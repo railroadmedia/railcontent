@@ -9,7 +9,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
-use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Railcontent\Services\JsonApiHydrator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentHierarchyService;

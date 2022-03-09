@@ -286,7 +286,7 @@ class RailcontentTestCase extends BaseTestCase
 
         // if new packages entities are required for testing, their entity directory/namespace config should be merged here
         $app['config']->set(
-            'doctrine.entities',
+            'railcontent.entities',
             array_merge(
                 $defaultConfig['entities']
             )

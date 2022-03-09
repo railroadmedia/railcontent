@@ -35,7 +35,7 @@ class ContentFollowsRepository extends EntityRepository
                 ->setParameter('brand', config('railcontent.brand'))
                 ->setParameter('user', auth()->id())
                ->getResult();
-dd($contents);
+
             self::$cache[auth()->id()] = $contents->pluck('content_id')->toArray();
         }
 
