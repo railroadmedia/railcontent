@@ -34,8 +34,8 @@ export const borderColor = {
 export const bgImg = {
     drumeo: drumeoBgImg,
     singeo: singeoBgImg,
-    guitareo: pianoteBgImg,
-    pianote: guitareoBgImg
+    pianote: pianoteBgImg,
+    guitareo: guitareoBgImg
 }
 
 // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style

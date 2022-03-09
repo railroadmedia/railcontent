@@ -17,7 +17,7 @@ const props = defineProps({
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 function onInstrumentSelection(instrument) {
     emit('changeInfo', { ...props.info, instrument })
-    emit('checkStep', 1)
+    emit('checkStep', 1, true)
     emit('changeStep', 2)
 }
 </script>
@@ -40,6 +40,7 @@ function onInstrumentSelection(instrument) {
             <InstrumentCard
                 :backgroundUrl="bgImg.drumeo"
                 brand="drumeo"
+                :active="info.instrument === 'drums'"
                 @onInstrumentSelect="() => onInstrumentSelection('drums')"
             >
                 <InstrumentCardContent
@@ -50,6 +51,7 @@ function onInstrumentSelection(instrument) {
             </InstrumentCard>
             <InstrumentCard
                 :backgroundUrl="bgImg.pianote"
+                :active="info.instrument === 'piano'"
                 brand="pianote"
                 @onInstrumentSelect="() => onInstrumentSelection('piano')"
             >
@@ -61,6 +63,7 @@ function onInstrumentSelection(instrument) {
             </InstrumentCard>
             <InstrumentCard
                 :backgroundUrl="bgImg.guitareo"
+                :active="info.instrument === 'guitar'"
                 brand="guitareo"
                 @onInstrumentSelect="() => onInstrumentSelection('guitar')"
             >
@@ -72,6 +75,7 @@ function onInstrumentSelection(instrument) {
             </InstrumentCard>
             <InstrumentCard
                 :backgroundUrl="bgImg.singeo"
+                :active="info.instrument === 'singing'"
                 brand="singeo"
                 @onInstrumentSelect="() => onInstrumentSelection('singing')"
             >

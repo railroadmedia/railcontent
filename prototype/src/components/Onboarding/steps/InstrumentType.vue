@@ -1,6 +1,4 @@
 <script setup>
-import AvatarUpload from '../../AvatarUpload/AvatarUpload.vue'
-import InputLabel from '../../InputLabel/InputLabel.vue'
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 import Button from '../../Button/Button.vue'
 import StepWrapper from '../StepWrapper.vue'
@@ -17,52 +15,38 @@ const props = defineProps({
     }
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
-
-function onInputChange(e) {
-    if (e.target) {
-        emit('changeInfo', {
-            ...props.info,
-            user: { ...props.info.user, name: e.target.value }
-        })
-    }
-}
 </script>
 
 <template>
-    <StepWrapper :brand="brand" :showBgImg="false">
+    <StepWrapper :brand="brand" :showBgImg="true">
         <h2
             class="tw-mb-[5px] tw-w-full tw-text-center tw-font-bold tw-text-white"
         >
-            Just a few quick questions to set up your account
+            What kind of gear will you be practicing with?
         </h2>
         <p class="tw-font-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white">
-            Your musical journey is personalized to you. Tell us a little bit
-            about yourself so that we can get it right.
+            You selected {{ info.instrument }}! Now it’s time to tell us about
+            your practice set-up. You can select multiple gear types and change
+            your settings in your profile at anytime.
         </p>
-        <AvatarUpload />
-        <InputLabel
-            :initialValue="info.user.name"
-            labelValue="Display Name"
-            placeholder="Enter your display name..."
-            classOverride="tw-mb-[56px]  lg:tw-w-[471px]"
-            @input="onInputChange"
-        />
+
         <ProgressBar
             :brand="brand"
-            :currentStep="0"
+            :currentStep="2"
             :steps="steps"
             @changeStep="(s) => emit('changeStep', s)"
         />
         <Button
-            :brand="brand"
             @buttonClick="
                 () => {
                     emit('changeStep', 1)
                 }
             "
             :isDisabled="!steps[0].checked"
+            :brand="brand"
             classOverride="tw-w-[543px] tw-mt-[40px]"
             >Next</Button
         >
+        <button>SKIP</button>
     </StepWrapper>
 </template>

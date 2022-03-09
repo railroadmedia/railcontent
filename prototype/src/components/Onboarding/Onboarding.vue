@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
+import InstrumentType from './steps/InstrumentType.vue'
+
 const props = defineProps({
     brand: {
         type: String,
@@ -17,12 +19,19 @@ const initialSteps = [
     { label: 'TOPICS', checked: false },
     { label: 'COACHES', checked: false }
 ]
+
+const instrumentBrand = {
+    piano: 'pianote',
+    drums: 'drumeo',
+    guitar: 'guitareo',
+    singing: 'singeo'
+}
 const initialInfo = {
     user: {
         name: '',
         avatarUrl: ''
     },
-    instrument: null
+    instrument: 'drums'
 }
 let currentStep = ref(0)
 let info = ref(initialInfo)
@@ -49,7 +58,7 @@ function checkStepToggle(step, val) {
 <template>
     <ModalRenderer>
         <UserInfo
-            :brand="brand"
+            :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 0"
             @changeStep="changeStep"
             @changeInfo="changeInfo"
@@ -58,7 +67,7 @@ function checkStepToggle(step, val) {
             :info="info"
         />
         <InstrumentSelect
-            :brand="brand"
+            :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 1"
             @changeStep="changeStep"
             @changeInfo="changeInfo"
@@ -66,6 +75,15 @@ function checkStepToggle(step, val) {
             :steps="steps"
             :info="info"
         />
-        <div v-if="currentStep === 2">STEP 3</div>
+
+        <InstrumentType
+            :brand="instrumentBrand[info.instrument]"
+            v-if="currentStep === 2"
+            @changeStep="changeStep"
+            @changeInfo="changeInfo"
+            @checkStep="checkStepToggle"
+            :steps="steps"
+            :info="info"
+        />
     </ModalRenderer>
 </template>
