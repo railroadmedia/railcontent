@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Musora;
+namespace App\Http\Controllers\Platform;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +9,6 @@ class LoginController extends Controller
 {
     public function show() 
     {
-        return view('musora.pages.login');
+        return view('pages.login');
     }
-} 
+}  

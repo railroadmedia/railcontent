@@ -26,5 +26,16 @@ module.exports = {
   },
   plugins: [
     require('stylesora/components/')(),
+    plugin(function({ addUtilities }) {
+      addUtilities({
+        '.text-musora': {
+          background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+        },
+        '.bg-musora': {
+          background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
+        },
+      })
   ],
 }

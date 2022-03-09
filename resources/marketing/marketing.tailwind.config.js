@@ -1,5 +1,7 @@
 // tailwind.config.js
 const stylesoraTheme = require('stylesora/theme');
+const plugin = require('tailwindcss/plugin')
+
 
 module.exports = {
   mode: 'jit',
@@ -23,6 +25,23 @@ module.exports = {
     },
   },
   plugins: [
+    require('stylesora/base/')(),
     require('stylesora/components/')(),
+    plugin(function({ addUtilities }) {
+      addUtilities({
+        '[x-cloak]': {
+          display: 'none', //For Alpine JS
+        },
+        '.text-musora': {
+          background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+        },
+        '.bg-musora': {
+          background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
+        },
+      })
+    }),
+
   ],
 }

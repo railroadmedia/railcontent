@@ -13,13 +13,24 @@
 
     <body class="flex flex-col w-full min-h-screen" x-data="{ sidebarOpen: false, showOverlay: false }">
 
-        <div  id="app" class="flex-1">
+        @yield('layout-header')
+
+        <main class="flex-1">
             @yield('layout-body')
-        </div>
+        </main>
+
+        @yield('layout-footer')
+
+        <!-- Overlay -->
+        <div id="page-overlay" 
+             x-cloak
+             x-show="showOverlay"
+             x-on:click="showOverlay = !showOverlay, sidebarOpen = !sidebarOpen"
+             x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"
+        ></div>
 
         <!-- Scripts -->
         @yield('layout-scripts')
-
         <script src="{{ mix('marketing/js/app.js') }}"></script>
 
     </body>
