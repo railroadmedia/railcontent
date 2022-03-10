@@ -16,6 +16,7 @@ use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ResponseService;
 use Spatie\Fractal\Fractal;
 use Throwable;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 
 /**
  * Class ContentDatumJsonController
@@ -37,13 +38,22 @@ class ContentDatumJsonController extends Controller
     private $permissionPackageService;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * ContentDatumJsonController constructor.
      *
      * @param ContentDatumService $datumService
      * @param PermissionService $permissionPackageService
      */
-    public function __construct(ContentDatumService $datumService, PermissionService $permissionPackageService)
-    {
+    public function __construct(
+        UserProviderInterface $userProvider,
+        ContentDatumService $datumService,
+        PermissionService $permissionPackageService
+    ) {
+        $this->userProvider = $userProvider;
         $this->datumService = $datumService;
         $this->permissionPackageService = $permissionPackageService;
     }
@@ -61,7 +71,7 @@ class ContentDatumJsonController extends Controller
      */
     public function store(ContentDatumCreateRequest $request)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.data');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'create.content.data');
 
         $contentData = $this->datumService->create(
             $request->input('data.relationships.content.data.id'),
@@ -89,7 +99,7 @@ class ContentDatumJsonController extends Controller
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'update.content.data');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'update.content.data');
 
         $contentData = $this->datumService->update(
             $dataId,
@@ -99,11 +109,11 @@ class ContentDatumJsonController extends Controller
         //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
             is_null($contentData),
-            new NotFoundException('Update failed, datum not found with id: ' . $dataId)
+            new NotFoundException('Update failed, datum not found with id: '.$dataId)
         );
+
         return ResponseService::contentData($contentData)
             ->respond(201);
-
     }
 
     /** Delete content datum.
@@ -122,16 +132,16 @@ class ContentDatumJsonController extends Controller
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content.data');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'delete.content.data');
 
         $deleted = $this->datumService->delete($dataId);
 
         //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
             is_null($deleted),
-            new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
+            new NotFoundException('Delete failed, datum not found with id: '.$dataId)
         );
-        return ResponseService::empty(204);
 
+        return ResponseService::empty(204);
     }
 }
