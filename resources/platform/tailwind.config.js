@@ -1,9 +1,12 @@
 // tailwind.config.js
 const stylesoraTheme = require('stylesora/theme');
 const plugin = require('tailwindcss/plugin');
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: 'jit',
+  prefix: "tw-",
+  darkMode: "class",
   content: [
     './resources/**/*.blade.php',
     './resources/**/*.js',
@@ -11,22 +14,29 @@ module.exports = {
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    colors: {
+      ...colors,
+      ...stylesoraTheme.colors,
+    },
     extend: {
       fontFamily: stylesoraTheme.fontFamily,
       fontSize: stylesoraTheme.fontSize, 
-      colors: {
-        drumeo: stylesoraTheme.colors.drumeo,
-        pianote: stylesoraTheme.colors.pianote,
-        guitareo: stylesoraTheme.colors.guitareo,
-        singeo: stylesoraTheme.colors.singeo,
-      },
-      spacing: stylesoraTheme.spacing,
-      zIndex: stylesoraTheme.zIndex,
-      inset: stylesoraTheme.inset
     },
   },
   plugins: [
-    require('stylesora/components/')(),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/aspect-ratio'),
+    //Stylesora's Base Styles
+    require("stylesora/base")(),
+    //Stylesora's Attributes
+    require("stylesora/attributes")(),
+    //Stylesora's Utility Classes
+    require("stylesora/utilities/")(),
+    //Stylesora's Component Styles
+    require("stylesora/components/")(),
+    //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
         '.text-musora': {

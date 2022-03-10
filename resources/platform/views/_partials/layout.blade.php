@@ -21,6 +21,9 @@
 
         </main>
 
+        <!-- Modal Container -->
+        <div id="modal-container" class="tw-z-10 tw-hidden tw-h-full tw-w-full"></div>
+
         <!-- Scripts -->
         @yield('layout-scripts')
         <script src="{{ mix('platform/js/app.js') }}"></script>
