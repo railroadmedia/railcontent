@@ -11,11 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Managers\SearchEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
+use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
@@ -43,15 +45,22 @@ class ContentJsonController extends Controller
     private $permissionPackageService;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * ContentJsonController constructor.
      *
      * @param ContentService $contentService
      * @param PermissionService $permissionPackageService
      */
     public function __construct(
+        UserProviderInterface $userProvider,
         ContentService $contentService,
         PermissionService $permissionPackageService
     ) {
+        $this->userProvider = $userProvider;
         $this->contentService = $contentService;
         $this->permissionPackageService = $permissionPackageService;
     }
@@ -78,7 +87,7 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        //$this->permissionPackageService->canOrThrow(auth()->id(), 'pull.contents');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'pull.contents');
 
         if ($request->has('statuses')) {
             ContentRepository::$availableContentStatues = $request->get('statuses');
@@ -152,7 +161,7 @@ class ContentJsonController extends Controller
      */
     public function getByParentId($parentId)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.contents');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'pull.contents');
 
         $contentData = $this->contentService->getByParentId($parentId);
 
@@ -185,7 +194,7 @@ class ContentJsonController extends Controller
      */
     public function getByIds(Request $request)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.contents');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'pull.contents');
 
         $contentData = $this->contentService->getByIds(explode(',', $request->get('ids', '')));
 
@@ -223,7 +232,7 @@ class ContentJsonController extends Controller
      */
     public function store(ContentCreateRequest $request)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'create.content');
 
         $content = $this->contentService->create(
             $request->input('data.attributes.slug'),
@@ -263,7 +272,7 @@ class ContentJsonController extends Controller
     public function update(ContentUpdateRequest $request, $contentId)
     {
 
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'update.content');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'update.content');
 
         $content = $this->contentService->update(
             $contentId,
@@ -296,7 +305,7 @@ class ContentJsonController extends Controller
      */
     public function delete($contentId)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'delete.content');
 
         $delete = $this->contentService->delete($contentId);
 
@@ -341,7 +350,7 @@ class ContentJsonController extends Controller
      */
     public function softDelete($contentId)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'delete.content');
 
         //delete content
         $delete = $this->contentService->softDelete($contentId);
@@ -517,5 +526,43 @@ class ContentJsonController extends Controller
             [$contentData]
         )
             ->respond();
+    }
+
+    public function updateOldField($contentId, ContentFieldCreateRequest $request)
+    {
+        $field = $request->onlyAllowed();
+
+        $content = $this->contentService->update(
+            $contentId,
+            [
+                'data' => [
+                    'attributes' => [
+                        'fields' => [$field]
+                    ]
+                ]
+            ]
+        );
+
+        return ResponseService::content($content)
+            ->respond(200);
+    }
+
+    public function insertOldField(ContentFieldCreateRequest $request)
+    {
+        $field = $request->onlyAllowed();
+
+        $content = $this->contentService->addFieldOLdFormat(
+            $request->get('content_id'),
+            [
+                'data' => [
+                    'attributes' => [
+                        'fields' => [$field]
+                    ]
+                ]
+            ]
+        );
+
+        return ResponseService::content($content)
+            ->respond(200);
     }
 }
