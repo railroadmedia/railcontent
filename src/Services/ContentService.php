@@ -1624,20 +1624,20 @@ class ContentService
 
                     $oldFields = call_user_func([$content, $getterName]);
 
-                    if ($this->entityManager->contains($content)) {
-                        foreach ($oldFields as $oldField) {
-                            //check if field was deleted
-                            $oldFieldValue = call_user_func([$oldField, $getterName]);
-                            if (!is_string($oldFieldValue)) {
-                                $oldFieldValue = $oldFieldValue->getId();
-                            }
-                            if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
-                                call_user_func([$content, $removeField], $oldField);
-
-                                $this->entityManager->remove($oldField);
-                            }
-                        }
-                    }
+//                    if ($this->entityManager->contains($content)) {
+//                        foreach ($oldFields as $oldField) {
+//                            //check if field was deleted
+//                            $oldFieldValue = call_user_func([$oldField, $getterName]);
+//                            if (!is_string($oldFieldValue)) {
+//                                $oldFieldValue = $oldFieldValue->getId();
+//                            }
+//                            if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
+//                                call_user_func([$content, $removeField], $oldField);
+//
+//                                $this->entityManager->remove($oldField);
+//                            }
+//                        }
+//                    }
 
                     if (array_key_exists('position', $field)) {
                         $position = $field['position'];
@@ -2025,5 +2025,26 @@ class ContentService
         ContentRepository::$availableContentStatues = $before;
 
         return $result;
+    }
+
+    public function addFieldOLdFormat($id, $data)
+    {
+        $content = $this->contentRepository->find($id);
+
+        if (empty($content)) {
+            return null;
+        }
+
+        $this->saveContentFields($data, $content);
+
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
+
+        event(new ContentUpdated($content));
+
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
+
+        return $content;
     }
 }
