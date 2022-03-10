@@ -56,7 +56,7 @@ class AddCoreColumnsToContentTable extends Migration
                     $table->integer('xp')
                         ->index()
                         ->after('video')
-                        ->nullable();
+                        ->default(0);
 
                     $table->string('album')
                         ->index()
