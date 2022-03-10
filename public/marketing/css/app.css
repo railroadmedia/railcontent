@@ -1,143 +1,106 @@
 /* Tailwind CSS */
-
-/* ! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com */
-
-/*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
-
+/* ! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com */
 /*
-Document
-========
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
-
-/**
-Use a better box model (opinionated).
-*/
-
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
 }
-
-/**
-Use a more readable tab size (opinionated).
-*/
-
-html {
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-     tab-size: 4;
+::before,
+::after {
+  --tw-content: '';
 }
-
-/**
-1. Correct the line height in all browsers.
+/*
+1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
 */
-
 html {
-  line-height: 1.15; /* 1 */
+  line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
 }
-
 /*
-Sections
-========
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
 */
-
-/**
-Remove the margin in all browsers.
-*/
-
 body {
-  margin: 0;
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
 }
-
-/**
-Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
-*/
-
-body {
-  font-family:
-		system-ui,
-		-apple-system, /* Firefox supports this but not yet `system-ui` */
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji';
-}
-
 /*
-Grouping content
-================
-*/
-
-/**
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
 */
-
 hr {
   height: 0; /* 1 */
   color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
 }
-
 /*
-Text-level semantics
-====================
-*/
-
-/**
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
-
-abbr[title] {
+abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
 }
-
-/**
+/*
+Remove the default font size and weight for headings.
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+/*
 Add the correct font weight in Edge and Safari.
 */
-
 b,
 strong {
   font-weight: bolder;
 }
-
-/**
-1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
-2. Correct the odd 'em' font sizing in all browsers.
+/*
+1. Use the user's configured `mono` font family by default.
+2. Correct the odd `em` font sizing in all browsers.
 */
-
 code,
 kbd,
 samp,
 pre {
-  font-family:
-		ui-monospace,
-		SFMono-Regular,
-		Consolas,
-		'Liberation Mono',
-		Menlo,
-		monospace; /* 1 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
-
-/**
+/*
 Add the correct font size in all browsers.
 */
-
 small {
   font-size: 80%;
 }
-
-/**
-Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
-
 sub,
 sup {
   font-size: 75%;
@@ -145,40 +108,27 @@ sup {
   position: relative;
   vertical-align: baseline;
 }
-
 sub {
   bottom: -0.25em;
 }
-
 sup {
   top: -0.5em;
 }
-
 /*
-Tabular data
-============
-*/
-
-/**
 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
 */
-
 table {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
 }
-
 /*
-Forms
-=====
-*/
-
-/**
 1. Change the font styles in all browsers.
 2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
 */
-
 button,
 input,
 optgroup,
@@ -186,133 +136,86 @@ select,
 textarea {
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
+  line-height: inherit; /* 1 */
+  color: inherit; /* 1 */
   margin: 0; /* 2 */
+  padding: 0; /* 3 */
 }
-
-/**
+/*
 Remove the inheritance of text transform in Edge and Firefox.
-1. Remove the inheritance of text transform in Firefox.
 */
-
 button,
-select { /* 1 */
+select {
   text-transform: none;
 }
-
-/**
-Correct the inability to style clickable types in iOS and Safari.
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
 */
-
 button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-  -webkit-appearance: button;
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
 }
-
-/**
-Remove the inner border and padding in Firefox.
+/*
+Use the modern Firefox focus style for all focusable elements.
 */
-
-::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-/**
-Restore the focus styles unset by the previous rule.
-*/
-
 :-moz-focusring {
-  outline: 1px dotted ButtonText;
+  outline: auto;
 }
-
-/**
-Remove the additional ':invalid' styles in Firefox.
-See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */
-
 :-moz-ui-invalid {
   box-shadow: none;
 }
-
-/**
-Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
-*/
-
-legend {
-  padding: 0;
-}
-
-/**
+/*
 Add the correct vertical alignment in Chrome and Firefox.
 */
-
 progress {
   vertical-align: baseline;
 }
-
-/**
+/*
 Correct the cursor style of increment and decrement buttons in Safari.
 */
-
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
   height: auto;
 }
-
-/**
+/*
 1. Correct the odd appearance in Chrome and Safari.
 2. Correct the outline style in Safari.
 */
-
 [type='search'] {
   -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
-
-/**
+/*
 Remove the inner padding in Chrome and Safari on macOS.
 */
-
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-
-/**
+/*
 1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to 'inherit' in Safari.
+2. Change font properties to `inherit` in Safari.
 */
-
 ::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
-
-/*
-Interactive
-===========
-*/
-
 /*
 Add the correct display in Chrome and Safari.
 */
-
 summary {
   display: list-item;
 }
-
-/**
- * Manually forked from SUIT CSS Base: https://github.com/suitcss/base
- * A thin layer on top of normalize.css that provides a starting point more
- * suitable for web applications.
- */
-
-/**
- * Removes the default spacing and border for appropriate elements.
- */
-
+/*
+Removes the default spacing and border for appropriate elements.
+*/
 blockquote,
 dl,
 dd,
@@ -328,217 +231,61 @@ p,
 pre {
   margin: 0;
 }
-
-button {
-  background-color: transparent;
-  background-image: none;
-}
-
 fieldset {
   margin: 0;
   padding: 0;
 }
-
+legend {
+  padding: 0;
+}
 ol,
-ul {
+ul,
+menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
-/**
- * Tailwind custom reset styles
- */
-
-/**
- * 1. Use the user's configured `sans` font-family (with Tailwind's default
- *    sans-serif font stack as a fallback) as a sane default.
- * 2. Use Tailwind's default "normal" line-height so the user isn't forced
- *    to override it to ensure consistency even when using the default theme.
- */
-
-html {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
-  line-height: 1.5; /* 2 */
-}
-
-/**
- * Inherit font-family and line-height from `html` so users can set them as
- * a class directly on the `html` element.
- */
-
-body {
-  font-family: inherit;
-  line-height: inherit;
-}
-
-/**
- * 1. Prevent padding and border from affecting element width.
- *
- *    We used to set this in the html element and inherit from
- *    the parent element for everything else. This caused issues
- *    in shadow-dom-enhanced elements like <details> where the content
- *    is wrapped by a div with box-sizing set to `content-box`.
- *
- *    https://github.com/mozdevs/cssremedy/issues/4
- *
- *
- * 2. Allow adding a border to an element by just adding a border-width.
- *
- *    By default, the way the browser specifies that an element should have no
- *    border is by setting it's border-style to `none` in the user-agent
- *    stylesheet.
- *
- *    In order to easily add borders to elements by just setting the `border-width`
- *    property, we change the default border-style for all elements to `solid`, and
- *    use border-width to hide them instead. This way our `border` utilities only
- *    need to set the `border-width` property instead of the entire `border`
- *    shorthand, making our border utilities much more straightforward to compose.
- *
- *    https://github.com/tailwindcss/tailwindcss/pull/116
- */
-
-*,
-::before,
-::after {
-  box-sizing: border-box; /* 1 */
-  border-width: 0; /* 2 */
-  border-style: solid; /* 2 */
-  border-color: currentColor; /* 2 */
-}
-
 /*
- * Ensure horizontal rules are visible by default
- */
-
-hr {
-  border-top-width: 1px;
-}
-
-/**
- * Undo the `border-style: none` reset that Normalize applies to images so that
- * our `border-{width}` utilities have the expected effect.
- *
- * The Normalize reset is unnecessary for us since we default the border-width
- * to 0 on all elements.
- *
- * https://github.com/tailwindcss/tailwindcss/issues/362
- */
-
-img {
-  border-style: solid;
-}
-
+Prevent resizing textareas horizontally by default.
+*/
 textarea {
   resize: vertical;
 }
-
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
 input::-moz-placeholder, textarea::-moz-placeholder {
-  opacity: 1;
-  color: #9ca3af;
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
 }
-
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;
-  color: #9ca3af;
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
 }
-
 input::placeholder,
 textarea::placeholder {
-  opacity: 1;
-  color: #9ca3af;
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
 }
-
+/*
+Set the default cursor for buttons.
+*/
 button,
 [role="button"] {
   cursor: pointer;
 }
-
-/**
- * Override legacy focus reset from Normalize with modern Firefox focus styles.
- *
- * This is actually an improvement over the new defaults in Firefox in our testing,
- * as it triggers the better focus styles even for links, which still use a dotted
- * outline in Firefox by default.
- */
-
-:-moz-focusring {
-  outline: auto;
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
 }
-
-table {
-  border-collapse: collapse;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-/**
- * Reset links to optimize for opt-in styling instead of
- * opt-out.
- */
-
-a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-/**
- * Reset form element properties that are easy to forget to
- * style explicitly so you don't inadvertently introduce
- * styles that deviate from your design system. These styles
- * supplement a partial reset that is already applied by
- * normalize.css.
- */
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  padding: 0;
-  line-height: inherit;
-  color: inherit;
-}
-
-/**
- * Use the configured 'mono' font family for elements that
- * are expected to be rendered with a monospace font, falling
- * back to the system monospace stack if there is no configured
- * 'mono' font family.
- */
-
-pre,
-code,
-kbd,
-samp {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
-/**
- * 1. Make replaced elements `display: block` by default as that's
- *    the behavior you want almost all of the time. Inspired by
- *    CSS Remedy, with `svg` added as well.
- *
- *    https://github.com/mozdevs/cssremedy/issues/14
- * 
- * 2. Add `vertical-align: middle` to align replaced elements more
- *    sensibly by default when overriding `display` by adding a
- *    utility like `inline`.
- *
- *    This can trigger a poorly considered linting error in some
- *    tools but is included by design.
- * 
- *    https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210
- */
-
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
 img,
 svg,
 video,
@@ -550,28 +297,62 @@ object {
   display: block; /* 1 */
   vertical-align: middle; /* 2 */
 }
-
-/**
- * Constrain images and videos to the parent width and preserve
- * their intrinsic aspect ratio.
- *
- * https://github.com/mozdevs/cssremedy/issues/14
- */
-
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
 img,
 video {
   max-width: 100%;
   height: auto;
 }
-
-/**
- * Ensure the default browser behavior of the `hidden` attribute.
- */
-
+/*
+Ensure the default browser behavior of the `hidden` attribute.
+*/
 [hidden] {
   display: none;
 }
-
+* {
+  box-sizing: border-box;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Open Sans", sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 600;
+}
+h1 {
+  font-size: 2.25rem;
+}
+h2 {
+  font-size: 1.875rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 1.125rem;
+}
+h6 {
+  font-size: 1rem;
+}
+p, a, ul, ol {
+  font-size: 1rem;
+}
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+a:visited {
+  color: currentColor;
+}
+.font-bebas-neue {
+  letter-spacing: 0.1em;
+}
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
@@ -580,110 +361,70 @@ video {
   --tw-skew-y: 0;
   --tw-scale-x: 1;
   --tw-scale-y: 1;
-  --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-border-opacity: 1;
-  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
-  --tw-blur: var(--tw-empty,/*!*/ /*!*/);
-  --tw-brightness: var(--tw-empty,/*!*/ /*!*/);
-  --tw-contrast: var(--tw-empty,/*!*/ /*!*/);
-  --tw-grayscale: var(--tw-empty,/*!*/ /*!*/);
-  --tw-hue-rotate: var(--tw-empty,/*!*/ /*!*/);
-  --tw-invert: var(--tw-empty,/*!*/ /*!*/);
-  --tw-saturate: var(--tw-empty,/*!*/ /*!*/);
-  --tw-sepia: var(--tw-empty,/*!*/ /*!*/);
-  --tw-drop-shadow: var(--tw-empty,/*!*/ /*!*/);
-  --tw-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: "Open Sans", sans-serif;
-}
-
-h1,h2,h3,h4,h5,h6 {
-  font-weight: 600;
-}
-
-h1 {
-  font-size: 2.25rem;
-}
-
-h2 {
-  font-size: 1.875rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-}
-
-h5 {
-  font-size: 1.125rem;
-}
-
-h6 {
-  font-size: 1rem;
-}
-
-p, a, ul, ol {
-  font-size: 1rem;
-}
-
-a {
-  color: currentColor;
-  text-decoration: none;
-}
-
-a:visited {
-  color: currentColor;
-}
-
-.font-bebas-neue {
-  letter-spacing: 0.1em;
-}
-
 .container {
   width: 100%;
 }
-
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
   }
 }
-
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
   }
 }
-
 @media (min-width: 1024px) {
   .container {
     max-width: 1024px;
   }
 }
-
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px;
   }
 }
-
 @media (min-width: 1536px) {
   .container {
     max-width: 1536px;
   }
 }
-
 .btn-primary, .btn-secondary {
   align-items: center;
   border-style: solid;
@@ -712,137 +453,101 @@ a:visited {
           user-select: none;
   white-space: nowrap;
 }
-
 .btn-primary:focus-visible, .btn-secondary:focus-visible {
   outline: none;
 }
-
 .btn-primary {
   border-color: transparent;
 }
-
 .btn-primary:visited {
   background-color: currentColor;
   color: white;
 }
-
 .btn-primary:hover {
   text-decoration: none;
 }
-
 .btn-primary[disabled], .btn-primary[disabled]:active {
   background-color: #e5e7eb !important;
   color: #9ca3af !important;
   pointer-events: none;
 }
-
 .btn-primary.bg-drumeo:hover, .btn-primary.bg-drumeo:focus-visible {
   background-color: #3C91E2;
 }
-
 .btn-primary.bg-pianote:hover, .btn-primary.bg-pianote:focus-visible {
   background-color: #FA7683;
 }
-
 .btn-primary.bg-guitareo:hover, .btn-primary.bg-guitareo:focus-visible {
   background-color: #66DFCD;
 }
-
 .btn-primary.bg-singeo:hover, .btn-primary.bg-singeo:focus-visible {
   background-color: #9C33ED;
 }
-
-.btn-primary.bg-recordeo:hover, .btn-primary.bg-recordeo:focus-visible {
-}
-
+.btn-primary.bg-recordeo:hover, .btn-primary.bg-recordeo:focus-visible {}
 .btn-primary.bg-drumeo:active {
   background-color: #095EAF;
 }
-
 .btn-primary.bg-pianote:active {
   background-color: #AC1222;
 }
-
 .btn-primary.bg-guitareo:active {
   background-color: #00A18A;
 }
-
 .btn-primary.bg-singeo:active {
   background-color: #6900BA;
 }
-
-.btn-primary.bg-recordeo:active {
-}
-
+.btn-primary.bg-recordeo:active {}
 .btn-secondary {
   border-color: currentColor;
   background-color: transparent;
 }
-
 .btn-secondary:hover {
   text-decoration: none;
 }
-
 .btn-secondary[disabled], .btn-secondary[disabled]:active {
   pointer-events: none;
   color: #9ca3af !important;
 }
-
 .btn-secondary.text-drumeo:hover, .btn-secondary.text-drumeo:focus-visible {
   color: #3C91E2;
 }
-
 .btn-secondary.text-pianote:hover, .btn-secondary.text-pianote:focus-visible {
   color: #FA7683;
 }
-
 .btn-secondary.text-guitareo:hover, .btn-secondary.text-guitareo:focus-visible {
   color: #66DFCD;
 }
-
 .btn-secondary.text-singeo:hover, .btn-secondary.text-singeo:focus-visible {
   color: #B566F2;
 }
-
-.btn-secondary.text-recordeo:hover, .btn-secondary.text-recordeo:focus-visible {
-}
-
+.btn-secondary.text-recordeo:hover, .btn-secondary.text-recordeo:focus-visible {}
 .btn-secondary.text-drumeo:active {
   color: #095EAF;
 }
-
 .btn-secondary.text-pianote:active {
   color: #AC1222;
 }
-
 .btn-secondary.text-guitareo:active {
   color: #00A18A;
 }
-
 .btn-secondary.text-singeo:active {
   color: #6900BA;
 }
-
-.btn-secondary.text-recordeo:active {
-}
-
+.btn-secondary.text-recordeo:active {}
 .btn-small {
   font-size: 14px;
   height: 34px !important;
   min-height: auto;
   padding: 8px 48px;
 }
-
 .btn-small.btn-circle {
   height: 34px !important;
   width: 34px !important;
 }
-
 .input-field {
   margin-bottom: 1rem;
   position: relative;
 }
-
 .input-field .label {
   color: #000;
   display: block;
@@ -851,11 +556,9 @@ a:visited {
   margin-bottom: 0.5rem;
   text-transform: capitalize;
 }
-
 .input-field .input-wrapper {
   position: relative;
 }
-
 .input-field input[type=date], .input-field input[type=email], .input-field input[type=number], .input-field input[type=search], .input-field input[type=tel], .input-field input[type=password], .input-field input[type=text], .input-field select, .input-field textarea, .input-field button {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -864,7 +567,7 @@ a:visited {
   border: 1px solid;
   border-color: #d1d5db;
   border-radius: 9999px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   color: #374151;
   display: block;
   font-size: 0.875rem;
@@ -877,37 +580,30 @@ a:visited {
   padding-right: 3.5rem;
   width: 100%;
 }
-
 .input-field input[type=date]:focus, .input-field input[type=email]:focus, .input-field input[type=number]:focus, .input-field input[type=search]:focus, .input-field input[type=tel]:focus, .input-field input[type=password]:focus, .input-field input[type=text]:focus, .input-field select:focus, .input-field textarea:focus, .input-field button:focus {
   outline: none;
 }
-
 .input-field input[type=date] + .input-icon svg.invalid-icon, .input-field input[type=date] .input-icon svg.invalid-icon, .input-field input[type=email] + .input-icon svg.invalid-icon, .input-field input[type=email] .input-icon svg.invalid-icon, .input-field input[type=number] + .input-icon svg.invalid-icon, .input-field input[type=number] .input-icon svg.invalid-icon, .input-field input[type=search] + .input-icon svg.invalid-icon, .input-field input[type=search] .input-icon svg.invalid-icon, .input-field input[type=tel] + .input-icon svg.invalid-icon, .input-field input[type=tel] .input-icon svg.invalid-icon, .input-field input[type=password] + .input-icon svg.invalid-icon, .input-field input[type=password] .input-icon svg.invalid-icon, .input-field input[type=text] + .input-icon svg.invalid-icon, .input-field input[type=text] .input-icon svg.invalid-icon, .input-field select + .input-icon svg.invalid-icon, .input-field select .input-icon svg.invalid-icon, .input-field textarea + .input-icon svg.invalid-icon, .input-field textarea .input-icon svg.invalid-icon, .input-field button + .input-icon svg.invalid-icon, .input-field button .input-icon svg.invalid-icon {
   display: none;
 }
-
 .input-field input[type=search] {
   padding-right: 1rem;
 }
-
 .input-field textarea {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   height: auto;
   padding-right: 2.5rem;
 }
-
 .input-field textarea + .input-icon {
   height: 2.5rem;
 }
-
 .input-field button {
   text-align: left;
 }
-
 .input-field ul.dropdown {
   background-color: #fff;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   border: 1px solid;
   border-color: #d1d5db;
   border-radius: 0.375rem;
@@ -924,7 +620,6 @@ a:visited {
   width: 100%;
   z-index: 10;
 }
-
 .input-field ul.dropdown li {
   color: #111827;
   cursor: default;
@@ -934,7 +629,6 @@ a:visited {
       -ms-user-select: none;
           user-select: none;
 }
-
 .input-field ul.dropdown li a, .input-field ul.dropdown li .option {
   cursor: pointer;
   display: block;
@@ -948,11 +642,9 @@ a:visited {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-
 .input-field ul.dropdown li a:hover, .input-field ul.dropdown li a .option, .input-field ul.dropdown li .option:hover, .input-field ul.dropdown li .option .option {
   background-color: #e5e7eb;
 }
-
 .input-field ul.dropdown li input[type="checkbox"], .input-field ul.dropdown li input[type="radio"] {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -960,36 +652,29 @@ a:visited {
   display: none;
   position: absolute;
 }
-
 .input-field ul.dropdown li input[type="checkbox"] + .option .input-icon svg, .input-field ul.dropdown li input[type="radio"] + .option .input-icon svg {
   color: currentColor;
   height: 1rem;
   opacity: 0;
   width: 1rem;
 }
-
 .input-field ul.dropdown li input[type="checkbox"]:checked + .option .input-icon svg, .input-field ul.dropdown li input[type="radio"]:checked + .option .input-icon svg {
   opacity: 1;
 }
-
 .input-field ul.dropdown li input[type="checkbox"]:checked + .option, .input-field ul.dropdown li input[type="radio"]:checked + .option {
   background-color: #374151;
   color: #fff;
 }
-
 .input-field[disabled] {
   pointer-events: none;
 }
-
 .input-field[disabled] input[type=date], .input-field[disabled] input[type=email], .input-field[disabled] input[type=number], .input-field[disabled] input[type=search], .input-field[disabled] input[type=tel], .input-field[disabled] input[type=password], .input-field[disabled] input[type=text], .input-field[disabled] select, .input-field[disabled] textarea, .input-field[disabled] button[type="button"] {
   background-color: #f3f4f6;
   color: #9ca3af;
 }
-
 .input-field[disabled] label {
   color: #d1d5db;
 }
-
 .input-field .input-icon {
   align-items: center;
   bottom: 0;
@@ -1001,98 +686,78 @@ a:visited {
   right: 0;
   top: 1px;
 }
-
 .input-field .input-icon svg {
   color: #6b7280;
   height: 1.25rem;
   width: 1.25rem;
 }
-
 .input-field .input-message {
   display: none;
   font-size: 0.875rem;
   font-style: italic;
 }
-
 .input-field input[type=date][aria-required="true"][aria-invalid="true"], .input-field input[type=email][aria-required="true"][aria-invalid="true"], .input-field input[type=number][aria-required="true"][aria-invalid="true"], .input-field input[type=search][aria-required="true"][aria-invalid="true"], .input-field input[type=tel][aria-required="true"][aria-invalid="true"], .input-field input[type=password][aria-required="true"][aria-invalid="true"], .input-field input[type=text][aria-required="true"][aria-invalid="true"], .input-field select[aria-required="true"][aria-invalid="true"], .input-field textarea[aria-required="true"][aria-invalid="true"], .input-field button[type="button"][aria-required="true"][aria-invalid="true"] {
   border-color: #ef4444 !important;
   background-color: #fef2f2 !important;
 }
-
 .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px #fef2f2 inset !important;
 }
-
 .input-field input[type=date][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=email][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=number][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=search][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=password][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=text][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field select[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field textarea[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] ~ .input-message {
   color: #ef4444;
   display: block;
 }
-
 .input-field input[type=date][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon {
   display: block;
 }
-
 .input-field input[type=date][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon {
   display: none;
 }
-
 .file-field label .input-icon {
   margin-right: 0.25rem;
 }
-
 .file-field label .input-icon svg {
   height: 1.25rem;
   width: 1.25rem;
 }
-
 .file-field label .input-icon svg.invalid-icon, .file-field label .input-icon svg.valid-icon {
   display: none;
 }
-
 .file-field label[aria-invalid="true"] .input-icon svg.invalid-icon {
   color: #ef4444 !important;
   display: block;
 }
-
 .file-field label[aria-invalid="true"] .input-icon svg:not(.invalid-icon), .file-field label[aria-invalid="true"] .input-icon i {
   display: none;
 }
-
 .file-field label[aria-valid="true"] .input-icon svg.valid-icon {
-  color: #10b981 !important;
+  color: #22c55e !important;
   display: block;
 }
-
 .file-field label[aria-valid="true"] .input-icon svg:not(.valid-icon), .file-field label[aria-valid="true"] .input-icon i {
   display: none;
 }
-
 .toggle-field .input-message {
   display: none;
   font-size: 0.875rem;
   font-style: italic;
 }
-
 .toggle-field[aria-required="true"][aria-invalid="true"] .input-message {
   display: block;
   color: #ef4444;
 }
-
 .fieldset .input-message {
   display: none;
   font-size: 0.875rem;
   font-style: italic;
 }
-
 .fieldset[aria-required="true"][aria-invalid="true"] .input-message {
   display: block;
   color: #ef4444;
 }
-
 .fieldset[disabled] .input-message {
   display: none;
 }
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1104,639 +769,498 @@ a:visited {
   white-space: nowrap;
   border-width: 0;
 }
-
 .fixed {
   position: fixed;
 }
-
 .absolute {
   position: absolute;
 }
-
 .relative {
   position: relative;
 }
-
 .top-0 {
   top: 0;
 }
-
 .left-0 {
   left: 0;
 }
-
 .right-0 {
   right: 0;
 }
-
 .top-14 {
   top: 3.5rem;
 }
-
 .left-1\/2 {
   left: 50%;
 }
-
 .top-1\/2 {
   top: 50%;
 }
-
 .z-0 {
   z-index: 0;
 }
-
 .z-40 {
   z-index: 40;
 }
-
 .z-30 {
   z-index: 30;
 }
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
-
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
 }
-
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 }
-
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
-
 .mt-4 {
   margin-top: 1rem;
 }
-
 .mb-7 {
   margin-bottom: 1.75rem;
 }
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
-
 .mb-10 {
   margin-bottom: 2.5rem;
 }
-
 .mb-6 {
   margin-bottom: 1.5rem;
 }
-
 .mr-2\.5 {
   margin-right: 0.625rem;
 }
-
 .mr-2 {
   margin-right: 0.5rem;
 }
-
 .ml-auto {
   margin-left: auto;
 }
-
 .mr-auto {
   margin-right: auto;
 }
-
 .ml-7 {
   margin-left: 1.75rem;
 }
-
 .mr-3 {
   margin-right: 0.75rem;
 }
-
 .mb-0 {
   margin-bottom: 0px;
 }
-
 .block {
   display: block;
 }
-
 .flex {
   display: flex;
 }
-
 .hidden {
   display: none;
 }
-
 .h-5 {
   height: 1.25rem;
 }
-
 .h-full {
   height: 100%;
 }
-
 .h-\[calc\(100vh-56px\)\] {
   height: calc(100vh - 56px);
 }
-
 .h-14 {
   height: 3.5rem;
 }
-
 .h-auto {
   height: auto;
 }
-
 .h-0\.5 {
   height: 0.125rem;
 }
-
 .h-0 {
   height: 0px;
 }
-
 .h-11 {
   height: 2.75rem;
 }
-
 .h-screen {
   height: 100vh;
 }
-
 .max-h-9 {
   max-height: 2.25rem;
 }
-
 .min-h-screen {
   min-height: 100vh;
 }
-
 .w-full {
   width: 100%;
 }
-
 .w-48 {
   width: 12rem;
 }
-
 .w-5 {
   width: 1.25rem;
 }
-
 .w-80 {
   width: 20rem;
 }
-
 .w-14 {
   width: 3.5rem;
 }
-
 .w-36 {
   width: 9rem;
 }
-
 .w-11 {
   width: 2.75rem;
 }
-
 .w-screen {
   width: 100vw;
 }
-
 .max-w-md {
   max-width: 28rem;
 }
-
 .max-w-\[144px\] {
   max-width: 144px;
 }
-
 .flex-1 {
   flex: 1 1 0%;
 }
-
 .flex-none {
   flex: none;
 }
-
 .translate-x-0 {
   --tw-translate-x: 0px;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .translate-x-full {
   --tw-translate-x: 100%;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .-translate-y-1\.5 {
   --tw-translate-y: -0.375rem;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .-translate-y-1 {
   --tw-translate-y: -0.25rem;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .translate-y-1\.5 {
   --tw-translate-y: 0.375rem;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .translate-y-1 {
   --tw-translate-y: 0.25rem;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .rotate-45 {
   --tw-rotate: 45deg;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .-rotate-45 {
   --tw-rotate: -45deg;
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .transform {
-  transform: var(--tw-transform);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .flex-col {
   flex-direction: column;
 }
-
 .flex-wrap {
   flex-wrap: wrap;
 }
-
 .items-center {
   align-items: center;
 }
-
 .justify-center {
   justify-content: center;
 }
-
 .rounded-lg {
   border-radius: 0.5rem;
 }
-
 .rounded-full {
   border-radius: 9999px;
 }
-
 .border-0 {
   border-width: 0px;
 }
-
 .border-2 {
   border-width: 2px;
 }
-
 .border-b {
   border-bottom-width: 1px;
 }
-
 .border-l {
   border-left-width: 1px;
 }
-
 .border-b-\[3px\] {
   border-bottom-width: 3px;
 }
-
 .border-gray-100 {
   --tw-border-opacity: 1;
-  border-color: rgba(243, 244, 246, var(--tw-border-opacity));
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
-
 .border-gray-200 {
   --tw-border-opacity: 1;
-  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
-
 .border-transparent {
   border-color: transparent;
 }
-
 .border-gray-700 {
   --tw-border-opacity: 1;
-  border-color: rgba(55, 65, 81, var(--tw-border-opacity));
+  border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
-
 .bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-
 .bg-gray-100 {
   --tw-bg-opacity: 1;
-  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
-
 .bg-\[\#020815\] {
   --tw-bg-opacity: 1;
-  background-color: rgba(2, 8, 21, var(--tw-bg-opacity));
+  background-color: rgb(2 8 21 / var(--tw-bg-opacity));
 }
-
 .bg-current {
   background-color: currentColor;
 }
-
 .bg-black {
   --tw-bg-opacity: 1;
-  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
-
+.bg-drumeo {
+  --tw-bg-opacity: 1;
+  background-color: rgb(11 118 219 / var(--tw-bg-opacity));
+}
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2;
 }
-
 .bg-cover {
   background-size: cover;
 }
-
 .bg-center {
   background-position: center;
 }
-
 .p-8 {
   padding: 2rem;
 }
-
 .p-3 {
   padding: 0.75rem;
 }
-
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
 }
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
 }
-
 .px-7 {
   padding-left: 1.75rem;
   padding-right: 1.75rem;
 }
-
 .pb-0\.5 {
   padding-bottom: 0.125rem;
 }
-
 .pb-0 {
   padding-bottom: 0px;
 }
-
 .pt-16 {
   padding-top: 4rem;
 }
-
 .pb-9 {
   padding-bottom: 2.25rem;
 }
-
 .pb-6 {
   padding-bottom: 1.5rem;
 }
-
 .pt-7 {
   padding-top: 1.75rem;
 }
-
 .text-center {
   text-align: center;
 }
-
 .font-bebas-neue {
   font-family: Bebas Neue, cursive;
 }
-
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
-
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-
 .uppercase {
   text-transform: uppercase;
 }
-
 .lowercase {
   text-transform: lowercase;
 }
-
 .leading-none {
   line-height: 1;
 }
-
 .text-white {
   --tw-text-opacity: 1;
-  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
-
 .text-gray-400 {
   --tw-text-opacity: 1;
-  color: rgba(156, 163, 175, var(--tw-text-opacity));
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
-
 .text-gray-800 {
   --tw-text-opacity: 1;
-  color: rgba(31, 41, 55, var(--tw-text-opacity));
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
-
 .text-black {
   --tw-text-opacity: 1;
-  color: rgba(0, 0, 0, var(--tw-text-opacity));
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
-
 .text-gray-700 {
   --tw-text-opacity: 1;
-  color: rgba(55, 65, 81, var(--tw-text-opacity));
+  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-
 .text-gray-100 {
   --tw-text-opacity: 1;
-  color: rgba(243, 244, 246, var(--tw-text-opacity));
+  color: rgb(243 244 246 / var(--tw-text-opacity));
 }
-
 .placeholder-gray-400::-moz-placeholder {
   --tw-placeholder-opacity: 1;
-  color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
+  color: rgb(156 163 175 / var(--tw-placeholder-opacity));
 }
-
 .placeholder-gray-400:-ms-input-placeholder {
   --tw-placeholder-opacity: 1;
-  color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
+  color: rgb(156 163 175 / var(--tw-placeholder-opacity));
 }
-
 .placeholder-gray-400::placeholder {
   --tw-placeholder-opacity: 1;
-  color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
+  color: rgb(156 163 175 / var(--tw-placeholder-opacity));
 }
-
 .opacity-80 {
   opacity: 0.8;
 }
-
 .opacity-0 {
   opacity: 0;
 }
-
 .opacity-70 {
   opacity: 0.7;
 }
-
 .drop-shadow-xl {
-  --tw-drop-shadow: drop-shadow(0 20px 13px rgba(0, 0, 0, 0.03)) drop-shadow(0 8px 5px rgba(0, 0, 0, 0.08));
-  filter: var(--tw-filter);
+  --tw-drop-shadow: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
-
 .transition {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-
 .duration-300 {
   transition-duration: 300ms;
 }
-
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 [x-cloak] {
   display: none;
 }
-
 .text-musora {
   background: linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .bg-musora {
   background: linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);
 }
-
-.hover\:btn-secondary:hover.hover\:text-drumeo:hover:hover, .hover\:btn-secondary:hover.hover\:text-drumeo:hover:focus-visible {
-  color: #3C91E2;
+.btn-secondary.hover\:text-drumeo:hover:hover, .btn-secondary.text-drumeo:focus-visible {
   color: #3C91E2;
 }
-
-.hover\:btn-secondary:hover.hover\:text-drumeo:hover:active {
+.btn-secondary.hover\:text-drumeo:hover:active {
   color: #095EAF;
 }
-
 .hover\:border-gray-600:hover {
   --tw-border-opacity: 1;
-  border-color: rgba(75, 85, 99, var(--tw-border-opacity));
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
-
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
-
 .hover\:text-drumeo:hover {
   --tw-text-opacity: 1;
-  color: rgba(11, 118, 219, var(--tw-text-opacity));
+  color: rgb(11 118 219 / var(--tw-text-opacity));
 }
-
 .focus\:border-drumeo:focus {
   --tw-border-opacity: 1;
-  border-color: rgba(11, 118, 219, var(--tw-border-opacity));
+  border-color: rgb(11 118 219 / var(--tw-border-opacity));
 }
-
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-
 @media (min-width: 768px) {
   .md\:mx-3 {
     margin-left: 0.75rem;
     margin-right: 0.75rem;
   }
-
   .md\:inline {
     display: inline;
   }
-
   .md\:h-7 {
     height: 1.75rem;
   }
-
   .md\:py-64 {
     padding-top: 16rem;
     padding-bottom: 16rem;
   }
-
   .md\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
 }
-
 @media (min-width: 1024px) {
   .lg\:py-72 {
     padding-top: 18rem;
     padding-bottom: 18rem;
   }
-
   .lg\:text-5xl {
     font-size: 3rem;
     line-height: 1;

@@ -8,19 +8,21 @@
         @yield('head-includes')
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+
+        @include('_partials.snippets.favicons')
     </head>
 
-    <body class="flex flex-col w-full min-h-screen" x-data="{ sidebarOpen: false, showOverlay: false }">
+    <body class="flex flex-col w-full min-h-screen">
 
-        <div  id="app" class="flex-1">
+        <main id="app" class="flex-1">
+
             @yield('layout-body')
-        </div>
+
+        </main>
 
         <!-- Scripts -->
         @yield('layout-scripts')
-
-        <script src="{{ mix('marketing/js/app.js') }}"></script>
-
+        <script src="{{ mix('platform/js/app.js') }}"></script>
     </body>
 </html>

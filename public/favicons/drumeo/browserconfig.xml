@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="/laravel/public/images/favicon/mstile-150x150.png?v=2017"/>
+            <TileColor>#0b76db</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>

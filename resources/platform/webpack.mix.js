@@ -17,10 +17,7 @@ mix
     .js('resources/platform/assets/js/app.js', 'public/platform/js')
     .vue()
     .postCss('resources/platform/assets/css/app.css', 'public/platform/css', [
-        require('tailwindcss')
+        tailwindcss('./resources/platform/tailwind.config.js')
     ])
-    .options({
-        postCss: [ tailwindcss('./resources/platform/tailwind.config.js')],
-    })
     .version()
     .mergeManifest();
