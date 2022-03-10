@@ -245,14 +245,20 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             $arrayValue = utf8_encode($value);
                         } else {
                             if (($value instanceof Content)) {
-                                $arrayValue = $this->transform($value);
 
+                                $arrayValue = $this->transform($value);
                                 $arrayValue['fields'] =
                                     $this->includeFields($value)
                                         ->getData();
+
+                                $data =
+                                    Fractal::create()
+                                        ->collection($value->getData())
+                                        ->transformWith(ContentDataOldStructureTransformer::class)
+                                        ->toArray();
                                 $arrayValue['data'] =
-                                    $this->includeData($value)
-                                        ->getData();
+                                    $data['data'];
+
                             } else {
                                 $arrayValue = $value;
                             }
