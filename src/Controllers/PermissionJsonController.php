@@ -9,7 +9,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Railcontent\Services\JsonApiHydrator;
 use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Content;
