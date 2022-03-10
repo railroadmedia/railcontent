@@ -1,14 +1,15 @@
 // tailwind.config.js
 const stylesoraTheme = require('stylesora/theme');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   mode: 'jit',
-  purge: [
+  content: [
     './resources/**/*.blade.php',
     './resources/**/*.js',
     './resources/**/*.vue',
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: stylesoraTheme.fontFamily,
@@ -37,5 +38,6 @@ module.exports = {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
         },
       })
+    })
   ],
 }

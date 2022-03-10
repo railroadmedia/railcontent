@@ -5,7 +5,7 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   mode: 'jit',
-  purge: [
+  content: [
     './resources/**/*.blade.php',
     './resources/**/*.js',
   ],

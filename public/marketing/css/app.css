@@ -1471,21 +1471,6 @@ a:visited {
   background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
 }
 
-.bg-guitareo {
-  --tw-bg-opacity: 1;
-  background-color: rgba(0, 201, 172, var(--tw-bg-opacity));
-}
-
-.bg-drumeo {
-  --tw-bg-opacity: 1;
-  background-color: rgba(11, 118, 219, var(--tw-bg-opacity));
-}
-
-.bg-singeo {
-  --tw-bg-opacity: 1;
-  background-color: rgba(131, 0, 233, var(--tw-bg-opacity));
-}
-
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2;
 }
@@ -1583,10 +1568,6 @@ a:visited {
   line-height: 1.75rem;
 }
 
-.text-\[13px\] {
-  font-size: 13px;
-}
-
 .uppercase {
   text-transform: uppercase;
 }
@@ -1629,21 +1610,6 @@ a:visited {
   color: rgba(243, 244, 246, var(--tw-text-opacity));
 }
 
-.text-guitareo {
-  --tw-text-opacity: 1;
-  color: rgba(0, 201, 172, var(--tw-text-opacity));
-}
-
-.text-drumeo {
-  --tw-text-opacity: 1;
-  color: rgba(11, 118, 219, var(--tw-text-opacity));
-}
-
-.text-singeo {
-  --tw-text-opacity: 1;
-  color: rgba(131, 0, 233, var(--tw-text-opacity));
-}
-
 .placeholder-gray-400::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
@@ -1665,10 +1631,6 @@ a:visited {
 
 .opacity-0 {
   opacity: 0;
-}
-
-.opacity-90 {
-  opacity: 0.9;
 }
 
 .opacity-70 {
