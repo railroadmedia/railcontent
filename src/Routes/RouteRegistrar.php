@@ -401,7 +401,17 @@ class RouteRegistrar
                 )
                     ->name('remote.put');
 
+                $this->router->patch(
+                    'content/field/{contentId}',
+                    ContentJsonController::class . '@updateOldField'
+                )
+                    ->name('content.updateOldField');
 
+                $this->router->put(
+                    'content/field',
+                    ContentJsonController::class . '@insertOldField'
+                )
+                    ->name('content.insertOldField');
 
             }
         );
