@@ -28,14 +28,9 @@ class AddCoachColumnsToContentTable extends Migration
                         ->after('bands')
                         ->nullable();
 
-                    $table->string('focus')
-                        ->index()
-                        ->after('endorsements')
-                        ->nullable();
-
                     $table->integer('forum_thread_id')
                         ->index()
-                        ->after('focus')
+                        ->after('endorsements')
                         ->nullable();
 
                     $table->integer('is_active')
@@ -58,9 +53,14 @@ class AddCoachColumnsToContentTable extends Migration
                         ->after('is_coach_of_the_month')
                         ->nullable();
 
-                    $table->integer('associated_user_id')
+                    $table->integer('is_house_coach')
                         ->index()
                         ->after('is_featured')
+                        ->nullable();
+
+                    $table->integer('associated_user_id')
+                        ->index()
+                        ->after('is_house_coach')
                         ->nullable();
 
                     $table->string('high_soundslice_slug')
@@ -139,7 +139,6 @@ class AddCoachColumnsToContentTable extends Migration
 
                     $table->dropColumn('bands');
                     $table->dropColumn('endorsements');
-                    $table->dropColumn('focus');
                     $table->dropColumn('forum_thread_id');
                     $table->dropColumn('is_active');
                     $table->dropColumn('is_coach');
