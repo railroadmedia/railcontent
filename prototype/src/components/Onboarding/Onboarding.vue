@@ -4,6 +4,7 @@ import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
 import InstrumentType from './steps/InstrumentType.vue'
+import GenreSelect from './steps/GenreSelect.vue'
 
 const props = defineProps({
     brand: {
@@ -79,6 +80,16 @@ function checkStepToggle(step, val) {
         <InstrumentType
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 2"
+            @onChangeStep="changeStep"
+            @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle"
+            :steps="steps"
+            :info="info"
+        />
+
+        <GenreSelect
+            :brand="instrumentBrand[info.instrument]"
+            v-if="currentStep === 3"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
             @onCheckStep="checkStepToggle"

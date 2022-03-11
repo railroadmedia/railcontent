@@ -2,6 +2,8 @@
 import InstrumentCard from '../../InstrumentCard/InstrumentCard.vue'
 import InstrumentCardContent from '../../InstrumentCard/InstrumentCardContent.vue'
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
+import StepWrapper from '../StepWrapper.vue'
+
 import { brandUrl, bgColor, bgImg } from '../../../constants/brands'
 const props = defineProps({
     brand: {
@@ -23,9 +25,7 @@ function onInstrumentSelection(instrument) {
 </script>
 
 <template>
-    <div
-        class="tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-center tw-bg-[#000C17]"
-    >
+    <StepWrapper :brand="brand" :showBgImg="false">
         <h2
             class="tw-mb-[5px] tw-w-full tw-text-center tw-font-bold tw-text-white"
         >
@@ -92,5 +92,5 @@ function onInstrumentSelection(instrument) {
             :steps="steps"
             @onChangeStep="(s) => emit('onChangeStep', s)"
         />
-    </div>
+    </StepWrapper>
 </template>

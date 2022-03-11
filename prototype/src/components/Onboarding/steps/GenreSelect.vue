@@ -18,9 +18,9 @@ const props = defineProps({
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 const options = [
-    { value: 'a', text: 'A' },
-    { value: 'b', text: 'B' },
-    { value: 'c', text: 'C' }
+    { value: 'c', text: 'C' },
+    { value: 'd', text: 'D' },
+    { value: 'e', text: 'E' }
 ]
 function handleMultiSelection(selection) {
     emit(
@@ -53,17 +53,17 @@ function skipStep() {
         />
         <ProgressBar
             :brand="brand"
-            :currentStep="2"
+            :currentStep="3"
             :steps="steps"
             @onChangeStep="(s) => emit('onChangeStep', s)"
         />
         <Button
             @onButtonClick="
                 () => {
-                    emit('onChangeStep', 3)
+                    emit('onChangeStep', 4)
                 }
             "
-            :isDisabled="!steps[2].checked"
+            :isDisabled="!steps[3].checked"
             :brand="brand"
             classOverride="tw-w-[543px] tw-mt-[40px]"
             >Next</Button
