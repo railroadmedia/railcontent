@@ -30,7 +30,7 @@ export default {
         const { input, errors } = useInputValidator(
             props.initialValue,
             [minLength(3)],
-            (value) => emit('input', value)
+            (value) => emit('onChange', value)
         )
         return {
             input,

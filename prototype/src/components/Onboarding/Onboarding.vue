@@ -60,18 +60,18 @@ function checkStepToggle(step, val) {
         <UserInfo
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 0"
-            @changeStep="changeStep"
-            @changeInfo="changeInfo"
-            @checkStep="checkStepToggle"
+            @onChangeStep="changeStep"
+            @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
         />
         <InstrumentSelect
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 1"
-            @changeStep="changeStep"
-            @changeInfo="changeInfo"
-            @checkStep="checkStepToggle"
+            @onChangeStep="changeStep"
+            @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
         />
@@ -79,9 +79,9 @@ function checkStepToggle(step, val) {
         <InstrumentType
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 2"
-            @changeStep="changeStep"
-            @changeInfo="changeInfo"
-            @checkStep="checkStepToggle"
+            @onChangeStep="changeStep"
+            @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
         />

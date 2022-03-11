@@ -10,12 +10,9 @@ const props = defineProps({
     steps: {
         type: Array,
         default: []
-    },
-    changeStep: {
-        type: Function
     }
 })
-const emit = defineEmits(['changeStep'])
+const emit = defineEmits(['onChangeStep'])
 
 const getStepType = (stepIndex, checked) => {
     if (stepIndex === props.currentStep) {
@@ -37,7 +34,7 @@ const getStepType = (stepIndex, checked) => {
             :label="step.label"
             v-bind:key="`${step.label}-step`"
             :currentStep="currentStep"
-            @navigateToStep="emit('changeStep', index)"
+            @navigateToStep="emit('onChangeStep', index)"
             :brand="brand"
             :stepType="getStepType(index, step.checked)"
             :isLast="steps.length - 1 === index"

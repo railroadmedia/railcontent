@@ -1,5 +1,5 @@
 <script setup>
-const props = defineEmits(['onSkip'])
+const emit = defineEmits(['onSkip'])
 </script>
 
 <template>

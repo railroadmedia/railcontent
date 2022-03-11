@@ -18,13 +18,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 
-function onInputChange(e) {
-    if (e.target) {
-        emit('changeInfo', {
-            ...props.info,
-            user: { ...props.info.user, name: e.target.value }
-        })
-    }
+function onInputChange(value) {
+    emit('onChangeInfo', {
+        ...props.info,
+        user: { ...props.info.user, name: value }
+    })
 }
 </script>
 
@@ -45,19 +43,19 @@ function onInputChange(e) {
             labelValue="Display Name"
             placeholder="Enter your display name..."
             classOverride="tw-mb-[56px]  lg:tw-w-[471px]"
-            @input="onInputChange"
+            @onChange="onInputChange"
         />
         <ProgressBar
             :brand="brand"
             :currentStep="0"
             :steps="steps"
-            @changeStep="(s) => emit('changeStep', s)"
+            @onChangeStep="(s) => emit('onChangeStep', s)"
         />
         <Button
             :brand="brand"
-            @buttonClick="
+            @onButtonClick="
                 () => {
-                    emit('changeStep', 1)
+                    emit('onChangeStep', 1)
                 }
             "
             :isDisabled="!steps[0].checked"

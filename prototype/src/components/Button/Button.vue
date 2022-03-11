@@ -28,7 +28,7 @@ const emit = defineEmits(['onButtonClick'])
 <template>
     <button
         type="button"
-        @click="!isDisabled && emit('buttonClick')"
+        @click="!isDisabled && emit('onButtonClick')"
         :class="`MusoraButton tw-rounded-[25px] tw-py-[13px] tw-px-[36px] tw-text-white ${
             bgColor[brand]
         } ${classOverride} ${isDisabled ? 'MusoraButton__disabled' : ''}`"

@@ -24,10 +24,13 @@ const options = [
 ]
 function handleMultiSelection(selection) {
     emit(
-        'checkStep',
+        'onCheckStep',
         2,
         Object.values(selection).find((val) => val)
     )
+}
+function skipStep() {
+    alert('* the user skipped the step *')
 }
 </script>
 
@@ -52,12 +55,12 @@ function handleMultiSelection(selection) {
             :brand="brand"
             :currentStep="2"
             :steps="steps"
-            @changeStep="(s) => emit('changeStep', s)"
+            @onChangeStep="(s) => emit('onChangeStep', s)"
         />
         <Button
-            @buttonClick="
+            @onButtonClick="
                 () => {
-                    emit('changeStep', 1)
+                    emit('onChangeStep', 1)
                 }
             "
             :isDisabled="!steps[2].checked"

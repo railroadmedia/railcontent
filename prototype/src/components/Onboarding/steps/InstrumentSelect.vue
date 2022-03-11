@@ -16,9 +16,9 @@ const props = defineProps({
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 function onInstrumentSelection(instrument) {
-    emit('changeInfo', { ...props.info, instrument })
-    emit('checkStep', 1, true)
-    emit('changeStep', 2)
+    emit('onChangeInfo', { ...props.info, instrument })
+    emit('onCheckStep', 1, true)
+    emit('onChangeStep', 2)
 }
 </script>
 
@@ -90,7 +90,7 @@ function onInstrumentSelection(instrument) {
             :brand="brand"
             :currentStep="1"
             :steps="steps"
-            @changeStep="(s) => emit('changeStep', s)"
+            @onChangeStep="(s) => emit('onChangeStep', s)"
         />
     </div>
 </template>

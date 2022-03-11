@@ -19,9 +19,6 @@ const props = defineProps({
     },
     currentStep: {
         type: Number
-    },
-    changeStep: {
-        type: Function
     }
 })
 const emit = defineEmits(['navigateToStep'])
