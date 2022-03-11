@@ -2,6 +2,8 @@
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 import Button from '../../Button/Button.vue'
 import StepWrapper from '../StepWrapper.vue'
+import SkipStep from '../SkipStep.vue'
+import MultiSelect from '../../MultiSelect/MultiSelect.vue'
 import { defineEmits, defineProps, ref } from 'vue'
 const props = defineProps({
     brand: {
@@ -15,6 +17,18 @@ const props = defineProps({
     }
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
+const options = [
+    { value: 'a', text: 'A' },
+    { value: 'b', text: 'B' },
+    { value: 'c', text: 'C' }
+]
+function handleMultiSelection(selection) {
+    emit(
+        'checkStep',
+        2,
+        Object.values(selection).find((val) => val)
+    )
+}
 </script>
 
 <template>
@@ -29,7 +43,11 @@ const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
             your practice set-up. You can select multiple gear types and change
             your settings in your profile at anytime.
         </p>
-
+        <MultiSelect
+            :options="options"
+            classOverride="tw-pb-[20px]"
+            @onChangeSelection="handleMultiSelection"
+        />
         <ProgressBar
             :brand="brand"
             :currentStep="2"
@@ -42,11 +60,11 @@ const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
                     emit('changeStep', 1)
                 }
             "
-            :isDisabled="!steps[0].checked"
+            :isDisabled="!steps[2].checked"
             :brand="brand"
             classOverride="tw-w-[543px] tw-mt-[40px]"
             >Next</Button
         >
-        <button>SKIP</button>
+        <SkipStep @onSkip="skipStep" />
     </StepWrapper>
 </template>
