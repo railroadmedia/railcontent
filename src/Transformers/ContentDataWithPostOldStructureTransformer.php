@@ -3,8 +3,10 @@
 namespace Railroad\Railcontent\Transformers;
 
 use League\Fractal\TransformerAbstract;
+use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentLikes;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class ContentDataWithPostOldStructureTransformer extends TransformerAbstract
 {
@@ -14,15 +16,13 @@ class ContentDataWithPostOldStructureTransformer extends TransformerAbstract
      */
     public function transform(ContentData $contentData)
     {
+        $entityManager = app()->make(RailcontentEntityManager::class);
+
+        $serializer = new BasicEntitySerializer();
+
         $this->setDefaultIncludes(['post']);
 
-        return [
-            'id' => $contentData->getId(),
-            'content_id' => $contentData->getContent()->getId(),
-            'key' => $contentData->getKey(),
-            'value' => $contentData->getValue(),
-            'position' => $contentData->getPosition(),
-        ];
+        return $serializer->serializeToUnderScores($contentData, $entityManager->getClassMetadata(ContentData::class));
     }
 
     public function includePost(ContentData $contentData)
