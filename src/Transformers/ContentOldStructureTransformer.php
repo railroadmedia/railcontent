@@ -323,6 +323,10 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     if (is_string($value) && mb_check_encoding($value) == false) {
                         $value = utf8_encode($value);
                     }
+                    if($field == 'associated_user'){
+                        $field = 'associated_user_id';
+                        $value = $value->getId();
+                    }
                     $fields[] = [
                         'id' => rand(),
                         'content_id' => $content->getId(),

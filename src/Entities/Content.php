@@ -60,7 +60,6 @@ use Doctrine\Search\Mapping\Annotations as MAP;
  *         @ORM\Index(name="railcontent_content_youtube_video_id_index", columns={"youtube_video_id"}),
  *         @ORM\Index(name="railcontent_content_bands_index", columns={"bands"}),
  *         @ORM\Index(name="railcontent_content_endorsements_index", columns={"endorsements"}),
- *         @ORM\Index(name="railcontent_content_focus_index", columns={"focus"}),
  *         @ORM\Index(name="railcontent_content_forum_thread_id_index", columns={"forum_thread_id"}),
  *         @ORM\Index(name="railcontent_content_is_active_index", columns={"is_active"}),
  *         @ORM\Index(name="railcontent_content_is_coach_index", columns={"is_coach"}),
@@ -243,8 +242,9 @@ class Content extends ArrayExpressible
         $this->instructor = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
         $this->likes = new ArrayCollection();
-        $this->styles = new ArrayCollection();
+        $this->style = new ArrayCollection();
         $this->follows = new ArrayCollection();
+        $this->focus = new ArrayCollection();
     }
 
     /**
@@ -625,7 +625,7 @@ class Content extends ArrayExpressible
 
         $styles = [];
 
-        foreach ($this->getStyles() as $contentStyle) {
+        foreach ($this->getStyle() as $contentStyle) {
             $styles[] = $contentStyle->getStyle();
         }
 
@@ -653,9 +653,9 @@ class Content extends ArrayExpressible
             'bpm' => $this->getBpm(),
             'staff_pick_rating' => $this->getStaffPickRating(),
             'is_coach' => $this->getIsCoach(),
-            'is_active' => $this->isActive(),
-            'is_coach_of_the_month' => $this->isCoachOfTheMonth(),
-            'is_featured' => $this->isFeatured()
+            'is_active' => $this->getIsActive(),
+            'is_coach_of_the_month' => $this->getIsCoachOfTheMonth(),
+            'is_featured' => $this->getIsFeatured(),
         ];
     }
 }

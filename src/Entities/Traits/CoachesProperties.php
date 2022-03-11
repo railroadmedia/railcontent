@@ -23,13 +23,6 @@ trait CoachesProperties
     protected $endorsements;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @var string
-     */
-    protected $focus;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
@@ -58,6 +51,12 @@ trait CoachesProperties
      * @var integer
      */
     protected $isFeatured;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    protected $isHouseCoach;
 
     /**
      * @var User
@@ -99,22 +98,6 @@ trait CoachesProperties
     }
 
     /**
-     * @return string
-     */
-    public function getFocus()
-    {
-        return $this->focus;
-    }
-
-    /**
-     * @param string $focus
-     */
-    public function setFocus($focus)
-    {
-        $this->focus = $focus;
-    }
-
-    /**
      * @return int
      */
     public function getForumThreadId()
@@ -133,7 +116,7 @@ trait CoachesProperties
     /**
      * @return bool
      */
-    public function isActive()
+    public function getIsActive()
     {
         return $this->isActive;
     }
@@ -165,7 +148,7 @@ trait CoachesProperties
     /**
      * @return int
      */
-    public function isCoachOfTheMonth()
+    public function getIsCoachOfTheMonth()
     {
         return $this->isCoachOfTheMonth;
     }
@@ -179,9 +162,25 @@ trait CoachesProperties
     }
 
     /**
+     * @return integer
+     */
+    public function getIsHouseCoach()
+    {
+        return $this->isHouseCoach;
+    }
+
+    /**
+     * @param $isHouseCoach
+     */
+    public function setIsHouseCoach($isHouseCoach)
+    {
+        $this->isHouseCoach = $isHouseCoach;
+    }
+
+    /**
      * @return bool
      */
-    public function isFeatured()
+    public function getIsFeatured()
     {
         return $this->isFeatured;
     }

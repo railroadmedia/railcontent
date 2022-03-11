@@ -90,6 +90,10 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content exercise migration.');
 
+        $this->migrateFocus($dbConnection);
+
+        $this->info('Ending content focus migration.');
+
         $this->info('Migration completed. ');
     }
 
@@ -325,6 +329,40 @@ EOT;
         $dbConnection->statement($statement);
         return $statement;
     }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateFocus(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `focus`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `focus`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_focus',
+            config('railcontent.table_prefix') . 'content_fields',
+            'focus'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
 
 
 

@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Entities\Traits;
 use Doctrine\Common\Collections\ArrayCollection;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentExercise;
+use Railroad\Railcontent\Entities\ContentFocus;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentKey;
 use Railroad\Railcontent\Entities\ContentKeyPitchType;
@@ -41,7 +42,7 @@ trait ContentFieldsAssociations
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentStyle", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $styles = [];
+    protected $style = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content",
@@ -72,6 +73,12 @@ trait ContentFieldsAssociations
      *     cascade={"persist","remove"})
      */
     protected $data = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentFocus", mappedBy="content",
+     *     cascade={"persist","remove"})
+     */
+    protected $focus = [];
 
      /**
      * @return ArrayCollection
@@ -529,7 +536,7 @@ trait ContentFieldsAssociations
      */
     public function addStyle(ContentStyle $contentStyle)
     {
-        if ($this->styles->contains($contentStyle)) {
+        if ($this->style->contains($contentStyle)) {
             // Do nothing if its already part of our collection
             return;
         }
@@ -537,10 +544,10 @@ trait ContentFieldsAssociations
         $predictate = function ($element) use ($contentStyle) {
             return $element->getStyle() === $contentStyle->getStyle();
         };
-        $existStyle = $this->styles->filter($predictate);
+        $existStyle = $this->style->filter($predictate);
 
         if ($existStyle->isEmpty()) {
-            $this->styles->add($contentStyle);
+            $this->style->add($contentStyle);
         } else {
             $style = $existStyle->first();
             if ($style->getPosition() == $contentStyle->getPosition()) {
@@ -564,19 +571,71 @@ trait ContentFieldsAssociations
     public function removeStyle(ContentStyle $contentStyle)
     {
         // If the style does not exist in the collection, then we don't need to do anything
-        if (!$this->styles->contains($contentStyle)) {
+        if (!$this->style->contains($contentStyle)) {
             return;
         }
 
-        $this->styles->removeElement($contentStyle);
+        $this->style->removeElement($contentStyle);
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getStyles()
+    public function getStyle()
     {
-        return $this->styles;
+        return $this->style;
+    }
+
+    /**
+     * @param ContentFocus $contentFocus
+     * @return $this
+     */
+    public function addFocus(ContentFocus $contentFocus)
+    {
+
+        $predictate = function ($element) use ($contentFocus) {
+            return $element->getFocus() === $contentFocus->getFocus();
+        };
+        $existFocus = $this->focus->filter($predictate);
+
+        if ($existFocus->isEmpty()) {
+            $this->focus->add($contentFocus);
+        } else {
+            $focus = $existFocus->first();
+            if ($focus->getPosition() == $contentFocus->getPosition()) {
+                return $this;
+            }
+
+            $key = $existFocus->key();
+            if ($contentFocus->getPosition()) {
+                $this->getFocus()
+                    ->get($key)
+                    ->setPosition($contentFocus->getPosition());
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ContentFocus $contentFocus
+     */
+    public function removeFocus(ContentFocus $contentFocus)
+    {
+        // If the focus does not exist in the collection, then we don't need to do anything
+        if (!$this->focus->contains($contentFocus)) {
+            return;
+        }
+
+        $this->focus->removeElement($contentFocus);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getFocus()
+    {
+        return $this->focus;
     }
 
 
