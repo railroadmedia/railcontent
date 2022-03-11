@@ -4,7 +4,7 @@ import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
 import InstrumentType from './steps/InstrumentType.vue'
-import GenreSelect from './steps/GenreSelect.vue'
+import Experience from './steps/Experience.vue'
 
 const props = defineProps({
     brand: {
@@ -15,6 +15,7 @@ const props = defineProps({
 const initialSteps = [
     { label: 'ABOUT', checked: false },
     { label: 'INSTRUMENT', checked: false },
+    { label: 'TYPE', checked: false },
     { label: 'EXPERIENCE', checked: false },
     { label: 'GENRES', checked: false },
     { label: 'TOPICS', checked: false },
@@ -25,14 +26,16 @@ const instrumentBrand = {
     piano: 'pianote',
     drums: 'drumeo',
     guitar: 'guitareo',
-    singing: 'singeo'
+    singing: 'singeo',
+    default: 'drumeo'
 }
 const initialInfo = {
     user: {
         name: '',
         avatarUrl: ''
     },
-    instrument: 'drums'
+    instrument: 'default',
+    instrumentTypes: {}
 }
 let currentStep = ref(0)
 let info = ref(initialInfo)
@@ -87,7 +90,7 @@ function checkStepToggle(step, val) {
             :info="info"
         />
 
-        <GenreSelect
+        <Experience
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 3"
             @onChangeStep="changeStep"

@@ -1,6 +1,6 @@
 <script setup>
-import InstrumentCard from '../../InstrumentCard/InstrumentCard.vue'
-import InstrumentCardContent from '../../InstrumentCard/InstrumentCardContent.vue'
+import SquaredCard from '../../SquaredCard/SquaredCard.vue'
+import InstrumentCardContent from '../InstrumentCardContent.vue'
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 import StepWrapper from '../StepWrapper.vue'
 
@@ -37,54 +37,54 @@ function onInstrumentSelection(instrument) {
             selector in the navigation.
         </p>
         <div class="tw-mb-[40px] tw-flex tw-space-x-6">
-            <InstrumentCard
+            <SquaredCard
                 :backgroundUrl="bgImg.drumeo"
-                brand="drumeo"
+                type="drumeo"
                 :active="info.instrument === 'drums'"
-                @onInstrumentSelect="() => onInstrumentSelection('drums')"
+                @onSelect="() => onInstrumentSelection('drums')"
             >
                 <InstrumentCardContent
                     instrumentText="DRUMS"
                     :logoUrl="brandUrl.drumeo"
                     logoAltText="Drumeo Logo"
                 />
-            </InstrumentCard>
-            <InstrumentCard
+            </SquaredCard>
+            <SquaredCard
                 :backgroundUrl="bgImg.pianote"
                 :active="info.instrument === 'piano'"
-                brand="pianote"
-                @onInstrumentSelect="() => onInstrumentSelection('piano')"
+                type="pianote"
+                @onSelect="() => onInstrumentSelection('piano')"
             >
                 <InstrumentCardContent
                     instrumentText="PIANO"
                     :logoUrl="brandUrl.pianote"
                     logoAltText="Pianote Logo"
                 />
-            </InstrumentCard>
-            <InstrumentCard
+            </SquaredCard>
+            <SquaredCard
                 :backgroundUrl="bgImg.guitareo"
                 :active="info.instrument === 'guitar'"
-                brand="guitareo"
-                @onInstrumentSelect="() => onInstrumentSelection('guitar')"
+                type="guitareo"
+                @onSelect="() => onInstrumentSelection('guitar')"
             >
                 <InstrumentCardContent
                     instrumentText="GUITAR"
                     :logoUrl="brandUrl.guitareo"
                     logoAltText="Guitareo Logo"
                 />
-            </InstrumentCard>
-            <InstrumentCard
+            </SquaredCard>
+            <SquaredCard
                 :backgroundUrl="bgImg.singeo"
                 :active="info.instrument === 'singing'"
-                brand="singeo"
-                @onInstrumentSelect="() => onInstrumentSelection('singing')"
+                type="singeo"
+                @onSelect="() => onInstrumentSelection('singing')"
             >
                 <InstrumentCardContent
                     instrumentText="SINGING"
                     :logoUrl="brandUrl.singeo"
                     logoAltText="Singeo Logo"
                 />
-            </InstrumentCard>
+            </SquaredCard>
         </div>
         <ProgressBar
             :brand="brand"

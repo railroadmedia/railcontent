@@ -9,6 +9,10 @@ const props = defineProps({
     classOverride: {
         type: String,
         default: ''
+    },
+    initialSelection: {
+        type: Object,
+        default: {}
     }
 })
 const emit = defineEmits(['onChangeSelection'])
@@ -16,7 +20,7 @@ const initialValues = props.options.reduce(
     (prev, curr) => ({ ...prev, [curr.value]: false }),
     {}
 )
-let selectedValues = ref(initialValues)
+let selectedValues = ref({ ...initialValues, ...props.initialSelection })
 
 function handleSelection(value) {
     console.log(value)

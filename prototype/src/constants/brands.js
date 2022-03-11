@@ -14,21 +14,33 @@ export const bgColor = {
     singeo: 'tw-bg-singeo',
     drumeo: 'tw-bg-drumeo',
     pianote: 'tw-bg-pianote',
-    guitareo: 'tw-bg-guitareo'
+    guitareo: 'tw-bg-guitareo',
+    red: '',
+    blue: '',
+    yellow: '',
+    green: ''
 }
 
 export const textColor = {
     drumeo: 'tw-text-drumeo',
     singeo: 'tw-text-singeo',
     guitareo: 'tw-text-guitareo',
-    pianote: 'tw-text-pianote'
+    pianote: 'tw-text-pianote',
+    red: '',
+    blue: '',
+    yellow: '',
+    green: ''
 }
 
 export const borderColor = {
     drumeo: 'tw-border-drumeo',
     singeo: 'tw-border-singeo',
     guitareo: 'tw-border-guitareo',
-    pianote: 'tw-border-pianote'
+    pianote: 'tw-border-pianote',
+    red: '',
+    blue: '',
+    yellow: '',
+    green: ''
 }
 
 export const bgImg = {

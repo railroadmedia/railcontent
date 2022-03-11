@@ -28,6 +28,7 @@ function handleMultiSelection(selection) {
         2,
         Object.values(selection).find((val) => val)
     )
+    emit('onChangeInfo', { ...props.info, instrumentTypes: selection })
 }
 function skipStep() {
     alert('* the user skipped the step *')
@@ -48,6 +49,7 @@ function skipStep() {
         </p>
         <MultiSelect
             :options="options"
+            :initialSelection="info.instrumentTypes"
             classOverride="tw-pb-[20px]"
             @onChangeSelection="handleMultiSelection"
         />
