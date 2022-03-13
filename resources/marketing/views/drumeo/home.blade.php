@@ -16,7 +16,8 @@
 <!-- Header -->
 @section('layout-header')
     @include('_partials.layout.public-header', [
-        "brand" => "drumeo",
+        "theme_bg" => "bg-drumeo",
+        "theme_text" => "text-drumeo",
         "logo" => "https://musora-ui.s3.amazonaws.com/logos/drumeo.svg"
     ])
 @stop

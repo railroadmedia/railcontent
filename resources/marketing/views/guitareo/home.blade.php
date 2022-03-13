@@ -16,15 +16,14 @@
 <!-- Header -->
 @section('layout-header')
     @include('_partials.layout.public-header', [
-        "brand" => "guitareo",
+        "theme_bg" => "bg-guitareo",
+        "theme_text" => "text-guitareo",
         "logo" => "https://musora-ui.s3.amazonaws.com/logos/guitareo.svg"
     ])
 @stop
 
 <!-- Main -->
 @section('layout-body')
-    
-
 
 @stop
 

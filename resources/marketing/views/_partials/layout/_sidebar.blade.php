@@ -8,6 +8,7 @@
             @if(!empty($info['children']))
                 @include('_partials.layout._secondary-nav-link', [
                     "page" => $page,
+                    "theme_text" => $theme_text,
                     "iconClass" => $info['iconClass'],
                     "children" => $info['children'],
                 ])
@@ -16,6 +17,7 @@
                     "page" => $page,
                     "iconClass" => $info['iconClass'],
                     "url" => $info['url'],
+                    "theme_text" => $theme_text,
                     "greyed" => $info['greyed'] ?? false,
                 ])
             @endif

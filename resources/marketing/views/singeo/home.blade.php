@@ -16,7 +16,8 @@
 <!-- Header -->
 @section('layout-header')
     @include('_partials.layout.public-header', [
-        "brand" => "singeo",
+        "theme_bg" => "bg-singeo",
+        "theme_text" => "text-singeo",
         "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo.svg"
     ])
 @stop

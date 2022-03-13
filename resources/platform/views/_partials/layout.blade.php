@@ -15,11 +15,7 @@
 
     <body class="flex flex-col w-full min-h-screen">
 
-        <main id="app" class="flex-1">
-
-            @yield('layout-body')
-
-        </main>
+        @yield('layout-body')
 
         <!-- Modal Container -->
         <div id="modal-container" class="tw-z-10 tw-hidden tw-h-full tw-w-full"></div>

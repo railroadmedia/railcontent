@@ -8,9 +8,9 @@ module.exports = {
   prefix: "tw-",
   darkMode: "class",
   content: [
-    './resources/**/*.blade.php',
-    './resources/**/*.js',
-    './resources/**/*.vue',
+    './resources/platform/**/*.blade.php',
+    './resources/platform/**/*.js',
+    './resources/platform/**/*.vue',
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {

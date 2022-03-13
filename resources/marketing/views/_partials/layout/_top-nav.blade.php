@@ -17,7 +17,7 @@
         <!-- Nav CTA buttons -->
         <div class="flex items-center">
             <a href="/shop" class="btn btn-secondary btn-small text-white mr-3 py-4 px-8 mb-0 h-auto">Shop</a>
-            <a href="/#join" class="btn btn-primary btn-small bg-{{ $brand }} border-0 py-4 px-8 mr-3 mb-0 h-auto">Join Musora</a>
+            <a href="/#join" class="btn btn-primary btn-small {{ $theme_bg }} border-0 py-4 px-8 mr-3 mb-0 h-auto">Join Musora</a>
         </div>
 
     </div>

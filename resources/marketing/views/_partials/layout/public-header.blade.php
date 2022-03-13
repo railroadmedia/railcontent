@@ -3,15 +3,16 @@
     <!-- Nav -->
     @include('_partials.layout._top-nav', [
         "logo" => $logo,
+        "theme_bg" => $theme_bg,
     ])
 
     <!-- Sidebar -->
     @include('_partials.layout._sidebar', [
-        "themeColor" => $brand,
+        "theme_text" => $theme_text,
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "login",
+                "url" => "/member",
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",

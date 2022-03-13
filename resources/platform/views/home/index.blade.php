@@ -5,7 +5,9 @@
 @extends('_partials.layout')
 
 @section('layout-body')
-
-    <hello-world/>
+  
+  <main id="home-app" class="flex-1">
+    <home-app/>
+  </main>
 
 @endsection

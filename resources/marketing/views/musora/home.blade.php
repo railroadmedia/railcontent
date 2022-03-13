@@ -13,9 +13,11 @@
 @stop
 
 <!-- Header -->
+<!-- Header -->
 @section('layout-header')
     @include('_partials.layout.public-header', [
-        "brand" => "musora",
+        "theme_bg" => "bg-musora",
+        "theme_text" => "text-musora",
         "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg"
     ])
 @stop

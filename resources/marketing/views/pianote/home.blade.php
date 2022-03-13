@@ -14,9 +14,11 @@
 @stop
 
 <!-- Header -->
+<!-- Header -->
 @section('layout-header')
     @include('_partials.layout.public-header', [
-        "brand" => "pianote",
+        "theme_bg" => "bg-pianote",
+        "theme_text" => "text-pianote",
         "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote.svg"
     ])
 @stop

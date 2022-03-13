@@ -5,10 +5,9 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   mode: 'jit',
-  content: [
-    './resources/**/*.blade.php',
-    './resources/**/*.js',
-  ],
+  content: require('fast-glob').sync([
+    './resources/marketing/**/*.{blade.php,js}',
+  ]),
   theme: {
     extend: {
       fontFamily: stylesoraTheme.fontFamily,

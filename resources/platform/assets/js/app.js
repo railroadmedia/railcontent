@@ -1,8 +1,10 @@
 require('./bootstrap');
 
-import { createApp } from 'vue'
-import HelloWorld from './vue/components/HelloWorld.vue';
+import { createApp } from 'vue';
+import store from './vue/store';
+import HomeApp from './vue/views/Home.vue';
 
-const app = createApp({});
-app.component('hello-world', HelloWorld)
-    .mount('#app');
+//Home 
+createApp(HomeApp)
+    .use(store)
+    .mount('#home-app')
