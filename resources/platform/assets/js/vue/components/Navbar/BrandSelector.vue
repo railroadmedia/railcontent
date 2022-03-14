@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import InstrumentCard from '../InstrumentCard/InstrumentCard.vue'
-import { textColor, bgImg, brandUrl } from '../../constants/brands.js'
+import { textColor, bgImg, brandUrl } from '../../../constants/brands.js'
 
 const brandNames = ['drumeo', 'pianote', 'guitareo', 'singeo']
 

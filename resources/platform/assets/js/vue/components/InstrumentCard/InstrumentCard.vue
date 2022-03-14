@@ -1,5 +1,5 @@
 <script>
-import { borderColor } from '../../constants/brands'
+import { borderColor } from '../../../constants/brands'
 export default {
   name: 'InstrumentCard',
   setup() {

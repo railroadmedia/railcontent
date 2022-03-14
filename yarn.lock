@@ -5236,10 +5236,10 @@ stylehacks@^5.0.1:
     browserslist "^4.16.0"
     postcss-selector-parser "^6.0.4"
 
-stylesora@^1.0.102-t3.3:
-  version "1.0.102-t3.3"
-  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.3.tgz#33f1a5f5e27327f6896400d9f6beeb72aed01f8e"
-  integrity sha512-adZ0cEhDIPWmlhg3V93Lph6tfBEN9JWJKOcnJODSLmlbt92Ub+IQpWqCJEcArTvNb68x7t8WmqM8kDE9JDx8CA==
+stylesora@^1.0.102-t3.7:
+  version "1.0.102-t3.7"
+  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.7.tgz#de826eb4b9b5c37293c051b6dac5ea71db2957d3"
+  integrity sha512-bU+FBjmO+QYK/Oh1pjpiR8pVClP5kK4o43n1lVzjZ4yQAm2xPOokyVL5Irw4I2ivJK6z77d5VRVQuRcobz2b+Q==
   dependencies:
     cssnano "^5.0.6"
 

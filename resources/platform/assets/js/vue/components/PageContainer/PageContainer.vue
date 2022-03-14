@@ -1,7 +1,7 @@
 <script>
 import { ref } from 'vue'
-import Navbar from '@/components/Navbar/Navbar.vue'
-import Sidebar from '@/components/Sidebar/Sidebar.vue'
+import Navbar from '../Navbar/Navbar.vue'
+import Sidebar from '../Sidebar/Sidebar.vue'
 export default {
     name: 'PageContainer',
     components: { Navbar, Sidebar },

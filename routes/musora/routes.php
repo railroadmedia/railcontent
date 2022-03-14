@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Platform Routes
+// PLATFORM
 require('platform/home.php');
+require('platform/login.php');
+require('platform/search.php');
 
-// Musora Routes
+// MARKETING
 require('marketing/homepage.php');
 require('marketing/login.php');

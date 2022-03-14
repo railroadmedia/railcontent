@@ -16,7 +16,7 @@
         @yield('layout-header')
 
         <main class="flex-1">
-            @yield('layout-body')
+            @yield('global-layout-body')
         </main>
 
         @yield('layout-footer')
@@ -24,6 +24,7 @@
         <!-- Overlay -->
         <div id="page-overlay" 
              x-cloak
+             x-transition.opacity.duration.200ms
              x-show="showOverlay"
              x-on:click="showOverlay = !showOverlay, sidebarOpen = !sidebarOpen"
              x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"

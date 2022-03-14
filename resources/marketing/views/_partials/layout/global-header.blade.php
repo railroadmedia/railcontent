@@ -12,7 +12,7 @@
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "/member",
+                "url" => "/members",
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",

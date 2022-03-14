@@ -1,39 +1,23 @@
-<!DOCTYPE html>
-@extends('_partials.layout.public-layout')
+@extends('pianote._partials.layout')
 
-@section('head-includes')
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
-    <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
-    <!-- Favicons -->
-    @include('_partials.layout.favicons.pianote-favicons')
-@stop
-
-<!-- Header -->
-<!-- Header -->
-@section('layout-header')
-    @include('_partials.layout.public-header', [
-        "theme_bg" => "bg-pianote",
-        "theme_text" => "text-pianote",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote.svg"
-    ])
-@stop
-
-<!-- Main -->
+<!-- Content -->
 @section('layout-body')
-    
 
-
-@stop
-
-<!-- Footer -->
-@section('layout-footer')
-    @include('_partials.layout.public-footer', [
-        "brand" => "pianote",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote-white.svg",
+    <!-- Hero Component -->
+    @component('_partials.components.hero-section', [
+        "backgroundImage" => "https://musora-web-platform.s3.amazonaws.com/pianote/homepage/pianote-hero.jpg",
+        "gradientClasses" => "from-[#29050f] to-[#29050f]"
     ])
+        @slot('content')
+            <div class="max-w-md">
+                <h1 class="text-white font-extrabold leading-tight max-w-xs md:max-w-md lg:max-w-2xl mx-auto md:mx-0 md:text-3xl lg:text-4xl">Learn the piano anytime with real teachers.</h1>
+                <p class="leading-normal text-blue-100 text-shadow-4 mt-3 md:mt-5 mb-5 md:mb-7 text-lg">
+                    <b class="uppercase">Technology Meets Tradition:</b>
+                    Online video lessons you can watch anytime, with support from real teachers every step of the way.
+                </p>
+                <a href="/" class="btn-primary bg-pianote">Get Strarted</a>
+            </div>
+        @endslot
+    @endcomponent
+
 @stop
