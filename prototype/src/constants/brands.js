@@ -26,10 +26,10 @@ export const textColor = {
     singeo: 'tw-text-singeo',
     guitareo: 'tw-text-guitareo',
     pianote: 'tw-text-pianote',
-    red: '',
-    blue: '',
-    yellow: '',
-    green: ''
+    red: 'tw-text-[#EF4444]',
+    blue: 'tw-text-[#3B82F6]',
+    yellow: 'tw-text-[#EAB308]',
+    green: 'tw-text-[#22C55E]'
 }
 
 export const borderColor = {
@@ -37,10 +37,10 @@ export const borderColor = {
     singeo: 'tw-border-singeo',
     guitareo: 'tw-border-guitareo',
     pianote: 'tw-border-pianote',
-    red: '',
-    blue: '',
-    yellow: '',
-    green: ''
+    red: 'tw-border-[#EF4444]',
+    blue: 'tw-border-[#3B82F6]',
+    yellow: 'tw-border-[#EAB308]',
+    green: 'tw-border-[#22C55E]'
 }
 
 export const bgImg = {
@@ -55,5 +55,9 @@ const __usedVars = [
     'hover:tw-border-drumeo',
     'hover:tw-border-pianote',
     'hover:tw-border-singeo',
-    'hover:tw-border-guitareo'
+    'hover:tw-border-guitareo',
+    'hover:tw-border-[#EF4444]',
+    'hover:tw-border-[#3B82F6]',
+    'hover:tw-border-[#EAB308]',
+    'hover:tw-border-[#22C55E]'
 ]

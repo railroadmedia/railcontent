@@ -5,6 +5,8 @@ import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
 import InstrumentType from './steps/InstrumentType.vue'
 import Experience from './steps/Experience.vue'
+import Genre from './steps/Genre.vue'
+import Topics from './steps/Topics.vue'
 
 const props = defineProps({
     brand: {
@@ -79,7 +81,6 @@ function checkStepToggle(step, val) {
             :steps="steps"
             :info="info"
         />
-
         <InstrumentType
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 2"
@@ -89,10 +90,27 @@ function checkStepToggle(step, val) {
             :steps="steps"
             :info="info"
         />
-
         <Experience
             :brand="instrumentBrand[info.instrument]"
             v-if="currentStep === 3"
+            @onChangeStep="changeStep"
+            @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle"
+            :steps="steps"
+            :info="info"
+        />
+        <Genre
+            :brand="instrumentBrand[info.instrument]"
+            v-if="currentStep === 4"
+            @onChangeStep="changeStep"
+            @onChangeInfo="changeInfo"
+            @onCheckStep="checkStepToggle"
+            :steps="steps"
+            :info="info"
+        />
+        <Topics
+            :brand="instrumentBrand[info.instrument]"
+            v-if="currentStep === 5"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
             @onCheckStep="checkStepToggle"

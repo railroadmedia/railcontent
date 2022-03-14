@@ -36,6 +36,11 @@ const getStepType = (stepIndex, checked) => {
             :currentStep="currentStep"
             @navigateToStep="emit('onChangeStep', index)"
             :brand="brand"
+            :isBarBranded="
+                getStepType(index, step.checked) === 'tick' ||
+                (!(steps.length - 1 === index) &&
+                    getStepType(index + 1, steps[index + 1].checked) === 'tick')
+            "
             :stepType="getStepType(index, step.checked)"
             :isLast="steps.length - 1 === index"
         />

@@ -19,6 +19,9 @@ const props = defineProps({
     },
     currentStep: {
         type: Number
+    },
+    isBarBranded: {
+        type: Boolean
     }
 })
 const emit = defineEmits(['navigateToStep'])
@@ -64,7 +67,7 @@ const emit = defineEmits(['navigateToStep'])
         <div v-if="!isLast" class="tw-mt-[14px] tw-w-[80px]">
             <div
                 :class="`tw-h-[2px] tw-w-full ${
-                    stepType === 'tick' ? bgColor[brand] : 'tw-bg-white'
+                    isBarBranded ? bgColor[brand] : 'tw-bg-white'
                 }`"
             ></div>
         </div>

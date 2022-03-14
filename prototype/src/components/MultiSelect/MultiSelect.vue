@@ -23,7 +23,6 @@ const initialValues = props.options.reduce(
 let selectedValues = ref({ ...initialValues, ...props.initialSelection })
 
 function handleSelection(value) {
-    console.log(value)
     const newSelectedValues = {
         ...selectedValues.value,
         [value]: !selectedValues.value[value]

@@ -40,7 +40,7 @@ export default {
                     ? `${getBorderColor(type)}`
                     : `${
                           defaultBorderColor
-                              ? 'defaultBorderColor'
+                              ? defaultBorderColor
                               : 'tw-border-transparent'
                       }`
             } hover:${

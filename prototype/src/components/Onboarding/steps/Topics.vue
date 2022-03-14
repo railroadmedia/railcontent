@@ -18,17 +18,17 @@ const props = defineProps({
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 const options = [
-    { value: 'a', text: 'A' },
-    { value: 'b', text: 'B' },
-    { value: 'c', text: 'C' }
+    { value: 'g', text: 'G' },
+    { value: 'h', text: 'H' },
+    { value: 'i', text: 'I' }
 ]
 function handleMultiSelection(selection) {
     emit(
         'onCheckStep',
-        2,
+        5,
         Object.values(selection).find((val) => val)
     )
-    emit('onChangeInfo', { ...props.info, instrumentTypes: selection })
+    emit('onChangeInfo', { ...props.info, topics: selection })
 }
 function skipStep() {
     alert('* the user skipped the step *')
@@ -38,34 +38,29 @@ function skipStep() {
 <template>
     <StepWrapper :brand="brand" :showBgImg="true">
         <h2
-            class="tw-mb-[5px] tw-w-full tw-text-center tw-font-bold tw-text-white"
+            class="tw-mb-[40px] tw-w-full tw-text-center tw-font-bold tw-text-white"
         >
-            What kind of gear will you be practicing with?
+            Okay, and what topics would you like to study?
         </h2>
-        <p class="tw-font-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white">
-            You selected {{ info.instrument }}! Now it’s time to tell us about
-            your practice set-up. You can select multiple gear types and change
-            your settings in your profile at anytime.
-        </p>
         <MultiSelect
             :options="options"
-            :initialSelection="info.instrumentTypes"
+            :initialSelection="info.topics"
             classOverride="tw-mb-[52px]"
             @onChangeSelection="handleMultiSelection"
         />
         <ProgressBar
             :brand="brand"
-            :currentStep="2"
+            :currentStep="5"
             :steps="steps"
             @onChangeStep="(s) => emit('onChangeStep', s)"
         />
         <Button
             @onButtonClick="
                 () => {
-                    emit('onChangeStep', 3)
+                    emit('onChangeStep', 6)
                 }
             "
-            :isDisabled="!steps[2].checked"
+            :isDisabled="!steps[5].checked"
             :brand="brand"
             classOverride="tw-w-[543px] tw-mt-[40px]"
             >Next</Button

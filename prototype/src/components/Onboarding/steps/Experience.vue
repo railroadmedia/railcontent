@@ -2,6 +2,7 @@
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 import SquaredCard from '../../SquaredCard/SquaredCard.vue'
 import InstrumentCardContent from '../InstrumentCardContent.vue'
+import ExperienceCardContent from '../ExperienceCardContent.vue'
 import Button from '../../Button/Button.vue'
 import StepWrapper from '../StepWrapper.vue'
 import SkipStep from '../SkipStep.vue'
@@ -20,7 +21,8 @@ const props = defineProps({
 const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 
 function onExperienceSelection(selection) {
-    emit('onCheckStep', 4, true)
+    emit('onCheckStep', 3, true)
+    emit('onChangeStep', 4)
     emit('onChangeInfo', { ...props.info, experience: selection })
 }
 
@@ -47,7 +49,11 @@ function skipStep() {
                 defaultBorderColor="tw-border-[#7E9AB1]"
                 @onSelect="() => onExperienceSelection(1)"
             >
-                a
+                <ExperienceCardContent
+                    title="Level 1"
+                    subtitle="Start from the beginning. No experience required!"
+                    color="green"
+                />
             </SquaredCard>
             <SquaredCard
                 :active="info.experience === 2"
@@ -55,7 +61,11 @@ function skipStep() {
                 defaultBorderColor="tw-border-[#7E9AB1]"
                 @onSelect="() => onExperienceSelection(2)"
             >
-                b
+                <ExperienceCardContent
+                    title="Level 2-3"
+                    subtitle="For beginners who can hold your sticks, set-up your kit, and can play a few beats and fills"
+                    color="blue"
+                />
             </SquaredCard>
             <SquaredCard
                 :active="info.experience === 4"
@@ -63,7 +73,11 @@ function skipStep() {
                 type="yellow"
                 @onSelect="() => onExperienceSelection(4)"
             >
-                c
+                <ExperienceCardContent
+                    title="Level 4-6"
+                    subtitle="For intermediate player who are comfortable playing some songs and have some hand and foot independence."
+                    color="yellow"
+                />
             </SquaredCard>
             <SquaredCard
                 :active="info.experience === 7"
@@ -71,7 +85,11 @@ function skipStep() {
                 type="red"
                 @onSelect="() => onExperienceSelection(7)"
             >
-                d
+                <ExperienceCardContent
+                    title="Level 7-10"
+                    subtitle="For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills."
+                    color="red"
+                />
             </SquaredCard>
         </div>
         <ProgressBar

@@ -11,7 +11,6 @@ export default {
         const brand = ref('drumeo')
 
         const onCollapseSidebar = (val) => {
-            console.log(val)
             if (typeof val === 'boolean') {
                 isSidebarCollapsed.value = val
             } else {
