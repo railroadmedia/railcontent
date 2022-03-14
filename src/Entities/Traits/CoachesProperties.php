@@ -61,9 +61,9 @@ trait CoachesProperties
     /**
      * @var User
      *
-     * @ORM\Column(type="user_id", name="associated_user_id", nullable=true)
+     * @ORM\Column(type="integer", name="associated_user_id", nullable=true)
      */
-    protected $associatedUser;
+    protected $associatedUserId;
 
     /**
      * @return string
@@ -194,18 +194,18 @@ trait CoachesProperties
     }
 
     /**
-     * @param User $associatedUser
+     * @param integer $associatedUserId
      */
-    public function setAssociatedUser(User $associatedUser)
+    public function setAssociatedUserId($associatedUserId)
     {
-        $this->associatedUser = $associatedUser;
+        $this->associatedUserId = $associatedUserId;
     }
 
     /**
-     * @return User
+     * @return int
      */
-    public function getAssociatedUser(): ?User
+    public function getAssociatedUserId(): ?int
     {
-        return $this->associatedUser;
+        return $this->associatedUserId;
     }
 }
