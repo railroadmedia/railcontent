@@ -164,10 +164,10 @@ class ContentHierarchyService
     public function delete($parentId, $childId)
     {
         //delete the cached results for parent id
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $parentId);
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $childId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $parentId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $childId);
 
         $hierarchy = $this->contentHierarchyRepository->findOneBy(
             [

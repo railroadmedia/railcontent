@@ -88,8 +88,8 @@ class UserPermissionsService
         $this->entityManager->persist($userPermission);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         return $userPermission;
     }
@@ -111,8 +111,8 @@ class UserPermissionsService
         $this->entityManager->remove($userPermission);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         $this->entityManager->getCache()
             ->evictEntity(UserPermission::class, 'permission');
@@ -214,8 +214,8 @@ class UserPermissionsService
                 ->toDateTimeString()) {
 
             //should delete the cache for user
-            $this->entityManager->getCache()
-                ->evictEntityRegion(Content::class);
+//            $this->entityManager->getCache()
+//                ->evictEntityRegion(Content::class);
         } else {
 
             $existingTTL =

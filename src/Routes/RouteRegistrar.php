@@ -413,6 +413,12 @@ class RouteRegistrar
                 )
                     ->name('content.insertOldField');
 
+                $this->router->delete(
+                    'content/field/{contentId}',
+                    ContentJsonController::class . '@deleteOldField'
+                )
+                    ->name('content.deleteOldField');
+
             }
         );
     }

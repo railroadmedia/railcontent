@@ -195,8 +195,8 @@ class UserContentProgressService
             $this->entityManager->flush();
         }
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 
@@ -295,8 +295,8 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($user, $content, 100, self::STATE_COMPLETED));
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 
@@ -354,8 +354,8 @@ class UserContentProgressService
         event(new UserContentProgressSaved($user, $content, 0, self::STATE_STARTED));
 
         //delete user progress from cache
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         return true;
     }
@@ -413,8 +413,8 @@ class UserContentProgressService
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 

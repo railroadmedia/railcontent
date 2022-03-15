@@ -120,8 +120,8 @@ class PermissionJsonController extends Controller
         $this->entityManager->persist($permission);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Permission::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Permission::class);
 
         return ResponseService::permission($permission);
     }
@@ -198,8 +198,8 @@ class PermissionJsonController extends Controller
         $this->entityManager->getCache()
             ->evictEntity(Permission::class, $id);
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         return ResponseService::empty(204);
     }

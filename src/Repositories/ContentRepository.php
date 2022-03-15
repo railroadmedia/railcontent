@@ -259,7 +259,7 @@ class ContentRepository extends EntityRepository
                 ->getQuery()
                 ->getResult();
 
-        return count($subQuery);
+        return count($results);
     }
 
     /**
@@ -381,13 +381,16 @@ class ContentRepository extends EntityRepository
                 } else {
 
                     $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+                    if ($requiredFieldData == 'styles') {
+                        $getterName = 'getStyle';
+                    }
 
                     foreach ($contents as $content) {
 
                             $value = call_user_func([$content, $getterName]);
 
 
-                        if ($value && !in_array(
+                        if ($value && is_string($value) && !in_array(
                                 strtolower($value),
                                 array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
                             )) {
@@ -597,13 +600,14 @@ class ContentRepository extends EntityRepository
             }
         }
 
-        $this->getEntityManager()
-            ->getConfiguration()
-            ->getSecondLevelCacheConfiguration()
-            ->getRegionsConfiguration()
-            ->setDefaultLifetime(
-                $lifetime
-            );
+        //Doctrine ORM Second level cache disable
+//        $this->getEntityManager()
+//            ->getConfiguration()
+//            ->getSecondLevelCacheConfiguration()
+//            ->getRegionsConfiguration()
+//            ->setDefaultLifetime(
+//                $lifetime
+//            );
 
         return $qb->select(config('railcontent.table_prefix') . 'content', 'progress', 'cd')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')

@@ -1300,15 +1300,15 @@ class ContentService
             $this->entityManager->flush();
         }
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
-        $this->entityManager->getCache()
-            ->getQueryCache('pull')
-            ->clear();
+//        $this->entityManager->getCache()
+//            ->getQueryCache('pull')
+//            ->clear();
 
-        $this->entityManager->getCache()
-            ->evictQueryRegion('pull');
+//        $this->entityManager->getCache()
+//            ->evictQueryRegion('pull');
 
         event(new ContentCreated($content));
 
@@ -1342,8 +1342,8 @@ class ContentService
 
         event(new ContentUpdated($content));
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         return $content;
     }
@@ -1486,15 +1486,15 @@ class ContentService
 
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
-        $this->entityManager->getCache()
-            ->getQueryCache('pull')
-            ->clear();
+//        $this->entityManager->getCache()
+//            ->getQueryCache('pull')
+//            ->clear();
 
-        $this->entityManager->getCache()
-            ->evictQueryRegion('pull');
+//        $this->entityManager->getCache()
+//            ->evictQueryRegion('pull');
 
         return $content;
     }
@@ -1512,8 +1512,8 @@ class ContentService
                 ->findByParent($id);
 
         //delete parent content cache
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         foreach ($children as $child) {
             $child->getChild()
@@ -2042,8 +2042,8 @@ class ContentService
 
         event(new ContentUpdated($content));
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         return $content;
     }

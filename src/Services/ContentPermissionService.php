@@ -143,8 +143,8 @@ class ContentPermissionService
         $this->entityManager->persist($contentPermission);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Content::class);
 
         $this->entityManager->getCache()->getQueryCache('pull')->clear();
 

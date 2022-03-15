@@ -142,11 +142,11 @@ class CommentService
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $contentId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $contentId);
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Comment::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Comment::class);
 
         event(new CommentCreated($comment, $content, $user));
 
@@ -253,8 +253,8 @@ class CommentService
             $this->entityManager->flush();
         }
 
-        $this->entityManager->getCache()
-            ->evictEntityRegion(Comment::class);
+//        $this->entityManager->getCache()
+//            ->evictEntityRegion(Comment::class);
 
         return true;
     }

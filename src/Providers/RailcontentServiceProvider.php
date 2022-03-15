@@ -10,6 +10,7 @@ use Doctrine\Common\Cache\PhpFileCache;
 use Doctrine\Common\Cache\RedisCache;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
+use Doctrine\DBAL\Logging\EchoSQLLogger;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Cache\DefaultCacheFactory;
 use Doctrine\ORM\Cache\RegionsConfiguration;
@@ -71,7 +72,7 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function __construct(Application $application)
     {
-       parent::__construct($application);
+        parent::__construct($application);
 
         $this->routeRegistar = $application->make(RouteRegistrar::class);
     }
@@ -84,22 +85,20 @@ class RailcontentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->listen = [
-            ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
-            ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
-            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
+            ContentDeleted::class => [ContentEventListener::class.'@handleDelete'],
+            ContentSoftDeleted::class => [ContentEventListener::class.'@handleSoftDelete'],
+            UserContentProgressSaved::class => [UserContentProgressEventListener::class.'@handle'],
+            CommentCreated::class => [AssignCommentEventListener::class.'@handle'],
         ];
 
         parent::boot();
 
-        $this->publishes(
-            [
-                __DIR__ . '/../../config/railcontent.php' => config_path('railcontent.php'),
-            ]
-        );
+        $this->publishes([
+                             __DIR__.'/../../config/railcontent.php' => config_path('railcontent.php'),
+                         ]);
 
         if (config('railcontent.data_mode') == 'host') {
-            $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+            $this->loadMigrationsFrom(__DIR__.'/../../migrations');
         }
 
         //load package routes
@@ -107,27 +106,25 @@ class RailcontentServiceProvider extends ServiceProvider
             $this->routeRegistar->registerAll();
         }
 
-        $this->commands(
-            [
-                CreateSearchIndexes::class,
-                CreateVimeoVideoContentRecords::class,
-                CreateYoutubeVideoContentRecords::class,
-                ExpireCache::class,
-                MigrateContentFields::class,
-                OrphanContent::class,
-                MigrateUserPlaylist::class,
-                DeleteContentAndHierarchiesForUserPlaylists::class,
-                CalculateTotalXP::class,
-                MigrateContentToNewStructure::class,
-                ComputePastStats::class,
-                ComputeWeeklyStats::class,
-                MigrateContentToElasticsearch::class,
-                MigrateContentColumns::class,
-                MigrateContentInstructors::class,
-                MigrateContentVideos::class,
-                MigrateContentStyles::class,
-            ]
-        );
+        $this->commands([
+                            CreateSearchIndexes::class,
+                            CreateVimeoVideoContentRecords::class,
+                            CreateYoutubeVideoContentRecords::class,
+                            ExpireCache::class,
+                            MigrateContentFields::class,
+                            OrphanContent::class,
+                            MigrateUserPlaylist::class,
+                            DeleteContentAndHierarchiesForUserPlaylists::class,
+                            CalculateTotalXP::class,
+                            MigrateContentToNewStructure::class,
+                            ComputePastStats::class,
+                            ComputeWeeklyStats::class,
+                            MigrateContentToElasticsearch::class,
+                            MigrateContentColumns::class,
+                            MigrateContentInstructors::class,
+                            MigrateContentVideos::class,
+                            MigrateContentStyles::class,
+                        ]);
     }
 
     /**
@@ -158,16 +155,15 @@ class RailcontentServiceProvider extends ServiceProvider
         $redisCache->setRedis($redis);
 
         // file cache
-       // $phpFileCache = new PhpFileCache($proxyDir);
+        $phpFileCache = new PhpFileCache($proxyDir);
 
         // redis cache instance is referenced in laravel container to be reused when needed
         AnnotationRegistry::registerLoader('class_exists');
 
         $annotationReader = new AnnotationReader();
 
-        $cachedAnnotationReader = new CachedReader(
-            $annotationReader, $redisCache
-        );
+        $cachedAnnotationReader =
+            new CachedReader($annotationReader, $phpFileCache, config('railcontent.development_mode'));
 
         $driverChain = new MappingDriverChain();
 
@@ -187,32 +183,42 @@ class RailcontentServiceProvider extends ServiceProvider
             );
         }
 
-        // driver chain instance is referenced in laravel container to be reused when needed
+        // timestamps
         $timestampableListener = new TimestampableListener();
         $timestampableListener->setAnnotationReader($cachedAnnotationReader);
 
+        //sort
         $sortableListener = new SortableListener();
         $sortableListener->setAnnotationReader($cachedAnnotationReader);
 
+        //search
         $searchableListener = new SearchableListener();
 
+        //add timestamps, sortable and searchable listeners to event manager
         $eventManager = new EventManager();
         $eventManager->addEventSubscriber($timestampableListener);
         $eventManager->addEventSubscriber($sortableListener);
         $eventManager->addEventSubscriber($searchableListener);
 
-
+        //orm config
         $ormConfiguration = new Configuration();
 
-        $factory = new DefaultCacheFactory(new RegionsConfiguration(), $redisCache);
-        $ormConfiguration->setSecondLevelCacheEnabled();
-        $ormConfiguration->getSecondLevelCacheConfiguration()->setCacheFactory($factory);
+        // disable second level cache
+        //        $factory = new DefaultCacheFactory(new RegionsConfiguration(), $redisCache);
+        //        $ormConfiguration->setSecondLevelCacheEnabled();
+        //        $ormConfiguration->getSecondLevelCacheConfiguration()->setCacheFactory($factory);
 
-        $ormConfiguration->addCustomStringFunction('MATCH_AGAINST','Railroad\\Railcontent\\Extensions\\Doctrine\\MatchAgainst');
-        $ormConfiguration->addCustomStringFunction('UNIX_TIMESTAMP','Railroad\\Railcontent\\Extensions\\Doctrine\\UnixTimestamp');
-
-        $ormConfiguration->setMetadataCacheImpl($redisCache);
-        $ormConfiguration->setQueryCacheImpl($redisCache);
+        $ormConfiguration->addCustomStringFunction(
+            'MATCH_AGAINST',
+            'Railroad\\Railcontent\\Extensions\\Doctrine\\MatchAgainst'
+        );
+        $ormConfiguration->addCustomStringFunction(
+            'UNIX_TIMESTAMP',
+            'Railroad\\Railcontent\\Extensions\\Doctrine\\UnixTimestamp'
+        );
+        // set file caching
+        $ormConfiguration->setMetadataCacheImpl($phpFileCache);
+        $ormConfiguration->setQueryCacheImpl($phpFileCache);
         $ormConfiguration->setResultCacheImpl($redisCache);
         $ormConfiguration->setProxyDir($proxyDir);
         $ormConfiguration->setProxyNamespace('DoctrineProxies');
@@ -224,7 +230,7 @@ class RailcontentServiceProvider extends ServiceProvider
             new UnderscoreNamingStrategy(CASE_LOWER)
         );
 
-        // orm configuration instance is referenced in laravel container to be reused when needed
+        // database config
         if (config('railcontent.database_in_memory') !== true) {
             $databaseOptions = [
                 'driver' => config('railcontent.database_driver'),
@@ -251,6 +257,14 @@ class RailcontentServiceProvider extends ServiceProvider
             $ormConfiguration,
             $eventManager
         );
+
+        if (config('railcontent.enable_query_log')) {
+            $logger = new EchoSQLLogger();
+
+            $entityManager->getConnection()
+                ->getConfiguration()
+                ->setSQLLogger($logger);
+        }
 
         // register the entity manager as a singleton
         app()->instance(RailcontentEntityManager::class, $entityManager);
