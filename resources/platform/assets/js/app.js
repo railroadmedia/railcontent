@@ -3,10 +3,10 @@ require('./bootstrap');
 import { createApp } from 'vue';
 import store from './vue/store';
 import router from './vue/router';
-import HomeApp from './vue/apps/HomeApp.vue';
+import AppContainer from './vue/apps/AppContainer.vue';
 
 //Home 
-createApp(HomeApp)
+createApp(AppContainer)
     .use(store)
     .use(router)
-    .mount('#home-app')
+    .mount('#app')
