@@ -169,6 +169,12 @@ class MigrateContentToElasticsearch extends Command
                                 ->where('content_id', $row->id)
                                 ->orderBy('id', 'asc')
                                 ->get();
+                        $bpm =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_bpm')
+                                ->select('bpm')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
 
                         $params1['body'][] = [
                             'index' => [
@@ -191,7 +197,11 @@ class MigrateContentToElasticsearch extends Command
                             'artist' => $row->artist,
                             'content_type' => $row->type,
                             'staff_pick_rating' => $row->staff_pick_rating,
-                            'bpm' => $row->bpm,
+                            'bpm' => (!$bpm->isEmpty()) ? array_map(
+                                'strtolower',
+                                $bpm->pluck('bpm')
+                                    ->toArray()
+                            ) : [],
                             'show_in_new_feed' => $row->show_in_new_feed,
                             'published_on' => $row->published_on,
                             'created_on' => $row->created_on,
