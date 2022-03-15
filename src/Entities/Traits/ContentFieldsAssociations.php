@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Entities\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentBpm;
 use Railroad\Railcontent\Entities\ContentExercise;
 use Railroad\Railcontent\Entities\ContentFocus;
 use Railroad\Railcontent\Entities\ContentInstructor;
@@ -79,6 +80,12 @@ trait ContentFieldsAssociations
      *     cascade={"persist","remove"})
      */
     protected $focus = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentBpm", mappedBy="content",
+     *     cascade={"persist","remove"})
+     */
+    protected $bpm = [];
 
      /**
      * @return ArrayCollection
@@ -637,6 +644,61 @@ trait ContentFieldsAssociations
     {
         return $this->focus;
     }
+
+    /**
+     * @param ContentBpm $contentBpm
+     * @return $this|void
+     */
+    public function addBpm(ContentBpm $contentBpm)
+    {
+        if ($this->bpm->contains($contentBpm)) {
+            // Do nothing if its already part of our collection
+            return;
+        }
+
+        $predictate = function ($element) use ($contentBpm) {
+            return $element->getBpm() === $contentBpm->getBpm();
+        };
+        $existBpm = $this->bpm->filter($predictate);
+
+        if ($existBpm->isEmpty()) {
+            $this->bpm->add($contentBpm);
+        } else {
+            $bpm = $existBpm->first();
+            if ($bpm->getPosition() == $contentBpm->getPosition()) {
+                return $this;
+            }
+
+            $key = $existBpm->key();
+            if ($contentBpm->getPosition()) {
+                $this->getBpm()
+                    ->get($key)
+                    ->setPosition($contentBpm->getPosition());
+            }
+        }
+    }
+
+    /**
+     * @param ContentBpm $contentBpm
+     */
+    public function removeBpm(ContentBpm $contentBpm)
+    {
+        // If the bpm does not exist in the collection, then we don't need to do anything
+        if (!$this->bpm->contains($contentBpm)) {
+            return;
+        }
+
+        $this->bpm->removeElement($contentBpm);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBpm()
+    {
+        return $this->bpm;
+    }
+
 
 
 }
