@@ -122,6 +122,7 @@ class ContentUpdateRequest extends CustomFormRequest
                     'data.attributes.forum_thread_id',
                     'data.attributes.associated_user_id',
                     'data.attributes.show_in_new_feed',
+                    'data.attributes.bpm',
                     'data.attributes.fields',
                     'data.relationships.user'
                 ]
