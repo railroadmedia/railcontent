@@ -4,7 +4,7 @@
      x-data="{ dropdown_{{ $id }}: false }"
 >
     
-     <div class="flex py-2 px-5 border-b border-gray-100 md:text-lg items-center leading-none"
+     <div class="flex py-2 px-5 border-b border-gray-100 md:text-[17px] items-center leading-none"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
           x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
     >

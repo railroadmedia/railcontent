@@ -39,7 +39,7 @@
                             @endif 
                            class="text-sm text-black"
                         >
-                            <i class="{{ $info['iconClass'] }} mr-1" aria-hidden="true"></i>
+                            <i class="{{ $info['iconClass'] }} mr-1 @if(@isset($info['themeClass'])){{$info['themeClass']}}@endif" aria-hidden="true"></i>
                             {{ $page }} 
                         </a>
                     </li>
