@@ -66,12 +66,6 @@ trait ContentFieldsProperties
      * @ORM\Column(type="string", nullable=true)
      * @var string
      */
-    protected $bpm;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
-     */
     protected $cdTracks;
 
     /**
@@ -117,13 +111,13 @@ trait ContentFieldsProperties
     protected $instructors;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @var DateTime
      */
     protected $liveEventStartTime;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @var DateTime
      */
     protected $liveEventEndTime;
@@ -426,22 +420,6 @@ trait ContentFieldsProperties
     public function setArtist($artist)
     {
         $this->artist = $artist;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBpm()
-    {
-        return $this->bpm;
-    }
-
-    /**
-     * @param $bpm
-     */
-    public function setBpm($bpm)
-    {
-        $this->bpm = $bpm;
     }
 
     /**
