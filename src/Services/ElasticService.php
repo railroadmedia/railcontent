@@ -67,7 +67,7 @@ class ElasticService
                             'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'instructor' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                            'bpm' => ['type' => 'text'],
+                            'bpm' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'published_on' => ['type' => 'date', "format" => "yyyy-MM-dd HH:mm:ss"],
                             'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
                             'show_in_new_feed' => ['type' => 'integer'],
