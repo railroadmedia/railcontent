@@ -22,7 +22,13 @@ class ContentDataWithPostOldStructureTransformer extends TransformerAbstract
 
         $this->setDefaultIncludes(['post']);
 
-        return $serializer->serializeToUnderScores($contentData, $entityManager->getClassMetadata(ContentData::class));
+        return [
+            'id' => $contentData->getId(),
+            'key' => $contentData->getKey(),
+            'value' => $contentData->getValue(),
+            'position' => $contentData->getPosition()
+        ];
+        //return $serializer->serializeToUnderScores($contentData, $entityManager->getClassMetadata(ContentData::class));
     }
 
     public function includePost(ContentData $contentData)
