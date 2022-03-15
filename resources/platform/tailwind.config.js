@@ -9,7 +9,8 @@ module.exports = {
   darkMode: "class",
   content: [
     './resources/platform/**/*.blade.php',
-    './resources/platform/**/**/*.{js, vue, ts}',
+    './resources/platform/**/*.vue',
+    './resources/platform/**/*.js',
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
