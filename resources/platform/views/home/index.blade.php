@@ -5,5 +5,5 @@
 @extends('_partials.layout')
 
 @section('layout-body')
-  <app-container>Custom children</app-container>
+  <page-layout>Custom children</page-layout>
 @endsection

@@ -13,6 +13,6 @@
 <template>
   <PageContainer>
     <router-view v-if="withRouter"></router-view>
-    <slot />
+    <slot v-if="!withRouter" />
   </PageContainer>
 </template>

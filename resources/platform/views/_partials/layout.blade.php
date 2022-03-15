@@ -1,6 +1,6 @@
 @php
 $initialData = new stdClass();
-$initialData->withRouter = false;
+$initialData->withRouter = true;
 @endphp
 
 <!DOCTYPE html>
