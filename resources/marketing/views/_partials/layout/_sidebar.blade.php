@@ -26,29 +26,26 @@
         <div class="flex flex-col"></div>
     </section>
     <!-- Social Links -->
-    <section class="pt-1">
-        <ul class="py-3 px-5">
-            <li class="mb-1">
-                <a href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="text-sm text-black">
-                    <i class="fab fa-fw fa-youtube mr-1" aria-hidden="true"></i> YouTube 
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="https://www.facebook.com/guitareoofficial" target="_blank" class="text-sm text-black">
-                    <i class="fab fa-fw fa-facebook mr-1" aria-hidden="true"></i> Facebook 
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="https://www.instagram.com/guitareoofficial/" target="_blank" class="text-sm text-black">
-                    <i class="fab fa-fw fa-instagram mr-1" aria-hidden="true"></i> Instagram 
-                </a>
-            </li>
-            <li class="mb-1">
-                <a href="https://help.guitareo.com/" target="_parent" class="text-sm text-black">
-                    <i class="fas fa-fw fa-question mr-1" aria-hidden="true"></i> FAQs
-                </a>
-            </li>
-        </ul>
-    </section>
+    @if( @isset($external_links) )
+        <section class="pt-1">
+            <ul class="py-3 px-5">
+                @foreach($external_links as $page => $info)
+                    <li class="mb-1">
+                        <a href="{{ $info['url'] }}" 
+                            @if(@isset($info['target']))
+                                target="{{$info['target']}}"
+                            @else
+                                target="_blank" 
+                            @endif 
+                           class="text-sm text-black"
+                        >
+                            <i class="{{ $info['iconClass'] }} mr-1" aria-hidden="true"></i>
+                            {{ $page }} 
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+    @endif
 
 </aside>

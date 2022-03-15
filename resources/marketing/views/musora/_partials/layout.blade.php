@@ -48,6 +48,24 @@
                 "url" => '/brand',
             ],
         ],
+        "external_links" => [
+            "Drumeo" => [
+                "iconClass" => "fas fa-external-link",
+                "url" => 'drumeo.com'
+            ],
+            "Pianote" => [
+                "iconClass" => "fas fa-external-link",
+                "url" => 'pianote.com'
+            ],
+            "Guitareo" => [
+                "iconClass" => "fas fa-external-link",
+                "url" => 'guitareo.com'
+            ],
+            "Singeo" => [
+                "iconClass" => "fas fa-external-link",
+                "url" => 'singeo.com'
+            ]
+        ]
     ])
 @stop
 
