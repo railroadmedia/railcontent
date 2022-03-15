@@ -736,6 +736,9 @@ a:visited {
 .flex-none {
   flex: none;
 }
+.origin-center {
+  transform-origin: center;
+}
 .translate-x-0 {
   --tw-translate-x: 0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -776,8 +779,19 @@ a:visited {
   --tw-rotate: -45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+.-rotate-180 {
+  --tw-rotate: -180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-0 {
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform-gpu {
+  transform: translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .flex-col {
   flex-direction: column;
@@ -839,6 +853,14 @@ a:visited {
   --tw-bg-opacity: 1;
   background-color: rgb(0 201 172 / var(--tw-bg-opacity));
 }
+.bg-pianote {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 26 48 / var(--tw-bg-opacity));
+}
+.bg-singeo {
+  --tw-bg-opacity: 1;
+  background-color: rgb(131 0 233 / var(--tw-bg-opacity));
+}
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
@@ -862,14 +884,6 @@ a:visited {
   --tw-bg-opacity: 1;
   background-color: rgb(11 118 219 / var(--tw-bg-opacity));
 }
-.bg-pianote {
-  --tw-bg-opacity: 1;
-  background-color: rgb(246 26 48 / var(--tw-bg-opacity));
-}
-.bg-singeo {
-  --tw-bg-opacity: 1;
-  background-color: rgb(131 0 233 / var(--tw-bg-opacity));
-}
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2;
 }
@@ -880,25 +894,9 @@ a:visited {
   --tw-gradient-from: #032829;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(3 40 41 / 0));
 }
-.from-pianote-800 {
-  --tw-gradient-from: #55171D;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(85 23 29 / 0));
-}
-.from-pianote-900 {
-  --tw-gradient-from: #201617;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(32 22 23 / 0));
-}
-.from-\[\#29050f\2c \] {
-  --tw-gradient-from: #29050f,;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(255 255 255 / 0));
-}
 .from-\[\#29050f\] {
   --tw-gradient-from: #29050f;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(41 5 15 / 0));
-}
-.from-singeo-800 {
-  --tw-gradient-from: #320E4F;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(50 14 79 / 0));
 }
 .from-\[\#1a0239\] {
   --tw-gradient-from: #1a0239;
@@ -907,26 +905,11 @@ a:visited {
 .via-transparent {
   --tw-gradient-stops: var(--tw-gradient-from), transparent, var(--tw-gradient-to, rgb(0 0 0 / 0));
 }
-.to-transparent {
-  --tw-gradient-to: transparent;
-}
 .to-\[\#032829\] {
   --tw-gradient-to: #032829;
 }
-.to-pianote-800 {
-  --tw-gradient-to: #55171D;
-}
-.to-pianote-900 {
-  --tw-gradient-to: #201617;
-}
-.to-\[\#29050f\2c \] {
-  --tw-gradient-to: #29050f,;
-}
 .to-\[\#29050f\] {
   --tw-gradient-to: #29050f;
-}
-.to-singeo-900 {
-  --tw-gradient-to: #18131C;
 }
 .to-\[\#1a0239\] {
   --tw-gradient-to: #1a0239;
@@ -946,6 +929,14 @@ a:visited {
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .px-2 {
   padding-left: 0.5rem;
@@ -967,16 +958,20 @@ a:visited {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
 .px-7 {
   padding-left: 1.75rem;
   padding-right: 1.75rem;
 }
-.pt-2 {
-  padding-top: 0.5rem;
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.pt-1 {
+  padding-top: 0.25rem;
 }
 .pb-0\.5 {
   padding-bottom: 0.125rem;
@@ -999,6 +994,10 @@ a:visited {
 .font-bebas-neue {
   font-family: Bebas Neue, cursive;
 }
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -1006,10 +1005,6 @@ a:visited {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 .text-xs {
   font-size: 0.75rem;
@@ -1049,14 +1044,6 @@ a:visited {
   --tw-text-opacity: 1;
   color: rgb(219 234 254 / var(--tw-text-opacity));
 }
-.text-pianote {
-  --tw-text-opacity: 1;
-  color: rgb(246 26 48 / var(--tw-text-opacity));
-}
-.text-singeo {
-  --tw-text-opacity: 1;
-  color: rgb(131 0 233 / var(--tw-text-opacity));
-}
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
@@ -1077,6 +1064,14 @@ a:visited {
   --tw-text-opacity: 1;
   color: rgb(0 201 172 / var(--tw-text-opacity));
 }
+.text-pianote {
+  --tw-text-opacity: 1;
+  color: rgb(246 26 48 / var(--tw-text-opacity));
+}
+.text-singeo {
+  --tw-text-opacity: 1;
+  color: rgb(131 0 233 / var(--tw-text-opacity));
+}
 .opacity-0 {
   opacity: 0;
 }
@@ -1092,6 +1087,11 @@ a:visited {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1262,10 +1262,5 @@ a:visited {
   .lg\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-}
-@media (min-width: 1280px) {
-  .xl\:hidden {
-    display: none;
   }
 }

@@ -6,8 +6,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- Icons -->
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
-    <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
     <!-- Favicons -->
     @include('_partials.layout.favicons.guitareo-favicons')
 @stop
@@ -17,7 +17,52 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-guitareo",
         "theme_text" => "text-guitareo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/guitareo.svg"
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/guitareo.svg",
+        "links" => [
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => "/members",
+            ],
+            "Contact" => [
+                "iconClass" => "fas fa-phone",
+                "url" => '/support',
+            ],
+            "Guitareo" => [
+                "iconClass" => "icon-courses",
+                "url" => '/',
+            ],
+            "Shop" => [
+                "iconClass" => "fas fa-tag",
+                "url" => '/shop',
+            ],
+            "The Riff" => [
+                "iconClass" => "fas fa-comment-alt-edit",
+                "url" => '/riff',
+            ],
+            "Free Resources" => [
+                "iconClass" => "fas fa-play-circle",
+                "children" => [
+                    "Getting Started On The Acoustic Guitar"=> [
+                        "url" => "/free-acoustic-guitar-lessons",
+                    ],
+                    "Learn to Solo In An Hour"=> [
+                        "url" => "/solo-in-an-hour",
+                    ],
+                    "Fretboard Cheatsheet"=> [
+                        "url" => "/fretboard-cheatsheet",
+                    ],
+                    "Song In An Hour Challenge"=> [
+                        "url" => "/song-in-an-hour",
+                    ],
+                    "2 Simple Guitar Tricks"=> [
+                        "url" => "/guitar-tricks",
+                    ],
+                    "The Guitarist's Toolbox"=> [
+                        "url" => "/toolbox",
+                    ],
+                ],
+            ],
+        ]
     ])
 @stop
 

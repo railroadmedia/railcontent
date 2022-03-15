@@ -26,8 +26,8 @@
         <div class="flex flex-col"></div>
     </section>
     <!-- Social Links -->
-    <section class="pt-2">
-        <ul class="p-3">
+    <section class="pt-1">
+        <ul class="py-3 px-5">
             <li class="mb-1">
                 <a href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="text-sm text-black">
                     <i class="fab fa-fw fa-youtube mr-1" aria-hidden="true"></i> YouTube 

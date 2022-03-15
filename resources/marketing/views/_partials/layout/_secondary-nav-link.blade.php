@@ -1,10 +1,10 @@
 @php($id = uniqid())
-<div class="page-link parent flex flex-col flex-wrap body text-black align-v-center "
+<div class="page-link parent flex flex-col flex-wrap body text-black align-v-center"
      data-remain-open="{{ strtolower(str_replace(' ', '-', $page)) }}"
      x-data="{ dropdown_{{ $id }}: false }"
 >
     
-     <div class="flex p-3 border-b border-gray-100 md:text-lg items-center leading-none"
+     <div class="flex py-2 px-5 border-b border-gray-100 md:text-lg items-center leading-none"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
           x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
     >
@@ -17,10 +17,12 @@
         @else
             {{ $page }}
         @endif
-        <i class="no-events far fa-chevron-down arrow ml-auto {{ $theme_text }}"></i>
+        <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center {{ $theme_text }}"
+           x-bind:class="dropdown_{{ $id }} ? '-rotate-180' : 'rotate-0'" 
+        ></i>
     </div>
 
-    <div class="flex flex-col overflow-hidden transition duration-200 ease-in-out"
+    <div class="flex flex-col overflow-hidden transition-all transform-gpu"
          x-bind:class="dropdown_{{ $id }} ? 'max-h-[500px]' : 'max-h-0'"
     >
         @foreach($children as $page => $info)

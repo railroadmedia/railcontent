@@ -6,8 +6,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- Icons -->
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
-    <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
     <!-- Favicons -->
     @include('_partials.layout.favicons.pianote-favicons')
 @stop
@@ -17,7 +17,42 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-pianote",
         "theme_text" => "text-pianote",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote.svg"
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote.svg",
+        "links" => [
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => "/members",
+            ],
+            "Contact" => [
+                "iconClass" => "fas fa-phone",
+                "url" => '/support',
+            ],
+            "Pianote" => [
+                "iconClass" => "icon-courses",
+                "url" => '/',
+            ],
+            "Shop" => [
+                "iconClass" => "fas fa-tag",
+                "url" => '/shop',
+            ],
+            "Free Resources" => [
+                "iconClass" => "fas fa-play-circle",
+                "children" => [
+                    "Pianote Blog"=> [
+                        "url" => "/blog",
+                    ],
+                    "Chord Hacks"=> [
+                        "url" => "/chord-hacks",
+                    ],
+                    "Getting Started On The Piano"=> [
+                        "url" => "/getting-started",
+                    ],
+                    "Sight Reading Made Simple"=> [
+                        "url" => "/sight-reading-made-simple",
+                    ],
+                ],
+            ],
+        ]
     ])
 @stop
 

@@ -6,8 +6,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- Icons -->
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
-    <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
     <!-- Favicons -->
     @include('_partials.layout.favicons.drumeo-favicons')
 @stop
@@ -17,7 +17,54 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-drumeo",
         "theme_text" => "text-drumeo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/drumeo.svg"
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/drumeo.svg",
+        "links" => [
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => "/members",
+            ],
+            "Contact" => [
+                "iconClass" => "fas fa-phone",
+                "url" => '/support',
+            ],
+            "Drumeo" => [
+                "iconClass" => "icon-courses",
+                "url" => '/',
+            ],
+            "Drum Shop" => [
+                "iconClass" => "fas fa-tag",
+                "url" => '/shop',
+            ],
+            "Free Resources" => [
+                "iconClass" => "fas fa-play-circle",
+                "children" => [
+                    "Drumeo Beat"=> [
+                        "url" => "/beat",
+                    ],
+                    "Getting Started On The Drums"=> [
+                        "url" => "/getting-started",
+                    ],
+                    "40 Drum Rudiments"=> [
+                        "url" => "/beat/rudiments/",
+                    ],
+                    "The Drumeo Podcast"=> [
+                        "url" => "/beat/podcasts/",
+                    ],
+                    "Free Video Drum Lessons"=> [
+                        "url" => "/beat/videos/",
+                    ],
+                    "Free Articles For Drummers"=> [
+                        "url" => "/beat/articles/",
+                    ],
+                    "How To Play Drums"=> [
+                        "url" => "/beat/how-to-play-drums/",
+                    ],
+                    "40 Free Songs"=> [
+                        "url" => "/40-songs",
+                    ],
+                ],
+            ],
+        ]
     ])
 @stop
 
