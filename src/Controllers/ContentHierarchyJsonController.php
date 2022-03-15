@@ -13,6 +13,7 @@ use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ResponseService;
 use Spatie\Fractal\Fractal;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 
 /**
  * Class ContentHierarchyJsonController
@@ -34,6 +35,11 @@ class ContentHierarchyJsonController extends Controller
     private $permissionPackageService;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * ContentHierarchyJsonController constructor.
      *
      * @param ContentHierarchyService $contentHierarchyService
@@ -41,8 +47,10 @@ class ContentHierarchyJsonController extends Controller
      */
     public function __construct(
         ContentHierarchyService $contentHierarchyService,
-        PermissionService $permissionPackageService
+        PermissionService $permissionPackageService,
+        UserProviderInterface $userProvider
     ) {
+        $this->userProvider = $userProvider;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->permissionPackageService = $permissionPackageService;
     }
@@ -88,7 +96,7 @@ class ContentHierarchyJsonController extends Controller
      */
     public function delete(Request $request, $parentId, $childId)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content.hierarchy');
+//        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content.hierarchy');
 
         $this->contentHierarchyService->delete($parentId, $childId);
 
