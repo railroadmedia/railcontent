@@ -62,6 +62,25 @@
                     ],
                 ],
             ],
+        ],
+        "external_links" => [
+            "YouTube" => [
+                "iconClass" => "fab fa-fw fa-youtube",
+                "url" => 'https://www.youtube.com/user/guitarlessonscom'
+            ],
+            "Facebook" => [
+                "iconClass" => "fab fa-fw fa-facebook",
+                "url" => 'https://www.facebook.com/guitareoofficial'
+            ],
+            "Instagram" => [
+                "iconClass" => "fab fa-fw fa-instagram",
+                "url" => 'https://www.instagram.com/guitareoofficial/'
+            ],
+            "FAQs" => [
+                "iconClass" => "fas fa-fw fa-question",
+                "url" => 'https://help.guitareo.com/',
+                "target" => '_parent'
+            ]
         ]
     ])
 @stop

@@ -64,6 +64,29 @@
                     ],
                 ],
             ],
+        ],
+        "external_links" => [
+            "Drumeo Kids App" => [
+                "iconClass" => "fas fa-fw fa-mobile-alt",
+                "url" => '/kids'
+            ],
+            "YouTube" => [
+                "iconClass" => "fab fa-fw fa-youtube",
+                "url" => 'https://www.youtube.com/freedrumlessons/'
+            ],
+            "Facebook" => [
+                "iconClass" => "fab fa-fw fa-facebook",
+                "url" => 'https://facebook.com/drumeo/'
+            ],
+            "Instagram" => [
+                "iconClass" => "fab fa-fw fa-instagram",
+                "url" => 'https://instagram.com/drumeoofficial/'
+            ],
+            "FAQs" => [
+                "iconClass" => "fas fa-fw fa-question",
+                "url" => 'https://help.drumeo.com/',
+                "target" => '_parent'
+            ]
         ]
     ])
 @stop

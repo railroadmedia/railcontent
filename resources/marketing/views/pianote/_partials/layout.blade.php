@@ -52,6 +52,29 @@
                     ],
                 ],
             ],
+        ],
+        "external_links" => [
+            "Mobile App" => [
+                "iconClass" => "fas fa-fw fa-mobile-alt",
+                "url" => '/app'
+            ],
+            "YouTube" => [
+                "iconClass" => "fab fa-fw fa-youtube",
+                "url" => 'https://youtube.com/user/pianolessonscom'
+            ],
+            "Facebook" => [
+                "iconClass" => "fab fa-fw fa-facebook",
+                "url" => 'https://facebook.com/pianoteofficial'
+            ],
+            "Instagram" => [
+                "iconClass" => "fab fa-fw fa-instagram",
+                "url" => 'https://instagram.com/pianoteofficial'
+            ],
+            "FAQs" => [
+                "iconClass" => "fas fa-fw fa-question",
+                "url" => 'https://help.pianote.com/',
+                "target" => '_parent'
+            ]
         ]
     ])
 @stop

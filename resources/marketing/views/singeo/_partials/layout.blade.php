@@ -42,7 +42,26 @@
             "4 Vocal Exercises" => [
                 "iconClass" => "fas fa-microphone-alt",
                 "url" => '/improve-any-voice',
+            ]
+        ],
+        "external_links" => [
+            "YouTube" => [
+                "iconClass" => "fab fa-fw fa-youtube",
+                "url" => 'https://www.youtube.com/c/singeoofficial'
             ],
+            "Facebook" => [
+                "iconClass" => "fab fa-fw fa-facebook",
+                "url" => 'https://www.facebook.com/singeoofficial/'
+            ],
+            "Instagram" => [
+                "iconClass" => "fab fa-fw fa-instagram",
+                "url" => 'https://instagram.com/singeoofficial/'
+            ],
+            "FAQs" => [
+                "iconClass" => "fas fa-fw fa-question",
+                "url" => 'https://help.singeo.com/',
+                "target" => '_parent'
+            ]
         ]
     ])
 @stop
