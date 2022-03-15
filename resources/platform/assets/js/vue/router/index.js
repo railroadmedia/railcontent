@@ -15,7 +15,7 @@ const routes = [
         component: Login
     },
     {
-        path: '/search',
+        path: '/members/search',
         name: 'Search',
         component: Search
     }

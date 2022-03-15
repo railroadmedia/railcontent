@@ -1,10 +1,14 @@
 <template>
-    <div>
-      <h1>Search</h1>
-    </div>
+  <PageContainer>
+    <h2>Search</h2>
+  </PageContainer>
 </template>
 <script>
+  import PageContainer from '../components/PageContainer/PageContainer.vue';
   export default {
-    name: 'search'
+    name: 'Search',
+    components: {
+        PageContainer,
+    }
   }
 </script>
