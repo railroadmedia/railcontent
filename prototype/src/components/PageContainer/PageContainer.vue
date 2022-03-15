@@ -11,6 +11,7 @@ export default {
         const brand = ref('drumeo')
 
         const onCollapseSidebar = (val) => {
+            console.log(val)
             if (typeof val === 'boolean') {
                 isSidebarCollapsed.value = val
             } else {
@@ -55,7 +56,7 @@ export default {
         <div
             class="tw-flex tw-flex-row"
             :style="{
-                height: 'calc(100vh - 58px)'
+                minHeight: 'calc(100vh - 58px)'
             }"
         >
             <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />
