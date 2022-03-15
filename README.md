@@ -15,6 +15,7 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
 the application. For example:  
 - **r musora-web-platform composer u**
+- **r musora-web-platform artisan key:generate**
 - **r musora-web-platform artisan migrate**
 
 ### Connecting to Dev Platform:
