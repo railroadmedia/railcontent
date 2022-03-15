@@ -1,26 +1,44 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "platform-development": "mix --mix-config=resources/platform/webpack.mix.js",
+        "platform-production": "mix --mix-config=resources/platform/webpack.mix.js --production",
+        "platform-watch": "mix --mix-config=resources/platform/webpack.mix.js watch",
+        "platform-watch-poll": "mix --mix-config=resources/platform/webpack.mix.js watch -- --watch-options-poll=1000",
+        "platform-hot": "mix --mix-config=resources/platform/webpack.mix.js watch --hot",
+        "platform-dev": "npm run platform-development",
+        "platform-prod": "npm run platform-production",
+        "marketing-development": "mix --mix-config=resources/marketing/webpack.mix.js",
+        "marketing-production": "mix --mix-config=resources/marketing/webpack.mix.js --production",
+        "marketing-watch": "mix --mix-config=resources/marketing/webpack.mix.js watch",
+        "marketing-watch-poll": "mix --mix-config=resources/marketing/webpack.mix.js watch -- --watch-options-poll=1000",
+        "marketing-hot": "mix --mix-config=resources/marketing/webpack.mix.js watch --hot",
+        "marketing-dev": "npm run marketing-development",
+        "marketing-prod": "npm run marketing-production"
     },
     "devDependencies": {
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
+        "laravel-mix-merge-manifest": "^2.0.0",
         "lodash": "^4.17.19",
-        "postcss": "^8.3.9"
+        "postcss": "^8.3.9",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.49.9",
+        "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "@tailwindcss/aspect-ratio": "^0.4.0",
+        "@tailwindcss/forms": "^0.5.0",
+        "@tailwindcss/line-clamp": "^0.3.1",
+        "@tailwindcss/typography": "^0.5.2",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.3.7",
-        "stylesora": "^1.0.102-3.0",
-        "tailwindcss": "^2.2.16",
+        "fast-glob": "^3.2.11",
+        "stylesora": "^1.0.102-t3.7",
+        "tailwindcss": "^3.0.23",
         "vue": "^3.2.19",
-        "vue-loader": "^16.8.1"
+        "vue-loader": "^16.8.1",
+        "vue-router": "^4.0.14",
+        "vuex": "^4.0.2"
     }
 }
