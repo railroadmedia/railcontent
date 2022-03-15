@@ -49,8 +49,6 @@ class ChangeBpmColumnTypeContentTable extends Migration
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
                      */
-                    $table->string('bpm')
-                        ->change();
                     $table->string('fast_bpm')
                         ->change();
                 }
@@ -71,8 +69,6 @@ class ChangeBpmColumnTypeContentTable extends Migration
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
                      */
-                    $table->integer('bpm')
-                        ->change();
                     $table->integer('fast_bpm')
                         ->change();
                 }

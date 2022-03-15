@@ -245,6 +245,8 @@ class Content extends ArrayExpressible
         $this->style = new ArrayCollection();
         $this->follows = new ArrayCollection();
         $this->focus = new ArrayCollection();
+        $this->bpm = new ArrayCollection();
+
     }
 
     /**

@@ -56,6 +56,7 @@ class AddCoreColumnsToContentTable extends Migration
                     $table->integer('xp')
                         ->index()
                         ->after('video')
+                        ->nullable()
                         ->default(0);
 
                     $table->string('album')
@@ -68,14 +69,14 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('album')
                         ->nullable();
 
-                    $table->string('bpm')
-                        ->index()
-                        ->after('artist')
-                        ->nullable();
+//                    $table->string('bpm')
+//                        ->index()
+//                        ->after('artist')
+//                        ->nullable();
 
                     $table->string('cd_tracks')
                         ->index()
-                        ->after('bpm')
+                        ->after('artist')
                         ->nullable();
 
                     $table->string('chord_or_scale')
