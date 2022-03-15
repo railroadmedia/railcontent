@@ -51,18 +51,22 @@
         "external_links" => [
             "Drumeo" => [
                 "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
                 "url" => 'drumeo.com'
             ],
             "Pianote" => [
                 "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
                 "url" => 'pianote.com'
             ],
             "Guitareo" => [
                 "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
                 "url" => 'guitareo.com'
             ],
             "Singeo" => [
                 "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
                 "url" => 'singeo.com'
             ]
         ]
