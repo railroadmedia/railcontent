@@ -2,6 +2,7 @@
 import PageContainer from '@/components/PageContainer/PageContainer.vue'
 import CoachHeader from './components/CoachHeader/CoachHeader.vue'
 import CoachOfTheMonthHeader from './components/CoachHeader/CoachOfTheMonthHeader.vue'
+import Onboarding from './components/Onboarding/Onboarding.vue'
 import { BeakerIcon } from '@heroicons/vue/solid'
 import {
     Drumeo,
@@ -40,7 +41,8 @@ export default {
         Pianote,
         Singeo,
         Sticks,
-        Wave
+        Wave,
+        Onboarding
     }
 }
 </script>
@@ -48,6 +50,7 @@ export default {
 <template>
     <div>
         <PageContainer>
+            <Onboarding />
             <CoachHeader
                 backgroundImage="https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fgreyson-playing-1643737463.jpg?auto=format&crop=faces%2Cedges&fit=crop&ixlib=php-1.2.1&s=0e22ebce257b6a48adda52d3ba4027bd"
                 shortBio="Big Band is where it all started. You’ll learn the fundamentals of drumming’s most celebrated style from a modern-day prodigy."
