@@ -28,26 +28,6 @@
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.35);
 }
 
-.tw-dark #sidebar.drumeo .sidebar-wrapper {
-    background: linear-gradient(180deg, rgba(8, 24, 37, 0.931) 6.6%, rgba(8, 24, 37, 0.7505) 100%),
-        linear-gradient(180.23deg, #081825 0.21%, #0b76db 25.07%);
-}
-
-.tw-dark #sidebar.singeo .sidebar-wrapper {
-    background: linear-gradient(180deg, rgba(8, 24, 37, 0.931) 6.6%, rgba(8, 24, 37, 0.7505) 100%),
-        linear-gradient(169.07deg, #002039 -1.47%, #8300e9 109.9%);
-}
-
-.tw-dark #sidebar.pianote .sidebar-wrapper {
-    background: linear-gradient(180deg, rgba(8, 24, 37, 0.931) 6.6%, rgba(8, 24, 37, 0.7505) 100%),
-        linear-gradient(169.07deg, #002039 -1.47%, #f61a30 109.9%);
-}
-
-.tw-dark #sidebar.guitareo .sidebar-wrapper {
-    background: linear-gradient(180deg, rgba(8, 24, 37, 0.931) 6.6%, rgba(8, 24, 37, 0.7505) 100%),
-        linear-gradient(169.07deg, #002039 -1.47%, #00c9ac 109.9%);
-}
-
 .sidebar-track {
     z-index: 1;
     position: absolute;
@@ -544,7 +524,7 @@ a.no-decoration {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-
+mm
 #sidebar .sidebar-link #sidebar-live-badge {
     display: none;
     vertical-align: middle;

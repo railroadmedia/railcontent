@@ -2,9 +2,11 @@
 import { ref } from 'vue'
 import Navbar from '../Navbar/Navbar.vue'
 import Sidebar from '../Sidebar/Sidebar.vue'
+import Footer from '../Footer/Footer.vue'
+
 export default {
     name: 'PageContainer',
-    components: { Navbar, Sidebar },
+    components: { Navbar, Sidebar, Footer },
     setup(props, context) {
         const isSidebarCollapsed = ref(false)
         const isDarkModeSelected = ref(true)
@@ -46,38 +48,37 @@ export default {
 </script>
 
 <template>
-    <main :class="isDarkModeSelected ? 'tw-dark' : 'tw-block'">
+    <main :class="isDarkModeSelected ? 'tw-dark' : 'tw-block'"
+          class="tw-min-h-screen"
+    >
         <Navbar
             :brand="brand"
             @onBrandSelect="onBrandSelect"
             @onCollapseSidebar="onCollapseSidebar"
             @onColorModeToggle="onColorModeToggle"
         />
-        <div
-            class="tw-flex tw-flex-row"
-            :style="{
-                minHeight: 'calc(100vh - 58px)'
-            }"
-        >
-            <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />
-            <div
-                class="content-container tw-flex tw-grow tw-flex-col"
-                :style="{
-                    minHeight: 'calc(100vh - 58px)'
-                }"
-            >
-                <div class="main-content tw-h-full tw-w-full">
 
-                    <!-- PAGE CONTENT -->
-                    <slot />
+        <!-- Page Container -->
+        <div class="tw-flex tw-flex-row tw-min-h-screen tw-pt-[58px] dark:tw-bg-[#000C17]">
+
+            <!-- Sidebar -->
+            <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />
+
+            <!-- Content Container -->
+            <main class="content-container tw-flex tw-grow tw-flex-col">
+
+                <!-- Content -->
+                <section class="main-content tw-h-full tw-w-full">
                     
-                </div>
-                <div
-                    class="tw-w-full tw-self-end tw-bg-black tw-text-center tw-text-white"
-                >
-                    FOOTER TEXT
-                </div>
-            </div>
+                    <div class="tw-container tw-mx-auto sm:tw-px-4 tw-px-8">
+                        <slot />
+                    </div>
+
+                </section>
+
+                <!-- Footer -->
+                <Footer />
+            </main>
         </div>
     </main>
 </template>

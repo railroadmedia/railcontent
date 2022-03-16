@@ -6,50 +6,34 @@ export default {
 </script>
 
 <template>
-  <div
+  <aside
     id="sidebar"
-    :class="isSidebarCollapsed ? `${brand} sidebar-collapsed` : brand"
+    class="tw-h-[calc(100vh-58px)]"
+    :class="{isSidebarCollapsed:'sidebar-collapsed'}"
   >
-    <div
-      class="sidebar-wrapper tw-bg-white tw-transition tw-duration-300 tw-ease-in-out dark:tw-bg-black"
-      style="
-         {
-          margin: '0px';
-        }
-      "
-    >
+    <div class="sidebar-wrapper tw-bg-white tw-transition tw-duration-300 tw-ease-in-out dark:tw-bg-[#081825]">
       <div class="sidebar-mask">
-        <div class="sidebar-offset" style="{right: '0px', bottom: '0px'}">
-          <div
-            class="sidebar-content-wrapper"
-            style="{height: '100%', overflow: 'hidden'}"
-          >
-            <div
-              class="sidebar-content"
-              style="
-                 {
-                  padding: '0px';
-                }
-              "
-            >
+        <div class="sidebar-offset tw-right-0 tw-bottom-0">
+
+          <div class="sidebar-content-wrapper tw-h-full tw-overflow-hidden">
+            <div class="sidebar-content">
               <div class="sidebar-header flex flex-row align-v-center">
                 <div id="sidebar-close">
                   <i class="fal fa-times"></i>
                 </div>
                 <div class="sidebar-header-inner">
-                  <img
-                    alt=""
-                    src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
-                  />
+                  <img alt="" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"/>
                 </div>
               </div>
+
               <slot />
+
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </aside>
 </template>
 
 <style type="text/css">
