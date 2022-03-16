@@ -19373,8 +19373,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AvatarMenu',
-  props: ['closeMenu'],
-  emits: ['closeMenu']
+  emits: ['onCloseMenu']
 });
 
 /***/ }),
@@ -21363,12 +21362,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "tw-h-full tw-w-full",
     onMouseleave: _cache[0] || (_cache[0] = function () {
-      _ctx.$emit('closeMenu');
+      _ctx.$emit('onCloseMenu');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[_directive_click_outside, function () {
-    _ctx.$emit('closeMenu');
+    _ctx.$emit('onCloseMenu');
   }]])], 4
   /* STYLE */
   );
@@ -22082,8 +22081,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_1), $setup.isUserMenuOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AvatarMenu, {
     key: 0,
-    onCloseMenu: _cache[1] || (_cache[1] = function () {
-      return $setup.handleMenuOpen(true);
+    onOnCloseMenu: _cache[1] || (_cache[1] = function () {
+      return $setup.handleMenuOpen(false);
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
