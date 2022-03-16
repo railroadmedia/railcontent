@@ -1,5 +1,5 @@
 <template>
-    <h2>Home</h2>
+    <h1> Vue Homepage</h1>
 </template>
 <script>
   export default {
