@@ -1,0 +1,5 @@
+<template>
+    <Onboarding />
+</template>
+<script setup>
+import Onboarding from '../components/Onboarding/Onboarding.vue'</script>
