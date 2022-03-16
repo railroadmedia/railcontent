@@ -1,0 +1,72 @@
+.SquaredCard {
+    display: block;
+    width: 264px;
+    height: 264px;
+}
+
+.SquaredCard__overlay {
+    display: flex;
+    font-family: Bebas Neue;
+}
+
+.SquaredCard__overlay--drumeo {
+    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),
+        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));
+}
+
+.SquaredCard__overlay--drumeo:hover {
+    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),
+        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));
+}
+
+.SquaredCard__overlay--pianote {
+    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),
+        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));
+}
+
+.SquaredCard__overlay--pianote:hover {
+    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),
+        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));
+}
+
+.SquaredCard__overlay--guitareo {
+    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),
+        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));
+}
+
+.SquaredCard__overlay--guitareo:hover {
+    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),
+        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
+}
+
+.SquaredCard__overlay--singeo {
+    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),
+        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
+}
+
+.SquaredCard__overlay--singeo:hover {
+    background: linear-gradient(
+            177.71deg,
+            rgba(131, 0, 233, 0) -6.02%,
+            rgba(131, 0, 233, 0.87) 176.38%,
+            rgba(131, 0, 233, 0.34) 176.38%,
+            rgba(131, 0, 233, 0) 176.38%
+        ),
+        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
+}
+
+.SquaredCard__overlay--red:hover {
+    background: rgba(239, 68, 68, 0.45);
+}
+
+.SquaredCard__overlay--blue:hover {
+    background: rgba(59, 130, 246, 0.45);
+}
+
+.SquaredCard__overlay--yellow:hover {
+    background: rgba(234, 179, 8, 0.45);
+}
+
+.SquaredCard__overlay--green:hover {
+    background: rgba(34, 197, 94, 0.45);
+}
