@@ -1,7 +1,8 @@
 <script>
 export default {
   name: 'AvatarMenu',
-  emits: ['onCloseMenu']
+  props: ['closeMenu'],
+  emits: ['closeMenu']
 }
 </script>
 
@@ -16,12 +17,12 @@ export default {
       class="tw-h-full tw-w-full"
       v-on:mouseleave="
         () => {
-          $emit('onCloseMenu')
+          $emit('closeMenu')
         }
       "
       v-click-outside="
         () => {
-          $emit('onCloseMenu')
+          $emit('closeMenu')
         }
       "
     >

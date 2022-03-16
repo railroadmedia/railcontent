@@ -27,7 +27,13 @@
         
         <!-- App Container -->
         <div id="app" class="flex-1">
-            @yield('layout-body')
+            <app-container
+                :vue-router="true"
+            >
+
+                @yield('layout-body')
+
+            </app-container>
         </div>
 
         <!-- Scripts -->
