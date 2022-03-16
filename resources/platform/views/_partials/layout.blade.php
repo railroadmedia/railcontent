@@ -1,8 +1,3 @@
-@php
-$initialData = new stdClass();
-$initialData->withRouter = true;
-@endphp
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -27,14 +22,20 @@ $initialData->withRouter = true;
     </head>
 
     <body class="flex flex-col w-full min-h-screen">
-<!-- Modal Container -->
-        <div
-        id="modal-container"
-        class="tw-z-10 tw-hidden tw-h-full tw-w-full"
-        ></div>
-        <div id="app" class="flex-1" initial-vue-data="{{ json_encode($initialData) }}">
-            @yield('layout-body')
+        <!-- Modal Container -->
+        <div id="modal-container" class="tw-z-10 tw-hidden tw-h-full tw-w-full"></div>
+        
+        <!-- App Container -->
+        <div id="app" class="flex-1">
+            <app-container
+                :vue-router="true"
+            >
+
+                @yield('layout-body')
+
+            </app-container>
         </div>
+
         <!-- Scripts -->
         @yield('layout-scripts')
         <script src="{{ mix('platform/js/app.js') }}"></script>

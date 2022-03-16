@@ -67,7 +67,10 @@ export default {
                 }"
             >
                 <div class="main-content tw-h-full tw-w-full">
+
+                    <!-- PAGE CONTENT -->
                     <slot />
+                    
                 </div>
                 <div
                     class="tw-w-full tw-self-end tw-bg-black tw-text-center tw-text-white"

@@ -4,8 +4,12 @@ import { createApp } from 'vue';
 import store from './vue/store';
 import router from './vue/router';
 import AppContainer from './vue/apps/AppContainer.vue';
+import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 
-const app = createApp(AppContainer);
+const app = createApp({});
+//Register Global Components
+app.component('AppContainer', AppContainer)
+   .component('PageContainer', PageContainer)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
@@ -24,5 +28,6 @@ app.directive('click-outside', {
 })
 
 app.use(store);
-app.use(router)
-app.mount('#app')
+app.use(router);
+app.mount('#app');
+
