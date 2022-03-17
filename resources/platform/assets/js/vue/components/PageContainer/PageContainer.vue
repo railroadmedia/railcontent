@@ -3,15 +3,19 @@ import { ref } from 'vue'
 import Navbar from '../Navbar/Navbar.vue'
 import Sidebar from '../Sidebar/Sidebar.vue'
 import Footer from '../Footer/Footer.vue'
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
     name: 'PageContainer',
     components: { Navbar, Sidebar, Footer },
+
     setup(props, context) {
         const isSidebarCollapsed = ref(false)
         const isDarkModeSelected = ref(true)
         const brand = ref('drumeo')
-
+        const route = useRoute()
+        const router = useRouter()
+        
         const onCollapseSidebar = (val) => {
             console.log(val)
             if (typeof val === 'boolean') {
@@ -30,8 +34,11 @@ export default {
         }
 
         const onBrandSelect = (val) => {
+            const urlSearchParams = new URLSearchParams(window.location.search)
             if (typeof val === 'string') {
-                brand.value = val
+                brand.value = val;
+                urlSearchParams.set('brand', val);
+                router.push({path:'/members', query:{brand: val}})
             }
         }
 
@@ -43,13 +50,21 @@ export default {
             onColorModeToggle,
             onBrandSelect
         }
-    }
+    },
+
+    beforeMount() {
+        //Get Query String
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        const brandParam = urlSearchParams.get('brand');
+        this.brand = brandParam || 'drumeo';
+        console.log('brandParam:', brandParam)
+    },
 }
 </script>
 
 <template>
     <main :class="isDarkModeSelected ? 'tw-dark' : 'tw-block'"
-          class="tw-min-h-screen"
+          class="tw-min-h-screen tw-w-screen"
     >
         <Navbar
             :brand="brand"
@@ -59,7 +74,7 @@ export default {
         />
 
         <!-- Page Container -->
-        <div class="tw-flex tw-flex-row tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]">
+        <div class="tw-flex tw-flex-row tw-w-full tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]">
 
             <!-- Sidebar -->
             <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />

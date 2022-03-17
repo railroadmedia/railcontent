@@ -12,7 +12,6 @@
     },
     setup(props) {
       console.log(`Has Vue Router: ${props.vueRouter}`)
-      console.log(`brand is ${props.brand}`)
     }
   }
 </script>

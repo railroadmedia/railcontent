@@ -29,7 +29,7 @@
         <div id="app" class="flex-1">
             <app-container
                 :vue-router="true"
-                brand="drumeo"
+                brand="{{ $brand }}"
             >
 
                 @yield('layout-body')
