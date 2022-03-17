@@ -446,7 +446,16 @@ class ContentRepository extends EntityRepository
      */
     public function requireField($name, $value, $type = '', $operator = '=')
     {
-        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator];
+        $isProperty = true;
+        if (in_array(
+            $name,
+            $this->getEntityManager()
+                ->getClassMetadata(Content::class)
+                ->getAssociationNames()
+        )) {
+            $isProperty = false;
+        }
+        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator,'property'=>$isProperty];
 
         return $this;
     }
