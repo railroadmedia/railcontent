@@ -164,8 +164,9 @@
         "formName" => 'Acoustic Guitar Jump Start',
         "submitButtonColor" => "#ff8c00",
     ]) 
+    
 
-    <div class="reveal acoustic text-center" id="getAccess" data-reveal>
+    <div class="reveal acoustic text-center max-w-2xl" id="getAccess" data-reveal data-reset-on-close="false">
 
         <div class="flex-video widescreen vimeo">
             <iframe id="vimeo" src="//player.vimeo.com/video/299263691" frameborder="0" allowfullscreen allow="autoplay"></iframe>
