@@ -1119,69 +1119,75 @@ class ContentService
                 $followedContents
             );
 
-            $totalResults = $elasticData['hits']['total']['value'];
-
-            $ids = [];
-            foreach ($elasticData['hits']['hits'] as $elData) {
-                $ids[] = $elData['_source']['content_id'];
-            }
-
-            $qbIds =
-                $this->contentRepository->build()
-                    ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
-                    ->setParameter('ids', $ids);
-
-            $results =
-                $qbIds->getQuery()
-                    ->setCacheable(true)
-                    ->setCacheRegion('pull')
-                    ->getResult('Railcontent');
-
-            $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
-
-            // restore order of ids passed in
-            if (!empty($requiredContentIdsByState) && ($sort == 'progress')) {
-                $ids = $requiredContentIdsByState;
-            }
-
             $data = [];
-            foreach ($ids as $id) {
-                foreach ($unorderedContentRows as $index => $unorderedContentRow) {
-                    if ($id == $unorderedContentRow->getId()) {
-                        $data[] = $unorderedContentRow;
+            $qb = null;
+            $totalResults = 0;
+
+            if ($elasticData) {
+                $totalResults = $elasticData['hits']['total']['value'];
+
+                $ids = [];
+                foreach ($elasticData['hits']['hits'] as $elData) {
+                    $ids[] = $elData['_source']['content_id'];
+                }
+
+                $qbIds =
+                    $this->contentRepository->build()
+                        ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
+                        ->setParameter('ids', $ids);
+
+                $results =
+                    $qbIds->getQuery()
+                        ->setCacheable(true)
+                        ->setCacheRegion('pull')
+                        ->getResult('Railcontent');
+
+                $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
+
+                // restore order of ids passed in
+                if (!empty($requiredContentIdsByState) && ($sort == 'progress')) {
+                    $ids = $requiredContentIdsByState;
+                }
+
+                $data = [];
+                foreach ($ids as $id) {
+                    foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                        if ($id == $unorderedContentRow->getId()) {
+                            $data[] = $unorderedContentRow;
+                        }
                     }
                 }
-            }
 
-            $qb = null;
-            if ($pullFilterFields) {
-                $filterOptions = $this->elasticService->getFilterFields(
-                    $includedTypes,
-                    $slugHierarchy,
-                    $requiredParentIds,
-                    $filter->requiredFields,
-                    $filter->includedFields,
-                    $requiredContentIdsByState ?? null,
-                    $includedContentsIdsByState ?? null,
-                    $requiredUserPlaylistIds
-                );
+                $qb = null;
+                if ($pullFilterFields) {
+                    $filterOptions = $this->elasticService->getFilterFields(
+                        $includedTypes,
+                        $slugHierarchy,
+                        $requiredParentIds,
+                        $filter->requiredFields,
+                        $filter->includedFields,
+                        $requiredContentIdsByState ?? null,
+                        $includedContentsIdsByState ?? null,
+                        $requiredUserPlaylistIds
+                    );
 
-                if (array_key_exists('instructors', $filterOptions)) {
-                    $instructors =
-                        $this->contentRepository->build()
-                            ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
-                            ->setParameter('ids', $filterOptions['instructors'])
-                            ->orderBy(config('railcontent.table_prefix').'content.slug', 'asc')
-                            ->getQuery()
-                            ->setCacheable(true)
-                            ->setCacheRegion('pull')
-                            ->getResult();
+                    if (array_key_exists('instructors', $filterOptions)) {
+                        $instructors =
+                            $this->contentRepository->build()
+                                ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
+                                ->setParameter('ids', $filterOptions['instructors'])
+                                ->orderBy(config('railcontent.table_prefix').'content.slug', 'asc')
+                                ->getQuery()
+                                ->setCacheable(true)
+                                ->setCacheRegion('pull')
+                                ->getResult();
 
-                    unset($filterOptions['instructors']);
-                    $filterOptions['instructor'] = $instructors;
+                        unset($filterOptions['instructors']);
+                        $filterOptions['instructor'] = $instructors;
+                    }
+
+                    $filters = $filterOptions;
                 }
-
-                $filters = $filterOptions;
             }
         } else {
             $qb = $this->contentRepository->retrieveFilter();
@@ -1300,15 +1306,15 @@ class ContentService
             $this->entityManager->flush();
         }
 
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Content::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Content::class);
 
-//        $this->entityManager->getCache()
-//            ->getQueryCache('pull')
-//            ->clear();
+        //        $this->entityManager->getCache()
+        //            ->getQueryCache('pull')
+        //            ->clear();
 
-//        $this->entityManager->getCache()
-//            ->evictQueryRegion('pull');
+        //        $this->entityManager->getCache()
+        //            ->evictQueryRegion('pull');
 
         event(new ContentCreated($content));
 
@@ -1342,8 +1348,8 @@ class ContentService
 
         event(new ContentUpdated($content));
 
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Content::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Content::class);
 
         return $content;
     }
@@ -1486,15 +1492,15 @@ class ContentService
 
         $this->entityManager->flush();
 
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Content::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Content::class);
 
-//        $this->entityManager->getCache()
-//            ->getQueryCache('pull')
-//            ->clear();
+        //        $this->entityManager->getCache()
+        //            ->getQueryCache('pull')
+        //            ->clear();
 
-//        $this->entityManager->getCache()
-//            ->evictQueryRegion('pull');
+        //        $this->entityManager->getCache()
+        //            ->evictQueryRegion('pull');
 
         return $content;
     }
@@ -1512,8 +1518,8 @@ class ContentService
                 ->findByParent($id);
 
         //delete parent content cache
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Content::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Content::class);
 
         foreach ($children as $child) {
             $child->getChild()
@@ -1624,20 +1630,20 @@ class ContentService
 
                     $oldFields = call_user_func([$content, $getterName]);
 
-//                    if ($this->entityManager->contains($content)) {
-//                        foreach ($oldFields as $oldField) {
-//                            //check if field was deleted
-//                            $oldFieldValue = call_user_func([$oldField, $getterName]);
-//                            if (!is_string($oldFieldValue)) {
-//                                $oldFieldValue = $oldFieldValue->getId();
-//                            }
-//                            if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
-//                                call_user_func([$content, $removeField], $oldField);
-//
-//                                $this->entityManager->remove($oldField);
-//                            }
-//                        }
-//                    }
+                    //                    if ($this->entityManager->contains($content)) {
+                    //                        foreach ($oldFields as $oldField) {
+                    //                            //check if field was deleted
+                    //                            $oldFieldValue = call_user_func([$oldField, $getterName]);
+                    //                            if (!is_string($oldFieldValue)) {
+                    //                                $oldFieldValue = $oldFieldValue->getId();
+                    //                            }
+                    //                            if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
+                    //                                call_user_func([$content, $removeField], $oldField);
+                    //
+                    //                                $this->entityManager->remove($oldField);
+                    //                            }
+                    //                        }
+                    //                    }
 
                     if (array_key_exists('position', $field)) {
                         $position = $field['position'];
@@ -2042,8 +2048,8 @@ class ContentService
 
         event(new ContentUpdated($content));
 
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Content::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Content::class);
 
         return $content;
     }
