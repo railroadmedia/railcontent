@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://www.guitareo.com/acoustic-guitar-jumpstart/">
 @stop
 
-@section('body')
+@section('layout-body')
 
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#161819",

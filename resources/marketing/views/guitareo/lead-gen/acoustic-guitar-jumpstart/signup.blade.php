@@ -14,6 +14,7 @@
 @section('layout-scripts')
     @parent
     
+    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -35,7 +36,7 @@
     </script>
 @stop
 
-@section('body')
+@section('layout-body')
     <header class="header acoustic py-7 md:py-12 lg:py-14" style="background: #161819;">
         <div class="row mx-auto md:max-w-2xl lg:max-w-4xl">
             <img class="mx-auto max-w-xs mb-5 md:max-w-xl md:mb-7 lg:max-w-4xl lg:mb-10" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/logo-white.png">

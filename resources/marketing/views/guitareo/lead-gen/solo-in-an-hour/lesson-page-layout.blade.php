@@ -4,12 +4,14 @@
     @parent
 
     <meta name="robots" content="noindex">
-    <title>{{ $title }} | Guitareo</title>
-    <meta name="description" content="Sign up on this page and you'll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.">
-    <meta property="og:image" content="https://s3.amazonaws.com/guitareo/acoustic-jump-start/6.jpg" style="display: none;">
-    <meta property="og:title" content="Acoustic Guitar Jumpstart">
-    <meta property="og:description" content="Sign up on this page and you'll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.">
-    <meta property="og:url" content="https://www.guitareo.com/acoustic-guitar-jumpstart/">
+    <title>@if(!empty($title)) {{ $title }} @endif | Solo In An Hour | Guitareo</title>
+    <meta property="og:title" content="Solo In An Hour">
+    <meta name="description" content="Play your first solo in less than 60 minutes"/>
+    <meta property="og:description" content="Play your first solo in less than 60 minutes">
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/og-image.jpg">
+    <meta property="og:url" content="https://www.guitareo.com/solo-in-an-hour/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
+    <link rel="stylesheet" href="{{ asset('/assets/marketing/lead-gen.css') }}">
 @stop
 
 @section('layout-scripts')
@@ -17,6 +19,7 @@
 
     <script type="text/javascript">
         $(document).ready(function (e) {
+            $(document).foundation();
             $('.lesson-row').click(function () {
                     $('.more-info').removeClass('active');
                     $(this).find('.more-info').addClass('active');
@@ -30,6 +33,9 @@
                     ev.stopPropagation();
                 }
             );
+            $('.assignment-row .fa-angle-down').click(function() {
+                $(this).parent().parent().toggleClass('active');
+            });
         });
 
         (function() {
@@ -40,17 +46,17 @@
         })();
 
         var disqus_config = function () {
-            this.page.url = 'https://www.guitareo.com/acoustic-guitar-jumpstart/course-index/2';
+            this.page.url = 'https://www.guitareo.com/solo-in-an-hour/lessons/';
         };
     </script>
+    <script src="/assets/js/modal-autoplay.js"></script>
 @stop
 
 @section('layout-body')
     @php
-        $PDF = 'https://s3.amazonaws.com/guitareo/acoustic-jump-start/acoustic-guitar-jump-start.pdf';
-        $themeColor = '#ff8c00';
-        $fromText = 'ACOUSTIC GUITAR JUMPSTART';
-        $allLessons = '/acoustic-guitar-jumpstart/course-index';
+        $themeColor = '#ffde16';
+        $fromText = 'solo in an hour';
+        $allLessons = '/solo-in-an-hour/lessons';
     @endphp
 
     @include('guitareo.lead-gen.partials._lesson-page-layout1')
