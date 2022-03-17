@@ -67,9 +67,7 @@ export default {
         </ModalRenderer>
         <button
             v-on:click="() => handleBrandOpen(true)"
-            :class="`tw-ml-[36px] tw-flex tw-h-full tw-flex-row tw-items-center tw-px-[12px] hover:tw-bg-[#002039]/80 ${
-                isSelectorOpen && 'tw-bg-[#002039]/80'
-            }`"
+            :class="`tw-flex tw-h-full tw-flex-row tw-items-center tw-px-[12px] ${ isSelectorOpen }`"
         >
             <img :src="brandUrl[brand]" class="tw-h-[23px]" />
             <i

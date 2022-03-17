@@ -23,9 +23,6 @@
     z-index: 99;
     clip-path: inset(0px -20px 0px 0px);
     overflow-y: auto;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.35);
 }
 
 .sidebar-track {
@@ -131,84 +128,6 @@
     max-width: 100%;
     width: 100%;
     pointer-events: none;
-}
-
-.sidebar-scrollbar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    min-height: 10px;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    min-height: 10px;
-}
-
-.sidebar-track.sidebar-horizontal .sidebar-scrollbar {
-    right: auto;
-    left: 0;
-    top: 2px;
-    height: 7px;
-    min-height: 0;
-    min-width: 10px;
-    width: auto;
-    right: auto;
-    left: 0px;
-    top: 2px;
-    height: 7px;
-    min-height: 0px;
-    min-width: 10px;
-    width: auto;
-}
-
-.sidebar-scrollbar:before {
-    position: absolute;
-    content: "";
-    background: black;
-    border-radius: 7px;
-    left: 2px;
-    right: 2px;
-    opacity: 0;
-    transition: opacity 0.2s linear;
-    position: absolute;
-    content: "";
-    background-image: initial;
-    background-position-x: initial;
-    background-position-y: initial;
-    background-size: initial;
-    background-repeat-x: initial;
-    background-repeat-y: initial;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: black;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    left: 2px;
-    right: 2px;
-    opacity: 0;
-    transition-duration: 0.2s;
-    transition-timing-function: linear;
-    transition-delay: 0s;
-    transition-property: opacity;
-}
-
-.sidebar-track.sidebar-horizontal .sidebar-scrollbar:before {
-    height: 100%;
-    left: 2px;
-    right: 2px;
-    height: 100%;
-    left: 2px;
-    right: 2px;
-}
-
-.sidebar-track.sidebar-vertical .sidebar-scrollbar:before {
-    top: 2px;
-    bottom: 2px;
-    top: 2px;
-    bottom: 2px;
 }
 
 .sidebar-height-auto-observer {

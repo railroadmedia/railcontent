@@ -11,7 +11,7 @@ export default {
     class="tw-h-[calc(100vh-58px)]"
     :class="{isSidebarCollapsed:'sidebar-collapsed'}"
   >
-    <div class="sidebar-wrapper tw-bg-white tw-transition tw-duration-300 tw-ease-in-out dark:tw-bg-[#081825]">
+    <div class="sidebar-wrapper tw-bg-[#F9FBFB] tw-transition dark:tw-bg-[#081825]">
       <div class="sidebar-mask">
         <div class="sidebar-offset tw-right-0 tw-bottom-0">
 

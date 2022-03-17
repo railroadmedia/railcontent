@@ -59,7 +59,7 @@ export default {
         />
 
         <!-- Page Container -->
-        <div class="tw-flex tw-flex-row tw-min-h-screen tw-pt-[58px] dark:tw-bg-[#000C17]">
+        <div class="tw-flex tw-flex-row tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]">
 
             <!-- Sidebar -->
             <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />
@@ -70,7 +70,7 @@ export default {
                 <!-- Content -->
                 <section class="main-content tw-h-full tw-w-full">
                     
-                    <div class="tw-container tw-mx-auto sm:tw-px-4 tw-px-8">
+                    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-10 dark:tw-text-white">
                         <slot />
                     </div>
 
