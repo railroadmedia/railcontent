@@ -750,11 +750,17 @@ a:visited {
 .tw-bottom-0 {
   bottom: 0px;
 }
+.tw-left-0 {
+  left: 0px;
+}
 .tw-z-10 {
   z-index: 10;
 }
 .tw-z-0 {
   z-index: 0;
+}
+.tw-z-\[99\] {
+  z-index: 99;
 }
 .tw-m-0 {
   margin: 0px;
@@ -906,6 +912,9 @@ a:visited {
 .tw-h-\[calc\(100vh-58px\)\] {
   height: calc(100vh - 58px);
 }
+.tw-h-\[37px\] {
+  height: 37px;
+}
 .tw-min-h-screen {
   min-height: 100vh;
 }
@@ -960,6 +969,12 @@ a:visited {
 .tw-w-\[543px\] {
   width: 543px;
 }
+.tw-w-64 {
+  width: 16rem;
+}
+.tw-w-\[68px\] {
+  width: 68px;
+}
 .tw-max-w-\[624px\] {
   max-width: 624px;
 }
@@ -1004,6 +1019,9 @@ a:visited {
 .tw-overflow-hidden {
   overflow: hidden;
 }
+.tw-overflow-y-auto {
+  overflow-y: auto;
+}
 .tw-break-normal {
   overflow-wrap: normal;
   word-break: normal;
@@ -1023,6 +1041,9 @@ a:visited {
 .tw-rounded-lg {
   border-radius: 0.5rem;
 }
+.tw-rounded {
+  border-radius: 0.25rem;
+}
 .tw-border {
   border-width: 1px;
 }
@@ -1034,6 +1055,15 @@ a:visited {
 }
 .tw-border-l-\[4px\] {
   border-left-width: 4px;
+}
+.tw-border-b {
+  border-bottom-width: 1px;
+}
+.tw-border-l-4 {
+  border-left-width: 4px;
+}
+.tw-border-none {
+  border-style: none;
 }
 .tw-border-drumeo {
   --tw-border-opacity: 1;
@@ -1084,6 +1114,10 @@ a:visited {
 .tw-border-transparent {
   border-color: transparent;
 }
+.tw-border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
 .tw-bg-singeo {
   --tw-bg-opacity: 1;
   background-color: rgb(131 0 233 / var(--tw-bg-opacity));
@@ -1130,6 +1164,10 @@ a:visited {
 .tw-bg-\[\#F9FBFB\]\/90 {
   background-color: rgb(249 251 251 / 0.9);
 }
+.tw-bg-\[\#E6E7E9\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(230 231 233 / var(--tw-bg-opacity));
+}
 .tw-bg-cover {
   background-size: cover;
 }
@@ -1138,6 +1176,12 @@ a:visited {
 }
 .tw-p-0 {
   padding: 0px;
+}
+.tw-p-3 {
+  padding: 0.75rem;
+}
+.tw-p-4 {
+  padding: 1rem;
 }
 .tw-px-\[16px\] {
   padding-left: 16px;
@@ -1231,6 +1275,9 @@ a:visited {
 .tw-pt-\[58px\] {
   padding-top: 58px;
 }
+.tw-pl-4 {
+  padding-left: 1rem;
+}
 .tw-text-left {
   text-align: left;
 }
@@ -1261,6 +1308,10 @@ a:visited {
 }
 .tw-text-\[18px\] {
   font-size: 18px;
+}
+.tw-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .tw-font-bold {
   font-weight: 700;
@@ -1326,6 +1377,10 @@ a:visited {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.tw-text-\[\#00101D\] {
+  --tw-text-opacity: 1;
+  color: rgb(0 16 29 / var(--tw-text-opacity));
+}
 .tw-underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -1353,6 +1408,11 @@ a:visited {
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.tw-transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1412,6 +1472,10 @@ a:visited {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+.tw-dark .dark\:tw-border-b-\[\#102230\] {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(16 34 48 / var(--tw-border-opacity));
+}
 .tw-dark .dark\:tw-bg-\[\#081825\] {
   --tw-bg-opacity: 1;
   background-color: rgb(8 24 37 / var(--tw-bg-opacity));
@@ -1438,6 +1502,18 @@ a:visited {
 .tw-dark .dark\:tw-text-gray-100 {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+.tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-text-opacity));
+}
+.tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]:-ms-input-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-text-opacity));
+}
+.tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-text-opacity));
 }
 @media (min-width: 640px) {
   .sm\:tw-grid-cols-1 {

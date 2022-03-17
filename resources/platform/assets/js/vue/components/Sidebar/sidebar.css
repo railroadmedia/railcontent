@@ -1,8 +1,4 @@
-#sidebar {
-    height: 100%;
-    width: 256px;
-    flex-shrink: 0;
-}
+
 
 @media screen and (min-width: 64rem) {
     #sidebar {
@@ -14,15 +10,6 @@
     #sidebar.sidebar-collapsed {
         display: none;
     }
-}
-.sidebar-wrapper {
-    height: 100%;
-    left: 0;
-    width: 256px;
-    position: fixed;
-    z-index: 99;
-    clip-path: inset(0px -20px 0px 0px);
-    overflow-y: auto;
 }
 
 .sidebar-track {
@@ -227,10 +214,6 @@
 
 #sidebar.sidebar-collapsed .bb-grey-1-1 {
     border: none;
-}
-
-#sidebar.sidebar-collapsed .sidebar-wrapper {
-    width: 68px;
 }
 
 #sidebar.sidebar-collapsed .sidebar-link {

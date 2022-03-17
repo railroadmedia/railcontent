@@ -11,13 +11,12 @@ export default {
 
     setup(props, context) {
         const isSidebarCollapsed = ref(false)
-        const isDarkModeSelected = ref(true)
+        const isDarkModeSelected = ref(false)
         const brand = ref('drumeo')
         const route = useRoute()
         const router = useRouter()
         
         const onCollapseSidebar = (val) => {
-            console.log(val)
             if (typeof val === 'boolean') {
                 isSidebarCollapsed.value = val
             } else {
@@ -54,6 +53,8 @@ export default {
     },
 
     beforeMount() {
+        //Set Dark Mode Based on User Preferences
+        this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
         //Get Query String
         const urlSearchParams = new URLSearchParams(window.location.search)
         const brandParam = urlSearchParams.get('brand');
@@ -89,12 +90,12 @@ export default {
             <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />
 
             <!-- Content Container -->
-            <main class="content-container tw-flex tw-grow tw-flex-col">
+            <main class="tw-flex tw-grow tw-flex-col">
 
                 <!-- Content -->
-                <section class="main-content tw-h-full tw-w-full">
+                <section class="tw-h-full tw-w-full">
                     
-                    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-10 dark:tw-text-white">
+                    <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
                         <slot />
                     </div>
 

@@ -20954,14 +20954,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup(props, context) {
     var isSidebarCollapsed = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-    var isDarkModeSelected = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var isDarkModeSelected = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var brand = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('drumeo');
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRoute)();
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
 
     var onCollapseSidebar = function onCollapseSidebar(val) {
-      console.log(val);
-
       if (typeof val === 'boolean') {
         isSidebarCollapsed.value = val;
       } else {
@@ -21003,7 +21001,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   beforeMount: function beforeMount() {
-    //Get Query String
+    //Set Dark Mode Based on User Preferences
+    this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches; //Get Query String
+
     var urlSearchParams = new URLSearchParams(window.location.search);
     var brandParam = urlSearchParams.get('brand');
     this.brand = brandParam || 'drumeo';
@@ -21160,6 +21160,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SidebarContainer_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SidebarContainer.vue */ "./resources/platform/assets/js/vue/components/Sidebar/SidebarContainer.vue");
 /* harmony import */ var _SidebarSection_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SidebarSection.vue */ "./resources/platform/assets/js/vue/components/Sidebar/SidebarSection.vue");
 /* harmony import */ var _SidebarLink_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SidebarLink.vue */ "./resources/platform/assets/js/vue/components/Sidebar/SidebarLink.vue");
+/* harmony import */ var _constants_brands_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../constants/brands.js */ "./resources/platform/assets/js/vue/constants/brands.js");
+
 
 
 
@@ -21170,7 +21172,130 @@ __webpack_require__.r(__webpack_exports__);
     SidebarSection: _SidebarSection_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     SidebarLink: _SidebarLink_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  props: ['brand', 'isSidebarCollapsed']
+  props: ['brand', 'isSidebarCollapsed'],
+  setup: function setup() {
+    return {
+      textColor: _constants_brands_js__WEBPACK_IMPORTED_MODULE_3__.textColor,
+      borderColor: _constants_brands_js__WEBPACK_IMPORTED_MODULE_3__.borderColor
+    };
+  },
+  data: function data() {
+    return {
+      sections: [{
+        links: [{
+          name: 'Home',
+          url: '/members',
+          icon: '',
+          active: true
+        }, {
+          name: 'Method',
+          url: '/members/method',
+          icon: '',
+          active: false
+        }, {
+          name: 'Songs',
+          url: '/members/songs',
+          icon: '',
+          active: false
+        }, {
+          name: 'Coaches',
+          url: '/members/coaches',
+          icon: '',
+          active: false
+        }]
+      }, {
+        links: [{
+          name: 'Packs',
+          url: '/members/packs',
+          icon: '',
+          active: false
+        }, {
+          name: 'Quick Tips',
+          url: '/members/quick-tips',
+          icon: '',
+          active: false
+        }, {
+          name: 'Student Focus',
+          url: '/members/student-focus',
+          icon: '',
+          active: false
+        }, {
+          name: 'Live',
+          url: '/members/live',
+          icon: '',
+          active: false
+        }]
+      }],
+      brandSections: [{
+        brand: 'singeo',
+        links: [{
+          name: 'Routines',
+          url: '/members/routines',
+          icon: '',
+          active: true
+        }]
+      }, {
+        brand: 'guitareo',
+        links: [{
+          name: 'Lessons',
+          url: '/members/lessons',
+          icon: '',
+          active: true
+        }, {
+          name: 'Play Alongs',
+          url: '/members/lessons',
+          icon: '',
+          active: true
+        }, {
+          name: 'Chords & Scales',
+          url: '/members/chords-scales',
+          icon: '',
+          active: true
+        }, {
+          name: 'Archives',
+          url: '/members/archives',
+          icon: '',
+          active: true
+        }]
+      }, {
+        brand: 'pianote',
+        links: [{
+          name: 'Foundation',
+          url: '/members/foundation',
+          icon: '',
+          active: false
+        }, {
+          name: 'Podcast',
+          url: '/members/podcast',
+          icon: '',
+          active: false
+        }, {
+          name: 'Bootcamps',
+          url: '/members/bootcamps',
+          icon: '',
+          active: false
+        }]
+      }, {
+        brand: 'drumeo',
+        links: [{
+          name: 'Play-Alongs',
+          url: '/members/play-alongs',
+          icon: '',
+          active: false
+        }, {
+          name: 'Rudiments',
+          url: '/members/rudiments',
+          icon: '',
+          active: false
+        }, {
+          name: 'Shows',
+          url: '/members/shows',
+          icon: '',
+          active: false
+        }]
+      }]
+    };
+  }
 });
 
 /***/ }),
@@ -23205,13 +23330,13 @@ var _hoisted_1 = {
   "class": "tw-flex tw-flex-row tw-w-full tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]"
 };
 var _hoisted_2 = {
-  "class": "content-container tw-flex tw-grow tw-flex-col"
+  "class": "tw-flex tw-grow tw-flex-col"
 };
 var _hoisted_3 = {
-  "class": "main-content tw-h-full tw-w-full"
+  "class": "tw-h-full tw-w-full"
 };
 var _hoisted_4 = {
-  "class": "tw-container tw-mx-auto tw-px-4 md:tw-px-10 dark:tw-text-white"
+  "class": "tw-container tw-mx-auto tw-px-4 dark:tw-text-white"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Navbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Navbar");
@@ -23355,90 +23480,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-home"
-}, null, -1
-/* HOISTED */
-);
+var _hoisted_1 = {
+  "class": "tw-p-4 tw-relative"
+};
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-home"
+  "class": ""
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-comments"
-}, null, -1
-/* HOISTED */
-);
+var _hoisted_3 = ["href"];
+var _hoisted_4 = {
+  key: 0,
+  "class": "tw-border-b dark:tw-border-b-[#102230]"
+};
+var _hoisted_5 = ["href"];
+var _hoisted_6 = {
+  "class": "tw-border-b dark:tw-border-b-[#102230]"
+};
+var _hoisted_7 = ["href"];
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-bell"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-envelope"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-envelope"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-whistle"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-envelope"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-envelope"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-envelope"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-envelope"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-cog"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-shopping-cart"
-}, null, -1
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "tw-h-[42px] tw-flex tw-items-center tw-pl-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "tw-uppercase tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white"
+}, "Playlists")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Loop through User Playlist ")], -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_SidebarLink = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SidebarLink");
-
-  var _component_SidebarSection = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SidebarSection");
-
   var _component_SidebarContainer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SidebarContainer");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_SidebarContainer, {
@@ -23446,197 +23517,54 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     brand: $props.brand
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarSection, null, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Home",
-            href: "#",
-            isActive: true,
-            showCollapsed: ""
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_1];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Packs",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_2];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Forums",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_3];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Notifications",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_4];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "My List",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_5];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"])];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarSection, null, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Option",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_6];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Coaches",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_7];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Songs",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_8];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Courses",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_9];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Quick Tips"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_10];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Shows"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_11];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"])];
-        }),
-        _: 1
-        /* STABLE */
-
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarSection, null, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Settings",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_12];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SidebarLink, {
-            brand: $props.brand,
-            title: "Store",
-            showCollapsed: true
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_13];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["brand"])];
-        }),
-        _: 1
-        /* STABLE */
-
-      })];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar Search "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "text",
+        placeholder: "search",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-w-full tw-h-[37px] tw-border-none tw-text-xs tw-rounded tw-transition-color tw-bg-[#E6E7E9] dark:tw-bg-[#000C17] dark:placeholder:tw-text-[#9EC0DC]", []])
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar Link Sections "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sections, function (section, i) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", {
+          key: i,
+          "class": "tw-border-b dark:tw-border-b-[#102230]"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(section.links, function (link, j) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
+            key: j,
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([link.active ? " ".concat($setup.textColor[$props.brand]) : ''])
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+            href: "".concat(link.url, "?brand=").concat($props.brand),
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-4", [link.active ? "tw-border-l-4 tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-text-[#00101D] dark:tw-text-white']])
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(link.name), 11
+          /* TEXT, CLASS, PROPS */
+          , _hoisted_3)], 2
+          /* CLASS */
+          );
+        }), 128
+        /* KEYED_FRAGMENT */
+        ))])]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Brand Specific Links "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.brandSections, function (section, i) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", {
+          key: i
+        }, [section.brand === $props.brand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(section.links, function (link, j) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
+            key: j
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+            href: "".concat(link.url, "?brand=").concat($props.brand),
+            "class": "tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-4 tw-text-[#00101D] dark:tw-text-white"
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(link.name), 9
+          /* TEXT, PROPS */
+          , _hoisted_5)]);
+        }), 128
+        /* KEYED_FRAGMENT */
+        ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forum "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        href: "/members/forums?brand=".concat($props.brand),
+        "class": "tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-4 tw-text-[#00101D] dark:tw-text-white"
+      }, " Forums ", 8
+      /* PROPS */
+      , _hoisted_7)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Playlists "), _hoisted_8];
     }),
     _: 1
     /* STABLE */
@@ -23662,7 +23590,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "sidebar-wrapper tw-bg-[#F9FBFB] tw-transition dark:tw-bg-[#081825]"
+  "class": "tw-absolute tw-h-full tw-w-full tw-top-0 tw-left-0 tw-z-[99] tw-overflow-y-auto tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]"
 };
 var _hoisted_2 = {
   "class": "sidebar-mask"
@@ -23682,10 +23610,10 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVN
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("aside", {
     id: "sidebar",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-h-[calc(100vh-58px)]", {
-      isSidebarCollapsed: 'sidebar-collapsed'
-    }])
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])])])])]);
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-h-[calc(100vh-58px)] tw-transition-all tw-relative", [$props.isSidebarCollapsed ? 'tw-w-[68px]' : 'tw-w-64']])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])])])])], 2
+  /* CLASS */
+  );
 }
 
 /***/ }),
@@ -24400,7 +24328,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#sidebar {\n    height: 100%;\n    width: 256px;\n    flex-shrink: 0;\n}\n\n@media screen and (min-width: 64rem) {\n    #sidebar {\n        display: block;\n    }\n}\n\n@media screen and (max-width: 64rem) {\n    #sidebar.sidebar-collapsed {\n        display: none;\n    }\n}\n.sidebar-wrapper {\n    height: 100%;\n    left: 0;\n    width: 256px;\n    position: fixed;\n    z-index: 99;\n    clip-path: inset(0px -20px 0px 0px);\n    overflow-y: auto;\n}\n\n.sidebar-track {\n    z-index: 1;\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    pointer-events: none;\n    overflow: hidden;\n    z-index: 1;\n    pointer-events: none;\n    overflow-x: hidden;\n}\n\n.sidebar-track.sidebar-horizontal {\n    left: 0;\n    height: 11px;\n    left: 0px;\n    height: 11px;\n}\n\n.sidebar-track.sidebar-vertical {\n    top: 0;\n    width: 11px;\n    top: 0px;\n    width: 11px;\n}\n\n.sidebar-height-auto-observer-wrapper {\n    height: 100%;\n    width: 100%;\n    max-width: 1px;\n    position: relative;\n    float: left;\n    max-height: 1px;\n    overflow: hidden;\n    z-index: -1;\n    padding: 0;\n    margin: 0;\n    pointer-events: none;\n    flex-shrink: 0;\n    flex-basis: 0;\n    height: 100%;\n    width: 100%;\n    max-width: 1px;\n    position: relative;\n    float: left;\n    max-height: 1px;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    z-index: -1;\n    padding-top: 0px;\n    padding-right: 0px;\n    padding-bottom: 0px;\n    padding-left: 0px;\n    margin-top: 0px;\n    margin-right: 0px;\n    margin-bottom: 0px;\n    margin-left: 0px;\n    pointer-events: none;\n    flex-shrink: 0;\n    flex-basis: 0px;\n}\n\n.sidebar-mask {\n    position: absolute;\n    overflow: hidden;\n    padding: 0;\n    margin: 0;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n    width: auto !important;\n    height: auto !important;\n    z-index: 0;\n    position: absolute;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    padding-top: 0px;\n    padding-right: 0px;\n    padding-bottom: 0px;\n    padding-left: 0px;\n    margin-top: 0px;\n    margin-right: 0px;\n    margin-bottom: 0px;\n    margin-left: 0px;\n    left: 0px;\n    top: 0px;\n    bottom: 0px;\n    right: 0px;\n    z-index: 0;\n    width: auto !important;\n    height: auto !important;\n}\n\n.sidebar-placeholder {\n    max-height: 100%;\n    max-width: 100%;\n    width: 100%;\n    pointer-events: none;\n    max-height: 100%;\n    max-width: 100%;\n    width: 100%;\n    pointer-events: none;\n}\n\n.sidebar-height-auto-observer {\n    display: block;\n    opacity: 0;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 1000%;\n    width: 1000%;\n    min-height: 1px;\n    min-width: 1px;\n    overflow: hidden;\n    pointer-events: none;\n    z-index: -1;\n    display: block;\n    opacity: 0;\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    height: 1000%;\n    width: 1000%;\n    min-height: 1px;\n    min-width: 1px;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    pointer-events: none;\n    z-index: -1;\n}\n\n.sidebar-offset {\n    resize: none !important;\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    padding: 0;\n    margin: 0;\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    bottom: 0px;\n    right: 0px;\n    padding-top: 0px;\n    padding-right: 0px;\n    padding-bottom: 0px;\n    padding-left: 0px;\n    margin-top: 0px;\n    margin-right: 0px;\n    margin-bottom: 0px;\n    margin-left: 0px;\n    resize: none !important;\n}\n\n.sidebar-content-wrapper {\n    box-sizing: border-box !important;\n    position: relative;\n    display: block;\n    height: 100%;\n    width: auto;\n    max-width: 100%;\n    max-height: 100%;\n    scrollbar-width: none;\n    position: relative;\n    display: block;\n    height: 100%;\n    width: auto;\n    max-width: 100%;\n    max-height: 100%;\n    box-sizing: border-box !important;\n}\n\n.sidebar-content-wrapper:-webkit-scrollbar,\n.sidebar-hide-scrollbar:-webkit-scrollbar {\n    width: 0;\n    height: 0;\n    width: 0px;\n    height: 0px;\n}\n\n.sidebar-link-container {\n    margin-top: 20px;\n    margin-bottom: 20px;\n    height: 42px;\n}\n\n#sidebar.sidebar-collapsed .sidebar-link-container:not(.show-collapsed),\n#sidebar.sidebar-collapsed .sidebar-section .sidebar-link-title {\n    display: none;\n}\n\n#sidebar.sidebar-collapsed {\n    width: 68px;\n    text-align: center;\n}\n\n#sidebar.sidebar-collapsed .bb-grey-1-1 {\n    border: none;\n}\n\n#sidebar.sidebar-collapsed .sidebar-wrapper {\n    width: 68px;\n}\n\n#sidebar.sidebar-collapsed .sidebar-link {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 0;\n}\n\n.sidebar-content:before,\n.sidebar-content:after {\n    content: \" \";\n    display: table;\n    content: \" \";\n    display: table;\n}\n\n.bb-grey-1-1 {\n    border-bottom: 1px solid #e5e8e8;\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-bottom-color: rgb(229, 232, 232);\n}\n\n.flex-row.align-v-center {\n    align-items: center;\n    align-items: center;\n}\n\n#sidebar .sidebar-header {\n    display: none;\n    padding-top: 12px;\n    padding-bottom: 11px;\n    display: none;\n    padding-top: 12px;\n    padding-bottom: 11px;\n}\n/*\n#sidebar .sidebar-section {\n    padding-top: 10px;\n    padding-bottom: 10px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n}\n*/\n#sidebar .sidebar-header #sidebar-close {\n    font-size: 22px;\n    line-height: 0.8;\n    padding-left: 20px;\n    padding-right: 20px;\n    cursor: pointer;\n    font-size: 22px;\n    line-height: 0.8;\n    padding-left: 20px;\n    padding-right: 20px;\n    cursor: pointer;\n}\n\n#sidebar .sidebar-header .sidebar-header-inner {\n    width: 110px;\n    width: 110px;\n}\n\n.fal {\n    display: inline-block;\n    font-style: normal;\n    font-variant: normal;\n    text-rendering: auto;\n    line-height: 1;\n    display: inline-block;\n    font-style: normal;\n    font-variant-ligatures: normal;\n    font-variant-caps: normal;\n    font-variant-numeric: normal;\n    font-variant-east-asian: normal;\n    text-rendering: auto;\n    line-height: 1;\n}\n\n.fal {\n    font-weight: 300;\n    font-weight: 300;\n}\n\n.fal {\n    font-family: \"Font Awesome 5 Pro\";\n    font-family: \"Font Awesome 5 Pro\";\n}\n\n.fa-times:before {\n    content: \"\\f00d\";\n    content: \"\";\n}\n\nimg {\n    border-style: none;\n    border-top-style: none;\n    border-right-style: none;\n    border-bottom-style: none;\n    border-left-style: none;\n}\n\nimg {\n    max-width: 100%;\n    height: auto;\n    min-height: 1px;\n    max-width: 100%;\n    height: auto;\n    min-height: 1px;\n}\n\na {\n    background-color: transparent;\n    background-color: transparent;\n}\n\na {\n    cursor: pointer;\n    cursor: pointer;\n}\n\na {\n    color: #0b76db;\n    color: rgb(11, 118, 219);\n}\n\n.pl-3 {\n    padding-left: 1.875rem;\n    padding-left: 1.875rem;\n}\n\n.body {\n    font: 400 16px/1.5em Open Sans, sans-serif;\n    font-style: normal;\n    font-variant-caps: normal;\n    font-variant-ligatures: normal;\n    font-variant-numeric: normal;\n    font-variant-east-asian: normal;\n    font-weight: 400;\n    font-stretch: normal;\n    font-size: 16px;\n    line-height: 1.5em;\n    font-family: \"Open Sans\", sans-serif;\n}\n\na.no-decoration {\n    text-decoration: none;\n    text-decoration-line: none;\n    text-decoration-thickness: initial;\n    text-decoration-style: initial;\n    text-decoration-color: initial;\n}\n\n#sidebar .sidebar-link {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    font-family: Open Sans;\n    font-size: 14px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 21px;\n    letter-spacing: 0em;\n}\n\n#sidebar .sidebar-link.active.drumeo {\n    color: #0b76db;\n    color: rgb(11, 118, 219);\n}\n\n#sidebar .sidebar-link .sidebar-link-icon {\n    display: inline-block;\n    justify-content: center;\n    vertical-align: middle;\n    font-size: 16px;\n    line-height: 1em;\n    width: 40px;\n    display: inline-block;\n    vertical-align: middle;\n    font-size: 16px;\n    line-height: 1em;\n    width: 40px;\n}\n\n#sidebar .sidebar-link .sidebar-link-title {\n    vertical-align: middle;\n    font-size: 14px;\n    line-height: 1em;\n    vertical-align: middle;\n    font-size: 14px;\n    line-height: 1em;\n}\n\n#sidebar .sidebar-link.active .sidebar-link-title {\n    font-weight: 550;\n    font-weight: 550;\n}\n\n.text-white {\n    color: #fff;\n    color: rgb(255, 255, 255);\n}\n\n.corners-10 {\n    border-radius: 10px;\n    border-top-left-radius: 10px;\n    border-top-right-radius: 10px;\n    border-bottom-right-radius: 10px;\n    border-bottom-left-radius: 10px;\n}\nmm\n#sidebar .sidebar-link #sidebar-live-badge {\n    display: none;\n    vertical-align: middle;\n    font-size: 10px;\n    line-height: 1em;\n    background: #f71b26;\n    padding: 4px;\n    margin-left: 5px;\n    font-weight: 600;\n    display: none;\n    vertical-align: middle;\n    font-size: 10px;\n    line-height: 1em;\n    background-image: initial;\n    background-position-x: initial;\n    background-position-y: initial;\n    background-size: initial;\n    background-repeat-x: initial;\n    background-repeat-y: initial;\n    background-attachment: initial;\n    background-origin: initial;\n    background-clip: initial;\n    background-color: rgb(247, 27, 38);\n    padding-top: 4px;\n    padding-right: 4px;\n    padding-bottom: 4px;\n    padding-left: 4px;\n    margin-left: 5px;\n    font-weight: 600;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n@media screen and (min-width: 64rem) {\n    #sidebar {\n        display: block;\n    }\n}\n\n@media screen and (max-width: 64rem) {\n    #sidebar.sidebar-collapsed {\n        display: none;\n    }\n}\n\n.sidebar-track {\n    z-index: 1;\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    pointer-events: none;\n    overflow: hidden;\n    z-index: 1;\n    pointer-events: none;\n    overflow-x: hidden;\n}\n\n.sidebar-track.sidebar-horizontal {\n    left: 0;\n    height: 11px;\n    left: 0px;\n    height: 11px;\n}\n\n.sidebar-track.sidebar-vertical {\n    top: 0;\n    width: 11px;\n    top: 0px;\n    width: 11px;\n}\n\n.sidebar-height-auto-observer-wrapper {\n    height: 100%;\n    width: 100%;\n    max-width: 1px;\n    position: relative;\n    float: left;\n    max-height: 1px;\n    overflow: hidden;\n    z-index: -1;\n    padding: 0;\n    margin: 0;\n    pointer-events: none;\n    flex-shrink: 0;\n    flex-basis: 0;\n    height: 100%;\n    width: 100%;\n    max-width: 1px;\n    position: relative;\n    float: left;\n    max-height: 1px;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    z-index: -1;\n    padding-top: 0px;\n    padding-right: 0px;\n    padding-bottom: 0px;\n    padding-left: 0px;\n    margin-top: 0px;\n    margin-right: 0px;\n    margin-bottom: 0px;\n    margin-left: 0px;\n    pointer-events: none;\n    flex-shrink: 0;\n    flex-basis: 0px;\n}\n\n.sidebar-mask {\n    position: absolute;\n    overflow: hidden;\n    padding: 0;\n    margin: 0;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n    width: auto !important;\n    height: auto !important;\n    z-index: 0;\n    position: absolute;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    padding-top: 0px;\n    padding-right: 0px;\n    padding-bottom: 0px;\n    padding-left: 0px;\n    margin-top: 0px;\n    margin-right: 0px;\n    margin-bottom: 0px;\n    margin-left: 0px;\n    left: 0px;\n    top: 0px;\n    bottom: 0px;\n    right: 0px;\n    z-index: 0;\n    width: auto !important;\n    height: auto !important;\n}\n\n.sidebar-placeholder {\n    max-height: 100%;\n    max-width: 100%;\n    width: 100%;\n    pointer-events: none;\n    max-height: 100%;\n    max-width: 100%;\n    width: 100%;\n    pointer-events: none;\n}\n\n.sidebar-height-auto-observer {\n    display: block;\n    opacity: 0;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 1000%;\n    width: 1000%;\n    min-height: 1px;\n    min-width: 1px;\n    overflow: hidden;\n    pointer-events: none;\n    z-index: -1;\n    display: block;\n    opacity: 0;\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    height: 1000%;\n    width: 1000%;\n    min-height: 1px;\n    min-width: 1px;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    pointer-events: none;\n    z-index: -1;\n}\n\n.sidebar-offset {\n    resize: none !important;\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    padding: 0;\n    margin: 0;\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    bottom: 0px;\n    right: 0px;\n    padding-top: 0px;\n    padding-right: 0px;\n    padding-bottom: 0px;\n    padding-left: 0px;\n    margin-top: 0px;\n    margin-right: 0px;\n    margin-bottom: 0px;\n    margin-left: 0px;\n    resize: none !important;\n}\n\n.sidebar-content-wrapper {\n    box-sizing: border-box !important;\n    position: relative;\n    display: block;\n    height: 100%;\n    width: auto;\n    max-width: 100%;\n    max-height: 100%;\n    scrollbar-width: none;\n    position: relative;\n    display: block;\n    height: 100%;\n    width: auto;\n    max-width: 100%;\n    max-height: 100%;\n    box-sizing: border-box !important;\n}\n\n.sidebar-content-wrapper:-webkit-scrollbar,\n.sidebar-hide-scrollbar:-webkit-scrollbar {\n    width: 0;\n    height: 0;\n    width: 0px;\n    height: 0px;\n}\n\n.sidebar-link-container {\n    margin-top: 20px;\n    margin-bottom: 20px;\n    height: 42px;\n}\n\n#sidebar.sidebar-collapsed .sidebar-link-container:not(.show-collapsed),\n#sidebar.sidebar-collapsed .sidebar-section .sidebar-link-title {\n    display: none;\n}\n\n#sidebar.sidebar-collapsed {\n    width: 68px;\n    text-align: center;\n}\n\n#sidebar.sidebar-collapsed .bb-grey-1-1 {\n    border: none;\n}\n\n#sidebar.sidebar-collapsed .sidebar-link {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    padding: 0;\n}\n\n.sidebar-content:before,\n.sidebar-content:after {\n    content: \" \";\n    display: table;\n    content: \" \";\n    display: table;\n}\n\n.bb-grey-1-1 {\n    border-bottom: 1px solid #e5e8e8;\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-bottom-color: rgb(229, 232, 232);\n}\n\n.flex-row.align-v-center {\n    align-items: center;\n    align-items: center;\n}\n\n#sidebar .sidebar-header {\n    display: none;\n    padding-top: 12px;\n    padding-bottom: 11px;\n    display: none;\n    padding-top: 12px;\n    padding-bottom: 11px;\n}\n/*\n#sidebar .sidebar-section {\n    padding-top: 10px;\n    padding-bottom: 10px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n}\n*/\n#sidebar .sidebar-header #sidebar-close {\n    font-size: 22px;\n    line-height: 0.8;\n    padding-left: 20px;\n    padding-right: 20px;\n    cursor: pointer;\n    font-size: 22px;\n    line-height: 0.8;\n    padding-left: 20px;\n    padding-right: 20px;\n    cursor: pointer;\n}\n\n#sidebar .sidebar-header .sidebar-header-inner {\n    width: 110px;\n    width: 110px;\n}\n\n.fal {\n    display: inline-block;\n    font-style: normal;\n    font-variant: normal;\n    text-rendering: auto;\n    line-height: 1;\n    display: inline-block;\n    font-style: normal;\n    font-variant-ligatures: normal;\n    font-variant-caps: normal;\n    font-variant-numeric: normal;\n    font-variant-east-asian: normal;\n    text-rendering: auto;\n    line-height: 1;\n}\n\n.fal {\n    font-weight: 300;\n    font-weight: 300;\n}\n\n.fal {\n    font-family: \"Font Awesome 5 Pro\";\n    font-family: \"Font Awesome 5 Pro\";\n}\n\n.fa-times:before {\n    content: \"\\f00d\";\n    content: \"\";\n}\n\nimg {\n    border-style: none;\n    border-top-style: none;\n    border-right-style: none;\n    border-bottom-style: none;\n    border-left-style: none;\n}\n\nimg {\n    max-width: 100%;\n    height: auto;\n    min-height: 1px;\n    max-width: 100%;\n    height: auto;\n    min-height: 1px;\n}\n\na {\n    background-color: transparent;\n    background-color: transparent;\n}\n\na {\n    cursor: pointer;\n    cursor: pointer;\n}\n\na {\n    color: #0b76db;\n    color: rgb(11, 118, 219);\n}\n\n.pl-3 {\n    padding-left: 1.875rem;\n    padding-left: 1.875rem;\n}\n\n.body {\n    font: 400 16px/1.5em Open Sans, sans-serif;\n    font-style: normal;\n    font-variant-caps: normal;\n    font-variant-ligatures: normal;\n    font-variant-numeric: normal;\n    font-variant-east-asian: normal;\n    font-weight: 400;\n    font-stretch: normal;\n    font-size: 16px;\n    line-height: 1.5em;\n    font-family: \"Open Sans\", sans-serif;\n}\n\na.no-decoration {\n    text-decoration: none;\n    text-decoration-line: none;\n    text-decoration-thickness: initial;\n    text-decoration-style: initial;\n    text-decoration-color: initial;\n}\n\n#sidebar .sidebar-link {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    font-family: Open Sans;\n    font-size: 14px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 21px;\n    letter-spacing: 0em;\n}\n\n#sidebar .sidebar-link.active.drumeo {\n    color: #0b76db;\n    color: rgb(11, 118, 219);\n}\n\n#sidebar .sidebar-link .sidebar-link-icon {\n    display: inline-block;\n    justify-content: center;\n    vertical-align: middle;\n    font-size: 16px;\n    line-height: 1em;\n    width: 40px;\n    display: inline-block;\n    vertical-align: middle;\n    font-size: 16px;\n    line-height: 1em;\n    width: 40px;\n}\n\n#sidebar .sidebar-link .sidebar-link-title {\n    vertical-align: middle;\n    font-size: 14px;\n    line-height: 1em;\n    vertical-align: middle;\n    font-size: 14px;\n    line-height: 1em;\n}\n\n#sidebar .sidebar-link.active .sidebar-link-title {\n    font-weight: 550;\n    font-weight: 550;\n}\n\n.text-white {\n    color: #fff;\n    color: rgb(255, 255, 255);\n}\n\n.corners-10 {\n    border-radius: 10px;\n    border-top-left-radius: 10px;\n    border-top-right-radius: 10px;\n    border-bottom-right-radius: 10px;\n    border-bottom-left-radius: 10px;\n}\nmm\n#sidebar .sidebar-link #sidebar-live-badge {\n    display: none;\n    vertical-align: middle;\n    font-size: 10px;\n    line-height: 1em;\n    background: #f71b26;\n    padding: 4px;\n    margin-left: 5px;\n    font-weight: 600;\n    display: none;\n    vertical-align: middle;\n    font-size: 10px;\n    line-height: 1em;\n    background-image: initial;\n    background-position-x: initial;\n    background-position-y: initial;\n    background-size: initial;\n    background-repeat-x: initial;\n    background-repeat-y: initial;\n    background-attachment: initial;\n    background-origin: initial;\n    background-clip: initial;\n    background-color: rgb(247, 27, 38);\n    padding-top: 4px;\n    padding-right: 4px;\n    padding-bottom: 4px;\n    padding-left: 4px;\n    margin-left: 5px;\n    font-weight: 600;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
