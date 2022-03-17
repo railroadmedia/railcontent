@@ -176,6 +176,13 @@ class MigrateContentToElasticsearch extends Command
                                 ->orderBy('id', 'asc')
                                 ->get();
 
+                        $focus =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_focus')
+                                ->select('focus')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
+
                         $params1['body'][] = [
                             'index' => [
                                 '_index' => 'content',
@@ -196,7 +203,6 @@ class MigrateContentToElasticsearch extends Command
                             ) : [],
                             'artist' => $row->artist,
                             'content_type' => $row->type,
-                            'staff_pick_rating' => $row->staff_pick_rating,
                             'bpm' => (!$bpm->isEmpty()) ? array_map(
                                 'strtolower',
                                 $bpm->pluck('bpm')
@@ -210,11 +216,6 @@ class MigrateContentToElasticsearch extends Command
                                 $topics->pluck('topic')
                                     ->toArray()
                             ) : [],
-                            'tag' => (!$tags->isEmpty()) ? array_map(
-                                'strtolower',
-                                $tags->pluck('tag')
-                                    ->toArray()
-                            ) : [],
                             'instructor' => $instructors->pluck('instructor_id')
                                 ->toArray(),
                             'instructors_name' => array_map(
@@ -225,12 +226,19 @@ class MigrateContentToElasticsearch extends Command
                             'all_progress_count' => $allProgressCount,
                             'last_week_progress_count' => $lastWeekProgressCount,
                             'description' => $description->value ?? '',
-                            'parent_id' => ($parent) ? $parent->parent_id : null,
-                            'parent_slug' => $parentSlug,
-                            'playlist_ids' => $userPlaylists->pluck('user_playlist_id')
-                                ->toArray(),
                             'permission_ids' => $permissions->pluck('permission_id')
                                 ->toArray(),
+                            'focus' => (!$focus->isEmpty()) ? array_map(
+                                'strtolower',
+                                $focus->pluck('focus')
+                                    ->toArray()
+                            ) : [],
+                            'is_coach' => $row->is_coach,
+                            'is_coach_of_the_month' => $row->is_coach_of_the_month,
+                            'is_active' => $row->is_active,
+                            'is_featured' => $row->is_featured,
+                            'name' => $row->name,
+
                         ];
                     }
 
