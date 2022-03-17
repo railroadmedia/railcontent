@@ -74,6 +74,7 @@ class ElasticService
                             'all_progress_count' => ['type' => 'integer'],
                             'last_week_progress_count' => ['type' => 'integer'],
                             'permission_ids' => ['type' => 'text'],
+                            'focus' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                         ],
                     ],
                 ],
@@ -126,44 +127,46 @@ class ElasticService
         array $followedContents = []
     ) {
         $client = $this->getClient();
+        if ($client->indices()
+            ->exists(['index' => 'content'])) {
+            $searchQuery =
+                $this->build()
+                    ->restrictByUserStates($requiredContentIdsByState)
+                    ->restrictByUserAccess()
+                    ->restrictByTypes($includedTypes)
+                    ->includeByUserStates($includedContentsIdsByState)
+                    ->includeByFields($includedFields)
+                    ->restrictByParentIds($requiredParentIds)
+                    ->restrictBySlugHierarchy($slugHierarchy)
+                    ->restrictByPlaylistIds($requiredUserPlaylistIds)
+                    ->restrictFollowedContent($followedContents)
+                    ->restrictByFields($requiredFields);
+            if ($searchTerm) {
+                $searchQuery->restrictByTerm(explode(' ', strtolower($searchTerm)));
+            }
+            $searchQuery->sortResults($sort);
 
-        $searchQuery =
-            $this->build()
-                ->restrictByUserStates($requiredContentIdsByState)
-                ->restrictByUserAccess()
-                ->restrictByTypes($includedTypes)
-                ->includeByUserStates($includedContentsIdsByState)
-                ->includeByFields($includedFields)
-                ->restrictByParentIds($requiredParentIds)
-                ->restrictBySlugHierarchy($slugHierarchy)
-                ->restrictByPlaylistIds($requiredUserPlaylistIds)
-                ->restrictFollowedContent($followedContents)
-                ->restrictByFields($requiredFields);
-        if ($searchTerm) {
-            $searchQuery->restrictByTerm(explode(' ', strtolower($searchTerm)));
-        }
-        $searchQuery->sortResults($sort);
-
-        $params = [
-            'index' => 'content',
-            'body' => [
-                'query' => [
-                    'function_score' => [
-                        'query' => [
-                            'bool' => [
-                                'must' => $searchQuery->getMust(),
+            $params = [
+                'index' => 'content',
+                'body' => [
+                    'query' => [
+                        'function_score' => [
+                            'query' => [
+                                'bool' => [
+                                    'must' => $searchQuery->getMust(),
+                                ],
                             ],
+                            'functions' => $searchQuery->getFilters(),
                         ],
-                        'functions' => $searchQuery->getFilters(),
                     ],
+                    'sort' => $searchQuery->getSort(),
+                    'from' => ($page - 1) * $limit,
+                    'size' => $limit,
                 ],
-                'sort' => $searchQuery->getSort(),
-                'from' => ($page - 1) * $limit,
-                'size' => $limit,
-            ],
-        ];
+            ];
 
-        return $client->search($params);
+            return $client->search($params);
+        }
     }
 
     /**
@@ -329,6 +332,7 @@ class ElasticService
 
     public function deleteIndex($indexName){
         $client = $this->getClient();
+
         $client->indices()->delete(['index' => $indexName]);
     }
 }
