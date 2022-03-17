@@ -96,8 +96,8 @@ class ContentFollowsService
         $this->entityManager->persist($contentFollows);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $contentId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $contentId);
 
         return $contentFollows;
     }
@@ -129,8 +129,8 @@ class ContentFollowsService
             $this->entityManager->flush();
         }
 
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $contentId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $contentId);
 
         return true;
     }
@@ -157,7 +157,8 @@ class ContentFollowsService
                 ->setParameter('type', $contentType)
                 ->setParameter('user', $userId)
                 ->setMaxResults($limit)
-                ->setFirstResult($first);
+                ->setFirstResult($first)
+                ->orderBy('c.createdOn','desc');
         $contentFollows =
             $qb->getQuery()
                 ->getResult('Railcontent');
