@@ -759,10 +759,6 @@ a:visited {
 .tw-m-0 {
   margin: 0px;
 }
-.tw-my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-}
 .tw-mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -859,9 +855,6 @@ a:visited {
 .tw-h-full {
   height: 100%;
 }
-.tw-h-\[400px\] {
-  height: 400px;
-}
 .tw-h-\[53px\] {
   height: 53px;
 }
@@ -919,9 +912,6 @@ a:visited {
 .tw-w-full {
   width: 100%;
 }
-.tw-w-\[400px\] {
-  width: 400px;
-}
 .tw-w-\[263px\] {
   width: 263px;
 }
@@ -955,6 +945,9 @@ a:visited {
 .tw-w-auto {
   width: auto;
 }
+.tw-w-screen {
+  width: 100vw;
+}
 .tw-w-\[32px\] {
   width: 32px;
 }
@@ -966,9 +959,6 @@ a:visited {
 }
 .tw-w-\[543px\] {
   width: 543px;
-}
-.tw-w-screen {
-  width: 100vw;
 }
 .tw-max-w-\[624px\] {
   max-width: 624px;
@@ -1018,9 +1008,6 @@ a:visited {
   overflow-wrap: normal;
   word-break: normal;
 }
-.tw-rounded-2xl {
-  border-radius: 1rem;
-}
 .tw-rounded-\[6px\] {
   border-radius: 6px;
 }
@@ -1035,9 +1022,6 @@ a:visited {
 }
 .tw-rounded-lg {
   border-radius: 0.5rem;
-}
-.tw-border-2 {
-  border-width: 2px;
 }
 .tw-border {
   border-width: 1px;

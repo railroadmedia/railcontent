@@ -38,6 +38,7 @@ export default {
             if (typeof val === 'string') {
                 brand.value = val;
                 urlSearchParams.set('brand', val);
+                //if using router
                 router.push({path:'/members', query:{brand: val}})
             }
         }
@@ -57,7 +58,15 @@ export default {
         const urlSearchParams = new URLSearchParams(window.location.search)
         const brandParam = urlSearchParams.get('brand');
         this.brand = brandParam || 'drumeo';
-        console.log('brandParam:', brandParam)
+    },
+
+    created() {
+        this.$watch(
+            () => this.$route.query,
+            (toParams, previousParams) => {
+                this.brand = this.$route.query.brand;
+            }
+        )
     },
 }
 </script>

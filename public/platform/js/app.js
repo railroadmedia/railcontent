@@ -20982,7 +20982,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (typeof val === 'string') {
         brand.value = val;
-        urlSearchParams.set('brand', val);
+        urlSearchParams.set('brand', val); //if using router
+
         router.push({
           path: '/members',
           query: {
@@ -21006,7 +21007,15 @@ __webpack_require__.r(__webpack_exports__);
     var urlSearchParams = new URLSearchParams(window.location.search);
     var brandParam = urlSearchParams.get('brand');
     this.brand = brandParam || 'drumeo';
-    console.log('brandParam:', brandParam);
+  },
+  created: function created() {
+    var _this = this;
+
+    this.$watch(function () {
+      return _this.$route.query;
+    }, function (toParams, previousParams) {
+      _this.brand = _this.$route.query.brand;
+    });
   }
 });
 
