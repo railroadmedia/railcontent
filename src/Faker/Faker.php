@@ -240,4 +240,18 @@ class Faker extends Generator
             $override
         );
     }
+
+    public function contentBpm(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'bpm' => $this->word(),
+                'position' => $this->randomNumber(),
+            ],
+            $override
+        );
+    }
+
+
 }

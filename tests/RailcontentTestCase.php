@@ -688,6 +688,7 @@ class RailcontentTestCase extends BaseTestCase
         $contentData['topic'] = new ArrayCollection();
         $contentData['data'] = new ArrayCollection();
         $contentData['tag'] = new ArrayCollection();
+        $contentData['bpm'] = new ArrayCollection();
         $contentData['archivedOn'] = null;
 
         if (array_key_exists('userId', $contentData)) {
@@ -995,5 +996,18 @@ class RailcontentTestCase extends BaseTestCase
         $contentFollow['id'] = $contentFollowId;
 
         return $contentFollow;
+    }
+
+    public function fakeContentBpm($bpm = [])
+    {
+        $contentBpm = $this->faker->contentBpm($bpm);
+
+        $contentBpmId =
+            $this->databaseManager->table('railcontent_content_bpm')
+                ->insertGetId($contentBpm);
+
+        $contentBpm['id'] = $contentBpmId;
+
+        return $contentBpm;
     }
 }
