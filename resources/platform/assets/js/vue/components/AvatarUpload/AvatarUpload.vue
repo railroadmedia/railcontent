@@ -1,8 +1,17 @@
 <script setup>
 import { ref } from 'vue'
 //import { UserIcon } from '@heroicons/vue/solid'
+import ImageDropzone from '../ImageDropzone/ImageDropzone.vue'
 import ImageUploader from '../ImageUploader/ImageUploader.vue'
+import InfoModal from '../Modal/InfoModal.vue'
 import UserIcon from './UserIcon.vue'
+
+const title = {
+    dropzone: 'Upload Image'
+};
+
+const showUploadForm = ref(false)
+const uploadStep = ref('dropzone')
 
 const props = defineProps({
     brand: {
@@ -15,12 +24,15 @@ const props = defineProps({
     }
 })
 function openUploadForm() {
-    alert('display form and upload pic')
+    showUploadForm.value = !showUploadForm.value
 }
 </script>
 
 <template>
     <div class="">
+        <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]">
+            <ImageDropzone />
+        </InfoModal>
         <button
             class="tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039]"
             v-on:click="openUploadForm"
