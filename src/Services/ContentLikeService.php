@@ -143,8 +143,8 @@ class ContentLikeService
         $this->entityManager->persist($contentLikes);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $contentId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $contentId);
 
         return $contentLikes;
     }
@@ -174,8 +174,8 @@ class ContentLikeService
             $this->entityManager->flush();
         }
 
-        $this->entityManager->getCache()
-            ->evictEntity(Content::class, $contentId);
+//        $this->entityManager->getCache()
+//            ->evictEntity(Content::class, $contentId);
 
         return true;
     }

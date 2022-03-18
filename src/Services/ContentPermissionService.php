@@ -108,10 +108,10 @@ class ContentPermissionService
 
         $q->execute();
 
-        $this->entityManager->getCache()->getQueryCache('pull')->clear();
-
-        $this->entityManager->getCache()
-            ->evictQueryRegion('pull');
+//        $this->entityManager->getCache()->getQueryCache('pull')->clear();
+//
+//        $this->entityManager->getCache()
+//            ->evictQueryRegion('pull');
 
         return true;
     }
@@ -146,10 +146,10 @@ class ContentPermissionService
 //        $this->entityManager->getCache()
 //            ->evictEntityRegion(Content::class);
 
-        $this->entityManager->getCache()->getQueryCache('pull')->clear();
-
-        $this->entityManager->getCache()
-            ->evictQueryRegion('pull');
+//        $this->entityManager->getCache()->getQueryCache('pull')->clear();
+//
+//        $this->entityManager->getCache()
+//            ->evictQueryRegion('pull');
 
         return $contentPermission;
     }
