@@ -50,7 +50,7 @@ export default {
                 ref="cropper"
                 class="upload-example-cropper"
                 :src="image"
-                :stencil-component="$options.components.Stencil"
+                :stencil-component="Stencil"
             />
             <div class="button-wrapper">
                 <span class="button" @click="$refs.file.click()">

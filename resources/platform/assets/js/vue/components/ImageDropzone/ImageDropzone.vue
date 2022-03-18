@@ -70,7 +70,7 @@ function handleDrop(e) {
             v-on:click="handleDropzoneClick"
             class="tw-absolute tw-h-full tw-w-full tw-bg-transparent tw-z-40"
         />
-        <div v-if="dragged" class="tw-absolute tw-h-full tw-w-full tw-bg-white tw-bg-opacity-30 tw-flex tw-items-center tw-justify-center tw-rounded-[6px] tw-text-[#222222] tw-text-2xl">
+        <div v-if="dragged" class="tw-absolute tw-h-full tw-w-full tw-bg-black tw-bg-opacity-40 tw-flex tw-items-center tw-justify-center tw-rounded-[6px] tw-text-white tw-text-2xl">
             Drop image
         </div>
         <div class="tw-flex tw-w-full tw-h-full tw-flex-col">

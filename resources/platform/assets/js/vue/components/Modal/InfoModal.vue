@@ -42,7 +42,7 @@ export default {
         <div
             class="tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
         >
-            <div class="tw-w-[750px] tw-bg-[#081825] tw-rounded-[8px] tw-z-30 tw-py-[24px] tw-flex tw-flex-col">
+            <div class="tw-w-[750px] tw-bg-[#081825] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col">
                 <div class="tw-flex tw-flex-row tw-justify-between tw-text-white tw-mb-[24px] tw-px-[40px]">
                     <h3>{{ title }}</h3><button @click="onClose" class="tw-self-end"><XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" /></button>
                 </div>

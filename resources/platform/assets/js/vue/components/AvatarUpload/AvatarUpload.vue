@@ -5,13 +5,19 @@ import ImageDropzone from '../ImageDropzone/ImageDropzone.vue'
 import ImageUploader from '../ImageUploader/ImageUploader.vue'
 import InfoModal from '../Modal/InfoModal.vue'
 import UserIcon from './UserIcon.vue'
+import { Cropper } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css'
+
+import Stencil from './Stencil.vue'
 
 const title = {
-    dropzone: 'Upload Image'
+    dropzone: 'Upload Image',
+    crop: 'Crop your Avatar'
 };
 
 const showUploadForm = ref(false)
 const uploadStep = ref('dropzone')
+const selectedImage = ref(null)
 
 const props = defineProps({
     brand: {
@@ -23,6 +29,12 @@ const props = defineProps({
         default: null
     }
 })
+
+function handleImage(image) {
+    selectedImage.value = image;
+    uploadStep.value = "crop"
+}
+
 function openUploadForm() {
     showUploadForm.value = !showUploadForm.value
 }
@@ -31,7 +43,14 @@ function openUploadForm() {
 <template>
     <div class="">
         <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]">
-            <ImageDropzone />
+            <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
+            <Cropper
+                v-if="uploadStep === 'crop'"
+                ref="cropper"
+                class="upload-example-cropper"
+                :src="selectedImage"
+                :stencil-component="Stencil"
+            />
         </InfoModal>
         <button
             class="tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039]"
