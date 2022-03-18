@@ -3,10 +3,13 @@ import SidebarContainer from './SidebarContainer.vue'
 import SidebarSection from './SidebarSection.vue'
 import SidebarLink from './SidebarLink.vue'
 import { textColor, borderColor } from '../../constants/brands.js'
+//Icons
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
+import SpriteSheet from '../MusoraIcons/SpriteSheet.vue'
 
 export default {
   name: 'Sidebar',
-  components: { SidebarContainer, SidebarSection, SidebarLink },
+  components: { SidebarContainer, SidebarSection, SidebarLink, SpriteSheet, MusoraIcon },
   props: ['brand', 'isSidebarCollapsed'],
   setup() {
     return {
@@ -22,25 +25,25 @@ export default {
             {
               name: 'Home',
               url: '/members',
-              icon: '',
+              icon: 'home',
               active: true,
             },
             {
               name: 'Method',
               url: '/members/method',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Songs',
               url: '/members/songs',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Coaches',
               url: '/members/coaches',
-              icon: '',
+              icon: 'home',
               active: false,
             }
           ]
@@ -50,25 +53,25 @@ export default {
             {
               name: 'Packs',
               url: '/members/packs',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Quick Tips',
               url: '/members/quick-tips',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Student Focus',
               url: '/members/student-focus',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Live',
               url: '/members/live',
-              icon: '',
+              icon: 'home',
               active: false,
             },
           ]
@@ -81,8 +84,8 @@ export default {
             {
               name: 'Routines',
               url: '/members/routines',
-              icon: '',
-              active: true,
+              icon: 'home',
+              active: false,
             },
           ]
         },
@@ -92,26 +95,26 @@ export default {
             {
               name: 'Lessons',
               url: '/members/lessons',
-              icon: '',
-              active: true,
+              icon: 'home',
+              active: false,
             },
             {
               name: 'Play Alongs',
               url: '/members/lessons',
-              icon: '',
-              active: true,
+              icon: 'home',
+              active: false,
             },
             {
               name: 'Chords & Scales',
               url: '/members/chords-scales',
-              icon: '',
-              active: true,
+              icon: 'home',
+              active: false,
             },
             {
               name: 'Archives',
               url: '/members/archives',
-              icon: '',
-              active: true,
+              icon: 'home',
+              active: false,
             },
           ]
         },
@@ -121,19 +124,19 @@ export default {
             {
               name: 'Foundation',
               url: '/members/foundation',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Podcast',
               url: '/members/podcast',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Bootcamps',
               url: '/members/bootcamps',
-              icon: '',
+              icon: 'home',
               active: false,
             },
           ]
@@ -144,19 +147,19 @@ export default {
             {
               name: 'Play-Alongs',
               url: '/members/play-alongs',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Rudiments',
               url: '/members/rudiments',
-              icon: '',
+              icon: 'home',
               active: false,
             },
             {
               name: 'Shows',
               url: '/members/shows',
-              icon: '',
+              icon: 'home',
               active: false,
             },
           ]
@@ -170,6 +173,8 @@ export default {
 <template>
   <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed" :brand="brand">
     
+    <sprite-sheet></sprite-sheet>
+    
     <!-- Sidebar Search -->
     <div class="tw-p-4 tw-relative">
       <i class=""></i>
@@ -181,23 +186,27 @@ export default {
       <ul>
         <li v-for="(link, j) in section.links" :key="j" :class="[link.active ? ` ${textColor[brand]}` : '']">
           <a :href="`${link.url}?brand=${brand}`" 
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-4"
-             :class="[link.active ? `tw-border-l-4 tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-text-[#00101D] dark:tw-text-white' ]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 "
+             :class="[link.active ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
-             {{ link.name }}
+              <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
+
+             <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
           </a>
         </li>
       </ul>
     </section>
-
 
     <!-- Brand Specific Links -->
     <section v-for="(section, i) in brandSections" :key="i">
       <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
         <li v-for="(link, j) in section.links" :key="j" >
           <a :href="`${link.url}?brand=${brand}`"  
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-4 tw-text-[#00101D] dark:tw-text-white ">
-             {{ link.name }}
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4"
+             :class="[link.active ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+          >
+            <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
+            <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
           </a>
         </li>
       </ul>
@@ -208,8 +217,11 @@ export default {
       <ul>
         <li>
           <a :href=" `/members/forums?brand=${brand }` " 
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-4 tw-text-[#00101D] dark:tw-text-white ">
-             Forums
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4"
+             :class="[active ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+          >
+             <musora-icon icon-name="home" class="tw-mx-4"/>
+             <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">Forums</span>
           </a>
         </li>
       </ul>
@@ -217,8 +229,11 @@ export default {
 
     <!-- Playlists -->
     <section>
-      <div class="tw-h-[42px] tw-flex tw-items-center tw-pl-4">
-        <p class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white">Playlists</p>
+      <div class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 tw-border-transparent">
+        <p class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-flex">
+          <musora-icon icon-name="home" class="tw-mx-4"/>
+          <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">Playlists</span>
+        </p>
       </div>
       <!-- Loop through User Playlist -->
     </section>

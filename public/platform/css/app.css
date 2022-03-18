@@ -744,14 +744,14 @@ a:visited {
 .tw-top-0 {
   top: 0px;
 }
+.tw-left-0 {
+  left: 0px;
+}
 .tw-right-0 {
   right: 0px;
 }
 .tw-bottom-0 {
   bottom: 0px;
-}
-.tw-left-0 {
-  left: 0px;
 }
 .tw-z-10 {
   z-index: 10;
@@ -776,6 +776,10 @@ a:visited {
 .tw-mx-\[7px\] {
   margin-left: 7px;
   margin-right: 7px;
+}
+.tw-mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .tw-mb-4 {
   margin-bottom: 1rem;
@@ -909,11 +913,11 @@ a:visited {
 .tw-h-\[2px\] {
   height: 2px;
 }
-.tw-h-\[calc\(100vh-58px\)\] {
-  height: calc(100vh - 58px);
-}
 .tw-h-\[37px\] {
   height: 37px;
+}
+.tw-h-\[calc\(100vh-58px\)\] {
+  height: calc(100vh - 58px);
 }
 .tw-min-h-screen {
   min-height: 100vh;
@@ -966,14 +970,14 @@ a:visited {
 .tw-w-\[80px\] {
   width: 80px;
 }
-.tw-w-\[543px\] {
-  width: 543px;
+.tw-w-\[68px\] {
+  width: 68px;
 }
 .tw-w-64 {
   width: 16rem;
 }
-.tw-w-\[68px\] {
-  width: 68px;
+.tw-w-\[543px\] {
+  width: 543px;
 }
 .tw-max-w-\[624px\] {
   max-width: 624px;
@@ -1038,11 +1042,11 @@ a:visited {
 .tw-rounded-\[63px\] {
   border-radius: 63px;
 }
-.tw-rounded-lg {
-  border-radius: 0.5rem;
-}
 .tw-rounded {
   border-radius: 0.25rem;
+}
+.tw-rounded-lg {
+  border-radius: 0.5rem;
 }
 .tw-border {
   border-width: 1px;
@@ -1053,13 +1057,13 @@ a:visited {
 .tw-border-t {
   border-top-width: 1px;
 }
-.tw-border-l-\[4px\] {
-  border-left-width: 4px;
-}
 .tw-border-b {
   border-bottom-width: 1px;
 }
 .tw-border-l-4 {
+  border-left-width: 4px;
+}
+.tw-border-l-\[4px\] {
   border-left-width: 4px;
 }
 .tw-border-none {
@@ -1113,10 +1117,6 @@ a:visited {
 }
 .tw-border-transparent {
   border-color: transparent;
-}
-.tw-border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 .tw-bg-singeo {
   --tw-bg-opacity: 1;
@@ -1176,9 +1176,6 @@ a:visited {
 }
 .tw-p-0 {
   padding: 0px;
-}
-.tw-p-3 {
-  padding: 0.75rem;
 }
 .tw-p-4 {
   padding: 1rem;
@@ -1278,6 +1275,12 @@ a:visited {
 .tw-pl-4 {
   padding-left: 1rem;
 }
+.tw-pl-2 {
+  padding-left: 0.5rem;
+}
+.tw-pl-1 {
+  padding-left: 0.25rem;
+}
 .tw-text-left {
   text-align: left;
 }
@@ -1312,6 +1315,14 @@ a:visited {
 .tw-text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+.tw-text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.tw-text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .tw-font-bold {
   font-weight: 700;
@@ -1387,6 +1398,12 @@ a:visited {
 }
 .tw-opacity-90 {
   opacity: 0.9;
+}
+.tw-opacity-0 {
+  opacity: 0;
+}
+.tw-opacity-100 {
+  opacity: 1;
 }
 .tw-blur-sm {
   --tw-blur: blur(4px);
@@ -1538,10 +1555,6 @@ a:visited {
   .md\:tw-px-14 {
     padding-left: 3.5rem;
     padding-right: 3.5rem;
-  }
-  .md\:tw-px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
   }
 }
 @media (min-width: 1024px) {

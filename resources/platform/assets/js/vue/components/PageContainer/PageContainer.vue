@@ -63,6 +63,7 @@ export default {
 
     created() {
         this.$watch(
+            //Watch for changes in route params
             () => this.$route.query,
             (toParams, previousParams) => {
                 this.brand = this.$route.query.brand;

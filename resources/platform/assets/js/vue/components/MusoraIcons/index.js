@@ -12,6 +12,7 @@ import PianoteVue from './Pianote.vue'
 import SingeoVue from './Singeo.vue'
 import SticksVue from './Sticks.vue'
 import WaveVue from './Wave.vue'
+import HomeIcon from './HomeIcon.vue'
 
 export const Drumeo = DrumeoVue
 export const Drums = DrumsVue
@@ -27,3 +28,4 @@ export const Pianote = PianoteVue
 export const Singeo = SingeoVue
 export const Sticks = SticksVue
 export const Wave = WaveVue
+export const HomeIcon = HomeIcon
