@@ -71,7 +71,7 @@ class ContentDatumJsonController extends Controller
      */
     public function store(ContentDatumCreateRequest $request)
     {
-       // $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'create.content.data');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'create.content.data');
 
         $contentData = $this->datumService->create(
             $request->input('data.relationships.content.data.id'),
@@ -99,7 +99,7 @@ class ContentDatumJsonController extends Controller
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
-        //$this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'update.content.data');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'update.content.data');
 
         $contentData = $this->datumService->update(
             $dataId,

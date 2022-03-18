@@ -232,7 +232,7 @@ class ContentJsonController extends Controller
      */
     public function store(ContentCreateRequest $request)
     {
-       // $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'create.content');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'create.content');
 
         $content = $this->contentService->create(
             $request->input('data.attributes.slug'),
@@ -272,7 +272,7 @@ class ContentJsonController extends Controller
     public function update(ContentUpdateRequest $request, $contentId)
     {
 
-      //  $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'update.content');
+        $this->permissionPackageService->canOrThrow($this->userProvider->getCurrentUserId(), 'update.content');
 
         $content = $this->contentService->update(
             $contentId,
