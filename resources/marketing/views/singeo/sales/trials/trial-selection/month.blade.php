@@ -1,0 +1,1 @@
+@extends('singeo.sales.trials.trial-selection.trial-selection-layout')
