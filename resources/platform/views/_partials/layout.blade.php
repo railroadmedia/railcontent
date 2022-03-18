@@ -29,6 +29,7 @@
         <div id="app" class="flex-1">
             <app-container
                 :vue-router="true"
+                brand="{{ $brand }}"
             >
 
                 @yield('layout-body')
