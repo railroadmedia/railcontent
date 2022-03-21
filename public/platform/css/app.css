@@ -818,6 +818,9 @@ a:visited {
 .tw-mt-\[18px\] {
   margin-top: 18px;
 }
+.tw-mr-\[20px\] {
+  margin-right: 20px;
+}
 .tw-mb-\[24px\] {
   margin-bottom: 24px;
 }
@@ -872,6 +875,9 @@ a:visited {
 .tw-block {
   display: block;
 }
+.tw-inline {
+  display: inline;
+}
 .tw-flex {
   display: flex;
 }
@@ -905,11 +911,17 @@ a:visited {
 .tw-h-\[32px\] {
   height: 32px;
 }
-.tw-h-\[42px\] {
-  height: 42px;
+.tw-h-\[25px\] {
+  height: 25px;
 }
 .tw-h-\[30px\] {
   height: 30px;
+}
+.tw-h-\[20px\] {
+  height: 20px;
+}
+.tw-h-\[42px\] {
+  height: 42px;
 }
 .tw-h-4 {
   height: 1rem;
@@ -982,6 +994,15 @@ a:visited {
 }
 .tw-w-\[32px\] {
   width: 32px;
+}
+.tw-w-\[25px\] {
+  width: 25px;
+}
+.tw-w-\[164px\] {
+  width: 164px;
+}
+.tw-w-\[20px\] {
+  width: 20px;
 }
 .tw-w-\[750px\] {
   width: 750px;
@@ -1298,6 +1319,14 @@ a:visited {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.tw-py-\[15px\] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.tw-px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .tw-px-\[13px\] {
   padding-left: 13px;
   padding-right: 13px;
@@ -1384,6 +1413,9 @@ a:visited {
 }
 .tw-text-\[16px\] {
   font-size: 16px;
+}
+.tw-text-\[13px\] {
+  font-size: 13px;
 }
 .tw-text-\[32px\] {
   font-size: 32px;

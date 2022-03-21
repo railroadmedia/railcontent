@@ -24,7 +24,6 @@ function handleFile(file) {
     if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
         var reader = new FileReader();
         reader.addEventListener("load", function () {
-            console.log(this.result)
             emit('onImageSelected', this.result);
         }, false);
         reader.readAsDataURL(file);

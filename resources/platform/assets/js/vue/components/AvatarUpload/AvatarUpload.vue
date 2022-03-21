@@ -1,23 +1,20 @@
 <script setup>
 import { ref } from 'vue'
-//import { UserIcon } from '@heroicons/vue/solid'
 import ImageDropzone from '../ImageDropzone/ImageDropzone.vue'
-import ImageUploader from '../ImageUploader/ImageUploader.vue'
+import ImageCropper from '../ImageCropper/ImageCropper.vue'
 import InfoModal from '../Modal/InfoModal.vue'
 import UserIcon from './UserIcon.vue'
-import { Cropper } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css'
-
-import Stencil from './Stencil.vue'
 
 const title = {
     dropzone: 'Upload Image',
-    crop: 'Crop your Avatar'
+    crop: 'Crop your Avatar',
+    upload: ''
 };
 
 const showUploadForm = ref(false)
 const uploadStep = ref('dropzone')
 const selectedImage = ref(null)
+const croppedImage = ref(null)
 
 const props = defineProps({
     brand: {
@@ -35,8 +32,15 @@ function handleImage(image) {
     uploadStep.value = "crop"
 }
 
+function handleCrop(image) {
+    croppedImage.value = image;
+    uploadStep.value = 'upload';
+}
+
 function openUploadForm() {
     showUploadForm.value = !showUploadForm.value
+    selectedImage.value = null;
+    uploadStep.value = 'dropzone'
 }
 </script>
 
@@ -44,12 +48,10 @@ function openUploadForm() {
     <div class="">
         <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]">
             <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
-            <Cropper
+            <ImageCropper
                 v-if="uploadStep === 'crop'"
-                ref="cropper"
-                class="upload-example-cropper"
-                :src="selectedImage"
-                :stencil-component="Stencil"
+                @onCrop="handleCrop"
+                :selectedImage="selectedImage"
             />
         </InfoModal>
         <button
