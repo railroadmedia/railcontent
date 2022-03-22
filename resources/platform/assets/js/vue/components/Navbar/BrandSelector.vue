@@ -43,7 +43,7 @@ export default {
     <div>
         <ModalRenderer
             v-if="isSelectorOpen"
-            @close="() => handleBrandOpen(false)"
+            @onClose="() => handleBrandOpen(false)"
             key="ModalRendererKeyToMakeItDestroyByVif"
         >
             <div class="tw-flex tw-flex-col">

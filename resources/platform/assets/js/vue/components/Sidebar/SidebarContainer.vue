@@ -7,7 +7,7 @@ export default {
 <template>
   <aside
     id="sidebar"
-    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-relative"
+    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-relative tw-shrink-0"
     :class="[isSidebarCollapsed ? 'tw-w-[68px]' : 'tw-w-64']"
   >
     <div class="tw-absolute tw-h-full tw-w-full tw-top-0 tw-left-0 tw-z-[99] tw-overflow-y-auto tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]">

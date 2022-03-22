@@ -24,27 +24,23 @@ export default {
           links: [
             {
               name: 'Home',
-              url: '/members',
+              path: '/members',
               icon: 'home',
-              active: true,
             },
             {
               name: 'Method',
-              url: '/members/method',
+              path: '/members/method',
               icon: 'method',
-              active: false,
             },
             {
               name: 'Songs',
-              url: '/members/songs',
+              path: '/members/songs',
               icon: 'headphones',
-              active: false,
             },
             {
               name: 'Coaches',
-              url: '/members/coaches',
+              path: '/members/coaches',
               icon: 'whistle',
-              active: false,
             }
           ]
         },
@@ -52,27 +48,23 @@ export default {
           links: [
             {
               name: 'Packs',
-              url: '/members/packs',
+              path: '/members/packs',
               icon: 'box',
-              active: false,
             },
             {
               name: 'Quick Tips',
-              url: '/members/quick-tips',
+              path: '/members/quick-tips',
               icon: 'light-bulb',
-              active: false,
             },
             {
               name: 'Student Focus',
-              url: '/members/student-focus',
+              path: '/members/student-focus',
               icon: 'person-plus',
-              active: false,
             },
             {
               name: 'Live',
-              url: '/members/live',
+              path: '/members/live',
               icon: 'play-circle',
-              active: false,
             },
           ]
         }
@@ -83,9 +75,8 @@ export default {
           links: [
             {
               name: 'Routines',
-              url: '/members/routines',
+              path: '/members/routines',
               icon: 'routines',
-              active: false,
               viewBox:"0 0 29 29"
             },
           ]
@@ -95,30 +86,26 @@ export default {
           links: [
             {
               name: 'Lessons',
-              url: '/members/lessons',
+              path: '/members/lessons',
               icon: 'acoustic-guitar',
               viewBox:"0 0 20 22",
               width: "22",
               height: "35",
-              active: false,
             },
             {
               name: 'Play Alongs',
-              url: '/members/lessons',
+              path: '/members/lessons',
               icon: 'eigth-notes',
-              active: false,
             },
             {
               name: 'Chords & Scales',
-              url: '/members/chords-scales',
+              path: '/members/chords-scales',
               icon: 'guitar-tabs',
-              active: false,
             },
             {
               name: 'Archives',
-              url: '/members/archives',
+              path: '/members/archives',
               icon: 'archives',
-              active: false,
             },
           ]
         },
@@ -127,22 +114,19 @@ export default {
           links: [
             {
               name: 'Foundation',
-              url: '/members/foundation',
+              path: '/members/foundation',
               icon: 'foundation',
-              active: false,
               viewBox: '0 0 27 27',
             },
             {
               name: 'Podcast',
-              url: '/members/podcast',
+              path: '/members/podcast',
               icon: 'podcast',
-              active: false,
             },
             {
               name: 'Bootcamps',
-              url: '/members/bootcamps',
+              path: '/members/bootcamps',
               icon: 'keys',
-              active: false,
             },
           ]
         },
@@ -151,26 +135,28 @@ export default {
           links: [
             {
               name: 'Play-Alongs',
-              url: '/members/play-alongs',
+              path: '/members/play-alongs',
               icon: 'eigth-notes',
-              active: false,
             },
             {
               name: 'Rudiments',
-              url: '/members/rudiments',
+              path: '/members/rudiments',
               icon: 'drum',
-              active: false,
             },
             {
               name: 'Shows',
-              url: '/members/shows',
+              path: '/members/shows',
               icon: 'shows',
-              active: false,
               viewBox: '0 0 30 27'
             },
           ]
         },
       ]
+    }
+  },
+  computed: {
+    pathName() {
+      return window.location.pathname;
     }
   }
 }
@@ -195,10 +181,10 @@ export default {
     <!-- Sidebar Link Sections -->
     <section v-for="(section, i) in sections" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
-        <li v-for="(link, j) in section.links" :key="j" :class="[link.active ? ` ${textColor[brand]}` : '']">
-          <a :href="`${link.url}?brand=${brand}`" 
+        <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
+          <a :href="`${link.path}?brand=${brand}`" 
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]"
-             :class="[link.active ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             :class="[pathName === link.path ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
             <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
             <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
@@ -211,9 +197,9 @@ export default {
     <section v-for="(section, i) in brandSections" :key="i">
       <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
         <li v-for="(link, j) in section.links" :key="j" >
-          <a :href="`${link.url}?brand=${brand}`"  
+          <a :href="`${link.path}?brand=${brand}`"  
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]"
-             :class="[link.active ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             :class="[pathName === link.path ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
             <musora-icon :icon-name="link.icon" :view-box="link.viewBox" :height="link.height" :width="link.width" class="tw-mx-4"/>
             <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
@@ -228,7 +214,7 @@ export default {
         <li>
           <a :href=" `/members/forums?brand=${brand }` " 
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]"
-             :class="[active ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             :class="[pathName === '/forums' ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
              <musora-icon icon-name="messages" class="tw-mx-4"/>
              <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">Forums</span>

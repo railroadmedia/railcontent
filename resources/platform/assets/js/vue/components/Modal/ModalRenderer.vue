@@ -3,16 +3,15 @@ const appRoot = document.getElementById('app')
 const modalRoot = document.getElementById('modal-container')
 
 export default {
-    name: 'Modal',
-    props: ['close'],
-    emits: ['close'],
+    name: 'ModalRenderer',
+    emits: ['onClose'],
     setup(props, context) {
         const onClose = () => {
-            context.emit('close', true)
+            context.emit('onClose', true)
         }
         const onOverlayClick = (event) => {
             if (event.target.id === 'modal-overlay') {
-                context.emit('close', true)
+                context.emit('onClose', true)
             }
         }
         return {
@@ -39,7 +38,7 @@ export default {
     <teleport to="#modal-container">
         <div
             id="modal-overlay"
-            class="tw-absolute tw-h-full tw-w-full tw-bg-[#081825] tw-opacity-90"
+            class="tw-absolute tw-h-full tw-w-full tw-bg-[#081825] tw-bg-opacity-90"
             v-on:click="onOverlayClick"
             style="
                  {
