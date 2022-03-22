@@ -8,6 +8,5 @@ Route::domain('{subdomain}.musora.com')->group(function () {
         HomeController::class, 
         'show',
     ]);
-    //set default brand
-    Request::instance()->query->set('brand', 'drumeo');
+    
 });

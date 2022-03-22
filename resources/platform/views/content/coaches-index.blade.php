@@ -1,0 +1,204 @@
+@php
+    $bodyClass = ($bodyClass ?? '') . ' sidebar';
+    $leftSidebar = true;
+    $hasUpcomingCoaches = $upcomingCoaches && count($upcomingCoaches) > 0;
+@endphp
+
+@extends('members.layout')
+
+@section('meta')
+    <title>Coaches | Singeo</title>
+@endsection
+
+@section('content')
+    @include('members.partials._content-sidebar')
+
+    @component('bladesora::members.components.header-banner', [
+        'hideUser' => true,
+        'backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/singeo-members-header-background-image.jpg',
+        'brand' => 'singeo'
+    ])
+        @slot('content')
+            <div class="flex flex-column pr-1">
+                <h1 class="heading text-white flex flex-row align-v-top">
+                    <span class="svg-icon text-singeo mr-1">
+                        <svg width="36" height="36" aria-hidden="true" fill="currentColor" focusable="false">
+                            <use href="#whistle"></use>
+                        </svg>
+                    </span>
+                    Coaches
+                </h1>
+
+                <p
+                        class="text-white body"
+                        style="max-width:960px"
+                >
+                    Every month, you’ll have new opportunities to learn from your coaches. You can choose the topics
+                    that you need help with OR follow the coach that works with your style and what you want to achieve
+                    with your voice. And you’ll always get the full recording so you never miss that ‘aha’ moment you’ve
+                    been waiting for.
+                </p>
+            </div>
+        @endslot
+    @endcomponent
+
+    <!-- Coach Event -->
+    <section class="tw-flex tw-py-2 tw-bg-gray-100">
+        <coach-event
+            brand="singeo"
+            :preloaded-content='{{ $coachEvent }}'
+            current-date-string="{{ $currentDate }}"
+            subscription-calendar-id="{{ $currentEventCalendarId }}"
+            youtube-event-id="{{ $youtubeId }}"
+            :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            variant="small"
+        />
+    </section>
+
+    <!-- Featured Coaches -->
+    @component('bladesora::members.components.coach-featured', [
+        'hasFeaturedCoaches' => $hasFeaturedCoaches,
+        'featuredCoaches' => $featuredCoaches,
+        'brand' => 'singeo',
+    ])
+    @endcomponent
+
+    <div class="container mt-2 mb-3">
+        <div class="flex flex-row mb-3">
+            <div class="flex flex-column grow">
+                <div class="flex flex-row align-v-center pv-2">
+                        <span class="rounded bg-singeo text-white icon-bg-circle body mr-1">
+                            <i class="fas fa-bolt"></i>
+                        </span>
+
+                    <h2 class="heading capitalize grow">
+                        Latest Featured Lessons
+                    </h2>
+                </div>
+
+                <div class="flex flex-row six-cards-row">
+                    <transition appear name="fade">
+                        <content-catalogue
+                                brand="singeo"
+                                theme-color="{{$themeColor}}"
+                                :use-theme-color="true"
+                                content-endpoint="/railcontent/content"
+                                catalogue-type="grid"
+                                limit="16"
+                                :lock-unowned="true"
+                                :six-wide="true"
+                                :force-wide-thumbs="true"
+                                :pre-loaded-content="{{ $latestLessons }}"
+                        >
+                            <div class="flex flex-row nmh-1">
+                                @for($i = 0; $i < 6; $i++)
+                                    @include('bladesora::members.skeletons.card-item', [
+                                        "cardClass" => 'six-wide',
+                                    ])
+                                @endfor
+                            </div>
+                        </content-catalogue>
+                    </transition>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if($hasFollowedCoaches)
+        <div class="container mt-2 mb-3">
+            <div class="flex flex-row mb-3">
+                <div class="flex flex-column grow">
+                    <div class="flex flex-row align-v-center pv-2">
+                        <span class="rounded bg-singeo text-white icon-bg-circle body mr-1">
+                            <i class="fas fa-star"></i>
+                        </span>
+
+                        <h2 class="heading capitalize grow">
+                            From Subscribed Coaches
+                        </h2>
+                    </div>
+
+                    <div class="flex flex-row six-cards-row">
+                        <transition appear name="fade">
+                            <content-catalogue
+                                    brand="singeo"
+                                    theme-color="{{$themeColor}}"
+                                    :use-theme-color="true"
+                                    content-endpoint="/railcontent/content"
+                                    catalogue-type="grid"
+                                    limit="16"
+                                    :lock-unowned="true"
+                                    :four-wide="true"
+                                    :force-wide-thumbs="true"
+                                    :pre-loaded-content="{{ $latestSubscribedLessons }}"
+                            >
+                                <div class="flex flex-row nmh-1">
+                                    @for($i = 0; $i < 6; $i++)
+                                        @include('bladesora::members.skeletons.card-item', [
+                                            "cardClass" => 'four-wide',
+                                        ])
+                                    @endfor
+                                </div>
+                            </content-catalogue>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    
+    <!-- Upcoming Coaches -->
+    @component('bladesora::members.components.coach-upcoming', [
+        'hasUpcomingCoaches' => $hasUpcomingCoaches,
+        'upcomingCoaches' => $upcomingCoaches,
+        'brand' => 'singeo',
+    ])
+    @endcomponent
+
+    <!-- Active Coaches -->
+    @component('bladesora::members.components.coach-active', [
+        'hasActiveCoaches' => $hasActiveCoaches,
+        'activeCoaches' => $activeCoaches,
+        'brand' => 'singeo'
+    ])
+    @endcomponent
+
+    <div class="container mb-3">
+        <transition appear name="fade">
+            <content-catalogue
+                    theme-color="{{$themeColor}}"
+                    brand="singeo"
+                    content-endpoint="/railcontent/content?only_subscribed={{$onlySubscribedCoaches}}"
+                    catalogue-type="coaches-grid"
+                    limit="{{ $limitOverride ?? 18 }}"
+                    :infinite-scroll="true"
+                    :statuses="{{ json_encode(['published', 'scheduled']) }}"
+                    :filterable-values="{{ json_encode(['focus','style']) }}"
+                    :included-types="{{ json_encode(['instructor']) }}"
+                    :required-fields="{{json_encode(['is_coach,1'])}}"
+                    :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"
+                    user-id="{{ auth()->id() }}"
+                    :is-admin="{{ json_encode(\App\Services\User\UserAccessService::isAdministrator(current_user()->getId())) }}"
+                    :use-url-params="true"
+                    :lock-unowned="true"
+                    :show-loading-animation="true"
+                    sort-override="slug"
+                    :six-wide="true"
+
+                    @if(!empty($showSearch))
+                    :search-bar="true"
+                    :total-results="{{ $limitOverride ?? 18 }}"
+                    :search-endpoint="{{json_encode(url()->route('content.index'))}}"
+                    @endif
+            >
+                @for($i = 0; $i < ($limitOverride ?? 18); $i++)
+                    @include('bladesora::members.skeletons.card-item', [
+                       "cardClass" => 'six-wide',
+                    ])
+                @endfor
+            </content-catalogue>
+        </transition>
+    </div>
+@endsection
+

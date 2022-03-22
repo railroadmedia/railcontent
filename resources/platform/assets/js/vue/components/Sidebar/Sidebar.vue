@@ -31,19 +31,19 @@ export default {
             {
               name: 'Method',
               url: '/members/method',
-              icon: 'home',
+              icon: 'method',
               active: false,
             },
             {
               name: 'Songs',
               url: '/members/songs',
-              icon: 'home',
+              icon: 'headphones',
               active: false,
             },
             {
               name: 'Coaches',
               url: '/members/coaches',
-              icon: 'home',
+              icon: 'whistle',
               active: false,
             }
           ]
@@ -53,25 +53,25 @@ export default {
             {
               name: 'Packs',
               url: '/members/packs',
-              icon: 'home',
+              icon: 'box',
               active: false,
             },
             {
               name: 'Quick Tips',
               url: '/members/quick-tips',
-              icon: 'home',
+              icon: 'light-bulb',
               active: false,
             },
             {
               name: 'Student Focus',
               url: '/members/student-focus',
-              icon: 'home',
+              icon: 'person-plus',
               active: false,
             },
             {
               name: 'Live',
               url: '/members/live',
-              icon: 'home',
+              icon: 'play-circle',
               active: false,
             },
           ]
@@ -84,8 +84,9 @@ export default {
             {
               name: 'Routines',
               url: '/members/routines',
-              icon: 'home',
+              icon: 'routines',
               active: false,
+              viewBox:"0 0 29 29"
             },
           ]
         },
@@ -95,25 +96,28 @@ export default {
             {
               name: 'Lessons',
               url: '/members/lessons',
-              icon: 'home',
+              icon: 'acoustic-guitar',
+              viewBox:"0 0 20 22",
+              width: "22",
+              height: "35",
               active: false,
             },
             {
               name: 'Play Alongs',
               url: '/members/lessons',
-              icon: 'home',
+              icon: 'eigth-notes',
               active: false,
             },
             {
               name: 'Chords & Scales',
               url: '/members/chords-scales',
-              icon: 'home',
+              icon: 'guitar-tabs',
               active: false,
             },
             {
               name: 'Archives',
               url: '/members/archives',
-              icon: 'home',
+              icon: 'archives',
               active: false,
             },
           ]
@@ -124,19 +128,20 @@ export default {
             {
               name: 'Foundation',
               url: '/members/foundation',
-              icon: 'home',
+              icon: 'foundation',
               active: false,
+              viewBox: '0 0 27 27',
             },
             {
               name: 'Podcast',
               url: '/members/podcast',
-              icon: 'home',
+              icon: 'podcast',
               active: false,
             },
             {
               name: 'Bootcamps',
               url: '/members/bootcamps',
-              icon: 'home',
+              icon: 'keys',
               active: false,
             },
           ]
@@ -147,20 +152,21 @@ export default {
             {
               name: 'Play-Alongs',
               url: '/members/play-alongs',
-              icon: 'home',
+              icon: 'eigth-notes',
               active: false,
             },
             {
               name: 'Rudiments',
               url: '/members/rudiments',
-              icon: 'home',
+              icon: 'drum',
               active: false,
             },
             {
               name: 'Shows',
               url: '/members/shows',
-              icon: 'home',
+              icon: 'shows',
               active: false,
+              viewBox: '0 0 30 27'
             },
           ]
         },
@@ -176,9 +182,14 @@ export default {
     <sprite-sheet></sprite-sheet>
     
     <!-- Sidebar Search -->
-    <div class="tw-p-4 tw-relative">
-      <i class=""></i>
-      <input type="text" placeholder="search" class="tw-w-full tw-h-[37px]  tw-border-none tw-text-xs tw-rounded tw-transition-color tw-bg-[#E6E7E9] dark:tw-bg-[#000C17] dark:placeholder:tw-text-[#9EC0DC]" :class="[]" />  
+    <div class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded">
+      <musora-icon icon-name="search" class="tw-absolute tw-top-3 tw-left-3 dark:tw-text-[#9EC0DC] tw-z-0"/>
+      <input type="text" 
+            placeholder="search" 
+            class="tw-relative tw-z-10 tw-w-full tw-h-[37px] tw-border-none tw-text-xs tw-rounded tw-transition-color dark:tw-text-[#9EC0DC] tw-bg-transparent focus:tw-outline focus:tw-outline-1 dark:focus:tw-outline-[#9EC0DC] tw-shadow-none focus:tw-ring-transparent" 
+            :class="[isSidebarCollapsed ? 'placeholder:tw-text-transparent tw-pl-6' : 'dark:placeholder:tw-text-[#9EC0DC] tw-pl-8']"
+            @focus="isSidebarCollapsed = false"
+      />  
     </div>
 
     <!-- Sidebar Link Sections -->
@@ -186,12 +197,11 @@ export default {
       <ul>
         <li v-for="(link, j) in section.links" :key="j" :class="[link.active ? ` ${textColor[brand]}` : '']">
           <a :href="`${link.url}?brand=${brand}`" 
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 "
-             :class="[link.active ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]"
+             :class="[link.active ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
-              <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
-
-             <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
+            <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
+            <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
           </a>
         </li>
       </ul>
@@ -202,10 +212,10 @@ export default {
       <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
         <li v-for="(link, j) in section.links" :key="j" >
           <a :href="`${link.url}?brand=${brand}`"  
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4"
-             :class="[link.active ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]"
+             :class="[link.active ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
-            <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
+            <musora-icon :icon-name="link.icon" :view-box="link.viewBox" :height="link.height" :width="link.width" class="tw-mx-4"/>
             <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
           </a>
         </li>
@@ -217,10 +227,10 @@ export default {
       <ul>
         <li>
           <a :href=" `/members/forums?brand=${brand }` " 
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4"
-             :class="[active ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]"
+             :class="[active ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
-             <musora-icon icon-name="home" class="tw-mx-4"/>
+             <musora-icon icon-name="messages" class="tw-mx-4"/>
              <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">Forums</span>
           </a>
         </li>
@@ -231,7 +241,7 @@ export default {
     <section>
       <div class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 tw-border-transparent">
         <p class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-flex">
-          <musora-icon icon-name="home" class="tw-mx-4"/>
+          <musora-icon icon-name="playlist" view-box="0 0 29 29" class="tw-mx-4"/>
           <span class="tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">Playlists</span>
         </p>
       </div>

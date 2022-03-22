@@ -6,7 +6,6 @@
         :height="height" 
         :viewBox="viewBox"
     >
-        <title lang="en">{{ iconName }}</title>
         <use 
             :xlink:href="iconID" 
             x="0" 

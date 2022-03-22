@@ -47,6 +47,9 @@ module.exports = {
         '.bg-musora': {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
         },
+        '[v-cloak]': {
+          display: 'none',
+        }
       })
     })
   ],

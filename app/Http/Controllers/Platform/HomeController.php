@@ -8,11 +8,11 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller 
 {
     public function show(Request $request) {
-        if ($request->has('brand')) {
-            $brand = $request->input('brand');
-        }
+        $brand = request('brand');
+        $default = 'drumeo';
+
         return view('home.index', [
-            'brand' => $brand,
+            'brand' => $brand ? $brand : $default,
         ]);
     }
 }  
