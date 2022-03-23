@@ -28,15 +28,22 @@ class ContentFollowsRepository extends EntityRepository
     {
         if (!isset(self::$cache[auth()->id()])) {
             $alias = 'cf';
-            $contents =   $this->createQueryBuilder($alias)
-                ->join($alias.'.content', 'c')
-                ->where('c.brand = :brand')
-                ->andWhere($alias.'.user = :user')
-                ->setParameter('brand', config('railcontent.brand'))
-                ->setParameter('user', auth()->id())
-               ->getResult();
-
-            self::$cache[auth()->id()] = $contents->pluck('content_id')->toArray();
+            $contents =
+                $this->createQueryBuilder($alias)
+                    ->join($alias.'.content', 'c')
+                    ->where('c.brand = :brand')
+                    ->andWhere($alias.'.user = :user')
+                    ->setParameter('brand', config('railcontent.brand'))
+                    ->setParameter('user', auth()->id())
+                    ->getQuery()
+                    ->getResult();
+            $ids = [];
+            foreach ($contents as $content) {
+                $ids[] =
+                    $content->getContent()
+                        ->getId();
+            }
+            self::$cache[auth()->id()] = $ids;
         }
 
         return self::$cache[auth()->id()];
