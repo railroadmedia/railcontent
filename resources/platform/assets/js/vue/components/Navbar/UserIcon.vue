@@ -42,7 +42,7 @@ export default {
 <template>
   <div
     v-on:click="handleMenuOpen"
-    class="tw-ml-[36px] tw-flex tw-h-full tw-flex-row tw-items-center tw-px-[12px] tw-py-[6px]"
+    class="tw-ml-[36px] tw-flex tw-h-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
     <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full" />
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">

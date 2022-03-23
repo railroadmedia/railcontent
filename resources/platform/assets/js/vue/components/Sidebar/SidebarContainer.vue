@@ -1,16 +1,19 @@
 <script>
 export default {
   name: 'SidebarContainer',
-  props: ['brand', 'isSidebarCollapsed']
+  props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden']
 }
 </script>
 <template>
   <aside
     id="sidebar"
-    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-relative tw-shrink-0"
-    :class="[isSidebarCollapsed ? 'tw-w-[68px]' : 'tw-w-64']"
+    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-shrink-0 tw-absolute md:tw-relative tw-z-[99] tw-w-64 md:tw-left-0"
+    :class="[
+      isSidebarCollapsed && !isSidebarHidden ? 'md:tw-w-[68px] ' : '',
+      isSidebarHidden ? 'tw--left-64 ' : 'tw-left-0',
+    ]"
   >
-    <div class="tw-absolute tw-h-full tw-w-full tw-top-0 tw-left-0 tw-z-[99] tw-overflow-y-auto tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]">
+    <div class="tw-h-full tw-w-full tw-top-0 tw-left-0 tw-overflow-y-auto tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]">
       <div class="sidebar-mask">
         <div class="sidebar-offset tw-right-0 tw-bottom-0">
 

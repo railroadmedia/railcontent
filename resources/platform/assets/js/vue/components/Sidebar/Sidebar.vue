@@ -13,6 +13,7 @@ export default {
   props: {
     brand: String,
     isSidebarCollapsed: Boolean,
+    isSidebarHidden: Boolean,
     playlist: {
       type: Array,
       default: []
@@ -165,12 +166,15 @@ export default {
     pathName() {
       return window.location.pathname;
     }
-  }
+  },
 }
 </script>
 
 <template>
-  <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed" :brand="brand">
+  <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed" 
+                    :isSidebarHidden="isSidebarHidden"
+                    :brand="brand"
+  >
     
     <sprite-sheet></sprite-sheet>
     
@@ -194,7 +198,7 @@ export default {
              :class="[pathName === link.path ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
             <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
-            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
+            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
           </a>
         </li>
       </ul>
@@ -209,7 +213,7 @@ export default {
              :class="[pathName === link.path ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
             <musora-icon :icon-name="link.icon" :view-box="link.viewBox" :height="link.height" :width="link.width" class="tw-mx-4"/>
-            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
+            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
           </a>
         </li>
       </ul>
@@ -224,7 +228,7 @@ export default {
              :class="[pathName === '/forums' ? `tw-font-bold tw-bg-black/[0.05] ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
              <musora-icon icon-name="messages" class="tw-mx-4"/>
-             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">Forums</span>
+             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Forums</span>
           </a>
         </li>
       </ul>
@@ -237,7 +241,7 @@ export default {
           
           <musora-icon icon-name="playlist" width="19" height="19" view-box="0 0 29 29" class="tw-mx-4 tw-mt-1"/>
           
-          <div class="tw-transition tw-flex tw-items-center tw-w-full" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">
+          <div class="tw-transition tw-flex tw-items-center tw-w-full" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
             <p class="tw-uppercase tw-text-sm tw-font-bold tw-w-full">Playlists</p>
             
             <!-- Add Playlist -->
@@ -249,7 +253,7 @@ export default {
         </div>
       </div>
       <!-- Loop through User Playlist -->
-      <div class="tw-text-sm tw-transition" :class="[isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']">
+      <div class="tw-text-sm tw-transition" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
         <ul v-if="playlist.length"></ul>
         <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
 

@@ -11,6 +11,7 @@ export default {
 
     setup(props, context) {
         const isSidebarCollapsed = ref(false)
+        const isSidebarHidden = ref(false)
         const isDarkModeSelected = ref(false)
         const brand = ref('drumeo')
         const route = useRoute()
@@ -18,9 +19,17 @@ export default {
         
         const onCollapseSidebar = (val) => {
             if (typeof val === 'boolean') {
-                isSidebarCollapsed.value = val
-            } else {
-                isSidebarCollapsed.value = !isSidebarCollapsed.value
+                isSidebarCollapsed.value = val;
+                isSidebarHidden.value = val;
+            } else {           
+                const smallBreakpoint = window.matchMedia('(max-width: 767px)');
+                if(smallBreakpoint.matches) {
+                    isSidebarHidden.value = !isSidebarHidden.value;
+                    isSidebarCollapsed.value = false;  
+                } else {
+                    isSidebarHidden.value = false;
+                    isSidebarCollapsed.value = !isSidebarCollapsed.value;
+                }
             }
         }
 
@@ -44,6 +53,7 @@ export default {
 
         return {
             isSidebarCollapsed,
+            isSidebarHidden,
             isDarkModeSelected,
             brand,
             onCollapseSidebar,
@@ -59,6 +69,13 @@ export default {
         const urlSearchParams = new URLSearchParams(window.location.search)
         const brandParam = urlSearchParams.get('brand');
         this.brand = brandParam || 'drumeo';
+
+        //Set Sidebar State
+        const smallBreakpoint = window.matchMedia('(max-width: 767px)');
+        if(smallBreakpoint.matches) {
+            this.isSidebarHidden = true;
+            this.isSidebarCollapsed = false;
+        }
     },
 
     created() {
@@ -69,6 +86,22 @@ export default {
                 this.brand = this.$route.query.brand;
             }
         )
+        //Check if Mobile on Resize
+        window.addEventListener("resize", this.onResize);
+    },
+
+    destroyed() {
+        window.removeEventListener("resize", this.onResize);
+    },
+
+    methods: {
+        onResize(e) {
+            const smallBreakpoint = window.matchMedia('(max-width: 767px)');
+            if(smallBreakpoint.matches) {
+                this.isSidebarHidden = true;
+                this.isSidebarCollapsed = false;
+            }
+        },
     },
 }
 </script>
@@ -79,6 +112,8 @@ export default {
     >
         <Navbar
             :brand="brand"
+            :isSidebarHidden="isSidebarHidden"
+            :isSidebarCollapsed="isSidebarCollapsed"
             @onBrandSelect="onBrandSelect"
             @onCollapseSidebar="onCollapseSidebar"
             @onColorModeToggle="onColorModeToggle"
@@ -88,7 +123,10 @@ export default {
         <div class="tw-flex tw-flex-row tw-w-full tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]">
 
             <!-- Sidebar -->
-            <Sidebar :brand="brand" :isSidebarCollapsed="isSidebarCollapsed" />
+            <Sidebar :brand="brand" 
+                     :isSidebarCollapsed="isSidebarCollapsed" 
+                     :isSidebarHidden="isSidebarHidden"
+            />
 
             <!-- Content Container -->
             <main class="tw-flex tw-grow tw-flex-col">

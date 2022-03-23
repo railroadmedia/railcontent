@@ -2,150 +2,136 @@ export default function() {
     return {
         sections: [
             {
-                links: [
-                    {
-                        name: 'Home',
-                        url: '/members',
-                        icon: 'home',
-                        active: true,
-                    },
-                    {
-                        name: 'Method',
-                        url: '/members/method',
-                        icon: 'method',
-                        active: false,
-                    },
-                    {
-                        name: 'Songs',
-                        url: '/members/songs',
-                        icon: 'headphones',
-                        active: false,
-                    },
-                    {
-                        name: 'Coaches',
-                        url: '/members/coaches',
-                        icon: 'whistle',
-                        active: false,
-                    }
-                ]
+              links: [
+                {
+                  name: 'Home',
+                  path: '/members',
+                  icon: 'home',
+                },
+                {
+                  name: 'Method',
+                  path: '/members/method',
+                  icon: 'method',
+                },
+                {
+                  name: 'Songs',
+                  path: '/members/songs',
+                  icon: 'headphones',
+                },
+                {
+                  name: 'Coaches',
+                  path: '/members/coaches',
+                  icon: 'whistle',
+                }
+              ]
             },
             {
-                links: [
-                    {
-                        name: 'Packs',
-                        url: '/members/packs',
-                        icon: 'box',
-                        active: false,
-                    },
-                    {
-                        name: 'Quick Tips',
-                        url: '/members/quick-tips',
-                        icon: 'light-bulb',
-                        active: false,
-                    },
-                    {
-                        name: 'Student Focus',
-                        url: '/members/student-focus',
-                        icon: 'person-plus',
-                        active: false,
-                    },
-                    {
-                        name: 'Live',
-                        url: '/members/live',
-                        icon: 'play-circle',
-                        active: false,
-                    },
-                ]
+              links: [
+                {
+                  name: 'Packs',
+                  path: '/members/packs',
+                  icon: 'box',
+                },
+                {
+                  name: 'Quick Tips',
+                  path: '/members/quick-tips',
+                  icon: 'light-bulb',
+                },
+                {
+                  name: 'Student Focus',
+                  path: '/members/student-focus',
+                  icon: 'person-plus',
+                },
+                {
+                  name: 'Live',
+                  path: '/members/live',
+                  icon: 'play-circle',
+                },
+              ]
             }
         ],
         brandSections: [
+        {
+            brand: 'singeo',
+            links: [
             {
-                brand: 'singeo',
-                links: [
-                    {
-                        name: 'Routines',
-                        url: '/members/routines',
-                        icon: 'home',
-                        active: false,
-                    },
-                ]
+                name: 'Routines',
+                path: '/members/routines',
+                icon: 'routines',
+                viewBox:"0 0 29 29"
+            },
+            ]
+        },
+        {
+            brand: 'guitareo',
+            links: [
+            {
+                name: 'Lessons',
+                path: '/members/lessons',
+                icon: 'acoustic-guitar',
+                viewBox:"0 0 20 22",
+                width: "22",
+                height: "35",
             },
             {
-                brand: 'guitareo',
-                links: [
-                    {
-                        name: 'Lessons',
-                        url: '/members/lessons',
-                        icon: 'acoustic-guitar',
-                        active: false,
-                    },
-                    {
-                        name: 'Play Alongs',
-                        url: '/members/lessons',
-                        icon: 'eigth-notes',
-                        active: false,
-                    },
-                    {
-                        name: 'Chords & Scales',
-                        url: '/members/chords-scales',
-                        icon: 'guitar-tabs',
-                        active: false,
-                    },
-                    {
-                        name: 'Archives',
-                        url: '/members/archives',
-                        icon: 'archives',
-                        active: false,
-                    },
-                ]
+                name: 'Play Alongs',
+                path: '/members/lessons',
+                icon: 'eigth-notes',
             },
             {
-                brand: 'pianote',
-                links: [
-                    {
-                        name: 'Foundation',
-                        url: '/members/foundation',
-                        icon: 'foundation',
-                        active: false,
-                        viewBox: '0 0 27 27',
-                    },
-                    {
-                        name: 'Podcast',
-                        url: '/members/podcast',
-                        icon: 'podcast',
-                        active: false,
-                    },
-                    {
-                        name: 'Bootcamps',
-                        url: '/members/bootcamps',
-                        icon: 'keys',
-                        active: false,
-                    },
-                ]
+                name: 'Chords & Scales',
+                path: '/members/chords-scales',
+                icon: 'guitar-tabs',
             },
             {
-                brand: 'drumeo',
-                    links: [
-                    {
-                        name: 'Play-Alongs',
-                        url: '/members/play-alongs',
-                        icon: 'eigth-notes',
-                        active: false,
-                    },
-                    {
-                        name: 'Rudiments',
-                        url: '/members/rudiments',
-                        icon: 'drum',
-                        active: false,
-                    },
-                    {
-                        name: 'Shows',
-                        url: '/members/shows',
-                        icon: 'shows',
-                        active: false,
-                    },
-                ]
+                name: 'Archives',
+                path: '/members/archives',
+                icon: 'archives',
             },
+            ]
+        },
+        {
+            brand: 'pianote',
+            links: [
+            {
+                name: 'Foundation',
+                path: '/members/foundation',
+                icon: 'foundation',
+                viewBox: '0 0 27 27',
+            },
+            {
+                name: 'Podcast',
+                path: '/members/podcast',
+                icon: 'podcast',
+            },
+            {
+                name: 'Bootcamps',
+                path: '/members/bootcamps',
+                icon: 'keys',
+            },
+            ]
+        },
+        {
+            brand: 'drumeo',
+            links: [
+            {
+                name: 'Play-Alongs',
+                path: '/members/play-alongs',
+                icon: 'eigth-notes',
+            },
+            {
+                name: 'Rudiments',
+                path: '/members/rudiments',
+                icon: 'drum',
+            },
+            {
+                name: 'Shows',
+                path: '/members/shows',
+                icon: 'shows',
+                viewBox: '0 0 30 27'
+            },
+            ]
+        },
         ]
     }
 }

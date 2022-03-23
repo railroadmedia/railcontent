@@ -68,9 +68,9 @@ export default {
         </ModalRenderer>
         <button
             v-on:click="() => handleBrandOpen(true)"
-            :class="`tw-flex tw-h-full tw-flex-row tw-items-center tw-px-[12px] ${ isSelectorOpen }`"
+            :class="`tw-flex tw-h-full tw-flex-row tw-items-center lg:tw-px-[12px] ${ isSelectorOpen }`"
         >
-            <img :src="brandUrl[brand]" class="tw-w-full tw-max-w-[77px] md:tw-max-w-[144px] tw-max-h-8" />
+            <img :src="brandUrl[brand]" class="tw-w-full tw-max-w-[144px] tw-max-h-8" />
             <i
                 :class="`fas fa-chevron-down ${textColor[brand]} tw-text-xs tw-pl-[4px] tw-align-middle`"
             ></i>
