@@ -17,6 +17,7 @@ use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Repositories\ContentLikeRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 
 class ContentFollowsService
 {
@@ -44,6 +45,10 @@ class ContentFollowsService
      * @var CustomRailcontentHydrator
      */
     private $resultsHydrator;
+    /**
+     * @var ContentService
+     */
+    private $contentService;
 
     /**
      * @param RailcontentEntityManager $entityManager
@@ -54,11 +59,13 @@ class ContentFollowsService
         RailcontentEntityManager $entityManager,
         UserProviderInterface $userProvider,
         ContentFollowsRepository $contentFollowsRepository,
-        CustomRailcontentHydrator $resultsHydrator
+        CustomRailcontentHydrator $resultsHydrator,
+        ContentService $contentService
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
         $this->contentFollowsRepository = $contentFollowsRepository;
+        $this->contentService = $contentService;
         $this->resultsHydrator = $resultsHydrator;
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
     }
@@ -154,8 +161,10 @@ class ContentFollowsService
                 ->join($alias.'.content', 'c')
                 ->where('c.type = :type')
                 ->andWhere($alias.'.user = :user')
+                ->andWhere('c.brand = :brand')
                 ->setParameter('type', $contentType)
                 ->setParameter('user', $userId)
+                ->setParameter('brand', $brand)
                 ->setMaxResults($limit)
                 ->setFirstResult($first)
                 ->orderBy('c.createdOn','desc');
@@ -190,4 +199,73 @@ class ContentFollowsService
     {
         return $this->contentFollowsRepository->getFollowedContentIds();
     }
+
+    /**
+     * @param $brand
+     * @param null $contentType
+     * @param array $statuses
+     * @param int $page
+     * @param int $limit
+     * @param string $sort
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     */
+    public function getLessonsForFollowedCoaches(
+        $brand,
+        $contentTypes = [],
+        $statuses = [],
+        $page = 1,
+        $limit = 10,
+        $sort = '-published_on'
+    ) {
+        $followedContent= [];
+
+        $qb =
+            $this->contentFollowsRepository->createQueryBuilder('fc')
+                ->join('fc.content', 'c')
+                ->where('fc.user = :user')
+                ->andWhere('c.brand = :brand')
+                ->setParameter('user', auth()->id())
+                ->setParameter('brand', $brand)
+                ->orderBy('c.createdOn','desc');
+        $contentFollows =
+            $qb->getQuery()
+                ->getResult('Railcontent');
+
+        foreach ($contentFollows as $contentFollow) {
+            $followedContent[] = $contentFollow->getContent();
+        }
+
+        $contentData = new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]);
+
+        if (!empty($followedContent)) {
+            $includedFields = [];
+
+            foreach ($followedContent as $content) {
+                $includedFields[] = 'instructor,' . $content->getId();
+                $instructor =         array_first($this->contentService->getBySlugAndType($content->getSlug(), 'coach'));
+
+                if ($instructor) {
+                    $includedFields[] = 'instructor,' . $instructor->getId();
+                }
+            }
+
+            ContentRepository::$pullFutureContent = false;
+            ContentRepository::$availableContentStatues =
+                (!empty($statuses)) ? $statuses : [ContentService::STATUS_PUBLISHED];
+
+            $contentData = $this->contentService->getFiltered(
+                $page,
+                $limit,
+                $sort,
+                $contentTypes,
+                [],
+                [],
+                [],
+                $includedFields
+            );
+        }
+
+        return $contentData;
+    }
+
 }
