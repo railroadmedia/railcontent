@@ -159,12 +159,12 @@ class UserPlaylistService
         $this->entityManager->persist($userPlaylistContent);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->getQueryCache('pull')
-            ->clear();
-
-        $this->entityManager->getCache()
-            ->evictQueryRegion('pull');
+//        $this->entityManager->getCache()
+//            ->getQueryCache('pull')
+//            ->clear();
+//
+//        $this->entityManager->getCache()
+//            ->evictQueryRegion('pull');
 
         return $userPlaylistContent;
     }
@@ -195,12 +195,12 @@ class UserPlaylistService
         $this->entityManager->remove($userPlaylistContent);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->getQueryCache('pull')
-            ->clear();
-
-        $this->entityManager->getCache()
-            ->evictQueryRegion('pull');
+//        $this->entityManager->getCache()
+//            ->getQueryCache('pull')
+//            ->clear();
+//
+//        $this->entityManager->getCache()
+//            ->evictQueryRegion('pull');
     }
 
     /**
