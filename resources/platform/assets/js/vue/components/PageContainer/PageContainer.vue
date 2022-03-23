@@ -95,10 +95,8 @@ export default {
 
                 <!-- Content -->
                 <section class="tw-h-full tw-w-full">
-                    
-                    <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
-                        <slot />
-                    </div>
+
+                    <slot />
 
                 </section>
 

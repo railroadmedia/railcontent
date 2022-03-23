@@ -9,7 +9,7 @@ export default {
 <template>
   <button
     v-on:click="$emit('onclick')"
-    class="tw-btn-primary tw-btn-small tw-btn-circle tw-bg-transparent hover:tw-bg-white/[.06] tw-p-0 tw-mb-0 tw-mr-3"
+    class="tw-btn-primary tw-btn-small tw-btn-circle tw-bg-transparent hover:tw-bg-[#3f3f46]/10 dark:hover:tw-bg-[#445F74]/20 tw-p-0 tw-mb-0 tw-mr-3"
   >
     <div
       class="tw-flex tw-h-[12px] tw-w-[18px] tw-flex-col tw-justify-between"

@@ -156,8 +156,9 @@
                 <path d="M24 15C24 15.5523 23.5523 16 23 16C22.4477 16 22 15.5523 22 15C22 14.4477 22.4477 14 23 14C23.5523 14 24 14.4477 24 15Z" fill="currentColor"/>
             </svg>
             <!-- Plus -->
-            <svg fill="none">
-                <path d="M10 1.75V10.5M10 10.5V19.25M10 10.5H18.75M10 10.5L1.25 10.5" stroke="currentColor" stroke-linejoin="round"/>
+            <svg id="icon-plus" fill="none">
+                <path d="M7 1.94629V13.9463V1.94629ZM13 7.94629H1H13Z" fill="currentColor"/>
+                <path d="M13 7.94629H1M7 1.94629V13.9463V1.94629Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </defs>
     </svg>

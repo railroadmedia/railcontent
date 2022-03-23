@@ -21531,7 +21531,14 @@ __webpack_require__.r(__webpack_exports__);
     SpriteSheet: _MusoraIcons_SpriteSheet_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     MusoraIcon: _MusoraIcons_MusoraIcon_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  props: ['brand', 'isSidebarCollapsed'],
+  props: {
+    brand: String,
+    isSidebarCollapsed: Boolean,
+    playlist: {
+      type: Array,
+      "default": []
+    }
+  },
   setup: function setup() {
     return {
       textColor: _constants_brands_js__WEBPACK_IMPORTED_MODULE_3__.textColor,
@@ -23087,10 +23094,16 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   d: "M24 15C24 15.5523 23.5523 16 23 16C22.4477 16 22 15.5523 22 15C22 14.4477 22.4477 14 23 14C23.5523 14 24 14.4477 24 15Z",
   fill: "currentColor"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Plus "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  id: "icon-plus",
   fill: "none"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M10 1.75V10.5M10 10.5V19.25M10 10.5H18.75M10 10.5L1.25 10.5",
+  d: "M7 1.94629V13.9463V1.94629ZM13 7.94629H1H13Z",
+  fill: "currentColor"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M13 7.94629H1M7 1.94629V13.9463V1.94629Z",
   stroke: "currentColor",
+  "stroke-width": "2",
+  "stroke-linecap": "round",
   "stroke-linejoin": "round"
 })])])], -1
 /* HOISTED */
@@ -23228,7 +23241,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$emit('onclick');
     }),
-    "class": "tw-btn-primary tw-btn-small tw-btn-circle tw-bg-transparent hover:tw-bg-white/[.06] tw-p-0 tw-mb-0 tw-mr-3"
+    "class": "tw-btn-primary tw-btn-small tw-btn-circle tw-bg-transparent hover:tw-bg-[#3f3f46]/10 dark:hover:tw-bg-[#445F74]/20 tw-p-0 tw-mb-0 tw-mr-3"
   }, _hoisted_2);
 }
 
@@ -24397,9 +24410,6 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "tw-h-full tw-w-full"
 };
-var _hoisted_4 = {
-  "class": "tw-container tw-mx-auto tw-px-4 dark:tw-text-white"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Navbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Navbar");
 
@@ -24421,7 +24431,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     isSidebarCollapsed: $setup.isSidebarCollapsed
   }, null, 8
   /* PROPS */
-  , ["brand", "isSidebarCollapsed"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Content Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)])])], 2
+  , ["brand", "isSidebarCollapsed"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Content Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)])])], 2
   /* CLASS */
   );
 }
@@ -24556,11 +24566,45 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["href"];
 var _hoisted_7 = {
-  "class": "tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 tw-border-transparent"
+  "class": "tw-h-[42px] tw-flex tw-items-center tw-w-full tw-pl-1 tw-border-l-4 tw-border-transparent"
 };
 var _hoisted_8 = {
-  "class": "tw-uppercase tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-flex"
+  "class": "tw-text-[#00101D] dark:tw-text-white tw-flex tw-w-full tw-items-center"
 };
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "tw-uppercase tw-text-sm tw-font-bold tw-w-full"
+}, "Playlists", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
+  "class": "tw-h-7 tw-w-7 tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-rounded-full hover:tw-bg-[#3f3f46]/10 dark:hover:tw-bg-[#445F74]/20 tw-mr-3"
+};
+var _hoisted_11 = {
+  key: 0
+};
+var _hoisted_12 = {
+  key: 1,
+  "class": "tw-mt-8 tw-flex tw-flex-col tw-items-center"
+};
+var _hoisted_13 = {
+  "class": "tw-h-[50px] tw-w-[50px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-mb-2 tw-bg-[#3f3f46]/20 dark:tw-bg-[#445F74]/50 tw-text-[#111827] dark:tw-text-[#9EC0DC]"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-whitespace-nowrap"
+}, "No Playlist yet", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-whitespace-nowrap",
+  href: ""
+}, "Create a playlist now", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_sprite_sheet = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sprite-sheet");
 
@@ -24602,7 +24646,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["icon-name"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition tw-whitespace-nowrap", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
           }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(link.name), 3
           /* TEXT, CLASS */
           )], 10
@@ -24633,7 +24677,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["icon-name", "view-box", "height", "width"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition tw-whitespace-nowrap", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
           }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(link.name), 3
           /* TEXT, CLASS */
           )], 10
@@ -24651,20 +24695,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "icon-name": "messages",
         "class": "tw-mx-4"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition tw-whitespace-nowrap", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
       }, "Forums", 2
       /* CLASS */
       )], 10
       /* CLASS, PROPS */
-      , _hoisted_6)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Playlists "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
+      , _hoisted_6)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Playlists "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
         "icon-name": "playlist",
+        width: "19",
+        height: "19",
         "view-box": "0 0 29 29",
-        "class": "tw-mx-4"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
-      }, "Playlists", 2
+        "class": "tw-mx-4 tw-mt-1"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition tw-flex tw-items-center tw-w-full", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
+      }, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add Playlist "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
+        "icon-name": "plus",
+        width: "14",
+        height: "14",
+        viewBox: "0 0 14 15"
+      })])], 2
       /* CLASS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Loop through User Playlist ")])];
+      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Loop through User Playlist "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-transition", [$props.isSidebarCollapsed ? 'tw-opacity-0' : 'tw-opacity-100']])
+      }, [$props.playlist.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_11)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
+        "icon-name": "playlist",
+        width: "21",
+        height: "19",
+        "view-box": "0 0 29 29",
+        "class": "tw-mx-4 tw-mt-1"
+      })]), _hoisted_14, _hoisted_15]))], 2
+      /* CLASS */
+      )])];
     }),
     _: 1
     /* STABLE */
