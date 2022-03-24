@@ -1155,6 +1155,9 @@ a:visited {
 .tw-h-8 {
   height: 2rem;
 }
+.tw-h-\[36px\] {
+  height: 36px;
+}
 .tw-max-h-8 {
   max-height: 2rem;
 }
@@ -1957,6 +1960,12 @@ a:visited {
 .tw-pb-1 {
   padding-bottom: 0.25rem;
 }
+.tw-pb-2 {
+  padding-bottom: 0.5rem;
+}
+.tw-pb-8 {
+  padding-bottom: 2rem;
+}
 .tw-text-left {
   text-align: left;
 }
@@ -2307,6 +2316,14 @@ a:visited {
   --tw-bg-opacity: 1;
   background-color: rgb(202 138 4 / var(--tw-bg-opacity));
 }
+.hover\:tw-bg-\[\#102230\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 34 48 / var(--tw-bg-opacity));
+}
+.hover\:tw-bg-\[\#F5F5F6\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 246 / var(--tw-bg-opacity));
+}
 .hover\:tw-bg-opacity-10:hover {
   --tw-bg-opacity: 0.1;
 }
@@ -2384,6 +2401,10 @@ a:visited {
 }
 .tw-dark .dark\:hover\:tw-bg-\[\#445F74\]\/20:hover {
   background-color: rgb(68 95 116 / 0.2);
+}
+.tw-dark .dark\:hover\:tw-bg-\[\#102230\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 34 48 / var(--tw-bg-opacity));
 }
 .tw-dark .dark\:focus\:tw-outline-\[\#9EC0DC\]:focus {
   outline-color: #9EC0DC;

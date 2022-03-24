@@ -7,7 +7,7 @@ export default {
 
 <template>
   <div
-    class="OptionGroup tw-h-full tw-w-full tw-border-t tw-border-[#445f74]/30 tw-py-[8px] tw-px-[16px]"
+    class="OptionGroup tw-h-full tw-w-full tw-border-t tw-border-[#445f74]/30 tw-py-2"
   >
     <slot />
   </div>
