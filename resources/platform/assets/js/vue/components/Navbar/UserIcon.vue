@@ -8,7 +8,7 @@ import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 export default {
   name: 'UserIcon',
-  props: ['onColorModeToggle', 'userName', 'userPhoto'],
+  props: ['onColorModeToggle', 'userName', 'userPhoto', 'brand'],
   emits: ['onColorModeToggle'],
   components: {
     AvatarMenu,
@@ -54,23 +54,23 @@ export default {
         :userPhoto="userPhoto"
       />
       <OptionGroup>
-        <OptionElement>
+        <OptionElement :href="`/members/profile/notifications?brand=${brand}`">
           <musora-icon width="14" height="14" viewBox="0 0 26 29" icon-name="bell" class="tw-mr-2"/>
           Notifications
         </OptionElement>
-        <OptionElement>
+        <OptionElement :href="`/members/profile/lists?brand=${brand}`">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="playlist" class="tw-mr-2"/>
           Playlists
         </OptionElement>
-        <OptionElement>
+        <OptionElement :href="`/members/schedule?brand=${brand}`">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="calendar" class="tw-mr-2"/>
           Schedule
         </OptionElement>
-        <OptionElement>
+        <OptionElement :href="`/members/lessons/student-focus?brand=${brand}`">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="board-complete" class="tw-mr-2"/>
           Apply For Review
         </OptionElement>
-        <OptionElement>
+        <OptionElement :href="`/members/settings?brand=${brand}`">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="settings" class="tw-mr-2"/>
           Settings
         </OptionElement>
@@ -80,17 +80,17 @@ export default {
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="moon" class="tw-mr-2"/>
           Toogle Color Mode
         </OptionElement>
-        <OptionElement>
+        <OptionElement :href="`/members/support?brand=${brand}`">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="phone" class="tw-mr-2"/>
             Support
           </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement>
+        <OptionElement :href="`${brand}.com/shop`">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="cart" class="tw-mr-2"/>
           Shop
         </OptionElement>
-        <OptionElement @onOptionClick="handleLogout">
+        <OptionElement href="/usora/deauthenticate">
           <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="sign-out" class="tw-mr-2"/>
           Logout 
         </OptionElement>

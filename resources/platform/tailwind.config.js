@@ -49,7 +49,14 @@ module.exports = {
         },
         '[v-cloak]': {
           display: 'none',
-        }
+        },
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none'
+        },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none',  
+          'scrollbar-width': 'none'
+        } 
       })
     })
   ],

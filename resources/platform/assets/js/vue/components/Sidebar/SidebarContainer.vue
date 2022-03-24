@@ -7,7 +7,8 @@ export default {
 <template>
   <aside
     id="sidebar"
-    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-shrink-0 tw-absolute md:tw-relative tw-z-[99] tw-w-64 md:tw-left-0"
+    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-shrink-0 tw-absolute md:tw-relative tw-z-[99] tw-w-64 md:tw-left-0 tw-shadow-[0_0_5px_rgb(0,0,0,.13)]"
+    style="clip-path: inset(0 -20px 0 0);"
     :class="[
       isSidebarCollapsed && !isSidebarHidden ? 'md:tw-w-[68px] ' : '',
       isSidebarHidden ? 'tw--left-64 ' : 'tw-left-0',
@@ -17,16 +18,8 @@ export default {
       <div class="sidebar-mask">
         <div class="sidebar-offset tw-right-0 tw-bottom-0">
 
-          <div class="sidebar-content-wrapper tw-h-full tw-overflow-hidden">
+          <div class="sidebar-content-wrapper tw-h-full tw-no-scrollbar tw-overflow-y-auto tw-overflow-x-hidden">
             <div class="sidebar-content">
-              <div class="sidebar-header flex flex-row align-v-center">
-                <div id="sidebar-close">
-                  <i class="fal fa-times"></i>
-                </div>
-                <div class="sidebar-header-inner">
-                  <img alt="" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"/>
-                </div>
-              </div>
 
               <slot />
 
