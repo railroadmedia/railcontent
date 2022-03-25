@@ -81,7 +81,8 @@ class ResponseService extends FractalResponseService
             $filters = [];
             foreach ($filterOptions as $key => $filterOption) {
                 foreach ($filterOption as $key2 => $filter) {
-                    if ($filter instanceof Content) {
+
+                    if (is_object($filter) ) {
                         $arrayValue = Fractal::create()
                             ->item($filter)
                             ->transformWith(ContentOldStructureTransformer::class)
