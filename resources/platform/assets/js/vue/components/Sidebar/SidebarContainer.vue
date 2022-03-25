@@ -1,7 +1,13 @@
 <script>
+import simplebar from 'simplebar-vue';
+import 'simplebar/dist/simplebar.min.css';
+
 export default {
   name: 'SidebarContainer',
-  props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden']
+  props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden'],
+  components: {
+    simplebar
+  }
 }
 </script>
 <template>
@@ -14,11 +20,11 @@ export default {
       isSidebarHidden ? 'tw--left-64 ' : 'tw-left-0',
     ]"
   >
-    <div class="tw-h-full tw-w-full tw-top-0 tw-left-0 tw-overflow-y-auto tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]">
+    <div class="tw-h-full tw-w-full tw-top-0 tw-left-0 tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]">
       <div class="sidebar-mask">
         <div class="sidebar-offset tw-right-0 tw-bottom-0">
 
-          <div class="sidebar-content-wrapper tw-h-full tw-no-scrollbar tw-overflow-y-auto tw-overflow-x-hidden">
+          <div class="tw-no-scrollbar tw-overflow-y-scroll tw-overflow-x-hidden sidebar-content-wrapper tw-h-full  tw-pb-4" data-simplebar>
             <div class="sidebar-content">
 
               <slot />

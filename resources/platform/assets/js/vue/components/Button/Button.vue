@@ -1,5 +1,5 @@
 <script setup>
-import { bgColor } from '../../constants/brands'
+import { bgColor } from '../../../constants/brands'
 const props = defineProps({
     label: {
         type: String,

@@ -10,7 +10,10 @@
   export default {
     props: {
       vueRouter: Boolean,
-      brand: String
+      brand: {
+        type: String,
+        default: 'drumeo',
+      }
     },
     setup(props) {
       console.log(`Has Vue Router: ${props.vueRouter}`)

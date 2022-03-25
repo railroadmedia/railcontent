@@ -1,5 +1,5 @@
 <script setup>
-import { bgImg } from '../../constants/brands'
+import { bgImg } from '../../../constants/brands'
 const props = defineProps({
     brand: {
         type: String,

@@ -47,6 +47,12 @@ module.exports = {
         '.bg-musora': {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
         },
+        '.fade-enter-active, .fade-leave-active': {
+          transition: 'opacity 150ms ease'
+        },
+        '.fade-enter-from,.fade-leave-to': {
+          opacity: 0
+        },
         '[v-cloak]': {
           display: 'none',
         },

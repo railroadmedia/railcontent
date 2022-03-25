@@ -1,6 +1,7 @@
 @php
     $isSubscriber = true;
     $page = Request::segment(1);
+    // $brand
 @endphp
 
 @extends('partials.layout')
@@ -18,8 +19,7 @@
             @if ($isSubscriber)
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
-                    <h4><span class="tw-capitalize">{{ $brand }}</span> Homepage</h4>
-                    <h5>Path: /{{ $page }}</h5>
+                    
                 </div>
 
             @endif

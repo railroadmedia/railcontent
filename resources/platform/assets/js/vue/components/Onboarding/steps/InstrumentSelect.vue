@@ -4,7 +4,7 @@ import InstrumentCardContent from '../InstrumentCardContent.vue'
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 import StepWrapper from '../StepWrapper.vue'
 
-import { brandUrl, bgColor, bgImg } from '../../../constants/brands'
+import { brandUrl, bgColor, bgImg } from '../../../../constants/brands'
 const props = defineProps({
     brand: {
         type: String
