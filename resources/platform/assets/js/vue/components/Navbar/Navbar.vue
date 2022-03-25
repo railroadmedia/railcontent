@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <nav class="tw-z-100 tw-fixed tw-top-0 tw-flex tw-h-[58px] tw-w-full tw-justify-between tw-px-4 tw-transition tw-bg-[#F9FBFB]/90 dark:tw-bg-[#081825]/90 tw-backdrop-blur-xl">
+  <nav class="tw-z-50 tw-fixed tw-top-0 tw-flex tw-h-[58px] tw-w-full tw-justify-between tw-px-4 tw-transition tw-bg-[#F9FBFB]/90 dark:tw-bg-[#081825]/90 tw-backdrop-blur-xl tw-shadow-[0_0_5px_rgb(0,0,0,.2)]">
     
     <div class="tw-row tw-flex tw-items-center">
       
@@ -37,6 +37,7 @@ export default {
     </div>
     <div class="tw-self-end">
       <UserIcon
+        :brand="brand"
         @onColorModeToggle="$emit('onColorModeToggle')"
         userName="John Doe"
         userPhoto="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"

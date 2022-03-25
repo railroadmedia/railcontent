@@ -1,6 +1,6 @@
 <script setup>
 import { CheckIcon } from '@heroicons/vue/solid'
-import { bgColor } from '../../constants/brands'
+import { bgColor } from '../../../constants/brands'
 const props = defineProps({
     stepType: {
         type: String,

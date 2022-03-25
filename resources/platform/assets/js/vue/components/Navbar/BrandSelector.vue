@@ -2,14 +2,22 @@
 import { ref } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import SquaredCard from '../SquaredCard/SquaredCard.vue'
-import { textColor, bgImg, brandUrl } from '../../constants/brands.js'
+import { textColor, bgImg, brandUrl } from '../../../constants/brands.js'
 
 const brandNames = ['drumeo', 'pianote', 'guitareo', 'singeo']
 
 export default {
     name: 'BrandSelector',
     components: { ModalRenderer, SquaredCard },
-    props: ['onBrandSelect', 'brand'],
+    props: {
+        brand: {
+            type: String,
+            default: 'drumeo'
+        },
+        onBrandSelect: {
+            type: String
+        }
+    },
     emits: ['onBrandSelect'],
     setup(_props, context) {
         const isSelectorOpen = ref(false)

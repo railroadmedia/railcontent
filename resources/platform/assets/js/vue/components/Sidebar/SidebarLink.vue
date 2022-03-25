@@ -1,5 +1,5 @@
 <script>
-import { textColor, borderColor } from '../../constants/brands.js'
+import { textColor, borderColor } from '../../../constants/brands.js'
 
 export default {
   name: 'SidebarLink',

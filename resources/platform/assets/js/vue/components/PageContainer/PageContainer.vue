@@ -4,16 +4,21 @@ import Navbar from '../Navbar/Navbar.vue'
 import Sidebar from '../Sidebar/Sidebar.vue'
 import Footer from '../Footer/Footer.vue'
 import { useRouter, useRoute } from 'vue-router'
+import SpriteSheet from '../MusoraIcons/SpriteSheet.vue'
 
 export default {
     name: 'PageContainer',
-    components: { Navbar, Sidebar, Footer },
+    components: { Navbar, Sidebar, Footer, SpriteSheet, },
+    data() {
+        return {
+            brand: 'drumeo'
+        }
+    },
 
     setup(props, context) {
         const isSidebarCollapsed = ref(false)
         const isSidebarHidden = ref(false)
         const isDarkModeSelected = ref(false)
-        const brand = ref('drumeo')
         const route = useRoute()
         const router = useRouter()
         
@@ -55,7 +60,6 @@ export default {
             isSidebarCollapsed,
             isSidebarHidden,
             isDarkModeSelected,
-            brand,
             onCollapseSidebar,
             onColorModeToggle,
             onBrandSelect
@@ -69,7 +73,6 @@ export default {
         const urlSearchParams = new URLSearchParams(window.location.search)
         const brandParam = urlSearchParams.get('brand');
         this.brand = brandParam || 'drumeo';
-
         //Set Sidebar State
         const smallBreakpoint = window.matchMedia('(max-width: 767px)');
         if(smallBreakpoint.matches) {
@@ -110,6 +113,8 @@ export default {
     <main :class="isDarkModeSelected ? 'tw-dark' : 'tw-block'"
           class="tw-min-h-screen tw-w-screen"
     >
+        <sprite-sheet></sprite-sheet>
+
         <Navbar
             :brand="brand"
             :isSidebarHidden="isSidebarHidden"
@@ -129,7 +134,7 @@ export default {
             />
 
             <!-- Content Container -->
-            <main class="tw-flex tw-grow tw-flex-col">
+            <main class="tw-flex tw-grow tw-flex-col tw-relative">
 
                 <!-- Content -->
                 <section class="tw-h-full tw-w-full">
@@ -140,6 +145,14 @@ export default {
 
                 <!-- Footer -->
                 <Footer />
+
+                <!-- Sidebar Content Wrapper -->
+                <Transition name="fade">
+                    <div v-if="!isSidebarCollapsed && !isSidebarHidden" 
+                        @click="isSidebarHidden = true"
+                        class="tw-absolute md:tw-hidden tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30">
+                    </div>
+                </Transition>
             </main>
         </div>
     </main>
