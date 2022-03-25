@@ -1,7 +1,7 @@
 @php
     $isSubscriber = true;
     $page = Request::segment(1);
-    // $brand
+    $brand = request()->get('brand');
 @endphp
 
 @extends('partials.layout')
@@ -19,7 +19,9 @@
             @if ($isSubscriber)
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
-                    
+
+                    <home-card-links brand="{{ $brand }}"/>
+
                 </div>
 
             @endif

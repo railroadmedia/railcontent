@@ -41,8 +41,9 @@ export default {
 </script>
 
 <template>
-    <div class="tw-flex tw-flex-col">
-        <label :for="id" class="tw-px-[13px] tw-pb-[5px] tw-text-white">{{
+    <div class="tw-flex tw-flex-col tw-relative">
+        <div class="tw-absolute"></div>
+        <label v-if="labelValue" :for="id" class="tw-px-[13px] tw-pb-[5px] tw-text-white">{{
             labelValue
         }}</label>
         <input

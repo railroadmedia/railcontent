@@ -16,15 +16,16 @@ const props = defineProps({
     default: null,
   },
 });
-
+ 
 const emit = defineEmits(['onCrop']);
 
 const cropper = ref(null);
-const zoomLevel = ref(0);
+const zoomLevel = ref(0); 
 
 function cropImage() {
-  const imageSelection = cropper.value.getResult();
-  emit("onCrop", imageSelection.image.src);
+  const result = cropper.value.getResult();
+  const image = result.canvas.toDataURL();
+  emit("onCrop", image);
 }
 
 function zoomIn() {

@@ -14,28 +14,26 @@ const props = defineProps({
 const percentCompleted = ref(0);
 
 onMounted(() => {
-  (function () {
-    var data = new FormData();
-    data.append("profile-pic", "profile-pic-img");
-    data.append("data", image);
+  var data = new FormData();
+  data.append("profile-pic", "profile-pic-img");
+  data.append("data", props.image);
 
-    var config = {
-      onUploadProgress: function (progressEvent) {
-        percentCompleted.value = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total
-        );
-      },
-    };
+  var config = {
+    onUploadProgress: function (progressEvent) {
+      percentCompleted.value = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total
+      );
+    },
+  };
 
-    axios
-      .post(FILE_UPLOAD_SERVICE, data, config)
-      .then(function (res) {
-        console.log("success", res);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  })();
+  axios
+    .post(FILE_UPLOAD_SERVICE, data, config)
+    .then(function (res) {
+      console.log("success", res);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 });
 </script>
 
