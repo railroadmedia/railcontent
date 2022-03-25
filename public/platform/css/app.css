@@ -1704,6 +1704,12 @@ a:visited {
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
+.tw-bg-black\/40 {
+  background-color: rgb(0 0 0 / 0.4);
+}
+.tw-bg-black\/50 {
+  background-color: rgb(0 0 0 / 0.5);
+}
 .tw-bg-opacity-40 {
   --tw-bg-opacity: 0.4;
 }
@@ -1767,6 +1773,12 @@ a:visited {
 }
 .tw-to-\[\#FFA811\] {
   --tw-gradient-to: #FFA811;
+}
+.tw-to-singeo\/60 {
+  --tw-gradient-to: rgb(131 0 233 / 0.6);
+}
+.tw-to-\[\#DD4572\]\/80 {
+  --tw-gradient-to: rgb(221 69 114 / 0.8);
 }
 .tw-bg-cover {
   background-size: cover;
@@ -2222,6 +2234,10 @@ a:visited {
 .tw-text-\[\#FFA811\] {
   --tw-text-opacity: 1;
   color: rgb(255 168 17 / var(--tw-text-opacity));
+}
+.tw-text-\[\#DD4572\] {
+  --tw-text-opacity: 1;
+  color: rgb(221 69 114 / var(--tw-text-opacity));
 }
 .tw-underline {
   -webkit-text-decoration-line: underline;

@@ -23400,7 +23400,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Method "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/method?brand=".concat($props.brand),
-    "class": "tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-pianote tw-bg-gradient-to-b tw-from-[#00101D]/60 tw-to-pianote/60"
+    "class": "tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-singeo tw-bg-gradient-to-b tw-from-[#00101D]/60 tw-to-singeo/60"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
     "icon-name": "method",
     "class": "tw-mb-2"
@@ -23408,7 +23408,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Method "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/songs?brand=".concat($props.brand),
-    "class": "tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-[#5FCFF5] tw-bg-gradient-to-b tw-from-[#00101D]/80 tw-to-[#5FCFF5]/80"
+    "class": "tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-[#DD4572] tw-bg-gradient-to-b tw-from-[#00101D]/80 tw-to-[#DD4572]/80"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
     "icon-name": "headphones",
     "class": "tw-mb-2"

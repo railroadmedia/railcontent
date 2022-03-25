@@ -1,7 +1,7 @@
 <template>
     <section class="tw-grid tw-grid-cols-3 tw-gap-4 tw-my-4">
         <!-- Method -->
-        <a :href="`/method?brand=${brand}`" class="tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-pianote tw-bg-gradient-to-b tw-from-[#00101D]/60 tw-to-pianote/60">
+        <a :href="`/method?brand=${brand}`" class="tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-singeo tw-bg-gradient-to-b tw-from-[#00101D]/60 tw-to-singeo/60">
             <!-- Icon -->
             <musora-icon icon-name="method" class="tw-mb-2"/>
             <!--Name SVG-->
@@ -10,7 +10,7 @@
             </svg>
         </a>
         <!-- Method -->
-        <a :href="`/songs?brand=${brand}`" class="tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-[#5FCFF5] tw-bg-gradient-to-b tw-from-[#00101D]/80 tw-to-[#5FCFF5]/80">
+        <a :href="`/songs?brand=${brand}`" class="tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-h-32 tw-rounded-lg tw-text-[#DD4572] tw-bg-gradient-to-b tw-from-[#00101D]/80 tw-to-[#DD4572]/80">
             <!-- Icon -->
             <musora-icon icon-name="headphones" class="tw-mb-2"/>
             <!--Name SVG-->
