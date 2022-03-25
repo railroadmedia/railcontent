@@ -163,12 +163,17 @@ abstract class ArrayExpressible
                         }
                     }
                 } else {
-                    $extraProperties = $fields->getExtra();
+                    if(is_string($fields)){
+                        $results = $fields;
+                    }elseif($fields instanceOf Content) {
 
-                    if ($extraProperties && array_key_exists($criteria[$i], $extraProperties)) {
-                        $results = $fields = $fields->getProperty($criteria[$i]);
-                    } else {
-                        return null;
+                        $extraProperties = $fields->getExtra();
+
+                        if ($extraProperties && array_key_exists($criteria[$i], $extraProperties)) {
+                            $results = $fields = $fields->getProperty($criteria[$i]);
+                        } else {
+                            return null;
+                        }
                     }
 
                     //decorate extra properties
