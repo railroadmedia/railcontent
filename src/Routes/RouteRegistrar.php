@@ -478,19 +478,19 @@ class RouteRegistrar
                     'content',
                     ContentJsonController::class . '@index'
                 )
-                    ->name('content.index');
+                    ->name('api.content.index');
 
                 $this->router->get(
                     'content/parent/{parentId}',
                     ContentJsonController::class . '@getByParentId'
                 )
-                    ->name('content.get-by-parent-id');
+                    ->name('api.content.get-by-parent-id');
 
                 $this->router->get(
                     'content/get-by-ids',
                     ContentJsonController::class . '@getByIds'
                 )
-                    ->name('content.get-by-ids');
+                    ->name('api.content.get-by-ids');
 
                 $this->router->put(
                     'start',
