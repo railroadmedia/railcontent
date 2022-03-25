@@ -6,18 +6,23 @@ export default {
   name: 'Navbar',
   components: { HamburguerButton, BrandSelector, UserIcon },
   props: {
-    brand: String
+    brand: String,
+    isSidebarHidden: Boolean,
+    isSidebarCollapsed: Boolean,
   },
   emits: ['onCollapseSidebar', 'onBrandSelect', 'onColorModeToggle']
 }
 </script>
 
 <template>
-  <nav class="tw-z-100 tw-fixed tw-top-0 tw-flex tw-h-[58px] tw-w-full tw-justify-between tw-px-[12px] tw-transition tw-bg-[#F9FBFB]/90 dark:tw-bg-[#081825]/90 tw-backdrop-blur-xl">
+  <nav class="tw-z-100 tw-fixed tw-top-0 tw-flex tw-h-[58px] tw-w-full tw-justify-between tw-px-4 tw-transition tw-bg-[#F9FBFB]/90 dark:tw-bg-[#081825]/90 tw-backdrop-blur-xl">
     
     <div class="tw-row tw-flex tw-items-center">
       
-      <HamburguerButton @onclick="$emit('onCollapseSidebar')" />
+      <HamburguerButton :isSidebarHidden="isSidebarHidden" 
+                        :isSidebarCollapsed="isSidebarCollapsed"
+                        @onclick="$emit('onCollapseSidebar')" 
+      />
       
       <!-- Logo -->
       <a href="/members" class="tw-hidden tw-w-[140px] lg:tw-flex tw-text-black dark:tw-text-white tw-mr-16">

@@ -4,6 +4,7 @@ import OptionElement from '../AvatarMenu/OptionElement.vue'
 import OptionGroup from '../AvatarMenu/OptionGroup.vue'
 import AvatarMenu from '../AvatarMenu/AvatarMenu.vue'
 import MenuHeader from '../AvatarMenu/MenuHeader.vue'
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 export default {
   name: 'UserIcon',
@@ -13,7 +14,8 @@ export default {
     AvatarMenu,
     OptionGroup,
     OptionElement,
-    MenuHeader
+    MenuHeader,
+    MusoraIcon
   },
   setup(props, context) {
     const isUserMenuOpen = ref(false)
@@ -42,7 +44,7 @@ export default {
 <template>
   <div
     v-on:click="handleMenuOpen"
-    class="tw-ml-[36px] tw-flex tw-h-full tw-flex-row tw-items-center tw-px-[12px] tw-py-[6px]"
+    class="tw-ml-[36px] tw-flex tw-h-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
     <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full" />
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
@@ -52,18 +54,46 @@ export default {
         :userPhoto="userPhoto"
       />
       <OptionGroup>
-        <OptionElement @optionClick="() => $emit('onColorModeToggle')"
-          >Toogle Color Mode</OptionElement
-        >
-        <OptionElement href="/stuff">Playlists</OptionElement>
-        <OptionElement>Stuff</OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 26 29" icon-name="bell" class="tw-mr-2"/>
+          Notifications
+        </OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="playlist" class="tw-mr-2"/>
+          Playlists
+        </OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="calendar" class="tw-mr-2"/>
+          Schedule
+        </OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="board-complete" class="tw-mr-2"/>
+          Apply For Review
+        </OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="settings" class="tw-mr-2"/>
+          Settings
+        </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement> More Stuff </OptionElement>
-        <OptionElement> Other Stuff </OptionElement>
+        <OptionElement @optionClick="() => $emit('onColorModeToggle')">
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="moon" class="tw-mr-2"/>
+          Toogle Color Mode
+        </OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="phone" class="tw-mr-2"/>
+            Support
+          </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement @onOptionClick="handleLogout">Logout </OptionElement>
+        <OptionElement>
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="cart" class="tw-mr-2"/>
+          Shop
+        </OptionElement>
+        <OptionElement @onOptionClick="handleLogout">
+          <musora-icon width="14" height="14" viewBox="0 0 29 29" icon-name="sign-out" class="tw-mr-2"/>
+          Logout 
+        </OptionElement>
       </OptionGroup>
     </AvatarMenu>
   </div>
