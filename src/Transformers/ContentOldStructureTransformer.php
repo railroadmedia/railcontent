@@ -30,7 +30,6 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         if ($extra) {
             foreach ($extra as $item) {
-
                 $value = $content->getProperty($item);
 
                 if (is_array($value)) {
@@ -44,54 +43,57 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             if ($valExtra) {
                                 foreach ($valExtra as $extraItemVal) {
                                     $valueExtraItem = $val->getProperty($extraItemVal);
-                                    if($extraItemVal == 'comments'){
-                                        $extraPropertiesItem[$extraItemVal] = Fractal::create()
-                                            ->collection($valueExtraItem)
-                                            ->transformWith(CommentOldStructureTransformer::class)
-                                            ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
-                                            ->toArray();
-                                    } else if (is_array($valueExtraItem)) {
-                                       foreach ($valueExtraItem as $index => $item2) {
-                                            if (is_object($item2) && ($item2->getId() != $content->getId())) {
-                                                $extraForItem =
-                                                    $serializer->serializeToUnderScores(
+                                    if ($extraItemVal == 'comments') {
+                                        $extraPropertiesItem[$extraItemVal] =
+                                            Fractal::create()
+                                                ->collection($valueExtraItem)
+                                                ->transformWith(CommentOldStructureTransformer::class)
+                                                ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                                                ->toArray();
+                                    } else {
+                                        if (is_array($valueExtraItem)) {
+                                            foreach ($valueExtraItem as $index => $item2) {
+                                                if (is_object($item2) && ($item2->getId() != $content->getId())) {
+                                                    $extraForItem = $serializer->serializeToUnderScores(
                                                         $item2,
                                                         $entityManager->getClassMetadata(get_class($item2))
                                                     );
-                                                $fields=[];
-                                                $data=[];
-                                                if ($item2 instanceof Content) {
-                                                    $fields = [
-                                                        'fields' => $this->includeFields($item2)
-                                                            ->getData(),
-                                                    ];
+                                                    $fields = [];
+                                                    $data = [];
+                                                    if ($item2 instanceof Content) {
+                                                        $fields = [
+                                                            'fields' => $this->includeFields($item2)
+                                                                ->getData(),
+                                                        ];
 
-                                                    $data =
-                                                        Fractal::create()
-                                                            ->collection($item2->getData())
-                                                            ->transformWith(ContentDataOldStructureTransformer::class)
-                                                            ->toArray();
+                                                        $data =
+                                                            Fractal::create()
+                                                                ->collection($item2->getData())
+                                                                ->transformWith(
+                                                                    ContentDataOldStructureTransformer::class
+                                                                )
+                                                                ->toArray();
+                                                    }
+                                                    $extraPropertiesItem[$extraItemVal][$index] =
+                                                        array_merge($extraForItem, $fields, $data);
+                                                } else {
+                                                    $extraPropertiesItem[$extraItemVal][$index] = $item2;
                                                 }
-                                                $extraPropertiesItem[$extraItemVal][$index] = array_merge($extraForItem, $fields, $data);
-
-                                            } else {
-                                                $extraPropertiesItem[$extraItemVal][$index] = $item2;
                                             }
+                                        } elseif (is_object($extraItemVal) &&
+                                            ($extraItemVal->getId() != $content->getId())) {
+                                            $extraPropertiesItem[$extraItemVal] = $serializer->serializeToUnderScores(
+                                                $valueExtraItem,
+                                                $entityManager->getClassMetadata(get_class($valueExtraItem))
+                                            );
+                                        } else {
+                                            $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
                                         }
-                                    } elseif (is_object($extraItemVal) &&
-                                        ($extraItemVal->getId() != $content->getId())) {
-                                        $extraPropertiesItem[$extraItemVal] = $serializer->serializeToUnderScores(
-                                            $valueExtraItem,
-                                            $entityManager->getClassMetadata(get_class($valueExtraItem))
-                                        );
-                                    } else {
-                                        $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
                                     }
                                 }
                             }
 
                             if ($val->getId() != $content->getId()) {
-
                                 $extraForItem = array_merge(
                                     $serializer->serializeToUnderScores(
                                         $val,
@@ -106,14 +108,16 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                             ->getData(),
                                     ];
 
-                                    $data = Fractal::create()->collection($val->getData())->transformWith(ContentDataOldStructureTransformer::class)->toArray();
+                                    $data =
+                                        Fractal::create()
+                                            ->collection($val->getData())
+                                            ->transformWith(ContentDataOldStructureTransformer::class)
+                                            ->toArray();
 
                                     $extraProperties[$item][] = array_merge($extraForItem, $fields, $data);
-
                                 } else {
                                     $extraProperties[$item][] = $extraForItem;
                                 }
-
                             }
                         } else {
                             if (is_array($val)) {
@@ -139,7 +143,11 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             }
                         }
                         if ($value->getId() != $content->getId()) {
-                            $data = Fractal::create()->collection($value->getData())->transformWith(ContentDataOldStructureTransformer::class)->toArray();
+                            $data =
+                                Fractal::create()
+                                    ->collection($value->getData())
+                                    ->transformWith(ContentDataOldStructureTransformer::class)
+                                    ->toArray();
                             $extraProperties[$item] = array_merge(
                                 $serializer->serializeToUnderScores(
                                     $value,
@@ -158,8 +166,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 }
             }
         }
- 
-        $defaultIncludes = ['fields', 'data'];
+
+        $defaultIncludes = ['fields'];
 
         if ($content->getProperty('permissions')) {
             $defaultIncludes[] = 'permissions';
@@ -177,10 +185,11 @@ class ContentOldStructureTransformer extends TransformerAbstract
             unset($serialized[$extraKey]);
         }
 
-        $results = array_merge(
-            $serialized,
-            $extraProperties
-        );
+        $results = array_merge($serialized, $extraProperties, [
+                                              'fields' => $this->includeFields($content)
+                                                  ->getData(),
+                                              'data' => $this->includeData($content),
+                                          ]);
 
         return $results;
     }
@@ -205,20 +214,21 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeData(Content $content)
     {
+        $data = [];
         if (!$content->getData()
             ->isEmpty()) {
-            return $this->collection(
-                $content->getData(),
-                new ContentDataOldStructureTransformer(),
-                'contentData'
-            );
-        } else {
-            return $this->collection(
-                [],
-                new ArrayTransformer(),
-                'contentData'
-            );
+            foreach ($content->getData() as $datum) {
+                $data[] = [
+                    'id' => $datum->getId(),
+                    'key' => $datum->getKey(),
+                    'value' => utf8_encode($datum->getValue()),
+                    'position' => $datum->getPosition(),
+                    'content_id' => $content->getId(),
+                ];
+            }
         }
+
+        return $data;
     }
 
     /**
@@ -233,8 +243,12 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $fields = [];
         foreach (config('oldResponseMapping.fields', []) as $field) {
-            $getterName = $getFields = Inflector::camelize('get' . ucwords(camel_case($field)));
-            $value = call_user_func([$content, $getterName]);
+            $getterName = $getFields = Inflector::camelize('get'.ucwords(camel_case($field)));
+            if ($field == 'instructor') {
+                $value = call_user_func([$content, 'getContentInstructors']);
+            } else {
+                $value = call_user_func([$content, $getterName]);
+            }
 
             if ($value) {
                 if ($value instanceof PersistentCollection) {
@@ -245,7 +259,6 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             $arrayValue = utf8_encode($value);
                         } else {
                             if (($value instanceof Content)) {
-
                                 $arrayValue = $this->transform($value);
                                 $arrayValue['fields'] =
                                     $this->includeFields($value)
@@ -256,9 +269,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                         ->collection($value->getData())
                                         ->transformWith(ContentDataOldStructureTransformer::class)
                                         ->toArray();
-                                $arrayValue['data'] =
-                                    $data['data'];
-
+                                $arrayValue['data'] = $data['data'];
                             } else {
                                 $arrayValue = $value;
                             }
@@ -284,9 +295,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         $arrayValue['fields'] =
                             $this->includeFields($value)
                                 ->getData();
-                        $arrayValue['data'] =
-                            $this->includeData($value)
-                                ->getData();
+                        $arrayValue['data'] = $this->includeData($value);
 
                         $fields[] = [
                             'id' => rand(),
@@ -323,7 +332,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     if (is_string($value) && mb_check_encoding($value) == false) {
                         $value = utf8_encode($value);
                     }
-                    if($field == 'associated_user'){
+                    if ($field == 'associated_user') {
                         $field = 'associated_user_id';
                         $value = $value->getId();
                     }

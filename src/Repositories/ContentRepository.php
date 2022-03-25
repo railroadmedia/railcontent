@@ -214,7 +214,6 @@ class ContentRepository extends EntityRepository
 
         $qb =
             $this->build()
-                ->paginate($this->limit, $this->page - 1)
                 ->restrictByUserAccess()
                 ->restrictByTypes($this->typesToInclude)
                 ->includeByUserStates($this->includedUserStates)
@@ -222,15 +221,14 @@ class ContentRepository extends EntityRepository
                 ->restrictByUserStates($this->requiredUserStates)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
+                ->includeByFields($this->includedFields)
                 ->restrictByFields($this->requiredFields)
                 ->orderBy(implode(', ', $orderByColumns))
-                ->setCacheable(true)
-                ->setCacheRegion('pull');
+                ->paginate($this->limit, ($this->page - 1));
 
         if(self::$getFollowedContentOnly){
             $qb->restrictFollowedContent();
         }
-
         return $qb;
     }
 
@@ -304,7 +302,10 @@ class ContentRepository extends EntityRepository
                 if ($requiredFieldData == 'style'){
                     $requiredFieldData = 'styles';
                 }
-                
+                if ($requiredFieldData == 'instructor'){
+                    $requiredFieldData = 'contentInstructors';
+                }
+
                 if (in_array(
                     $requiredFieldData,
                     $this->getEntityManager()
@@ -352,19 +353,20 @@ class ContentRepository extends EntityRepository
 
                         if ($requiredFieldData == 'styles') {
                             $getterName = 'getStyle';
-                        } else {
-
+                        } elseif ($requiredFieldData == 'contentInstructors') {
+                            $getterName = 'getInstructor';
+                        }else {
                             $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
                         }
                         $value = call_user_func([$result, $getterName]);
 
-                        if ($requiredFieldData == 'instructor') {
+                        if ($requiredFieldData == 'contentInstructors') {
 
                             $instructor = $result->getInstructor();
 
                             if (!in_array($instructor->getId(), $instructors)) {
                                 $instructors[] = $instructor->getId();
-                                $filteredContents[$requiredFieldData][] = $instructor;
+                                $filteredContents['instructor'][$instructor->getId()] = $instructor;
                             }
 
                         } else {
@@ -595,19 +597,20 @@ class ContentRepository extends EntityRepository
         $qb = new ContentQueryBuilder($this->getEntityManager());
         $lifetime = config('railcontent.cache_duration');
 
-        if (auth()->id()) {
-            $userPermissionRepository =
-                $this->getEntityManager()
-                    ->getRepository(UserPermission::class);
 
-            $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
-
-            if ($userPermission) {
-                $lifetime =
-                    Carbon::parse($userPermission[0]->getExpirationDate())
-                        ->diffInSeconds(Carbon::now());
-            }
-        }
+//        if (auth()->id()) {
+//            $userPermissionRepository =
+//                $this->getEntityManager()
+//                    ->getRepository(UserPermission::class);
+//
+//            $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
+//
+//            if ($userPermission) {
+//                $lifetime =
+//                    Carbon::parse($userPermission[0]->getExpirationDate())
+//                        ->diffInSeconds(Carbon::now());
+//            }
+//        }
 
         //Doctrine ORM Second level cache disable
 //        $this->getEntityManager()
@@ -618,16 +621,16 @@ class ContentRepository extends EntityRepository
 //                $lifetime
 //            );
 
-        return $qb->select(config('railcontent.table_prefix') . 'content', 'progress', 'cd')
-            ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content' . '.userProgress',
-                'progress',
-                'WITH',
-                'progress.user = :userId'
-            )
-            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.data', 'cd')
-            ->setParameter('userId', auth()->id());
+        return $qb->select(config('railcontent.table_prefix') . 'content')
+            ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content');
+//            ->leftJoin(
+//                config('railcontent.table_prefix') . 'content' . '.userProgress',
+//                'progress',
+//                'WITH',
+//                'progress.user = :userId'
+//            )
+//            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.data', 'cd')
+//            ->setParameter('userId', auth()->id());
     }
 
     /**

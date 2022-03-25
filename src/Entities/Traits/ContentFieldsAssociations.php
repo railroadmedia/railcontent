@@ -25,7 +25,7 @@ trait ContentFieldsAssociations
     /**
      * @ORM\OneToMany(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist","remove"})
      */
-    protected $instructor = [];
+    protected $contentInstructors = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content",
@@ -150,7 +150,7 @@ trait ContentFieldsAssociations
     {
         $names = [];
 
-        foreach ($this->getInstructor() as $contentInstructor) {
+        foreach ($this->getContentInstructors() as $contentInstructor) {
             $names[] = $contentInstructor->getInstructor()->getName();
         }
 
@@ -160,17 +160,17 @@ trait ContentFieldsAssociations
     /**
      * @return ContentInstructor[]
      */
-    public function getInstructor()
+    public function getContentInstructors()
     {
-        return $this->instructor;
+        return $this->contentInstructors;
     }
 
     /**
      * @param ContentInstructor $instructor
      */
-    public function addInstructor(ContentInstructor $instructor)
+    public function addContentInstructors(ContentInstructor $instructor)
     {
-        if ($this->instructor->contains($instructor)) {
+        if ($this->contentInstructors->contains($instructor)) {
             // Do nothing if its already part of our collection
             return;
         }
@@ -178,10 +178,10 @@ trait ContentFieldsAssociations
         $predictate = function ($element) use ($instructor) {
             return $element->getInstructor() === $instructor->getInstructor();
         };
-        $exist = $this->instructor->filter($predictate);
+        $exist = $this->contentInstructors->filter($predictate);
 
         if ($exist->isEmpty()) {
-            $this->instructor->add($instructor);
+            $this->contentInstructors->add($instructor);
         } else {
             $instructors = $exist->first();
             if ($instructors->getPosition() == $instructor->getPosition()) {
@@ -190,7 +190,7 @@ trait ContentFieldsAssociations
 
             $key = $exist->key();
             if ($instructor->getPosition()) {
-                $this->getInstructor()
+                $this->contentInstructors()
                     ->get($key)
                     ->setPosition($instructor->getPosition());
             }
@@ -202,22 +202,22 @@ trait ContentFieldsAssociations
     /**
      * @param ContentInstructor $instructor
      */
-    public function setInstructor(?ContentInstructor $instructor)
+    public function setContentInstructors(?ContentInstructor $instructor)
     {
-        $this->instructor = $instructor;
+        $this->contentInstructors = $instructor;
     }
 
     /**
      * @param ContentInstructor $contentInstructor
      */
-    public function removeInstructor(ContentInstructor $contentInstructor)
+    public function removeContentInstructors(ContentInstructor $contentInstructor)
     {
         // If does not exist in the collection, then we don't need to do anything
-        if (!$this->instructor->contains($contentInstructor)) {
+        if (!$this->contentInstructors->contains($contentInstructor)) {
             return;
         }
 
-        $this->instructor->removeElement($contentInstructor);
+        $this->contentInstructors->removeElement($contentInstructor);
     }
 
     /**

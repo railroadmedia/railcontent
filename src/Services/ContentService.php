@@ -327,8 +327,6 @@ class ContentService
                 ->setParameter('slug', $slug)
                 ->setParameter('type', $type)
                 ->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
                 ->getResult();
 
         return $this->resultsHydrator->hydrate($results, $this->entityManager);
@@ -749,7 +747,7 @@ class ContentService
         $requiredFilters = []
     ) {
         //user
-        $alias = 'up';
+        $alias = 'progress';
 
         $qb =
             $this->contentRepository->build()
@@ -775,8 +773,6 @@ class ContentService
 
         $rows =
             $qb->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
                 ->getResult();
         $hydratedResults = $this->resultsHydrator->hydrate($rows, $this->entityManager);
 
@@ -955,8 +951,8 @@ class ContentService
         }
 
         $filter = $this->contentRepository->startFilter(
-            $page,
-            $limit,
+            (int)$page,
+            (int)$limit,
             $sort,
             $includedTypes,
             $slugHierarchy,

@@ -42,7 +42,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             $this->andWhere(
                 $this->expr()
                     ->in(
-                        config('railcontent.table_prefix') . 'content' . '.status',
+                        config('railcontent.table_prefix').'content'.'.status',
                         ContentRepository::$availableContentStatues
                     )
             );
@@ -61,7 +61,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 'where',
                 $this->expr()
                     ->lte(
-                        config('railcontent.table_prefix') . 'content' . '.publishedOn',
+                        config('railcontent.table_prefix').'content'.'.publishedOn',
                         'CURRENT_TIMESTAMP()'
                     )
             );
@@ -71,7 +71,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             $this->andWhere(
                 $this->expr()
                     ->gt(
-                        config('railcontent.table_prefix') . 'content' . '.publishedOn',
+                        config('railcontent.table_prefix').'content'.'.publishedOn',
                         'CURRENT_TIMESTAMP()'
                     )
             );
@@ -86,7 +86,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
     public function restrictBrand()
     {
         $this->andWhere(
-            config('railcontent.table_prefix') . 'content' . '.brand IN (:brands)'
+            config('railcontent.table_prefix').'content'.'.brand IN (:brands)'
         )
             ->setParameter('brands', array_values(array_wrap(config('railcontent.available_brands'))));
 
@@ -100,7 +100,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
     public function restrictByTypes(array $typesToInclude)
     {
         if (!empty($typesToInclude)) {
-            $this->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $typesToInclude);
+            $this->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:types)')
+                ->setParameter('types', $typesToInclude);
         }
 
         return $this;
@@ -134,11 +135,13 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
         }
 
         foreach ($requiredUserStates as $index => $requiredUserState) {
-            $this->andWhere('progress.state IN (:states)')
+            $this->join(config('railcontent.table_prefix').'content'.'.userProgress', 'progress')
+                ->andWhere('progress.state IN (:states)')
                 ->andWhere('progress.user = :user')
                 ->setParameter('states', $requiredUserState['state'])
                 ->setParameter('user', $requiredUserState['user']);
         }
+
         return $this;
     }
 
@@ -159,10 +162,10 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             $condition =
                 $this->expr()
                     ->andX(
-                        'pu.state  = ' .
+                        'pu.state  = '.
                         $this->expr()
-                            ->literal($includedUserState['state']) .
-                        ' AND pu.user = ' .
+                            ->literal($includedUserState['state']).
+                        ' AND pu.user = '.
                         $includedUserState['user']
                     );
 
@@ -184,51 +187,68 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
         }
 
         foreach ($requiredFields as $index => $requiredFieldData) {
+            $fieldName = $requiredFieldData['name'];
+            if (strpos($requiredFieldData['name'], '_') !== false ||
+                strpos($requiredFieldData['name'], '-') !== false) {
+                $fieldName = camel_case($requiredFieldData['name']);
+            }
+
             if (in_array(
-                $requiredFieldData['name'],
+                $fieldName,
                 $this->getEntityManager()
                     ->getClassMetadata(Content::class)
                     ->getFieldNames()
             )) {
-                $this->andWhere(
-                    config('railcontent.table_prefix') .
-                    'content' .
-                    '.' .
-                    $requiredFieldData['name'] .
-                    ' ' .
-                    $requiredFieldData['operator'] .
-                    '  (:value' .
-                    $index .
-                    ')'
-                )
-                    ->setParameter('value' . $index, $requiredFieldData['value']);
+                if ($fieldName == 'isCoach') {
+                    $this->andWhere(
+                        'railcontent_content'.'.'.$fieldName.' '.$requiredFieldData['operator'].'  :value'.$index.''
+                    )
+                        ->setParameter('value'.$index, (int)$requiredFieldData['value']);
+                } else {
+                    $likeOp = ($requiredFieldData['operator'] == 'like')?'%':'';
+                    $this->andWhere(
+                        config('railcontent.table_prefix').
+                        'content'.
+                        '.'.
+                        $fieldName.
+                        ' '.
+                        $requiredFieldData['operator'].
+                        '  :value'.
+                        $index.
+                        ''
+                    )
+                        ->setParameter('value'.$index, $likeOp.$requiredFieldData['value'].$likeOp);
+                }
             } else {
+                if($fieldName == 'instructor'){
+                    $fieldName = 'contentInstructors';
+                }
                 if (in_array(
-                    $requiredFieldData['name'],
+                    $fieldName,
                     $this->getEntityManager()
                         ->getClassMetadata(Content::class)
                         ->getAssociationNames()
                 )) {
                     $this->join(
-                        config('railcontent.table_prefix') .
-                        'content' .
-                        '.' .
+                        config('railcontent.table_prefix').
+                        'content'.
+                        '.'.
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
-                            ->getFieldName($requiredFieldData['name']),
-                        'pf' . $index
+                            ->getFieldName($fieldName),
+                        'pf'.$index
                     )
                         ->andWhere(
-                            'pf' .
-                            $index .
-                            '.' .
-                            $requiredFieldData['name'] .
-                            $requiredFieldData['operator'] .
-                            ' (:value' .
-                            $index .
+                            'pf'.
+                            $index.
+                            '.'.
+                            $requiredFieldData['name'].
+                            $requiredFieldData['operator'].
+                            ' (:value'.
+                            $index.
                             ')'
                         )
-                        ->setParameter('value' . $index, $requiredFieldData['value']);
+                        ->setParameter('value'.$index, $requiredFieldData['value']);
                 }
             }
         }
@@ -255,7 +275,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                     ->getClassMetadata(Content::class)
                     ->getFieldNames()
             )) {
-                $conditions[config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name']] =
+                $conditions[config('railcontent.table_prefix').'content'.'.'.$requiredFieldData['name']] =
                     [$requiredFieldData['value']];
             } else {
                 if (in_array(
@@ -265,15 +285,23 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                         ->getAssociationNames()
                 )) {
                     $this->join(
-                        config('railcontent.table_prefix') .
-                        'content' .
-                        '.' .
+                        config('railcontent.table_prefix').
+                        'content'.
+                        '.'.
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
                             ->getFieldName($requiredFieldData['name']),
-                        'ipf' . $index
+                        'ipf'.$index
                     );
-                    $conditions['ipf' . $index. '.' . $requiredFieldData['name']] = [$requiredFieldData['value']];
+                    $conditions['ipf'.$index.'.'.$requiredFieldData['name']] = [$requiredFieldData['value']];
+                } elseif ($requiredFieldData['name'] == 'instructor') {
+                    $this->join(
+                        config('railcontent.table_prefix').'content'.'.contentInstructors',
+                        'ipf'.$index
+                    );
+                    $conditions['ipf'.$index.'.instructor'] =
+                        is_array($requiredFieldData['value']) ? $requiredFieldData['value'] :
+                            [$requiredFieldData['value']];
                 }
             }
         }
@@ -284,15 +312,15 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                     ->orX();
 
             foreach ($conditions as $key => $value) {
-
                 $condition =
                     $this->expr()
                         ->orX(
-                            $key . ' IN (' . implode(",", $value) . ')'
+                            $key.' IN ('.implode(",", $value).')'
                         );
 
                 $orX->add($condition);
             }
+
             $this->andWhere($orX);
         }
 
@@ -304,7 +332,6 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictByPermissions()
     {
-
         if (ContentRepository::$bypassPermissions === true) {
             return $this;
         }
@@ -333,10 +360,10 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 $this->expr()
                     ->andX(
                         $this->expr()
-                            ->eq('content_permission.permission','user_permission.permission'),
+                            ->eq('content_permission.permission', 'user_permission.permission'),
 
-                                $this->expr()
-                                   ->eq('user_permission.user', ':user')
+                        $this->expr()
+                            ->eq('user_permission.user', ':user')
                     )
             );
 
@@ -369,7 +396,6 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             );
 
         return $this;
-
     }
 
     /**
@@ -392,7 +418,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function whereIn($param, $values)
     {
-        $this->andWhere($param . ' IN (:values)')
+        $this->andWhere($param.' IN (:values)')
             ->setParameter('values', $values);
 
         return $this;
@@ -403,7 +429,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictByFilterOptions()
     {
-         //TODO:   verify in results that at list one filter exists
+        //TODO:   verify in results that at list one filter exists
         foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
             if (in_array(
                 $requiredFieldData,
@@ -413,9 +439,9 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             )) {
                 $this->addSelect($requiredFieldData);
                 $this->leftJoin(
-                    config('railcontent.table_prefix') .
-                    'content' .
-                    '.' .
+                    config('railcontent.table_prefix').
+                    'content'.
+                    '.'.
                     $this->getEntityManager()
                         ->getClassMetadata(Content::class)
                         ->getFieldName($requiredFieldData),
@@ -452,11 +478,11 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
     {
         switch ($orderBy) {
             case 'newest':
-                $this->orderBy('railcontent_content.publishedOn','desc');
+                $this->orderBy('railcontent_content.publishedOn', 'desc');
 
                 break;
             case 'oldest':
-                $this->orderBy('railcontent_content.publishedOn','asc');
+                $this->orderBy('railcontent_content.publishedOn', 'asc');
 
                 break;
             case 'popularity':
@@ -483,7 +509,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                             'user_progress.updatedOn >= :lastWeek'
                         )
                 );
-                $this->setParameter('lastWeek',
+                $this->setParameter(
+                    'lastWeek',
                     Carbon::now()
                         ->subWeek(1)
                 );
@@ -495,7 +522,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 //TODO
                 break;
             case 'title':
-                $this->orderBy('railcontent_content.title','asc');
+                $this->orderBy('railcontent_content.title', 'asc');
 
                 break;
         }

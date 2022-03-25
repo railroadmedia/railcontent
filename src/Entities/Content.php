@@ -239,7 +239,7 @@ class Content extends ArrayExpressible
         $this->keyPitchType = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
-        $this->instructor = new ArrayCollection();
+        $this->contentInstructors = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->style = new ArrayCollection();
@@ -633,7 +633,7 @@ class Content extends ArrayExpressible
 
         $instructors = [];
 
-        foreach ($this->getInstructor() as $contentInstructor) {
+        foreach ($this->getContentInstructors() as $contentInstructor) {
             $instructors[] = $contentInstructor->getInstructor()->getId();
         }
 
