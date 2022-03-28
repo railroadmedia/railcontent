@@ -40,9 +40,11 @@ const initialInfo = {
     instrument: 'default',
     instrumentTypes: {}
 }
-let currentStep = ref(0)
+
+let currentStep = ref(6)
 let info = ref(initialInfo)
 let steps = ref(initialSteps)
+
 function changeStep(step) {
     currentStep.value = step
 }

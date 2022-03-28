@@ -21,7 +21,7 @@
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
                     {{-- Carousel --}}
-
+                    
                     
                     {{-- Home Cards --}}
                     <home-card-links brand="{{ $brand }}"/>
