@@ -164,7 +164,7 @@ class UserContentProgressEventListener extends Event
 
                     foreach ($level2Children as $index => $level2Child) {
                         if ($level2Child->state != 'completed') {
-                            $level2Position = $index - 1;
+                            $level2Position = $index;
                             break;
                         }
                     }
