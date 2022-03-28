@@ -1,7 +1,7 @@
-let drumeoBgImg; 
-let singeoBgImg; 
-let pianoteBgImg; 
-let guitareoBgImg; 
+import drumeoBgImg from '../vue/images/drumeo-bg.png'; 
+import singeoBgImg from '../vue/images/singeo-bg.png'; 
+import pianoteBgImg from '../vue/images/pianote-bg.png'; 
+import guitareoBgImg from '../vue/images/guitareo-bg.png'; 
 
 export const brandUrl = {
   drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
