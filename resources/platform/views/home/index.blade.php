@@ -21,70 +21,69 @@
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
                     {{-- Carousel --}}
-
                     
-                    {{-- Home Cards --}}
-                    <home-card-links brand="{{ $brand }}"/>
-
+                    <!-- Home Card Links -->
+                    <home-card-links brand="{{ $brand }}"></home-card-links>
+                    
                     {{-- Continue Section --}}
-                    <content-card-section
+                    <card-section
                         title="Continue"
                         type="video"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- New Section --}}
-                    <content-card-section
+                    <card-section
                         title="New"
                         type="video"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- Popular Conversations --}}
-                    <content-card-section
+                    <card-section
                         title="From Subscribed Coaches"
                         type="forum"
                         brand="{{ $brand }}"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- From Subscribed Coaches --}}
-                    <content-card-section
+                    <card-section
                         title="From Subscribed Coaches"
                         type="video"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- Subscribed Coaches --}}
-                    <content-card-section
+                    <card-section
                         title="Subscribed Coaches"
                         type="coach"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- My Playlists --}}
-                    <content-card-section
+                    <card-section
                         title="My Playlists"
                         type="playlist"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- Live Banner --}}
-                    
+
 
                     {{-- Upcoming Events --}}
-                    <content-card-section
+                    <card-section
                         title="Upcoming Events"
                         type="video"
                         isVisible=""
-                        data=""
-                    >
+                        :data="[]"
+                    ></card-section>
 
                     {{-- My Stats --}}
 

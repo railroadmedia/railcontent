@@ -2738,6 +2738,10 @@ a:visited {
   .lg\:tw-text-left {
     text-align: left;
   }
+  .lg\:tw-text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 }
 @media (min-width: 1280px) {
   .xl\:tw-mb-0 {
