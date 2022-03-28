@@ -32,18 +32,22 @@ export default {
 <template>
     <section class="tw-text-[#00101D] dark:tw-text-white">
         <div class="tw-my-8">
-            <h2 class="tw-text-2xl lg:tw-text-3xl">{{ title }}</h2>
+            <h2 class="tw-font-bold tw-text-2xl lg:tw-text-3xl">{{ title }}</h2>
 
             <template v-if="type === 'video'">
-                <p>Print Video Cards</p>
+                <i>Print Video Cards</i>
             </template>
 
             <template v-if="type === 'coach'">
-                <p>Print Coach Cards</p>
+                <i>Print Coach Cards</i>
             </template>
 
             <template v-if="type === 'forum'">
-                <p>Print Forum Cards</p>
+                <i>Print Forum Cards</i>
+            </template>
+
+            <template v-if="type === 'playlist'">
+                <i>Print Playlist Cards</i>
             </template>
         </div>    
     </section>

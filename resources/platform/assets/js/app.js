@@ -7,6 +7,7 @@ import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CardSection from './vue/components/CardSection/CardSection.vue';
+import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 
 const app = createApp({});
 
@@ -15,6 +16,7 @@ app.component('AppContainer', AppContainer)
    .component('PageContainer', PageContainer)
    .component('HomeCardLinks', HomeCardLinks)
    .component('CardSection', CardSection)
+   .component('StatsSection', StatsSection)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

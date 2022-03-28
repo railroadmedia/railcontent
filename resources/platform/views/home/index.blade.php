@@ -86,7 +86,10 @@
                     ></card-section>
 
                     {{-- My Stats --}}
-
+                    {{-- <stats-section
+                        brand="{{ $brand }}"
+                        :data="[]"
+                    ></stats-section> --}}
                 </div>
 
             @endif

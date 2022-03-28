@@ -134,7 +134,7 @@ export default {
             />
 
             <!-- Content Container -->
-            <main class="tw-flex tw-grow tw-flex-col tw-relative">
+            <main class="tw-flex tw-grow tw-flex-col tw-relative tw-overflow-auto">
 
                 <!-- Content -->
                 <section class="tw-h-full tw-w-full">

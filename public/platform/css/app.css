@@ -1165,6 +1165,12 @@ a:visited {
 .tw-h-1 {
   height: 0.25rem;
 }
+.tw-h-\[183px\] {
+  height: 183px;
+}
+.tw-h-\[89px\] {
+  height: 89px;
+}
 .tw-max-h-8 {
   max-height: 2rem;
 }
@@ -1173,6 +1179,18 @@ a:visited {
 }
 .tw-min-h-screen {
   min-height: 100vh;
+}
+.tw-min-h-\[89px\] {
+  min-height: 89px;
+}
+.tw-min-h-\[108px\] {
+  min-height: 108px;
+}
+.tw-min-h-\[183px\] {
+  min-height: 183px;
+}
+.tw-min-h-\[220px\] {
+  min-height: 220px;
 }
 .tw-w-full {
   width: 100%;
@@ -1333,6 +1351,12 @@ a:visited {
 .tw-max-w-\[624px\] {
   max-width: 624px;
 }
+.tw-max-w-\[500px\] {
+  max-width: 500px;
+}
+.tw-max-w-\[300px\] {
+  max-width: 300px;
+}
 .tw-flex-none {
   flex: none;
 }
@@ -1404,6 +1428,9 @@ a:visited {
 .tw-grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
+.tw-grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 .tw-flex-row {
   flex-direction: row;
 }
@@ -1446,6 +1473,12 @@ a:visited {
 .tw-gap-6 {
   gap: 1.5rem;
 }
+.tw-gap-4 {
+  gap: 1rem;
+}
+.tw-gap-8 {
+  gap: 2rem;
+}
 .tw-space-x-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
@@ -1457,8 +1490,14 @@ a:visited {
 .tw-justify-self-center {
   justify-self: center;
 }
+.tw-overflow-auto {
+  overflow: auto;
+}
 .tw-overflow-hidden {
   overflow: hidden;
+}
+.tw-overflow-y-auto {
+  overflow-y: auto;
 }
 .tw-overflow-x-hidden {
   overflow-x: hidden;
@@ -2308,6 +2347,9 @@ a:visited {
 .hover\:tw-top-1:hover {
   top: 0.25rem;
 }
+.hover\:tw-bottom-1:hover {
+  bottom: 0.25rem;
+}
 .hover\:tw-cursor-pointer:hover {
   cursor: pointer;
 }
@@ -2372,6 +2414,9 @@ a:visited {
 .focus\:tw-top-1:focus {
   top: 0.25rem;
 }
+.focus\:tw-bottom-1:focus {
+  bottom: 0.25rem;
+}
 .focus\:tw-border-none:focus {
   border-style: none;
 }
@@ -2387,6 +2432,10 @@ a:visited {
 }
 .focus\:tw-ring-transparent:focus {
   --tw-ring-color: transparent;
+}
+.tw-dark .dark\:tw-border-\[\#445F74\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(68 95 116 / var(--tw-border-opacity));
 }
 .tw-dark .dark\:tw-border-b-\[\#102230\] {
   --tw-border-opacity: 1;
@@ -2741,6 +2790,9 @@ a:visited {
   .lg\:tw-text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+  .lg\:tw-leading-none {
+    line-height: 1;
   }
 }
 @media (min-width: 1280px) {
