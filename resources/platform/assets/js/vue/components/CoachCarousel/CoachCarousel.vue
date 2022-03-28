@@ -25,7 +25,7 @@ const props = defineProps({
         :style="{ marginLeft: -toLeft }"
         :ref="resultsRef"
       >
-        <SingleCoach v-for="n in 7" :key="n" />
+        <SingleCoach v-for="n in 7" :key="n"  />
       </div>
     </div>
     <button
