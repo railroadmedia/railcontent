@@ -20,7 +20,27 @@
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
+                    {{-- Carousel --}}
+
+                    
+                    {{-- Home Cards --}}
                     <home-card-links brand="{{ $brand }}"/>
+
+                    {{-- Continue Section --}}
+
+                    {{-- New Section --}}
+
+                    {{-- Popular Conversations --}}
+
+                    {{-- From Subscribed Coaches --}}
+
+                    {{-- Subscribed Coaches --}}
+
+                    {{-- My Playlists --}}
+
+                    {{-- Live Section --}}
+
+                    {{-- My Stats --}}
 
                 </div>
 
