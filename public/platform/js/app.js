@@ -23037,7 +23037,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _directive_click_outside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("click-outside");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    "class": "tw-absolute tw-top-[58px] tw-flex tw-w-[263px] tw-flex-col tw-items-start tw-justify-center tw-rounded-[6px] tw-border tw-border-[#445f74]/10 tw-pt-[24px] tw-pb-2 tw-text-left dark:tw-bg-[#081825] tw-shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)]",
+    "class": "tw-absolute tw-top-[58px] tw-flex tw-w-[263px] tw-flex-col tw-items-start tw-justify-center tw-rounded-[6px] tw-border tw-border-[#445f74]/10 tw-pt-[24px] tw-pb-2 tw-text-left tw-bg-white dark:tw-bg-[#081825] tw-shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)]",
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
       left: 'calc(100vw - 262px - 12px)'
     })
