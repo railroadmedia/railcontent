@@ -38,15 +38,11 @@ class CommentJsonController extends Controller
     private $commentService;
 
     /**
-     * CommentJsonController constructor.
-     *
      * @param CommentService $commentService
-     * @param JsonApiHydrator $jsonApiHydrator
      */
-    public function __construct(CommentService $commentService, JsonApiHydrator $jsonApiHydrator)
+    public function __construct(CommentService $commentService)
     {
         $this->commentService = $commentService;
-        $this->jsonApiHidrator = $jsonApiHydrator;
     }
 
     /** List comments
@@ -77,8 +73,9 @@ class CommentJsonController extends Controller
             auth()->id() ?? null
         );
 
-        return ResponseService::comment($comments['results'], $comments['qb']);
-          //  ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
+
+        return ResponseService::comment($comments['results'], $comments['qb'])
+            ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 
     /** Create a new comment

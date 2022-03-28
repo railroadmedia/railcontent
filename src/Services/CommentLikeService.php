@@ -151,15 +151,15 @@ class CommentLikeService
         $this->entityManager->persist($commentLike);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntity(Comment::class, $commentId);
-
-        $this->entityManager->getCache()
-            ->evictEntity(
-                Content::class,
-                $comment->getContent()
-                    ->getId()
-            );
+//        $this->entityManager->getCache()
+//            ->evictEntity(Comment::class, $commentId);
+//
+//        $this->entityManager->getCache()
+//            ->evictEntity(
+//                Content::class,
+//                $comment->getContent()
+//                    ->getId()
+//            );
 
          event(new CommentLiked($comment, $user));
 
@@ -189,8 +189,8 @@ class CommentLikeService
             $this->entityManager->remove($commentLikes);
             $this->entityManager->flush();
 
-            $this->entityManager->getCache()
-                ->evictEntity(Comment::class, $commentId);
+//            $this->entityManager->getCache()
+//                ->evictEntity(Comment::class, $commentId);
 
             event(new CommentUnLiked($comment, $user));
         }
@@ -251,6 +251,6 @@ class CommentLikeService
             ->orderBy('cl.' . $orderByColumn, $orderByDirection);
 
         return $qb->getQuery()
-            ->getResult('Railcontent');
+            ->getResult();
     }
 }

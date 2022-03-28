@@ -121,7 +121,7 @@ class CommentService
         $content = $this->contentRepository->find($contentId);
 
         //check if the content type allow comments : return null if the content type it's not predefined in config file
-        if (!in_array($content->getType(), config('railcontent.commentable_content_types'))) {
+        if (!in_array($content->getType(), array_merge(config('railcontent.commentable_content_types', []), config('railcontent.showTypes', [])))) {
             return null;
         }
 
@@ -142,11 +142,11 @@ class CommentService
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
-//        $this->entityManager->getCache()
-//            ->evictEntity(Content::class, $contentId);
+        //        $this->entityManager->getCache()
+        //            ->evictEntity(Content::class, $contentId);
 
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Comment::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Comment::class);
 
         event(new CommentCreated($comment, $content, $user));
 
@@ -237,12 +237,12 @@ class CommentService
 
         $this->commentRepository->deleteCommentReplies($id);
 
-        $this->entityManager->getCache()
-            ->evictEntity(
-                Content::class,
-                $comment->getContent()
-                    ->getId()
-            );
+//        $this->entityManager->getCache()
+//            ->evictEntity(
+//                Content::class,
+//                $comment->getContent()
+//                    ->getId()
+//            );
 
         if ($isSoftDelete) {
             $comment->setDeletedAt(Carbon::now());
@@ -253,8 +253,8 @@ class CommentService
             $this->entityManager->flush();
         }
 
-//        $this->entityManager->getCache()
-//            ->evictEntityRegion(Comment::class);
+        //        $this->entityManager->getCache()
+        //            ->evictEntityRegion(Comment::class);
 
         return true;
     }
@@ -295,13 +295,12 @@ class CommentService
             $qb->getQuery()
                 ->getResult();
 
-        $hydratedResults =  $this->resultsHydrator->hydrate($results, $this->entityManager);
+        $hydratedResults = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
         $results = [
-                'qb' => $qb,
-                'results' => $hydratedResults
-            ];
-
+            'qb' => $qb,
+            'results' => $hydratedResults,
+        ];
 
         return $results;
     }
@@ -325,7 +324,7 @@ class CommentService
         $qb = $this->commentRepository->createQueryBuilder('c');
 
         $qb->select('count(c)')
-            ->join($alias . '.content', $aliasContent)
+            ->join($alias.'.content', $aliasContent)
             ->where('c.createdOn >= :createdOn')
             ->andWhere(
                 $qb->expr()
@@ -338,27 +337,27 @@ class CommentService
             ->setParameter('createdOn', $comment->getCreatedOn())
             ->andWhere(
                 $qb->expr()
-                    ->in($aliasContent . '.brand', ':availableBrands')
+                    ->in($aliasContent.'.brand', ':availableBrands')
             )
             ->setParameter('availableBrands', array_values(array_wrap(config('railcontent.available_brands'))));
 
         if (CommentRepository::$availableUserId) {
-            $qb->andWhere($alias . '.userId = :availableUserId')
+            $qb->andWhere($alias.'.userId = :availableUserId')
                 ->setParameter('availableUserId', CommentRepository::$availableUserId);
         }
 
         if (CommentRepository::$availableContentType) {
-            $qb->andWhere($aliasContent . '.type = :availableContentType')
+            $qb->andWhere($aliasContent.'.type = :availableContentType')
                 ->setParameter('availableContentType', CommentRepository::$availableContentType);
         }
 
         if (CommentRepository::$availableContentId) {
-            $qb->andWhere($alias . '.content = :availableContentId')
+            $qb->andWhere($alias.'.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
 
         if (CommentRepository::$conversationStatus) {
-            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
+            $qb->andWhere($alias.'.conversationStatus = :conversationStatus')
                 ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
         }
 
@@ -389,7 +388,6 @@ class CommentService
      */
     public function getQb($page, $limit, $orderByAndDirection, $currentUserId = null)
     : QueryBuilder {
-
         if ($limit == 'null') {
             $limit = -1;
         }
@@ -405,18 +403,18 @@ class CommentService
         $alias = 'c';
         $aliasContent = 'content';
 
-        $orderByColumn = $alias . '.' . $orderByColumn;
-        if($orderByColumn == $alias . '.' .'repliedOn'){
-            $orderByColumn ='r.createdOn';
+        $orderByColumn = $alias.'.'.$orderByColumn;
+        if ($orderByColumn == $alias.'.'.'repliedOn') {
+            $orderByColumn = 'r.createdOn';
         }
 
         $qb = $this->commentRepository->createQueryBuilder($alias);
 
-        $qb->join($alias . '.content', $aliasContent)
-            ->leftJoin($alias.'.children','r')
+        $qb->join($alias.'.content', $aliasContent)
+            ->leftJoin($alias.'.children', 'r')
             ->andWhere(
                 $qb->expr()
-                    ->in($aliasContent . '.brand', ':availableBrands')
+                    ->in($aliasContent.'.brand', ':availableBrands')
             )
             ->setParameter('availableBrands', array_values(array_wrap(config('railcontent.available_brands'))))
             ->andWhere(
@@ -426,48 +424,47 @@ class CommentService
             ->andWhere(
                 $qb->expr()
                     ->isNull('c.parent')
-            )
-        ;
+            );
 
-        if ($orderByColumn == $alias . ".mine") {
+        if ($orderByColumn == $alias.".mine") {
             CommentRepository::$availableUserId = $currentUserId;
-            $orderByColumn = $alias . '.createdOn';
-        }
-
-        if ($orderByColumn == $alias . ".likeCount") {
-
-            $qb->leftJoin($alias . '.likes', 'likes');
-            $qb->addSelect('COUNT(likes) AS HIDDEN counter')
-                ->groupBy($alias . '.id');
-
-            $orderByColumn = 'counter';
+            $orderByColumn = $alias.'.createdOn';
         }
 
         if (CommentRepository::$availableUserId) {
-            $qb->andWhere($alias . '.user = :availableUserId')
+            $qb->andWhere($alias.'.user = :availableUserId')
                 ->setParameter('availableUserId', CommentRepository::$availableUserId);
+        }
+
+        if ($orderByColumn == $alias.".likeCount") {
+            $qb->leftJoin($alias.'.likes', 'likes');
+            $qb->addSelect('COUNT(likes) AS HIDDEN counter')
+                ->groupBy($alias.'.id');
+
+            $orderByColumn = 'counter';
         }
 
         if (CommentRepository::$availableContentType) {
             $contentType = (array)CommentRepository::$availableContentType;
 
-            $qb->andWhere($aliasContent . '.type IN (:availableContentType)')
+            $qb->andWhere($aliasContent.'.type IN (:availableContentType)')
                 ->setParameter('availableContentType', $contentType);
         }
 
         if (CommentRepository::$availableContentId) {
-            $qb->andWhere($alias . '.content = :availableContentId')
+            $qb->andWhere($alias.'.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
 
         if (CommentRepository::$conversationStatus) {
-//            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
-//                ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
+            //            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
+            //                ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
         }
 
         $qb->addSelect([$alias])
             ->paginate($limit, $page - 1)
-            ->orderBy($orderByColumn, $orderByDirection);
+            ->addOrderBy($orderByColumn, $orderByDirection)
+            ->addOrderBy($alias.'.createdOn', 'desc');
 
         return $qb;
     }
@@ -485,40 +482,38 @@ class CommentService
         $qb = $this->commentRepository->createQueryBuilder('c');
 
         $qb->select('count(c)')
-            ->join($alias . '.content', $aliasContent)
-
+            ->join($alias.'.content', $aliasContent)
             ->where(
                 $qb->expr()
                     ->isNull('c.deletedAt')
             )
             ->andWhere(
                 $qb->expr()
-                    ->in($aliasContent . '.brand', ':availableBrands')
+                    ->in($aliasContent.'.brand', ':availableBrands')
             )
             ->setParameter('availableBrands', array_values(array_wrap(config('railcontent.available_brands'))));
 
         if (CommentRepository::$availableUserId) {
-            $qb->andWhere($alias . '.user = :availableUserId')
+            $qb->andWhere($alias.'.user = :availableUserId')
                 ->setParameter('availableUserId', CommentRepository::$availableUserId);
         }
 
         if (CommentRepository::$availableContentType) {
-            $qb->andWhere($aliasContent . '.type = :availableContentType')
+            $qb->andWhere($aliasContent.'.type = :availableContentType')
                 ->setParameter('availableContentType', CommentRepository::$availableContentType);
         }
 
         if (CommentRepository::$availableContentId) {
-            $qb->andWhere($alias . '.content = :availableContentId')
+            $qb->andWhere($alias.'.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
 
         if (CommentRepository::$conversationStatus) {
-            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
+            $qb->andWhere($alias.'.conversationStatus = :conversationStatus')
                 ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
         }
 
         return $qb->getQuery()
             ->getSingleScalarResult();
-
     }
 }
