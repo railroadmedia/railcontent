@@ -5,6 +5,8 @@ import Sidebar from '../Sidebar/Sidebar.vue'
 import Footer from '../Footer/Footer.vue'
 import { useRouter, useRoute } from 'vue-router'
 import SpriteSheet from '../MusoraIcons/SpriteSheet.vue'
+import simplebar from 'simplebar-vue';
+import 'simplebar/dist/simplebar.min.css';
 
 export default {
     name: 'PageContainer',
@@ -125,7 +127,7 @@ export default {
         />
 
         <!-- Page Container -->
-        <div class="tw-flex tw-flex-row tw-w-full tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]">
+        <div class="tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors dark:tw-bg-[#000C17] tw-overflow-hidden">
 
             <!-- Sidebar -->
             <Sidebar :brand="brand" 
@@ -134,10 +136,10 @@ export default {
             />
 
             <!-- Content Container -->
-            <main class="tw-flex tw-grow tw-flex-col tw-relative tw-overflow-auto">
+            <main class="tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden">
 
                 <!-- Content -->
-                <section class="tw-h-full tw-w-full">
+                <section class="tw-flex tw-flex-col tw-grow tw-w-full">
 
                     <slot />
 

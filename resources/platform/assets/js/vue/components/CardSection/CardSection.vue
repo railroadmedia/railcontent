@@ -32,7 +32,17 @@ export default {
 <template>
     <section class="tw-text-[#00101D] dark:tw-text-white">
         <div class="tw-my-8">
-            <h2 class="tw-font-bold tw-text-2xl lg:tw-text-3xl">{{ title }}</h2>
+
+            <!-- Section Title -->
+            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">{{ title }}</h2>
+                <a href="https://www.drumeo.com/laravel/public/members/profile" 
+                   aria-label="See My Dashboard" 
+                   class="tw-uppercase tw-font-bebas-neue tw-tracking-wide"
+                >
+                    See All
+                </a>
+            </div> 
 
             <template v-if="type === 'video'">
                 <i>Print Video Cards</i>

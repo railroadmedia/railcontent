@@ -1018,6 +1018,12 @@ a:visited {
 .tw-mt-2 {
   margin-top: 0.5rem;
 }
+.tw-mt-\[58px\] {
+  margin-top: 58px;
+}
+.tw-mb-5 {
+  margin-bottom: 1.25rem;
+}
 .tw-box-border {
   box-sizing: border-box;
 }
@@ -1171,6 +1177,9 @@ a:visited {
 .tw-h-\[89px\] {
   height: 89px;
 }
+.tw-h-screen {
+  height: 100vh;
+}
 .tw-max-h-8 {
   max-height: 2rem;
 }
@@ -1191,6 +1200,9 @@ a:visited {
 }
 .tw-min-h-\[220px\] {
   min-height: 220px;
+}
+.tw-min-h-\[100vh-58px\] {
+  min-height: 100vh - 58px;
 }
 .tw-w-full {
   width: 100%;
@@ -2277,6 +2289,10 @@ a:visited {
 }
 .tw-blur-sm {
   --tw-blur: blur(4px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.tw-blur-xl {
+  --tw-blur: blur(24px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .tw-grayscale {

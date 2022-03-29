@@ -1,19 +1,14 @@
 <script>
-import simplebar from 'simplebar-vue';
-import 'simplebar/dist/simplebar.min.css';
 
 export default {
   name: 'SidebarContainer',
   props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden'],
-  components: {
-    simplebar
-  }
 }
 </script>
 <template>
   <aside
     id="sidebar"
-    class="tw-h-[calc(100vh-58px)] tw-transition-all tw-shrink-0 tw-absolute md:tw-relative tw-z-[99] tw-w-64 md:tw-left-0 tw-shadow-[0_0_5px_rgb(0,0,0,.13)]"
+    class="tw-h-[calc(100vh-58px)] tw-mt-[58px] tw-transition-all tw-shrink-0 tw-absolute md:tw-relative tw-z-[99] tw-w-64 md:tw-left-0 tw-shadow-[0_0_5px_rgb(0,0,0,.13)]"
     style="clip-path: inset(0 -20px 0 0);"
     :class="[
       isSidebarCollapsed && !isSidebarHidden ? 'md:tw-w-[68px] ' : '',
