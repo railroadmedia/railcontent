@@ -67,7 +67,7 @@ class ElasticService
                             'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'instructor' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                            'bpm' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'bpm' => ['type' => 'integer', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'published_on' => ['type' => 'date', "format" => "yyyy-MM-dd HH:mm:ss"],
                             'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
                             'show_in_new_feed' => ['type' => 'integer'],
@@ -270,11 +270,6 @@ class ElasticService
         foreach ($filtersEl['hits']['hits'] as $elData) {
             $idEs[] = $elData['_source']['content_id'];
 
-            if (!in_array($elData['_source']['content_type'], $filteredContents['content_type'] ?? []) &&
-                (!in_array($elData['_source']['content_type'], $includedTypes))) {
-                $filteredContents['content_type'][] = $elData['_source']['content_type'];
-            }
-
             $requiredFiltersData =
                 (array_intersect_key(config('railcontent.field_option_list', []), array_keys($elData['_source'])));
 
@@ -284,15 +279,15 @@ class ElasticService
                         $instructorsIds[$insId] = $insId;
                     }
                 }
+
                 if (array_key_exists($requiredFieldData, $elData['_source'])) {
                     if (is_array($elData['_source'][$requiredFieldData])) {
-                        $filteredContents[$requiredFieldData] = [];
                         foreach ($elData['_source'][$requiredFieldData] as $option) {
                             if (!in_array(
-                                strtolower($option),
-                                array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
+                                trim(ucfirst($option)),
+                                array_map('ucfirst', $filteredContents[$requiredFieldData] ?? [])
                             )) {
-                                $filteredContents[$requiredFieldData][] = $option;
+                                $filteredContents[$requiredFieldData][] = trim(ucfirst($option));
                             }
                         }
                     } else {
@@ -305,6 +300,10 @@ class ElasticService
                         }
                     }
                 }
+            }
+
+            if (!in_array($elData['_source']['content_type'], $filteredContents['content_type'] ?? []) ) {
+                $filteredContents['content_type'][] = $elData['_source']['content_type'];
             }
         }
 
