@@ -658,6 +658,7 @@ class Content extends ArrayExpressible
             'is_active' => $this->getIsActive(),
             'is_coach_of_the_month' => $this->getIsCoachOfTheMonth(),
             'is_featured' => $this->getIsFeatured(),
+            'associated_user_id' => $this->getAssociatedUserId()
         ];
     }
 }

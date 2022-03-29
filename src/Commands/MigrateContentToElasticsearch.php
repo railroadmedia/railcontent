@@ -238,7 +238,7 @@ class MigrateContentToElasticsearch extends Command
                             'is_active' => $row->is_active,
                             'is_featured' => $row->is_featured,
                             'name' => $row->name,
-
+                            'associated_user_id' => $row->associated_user_id,
                         ];
                     }
 

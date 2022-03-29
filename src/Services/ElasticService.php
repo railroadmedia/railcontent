@@ -75,6 +75,7 @@ class ElasticService
                             'last_week_progress_count' => ['type' => 'integer'],
                             'permission_ids' => ['type' => 'text'],
                             'focus' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'associated_user_id' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                         ],
                     ],
                 ],
