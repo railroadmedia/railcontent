@@ -108,7 +108,7 @@ class ElasticQueryBuilder
         if (!is_array($requiredContentIdsByState)) {
             return $this;
         }
-        $this->must[] = ['terms' => ['id' => $requiredContentIdsByState]];
+        $this->must[] = ['terms' => ['content_id' => $requiredContentIdsByState]];
 
         return $this;
     }
@@ -145,7 +145,15 @@ class ElasticQueryBuilder
         }
 
         foreach ($requiredFields as $index => $requiredFieldData) {
-            if (!$requiredFieldData['property']) {
+            if ($requiredFieldData['operator'] == '>' || $requiredFieldData['operator'] == '>=') {
+                $this->must[] = [
+                    ['range' => [$requiredFieldData['name'] => ['gte' => $requiredFieldData['value']]]],
+                ];
+            } elseif ($requiredFieldData['operator'] == '<' || $requiredFieldData['operator'] == '<=') {
+                $this->must[] = [
+                    ['range' => [$requiredFieldData['name'] => ['lte' => $requiredFieldData['value']]]],
+                ];
+            } elseif (!$requiredFieldData['property']) {
                 $this->must[] = [
                     ['match_phrase' => [$requiredFieldData['name'].'.raw' => strtolower($requiredFieldData['value'])]],
 
@@ -187,7 +195,7 @@ class ElasticQueryBuilder
 
         $this->must[] = [
             'bool' => [
-                'must' => $terms,
+                'should' => $terms,
             ],
         ];
 
@@ -253,7 +261,8 @@ class ElasticQueryBuilder
         if (empty($followedContents)) {
             return $this;
         }
-        $this->must[] = ['terms' => ['id' => $followedContents]];
+
+        $this->must[] = ['terms' => ['content_id' => $followedContents]];
 
         return $this;
     }
