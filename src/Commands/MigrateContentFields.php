@@ -2,8 +2,8 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Illuminate\Database\Connection;
 use Illuminate\Console\Command;
+use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
@@ -93,6 +93,10 @@ class MigrateContentFields extends Command
         $this->migrateFocus($dbConnection);
 
         $this->info('Ending content focus migration.');
+
+        $this->migrateBpm($dbConnection);
+
+        $this->info('Ending content bpm migration.');
 
         $this->info('Migration completed. ');
     }
@@ -363,7 +367,38 @@ EOT;
         return $statement;
     }
 
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateBpm(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `bpm`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `bpm`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
 
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_bpm',
+            config('railcontent.table_prefix') . 'content_fields',
+            'bpm'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
 
 
 }
