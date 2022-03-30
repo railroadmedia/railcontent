@@ -22599,8 +22599,10 @@ __webpack_require__.r(__webpack_exports__);
     var onColorModeToggle = function onColorModeToggle(val) {
       if (typeof val === 'boolean') {
         isDarkModeSelected.value = val;
+        localStorage.setItem('darkMode', val);
       } else {
         isDarkModeSelected.value = !isDarkModeSelected.value;
+        localStorage.setItem('darkMode', isDarkModeSelected.value);
       }
     };
 
@@ -22631,7 +22633,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     //Set Dark Mode Based on User Preferences
-    this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches; //Get Query String
+    if (localStorage.getItem('darkMode')) {
+      this.isDarkModeSelected = JSON.parse(localStorage.getItem('darkMode'));
+    } else {
+      this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } //Get Query String
+
 
     var urlSearchParams = new URLSearchParams(window.location.search);
     var brandParam = urlSearchParams.get('brand');
@@ -22987,7 +22994,8 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup() {
     return {
       textColor: _constants_brands_js__WEBPACK_IMPORTED_MODULE_0__.textColor,
-      bgColor: _constants_brands_js__WEBPACK_IMPORTED_MODULE_0__.bgColor
+      bgColor: _constants_brands_js__WEBPACK_IMPORTED_MODULE_0__.bgColor,
+      bgBottomGradients: _constants_brands_js__WEBPACK_IMPORTED_MODULE_0__.bgBottomGradients
     };
   }
 });
@@ -26537,7 +26545,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === link.path ? " ".concat($setup.textColor[$props.brand]) : ''])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
             href: "".concat(link.path, "?brand=").concat($props.brand),
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
             "icon-name": link.icon,
             "class": "tw-mx-4"
@@ -26565,7 +26573,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: j
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
             href: "".concat(link.path, "?brand=").concat($props.brand),
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
             "icon-name": link.icon,
             "view-box": link.viewBox,
@@ -26588,7 +26596,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forum "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
         href: "/members/forums?brand=".concat($props.brand),
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 hover:tw-bg-black/[0.05]", [$options.pathName === '/forums' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/forums' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
         "icon-name": "messages",
         "class": "tw-mx-4"
@@ -26794,11 +26802,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "tw-flex tw-flex-col tw-mb-6 md:tw-mb-8 tw-text-[#00101D] dark:tw-text-white tw-w-full"
+  "class": "tw-flex tw-flex-col tw-mb-6 md:tw-mb-12 tw-text-[#00101D] dark:tw-text-white tw-w-full"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between"
+  "class": "tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl"
 }, "My Stats"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
@@ -26809,18 +26817,136 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"tw-flex tw-w-1/2 tw-items-center tw-px-8 tw-justify-center\"><img src=\"https://dpwjbsxqtam5n.cloudfront.net/pack-logos/drumeo-method-logo.png\" class=\"tw-max-w-[300px]\" alt=\"The drumeo Method Logo\"></div><div class=\"tw-flex tw-flex-col tw-w-1/2 tw-items-center tw-px-8\"><h3 class=\"text-white tw-text-4xl tw-font-bold tw-uppercase\">Level 2.3</h3><div class=\"progress-bar bg-white ba-white-3 relative\"><div class=\"progress bg-drumeo\" style=\"width:15%;\"><span class=\"amount text-white tiny font-bold text-drumeo right\">15%</span></div></div></div>", 2);
+var _hoisted_3 = {
+  "class": "tw-flex tw-w-1/2 tw-items-center tw-px-8 tw-shrink-0"
+};
+var _hoisted_4 = ["src", "alt"];
+var _hoisted_5 = {
+  "class": "tw-flex tw-flex-col tw-w-1/2 tw-items-end tw-px-8"
+};
+var _hoisted_6 = {
+  "class": "tw-text-center"
+};
 
-var _hoisted_5 = [_hoisted_3];
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-white tw-text-[54px] tw-font-bold tw-uppercase"
+}, "Level 2.3", -1
+/* HOISTED */
+);
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"tw-mt-4 tw-grid tw-gap-8 tw-grid-cols-4 tw-w-full\"><!-- XP Level --><a href=\"https://www.drumeo.com/laravel/public/members/profile\" class=\"tw-inline-flex tw-min-h-[108px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center\"><i class=\"icon-experience-points text-drumeo text-center nowrap mb-1\" style=\"line-height:32px;\"></i><h4 class=\"large-display text-black text-center tw-nowrap tw-text-4xl\" style=\"line-height:0.8em;\">18.8K</h4><h6 class=\"tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase nowrap\" style=\"line-height:32px;\">Pro III</h6></a><!-- Forum Post Likes --><a href=\"https://www.drumeo.com/laravel/public/members/profile\" class=\"tw-inline-flex tw-min-h-[108px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center\"><i class=\"fa fa-comments text-drumeo text-center nowrap mb-1\" style=\"line-height:32px;\"></i><h4 class=\"large-display text-black text-center nowrap tw-text-4xl\" style=\"line-height:0.8em;\">0</h4><h6 class=\"tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-nowrap\" style=\"line-height:32px;\">Forum Post Likes</h6></a><!-- Comment Likes --><a href=\"https://www.drumeo.com/laravel/public/members/profile\" class=\"tw-inline-flex tw-min-h-[108px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center\"><i class=\"icon-comments-liked text-drumeo text-center nowrap mb-1\" style=\"line-height:32px;\"></i><h4 class=\"large-display text-black text-center nowrap tw-text-4xl\" style=\"line-height:0.8em;\">0</h4><h6 class=\"tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-nowrap\" style=\"line-height:32px;\">Comment Likes</h6></a><!-- Minutes Practiced --><a href=\"https://www.drumeo.com/laravel/public/members/profile\" class=\"tw-inline-flex tw-min-h-[108px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center\"><i class=\"icon-minutes-practiced text-drumeo text-center nowrap mb-1\" style=\"line-height:32px;\"></i><h4 class=\"large-display text-black text-center tw-nowrap tw-text-4xl\" style=\"line-height:0.8em;\">1</h4><h6 class=\"tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-nowrap\" style=\"line-height:32px;\">Minutes Practiced</h6></a></div>", 1);
+var _hoisted_8 = {
+  "class": "tw-bg-white tw-relative tw-w-full tw-max-w-[260px] tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]"
+};
+var _hoisted_9 = {
+  "class": "tw-grid tw-gap-4 tw-grid-cols-4 tw-w-full"
+};
+var _hoisted_10 = {
+  href: "https://www.drumeo.com/laravel/public/members/profile",
+  "class": "tw-inline-flex tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+  "class": "tw-text-5xl tw-my-1 tw-font-bold"
+}, "18.8K", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase nowrap"
+}, "Pro III", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = {
+  href: "https://www.drumeo.com/laravel/public/members/profile",
+  "class": "tw-inline-flex tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+  "class": "tw-text-5xl tw-my-1 tw-font-bold"
+}, "0", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-nowrap"
+}, "Forum Post Likes", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = {
+  href: "https://www.drumeo.com/laravel/public/members/profile",
+  "class": "tw-inline-flex tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+};
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+  "class": "tw-text-5xl tw-my-1 tw-font-bold"
+}, "0", -1
+/* HOISTED */
+);
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-nowrap"
+}, "Comment Likes", -1
+/* HOISTED */
+);
+
+var _hoisted_19 = {
+  href: "https://www.drumeo.com/laravel/public/members/profile",
+  "class": "tw-inline-flex tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+};
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+  "class": "tw-text-5xl tw-my-1 tw-font-bold"
+}, "1", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-nowrap"
+}, "Minutes Practiced", -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Section Title "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Method Progress "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-flex tw-flex-wrap tw-items-center tw-w-full tw-rounded-full tw-min-h-[89px]", $setup.bgColor[$props.brand]])
-  }, _hoisted_5, 2
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-flex tw-flex-wrap tw-items-center tw-mb-5 tw-w-full tw-rounded-full tw-min-h-[150px] tw-px-14 tw-bg-gradient-to-b", $setup.bgBottomGradients[$props.brand]])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: "https://musora-ui.s3.amazonaws.com/logos/".concat($props.brand, "-method.svg"),
+    alt: $props.brand,
+    "class": "tw-max-w-[567px] tw-w-full"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" progress bar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0", $setup.bgColor[$props.brand]]),
+    style: {
+      "width": "15%"
+    }
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-absolute tw-top-0 tw-h-full tw-font-bold tw-translate-x-full tw-text-sm tw-right-[-5px]", $setup.textColor[$props.brand]])
+  }, "15%", 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" More Stats "), _hoisted_6]);
+  )], 2
+  /* CLASS */
+  )])])])], 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" More Stats "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" XP Level "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["icon-experience-points tw-text-3xl", $setup.textColor[$props.brand]])
+  }, null, 2
+  /* CLASS */
+  ), _hoisted_11, _hoisted_12]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forum Post Likes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fa fa-comments tw-text-3xl", $setup.textColor[$props.brand]])
+  }, null, 2
+  /* CLASS */
+  ), _hoisted_14, _hoisted_15]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Comment Likes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["icon-comments-liked tw-text-3xl", $setup.textColor[$props.brand]])
+  }, null, 2
+  /* CLASS */
+  ), _hoisted_17, _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Minutes Practiced "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["icon-minutes-practiced tw-text-3xl", $setup.textColor[$props.brand]])
+  }, null, 2
+  /* CLASS */
+  ), _hoisted_20, _hoisted_21])])]);
 }
 
 /***/ }),
@@ -27041,6 +27167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "brandUrl": () => (/* binding */ brandUrl),
 /* harmony export */   "bgColor": () => (/* binding */ bgColor),
+/* harmony export */   "bgBottomGradients": () => (/* binding */ bgBottomGradients),
 /* harmony export */   "textColor": () => (/* binding */ textColor),
 /* harmony export */   "borderColor": () => (/* binding */ borderColor),
 /* harmony export */   "bgImg": () => (/* binding */ bgImg)
@@ -27060,6 +27187,12 @@ var bgColor = {
   drumeo: 'tw-bg-drumeo',
   pianote: 'tw-bg-pianote',
   guitareo: 'tw-bg-guitareo'
+};
+var bgBottomGradients = {
+  singeo: 'tw-from-singeo tw-to-singeo-700',
+  drumeo: 'tw-from-drumeo tw-to-drumeo-700',
+  pianote: 'tw-from-pianote tw-to-pianote-700',
+  guitareo: 'tw-from-guitareo tw-to-guitareo-700'
 };
 var textColor = {
   drumeo: 'tw-text-drumeo',

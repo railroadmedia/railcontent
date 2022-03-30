@@ -43,7 +43,7 @@ export default {
                     See All
                 </a>
             </div> 
-
+            
             <template v-if="type === 'video'">
                 <i>Print Video Cards</i>
             </template>

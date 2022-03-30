@@ -42,9 +42,11 @@ export default {
 
         const onColorModeToggle = (val) => {
             if (typeof val === 'boolean') {
-                isDarkModeSelected.value = val
+                isDarkModeSelected.value = val;
+                localStorage.setItem('darkMode', val);
             } else {
-                isDarkModeSelected.value = !isDarkModeSelected.value
+                isDarkModeSelected.value = !isDarkModeSelected.value;
+                localStorage.setItem('darkMode', isDarkModeSelected.value);
             }
         }
 
@@ -70,7 +72,11 @@ export default {
 
     beforeMount() {
         //Set Dark Mode Based on User Preferences
-        this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if( localStorage.getItem('darkMode') ) {
+            this.isDarkModeSelected = JSON.parse(localStorage.getItem('darkMode'));
+        } else {
+            this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        }
         //Get Query String
         const urlSearchParams = new URLSearchParams(window.location.search)
         const brandParam = urlSearchParams.get('brand');

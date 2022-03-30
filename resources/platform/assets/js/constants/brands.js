@@ -18,6 +18,13 @@ export const bgColor = {
   guitareo: 'tw-bg-guitareo'
 }
 
+export const bgBottomGradients = {
+  singeo: 'tw-from-singeo tw-to-singeo-700',
+  drumeo: 'tw-from-drumeo tw-to-drumeo-700',
+  pianote: 'tw-from-pianote tw-to-pianote-700',
+  guitareo: 'tw-from-guitareo tw-to-guitareo-700'
+}
+
 export const textColor = {
   drumeo: 'tw-text-drumeo',
   singeo: 'tw-text-singeo',
