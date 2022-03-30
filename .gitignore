@@ -105,6 +105,6 @@ dist
 
 /vendor/
 
-/public/
+public/
 
 .idea
