@@ -20276,11 +20276,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    vueRouter: Boolean,
-    brand: {
-      type: String,
-      "default": 'drumeo'
-    }
+    vueRouter: {
+      type: Boolean,
+      "default": true
+    },
+    brand: String
   },
   setup: function setup(props) {
     console.log("Has Vue Router: ".concat(props.vueRouter));
@@ -20620,11 +20620,31 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var resultsRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var interval = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var currentGradientBorder = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("right");
+    var gradientMaskMap = {
+      left: "gradient-border-left",
+      right: "gradient-border-right",
+      both: "gradient-border-both"
+    };
+
+    var updateGradientState = function updateGradientState(container) {
+      var scrollValue = container.scrollLeft;
+      var width = container.scrollWidth - container.offsetWidth;
+
+      if (scrollValue === 0) {
+        currentGradientBorder.value = "right";
+      } else if (Math.round(scrollValue) === Math.round(width)) {
+        currentGradientBorder.value = "left";
+      } else if (currentGradientBorder.value !== "both") {
+        currentGradientBorder.value = "both";
+      }
+    };
 
     var scrollCarouselLeft = function scrollCarouselLeft() {
       interval.value = setInterval(function () {
         var scrollContainer = document.getElementById("coach-carousel-results-container");
         scrollContainer.scrollLeft -= 20;
+        updateGradientState(scrollContainer);
       }, 30);
     };
 
@@ -20632,6 +20652,7 @@ __webpack_require__.r(__webpack_exports__);
       interval.value = setInterval(function () {
         var scrollContainer = document.getElementById("coach-carousel-results-container");
         scrollContainer.scrollLeft += 20;
+        updateGradientState(scrollContainer);
       }, 30);
     };
 
@@ -20649,12 +20670,17 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         scrollContainer.scrollLeft -= 25;
       }
+
+      updateGradientState(scrollContainer);
     }
 
     var __returned__ = {
+      props: props,
       resultsRef: resultsRef,
       interval: interval,
-      props: props,
+      currentGradientBorder: currentGradientBorder,
+      gradientMaskMap: gradientMaskMap,
+      updateGradientState: updateGradientState,
       scrollCarouselLeft: scrollCarouselLeft,
       scrollCarouselRight: scrollCarouselRight,
       stopScroll: stopScroll,
@@ -21826,7 +21852,7 @@ __webpack_require__.r(__webpack_exports__);
       instrument: 'default',
       instrumentTypes: {}
     };
-    var currentStep = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
+    var currentStep = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(6);
     var info = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(initialInfo);
     var steps = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(initialSteps);
 
@@ -21928,10 +21954,14 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     brand: {
       type: String,
-      "default": 'drumeo'
+      "default": "drumeo"
     },
     showBgImg: {
       type: Boolean
+    },
+    showInstrumentBrand: {
+      type: Boolean,
+      "default": true
     }
   },
   setup: function setup(__props, _ref) {
@@ -21940,7 +21970,8 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var __returned__ = {
       props: props,
-      bgImg: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImg
+      bgImg: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImg,
+      whiteLogos: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.whiteLogos
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -23488,11 +23519,11 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "tw-relative"
+  "class": "tw-relative tw-mb-[60px]"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "tw-w-[800px] tw-overflow-hidden",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-w-[800px] tw-overflow-hidden ".concat($setup.gradientMaskMap[$setup.currentGradientBorder])),
     style: {
       "overflow-x": "scroll"
     },
@@ -23509,8 +23540,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  )], 32
-  /* HYDRATE_EVENTS */
+  )], 34
+  /* CLASS, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "tw-w-[60px] tw-h-[60px] tw-bg-[#445f74] tw-bg-opacity-20 tw-flex tw-items-center tw-justify-center tw-absolute tw-left-[-30px] tw-top-[50%] tw-rounded-full hover:tw-bg-opacity-100",
     onMousedown: $setup.scrollCarouselLeft,
@@ -25583,6 +25614,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "tw-absolute tw-bottom-[56px] tw-flex tw-justify-center tw-items-center tw-w-full"
+};
+var _hoisted_2 = {
+  key: 0
+};
+var _hoisted_3 = {
+  "class": "tw-h-[39px]"
+};
+var _hoisted_4 = ["src", "alt"];
+var _hoisted_5 = {
+  "class": "tw-flex tw-justify-center tw-items-center tw-text-white tw-text-[10px] tw-w-full tw-mt-[10px]"
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" BY  ");
+
+var _hoisted_7 = ["src"];
+var _hoisted_8 = {
+  key: 1,
+  "class": "tw-h-[21px]"
+};
+var _hoisted_9 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper StepWrapper--".concat($props.brand)),
@@ -25591,7 +25644,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     } : {})
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper__overlay ".concat($props.showBgImg ? 'StepWrapper__overlay--gradient' : ''))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 2
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$props.showInstrumentBrand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.whiteLogos[$props.brand],
+    "class": "tw-h-full tw-w-auto",
+    alt: "".concat($props.brand, " logo")
+  }, null, 8
+  /* PROPS */
+  , _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    "class": "tw-h-[10px] tw-w-auto",
+    src: $setup.whiteLogos.musora,
+    alt: "Musora Logo"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_7)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.showInstrumentBrand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.whiteLogos.musora,
+    alt: "Musora Logo",
+    "class": "tw-h-full tw-w-auto"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_9)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 2
   /* CLASS */
   )], 6
   /* CLASS, STYLE */
@@ -25634,7 +25705,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     showBgImg: true
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CoachCarousel"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ProgressBar"], {
+      return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CoachCarousel"], {
+        brand: $props.brand
+      }, null, 8
+      /* PROPS */
+      , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ProgressBar"], {
         brand: $props.brand,
         currentStep: 6,
         steps: $props.steps,
@@ -25915,7 +25990,8 @@ var _hoisted_3 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["StepWrapper"], {
     brand: $props.brand,
-    showBgImg: false
+    showBgImg: false,
+    showInstrumentBrand: false
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SquaredCard"], {
@@ -26212,7 +26288,8 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["StepWrapper"], {
     brand: $props.brand,
-    showBgImg: false
+    showBgImg: false,
+    showInstrumentBrand: false
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AvatarUpload"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
@@ -27166,6 +27243,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "brandUrl": () => (/* binding */ brandUrl),
+/* harmony export */   "whiteLogos": () => (/* binding */ whiteLogos),
 /* harmony export */   "bgColor": () => (/* binding */ bgColor),
 /* harmony export */   "bgBottomGradients": () => (/* binding */ bgBottomGradients),
 /* harmony export */   "textColor": () => (/* binding */ textColor),
@@ -27185,6 +27263,13 @@ var brandUrl = {
   singeo: 'https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png',
   guitareo: 'https://musora-ui.s3.amazonaws.com/logos/guitareo.svg',
   pianote: 'https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png'
+};
+var whiteLogos = {
+  drumeo: 'http://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg',
+  singeo: 'http://musora-ui.s3.amazonaws.com/logos/singeo-white.svg',
+  guitareo: 'http://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg',
+  pianote: 'http://musora-ui.s3.amazonaws.com/logos/pianote-white.svg',
+  musora: 'http://musora-ui.s3.amazonaws.com/logos/musora-white.svg'
 };
 var bgColor = {
   singeo: 'tw-bg-singeo',
@@ -27208,7 +27293,11 @@ var borderColor = {
   drumeo: 'tw-border-drumeo',
   singeo: 'tw-border-singeo',
   guitareo: 'tw-border-guitareo',
-  pianote: 'tw-border-pianote'
+  pianote: 'tw-border-pianote',
+  red: 'tw-border-red-400',
+  green: 'tw-border-green-400',
+  blue: 'tw-border-blue-400',
+  yellow: 'tw-border-yellow-400'
 };
 var bgImg = {
   drumeo: _vue_images_drumeo_bg_png__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -32297,7 +32386,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#coach-carousel-results-container[data-v-7921963a]::-webkit-scrollbar {\n  height: 0 !important;\n  width: 0 !important;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  overflow: -moz-scrollbars-none;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  -ms-overflow-style: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#coach-carousel-results-container[data-v-7921963a]::-webkit-scrollbar {\n  height: 0 !important;\n  width: 0 !important;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  overflow: -moz-scrollbars-none;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  -ms-overflow-style: none;\n}\n.gradient-border-both[data-v-7921963a] {\n  -webkit-mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n  mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n}\n.gradient-border-left[data-v-7921963a] {\n  -webkit-mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 1) 100%\n  );\n  mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 1) 100%\n  );\n}\n.gradient-border-right[data-v-7921963a] {\n  -webkit-mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 1) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n  mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 1) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32417,7 +32506,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.StepWrapper {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    background-size: cover;\n}\n.StepWrapper__overlay {\n    display: flex;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background: #000c17;\n}\n.StepWrapper--drumeo .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(0, 32, 57, 0.55),\n            rgba(0, 32, 57, 0.55)\n        ),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n.StepWrapper--pianote .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(0, 32, 57, 0.46),\n            rgba(0, 32, 57, 0.46)\n        ),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n.StepWrapper--guitareo .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(0, 32, 57, 0.45),\n            rgba(0, 32, 57, 0.45)\n        ),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n.StepWrapper--singeo .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(131, 0, 233, 0.1),\n            rgba(131, 0, 233, 0.1)\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.StepWrapper {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n}\n.StepWrapper__overlay {\n  display: flex;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  background: #000c17;\n}\n.StepWrapper--drumeo .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(0, 32, 57, 0.55),\n      rgba(0, 32, 57, 0.55)\n    ),\n    linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n.StepWrapper--pianote .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(0, 32, 57, 0.46),\n      rgba(0, 32, 57, 0.46)\n    ),\n    linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n.StepWrapper--guitareo .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(0, 32, 57, 0.45),\n      rgba(0, 32, 57, 0.45)\n    ),\n    linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n.StepWrapper--singeo .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(131, 0, 233, 0.1),\n      rgba(131, 0, 233, 0.1)\n    ),\n    linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
