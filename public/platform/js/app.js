@@ -20276,11 +20276,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    vueRouter: {
-      type: Boolean,
-      "default": true
-    },
-    brand: String
+    vueRouter: Boolean,
+    brand: {
+      type: String,
+      "default": 'drumeo'
+    }
   },
   setup: function setup(props) {
     console.log("Has Vue Router: ".concat(props.vueRouter));
