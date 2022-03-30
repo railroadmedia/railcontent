@@ -5,6 +5,8 @@ import Sidebar from '../Sidebar/Sidebar.vue'
 import Footer from '../Footer/Footer.vue'
 import { useRouter, useRoute } from 'vue-router'
 import SpriteSheet from '../MusoraIcons/SpriteSheet.vue'
+import simplebar from 'simplebar-vue';
+import 'simplebar/dist/simplebar.min.css';
 
 export default {
     name: 'PageContainer',
@@ -40,9 +42,11 @@ export default {
 
         const onColorModeToggle = (val) => {
             if (typeof val === 'boolean') {
-                isDarkModeSelected.value = val
+                isDarkModeSelected.value = val;
+                localStorage.setItem('darkMode', val);
             } else {
-                isDarkModeSelected.value = !isDarkModeSelected.value
+                isDarkModeSelected.value = !isDarkModeSelected.value;
+                localStorage.setItem('darkMode', isDarkModeSelected.value);
             }
         }
 
@@ -68,7 +72,11 @@ export default {
 
     beforeMount() {
         //Set Dark Mode Based on User Preferences
-        this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if( localStorage.getItem('darkMode') ) {
+            this.isDarkModeSelected = JSON.parse(localStorage.getItem('darkMode'));
+        } else {
+            this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        }
         //Get Query String
         const urlSearchParams = new URLSearchParams(window.location.search)
         const brandParam = urlSearchParams.get('brand');
@@ -125,7 +133,7 @@ export default {
         />
 
         <!-- Page Container -->
-        <div class="tw-flex tw-flex-row tw-w-full tw-min-h-screen tw-pt-[58px] tw-transition-colors dark:tw-bg-[#000C17]">
+        <div class="tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors dark:tw-bg-[#000C17] tw-overflow-hidden">
 
             <!-- Sidebar -->
             <Sidebar :brand="brand" 
@@ -134,10 +142,10 @@ export default {
             />
 
             <!-- Content Container -->
-            <main class="tw-flex tw-grow tw-flex-col tw-relative">
+            <main class="tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden">
 
                 <!-- Content -->
-                <section class="tw-h-full tw-w-full">
+                <section class="tw-flex tw-flex-col tw-grow tw-w-full">
 
                     <slot />
 

@@ -21,6 +21,11 @@ module.exports = {
     extend: {
       fontFamily: stylesoraTheme.fontFamily,
       fontSize: stylesoraTheme.fontSize, 
+      //New Breakpoints
+      screens: {
+        '3xl': '1815px',
+        '4xl': '2256px',
+      }
     },
   },
   plugins: [
@@ -62,7 +67,15 @@ module.exports = {
         '.no-scrollbar': {
           '-ms-overflow-style': 'none',  
           'scrollbar-width': 'none'
-        } 
+        }, 
+        '.container': {
+          '@media (min-width: 1815px)': {
+            maxWidth: '1815px',
+          },
+          '@media (min-width: 2256px)': {
+            maxWidth: '2256px',
+          }
+        }
       })
     })
   ],

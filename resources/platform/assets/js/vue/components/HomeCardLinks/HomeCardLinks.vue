@@ -4,7 +4,7 @@
         <a :href="`/members/method?brand=${brand}`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full"
         >
-            <div class="tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-transition-all tw-duration-200 tw-ease-in-out tw-top-0 focus:tw-top-1 hover:tw-top-1"
+            <div class="tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-transition-all tw-duration-200 tw-ease-in-out tw-bottom-0 focus:tw-bottom-1 hover:tw-bottom-1"
                  :class="`${brand}-card tw-text-${brand}`"
             >
                 <!-- Icon -->
@@ -19,7 +19,7 @@
         <a :href="`/members/songs?brand=${brand}`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full"
         >
-            <div class="tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-transition-all tw-duration-200 tw-ease-in-out tw-top-0 focus:tw-top-1 hover:tw-top-1"
+            <div class="tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-transition-all tw-duration-200 tw-ease-in-out tw-bottom-0 focus:tw-bottom-1 hover:tw-bottom-1"
                  :class="[ brand === 'pianote'? `songs-card-blue tw-text-[#5FCFF5]` : `songs-card-pink tw-text-[#DD4572]`]"
             >
                 <!-- Icon -->
@@ -34,7 +34,7 @@
         <!-- Coaches -->
         <a :href="`/members/coaches?brand=${brand}`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full">
-            <div class="tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-text-[#FFA710] coaches-card tw-transition-all tw-duration-200 tw-ease-in-out tw-top-0 focus:tw-top-1 hover:tw-top-1">
+            <div class="tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-text-[#FFA710] coaches-card tw-transition-all tw-duration-200 tw-ease-in-out tw-bottom-0 focus:tw-bottom-1 hover:tw-bottom-1">
                 <!-- Icon -->
                 <musora-icon width="35" height="35" viewBox="0 0 21 21" icon-name="whistle" class="tw-w-4 tw-h-4 sm:tw-h-9 sm:tw-w-9 tw-mb-1 sm:tw-mb-2"/>
                 <!--Name SVG-->
