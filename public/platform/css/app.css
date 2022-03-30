@@ -1857,6 +1857,15 @@ a:visited {
 .tw-to-pianote-700 {
   --tw-gradient-to: #7B0D18;
 }
+.tw-to-singeo-600 {
+  --tw-gradient-to: #6900BA;
+}
+.tw-to-drumeo-600 {
+  --tw-gradient-to: #095EAF;
+}
+.tw-to-pianote-600 {
+  --tw-gradient-to: #AC1222;
+}
 .tw-bg-cover {
   background-size: cover;
 }
@@ -2225,8 +2234,14 @@ a:visited {
 .tw-leading-normal {
   line-height: 1.5;
 }
+.tw-leading-\[0px\] {
+  line-height: 0px;
+}
 .tw-tracking-wide {
   letter-spacing: 0.025em;
+}
+.tw-tracking-wider {
+  letter-spacing: 0.05em;
 }
 .tw-text-white {
   --tw-text-opacity: 1;
@@ -2511,6 +2526,10 @@ a:visited {
 .focus\:tw-border-none:focus {
   border-style: none;
 }
+.focus\:tw-bg-\[\#F5F5F6\]:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 246 / var(--tw-bg-opacity));
+}
 .focus\:tw-outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -2577,8 +2596,16 @@ a:visited {
 .tw-dark .dark\:hover\:tw-bg-\[\#445F74\]\/20:hover {
   background-color: rgb(68 95 116 / 0.2);
 }
+.tw-dark .dark\:focus\:tw-bg-\[\#102230\]:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 34 48 / var(--tw-bg-opacity));
+}
 .tw-dark .dark\:focus\:tw-outline-\[\#9EC0DC\]:focus {
   outline-color: #9EC0DC;
+}
+.tw-dark .dark\:focus\:hover\:tw-bg-\[\#102230\]:hover:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 34 48 / var(--tw-bg-opacity));
 }
 @media (min-width: 640px) {
   .sm\:tw-mt-10 {
