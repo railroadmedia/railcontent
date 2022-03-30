@@ -31,7 +31,7 @@ const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
       genre preferences. When you follow a coach you will get notified when they
       release new content.
     </p>
-    <CoachCarousel />
+    <CoachCarousel :brand="brand" />
     <ProgressBar
       :brand="brand"
       :currentStep="6"

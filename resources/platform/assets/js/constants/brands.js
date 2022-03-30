@@ -11,6 +11,14 @@ export const brandUrl = {
     'https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png'
 }
 
+export const whiteLogos = {
+  drumeo:'http://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg',
+  singeo:'http://musora-ui.s3.amazonaws.com/logos/singeo-white.svg',
+  guitareo:'http://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg',
+  pianote:'http://musora-ui.s3.amazonaws.com/logos/pianote-white.svg',
+  musora: 'http://musora-ui.s3.amazonaws.com/logos/musora-white.svg'
+}
+
 export const bgColor = {
   singeo: 'tw-bg-singeo',
   drumeo: 'tw-bg-drumeo',
@@ -36,7 +44,11 @@ export const borderColor = {
   drumeo: 'tw-border-drumeo',
   singeo: 'tw-border-singeo',
   guitareo: 'tw-border-guitareo',
-  pianote: 'tw-border-pianote'
+  pianote: 'tw-border-pianote',
+  red: 'tw-border-red-400',
+  green: 'tw-border-green-400',
+  blue: 'tw-border-blue-400',
+  yellow: 'tw-border-yellow-400'
 }
 
 export const bgImg = {

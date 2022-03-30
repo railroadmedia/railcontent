@@ -41,7 +41,7 @@ const initialInfo = {
     instrumentTypes: {}
 }
 
-let currentStep = ref(0)
+let currentStep = ref(6)
 let info = ref(initialInfo)
 let steps = ref(initialSteps)
 

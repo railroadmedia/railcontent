@@ -4,9 +4,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import SingleCoach from "./SingleCoach.vue";
 import { textColor } from "../../../constants/brands";
 
-const resultsRef = ref();
-const interval = ref(false);
-
 const props = defineProps({
   coaches: {
     type: Object,
@@ -18,12 +15,37 @@ const props = defineProps({
   },
 });
 
+const resultsRef = ref();
+const interval = ref(false);
+const currentGradientBorder = ref("right");
+
+const gradientMaskMap = {
+  left: "gradient-border-left",
+  right: "gradient-border-right",
+  both: "gradient-border-both",
+};
+
+const updateGradientState = (container) => {
+  const scrollValue = container.scrollLeft;
+  const width = container.scrollWidth - container.offsetWidth;
+
+  if (scrollValue === 0) {
+    currentGradientBorder.value = "right";
+  }
+  else if (Math.round(scrollValue) === Math.round(width)) {
+    currentGradientBorder.value = "left";
+  } else if (currentGradientBorder.value !== "both") {
+    currentGradientBorder.value = "both"
+  }
+};
+
 const scrollCarouselLeft = () => {
   interval.value = setInterval(() => {
     const scrollContainer = document.getElementById(
       "coach-carousel-results-container"
     );
     scrollContainer.scrollLeft -= 20;
+    updateGradientState(scrollContainer)
   }, 30);
 };
 
@@ -33,6 +55,7 @@ const scrollCarouselRight = () => {
       "coach-carousel-results-container"
     );
     scrollContainer.scrollLeft += 20;
+    updateGradientState(scrollContainer)
   }, 30);
 };
 
@@ -51,13 +74,14 @@ function onWheelScroll(e) {
   } else {
     scrollContainer.scrollLeft -= 25;
   }
+  updateGradientState(scrollContainer)
 }
 </script>
 
 <template>
-  <div class="tw-relative">
+  <div class="tw-relative tw-mb-[60px]">
     <div
-      class="tw-w-[800px] tw-overflow-hidden"
+      :class="`tw-w-[800px] tw-overflow-hidden ${gradientMaskMap[currentGradientBorder]}`"
       style="overflow-x: scroll"
       id="coach-carousel-results-container"
       @wheel="onWheelScroll"
@@ -121,5 +145,56 @@ function onWheelScroll(e) {
 
 #coach-carousel-results-container {
   -ms-overflow-style: none;
+}
+
+.gradient-border-both {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 1) 93%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 1) 93%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.gradient-border-left {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 1) 93%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 1) 93%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.gradient-border-right {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 1) 93%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 7%,
+    rgba(0, 0, 0, 1) 93%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 </style>
