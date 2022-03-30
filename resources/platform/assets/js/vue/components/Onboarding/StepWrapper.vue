@@ -25,10 +25,12 @@ const props = defineProps({
         showBgImg ? 'StepWrapper__overlay--gradient' : ''
       }`"
     >
-      <slot />
-      <div class="tw-absolute tw-bottom-[56px] tw-flex tw-justify-center tw-items-center tw-w-full">
+      <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-h-full tw-w-full">
+        <slot />
+      </div>
+      <div class="tw-flex tw-justify-center tw-items-center tw-w-full tw-self-end tw-pb-[40px]">
       <div v-if="showInstrumentBrand">
-        <div class="tw-h-[39px]">
+        <div class="tw-h-[32px]">
           <img
             :src="whiteLogos[brand]"
             class="tw-h-full tw-w-auto"
@@ -66,8 +68,8 @@ const props = defineProps({
   width: 100%;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   background: #000c17;
 }
 

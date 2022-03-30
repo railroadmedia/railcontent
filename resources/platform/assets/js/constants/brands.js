@@ -63,5 +63,9 @@ const __usedVars = [
   'hover:tw-border-drumeo',
   'hover:tw-border-pianote',
   'hover:tw-border-singeo',
-  'hover:tw-border-guitareo'
+  'hover:tw-border-guitareo',
+  'hover:tw-border-red-400',
+  'hover:tw-border-green-400',
+  'hover:tw-border-blue-400',
+  'hover:tw-border-yellow-400'
 ]
