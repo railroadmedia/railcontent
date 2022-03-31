@@ -9,11 +9,11 @@
 <script>
   export default {
     props: {
-      vueRouter: Boolean,
-      brand: {
-        type: String,
-        default: 'drumeo',
-      }
+      vueRouter: {
+        type: Boolean,
+        default: true,
+      },
+      brand: String
     },
     setup(props) {
       console.log(`Has Vue Router: ${props.vueRouter}`)

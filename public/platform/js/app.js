@@ -20276,11 +20276,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    vueRouter: Boolean,
-    brand: {
-      type: String,
-      "default": 'drumeo'
-    }
+    vueRouter: {
+      type: Boolean,
+      "default": true
+    },
+    brand: String
   },
   setup: function setup(props) {
     console.log("Has Vue Router: ".concat(props.vueRouter));
@@ -20620,11 +20620,33 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var resultsRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var interval = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var currentGradientBorder = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("right");
+    var gradientMaskMap = {
+      left: "gradient-border-left",
+      right: "gradient-border-right",
+      both: "gradient-border-both"
+    };
+
+    var updateGradientState = function updateGradientState(container) {
+      var scrollValue = container.scrollLeft;
+      var width = container.scrollWidth - container.offsetWidth;
+
+      if (scrollValue === 0) {
+        currentGradientBorder.value = "right";
+        stopScroll();
+      } else if (Math.round(scrollValue) === Math.round(width)) {
+        currentGradientBorder.value = "left";
+        stopScroll();
+      } else if (currentGradientBorder.value !== "both") {
+        currentGradientBorder.value = "both";
+      }
+    };
 
     var scrollCarouselLeft = function scrollCarouselLeft() {
       interval.value = setInterval(function () {
         var scrollContainer = document.getElementById("coach-carousel-results-container");
         scrollContainer.scrollLeft -= 20;
+        updateGradientState(scrollContainer);
       }, 30);
     };
 
@@ -20632,6 +20654,7 @@ __webpack_require__.r(__webpack_exports__);
       interval.value = setInterval(function () {
         var scrollContainer = document.getElementById("coach-carousel-results-container");
         scrollContainer.scrollLeft += 20;
+        updateGradientState(scrollContainer);
       }, 30);
     };
 
@@ -20649,12 +20672,17 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         scrollContainer.scrollLeft -= 25;
       }
+
+      updateGradientState(scrollContainer);
     }
 
     var __returned__ = {
+      props: props,
       resultsRef: resultsRef,
       interval: interval,
-      props: props,
+      currentGradientBorder: currentGradientBorder,
+      gradientMaskMap: gradientMaskMap,
+      updateGradientState: updateGradientState,
       scrollCarouselLeft: scrollCarouselLeft,
       scrollCarouselRight: scrollCarouselRight,
       stopScroll: stopScroll,
@@ -21928,10 +21956,14 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     brand: {
       type: String,
-      "default": 'drumeo'
+      "default": "drumeo"
     },
     showBgImg: {
       type: Boolean
+    },
+    showInstrumentBrand: {
+      type: Boolean,
+      "default": true
     }
   },
   setup: function setup(__props, _ref) {
@@ -21940,7 +21972,8 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var __returned__ = {
       props: props,
-      bgImg: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImg
+      bgImg: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImg,
+      whiteLogos: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.whiteLogos
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -21967,7 +22000,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Button_Button_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Button/Button.vue */ "./resources/platform/assets/js/vue/components/Button/Button.vue");
 /* harmony import */ var _StepWrapper_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../StepWrapper.vue */ "./resources/platform/assets/js/vue/components/Onboarding/StepWrapper.vue");
 /* harmony import */ var _CoachCarousel_CoachCarousel_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../CoachCarousel/CoachCarousel.vue */ "./resources/platform/assets/js/vue/components/CoachCarousel/CoachCarousel.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _InputLabel_InputLabel_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../InputLabel/InputLabel.vue */ "./resources/platform/assets/js/vue/components/InputLabel/InputLabel.vue");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/SearchIcon.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
 
 
 
@@ -21991,14 +22028,22 @@ __webpack_require__.r(__webpack_exports__);
         emit = _ref.emit;
     expose();
     var props = __props;
+
+    function onInputChange(value) {
+      console.log('searching for', value);
+    }
+
     var __returned__ = {
       props: props,
       emit: emit,
+      onInputChange: onInputChange,
       ProgressBar: _ProgressBar_ProgressBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
       Button: _Button_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
       StepWrapper: _StepWrapper_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       CoachCarousel: _CoachCarousel_CoachCarousel_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      ref: vue__WEBPACK_IMPORTED_MODULE_4__.ref
+      InputLabel: _InputLabel_InputLabel_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+      SearchIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__["default"],
+      ref: vue__WEBPACK_IMPORTED_MODULE_5__.ref
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -22891,15 +22936,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_brands__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../constants/brands */ "./resources/platform/assets/js/constants/brands.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'SquaredCard',
-  props: ['type', 'active', 'backgroundUrl', 'onSelect', 'bgColor', 'defaultBorderColor'],
-  emits: ['onSelect'],
+  name: "SquaredCard",
+  props: ["type", "active", "backgroundUrl", "onSelect", "bgColor", "defaultBorderColor"],
+  emits: ["onSelect"],
   setup: function setup(props) {
     var getBorderColor = function getBorderColor(type) {
-      if (['drumeo', 'guitareo', 'singeo', 'pianote'].includes(type)) {
+      if (["drumeo", "guitareo", "singeo", "pianote"].includes(type)) {
         return _constants_brands__WEBPACK_IMPORTED_MODULE_0__.borderColor[type];
       } else {
-        return 'tw-border-[#7E9AB1]';
+        return "tw-border-[#7E9AB1]";
       }
     };
 
@@ -23483,11 +23528,11 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "tw-relative"
+  "class": "tw-relative tw-mb-[40px]"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "tw-w-[800px] tw-overflow-hidden",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[80vw] tw-overflow-hidden ".concat($setup.gradientMaskMap[$setup.currentGradientBorder])),
     style: {
       "overflow-x": "scroll"
     },
@@ -23504,28 +23549,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  )], 32
-  /* HYDRATE_EVENTS */
+  )], 34
+  /* CLASS, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "tw-w-[60px] tw-h-[60px] tw-bg-[#445f74] tw-bg-opacity-20 tw-flex tw-items-center tw-justify-center tw-absolute tw-left-[-30px] tw-top-[50%] tw-rounded-full hover:tw-bg-opacity-100",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("\n        tw-w-[60px]\n        tw-h-[60px]\n        tw-bg-[#445f74]\n        tw-bg-opacity-20\n        tw-items-center\n        tw-justify-center\n        tw-absolute\n        tw-left-[-30px]\n        tw-top-[50%]\n        tw-rounded-full\n        hover:tw-bg-opacity-100\n        ".concat($setup.currentGradientBorder === 'right' ? 'tw-hidden' : 'tw-hidden md:tw-flex', "\n        ")),
     onMousedown: $setup.scrollCarouselLeft,
     onMouseup: $setup.stopScroll
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronLeftIcon"], {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-p-[12px] ".concat($setup.textColor[$props.brand]))
   }, null, 8
   /* PROPS */
-  , ["class"])], 32
-  /* HYDRATE_EVENTS */
+  , ["class"])], 34
+  /* CLASS, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "tw-w-[60px] tw-h-[60px] tw-bg-[#445f74] tw-bg-opacity-20 tw-flex tw-items-center tw-justify-center tw-absolute tw-right-[-30px] tw-top-[50%] tw-rounded-full hover:tw-bg-opacity-100",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-w-[60px]\n        tw-h-[60px]\n        tw-bg-[#445f74]\n        tw-bg-opacity-20\n        tw-flex\n        tw-items-center\n        tw-justify-center\n        tw-absolute\n        tw-right-[-30px]\n        tw-top-[50%]\n        tw-rounded-full\n        hover:tw-bg-opacity-100\n        ".concat($setup.currentGradientBorder === 'left' ? 'tw-hidden' : 'tw-hidden md:tw-flex', "\n        ")),
     onMousedown: $setup.scrollCarouselRight,
     onMouseup: $setup.stopScroll
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronRightIcon"], {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-p-[12px] ".concat($setup.textColor[$props.brand]))
   }, null, 8
   /* PROPS */
-  , ["class"])], 32
-  /* HYDRATE_EVENTS */
+  , ["class"])], 34
+  /* CLASS, HYDRATE_EVENTS */
   )]);
 }
 
@@ -25611,6 +25656,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "tw-flex tw-flex-col tw-items-center tw-justify-center tw-h-full tw-w-full"
+};
+var _hoisted_2 = {
+  "class": "tw-flex tw-justify-center tw-items-center tw-w-full tw-self-end tw-pb-[40px]"
+};
+var _hoisted_3 = {
+  key: 0
+};
+var _hoisted_4 = {
+  "class": "tw-h-[32px]"
+};
+var _hoisted_5 = ["src", "alt"];
+var _hoisted_6 = {
+  "class": "tw-flex tw-justify-center tw-items-center tw-text-white tw-text-[10px] tw-w-full tw-mt-[10px]"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" BY  ");
+
+var _hoisted_8 = ["src"];
+var _hoisted_9 = {
+  key: 1,
+  "class": "tw-h-[21px]"
+};
+var _hoisted_10 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper StepWrapper--".concat($props.brand)),
@@ -25619,7 +25689,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     } : {})
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper__overlay ".concat($props.showBgImg ? 'StepWrapper__overlay--gradient' : ''))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 2
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$props.showInstrumentBrand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.whiteLogos[$props.brand],
+    "class": "tw-h-full tw-w-auto",
+    alt: "".concat($props.brand, " logo")
+  }, null, 8
+  /* PROPS */
+  , _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    "class": "tw-h-[10px] tw-w-auto",
+    src: $setup.whiteLogos.musora,
+    alt: "Musora Logo"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_8)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$props.showInstrumentBrand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.whiteLogos.musora,
+    alt: "Musora Logo",
+    "class": "tw-h-full tw-w-auto"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_10)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 2
   /* CLASS */
   )], 6
   /* CLASS, STYLE */
@@ -25649,12 +25737,16 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "tw-font-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white"
+  "class": "tw-font-[16px] tw-mb-[15px] md:tw-w-[692px] md:tw-block tw-hidden tw-text-white tw-text-center"
 }, " Here are some coaches we think you’ll like based on your experience and genre preferences. When you follow a coach you will get notified when they release new content. ", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("COMPLETE YOUR ACCOUNT");
+var _hoisted_3 = {
+  "class": "tw-relative tw-h-[42px] tw-mb-[40px] tw-w-[600px]"
+};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("COMPLETE YOUR ACCOUNT");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["StepWrapper"], {
@@ -25662,7 +25754,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     showBgImg: true
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CoachCarousel"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ProgressBar"], {
+      return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
+        placeholder: "Find a coach...",
+        classOverride: "tw-text-white tw-w-full tw-bg-[#002039]/90 tw-absolute tw-pl-[36px] tw-box-border",
+        onOnChange: $setup.onInputChange
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SearchIcon"], {
+        "class": "tw-absolute tw-w-[16px] tw-h-[16px] tw-text-[#7E9AB1] tw-mt-[14px] tw-ml-[14px]"
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CoachCarousel"], {
+        brand: $props.brand
+      }, null, 8
+      /* PROPS */
+      , ["brand"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ProgressBar"], {
         brand: $props.brand,
         currentStep: 6,
         steps: $props.steps,
@@ -25676,18 +25778,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onOnButtonClick: _cache[1] || (_cache[1] = function () {
           $setup.emit('onChangeStep', 1);
         }),
-        isDisabled: !$props.steps[0].checked,
         classOverride: "tw-w-[543px] tw-mt-[40px]"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_3];
+          return [_hoisted_4];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["brand", "isDisabled"])];
+      , ["brand"])];
     }),
     _: 1
     /* STABLE */
@@ -25943,7 +26044,8 @@ var _hoisted_3 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["StepWrapper"], {
     brand: $props.brand,
-    showBgImg: false
+    showBgImg: false,
+    showInstrumentBrand: false
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SquaredCard"], {
@@ -26240,7 +26342,8 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["StepWrapper"], {
     brand: $props.brand,
-    showBgImg: false
+    showBgImg: false,
+    showInstrumentBrand: false
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AvatarUpload"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
@@ -26744,7 +26847,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.$emit('onSelect');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("SquaredCard SquaredCard__overlay--".concat($props.type, " ").concat($props.active ? "".concat($setup.getBorderColor($props.type)) : "".concat($props.defaultBorderColor ? $props.defaultBorderColor : 'tw-border-transparent'), " hover:").concat($setup.borderColor[$props.type], " tw-border-box tw-column tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-rounded-lg tw-border-[3px] tw-bg-cover"))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("SquaredCard__overlay--".concat($props.type, " ").concat($props.active ? "".concat($setup.getBorderColor($props.type), " SquaredCard__overlay--active") : "".concat($props.defaultBorderColor ? $props.defaultBorderColor : 'tw-border-transparent'), " ").concat($setup.borderColor[$props.type] ? "hover:".concat($setup.borderColor[$props.type]) : '', " tw-border-box tw-column tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-rounded-lg tw-border-[3px] tw-bg-cover"))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 2
   /* CLASS */
   )], 4
@@ -27073,21 +27176,33 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "brandUrl": () => (/* binding */ brandUrl),
+/* harmony export */   "whiteLogos": () => (/* binding */ whiteLogos),
 /* harmony export */   "bgColor": () => (/* binding */ bgColor),
 /* harmony export */   "bgBottomGradients": () => (/* binding */ bgBottomGradients),
 /* harmony export */   "textColor": () => (/* binding */ textColor),
 /* harmony export */   "borderColor": () => (/* binding */ borderColor),
 /* harmony export */   "bgImg": () => (/* binding */ bgImg)
 /* harmony export */ });
-var drumeoBgImg;
-var singeoBgImg;
-var pianoteBgImg;
-var guitareoBgImg;
+/* harmony import */ var _vue_images_drumeo_bg_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../vue/images/drumeo-bg.png */ "./resources/platform/assets/js/vue/images/drumeo-bg.png");
+/* harmony import */ var _vue_images_singeo_bg_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../vue/images/singeo-bg.png */ "./resources/platform/assets/js/vue/images/singeo-bg.png");
+/* harmony import */ var _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../vue/images/pianote-bg.png */ "./resources/platform/assets/js/vue/images/pianote-bg.png");
+/* harmony import */ var _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vue/images/guitareo-bg.png */ "./resources/platform/assets/js/vue/images/guitareo-bg.png");
+
+
+
+
 var brandUrl = {
   drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
   singeo: 'https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png',
   guitareo: 'https://musora-ui.s3.amazonaws.com/logos/guitareo.svg',
   pianote: 'https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png'
+};
+var whiteLogos = {
+  drumeo: 'http://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg',
+  singeo: 'http://musora-ui.s3.amazonaws.com/logos/singeo-white.svg',
+  guitareo: 'http://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg',
+  pianote: 'http://musora-ui.s3.amazonaws.com/logos/pianote-white.svg',
+  musora: 'http://musora-ui.s3.amazonaws.com/logos/musora-white.svg'
 };
 var bgColor = {
   singeo: 'tw-bg-singeo',
@@ -27111,16 +27226,20 @@ var borderColor = {
   drumeo: 'tw-border-drumeo',
   singeo: 'tw-border-singeo',
   guitareo: 'tw-border-guitareo',
-  pianote: 'tw-border-pianote'
+  pianote: 'tw-border-pianote',
+  red: 'tw-border-red-400',
+  green: 'tw-border-green-400',
+  blue: 'tw-border-blue-400',
+  yellow: 'tw-border-yellow-400'
 };
 var bgImg = {
-  drumeo: drumeoBgImg,
-  singeo: singeoBgImg,
-  guitareo: pianoteBgImg,
-  pianote: guitareoBgImg
+  drumeo: _vue_images_drumeo_bg_png__WEBPACK_IMPORTED_MODULE_0__["default"],
+  singeo: _vue_images_singeo_bg_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+  guitareo: _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__["default"],
+  pianote: _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__["default"]
 }; // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
 
-var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo'];
+var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo', 'hover:tw-border-red-400', 'hover:tw-border-green-400', 'hover:tw-border-blue-400', 'hover:tw-border-yellow-400'];
 
 /***/ }),
 
@@ -32200,7 +32319,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#coach-carousel-results-container[data-v-7921963a]::-webkit-scrollbar {\n  height: 0 !important;\n  width: 0 !important;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  overflow: -moz-scrollbars-none;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  -ms-overflow-style: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#coach-carousel-results-container[data-v-7921963a]::-webkit-scrollbar {\n  height: 0 !important;\n  width: 0 !important;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  overflow: -moz-scrollbars-none;\n}\n#coach-carousel-results-container[data-v-7921963a] {\n  -ms-overflow-style: none;\n}\n.gradient-border-both[data-v-7921963a] {\n  -webkit-mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n  mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n}\n.gradient-border-left[data-v-7921963a] {\n  -webkit-mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 1) 100%\n  );\n  mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 0) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 1) 100%\n  );\n}\n.gradient-border-right[data-v-7921963a] {\n  -webkit-mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 1) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n  mask-image: linear-gradient(\n    90deg,\n    rgba(0, 0, 0, 1) 0%,\n    rgba(0, 0, 0, 1) 7%,\n    rgba(0, 0, 0, 1) 93%,\n    rgba(0, 0, 0, 0) 100%\n  );\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32320,7 +32439,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.StepWrapper {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    background-size: cover;\n}\n.StepWrapper__overlay {\n    display: flex;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background: #000c17;\n}\n.StepWrapper--drumeo .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(0, 32, 57, 0.55),\n            rgba(0, 32, 57, 0.55)\n        ),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n.StepWrapper--pianote .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(0, 32, 57, 0.46),\n            rgba(0, 32, 57, 0.46)\n        ),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n.StepWrapper--guitareo .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(0, 32, 57, 0.45),\n            rgba(0, 32, 57, 0.45)\n        ),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n.StepWrapper--singeo .StepWrapper__overlay--gradient {\n    background: linear-gradient(\n            0deg,\n            rgba(131, 0, 233, 0.1),\n            rgba(131, 0, 233, 0.1)\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.StepWrapper {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n}\n.StepWrapper__overlay {\n  display: flex;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-between;\n  background: #000c17;\n}\n.StepWrapper--drumeo .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(0, 32, 57, 0.55),\n      rgba(0, 32, 57, 0.55)\n    ),\n    linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n.StepWrapper--pianote .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(0, 32, 57, 0.46),\n      rgba(0, 32, 57, 0.46)\n    ),\n    linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n.StepWrapper--guitareo .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(0, 32, 57, 0.45),\n      rgba(0, 32, 57, 0.45)\n    ),\n    linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n.StepWrapper--singeo .StepWrapper__overlay--gradient {\n  background: linear-gradient(\n      0deg,\n      rgba(131, 0, 233, 0.1),\n      rgba(131, 0, 233, 0.1)\n    ),\n    linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32446,7 +32565,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".SquaredCard {\n    display: block;\n    width: 264px;\n    height: 264px;\n}\n\n.SquaredCard__overlay {\n    display: flex;\n    font-family: Bebas Neue;\n}\n\n.SquaredCard__overlay--drumeo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n\n.SquaredCard__overlay--drumeo:hover {\n    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--pianote {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n\n.SquaredCard__overlay--pianote:hover {\n    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--guitareo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n\n.SquaredCard__overlay--guitareo:hover {\n    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo {\n    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo:hover {\n    background: linear-gradient(\n            177.71deg,\n            rgba(131, 0, 233, 0) -6.02%,\n            rgba(131, 0, 233, 0.87) 176.38%,\n            rgba(131, 0, 233, 0.34) 176.38%,\n            rgba(131, 0, 233, 0) 176.38%\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--red:hover {\n    background: rgba(239, 68, 68, 0.45);\n}\n\n.SquaredCard__overlay--blue:hover {\n    background: rgba(59, 130, 246, 0.45);\n}\n\n.SquaredCard__overlay--yellow:hover {\n    background: rgba(234, 179, 8, 0.45);\n}\n\n.SquaredCard__overlay--green:hover {\n    background: rgba(34, 197, 94, 0.45);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".SquaredCard {\n    display: block;\n    width: 264px;\n    height: 264px;\n}\n\n.SquaredCard__overlay {\n    display: flex;\n    font-family: Bebas Neue;\n}\n\n.SquaredCard__overlay--drumeo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n\n.SquaredCard__overlay--drumeo:hover {\n    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--pianote {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n\n.SquaredCard__overlay--pianote:hover {\n    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--guitareo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n\n.SquaredCard__overlay--guitareo:hover {\n    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo {\n    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo:hover {\n    background: linear-gradient(\n            177.71deg,\n            rgba(131, 0, 233, 0) -6.02%,\n            rgba(131, 0, 233, 0.87) 176.38%,\n            rgba(131, 0, 233, 0.34) 176.38%,\n            rgba(131, 0, 233, 0) 176.38%\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--red:hover,.SquaredCard__overlay--red.SquaredCard__overlay--active  {\n    background: rgba(239, 68, 68, 0.45);\n}\n\n.SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {\n    background: rgba(59, 130, 246, 0.45);\n}\n\n.SquaredCard__overlay--yellow:hover,.SquaredCard__overlay--yellow.SquaredCard__overlay--active  {\n    background: rgba(234, 179, 8, 0.45);\n}\n\n.SquaredCard__overlay--green:hover,.SquaredCard__overlay--green.SquaredCard__overlay--active  {\n    background: rgba(34, 197, 94, 0.45);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32526,6 +32645,66 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/drumeo-bg.png":
+/*!***************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/drumeo-bg.png ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/drumeo-bg.png?b227af571f38ec89487fd4461e1e1de2");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/guitareo-bg.png":
+/*!*****************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/guitareo-bg.png ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg.png?49281356b5c8239ef7c903581f6d2f89");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/pianote-bg.png":
+/*!****************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/pianote-bg.png ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg.png?c596b54d9940bce2b5bf17c23e4bc04f");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/singeo-bg.png":
+/*!***************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/singeo-bg.png ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/singeo-bg.png?b1fe24ffaa4a6ab7f38a4d472b49f779");
 
 /***/ }),
 
@@ -62186,6 +62365,37 @@ function render(_ctx, _cache) {
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
       "fill-rule": "evenodd",
       d: "M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z",
+      "clip-rule": "evenodd"
+    })
+  ]))
+}
+
+/***/ }),
+
+/***/ "./node_modules/@heroicons/vue/solid/esm/SearchIcon.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@heroicons/vue/solid/esm/SearchIcon.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+function render(_ctx, _cache) {
+  return ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 20 20",
+    fill: "currentColor",
+    "aria-hidden": "true"
+  }, [
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+      "fill-rule": "evenodd",
+      d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z",
       "clip-rule": "evenodd"
     })
   ]))

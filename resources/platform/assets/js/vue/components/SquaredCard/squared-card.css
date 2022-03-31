@@ -55,18 +55,18 @@
         linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
 }
 
-.SquaredCard__overlay--red:hover {
+.SquaredCard__overlay--red:hover,.SquaredCard__overlay--red.SquaredCard__overlay--active  {
     background: rgba(239, 68, 68, 0.45);
 }
 
-.SquaredCard__overlay--blue:hover {
+.SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {
     background: rgba(59, 130, 246, 0.45);
 }
 
-.SquaredCard__overlay--yellow:hover {
+.SquaredCard__overlay--yellow:hover,.SquaredCard__overlay--yellow.SquaredCard__overlay--active  {
     background: rgba(234, 179, 8, 0.45);
 }
 
-.SquaredCard__overlay--green:hover {
+.SquaredCard__overlay--green:hover,.SquaredCard__overlay--green.SquaredCard__overlay--active  {
     background: rgba(34, 197, 94, 0.45);
 }

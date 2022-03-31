@@ -28,7 +28,7 @@ function onInstrumentSelection(instrument) {
 </script>
 
 <template>
-    <StepWrapper :brand="brand" :showBgImg="false">
+    <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false">
         <h2
             class="tw-mb-[5px] tw-w-full tw-text-center tw-font-bold tw-text-white"
         >
