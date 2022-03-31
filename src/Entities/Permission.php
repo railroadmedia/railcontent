@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 
 /**
  * @ORM\Entity()
@@ -19,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Permission extends ArrayExpressible
 {
+    use DecoratedFields;
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      * @var int
