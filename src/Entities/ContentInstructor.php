@@ -87,7 +87,7 @@ class ContentInstructor
      */
     public function setContent(Content $content)
     {
-        $content->addInstructor($this);
+        $content->addContentInstructors($this);
 
         $this->content = $content;
     }
