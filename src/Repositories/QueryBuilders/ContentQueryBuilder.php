@@ -535,9 +535,17 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictFollowedContent()
     {
-        $this->join(ContentFollows::class, 'cf', 'WITH', 'railcontent_content.id = cf.content');
-        $this->andWhere('cf.user IN (:user)')
-            ->setParameter('user', auth()->id());
+        $this->join(ContentFollows::class, 'cf', 'WITH',
+                    $this->expr()
+                        ->andX(
+                            $this->expr()
+                                ->eq('railcontent_content.id', 'cf.content'),
+
+                            $this->expr()
+                                ->eq('cf.user', ':user')
+                        )
+        )
+        ->setParameter('user', auth()->id());
 
         return $this;
     }
