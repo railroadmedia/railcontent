@@ -1009,6 +1009,10 @@ class ContentService
 
         if (config('railcontent.use_elastic_search') == true) {
             $filters = [];
+            $emptyResults = false;
+            $data = [];
+            $qb = null;
+            $totalResults = 0;
 
             if (!empty($includedUserStates)) {
                 $includedContentsIdsByState = [];
@@ -1026,15 +1030,16 @@ class ContentService
                             ->getId();
                 }
             }
+
             $followedContents = [];
             if ($getFollowedContentOnly) {
                 $alias = 'cf';
-                $qb =
+                $qbFC =
                     $this->contentFollowsRepository->createQueryBuilder($alias)
                         ->where($alias.'.user = :user')
                         ->setParameter('user', auth()->id());
                 $contentFollows =
-                    $qb->getQuery()
+                    $qbFC->getQuery()
                         ->getResult('Railcontent');
 
                 foreach ($contentFollows as $contentFollow) {
@@ -1042,22 +1047,25 @@ class ContentService
                         $contentFollow->getContent()
                             ->getId();
                 }
+                if(empty($followedContents)){
+                    $emptyResults = true;
+                }
             }
 
             if (!empty($requiredUserStates)) {
                 $requiredContentIdsByState = [];
-                $qb =
+                $qbUS =
                     $this->userContentProgressRepository->createQueryBuilder('up')
                         ->where('up.user = :userId')
                         ->setParameter('userId', auth()->id());
 
                 foreach ($requiredUserStates as $state) {
-                    $qb->andWhere('up.state  = :state')
+                    $qbUS->andWhere('up.state  = :state')
                         ->setParameter('state', $state);
                 }
 
                 $requiredContentsByState =
-                    $qb->orderByColumn('up', 'updatedOn', 'desc')
+                    $qbUS->orderByColumn('up', 'updatedOn', 'desc')
                         ->getQuery()
                         ->getResult();
 
@@ -1066,123 +1074,127 @@ class ContentService
                         $progress->getContent()
                             ->getId();
                 }
-            }
 
-            $permissionIds = [];
-            if (auth()->id()) {
-                $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
-                foreach ($userPermissions as $permission) {
-                    $permissionIds[] =
-                        $permission->getPermission()
-                            ->getId();
+                if(empty($requiredContentIdsByState)){
+                    $emptyResults = true;
                 }
             }
 
-            switch (config('railcontent.brand')) {
-                case 'drumeo':
-                    ElasticQueryBuilder::$skillLevel =
-                        $this->userProvider->getCurrentUser()
-                            ->getDrumsSkillLevel();
-                    break;
-                case 'pianote':
-                    ElasticQueryBuilder::$skillLevel =
-                        $this->userProvider->getCurrentUser()
-                            ->getPianoSkillLevel();
-                    break;
-                case 'guitareo':
-                    ElasticQueryBuilder::$skillLevel =
-                        $this->userProvider->getCurrentUser()
-                            ->getGuitarSkillLevel();
-                    break;
-            }
 
-            ElasticQueryBuilder::$userPermissions = $permissionIds;
-            ElasticQueryBuilder::$userTopics = $this->userProvider->getCurrentUserTopics();
+            if(!$emptyResults) {
 
-            $elasticData = $this->elasticService->getElasticFiltered(
-                $page,
-                $limit,
-                $sort,
-                $includedTypes,
-                $slugHierarchy,
-                $requiredParentIds,
-                $filter->requiredFields,
-                $filter->includedFields,
-                $requiredContentIdsByState ?? null,
-                $includedContentsIdsByState ?? null,
-                $requiredUserPlaylistIds,
-                null,
-                $followedContents
-            );
-
-            $data = [];
-            $qb = null;
-            $totalResults = 0;
-
-            if ($elasticData) {
-                $totalResults = $elasticData['hits']['total']['value'];
-
-                $ids = [];
-                foreach ($elasticData['hits']['hits'] as $elData) {
-                    $ids[] = $elData['_source']['content_id'];
+                $permissionIds = [];
+                if (auth()->id()) {
+                    $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+                    foreach ($userPermissions as $permission) {
+                        $permissionIds[] =
+                            $permission->getPermission()
+                                ->getId();
+                    }
                 }
 
-                $qbIds =
-                    $this->contentRepository->build()
-                        ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
-                        ->setParameter('ids', $ids);
-
-                $results =
-                    $qbIds->getQuery()
-                        ->setCacheable(true)
-                        ->setCacheRegion('pull')
-                        ->getResult('Railcontent');
-
-                $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
-
-                // restore order of ids passed in
-                if (!empty($requiredContentIdsByState) && ($sort == 'progress')) {
-                    $ids = $requiredContentIdsByState;
+                switch (config('railcontent.brand')) {
+                    case 'drumeo':
+                        ElasticQueryBuilder::$skillLevel =
+                            $this->userProvider->getCurrentUser()
+                                ->getDrumsSkillLevel();
+                        break;
+                    case 'pianote':
+                        ElasticQueryBuilder::$skillLevel =
+                            $this->userProvider->getCurrentUser()
+                                ->getPianoSkillLevel();
+                        break;
+                    case 'guitareo':
+                        ElasticQueryBuilder::$skillLevel =
+                            $this->userProvider->getCurrentUser()
+                                ->getGuitarSkillLevel();
+                        break;
                 }
 
-                $data = [];
-                foreach ($ids as $id) {
-                    foreach ($unorderedContentRows as $index => $unorderedContentRow) {
-                        if ($id == $unorderedContentRow->getId()) {
-                            $data[] = $unorderedContentRow;
+                ElasticQueryBuilder::$userPermissions = $permissionIds;
+                ElasticQueryBuilder::$userTopics = $this->userProvider->getCurrentUserTopics();
+
+                $elasticData = $this->elasticService->getElasticFiltered(
+                    $page,
+                    $limit,
+                    $sort,
+                    array_map( 'strtolower', $includedTypes),
+                    $slugHierarchy,
+                    $requiredParentIds,
+                    $filter->requiredFields,
+                    $filter->includedFields,
+                    $requiredContentIdsByState ?? null,
+                    $includedContentsIdsByState ?? null,
+                    $requiredUserPlaylistIds,
+                    null,
+                    $followedContents
+                );
+
+                if ($elasticData) {
+                    $totalResults = $elasticData['hits']['total']['value'];
+
+                    $ids = [];
+                    foreach ($elasticData['hits']['hits'] as $elData) {
+                        $ids[] = $elData['_source']['content_id'];
+                    }
+
+                    $qbIds =
+                        $this->contentRepository->build()
+                            ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
+                            ->setParameter('ids', $ids);
+
+                    $results =
+                        $qbIds->getQuery()
+//                            ->setCacheable(true)
+//                            ->setCacheRegion('pull')
+                            ->getResult('Railcontent');
+
+                    $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
+
+                    // restore order of ids passed in
+                    if (!empty($requiredContentIdsByState) && ($sort == 'progress')) {
+                        $ids = $requiredContentIdsByState;
+                    }
+
+                    $data = [];
+                    foreach ($ids as $id) {
+                        foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                            if ($id == $unorderedContentRow->getId()) {
+                                $data[] = $unorderedContentRow;
+                            }
                         }
                     }
-                }
 
-                $qb = null;
-                if ($pullFilterFields) {
-                    $filterOptions = $this->elasticService->getFilterFields(
-                        $includedTypes,
-                        $slugHierarchy,
-                        $requiredParentIds,
-                        $filter->requiredFields,
-                        $filter->includedFields,
-                        $requiredContentIdsByState ?? null,
-                        $includedContentsIdsByState ?? null,
-                        $requiredUserPlaylistIds
-                    );
+                    $qb = null;
+                    if ($pullFilterFields) {
+                        $filterOptions = $this->elasticService->getFilterFields(
+                            $includedTypes,
+                            $slugHierarchy,
+                            $requiredParentIds,
+                            $filter->requiredFields,
+                            $filter->includedFields,
+                            $requiredContentIdsByState ?? null,
+                            $includedContentsIdsByState ?? null,
+                            $requiredUserPlaylistIds
+                        );
 
-                    if (array_key_exists('instructors', $filterOptions)) {
-                        $instructors =
-                            $this->contentRepository->build()
-                                ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
-                                ->setParameter('ids', $filterOptions['instructors'])
-                                ->orderBy(config('railcontent.table_prefix').'content.slug', 'asc')
-                                ->getQuery()
-                                ->setCacheable(true)
-                                ->setCacheRegion('pull')
-                                ->getResult();
+                        if (array_key_exists('instructors', $filterOptions)) {
+                            $instructors =
+                                $this->contentRepository->build()
+                                    ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
+                                    ->setParameter('ids', $filterOptions['instructors'])
+                                    ->orderBy(config('railcontent.table_prefix').'content.slug', 'asc')
+                                    ->getQuery()
+                                    ->setCacheable(true)
+                                    ->setCacheRegion('pull')
+                                    ->getResult();
 
-                        unset($filterOptions['instructors']);
-                        $filterOptions['instructor'] = $instructors;
+                            unset($filterOptions['instructors']);
+                            $filterOptions['instructor'] = $instructors;
+                        }
+
+                        $filters = $filterOptions;
                     }
-
-                    $filters = $filterOptions;
                 }
             }
         } else {
@@ -1198,8 +1210,7 @@ class ContentService
             $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         }
 
-        $results = new ContentFilterResultsEntity([
-                                                      'qb' => $qb,
+        $results = new ContentFilterResultsEntity(array_merge(($qb)?['qb' => $qb]:[],[
                                                       'results' => $data,
                                                       'filter_options' => $filters,
                                                       'active_filters' => $filter->getActiveFilters(),
@@ -1212,7 +1223,7 @@ class ContentService
                                                           'total_pages' => ceil($totalResults / $limit),
                                                           'links' => [],
                                                       ],
-                                                  ]);
+                                                  ]));
 
         return $results;
     }
