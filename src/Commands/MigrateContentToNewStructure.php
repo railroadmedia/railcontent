@@ -38,7 +38,7 @@ class MigrateContentToNewStructure extends Command
         $this->call('command:migrateVideos');
         $this->call('command:migrateStyles');
         $this->call('command:deleteOrphanContent');
-        $this->call('command:calculateTotalXP');
+      //  $this->call('command:calculateTotalXP');
         $this->call('command:MigrateContentToElasticsearch');
 
         $this->info('Finished MigrateContentToNewStructure.');
