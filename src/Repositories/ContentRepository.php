@@ -42,7 +42,7 @@ class ContentRepository extends EntityRepository
     public static $pullFutureContent = true;
 
     /**
-     * If true all content will be returned regarless of user permissions.
+     * If true all content will be returned regardless of user permissions.
      *
      * @var array|bool
      */
@@ -84,17 +84,17 @@ class ContentRepository extends EntityRepository
         $orderColumn = 'publishedOn',
         $orderDirection = 'desc'
     ) {
-        $alias = config('railcontent.table_prefix') . 'content';
+        $alias = config('railcontent.table_prefix').'content';
         if (strpos($orderColumn, '_') !== false || strpos($orderColumn, '-') !== false) {
             $orderColumn = camel_case($orderColumn);
         }
-        $orderColumn = $alias . '.' . $orderColumn;
+        $orderColumn = $alias.'.'.$orderColumn;
 
         $beforeContents =
             $this->build()
                 ->restrictByUserAccess()
-                ->andWhere($alias . '.type = :type')
-                ->andWhere($alias . '.' . $columnName . ' < :columnValue')
+                ->andWhere($alias.'.type = :type')
+                ->andWhere($alias.'.'.$columnName.' < :columnValue')
                 ->setParameter('type', $type)
                 ->setParameter('columnValue', $columnValue)
                 ->orderBy($orderColumn, 'desc')
@@ -107,8 +107,8 @@ class ContentRepository extends EntityRepository
         $afterContents =
             $this->build()
                 ->restrictByUserAccess()
-                ->andWhere($alias . '.type = :type')
-                ->andWhere($alias . '.' . $columnName . ' > :columnValue')
+                ->andWhere($alias.'.type = :type')
+                ->andWhere($alias.'.'.$columnName.' > :columnValue')
                 ->setParameter('type', $type)
                 ->setParameter('columnValue', $columnValue)
                 ->orderBy($orderColumn, 'desc')
@@ -197,8 +197,8 @@ class ContentRepository extends EntityRepository
     public function retrieveFilter()
     {
         $orderByExploded = explode(' ', $this->orderBy);
-        $orderByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
-        $groupByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
+        $orderByColumns = [config('railcontent.table_prefix').'content'.'.'.'createdOn'];
+        $groupByColumns = [config('railcontent.table_prefix').'content'.'.'.'createdOn'];
 
         foreach ($orderByExploded as $orderByColumn) {
             if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
@@ -206,10 +206,10 @@ class ContentRepository extends EntityRepository
             }
             array_unshift(
                 $orderByColumns,
-                config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn . ' ' . $this->orderDirection
+                config('railcontent.table_prefix').'content'.'.'.$orderByColumn.' '.$this->orderDirection
             );
 
-            array_unshift($groupByColumns, config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn);
+            array_unshift($groupByColumns, config('railcontent.table_prefix').'content'.'.'.$orderByColumn);
         }
 
         $qb =
@@ -226,7 +226,7 @@ class ContentRepository extends EntityRepository
                 ->orderBy(implode(', ', $orderByColumns))
                 ->paginate($this->limit, ($this->page - 1));
 
-        if(self::$getFollowedContentOnly){
+        if (self::$getFollowedContentOnly) {
             $qb->restrictFollowedContent();
         }
         return $qb;
@@ -247,14 +247,14 @@ class ContentRepository extends EntityRepository
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->groupBy(config('railcontent.table_prefix') . 'content.id');
+                ->groupBy(config('railcontent.table_prefix').'content.id');
 
-        if(self::$getFollowedContentOnly){
+        if (self::$getFollowedContentOnly) {
             $subQuery->restrictFollowedContent();
         }
 
-        $results = $subQuery
-                ->getQuery()
+        $results =
+            $subQuery->getQuery()
                 ->getResult();
 
         return count($results);
@@ -279,11 +279,13 @@ class ContentRepository extends EntityRepository
                 ->restrictByParentIds($this->requiredParentIds)
                 ->restrictByFilterOptions();
 
-        if(self::$getFollowedContentOnly){
+        if (self::$getFollowedContentOnly) {
             $query->restrictFollowedContent();
         }
 
-        $contents = $query->getQuery()->getResult();
+        $contents =
+            $query->getQuery()
+                ->getResult();
 
         $ids = [];
         if ($contents) {
@@ -299,19 +301,15 @@ class ContentRepository extends EntityRepository
         if (!empty($contents)) {
             $instructors = [];
             foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
-                if ($requiredFieldData == 'style'){
-                    $requiredFieldData = 'styles';
-                }
-                if ($requiredFieldData == 'instructor'){
+                if ($requiredFieldData == 'instructor') {
                     $requiredFieldData = 'contentInstructors';
                 }
-
                 if (in_array(
                     $requiredFieldData,
                     $this->getEntityManager()
                         ->getClassMetadata(Content::class)
                         ->getAssociationNames()
-                ) ) {
+                )) {
                     $alias = $requiredFieldData;
                     $targetEntity =
                         $this->getEntityManager()
@@ -336,13 +334,13 @@ class ContentRepository extends EntityRepository
                     if ($assoc > 1) {
                         foreach ($assoc as $index => $j) {
                             if ($index != 'content') {
-                                $qb->addSelect($j['fieldName'] . $index);
-                                $qb->join($alias . '.' . $j['fieldName'], $j['fieldName'] . $index);
+                                $qb->addSelect($j['fieldName'].$index);
+                                $qb->join($alias.'.'.$j['fieldName'], $j['fieldName'].$index);
                             }
                         }
                     }
 
-                    $qb->where($alias . '.content IN (:ids)')
+                    $qb->where($alias.'.content IN (:ids)')
                         ->setParameter('ids', $ids);
 
                     $results =
@@ -350,47 +348,39 @@ class ContentRepository extends EntityRepository
                             ->getResult();
 
                     foreach ($results as $result) {
-
                         if ($requiredFieldData == 'styles') {
                             $getterName = 'getStyle';
                         } elseif ($requiredFieldData == 'contentInstructors') {
                             $getterName = 'getInstructor';
-                        }else {
-                            $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+                        } else {
+                            $getterName = Inflector::camelize('get'.ucwords(camel_case($requiredFieldData)));
                         }
                         $value = call_user_func([$result, $getterName]);
 
                         if ($requiredFieldData == 'contentInstructors') {
-
                             $instructor = $result->getInstructor();
 
                             if (!in_array($instructor->getId(), $instructors)) {
                                 $instructors[] = $instructor->getId();
                                 $filteredContents['instructor'][$instructor->getId()] = $instructor;
                             }
-
                         } else {
                             if (!in_array(
                                 strtolower($value),
                                 array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
                             )) {
-
                                 $filteredContents[$requiredFieldData][] = $value;
                             }
                         }
                     }
-
                 } else {
-
-                    $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+                    $getterName = Inflector::camelize('get'.ucwords(camel_case($requiredFieldData)));
                     if ($requiredFieldData == 'styles') {
                         $getterName = 'getStyle';
                     }
 
                     foreach ($contents as $content) {
-
-                            $value = call_user_func([$content, $getterName]);
-
+                        $value = call_user_func([$content, $getterName]);
 
                         if ($value && is_string($value) && !in_array(
                                 strtolower($value),
@@ -403,30 +393,24 @@ class ContentRepository extends EntityRepository
             }
 
             foreach ($filteredContents as $availableFieldIndex => $availableField) {
-                usort(
-                    $filteredContents[$availableFieldIndex],
-                    function ($a, $b) {
-                        if ($a instanceof Content) {
-                            return strncmp($a->getSlug(), $b->getSlug(), 15);
-                        }
-                        return strncmp($a, $b, 15);
+                usort($filteredContents[$availableFieldIndex], function ($a, $b) {
+                    if ($a instanceof Content) {
+                        return strncmp($a->getSlug(), $b->getSlug(), 15);
                     }
-                );
+
+                    return strncmp($a, $b, 15);
+                });
             }
 
             // random use case, should be refactored at some point
             if (!empty($filteredContents['difficulty']) && count(
-                    array_diff(
-                        $filteredContents['difficulty'],
-                        [
-                            'beginner',
-                            'intermediate',
-                            'advanced',
-                            'all',
-                        ]
-                    )
+                    array_diff($filteredContents['difficulty'], [
+                                                                  'beginner',
+                                                                  'intermediate',
+                                                                  'advanced',
+                                                                  'all',
+                                                              ])
                 ) == 0) {
-
                 $filteredContents['difficulty'] = [
                     'beginner',
                     'intermediate',
@@ -457,7 +441,8 @@ class ContentRepository extends EntityRepository
         )) {
             $isProperty = false;
         }
-        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator,'property'=>$isProperty];
+        $this->requiredFields[] =
+            ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator, 'property' => $isProperty];
 
         return $this;
     }
@@ -523,12 +508,11 @@ class ContentRepository extends EntityRepository
 
         foreach ($rows as $row) {
             foreach (config('railcontent.field_option_list', []) as $fieldOption) {
-
                 if (strpos($fieldOption, '_') !== false || strpos($fieldOption, '-') !== false) {
                     $fieldOption = camel_case($fieldOption);
                 }
 
-                $getField = 'get' . ucwords($fieldOption);
+                $getField = 'get'.ucwords($fieldOption);
 
                 if ($row->$getField() && (count($row->$getField()) > 0)) {
                     if (in_array(
@@ -537,7 +521,6 @@ class ContentRepository extends EntityRepository
                             ->getClassMetadata(Content::class)
                             ->getAssociationNames()
                     )) {
-
                         if ($row->$getField() instanceof PersistentCollection) {
                             foreach ($row->$getField() as $field) {
                                 if (!in_array(
@@ -567,17 +550,13 @@ class ContentRepository extends EntityRepository
 
         // random use case, should be refactored at some point
         if (!empty($availableFields['difficulty']) && count(
-                array_diff(
-                    $availableFields['difficulty'],
-                    [
-                        'beginner',
-                        'intermediate',
-                        'advanced',
-                        'all',
-                    ]
-                )
+                array_diff($availableFields['difficulty'], [
+                                                             'beginner',
+                                                             'intermediate',
+                                                             'advanced',
+                                                             'all',
+                                                         ])
             ) == 0) {
-
             $availableFields['difficulty'] = [
                 'beginner',
                 'intermediate',
@@ -597,40 +576,39 @@ class ContentRepository extends EntityRepository
         $qb = new ContentQueryBuilder($this->getEntityManager());
         $lifetime = config('railcontent.cache_duration');
 
-
-//        if (auth()->id()) {
-//            $userPermissionRepository =
-//                $this->getEntityManager()
-//                    ->getRepository(UserPermission::class);
-//
-//            $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
-//
-//            if ($userPermission) {
-//                $lifetime =
-//                    Carbon::parse($userPermission[0]->getExpirationDate())
-//                        ->diffInSeconds(Carbon::now());
-//            }
-//        }
+        //        if (auth()->id()) {
+        //            $userPermissionRepository =
+        //                $this->getEntityManager()
+        //                    ->getRepository(UserPermission::class);
+        //
+        //            $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
+        //
+        //            if ($userPermission) {
+        //                $lifetime =
+        //                    Carbon::parse($userPermission[0]->getExpirationDate())
+        //                        ->diffInSeconds(Carbon::now());
+        //            }
+        //        }
 
         //Doctrine ORM Second level cache disable
-//        $this->getEntityManager()
-//            ->getConfiguration()
-//            ->getSecondLevelCacheConfiguration()
-//            ->getRegionsConfiguration()
-//            ->setDefaultLifetime(
-//                $lifetime
-//            );
+        //        $this->getEntityManager()
+        //            ->getConfiguration()
+        //            ->getSecondLevelCacheConfiguration()
+        //            ->getRegionsConfiguration()
+        //            ->setDefaultLifetime(
+        //                $lifetime
+        //            );
 
-        return $qb->select(config('railcontent.table_prefix') . 'content')
-            ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content');
-//            ->leftJoin(
-//                config('railcontent.table_prefix') . 'content' . '.userProgress',
-//                'progress',
-//                'WITH',
-//                'progress.user = :userId'
-//            )
-//            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.data', 'cd')
-//            ->setParameter('userId', auth()->id());
+        return $qb->select(config('railcontent.table_prefix').'content')
+            ->from($this->getEntityName(), config('railcontent.table_prefix').'content');
+        //            ->leftJoin(
+        //                config('railcontent.table_prefix') . 'content' . '.userProgress',
+        //                'progress',
+        //                'WITH',
+        //                'progress.user = :userId'
+        //            )
+        //            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.data', 'cd')
+        //            ->setParameter('userId', auth()->id());
     }
 
     /**
@@ -643,7 +621,7 @@ class ContentRepository extends EntityRepository
     {
         return $this->build()
             ->restrictByUserAccess()
-            ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+            ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
             ->andWhere('p.parent = :parentId')
             ->setParameter('parentId', $parentId)
             ->orderByColumn('p', $orderBy, $orderByDirection)
@@ -662,7 +640,7 @@ class ContentRepository extends EntityRepository
     {
         return $this->build()
             ->restrictByUserAccess()
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.id = :id')
+            ->andWhere(config('railcontent.table_prefix').'content'.'.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->setCacheable(true)
@@ -696,7 +674,7 @@ class ContentRepository extends EntityRepository
         if (array_key_exists('instructor', $active)) {
             $instructors =
                 $this->build()
-                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                    ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
                     ->setParameter('ids', $active['instructor'])
                     ->getQuery()
                     ->setCacheable(true)
