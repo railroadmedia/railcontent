@@ -52,6 +52,7 @@ export default {
                 })
                 .then((response) => {
                     this.cardData = response.data;
+                    console.log('data is: ', response.data)
                 })
         },
     },
