@@ -284,19 +284,18 @@ class ElasticService
                     if (is_array($elData['_source'][$requiredFieldData])) {
                         foreach ($elData['_source'][$requiredFieldData] as $option) {
                             if (!in_array(
-                                trim(ucfirst($option)),
-                                array_map('ucfirst', $filteredContents[$requiredFieldData] ?? [])
+                                ucfirst(trim($option)),
+                                array_map('trim', $filteredContents[$requiredFieldData] ?? [])
                             )) {
-                                $filteredContents[$requiredFieldData][] = trim(ucfirst($option));
-                            }
+                                $filteredContents[$requiredFieldData][] = ucfirst(trim($option));
+                             }
                         }
                     } else {
                         if (($elData['_source'][$requiredFieldData]) && (!in_array(
-                                strtolower($elData['_source'][$requiredFieldData]),
+                                ucfirst(trim(($elData['_source'][$requiredFieldData]))),
                                 array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
-
                             ))) {
-                            $filteredContents[$requiredFieldData][] = $elData['_source'][$requiredFieldData];
+                            $filteredContents[$requiredFieldData][] = ucfirst(trim($elData['_source'][$requiredFieldData]));
                         }
                     }
                 }
@@ -308,17 +307,16 @@ class ElasticService
         }
 
         foreach ($filteredContents as $availableFieldIndex => $availableField) {
-            if (is_numeric(reset($filteredContents[$availableFieldIndex])) &&
-                ctype_digit(implode('', $filteredContents[$availableFieldIndex]))) {
-                sort($filteredContents[$availableFieldIndex]);
-            } else {
                 usort(
                     $filteredContents[$availableFieldIndex],
                     function ($a, $b) {
+                        if (is_numeric($a) && is_numeric($b)) {
+                            return $a > $b;
+                        }
                         return strncmp($a, $b, 15);
                     }
                 );
-            }
+
         }
 
         if (!empty($instructorsIds)) {
