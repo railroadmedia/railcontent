@@ -28,7 +28,7 @@ const getStepType = (stepIndex, checked) => {
 </script>
 
 <template>
-    <div class="tw-flex tw-h-[52px]">
+    <div class="tw-flex tw-h-[10px] md:tw-h-[52px]">
         <Step
             v-for="(step, index) in steps"
             :label="step.label"

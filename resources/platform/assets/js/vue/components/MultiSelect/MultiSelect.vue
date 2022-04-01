@@ -34,7 +34,7 @@ function handleSelection(value) {
 
 <template>
     <div
-        class="tw-flex tw-flex-row tw-items-center tw-justify-center"
+        class="tw-flex tw-flex-row tw-items-center tw-justify-center tw-w-full tw-px-[12px] md:tw-w-[620px] lg:tw-w-[750px] tw-flex-wrap"
         :class="classOverride"
     >
         <Pill

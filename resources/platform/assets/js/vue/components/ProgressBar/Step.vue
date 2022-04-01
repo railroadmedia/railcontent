@@ -32,7 +32,7 @@ const emit = defineEmits(['navigateToStep'])
         <div class="tw-flex tw-flex-col">
             <div class="tw-relative tw-flex tw-flex-col tw-items-center">
                 <div
-                    class="tw-h-[32px] tw-w-[32px] tw-overflow-hidden tw-rounded-full"
+                    class="tw-h-[9px] tw-w-[9px] md:tw-h-[32px] md:tw-w-[32px] tw-overflow-hidden tw-rounded-full tw-text-[8px] md:tw-text-[16px]"
                 >
                     <div
                         v-if="stepType === 'white'"
@@ -41,15 +41,15 @@ const emit = defineEmits(['navigateToStep'])
                     <div
                         v-if="stepType === 'tick'"
                         v-on:click="emit('navigateToStep')"
-                        :class="`${bgColor[brand]} tw- tw-flex tw-h-full tw-w-full tw-cursor-pointer tw-items-center tw-justify-center tw-text-white`"
+                        :class="`${bgColor[brand]} tw-flex tw-h-full tw-w-full tw-cursor-pointer tw-items-center tw-justify-center tw-text-white`"
                     >
-                        <CheckIcon class="tw-m-0 tw-h-6 tw-w-6 tw-text-white" />
+                        <CheckIcon class="tw-m-0 tw-h-1 tw-w-1 md:tw-h-6 md:tw-w-6 tw-text-white tw-hidden md:tw-inline" />
                     </div>
                     <div
                         v-if="stepType === 'number'"
                         :class="`${bgColor[brand]} tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white`"
                     >
-                        {{ currentStep + 1 }}
+                        <span class="tw-hidden md:tw-inline">{{ currentStep + 1 }}</span>
                     </div>
                 </div>
                 <div
@@ -60,13 +60,13 @@ const emit = defineEmits(['navigateToStep'])
                             : 'tw-font-normal'
                     "
                 >
-                    {{ label }}
+                    <span class="tw-hidden md:tw-inline">{{ label }}</span>
                 </div>
             </div>
         </div>
-        <div v-if="!isLast" class="tw-mt-[14px] tw-w-[80px]">
+        <div v-if="!isLast" class="tw-mt-[14px] tw-w-[20px] md:tw-w-[60px] lg:tw-w-[80px]">
             <div
-                :class="`tw-h-[2px] tw-w-full ${
+                :class="`tw-h-0 md:tw-h-[2px] tw-w-full ${
                     isBarBranded ? bgColor[brand] : 'tw-bg-white'
                 }`"
             ></div>

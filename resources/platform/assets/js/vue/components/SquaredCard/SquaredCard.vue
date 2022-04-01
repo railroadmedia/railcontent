@@ -13,7 +13,7 @@ export default {
   emits: ["onSelect"],
   setup(props) {
     const getBorderColor = (type) => {
-      if (["drumeo", "guitareo", "singeo", "pianote"].includes(type)) {
+      if (["drumeo", "guitareo", "singeo", "pianote", "red", "blue", "green", "yellow"].includes(type)) {
         return borderColor[type];
       } else {
         return "tw-border-[#7E9AB1]";
@@ -26,7 +26,7 @@ export default {
 
 <template>
   <button
-    class="SquaredCard tw-rounded-lg"
+    class="SquaredCard tw-rounded-lg md:tw-mx-2 tw-my-2 xl:tw-my-0 tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px]"
     :style="{
       background: backgroundUrl ? `url(${backgroundUrl})` : bgColor,
       backgroundSize: 'cover',
@@ -35,7 +35,7 @@ export default {
     v-on:click="$emit('onSelect')"
   >
     <div
-      :class="`SquaredCard__overlay--${type} ${
+      :class="`SquaredCard__overlay SquaredCard__overlay--${type} ${
         active
           ? `${getBorderColor(type)} SquaredCard__overlay--active`
           : `${
