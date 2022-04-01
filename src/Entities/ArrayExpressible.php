@@ -85,10 +85,10 @@ abstract class ArrayExpressible
                     } else {
                         if ($customPosition) {
                             if ($data->getPosition() == $customPosition) {
-                                $results = $data->getValue();
+                                $results = utf8_encode($data->getValue());
                             }
                         } else {
-                            $results = $data->getValue();
+                            $results = utf8_encode($data->getValue());
                         }
                     }
                 }
