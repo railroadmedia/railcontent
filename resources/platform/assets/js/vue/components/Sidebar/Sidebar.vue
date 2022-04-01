@@ -1,7 +1,5 @@
 <script>
 import SidebarContainer from './SidebarContainer.vue'
-import SidebarSection from './SidebarSection.vue'
-import SidebarLink from './SidebarLink.vue'
 import { textColor, borderColor } from '../../../constants/brands.js'
 import { sidebarLinks } from '../../../constants/sidebar_links.js'
 //Icons
@@ -9,7 +7,7 @@ import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 export default {
   name: 'Sidebar',
-  components: { SidebarContainer, SidebarSection, SidebarLink, MusoraIcon },
+  components: { SidebarContainer, MusoraIcon },
   props: {
     isSidebarCollapsed: Boolean,
     isSidebarHidden: Boolean,
@@ -110,7 +108,7 @@ export default {
             <p class="tw-uppercase tw-text-sm tw-font-bold tw-w-full">Playlists</p>
             
             <!-- Add Playlist -->
-            <button class="tw-h-7 tw-w-7 tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-rounded-full hover:tw-bg-[#3f3f46]/10 dark:hover:tw-bg-[#445F74]/20 tw-mr-3">
+            <button class="tw-h-7 tw-w-7 tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-rounded-full dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-mr-3">
               <musora-icon icon-name="plus" width="14" height="14" viewBox="0 0 14 15"/>
             </button>
           
@@ -121,7 +119,7 @@ export default {
       <Transition name="fade">
         <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
           <!-- Loop through User Playlist -->
-          <ul v-if="playlist.length"></ul>
+          <ul v-if="playlist.length > 0"></ul>
           
           <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
 

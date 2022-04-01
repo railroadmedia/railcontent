@@ -1,7 +1,12 @@
 @php
+    //Test Data
     $isSubscriber = true;
     $page = Request::segment(1);
     $brand = request()->get('brand');
+    //My Stats Data
+    $nextLearningPathProgressPercent = "0";
+    $nextLearningPathLevel = "1.1";
+    $userMetrics = "[]";
 @endphp
 
 @extends('partials.layout')
@@ -88,7 +93,9 @@
                     {{-- My Stats --}}
                     <stats-section
                         brand="{{ $brand }}"
-                        :data="[]"
+                        :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+                        next-learning-path-level="{{ $nextLearningPathLevel }}"
+                        :userMetrics="{{ $userMetrics }}"
                     ></stats-section>
                 </div>
 

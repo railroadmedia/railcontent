@@ -29,10 +29,7 @@ export default {
     </div>
     <div class="tw-flex tw-grow tw-flex-col tw-justify-between tw-pl-[10px]">
       <div class="tw-text-[14px] tw-font-bold">{{ name }}</div>
-      <a
-        class="tw-text-[12px] tw-text-black dark:tw-text-white"
-        v-on:click="onButtonClick"
-      >
+      <a href="/members/profile" class="tw-text-[12px] tw-text-black dark:tw-text-white">
         View Profile
       </a>
     </div>

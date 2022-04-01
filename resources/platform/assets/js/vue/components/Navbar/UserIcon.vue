@@ -42,11 +42,14 @@ export default {
 </script>
 
 <template>
-  <div
+  <button
     v-on:click="handleMenuOpen"
-    class="tw-ml-[36px] tw-flex tw-h-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
+    tabindex="0"
+    class="tw-ml-[36px] tw-flex tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
+    <!-- User Image -->
     <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full" />
+
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader
         :name="userName"
@@ -96,5 +99,5 @@ export default {
         </OptionElement>
       </OptionGroup>
     </AvatarMenu>
-  </div>
+  </button>
 </template>

@@ -8,6 +8,8 @@ import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CardSection from './vue/components/CardSection/CardSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 const app = createApp({});
 
@@ -36,5 +38,6 @@ app.directive('click-outside', {
 
 app.use(store);
 app.use(router);
+app.use(VueAxios, axios);
 app.mount('#app');
 
