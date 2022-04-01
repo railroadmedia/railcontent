@@ -39,12 +39,13 @@
     },
     "dependencies": {
         "alpinejs": "^3.4.2",
-        "axios": "^0.21",
+        "axios": "^0.26.1",
         "fast-glob": "^3.2.11",
         "lodash": "^4.17.19",
         "simplebar-vue": "^1.6.8",
         "vue": "^3.2.19",
         "vue-advanced-cropper": "^2.8.1",
+        "vue-axios": "^3.4.1",
         "vue-loader": "^16.8.1",
         "vue-router": "^4.0.14",
         "vuex": "^4.0.2"
