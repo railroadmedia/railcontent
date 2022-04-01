@@ -30,6 +30,7 @@ function onInputChange(value) {
 function skipStep() {
   alert("* the user skipped the step *");
 }
+
 </script>
 
 <template>

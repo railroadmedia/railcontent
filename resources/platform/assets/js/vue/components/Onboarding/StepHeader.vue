@@ -16,12 +16,12 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['onBackClick'])
+const emit = defineEmits(['onGoBack'])
 </script>
 
 <template>
-  <div class="tw-flex tw-flex-col tw-w-full tw-relative tw-items-center tw-justify-center">
-    <button v-if="!hideBackButton" @click="emit('onBackClick')" class="tw-text-white tw-absolute tw-left-[20%] tw-top-0"><ArrowSmLeftIcon class="tw-w-[19px] tw-h-[18px] md:tw-w-[39px] md:tw-h-[37px]" /></button>
+  <div class="tw-flex tw-flex-col tw-w-[90vw] md:tw-w-full tw-relative md:tw-static tw-items-center tw-justify-center">
+    <button @click="() => emit('onGoBack')" v-if="!hideBackButton" class="tw-text-white tw-absolute tw-left-0 tw-top-[10px] md:tw-top-[32px] md:tw-left-[32px]"><ArrowSmLeftIcon class="tw-w-[32px] tw-h-[32px] md:tw-w-[54px] md:tw-h-[54px]" /></button>
     <h2
       class="
         md:tw-mb-[5px]

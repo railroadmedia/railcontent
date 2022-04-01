@@ -31,6 +31,10 @@ function onExperienceSelection(selection) {
 function skipStep() {
   alert("* the user skipped the step *");
 }
+
+function goBack() {
+  emit('onChangeStep', 2);
+}
 </script>
 
 <template>
@@ -51,6 +55,7 @@ function skipStep() {
         title="What experience level best describes you?"
         subtitle="Now it’s time to choose your experience level. You can change your
             experience level at anytime in your profile."
+        @onGoBack="goBack"
       />
       <SquaresContainer>
         <SquaredCard

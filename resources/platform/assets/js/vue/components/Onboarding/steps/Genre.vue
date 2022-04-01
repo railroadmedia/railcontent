@@ -34,6 +34,10 @@ function handleMultiSelection(selection) {
 function skipStep() {
   alert("* the user skipped the step *");
 }
+
+function goBack() {
+  emit('onChangeStep', 3);
+}
 </script>
 
 <template>
@@ -48,7 +52,8 @@ function skipStep() {
         md:tw-mt-0
       "
     >
-      <StepHeader title="Great. What kind of songs are you into these days?" />
+      <StepHeader title="Great. What kind of songs are you into these days?" 
+        @onGoBack="goBack" />
       <MultiSelect
         :options="options"
         :initialSelection="info.genres"

@@ -40,6 +40,10 @@ function handleMultiSelection(selection) {
 function skipStep() {
   alert("* the user skipped the step *");
 }
+
+function goBack() {
+  emit('onChangeStep', 1);
+}
 </script>
 
 <template>
@@ -59,6 +63,7 @@ function skipStep() {
         :subtitle="`You selected ${info.instrument}! Now it’s time to tell us about
             your practice set-up. You can select multiple gear types and change
             your settings in your profile at anytime.`"
+        @onGoBack="goBack"
       />
       <MultiSelect
         :options="options"

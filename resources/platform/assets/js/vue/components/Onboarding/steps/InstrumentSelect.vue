@@ -27,6 +27,9 @@ function onInstrumentSelection(instrument) {
     emit("onCheckStep", i, false);
   }
 }
+function goBack() {
+  emit('onChangeStep', 0);
+}
 </script>
 
 <template>
@@ -47,6 +50,7 @@ function onInstrumentSelection(instrument) {
         title="What instrument would you like to learn?"
         subtitle="Want to learn more than one instument? You can change your instrument at any
     time in your profile or by using the instrument selector in the navigation."
+        @onGoBack="goBack"
       />
       <SquaresContainer>
         <SquaredCard
