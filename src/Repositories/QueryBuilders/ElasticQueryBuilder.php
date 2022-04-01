@@ -310,7 +310,7 @@ class ElasticQueryBuilder
                 ];
                 break;
 
-            case 'popularity':
+            case '-popularity':
                 $this->sort[] = [
                     'all_progress_count' => 'desc',
                 ];
