@@ -246,7 +246,6 @@ class Content extends ArrayExpressible
         $this->follows = new ArrayCollection();
         $this->focus = new ArrayCollection();
         $this->bpm = new ArrayCollection();
-
     }
 
     /**
@@ -582,6 +581,7 @@ class Content extends ArrayExpressible
     {
         return $this->follows;
     }
+
     /**
      * @return text
      */
@@ -626,15 +626,20 @@ class Content extends ArrayExpressible
         }
 
         $styles = [];
-
         foreach ($this->getStyle() as $contentStyle) {
             $styles[] = $contentStyle->getStyle();
         }
 
         $instructors = [];
-
         foreach ($this->getContentInstructors() as $contentInstructor) {
-            $instructors[] = $contentInstructor->getInstructor()->getId();
+            $instructors[] =
+                $contentInstructor->getInstructor()
+                    ->getId();
+        }
+
+        $bpm = [];
+        foreach ($this->getBpm() as $contentBpm) {
+            $bpm[] = $contentBpm->getBpm();
         }
 
         return [
@@ -649,16 +654,18 @@ class Content extends ArrayExpressible
             'instructor' => $instructors,
             'content_type' => $this->getType(),
             'published_on' => ($this->getPublishedOn()) ?
-                $this->getPublishedOn()->toDateTimeString() : null,
-            'created_on' => $this->getCreatedOn()->toDateTimeString(),
+                $this->getPublishedOn()
+                    ->toDateTimeString() : null,
+            'created_on' => $this->getCreatedOn()
+                ->toDateTimeString(),
             'topic' => $topics,
-            'bpm' => $this->getBpm(),
+            'bpm' => $bpm,
             'staff_pick_rating' => $this->getStaffPickRating(),
             'is_coach' => $this->getIsCoach(),
             'is_active' => $this->getIsActive(),
             'is_coach_of_the_month' => $this->getIsCoachOfTheMonth(),
             'is_featured' => $this->getIsFeatured(),
-            'associated_user_id' => $this->getAssociatedUserId()
+            'associated_user_id' => $this->getAssociatedUserId(),
         ];
     }
 }
