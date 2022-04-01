@@ -135,9 +135,9 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
         }
 
         foreach ($requiredUserStates as $index => $requiredUserState) {
-            $this->join(config('railcontent.table_prefix').'content'.'.userProgress', 'progress')
-                ->andWhere('progress.state IN (:states)')
-                ->andWhere('progress.user = :user')
+            $this->join(config('railcontent.table_prefix').'content'.'.userProgress', 'progress'.$index)
+                ->andWhere('progress'.$index.'.state IN (:states)')
+                ->andWhere('progress'.$index.'.user = :user')
                 ->setParameter('states', $requiredUserState['state'])
                 ->setParameter('user', $requiredUserState['user']);
         }
