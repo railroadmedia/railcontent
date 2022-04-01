@@ -229,6 +229,7 @@ class ContentRepository extends EntityRepository
         if (self::$getFollowedContentOnly) {
             $qb->restrictFollowedContent();
         }
+
         return $qb;
     }
 
@@ -288,17 +289,19 @@ class ContentRepository extends EntityRepository
                 ->getResult();
 
         $ids = [];
-        if ($contents) {
-            foreach ($contents as $content) {
-                $ids[] = $content->getId();
-                if (!in_array($content->getType(), $filteredContents['content_type'] ?? []) &&
-                    (!in_array($content->getType(), $this->typesToInclude))) {
-                    $filteredContents['content_type'][] = $content->getType();
-                }
-            }
-        }
 
         if (!empty($contents)) {
+                        foreach ($contents as $content) {
+                            $ids[] = $content->getId();
+                            if (!in_array($content->getType(), $filteredContents['content_type'] ?? [])
+//                                &&
+//                                (!in_array($content->getType(), $this->typesToInclude))
+                                )
+                            {
+                                $filteredContents['content_type'][] = $content->getType();
+                            }
+                        }
+
             $instructors = [];
             foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
@@ -366,10 +369,10 @@ class ContentRepository extends EntityRepository
                             }
                         } else {
                             if (!in_array(
-                                strtolower($value),
-                                array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
+                                ucfirst(trim($value)),
+                                array_map("ucfirst", $filteredContents[$requiredFieldData] ?? [])
                             )) {
-                                $filteredContents[$requiredFieldData][] = $value;
+                                $filteredContents[$requiredFieldData][] = ucfirst(trim($value));
                             }
                         }
                     }
@@ -381,21 +384,24 @@ class ContentRepository extends EntityRepository
 
                     foreach ($contents as $content) {
                         $value = call_user_func([$content, $getterName]);
-
                         if ($value && is_string($value) && !in_array(
-                                strtolower($value),
-                                array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
+                                ucfirst(trim(($value))),
+                                array_map("ucfirst", $filteredContents[$requiredFieldData] ?? [])
                             )) {
-                            $filteredContents[$requiredFieldData][] = $value;
+                            $filteredContents[$requiredFieldData][] = ucfirst(trim($value));
                         }
                     }
                 }
             }
 
+
+
             foreach ($filteredContents as $availableFieldIndex => $availableField) {
-                usort($filteredContents[$availableFieldIndex], function ($a, $b) {
+                usort($filteredContents[$availableFieldIndex], function ($a, $b) use ($availableField) {
                     if ($a instanceof Content) {
                         return strncmp($a->getSlug(), $b->getSlug(), 15);
+                    } elseif (is_numeric($a) && is_numeric($b)) {
+                        return $a > $b;
                     }
 
                     return strncmp($a, $b, 15);
@@ -405,11 +411,11 @@ class ContentRepository extends EntityRepository
             // random use case, should be refactored at some point
             if (!empty($filteredContents['difficulty']) && count(
                     array_diff($filteredContents['difficulty'], [
-                                                                  'beginner',
-                                                                  'intermediate',
-                                                                  'advanced',
-                                                                  'all',
-                                                              ])
+                        'beginner',
+                        'intermediate',
+                        'advanced',
+                        'all',
+                    ])
                 ) == 0) {
                 $filteredContents['difficulty'] = [
                     'beginner',
@@ -548,14 +554,30 @@ class ContentRepository extends EntityRepository
             }
         }
 
+        foreach ($availableFields as $availableFieldIndex => $availableField) {
+            // if they are all numeric, sort by numbers, otherwise sort by string comparision
+            if (is_numeric(reset($availableFields[$availableFieldIndex])) &&
+                ctype_digit(implode('', $availableFields[$availableFieldIndex]))) {
+                sort($availableFields[$availableFieldIndex]);
+            } else {
+                usort($availableFields[$availableFieldIndex], function ($a, $b) {
+                    if (is_array($a)) {
+                        return strncmp(strtolower($a->getSlug()), strtolower($b->getSlug()), 15);
+                    }
+
+                    return strncmp(strtolower($a), strtolower($b), 15);
+                });
+            }
+        }
+
         // random use case, should be refactored at some point
         if (!empty($availableFields['difficulty']) && count(
                 array_diff($availableFields['difficulty'], [
-                                                             'beginner',
-                                                             'intermediate',
-                                                             'advanced',
-                                                             'all',
-                                                         ])
+                    'beginner',
+                    'intermediate',
+                    'advanced',
+                    'all',
+                ])
             ) == 0) {
             $availableFields['difficulty'] = [
                 'beginner',
