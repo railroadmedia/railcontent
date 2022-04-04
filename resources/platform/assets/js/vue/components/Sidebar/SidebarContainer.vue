@@ -19,7 +19,7 @@ export default {
       <div class="sidebar-mask">
         <div class="sidebar-offset tw-right-0 tw-bottom-0">
 
-          <div class="tw-no-scrollbar tw-overflow-y-scroll tw-overflow-x-hidden sidebar-content-wrapper tw-h-full  tw-pb-4" data-simplebar>
+          <div class="tw-no-scrollbar tw-overflow-y-scroll sidebar-content-wrapper tw-h-full  tw-pb-4">
             <div class="sidebar-content">
 
               <slot />

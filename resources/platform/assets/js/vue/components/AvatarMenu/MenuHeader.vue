@@ -27,9 +27,9 @@ export default {
     <div v-on:click="onButtonClick">
       <img :src="userPhoto" class="tw-h-[53px] tw-w-[53px] tw-rounded-full" />
     </div>
-    <div class="tw-flex tw-grow tw-flex-col tw-justify-between tw-pl-[10px]">
-      <div class="tw-text-[14px] tw-font-bold">{{ name }}</div>
-      <a href="/members/profile" class="tw-text-[12px] tw-text-black dark:tw-text-white">
+    <div class="tw-flex tw-grow tw-flex-col tw-justify-center tw-pl-[10px]">
+      <div class="tw-text-[14px] tw-font-bold tw-mb-1">{{ name }}</div>
+      <a href="/members/profile" class="tw-text-[12px] tw-text-black dark:tw-text-white hover:tw-underline">
         View Profile
       </a>
     </div>

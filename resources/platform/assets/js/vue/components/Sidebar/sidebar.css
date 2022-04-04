@@ -38,74 +38,6 @@
     width: 11px;
 }
 
-.sidebar-height-auto-observer-wrapper {
-    height: 100%;
-    width: 100%;
-    max-width: 1px;
-    position: relative;
-    float: left;
-    max-height: 1px;
-    overflow: hidden;
-    z-index: -1;
-    padding: 0;
-    margin: 0;
-    pointer-events: none;
-    flex-shrink: 0;
-    flex-basis: 0;
-    height: 100%;
-    width: 100%;
-    max-width: 1px;
-    position: relative;
-    float: left;
-    max-height: 1px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    z-index: -1;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    pointer-events: none;
-    flex-shrink: 0;
-    flex-basis: 0px;
-}
-
-.sidebar-mask {
-    position: absolute;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: auto !important;
-    height: auto !important;
-    z-index: 0;
-    position: absolute;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    left: 0px;
-    top: 0px;
-    bottom: 0px;
-    right: 0px;
-    z-index: 0;
-    width: auto !important;
-    height: auto !important;
-}
-
 .sidebar-placeholder {
     max-height: 100%;
     max-width: 100%;
@@ -115,59 +47,6 @@
     max-width: 100%;
     width: 100%;
     pointer-events: none;
-}
-
-.sidebar-height-auto-observer {
-    display: block;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1000%;
-    width: 1000%;
-    min-height: 1px;
-    min-width: 1px;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -1;
-    display: block;
-    opacity: 0;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 1000%;
-    width: 1000%;
-    min-height: 1px;
-    min-width: 1px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.sidebar-offset {
-    resize: none !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    resize: none !important;
 }
 
 .sidebar-content-wrapper {

@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-p-0 tw-mb-0 tw-mr-3 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus-visible:tw-outline-white focus-visible:tw-outline-2"  v-on:click="$emit('onclick')">
+  <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-p-0 tw-mb-0 tw-mr-3 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2"  v-on:click="$emit('onclick')">
     <span class="tw-sr-only">Open main menu</span>
     <div class="tw-block tw-w-5 tw-absolute tw-text-[#111827] dark:tw-text-white tw-left-1/2 tw-top-1/2 tw-transform tw--translate-x-1/2 tw--translate-y-1/2">
         <span aria-hidden="true" 
