@@ -28,13 +28,17 @@ const props = defineProps({
   showSlide: {
     type: Boolean,
     default: false,
-  }
+  },
 });
 </script>
 
 <template>
   <div
-    :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] ${showSlide ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative' : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'}`"
+    :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] ${
+      showSlide
+        ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative'
+        : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'
+    }`"
     :style="{
       backgroundImage: `url('${img}')`,
       backgroundPosition: 'top center',

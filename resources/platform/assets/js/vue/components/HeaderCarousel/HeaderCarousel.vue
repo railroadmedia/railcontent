@@ -82,8 +82,8 @@ const handleRightClick = () => {
 };
 
 const handleNavClick = (index) => {
-    currentSlide.value = index;
-}
+  currentSlide.value = index;
+};
 
 onMounted(() => {
   resetInterval();
@@ -93,6 +93,7 @@ onMounted(() => {
 <template>
   <div
     class="
+      tw-block
       tw-border-[0.5px]
       tw-border-[#344858]
       tw-w-full
@@ -115,14 +116,24 @@ onMounted(() => {
     />
     <div
       class="
-        tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 tw-translate-x-[-50%] tw-left-2/4 tw-mx-auto
+        tw-absolute
+        tw-w-auto
+        tw-bottom-0
+        tw-justify-center
+        tw-py-[25px]
+        tw-z-40
+        tw-translate-x-[-50%]
+        tw-left-2/4
+        tw-mx-auto
       "
     >
       <button
         v-for="(slide, i) in slides"
         v-bind:key="slide.title"
         @click="() => handleNavClick(i)"
-        :class="`tw-mx-[15px] tw-h-[10px] tw-w-[10px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50' }`"
+        :class="`tw-mx-[15px] tw-h-[10px] tw-w-[10px] tw-rounded-full ${
+          i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
+        }`"
       />
     </div>
     <div
