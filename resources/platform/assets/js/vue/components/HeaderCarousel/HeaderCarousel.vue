@@ -56,7 +56,7 @@ const resetInterval = () => {
     } else {
       currentSlide.value = 0;
     }
-    console.log(currentSlide.value)
+    console.log(currentSlide.value);
   }, 6000);
 };
 
@@ -80,6 +80,10 @@ const handleRightClick = () => {
   }
   resetInterval();
 };
+
+const handleNavClick = (index) => {
+    currentSlide.value = index;
+}
 
 onMounted(() => {
   resetInterval();
@@ -111,6 +115,18 @@ onMounted(() => {
     />
     <div
       class="
+        tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 tw-translate-x-[-50%] tw-left-2/4 tw-mx-auto
+      "
+    >
+      <button
+        v-for="(slide, i) in slides"
+        v-bind:key="slide.title"
+        @click="() => handleNavClick(i)"
+        :class="`tw-mx-[15px] tw-h-[10px] tw-w-[10px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50' }`"
+      />
+    </div>
+    <div
+      class="
         tw-w-full
         tw-absolute
         tw-bottom-0
@@ -118,7 +134,7 @@ onMounted(() => {
         tw-justify-end
         tw-px-[36px]
         tw-py-[8px]
-        tw-z-20
+        tw-z-30
       "
     >
       <button
