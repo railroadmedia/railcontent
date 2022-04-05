@@ -27466,8 +27466,6 @@ var _hoisted_8 = ["href", "title"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_musora_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("musora-icon");
 
-  var _component_playlists_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("playlists-section");
-
   var _component_SidebarContainer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SidebarContainer");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_SidebarContainer, {
@@ -27583,14 +27581,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS, PROPS */
       , _hoisted_8)], 2
       /* CLASS */
-      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Playlists Section "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_playlists_section, {
-        isSidebarCollapsed: $props.isSidebarCollapsed,
-        playlist: $props.playlist,
-        pathName: $options.pathName,
-        brand: $props.brand
-      }, null, 8
-      /* PROPS */
-      , ["isSidebarCollapsed", "playlist", "pathName", "brand"])];
+      )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Playlists Section "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <playlists-section\n      :isSidebarCollapsed=\"isSidebarCollapsed\"\n      :playlist=\"playlist\"\n      :pathName=\"pathName\"\n      :brand=\"brand\"\n    ></playlists-section> ")];
     }),
     _: 1
     /* STABLE */
@@ -27938,10 +27929,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_components_HomeCardLinks_HomeCardLinks_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./vue/components/HomeCardLinks/HomeCardLinks.vue */ "./resources/platform/assets/js/vue/components/HomeCardLinks/HomeCardLinks.vue");
 /* harmony import */ var _vue_components_CatalogSection_CatalogSection_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./vue/components/CatalogSection/CatalogSection.vue */ "./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue");
 /* harmony import */ var _vue_components_StatsSection_StatsSection_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./vue/components/StatsSection/StatsSection.vue */ "./resources/platform/assets/js/vue/components/StatsSection/StatsSection.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
+/* harmony import */ var _vue_components_HeaderCarousel_HeaderCarousel_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./vue/components/HeaderCarousel/HeaderCarousel.vue */ "./resources/platform/assets/js/vue/components/HeaderCarousel/HeaderCarousel.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/platform/assets/js/bootstrap.js");
+
 
 
 
@@ -27955,7 +27948,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/platform/assets/js/bootstrap
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({}); //Register Global Components
 
-app.component('AppContainer', _vue_apps_AppContainer_vue__WEBPACK_IMPORTED_MODULE_3__["default"]).component('PageContainer', _vue_components_PageContainer_PageContainer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]).component('HomeCardLinks', _vue_components_HomeCardLinks_HomeCardLinks_vue__WEBPACK_IMPORTED_MODULE_5__["default"]).component('CatalogSection', _vue_components_CatalogSection_CatalogSection_vue__WEBPACK_IMPORTED_MODULE_6__["default"]).component('StatsSection', _vue_components_StatsSection_StatsSection_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
+app.component('AppContainer', _vue_apps_AppContainer_vue__WEBPACK_IMPORTED_MODULE_3__["default"]).component('PageContainer', _vue_components_PageContainer_PageContainer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]).component('HeaderCarousel', _vue_components_HeaderCarousel_HeaderCarousel_vue__WEBPACK_IMPORTED_MODULE_8__["default"]).component('HomeCardLinks', _vue_components_HomeCardLinks_HomeCardLinks_vue__WEBPACK_IMPORTED_MODULE_5__["default"]).component('CatalogSection', _vue_components_CatalogSection_CatalogSection_vue__WEBPACK_IMPORTED_MODULE_6__["default"]).component('StatsSection', _vue_components_StatsSection_StatsSection_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 app.directive('click-outside', {
   mounted: function mounted(el, binding, vnode) {
     setTimeout(function () {
@@ -27974,7 +27967,7 @@ app.directive('click-outside', {
 });
 app.use(_vue_store__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.use(_vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
-app.use(vue_axios__WEBPACK_IMPORTED_MODULE_9__["default"], (axios__WEBPACK_IMPORTED_MODULE_8___default()));
+app.use(vue_axios__WEBPACK_IMPORTED_MODULE_10__["default"], (axios__WEBPACK_IMPORTED_MODULE_9___default()));
 app.mount('#app');
 
 /***/ }),
