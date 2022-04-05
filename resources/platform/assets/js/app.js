@@ -6,8 +6,9 @@ import router from './vue/router';
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
-import CardSection from './vue/components/CardSection/CardSection.vue';
+import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
+import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -16,8 +17,9 @@ const app = createApp({});
 //Register Global Components
 app.component('AppContainer', AppContainer)
    .component('PageContainer', PageContainer)
+   .component('HeaderCarousel', HeaderCarousel)
    .component('HomeCardLinks', HomeCardLinks)
-   .component('CardSection', CardSection)
+   .component('CatalogSection', CatalogSection)
    .component('StatsSection', StatsSection)
 
 app.directive('click-outside', {

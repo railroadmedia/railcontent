@@ -26,69 +26,70 @@
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
                     {{-- Carousel --}}
+                    <header-carousel><header-carousel/>
                     
                     <!-- Home Card Links -->
                     <home-card-links brand="{{ $brand }}"></home-card-links>
                     
                     {{-- Continue Section --}}
-                    <card-section
+                    <catalog-section
                         title="Continue"
                         type="video"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- New Section --}}
-                    <card-section
+                    <catalog-section
                         title="New"
                         type="video"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- Popular Conversations --}}
-                    <card-section
-                        title="From Subscribed Coaches"
+                    <catalog-section
+                        title="Popular Conversations"
                         type="forum"
                         brand="{{ $brand }}"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- From Subscribed Coaches --}}
-                    <card-section
+                    <catalog-section
                         title="From Subscribed Coaches"
                         type="video"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- Subscribed Coaches --}}
-                    <card-section
+                    <catalog-section
                         title="Subscribed Coaches"
                         type="coach"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- My Playlists --}}
-                    <card-section
+                    <catalog-section
                         title="My Playlists"
                         type="playlist"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- Live Banner --}}
 
 
                     {{-- Upcoming Events --}}
-                    <card-section
+                    <catalog-section
                         title="Upcoming Events"
                         type="video"
                         isVisible=""
                         :data="[]"
-                    ></card-section>
+                    ></catalog-section>
 
                     {{-- My Stats --}}
                     <stats-section

@@ -2,12 +2,13 @@
 import SidebarContainer from './SidebarContainer.vue'
 import { textColor, borderColor } from '../../../constants/brands.js'
 import { sidebarLinks } from '../../../constants/sidebar_links.js'
+import PlaylistsSection from './PlaylistsSection.vue'
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 export default {
   name: 'Sidebar',
-  components: { SidebarContainer, MusoraIcon },
+  components: { SidebarContainer, MusoraIcon, PlaylistsSection },
   props: {
     isSidebarCollapsed: Boolean,
     isSidebarHidden: Boolean,
@@ -57,12 +58,13 @@ export default {
       <ul>
         <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
           <a :href="`${link.path}?brand=${brand}`" 
+             :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
-            <musora-icon :icon-name="link.icon" class="tw-mx-4"/>
+            <musora-icon :icon-name="link.icon" class="tw-w-[20px] tw-mx-4"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
-          </a>
+          </a> 
         </li>
       </ul>
     </section>
@@ -70,14 +72,15 @@ export default {
     <!-- Brand Specific Links -->
     <section v-for="(section, i) in sidebarLinks.brandSections" :key="i">
       <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
-        <li v-for="(link, j) in section.links" :key="j" >
-          <a :href="`${link.path}?brand=${brand}`"  
+        <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
+          <a :href="`${link.path}?brand=${brand}`" 
+             :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
-            <musora-icon :icon-name="link.icon" :view-box="link.viewBox" :height="link.height" :width="link.width" class="tw-mx-4"/>
+            <musora-icon :icon-name="link.icon" class="tw-w-[20px] tw-mx-4"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
-          </a>
+          </a> 
         </li>
       </ul>
     </section>
@@ -85,55 +88,42 @@ export default {
     <!-- Forum -->
     <section class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
-        <li>
-          <a :href=" `/members/forums?brand=${brand }` " 
+        <li :class="[pathName === '/members/forums' ? ` ${textColor[brand]}` : '']">
+          <a :href="`/members/forums?brand=${brand}`" 
+             :title="[ isSidebarCollapsed ? 'Forums': '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === '/forums' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+             :class="[pathName === '/members/forums' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
-             <musora-icon icon-name="messages" class="tw-mx-4"/>
-             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Forums</span>
+            <musora-icon icon-name="messages" class="tw-w-[20px] tw-mx-4"/>
+            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Forums</span>
+          </a> 
+        </li>
+      </ul>
+    </section>   
+
+    <!-- My List -->
+    <section class="tw-border-b dark:tw-border-b-[#102230]">
+      <ul>
+        <li :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
+          <a :href=" `/members/profile/?brand=${brand }` " 
+             :title="[ isSidebarCollapsed ? 'My List': '' ]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+             :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+          >
+            <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mx-4 tw-mt-1"/>
+            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">My List</span>
           </a>
         </li>
       </ul>
     </section>
 
-    <!-- Playlists -->
-    <section>
-      <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full tw-pl-1 tw-border-l-4 tw-border-transparent">
-        <div class="tw-text-[#00101D] dark:tw-text-white tw-flex tw-w-full tw-items-center">
-          
-          <musora-icon icon-name="playlist" width="19" height="19" view-box="0 0 29 29" class="tw-mx-4 tw-mt-1"/>
-          
-          <div class="tw-transition tw-flex tw-items-center tw-w-full" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
-            <p class="tw-uppercase tw-text-sm tw-font-bold tw-w-full">Playlists</p>
-            
-            <!-- Add Playlist -->
-            <button class="tw-h-7 tw-w-7 tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-rounded-full dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-mr-3">
-              <musora-icon icon-name="plus" width="14" height="14" viewBox="0 0 14 15"/>
-            </button>
-          
-          </div>
-        </div>
-      </div>
-
-      <Transition name="fade">
-        <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
-          <!-- Loop through User Playlist -->
-          <ul v-if="playlist.length > 0"></ul>
-          
-          <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
-
-            <div class="tw-h-[50px] tw-w-[50px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-mb-2 tw-bg-[#3f3f46]/20 dark:tw-bg-[#445F74]/50 tw-text-[#111827] dark:tw-text-[#9EC0DC]">
-              <musora-icon icon-name="playlist" width="21" height="19" view-box="0 0 29 29" class="tw-mx-4 tw-mt-1"/>
-            </div>
-
-            <span class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-whitespace-nowrap">No Playlist yet</span>
-            <a class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-whitespace-nowrap" href="">Create a playlist now</a>
-          </div>
-        </div>
-      </Transition>
-
-    </section>
+    <!-- Playlists Section -->
+    <!-- <playlists-section
+      :isSidebarCollapsed="isSidebarCollapsed"
+      :playlist="playlist"
+      :pathName="pathName"
+      :brand="brand"
+    ></playlists-section> -->
 
   </SidebarContainer>
 </template>
