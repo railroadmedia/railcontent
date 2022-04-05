@@ -101,6 +101,7 @@ onMounted(() => {
       tw-border-box
       tw-rounded-[10px]
       tw-relative
+      tw-my-4
     "
   >
     <Slide
