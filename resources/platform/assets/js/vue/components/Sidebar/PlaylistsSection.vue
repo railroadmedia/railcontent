@@ -25,25 +25,18 @@
         <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full" :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
 
             <a :href=" `/members/profile?brand=${brand }` " 
-                aria-labelledby="tooltip-sidebar-my-list"
                 :title="[ isSidebarCollapsed ? 'Playlists': '' ]"
-                class="tw-group tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
+                class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
                 :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
             >
                 <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mx-4 tw-mt-1"/>
                 <span class="tw-transition tw-whitespace-nowrap tw-font-bold tw-text-sm tw-uppercase" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Playlists</span>
-                <!-- Tool Tip -->
-                <div v-if="isSidebarCollapsed" 
-                    role="tooltip" 
-                    class="group-hover:tw-block tw-font-normal tw-hidden tw-left-[calc(100%+5px)] tw-shadow-lg tw-whitespace-nowrap tw-absolute tw-text-sm tw-leading-none tw-z-[100] tw-rounded tw-p-2 tw-border tw-bg-[#3F3F46] dark:tw-bg-[#000C17] tw-border-[#9EC0DC]/30 dark:tw-border-[#344858] tw-text-white"
-                    id="tooltip-sidebar-my-list">
-                    Playlists
-                </div>
             </a>
                 
             <!-- Add Playlist -->
             <button class="tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-h-full tw-w-[42px] tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                     :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']"
+                    title="Create Playlist"
             >
                 <musora-icon icon-name="plus" class="tw-w-[20px]"/>
             </button>

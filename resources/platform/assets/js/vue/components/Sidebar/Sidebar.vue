@@ -58,20 +58,12 @@ export default {
       <ul>
         <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
           <a :href="`${link.path}?brand=${brand}`" 
-             :aria-labelledby="`tooltip-sidebar-${i}-${j}`"
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
-             class="tw-group tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
             <musora-icon :icon-name="link.icon" class="tw-w-[20px] tw-mx-4"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
-            <!-- Tool Tip -->
-            <div v-if="isSidebarCollapsed" 
-                 role="tooltip" 
-                 class="group-hover:tw-block tw-font-normal tw-hidden tw-left-[calc(100%+5px)] tw-shadow-lg tw-whitespace-nowrap tw-absolute tw-text-sm tw-leading-none tw-z-[100] tw-rounded tw-p-2 tw-border tw-bg-[#3F3F46] dark:tw-bg-[#000C17] tw-border-[#9EC0DC]/30 dark:tw-border-[#344858] tw-text-white" 
-                 :id="`tooltip-sidebar-${i}-${j}`">
-                {{ link.name }}
-            </div>
           </a> 
         </li>
       </ul>
@@ -82,20 +74,12 @@ export default {
       <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
         <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
           <a :href="`${link.path}?brand=${brand}`" 
-             :aria-labelledby="`tooltip-sidebar-${i}-${j}`"
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
-             class="tw-group tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
             <musora-icon :icon-name="link.icon" class="tw-w-[20px] tw-mx-4"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
-            <!-- Tool Tip -->
-            <div v-if="isSidebarCollapsed" 
-                 role="tooltip" 
-                 class="group-hover:tw-block tw-font-normal tw-hidden tw-left-[calc(100%+5px)] tw-shadow-lg tw-whitespace-nowrap tw-absolute tw-text-sm tw-leading-none tw-z-[100] tw-rounded tw-p-2 tw-border tw-bg-[#3F3F46] dark:tw-bg-[#000C17] tw-border-[#9EC0DC]/30 dark:tw-border-[#344858] tw-text-white" 
-                 :id="`tooltip-sidebar-${i}-${j}`">
-                {{ link.name }}
-            </div>
           </a> 
         </li>
       </ul>
@@ -106,20 +90,12 @@ export default {
       <ul>
         <li :class="[pathName === '/members/forums' ? ` ${textColor[brand]}` : '']">
           <a :href="`/members/forums?brand=${brand}`" 
-             aria-labelledby="tooltip-sidebar-forums"
              :title="[ isSidebarCollapsed ? 'Forums': '' ]"
-             class="tw-group tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === '/members/forums' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
             <musora-icon icon-name="messages" class="tw-w-[20px] tw-mx-4"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Forums</span>
-            <!-- Tool Tip -->
-            <div v-if="isSidebarCollapsed" 
-                 role="tooltip" 
-                 class="group-hover:tw-block tw-font-normal tw-hidden tw-left-[calc(100%+5px)] tw-shadow-lg tw-whitespace-nowrap tw-absolute tw-text-sm tw-leading-none tw-z-[100] tw-rounded tw-p-2 tw-border tw-bg-[#3F3F46] dark:tw-bg-[#000C17] tw-border-[#9EC0DC]/30 dark:tw-border-[#344858] tw-text-white" 
-                 :id="`tooltip-sidebar-forums`">
-                Forums
-            </div>
           </a> 
         </li>
       </ul>
@@ -130,20 +106,12 @@ export default {
       <ul>
         <li :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
           <a :href=" `/members/profile/?brand=${brand }` " 
-             aria-labelledby="tooltip-sidebar-my-list"
              :title="[ isSidebarCollapsed ? 'My List': '' ]"
-             class="tw-group tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
           >
             <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mx-4 tw-mt-1"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">My List</span>
-            <!-- Tool Tip -->
-            <div v-if="isSidebarCollapsed" 
-                 role="tooltip" 
-                 class="group-hover:tw-block tw-font-normal tw-hidden tw-left-[calc(100%+5px)] tw-shadow-lg tw-whitespace-nowrap tw-absolute tw-text-sm tw-leading-none tw-z-[100] tw-rounded tw-p-2 tw-border tw-bg-[#3F3F46] dark:tw-bg-[#000C17] tw-border-[#9EC0DC]/30 dark:tw-border-[#344858] tw-text-white"
-                 id="tooltip-sidebar-my-list">
-                My List
-            </div>
           </a>
         </li>
       </ul>
