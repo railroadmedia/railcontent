@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue";
 import { ArrowSmRightIcon } from "@heroicons/vue/solid";
 const props = defineProps({
   topSubtitle: {
@@ -26,13 +25,16 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  showSlide: {
+    type: Boolean,
+    default: false,
+  }
 });
-const currentSlide = ref(0);
 </script>
 
 <template>
   <div
-    class="tw-w-full tw-h-full"
+    :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] ${showSlide ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative' : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'}`"
     :style="{
       backgroundImage: `url('${img}')`,
       backgroundPosition: 'right',
