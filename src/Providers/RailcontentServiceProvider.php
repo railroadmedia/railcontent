@@ -18,6 +18,9 @@ use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
 use Railroad\Railcontent\Commands\ExpireCache;
+use Railroad\Railcontent\Commands\MigrateContentColumns;
+use Railroad\Railcontent\Commands\MigrateContentFields;
+use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -126,6 +129,9 @@ class RailcontentServiceProvider extends ServiceProvider
                 CleanMetadata::class,
                 CleanContentTopicsAndStyles::class,
                 CalculateContentPopularity::class,
+                MigrateContentToNewStructure::class,
+                MigrateContentColumns::class,
+                MigrateContentFields::class
             ]
         );
 

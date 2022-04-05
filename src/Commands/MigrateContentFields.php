@@ -1,0 +1,355 @@
+<?php
+
+namespace Railroad\Railcontent\Commands;
+
+use Illuminate\Database\Connection;
+use Illuminate\Console\Command;
+use Illuminate\Database\DatabaseManager;
+
+class MigrateContentFields extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'command:migrateFields';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Migrate content fields to the new structure';
+
+    /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
+
+    /**
+     * @param DatabaseManager $databaseManager
+     */
+    public function __construct(DatabaseManager $databaseManager)
+    {
+        parent::__construct();
+
+        $this->databaseManager = $databaseManager;
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConnection->disableQueryLog();
+        $pdo = $dbConnection->getPdo();
+        $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
+
+        $this->info('Migrate fields command starting.');
+
+        $this->migrateTopics($dbConnection);
+
+        $this->info('Ending content topics migration. ');
+
+        $this->migrateTags($dbConnection);
+
+        $this->info('Ending content tags migration.');
+
+        $this->migrateSBTFields($dbConnection);
+
+        $this->info('Ending content sbt_bpm and sbt_exercise_number migration. ');
+
+        $this->migrateContentPlaylist($dbConnection);
+
+        $this->info('Ending content playlists migration.');
+
+        $this->migrateContentKeys($dbConnection);
+
+        $this->info('Ending content keys migration. ');
+
+        $this->migrateContentKeyPitchType($dbConnection);
+
+        $this->info('Ending content key pitch types migration.');
+
+        $this->migrateExercise($dbConnection);
+
+        $this->info('Ending content exercise migration.');
+
+        $this->migrateStyles($dbConnection);
+
+        $this->info('Ending content styles migration.');
+
+        $this->info('Migration completed. ');
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateTopics(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `topic`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `topic`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_topics',
+            config('railcontent.table_prefix') . 'content_fields',
+            'topic'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateTags(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `tag`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `tag`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_tags',
+            config('railcontent.table_prefix') . 'content_fields',
+            'tag'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateSBTFields(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `value`,
+    `key`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `tag`,
+    c.`key` AS `key`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_data',
+            config('railcontent.table_prefix') . 'content_fields',
+            implode(", ", ['sbt_bpm', 'sbt_exercise_number'])
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateContentPlaylist(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `playlist`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `playlist`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_playlists',
+            config('railcontent.table_prefix') . 'content_fields',
+            'playlist'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateContentKeys(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `key`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `key`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_keys',
+            config('railcontent.table_prefix') . 'content_fields',
+            'key'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateContentKeyPitchType(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `key_pitch_type`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `key_pitch_type`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_key_pitch_types',
+            config('railcontent.table_prefix') . 'content_fields',
+            'key_pitch_type'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateExercise(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `exercise_id`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `exercise_id`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_exercises',
+            config('railcontent.table_prefix') . 'content_fields',
+            'exercise_id'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateStyles(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `style`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `style`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_styles',
+            config('railcontent.table_prefix') . 'content_fields',
+            'style'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+}
