@@ -126,6 +126,7 @@ export default {
         <Navbar
             :brand="brand"
             :isSidebarHidden="isSidebarHidden"
+            :isDarkModeSelected="isDarkModeSelected"
             :isSidebarCollapsed="isSidebarCollapsed"
             @onBrandSelect="onBrandSelect"
             @onCollapseSidebar="onCollapseSidebar"

@@ -9,6 +9,7 @@ export default {
     brand: String,
     isSidebarHidden: Boolean,
     isSidebarCollapsed: Boolean,
+    isDarkModeSelected: Boolean,
   },
   emits: ['onCollapseSidebar', 'onBrandSelect', 'onColorModeToggle']
 }
@@ -38,6 +39,7 @@ export default {
     <div class="tw-self-end">
       <UserIcon
         :brand="brand"
+        :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="$emit('onColorModeToggle')"
         userName="John Doe"
         userPhoto="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"

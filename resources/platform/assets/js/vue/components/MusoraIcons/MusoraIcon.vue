@@ -25,15 +25,15 @@ export default {
         },
         width: {
             type: [Number, String],
-            default: '20px',
+            default: '36',
         },
         height: {
             type: [Number, String],
-            default: '20px',
+            default: '35',
         },
         viewBox: {
             type: [Number, String],
-            default: '0 0 20 20',
+            default: '0 0 36 35',
         },
     },
     computed: {

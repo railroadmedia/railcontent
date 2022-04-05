@@ -25,10 +25,10 @@ const props = defineProps({
         showBgImg ? 'StepWrapper__overlay--gradient' : ''
       }`"
     >
-      <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-h-full tw-w-full">
+      <div class="tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-h-full tw-w-full">
         <slot />
       </div>
-      <div class="tw-flex tw-justify-center tw-items-center tw-w-full tw-self-end tw-pb-[40px]">
+      <div class="tw-flex tw-justify-center tw-items-center tw-w-full tw-self-end tw-pb-[40px] tw-hidden md:tw-flex">
       <div v-if="showInstrumentBrand">
         <div class="tw-h-[32px]">
           <img

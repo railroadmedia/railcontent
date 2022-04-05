@@ -57,7 +57,6 @@ export const sidebarLinks = {
             name: 'Routines',
             path: '/members/routines',
             icon: 'routines',
-            viewBox:"0 0 29 29"
           },
         ]
       },
@@ -67,15 +66,13 @@ export const sidebarLinks = {
           {
             name: 'Lessons',
             path: '/members/lessons',
-            icon: 'acoustic-guitar',
-            viewBox:"0 0 20 22",
-            width: "22",
-            height: "35",
+            icon: 'electric-guitar',
+
           },
           {
-            name: 'Play Alongs',
+            name: '500 Songs',
             path: '/members/lessons',
-            icon: 'eigth-notes',
+            icon: '500-songs',
           },
           {
             name: 'Chords & Scales',
@@ -96,7 +93,6 @@ export const sidebarLinks = {
             name: 'Foundation',
             path: '/members/foundation',
             icon: 'foundation',
-            viewBox: '0 0 27 27',
           },
           {
             name: 'Podcast',
@@ -127,7 +123,6 @@ export const sidebarLinks = {
             name: 'Shows',
             path: '/members/shows',
             icon: 'shows',
-            viewBox: '0 0 30 27'
           },
         ]
       },

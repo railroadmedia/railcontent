@@ -1,70 +1,108 @@
 <script setup>
-import ProgressBar from '../../ProgressBar/ProgressBar.vue'
-import Button from '../../Button/Button.vue'
-import StepWrapper from '../StepWrapper.vue'
-import SkipStep from '../SkipStep.vue'
-import MultiSelect from '../../MultiSelect/MultiSelect.vue'
-import { defineEmits, defineProps, ref } from 'vue'
+import ProgressBar from "../../ProgressBar/ProgressBar.vue";
+import Button from "../../Button/Button.vue";
+import StepWrapper from "../StepWrapper.vue";
+import StepHeader from "../StepHeader.vue";
+
+import SkipStep from "../SkipStep.vue";
+import MultiSelect from "../../MultiSelect/MultiSelect.vue";
+import { defineEmits, defineProps, ref } from "vue";
 const props = defineProps({
-    brand: {
-        type: String
-    },
-    steps: {
-        type: Array
-    },
-    info: {
-        type: Object
-    }
-})
-const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
+  brand: {
+    type: String,
+  },
+  steps: {
+    type: Array,
+  },
+  info: {
+    type: Object,
+  },
+});
+const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 const options = [
-    { value: 'g', text: 'G' },
-    { value: 'h', text: 'H' },
-    { value: 'i', text: 'I' }
-]
+  { value: "g", text: "G" },
+  { value: "h", text: "H" },
+  { value: "i", text: "I" },
+];
 function handleMultiSelection(selection) {
-    emit(
-        'onCheckStep',
-        5,
-        Object.values(selection).find((val) => val)
-    )
-    emit('onChangeInfo', { ...props.info, topics: selection })
+  emit(
+    "onCheckStep",
+    5,
+    Object.values(selection).find((val) => val)
+  );
+  emit("onChangeInfo", { ...props.info, topics: selection });
 }
 function skipStep() {
-    alert('* the user skipped the step *')
+  alert("* the user skipped the step *");
+}
+
+function goBack() {
+  emit('onChangeStep', 4);
 }
 </script>
 
 <template>
-    <StepWrapper :brand="brand" :showBgImg="true">
-        <h2
-            class="tw-mb-[40px] tw-w-full tw-text-center tw-font-bold tw-text-white"
-        >
-            Okay, and what topics would you like to study?
-        </h2>
-        <MultiSelect
-            :options="options"
-            :initialSelection="info.topics"
-            classOverride="tw-mb-[52px]"
-            @onChangeSelection="handleMultiSelection"
-        />
-        <ProgressBar
-            :brand="brand"
-            :currentStep="5"
-            :steps="steps"
-            @onChangeStep="(s) => emit('onChangeStep', s)"
-        />
-        <Button
-            @onButtonClick="
-                () => {
-                    emit('onChangeStep', 6)
-                }
-            "
-            :isDisabled="!steps[5].checked"
-            :brand="brand"
-            classOverride="tw-w-[543px] tw-mt-[40px]"
-            >Next</Button
-        >
-        <SkipStep @onSkip="skipStep" />
-    </StepWrapper>
+  <StepWrapper :brand="brand" :showBgImg="true">
+    <div
+      class="
+        tw-h-full
+        md:tw-h-auto
+        tw-w-full tw-flex tw-flex-col tw-items-center
+        md:tw-justify-center
+        tw-mt-[40px]
+        md:tw-mt-0
+      "
+    >
+      <StepHeader title="Okay, and what topics would you like to study?"
+        @onGoBack="goBack" />
+      <MultiSelect
+        :options="options"
+        :initialSelection="info.topics"
+        classOverride="tw-mb-[52px]"
+        @onChangeSelection="handleMultiSelection"
+      />
+    </div>
+    <div
+      class="
+        tw-justify-self-end
+        md:tw-justify-self-center
+        tw-flex tw-flex-col tw-items-center tw-pb-[20px]
+        md:tw-pb-0
+      "
+    >
+      <Button
+        :brand="brand"
+        @onButtonClick="
+          () => {
+            emit('onChangeStep', 6);
+          }
+        "
+        :isDisabled="!steps[5].checked"
+        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
+        >Next</Button
+      >
+      <ProgressBar
+        :brand="brand"
+        :currentStep="5"
+        :steps="steps"
+        @onChangeStep="(s) => emit('onChangeStep', s)"
+      />
+      <Button
+        :brand="brand"
+        @onButtonClick="
+          () => {
+            emit('onChangeStep', 6);
+          }
+        "
+        :isDisabled="!steps[5].checked"
+        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
+        >Next</Button
+      >
+      <SkipStep
+        @onSkip="skipStep"
+        title="SKIP ACCOUNT SETUP"
+        classOverride="tw-mt-[20px] md:tw-mt-0"
+      />
+    </div>
+  </StepWrapper>
 </template>

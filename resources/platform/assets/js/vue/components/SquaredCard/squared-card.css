@@ -1,12 +1,11 @@
 .SquaredCard {
     display: block;
-    width: 264px;
-    height: 264px;
 }
 
 .SquaredCard__overlay {
     display: flex;
     font-family: Bebas Neue;
+    background: rgba(0, 12, 23, 0.5)
 }
 
 .SquaredCard__overlay--drumeo {

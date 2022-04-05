@@ -1,4 +1,10 @@
 <script setup>
+const props = defineProps({
+    title: {
+        type: String,
+        default: 'SKIP ACCOUNT SET UP'
+    }
+})
 const emit = defineEmits(['onSkip'])
 </script>
 
@@ -8,6 +14,6 @@ const emit = defineEmits(['onSkip'])
         style="font-family: Bebas Neue"
         v-on:click="() => emit('onSkip')"
     >
-        SKIP ACCOUNT SET UP
+        {{ title }}
     </button>
 </template>

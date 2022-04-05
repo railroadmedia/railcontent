@@ -1,21 +1,53 @@
 <!-- Playlists -->
+<script>
+    //Icons
+    import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
+    import { textColor, borderColor } from '../../../constants/brands.js'
+    export default {
+        name: 'PlaylistsSection',
+        components: { MusoraIcon },
+        props: {
+            isSidebarCollapsed: Boolean,
+            playlist: Array,
+            brand: String,
+            pathName: String
+        },
+        setup(props) {
+            return {
+                textColor,
+                borderColor,
+            }
+        },
+    }
+</script>
 <template>
     <section>
-        <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full tw-pl-1 tw-border-l-4 tw-border-transparent">
-            <div class="tw-text-[#00101D] dark:tw-text-white tw-flex tw-w-full tw-items-center">
-            
-                <musora-icon icon-name="playlist" width="19" height="19" view-box="0 0 29 29" class="tw-mx-4 tw-mt-1"/>
-                
-                <div class="tw-transition tw-flex tw-items-center tw-w-full" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
-                    <p class="tw-uppercase tw-text-sm tw-font-bold tw-w-full">Playlists</p>
-                    
-                    <!-- Add Playlist -->
-                    <button class="tw-h-7 tw-w-7 tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-rounded-full dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-mr-3">
-                        <musora-icon icon-name="plus" width="14" height="14" viewBox="0 0 14 15"/>
-                    </button>
-                
+        <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full" :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
+
+            <a :href=" `/members/profile?brand=${brand }` " 
+                aria-labelledby="tooltip-sidebar-my-list"
+                :title="[ isSidebarCollapsed ? 'Playlists': '' ]"
+                class="tw-group tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
+                :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+            >
+                <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mx-4 tw-mt-1"/>
+                <span class="tw-transition tw-whitespace-nowrap tw-font-bold tw-text-sm tw-uppercase" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Playlists</span>
+                <!-- Tool Tip -->
+                <div v-if="isSidebarCollapsed" 
+                    role="tooltip" 
+                    class="group-hover:tw-block tw-font-normal tw-hidden tw-left-[calc(100%+5px)] tw-shadow-lg tw-whitespace-nowrap tw-absolute tw-text-sm tw-leading-none tw-z-[100] tw-rounded tw-p-2 tw-border tw-bg-[#3F3F46] dark:tw-bg-[#000C17] tw-border-[#9EC0DC]/30 dark:tw-border-[#344858] tw-text-white"
+                    id="tooltip-sidebar-my-list">
+                    Playlists
                 </div>
-            </div>
+            </a>
+                
+            <!-- Add Playlist -->
+            <button class="tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-h-full tw-w-[42px] tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+                    :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']"
+            >
+                <musora-icon icon-name="plus" class="tw-w-[20px]"/>
+            </button>
+            
         </div>
 
         <Transition name="fade">
@@ -26,19 +58,25 @@
                 <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
 
                     <div class="tw-h-[50px] tw-w-[50px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-mb-2 tw-bg-[#3f3f46]/20 dark:tw-bg-[#445F74]/50 tw-text-[#111827] dark:tw-text-[#9EC0DC]">
-                    <musora-icon icon-name="playlist" width="21" height="19" view-box="0 0 29 29" class="tw-mx-4 tw-mt-1"/>
+                        <musora-icon icon-name="playlist" class="tw-w-[] tw-mx-4 tw-mt-1"/>
                     </div>
 
                     <span class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-whitespace-nowrap">No Playlist yet</span>
-                    <a class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-whitespace-nowrap" href="">Create a playlist now</a>
+                    <a class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-whitespace-nowrap hover:tw-underline" href="">Create a playlist now</a>
                 </div>
             </div>
         </Transition>
 
     </section>
 </template>
-<script>
-    export default {
-        name: 'PlaylistsSection',
-    }
-</script>
+<style scoped>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 150ms ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+</style>

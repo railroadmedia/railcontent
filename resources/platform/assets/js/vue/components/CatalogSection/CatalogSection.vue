@@ -50,7 +50,7 @@ export default {
             </a>
             <a href="https://www.drumeo.com/laravel/public/members/profile" 
                 aria-label="See My Dashboard" 
-                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-pb-0.5 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 See All
             </a>
