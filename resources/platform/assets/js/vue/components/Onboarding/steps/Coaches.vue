@@ -7,7 +7,7 @@ import CoachCarousel from "../../CoachCarousel/CoachCarousel.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import { SearchIcon } from "@heroicons/vue/solid";
 
-import { defineEmits, defineProps, ref } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   brand: {

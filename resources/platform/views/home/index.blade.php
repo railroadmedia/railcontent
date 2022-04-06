@@ -7,6 +7,13 @@
     $nextLearningPathProgressPercent = "0";
     $nextLearningPathLevel = "1.1";
     $userMetrics = "[]";
+    $coachEvent = "{}"
+    //Coach Event
+    $currentDate = "2022-04-06";
+    $calendarId = "12";
+    $youtubeId = "fuvdhzGy3fo";
+    $timeCutoffMinutes = "10";
+    $eventCoachProfileUrl = "";
 @endphp
 
 @extends('partials.layout')
@@ -81,7 +88,16 @@
                     ></catalog-section>
 
                     {{-- Live Banner --}}
-
+                    <coach-event 
+                        brand="{{ $brand }}" 
+                        v-if="{{ !empty($coachEvent) }}"
+                        :preloaded-content='{{ $coachEvent }}'
+                        current-date-string="{{ $currentDate }}" 
+                        subscription-calendar-id="{{ $calendarId }}"
+                        youtube-event-id="{{ $youtubeId }}" 
+                        :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                        event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+                    ></coach-event>
 
                     {{-- Upcoming Events --}}
                     <catalog-section

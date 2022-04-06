@@ -1,4 +1,4 @@
-import Utils from '@musora/helper-functions/modules/utils';
+import Utils from '../assets/js/helper-functions/utils.js';
 
 export default {
     props: {

@@ -5,7 +5,8 @@
             class="flex flex-column bg-white shadow corners-10"
         >
             <a
-                v-for="platform in platforms"
+                v-for="(platform, i) in platforms"
+                :key="i"
                 :href="'https://www.addevent.com/subscribe/' + subscriptionCalendarId + '+' + platform.key"
                 target="_blank"
                 class="text-black pointer bg-white no-decoration"
@@ -14,9 +15,7 @@
                 <p
                     class="body pa-1"
                     v-html="platform.value"
-                >
-                    {{ platform.value }}
-                </p>
+                ></p>
             </a>
         </div>
 
@@ -34,9 +33,7 @@
                 <p
                     class="body pa-1"
                     v-html="platform.value"
-                >
-                    {{ platform.value }}
-                </p>
+                ></p>
 
                 <span class="start">{{ $_event_date }}</span>
                 <span class="timezone">UTC</span>

@@ -6,7 +6,7 @@ import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
-import { defineEmits, defineProps, ref } from "vue";
+import { ref } from "vue";
 const props = defineProps({
   brand: {
     type: String,
