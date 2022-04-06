@@ -499,6 +499,9 @@ a {
 a:visited {
   color: currentColor;
 }
+.font-bebas-neue {
+  letter-spacing: 0.1em;
+}
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
@@ -880,13 +883,13 @@ a:visited {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
 }
-.tw-mx-\[15px\] {
-  margin-left: 15px;
-  margin-right: 15px;
-}
 .tw-my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.tw-mx-\[15px\] {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .tw-mx-\[40px\] {
   margin-left: 40px;
@@ -1409,6 +1412,9 @@ a:visited {
 }
 .tw-w-1\/2 {
   width: 50%;
+}
+.tw-w-\[24px\] {
+  width: 24px;
 }
 .tw-min-w-\[232px\] {
   min-width: 232px;
@@ -2564,6 +2570,9 @@ a:visited {
   .tw-container {
     max-width: 2256px;
   }
+}
+.tw-font-bebas-neue {
+  letter-spacing: 0.025em;
 }
 .placeholder\:tw-text-transparent::-moz-placeholder {
   color: transparent;

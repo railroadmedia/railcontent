@@ -121,7 +121,6 @@ export default {
                 <musora-icon :icon-name="metric.icon" 
                                 width="24" 
                                 height="24" 
-                                view-box="0 0 29 29" 
                                 class="" 
                                 :class="textColor[brand]"
                 />

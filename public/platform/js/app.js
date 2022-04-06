@@ -27492,7 +27492,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
             "icon-name": link.icon,
-            "class": "tw-w-[20px] tw-mx-4"
+            "class": "tw-w-[24px] tw-mx-4"
           }, null, 8
           /* PROPS */
           , ["icon-name"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -27522,7 +27522,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
             "icon-name": link.icon,
-            "class": "tw-w-[20px] tw-mx-4"
+            "class": "tw-w-[24px] tw-mx-4"
           }, null, 8
           /* PROPS */
           , ["icon-name"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -27547,7 +27547,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/members/forums' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
         "icon-name": "messages",
-        "class": "tw-w-[20px] tw-mx-4"
+        "class": "tw-w-[24px] tw-mx-4"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition tw-whitespace-nowrap", [$props.isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']])
       }, "Forums", 2
@@ -27564,7 +27564,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/members/profile' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
         "icon-name": "playlist",
-        "class": "tw-w-[20px] tw-mx-4 tw-mt-1"
+        "class": "tw-w-[24px] tw-mx-4 tw-mt-1"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-transition tw-whitespace-nowrap", [$props.isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']])
       }, "My List", 2
@@ -27602,7 +27602,7 @@ var _hoisted_1 = {
   "class": "tw-h-full tw-w-full tw-top-0 tw-left-0 tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]"
 };
 var _hoisted_2 = {
-  "class": "tw-flex tw-flex-col tw-right-0 tw-bottom-0 tw-h-full tw-no-scrollbar tw-pb-10",
+  "class": "tw-flex tw-flex-col tw-right-0 tw-bottom-0 tw-h-full tw-no-scrollbar tw-overflow-y-auto tw-overflow-x-hidden tw-pb-10",
   "data-simplebar": ""
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -27767,7 +27767,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "icon-name": metric.icon,
       width: "24",
       height: "24",
-      "view-box": "0 0 29 29",
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["", $setup.textColor[$props.brand]])
     }, null, 8
     /* PROPS */
