@@ -1,0 +1,256 @@
+<template>
+    <div class="cart-item-row flex flex-row ph-2 pt-2">
+        <div class="flex flex-column rounded cart-thumbnail mb-2">
+            <div
+                class="square rounded bg-center"
+            >
+                <img
+                    :src="item.thumbnail_url"
+                    class="rounded"
+                >
+            </div>
+        </div>
+        <div class="flex flex-column mb-2 pl">
+            <div class="flex flex-row flex-wrap align-v-top">
+                <div class="flex flex-column xs-12 sm-8">
+                    <h3 class="title font-bold">
+                        {{ item.name }}
+                    </h3>
+                    <h4 class="body text-grey-4">
+                        {{ item.description }}
+                    </h4>
+
+                    <div
+                        v-if="item.requires_shipping && !isCartLocked"
+                        class="flex flex-row align-h-left align-v-center"
+                    >
+                        <div class="flex flex-column flex-auto">
+                            <h4 class="quantity-label tiny dense font-bold uppercase">
+                                Quantity:
+                            </h4>
+                        </div>
+
+                        <div class="flex flex-column flex-auto quantity-column">
+                            <input
+                                v-model="$_itemQuantity"
+                                type="number"
+                                min="1"
+                                max="99"
+                                class="no-label text-center"
+                                style="border:none;background:none;padding: 0px 15px 0px 15px"
+                            >
+                        </div>
+
+                        <div
+                            v-show="loading"
+                            class="flex flex-column flex-auto body"
+                        >
+                            <i
+                                class="fas fa-spin fa-spinner"
+                                :class="themeTextClass"
+                            ></i>
+                        </div>
+                    </div>
+
+                    <div
+                        v-if="!isCartLocked"
+                        class="flex flex-row"
+                    >
+                        <div class="flex flex-column flex-auto">
+                            <a
+                                class="text-error tiny dense font-bold pointer uppercase"
+                                title="Remove Item"
+                                @click.stop.prevent="removeCartItem"
+                            >
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-column price-column xs-12 sm-4 pt-1 text-right align-v-top">
+                    <div class="flex flex-column">
+                        <h3
+                            v-if="isDiscounted"
+                            class="tiny font-bold font-strike text-grey-3 mr-1 m-xs-only"
+                        >
+                            ${{ Number(item.price_before_discounts).toFixed(2) }}
+                        </h3>
+
+                        <h2
+                            v-if="totalPriceAfterDiscounts > 0"
+                            class="title font-bold"
+                            :class="themeTextClass"
+                        >
+                            ${{ totalPriceAfterDiscounts }}
+                        </h2>
+
+                        <h2
+                            v-if="totalPriceAfterDiscounts <= 0"
+                            class="title font-bold"
+                            :class="themeTextClass"
+                        >
+                            FREE
+                        </h2>
+                    </div>
+
+                    <h3
+                        v-if="item.subscription_interval_type && totalPriceAfterDiscounts > 0"
+                        class="tiny"
+                    >
+                        <span v-if="item.subscription_renewal_price != totalPriceAfterDiscounts">
+                            then ${{ Number(item.subscription_renewal_price).toFixed(2)}}
+                        </span>
+
+                        {{ intervalString }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import EcommerceService from '../../assets/js/services/ecommerce.js';
+import ThemeClasses from '../../mixins/ThemeClasses';
+import Toasts from '../../assets/js/classes/toasts';
+import CartEvents from './_events';
+
+
+export default {
+    name: 'OrderFormCartItem',
+    mixins: [ThemeClasses, CartEvents],
+    props: {
+        item: {
+            type: Object,
+        },
+
+        isCartLocked: {
+            type: Boolean,
+            default: () => false,
+        },
+    },
+    data() {
+        return {
+            loading: false,
+            updateQuantityTimeout: null,
+            itemQuantity: this.item.quantity,
+        };
+    },
+    computed: {
+        $_itemQuantity: {
+            get() {
+                return this.itemQuantity;
+            },
+            set(val) {
+                // This timeout prevents multiple requests from being sent
+                clearTimeout(this.updateQuantityTimeout);
+
+                this.updateQuantityTimeout = setTimeout(() => {
+                    this.updateCartItemQuantity(val);
+                    this.itemQuantity = val;
+                }, 500);
+            },
+        },
+
+        totalPriceAfterDiscounts() {
+            return Number(this.item.price_after_discounts).toFixed(2);
+        },
+
+        isDiscounted() {
+            return this.item.price_after_discounts !== this.item.price_before_discounts;
+        },
+
+        intervalString() {
+            if(this.item.subscription_interval_count === 1){
+                return `per ${ this.item.subscription_interval_type }`;
+            }
+
+            return `per ${ this.item.subscription_interval_count } ${ this.item.subscription_interval_type }s`
+        },
+    },
+    mounted() {
+    },
+    methods: {
+        updateCartItemQuantity(quantity) {
+            this.loading = true;
+
+            EcommerceService.updateCartItemQuantity({
+                productSku: this.item.sku,
+                quantity,
+            })
+                .then(this.handleResponse);
+        },
+
+        removeCartItem() {
+            this.loading = true;
+
+            EcommerceService.removeCartItem({
+                productSku: this.item.sku,
+            })
+                .then(this.handleResponse);
+        },
+
+        handleResponse(response) {
+            if (response) {
+                this.emitUpdateCartItem(response.data);
+            } else {
+                Toasts.push({
+                    icon: 'disappointed',
+                    title: 'Something went wrong!',
+                    themeColor: this.themeColor,
+                    message: 'Please contact support using the chat widget at the bottom of the page.',
+                });
+
+                this.itemQuantity = this.item.quantity;
+            }
+
+            this.loading = false;
+        },
+    },
+};
+</script>
+
+<style lang="scss">
+    @import '../../assets/sass/partials/variables';
+
+    .cart-item-row {
+        align-items:flex-start;
+
+        @include small {
+            align-items:center;
+        }
+    }
+    .cart-thumbnail {
+        border:3px solid #d1d1d1;
+        background:#eee;
+        flex:0 0 60px;
+        max-width:60px;
+
+        @include small {
+            flex:0 0 120px;
+            max-width:120px;
+        }
+
+        @include medium {
+            flex:0 0 150px;
+            max-width:150px;
+        }
+    }
+    .quantity-column {
+        flex:0 0 75px;
+        max-width:75px;
+    }
+    .price-column {
+        text-align:left;
+
+        @include small {
+            text-align:right;
+        }
+    }
+    .price-flex {
+        flex-direction:row;
+
+        @include small {
+            flex-direction:column;
+        }
+    }
+</style>

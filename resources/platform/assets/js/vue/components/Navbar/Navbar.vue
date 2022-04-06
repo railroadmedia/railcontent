@@ -36,7 +36,7 @@ export default {
       />
 
     </div>
-    <div class="tw-self-end">
+    <div class="tw-self-end tw-h-full">
       <UserIcon
         :brand="brand"
         :isDarkModeSelected="isDarkModeSelected"

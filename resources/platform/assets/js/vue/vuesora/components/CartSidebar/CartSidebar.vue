@@ -1,0 +1,636 @@
+<template>
+    <div>
+        <div id="cart-sidebar-overlay" @click.stop.prevent="closeCartSidebar" :class="{active: active}">
+        </div>
+        <section id="cart-sidebar" :class="{active: active}">
+            <div class="top">
+                <h5 class="">Your Cart</h5>
+                <a
+                    href="#"
+                    class="close"
+                    style="font-size: 16px !important;"
+                    @click.stop.prevent="closeCartSidebar"
+                ><i class="fal fa-times fa-2x"></i></a>
+            </div>
+            <div class="csb-guarantee">
+                <div>
+                    <i class="fas fa-check-circle" :class="brand"></i>
+                    <span>All of our lessons are backed by a 90-day guarantee.</span>
+                </div>
+            </div>
+            <div id="csb-products-container" v-show="cartItems">
+                <div class="border-top"></div>
+                <div class="csb-products-inner" ref="simplebar">
+                    <div class="csb-products-wrapper">
+                        <cart-item
+                            v-for="item in cartItems"
+                            v-if="cartItems"
+                            :key="item.sku"
+                            :item="item"
+                            :loading="loading"
+                            :locked="locked"
+                            @removeCartItem="removeCartItem"
+                            @updateCartItemQuantity="updateCartItemQuantity"
+                        ></cart-item>
+
+                        <cart-item
+                            v-for="item in bonusItems"
+                            v-if="bonusItems"
+                            :key="item.sku"
+                            :item="item"
+                            :loading="loading"
+                            :is-bonus="true"
+                        ></cart-item>
+                    </div>
+                </div>
+                <div class="border-bottom"></div>
+            </div>
+            <div class="csb-remove-all-items" v-show="cartItems" @click.stop.prevent="clearCart">
+              <div>
+                <span>Remove all items from cart</span>
+              </div>
+              <div class="border-bottom"></div>
+            </div>
+            <div class="summary-container">
+                <div class="summary-container-inner">
+                    <div class="summary-row">
+                        <div class="summary">Subtotal</div>
+                        <div v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="due">
+                            <span v-if="cartTotals">
+                                <s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts()) }}</s>
+                                <span>&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts()) }}</span>
+                            </span>
+                        </div>
+                        <div v-if="subTotalBeforeDiscounts() === subTotalAfterDiscounts()" class="due">
+                            <span v-if="cartTotals">${{ parseTotal(subTotalAfterDiscounts()) }}</span>
+                        </div>
+                    </div>
+                    <div v-if="sumOfDiscounts() > 0" class="summary-row">
+                        <div class="summary">My Savings</div>
+                        <div class="savings">
+                            <span v-if="cartTotals">-${{ parseTotal(sumOfDiscounts()) }}</span>
+                        </div>
+                    </div>
+                    <div v-if="cartRequiresShippingAddress" class="summary-row">
+                        <div class="summary">Shipping</div>
+                        <div class="deferred">{{shippingCostMessage }}</div>
+                    </div>
+                    <div class="summary-row">
+                        <div class="summary">Tax</div>
+                        <div class="deferred">Calculated at checkout</div>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout">
+                <a href="/order" :class="brand"><i class="fas fa-lock"></i>checkout</a>
+            </div>
+            <div v-if="!locked" class="recommended-title">
+                <div>customers also liked</div>
+            </div>
+            <div class="recommended-products" v-if="cartItems && !locked">
+                <div class="recommended-products-wrapper">
+                    <recommended-product
+                        v-for="item in recommendedProducts"
+                        :key="item.sku"
+                        :item="item"
+                        :brand="brand"
+                        :loading="loading"
+                        @addToCart="addRecommendedProductToCart"
+                    ></recommended-product>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>
+
+<script>
+import CartItem from './_CartItem.vue';
+import RecommendedProduct from './_RecommendedProduct.vue';
+import SimpleBar from 'simplebar';
+import 'simplebar/dist/simplebar.min.css';
+
+import EcommerceService from '../../assets/js/services/ecommerce.js';
+
+export default {
+    components: {
+        'cart-item': CartItem,
+        'recommended-product': RecommendedProduct,
+    },
+    name: 'CartSidebar',
+    props: {
+        brand: {
+            type: String,
+            default: () => 'drumeo',
+        },
+        cartData: {
+            item: String,
+        },
+    },
+    data() {
+        return {
+            active: false,
+            locked: false,
+            cartItems: null,
+            bonusItems: null,
+            cartTotals: null,
+            recommendedProducts: null,
+            discounts: [],
+            simpleBar: null,
+            loading: false,
+            scrollTop: false,
+        };
+    },
+    mounted() {
+        let cartData = JSON.parse(this.cartData);
+
+        this.updateCartData(cartData);
+
+        this.$root.$on('openCartSidebar', this.openCartSidebar);
+
+        this.simpleBar = new SimpleBar(this.$refs.simplebar, {autoHide: false});
+        this.loading = false;
+
+        this.attachAddToCartListeners();
+    },
+    computed: {
+        cartRequiresShippingAddress() {
+            if (this.cartItems) {
+                return this.cartItems.filter(item => item.requires_shipping === true).length > 0;
+            }
+
+            return false;
+        },
+
+        shippingCostMessage() {
+            if (this.subTotalAfterDiscounts() > 100) { // todo: temporary
+                return 'Free Shipping';
+            }
+
+            return 'Calculated at checkout';
+        },
+    },
+    methods: {
+        openCartSidebar() {
+            this.active = true;
+
+            // todo - refactor when drumshop & product pages are created with vue, used for removing page scroll bar on mobiles
+            document.body.classList.add('cart-sidebar-active');
+            document.documentElement.classList.add('cart-sidebar-active');
+        },
+
+        closeCartSidebar() {
+            this.active = false;
+
+            // todo - refactor when drumshop & product pages are created with vue, used for adding back page scroll bar on mobiles
+            document.body.classList.remove('cart-sidebar-active');
+            document.documentElement.classList.remove('cart-sidebar-active');
+        },
+
+        updateCartData(cartData) {
+            this.cartItems = cartData.meta.cart.items.reverse();
+            this.recommendedProducts = cartData.meta.cart.recommendedProducts;
+            this.cartTotals = cartData.meta.cart.totals;
+            this.discounts = cartData.meta.cart.discounts;
+            this.bonusItems = cartData.meta.cart.bonuses ? cartData.meta.cart.bonuses : [];
+            this.locked = cartData.meta.cart.locked;
+
+            setTimeout(() => {
+                this.simpleBar.recalculate();
+                if (this.scrollTop) {
+                    this.scrollTop = false;
+                    this.simpleBar.getScrollElement().scroll({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 10);
+        },
+
+        attachAddToCartListeners() {
+            // todo - when drumshop page will be refactored with vue, remove/replace this logic
+
+            let buttons = document.querySelectorAll('.vue-add-to-cart');
+
+            if (buttons.length) {
+                Array.from(buttons).forEach((element) => {
+
+                    element.addEventListener('click', (event) => {
+
+                        event.preventDefault();
+
+                        let isValid = !this.loading && element.hasAttribute('data-product-json');
+
+                        if (isValid && (element.classList.contains('selected-pack') || element.classList.contains('merch'))) {
+                            isValid = element.classList.contains('active')
+                        }
+                        
+                        if (isValid) {
+                            event.stopPropagation();
+
+                            element.classList.add('loading');
+
+                            this.openCartSidebar();
+
+                            let productsObject = JSON.parse(element.getAttribute('data-product-json'));
+                            let promoCode = element.hasAttribute('data-promocode') ? element.getAttribute('data-promocode') : null;
+                            let lockedCart = element.hasAttribute('data-locked-cart') ? element.getAttribute('data-locked-cart') : null;
+
+                            this
+                                .addToCart(productsObject, promoCode, lockedCart)
+                                .then(() => {
+                                    element.classList.remove('loading');
+                                });
+                        }
+                    });
+                });
+            }
+        },
+
+        addToCart(products, promoCode, lockedCart) {
+            if (!this.loading) {
+                this.loading = true;
+
+                let payload = {products: products};
+
+                if (promoCode) {
+                    payload['promo-code'] = promoCode;
+                }
+
+                if (lockedCart) {
+                    payload['locked'] = lockedCart;
+                }
+
+                this.scrollTop = true;
+
+                return EcommerceService
+                    .addCartItems(payload)
+                    .then(this.handleCartUpdate)
+                    .catch(this.handleError);
+            }
+        },
+
+        removeCartItem(cartItem) {
+            if (!this.loading) {
+                this.loading = true;
+
+                EcommerceService
+                    .removeCartItem({productSku: cartItem.sku})
+                    .then(this.handleCartUpdate)
+                    .catch(this.handleError);
+            }
+        },
+
+        clearCart() {
+            if (!this.loading) {
+                this.loading = true;
+
+                EcommerceService
+                    .clearCart()
+                    .then(this.handleCartUpdate)
+                    .catch(this.handleError);
+            }
+        },
+
+        updateCartItemQuantity({cartItem, quantity}) {
+            if (!this.loading) {
+                this.loading = true;
+
+                EcommerceService
+                    .updateCartItemQuantity({productSku: cartItem.sku, quantity})
+                    .then(this.handleCartUpdate)
+                    .catch(this.handleError);
+            }
+        },
+
+        handleCartUpdate(response) {
+            this.updateCartData(response.data);
+            this.$root.$emit('updateCartData', response.data);
+
+            this.loading = false;
+
+            if (!this.cartItems.length) {
+                this.closeCartSidebar();
+            } else if (!this.active) {
+                this.openCartSidebar();
+            }
+        },
+
+        addRecommendedProductToCart(cartItem) {
+            let product = {};
+
+            product[cartItem.sku] = cartItem.quantity;
+
+            this.addToCart(product);
+        },
+
+        parseTotal(total) {
+            return (total || 0).toFixed(2);
+        },
+
+        sumOfDiscounts() {
+            return this.subTotalBeforeDiscounts() - this.subTotalAfterDiscounts();
+        },
+
+        subTotalBeforeDiscounts() {
+            let subTotalBeforeDiscounts = 0;
+
+            if (this.cartItems) {
+                this.cartItems.forEach((item) => {
+                    subTotalBeforeDiscounts += item.price_before_discounts;
+                });
+            }
+
+            if (this.bonusItems) {
+                this.bonusItems.forEach((item) => {
+                    subTotalBeforeDiscounts += item.price_before_discounts;
+                });
+            }
+
+            return subTotalBeforeDiscounts;
+        },
+
+        subTotalAfterDiscounts() {
+            let subTotalAfterDiscounts = 0;
+
+            if (this.cartItems) {
+                this.cartItems.forEach((item) => {
+                    subTotalAfterDiscounts += item.price_after_discounts;
+                });
+            }
+
+            if (this.bonusItems) {
+                this.bonusItems.forEach((item) => {
+                    subTotalAfterDiscounts += item.price_after_discounts;
+                });
+            }
+
+            return subTotalAfterDiscounts;
+        },
+
+        handleError() {
+            this.loading = false;
+            this.$toasted.error(
+                'Something went wrong! Please try again or contact support using the chat widget at the bottom of the page.',
+                {
+                    icon: 'fal fa-meh-rolling-eyes fa-3x toasted-icon',
+                }
+            );
+        }
+    },
+}
+</script>
+
+<style lang="scss">
+@import '../../assets/sass/partials/_variables.scss';
+
+.toasted-container.custom-toast {
+    z-index: 2147483010;
+    &.top-left {
+        left: 2%;
+    }
+    .toasted {
+        max-width: 400px;
+        .toasted-icon {
+            margin-right: 20px;
+        }
+        .toasted-close-icon {
+            color: #8B929A;
+            font-size: 18px;
+        }
+    }
+}
+#cart-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    visibility: hidden;
+    z-index: -1;
+    opacity: 0;
+    -webkit-transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    -moz-transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    -o-transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    &.active {
+        z-index: 2147483005;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+#cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 2147483006;
+    padding-left: 2px;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    height:100vh;
+    overflow: auto;
+    padding: 20px 5px 20px 20px;
+    background: #FCFCFC;
+    @include xSmallOnly {
+        width: 95%;
+    }
+    &.active {
+        right: 0;
+    }
+    h5 {
+        font-family: 'Open Sans', sans-serif;
+    }
+    .top {
+        padding: 10px 15px 10px 0;
+        position: relative;
+        .close {
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+        h5 {
+            font-weight: 700;
+            font-size: 30px;
+            margin-bottom: 0;
+        }
+        a {
+            color: #CCD3D3;
+        }
+    }
+    .csb-guarantee {
+        padding-bottom: 18px;
+        padding-right: 14px;
+        div {
+            line-height: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            i {
+                margin-right: 3px;
+                &.drumeo {
+                    color: #0b76db;
+                }
+                &.pianote {
+                    color: #ff383f;
+                }
+                &.guitareo {
+                    color: #00C9AC;;
+                }
+                &.singeo {
+                    color: #8300E9;;
+                }
+            }
+            span {
+                padding-left: 3px;
+                color: #8B929A;
+                font-size: 12px;
+            }
+        }
+    }
+    .csb-remove-all-items {
+        padding-bottom: 18px;
+        padding-right: 14px;
+        margin-top: 14px;
+
+        .border-bottom {
+            border-bottom: 1px solid #CCD3D3;
+            margin-top: 15px;
+        }
+
+        div {
+            cursor: pointer;
+            line-height: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            span {
+                width: 100%;
+                color: #8B929A;
+                font-size: 12px;
+                text-align: center;
+                text-decoration: underline;
+            }
+        }
+    }
+    .summary-container {
+        padding: 18px 15px 18px 0;
+        .summary-container-inner {
+            .summary-row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .summary {
+                    font-size: 14px;
+                }
+                .due {
+                    font-weight: 700;
+                    font-size: 14px;
+                }
+                .savings {
+                    color: #F71B26;
+                    font-size: 14px;
+                }
+                .deferred {
+                    font-size: 14px;
+                    font-style: italic;
+                }
+            }
+        }
+    }
+    .checkout {
+        margin-right: 15px;
+        text-align: center;
+        margin-bottom: 60px;
+        a {
+            color: #FFF;
+            padding: 12px;
+            font: 700 17px "Roboto Condensed",sans-serif;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            outline: none;
+            text-align: center;
+            user-select: none;
+            transition: all .3s;
+            box-shadow: 0 0 0 rgba(0,0,0,0.35);
+            display: inline-block;
+            width: 100%;
+            &.drumeo {
+                background: #0B76DB;
+                &:hover {
+                    background: #258FF4;
+                }
+            }
+            &.pianote {
+                background: #FF383F;
+                &:hover {
+                    background: #FF6B70;
+                }
+            }
+            &.guitareo {
+                background: #00C9AC;
+                &:hover {
+                    background: #00FCB8;
+                }
+            }
+            &.singeo {
+                background: #8300E9;
+                &:hover {
+                    background: #8300E9;
+                }
+            }
+            i {
+                padding-right: 5px;
+            }
+        }
+    }
+    .recommended-title {
+        padding-top: 15px;
+        padding-right: 15px;
+        div {
+            text-transform: uppercase;
+            font-size: 14px;
+            color: #8B929A;
+        }
+    }
+    .recommended-products {
+        padding-top: 10px;
+        margin-bottom: 100px;
+        .recommended-products-wrapper {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+#csb-products-container {
+    overflow: hidden;
+    position: relative;
+    height: 345px;
+
+    .border-top {
+        border-top: 1px solid #CCD3D3;
+        margin-right: 15px;
+    }
+
+    .csb-products-inner {
+        height: 345px;
+        padding-right: 15px;
+
+        .csb-products-wrapper {
+            max-height: 100%;
+        }
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #CCD3D3;
+        position: absolute;
+        bottom: 0;
+        right: 15px;
+        left: 0;
+    }
+}
+
+#csb-clear-cart-container {
+  margin-bottom: 20px;
+}
+</style>

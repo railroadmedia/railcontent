@@ -23961,7 +23961,7 @@ var _hoisted_2 = {
 };
 var _hoisted_3 = {
   href: "",
-  "class": "tw-text-[#00101D] dark:tw-text-white tw-pb-2 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+  "class": "tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
 };
 var _hoisted_4 = {
   "class": "tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl"
@@ -23970,7 +23970,7 @@ var _hoisted_4 = {
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "https://www.drumeo.com/laravel/public/members/profile",
   "aria-label": "See My Dashboard",
-  "class": "tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-pb-0.5 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+  "class": "tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
 }, " See All ", -1
 /* HOISTED */
 );
@@ -25657,7 +25657,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_4 = {
-  "class": "tw-self-end"
+  "class": "tw-self-end tw-h-full"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_HamburguerButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("HamburguerButton");
@@ -27162,7 +27162,7 @@ var _hoisted_2 = {
   "data-simplebar": ""
 };
 var _hoisted_3 = {
-  "class": "tw-flex tw-flex-col tw-grow tw-w-full"
+  "class": "tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_sprite_sheet = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sprite-sheet");
@@ -27691,20 +27691,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   id: "stats-section",
-  "class": "tw-flex tw-flex-col tw-mb-6 md:tw-mb-12 tw-text-[#00101D] dark:tw-text-white tw-w-full"
+  "class": "tw-flex tw-flex-col tw-mb-5 tw-text-[#00101D] dark:tw-text-white tw-w-full"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "",
-  "class": "tw-text-[#00101D] dark:tw-text-white tw-pb-2 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+  "class": "tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl"
 }, "My Stats")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "https://www.drumeo.com/laravel/public/members/profile",
   "aria-label": "See My Dashboard",
-  "class": "tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+  "class": "tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
 }, " Dashboard ")], -1
 /* HOISTED */
 );
