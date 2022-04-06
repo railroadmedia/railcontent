@@ -7,7 +7,7 @@
     $nextLearningPathProgressPercent = "0";
     $nextLearningPathLevel = "1.1";
     $userMetrics = "[]";
-    $coachEvent = "{}"
+    $coachEvent = "{}";
     //Coach Event
     $currentDate = "2022-04-06";
     $calendarId = "12";
