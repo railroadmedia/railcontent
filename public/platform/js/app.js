@@ -27158,7 +27158,8 @@ var _hoisted_1 = {
   "class": "tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors dark:tw-bg-[#000C17] tw-overflow-hidden"
 };
 var _hoisted_2 = {
-  "class": "tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden"
+  "class": "tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden",
+  "data-simplebar": ""
 };
 var _hoisted_3 = {
   "class": "tw-flex tw-flex-col tw-grow tw-w-full"
@@ -27601,7 +27602,7 @@ var _hoisted_1 = {
   "class": "tw-h-full tw-w-full tw-top-0 tw-left-0 tw-transition-color tw-bg-[#F9FBFB] dark:tw-bg-[#081825]"
 };
 var _hoisted_2 = {
-  "class": "tw-flex tw-flex-col tw-right-0 tw-bottom-0 tw-h-full tw-no-scrollbar tw-overflow-y-auto tw-overflow-x-hidden tw-pb-10",
+  "class": "tw-flex tw-flex-col tw-right-0 tw-bottom-0 tw-h-full tw-no-scrollbar tw-pb-10",
   "data-simplebar": ""
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
