@@ -108,7 +108,7 @@ class MigrateContentColumns extends Command
             'sbt_bpm',
             'sbt_exercise_number',
             'song_name',
-            'Soundslice_xml_file_url',
+            'soundslice_xml_file_url',
         ];
 
         $mappingColumns = [

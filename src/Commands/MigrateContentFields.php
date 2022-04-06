@@ -2,8 +2,8 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Illuminate\Database\Connection;
 use Illuminate\Console\Command;
+use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 
 class MigrateContentFields extends Command
@@ -83,6 +83,14 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content styles migration.');
 
+        $this->migrateFocus($dbConnection);
+
+        $this->info('Ending content focus migration.');
+
+        $this->migrateBpm($dbConnection);
+
+        $this->info('Ending content bpm migration.');
+
         $this->info('Migration completed. ');
     }
 
@@ -110,12 +118,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_topics',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_topics',
+            config('railcontent.table_prefix').'content_fields',
             'topic'
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -143,12 +152,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_tags',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_tags',
+            config('railcontent.table_prefix').'content_fields',
             'tag'
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -178,12 +188,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_data',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_data',
+            config('railcontent.table_prefix').'content_fields',
             implode(", ", ['sbt_bpm', 'sbt_exercise_number'])
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -211,12 +222,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_playlists',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_playlists',
+            config('railcontent.table_prefix').'content_fields',
             'playlist'
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -244,12 +256,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_keys',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_keys',
+            config('railcontent.table_prefix').'content_fields',
             'key'
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -277,12 +290,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_key_pitch_types',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_key_pitch_types',
+            config('railcontent.table_prefix').'content_fields',
             'key_pitch_type'
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -310,12 +324,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_exercises',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_exercises',
+            config('railcontent.table_prefix').'content_fields',
             'exercise_id'
         );
 
         $dbConnection->statement($statement);
+
         return $statement;
     }
 
@@ -343,12 +358,81 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_styles',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content_styles',
+            config('railcontent.table_prefix').'content_fields',
             'style'
         );
 
         $dbConnection->statement($statement);
+
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateFocus(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `focus`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `focus`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix').'content_focus',
+            config('railcontent.table_prefix').'content_fields',
+            'focus'
+        );
+
+        $dbConnection->statement($statement);
+
+        return $statement;
+    }
+
+    /**
+     * @param Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateBpm(Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `bpm`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `bpm`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix').'content_bpm',
+            config('railcontent.table_prefix').'content_fields',
+            'bpm'
+        );
+
+        $dbConnection->statement($statement);
+
         return $statement;
     }
 

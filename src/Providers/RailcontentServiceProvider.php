@@ -20,7 +20,11 @@ use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
+use Railroad\Railcontent\Commands\MigrateContentInstructors;
+use Railroad\Railcontent\Commands\MigrateContentStyles;
+use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
+use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -131,7 +135,11 @@ class RailcontentServiceProvider extends ServiceProvider
                 CalculateContentPopularity::class,
                 MigrateContentToNewStructure::class,
                 MigrateContentColumns::class,
-                MigrateContentFields::class
+                MigrateContentFields::class,
+                MigrateContentInstructors::class,
+                MigrateContentStyles::class,
+                MigrateContentVideos::class,
+                MigrateContentToElasticsearch::class
             ]
         );
 

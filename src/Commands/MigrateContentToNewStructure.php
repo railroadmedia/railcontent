@@ -34,12 +34,12 @@ class MigrateContentToNewStructure extends Command
 //        $this->call('command:deleteOldContentForPlaylist');
         $this->call('command:migrateFields');
         $this->call('command:migrateContentColumns');
-//        $this->call('command:migrateInstructors');
-//        $this->call('command:migrateVideos');
-//        $this->call('command:migrateStyles');
+        $this->call('command:migrateInstructors');
+        $this->call('command:migrateVideos');
+        $this->call('command:migrateStyles');
 //        $this->call('command:deleteOrphanContent');
 //        $this->call('command:calculateTotalXP');
-//        $this->call('command:MigrateContentToElasticsearch');
+        $this->call('command:MigrateContentToElasticsearch');
 
         $this->info('Finished MigrateContentToNewStructure.');
     }
