@@ -2195,6 +2195,9 @@ a:visited {
 .tw-rounded-\[8px\] {
   border-radius: 8px;
 }
+.tw-rounded-\[5px\] {
+  border-radius: 5px;
+}
 .tw-rounded {
   border-radius: 0.25rem;
 }
@@ -3184,6 +3187,9 @@ a:visited {
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.tw-outline-offset-0 {
+  outline-offset: 0px;
+}
 .tw-blur-sm {
   --tw-blur: blur(4px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -3397,6 +3403,9 @@ a:visited {
 }
 .focus\:tw-outline-1:focus {
   outline-width: 1px;
+}
+.focus\:tw-outline-\[\#445f74\]:focus {
+  outline-color: #445f74;
 }
 .focus\:tw-ring-transparent:focus {
   --tw-ring-color: transparent;

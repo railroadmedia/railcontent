@@ -56,7 +56,6 @@ const resetInterval = () => {
     } else {
       currentSlide.value = 0;
     }
-    console.log(currentSlide.value);
   }, 6000);
 };
 
