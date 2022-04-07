@@ -169,7 +169,7 @@ return [
         /*
          * Module Service Providers
          */
-        App\Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
+        Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
 
         /*
          * Application Service Providers...

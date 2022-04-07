@@ -4,7 +4,7 @@ return [
     'development_mode' => env('APP_DEBUG', false),
 
     // databases
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME', 'musora_laravel_mysql'),
     'run_migrations' => true,
 
     // redis
@@ -26,4 +26,8 @@ return [
 //        \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
 //        \App\Http\Middleware\SetContentPermissions::class
     ],
+
+    // remember tokens
+    'remember_me_token_expiration_time' => 94608000, // 3 years
+    'force_remember' => true,
 ];

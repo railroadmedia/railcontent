@@ -1,55 +1,48 @@
 <?php
 
-namespace Railroad\Usora\Providers;
+namespace Modules\UserManagementSystem\Providers;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
+use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Support\Str;
-use Railroad\Usora\Entities\RememberToken;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Managers\UsoraEntityManager;
+use Modules\UserManagementSystem\Models\RememberToken;
+use Modules\UserManagementSystem\Models\User;
 
-class UserServiceProvider implements UserProvider
+/**
+ * @method User retrieveById($identifier)
+ */
+class UserServiceProvider extends EloquentUserProvider
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
     /**
      * @var Hasher
      */
-    private $hasher;
+    protected $hasher;
 
     /**
-     * UserServiceProvider constructor.
-     *
-     * @param EntityManager $entityManager
      * @param Hasher $hasher
+     * @return void
      */
-    public function __construct(UsoraEntityManager $entityManager, Hasher $hasher)
+    public function __construct(Hasher $hasher)
     {
-        $this->entityManager = $entityManager;
         $this->hasher = $hasher;
+
+        parent::__construct($hasher, null);
     }
 
     /**
-     * @param mixed $identifier
      * @return User
      */
-    public function retrieveById($identifier)
+    public function createModel()
     {
-        return $this->entityManager->getRepository(User::class)
-            ->find($identifier);
+        return new User();
     }
 
     /**
      * @param mixed $identifier
      * @param string $token
-     * @return Authenticatable|null|User
+     * @return null|User
      */
     public function retrieveByToken($identifier, $token)
     {
@@ -59,12 +52,11 @@ class UserServiceProvider implements UserProvider
             return null;
         }
 
-        $rememberTokens = $user->getRememberTokens();
+        $rememberTokens = $user->rememberTokens;
 
         foreach ($rememberTokens as $rememberToken) {
             if (!empty($rememberToken->getToken()) == hash_equals($rememberToken->getToken(), $token) &&
                 $rememberToken->getExpiresAt() > Carbon::now()) {
-
                 return $user;
             }
         }
@@ -76,23 +68,19 @@ class UserServiceProvider implements UserProvider
      * @param Authenticatable|User $user
      * @param string $token
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
      */
-    public function updateRememberToken(Authenticatable $user, $token)
+    public function updateRememberToken(Authenticatable|User $user, $token)
     {
-        // todo: clear expired remember tokens
         $rememberToken = new RememberToken();
 
-        $rememberToken->setToken(Str::random(60));
-        $rememberToken->setDeviceInformation(request()->userAgent() . '|' . request()->ip());
-        $rememberToken->setExpiresAt(Carbon::now()->addSeconds(config('usora.remember_me_token_expiration_time')));
-        $rememberToken->setUser($user);
+        $rememberToken->token = Str::random(60);
+        $rememberToken->device_information = request()->userAgent() . '|' . request()->ip();
+        $rememberToken->expires_at = Carbon::now()
+            ->addSeconds(config('user_management_system.remember_me_token_expiration_time'));
+        $rememberToken->user()->associate($user);
+        $rememberToken->save();
 
-        $this->entityManager->persist($rememberToken);
-        $this->entityManager->flush();
-
-        $user->addRememberToken($rememberToken);
-        $user->setRememberToken($rememberToken->getToken());
+        $user->setRememberToken($rememberToken->token);
 
         return true;
     }
@@ -100,36 +88,25 @@ class UserServiceProvider implements UserProvider
     /**
      * @param $token
      * @param $userId
-     * @throws \Doctrine\ORM\ORMException
      */
     public function deleteRememberToken($token, $userId)
     {
-        $rememberToken = $this->entityManager->getRepository(RememberToken::class)
-            ->findOneBy(['token' => $token, 'user' => $userId]);
-
-        if (!empty($rememberToken)) {
-            $this->entityManager->remove($rememberToken);
-            $this->entityManager->flush();
-        }
+        RememberToken::query()->where(['token' => $token, 'user' => $userId])->delete();
     }
 
     /**
      * @param Authenticatable $user
      * @param string $salt
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
      */
     public function updateSessionSalt(Authenticatable $user, $salt)
     {
-        $user =
-            $this->entityManager->getRepository(User::class)
-                ->find($user->getAuthIdentifier());
+        $user = User::newModelQuery()->find($user->getAuthIdentifier());
 
         if (!is_null($user)) {
-            $user->setSessionSalt($salt);
+            $user->session_salt = $salt;
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            $user->save();
 
             return true;
         }
@@ -139,7 +116,7 @@ class UserServiceProvider implements UserProvider
 
     /**
      * @param array $credentials
-     * @return Authenticatable|null
+     * @return Authenticatable|User|null
      */
     public function retrieveByCredentials(array $credentials)
     {
@@ -155,8 +132,7 @@ class UserServiceProvider implements UserProvider
             }
         }
 
-        return $this->entityManager->getRepository(User::class)
-            ->findOneBy($getByAttributes);
+        return User::newModelQuery()->where($getByAttributes)->first();
     }
 
     /**

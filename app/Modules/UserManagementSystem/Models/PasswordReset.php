@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\UserManagementSystem\Models;
+namespace Modules\UserManagementSystem\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|PasswordReset whereId($value)
  * @method static Builder|PasswordReset whereToken($value)
  * @mixin Eloquent
- * @property-read User|null $user
+ * @property-read User $user
  */
 class PasswordReset extends Model
 {
@@ -33,6 +33,6 @@ class PasswordReset extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

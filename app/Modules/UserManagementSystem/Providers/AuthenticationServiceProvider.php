@@ -1,10 +1,11 @@
 <?php
 
-namespace Railroad\Usora\Providers;
+namespace Modules\UserManagementSystem\Providers;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
-use Railroad\Usora\Guards\SaltedSessionGuard;
+use Modules\UserManagementSystem\Guards\SaltedSessionGuard;
 
 class AuthenticationServiceProvider extends ServiceProvider
 {
@@ -12,6 +13,7 @@ class AuthenticationServiceProvider extends ServiceProvider
      * Bootstrap the application services.
      *
      * @return void
+     * @throws BindingResolutionException
      */
     public function boot()
     {
@@ -53,6 +55,5 @@ class AuthenticationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }

@@ -1,13 +1,19 @@
 <?php
 
-namespace App\Modules\UserManagementSystem\Models;
+namespace Modules\UserManagementSystem\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
+use Modules\UserManagementSystem\Factories\UserFactory;
 
 /**
  * App\Modules\UserManagementSystem\Models\User
@@ -141,29 +147,167 @@ use Illuminate\Support\Carbon;
  * @property-read Collection|RememberToken[] $rememberTokens
  * @property-read int|null $remember_tokens_count
  */
-class User extends Model
+class User extends Model implements Authenticatable, CanResetPassword
 {
-    protected $table = 'usora_users';
-
     use HasFactory;
 
+    protected $table = 'usora_users';
+
+    /**
+     * @var string
+     */
+    protected $currentRememberToken;
+
+    /**
+     * @var string
+     */
+    protected $sessionSalt;
+
+    /**
+     * @param array $attributes
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->connection = config('user_management_system.database_connection_name');
+
+        parent::__construct($attributes);
+    }
+
+    /**
+     * @return Collection|RememberToken[]|HasMany
+     */
     public function rememberTokens()
     {
-        return $this->hasMany(RememberToken::class);
+        return $this->hasMany(RememberToken::class, 'user_id');
     }
 
+    /**
+     * @return Collection|FirebaseToken[]|HasMany
+     */
     public function firebaseTokens()
     {
-        return $this->hasMany(FirebaseToken::class);
+        return $this->hasMany(FirebaseToken::class, 'user_id');
     }
 
+    /**
+     * @return Collection|EmailChange[]|HasMany
+     */
     public function emailChanges()
     {
-        return $this->hasMany(EmailChange::class);
+        return $this->hasMany(EmailChange::class, 'user_id');
     }
 
+    /**
+     * @return Collection|PasswordReset[]|HasMany
+     */
     public function passwordResets()
     {
-        return $this->hasMany(PasswordReset::class);
+        return $this->hasMany(PasswordReset::class, 'user_id');
+    }
+
+    /**
+     * Get the name of the unique identifier for the user.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return 'id';
+    }
+
+    /**
+     * Get the unique identifier for the user.
+     *
+     * @return mixed
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRememberToken()
+    {
+        return $this->currentRememberToken;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setRememberToken($value)
+    {
+        $this->currentRememberToken = $value;
+    }
+
+    /**
+     * @param $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $class = config('usora.password_reset_notification_class');
+
+        (new AnonymousNotifiable())->route(
+            config('usora.password_reset_notification_channel'),
+            $this->getEmailForPasswordReset()
+        )
+            ->notify(new $class($token));
+    }
+
+    /**
+     * Get the e-mail address where password reset links are sent.
+     *
+     * @return string
+     */
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSessionSalt()
+    {
+        return $this->sessionSalt;
+    }
+
+    /**
+     * @param string $sessionSalt
+     */
+    public function setSessionSalt($sessionSalt)
+    {
+        $this->sessionSalt = $sessionSalt;
+    }
+
+    /**
+     * @return Factory|UserFactory
+     */
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }

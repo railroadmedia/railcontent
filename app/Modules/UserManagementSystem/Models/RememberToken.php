@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\UserManagementSystem\Models;
+namespace Modules\UserManagementSystem\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,7 +27,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|RememberToken whereToken($value)
  * @method static Builder|RememberToken whereUserId($value)
  * @mixin Eloquent
- * @property-read User|null $user
+ * @property-read User $user
  */
 class RememberToken extends Model
 {
@@ -37,6 +37,6 @@ class RememberToken extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

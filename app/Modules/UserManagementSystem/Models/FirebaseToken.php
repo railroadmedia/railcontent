@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\UserManagementSystem\Models;
+namespace Modules\UserManagementSystem\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,7 +27,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|FirebaseToken whereType($value)
  * @method static Builder|FirebaseToken whereUserId($value)
  * @mixin Eloquent
- * @property-read User|null $user
+ * @property-read User $user
  */
 class FirebaseToken extends Model
 {
@@ -37,6 +37,6 @@ class FirebaseToken extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

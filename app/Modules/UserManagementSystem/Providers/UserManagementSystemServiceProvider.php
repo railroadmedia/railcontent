@@ -1,18 +1,12 @@
 <?php
 
-namespace App\Modules\UserManagementSystem\Providers;
+namespace Modules\UserManagementSystem\Providers;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Routing\RouteRegistrar;
 
 class UserManagementSystemServiceProvider extends ServiceProvider
 {
-    /**
-     * @var RouteRegistrar
-     */
-    private $routeRegistrar;
-
     /**
      * UsoraServiceProvider constructor.
      *
@@ -21,8 +15,6 @@ class UserManagementSystemServiceProvider extends ServiceProvider
     public function __construct(Application $application)
     {
         parent::__construct($application);
-
-        $this->routeRegistrar = $application->make(RouteRegistrar::class);
     }
 
     /**
@@ -68,6 +60,5 @@ class UserManagementSystemServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }
