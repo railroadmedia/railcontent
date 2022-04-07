@@ -151,6 +151,7 @@ class User extends Model implements Authenticatable, CanResetPassword
 {
     use HasFactory;
 
+    protected $hidden = ['password'];
     protected $table = 'usora_users';
 
     /**

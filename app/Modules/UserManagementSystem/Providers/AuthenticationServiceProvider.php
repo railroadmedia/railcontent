@@ -18,14 +18,14 @@ class AuthenticationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app['auth']->provider(
-            'usora',
+            'user-management-system',
             function () {
                 return app()->make(UserServiceProvider::class);
             }
         );
 
         Auth::extend(
-            'usora',
+            'user-management-system',
             function ($app, $name, array $config) {
                 $guard = new SaltedSessionGuard(
                     $name, Auth::createUserProvider($config['provider']), $app['session.store']

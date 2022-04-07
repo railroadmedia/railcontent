@@ -101,7 +101,7 @@ class UserServiceProvider extends EloquentUserProvider
      */
     public function updateSessionSalt(Authenticatable $user, $salt)
     {
-        $user = User::newModelQuery()->find($user->getAuthIdentifier());
+        $user = User::query()->find($user->getAuthIdentifier());
 
         if (!is_null($user)) {
             $user->session_salt = $salt;
@@ -132,7 +132,7 @@ class UserServiceProvider extends EloquentUserProvider
             }
         }
 
-        return User::newModelQuery()->where($getByAttributes)->first();
+        return User::query()->where($getByAttributes)->first();
     }
 
     /**

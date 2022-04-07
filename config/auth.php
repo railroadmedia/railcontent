@@ -37,8 +37,8 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+            'driver' => 'user-management-system',
+            'provider' => 'user-management-system',
         ],
     ],
 
@@ -60,9 +60,8 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => \Modules\UserManagementSystem\Models\User::class,
+        'user-management-system' => [
+            'driver' => 'user-management-system'
         ],
 
         // 'users' => [

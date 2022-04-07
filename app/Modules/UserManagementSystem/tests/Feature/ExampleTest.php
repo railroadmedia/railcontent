@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature;
 
+use Illuminate\Support\Facades\Hash;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\TestCase;
 
@@ -14,9 +15,15 @@ class ExampleTest extends TestCase
      */
     public function test_example()
     {
-        $user = User::factory()->create();
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
 
-        auth()->loginUsingId($user->id);
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        $worked = auth()->attempt(['email' => $email, 'password' => $password]);
 
         $loggedInUser = auth()->user();
 

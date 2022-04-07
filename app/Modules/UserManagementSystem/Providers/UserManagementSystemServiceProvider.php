@@ -60,5 +60,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Laravel auth integration
+        $this->app->register(AuthenticationServiceProvider::class);
     }
 }
