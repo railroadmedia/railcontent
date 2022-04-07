@@ -167,6 +167,11 @@ return [
          */
 
         /*
+         * Module Service Providers
+         */
+        App\Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
