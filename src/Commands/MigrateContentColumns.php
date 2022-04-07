@@ -95,6 +95,7 @@ class MigrateContentColumns extends Command
             'forum_thread_id',
             'is_active',
             'is_coach',
+            'is_house_coach',
             'is_coach_of_the_month',
             'is_featured',
             'associated_user_id',

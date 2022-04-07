@@ -229,9 +229,14 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('is_coach')
                         ->nullable();
 
-                    $table->integer('is_featured')
+                    $table->integer('is_house_coach')
                         ->index()
                         ->after('is_coach_of_the_month')
+                        ->nullable();
+
+                    $table->integer('is_featured')
+                        ->index()
+                        ->after('is_house_coach')
                         ->nullable();
 
                     $table->integer('associated_user_id')
