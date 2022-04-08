@@ -91,6 +91,10 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content bpm migration.');
 
+        $this->migrateInstructors($dbConnection);
+
+        $this->info('Ending content instructors migration.');
+
         $this->info('Migration completed. ');
     }
 
@@ -429,6 +433,42 @@ EOT;
             config('railcontent.table_prefix').'content_bpm',
             config('railcontent.table_prefix').'content_fields',
             'bpm'
+        );
+
+        $dbConnection->statement($statement);
+
+        return $statement;
+    }
+
+    /**
+     * @param \Illuminate\Database\Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateInstructors(\Illuminate\Database\Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `instructor_id`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `instructor_id`,
+    c.`position` AS `position`
+FROM `%s` c
+JOIN `%s` ci on c.`value` = ci.`id`
+WHERE
+    c.`key` IN ('%s')
+    AND c.`value`  REGEXP '^-?[0-9]+$'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix').'content_instructors',
+            config('railcontent.table_prefix').'content_fields',
+            config('railcontent.table_prefix').'content',
+            'instructor'
         );
 
         $dbConnection->statement($statement);
