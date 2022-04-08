@@ -105,11 +105,11 @@
         <div
           class="
             tw-flex tw-flex-col tw-justify-center tw-mt-3
-            sm:tw-mt-0 sm:tw-ml-auto tw-hidden lg:tw-block
+            sm:tw-mt-0 sm:tw-ml-auto 
           "
         >
           <div v-if="eventIsLive || showWatch">
-            <div class="tw-flex tw-flex-row tw-flex-wrap-md">
+            <div class="tw-flex tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
               <div>
                 <a
                   href="/members/live"
