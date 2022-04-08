@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
-use Railroad\Railcontent\Entities\Content;
 
 class MigrateContentColumns extends Command
 {
@@ -64,7 +63,6 @@ class MigrateContentColumns extends Command
             'xp',
             'album',
             'artist',
-            'bpm',
             'cd-tracks',
             'chord_or_scale',
             'difficulty_range',
@@ -91,7 +89,6 @@ class MigrateContentColumns extends Command
             'show_in_new_feed',
             'bands',
             'endorsements',
-            'focus',
             'forum_thread_id',
             'is_active',
             'is_coach',
@@ -106,8 +103,6 @@ class MigrateContentColumns extends Command
             'original_video',
             'pdf',
             'pdf_in_g',
-            'sbt_bpm',
-            'sbt_exercise_number',
             'song_name',
             'soundslice_xml_file_url',
         ];
@@ -169,11 +164,6 @@ class MigrateContentColumns extends Command
                 }
                 if (array_key_exists($column, $contentColumns[$contentId])) {
                     $value = $contentColumns[$contentId][$column];
-//                    if ($this->entityManager->getClassMetadata(Content::class)
-//                            ->getTypeOfField($column) == 'integer') {
-//                        $value = str_replace(',', '', $value);
-//                    }
-
                     if ((($column == 'live_event_end_time') || ($column == 'live_event_start_time'))) {
                         $query1 .= "  WHEN id = ".
                             $contentId.
