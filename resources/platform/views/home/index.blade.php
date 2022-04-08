@@ -7,8 +7,8 @@
     $nextLearningPathProgressPercent = "0";
     $nextLearningPathLevel = "1.1";
     $userMetrics = "[]";
-    $coachEvent = "{}";
     //Coach Event
+    $coachEvent = "{}";
     $currentDate = "2022-04-06";
     $calendarId = "12";
     $youtubeId = "fuvdhzGy3fo";
@@ -32,8 +32,14 @@
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
+                    {{-- On Boarding Message --}}
+
+
                     {{-- Carousel --}}
-                    <header-carousel></header-carousel>
+                    <header-carousel 
+                        :preloaded-carousel="[]" 
+                        brand="{{ $brand }}">
+                    </header-carousel>
                     
                     <!-- Home Card Links -->
                     <home-card-links brand="{{ $brand }}"></home-card-links>

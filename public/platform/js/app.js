@@ -20927,39 +20927,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ArrowSmRightIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ChevronLeftIcon.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ChevronRightIcon.js");
-/* harmony import */ var _Slide_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slide.vue */ "./resources/platform/assets/js/vue/components/HeaderCarousel/Slide.vue");
+/* harmony import */ var _constants_carousel_data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/carousel_data.js */ "./resources/platform/assets/js/constants/carousel_data.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ArrowSmRightIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ChevronLeftIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ChevronRightIcon.js");
+/* harmony import */ var _Slide_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Slide.vue */ "./resources/platform/assets/js/vue/components/HeaderCarousel/Slide.vue");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    slides: {
+    brand: {
+      type: String,
+      "default": 'drumeo'
+    },
+    preloadedCarousel: {
       type: Array,
-      "default": [{
-        topSubtitle: "STEP BY STEP CURRICULUM",
-        title: "DRUMEO METHOD",
-        ctaText: "START METHOD",
-        description: "Exclusive curriculum so you’ll always know what to work on for maximum results.",
-        ctaUrl: "#",
-        img: "https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fdennis-16x9-1648750627.jpg?auto=format&crop=faces%2Cedges&fit=crop&ixlib=php-1.2.1&s=b32acf1a4f65f567d9ae1923abdf377b"
-      }, {
-        topSubtitle: "TEST",
-        title: "TEST",
-        ctaText: "TEST",
-        description: "ExclusivASDASD um so yousdasd sd asd ’ll always k results.",
-        ctaUrl: "#",
-        img: "https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_1920%2Ch_823%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fcoaches-2022%2Fdrumeo%2FAaron-Edgar-ACTION.jpg?auto=format&crop=faces%2Cedges&fit=crop&ixlib=php-1.2.1&s=4e4c88f8bf9839131168e117231f634e"
-      }, {
-        topSubtitle: "TEST2",
-        title: "TEST2",
-        ctaText: "TEST2",
-        description: "ExclusivASDASD um so yousdasd sd asd ’ll always k results 2.",
-        ctaUrl: "#",
-        img: "https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_1920%2Ch_823%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fcoaches-2022%2Fdrumeo%2FDAVE-ATKINSON-ACTION.jpg?auto=format&crop=faces%2Cedges&fit=crop&ixlib=php-1.2.1&s=fea4bfe75d6cef4106ac93acd97d2a4b"
-      }]
+      "default": []
     }
   },
   setup: function setup(__props, _ref) {
@@ -20967,63 +20952,76 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var currentSlide = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
+    var carouselData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var slideInterval = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
 
-    var resetInterval = function resetInterval() {
+    var resetInterval = function resetInterval(carouselData, brand) {
       clearInterval(slideInterval.value);
       slideInterval.value = false;
       slideInterval.value = setInterval(function () {
-        if (props.slides.length > 0 && currentSlide.value !== props.slides.length - 1) {
-          currentSlide.value = currentSlide.value + 1;
-        } else {
-          currentSlide.value = 0;
-        }
-
-        console.log(currentSlide.value);
+        carouselData.value.forEach(function (carousel) {
+          if (carousel.brand === brand) {
+            if (carousel.slides.length > 0 && currentSlide.value !== carousel.slides.length - 1) {
+              currentSlide.value = currentSlide.value + 1;
+            } else {
+              currentSlide.value = 0;
+            }
+          }
+        }); // console.log(currentSlide.value);
       }, 6000);
     };
 
-    var handleLeftClick = function handleLeftClick() {
-      if (props.slides.length > 0 && currentSlide.value !== 0) {
+    var handleLeftClick = function handleLeftClick(carousel) {
+      if (carousel.slides.length > 0 && currentSlide.value !== 0) {
         currentSlide.value = currentSlide.value - 1;
       } else {
-        currentSlide.value = props.slides.length - 1;
+        currentSlide.value = carousel.slides.length - 1;
       }
 
-      resetInterval();
+      resetInterval(carouselData, carousel.brand);
     };
 
-    var handleRightClick = function handleRightClick() {
-      if (props.slides.length > 0 && currentSlide.value !== props.slides.length - 1) {
+    var handleRightClick = function handleRightClick(carousel) {
+      if (carousel.slides.length > 0 && currentSlide.value !== carousel.slides.length - 1) {
         currentSlide.value = currentSlide.value + 1;
       } else {
         currentSlide.value = 0;
       }
 
-      resetInterval();
+      resetInterval(carouselData, carousel.brand);
     };
 
     var handleNavClick = function handleNavClick(index) {
       currentSlide.value = index;
     };
 
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(function () {
+      if (props.preloadedCarousel.length > 0) {
+        carouselData.value = props.preloadedCarousel;
+      } else {
+        carouselData.value = _constants_carousel_data_js__WEBPACK_IMPORTED_MODULE_1__.testCarousel;
+      }
+    });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      resetInterval();
+      resetInterval(carouselData, props.brand);
     });
     var __returned__ = {
       props: props,
       currentSlide: currentSlide,
+      carouselData: carouselData,
       slideInterval: slideInterval,
       resetInterval: resetInterval,
       handleLeftClick: handleLeftClick,
       handleRightClick: handleRightClick,
       handleNavClick: handleNavClick,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      onBeforeMount: vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
-      ArrowSmRightIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_2__["default"],
-      ChevronLeftIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
-      ChevronRightIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__["default"],
-      Slide: _Slide_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+      testCarousel: _constants_carousel_data_js__WEBPACK_IMPORTED_MODULE_1__.testCarousel,
+      ArrowSmRightIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__["default"],
+      ChevronLeftIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__["default"],
+      ChevronRightIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__["default"],
+      Slide: _Slide_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -24869,48 +24867,68 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4"
 };
-var _hoisted_2 = {
-  "class": "tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 tw-translate-x-[-50%] tw-left-2/4 tw-mx-auto"
-};
+var _hoisted_2 = ["onClick"];
 var _hoisted_3 = ["onClick"];
-var _hoisted_4 = {
-  "class": "tw-w-full tw-absolute tw-bottom-0 tw-flex tw-justify-end tw-px-[36px] tw-py-[8px] tw-z-30"
-};
+var _hoisted_4 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.slides, function (slide, i) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Slide"], {
-      showSlide: i === $setup.currentSlide,
-      key: slide.title,
-      topSubtitle: slide.topSubtitle,
-      title: slide.title,
-      ctaText: slide.ctaText,
-      description: slide.description,
-      ctaUrl: slide.ctaUrl,
-      img: slide.img
-    }, null, 8
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.carouselData, function (carousel, i) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [carousel.brand === $props.brand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      key: 0
+    }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(carousel.slides, function (slide, j) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Slide"], {
+        showSlide: j === $setup.currentSlide,
+        key: j,
+        topSubtitle: slide.topSubtitle,
+        title: slide.title,
+        ctaText: slide.ctaText,
+        description: slide.description,
+        ctaUrl: slide.ctaUrl,
+        img: slide.img
+      }, null, 8
+      /* PROPS */
+      , ["showSlide", "topSubtitle", "title", "ctaText", "description", "ctaUrl", "img"]);
+    }), 128
+    /* KEYED_FRAGMENT */
+    )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Directional Buttons "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: "carousel-".concat(i, "-buttons"),
+      "class": "tw-w-full tw-absolute tw-bottom-0 tw-flex tw-justify-end tw-px-[36px] tw-py-[8px] tw-z-30"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none",
+      onClick: function onClick($event) {
+        return $setup.handleLeftClick(carousel);
+      }
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronLeftIcon"])], 8
     /* PROPS */
-    , ["showSlide", "topSubtitle", "title", "ctaText", "description", "ctaUrl", "img"]);
-  }), 128
-  /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.slides, function (slide, i) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-      key: slide.title,
-      onClick: function onClick() {
-        return $setup.handleNavClick(i);
-      },
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-mx-[15px] tw-h-[10px] tw-w-[10px] tw-rounded-full ".concat(i === $setup.currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'))
-    }, null, 10
-    /* CLASS, PROPS */
-    , _hoisted_3);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none",
-    onClick: $setup.handleLeftClick
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronLeftIcon"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none",
-    onClick: $setup.handleRightClick
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronRightIcon"])])])]);
+    , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none",
+      onClick: function onClick($event) {
+        return $setup.handleRightClick(carousel);
+      }
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronRightIcon"])], 8
+    /* PROPS */
+    , _hoisted_3)])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Navigation Dots "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: "carousel-".concat(i, "-nav"),
+      "class": "tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 tw-translate-x-[-50%] tw-left-2/4 tw-mx-auto"
+    }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(carousel.slides, function (slide, j) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+        key: slide.title,
+        onClick: function onClick() {
+          return $setup.handleNavClick(j);
+        },
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-mx-[15px] tw-h-[10px] tw-w-[10px] tw-rounded-full ".concat(j === $setup.currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'))
+      }, null, 10
+      /* CLASS, PROPS */
+      , _hoisted_4);
+    }), 128
+    /* KEYED_FRAGMENT */
+    ))]))], 64
+    /* STABLE_FRAGMENT */
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+    /* STABLE_FRAGMENT */
+    );
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  ))]);
 }
 
 /***/ }),
@@ -24929,26 +24947,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "tw-flex tw-flex-col tw-text-white tw-text-uppercase tw-h-full tw-justify-center tw-px-[26px] tw-font-open-sans"
+  "class": "tw-flex tw-flex-col tw-text-white tw-text-uppercase tw-h-full tw-justify-center tw-px-[26px] tw-font-open-sans tw-w-1/2"
 };
 var _hoisted_2 = {
-  "class": "tw-font-bold tw-text-[16px]"
+  "class": "tw-font-bold tw-text-[16px] tw-uppercase tw-leading-none tw-mb-3"
 };
 var _hoisted_3 = {
-  "class": "tw-font-bold tw-font-bebas-neue tw-text-[60px] tw-leading-[40px] tw-mt-[15px] tw-mb-[5px]"
+  "class": "tw-font-bold tw-font-bebas-neue tw-text-[60px] tw-mb-1 tw-uppercase tw-leading-none"
 };
 var _hoisted_4 = {
-  "class": "tw-text-[16px]"
+  "class": "tw-text-[16px] tw-mb-3 tw-hidden lg:tw-block"
 };
 var _hoisted_5 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] ".concat($props.showSlide ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative' : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0')),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%] ".concat($props.showSlide ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative' : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0')),
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
-      backgroundImage: "url('".concat($props.img, "')"),
-      backgroundPosition: 'top center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
+      backgroundImage: "url('".concat($props.img, "')")
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "tw-w-full tw-h-full tw-rounded-[10px]",
@@ -25020,9 +25035,17 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_4 = ["href"];
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "tw-absolute tw-w-full tw-h-full tw-top-0 tw-bg-black tw-opacity-0 group-hover:tw-opacity-30 tw-left-0 tw-transition-all tw-duration-200 tw-ease-in-out"
+  }, null, -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_5 = ["href"];
+
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     width: "106",
     height: "25",
@@ -25038,12 +25061,20 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_6 = ["href"];
-var _hoisted_7 = {
-  "class": "tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-text-[#FFA710] coaches-card tw-transition-all tw-duration-200 tw-ease-in-out tw-bottom-0 focus:tw-bottom-1 hover:tw-bottom-1"
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "tw-absolute tw-w-full tw-h-full tw-top-0 tw-bg-black tw-opacity-0 group-hover:tw-opacity-30 tw-left-0 tw-transition-all tw-duration-200 tw-ease-in-out"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_8 = ["href"];
+var _hoisted_9 = {
+  "class": "tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-text-[#FFA710] coaches-card focus:tw-bottom-1"
 };
 
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     width: "121",
     height: "22",
@@ -25059,42 +25090,50 @@ var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "tw-absolute tw-w-full tw-h-full tw-top-0 tw-bg-black tw-opacity-0 group-hover:tw-opacity-30 tw-left-0 tw-transition-all tw-duration-200 tw-ease-in-out"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_musora_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("musora-icon");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Method "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/members/method?brand=".concat($props.brand),
-    "class": "tw-relative tw-h-14 sm:tw-h-32 tw-w-full"
+    "class": "tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-transition-all tw-duration-200 tw-ease-in-out tw-bottom-0 focus:tw-bottom-1 hover:tw-bottom-1", "".concat($props.brand, "-card tw-text-").concat($props.brand)])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center focus:tw-bottom-1", "".concat($props.brand, "-card tw-text-").concat($props.brand)])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
     "icon-name": "method",
     "class": "tw-w-4 tw-h-4 sm:tw-h-9 sm:tw-w-9 tw-mb-1 sm:tw-mb-2"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Name SVG"), _hoisted_3], 2
   /* CLASS */
-  )], 8
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" overlay "), _hoisted_4], 8
   /* PROPS */
   , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Songs "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/members/songs?brand=".concat($props.brand),
-    "class": "tw-relative tw-h-14 sm:tw-h-32 tw-w-full"
+    "class": "tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-absolute tw-w-full tw-h-full tw-border-[0.5px] tw-border-[#344858] tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-rounded-xl tw-transition-all tw-duration-200 tw-ease-in-out tw-bottom-0 focus:tw-bottom-1 hover:tw-bottom-1", [$props.brand === 'pianote' ? "songs-card-blue tw-text-[#5FCFF5]" : "songs-card-pink tw-text-[#DD4572]"]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center focus:tw-bottom-1", [$props.brand === 'pianote' ? "songs-card-blue tw-text-[#5FCFF5]" : "songs-card-pink tw-text-[#DD4572]"]])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
     "icon-name": "headphones",
     "class": "tw-w-4 tw-h-4 sm:tw-h-9 sm:tw-w-9 tw-mb-1 sm:tw-mb-2"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Name SVG"), _hoisted_5], 2
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Name SVG"), _hoisted_6], 2
   /* CLASS */
-  )], 8
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" overlay "), _hoisted_7], 8
   /* PROPS */
-  , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Coaches "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  , _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Coaches "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/members/coaches?brand=".concat($props.brand),
-    "class": "tw-relative tw-h-14 sm:tw-h-32 tw-w-full"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
+    "class": "tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Icon "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
     "icon-name": "whistle",
     "class": "tw-w-4 tw-h-4 sm:tw-h-9 sm:tw-w-9 tw-mb-1 sm:tw-mb-2"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Name SVG"), _hoisted_8])], 8
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Name SVG"), _hoisted_10]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" overlay "), _hoisted_11], 8
   /* PROPS */
-  , _hoisted_6)]);
+  , _hoisted_8)]);
 }
 
 /***/ }),
@@ -29421,6 +29460,145 @@ var bgImg = {
 }; // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
 
 var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo', 'hover:tw-border-red-400', 'hover:tw-border-green-400', 'hover:tw-border-blue-400', 'hover:tw-border-yellow-400'];
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/constants/carousel_data.js":
+/*!*****************************************************************!*\
+  !*** ./resources/platform/assets/js/constants/carousel_data.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "testCarousel": () => (/* binding */ testCarousel)
+/* harmony export */ });
+var testCarousel = [{
+  brand: 'drumeo',
+  slides: [{
+    topSubtitle: "Step by Step Curriculum",
+    title: "Drumeo Method",
+    ctaText: "Start Method",
+    description: "Exclusive curriculum so you’ll always know what to work on for maximum results.",
+    ctaUrl: "/members/methods?brand=drumeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-method+1.jpg"
+  }, {
+    topSubtitle: "Coach of the Month",
+    title: "Dennis Chambers",
+    ctaText: "Visit Dennis's Coach Page",
+    description: "Dennis Chambers is a drumming legend who has recorded and performed with artists such as Santana, Steely Dan, Parliament/Funkadelic, and many more.",
+    ctaUrl: "/members/coaches?brand=drumeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-chambers-coach.jpg"
+  }, {
+    topSubtitle: "Popular Songs in All Genres",
+    title: "Songs",
+    ctaText: "See the latest songs",
+    description: "Full transcriptions, loops, and practice tools for music by popular bands of all eras and styles.",
+    ctaUrl: "/members/songs?brand=drumeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/songs.jpg"
+  }, {
+    topSubtitle: "Learn from the legends",
+    title: "Coaches",
+    ctaText: "See Coaches",
+    description: "Drumming legends sharing their best advice and guiding your drumming journey.",
+    ctaUrl: "/members/coaches?brand=drumeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/coaches.jpg"
+  }]
+}, {
+  brand: 'pianote',
+  slides: [{
+    topSubtitle: "Step by Step Curriculum",
+    title: "Pianote Method",
+    ctaText: "Start Method",
+    description: "Exclusive curriculum so you’ll always know what to work on for maximum results.",
+    ctaUrl: "/members/methods?brand=pianote",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/pianote-method+1.jpg"
+  }, {
+    topSubtitle: "Coach of the Month",
+    title: "Erskine Hawkins",
+    ctaText: "Visit Erskine's Coach Page",
+    description: "As a music director for Disney star Zendaya, producer and performer, Erskine Hawkins has done a lot. But his favorite thing in the world is playing gospel piano.",
+    ctaUrl: "/members/coaches?brand=pianote",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/pianote-erskine_coach+1.jpg"
+  }, {
+    topSubtitle: "Popular Songs in All Genres",
+    title: "Songs",
+    ctaText: "See the latest songs",
+    description: "Full transcriptions, loops, and practice tools for music by popular bands of all eras and styles.",
+    ctaUrl: "/members/songs?brand=pianote",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/songs.jpg"
+  }, {
+    topSubtitle: "Learn from the legends",
+    title: "Coaches",
+    ctaText: "See Coaches",
+    description: "Piano legends sharing their best advice and guiding your piano journey.",
+    ctaUrl: "/members/coaches?brand=pianote",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/coaches.jpg"
+  }]
+}, {
+  brand: 'guitareo',
+  slides: [{
+    topSubtitle: "Step by Step Curriculum",
+    title: "Guitareo Method",
+    ctaText: "Start Method",
+    description: "Exclusive curriculum so you’ll always know what to work on for maximum results.",
+    ctaUrl: "/members/methods?brand=guitareo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/Guitareo-Method_Lesson+3+1.jpg"
+  }, {
+    topSubtitle: "Coach of the Month",
+    title: "Sami Ghawi",
+    ctaText: "Visit Sami's Coach Page",
+    description: 'Sami has been a professional musician, producer & educator for over 20 years, dedicating his life to "helping artists do what they love," as well as spreading the beautiful & universal language of music.',
+    ctaUrl: "/members/coaches?brand=guitareo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/guitareo-sami_coach.jpg"
+  }, {
+    topSubtitle: "Popular Songs in All Genres",
+    title: "Songs",
+    ctaText: "See the latest songs",
+    description: "Play popular songs faster with access to chord charts for every style, era, and skill level.",
+    ctaUrl: "/members/songs?brand=guitareo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/songs.jpg"
+  }, {
+    topSubtitle: "Learn from the legends",
+    title: "Coaches",
+    ctaText: "See Coaches",
+    description: "Guitar legends sharing their best advice and guiding your guitar journey.",
+    ctaUrl: "/members/coaches?brand=guitareo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/coaches.jpg"
+  }]
+}, {
+  brand: 'singeo',
+  slides: [{
+    topSubtitle: "Step by Step Curriculum",
+    title: "Singeo Method",
+    ctaText: "Start Method",
+    description: "Exclusive curriculum so you’ll always know what to work on for maximum results.",
+    ctaUrl: "/members/methods?brand=singeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/singeo-method+1.jpg"
+  }, {
+    topSubtitle: "Coach of the Month",
+    title: "SHELÉA",
+    ctaText: "Visit SHELÉA's Coach Page",
+    description: "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent who has a very important message on singing your truth.",
+    ctaUrl: "/members/coaches?brand=singeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/singeo-shelea-coach.jpg"
+  }, {
+    topSubtitle: "Popular Songs in All Genres",
+    title: "Songs",
+    ctaText: "See the latest songs",
+    description: "Sing along to songs by popular singers of all eras and styles in our extensive Karaoke library.",
+    ctaUrl: "/members/songs?brand=singeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/songs.jpg"
+  }, {
+    topSubtitle: "Learn from the legends",
+    title: "Coaches",
+    ctaText: "See Coaches",
+    description: "Vocal legends sharing their best advice and guiding your singing journey.",
+    ctaUrl: "/members/coaches?brand=singeo",
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/coaches.jpg"
+  }]
+}];
 
 /***/ }),
 
