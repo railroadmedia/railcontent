@@ -291,4 +291,38 @@ class UserContentProgressRepository extends RepositoryBase
         return $query->get()
             ->first()['count'];
     }
+
+    /**
+     * @param $id
+     * @param array $types
+     * @param string $state
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param int $limit
+     * @return array
+     */
+    public function getUserProgressForState(
+        $id,
+        $state,
+        $orderByColumn = 'updated_on',
+        $orderByDirection = 'desc'
+    ) {
+        return $this->query()
+            ->join(
+                ConfigService::$tableContent,
+                function (JoinClause $join) {
+                    $join->on(
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    );
+                }
+            )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+            ->where(ConfigService::$tableUserContentProgress . '.state', '=', $state)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
+            ->orderBy($orderByColumn, $orderByDirection)
+            ->get()
+            ->toArray();
+    }
 }

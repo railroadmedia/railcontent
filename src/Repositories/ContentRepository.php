@@ -121,7 +121,7 @@ class ContentRepository extends RepositoryBase
             return null;
         }
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -1777,7 +1777,7 @@ class ContentRepository extends RepositoryBase
                     array_column($contentRows, 'id')
                 )
                 ->get()
-                ->keyBy('id')
+                ->groupBy('id')
                 ->toArray();
 
         $styles =
@@ -1797,7 +1797,47 @@ class ContentRepository extends RepositoryBase
                     array_column($contentRows, 'id')
                 )
                 ->get()
-                ->keyBy('id')
+                ->groupBy('id')
+                ->toArray();
+
+        $bpm =
+            $this->query()
+                ->select([
+                             config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
+                             config('railcontent.table_prefix').'content'.'.id',
+                         ])
+                ->join(
+                    config('railcontent.table_prefix').'content_bpm',
+                    config('railcontent.table_prefix').'content'.'.id',
+                    '=',
+                    config('railcontent.table_prefix').'content_bpm'.'.content_id'
+                )
+                ->whereIn(
+                    config('railcontent.table_prefix').'content'.'.id',
+                    array_column($contentRows, 'id')
+                )
+                ->get()
+                ->groupBy('id')
+                ->toArray();
+
+        $topics =
+            $this->query()
+                ->select([
+                             config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
+                             config('railcontent.table_prefix').'content'.'.id',
+                         ])
+                ->join(
+                    config('railcontent.table_prefix').'content_topics',
+                    config('railcontent.table_prefix').'content'.'.id',
+                    '=',
+                    config('railcontent.table_prefix').'content_topics'.'.content_id'
+                )
+                ->whereIn(
+                    config('railcontent.table_prefix').'content'.'.id',
+                    array_column($contentRows, 'id')
+                )
+                ->get()
+                ->groupBy('id')
                 ->toArray();
 
         $contentColumnNames = [
@@ -1832,8 +1872,8 @@ class ContentRepository extends RepositoryBase
             'soundslice_slug',
             'staff_pick_rating',
             'student_id',
-            //            'vimeo_video_id',
-            //            'youtube_video_id',
+                        'vimeo_video_id',
+                        'youtube_video_id',
             'show_in_new_feed',
             'bands',
             'endorsements',
@@ -1862,7 +1902,7 @@ class ContentRepository extends RepositoryBase
         foreach ($contentRows as $contentRow) {
             $fields[$contentRow['id']] = [];
             foreach ($contentColumnNames as $column) {
-                //if(isset($contentRow[$column])) {
+                if(isset($contentRow[$column])) {
                     $fields[$contentRow['id']][] = [
                         "content_id" => $contentRow['id'],
                         "key" => $column,
@@ -1870,27 +1910,56 @@ class ContentRepository extends RepositoryBase
                         "type" => "integer",
                         "position" => 1,
                     ];
-               // }
+                }
             }
             if (array_key_exists($contentRow['id'], $instructors)) {
-                $fields[$contentRow['id']][] = [
-                    "content_id" => $contentRow['id'],
-                    "key" => 'instructor',
-                    "value" => $instructors[$contentRow['id']]['field_value'] ?? '',
-                    "type" => "content_id",
-                    "position" => 1,
-                ];
+                foreach ($instructors[$contentRow['id']] as $index=>$instructor) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'instructor',
+                        "value" => $instructor['field_value'] ?? '',
+                        "type" => "content_id",
+                        "position" => $index,
+                    ];
+                }
             }
 
             if (array_key_exists($contentRow['id'], $styles)) {
-                $fields[$contentRow['id']][] = [
-                    "content_id" => $contentRow['id'],
-                    "key" => 'style',
-                    "value" => $styles[$contentRow['id']]['field_value'] ?? '',
-                    "type" => "string",
-                    "position" => 1,
-                ];
+                foreach ($styles[$contentRow['id']] as $index=>$style) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'style',
+                        "value" => $style['field_value'] ?? '',
+                        "type" => "string",
+                        "position" => $index,
+                    ];
+                }
             }
+
+            if (array_key_exists($contentRow['id'], $bpm)) {
+                foreach ($bpm[$contentRow['id']] as $index=>$bpmRow) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'bpm',
+                        "value" => $bpmRow['field_value'] ?? '',
+                        "type" => "integer",
+                        "position" => $index,
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $topics)) {
+                foreach ($topics[$contentRow['id']] as $index=>$topic) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'topic',
+                        "value" => $topic['field_value'] ?? '',
+                        "type" => "integer",
+                        "position" => $index,
+                    ];
+                }
+            }
+
             if($contentRow['video']){
                 $fields[$contentRow['id']][] = [
                     "content_id" => $contentRow['id'],

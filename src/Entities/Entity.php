@@ -10,6 +10,10 @@ class Entity extends ArrayObject
 
     public function fetch($dotNotationString, $default = '')
     {
+        $dotNotationField = str_replace('fields.','', $dotNotationString);
+        if(array_key_exists($dotNotationField,$this)){
+            return $this[$dotNotationField] ?? $default;
+        }
         return $this->dot()[$dotNotationString] ?? $default;
     }
 

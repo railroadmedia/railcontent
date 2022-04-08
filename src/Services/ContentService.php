@@ -19,11 +19,14 @@ use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
+use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Support\Collection;
 
 class ContentService
@@ -73,6 +76,20 @@ class ContentService
      */
     private $userContentProgressRepository;
 
+    /**
+     * @var UserPermissionsRepository
+     */
+    private $userPermissionRepository;
+    /**
+     * @var ContentFollowsRepository
+     */
+    private $contentFollowRepository;
+
+    /**
+     * @var ElasticService
+     */
+    private $elasticService;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -83,8 +100,6 @@ class ContentService
     private $idContentCache = [];
 
     /**
-     * ContentService constructor.
-     *
      * @param ContentRepository $contentRepository
      * @param ContentVersionRepository $versionRepository
      * @param ContentFieldRepository $fieldRepository
@@ -94,6 +109,9 @@ class ContentService
      * @param CommentRepository $commentRepository
      * @param CommentAssignmentRepository $commentAssignmentRepository
      * @param UserContentProgressRepository $userContentProgressRepository
+     * @param UserPermissionsRepository $userPermissionsRepository
+     * @param ContentFollowsRepository $contentFollowsRepository
+     * @param ElasticService $elasticService
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -104,7 +122,10 @@ class ContentService
         ContentPermissionRepository $contentPermissionRepository,
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository
+        UserContentProgressRepository $userContentProgressRepository,
+        UserPermissionsRepository $userPermissionsRepository,
+        ContentFollowsRepository $contentFollowsRepository,
+        ElasticService $elasticService
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
@@ -115,6 +136,9 @@ class ContentService
         $this->commentRepository = $commentRepository;
         $this->commentAssignationRepository = $commentAssignmentRepository;
         $this->userContentProgressRepository = $userContentProgressRepository;
+        $this->userPermissionRepository = $userPermissionsRepository;
+        $this->contentFollowsRepository = $contentFollowsRepository;
+        $this->elasticService = $elasticService;
     }
 
     /**
@@ -892,16 +916,179 @@ class ContentService
                 );
             }
 
-            $resultsDB = new ContentFilterResultsEntity(
-                [
-                    'results' => $filter->retrieveFilter(),
-                    'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
-                ]
-            );
+            if (config('railcontent.use_elastic_search') == true) {
+                $filters = [];
 
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
-            $results = new ContentFilterResultsEntity($results);
+                //ContentRepository::$bypassPermissions = true;
+                if (!empty($includedUserStates)) {
+                    $includedContentsIdsByState = [];
+                    $includedContentsByState =
+                        $this->userContentProgressRepository->createQueryBuilder('up')
+                            ->where('up.user = :userId')
+                            ->andWhere('up.state IN (:state)')
+                            ->setParameter('userId', auth()->id())
+                            ->setParameter('state', $includedUserStates)
+                            ->getQuery()
+                            ->getResult();
+                    foreach ($includedContentsByState as $progress) {
+                        $includedContentsIdsByState[] =
+                            $progress->getContent()
+                                ->getId();
+                    }
+                }
+
+                $followedContents = [];
+                if ($getFollowedContentOnly) {
+                    $followedContents = $this->contentFollowsRepository->getFollowedContentIds();
+                    if(empty($followedContents)){
+                        $resultsDB = new ContentFilterResultsEntity([
+                                                                        'results' => $followedContents,
+                                                                        'total_results' =>  0,
+                                                                        'filter_options' =>  [],
+                                                                    ]);
+
+                        $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+                        return  new ContentFilterResultsEntity($results);
+                    }
+                }
+
+                if (!empty($requiredUserStates)) {
+                    $requiredContentsByState =
+                        $this->userContentProgressRepository->getUserProgressForState(auth()->id(), $requiredUserStates[0]);
+
+                    $requiredContentIdsByState = array_pluck($requiredContentsByState, 'content_id');
+                }
+
+                $permissionIds = [];
+                if (auth()->id()) {
+                    $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+                    $permissionIds = array_pluck($userPermissions,'permission_id');
+                }
+
+//                switch (config('railcontent.brand')) {
+//                    case 'drumeo':
+//                        ElasticQueryBuilder::$skillLevel =
+//                            $this->userProvider->getCurrentUser()
+//                                ->getDrumsSkillLevel();
+//                        break;
+//                    case 'pianote':
+//                        ElasticQueryBuilder::$skillLevel =
+//                            $this->userProvider->getCurrentUser()
+//                                ->getPianoSkillLevel();
+//                        break;
+//                    case 'guitareo':
+//                        ElasticQueryBuilder::$skillLevel =
+//                            $this->userProvider->getCurrentUser()
+//                                ->getGuitarSkillLevel();
+//                        break;
+//                }
+
+                ElasticQueryBuilder::$userPermissions = $permissionIds;
+
+//                ElasticQueryBuilder::$userTopics = $this->userProvider->getCurrentUserTopics();
+                $requiredUserPlaylistIds = [];
+                $elasticData = $this->elasticService->getElasticFiltered(
+                    $page,
+                    $limit,
+                    $orderByAndDirection,
+                    $includedTypes,
+                    $slugHierarchy,
+                    $requiredParentIds,
+                    $filter->getRequiredFields(),
+                    $filter->getIncludedFields(),
+                    $requiredContentIdsByState ?? null,
+                    $includedContentsIdsByState ?? null,
+                    $requiredUserPlaylistIds,
+                    null,
+                    $followedContents
+                );
+
+                $totalResults = $elasticData['hits']['total']['value'];
+
+                $ids = [];
+                foreach ($elasticData['hits']['hits'] as $elData) {
+                    $ids[] = $elData['_source']['content_id'];
+                }
+
+                $unorderedContentRows = $this->contentRepository->getByIds($ids);
+
+//                    $this->contentRepository->build()
+//                        ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
+//                        ->setParameter('ids', $ids);
+
+//                $results =
+//                    $qbIds->getQuery()
+//                        ->setCacheable(true)
+//                        ->setCacheRegion('pull')
+//                        ->getResult('Railcontent');
+//
+//                $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
+
+                // restore order of ids passed in
+//                if (!empty($requiredContentIdsByState) && ($sort == 'progress')) {
+//                    $ids = $requiredContentIdsByState;
+//                }
+//
+                $data = [];
+                foreach ($ids as $id) {
+                    foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                        if ($id == $unorderedContentRow['id']) {
+                            $data[] = $unorderedContentRow;
+                        }
+                    }
+                }
+
+                $qb = null;
+                if ($pullFilterFields) {
+                    $filterOptions = $this->elasticService->getFilterFields(
+                        $includedTypes,
+                        $slugHierarchy,
+                        $requiredParentIds,
+                        $filter->getRequiredFields(),
+                        $filter->getIncludedFields(),
+                        $requiredContentIdsByState ?? null,
+                        $includedContentsIdsByState ?? null,
+                        $requiredUserPlaylistIds
+                    );
+
+
+                    if (array_key_exists('instructors', $filterOptions)) {
+                        $instructors =
+                            $this->contentRepository->getByIds($filterOptions['instructors']);
+
+                        unset($filterOptions['instructors']);
+                        usort(
+                            $instructors,
+                            function ($a, $b)  {
+                                return strncmp($a['name'], $b['name'], 15);
+                            }
+                        );
+                        $filterOptions['instructor'] = $instructors;
+                    }
+
+                    $filters = $filterOptions;
+                }
+
+                $resultsDB = new ContentFilterResultsEntity([
+                                                                'results' => $data,
+                                                                'total_results' =>  $totalResults,
+                                                                'filter_options' =>  $filters,
+                                                            ]);
+
+                $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+                $results = new ContentFilterResultsEntity($results);
+            } else {
+
+                $resultsDB = new ContentFilterResultsEntity([
+                                                                'results' => $filter->retrieveFilter(),
+                                                                'total_results' => $pullPagination ?
+                                                                    $filter->countFilter() : 0,
+                                                                'filter_options' => $pullFilterFields ?
+                                                                    $filter->getFilterFields() : [],
+                                                            ]);
+                $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+                $results = new ContentFilterResultsEntity($results);
+            }
         }
 
         return Decorator::decorate($results, 'content');

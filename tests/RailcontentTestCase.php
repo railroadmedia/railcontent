@@ -114,6 +114,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
         $app['config']->set('railcontent.data_mode', $defaultConfig['data_mode']);
+        $app['config']->set('railcontent.use_elastic_search', $defaultConfig['use_elastic_search']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
         $app['config']->set('railcontent.available_brands', $defaultConfig['available_brands']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);

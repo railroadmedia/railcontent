@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
+use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 
 class FullTextSearchService
 {
@@ -17,18 +19,31 @@ class FullTextSearchService
     private $contentService;
 
     /**
-     * FullTextSearchService constructor.
-     *
+     * @var ElasticService
+     */
+    private $elasticService;
+
+    /**
+     * @var UserPermissionsRepository
+     */
+    private $userPermissionRepository;
+
+    /**
      * @param FullTextSearchRepository $fullTextSearchRepository
      * @param ContentService $contentService
+     * @param ElasticService $elasticService
+     * @param UserPermissionsRepository $userPermissionsRepository
      */
     public function __construct(
         FullTextSearchRepository $fullTextSearchRepository,
-        ContentService $contentService
-    )
-    {
+        ContentService $contentService,
+        ElasticService $elasticService,
+        UserPermissionsRepository $userPermissionsRepository
+    ) {
         $this->fullTextSearchRepository = $fullTextSearchRepository;
         $this->contentService = $contentService;
+        $this->elasticService = $elasticService;
+        $this->userPermissionRepository = $userPermissionsRepository;
     }
 
     /** Full text search by term
@@ -54,8 +69,7 @@ class FullTextSearchService
         $dateTimeCutoff = null,
         $brands = null,
         $instructorIds = []
-    )
-    {
+    ) {
         $term = $output = preg_replace(
             '!\s+!',
             ' ',
@@ -70,7 +84,7 @@ class FullTextSearchService
 
         $oldBrands = ConfigService::$availableBrands;
 
-        if(empty($contentStatuses)){
+        if (empty($contentStatuses)) {
             $contentStatuses = ContentRepository::$availableContentStatues;
         }
 
@@ -78,29 +92,105 @@ class FullTextSearchService
             ConfigService::$availableBrands = $brands;
         }
 
-        $return = [
-            'results' => $this->contentService->getByIds(
-                $this->fullTextSearchRepository->search(
-                    $term,
-                    $page,
-                    $limit,
-                    $contentTypes,
-                    $contentStatuses,
-                    $orderByColumn,
-                    $orderByDirection,
-                    $dateTimeCutoff,
-                    $instructorIds
-                )
-            ),
-            'total_results' => $this->fullTextSearchRepository->countTotalResults(
+        if (config('railcontent.use_elastic_search') == true) {
+            $permissionIds = [];
+            if (auth()->id()) {
+                $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+                $permissionIds = array_pluck($userPermissions,'permission_id');
+            }
+
+//            switch (config('railcontent.brand')) {
+//                case 'drumeo':
+//                    ElasticQueryBuilder::$skillLevel =
+//                        $this->userProvider->getCurrentUser()
+//                            ->getDrumsSkillLevel();
+//                    break;
+//                case 'pianote':
+//                    ElasticQueryBuilder::$skillLevel =
+//                        $this->userProvider->getCurrentUser()
+//                            ->getPianoSkillLevel();
+//                    break;
+//                case 'guitareo':
+//                    ElasticQueryBuilder::$skillLevel =
+//                        $this->userProvider->getCurrentUser()
+//                            ->getGuitarSkillLevel();
+//                    break;
+//            }
+
+            ElasticQueryBuilder::$userPermissions = $permissionIds;
+
+            $elasticData = $this->elasticService->search(
                 $term,
+                $page,
+                $limit,
                 $contentTypes,
                 $contentStatuses,
                 $dateTimeCutoff,
-                $instructorIds
-            )
-        ];
+                $sort
+            );
 
+            $totalResults = $elasticData['hits']['total']['value'];
+
+            $contentIds = [];
+            foreach ($elasticData['hits']['hits'] as $elData) {
+                $contentIds[] = $elData['_source']['content_id'];
+            }
+
+            $filters = $this->elasticService->getFilterFields(
+                $contentTypes,
+                [],
+                [],
+                [],
+                [],
+                null,
+                null,
+                [],
+                $term
+            );
+
+            $contents = $this->contentService->getByIds($contentIds);
+            $return = [
+                'results' => $contents,
+                'total_results' => $totalResults,
+                'filter_options' => $filters,
+                'custom_pagination' => [
+                    'total' => $totalResults,
+                    'count' => count($contents),
+                    'per_page' => $limit,
+                    'current_page' => $page,
+                    'total_pages' => ceil($totalResults / $limit),
+                    'links' => [],
+                ],
+                // 'qb' => $qb->addSelect('p'),
+            ];
+            config(['railcontent.available_brands' => $oldBrands]);
+
+            return $return;
+
+        } else {
+            $return = [
+                'results' => $this->contentService->getByIds(
+                    $this->fullTextSearchRepository->search(
+                        $term,
+                        $page,
+                        $limit,
+                        $contentTypes,
+                        $contentStatuses,
+                        $orderByColumn,
+                        $orderByDirection,
+                        $dateTimeCutoff,
+                        $instructorIds
+                    )
+                ),
+                'total_results' => $this->fullTextSearchRepository->countTotalResults(
+                    $term,
+                    $contentTypes,
+                    $contentStatuses,
+                    $dateTimeCutoff,
+                    $instructorIds
+                ),
+            ];
+        }
         ConfigService::$availableBrands = $oldBrands;
 
         return $return;
