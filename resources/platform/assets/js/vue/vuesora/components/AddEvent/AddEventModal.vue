@@ -1,31 +1,31 @@
 <template>
     <div
         :id="modalId"
-        class="modal small"
+        class="tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center tw-bg-black tw-z-50"
     >
-        <div class="flex flex-column bg-white shadow corners-10 pa-3 align-h-center  overflow-visible">
-            <h1 class="subheading text-center mb-2">
+        <div class="tw-flex tw-flex-column tw-bg-white tw-shadow corners-10 pa-3 align-h-center tw-overflow-visible">
+            <h1 class="subheading tw-text-center tw-mb-2">
                 Subscribe to Calendar
             </h1>
 
-            <p class="tiny text-center mb-2">
+            <p class="tiny tw-text-center tw-mb-2">
                 Here you can subscribe to {{ toCapitalCase(brand) }}'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported.
             </p>
 
             <div
                 v-show="subscriptionCalendarId"
-                class="relative"
+                class="tw-relative"
                 style="width:100%;"
             >
                 <button
-                    class="btn mb-1"
+                    class="btn tw-mb-1"
                     @click.stop="subscriptionCalendarDropdown = !subscriptionCalendarDropdown"
                 >
                     <span
-                        class="text-white"
+                        class="tw-text-white"
                         :class="themeBgClass"
                     >
-                        <i class="fas fa-calendar-plus mr-1"></i>
+                        <i class="fas fa-calendar-plus tw-mr-1"></i>
                         Subscribe to calendar
                     </span>
                 </button>
@@ -42,31 +42,31 @@
 
             <p
                 v-show="subscriptionCalendarId"
-                class="x-tiny font-italic text-center mb-2"
+                class="x-tiny tw-font-italic tw-text-center tw-mb-2"
             >
                 Any upcoming releases will automatically show up in this calendar as they are scheduled by the {{ toCapitalCase(brand) }} Team.
             </p>
 
             <p
                 v-show="hasSingleEvent"
-                class="tiny text-center mb-2"
+                class="tiny tw-text-center tw-mb-2"
             >
                 Or you can subscribe to this event only by clicking the button below.
             </p>
             <div
                 v-show="hasSingleEvent"
-                class="tiny pointer relative"
+                class="tiny pointer tw-relative"
                 style="width:100%;"
             >
                 <button
-                    class="btn mb-1"
+                    class="btn tw-mb-1"
                     @click.stop="singleEventDropdown = !singleEventDropdown"
                 >
                     <span
                         class="inverted"
                         :class="[themeTextClass, themeBgClass]"
                     >
-                        <i class="fas fa-calendar-plus mr-1"></i>
+                        <i class="fas fa-calendar-plus tw-mr-1"></i>
                         Subscribe to this event only
                     </span>
                 </button>
@@ -82,7 +82,7 @@
 
             <p
                 v-show="hasSingleEvent"
-                class="x-tiny font-italic text-center mb-2"
+                class="x-tiny tw-font-italic tw-text-center tw-mb-2"
             >
                 {{ singleEventDescription }}
             </p>
