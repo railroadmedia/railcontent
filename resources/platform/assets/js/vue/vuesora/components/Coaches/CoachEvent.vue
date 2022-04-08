@@ -1,12 +1,12 @@
 <template>
-  <div class="container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-[] dark:tw-bg-[] dark:tw-border-[]">
+  <div class="container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
     <NotificationToasts
       :icon="toast.icon"
       :text="toast.text"
       :isError="toast.showErrorMessage"
       :brandName="brand"
     />
-    <div class="tw-flex tw-flex-row tw-items-center" v-if="content">
+    <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a
         href="/members/live"
@@ -172,6 +172,7 @@
             <content-schedule
               :subscription-calendar-id="subscriptionCalendarId"
               :theme-color="brand"
+              :toggleSubscribePopup="toggleSubscribePopup"
               v-if="showSubscribePopup"
             ></content-schedule>
           </div>
@@ -257,6 +258,7 @@ export default {
       this.startTime = DateTime.fromSQL(this.content.live_event_start_time, {
         zone: "UTC",
       });
+      console.log(this.startTime)
       this.startDate = new Date(this.startTime);
       this.startWeekday = this.startDate.toLocaleString("en-US", {
         weekday: "long",
