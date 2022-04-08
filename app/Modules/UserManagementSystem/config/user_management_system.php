@@ -19,6 +19,7 @@ return [
     'autoload_all_routes' => true,
     'route_middleware_public_groups' => ['web'],
     'route_middleware_logged_in_groups' => ['web_authed'],
+    'login_page_path' => '/login',
 
     //middleware for API requests
     'route_middleware_app_logged_in_groups' => [

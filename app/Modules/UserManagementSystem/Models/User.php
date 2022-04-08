@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
+use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
 
 /**
@@ -150,6 +151,7 @@ use Modules\UserManagementSystem\Factories\UserFactory;
 class User extends Model implements Authenticatable, CanResetPassword
 {
     use HasFactory;
+    use HasApiTokens;
 
     protected $hidden = ['password'];
     protected $table = 'usora_users';

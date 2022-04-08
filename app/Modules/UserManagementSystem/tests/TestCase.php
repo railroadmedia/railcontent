@@ -6,6 +6,7 @@ use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\URL;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -22,6 +23,8 @@ abstract class TestCase extends BaseTestCase
         $this->faker = Factory::create();
 
         parent::setUp();
+
+        URL::forceRootUrl('https://testing.musora.com');
     }
 
 
