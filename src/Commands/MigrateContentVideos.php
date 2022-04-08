@@ -2,11 +2,10 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class MigrateContentVideos extends Command
 {
@@ -57,9 +56,8 @@ class MigrateContentVideos extends Command
 
         $this->migrateVideo();
 
-        $this->info('Ending content video migration. ' );
+        $this->info('Ending content video migration. ');
     }
-    
 
     /**
      * @return string|void
@@ -68,13 +66,10 @@ class MigrateContentVideos extends Command
     {
         $start = microtime(true);
         Schema::connection(config('railcontent.database_connection_name'))
-            ->table(
-                config('railcontent.table_prefix') . 'content_fields',
-                function (Blueprint $table) {
-                    $table->integer('video_content_id')
-                        ->nullable(true);
-                }
-            );
+            ->table(config('railcontent.table_prefix').'content_fields', function (Blueprint $table) {
+                $table->integer('video_content_id')
+                    ->nullable(true);
+            });
 
         $sqlFields = <<<'EOT'
 UPDATE `%s` cs
@@ -86,13 +81,12 @@ EOT;
 
         $statementF = sprintf(
             $sqlFields,
-            config('railcontent.table_prefix') . 'content_fields',
-            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix').'content_fields',
+            config('railcontent.table_prefix').'content',
             'video'
         );
 
-        $this->databaseManager
-            ->connection(config('railcontent.database_connection_name'))
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->statement($statementF);
         $finish = microtime(true) - $start;
         $format = "Finished fields updates in %s seconds\n ";
@@ -109,25 +103,21 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content',
-            config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix').'content',
+            config('railcontent.table_prefix').'content_fields',
             'video'
         );
 
-        $this->databaseManager
-            ->connection(config('railcontent.database_connection_name'))
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->statement($statement);
         $finish2 = microtime(true) - $finish;
         $format = "Finished content video updates in %s seconds\n ";
         $this->info(sprintf($format, $finish2));
 
         Schema::connection(config('railcontent.database_connection_name'))
-            ->table(
-                config('railcontent.table_prefix') . 'content_fields',
-                function (Blueprint $table) {
-                    $table->dropColumn('video_content_id');
-                }
-            );
+            ->table(config('railcontent.table_prefix').'content_fields', function (Blueprint $table) {
+                $table->dropColumn('video_content_id');
+            });
 
         return $statement;
     }
