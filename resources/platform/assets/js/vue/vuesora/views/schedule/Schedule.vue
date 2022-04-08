@@ -16,6 +16,7 @@
             :single-event="singleEvent"
             :theme-color="themeColor"
             @modalClose="handleModalClose"
+            :toggleSubscribe="toggleSubscribe"
         ></add-event-modal>
     </div>
 </template>
@@ -49,6 +50,10 @@ export default {
             type: String,
             default: '',
         },
+        toggleSubscribePopup: {
+            type: Function,
+            default: () => {},
+        }
     },
     data() {
         return {
@@ -85,6 +90,9 @@ export default {
                 });
             }, 300);
         },
+        toggleSubscribe(){
+            this.toggleSubscribePopup();
+        }
     },
 };
 </script>
