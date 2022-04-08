@@ -1,33 +1,37 @@
 <template>
     <div
         :id="modalId"
-        class="tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center tw-bg-black tw-z-50"
+        class="modal small"
     >
-        <div class="tw-flex tw-flex-column tw-bg-white tw-shadow corners-10 pa-3 align-h-center tw-overflow-visible">
-            <h1 class="subheading tw-text-center tw-mb-2">
+    <InfoModal
+        :modalId="modalId"
+        @onClose="toggleModal"
+    >
+        <div class="tw-flex tw-flex-col tw-bg-white shadow corners-10 tw-mx-auto tw-p-4 md:tw-p-7 align-h-center tw-overflow-visible tw-max-w-lg">
+            <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl">
                 Subscribe to Calendar
             </h1>
 
-            <p class="tiny tw-text-center tw-mb-2">
+            <p class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4">
                 Here you can subscribe to {{ toCapitalCase(brand) }}'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported.
             </p>
 
             <div
                 v-show="subscriptionCalendarId"
-                class="tw-relative"
+                class="tw-relative tw-text-center"
                 style="width:100%;"
             >
                 <button
-                    class="btn tw-mb-1"
+                    class="btn tw-mb-2 tw-w-full"
                     @click.stop="subscriptionCalendarDropdown = !subscriptionCalendarDropdown"
                 >
-                    <span
-                        class="tw-text-white"
-                        :class="themeBgClass"
+                    <div
+                        class="tw-text-white tw-max-w-full tw-rounded-full tw-py-4 tw-uppercase tw-font-bold tw-font-roboto-condensed"
+                        :class="'tw-' + themeBgClass"
                     >
                         <i class="fas fa-calendar-plus tw-mr-1"></i>
                         Subscribe to calendar
-                    </span>
+                    </div>
                 </button>
 
                 <transition name="grow-fade">
@@ -42,20 +46,20 @@
 
             <p
                 v-show="subscriptionCalendarId"
-                class="x-tiny tw-font-italic tw-text-center tw-mb-2"
+                class="tw-text-[10px] tw-italic tw-text-center tw-mb-2"
             >
                 Any upcoming releases will automatically show up in this calendar as they are scheduled by the {{ toCapitalCase(brand) }} Team.
             </p>
 
             <p
                 v-show="hasSingleEvent"
-                class="tiny tw-text-center tw-mb-2"
+                class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-2"
             >
                 Or you can subscribe to this event only by clicking the button below.
             </p>
             <div
                 v-show="hasSingleEvent"
-                class="tiny pointer tw-relative"
+                class="tw-text-[13px] tw-leading-normal pointer tw-relative"
                 style="width:100%;"
             >
                 <button
@@ -82,22 +86,25 @@
 
             <p
                 v-show="hasSingleEvent"
-                class="x-tiny tw-font-italic tw-text-center tw-mb-2"
+                class="x-tiny tw-italic tw-text-center tw-mb-2"
             >
                 {{ singleEventDescription }}
             </p>
         </div>
+        </InfoModal>
     </div>
 </template>
 <script>
 import UtilsHelpers from '../../assets/js/helper-functions/utils.js';
 import AddEventDropdown from './AddEventDropdown.vue';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import InfoModal from '../../../components/Modal/InfoModal.vue';
 
 export default {
     name: 'AddEventModal',
     components: {
         'add-event-dropdown': AddEventDropdown,
+        InfoModal,
     },
     mixins: [ThemeClasses],
     props: {
@@ -121,6 +128,10 @@ export default {
             type: String,
             default: () => 'Only this event will be added to your calendar.',
         },
+        toggleSubscribe: {
+            type: Function,
+            default: () => {}
+        }
     },
     data() {
         return {
@@ -157,6 +168,9 @@ export default {
     },
     methods: {
         toCapitalCase: string => UtilsHelpers.toCapitalCase(string),
+        toggleModal(){
+            this.toggleSubscribe();
+        }
     },
 };
 </script>
