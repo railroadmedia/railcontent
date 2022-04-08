@@ -23,7 +23,7 @@
 
     <body id="app-body" class="flex flex-col w-full min-h-screen">
         <!-- Modal Container -->
-        <div id="modal-container" class="tw-z-10 tw-hidden tw-h-full tw-w-full"></div>
+        <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
         
         <!-- App Container -->
         <div id="app" class="flex-1">
