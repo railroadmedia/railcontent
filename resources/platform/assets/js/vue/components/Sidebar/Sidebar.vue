@@ -5,10 +5,12 @@ import { sidebarLinks } from '../../../constants/sidebar_links.js'
 import PlaylistsSection from './PlaylistsSection.vue'
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
+import SearchInput from './SearchInput.vue'
 
 export default {
   name: 'Sidebar',
-  components: { SidebarContainer, MusoraIcon, PlaylistsSection },
+  components: { SidebarContainer, MusoraIcon, PlaylistsSection, SearchInput },
+  emits: ['onCollapseSidebar'],
   props: {
     isSidebarCollapsed: Boolean,
     isSidebarHidden: Boolean,
@@ -21,11 +23,15 @@ export default {
       default: []
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
+    const handleCollapse = (val) => {
+      emit('onCollapseSidebar', val)
+    };
     return {
       textColor,
       borderColor,
-      sidebarLinks
+      sidebarLinks,
+      handleCollapse
     }
   },
   computed: {
@@ -43,15 +49,7 @@ export default {
   >
     
     <!-- Sidebar Search -->
-    <div class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded">
-      <musora-icon icon-name="search" class="tw-absolute tw-top-3 tw-left-3 dark:tw-text-[#9EC0DC] tw-z-0"/>
-      <input type="text" 
-            placeholder="search" 
-            class="tw-relative tw-z-10 tw-w-full tw-h-[37px] tw-border-none tw-text-xs tw-rounded tw-transition-color dark:tw-text-[#9EC0DC] tw-bg-transparent focus:tw-outline focus:tw-outline-1 dark:focus:tw-outline-[#9EC0DC] tw-shadow-none focus:tw-ring-transparent" 
-            :class="[isSidebarCollapsed ? 'placeholder:tw-text-transparent tw-pl-6' : 'dark:placeholder:tw-text-[#9EC0DC] tw-pl-8']"
-            @focus="isSidebarCollapsed = false"
-      />  
-    </div>
+    <SearchInput :isSidebarCollapsed="isSidebarCollapsed" @onCollapse="handleCollapse" />
 
     <!-- Sidebar Link Sections -->
     <section v-for="(section, i) in sidebarLinks.sections" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">

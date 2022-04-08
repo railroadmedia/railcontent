@@ -25,6 +25,7 @@ export default {
         const router = useRouter()
         
         const onCollapseSidebar = (val) => {
+            console.log('collapse sidebar called')
             if (typeof val === 'boolean') {
                 isSidebarCollapsed.value = val;
                 isSidebarHidden.value = val;
@@ -140,6 +141,7 @@ export default {
             <Sidebar :brand="brand" 
                      :isSidebarCollapsed="isSidebarCollapsed" 
                      :isSidebarHidden="isSidebarHidden"
+                     @onCollapseSidebar="onCollapseSidebar"
             />
 
             <!-- Content Container -->
