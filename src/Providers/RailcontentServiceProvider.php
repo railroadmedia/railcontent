@@ -20,8 +20,6 @@ use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
-use Railroad\Railcontent\Commands\MigrateContentInstructors;
-use Railroad\Railcontent\Commands\MigrateContentStyles;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
@@ -42,10 +40,9 @@ use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
+use Railroad\Railcontent\Listeners\ContentTotalXPListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
-use Railroad\Railcontent\Listeners\VersionContentEventListener;
-use Railroad\Railcontent\Listeners\ContentTotalXPListener;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
@@ -61,93 +58,88 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->listen = [
             StatementPrepared::class => [
                 function (StatementPrepared $event) {
-
                     // we only want to use assoc fetching for this packages database calls
                     // so we need to use a separate 'mask' connection
 
                     if ($event->connection->getName() ==
-                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
+                        ConfigService::$connectionMaskPrefix.ConfigService::$databaseConnectionName) {
                         $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                     }
-                }
+                },
             ],
             ContentCreated::class => [],
             ContentUpdated::class => [],
-            ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
-            ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
+            ContentDeleted::class => [ContentEventListener::class.'@handleDelete'],
+            ContentSoftDeleted::class => [ContentEventListener::class.'@handleSoftDelete'],
             ContentFieldCreated::class => [
-               // VersionContentEventListener::class . '@handleFieldCreated',
-                ContentTotalXPListener::class . '@handleFieldCreated',
+                // VersionContentEventListener::class . '@handleFieldCreated',
+                ContentTotalXPListener::class.'@handleFieldCreated',
             ],
             ContentFieldUpdated::class => [
-               // VersionContentEventListener::class . '@handleFieldUpdated',
-                ContentTotalXPListener::class . '@handleFieldUpdated',
+                // VersionContentEventListener::class . '@handleFieldUpdated',
+                ContentTotalXPListener::class.'@handleFieldUpdated',
             ],
             ContentFieldDeleted::class => [
-               // VersionContentEventListener::class . '@handleFieldDeleted',
-                ContentTotalXPListener::class . '@handleFieldDeleted',
+                // VersionContentEventListener::class . '@handleFieldDeleted',
+                ContentTotalXPListener::class.'@handleFieldDeleted',
             ],
             ContentDatumCreated::class => [],
             ContentDatumUpdated::class => [],
             ContentDatumDeleted::class => [],
-            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
-            CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
-            HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
+            CommentCreated::class => [AssignCommentEventListener::class.'@handle'],
+            CommentDeleted::class => [UnassignCommentEventListener::class.'@handle'],
+            UserContentProgressSaved::class => [UserContentProgressEventListener::class.'@handle'],
+            HierarchyUpdated::class => [ContentTotalXPListener::class.'@handleHierarchyUpdated'],
         ];
 
         parent::boot();
 
         $this->setupConfig();
 
-        $this->publishes(
-            [
-                __DIR__ . '/../../config/railcontent.php' => config_path('railcontent.php'),
-            ]
-        );
+        $this->publishes([
+                             __DIR__.'/../../config/railcontent.php' => config_path('railcontent.php'),
+                         ]);
 
         $this->publishes([
-            __DIR__ . '/../../database/seeds/CoachV2Seeder.php' => database_path('seeds/CoachV2Seeder.php'),
-        ]);
+                             __DIR__.'/../../database/seeds/CoachV2Seeder.php' => database_path(
+                                 'seeds/CoachV2Seeder.php'
+                             ),
+                         ]);
 
         if (ConfigService::$dataMode == 'host') {
-            $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+            $this->loadMigrationsFrom(__DIR__.'/../../migrations');
         }
 
         //load package routes file
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../../routes/routes.php');
+        $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
 
-        $this->commands(
-            [
-                AddDefaultShowNewField::class,
-                ComputePastStats::class,
-                ComputeWeeklyStats::class,
-                CreateSearchIndexes::class,
-                CreateVimeoVideoContentRecords::class,
-                RepairMissingDurations::class,
-                CreateYoutubeVideoContentRecords::class,
-                CreateYoutubeVideoContentRecordsViaClientAPI::class,
-                ExpireCache::class,
-                CalculateTotalXP::class,
-                CleanMetadata::class,
-                CleanContentTopicsAndStyles::class,
-                CalculateContentPopularity::class,
-                MigrateContentToNewStructure::class,
-                MigrateContentColumns::class,
-                MigrateContentFields::class,
-                MigrateContentInstructors::class,
-                MigrateContentStyles::class,
-                MigrateContentVideos::class,
-                MigrateContentToElasticsearch::class
-            ]
-        );
+        $this->commands([
+                            AddDefaultShowNewField::class,
+                            ComputePastStats::class,
+                            ComputeWeeklyStats::class,
+                            CreateSearchIndexes::class,
+                            CreateVimeoVideoContentRecords::class,
+                            RepairMissingDurations::class,
+                            CreateYoutubeVideoContentRecords::class,
+                            CreateYoutubeVideoContentRecordsViaClientAPI::class,
+                            ExpireCache::class,
+                            CalculateTotalXP::class,
+                            CleanMetadata::class,
+                            CleanContentTopicsAndStyles::class,
+                            CalculateContentPopularity::class,
+                            MigrateContentToNewStructure::class,
+                            MigrateContentColumns::class,
+                            MigrateContentFields::class,
+                            MigrateContentVideos::class,
+                            MigrateContentToElasticsearch::class,
+                        ]);
 
         Validator::extend(
             'exists_multiple_columns',
-            MultipleColumnExistsValidator::class . '@validate',
-            'The value entered does not exist in the database, or does not match the requirements to be ' .
-            'set as the :attribute for this content-type with the current or requested content-status. Please ' .
+            MultipleColumnExistsValidator::class.'@validate',
+            'The value entered does not exist in the database, or does not match the requirements to be '.
+            'set as the :attribute for this content-type with the current or requested content-status. Please '.
             'double-check the input value and try again.'
         );
     }
@@ -165,24 +157,24 @@ class RailcontentServiceProvider extends ServiceProvider
         // tables
         ConfigService::$tablePrefix = config('railcontent.table_prefix');
 
-        ConfigService::$tableContent = ConfigService::$tablePrefix . 'content';
-        ConfigService::$tableContentHierarchy = ConfigService::$tablePrefix . 'content_hierarchy';
-        ConfigService::$tableContentVersions = ConfigService::$tablePrefix . 'versions';
-        ConfigService::$tableContentFields = ConfigService::$tablePrefix . 'content_fields';
-        ConfigService::$tableContentData = ConfigService::$tablePrefix . 'content_data';
-        ConfigService::$tablePermissions = ConfigService::$tablePrefix . 'permissions';
-        ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
-        ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
-        ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
-        ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
-        ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
-        ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
-        ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
-        ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
-        ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
-        ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
-        ConfigService::$tableContentStatistics = ConfigService::$tablePrefix . 'content_statistics';
-        ConfigService::$tableContentFollows = ConfigService::$tablePrefix . 'content_follows';
+        ConfigService::$tableContent = ConfigService::$tablePrefix.'content';
+        ConfigService::$tableContentHierarchy = ConfigService::$tablePrefix.'content_hierarchy';
+        ConfigService::$tableContentVersions = ConfigService::$tablePrefix.'versions';
+        ConfigService::$tableContentFields = ConfigService::$tablePrefix.'content_fields';
+        ConfigService::$tableContentData = ConfigService::$tablePrefix.'content_data';
+        ConfigService::$tablePermissions = ConfigService::$tablePrefix.'permissions';
+        ConfigService::$tableContentPermissions = ConfigService::$tablePrefix.'content_permissions';
+        ConfigService::$tableUserPermissions = ConfigService::$tablePrefix.'user_permissions';
+        ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix.'user_content_progress';
+        ConfigService::$tablePlaylists = ConfigService::$tablePrefix.'playlists';
+        ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix.'playlist_contents';
+        ConfigService::$tableComments = ConfigService::$tablePrefix.'comments';
+        ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix.'comment_assignment';
+        ConfigService::$tableCommentLikes = ConfigService::$tablePrefix.'comment_likes';
+        ConfigService::$tableContentLikes = ConfigService::$tablePrefix.'content_likes';
+        ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix.'search_indexes';
+        ConfigService::$tableContentStatistics = ConfigService::$tablePrefix.'content_statistics';
+        ConfigService::$tableContentFollows = ConfigService::$tablePrefix.'content_follows';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
@@ -230,16 +222,16 @@ class RailcontentServiceProvider extends ServiceProvider
 
         ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
         ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
-            'railcontent.content_hierarchy_decorator_allowed_types' . ''
+            'railcontent.content_hierarchy_decorator_allowed_types'.''
         );
 
         // aggregates
         ConfigService::$tableCommentsAggregates = [
             ConfigService::$tableCommentLikes => [
-                'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
+                'selectColumn' => 'COUNT(`'.ConfigService::$tableCommentLikes.'`.`id`) as `like_count`',
                 'foreignField' => 'comment_id',
                 'localField' => 'id',
-                'groupBy' => ConfigService::$tableComments . '.id',
+                'groupBy' => ConfigService::$tableComments.'.id',
             ],
         ];
     }
@@ -251,6 +243,5 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }
