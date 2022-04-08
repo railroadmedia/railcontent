@@ -21594,7 +21594,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'InfoModal',
-  props: ['modalId', 'title'],
+  props: ['modalId', 'title', 'showBG'],
   components: {
     XIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -23757,13 +23757,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_js_helper_functions_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/js/helper-functions/utils.js */ "./resources/platform/assets/js/vue/vuesora/assets/js/helper-functions/utils.js");
 /* harmony import */ var _AddEventDropdown_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddEventDropdown.vue */ "./resources/platform/assets/js/vue/vuesora/components/AddEvent/AddEventDropdown.vue");
 /* harmony import */ var _mixins_ThemeClasses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/ThemeClasses */ "./resources/platform/assets/js/vue/vuesora/mixins/ThemeClasses.js");
+/* harmony import */ var _components_Modal_InfoModal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Modal/InfoModal.vue */ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AddEventModal',
   components: {
-    'add-event-dropdown': _AddEventDropdown_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'add-event-dropdown': _AddEventDropdown_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    InfoModal: _components_Modal_InfoModal_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   mixins: [_mixins_ThemeClasses__WEBPACK_IMPORTED_MODULE_2__["default"]],
   props: {
@@ -23790,6 +23793,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return 'Only this event will be added to your calendar.';
       }
+    },
+    toggleSubscribe: {
+      type: Function,
+      "default": function _default() {}
     }
   },
   data: function data() {
@@ -23829,6 +23836,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     toCapitalCase: function toCapitalCase(string) {
       return _assets_js_helper_functions_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toCapitalCase(string);
+    },
+    toggleModal: function toggleModal() {
+      this.toggleSubscribe();
     }
   }
 });
@@ -23934,6 +23944,7 @@ __webpack_require__.r(__webpack_exports__);
       this.startTime = luxon__WEBPACK_IMPORTED_MODULE_4__.DateTime.fromSQL(this.content.live_event_start_time, {
         zone: "UTC"
       });
+      console.log(this.startTime);
       this.startDate = new Date(this.startTime);
       this.startWeekday = this.startDate.toLocaleString("en-US", {
         weekday: "long"
@@ -24215,6 +24226,10 @@ __webpack_require__.r(__webpack_exports__);
     subscriptionCalendarId: {
       type: String,
       "default": ''
+    },
+    toggleSubscribePopup: {
+      type: Function,
+      "default": function _default() {}
     }
   },
   data: function data() {
@@ -24250,6 +24265,9 @@ __webpack_require__.r(__webpack_exports__);
           date: null
         });
       }, 300);
+    },
+    toggleSubscribe: function toggleSubscribe() {
+      this.toggleSubscribePopup();
     }
   }
 });
@@ -24557,7 +24575,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0,
     modalId: "upload-modal",
     onOnClose: $setup.openUploadForm,
-    title: $setup.title[$setup.uploadStep]
+    title: $setup.title[$setup.uploadStep],
+    showBG: "true"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.uploadStep === 'dropzone' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ImageDropzone"], {
@@ -25487,9 +25506,6 @@ var _hoisted_2 = {
   "class": "tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
 };
 var _hoisted_3 = {
-  "class": "tw-w-[750px] tw-bg-[#081825] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col"
-};
-var _hoisted_4 = {
   "class": "tw-flex tw-flex-row tw-justify-between tw-text-white tw-mb-[24px] tw-px-[40px]"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -25505,7 +25521,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
+  , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-w-[750px] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col", $props.showBG && 'tw-bg-[#081825]'])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
@@ -25514,7 +25532,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-self-end"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_XIcon, {
     "class": "tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]"
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])]);
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 2
+  /* CLASS */
+  )])]);
 }
 
 /***/ }),
@@ -28727,20 +28747,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = ["id"];
 var _hoisted_2 = {
-  "class": "tw-flex tw-flex-column tw-bg-white tw-shadow corners-10 pa-3 align-h-center tw-overflow-visible"
+  "class": "tw-flex tw-flex-col tw-bg-white shadow corners-10 tw-mx-auto tw-p-4 md:tw-p-7 align-h-center tw-overflow-visible tw-max-w-lg"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "subheading tw-text-center tw-mb-2"
+  "class": "tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl"
 }, " Subscribe to Calendar ", -1
 /* HOISTED */
 );
 
 var _hoisted_4 = {
-  "class": "tiny tw-text-center tw-mb-2"
+  "class": "tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4"
 };
 var _hoisted_5 = {
-  "class": "tw-relative",
+  "class": "tw-relative tw-text-center",
   style: {
     "width": "100%"
   }
@@ -28756,10 +28776,10 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_8 = [_hoisted_6, _hoisted_7];
 var _hoisted_9 = {
-  "class": "tiny tw-text-center tw-mb-2"
+  "class": "tw-text-[13px] tw-leading-normal tw-text-center tw-mb-2"
 };
 var _hoisted_10 = {
-  "class": "tiny pointer tw-relative",
+  "class": "tw-text-[13px] tw-leading-normal pointer tw-relative",
   style: {
     "width": "100%"
   }
@@ -28777,73 +28797,87 @@ var _hoisted_13 = [_hoisted_11, _hoisted_12];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_add_event_dropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("add-event-dropdown");
 
+  var _component_InfoModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoModal");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     id: $props.modalId,
-    "class": "tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center tw-bg-black tw-z-50"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, " Here you can subscribe to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + "'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported. ", 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn tw-mb-1",
-    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $data.subscriptionCalendarDropdown = !$data.subscriptionCalendarDropdown;
-    }, ["stop"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white", _ctx.themeBgClass])
-  }, _hoisted_8, 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    name: "grow-fade"
+    "class": "modal small"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InfoModal, {
+    modalId: $props.modalId,
+    onOnClose: $options.toggleModal
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
-        key: "subscriptionCalendar",
-        "subscription-calendar-id": $props.subscriptionCalendarId,
-        "is-subscription": true
-      }, null, 8
-      /* PROPS */
-      , ["subscription-calendar-id"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.subscriptionCalendarDropdown]])];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, " Here you can subscribe to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + "'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported. ", 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn tw-mb-2 tw-w-full",
+        onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return $data.subscriptionCalendarDropdown = !$data.subscriptionCalendarDropdown;
+        }, ["stop"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-max-w-full tw-rounded-full tw-py-4 tw-uppercase tw-font-bold tw-font-roboto-condensed", 'tw-' + _ctx.themeBgClass])
+      }, _hoisted_8, 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+        name: "grow-fade"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
+            key: "subscriptionCalendar",
+            "subscription-calendar-id": $props.subscriptionCalendarId,
+            "is-subscription": true
+          }, null, 8
+          /* PROPS */
+          , ["subscription-calendar-id"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.subscriptionCalendarDropdown]])];
+        }),
+        _: 1
+        /* STABLE */
+
+      })], 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+        "class": "tw-text-[10px] tw-italic tw-text-center tw-mb-2"
+      }, " Any upcoming releases will automatically show up in this calendar as they are scheduled by the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + " Team. ", 513
+      /* TEXT, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, " Or you can subscribe to this event only by clicking the button below. ", 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        "class": "btn tw-mb-1",
+        onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return $data.singleEventDropdown = !$data.singleEventDropdown;
+        }, ["stop"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inverted", [_ctx.themeTextClass, _ctx.themeBgClass]])
+      }, _hoisted_13, 2
+      /* CLASS */
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+        name: "grow-fade"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
+            key: "singleEvent",
+            "single-event": $props.singleEvent
+          }, null, 8
+          /* PROPS */
+          , ["single-event"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.singleEventDropdown]])];
+        }),
+        _: 1
+        /* STABLE */
+
+      })], 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+        "class": "x-tiny tw-italic tw-text-center tw-mb-2"
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.singleEventDescription), 513
+      /* TEXT, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]])])];
     }),
     _: 1
     /* STABLE */
 
-  })], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "x-tiny tw-font-italic tw-text-center tw-mb-2"
-  }, " Any upcoming releases will automatically show up in this calendar as they are scheduled by the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + " Team. ", 513
-  /* TEXT, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, " Or you can subscribe to this event only by clicking the button below. ", 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn tw-mb-1",
-    onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $data.singleEventDropdown = !$data.singleEventDropdown;
-    }, ["stop"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inverted", [_ctx.themeTextClass, _ctx.themeBgClass]])
-  }, _hoisted_13, 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    name: "grow-fade"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
-        key: "singleEvent",
-        "single-event": $props.singleEvent
-      }, null, 8
-      /* PROPS */
-      , ["single-event"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.singleEventDropdown]])];
-    }),
-    _: 1
-    /* STABLE */
-
-  })], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "x-tiny tw-font-italic tw-text-center tw-mb-2"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.singleEventDescription), 513
-  /* TEXT, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]])])], 8
+  }, 8
+  /* PROPS */
+  , ["modalId", "onOnClose"])], 8
   /* PROPS */
   , _hoisted_1);
 }
@@ -28864,10 +28898,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-[] dark:tw-bg-[] dark:tw-border-[]"
+  key: 0,
+  "class": "container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
 };
 var _hoisted_2 = {
-  key: 0,
   "class": "tw-flex tw-flex-row tw-items-center"
 };
 var _hoisted_3 = {
@@ -28965,14 +28999,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_content_schedule = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("content-schedule");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NotificationToasts, {
+  return $data.content && $options.$_hours <= 48 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NotificationToasts, {
     icon: $data.toast.icon,
     text: $data.toast.text,
     isError: $data.toast.showErrorMessage,
     brandName: $props.brand
   }, null, 8
   /* PROPS */
-  , ["icon", "text", "isError", "brandName"]), $data.content ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Live Event Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  , ["icon", "text", "isError", "brandName"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Live Event Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     "class": "tw-rounded-lg tw-w-full",
     src: 'https://cdn.musora.com/image/fetch/c_thumb,w_320,h_180,z_0.75,q_auto:best/' + ($data.content.thumbnail_url ? $data.content.thumbnail_url : $data.instructors[0].head_shot_picture_url)
   }, null, 8
@@ -29060,12 +29094,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), $data.showSubscribePopup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_content_schedule, {
     key: 0,
     "subscription-calendar-id": $props.subscriptionCalendarId,
-    "theme-color": $props.brand
+    "theme-color": $props.brand,
+    toggleSubscribePopup: $options.toggleSubscribePopup
   }, null, 8
   /* PROPS */
-  , ["subscription-calendar-id", "theme-color"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
+  , ["subscription-calendar-id", "theme-color", "toggleSubscribePopup"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
   /* CLASS */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -29087,10 +29122,10 @@ var _hoisted_1 = {
   key: 0,
   style: {
     "position": "fixed",
-    "left": "0",
-    "width": "100vw",
-    "z-index": "2000",
-    "bottom": "40px"
+    "width": "inherit",
+    "margin-left": "-180px",
+    "bottom": "0",
+    "z-index": "2000"
   }
 };
 var _hoisted_2 = {
@@ -29168,10 +29203,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "subscription-calendar-id": $props.subscriptionCalendarId,
     "single-event": $data.singleEvent,
     "theme-color": $props.themeColor,
-    onModalClose: $options.handleModalClose
+    onModalClose: $options.handleModalClose,
+    toggleSubscribe: $options.toggleSubscribe
   }, null, 8
   /* PROPS */
-  , ["subscription-calendar-id", "single-event", "theme-color", "onModalClose"])]);
+  , ["subscription-calendar-id", "single-event", "theme-color", "onModalClose", "toggleSubscribe"])]);
 }
 
 /***/ }),

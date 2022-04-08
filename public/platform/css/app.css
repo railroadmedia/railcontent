@@ -1279,6 +1279,12 @@ a:visited {
 .tw-z-\[99\] {
   z-index: 99;
 }
+.tw-z-\[5\] {
+  z-index: 5;
+}
+.tw-z-\[150\] {
+  z-index: 150;
+}
 .tw-order-first {
   order: -9999;
 }
@@ -1356,6 +1362,10 @@ a:visited {
 .tw-mx-6 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
+}
+.tw-mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .tw-mt-14 {
   margin-top: 3.5rem;
@@ -1951,6 +1961,9 @@ a:visited {
 .tw-max-w-6xl {
   max-width: 72rem;
 }
+.tw-max-w-full {
+  max-width: 100%;
+}
 .tw-max-w-md {
   max-width: 28rem;
 }
@@ -2332,6 +2345,9 @@ a:visited {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+.tw-border-black\/\[0\.15\] {
+  border-color: rgb(0 0 0 / 0.15);
+}
 .tw-border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
@@ -2567,6 +2583,9 @@ a:visited {
 }
 .tw-p-4 {
   padding: 1rem;
+}
+.tw-p-7 {
+  padding: 1.75rem;
 }
 .tw-p-1\.5 {
   padding: 0.375rem;
@@ -2971,6 +2990,9 @@ a:visited {
 .tw-font-normal {
   font-weight: 400;
 }
+.tw-font-extrabold {
+  font-weight: 800;
+}
 .tw-font-medium {
   font-weight: 500;
 }
@@ -3184,11 +3206,6 @@ a:visited {
 .tw-shadow-\[0_0_5px_rgb\(0\,0\,0\,\.13\)\] {
   --tw-shadow: 0 0 5px rgb(0,0,0,.13);
   --tw-shadow-colored: 0 0 5px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.tw-shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .tw-shadow-lg {
@@ -3426,6 +3443,9 @@ a:visited {
   --tw-border-opacity: 1;
   border-color: rgb(68 95 116 / var(--tw-border-opacity));
 }
+.tw-dark .dark\:tw-border-white\/\[0\.15\] {
+  border-color: rgb(255 255 255 / 0.15);
+}
 .tw-dark .dark\:tw-border-b-\[\#102230\] {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(16 34 48 / var(--tw-border-opacity));
@@ -3443,6 +3463,9 @@ a:visited {
 }
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/50 {
   background-color: rgb(68 95 116 / 0.5);
+}
+.tw-dark .dark\:tw-bg-\[\#002039\]\/\[0\.7\] {
+  background-color: rgb(0 32 57 / 0.7);
 }
 .tw-dark .dark\:tw-text-white {
   --tw-text-opacity: 1;
@@ -3944,6 +3967,9 @@ a:visited {
   }
   .md\:tw-bg-transparent {
     background-color: transparent;
+  }
+  .md\:tw-p-7 {
+    padding: 1.75rem;
   }
   .md\:tw-py-12 {
     padding-top: 3rem;
