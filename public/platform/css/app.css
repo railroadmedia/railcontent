@@ -620,7 +620,7 @@ a:visited {
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1rem;
+  font-size: 1.125rem;
   justify-content: center;
   letter-spacing: 0.1em;
   line-height: 1;
@@ -1507,9 +1507,6 @@ a:visited {
 .tw-mt-3 {
   margin-top: 0.75rem;
 }
-.tw-mt-2 {
-  margin-top: 0.5rem;
-}
 .tw-mr-6 {
   margin-right: 1.5rem;
 }
@@ -1533,6 +1530,9 @@ a:visited {
 }
 .tw-ml-0 {
   margin-left: 0px;
+}
+.tw-mt-2 {
+  margin-top: 0.5rem;
 }
 .tw-mr-10 {
   margin-right: 2.5rem;
@@ -2144,6 +2144,9 @@ a:visited {
 .tw-overflow-hidden {
   overflow: hidden;
 }
+.tw-overflow-visible {
+  overflow: visible;
+}
 .tw-overflow-y-auto {
   overflow-y: auto;
 }
@@ -2448,6 +2451,10 @@ a:visited {
 }
 .tw-bg-\[\#002039\]\/90 {
   background-color: rgb(0 32 57 / 0.9);
+}
+.tw-bg-\[\#F3F4F6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 .tw-bg-gray-400 {
   --tw-bg-opacity: 1;
@@ -3179,6 +3186,11 @@ a:visited {
   --tw-shadow-colored: 0 0 5px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.tw-shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .tw-shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -3585,6 +3597,9 @@ a:visited {
   .sm\:tw-flex-nowrap {
     flex-wrap: nowrap;
   }
+  .sm\:tw-items-center {
+    align-items: center;
+  }
   .sm\:tw-justify-start {
     justify-content: flex-start;
   }
@@ -3983,6 +3998,10 @@ a:visited {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
+  .md\:tw-text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
   .md\:tw-text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -4119,6 +4138,10 @@ a:visited {
   .lg\:tw-px-\[12px\] {
     padding-left: 12px;
     padding-right: 12px;
+  }
+  .lg\:tw-px-7 {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
   .lg\:tw-px-8 {
     padding-left: 2rem;
