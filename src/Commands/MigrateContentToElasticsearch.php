@@ -62,12 +62,13 @@ class MigrateContentToElasticsearch extends Command
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
         $client = $this->elasticService->getClient();
+        $indexName = config('railcontent.elastic_index_name','content');
 
         //Delete index if exists
         if ($client->indices()
-            ->exists(['index' => 'content'])) {
+            ->exists(['index' => $indexName])) {
             $client->indices()
-                ->delete(['index' => 'content']);
+                ->delete(['index' => $indexName]);
         }
 
         // Create the index
@@ -227,6 +228,11 @@ class MigrateContentToElasticsearch extends Command
                         ) : [],
                         'instructor' => $instructors->pluck('instructor_id')
                             ->toArray(),
+                        'instructors_name' => array_map(
+                            'strtolower',
+                            $instructors->pluck('name')
+                                ->toArray()
+                        ),
                         'all_progress_count' => $allProgressCount,
                         'last_week_progress_count' => $lastWeekProgressCount,
                         'description' => $description->value ?? '',
