@@ -24,7 +24,7 @@
 
 @section('content')
     <page-container>
-
+        
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
 
@@ -32,8 +32,7 @@
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
-                    {{-- On Boarding Message --}}
-
+                    {{-- On Boarding --}}
 
                     {{-- Carousel --}}
                     <header-carousel 
