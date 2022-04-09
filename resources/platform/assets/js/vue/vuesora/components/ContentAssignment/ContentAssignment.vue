@@ -56,7 +56,6 @@
             <div v-if="accordionActive && thisAssignment != null" v-show="!accordionLoading" class="flex flex-column">
                 <div v-show="$_description.length > 0" class="flex flex-row mb-3 pa-3">
                     <div class="body" v-html="$_description">
-                        {{ $_description }}
                     </div>
                 </div>
                 <div v-show="$_totalPages > 0" class="flex flex-row pa-3">
