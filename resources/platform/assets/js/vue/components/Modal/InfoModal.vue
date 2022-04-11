@@ -57,7 +57,7 @@ onUnmounted(() => {
           tw-flex
           tw-flex-col
         "
-        :class="showBG && 'tw-bg-[#081825]'"
+        :class="bgColor && `tw-bg-[${bgColor}]`"
       >
         <div
           class="
