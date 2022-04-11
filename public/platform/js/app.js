@@ -21559,10 +21559,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&lang=js":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&lang=js ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&setup=true&lang=js":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&setup=true&lang=js ***!
+  \****************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21570,41 +21570,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/XIcon.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/XIcon.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'InfoModal',
-  props: ['modalId', 'title'],
-  components: {
-    XIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  emits: ['onClose'],
-  setup: function setup(props, context) {
+  props: ["modalId", "title", "showBG"],
+  emits: ["onClose"],
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose,
+        emit = _ref.emit;
+    expose();
+    var props = __props;
+    var isContainerCreated = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+
     var onClose = function onClose() {
-      context.emit('onClose', true);
+      emit("onClose", true);
     };
 
     var onOverlayClick = function onOverlayClick(event) {
       console.log(event.target.id);
 
       if (event.target.id === "".concat(props.modalId, "-overlay")) {
-        console.log('onOverlayClick');
-        context.emit('onClose', true);
+        console.log("onOverlayClick");
+        emit("onClose", true);
       }
     };
 
-    return {
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      var modalContainer = document.getElementById("modal-container");
+      modalContainer.classList.remove("tw-hidden");
+      modalContainer.classList.add("tw-fixed");
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(function () {
+      var modalContainer = document.getElementById("modal-container");
+      modalContainer.classList.add("tw-hidden");
+      modalContainer.classList.remove("tw-fixed");
+    });
+    var __returned__ = {
+      isContainerCreated: isContainerCreated,
+      props: props,
+      emit: emit,
       onClose: onClose,
-      onOverlayClick: onOverlayClick
+      onOverlayClick: onOverlayClick,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      onUnmounted: vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      XIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
-  },
-  beforeMount: function beforeMount() {
-    var modalContainer = document.createElement("div");
-    modalContainer.setAttribute('id', this.modalId);
-    document.body.appendChild(modalContainer);
-  },
-  unmounted: function unmounted() {
-    document.getElementById(this.modalId).remove();
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
   }
 });
 
@@ -23805,24 +23823,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_js_helper_functions_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/js/helper-functions/utils.js */ "./resources/platform/assets/js/vue/vuesora/assets/js/helper-functions/utils.js");
 /* harmony import */ var _AddEventDropdown_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddEventDropdown.vue */ "./resources/platform/assets/js/vue/vuesora/components/AddEvent/AddEventDropdown.vue");
 /* harmony import */ var _mixins_ThemeClasses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/ThemeClasses */ "./resources/platform/assets/js/vue/vuesora/mixins/ThemeClasses.js");
+/* harmony import */ var _components_Modal_InfoModal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Modal/InfoModal.vue */ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue");
+/* harmony import */ var _components_Modal_ModalRenderer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/Modal/ModalRenderer.vue */ "./resources/platform/assets/js/vue/components/Modal/ModalRenderer.vue");
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'AddEventModal',
+  name: "AddEventModal",
   components: {
-    'add-event-dropdown': _AddEventDropdown_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    "add-event-dropdown": _AddEventDropdown_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    InfoModal: _components_Modal_InfoModal_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ModalRenderer: _components_Modal_ModalRenderer_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   mixins: [_mixins_ThemeClasses__WEBPACK_IMPORTED_MODULE_2__["default"]],
   props: {
     modalId: {
       type: String,
-      "default": 'addToCalendarModal'
+      "default": "addToCalendarModal"
     },
     brand: {
       type: String,
       "default": function _default() {
-        return 'Musora';
+        return "Musora";
       }
     },
     singleEvent: {
@@ -23831,13 +23855,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     subscriptionCalendarId: {
       type: String,
-      "default": ''
+      "default": ""
     },
     singleEventDescription: {
       type: String,
       "default": function _default() {
-        return 'Only this event will be added to your calendar.';
+        return "Only this event will be added to your calendar.";
       }
+    },
+    toggleSubscribe: {
+      type: Function,
+      "default": function _default() {}
     }
   },
   data: function data() {
@@ -23866,17 +23894,20 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    document.body.addEventListener('click', function () {
+    document.body.addEventListener("click", function () {
       _this.singleEventDropdown = false;
       _this.subscriptionCalendarDropdown = false;
     });
-    window.addEventListener('modalClose', function () {
-      _this.$emit('modalClose');
+    window.addEventListener("modalClose", function () {
+      _this.$emit("modalClose");
     });
   },
   methods: {
     toCapitalCase: function toCapitalCase(string) {
       return _assets_js_helper_functions_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toCapitalCase(string);
+    },
+    toggleModal: function toggleModal() {
+      this.toggleSubscribe();
     }
   }
 });
@@ -23965,6 +23996,7 @@ __webpack_require__.r(__webpack_exports__);
       startWeekday: "",
       startMonth: "",
       formattedTime: "",
+      showSubscribePopup: false,
       toast: {
         icon: "",
         text: "",
@@ -23981,6 +24013,7 @@ __webpack_require__.r(__webpack_exports__);
       this.startTime = luxon__WEBPACK_IMPORTED_MODULE_4__.DateTime.fromSQL(this.content.live_event_start_time, {
         zone: "UTC"
       });
+      console.log(this.startTime);
       this.startDate = new Date(this.startTime);
       this.startWeekday = this.startDate.toLocaleString("en-US", {
         weekday: "long"
@@ -24099,6 +24132,9 @@ __webpack_require__.r(__webpack_exports__);
     setLiveState: function setLiveState() {
       this.eventIsLive = true;
       document.body.classList.add("live");
+    },
+    toggleSubscribePopup: function toggleSubscribePopup() {
+      this.showSubscribePopup = !this.showSubscribePopup;
     },
     showNotificationToast: function showNotificationToast(_ref) {
       var icon = _ref.icon,
@@ -27232,6 +27268,10 @@ __webpack_require__.r(__webpack_exports__);
     subscriptionCalendarId: {
       type: String,
       "default": ''
+    },
+    toggleSubscribePopup: {
+      type: Function,
+      "default": function _default() {}
     }
   },
   data: function data() {
@@ -27267,6 +27307,9 @@ __webpack_require__.r(__webpack_exports__);
           date: null
         });
       }, 300);
+    },
+    toggleSubscribe: function toggleSubscribe() {
+      this.toggleSubscribePopup();
     }
   }
 });
@@ -27574,7 +27617,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0,
     modalId: "upload-modal",
     onOnClose: $setup.openUploadForm,
-    title: $setup.title[$setup.uploadStep]
+    title: $setup.title[$setup.uploadStep],
+    bgColor: "#081825"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.uploadStep === 'dropzone' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ImageDropzone"], {
@@ -28589,34 +28633,29 @@ var _hoisted_2 = {
   "class": "tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
 };
 var _hoisted_3 = {
-  "class": "tw-w-[750px] tw-bg-[#081825] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col"
-};
-var _hoisted_4 = {
   "class": "tw-flex tw-flex-row tw-justify-between tw-text-white tw-mb-[24px] tw-px-[40px]"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_XIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("XIcon");
-
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Teleport, {
     to: "#modal-container"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: "".concat($props.modalId, "-overlay"),
     "class": "tw-absolute tw-h-full tw-w-full tw-bg-[#000000] tw-bg-opacity-80 tw-z-20",
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.onOverlayClick && $setup.onOverlayClick.apply($setup, arguments);
-    })
+    onClick: $setup.onOverlayClick
   }, null, 8
   /* PROPS */
-  , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
+  , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-w-[750px] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col", _ctx.bgColor && "tw-bg-[".concat(_ctx.bgColor, "]")])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.onClose && $setup.onClose.apply($setup, arguments);
-    }),
+    onClick: $setup.onClose,
     "class": "tw-self-end"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_XIcon, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["XIcon"], {
     "class": "tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]"
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])])]);
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 2
+  /* CLASS */
+  )])]);
 }
 
 /***/ }),
@@ -30984,8 +31023,7 @@ var _hoisted_1 = {
   "class": "tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors dark:tw-bg-[#000C17] tw-overflow-hidden"
 };
 var _hoisted_2 = {
-  "class": "tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden",
-  "data-simplebar": ""
+  "class": "tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden"
 };
 var _hoisted_3 = {
   "class": "tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7"
@@ -31852,127 +31890,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["id"];
-var _hoisted_2 = {
-  "class": "flex flex-column bg-white shadow corners-10 pa-3 align-h-center overflow-visible"
+var _hoisted_1 = {
+  "class": "tw-flex tw-flex-col tw-bg-white shadow corners-10 tw-mx-auto tw-p-4 md:tw-p-7 align-h-center tw-overflow-visible tw-max-w-lg"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "subheading text-center mb-2"
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl"
 }, " Subscribe to Calendar ", -1
 /* HOISTED */
 );
 
+var _hoisted_3 = {
+  "class": "tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4"
+};
 var _hoisted_4 = {
-  "class": "tiny text-center mb-2"
-};
-var _hoisted_5 = {
-  "class": "relative",
+  "class": "tw-relative tw-text-center",
   style: {
     "width": "100%"
   }
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-calendar-plus mr-1"
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-calendar-plus tw-mr-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe to calendar ");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe to calendar ");
 
-var _hoisted_8 = [_hoisted_6, _hoisted_7];
+var _hoisted_7 = [_hoisted_5, _hoisted_6];
+var _hoisted_8 = {
+  "class": "tw-text-[13px] tw-leading-normal tw-text-center tw-mb-2"
+};
 var _hoisted_9 = {
-  "class": "tiny text-center mb-2"
-};
-var _hoisted_10 = {
-  "class": "tiny pointer relative",
+  "class": "tw-text-[13px] tw-leading-normal pointer tw-relative",
   style: {
     "width": "100%"
   }
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-calendar-plus mr-1"
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-calendar-plus tw-mr-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe to this event only ");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Subscribe to this event only ");
 
-var _hoisted_13 = [_hoisted_11, _hoisted_12];
+var _hoisted_12 = [_hoisted_10, _hoisted_11];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_add_event_dropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("add-event-dropdown");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    id: $props.modalId,
-    "class": "modal small"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, " Here you can subscribe to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + "'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported. ", 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn mb-1",
-    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $data.subscriptionCalendarDropdown = !$data.subscriptionCalendarDropdown;
-    }, ["stop"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-white", _ctx.themeBgClass])
-  }, _hoisted_8, 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    name: "grow-fade"
-  }, {
+  var _component_InfoModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("InfoModal");
+
+  var _component_ModalRenderer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalRenderer");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ModalRenderer, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
-        key: "subscriptionCalendar",
-        "subscription-calendar-id": $props.subscriptionCalendarId,
-        "is-subscription": true
-      }, null, 8
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_InfoModal, {
+        modalId: $props.modalId,
+        onOnClose: $options.toggleModal
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, " Here you can subscribe to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + "'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported. ", 1
+          /* TEXT */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+            "class": "btn tw-mb-2 tw-w-full",
+            onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+              return $data.subscriptionCalendarDropdown = !$data.subscriptionCalendarDropdown;
+            }, ["stop"]))
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-max-w-full tw-rounded-full tw-py-4 tw-uppercase tw-font-bold tw-font-roboto-condensed", 'tw-' + _ctx.themeBgClass])
+          }, _hoisted_7, 2
+          /* CLASS */
+          )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+            name: "grow-fade"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
+                key: "subscriptionCalendar",
+                "subscription-calendar-id": $props.subscriptionCalendarId,
+                "is-subscription": true
+              }, null, 8
+              /* PROPS */
+              , ["subscription-calendar-id"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.subscriptionCalendarDropdown]])];
+            }),
+            _: 1
+            /* STABLE */
+
+          })], 512
+          /* NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+            "class": "tw-text-[10px] tw-italic tw-text-center tw-mb-2"
+          }, " Any upcoming releases will automatically show up in this calendar as they are scheduled by the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + " Team. ", 513
+          /* TEXT, NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, " Or you can subscribe to this event only by clicking the button below. ", 512
+          /* NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+            "class": "btn tw-mb-1",
+            onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+              return $data.singleEventDropdown = !$data.singleEventDropdown;
+            }, ["stop"]))
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inverted", [_ctx.themeTextClass, _ctx.themeBgClass]])
+          }, _hoisted_12, 2
+          /* CLASS */
+          )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+            name: "grow-fade"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
+                key: "singleEvent",
+                "single-event": $props.singleEvent
+              }, null, 8
+              /* PROPS */
+              , ["single-event"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.singleEventDropdown]])];
+            }),
+            _: 1
+            /* STABLE */
+
+          })], 512
+          /* NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+            "class": "x-tiny tw-italic tw-text-center tw-mb-2"
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.singleEventDescription), 513
+          /* TEXT, NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]])])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
       /* PROPS */
-      , ["subscription-calendar-id"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.subscriptionCalendarDropdown]])];
+      , ["modalId", "onOnClose"])];
     }),
     _: 1
     /* STABLE */
 
-  })], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "x-tiny font-italic text-center mb-2"
-  }, " Any upcoming releases will automatically show up in this calendar as they are scheduled by the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + " Team. ", 513
-  /* TEXT, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.subscriptionCalendarId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, " Or you can subscribe to this event only by clicking the button below. ", 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn mb-1",
-    onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $data.singleEventDropdown = !$data.singleEventDropdown;
-    }, ["stop"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inverted", [_ctx.themeTextClass, _ctx.themeBgClass]])
-  }, _hoisted_13, 2
-  /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
-    name: "grow-fade"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_event_dropdown, {
-        key: "singleEvent",
-        "single-event": $props.singleEvent
-      }, null, 8
-      /* PROPS */
-      , ["single-event"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.singleEventDropdown]])];
-    }),
-    _: 1
-    /* STABLE */
-
-  })], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "x-tiny font-italic text-center mb-2"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.singleEventDescription), 513
-  /* TEXT, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.hasSingleEvent]])])], 8
-  /* PROPS */
-  , _hoisted_1);
+  });
 }
 
 /***/ }),
@@ -31991,11 +32046,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container tw-my-3 tw-w-full"
+  key: 0,
+  "class": "container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
 };
 var _hoisted_2 = {
-  key: 0,
-  "class": "tw-flex tw-flex-row"
+  "class": "tw-flex tw-flex-row tw-items-center"
 };
 var _hoisted_3 = {
   href: "/members/live",
@@ -32006,7 +32061,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = ["src"];
 var _hoisted_6 = {
-  "class": "tw-flex tw-w-full tw-flex-col sm:tw-flex-row"
+  "class": "tw-flex tw-w-full tw-flex-col sm:tw-items-center sm:tw-flex-row"
 };
 var _hoisted_7 = {
   "class": "tw-flex tw-flex-col tw-justify-center tw-pr-4"
@@ -32056,14 +32111,14 @@ var _hoisted_18 = {
 };
 var _hoisted_19 = {
   href: "/members/live",
-  "class": "tw-font-bold tw-no-underline tw-text-black tw-capitalize tw-leading-tight tw-text-2xl"
+  "class": "tw-font-bold tw-no-underline tw-text-black tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white"
 };
 var _hoisted_20 = {
   "class": "tw-flex"
 };
 var _hoisted_21 = ["href"];
 var _hoisted_22 = {
-  "class": "tw-leading-none tw-text-lg tw-uppercase tw-font-normal"
+  "class": "tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-black dark:tw-text-white"
 };
 var _hoisted_23 = {
   "class": "tw-mr-1"
@@ -32075,42 +32130,38 @@ var _hoisted_25 = {
   "class": "tw-font-bold"
 };
 var _hoisted_26 = {
-  "class": "tw-flex tw-flex-col tw-justify-center tw-mt-3 sm:tw-mt-0 sm:tw-ml-auto"
+  key: 0,
+  "class": "tw-leading-none tw-font-bold tw-text-lg tw-mr-1.5"
 };
 var _hoisted_27 = {
-  key: 0,
-  "class": "tw-mb-3"
+  "class": "tw-flex tw-flex-col tw-justify-center tw-mt-3 sm:tw-mt-0 sm:tw-ml-auto"
 };
 var _hoisted_28 = {
-  "class": "tw-flex tw-flex-row tw-flex-wrap-md tw-mt-2"
+  key: 0
 };
-
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-calendar-plus"
-}, null, -1
-/* HOISTED */
-);
-
+var _hoisted_29 = {
+  "class": "tw-flex tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_NotificationToasts = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NotificationToasts");
 
   var _component_content_schedule = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("content-schedule");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NotificationToasts, {
+  return $data.content && $options.$_hours <= 48 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NotificationToasts, {
     icon: $data.toast.icon,
     text: $data.toast.text,
     isError: $data.toast.showErrorMessage,
     brandName: $props.brand
   }, null, 8
   /* PROPS */
-  , ["icon", "text", "isError", "brandName"]), $data.content ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Live Event Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  , ["icon", "text", "isError", "brandName"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Live Event Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     "class": "tw-rounded-lg tw-w-full",
     src: 'https://cdn.musora.com/image/fetch/c_thumb,w_320,h_180,z_0.75,q_auto:best/' + ($data.content.thumbnail_url ? $data.content.thumbnail_url : $data.instructors[0].head_shot_picture_url)
   }, null, 8
   /* PROPS */
   , _hoisted_5)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Event Details "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Live Badge "), $data.eventIsLive ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_9, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Countdown "), !$data.eventIsLive ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 1,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-text-sm font-bold tw-p-1.5 tw-leading-none tw-rounded tw-inline-flex tw-mr-2", [$options.brandBGColor]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-text-sm tw-font-bold tw-p-1.5 tw-leading-none tw-rounded tw-inline-flex tw-mr-2 tw-bg", [$options.brandBGColor]])
   }, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.$_hours), 1
   /* TEXT */
   ), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.$_minutes), 1
@@ -32133,24 +32184,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: i
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/members/coaches/".concat(coach.slug),
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-no-underline tw-mr-1.5 tw-block hover:tw-underline", [$options.brandTextColor]])
+      "class": "tw-no-underline tw-mr-1.5 tw-block"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(coach.name.split(" ")[0]), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(coach.name.split(" ")[1]), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Optional third name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(coach.name.split(" ")[2]), 1
     /* TEXT */
-    )])], 10
-    /* CLASS, PROPS */
-    , _hoisted_21), i + 1 < $data.instructors.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
-      key: 0,
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-leading-none tw-font-bold tw-text-lg tw-mr-1.5", [$options.brandTextColor]])
-    }, "&", 2
-    /* CLASS */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+    )])], 8
+    /* PROPS */
+    , _hoisted_21), i + 1 < $data.instructors.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_26, "&")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [$data.eventIsLive || $data.showWatch ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [$data.eventIsLive || $data.showWatch ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/members/live",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-btn-primary tw-w-full", [$options.brandBGColor, $options.brandHoverColor]])
   }, " watch now ", 2
@@ -32180,7 +32226,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Subscribe to Calendar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-cursor-pointer tw-with-tooltip tw-tooltip-top tw-tooltip-right tw-border-0 tw-bg-transparent tw-text-3xl", [$options.brandTextColor]]),
     "data-open-modal": "scheduleAddToCalendarModal"
-  }, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Tooltip "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fas fa-calendar-plus",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.toggleSubscribePopup && $options.toggleSubscribePopup.apply($options, arguments);
+    })
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Tooltip "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     role: "tooltip",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-tooltip tw-tooltip-dark", [$options.brandBGColor]]),
     id: "tooltip-#"
@@ -32188,14 +32239,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )], 2
   /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_content_schedule, {
+  ), $data.showSubscribePopup ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_content_schedule, {
+    key: 0,
     "subscription-calendar-id": $props.subscriptionCalendarId,
-    "theme-color": $props.brand
+    "theme-color": $props.brand,
+    toggleSubscribePopup: $options.toggleSubscribePopup
   }, null, 8
   /* PROPS */
-  , ["subscription-calendar-id", "theme-color"])], 2
+  , ["subscription-calendar-id", "theme-color", "toggleSubscribePopup"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
   /* CLASS */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -32244,10 +32297,10 @@ var _hoisted_1 = {
   key: 0,
   style: {
     "position": "fixed",
-    "left": "0",
-    "width": "100vw",
-    "z-index": "2000",
-    "bottom": "40px"
+    "width": "inherit",
+    "margin-left": "-180px",
+    "bottom": "0",
+    "z-index": "2000"
   }
 };
 var _hoisted_2 = {
@@ -34513,10 +34566,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "subscription-calendar-id": $props.subscriptionCalendarId,
     "single-event": $data.singleEvent,
     "theme-color": $props.themeColor,
-    onModalClose: $options.handleModalClose
+    onModalClose: $options.handleModalClose,
+    toggleSubscribe: $options.toggleSubscribe
   }, null, 8
   /* PROPS */
-  , ["subscription-calendar-id", "single-event", "theme-color", "onModalClose"])]);
+  , ["subscription-calendar-id", "single-event", "theme-color", "onModalClose", "toggleSubscribe"])]);
 }
 
 /***/ }),
@@ -80131,14 +80185,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _InfoModal_vue_vue_type_template_id_0f125e8a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InfoModal.vue?vue&type=template&id=0f125e8a */ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=template&id=0f125e8a");
-/* harmony import */ var _InfoModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InfoModal.vue?vue&type=script&lang=js */ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&lang=js");
+/* harmony import */ var _InfoModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InfoModal.vue?vue&type=script&setup=true&lang=js */ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&setup=true&lang=js");
 /* harmony import */ var _app_musora_web_platform_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_app_musora_web_platform_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_InfoModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_InfoModal_vue_vue_type_template_id_0f125e8a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/platform/assets/js/vue/components/Modal/InfoModal.vue"]])
+const __exports__ = /*#__PURE__*/(0,_app_musora_web_platform_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_InfoModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_InfoModal_vue_vue_type_template_id_0f125e8a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/platform/assets/js/vue/components/Modal/InfoModal.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -82300,18 +82354,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&lang=js":
-/*!*************************************************************************************************!*\
-  !*** ./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&lang=js ***!
-  \*************************************************************************************************/
+/***/ "./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&setup=true&lang=js":
+/*!************************************************************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&setup=true&lang=js ***!
+  \************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InfoModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InfoModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InfoModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./InfoModal.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_InfoModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./InfoModal.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Modal/InfoModal.vue?vue&type=script&setup=true&lang=js");
  
 
 /***/ }),
