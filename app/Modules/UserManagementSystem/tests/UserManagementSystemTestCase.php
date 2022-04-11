@@ -2,15 +2,16 @@
 
 namespace Modules\UserManagementSystem\Tests;
 
+use Carbon\Carbon;
 use Faker\Factory;
 use Faker\Generator;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\URL;
 
-abstract class TestCase extends BaseTestCase
+abstract class UserManagementSystemTestCase extends BaseTestCase
 {
-    use CreatesApplication;
     use RefreshDatabase;
 
     /**
@@ -22,10 +23,24 @@ abstract class TestCase extends BaseTestCase
     {
         $this->faker = Factory::create();
 
+        Carbon::setTestNow(Carbon::now());
+
         parent::setUp();
 
         URL::forceRootUrl('https://testing.musora.com');
     }
 
+    /**
+     * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
+     */
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../../../../bootstrap/app.php';
 
+        $app->make(Kernel::class)->bootstrap();
+
+        return $app;
+    }
 }

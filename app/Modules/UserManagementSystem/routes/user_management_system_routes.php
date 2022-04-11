@@ -24,7 +24,7 @@ Route::group(
         )
             ->name('user_management_system.login');
 
-        Route::post(
+        Route::get(
             'logout',
             AuthenticationController::class . '@logout'
         )

@@ -33,6 +33,8 @@ class RememberToken extends Model
 {
     protected $table = 'usora_remember_tokens';
 
+    protected $dates = ['expires_at'];
+
     use HasFactory;
 
     public function user()

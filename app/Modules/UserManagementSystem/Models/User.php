@@ -153,7 +153,7 @@ class User extends Model implements Authenticatable, CanResetPassword
     use HasFactory;
     use HasApiTokens;
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'session_salt'];
     protected $table = 'usora_users';
 
     /**

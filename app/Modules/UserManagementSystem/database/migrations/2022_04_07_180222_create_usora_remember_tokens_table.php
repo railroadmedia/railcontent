@@ -22,8 +22,8 @@ class CreateUsoraRememberTokensTable extends Migration
             $table->integer('user_id')->index();
             $table->string('token')->index();
             $table->text('device_information');
-            $table->timestamp('expires_at')->useCurrent()->index();
-            $table->timestamp('created_at')->useCurrent()->index();
+            $table->timestamp('expires_at')->index();
+            $table->timestamp('created_at')->index();
         });
     }
 

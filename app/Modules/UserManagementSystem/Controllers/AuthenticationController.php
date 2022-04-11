@@ -17,8 +17,8 @@ class AuthenticationController extends Controller
     use ValidatesRequests;
 
     /**
-     * @param Request $request
-     * @param AuthenticationType $authenticationType
+     * @param  Request  $request
+     * @param  AuthenticationType  $authenticationType
      * @return JsonResponse|RedirectResponse
      */
     public function login(Request $request, AuthenticationType $authenticationType)
@@ -45,11 +45,20 @@ class AuthenticationController extends Controller
 
             return redirect()
                 ->to(
-                    config('user_management_system.login_page_path') .
-                    ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                    config('user_management_system.login_page_path').
+                    ($request->has('redirect') ? ('?redirect_to='.$request->get('redirect')) : '')
                 )
                 ->withErrors($exception->errors());
         }
+
+        $remember = false;
+
+        if (config('user_management_system.force_remember', false) == true ||
+            (boolean)$request->get('remember', false) == true) {
+            $remember = true;
+        }
+
+        $request->attributes->set('remember', $remember);
 
         $passedCheck = auth()->guard('user-management-system')
             ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
@@ -57,7 +66,7 @@ class AuthenticationController extends Controller
         if ($passedCheck) {
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
 
-            auth()->login($user);
+            auth()->login($user, $remember);
 
             // return token if client want a token to use the json api
             if ($authenticationType == AuthenticationType::Token && $request->wantsJson()) {
@@ -80,8 +89,8 @@ class AuthenticationController extends Controller
 
         return redirect()
             ->to(
-                config('user_management_system.login_page_path') .
-                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                config('user_management_system.login_page_path').
+                ($request->has('redirect') ? ('?redirect_to='.$request->get('redirect')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -89,13 +98,11 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function logout(Request $request)
     {
-        session()->put('skip-third-party-auth-check', true);
-
         $user = auth()->user();
 
         if (!empty($user)) {

@@ -80,7 +80,6 @@ class UserFactory extends Factory
             'biography' => $this->faker->sentences(3, true),
             'support_note' => $this->faker->sentences(3, true),
             'created_at' => $this->faker->dateTime,
-            'updated_at' => $this->faker->dateTime,
         ];
     }
 }

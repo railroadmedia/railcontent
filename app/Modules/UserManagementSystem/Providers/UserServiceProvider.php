@@ -55,8 +55,8 @@ class UserServiceProvider extends EloquentUserProvider
         $rememberTokens = $user->rememberTokens;
 
         foreach ($rememberTokens as $rememberToken) {
-            if (!empty($rememberToken->getToken()) == hash_equals($rememberToken->getToken(), $token) &&
-                $rememberToken->getExpiresAt() > Carbon::now()) {
+            if (!empty($rememberToken->token) == hash_equals($rememberToken->token, $token) &&
+                $rememberToken->expires_at > Carbon::now()) {
                 return $user;
             }
         }

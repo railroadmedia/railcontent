@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
-use Modules\UserManagementSystem\Tests\TestCase;
+use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
 
-class AuthenticatedOnlyMiddlewareTest extends TestCase
+class AuthenticatedOnlyMiddlewareUserManagementSystemTest extends UserManagementSystemTestCase
 {
     protected function setUp(): void
     {
