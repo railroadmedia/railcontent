@@ -21,6 +21,9 @@
 
                     {{-- On Boarding --}}
                     {{-- <onboarding></onboarding> --}}
+                    
+                    {{-- On Boarding TriggerBanner --}}
+                    <trigger-banner :v-if="true"></trigger-banner>
 
                     {{-- Carousel --}}
                     <header-carousel 
