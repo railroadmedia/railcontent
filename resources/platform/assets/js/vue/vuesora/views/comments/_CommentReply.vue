@@ -83,7 +83,6 @@
                     class="flex flex-column post-body grow"
                     v-html="comment.comment"
                 >
-                    {{ comment.comment }}
                 </div>
             </div>
 

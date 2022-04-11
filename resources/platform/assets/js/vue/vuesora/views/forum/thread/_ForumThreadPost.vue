@@ -44,7 +44,6 @@
                     :class="['flex', 'flex-column', 'post-body', 'grow', brand]"
                     v-html="post.postBody"
                 >
-                    {{ post.postBody }}
                 </div>
 
                 <div
@@ -164,7 +163,6 @@
                     class="tw-flex tw-flex-col post-body grow bt-grey-1-1 tiny text-grey-3 tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
-                {{ post.authorSignature }}
                 </div>
             </div>
         </div>

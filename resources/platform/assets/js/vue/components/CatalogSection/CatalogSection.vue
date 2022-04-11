@@ -1,5 +1,8 @@
 <script>
+import ContentCatalogue from '../../vuesora/views/catalogues/ContentCatalogue.vue';
+
 export default {
+    components: { ContentCatalogue },
     data() {
         return {
             cardData: [],
@@ -8,7 +11,7 @@ export default {
     props: {
         id: {
             type: String,
-            default: 'text-input'
+            default: 'section'
         },
         brand: {
             type: String,
@@ -22,13 +25,21 @@ export default {
             type: String,
             default: 'Section'
         },
-        data: {
-            type: Array,
-            default: [],
-        },
         isVisible: {
             type: Boolean,
             default: true
+        },
+        preloadedContent: {
+            type: Array,
+            default: [],
+        },
+        contentEndpoint: {
+            type: String,
+            default: '/',
+        },
+        url: {
+            type: String,
+            default: '/'
         }
     },
     watch: {
@@ -41,7 +52,7 @@ export default {
 </script>
 
 <template>
-    <section v-if="this.isVisible" class="tw-my-8 tw-text-[#00101D] dark:tw-text-white">
+    <section :id="id" v-if="this.isVisible" class="tw-my-8 tw-text-[#00101D] dark:tw-text-white">
 
         <!-- Section Title -->
         <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
@@ -57,13 +68,29 @@ export default {
         </div> 
         
         <div class="tw-flex">
-
+            <!-- Video Cards -->
             <template v-if="type === 'video'">
-                <i>Print Video Cards</i>
+                <transition name="fade">
+                    <content-catalogue
+                            :theme-color="brand"
+                            :use-theme-color="true"
+                            :content-endpoint="contentEndpoint"
+                            catalogue-type="grid"
+                            limit="16"
+                            :lock-unowned="true"
+                            :six-wide="true"
+                            :force-wide-thumbs="true"
+                            :pre-loaded-content="false"
+                    >
+                        <div class="tw-flex">
+                            <!-- Skeleton Loader -->
+                        </div>
+                    </content-catalogue>
+                </transition>
             </template>
 
             <template v-if="type === 'coach'">
-                <i>Print Coach Cards</i>
+                
             </template>
 
             <template v-if="type === 'forum'">

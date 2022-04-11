@@ -1,19 +1,5 @@
 @php
-    //Test Data
-    $isSubscriber = true;
-    $page = Request::segment(1);
-    $brand = request()->get('brand');
-    //My Stats Data
-    $nextLearningPathProgressPercent = "0";
-    $nextLearningPathLevel = "1.1";
-    $userMetrics = "[]";
-    //Coach Event
-    $coachEvent = "{}";
-    $currentDate = "2022-04-06";
-    $calendarId = "12";
-    $youtubeId = "fuvdhzGy3fo";
-    $timeCutoffMinutes = "10";
-    $eventCoachProfileUrl = "";
+  require_once(resource_path('platform/views/home/test_data.php'))
 @endphp
 
 @extends('partials.layout')
@@ -24,7 +10,7 @@
 
 @section('content')
     <page-container>
-
+        
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
 
@@ -32,8 +18,8 @@
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
 
-                    {{-- On Boarding Message --}}
-
+                    {{-- On Boarding --}}
+                    {{-- <onboarding></onboarding> --}}
 
                     {{-- Carousel --}}
                     <header-carousel 
@@ -46,18 +32,24 @@
                     
                     {{-- Continue Section --}}
                     <catalog-section
+                        brand="{{ $brand }}" 
                         title="Continue"
                         type="video"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="true"
+                        url="/members/profile/397822/lists?state=started"
+                        :preloaded-content="{{ $startedContent }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- New Section --}}
                     <catalog-section
+                        brand="{{ $brand }}" 
                         title="New"
                         type="video"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="true"
+                        url="/members/lessons/all"
+                        :preloaded-content="{{ $newContent }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- Popular Conversations --}}
@@ -65,32 +57,43 @@
                         title="Popular Conversations"
                         type="forum"
                         brand="{{ $brand }}"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="true"
+                        url="/members/forums"
+                        :preloaded-content="{{ $forumPosts }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- From Subscribed Coaches --}}
                     <catalog-section
+                        brand="{{ $brand }}" 
                         title="From Subscribed Coaches"
                         type="video"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="{{ $hasfollowedLessons }}"
+                        url="/members/lessons/subscribed"
+                        :preloaded-content="{{ $followedLessons }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- Subscribed Coaches --}}
                     <catalog-section
+                        brand="{{ $brand }}" 
                         title="Subscribed Coaches"
                         type="coach"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="{{ $hasSubscribedCoaches }}"
+                        url="/members/coaches?only_subscribed=true#coach-section"
+                        :preloaded-content="{{ $hasSubscribedCoaches }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- My Playlists --}}
                     <catalog-section
+                        brand="{{ $brand }}" 
                         title="My Playlists"
                         type="playlist"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="true"
+                        url="/members/profile/397822/lists"
+                        :preloaded-content="{{ $usersListContent }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- Live Banner --}}
@@ -107,10 +110,13 @@
 
                     {{-- Upcoming Events --}}
                     <catalog-section
+                        brand="{{ $brand }}" 
                         title="Upcoming Events"
                         type="video"
-                        isVisible=""
-                        :data="[]"
+                        :is-visible="true"
+                        url="/members/live"
+                        :preloaded-content="{{ $upcomingEvents }}"
+                        content-endpoint="/railcontent/content"
                     ></catalog-section>
 
                     {{-- My Stats --}}

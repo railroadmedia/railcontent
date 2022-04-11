@@ -10,6 +10,7 @@ import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
+import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -23,6 +24,7 @@ app.component('AppContainer', AppContainer)
    .component('CatalogSection', CatalogSection)
    .component('StatsSection', StatsSection)
    .component('CoachEvent', CoachEvent)
+   .component('Onboarding', Onboarding)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

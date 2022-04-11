@@ -93,7 +93,7 @@
 </template>
 <script>
 import ThemeClasses from '../mixins/ThemeClasses';
-import { Utils } from '@musora/helper-functions';
+import Utils from '../assets/js/helper-functions/utils.js';
 
 export default {
     name: 'Pagination',
