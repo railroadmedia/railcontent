@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
     <page-container>
         
         {{-- v-cloak: Wait Until Page Container has loaded --}}
@@ -31,7 +32,7 @@
                     <home-card-links brand="{{ $brand }}"></home-card-links>
                     
                     {{-- Continue Section --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         brand="{{ $brand }}" 
                         title="Continue"
                         type="video"
@@ -39,10 +40,10 @@
                         url="/members/profile/397822/lists?state=started"
                         :preloaded-content="{{ $startedContent }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
+                    ></catalog-section> --}}
 
                     {{-- New Section --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         brand="{{ $brand }}" 
                         title="New"
                         type="video"
@@ -50,10 +51,10 @@
                         url="/members/lessons/all"
                         :preloaded-content="{{ $newContent }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
+                    ></catalog-section> --}}
 
                     {{-- Popular Conversations --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         title="Popular Conversations"
                         type="forum"
                         brand="{{ $brand }}"
@@ -61,10 +62,10 @@
                         url="/members/forums"
                         :preloaded-content="{{ $forumPosts }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
+                    ></catalog-section> --}}
 
                     {{-- From Subscribed Coaches --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         brand="{{ $brand }}" 
                         title="From Subscribed Coaches"
                         type="video"
@@ -72,10 +73,10 @@
                         url="/members/lessons/subscribed"
                         :preloaded-content="{{ $followedLessons }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
+                    ></catalog-section> --}}
 
                     {{-- Subscribed Coaches --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         brand="{{ $brand }}" 
                         title="Subscribed Coaches"
                         type="coach"
@@ -83,10 +84,10 @@
                         url="/members/coaches?only_subscribed=true#coach-section"
                         :preloaded-content="{{ $hasSubscribedCoaches }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
+                    ></catalog-section> --}}
 
                     {{-- My Playlists --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         brand="{{ $brand }}" 
                         title="My Playlists"
                         type="playlist"
@@ -94,12 +95,12 @@
                         url="/members/profile/397822/lists"
                         :preloaded-content="{{ $usersListContent }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
-
+                    ></catalog-section> --}}
+                    
+                    <p>
                     {{-- Live Banner --}}
                     <coach-event 
                         brand="{{ $brand }}" 
-                        v-if="{{ !empty($coachEvent) }}"
                         :preloaded-content='{{ $coachEvent }}'
                         current-date-string="{{ $currentDate }}" 
                         subscription-calendar-id="{{ $calendarId }}"
@@ -109,7 +110,7 @@
                     ></coach-event>
 
                     {{-- Upcoming Events --}}
-                    <catalog-section
+                    {{-- <catalog-section
                         brand="{{ $brand }}" 
                         title="Upcoming Events"
                         type="video"
@@ -117,7 +118,7 @@
                         url="/members/live"
                         :preloaded-content="{{ $upcomingEvents }}"
                         content-endpoint="/railcontent/content"
-                    ></catalog-section>
+                    ></catalog-section> --}}
 
                     {{-- My Stats --}}
                     <stats-section
@@ -134,3 +135,6 @@
         
     </page-container>
 @endsection
+
+
+

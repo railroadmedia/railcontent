@@ -1255,11 +1255,14 @@ a:visited {
 .tw--bottom-44 {
   bottom: -11rem;
 }
-.tw-z-10 {
-  z-index: 10;
+.tw-z-\[150\] {
+  z-index: 150;
 }
 .tw-z-0 {
   z-index: 0;
+}
+.tw-z-10 {
+  z-index: 10;
 }
 .tw-z-\[200\] {
   z-index: 200;
@@ -1501,9 +1504,6 @@ a:visited {
 .tw-mt-3 {
   margin-top: 0.75rem;
 }
-.tw-mt-2 {
-  margin-top: 0.5rem;
-}
 .tw-mr-6 {
   margin-right: 1.5rem;
 }
@@ -1527,6 +1527,9 @@ a:visited {
 }
 .tw-ml-0 {
   margin-left: 0px;
+}
+.tw-mt-2 {
+  margin-top: 0.5rem;
 }
 .tw-mr-10 {
   margin-right: 2.5rem;
@@ -1945,6 +1948,9 @@ a:visited {
 .tw-max-w-6xl {
   max-width: 72rem;
 }
+.tw-max-w-full {
+  max-width: 100%;
+}
 .tw-max-w-md {
   max-width: 28rem;
 }
@@ -2138,6 +2144,9 @@ a:visited {
 .tw-overflow-hidden {
   overflow: hidden;
 }
+.tw-overflow-visible {
+  overflow: visible;
+}
 .tw-overflow-y-auto {
   overflow-y: auto;
 }
@@ -2326,6 +2335,9 @@ a:visited {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+.tw-border-black\/\[0\.15\] {
+  border-color: rgb(0 0 0 / 0.15);
+}
 .tw-border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
@@ -2414,6 +2426,9 @@ a:visited {
 .tw-bg-\[\#F9FBFB\]\/90 {
   background-color: rgb(249 251 251 / 0.9);
 }
+.tw-bg-\[\#002039B2\]\/70 {
+  background-color: rgb(0 32 57 / 0.7);
+}
 .tw-bg-black\/30 {
   background-color: rgb(0 0 0 / 0.3);
 }
@@ -2445,6 +2460,10 @@ a:visited {
 }
 .tw-bg-\[\#002039\]\/90 {
   background-color: rgb(0 32 57 / 0.9);
+}
+.tw-bg-\[\#F3F4F6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 .tw-bg-gray-400 {
   --tw-bg-opacity: 1;
@@ -3411,6 +3430,9 @@ a:visited {
   --tw-border-opacity: 1;
   border-color: rgb(68 95 116 / var(--tw-border-opacity));
 }
+.tw-dark .dark\:tw-border-white\/\[0\.15\] {
+  border-color: rgb(255 255 255 / 0.15);
+}
 .tw-dark .dark\:tw-border-b-\[\#102230\] {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(16 34 48 / var(--tw-border-opacity));
@@ -3428,6 +3450,9 @@ a:visited {
 }
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/50 {
   background-color: rgb(68 95 116 / 0.5);
+}
+.tw-dark .dark\:tw-bg-\[\#002039\]\/\[0\.7\] {
+  background-color: rgb(0 32 57 / 0.7);
 }
 .tw-dark .dark\:tw-text-white {
   --tw-text-opacity: 1;
@@ -3581,6 +3606,9 @@ a:visited {
   }
   .sm\:tw-flex-nowrap {
     flex-wrap: nowrap;
+  }
+  .sm\:tw-items-center {
+    align-items: center;
   }
   .sm\:tw-justify-start {
     justify-content: flex-start;
@@ -3927,6 +3955,9 @@ a:visited {
   .md\:tw-bg-transparent {
     background-color: transparent;
   }
+  .md\:tw-p-7 {
+    padding: 1.75rem;
+  }
   .md\:tw-py-12 {
     padding-top: 3rem;
     padding-bottom: 3rem;
@@ -3979,6 +4010,10 @@ a:visited {
   .md\:tw-text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+  .md\:tw-text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
   .md\:tw-text-3xl {
     font-size: 1.875rem;
@@ -4116,6 +4151,10 @@ a:visited {
   .lg\:tw-px-\[12px\] {
     padding-left: 12px;
     padding-right: 12px;
+  }
+  .lg\:tw-px-7 {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
   .lg\:tw-px-8 {
     padding-left: 2rem;

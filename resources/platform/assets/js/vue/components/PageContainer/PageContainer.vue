@@ -145,7 +145,7 @@ export default {
             />
 
             <!-- Content Container -->
-            <main class="tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden" data-simplebar>
+            <main class="tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden">
 
                 <!-- Content -->
                 <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">

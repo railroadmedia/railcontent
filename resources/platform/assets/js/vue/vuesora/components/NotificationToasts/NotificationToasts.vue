@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="showNotification"
-    style="position: fixed; left: 0; width: 100vw; z-index: 2000; bottom: 40px;"
+    style="position: fixed; width: inherit; margin-left: -180px; bottom: 0; z-index: 2000;"
   >
     <div class="tw-text-center tw-pb-6">
       <div

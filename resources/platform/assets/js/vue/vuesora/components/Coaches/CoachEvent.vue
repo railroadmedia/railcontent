@@ -1,12 +1,12 @@
 <template>
-  <div class="container tw-my-3 tw-w-full">
+  <div class="container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
     <NotificationToasts
       :icon="toast.icon"
       :text="toast.text"
       :isError="toast.showErrorMessage"
       :brandName="brand"
     />
-    <div class="tw-flex tw-flex-row" v-if="content">
+    <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a
         href="/members/live"
@@ -25,7 +25,7 @@
         </div>
       </a>
 
-      <div class="tw-flex tw-w-full tw-flex-col sm:tw-flex-row">
+      <div class="tw-flex tw-w-full tw-flex-col sm:tw-items-center sm:tw-flex-row">
         <!-- Event Details -->
         <div class="tw-flex tw-flex-col tw-justify-center tw-pr-4">
           <div class="tw-flex tw-items-center tw-mb-1">
@@ -44,7 +44,7 @@
 
             <!-- Countdown -->
             <div
-              class="tw-text-white tw-text-sm font-bold tw-p-1.5 tw-leading-none tw-rounded tw-inline-flex tw-mr-2"
+              class="tw-text-white tw-text-sm tw-font-bold tw-p-1.5 tw-leading-none tw-rounded tw-inline-flex tw-mr-2 tw-bg"
               :class="[brandBGColor]"
               v-if="!eventIsLive"
             >
@@ -73,7 +73,7 @@
           <div class="tw-mb-1.5">
             <a
               href="/members/live"
-              class="tw-font-bold tw-no-underline tw-text-black tw-capitalize tw-leading-tight tw-text-2xl"
+              class="tw-font-bold tw-no-underline tw-text-black tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white"
             >
               {{ content.title }}
             </a>
@@ -86,17 +86,16 @@
                 :key="i"
             >
               <a :href="`/members/coaches/${coach.slug}`"
-                 class="tw-no-underline tw-mr-1.5 tw-block hover:tw-underline"
-                 :class="[brandTextColor]"
+                 class="tw-no-underline tw-mr-1.5 tw-block"
               >
-                <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal">
+                <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-black dark:tw-text-white">
                   <span class="tw-mr-1">{{ coach.name.split(" ")[0] }}</span>
                   <span class="tw-font-bold">{{ coach.name.split(" ")[1] }}</span>
                   <!-- Optional third name -->
                   <span class="tw-font-bold">{{ coach.name.split(" ")[2] }}</span>
                 </h4>
               </a>
-              <span v-if="i+1 < instructors.length" class="tw-leading-none tw-font-bold tw-text-lg tw-mr-1.5" :class="[brandTextColor]" >&</span>
+              <span v-if="i+1 < instructors.length" class="tw-leading-none tw-font-bold tw-text-lg tw-mr-1.5" >&</span>
             </div>
           </div>
 
@@ -106,11 +105,11 @@
         <div
           class="
             tw-flex tw-flex-col tw-justify-center tw-mt-3
-            sm:tw-mt-0 sm:tw-ml-auto
+            sm:tw-mt-0 sm:tw-ml-auto 
           "
         >
-          <div class="tw-mb-3" v-if="eventIsLive || showWatch">
-            <div class="tw-flex tw-flex-row tw-flex-wrap-md tw-mt-2">
+          <div v-if="eventIsLive || showWatch">
+            <div class="tw-flex tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
               <div>
                 <a
                   href="/members/live"
@@ -158,7 +157,7 @@
               data-open-modal="scheduleAddToCalendarModal"
               :class="[brandTextColor]"
             >
-              <i class="fas fa-calendar-plus"></i>
+              <i class="fas fa-calendar-plus" @click="toggleSubscribePopup"></i>
               <!-- Tooltip -->
               <div
                 role="tooltip"
@@ -173,6 +172,8 @@
             <content-schedule
               :subscription-calendar-id="subscriptionCalendarId"
               :theme-color="brand"
+              :toggleSubscribePopup="toggleSubscribePopup"
+              v-if="showSubscribePopup"
             ></content-schedule>
           </div>
         </div>
@@ -235,6 +236,7 @@ export default {
       startWeekday: "",
       startMonth: "",
       formattedTime: "",
+      showSubscribePopup: false,
       toast: {
         icon: "",
         text: "",
@@ -256,6 +258,7 @@ export default {
       this.startTime = DateTime.fromSQL(this.content.live_event_start_time, {
         zone: "UTC",
       });
+      console.log(this.startTime)
       this.startDate = new Date(this.startTime);
       this.startWeekday = this.startDate.toLocaleString("en-US", {
         weekday: "long",
@@ -370,6 +373,10 @@ export default {
     setLiveState() {
       this.eventIsLive = true;
       document.body.classList.add("live");
+    },
+
+    toggleSubscribePopup(){
+      this.showSubscribePopup = !this.showSubscribePopup;
     },
 
     showNotificationToast({ icon, text, error }) {
