@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        @component('bladesora::members.components.home._method-progress', [
+        @component('partials.bladesora.members.components.home._method-progress', [
             "brand" => $brand,
             "progress" => $nextLearningPathProgressPercent,
             "level" => explode('.', $nextLearningPathLevel)[0] ?? "1",
@@ -31,7 +31,7 @@
             @foreach($userMetrics as $userMetric)
                 <a href="{{ $userDashboardUrl }}"
                    class="tw-flex tw-flex-col tw-no-underline tw-w-1/2 md:tw-w-1/3 lg:tw-w-1/4 xl:tw-w-full">
-                    @include('bladesora::members.components.user-metric', [
+                    @include('partials.bladesora.members.components.user-metric', [
                         "brand" => $brand,
                         "icon" => $userMetric['icon'],
                         "value" => $userMetric['value'],

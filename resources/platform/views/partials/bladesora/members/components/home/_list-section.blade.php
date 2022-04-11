@@ -35,7 +35,7 @@
                 >
                     <div class="flex flex-row nmh-1">
                         @for($i = 0; $i < 6; $i++)
-                            @include('bladesora::members.skeletons.card-item', [
+                            @include('partials.bladesora.members.skeletons.card-item', [
                                 "cardClass" => 'six-wide',
                             ])
                         @endfor
