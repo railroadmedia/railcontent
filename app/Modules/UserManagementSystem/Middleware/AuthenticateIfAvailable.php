@@ -7,7 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatedOnly
+class AuthenticateIfAvailable
 {
     /**
      * Handle an incoming request.
@@ -18,13 +18,8 @@ class AuthenticatedOnly
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('user-management-system')->check() && !Auth::guard('sanctum')->check()) {
-            if ($request->wantsJson()) {
-                throw new AuthenticationException();
-            }
-
-            return redirect(config('user_management_system.login_page_path'));
-        }
+        Auth::guard('user-management-system')->check();
+        Auth::guard('sanctum')->check();
 
         return $next($request);
     }

@@ -36,9 +36,9 @@ class UserManagementSystemServiceProvider extends ServiceProvider
         }
 
         // routes
-//        if (config('usora.autoload_all_routes') == true) {
-//            $this->routeRegistrar->registerAll();
-//        }
+        if (config('user_management_system.autoload_all_routes') == true) {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/user_management_system_routes.php');
+        }
 
         // commands
         if ($this->app->runningInConsole()) {

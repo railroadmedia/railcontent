@@ -17,8 +17,8 @@ return [
     // routes
     'route_prefix' => 'usora',
     'autoload_all_routes' => true,
-    'route_middleware_public_groups' => ['web'],
-    'route_middleware_logged_in_groups' => ['web_authed'],
+    'route_middleware_public_groups' => ['web_public'],
+    'route_middleware_logged_in_groups' => ['web_authenticated'],
     'login_page_path' => '/login',
 
     //middleware for API requests

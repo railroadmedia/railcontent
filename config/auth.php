@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user-management-system',
         'passwords' => 'users',
     ],
 
@@ -36,7 +36,7 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'user-management-system' => [
             'driver' => 'user-management-system',
             'provider' => 'user-management-system',
         ],

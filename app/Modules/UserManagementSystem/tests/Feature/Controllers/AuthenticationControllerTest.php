@@ -1,75 +1,104 @@
 <?php
 
-namespace Railroad\Usora\Tests\Functional;
+namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Faker\ORM\Doctrine\Populator;
-use Illuminate\Routing\Router;
-use MikeMcLin\WpPassword\Facades\WpPassword;
-use Railroad\Usora\DataFixtures\UserFixtureLoader;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Middleware\AuthenticatedOnly;
-use Railroad\Usora\Tests\UsoraTestCase;
-use ReflectionClass;
+use Illuminate\Support\Facades\Hash;
+use Modules\UserManagementSystem\DataTransferObjects\AuthenticationType;
+use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
+use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Tests\TestCase;
 
-class AuthenticationControllerTest extends UsoraTestCase
+class AuthenticationControllerTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
-
-        $populator = new Populator($this->faker, $this->entityManager);
-
-        $populator->addEntity(
-            User::class,
-            1,
-            [
-                'email' => 'login_user_test@email.com',
-                'password' => 'Password12345!@',
-            ]
-        );
-        $populator->execute();
-
-        $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->entityManager, $purger);
-        $executor->execute([app(UserFixtureLoader::class)], true);
     }
 
-    public function test_authenticate_via_credentials_validation_failed()
+    public function test_authenticate_token_validation_fails()
+    {
+        $response = $this->json(
+            'POST',
+            'usora/login/' . AuthenticationType::Token->value,
+            []
+        );
+
+        $this->assertEquals(
+            json_encode([
+                'errors' =>
+                    [
+                        'email' =>
+                            [
+                                0 => 'validation.required',
+                            ],
+                        'password' =>
+                            [
+                                0 => 'validation.required',
+                            ],
+                        'device_name' =>
+                            [
+                                0 => 'validation.required',
+                            ],
+                    ]
+            ]),
+            $response->getContent()
+        );
+
+        $this->assertEmpty(auth()->id());
+    }
+
+    public function test_authenticate_token_invalid_credentials()
+    {
+        $response = $this->json(
+            'POST',
+            'usora/login/' . AuthenticationType::Token->value,
+            ['email' => 'fail', 'password' => '123', 'device_name' => 'test_device']
+        );
+
+        $this->assertEquals('{"message":"Unauthenticated."}', $response->getContent());
+
+        $this->assertEmpty(auth()->id());
+    }
+
+    public function test_authenticate_token_success()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+        $device = 'test_device';
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        $response = $this->json(
+            'POST',
+            'usora/login/' . AuthenticationType::Token->value,
+            ['email' => $email, 'password' => $password, 'device_name' => $device]
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $responseJson = json_decode($response->getContent());
+
+        $this->assertNotEmpty($responseJson->token);
+        $this->assertEquals($user->toArray(), (array) $responseJson->user);
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
+    }
+
+    public function test_authenticate_token_cookie()
     {
         $response = $this->call(
             'POST',
-            'usora/authenticate/with-credentials',
+            'usora/login/' . AuthenticationType::Token->value,
             ['email' => 'fail', 'password' => '123']
         );
 
         $response->assertSessionHasErrors(['invalid-credentials']);
 
-        $this->assertEmpty(
-            $this->app->make('auth')
-                ->guard()
-                ->id()
-        );
-    }
-
-    public function test_authenticate_via_credentials_too_many_attempts()
-    {
-        for ($i = 0; $i < 9; $i++) {
-            $response = $this->call(
-                'POST',
-                'usora/authenticate/with-credentials',
-                ['email' => 'test-1@test.com', 'password' => 'wrong-password']
-            );
-        }
-
-        $response->assertSessionHasErrors(['throttle']);
-
-        $this->assertEmpty(
-            $this->app->make('auth')
-                ->guard()
-                ->id()
-        );
+        $this->assertEmpty(auth()->id());
     }
 
     public function test_authenticate_via_credentials()

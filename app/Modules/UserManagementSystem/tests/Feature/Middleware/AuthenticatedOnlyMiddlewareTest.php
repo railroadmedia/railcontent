@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\UserManagementSystem\Tests\Feature;
+namespace Modules\UserManagementSystem\Tests\Feature\Middleware;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
