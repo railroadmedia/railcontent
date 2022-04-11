@@ -5,6 +5,8 @@ namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\DataTransferObjects\AuthenticationType;
+use Modules\UserManagementSystem\Events\MobileAppLogin;
+use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
@@ -79,6 +81,9 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
             'password' => Hash::make($password),
         ]);
 
+        $this->expectsEvents([MobileAppLogin::class]);
+        $this->expectsEvents([UserEvent::class]);
+
         $response = $this->json(
             'POST',
             'usora/login/'.AuthenticationType::Token->value,
@@ -133,6 +138,8 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
             'password' => Hash::make($password),
         ]);
 
+        $this->expectsEvents([UserEvent::class]);
+
         $response = $this->call(
             'POST',
             'usora/login/'.AuthenticationType::Cookie->value,
@@ -148,6 +155,33 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
         $this->assertEquals($user->toArray(), user()->toArray());
     }
 
+    public function test_authenticate_cookie_success_follows_redirect_parameter()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+        $redirectUrl = $this->faker->url;
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        $this->expectsEvents([UserEvent::class]);
+
+        $response = $this->call(
+            'POST',
+            'usora/login/'.AuthenticationType::Cookie->value,
+            ['email' => $email, 'password' => $password, 'redirect' => $redirectUrl]
+        );
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $response->assertRedirect($redirectUrl);
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
+    }
+
     public function test_authenticate_via_remember_token()
     {
         $email = $this->faker->email;
@@ -157,6 +191,8 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
             'email' => $email,
             'password' => Hash::make($password),
         ]);
+
+        $this->expectsEvents([UserEvent::class]);
 
         $response = $this->call(
             'POST',

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\DataTransferObjects\AuthenticationType;
+use Modules\UserManagementSystem\Events\MobileAppLogin;
+use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Models\User;
 
 class AuthenticationController extends Controller
@@ -68,18 +70,24 @@ class AuthenticationController extends Controller
 
             auth()->login($user, $remember);
 
+            event(new UserEvent($user->id, 'authenticated'));
+
             // return token if client want a token to use the json api
             if ($authenticationType == AuthenticationType::Token && $request->wantsJson()) {
+                event(
+                    new MobileAppLogin($user, $request->get('firebase_token'), $request->get('platform'))
+                );
+
                 $token = $user->createToken($request->get('device_name'));
 
                 return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
             }
 
             // do web cookie auth
-            if ($authenticationType == AuthenticationType::Cookie &&
-                auth()->attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
-                // todo: this needs to go to the users last used brand home page or the one stored in this devices cookie
-                return redirect()->to($request->get('redirect', '/members'));
+            if ($authenticationType == AuthenticationType::Cookie) {
+
+                // todo: go to last brand value or cookie value
+                return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/members');
             }
         }
 
