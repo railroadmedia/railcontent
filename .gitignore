@@ -111,3 +111,5 @@ dist
 /public/mix-manifest.json
 
 .idea
+
+auth.json
