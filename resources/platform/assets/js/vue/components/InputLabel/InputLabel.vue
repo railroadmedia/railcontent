@@ -1,6 +1,7 @@
 <script setup>
 import useInputValidator from "./useInputValidator";
 import { minLength } from "./validators";
+import { XIcon } from "@heroicons/vue/solid";
 const props = defineProps({
   initialValue: {
     type: String,
@@ -18,7 +19,11 @@ const props = defineProps({
     type: String,
     default: "text-input",
   },
-  classOverride: {
+  inputOverride: {
+    type: String,
+    default: "",
+  },
+  wrapperOverride: {
     type: String,
     default: "",
   },
@@ -31,32 +36,46 @@ const { input, errors } = useInputValidator(
   (value) => emit("onChange", value)
 );
 
+const onClear = () => {
+  emit("onChange", '');
+  input.value = '';
+};
+
 const onEnter = () => {
   emit("onEnter");
   console.log("enter key pressed");
 };
-
 </script>
 
 <template>
-  <div class="tw-flex tw-flex-col tw-relative">
-    <div class="tw-absolute"></div>
+  <div
+    :class="`tw-flex tw-flex-col tw-relative ${
+      wrapperOverride ? wrapperOverride : ''
+    }`"
+  >
     <label
       v-if="labelValue"
       :for="id"
       class="tw-px-[13px] tw-pb-[5px] tw-text-white"
       >{{ labelValue }}</label
     >
-    <input
-      :placeholder="placeholder"
-      :id="id"
-      :class="`tw-h-[42px] tw-rounded-[63px] tw-border-[#D1D5DB] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
-        classOverride ? classOverride : ''
-      }`"
-      v-model="input"
-      v-on:keyup.enter="onEnter"
-      @focus="() => emit('onFocus')"
-      autocomplete="off"
-    />
+    <div class="tw-flex">
+      <input
+        :placeholder="placeholder"
+        :id="id"
+        :class="`tw-h-[42px] tw-rounded-[63px] tw-border-[#D1D5DB] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
+          inputOverride ? inputOverride : ''
+        }`"
+        v-model="input"
+        v-on:keyup.enter="onEnter"
+        @focus="() => emit('onFocus')"
+        autocomplete="off"
+      />
+      <div :class="`tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'}`">
+        <button class="tw-h-[16px] tw-tw-[16px] tw-mx-[12px]" @click="onClear">
+          <XIcon class="tw-h-full tw-w-full" />
+        </button>
+      </div>
+    </div>
   </div>
 </template>

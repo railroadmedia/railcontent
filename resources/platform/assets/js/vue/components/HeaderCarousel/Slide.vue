@@ -77,15 +77,16 @@ const props = defineProps({
           {{ title }}
         </h2>
 
-        <p class="tw-text-[16px] tw-mb-3 tw-hidden lg:tw-block">{{ description }}</p>
+        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block">{{ description }}</p>
         
         <a
           class="
-            tw-block
             tw-text-white
             tw-font-bold
             tw-font-bebas-neue
             tw-text-[20px]
+            tw-hidden
+            xl:tw-block
           "
           :href="ctaUrl"
           >{{ ctaText }}
