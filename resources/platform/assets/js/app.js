@@ -16,6 +16,7 @@ import VueAxios from 'vue-axios'
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
+import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
 
 const app = createApp({});
 
@@ -30,6 +31,7 @@ app.component('AppContainer', AppContainer)
    .component('ContentCatalogue', ContentCatalogue)
    .component('Onboarding', Onboarding)
    .component('TriggerBanner', TriggerBanner)
+   .component('NotificationsTable', NotificationsTable)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
