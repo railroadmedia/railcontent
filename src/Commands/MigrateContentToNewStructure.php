@@ -25,7 +25,7 @@ class MigrateContentToNewStructure extends Command
     public function handle()
     {
         $this->info('Starting MigrateContentToNewStructure.');
-        //        $this->call('command:migrateUserPlaylists');
+                $this->call('command:migrateUserPlaylists');
         //        $this->call('command:deleteOldContentForPlaylist');
         $this->call('command:migrateFields');
         $this->call('command:migrateContentColumns');
