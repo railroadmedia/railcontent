@@ -111,3 +111,4 @@ dist
 /public/mix-manifest.json
 
 .idea
+.phpunit*
