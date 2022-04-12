@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "showBG"]);
+const props = defineProps(["modalId", "title", "bgColor"]);
 const emit = defineEmits(["onClose"]);
 const onClose = () => {
   emit("onClose", true);
