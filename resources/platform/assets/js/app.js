@@ -16,6 +16,7 @@ import VueAxios from 'vue-axios'
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
+import PaymentMethods from './vue/vuesora/views/payment-methods';
 
 const app = createApp({});
 
@@ -30,6 +31,7 @@ app.component('AppContainer', AppContainer)
    .component('ContentCatalogue', ContentCatalogue)
    .component('Onboarding', Onboarding)
    .component('TriggerBanner', TriggerBanner)
+   .component('PaymentMethods', PaymentMethods)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
