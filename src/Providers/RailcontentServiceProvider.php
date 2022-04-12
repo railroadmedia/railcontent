@@ -23,6 +23,7 @@ use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
+use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -133,6 +134,7 @@ class RailcontentServiceProvider extends ServiceProvider
                             MigrateContentFields::class,
                             MigrateContentVideos::class,
                             MigrateContentToElasticsearch::class,
+            MigrateUserPlaylist::class,
                         ]);
 
         Validator::extend(
