@@ -1,0 +1,145 @@
+@import './_variables.scss';
+
+body.play-alongs-player-open {
+  padding-bottom: 325px;
+
+  footer {
+    margin-bottom:263px;
+  }
+
+  &.has-public-footer {
+    padding-bottom:891px;
+
+    footer {
+      padding-bottom:260px;
+    }
+
+    @include small {
+      padding-bottom:539px;
+
+      footer {
+        padding-bottom:263px;
+      }
+    }
+  }
+
+  #intercom-container {
+    display:none;
+  }
+}
+
+.play-alongs {
+  .loading {
+    position:fixed;
+    bottom:300px;
+    left:50%;
+    width:100px;
+    height:100px;
+    margin-left:-50px;
+  }
+
+  .enable-filters {
+    flex:0 0 50px;
+    max-width:50px;
+    min-width:50px;
+  }
+}
+
+#playAlongsPlayer {
+  position:fixed;
+  font-size:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:97;
+  transform:translateY(0);
+  transition:.2s transform ease-in-out;
+  will-change:transform;
+  touch-action: manipulation;
+
+  &.collapsed-down {
+    transform:translateY(calc(100% - 10px));
+  }
+
+  .player-buttons {
+    flex: 0 0 210px;
+  }
+
+  .player-tab {
+    position:absolute;
+    height:30px;
+    width:60px;
+    top:-30px;
+    left:30px;
+    border-radius:3px 3px 0 0;
+    z-index:1;
+  }
+
+  .progress-container {
+    position:relative;
+    height:10px;
+
+    .progress-amount {
+      height:100%;
+      width:100%;
+      position:absolute;
+      left:0;
+      top:0;
+    }
+  }
+
+  .loop-anchor {
+    position:absolute;
+    top:-35px;
+    width:30px;
+    height:30px;
+    z-index:2;
+    transform:translateX(-50%);
+    @include flexCenter();
+
+    & > * {
+      pointer-events:none;
+    }
+
+    &:after {
+      bottom: -15px;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      //border-color: rgba(136, 183, 213, 0);
+      border-top-color: $drumeoBlue;
+      border-width: 10px;
+      margin-left: -10px;
+    }
+  }
+
+  .skip-5 {
+
+    i {
+      position:relative;
+
+      &:after {
+        content: '5';
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        font:400 7px $defaultSansSerif;
+      }
+    }
+  }
+}
+
+.show-mobile-filters {
+  position:fixed;
+  top:110px;
+  right:0;
+  width:60px;
+  height:60px;
+  z-index:96;
+  border-radius:3px 0 0 3px;
+}

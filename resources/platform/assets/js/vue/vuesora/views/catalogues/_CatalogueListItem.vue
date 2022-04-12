@@ -142,7 +142,6 @@
         class="tiny text-grey-6 mb-1 m-xs-only"
         v-html="mappedData.description"
       >
-        {{ mappedData.description }}
       </p>
 
       <p

@@ -1,53 +1,81 @@
-<script>
-import { XIcon } from '@heroicons/vue/solid'
-export default {
-    name: 'InfoModal',
-    props: ['modalId', 'title'],
-    components: { XIcon },
-    emits: ['onClose'],
-    setup(props, context) {
-        const onClose = () => {
-            context.emit('onClose', true)
-        }
-        const onOverlayClick = (event) => {
-            console.log(event.target.id)
-            if (event.target.id === `${props.modalId}-overlay`) {
-                console.log('onOverlayClick')
-                context.emit('onClose', true)
-            }
-        }
-        return {
-            onClose,
-            onOverlayClick
-        }
-    },
-    beforeMount() {
-        let modalContainer = document.createElement("div");
-        modalContainer.setAttribute('id', this.modalId);
-        document.body.appendChild(modalContainer);
-    },
-    unmounted() {
-        document.getElementById(this.modalId).remove();
-    }
-}
+<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+import { XIcon } from "@heroicons/vue/solid";
+const isContainerCreated = ref(false);
+const props = defineProps(["modalId", "title", "showBG"]);
+const emit = defineEmits(["onClose"]);
+const onClose = () => {
+  emit("onClose", true);
+};
+const onOverlayClick = (event) => {
+  console.log(event.target.id);
+  if (event.target.id === `${props.modalId}-overlay`) {
+    console.log("onOverlayClick");
+    emit("onClose", true);
+  }
+};
+
+onMounted(() => {
+  const modalContainer = document.getElementById("modal-container");
+  modalContainer.classList.remove("tw-hidden");
+  modalContainer.classList.add("tw-fixed");
+});
+
+onUnmounted(() => {
+  const modalContainer = document.getElementById("modal-container");
+  modalContainer.classList.add("tw-hidden");
+  modalContainer.classList.remove("tw-fixed");
+});
 </script>
 
 <template>
-    <teleport to="#modal-container">
+  <teleport to="#modal-container">
+    <div
+      :id="`${modalId}-overlay`"
+      class="
+        tw-absolute tw-h-full tw-w-full tw-bg-[#000000] tw-bg-opacity-80 tw-z-20
+      "
+      @click="onOverlayClick"
+    ></div>
+    <div
+      class="
+        tw-absolute
+        tw-flex
+        tw-h-full
+        tw-w-full
+        tw-items-center
+        tw-justify-center
+      "
+    >
+      <div
+        class="
+          tw-w-[750px]
+          tw-rounded-[8px]
+          tw-z-30
+          tw-pt-[24px]
+          tw-pb-[42px]
+          tw-flex
+          tw-flex-col
+        "
+        :class="bgColor && `tw-bg-[${bgColor}]`"
+      >
         <div
-            :id="`${modalId}-overlay`"
-            class="tw-absolute tw-h-full tw-w-full tw-bg-[#000000] tw-bg-opacity-80 tw-z-20"
-            @click="onOverlayClick"
-        ></div>
-        <div
-            class="tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
+          class="
+            tw-flex
+            tw-flex-row
+            tw-justify-between
+            tw-text-white
+            tw-mb-[24px]
+            tw-px-[40px]
+          "
         >
-            <div class="tw-w-[750px] tw-bg-[#081825] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col">
-                <div class="tw-flex tw-flex-row tw-justify-between tw-text-white tw-mb-[24px] tw-px-[40px]">
-                    <h3>{{ title }}</h3><button @click="onClose" class="tw-self-end"><XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" /></button>
-                </div>
-                <slot></slot>
-            </div>
+          <h3>{{ title }}</h3>
+          <button @click="onClose" class="tw-self-end">
+            <XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" />
+          </button>
         </div>
-    </teleport>
+        <slot></slot>
+      </div>
+    </div>
+  </teleport>
 </template>

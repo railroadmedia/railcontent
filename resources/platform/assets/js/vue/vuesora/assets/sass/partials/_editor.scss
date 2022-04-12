@@ -1,0 +1,72 @@
+@import './_variables.scss';
+
+/*
+* You might be wondering why the usage of !important is so liberal in this file
+* that's because TinyMCE is not very designer friendly and most positional properties
+* are hardcoded inline css styles generated in the library JS, this is the most effective
+* way to override them
+*/
+
+.tox-tinymce {
+  box-shadow: 0 0 5px rgba(0, 0, 0, .2) !important;
+}
+
+.tox {
+
+  .tox-dialog-wrap__backdrop {
+    background:rgba(0,0,0,.5)!important;
+  }
+  
+  .tox-toolbar {
+    background-color: #d1d1d1 !important;
+    padding: 0.9375rem !important;
+  }
+
+  .tox-toolbar__primary {
+    background-color: #d1d1d1 !important;
+  }
+
+  .tox-toolbar__group {
+    height: 40px !important;
+    margin-right: 0.9375rem !important;
+    border-radius: 5px !important;
+    border: 1px solid #a8a8a8 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+
+    button.tox-tbtn,
+    .tox-split-button {
+      border-right: 1px solid #a8a8a8 !important;
+      margin: 0 !important;
+    }
+
+    button.tox-tbtn[aria-pressed='true'] {
+      background-color: #555c66 !important;
+
+      svg { fill: #fff !important; }
+    } 
+
+    button.tox-tbtn:last-child,
+    .tox-split-button:last-child {
+      border-right: none !important;
+    }
+  }
+
+  .tox-tbtn {
+    background-color: #fff !important;
+    border-radius: 0px !important;
+    margin: 0 !important;
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  .tox-toolbar, .tox-toolbar__overflow, .tox-toolbar__primary {
+    padding: 0.9375rem !important;
+    background-image: none !important;
+  }
+  
+}
+
+.tox-tinymce {
+  min-height: 300px !important;
+}

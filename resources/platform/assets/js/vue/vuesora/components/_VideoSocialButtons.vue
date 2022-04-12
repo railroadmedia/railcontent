@@ -112,7 +112,7 @@
     </div>
 </template>
 <script>
-import Utils from '@musora/helper-functions/modules/utils';
+import Utils from '../assets/js/helper-functions/utils.js';
 import Toasts from '../assets/js/classes/toasts';
 import LikesModal from '../views/comments/_CommentLikesModal';
 import ContentService from '../assets/js/services/content';

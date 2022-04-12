@@ -20,7 +20,7 @@
 
         <div class="flex flex-row flex-wrap">
             @foreach($forumPosts as $post)
-                @include('bladesora::members.content._hot-forum-post', [
+                @include('partials.bladesora.members.content._hot-forum-post', [
                     "themeColor" => $brand,
                     "xp" => $post->user_xp,
                     "rank" => $post->xp_rank,

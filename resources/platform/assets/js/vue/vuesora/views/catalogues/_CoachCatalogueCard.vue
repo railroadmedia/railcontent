@@ -83,7 +83,6 @@
                 <h5
                     class="tw-text-xs text-grey-4 capitalize tw-font-normal tw-font-normal"
                     v-if="!isGuitareoChordAndScale" v-html="mappedData.grey_title">
-                    {{ mappedData.grey_title }} 
                     </h5>
 
                 <h4
