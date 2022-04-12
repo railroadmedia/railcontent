@@ -20,6 +20,8 @@ return [
     'web_route_middleware_public_groups' => ['web_public'],
     'web_route_middleware_logged_in_groups' => ['web_authenticated'],
     'api_route_middleware_public_groups' => ['api_public'],
+    'api_route_middleware_authenticated_groups' => ['api_authenticated'],
+
     'login_page_path' => '/login',
 
     //middleware for API requests

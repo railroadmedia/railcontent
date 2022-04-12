@@ -4,6 +4,7 @@ namespace Modules\UserManagementSystem\Providers;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class UserManagementSystemServiceProvider extends ServiceProvider
 {
@@ -37,7 +38,20 @@ class UserManagementSystemServiceProvider extends ServiceProvider
 
         // routes
         if (config('user_management_system.autoload_all_routes') == true) {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/user_management_system_routes.php');
+
+            // If there is an auth token present use the API middleware groups, otherwise it will use the web
+            // middleware groups.
+            if (!empty(request()->bearerToken())) {
+                Route::middleware('api_authenticated')
+                    ->group(__DIR__ . '/../routes/user_management_system_authenticated_routes.php');
+                Route::middleware('api_public')
+                    ->group(__DIR__ . '/../routes/user_management_system_public_routes.php');
+            } else {
+                Route::middleware('web_authenticated')
+                    ->group(__DIR__ . '/../routes/user_management_system_authenticated_routes.php');
+                Route::middleware('web_public')
+                    ->group(__DIR__ . '/../routes/user_management_system_public_routes.php');
+            }
         }
 
         // commands

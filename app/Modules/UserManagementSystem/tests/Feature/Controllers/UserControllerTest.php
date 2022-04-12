@@ -4,34 +4,50 @@ namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Modules\UserManagementSystem\DataTransferObjects\AuthenticationType;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
+use Spatie\Permission\Models\Permission;
 
-class AuthenticationControllerUserManagementSystemTest extends UserManagementSystemTestCase
+class UserControllerTest extends UserManagementSystemTestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
 
-        Route::get(
-            'test-route',
-            function () {
-                return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
-            }
-        )->middleware([AuthenticatedOnly::class]);
+//        Route::get(
+//            'test-route',
+//            function () {
+//                return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
+//            }
+//        )->middleware([AuthenticatedOnly::class]);
     }
 
-    public function test_authenticate_token_validation_fails()
+    public function test_create()
     {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+        $device = 'test_device';
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'users.create']);
+        $user->givePermissionTo($permission);
+
+        auth()->login($user);
+
         $response = $this->json(
-            'POST',
-            config('user_management_system.route_prefix') . '/login/token',
+            'PUT',
+            config('user_management_system.route_prefix') . '/user/store',
             []
         );
+
+        dd($response);
 
         $this->assertEquals(
             json_encode([

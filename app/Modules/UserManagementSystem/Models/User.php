@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,10 +12,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\Modules\UserManagementSystem\Models\User
@@ -148,13 +151,16 @@ use Modules\UserManagementSystem\Factories\UserFactory;
  * @property-read Collection|RememberToken[] $rememberTokens
  * @property-read int|null $remember_tokens_count
  */
-class User extends Model implements Authenticatable, CanResetPassword
+class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
     use HasFactory;
     use HasApiTokens;
+    use HasRoles;
+    use Authorizable;
 
     protected $hidden = ['password', 'session_salt'];
     protected $table = 'usora_users';
+    protected $guard_name = 'user-management-system';
 
     /**
      * @var string

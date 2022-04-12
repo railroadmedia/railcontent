@@ -18,14 +18,20 @@ class AuthenticatedOnly
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('sanctum')->check() && !Auth::guard('user-management-system')->check()) {
-            if ($request->wantsJson()) {
+        // try token auth first
+        if (!empty($request->bearerToken())) {
+            if (Auth::guard('sanctum')->check()) {
+                return $next($request);
+            } else {
                 throw new AuthenticationException();
             }
-
-            return redirect(config('user_management_system.login_page_path'));
         }
 
-        return $next($request);
+        // other wise try cookie auth
+        if (Auth::guard('user-management-system')->check()) {
+            return $next($request);
+        } else {
+            throw new AuthenticationException();
+        }
     }
 }

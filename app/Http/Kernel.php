@@ -53,6 +53,11 @@ class Kernel extends HttpKernel
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'api_authenticated' => [
+            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
     ];
 
     /**
