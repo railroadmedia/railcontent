@@ -18,8 +18,11 @@ class AuthenticateIfAvailable
      */
     public function handle($request, Closure $next)
     {
-        Auth::guard('user-management-system')->check();
-        Auth::guard('sanctum')->check();
+        $passed = Auth::guard('sanctum')->check();
+
+        if (!$passed) {
+            Auth::guard('user-management-system')->check();
+        }
 
         return $next($request);
     }

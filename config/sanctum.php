@@ -3,7 +3,7 @@
 return [
 
     // use our custom guard as fallback
-    'guard' => 'user-management-system',
+    'guard' => null,
 
     /*
     |--------------------------------------------------------------------------

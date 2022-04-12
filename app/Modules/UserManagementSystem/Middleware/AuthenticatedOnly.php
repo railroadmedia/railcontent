@@ -18,7 +18,7 @@ class AuthenticatedOnly
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('user-management-system')->check() && !Auth::guard('sanctum')->check()) {
+        if (!Auth::guard('sanctum')->check() && !Auth::guard('user-management-system')->check()) {
             if ($request->wantsJson()) {
                 throw new AuthenticationException();
             }

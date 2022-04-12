@@ -4,31 +4,50 @@ use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\AuthenticationController;
 
 /*
- * Public Routes
+ * Public API Routes
  */
 Route::group(
     [
         'prefix' => config('user_management_system.route_prefix'),
-        'middleware' => config('user_management_system.route_middleware_public_groups'),
+        'middleware' => config('user_management_system.api_route_middleware_public_groups'),
+    ],
+    function () {
+        Route::post(
+            'login/token',
+            AuthenticationController::class.'@loginToken'
+        )
+            ->name('user_management_system.login-token');
+
+        Route::get(
+            'logout/token',
+            AuthenticationController::class.'@logoutToken'
+        )
+            ->name('user_management_system.logout-token');
+    }
+);
+/*
+ * Public Web Routes
+ */
+Route::group(
+    [
+        'prefix' => config('user_management_system.route_prefix'),
+        'middleware' => config('user_management_system.web_route_middleware_public_groups'),
     ],
     function () {
         /*
          * Authentication
          */
-
-        // {authenticationType} must be 'cookie' or 'token'. Cookie is for web, token is for JSON API/mobile app.
-        // See AuthenticationType enum.
         Route::post(
-            'login/{authenticationType}',
-            AuthenticationController::class . '@login'
+            'login/cookie',
+            AuthenticationController::class.'@loginCookie'
         )
-            ->name('user_management_system.login');
+            ->name('user_management_system.login-cookie');
 
         Route::get(
-            'logout',
-            AuthenticationController::class . '@logout'
+            'logout/cookie',
+            AuthenticationController::class.'@logoutCookie'
         )
-            ->name('user_management_system.logout');
+            ->name('user_management_system.logout-cookie');
 
 //        /*
 //         * Password Management

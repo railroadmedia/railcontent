@@ -29,7 +29,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->json(
             'POST',
-            'usora/login/'.AuthenticationType::Token->value,
+            'usora/login/token',
             []
         );
 
@@ -61,7 +61,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->json(
             'POST',
-            'usora/login/'.AuthenticationType::Token->value,
+            'usora/login/token',
             ['email' => 'fail', 'password' => '123', 'device_name' => 'test_device']
         );
 
@@ -86,10 +86,11 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->json(
             'POST',
-            'usora/login/'.AuthenticationType::Token->value,
+            'usora/login/token',
             ['email' => $email, 'password' => $password, 'device_name' => $device]
         );
 
+        // make sure no web based auth cookies are passed back
         $this->assertEquals(200, $response->getStatusCode());
 
         $responseJson = json_decode($response->getContent());
@@ -105,7 +106,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/cookie',
             ['email' => 'fail', 'password' => '123']
         );
 
@@ -118,7 +119,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value
+            'usora/login/cookie'
         );
 
         $this->assertEmpty(auth()->id());
@@ -142,7 +143,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -170,7 +171,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/cookie',
             ['email' => $email, 'password' => $password, 'redirect' => $redirectUrl]
         );
 
@@ -196,7 +197,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -223,7 +224,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    public function test_logout()
+    public function test_logout_token()
     {
         $email = $this->faker->email;
         $password = $this->faker->words(3, true);
@@ -235,7 +236,37 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/token',
+            ['email' => $email, 'password' => $password, 'device_name' => 'test']
+        );
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+
+        $this->assertDatabaseHas('personal_access_tokens', ['id' => 1, 'tokenable_id' => $user->id]);
+
+        $response = $this->get(
+            'usora/logout/token',
+            ['Authorization' => 'Bearer ' . json_decode($response->getContent())->token]
+        );
+
+        $this->assertEmpty(auth()->user());
+
+        $this->assertDatabaseMissing('personal_access_tokens', ['id' => 1, 'tokenable_id' => $user->id]);
+    }
+
+    public function test_logout_cookie()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        $response = $this->call(
+            'POST',
+            'usora/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -249,7 +280,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
         $this->assertEmpty(auth()->user());
     }
 
-    public function test_deauthenticate_with_remember()
+    public function test_logout_cookie_with_remember()
     {
         $email = $this->faker->email;
         $password = $this->faker->words(3, true);
@@ -261,7 +292,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -273,7 +304,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/'.AuthenticationType::Cookie->value,
+            'usora/login/cookie',
             ['email' => $email, 'password' => $password],
             $cookies
         );
