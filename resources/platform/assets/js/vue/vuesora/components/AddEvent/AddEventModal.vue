@@ -1,5 +1,4 @@
 <template>
-  <ModalRenderer>
     <InfoModal :modalId="modalId" @onClose="toggleModal">
       <div
         class="
@@ -106,7 +105,6 @@
         </p>
       </div>
     </InfoModal>
-  </ModalRenderer>
 </template>
 <script>
 import UtilsHelpers from "../../assets/js/helper-functions/utils.js";
