@@ -10,13 +10,14 @@ const props = defineProps({
         default: 'drumeo'
     }
 });
+const emit = defineEmits(['onClose']);
 const onSearch = () => {
     // handle search
 };
 </script>
 
 <template>
-  <ModalRenderer>
+  <ModalRenderer @onClose="() => emit('onClose')">
     <div
       class="
         lg:tw-hidden
