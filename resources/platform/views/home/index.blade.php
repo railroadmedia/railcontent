@@ -35,72 +35,62 @@
                     <home-card-links brand="{{ $brand }}"></home-card-links>
                     
                     {{-- Continue Section --}}
-                    {{-- <catalog-section
-                        brand="{{ $brand }}" 
-                        title="Continue"
-                        type="video"
-                        :is-visible="true"
-                        url="/members/profile/397822/lists?state=started"
-                        :preloaded-content="{{ $startedContent }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._continue-section', [
+                        'hasStartedContent' => !empty($startedContentArray),
+                        'contentEndpoint' => '/railcontent/content',
+                        'continueUrl' => url()->route('members.profile.lists', ['state' => 'started']),
+                        'seeAllUrl' => url()->route('members.profile.lists', ['state' => 'started']),
+                        'brand' => 'pianote',
+                        'startedContent' => $startedContentJson,
+                        ])
+                    @endcomponent --}}
 
                     {{-- New Section --}}
-                    {{-- <catalog-section
-                        brand="{{ $brand }}" 
-                        title="New"
-                        type="video"
-                        :is-visible="true"
-                        url="/members/lessons/all"
-                        :preloaded-content="{{ $newContent }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._new-section', [
+                        'brand' => 'drumeo',
+                        'contentEndpoint' => '/laravel/public/railcontent/content',
+                        'allLessonsUrl' => url()->route('members.lessons.all'),
+                        'newContent' => $newContent,
+                        ])
+                    @endcomponent --}}
 
                     {{-- Popular Conversations --}}
-                    {{-- <catalog-section
-                        title="Popular Conversations"
-                        type="forum"
-                        brand="{{ $brand }}"
-                        :is-visible="true"
-                        url="/members/forums"
-                        :preloaded-content="{{ $forumPosts }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._conversations-section', [
+                        'brand' => 'drumeo',
+                        'forumUrl' => 'https://forums.drumeo.com',
+                        'forumPosts' => $hotForumTopics,
+                        ])
+                    @endcomponent --}}
 
                     {{-- From Subscribed Coaches --}}
-                    {{-- <catalog-section
-                        brand="{{ $brand }}" 
-                        title="From Subscribed Coaches"
-                        type="video"
-                        :is-visible="{{ $hasfollowedLessons }}"
-                        url="/members/lessons/subscribed"
-                        :preloaded-content="{{ $followedLessons }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._followed-section', [
+                        'brand' => 'drumeo',
+                        'subscribedLessons' => url()->route('members.lessons.subscribed'),
+                        'contentEndpoint' => '/laravel/public/railcontent/content',
+                        'followedLessons' => $followedLessons,
+                        'hasfollowedLessons' => $hasfollowedLessons,
+                        ])
+                    @endcomponent --}}
 
                     {{-- Subscribed Coaches --}}
-                    {{-- <catalog-section
-                        brand="{{ $brand }}" 
-                        title="Subscribed Coaches"
-                        type="coach"
-                        :is-visible="{{ $hasSubscribedCoaches }}"
-                        url="/members/coaches?only_subscribed=true#coach-section"
-                        :preloaded-content="{{ $hasSubscribedCoaches }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._coaches-section', [
+                        'brand' => 'drumeo',
+                        'hasSubscribedCoaches' => $hasSubscribedCoaches,
+                        'subscribedCoaches' => $subscribedCoaches,
+                        'subscribedCoachesUrl' => '/members/coaches?only_subscribed=true#coach-section',
+                        'allCoachesUrl' => '/members/coaches?only_subscribed=true#coach-section"',
+                        ])
+                    @endcomponent --}}
 
                     {{-- My Playlists --}}
-                    {{-- <catalog-section
-                        brand="{{ $brand }}" 
-                        title="My Playlists"
-                        type="playlist"
-                        :is-visible="true"
-                        url="/members/profile/397822/lists"
-                        :preloaded-content="{{ $usersListContent }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._list-section', [
+                        'brand' => 'drumeo',
+                        'myListUrl' => url()->route('user.lists', ['id' => auth()->id()]),
+                        'contentEndpoint' => '/laravel/public/railcontent/content',
+                        'usersList' => $usersList,
+                        ])
+                    @endcomponent --}}
                     
-                    <p>
                     {{-- Live Banner --}}
                     <coach-event 
                         brand="{{ $brand }}" 
@@ -113,15 +103,13 @@
                     ></coach-event>
 
                     {{-- Upcoming Events --}}
-                    {{-- <catalog-section
-                        brand="{{ $brand }}" 
-                        title="Upcoming Events"
-                        type="video"
-                        :is-visible="true"
-                        url="/members/live"
-                        :preloaded-content="{{ $upcomingEvents }}"
-                        content-endpoint="/railcontent/content"
-                    ></catalog-section> --}}
+                    {{-- @component('partials.bladesora.members.components.home._upcoming-section', [
+                        'brand' => 'drumeo',
+                        'upcomingUrl' => url()->route('members.live'),
+                        'upcomingEvents' => $upcomingEvents,
+                        'contentEndpoint' => '/laravel/public/railcontent/content',
+                        ])
+                    @endcomponent --}}
 
                     {{-- My Stats --}}
                     <stats-section
