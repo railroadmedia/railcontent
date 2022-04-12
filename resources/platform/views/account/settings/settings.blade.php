@@ -1,7 +1,7 @@
-@extends('members.account.settings.layout')
+@extends('account.settings.layout')
 
 @section('meta')
-    <title>Settings | Singeo</title>
+    <title>Settings | Musora</title>
 @endsection
 
 @section('edit-forms')
@@ -22,7 +22,7 @@
                 <div class="flex flex-row ph-3 pb-3">
                     <div class="flex flex-column">
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.toggle-input', [
+                            @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "weeklyUpdates",
                                 "inputName" => "notify_weekly_update",
                                 "inputLabel" => "Weekly Community Updates.",
@@ -30,7 +30,7 @@
                             ])
                         </div>
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.toggle-input', [
+                            @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "repliesComment",
                                 "inputName" => "notify_on_lesson_comment_reply",
                                 "inputLabel" => "When a member replies to my lesson comment.",
@@ -38,7 +38,7 @@
                             ])
                         </div>
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.toggle-input', [
+                            @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "likesComment",
                                 "inputName" => "notify_on_lesson_comment_like",
                                 "inputLabel" => "When a member likes my lesson comment.",
@@ -46,7 +46,7 @@
                             ])
                         </div>
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.toggle-input', [
+                            @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "repliesForum",
                                 "inputName" => "notify_on_forum_followed_thread_reply",
                                 "inputLabel" => "When a member posts in a forum thread I created or follow.",
@@ -54,7 +54,7 @@
                             ])
                         </div>
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.toggle-input', [
+                            @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "likesForum",
                                 "inputName" => "notify_on_forum_post_like",
                                 "inputLabel" => "When a member likes my forum posts",
@@ -70,7 +70,7 @@
                 <div class="flex flex-row ph-3 pb-3">
                     <div class="flex flex-column">
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.radio-input', [
+                            @include('partials.bladesora.members.inputs.radio-input', [
                                 "inputID" => "rightAway",
                                 "inputName" => "notifications_summary_frequency_minutes",
                                 "inputLabel" => "Send me notifications right away.",
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.radio-input', [
+                            @include('partials.bladesora.members.inputs.radio-input', [
                                 "inputID" => "perDay",
                                 "inputName" => "notifications_summary_frequency_minutes",
                                 "inputLabel" => "Email me a summary of my notifications once per day.",
@@ -101,7 +101,7 @@
                 <div class="flex flex-row ph-3 pb-3 pt-3">
                     <div class="flex flex-column">
                         <div class="flex flex-row mb-2">
-                            @include('bladesora::members.inputs.toggle-input', [
+                            @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "useLegacyPlayer",
                                 "inputName" => "use_legacy_video_player",
                                 "inputLabel" => "Use legacy video player.",

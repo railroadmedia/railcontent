@@ -2,7 +2,7 @@
     /** @var $subscription Railroad\Ecommerce\Entities\Subscription */
 @endphp
 
-@extends('members.account.settings.layout')
+@extends('account.settings.layout')
 
 @section('meta')
     <title>Membership | Singeo</title>
@@ -140,7 +140,7 @@
     </div>
 
     @if(!empty($subscription))
-        @include('members.account.settings.partials._unsubscribe', [
+        @include('account.settings.partials._unsubscribe', [
             "subscription" => $subscription
         ])
     @endif

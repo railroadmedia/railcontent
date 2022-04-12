@@ -28,7 +28,7 @@
             <p class="body font-bold mb-2">1) What would you like to do? Please choose an option below.</p>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "instructorPlease",
                     "inputName" => "action",
                     "inputLabel" => "I'd like to be contacted by a Singeo Instructor to discuss how Singeo can help me achieve my goals.",
@@ -39,7 +39,7 @@
 
             @if(!empty($subscription->getPaidUntil()))
                 <div class="mb-3">
-                    @include('bladesora::members.inputs.radio-input', [
+                    @include('partials.bladesora.members.inputs.radio-input', [
                         "inputID" => "contactMe",
                         "inputName" => "action",
                         "inputLabel" => "I'd like to unsubscribe.<br><span class='tiny font-italic text-grey-3'>Your account will expire on: " . Carbon\Carbon::parse($subscription->getPaidUntil())->format('F jS, Y') . ". Automatic renewal payments will stop immediately.</span>",
@@ -49,7 +49,7 @@
                 </div>
             @else
                 <div class="mb-3">
-                    @include('bladesora::members.inputs.radio-input', [
+                    @include('partials.bladesora.members.inputs.radio-input', [
                         "inputID" => "contactMe",
                         "inputName" => "action",
                         "inputLabel" => "I'd like to unsubscribe.<br><span class='tiny font-italic text-grey-3'>Please allow 48 hours for your cancellation to be processed.</span>",
@@ -62,7 +62,7 @@
             <p class="body font-bold mb-2">2) Why do you want to unsubscribe? Please choose one reason below.</p>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "noTime",
                     "inputName" => "reason",
                     "inputLabel" => "I don't have the time.",
@@ -72,7 +72,7 @@
             </div>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "notUsing",
                     "inputName" => "reason",
                     "inputLabel" => "I'm not using it.",
@@ -82,7 +82,7 @@
             </div>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "tooEasy",
                     "inputName" => "reason",
                     "inputLabel" => "The lessons are too easy.",
@@ -92,7 +92,7 @@
             </div>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "tooDifficult",
                     "inputName" => "reason",
                     "inputLabel" => "The lessons are too difficult.",
@@ -102,7 +102,7 @@
             </div>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "tooExpensive",
                     "inputName" => "reason",
                     "inputLabel" => "It's too expensive.",
@@ -112,7 +112,7 @@
             </div>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "dontKnow",
                     "inputName" => "reason",
                     "inputLabel" => "I don't know how to use it.",
@@ -122,7 +122,7 @@
             </div>
 
             <div class="mb-2">
-                @include('bladesora::members.inputs.radio-input', [
+                @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "other",
                     "inputName" => "reason",
                     "inputLabel" => "Other",
@@ -132,7 +132,7 @@
             </div>
 
             <div id="reasonInput" class="mb-2 hide">
-                @include('bladesora::members.inputs.textarea-input', [
+                @include('partials.bladesora.members.inputs.textarea-input', [
                    "brand" => "Singeo",
                    "type" => "text",
                    "inputId" => "otherReason",

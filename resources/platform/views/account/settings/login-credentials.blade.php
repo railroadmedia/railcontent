@@ -1,7 +1,7 @@
-@extends('members.account.settings.layout')
+@extends('account.settings.layout')
 
 @section('meta')
-    <title>Login Credentials | Singeo</title>
+    <title>Login Credentials | Musora</title>
 @endsection
 
 @section('edit-forms')
@@ -11,8 +11,8 @@
         </div>
 
         <div class="flex flex-row pa-3 flex-auto bt-grey-1-1">
-            @include('bladesora::members.account.settings.login-credentials.email-form', [
-                'brand' => 'singeo',
+            @include('partials.bladesora.members.account.settings.login-credentials.email-form', [
+                'brand' => '{{ $brand }}',
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',
                 'action' => '/usora/email-change/request',
                 'method' => 'post',
@@ -31,8 +31,8 @@
         </div>
 
         <div class="flex flex-row pa-3 flex-auto bt-grey-1-1 body">
-            @include('bladesora::members.account.settings.login-credentials.password-form', [
-                'brand' => 'singeo',
+            @include('partials.bladesora.members.account.settings.login-credentials.password-form', [
+                'brand' => '{{ $brand }}',
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',
                 'action' => route('usora.user-password.update'),
                 'method' => 'patch',

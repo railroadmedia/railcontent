@@ -1,4 +1,4 @@
-@extends('members.account.settings.layout')
+@extends('account.settings.layout')
 
 @section('meta')
     <title>Payments | Singeo</title>
@@ -8,7 +8,7 @@
     <script src="https://js.stripe.com/v3/"></script>
 @endsection
 
-@section('inject-components')
+@section('layout-scripts')
     @parent
 
     <script src="{{ mix('assets/members/js/profile.js') }}"></script>
@@ -21,17 +21,18 @@
         </div>
 
         <div class="flex flex-row ph-3 mb-3">
-             <payment-methods
-                     theme-color="singeo"
-                     :payment-methods="{{ $paymentMethodsJson }}"
-                     brand="singeo"
-                     stripe-publishable-key="{{ $stripePublishableKey }}"
-                     :countries="{{ $countries }}"
-                     :provinces="{{ $provinces }}"
-                     :cart="{{ $cartJson }}"
-                     :has-subscription="{{ json_encode(!empty($currentSubscription)) }}"
-                     :is-active="{{ json_encode($existingSubscriptionActive) }}"
-                     :user-id="{{ auth()->id() }}"></payment-methods>
+            <payment-methods
+                theme-color="singeo"
+                :payment-methods="{{ $paymentMethodsJson }}"
+                brand="singeo"
+                stripe-publishable-key="{{ $stripePublishableKey }}"
+                :countries="{{ $countries }}"
+                :provinces="{{ $provinces }}"
+                :cart="{{ $cartJson }}"
+                :has-subscription="{{ json_encode(!empty($currentSubscription)) }}"
+                :is-active="{{ json_encode($existingSubscriptionActive) }}"
+                :user-id="{{ auth()->id() }}"
+            />
         </div>
     </div>
 
