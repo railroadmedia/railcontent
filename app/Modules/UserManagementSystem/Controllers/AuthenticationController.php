@@ -119,6 +119,7 @@ class AuthenticationController extends Controller
             );
 
             $token = $user->createToken($request->get('device_name'));
+            $user->withAccessToken($token);
 
             return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
         }
@@ -150,10 +151,10 @@ class AuthenticationController extends Controller
     {
         $user = auth()->user();
 
-        dd($user->currentAccessToken());
+        if (!empty($user) && !empty($user->currentAccessToken())) {
+            $user->currentAccessToken()->accessToken->delete();
 
-        if (!empty($request->bearerToken())) {
-            user()->tokens()->where('token', $request->bearerToken())->delete();
+            auth()->logout();
         }
 
         return $request->has('redirect') ? redirect()->away($request->get('redirect')) :

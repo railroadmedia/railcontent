@@ -29,7 +29,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->json(
             'POST',
-            'usora/login/token',
+            config('user_management_system.route_prefix') . '/login/token',
             []
         );
 
@@ -61,7 +61,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->json(
             'POST',
-            'usora/login/token',
+            config('user_management_system.route_prefix') . '/login/token',
             ['email' => 'fail', 'password' => '123', 'device_name' => 'test_device']
         );
 
@@ -86,7 +86,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->json(
             'POST',
-            'usora/login/token',
+            config('user_management_system.route_prefix') . '/login/token',
             ['email' => $email, 'password' => $password, 'device_name' => $device]
         );
 
@@ -106,7 +106,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => 'fail', 'password' => '123']
         );
 
@@ -119,7 +119,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
     {
         $response = $this->call(
             'POST',
-            'usora/login/cookie'
+            config('user_management_system.route_prefix') . '/login/cookie'
         );
 
         $this->assertEmpty(auth()->id());
@@ -143,7 +143,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -171,7 +171,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password, 'redirect' => $redirectUrl]
         );
 
@@ -197,7 +197,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -236,7 +236,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/token',
+            config('user_management_system.route_prefix') . '/login/token',
             ['email' => $email, 'password' => $password, 'device_name' => 'test']
         );
 
@@ -245,7 +245,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
         $this->assertDatabaseHas('personal_access_tokens', ['id' => 1, 'tokenable_id' => $user->id]);
 
         $response = $this->get(
-            'usora/logout/token',
+            config('user_management_system.route_prefix') . '/logout/token',
             ['Authorization' => 'Bearer ' . json_decode($response->getContent())->token]
         );
 
@@ -266,7 +266,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -274,7 +274,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'GET',
-            'usora/logout',
+            config('user_management_system.route_prefix') . '/logout/cookie',
         );
 
         $this->assertEmpty(auth()->user());
@@ -292,7 +292,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password]
         );
 
@@ -304,7 +304,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'POST',
-            'usora/login/cookie',
+            config('user_management_system.route_prefix') . '/login/cookie',
             ['email' => $email, 'password' => $password],
             $cookies
         );
@@ -313,7 +313,7 @@ class AuthenticationControllerUserManagementSystemTest extends UserManagementSys
 
         $response = $this->call(
             'GET',
-            'usora/logout',
+            config('user_management_system.route_prefix') . '/logout/cookie',
         );
 
         $this->assertEmpty(auth()->user());
