@@ -3,26 +3,28 @@
     $leftSidebar = true;
 @endphp
 
-@extends('members.forums.forumlayout')
+@extends('forums.forumlayout')
 
 @section('meta')
-    <title>Create a Forum | Singeo</title>
-@endsection
-
-@section('inject-components')
-    <script src="{{ mix('assets/members/js/forum.js') }}"></script>
+    <title>Create a Forum | {{ $brand }}</title>
 @endsection
 
 @section('content')
-    @include('members.partials._content-sidebar')
+    <page-container>
 
-    <div class="container mv-3 forum-post">
-        @include('bladesora::members.forums.create-forum', [
-            "brand" => "singeo",
-            "forumUrl" => url()->route('forums.index'),
-            "formAction" => url()->route('railforums.discussion.store'),
-            "method" => 'PUT',
-            "topicOptions" => []
-        ])
-    </div>
+        <div v-cloak>
+
+            <div class="container mv-3 forum-post">
+                @include('partials.bladesora.members.forums.create-forum', [
+                    "brand" => $brand,
+                    "forumUrl" => url()->route('forums.index'),
+                    "formAction" => url()->route('railforums.discussion.store'),
+                    "method" => 'PUT',
+                    "topicOptions" => []
+                ])
+            </div>
+
+        </div>
+        
+    </page-container>
 @endsection
