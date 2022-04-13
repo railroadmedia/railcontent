@@ -2,10 +2,9 @@
 
 @section('content')
     <page-container>
-
         <div v-cloak>
 
-            @include('partials.bladesora.adesora.partials._account-header', [
+            @include('partials.bladesora.members.partials._account-header', [
                 "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
                 "userAvatar" => current_user()->getProfilePictureUrl(),
                 "userName" => current_user()->getDisplayName(),
@@ -83,6 +82,5 @@
             </div>
 
         </div>
-
     </page-container>
 @endsection

@@ -6,7 +6,6 @@
 
 @section('content')
     <page-container>
-
         <div v-cloak>
 
             @include('partials.bladesora.members.partials._account-header', [
@@ -18,7 +17,7 @@
             ])
 
             <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
-                <div class="tw-flex tw-flex-column">
+                <div class="tw-flex tw-flex-col">
 
                     <div class="tw-flex tw-flex-row pv-3 ph {{ $isSubscriber ? 'bb-grey-1-1' : '' }}">
                         <h1 class="heading grow">{{ $isCurrentUsersProfile ? 'My' : possessivize($user->getDisplayName()) }} Dashboard</h1>
@@ -125,34 +124,10 @@
                                 <p class="body">{!! nl2br($user->getBiography()) !!}</p>
                             @endif
                         </div>
-
-        {{--                <div id="gearImageModal" class="modal">--}}
-        {{--                    <div class="tw-flex tw-flex-column pa bg-white shadow corners-10">--}}
-        {{--                        <img src="{{ $user->getPianoGearPhoto() }}" alt="" style="width:100%;height:auto;">--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-
-        {{--                <div class="tw-flex tw-flex-column xs-12 md-5 mb-2">--}}
-        {{--                    @if(!empty($user->getPianoGearPhoto()))--}}
-        {{--                        <div class="mb-2 widescreen bg-center corners-10 pointer"--}}
-        {{--                             data-open-modal="gearImageModal"--}}
-        {{--                             style="background-image:url({{ $user->getPianoGearPhoto() }})">--}}
-        {{--                        </div>--}}
-        {{--                    @endif--}}
-
-        {{--                    @include('partials.bladesora.members.account.partials._text-fields', [--}}
-        {{--                        "fields" => [--}}
-        {{--                            "Played Piano Since" => $user->getPianoPlayingSinceYear(),--}}
-        {{--                            "Piano" => $user->getPianoGearPianoBrands(),--}}
-        {{--                            "Keyboard" => $user->getPianoGearKeyboardBrands(),--}}
-        {{--                        ]--}}
-        {{--                    ])--}}
-        {{--                </div>--}}
                     </div>
                 </div>
             </div>
 
         </div>
-
     </page-container>
 @endsection

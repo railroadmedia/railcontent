@@ -11,7 +11,7 @@
 @section('layout-scripts')
     @parent
 
-    <script src="{{ mix('assets/members/js/profile.js') }}"></script>
+    <script src="{{ mix('platform/js/profile.js') }}"></script>
 @endsection
 
 @section('edit-forms')
