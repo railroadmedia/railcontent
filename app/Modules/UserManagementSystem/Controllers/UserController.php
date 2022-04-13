@@ -8,8 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use ReflectionException;
-use Spatie\Permission\Exceptions\UnauthorizedException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
@@ -27,89 +25,41 @@ class UserController extends Controller
      * @return RedirectResponse
      * @throws ReflectionException
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
+        // todo
         $this->authorize('users.create');
-
-        return 'yes';
     }
 
-//    /**
-//     * @param UserUpdateRequest $request
-//     * @param integer $id
-//     * @return RedirectResponse
-//     * @throws DBALException
-//     * @throws ORMException
-//     * @throws OptimisticLockException
-//     * @throws ReflectionException
-//     */
-//    public function update(UserUpdateRequest $request, $id)
-//    {
-//        if (!$this->permissionService->can(auth()->id(), 'update-users') && auth()->id() != $id) {
-//            throw new NotFoundHttpException();
-//        }
-//
-//        $user = $this->userRepository->find($id);
-//        $oldUser = clone($user);
-//
-//        if (empty($user)) {
-//            throw new NotFoundHttpException();
-//        }
-//
-//        $this->arrayHydrator->hydrate($user, $request->onlyAllowed());
-//
-//        // regular users are not allowed to change their emails here
-//        if ($this->permissionService->can(auth()->id(), 'update-users-email-without-confirmation') &&
-//            !empty($request->input('data.attributes.email'))) {
-//
-//            $user->setEmail($request->input('data.attributes.email'));
-//        }
-//
-//        $this->entityManager->persist($user);
-//        $this->entityManager->flush();
-//
-//        event(new UserUpdated($user, $oldUser));
-//
-//        $message = ['success' => true];
-//
-//        return $request->has('redirect') ?
-//            redirect()
-//                ->away($request->get('redirect'))
-//                ->with($message) :
-//            redirect()
-//                ->back()
-//                ->with($message);
-//    }
-//
-//    /**
-//     * @param Request $request
-//     * @param integer $id
-//     * @return RedirectResponse
-//     * @throws ORMException
-//     */
-//    public function delete(Request $request, $id)
-//    {
-//        if (!$this->permissionService->can(auth()->id(), 'delete-users')) {
-//            throw new NotFoundHttpException();
-//        }
-//
-//        $user = $this->userRepository->find($id);
-//
-//        if (!is_null($user)) {
-//            $this->entityManager->remove($user);
-//            $this->entityManager->flush();
-//
-//            event(new UserDeleted($user));
-//        }
-//
-//        $message = ['success' => true];
-//
-//        return $request->has('redirect') ?
-//            redirect()
-//                ->away($request->get('redirect'))
-//                ->with($message) :
-//            redirect()
-//                ->back()
-//                ->with($message);
-//    }
+    /**
+     * @return RedirectResponse
+     * @throws ReflectionException
+     */
+    public function read(Request $request, $id)
+    {
+        // todo
+        $this->authorize('users.read');
+    }
+
+    /**
+     * @param integer $id
+     * @return RedirectResponse
+     * @throws ReflectionException
+     */
+    public function update(Request $request, $id)
+    {
+        // todo
+        $this->authorize('users.update');
+    }
+
+    /**
+     * @param Request $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request, $id)
+    {
+        // todo
+        $this->authorize('users.destroy');
+    }
 }

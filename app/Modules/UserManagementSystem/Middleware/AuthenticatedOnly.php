@@ -31,7 +31,11 @@ class AuthenticatedOnly
         if (Auth::guard('user-management-system')->check()) {
             return $next($request);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException(
+                $message = 'Unauthenticated.',
+                [],
+                $redirectTo = config('user_management_system.login_page_path')
+            );
         }
     }
 }
