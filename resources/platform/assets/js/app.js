@@ -17,6 +17,9 @@ import VueAxios from 'vue-axios'
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
+import ForumThreadsTable from './vue/vuesora/views/forum';
+import ForumThread from './vue/vuesora/views/forum/thread';
+import TextEditor from './vue/vuesora/components/TextEditor';
 
 const app = createApp({});
 
@@ -32,6 +35,9 @@ app.component('AppContainer', AppContainer)
    .component('Onboarding', Onboarding)
    .component('TriggerBanner', TriggerBanner)
    .component('NotificationsTable', NotificationsTable)
+   .component('ForumThreadsTable', ForumThreadsTable)
+   .component('ForumThread', ForumThread)
+   .component('TextEditor', TextEditor)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
