@@ -1,18 +1,18 @@
-@extends('members.account.settings.layout')
+@extends('account.settings.layout')
 
 @section('meta')
-    <title>Login Credentials | Singeo</title>
+    <title>Login Credentials | Musora</title>
 @endsection
 
 @section('edit-forms')
-    <div id="editForm" class="flex flex-column">
-        <div class="flex flex-row pa-3 bb-grey-1-1 flex-auto">
+    <div id="editForm" class="tw-flex tw-flex-column">
+        <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1 tw-flex-auto">
             <h1 class="heading">Login Credentials</h1>
         </div>
 
-        <div class="flex flex-row pa-3 flex-auto bt-grey-1-1">
-            @include('bladesora::members.account.settings.login-credentials.email-form', [
-                'brand' => 'singeo',
+        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
+            @include('partials.bladesora.members.account.settings.login-credentials.email-form', [
+                'brand' => '{{ $brand }}',
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',
                 'action' => '/usora/email-change/request',
                 'method' => 'post',
@@ -30,9 +30,9 @@
            ])
         </div>
 
-        <div class="flex flex-row pa-3 flex-auto bt-grey-1-1 body">
-            @include('bladesora::members.account.settings.login-credentials.password-form', [
-                'brand' => 'singeo',
+        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1 body">
+            @include('partials.bladesora.members.account.settings.login-credentials.password-form', [
+                'brand' => '{{ $brand }}',
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',
                 'action' => route('usora.user-password.update'),
                 'method' => 'patch',
