@@ -34,16 +34,13 @@ const props = defineProps({
 
 <template>
   <div
-    :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] ${
+    :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%] ${
       showSlide
         ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative'
         : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'
     }`"
     :style="{
       backgroundImage: `url('${img}')`,
-      backgroundPosition: 'top center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
     }"
   >
     <div
@@ -63,29 +60,33 @@ const props = defineProps({
           tw-justify-center
           tw-px-[26px]
           tw-font-open-sans
+          tw-w-1/2
         "
       >
-        <h4 class="tw-font-bold tw-text-[16px]">{{ topSubtitle }}</h4>
+        <h4 class="tw-font-bold tw-text-[16px] tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
         <h2
           class="
             tw-font-bold
             tw-font-bebas-neue
             tw-text-[60px]
-            tw-leading-[40px]
-            tw-mt-[15px]
-            tw-mb-[5px]
+            tw-mb-1
+            tw-uppercase
+            tw-leading-none
           "
         >
           {{ title }}
         </h2>
-        <p class="tw-text-[16px]">{{ description }}</p>
+
+        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block">{{ description }}</p>
+        
         <a
           class="
-            tw-block
             tw-text-white
             tw-font-bold
             tw-font-bebas-neue
             tw-text-[20px]
+            tw-hidden
+            xl:tw-block
           "
           :href="ctaUrl"
           >{{ ctaText }}

@@ -1,11 +1,9 @@
 <section id="loginForm" class="flex flex-column bg-grey-1 pa-3 mb-3 corners-10">
 
     <form method="post" action="{{ $loginUrl }}" class="flex flex-column">
-        @if($useCsrfToken ?? true)
             {{ csrf_field() }}
-        @endif
 
-        @if(!empty($errors->all()))
+        @if(!empty($errors) && !empty($errors->all()))
             <ul class="flex flex-column mb-3 tiny text-error list-style-none">
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -20,7 +18,7 @@
         @endif
 
         <div class="flex flex-column mb-2">
-            @include('bladesora::members.inputs.text-input', [
+            @include('partials.bladesora.members.inputs.text-input', [
                "brand" => $brand,
                "type" => "email",
                "inputId" => "loginEmail",
@@ -32,7 +30,7 @@
         </div>
 
         <div class="flex flex-column mb-2">
-            @include('bladesora::members.inputs.text-input', [
+            @include('partials.bladesora.members.inputs.text-input', [
                 "brand" => $brand,
                 "type" => "password",
                 "inputId" => "loginPassword",

@@ -9,9 +9,16 @@ import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
-import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
+import Onboarding from './vue/components/Onboarding/Onboarding.vue';
+import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+//Vuesora Components
+import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
+import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
+import ForumThreadsTable from './vue/vuesora/views/forum';
+import ForumThread from './vue/vuesora/views/forum/thread';
+import TextEditor from './vue/vuesora/components/TextEditor';
 
 const app = createApp({});
 
@@ -23,6 +30,13 @@ app.component('AppContainer', AppContainer)
    .component('CatalogSection', CatalogSection)
    .component('StatsSection', StatsSection)
    .component('CoachEvent', CoachEvent)
+   .component('ContentCatalogue', ContentCatalogue)
+   .component('Onboarding', Onboarding)
+   .component('TriggerBanner', TriggerBanner)
+   .component('ForumThreadsTable', ForumThreadsTable)
+   .component('ForumThread', ForumThread)
+   .component('TextEditor', TextEditor)
+
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

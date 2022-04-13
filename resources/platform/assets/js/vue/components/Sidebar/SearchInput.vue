@@ -30,7 +30,7 @@ const handleFocus = () => {
     <InputLabel
       placeholder="Search"
       @onChange="handleChange"
-      :classOverride="`
+      :inputOverride="`
         tw-outline-offset-0
         tw-relative
         tw-z-10

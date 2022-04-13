@@ -1,26 +1,19 @@
 @if($hasSubscribedCoaches)
-    <section class="flex flex-row tw-mb-6 md:tw-mb-8">
-        <div class="flex flex-column grow">
+    <section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
+        <div class="tw-flex tw-flex-col tw-grow">
 
-            <div class="flex flex-row align-v-center pv-2">
-                <span class="rounded bg-{{$brand}} text-white icon-bg-circle body mr-1">
-                    <i class="fas fa-gem"></i>
-                    <!-- <svg width="19" height="19" aria-hidden="true" focusable="false" fill="white">
-                        <use href="#whistle"></use>
-                    </svg> -->
-                </span>
-                <h2 class="heading capitalize grow">
-                    <a
-                        href="{{ $subscribedCoachesUrl }}"
-                        class="text-black font-no-underline"
-                    >Subscribed Coaches</a>
-                </h2>
-                <a href="{{ $subscribedCoachesUrl }}"
-                    aria-label="See All Coaches"
-                    class="text-{{$brand}} tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
+            <!-- Section Title -->
+            <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
+                <a href="{{ $subscribedCoachesUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Subscribed Coaches</h2>
+                </a>
+                <a href="{{ $subscribedCoachesUrl }}" 
+                    aria-label="See All Coaches" 
+                    class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                >
                     See All
                 </a>
-            </div>
+            </div> 
 
             <div class="tw-grid tw-gap-3 tw-grid-cols-3 sm:tw-grid-cols-4 md:tw-grid-cols-5 xl:tw-grid-cols-6">
                 @foreach($subscribedCoaches->results() as $coach)

@@ -90,7 +90,6 @@
       </div>
       <div class="flex flex-column">
         <h4 class="body" v-html="noResultsMessageWithProgress">
-          {{ noResultsMessageWithProgress }}
         </h4>
       </div>
     </div>
@@ -249,7 +248,7 @@
 <script>
 import axios from "axios";
 import * as QueryString from "query-string";
-import { Content as ContentHelpers } from "@musora/helper-functions";
+import ContentHelpers from '../../assets/js/helper-functions/content.js';
 import DownloadsCatalogue from "./DownloadsCatalogue.vue";
 import GridCatalogue from "./GridCatalogue.vue";
 import CoachGridCatalogue from "./CoachGridCatalogue.vue";

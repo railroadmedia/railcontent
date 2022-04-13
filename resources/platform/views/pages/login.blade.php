@@ -1,4 +1,4 @@
-@extends('members.layout', [
+@extends('layout', [
     "bodyClass" => "bg-white login-body",
     "hideNav" => true,
     "hideFooter" => true
@@ -32,16 +32,14 @@
 
 @section('content')
     <section id="logoContainer" class="pa-2 text-center">
-        <img class="logo"
-             src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
     </section>
 
     <p class="pb-3 text-center font-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>
 
-    @include('bladesora::members.login-form', [
+    @include('partials.bladesora.members.login-form', [
         "brand" => "singeo",
-        "loginUrl" => url()->route('usora.authenticate.with-credentials', (!empty($redirect) ? ['redirect' => $redirect] : [])),
-        "resetUrl" => url()->route('usora.password.send-reset-email'),
+        "loginUrl" => url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])),
+        "resetUrl" => 'todo',
         "joinUrl" => url('/#orderNow'),
         "joinPitch" => "text-black",
         "labelClasses" => "text-grey-3 tiny",

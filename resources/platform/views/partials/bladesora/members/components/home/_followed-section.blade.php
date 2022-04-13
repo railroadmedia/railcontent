@@ -1,25 +1,21 @@
 @if($hasfollowedLessons)
-    <section class="flex flex-row tw-mb-6 md:tw-mb-8">
-        <div class="flex flex-column grow">
+    <section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
+        <div class="tw-flex tw-flex-col tw-grow">
 
-            <div class="flex flex-row align-v-center pv-2">
-                <span class="rounded bg-{{$brand}} text-white icon-bg-circle body mr-1">
-                    <i class="fas fa-bell"></i>
-                </span>
-                <h2 class="heading capitalize grow">
-                    <a
-                        href="{{ $subscribedLessons }}"
-                        class="text-black font-no-underline"
-                    >From Subscribed Coaches</a>
-                </h2>
-                <a href="{{ $subscribedLessons }}"
+            <!-- Section Title -->
+            <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
+                <a href="{{ $subscribedLessons }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
+                </a>
+                <a href="{{ $subscribedLessons }}"  
                     aria-label="See All Subscribed Lessons"
-                    class="text-{{$brand}} tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
+                    class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                >
                     See All
                 </a>
-            </div>
+            </div> 
 
-            <div class="flex flex-row six-cards-row">
+            <div class="tw-flex tw-flex-row six-cards-row">
                 <transition appear name="fade">
                     <content-catalogue
                             theme-color="{{$brand}}"
@@ -34,9 +30,9 @@
                             :force-wide-thumbs="true"
                             :pre-loaded-content="{{ $followedLessons }}"
                     >
-                        <div class="flex flex-row nmh-1">
+                        <div class="tw-flex tw-flex-row nmh-1">
                             @for($i = 0; $i < 4; $i++)
-                                @include('bladesora::members.skeletons.card-item', [
+                                @include('partials.bladesora.members.skeletons.card-item', [
                                     "cardClass" => 'four-wide',
                                 ])
                             @endfor

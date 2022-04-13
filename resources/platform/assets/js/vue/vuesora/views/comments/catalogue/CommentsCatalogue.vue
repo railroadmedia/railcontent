@@ -178,7 +178,6 @@
                         class="flex flex-column comment-body tiny ph-1"
                         v-html="comment.comment"
                     >
-                        {{ comment.comment }}
                     </div>
 
                     <div class="flex flex-column lesson-title hide-xs-only ph-1">

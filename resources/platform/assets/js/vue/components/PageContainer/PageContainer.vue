@@ -1,170 +1,204 @@
 <script>
-import { ref } from 'vue'
-import Navbar from '../Navbar/Navbar.vue'
-import Sidebar from '../Sidebar/Sidebar.vue'
-import Footer from '../Footer/Footer.vue'
-import { useRouter, useRoute } from 'vue-router'
-import SpriteSheet from '../MusoraIcons/SpriteSheet.vue'
-import simplebar from 'simplebar-vue';
-import 'simplebar/dist/simplebar.min.css';
+import { ref } from "vue";
+import Navbar from "../Navbar/Navbar.vue";
+import Sidebar from "../Sidebar/Sidebar.vue";
+import Footer from "../Footer/Footer.vue";
+import { useRouter, useRoute } from "vue-router";
+import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
+import simplebar from "simplebar-vue";
+import "simplebar/dist/simplebar.min.css";
 
 export default {
-    name: 'PageContainer',
-    components: { Navbar, Sidebar, Footer, SpriteSheet, },
-    data() {
-        return {
-            brand: 'drumeo'
-        }
-    },
+  name: "PageContainer",
+  components: { Navbar, Sidebar, Footer, SpriteSheet },
+  data() {
+    return {
+      brand: "drumeo",
+    };
+  },
 
-    setup(props, context) {
-        const isSidebarCollapsed = ref(false)
-        const isSidebarHidden = ref(false)
-        const isDarkModeSelected = ref(false)
-        const route = useRoute()
-        const router = useRouter()
-        
-        const onCollapseSidebar = (val) => {
-            console.log('collapse sidebar called')
-            if (typeof val === 'boolean') {
-                isSidebarCollapsed.value = val;
-                isSidebarHidden.value = val;
-            } else {           
-                const smallBreakpoint = window.matchMedia('(max-width: 767px)');
-                if(smallBreakpoint.matches) {
-                    isSidebarHidden.value = !isSidebarHidden.value;
-                    isSidebarCollapsed.value = false;  
-                } else {
-                    isSidebarHidden.value = false;
-                    isSidebarCollapsed.value = !isSidebarCollapsed.value;
-                }
-            }
-        }
+  setup(props, context) {
+    const isSidebarCollapsed = ref(false);
+    const isSidebarHidden = ref(false);
+    const isDarkModeSelected = ref(false);
+    const route = useRoute();
+    const router = useRouter();
 
-        const onColorModeToggle = (val) => {
-            if (typeof val === 'boolean') {
-                isDarkModeSelected.value = val;
-                localStorage.setItem('darkMode', val);
-            } else {
-                isDarkModeSelected.value = !isDarkModeSelected.value;
-                localStorage.setItem('darkMode', isDarkModeSelected.value);
-            }
-        }
+    const setDarkMode = (isSelected) => {
+      const body = document.getElementById("app-body");
+      if (isSelected) {
+        body.classList.add("tw-dark");
+      } else {
+        body.classList.remove("tw-dark");
+      }
+    };
 
-        const onBrandSelect = (val) => {
-            const urlSearchParams = new URLSearchParams(window.location.search)
-            if (typeof val === 'string') {
-                brand.value = val;
-                urlSearchParams.set('brand', val);
-                //if using router
-                router.push({path:'/members', query:{brand: val}})
-            }
-        }
-
-        return {
-            isSidebarCollapsed,
-            isSidebarHidden,
-            isDarkModeSelected,
-            onCollapseSidebar,
-            onColorModeToggle,
-            onBrandSelect
-        }
-    },
-
-    beforeMount() {
-        //Set Dark Mode Based on User Preferences
-        if( localStorage.getItem('darkMode') ) {
-            this.isDarkModeSelected = JSON.parse(localStorage.getItem('darkMode'));
+    const onCollapseSidebar = (val) => {
+      console.log("collapse sidebar called");
+      if (typeof val === "boolean") {
+        isSidebarCollapsed.value = val;
+        isSidebarHidden.value = val;
+      } else {
+        const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+        if (smallBreakpoint.matches) {
+          isSidebarHidden.value = !isSidebarHidden.value;
+          isSidebarCollapsed.value = false;
         } else {
-            this.isDarkModeSelected = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          isSidebarHidden.value = false;
+          isSidebarCollapsed.value = !isSidebarCollapsed.value;
         }
-        //Get Query String
-        const urlSearchParams = new URLSearchParams(window.location.search)
-        const brandParam = urlSearchParams.get('brand');
-        this.brand = brandParam || 'drumeo';
-        //Set Sidebar State
-        const smallBreakpoint = window.matchMedia('(max-width: 767px)');
-        if(smallBreakpoint.matches) {
-            this.isSidebarHidden = true;
-            this.isSidebarCollapsed = false;
-        }
-    },
+      }
+    };
 
-    created() {
-        this.$watch(
-            //Watch for changes in route params
-            () => this.$route.query,
-            (toParams, previousParams) => {
-                this.brand = this.$route.query.brand;
-            }
-        )
-        //Check if Mobile on Resize
-        window.addEventListener("resize", this.onResize);
-    },
+    const onColorModeToggle = (val) => {
+      if (typeof val === "boolean") {
+        isDarkModeSelected.value = val;
+        setDarkMode(val);
+        localStorage.setItem("darkMode", val);
+      } else {
+        isDarkModeSelected.value = !isDarkModeSelected.value;
+        setDarkMode(isDarkModeSelected.value);
+        localStorage.setItem("darkMode", isDarkModeSelected.value);
+      }
+    };
 
-    destroyed() {
-        window.removeEventListener("resize", this.onResize);
-    },
+    const onBrandSelect = (val) => {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      if (typeof val === "string") {
+        brand.value = val;
+        urlSearchParams.set("brand", val);
+        //if using router
+        router.push({ path: "/members", query: { brand: val } });
+      }
+    };
 
-    methods: {
-        onResize(e) {
-            const smallBreakpoint = window.matchMedia('(max-width: 767px)');
-            if(smallBreakpoint.matches) {
-                this.isSidebarHidden = true;
-                this.isSidebarCollapsed = false;
-            }
-        },
+    return {
+      isSidebarCollapsed,
+      isSidebarHidden,
+      isDarkModeSelected,
+      onCollapseSidebar,
+      onColorModeToggle,
+      onBrandSelect,
+      setDarkMode
+    };
+  },
+
+  beforeMount() {
+    //Set Dark Mode Based on User Preferences
+    if (localStorage.getItem("darkMode")) {
+      this.isDarkModeSelected = JSON.parse(localStorage.getItem("darkMode"));
+      this.setDarkMode(this.isDarkModeSelected);
+    } else {
+      this.isDarkModeSelected = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      this.setDarkMode(this.isDarkModeSelected);
+    }
+    //Get Query String
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const brandParam = urlSearchParams.get("brand");
+    this.brand = brandParam || "drumeo";
+    //Set Sidebar State
+    const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+    if (smallBreakpoint.matches) {
+      this.isSidebarHidden = true;
+      this.isSidebarCollapsed = false;
+    }
+  },
+
+  created() {
+    this.$watch(
+      //Watch for changes in route params
+      () => this.$route.query,
+      (toParams, previousParams) => {
+        this.brand = this.$route.query.brand;
+      }
+    );
+    //Check if Mobile on Resize
+    window.addEventListener("resize", this.onResize);
+  },
+
+  destroyed() {
+    window.removeEventListener("resize", this.onResize);
+  },
+
+  methods: {
+    onResize(e) {
+      const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+      if (smallBreakpoint.matches) {
+        this.isSidebarHidden = true;
+        this.isSidebarCollapsed = false;
+      }
     },
-}
+  },
+};
 </script>
 
 <template>
-    <main :class="isDarkModeSelected ? 'tw-dark' : 'tw-block'"
-          class="tw-min-h-screen tw-w-screen"
+  <main class="tw-min-h-screen tw-w-screen">
+    <sprite-sheet></sprite-sheet>
+
+    <Navbar
+      :brand="brand"
+      :isSidebarHidden="isSidebarHidden"
+      :isDarkModeSelected="isDarkModeSelected"
+      :isSidebarCollapsed="isSidebarCollapsed"
+      @onBrandSelect="onBrandSelect"
+      @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle"
+    />
+
+    <!-- Page Container -->
+    <div
+      class="
+        tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
+        dark:tw-bg-[#000C17]
+        tw-overflow-hidden
+      "
     >
-        <sprite-sheet></sprite-sheet>
+      <!-- Sidebar -->
+      <Sidebar
+        :brand="brand"
+        :isSidebarCollapsed="isSidebarCollapsed"
+        :isSidebarHidden="isSidebarHidden"
+        @onCollapseSidebar="onCollapseSidebar"
+      />
 
-        <Navbar
-            :brand="brand"
-            :isSidebarHidden="isSidebarHidden"
-            :isDarkModeSelected="isDarkModeSelected"
-            :isSidebarCollapsed="isSidebarCollapsed"
-            @onBrandSelect="onBrandSelect"
-            @onCollapseSidebar="onCollapseSidebar"
-            @onColorModeToggle="onColorModeToggle"
-        />
+      <!-- Content Container -->
+      <main
+        class="
+          tw-flex
+          tw-w-full
+          tw-h-full
+          tw-min-h-screen
+          tw-pt-[58px]
+          tw-flex-col
+          tw-relative
+          tw-overflow-y-auto
+          tw-overflow-x-hidden
+        "
+      >
+        <!-- Content -->
+        <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">
+          <slot />
+        </section>
 
-        <!-- Page Container -->
-        <div class="tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors dark:tw-bg-[#000C17] tw-overflow-hidden">
+        <!-- Footer -->
+        <Footer />
 
-            <!-- Sidebar -->
-            <Sidebar :brand="brand" 
-                     :isSidebarCollapsed="isSidebarCollapsed" 
-                     :isSidebarHidden="isSidebarHidden"
-                     @onCollapseSidebar="onCollapseSidebar"
-            />
-
-            <!-- Content Container -->
-            <main class="tw-flex tw-w-full tw-h-full tw-min-h-screen tw-pt-[58px] tw-flex-col tw-relative tw-overflow-y-auto tw-overflow-x-hidden" data-simplebar>
-
-                <!-- Content -->
-                <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">
-
-                    <slot />
-
-                </section>
-
-                <!-- Footer -->
-                <Footer />
-
-                <!-- Sidebar Content Wrapper -->
-                <Transition name="fade">
-                    <div v-if="!isSidebarCollapsed && !isSidebarHidden" 
-                        @click="isSidebarHidden = true"
-                        class="tw-absolute md:tw-hidden tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30">
-                    </div>
-                </Transition>
-            </main>
-        </div>
-    </main>
+        <!-- Sidebar Content Wrapper -->
+        <Transition name="fade">
+          <div
+            v-if="!isSidebarCollapsed && !isSidebarHidden"
+            @click="isSidebarHidden = true"
+            class="
+              tw-absolute
+              md:tw-hidden
+              tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
+            "
+          ></div>
+        </Transition>
+      </main>
+    </div>
+  </main>
 </template>
