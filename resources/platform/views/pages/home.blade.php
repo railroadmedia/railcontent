@@ -1,8 +1,3 @@
-@php
-$bodyClass = ($bodyClass ?? '') . ' sidebar';
-$leftSidebar = true;
-@endphp
-
 @extends('members.layout')
 
 @section('meta')
@@ -17,14 +12,14 @@ $leftSidebar = true;
         <!-- Coach Of The Month -->
         @component('partials.bladesora.members.components.members-index-banner', [
             'coachOfTheMonth' => $coachOfTheMonth,
-            'brand' => 'singeo',
+            'brand' => '{{ $brand }}',
             ])
         @endcomponent
 
         <!-- Coach Event -->
         @if (!empty($coachEvent))
             <section class="tw-flex tw-py-2 tw-bg-gray-100 tw-mb-6 md:tw-mb-10">
-                <coach-event brand="singeo" :preloaded-content='{{ $coachEvent }}'
+                <coach-event brand="{{ $brand }}" :preloaded-content='{{ $coachEvent }}'
                     current-date-string="{{ $currentDate }}" subscription-calendar-id="{{ $calendarId }}"
                     youtube-event-id="{{ $youtubeId }}" :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
                     event-coach-profile-url="{{ $eventCoachProfileUrl }}" />
@@ -32,15 +27,15 @@ $leftSidebar = true;
             </section>
         @endif
         @if(session()->has('email-invite-message'))
-            <div class="container mt-4 mb-4">
-                <div class="flex flex-column" style="padding: 20px; background-color: #c7ff9b; border: 1px solid #3fd525">
-                    <h3 class="text-black no-decoration grow">Your invite was emailed successfully!</h3>
+            <div class="tw-container tw-mx-auto tw-mt-4 tw-mb-4">
+                <div class="tw-flex tw-flex-column" style="padding: 20px; background-color: #c7ff9b; border: 1px solid #3fd525">
+                    <h3 class="tw-text-black tw-no-underline tw-grow">Your invite was emailed successfully!</h3>
                 </div>
             </div>
         @endif
 
-        <div class="container tw-mb-24">
-            <div class="flex flex-column">
+        <div class="tw-container tw-mx-auto tw-mb-24">
+            <div class="tw-flex tw-flex-column">
                 <!-- Page Links -->
                 @component('partials.bladesora.members.components.home._card-links', [
                     'hasStartedMethod' => $hasStartedMethod,
@@ -66,8 +61,8 @@ $leftSidebar = true;
                     'coachCardBg' => 'https://drumeo.s3.amazonaws.com/homepage/coachesLinkBG.png',
                     'coachCardIcon' =>
                     'https://cdn.musora.com/image/fetch/https://dpwjbsxqtam5n.cloudfront.net/logos/CoachesLogo.svg',
-                    'brand' => 'singeo',
-                    ])
+                    'brand' => '{{ $brand }}',
+                ])
                 @endcomponent
 
                 <!-- Continue Section -->
@@ -75,114 +70,114 @@ $leftSidebar = true;
                     'hasStartedContent' => !empty($startedContentArray),
                     'continueUrl' => url()->route('members.profile.lists', ['state' => 'started']),
                     'seeAllUrl' => url()->route('members.profile.lists', ['state' => 'started']),
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'startedContent' => $startedContentJson,
                     'contentEndpoint' => '/laravel/public/railcontent/content',
-                    ])
+                ])
                 @endcomponent
 
                 <!-- New Section -->
                 @component('partials.bladesora.members.components.home._new-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'contentEndpoint' => '/laravel/public/railcontent/content',
                     'allLessonsUrl' => url()->route('members.catalogues.all'),
                     'newContent' => $newContent,
-                    ])
+                ])
                 @endcomponent
 
                 <!-- Popular Conversations from Forums -->
                 @component('partials.bladesora.members.components.home._conversations-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'forumUrl' => 'https://forums.drumeo.com',
                     'forumPosts' => $forumPosts,
-                    ])
+                ])
                 @endcomponent
 
                 <!-- Followed Lessons -->
                 @component('partials.bladesora.members.components.home._followed-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'subscribedLessons' => url()->route('members.lessons.subscribed'),
                     'contentEndpoint' => '/laravel/public/railcontent/content',
                     'followedLessons' => $followedLessons,
                     'hasfollowedLessons' => $hasfollowedLessons,
-                    ])
+                ])
                 @endcomponent
 
                 <!-- Subscribed Coaches Section -->
                 @component('partials.bladesora.members.components.home._coaches-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'hasSubscribedCoaches' => $hasSubscribedCoaches,
                     'subscribedCoaches' => $subscribedCoaches,
                     'subscribedCoachesUrl' => '/members/coaches?only_subscribed=true#coach-section',
                     'allCoachesUrl' => '/members/coaches?only_subscribed=true#coach-section"',
-                    ])
+                ])
                 @endcomponent
 
                 <!-- My List -->
                 @component('partials.bladesora.members.components.home._list-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'myListUrl' => url()->route('members.profile.lists', ['id' => auth()->id()]),
                     'contentEndpoint' => '/laravel/public/railcontent/content',
                     'usersList' => $usersListContentJson,
-                    ])
+                ])
                 @endcomponent
 
                 <!-- Upcomming Events -->
                 @component('partials.bladesora.members.components.home._upcoming-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'upcomingUrl' => url()->route('members.live.show'),
                     'upcomingEvents' => $upcomingEvents,
                     'contentEndpoint' => '/laravel/public/railcontent/content',
-                    ])
+                ])
                 @endcomponent
 
                 <!-- My Stats -->
                 @component('partials.bladesora.members.components.home._stats-section', [
-                    'brand' => 'singeo',
+                    'brand' => '{{ $brand }}',
                     'userDashboardUrl' => url()->route('members.profile.dashboard'),
                     'nextLearningPathProgressPercent' => $nextLearningPathProgressPercent,
                     'nextLearningPathLevel' => $nextLearningPathLevel,
                     'userMetrics' => $userMetrics,
                     'methodLogo' =>
                     'https://musora.imgix.net/https%3A%2F%2Fmusora-ui.s3.amazonaws.com%2Flogos%2Fsingeo-method.svg?ixlib=php-1.2.1&q=80&w=540&s=0c1843495a73e9d12870be6aeb30f26f',
-                    ])
+                ])
                 @endcomponent
             </div>
         </div>
 
     @elseif($isCourseOnlyOwner)
         @if (!empty($courses))
-            <div class="container tw-mb-24">
-                <div class="flex flex-column">
+            <div class="tw-container tw-mx-auto tw-mb-24">
+                <div class="tw-flex tw-flex-column">
 
                     <!-- Continue Section -->
                     @component('partials.bladesora.members.components.home._continue-section', [
                         'hasStartedContent' => !empty($startedContentArray),
                         'continueUrl' => url()->route('members.profile.lists', ['state' => 'started']),
                         'seeAllUrl' => url()->route('members.profile.lists', ['state' => 'started']),
-                        'brand' => 'singeo',
+                        'brand' => '{{ $brand }}',
                         'startedContent' => $startedContentJson,
                         'contentEndpoint' => '/laravel/public/railcontent/content',
                         ])
                     @endcomponent
 
                     @include(
-                    'members.partials.content._list',
-                    [
-                    'sectionLabel' => 'Your Courses',
-                    'sectionIconClasses' => 'icon-courses',
-                    'sectionUrl' => url()->route('members.catalogues.show', ['lessonType' => 'courses']),
-                    'sectionUrlLabel' => 'See All Courses',
-                    'preLoadedContent' => $courses
-                    ]
+                        'members.partials.content._list',
+                        [
+                            'sectionLabel' => 'Your Courses',
+                            'sectionIconClasses' => 'icon-courses',
+                            'sectionUrl' => url()->route('members.catalogues.show', ['lessonType' => 'courses']),
+                            'sectionUrlLabel' => 'See All Courses',
+                            'preLoadedContent' => $courses
+                        ]
                     )
 
                     <!-- Popular Conversations from Forums -->
                     @component('partials.bladesora.members.components.home._conversations-section', [
-                        'brand' => 'singeo',
+                        'brand' => '{{ $brand }}',
                         'forumUrl' => 'https://forums.drumeo.com',
                         'forumPosts' => $forumPosts,
-                        ])
+                    ])
                     @endcomponent
 
                 </div>
