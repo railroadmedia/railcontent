@@ -3,8 +3,8 @@
 use App\Modules\Brand\Enums\Brand;
 
 return [
-    Brand::Drumeo,
-    Brand::Pianote,
-    Brand::Guitareo,
-    Brand::Singeo,
+    Brand::Drumeo->value,
+    Brand::Pianote->value,
+    Brand::Guitareo->value,
+    Brand::Singeo->value,
 ];

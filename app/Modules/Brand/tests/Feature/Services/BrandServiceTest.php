@@ -6,13 +6,8 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Brand\Services\BrandService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
 use Modules\Brand\Tests\BrandTestCase;
-use Modules\UserManagementSystem\Events\MobileAppLogin;
-use Modules\UserManagementSystem\Events\UserEvent;
-use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
-use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
 
 class BrandServiceTest extends BrandTestCase
 {
@@ -48,13 +43,17 @@ class BrandServiceTest extends BrandTestCase
 
         Cache::shouldReceive('add')
             ->once()
-            ->with('user_' . $user->id . '_last_used_brand', Brand::Drumeo)
+            ->with('user_' . $user->id . '_last_used_brand', Brand::Drumeo->value)
             ->andReturnNull();
 
         $this->brandService->setLastUsedBrand($user, Brand::Drumeo);
 
-        $this->assertEquals(Brand::Drumeo, $user->last_used_brand);
-        $this->assertEquals(Brand::Drumeo, user()->last_used_brand);
+        $this->assertEquals(Brand::Drumeo->value, $user->last_used_brand);
+        $this->assertEquals(Brand::Drumeo->value, user()->last_used_brand);
+        $this->assertEquals(
+            Brand::Drumeo->value,
+            cookie()->queued('user_' . $user->id . '_last_used_brand')->getValue()
+        );
 
         $this->app->terminate();
 
@@ -69,7 +68,7 @@ class BrandServiceTest extends BrandTestCase
         $user = User::factory()->create([
             'email' => $email,
             'password' => Hash::make($password),
-            'last_used_brand' => Brand::Drumeo,
+            'last_used_brand' => Brand::Drumeo->value,
         ]);
 
         auth()->setUser($user);
@@ -77,15 +76,15 @@ class BrandServiceTest extends BrandTestCase
         Cache::shouldReceive('get')
             ->once()
             ->with('user_' . $user->id . '_last_used_brand')
-            ->andReturn(Brand::Drumeo);
+            ->andReturn(Brand::Drumeo->value);
 
         Cache::shouldReceive('add')
             ->never();
 
         $this->brandService->setLastUsedBrand($user, Brand::Drumeo);
 
-        $this->assertEquals(Brand::Drumeo, $user->last_used_brand);
-        $this->assertEquals(Brand::Drumeo, user()->last_used_brand);
+        $this->assertEquals(Brand::Drumeo->value, $user->last_used_brand);
+        $this->assertEquals(Brand::Drumeo->value, user()->last_used_brand);
 
         $this->assertDatabaseHas('usora_users', ['id' => $user->id, 'last_used_brand' => Brand::Drumeo]);
     }
@@ -110,13 +109,17 @@ class BrandServiceTest extends BrandTestCase
 
         Cache::shouldReceive('add')
             ->once()
-            ->with('user_' . $user->id . '_last_used_brand', Brand::Pianote)
+            ->with('user_' . $user->id . '_last_used_brand', Brand::Pianote->value)
             ->andReturnNull();
 
         $this->brandService->setLastUsedBrand($user, Brand::Pianote);
 
-        $this->assertEquals(Brand::Pianote, $user->last_used_brand);
-        $this->assertEquals(Brand::Pianote, user()->last_used_brand);
+        $this->assertEquals(Brand::Pianote->value, $user->last_used_brand);
+        $this->assertEquals(Brand::Pianote->value, user()->last_used_brand);
+        $this->assertEquals(
+            Brand::Pianote->value,
+            cookie()->queued('user_' . $user->id . '_last_used_brand')->getValue()
+        );
 
         $this->app->terminate();
 
