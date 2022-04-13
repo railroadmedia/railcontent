@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Brand\Services\BrandService;
 use Closure;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class SetLastUsedBrand
     public function handle($request, Closure $next)
     {
         if (!empty(user()) && in_array($request->segment(0), config('brands'))) {
-            $this->brandService->setLastUsedBrand(user(), $request->segment(0));
+            $this->brandService->setLastUsedBrand(user(), Brand::from($request->segment(0)));
         }
 
         return $next($request);
