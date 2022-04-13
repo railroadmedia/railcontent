@@ -1,6 +1,5 @@
 @php
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
 @endphp
 
 @extends('forums.forumlayout')
@@ -14,7 +13,7 @@
 
         <div v-cloak>
 
-            <div class="container mv-3 forum-post">
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
                 @include('partials.bladesora.members.forums.create-thread', [
                     "brand" => $brand,
                     "userAvatar" => $user->getProfilePictureUrl(),

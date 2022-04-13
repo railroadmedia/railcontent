@@ -28,7 +28,6 @@
 
 @section('content')
     <page-container>
-
         <div v-cloak>
 
             @component('partials._forum-header-banner',[
@@ -51,11 +50,11 @@
                             <span class="tw-text-32">{{$discussion['title']}}</span>
                         </h1>
 
-                        <p class="text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
+                        <p class="tw-text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
                             {{$discussion['description']}}
                         </p>
 
-                        <div class="tw-inline-flex align-v-center flex-wrap header-buttons">
+                        <div class="tw-inline-flex tw-items-center tw-flex-wrap header-buttons">
                             <a href="{{ url()->route('forums.thread.create') }}?thread-title={{$discussion['title']}}"
                             class="tw-btn-primary tw-bg-{{ $brand }} sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                             dusk="create-post-button">
@@ -75,7 +74,7 @@
                 @endslot
             @endcomponent
 
-            <div class="container tw-px-4 tw-pt-8 tw-pb-14">
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
                 <div class="tw-flex tw-flex-col">
                     <div class="tw-flex">
                         <forum-threads-table
@@ -92,6 +91,5 @@
             </div>
 
         </div>
-
     </page-container>
 @endsection

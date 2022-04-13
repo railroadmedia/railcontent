@@ -1,6 +1,5 @@
 @php
     $bodyClass = ($bodyClass ?? '') . 'tw-bg-gray-50  sidebar';
-    $leftSidebar = true;
 @endphp
 @extends('forums.forumlayout')
 
@@ -32,7 +31,6 @@
 
 @section('content')
     <page-container>
-
         <div v-cloak>
 
             <forum-thread
@@ -45,6 +43,5 @@
             />
 
         </div>
-
     </page-container>
 @endsection

@@ -1,6 +1,5 @@
 @php
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
 @endphp
 @extends('partials.layout')
 
@@ -10,10 +9,9 @@
 
 @section('content')
     <page-container>
-
         <div v-cloak>
 
-            <div class="container mv-3 forum-post">
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
                 @include('partials.bladesora.members.forums.update-thread', [
                     "brand" => "{{ $brand }}",
                     "forumUrl" => url()->route('forums.index'),
@@ -23,11 +21,11 @@
                     "topicOptions" => $categories
                 ])
 
-                <div class="flex flex-row pa mt-5">
+                <div class="tw-flex tw-flex-row pa mt-5">
                     <form action="{{ url()->route('railforums.thread.delete', [$thread['id']]) . '?redirect=' . url()->route('forums.index') }}"
                         method="POST"
                         onSubmit="confirm('Are you sure you wish to delete this thread?')"
-                        class="flex flex-center pt-5">
+                        class="tw-flex tw-items-center pt-5">
                         <input type="hidden" name="_method" value="DELETE">
 
                         <button class="btn collapse-250 mt-5" type="submit">
@@ -40,6 +38,5 @@
             </div>
 
         </div>
-
     </page-container>
 @endsection

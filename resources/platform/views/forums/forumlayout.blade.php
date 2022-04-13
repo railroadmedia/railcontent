@@ -1,68 +1,68 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-<head>
-    {!! \App\Analytics\Tracker::headTop() !!}
+    <head>
+        {!! \App\Analytics\Tracker::headTop() !!}
+        {{-- Meta --}}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+        @yield('meta')
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+        {{-- Google Fonts --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+        
+        {{-- Icons --}}
+        <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
+        <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
+        @include('partials._svg-icons')
 
-    @yield('meta')
+        {{-- Styles --}}
+        {{-- <link rel="stylesheet" href="{{ mix('assets/members/css/app.css') }}"> --}}
+        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+        @yield('styles')
 
-    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
+        @include('partials._favicons')
 
-    <link rel="stylesheet" href="{{ mix('assets/members/css/app.css') }}">
-    <!-- Tailwind -->
-    <link rel="stylesheet" href="{{ mix('tailwindcss/tailwind.css') }}">
+        {{-- Header Analytics --}}
+        {!! \App\Analytics\Tracker::trackPageView() !!}
+        {!! \App\Analytics\Tracker::headBottom() !!}
+        {!! inspectlet_embed_script() !!}
+    </head>
 
-    @include('members.partials._favicons')
-    @include('members.partials._svg-icons')
+    <body class="singeo {{ isLive() ? 'live' : '' }} {{ $bodyClass ?? '' }} {{ !empty($_COOKIE['collapsed']) ? 'sidebar-collapsed' : '' }} {{ !empty($_COOKIE['darkmode']) ? 'dark-mode' : '' }}">
+        {{-- Body Analytics --}}
+        {!! \Railroad\Usora\Services\ClientRelayService::getBodyTop() !!}
+        {!! \App\Analytics\Tracker::bodyTop() !!}
 
-    @yield('styles')
+        {{-- Content --}}
+        <div id="app">
+            <app-container
+                :vue-router="false"
+                brand="{{ $brand }}"
+            >
+                @if(!empty(current_user()))
+                    <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
+                @endif
 
-    {!! \App\Analytics\Tracker::trackPageView() !!}
+                @yield('breadcrumbs')
 
-    {!! \App\Analytics\Tracker::headBottom() !!}
+                @yield('content')
+            </app-container>
+        </div>
 
-    {!! inspectlet_embed_script() !!}
-</head>
+        {{-- Scripts --}}
+        <script src="{{ mix('platform/js/app.js') }}"></script>
+        @yield('scripts')
+        @yield('inject-components')
 
-<body class="singeo {{ isLive() ? 'live' : '' }} {{ $bodyClass ?? '' }} {{ !empty($_COOKIE['collapsed']) ? 'sidebar-collapsed' : '' }} {{ !empty($_COOKIE['darkmode']) ? 'dark-mode' : '' }}">
-    <div id="app">
-        <app-container
-            :vue-router="false"
-            brand="{{ $brand }}"
-        >
-            @if(!empty(current_user()))
-                <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
-            @endif
-
-            {!! \Railroad\Usora\Services\ClientRelayService::getBodyTop() !!}
-
-            {!! \App\Analytics\Tracker::bodyTop() !!}
-
-            @yield('breadcrumbs')
-
-            @yield('content')
-        </app-container>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
-
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    @yield('inject-components')
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
-
-    @yield('scripts')
-
-    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])
-    <script type="text/javascript">
-        Beacon('on', 'ready', () => {
-            document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
-        })
-    </script>
-    {!! \App\Analytics\Tracker::bodyBottom() !!}
-
-</body>
+        {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
+        <script type="text/javascript">
+            Beacon('on', 'ready', () => {
+                document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
+            })
+        </script>
+        {!! \App\Analytics\Tracker::bodyBottom() !!}
+    </body>
 </html>
