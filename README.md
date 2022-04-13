@@ -11,7 +11,8 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 - make a new file in the repository root named `.env`
 - copy content from 1pass note `.env, local, Musora Web Platform` to the .env file 
 - run `r musora-web-platform composer install`
-- run r musora-web-platform db8 local fromprod
+- run `r musora-web-platform db8 local fromprod`
+  run `r musora-web-platform artisan migrate`
 - navigate to the /app/musora-web-platform folder with `cd /app/musora-web-platform`
 - run `nvm use 16` then `yarn` then `yarn platform-prod` then `yarn marketing-prod`
 - `https://devplatform.musora.com:8443` should now load and the app and automated testing should work
