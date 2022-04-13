@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Login | Singeo</title>
+    <title>Login | Musora</title>
 @endsection
 
 @section('scripts')

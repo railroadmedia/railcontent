@@ -1,15 +1,14 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Notifications | Singeo</title>
+    <title>Notifications | Musora</title>
 @endsection
 
 @section('content')
     <page-container>
-
         <div v-cloak>
 
-            <div class="tw-container tw-mx-auto mv-2">
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
                 <notifications-table
                     brand="{{ $brand }}"
                     theme-color="{{ $brand }}"
@@ -22,6 +21,5 @@
             </div>
 
         </div>
-
     </page-container>
 @endsection

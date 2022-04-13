@@ -1401,9 +1401,6 @@ a:visited {
 .tw-mr-2 {
   margin-right: 0.5rem;
 }
-.tw-mb-24 {
-  margin-bottom: 6rem;
-}
 .tw-mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -2095,6 +2092,9 @@ a:visited {
 .tw-resize-y {
   resize: vertical;
 }
+.tw-list-none {
+  list-style-type: none;
+}
 .tw-auto-cols-fr {
   grid-auto-columns: minmax(0, 1fr);
 }
@@ -2410,9 +2410,9 @@ a:visited {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
-.tw-bg-black {
+.tw-bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .tw-bg-singeo {
   --tw-bg-opacity: 1;
@@ -2422,6 +2422,10 @@ a:visited {
   --tw-bg-opacity: 1;
   background-color: rgb(11 118 219 / var(--tw-bg-opacity));
 }
+.tw-bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
 .tw-bg-pianote {
   --tw-bg-opacity: 1;
   background-color: rgb(246 26 48 / var(--tw-bg-opacity));
@@ -2429,10 +2433,6 @@ a:visited {
 .tw-bg-guitareo {
   --tw-bg-opacity: 1;
   background-color: rgb(0 201 172 / var(--tw-bg-opacity));
-}
-.tw-bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .tw-bg-\[\#002039\] {
   --tw-bg-opacity: 1;
@@ -3813,9 +3813,6 @@ a:visited {
   .md\:tw-my-6 {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-  }
-  .md\:tw-mb-10 {
-    margin-bottom: 2.5rem;
   }
   .md\:tw-mb-\[40px\] {
     margin-bottom: 40px;
