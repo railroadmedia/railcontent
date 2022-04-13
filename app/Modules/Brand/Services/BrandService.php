@@ -18,7 +18,7 @@ class BrandService
         $brandString = $brand->value;
 
         if (in_array($brandString, config('brands'))) {
-            $cacheKey = 'musora_last_used_brand';
+            $cacheKey = 'user_' . $user->id . '_last_used_brand';
             $cacheValue = Cache::get($cacheKey);
 
             // set in cache
@@ -36,7 +36,6 @@ class BrandService
             }
 
             // set in cookie
-            // NOTE: it's best to make this cookie unencrypted inside the EncryptCookies middleware
             cookie()->queue($cacheKey, $brandString);
         }
     }

@@ -38,12 +38,12 @@ class BrandServiceTest extends BrandTestCase
 
         Cache::shouldReceive('get')
             ->once()
-            ->with('musora_last_used_brand')
+            ->with('user_' . $user->id . '_last_used_brand')
             ->andReturnNull();
 
         Cache::shouldReceive('add')
             ->once()
-            ->with('musora_last_used_brand', Brand::Drumeo->value)
+            ->with('user_' . $user->id . '_last_used_brand', Brand::Drumeo->value)
             ->andReturnNull();
 
         $this->brandService->setLastUsedBrand($user, Brand::Drumeo);
@@ -52,7 +52,7 @@ class BrandServiceTest extends BrandTestCase
         $this->assertEquals(Brand::Drumeo->value, user()->last_used_brand);
         $this->assertEquals(
             Brand::Drumeo->value,
-            cookie()->queued('musora_last_used_brand')->getValue()
+            cookie()->queued('user_' . $user->id . '_last_used_brand')->getValue()
         );
 
         $this->app->terminate();
@@ -75,7 +75,7 @@ class BrandServiceTest extends BrandTestCase
 
         Cache::shouldReceive('get')
             ->once()
-            ->with('musora_last_used_brand')
+            ->with('user_' . $user->id . '_last_used_brand')
             ->andReturn(Brand::Drumeo->value);
 
         Cache::shouldReceive('add')
@@ -104,12 +104,12 @@ class BrandServiceTest extends BrandTestCase
 
         Cache::shouldReceive('get')
             ->once()
-            ->with('musora_last_used_brand')
+            ->with('user_' . $user->id . '_last_used_brand')
             ->andReturn(Brand::Drumeo->value);
 
         Cache::shouldReceive('add')
             ->once()
-            ->with('musora_last_used_brand', Brand::Pianote->value)
+            ->with('user_' . $user->id . '_last_used_brand', Brand::Pianote->value)
             ->andReturnNull();
 
         $this->brandService->setLastUsedBrand($user, Brand::Pianote);
@@ -118,65 +118,11 @@ class BrandServiceTest extends BrandTestCase
         $this->assertEquals(Brand::Pianote->value, user()->last_used_brand);
         $this->assertEquals(
             Brand::Pianote->value,
-            cookie()->queued('musora_last_used_brand')->getValue()
+            cookie()->queued('user_' . $user->id . '_last_used_brand')->getValue()
         );
 
         $this->app->terminate();
 
         $this->assertDatabaseHas('usora_users', ['id' => $user->id, 'last_used_brand' => Brand::Pianote]);
-    }
-
-    public function test_cookie_changed_to_logged_in_users_last_used_brand()
-    {
-        $email1 = $this->faker->email;
-        $password1 = $this->faker->words(3, true);
-
-        $user1 = User::factory()->create([
-            'email' => $email1,
-            'password' => Hash::make($password1),
-            'last_used_brand' => Brand::Drumeo->value,
-        ]);
-
-        Cache::shouldReceive('get')
-            ->once()
-            ->with('musora_last_used_brand')
-            ->andReturn(Brand::Drumeo->value);
-
-        auth()->setUser($user1);
-
-        $this->assertEquals(Brand::Drumeo->value, $user1->last_used_brand);
-        $this->assertEquals(Brand::Drumeo->value, user()->last_used_brand);
-        $this->assertEquals(
-            Brand::Drumeo->value,
-            cookie()->queued('musora_last_used_brand')->getValue()
-        );
-
-        $email2 = $this->faker->email;
-        $password2 = $this->faker->words(3, true);
-
-        $user2 = User::factory()->create([
-            'email' => $email2,
-            'password' => Hash::make($password2),
-            'last_used_brand' => Brand::Pianote->value,
-        ]);
-
-        Cache::shouldReceive('get')
-            ->once()
-            ->with('musora_last_used_brand')
-            ->andReturn(Brand::Drumeo->value);
-
-        Cache::shouldReceive('add')
-            ->once()
-            ->with('musora_last_used_brand', Brand::Pianote->value)
-            ->andReturnNull();
-
-        auth()->setUser($user2);
-
-        $this->assertEquals(Brand::Pianote->value, $user2->last_used_brand);
-        $this->assertEquals(Brand::Pianote->value, user()->last_used_brand);
-        $this->assertEquals(
-            Brand::Pianote->value,
-            cookie()->queued('musora_last_used_brand')->getValue()
-        );
     }
 }

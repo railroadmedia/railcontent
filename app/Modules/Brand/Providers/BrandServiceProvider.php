@@ -2,8 +2,6 @@
 
 namespace App\Modules\Brand\Providers;
 
-use App\Modules\Brand\Listeners\BrandEventListener;
-use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -15,7 +13,6 @@ class BrandServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Authenticated::class => [BrandEventListener::class . '@handleAuthenticated'],
     ];
 
     /**
