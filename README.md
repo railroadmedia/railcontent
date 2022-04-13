@@ -8,8 +8,13 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
     - _This will install new containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites._ 
 - in the railenvironmet directory, restart the container with the `./rrr.sh` command
 - run `r setup musora-web-platform` then `cd /app/musora-web-platform` 
-- copy the contents of the `.env.example` file into a new `.env` file
+- make a new file in the repository root named `.env`
+- copy content from 1pass note `.env, local, Musora Web Platform` to the .env file 
 - run `r musora-web-platform composer install`
+- run r musora-web-platform db8 local fromprod
+- navigate to the /app/musora-web-platform folder with `cd /app/musora-web-platform`
+- run `nvm use 16` then `yarn` then `yarn platform-prod` then `yarn marketing-prod`
+- `https://devplatform.musora.com:8443` should now load and the app and automated testing should work
 
 ### Running Commands:
 Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
@@ -131,3 +136,12 @@ In your blade file you can load in these variables like this:
 </html>
 
 ```
+
+
+# PHPStorm Automated Testing Settings
+
+### Test Framework
+![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/f532fe6d-7f49-489e-aa55-2dabeaee5900/public)
+
+### CLI Interpreter
+![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e0eb64b1-b163-4626-e217-5ce9d80d7900/public)
