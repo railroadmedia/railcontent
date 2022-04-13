@@ -14,22 +14,22 @@
 @endsection
 
 @section('edit-forms')
-    <div id="membershipMain" class="flex flex-column">
-        <div class="flex flex-row pa-3 bb-grey-1-1 flex-auto">
+    <div id="membershipMain" class="tw-flex tw-flex-column">
+        <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1 tw-flex-auto">
             <h1 class="heading">Membership</h1>
         </div>
 
 
-        <div class="flex flex-row pa-3 flex-auto">
-            <div class="flex flex-column">
-                <div class="flex flex-row">
-                    <h2 class="subheading mb-3">Membership Type</h2>
+        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto">
+            <div class="tw-flex tw-flex-column">
+                <div class="tw-flex tw-flex-row">
+                    <h2 class="subheading tw-mb-3">Membership Type</h2>
                 </div>
 
                 @if(!empty($ownedProducts))
-                    <div class="flex flex-row mb-3">
-                        <div class="flex flex-column">
-                            <p class="body mb-1">
+                    <div class="tw-flex tw-flex-row tw-mb-3">
+                        <div class="tw-flex tw-flex-column">
+                            <p class="body tw-mb-1">
                                 Your account has the following Singeo products:
                             </p>
                             <ul class="body">
@@ -45,10 +45,10 @@
                 @endif
 
                 @if(!empty($subscription))
-                    <div class="flex flex-row">
-                        <div class="flex flex-column">
+                    <div class="tw-flex tw-flex-row">
+                        <div class="tw-flex tw-flex-column">
                             @if($subscription->getIsActive())
-                                <p class="body mb-1">
+                                <p class="body tw-mb-1">
                                     You have a
                                     <strong>{{ str_replace('subscription', 'Singeo Membership', $subscription->getType()) }}</strong>
                                     billed at
@@ -75,18 +75,18 @@
 
                                     @endif
                                 </p>
-                                <p class="body font-italic">
+                                <p class="body tw-italic">
                                     Your membership renews on
                                     <strong>{{ Carbon\Carbon::parse($subscription->getPaidUntil())->format('F j, Y') }}</strong>.
                                 </p>
                             @else
-                                <p class="body mb-1">
+                                <p class="body tw-mb-1">
                                     Your {{ $subscription->getType() }}
                                     {{ empty($subscription->getCanceledOn()) ? 'has expired' : 'has been canceled'  }}.
                                 </p>
 
                                 @if($subscription->getPaidUntil() > Carbon\Carbon::now())
-                                    <p class="body font-italic">
+                                    <p class="body tw-italic">
                                         Your membership will end on
                                         <strong>{{ Carbon\Carbon::parse($subscription->getPaidUntil())->format('F j, Y') }}</strong>.
                                     </p>
@@ -95,19 +95,19 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row mt-3 flex-auto">
-                        <div class="flex flex-column">
+                    <div class="tw-flex tw-flex-row mt-3 tw-flex-auto">
+                        <div class="tw-flex tw-flex-column">
                             @if($subscription->getIsActive())
-                                <h2 class="subheading mb-2">Cancel Membership</h2>
-                                <div class="flex flex-row">
+                                <h2 class="subheading tw-mb-2">Cancel Membership</h2>
+                                <div class="tw-flex tw-flex-row">
                                     <p id="openUnsubscribeForm"
-                                       class="body text-black font-underline pointer">
+                                       class="body tw-text-black tw-underline tw-pointer">
                                         Click here to cancel your membership
                                     </p>
                                 </div>
                             @else
-                                <h2 class="subheading mb-2">Renew Membership</h2>
-                                <div class="flex flex-row">
+                                <h2 class="subheading tw-mb-2">Renew Membership</h2>
+                                <div class="tw-flex tw-flex-row">
                                     <a class="body text-black"
                                        href="{{ url()->route('members.profile.settings', ['section' => 'payments']) }}">
                                         Click here to renew your membership.</a>
@@ -116,17 +116,17 @@
                         </div>
                     </div>
                 @else
-                    <div class="flex flex-row">
+                    <div class="tw-flex tw-flex-row">
                         @if($isLifetime)
-                            <div class="flex flex-column mb-2">
-                                <p class="body mb-1">
+                            <div class="tw-flex tw-flex-column tw-mb-2">
+                                <p class="body tw-mb-1">
                                     Lifetime memberships never renew or expire, you have access for life!
                                 </p>
                             </div>
                         @endif
 
                         @if($isPackOnly)
-                            <div class="flex flex-column mb-2">
+                            <div class="tw-flex tw-flex-column tw-mb-2">
                                 <p class="body">
                                     You have a Singeo Pack Membership.
                                     <a href="/#orderNow" target="_blank">Learn more about Singeo Membership.</a>

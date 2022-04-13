@@ -16,13 +16,13 @@
                 'memberSince' => current_user()->getCreatedAt(),
             ])
 
-            <div class="container mv-3">
-                <div class="flex flex-column">
-                    <div class="flex flex-row">
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+                <div class="tw-flex tw-flex-column">
+                    <div class="tw-flex tw-flex-row">
                         <content-catalogue
                             catalogue-type="list"
-                            brand="singeo"
-                            theme-color="singeo"
+                            brand="{{ $brand }}"
+                            theme-color="{{ $brand }}"
                             limit="20"
                             :included-types="{{ $includedTypes }}"
                             :use-theme-color="true"

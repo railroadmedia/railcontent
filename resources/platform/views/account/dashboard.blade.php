@@ -17,19 +17,19 @@
                 "memberSince" => $user->getCreatedAt(),
             ])
 
-            <div class="container mv-3">
-                <div class="flex flex-column">
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+                <div class="tw-flex tw-flex-column">
 
-                    <div class="flex flex-row pv-3 ph {{ $isSubscriber ? 'bb-grey-1-1' : '' }}">
+                    <div class="tw-flex tw-flex-row pv-3 ph {{ $isSubscriber ? 'bb-grey-1-1' : '' }}">
                         <h1 class="heading grow">{{ $isCurrentUsersProfile ? 'My' : possessivize($user->getDisplayName()) }} Dashboard</h1>
                     </div>
 
                     @if($isSubscriber)
-                        <div class="flex flex-row flex-wrap nmh-1 pv-3">
+                        <div class="tw-flex tw-flex-row tw-flex-wrap nmh-1 pv-3">
                             @foreach($userMetrics as $userMetric)
-                                <div class="flex flex-column xs-6 sm-3 no-decoration">
+                                <div class="tw-flex tw-flex-column xs-6 sm-3 tw-no-underline">
                                     @include('partials.bladesora.members.components.user-metric', [
-                                        "themeColor" => 'singeo',
+                                        "themeColor" => '{{ $brand }}',
                                         "icon" => $userMetric['icon'],
                                         "value" => $userMetric['value'],
                                         "label" => $userMetric['label'],
@@ -39,15 +39,15 @@
                         </div>
                     @endif
 
-                    <div class="flex flex-row pv-3 ph bt-grey-1-1 align-v-center" dusk="started-lessons">
+                    <div class="tw-flex tw-flex-row pv-3 ph bt-grey-1-1 tw-items-center" dusk="started-lessons">
                         @if($isCurrentUsersProfile)
                             <a href="{{ url()->route('members.profile.lists', ['state' => 'started']) }}"
-                                    class="text-black subheading grow no-decoration"
+                                    class="tw-text-black subheading tw-grow tw-no-underline"
                                     dusk="see-all-started">
                                 Started Lessons
                             </a>
                             <a href="{{ url()->route('members.profile.lists', ['state' => 'started']) }}"
-                            class="tiny text-grey-3 uppercase dense font-bold flex-auto no-decoration"
+                            class="tiny text-grey-3 tw-uppercase dense tw-font-bold tw-flex-auto tw-no-underline"
                             dusk="see-all-started">
                                 See All &raquo;
                             </a>
@@ -55,10 +55,10 @@
                             <h1 class="subheading grow">Started Lessons </h1>
                         @endif
                     </div>
-                    <div class="flex flex-row pb-3 four-cards-row" dusk="started-lesson-grid">
+                    <div class="tw-flex tw-flex-row tw-pb-3 four-cards-row" dusk="started-lesson-grid">
                         <content-catalogue
-                            brand="singeo"
-                            theme-color="singeo"
+                            brand="{{ $brand }}"
+                            theme-color="{{ $brand }}"
                             catalogue-type="grid"
                             limit="4"
                             :force-wide-thumbs="true"
@@ -69,16 +69,16 @@
                         />
                     </div>
 
-                    <div class="flex flex-row pv-3 ph bt-grey-1-1 align-v-center" dusk="completed-lessons">
+                    <div class="tw-flex tw-flex-row pv-3 ph bt-grey-1-1 align-v-center" dusk="completed-lessons">
 
                         @if($isCurrentUsersProfile)
                             <a href="{{ url()->route('members.profile.lists', ['state' => 'completed']) }}"
-                                    class="text-black subheading grow no-decoration"
+                                    class="text-black subheading grow tw-no-underline"
                                     dusk="see-all-completed">
                                 Completed
                             </a>
                             <a href="{{ url()->route('members.profile.lists', ['state' => 'completed']) }}"
-                            class="tiny text-grey-3 uppercase dense font-bold flex-auto no-decoration"
+                            class="tiny text-grey-3 tw-uppercase dense tw-font-bold tw-flex-auto tw-no-underline"
                             dusk="see-all-completed">
                                 See All &raquo;
                             </a>
@@ -86,10 +86,10 @@
                             <h1 class="subheading grow">Completed Lessons</h1>
                         @endif
                     </div>
-                    <div class="flex flex-row pb-3 four-cards-row" dusk="completed-lesson-grid">
+                    <div class="tw-flex tw-flex-row pb-3 four-cards-row" dusk="completed-lesson-grid">
                         <content-catalogue
-                            brand="singeo"
-                            theme-color="singeo"
+                            brand="{{ $brand }}"
+                            theme-color="{{ $brand }}"
                             catalogue-type="grid"
                             limit="4"
                             :force-wide-thumbs="true"
@@ -100,20 +100,20 @@
                         />
                     </div>
 
-                    <div id="editForm" class="flex flex-row flex-wrap ph bt-grey-1-1" dusk="about-user">
-                        <div class="flex flex-column xs-12 mb-3 pv-3">
-                            <div class="flex flex-row">
+                    <div id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph bt-grey-1-1" dusk="about-user">
+                        <div class="tw-flex tw-flex-column xs-12 tw-mb-3 pv-3">
+                            <div class="tw-flex tw-flex-row">
                                 <h1 class="subheading grow">About {{ $isCurrentUsersProfile ? 'You' : $user->getDisplayName() }}</h1>
 
                                 @if($isCurrentUsersProfile)
                                     <a href="{{ url()->route('members.profile.settings') }}"
-                                    class="tiny text-grey-3 uppercase dense font-bold flex-auto no-decoration" dusk="edit-user">
+                                    class="tiny text-grey-3 tw-uppercase dense tw-font-bold tw-flex-auto tw-no-underline" dusk="edit-user">
                                         Edit
                                     </a>
                                 @endif
                             </div>
                         </div>
-                        <div class="flex flex-column xs-12 md-7 mb-2 pr-2">
+                        <div class="tw-flex tw-flex-column xs-12 md-7 tw-mb-2 tw-pr-2">
                             @include('partials.bladesora.members.account.partials._text-fields', [
                                 "fields" => [
                                     "Name" => !empty($user->getFirstName()) && !empty($user->getFirstName()) ? $user->getFirstName() . ' ' . $user->getLastName() : null,
@@ -127,12 +127,12 @@
                         </div>
 
         {{--                <div id="gearImageModal" class="modal">--}}
-        {{--                    <div class="flex flex-column pa bg-white shadow corners-10">--}}
+        {{--                    <div class="tw-flex tw-flex-column pa bg-white shadow corners-10">--}}
         {{--                        <img src="{{ $user->getPianoGearPhoto() }}" alt="" style="width:100%;height:auto;">--}}
         {{--                    </div>--}}
         {{--                </div>--}}
 
-        {{--                <div class="flex flex-column xs-12 md-5 mb-2">--}}
+        {{--                <div class="tw-flex tw-flex-column xs-12 md-5 mb-2">--}}
         {{--                    @if(!empty($user->getPianoGearPhoto()))--}}
         {{--                        <div class="mb-2 widescreen bg-center corners-10 pointer"--}}
         {{--                             data-open-modal="gearImageModal"--}}

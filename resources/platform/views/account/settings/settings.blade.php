@@ -5,23 +5,23 @@
 @endsection
 
 @section('edit-forms')
-    <div class="flex flex-column pa-3 flex-auto">
+    <div class="tw-flex tw-flex-column pa-3 tw-flex-auto">
         <h1 class="heading">Settings</h1>
     </div>
-    <div class="flex flex-row">
-        <div id="editForm" class="flex flex-column">
+    <div class="tw-flex tw-flex-row">
+        <div id="editForm" class="tw-flex tw-flex-column">
             <form method="POST" action="/usora/user/update/{{ current_user()->getId() }}">
                 <input type="hidden" name="redirect" value="{{ url()->current() }}">
                 {{ method_field('PATCH') }}
                 {{ csrf_field() }}
 
-                <div class="flex flex-row flex-auto bt-grey-1-1 pa-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto bt-grey-1-1 pa-3">
                     <h2 class="subheading">When would you like to receive email notifications?</h2>
                 </div>
 
-                <div class="flex flex-row ph-3 pb-3">
-                    <div class="flex flex-column">
-                        <div class="flex flex-row mb-2">
+                <div class="tw-flex tw-flex-row ph-3 pb-3">
+                    <div class="tw-flex tw-flex-column">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "weeklyUpdates",
                                 "inputName" => "notify_weekly_update",
@@ -29,7 +29,7 @@
                                 "checked" => (boolean) current_user()->getNotifyWeeklyUpdate()
                             ])
                         </div>
-                        <div class="flex flex-row mb-2">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "repliesComment",
                                 "inputName" => "notify_on_lesson_comment_reply",
@@ -37,7 +37,7 @@
                                 "checked" => (boolean) current_user()->getNotifyOnLessonCommentReply()
                             ])
                         </div>
-                        <div class="flex flex-row mb-2">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "likesComment",
                                 "inputName" => "notify_on_lesson_comment_like",
@@ -45,7 +45,7 @@
                                 "checked" => (boolean) current_user()->getNotifyOnLessonCommentLike()
                             ])
                         </div>
-                        <div class="flex flex-row mb-2">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "repliesForum",
                                 "inputName" => "notify_on_forum_followed_thread_reply",
@@ -53,7 +53,7 @@
                                 "checked" => (boolean) current_user()->getNotifyOnForumFollowedThreadReply()
                             ])
                         </div>
-                        <div class="flex flex-row mb-2">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "likesForum",
                                 "inputName" => "notify_on_forum_post_like",
@@ -64,12 +64,12 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row flex-auto bt-grey-1-1 pa-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto bt-grey-1-1 pa-3">
                     <h2 class="subheading">How often would you like to receive email notifications?</h2>
                 </div>
-                <div class="flex flex-row ph-3 pb-3">
-                    <div class="flex flex-column">
-                        <div class="flex flex-row mb-2">
+                <div class="tw-flex tw-flex-row ph-3 pb-3">
+                    <div class="tw-flex tw-flex-column">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.radio-input', [
                                 "inputID" => "rightAway",
                                 "inputName" => "notifications_summary_frequency_minutes",
@@ -79,7 +79,7 @@
                             ])
                         </div>
 
-                        <div class="flex flex-row mb-2">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.radio-input', [
                                 "inputID" => "perDay",
                                 "inputName" => "notifications_summary_frequency_minutes",
@@ -91,16 +91,16 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row flex-auto bt-grey-1-1 pa-3" style="padding-bottom: 10px;">
+                <div class="tw-flex tw-flex-row tw-flex-auto bt-grey-1-1 pa-3" style="padding-bottom: 10px;">
                     <h2 class="subheading">Would you like to use our legacy video player?</h2>
                 </div>
-                <div class="flex flex-row flex-auto ph-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">
                     <p class="body">Our video player may have compatibility issues with older devices and operating systems. <br>We recommend switching to our legacy video player if you are experiencing playback issues.</p>
                 </div>
 
-                <div class="flex flex-row ph-3 pb-3 pt-3">
-                    <div class="flex flex-column">
-                        <div class="flex flex-row mb-2">
+                <div class="tw-flex tw-flex-row ph-3 pb-3 pt-3">
+                    <div class="tw-flex tw-flex-column">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "useLegacyPlayer",
                                 "inputName" => "use_legacy_video_player",
@@ -111,14 +111,14 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row pa-3">
+                <div class="tw-flex tw-flex-row pa-3">
                     <button class="btn collapse-150" type="submit">
-                        <span class="bg-singeo text-white short">
+                        <span class="tw-bg-{{ $brand }} tw-text-white short">
                             Save
                         </span>
                     </button>
-                    <button class="btn collapse-150 ml-1" type="reset">
-                        <span class="flat text-black short">
+                    <button class="btn collapse-150 tw-ml-1" type="reset">
+                        <span class="flat tw-text-black short">
                             Cancel
                         </span>
                     </button>
