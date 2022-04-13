@@ -1,22 +1,18 @@
-<section class="tw-flex tw-mb-6 md:tw-mb-8">
-    <div class="tw-flex tw-flex-col grow">
+<section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
+    <div class="tw-flex tw-flex-col tw-grow">
 
-        <div class="flex flex-row align-v-center tw-mt-4">
-            <span class="rounded bg-{{$brand}} text-white icon-bg-circle body mr-1">
-                <i class="icon-my-list"></i>
-            </span>
-            <h2 class="heading capitalize grow">
-                <a
-                    href="{{ $myListUrl }}"
-                    class="text-black font-no-underline"
-                >My List</a>
-            </h2>
-            <a href="{{ $myListUrl }}"
+        <!-- Section Title -->
+        <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
+            <a href="{{ $myListUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My List</h2>
+            </a>
+            <a href="{{ $myListUrl }}"  
                 aria-label="See All Lessons In My List"
-                class="text-{{$brand}} tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
+                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+            >
                 See All
             </a>
-        </div>
+        </div> 
 
         <div class="tw-flex six-cards-row">
             <transition appear name="fade">
@@ -33,7 +29,7 @@
                         :force-wide-thumbs="true"
                         :pre-loaded-content="{{ $usersList }}"
                 >
-                    <div class="flex flex-row nmh-1">
+                    <div class="tw-flex tw-flex-row nmh-1">
                         @for($i = 0; $i < 6; $i++)
                             @include('partials.bladesora.members.skeletons.card-item', [
                                 "cardClass" => 'six-wide',
