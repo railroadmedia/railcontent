@@ -14,7 +14,7 @@ class AddUpdatedAtToUsoraRememberTokensTable extends Migration
     public function up()
     {
         Schema::table('usora_remember_tokens', function (Blueprint $table) {
-            $table->timestamp('updated_at')->insertAfter('created_at')->nullable()->index();
+            $table->timestamp('updated_at')->after('created_at')->nullable()->index();
         });
     }
 
@@ -26,7 +26,7 @@ class AddUpdatedAtToUsoraRememberTokensTable extends Migration
     public function down()
     {
         Schema::table('usora_remember_tokens', function (Blueprint $table) {
-            $table->drop('updated_at');
+            $table->dropColumn('updated_at');
         });
     }
 }
