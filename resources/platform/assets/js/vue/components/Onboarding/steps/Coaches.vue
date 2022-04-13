@@ -54,7 +54,7 @@ function goBack() {
       <div class="tw-relative tw-h-[42px] tw-mb-[20px] md:tw-mb-[40px] tw-w-[90vw] md:tw-w-[600px]">
         <InputLabel
           placeholder="Find a coach..."
-          classOverride="tw-text-white tw-w-full tw-bg-[#002039]/90 tw-absolute tw-pl-[36px] tw-box-border"
+          inputOverride="tw-text-white tw-w-full tw-bg-[#002039]/90 tw-absolute tw-pl-[36px] tw-box-border"
           @onChange="onInputChange"
         />
         <SearchIcon

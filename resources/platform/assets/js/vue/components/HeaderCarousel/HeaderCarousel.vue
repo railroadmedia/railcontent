@@ -92,7 +92,7 @@ onMounted(() => {
         />
 
         <!-- Directional Buttons -->
-        <div :key="`carousel-${i}-buttons`" class="tw-w-full tw-absolute tw-bottom-0 tw-flex tw-justify-end tw-px-[36px] tw-py-[8px] tw-z-30">
+        <div :key="`carousel-${i}-buttons`" class="tw-w-full tw-absolute tw-bottom-0 tw-flex tw-justify-end tw-px-[26px] lg:tw-px-[36px] tw-py-[8px] tw-z-30">
           
           <button class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
                   @click="handleLeftClick(carousel)"
@@ -108,12 +108,12 @@ onMounted(() => {
         </div>
 
         <!-- Navigation Dots -->
-        <div :key="`carousel-${i}-nav`" class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 tw-translate-x-[-50%] tw-left-2/4 tw-mx-auto">
+        <div :key="`carousel-${i}-nav`" class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] lg:tw-left-2/4 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0">
           <button
             v-for="(slide, j) in carousel.slides"
             v-bind:key="slide.title"
             @click="() => handleNavClick(j)"
-            :class="`tw-mx-[15px] tw-h-[10px] tw-w-[10px] tw-rounded-full ${
+            :class="`tw-h-[6px] tw-w-[6px] tw-mx-[5px] lg:tw-mx-[15px] lg:tw-h-[10px] lg:tw-w-[10px] tw-rounded-full ${
               j === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
             }`"
           />
