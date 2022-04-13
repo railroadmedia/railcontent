@@ -8,7 +8,7 @@ use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
 
-class AuthenticatedOnlyMiddlewareTest extends UserManagementSystemTestCase
+class AuthenticatedOnlyTest extends UserManagementSystemTestCase
 {
     protected function setUp(): void
     {
