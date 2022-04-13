@@ -1,4 +1,4 @@
-@include('bladesora::members.navigation.subnav', [
+@include('partials.bladesora.members.navigation.subnav', [
     "themeColor" => 'singeo',
     "subSections" => [
         [
