@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import SingleCoach from "./SingleCoach.vue";
 import { textColor } from "../../../constants/brands";

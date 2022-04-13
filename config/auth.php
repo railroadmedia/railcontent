@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user-management-system',
         'passwords' => 'users',
     ],
 
@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+        'user-management-system' => [
+            'driver' => 'user-management-system',
+            'provider' => 'user-management-system',
         ],
     ],
 
@@ -60,9 +60,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+        'user-management-system' => [
+            'driver' => 'user-management-system',
+            'model' => \Modules\UserManagementSystem\Models\User::class,
         ],
 
         // 'users' => [

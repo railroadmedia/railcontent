@@ -38,7 +38,7 @@ const emit = defineEmits(['onGoBack'])
       {{ title }}
     </h2>
     <p
-      class="tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-hidden md:tw-block"
+      class="tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
     >
       {{ subtitle }}
     </p>

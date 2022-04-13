@@ -78,14 +78,16 @@ export default {
 
 <template>
 
-    <section id="stats-section" class="tw-flex tw-flex-col tw-mb-6 md:tw-mb-12 tw-text-[#00101D] dark:tw-text-white tw-w-full">
+    <section id="stats-section" class="tw-flex tw-flex-col tw-mb-5 tw-text-[#00101D] dark:tw-text-white tw-w-full">
 
         <!-- Section Title -->
         <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
-            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
+            <a href="" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
+            </a>
             <a href="https://www.drumeo.com/laravel/public/members/profile" 
                 aria-label="See My Dashboard" 
-                class="tw-p-3 tw-pb-2 tw-rounded-full tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Dashboard
             </a>
@@ -119,7 +121,6 @@ export default {
                 <musora-icon :icon-name="metric.icon" 
                                 width="24" 
                                 height="24" 
-                                view-box="0 0 29 29" 
                                 class="" 
                                 :class="textColor[brand]"
                 />

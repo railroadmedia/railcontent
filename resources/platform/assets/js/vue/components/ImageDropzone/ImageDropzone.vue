@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, defineProps } from 'vue'
+import { ref } from 'vue'
 import { XIcon, PhotographIcon } from '@heroicons/vue/outline'
 const emit = defineEmits(['onImageSelected'])
 

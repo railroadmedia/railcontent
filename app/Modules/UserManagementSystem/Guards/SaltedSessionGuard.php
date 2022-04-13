@@ -1,0 +1,176 @@
+<?php
+
+namespace Modules\UserManagementSystem\Guards;
+
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\SessionGuard;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Support\Str;
+use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Providers\UserServiceProvider;
+
+class SaltedSessionGuard extends SessionGuard
+{
+    /**
+     * @var bool
+     */
+    public static $updateSalt = true;
+    /**
+     * @var UserServiceProvider
+     */
+    public $provider;
+    /**
+     * @var AuthenticatableContract|User
+     */
+    protected $user;
+
+    public function nullCurrentUser()
+    {
+        $this->user = null;
+    }
+
+    /**
+     * @param AuthenticatableContract $user
+     * @param $rememberTokenValue
+     */
+    public function setRememberToken(AuthenticatableContract $user, $rememberTokenValue)
+    {
+        $this->getCookieJar()
+            ->queue(
+                $this->createRecaller(
+                    $user->getAuthIdentifier() . '|' . $user->getRememberToken() . '|' . $user->getAuthPassword()
+                )
+            );
+
+        $user->setRememberToken($rememberTokenValue);
+    }
+
+    /**
+     * Copied from laravel SessionGuard
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        $user = $this->user();
+
+        if (empty($user)) {
+            $this->user = null;
+
+            $this->loggedOut = true;
+
+            return;
+        }
+
+        $this->clearUserDataFromStorage();
+
+        $this->provider->updateSessionSalt($user, '');
+
+        if (!is_null($this->user) && !empty($this->recaller())) {
+            $recaller = $this->recaller();
+
+            $this->provider->deleteRememberToken($recaller->token(), $user->getAuthIdentifier());
+        }
+
+        if (isset($this->events)) {
+            $this->events->dispatch(new Logout($this->name, $user));
+        }
+
+        $this->user = null;
+        $this->loggedOut = true;
+    }
+
+    /**
+     * @return AuthenticatableContract|null|User
+     */
+    public function user()
+    {
+        if ($this->loggedOut) {
+            return null;
+        }
+
+        // If we've already retrieved the user for the current request we can just
+        // return it back immediately. We do not want to fetch the user data on
+        // every call to this method because that would be tremendously slow.
+        if (!is_null($this->user)) {
+            return $this->user;
+        }
+
+        $id = $this->session->get($this->getName());
+        $salt = $this->session->get($this->getSaltName());
+
+        if (!is_null($id) && !empty($salt)) {
+            $user = $this->provider->retrieveById($id);
+
+            if ($user->getSessionSalt() === $salt) {
+                $this->user = $user;
+
+                return $this->user;
+            }
+        }
+
+        $recaller = $this->recaller();
+
+        if (is_null($this->user) && !is_null($recaller)) {
+            $this->user = $this->userFromRecaller($recaller);
+
+            if ($this->user) {
+                $this->login($this->user, false);
+
+                return $this->user;
+            }
+        }
+
+        return null;
+    }
+
+    protected function getSaltName()
+    {
+        return 'login_salt_' . $this->name . '_' . sha1(static::class);
+    }
+
+    /**
+     * @param AuthenticatableContract|User $user
+     * @param bool $remember
+     */
+    public function login(AuthenticatableContract|User $user, $remember = false)
+    {
+        $this->updateSession($user->getAuthIdentifier());
+
+        if ($remember) {
+            $this->createAndQueueRememberToken($user);
+
+            $this->getCookieJar()
+                ->queue(
+                    $this->createRecaller(
+                        $user->getAuthIdentifier() . '|' . $user->getRememberToken() . '|' . $user->getAuthPassword()
+                    )
+                );
+        }
+
+        if (self::$updateSalt && empty($user->getSessionSalt())) {
+            $salt = Str::random(60);
+
+            $this->session->put($this->getSaltName(), $salt);
+            $this->provider->updateSessionSalt($user, $salt);
+        } else {
+            $this->session->put($this->getSaltName(), $user->getSessionSalt());
+        }
+
+        $this->fireLoginEvent($user, $remember);
+
+        $this->setUser($user);
+    }
+
+    /**
+     * Create a new "remember me" token for the user if one doesn't already exist.
+     *
+     * @param AuthenticatableContract|User $user
+     * @return void
+     */
+    protected function createAndQueueRememberToken(AuthenticatableContract|User $user)
+    {
+        $this->provider->updateRememberToken($user, Str::random(60));
+    }
+}

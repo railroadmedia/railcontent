@@ -12,11 +12,11 @@ export const brandUrl = {
 }
 
 export const whiteLogos = {
-  drumeo:'http://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg',
-  singeo:'http://musora-ui.s3.amazonaws.com/logos/singeo-white.svg',
-  guitareo:'http://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg',
-  pianote:'http://musora-ui.s3.amazonaws.com/logos/pianote-white.svg',
-  musora: 'http://musora-ui.s3.amazonaws.com/logos/musora-white.svg'
+  drumeo:'https://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg',
+  singeo:'https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg',
+  guitareo:'https://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg',
+  pianote:'https://musora-ui.s3.amazonaws.com/logos/pianote-white.svg',
+  musora: 'https://musora-ui.s3.amazonaws.com/logos/musora-white.svg'
 }
 
 export const bgColor = {

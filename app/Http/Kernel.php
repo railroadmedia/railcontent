@@ -29,20 +29,38 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewareGroups = [
-        'web' => [
+        'web_public' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         ],
 
-        'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:api',
+        'web_authenticated' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        ],
+
+        'api_public' => [
+            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        ],
+
+        'api_authenticated' => [
+            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         ],
     ];
 

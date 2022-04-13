@@ -6,7 +6,7 @@ import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
-import { defineEmits, defineProps, ref } from "vue";
+import { ref } from "vue";
 const props = defineProps({
   brand: {
     type: String,
@@ -47,7 +47,7 @@ function skipStep() {
         :initialValue="info.user.name"
         labelValue="Display Name"
         placeholder="Enter your display name..."
-        classOverride="tw-mb-[56px] tw-w-[90vw] md:tw-w-[471px]"
+        inputOverride="tw-mb-[56px] tw-w-[90vw] md:tw-w-[471px]"
         @onChange="onInputChange"
       />
     </div>

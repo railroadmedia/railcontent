@@ -52,6 +52,7 @@ function openUploadForm() {
       modalId="upload-modal"
       @onClose="openUploadForm"
       :title="title[uploadStep]"
+      bgColor="#081825"
     >
       <ImageDropzone
         v-if="uploadStep === 'dropzone'"
