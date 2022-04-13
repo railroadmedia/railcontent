@@ -18,9 +18,11 @@ function toggleOnboarding() {
       tw-flex-col
       lg:tw-flex-row
       tw-w-full
-      tw-bg-[#002039B2]/70
-      tw-border-[0.5px]
-      tw-border-[#344858]
+      tw-bg-[#F3F4F6]
+      dark:tw-bg-[#002039B2]/70
+      tw-border
+      tw-border-[0,0,0]/[.15]
+      dark:tw-border-[#344858]
       tw-justify-between
       tw-min-h-[105px]
       tw-rounded-[10px]
@@ -36,15 +38,17 @@ function toggleOnboarding() {
     </div>
     <Button
       @onButtonClick="toggleOnboarding"
-      classOverride="tw-shrink-0 tw-h-[50px] tw-bg-transparent tw-border-white tw-border-[2px] tw-text-[16px] lg:tw-text-[18px] 2xl:tw-text-[20px] tw-px-[59px]"
+      classOverride="tw-shrink-0 tw-h-[50px] tw-bg-transparent tw-border-black tw-text-black dark:tw-text-white dark:tw-border-white tw-border-[2px] lg:tw-mr-6 tw-text-[16px] lg:tw-text-[18px] 2xl:tw-text-[20px] tw-px-[59px]"
       >COMPLETE YOUR ACCOUNT
     </Button>
     <Onboarding v-if="showOnboarding" />
     <button
       class="
         tw-absolute
-        tw-text-white
-        tw-border-white
+        dark:tw-text-white
+        dark:tw-border-white
+        tw-text-black
+        tw-border-black
         tw-border-[2px]
         tw-rounded-full
         tw-h-[20px]
@@ -57,7 +61,7 @@ function toggleOnboarding() {
       "
       @click="() => emit('onClose')"
     >
-      <XIcon class="tw-w-[9px] tw-h-[9px]" />
+      <XIcon class="tw-w-[12px] tw-h-[12px]" />
     </button>
   </div>
 </template>

@@ -17,6 +17,7 @@ import VueAxios from 'vue-axios'
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
+import PaymentMethods from './vue/vuesora/views/payment-methods';
 import ForumThreadsTable from './vue/vuesora/views/forum';
 import ForumThread from './vue/vuesora/views/forum/thread';
 import TextEditor from './vue/vuesora/components/TextEditor';
@@ -35,6 +36,7 @@ app.component('AppContainer', AppContainer)
    .component('Onboarding', Onboarding)
    .component('TriggerBanner', TriggerBanner)
    .component('NotificationsTable', NotificationsTable)
+   .component('PaymentMethods', PaymentMethods)
    .component('ForumThreadsTable', ForumThreadsTable)
    .component('ForumThread', ForumThread)
    .component('TextEditor', TextEditor)
