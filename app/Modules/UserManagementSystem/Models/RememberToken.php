@@ -28,6 +28,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|RememberToken whereUserId($value)
  * @mixin Eloquent
  * @property-read User $user
+ * @property Carbon|null $updated_at
+ * @method static Builder|RememberToken whereUpdatedAt($value)
  */
 class RememberToken extends Model
 {

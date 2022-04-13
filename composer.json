@@ -40,7 +40,8 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "Modules\\UserManagementSystem\\Tests\\": "app/Modules/UserManagementSystem/tests"
+            "Modules\\UserManagementSystem\\Tests\\": "app/Modules/UserManagementSystem/tests",
+            "Modules\\Brand\\Tests\\": "app/Modules/Brand/tests"
         }
     },
     "scripts": {

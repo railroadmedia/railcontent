@@ -170,6 +170,7 @@ return [
          * Module Service Providers
          */
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
+        App\Modules\Brand\Providers\BrandServiceProvider::class,
 
         /*
          * Application Service Providers...

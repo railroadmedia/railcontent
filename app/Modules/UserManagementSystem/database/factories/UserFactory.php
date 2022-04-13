@@ -38,6 +38,7 @@ class UserFactory extends Factory
             'phone_number' => $this->faker->phoneNumber,
             'profile_picture_url' => $this->faker->imageUrl,
             'timezone' => $this->faker->timezone,
+            'last_used_brand' => $this->faker->randomElement(['drumeo', 'pianote', 'singeo', 'guitareo']),
             'permission_level' => null,
             'legacy_drumeo_id' => null,
             'legacy_pianote_id' => null,

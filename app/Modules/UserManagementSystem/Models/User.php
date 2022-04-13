@@ -150,6 +150,17 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $password_resets_count
  * @property-read Collection|RememberToken[] $rememberTokens
  * @property-read int|null $remember_tokens_count
+ * @property-read Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read int|null $permissions_count
+ * @property-read Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @property-read Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Modules\UserManagementSystem\Factories\UserFactory factory(...$parameters)
+ * @method static Builder|User permission($permissions)
+ * @method static Builder|User role($roles, $guard = null)
+ * @property string|null $last_used_brand
+ * @method static Builder|User whereLastUsedBrand($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
