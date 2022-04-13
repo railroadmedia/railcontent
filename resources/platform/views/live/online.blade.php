@@ -4,10 +4,6 @@
     <title>Live Lesson - {{ $lessonContent->fetch('fields.title') }} | {{ $brand }}</title>
 @endsection
 
-@section('layout-styles')
-    <link rel="stylesheet" href="{{ mix('css/packages.css') }}">
-@endsection
-
 @section('content')
     <page-container>
         <div v-cloak>
