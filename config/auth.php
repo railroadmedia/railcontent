@@ -61,7 +61,8 @@ return [
 
     'providers' => [
         'user-management-system' => [
-            'driver' => 'user-management-system'
+            'driver' => 'user-management-system',
+            'model' => \Modules\UserManagementSystem\Models\User::class,
         ],
 
         // 'users' => [

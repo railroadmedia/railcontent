@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'guard' => env('NOVA_GUARD', null),
+    'guard' => 'user-management-system',
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ return [
     */
 
     'middleware' => [
-        'web',
+        'web_authenticated',
         HandleInertiaRequests::class,
         DispatchServingNovaEvent::class,
         BootTools::class,
