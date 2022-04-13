@@ -10,28 +10,28 @@
         <div v-cloak>
 
             <header id="pageHeader"
-                    class="container fluid pv-4"
+                    class="tw-container tw-mx-auto fluid pv-4"
                     style="background-image:url('https://singeo.s3.amazonaws.com/singeo-header-image.jpg');">
-                <div class="container text-center">
-                    <h1 class="heading text-white mb-2">
-                        <a href="javascript:history.back()" class="no-decoration">
+                <div class="tw-container tw-mx-auto tw-text-center">
+                    <h1 class="heading tw-text-white tw-mb-2">
+                        <a href="javascript:history.back()" class="tw-no-underline">
                             <i class="fas fa-arrow-circle-left text-grey-3"></i>
                         </a>
                         Upgrade Your Account
                     </h1>
-                    <p class="body text-white">
+                    <p class="body tw-text-white">
                         The page you are trying to access requires a singeo Membership.
                     </p>
-                    <p class="body text-white mb-2">
+                    <p class="body tw-text-white tw-mb-2">
                         <a href="/#orderNow"
-                        class="font-bold text-white">
+                        class="tw-font-bold tw-text-white">
                             Upgrade your account
                         </a>
                         or read below to find out what you get with singeo.
                     </p>
-                    <div class="flex-center">
+                    <div class="tw-flex-center">
                         <a href="/#orderNow"
-                        class="btn bg-singeo text-white collapse-250">
+                        class="btn tw-bg-singeo tw-text-white collapse-250">
                             Get a singeo Membership
                         </a>
                     </div>

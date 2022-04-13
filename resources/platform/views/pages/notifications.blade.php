@@ -9,10 +9,10 @@
 
         <div v-cloak>
 
-            <div class="container mv-2">
+            <div class="tw-container tw-mx-auto mv-2">
                 <notifications-table
-                    brand="singeo"
-                    theme-color="singeo"
+                    brand="{{ $brand }}"
+                    theme-color="{{ $brand }}"
                     :notifications="{{ $notifications }}"
                     notifications-endpoint=""
                     settings-url="{{ url()->route('members.profile.settings', ['section' => 'settings']) }}"

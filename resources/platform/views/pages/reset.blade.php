@@ -38,22 +38,22 @@
 @section('content')
     <div v-cloak>
 
-        <section id="logoContainer" class="pa-2 text-center">
+        <section id="logoContainer" class="pa-2 tw-text-center">
             <img class="logo"
                 src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
         </section>
 
-        <p class="pb-3 text-center font-italic">Your start-to-finish guide to confident singing.</p>
+        <p class="tw-pb-3 tw-text-center tw-italic">Your start-to-finish guide to confident singing.</p>
 
-        <section class="flex flex-column bg-grey-1 pa-3 mb-3 corners-10">
+        <section class="tw-flex tw-flex-column bg-grey-1 pa-3 tw-mb-3 corners-10">
 
-            <form method="post" action="{{ url()->route('usora.password.reset') }}" class="flex flex-column">
+            <form method="post" action="{{ url()->route('usora.password.reset') }}" class="tw-flex tw-flex-column">
                 @if($useCsrfToken ?? true)
                     {{ csrf_field() }}
                 @endif
 
                 @if(!empty($errors->all()))
-                    <ul class="flex flex-column mb-3 tiny text-error list-style-none">
+                    <ul class="tw-flex tw-flex-column mb-3 tiny text-error tw-list-none">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -63,9 +63,9 @@
                 <input type="hidden" name="token" value="{{ $token }}">
                 <input type="hidden" name="email" value="{{ $email }}">
 
-                <p class="tiny mb-2 text-center">Reset password for <strong>{{ $email }}</strong></p>
+                <p class="tiny tw-mb-2 tw-text-center">Reset password for <strong>{{ $email }}</strong></p>
 
-                <div class="flex flex-column mb-2">
+                <div class="tw-flex tw-flex-column tw-mb-2">
                     @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => 'singeo',
                     "type" => "password",
@@ -77,7 +77,7 @@
                 ])
                 </div>
 
-                <div class="flex flex-column mb-2">
+                <div class="tw-flex tw-flex-column tw-mb-2">
                     @include('partials.bladesora.members.inputs.text-input', [
                         "brand" => 'singeo',
                         "type" => "password",
@@ -90,7 +90,7 @@
                 </div>
 
                 <button type="submit" class="btn">
-                    <span class="text-white bg-singeo">Sign In</span>
+                    <span class="tw-text-white tw-bg-singeo">Sign In</span>
                 </button>
             </form>
         </section>

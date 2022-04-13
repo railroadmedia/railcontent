@@ -14,10 +14,10 @@
 
         <div v-cloak>
 
-            <header id="pageHeader" class="container fluid tw-py-20" style="background-image:url(https://singeo.s3.amazonaws.com/singeo-header-image.jpg);">
-                <div class="container text-center">
+            <header id="pageHeader" class="tw-container tw-mx-auto fluid tw-py-20" style="background-image:url(https://singeo.s3.amazonaws.com/singeo-header-image.jpg);">
+                <div class="tw-container tw-mx-auto tw-text-center">
                     <h1 class="tw-text-white">
-                        <i class="fas fa-phone fa-flip-horizontal text-{{ $brand }}"></i> 
+                        <i class="fas fa-phone fa-flip-horizontal tw-text-{{ $brand }}"></i> 
                         Support
                     </h1>
                 </div>

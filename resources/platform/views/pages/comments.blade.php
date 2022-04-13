@@ -9,8 +9,8 @@
 
         <div v-cloak>
 
-            <div class="container">
-                <div class="flex flex-column bg-white shadows corners-10 mv-3">
+            <div class="tw-container tw-mx-auto">
+                <div class="tw-flex tw-flex-column tw-bg-white tw-shadows corners-10 tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
                     <comments-catalogue
                         theme-color="{{ $brand }}"
                         brand="{{ $brand }}"
