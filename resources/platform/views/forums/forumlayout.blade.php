@@ -29,49 +29,22 @@
 
 <body class="singeo {{ isLive() ? 'live' : '' }} {{ $bodyClass ?? '' }} {{ !empty($_COOKIE['collapsed']) ? 'sidebar-collapsed' : '' }} {{ !empty($_COOKIE['darkmode']) ? 'dark-mode' : '' }}">
     <div id="app">
-        @if(!empty(current_user()))
-            <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
-        @endif
+        <app-container
+            :vue-router="false"
+            brand="{{ $brand }}"
+        >
+            @if(!empty(current_user()))
+                <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
+            @endif
 
-        {!! \Railroad\Usora\Services\ClientRelayService::getBodyTop() !!}
+            {!! \Railroad\Usora\Services\ClientRelayService::getBodyTop() !!}
 
-        {!! \App\Analytics\Tracker::bodyTop() !!}
+            {!! \App\Analytics\Tracker::bodyTop() !!}
 
-        @yield('breadcrumbs')
+            @yield('breadcrumbs')
 
-        @if(empty($hideNav) && !empty(auth()->user()))
-                @include('bladesora::members.navigation.nav', [
-                     "logo" => "https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png",
-                     "themeColor" => "singeo",
-                     "accountUrl" => url()->route('members.profile.dashboard', [auth()->id()]),
-                     "userAvatar" => current_user()->getProfilePictureUrl(),
-                     "userName" => 'Singeo User',
-                     "searchUrl" => isPackOnly() ? null : url()->route('members.search'),
-                     "mainSections" => [],
-                     "links" => [],
-                     "supportUrl" => url()->route('support.render-page'),
-                     "logoutUrl" => url()->route('usora.deauthenticate'),
-                     "stretch" => $leftSidebar ?? false,
-                     "userName" => current_user()->getDisplayName(),
-                     "userXp" => \Railroad\Points\Services\UserPointsService::fetchPoints(current_user()->getId()),
-                     "userLevel" => \App\Services\User\UserContentProgressService::getLevelRank(current_user()->getId()),
-                     "showReferralButton" => true,
-                    "referralPageUrl" => url()->route('members.referral.invite-a-friend'),
-                 ])
-        @endif
-
-        @yield('content')
-
-        @if(empty($hideFooter))
-            @include('bladesora::members.navigation.footer', [
-                "termsUrl" => "/terms",
-                "privacyUrl" => "/privacy",
-                "logoutUrl" => url()->route('usora.deauthenticate'),
-                "supportUrl" => url()->route('support.render-page'),
-                "logoImage" => "https://dmmior4id2ysr.cloudfront.net/logos/singeo-by-musora-grey.png",
-            ])
-        @endif
-
+            @yield('content')
+        </app-container>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
