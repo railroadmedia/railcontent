@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLastUsedBrand::class,
         ],
 
         'web_authenticated' => [
@@ -47,16 +48,19 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLastUsedBrand::class,
         ],
 
         'api_public' => [
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLastUsedBrand::class,
         ],
 
         'api_authenticated' => [
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLastUsedBrand::class,
         ],
     ];
 
