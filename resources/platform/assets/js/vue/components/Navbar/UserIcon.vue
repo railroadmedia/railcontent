@@ -45,7 +45,7 @@ export default {
   <button
     v-on:click="handleMenuOpen"
     tabindex="0"
-    class="tw-ml-[36px] tw-flex tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
+    class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
     <!-- User Image -->
     <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full" />

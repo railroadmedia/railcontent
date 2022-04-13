@@ -1,28 +1,18 @@
 @php
     $bodyClass = ($bodyClass ?? '') . 'tw-bg-gray-50  sidebar';
-    $leftSidebar = true;
 @endphp
-@extends('members.forums.forumlayout')
+@extends('forums.forumlayout')
 
 @section('meta')
-    <title>{{ $threadTitle }} | {{$categoryTitle}} | Forums | Singeo</title>
-@endsection
-
-@section('styles')
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="{{ mix('tailwindcss/tailwind.css') }}">
-@endsection
-
-@section('inject-components')
-    <script src="{{ mix('assets/members/js/forum.js') }}"></script>
+    <title>{{ $threadTitle }} | {{$categoryTitle}} | Forums | {{ $brand }}</title>
 @endsection
 
 @section('breadcrumbs')
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home'),
+                "url" => url()->route('home'),
             ],
             [
                 "title" => "Forums",
@@ -40,13 +30,18 @@
 @endsection
 
 @section('content')
-    @include('members.partials._content-sidebar')
+    <page-container>
+        <div v-cloak>
 
-    <forum-thread
-            theme-color="singeo"
-            brand="singeo"
-            :thread="{{ $thread }}"
-            :current-user="{{ $currentUser }}"
-            previous-page="{{ $categoryUrl }}"
-            update-post-base-route={{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.post.jump-to',['#####']) }}></forum-thread>
+            <forum-thread
+                theme-color="{{ $brand }}"
+                brand="{{ $brand }}"
+                :thread="{{ $thread }}"
+                :current-user="{{ $currentUser }}"
+                previous-page="{{ $categoryUrl }}"
+                update-post-base-route={{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.post.jump-to',['#####']) }}
+            />
+
+        </div>
+    </page-container>
 @endsection

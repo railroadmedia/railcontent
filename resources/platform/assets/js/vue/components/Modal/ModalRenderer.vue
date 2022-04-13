@@ -7,16 +7,18 @@ export default {
     emits: ['onClose'],
     setup(props, context) {
         const onClose = () => {
+            console.log('on close modal renderer')
             context.emit('onClose', true)
         }
-        const onOverlayClick = (event) => {
-            if (event.target.id === 'modal-overlay') {
+        const onWrapperClick = (event) => {
+            console.log(event)
+            if (event.target.id === 'slot-wrapper') {
                 context.emit('onClose', true)
             }
         }
         return {
             onClose,
-            onOverlayClick
+            onWrapperClick
         }
     },
     mounted() {
@@ -39,14 +41,13 @@ export default {
         <div
             id="modal-overlay"
             class="tw-absolute tw-h-full tw-w-full tw-bg-[#081825] tw-bg-opacity-90"
-            v-on:click="onOverlayClick"
             style="
                  {
                     backdropfilter: 'blur(64px)';
                 }
             "
         ></div>
-        <div
+        <div id="slot-wrapper" @click="onWrapperClick"
             class="tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
         >
             <slot></slot>
