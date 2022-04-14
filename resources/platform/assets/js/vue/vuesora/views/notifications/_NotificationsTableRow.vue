@@ -5,7 +5,7 @@
         :class="{'is-read': isRead}"
         @click="markAsRead(false)"
     >
-        <div class="tw-flex tw-flex-col avatar-col align-v-center">
+        <div class="tw-flex tw-flex-col avatar-col tw-justify-center">
             <div
                 class="thumb-img square tw-rounded tw-bg-center"
             >
