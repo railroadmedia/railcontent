@@ -1,9 +1,9 @@
-<div id="membershipUnsubscribe" class="tw-flex tw-flex-column hide">
+<div id="membershipUnsubscribe" class="tw-flex tw-flex-col hide">
     <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1 tw-flex-auto">
         <h1 class="heading">Unsubscribe</h1>
     </div>
     <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1">
-        <div class="tw-flex tw-flex-column">
+        <div class="tw-flex tw-flex-col">
             <h6 class="title tw-mb-2">Hey {{ current_user()->getDisplayName() }}!</h6>
 
             <p class="tiny tw-uppercase text-error tw-font-bold">Please Read</p>

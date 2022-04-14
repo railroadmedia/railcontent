@@ -55,7 +55,7 @@
     @endif
 
     <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
-        <div class="tw-flex tw-flex-column">
+        <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row tw-mb-3">
                 <h4 class="subheading">Payment History</h4>
             </div>
@@ -64,7 +64,7 @@
                     <a href="{{ url()->route('members.payment-invoice', $payment->getId()) }}"
                        class="tw-flex tw-flex-row tw-flex-wrap tw-mb-1 tw-text-black tw-no-underline"
                        target="_blank">
-                        <div class="tw-flex tw-flex-column xs-12 md-6">
+                        <div class="tw-flex tw-flex-col xs-12 md-6">
                             <div class="tw-flex tw-flex-row">
                                 <p class="tiny tw-font-bold">
                                     <i class="fal fa-file-pdf tw-mr-1"></i>
@@ -72,9 +72,9 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="tw-flex tw-flex-column xs-12 md-6">
+                        <div class="tw-flex tw-flex-col xs-12 md-6">
                             <div class="tw-flex tw-flex-row">
-                                <div class="tw-flex tw-flex-column x-tiny tw-italic tw-uppercase align-h-left xs-6">
+                                <div class="tw-flex tw-flex-col x-tiny tw-italic tw-uppercase align-h-left xs-6">
                                     @if (!empty($payment->getPaymentMethod()) &&
                                     !empty($payment->getPaymentMethod()->getMethod()) &&
                                     $payment->getExternalProvider() == 'stripe')
@@ -85,10 +85,10 @@
                                     @endif
 
                                 </div>
-                                <div class="tw-flex tw-flex-column x-tiny tw-italic tw-uppercase align-h-center xs-3">
+                                <div class="tw-flex tw-flex-col x-tiny tw-italic tw-uppercase align-h-center xs-3">
                                     {{ $payment->getType() }}
                                 </div>
-                                <div class="tw-flex tw-flex-column x-tiny tw-italic tw-uppercase align-h-right xs-3">
+                                <div class="tw-flex tw-flex-col x-tiny tw-italic tw-uppercase align-h-right xs-3">
                                     &#36;{{ money_format('%i', $payment->getTotalPaid()) }}
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
-<div id="breadCrumbs" class="container fluid bg-black bb-grey-5-1 collapsed hide-xs-only" dusk="breadcrumbs">
-    <div class="container text-grey-3 pa-1 uppercase text-center">
+<div id="breadCrumbs" class="tw-container tw-mx-auto fluid tw-bg-black bb-grey-5-1 collapsed hide-xs-only" dusk="breadcrumbs">
+    <div class="tw-container tw-mx-auto text-grey-3 pa-1 tw-uppercase tw-text-center">
         {{--<div class="flex flex-row">--}}
             @foreach($pages as $index => $page)
                 @if($index !== 0)
@@ -7,11 +7,11 @@
                 @endif
 
                 @if(!empty($page['url']))
-                    <a class="tiny text-grey-3 no-decoration" href="{{ $page['url'] }}">
+                    <a class="tiny text-grey-3 tw-no-underline" href="{{ $page['url'] }}">
                         {{ ucwords($page['title']) }}
                     </a>
                 @else
-                    <span class="tiny font-bold">{{ ucwords($page['title']) }}</span>
+                    <span class="tiny tw-font-bold">{{ ucwords($page['title']) }}</span>
                 @endif
             @endforeach
         {{--</div>--}}

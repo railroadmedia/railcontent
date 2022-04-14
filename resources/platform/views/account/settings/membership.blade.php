@@ -5,7 +5,7 @@
 @extends('account.settings.layout')
 
 @section('meta')
-    <title>Membership | Singeo</title>
+    <title>Membership | Musora</title>
 @endsection
 
 @section('scripts')
@@ -14,23 +14,23 @@
 @endsection
 
 @section('edit-forms')
-    <div id="membershipMain" class="tw-flex tw-flex-column">
+    <div id="membershipMain" class="tw-flex tw-flex-col">
         <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1 tw-flex-auto">
             <h1 class="heading">Membership</h1>
         </div>
 
 
         <div class="tw-flex tw-flex-row pa-3 tw-flex-auto">
-            <div class="tw-flex tw-flex-column">
+            <div class="tw-flex tw-flex-col">
                 <div class="tw-flex tw-flex-row">
                     <h2 class="subheading tw-mb-3">Membership Type</h2>
                 </div>
 
                 @if(!empty($ownedProducts))
                     <div class="tw-flex tw-flex-row tw-mb-3">
-                        <div class="tw-flex tw-flex-column">
+                        <div class="tw-flex tw-flex-col">
                             <p class="body tw-mb-1">
-                                Your account has the following Singeo products:
+                                Your account has the following Musora products:
                             </p>
                             <ul class="body">
                                 @foreach($ownedProducts as $product)
@@ -46,11 +46,11 @@
 
                 @if(!empty($subscription))
                     <div class="tw-flex tw-flex-row">
-                        <div class="tw-flex tw-flex-column">
+                        <div class="tw-flex tw-flex-col">
                             @if($subscription->getIsActive())
                                 <p class="body tw-mb-1">
                                     You have a
-                                    <strong>{{ str_replace('subscription', 'Singeo Membership', $subscription->getType()) }}</strong>
+                                    <strong>{{ str_replace('subscription', 'Musora Membership', $subscription->getType()) }}</strong>
                                     billed at
                                     <strong>${{ $subscription->getTotalPrice() }}</strong>
 
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="tw-flex tw-flex-row mt-3 tw-flex-auto">
-                        <div class="tw-flex tw-flex-column">
+                        <div class="tw-flex tw-flex-col">
                             @if($subscription->getIsActive())
                                 <h2 class="subheading tw-mb-2">Cancel Membership</h2>
                                 <div class="tw-flex tw-flex-row">
@@ -118,7 +118,7 @@
                 @else
                     <div class="tw-flex tw-flex-row">
                         @if($isLifetime)
-                            <div class="tw-flex tw-flex-column tw-mb-2">
+                            <div class="tw-flex tw-flex-col tw-mb-2">
                                 <p class="body tw-mb-1">
                                     Lifetime memberships never renew or expire, you have access for life!
                                 </p>
@@ -126,10 +126,10 @@
                         @endif
 
                         @if($isPackOnly)
-                            <div class="tw-flex tw-flex-column tw-mb-2">
+                            <div class="tw-flex tw-flex-col tw-mb-2">
                                 <p class="body">
-                                    You have a Singeo Pack Membership.
-                                    <a href="/#orderNow" target="_blank">Learn more about Singeo Membership.</a>
+                                    You have a Musora Membership.
+                                    <a href="/#orderNow" target="_blank">Learn more about Musora Membership.</a>
                                 </p>
                             </div>
                         @endif

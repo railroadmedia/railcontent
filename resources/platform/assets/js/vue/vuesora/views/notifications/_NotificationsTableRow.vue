@@ -1,13 +1,13 @@
 <template>
     <a
         :href="linkedContent.url"
-        class="content-table-row flex flex-row bt-grey-1-1 pa-1 relative no-decoration"
+        class="content-table-row tw-flex tw-flex-row bt-grey-1-1 pa-1 relative no-decoration"
         :class="{'is-read': isRead}"
         @click="markAsRead(false)"
     >
-        <div class="flex flex-column avatar-col align-v-center">
+        <div class="tw-flex tw-flex-col avatar-col tw-justify-center">
             <div
-                class="thumb-img square rounded bg-center"
+                class="thumb-img square tw-rounded tw-bg-center"
             >
                 <img
                     src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
@@ -19,43 +19,43 @@
             </div>
         </div>
 
-        <div class="flex flex-column align-v-center ph-1 title-column overflow">
+        <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow">
 
-            <p class="tiny text-black item-title">
-                <span class="font-bold">{{ userName }}</span>
+            <p class="tiny tw-text-black item-title">
+                <span class="tw-font-bold">{{ userName }}</span>
 
                 {{ notificationTypeString }}
 
-                <span class="font-bold">{{ linkedContent.title }}</span>
+                <span class="tw-font-bold">{{ linkedContent.title }}</span>
             </p>
 
             <p
                 v-html="subContent"
-                class="tiny text-black mt-1"
+                class="tiny tw-text-black tw-mt-1"
             >
             </p>
 
             <p
-                class="tiny text-grey-3 font-italic mt-1"
+                class="tiny text-grey-3 tw-italic tw-mt-1"
                 style="font-size: 8pt;"
             >
                 {{ createdOn }}
             </p>
         </div>
 
-        <div class="flex flex-column icon-col align-v-center">
+        <div class="tw-flex tw-flex-col icon-col tw-justify-center">
             <div
                 class="body"
                 title="Mark as Read"
                 @click.stop.prevent="markAsRead(true)"
             >
-                <i class="far fa-eye flex-center text-grey-2 rounded read-icon"></i>
+                <i class="far fa-eye tw-flex-center text-grey-2 tw-rounded read-icon"></i>
             </div>
         </div>
 
-        <div class="flex flex-column icon-col align-v-center">
+        <div class="tw-flex tw-flex-col icon-col tw-justify-center">
             <div class="body">
-                <i class="fas fa-arrow-circle-right flex-center text-grey-2 rounded"></i>
+                <i class="fas fa-arrow-circle-right tw-flex-center text-grey-2 tw-rounded"></i>
             </div>
         </div>
     </a>

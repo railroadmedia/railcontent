@@ -31,7 +31,7 @@
 
         <section id="logoContainer" class="pa-2 tw-text-center">
             <img class="logo"
-                src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
+                src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
         </section>
 
         <p class="tw-pb-3 tw-text-center tw-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>

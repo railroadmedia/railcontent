@@ -5,7 +5,7 @@
 @endsection
 
 @section('edit-forms')
-    <div id="editForm" class="tw-flex tw-flex-column">
+    <div id="editForm" class="tw-flex tw-flex-col">
         <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1 tw-flex-auto">
             <h1 class="heading">Login Credentials</h1>
         </div>

@@ -1,4 +1,4 @@
-@component('bladesora::members.account.settings.edit-form')
+@component('partials.bladesora.members.account.settings.edit-form')
     @slot('formTitle')
         Profile Picture
     @endslot
@@ -8,22 +8,22 @@
     @endslot
 
     @slot('formData')
-        <div class="flex flex-column">
-            <div class="flex flex-row flex-wrap align-center">
-                <div class="flex flex-column image-col align-center relative">
+        <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-row tw-flex-wrap align-center">
+                <div class="tw-flex tw-flex-col image-col align-center tw-relative">
                     <img class="rounded"
                          src="{{ $profilePictureUrl }}"
                          data-avatar-update="true">
 
                     @if($canClearAvatar)
-                        <span id="clearAvatar" class="rounded clear-button">
+                        <span id="clearAvatar" class="tw-rounded clear-button">
                             <i class="fas fa-times"></i>
                         </span>
                     @endif
                 </div>
-                <div class="flex flex-column align-center pa">
+                <div class="tw-flex tw-flex-col align-center pa">
                     <p class="tiny text-grey-3">For best results upload a square photo.</p>
-                    <p class="tiny text-grey-3 font-italic">Max file size: <strong>5MB</strong></p>
+                    <p class="tiny text-grey-3 tw-italic">Max file size: <strong>5MB</strong></p>
                 </div>
             </div>
         </div>
@@ -31,8 +31,8 @@
 
     @slot('formModal')
         <div id="avatarModal" class="modal">
-            <div class="flex flex-column bg-white corners-10 shadow">
-                <div class="flex flex-row pa-3">
+            <div class="tw-flex tw-flex-col tw-bg-white corners-10 tw-shadow">
+                <div class="tw-flex tw-flex-row pa-3">
                     <h2 class="subheading">Edit: Profile Picture</h2>
                 </div>
 
