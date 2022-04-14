@@ -9,7 +9,7 @@
         <div v-cloak>
 
             <div class="tw-container tw-mx-auto">
-                <div class="tw-flex tw-flex-column tw-bg-white tw-shadows corners-10 tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+                <div class="tw-flex tw-flex-col tw-bg-white tw-shadows corners-10 tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
                     <comments-catalogue
                         theme-color="{{ $brand }}"
                         brand="{{ $brand }}"

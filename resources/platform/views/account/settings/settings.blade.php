@@ -5,11 +5,11 @@
 @endsection
 
 @section('edit-forms')
-    <div class="tw-flex tw-flex-column pa-3 tw-flex-auto">
+    <div class="tw-flex tw-flex-col pa-3 tw-flex-auto">
         <h1 class="heading">Settings</h1>
     </div>
     <div class="tw-flex tw-flex-row">
-        <div id="editForm" class="tw-flex tw-flex-column">
+        <div id="editForm" class="tw-flex tw-flex-col">
             <form method="POST" action="/usora/user/update/{{ current_user()->getId() }}">
                 <input type="hidden" name="redirect" value="{{ url()->current() }}">
                 {{ method_field('PATCH') }}
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="tw-flex tw-flex-row ph-3 pb-3">
-                    <div class="tw-flex tw-flex-column">
+                    <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "weeklyUpdates",
@@ -68,7 +68,7 @@
                     <h2 class="subheading">How often would you like to receive email notifications?</h2>
                 </div>
                 <div class="tw-flex tw-flex-row ph-3 pb-3">
-                    <div class="tw-flex tw-flex-column">
+                    <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.radio-input', [
                                 "inputID" => "rightAway",
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="tw-flex tw-flex-row ph-3 pb-3 pt-3">
-                    <div class="tw-flex tw-flex-column">
+                    <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "useLegacyPlayer",

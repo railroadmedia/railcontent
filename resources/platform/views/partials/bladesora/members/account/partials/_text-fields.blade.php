@@ -1,10 +1,10 @@
 @foreach($fields as $key => $value)
     @if($value || !empty($showEmpty))
-        <div class="flex flex-row text-field flex-auto mb-1">
-            <div class="flex flex-column key">
+        <div class="tw-flex tw-flex-row text-field tw-flex-auto tw-mb-1">
+            <div class="tw-flex tw-flex-col key">
                 <p class="body font-bold">{{ ucwords($key) }}</p>
             </div>
-            <div class="flex flex-column value grow">
+            <div class="tw-flex tw-flex-col value tw-grow">
                 <p class="body">{{ $value }}</p>
             </div>
         </div>
