@@ -14,7 +14,7 @@
                     {{ csrf_field() }}
                     {{ method_field($method) }}
 
-                    <div class="form-group -twmb-2">
+                    <div class="form-group tw-mb-2">
                         <input type="text" name="title" id="title" value="{{ old('title') }}">
                         <label for="title" class="{{ $brand }}">Title</label>
 
