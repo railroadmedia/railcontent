@@ -86,8 +86,8 @@ function goBack() {
           }
         "
         :isDisabled="!steps[0].checked"
-        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
-        >COMPLETE YOUR ACCOUNT</Button
+        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] tw-uppercase md:tw-hidden tw-block"
+        >Complete Your Account</Button
       >
       <ProgressBar
         :brand="brand"
@@ -103,8 +103,8 @@ function goBack() {
           }
         "
         :isDisabled="!steps[0].checked"
-        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
-        >COMPLETE YOUR ACCOUNT</Button
+        classOverride="md:tw-w-[543px] tw-uppercase tw-mt-[40px] tw-hidden md:tw-block"
+        >Complete Your Account</Button
       >
     </div>
   </StepWrapper>

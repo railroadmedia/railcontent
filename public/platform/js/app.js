@@ -34095,20 +34095,11 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("COMPLETE YOUR ACCOUNT ");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Button"], {
-    onOnButtonClick: $setup.toggleOnboarding,
-    classOverride: "tw-shrink-0 tw-h-[50px] tw-bg-transparent tw-border-black tw-text-black dark:tw-text-white dark:tw-border-white tw-border-[2px] lg:tw-mr-6 tw-text-[16px] lg:tw-text-[18px] 2xl:tw-text-[20px] tw-px-[59px]"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_3];
-    }),
-    _: 1
-    /* STABLE */
-
-  }), $setup.showOnboarding ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Onboarding"], {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: $setup.toggleOnboarding,
+    "class": "tw-btn-secondary tw-text-black tw-border-3 tw-leading-none tw-text-lg tw-tracking-wide tw-mr-6 dark:tw-text-white"
+  }, "Complete Your Account "), $setup.showOnboarding ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Onboarding"], {
     key: 0
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "tw-absolute dark:tw-text-white dark:tw-border-white tw-text-black tw-border-black tw-border-[2px] tw-rounded-full tw-h-[20px] tw-w-[20px] tw-flex tw-justify-center tw-items-center tw-top-[9px] tw-right-[14px]",
@@ -34145,9 +34136,9 @@ var _hoisted_3 = {
   "class": "tw-justify-self-end md:tw-justify-self-center tw-flex tw-flex-col tw-items-center tw-pb-[20px] md:tw-pb-0"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("COMPLETE YOUR ACCOUNT");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Complete Your Account");
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("COMPLETE YOUR ACCOUNT");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Complete Your Account");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["StepWrapper"], {
@@ -34175,7 +34166,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           $setup.emit('onChangeStep', 1);
         }),
         isDisabled: !$props.steps[0].checked,
-        classOverride: "tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
+        classOverride: "tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] tw-uppercase md:tw-hidden tw-block"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_4];
@@ -34200,7 +34191,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           $setup.emit('onChangeStep', 1);
         }),
         isDisabled: !$props.steps[0].checked,
-        classOverride: "md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
+        classOverride: "md:tw-w-[543px] tw-uppercase tw-mt-[40px] tw-hidden md:tw-block"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_5];
