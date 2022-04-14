@@ -5,7 +5,7 @@
 @extends('account.settings.layout')
 
 @section('meta')
-    <title>Membership | Singeo</title>
+    <title>Membership | Musora</title>
 @endsection
 
 @section('scripts')
@@ -30,7 +30,7 @@
                     <div class="tw-flex tw-flex-row tw-mb-3">
                         <div class="tw-flex tw-flex-col">
                             <p class="body tw-mb-1">
-                                Your account has the following Singeo products:
+                                Your account has the following Musora products:
                             </p>
                             <ul class="body">
                                 @foreach($ownedProducts as $product)
@@ -50,7 +50,7 @@
                             @if($subscription->getIsActive())
                                 <p class="body tw-mb-1">
                                     You have a
-                                    <strong>{{ str_replace('subscription', 'Singeo Membership', $subscription->getType()) }}</strong>
+                                    <strong>{{ str_replace('subscription', 'Musora Membership', $subscription->getType()) }}</strong>
                                     billed at
                                     <strong>${{ $subscription->getTotalPrice() }}</strong>
 
@@ -128,8 +128,8 @@
                         @if($isPackOnly)
                             <div class="tw-flex tw-flex-col tw-mb-2">
                                 <p class="body">
-                                    You have a Singeo Pack Membership.
-                                    <a href="/#orderNow" target="_blank">Learn more about Singeo Membership.</a>
+                                    You have a Musora Membership.
+                                    <a href="/#orderNow" target="_blank">Learn more about Musora Membership.</a>
                                 </p>
                             </div>
                         @endif
