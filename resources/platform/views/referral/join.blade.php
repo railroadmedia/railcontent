@@ -1,15 +1,10 @@
-@php
-    $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
-@endphp
-
-@extends('members.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Singeo | Invite A Friend</title>
+    <title>Musora | Invite A Friend</title>
 @endsection
 
-@section('styles')
+@section('layout-styles')
     <style>
         h1 strong,
         label strong {
@@ -77,13 +72,17 @@
 @endsection
 
 @section('content')
-    @include('members.partials._content-sidebar')
+    <page-container>
+        <div v-cloak>
 
-    @include(
-        'bladesora::members.referral.join',
-        [
-            'joinUrl' => url()->route('referral.email-invite'),
-            'brand' => 'singeo',
-        ]
-    )
+            @include(
+                'partials.bladesora.members.referral.join',
+                [
+                    'joinUrl' => url()->route('referral.email-invite'),
+                    'brand' => 'singeo',
+                ]
+            )
+
+        </div>
+    </page-container>           
 @endsection
