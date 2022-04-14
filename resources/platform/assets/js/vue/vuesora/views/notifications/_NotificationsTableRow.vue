@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="tw-flex tw-flex-col icon-col align-v-center">
+        <div class="tw-flex tw-flex-col icon-col tw-justify-center">
             <div class="body">
                 <i class="fas fa-arrow-circle-right tw-flex-center text-grey-2 tw-rounded"></i>
             </div>
