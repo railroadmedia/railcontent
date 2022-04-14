@@ -1,15 +1,10 @@
-@php
-    $bodyClass = ($bodyClass ?? '') . ' bg-referral sidebar';
-    $leftSidebar = true;
-@endphp
-
-@extends('members.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Singeo | Invite A Friend</title>
+    <title>Musora | Invite A Friend</title>
 @endsection
 
-@section('styles')
+@section('layout-styles')
     @parent
     <style>
         h1 strong,
@@ -87,19 +82,22 @@
 @endsection
 
 @section('content')
-    @include('members.partials._content-sidebar')
+    <page-container>
+        <div v-cloak>
 
-    @include(
-        'bladesora::members.referral.invite',
-        [
-            'referralsPerUser' => $referralsPerUser,
-            'userReferralsPerformed' => $userReferralsPerformed,
-            'userReferralLink' => $userReferralLink,
-            'canRefer' => $canRefer,
-            'emailInviteUrl' => url()->route('referral.email-invite'),
-            'brand' => 'singeo',
-            'showToast' => session()->has('email-invite-message'),
-            'toastMessage' => session()->get('email-invite-message'),
-        ]
-    )
+            @include('partials.bladesora.members.referral.invite',
+                [
+                    'referralsPerUser' => $referralsPerUser,
+                    'userReferralsPerformed' => $userReferralsPerformed,
+                    'userReferralLink' => $userReferralLink,
+                    'canRefer' => $canRefer,
+                    'emailInviteUrl' => url()->route('referral.email-invite'),
+                    'brand' => 'singeo',
+                    'showToast' => session()->has('email-invite-message'),
+                    'toastMessage' => session()->get('email-invite-message'),
+                ]
+            )
+
+        </div>
+    </page-container>
 @endsection
