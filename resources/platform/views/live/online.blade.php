@@ -38,7 +38,7 @@
 
             <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; max-width: 100%; padding-left: 87px; padding-right: 87px;">
                 <div id="lessonInfo" class="tw-flex tw-flex-row tw-items-center">
-                    <div class="tw-flex tw-flex-coltw-grow tw-bg-white tw-shadow corners-10">
+                    <div class="tw-flex tw-flex-col tw-grow tw-bg-white tw-shadow corners-10">
                         @if(!empty($lessonContent->fetch('*assignments')))
                             @foreach($lessonContent->fetch('*assignments', []) as $assignment)
                                 <div class="tw-flex tw-flex-row">
