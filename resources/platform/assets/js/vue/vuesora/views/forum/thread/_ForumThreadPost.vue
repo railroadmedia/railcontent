@@ -127,7 +127,7 @@
                 </div>
                 </div>
                 <div class="tw-flex tw-flex-col mb-1">
-                <div class="tw-flex tw-flex-row align-v-center align-h-right">
+                <div class="tw-flex tw-flex-row tw-items-center align-h-right">
                     <p
                         class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
                         @click="reportPost"
