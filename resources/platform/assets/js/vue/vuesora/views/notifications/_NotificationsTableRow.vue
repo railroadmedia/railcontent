@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="tw-flex tw-flex-col align-v-center ph-1 title-column overflow">
+        <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow">
 
             <p class="tiny tw-text-black item-title">
                 <span class="tw-font-bold">{{ userName }}</span>
