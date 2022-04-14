@@ -1,4 +1,4 @@
-<div class="tw-flex tw-flex-row form-group align-v-center">
+<div class="tw-flex tw-flex-row form-group tw-items-center">
     <span class="toggle-input mr-1">
         <input type="hidden"
                class="hidden-input"
