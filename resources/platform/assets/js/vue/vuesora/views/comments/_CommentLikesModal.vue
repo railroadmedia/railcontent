@@ -50,7 +50,7 @@
                                 >
                             </div>
                         </div>
-                        <div class="tw-flex tw-flex-col pl-2 tw-items-center tw-truncate">
+                        <div class="tw-flex tw-flex-col pl-2 tw-justify-center tw-truncate">
                             <p class="body tw-font-bold tw-truncate">
                                 {{ user.display_name }}
                             </p>
