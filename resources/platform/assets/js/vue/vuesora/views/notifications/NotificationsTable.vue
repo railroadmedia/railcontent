@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col">
-        <div class="tw-flex tw-flex-row pv-3 align-v-center tw-flex-wrap">
+        <div class="tw-flex tw-flex-row pv-3 tw-items-center tw-flex-wrap">
             <div class="tw-flex tw-flex-col">
                 <h1 class="heading">
                     Notifications
