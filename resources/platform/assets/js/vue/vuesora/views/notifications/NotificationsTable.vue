@@ -1,13 +1,13 @@
 <template>
-    <div class="flex flex-column">
-        <div class="flex flex-row pv-3 align-v-center flex-wrap">
-            <div class="flex flex-column">
+    <div class="tw-flex tw-flex-col">
+        <div class="tw-flex tw-flex-row pv-3 align-v-center tw-flex-wrap">
+            <div class="tw-flex tw-flex-col">
                 <h1 class="heading">
                     Notifications
                 </h1>
             </div>
 
-            <div class="flex flex-column button-col">
+            <div class="tw-flex tw-flex-col button-col">
                 <a
                     :href="settingsUrl"
                     class="btn bg-dark inverted short text-grey-3"
@@ -17,17 +17,17 @@
                 </a>
             </div>
 
-            <div class="flex flex-column button-col">
+            <div class="tw-flex tw-flex-col button-col">
                 <button
                     class="btn"
                     :disabled="!hasUnread"
                     @click.stop="markAllAsRead"
                 >
                     <span
-                        class="text-white short"
+                        class="tw-text-white short"
                         :class="themeBgClass"
                     >
-                        <i class="fas fa-eye mr-1"></i>
+                        <i class="fas fa-eye tw-mr-1"></i>
                         Mark All As Read
                     </span>
                 </button>
@@ -36,10 +36,10 @@
 
         <div
             v-if="notifications.length === 0"
-            class="flex flex-row pa-3"
+            class="tw-flex tw-flex-row pa-3"
         >
             <p
-                class="tiny text-grey-3 font-italic"
+                class="tiny text-grey-3 tw-italic"
             >
                 You do not appear to have any notifications at this time.
             </p>
@@ -54,7 +54,7 @@
 
         <div
             v-if="totalPages > 1"
-            class="flex flex-row bg-light pagination-row align-h-right"
+            class="tw-flex tw-flex-row bg-light pagination-row align-h-right"
         >
             <pagination
                 :current-page="currentPage"

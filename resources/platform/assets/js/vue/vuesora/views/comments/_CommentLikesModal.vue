@@ -6,14 +6,14 @@
         <div
             id="likeUsersContainer"
             ref="likeUsersContainer"
-            class="flex flex-column bg-white corners-10 shadow"
+            class="tw-flex tw-flex-col tw-bg-white corners-10 tw-shadow"
             style="max-height:500px;"
         >
             <div
                 v-if="loadingLikeUsers"
-                class="flex flex-column pa-3"
+                class="tw-flex tw-flex-col pa-3"
             >
-                <h1 class="heading text-center">
+                <h1 class="heading tw-text-center">
                     <i
                         class="fas fa-spinner fa-spin"
                         :class="themeTextClass"
@@ -22,11 +22,11 @@
             </div>
             <div
                 v-else
-                class="flex flex-column"
+                class="tw-flex tw-flex-col"
             >
-                <h1 class="heading align-v-center pa-3">
+                <h1 class="heading tw-align-middle pa-3">
                     <i
-                        class="fas fa-thumbs-up rounded text-white mr-1 big likes-icon"
+                        class="fas fa-thumbs-up tw-rounded tw-text-white tw-mr-1 big likes-icon"
                         :class="themeBgClass"
                     ></i>
                     {{ totalLikeUsers }} Like{{ totalLikeUsers == 1 ? '' : 's' }}
@@ -36,22 +36,22 @@
                     v-for="user in likeUsers"
                     :key="user.id"
                     :href="baseProfileRoute + user.user_id"
-                    class="flex flex-row comment-like-user bt-grey-1-1 no-decoration text-black ph-3 pv-1 align-v-center"
+                    class="tw-flex tw-flex-row comment-like-user bt-grey-1-1 tw-no-underline tw-text-black ph-3 pv-1 tw-items-center"
                 >
-                    <div class="flex flex-row">
-                        <div class="flex flex-column avatar-column">
+                    <div class="tw-flex tw-flex-row">
+                        <div class="tw-flex tw-flex-col avatar-column">
                             <div
                                 class="user-avatar smaller"
                                 :class="getUserAvatarClassObject(user)"
                             >
                                 <img
-                                    class="rounded"
+                                    class="tw-rounded"
                                     :src="user.avatar_url"
                                 >
                             </div>
                         </div>
-                        <div class="flex flex-column pl-2 align-v-center text-truncate">
-                            <p class="body font-bold text-truncate">
+                        <div class="tw-flex tw-flex-col pl-2 tw-items-center tw-truncate">
+                            <p class="body tw-font-bold tw-truncate">
                                 {{ user.display_name }}
                             </p>
                         </div>
