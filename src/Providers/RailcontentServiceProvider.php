@@ -37,11 +37,13 @@ use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\ContentTotalXPListener;
+use Railroad\Railcontent\Listeners\SyncElasticsearchListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Services\ConfigService;
@@ -75,6 +77,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentFieldCreated::class => [
                 // VersionContentEventListener::class . '@handleFieldCreated',
                 ContentTotalXPListener::class.'@handleFieldCreated',
+                SyncElasticsearchListener::class.'@handleSync'
             ],
             ContentFieldUpdated::class => [
                 // VersionContentEventListener::class . '@handleFieldUpdated',
@@ -91,6 +94,7 @@ class RailcontentServiceProvider extends ServiceProvider
             CommentDeleted::class => [UnassignCommentEventListener::class.'@handle'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class.'@handle'],
             HierarchyUpdated::class => [ContentTotalXPListener::class.'@handleHierarchyUpdated'],
+            ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class.'@handleSync']
         ];
 
         parent::boot();
