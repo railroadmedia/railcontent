@@ -11,15 +11,23 @@ class DataTransformer extends TransformerAbstract
 {
     public function transform($data)
     {
-        if(is_null($data)){
+        if (is_null($data)) {
             return [];
         }
         if (is_array($data)) {
             return $data;
         }
 
-        if ($data instanceOf Collection) {
-            return $data->toArray();
+        if ($data instanceof Collection) {
+            $data = $data->toArray();
+        }
+
+        $extraColumns = config('railcontent.contentColumnNamesForFields', []);
+
+        foreach ($extraColumns as $extraColumn) {
+            if (array_key_exists($extraColumn,$data)) {
+                unset($data[$extraColumn]);
+            }
         }
 
         foreach ($data as $rowIndex => $row) {
@@ -32,6 +40,10 @@ class DataTransformer extends TransformerAbstract
             }
 
             if ($rowIndex == 'lessons') {
+                unset($data[$rowIndex]);
+            }
+
+            if ($rowIndex == 'video') {
                 unset($data[$rowIndex]);
             }
 
