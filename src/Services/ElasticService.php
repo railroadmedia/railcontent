@@ -68,6 +68,8 @@ class ElasticService
                             'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'instructor' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'vimeo_video_id' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'youtube_video_id' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'instructors_name' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'bpm' => ['type' => 'integer', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'published_on' => ['type' => 'date', "format" => "yyyy-MM-dd HH:mm:ss"],
