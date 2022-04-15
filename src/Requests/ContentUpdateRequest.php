@@ -84,7 +84,8 @@ class ContentUpdateRequest extends CustomFormRequest
                     'forum_thread_id',
                     'associated_user_id',
                     'show_in_new_feed',
-                    'bpm'
+                    'bpm',
+                    'video'
                 ]
             );
     }
