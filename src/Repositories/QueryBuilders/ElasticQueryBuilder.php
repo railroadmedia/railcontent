@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ConfigService;
 
 class ElasticQueryBuilder
 {
@@ -66,7 +67,7 @@ class ElasticQueryBuilder
      */
     public function restrictBrand()
     {
-        $this->must[] = ['terms' => ['brand' => array_values(array_wrap(config('railcontent.available_brands')))]];
+        $this->must[] = ['terms' => ['brand' => array_values(array_wrap(ConfigService::$availableBrands))]];
 
         return $this;
     }
