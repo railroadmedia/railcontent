@@ -5,8 +5,14 @@ namespace Railroad\Railcontent\Services;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Helpers\CacheHelper;
+use Railroad\Railcontent\Repositories\ContentBpmRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\ContentInstructorRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\ContentStyleRepository;
+use Railroad\Railcontent\Repositories\ContentTopicRepository;
 
 class ContentFieldService
 {
@@ -21,15 +27,49 @@ class ContentFieldService
     private $contentService;
 
     /**
-     * FieldService constructor.
-     *
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
+     * @var ContentTopicRepository
+     */
+    private $contentTopicRepository;
+    /**
+     * @var ContentInstructorRepository
+     */
+    private $contentInstructorRepository;
+    /**
+     * @var ContentStyleRepository
+     */
+    private $contentStyleRepository;
+
+    private $contentBpmRepository;
+
+    /**
      * @param ContentFieldRepository $fieldRepository
      * @param ContentService $contentService
+     * @param ContentRepository $contentRepository
+     * @param ContentTopicRepository $contentTopicRepository
+     * @param ContentInstructorRepository $contentInstructorRepository
+     * @param ContentStyleRepository $contentStyleRepository
      */
-    public function __construct(ContentFieldRepository $fieldRepository, ContentService $contentService)
-    {
+    public function __construct(
+        ContentFieldRepository $fieldRepository,
+        ContentService $contentService,
+        ContentRepository $contentRepository,
+        ContentTopicRepository $contentTopicRepository,
+        ContentInstructorRepository $contentInstructorRepository,
+        ContentStyleRepository $contentStyleRepository,
+        ContentBpmRepository $contentBpmRepository
+    ) {
         $this->fieldRepository = $fieldRepository;
         $this->contentService = $contentService;
+        $this->contentRepository = $contentRepository;
+        $this->contentTopicRepository = $contentTopicRepository;
+        $this->contentInstructorRepository = $contentInstructorRepository;
+        $this->contentStyleRepository = $contentStyleRepository;
+        $this->contentBpmRepository = $contentBpmRepository;
     }
 
     /**
@@ -139,7 +179,7 @@ class ContentFieldService
         $id = $this->fieldRepository->createOrUpdateAndReposition(null, $input);
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $contentId);
+        CacheHelper::deleteCache('content_'.$contentId);
 
         $newField = $this->get($id);
 
@@ -169,7 +209,7 @@ class ContentFieldService
         $this->fieldRepository->createOrUpdateAndReposition($id, $data);
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_' . $oldField['content_id']);
+        CacheHelper::deleteCache('content_'.$oldField['content_id']);
 
         CacheHelper::deleteUserFields(null, 'contents');
 
@@ -200,7 +240,7 @@ class ContentFieldService
         event(new ContentFieldDeleted($field));
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_' . $field['content_id']);
+        CacheHelper::deleteCache('content_'.$field['content_id']);
 
         return $deleted;
     }
@@ -211,27 +251,35 @@ class ContentFieldService
      */
     public function createOrUpdate($data)
     {
-        $oldField = $this->get($data['content_id']??0);
+        if (in_array($data['key'], config('railcontent.contentColumnNamesForFields'))) {
+            $this->contentRepository->update($data['content_id'], [$data['key'] => $data['value']]);
+            // event(new ContentUpdated($id, $content, $data));
 
-        $id = $this->fieldRepository->createOrUpdateAndReposition(
-            ['id' => $data['id'] ?? null],
-            $data
-        );
-
-        //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $data['content_id']);
-
-        CacheHelper::deleteUserFields(null, 'contents');
-
-        $newField = $this->get($id);
-
-        if(!empty($data['id'])) {
-            event(new ContentFieldUpdated($newField, $oldField));
         } else {
-            event(new ContentFieldCreated($newField, $data));
+            $key = ($data['key'] == 'instructor') ? 'instructor_id' : $data['key'];
+            $repository = 'content'.ucfirst($data['key']).'Repository';
+
+            $newFields = $this->$repository->create([
+                                                        'content_id' => $data['content_id'],
+                                                        "$key" => $data['value'],
+                                                        'position' => $data['position'],
+                                                    ]);
         }
 
-        return $newField;
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_'.$data['content_id']);
+
+        CacheHelper::deleteUserFields(null, 'contents');
+        event(new ElasticDataShouldUpdate($data['content_id']));
+        //        $newField = $this->get($id);
+        //
+        //        if (!empty($data['id'])) {
+        //            event(new ContentFieldUpdated($newField, $oldField));
+        //        } else {
+        //            event(new ContentFieldCreated($newField, $data));
+        //        }
+
+        return $data;
     }
 
 }

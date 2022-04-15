@@ -161,8 +161,7 @@ class ContentRepository extends RepositoryBase
             }
         }
 
-        $contentFieldRows = //$this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-            $this->getFieldsByContentIds($contentRows);
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
 
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
@@ -244,7 +243,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -286,7 +285,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -332,7 +331,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -427,7 +426,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -464,7 +463,9 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds(
+            $contentRows
+        );
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -526,7 +527,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -569,7 +570,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -613,7 +614,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -661,7 +662,6 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
 
         $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-            //$this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -822,7 +822,7 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -853,7 +853,7 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -886,7 +886,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.user_id', $userId)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -938,7 +938,7 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -1006,7 +1006,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.status', $status)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -1055,21 +1055,24 @@ class ContentRepository extends RepositoryBase
                 ->orderBy($orderByColumn, $orderByDirection);
 
         if (!empty($requiredField)) {
-            $contentRows->join(ConfigService::$tableContentFields, function (JoinClause $joinClause) use (
-                $requiredField
+            if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
+                $contentRows->where(ConfigService::$tableContent.'.'.$requiredField['key'], $requiredField['value']);
+            } else {
+                $column = ($requiredField['key'] == 'instructor') ? 'instructor_id' : $requiredField['key'];
+                $table = config('railcontent.table_prefix').'content_'.$requiredField['key'].'s';
+            }
+            $contentRows->join($table, function (JoinClause $joinClause) use (
+                $requiredField,
+                $table,
+                $column
             ) {
                 $joinClause->on(
-                    ConfigService::$tableContentFields.'.content_id',
+                    $table.'.content_id',
                     '=',
                     ConfigService::$tableContent.'.id'
                 )
-                    ->where(
-                        ConfigService::$tableContentFields.'.key',
-                        '=',
-                        $requiredField['key']
-                    )
                     ->whereIn(
-                        ConfigService::$tableContentFields.'.value',
+                        $table.'.'.$column,
                         $requiredField['value']
                     );
             });
@@ -1078,7 +1081,6 @@ class ContentRepository extends RepositoryBase
         $contentRows = $contentRows->getToArray();
 
         $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-            //$this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -1154,9 +1156,13 @@ class ContentRepository extends RepositoryBase
 
         foreach ($contentRows as $contentRow) {
             $contents[$contentRow['id']]['id'] = $contentRow['id'];
+            $contents[$contentRow['id']]['content_id'] = $contentRow['content_id'] ?? null;
             $contents[$contentRow['id']]['popularity'] = $contentRow['popularity'];
             $contents[$contentRow['id']]['difficulty'] = $contentRow['difficulty'];
             $contents[$contentRow['id']]['title'] = $contentRow['title'];
+            $contents[$contentRow['id']]['video'] = $contentRow['video'];
+            $contents[$contentRow['id']]['vimeo_video_id'] = $contentRow['vimeo_video_id'];
+            $contents[$contentRow['id']]['youtube_video_id'] = $contentRow['youtube_video_id'];
             $contents[$contentRow['id']]['name'] = $contentRow['name'];
             $contents[$contentRow['id']]['slug'] = $contentRow['slug'];
             $contents[$contentRow['id']]['type'] = $contentRow['type'];
@@ -1187,7 +1193,7 @@ class ContentRepository extends RepositoryBase
             }
         }
 
-        return $this->attachContentsLinkedByField(array_values($contents));
+        return array_values($contents);
     }
 
     /**
@@ -1273,7 +1279,7 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
             array_column($contentRows, 'id'),
@@ -1333,16 +1339,17 @@ class ContentRepository extends RepositoryBase
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    ConfigService::$tableContentFields.'.content_id',
-                    '=',
-                    ConfigService::$tableContent.'.id'
-                )
-                ->whereIn(
-                    ConfigService::$tableContentFields.'.key',
-                    ConfigService::$fieldOptionList
-                );
+            //                ->leftJoin(
+            //                    ConfigService::$tableContentFields,
+            //                    ConfigService::$tableContentFields.'.content_id',
+            //                    '=',
+            //                    ConfigService::$tableContent.'.id'
+            //                )
+            //                ->whereIn(
+            //                    ConfigService::$tableContentFields.'.key',
+            //                    ConfigService::$fieldOptionList
+            //                )
+        ;
 
         if (self::$getFollowedContentOnly) {
             $query->restrictFollowedContent();
@@ -1755,177 +1762,221 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param $contentRows
+     * @param $contentIds
      * @return array
      */
-    public function getFieldsByContentIds($contentRows)
+    public function getInstructorsForContents($contentIds)
     {
         $instructors =
             $this->query()
                 ->select([
+                             config('railcontent.table_prefix').'content_instructors'.'.content_id',
                              config('railcontent.table_prefix').'content_instructors'.'.instructor_id as field_value',
-                             config('railcontent.table_prefix').'content'.'.id',
+                             config('railcontent.table_prefix').'content'.'.*',
                          ])
-                ->join(
+                ->leftJoin(
                     config('railcontent.table_prefix').'content_instructors',
                     config('railcontent.table_prefix').'content'.'.id',
                     '=',
-                    config('railcontent.table_prefix').'content_instructors'.'.content_id'
+                    config('railcontent.table_prefix').'content_instructors'.'.instructor_id'
+                )
+                ->join(
+                    config('railcontent.table_prefix').'content as co',
+                    config('railcontent.table_prefix').'content_instructors'.'.content_id',
+                    '=',
+                    'co.id'
                 )
                 ->whereIn(
-                    config('railcontent.table_prefix').'content'.'.id',
-                    array_column($contentRows, 'id')
+                    config('railcontent.table_prefix').'content_instructors'.'.content_id',
+                    $contentIds
                 )
                 ->get()
-                ->groupBy('id')
                 ->toArray();
 
-        $styles =
+        $contentFieldRows = $this->getFieldsByContentIds(array_values($instructors), true);
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($instructors, 'id'));
+        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+            array_column($instructors, 'id'),
+            array_column($instructors, 'type')
+        );
+
+        $instructorRows = $this->processRows(
+            $instructors,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+
+        $results = [];
+        foreach ($instructorRows as $instructor) {
+            $results[$instructor['content_id']][] = $instructor;
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param $contentIds
+     * @return array
+     */
+    public function getVideoForContents($contentIds)
+    {
+        $videos =
             $this->query()
                 ->select([
-                             config('railcontent.table_prefix').'content_styles'.'.style as field_value',
-                             config('railcontent.table_prefix').'content'.'.id',
+                             'video'.'.*',
+                             config('railcontent.table_prefix').'content.id as content_id',
                          ])
-                ->join(
-                    config('railcontent.table_prefix').'content_styles',
-                    config('railcontent.table_prefix').'content'.'.id',
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as video',
+                    config('railcontent.table_prefix').'content'.'.video',
                     '=',
-                    config('railcontent.table_prefix').'content_styles'.'.content_id'
+                    'video.id'
                 )
                 ->whereIn(
                     config('railcontent.table_prefix').'content'.'.id',
-                    array_column($contentRows, 'id')
+                    $contentIds
                 )
                 ->get()
-                ->groupBy('id')
                 ->toArray();
 
-        $bpm =
-            $this->query()
-                ->select([
-                             config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
-                             config('railcontent.table_prefix').'content'.'.id',
-                         ])
-                ->join(
-                    config('railcontent.table_prefix').'content_bpm',
-                    config('railcontent.table_prefix').'content'.'.id',
-                    '=',
-                    config('railcontent.table_prefix').'content_bpm'.'.content_id'
-                )
-                ->whereIn(
-                    config('railcontent.table_prefix').'content'.'.id',
-                    array_column($contentRows, 'id')
-                )
-                ->get()
-                ->groupBy('id')
-                ->toArray();
+        if (empty($videos)) {
+            return [];
+        }
 
-        $topics =
-            $this->query()
-                ->select([
-                             config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
-                             config('railcontent.table_prefix').'content'.'.id',
-                         ])
-                ->join(
-                    config('railcontent.table_prefix').'content_topics',
-                    config('railcontent.table_prefix').'content'.'.id',
-                    '=',
-                    config('railcontent.table_prefix').'content_topics'.'.content_id'
-                )
-                ->whereIn(
-                    config('railcontent.table_prefix').'content'.'.id',
-                    array_column($contentRows, 'id')
-                )
-                ->get()
-                ->groupBy('id')
-                ->toArray();
+        $contentFieldRows = $this->getFieldsByContentIds(array_values($videos), true);
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($videos, 'id'));
+        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+            array_column($videos, 'id'),
+            array_column($videos, 'type')
+        );
 
-        $contentColumnNames = [
-            'difficulty',
-            'home_staff_pick_rating',
-            'legacy_id',
-            'legacy_wordpress_post_id',
-            //            'qna_video',
-            'title',
-            'xp',
-            'album',
-            'artist',
-            'bpm',
-            'cd-tracks',
-            'chord_or_scale',
-            'difficulty_range',
-            'episode_number',
-            'exercise-book-pages',
-            'fast_bpm',
-            'includes_song',
-            'live_event_start_time',
-            'live_event_end_time',
-            'live_event_youtube_id',
-            'live_stream_feed_type',
-            'name',
-            'released',
-            'slow_bpm',
-            'transcriber_name',
-            'week',
-            'avatar_url',
-            'length_in_seconds',
-            'soundslice_slug',
-            'staff_pick_rating',
-            'student_id',
-                        'vimeo_video_id',
-                        'youtube_video_id',
-            'show_in_new_feed',
-            'bands',
-            'endorsements',
-            'focus',
-            'forum_thread_id',
-            'is_active',
-            'is_coach',
-            'is_house_coach',
-            'is_coach_of_the_month',
-            'is_featured',
-            'associated_user_id',
-            'high_soundslice_slug',
-            'low_soundslice_slug',
-            //            'high_video',
-            //            'low_video',
-            //            'original_video',
-            'pdf',
-            'pdf_in_g',
-            'sbt_bpm',
-            'sbt_exercise_number',
-            'song_name',
-            'soundslice_xml_file_url',
-        ];
+        $videoRows = $this->processRows(
+            $videos,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+
+        $results = [];
+        foreach ($videoRows as $video) {
+            $results[$video['content_id']][] = $video;
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param $contentRows
+     * @param false $withoutAssociatedJoin
+     * @return array
+     */
+    public function getFieldsByContentIds($contentRows, $withoutAssociatedJoin = false)
+    {
+        $instructors = [];
+        $styles = [];
+        $bpm = [];
+        $topics = [];
+        $videos = [];
+
+        if (!$withoutAssociatedJoin) {
+            $videos = $this->getVideoForContents(array_column($contentRows, 'id'));
+            $instructors = $this->getInstructorsForContents(array_column($contentRows, 'id'));
+
+            $styles =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix').'content_styles'.'.style as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix').'content_styles',
+                        config('railcontent.table_prefix').'content'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'content_styles'.'.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix').'content'.'.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+
+            $bpm =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix').'content_bpm',
+                        config('railcontent.table_prefix').'content'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'content_bpm'.'.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix').'content'.'.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+
+            $topics =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix').'content_topics',
+                        config('railcontent.table_prefix').'content'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'content_topics'.'.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix').'content'.'.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+        }
+
+        $fieldsColumns = config('railcontent.contentColumnNamesForFields', []);
+
         $fields = [];
 
         foreach ($contentRows as $contentRow) {
             $fields[$contentRow['id']] = [];
-            foreach ($contentColumnNames as $column) {
-                if(isset($contentRow[$column])) {
+
+            foreach ($fieldsColumns as $column) {
+                if ($column != 'video') {
                     $fields[$contentRow['id']][] = [
                         "content_id" => $contentRow['id'],
                         "key" => $column,
                         "value" => $contentRow[$column] ?? '',
-                        "type" => "integer",
+                        "type" => "string",
                         "position" => 1,
                     ];
                 }
             }
+
             if (array_key_exists($contentRow['id'], $instructors)) {
-                foreach ($instructors[$contentRow['id']] as $index=>$instructor) {
+                foreach ($instructors[$contentRow['id']] as $index => $instructor) {
                     $fields[$contentRow['id']][] = [
                         "content_id" => $contentRow['id'],
                         "key" => 'instructor',
-                        "value" => $instructor['field_value'] ?? '',
-                        "type" => "content_id",
+                        "value" => $instructor,
+                        "type" => "content",
                         "position" => $index,
                     ];
                 }
             }
 
             if (array_key_exists($contentRow['id'], $styles)) {
-                foreach ($styles[$contentRow['id']] as $index=>$style) {
+                foreach ($styles[$contentRow['id']] as $index => $style) {
                     $fields[$contentRow['id']][] = [
                         "content_id" => $contentRow['id'],
                         "key" => 'style',
@@ -1937,7 +1988,7 @@ class ContentRepository extends RepositoryBase
             }
 
             if (array_key_exists($contentRow['id'], $bpm)) {
-                foreach ($bpm[$contentRow['id']] as $index=>$bpmRow) {
+                foreach ($bpm[$contentRow['id']] as $index => $bpmRow) {
                     $fields[$contentRow['id']][] = [
                         "content_id" => $contentRow['id'],
                         "key" => 'bpm',
@@ -1949,25 +2000,28 @@ class ContentRepository extends RepositoryBase
             }
 
             if (array_key_exists($contentRow['id'], $topics)) {
-                foreach ($topics[$contentRow['id']] as $index=>$topic) {
+                foreach ($topics[$contentRow['id']] as $index => $topic) {
                     $fields[$contentRow['id']][] = [
                         "content_id" => $contentRow['id'],
                         "key" => 'topic',
                         "value" => $topic['field_value'] ?? '',
                         "type" => "integer",
                         "position" => $index,
+
                     ];
                 }
             }
 
-            if($contentRow['video']){
-                $fields[$contentRow['id']][] = [
-                    "content_id" => $contentRow['id'],
-                    "key" => 'video',
-                    "value" => $contentRow['video'],
-                    "type" => "content_id",
-                    "position" => 1,
-                ];
+            if (array_key_exists($contentRow['id'], $videos)) {
+                foreach ($videos[$contentRow['id']] as $index => $video) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'video',
+                        "value" => $video,
+                        "type" => "content",
+                        "position" => $index,
+                    ];
+                }
             }
         }
 
