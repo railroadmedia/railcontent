@@ -62,7 +62,7 @@ class MigrateContentToElasticsearch extends Command
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
         $client = $this->elasticService->getClient();
-        $indexName = config('railcontent.elastic_index_name','content');
+        $indexName = config('railcontent.elastic_index_name', 'content');
 
         //Delete index if exists
         if ($client->indices()
@@ -77,7 +77,7 @@ class MigrateContentToElasticsearch extends Command
         $nr = 0;
         $dbConnection->table(config('railcontent.table_prefix').'content')
             ->select('*')
-            ->whereNotIn('type', ['assignment', 'exercise', 'vimeo-video', 'youtube-video'])
+            ->whereNotIn('type', ['assignment', 'exercise'])
             //  ->where('id', 31877)
             ->orderBy('id', 'asc')
             ->chunk(500, function (Collection $rows) use ($dbConnection, $client, &$nr) {
@@ -202,6 +202,8 @@ class MigrateContentToElasticsearch extends Command
                         'is_coach_of_the_month' => $row->is_coach_of_the_month,
                         'associated_user_id' => $row->associated_user_id,
                         'name' => $row->name,
+                        'vimeo_video_id' => $row->vimeo_video_id ,
+                        'youtube_video_id' => $row->youtube_video_id ,
                         'style' => (!$styles->isEmpty()) ? array_map(
                             'strtolower',
                             $styles->pluck('style')
