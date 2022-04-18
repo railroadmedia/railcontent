@@ -1022,6 +1022,7 @@ class ContentService
 
                 //                ElasticQueryBuilder::$userTopics = $this->userProvider->getCurrentUserTopics();
                 $requiredUserPlaylistIds = [];
+                $start = microtime(true);
                 $elasticData = $this->elasticService->getElasticFiltered(
                     $page,
                     $limit,
@@ -1037,15 +1038,19 @@ class ContentService
                     null,
                     $followedContents
                 );
-
+                $finish = microtime(true) - $start;
+                error_log('get elastic data in '.$finish);
                 $totalResults = $elasticData['hits']['total']['value'];
 
                 $ids = [];
                 foreach ($elasticData['hits']['hits'] as $elData) {
                     $ids[] = $elData['_source']['content_id'];
                 }
-
+                $start = microtime(true);
                 $unorderedContentRows = $this->getByIds($ids);
+                $finish = microtime(true) - $start;
+
+                error_log('get contents by ids from elasticsearch '.$finish);
 
                 $data = [];
                 foreach ($ids as $id) {
@@ -1056,8 +1061,8 @@ class ContentService
                     }
                 }
 
-                $qb = null;
-                if ($pullFilterFields) {
+                if ($pullFilterFields === true) {
+                    $start = microtime(true);
                     $filterOptions = $this->elasticService->getFilterFields(
                         $includedTypes,
                         $slugHierarchy,
@@ -1080,6 +1085,9 @@ class ContentService
                     }
 
                     $filters = $filterOptions;
+                    $finish = microtime(true) - $start;
+
+                    error_log('get filter options in  '.$finish);
                 }
 
                 $resultsDB = new ContentFilterResultsEntity([

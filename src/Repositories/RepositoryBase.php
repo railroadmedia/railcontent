@@ -25,11 +25,47 @@ abstract class RepositoryBase
     public static $connectionMask;
 
     /**
+     * @var PresenterInterface
+     */
+    protected $presenter;
+
+    /**
+     * @var ValidatorInterface
+     */
+    protected $validator;
+
+    /**
+     * Validation Rules
+     *
+     * @var array
+     */
+    protected $rules = null;
+
+    /**
+     * Collection of Criteria
+     *
+     * @var Collection
+     */
+    protected $criteria;
+
+    /**
+     * @var bool
+     */
+    protected $skipCriteria = false;
+
+    /**
+     * @var bool
+     */
+    protected $skipPresenter = false;
+
+    /**
      * CategoryRepository constructor.
      */
     public function __construct()
     {
         $this->databaseManager = app('db');
+
+       // $this->makePresenter();
 
         if (empty(self::$connectionMask)) {
             /**
@@ -355,4 +391,257 @@ abstract class RepositoryBase
                 ->where('position', '<=', $endPosition)
                 ->decrement('position') > 0;
     }
+
+
+
+
+
+
+
+
+    /**
+     * Specify Presenter class name
+     *
+     * @return string
+     */
+    public function presenter()
+    {
+        return null;
+    }
+
+    /**
+     * Set Presenter
+     *
+     * @param $presenter
+     *
+     * @return $this
+     */
+    public function setPresenter($presenter)
+    {
+        $this->makePresenter($presenter);
+
+        return $this;
+    }
+
+
+    /**
+     * @param null $presenter
+     *
+     * @return PresenterInterface
+     * @throws RepositoryException
+     */
+    public function makePresenter($presenter = null)
+    {
+        $presenter = !is_null($presenter) ? $presenter : $this->presenter();
+
+        if (!is_null($presenter)) {
+            $this->presenter = is_string($presenter) ? app()->make($presenter) : $presenter;
+//            dd($this->presenter);
+//            if (!$this->presenter instanceof PresenterInterface) {
+//                throw new RepositoryException("Class {$presenter} must be an instance of Reflex\\Repository\\Contracts\\PresenterInterface");
+//            }
+
+            return $this->presenter;
+        }
+
+        return null;
+    }
+
+
+
+    /**
+     * Skip Presenter Wrapper
+     *
+     * @param bool $status
+     *
+     * @return $this
+     */
+    public function skipPresenter($status = true)
+    {
+        $this->skipPresenter = $status;
+
+        return $this;
+    }
+
+    /**
+     * Wrapper result data
+     *
+     * @param mixed $result
+     *
+     * @return mixed
+     */
+    public function parserResult($result)
+    {
+        if($this->presenter) {
+            return $this->presenter->transform($result);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param $contentRows
+     * @param false $withoutAssociatedJoin
+     * @return array
+     */
+    public function getFieldsByContentIds($contentRows, $withoutAssociatedJoin = false)
+    {
+        $instructors = [];
+        $styles = [];
+        $bpm = [];
+        $topics = [];
+        $videos = [];
+
+        if (!$withoutAssociatedJoin) {
+            $videos = [];
+                //$this->getVideoForContents(array_column($contentRows, 'id'));
+            $instructors = [];
+                //$this->getInstructorsForContents(array_column($contentRows, 'id'));
+
+            $styles =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix').'content_styles'.'.style as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix').'content_styles',
+                        config('railcontent.table_prefix').'content'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'content_styles'.'.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix').'content'.'.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+
+            $bpm =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix').'content_bpm',
+                        config('railcontent.table_prefix').'content'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'content_bpm'.'.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix').'content'.'.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+
+            $topics =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix').'content_topics',
+                        config('railcontent.table_prefix').'content'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'content_topics'.'.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix').'content'.'.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+        }
+
+        $fieldsColumns = config('railcontent.contentColumnNamesForFields', []);
+
+        $fields = [];
+
+        foreach ($contentRows as $contentRow) {
+            $fields[$contentRow['id']] = [];
+
+            foreach ($fieldsColumns as $column) {
+                if ($column != 'video') {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => $column,
+                        "value" => $contentRow[$column] ?? '',
+                        "type" => "string",
+                        "position" => 1,
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $instructors)) {
+                foreach ($instructors[$contentRow['id']] as $index => $instructor) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'instructor',
+                        "value" => $instructor,
+                        "type" => "content",
+                        "position" => $index,
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $styles)) {
+                foreach ($styles[$contentRow['id']] as $index => $style) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'style',
+                        "value" => $style['field_value'] ?? '',
+                        "type" => "string",
+                        "position" => $index,
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $bpm)) {
+                foreach ($bpm[$contentRow['id']] as $index => $bpmRow) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'bpm',
+                        "value" => $bpmRow['field_value'] ?? '',
+                        "type" => "integer",
+                        "position" => $index,
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $topics)) {
+                foreach ($topics[$contentRow['id']] as $index => $topic) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'topic',
+                        "value" => $topic['field_value'] ?? '',
+                        "type" => "integer",
+                        "position" => $index,
+
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $videos)) {
+                foreach ($videos[$contentRow['id']] as $index => $video) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'video',
+                        "value" => $video,
+                        "type" => "content",
+                        "position" => $index,
+                    ];
+                }
+            }
+        }
+
+        return $fields;
+    }
+
+
 }

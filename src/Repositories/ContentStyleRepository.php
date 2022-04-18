@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Railroad\Railcontent\Transformers\StyleTransformer;
+
 class ContentStyleRepository extends RepositoryBase
 {
     public function query()
@@ -15,10 +17,13 @@ class ContentStyleRepository extends RepositoryBase
             return [];
         }
 
-        return $this->query()
+        $data = $this->query()
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
             ->toArray();
+
+       $this->setPresenter(StyleTransformer::class);
+        return $this->parserResult($data);
     }
 }
