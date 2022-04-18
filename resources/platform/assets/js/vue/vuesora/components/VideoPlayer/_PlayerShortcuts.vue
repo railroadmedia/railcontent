@@ -1,16 +1,16 @@
 <template>
     <div
-        class="player-dialog bg-grey-5 text-white corners-10 shadow pa-1"
+        class="player-dialog bg-grey-5 tw-text-white corners-10 tw-shadow pa-1"
     >
         <span
-            class="close-shortcuts body text-grey-3 hover-text-white pointer"
+            class="close-shortcuts body text-grey-3 hover-text-white tw-pointer"
             @click="close"
         >
             <i class="fas fa-times"></i>
         </span>
 
         <table class="dense">
-            <thead class="body font-bold">
+            <thead class="body tw-font-bold">
                 <tr>
                     <td>
                         Key
@@ -22,7 +22,7 @@
             </thead>
             <tbody class="tiny">
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Spacebar
                     </td>
                     <td class="text-grey-3">
@@ -30,7 +30,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Up Arrow
                     </td>
                     <td class="text-grey-3">
@@ -38,7 +38,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Down Arrow
                     </td>
                     <td class="text-grey-3">
@@ -46,7 +46,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Left Arrow
                     </td>
                     <td class="text-grey-3">
@@ -54,7 +54,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Right Arrow
                     </td>
                     <td class="text-grey-3">
@@ -62,7 +62,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Numbers 0-9
                     </td>
                     <td class="text-grey-3">
@@ -70,7 +70,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         Home
                     </td>
                     <td class="text-grey-3">
@@ -78,7 +78,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         End
                     </td>
                     <td class="text-grey-3">
@@ -86,7 +86,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         F
                     </td>
                     <td class="text-grey-3">
@@ -94,7 +94,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         M
                     </td>
                     <td class="text-grey-3">
@@ -102,7 +102,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         -
                     </td>
                     <td class="text-grey-3">
@@ -110,7 +110,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-bold">
+                    <td class="tw-font-bold">
                         +
                     </td>
                     <td class="text-grey-3">
