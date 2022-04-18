@@ -56,7 +56,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected $connectionType = 'mysql';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -294,7 +294,7 @@ class RailcontentTestCase extends BaseTestCase
         return $this->databaseManager->connection();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Redis::flushDB();
         parent::tearDown();

@@ -23,7 +23,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
      */
     protected $commentFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
