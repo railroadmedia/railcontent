@@ -1,27 +1,22 @@
-@php
-    $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
-    $hasUpcomingCoaches = $upcomingCoaches && count($upcomingCoaches) > 0;
-@endphp
-
-@extends('members.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Coaches | Singeo</title>
+    <title>Coaches | Musora</title>
 @endsection
 
 @section('content')
-    @include('members.partials._content-sidebar')
+    <page-container>
+        <div v-cloak>
 
-    @component('bladesora::members.components.header-banner', [
+    @component('partials.bladesora.members.components.header-banner', [
         'hideUser' => true,
         'backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/singeo-members-header-background-image.jpg',
-        'brand' => 'singeo'
+        'brand' => '{{ $brand }}'
     ])
         @slot('content')
-            <div class="flex flex-column pr-1">
-                <h1 class="heading text-white flex flex-row align-v-top">
-                    <span class="svg-icon text-singeo mr-1">
+            <div class="tw-flex tw-flex-col tw-pr-1">
+                <h1 class="heading tw-text-white tw-flex tw-flex-row tw-justify-start">
+                    <span class="svg-icon tw-text-{{ $brand }} mr-1">
                         <svg width="36" height="36" aria-hidden="true" fill="currentColor" focusable="false">
                             <use href="#whistle"></use>
                         </svg>
@@ -30,8 +25,8 @@
                 </h1>
 
                 <p
-                        class="text-white body"
-                        style="max-width:960px"
+                    class="text-white body"
+                    style="max-width:960px"
                 >
                     Every month, you’ll have new opportunities to learn from your coaches. You can choose the topics
                     that you need help with OR follow the coach that works with your style and what you want to achieve
@@ -43,9 +38,9 @@
     @endcomponent
 
     <!-- Coach Event -->
-    <section class="tw-flex tw-py-2 tw-bg-gray-100">
+    <section class="tw-tw-flex tw-py-2 tw-bg-gray-100">
         <coach-event
-            brand="singeo"
+            brand="{{ $brand }}"
             :preloaded-content='{{ $coachEvent }}'
             current-date-string="{{ $currentDate }}"
             subscription-calendar-id="{{ $currentEventCalendarId }}"
@@ -57,30 +52,30 @@
     </section>
 
     <!-- Featured Coaches -->
-    @component('bladesora::members.components.coach-featured', [
+    @component('partials.bladesora.members.components.coach-featured', [
         'hasFeaturedCoaches' => $hasFeaturedCoaches,
         'featuredCoaches' => $featuredCoaches,
-        'brand' => 'singeo',
+        'brand' => '{{ $brand }}',
     ])
     @endcomponent
 
-    <div class="container mt-2 mb-3">
-        <div class="flex flex-row mb-3">
-            <div class="flex flex-column grow">
-                <div class="flex flex-row align-v-center pv-2">
-                        <span class="rounded bg-singeo text-white icon-bg-circle body mr-1">
+    <div class="tw-container tw-mx-auto tw-mt-2 tw-mb-3">
+        <div class="tw-flex tw-flex-row tw-mb-3">
+            <div class="tw-flex tw-flex-col tw-flex-grow">
+                <div class="tw-flex tw-flex-row tw-items-center pv-2">
+                        <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
                             <i class="fas fa-bolt"></i>
                         </span>
 
-                    <h2 class="heading capitalize grow">
+                    <h2 class="heading tw-capitalize tw-flex-grow">
                         Latest Featured Lessons
                     </h2>
                 </div>
 
-                <div class="flex flex-row six-cards-row">
+                <div class="tw-flex tw-flex-row six-cards-row">
                     <transition appear name="fade">
                         <content-catalogue
-                                brand="singeo"
+                                brand="{{ $brand }}"
                                 theme-color="{{$themeColor}}"
                                 :use-theme-color="true"
                                 content-endpoint="/railcontent/content"
@@ -91,9 +86,9 @@
                                 :force-wide-thumbs="true"
                                 :pre-loaded-content="{{ $latestLessons }}"
                         >
-                            <div class="flex flex-row nmh-1">
+                            <div class="tw-flex tw-flex-row nmh-1">
                                 @for($i = 0; $i < 6; $i++)
-                                    @include('bladesora::members.skeletons.card-item', [
+                                    @include('partials.bladesora.members.skeletons.card-item', [
                                         "cardClass" => 'six-wide',
                                     ])
                                 @endfor
@@ -106,23 +101,23 @@
     </div>
 
     @if($hasFollowedCoaches)
-        <div class="container mt-2 mb-3">
-            <div class="flex flex-row mb-3">
-                <div class="flex flex-column grow">
-                    <div class="flex flex-row align-v-center pv-2">
-                        <span class="rounded bg-singeo text-white icon-bg-circle body mr-1">
+        <div class="tw-container tw-mx-auto tw-mt-2 tw-mb-3">
+            <div class="tw-flex tw-flex-row tw-mb-3">
+                <div class="tw-flex tw-flex-col tw-flex-grow">
+                    <div class="tw-flex tw-flex-row tw-items-center pv-2">
+                        <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
                             <i class="fas fa-star"></i>
                         </span>
 
-                        <h2 class="heading capitalize grow">
+                        <h2 class="heading tw-capitalize tw-flex-grow">
                             From Subscribed Coaches
                         </h2>
                     </div>
 
-                    <div class="flex flex-row six-cards-row">
+                    <div class="tw-flex tw-flex-row six-cards-row">
                         <transition appear name="fade">
                             <content-catalogue
-                                    brand="singeo"
+                                    brand="{{ $brand }}"
                                     theme-color="{{$themeColor}}"
                                     :use-theme-color="true"
                                     content-endpoint="/railcontent/content"
@@ -133,9 +128,9 @@
                                     :force-wide-thumbs="true"
                                     :pre-loaded-content="{{ $latestSubscribedLessons }}"
                             >
-                                <div class="flex flex-row nmh-1">
+                                <div class="tw-flex tw-flex-row nmh-1">
                                     @for($i = 0; $i < 6; $i++)
-                                        @include('bladesora::members.skeletons.card-item', [
+                                        @include('partials.bladesora.members.skeletons.card-item', [
                                             "cardClass" => 'four-wide',
                                         ])
                                     @endfor
@@ -149,26 +144,26 @@
     @endif
     
     <!-- Upcoming Coaches -->
-    @component('bladesora::members.components.coach-upcoming', [
+    @component('partials.bladesora.members.components.coach-upcoming', [
         'hasUpcomingCoaches' => $hasUpcomingCoaches,
         'upcomingCoaches' => $upcomingCoaches,
-        'brand' => 'singeo',
+        'brand' => '{{ $brand }}',
     ])
     @endcomponent
 
     <!-- Active Coaches -->
-    @component('bladesora::members.components.coach-active', [
+    @component('partials.bladesora.members.components.coach-active', [
         'hasActiveCoaches' => $hasActiveCoaches,
         'activeCoaches' => $activeCoaches,
-        'brand' => 'singeo'
+        'brand' => '{{ $brand }}'
     ])
     @endcomponent
 
-    <div class="container mb-3">
+    <div class="tw-container tw-mx-auto tw-mb-3">
         <transition appear name="fade">
             <content-catalogue
                     theme-color="{{$themeColor}}"
-                    brand="singeo"
+                    brand="{{ $brand }}"
                     content-endpoint="/railcontent/content?only_subscribed={{$onlySubscribedCoaches}}"
                     catalogue-type="coaches-grid"
                     limit="{{ $limitOverride ?? 18 }}"
@@ -193,12 +188,15 @@
                     @endif
             >
                 @for($i = 0; $i < ($limitOverride ?? 18); $i++)
-                    @include('bladesora::members.skeletons.card-item', [
+                    @include('partials.bladesora.members.skeletons.card-item', [
                        "cardClass" => 'six-wide',
                     ])
                 @endfor
             </content-catalogue>
         </transition>
     </div>
+
+        </div>
+    </page-container>
 @endsection
 
