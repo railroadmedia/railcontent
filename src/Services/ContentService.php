@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -323,7 +324,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -359,7 +360,7 @@ class ContentService
                 $orderByDirection
             );
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -391,7 +392,7 @@ class ContentService
                 $orderByDirection
             );
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -434,7 +435,7 @@ class ContentService
                 $orderByDirection
             );
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -473,7 +474,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $parentIds));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), $parentIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -494,7 +495,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdWhereType($childId, $type);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -515,7 +516,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), $childIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -536,7 +537,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdsWhereTypeForUrl($childIds, $type);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), $childIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -557,7 +558,7 @@ class ContentService
         if (is_null($results)) {
             $resultsDB = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -900,7 +901,7 @@ class ContentService
                 ]
             );
 
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
         }
 
@@ -1042,7 +1043,7 @@ class ContentService
         //delete the content comments, replies and assignation
         $comments = $this->commentRepository->getByContentId($contentId);
 
-        $this->commentAssignationRepository->deleteCommentAssignations(array_pluck($comments, 'id'));
+        $this->commentAssignationRepository->deleteCommentAssignations(Arr::pluck($comments, 'id'));
 
         $this->commentRepository->deleteByContentId($contentId);
 
@@ -1124,7 +1125,7 @@ class ContentService
         //delete parent content cache
         CacheHelper::deleteCache('content_' . $id);
 
-        return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
+        return $this->contentRepository->softDelete(Arr::pluck($children, 'child_id'));
     }
 
     /**
@@ -1438,7 +1439,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildId($childId);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');

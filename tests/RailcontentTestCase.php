@@ -4,17 +4,18 @@ namespace Railroad\Railcontent\Tests;
 
 use Carbon\Carbon;
 use Dotenv\Dotenv;
-use Exception;
 use Faker\Generator;
 use Illuminate\Auth\AuthManager;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use PDO;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
@@ -94,6 +95,11 @@ class RailcontentTestCase extends BaseTestCase
                 }
             );
         }
+
+        Event::listen(StatementPrepared::class, function($event) {
+            /** @var StatementPrepared $event */
+            $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+        });
     }
 
     /**
@@ -105,7 +111,7 @@ class RailcontentTestCase extends BaseTestCase
     protected function getEnvironmentSetUp($app)
     {
         // setup package config for testing
-        $dotenv = new Dotenv(__DIR__ . '/../', '.env.testing');
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../', '.env.testing');
         $dotenv->load();
 
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
@@ -154,13 +160,13 @@ class RailcontentTestCase extends BaseTestCase
             'database.connections.mysql',
             [
                 'driver' => 'mysql',
-                'host' => 'mysql',
+                'host' => 'mysql8',
                 'port' => env('MYSQL_PORT', '3306'),
                 'database' => env('MYSQL_DB', 'railcontent'),
                 'username' => 'root',
                 'password' => 'root',
-                'charset' => 'utf8',
-                'collation' => 'utf8_general_ci',
+                'charset' => 'utf8mb4',
+                'collation' => 'utf8mb4_general_ci',
                 'prefix' => '',
                 'options' => [
                     \PDO::ATTR_PERSISTENT => true,
@@ -195,16 +201,30 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set(
             'database.redis',
             [
-                'client' => 'predis',
+                'client' => env('REDIS_CLIENT', 'predis'),
+
+                'options' => [
+                    'cluster' => env('REDIS_CLUSTER', 'redis'),
+                ],
+
                 'default' => [
+                    'url' => env('REDIS_URL', 'redis'),
                     'host' => env('REDIS_HOST', 'redis'),
                     'password' => env('REDIS_PASSWORD', null),
                     'port' => env('REDIS_PORT', 6379),
                     'database' => 0,
-                ]
-            ]
+                ],
+
+                'cache' => [
+                    'url' => env('REDIS_URL', 'redis'),
+                    'host' => env('REDIS_HOST', 'redis'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 0,
+                ],
+            ],
         );
-        $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
+        $app['config']->set('cache.default', env('CACHE_DRIVER', 'array'));
         $app['config']->set('railcontent.cache_prefix', $defaultConfig['cache_prefix']);
         $app['config']->set('railcontent.cache_driver', $defaultConfig['cache_driver']);
 
@@ -219,51 +239,6 @@ class RailcontentTestCase extends BaseTestCase
         // register provider
         $app->register(RailcontentServiceProvider::class);
         $app->register(ResponseServiceProvider::class);
-    }
-
-    /**
-     * We don't want to use mockery so this is a reimplementation of the mockery version.
-     *
-     * @param  array|string $events
-     * @return $this
-     *
-     * @throws Exception
-     */
-    public function expectsEvents($events)
-    {
-        $events = is_array($events) ? $events : func_get_args();
-
-        $mock = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['fire', 'dispatch'])
-            ->getMockForAbstractClass();
-
-        $mock->method('fire')->willReturnCallback(
-            function ($called) {
-                $this->firedEvents[] = $called;
-            }
-        );
-
-        $mock->method('dispatch')->willReturnCallback(
-            function ($called) {
-                $this->firedEvents[] = $called;
-            }
-        );
-
-        $this->app->instance('events', $mock);
-
-        $this->beforeApplicationDestroyed(
-            function () use ($events) {
-                $fired = $this->getFiredEvents($events);
-                if ($eventsNotFired = array_diff($events, $fired)) {
-                    throw new Exception(
-                        'These expected events were not fired: [' .
-                        implode(', ', $eventsNotFired) . ']'
-                    );
-                }
-            }
-        );
-
-        return $this;
     }
 
     /**
@@ -296,7 +271,6 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown(): void
     {
-        Redis::flushDB();
         parent::tearDown();
     }
 

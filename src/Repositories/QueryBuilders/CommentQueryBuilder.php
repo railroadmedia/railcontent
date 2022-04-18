@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -192,7 +193,7 @@ class CommentQueryBuilder extends QueryBuilder
             '=',
             ConfigService::$tableComments . '.content_id'
         )
-            ->whereIn('content.brand', array_values(array_wrap(ConfigService::$availableBrands)));
+            ->whereIn('content.brand', array_values(Arr::wrap(ConfigService::$availableBrands)));
 
         return $this;
     }

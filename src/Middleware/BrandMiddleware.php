@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Services\ConfigService;
 
 class BrandMiddleware
@@ -19,7 +20,7 @@ class BrandMiddleware
     {
         if ($request->has('brand') && ConfigService::$dataMode == 'host') {
             ConfigService::$brand = $request->get('brand');
-            ConfigService::$availableBrands = array_wrap($request->get('brand'));
+            ConfigService::$availableBrands = Arr::wrap($request->get('brand'));
         }
 
         return $next($request);
