@@ -121,6 +121,11 @@ class CacheHelper
     {
         self::setPrefix();
 
+        if (!Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            return true;
+        }
+
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
         do {
@@ -149,6 +154,11 @@ class CacheHelper
      */
     public static function deleteAllCachedSearchResults($key)
     {
+        if (!Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            return true;
+        }
+
         $cursor = 0;
         do {
             [$cursor, $keys] = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);

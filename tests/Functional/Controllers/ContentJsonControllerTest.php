@@ -128,7 +128,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The type field is required.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_store_with_negative_position()
@@ -155,7 +155,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
 
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function _test_store_with_custom_validation_and_slug_huge()
@@ -318,7 +318,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The position must be at least 0.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_update_not_pass_the_validation()
@@ -339,7 +339,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected status is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_after_update_content_is_returned_in_json_format()
@@ -438,10 +438,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('DELETE', 'railcontent/content/' . $randomId);
 
         $this->assertEquals(404, $response->status());
-        $this->assertEquals('Entity not found.', $response->decodeResponseJson('meta')['errors']['title']);
+        $this->assertEquals('Entity not found.', $response->decodeResponseJson()->json('meta')['errors']['title']);
         $this->assertEquals(
             'Delete failed, content not found with id: ' . $randomId,
-            $response->decodeResponseJson('meta')['errors']['detail']
+            $response->decodeResponseJson()->json('meta')['errors']['detail']
         );
     }
 
@@ -1240,7 +1240,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected content id is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_unfollow_content()
@@ -1280,7 +1280,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected content id is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_get_followed_content()
@@ -1324,7 +1324,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'api/railcontent/followed-content/');
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(3, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertEquals(3, $response->decodeResponseJson()->json('meta')['totalResults']);
         $this->assertEquals(
             [$content1->getArrayCopy(), $content2->getArrayCopy(), $content3->getArrayCopy()],
             $response->decodeResponseJson()->json('data')
@@ -1369,7 +1369,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'api/railcontent/followed-lessons');
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(1, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertEquals(1, $response->decodeResponseJson()->json('meta')['totalResults']);
         $this->assertArraySubset([$content1->getArrayCopy()], $response->decodeResponseJson()->json('data'));
     }
 

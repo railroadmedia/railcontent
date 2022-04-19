@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Providers;
 
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
@@ -52,18 +53,6 @@ class RailcontentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->listen = [
-            StatementPrepared::class => [
-                function (StatementPrepared $event) {
-
-                    // we only want to use assoc fetching for this packages database calls
-                    // so we need to use a separate 'mask' connection
-
-                    if ($event->connection->getName() ==
-                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
-                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
-                    }
-                }
-            ],
             ContentCreated::class => [],
             ContentUpdated::class => [],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
@@ -237,6 +226,12 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        Event::listen(StatementPrepared::class, function($event) {
+            /** @var StatementPrepared $event */
+            if ($event->connection->getName() ==
+                ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
+                $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+            }
+        });
     }
 }
