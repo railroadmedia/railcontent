@@ -80,7 +80,7 @@ class ContentJsonController extends Controller
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
-            true,
+            $request->get('include_filters', true),
             false,
             true,
             $request->get('only_subscribed', false)
