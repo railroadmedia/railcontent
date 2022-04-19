@@ -22054,7 +22054,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["modalId", "title", "bgColor"],
+  props: ["modalId", "title", "bgColor", "selfContained"],
   emits: ["onClose"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose,
@@ -22077,14 +22077,18 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      var modalContainer = document.getElementById("modal-container");
-      modalContainer.classList.remove("tw-hidden");
-      modalContainer.classList.add("tw-fixed");
+      if (props.selfContained) {
+        var modalContainer = document.getElementById("modal-container");
+        modalContainer.classList.remove("tw-hidden");
+        modalContainer.classList.add("tw-fixed");
+      }
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(function () {
-      var modalContainer = document.getElementById("modal-container");
-      modalContainer.classList.add("tw-hidden");
-      modalContainer.classList.remove("tw-fixed");
+      if (props.selfContained) {
+        var modalContainer = document.getElementById("modal-container");
+        modalContainer.classList.add("tw-hidden");
+        modalContainer.classList.remove("tw-fixed");
+      }
     });
     var __returned__ = {
       isContainerCreated: isContainerCreated,
@@ -36653,7 +36657,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_InfoModal, {
     modalId: $props.modalId,
-    onOnClose: $options.toggleModal
+    onOnClose: $options.toggleModal,
+    selfContained: true
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_3, " Here you can subscribe to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toCapitalCase($props.brand)) + "'s Lesson Calendar - Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all supported. ", 1
