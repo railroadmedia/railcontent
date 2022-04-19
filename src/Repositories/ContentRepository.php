@@ -88,22 +88,32 @@ class ContentRepository extends RepositoryBase
      * @var ContentInstructorRepository
      */
     private $contentInstructorRepository;
+    /**
+     * @var ContentStyleRepository
+     */
+    private $contentStyleRepository;
+    /**
+     * @var ContentBpmRepository
+     */
+    private $contentBpmRepository;
 
     /**
-     * ContentRepository constructor.
-     *
      * @param ContentPermissionRepository $contentPermissionRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
-     * @param DatabaseManager $databaseManager
+     * @param ContentInstructorRepository $contentInstructorRepository
+     * @param ContentStyleRepository $contentStyleRepository
+     * @param ContentBpmRepository $contentBpmRepository
      */
     public function __construct(
         ContentPermissionRepository $contentPermissionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
-        ContentInstructorRepository $contentInstructorRepository
+        ContentInstructorRepository $contentInstructorRepository,
+        ContentStyleRepository $contentStyleRepository,
+        ContentBpmRepository $contentBpmRepository
     ) {
         parent::__construct();
 
@@ -112,6 +122,8 @@ class ContentRepository extends RepositoryBase
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
         $this->contentInstructorRepository = $contentInstructorRepository;
+        $this->contentStyleRepository = $contentStyleRepository;
+        $this->contentBpmRepository = $contentBpmRepository;
     }
 
     /**
@@ -132,17 +144,16 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-        $instructors = $this->contentInstructorRepository->getByContentId($id);
-        $video = $this->getVideoByContentIds([$id]);
+        $instructors = $this->contentInstructorRepository->getByContentId(array_column($contentRows, 'id'));
+        $video = $this->getVideoByContentIds(array_column($contentRows, 'id'));
+
         $data = $contentRows[0] ?? null;
         $parser = $this->setPresenter(ContentTransformer::class);
-        $parser->presenter->addParam(
-            [
-                'instructor' => $instructors,
-                'video' => $video,
-                'data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id'),
-            ]
-        );
+        $parser->presenter->addParam([
+                                         'instructor' => $instructors,
+                                         'video' => $video,
+                                        'data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id'),
+                                     ]);
 
         return $this->parserResult($data);
     }
@@ -171,33 +182,19 @@ class ContentRepository extends RepositoryBase
             }
         }
 
-        // dd(array_column($contentRows, 'type'));
-        // $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-
-        //   $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-
-        //        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-        //            array_column($contentRows, 'id'),
-        //            array_column($contentRows, 'type')
-        //        );
-
-        //        $data = $this->processRows(
-        //            $contentRows,
-        //            $contentFieldRows,
-        //            $contentDatumRows,
-        //            $contentPermissionRows
-        //        );
-
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
         $instructors = $this->contentInstructorRepository->getByContentId(array_column($contentRows, 'id'));
         $video = $this->getVideoByContentIds(array_column($contentRows, 'id'));
-
+        $styles = $this->contentStyleRepository->getByContentId(array_column($contentRows, 'id'));
+        $bpm = $this->contentBpmRepository->getByContentId(array_column($contentRows, 'id'));
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam([
                                          'data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id'),
                                          'instructor' => $instructors,
                                          'video' => $video,
+                                         'style' => $styles,
+                                         'bpm' => $bpm,
                                      ]);
 
         return $this->parserResult($contentRows);
@@ -945,7 +942,8 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->selectInheritenceColumns()
                 ->restrictByUserAccess()
-                ->leftJoin(ConfigService::$tableContentHierarchy,
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
                     function (JoinClause $joinClause) use ($childContentIds) {
                         $joinClause->on(
                             ConfigService::$tableContentHierarchy.'.parent_id',
@@ -953,7 +951,8 @@ class ContentRepository extends RepositoryBase
                             ConfigService::$tableContent.'.id'
                         )
                             ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childContentIds);
-                    })
+                    }
+                )
                 ->where(ConfigService::$tableContent.'.user_id', $userId);
 
         if (!empty($slug)) {
@@ -1362,18 +1361,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserStates($this->requiredUserStates)
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
-                ->restrictByParentIds($this->requiredParentIds)
-            //                ->leftJoin(
-            //                    ConfigService::$tableContentFields,
-            //                    ConfigService::$tableContentFields.'.content_id',
-            //                    '=',
-            //                    ConfigService::$tableContent.'.id'
-            //                )
-            //                ->whereIn(
-            //                    ConfigService::$tableContentFields.'.key',
-            //                    ConfigService::$fieldOptionList
-            //                )
-        ;
+                ->restrictByParentIds($this->requiredParentIds);
 
         if (self::$getFollowedContentOnly) {
             $query->restrictFollowedContent();
@@ -2069,11 +2057,9 @@ class ContentRepository extends RepositoryBase
 
         $parser = $this->setPresenter(VideoTransformer::class);
 
-
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($data, 'id'));
 
         $parser->presenter->addParam(['data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id')]);
-
 
         return $this->parserResult($data);
     }

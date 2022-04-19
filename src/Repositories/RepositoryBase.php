@@ -410,11 +410,9 @@ abstract class RepositoryBase
     }
 
     /**
-     * Set Presenter
-     *
      * @param $presenter
-     *
      * @return $this
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function setPresenter($presenter)
     {
@@ -423,12 +421,10 @@ abstract class RepositoryBase
         return $this;
     }
 
-
     /**
      * @param null $presenter
-     *
-     * @return PresenterInterface
-     * @throws RepositoryException
+     * @return mixed|PresenterInterface|string|null
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function makePresenter($presenter = null)
     {
@@ -436,31 +432,11 @@ abstract class RepositoryBase
 
         if (!is_null($presenter)) {
             $this->presenter = is_string($presenter) ? app()->make($presenter) : $presenter;
-//            dd($this->presenter);
-//            if (!$this->presenter instanceof PresenterInterface) {
-//                throw new RepositoryException("Class {$presenter} must be an instance of Reflex\\Repository\\Contracts\\PresenterInterface");
-//            }
 
             return $this->presenter;
         }
 
         return null;
-    }
-
-
-
-    /**
-     * Skip Presenter Wrapper
-     *
-     * @param bool $status
-     *
-     * @return $this
-     */
-    public function skipPresenter($status = true)
-    {
-        $this->skipPresenter = $status;
-
-        return $this;
     }
 
     /**

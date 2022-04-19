@@ -18,7 +18,7 @@ class ContentStyleRepository extends RepositoryBase
         }
 
         $data = $this->query()
-            ->where('content_id', $contentId)
+            ->whereIn('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
             ->toArray();

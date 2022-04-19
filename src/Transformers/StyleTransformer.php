@@ -13,7 +13,7 @@ class StyleTransformer
         $results = [];
         foreach ($data as $style) {
             $results[$style['content_id']] = [
-                'id' => $video['id'] ?? null,
+                'id' => $style['id'] ?? null,
                 'content_id' => $style['content_id'],
                 'key' => 'style',
                 'value' => $style['style'],
