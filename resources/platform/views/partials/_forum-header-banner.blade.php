@@ -1,5 +1,5 @@
 <!-- Forum Header Banner -->
-<div class="container fluid collapsed-h pv-5 relative bg-black">
+<div class="tw-container tw-mx-auto fluid collapsed-h pv-5 tw-relative tw-bg-black">
     <div class="header-background-container absolute-fill bg-top"
          style="background-image: url({{ _imgix(
                 $backgroundImage,
@@ -8,8 +8,8 @@
     ></div>
     <div class="header-background-container absolute-fill bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
-    <div class="container relative">
-        <div class="flex flex-row align-center">
+    <div class="tw-container tw-mx-auto tw-relative">
+        <div class="tw-flex tw-flex-row tw-items-center">
             {{ $content }}
 
             @if(empty($hideUser))
@@ -19,9 +19,9 @@
                                 {{ $brand }}
                                 {{ $currentUser['access_level'] }}"
                     >
-                        <a href="{{ $profileUrl }}" class="no-decoration">
+                        <a href="{{ $profileUrl }}" class="tw-no-underline">
                             <img
-                                class="rounded inset-border"
+                                class="tw-rounded inset-border"
                                 src="{{ _imgix(
                                     $currentUser['avatar'],
                                     ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]

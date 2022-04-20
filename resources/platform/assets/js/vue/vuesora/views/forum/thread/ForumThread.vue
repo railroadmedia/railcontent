@@ -1,8 +1,8 @@
 <template>
-    <div class="container forum-post tw-px-4 tw-py-12">
-        <div class="flex flex-column">
+    <div class="tw-container tw-mx-auto forum-post tw-px-4 tw-py-12">
+        <div class="tw-flex tw-flex-col">
 
-            <div class="tw-flex flex-wrap align-v-center tw-mb-6 md:tw-mb-8 tw-flex-col md:tw-flex-row">
+            <div class="tw-flex tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-8 tw-flex-col md:tw-flex-row">
                 
                 <div class="tw-flex tw-w-full tw-mb-5 tw-justify-center md:tw-justify-start tw-items-center md:tw-mb-0 md:tw-w-1/2">
                     <h1 class="heading thread-title">
@@ -25,7 +25,7 @@
                             <!-- Edit or delete the thread -->
                             <button
                                 v-if="currentUser.isAdmin || currentUser.isOwner"
-                                class="btn collapse-square short mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
                                 @click="update"
                             >
                                 <span
@@ -44,10 +44,10 @@
                             <!-- Pins the post to the top of the thread index list -->
                             <button
                                 v-if="currentUser.isAdmin"
-                                class="btn collapse-square short mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
                                 @click="pinPost"
                             >
-                                <span :class="[themeBgClass, isPinned ? 'text-white' : 'inverted ' + themeTextClass]">
+                                <span :class="[themeBgClass, isPinned ? 'tw-text-white' : 'inverted ' + themeTextClass]">
                                     <i class="fas fa-thumbtack"></i>
                                 </span>
 
@@ -60,10 +60,10 @@
                             <!-- Disables the option to reply to the post -->
                             <button
                                 v-if="currentUser.isAdmin"
-                                class="btn collapse-square short mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
                                 @click="lockPost"
                             >
-                                <span :class="[themeBgClass, isLocked ? 'text-white' : 'inverted ' + themeTextClass]">
+                                <span :class="[themeBgClass, isLocked ? 'tw-text-white' : 'inverted ' + themeTextClass]">
                                     <i class="fas fa-lock"></i>
                                 </span>
 
@@ -75,10 +75,10 @@
 
                             <!-- Hides Signatures -->
                             <button
-                                class="btn collapse-square short mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
                                 @click="hideSignatures"
                             >
-                                <span :class="[themeBgClass, signaturesHidden ? 'text-white' : 'inverted ' + themeTextClass]">
+                                <span :class="[themeBgClass, signaturesHidden ? 'tw-text-white' : 'inverted ' + themeTextClass]">
                                     <i class="fas fa-eye"></i>
                                 </span>
 
@@ -93,7 +93,7 @@
                     <div class="tw-flex tw-justify-center tw-items-center md:tw-w-1/2">
                         <!-- Follow -->
                         <button
-                            class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 bg-drumeo tw-px-4 tw-h-10"
+                            class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-bg-{{$brand}} tw-px-4 tw-h-10"
                             :class="[brandBgColor]"
                             @click="followPost"
                         >
@@ -104,7 +104,7 @@
 
                         <!-- Reply -->
                         <button
-                            class="tw-btn-primary tw-btn-small tw-w-full bg-drumeo tw-px-4 tw-h-10"
+                            class="tw-btn-primary tw-btn-small tw-w-full tw-bg-{{$brand}} tw-px-4 tw-h-10"
                             :class="[brandBgColor]"
                             @click="scrollToReply"
                         >
@@ -181,7 +181,7 @@
                 @deletePost="handlePostDelete"
                 @replyToPost="handleReplyToPost"
                 @updateCurrentPostID="changeCurrentPostID"
-            ></forum-thread-post>
+            />
 
             <div class="tw-flex tw-flex-row tw-mb-8 tw-flex-wrap">
                 <div class="tw-w-full tw-inline-flex tw-justify-center tw-mb-4 sm:tw-mb-0 sm:tw-justify-start sm:tw-w-auto">
@@ -197,13 +197,13 @@
                         :current-page="currentPage"
                         :total-pages="totalPages"
                         @pageChange="handlePageChange"
-                    ></pagination>
+                    />
                 </div>
             </div>
 
             <!-- Thread Reply Section -->
             <section v-if="!thread.isLocked"
-                class="flex flex-row pv-3"
+                class="tw-flex tw-flex-row pv-3"
             >   
                 <div class="tw-items-center tw-flex-col tw-hidden sm:tw-inline-flex tw-flex-shrink-0">
                     <!-- Avatar -->
@@ -212,7 +212,7 @@
                             :class="[userAvatarClassObject, brand]"
                         >
                             <img
-                                class="rounded"
+                                class="tw-rounded"
                                 :src="currentUser.avatar"
                             >               
                         </div>
@@ -289,8 +289,8 @@
             <div id="sharePostModal"
                  class="modal"
             >
-                <div class="flex flex-column bg-white corners-3 shadow ph-2 tw-max-w-md tw-rounded-lg">
-                    <div class="tw-flex tw-flex-col mb-2 pv-3">
+                <div class="tw-flex tw-flex-col bg-white corners-3 shadow ph-2 tw-max-w-md tw-rounded-lg">
+                    <div class="tw-flex tw-flex-col tw-mb-2 pv-3">
                         <h2 class="tw-text-lg tw-font-bold tw-mb-2">Share Link</h2>
                             <p v-if="shareLinkCopied" class="tw-text-sm tw-text-green-400 tw-mb-3">Link copied successfully. You are good to go!</p>
                             <p v-else class="tw-text-sm tw-text-gray-400 tw-mb-3">Click on the button to copy the link to your clipboard.</p>

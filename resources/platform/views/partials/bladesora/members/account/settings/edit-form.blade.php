@@ -1,21 +1,21 @@
-<div class="flex flex-column grow">
-    <div class="flex flex-row flex-auto align-v-center mb-2">
-        <div class="flex flex-column">
+<div class="tw-flex tw-flex-col tw-grow">
+    <div class="tw-flex tw-flex-row tw-flex-auto tw-items-center tw-mb-2">
+        <div class="tw-flex tw-flex-col">
             <h2 class="subheading">
                 {{ $formTitle }}
             </h2>
         </div>
-        <div class="flex flex-column edit-button">
+        <div class="tw-flex tw-flex-col edit-button">
             <button class="btn" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">
-                <span class="text-black bg-black inverted corners-10 short">
+                <span class="tw-text-black tw-bg-black inverted corners-10 short">
                     Edit
                 </span>
             </button>
         </div>
     </div>
-    <div class="flex flex-row">
-        <div class="flex flex-column grow">
-            <div class="flex flex-row">
+    <div class="tw-flex tw-flex-row">
+        <div class="tw-flex tw-flex-col tw-grow">
+            <div class="tw-flex tw-flex-row">
                 {{ $formData }}
             </div>
         </div>

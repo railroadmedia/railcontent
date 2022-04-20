@@ -1,22 +1,22 @@
-<div id="subNav" class="container fluid collapsed bg-black bb-grey-5-1">
-    <div class="container relative {{ count($subSections) > 4 ? 'pad-sides' : 'collapsed' }}">
-        <div id="subNavWrap" class="flex flex-row align-h-center overflow">
+<div id="subNav" class="tw-container tw-mx-auto fluid collapsed tw-bg-black bb-grey-5-1">
+    <div class="tw-container tw-relative {{ count($subSections) > 4 ? 'pad-sides' : 'collapsed' }}">
+        <div id="subNavWrap" class="tw-flex tw-flex-row tw-items-center overflow">
             @foreach($subSections as $section)
                 <a href="{{ $section['url'] }}"
-                   class="flex flex-column subnav-link pa-1 uppercase align-center text-grey-4 no-decoration
+                   class="tw-flex tw-flex-col subnav-link pa-1 tw-uppercase align-center text-grey-4 tw-no-underline
                     {{ $section['active'] ? 'active' : '' }}"
                     dusk="subnav-link-{{ strtolower(str_replace(" ", "-", $section['title'])) }}">
-                    <i class="{{ $section['icon'] }} relative
-                            {{ $section['active'] ? ('text-' . $themeColor) : 'text-grey-4' }}" style="font-size:20px;">
+                    <i class="{{ $section['icon'] }} tw-relative
+                            {{ $section['active'] ? ('tw-text-' . $themeColor) : 'text-grey-4' }}" style="font-size:20px;">
 
 
                         @if(!empty($section['badge']))
-                            <span class="notification-badge rounded smaller" dusk="notification-dot-small"></span>
+                            <span class="notification-badge tw-rounded smaller" dusk="notification-dot-small"></span>
                         @endif
 
                     </i>
-                    <p class="x-tiny font-bold wrap text-center
-                            {{ $section['active'] ? 'text-white' : 'text-grey-4' }}" style="max-width:100%;white-space:normal;">
+                    <p class="x-tiny tw-font-bold wrap tw-text-center
+                            {{ $section['active'] ? 'tw-text-white' : 'text-grey-4' }}" style="max-width:100%;white-space:normal;">
                         {{ $section['title'] }}
                     </p>
                 </a>

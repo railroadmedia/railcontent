@@ -1,30 +1,25 @@
-@php
-    $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
-@endphp
-@extends('members.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Notifications | Singeo</title>
-@endsection
-
-@section('styles')
-@endsection
-
-@section('scripts')
+    <title>Notifications | Musora</title>
 @endsection
 
 @section('content')
-    @include('members.partials._content-sidebar')
+    <page-container>
+        <div v-cloak>
 
-    <div class="container mv-2">
-        <notifications-table
-             brand="singeo"
-             theme-color="singeo"
-             :notifications="{{ $notifications }}"
-             notifications-endpoint=""
-             settings-url="{{ url()->route('members.profile.settings', ['section' => 'settings']) }}"
-             notification-count="{{ $notificationCount }}"
-             :has-unread-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"></notifications-table>
-    </div>
+            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+                <notifications-table
+                    brand="{{ $brand }}"
+                    theme-color="{{ $brand }}"
+                    :notifications="{{ $notifications }}"
+                    notifications-endpoint=""
+                    settings-url="{{ url()->route('members.profile.settings', ['section' => 'settings']) }}"
+                    notification-count="{{ $notificationCount }}"
+                    :has-unread-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                />
+            </div>
+
+        </div>
+    </page-container>
 @endsection

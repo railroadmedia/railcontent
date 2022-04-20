@@ -12,9 +12,9 @@
                 <div class="user-avatar tw-w-20 tw-h-20"
                     :class="[avatarClassObject, brand]">
                     <a :href="post.authorProfileUrl"
-                        class="no-decoration"
+                        class="tw-no-underline"
                     >
-                        <img class="rounded" :src="post.authorAvatar">
+                        <img class="tw-rounded" :src="post.authorAvatar">
                     </a>
                 </div>
             </div>
@@ -36,19 +36,19 @@
         </div>
 
         <!-- Post Content -->
-        <div class="flex flex-column">
+        <div class="tw-flex tw-flex-col">
             <!-- Body -->
-            <div class="flex flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
+            <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
-                    :class="['flex', 'flex-column', 'post-body', 'grow', brand]"
+                    :class="['tw-flex', 'tw-flex-col', 'post-body', 'grow', brand]"
                     v-html="post.postBody"
                 >
                 </div>
 
                 <div
                     v-if="editing"
-                    class="flex flex-column mb-1"
+                    class="tw-flex tw-flex-col tw-mb-1"
                 >
                     <form
                         :action="updatePostRoute"
@@ -61,9 +61,9 @@
                         >
                         <text-editor :initial-value="post.postBody"></text-editor>
 
-                        <div class="flex flex-row align-h-right mt-2">
+                        <div class="tw-flex tw-flex-row align-h-right tw-mt-2">
                             <a
-                                class="btn bg-black text-black no-decoration flat collapse-150 no-border mr-1"
+                                class="btn tw-bg-black tw-text-black tw-no-underline flat collapse-150 tw-border-none tw-mr-1"
                                 @click="editing = false"
                             >
                                 Cancel
@@ -74,7 +74,7 @@
                                 type="submit"
                             >
                                 <span
-                                    class="text-white corners-10"
+                                    class="tw-text-white corners-10"
                                     :class="themeBgClass"
                                 >
                                     Save Post
@@ -86,21 +86,21 @@
             </div>
 
             <!-- Actions -->
-            <div class="flex flex-row flex-wrap">
-                <div class="flex flex-column mb-1">
-                <div class="flex flex-row align-v-center">
+            <div class="tw-flex tw-flex-row tw-flex-wrap">
+                <div class="tw-flex tw-flex-col mb-1">
+                <div class="tw-flex tw-flex-row tw-items-center">
                     <p
-                        class="tw-text-sm tw-mr-1 font-bold uppercase dense pointer reply-like noselect"
+                        class="tw-text-sm tw-mr-1 tw-font-bold tw-uppercase dense tw-pointer reply-like noselect"
                         :class="post.isLiked ? themeTextClass : 'text-grey-3'"
                         @click="likePost"
                     >
                     <i
-                        class=" fas fa-thumbs-up"
+                        class="fas fa-thumbs-up"
                         :class="post.isLiked ? 'fas' : 'fal'"
                     ></i>
                     </p>
                     <p
-                        class="tw-text-sm tw-mr-2 font-bold uppercase dense pointer reply-like noselect"
+                        class="tw-text-sm tw-mr-2 font-bold tw-uppercase dense tw-pointer reply-like noselect"
                         :class="post.isLiked ? themeTextClass : 'tw-text-gray-500'"
                         :data-open-modal="openModalString"
                         @click="openLikes"
@@ -110,13 +110,13 @@
 
                     <p
                         v-if="!post.isLocked"
-                        class="tw-text-sm tw-text-gray-500 tw-mr-3 font-bold uppercase dense pointer reply-like noselect"
+                        class="tw-text-sm tw-text-gray-500 tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like noselect"
                         @click="replyToPost"
                     >
                     Reply
                     </p>
                     <button
-                        class="tw-text-sm tw-text-gray-500 mr-3 font-bold uppercase dense pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
+                        class="tw-text-sm tw-text-gray-500 mr-3 font-bold tw-uppercase dense tw-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
                         data-open-modal="sharePostModal"
                         title="Share this post"
                         @click="$emit('updateCurrentPostID', post.id)"
@@ -126,28 +126,28 @@
                     </button>
                 </div>
                 </div>
-                <div class="flex flex-column mb-1">
-                <div class="flex flex-row align-v-center align-h-right">
+                <div class="tw-flex tw-flex-col mb-1">
+                <div class="tw-flex tw-flex-row tw-items-center align-h-right">
                     <p
-                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic uppercase dense pointer"
+                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
                         @click="reportPost"
                     >
                     Report
                     </p>
-                    <!--<p v-if="currentUser.isAdmin" class="x-tiny text-grey-2 ml-3 font-bold font-italic uppercase dense pointer"-->
+                    <!--<p v-if="currentUser.isAdmin" class="x-tiny text-grey-2 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"-->
                     <!--@click="hidePost">-->
                     <!--Hide-->
                     <!--</p>-->
                     <p
                         v-if="index !== 0 && canEdit"
-                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic uppercase dense pointer"
+                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
                         @click="deletePost"
                     >
                     Delete
                     </p>
                     <p
                         v-if="canEdit"
-                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic uppercase dense pointer"
+                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
                         @click="editing = !editing"
                     >
                     Edit
@@ -157,10 +157,10 @@
             </div>
             
             <!-- Signature -->
-            <div class="flex flex-row body">
+            <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-flex tw-flex-col post-body grow bt-grey-1-1 tiny text-grey-3 tw-pt-4 tw-mt-0"
+                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 tiny text-grey-3 tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>

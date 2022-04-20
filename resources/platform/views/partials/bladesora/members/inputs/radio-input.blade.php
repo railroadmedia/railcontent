@@ -1,5 +1,5 @@
-<div class="flex flex-row form-group align-v-center">
-    <span class="radio-input mr-1">
+<div class="tw-flex tw-flex-row form-group tw-items-center">
+    <span class="radio-input tw-mr-1">
         <input id="{{ $inputID }}"
                name="{{ $inputName }}"
                {{ !empty($checked) && $checked === true ? 'checked' : '' }}

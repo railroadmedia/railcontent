@@ -339,7 +339,7 @@
     </div>
 </template>
 <script>
-import Utils from '../assets/js/helper-functions/utils.js';
+import Utils from '../../assets/js/helper-functions/utils.js';
 import Validation from './_validation';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import PaymentSVG from '../../components/SVGSprites/_PaymentSVG.vue';

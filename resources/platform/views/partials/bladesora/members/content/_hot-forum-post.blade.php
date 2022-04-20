@@ -1,42 +1,36 @@
-<div class="flex flex-column xs-12 sm-6 md-4 pa-2 raised-hover corners-10">
-    <a href="{{ $url }}" class="flex flex-row no-decoration">
-        <div class="flex flex-column hot-forum-avatar-col text-black">
+<div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 md:tw-w-1/4 tw-rounded pa-2 hover:tw-shadow-lg">
+    <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
+        <div class="tw-flex tw-flex-col tw-text-black dark:tw-text-white hot-forum-avatar-col">
             <img
                 src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                 data-ix-src="{{ $avatar }}"
                 data-ix-fade
-                class="bg-grey-2 rounded mb-1"
+                class="tw-bg-gray-300 tw-rounded-full tw-mb-1"
                 alt="{{ $author }} Avatar"
             >
-
-            <p class="tiny dense font-bold uppercase text-center font-compressed">
+            <p class="tw-text-sm tw-font-bold tw-uppercase tw-text-center dense font-compressed">
                 {{ $rank }}
             </p>
-
             <p
-               class="tiny text-center font-compressed"
+               class="tw-text-sm tw-text-center font-compressed"
                style="margin-top:-3px;"
             >
                 {{ parse_xp_value($xp) }} XP
             </p>
         </div>
-        <div class="flex flex-column grow pl">
-            <h5 class="text-black tiny font-bold text-truncate">
+        <div class="tw-flex tw-flex-col tw-flex-grow tw-pl-1">
+            <h5 class="dark:tw-text-white tw-text-black tw-text-sm tw-font-bold tw-truncate">
                 {!! $title !!}
             </h5>
-            <h6 class="x-tiny text-grey-3 uppercase text-black mb-1">
+            <h6 class="tw-text-xs tw-text-gray-300 dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] tw-uppercase dark:tw-text-white tw-text-black tw-mb-1">
                 Posted
-                <strong class="text-{{ $themeColor ?? 'drumeo' }}">
-                    {{ $date }}
-                </strong>
+                <strong>{{ $date }}</strong>
                 by
-                <strong class="text-{{ $themeColor ?? 'drumeo' }}">
-                    {{ $author }}
-                </strong>
+                <strong>{{ $author }}</strong>
             </h6>
-            <p class="x-tiny text-black break-words">
+            <p class="tw-text-xs dark:tw-text-white tw-text-black tw-break-words">
                 {!! str_replace('&nbsp;', '', $post) !!}...
-                <span class="font-bold text-black ml-1 text-underline">See Post &raquo;</span>
+                <span class="tw-font-bold dark:tw-text-white tw-text-black tw-ml-1 tw-underline">See Post &raquo;</span>
             </p>
         </div>
     </a>

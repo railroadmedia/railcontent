@@ -2,11 +2,13 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "bgColor"]);
+const props = defineProps(["modalId", "title", "bgColor", "selfContained"]);
 const emit = defineEmits(["onClose"]);
+
 const onClose = () => {
   emit("onClose", true);
 };
+
 const onOverlayClick = (event) => {
   console.log(event.target.id);
   if (event.target.id === `${props.modalId}-overlay`) {
@@ -16,15 +18,19 @@ const onOverlayClick = (event) => {
 };
 
 onMounted(() => {
-  const modalContainer = document.getElementById("modal-container");
-  modalContainer.classList.remove("tw-hidden");
-  modalContainer.classList.add("tw-fixed");
+  if (props.selfContained) {
+    const modalContainer = document.getElementById("modal-container");
+    modalContainer.classList.remove("tw-hidden");
+    modalContainer.classList.add("tw-fixed");
+  }
 });
 
 onUnmounted(() => {
-  const modalContainer = document.getElementById("modal-container");
-  modalContainer.classList.add("tw-hidden");
-  modalContainer.classList.remove("tw-fixed");
+  if (props.selfContained) {
+    const modalContainer = document.getElementById("modal-container"); 
+    modalContainer.classList.add("tw-hidden");
+    modalContainer.classList.remove("tw-fixed");
+  }
 });
 </script>
 

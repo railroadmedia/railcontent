@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row pagination align-center">
+    <div class="tw-flex tw-flex-row pagination align-center">
         <button
             v-show="currentPage > 1"
             class="btn short collapse-square page-button"
@@ -114,7 +114,7 @@ export default {
     },
     computed: {
         activeClasses() {
-            return ['text-white', this.themeBgClass];
+            return ['tw-text-white', this.themeBgClass];
         },
 
         inactiveClasses() {

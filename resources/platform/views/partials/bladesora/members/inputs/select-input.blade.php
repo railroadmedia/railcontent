@@ -18,7 +18,7 @@
         {{ $inputLabel }}
     </label>
 
-    @include('bladesora::members.inputs.partials._errors', [
+    @include('partials.bladesora.members.inputs.partials._errors', [
         "inputErrors" => $inputErrors
     ])
 </div>
