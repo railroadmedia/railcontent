@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
+        Railroad\Response\Providers\ResponseServiceProvider::class,
 
         /*
          * Module Service Providers
