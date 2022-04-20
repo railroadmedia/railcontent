@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -16,6 +17,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class UserPermissionsJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var PermissionRepository
      */
@@ -41,7 +44,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
      */
     private $contentRepository;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->permissionRepository = $this->app->make(PermissionRepository::class);
@@ -51,10 +54,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->contentRepository = $this->app->make(ContentRepository::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        Cache::store('redis')
-            ->flush();
     }
 
     public function test_store_validation()
@@ -78,7 +79,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     'detail' => 'The selected permission id is invalid.',
                 ],
             ],
-            $results->decodeResponseJson('meta')['errors']
+            $results->decodeResponseJson()->json('meta')['errors']
         );
     }
 
@@ -121,7 +122,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'updated_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
-            $results->decodeResponseJson('data')[0]
+            $results->decodeResponseJson()->json('data')[0]
         );
         $this->assertDatabaseHas(
             ConfigService::$tableUserPermissions,
@@ -187,7 +188,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
-            $results->decodeResponseJson('data')[0]
+            $results->decodeResponseJson()->json('data')[0]
         );
         $this->assertDatabaseHas(
             ConfigService::$tableUserPermissions,
@@ -246,7 +247,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     "detail" => "The start date is not a valid date.",
                 ],
             ],
-            $results->decodeResponseJson('meta')['errors']
+            $results->decodeResponseJson()->json('meta')['errors']
         );
     }
 
@@ -260,7 +261,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'title' => 'Entity not found.',
                 'detail' => 'Delete failed, user permission not found with id: ' . $randomId,
             ],
-            $results->decodeResponseJson('meta')['errors']
+            $results->decodeResponseJson()->json('meta')['errors']
         );
     }
 
@@ -360,7 +361,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         ]));
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(2, count($results->decodeResponseJson('data')));
+        $this->assertEquals(2, count($results->decodeResponseJson()->json('data')));
     }
 
     public function test_index_specific_user_active_permissions()
@@ -425,7 +426,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(1, count($results->decodeResponseJson('data')));
+        $this->assertEquals(1, count($results->decodeResponseJson()->json('data')));
     }
 
     public function test_index_pull_active_and_expired_user_permissions()
@@ -489,7 +490,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(3, count($results->decodeResponseJson('data')));
+        $this->assertEquals(3, count($results->decodeResponseJson()->json('data')));
     }
 
     public function test_old_user_cache_deleted_when_new_user_permission_activate()
@@ -519,7 +520,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             ]
 
         );
-        $this->assertArraySubset([(array)$content2], $response->decodeResponseJson('data'));
+        $this->assertArraySubset([(array)$content2], $response->decodeResponseJson()->json('data'));
 
         //assign permission to user
         $this->call(
@@ -541,7 +542,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'sort' => 'id',
             ]
         );
-        $this->assertArraySubset([(array)$content1, (array)$content2], $response->decodeResponseJson('data'));
+        $this->assertArraySubset([(array)$content1, (array)$content2], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_ttl_to_user_permission_start_date()
@@ -575,7 +576,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'sort' => 'id',
             ]
         );
-        $this->assertArraySubset([(array)$content2], $response->decodeResponseJson('data'));
+        $this->assertArraySubset([(array)$content2], $response->decodeResponseJson()->json('data'));
 
         //assign permission to user
         $this->call(
@@ -599,25 +600,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             ]
         );
         // assert that the user receive only content 2
-        $this->assertArraySubset([(array)$content2], $response2->decodeResponseJson('data'));
-
-        //assert that the time to live was set for user cached keys
-        $this->assertNotEquals(
-            -1,
-            Redis::ttl(
-                $userCacheKeys
-            )
-        );
-
-        //assert ttl it's the seconds until permission activation date
-        $this->assertTrue(
-            Redis::ttl(
-                $userCacheKeys
-            ) <=60 * 60 &&
-            Redis::ttl(
-                $userCacheKeys
-            ) > 60
-        );
+        $this->assertArraySubset([(array)$content2], $response2->decodeResponseJson()->json('data'));
     }
 
     public function test_user_cache_deleted_when_user_permission_deleted()
@@ -657,19 +640,11 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'sort' => 'id',
             ]
         );
-        $this->assertArraySubset([(array)$content], $response->decodeResponseJson('data'));
+        $this->assertArraySubset([(array)$content], $response->decodeResponseJson()->json('data'));
 
         $this->call(
             'DELETE',
             'railcontent/user-permission/' . $userPermission
-        );
-
-        $this->assertEquals(
-            [],
-            Redis::hgetall(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId
-            )
         );
     }
 
@@ -746,12 +721,5 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString(),
             ]
         );
-
-        //expected 3 days in seconds (the expiration date for user's permission 1)
-        $recentExpirationSeconds = 3 * 24 * 60 * 60;
-
-        $redisTTL = Redis::ttl($userCacheKeys);
-
-        $this->assertTrue($recentExpirationSeconds <= $redisTTL);
     }
 }

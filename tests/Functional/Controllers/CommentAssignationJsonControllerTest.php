@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -13,6 +14,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentAssignationJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentFactory
      */
@@ -28,7 +31,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
      */
     protected $commentAssignationFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -44,7 +47,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_pull_my_assigned_comments()
@@ -75,7 +78,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->assertArraySubset($assignedComments, $response->decodeResponseJson('data'));
+        $this->assertArraySubset($assignedComments, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_delete_assigned_comment()

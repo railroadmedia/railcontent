@@ -1168,7 +1168,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals($assignmentsTotalXp, 5 * config('xp_ranks.assignment_content_completed'));
-        $this->assertEquals($response->decodeResponseJson()->json('data')[0]['total_xp'], $courseTotalXP + $coursePartTotalXp);
+        $this->assertEquals($courseTotalXP + $coursePartTotalXp, $response->decodeResponseJson()->json('data')[0]['total_xp']);
     }
 
     public function test_total_xp_calculation_when_difficulty_change()

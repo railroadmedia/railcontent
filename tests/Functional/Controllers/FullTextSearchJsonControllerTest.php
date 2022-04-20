@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Config;
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -13,6 +14,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class FullTextSearchJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentFactory $contentFactory
      */
@@ -28,7 +31,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
      */
     protected $datumFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setConnectionType('mysql');
 
@@ -44,8 +47,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'railcontent/search');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertEquals([], $response->decodeResponseJson()->json('data'));
+        $this->assertEquals(0, $response->decodeResponseJson()->json('meta')['totalResults']);
     }
 
     public function test_search_results_paginated()
@@ -136,8 +139,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         );
 
         //check that first result it's the most relevant
-        $this->assertArraySubset([$content[2]], array_slice($response->decodeResponseJson('data'), 0, 1));
-        $this->assertGreaterThanOrEqual(1, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArraySubset([$content[2]], array_slice($response->decodeResponseJson()->json('data'), 0, 1));
+        $this->assertGreaterThanOrEqual(1, $response->decodeResponseJson()->json('meta')['totalResults']);
     }
 
     public function test_search_with_sort_and_content_type_criteria()
@@ -182,7 +185,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $results = $response->decodeResponseJson('data');
+        $results = $response->decodeResponseJson()->json('data');
 
         $expectedResults = $this->call(
             'GET',
@@ -195,7 +198,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
+        $this->assertEquals($expectedResults->decodeResponseJson()->json('data'), array_values($results));
     }
 
     public function test_search_with_status()
@@ -232,7 +235,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $results = $response->decodeResponseJson('data');
+        $results = $response->decodeResponseJson()->json('data');
 
         $expectedResults = $this->call(
             'GET',
@@ -246,7 +249,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
+        $this->assertEquals($expectedResults->decodeResponseJson()->json('data'), array_values($results));
     }
 
     public function test_search_for_coach_content()
@@ -311,7 +314,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $results = $response->decodeResponseJson('data');
+        $results = $response->decodeResponseJson()->json('data');
 
         foreach ($results as $result)
         {

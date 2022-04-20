@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -66,7 +67,7 @@ class MyListJsonController extends Controller
         }
 
         $userPrimaryPlaylist =
-            array_first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            Arr::first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
 
         if (!$userPrimaryPlaylist) {
             $userPrimaryPlaylist = $this->contentService->create(
@@ -101,7 +102,7 @@ class MyListJsonController extends Controller
         $userId = auth()->id();
 
         $userPrimaryPlaylist =
-            array_first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            Arr::first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
 
         $this->contentHierarchyService->delete($userPrimaryPlaylist['id'], $request->get('content_id'));
 
@@ -133,7 +134,7 @@ class MyListJsonController extends Controller
 
         if (!$state) {
 
-            $usersPrimaryPlaylist = array_first(
+            $usersPrimaryPlaylist = Arr::first(
                 $this->contentRepository->getByUserIdTypeSlug(auth()->id(), 'user-playlist', 'primary-playlist')
             );
 

@@ -298,7 +298,7 @@ class CacheHelper
             $userKey = self::getUserSpecificHashedKey();
             if (!is_null($contentIds)) {
                 if (empty($contentIds)) {
-                    $contentIds = array_pluck($data, 'id');
+                    $contentIds = Arr::pluck($data, 'id');
                 }
                 self::addLists($userKey . ' ' . $hash, $contentIds);
             }

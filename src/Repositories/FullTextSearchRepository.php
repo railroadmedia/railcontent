@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
@@ -310,7 +311,7 @@ class FullTextSearchRepository extends RepositoryBase
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
                     $coach = $this->contentRepository->getById($coachId);
-                    $instructor = array_first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
+                    $instructor = Arr::first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
 
                     if ($instructor) {
                         $builder->orwhere(function (Builder $builder2) use ($instructor, $coachId) {
@@ -413,7 +414,7 @@ class FullTextSearchRepository extends RepositoryBase
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
                     $coach = $this->contentRepository->getById($coachId);
-                    $instructor = array_first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
+                    $instructor = Arr::first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
 
                     if ($instructor) {
                         $builder->orwhere(function (Builder $builder2) use ($instructor, $coachId) {

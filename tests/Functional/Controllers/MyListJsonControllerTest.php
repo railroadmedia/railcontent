@@ -31,7 +31,7 @@ class MyListJsonControllerTest extends RailcontentTestCase
      */
     protected $contentFieldFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -61,7 +61,7 @@ class MyListJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals(
             'success',
-            $response->decodeResponseJson()[0]
+            $response->decodeResponseJson()->json()[0]
         );
 
         $this->assertDatabaseHas(
@@ -109,7 +109,7 @@ class MyListJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals(
             'success',
-            $response->decodeResponseJson()[0]
+            $response->decodeResponseJson()->json()[0]
         );
 
         $this->assertDatabaseMissing(

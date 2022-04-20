@@ -20,7 +20,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
     private $comments;
     private $content;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

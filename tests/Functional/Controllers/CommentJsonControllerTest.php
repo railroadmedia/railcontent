@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -13,6 +14,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentFactory
      */
@@ -110,7 +113,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'replies'      => []
         ];
 
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson()->json('data')[0]);
     }
 
     public function test_update_other_comment_response()
@@ -191,7 +194,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'parent_id'  => null
         ];
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson()->json('data')[0]);
     }
 
     public function test_delete_my_comment_response()
@@ -293,7 +296,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_pull_comments_paginated()
@@ -324,7 +327,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
     }
 
@@ -366,7 +369,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
     }
 
@@ -404,7 +407,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
     }
 
@@ -577,7 +580,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
     }
 
@@ -628,7 +631,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
     }
 
@@ -648,7 +651,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('GET', 'railcontent/comment/' . $comment['id']);
 
-        $this->assertEquals([$comments[2], $comments[1], $comment], $response->decodeResponseJson('data'));
+        $this->assertEquals([$comments[2], $comments[1], $comment], $response->decodeResponseJson()->json('data'));
         $this->assertEquals(($commentsNr + 1), $response->decodeResponseJson('meta')['totalResults']);
     }
 }

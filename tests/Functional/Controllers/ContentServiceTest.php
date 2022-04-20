@@ -42,7 +42,7 @@ class ContentServiceTest extends RailcontentTestCase
      */
     protected $serviceBeingTested;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

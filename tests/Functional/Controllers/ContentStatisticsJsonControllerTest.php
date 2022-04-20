@@ -59,7 +59,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
      */
     protected $userContentRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -178,7 +178,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
 
         $lastSortedByValue = -1;
 
-        foreach ($response->decodeResponseJson() as $stats) {
+        foreach ($response->decodeResponseJson()->json() as $stats) {
             // assert stats value
             $this->assertEquals(
                 $expectedStats[$stats['content_id']],
@@ -377,7 +377,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
                 'total_likes' => $expectedLikes,
                 'total_added_to_list' => $expectedAddToList,
             ],
-            $response->decodeResponseJson()
+            $response->decodeResponseJson()->json()
         );
     }
 

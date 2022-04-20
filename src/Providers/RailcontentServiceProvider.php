@@ -45,6 +45,32 @@ use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
+    protected $listen = [
+        ContentCreated::class => [],
+        ContentUpdated::class => [],
+        ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
+        ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
+        ContentFieldCreated::class => [
+            // VersionContentEventListener::class . '@handleFieldCreated',
+            ContentTotalXPListener::class . '@handleFieldCreated',
+        ],
+        ContentFieldUpdated::class => [
+            // VersionContentEventListener::class . '@handleFieldUpdated',
+            ContentTotalXPListener::class . '@handleFieldUpdated',
+        ],
+        ContentFieldDeleted::class => [
+            // VersionContentEventListener::class . '@handleFieldDeleted',
+            ContentTotalXPListener::class . '@handleFieldDeleted',
+        ],
+        ContentDatumCreated::class => [],
+        ContentDatumUpdated::class => [],
+        ContentDatumDeleted::class => [],
+        CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
+        CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
+        UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
+        HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
+    ];
+
     /**
      * Bootstrap the application services.
      *
@@ -52,32 +78,6 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->listen = [
-            ContentCreated::class => [],
-            ContentUpdated::class => [],
-            ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
-            ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentFieldCreated::class => [
-               // VersionContentEventListener::class . '@handleFieldCreated',
-                ContentTotalXPListener::class . '@handleFieldCreated',
-            ],
-            ContentFieldUpdated::class => [
-               // VersionContentEventListener::class . '@handleFieldUpdated',
-                ContentTotalXPListener::class . '@handleFieldUpdated',
-            ],
-            ContentFieldDeleted::class => [
-               // VersionContentEventListener::class . '@handleFieldDeleted',
-                ContentTotalXPListener::class . '@handleFieldDeleted',
-            ],
-            ContentDatumCreated::class => [],
-            ContentDatumUpdated::class => [],
-            ContentDatumDeleted::class => [],
-            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
-            CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
-            HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
-        ];
-
         parent::boot();
 
         $this->setupConfig();
@@ -233,5 +233,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 $event->statement->setFetchMode(PDO::FETCH_ASSOC);
             }
         });
+
+        parent::register();
     }
 }

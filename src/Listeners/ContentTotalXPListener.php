@@ -2,9 +2,11 @@
 
 namespace Railroad\Railcontent\Listeners;
 
+use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
+use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Services\ContentService;
 

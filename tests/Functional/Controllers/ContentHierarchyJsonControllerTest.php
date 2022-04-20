@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Services\ConfigService;
@@ -10,6 +11,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentFactory
      */
@@ -20,7 +23,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
      */
     protected $contentHierarchyFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -45,7 +48,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ],
         ];
 
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_create_without_position()
@@ -67,7 +70,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
-            $response->decodeResponseJson('post')
+            $response->decodeResponseJson()->json('post')
         );
     }
 
@@ -94,10 +97,9 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
-            $response->decodeResponseJson()['post']
+            $response->decodeResponseJson()->json()['post']
         );
     }
-
 
     public function test_update()
     {
