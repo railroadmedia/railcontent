@@ -9,10 +9,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
+use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Transformers\ParentContentTransformer;
 use Railroad\Railcontent\Transformers\VideoTransformer;
 
 class ContentRepository extends RepositoryBase
@@ -143,19 +145,15 @@ class ContentRepository extends RepositoryBase
             return null;
         }
 
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-        $instructors = $this->contentInstructorRepository->getByContentId(array_column($contentRows, 'id'));
-        $video = $this->getVideoByContentIds(array_column($contentRows, 'id'));
-
         $data = $contentRows[0] ?? null;
+
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
+
         $parser = $this->setPresenter(ContentTransformer::class);
-        $parser->presenter->addParam([
-                                         'instructor' => $instructors,
-                                         'video' => $video,
-                                        'data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id'),
-                                     ]);
+        $parser->presenter->addParam($extraData);
 
         return $this->parserResult($data);
+
     }
 
     /**
@@ -181,21 +179,10 @@ class ContentRepository extends RepositoryBase
                 }
             }
         }
-
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-        $instructors = $this->contentInstructorRepository->getByContentId(array_column($contentRows, 'id'));
-        $video = $this->getVideoByContentIds(array_column($contentRows, 'id'));
-        $styles = $this->contentStyleRepository->getByContentId(array_column($contentRows, 'id'));
-        $bpm = $this->contentBpmRepository->getByContentId(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'style', 'topic', 'bpm', 'video'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
-        $parser->presenter->addParam([
-                                         'data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id'),
-                                         'instructor' => $instructors,
-                                         'video' => $video,
-                                         'style' => $styles,
-                                         'bpm' => $bpm,
-                                     ]);
+        $parser->presenter->addParam($extraData);
 
         return $this->parserResult($contentRows);
     }
@@ -221,20 +208,12 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -265,20 +244,12 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -307,20 +278,12 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -352,21 +315,12 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->selectInheritenceColumns()
                 ->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -410,21 +364,12 @@ class ContentRepository extends RepositoryBase
                 ->whereIn(ConfigService::$tableContentHierarchy.'.parent_id', $parentIds)
                 ->selectInheritenceColumns()
                 ->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor','video'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ParentContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -447,21 +392,12 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -484,23 +420,12 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds(
-            $contentRows
-        );
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -524,7 +449,10 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray(['id', 'slug', 'child_ids']);
 
-        return $this->processRows($contentRows, [], [], []);
+        $this->setPresenter(ContentTransformer::class);
+
+        return $this->parserResult($contentRows);
+
     }
 
     /**
@@ -549,20 +477,12 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -592,21 +512,12 @@ class ContentRepository extends RepositoryBase
                 ->limit($limit)
                 ->skip($skip)
                 ->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -637,20 +548,12 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -684,20 +587,12 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -763,21 +658,26 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
 
         $merged = array_merge($beforeContents, $afterContents);
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $merged);
 
-        $contentFieldRows = $this->getFieldsByContentIds($merged);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($merged, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($merged, 'id'),
-            array_column($merged, 'type')
-        );
-
-        $processedContents = $this->processRows(
-            $merged,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        $processedContents = $this->parserResult($merged);
+//        $contentFieldRows = $this->getFieldsByContentIds($merged);
+//        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($merged, 'id'));
+//
+//        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+//            array_column($merged, 'id'),
+//            array_column($merged, 'type')
+//        );
+//
+//        $processedContents = $this->processRows(
+//            $merged,
+//            $contentFieldRows,
+//            $contentDatumRows,
+//            $contentPermissionRows
+//        );
 
         foreach ($afterContents as $afterContentIndex => $afterContent) {
             foreach ($processedContents as $processedContentIndex => $processedContent) {
@@ -845,20 +745,12 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -876,20 +768,12 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -908,21 +792,12 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->where(ConfigService::$tableContent.'.user_id', $userId)
                 ->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor','video','style','bpm'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -960,21 +835,12 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentRows = $query->getToArray();
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**
@@ -1302,19 +1168,13 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
 
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic'], $contentRows);
+
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
+
+        return $this->parserResult($contentRows);
     }
 
     /**

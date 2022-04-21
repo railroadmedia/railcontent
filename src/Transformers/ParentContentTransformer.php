@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-class ContentTransformer
+class ParentContentTransformer
 {
     private $params;
 
@@ -45,6 +45,7 @@ class ContentTransformer
                 'sort' => $data['sort'] ?? '',
                 'type' => $data['type'] ?? '',
                 'name' => $data['name'] ?? '',
+                'parent_id' => $data['parent_id'] ?? null,
                 'fields' => $fields,
                 'data' => $associations['data'][$data['id']] ?? [],
                 'permissions' => $data['permissions'] ?? [],
@@ -80,6 +81,7 @@ class ContentTransformer
                         'sort' => $row['sort'] ?? '',
                         'type' => $row['type'] ?? '',
                         'name' => $row['name'] ?? '',
+                        'parent_id' => $row['parent_id'] ?? null,
                         'fields' => $fields,
                         'data' => $associations['data'][$row['id']] ?? [],
                         'permissions' => $row['permissions'] ?? [],
@@ -107,7 +109,6 @@ class ContentTransformer
         if (!empty($this->params)) {
             foreach ($this->params as $key => $value) {
                 if ($key != 'data') {
-
                     $association['fields'] = $association['fields'] + $this->transformField($key, $value);
                 } else {
                     $association['data'] = $value;
@@ -154,16 +155,14 @@ class ContentTransformer
 
         if (is_array($value)) {
             foreach ($value as $val) {
-                if (($key == 'style') || ($key == 'bpm') || ($key == 'topic')) {
-
-                        $field[$key][$val['content_id']][] = [
-                            'content_id' => $val['content_id'],
-                            'key' => $key,
-                            'position' => $val['position'] ?? 1,
-                            'value' => $val['value'],
-                            'type' => 'string',
-                        ];
-
+                if (($key == 'style') || ($key == 'bpm')) {
+                    $field[$key][$val['content_id']][] = [
+                        'content_id' => $val['content_id'],
+                        'key' => $key,
+                        'position' => $val['position'] ?? 1,
+                        'value' => $val['value'],
+                        'type' => 'string',
+                    ];
                 } else {
                     $field[$key][$val['content_id']][] = [
                         'content_id' => $val['content_id'],

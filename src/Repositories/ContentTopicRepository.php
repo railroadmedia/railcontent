@@ -2,23 +2,31 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Railroad\Railcontent\Transformers\TopicTransformer;
+
 class ContentTopicRepository extends RepositoryBase
 {
     public function query()
     {
-        return $this->connection()->table(config('railcontent.table_prefix').'content_topics');
+        return $this->connection()
+            ->table(config('railcontent.table_prefix').'content_topics');
     }
 
-    public function getByContentId($contentId)
+    public function getByContentIds($contentIds)
     {
-        if (empty($contentId)) {
+        if (empty($contentIds)) {
             return [];
         }
 
-        return $this->query()
-            ->where('content_id', $contentId)
-            ->orderBy('position', 'asc')
-            ->get()
-            ->toArray();
+        $data =
+            $this->query()
+                ->whereIn('content_id', $contentIds)
+                ->orderBy('position', 'asc')
+                ->get()
+                ->toArray();
+
+        $this->setPresenter(TopicTransformer::class);
+
+        return $this->parserResult($data);
     }
 }

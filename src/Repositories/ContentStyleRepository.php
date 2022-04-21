@@ -11,7 +11,7 @@ class ContentStyleRepository extends RepositoryBase
         return $this->connection()->table(config('railcontent.table_prefix').'content_styles');
     }
 
-    public function getByContentId($contentId)
+    public function getByContentIds($contentId)
     {
         if (empty($contentId)) {
             return [];

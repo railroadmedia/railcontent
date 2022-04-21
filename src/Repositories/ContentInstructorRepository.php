@@ -26,13 +26,13 @@ class ContentInstructorRepository extends RepositoryBase
             ->table(config('railcontent.table_prefix').'content_instructors');
     }
 
-    public function getByContentId($contentId)
+    public function getByContentIds($contentIds)
     {
-        if (empty($contentId)) {
+        if (empty($contentIds)) {
             return [];
         }
-        if (!is_array($contentId)) {
-            $contentId = [$contentId];
+        if (!is_array($contentIds)) {
+            $contentIds = [$contentIds];
         }
 
         $data =
@@ -43,7 +43,7 @@ class ContentInstructorRepository extends RepositoryBase
                     '=',
                     config('railcontent.table_prefix').'content.id'
                 )
-                ->whereIn('content_id', $contentId)
+                ->whereIn('content_id', $contentIds)
                 ->orderBy('position', 'asc')
                 ->get()
                 ->toArray();

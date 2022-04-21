@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ConfigService;
 
 abstract class RepositoryBase
@@ -51,12 +52,16 @@ abstract class RepositoryBase
     /**
      * @var bool
      */
-    protected $skipCriteria = false;
-
-    /**
-     * @var bool
-     */
     protected $skipPresenter = false;
+
+    const REPOSITORYMAPPING = [
+        'data' => ContentDatumRepository::class,
+        'instructor' => ContentInstructorRepository::class,
+        'topic' => ContentTopicRepository::class,
+        'style' => ContentStyleRepository::class,
+        'bpm' => ContentBpmRepository::class,
+        'video' => ContentVideoRepository::class
+    ];
 
     /**
      * CategoryRepository constructor.
@@ -65,8 +70,6 @@ abstract class RepositoryBase
     {
         $this->databaseManager = app('db');
 
-       // $this->makePresenter();
-
         if (empty(self::$connectionMask)) {
             /**
              * @var $realConnection Connection
@@ -74,15 +77,14 @@ abstract class RepositoryBase
             $realConnection = app('db')->connection(config('railcontent.database_connection_name'));
             $realConfig = $realConnection->getConfig();
 
-            $realConfig['name'] = config('railcontent.connection_mask_prefix') . $realConfig['name'];
+            $realConfig['name'] = config('railcontent.connection_mask_prefix').$realConfig['name'];
 
-            $maskConnection =
-                new Connection(
-                    $realConnection->getPdo(),
-                    $realConnection->getDatabaseName(),
-                    $realConnection->getTablePrefix(),
-                    $realConfig
-                );
+            $maskConnection = new Connection(
+                $realConnection->getPdo(),
+                $realConnection->getDatabaseName(),
+                $realConnection->getTablePrefix(),
+                $realConfig
+            );
 
             if (!empty($realConnection->getSchemaGrammar())) {
                 $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
@@ -104,7 +106,9 @@ abstract class RepositoryBase
      */
     public function getById($id)
     {
-        return $this->query()->where(['id' => $id])->first();
+        return $this->query()
+            ->where(['id' => $id])
+            ->first();
     }
 
     /**
@@ -117,9 +121,7 @@ abstract class RepositoryBase
     public function getByKeyValueTypePosition($key, $value, $type, $position)
     {
         return $this->query()
-            ->where(
-                ['key' => $key, 'value' => $value, 'type' => $type, 'position' => $position]
-            )
+            ->where(['key' => $key, 'value' => $value, 'type' => $type, 'position' => $position])
             ->get()
             ->toArray();
     }
@@ -133,9 +135,7 @@ abstract class RepositoryBase
     public function getByKeyValueType($key, $value, $type)
     {
         return $this->query()
-            ->where(
-                ['key' => $key, 'value' => $value, 'type' => $type]
-            )
+            ->where(['key' => $key, 'value' => $value, 'type' => $type])
             ->get()
             ->toArray();
     }
@@ -148,9 +148,13 @@ abstract class RepositoryBase
      */
     public function updateOrCreate(array $attributes, array $values = [], $getterColumn = 'id')
     {
-        $this->query()->updateOrInsert($attributes, !empty($values) ? $values : array_merge($attributes, $values));
+        $this->query()
+            ->updateOrInsert($attributes, !empty($values) ? $values : array_merge($attributes, $values));
 
-        return $this->query()->where($attributes)->get([$getterColumn])->first()[$getterColumn] ?? null;
+        return $this->query()
+                ->where($attributes)
+                ->get([$getterColumn])
+                ->first()[$getterColumn] ?? null;
     }
 
     /**
@@ -161,10 +165,14 @@ abstract class RepositoryBase
      */
     public function create(array $data)
     {
-        $existing = $this->query()->where($data)->first();
+        $existing =
+            $this->query()
+                ->where($data)
+                ->first();
 
         if (empty($existing)) {
-            return $this->query()->insertGetId($data);
+            return $this->query()
+                ->insertGetId($data);
         }
 
         return $existing['id'];
@@ -177,10 +185,15 @@ abstract class RepositoryBase
      */
     public function update($id, array $data)
     {
-        $existing = $this->query()->where(['id' => $id])->first();
+        $existing =
+            $this->query()
+                ->where(['id' => $id])
+                ->first();
 
         if (!empty($existing)) {
-            $this->query()->where(['id' => $id])->update($data);
+            $this->query()
+                ->where(['id' => $id])
+                ->update($data);
         }
 
         return $id;
@@ -193,22 +206,22 @@ abstract class RepositoryBase
      */
     public function createOrUpdateAndReposition($dataId = null, $data)
     {
-        $existingData = $this->query()
-            ->where('id', $dataId)
-            ->get()
-            ->first();
+        $existingData =
+            $this->query()
+                ->where('id', $dataId)
+                ->get()
+                ->first();
 
         $contentId = $existingData['content_id'] ?? $data['content_id'];
         $key = $existingData['key'] ?? $data['key'];
 
-        $dataCount = $this->query()
-            ->where(
-                [
-                    'content_id' => $contentId,
-                    'key' => $key
-                ]
-            )
-            ->count();
+        $dataCount =
+            $this->query()
+                ->where([
+                            'content_id' => $contentId,
+                            'key' => $key,
+                        ])
+                ->count();
 
         $data['position'] = $this->recalculatePosition(
             $data['position'] ?? $existingData['position'],
@@ -225,10 +238,9 @@ abstract class RepositoryBase
                 null
             );
 
-            return $this->query()->insertGetId($data);
-
+            return $this->query()
+                ->insertGetId($data);
         } elseif ($data['position'] > $existingData['position']) {
-
             $this->query()
                 ->where('id', $dataId)
                 ->update($data);
@@ -240,11 +252,11 @@ abstract class RepositoryBase
                 $existingData['position'],
                 $data['position']
             );
-
         } elseif ($data['position'] < $existingData['position']) {
-            $updated = $this->query()
-                ->where('id', $dataId)
-                ->update($data);
+            $updated =
+                $this->query()
+                    ->where('id', $dataId)
+                    ->update($data);
 
             $this->incrementOtherEntitiesPosition(
                 $dataId,
@@ -255,7 +267,6 @@ abstract class RepositoryBase
             );
 
             return $updated;
-
         } else {
             return $this->query()
                 ->where('id', $dataId)
@@ -271,7 +282,9 @@ abstract class RepositoryBase
      */
     public function delete($id)
     {
-        return $this->query()->where(['id' => $id])->delete() > 0;
+        return $this->query()
+                ->where(['id' => $id])
+                ->delete() > 0;
     }
 
     /**
@@ -281,38 +294,38 @@ abstract class RepositoryBase
      */
     public function deleteAndReposition($entity, $positionColumnPrefix = '')
     {
-        $existingLink = $this->query()
-            ->where($entity)
-            ->first();
+        $existingLink =
+            $this->query()
+                ->where($entity)
+                ->first();
 
         if (empty($existingLink)) {
             return true;
         }
 
         $query = $this->query();
-        if(array_key_exists('content_id', $existingLink)){
-            $query->where(
-                [
-                    'content_id' => $existingLink['content_id'],
-                    'key' => $existingLink['key'],
-                ]
-            );
+        if (array_key_exists('content_id', $existingLink)) {
+            $query->where([
+                              'content_id' => $existingLink['content_id'],
+                              'key' => $existingLink['key'],
+                          ]);
         }
 
-        if(array_key_exists('parent_id', $existingLink)){
+        if (array_key_exists('parent_id', $existingLink)) {
             $query->where('parent_id', $existingLink['parent_id']);
         }
 
-           $query->where(
-                $positionColumnPrefix . 'position',
-                '>',
-                $existingLink[$positionColumnPrefix . "position"]
-            )
-            ->decrement($positionColumnPrefix . 'position');
+        $query->where(
+            $positionColumnPrefix.'position',
+            '>',
+            $existingLink[$positionColumnPrefix."position"]
+        )
+            ->decrement($positionColumnPrefix.'position');
 
-        $deleted = $this->query()
-            ->where(['id' => $existingLink['id']])
-            ->delete();
+        $deleted =
+            $this->query()
+                ->where(['id' => $existingLink['id']])
+                ->delete();
 
         return $deleted > 0;
     }
@@ -360,10 +373,11 @@ abstract class RepositoryBase
         $startPosition,
         $endPosition = null
     ) {
-        $query = $this->query()
-            ->where('content_id', $contentId)
-            ->where('key', $key)
-            ->where('position', '>=', $startPosition);
+        $query =
+            $this->query()
+                ->where('content_id', $contentId)
+                ->where('key', $key)
+                ->where('position', '>=', $startPosition);
 
         if ($excludedEntityId) {
             $query->where('id', '!=', $excludedEntityId);
@@ -391,13 +405,6 @@ abstract class RepositoryBase
                 ->where('position', '<=', $endPosition)
                 ->decrement('position') > 0;
     }
-
-
-
-
-
-
-
 
     /**
      * Specify Presenter class name
@@ -448,7 +455,7 @@ abstract class RepositoryBase
      */
     public function parserResult($result)
     {
-        if($this->presenter) {
+        if ($this->presenter) {
             return $this->presenter->transform($result);
         }
 
@@ -470,9 +477,9 @@ abstract class RepositoryBase
 
         if (!$withoutAssociatedJoin) {
             $videos = [];
-                //$this->getVideoForContents(array_column($contentRows, 'id'));
+            //$this->getVideoForContents(array_column($contentRows, 'id'));
             $instructors = [];
-                //$this->getInstructorsForContents(array_column($contentRows, 'id'));
+            //$this->getInstructorsForContents(array_column($contentRows, 'id'));
 
             $styles =
                 $this->query()
@@ -619,5 +626,23 @@ abstract class RepositoryBase
         return $fields;
     }
 
+    public function geExtraDataInOldStyle($extraKeys, $contentRows)
+    {
+        $results = [];
+        foreach ($extraKeys as $key) {
+            if (array_key_exists($key, self::REPOSITORYMAPPING)) {
+                $repositoryName = self::REPOSITORYMAPPING[$key];
+                if ($repositoryName) {
+                    $repository = app()->make($repositoryName);
+                    $results[$key] = $repository->getByContentIds(array_column($contentRows, 'id'));
+                    if($key == 'data' ){
+                        $results[$key] = ContentHelper::groupArrayBy($results[$key], 'content_id');
+                    }
+                }
+            }
+        }
+
+        return $results;
+    }
 
 }

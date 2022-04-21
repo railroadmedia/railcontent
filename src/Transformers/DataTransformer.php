@@ -15,7 +15,6 @@ class DataTransformer extends TransformerAbstract
             return [];
         }
         if (is_array($data)) {
-            dd('e array');
             return $data;
         }
 
