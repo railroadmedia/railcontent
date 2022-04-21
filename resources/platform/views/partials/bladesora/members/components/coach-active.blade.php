@@ -1,7 +1,7 @@
 @if ($hasActiveCoaches)
-    <div class="container">
+    <div class="tw-container tw-mx-auto">
         <div class="tw-flex tw-items-center tw-mb-6">
-            <span class="rounded bg-{{ $brand }} text-white icon-bg-circle body mr-1">
+            <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
                 <svg width="20" height="20" aria-hidden="true" fill="white" focusable="false">
                     <use href="#whistle"></use>
                 </svg>
