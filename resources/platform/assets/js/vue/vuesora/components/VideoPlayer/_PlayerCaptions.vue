@@ -1,20 +1,20 @@
 <template>
-    <div class="settings-drawer captions bg-grey-5 text-white shadow overflow">
-        <div class="flex flex-column">
-            <div class="flex flex-row">
-                <div class="flex flex-column">
-                    <ul class="list-style-none body text-right dense font-bold">
+    <div class="settings-drawer captions bg-grey-5 tw-text-white tw-shadow overflow">
+        <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-row">
+                <div class="tw-flex tw-flex-col">
+                    <ul class="tw-list-none body tw-text-right dense tw-font-bold">
                         <li
                             v-for="caption in captionOptions"
                             :key="caption.language"
-                            class="pa-1 hover-bg-grey-4 pointer relative"
+                            class="pa-1 hover-bg-grey-4 tw-pointer tw-relative"
                             :class="[{ 'selected-caption': isSelected(caption) }, isSelected(caption) ? themeTextClass : '']"
                             @click="selectCaptionHandler(caption)"
                         >
                             {{ caption.label }}
                         </li>
                         <li
-                            class="pa-1 hover-bg-grey-4 pointer relative"
+                            class="pa-1 hover-bg-grey-4 tw-pointer tw-relative"
                             :class="isOff ? [themeTextClass, 'selected-caption'] : ''"
                             @click="selectCaptionHandler(null)"
                         >

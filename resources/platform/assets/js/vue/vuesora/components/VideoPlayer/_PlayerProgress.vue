@@ -7,7 +7,7 @@
         @dragenter.prevent.stop
     >
         <div
-            class="progress-tooltip tiny text-white"
+            class="progress-tooltip tiny tw-text-white"
             :style="toolTipOffset"
         >
             {{ toolTipValue }}

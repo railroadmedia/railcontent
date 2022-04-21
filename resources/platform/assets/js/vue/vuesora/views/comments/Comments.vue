@@ -1,16 +1,16 @@
 <template>
     <div
         id="commentsSection"
-        class="flex flex-column grow"
+        class="tw-flex tw-flex-col tw-flex-grow"
     >
-        <div class="flex flex-row flex-wrap pt-3 align-v-center">
-            <div class="flex flex-column xs-12 sm-9 mb-3">
+        <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
+            <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
                 <h1 class="heading">
                     {{ totalCommentsAndReplies }} Comments
                 </h1>
             </div>
 
-            <div class="flex flex-column xs-12 sm-4 md-3 mb-3">
+            <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
                 <div
                     class="form-group xs-12"
                     style="width:100%;"
@@ -42,9 +42,9 @@
 
         <div
             id="postComment"
-            class="flex flex-row comment-post mv-3"
+            class="tw-flex tw-flex-row comment-post mv-3"
         >
-            <div class="flex flex-column avatar-column pr hide-xs-only">
+            <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
@@ -53,25 +53,25 @@
                         src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="currentUser.avatar"
                         data-ix-fade
-                        class="rounded"
+                        class="tw-rounded"
                     >
                 </div>
 
                 <p
                     v-if="showUserExp"
-                    class="x-tiny dense font-bold uppercase text-center mt-1"
+                    class="x-tiny dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
                 >
                     {{ userExpRank }}
                 </p>
                 <p
                     v-if="showUserExp"
-                    class="x-tiny dense text-center font-compressed"
+                    class="x-tiny dense tw-text-center font-compressed"
                 >
                     {{ userExpValue }} XP
                 </p>
             </div>
 
-            <div class="flex flex-column">
+            <div class="tw-flex tw-flex-col">
                 <text-editor
                     ref="textEditor"
                     v-model="commentInterface"
@@ -79,7 +79,7 @@
                     :height="150"
                 ></text-editor>
 
-                <div class="flex flex-row align-h-right mv-1">
+                <div class="tw-flex tw-flex-row align-h-right mv-1">
                     <button
                         class="btn collapse-150"
                         :disabled="loading"
@@ -87,7 +87,7 @@
                         @click="postComment"
                     >
                         <span
-                            class="text-white short"
+                            class="tw-text-white short"
                             :class="themeBgClass"
                         >
                             Comment
@@ -97,7 +97,7 @@
 
                 <div
                     v-show="loading"
-                    class="loading-reply flex-center"
+                    class="loading-reply tw-flex-center"
                 >
                     <i
                         class="fas fa-spinner fa-spin"

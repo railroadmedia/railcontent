@@ -24,6 +24,8 @@ import ForumThread from './vue/vuesora/views/forum/thread';
 import TextEditor from './vue/vuesora/components/TextEditor';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
+import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
+import Comments from './vue/vuesora/views/comments/Comments.vue'
 
 const app = createApp({});
 
@@ -46,6 +48,9 @@ app.component('AppContainer', AppContainer)
    .component('TextEditor', TextEditor)
    .component('ContactMemberEmailForm', ContactMemberEmailForm)
    .component('ContentSchedule', ContentSchedule)
+   .component('YoutubePlayer', YoutubePlayer)
+   .component('Comments', Comments)
+
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

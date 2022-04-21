@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-row comment-post pv mv-1">
-        <div class="flex flex-column avatar-column pr">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1">
+        <div class="tw-flex tw-flex-col avatar-column pr">
             <div
                 v-if="hasPublicProfiles"
                 class="user-avatar smaller"
@@ -9,44 +9,44 @@
                 <a
                     :href="profileRoute"
                     target="_blank"
-                    class="no-decoration"
+                    class="tw-no-underline"
                 >
                     <img
                         src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="comment.user['fields.profile_picture_image_url']"
                         data-ix-fade
-                        class="rounded"
+                        class="tw-rounded"
                     >
                 </a>
             </div>
             <img
                 v-if="!hasPublicProfiles"
                 :src="comment.user['fields.profile_picture_image_url']"
-                class="rounded"
+                class="tw-rounded"
             >
 
             <p
                 v-if="showUserExp"
-                class="body dense font-bold uppercase text-center mt-1"
+                class="body dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
             >
                 {{ userExpRank }}
             </p>
             <p
                 v-if="showUserExp"
-                class="tiny dense text-center font-compressed"
+                class="tiny dense tw-text-center font-compressed"
             >
                 {{ userExpValue }} XP
             </p>
         </div>
-        <div class="flex flex-column grow">
-            <div class="flex flex-row align-v-center mb-1 comment-meta">
-                <div class="flex flex-column grow mr-1">
-                    <h2 class="body font-bold break-words">
+        <div class="tw-flex tw-flex-col tw-flex-grow">
+            <div class="tw-flex tw-flex-row tw-items-center tw-mb-1 comment-meta">
+                <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
+                    <h2 class="body tw-font-bold break-words">
                         <a
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="text-black no-decoration"
+                            class="tw-text-black tw-no-underline"
                         >
                             {{ comment.user.display_name }}
                         </a>
@@ -57,17 +57,17 @@
                             {{ comment.user.display_name }}
                         </span>
 
-                        <span class="x-tiny text-grey-3 font-bold font-italic uppercase ml-1">
+                        <span class="x-tiny text-grey-3 tw-font-bold tw-italic tw-uppercase tw-ml-1">
                             {{ dateString }}
                         </span>
                     </h2>
                 </div>
 
-                <div class="flex flex-column align-h-right align-v-center flex-auto">
-                    <div class="flex flex-row">
+                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-flex-auto">
+                    <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tiny no-decoration text-grey-3 pointer mr-1"
+                            class="tiny no-decoration text-grey-3 tw-pointer tw-mr-1"
                         >
                             <i
                                 class="fas fa-trash"
@@ -78,20 +78,20 @@
                 </div>
             </div>
 
-            <div class="flex flex-row body mb-1">
+            <div class="tw-flex tw-flex-row body tw-mb-1">
                 <div
-                    class="flex flex-column post-body grow"
+                    class="tw-flex tw-flex-col post-body tw-flex-grow"
                     v-html="comment.comment"
                 >
                 </div>
             </div>
 
 
-            <div class="flex flex-row flex-wrap">
-                <div class="flex flex-column mb-1">
-                    <div class="flex flex-row align-v-center">
+            <div class="tw-flex tw-flex-row tw-flex-wrap">
+                <div class="tw-flex tw-flex-col tw-mb-1">
+                    <div class="tw-flex tw-flex-row tw-items-center">
                         <p
-                            class="tiny mr-3 font-bold uppercase dense pointer reply-like nowrap noselect"
+                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
                             :class="replying ? themeTextClass : 'text-grey-3'"
                             dusk="reply-button"
                             @click="openReply"
@@ -104,7 +104,7 @@
 
                         <p
                             v-if="!isUsersPost"
-                            class="tiny mr-3 font-bold uppercase dense pointer reply-like nowrap noselect"
+                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
                             :class="comment.is_liked ? themeTextClass : 'text-grey-3'"
                             @click="likeComment"
                         >
@@ -114,15 +114,15 @@
                             </span>
                         </p>
 
-                        <span class="grow"></span>
+                        <span class="tw-flex-grow"></span>
 
                         <p
-                            class="x-tiny font-bold text-grey-3 uppercase nowrap pointer noselect"
+                            class="x-tiny tw-font-bold text-grey-3 tw-uppercase nowrap tw-pointer noselect"
                             :data-open-modal="openModalString"
                             @click="openLikes"
                         >
                             <i
-                                class="fas fa-thumbs-up text-white likes-icon"
+                                class="fas fa-thumbs-up tw-text-white likes-icon"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             ></i> {{ comment.like_count }}
                         </p>
@@ -133,16 +133,16 @@
             <transition name="slide-fade">
                 <div
                     v-if="replying"
-                    class="flex flex-row comment-post mv-2"
+                    class="tw-flex tw-flex-row comment-post mv-2"
                 >
-                    <div class="flex flex-column avatar-column pr hide-xs-only">
+                    <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
                         <img
                             :src="currentUser.avatar"
                             class="rounded"
                         >
                     </div>
-                    <div class="flex flex-column">
-                        <div class="flex flex-row">
+                    <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-row">
                             <text-editor
                                 ref="textEditor"
                                 v-model="replyInterface"
@@ -150,9 +150,9 @@
                                 :height="150"
                             ></text-editor>
                         </div>
-                        <div class="flex flex-row align-h-right mv-1">
+                        <div class="tw-flex tw-flex-row tw-justify-center mv-1">
                             <a
-                                class="btn flat text-black collapse-150 short mr-1"
+                                class="btn flat tw-text-black collapse-150 short tw-mr-1"
                                 @click="replying = false"
                             >
                                 Cancel
@@ -164,7 +164,7 @@
                                 @click="postReply"
                             >
                                 <span
-                                    class="text-white short"
+                                    class="tw-text-white short"
                                     :class="themeBgClass"
                                 >
                                     Reply
@@ -174,7 +174,7 @@
 
                         <div
                             v-show="loading"
-                            class="loading-reply flex-center"
+                            class="loading-reply tw-flex-center"
                         >
                             <i
                                 class="fas fa-spinner fa-spin"
