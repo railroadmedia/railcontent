@@ -1,8 +1,8 @@
-@component('bladesora::members.components.coach-header-template', [
+@component('partials.bladesora.members.components.coach-header-template', [
     'brand'=> $brandName,
     'backgroundImage'=> $backgroundImage,
     'vimeoVideo' => $vimeoVideo,
-    ])    
+])    
     @slot('queuedScripts')
     <script type="application/javascript">
         function hideElement(elId) {
@@ -156,14 +156,14 @@
 
         @if(empty($hideUser))
             <div class="tw-flex-col tw-items-center tw-hidden sm:tw-flex">
-                <div class="header-avatar user-avatar rounded tw-bg-black tw-pb-0 tw-w-32
+                <div class="header-avatar user-avatar tw-rounded tw-bg-black tw-pb-0 tw-w-32
                             {{ in_array($currentUser['access_level'], ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
                             {{ $brand }}
                             {{ $currentUser['access_level'] }}"
                 >
-                    <a href="{{ $profileUrl }}" class="no-decoration">
+                    <a href="{{ $profileUrl }}" class="tw-no-underline">
                         <img
-                            class="rounded inset-border"
+                            class="tw-rounded inset-border"
                             src="{{ _imgix(
                                 $currentUser['avatar'],
                                 ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
@@ -174,7 +174,7 @@
                 </div>
 
                 @if($currentUser['access_level'] !== 'pack')
-                    <p class="body dense text-white font-bold text-center uppercase mt-1 text-white">
+                    <p class="body dense tw-text-white tw-font-bold tw-text-center tw-uppercase tw-mt-1 tw-text-white">
                         @if($currentUser['access_level'] === 'team')
                             {{ $brand }} Team
                         @elseif ($currentUser['access_level'] === 'coach')
@@ -185,7 +185,7 @@
                     </p>
 
                     @if($currentUser['access_level'] !== 'team')
-                        <p class="body dense text-white font-compressed text-center">
+                        <p class="body dense tw-text-white font-compressed tw-text-center">
                             {{ $currentUser['xp'] }} XP
                         </p>
                     @endif

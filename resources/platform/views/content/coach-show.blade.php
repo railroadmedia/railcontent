@@ -13,7 +13,6 @@
     <page-container>
         <div v-cloak>
 
-            @include('partials._content-sidebar')
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 'pages' => [
                     [
@@ -70,7 +69,7 @@
                                     <i class="fas fa-graduation-cap"></i>
                                 </span>
 
-                                <h2 class="heading capitalize tw-flex-grow">
+                                <h2 class="heading tw-capitalize tw-flex-grow">
                                     Featured Lessons
                                 </h2>
                             </div>
