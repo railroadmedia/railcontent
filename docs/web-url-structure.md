@@ -91,7 +91,7 @@ General Structure:
 Examples:
 - musora.com/{BRAND}/forums/general-drum-discussion/4/whats-the-one-tip-for-self-confidence/13097
 
-Previous:
+Old URLs:
 - drumeo.com/members/forums/threads/general-drum-discussion/4
 ('threads' needs to be removed from this layer of urls)
 
