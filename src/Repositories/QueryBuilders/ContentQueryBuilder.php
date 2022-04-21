@@ -722,11 +722,13 @@ class ContentQueryBuilder extends QueryBuilder
         foreach ($orderByExploded as $orderByColumn) {
             if (($orderByColumn != 'progress') && ($orderByColumn != 'content_likes') && ($orderByColumn != 'title')) {
                 array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
-            }elseif ($orderByColumn == 'content_likes') {
-                array_unshift($groupByColumns,  ConfigService::$tableContentLikes . '.content_id' );
-            }elseif ($orderByColumn == 'title') {
-                array_unshift($groupByColumns,   'field.value' );
-    }
+            } elseif ($orderByColumn == 'content_likes') {
+                array_unshift($groupByColumns, ConfigService::$tableContentLikes . '.content_id');
+            } elseif ($orderByColumn == 'title') {
+                array_unshift($groupByColumns, 'field.value');
+            } elseif ($orderByColumn == 'progress') {
+                array_unshift($groupByColumns, 'railcontent.railcontent_user_content_progress.updated_on');
+            }
         }
 
         return $this->groupBy(

@@ -75,7 +75,7 @@ class ContentServiceTest extends RailcontentTestCase
      */
     protected $userContentProgressFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -365,29 +365,12 @@ class ContentServiceTest extends RailcontentTestCase
                 ->get('do_not_delete')
         );
 
-        $this->assertEquals(
-            3,
-            count(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getRedis()
-                    ->keys('*')
-            )
-        );
-
         $this->classBeingTested->delete($contentResponse['id']);
 
         $this->assertEquals(
             'a_value',
             Cache::store(ConfigService::$cacheDriver)
                 ->get('do_not_delete')
-        );
-        $this->assertEquals(
-            2,
-            count(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getRedis()
-                    ->keys('*')
-            )
         );
     }
 
