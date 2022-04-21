@@ -42,7 +42,8 @@
             "Modules\\UserManagementSystem\\Factories\\": "app/Modules/UserManagementSystem/database/factories"
         },
         "files": [
-            "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php"
+            "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
+            "app/Modules/Brand/helpers/brand_helpers.php"
         ]
     },
     "autoload-dev": {

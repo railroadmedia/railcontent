@@ -59,7 +59,7 @@ This will load based on the routes defined in the relevant route files for that 
 inside the routes file of this repo. A route can be locked to a given domain like this:
 
 ```php
-Route::domain('{subdomain}.drumeo.com')->group(function () {
+Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/', function () {
         return 'Drumeo only route!';
     });
