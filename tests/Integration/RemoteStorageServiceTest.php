@@ -12,7 +12,7 @@ class RemoteStorageServiceTest extends RailcontentTestCase
     /** @var string */
     protected $s3DirectoryForThisInstance;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         
@@ -22,10 +22,8 @@ class RemoteStorageServiceTest extends RailcontentTestCase
         $this->remoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        parent::tearDown();
-
         $contentsList = $this->remoteStorageService->listContents($this->s3DirectoryForThisInstance);
         $notDeleted = [];
 
@@ -40,7 +38,7 @@ class RemoteStorageServiceTest extends RailcontentTestCase
          * the one created for the test class with deleteDir.
          *      Jonathan, Nov 2017
          */
-        $newRemoteStorageService = new RemoteStorageService();
+        $newRemoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
         $deleteDir = $newRemoteStorageService->deleteDir($this->s3DirectoryForThisInstance);
 
         if (!$deleteDir) {
@@ -56,6 +54,8 @@ class RemoteStorageServiceTest extends RailcontentTestCase
         if (!empty($notDeleted)) {
             $this->fail('contents not deleted (' . var_export($notDeleted, true) . ')');
         }
+
+        parent::tearDown();
     }
 
 
