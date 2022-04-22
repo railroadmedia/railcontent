@@ -1,5 +1,7 @@
 <?php
 
+use App\Modules\Brand\Enums\Brand;
+
 if (! function_exists('brand')) {
     /**
      * Get the relevant brand for the current request.
@@ -17,5 +19,17 @@ if (! function_exists('brand')) {
         }
 
         return 'drumeo';
+    }
+}
+
+if (! function_exists('all_brands')) {
+    /**
+     * Get the relevant brand for the current request.
+     *
+     * @return array
+     */
+    function all_brands()
+    {
+        return array_column(Brand::cases(), 'value');
     }
 }

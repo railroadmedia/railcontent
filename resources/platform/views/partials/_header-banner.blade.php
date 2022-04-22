@@ -1,10 +1,7 @@
 <!-- // todo - review & clean -->
 <div class="container fluid collapsed-h pv-5 relative bg-black">
     <div class="header-background-container absolute-fill bg-top"
-            style="background-image: url({{ _imgix(
-                    $backgroundImage,
-                    ["q" => 80, "blur" => 40, "w" => 640]
-                ) }});" data-ix-bg="{{ $backgroundImage }}"
+            style="background-image: url({{ cf_img($backgroundImage, ["quality" => 80, "blur" => 150, "width" => 640]) }});" data-ix-bg="{{ $backgroundImage }}"
     ></div>
     <div class="header-background-container absolute-fill bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
@@ -15,33 +12,34 @@
             @if(empty($hideUser))
                 <div class="header-avatar flex flex-column hide-xs-only">
                     <div class="user-avatar rounded bg-black
-                                {{ in_array($currentUser['access_level'], ['edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
+                                {{ in_array(user()->access_level, ['edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
                                 {{ $brand }}
-                                {{ $currentUser['access_level'] }}"
+                                {{ user()->access_level }}"
                     >
-                        <a href="{{ $profileUrl }}" class="no-decoration">
+                        <a href="{{ url()->route('platform.profile.dashboard', ['brand' => $brand, 'userId' => user()->id]) }}"
+                           class="no-decoration">
                             <img
                                 class="rounded inset-border"
-                                src="{{ _imgix(
-                                    $currentUser['avatar'],
-                                    ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
+                                src="{{ cf_img(
+                                    user()->profile_picture_url,
+                                    ["quality" => 75, "blur" => 20, "width" => 50, "height" => 50]
                                 ) }}"
-                                data-ix-src="{{ $currentUser['avatar'] }}"
+                                data-ix-src="{{ user()->profile_picture_url }}"
                             >
                         </a>
                     </div>
 
-                    @if($currentUser['access_level'] !== 'pack')
+                    @if(user()->access_level !== 'pack')
                         <p class="body dense text-white font-bold text-center uppercase mt-1 text-white">
-                            @if($currentUser['access_level'] === 'team')
+                            @if(user()->access_level === 'team')
                                 {{ $brand }} Team
                             @else
-                                {{ map_experience_rank($currentUser['xp']) }}
+                                {{ user()->xp_rank }}
                             @endif
                         </p>
 
-                        @if($currentUser['access_level'] !== 'team')
-                            <p class="body dense text-white font-compressed text-center">{{ $currentUser['xp'] }} XP</p>
+                        @if(user()->access_level !== 'team')
+                            <p class="body dense text-white font-compressed text-center">{{ user()->total_xp }} XP</p>
                         @endif
                     @endif
                 </div>

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Musora\HomePageController;
+use App\Http\Controllers\Musora\HomePageBaseController;
 
 Route::domain('{musoraDomain}')->group(function () {
-    Route::get('/', [HomePageController::class, 'show']);
+    Route::get('/', [HomePageBaseController::class, 'show']);
 });
 

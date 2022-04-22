@@ -4,9 +4,9 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME'),
     'connection_mask_prefix' => 'railcontent_',
-    'data_mode' => 'host',
+    'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
     'table_prefix' => 'railcontent_',
 
@@ -88,10 +88,10 @@ return [
     ],
 
     'awsS3_remote_storage' => [
-        'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
-        'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
-        'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
+        'accessKey' => env('S3_KEY'),
+        'accessSecret' => env('S3_SECRET'),
+        'region' => env('S3_REGION'),
+        'bucket' => env('S3_BUCKET'),
     ],
     'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
 
@@ -165,7 +165,7 @@ return [
 
     'video_sync' => [
         'vimeo' => [
-            'drumeo' => [
+            'musora' => [
                 'client_id' => env('VIMEO_CLIENT_ID_DRUMEO'),
                 'client_secret' => env('VIMEO_CLIENT_SECRET_DRUMEO'),
                 'access_token' => env('VIMEO_ACCESS_TOKEN_DRUMEO'),
@@ -173,7 +173,7 @@ return [
         ],
         'youtube' => [
             'key' => env('YOUTUBE_API_KEY'),
-            'drumeo' => [
+            'musora' => [
                 'user' => env('YOUTUBE_USERNAME'),
             ],
         ],

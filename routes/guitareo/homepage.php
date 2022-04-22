@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Guitareo\HomePageController;
+use App\Http\Controllers\Guitareo\HomePageBaseController;
 
 Route::domain('{guitareoDomain}')->group(function () {
-    Route::get('/', [HomePageController::class, 'show']);
+    Route::get('/', [HomePageBaseController::class, 'show']);
 });

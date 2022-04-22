@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Pianote\HomePageController;
+use App\Http\Controllers\Pianote\HomePageBaseController;
 
 Route::domain('{pianoteDomain}')->group(function () {
-    Route::get('/', [HomePageController::class, 'show']);
+    Route::get('/', [HomePageBaseController::class, 'show']);
 });

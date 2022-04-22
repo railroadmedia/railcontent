@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
  * Domain patterns for usage in routes. This allows routes to accept any subdomain OR no subdomain for a given domain.
@@ -10,6 +11,12 @@ Route::pattern('drumeoDomain', '(.*drumeo\.com)');
 Route::pattern('pianoteDomain', '(.*pianote\.com)');
 Route::pattern('guitareoDomain', '(.*guitareo\.com)');
 Route::pattern('singeoDomain', '(.*singeo\.com)');
+
+URL::defaults(['musoraDomain' => 'musora.com']);
+URL::defaults(['drumeoDomain' => 'drumeo.com']);
+URL::defaults(['pianoteDomain' => 'pianote.com']);
+URL::defaults(['guitareoDomain' => 'guitareo.com']);
+URL::defaults(['singeoDomain' => 'singeo.com']);
 
 /*
  * Public Routes
