@@ -22054,7 +22054,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["modalId", "title", "bgColor", "selfContained"],
+  props: ["modalId", "title", "selfContained"],
   emits: ["onClose"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose,
@@ -32182,18 +32182,21 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": ""
 };
+var _hoisted_2 = {
+  "class": "tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039] tw-cursor-pointer"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full tw-bg-white"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase",
   style: {
-    "font-family": "Bebas Neue"
-  },
-  "class": "tw-text-center tw-text-white"
+    "text-decoration": "inherit"
+  }
 }, " UPLOAD PHOTO ", -1
 /* HOISTED */
 );
@@ -32203,8 +32206,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0,
     modalId: "upload-modal",
     onOnClose: $setup.openUploadForm,
-    title: $setup.title[$setup.uploadStep],
-    bgColor: "#081825"
+    title: $setup.title[$setup.uploadStep]
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.uploadStep === 'dropzone' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ImageDropzone"], {
@@ -32229,9 +32231,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039]",
-    onClick: $setup.openUploadForm
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserIcon"]), _hoisted_2]), _hoisted_3]);
+    onClick: $setup.openUploadForm,
+    "class": "hover:tw-underline"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserIcon"]), _hoisted_3]), _hoisted_4])]);
 }
 
 /***/ }),
@@ -32895,13 +32897,10 @@ var _hoisted_1 = {
   "class": "tw-w-full tw-h-full"
 };
 var _hoisted_2 = {
-  "class": "tw-w-full tw-flex tw-text-white tw-py-[15px] tw-items-center tw-justify-between tw-px-[20px]"
+  "class": "tw-w-full tw-flex tw-flex-col md:tw-flex-row tw-text-white tw-py-[15px] tw-items-center tw-justify-between tw-px-[20px]"
 };
 var _hoisted_3 = {
-  "class": "tw-w-auto tw-flex tw-text-[13px]",
-  style: {
-    "font-family": "Bebas Neue"
-  }
+  "class": "tw-w-auto tw-flex tw-text-[13px] tw-font-bebas-neue"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ZOOM IN ");
@@ -32936,11 +32935,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px]",
     onClick: $setup.rotate
   }, " Rotate ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    style: {
-      "font-family": "Roboto Condensed"
-    },
     onClick: $setup.cropImage,
-    "class": "tw-border-white tw-border-2 tw-rounded-[25px] tw-text-[14px] tw-w-[164px] tw-h-[30px] tw-flex tw-items-center tw-justify-center"
+    "class": "tw-border-white tw-border-2 tw-rounded-[25px] tw-text-[14px] tw-w-[164px] tw-h-[30px] tw-flex tw-items-center tw-justify-center tw-font-bebas-neue"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CheckIcon"], {
     "class": "tw-w-[20px] tw-h-[20px] tw-inline"
   }), _hoisted_6])])]);
@@ -33222,7 +33218,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = ["id"];
 var _hoisted_2 = {
-  "class": "tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
+  "class": "tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-px-[16px] md:tw-px-[28px]"
 };
 var _hoisted_3 = {
   "class": "tw-flex tw-flex-row tw-justify-between tw-text-white tw-mb-[24px] tw-px-[40px]"
@@ -33237,7 +33233,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-w-[750px] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col", $props.bgColor && "tw-bg-[".concat($props.bgColor, "]")])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:tw-w-[750px] tw-w-full tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col tw-border-[#223F57] tw-border-[1px] tw-bg-[#081825]", $props.selfContained && "tw-bg-transparent tw-border-0"])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -34736,10 +34732,10 @@ var _hoisted_1 = {
   "class": "tw-flex tw-flex-col tw-w-[90vw] md:tw-w-full tw-relative md:tw-static tw-items-center tw-justify-center"
 };
 var _hoisted_2 = {
-  "class": "md:tw-mb-[5px] tw-w-[250px] md:tw-w-full tw-text-center tw-font-bold tw-text-white tw-text-[20px] tw-baseline-[24px] tw-mb-[36px]"
+  "class": "md:tw-mb-[5px] tw-w-[250px] md:tw-w-full tw-font-open-sans tw-text-center tw-font-extrabold tw-text-white tw-text-[20px] md:tw-text-[24px] lg:tw-text-[30px] tw-baseline-[24px] tw-mb-[36px]"
 };
 var _hoisted_3 = {
-  "class": "tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
+  "class": "tw-font-open-sans tw-font-normal tw-text-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$props.hideBackButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {

@@ -63,6 +63,8 @@ function rotate() {
       class="
         tw-w-full
         tw-flex
+        tw-flex-col
+        md:tw-flex-row
         tw-text-white
         tw-py-[15px]
         tw-items-center
@@ -71,8 +73,7 @@ function rotate() {
       "
     >
       <div
-        class="tw-w-auto tw-flex tw-text-[13px]"
-        style="font-family: Bebas Neue"
+        class="tw-w-auto tw-flex tw-text-[13px] tw-font-bebas-neue"
       >
         <button
           :class="`tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px] ${
@@ -102,7 +103,6 @@ function rotate() {
         </button>
       </div>
       <button
-        style="font-family: Roboto Condensed"
         @click="cropImage"
         class="
           tw-border-white
@@ -114,6 +114,7 @@ function rotate() {
           tw-flex
           tw-items-center
           tw-justify-center
+          tw-font-bebas-neue
         "
       >
         <CheckIcon class="tw-w-[20px] tw-h-[20px] tw-inline" /> FINISH CROPPING
