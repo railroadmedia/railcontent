@@ -50,6 +50,7 @@ mysql containers.
 All brand domains/websites such as drumeo.com, pianote.com, etc use this same repository and laravel install
 to run. To load these brands using the new musora-web-platform repo you must specify the port and URLs like this:  
 
+[https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)  
 [https://devplatform.drumeo.com:8443/](https://devplatform.drumeo.com:8443/)  
 [https://devplatform.pianote.com:8443/](https://devplatform.pianote.com:8443/)  
 [https://devplatform.guitareo.com:8443/](https://devplatform.guitareo.com:8443/)  

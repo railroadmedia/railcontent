@@ -32,6 +32,11 @@ class ContentPagesController extends BaseController
         $this->contentFollowService = $contentFollowsService;
     }
 
+    public function homeRedirect()
+    {
+        return redirect()->route('platform.home', ['brand' => brand()]);
+    }
+
     public function home(Request $request, $brand) {
         return view('home.index', [
             'brand' => $brand,
