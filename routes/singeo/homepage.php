@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Singeo\HomePageBaseController;
+use App\Http\Controllers\Singeo\HomePageController;
 
 Route::domain('{singeoDomain}')->group(function () {
-    Route::get('/', [HomePageBaseController::class, 'show']);
+    Route::get('/', [HomePageController::class, 'show']);
 });

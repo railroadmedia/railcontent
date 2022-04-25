@@ -30,4 +30,4 @@ require_once('guitareo/routes.php');
 /*
  * Platform Routes
  */
-require_once('platform/primary_pages_routes.php');
+require_once('platform/platform_pages_routes.php');

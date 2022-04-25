@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Drumeo\HomePageBaseController;
+use App\Http\Controllers\Drumeo\HomePageController;
 
 Route::domain('{drumeoDomain}')->group(function () {
-    Route::get('/', [HomePageBaseController::class, 'show']);
+    Route::get('/', [HomePageController::class, 'show']);
 });
