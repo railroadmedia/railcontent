@@ -45,4 +45,38 @@ class BrandService
             cookie()->queue($cacheKey, $brandString);
         }
     }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public static function getLastUsedBrand(User $user)
+    {
+        if (!empty(self::$currentBrand)) {
+            return self::$currentBrand;
+        }
+
+        $cacheKey = 'user_' . $user->id . '_last_used_brand';
+        $cookieValue = request()->cookie($cacheKey);
+        $cacheValue = Cache::get($cacheKey);
+        $databaseValue = $user->last_used_brand;
+        $default = 'drumeo'; // todo: this should go to onboarding
+
+        // check in cookie first
+        if (!empty($cookieValue) && in_array($cookieValue, config('brands'))) {
+            return $cookieValue;
+        }
+
+        // then check cache
+        if (!empty($cacheValue) && in_array($cacheValue, config('brands'))) {
+            return $cacheValue;
+        }
+
+        // then check database
+        if (!empty($databaseValue) && in_array($databaseValue, config('brands'))) {
+            return $databaseValue;
+        }
+
+        return $default;
+    }
 }

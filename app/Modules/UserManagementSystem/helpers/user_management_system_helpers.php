@@ -18,10 +18,10 @@ if (! function_exists('brand')) {
     /**
      * Get the currently logged-in user.
      *
-     * @return \Modules\UserManagementSystem\Models\User|null
+     * @return string
      */
     function brand()
     {
-        return BrandService::$currentBrand;
+        return BrandService::getLastUsedBrand(user());
     }
 }

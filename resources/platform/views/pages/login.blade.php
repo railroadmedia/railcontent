@@ -37,14 +37,14 @@
         <p class="tw-pb-3 tw-text-center tw-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>
 
         @include('partials.bladesora.members.login-form', [
-            "brand" => "{{ $brand }}",
-            "loginUrl" => url()->route('usora.authenticate.with-credentials', (!empty($redirect) ? ['redirect' => $redirect] : [])),
-            "resetUrl" => url()->route('usora.password.send-reset-email'),
+            "brand" => "drumeo",
+            "loginUrl" => url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])),
+            "resetUrl" => '// todo',
             "joinUrl" => url('/#orderNow'),
             "joinPitch" => "tw-text-black",
             "labelClasses" => "text-grey-3 tiny",
             "checked" => true,
         ])
-        
+
     </div>
 @endsection

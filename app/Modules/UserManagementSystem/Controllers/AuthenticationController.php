@@ -61,7 +61,7 @@ class AuthenticationController extends Controller
 
             event(new UserEvent($user->id, 'authenticated'));
 
-            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/members');
+            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
         }
 
         return redirect()
