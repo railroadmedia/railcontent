@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
@@ -38,7 +39,7 @@ class PermissionControllerTest extends RailcontentTestCase
      */
     protected $contentPermissionService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -71,8 +72,8 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals(
-            array_add($permission, 'brand', ConfigService::$brand),
-            $response->decodeResponseJson('data')[0]
+            Arr::add($permission, 'brand', ConfigService::$brand),
+            $response->decodeResponseJson()->json('data')[0]
         );
     }
 
@@ -86,7 +87,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 "source" => "name",
                 "detail" => "The name field is required.",
             ]
-        ], $response->decodeResponseJson('meta')['errors']);
+        ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_new_permission_returned_after_store_service()
@@ -100,7 +101,7 @@ class PermissionControllerTest extends RailcontentTestCase
             'name' => $name,
         ];
 
-        $this->assertEquals(array_add($expectedResult, 'brand', ConfigService::$brand), $permission);
+        $this->assertEquals(Arr::add($expectedResult, 'brand', ConfigService::$brand), $permission);
     }
 
     public function test_update_response()
@@ -148,7 +149,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             'Update failed, permission not found with id: 1',
-            $response->decodeResponseJson('meta')['errors']['detail']
+            $response->decodeResponseJson()->json('meta')['errors']['detail']
         );
     }
 
@@ -165,7 +166,7 @@ class PermissionControllerTest extends RailcontentTestCase
             "detail" => "The name field is required.",
         ];
 
-        $this->assertEquals([$expectedErrors], $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals([$expectedErrors], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_updated_permission_returned_after_update_service()
@@ -199,7 +200,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals(404, $response->status());
         $this->assertEquals(
             'Delete failed, permission not found with id: 1',
-            $response->decodeResponseJson('meta')['errors']['detail']
+            $response->decodeResponseJson()->json('meta')['errors']['detail']
         );
     }
 
@@ -297,7 +298,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson('meta');
+        $decodedResponse = $response->decodeResponseJson()->json('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);
@@ -331,7 +332,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson('meta');
+        $decodedResponse = $response->decodeResponseJson()->json('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);
@@ -358,7 +359,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson('meta');
+        $decodedResponse = $response->decodeResponseJson()->json('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);

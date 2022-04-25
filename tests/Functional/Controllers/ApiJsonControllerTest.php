@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
@@ -42,7 +43,7 @@ class ApiJsonControllerTest extends RailcontentTestCase
      */
     protected $commentFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -65,7 +66,7 @@ class ApiJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             config('railcontent.onboardingContentIds'),
-            array_pluck($response->decodeResponseJson(), 'id')
+            Arr::pluck($response->decodeResponseJson()->json(), 'id')
         );
     }
 
@@ -75,7 +76,7 @@ class ApiJsonControllerTest extends RailcontentTestCase
             'GET',
             'api/railcontent/shows'
         );
-        $results = $response->decodeResponseJson();
+        $results = $response->decodeResponseJson()->json();
 
         $this->assertEquals(200, $response->status());
 
@@ -105,6 +106,6 @@ class ApiJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['comment']);
+        $this->assertEquals($commentText, $response->decodeResponseJson()->json('data')[0]['comment']);
     }
 }

@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Cache\RedisStore;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Predis\Transaction\AbortedMultiExecException;
@@ -55,9 +56,9 @@ class CacheHelper
             ' ' .
             ConfigService::$brand .
             ' ' .
-            implode(' ', array_values(array_wrap(ConfigService::$availableBrands))) .
+            implode(' ', array_values(Arr::wrap(ConfigService::$availableBrands))) .
             ' ' .
-            implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)));
+            implode(' ', array_values(Arr::wrap(ContentRepository::$availableContentStatues)));
 
         return $settings;
     }
@@ -72,7 +73,7 @@ class CacheHelper
         $args = func_get_args();
         $key = '';
         foreach ($args as $arg) {
-            $key .= implode(' ', array_values(array_wrap($arg)));
+            $key .= implode(' ', array_values(Arr::wrap($arg)));
         }
         if (auth()->check()) {
             $key .= auth()->id();
@@ -120,12 +121,17 @@ class CacheHelper
     {
         self::setPrefix();
 
+        if (!Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            return true;
+        }
+
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
         do {
-            list(
+            [
                 $cursor, $keys
-                ) = Redis::sscan(
+                ] = Redis::sscan(
                 Cache::store(ConfigService::$cacheDriver)
                     ->getPrefix() . $key,
                 $cursor,
@@ -148,9 +154,14 @@ class CacheHelper
      */
     public static function deleteAllCachedSearchResults($key)
     {
+        if (!Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            return true;
+        }
+
         $cursor = 0;
         do {
-            list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);
+            [$cursor, $keys] = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);
             self::deleteCacheKeys($keys);
         } while ($cursor);
 
@@ -287,7 +298,7 @@ class CacheHelper
             $userKey = self::getUserSpecificHashedKey();
             if (!is_null($contentIds)) {
                 if (empty($contentIds)) {
-                    $contentIds = array_pluck($data, 'id');
+                    $contentIds = Arr::pluck($data, 'id');
                 }
                 self::addLists($userKey . ' ' . $hash, $contentIds);
             }

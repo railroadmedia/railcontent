@@ -454,11 +454,13 @@ Define the following environmental variables with appropriate values:
 * *YOUTUBE_USERNAME*
 
 Add the service provider (`\Railroad\Railcontent\Providers\RailcontentServiceProvider`) to the `'providers` array in you application's */config/app.php*:
+NOTE: you also need to add the 'Railroad\Response\Providers\ResponseServiceProvider::class,' to the list if you don't already have it.
 
 ```php
 'providers' => [
     # ...
-    \Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
+    Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
+    Railroad\Response\Providers\ResponseServiceProvider::class,
 ]
 ```
 

@@ -9,10 +9,10 @@ return [
     // ttl value in minutes
     'cache_duration' => 60 * 24 * 30,
     'cache_prefix' => 'railcontent',
-    'cache_driver' => 'redis',
+    'cache_driver' => 'array',
 
     // database
-    'database_connection_name' => 'mysql',
+    'database_connection_name' => 'mysql8',
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => 'host',
     'table_prefix' => 'railcontent_',

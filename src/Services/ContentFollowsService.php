@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentFollow;
@@ -97,7 +98,7 @@ class ContentFollowsService
         $followedContent =
             $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType, $page, $limit);
 
-        $contentIds = array_pluck($followedContent, 'content_id');
+        $contentIds = Arr::pluck($followedContent, 'content_id');
 
         $contents = $this->contentService->getByIds($contentIds);
 

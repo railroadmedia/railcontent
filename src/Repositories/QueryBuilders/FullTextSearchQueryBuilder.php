@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -52,7 +53,7 @@ class FullTextSearchQueryBuilder extends QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->whereIn(ConfigService::$tableSearchIndexes . '.brand', array_values(array_wrap(ConfigService::$availableBrands)));
+        $this->whereIn(ConfigService::$tableSearchIndexes . '.brand', array_values(Arr::wrap(ConfigService::$availableBrands)));
 
         return $this;
     }

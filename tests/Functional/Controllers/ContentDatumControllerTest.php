@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
@@ -13,6 +14,8 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     protected $classBeingTested;
     /**
      * @var ContentFactory
@@ -24,7 +27,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
      */
     protected $contentDatumFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -63,7 +66,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'value' => $value,
                         'position' => 1,
                 ],
-            ], $response->decodeResponseJson()
+            ], $response->decodeResponseJson()->json()
         );
     }
 
@@ -81,7 +84,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 "source" => "content_id",
                 "detail" => "The content id field is required.",
             ]
-        ], $response->decodeResponseJson('meta')['errors']);
+        ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_add_content_datum_key_not_pass_the_validation()
@@ -96,13 +99,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertEquals([
             [
                 "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
+                "detail" => "The key must not be greater than 255 characters.",
             ],
             [
                 "source" => "content_id",
                 "detail" => "The selected content id is invalid.",
             ]
-        ], $response->decodeResponseJson('meta')['errors']);
+        ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_update_content_datum_controller_method_response()
@@ -144,7 +147,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'value' => $new_value,
                         'position' => 1,
                 ],
-            ], $response->decodeResponseJson()
+            ], $response->decodeResponseJson()->json()
         );
     }
 
@@ -175,9 +178,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertEquals([
             [
                 "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
+                "detail" => "The key must not be greater than 255 characters.",
             ]
-        ], $response->decodeResponseJson('meta')['errors']);
+        ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_delete_content_datum_controller()

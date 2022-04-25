@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Aws\S3\S3Client;
-use League\Flysystem\AwsS3v3\AwsS3Adapter;
+use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
 use League\Flysystem\Filesystem;
 
 class RemoteStorageService
@@ -17,7 +17,7 @@ class RemoteStorageService
         'public' => 'public'
     ];
 
-    public function __construct($optionalPathPrefix = null)
+    public function __construct($optionalPathPrefix = '')
     {
         $client = new S3Client([
             'credentials' => [
@@ -28,7 +28,7 @@ class RemoteStorageService
             'version' => 'latest',
         ]);
 
-        $adapter = new AwsS3Adapter(
+        $adapter = new AwsS3V3Adapter(
             $client, config('railcontent.awsS3_remote_storage.bucket'), $optionalPathPrefix
         );
         $this->filesystem = new Filesystem($adapter);
@@ -46,11 +46,13 @@ class RemoteStorageService
      */
     public function put($filenameRelative, $filenameAbsolute)
     {
-        return $this->filesystem->put(
+        $this->filesystem->write(
             $filenameRelative,
             file_get_contents($filenameAbsolute),
             self::$visibilityPublic
         );
+
+        return true;
     }
 
     /**
@@ -77,7 +79,9 @@ class RemoteStorageService
      */
     public function delete($target)
     {
-        return $this->filesystem->delete($target);
+        $this->filesystem->delete($target);
+
+        return true;
     }
 
     /**
@@ -87,7 +91,9 @@ class RemoteStorageService
      */
     public function rename($target, $newName)
     {
-        return $this->filesystem->rename($target, $newName);
+        $this->filesystem->move($target, $newName);
+
+        return true;
     }
 
     /**
@@ -97,7 +103,9 @@ class RemoteStorageService
      */
     public function copy($original, $duplicate)
     {
-        return $this->filesystem->copy($original, $duplicate);
+        $this->filesystem->copy($original, $duplicate);
+
+        return true;
     }
 
     /**
@@ -106,7 +114,7 @@ class RemoteStorageService
      */
     public function getMimetype($target)
     {
-        return $this->filesystem->getMimetype($target);
+        return $this->filesystem->mimeType($target);
     }
 
     /**
@@ -115,7 +123,7 @@ class RemoteStorageService
      */
     public function getTimestamp($target)
     {
-        return $this->filesystem->getTimestamp($target);
+        return $this->filesystem->lastModified($target);
     }
 
     /**
@@ -124,7 +132,7 @@ class RemoteStorageService
      */
     public function getSize($target)
     {
-        return $this->filesystem->getSize($target);
+        return $this->filesystem->fileSize($target);
     }
 
     /**
@@ -133,7 +141,9 @@ class RemoteStorageService
      */
     public function createDir($target)
     {
-        return $this->filesystem->createDir($target);
+        $this->filesystem->createDirectory($target);
+
+        return true;
     }
 
     /**
@@ -142,7 +152,9 @@ class RemoteStorageService
      */
     public function deleteDir($target)
     {
-        return $this->filesystem->deleteDir($target);
+        $this->filesystem->deleteDirectory($target);
+
+        return true;
     }
 
     /**
@@ -152,9 +164,9 @@ class RemoteStorageService
     public function listContents($targetDir = null)
     {
         if(!empty($targetDir)){
-            return $this->filesystem->listContents($targetDir, true);
-        }else{
-            return $this->filesystem->listContents();
+            return $this->filesystem->listContents($targetDir, true)->toArray();
         }
+
+        return [];
     }
 }

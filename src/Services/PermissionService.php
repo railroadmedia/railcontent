@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
@@ -149,9 +150,9 @@ class PermissionService
         if (is_null($permission)) {
             return $permission;
         }
-        $associatedContentIds = array_filter(array_pluck($this->contentPermissionRepository->getContentAssociationBasedOnPermissionId($id), 'content_id'));
+        $associatedContentIds = array_filter(Arr::pluck($this->contentPermissionRepository->getContentAssociationBasedOnPermissionId($id), 'content_id'));
         CacheHelper::deleteCacheKeys($associatedContentIds);
-        $associatedContentTypes = array_filter(array_pluck($this->contentPermissionRepository->getContentAssociationBasedOnPermissionId($id), 'content_type'));
+        $associatedContentTypes = array_filter(Arr::pluck($this->contentPermissionRepository->getContentAssociationBasedOnPermissionId($id), 'content_type'));
         foreach ($associatedContentTypes as $contentType) {
             $contentIds = $this->contentRepository->getByType($contentType);
             CacheHelper::deleteCacheKeys($contentIds);

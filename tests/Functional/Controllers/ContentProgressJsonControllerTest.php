@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -12,6 +13,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentProgressJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentRepository
      */
@@ -26,7 +29,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
     protected $userId;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -47,7 +50,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $response->status());
-        $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertTrue($response->decodeResponseJson()->json('data')[0][0]);
     }
 
     public function test_start_content_invalid_content_id()
@@ -60,7 +63,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('meta');
+        $responseContent = $response->decodeResponseJson()->json('meta');
         $responseErrors = $responseContent['errors'];
 
         $expectedErrors = [
@@ -92,7 +95,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(201, $response->status());
-        $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertTrue($response->decodeResponseJson()->json('data')[0][0]);
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
             [
@@ -116,7 +119,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('meta');
+        $responseContent = $response->decodeResponseJson()->json('meta');
         $responseErrors = $responseContent['errors'];
 
         $expectedErrors = [
@@ -153,7 +156,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(201, $response->status());
-        $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertTrue($response->decodeResponseJson()->json('data')[0][0]);
     }
 
     public function test_save_user_progress_on_content_inexistent()
@@ -170,7 +173,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(422, $response->status());
 
-        $responseContent = $response->decodeResponseJson('meta');
+        $responseContent = $response->decodeResponseJson()->json('meta');
         $responseErrors = $responseContent['errors'];
 
         $expectedErrors = [
@@ -231,7 +234,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
 
         );
-        $results = $response->decodeResponseJson('data');
+        $results = $response->decodeResponseJson()->json('data');
 
         $this->assertTrue(count($results) <= 10);
 

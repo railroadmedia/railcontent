@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
@@ -13,6 +14,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentFieldControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentFieldService
      */
@@ -28,7 +31,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
      */
     protected $contentFieldFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -66,7 +69,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         ];
 
         $this->assertEquals(201, $response->status());
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('field'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('field'));
 
     }
 
@@ -82,7 +85,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals(2, count($response->decodeResponseJson('meta')['errors']));
+        $this->assertEquals(2, count($response->decodeResponseJson()->json('meta')['errors']));
     }
 
     public function test_add_content_field_incorrect_fields()
@@ -105,16 +108,16 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertArrayHasKey('errors', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('errors', $response->decodeResponseJson()->json('meta'));
 
         $expectedErrors = [
             [
                 "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
+                "detail" => "The key must not be greater than 255 characters.",
             ],
             [
                 "source" => "type",
-                "detail" => "The type may not be greater than 255 characters.",
+                "detail" => "The type must not be greater than 255 characters.",
             ],
             [
                 "source" => "position",
@@ -125,7 +128,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 "detail" => "The selected content id is invalid.",
             ],
         ];
-        $this->assertEquals($expectedErrors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($expectedErrors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_update_content_field_controller_method_response()
@@ -159,7 +162,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             "position" => $field['position'],
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson()['field']);
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json()['field']);
     }
 
     public function test_update_content_field_not_pass_validation()
@@ -175,7 +178,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 'content_id' => $this->faker->numberBetween(),
             ]
         );
-        $decodedResponse = $response->decodeResponseJson('meta');
+        $decodedResponse = $response->decodeResponseJson()->json('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);
@@ -208,7 +211,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             'Delete failed, field not found with id: ' . $fieldId,
-            $response->decodeResponseJson('meta')['errors']['detail']
+            $response->decodeResponseJson()->json('meta')['errors']['detail']
         );
 
         $this->assertEquals(404, $response->status());
@@ -349,7 +352,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         ];
 
         $this->assertEquals(201, $response->status());
-        $this->assertEquals($expectedResults, $response->decodeResponseJson()['field']);
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json()['field']);
 
     }
 }

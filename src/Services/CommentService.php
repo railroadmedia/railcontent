@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -286,7 +287,7 @@ class CommentService
             }
 
             if ($results['total_results'] > 0) {
-                $contentIds = array_pluck(array_values($results['results']), 'content_id');
+                $contentIds = Arr::pluck(array_values($results['results']), 'content_id');
             } else {
                 $contentIds = null;
             }

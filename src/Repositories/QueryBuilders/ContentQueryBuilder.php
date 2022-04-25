@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories\QueryBuilders;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -232,7 +233,7 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $this->whereIn(
             ConfigService::$tableContent . '.brand',
-            array_values(array_wrap(ConfigService::$availableBrands))
+            array_values(Arr::wrap(ConfigService::$availableBrands))
         );
 
         return $this;
@@ -710,11 +711,13 @@ class ContentQueryBuilder extends QueryBuilder
         foreach ($orderByExploded as $orderByColumn) {
             if (($orderByColumn != 'progress') && ($orderByColumn != 'content_likes') && ($orderByColumn != 'title')) {
                 array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
-            }elseif ($orderByColumn == 'content_likes') {
-                array_unshift($groupByColumns,  ConfigService::$tableContentLikes . '.content_id' );
-            }elseif ($orderByColumn == 'title') {
-                array_unshift($groupByColumns,   'field.value' );
-    }
+            } elseif ($orderByColumn == 'content_likes') {
+                array_unshift($groupByColumns, ConfigService::$tableContentLikes . '.content_id');
+            } elseif ($orderByColumn == 'title') {
+                array_unshift($groupByColumns, 'field.value');
+            } elseif ($orderByColumn == 'progress') {
+                array_unshift($groupByColumns, 'railcontent.railcontent_user_content_progress.updated_on');
+            }
         }
 
         return $this->groupBy(

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -379,7 +380,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -415,7 +416,7 @@ class ContentService
                 $orderByDirection
             );
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -447,7 +448,7 @@ class ContentService
                 $orderByDirection
             );
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -490,7 +491,7 @@ class ContentService
                 $orderByDirection
             );
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -529,7 +530,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $parentIds));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), $parentIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -550,7 +551,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdWhereType($childId, $type);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -571,7 +572,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), $childIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -592,7 +593,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdsWhereTypeForUrl($childIds, $type);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), $childIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -613,7 +614,7 @@ class ContentService
         if (is_null($results)) {
             $resultsDB = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -979,7 +980,7 @@ class ContentService
                                                                     ]);
 
                         $results =
-                            CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+                            CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
 
                         return new ContentFilterResultsEntity($results);
                     }
@@ -991,13 +992,13 @@ class ContentService
                         $requiredUserStates[0]
                     );
 
-                    $requiredContentIdsByState = array_pluck($requiredContentsByState, 'content_id');
+                    $requiredContentIdsByState = Arr::pluck($requiredContentsByState, 'content_id');
                 }
 
                 $permissionIds = [];
                 if (auth()->id()) {
                     $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
-                    $permissionIds = array_pluck($userPermissions, 'permission_id');
+                    $permissionIds = Arr::pluck($userPermissions, 'permission_id');
                 }
 
                 //                switch (config('railcontent.brand')) {
@@ -1096,7 +1097,7 @@ class ContentService
                                                                 'filter_options' => $filters,
                                                             ]);
 
-                $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+                $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
                 $resultsDB = new ContentFilterResultsEntity([
@@ -1105,7 +1106,7 @@ class ContentService
                                                                     $filter->countFilter() : 0,
                                                                 'filter_options' => $pullFilterFields ? [] : [],
                                                             ]);
-                $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+                $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             }
         }
@@ -1250,7 +1251,7 @@ class ContentService
         //delete the content comments, replies and assignation
         $comments = $this->commentRepository->getByContentId($contentId);
 
-        $this->commentAssignationRepository->deleteCommentAssignations(array_pluck($comments, 'id'));
+        $this->commentAssignationRepository->deleteCommentAssignations(Arr::pluck($comments, 'id'));
 
         $this->commentRepository->deleteByContentId($contentId);
 
@@ -1334,7 +1335,7 @@ class ContentService
         //delete parent content cache
         CacheHelper::deleteCache('content_'.$id);
 
-        return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
+        return $this->contentRepository->softDelete(Arr::pluck($children, 'child_id'));
     }
 
     /**
@@ -1645,7 +1646,7 @@ class ContentService
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildId($childId);
             $results =
-                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(Arr::pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -1767,16 +1768,16 @@ class ContentService
             'difficulty' => $content['difficulty'] ?? null,
             'status' => $content['status'],
             'brand' => $content['brand'],
-            'style' => array_pluck($styles, 'style'),
-            'instructor' => array_pluck($instructors, 'instructor_id'),
+            'style' => Arr::pluck($styles, 'style'),
+            'instructor' => Arr::pluck($instructors, 'instructor_id'),
             'internal_video_id' => $content['video']??'',
             'vimeo_video_id' => $vimeoVideoId ?? '',
             'youtube_video_id' => $youtubeVideoId ?? '',
             'content_type' => $content['type'],
             'published_on' => $content['published_on'],
             'created_on' => $content['created_on'],
-            'topic' => array_pluck($topics, 'topic'),
-            'bpm' => array_pluck($bpm, 'bpm'),
+            'topic' => Arr::pluck($topics, 'topic'),
+            'bpm' => Arr::pluck($bpm, 'bpm'),
             'staff_pick_rating' => $content['staff_pick_rating'] ?? null,
             'is_coach' => $content['is_coach'] ?? 0,
             'is_active' => $content['is_active'] ?? 0,

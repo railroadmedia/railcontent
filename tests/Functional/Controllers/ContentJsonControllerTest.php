@@ -2,8 +2,8 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Config;
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -17,10 +17,11 @@ use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Response;
 
 class ContentJsonControllerTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentRepository
      */
@@ -71,7 +72,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
      */
     protected $contentHierarchyService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -91,7 +92,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $response = $this->call('GET', 'railcontent/content');
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_store_response_status()
@@ -127,7 +128,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The type field is required.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_store_with_negative_position()
@@ -154,7 +155,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
 
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function _test_store_with_custom_validation_and_slug_huge()
@@ -242,7 +243,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
         ];
 
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -254,7 +255,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(
             $content->getArrayCopy(),
-            $response->decodeResponseJson('data')[0]
+            $response->decodeResponseJson()->json('data')[0]
         );
     }
 
@@ -317,7 +318,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The position must be at least 0.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_update_not_pass_the_validation()
@@ -338,7 +339,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected status is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_after_update_content_is_returned_in_json_format()
@@ -379,7 +380,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString(),
                 'sort' => 0,
             ],
-            $response->decodeResponseJson('data')[0]
+            $response->decodeResponseJson()->json('data')[0]
         );
     }
 
@@ -437,10 +438,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('DELETE', 'railcontent/content/' . $randomId);
 
         $this->assertEquals(404, $response->status());
-        $this->assertEquals('Entity not found.', $response->decodeResponseJson('meta')['errors']['title']);
+        $this->assertEquals('Entity not found.', $response->decodeResponseJson()->json('meta')['errors']['title']);
         $this->assertEquals(
             'Delete failed, content not found with id: ' . $randomId,
-            $response->decodeResponseJson('meta')['errors']['detail']
+            $response->decodeResponseJson()->json('meta')['errors']['detail']
         );
     }
 
@@ -520,13 +521,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'sort' => 'id',
             'included_types' => $types,
         ]);
-        $response = $this->call('GET', 'railcontent/content', [
-            'page' => $page,
-            'limit' => $limit,
-            'sort' => 'id',
-            'included_types' => $types,
-        ]);
-        $responseContent = $response->decodeResponseJson('data');
+        $responseContent = $response->decodeResponseJson()->json('data');
         $this->assertArraySubset($expectedContent['results'], $responseContent);
     }
 
@@ -581,7 +576,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'included_types' => $types,
             'filter' => ['required_fields' => $filter],
         ]);
-        $responseContent = $response->decodeResponseJson('data');
+        $responseContent = $response->decodeResponseJson()->json('data');
 
         $this->assertArraySubset($expectedContent['results'], $responseContent);
     }
@@ -679,7 +674,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
             'parent_slug' => '',
         ]);
-        $responseContent = $response->decodeResponseJson('data');
+        $responseContent = $response->decodeResponseJson()->json('data');
 
         $this->assertArraySubset($expectedContent['results'], $responseContent);
     }
@@ -691,7 +686,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/parent/' . rand()
         );
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_getByParentId()
@@ -733,20 +728,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/parent/' . $parent['id']
         );
 
-        $this->assertEquals(2, count($response->decodeResponseJson('data')));
+        $this->assertEquals(2, count($response->decodeResponseJson()->json('data')));
 
         $expectedResults = [
             (array)$firstChild,
             (array)$secondChild,
         ];
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_get_by_ids_when_ids_not_exists()
     {
         $response = $this->call('GET', 'railcontent/content/get-by-ids', [rand(), rand()]);
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_get_by_ids()
@@ -770,7 +765,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             (array)$content1,
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_get_id_cached()
@@ -885,7 +880,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->call('GET', 'railcontent/content/get-by-ids', ['ids' => $content2['id'] . ',' . $content1['id']]);
         $expectedResults = [(array)$content2];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_pull_content_user_permission()
@@ -931,7 +926,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->call('GET', 'railcontent/content/get-by-ids', ['ids' => $content2['id'] . ',' . $content1['id']]);
         $expectedResults = [(array)$content2];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_pull_content_user_permission_before_start_date()
@@ -977,7 +972,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->call('GET', 'railcontent/content/get-by-ids', ['ids' => $content2['id'] . ',' . $content1['id']]);
         $expectedResults = [(array)$content2];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_pull_content_user_permission_after_start_date()
@@ -1023,7 +1018,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->call('GET', 'railcontent/content/get-by-ids', ['ids' => $content2['id'] . ',' . $content1['id']]);
         $expectedResults = [(array)$content2, (array)$content1];
 
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson()->json('data'));
     }
 
     public function test_all_content()
@@ -1051,7 +1046,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
 
         );
-        $results = $response->decodeResponseJson('data');
+        $results = $response->decodeResponseJson()->json('data');
 
         $this->assertTrue(count($results) <= 10);
 
@@ -1098,7 +1093,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'included_types' => $types,
         ]);
 
-        $responseContent = $response->decodeResponseJson('data');
+        $responseContent = $response->decodeResponseJson()->json('data');
 
         $previousValue = 0;
 
@@ -1173,7 +1168,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals($assignmentsTotalXp, 5 * config('xp_ranks.assignment_content_completed'));
-        $this->assertEquals($response->decodeResponseJson('data')[0]['total_xp'], $courseTotalXP + $coursePartTotalXp);
+        $this->assertEquals($courseTotalXP + $coursePartTotalXp, $response->decodeResponseJson()->json('data')[0]['total_xp']);
     }
 
     public function test_total_xp_calculation_when_difficulty_change()
@@ -1189,7 +1184,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'railcontent/content/' . $content['id']);
 
         $this->assertEquals(
-            $response->decodeResponseJson('data')[0]['total_xp'],
+            $response->decodeResponseJson()->json('data')[0]['total_xp'],
             config('xp_ranks.difficulty_xp_map.' . $difficulty)
         );
     }
@@ -1228,8 +1223,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/follow/', ['content_id' => $content['id']]);
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals($response->decodeResponseJson('data')[0]['content_id'], $content['id']);
-        $this->assertEquals($response->decodeResponseJson('data')[0]['user_id'], $loggedInUserId);
+        $this->assertEquals($response->decodeResponseJson()->json('data')[0]['content_id'], $content['id']);
+        $this->assertEquals($response->decodeResponseJson()->json('data')[0]['user_id'], $loggedInUserId);
     }
 
     public function test_follow_content_validation()
@@ -1245,7 +1240,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected content id is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_unfollow_content()
@@ -1285,7 +1280,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected content id is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
     public function test_get_followed_content()
@@ -1329,10 +1324,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'api/railcontent/followed-content/');
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(3, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertEquals(3, $response->decodeResponseJson()->json('meta')['totalResults']);
         $this->assertEquals(
             [$content1->getArrayCopy(), $content2->getArrayCopy(), $content3->getArrayCopy()],
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
     }
 
@@ -1374,8 +1369,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'api/railcontent/followed-lessons');
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(1, $response->decodeResponseJson('meta')['totalResults']);
-        $this->assertArraySubset([$content1->getArrayCopy()], $response->decodeResponseJson('data'));
+        $this->assertEquals(1, $response->decodeResponseJson()->json('meta')['totalResults']);
+        $this->assertArraySubset([$content1->getArrayCopy()], $response->decodeResponseJson()->json('data'));
     }
 
     public function test_popularity_command()
@@ -1504,7 +1499,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ['id' => $content1->getArrayCopy()['id']],
                 ['id' => $content3->getArrayCopy()['id']],
             ],
-            $response->decodeResponseJson('data')
+            $response->decodeResponseJson()->json('data')
         );
 
     }
