@@ -23,7 +23,7 @@ Route::domain('{musoraDomain}')
             ->name('home');
 
         /*
-         * Content Pages
+         * Primary Content Pages
          */
         Route::get('/{brand}/packs', [ContentPagesController::class, 'packs'])
             ->whereIn('brand', all_brands())
@@ -94,6 +94,33 @@ Route::domain('{musoraDomain}')
             ->name('search');
 
         /*
+         * Sub-Content Hierarchy Pages
+         */
+        Route::get(
+            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',
+            [ContentPagesController::class, 'firstLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'songs', 'courses', 'quick-tips'])
+            ->name('content.first-level');
+
+        Route::get(
+            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
+            [ContentPagesController::class, 'secondLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->whereIn('primaryPage', ['packs', 'method'])
+            ->name('content.second-level');
+
+        Route::get(
+            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}',
+            [ContentPagesController::class, 'thirdLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->whereIn('primaryPage', ['packs', 'method'])
+            ->name('content.third-level');
+
+        /*
          * Live & Schedule
          */
         Route::get('/{brand}/live', [LivePageController::class, 'live'])
@@ -107,12 +134,28 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('lists.my-list');
 
+        Route::get('/{brand}/lists/in-progress', [UserListPagesController::class, 'inProgress'])
+            ->whereIn('brand', all_brands())
+            ->name('lists.in-progress');
+
+        Route::get('/{brand}/lists/completed', [UserListPagesController::class, 'completed'])
+            ->whereIn('brand', all_brands())
+            ->name('lists.completed');
+
         /*
          * Forums Pages
          */
         Route::get('/{brand}/forums', [ForumPagesController::class, 'index'])
             ->whereIn('brand', all_brands())
-            ->name('forums');
+            ->name('forums.index');
+
+        Route::get('/{brand}/forums/{categorySlug}/{categoryId}', [ForumPagesController::class, 'category'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.category');
+
+        Route::get('/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}', [ForumPagesController::class, 'thread'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.thread');
 
         /*
          * Profile Public Pages
@@ -128,7 +171,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('profile.settings.profile');
 
-        Route::get('/{brand}/profile/{userId}/settings/login-credentials', [ProfileSettingsPagesController::class, 'loginCredentials'])
+        Route::get(
+            '/{brand}/profile/{userId}/settings/login-credentials',
+            [ProfileSettingsPagesController::class, 'loginCredentials']
+        )
             ->whereIn('brand', all_brands())
             ->name('profile.settings.login-credentials');
 
@@ -136,11 +182,17 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('profile.settings.payments');
 
-        Route::get('/{brand}/profile/{userId}/settings/notifications', [ProfileSettingsPagesController::class, 'notifications'])
+        Route::get(
+            '/{brand}/profile/{userId}/settings/notifications',
+            [ProfileSettingsPagesController::class, 'notifications']
+        )
             ->whereIn('brand', all_brands())
             ->name('profile.settings.notifications');
 
-        Route::get('/{brand}/profile/{userId}/settings/membership', [ProfileSettingsPagesController::class, 'membership'])
+        Route::get(
+            '/{brand}/profile/{userId}/settings/membership',
+            [ProfileSettingsPagesController::class, 'membership']
+        )
             ->whereIn('brand', all_brands())
             ->name('profile.settings.membership');
 
