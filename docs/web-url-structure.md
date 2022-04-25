@@ -101,4 +101,4 @@ Old URLs:
 
 - musora.com/{BRAND}/lists/my-list
 - musora.com/{BRAND}/lists/in-progress
-- musora.com/{BRAND}/lists/complete
+- musora.com/{BRAND}/lists/completed

@@ -4,10 +4,13 @@ namespace App\Modules\Brand\Services;
 
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
 use Modules\UserManagementSystem\Models\User;
 
 class BrandService
 {
+    public static $currentBrand = null;
+
     /**
      * @param User $user
      * @param $brand
@@ -18,6 +21,9 @@ class BrandService
         $brandString = $brand->value;
 
         if (in_array($brandString, config('brands'))) {
+            self::$currentBrand = $brandString;
+            URL::defaults(['brand' => self::$currentBrand]);
+
             $cacheKey = 'user_' . $user->id . '_last_used_brand';
             $cacheValue = Cache::get($cacheKey);
 

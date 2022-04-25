@@ -1,9 +1,7 @@
 <div class="container fluid collapsed-h pv-5 relative bg-black">
     <div class="header-background-container absolute-fill bg-top"
-            style="background-image: url({{ _imgix(
-                    $backgroundImage,
-                    ["q" => 80, "blur" => 40, "w" => 640]
-                ) }});" data-ix-bg="{{ $backgroundImage }}"
+            style="background-image: url({{ cf_img($backgroundImage, ["quality" => 80, "blur" => 150, "width" => 640]) }});"
+         data-ix-bg="{{ $backgroundImage }}"
     ></div>
     <div class="header-background-container absolute-fill bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
@@ -21,9 +19,9 @@
                         <a href="{{ $profileUrl }}" class="no-decoration">
                             <img
                                 class="rounded inset-border"
-                                src="{{ _imgix(
+                                src="{{ cf_img(
                                     $currentUser['avatar'],
-                                    ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
+                                    ["quality" => 75, "blur" => 20, "width" => 50, "height" => 50]
                                 ) }}"
                                 data-ix-src="{{ $currentUser['avatar'] }}"
                             >
@@ -46,7 +44,7 @@
                                 {{ $currentUser['xp'] }} XP
                             </p>
                         @endif
-                        
+
                         @isset($userActions)
                             {{ $userActions }}
                         @endif

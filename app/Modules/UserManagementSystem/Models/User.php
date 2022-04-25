@@ -161,6 +161,12 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User role($roles, $guard = null)
  * @property string|null $last_used_brand
  * @method static Builder|User whereLastUsedBrand($value)
+ * @property string|null $access_level
+ * @property int|null $total_xp
+ * @property mixed|null $brand_method_levels
+ * @method static Builder|User whereAccessLevel($value)
+ * @method static Builder|User whereBrandMethodLevels($value)
+ * @method static Builder|User whereTotalXp($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -172,6 +178,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $hidden = ['password', 'session_salt'];
     protected $table = 'usora_users';
     protected $guard_name = 'user-management-system';
+    protected $casts = [
+        'brand_method_levels' => 'json',
+    ];
 
     /**
      * @var string
@@ -192,6 +201,91 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->connection = config('user_management_system.database_connection_name');
 
         parent::__construct($attributes);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodLevel()
+    {
+        $brand = brand();
+
+        if (isset($this->brand_method_levels->$brand)) {
+            return $this->brand_method_levels->$brand;
+        }
+
+        return '1.0';
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePictureUrl()
+    {
+        if (!empty($this->profile_picture_url)) {
+            return $this->profile_picture_url;
+        }
+
+        return 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
+    }
+
+    /**
+     * @return string
+     */
+    public function getXpRank()
+    {
+        switch ($this->total_xp) {
+            case $this->total_xp < 250:
+                return 'Casual';
+            case $this->total_xp >= 250 && $this->total_xp < 1000:
+                return 'Enthusiast I';
+            case $this->total_xp >= 1000 && $this->total_xp < 2500:
+                return 'Enthusiast II';
+            case $this->total_xp >= 2500 && $this->total_xp < 5000:
+                return 'Pro I';
+            case $this->total_xp >= 5000 && $this->total_xp < 10000:
+                return 'Pro II';
+            case $this->total_xp >= 10000 && $this->total_xp < 20000:
+                return 'Pro III';
+            case $this->total_xp >= 20000 && $this->total_xp < 50000:
+                return 'Master I';
+            case $this->total_xp >= 50000 && $this->total_xp < 100000:
+                return 'Master II';
+            case $this->total_xp >= 100000 && $this->total_xp < 250000:
+                return 'Master III';
+            case $this->total_xp >= 250000 && $this->total_xp < 500000:
+                return 'Drumeo Legend';
+            case $this->total_xp >= 500000 && $this->total_xp < 1000000:
+                return 'Legends: Star';
+            case $this->total_xp >= 1000000 && $this->total_xp < 1500000:
+                return 'Legends: Erskine';
+            case $this->total_xp >= 1500000 && $this->total_xp < 2000000:
+                return 'Legends: Cobham';
+            case $this->total_xp >= 2000000 && $this->total_xp < 2500000:
+                return 'Legends: Garibaldi';
+            case $this->total_xp >= 2500000 && $this->total_xp < 3000000:
+                return 'Legends: Peart';
+            case $this->total_xp >= 3000000 && $this->total_xp < 4000000:
+                return 'Legends: Bonham';
+            case $this->total_xp >= 4000000 && $this->total_xp < 5000000:
+                return 'Legends: Colaiuta';
+            case $this->total_xp >= 5000000 && $this->total_xp < 7500000:
+                return 'Legends: Gadd';
+            case $this->total_xp >= 75000000 && $this->total_xp < 10000000:
+                return 'Legends: Porcaro';
+            case $this->total_xp >= 10000000:
+                return 'Legends: Rich';
+            default:
+                return 'Member';
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->permission_level == 'administrator';
     }
 
     /**

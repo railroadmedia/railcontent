@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Platform;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class LoginController extends Controller
+class LoginPageController extends BaseController
 {
-    public function show() 
+    public function show()
     {
         return view('pages.login');
     }
-}  
+}

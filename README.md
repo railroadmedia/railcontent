@@ -59,7 +59,7 @@ This will load based on the routes defined in the relevant route files for that 
 inside the routes file of this repo. A route can be locked to a given domain like this:
 
 ```php
-Route::domain('{subdomain}.drumeo.com')->group(function () {
+Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/', function () {
         return 'Drumeo only route!';
     });
@@ -72,6 +72,18 @@ your blade files by brand. Currently, in the 'views' folder each brand has its o
 **Existing legacy dev URLs are not affected by this. They still work as normal, for example 'https://dev.drumeo.com/'.**
 
 <br>
+
+# Module Design Pattern For Back End
+Now that we have a single repository we no longer need to separate our main php system in to separate composer
+packages. Instead, we use a 'module' design system.  
+
+[https://techsemicolon.github.io/blog/2019/01/06/laravel-module-pattern/](https://techsemicolon.github.io/blog/2019/01/06/laravel-module-pattern/)  
+
+This pattern achieves a similar level of seperation of logic and solid principals but without need seperate composer 
+packages and repositories. Please review the app/Modules folder. We will slowly migrate all of our core php packages
+to module in this repository over time.  
+
+Before the launch we are only planning to move over our 'usora' package in to a module called 'UserManagementSystem'.
 
 # Front End Web Prototyping
 
