@@ -35,9 +35,10 @@
     <page-container>
         <div v-cloak>
 
-            @component('partials._header-banner')
+            @component('partials._header-banner',
+['backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-members-header-background-image.jpg',])
                 @slot('content')
-                    <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4 tw-mt-14">            
+                    <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4 tw-mt-14">
                         <h1 class="tw-text-white tw-tw-flex tw-items-center tw-mb-2">
                             @if($catalogueMeta['name'] == 'Q&A')
                                 <svg width="32" height="32" class="tw-mr-4" aria-hidden="true" focusable="false">
@@ -179,8 +180,8 @@
                         :use-theme-color="true"
                         :pre-loaded-content="{{ $listLessons }}"
                         user-id="{{ auth()->id() }}"
-                        :is-admin="{{ json_encode(\App\Services\User\UserAccessService::isAdministrator(current_user()->getId())) }}"
-                        :statuses="{{ json_encode(\App\Services\User\UserAccessService::isAdministrator(current_user()->getId()) ? ['published', 'draft'] : ['published']) }}"
+                        :is-admin="{{ json_encode(user()->isAdmin()) }}"
+                        :statuses="{{ json_encode(user()->isAdmin() ? ['published', 'draft'] : ['published']) }}"
                         :use-url-params="true"
                         @if($lessonType === 'student-review' || !empty($isAllContent))
                         :force-wide-thumbs="true"

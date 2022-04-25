@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -218,15 +219,45 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
+     * @return Attribute
+     */
+    public function profilePictureUrl($usingCDN = true)
+    {
+        return Attribute::make(
+            get: function ($value) use ($usingCDN) {
+                $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
+
+                if (!empty($this->profile_picture_url)) {
+                    $imageUrl = $this->profile_picture_url;
+                }
+
+                if ($usingCDN) {
+                    $imageUrl = cf_img($imageUrl, ["quality" => 75, "width" => 50, "height" => 50]);
+                }
+
+                return $imageUrl;
+            },
+        );
+    }
+
+    /**
      * @return string
      */
-    public function getProfilePictureUrl()
+    public function getDashboardUrl()
     {
-        if (!empty($this->profile_picture_url)) {
-            return $this->profile_picture_url;
-        }
+        return url()->route('platform.profile.settings.profile', ['brand' => brand(), 'userId' => $this->id]);
+    }
 
-        return 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
+    /**
+     * @return Attribute
+     */
+    public function totalXp(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                return !empty($this->total_xp) ? $this->total_xp : 0;
+            },
+        );
     }
 
     /**
