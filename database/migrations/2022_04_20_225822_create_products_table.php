@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('brand_id');
             $table->integer('product_type_id');
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('header_text');
             $table->string('logo')->nullable();
             $table->string('features')->nullable();
