@@ -1,4 +1,4 @@
-<?php
+\<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +16,7 @@ class AddAccessAndXpAndLevelColumnsToUsersTable extends Migration
         Schema::table('usora_users', function (Blueprint $table) {
             $table->string('access_level')->after('last_used_brand')->nullable()->index();
             $table->integer('total_xp')->after('access_level')->nullable()->index();
-            $table->json('brand_method_levels')->after('total_xp')->nullable()->index();
+            $table->json('brand_method_levels')->after('total_xp')->nullable();
         });
     }
 
