@@ -310,6 +310,27 @@ EOT;
      */
     private function migrateExercise(Connection $dbConnection)
     {
+        // fix a few rows with incorrect massive values that will not fit inside a int column
+        $dbConnection->table(config('railcontent.table_prefix').'content_exercises')
+            ->truncate();
+
+        $rows = $dbConnection->table(config('railcontent.table_prefix').'content_fields')
+            ->where('key', 'exercise_id')
+            ->whereNotNull('key')
+            ->where('value', '>', 1000000)
+            ->get();
+
+        // using a direct delete query doesn't work for some reason, it throws a strange sql error
+        foreach ($rows as $row) {
+            $dbConnection->table(config('railcontent.table_prefix').'content_fields')
+                ->where('id', $row->id)
+                ->delete();
+        }
+
+        $dbConnection->table(config('railcontent.table_prefix').'content_fields')
+            ->whereIn('id', [253361, 263298])
+            ->delete();
+
         $sql = <<<'EOT'
 INSERT INTO %s (
     `content_id`,

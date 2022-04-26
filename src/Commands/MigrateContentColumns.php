@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Commands;
 
+use DateTime;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
@@ -112,13 +113,35 @@ class MigrateContentColumns extends Command
             'exercise-book-pages' => 'exercise_book_pages',
         ];
 
-        $dbConnection->table(config('railcontent.table_prefix').'content_fields')
-            ->select('id', 'content_id', 'key', 'value')
+        // fix fast_bpm and slow_bpm cases where they are strings which are not needed
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->where('key', 'fast_bpm')
+            ->where('value', 'fast')
+            ->delete();
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->where('key', 'slow_bpm')
+            ->where('value', 'slow')
+            ->delete();
+
+        // fix misc use case
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->where('id', '496893')
+            ->delete();
+
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select(
+                'railcontent_content_fields.id',
+                'railcontent_content_fields.content_id',
+                'railcontent_content_fields.key',
+                'railcontent_content_fields.value'
+            )
+            ->leftJoin('railcontent_content', 'railcontent_content.id', '=', 'railcontent_content_fields.content_id')
+            ->whereNot('railcontent_content.type', 'user-playlist')
             ->whereIn('key', $contentColumnNames)
             ->whereNotNull('value')
             ->whereNotIn('value', ['Invalid date'])
             ->orderBy('content_id', 'desc')
-            ->chunk(500, function (Collection $rows) use (&$migratedFields, &$contentColumns, $mappingColumns) {
+            ->chunk(10000, function (Collection $rows) use (&$migratedFields, &$contentColumns, $mappingColumns) {
                 $groupRows = $rows->groupBy('content_id');
                 foreach ($groupRows as $contentId => $row) {
                     $data = [];
@@ -131,15 +154,21 @@ class MigrateContentColumns extends Command
 
                         if ($item->key == 'home_staff_pick_rating' && !is_numeric($item->value)) {
                             $this->info(
-                                'home_staff_pick_rating is not integer::'.$item->value.'    content id: '.$contentId
+                                'home_staff_pick_rating is not integer::' . $item->value . '    content id: ' . $contentId
                             );
 
                             continue;
                         }
 
                         if ($item->key == 'xp' && !is_numeric($item->value)) {
-                            $this->info('xp is not integer::'.$item->value.'    content id: '.$contentId);
+                            $this->info('xp is not integer::' . $item->value . '    content id: ' . $contentId);
 
+                            continue;
+                        }
+
+                        if (in_array($item->key, ['live_event_start_time', 'live_event_end_time']) &&
+                            !$this->validateDate($item->value)) {
+                            $this->info('Skipping date: ' . $item->value . ' | value: ' . $item->value);
                             continue;
                         }
 
@@ -153,44 +182,41 @@ class MigrateContentColumns extends Command
 
         $contentIdsToUpdate = array_keys($contentColumns);
 
-        foreach ($contentColumnNames as $column) {
-            $total[$column] = 0;
-            $query1 = ' CASE';
-            $exist = false;
-            foreach ($contentIdsToUpdate as $index2 => $contentId) {
-                if (!is_array($contentColumns[$contentId])) {
-                    $this->info($contentColumns[$contentId]);
+        $this->info('Updating content row count: ' . count($contentIdsToUpdate));
+
+        $dbConnection->beginTransaction();
+        foreach ($contentIdsToUpdate as $contentIdIndex => $contentId) {
+            $updateArray = [];
+
+            foreach ($contentColumnNames as $column) {
+                if (!is_array($contentColumns[$contentId]) || $contentId == 0 || empty($contentColumns[$contentId])) {
+                    unset($contentIdsToUpdate[$contentIdIndex]);
                     continue;
                 }
-                if (array_key_exists($column, $contentColumns[$contentId])) {
-                    $value = $contentColumns[$contentId][$column];
-                    if ((($column == 'live_event_end_time') || ($column == 'live_event_start_time'))) {
-                        $query1 .= "  WHEN id = ".
-                            $contentId.
-                            " THEN STR_TO_DATE(".
-                            $pdo->quote($value).
-                            ', \'%Y-%m-%d %H:%i:%s\')';
-                    } else {
-                        $query1 .= "  WHEN id = ".$contentId." THEN ".$pdo->quote($value);
-                    }
-                    $exist = true;
-                    $total[$column]++;
-                }
-            }
-            if ($exist) {
-                $query1 .= " ELSE ".$column." = ".$column." END";
 
-                $cq = " SET ".$column." = ".$query1;
-
-                $statement = "UPDATE ".config('railcontent.table_prefix').'content'.$cq;
-                $statement .= " WHERE id IN (".implode(",", $contentIdsToUpdate).")";
-
-                $dbConnection->statement($statement);
+                $updateArray = array_merge($updateArray, $contentColumns[$contentId]);
             }
 
-            $this->info('Migrated content column:'.$column.'. Total:'.$total[$column]);
+            $dbConnection->table(config('railcontent.table_prefix') . 'content')
+                ->where('id', $contentId)
+                ->update($updateArray);
         }
+        $dbConnection->commit();
 
+        $this->info('Updated all content columns.');
         $this->info('Migration completed. ');
     }
+
+    /**
+     * @param $date
+     * @param $format
+     * @return bool
+     */
+    public function validateDate($date, $format = 'Y-m-d H:i:s')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+
+        return $d && $d->format($format) === $date;
+    }
+
 }
