@@ -1,5 +1,5 @@
 <template>
-    <InfoModal :modalId="modalId" @onClose="toggleModal">
+    <InfoModal :modalId="modalId" @onClose="toggleModal" :selfContained="true">
       <div
         class="
           tw-flex tw-flex-col tw-bg-white

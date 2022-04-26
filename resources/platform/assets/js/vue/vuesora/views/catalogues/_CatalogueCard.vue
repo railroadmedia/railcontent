@@ -7,6 +7,7 @@
             class="no-decoration flex"
             :class="displayInline ? 'flex-row' : 'flex-column'"
         >
+            <!-- Thumbnail Section -->
             <div class="flex flex-column"
                  :class="[{'thumbnail-col': displayInline}, item.type + '-thumbnail']"
             >
@@ -46,6 +47,7 @@
                 </div>
             </div>
 
+            <!-- Description Section -->
             <div class="tw-flex">
                 <div class="card-info flex flex-column tw-pr-1"
                      :class="displayInline ? 'ph-1 align-v-center' : ''">
@@ -77,8 +79,7 @@
                     </h6>
                 </div>
                 <!-- Add to My List -->
-                <i
-                    v-if="item.type !== 'pack-bundle' && showMyListAction"
+                <i  v-if="item.type !== 'pack-bundle' && showMyListAction"
                     class="add-to-list fas fa-plus tw-text-xl"
                     :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-black dark:tw-text-white'"
                     :title="is_added ? 'Remove from list' : 'Add to list'"

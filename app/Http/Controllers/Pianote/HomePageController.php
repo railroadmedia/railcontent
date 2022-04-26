@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Pianote;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class HomePageController extends Controller
+class HomePageController extends BaseController
 {
-    public function show() 
+    public function show()
     {
         return view('pianote.home');
     }
-}  
+}

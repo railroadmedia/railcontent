@@ -36,11 +36,11 @@ function toggleOnboarding() {
     <div class="tw-text-center tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-font-bold tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
       You haven’t set up your account for this instrument.
     </div>
-    <Button
-      @onButtonClick="toggleOnboarding"
-      classOverride="tw-shrink-0 tw-h-[50px] tw-bg-transparent tw-border-black tw-text-black dark:tw-text-white dark:tw-border-white tw-border-[2px] lg:tw-mr-6 tw-text-[16px] lg:tw-text-[18px] 2xl:tw-text-[20px] tw-px-[59px]"
-      >COMPLETE YOUR ACCOUNT
-    </Button>
+    <button
+      @click="toggleOnboarding"
+      class="tw-btn-secondary tw-text-black tw-border-3 tw-leading-none tw-text-lg tw-tracking-wide tw-mr-6 dark:tw-text-white"
+      >Complete Your Account
+    </button>
     <Onboarding v-if="showOnboarding" />
     <button
       class="

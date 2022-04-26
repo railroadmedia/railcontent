@@ -1,11 +1,7 @@
-@extends('layout', [
-    "bodyClass" => "bg-white login-body",
-    "hideNav" => true,
-    "hideFooter" => true
-])
+@extends('partials.layout')
 
 @section('meta')
-    <title>Login | Singeo</title>
+    <title>Login | Musora</title>
 @endsection
 
 @section('scripts')
@@ -31,18 +27,24 @@
 @endsection
 
 @section('content')
-    <section id="logoContainer" class="pa-2 text-center">
-    </section>
+    <div v-cloak>
 
-    <p class="pb-3 text-center font-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>
+        <section id="logoContainer" class="pa-2 tw-text-center">
+            <img class="logo"
+                src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
+        </section>
 
-    @include('partials.bladesora.members.login-form', [
-        "brand" => "singeo",
-        "loginUrl" => url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])),
-        "resetUrl" => 'todo',
-        "joinUrl" => url('/#orderNow'),
-        "joinPitch" => "text-black",
-        "labelClasses" => "text-grey-3 tiny",
-        "checked" => true,
-    ])
+        <p class="tw-pb-3 tw-text-center tw-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>
+
+        @include('partials.bladesora.members.login-form', [
+            "brand" => "drumeo",
+            "loginUrl" => url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])),
+            "resetUrl" => '// todo',
+            "joinUrl" => url('/#orderNow'),
+            "joinPitch" => "tw-text-black",
+            "labelClasses" => "text-grey-3 tiny",
+            "checked" => true,
+        ])
+
+    </div>
 @endsection

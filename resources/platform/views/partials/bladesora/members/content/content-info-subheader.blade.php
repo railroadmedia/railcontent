@@ -1,10 +1,10 @@
-<div id="subHeader" class="container collapsed-h fluid bg-grey-5 pv-1">
-    <div class="container">
-        <div class="flex flex-row align-center flex-wrap nmh-1">
-            <div class="flex flex-column align-v-center text-white ph-1 meta-info-col hide-xs-only">
-                <div class="flex flex-row align-v-center">
+<div id="subHeader" class="tw-container tw-mx-auto collapsed-h fluid bg-grey-5 pv-1">
+    <div class="tw-container tw-mx-auto">
+        <div class="tw-flex tw-flex-row align-center tw-flex-wrap nmh-1">
+            <div class="tw-flex tw-flex-col tw-justify-center tw-text-white ph-1 meta-info-col hide-xs-only">
+                <div class="tw-flex tw-flex-row tw-items-center">
                     @foreach($infoData as $key => $value)
-                        <p class="subheading uppercase mr-3">
+                        <p class="subheading tw-uppercase tw-mr-3">
                             {{ $value  }}  <span class="body">{{ $key }}</span>
                         </p>
                     @endforeach
@@ -12,31 +12,31 @@
             </div>
 
             @if(!empty($addToList) && $addToList === true)
-                <div class="flex flex-column button-col">
+                <div class="tw-flex tw-flex-col button-col">
                     <button class="addToList btn {{ $isAdded ? 'added' : '' }}"
                             data-content-id="{{ $contentId }}">
-                        <span class="un-added bg-white inverted text-white">
+                        <span class="un-added tw-bg-white inverted tw-text-white">
                             <i class="fas fa-plus"></i>
                         </span>
 
-                        <span class="is-added bg-white text-x-dark">
-                            <i class="fas fa-plus rotate-45"></i>
+                        <span class="is-added tw-bg-white text-x-dark">
+                            <i class="fas fa-plus tw-rotate-45"></i>
                         </span>
                     </button>
                 </div>
             @endif
 
             @if(!empty($downloadableResources))
-                <div class="flex flex-column button-col">
-                    <div class="btn bg-white inverted is-dropdown">
-                        <i class="unopen fas fa-download no-events text-white"></i>
+                <div class="tw-flex tw-flex-col button-col">
+                    <div class="btn tw-bg-white inverted is-dropdown">
+                        <i class="unopen fas fa-download no-events tw-text-white"></i>
                         <i class="open fas fa-download no-events text-x-dark"></i>
 
-                        <div class="dropdown-content bg-white shadow tiny text-black">
+                        <div class="dropdown-content tw-bg-white tw-shadow tiny tw-text-black">
                             <ul>
                                 @foreach($downloadableResources as $resource)
                                     <li>
-                                        <a class="no-decoration text-black pa-1"
+                                        <a class="tw-no-underline tw-text-black pa-1"
                                            href="{{ $resource['resource_url'] }}"
                                            target="_blank"
                                            download>
@@ -51,11 +51,11 @@
             @endif
 
             @if(!empty($resetProgress) && $resetProgress === true)
-                <div class="flex flex-column button-col">
+                <div class="tw-flex tw-flex-col button-col">
                     <button class="resetProgress btn" title="Reset Progress"
                             data-content-id="{{ $contentId }}"
                             data-brand="{{ $brand }}">
-                        <span class="text-white bg-white inverted">
+                        <span class="tw-text-white tw-bg-white inverted">
                             <i class="fas fa-redo-alt fa-flip-horizontal"></i>
                         </span>
                     </button>

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Brand\Providers;
 
+use App\Modules\Brand\ViewComposers\BrandViewComposer;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -37,6 +38,9 @@ class BrandServiceProvider extends ServiceProvider
             __DIR__ . '/../config/brands.php',
             'brands'
         );
+
+        // view composers
+        view()->composer('*', BrandViewComposer::class);
     }
 
     /**

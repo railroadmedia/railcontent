@@ -1,4 +1,4 @@
-<div class="flex flex-column tw-max-w-3xl tw-mx-auto tw-px-4">
+<div class="tw-flex tw-flex-col tw-max-w-3xl tw-mx-auto tw-px-4">
 
     <section>
         <div class="tw-mt-12 tw-text-center">
@@ -8,8 +8,8 @@
         </div>
     </section>
 
-    <section class="flex flex-row flex-wrap mv-3">
-        <div class="flex flex-column">
+    <section class="tw-flex tw-flex-row tw-flex-wrap mv-3">
+        <div class="tw-flex tw-flex-col">
 
             {{--TODO: Requires an instance of Vue with the Vuesora plugin ...? --}}
                 <contact-member-email-form

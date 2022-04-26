@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-column volume">
-        <div class="flex flex-row align-v-center">
-            <div class="flex flex-column volume-rail-wrap">
+    <div class="tw-flex tw-flex-col volume">
+        <div class="tw-flex tw-flex-row align-v-center">
+            <div class="tw-flex tw-flex-col volume-rail-wrap">
                 <div class="volume-rail">
                     <div
                         class="volume-fill"

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column">
+    <div class="tw-flex tw-flex-col">
         <input
             v-model="contentInterface"
             type="hidden"
@@ -33,7 +33,7 @@ export default {
         },
         toolbar: {
             type: String,
-            default: () => 'bold italic underline | bullist numlist | link image media | forecolor backcolor | emoticons',
+            default: () => 'tw-font-bold tw-italic tw-underline | bullist numlist | link image media | forecolor backcolor | emoticons',
         },
         imageUploadEndpoint: {
             type: String,
