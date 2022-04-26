@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import PlayerUtils from "../VideoPlayer/player-utils";
 import PlayerRanges from '../VideoPlayer/_PlayerRanges.vue';
 
 export default {

@@ -8,8 +8,16 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
     - _This will install new containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites._ 
 - in the railenvironmet directory, restart the container with the `./rrr.sh` command
 - run `r setup musora-web-platform` then `cd /app/musora-web-platform` 
-- copy the contents of the `.env.example` file into a new `.env` file
-- run `r musora-web-platform composer install`
+- make a new file in the repository root named `.env`
+- copy content from 1pass note `.env, local, Musora Web Platform` to the .env file 
+- run `r musora-web-platform composer install` -- NOTE: if asked for nova package credentials, 
+  input 'caleb@drumeo.com' for the username and for the password use our Nova license key which is inside the 1pass note: 
+  "Laravel Nova v4.0 License Key". When it asks if you want to store a composer auth file, enter Y
+- run `r musora db8 local fromprod` -- NOTE: this is just 'musora' since we only need the musora_laravel tables
+  run `r musora-web-platform artisan migrate`
+- navigate to the /app/musora-web-platform folder with `cd /app/musora-web-platform`
+- run `nvm use 16` then `yarn` then `yarn platform-prod` then `yarn marketing-prod`
+- `https://devplatform.musora.com:8443` should now load and the app and automated testing should work
 
 ### Running Commands:
 Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
@@ -44,6 +52,7 @@ mysql containers.
 All brand domains/websites such as drumeo.com, pianote.com, etc use this same repository and laravel install
 to run. To load these brands using the new musora-web-platform repo you must specify the port and URLs like this:  
 
+[https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)  
 [https://devplatform.drumeo.com:8443/](https://devplatform.drumeo.com:8443/)  
 [https://devplatform.pianote.com:8443/](https://devplatform.pianote.com:8443/)  
 [https://devplatform.guitareo.com:8443/](https://devplatform.guitareo.com:8443/)  
@@ -53,7 +62,7 @@ This will load based on the routes defined in the relevant route files for that 
 inside the routes file of this repo. A route can be locked to a given domain like this:
 
 ```php
-Route::domain('{subdomain}.drumeo.com')->group(function () {
+Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/', function () {
         return 'Drumeo only route!';
     });
@@ -66,6 +75,18 @@ your blade files by brand. Currently, in the 'views' folder each brand has its o
 **Existing legacy dev URLs are not affected by this. They still work as normal, for example 'https://dev.drumeo.com/'.**
 
 <br>
+
+# Module Design Pattern For Back End
+Now that we have a single repository we no longer need to separate our main php system in to separate composer
+packages. Instead, we use a 'module' design system.  
+
+[https://techsemicolon.github.io/blog/2019/01/06/laravel-module-pattern/](https://techsemicolon.github.io/blog/2019/01/06/laravel-module-pattern/)  
+
+This pattern achieves a similar level of seperation of logic and solid principals but without need seperate composer 
+packages and repositories. Please review the app/Modules folder. We will slowly migrate all of our core php packages
+to module in this repository over time.  
+
+Before the launch we are only planning to move over our 'usora' package in to a module called 'UserManagementSystem'.
 
 # Front End Web Prototyping
 
@@ -131,3 +152,12 @@ In your blade file you can load in these variables like this:
 </html>
 
 ```
+
+
+# PHPStorm Automated Testing Settings
+
+### Test Framework
+![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/f532fe6d-7f49-489e-aa55-2dabeaee5900/public)
+
+### CLI Interpreter
+![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e0eb64b1-b163-4626-e217-5ce9d80d7900/public)

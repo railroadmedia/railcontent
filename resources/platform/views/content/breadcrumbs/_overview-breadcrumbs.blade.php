@@ -1,5 +1,5 @@
 @if($parentContent->fetch('type') === 'learning-path')
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',
@@ -11,7 +11,7 @@
         ]
     ])
 @elseif($parentContent->fetch('type') === 'learning-path-level')
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Singeo Method',
@@ -23,7 +23,7 @@
         ]
     ])
 @elseif($parentContent->fetch('type') === 'learning-path-course')
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Singeo Method',
@@ -39,7 +39,7 @@
         ]
     ])
 @elseif($parentContent->fetch('type') === 'unit')
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',
@@ -59,7 +59,7 @@
         ]
     ])
 @else
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',

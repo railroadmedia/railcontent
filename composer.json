@@ -4,18 +4,30 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.0",
-        "laravel/sanctum": "^2.14.1",
+        "laravel/nova": "~4.0",
+        "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "railroad/railcontent": "dev-2.0-php-mysql-8-migration",
+        "spatie/laravel-permission": "^5.5",
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
+        "kitloong/laravel-migrations-generator": "^5.2",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
@@ -26,12 +38,21 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "app/Modules",
+            "Modules\\UserManagementSystem\\Factories\\": "app/Modules/UserManagementSystem/database/factories"
+        },
+        "files": [
+            "helpers/helpers.php",
+            "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
+            "app/Modules/Brand/helpers/brand_helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Modules\\UserManagementSystem\\Tests\\": "app/Modules/UserManagementSystem/tests",
+            "Modules\\Brand\\Tests\\": "app/Modules/Brand/tests"
         }
     },
     "scripts": {

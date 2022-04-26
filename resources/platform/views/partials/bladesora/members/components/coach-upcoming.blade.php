@@ -1,8 +1,8 @@
 @if ($hasUpcomingCoaches)
-    <div class="container">
+    <div class="tw-container tw-mx-auto">
         <div class="tw-flex tw-items-center tw-mb-6">
-            <span class="rounded bg-{{ $brand }} text-white icon-bg-circle body mr-1">
-                @include('bladesora::members.partials._upcoming-coaches-icon')
+            <span class="tw-rounded bg-{{ $brand }} text-white icon-bg-circle body tw-mr-1">
+                @include('partials.bladesora.members.partials._upcoming-coaches-icon')
             </span>
             <h2 class="heading sans">
                 Upcoming Coaches
@@ -17,7 +17,7 @@
                         <img src="{{ imgix($coach['image'], ['h' => 436, 'w' => 300, 'fit' => 'crop', 'crop' => 'faces']) }}"
                             class="tw-w-full tw-flex tw-object-cover tw-filter tw-grayscale" alt="{{ $coach['name'] }} Card">
                         @if (isset($coach['date']))
-                            <div class="tw-absolute  tw-leading-none tw-uppercase  tw-rounded  tw-p-1 tw-m-4 tw-bg-yellow-400">
+                            <div class="tw-absolute tw-leading-none tw-uppercase tw-rounded tw-p-1 tw-m-4 tw-bg-yellow-400">
                                 <span class="tw-text-sm tw-text-black tw-font-bold tw-leading-none tw-font-roboto-condensed">
                                     <!-- Lock Icon SVG-->
                                     <svg width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">

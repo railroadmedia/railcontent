@@ -1,11 +1,11 @@
 @if ($hasFeaturedCoaches)
-    <div class="container mt-2 tw-mb-6">
-        <div class="flex flex-row align-v-center pv-2  tw-mb-4">
-            <span class="rounded bg-{{ $brand }} text-white icon-bg-circle body mr-1">
+    <div class="tw-container tw-mt-2 tw-mb-6">
+        <div class="tw-flex tw-flex-row align-v-center pv-2 tw-mb-4">
+            <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
                 <i class="fas fa-star"></i>
             </span>
 
-            <h2 class="heading capitalize grow">
+            <h2 class="heading tw-capitalize tw-flex-grow">
                 Featured Coaches
             </h2>
         </div>

@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Platform\HomeController;
+use App\Http\Controllers\Platform\ContentPagesController;
 
-Route::domain('{subdomain}.musora.com')->group(function () {
+Route::domain('{musoraDomain}')
+    ->middleware(['web_authenticated'])
+    ->group(function () {
     Route::get('members', [
-        HomeController::class, 
+        ContentPagesController::class,
         'show',
     ]);
-    
 });

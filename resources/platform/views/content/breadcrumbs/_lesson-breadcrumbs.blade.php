@@ -1,5 +1,5 @@
 @if($lessonType === 'unit-part')
-    @include('bladesora::members.navigation.breadcrumbs', [
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',
@@ -23,7 +23,7 @@
         ]
     ])
 @elseif($lessonType === 'learning-path-lesson')
-        @include('bladesora::members.navigation.breadcrumbs', [
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
                     "title" => 'Singeo Method',
@@ -40,7 +40,7 @@
         ])
 @elseif(!empty($pack))
     @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
-        @include('bladesora::members.navigation.breadcrumbs', [
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
                     "title" => 'Home',
@@ -67,7 +67,7 @@
 @else
     @if($parent)
         @if($parent->fetch('type') === 'pack-bundle')
-            @include('bladesora::members.navigation.breadcrumbs', [
+            @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
                         "title" => 'Home',
@@ -89,7 +89,7 @@
                 ]
             ])
         @else
-            @include('bladesora::members.navigation.breadcrumbs', [
+            @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
                         "title" => 'Home',
@@ -110,7 +110,7 @@
             ])
         @endif
     @else
-        @include('bladesora::members.navigation.breadcrumbs', [
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
                     "title" => 'Home',
