@@ -60,16 +60,36 @@ class MigrateUserPlaylist extends Command
         $start = microtime(true);
 
         $this->info(
-            'Migrate user playlists command starting :::: '.
+            'Migrate user playlists command starting :::: ' .
             Carbon::now()
                 ->toDateTimeString()
         );
 
-        Schema::connection(config('railcontent.database_connection_name'))
-            ->table(config('railcontent.table_prefix').'user_playlists', function (Blueprint $table) {
-                $table->integer('old_id')
-                    ->nullable(true);
-            });
+        // this allows the command to run after if fails once
+        if (Schema::connection(config('railcontent.database_connection_name'))
+            ->hasColumn(config('railcontent.table_prefix') . 'user_playlists', 'old_id')) {
+            $dbConnection->table(config('railcontent.table_prefix') . 'user_playlists')
+                ->update(['old_id' => null]);
+        } else {
+            Schema::connection(config('railcontent.database_connection_name'))
+                ->table(config('railcontent.table_prefix') . 'user_playlists', function (Blueprint $table) {
+                    $table->integer('old_id')
+                        ->nullable(true);
+                });
+        }
+
+        // fix up invalid date time error
+        $dbConnection->table(config('railcontent.table_prefix') . 'content')
+            ->where('created_on', '<', '2000-01-01')
+            ->update(['created_on' => '2011-01-01 00:00:00']);
+
+        $dbConnection->table(config('railcontent.table_prefix') . 'content')
+            ->where('published_on', '<', '2000-01-01')
+            ->update(['published_on' => '2011-01-01 00:00:00']);
+
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
+            ->where('created_on', '<', '2000-01-01')
+            ->update(['created_on' => '2011-01-01 00:00:00']);
 
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -92,8 +112,8 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix').'user_playlists',
-            config('railcontent.table_prefix').'content',
+            config('railcontent.table_prefix') . 'user_playlists',
+            config('railcontent.table_prefix') . 'content',
             'user-playlist'
         );
 
@@ -116,9 +136,9 @@ EOT;
 
         $statement2 = sprintf(
             $sql2,
-            config('railcontent.table_prefix').'user_playlist_content',
-            config('railcontent.table_prefix').'content_hierarchy',
-            config('railcontent.table_prefix').'user_playlists'
+            config('railcontent.table_prefix') . 'user_playlist_content',
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'user_playlists'
         );
 
         $dbConnection->statement($statement2);
@@ -128,7 +148,7 @@ EOT;
         $this->info(sprintf($format, $finish));
 
         Schema::connection(config('railcontent.database_connection_name'))
-            ->table(config('railcontent.table_prefix').'user_playlists', function (Blueprint $table) {
+            ->table(config('railcontent.table_prefix') . 'user_playlists', function (Blueprint $table) {
                 $table->dropColumn('old_id');
             });
     }
