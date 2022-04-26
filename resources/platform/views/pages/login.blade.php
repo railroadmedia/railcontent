@@ -27,14 +27,15 @@
 @endsection
 
 @section('content')
-    <div v-cloak>
+    <div class="tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-bg-[#000C17] tw-text-white tw-bg-cover"
+         style="background-image: url('https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg');"
+         v-cloak>
 
-        <section id="logoContainer" class="pa-2 tw-text-center">
-            <img class="logo"
-                src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
+        <section id="logoContainer" class="tw-flex-col tw-flex tw-items-center tw-text-center">
+            <img class="logo tw-max-w-[280px] tw-mb-6"
+                src="https://musora-ui.s3.amazonaws.com/logos/musora-white.svg" alt="Musora Logo">
+            <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
         </section>
-
-        <p class="tw-pb-3 tw-text-center tw-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>
 
         @include('partials.bladesora.members.login-form', [
             "brand" => "drumeo",

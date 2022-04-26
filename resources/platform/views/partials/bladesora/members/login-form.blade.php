@@ -1,4 +1,4 @@
-<section id="loginForm" class="tw-flex tw-flex-col bg-grey-1 pa-3 tw-mb-3 corners-10">
+<section id="loginForm" class="tw-flex tw-flex-col tw-bg-[#081825]/[90] tw-p-4 tw-mb-3 tw-rounded-xl tw-max-w-[400px] tw-w-full">
 
     <form method="post" action="{{ $loginUrl }}" class="tw-flex tw-flex-col">
         @if($useCsrfToken ?? true)
