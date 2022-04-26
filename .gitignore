@@ -113,3 +113,5 @@ dist
 .idea
 .phpunit*
 auth.json
+
+storage/clockwork/*
