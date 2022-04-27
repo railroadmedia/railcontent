@@ -32719,17 +32719,17 @@ var _hoisted_1 = {
   "class": ""
 };
 var _hoisted_2 = {
-  "class": "tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039] tw-cursor-pointer"
+  "class": "tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039] tw-cursor-pointer tw-border-[#344858] hover:tw-border-white tw-border-2 tw-color-[#344858]"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full tw-bg-white"
+  "class": "tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase",
+  "class": "tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]",
   style: {
     "text-decoration": "inherit"
   }
@@ -32788,26 +32788,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  width: "148",
-  height: "148",
-  viewBox: "0 0 150 150",
+  width: "152",
+  height: "152",
+  viewBox: "0 0 152 152",
   fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  "class": "tw-z-10"
+  xmlns: "http://www.w3.org/2000/svg"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M30.4334 112.12L30.1158 112.718L30.5532 113.235C41.3785 126.029 57.5597 134.214 75.6202 134.214C93.6808 134.214 109.862 126.029 120.687 113.235L121.125 112.718L120.807 112.12C114.96 101.11 103.503 93.505 90.1361 93.505C89.3001 93.505 88.476 93.6442 87.6978 93.881L87.6886 93.8838L87.6794 93.8868C83.8557 95.1317 79.8183 95.9243 75.6202 95.9243C71.4231 95.9243 67.4156 95.1321 63.5589 93.8861L63.5508 93.8835L63.5427 93.881C62.7645 93.6442 61.9404 93.505 61.1044 93.505C47.7373 93.505 36.281 101.11 30.4334 112.12ZM1.62158 75.1505C1.62158 34.2721 34.7418 1.15186 75.6202 1.15186C116.499 1.15186 149.619 34.2721 149.619 75.1505C149.619 116.029 116.499 149.149 75.6202 149.149C34.7418 149.149 1.62158 116.029 1.62158 75.1505ZM103.233 55.796C103.233 40.5464 90.8699 28.1836 75.6202 28.1836C60.3706 28.1836 48.0078 40.5464 48.0078 55.796C48.0078 71.0456 60.3706 83.4085 75.6202 83.4085C90.8699 83.4085 103.233 71.0456 103.233 55.796Z",
-  fill: "#002039",
-  stroke: "#344858",
-  "stroke-width": "2"
+  d: "M122 107.724C97.7273 134.511 58.2841 135.006 33 107.724H122ZM122 107.724C103.624 70.7916 53.824 68.0937 33 107.693L122 107.724Z",
+  fill: "white"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M97 40.5C97 51.2696 88.2696 60 77.5 60C66.7304 60 58 51.2696 58 40.5C58 29.7304 66.7304 21 77.5 21C88.2696 21 97 29.7304 97 40.5Z",
+  fill: "white"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_4 = [_hoisted_2, _hoisted_3];
 function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_1, _hoisted_4);
 }
 
 /***/ }),
@@ -58141,7 +58145,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg.png?49281356b5c8239ef7c903581f6d2f89");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg.png?c596b54d9940bce2b5bf17c23e4bc04f");
 
 /***/ }),
 
@@ -58156,7 +58160,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg.png?c596b54d9940bce2b5bf17c23e4bc04f");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg.png?49281356b5c8239ef7c903581f6d2f89");
 
 /***/ }),
 

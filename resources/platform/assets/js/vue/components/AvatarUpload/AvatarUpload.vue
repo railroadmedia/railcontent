@@ -81,6 +81,10 @@ function openUploadForm() {
           tw-rounded-full
           tw-bg-[#002039]
           tw-cursor-pointer
+          tw-border-[#344858]
+          hover:tw-border-white
+          tw-border-2
+          tw-color-[#344858]
         "
       >
         <UserIcon />
@@ -91,11 +95,10 @@ function openUploadForm() {
             tw-h-[120px]
             tw-w-[120px]
             tw-rounded-full
-            tw-bg-white
           "
         ></div>
       </div>
-      <div class="tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase" style="text-decoration: inherit;">
+      <div class="tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]" style="text-decoration: inherit;">
         UPLOAD PHOTO
       </div>
     </button>
