@@ -49,7 +49,7 @@
                                     $firstName = array_shift($exploded);
                                 @endphp
                                 <span class="tw-font-normal">{{ $firstName }}</span>
-                                {{ implode($exploded, ' ') }}
+                                {{ implode(' ', $exploded) }}
                             </a>
                             <!-- Buttons -->
                             <a href="{{ $featured->fetch('url') }}"

@@ -102,7 +102,7 @@ class HomePageController extends BaseController
         $userMetrics = $this->getUserMetrics();
 
         $followedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
-            config('railcontent.brand'),
+            brand(),
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])),
             [],
             1,
@@ -110,8 +110,8 @@ class HomePageController extends BaseController
         );
 
         $subscribedCoaches = $this->contentFollowService->getUserFollowedContent(
-            auth()->id(),
-            config('railcontent.brand'),
+            user()->id,
+            brand(),
             ['instructor'],
             1,
             6
@@ -168,7 +168,7 @@ class HomePageController extends BaseController
             'brand' => $brand,
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
-            "startedContent" => $startedLessons->toResponseRawJson(),
+            "startedContentJson" => $startedLessons->toResponseRawJson(),
             "startedContentCount" => $startedLessons->totalResults(),
             "usersList" => $usersList->toResponseRawJson(),
             "usersListCount" => $usersList->totalResults(),
@@ -191,6 +191,7 @@ class HomePageController extends BaseController
             'timeCutoffMinutes' => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
             'followedLessons' => $followedLessons->toResponseRawJson(),
             'subscribedCoaches' => $subscribedCoaches,
+            'subscribedCoachesJson' => $subscribedCoaches->toResponseRawJson(),
             "hasSubscribedCoaches" => $subscribedCoaches->totalResults() > 0,
             "hasfollowedLessons" => $subscribedCoaches->totalResults() > 0 && $followedLessons->totalResults() > 0,
             'upcomingEvents' => $upcomingEvents->toResponseRawJson(),

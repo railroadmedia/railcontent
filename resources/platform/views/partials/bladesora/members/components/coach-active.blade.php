@@ -33,7 +33,7 @@
                                     $firstName = array_shift($exploded);
                                 @endphp
                                 <span class="tw-block">{{ $firstName }}</span>
-                                {{ implode($exploded, ' ') }}
+                                {{ implode(' ', $exploded) }}
                             </p>
 
                             <!-- Coach Title -->
