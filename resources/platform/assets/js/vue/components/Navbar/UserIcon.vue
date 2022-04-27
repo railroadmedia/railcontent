@@ -57,23 +57,23 @@ export default {
         :userPhoto="userPhoto"
       />
       <OptionGroup>
-        <OptionElement :href="`/members/profile/notifications?brand=${brand}`">
+        <OptionElement :href="`/${brand}/profile/notifications`">
           <musora-icon icon-name="bell" class="tw-w-[20px] tw-mr-2"/>
           Notifications
         </OptionElement>
-        <OptionElement :href="`/members/profile/lists?brand=${brand}`">
+        <OptionElement :href="`/${brand}/profile/lists`">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement>
-        <OptionElement :href="`/members/schedule?brand=${brand}`">
+        <OptionElement :href="`/${brand}/schedule`">
           <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
           Schedule
         </OptionElement>
-        <OptionElement :href="`/members/lessons/student-focus?brand=${brand}`">
+        <OptionElement :href="`/${brand}/lessons/student-focus`">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>
-        <OptionElement :href="`/members/settings?brand=${brand}`">
+        <OptionElement :href="`/${brand}/settings`">
           <musora-icon icon-name="settings" class="tw-w-[20px] tw-mr-2"/>
           Settings
         </OptionElement>
@@ -86,7 +86,7 @@ export default {
 
           Appearance: {{ isDarkModeSelected ? 'Dark' : 'Light' }}
         </OptionElement>
-        <OptionElement :href="`/members/support?brand=${brand}`">
+        <OptionElement :href="`/${brand}/support`">
           <musora-icon icon-name="phone" class="tw-w-[20px] tw-mr-2"/>
             Support
           </OptionElement>

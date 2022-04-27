@@ -34744,7 +34744,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["name", "optionClick", "userPhoto"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionGroup, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
-            href: "/members/profile/notifications?brand=".concat($props.brand)
+            href: "/".concat($props.brand, "/profile/notifications")
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -34758,7 +34758,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, 8
           /* PROPS */
           , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
-            href: "/members/profile/lists?brand=".concat($props.brand)
+            href: "/".concat($props.brand, "/profile/lists")
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -34772,7 +34772,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, 8
           /* PROPS */
           , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
-            href: "/members/schedule?brand=".concat($props.brand)
+            href: "/".concat($props.brand, "/schedule")
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -34786,7 +34786,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, 8
           /* PROPS */
           , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
-            href: "/members/lessons/student-focus?brand=".concat($props.brand)
+            href: "/".concat($props.brand, "/lessons/student-focus")
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -34800,7 +34800,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, 8
           /* PROPS */
           , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
-            href: "/members/settings?brand=".concat($props.brand)
+            href: "/".concat($props.brand, "/settings")
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -34842,7 +34842,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             /* STABLE */
 
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
-            href: "/members/support?brand=".concat($props.brand)
+            href: "/".concat($props.brand, "/support")
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {

@@ -38,7 +38,7 @@
             @component('partials._header-banner',
 ['backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-members-header-background-image.jpg',])
                 @slot('content')
-                    <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4 tw-mt-14">
+                    <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
                         <h1 class="tw-text-white tw-tw-flex tw-items-center tw-mb-2">
                             @if($catalogueMeta['name'] == 'Q&A')
                                 <svg width="32" height="32" class="tw-mr-4" aria-hidden="true" focusable="false">
@@ -87,7 +87,7 @@
         {{--    @endif--}}
 
             @if($lessonType === 'routine' && $hasRecentRoutines)
-                <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-1">
+                <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
                     <div class="tw-flex tw-flex-col tw-flex-grow">
                         <div class="tw-flex tw-flex-row tw-items-center pv-2">
                             <div class="text-black no-decoration heading tw-capitalize tw-flex-grow">Recently Viewed</div>
@@ -136,26 +136,26 @@
         {{--        </div>--}}
         {{--    </div>--}}
             @if(!empty($isAllContent))
-            <div class="tw-container tw-mx-auto ph-1">
-                <div class="tw-flex tw-flex-col tw-mt-3">
-                    <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
-                        <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-3">
-                            <h1 class="heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
-                        </div>
-                        <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
-                            <button class="btn" data-open-modal="addToCalendarModal">
-                                <span class="tw-text-{{ $brand }} tw-bg-{{ $brand }} inverted">
-                                    <i class="fas fa-calendar-plus tw-mr-1"></i>
-                                    Subscribe to Calendar
-                                </span>
-                            </button>
+                <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
+                    <div class="tw-flex tw-flex-col tw-mt-3">
+                        <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
+                            <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-3">
+                                <h1 class="heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
+                            </div>
+                            <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
+                                <button class="btn" data-open-modal="addToCalendarModal">
+                                    <span class="tw-text-{{ $brand }} tw-bg-{{ $brand }} inverted">
+                                        <i class="fas fa-calendar-plus tw-mr-1"></i>
+                                        Subscribe to Calendar
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endif
 
-            <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-2">
+            <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
                 <transition appear name="fade">
                     <content-catalogue
                         dusk="content-catalogue"

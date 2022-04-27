@@ -24321,6 +24321,10 @@ a:visited{
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
+  .md\:tw-px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   .md\:tw-pb-0{
     padding-bottom: 0px;
   }
