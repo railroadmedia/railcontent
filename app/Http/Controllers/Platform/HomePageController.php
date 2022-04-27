@@ -17,6 +17,7 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends BaseController
 {
@@ -48,23 +49,40 @@ class HomePageController extends BaseController
 
     public function home(Request $request, $brand)
     {
+        switch(brand()) {
+            case 'drumeo':
+                $methodSlug = 'drumeo-method';
+                break;
+            case 'pianote':
+                $methodSlug = 'pianote-method';
+                break;
+            case 'guitareo':
+                $methodSlug = 'guitareo-method';
+                break;
+            case 'singeo':
+                $methodSlug = 'singeo-method';
+                break;
+            default:
+                throw new NotFoundHttpException();
+        }
+
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
         ContentRepository::$pullFutureContent = true;
 
-        $drumeoMethod =
-            $this->contentService->getBySlugAndType('drumeo-method', 'learning-path')
+        $methodContent =
+            $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
 
-        $userHasInteractedWithDrumeoMethod = $drumeoMethod['started'];
-        $hasCompletedMethod = $drumeoMethod['completed'];
+        $userHasInteractedWithDrumeoMethod = $methodContent['started'];
+        $hasCompletedMethod = $methodContent['completed'];
 
-        $nextLearningPathLesson = $drumeoMethod['next_lesson'] ?? null;
-        $showNextLearningPathLesson = !empty($drumeoMethod['next_lesson']);
+        $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
+        $showNextLearningPathLesson = !empty($methodContent['next_lesson']);
 
-        $nextLearningPathLessonUrl = $drumeoMethod['next_lesson']['url'] ?? '';
-        $nextLearningPathLevel = $drumeoMethod['level_rank'] ?? '1.1';
-        $nextLearningPathProgressPercent = $drumeoMethod['progress_percent'];
+        $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
+        $nextLearningPathLevel = $methodContent['level_rank'] ?? '1.1';
+        $nextLearningPathProgressPercent = $methodContent['progress_percent'];
 
         $startedLessons = $this->getUsersStartedContent();
 
@@ -195,9 +213,10 @@ class HomePageController extends BaseController
             "hasSubscribedCoaches" => $subscribedCoaches->totalResults() > 0,
             "hasfollowedLessons" => $subscribedCoaches->totalResults() > 0 && $followedLessons->totalResults() > 0,
             'upcomingEvents' => $upcomingEvents->toResponseRawJson(),
+            'hasUpcomingEvents' => $upcomingEvents->totalResults() > 0,
             'coachOfTheMonth' => $coachOfTheMonth->first(),
             'hasCompletedMethod' => $hasCompletedMethod,
-            'completedLevelsUrl' => $drumeoMethod['url'] ?? '',
+            'completedLevelsUrl' => $methodContent['url'] ?? '',
         ]);
     }
 

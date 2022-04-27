@@ -83,13 +83,13 @@
                 @endcomponent
 
                 {{-- My Playlists --}}
-                {{-- @component('partials.bladesora.members.components.home._list-section', [
-                    'brand' => 'drumeo',
-                    'myListUrl' => url()->route('user.lists', ['id' => auth()->id()]),
+                @component('partials.bladesora.members.components.home._list-section', [
+                    'brand' => brand(),
+                    'myListUrl' => '', // todo: need url
                     'contentEndpoint' => '/laravel/public/railcontent/content',
                     'usersList' => $usersList,
                     ])
-                @endcomponent --}}
+                @endcomponent
 
                 {{-- Live Banner --}}
                 <coach-event
@@ -103,13 +103,15 @@
                 ></coach-event>
 
                 {{-- Upcoming Events --}}
-                {{-- @component('partials.bladesora.members.components.home._upcoming-section', [
-                    'brand' => 'drumeo',
-                    'upcomingUrl' => url()->route('members.live'),
-                    'upcomingEvents' => $upcomingEvents,
-                    'contentEndpoint' => '/laravel/public/railcontent/content',
-                    ])
-                @endcomponent --}}
+                @if($hasUpcomingEvents)
+                    @component('partials.bladesora.members.components.home._upcoming-section', [
+                        'brand' => brand(),
+                        'upcomingUrl' => '', // todo: url
+                        'upcomingEvents' => $upcomingEvents,
+                        'contentEndpoint' => '/laravel/public/railcontent/content',
+                        ])
+                    @endcomponent
+                @endif
 
                 {{-- My Stats --}}
                 <stats-section
