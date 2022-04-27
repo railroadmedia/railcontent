@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Http\Controllers\Content\CoachesController;
+use App\Maps\ContentTypes;
+use App\Services\LiveStreamEventService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
@@ -31,17 +36,6 @@ class ContentPagesController extends BaseController
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
-    }
-
-    public function homeRedirect()
-    {
-        return redirect()->route('platform.home', ['brand' => brand()]);
-    }
-
-    public function home(Request $request, $brand) {
-        return view('home.index', [
-            'brand' => $brand,
-        ]);
     }
 
     public function courses(Request $request, $domain) {

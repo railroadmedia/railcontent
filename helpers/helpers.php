@@ -1,5 +1,7 @@
 <?php
 
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+
 if (! function_exists('cf_img')) {
     /**
      * Process image and Get a CDN URL using our cloudflare images account.
@@ -35,5 +37,20 @@ if (! function_exists('cf_img')) {
         $urlString .= '/' . $pathFromOriginOrUrl;
 
         return $urlString;
+    }
+
+    /**
+     * @param $contents
+     * @return string
+     */
+    function content_to_json($contents)
+    {
+        if (!empty($contents)) {
+            return (new ContentFilterResultsEntity(
+                ['results' => $contents, 'total_results' => count($contents)]
+            ))->toResponseRawJson();
+        }
+
+        return '';
     }
 }

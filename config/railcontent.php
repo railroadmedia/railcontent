@@ -580,6 +580,9 @@ return [
             'showFutureLessonAtTopOrBottom' => 'bottom',
         ],
     ],
+
+//    ---------------------------------------
+//    Content Types
     /**
      * The order of the show types it's IMPORTANT.
      * The show cards on 'Shows' page are displayed in this order.
