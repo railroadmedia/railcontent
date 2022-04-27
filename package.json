@@ -8,13 +8,17 @@
         "platform-hot": "mix --mix-config=resources/platform/webpack.mix.js watch --hot",
         "platform-dev": "npm run platform-development",
         "platform-prod": "npm run platform-production",
+        "pd": "npm run platform-development",
+        "pp": "npm run platform-production",
         "marketing-development": "mix --mix-config=resources/marketing/webpack.mix.js",
         "marketing-production": "mix --mix-config=resources/marketing/webpack.mix.js --production",
         "marketing-watch": "mix --mix-config=resources/marketing/webpack.mix.js watch",
         "marketing-watch-poll": "mix --mix-config=resources/marketing/webpack.mix.js watch -- --watch-options-poll=1000",
         "marketing-hot": "mix --mix-config=resources/marketing/webpack.mix.js watch --hot",
         "marketing-dev": "npm run marketing-development",
-        "marketing-prod": "npm run marketing-production"
+        "marketing-prod": "npm run marketing-production",
+        "md": "npm run marketing-development",
+        "mp": "npm run marketing-production"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
