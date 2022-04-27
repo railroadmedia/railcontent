@@ -1744,7 +1744,6 @@ class ContentService
     /**
      * @param $contentId
      * @return array
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getElasticData($contentId)
     {

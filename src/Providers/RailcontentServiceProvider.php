@@ -59,7 +59,9 @@ class RailcontentServiceProvider extends ServiceProvider
         ContentFieldCreated::class => [
             // VersionContentEventListener::class . '@handleFieldCreated',
             ContentTotalXPListener::class . '@handleFieldCreated',
-            SyncElasticsearchListener::class . '@handleSync',
+
+            // todo: some functions are missing so this is commented our for now.
+//            SyncElasticsearchListener::class . '@handleSync',
         ],
         ContentFieldUpdated::class => [
             // VersionContentEventListener::class . '@handleFieldUpdated',

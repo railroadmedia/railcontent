@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -16,6 +17,8 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentRepositoryTest extends RailcontentTestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      * @var ContentRepository
      */
@@ -51,7 +54,7 @@ class ContentRepositoryTest extends RailcontentTestCase
      */
     protected $contentPermissionFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

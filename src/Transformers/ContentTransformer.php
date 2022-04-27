@@ -49,6 +49,12 @@ class ContentTransformer
                 'data' => $associations['data'][$data['id']] ?? [],
                 'permissions' => $data['permissions'] ?? [],
                 'published_on' => $data['published_on'] ?? null,
+                'created_on' => $data['created_on'] ?? null,
+                'archived_on' => $data['archived_on'] ?? null,
+                'brand' => $data['brand'] ?? null,
+                'language' => $data['language'] ?? null,
+                'parent_id' => $data['parent_id'] ?? null,
+                'child_id' => $data['child_id'] ?? null,
             ];
 
             $results = $content;
@@ -84,6 +90,12 @@ class ContentTransformer
                         'data' => $associations['data'][$row['id']] ?? [],
                         'permissions' => $row['permissions'] ?? [],
                         'published_on' => $row['published_on'] ?? null,
+                        'created_on' => $row['created_on'] ?? null,
+                        'archived_on' => $row['archived_on'] ?? null,
+                        'brand' => $row['brand'] ?? null,
+                        'language' => $row['language'] ?? null,
+                        'parent_id' => $row['parent_id'] ?? null,
+                        'child_id' => $row['child_id'] ?? null,
                     ];
 
                     $results[] = $content;
