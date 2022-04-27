@@ -32,7 +32,7 @@ if (! function_exists('cf_img')) {
 
         $urlString .= implode(',', $optionsStringArray);
 
-        $urlString .= $pathFromOriginOrUrl;
+        $urlString .= '/' . $pathFromOriginOrUrl;
 
         return $urlString;
     }

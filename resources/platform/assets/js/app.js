@@ -26,6 +26,11 @@ import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailF
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue'
+import ImgixService from './vue/vuesora/assets/js/services/imgix';
+
+window.onload = function(){
+    window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
+};
 
 const app = createApp({});
 

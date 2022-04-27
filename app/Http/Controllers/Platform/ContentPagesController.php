@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -43,7 +44,10 @@ class ContentPagesController extends BaseController
         ]);
     }
 
-    public function courses(Request $request, $brand) {
+    public function courses(Request $request, $domain) {
+        ConfigService::$availableBrands = [brand()];
+        ContentRepository::$bypassPermissions = true;
+
         $lessonType = 'course';
         $catalogName = 'courses';
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$catalogName] ?? [];
