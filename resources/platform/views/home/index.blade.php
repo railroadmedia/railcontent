@@ -11,29 +11,29 @@
 @section('content')
 
     <page-container brand="{{ $brand }}">
-        
+
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
 
             @if ($isSubscriber)
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
-                    
+
                     {{-- On Boarding --}}
                     {{-- <onboarding></onboarding> --}}
-                    
+
                     {{-- On Boarding TriggerBanner --}}
                     <trigger-banner :v-if="true"></trigger-banner>
 
                     {{-- Carousel --}}
-                    <header-carousel 
-                        :preloaded-carousel="[]" 
+                    <header-carousel
+                        :preloaded-carousel="[]"
                         brand="{{ $brand }}">
                     </header-carousel>
-                    
+
                     <!-- Home Card Links -->
                     <home-card-links brand="{{ $brand }}"></home-card-links>
-                    
+
                     {{-- Continue Section --}}
                     {{-- @component('partials.bladesora.members.components.home._continue-section', [
                         'hasStartedContent' => !empty($startedContentArray),
@@ -46,13 +46,13 @@
                     @endcomponent --}}
 
                     {{-- New Section --}}
-                    {{-- @component('partials.bladesora.members.components.home._new-section', [
-                        'brand' => 'drumeo',
+                    @component('partials.bladesora.members.components.home._new-section', [
+                        'brand' => brand(),
                         'contentEndpoint' => '/laravel/public/railcontent/content',
-                        'allLessonsUrl' => url()->route('members.lessons.all'),
-                        'newContent' => $newContent,
+                        'allLessonsUrl' => '', // todo: need url
+                        'newContentJson' => $newContentJson,
                         ])
-                    @endcomponent --}}
+                    @endcomponent
 
                     {{-- Popular Conversations --}}
                     {{-- @component('partials.bladesora.members.components.home._conversations-section', [
@@ -90,14 +90,14 @@
                         'usersList' => $usersList,
                         ])
                     @endcomponent --}}
-                    
+
                     {{-- Live Banner --}}
-                    <coach-event 
-                        brand="{{ $brand }}" 
+                    <coach-event
+                        brand="{{ $brand }}"
                         :preloaded-content='{{ $coachEvent }}'
-                        current-date-string="{{ $currentDate }}" 
+                        current-date-string="{{ $currentDate }}"
                         subscription-calendar-id="{{ $calendarId }}"
-                        youtube-event-id="{{ $youtubeId }}" 
+                        youtube-event-id="{{ $youtubeId }}"
                         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
                         event-coach-profile-url="{{ $eventCoachProfileUrl }}"
                     ></coach-event>
@@ -121,9 +121,9 @@
                 </div>
 
             @endif
-            
+
         </div>
-        
+
     </page-container>
 @endsection
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
+use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
@@ -18,12 +19,12 @@ Route::domain('{musoraDomain}')
         /*
          * Home Page
          */
-        Route::get('/{brand}', [ContentPagesController::class, 'home'])
+        Route::get('/{brand}', [HomePageController::class, 'home'])
             ->whereIn('brand', all_brands())
             ->name('home');
 
         // this automatically redirects to the users last used brand
-        Route::get('/members', [ContentPagesController::class, 'homeRedirect'])
+        Route::get('/members', [HomePageController::class, 'homeRedirect'])
             ->whereIn('brand', all_brands())
             ->name('home-redirect');
 
