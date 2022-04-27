@@ -21411,6 +21411,12 @@ a:visited{
   position: -webkit-sticky;
   position: sticky;
 }
+.tw-top-0{
+  top: 0px;
+}
+.tw-left-0{
+  left: 0px;
+}
 .tw-top-\[60px\]{
   top: 60px;
 }
@@ -21431,12 +21437,6 @@ a:visited{
 }
 .tw-bottom-0{
   bottom: 0px;
-}
-.tw-left-0{
-  left: 0px;
-}
-.tw-top-0{
-  top: 0px;
 }
 .tw-right-0{
   right: 0px;
@@ -21538,6 +21538,10 @@ a:visited{
   margin-left: auto;
   margin-right: auto;
 }
+.tw-my-4{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .tw-my-3{
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -21549,10 +21553,6 @@ a:visited{
 .tw-mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
-}
-.tw-my-4{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 .tw-mx-\[5px\]{
   margin-left: 5px;
@@ -21604,17 +21604,11 @@ a:visited{
 .tw-mb-2{
   margin-bottom: 0.5rem;
 }
-.tw-mt-14{
-  margin-top: 3.5rem;
-}
 .tw-mr-4{
   margin-right: 1rem;
 }
 .tw-mb-4{
   margin-bottom: 1rem;
-}
-.tw-mt-1{
-  margin-top: 0.25rem;
 }
 .tw-mt-3{
   margin-top: 0.75rem;
@@ -21624,6 +21618,9 @@ a:visited{
 }
 .tw-mt-2{
   margin-top: 0.5rem;
+}
+.tw-mt-14{
+  margin-top: 3.5rem;
 }
 .tw-mr-3{
   margin-right: 0.75rem;
@@ -21639,6 +21636,9 @@ a:visited{
 }
 .tw-mb-1{
   margin-bottom: 0.25rem;
+}
+.tw-mt-1{
+  margin-top: 0.25rem;
 }
 .tw-ml-1{
   margin-left: 0.25rem;
@@ -22635,6 +22635,10 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
+.tw-border-\[\#E4E4E7\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(228 228 231 / var(--tw-border-opacity));
+}
 .tw-bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -23464,6 +23468,14 @@ a:visited{
   --tw-text-opacity: 1;
   color: rgb(74 222 128 / var(--tw-text-opacity));
 }
+.tw-text-\[\#D4D4D8\]{
+  --tw-text-opacity: 1;
+  color: rgb(212 212 216 / var(--tw-text-opacity));
+}
+.tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-text-opacity));
+}
 .tw-underline{
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -23680,6 +23692,15 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(202 138 4 / var(--tw-bg-opacity));
 }
+.hover\:tw-bg-gray-200\/\[10\]:hover{
+  background-color: rgb(229 231 235 / 10);
+}
+.hover\:tw-bg-gray-900\/\[10\]:hover{
+  background-color: rgb(17 24 39 / 10);
+}
+.hover\:tw-bg-gray-100\/\[10\]:hover{
+  background-color: rgb(243 244 246 / 10);
+}
 .hover\:tw-bg-opacity-100:hover{
   --tw-bg-opacity: 1;
 }
@@ -23766,6 +23787,10 @@ a:visited{
 .tw-dark .dark\:tw-border-white\/\[0\.15\]{
   border-color: rgb(255 255 255 / 0.15);
 }
+.tw-dark .dark\:tw-border-\[\#223457\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(34 52 87 / var(--tw-border-opacity));
+}
 .tw-dark .dark\:tw-border-b-\[\#102230\]{
   --tw-border-opacity: 1;
   border-bottom-color: rgb(16 34 48 / var(--tw-border-opacity));
@@ -23798,6 +23823,10 @@ a:visited{
   --tw-text-opacity: 1;
   color: rgb(158 192 220 / var(--tw-text-opacity));
 }
+.tw-dark .dark\:tw-text-black{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
 .tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::-moz-placeholder{
   --tw-text-opacity: 1;
   color: rgb(158 192 220 / var(--tw-text-opacity));
@@ -23813,6 +23842,13 @@ a:visited{
 .tw-dark .dark\:hover\:tw-bg-\[\#102230\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity));
+}
+.tw-dark .dark\:hover\:tw-bg-gray-900\/\[10\]:hover{
+  background-color: rgb(17 24 39 / 10);
+}
+.tw-dark .dark\:hover\:tw-text-white:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .tw-dark .dark\:focus\:tw-outline-\[\#9EC0DC\]:focus{
   outline-color: #9EC0DC;
@@ -24297,6 +24333,10 @@ a:visited{
   .md\:tw-p-7{
     padding: 1.75rem;
   }
+  .md\:tw-px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   .md\:tw-py-12{
     padding-top: 3rem;
     padding-bottom: 3rem;
@@ -24320,10 +24360,6 @@ a:visited{
   .md\:tw-px-1{
     padding-left: 0.25rem;
     padding-right: 0.25rem;
-  }
-  .md\:tw-px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
   }
   .md\:tw-pb-0{
     padding-bottom: 0px;

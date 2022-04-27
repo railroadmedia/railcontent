@@ -40145,7 +40145,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["href"];
 var _hoisted_2 = {
   key: 0,
-  "class": "flex flex-column align-left align-v-center number-col title text-black hide-xs-only"
+  "class": "tw-flex tw-flex-col tw-text-black dark:tw-text-white align-left tw-justify-center number-col title hide-xs-only"
 };
 var _hoisted_3 = {
   "class": "thumb-wrap corners-10"
@@ -40164,7 +40164,7 @@ var _hoisted_8 = {
 };
 var _hoisted_9 = {
   key: 2,
-  "class": "flex flex-column align-v-center avatar-col"
+  "class": "tw-flex tw-flex-col tw-justify-center avatar-col"
 };
 var _hoisted_10 = {
   "class": "thumb-wrap rounded",
@@ -40183,16 +40183,16 @@ var _hoisted_12 = {
   "class": "x-tiny text-white font-bold"
 };
 var _hoisted_13 = {
-  "class": "flex flex-column align-v-center title-column overflow"
+  "class": "tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column overflow"
 };
 var _hoisted_14 = {
   key: 1,
-  "class": "text-grey-3 item-title body mv-2"
+  "class": "tw-text-[#3F3F46] dark:tw-text-[] item-title body mv-2"
 };
 var _hoisted_15 = ["innerHTML"];
 var _hoisted_16 = {
   key: 3,
-  "class": "x-tiny font-compressed text-grey-3 text-truncate uppercase hide-md-up"
+  "class": "tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[] text-truncate tw-uppercase hide-md-up"
 };
 var _hoisted_17 = {
   key: 0,
@@ -40200,17 +40200,17 @@ var _hoisted_17 = {
 };
 var _hoisted_18 = {
   key: 3,
-  "class": "flex flex-column sheet-music-col ph-1 hide-xs-only"
+  "class": "flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
 };
 var _hoisted_19 = ["src"];
 var _hoisted_20 = ["data-test"];
 var _hoisted_21 = {
   key: 5,
-  "class": "flex flex-column uppercase align-center basic-col text-center x-tiny hide-sm-down"
+  "class": "tw-flex tw-flex-col tw-uppercase tw-justify-center basic-col tw-text-center tw-text-xs hide-sm-down"
 };
 var _hoisted_22 = {
   key: 6,
-  "class": "flex flex-column uppercase align-center basic-col text-center x-tiny hide-sm-down"
+  "class": "flex tw-flex-col uppercase tw-justify-center basic-col text-center x-tiny hide-sm-down"
 };
 var _hoisted_23 = {
   key: 0,
@@ -40223,20 +40223,20 @@ var _hoisted_24 = {
 var _hoisted_25 = ["title"];
 var _hoisted_26 = {
   key: 8,
-  "class": "flex flex-column icon-col align-v-center"
+  "class": "flex tw-flex-col icon-col tw-justify-center"
 };
 var _hoisted_27 = {
   "class": "body"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex flex-row bb-grey-1-1 no-decoration hover-bg-grey-7 relative text-grey-3 hover-text-black", $options.class_object]),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-flex tw-flex-row tw-relative tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-no-underline hover:tw-bg-gray-100/[10] dark:hover:tw-bg-gray-900/[10]", $options.class_object]),
     href: _ctx.renderLink ? _ctx.item.url : false
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        <div v-if=\"mappedData.sheet_music && !is_search\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("             class=\"flex flex-column xs-12 pv hide-sm-up\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("            <img :src=\"mappedData.sheet_music\" style=\"width:100%;\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" LESSON NUMBERS "), _ctx.showNumbers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.lesson_number), 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" LESSON NUMBERS "), _ctx.showNumbers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.lesson_number), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" THUMBNAIL COLUMN "), !$options.showStudentReviewThumbsAsAvatar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 1,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex flex-column align-v-center", [$options.thumbnailColumnClass, _ctx.themeColor]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-flex tw-flex-col tw-justify-center", [$options.thumbnailColumnClass, _ctx.themeColor]])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["thumb-img corners-10", _ctx.thumbnailType])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -40273,7 +40273,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   ), !_ctx.isReleased ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
     key: 0,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-white font-bold", _ctx.overview ? 'tiny' : 'x-tiny'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white dark:tw-text-black tw-font-bold", _ctx.overview ? 'tiny' : 'x-tiny'])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.releaseDate), 3
   /* TEXT, CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 2
@@ -40293,11 +40293,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STYLE */
   )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" TITLES AND COLUMN DATA (on mobile) "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_ctx.brand !== 'guitareo' && !$props.isCoach ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
     key: 0,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tiny font-compressed uppercase text-truncate", [_ctx.themeTextClass, _ctx.overview ? 'dense font-bold' : 'font-compressed']])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]", [_ctx.overview ? 'dense font-bold' : 'font-compressed']])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.mappedData.color_title), 3
   /* TEXT, CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-black font-bold item-title", _ctx.overview ? 'heading' : 'tiny font-compressed'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-black dark:tw-text-white tw-font-bold item-title", _ctx.overview ? 'heading' : 'tiny font-compressed'])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.mappedData.black_title), 3
   /* TEXT, CLASS */
   ), $options.mappedData.grey_title && _ctx.overview ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.mappedData.grey_title), 1
@@ -40325,7 +40325,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.mappedData.column_data, function (column_data, i) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: "".concat(_ctx.item.id, "-mappedData-").concat(i),
-      "class": "flex flex-column uppercase align-center basic-col text-center x-tiny font-compressed hide-sm-down",
+      "class": "tw-flex tw-flex-col tw-uppercase tw-justify-center basic-col tw-text-center tw-text-xs font-compressed hide-sm-down",
       "data-test": column_data
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(column_data), 9
     /* TEXT, PROPS */
@@ -40338,15 +40338,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ADD TO LIST OR RESET PROGRESS BUTTONS "), _ctx.displayUserInteractions && _ctx.item.type !== 'learning-path' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 7,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex flex-column icon-col align-v-center", _ctx.is_search ? '' : 'hide-xs-only'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex tw-flex-col icon-col tw-justify-center", _ctx.is_search ? '' : 'hide-xs-only'])
   }, [_ctx.resetProgress ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "fas fa-undo flex-center text-grey-2 hover-text-black reset",
+    "class": "fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black reset",
     title: "Reset Progress",
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return _ctx.progressReset && _ctx.progressReset.apply(_ctx, arguments);
     }, ["stop", "prevent"]))
   })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["add-to-list fas fa-plus flex-center hover-text-black", _ctx.is_added ? 'is-added ' + _ctx.themeTextClass : 'text-grey-2']),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black", _ctx.is_added ? 'is-added ' + _ctx.themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]']),
     title: _ctx.is_added ? 'Remove from list' : 'Add to list',
     onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return _ctx.addToList && _ctx.addToList.apply(_ctx, arguments);
@@ -40356,10 +40356,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_25)]))], 2
   /* CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.is_search && _ctx.item.type === 'learning-path' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PROGRESS INDICATOR OR LOCK ICON "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex flex-column icon-col align-v-center", _ctx.is_search || _ctx.overview ? 'hide-xs-only' : ''])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["flex tw-flex-col icon-col tw-justify-center", _ctx.is_search || _ctx.overview ? 'hide-xs-only' : ''])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" LOCK ICON OR ADD TO CALENDAR "), _ctx.noAccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
-    "class": "body text-grey-2 hover-text-black",
+    "class": "body tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black",
     title: "Add to Calendar",
     "data-open-modal": "addToCalendarModal",
     onClick: _cache[2] || (_cache[2] = function () {
@@ -40373,12 +40373,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" STARTED OR COMPLETED "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_ctx.item.started || _ctx.item.completed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
     key: 0,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas flex-center rounded hover-text-black", [_ctx.item.completed ? _ctx.completedIcon : 'fa-adjust', _ctx.themeTextClass]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas flex-center rounded dark:hover:tw-text-white hover:tw-text-black", [_ctx.item.completed ? _ctx.completedIcon : 'fa-adjust', _ctx.themeTextClass]])
   }, null, 2
   /* CLASS */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
     key: 1,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas flex-center text-grey-2 rounded hover-text-black", ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(_ctx.item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black rounded", ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(_ctx.item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle'])
   }, null, 2
   /* CLASS */
   ))])], 2112
