@@ -38,12 +38,17 @@
         "tailwindcss": "^3.0.23"
     },
     "dependencies": {
+        "@musora/icons": "^1.0.6",
         "@tinymce/tinymce-vue": "^5.0.0",
         "alpinejs": "^3.4.2",
         "axios": "^0.26.1",
+        "cropperjs": "^1.5.12",
+        "dropzone": "5.7.2",
         "fast-glob": "^3.2.11",
+        "flatpickr": "^4.6.13",
         "lodash": "^4.17.19",
         "luxon": "^2.3.1",
+        "normalize.css": "^8.0.1",
         "noty": "^3.2.0-beta-deprecated",
         "query-string": "^7.1.1",
         "simplebar-vue": "^1.6.8",

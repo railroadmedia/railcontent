@@ -11,7 +11,8 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 - make a new file in the repository root named `.env`
 - copy content from 1pass note `.env, local, Musora Web Platform` to the .env file 
 - run `r musora-web-platform composer install` -- NOTE: if asked for nova package credentials, 
-  input the credentials from our 'Laravel + Nova/Vapor/Etc' 1pass note
+  input 'caleb@drumeo.com' for the username and for the password use our Nova license key which is inside the 1pass note: 
+  "Laravel Nova v4.0 License Key". When it asks if you want to store a composer auth file, enter Y
 - run `r musora db8 local fromprod` -- NOTE: this is just 'musora' since we only need the musora_laravel tables
   run `r musora-web-platform artisan migrate`
 - navigate to the /app/musora-web-platform folder with `cd /app/musora-web-platform`
