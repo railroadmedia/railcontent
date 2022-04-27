@@ -122,7 +122,6 @@ export default {
       :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed"
-      @onBrandSelect="onBrandSelect"
       @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle"
     />

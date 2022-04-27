@@ -55,7 +55,7 @@ export default {
     <section v-for="(section, i) in sidebarLinks.sections" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
         <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
-          <a :href="`${link.path}?brand=${brand}`" 
+          <a :href="`/${brand}/${link.path}`" 
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
@@ -71,7 +71,7 @@ export default {
     <section v-for="(section, i) in sidebarLinks.brandSections" :key="i">
       <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
         <li v-for="(link, j) in section.links" :key="j" :class="[pathName === link.path ? ` ${textColor[brand]}` : '']">
-          <a :href="`${link.path}?brand=${brand}`" 
+          <a :href="`/${brand}/${link.path}`" 
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === link.path ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
@@ -87,7 +87,7 @@ export default {
     <section class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
         <li :class="[pathName === '/members/forums' ? ` ${textColor[brand]}` : '']">
-          <a :href="`/members/forums?brand=${brand}`" 
+          <a :href="`/${brand}/forums`" 
              :title="[ isSidebarCollapsed ? 'Forums': '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === '/members/forums' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
@@ -103,7 +103,7 @@ export default {
     <section class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
         <li :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
-          <a :href=" `/members/profile/?brand=${brand }` " 
+          <a :href=" `/${brand}/profile/` " 
              :title="[ isSidebarCollapsed ? 'My List': '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"

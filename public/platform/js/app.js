@@ -36200,12 +36200,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     isSidebarHidden: $setup.isSidebarHidden,
     isDarkModeSelected: $setup.isDarkModeSelected,
     isSidebarCollapsed: $setup.isSidebarCollapsed,
-    onOnBrandSelect: _ctx.onBrandSelect,
     onOnCollapseSidebar: $setup.onCollapseSidebar,
     onOnColorModeToggle: $setup.onColorModeToggle
   }, null, 8
   /* PROPS */
-  , ["brand", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "onOnBrandSelect", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
+  , ["brand", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
     brand: $props.brand,
     isSidebarCollapsed: $setup.isSidebarCollapsed,
     isSidebarHidden: $setup.isSidebarHidden,
@@ -36597,7 +36596,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: j,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === link.path ? " ".concat($setup.textColor[$props.brand]) : ''])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-            href: "".concat(link.path, "?brand=").concat($props.brand),
+            href: "/".concat($props.brand, "/").concat(link.path),
             title: [$props.isSidebarCollapsed ? "".concat(link.name) : ''],
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -36627,7 +36626,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: j,
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === link.path ? " ".concat($setup.textColor[$props.brand]) : ''])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-            href: "".concat(link.path, "?brand=").concat($props.brand),
+            href: "/".concat($props.brand, "/").concat(link.path),
             title: [$props.isSidebarCollapsed ? "".concat(link.name) : ''],
             "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -36652,7 +36651,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forum "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === '/members/forums' ? " ".concat($setup.textColor[$props.brand]) : ''])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-        href: "/members/forums?brand=".concat($props.brand),
+        href: "/".concat($props.brand, "/forums"),
         title: [$props.isSidebarCollapsed ? 'Forums' : ''],
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/members/forums' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -36669,7 +36668,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" My List "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === '/members/profile' ? " ".concat($setup.textColor[$props.brand]) : ''])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-        href: "/members/profile/?brand=".concat($props.brand),
+        href: "/".concat($props.brand, "/profile/"),
         title: [$props.isSidebarCollapsed ? 'My List' : ''],
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/members/profile' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
@@ -45187,37 +45186,37 @@ var sidebarLinks = {
   sections: [{
     links: [{
       name: 'Home',
-      path: '/members',
+      path: '',
       icon: 'home'
     }, {
       name: 'Method',
-      path: '/members/method',
+      path: 'method',
       icon: 'method'
     }, {
       name: 'Songs',
-      path: '/members/songs',
+      path: 'songs',
       icon: 'headphones'
     }, {
       name: 'Coaches',
-      path: '/members/coaches',
+      path: 'coaches',
       icon: 'whistle'
     }]
   }, {
     links: [{
       name: 'Packs',
-      path: '/members/packs',
+      path: 'packs',
       icon: 'box'
     }, {
       name: 'Quick Tips',
-      path: '/members/quick-tips',
+      path: 'quick-tips',
       icon: 'light-bulb'
     }, {
       name: 'Student Focus',
-      path: '/members/student-focus',
+      path: 'student-focus',
       icon: 'person-plus'
     }, {
       name: 'Live',
-      path: '/members/live',
+      path: 'live',
       icon: 'play-circle'
     }]
   }],
@@ -45225,56 +45224,56 @@ var sidebarLinks = {
     brand: 'singeo',
     links: [{
       name: 'Routines',
-      path: '/members/routines',
+      path: 'routines',
       icon: 'routines'
     }]
   }, {
     brand: 'guitareo',
     links: [{
       name: 'Lessons',
-      path: '/members/lessons',
+      path: 'lessons',
       icon: 'electric-guitar'
     }, {
       name: '500 Songs',
-      path: '/members/lessons',
+      path: 'lessons',
       icon: '500-songs'
     }, {
       name: 'Chords & Scales',
-      path: '/members/chords-scales',
+      path: 'chords-scales',
       icon: 'guitar-tabs'
     }, {
       name: 'Archives',
-      path: '/members/archives',
+      path: 'archives',
       icon: 'archives'
     }]
   }, {
     brand: 'pianote',
     links: [{
       name: 'Foundation',
-      path: '/members/foundation',
+      path: 'foundation',
       icon: 'foundation'
     }, {
       name: 'Podcast',
-      path: '/members/podcast',
+      path: 'podcast',
       icon: 'podcast'
     }, {
       name: 'Bootcamps',
-      path: '/members/bootcamps',
+      path: 'bootcamps',
       icon: 'keys'
     }]
   }, {
     brand: 'drumeo',
     links: [{
       name: 'Play-Alongs',
-      path: '/members/play-alongs',
+      path: 'play-alongs',
       icon: 'eigth-notes'
     }, {
       name: 'Rudiments',
-      path: '/members/rudiments',
+      path: 'rudiments',
       icon: 'drum'
     }, {
       name: 'Shows',
-      path: '/members/shows',
+      path: 'shows',
       icon: 'shows'
     }]
   }]
