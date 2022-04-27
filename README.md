@@ -10,7 +10,9 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 - run `r setup musora-web-platform` then `cd /app/musora-web-platform` 
 - make a new file in the repository root named `.env`
 - copy content from 1pass note `.env, local, Musora Web Platform` to the .env file 
-- run `r musora-web-platform composer install`
+- run `r musora-web-platform composer install` -- NOTE: if asked for nova package credentials, 
+  input 'caleb@drumeo.com' for the username and for the password use our Nova license key which is inside the 1pass note: 
+  "Laravel Nova v4.0 License Key". When it asks if you want to store a composer auth file, enter Y
 - run `r musora db8 local fromprod` -- NOTE: this is just 'musora' since we only need the musora_laravel tables
   run `r musora-web-platform artisan migrate`
 - navigate to the /app/musora-web-platform folder with `cd /app/musora-web-platform`
@@ -50,6 +52,7 @@ mysql containers.
 All brand domains/websites such as drumeo.com, pianote.com, etc use this same repository and laravel install
 to run. To load these brands using the new musora-web-platform repo you must specify the port and URLs like this:  
 
+[https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)  
 [https://devplatform.drumeo.com:8443/](https://devplatform.drumeo.com:8443/)  
 [https://devplatform.pianote.com:8443/](https://devplatform.pianote.com:8443/)  
 [https://devplatform.guitareo.com:8443/](https://devplatform.guitareo.com:8443/)  

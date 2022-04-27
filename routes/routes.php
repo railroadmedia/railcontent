@@ -1,7 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+
+$subDomain = current(explode('.', request()->getHost()));
 
 /*
  * Domain patterns for usage in routes. This allows routes to accept any subdomain OR no subdomain for a given domain.
@@ -12,11 +15,11 @@ Route::pattern('pianoteDomain', '(.*pianote\.com)');
 Route::pattern('guitareoDomain', '(.*guitareo\.com)');
 Route::pattern('singeoDomain', '(.*singeo\.com)');
 
-URL::defaults(['musoraDomain' => 'musora.com']);
-URL::defaults(['drumeoDomain' => 'drumeo.com']);
-URL::defaults(['pianoteDomain' => 'pianote.com']);
-URL::defaults(['guitareoDomain' => 'guitareo.com']);
-URL::defaults(['singeoDomain' => 'singeo.com']);
+URL::defaults(['musoraDomain' => !empty($subDomain) ? $subDomain . '.musora.com' : 'musora.com']);
+URL::defaults(['drumeoDomain' => !empty($subDomain) ? $subDomain . '.drumeo.com' : 'drumeo.com']);
+URL::defaults(['pianoteDomain' => !empty($subDomain) ? $subDomain . '.pianote.com' : 'pianote.com']);
+URL::defaults(['guitareoDomain' => !empty($subDomain) ? $subDomain . '.guitareo.com' : 'guitareo.com']);
+URL::defaults(['singeoDomain' => !empty($subDomain) ? $subDomain . '.singeo.com' : 'singeo.com']);
 
 /*
  * Public Routes

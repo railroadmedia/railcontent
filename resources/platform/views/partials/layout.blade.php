@@ -22,7 +22,7 @@
         @include('partials._favicons')
     </head>
 
-    <body id="app-body" class="flex flex-col w-full min-h-screen tw-relative">
+    <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
         <!-- Modal Container -->
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
         

@@ -22,6 +22,11 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('home');
 
+        // this automatically redirects to the users last used brand
+        Route::get('/members', [ContentPagesController::class, 'homeRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('home-redirect');
+
         /*
          * Primary Content Pages
          */

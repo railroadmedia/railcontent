@@ -47,13 +47,17 @@ class BrandService
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @return string
      */
-    public static function getLastUsedBrand(User $user)
+    public static function getLastUsedBrand(User $user = null)
     {
         if (!empty(self::$currentBrand)) {
             return self::$currentBrand;
+        }
+
+        if (empty($user)) {
+            return null;
         }
 
         $cacheKey = 'user_' . $user->id . '_last_used_brand';
