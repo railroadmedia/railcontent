@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d6151c25ee49e2a5eaef0e4296be44d4",
+    "content-hash": "ee6b2f80e069080e4451a3530cb542e2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.220.4",
+            "version": "3.221.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6c2e36bb61741c87ed7ffd53e15d903311ad6b60"
+                "reference": "6ef06165ef815358d3e60872b4c9f6c10deb3816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6c2e36bb61741c87ed7ffd53e15d903311ad6b60",
-                "reference": "6c2e36bb61741c87ed7ffd53e15d903311ad6b60",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6ef06165ef815358d3e60872b4c9f6c10deb3816",
+                "reference": "6ef06165ef815358d3e60872b4c9f6c10deb3816",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.220.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.221.0"
             },
-            "time": "2022-04-25T18:16:08+00:00"
+            "time": "2022-04-26T18:19:33+00:00"
         },
         {
             "name": "box/spout",
@@ -2131,17 +2131,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.2.5",
+            "version": "4.2.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "904a5cc20be798ea4cd361b42a1dedfa09a08371"
+                "reference": "2d5a07d0ec51ffd7b6a2a6a91736313afec619b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-904a5cc20be798ea4cd361b42a1dedfa09a08371-zip-909b3f.zip",
-                "reference": "904a5cc20be798ea4cd361b42a1dedfa09a08371",
-                "shasum": "66df24c62bb7585b3f94be6fde00a7a7235689f4"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-2d5a07d0ec51ffd7b6a2a6a91736313afec619b0-zip-721fae.zip",
+                "reference": "2d5a07d0ec51ffd7b6a2a6a91736313afec619b0",
+                "shasum": "2ffa4cb1bfd8e3b5e090a3eabfe92186baeebd05"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -2231,9 +2231,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.2.5"
+                "source": "https://github.com/laravel/nova/tree/v4.2.7"
             },
-            "time": "2022-04-21T15:42:54+00:00"
+            "time": "2022-04-26T22:34:25+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4263,7 +4263,7 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-2.0-php-mysql-8-migration",
+            "version": "dev-0.5-php-mysql-8-migration",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
@@ -4324,7 +4324,7 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-php-mysql-8-migration"
+                "source": "https://github.com/railroadmedia/railcontent/tree/0.5-php-mysql-8-migration"
             },
             "time": "2022-04-22T17:18:49+00:00"
         },
