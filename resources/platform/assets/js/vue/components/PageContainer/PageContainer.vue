@@ -11,10 +11,11 @@ import "simplebar/dist/simplebar.min.css";
 export default {
   name: "PageContainer",
   components: { Navbar, Sidebar, Footer, SpriteSheet },
-  data() {
-    return {
-      brand: "drumeo",
-    };
+  props: {
+    brand: {
+      type: String,
+      default: 'drumeo'
+    }
   },
 
   setup(props, context) {
@@ -62,23 +63,12 @@ export default {
       }
     };
 
-    const onBrandSelect = (val) => {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      if (typeof val === "string") {
-        brand.value = val;
-        urlSearchParams.set("brand", val);
-        //if using router
-        router.push({ path: "/members", query: { brand: val } });
-      }
-    };
-
     return {
       isSidebarCollapsed,
       isSidebarHidden,
       isDarkModeSelected,
       onCollapseSidebar,
       onColorModeToggle,
-      onBrandSelect,
       setDarkMode
     };
   },
@@ -94,10 +84,6 @@ export default {
       ).matches;
       this.setDarkMode(this.isDarkModeSelected);
     }
-    //Get Query String
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const brandParam = urlSearchParams.get("brand");
-    this.brand = brandParam || "drumeo";
     //Set Sidebar State
     const smallBreakpoint = window.matchMedia("(max-width: 767px)");
     if (smallBreakpoint.matches) {
@@ -107,13 +93,6 @@ export default {
   },
 
   created() {
-    this.$watch(
-      //Watch for changes in route params
-      () => this.$route.query,
-      (toParams, previousParams) => {
-        this.brand = this.$route.query.brand;
-      }
-    );
     //Check if Mobile on Resize
     window.addEventListener("resize", this.onResize);
   },

@@ -30,8 +30,8 @@ export default {
 
         const handleSelect = (brand) => {
             //Refresh the Page with new brand
-            let path = window.location.pathname;
-            window.location.replace(`${path}?brand=${brand}`)
+            const host = window.location.host;   
+            window.location.href = `${brand}`;
         }
 
         return {

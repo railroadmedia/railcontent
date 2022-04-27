@@ -10,7 +10,7 @@
 
 @section('content')
 
-    <page-container>
+    <page-container brand="{{ $brand }}">
         
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
@@ -18,7 +18,7 @@
             @if ($isSubscriber)
 
                 <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
-
+                    
                     {{-- On Boarding --}}
                     {{-- <onboarding></onboarding> --}}
                     

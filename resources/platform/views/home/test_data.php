@@ -2,7 +2,6 @@
 //Test Data
 $isSubscriber = true;
 $page = Request::segment(1);
-$brand = request()->get('brand');
 //My Stats Data
 $nextLearningPathProgressPercent = "0";
 $nextLearningPathLevel = "1.1";
