@@ -9,17 +9,17 @@ export const sidebarLinks = {
           },
           {
             name: 'Method',
-            path: 'method',
+            path: '/method',
             icon: 'method',
           },
           {
             name: 'Songs',
-            path: 'songs',
+            path: '/songs',
             icon: 'headphones',
           },
           {
             name: 'Coaches',
-            path: 'coaches',
+            path: '/coaches',
             icon: 'whistle',
           }
         ]
@@ -28,27 +28,27 @@ export const sidebarLinks = {
         links: [
           {
             name: 'Packs',
-            path: 'packs',
+            path: '/packs',
             icon: 'box',
           },
           {
             name: 'Courses',
-            path: 'courses',
+            path: '/courses',
             icon: 'academic-cap'
           },
           {
             name: 'Quick Tips',
-            path: 'quick-tips',
+            path: '/quick-tips',
             icon: 'light-bulb',
           },
           {
             name: 'Student Focus',
-            path: 'student-focus',
+            path: '/student-focus',
             icon: 'person-plus',
           },
           {
             name: 'Live',
-            path: 'live',
+            path: '/live',
             icon: 'play-circle',
           },
         ]
@@ -60,7 +60,7 @@ export const sidebarLinks = {
         links: [
           {
             name: 'Routines',
-            path: 'routines',
+            path: '/routines',
             icon: 'routines',
           },
         ]
@@ -70,23 +70,23 @@ export const sidebarLinks = {
         links: [
           {
             name: 'Lessons',
-            path: 'lessons',
+            path: '/lessons',
             icon: 'electric-guitar',
 
           },
           {
             name: '500 Songs',
-            path: 'lessons',
+            path: '/lessons',
             icon: '500-songs',
           },
           {
             name: 'Chords & Scales',
-            path: 'chords-scales',
+            path: '/chords-scales',
             icon: 'guitar-tabs',
           },
           {
             name: 'Archives',
-            path: 'archives',
+            path: '/archives',
             icon: 'archives',
           },
         ]
@@ -96,17 +96,17 @@ export const sidebarLinks = {
         links: [
           {
             name: 'Foundation',
-            path: 'foundation',
+            path: '/foundation',
             icon: 'foundation',
           },
           {
             name: 'Podcast',
-            path: 'podcast',
+            path: '/podcast',
             icon: 'podcast',
           },
           {
             name: 'Bootcamps',
-            path: 'bootcamps',
+            path: '/bootcamps',
             icon: 'keys',
           },
         ]
@@ -116,17 +116,17 @@ export const sidebarLinks = {
         links: [
           {
             name: 'Play-Alongs',
-            path: 'play-alongs',
+            path: '/play-alongs',
             icon: 'eigth-notes',
           },
           {
             name: 'Rudiments',
-            path: 'rudiments',
+            path: '/rudiments',
             icon: 'drum',
           },
           {
             name: 'Shows',
-            path: 'shows',
+            path: '/shows',
             icon: 'shows',
           },
         ]

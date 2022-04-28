@@ -33262,7 +33262,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "tw-grid tw-grid-cols-3 tw-gap-1 sm:tw-gap-4 tw-my-4"
+  "class": "tw-grid tw-grid-cols-3 tw-gap-1 sm:tw-gap-4 tw-mb-6 md:tw-mb-8"
 };
 var _hoisted_2 = ["href"];
 
@@ -36603,11 +36603,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(section.links, function (link, j) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
             key: j,
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === link.path ? " ".concat($setup.textColor[$props.brand]) : ''])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === "/".concat($props.brand).concat(link.path) ? " ".concat($setup.textColor[$props.brand]) : ''])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-            href: "/".concat($props.brand, "/").concat(link.path),
+            href: "/".concat($props.brand).concat(link.path),
             title: [$props.isSidebarCollapsed ? "".concat(link.name) : ''],
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === "/".concat($props.brand).concat(link.path) ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
             "icon-name": link.icon,
             "class": "tw-w-[24px] tw-mx-4"
@@ -36633,11 +36633,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, [section.brand === $props.brand ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(section.links, function (link, j) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
             key: j,
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === link.path ? " ".concat($setup.textColor[$props.brand]) : ''])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === "/".concat($props.brand).concat(link.path) ? " ".concat($setup.textColor[$props.brand]) : ''])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-            href: "/".concat($props.brand, "/").concat(link.path),
+            href: "/".concat($props.brand).concat(link.path),
             title: [$props.isSidebarCollapsed ? "".concat(link.name) : ''],
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === link.path ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === "/".concat($props.brand).concat(link.path) ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
             "icon-name": link.icon,
             "class": "tw-w-[24px] tw-mx-4"
@@ -36658,11 +36658,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), 128
       /* KEYED_FRAGMENT */
       )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forum "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === '/members/forums' ? " ".concat($setup.textColor[$props.brand]) : ''])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === "".concat($props.brand, "/forums") ? " ".concat($setup.textColor[$props.brand]) : ''])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
         href: "/".concat($props.brand, "/forums"),
         title: [$props.isSidebarCollapsed ? 'Forums' : ''],
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/members/forums' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === "".concat($props.brand, "/forums") ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
         "icon-name": "messages",
         "class": "tw-w-[24px] tw-mx-4"
@@ -36675,11 +36675,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , _hoisted_5)], 2
       /* CLASS */
       )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" My List "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === '/members/profile' ? " ".concat($setup.textColor[$props.brand]) : ''])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$options.pathName === "".concat($props.brand, "/profile") ? " ".concat($setup.textColor[$props.brand]) : ''])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
         href: "/".concat($props.brand, "/profile/"),
         title: [$props.isSidebarCollapsed ? 'My List' : ''],
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === '/members/profile' ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]", [$options.pathName === "".concat($props.brand, "/profile") ? "tw-font-bold ".concat($setup.textColor[$props.brand], " ").concat($setup.borderColor[$props.brand]) : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
         "icon-name": "playlist",
         "class": "tw-w-[24px] tw-mx-4 tw-mt-1"
@@ -37346,7 +37346,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
+  "class": "tw-mb-6 md:tw-mb-8 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]"
 };
 var _hoisted_2 = {
   "class": "tw-flex tw-flex-row tw-items-center"
@@ -45199,37 +45199,37 @@ var sidebarLinks = {
       icon: 'home'
     }, {
       name: 'Method',
-      path: 'method',
+      path: '/method',
       icon: 'method'
     }, {
       name: 'Songs',
-      path: 'songs',
+      path: '/songs',
       icon: 'headphones'
     }, {
       name: 'Coaches',
-      path: 'coaches',
+      path: '/coaches',
       icon: 'whistle'
     }]
   }, {
     links: [{
       name: 'Packs',
-      path: 'packs',
+      path: '/packs',
       icon: 'box'
     }, {
       name: 'Courses',
-      path: 'courses',
+      path: '/courses',
       icon: 'academic-cap'
     }, {
       name: 'Quick Tips',
-      path: 'quick-tips',
+      path: '/quick-tips',
       icon: 'light-bulb'
     }, {
       name: 'Student Focus',
-      path: 'student-focus',
+      path: '/student-focus',
       icon: 'person-plus'
     }, {
       name: 'Live',
-      path: 'live',
+      path: '/live',
       icon: 'play-circle'
     }]
   }],
@@ -45237,56 +45237,56 @@ var sidebarLinks = {
     brand: 'singeo',
     links: [{
       name: 'Routines',
-      path: 'routines',
+      path: '/routines',
       icon: 'routines'
     }]
   }, {
     brand: 'guitareo',
     links: [{
       name: 'Lessons',
-      path: 'lessons',
+      path: '/lessons',
       icon: 'electric-guitar'
     }, {
       name: '500 Songs',
-      path: 'lessons',
+      path: '/lessons',
       icon: '500-songs'
     }, {
       name: 'Chords & Scales',
-      path: 'chords-scales',
+      path: '/chords-scales',
       icon: 'guitar-tabs'
     }, {
       name: 'Archives',
-      path: 'archives',
+      path: '/archives',
       icon: 'archives'
     }]
   }, {
     brand: 'pianote',
     links: [{
       name: 'Foundation',
-      path: 'foundation',
+      path: '/foundation',
       icon: 'foundation'
     }, {
       name: 'Podcast',
-      path: 'podcast',
+      path: '/podcast',
       icon: 'podcast'
     }, {
       name: 'Bootcamps',
-      path: 'bootcamps',
+      path: '/bootcamps',
       icon: 'keys'
     }]
   }, {
     brand: 'drumeo',
     links: [{
       name: 'Play-Alongs',
-      path: 'play-alongs',
+      path: '/play-alongs',
       icon: 'eigth-notes'
     }, {
       name: 'Rudiments',
-      path: 'rudiments',
+      path: '/rudiments',
       icon: 'drum'
     }, {
       name: 'Shows',
-      path: 'shows',
+      path: '/shows',
       icon: 'shows'
     }]
   }]
