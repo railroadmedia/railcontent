@@ -15,7 +15,7 @@ Route::domain('{musoraDomain}')
     });
 
 Route::get('products/{product:slug}', function ($slug){
-    $product = Product::where('slug', $slug)->first();
+    $product = Product::firstWhere('slug', $slug);
 
     return view('product',[
         'product' => $product
@@ -23,10 +23,13 @@ Route::get('products/{product:slug}', function ($slug){
 });
 
 Route::get('{brand}/products', function ($brand){
-//    $products = Product::where("brands.name", "=", $brand)->get();
-    $products = Product::join("brands", "brands.id", "=", "products.brand_id")->join("product_types", "product_types.id", "=", "products.product_type_id")->where("brands.name", "=", $brand)->get(["products.name", "product_types.name as product_type",]);
+//    $products = Product::join("brands", "brands.id", "=", "products.brand_id")->join("product_types", "product_types.id", "=", "products.product_type_id")->where("brands.name", "=", $brand)->get(["products.name", "product_types.name as product_type",]);
 
-    dd($products);
+    $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->
+                        join("product_types", "product_types.id", "=", "products.product_type_id")->
+                        get(["products.name", "product_types.name as product_type",]);
+
+//    dd($products);
 
     return view('products',[
         'products' => $products
