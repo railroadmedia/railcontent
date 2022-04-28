@@ -4,7 +4,7 @@ import { bgColor } from '../../../constants/brands'
 const props = defineProps({
     stepType: {
         type: String,
-        default: 'white' // white, tick, number
+        default: 'unchecked' // unchecked, tick, number
     },
     isLast: {
         type: Boolean,
@@ -35,8 +35,8 @@ const emit = defineEmits(['navigateToStep'])
                     class="tw-h-[9px] tw-w-[9px] md:tw-h-[32px] md:tw-w-[32px] tw-overflow-hidden tw-rounded-full tw-text-[8px] md:tw-text-[16px]"
                 >
                     <div
-                        v-if="stepType === 'white'"
-                        class="tw-h-full tw-w-full tw-bg-white"
+                        v-if="stepType === 'unchecked'"
+                        :class="`tw-h-full tw-w-full tw-bg-transparent tw-border-[1px] tw-border-[#445F74] md:tw-bg-white md:tw-border-none`"
                     ></div>
                     <div
                         v-if="stepType === 'tick'"
@@ -47,7 +47,7 @@ const emit = defineEmits(['navigateToStep'])
                     </div>
                     <div
                         v-if="stepType === 'number'"
-                        :class="`${bgColor[brand]} tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white`"
+                        :class="`${brand ? bgColor[brand] : 'tw-bg-white'} tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white tw-font-bold`"
                     >
                         <span class="tw-hidden md:tw-inline">{{ currentStep + 1 }}</span>
                     </div>

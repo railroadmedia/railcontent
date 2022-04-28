@@ -21324,6 +21324,9 @@ __webpack_require__.r(__webpack_exports__);
         id: "test",
         name: "Aaron Pearson",
         tagline: "YOUR GUIDE TO METAL"
+      },
+      key: {
+        type: Number
       }
     }
   },
@@ -22677,8 +22680,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     brand: {
-      type: String,
-      "default": 'drumeo'
+      type: String
     }
   },
   setup: function setup(__props, _ref) {
@@ -22897,7 +22899,7 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var __returned__ = {
       props: props,
-      bgImg: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImg,
+      bgImgLight: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImgLight,
       whiteLogos: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.whiteLogos
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -23839,7 +23841,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!checked) {
-        return 'white';
+        return 'unchecked';
       }
 
       if (checked) {
@@ -23882,7 +23884,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     stepType: {
       type: String,
-      "default": 'white' // white, tick, number
+      "default": 'unchecked' // unchecked, tick, number
 
     },
     isLast: {
@@ -32973,14 +32975,14 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[80vw] tw-overflow-hidden ".concat($setup.gradientMaskMap[$setup.currentGradientBorder])),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[100vw] tw-overflow-hidden ".concat($setup.gradientMaskMap[$setup.currentGradientBorder])),
     style: {
       "overflow-x": "scroll"
     },
     id: "coach-carousel-results-container",
     onWheel: $setup.onWheelScroll
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "tw-gap-2 tw-flex tw-transition-all",
+    "class": "tw-gap-2 tw-flex tw-transition-all tw-pl-[8px]",
     ref: $setup.resultsRef
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(7, function (n) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SingleCoach"], {
@@ -33876,7 +33878,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-text-[14px] md:tw-text-[16px] tw-w-[42%] md:tw-w-auto tw-mx-[7px] tw-my-[7px] tw-rounded-[25px] tw-border tw-border-[#7E9AB1] tw-px-[25px] tw-py-[13px] tw-font-bold tw-text-white ".concat($props.active ? 'tw-bg-[#7E9AB1]' : '')),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-text-[14px] md:tw-text-[16px] tw-w-[42%] md:tw-w-auto tw-mx-[7px] tw-my-[7px] tw-rounded-[25px] tw-border tw-border-[#7E9AB1] tw-px-[25px] tw-py-[13px] tw-font-bold tw-text-white ".concat($props.active ? 'tw-bg-[#7E9AB1] hover:tw-bg-[#7E9AB1]/100' : 'hover:tw-bg-[#7E9AB1]/20')),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.emit('onSelect', $props.value);
     })
@@ -34944,10 +34946,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-center tw-px-[8px] md:tw-px-[30px] tw-text-white")
+  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-center tw-px-[8px] md:tw-px-[19px] tw-text-white")
 };
 var _hoisted_2 = {
-  "class": "tw-flex tw-flex-row md:tw-flex-col"
+  "class": "tw-flex tw-flex-row md:tw-flex-col tw-items-center"
 };
 var _hoisted_3 = {
   "class": "tw-text-[24px] md:tw-text-[32px] tw-leading-[20px] md:tw-leading-[40px]",
@@ -35337,7 +35339,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper StepWrapper--".concat($props.brand)),
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($props.showBgImg ? {
-      backgroundImage: "url('".concat($setup.bgImg[$props.brand], "')")
+      backgroundImage: "url('".concat($setup.bgImgLight[$props.brand], "')")
     } : {})
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper__overlay ".concat($props.showBgImg ? 'StepWrapper__overlay--gradient' : ''))
@@ -36325,7 +36327,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = {
   key: 0,
-  "class": "tw-h-full tw-w-full tw-bg-white"
+  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-h-full tw-w-full tw-bg-transparent tw-border-[1px] tw-border-[#445F74] md:tw-bg-white md:tw-border-none")
 };
 var _hoisted_6 = {
   "class": "tw-hidden md:tw-inline"
@@ -36338,7 +36340,7 @@ var _hoisted_8 = {
   "class": "tw-mt-[14px] tw-w-[20px] md:tw-w-[60px] lg:tw-w-[80px]"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$props.stepType === 'white' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'tick' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$props.stepType === 'unchecked' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'tick' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 1,
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.emit('navigateToStep');
@@ -36350,7 +36352,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'number' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 2,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("".concat($setup.bgColor[$props.brand], " tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white"))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("".concat($props.brand ? $setup.bgColor[$props.brand] : 'tw-bg-white', " tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white tw-font-bold"))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currentStep + 1), 1
   /* TEXT */
   )], 2
@@ -45009,6 +45011,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "bgBottomGradients": () => (/* binding */ bgBottomGradients),
 /* harmony export */   "bgColor": () => (/* binding */ bgColor),
 /* harmony export */   "bgImg": () => (/* binding */ bgImg),
+/* harmony export */   "bgImgLight": () => (/* binding */ bgImgLight),
 /* harmony export */   "borderColor": () => (/* binding */ borderColor),
 /* harmony export */   "brandUrl": () => (/* binding */ brandUrl),
 /* harmony export */   "textColor": () => (/* binding */ textColor),
@@ -45018,6 +45021,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_images_singeo_bg_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../vue/images/singeo-bg.png */ "./resources/platform/assets/js/vue/images/singeo-bg.png");
 /* harmony import */ var _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../vue/images/pianote-bg.png */ "./resources/platform/assets/js/vue/images/pianote-bg.png");
 /* harmony import */ var _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vue/images/guitareo-bg.png */ "./resources/platform/assets/js/vue/images/guitareo-bg.png");
+/* harmony import */ var _vue_images_drumeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../vue/images/drumeo-bg-light.jpg */ "./resources/platform/assets/js/vue/images/drumeo-bg-light.jpg");
+/* harmony import */ var _vue_images_singeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../vue/images/singeo-bg-light.jpg */ "./resources/platform/assets/js/vue/images/singeo-bg-light.jpg");
+/* harmony import */ var _vue_images_pianote_bg_light_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vue/images/pianote-bg-light.jpg */ "./resources/platform/assets/js/vue/images/pianote-bg-light.jpg");
+/* harmony import */ var _vue_images_guitareo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../vue/images/guitareo-bg-light.jpg */ "./resources/platform/assets/js/vue/images/guitareo-bg-light.jpg");
+
+
+
+
 
 
 
@@ -45066,8 +45077,14 @@ var borderColor = {
 var bgImg = {
   drumeo: _vue_images_drumeo_bg_png__WEBPACK_IMPORTED_MODULE_0__["default"],
   singeo: _vue_images_singeo_bg_png__WEBPACK_IMPORTED_MODULE_1__["default"],
-  guitareo: _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-  pianote: _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__["default"]
+  guitareo: _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__["default"],
+  pianote: _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__["default"]
+};
+var bgImgLight = {
+  drumeo: _vue_images_drumeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_4__["default"],
+  singeo: _vue_images_singeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_5__["default"],
+  guitareo: _vue_images_guitareo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_7__["default"],
+  pianote: _vue_images_pianote_bg_light_jpg__WEBPACK_IMPORTED_MODULE_6__["default"]
 }; // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
 
 var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo', 'hover:tw-border-red-400', 'hover:tw-border-green-400', 'hover:tw-border-blue-400', 'hover:tw-border-yellow-400'];
@@ -57931,7 +57948,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".SquaredCard {\n    display: block;\n}\n\n.SquaredCard__overlay {\n    display: flex;\n    font-family: Bebas Neue;\n    background: rgba(0, 12, 23, 0.5)\n}\n\n.SquaredCard__overlay--drumeo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n\n.SquaredCard__overlay--drumeo:hover {\n    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--pianote {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n\n.SquaredCard__overlay--pianote:hover {\n    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--guitareo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n\n.SquaredCard__overlay--guitareo:hover {\n    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo {\n    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo:hover {\n    background: linear-gradient(\n            177.71deg,\n            rgba(131, 0, 233, 0) -6.02%,\n            rgba(131, 0, 233, 0.87) 176.38%,\n            rgba(131, 0, 233, 0.34) 176.38%,\n            rgba(131, 0, 233, 0) 176.38%\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--red:hover,.SquaredCard__overlay--red.SquaredCard__overlay--active  {\n    background: rgba(239, 68, 68, 0.45);\n}\n\n.SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {\n    background: rgba(59, 130, 246, 0.45);\n}\n\n.SquaredCard__overlay--yellow:hover,.SquaredCard__overlay--yellow.SquaredCard__overlay--active  {\n    background: rgba(234, 179, 8, 0.45);\n}\n\n.SquaredCard__overlay--green:hover,.SquaredCard__overlay--green.SquaredCard__overlay--active  {\n    background: rgba(34, 197, 94, 0.45);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".SquaredCard {\n    display: block;\n}\n\n.SquaredCard__overlay {\n    display: flex;\n    font-family: Bebas Neue;\n    background: rgba(68, 95, 116, 0.1);\n    transition: all 0.5s ease;\n}\n\n.SquaredCard__overlay--drumeo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n\n.SquaredCard__overlay--drumeo:hover {\n    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--pianote {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n\n.SquaredCard__overlay--pianote:hover {\n    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--guitareo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n\n.SquaredCard__overlay--guitareo:hover {\n    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo {\n    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo:hover {\n    background: linear-gradient(\n            177.71deg,\n            rgba(131, 0, 233, 0) -6.02%,\n            rgba(131, 0, 233, 0.87) 176.38%,\n            rgba(131, 0, 233, 0.34) 176.38%,\n            rgba(131, 0, 233, 0) 176.38%\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--red:hover,.SquaredCard__overlay--red.SquaredCard__overlay--active  {\n    background: rgba(239, 68, 68, 0.35);\n}\n\n.SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {\n    background: rgba(59, 130, 246, 0.35);\n}\n\n.SquaredCard__overlay--yellow:hover,.SquaredCard__overlay--yellow.SquaredCard__overlay--active  {\n    background: rgba(234, 179, 8, 0.35);\n}\n\n.SquaredCard__overlay--green:hover,.SquaredCard__overlay--green.SquaredCard__overlay--active  {\n    background: rgba(34, 197, 94, 0.35);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58119,6 +58136,21 @@ module.exports = function (encodedURI) {
 
 /***/ }),
 
+/***/ "./resources/platform/assets/js/vue/images/drumeo-bg-light.jpg":
+/*!*********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/drumeo-bg-light.jpg ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/drumeo-bg-light.jpg?4ad26c41d1b959c5747996da236c6933");
+
+/***/ }),
+
 /***/ "./resources/platform/assets/js/vue/images/drumeo-bg.png":
 /*!***************************************************************!*\
   !*** ./resources/platform/assets/js/vue/images/drumeo-bg.png ***!
@@ -58134,6 +58166,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/platform/assets/js/vue/images/guitareo-bg-light.jpg":
+/*!***********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/guitareo-bg-light.jpg ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg-light.jpg?826ec03f8ce14bbe97f5b748ff9d37e4");
+
+/***/ }),
+
 /***/ "./resources/platform/assets/js/vue/images/guitareo-bg.png":
 /*!*****************************************************************!*\
   !*** ./resources/platform/assets/js/vue/images/guitareo-bg.png ***!
@@ -58145,7 +58192,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg.png?c596b54d9940bce2b5bf17c23e4bc04f");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg.png?49281356b5c8239ef7c903581f6d2f89");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/pianote-bg-light.jpg":
+/*!**********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/pianote-bg-light.jpg ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg-light.jpg?6d977cc9fa7f492494d770e438b03c41");
 
 /***/ }),
 
@@ -58160,7 +58222,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg.png?49281356b5c8239ef7c903581f6d2f89");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg.png?c596b54d9940bce2b5bf17c23e4bc04f");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/singeo-bg-light.jpg":
+/*!*********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/singeo-bg-light.jpg ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/singeo-bg-light.jpg?aca1d14d4b511b6e6fa916d4e2683373");
 
 /***/ }),
 
