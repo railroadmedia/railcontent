@@ -5,8 +5,12 @@ namespace App\Console\Commands;
 use App\Modules\Brand\Enums\Brand;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ContentHierarchyService;
+use Railroad\Railcontent\Services\ContentService;
 
 class SeedUserContentData extends Command
 {
@@ -435,6 +439,30 @@ class SeedUserContentData extends Command
         ]
     ];
 
+    protected $coachIdMap = [
+        'drumeo' => [311690, 31888, 236681, 273806, 234095, 265267, 189973],
+        'pianote' => [323470, 320027, 197087, 197077, 196999],
+        'guitareo' => [354026, 350843, 342307, 313460, 278722, 211443],
+        'singeo' => [347694, 322496, 309845, 305432]
+    ];
+
+    private ContentRepository $contentRepository;
+    private ContentService $contentService;
+    private ContentHierarchyService $contentHierarchyService;
+
+    public function __construct(
+        ContentRepository $contentRepository,
+        ContentService $contentService,
+        ContentHierarchyService $contentHierarchyService
+    ) {
+        parent::__construct();
+
+        $this->contentRepository = $contentRepository;
+        $this->contentService = $contentService;
+        $this->contentHierarchyService = $contentHierarchyService;
+    }
+
+
     /**
      * Execute the console command.
      *
@@ -464,6 +492,7 @@ class SeedUserContentData extends Command
                         'completed_on' => null,
                     ]);
             }
+            $this->info('Done adding started content.');
 
             // user content progress completes
             for ($i = 50; $i < 100; $i++) {
@@ -477,12 +506,59 @@ class SeedUserContentData extends Command
                         'progress_percent' => 100,
                         'higher_key_progress' => null,
                         'updated_on' => $date->toDateTimeString(),
-                        'started_on' => $date->copy()->subDays(rand(1,100))->toDateTimeString(),
+                        'started_on' => $date->copy()->subDays(rand(1, 100))->toDateTimeString(),
                         'completed_on' => $date->toDateTimeString(),
                     ]);
             }
+            $this->info('Done adding completed content.');
+
+            // user my-list additions
+            for ($i = 3; $i < 40; $i++) {
+                $this->addToPrimaryPlaylist($brandString, $this->contentIdMap[$brandString][$i], $user->id);
+            }
+            $this->info('Done adding my list content.');
+
+            // subscribe to coaches
+            foreach ($this->coachIdMap as $brandName => $coachIds) {
+                foreach ($coachIds as $coachId) {
+                    $dbConnection->table('railcontent_content_follows')
+                        ->updateOrInsert([
+                            'content_id' => $coachId,
+                            'user_id' => $user->id,
+                            'created_on' => $date->toDateTimeString(),
+                        ]);
+                }
+            }
+            $this->info('Done subscribing to coaches.');
         }
 
         return 0;
+    }
+
+    /**
+     */
+    public function addToPrimaryPlaylist($brand, $contentId, $userId)
+    {
+        $userPrimaryPlaylists =
+            collect($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+
+        $userPrimaryPlaylist = $userPrimaryPlaylists->where('brand', $brand)->first();
+
+        if (!$userPrimaryPlaylist) {
+            $userPrimaryPlaylist = $this->contentService->create(
+                'primary-playlist',
+                'user-playlist',
+                ContentService::STATUS_PUBLISHED,
+                null,
+                $brand,
+                $userId,
+                Carbon::now()->subSeconds(rand(1, 1000))
+                    ->toDateTimeString()
+            );
+        }
+
+        $this->contentHierarchyService->create($userPrimaryPlaylist['id'], $contentId, 1);
+
+        return response()->json(['success']);
     }
 }
