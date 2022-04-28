@@ -165,8 +165,8 @@ In your blade file you can load in these variables like this:
 
 # Useful Testing & Seeder Commands
 
-## Seed a users content data
-`artisan SeedUserContentData "{userEmail}"`
-Generates content progress, list additions, coach follows, etc, for the user for testing.
-Example:
+## Seed a users content data with: SeedUserContentData
+`artisan SeedUserContentData "{userEmail}"`  
+Generates content progress, list additions, coach follows, etc, for the user for testing.  
+Example:  
 `r mwp artisan SeedUserContentData "caleb@drumeo.com"`
