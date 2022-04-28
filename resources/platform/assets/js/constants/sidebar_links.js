@@ -32,6 +32,11 @@ export const sidebarLinks = {
             icon: 'box',
           },
           {
+            name: 'Courses',
+            path: 'courses',
+            icon: 'academic-cap'
+          },
+          {
             name: 'Quick Tips',
             path: 'quick-tips',
             icon: 'light-bulb',
