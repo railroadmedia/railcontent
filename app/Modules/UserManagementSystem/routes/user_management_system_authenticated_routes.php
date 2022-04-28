@@ -23,8 +23,22 @@ Route::group(
 
         Route::delete(
             'user/delete/{id}',
-            UserController::class . '@delete'
+            UserController::class . '@destroy'
         )
             ->name('user_management_system.user.delete');
+
+        Route::get(
+            'user/show/{id}',
+            UserController::class . '@read'
+        )
+            ->name('user_management_system.user.show');
+
+        Route::get(
+            'user/index',
+            UserController::class . '@index'
+        )
+            ->name('user_management_system.user.index');
     }
 );
+
+
