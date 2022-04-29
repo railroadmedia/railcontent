@@ -11,6 +11,7 @@ import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
+import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 //Vuesora Components
@@ -55,6 +56,7 @@ app.component('AppContainer', AppContainer)
    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('Comments', Comments)
+   .component('MusoraIcon', MusoraIcon)
 
 
 app.directive('click-outside', {

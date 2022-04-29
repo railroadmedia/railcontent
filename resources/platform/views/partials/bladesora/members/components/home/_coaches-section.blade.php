@@ -3,7 +3,7 @@
         <div class="tw-flex tw-flex-col tw-grow">
 
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mb-3 tw-w-full tw-justify-between">
+            <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
                 <a href="{{ $subscribedCoachesUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Subscribed Coaches</h2>
                 </a>
@@ -25,7 +25,7 @@
                                 style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
                             >
                                 <!-- Coach Name -->
-                                <h4 class="tw-uppercase tw-mt-auto tw-font-roboto-condensed tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mb-3 tw-text-center"
+                                <h4 class="tw-uppercase tw-mt-auto tw-font-bebas-neue tw-text-lg md:tw-text-xl lg:tw-text-2xl xl:tw-text-3xl tw-break-all tw-leading-tight md:tw-leading-none tw-mb-3 tw-text-center"
                                     style="hyphens: auto">
                                     @php
                                         $fullName = $coach->fetch('fields.name');
