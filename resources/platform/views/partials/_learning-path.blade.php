@@ -1,4 +1,4 @@
-@component('bladesora::members.components.header-banner', [
+@component('partials._header-banner', [
     'hideUser' => true,
     'brand' => 'singeo',
     'backgroundImage' => $parentContent->fetch('data.header_image_url', 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg'),

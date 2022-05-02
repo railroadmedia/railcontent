@@ -16,7 +16,7 @@
                 @component('partials.bladesora.members.partials._overview-header', [
                         "themeColor" => '{{ $brand }}',
                         "pageTitle" => $parentContent->fetch('fields.title'),
-                        "overviewType" => $parentContent->fetch('type') == 'learning-path' ? 'Singeo' : $parentContent->fetch('type'),
+                        "overviewType" => $parentContent->fetch('type') == 'learning-path' ? ucwords(brand()) : $parentContent->fetch('type'),
                         "difficulty" => $parentContent->fetch('difficulty'),
                         "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
                         "avatarImage" => $parentContent->fetch('fields.instructor.data.head_shot_picture_url'),
@@ -73,7 +73,7 @@
                             theme-color="{{ $brand }}"
                             :use-theme-color="true"
                             :pre-loaded-content="{{ $childContent }}"
-                            :is-admin="<?php echo e(json_encode(current_user()->getPermissionLevel() === 'administrator')); ?>"
+                            :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
                             @if($parentContent['type'] !== 'learning-path')
                             :show-numbers="true"
                             @endif
@@ -85,8 +85,8 @@
                             @if($parentContent['type'] === 'learning-path-level')
                             :lock-unowned="true"
                             @endif
-                            user-id="{{ auth()->id() }}"
-                            :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}"
+                            user-id="{{ user()->id }}"
+                            :is-admin="{{ json_encode(user()->isAdmin()) }}"
                         >
                             @for($i = 0; $i < 10; $i++)
                                 @include('partials.bladesora.members.skeletons.list-item', [

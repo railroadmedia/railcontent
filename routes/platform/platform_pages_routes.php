@@ -126,6 +126,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('primaryPage', ['packs', 'method'])
             ->name('content.third-level');
 
+        Route::get(
+            '/{brand}/jump-to-content-id/{contentId}',
+            [ContentPagesController::class, 'jumpToContentId']
+        )
+            ->whereIn('brand', all_brands())
+            ->whereIn('primaryPage', ['packs', 'method'])
+            ->name('content.jump-to-content-id');
+
         /*
          * Live & Schedule
          */

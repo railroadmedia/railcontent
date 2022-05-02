@@ -218,6 +218,7 @@ return [
         'content' => [
             \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+            \App\Decorators\Content\UrlDecorator::class,
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
