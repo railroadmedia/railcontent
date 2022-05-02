@@ -8,7 +8,24 @@ import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 export default {
   name: 'UserIcon',
-  props: ['onColorModeToggle', 'userName', 'userPhoto', 'brand', 'isDarkModeSelected'],
+  props: {
+    userName: {
+      type: String
+    },
+    userPhoto: {
+      type: String
+    },
+    brand: {
+      type: String
+    },
+    isDarkModeSelected: {
+      type: Boolean,
+    },
+    hasNotifications: {
+      type: Boolean,
+      default: false,
+    }
+  },
   emits: ['onColorModeToggle'],
   components: {
     AvatarMenu,
@@ -48,7 +65,15 @@ export default {
     class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
     <!-- User Image -->
-    <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full" />
+    <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full">
+      <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
+      
+      <!-- Notification Indicator -->
+      <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">
+        <span class="tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"></span>
+        <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
+      </span>
+    </div>
 
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader

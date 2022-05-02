@@ -32,17 +32,9 @@
                 :vue-router="false"
                 brand="{{ $brand }}"
             >
-                <page-container 
-                    brand="{{ $brand }}" 
-                    :is-live="true" 
-                    :has-notifications="true"
-                    user-name=""
-                    user-avatar=""
-                    account-url=""
-                    search-url=""
-                >   
-                    @yield('content')
-                </page-container>
+
+                @yield('content')
+
             </app-container>
         </div>
 

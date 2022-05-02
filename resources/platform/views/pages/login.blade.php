@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.login-layout')
 
 @section('meta')
     <title>Login | Musora</title>

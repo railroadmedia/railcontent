@@ -6,7 +6,6 @@
 
 @section('content')
 
-    <page-container brand="{{ $brand }}">
 
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
@@ -123,7 +122,6 @@
             </div>
         </div>
 
-    </page-container>
 @endsection
 
 

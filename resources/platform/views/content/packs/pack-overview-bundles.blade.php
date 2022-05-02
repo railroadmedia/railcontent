@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             @include('partials.bladesora.members.navigation.breadcrumbs', [
@@ -112,5 +111,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             <header id="pageHeader"
@@ -38,6 +37,5 @@
             </header>
 
         </div>
-    </page-container>
 @endsection
 
