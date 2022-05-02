@@ -52,7 +52,7 @@
 
         <p class="tiny tw-text-center {{ $joinPitch ?? '' }}">
             <strong>Not a member yet?</strong>
-            <a href="{{ $joinUrl }}">Join the community here!</a>
+            <a href="{{ url('/#orderNow') }}">Join the community here!</a>
         </p>
     </div>
 @endsection
