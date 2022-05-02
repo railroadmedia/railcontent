@@ -65,14 +65,14 @@ const onEnter = () => {
 
 <template>
   <div
-    :class="`tw-flex tw-flex-col tw-relative ${
+    :class="`tw-flex tw-flex-col tw-relative ${id+'-wrapper'} ${
       wrapperOverride ? wrapperOverride : ''
     }`"
   >
     <label
       v-if="labelValue"
       :for="id"
-      class="tw-px-[13px] tw-pb-[5px] dark:tw-text-white"
+      :class="`tw-px-[13px] tw-pb-[5px] dark:tw-text-white ${id+'-label'}`"
       >{{ labelValue }}</label
     >
     <div class="tw-flex">

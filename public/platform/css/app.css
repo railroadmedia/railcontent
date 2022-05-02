@@ -21895,6 +21895,9 @@ a:visited{
 .tw-h-\[16px\]{
   height: 16px;
 }
+.tw-h-\[50px\]{
+  height: 50px;
+}
 .tw-h-\[40px\]{
   height: 40px;
 }
@@ -21939,9 +21942,6 @@ a:visited{
 }
 .tw-h-\[37px\]{
   height: 37px;
-}
-.tw-h-\[50px\]{
-  height: 50px;
 }
 .tw-h-\[calc\(100vh-58px\)\]{
   height: calc(100vh - 58px);
@@ -22533,6 +22533,9 @@ a:visited{
 .tw-border-0{
   border-width: 0px;
 }
+.tw-border-\[1px\]{
+  border-width: 1px;
+}
 .tw-border-t{
   border-top-width: 1px;
 }
@@ -22613,6 +22616,10 @@ a:visited{
 .tw-border-\[\#D1D5DB\]{
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+.tw-border-\[\#223F57\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(34 63 87 / var(--tw-border-opacity));
 }
 .tw-border-\[\#7E9AB1\]{
   --tw-border-opacity: 1;
@@ -22981,6 +22988,10 @@ a:visited{
   padding-top: 9px;
   padding-bottom: 9px;
 }
+.tw-py-\[42px\]{
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
 .tw-px-\[12px\]{
   padding-left: 12px;
   padding-right: 12px;
@@ -23048,6 +23059,10 @@ a:visited{
 .tw-px-10{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
+}
+.tw-px-\[32px\]{
+  padding-left: 32px;
+  padding-right: 32px;
 }
 .tw-pt-8{
   padding-top: 2rem;
@@ -23301,6 +23316,9 @@ a:visited{
 }
 .tw-font-normal{
   font-weight: 400;
+}
+.tw-font-extrabold{
+  font-weight: 800;
 }
 .tw-font-medium{
   font-weight: 500;
@@ -23712,6 +23730,10 @@ a:visited{
 .hover\:tw-text-black:hover{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+.hover\:tw-text-white:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .hover\:tw-text-gray-500:hover{
   --tw-text-opacity: 1;
