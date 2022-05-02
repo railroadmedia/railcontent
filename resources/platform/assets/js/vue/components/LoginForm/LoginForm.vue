@@ -75,7 +75,7 @@ const props = defineProps({
         password.</p>
 
     <form method="post" :action="reseturl" class="tw-flex tw-flex-col">
-        <slot v-if="useCsrfToken" name="csrf"></slot>
+        <slot v-if="usecsrftoken" name="csrf"></slot>
 
         <div class="form-group tw-mb-2">
             <input id="resetEmail" type="email" name="email">

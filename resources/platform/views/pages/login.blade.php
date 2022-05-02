@@ -42,10 +42,10 @@
             loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])) }}"
             reseturl="//todo"
             joinurl="{{url('/#orderNow')}}"
-            checked="{{true}}"
             :errors="{{json_encode($errors->all())}}"
             hassessionstatus="{{session()->has('status')}}"
             sessionstatus="{{ session()->get('status') }}"
+            :usecsrftoken="!!({{$useCsrfToken ?? true}})"
         >
             <template v-slot:csrf>{{ csrf_field() }}</template>
         </login-form>
