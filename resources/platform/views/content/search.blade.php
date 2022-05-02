@@ -15,7 +15,6 @@
 @endsection
 
 @section('content')
-    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             <div class="tw-container tw-mx-auto mv-3">
@@ -53,5 +52,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             @component('partials._header-banner')
@@ -71,5 +70,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

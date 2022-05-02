@@ -31,7 +31,7 @@ export default {
         const handleSelect = (brand) => {
             //Refresh the Page with new brand
             const host = window.location.host;   
-            window.location.href = `${brand}`;
+            window.location.href = `/${brand}`;
         }
 
         return {

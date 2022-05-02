@@ -15,6 +15,14 @@ export default {
     brand: {
       type: String,
       default: 'drumeo'
+    },
+    isLive: {
+      type: Boolean,
+      default: false
+    },
+    hasNotifications: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -119,6 +127,7 @@ export default {
 
     <Navbar
       :brand="brand"
+      :has-notifications="hasNotifications"
       :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed"
@@ -137,6 +146,7 @@ export default {
       <!-- Sidebar -->
       <Sidebar
         :brand="brand"
+        :isLive="isLive"
         :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden"
         @onCollapseSidebar="onCollapseSidebar"

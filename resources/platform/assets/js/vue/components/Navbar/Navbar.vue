@@ -11,6 +11,10 @@ const props = defineProps({
   isSidebarHidden: Boolean,
   isSidebarCollapsed: Boolean,
   isDarkModeSelected: Boolean,
+  hasNotifications: {
+    type: Boolean,
+    default: false
+  }
 });
 const emit = defineEmits([
   "onCollapseSidebar",
@@ -81,20 +85,24 @@ const toggleSearchModal = (val) => {
       />
     </div>
     <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]">
+
       <button
         @click="() => toggleSearchModal(true)"
         :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-justify-center ${bgColor[brand]}`"
       >
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-white" />
       </button>
+
       <UserIcon
         :brand="brand"
+        :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="emit('onColorModeToggle')"
         userName="John Doe"
         userPhoto="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
       />
     </div>
+
     <SearchModal @onClose="() => toggleSearchModal(false)" v-if="showSearchModal" />
   </nav>
 </template>

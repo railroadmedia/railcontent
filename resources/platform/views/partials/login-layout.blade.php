@@ -32,17 +32,9 @@
                 :vue-router="false"
                 brand="{{ $brand }}"
             >
-                <page-container 
-                    brand="{{ $brand }}" 
-                    :is-live="true" 
-                    :has-notifications="true"
-                    user-name=""
-                    user-avatar=""
-                    account-url=""
-                    search-url=""
-                >   
-                    @yield('content')
-                </page-container>
+
+                @yield('content')
+
             </app-container>
         </div>
 
@@ -53,9 +45,9 @@
 
         {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
         <script type="text/javascript">
-            //Beacon('on', 'ready', () => {
-                //document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
-            //})
+            Beacon('on', 'ready', () => {
+                document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
+            })
         </script>
         {{-- {!! \App\Analytics\Tracker::bodyBottom() !!} --}}
     </body>

@@ -46,9 +46,20 @@
                     <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
                 @endif
 
-                @yield('breadcrumbs')
-
-                @yield('content')
+                <page-container 
+                    brand="{{ $brand }}" 
+                    :is-live="true" 
+                    :has-notifications="true"
+                    user-name=""
+                    user-avatar=""
+                    account-url=""
+                    search-url=""
+                >   
+                    @yield('breadcrumbs')
+                    @yield('content')
+                    
+                </page-container>
+                
             </app-container>
         </div>
 
