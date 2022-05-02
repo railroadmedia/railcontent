@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <page-container>
+    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             @component('partials.bladesora.members.components.header-banner', [

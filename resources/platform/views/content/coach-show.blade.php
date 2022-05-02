@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <page-container>
+    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             @include('partials.bladesora.members.navigation.breadcrumbs', [
