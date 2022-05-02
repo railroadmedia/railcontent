@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <page-container>
+    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             @include('content.breadcrumbs._lesson-breadcrumbs')

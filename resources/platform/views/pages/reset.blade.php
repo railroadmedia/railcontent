@@ -36,7 +36,7 @@
 @endsection
 
 @section('content')
-    <page-container>
+    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             <section id="logoContainer" class="pa-2 tw-text-center">

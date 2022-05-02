@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <page-conatiner>
+    <page-conatiner brand="{{ $brand }}">
 
         <div v-cloak>
 

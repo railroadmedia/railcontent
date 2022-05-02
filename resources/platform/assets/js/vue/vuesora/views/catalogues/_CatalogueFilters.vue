@@ -38,11 +38,11 @@
         ></catalogue-filter>
 
       <div class="sm:tw-pr-0 tw-mb-3 sm:tw-mb-0 ph-1">
-        <div class="flex flex-column form-group mr-1">
+        <div class="tw-flex tw-flex-col tw-mr-2 form-group ">
           <select
               id="sortInput"
               type="text"
-              class="borderless"
+              class="tw-pb-0 tw-text-black dark:tw-text-white borderless"
               @change="handleContentSort($event)"
               v-model="sort"
           >

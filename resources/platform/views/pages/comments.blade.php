@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <page-container>
+    <page-container brand="{{ $brand }}">
         <div v-cloak>
 
             <div class="tw-container tw-mx-auto">

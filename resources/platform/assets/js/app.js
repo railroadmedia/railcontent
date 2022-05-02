@@ -11,7 +11,7 @@ import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
-import LoginForm from './vue/components/LoginForm/LoginForm.vue';
+import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 //Vuesora Components
@@ -47,7 +47,6 @@ app.component('AppContainer', AppContainer)
    .component('CommentsCatalogue', CommentsCatalogue)
    .component('Onboarding', Onboarding)
    .component('TriggerBanner', TriggerBanner)
-   .component('LoginForm', LoginForm)
    .component('NotificationsTable', NotificationsTable)
    .component('PaymentMethods', PaymentMethods)
    .component('ForumThreadsTable', ForumThreadsTable)
@@ -57,6 +56,7 @@ app.component('AppContainer', AppContainer)
    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('Comments', Comments)
+   .component('MusoraIcon', MusoraIcon)
 
 
 app.directive('click-outside', {
