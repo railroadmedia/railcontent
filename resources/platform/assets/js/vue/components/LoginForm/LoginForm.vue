@@ -1,4 +1,9 @@
 <script setup>
+/* TODO:
+- Add real reset url
+- Define if join url should be out or inside this component
+*/
+
 import { ref } from "vue";
 import { bgColor } from "../../../constants/brands";
 import InputLabel from "../InputLabel/InputLabel.vue";

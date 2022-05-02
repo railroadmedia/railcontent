@@ -49,5 +49,10 @@
         >
             <template v-slot:csrf>{{ csrf_field() }}</template>
         </login-form>
+
+        <p class="tiny tw-text-center {{ $joinPitch ?? '' }}">
+            <strong>Not a member yet?</strong>
+            <a href="{{ $joinUrl }}">Join the community here!</a>
+        </p>
     </div>
 @endsection
