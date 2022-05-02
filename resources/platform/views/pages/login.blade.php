@@ -37,15 +37,17 @@
             <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
         </section>
 
-        @include('partials.bladesora.members.login-form', [
-            "brand" => "drumeo",
-            "loginUrl" => url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])),
-            "resetUrl" => '// todo',
-            "joinUrl" => url('/#orderNow'),
-            "joinPitch" => "tw-text-black",
-            "labelClasses" => "text-grey-3 tiny",
-            "checked" => true,
-        ])
-
+        <login-form
+            brand="drumeo"
+            loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])) }}"
+            reseturl="//todo"
+            joinurl="{{url('/#orderNow')}}"
+            checked="{{true}}"
+            :errors="{{json_encode($errors->all())}}"
+            hassessionstatus="{{session()->has('status')}}"
+            sessionstatus="{{ session()->get('status') }}"
+        >
+            <template v-slot:csrf>{{ csrf_field() }}</template>
+        </login-form>
     </div>
 @endsection

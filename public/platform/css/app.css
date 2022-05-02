@@ -21817,6 +21817,9 @@ a:visited{
 .tw-h-full{
   height: 100%;
 }
+.tw-h-\[369px\]{
+  height: 369px;
+}
 .tw-h-\[53px\]{
   height: 53px;
 }
@@ -22012,6 +22015,9 @@ a:visited{
 .tw-w-32{
   width: 8rem;
 }
+.tw-w-\[423px\]{
+  width: 423px;
+}
 .tw-w-\[263px\]{
   width: 263px;
 }
@@ -22194,9 +22200,6 @@ a:visited{
 }
 .tw-max-w-3xl{
   max-width: 48rem;
-}
-.tw-max-w-\[400px\]{
-  max-width: 400px;
 }
 .tw-max-w-\[144px\]{
   max-width: 144px;
