@@ -53,9 +53,9 @@
 
         {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
         <script type="text/javascript">
-            Beacon('on', 'ready', () => {
-                document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
-            })
+            //Beacon('on', 'ready', () => {
+                //document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
+            //})
         </script>
         {{-- {!! \App\Analytics\Tracker::bodyBottom() !!} --}}
     </body>
