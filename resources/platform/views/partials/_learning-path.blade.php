@@ -1,4 +1,4 @@
-@component('bladesora::members.components.header-banner', [
+@component('partials._header-banner', [
     'hideUser' => true,
     'brand' => 'singeo',
     'backgroundImage' => $parentContent->fetch('data.header_image_url', 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg'),
@@ -21,8 +21,7 @@
 {{--                </div>--}}
                 <img
                         alt="{{ $parentContent->fetch('title') }} Logo"
-                        src="{{ imgix('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
-                        ["q" => 80, "w" => 540]) }}"
+                        src="https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg"
                         class="mv-3"
                         style="width:540px;max-width:100%;"
                 >

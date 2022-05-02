@@ -34,7 +34,11 @@ window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
 };
 
-const app = createApp({});
+const app = createApp({
+    provide: {
+        sidebarNavigationLinks: window.sidebarNavigationLinks
+    }
+});
 
 //Register Global Components
 app.component('AppContainer', AppContainer)
@@ -81,4 +85,3 @@ app.use(store);
 app.use(router);
 app.use(VueAxios, axios);
 app.mount('#app');
-

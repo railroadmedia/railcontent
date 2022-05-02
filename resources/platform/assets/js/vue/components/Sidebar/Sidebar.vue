@@ -10,6 +10,7 @@ import SearchInput from './SearchInput.vue'
 export default {
   name: 'Sidebar',
   components: { SidebarContainer, MusoraIcon, PlaylistsSection, SearchInput },
+  inject: ['sidebarNavigationLinks'],
   emits: ['onCollapseSidebar'],
   props: {
     isSidebarCollapsed: Boolean,
@@ -47,80 +48,25 @@ export default {
 </script>
 
 <template>
-  <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed" 
+  <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed"
                     :isSidebarHidden="isSidebarHidden"
                     :brand="brand"
   >
-    
+
     <!-- Sidebar Search -->
     <SearchInput :isSidebarCollapsed="isSidebarCollapsed" @onCollapse="handleCollapse" />
 
     <!-- Sidebar Link Sections -->
-    <section v-for="(section, i) in sidebarLinks.sections" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">
+    <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
-        <li v-for="(link, j) in section.links" :key="j" :class="[pathName === `/${brand}${link.path}` ? ` ${textColor[brand]}` : '']">
-          <a :href="`/${brand}${link.path}`" 
+        <li v-for="(link, j) in section" :key="j" :class="[pathName === `${link.path}` ? ` ${textColor[brand]}` : '']">
+          <a :href="`${link.path}`"
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === `/${brand}${link.path}` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
-          >
-            <musora-icon :icon-name="link.icon" class="tw-w-[24px] tw-mx-4"/>
-            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
-              {{ link.name }}
-              <!-- Live Indicator -->
-              <span v-if="link.name === 'Live' && isLive" class="tw-relative  tw-w-[37px] tw-h-[18px] tw-ml-3">
-                <span class="tw-animate-grow-shrink tw-blur-sm tw-origin-center tw-scale-125 tw-absolute tw-left-0 tw-top-0 tw-inline-flex tw-h-full tw-w-full tw-rounded tw-bg-[#F71B26] tw-opacity-75"></span>
-                <span class="tw-relative tw-base tw-py-[2px] tw-px-[3px] tw-rounded tw-leading-none tw-text-white tw-bg-[#DC2626] tw-uppercase tw-leading-none tw-font-bebas-neue">On-Air</span>
-              </span>
-            </span>
-          </a> 
-        </li>
-      </ul>
-    </section>
-
-    <!-- Brand Specific Links -->
-    <section v-for="(section, i) in sidebarLinks.brandSections" :key="i">
-      <ul v-if="section.brand === brand" class="tw-border-b dark:tw-border-b-[#102230]">
-        <li v-for="(link, j) in section.links" :key="j" :class="[pathName === `/${brand}${link.path}` ? ` ${textColor[brand]}` : '']">
-          <a :href="`/${brand}${link.path}`" 
-             :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === `/${brand}${link.path}` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
+             :class="[pathName === `${link.path}` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
             <musora-icon :icon-name="link.icon" class="tw-w-[24px] tw-mx-4"/>
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
-          </a> 
-        </li>
-      </ul>
-    </section>
-
-    <!-- Forum -->
-    <section class="tw-border-b dark:tw-border-b-[#102230]">
-      <ul>
-        <li :class="[pathName === `${brand}/forums` ? ` ${textColor[brand]}` : '']">
-          <a :href="`/${brand}/forums`" 
-             :title="[ isSidebarCollapsed ? 'Forums': '' ]"
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === `${brand}/forums` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
-          >
-            <musora-icon icon-name="messages" class="tw-w-[24px] tw-mx-4"/>
-            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Forums</span>
-          </a> 
-        </li>
-      </ul>
-    </section>   
-
-    <!-- My List -->
-    <section class="tw-border-b dark:tw-border-b-[#102230]">
-      <ul>
-        <li :class="[pathName === `${brand}/profile` ? ` ${textColor[brand]}` : '']">
-          <a :href=" `/${brand}/profile/` " 
-             :title="[ isSidebarCollapsed ? 'My List': '' ]"
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-             :class="[pathName === `${brand}/profile` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
-          >
-            <musora-icon icon-name="playlist" class="tw-w-[24px] tw-mx-4 tw-mt-1"/>
-            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">My List</span>
           </a>
         </li>
       </ul>
