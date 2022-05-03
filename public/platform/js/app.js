@@ -21374,6 +21374,9 @@ __webpack_require__.r(__webpack_exports__);
         id: "test",
         name: "Aaron Pearson",
         tagline: "YOUR GUIDE TO METAL"
+      },
+      key: {
+        type: Number
       }
     }
   },
@@ -22202,7 +22205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["modalId", "title", "bgColor", "selfContained"],
+  props: ["modalId", "title", "selfContained"],
   emits: ["onClose"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose,
@@ -22858,8 +22861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     brand: {
-      type: String,
-      "default": 'drumeo'
+      type: String
     }
   },
   setup: function setup(__props, _ref) {
@@ -23078,7 +23080,7 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var __returned__ = {
       props: props,
-      bgImg: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImg,
+      bgImgLight: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.bgImgLight,
       whiteLogos: _constants_brands__WEBPACK_IMPORTED_MODULE_0__.whiteLogos
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -24012,7 +24014,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (!checked) {
-        return 'white';
+        return 'unchecked';
       }
 
       if (checked) {
@@ -24055,7 +24057,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     stepType: {
       type: String,
-      "default": 'white' // white, tick, number
+      "default": 'unchecked' // unchecked, tick, number
 
     },
     isLast: {
@@ -32903,18 +32905,21 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": ""
 };
+var _hoisted_2 = {
+  "class": "tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039] tw-cursor-pointer tw-border-[#344858] hover:tw-border-white tw-border-2 tw-color-[#344858]"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full tw-bg-white"
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]",
   style: {
-    "font-family": "Bebas Neue"
-  },
-  "class": "tw-text-center tw-text-white"
+    "text-decoration": "inherit"
+  }
 }, " UPLOAD PHOTO ", -1
 /* HOISTED */
 );
@@ -32924,8 +32929,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0,
     modalId: "upload-modal",
     onOnClose: $setup.openUploadForm,
-    title: $setup.title[$setup.uploadStep],
-    bgColor: "#081825"
+    title: $setup.title[$setup.uploadStep]
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$setup.uploadStep === 'dropzone' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ImageDropzone"], {
@@ -32950,9 +32954,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["title"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039]",
-    onClick: $setup.openUploadForm
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserIcon"]), _hoisted_2]), _hoisted_3]);
+    onClick: $setup.openUploadForm,
+    "class": "hover:tw-underline"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserIcon"]), _hoisted_3]), _hoisted_4])]);
 }
 
 /***/ }),
@@ -32971,26 +32975,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  width: "148",
-  height: "148",
-  viewBox: "0 0 150 150",
+  width: "152",
+  height: "152",
+  viewBox: "0 0 152 152",
   fill: "none",
-  xmlns: "http://www.w3.org/2000/svg",
-  "class": "tw-z-10"
+  xmlns: "http://www.w3.org/2000/svg"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M30.4334 112.12L30.1158 112.718L30.5532 113.235C41.3785 126.029 57.5597 134.214 75.6202 134.214C93.6808 134.214 109.862 126.029 120.687 113.235L121.125 112.718L120.807 112.12C114.96 101.11 103.503 93.505 90.1361 93.505C89.3001 93.505 88.476 93.6442 87.6978 93.881L87.6886 93.8838L87.6794 93.8868C83.8557 95.1317 79.8183 95.9243 75.6202 95.9243C71.4231 95.9243 67.4156 95.1321 63.5589 93.8861L63.5508 93.8835L63.5427 93.881C62.7645 93.6442 61.9404 93.505 61.1044 93.505C47.7373 93.505 36.281 101.11 30.4334 112.12ZM1.62158 75.1505C1.62158 34.2721 34.7418 1.15186 75.6202 1.15186C116.499 1.15186 149.619 34.2721 149.619 75.1505C149.619 116.029 116.499 149.149 75.6202 149.149C34.7418 149.149 1.62158 116.029 1.62158 75.1505ZM103.233 55.796C103.233 40.5464 90.8699 28.1836 75.6202 28.1836C60.3706 28.1836 48.0078 40.5464 48.0078 55.796C48.0078 71.0456 60.3706 83.4085 75.6202 83.4085C90.8699 83.4085 103.233 71.0456 103.233 55.796Z",
-  fill: "#002039",
-  stroke: "#344858",
-  "stroke-width": "2"
+  d: "M122 107.724C97.7273 134.511 58.2841 135.006 33 107.724H122ZM122 107.724C103.624 70.7916 53.824 68.0937 33 107.693L122 107.724Z",
+  fill: "white"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M97 40.5C97 51.2696 88.2696 60 77.5 60C66.7304 60 58 51.2696 58 40.5C58 29.7304 66.7304 21 77.5 21C88.2696 21 97 29.7304 97 40.5Z",
+  fill: "white"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_4 = [_hoisted_2, _hoisted_3];
 function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_1, _hoisted_4);
 }
 
 /***/ }),
@@ -33184,14 +33192,14 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[80vw] tw-overflow-hidden ".concat($setup.gradientMaskMap[$setup.currentGradientBorder])),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[100vw] tw-overflow-hidden ".concat($setup.gradientMaskMap[$setup.currentGradientBorder])),
     style: {
       "overflow-x": "scroll"
     },
     id: "coach-carousel-results-container",
     onWheel: $setup.onWheelScroll
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "tw-gap-2 tw-flex tw-transition-all",
+    "class": "tw-gap-2 tw-flex tw-transition-all tw-pl-[8px]",
     ref: $setup.resultsRef
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(7, function (n) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SingleCoach"], {
@@ -33648,13 +33656,10 @@ var _hoisted_1 = {
   "class": "tw-w-full tw-h-full"
 };
 var _hoisted_2 = {
-  "class": "tw-w-full tw-flex tw-text-white tw-py-[15px] tw-items-center tw-justify-between tw-px-[20px]"
+  "class": "tw-w-full tw-flex tw-flex-col md:tw-flex-row tw-text-white tw-py-[15px] tw-items-center tw-justify-between tw-px-[20px]"
 };
 var _hoisted_3 = {
-  "class": "tw-w-auto tw-flex tw-text-[13px]",
-  style: {
-    "font-family": "Bebas Neue"
-  }
+  "class": "tw-w-auto tw-flex tw-text-[13px] tw-font-bebas-neue"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ZOOM IN ");
@@ -33689,11 +33694,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px]",
     onClick: $setup.rotate
   }, " Rotate ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    style: {
-      "font-family": "Roboto Condensed"
-    },
     onClick: $setup.cropImage,
-    "class": "tw-border-white tw-border-2 tw-rounded-[25px] tw-text-[14px] tw-w-[164px] tw-h-[30px] tw-flex tw-items-center tw-justify-center"
+    "class": "tw-border-white tw-border-2 tw-rounded-[25px] tw-text-[14px] tw-w-[164px] tw-h-[30px] tw-flex tw-items-center tw-justify-center tw-font-bebas-neue"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CheckIcon"], {
     "class": "tw-w-[20px] tw-h-[20px] tw-inline"
   }), _hoisted_6])])]);
@@ -34113,7 +34115,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = ["id"];
 var _hoisted_2 = {
-  "class": "tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"
+  "class": "tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-px-[16px] md:tw-px-[28px]"
 };
 var _hoisted_3 = {
   "class": "tw-flex tw-flex-row tw-justify-between tw-text-white tw-mb-[24px] tw-px-[40px]"
@@ -34128,7 +34130,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-w-[750px] tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col", $props.bgColor && "tw-bg-[".concat($props.bgColor, "]")])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:tw-w-[750px] tw-w-full tw-rounded-[8px] tw-z-30 tw-pt-[24px] tw-pb-[42px] tw-flex tw-flex-col tw-border-[#223F57] tw-border-[1px] tw-bg-[#081825]", $props.selfContained && "tw-bg-transparent tw-border-0"])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -34231,7 +34233,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-text-[14px] md:tw-text-[16px] tw-w-[42%] md:tw-w-auto tw-mx-[7px] tw-my-[7px] tw-rounded-[25px] tw-border tw-border-[#7E9AB1] tw-px-[25px] tw-py-[13px] tw-font-bold tw-text-white ".concat($props.active ? 'tw-bg-[#7E9AB1]' : '')),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-text-[14px] md:tw-text-[16px] tw-w-[42%] md:tw-w-auto tw-mx-[7px] tw-my-[7px] tw-rounded-[25px] tw-border tw-border-[#7E9AB1] tw-px-[25px] tw-py-[13px] tw-font-bold tw-text-white ".concat($props.active ? 'tw-bg-[#7E9AB1] hover:tw-bg-[#7E9AB1]/100' : 'hover:tw-bg-[#7E9AB1]/20')),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.emit('onSelect', $props.value);
     })
@@ -35345,10 +35347,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-center tw-px-[8px] md:tw-px-[30px] tw-text-white")
+  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-center tw-px-[8px] md:tw-px-[19px] tw-text-white")
 };
 var _hoisted_2 = {
-  "class": "tw-flex tw-flex-row md:tw-flex-col"
+  "class": "tw-flex tw-flex-row md:tw-flex-col tw-items-center"
 };
 var _hoisted_3 = {
   "class": "tw-text-[24px] md:tw-text-[32px] tw-leading-[20px] md:tw-leading-[40px]",
@@ -35673,10 +35675,10 @@ var _hoisted_1 = {
   "class": "tw-flex tw-flex-col tw-w-[90vw] md:tw-w-full tw-relative md:tw-static tw-items-center tw-justify-center"
 };
 var _hoisted_2 = {
-  "class": "md:tw-mb-[5px] tw-w-[250px] md:tw-w-full tw-text-center tw-font-bold tw-text-white tw-text-[20px] tw-baseline-[24px] tw-mb-[36px]"
+  "class": "md:tw-mb-[5px] tw-w-[250px] md:tw-w-full tw-font-open-sans tw-text-center tw-font-extrabold tw-text-white tw-text-[20px] md:tw-text-[24px] lg:tw-text-[30px] tw-baseline-[24px] tw-mb-[36px]"
 };
 var _hoisted_3 = {
-  "class": "tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
+  "class": "tw-font-open-sans tw-font-normal tw-text-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$props.hideBackButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
@@ -35738,7 +35740,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper StepWrapper--".concat($props.brand)),
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($props.showBgImg ? {
-      backgroundImage: "url('".concat($setup.bgImg[$props.brand], "')")
+      backgroundImage: "url('".concat($setup.bgImgLight[$props.brand], "')")
     } : {})
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("StepWrapper__overlay ".concat($props.showBgImg ? 'StepWrapper__overlay--gradient' : ''))
@@ -36730,7 +36732,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = {
   key: 0,
-  "class": "tw-h-full tw-w-full tw-bg-white"
+  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-h-full tw-w-full tw-bg-transparent tw-border-[1px] tw-border-[#445F74] md:tw-bg-white md:tw-border-none")
 };
 var _hoisted_6 = {
   "class": "tw-hidden md:tw-inline"
@@ -36743,7 +36745,7 @@ var _hoisted_8 = {
   "class": "tw-mt-[14px] tw-w-[20px] md:tw-w-[60px] lg:tw-w-[80px]"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$props.stepType === 'white' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'tick' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$props.stepType === 'unchecked' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'tick' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 1,
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.emit('navigateToStep');
@@ -36755,7 +36757,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'number' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 2,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("".concat($setup.bgColor[$props.brand], " tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white"))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("".concat($props.brand ? $setup.bgColor[$props.brand] : 'tw-bg-white', " tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white tw-font-bold"))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currentStep + 1), 1
   /* TEXT */
   )], 2
@@ -45359,6 +45361,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "bgBottomGradients": () => (/* binding */ bgBottomGradients),
 /* harmony export */   "bgColor": () => (/* binding */ bgColor),
 /* harmony export */   "bgImg": () => (/* binding */ bgImg),
+/* harmony export */   "bgImgLight": () => (/* binding */ bgImgLight),
 /* harmony export */   "borderColor": () => (/* binding */ borderColor),
 /* harmony export */   "brandUrl": () => (/* binding */ brandUrl),
 /* harmony export */   "textColor": () => (/* binding */ textColor),
@@ -45368,6 +45371,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_images_singeo_bg_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../vue/images/singeo-bg.png */ "./resources/platform/assets/js/vue/images/singeo-bg.png");
 /* harmony import */ var _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../vue/images/pianote-bg.png */ "./resources/platform/assets/js/vue/images/pianote-bg.png");
 /* harmony import */ var _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vue/images/guitareo-bg.png */ "./resources/platform/assets/js/vue/images/guitareo-bg.png");
+/* harmony import */ var _vue_images_drumeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../vue/images/drumeo-bg-light.jpg */ "./resources/platform/assets/js/vue/images/drumeo-bg-light.jpg");
+/* harmony import */ var _vue_images_singeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../vue/images/singeo-bg-light.jpg */ "./resources/platform/assets/js/vue/images/singeo-bg-light.jpg");
+/* harmony import */ var _vue_images_pianote_bg_light_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vue/images/pianote-bg-light.jpg */ "./resources/platform/assets/js/vue/images/pianote-bg-light.jpg");
+/* harmony import */ var _vue_images_guitareo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../vue/images/guitareo-bg-light.jpg */ "./resources/platform/assets/js/vue/images/guitareo-bg-light.jpg");
+
+
+
+
 
 
 
@@ -45416,8 +45427,14 @@ var borderColor = {
 var bgImg = {
   drumeo: _vue_images_drumeo_bg_png__WEBPACK_IMPORTED_MODULE_0__["default"],
   singeo: _vue_images_singeo_bg_png__WEBPACK_IMPORTED_MODULE_1__["default"],
-  guitareo: _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__["default"],
-  pianote: _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__["default"]
+  guitareo: _vue_images_guitareo_bg_png__WEBPACK_IMPORTED_MODULE_3__["default"],
+  pianote: _vue_images_pianote_bg_png__WEBPACK_IMPORTED_MODULE_2__["default"]
+};
+var bgImgLight = {
+  drumeo: _vue_images_drumeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_4__["default"],
+  singeo: _vue_images_singeo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_5__["default"],
+  guitareo: _vue_images_guitareo_bg_light_jpg__WEBPACK_IMPORTED_MODULE_7__["default"],
+  pianote: _vue_images_pianote_bg_light_jpg__WEBPACK_IMPORTED_MODULE_6__["default"]
 }; // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
 
 var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo', 'hover:tw-border-red-400', 'hover:tw-border-green-400', 'hover:tw-border-blue-400', 'hover:tw-border-yellow-400'];
@@ -58648,7 +58665,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".SquaredCard {\n    display: block;\n}\n\n.SquaredCard__overlay {\n    display: flex;\n    font-family: Bebas Neue;\n    background: rgba(0, 12, 23, 0.5)\n}\n\n.SquaredCard__overlay--drumeo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n\n.SquaredCard__overlay--drumeo:hover {\n    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--pianote {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n\n.SquaredCard__overlay--pianote:hover {\n    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--guitareo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n\n.SquaredCard__overlay--guitareo:hover {\n    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo {\n    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo:hover {\n    background: linear-gradient(\n            177.71deg,\n            rgba(131, 0, 233, 0) -6.02%,\n            rgba(131, 0, 233, 0.87) 176.38%,\n            rgba(131, 0, 233, 0.34) 176.38%,\n            rgba(131, 0, 233, 0) 176.38%\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--red:hover,.SquaredCard__overlay--red.SquaredCard__overlay--active  {\n    background: rgba(239, 68, 68, 0.45);\n}\n\n.SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {\n    background: rgba(59, 130, 246, 0.45);\n}\n\n.SquaredCard__overlay--yellow:hover,.SquaredCard__overlay--yellow.SquaredCard__overlay--active  {\n    background: rgba(234, 179, 8, 0.45);\n}\n\n.SquaredCard__overlay--green:hover,.SquaredCard__overlay--green.SquaredCard__overlay--active  {\n    background: rgba(34, 197, 94, 0.45);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".SquaredCard {\n    display: block;\n}\n\n.SquaredCard__overlay {\n    display: flex;\n    font-family: Bebas Neue;\n    background: rgba(68, 95, 116, 0.1);\n    transition: all 0.5s ease;\n}\n\n.SquaredCard__overlay--drumeo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),\n        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));\n}\n\n.SquaredCard__overlay--drumeo:hover {\n    background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--pianote {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),\n        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));\n}\n\n.SquaredCard__overlay--pianote:hover {\n    background: linear-gradient(196.7deg, rgba(246, 26, 48, 0.2) -3.49%, rgba(246, 26, 48, 0.392) 100.32%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));\n}\n\n.SquaredCard__overlay--guitareo {\n    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),\n        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));\n}\n\n.SquaredCard__overlay--guitareo:hover {\n    background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo {\n    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--singeo:hover {\n    background: linear-gradient(\n            177.71deg,\n            rgba(131, 0, 233, 0) -6.02%,\n            rgba(131, 0, 233, 0.87) 176.38%,\n            rgba(131, 0, 233, 0.34) 176.38%,\n            rgba(131, 0, 233, 0) 176.38%\n        ),\n        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));\n}\n\n.SquaredCard__overlay--red:hover,.SquaredCard__overlay--red.SquaredCard__overlay--active  {\n    background: rgba(239, 68, 68, 0.35);\n}\n\n.SquaredCard__overlay--blue:hover,.SquaredCard__overlay--blue.SquaredCard__overlay--active  {\n    background: rgba(59, 130, 246, 0.35);\n}\n\n.SquaredCard__overlay--yellow:hover,.SquaredCard__overlay--yellow.SquaredCard__overlay--active  {\n    background: rgba(234, 179, 8, 0.35);\n}\n\n.SquaredCard__overlay--green:hover,.SquaredCard__overlay--green.SquaredCard__overlay--active  {\n    background: rgba(34, 197, 94, 0.35);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58836,6 +58853,21 @@ module.exports = function (encodedURI) {
 
 /***/ }),
 
+/***/ "./resources/platform/assets/js/vue/images/drumeo-bg-light.jpg":
+/*!*********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/drumeo-bg-light.jpg ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/drumeo-bg-light.jpg?4ad26c41d1b959c5747996da236c6933");
+
+/***/ }),
+
 /***/ "./resources/platform/assets/js/vue/images/drumeo-bg.png":
 /*!***************************************************************!*\
   !*** ./resources/platform/assets/js/vue/images/drumeo-bg.png ***!
@@ -58848,6 +58880,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/drumeo-bg.png?b227af571f38ec89487fd4461e1e1de2");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/guitareo-bg-light.jpg":
+/*!***********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/guitareo-bg-light.jpg ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/guitareo-bg-light.jpg?826ec03f8ce14bbe97f5b748ff9d37e4");
 
 /***/ }),
 
@@ -58866,6 +58913,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/platform/assets/js/vue/images/pianote-bg-light.jpg":
+/*!**********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/pianote-bg-light.jpg ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg-light.jpg?6d977cc9fa7f492494d770e438b03c41");
+
+/***/ }),
+
 /***/ "./resources/platform/assets/js/vue/images/pianote-bg.png":
 /*!****************************************************************!*\
   !*** ./resources/platform/assets/js/vue/images/pianote-bg.png ***!
@@ -58878,6 +58940,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/pianote-bg.png?c596b54d9940bce2b5bf17c23e4bc04f");
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/images/singeo-bg-light.jpg":
+/*!*********************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/images/singeo-bg-light.jpg ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/singeo-bg-light.jpg?aca1d14d4b511b6e6fa916d4e2683373");
 
 /***/ }),
 
