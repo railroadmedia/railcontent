@@ -32,6 +32,8 @@ if (! function_exists('cf_img')) {
             $optionsStringArray[] = $optionKey . '=' . $optionValue;
         }
 
+        $optionsStringArray[] = 'metadata=none';
+
         $urlString .= implode(',', $optionsStringArray);
 
         $urlString .= '/' . $pathFromOriginOrUrl;

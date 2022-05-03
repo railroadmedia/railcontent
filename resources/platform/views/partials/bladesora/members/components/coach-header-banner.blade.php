@@ -164,9 +164,9 @@
                     <a href="{{ $profileUrl }}" class="tw-no-underline">
                         <img
                             class="tw-rounded inset-border"
-                            src="{{ _imgix(
+                            src="{{ cf_img(
                                 $currentUser['avatar'],
-                                ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
+                                ["quality" => 50, "blur" => 2, "width" => 50, "height" => 50]
                             ) }}"
                             data-ix-src="{{ $currentUser['avatar'] }}"
                         >
