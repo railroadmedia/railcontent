@@ -21691,6 +21691,12 @@ a:visited{
 .tw-ml-\[36px\]{
   margin-left: 36px;
 }
+.tw-mt-0\.5{
+  margin-top: 0.125rem;
+}
+.tw-mt-0{
+  margin-top: 0px;
+}
 .tw-mt-\[10px\]{
   margin-top: 10px;
 }
@@ -21792,9 +21798,6 @@ a:visited{
 }
 .tw-mr-0{
   margin-right: 0px;
-}
-.tw-mt-0{
-  margin-top: 0px;
 }
 .tw-mb-0\.5{
   margin-bottom: 0.125rem;
@@ -22814,6 +22817,9 @@ a:visited{
 .tw-bg-\[\#F9FBFB\]\/90{
   background-color: rgb(249 251 251 / 0.9);
 }
+.tw-bg-inherit{
+  background-color: inherit;
+}
 .tw-bg-red-500{
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
@@ -22851,9 +22857,6 @@ a:visited{
 .tw-bg-gray-300{
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
-}
-.tw-bg-inherit{
-  background-color: inherit;
 }
 .tw-bg-\[\#002039\]\/90{
   background-color: rgb(0 32 57 / 0.9);
@@ -24269,6 +24272,9 @@ a:visited{
   .md\:tw-mb-8{
     margin-bottom: 2rem;
   }
+  .md\:tw-mr-2{
+    margin-right: 0.5rem;
+  }
   .md\:tw-mb-\[5px\]{
     margin-bottom: 5px;
   }
@@ -24277,9 +24283,6 @@ a:visited{
   }
   .md\:tw-mr-0{
     margin-right: 0px;
-  }
-  .md\:tw-mr-2{
-    margin-right: 0.5rem;
   }
   .md\:tw-mb-6{
     margin-bottom: 1.5rem;

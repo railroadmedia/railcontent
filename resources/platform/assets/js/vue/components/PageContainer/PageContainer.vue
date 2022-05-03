@@ -35,6 +35,10 @@ export default {
     },
     searchUrl: {
       type: String
+    },
+    withReferralButton: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -146,6 +150,7 @@ export default {
       :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed"
+      :with-referral-button="withReferralButton"
       @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle"
     />

@@ -40,6 +40,7 @@
                     user-avatar=""
                     account-url=""
                     search-url=""
+                    :with-referral-button="true"
                 >   
                     @yield('content')
                 </page-container>
