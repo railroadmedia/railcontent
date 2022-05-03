@@ -35925,7 +35925,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "tw-flex-grow md:flex-grow-0 md:tw-h-auto tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-pt-[40px] md:tw-mt-0 tw-overflow-y-scroll"
+  "class": "tw-flex-grow md:tw-flex-grow-0 md:tw-h-auto tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-pt-[40px] md:tw-mt-0 tw-overflow-y-scroll"
 };
 var _hoisted_2 = {
   "class": "tw-justify-self-end md:tw-justify-self-center tw-flex tw-flex-col tw-items-center tw-pb-[30px] tw-pt-[10px] md:tw-pb-0 md:tw-pt-0"
@@ -45436,7 +45436,7 @@ var bgImgLight = {
   pianote: _vue_images_pianote_bg_light_jpg__WEBPACK_IMPORTED_MODULE_6__["default"]
 }; // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
 
-var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo', 'hover:tw-border-red-400', 'hover:tw-border-green-400', 'hover:tw-border-blue-400', 'hover:tw-border-yellow-400'];
+var __usedVars = ['hover:tw-border-drumeo', 'hover:tw-border-pianote', 'hover:tw-border-singeo', 'hover:tw-border-guitareo', 'hover:tw-border-red-400', 'hover:tw-border-green-400', 'hover:tw-border-blue-400', 'hover:tw-border-yellow-400', 'md:tw-bg-drumeo', 'md:tw-bg-singeo', 'md:tw-bg-guitareo', 'md:tw-bg-pianote'];
 
 /***/ }),
 
