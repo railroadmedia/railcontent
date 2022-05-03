@@ -24231,7 +24231,6 @@ __webpack_require__.r(__webpack_exports__);
 
     var handleFocus = function handleFocus() {
       emit('onCollapse', false);
-      console.log('handle focus called');
     };
 
     var __returned__ = {
@@ -36757,7 +36756,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.stepType === 'number' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 2,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("".concat($props.brand ? $setup.bgColor[$props.brand] : 'tw-bg-white', " tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white tw-font-bold"))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("md:".concat($setup.bgColor[$props.brand], " tw-bg-white tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white tw-font-bold"))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currentStep + 1), 1
   /* TEXT */
   )], 2
