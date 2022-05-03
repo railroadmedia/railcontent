@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>My Lists | Singeo</title>
+    <title>My Lists | Musora</title>
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             @include('partials.bladesora.members.partials._account-header', [
                 'userAvatar' => current_user()->getProfilePictureUrl(),
                 'userName' => current_user()->getDisplayName(),
-                'appName' => 'Singeo',
+                'appName' => 'Musora',
                 'memberSince' => current_user()->getCreatedAt(),
             ])
 

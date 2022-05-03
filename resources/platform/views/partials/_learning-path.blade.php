@@ -40,7 +40,7 @@
                 <div class="flex flex-row align-left mt-3">
                     <a href="https://www.singeo.com/resources" class="btn collapse-320">
                         <button class="btn collapse-320">
-                            <span class="bg-singeo text-white short ph-5">
+                            <span class="bg-{{$brand}} text-white short ph-5">
                                 FOUNDATIONS BOOK RESOURCES
                             </span>
                         </button>
@@ -93,7 +93,7 @@
                         </h1>
 
                         <a href="{{ $nextLessonUrl }}"
-                           class="btn bg-singeo text-white collapse-250 short ml-1">
+                           class="btn bg-{{ $brand }} text-white collapse-250 short ml-1">
                             <i class="fas fa-play mr-1"></i>
                             Start Next Lesson
                         </a>

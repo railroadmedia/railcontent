@@ -31,7 +31,7 @@
         {!! inspectlet_embed_script() !!}
     </head>
 
-    <body class="singeo {{ isLive() ? 'live' : '' }} {{ $bodyClass ?? '' }} {{ !empty($_COOKIE['collapsed']) ? 'sidebar-collapsed' : '' }} {{ !empty($_COOKIE['darkmode']) ? 'dark-mode' : '' }}">
+    <body class="{{ $brand }} {{ isLive() ? 'live' : '' }} {{ $bodyClass ?? '' }} {{ !empty($_COOKIE['collapsed']) ? 'sidebar-collapsed' : '' }} {{ !empty($_COOKIE['darkmode']) ? 'dark-mode' : '' }}">
         {{-- Body Analytics --}}
         {!! \Railroad\Usora\Services\ClientRelayService::getBodyTop() !!}
         {!! \App\Analytics\Tracker::bodyTop() !!}
@@ -50,11 +50,12 @@
                     brand="{{ $brand }}" 
                     :is-live="true" 
                     :has-notifications="true"
-                    user-name=""
+                    user-name="John Smith"
                     user-avatar=""
                     account-url=""
                     search-url=""
-                >   
+                    :with-referral-button="true"
+                >  
                     @yield('breadcrumbs')
                     @yield('content')
                     
