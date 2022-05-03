@@ -185,7 +185,7 @@ Route::domain('{musoraDomain}')
         /*
          * Profile Public Pages
          */
-        Route::get('/{brand}/profile/{userId}/dashboard', [ProfilePublicPagesController::class, 'courses'])
+        Route::get('/{brand}/profile/{userId}/dashboard', [ProfilePublicPagesController::class, 'dashboard'])
             ->whereIn('brand', all_brands())
             ->name('profile.dashboard');
 

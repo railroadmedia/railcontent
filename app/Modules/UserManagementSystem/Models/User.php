@@ -245,7 +245,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function getDashboardUrl()
     {
-        return url()->route('platform.profile.settings.profile', ['brand' => brand(), 'userId' => $this->id]);
+        return url()->route('platform.profile.dashboard', [$this->id]);
     }
 
     /**
@@ -317,6 +317,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isAdmin()
     {
         return $this->permission_level == 'administrator';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscriber()
+    {
+        return true; // todo: connect
     }
 
     /**

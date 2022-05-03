@@ -32,16 +32,16 @@
                 :vue-router="false"
                 brand="{{ $brand }}"
             >
-                <page-container 
-                    brand="{{ $brand }}" 
-                    :is-live="true" 
+                <page-container
+                    brand="{{ $brand }}"
+                    :is-live="true"
                     :has-notifications="true"
-                    user-name="John Smith"
-                    user-avatar=""
-                    account-url=""
+                    user-name="{{ user()->display_name }}"
+                    user-avatar="{{ user()->profile_picture_url }}"
+                    account-url="{{ user()->getDashboardUrl() }}"
                     search-url=""
                     :with-referral-button="true"
-                >   
+                >
                     @yield('content')
                 </page-container>
             </app-container>
