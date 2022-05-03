@@ -66,7 +66,14 @@ export default {
              :class="[pathName === `${link.path}` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
             <musora-icon :icon-name="link.icon" class="tw-w-[24px] tw-mx-4"/>
-            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">{{ link.name }}</span>
+            <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
+              {{ link.name }}
+                <!-- Live Indicator -->
+                <span v-if="link.name === 'Live' && isLive" class="tw-relative  tw-w-[37px] tw-h-[18px] tw-ml-3">
+                  <span class="tw-animate-grow-shrink tw-blur-sm tw-origin-center tw-scale-125 tw-absolute tw-left-0 tw-top-0 tw-inline-flex tw-h-full tw-w-full tw-rounded tw-bg-[#F71B26] tw-opacity-75"></span>
+                  <span class="tw-relative tw-base tw-py-[2px] tw-px-[3px] tw-rounded tw-leading-none tw-text-white tw-bg-[#DC2626] tw-uppercase tw-leading-none tw-font-bebas-neue">On-Air</span>
+                </span>
+            </span>
           </a>
         </li>
       </ul>
