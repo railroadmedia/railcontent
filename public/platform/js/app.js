@@ -40458,7 +40458,7 @@ var _hoisted_2 = {
   "class": "tw-flex tw-flex-col tw-text-black dark:tw-text-white align-left tw-justify-center number-col title hide-xs-only"
 };
 var _hoisted_3 = {
-  "class": "thumb-wrap corners-10"
+  "class": "thumb-wrap corners-10 tw-ml-4"
 };
 var _hoisted_4 = ["data-ix-src"];
 var _hoisted_5 = {
@@ -40497,12 +40497,12 @@ var _hoisted_13 = {
 };
 var _hoisted_14 = {
   key: 1,
-  "class": "tw-text-[#3F3F46] dark:tw-text-[] item-title body mv-2"
+  "class": "tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body mv-2"
 };
 var _hoisted_15 = ["innerHTML"];
 var _hoisted_16 = {
   key: 3,
-  "class": "tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[] text-truncate tw-uppercase hide-md-up"
+  "class": "tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate tw-uppercase hide-md-up"
 };
 var _hoisted_17 = {
   key: 0,
@@ -40614,7 +40614,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.overview && $options.mappedData.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
     key: 2,
-    "class": "tiny text-grey-6 mb-1 m-xs-only",
+    "class": "tiny text-grey-6 dark:tw-text-white mb-1 m-xs-only",
     innerHTML: $options.mappedData.description
   }, null, 8
   /* PROPS */

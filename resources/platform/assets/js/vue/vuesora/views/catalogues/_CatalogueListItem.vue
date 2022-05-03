@@ -41,7 +41,7 @@
       class="tw-flex tw-flex-col tw-justify-center"
       :class="[thumbnailColumnClass, themeColor]"
     >
-      <div class="thumb-wrap corners-10">
+      <div class="thumb-wrap corners-10 tw-ml-4">
         <div class="thumb-img corners-10" :class="thumbnailType">
           <img
             src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
@@ -134,14 +134,14 @@
 
       <p
         v-if="mappedData.grey_title && overview"
-        class="tw-text-[#3F3F46] dark:tw-text-[] item-title body mv-2"
+        class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body mv-2"
       >
         {{ mappedData.grey_title }}
       </p>
 
       <p
         v-if="overview && mappedData.description"
-        class="tiny text-grey-6 mb-1 m-xs-only"
+        class="tiny text-grey-6 dark:tw-text-white mb-1 m-xs-only"
         v-html="mappedData.description"
       >
       </p>
@@ -151,7 +151,7 @@
         class="
           tw-text-xs
           font-compressed
-          tw-text-[#3F3F46] dark:tw-text-[] text-truncate
+          tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
           tw-uppercase
           hide-md-up
         "

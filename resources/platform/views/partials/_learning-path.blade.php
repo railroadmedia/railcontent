@@ -27,7 +27,7 @@
                 >
 
 {{-- todo: re-add if requested --}}
-{{--                <a data-open-modal="surveyModal" class="btn bg-singeo text-white collapse-200 short">--}}
+{{--                <a data-open-modal="surveyModal" class="btn bg-{{ $brand }} text-white collapse-200 short">--}}
 {{--                    <i class="fas fa-question-circle"></i>&nbsp; WHERE TO BEGIN--}}
 {{--                </a>--}}
 {{--                <div id="surveyModal" class="modal">--}}

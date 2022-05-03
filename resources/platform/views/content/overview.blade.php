@@ -13,7 +13,7 @@
                 @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
             @else
                 @component('partials.bladesora.members.partials._overview-header', [
-                        "themeColor" => '{{ $brand }}',
+                        "themeColor" => $brand,
                         "pageTitle" => $parentContent->fetch('fields.title'),
                         "overviewType" => $parentContent->fetch('type') == 'learning-path' ? ucwords(brand()) : $parentContent->fetch('type'),
                         "difficulty" => $parentContent->fetch('difficulty'),
@@ -27,7 +27,7 @@
                 @endcomponent
 
                 @include('partials.bladesora.members.content.content-info-subheader', [
-                    "brand" => '{{ $brand }}',
+                    "brand" => $brand,
                     "infoData" => $infoData,
                     "contentId" => $parentContent->fetch('id'),
                     "contentType" => $parentContent->fetch('type'),
@@ -40,10 +40,10 @@
             @endif
 
 
-            <div class="tw-container tw-mx-auto fluid tw-bg-{{ $brand }}">
+            <div class="tw-w-full fluid tw-bg-{{ $brand }}">
                 @include('partials.bladesora.members.content.content-progress', [
-                    "themeColor" => '{{ $brand }}',
-                    "brand" => "{{ $brand }}",
+                    "themeColor" => $brand,
+                    "brand" => $brand,
                     "contentType" => $parentContent->fetch('type'),
                     "labelText" => $progressLabelText ?? null,
                     "progress" => $parentContent->fetch('progress_percent'),
@@ -62,7 +62,7 @@
                 ])
             @endif
 
-            <div class="tw-container tw-mx-auto mv-3">
+            <div class="tw-container tw-mx-auto tw-px-4 mv-3">
                 <div class="tw-flex tw-flex-column">
                     <div class="tw-flex tw-flex-row">
                         <content-catalogue
@@ -100,7 +100,7 @@
                         @include('partials.bladesora.members.partials._completion-bonus', [
                             "xpBonus" => $xpBonus,
                             "isComplete" => $parentContent->fetch('progress_percent', 0) === 100,
-                            "themeColor" => '{{ $brand }}'
+                            "themeColor" => $brand
                         ])
                     @endif
                 </div>
