@@ -35,7 +35,7 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('packs');
 
-        Route::get('/{brand}/coaches', [ContentPagesController::class, 'coaches'])
+        Route::get('/{brand}/coaches', [\App\Http\Controllers\Platform\CoachPagesController::class, 'coaches'])
             ->whereIn('brand', all_brands())
             ->name('coaches');
 
