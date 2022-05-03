@@ -47,7 +47,7 @@
                     </a>
                 </div>
             @else
-                <p class="text-white font-bold heading">Singeo Foundations</p>
+                <p class="text-white font-bold heading">{{ $brand }} Foundations</p>
             @endif
 
             <div id="previewModal" class="modal">

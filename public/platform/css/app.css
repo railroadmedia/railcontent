@@ -21709,6 +21709,9 @@ a:visited{
 .tw-mt-8{
   margin-top: 2rem;
 }
+.tw-ml-3{
+  margin-left: 0.75rem;
+}
 .tw-mt-\[58px\]{
   margin-top: 58px;
 }
@@ -21792,9 +21795,6 @@ a:visited{
 }
 .tw-mt-6{
   margin-top: 1.5rem;
-}
-.tw-ml-3{
-  margin-left: 0.75rem;
 }
 .tw-box-border{
   box-sizing: border-box;
@@ -22156,6 +22156,9 @@ a:visited{
 .tw-w-\[\]{
   width: ;
 }
+.tw-w-\[37px\]{
+  width: 37px;
+}
 .tw-w-64{
   width: 16rem;
 }
@@ -22200,9 +22203,6 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75%;
-}
-.tw-w-\[37px\]{
-  width: 37px;
 }
 .tw-min-w-\[232px\]{
   min-width: 232px;
@@ -22823,6 +22823,14 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(230 231 233 / var(--tw-bg-opacity));
 }
+.tw-bg-\[\#F71B26\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 27 38 / var(--tw-bg-opacity));
+}
+.tw-bg-\[\#DC2626\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
 .tw-bg-\[\#223F57\]{
   --tw-bg-opacity: 1;
   background-color: rgb(34 63 87 / var(--tw-bg-opacity));
@@ -22860,14 +22868,6 @@ a:visited{
 .tw-bg-pink-600{
   --tw-bg-opacity: 1;
   background-color: rgb(219 39 119 / var(--tw-bg-opacity));
-}
-.tw-bg-\[\#F71B26\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(247 27 38 / var(--tw-bg-opacity));
-}
-.tw-bg-\[\#DC2626\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 .tw-bg-opacity-20{
   --tw-bg-opacity: 0.2;
@@ -23078,6 +23078,14 @@ a:visited{
   padding-left: 8px;
   padding-right: 8px;
 }
+.tw-py-\[2px\]{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.tw-px-\[3px\]{
+  padding-left: 3px;
+  padding-right: 3px;
+}
 .tw-px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -23133,14 +23141,6 @@ a:visited{
 .tw-px-10{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-}
-.tw-py-\[2px\]{
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-.tw-px-\[3px\]{
-  padding-left: 3px;
-  padding-right: 3px;
 }
 .tw-pt-8{
   padding-top: 2rem;

@@ -12,7 +12,10 @@ export default {
     userName: {
       type: String
     },
-    userPhoto: {
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
       type: String
     },
     brand: {
@@ -65,8 +68,9 @@ export default {
     class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
     <!-- User Image -->
-    <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full">
-      <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
+    <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover"
+          style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?blur=2&fit=crop&h=50&ixlib=php-1.2.1&q=50&w=50&s=0a284a726ec34f3bca2bb253a0dfc869)">
+      <img v-if="userAvatar.lenth" :src="userAvatar" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
       
       <!-- Notification Indicator -->
       <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">
@@ -79,7 +83,8 @@ export default {
       <MenuHeader
         :name="userName"
         :optionClick="() => {}"
-        :userPhoto="userPhoto"
+        :userPhoto="userAvatar"
+        :accountUrl="accountUrl"
       />
       <OptionGroup>
         <OptionElement :href="`/${brand}/profile/notifications`">

@@ -20911,7 +20911,7 @@ var goToHref = function goToHref(href) {
       }
     };
   },
-  props: ['href', 'optionClick', 'userPhoto', 'name'],
+  props: ['href', 'optionClick', 'userPhoto', 'name', 'accountUrl'],
   emits: ['onOptionClick']
 });
 
@@ -22553,6 +22553,15 @@ __webpack_require__.r(__webpack_exports__);
     hasNotifications: {
       type: Boolean,
       "default": false
+    },
+    userName: {
+      type: String
+    },
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
+      type: String
     }
   },
   emits: ["onCollapseSidebar", "onBrandSelect", "onColorModeToggle"],
@@ -22619,7 +22628,10 @@ __webpack_require__.r(__webpack_exports__);
     userName: {
       type: String
     },
-    userPhoto: {
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
       type: String
     },
     brand: {
@@ -23798,6 +23810,18 @@ __webpack_require__.r(__webpack_exports__);
     hasNotifications: {
       type: Boolean,
       "default": false
+    },
+    userName: {
+      type: String
+    },
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
+      type: String
+    },
+    searchUrl: {
+      type: String
     }
   },
   setup: function setup(props, context) {
@@ -32728,14 +32752,7 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "tw-text-[14px] tw-font-bold tw-mb-1"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "/members/profile",
-  "class": "tw-text-[12px] tw-text-black dark:tw-text-white hover:tw-underline"
-}, " View Profile ", -1
-/* HOISTED */
-);
-
+var _hoisted_4 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": "tw-flex tw-h-full tw-w-full tw-px-[16px] tw-pb-[12px] tw-leading-[18px] tw-text-black dark:tw-text-white",
@@ -32745,15 +32762,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.onButtonClick && $setup.onButtonClick.apply($setup, arguments);
-    })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }),
+    "class": "tw-relative tw-h-[53px] tw-w-[53px] tw-rounded-full tw-bg-cover",
+    style: {
+      "background-image": "url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?blur=2&fit=crop&h=50&ixlib=php-1.2.1&q=50&w=50&s=0a284a726ec34f3bca2bb253a0dfc869)"
+    }
+  }, [$props.userPhoto.lenth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+    key: 0,
     src: $props.userPhoto,
     "class": "tw-h-[53px] tw-w-[53px] tw-rounded-full"
   }, null, 8
   /* PROPS */
-  , _hoisted_1)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.name), 1
+  , _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.name), 1
   /* TEXT */
-  ), _hoisted_4])]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: [$props.accountUrl.length ? $props.accountUrl : '/profile'],
+    "class": "tw-text-[12px] tw-text-black dark:tw-text-white hover:tw-underline"
+  }, " View Profile ", 8
+  /* PROPS */
+  , _hoisted_4)])]);
 }
 
 /***/ }),
@@ -34956,16 +34983,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["UserIcon"], {
     brand: $props.brand,
+    "user-avatar": $props.userAvatar,
+    "user-name": $props.userName,
+    "account-url": $props.accountUrl,
     "has-notifications": $props.hasNotifications,
     isDarkModeSelected: $props.isDarkModeSelected,
     onOnColorModeToggle: _cache[3] || (_cache[3] = function ($event) {
       return $setup.emit('onColorModeToggle');
-    }),
-    userName: "John Doe",
-    userPhoto: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+    })
   }, null, 8
   /* PROPS */
-  , ["brand", "has-notifications", "isDarkModeSelected"])]), $setup.showSearchModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["SearchModal"], {
+  , ["brand", "user-avatar", "user-name", "account-url", "has-notifications", "isDarkModeSelected"])]), $setup.showSearchModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["SearchModal"], {
     key: 0,
     onOnClose: _cache[4] || (_cache[4] = function () {
       return $setup.toggleSearchModal(false);
@@ -34989,11 +35017,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full"
+  "class": "tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover",
+  style: {
+    "background-image": "url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?blur=2&fit=crop&h=50&ixlib=php-1.2.1&q=50&w=50&s=0a284a726ec34f3bca2bb253a0dfc869)"
+  }
 };
 var _hoisted_2 = ["src"];
 var _hoisted_3 = {
-  key: 0,
+  key: 1,
   "class": "tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]"
 };
 
@@ -35044,12 +35075,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     tabindex: "0",
     "class": "tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $props.userPhoto,
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Image "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$props.userAvatar.lenth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+    key: 0,
+    src: $props.userAvatar,
     "class": "tw-h-[42px] tw-w-[42px] tw-rounded-full"
   }, null, 8
   /* PROPS */
-  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification Indicator "), $props.hasNotifications ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $setup.isUserMenuOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AvatarMenu, {
+  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification Indicator "), $props.hasNotifications ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $setup.isUserMenuOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AvatarMenu, {
     key: 0,
     onOnCloseMenu: _cache[1] || (_cache[1] = function () {
       return $setup.handleMenuOpen(false);
@@ -35059,10 +35091,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MenuHeader, {
         name: $props.userName,
         optionClick: function optionClick() {},
-        userPhoto: $props.userPhoto
+        userPhoto: $props.userAvatar,
+        accountUrl: $props.accountUrl
       }, null, 8
       /* PROPS */
-      , ["name", "optionClick", "userPhoto"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionGroup, null, {
+      , ["name", "optionClick", "userPhoto", "accountUrl"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionGroup, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_OptionElement, {
             href: "/".concat($props.brand, "/profile/notifications")
@@ -36519,6 +36552,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("main", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sprite_sheet), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Navbar, {
     brand: $props.brand,
     "has-notifications": $props.hasNotifications,
+    "user-name": $props.userName,
+    "user-avatar": $props.userAvatar,
+    "account-url": $props.accountUrl,
     isSidebarHidden: $setup.isSidebarHidden,
     isDarkModeSelected: $setup.isDarkModeSelected,
     isSidebarCollapsed: $setup.isSidebarCollapsed,
@@ -36526,7 +36562,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onOnColorModeToggle: $setup.onColorModeToggle
   }, null, 8
   /* PROPS */
-  , ["brand", "has-notifications", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
+  , ["brand", "has-notifications", "user-name", "user-avatar", "account-url", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
     brand: $props.brand,
     isLive: $props.isLive,
     isSidebarCollapsed: $setup.isSidebarCollapsed,

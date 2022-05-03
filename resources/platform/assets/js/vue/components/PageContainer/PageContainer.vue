@@ -23,6 +23,18 @@ export default {
     hasNotifications: {
       type: Boolean,
       default: false
+    },
+    userName: {
+      type: String
+    },
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
+      type: String
+    },
+    searchUrl: {
+      type: String
     }
   },
 
@@ -128,6 +140,9 @@ export default {
     <Navbar
       :brand="brand"
       :has-notifications="hasNotifications"
+      :user-name="userName"
+      :user-avatar="userAvatar"
+      :account-url="accountUrl"
       :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed"

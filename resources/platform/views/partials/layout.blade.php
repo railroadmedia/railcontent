@@ -36,7 +36,7 @@
                     brand="{{ $brand }}" 
                     :is-live="true" 
                     :has-notifications="true"
-                    user-name=""
+                    user-name="John Smith"
                     user-avatar=""
                     account-url=""
                     search-url=""

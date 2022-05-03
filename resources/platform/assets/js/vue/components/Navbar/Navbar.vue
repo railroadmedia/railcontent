@@ -14,6 +14,15 @@ const props = defineProps({
   hasNotifications: {
     type: Boolean,
     default: false
+  },
+  userName: {
+    type: String
+  },
+  userAvatar: {
+    type: String
+  },
+  accountUrl: {
+    type: String
   }
 });
 const emit = defineEmits([
@@ -95,11 +104,12 @@ const toggleSearchModal = (val) => {
 
       <UserIcon
         :brand="brand"
+        :user-avatar="userAvatar"
+        :user-name="userName"
+        :account-url="accountUrl"
         :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="emit('onColorModeToggle')"
-        userName="John Doe"
-        userPhoto="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
       />
     </div>
 
