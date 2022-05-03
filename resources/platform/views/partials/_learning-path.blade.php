@@ -1,12 +1,12 @@
 @component('partials._header-banner', [
     'hideUser' => true,
-    'brand' => 'singeo',
-    'backgroundImage' => $parentContent->fetch('data.header_image_url', 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg'),
+    'brand' => $brand,
+    'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/method/method-header-'.$brand.'.jpg',
 ])
     @slot('content')
         <div class="flex flex-column pr-1 align-center">
 
-            @if(!empty($learningPathSlug) && $learningPathSlug == 'singeo-method')
+            @if(!empty($learningPathSlug) && $learningPathSlug == $brand.'-method')
 {{--                <div--}}
 {{--                        class="flex flex-column rounded ba-grey-1-2 hover-border-singeo text-white hover-text-singeo pointer"--}}
 {{--                        data-open-modal="previewModal"--}}
@@ -21,7 +21,7 @@
 {{--                </div>--}}
                 <img
                         alt="{{ $parentContent->fetch('title') }} Logo"
-                        src="https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg"
+                        src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg"
                         class="mv-3"
                         style="width:540px;max-width:100%;"
                 >
@@ -47,7 +47,7 @@
                     </a>
                 </div>
             @else
-                <p class="text-white font-bold heading">{{ $brand }} Foundations</p>
+                <p class="text-white font-bold heading">{{ $brand }} Method</p>
             @endif
 
             <div id="previewModal" class="modal">

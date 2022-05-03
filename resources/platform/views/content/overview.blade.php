@@ -49,8 +49,7 @@
                     "progress" => $parentContent->fetch('progress_percent'),
                     "nextLessonUrl" => $nextLessonUrl,
                     "backButton" => $backButton,
-                    "compact" => $parentContent->fetch('type') === 'pack-bundle' &&
-            $pack->fetch('bundle_count') <= 1,
+                    "compact" => $parentContent->fetch('type') === 'pack-bundle' && $pack->fetch('bundle_count') <= 1,
                     "xpAmount" =>  $parentContent->fetch('total_xp') ?? null,
                     "isCompleted" => $parentContent->fetch('completed', false),
                     "isStarted" => $parentContent->fetch('started', false),
