@@ -43,7 +43,7 @@ class UrlDecorator extends ModeDecoratorBase
     }
 
     /**
-     * @param  Collection  $contents
+     * @param Collection $contents
      * @return Collection
      */
     public function decorate(Collection $contents)
@@ -64,7 +64,6 @@ class UrlDecorator extends ModeDecoratorBase
         // set url based on type
         foreach ($contents as $contentIndex => $content) {
             $mobileUrl = '';
-
             $musoraApiUrl = '';
 
             // learning paths
@@ -111,6 +110,15 @@ class UrlDecorator extends ModeDecoratorBase
 //                        $content['id'],
 //                    ]
 //                );
+            }
+
+            // coaches
+            if ($content['type'] == 'instructor') {
+                $contents[$contentIndex]['url'] =
+                    url()->route('platform.content.first-level', ['coaches', $content['slug'], $content['id']]);
+
+//                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
+//                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
             }
 
 //            // learning paths
@@ -351,15 +359,6 @@ class UrlDecorator extends ModeDecoratorBase
 //                );
 //            }
 //
-//            if ($content['type'] == 'coach') {
-//
-//                $contents[$contentIndex]['url'] =
-//                    url()->route('members.coaches.show', [ $content['slug']]);
-//                self::$contentCache[$content['id']] = $content;
-//
-//                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-//            }
 //
 //            if ($content['type'] == 'instructor') {
 //
@@ -398,12 +397,12 @@ class UrlDecorator extends ModeDecoratorBase
                     ->restrictByUserAccess()
                     ->leftJoin(
                         ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy.'.parent_id',
+                        ConfigService::$tableContentHierarchy . '.parent_id',
                         '=',
-                        ConfigService::$tableContent.'.id'
+                        ConfigService::$tableContent . '.id'
                     )
-                    ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childIds)
-                    ->whereIn(ConfigService::$tableContent.'.type', $parentTypes)
+                    ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
+                    ->whereIn(ConfigService::$tableContent . '.type', $parentTypes)
                     ->selectInheritenceColumns()
                     ->getToArray();
 
@@ -425,7 +424,7 @@ class UrlDecorator extends ModeDecoratorBase
                 $this->contentRepository->query()
                     ->selectPrimaryColumns()
                     ->restrictByUserAccess()
-                    ->whereIn(ConfigService::$tableContent.'.id', array_column($rows, 'parent_id'))
+                    ->whereIn(ConfigService::$tableContent . '.id', array_column($rows, 'parent_id'))
                     ->getToArray();
 
             foreach ($newContents as $parent) {
