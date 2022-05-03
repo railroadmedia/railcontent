@@ -2,7 +2,7 @@
     <div class="flex flex-column">
         <button class="btn collapse-250 short"
                 data-open-modal="askQuestionModal">
-                <span class="bg-singeo text-white">
+                <span class="bg-{{ $brand }} text-white">
                     Ask a Question
                 </span>
         </button>
@@ -17,14 +17,14 @@
 
         <email-form
                 email-subject="Question Asked by: {{ current_user()->getDisplayName() }} ({{ current_user()->getEmail() }})"
-                brand="singeo"
+                brand="{{ $brand }}"
                 recipient="{{ config('mail-recipients.ask-question-form') ?? 'support@singeo.com' }}"
                 input-label="Ask your question here..."
                 email-type="layouts/inline/alert"
                 email-endpoint="/mailora/secure/send"
                 email-logo="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
                 email-alert="Question Asked by: {{ current_user()->getDisplayName() }} ({{ current_user()->getEmail() }})"
-                theme-color="singeo"
+                theme-color="{{ $brand }}"
                 success-message="Question successfully sent!"
                 :lesson-page="false"></email-form>
     </div>

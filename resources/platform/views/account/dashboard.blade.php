@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $user->getDisplayName() }} | Singeo</title>
+    <title>{{ $user->getDisplayName() }} | Musora</title>
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
                 "userAvatar" => $user->getProfilePictureUrl(),
                 "userName" => $user->getDisplayName(),
-                "appName" => 'Singeo',
+                "appName" => 'Musora',
                 "memberSince" => $user->getCreatedAt(),
             ])
 
@@ -62,7 +62,7 @@
                             :force-wide-thumbs="true"
                             :use-theme-color="true"
                             :pre-loaded-content="{{ $startedProgressContents }}"
-                            no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you start will show up here. Check out the <a href=\"" . url()->route('members.learning-paths.show', ['singeo-method', 308514]) . "\">Singeo Method</a> to get started." : "This member has not started any lessons yet." }}"
+                            no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you start will show up here. Check out the <a href=\"" . url()->route('members.learning-paths.show', ['singeo-method', 308514]) . "\">Method Pages</a> to get started." : "This member has not started any lessons yet." }}"
                             no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
                         />
                     </div>

@@ -6,7 +6,7 @@
 @extends('members.layout')
 
 @section('meta')
-    <title>Update Payment Info | Singeo</title>
+    <title>Update Payment Info | Musora</title>
 @stop()
 
 @section('styles')
@@ -279,7 +279,7 @@
     @include('members.partials._content-sidebar')
 
     @component('bladesora::members.partials._page-header', [
-    "themeColor" => "singeo",
+    "themeColor" => $brand,
     "pageTitle" => $existingSubscriptionActive ? 'Edit Payment Method' : 'Your Subscription has Expired',
     "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
     "pageDescription" => $existingSubscriptionActive ? "Edit your payment subscription details below." : "To renew your account you must update your payment details below.",
@@ -287,7 +287,7 @@
         @slot('interactionSlot')
             <p class="body text-white">
                 <strong>Need assistance?</strong>
-                Call Singeo support at
+                Call Musora support at
                 <a href="tel:1-800-439-8921" class="text-white">1-800-439-8921</a>
                 or <a class="text-white" href="/support">contact us</a>
             </p>
@@ -302,7 +302,7 @@
             <h1 class="title">Processing Your Request</h1>
             <h6 class="body font-italic mb-2">Please Wait..</h6>
             <span class="heading">
-                <i class="fas fa-spinner fa-spin text-singeo"></i>
+                <i class="fas fa-spinner fa-spin text-{{ $brand }}"></i>
             </span>
         </div>
     </div>
@@ -355,7 +355,7 @@
                         <div class="flex flex-row mb-2 ph">
                             <div class="flex flex-column">
                                 @include('bladesora::members.inputs.select-input', [
-                                    "brand" => 'singeo',
+                                    "brand" => $brand,
                                     "inputId" => "paymentType",
                                     "inputName" => "payment-type",
                                     "inputLabel" => "Payment Method Type",
@@ -373,7 +373,7 @@
                                         <div id="card-number" class="stripe-element"></div>
                                         <h5 class="stripe-element-error tiny mt-1">Invalid Credit Card Number.</h5>
                                     </div>
-                                    <label for="card-number" class="singeo">Credit Card Number</label>
+                                    <label for="card-number" class="{{ $brand }}">Credit Card Number</label>
                                 </div>
                             </div>
                             <div class="flex flex-column xs-12 sm-3 mb-2 ph">
@@ -382,7 +382,7 @@
                                         <div id="card-expiry" class="stripe-element"></div>
                                         <h5 class="stripe-element-error tiny mt-1">Invalid Credit Card Expiry</h5>
                                     </div>
-                                    <label for="card-expiry" class="singeo">Credit Card Expiry</label>
+                                    <label for="card-expiry" class="{{ $brand }}">Credit Card Expiry</label>
                                 </div>
                             </div>
                             <div class="flex flex-column xs-12 sm-3 mb-2 ph">
@@ -391,7 +391,7 @@
                                         <div id="card-cvc" class="stripe-element"></div>
                                         <h5 class="stripe-element-error tiny mt-1">Invalid Credit Card CVV/CVC</h5>
                                     </div>
-                                    <label for="card-cvc" class="singeo">CVV/CVC</label>
+                                    <label for="card-cvc" class="{{ $brand }}">CVV/CVC</label>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +424,7 @@
 
                                 <button class="btn collapse-250"
                                         type="submit">
-                                    <span class="bg-singeo text-white">
+                                    <span class="bg-{{ $brand }} text-white">
                                         Submit
                                     </span>
                                 </button>

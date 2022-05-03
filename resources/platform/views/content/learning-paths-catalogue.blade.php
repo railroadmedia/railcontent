@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Learning Paths | Singeo</title>
+    <title>Learning Paths | {{ $brand }} | Musora</title>
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 @slot('content')
                     <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                            <i class="icon-learning-paths tw-text-singeo tw-mr-3 tw-text-3xl"></i>
+                            <i class="icon-learning-paths tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
                             <span class="tw-text-32">Learning Paths</span>
                         </h1>
                         <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">

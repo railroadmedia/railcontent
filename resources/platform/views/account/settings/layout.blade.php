@@ -42,7 +42,7 @@
                 <div class="tw-flex tw-flex-row tw-bg-{{$brand}} tw-text-white tw-shadow corners-10 pa-3">
                     <div class="tw-flex tw-flex-col">
                         <h4 class="title tw-mb-3">Membership Canceled</h4>
-                        <p class="body tw-mb-2">We're sorry to see you go! Your <span class="tw-capitalize">{{$brand}}</span> membership has been deactivated, and your account will not auto-renew. You can still enjoy Singeo until it expires. We exist to help people achieve their musical goals and hope you continue the work to make your dreams happen. If we can help you make the music you want to, we're here to support you whenever you need us.</p>
+                        <p class="body tw-mb-2">We're sorry to see you go! Your <span class="tw-capitalize">{{$brand}}</span> membership has been deactivated, and your account will not auto-renew. You can still enjoy Musora until it expires. We exist to help people achieve their musical goals and hope you continue the work to make your dreams happen. If we can help you make the music you want to, we're here to support you whenever you need us.</p>
                     </div>
                 </div>
             </div>

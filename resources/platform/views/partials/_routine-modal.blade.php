@@ -1,5 +1,5 @@
 <div class="flex flex-row align-left">
-    <button class="tw-btn-primary tw-bg-singeo tw-px-16"
+    <button class="tw-btn-primary tw-bg-{{ $brand }} tw-px-16"
             data-open-modal="routineModal">
         How To Use Routines
     </button>

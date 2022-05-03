@@ -12,12 +12,12 @@
                     <div class="tw-flex tw-flex-col tw-pr-1">
                         <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                             <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                                <i class="icon-packs tw-text-singeo tw-mr-3 tw-text-3xl"></i>
+                                <i class="icon-packs tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
                                 <span class="tw-text-32">Packs</span>
                             </h1>
                             <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                                Here you can access Singeo training packs. If you've purchased access to these packs
-                                individually you’ll have lifetime access to them. If you own a Singeo Membership
+                                Here you can access Musora training packs. If you've purchased access to these packs
+                                individually you’ll have lifetime access to them. If you own a Musora Membership
                                 you'll have access to these packs as long as you're a member!
                             </p>
                         </div>

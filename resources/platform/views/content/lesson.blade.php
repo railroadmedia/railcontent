@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $lessonContent->fetch('fields.title') }} | Singeo</title>
+    <title>{{ $lessonContent->fetch('fields.title') }} | {{ $brand }} | Musora</title>
 @endsection
 
 @section('inject-components')

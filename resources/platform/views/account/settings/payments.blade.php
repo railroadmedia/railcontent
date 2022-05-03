@@ -1,7 +1,7 @@
 @extends('account.settings.layout')
 
 @section('meta')
-    <title>Payments | Singeo</title>
+    <title>Payments | Musora</title>
 @endsection
 
 @section('styles')
@@ -22,9 +22,9 @@
 
         <div class="tw-flex tw-flex-row ph-3 tw-mb-3">
             <payment-methods
-                theme-color="singeo"
+                theme-color="{{ $brand }}"
                 :payment-methods="{{ $paymentMethodsJson }}"
-                brand="singeo"
+                brand="{{ $brand }}"
                 stripe-publishable-key="{{ $stripePublishableKey }}"
                 :countries="{{ $countries }}"
                 :provinces="{{ $provinces }}"

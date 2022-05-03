@@ -7,7 +7,7 @@
                         <img
                             src="{{ imgix('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
                             ["q" => 80, "w" => 200]) }}"
-                            alt="The Singeo Method Logo"
+                            alt="The {{ $brand }} Method Logo"
                             class="invert-fill"
                             style="max-width:225px;width:200px;height:auto; padding-left: 1px;"
                         >
@@ -16,8 +16,8 @@
                     <div class="flex flex-column grow"></div>
 
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}"
-                       aria-label="See All Singeo Method Lessons"
-                       class="text-singeo tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
+                       aria-label="See All {{ $brand }} Method Lessons"
+                       class="text-{{ $brand }} tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
                         See All
                     </a>
                 @else
@@ -29,9 +29,9 @@
             <div class="flex flex-row remove-borders">
                 <transition appear name="fade">
                     <content-catalogue
-                        brand="singeo"
+                        brand="{{ $brand }}"
                         catalogue-type="list"
-                        theme-color="singeo"
+                        theme-color="{{ $brand }}"
                         :pre-loaded-content="{{ $currentLearningPathLesson }}"
                         :display-items-as-overview="true"
                         :lock-unowned="true"
