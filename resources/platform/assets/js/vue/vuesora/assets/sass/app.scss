@@ -639,6 +639,10 @@ ul {
     background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($pianoteRed, 10%), 0.3) 100%);
   }
 
+  &.guitareo {
+    background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($guitareoGreen, 10%), 0.3) 100%);
+  }
+
   &.singeo {
     background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($singeoPurple, 10%), 0.3) 100%);
   }

@@ -40458,7 +40458,7 @@ var _hoisted_2 = {
   "class": "tw-flex tw-flex-col tw-text-black dark:tw-text-white align-left tw-justify-center number-col title hide-xs-only"
 };
 var _hoisted_3 = {
-  "class": "thumb-wrap corners-10 tw-ml-4"
+  "class": "thumb-wrap corners-10 tw-ml-3"
 };
 var _hoisted_4 = ["data-ix-src"];
 var _hoisted_5 = {
@@ -40583,7 +40583,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   ), !_ctx.isReleased ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
     key: 0,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white dark:tw-text-black tw-font-bold", _ctx.overview ? 'tiny' : 'x-tiny'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-font-bold", _ctx.overview ? 'tiny' : 'x-tiny'])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.releaseDate), 3
   /* TEXT, CLASS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 2

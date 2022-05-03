@@ -20112,6 +20112,9 @@ ul {
 .header-gradient-overlay.pianote {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(213, 8, 29, 0.7) 100%);
 }
+.header-gradient-overlay.guitareo {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(0, 150, 128, 0.7) 100%);
+}
 .header-gradient-overlay.singeo {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(102, 0, 182, 0.7) 100%);
 }

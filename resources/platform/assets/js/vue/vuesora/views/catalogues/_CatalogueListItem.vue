@@ -41,7 +41,7 @@
       class="tw-flex tw-flex-col tw-justify-center"
       :class="[thumbnailColumnClass, themeColor]"
     >
-      <div class="thumb-wrap corners-10 tw-ml-4">
+      <div class="thumb-wrap corners-10 tw-ml-3">
         <div class="thumb-img corners-10" :class="thumbnailType">
           <img
             src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
@@ -80,7 +80,7 @@
             <i class="fas" :class="thumbnailIcon"></i>
             <p
               v-if="!isReleased"
-              class="tw-text-white dark:tw-text-black tw-font-bold"
+              class="tw-text-white tw-font-bold"
               :class="overview ? 'tiny' : 'x-tiny'"
             >
               {{ releaseDate }}
