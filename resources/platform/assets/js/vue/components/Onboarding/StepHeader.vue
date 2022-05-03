@@ -27,10 +27,13 @@ const emit = defineEmits(['onGoBack'])
         md:tw-mb-[5px]
         tw-w-[250px]
         md:tw-w-full
+        tw-font-open-sans
         tw-text-center
-        tw-font-bold
+        tw-font-extrabold
         tw-text-white
         tw-text-[20px]
+        md:tw-text-[24px]
+        lg:tw-text-[30px]
         tw-baseline-[24px]
         tw-mb-[36px]
       "
@@ -38,7 +41,7 @@ const emit = defineEmits(['onGoBack'])
       {{ title }}
     </h2>
     <p
-      class="tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
+      class="tw-font-open-sans tw-font-normal tw-text-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
     >
       {{ subtitle }}
     </p>

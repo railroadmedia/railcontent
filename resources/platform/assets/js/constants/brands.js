@@ -1,7 +1,12 @@
 import drumeoBgImg from '../vue/images/drumeo-bg.png'; 
 import singeoBgImg from '../vue/images/singeo-bg.png'; 
 import pianoteBgImg from '../vue/images/pianote-bg.png'; 
-import guitareoBgImg from '../vue/images/guitareo-bg.png'; 
+import guitareoBgImg from '../vue/images/guitareo-bg.png';
+
+import drumeoBgImgLight from '../vue/images/drumeo-bg-light.jpg'; 
+import singeoBgImgLight from '../vue/images/singeo-bg-light.jpg'; 
+import pianoteBgImgLight from '../vue/images/pianote-bg-light.jpg'; 
+import guitareoBgImgLight from '../vue/images/guitareo-bg-light.jpg'; 
 
 export const brandUrl = {
   drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
@@ -54,8 +59,15 @@ export const borderColor = {
 export const bgImg = {
   drumeo: drumeoBgImg,
   singeo: singeoBgImg,
-  guitareo: pianoteBgImg,
-  pianote: guitareoBgImg
+  guitareo: guitareoBgImg,
+  pianote: pianoteBgImg
+}
+
+export const bgImgLight = {
+  drumeo: drumeoBgImgLight,
+  singeo: singeoBgImgLight,
+  guitareo: guitareoBgImgLight,
+  pianote: pianoteBgImgLight
 }
 
 // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style

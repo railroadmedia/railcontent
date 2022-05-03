@@ -222,6 +222,7 @@ export default {
     },
   },
   data() {
+    console.log(this.props)
     return {
       content: null,
       instructors: null,
@@ -245,6 +246,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.props)
     if (
       this.preloadedContent &&
       this.preloadedContent.data &&

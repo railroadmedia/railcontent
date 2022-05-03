@@ -8,6 +8,9 @@ const props = defineProps({
       name: "Aaron Pearson",
       tagline: "YOUR GUIDE TO METAL",
     },
+    key: {
+      type: Number,
+    },
   },
 });
 

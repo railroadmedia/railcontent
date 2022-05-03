@@ -93,7 +93,7 @@
                 {{-- Live Banner --}}
                 <coach-event
                     brand="{{ $brand }}"
-                    :preloaded-content='{{ $coachEvent }}'
+                    :preloaded-content='{{ json_encode($coachEvent) }}'
                     current-date-string="{{ $currentDate }}"
                     subscription-calendar-id="{{ $calendarId }}"
                     youtube-event-id="{{ $youtubeId }}"
