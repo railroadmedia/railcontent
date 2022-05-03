@@ -50,9 +50,10 @@
             <template v-slot:csrf>{{ csrf_field() }}</template>
         </login-form>
 
-        <p class="tiny tw-text-center {{ $joinPitch ?? '' }}">
-            <strong>Not a member yet?</strong>
-            <a href="{{ url('/#orderNow') }}">Join the community here!</a>
+        <p class="tiny tw-text-center tw-py-[20px] tw-text-[16px] {{ $joinPitch ?? '' }}">
+            <span>Not a member yet?</span>
+            <br/>
+            <a class="tw-text-white tw-font-extrabold tw-underline" href="{{ url('/#orderNow') }}">Join the community here!</a>
         </p>
     </div>
 @endsection

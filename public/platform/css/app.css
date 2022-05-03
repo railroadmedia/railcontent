@@ -22021,6 +22021,9 @@ a:visited{
 .tw-min-h-\[150px\]{
   min-height: 150px;
 }
+.tw-min-h-\[369px\]{
+  min-height: 369px;
+}
 .tw-w-full{
   width: 100%;
 }
@@ -23145,6 +23148,14 @@ a:visited{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
+.tw-py-\[24px\]{
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.tw-py-\[20px\]{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 .tw-pt-8{
   padding-top: 2rem;
 }
@@ -23927,10 +23938,6 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#9EC0DC\]{
   --tw-text-opacity: 1;
   color: rgb(158 192 220 / var(--tw-text-opacity));
-}
-.tw-dark .dark\:tw-text-black{
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::-moz-placeholder{
   --tw-text-opacity: 1;

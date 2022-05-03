@@ -33937,7 +33937,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", {
     id: "loginForm",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex\n      tw-flex-col\n      tw-bg-[#081825]/[90]\n      tw-rounded-xl\n      tw-w-[423px]\n      tw-h-[369px]\n      tw-border-[1px]\n      tw-border-[#223F57]\n      tw-px-[32px]\n      ".concat($setup.currentForm !== 'login' ? 'tw-hidden' : ''))
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex\n      tw-flex-col\n      tw-bg-[#081825]/[90]\n      tw-rounded-xl\n      tw-w-[423px]\n      tw-min-h-[369px]\n      tw-border-[1px]\n      tw-border-[#223F57]\n      tw-px-[32px]\n      ".concat($setup.currentForm !== 'login' ? 'tw-hidden' : ''))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     method: "post",
     action: $props.loginurl,

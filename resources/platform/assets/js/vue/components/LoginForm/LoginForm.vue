@@ -49,7 +49,7 @@ const changeCurrentForm = (val) => {
       tw-bg-[#081825]/[90]
       tw-rounded-xl
       tw-w-[423px]
-      tw-h-[369px]
+      tw-min-h-[369px]
       tw-border-[1px]
       tw-border-[#223F57]
       tw-px-[32px]
