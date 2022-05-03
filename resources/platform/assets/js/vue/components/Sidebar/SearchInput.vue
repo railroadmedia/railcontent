@@ -15,7 +15,6 @@ const handleChange = () => {
 
 const handleFocus = () => {
     emit('onCollapse', false);
-    console.log('handle focus called')
 };
 </script>
 

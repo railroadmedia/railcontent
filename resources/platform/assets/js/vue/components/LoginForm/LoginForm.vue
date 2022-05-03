@@ -7,6 +7,7 @@
 import { ref } from "vue";
 import { bgColor } from "../../../constants/brands";
 import InputLabel from "../InputLabel/InputLabel.vue";
+import RainbowButton from "../Button/RainbowButton.vue";
 const props = defineProps({
   brand: {
     type: String,
@@ -43,8 +44,10 @@ const changeCurrentForm = (val) => {
 
 <template>
   <section
+    v-if="currentForm === 'login'"
     id="loginForm"
-    :class="`tw-flex
+    class="
+      tw-flex
       tw-flex-col
       tw-bg-[#081825]/[90]
       tw-rounded-xl
@@ -53,7 +56,7 @@ const changeCurrentForm = (val) => {
       tw-border-[1px]
       tw-border-[#223F57]
       tw-px-[32px]
-      ${currentForm !== 'login' ? 'tw-hidden' : ''}`"
+    "
   >
     <form
       method="post"
@@ -100,24 +103,8 @@ const changeCurrentForm = (val) => {
           :inputErrors="[]"
         />
       </div>
-      <button
-        type="submit"
-        class="
-          tw-rounded-[25px]
-          tw-mb-[20px]
-          tw-h-[50px]
-          tw-border-[2px]
-          tw-text-[#445F74]
-          hover:tw-text-white
-          tw-border-[#445F74] tw-relative
-          login-submit-btn
-        "
-        dusk="submit-button"
-      >
-        <span class="tw-font-bebas-neue tw-font-extrabold tw-uppercase"
-          >Sign In</span
-        >
-      </button>
+      
+      <RainbowButton type="submit" label="SIGN IN" />
       <a
         id="resetToggle"
         class="text-center text-grey-3 noselect tw-text-[16px]"
@@ -128,8 +115,10 @@ const changeCurrentForm = (val) => {
   </section>
 
   <section
+    v-if="currentForm === 'reset'"
     id="resetForm"
-    :class="`tw-flex
+    class="
+      tw-flex
       tw-flex-col
       tw-bg-[#081825]/[90]
       tw-rounded-xl
@@ -138,18 +127,15 @@ const changeCurrentForm = (val) => {
       tw-border-[1px]
       tw-border-[#223F57]
       tw-py-[42px]
-      tw-px-[32px] ${currentForm !== 'reset' ? 'tw-hidden' : ''}`"
+      tw-px-[32px]
+    "
   >
     <p class="text-grey-3 tw-mb-[20px]">
       Please enter your email address and we will send you instructions to reset
       your password.
     </p>
 
-    <form
-      method="post"
-      :action="reseturl"
-      class="tw-flex tw-flex-col"
-    >
+    <form method="post" :action="reseturl" class="tw-flex tw-flex-col">
       <slot v-if="usecsrftoken" name="csrf"></slot>
       <div class="tw-flex tw-flex-col tw-mb-[20px]">
         <InputLabel
@@ -163,24 +149,7 @@ const changeCurrentForm = (val) => {
           :inputErrors="[]"
         />
       </div>
-
-      <button
-        type="submit"
-        class="
-          tw-rounded-[25px]
-          tw-mb-[20px]
-          tw-h-[50px]
-          tw-border-[2px]
-          tw-text-[#445F74]
-          hover:tw-text-white
-          tw-border-[#445F74] tw-relative
-          login-submit-btn
-        "
-      >
-        <span class="tw-font-bebas-neue tw-font-extrabold tw-uppercase"
-          >Get New Password</span
-        >
-      </button>
+      <RainbowButton type="submit" label="GET NEW PASSWORD" />
     </form>
 
     <a

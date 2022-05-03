@@ -21117,6 +21117,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=script&setup=true&lang=js":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=script&setup=true&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    label: {
+      type: String
+    },
+    type: {
+      type: String,
+      "default": "button"
+    }
+  },
+  emits: ["onButtonClick"],
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose,
+        emit = _ref.emit;
+    expose();
+    var props = __props;
+
+    var handleClick = function handleClick(e) {
+      if (props.type === "button") {
+        e.preventDefault();
+        emit("onButtonClick");
+      }
+    };
+
+    var __returned__ = {
+      props: props,
+      emit: emit,
+      handleClick: handleClick
+    };
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue?vue&type=script&lang=js":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue?vue&type=script&lang=js ***!
@@ -22068,6 +22118,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _constants_brands__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/brands */ "./resources/platform/assets/js/constants/brands.js");
 /* harmony import */ var _InputLabel_InputLabel_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../InputLabel/InputLabel.vue */ "./resources/platform/assets/js/vue/components/InputLabel/InputLabel.vue");
+/* harmony import */ var _Button_RainbowButton_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Button/RainbowButton.vue */ "./resources/platform/assets/js/vue/components/Button/RainbowButton.vue");
+
 
 
 
@@ -22121,7 +22173,8 @@ __webpack_require__.r(__webpack_exports__);
       changeCurrentForm: changeCurrentForm,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       bgColor: _constants_brands__WEBPACK_IMPORTED_MODULE_1__.bgColor,
-      InputLabel: _InputLabel_InputLabel_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+      InputLabel: _InputLabel_InputLabel_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      RainbowButton: _Button_RainbowButton_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -24833,6 +24886,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
+    console.log(this.props);
     return {
       content: null,
       instructors: null,
@@ -24859,6 +24913,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this = this;
+
+    console.log(this.props);
 
     if (this.preloadedContent && this.preloadedContent.data && this.preloadedContent.data[0]) {
       this.content = _assets_js_helper_functions_content_js__WEBPACK_IMPORTED_MODULE_0__["default"].flattenContentObject(this.preloadedContent.data[0], true);
@@ -32975,6 +33031,38 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=template&id=d14f6bc6":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=template&id=d14f6bc6 ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = ["type"];
+var _hoisted_2 = {
+  "class": "tw-font-bebas-neue tw-font-extrabold tw-uppercase"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    type: $props.type,
+    "class": "tw-rounded-[25px] tw-mb-[20px] tw-h-[50px] tw-border-[2px] tw-text-[#445F74] hover:tw-text-white tw-border-[#445F74] tw-relative login-submit-btn",
+    dusk: "submit-button",
+    onClick: $setup.handleClick
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.label), 1
+  /* TEXT */
+  )], 8
+  /* PROPS */
+  , _hoisted_1);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue?vue&type=template&id=30bc5c2d":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue?vue&type=template&id=30bc5c2d ***!
@@ -33888,63 +33976,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["action"];
-var _hoisted_2 = {
+var _hoisted_1 = {
+  key: 0,
+  id: "loginForm",
+  "class": "tw-flex tw-flex-col tw-bg-[#081825]/[90] tw-rounded-xl tw-w-[423px] tw-min-h-[369px] tw-border-[1px] tw-border-[#223F57] tw-px-[32px]"
+};
+var _hoisted_2 = ["action"];
+var _hoisted_3 = {
   key: 1,
   "class": "tw-flex tw-flex-col tw-mb-3 tiny text-error list-style-none"
 };
-var _hoisted_3 = {
+var _hoisted_4 = {
   key: 2,
   "class": "tw-flex tw-flex-col tw-mb-2 tiny text-success list-style-none"
-};
-var _hoisted_4 = {
-  "class": "tw-flex tw-flex-col tw-mb-[20px]"
 };
 var _hoisted_5 = {
   "class": "tw-flex tw-flex-col tw-mb-[20px]"
 };
+var _hoisted_6 = {
+  "class": "tw-flex tw-flex-col tw-mb-[20px]"
+};
+var _hoisted_7 = {
+  key: 1,
+  id: "resetForm",
+  "class": "tw-flex tw-flex-col tw-bg-[#081825]/[90] tw-rounded-xl tw-w-[423px] tw-h-[369px] tw-border-[1px] tw-border-[#223F57] tw-py-[42px] tw-px-[32px]"
+};
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "tw-rounded-[25px] tw-mb-[20px] tw-h-[50px] tw-border-[2px] tw-text-[#445F74] hover:tw-text-white tw-border-[#445F74] tw-relative login-submit-btn",
-  dusk: "submit-button"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "tw-font-bebas-neue tw-font-extrabold tw-uppercase"
-}, "Sign In")], -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-grey-3 tw-mb-[20px]"
 }, " Please enter your email address and we will send you instructions to reset your password. ", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = ["action"];
-var _hoisted_9 = {
+var _hoisted_9 = ["action"];
+var _hoisted_10 = {
   "class": "tw-flex tw-flex-col tw-mb-[20px]"
 };
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "tw-rounded-[25px] tw-mb-[20px] tw-h-[50px] tw-border-[2px] tw-text-[#445F74] hover:tw-text-white tw-border-[#445F74] tw-relative login-submit-btn"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "tw-font-bebas-neue tw-font-extrabold tw-uppercase"
-}, "Get New Password")], -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", {
-    id: "loginForm",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex\n      tw-flex-col\n      tw-bg-[#081825]/[90]\n      tw-rounded-xl\n      tw-w-[423px]\n      tw-min-h-[369px]\n      tw-border-[1px]\n      tw-border-[#223F57]\n      tw-px-[32px]\n      ".concat($setup.currentForm !== 'login' ? 'tw-hidden' : ''))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$setup.currentForm === 'login' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     method: "post",
     action: $props.loginurl,
     "class": "tw-flex tw-flex-col tw-py-[42px]"
   }, [$props.usecsrftoken ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "csrf", {
     key: 0
-  }) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.errors.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.errors, function (error, i) {
+  }) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.errors.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.errors, function (error, i) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       key: i + 'error'
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error), 1
@@ -33952,9 +34027,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.hassessionstatus && $props.sessionstatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.sessionstatus), 1
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.hassessionstatus && $props.sessionstatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.sessionstatus), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
     inputOverride: "tw-w-full tw-h-[50px]",
     brand: $props.brand,
     inputType: "email",
@@ -33965,7 +34040,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     inputErrors: []
   }, null, 8
   /* PROPS */
-  , ["brand"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
+  , ["brand"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
     wrapperOverride: "tw-text-[16px]",
     inputOverride: "tw-w-full tw-h-[50px]",
     brand: $props.brand,
@@ -33977,7 +34052,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     inputErrors: []
   }, null, 8
   /* PROPS */
-  , ["brand"])]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  , ["brand"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RainbowButton"], {
+    type: "submit",
+    label: "SIGN IN"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     id: "resetToggle",
     "class": "text-center text-grey-3 noselect tw-text-[16px]",
     onClick: _cache[0] || (_cache[0] = function () {
@@ -33985,18 +34063,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "Forgot your password?")], 8
   /* PROPS */
-  , _hoisted_1)], 2
-  /* CLASS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", {
-    id: "resetForm",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("tw-flex\n      tw-flex-col\n      tw-bg-[#081825]/[90]\n      tw-rounded-xl\n      tw-w-[423px]\n      tw-h-[369px]\n      tw-border-[1px]\n      tw-border-[#223F57]\n      tw-py-[42px]\n      tw-px-[32px] ".concat($setup.currentForm !== 'reset' ? 'tw-hidden' : ''))
-  }, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  , _hoisted_2)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.currentForm === 'reset' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     method: "post",
     action: $props.reseturl,
     "class": "tw-flex tw-flex-col"
   }, [$props.usecsrftoken ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "csrf", {
     key: 0
-  }) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
+  }) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["InputLabel"], {
     inputOverride: "tw-w-full tw-h-[50px]",
     brand: $props.brand,
     inputType: "email",
@@ -34007,17 +34080,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     inputErrors: []
   }, null, 8
   /* PROPS */
-  , ["brand"])]), _hoisted_10], 8
+  , ["brand"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RainbowButton"], {
+    type: "submit",
+    label: "GET NEW PASSWORD"
+  })], 8
   /* PROPS */
-  , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     id: "loginToggle",
     "class": "tw-text-center text-grey-3 noselect",
     onClick: _cache[1] || (_cache[1] = function () {
       return $setup.changeCurrentForm('login');
     })
-  }, "Back to Login")], 2
-  /* CLASS */
-  )], 64
+  }, "Back to Login")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -93273,6 +93347,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/platform/assets/js/vue/components/Button/RainbowButton.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/components/Button/RainbowButton.vue ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RainbowButton_vue_vue_type_template_id_d14f6bc6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RainbowButton.vue?vue&type=template&id=d14f6bc6 */ "./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=template&id=d14f6bc6");
+/* harmony import */ var _RainbowButton_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RainbowButton.vue?vue&type=script&setup=true&lang=js */ "./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var _app_musora_web_platform_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_app_musora_web_platform_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_RainbowButton_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_RainbowButton_vue_vue_type_template_id_d14f6bc6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/platform/assets/js/vue/components/Button/RainbowButton.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue":
 /*!***************************************************************************************!*\
   !*** ./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue ***!
@@ -96415,6 +96517,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=script&setup=true&lang=js":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=script&setup=true&lang=js ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_RainbowButton_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_RainbowButton_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./RainbowButton.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=script&setup=true&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue?vue&type=script&lang=js":
 /*!***************************************************************************************************************!*\
   !*** ./resources/platform/assets/js/vue/components/CatalogSection/CatalogSection.vue?vue&type=script&lang=js ***!
@@ -98203,6 +98321,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Button_vue_vue_type_template_id_a8a9d726_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Button_vue_vue_type_template_id_a8a9d726_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Button.vue?vue&type=template&id=a8a9d726&scoped=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/Button.vue?vue&type=template&id=a8a9d726&scoped=true");
+
+
+/***/ }),
+
+/***/ "./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=template&id=d14f6bc6":
+/*!************************************************************************************************************!*\
+  !*** ./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=template&id=d14f6bc6 ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_RainbowButton_vue_vue_type_template_id_d14f6bc6__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_RainbowButton_vue_vue_type_template_id_d14f6bc6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./RainbowButton.vue?vue&type=template&id=d14f6bc6 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/platform/assets/js/vue/components/Button/RainbowButton.vue?vue&type=template&id=d14f6bc6");
 
 
 /***/ }),
