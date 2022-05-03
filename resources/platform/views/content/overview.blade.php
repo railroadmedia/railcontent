@@ -64,7 +64,7 @@
 
             <div class="tw-container tw-mx-auto tw-px-4 mv-3">
                 <div class="tw-flex tw-flex-column">
-                    <div class="tw-flex tw-flex-row">
+                    <div class="tw-flex tw-w-full tw-flex-row">
                         <content-catalogue
                             brand="{{ $brand }}"
                             catalogue-type="list"
