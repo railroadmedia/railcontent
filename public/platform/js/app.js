@@ -22562,6 +22562,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     accountUrl: {
       type: String
+    },
+    withReferralButton: {
+      type: Boolean,
+      "default": false
     }
   },
   emits: ["onCollapseSidebar", "onBrandSelect", "onColorModeToggle"],
@@ -23822,6 +23826,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchUrl: {
       type: String
+    },
+    withReferralButton: {
+      type: Boolean,
+      "default": false
     }
   },
   setup: function setup(props, context) {
@@ -34956,6 +34964,29 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_4 = {
   "class": "tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]"
 };
+var _hoisted_5 = {
+  key: 0,
+  "class": "pa-1 noselect tw-grow-0 tw-bg-inherit",
+  style: {
+    "padding-left": "0px",
+    "z-index": "10"
+  }
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "aria-hidden": "true",
+  "class": "fas fa-gift md:tw-mr-2"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "tw-hidden md:tw-inline-block tw-leading-none tw-mt-0.5"
+}, "invite a friend", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = [_hoisted_6, _hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["HamburguerButton"], {
     isSidebarHidden: $props.isSidebarHidden,
@@ -34972,7 +35003,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     brand: $props.brand
   }, null, 8
   /* PROPS */
-  , ["brand"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , ["brand"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Referral Button "), $props.withReferralButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "/referral/invite-a-friend",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-btn-primary tw-h-[40px] tw-text-base tw-mb-0 tw-px-4 tw-tracking-wide tw-btn-small", "tw-bg-".concat($props.brand)])
+  }, _hoisted_8, 2
+  /* CLASS */
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $setup.toggleSearchModal(true);
     }),
@@ -36558,11 +36594,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     isSidebarHidden: $setup.isSidebarHidden,
     isDarkModeSelected: $setup.isDarkModeSelected,
     isSidebarCollapsed: $setup.isSidebarCollapsed,
+    "with-referral-button": $props.withReferralButton,
     onOnCollapseSidebar: $setup.onCollapseSidebar,
     onOnColorModeToggle: $setup.onColorModeToggle
   }, null, 8
   /* PROPS */
-  , ["brand", "has-notifications", "user-name", "user-avatar", "account-url", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
+  , ["brand", "has-notifications", "user-name", "user-avatar", "account-url", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "with-referral-button", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
     brand: $props.brand,
     isLive: $props.isLive,
     isSidebarCollapsed: $setup.isSidebarCollapsed,
