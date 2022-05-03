@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
@@ -35,7 +36,7 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('packs');
 
-        Route::get('/{brand}/coaches', [\App\Http\Controllers\Platform\CoachPagesController::class, 'coaches'])
+        Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
             ->whereIn('brand', all_brands())
             ->name('coaches');
 
@@ -100,7 +101,17 @@ Route::domain('{musoraDomain}')
             ->name('search');
 
         /*
-         * Sub-Content Hierarchy Pages
+         * Specific Sub-Content Hierarchy Pages
+         */
+        Route::get(
+            '/{brand}/coaches/{firstContentSlug}/{firstContentId}',
+            [CoachPagesController::class, 'show']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('content.coach.show');
+
+        /*
+         * Catch-All Sub-Content Hierarchy Pages
          */
         Route::get(
             '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',

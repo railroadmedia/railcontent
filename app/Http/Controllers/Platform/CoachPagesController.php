@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
-use App\Maps\ContentTypes;
 use App\Services\LiveStreamEventService;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
@@ -11,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -78,9 +78,11 @@ class CoachPagesController extends Controller
 
         $lessonType = 'instructor';
 
-        $coaches = $this->contentService->getFiltered(   $request->get('page', 1),
+        $coaches = $this->contentService->getFiltered(
+            $request->get('page', 1),
             $request->get('limit', 18),
-            $request->get('sort','slug'), [$lessonType],
+            $request->get('sort', 'slug'),
+            [$lessonType],
             [],
             [],
             ['is_coach,1'],
@@ -90,11 +92,28 @@ class CoachPagesController extends Controller
             true,
             false,
             true,
-            $request->get('only_subscribed', false));
+            $request->get('only_subscribed', false)
+        );
 
-        $activeCoaches = $this->contentService->getFiltered(1, 20, 'slug', [$lessonType], [], [], ['is_active,1', 'is_coach,1']);
+        $activeCoaches = $this->contentService->getFiltered(
+            1,
+            20,
+            'slug',
+            [$lessonType],
+            [],
+            [],
+            ['is_active,1', 'is_coach,1']
+        );
 
-        $featuredCoaches = $this->contentService->getFiltered(1, 20, 'slug', [$lessonType], [], [], ['is_featured,1', 'is_coach,1']);
+        $featuredCoaches = $this->contentService->getFiltered(
+            1,
+            20,
+            'slug',
+            [$lessonType],
+            [],
+            [],
+            ['is_featured,1', 'is_coach,1']
+        );
 
         $themeColor = 'drumeo';
         $currentDate =
@@ -117,7 +136,7 @@ class CoachPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
-        if($currentEvent){
+        if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachUrl = url()->route('members.coaches.show', ['coachSlug' => $eventCoachSlug]);
@@ -126,7 +145,6 @@ class CoachPagesController extends Controller
             $env = config('app.env') === 'production' ? 'prod' : 'sandbox';
             $coachCalendar = config('addevent.uniquekeys.by-coach')[$eventCoachSlug] ?? null;
             $currentEventCalendarId = $coachCalendar ?? $brandOverview;
-
         }
 
         $followedCoaches = $this->contentFollowService->getUserFollowedContent(
@@ -137,7 +155,11 @@ class CoachPagesController extends Controller
             6
         );
 
-        $latestSubscribedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(config('railcontent.brand'), [], [], 1, 4);
+        $latestSubscribedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
+            config('railcontent.brand'), [], [],
+            1,
+            4
+        );
 
         $includedFields = [];
         foreach ($featuredCoaches->results() as $featuredCoache) {
@@ -154,7 +176,7 @@ class CoachPagesController extends Controller
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = true;
 
-        $includedTypes = array_merge(config('railcontent.coachContentTypes', []),config('railcontent.showTypes',[]));
+        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
 
         $latestLessons = $this->contentService->getFiltered(
             1,
@@ -172,7 +194,9 @@ class CoachPagesController extends Controller
             false
         );
 
-        return view('members.content.coaches-index', [
+        $upcomingCoaches = config('coaches.upcoming_coaches', []);
+
+        return view('content.coaches-index', [
             'coaches' => $coaches,
             'activeCoaches' => $activeCoaches->results(),
             'themeColor' => $themeColor,
@@ -191,7 +215,8 @@ class CoachPagesController extends Controller
             "hasActiveCoaches" => $activeCoaches->totalResults() > 0,
             "latestSubscribedLessons" => $latestSubscribedLessons->toResponseRawJson(),
             "onlySubscribedCoaches" => $request->get('only_subscribed', false),
-            'upcomingCoaches' => config('coaches.upcoming_coaches',[])
+            'upcomingCoaches' => $upcomingCoaches,
+            'hasUpcomingCoaches' => ($upcomingCoaches && count($upcomingCoaches) > 0),
         ]);
     }
 
@@ -200,7 +225,7 @@ class CoachPagesController extends Controller
      * @param $coachSlug
      * @return Factory|Application|View
      */
-    public function show(Request $request, $coachSlug)
+    public function show(Request $request, $domain, $brand, $coachSlug, $coachId)
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
@@ -235,9 +260,8 @@ class CoachPagesController extends Controller
                 break;
             }
         }
-        $thisCoach =
-            $this->contentService->getBySlugAndType($coachSlug, 'instructor')
-                ->first();
+
+        $thisCoach = $this->contentService->getById($coachId);
 
         if (empty($thisCoach)) {
             throw new NotFoundHttpException();
@@ -255,7 +279,7 @@ class CoachPagesController extends Controller
         }
 
         $includedTypes =
-            array_merge(config('railcontent.coachContentTypes', []),config('railcontent.showTypes',[]));
+            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
 
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -276,12 +300,12 @@ class CoachPagesController extends Controller
         $featuredLessons = $this->contentService->getFiltered(
             1,
             4,
-             '-published_on',
+            '-published_on',
             [],
             [],
             [],
             ['is_featured,1'],
-             $includedFields,
+            $includedFields,
             [],
             []
         );
@@ -292,7 +316,7 @@ class CoachPagesController extends Controller
 
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent(null, $fieldIds);
 
-        if($currentEvent){
+        if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachUrl = url()->route('members.coaches.show', ['coachSlug' => $eventCoachSlug]);
@@ -303,7 +327,7 @@ class CoachPagesController extends Controller
             $currentEventCalendarId = $coachCalendar ?? $brandOverview;
         }
 
-        return view('members.content.coach-show', [
+        return view('content.coach-show', [
             "thisCoach" => $thisCoach,
             "startedLessons" => [],
             "hasStartedLessons" => false,
@@ -315,7 +339,7 @@ class CoachPagesController extends Controller
             "includedFields" => $includedFields,
             "requiredFields" => [],
             'totalResults' => $listLessons->totalResults(),
-            'includedTypes' => array_map('ucfirst',$listLessons->filterOptions()['content_type'] ?? []) ,
+            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['content_type'] ?? []),
             'featuredLessons' => $featuredLessons->toResponseRawJson(),
             "hasFeaturedLessons" => $featuredLessons->totalResults() > 0,
             'showSearch' => true,
@@ -348,7 +372,7 @@ class CoachPagesController extends Controller
 
         $lessonContent = $this->contentService->getById($streamId);
 
-        if (!$lessonContent ||($lessonContent instanceof Collection && $lessonContent->isEmpty())) {
+        if (!$lessonContent || ($lessonContent instanceof Collection && $lessonContent->isEmpty())) {
             return redirect()->route('members.unreleased');
         }
 
@@ -455,19 +479,21 @@ class CoachPagesController extends Controller
             [],
             [],
             true
-        )['results']->merge($this->contentService->getFiltered(
-            1,
-            'null',
-            'slug',
-            ['instructor'],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            true
-        )['results']);
+        )['results']->merge(
+            $this->contentService->getFiltered(
+                1,
+                'null',
+                'slug',
+                ['instructor'],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                true
+            )['results']
+        );
 
         $thisCoach = null;
 
