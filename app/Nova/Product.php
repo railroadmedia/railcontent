@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Flexible\Layouts\FeatureLayout;
+use App\Nova\Flexible\Presets\FeaturePreset;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
@@ -10,6 +12,7 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Whitecube\NovaFlexibleContent\Flexible;
 
 class Product extends Resource
 {
@@ -49,11 +52,14 @@ class Product extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
             BelongsTo::make('ProductType', 'productType', 'App\Nova\ProductType'),
             Text::make('Name'),
-            Text::make('Slug'),
-            Text::make('Header Text', 'header_text'),
-            Image::make('Logo'),
-            Currency::make('Price'),
-            Currency::make('Discounted Price', 'discounted_price'),
+            Text::make('Slug')->hideFromIndex(),
+            Text::make('Header Text', 'header_text')->hideFromIndex(),
+            Image::make('Logo')->hideFromIndex(),
+            Flexible::make('Features')
+                        ->addLayout(FeatureLayout::class)
+                        ->preset(FeaturePreset::class),
+            Currency::make('Price')->hideFromIndex(),
+            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
         ];
     }
 
