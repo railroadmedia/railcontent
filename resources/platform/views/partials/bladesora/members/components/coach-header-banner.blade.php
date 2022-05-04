@@ -1,5 +1,5 @@
 @component('partials.bladesora.members.components.coach-header-template', [
-    'brand'=> $brandName,
+    'brand'=> $brand,
     'backgroundImage'=> $backgroundImage,
     'vimeoVideo' => $vimeoVideo,
 ])
@@ -117,7 +117,7 @@
     @slot('actions')
             <div id="subscribeButton" class="{{ $isUserSubscribed ? 'tw-hidden' : '' }}">
                     <button onclick="subscribeToCoach({{ $coachId }}, '{{ $subscribeUrl }}');"
-                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brandName }} hover:tw-bg-{{ $brandName }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
+                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
                         <span>
                             <i aria-hidden="true" class="fa fa-bell tw-px-0.5"></i>
                             Subscribe</span>
@@ -125,7 +125,7 @@
                 </div>
                 <div id="unsubscribeButton" class="{{ $isUserSubscribed ? '' : 'tw-hidden' }}">
                     <button onclick="unsubscribeToCoach({{ $coachId }}, '{{ $unsubscribeUrl }}');"
-                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brandName }} hover:tw-bg-{{ $brandName }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
+                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
                         <span>
                             <i aria-hidden="true" class="fa fa-check tw-px-0.5"></i>
                             <span>Subscribed</span> </span>
@@ -134,7 +134,7 @@
                 @if ($forumUrl != null)
                     <div class="lg:tw-mr-4">
                         <a href="{{ $forumUrl }}"
-                            class="tw-btn tw-btn-primary tw-transition tw-bg-{{ $brandName }} hover:tw-bg-{{ $brandName }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
+                            class="tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
                             <span>
                                 <i aria-hidden="true" class="fa fa-question-circle tw-px-0.5"></i>
                                 <span>Ask a question</span></span>

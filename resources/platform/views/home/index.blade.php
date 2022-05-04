@@ -10,7 +10,7 @@
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
 
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
                 {{-- On Boarding --}}
                 {{-- <onboarding></onboarding> --}}
@@ -93,7 +93,7 @@
                 {{-- Live Banner --}}
                 <coach-event
                     brand="{{ $brand }}"
-                    :preloaded-content='{{ json_encode($coachEvent) }}'
+                    :preloaded-content='{{ $coachEvent }}'
                     current-date-string="{{ $currentDate }}"
                     subscription-calendar-id="{{ $calendarId }}"
                     youtube-event-id="{{ $youtubeId }}"

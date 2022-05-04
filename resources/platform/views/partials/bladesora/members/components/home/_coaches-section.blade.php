@@ -41,7 +41,7 @@
                                 </p>
 
                                 @if ($coach->fetch('is_house_coach'))
-                                    <div class="tw-text-white tw-text-xs tw-font-roboto-condensed tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+                                    <div class="tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
                                         <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
                                         HOUSE
                                     </div>
