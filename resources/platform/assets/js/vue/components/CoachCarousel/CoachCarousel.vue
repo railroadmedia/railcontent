@@ -83,12 +83,12 @@ function onWheelScroll(e) {
 <template>
   <div class="tw-relative tw-mb-[20px] md:tw-mb-[40px]">
     <div
-      :class="`lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[80vw] tw-overflow-hidden ${gradientMaskMap[currentGradientBorder]}`"
+      :class="`lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[100vw] tw-overflow-hidden ${gradientMaskMap[currentGradientBorder]}`"
       style="overflow-x: scroll"
       id="coach-carousel-results-container"
       @wheel="onWheelScroll"
     >
-      <div class="tw-gap-2 tw-flex tw-transition-all" :ref="resultsRef">
+      <div class="tw-gap-2 tw-flex tw-transition-all tw-pl-[8px]" :ref="resultsRef">
         <SingleCoach v-for="n in 7" :key="n" />
       </div>
     </div>

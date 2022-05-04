@@ -2,7 +2,7 @@
     'brand'=> $brandName,
     'backgroundImage'=> $backgroundImage,
     'vimeoVideo' => $vimeoVideo,
-])    
+])
     @slot('queuedScripts')
     <script type="application/javascript">
         function hideElement(elId) {
@@ -102,7 +102,7 @@
                 $focusArray;
                 $lastFocus = array_pop($focusArray);
             @endphp
-            {{ implode($focusArray, ', ') }}
+            {{ implode(', ', $focusArray) }}
             @if (count($focusArray) !== 0)
                 <span>AND</span>
             @endif
@@ -152,7 +152,7 @@
                     </div>
                 @endif
     @endslot
-@endcomponent 
+@endcomponent
 
         @if(empty($hideUser))
             <div class="tw-flex-col tw-items-center tw-hidden sm:tw-flex">
@@ -164,9 +164,9 @@
                     <a href="{{ $profileUrl }}" class="tw-no-underline">
                         <img
                             class="tw-rounded inset-border"
-                            src="{{ _imgix(
+                            src="{{ cf_img(
                                 $currentUser['avatar'],
-                                ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
+                                ["quality" => 50, "blur" => 2, "width" => 50, "height" => 50]
                             ) }}"
                             data-ix-src="{{ $currentUser['avatar'] }}"
                         >
@@ -189,7 +189,7 @@
                             {{ $currentUser['xp'] }} XP
                         </p>
                     @endif
-                    
+
                     @isset($userActions)
                         {{ $userActions }}
                     @endif

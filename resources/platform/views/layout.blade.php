@@ -12,7 +12,7 @@
     @yield('styles')
 </head>
 
-<body class="singeo">
+<body class="">{{ $brand }}
     <!-- Analytics scripts should live outside of #app -->
     <div id="app">
         @yield('breadcrumbs')

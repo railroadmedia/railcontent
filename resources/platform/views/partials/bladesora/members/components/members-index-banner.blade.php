@@ -18,7 +18,7 @@
                 $firstName = array_shift($exploded);
             @endphp
             <span class="tw-font-normal">{{ $firstName }}</span>
-            <span class="tw-font-bold">{{ implode($exploded, ' ') }}</span>
+            <span class="tw-font-bold">{{ implode(' ', $exploded) }}</span>
         @endslot
         @slot('shortBio')
             {!! $coachOfTheMonth->fetch('data.short_bio', '') !!}

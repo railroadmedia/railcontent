@@ -11,6 +11,23 @@ const props = defineProps({
   isSidebarHidden: Boolean,
   isSidebarCollapsed: Boolean,
   isDarkModeSelected: Boolean,
+  hasNotifications: {
+    type: Boolean,
+    default: false
+  },
+  userName: {
+    type: String
+  },
+  userAvatar: {
+    type: String
+  },
+  accountUrl: {
+    type: String
+  },
+  withReferralButton: {
+    type: Boolean,
+    default: false
+  }
 });
 const emit = defineEmits([
   "onCollapseSidebar",
@@ -81,20 +98,37 @@ const toggleSearchModal = (val) => {
       />
     </div>
     <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]">
+
+      <!-- Referral Button -->
+      <div v-if="withReferralButton" class="pa-1 noselect tw-grow-0 tw-bg-inherit" 
+           style="padding-left: 0px; z-index: 10;">
+        <a href="/referral/invite-a-friend" 
+          class="tw-btn-primary tw-h-[40px] tw-text-base tw-mb-0 tw-px-4 tw-tracking-wide tw-btn-small"
+          :class="`tw-bg-${brand}`" 
+        >
+          <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i> 
+          <span class="tw-hidden md:tw-inline-block tw-leading-none tw-mt-0.5">invite a friend</span>
+        </a>
+      </div>
+
       <button
         @click="() => toggleSearchModal(true)"
         :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-justify-center ${bgColor[brand]}`"
       >
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-white" />
       </button>
+
       <UserIcon
         :brand="brand"
+        :user-avatar="userAvatar"
+        :user-name="userName"
+        :account-url="accountUrl"
+        :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="emit('onColorModeToggle')"
-        userName="John Doe"
-        userPhoto="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
       />
     </div>
+
     <SearchModal @onClose="() => toggleSearchModal(false)" v-if="showSearchModal" />
   </nav>
 </template>

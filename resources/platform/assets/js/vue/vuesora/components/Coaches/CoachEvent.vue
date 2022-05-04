@@ -1,5 +1,5 @@
 <template>
-  <div class="container tw-my-3 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
+  <div class="tw-mb-6 md:tw-mb-8 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
     <NotificationToasts
       :icon="toast.icon"
       :text="toast.text"
@@ -222,6 +222,7 @@ export default {
     },
   },
   data() {
+    console.log(this.props)
     return {
       content: null,
       instructors: null,
@@ -245,6 +246,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.props)
     if (
       this.preloadedContent &&
       this.preloadedContent.data &&

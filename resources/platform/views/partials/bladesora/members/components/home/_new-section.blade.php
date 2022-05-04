@@ -2,17 +2,17 @@
     <div class="tw-flex tw-flex-col tw-grow">
 
         <!-- Section Title -->
-        <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
+        <div class="tw-flex tw-items-center tw-mb-3 tw-w-full tw-justify-between">
             <a href="{{ $allLessonsUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">New</h2>
             </a>
-            <a href="{{ $allLessonsUrl }}"  
+            <a href="{{ $allLessonsUrl }}"
                 aria-label="See All New Lessons"
                 class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 See All
             </a>
-        </div> 
+        </div>
 
 
         <div class="tw-flex tw-flex-row six-cards-row">
@@ -26,7 +26,7 @@
                         :lock-unowned="true"
                         :six-wide="true"
                         :force-wide-thumbs="true"
-                        :pre-loaded-content="{{ $newContent }}"
+                        :pre-loaded-content="{{ $newContentJson }}"
                 >
                     <div class="tw-flex tw-flex-row nmh-1">
                         @for($i = 0; $i < 6; $i++)
@@ -38,6 +38,6 @@
                 </content-catalogue>
             </transition>
         </div>
-        
+
     </div>
 </section>

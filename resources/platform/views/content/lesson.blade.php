@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $lessonContent->fetch('fields.title') }} | Singeo</title>
+    <title>{{ $lessonContent->fetch('fields.title') }} | {{ $brand }} | Musora</title>
 @endsection
 
 @section('inject-components')
@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @include('content.breadcrumbs._lesson-breadcrumbs')
@@ -263,5 +262,4 @@
             ])
 
         </div>
-    </page-container>
 @endsection

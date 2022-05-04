@@ -6,7 +6,7 @@
             <select
                 :id="filterName + 'Filter'"
                 v-model="valueInterface"
-                class="no-label"
+                class="tw-pb-0 tw-text-black dark:tw-text-white no-label"
                 :class="{'is-clearable': valueInterface}"
                 :disabled="valueInterface"
                 @keydown.prevent
@@ -19,6 +19,7 @@
                     {{ placeholderLabel }}
                 </option>
                 <option
+                    class="tw-text-black"
                     v-for="filter in sortedOptions"
                     :key="filter.key"
                     :value="filter.value"

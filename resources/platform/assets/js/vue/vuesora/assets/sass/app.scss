@@ -9,7 +9,7 @@
 @import './partials/_modifiers.scss';
 @import './partials/_forms.scss';
 @import './partials/_button.scss';
-@import './partials/_nav.scss';
+// @import './partials/_nav.scss';
 @import './partials/_content.scss';
 @import './partials/_content-table.scss';
 @import './partials/_add-event.scss';
@@ -27,7 +27,7 @@
 @import './partials/_stripe.scss';
 @import './partials/_darkmode.scss';
 @import './partials/_images.scss';
-@import './partials/_sidebar.scss';
+// @import './partials/_sidebar.scss';
 @import './partials/_coaches.scss';
 
 @import '~@musora/icons/dist/icons.css';
@@ -637,6 +637,10 @@ ul {
 
   &.pianote {
     background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($pianoteRed, 10%), 0.3) 100%);
+  }
+
+  &.guitareo {
+    background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($guitareoGreen, 10%), 0.3) 100%);
   }
 
   &.singeo {

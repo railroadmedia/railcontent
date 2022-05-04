@@ -24,7 +24,7 @@
                     class="subtitle font-regular text-center text-white mb-3"
                     style="max-width:540px;"
                 >
-                    The Singeo Method is a step-by-step curriculum designed to take students from a beginner
+                    The {{ $brand }} Method is a step-by-step curriculum designed to take students from a beginner
                     to advanced level. Students will work with a wide range of instructors as they develop their
                     skills in a variety of topics.
                 </p>
@@ -33,7 +33,7 @@
                     <div class="flex flex-column xs-6 ph-1">
                         <a
                             href="{{ $currentLearningPathLessonUrl }}"
-                            class="btn text-white bg-singeo"
+                            class="btn text-white bg-{{ $brand }}"
                         >
                             <i class="fas fa-play mr-1"></i> Start
                         </a>

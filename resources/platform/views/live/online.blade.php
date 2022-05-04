@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             <div class="tw-container tw-mx-auto fluid bg-grey-5 pv-3">
@@ -74,5 +73,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

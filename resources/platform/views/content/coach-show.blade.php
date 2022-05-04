@@ -10,14 +10,13 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 'pages' => [
                     [
                         'title' => 'Coaches',
-                        'url' => url()->route('members.coaches.index'),
+                        'url' => url()->route('platform.coaches'),
                     ],
                     [
                         'title' => $thisCoach->fetch('fields.name'),
@@ -30,13 +29,13 @@
                 'hideUser' => true,
                 'backgroundImage' => $thisCoach->fetch('data.coach_top_banner_image'),
                 'shortBio' => $thisCoach->fetch('data.short_bio'),
-                'focusArray' => [$thisCoach->fetch('data.focus_text','')],
+                'focusArray' => \Illuminate\Support\Arr::wrap($thisCoach->fetch('data.focus_text','')),
                 'firstName' => $firstLastName[0] ?? '',
                 'lastName' => $firstLastName[1] ?? '',
                 'isUserSubscribed' => $currentUserSubscribed,
                 'coachId' => $thisCoach->fetch('id'),
                 'vimeoVideo' => $thisCoach->fetch('fields.video.fields.vimeo_video_id', null),
-                'forumUrl' => $thisCoach->fetch('fields.forum_thread_id')?$thisCoach['forum_thread']['url']:'',
+                'forumUrl' => $thisCoach->fetch('fields.forum_thread_id')?($thisCoach['forum_thread']['url'] ?? ''):'',
                 'subscribeUrl' => url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
                 'unsubscribeUrl' => url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')])
                 ])
@@ -154,5 +153,4 @@
             @endcomponent
 
         </div>
-    </page-container>
 @endsection

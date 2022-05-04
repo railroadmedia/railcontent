@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @component('partials._header-banner')
@@ -20,7 +19,7 @@
                             This is where you'll see the upcoming lesson release schedule.
                             Make sure to click the "Add To Calendar" button for anything that catches your eye so you
                             don't miss out. Whenever we stream live you'll be able to watch the lesson here and chat with
-                            other Singeo members!
+                            other Musora members!
                         </p>
 
                         <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3">
@@ -71,5 +70,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

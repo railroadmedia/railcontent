@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
+use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
@@ -18,12 +20,12 @@ Route::domain('{musoraDomain}')
         /*
          * Home Page
          */
-        Route::get('/{brand}', [ContentPagesController::class, 'home'])
+        Route::get('/{brand}', [HomePageController::class, 'home'])
             ->whereIn('brand', all_brands())
             ->name('home');
 
         // this automatically redirects to the users last used brand
-        Route::get('/members', [ContentPagesController::class, 'homeRedirect'])
+        Route::get('/members', [HomePageController::class, 'homeRedirect'])
             ->whereIn('brand', all_brands())
             ->name('home-redirect');
 
@@ -34,7 +36,7 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('packs');
 
-        Route::get('/{brand}/coaches', [ContentPagesController::class, 'coaches'])
+        Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
             ->whereIn('brand', all_brands())
             ->name('coaches');
 
@@ -99,7 +101,17 @@ Route::domain('{musoraDomain}')
             ->name('search');
 
         /*
-         * Sub-Content Hierarchy Pages
+         * Specific Sub-Content Hierarchy Pages
+         */
+        Route::get(
+            '/{brand}/coaches/{firstContentSlug}/{firstContentId}',
+            [CoachPagesController::class, 'show']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('content.coach.show');
+
+        /*
+         * Catch-All Sub-Content Hierarchy Pages
          */
         Route::get(
             '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',
@@ -124,6 +136,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->whereIn('primaryPage', ['packs', 'method'])
             ->name('content.third-level');
+
+        Route::get(
+            '/{brand}/jump-to-content-id/{contentId}',
+            [ContentPagesController::class, 'jumpToContentId']
+        )
+            ->whereIn('brand', all_brands())
+            ->whereIn('primaryPage', ['packs', 'method'])
+            ->name('content.jump-to-content-id');
 
         /*
          * Live & Schedule

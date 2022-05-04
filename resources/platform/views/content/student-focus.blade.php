@@ -5,14 +5,13 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
         @component('partials._header-banner')
             @slot('content')
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <i class="icon-student-focus tw-text-singeo tw-mr-3 tw-text-3xl"></i>
+                        <i class="icon-student-focus tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
                         <span class="tw-text-32">Student Focus</span>
                     </h1>
 
@@ -49,5 +48,4 @@
         </div>
 
         </div>
-    </page-container>
 @endsection

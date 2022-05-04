@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @component('partials.bladesora.members.components.header-banner', [
@@ -142,7 +141,7 @@
                     </div>
                 </div>
             @endif
-            
+
             <!-- Upcoming Coaches -->
             @component('partials.bladesora.members.components.coach-upcoming', [
                 'hasUpcomingCoaches' => $hasUpcomingCoaches,
@@ -174,7 +173,7 @@
                             :required-fields="{{json_encode(['is_coach,1'])}}"
                             :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"
                             user-id="{{ auth()->id() }}"
-                            :is-admin="{{ json_encode(\App\Services\User\UserAccessService::isAdministrator(current_user()->getId())) }}"
+                            :is-admin="{{ json_encode(user()->isAdmin()) }}"
                             :use-url-params="true"
                             :lock-unowned="true"
                             :show-loading-animation="true"
@@ -197,6 +196,5 @@
             </div>
 
         </div>
-    </page-container>
 @endsection
 

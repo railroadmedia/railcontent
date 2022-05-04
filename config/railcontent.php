@@ -218,6 +218,7 @@ return [
         'content' => [
             \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+            \App\Decorators\Content\UrlDecorator::class,
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
@@ -580,6 +581,9 @@ return [
             'showFutureLessonAtTopOrBottom' => 'bottom',
         ],
     ],
+
+//    ---------------------------------------
+//    Content Types
     /**
      * The order of the show types it's IMPORTANT.
      * The show cards on 'Shows' page are displayed in this order.
@@ -686,6 +690,22 @@ return [
         'pack-lesson',
         'semester-pack-lesson',
         'rudiment',
+        'unit',
+        'unit-part',
+        'course',
+        'course-part',
+        'song',
+        'song-part',
+        'quick-tips',
+        'question-and-answer',
+        'student-review',
+        'boot-camps',
+        'chord-and-scale',
+        'pack-bundle-lesson',
+        'podcasts',
+        'learning-path-lesson',
+        'learning-path-course',
+        'learning-path-level'
     ],
     'dashboardInProgressContentTypes' => [
         'course',

@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             <div class="tw-container tw-mx-auto">
@@ -25,5 +24,4 @@
             </div>
     
         </div>
-    </page-container>
 @endsection

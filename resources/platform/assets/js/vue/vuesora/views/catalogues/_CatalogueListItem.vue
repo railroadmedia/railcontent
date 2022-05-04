@@ -1,31 +1,34 @@
 <template>
   <a
     class="
-      flex flex-row
-      bb-grey-1-1
-      no-decoration
-      hover-bg-grey-7
-      relative
-      text-grey-3
-      hover-text-black
+      tw-flex 
+      tw-flex-row
+      tw-relative
+      tw-text-[#3F3F46] 
+      dark:tw-text-[#9EC0DC]
+      tw-border-b 
+      tw-border-[#E4E4E7]
+      dark:tw-border-[#223457]
+      tw-no-underline
+      hover:tw-bg-gray-100/[10]
+      dark:hover:tw-bg-gray-900/[10]
     "
     :class="class_object"
     :href="renderLink ? item.url : false"
   >
-    <!--        <div v-if="mappedData.sheet_music && !is_search"-->
-    <!--             class="flex flex-column xs-12 pv hide-sm-up">-->
-    <!--            <img :src="mappedData.sheet_music" style="width:100%;">-->
-    <!--        </div>-->
 
     <!-- LESSON NUMBERS -->
     <div
       v-if="showNumbers"
       class="
-        flex flex-column
-        align-left align-v-center
+        tw-flex 
+        tw-flex-col
+        tw-text-black
+        dark:tw-text-white
+        align-left 
+        tw-justify-center
         number-col
         title
-        text-black
         hide-xs-only
       "
     >
@@ -35,10 +38,10 @@
     <!-- THUMBNAIL COLUMN -->
     <div
       v-if="!showStudentReviewThumbsAsAvatar"
-      class="flex flex-column align-v-center"
+      class="tw-flex tw-flex-col tw-justify-center"
       :class="[thumbnailColumnClass, themeColor]"
     >
-      <div class="thumb-wrap corners-10">
+      <div class="thumb-wrap corners-10 tw-ml-3">
         <div class="thumb-img corners-10" :class="thumbnailType">
           <img
             src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
@@ -77,7 +80,7 @@
             <i class="fas" :class="thumbnailIcon"></i>
             <p
               v-if="!isReleased"
-              class="text-white font-bold"
+              class="tw-text-white tw-font-bold"
               :class="overview ? 'tiny' : 'x-tiny'"
             >
               {{ releaseDate }}
@@ -90,7 +93,7 @@
     <!-- AVATAR INSTEAD OF THUMBNAIL -->
     <div
       v-if="showStudentReviewThumbsAsAvatar"
-      class="flex flex-column align-v-center avatar-col"
+      class="tw-flex tw-flex-col tw-justify-center avatar-col"
     >
       <div class="thumb-wrap rounded" style="border-radius: 50%">
         <div
@@ -111,12 +114,11 @@
     </div>
 
     <!-- TITLES AND COLUMN DATA (on mobile) -->
-    <div class="flex flex-column align-v-center title-column overflow">
+    <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column overflow">
       <p
         v-if="brand !== 'guitareo' && !isCoach"
-        class="tiny font-compressed uppercase text-truncate"
+        class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
         :class="[
-          themeTextClass,
           overview ? 'dense font-bold' : 'font-compressed',
         ]"
       >
@@ -124,7 +126,7 @@
       </p>
 
       <p
-        class="text-black font-bold item-title"
+        class="tw-text-black dark:tw-text-white tw-font-bold item-title"
         :class="overview ? 'heading' : 'tiny font-compressed'"
       >
         {{ mappedData.black_title }}
@@ -132,14 +134,14 @@
 
       <p
         v-if="mappedData.grey_title && overview"
-        class="text-grey-3 item-title body mv-2"
+        class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body mv-2"
       >
         {{ mappedData.grey_title }}
       </p>
 
       <p
         v-if="overview && mappedData.description"
-        class="tiny text-grey-6 mb-1 m-xs-only"
+        class="tiny text-grey-6 dark:tw-text-white mb-1 m-xs-only"
         v-html="mappedData.description"
       >
       </p>
@@ -147,10 +149,10 @@
       <p
         v-if="!is_search"
         class="
-          x-tiny
+          tw-text-xs
           font-compressed
-          text-grey-3 text-truncate
-          uppercase
+          tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
+          tw-uppercase
           hide-md-up
         "
       >
@@ -168,7 +170,7 @@
     <!-- SHEET MUSIC IMAGE IF IT EXISTS -->
     <div
       v-if="mappedData.sheet_music && !is_search"
-      class="flex flex-column sheet-music-col ph-1 hide-xs-only"
+      class="flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
     >
       <img :src="mappedData.sheet_music" />
     </div>
@@ -179,12 +181,13 @@
       v-if="!is_search"
       :key="`${item.id}-mappedData-${i}`"
       class="
-        flex flex-column
-        uppercase
-        align-center
+        tw-flex 
+        tw-flex-col
+        tw-uppercase
+        tw-justify-center
         basic-col
-        text-center
-        x-tiny
+        tw-text-center
+        tw-text-xs
         font-compressed
         hide-sm-down
       "
@@ -197,12 +200,12 @@
     <div
       v-if="is_search"
       class="
-        flex flex-column
-        uppercase
-        align-center
+        tw-flex tw-flex-col
+        tw-uppercase
+        tw-justify-center
         basic-col
-        text-center
-        x-tiny
+        tw-text-center
+        tw-text-xs
         hide-sm-down
       "
     >
@@ -211,9 +214,9 @@
     <div
       v-if="is_search"
       class="
-        flex flex-column
+        flex tw-flex-col
         uppercase
-        align-center
+        tw-justify-center
         basic-col
         text-center
         x-tiny
@@ -226,20 +229,20 @@
     <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
     <div
       v-if="displayUserInteractions && item.type !== 'learning-path'"
-      class="flex flex-column icon-col align-v-center"
+      class="flex tw-flex-col icon-col tw-justify-center"
       :class="is_search ? '' : 'hide-xs-only'"
     >
       <div v-if="resetProgress" class="body">
         <i
-          class="fas fa-undo flex-center text-grey-2 hover-text-black reset"
+          class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black reset"
           title="Reset Progress"
           @click.stop.prevent="progressReset"
         ></i>
       </div>
       <div v-else class="body">
         <i
-          class="add-to-list fas fa-plus flex-center hover-text-black"
-          :class="is_added ? 'is-added ' + themeTextClass : 'text-grey-2'"
+          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black"
+          :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]'"
           :title="is_added ? 'Remove from list' : 'Add to list'"
           @click.stop.prevent="addToList"
         ></i>
@@ -248,18 +251,18 @@
 
     <div
       v-if="is_search && item.type === 'learning-path'"
-      class="flex flex-column icon-col align-v-center"
+      class="flex tw-flex-col icon-col tw-justify-center"
     ></div>
 
     <!-- PROGRESS INDICATOR OR LOCK ICON -->
     <div
-      class="flex flex-column icon-col align-v-center"
+      class="flex tw-flex-col icon-col tw-justify-center"
       :class="is_search || overview ? 'hide-xs-only' : ''"
     >
       <!-- LOCK ICON OR ADD TO CALENDAR -->
       <div
         v-if="noAccess"
-        class="body text-grey-2 hover-text-black"
+        class="body tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black"
         title="Add to Calendar"
         data-open-modal="addToCalendarModal"
         @click="addEvent"
@@ -274,7 +277,7 @@
       <div v-else class="body">
         <i
           v-if="item.started || item.completed"
-          class="fas flex-center rounded hover-text-black"
+          class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-black"
           :class="[
             item.completed ? completedIcon : 'fa-adjust',
             themeTextClass,
@@ -283,7 +286,7 @@
 
         <i
           v-else
-          class="fas flex-center text-grey-2 rounded hover-text-black"
+          class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black rounded"
           :class="
             ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(
               item.type

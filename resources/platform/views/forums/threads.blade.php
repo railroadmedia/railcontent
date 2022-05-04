@@ -27,7 +27,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @component('partials._forum-header-banner',[
@@ -91,5 +90,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

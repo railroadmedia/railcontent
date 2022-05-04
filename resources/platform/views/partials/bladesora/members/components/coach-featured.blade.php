@@ -17,7 +17,7 @@
                     <!-- Card Thumbnail -->
                     <div class="{{ $singleFeaturedCoach ? 'md:tw-mr-6 md:tw-w-1/2' : 'md:tw-mr-0' }}">
                         <a href="{{ $featured->fetch('url') }}" class="tw-w-full tw-flex tw-rounded-xl tw-mb-4 tw-bg-cover tw-bg-top tw-h-80 tw-bg-gray-200"
-                            style="background-image: url( {{ imgix($featured->fetch('data.coach_featured_image'), ['w' => 720]) }} );">
+                            style="background-image: url( {{ cf_img($featured->fetch('data.coach_featured_image'), ['width' => 720]) }} );">
                             <span class="sr-only">Image of {{ $featured->fetch('fields.name') }}</span>
                         </a>
                     </div>
@@ -29,7 +29,7 @@
                             <a href="{{ $featured->fetch('url') }}"
                                 class="tw-mr-4 tw-rounded-full tw-relative tw-w-16 tw-h-16 tw-overflow-hidden tw-flex-shrink-0">
                                 <img class="tw-w-16 tw-h-16 tw-rounded-full tw-border-2 tw-border-solid tw-border-yellow-500"
-                                    src="{{ imgix($featured->fetch('coach_profile_image'), ['w' => 300]) }} ">
+                                    src="{{ cf_img($featured->fetch('coach_profile_image'), ['width' => 300]) }} ">
                                 <!-- Badge -->
                                 <div
                                     class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-3 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
@@ -49,7 +49,7 @@
                                     $firstName = array_shift($exploded);
                                 @endphp
                                 <span class="tw-font-normal">{{ $firstName }}</span>
-                                {{ implode($exploded, ' ') }}
+                                {{ implode(' ', $exploded) }}
                             </a>
                             <!-- Buttons -->
                             <a href="{{ $featured->fetch('url') }}"
