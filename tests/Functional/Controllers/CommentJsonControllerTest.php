@@ -652,6 +652,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'railcontent/comment/' . $comment['id']);
 
         $this->assertEquals([$comments[2], $comments[1], $comment], $response->decodeResponseJson()->json('data'));
-        $this->assertEquals(($commentsNr + 1), $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertEquals(($commentsNr + 1), $response->decodeResponseJson()->json('meta')['totalResults']);
     }
 }
