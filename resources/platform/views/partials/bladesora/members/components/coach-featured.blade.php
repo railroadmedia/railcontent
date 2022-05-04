@@ -1,11 +1,7 @@
 @if ($hasFeaturedCoaches)
-    <div class="tw-container tw-mt-2 tw-mb-6">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-6">
         <div class="tw-flex tw-flex-row align-v-center pv-2 tw-mb-4">
-            <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
-                <i class="fas fa-star"></i>
-            </span>
-
-            <h2 class="heading tw-capitalize tw-flex-grow">
+            <h2 class="heading tw-capitalize dark:tw-text-white tw-flex-grow">
                 Featured Coaches
             </h2>
         </div>
@@ -40,7 +36,7 @@
                                 </div>
                             </a>
                             <!-- Header -->
-                            <a class="tw-text-2xl tw-text-black tw-no-underline tw-font-bold tw-uppercase tw-mr-4"
+                            <a class="tw-text-2xl tw-text-black dark:tw-text-white tw-no-underline tw-font-bold tw-uppercase tw-mr-4"
                                href="{{ $featured->fetch('url') }}"
                             >
                                 @php
@@ -59,10 +55,10 @@
                         </div>
                         <!-- Card Body -->
                         <div class="tw-flex tw-flex-col tw-mb-6">
-                            <h3 class="tw-text-xl tw-font-bold tw-uppercase tw-mb-4">
+                            <h3 class="tw-text-xl tw-font-bold dark:tw-text-white tw-uppercase tw-mb-4">
                                 {{ $featured->fetch('data.focus_text.value') }}
                             </h3>
-                            <div class="tw-text-sm">{!! $featured->fetch('data.short_bio.value') !!}</div>
+                            <div class="tw-text-sm dark:tw-text-white">{!! $featured->fetch('data.short_bio.value') !!}</div>
                         </div>
                         <!-- Buttons -->
                         <a href="{{ $featured->fetch('url') }}"

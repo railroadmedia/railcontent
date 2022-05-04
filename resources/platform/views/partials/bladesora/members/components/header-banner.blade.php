@@ -1,12 +1,12 @@
-<div class="container fluid collapsed-h pv-5 relative bg-black">
+<div class="tw-full fluid collapsed-h pv-5 relative bg-black">
     <div class="header-background-container absolute-fill bg-top"
             style="background-image: url({{ cf_img($backgroundImage, ["quality" => 80, "blur" => 150, "width" => 640]) }});"
          data-ix-bg="{{ $backgroundImage }}"
     ></div>
     <div class="header-background-container absolute-fill bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
-    <div class="container relative">
-        <div class="flex flex-row align-center">
+    <div class="relative">
+        <div class="tw-relative tw-flex tw-items-center tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             {{ $content }}
 
             @if(empty($hideUser))

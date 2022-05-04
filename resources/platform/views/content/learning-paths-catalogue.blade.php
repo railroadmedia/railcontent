@@ -22,7 +22,7 @@
                 @endslot
             @endcomponent
 
-            <div class="tw-container tw-mx-auto">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
                 <div class="tw-flex tw-flex-col mv-3">
                     <div class="tw-flex tw-flex-row pv-3">
                         <h1 class="heading tw-capitalize">All Learning Paths</h1>

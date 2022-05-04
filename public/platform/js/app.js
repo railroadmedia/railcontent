@@ -37657,7 +37657,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $data.subscriptionCalendarDropdown = !$data.subscriptionCalendarDropdown;
         }, ["stop"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-max-w-full tw-rounded-full tw-py-4 tw-uppercase tw-font-bold tw-font-roboto-condensed", 'tw-' + _ctx.themeBgClass])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-white tw-max-w-full tw-rounded-full tw-py-4 tw-uppercase tw-font-bold tw-font-bebas-neue", 'tw-' + _ctx.themeBgClass])
       }, _hoisted_7, 2
       /* CLASS */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
@@ -39742,7 +39742,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition",
     href: $options.coachIndexUrl + '#coach-section'
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [!$options.isOnlySubscribed ? 'tw-text-black tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [!$options.isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
   }, " All Coaches ", 2
   /* CLASS */
   )], 8
@@ -39751,7 +39751,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-no-underline tw-transition",
     href: $options.coachIndexUrl + '?only_subscribed=true#coach-section'
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [$options.isOnlySubscribed ? 'tw-text-black tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [$options.isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
   }, " Subscribed Coaches ", 2
   /* CLASS */
   )], 8
@@ -39993,7 +39993,7 @@ var _hoisted_2 = {
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "tw-text-4xl tw-font-bold"
+  "class": "tw-text-4xl tw-font-bold dark:tw-text-white"
 }, "All Lessons", -1
 /* HOISTED */
 );
@@ -41265,7 +41265,7 @@ var _hoisted_3 = {
   }
 };
 var _hoisted_4 = {
-  "class": "tw-uppercase tw-font-roboto-condensed tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
+  "class": "tw-uppercase tw-font-bebas-neue tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
@@ -41280,7 +41280,7 @@ var _hoisted_7 = {
 };
 var _hoisted_8 = {
   key: 0,
-  "class": "tw-text-white tw-text-xs tw-font-roboto-condensed tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center"
+  "class": "tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
@@ -41474,12 +41474,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["card-info flex flex-column", $props.displayInline ? 'ph-1 align-v-center' : ''])
   }, [!$options.isGuitareoChordAndScale ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h5", {
     key: 0,
-    "class": "tw-text-xs text-grey-4 capitalize tw-font-normal tw-font-normal",
+    "class": "tw-text-xs text-grey-4 dark:tw-text-[#9EC0DC] capitalize tw-font-normal tw-font-normal",
     innerHTML: $options.mappedData.grey_title
   }, null, 8
   /* PROPS */
   , _hoisted_12)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-leading-snug text-black font-compressed font-bold capitalize mb-1", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-sm tw-leading-snug tw-text-black dark:tw-text-white font-compressed font-bold capitalize mb-1", {
       'text-center': $options.isGuitareoChordAndScale
     }])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.mappedData.black_title), 3
@@ -43747,7 +43747,7 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "tw-font-roboto-condensed tw-font-bold tw-text-sm tw-uppercase"
+  "class": "tw-font-bebas-neue tw-font-bold tw-text-sm tw-uppercase"
 }, "Back To Forum", -1
 /* HOISTED */
 );
@@ -43782,7 +43782,7 @@ var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "tw-font-roboto-condensed tw-font-bold tw-text-sm tw-uppercase"
+  "class": "tw-font-bebas-neue tw-font-bold tw-text-sm tw-uppercase"
 }, "Back To Forum", -1
 /* HOISTED */
 );
@@ -43804,7 +43804,7 @@ var _hoisted_46 = {
 };
 var _hoisted_47 = ["src"];
 var _hoisted_48 = {
-  "class": "tw-font-roboto-condensed tw-uppercase tw-text-center"
+  "class": "tw-font-bebas-neue tw-uppercase tw-text-center"
 };
 var _hoisted_49 = {
   "class": "tw-text-base tw-font-bold tw-mb-1"
@@ -44132,7 +44132,7 @@ var _hoisted_8 = {
   "class": "tw-mb-1 tw-text-2xl tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal"
 };
 var _hoisted_9 = {
-  "class": "tw-text-sm tw-text-gray-500 tw-font-medium tw-uppercase tw-font-roboto-condensed tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2"
+  "class": "tw-text-sm tw-text-gray-500 tw-font-medium tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2"
 };
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" - ");
@@ -44140,7 +44140,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" - ");
 
 var _hoisted_12 = {
-  "class": "tw-inline-flex tw-text-sm tw-text-gray-500 tw-italic tw-font-medium tw-uppercase tw-font-roboto-condensed md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end"
+  "class": "tw-inline-flex tw-text-sm tw-text-gray-500 tw-italic tw-font-medium tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end"
 };
 var _hoisted_13 = {
   "class": "tw-mb-1 md:tw-mb-4"

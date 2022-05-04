@@ -81,12 +81,12 @@
                 :class="displayInline ? 'ph-1 align-v-center' : ''"
             >
                 <h5
-                    class="tw-text-xs text-grey-4 capitalize tw-font-normal tw-font-normal"
+                    class="tw-text-xs text-grey-4 dark:tw-text-[#9EC0DC] capitalize tw-font-normal tw-font-normal"
                     v-if="!isGuitareoChordAndScale" v-html="mappedData.grey_title">
                     </h5>
 
                 <h4
-                    class="tw-text-sm tw-leading-snug text-black font-compressed font-bold capitalize mb-1"
+                    class="tw-text-sm tw-leading-snug tw-text-black dark:tw-text-white font-compressed font-bold capitalize mb-1"
                     :class="{'text-center': isGuitareoChordAndScale}"
                 >
                     {{ mappedData.black_title }}
