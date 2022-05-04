@@ -78,6 +78,7 @@ class RailcontentServiceProvider extends ServiceProvider
         CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
         UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
         HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
+        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class.'@handleSync']
     ];
 
     /**

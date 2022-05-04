@@ -295,7 +295,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 $content[$i]['id'],
                 $fieldInstructor['key'],
                 $fieldInstructor['value'],
-                null,
+                1,
                 $fieldInstructor['type']
             );
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);

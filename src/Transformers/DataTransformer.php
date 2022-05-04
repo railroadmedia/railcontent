@@ -25,7 +25,7 @@ class DataTransformer extends TransformerAbstract
         $extraColumns = config('railcontent.contentColumnNamesForFields', []);
 
         foreach ($extraColumns as $extraColumn) {
-            if (array_key_exists($extraColumn,$data)) {
+            if (isset($data[$extraColumn])) {
                 unset($data[$extraColumn]);
             }
         }

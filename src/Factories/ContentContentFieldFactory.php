@@ -24,15 +24,14 @@ class ContentContentFieldFactory extends ContentFieldService
     {
         $this->faker = app(Generator::class);
 
-        $parameters =
-            func_get_args() + [
-                rand(),
-                $this->faker->word,
-                $this->faker->word,
-                rand(),
-                $this->faker->word
-            ];
+        $data = [
+            'content_id' => $contentId ?? rand(),
+            'key' => $key ??  $this->faker->word,
+            'value' => $value ??  $this->faker->word,
+            'position' => $position ?? rand(),
+            'type' => $type ?? $this->faker->word,
+        ];
 
-        return parent::create(...$parameters);
+        return parent::createOrUpdate($data);
     }
 }
