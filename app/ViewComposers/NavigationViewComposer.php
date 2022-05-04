@@ -2,10 +2,10 @@
 
 namespace App\ViewComposers;
 
-use App\Services\SidebarNavigationService;
+use App\Services\NavigationService;
 use Illuminate\View\View;
 
-class SidebarNavigationViewComposer
+class NavigationViewComposer
 {
     /**
      * Check the users permission levels and render a different nav for different levels
@@ -16,7 +16,8 @@ class SidebarNavigationViewComposer
     public function compose(View $view)
     {
         $view->with([
-            'sidebarNavigationSectionsJson' => SidebarNavigationService::getSectionsJson(),
+            'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
+            'userNavigationDropdownLinksJson' => NavigationService::getUserDropDownLinksJson(),
         ]);
     }
 }
