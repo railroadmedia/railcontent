@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 
 class Product extends Model
 {
@@ -21,7 +22,16 @@ class Product extends Model
         return $this->belongsTo(ProductType::class, 'product_type_id');
     }
 
-    protected $fillable = [
-        'name'
+    public function feature()
+    {
+        return $this->hasMany(Feature::class);
+    }
+
+    protected $casts = [
+        'features' => FlexibleCast::class
+    ];
+
+    protected $guarded = [
+        'id'
     ];
 }
