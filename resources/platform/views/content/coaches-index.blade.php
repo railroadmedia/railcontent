@@ -36,19 +36,16 @@
                 @endslot
             @endcomponent
 
-            <!-- Coach Event -->
-            <section class="tw-flex tw-py-2 tw-bg-gray-100">
-                <coach-event
-                    brand="{{ $brand }}"
-                    :preloaded-content='{{ $coachEvent }}'
-                    current-date-string="{{ $currentDate }}"
-                    subscription-calendar-id="{{ $currentEventCalendarId }}"
-                    youtube-event-id="{{ $youtubeId }}"
-                    :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-                    event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-                    variant="small"
-                />
-            </section>
+            {{-- Live Banner --}}
+            <coach-event
+                brand="{{ $brand }}"
+                :preloaded-content='{{ $coachEvent }}'
+                current-date-string="{{ $currentDate }}"
+                subscription-calendar-id="{{ $currentEventCalendarId }}"
+                youtube-event-id="{{ $youtubeId }}"
+                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            ></coach-event>
 
             <!-- Featured Coaches -->
             @component('partials.bladesora.members.components.coach-featured', [

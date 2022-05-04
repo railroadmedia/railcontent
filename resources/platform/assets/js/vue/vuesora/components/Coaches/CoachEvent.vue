@@ -222,7 +222,6 @@ export default {
     },
   },
   data() {
-    console.log(this.props)
     return {
       content: null,
       instructors: null,
@@ -246,12 +245,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.props)
-    if (
-      this.preloadedContent &&
-      this.preloadedContent.data &&
-      this.preloadedContent.data[0]
-    ) {
+    if ( this.preloadedContent.data[0].length ) {
       this.content = ContentHelpers.flattenContentObject(
         this.preloadedContent.data[0],
         true
@@ -260,7 +254,6 @@ export default {
       this.startTime = DateTime.fromSQL(this.content.live_event_start_time, {
         zone: "UTC",
       });
-      console.log(this.startTime)
       this.startDate = new Date(this.startTime);
       this.startWeekday = this.startDate.toLocaleString("en-US", {
         weekday: "long",
