@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\ViewComposers\SidebarNavigationViewComposer;
+use App\ViewComposers\NavigationViewComposer;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*', SidebarNavigationViewComposer::class);
+        view()->composer('*', NavigationViewComposer::class);
     }
 }
