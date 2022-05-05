@@ -7,6 +7,10 @@ use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 
 class ElasticService
 {
+    /**
+     * @var ContentService ContentService
+     */
+    private $contentService;
 
     /**
      * @return \Elasticsearch\Client
@@ -34,11 +38,10 @@ class ElasticService
     public function createContentIndex()
     {
         $client = $this->getClient();
-        $indexName = config('railcontent.elastic_index_name','content');
+        $indexName = config('railcontent.elastic_index_name', 'content');
 
         if (!$client->indices()
             ->exists(['index' => $indexName])) {
-
             $params = [
                 'index' => $indexName,
                 'body' => [
@@ -132,7 +135,7 @@ class ElasticService
         array $followedContents = []
     ) {
         $client = $this->getClient();
-        $indexName = config('railcontent.elastic_index_name','content');
+        $indexName = config('railcontent.elastic_index_name', 'content');
 
         if ($client->indices()
             ->exists(['index' => $indexName])) {
@@ -171,7 +174,7 @@ class ElasticService
                     'size' => $limit,
                 ],
             ];
-//dd($params);
+
             return $client->search($params);
         }
     }
@@ -195,17 +198,18 @@ class ElasticService
         $dateTimeCutoff = null,
         $sort = 'score'
     ) {
-
         $client = $this->getClient();
-        $arrTerm = explode(' ', strtolower($term));
-        $indexName = config('railcontent.elastic_index_name','content');
+        if ($term) {
+            $arrTerm = explode(' ', strtolower($term));
+        }
+        $indexName = config('railcontent.elastic_index_name', 'content');
 
         $searchQuery =
             $this->build()
                 ->restrictByUserAccess()
                 ->includeByTypes($contentTypes)
                 ->restrictByContentStatuses($contentStatuses)
-                ->restrictByTerm($arrTerm)
+                ->restrictByTerm($arrTerm ?? [])
                 ->restrictByPublishedDate($dateTimeCutoff)
                 ->setResultRelevanceBasedOnConfigSettings($arrTerm)
                 ->sortResults($sort);
@@ -294,36 +298,33 @@ class ElasticService
                                 array_map('trim', $filteredContents[$requiredFieldData] ?? [])
                             )) {
                                 $filteredContents[$requiredFieldData][] = ucfirst(trim($option));
-                             }
+                            }
                         }
                     } else {
                         if (($elData['_source'][$requiredFieldData]) && (!in_array(
                                 ucfirst(trim(($elData['_source'][$requiredFieldData]))),
                                 array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
                             ))) {
-                            $filteredContents[$requiredFieldData][] = ucfirst(trim($elData['_source'][$requiredFieldData]));
+                            $filteredContents[$requiredFieldData][] =
+                                ucfirst(trim($elData['_source'][$requiredFieldData]));
                         }
                     }
                 }
             }
 
-            if (!in_array($elData['_source']['content_type'], $filteredContents['content_type'] ?? []) ) {
+            if (!in_array($elData['_source']['content_type'], $filteredContents['content_type'] ?? [])) {
                 $filteredContents['content_type'][] = $elData['_source']['content_type'];
             }
         }
 
-
         foreach ($filteredContents as $availableFieldIndex => $availableField) {
-                usort(
-                    $filteredContents[$availableFieldIndex],
-                    function ($a, $b)  {
-                        if (is_numeric($a) && is_numeric($b)) {
-                            return $a > $b;
-                        }
-                        return strncmp($a, $b, 15);
-                    }
-                );
+            usort($filteredContents[$availableFieldIndex], function ($a, $b) {
+                if (is_numeric($a) && is_numeric($b)) {
+                    return $a > $b;
+                }
 
+                return strncmp($a, $b, 15);
+            });
         }
 
         if (!empty($instructorsIds)) {
@@ -335,9 +336,84 @@ class ElasticService
         return $filteredContents;
     }
 
-    public function deleteIndex($indexName){
+    public function deleteIndex($indexName)
+    {
         $client = $this->getClient();
 
-        $client->indices()->delete(['index' => $indexName]);
+        $client->indices()
+            ->delete(['index' => $indexName]);
+    }
+
+    public function syncDocument($content)
+    {
+        $client = $this->getClient();
+
+        $contentID = $content['id'];
+
+        //get progress on content
+        //            $userContentPogress =
+        //                $oArgs->getEntityManager()
+        //                    ->getRepository(UserContentProgress::class);
+        //            $allProgress = $userContentPogress->countContentProgress($contentID);
+        //
+        //            $lastWeekProgress = $userContentPogress->countContentProgress(
+        //                $contentID,
+        //                Carbon::now()
+        //                    ->subWeek(1)
+        //            );
+
+        $this->contentService = app(ContentService::class);
+        $elasticData = array_merge(
+            [
+                //                    'all_progress_count' => $allProgress,
+                //                    'last_week_progress_count' => $lastWeekProgress,
+            ],
+            $this->contentService->getElasticData($contentID)
+        );
+
+        $paramsContent = [
+            'index' => 'content',
+            'body' => $elasticData,
+        ];
+
+        // Create indexes if not exists
+        if (!$client->indices()
+            ->exists(['index' => 'content'])) {
+            $this->createContentIndex();
+        }
+
+        //update or create document
+        try {
+            $paramsSearch = [
+                'index' => 'content',
+                'body' => [
+                    'query' => [
+                        'term' => [
+                            'content_id' => "$contentID",
+                        ],
+                    ],
+                ],
+            ];
+
+            $documents = $client->search($paramsSearch);
+
+            //delete document if exists
+            foreach ($documents['hits']['hits'] as $elData) {
+                //dd($elData);
+                $paramsDelete = [
+                    'index' => 'content',
+                    'id' => $elData['_id'],
+                    'refresh' => true,
+                ];
+
+                $client->delete($paramsDelete);
+            }
+
+            $client->index($paramsContent);
+        } catch (Exception $exception) {
+            error_log('Can not delete elasticsearch index '.print_r($exception->getMessage(), true));
+        }
+
+        return $elasticData;
     }
 }
