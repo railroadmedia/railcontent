@@ -333,6 +333,10 @@ class NavigationService
      */
     public static function getUserDropDownLinks()
     {
+        if (empty(user())) {
+            return [];
+        }
+        
         return [
             'dashboardPageUrl' => '/' . brand() . '/profile/' . user()->id . '/dashboard',
             'notificationsPageUrl' => '/',

@@ -4,7 +4,7 @@
     </div>
     <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1">
         <div class="tw-flex tw-flex-col">
-            <h6 class="title tw-mb-2">Hey {{ current_user()->getDisplayName() }}!</h6>
+            <h6 class="title tw-mb-2">Hey {{ user()->display_name }}!</h6>
 
             <p class="tiny tw-uppercase text-error tw-font-bold">Please Read</p>
             <p class="body tw-mb-2">When you first signed up for Musora, you made a decision to learn to sing or improve your skills. You were probably excited to get started and had this amazing sense of motivation and inspiration. Take a moment to reflect on what's happened since then...</p>
