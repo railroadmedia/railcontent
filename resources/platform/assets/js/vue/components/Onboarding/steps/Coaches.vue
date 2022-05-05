@@ -6,10 +6,10 @@ import StepHeader from "../StepHeader.vue";
 import CoachCarousel from "../../CoachCarousel/CoachCarousel.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import { SearchIcon } from "@heroicons/vue/solid";
-import { useDebounceFn } from "../../../hooks/debounce/useDebounce"
-import { searchCoaches } from "../../../utils"
+import { useDebounceFn } from "../../../hooks/debounce/useDebounce";
+import { searchCoaches, parseCoachesCardData } from "../../../utils";
 
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const props = defineProps({
   brand: {
@@ -25,18 +25,28 @@ const props = defineProps({
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
+const coachResults = ref([]);
+
+const handleCoachSearch = (value) => {
+  searchCoaches(props.brand, value).then((result) => {
+    coachResults.value = parseCoachesCardData(result);
+  });
+};
+
+onMounted(() => {
+  handleCoachSearch();
+});
+
 const debouncedSearch = useDebounceFn((value) => {
-    searchCoaches(props.brand, value).then((result) => {
-      console.log(result)
-    });
-}, 400)
+  handleCoachSearch(value);
+}, 350);
 
 const onInputChange = (value) => {
   debouncedSearch(value);
-}
+};
 
 function goBack() {
-  emit('onChangeStep', 5);
+  emit("onChangeStep", 5);
 }
 </script>
 
@@ -59,7 +69,14 @@ function goBack() {
       release new content."
         @onGoBack="goBack"
       />
-      <div class="tw-relative tw-h-[42px] tw-mb-[20px] md:tw-mb-[40px] tw-w-[90vw] md:tw-w-[600px]">
+      <div
+        class="
+          tw-relative tw-h-[42px] tw-mb-[20px]
+          md:tw-mb-[40px]
+          tw-w-[90vw]
+          md:tw-w-[600px]
+        "
+      >
         <InputLabel
           placeholder="Find a coach..."
           inputOverride="tw-text-white tw-w-full tw-bg-[#002039]/90 tw-absolute tw-pl-[36px] tw-box-border"
@@ -76,7 +93,7 @@ function goBack() {
           "
         />
       </div>
-      <CoachCarousel :brand="brand" />
+      <CoachCarousel :brand="brand" :coachResults="coachResults" />
     </div>
     <div
       class="
