@@ -91,7 +91,7 @@ class CommentServiceTest extends RailcontentTestCase
 
     public function test_comment_assignation()
     {
-        Event::fake();
+        //Event::fake();
 
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(

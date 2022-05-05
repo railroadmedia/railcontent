@@ -266,6 +266,8 @@ class ContentFieldService
                                                     ]);
         }
 
+        $content = $this->contentService->getById($data['content_id']);
+
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_'.$data['content_id']);
 
@@ -279,7 +281,7 @@ class ContentFieldService
         //            event(new ContentFieldCreated($newField, $data));
         //        }
 
-        return $data;
+        return $content;
     }
 
 }

@@ -444,5 +444,4 @@ class RailcontentTestCase extends BaseTestCase
     {
         return $this->connectionType;
     }
-
-}
+    }

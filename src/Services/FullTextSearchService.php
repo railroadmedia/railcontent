@@ -70,14 +70,16 @@ class FullTextSearchService
         $brands = null,
         $instructorIds = []
     ) {
-        $term = $output = preg_replace(
-            '!\s+!',
-            ' ',
-            trim(
-                preg_replace("/[^a-zA-Z0-9\\s\/]+/", "", $term)
-            )
-        );
-        $term = str_replace('/', '_', $term);
+        if($term) {
+            $term = $output = preg_replace(
+                '!\s+!',
+                ' ',
+                trim(
+                    preg_replace("/[^a-zA-Z0-9\\s\/]+/", "", $term)
+                )
+            );
+            $term = str_replace('/', '_', $term);
+        }
 
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
@@ -133,7 +135,7 @@ class FullTextSearchService
 
             $contentIds = [];
             foreach ($elasticData['hits']['hits'] as $elData) {
-                $contentIds[] = $elData['_source']['content_id'];
+                $contentIds[$elData['_source']['content_id']] = $elData['_source']['content_id'];
             }
 
             $filters = $this->elasticService->getFilterFields(

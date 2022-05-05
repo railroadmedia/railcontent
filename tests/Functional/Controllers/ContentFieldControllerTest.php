@@ -250,7 +250,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
     public function content_updated_event_dispatched_when_link_content_field()
     {
-        Event::fake();
+        //Event::fake();
 
         $key = $this->faker->text(255);
         $value = $this->faker->text(255);
@@ -282,7 +282,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
     public function content_updated_event_dispatched_when_unlink_content_field()
     {
-        Event::fake();
+        //Event::fake();
 
         $contentId = $this->createContent();
 

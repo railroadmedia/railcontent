@@ -271,7 +271,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function content_updated_event_dispatched_when_unlink_content_datum()
     {
-        Event::fake();
+        //Event::fake();
 
         $contentId = $this->createContent();
 
