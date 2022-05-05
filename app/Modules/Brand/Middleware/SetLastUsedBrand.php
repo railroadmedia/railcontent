@@ -32,7 +32,7 @@ class SetLastUsedBrand
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->segment(1)));
         }
 
-        // token API requests will have the brand in the params
+        // API requests will have the brand in the params
         if (!empty(user()) &&
             !empty($request->get('brand')) &&
             in_array($request->get('brand'), config('brands'))) {
