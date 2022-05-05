@@ -11,11 +11,14 @@ import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
+import LoginForm from './vue/components/LoginForm/LoginForm.vue';
+import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
+import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
 import PaymentMethods from './vue/vuesora/views/payment-methods';
@@ -26,8 +29,20 @@ import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailF
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue'
+import ImgixService from './vue/vuesora/assets/js/services/imgix';
 
-const app = createApp({});
+window.onload = function(){
+    window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
+};
+
+const app = createApp({
+    provide: {
+        sidebarNavigationLinks: window.sidebarNavigationLinks,
+        userNavigationDropdownLinks: window.userNavigationDropdownLinks,
+    }
+});
+
+console.log(window.userNavigationDropdownLinks);
 
 //Register Global Components
 app.component('AppContainer', AppContainer)
@@ -38,9 +53,11 @@ app.component('AppContainer', AppContainer)
    .component('StatsSection', StatsSection)
    .component('CoachEvent', CoachEvent)
    .component('ContentCatalogue', ContentCatalogue)
+   .component('ContentCatalogueContainer', ContentCatalogueContainer)
    .component('CommentsCatalogue', CommentsCatalogue)
    .component('Onboarding', Onboarding)
    .component('TriggerBanner', TriggerBanner)
+   .component('LoginForm', LoginForm)
    .component('NotificationsTable', NotificationsTable)
    .component('PaymentMethods', PaymentMethods)
    .component('ForumThreadsTable', ForumThreadsTable)
@@ -50,6 +67,7 @@ app.component('AppContainer', AppContainer)
    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('Comments', Comments)
+   .component('MusoraIcon', MusoraIcon)
 
 
 app.directive('click-outside', {
@@ -72,4 +90,3 @@ app.use(store);
 app.use(router);
 app.use(VueAxios, axios);
 app.mount('#app');
-

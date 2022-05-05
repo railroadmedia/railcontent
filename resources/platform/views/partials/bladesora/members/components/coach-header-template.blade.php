@@ -60,10 +60,7 @@ $brandColors = $colors[$brand];
     <div class="lg:tw-hidden tw-bg-top"
         style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
-            background-image: url({{ _imgix(
-                $backgroundImage,
-                []
-            ) }});
+            background-image: url({{ cf_img($backgroundImage, []) }});
             color: #fff;
             background-size: cover;
             min-height: 25vh;
@@ -96,10 +93,7 @@ $brandColors = $colors[$brand];
     <div class="tw-hidden lg:tw-flex tw-bg-top"
         style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
-            background-image: url({{ _imgix(
-                $backgroundImage,
-                []
-            ) }});
+            background-image: url({{ cf_img($backgroundImage, []) }});
             color: #fff;
             background-size: cover;
             background-position: 50%;">
@@ -115,7 +109,7 @@ $brandColors = $colors[$brand];
                 <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close"
                     src="https://player.vimeo.com/video/{{$vimeoVideo}}?title=0&byline=0&portrait=0"
                     frameborder="0"
-                    allow="autoplay; fullscreen;" 
+                    allow="autoplay; fullscreen;"
                     id="coachVideoIframe">
                 </iframe>
             </div>

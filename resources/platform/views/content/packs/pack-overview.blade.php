@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
         @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
@@ -110,5 +109,4 @@
         </div>
 
         </div>
-    </page-container>
 @endsection

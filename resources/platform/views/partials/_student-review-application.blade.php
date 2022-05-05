@@ -1,7 +1,7 @@
 <div class="flex flex-row align-left">
     <button class="btn collapse-200"
             data-open-modal="applicationModal">
-        <span class="bg-singeo text-white short">
+        <span class="bg-{{ $brand }} text-white short">
             Apply
         </span>
     </button>
@@ -20,14 +20,14 @@
               action=""
               accept-charset="UTF-8">
 
-            <input type="hidden" name="subject" value="Student Review Application from: {{ current_user()->getDisplayName() }} ({{ current_user()->getEmail() }})">
+            <input type="hidden" name="subject" value="Student Review Application from: {{ user()->display_name }} ({{ current_user()->getEmail() }})">
 
             <input type="hidden" name="student progress info" value="https://{{ environmentSubdomain() }}musora.com/admin/user-progress-info/{{ current_user()->getId() }}">
             <div class="flex flex-column mb-2">
                 <p class="body">What is your goal as a singer?</p>
 
                 @include('bladesora::members.inputs.text-input', [
-                    "brand" => 'singeo',
+                    "brand" => $brand,
                     "inputId" => "pianoGoal",
                     "inputLabel" => "",
                     "inputName" => "goal",
@@ -42,7 +42,7 @@
             <div class="flex flex-column mb-2">
                 <p class="body">What is one skill you'd like to improve on?</p>
                 @include('bladesora::members.inputs.text-input', [
-                    "brand" => 'singeo',
+                    "brand" => $brand,
                     "inputId" => "skillImproval",
                     "inputLabel" => "",
                     "inputName" => "improvement",
@@ -57,7 +57,7 @@
             <div class="flex flex-column mb-2">
                 <p class="body">What is your biggest weakness as a singer?</p>
                 @include('bladesora::members.inputs.text-input', [
-                    "brand" => 'singeo',
+                    "brand" => $brand,
                     "inputId" => "pianoWeakness",
                     "inputLabel" => "",
                     "inputName" => "weakness",
@@ -72,7 +72,7 @@
             <div class="flex flex-column mb-2">
                 <p class="body">Tell us about your submission. What are you singing and what would you like the instructor to focus on?</p>
                 @include('bladesora::members.inputs.textarea-input', [
-                    "brand" => 'singeo',
+                    "brand" => $brand,
                     "inputId" => "applicationFocus",
                     "inputLabel" => "",
                     "inputName" => "instructor_focus",
@@ -87,7 +87,7 @@
             <div class="flex flex-column mb-2">
                 <p class="body">Youtube Video URL</p>
                 @include('bladesora::members.inputs.text-input', [
-                    "brand" => 'singeo',
+                    "brand" => $brand,
                     "inputId" => "applicationFocus",
                     "inputLabel" => "",
                     "inputName" => "youtube_url",
@@ -109,7 +109,7 @@
 
                 <button class="btn collapse-150"
                         type="submit">
-                    <span class="bg-singeo text-white short">
+                    <span class="bg-{{ $brand }} text-white short">
                         Apply
                     </span>
                 </button>

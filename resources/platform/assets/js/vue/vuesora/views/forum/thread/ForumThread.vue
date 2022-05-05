@@ -124,7 +124,7 @@
                         class="tw-no-underline tw-transition tw-inline-flex tw-text-gray-300 tw-items-center hover:tw-text-gray-400"
                     >
                         <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2"></i>
-                        <span class="tw-font-roboto-condensed tw-font-bold tw-text-sm tw-uppercase">Back To Forum</span>
+                        <span class="tw-font-bebas-neue tw-font-bold tw-text-sm tw-uppercase">Back To Forum</span>
                     </a>
                 </div>
                 <!-- Pagination -->
@@ -189,7 +189,7 @@
                         class="tw-no-underline tw-transition tw-inline-flex tw-text-gray-300 tw-items-center hover:tw-text-gray-400"
                     >
                         <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2"></i>
-                        <span class="tw-font-roboto-condensed tw-font-bold tw-text-sm tw-uppercase">Back To Forum</span>
+                        <span class="tw-font-bebas-neue tw-font-bold tw-text-sm tw-uppercase">Back To Forum</span>
                     </a>
                 </div>
                 <div class="tw-flex-grow tw-w-full sm:tw-w-auto" v-if="totalPages > 1">
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                     <!-- User Info -->
-                    <div class="tw-font-roboto-condensed tw-uppercase tw-text-center">
+                    <div class="tw-font-bebas-neue tw-uppercase tw-text-center">
                         <p class="tw-text-base tw-font-bold tw-mb-1">{{ currentUser.userExpVal }}</p>
                         <p class="tw-text-sm  tw-mb-0.5">Level {{ currentUser.progressLevel }}</p>
                         <p class="tw-text-13  tw-font-bold tw-text-gray-400">{{ currentUser.totalPosts }} Posts</p>

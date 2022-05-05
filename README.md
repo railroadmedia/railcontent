@@ -161,3 +161,12 @@ In your blade file you can load in these variables like this:
 
 ### CLI Interpreter
 ![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e0eb64b1-b163-4626-e217-5ce9d80d7900/public)
+
+
+# Useful Testing & Seeder Commands
+
+## Seed a users content data with: SeedUserContentData
+`artisan SeedUserContentData "{userEmail}"`  
+Generates content progress, list additions, coach follows, etc, for the user for testing.  
+Example:  
+`r mwp artisan SeedUserContentData "caleb@drumeo.com"`

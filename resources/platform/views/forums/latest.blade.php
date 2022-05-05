@@ -26,11 +26,10 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @component('partials._forum-header-banner',[
-                        "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
+                        "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                         "brand" => "{{ $brand }}",
                         "currentUser" => $user,
                         'profileUrl' => url()->route('members.profile.dashboard', [auth()->id()]),
@@ -75,5 +74,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

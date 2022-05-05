@@ -1,12 +1,12 @@
-@component('bladesora::members.components.header-banner', [
+@component('partials._header-banner', [
     'hideUser' => true,
-    'brand' => 'singeo',
-    'backgroundImage' => $parentContent->fetch('data.header_image_url', 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg'),
+    'brand' => $brand,
+    'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/method/method-header-'.$brand.'.jpg',
 ])
     @slot('content')
         <div class="flex flex-column pr-1 align-center">
 
-            @if(!empty($learningPathSlug) && $learningPathSlug == 'singeo-method')
+            @if(!empty($learningPathSlug) && $learningPathSlug == $brand.'-method')
 {{--                <div--}}
 {{--                        class="flex flex-column rounded ba-grey-1-2 hover-border-singeo text-white hover-text-singeo pointer"--}}
 {{--                        data-open-modal="previewModal"--}}
@@ -21,14 +21,13 @@
 {{--                </div>--}}
                 <img
                         alt="{{ $parentContent->fetch('title') }} Logo"
-                        src="{{ imgix('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
-                        ["q" => 80, "w" => 540]) }}"
+                        src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg"
                         class="mv-3"
                         style="width:540px;max-width:100%;"
                 >
 
 {{-- todo: re-add if requested --}}
-{{--                <a data-open-modal="surveyModal" class="btn bg-singeo text-white collapse-200 short">--}}
+{{--                <a data-open-modal="surveyModal" class="btn bg-{{ $brand }} text-white collapse-200 short">--}}
 {{--                    <i class="fas fa-question-circle"></i>&nbsp; WHERE TO BEGIN--}}
 {{--                </a>--}}
 {{--                <div id="surveyModal" class="modal">--}}
@@ -41,14 +40,14 @@
                 <div class="flex flex-row align-left mt-3">
                     <a href="https://www.singeo.com/resources" class="btn collapse-320">
                         <button class="btn collapse-320">
-                            <span class="bg-singeo text-white short ph-5">
+                            <span class="bg-{{$brand}} text-white short ph-5">
                                 FOUNDATIONS BOOK RESOURCES
                             </span>
                         </button>
                     </a>
                 </div>
             @else
-                <p class="text-white font-bold heading">Singeo Foundations</p>
+                <p class="text-white font-bold heading">{{ $brand }} Method</p>
             @endif
 
             <div id="previewModal" class="modal">
@@ -94,7 +93,7 @@
                         </h1>
 
                         <a href="{{ $nextLessonUrl }}"
-                           class="btn bg-singeo text-white collapse-250 short ml-1">
+                           class="btn bg-{{ $brand }} text-white collapse-250 short ml-1">
                             <i class="fas fa-play mr-1"></i>
                             Start Next Lesson
                         </a>

@@ -124,7 +124,7 @@ class AuthenticationController extends Controller
             return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
         }
 
-        throw new AuthenticationException();
+        return response()->json(['error' => 'Invalid login credentials.']);
     }
 
     /**

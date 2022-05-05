@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @component('partials.bladesora.members.partials._page-header', [
@@ -32,5 +31,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

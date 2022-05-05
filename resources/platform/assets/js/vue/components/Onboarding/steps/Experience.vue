@@ -42,7 +42,7 @@ function goBack() {
     <div
       class="
         tw-flex-grow
-        md:flex-grow-0
+        md:tw-flex-grow-0
         md:tw-h-auto
         tw-w-full tw-flex tw-flex-col tw-items-center
         md:tw-justify-center

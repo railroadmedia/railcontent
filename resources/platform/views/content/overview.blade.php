@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @include('content.breadcrumbs._overview-breadcrumbs')
@@ -14,11 +13,11 @@
                 @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
             @else
                 @component('partials.bladesora.members.partials._overview-header', [
-                        "themeColor" => '{{ $brand }}',
+                        "themeColor" => $brand,
                         "pageTitle" => $parentContent->fetch('fields.title'),
-                        "overviewType" => $parentContent->fetch('type') == 'learning-path' ? 'Singeo' : $parentContent->fetch('type'),
+                        "overviewType" => $parentContent->fetch('type') == 'learning-path' ? ucwords(brand()) : $parentContent->fetch('type'),
                         "difficulty" => $parentContent->fetch('difficulty'),
-                        "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
+                        "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                         "avatarImage" => $parentContent->fetch('fields.instructor.data.head_shot_picture_url'),
                         "pageDescription" => $parentContent->fetch('data.description'),
                     ])
@@ -28,7 +27,7 @@
                 @endcomponent
 
                 @include('partials.bladesora.members.content.content-info-subheader', [
-                    "brand" => '{{ $brand }}',
+                    "brand" => $brand,
                     "infoData" => $infoData,
                     "contentId" => $parentContent->fetch('id'),
                     "contentType" => $parentContent->fetch('type'),
@@ -41,17 +40,16 @@
             @endif
 
 
-            <div class="tw-container tw-mx-auto fluid tw-bg-{{ $brand }}">
+            <div class="tw-w-full fluid tw-bg-{{ $brand }}">
                 @include('partials.bladesora.members.content.content-progress', [
-                    "themeColor" => '{{ $brand }}',
-                    "brand" => "{{ $brand }}",
+                    "themeColor" => $brand,
+                    "brand" => $brand,
                     "contentType" => $parentContent->fetch('type'),
                     "labelText" => $progressLabelText ?? null,
                     "progress" => $parentContent->fetch('progress_percent'),
                     "nextLessonUrl" => $nextLessonUrl,
                     "backButton" => $backButton,
-                    "compact" => $parentContent->fetch('type') === 'pack-bundle' &&
-            $pack->fetch('bundle_count') <= 1,
+                    "compact" => $parentContent->fetch('type') === 'pack-bundle' && $pack->fetch('bundle_count') <= 1,
                     "xpAmount" =>  $parentContent->fetch('total_xp') ?? null,
                     "isCompleted" => $parentContent->fetch('completed', false),
                     "isStarted" => $parentContent->fetch('started', false),
@@ -64,16 +62,16 @@
                 ])
             @endif
 
-            <div class="tw-container tw-mx-auto mv-3">
+            <div class="tw-container tw-mx-auto tw-px-4 mv-3">
                 <div class="tw-flex tw-flex-column">
-                    <div class="tw-flex tw-flex-row">
+                    <div class="tw-flex tw-w-full tw-flex-row">
                         <content-catalogue
                             brand="{{ $brand }}"
                             catalogue-type="list"
                             theme-color="{{ $brand }}"
                             :use-theme-color="true"
                             :pre-loaded-content="{{ $childContent }}"
-                            :is-admin="<?php echo e(json_encode(current_user()->getPermissionLevel() === 'administrator')); ?>"
+                            :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
                             @if($parentContent['type'] !== 'learning-path')
                             :show-numbers="true"
                             @endif
@@ -85,8 +83,8 @@
                             @if($parentContent['type'] === 'learning-path-level')
                             :lock-unowned="true"
                             @endif
-                            user-id="{{ auth()->id() }}"
-                            :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}"
+                            user-id="{{ user()->id }}"
+                            :is-admin="{{ json_encode(user()->isAdmin()) }}"
                         >
                             @for($i = 0; $i < 10; $i++)
                                 @include('partials.bladesora.members.skeletons.list-item', [
@@ -102,12 +100,11 @@
                         @include('partials.bladesora.members.partials._completion-bonus', [
                             "xpBonus" => $xpBonus,
                             "isComplete" => $parentContent->fetch('progress_percent', 0) === 100,
-                            "themeColor" => '{{ $brand }}'
+                            "themeColor" => $brand
                         ])
                     @endif
                 </div>
             </div>
 
         </div>
-    </page-container>
 @endsection

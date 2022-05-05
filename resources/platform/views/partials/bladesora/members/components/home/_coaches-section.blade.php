@@ -7,13 +7,13 @@
                 <a href="{{ $subscribedCoachesUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Subscribed Coaches</h2>
                 </a>
-                <a href="{{ $subscribedCoachesUrl }}" 
-                    aria-label="See All Coaches" 
+                <a href="{{ $subscribedCoachesUrl }}"
+                    aria-label="See All Coaches"
                     class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                 >
                     See All
                 </a>
-            </div> 
+            </div>
 
             <div class="tw-grid tw-gap-3 tw-grid-cols-3 sm:tw-grid-cols-4 md:tw-grid-cols-5 xl:tw-grid-cols-6">
                 @foreach($subscribedCoaches->results() as $coach)
@@ -25,7 +25,7 @@
                                 style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
                             >
                                 <!-- Coach Name -->
-                                <h4 class="tw-uppercase tw-mt-auto tw-font-roboto-condensed tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mb-3 tw-text-center"
+                                <h4 class="tw-uppercase tw-mt-auto tw-font-bebas-neue tw-text-lg md:tw-text-xl lg:tw-text-2xl xl:tw-text-3xl tw-break-all tw-leading-tight md:tw-leading-none tw-mb-3 tw-text-center"
                                     style="hyphens: auto">
                                     @php
                                         $fullName = $coach->fetch('fields.name');
@@ -33,7 +33,7 @@
                                         $firstName = array_shift( $exploded );
                                     @endphp
                                     <span class="">{{ $firstName }}</span><br>
-                                    {{ implode($exploded, ' ')}}
+                                    {{ implode(' ', $exploded) }}
                                 </h4>
                                 <!-- Coach Title -->
                                 <p class="tw-text-yellow-400 tw-px-2 tw-fluid-text-sm-xs tw-mb-8 tw-uppercase tw-h-8 tw-leading-tight">
@@ -41,7 +41,7 @@
                                 </p>
 
                                 @if ($coach->fetch('is_house_coach'))
-                                    <div class="tw-text-white tw-text-xs tw-font-roboto-condensed tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+                                    <div class="tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
                                         <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
                                         HOUSE
                                     </div>
@@ -53,7 +53,7 @@
                     </a>
                 @endforeach
             </div>
-            
+
         </div>
     </section>
 @endif

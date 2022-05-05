@@ -82,7 +82,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @include('partials.bladesora.members.referral.invite',
@@ -92,12 +91,11 @@
                     'userReferralLink' => $userReferralLink,
                     'canRefer' => $canRefer,
                     'emailInviteUrl' => url()->route('referral.email-invite'),
-                    'brand' => 'singeo',
+                    'brand' => $brand,
                     'showToast' => session()->has('email-invite-message'),
                     'toastMessage' => session()->get('email-invite-message'),
                 ]
             )
 
         </div>
-    </page-container>
 @endsection

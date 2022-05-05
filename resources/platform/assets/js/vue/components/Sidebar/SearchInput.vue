@@ -15,7 +15,6 @@ const handleChange = () => {
 
 const handleFocus = () => {
     emit('onCollapse', false);
-    console.log('handle focus called')
 };
 </script>
 
@@ -28,6 +27,7 @@ const handleFocus = () => {
       class="tw-absolute tw-top-3 tw-left-3 dark:tw-text-[#9EC0DC] tw-z-0"
     />
     <InputLabel
+      :showClearButton="true"
       placeholder="Search"
       @onChange="handleChange"
       :inputOverride="`

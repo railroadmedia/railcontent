@@ -1,7 +1,7 @@
 <template>
   <section id="content-catalogue">
     <div class="tw-flex tw-justify-between tw-items-center">
-      <h1 class="tw-text-4xl tw-font-bold">All Lessons</h1>
+      <h1 class="tw-text-4xl tw-font-bold dark:tw-text-white">All Lessons</h1>
       <button
         v-on:click="changeGridState"
         class="tw-bg-transparent tw-border-none tw-cursor-pointer"
