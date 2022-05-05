@@ -37,9 +37,12 @@ window.onload = function(){
 
 const app = createApp({
     provide: {
-        sidebarNavigationLinks: window.sidebarNavigationLinks
+        sidebarNavigationLinks: window.sidebarNavigationLinks,
+        userNavigationDropdownLinks: window.userNavigationDropdownLinks,
     }
 });
+
+console.log(window.userNavigationDropdownLinks);
 
 //Register Global Components
 app.component('AppContainer', AppContainer)

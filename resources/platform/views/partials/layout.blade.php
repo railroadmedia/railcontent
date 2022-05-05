@@ -50,6 +50,7 @@
         <!-- Scripts -->
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
+            window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
         </script>
 
         @yield('layout-scripts')
