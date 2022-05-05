@@ -6,6 +6,8 @@ import StepHeader from "../StepHeader.vue";
 import CoachCarousel from "../../CoachCarousel/CoachCarousel.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import { SearchIcon } from "@heroicons/vue/solid";
+import { useDebounceFn } from "../../../hooks/debounce/useDebounce"
+import { searchCoaches } from "../../../utils"
 
 import { ref } from "vue";
 
@@ -23,8 +25,14 @@ const props = defineProps({
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
-function onInputChange(value) {
-  console.log("searching for", value);
+const debouncedSearch = useDebounceFn((value) => {
+    searchCoaches(props.brand, value).then((result) => {
+      console.log(result)
+    });
+}, 400)
+
+const onInputChange = (value) => {
+  debouncedSearch(value);
 }
 
 function goBack() {

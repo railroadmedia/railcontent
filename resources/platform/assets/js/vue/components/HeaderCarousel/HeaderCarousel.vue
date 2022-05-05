@@ -70,6 +70,7 @@ onBeforeMount( () => {
 });
 
 onMounted(() => {
+  console.log(window.location)
   resetInterval(carouselData, props.brand);
 });
 </script>
