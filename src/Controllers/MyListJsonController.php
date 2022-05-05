@@ -10,6 +10,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,6 +32,11 @@ class MyListJsonController extends Controller
     private $contentHierarchyService;
 
     /**
+     * @var UserPlaylistsService
+     */
+    private $userPlaylistsService;
+
+    /**
      * MyListJsonController constructor.
      *
      * @param ContentService $contentService
@@ -40,11 +46,13 @@ class MyListJsonController extends Controller
     public function __construct(
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService,
-        ContentRepository $contentRepository
+        ContentRepository $contentRepository,
+        UserPlaylistsService $userPlaylistsService
     ) {
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
         $this->contentRepository = $contentRepository;
+        $this->userPlaylistsService = $userPlaylistsService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -66,23 +74,14 @@ class MyListJsonController extends Controller
             return response()->json(['error' => 'Incorrect content']);
         }
 
-        $userPrimaryPlaylist =
-            Arr::first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+        $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => $userId], [
+            'user_id' => $userId,
+            'type' => 'primary-playlist',
+            'brand' => $request->get('brand'),
+            'created_at' => Carbon::now()->toDateTimeString()
+        ]);
 
-        if (!$userPrimaryPlaylist) {
-            $userPrimaryPlaylist = $this->contentService->create(
-                'primary-playlist',
-                'user-playlist',
-                ContentService::STATUS_PUBLISHED,
-                null,
-                config('railcontent.brand'),
-                $userId,
-                Carbon::now()
-                    ->toDateTimeString()
-            );
-        }
-
-        $this->contentHierarchyService->create($userPrimaryPlaylist['id'], $request->get('content_id'), 1);
+        $this->userPlaylistsService->addContentToUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
 
         return response()->json(['success']);
     }
@@ -101,10 +100,14 @@ class MyListJsonController extends Controller
 
         $userId = auth()->id();
 
-        $userPrimaryPlaylist =
-            Arr::first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+        $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => $userId], [
+            'user_id' => $userId,
+            'type' => 'primary-playlist',
+            'brand' => $request->get('brand'),
+            'created_at' => Carbon::now()->toDateTimeString()
+        ]);
 
-        $this->contentHierarchyService->delete($userPrimaryPlaylist['id'], $request->get('content_id'));
+        $this->userPlaylistsService->removeContentFromUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
 
         return response()->json(['success']);
     }
@@ -117,6 +120,7 @@ class MyListJsonController extends Controller
     public function getMyLists(Request $request)
     {
         $state = $request->get('state');
+        $userId = auth()->id();
 
         $oldFieldOptions = ConfigService::$fieldOptionList;
         ConfigService::$fieldOptionList = array_merge(ConfigService::$fieldOptionList, ['video']);
@@ -133,17 +137,17 @@ class MyListJsonController extends Controller
         $includedFields = $request->get('included_fields', []);
 
         if (!$state) {
-
-            $usersPrimaryPlaylist = Arr::first(
-                $this->contentRepository->getByUserIdTypeSlug(auth()->id(), 'user-playlist', 'primary-playlist')
-            );
+            $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => $userId], [
+                'user_id' => $userId,
+                'type' => 'primary-playlist',
+                'brand' => $request->get('brand') ?? config('railcontent.brand'),
+                'created_at' => Carbon::now()->toDateTimeString()
+            ]);
 
             if (empty($usersPrimaryPlaylist)) {
-                return (new ContentFilterResultsEntity(
-                    [
-                        'results' => [],
-                    ]
-                ))->toJsonResponse();
+                return (new ContentFilterResultsEntity([
+                                                           'results' => [],
+                                                       ]))->toJsonResponse();
             }
 
             $lessons = $this->contentService->getFiltered(
@@ -165,7 +169,7 @@ class MyListJsonController extends Controller
                 $page,
                 $limit,
                 $request->get('sort', '-progress'),
-                $contentTypes,
+                array_values($contentTypes),
                 [],
                 [],
                 $requiredFields,
@@ -177,12 +181,10 @@ class MyListJsonController extends Controller
 
         ConfigService::$fieldOptionList = $oldFieldOptions;
 
-        return (new ContentFilterResultsEntity(
-            [
-                'results' => $lessons->results(),
-                'total_results' => $lessons->totalResults(),
-                'filter_options' => $lessons->filterOptions(),
-            ]
-        ))->toJsonResponse();
+        return (new ContentFilterResultsEntity([
+                                                   'results' => $lessons->results(),
+                                                   'total_results' => $lessons->totalResults(),
+                                                   'filter_options' => $lessons->filterOptions(),
+                                               ]))->toJsonResponse();
     }
 }

@@ -31,7 +31,8 @@ class MyListJsonControllerTest extends RailcontentTestCase
      */
     protected $contentFieldFactory;
 
-    protected function setUp(): void
+    protected function setUp()
+    : void
     {
         parent::setUp();
 
@@ -50,26 +51,21 @@ class MyListJsonControllerTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED
         );
 
-        $response = $this->call(
-            'PUT',
-            'api/railcontent/add-to-my-list',
-            [
-                'content_id' => $content['id'],
-            ]
-        );
+        $response = $this->call('PUT', 'api/railcontent/add-to-my-list', [
+            'content_id' => $content['id'],
+            'brand' => config('railcontent.brand'),
+        ]);
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals(
             'success',
-            $response->decodeResponseJson()->json()[0]
+            $response->decodeResponseJson()
+                ->json()[0]
         );
 
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $content['id'],
-            ]
-        );
+        $this->assertDatabaseHas(config('railcontent.table_prefix').'user_playlist_content', [
+            'content_id' => $content['id'],
+        ]);
     }
 
     public function test_remove_from_my_list()
@@ -98,26 +94,20 @@ class MyListJsonControllerTest extends RailcontentTestCase
         $this->contentHierarchyFactory->create($myList['id'], $content1['id']);
         $this->contentHierarchyFactory->create($myList['id'], $content2['id']);
 
-        $response = $this->call(
-            'PUT',
-            'api/railcontent/remove-from-my-list',
-            [
-                'content_id' => $content1['id'],
-            ]
-        );
+        $response = $this->call('PUT', 'api/railcontent/remove-from-my-list', [
+            'content_id' => $content1['id'],
+        ]);
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals(
             'success',
-            $response->decodeResponseJson()->json()[0]
+            $response->decodeResponseJson()
+                ->json()[0]
         );
 
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $content1['id'],
-            ]
-        );
+        $this->assertDatabaseMissing(ConfigService::$tableContentHierarchy, [
+            'child_id' => $content1['id'],
+        ]);
     }
 
     public function test_my_list()
@@ -155,7 +145,7 @@ class MyListJsonControllerTest extends RailcontentTestCase
             'GET',
             'api/railcontent/my-list'
         );
-
+dd($response->decodeResponseJson());
         $this->assertEquals(200, $response->status());
         $this->assertEquals(2, count($response->decodeResponseJson('data')));
     }
@@ -171,9 +161,11 @@ class MyListJsonControllerTest extends RailcontentTestCase
                 ContentService::STATUS_PUBLISHED,
                 'en-US',
                 ConfigService::$brand,
-                rand(), Carbon::now()->subMinute($i)
+                rand(),
+                Carbon::now()
+                    ->subMinute($i)
             );
-            $difficulty[$i] = $this->contentFieldFactory->create($courses[$i]['id'],'difficulty', $i);
+            $difficulty[$i] = $this->contentFieldFactory->create($courses[$i]['id'], 'difficulty', $i);
         }
 
         $userContent = [
@@ -194,14 +186,14 @@ class MyListJsonControllerTest extends RailcontentTestCase
             'user_id' => $user,
             'state' => UserContentProgressService::STATE_STARTED,
             'progress_percent' => $this->faker->numberBetween(0, 10),
-            'updated_on' => Carbon::now()->addHours(5)
+            'updated_on' => Carbon::now()
+                ->addHours(5)
                 ->toDateTimeString(),
         ];
 
         $this->query()
             ->table(ConfigService::$tableUserContentProgress)
             ->insertGetId($userContent);
-
 
         $response = $this->call(
             'GET',
