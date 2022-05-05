@@ -1747,19 +1747,20 @@ class ContentService
      */
     public function getElasticData($contentId)
     {
-        $content = $this->getById($contentId);
+        $content = $this->getContentForElastic($contentId);
 
-        $topics = $this->contentTopicRepository->getByContentId($content['id']);
-        $styles = $this->contentStyleRepository->getByContentId($content['id']);
-        $instructors = $this->contentInstructorRepository->getByContentId($content['id']);
-        $bpm = $this->contentBpmRepository->getByContentId($content['id']);
-        if(array_key_exists('video', $content)) {
+        $topics = $this->contentTopicRepository->getByContentIds([$content['id']]);
+        $styles = $this->contentStyleRepository->getByContentIds([$content['id']]);
+        $instructors = $this->contentInstructorRepository->getByContentIds([$content['id']]);
+        $bpm = $this->contentBpmRepository->getByContentIds([$content['id']]);
+        if(isset( $content['video'])) {
             $video = $this->contentRepository->getById($content['video']);
 
             $vimeoVideoId = $video ? $video['vimeo_video_id'] : '';
             $youtubeVideoId = $video ? $video['youtube_video_id'] : '';
         }
-        return [
+
+        $document = [
             'content_id' => $content['id'],
             'title' => utf8_encode($content['title'] ?? ''),
             'slug' => utf8_encode($content['slug'] ?? ''),
@@ -1768,7 +1769,7 @@ class ContentService
             'status' => $content['status'],
             'brand' => $content['brand'],
             'style' => Arr::pluck($styles, 'style'),
-            'instructor' => Arr::pluck($instructors, 'instructor_id'),
+            'instructor' => Arr::pluck($instructors, 'id'),
             'internal_video_id' => $content['video']??'',
             'vimeo_video_id' => $vimeoVideoId ?? '',
             'youtube_video_id' => $youtubeVideoId ?? '',
@@ -1784,6 +1785,33 @@ class ContentService
             'is_featured' => $content['is_featured'] ?? 0,
             'associated_user_id' => $content['associated_user_id'] ?? null,
         ];
+
+        return $document;
+    }
+
+    /**
+     * Call the getElasticContentById method from repository and return the data for elasticsearch documents
+     *
+     * @param integer $id
+     * @return ContentEntity|array|null
+     */
+    public function getContentForElastic($id)
+    {
+        $hash = 'elastic_contents_by_id_'.CacheHelper::getKey($id);
+
+        if (isset($this->idContentCache[$hash])) {
+            return $this->idContentCache[$hash];
+        }
+
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getElasticContentById($id), [$id]);
+        }
+
+        $this->idContentCache[$hash] = Decorator::decorate($results, 'content');
+
+        return $this->idContentCache[$hash];
     }
 
 }
