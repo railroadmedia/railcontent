@@ -9,6 +9,10 @@ class NavigationService
      */
     public static function getSidebarSections()
     {
+        if (empty(user())) {
+            return [];
+        }
+
         if (brand() === 'drumeo') {
             return [
                 [ // section
@@ -336,7 +340,7 @@ class NavigationService
         if (empty(user())) {
             return [];
         }
-        
+
         return [
             'dashboardPageUrl' => '/' . brand() . '/profile/' . user()->id . '/dashboard',
             'notificationsPageUrl' => '/',
