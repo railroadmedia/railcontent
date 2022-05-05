@@ -7,7 +7,7 @@
 @section('content')
         <div v-cloak>
 
-            <header id="pageHeader" class="tw-container tw-mx-auto fluid tw-py-20" style="background-image:url(https://singeo.s3.amazonaws.com/singeo-header-image.jpg);">
+            <header id="pageHeader" class="tw-container tw-mx-auto fluid tw-py-20" style="background-image:url(https://musora-web-platform.s3.amazonaws.com/headers/".$brand."Header.jpg);">
                 <div class="tw-container tw-mx-auto tw-text-center">
                     <h1 class="tw-text-white">
                         <i class="fas fa-phone fa-flip-horizontal tw-text-{{ $brand }}"></i> 

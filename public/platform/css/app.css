@@ -21625,14 +21625,14 @@ a:visited{
 .tw-mt-2{
   margin-top: 0.5rem;
 }
-.tw-mr-1{
-  margin-right: 0.25rem;
-}
 .tw-mt-14{
   margin-top: 3.5rem;
 }
 .tw-mr-3{
   margin-right: 0.75rem;
+}
+.tw-mr-1{
+  margin-right: 0.25rem;
 }
 .tw-mb-6{
   margin-bottom: 1.5rem;
@@ -21742,6 +21742,9 @@ a:visited{
 .tw-mr-auto{
   margin-right: auto;
 }
+.tw--mb-7{
+  margin-bottom: -1.75rem;
+}
 .tw-mt-12{
   margin-top: 3rem;
 }
@@ -21804,9 +21807,6 @@ a:visited{
 }
 .tw-mt-6{
   margin-top: 1.5rem;
-}
-.tw--mb-7{
-  margin-bottom: -1.75rem;
 }
 .tw-box-border{
   box-sizing: border-box;
@@ -22729,10 +22729,6 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
-.tw-bg-gray-100{
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
 .tw-bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -22884,6 +22880,10 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(219 39 119 / var(--tw-bg-opacity));
 }
+.tw-bg-gray-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
 .tw-bg-opacity-20{
   --tw-bg-opacity: 0.2;
 }
@@ -22993,10 +22993,6 @@ a:visited{
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-.tw-py-2{
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
 .tw-px-16{
   padding-left: 4rem;
   padding-right: 4rem;
@@ -23012,6 +23008,10 @@ a:visited{
 .tw-px-\[16px\]{
   padding-left: 16px;
   padding-right: 16px;
+}
+.tw-py-2{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 .tw-py-\[13px\]{
   padding-top: 13px;

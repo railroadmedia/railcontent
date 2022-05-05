@@ -14,7 +14,7 @@
         <div v-cloak>
 
             @include('partials.bladesora.members.partials._account-header', [
-                "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
+                "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                 "userAvatar" => $user->profile_picture_url,
                 "userName" => $user->display_name,
                 "appName" => 'Musora',

@@ -35,7 +35,7 @@
         <div v-cloak>
 
             @component('partials._header-banner',
-['backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-members-header-background-image.jpg',])
+                ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',])
                 @slot('content')
                     <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">

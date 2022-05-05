@@ -9,7 +9,7 @@
 
         @component('partials.bladesora.members.components.header-banner', [
             'hideUser' => true,
-            'backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/singeo-members-header-background-image.jpg',
+            'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
             'brand' => '{{ $brand }}'
         ])
             @slot('content')
