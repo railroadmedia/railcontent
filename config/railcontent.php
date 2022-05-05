@@ -668,7 +668,6 @@ return [
         'xp',
         'album',
         'artist',
-        'bpm',
         'cd-tracks',
         'chord_or_scale',
         'difficulty_range',
