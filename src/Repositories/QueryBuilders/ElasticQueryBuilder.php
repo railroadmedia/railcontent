@@ -80,8 +80,14 @@ class ElasticQueryBuilder
     public function restrictByTypes(array $typesToInclude)
     {
         if (!empty($typesToInclude)) {
-            $this->must[] = ['terms' => ['content_type' => array_map(
-                'strtolower',$typesToInclude)]];
+            $this->must[] = [
+                'terms' => [
+                    'content_type' => array_map(
+                        'strtolower',
+                        $typesToInclude
+                    ),
+                ],
+            ];
         }
 
         return $this;
@@ -157,11 +163,11 @@ class ElasticQueryBuilder
                 $this->must[] = [
                     ['range' => [$requiredFieldData['name'] => ['lte' => $requiredFieldData['value']]]],
                 ];
-//            } elseif (!$requiredFieldData['property']) {
-//                $this->must[] = [
-//                    ['match_phrase' => [$requiredFieldData['name'].'.raw' => strtolower($requiredFieldData['value'])]],
-//
-//                ];
+                //            } elseif (!$requiredFieldData['property']) {
+                //                $this->must[] = [
+                //                    ['match_phrase' => [$requiredFieldData['name'].'.raw' => strtolower($requiredFieldData['value'])]],
+                //
+                //                ];
             } elseif ($requiredFieldData['operator'] == 'like') {
                 $this->must[] = [
                     ['match' => [$requiredFieldData['name'] => $requiredFieldData['value']]],
@@ -170,8 +176,18 @@ class ElasticQueryBuilder
                 $this->must[] = [
                     'bool' => [
                         'should' => [
-                            ['terms' => [$requiredFieldData['name'].'.raw' => [strtolower($requiredFieldData['value'])]]],
+                            [
+                                'terms' => [
+                                    $requiredFieldData['name'].'.raw' => [
+                                        strtolower(
+                                            $requiredFieldData['value']
+                                        ),
+                                    ],
+                                ],
+                            ],
                             ['terms' => [$requiredFieldData['name'] => [strtolower($requiredFieldData['value'])]]],
+                            ['terms' => [$requiredFieldData['name'].'.raw' => [($requiredFieldData['value'])]]],
+                            ['terms' => [$requiredFieldData['name'] => [($requiredFieldData['value'])]]],
                         ],
                     ],
                 ];
@@ -251,7 +267,7 @@ class ElasticQueryBuilder
         if (empty($userPlaylistIds)) {
             return $this;
         }
-        $this->must[] = ['terms' => ['playlist_ids' => $userPlaylistIds]];
+        $this->must[] = ['terms' => ['content_id' => $userPlaylistIds]];
 
         return $this;
     }
@@ -278,6 +294,12 @@ class ElasticQueryBuilder
     public function sortResults($orderBy)
     {
         switch ($orderBy) {
+            case 'id':
+                $this->sort[] = [
+                    'content_id' => 'asc',
+                ];
+                break;
+
             case 'newest':
                 $this->sort[] = [
                     'published_on' => 'desc',
@@ -383,6 +405,10 @@ class ElasticQueryBuilder
      */
     public function setResultRelevanceBasedOnConfigSettings($term)
     {
+        if(!$term){
+            return $this;
+        }
+
         $searchableFields = [];
         foreach (config('railcontent.search_index_values', []) as $index => $searchFields) {
             foreach ($searchFields as $field) {
@@ -430,6 +456,10 @@ class ElasticQueryBuilder
      */
     public function restrictByTerm($arrTerms)
     {
+        if (empty($arrTerms)) {
+            return $this;
+        }
+
         $searchableFields = [];
         foreach (config('railcontent.search_index_values', []) as $searchFields) {
             foreach ($searchFields as $field) {
@@ -500,8 +530,14 @@ class ElasticQueryBuilder
             return $this;
         }
 
-        $terms = ['terms' => ['content_type' => array_map(
-            'strtolower',$typesToInclude)]];
+        $terms = [
+            'terms' => [
+                'content_type' => array_map(
+                    'strtolower',
+                    $typesToInclude
+                ),
+            ],
+        ];
 
         $this->must[] = [
             'bool' => [
