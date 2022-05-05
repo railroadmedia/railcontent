@@ -1923,4 +1923,27 @@ class ContentRepository extends RepositoryBase
 
         return $this->parserResult($data);
     }
+
+    /**
+     * @param integer $id
+     * @return array|null
+     */
+    public function getElasticContentById($id)
+    {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->where([ConfigService::$tableContent.'.id' => $id])
+                ->getToArray();
+
+        if (empty($contentRows)) {
+            return null;
+        }
+
+        $data = $contentRows[0] ?? null;
+
+        return $data;
+    }
+
 }
