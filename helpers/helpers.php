@@ -2,7 +2,7 @@
 
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 
-if (! function_exists('cf_img')) {
+if (!function_exists('cf_img')) {
     /**
      * Process image and Get a CDN URL using our cloudflare images account.
      * https://developers.cloudflare.com/images/image-resizing/url-format/
@@ -29,18 +29,20 @@ if (! function_exists('cf_img')) {
         $optionsStringArray = [];
 
         foreach ($options as $optionKey => $optionValue) {
-            $optionsStringArray[] = $optionKey . '=' . $optionValue;
+            $optionsStringArray[] = $optionKey.'='.$optionValue;
         }
 
         $optionsStringArray[] = 'metadata=none';
 
         $urlString .= implode(',', $optionsStringArray);
 
-        $urlString .= '/' . $pathFromOriginOrUrl;
+        $urlString .= '/'.$pathFromOriginOrUrl;
 
         return $urlString;
     }
+}
 
+if (!function_exists('content_to_json')) {
     /**
      * @param $contents
      * @return string
@@ -54,5 +56,17 @@ if (! function_exists('cf_img')) {
         }
 
         return '';
+    }
+}
+
+if (!function_exists('possessivize')) {
+    /**
+     * @return string
+     */
+    if (!function_exists('possessivize')) {
+        function possessivize($string)
+        {
+            return $string.'\''.($string[strlen($string) - 1] !== 's' ? 's' : '');
+        }
     }
 }
