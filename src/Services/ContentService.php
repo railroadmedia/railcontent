@@ -1784,6 +1784,7 @@ class ContentService
             'is_coach_of_the_month' => $content['is_coach_of_the_month'] ?? 0,
             'is_featured' => $content['is_featured'] ?? 0,
             'associated_user_id' => $content['associated_user_id'] ?? null,
+            'popularity' => $content['popularity'] ?? 0
         ];
 
         return $document;
