@@ -23,8 +23,12 @@ if (!function_exists('cf_img')) {
      *
      * @return string
      */
-    function cf_img(string $pathFromOriginOrUrl, array $options = [])
+    function cf_img(string|null $pathFromOriginOrUrl, array $options = [])
     {
+        if (empty($pathFromOriginOrUrl)) {
+            return '';
+        }
+        
         $urlString = 'https://musora.com/cdn-cgi/image/';
         $optionsStringArray = [];
 
