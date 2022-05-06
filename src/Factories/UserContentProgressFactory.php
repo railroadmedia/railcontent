@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
+use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
 class UserContentProgressFactory extends UserContentProgressService
@@ -12,6 +14,10 @@ class UserContentProgressFactory extends UserContentProgressService
      */
     protected $faker;
 
+    protected $elasticService;
+
+    protected $contentService;
+
     /**
      * @param int|null $contentId
      * @param int|null $userId
@@ -20,6 +26,9 @@ class UserContentProgressFactory extends UserContentProgressService
     public function startContent($contentId = null, $userId = null, $forceEvenIfComplete = false)
     {
         $this->faker = app(Generator::class);
+        $this->elasticService = app(ElasticService::class);
+        $this->contentService = app(ContentService::class);
+
 
         $parameters =
             func_get_args() + [
@@ -29,6 +38,9 @@ class UserContentProgressFactory extends UserContentProgressService
             ];
 
         $userContentId = parent::startContent(...$parameters);
+
+        $content = $this->contentService->getById($parameters[0]);
+        $this->elasticService->syncDocument($content);
 
         return $userContentId;
     }
@@ -41,6 +53,7 @@ class UserContentProgressFactory extends UserContentProgressService
     public function completeContent($contentId = null, $userId = null)
     {
         $this->faker = app(Generator::class);
+        $this->elasticService = app(ElasticService::class);
 
         $parameters =
             func_get_args() + [
@@ -49,6 +62,9 @@ class UserContentProgressFactory extends UserContentProgressService
             ];
 
         $userContentId = parent::completeContent(...$parameters);
+
+        $content = $this->contentService->getById($parameters[0]);
+        $this->elasticService->syncDocument($content);
 
         return $userContentId;
     }
@@ -62,6 +78,7 @@ class UserContentProgressFactory extends UserContentProgressService
     public function saveContentProgress($contentId = null, $progress = null, $userId = null, $overwriteComplete = false)
     {
         $this->faker = app(Generator::class);
+        $this->elasticService = app(ElasticService::class);
 
         $parameters =
             func_get_args() + [
@@ -71,6 +88,9 @@ class UserContentProgressFactory extends UserContentProgressService
             ];
 
         $userContentId = parent::saveContentProgress(...$parameters);
+
+        $content = $this->contentService->getById($parameters[0]);
+        $this->elasticService->syncDocument($content);
 
         return $userContentId;
     }
