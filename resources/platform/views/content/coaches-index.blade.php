@@ -14,7 +14,7 @@
         ])
             @slot('content')
                 <div class="tw-flex tw-flex-col tw-pr-1">
-                    <h1 class="heading tw-text-white tw-flex tw-flex-row tw-justify-start">
+                    <h1 class="heading tw-text-white tw-flex tw-flex-row tw-justify-start tw-mb-2">
                         <musora-icon icon-name="whistle" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         Coaches
                     </h1>
@@ -64,7 +64,7 @@
                         <transition appear name="fade">
                             <content-catalogue
                                 brand="{{ $brand }}"
-                                theme-color="{{$themeColor}}"
+                                theme-color="{{ $brand }}"
                                 :use-theme-color="true"
                                 content-endpoint="/railcontent/content"
                                 catalogue-type="grid"
@@ -103,7 +103,7 @@
                             <transition appear name="fade">
                                 <content-catalogue
                                         brand="{{ $brand }}"
-                                        theme-color="{{$themeColor}}"
+                                        theme-color="{{ $brand }}"
                                         :use-theme-color="true"
                                         content-endpoint="/railcontent/content"
                                         catalogue-type="grid"
@@ -147,7 +147,7 @@
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
             <transition appear name="fade">
                 <content-catalogue
-                        theme-color="{{$themeColor}}"
+                        theme-color="{{ $brand }}"
                         brand="{{ $brand }}"
                         content-endpoint="/railcontent/content?only_subscribed={{$onlySubscribedCoaches}}"
                         catalogue-type="coaches-grid"

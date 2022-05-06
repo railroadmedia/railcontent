@@ -39784,7 +39784,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition",
     href: $options.coachIndexUrl + '#coach-section'
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [!$options.isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [!$options.isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
   }, " All Coaches ", 2
   /* CLASS */
   )], 8
@@ -39793,7 +39793,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-no-underline tw-transition",
     href: $options.coachIndexUrl + '?only_subscribed=true#coach-section'
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [$options.isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer", [$options.isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', $options.brandBorderColor]])
   }, " Subscribed Coaches ", 2
   /* CLASS */
   )], 8
@@ -41228,7 +41228,7 @@ var _hoisted_3 = {
   "class": "flex flex-row"
 };
 var _hoisted_4 = {
-  "class": "flex flex-column grow form-group pr-2"
+  "class": "flex flex-column grow pr-2"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -41280,7 +41280,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "search",
     autocomplete: "off",
     placeholder: "Search...",
-    "class": "no-label",
+    "class": "no-label tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-xl tw-border tw-text-black dark:tw-text-[#9EC0DC] tw-border-black dark:tw-border-current",
     onKeydown: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.submitSearch($event);
     }, ["enter"]))

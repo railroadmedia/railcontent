@@ -20,7 +20,7 @@
 
             <div class="flex flex-column ph-1">
                 <div class="flex flex-row">
-                    <div class="flex flex-column grow form-group pr-2">
+                    <div class="flex flex-column grow pr-2">
                         <input
                             id="catalogueSearch"
                             v-model="searchTermInterface"
@@ -29,7 +29,7 @@
                             name="search"
                             autocomplete="off"
                             placeholder="Search..."
-                            class="no-label"
+                            class="no-label tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-xl tw-border tw-text-black dark:tw-text-[#9EC0DC] tw-border-black dark:tw-border-current"
                             @keydown.enter="submitSearch($event)"
                         >
                     </div>

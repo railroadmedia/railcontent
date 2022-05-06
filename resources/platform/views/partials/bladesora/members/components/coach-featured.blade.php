@@ -1,6 +1,6 @@
 @if ($hasFeaturedCoaches)
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-6">
-        <div class="tw-flex tw-flex-row align-v-center pv-2 tw-mb-4">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-5 tw-mb-3">
+        <div class="tw-flex tw-flex-row align-v-center tw-mb-4">
             <h2 class="heading tw-capitalize dark:tw-text-white tw-flex-grow">
                 Featured Coaches
             </h2>
@@ -24,6 +24,7 @@
                             <!-- Coach Headshot -->
                             <a href="{{ $featured->fetch('url') }}"
                                 class="tw-mr-4 tw-rounded-full tw-relative tw-w-16 tw-h-16 tw-overflow-hidden tw-flex-shrink-0">
+                                
                                 <img class="tw-w-16 tw-h-16 tw-rounded-full tw-border-2 tw-border-solid tw-border-yellow-500"
                                     src="{{ cf_img($featured->fetch('coach_profile_image'), ['width' => 300]) }} ">
                                 <!-- Badge -->
@@ -58,7 +59,9 @@
                             <h3 class="tw-text-xl tw-font-bold dark:tw-text-white tw-uppercase tw-mb-4">
                                 {{ $featured->fetch('data.focus_text.value') }}
                             </h3>
-                            <div class="tw-text-sm dark:tw-text-white">{!! $featured->fetch('data.short_bio.value') !!}</div>
+                            <div class="tw-text-sm dark:tw-text-white">
+                                {!! $featured->fetch('data.short_bio.value') !!}
+                            </div>
                         </div>
                         <!-- Buttons -->
                         <a href="{{ $featured->fetch('url') }}"

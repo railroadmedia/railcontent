@@ -21423,6 +21423,9 @@ a:visited{
 .tw-top-\[60px\]{
   top: 60px;
 }
+.tw-right-0{
+  right: 0px;
+}
 .tw-left-\[-30px\]{
   left: -30px;
 }
@@ -21440,9 +21443,6 @@ a:visited{
 }
 .tw-bottom-0{
   bottom: 0px;
-}
-.tw-right-0{
-  right: 0px;
 }
 .tw-left-1\/2{
   left: 50%;
@@ -22625,6 +22625,9 @@ a:visited{
 .tw-border-b-2{
   border-bottom-width: 2px;
 }
+.tw-border-b-\[3px\]{
+  border-bottom-width: 3px;
+}
 .tw-border-solid{
   border-style: solid;
 }
@@ -22872,6 +22875,9 @@ a:visited{
 .tw-bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.tw-bg-\[transparent\]{
+  background-color: transparent;
 }
 .tw-bg-opacity-20{
   --tw-bg-opacity: 0.2;
@@ -23902,6 +23908,9 @@ a:visited{
 .tw-dark .dark\:tw-border-\[\#223457\]{
   --tw-border-opacity: 1;
   border-color: rgb(34 52 87 / var(--tw-border-opacity));
+}
+.tw-dark .dark\:tw-border-current{
+  border-color: currentColor;
 }
 .tw-dark .dark\:tw-border-b-\[\#102230\]{
   --tw-border-opacity: 1;
