@@ -325,4 +325,38 @@ class UserContentProgressRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    public function countContentProgress($contentId, $date = null, $state = null)
+    {
+        $query =
+            $this->query()
+                ->select(
+                    $this->databaseManager->raw(
+                        'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
+                    )
+                )
+                ->join(
+                    ConfigService::$tableContent,
+                    function (JoinClause $join) {
+                        $join->on(
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        );
+                    }
+                )
+                ->where(ConfigService::$tableContent . '.id', $contentId);
+
+        if ($state) {
+            $query->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
+        }
+
+        if ($date) {
+            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $date);
+        }
+
+        return $query->get()
+            ->first()['count'];
+    }
+
 }
