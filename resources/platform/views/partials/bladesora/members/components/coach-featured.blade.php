@@ -1,7 +1,7 @@
 @if ($hasFeaturedCoaches)
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-5 tw-mb-3">
-        <div class="tw-flex tw-flex-row align-v-center tw-mb-4">
-            <h2 class="heading tw-capitalize dark:tw-text-white tw-flex-grow">
+        <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-4">
                 Featured Coaches
             </h2>
         </div>

@@ -54,8 +54,8 @@
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
             <div class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow">
-                    <div class="tw-flex tw-flex-row tw-items-center pv-2">
-                        <h2 class="heading tw-capitalize tw-flex-grow dark:tw-text-white">
+                    <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+                        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-3">
                             Latest Featured Lessons
                         </h2>
                     </div>
@@ -93,8 +93,8 @@
                 <div class="tw-flex tw-flex-row tw-mb-3">
                     <div class="tw-flex tw-flex-col tw-flex-grow">
                         
-                        <div class="tw-flex tw-flex-row tw-items-center pv-2">
-                            <h2 class="heading dark:tw-text-white tw-capitalize tw-flex-grow">
+                        <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-3">
                                 From Subscribed Coaches
                             </h2>
                         </div>
@@ -102,16 +102,16 @@
                         <div class="tw-flex tw-flex-row six-cards-row">
                             <transition appear name="fade">
                                 <content-catalogue
-                                        brand="{{ $brand }}"
-                                        theme-color="{{ $brand }}"
-                                        :use-theme-color="true"
-                                        content-endpoint="/railcontent/content"
-                                        catalogue-type="grid"
-                                        limit="16"
-                                        :lock-unowned="true"
-                                        :four-wide="true"
-                                        :force-wide-thumbs="true"
-                                        :pre-loaded-content="{{ $latestSubscribedLessons }}"
+                                    brand="{{ $brand }}"
+                                    theme-color="{{ $brand }}"
+                                    :use-theme-color="true"
+                                    content-endpoint="/railcontent/content"
+                                    catalogue-type="grid"
+                                    limit="16"
+                                    :lock-unowned="true"
+                                    :four-wide="true"
+                                    :force-wide-thumbs="true"
+                                    :pre-loaded-content="{{ $latestSubscribedLessons }}"
                                 >
                                     <div class="tw-flex tw-flex-row nmh-1">
                                         @for($i = 0; $i < 6; $i++)
@@ -120,7 +120,7 @@
                                             ])
                                         @endfor
                                     </div>
-                                </content-cataldark:tw-text-whiteogue>
+                                </content-catalogue>
                             </transition>
                         </div>
                     </div>

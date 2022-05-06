@@ -29,7 +29,7 @@
                             name="search"
                             autocomplete="off"
                             placeholder="Search..."
-                            class="no-label tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-xl tw-border tw-text-black dark:tw-text-[#9EC0DC] tw-border-black dark:tw-border-current"
+                            class="no-label dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-black tw-border-[#D4D4D8] dark:tw-border-[#9EC0DC] dark:tw-text-white"
                             @keydown.enter="submitSearch($event)"
                         >
                     </div>

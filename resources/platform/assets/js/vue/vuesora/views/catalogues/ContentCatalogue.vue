@@ -3,7 +3,7 @@
 
     <div v-if="isCoachesGrid" 
          id="coach-section"
-         class="tw-flex tw-flex-col tw-pt-4 tw-mb-6">
+         class="tw-flex tw-flex-col tw-mb-6">
         <div class="tw-flex tw-flex-wrap">
             <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
                :href="coachIndexUrl + '#coach-section'"

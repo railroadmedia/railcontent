@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tw-w-full tw-py-10 tw-flex tw-flex-col sm:tw-flex-row tw-justify-between"
+    class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row tw-justify-between"
   >
     <div class="tw-w-full md:tw-w-3/6 lg:tw-w-2/6">
       <div class="tw-flex tw-text-gray-600 sm:tw-pr-5 tw-mb-3 ph-1 sm:tw-pl-0">
@@ -11,7 +11,7 @@
           name="search"
           autocomplete="off"
           placeholder="Search..."
-          class="tw-bg-white tw-py-3 tw-px-4 tw-mr-5 tw-rounded-full tw-w-full focus:outline-none tw-border-2"
+          class="no-label tw-bg-transparent tw-w-full tw-mr-5 tw-py-0 tw-h-[50px] dark:placeholder:tw-text-white tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-black tw-border-[#D4D4D8] dark:tw-border-[#9EC0DC] dark:tw-text-white"
           @keydown.enter="submitSearch"
         />
         <button
@@ -20,7 +20,7 @@
           title="Search"
           @click="submitSearch"
         >
-          <span class="tw-text-white" :class="`tw-bg-${themeColor}`">
+          <span class="tw-text-white">
             <i class="fas fa-search tw-px-1"></i>
           </span>
         </button>
@@ -44,30 +44,17 @@
             <select
               id="sortInput"
               type="text"
-              class="borderless"
+              class="borderless dark:tw-text-white tw-pb-0"
               @change="handleContentSort($event)"
               v-model="sort"
             >
-              <option
-                  value="-popularity"
-                  :selected="sort === '-popularity'"
+              <option v-for="(option, i) in coachFilterOptions" 
+                     :key="i" 
+                     class="tw-text-black"
+                     :value="option.value"
+                     :selected="sort === option.value"     
               >
-                Most Popular
-              </option>
-              <option
-                value="-published_on"
-                :selected="sort === '-published_on'"
-              >
-                Newest First
-              </option>
-              <option value="published_on" :selected="sort === 'published_on'">
-                Oldest First
-              </option>
-              <option value="title" :selected="sort === 'title'">
-                Name: A to Z
-              </option>
-              <option value="-title" :selected="sort === '-title'">
-                Name: Z to A
+                {{ option.name }}
               </option>
             </select>
 
@@ -128,6 +115,28 @@ export default {
     return {
       search_term: this.searchTerm,
       sort: "-published_on",
+      coachFilterOptions: [
+        {
+          name: "Most Popular",
+          value: "-popularity",
+        },
+        {
+          name: "Newest First",
+          value: "-published_on",
+        },
+                {
+          name: "Oldest First",
+          value: "published_on",
+        },
+        {
+          name: "Name: A to Z",
+          value: "title",
+        },
+        {
+          name: "Name: Z to A",
+          value: "-title",
+        },
+      ]
     };
   },
   computed: {
