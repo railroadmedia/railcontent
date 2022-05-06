@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Carbon\Carbon;
 use Elasticsearch\ClientBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 
@@ -11,6 +12,10 @@ class ElasticService
      * @var ContentService ContentService
      */
     private $contentService;
+    /**
+     * @var UserContentProgressService
+     */
+    private $userContentProgressService;
 
     /**
      * @return \Elasticsearch\Client
@@ -346,27 +351,26 @@ class ElasticService
 
     public function syncDocument($content)
     {
+        $this->userContentProgressService = app(UserContentProgressService::class);
         $client = $this->getClient();
 
         $contentID = $content['id'];
 
         //get progress on content
-        //            $userContentPogress =
-        //                $oArgs->getEntityManager()
-        //                    ->getRepository(UserContentProgress::class);
-        //            $allProgress = $userContentPogress->countContentProgress($contentID);
-        //
-        //            $lastWeekProgress = $userContentPogress->countContentProgress(
-        //                $contentID,
-        //                Carbon::now()
-        //                    ->subWeek(1)
-        //            );
+
+        $allProgress = $this->userContentProgressService->countContentProgress($contentID);
+
+        $lastWeekProgress = $this->userContentProgressService->countContentProgress(
+            $contentID,
+            Carbon::now()
+                ->subWeek(1)
+        );
 
         $this->contentService = app(ContentService::class);
         $elasticData = array_merge(
             [
-                //                    'all_progress_count' => $allProgress,
-                //                    'last_week_progress_count' => $lastWeekProgress,
+                'all_progress_count' => $allProgress,
+                'last_week_progress_count' => $lastWeekProgress,
             ],
             $this->contentService->getElasticData($contentID)
         );
@@ -399,7 +403,6 @@ class ElasticService
 
             //delete document if exists
             foreach ($documents['hits']['hits'] as $elData) {
-                //dd($elData);
                 $paramsDelete = [
                     'index' => 'content',
                     'id' => $elData['_id'],
