@@ -59,7 +59,7 @@ class UserContentProgressService
 
     /**
      * @param $contentType
-     * @param $userId
+     * @param $userIdcountContentProgress
      * @param $state
      * @return array
      */
@@ -735,5 +735,18 @@ class UserContentProgressService
     public function countUserProgress($userId, $date = null, $state = null)
     {
         return $this->userContentRepository->countUserProgress($userId, $date, $state);
+    }
+
+    /**
+     * @param $contentId
+     * @param null $date
+     * @param null $state
+     * @return int|mixed|string
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countContentProgress($contentId, $date = null, $state = null)
+    {
+        return $this->userContentRepository->countContentProgress($contentId, $date, $state);
     }
 }
