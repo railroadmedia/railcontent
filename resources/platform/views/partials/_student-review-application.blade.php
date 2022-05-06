@@ -20,7 +20,7 @@
               action=""
               accept-charset="UTF-8">
 
-            <input type="hidden" name="subject" value="Student Review Application from: {{ current_user()->getDisplayName() }} ({{ current_user()->getEmail() }})">
+            <input type="hidden" name="subject" value="Student Review Application from: {{ user()->display_name }} ({{ current_user()->getEmail() }})">
 
             <input type="hidden" name="student progress info" value="https://{{ environmentSubdomain() }}musora.com/admin/user-progress-info/{{ current_user()->getId() }}">
             <div class="flex flex-column mb-2">

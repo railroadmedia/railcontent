@@ -184,31 +184,37 @@ return [
         ],
     ],
 
-    'all_routes_middleware' => [],
-
-    'user_routes_middleware' => [
+    'all_routes_middleware' => [
         \App\Http\Middleware\EncryptCookies::class,
-        \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
-//        \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
-//        \App\Http\Middleware\TokenAuth::class,
-//        \App\Http\Middleware\AuthenticatedOnly::class,
-//        \App\Http\Middleware\SetContentPermissions::class,
+        \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
+    ],
+
+    'user_routes_middleware' => [
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
     ],
     'administrator_routes_middleware' => ['auth.admin'],
 
     //middleware for API requests
     'api_middleware' => [
-        // \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
-//        MobileAppTokenAuth::class,
-//        \App\Http\Middleware\SetContentPermissions::class,
-//        //\Tymon\JWTAuth\Http\Middleware\Authenticate::class
-//        \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
-//        \App\Http\Middleware\SetMobileAppDecorators::class
+        \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
     ],
 
     'cache_prefix' => 'musora_railcontent_',

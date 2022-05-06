@@ -5,6 +5,7 @@ import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
 import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
+import { setEndpointPrefix } from "../../utils"
 import simplebar from "simplebar-vue";
 import "simplebar/dist/simplebar.min.css";
 
@@ -114,6 +115,7 @@ export default {
       this.isSidebarHidden = true;
       this.isSidebarCollapsed = false;
     }
+    setEndpointPrefix();
   },
 
   created() {

@@ -13,8 +13,8 @@
                         theme-color="{{ $brand }}"
                         brand="{{ $brand }}"
                         user-id="{{ current_user()->getId() }}"
-                        user-name="{{ current_user()->getDisplayName() }}"
-                        user-avatar="{{ current_user()->getProfilePictureUrl() }}"
+                        user-name="{{ user()->display_name }}"
+                        user-avatar="{{ user()->profile_picture_url }}"
                         user-xp="{{ Railroad\Points\Services\UserPointsService::fetchPoints(current_user()->getId()) }}"
                         user-access-level="{{ current_user()->getPermissionLevel() === 'administrator' ? 'team' : 'piano' }}"
                         profile-base-route="/members/profile/"
@@ -22,6 +22,6 @@
                     />
                 </div>
             </div>
-    
+
         </div>
 @endsection

@@ -9,8 +9,8 @@
         <div v-cloak>
 
             @include('partials.bladesora.members.partials._account-header', [
-                'userAvatar' => current_user()->getProfilePictureUrl(),
-                'userName' => current_user()->getDisplayName(),
+                'userAvatar' => user()->profile_picture_url,
+                'userName' => user()->display_name,
                 'appName' => 'Musora',
                 'memberSince' => current_user()->getCreatedAt(),
             ])

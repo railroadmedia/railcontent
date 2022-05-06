@@ -66,7 +66,7 @@ export default {
   <button
     v-on:click="handleMenuOpen"
     tabindex="0"
-    class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
+    class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-relative tw-cursor-pointer"
   >
     <!-- User Image -->
     <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover"
