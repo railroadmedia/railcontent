@@ -145,7 +145,7 @@ class MyListJsonControllerTest extends RailcontentTestCase
             'GET',
             'api/railcontent/my-list'
         );
-dd($response->decodeResponseJson());
+
         $this->assertEquals(200, $response->status());
         $this->assertEquals(2, count($response->decodeResponseJson('data')));
     }

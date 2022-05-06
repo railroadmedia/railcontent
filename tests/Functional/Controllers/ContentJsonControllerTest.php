@@ -8,6 +8,7 @@ use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
+use Railroad\Railcontent\Factories\UserContentProgressFactory;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
@@ -72,6 +73,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
      */
     protected $contentHierarchyService;
 
+    /**
+     * @var UserContentProgressFactory
+     */
+    protected $userContentProgressFactory;
+
     protected function setUp()
     : void
     {
@@ -87,6 +93,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->permissionRepository = $this->app->make(PermissionRepository::class);
         $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
         $this->contentHierarchyService = $this->app->make(ContentHierarchyService::class);
+        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
     public function test_index_empty()
@@ -1510,68 +1517,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
     }
 
-    public function test_popularity_command()
-    {
-        $this->createAndLogInNewUser();
 
-        $content1 = $this->contentFactory->create($this->faker->word, 'course', 'published');
-        $content2 = $this->contentFactory->create($this->faker->word, 'course', 'published');
-        $content3 = $this->contentFactory->create($this->faker->word, 'course', 'published');
-
-        $userContent1 = [
-            'content_id' => $content1['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
-
-        $userContent2 = [
-            'content_id' => $content2['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_COMPLETED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
-
-        $userContent3 = [
-            'content_id' => $content2['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
-
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent1);
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent2);
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent3);
-
-        //$this->artisan('CalculateContentPopularity');
-
-        $this->assertDatabaseHas(ConfigService::$tableContent, [
-            'id' => $content1['id'],
-            'popularity' => 1,
-        ]);
-
-        $this->assertDatabaseHas(ConfigService::$tableContent, [
-            'id' => $content2['id'],
-            'popularity' => 6,
-        ]);
-
-        $this->assertDatabaseHas(ConfigService::$tableContent, [
-            'id' => $content3['id'],
-            'popularity' => 0,
-        ]);
-    }
 
     public function test_sort_contents_by_popularity()
     {
@@ -1580,54 +1526,26 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $content1 = $this->contentFactory->create($this->faker->word, 'course', 'published');
         $content2 = $this->contentFactory->create($this->faker->word, 'course', 'published');
         $content3 = $this->contentFactory->create($this->faker->word, 'course', 'published');
+        sleep(1);
 
-        $userContent1 = [
-            'content_id' => $content1['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
+        $this->userContentProgressFactory->startContent($content1['id'], rand());
+        sleep(1);
 
-        $userContent2 = [
-            'content_id' => $content2['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_COMPLETED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
+        $this->userContentProgressFactory->completeContent($content2['id'], rand());
+        sleep(1);
 
-        $userContent3 = [
-            'content_id' => $content2['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
+        $this->userContentProgressFactory->startContent($content2['id'], rand());
+        sleep(1);
 
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent1);
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent2);
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent3);
+        // $this->artisan('CalculateContentPopularity');
 
-        $this->artisan('CalculateContentPopularity');
-
-        $response = $this->call('GET', 'api/railcontent/content', [
+        $response = $this->call('GET', 'railcontent/content', [
                                          'included_types' => ['course'],
-                                         'statuses' => ['published', 'scheduled'],
+                                         'statuses' => ['published'],
                                          'sort' => '-popularity',
                                          'brand' => config('railcontent.brand'),
                                          'limit' => 10,
                                      ]
-
         );
 
         $this->assertArraySubset(
@@ -1639,6 +1557,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $response->decodeResponseJson()
                 ->json('data')
         );
+
     }
 
     /**

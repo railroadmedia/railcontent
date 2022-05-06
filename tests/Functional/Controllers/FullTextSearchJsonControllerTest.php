@@ -8,8 +8,10 @@ use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Factories\UserContentProgressFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class FullTextSearchJsonControllerTest extends RailcontentTestCase
@@ -373,5 +375,74 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $results = $response->decodeResponseJson();
 
         $this->assertEquals(0, $results['meta']['totalResults']);
+    }
+
+    public function test_popularity_command()
+    {
+        $this->createAndLogInNewUser();
+
+        $content1 = $this->contentFactory->create($this->faker->word, 'course', 'published', null,
+                                                  null,
+                                                  null,
+                                                  Carbon::now()->subDays(2));
+        $content2 = $this->contentFactory->create($this->faker->word, 'course', 'published',null,
+                                                  null,
+                                                  null,
+                                                  Carbon::now());
+        $content3 = $this->contentFactory->create($this->faker->word, 'course', 'published');
+
+        $userContent1 = [
+            'content_id' => $content1['id'],
+            'user_id' => rand(),
+            'state' => UserContentProgressService::STATE_STARTED,
+            'progress_percent' => $this->faker->numberBetween(0, 99),
+            'updated_on' => Carbon::now()
+                ->toDateString(),
+        ];
+
+        $userContent2 = [
+            'content_id' => $content2['id'],
+            'user_id' => rand(),
+            'state' => UserContentProgressService::STATE_COMPLETED,
+            'progress_percent' => $this->faker->numberBetween(0, 99),
+            'updated_on' => Carbon::now()
+                ->toDateString(),
+        ];
+
+        $userContent3 = [
+            'content_id' => $content2['id'],
+            'user_id' => rand(),
+            'state' => UserContentProgressService::STATE_STARTED,
+            'progress_percent' => $this->faker->numberBetween(0, 99),
+            'updated_on' => Carbon::now()
+                ->toDateString(),
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent1);
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent2);
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent3);
+
+        $this->artisan('CalculateContentPopularity');
+
+        $this->assertDatabaseHas(ConfigService::$tableContent, [
+            'id' => $content1['id'],
+            'popularity' => 1,
+        ]);
+
+        $this->assertDatabaseHas(ConfigService::$tableContent, [
+            'id' => $content2['id'],
+            'popularity' => 8,
+        ]);
+
+        $this->assertDatabaseHas(ConfigService::$tableContent, [
+            'id' => $content3['id'],
+            'popularity' => 0,
+        ]);
     }
 }
