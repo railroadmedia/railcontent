@@ -21540,6 +21540,9 @@ a:visited{
 .tw-m-4{
   margin: 1rem;
 }
+.tw-m-1{
+  margin: 0.25rem;
+}
 .tw-mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -22985,6 +22988,9 @@ a:visited{
 .tw-p-8{
   padding: 2rem;
 }
+.tw-p-0\.5{
+  padding: 0.125rem;
+}
 .tw-px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -23828,6 +23834,30 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(202 138 4 / var(--tw-bg-opacity));
 }
+.hover\:tw-bg-gray-500\/50:hover{
+  background-color: rgb(107 114 128 / 0.5);
+}
+.hover\:tw-bg-gray-500\/20:hover{
+  background-color: rgb(107 114 128 / 0.2);
+}
+.hover\:tw-bg-gray-500\/10:hover{
+  background-color: rgb(107 114 128 / 0.1);
+}
+.hover\:tw-bg-gray-900\/10:hover{
+  background-color: rgb(17 24 39 / 0.1);
+}
+.hover\:tw-bg-gray-100\/10:hover{
+  background-color: rgb(243 244 246 / 0.1);
+}
+.hover\:tw-bg-gray-100\/50:hover{
+  background-color: rgb(243 244 246 / 0.5);
+}
+.hover\:tw-bg-gray-100\/20:hover{
+  background-color: rgb(243 244 246 / 0.2);
+}
+.hover\:tw-bg-gray-100\/80:hover{
+  background-color: rgb(243 244 246 / 0.8);
+}
 .hover\:tw-bg-opacity-100:hover{
   --tw-bg-opacity: 1;
 }
@@ -23972,6 +24002,9 @@ a:visited{
 }
 .tw-dark .dark\:hover\:tw-bg-gray-900\/\[10\]:hover{
   background-color: rgb(17 24 39 / 10);
+}
+.tw-dark .dark\:hover\:tw-bg-gray-100\/20:hover{
+  background-color: rgb(243 244 246 / 0.2);
 }
 .tw-dark .dark\:hover\:tw-text-white:hover{
   --tw-text-opacity: 1;
@@ -24454,6 +24487,9 @@ a:visited{
   .md\:tw-grid-cols-5{
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
+  .md\:tw-grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .md\:tw-flex-row{
     flex-direction: row;
   }
@@ -24548,6 +24584,10 @@ a:visited{
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
+  .md\:tw-px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   .md\:tw-pb-0{
     padding-bottom: 0px;
   }
@@ -24619,8 +24659,14 @@ a:visited{
   }
 }
 @media (min-width: 1024px){
+  .lg\:tw-relative{
+    position: relative;
+  }
   .lg\:tw-left-2\/4{
     left: 50%;
+  }
+  .lg\:tw-left-0{
+    left: 0px;
   }
   .lg\:tw-mx-auto{
     margin-left: auto;
@@ -24713,6 +24759,9 @@ a:visited{
   .lg\:tw-w-1\/4{
     width: 25%;
   }
+  .lg\:tw-w-\[68px\]{
+    width: 68px;
+  }
   .lg\:tw-max-w-\[567px\]{
     max-width: 567px;
   }
@@ -24731,6 +24780,12 @@ a:visited{
   }
   .lg\:tw-grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lg\:tw-grid-cols-5{
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .lg\:tw-grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .lg\:tw-flex-row{
     flex-direction: row;
@@ -24878,11 +24933,23 @@ a:visited{
   .\32xl\:tw-w-\[1350px\]{
     width: 1350px;
   }
+  .\32xl\:tw-grid-cols-7{
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .\32xl\:tw-grid-cols-6{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
   .\32xl\:tw-text-\[24px\]{
     font-size: 24px;
   }
 }
 @media (min-width: 1815px){
+  .\33xl\:tw-grid-cols-7{
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .\33xl\:tw-grid-cols-8{
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
   .\33xl\:tw-bg-\[length\:70\%\]{
     background-size: 70%;
   }

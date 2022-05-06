@@ -8,7 +8,7 @@
 
         <!-- Active Coaches -->
         <div class="tw-my-3">
-            <div class="tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-3">
+            <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-3">
                 @foreach ($activeCoaches as $coach)
                     <a href="{{ $coach->fetch('url') }}"
                         class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">

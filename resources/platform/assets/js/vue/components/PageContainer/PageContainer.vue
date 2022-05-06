@@ -109,7 +109,7 @@ export default {
       this.setDarkMode(this.isDarkModeSelected);
     }
     //Set Sidebar State
-    const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+    const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
     if (smallBreakpoint.matches) {
       this.isSidebarHidden = true;
       this.isSidebarCollapsed = false;
@@ -127,7 +127,7 @@ export default {
 
   methods: {
     onResize(e) {
-      const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+      const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
       if (smallBreakpoint.matches) {
         this.isSidebarHidden = true;
         this.isSidebarCollapsed = false;
