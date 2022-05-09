@@ -56,12 +56,10 @@ class UserController extends Controller
             if ($isJson) {
                 return json_encode(
                     array(
-                        "status" => "error",
-                        "errors" => json_encode($exception->errors())
+                        "errors" => $exception->errors()
                     )
                 );
             }
-
 
             return $request->has('redirect') ?
                 redirect()
