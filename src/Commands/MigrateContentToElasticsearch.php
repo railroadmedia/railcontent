@@ -99,22 +99,6 @@ class MigrateContentToElasticsearch extends Command
                             ->orderBy('id', 'asc')
                             ->get();
 
-                    $allProgressCount =
-                        $dbConnection->table(config('railcontent.table_prefix').'user_content_progress')
-                            ->where('content_id', $row->id)
-                            ->count();
-
-                    $lastWeekProgressCount =
-                        $dbConnection->table(config('railcontent.table_prefix').'user_content_progress')
-                            ->where('content_id', $row->id)
-                            ->where(
-                                'updated_on',
-                                '>=',
-                                Carbon::now()
-                                    ->subWeek(1)
-                            )
-                            ->count();
-
                     $parent =
                         $dbConnection->table(config('railcontent.table_prefix').'content_hierarchy')
                             ->join(
@@ -235,8 +219,6 @@ class MigrateContentToElasticsearch extends Command
                             $instructors->pluck('name')
                                 ->toArray()
                         ),
-                        'all_progress_count' => $allProgressCount,
-                        'last_week_progress_count' => $lastWeekProgressCount,
                         'description' => $description->value ?? '',
                         'permission_ids' => $permissions->pluck('permission_id')
                             ->toArray(),
