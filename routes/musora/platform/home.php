@@ -17,21 +17,15 @@ Route::domain('{musoraDomain}')
 Route::get('products/{product:slug}', function ($slug){
     $product = Product::firstWhere('slug', $slug);
 
-    return view('product',[
+    return view('test.product',[
         'product' => $product
     ]);
 });
 
 Route::get('{brand}/products', function ($brand){
-//    $products = Product::join("brands", "brands.id", "=", "products.brand_id")->join("product_types", "product_types.id", "=", "products.product_type_id")->where("brands.name", "=", $brand)->get(["products.name", "product_types.name as product_type",]);
+    $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->get();
 
-    $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->
-                        join("product_types", "product_types.id", "=", "products.product_type_id")->
-                        get(["products.name", "product_types.name as product_type",]);
-
-//    dd($products);
-
-    return view('products',[
+    return view('test.products',[
         'products' => $products
     ]);
 });
