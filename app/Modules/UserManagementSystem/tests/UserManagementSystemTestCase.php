@@ -9,6 +9,7 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\URL;
+use Railroad\Railcontent\Services\ConfigService;
 
 abstract class UserManagementSystemTestCase extends BaseTestCase
 {
@@ -21,6 +22,8 @@ abstract class UserManagementSystemTestCase extends BaseTestCase
 
     protected function setUp(): void
     {
+        putenv('RAILCONTENT_DATA_MODE=client');
+
         $this->faker = Factory::create();
 
         Carbon::setTestNow(Carbon::now());

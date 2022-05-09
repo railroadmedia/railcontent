@@ -1,5 +1,5 @@
 <template>
-    <section class="tw-grid tw-grid-cols-3 tw-gap-1 sm:tw-gap-4 tw-my-4">
+    <section class="tw-grid tw-grid-cols-3 tw-gap-1 sm:tw-gap-4 tw-mb-6 md:tw-mb-8">
         <!-- Method -->
         <a :href="`/members/method?brand=${brand}`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"

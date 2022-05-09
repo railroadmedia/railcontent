@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.login-layout')
 
 @section('meta')
     <title>Login | Musora</title>
@@ -27,24 +27,33 @@
 @endsection
 
 @section('content')
-    <div v-cloak>
+    <div class="tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-bg-[#000C17] tw-text-white tw-bg-cover"
+         style="background-image: url('https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg');"
+         v-cloak>
 
-        <section id="logoContainer" class="pa-2 tw-text-center">
-            <img class="logo"
-                src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
+        <section id="logoContainer" class="tw-flex-col tw-flex tw-items-center tw-text-center">
+            <img class="logo tw-max-w-[280px] tw-mb-6"
+                src="https://musora-ui.s3.amazonaws.com/logos/musora-white.svg" alt="Musora Logo">
+            <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
         </section>
 
-        <p class="tw-pb-3 tw-text-center tw-italic">The Ultimate Online Singeo Lessons Experience&#8482;</p>
+        <login-form
+            brand="drumeo"
+            loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])) }}"
+            reseturl="//todo"
+            joinurl="{{url('/#orderNow')}}"
+            :errors="{{json_encode($errors->all())}}"
+            hassessionstatus="{{session()->has('status')}}"
+            sessionstatus="{{ session()->get('status') }}"
+            :usecsrftoken="!!({{$useCsrfToken ?? true}})"
+        >
+            <template v-slot:csrf>{{ csrf_field() }}</template>
+        </login-form>
 
-        @include('partials.bladesora.members.login-form', [
-            "brand" => "{{ $brand }}",
-            "loginUrl" => url()->route('usora.authenticate.with-credentials', (!empty($redirect) ? ['redirect' => $redirect] : [])),
-            "resetUrl" => url()->route('usora.password.send-reset-email'),
-            "joinUrl" => url('/#orderNow'),
-            "joinPitch" => "tw-text-black",
-            "labelClasses" => "text-grey-3 tiny",
-            "checked" => true,
-        ])
-        
+        <p class="tiny tw-text-center tw-py-[20px] tw-text-[16px] {{ $joinPitch ?? '' }}">
+            <span>Not a member yet?</span>
+            <br/>
+            <a class="tw-text-white tw-font-extrabold tw-underline" href="{{ url('/#orderNow') }}">Join the community here!</a>
+        </p>
     </div>
 @endsection

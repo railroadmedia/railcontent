@@ -2,6 +2,7 @@
 const stylesoraTheme = require('stylesora/theme');
 const plugin = require('tailwindcss/plugin');
 const colors = require("tailwindcss/colors");
+const { keyframes } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   mode: 'jit',
@@ -25,6 +26,22 @@ module.exports = {
       screens: {
         '3xl': '1815px',
         '4xl': '2256px',
+      },
+      animation: {
+        'grow-shrink': 'grow-shrink 1.25s infinite'
+      },
+      keyframes: {
+        'grow-shrink': {
+          '0%': {
+            transform: 'scale(1)',
+          },
+          '50%': {
+            transform: 'scale(1.25)',
+          },
+          '100%': {
+            transform: 'scale(1)',
+          }
+        }
       }
     },
   },

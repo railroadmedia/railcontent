@@ -61,7 +61,7 @@ class AuthenticationController extends Controller
 
             event(new UserEvent($user->id, 'authenticated'));
 
-            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/members');
+            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
         }
 
         return redirect()
@@ -124,7 +124,7 @@ class AuthenticationController extends Controller
             return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
         }
 
-        throw new AuthenticationException();
+        return response()->json(['error' => 'Invalid login credentials.']);
     }
 
     /**

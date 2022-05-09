@@ -4,10 +4,13 @@ namespace App\Modules\Brand\Services;
 
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
 use Modules\UserManagementSystem\Models\User;
 
 class BrandService
 {
+    public static $currentBrand = null;
+
     /**
      * @param User $user
      * @param $brand
@@ -18,6 +21,9 @@ class BrandService
         $brandString = $brand->value;
 
         if (in_array($brandString, config('brands'))) {
+            self::$currentBrand = $brandString;
+            URL::defaults(['brand' => self::$currentBrand]);
+
             $cacheKey = 'user_' . $user->id . '_last_used_brand';
             $cacheValue = Cache::get($cacheKey);
 
@@ -38,5 +44,43 @@ class BrandService
             // set in cookie
             cookie()->queue($cacheKey, $brandString);
         }
+    }
+
+    /**
+     * @param User|null $user
+     * @return string
+     */
+    public static function getLastUsedBrand(User $user = null)
+    {
+        if (!empty(self::$currentBrand)) {
+            return self::$currentBrand;
+        }
+
+        if (empty($user)) {
+            return null;
+        }
+
+        $cacheKey = 'user_' . $user->id . '_last_used_brand';
+        $cookieValue = request()->cookie($cacheKey);
+        $cacheValue = Cache::get($cacheKey);
+        $databaseValue = $user->last_used_brand;
+        $default = 'drumeo'; // todo: this should go to onboarding
+
+        // check in cookie first
+        if (!empty($cookieValue) && in_array($cookieValue, config('brands'))) {
+            return $cookieValue;
+        }
+
+        // then check cache
+        if (!empty($cacheValue) && in_array($cacheValue, config('brands'))) {
+            return $cacheValue;
+        }
+
+        // then check database
+        if (!empty($databaseValue) && in_array($databaseValue, config('brands'))) {
+            return $databaseValue;
+        }
+
+        return $default;
     }
 }

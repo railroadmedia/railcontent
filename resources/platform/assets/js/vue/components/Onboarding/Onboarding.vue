@@ -12,7 +12,6 @@ import Coaches from './steps/Coaches.vue'
 const props = defineProps({
     brand: {
         type: String,
-        default: 'drumeo'
     }
 })
 const initialSteps = [

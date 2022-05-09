@@ -1,8 +1,8 @@
 <template>
-    <div class="flex flex-row nmh-1 mt-3" style="justify-content: space-between;">
+    <div class="tw-flex tw-flex-row nmh-1 tw-mt-3 tw-justify-between">
         <template v-for="range in ['lower', 'low', 'original', 'high', 'higher']">
             <div
-                class="flex flex-column ph-1"
+                class="tw-flex tw-flex-col ph-1"
                 style="max-width: 250px"
                 v-if="hasRange(range)"
             >
@@ -11,7 +11,7 @@
                     class="btn uppercase"
                     :class="getRangeButtonClasses(range)"
                     @click.stop.prevent="setRange(range)"
-                ><i :class="getRangeIconClasses(range)" v-if="getRangeIconClasses(range)"></i><span :class="{'ml-1': getRangeIconClasses(range) != ''}">{{ range }} range</span></a>
+                ><i :class="getRangeIconClasses(range)" v-if="getRangeIconClasses(range)"></i><span :class="{'tw-ml-1': getRangeIconClasses(range) != ''}">{{ range }} range</span></a>
             </div>
         </template>
     </div>

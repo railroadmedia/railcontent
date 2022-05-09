@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserRolesTable;
+use App\Console\Commands\SeedUserContentData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,8 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        PopulateNewRolesAndPermissionsTables::class,
-        PopulateUserRolesTable::class
+	SeedUserContentData::class,	
+	PopulateNewRolesAndPermissionsTables::class,
+	PopulateUserRolesTable::class
     ];
 
     /**
@@ -40,6 +42,6 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         // TODO: uncomment when the console route file exists
-//        require base_path('routes/console.php');
+        //require base_path('routes/console.php');
     }
 }

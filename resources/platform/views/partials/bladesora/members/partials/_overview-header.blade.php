@@ -1,6 +1,9 @@
-<header id="pageHeader" class="container fluid pv-4 relative" style="background-image:url({{ $backgroundImage }});">
+<header id="pageHeader" 
+        class="container fluid pv-4 relative" 
+        style="background-image:url({{ $backgroundImage }});"
+>
     <div class="header-gradient-overlay absolute-fill {{ $themeColor }}"></div>
-    <div class="container relative">
+    <div class="tw-container tw-mx-auto tw-px-4 tw-relative">
         <div class="flex flex-row">
             @if(!empty($avatarImage))
                 <div class="header-avatar flex flex-column hide-xs-only">

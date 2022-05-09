@@ -4,14 +4,14 @@
     </div>
     <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1">
         <div class="tw-flex tw-flex-col">
-            <h6 class="title tw-mb-2">Hey {{ current_user()->getDisplayName() }}!</h6>
+            <h6 class="title tw-mb-2">Hey {{ user()->display_name }}!</h6>
 
             <p class="tiny tw-uppercase text-error tw-font-bold">Please Read</p>
-            <p class="body tw-mb-2">When you first signed up for Singeo, you made a decision to learn to sing or improve your skills. You were probably excited to get started and had this amazing sense of motivation and inspiration. Take a moment to reflect on what's happened since then...</p>
+            <p class="body tw-mb-2">When you first signed up for Musora, you made a decision to learn to sing or improve your skills. You were probably excited to get started and had this amazing sense of motivation and inspiration. Take a moment to reflect on what's happened since then...</p>
 
             <p class="body tw-mb-2">Are you practicing less? Do you feel like you've hit a wall and aren't getting any better? Are you lost on what to learn next?</p>
 
-            <p class="body tw-mb-2">Myself and the entire Singeo Team are committed to helping you get better, whatever it takes. Before you unsubscribe, I'd encourage you to fill out the form below and someone from our team will contact you personally to make sure that you're setup with the tools you need to succeed.</p>
+            <p class="body tw-mb-2">Myself and the entire Musora Team are committed to helping you get better, whatever it takes. Before you unsubscribe, I'd encourage you to fill out the form below and someone from our team will contact you personally to make sure that you're setup with the tools you need to succeed.</p>
 
             <p class="body tw-mb-2">My advice: Don't give up.</p>
 
@@ -31,7 +31,7 @@
                 @include('partials.bladesora.members.inputs.radio-input', [
                     "inputID" => "instructorPlease",
                     "inputName" => "action",
-                    "inputLabel" => "I'd like to be contacted by a Singeo Instructor to discuss how Singeo can help me achieve my goals.",
+                    "inputLabel" => "I'd like to be contacted by a Musora Instructor to discuss how Musora can help me achieve my goals.",
                     "inputValue" => 'instructor',
                     "checked" => true
                 ])
@@ -133,7 +133,7 @@
 
             <div id="reasonInput" class="tw-mb-2 hide">
                 @include('partials.bladesora.members.inputs.textarea-input', [
-                   "brand" => "Singeo",
+                   "brand" => "Musora",
                    "type" => "text",
                    "inputId" => "otherReason",
                    "inputName" => "other-reason",

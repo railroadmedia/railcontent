@@ -8,7 +8,28 @@ import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 export default {
   name: 'UserIcon',
-  props: ['onColorModeToggle', 'userName', 'userPhoto', 'brand', 'isDarkModeSelected'],
+  inject: ['userNavigationDropdownLinks'],
+  props: {
+    userName: {
+      type: String
+    },
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
+      type: String
+    },
+    brand: {
+      type: String
+    },
+    isDarkModeSelected: {
+      type: Boolean,
+    },
+    hasNotifications: {
+      type: Boolean,
+      default: false,
+    }
+  },
   emits: ['onColorModeToggle'],
   components: {
     AvatarMenu,
@@ -48,32 +69,42 @@ export default {
     class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
   >
     <!-- User Image -->
-    <img :src="userPhoto" class="tw-h-[42px] tw-w-[42px] tw-rounded-full" />
+    <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover"
+          style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?blur=2&fit=crop&h=50&ixlib=php-1.2.1&q=50&w=50&s=0a284a726ec34f3bca2bb253a0dfc869)">
+      <img v-if="userAvatar.lenth" :src="userAvatar" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
+
+      <!-- Notification Indicator -->
+      <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">
+        <span class="tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"></span>
+        <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
+      </span>
+    </div>
 
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader
         :name="userName"
         :optionClick="() => {}"
-        :userPhoto="userPhoto"
+        :userPhoto="userAvatar"
+        :accountUrl="accountUrl"
       />
       <OptionGroup>
-        <OptionElement :href="`/members/profile/notifications?brand=${brand}`">
+        <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
           <musora-icon icon-name="bell" class="tw-w-[20px] tw-mr-2"/>
           Notifications
         </OptionElement>
-        <OptionElement :href="`/members/profile/lists?brand=${brand}`">
+        <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement>
-        <OptionElement :href="`/members/schedule?brand=${brand}`">
+        <OptionElement :href="this.userNavigationDropdownLinks.schedulePageUrl">
           <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
           Schedule
         </OptionElement>
-        <OptionElement :href="`/members/lessons/student-focus?brand=${brand}`">
+        <OptionElement :href="this.userNavigationDropdownLinks.applyForReviewPageUrl">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>
-        <OptionElement :href="`/members/settings?brand=${brand}`">
+        <OptionElement :href="this.userNavigationDropdownLinks.settingsPageUrl">
           <musora-icon icon-name="settings" class="tw-w-[20px] tw-mr-2"/>
           Settings
         </OptionElement>
@@ -86,19 +117,19 @@ export default {
 
           Appearance: {{ isDarkModeSelected ? 'Dark' : 'Light' }}
         </OptionElement>
-        <OptionElement :href="`/members/support?brand=${brand}`">
+        <OptionElement :href="this.userNavigationDropdownLinks.supportPageUrl">
           <musora-icon icon-name="phone" class="tw-w-[20px] tw-mr-2"/>
             Support
           </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement :href="`${brand}.com/shop`">
+        <OptionElement :href="this.userNavigationDropdownLinks.shopPageUrl">
           <musora-icon icon-name="cart" class="tw-w-[20px] tw-mr-2"/>
           Shop
         </OptionElement>
-        <OptionElement href="/usora/deauthenticate">
+        <OptionElement :href="this.userNavigationDropdownLinks.logoutPageUrl">
           <musora-icon icon-name="sign-out" class="tw-w-[20px] tw-mr-2"/>
-          Logout 
+          Logout
         </OptionElement>
       </OptionGroup>
     </AvatarMenu>

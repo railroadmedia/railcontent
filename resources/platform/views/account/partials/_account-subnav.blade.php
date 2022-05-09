@@ -1,5 +1,5 @@
 @include('partials.bladesora.members.navigation.subnav', [
-    "themeColor" => 'singeo',
+    "themeColor" => $brand,
     "subSections" => [
         [
             'title' => 'Dashboard',

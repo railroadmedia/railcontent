@@ -4,9 +4,9 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME'),
     'connection_mask_prefix' => 'railcontent_',
-    'data_mode' => 'host',
+    'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
     'table_prefix' => 'railcontent_',
 
@@ -88,10 +88,10 @@ return [
     ],
 
     'awsS3_remote_storage' => [
-        'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
-        'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
-        'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
+        'accessKey' => env('S3_KEY'),
+        'accessSecret' => env('S3_SECRET'),
+        'region' => env('S3_REGION'),
+        'bucket' => env('S3_BUCKET'),
     ],
     'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
 
@@ -165,7 +165,7 @@ return [
 
     'video_sync' => [
         'vimeo' => [
-            'drumeo' => [
+            'musora' => [
                 'client_id' => env('VIMEO_CLIENT_ID_DRUMEO'),
                 'client_secret' => env('VIMEO_CLIENT_SECRET_DRUMEO'),
                 'access_token' => env('VIMEO_ACCESS_TOKEN_DRUMEO'),
@@ -173,7 +173,7 @@ return [
         ],
         'youtube' => [
             'key' => env('YOUTUBE_API_KEY'),
-            'drumeo' => [
+            'musora' => [
                 'user' => env('YOUTUBE_USERNAME'),
             ],
         ],
@@ -184,31 +184,37 @@ return [
         ],
     ],
 
-    'all_routes_middleware' => [],
-
-    'user_routes_middleware' => [
+    'all_routes_middleware' => [
         \App\Http\Middleware\EncryptCookies::class,
-        \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
-//        \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
-//        \App\Http\Middleware\TokenAuth::class,
-//        \App\Http\Middleware\AuthenticatedOnly::class,
-//        \App\Http\Middleware\SetContentPermissions::class,
+        \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
+    ],
+
+    'user_routes_middleware' => [
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
     ],
     'administrator_routes_middleware' => ['auth.admin'],
 
     //middleware for API requests
     'api_middleware' => [
-        // \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
-//        MobileAppTokenAuth::class,
-//        \App\Http\Middleware\SetContentPermissions::class,
-//        //\Tymon\JWTAuth\Http\Middleware\Authenticate::class
-//        \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
-//        \App\Http\Middleware\SetMobileAppDecorators::class
+        \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
     ],
 
     'cache_prefix' => 'musora_railcontent_',
@@ -218,6 +224,7 @@ return [
         'content' => [
             \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+            \App\Decorators\Content\UrlDecorator::class,
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
@@ -580,6 +587,9 @@ return [
             'showFutureLessonAtTopOrBottom' => 'bottom',
         ],
     ],
+
+//    ---------------------------------------
+//    Content Types
     /**
      * The order of the show types it's IMPORTANT.
      * The show cards on 'Shows' page are displayed in this order.
@@ -686,6 +696,22 @@ return [
         'pack-lesson',
         'semester-pack-lesson',
         'rudiment',
+        'unit',
+        'unit-part',
+        'course',
+        'course-part',
+        'song',
+        'song-part',
+        'quick-tips',
+        'question-and-answer',
+        'student-review',
+        'boot-camps',
+        'chord-and-scale',
+        'pack-bundle-lesson',
+        'podcasts',
+        'learning-path-lesson',
+        'learning-path-course',
+        'learning-path-level'
     ],
     'dashboardInProgressContentTypes' => [
         'course',

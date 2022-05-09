@@ -30,7 +30,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             <forum-thread
@@ -43,5 +42,4 @@
             />
 
         </div>
-    </page-container>
 @endsection

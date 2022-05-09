@@ -1,11 +1,7 @@
 @if ($hasFeaturedCoaches)
-    <div class="container mt-2 tw-mb-6">
-        <div class="flex flex-row align-v-center pv-2  tw-mb-4">
-            <span class="rounded bg-{{ $brand }} text-white icon-bg-circle body mr-1">
-                <i class="fas fa-star"></i>
-            </span>
-
-            <h2 class="heading capitalize grow">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-6">
+        <div class="tw-flex tw-flex-row align-v-center pv-2 tw-mb-4">
+            <h2 class="heading tw-capitalize dark:tw-text-white tw-flex-grow">
                 Featured Coaches
             </h2>
         </div>
@@ -17,7 +13,7 @@
                     <!-- Card Thumbnail -->
                     <div class="{{ $singleFeaturedCoach ? 'md:tw-mr-6 md:tw-w-1/2' : 'md:tw-mr-0' }}">
                         <a href="{{ $featured->fetch('url') }}" class="tw-w-full tw-flex tw-rounded-xl tw-mb-4 tw-bg-cover tw-bg-top tw-h-80 tw-bg-gray-200"
-                            style="background-image: url( {{ imgix($featured->fetch('data.coach_featured_image'), ['w' => 720]) }} );">
+                            style="background-image: url( {{ cf_img($featured->fetch('data.coach_featured_image'), ['width' => 720]) }} );">
                             <span class="sr-only">Image of {{ $featured->fetch('fields.name') }}</span>
                         </a>
                     </div>
@@ -29,7 +25,7 @@
                             <a href="{{ $featured->fetch('url') }}"
                                 class="tw-mr-4 tw-rounded-full tw-relative tw-w-16 tw-h-16 tw-overflow-hidden tw-flex-shrink-0">
                                 <img class="tw-w-16 tw-h-16 tw-rounded-full tw-border-2 tw-border-solid tw-border-yellow-500"
-                                    src="{{ imgix($featured->fetch('coach_profile_image'), ['w' => 300]) }} ">
+                                    src="{{ cf_img($featured->fetch('coach_profile_image'), ['width' => 300]) }} ">
                                 <!-- Badge -->
                                 <div
                                     class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-3 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
@@ -40,7 +36,7 @@
                                 </div>
                             </a>
                             <!-- Header -->
-                            <a class="tw-text-2xl tw-text-black tw-no-underline tw-font-bold tw-uppercase tw-mr-4"
+                            <a class="tw-text-2xl tw-text-black dark:tw-text-white tw-no-underline tw-font-bold tw-uppercase tw-mr-4"
                                href="{{ $featured->fetch('url') }}"
                             >
                                 @php
@@ -49,7 +45,7 @@
                                     $firstName = array_shift($exploded);
                                 @endphp
                                 <span class="tw-font-normal">{{ $firstName }}</span>
-                                {{ implode($exploded, ' ') }}
+                                {{ implode(' ', $exploded) }}
                             </a>
                             <!-- Buttons -->
                             <a href="{{ $featured->fetch('url') }}"
@@ -59,10 +55,10 @@
                         </div>
                         <!-- Card Body -->
                         <div class="tw-flex tw-flex-col tw-mb-6">
-                            <h3 class="tw-text-xl tw-font-bold tw-uppercase tw-mb-4">
+                            <h3 class="tw-text-xl tw-font-bold dark:tw-text-white tw-uppercase tw-mb-4">
                                 {{ $featured->fetch('data.focus_text.value') }}
                             </h3>
-                            <div class="tw-text-sm">{!! $featured->fetch('data.short_bio.value') !!}</div>
+                            <div class="tw-text-sm dark:tw-text-white">{!! $featured->fetch('data.short_bio.value') !!}</div>
                         </div>
                         <!-- Buttons -->
                         <a href="{{ $featured->fetch('url') }}"

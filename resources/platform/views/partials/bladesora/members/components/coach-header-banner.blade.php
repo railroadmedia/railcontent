@@ -1,8 +1,8 @@
-@component('bladesora::members.components.coach-header-template', [
-    'brand'=> $brandName,
+@component('partials.bladesora.members.components.coach-header-template', [
+    'brand'=> $brand,
     'backgroundImage'=> $backgroundImage,
     'vimeoVideo' => $vimeoVideo,
-    ])    
+])
     @slot('queuedScripts')
     <script type="application/javascript">
         function hideElement(elId) {
@@ -102,7 +102,7 @@
                 $focusArray;
                 $lastFocus = array_pop($focusArray);
             @endphp
-            {{ implode($focusArray, ', ') }}
+            {{ implode(', ', $focusArray) }}
             @if (count($focusArray) !== 0)
                 <span>AND</span>
             @endif
@@ -117,7 +117,7 @@
     @slot('actions')
             <div id="subscribeButton" class="{{ $isUserSubscribed ? 'tw-hidden' : '' }}">
                     <button onclick="subscribeToCoach({{ $coachId }}, '{{ $subscribeUrl }}');"
-                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brandName }} hover:tw-bg-{{ $brandName }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
+                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
                         <span>
                             <i aria-hidden="true" class="fa fa-bell tw-px-0.5"></i>
                             Subscribe</span>
@@ -125,7 +125,7 @@
                 </div>
                 <div id="unsubscribeButton" class="{{ $isUserSubscribed ? '' : 'tw-hidden' }}">
                     <button onclick="unsubscribeToCoach({{ $coachId }}, '{{ $unsubscribeUrl }}');"
-                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brandName }} hover:tw-bg-{{ $brandName }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
+                        class="lg:tw-mr-4 tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
                         <span>
                             <i aria-hidden="true" class="fa fa-check tw-px-0.5"></i>
                             <span>Subscribed</span> </span>
@@ -134,7 +134,7 @@
                 @if ($forumUrl != null)
                     <div class="lg:tw-mr-4">
                         <a href="{{ $forumUrl }}"
-                            class="tw-btn tw-btn-primary tw-transition tw-bg-{{ $brandName }} hover:tw-bg-{{ $brandName }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
+                            class="tw-btn tw-btn-primary tw-transition tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-box-border tw-px-auto tw-mb-4" style="width: 200px;">
                             <span>
                                 <i aria-hidden="true" class="fa fa-question-circle tw-px-0.5"></i>
                                 <span>Ask a question</span></span>
@@ -152,21 +152,21 @@
                     </div>
                 @endif
     @endslot
-@endcomponent 
+@endcomponent
 
         @if(empty($hideUser))
             <div class="tw-flex-col tw-items-center tw-hidden sm:tw-flex">
-                <div class="header-avatar user-avatar rounded tw-bg-black tw-pb-0 tw-w-32
+                <div class="header-avatar user-avatar tw-rounded tw-bg-black tw-pb-0 tw-w-32
                             {{ in_array($currentUser['access_level'], ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
                             {{ $brand }}
                             {{ $currentUser['access_level'] }}"
                 >
-                    <a href="{{ $profileUrl }}" class="no-decoration">
+                    <a href="{{ $profileUrl }}" class="tw-no-underline">
                         <img
-                            class="rounded inset-border"
-                            src="{{ _imgix(
+                            class="tw-rounded inset-border"
+                            src="{{ cf_img(
                                 $currentUser['avatar'],
-                                ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
+                                ["quality" => 50, "blur" => 2, "width" => 50, "height" => 50]
                             ) }}"
                             data-ix-src="{{ $currentUser['avatar'] }}"
                         >
@@ -174,7 +174,7 @@
                 </div>
 
                 @if($currentUser['access_level'] !== 'pack')
-                    <p class="body dense text-white font-bold text-center uppercase mt-1 text-white">
+                    <p class="body dense tw-text-white tw-font-bold tw-text-center tw-uppercase tw-mt-1 tw-text-white">
                         @if($currentUser['access_level'] === 'team')
                             {{ $brand }} Team
                         @elseif ($currentUser['access_level'] === 'coach')
@@ -185,11 +185,11 @@
                     </p>
 
                     @if($currentUser['access_level'] !== 'team')
-                        <p class="body dense text-white font-compressed text-center">
+                        <p class="body dense tw-text-white font-compressed tw-text-center">
                             {{ $currentUser['xp'] }} XP
                         </p>
                     @endif
-                    
+
                     @isset($userActions)
                         {{ $userActions }}
                     @endif

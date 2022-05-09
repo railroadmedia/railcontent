@@ -9,6 +9,7 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\URL;
+use Railroad\Railcontent\Services\ConfigService;
 
 abstract class BrandTestCase extends BaseTestCase
 {

@@ -1,18 +1,17 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>My Lists | Singeo</title>
+    <title>My Lists | Musora</title>
 @endsection
 
 @section('content')
-    <page-container>
 
         <div v-cloak>
 
             @include('partials.bladesora.members.partials._account-header', [
-                'userAvatar' => current_user()->getProfilePictureUrl(),
-                'userName' => current_user()->getDisplayName(),
-                'appName' => 'Singeo',
+                'userAvatar' => user()->profile_picture_url,
+                'userName' => user()->display_name,
+                'appName' => 'Musora',
                 'memberSince' => current_user()->getCreatedAt(),
             ])
 
@@ -48,5 +47,4 @@
 
         </div>
 
-    </page-container>
 @endsection
