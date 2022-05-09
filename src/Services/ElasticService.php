@@ -12,10 +12,6 @@ class ElasticService
      * @var ContentService ContentService
      */
     private $contentService;
-    /**
-     * @var UserContentProgressService
-     */
-    private $userContentProgressService;
 
     /**
      * @return \Elasticsearch\Client
@@ -83,11 +79,10 @@ class ElasticService
                             'published_on' => ['type' => 'date', "format" => "yyyy-MM-dd HH:mm:ss"],
                             'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
                             'show_in_new_feed' => ['type' => 'integer'],
-                            'all_progress_count' => ['type' => 'integer'],
-                            'last_week_progress_count' => ['type' => 'integer'],
                             'permission_ids' => ['type' => 'text'],
                             'focus' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'associated_user_id' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'popularity' => ['type' => 'integer'],
                         ],
                     ],
                 ],
@@ -351,29 +346,12 @@ class ElasticService
 
     public function syncDocument($content)
     {
-        $this->userContentProgressService = app(UserContentProgressService::class);
         $client = $this->getClient();
 
         $contentID = $content['id'];
 
-        //get progress on content
-
-        $allProgress = $this->userContentProgressService->countContentProgress($contentID);
-
-        $lastWeekProgress = $this->userContentProgressService->countContentProgress(
-            $contentID,
-            Carbon::now()
-                ->subWeek(1)
-        );
-
         $this->contentService = app(ContentService::class);
-        $elasticData = array_merge(
-            [
-                'all_progress_count' => $allProgress,
-                'last_week_progress_count' => $lastWeekProgress,
-            ],
-            $this->contentService->getElasticData($contentID)
-        );
+        $elasticData = $this->contentService->getElasticData($contentID);
 
         $paramsContent = [
             'index' => 'content',
