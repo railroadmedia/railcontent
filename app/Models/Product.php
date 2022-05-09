@@ -22,14 +22,15 @@ class Product extends Model
         return $this->belongsTo(ProductType::class, 'product_type_id');
     }
 
-    public function feature()
+    public function features()
     {
         return $this->hasMany(Feature::class);
     }
 
-    protected $casts = [
-        'features' => FlexibleCast::class
-    ];
+    public function specs()
+    {
+        return $this->hasMany(Spec::class);
+    }
 
     protected $guarded = [
         'id'
