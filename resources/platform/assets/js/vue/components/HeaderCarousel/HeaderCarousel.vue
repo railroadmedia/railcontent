@@ -19,110 +19,91 @@ const props = defineProps({
   },
 });
 const currentSlide = ref(0);
-const carouselData = ref([]);
+const slides = ref([]);
 const slideInterval = ref(null);
 
-const resetInterval = (carouselData, brand) => {
-  clearInterval(slideInterval.value);
-  slideInterval.value = false;
+const removeInterval = () => {
+  if (slideInterval.value) {
+    clearInterval(slideInterval.value);
+    slideInterval.value = false;
+  }
+};
+
+const resetInterval = () => {
+  removeInterval();
   slideInterval.value = setInterval(() => {
-    carouselData.value.forEach(carousel => {
-      if(carousel.brand === brand) {
-        if (carousel.slides.length > 0 && currentSlide.value !== carousel.slides.length - 1) {
-          currentSlide.value = currentSlide.value + 1;
-        } else {
-          currentSlide.value = 0;
-        }
-      }
-    });
-    // console.log(currentSlide.value);
+    if (slides.value.length > 0 && currentSlide.value !== slides.value.length - 1) {
+      currentSlide.value = currentSlide.value + 1;
+    } else {
+      currentSlide.value = 0;
+    }
   }, 6000);
 };
 
-const handleLeftClick = (carousel) => {
-  if (carousel.slides.length > 0 && currentSlide.value !== 0) {
+const handleLeft = () => {
+  if (slides.value.length > 0 && currentSlide.value !== 0) {
     currentSlide.value = currentSlide.value - 1;
   } else {
-    currentSlide.value = carousel.slides.length - 1;
+    currentSlide.value = slides.value.length - 1;
   }
-  resetInterval(carouselData, carousel.brand);
+  resetInterval();
 };
 
-const handleRightClick = (carousel) => {
-  if (carousel.slides.length > 0 && currentSlide.value !== carousel.slides.length - 1) {
+const handleRight = () => {
+  if (slides.value.length > 0 && currentSlide.value !== slides.value.length - 1) {
     currentSlide.value = currentSlide.value + 1;
   } else {
     currentSlide.value = 0;
   }
-  resetInterval(carouselData, carousel.brand);
+  resetInterval();
 };
 
 const handleNavClick = (index) => {
   currentSlide.value = index;
 };
 
-onBeforeMount( () => {
-  if(props.preloadedCarousel.length > 0) {
-    carouselData.value = props.preloadedCarousel;
+onBeforeMount(() => {
+  if (props.preloadedCarousel.length > 0) {
+    slides.value = props.preloadedCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
   } else {
-    carouselData.value = testCarousel;
+    slides.value = testCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
   }
 });
 
 onMounted(() => {
-  console.log(window.location)
-  resetInterval(carouselData, props.brand);
+  resetInterval();
 });
 </script>
 
 <template>
-  <div class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4">
-    <template v-for="(carousel, i) in carouselData">
-      <template v-if="carousel.brand === brand">
-        
-        <Slide
-          v-for="(slide, j) in carousel.slides"
-          :showSlide="j === currentSlide"
-          :key="j"
-          :topSubtitle="slide.topSubtitle"
-          :title="slide.title"
-          :ctaText="slide.ctaText"
-          :description="slide.description"
-          :ctaUrl="slide.ctaUrl"
-          :img="slide.img"
-        />
+  <div
+    class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4">
+    <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :key="slide.title"
+      :topSubtitle="slide.topSubtitle" :title="slide.title" :ctaText="slide.ctaText" :description="slide.description"
+      :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval" @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" />
 
-        <!-- Directional Buttons -->
-        <div :key="`carousel-${i}-buttons`" class="tw-w-full tw-absolute tw-bottom-0 tw-flex tw-justify-end tw-px-[26px] lg:tw-px-[36px] tw-py-[8px] tw-z-30">
-          
-          <button class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
-                  @click="handleLeftClick(carousel)"
-          >
-            <ChevronLeftIcon />
-          </button>
+    <!-- Directional Buttons -->
+    <div :key="`carousel-directional-buttons`"
+      class="tw-absolute tw-bottom-0 tw-right-0 tw-flex tw-justify-end tw-py-[8px] tw-z-30 tw-mr-[21px] tw-mb-[9px] md:tw-mr-[21px] md:tw-mb-[12px] lg:tw-mr-[26px] lg:tw-mb-[20px]">
 
-          <button class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[30px] tw-w-[30px] tw-m-[12px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
-                  @click="handleRightClick(carousel)"
-          >
-            <ChevronRightIcon />
-          </button>
-        </div>
+      <button
+        class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
+        @click="handleLeft()">
+        <ChevronLeftIcon />
+      </button>
 
-        <!-- Navigation Dots -->
-        <div :key="`carousel-${i}-nav`" class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] lg:tw-left-2/4 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0">
-          <button
-            v-for="(slide, j) in carousel.slides"
-            v-bind:key="slide.title"
-            @click="() => handleNavClick(j)"
-            :class="`tw-h-[6px] tw-w-[6px] tw-mx-[5px] lg:tw-mx-[15px] lg:tw-h-[10px] lg:tw-w-[10px] tw-rounded-full ${
-              j === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
-            }`"
-          />
-        </div>
+      <button
+        class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
+        @click="handleRight()">
+        <ChevronRightIcon />
+      </button>
+    </div>
 
-      </template>
-    </template>
-
-
+    <!-- Navigation Dots -->
+    <div :key="`carousel-nav`"
+      class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[15px] lg:tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] lg:tw-left-2/4 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0">
+      <button v-for="(slide, i) in slides" v-bind:key="slide.title" @click="() => handleNavClick(i)" :class="`tw-h-[6px] tw-w-[6px] tw-mr-[10px] lg:tw-mx-[15px] lg:tw-h-[10px] lg:tw-w-[10px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
+      }`" />
+    </div>
   </div>
 </template>
