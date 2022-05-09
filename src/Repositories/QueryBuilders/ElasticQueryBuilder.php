@@ -299,80 +299,46 @@ class ElasticQueryBuilder
                     'content_id' => 'asc',
                 ];
                 break;
-
+            case '-id':
+                $this->sort[] = [
+                    'content_id' => 'desc',
+                ];
+                break;
             case 'newest':
                 $this->sort[] = [
                     'published_on' => 'desc',
                 ];
                 break;
-
             case '-created_on':
                 $this->sort[] = [
                     'created_on' => 'desc',
                 ];
                 break;
-
             case 'created_on':
                 $this->sort[] = [
                     'created_on' => 'asc',
                 ];
                 break;
-
             case '-published_on':
                 $this->sort[] = [
                     'published_on' => 'desc',
                 ];
                 break;
-
             case 'published_on':
                 $this->sort[] = [
                     'published_on' => 'asc',
                 ];
                 break;
-
             case 'oldest':
                 $this->sort[] = [
                     'published_on' => 'asc',
                 ];
                 break;
-
             case '-popularity':
                 $this->sort[] = [
-                    'all_progress_count' => 'desc',
+                    'popularity' => 'desc',
                 ];
                 break;
-
-            case 'trending':
-                $this->sort[] = [
-                    'last_week_progress_count' => 'desc',
-                ];
-                break;
-
-            case 'relevance':
-
-                $userDifficulty = self::$skillLevel;
-                $userTopics = self::$userTopics;
-
-                if ($userDifficulty) {
-                    $this->filters[] = [
-                        'filter' => ['terms' => ['difficulty.raw' => [$userDifficulty, 'All Skill Levels']]],
-                        'weight' => 20,
-                    ];
-                }
-
-                if ($userTopics) {
-                    $this->filters[] = [
-                        'filter' => ['terms' => ['topic' => $userTopics]],
-                        'weight' => 20,
-                    ];
-                }
-
-                $this->sort[] = [
-                    '_score' => 'desc',
-                ];
-
-                break;
-
             case 'slug':
                 $this->sort[] = [
                     'title.raw' => 'asc',
@@ -388,7 +354,6 @@ class ElasticQueryBuilder
                     'title.raw' => 'asc',
                 ];
                 break;
-
             case 'score':
                 $this->sort[] = [
                     '_score' => 'desc',
@@ -405,7 +370,7 @@ class ElasticQueryBuilder
      */
     public function setResultRelevanceBasedOnConfigSettings($term)
     {
-        if(!$term){
+        if (!$term) {
             return $this;
         }
 
