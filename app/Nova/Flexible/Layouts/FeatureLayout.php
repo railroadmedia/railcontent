@@ -19,7 +19,7 @@ class FeatureLayout extends Layout
      *
      * @var string
      */
-    protected $title = 'Feature';
+    protected $title = 'Feature/Topic';
 
     /**
      * Get the fields displayed by the layout.
