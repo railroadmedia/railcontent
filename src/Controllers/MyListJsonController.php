@@ -100,14 +100,12 @@ class MyListJsonController extends Controller
 
         $userId = auth()->id();
 
-        $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => $userId], [
-            'user_id' => $userId,
-            'type' => 'primary-playlist',
-            'brand' => $request->get('brand'),
-            'created_at' => Carbon::now()->toDateTimeString()
-        ]);
+        $userPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist',$request->get('brand'));
 
-        $this->userPlaylistsService->removeContentFromUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
+        if(!empty($userPrimaryPlaylist)){
+            $userPrimaryPlaylistId = Arr::first($userPrimaryPlaylist)['id'];
+            $this->userPlaylistsService->removeContentFromUserPlaylist($userPrimaryPlaylistId, $request->get('content_id'));
+        }
 
         return response()->json(['success']);
     }
