@@ -1741,6 +1741,15 @@ class ContentService
             $youtubeVideoId = $video ? $video['youtube_video_id'] : '';
         }
 
+        $permissions = $this->contentPermissionRepository->query()
+            ->select('permission_id')
+            ->where('content_id', $content['id'])
+            ->orWhere('content_type', $content['type'])
+            ->orderBy('id', 'asc')
+            ->get();
+
+
+
         $document = [
             'content_id' => $content['id'],
             'title' => utf8_encode($content['title'] ?? ''),
@@ -1765,7 +1774,9 @@ class ContentService
             'is_coach_of_the_month' => $content['is_coach_of_the_month'] ?? 0,
             'is_featured' => $content['is_featured'] ?? 0,
             'associated_user_id' => $content['associated_user_id'] ?? null,
-            'popularity' => $content['popularity'] ?? 0
+            'popularity' => $content['popularity'] ?? 0,
+            'permission_ids' => $permissions->pluck('permission_id')
+                ->toArray(),
         ];
 
         return $document;
@@ -1779,21 +1790,7 @@ class ContentService
      */
     public function getContentForElastic($id)
     {
-        $hash = 'elastic_contents_by_id_'.CacheHelper::getKey($id);
-
-        if (isset($this->idContentCache[$hash])) {
-            return $this->idContentCache[$hash];
-        }
-
-        $results = CacheHelper::getCachedResultsForKey($hash);
-
-        if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getElasticContentById($id), [$id]);
-        }
-
-        $this->idContentCache[$hash] = Decorator::decorate($results, 'content');
-
-        return $this->idContentCache[$hash];
+        return $this->contentRepository->getElasticContentById($id);
     }
 
 }

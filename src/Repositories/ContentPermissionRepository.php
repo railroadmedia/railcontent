@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -85,6 +86,8 @@ class ContentPermissionRepository extends RepositoryBase
                 'permission_id' => $permissionId
             ]
         );
+
+        event(new ElasticDataShouldUpdate($contentId));
 
         return $contentPermissionId;
     }

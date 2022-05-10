@@ -582,6 +582,7 @@ class ContentRepository extends RepositoryBase
                 )
                 ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress.'.state', $state)
+                ->groupBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
                 ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
                 ->limit($limit)
                 ->skip($skip)
@@ -1933,7 +1934,6 @@ class ContentRepository extends RepositoryBase
         $contentRows =
             $this->query()
                 ->selectPrimaryColumns()
-                ->restrictByUserAccess()
                 ->where([ConfigService::$tableContent.'.id' => $id])
                 ->getToArray();
 

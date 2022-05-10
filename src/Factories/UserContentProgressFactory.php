@@ -14,8 +14,6 @@ class UserContentProgressFactory extends UserContentProgressService
      */
     protected $faker;
 
-    protected $elasticService;
-
     protected $contentService;
 
     /**
@@ -52,7 +50,6 @@ class UserContentProgressFactory extends UserContentProgressService
     public function completeContent($contentId = null, $userId = null)
     {
         $this->faker = app(Generator::class);
-        $this->elasticService = app(ElasticService::class);
 
         $parameters =
             func_get_args() + [
@@ -61,9 +58,6 @@ class UserContentProgressFactory extends UserContentProgressService
             ];
 
         $userContentId = parent::completeContent(...$parameters);
-
-        $content = $this->contentService->getById($parameters[0]);
-        $this->elasticService->syncDocument($content);
 
         return $userContentId;
     }
@@ -77,7 +71,6 @@ class UserContentProgressFactory extends UserContentProgressService
     public function saveContentProgress($contentId = null, $progress = null, $userId = null, $overwriteComplete = false)
     {
         $this->faker = app(Generator::class);
-        $this->elasticService = app(ElasticService::class);
 
         $parameters =
             func_get_args() + [
@@ -88,8 +81,6 @@ class UserContentProgressFactory extends UserContentProgressService
 
         $userContentId = parent::saveContentProgress(...$parameters);
 
-        $content = $this->contentService->getById($parameters[0]);
-        $this->elasticService->syncDocument($content);
 
         return $userContentId;
     }

@@ -62,7 +62,7 @@ class ContentFactory extends ContentService
         $content = (parent::create(...$parameters));
 
 
-        $this->elasticService->syncDocument($content);
+       // $this->elasticService->syncDocument($content['id']);
 
         return $content;
     }

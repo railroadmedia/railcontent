@@ -38,9 +38,9 @@ class ContentContentFieldFactory extends ContentFieldService
 
         $content = parent::createOrUpdate($data);
 
-        $this->elasticService->syncDocument($content);
-
-        sleep(1);
+//        $this->elasticService->syncDocument($content['id']);
+//
+//        sleep(1);
 
         return $data;
     }

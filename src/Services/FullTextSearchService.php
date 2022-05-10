@@ -101,24 +101,6 @@ class FullTextSearchService
                 $permissionIds = array_pluck($userPermissions,'permission_id');
             }
 
-//            switch (config('railcontent.brand')) {
-//                case 'drumeo':
-//                    ElasticQueryBuilder::$skillLevel =
-//                        $this->userProvider->getCurrentUser()
-//                            ->getDrumsSkillLevel();
-//                    break;
-//                case 'pianote':
-//                    ElasticQueryBuilder::$skillLevel =
-//                        $this->userProvider->getCurrentUser()
-//                            ->getPianoSkillLevel();
-//                    break;
-//                case 'guitareo':
-//                    ElasticQueryBuilder::$skillLevel =
-//                        $this->userProvider->getCurrentUser()
-//                            ->getGuitarSkillLevel();
-//                    break;
-//            }
-
             ElasticQueryBuilder::$userPermissions = $permissionIds;
 
             $elasticData = $this->elasticService->search(

@@ -38,6 +38,7 @@ use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;

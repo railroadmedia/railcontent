@@ -344,14 +344,13 @@ class ElasticService
             ->delete(['index' => $indexName]);
     }
 
-    public function syncDocument($content)
+    public function syncDocument($contentId)
     {
         $client = $this->getClient();
 
-        $contentID = $content['id'];
-
         $this->contentService = app(ContentService::class);
-        $elasticData = $this->contentService->getElasticData($contentID);
+        $elasticData = $this->contentService->getElasticData($contentId);
+
 
         $paramsContent = [
             'index' => 'content',
@@ -371,16 +370,40 @@ class ElasticService
                 'body' => [
                     'query' => [
                         'term' => [
-                            'content_id' => "$contentID",
+                            'content_id' => $contentId,
                         ],
                     ],
                 ],
             ];
 
             $documents = $client->search($paramsSearch);
-
+//            if($elasticData['title'] != '') {
+//                dd($client->search([
+//                                       'index' => 'content',
+//                                       'body' => [
+//                                           'query' => [
+//                                               'term' => [
+//                                                   'content_id' => 1,
+//                                               ],
+//                                           ],
+//                                       ],
+//                                   ]));
+//            }
+//            if(!empty($elasticData['permission_ids'])){
+//                dd($client->search([
+//                                       'index' => 'content',
+//                                       'body' => [
+//                                           'query' => [
+//                                               'term' => [
+//                                                   'content_id' => $contentId,
+//                                               ],
+//                                           ],
+//                                       ],
+//                                   ]));
+//            }
             //delete document if exists
             foreach ($documents['hits']['hits'] as $elData) {
+//dd($contentId);
                 $paramsDelete = [
                     'index' => 'content',
                     'id' => $elData['_id'],
@@ -391,6 +414,7 @@ class ElasticService
             }
 
             $client->index($paramsContent);
+
         } catch (Exception $exception) {
             error_log('Can not delete elasticsearch index '.print_r($exception->getMessage(), true));
         }

@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Listeners;
 
-use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ElasticService;
 
@@ -23,11 +23,10 @@ class SyncElasticsearchListener
         $this->elasticService = $elasticService;
     }
 
-    public function handleSync(Event $event)
+    public function handleSync(ElasticDataShouldUpdate $event)
     {
         if (config('railcontent.use_elastic_search')) {
-            $content = $this->contentService->getById($event->contentId);
-            $this->elasticService->syncDocument($content);
+            $this->elasticService->syncDocument($event->contentId);
         }
     }
 }
