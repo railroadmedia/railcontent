@@ -148,6 +148,11 @@ EOT;
         $this->info('Total time::  '.(microtime(true) - $startTime));
         $this->info('Memory usage :: '.$this->formatmem(memory_get_usage() - $memoryStart));
 
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(config('railcontent.table_prefix') . 'content', function (Blueprint $table) {
+                $table->dropColumn('updated_id');
+            });
+
         return true;
     }
 
