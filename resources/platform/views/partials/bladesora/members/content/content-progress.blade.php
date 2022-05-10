@@ -1,6 +1,6 @@
 <div class="tw-container tw-mx-auto tw-px-4 bg-{{ $themeColor }}">
-    <div class="content-progress flex flex-row flex-wrap pv-3">
-        
+    <div class="content-progress flex flex-row flex-wrap pv-2">
+
         @if(!empty($labelText))
             <div class="flex flex-column left-column align-v-center">
                 <h3 class="display text-white nowrap">
