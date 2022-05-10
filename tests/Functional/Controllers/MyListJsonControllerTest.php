@@ -3,9 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -17,19 +15,8 @@ class MyListJsonControllerTest extends RailcontentTestCase
      * @var
      */
     protected $userId;
-
     /** @var  ContentFactory */
     protected $contentFactory;
-
-    /**
-     * @var ContentHierarchyFactory
-     */
-    protected $contentHierarchyFactory;
-
-    /**
-     * @var ContentContentFieldFactory
-     */
-    protected $contentFieldFactory;
 
     protected function setUp()
     : void
@@ -37,9 +24,6 @@ class MyListJsonControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
-
         $this->userId = $this->createAndLogInNewUser();
     }
 
@@ -70,32 +54,38 @@ class MyListJsonControllerTest extends RailcontentTestCase
 
     public function test_remove_from_my_list()
     {
-        $myList = $this->contentFactory->create(
-            'primary-playlist',
-            'user-playlist',
-            ContentService::STATUS_PUBLISHED,
-            null,
-            config('railcontent.brand'),
-            $this->userId
-        );
-
-        $content1 = $this->contentFactory->create(
+        $content = $this->contentFactory->create(
             $this->faker->word,
-            'course',
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
 
-        $content2 = $this->contentFactory->create(
-            $this->faker->word,
-            'course',
-            ContentService::STATUS_PUBLISHED
-        );
+        $myList = [
+            'brand' => config('railcontent.brand'),
+            'type' => 'primary-playlist',
+            'user_id' => $this->userId,
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
 
-        $this->contentHierarchyFactory->create($myList['id'], $content1['id']);
-        $this->contentHierarchyFactory->create($myList['id'], $content2['id']);
+        $myListId =
+            $this->query()
+                ->table(ConfigService::$tablePlaylists)
+                ->insertGetId($myList);
+
+        $userPlaylistContent1 = [
+            'content_id' => $content['id'],
+            'user_playlist_id' => $myListId,
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tablePlaylistContents)
+            ->insertGetId($userPlaylistContent1);
 
         $response = $this->call('PUT', 'api/railcontent/remove-from-my-list', [
-            'content_id' => $content1['id'],
+            'content_id' => $content['id'],
         ]);
 
         $this->assertEquals(200, $response->status());
@@ -105,41 +95,61 @@ class MyListJsonControllerTest extends RailcontentTestCase
                 ->json()[0]
         );
 
-        $this->assertDatabaseMissing(ConfigService::$tableContentHierarchy, [
-            'child_id' => $content1['id'],
+        $this->assertDatabaseMissing(ConfigService::$tablePlaylistContents, [
+            'content_id' => $content['id'],
+            'user_playlist_id' => $myListId,
         ]);
     }
 
     public function test_my_list()
     {
-        $myList = $this->contentFactory->create(
-            'primary-playlist',
-            'user-playlist',
-            ContentService::STATUS_PUBLISHED,
-            null,
-            config('railcontent.brand'),
-            $this->userId
-        );
-
         $content1 = $this->contentFactory->create(
             $this->faker->word,
-            'course',
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
-
         $content2 = $this->contentFactory->create(
             $this->faker->word,
-            'course',
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
         $content3 = $this->contentFactory->create(
             $this->faker->word,
-            'course',
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
 
-        $this->contentHierarchyFactory->create($myList['id'], $content1['id']);
-        $this->contentHierarchyFactory->create($myList['id'], $content2['id']);
+        $myList = [
+            'brand' => config('railcontent.brand'),
+            'type' => 'primary-playlist',
+            'user_id' => $this->userId,
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+        $myListId =
+            $this->query()
+                ->table(ConfigService::$tablePlaylists)
+                ->insertGetId($myList);
+
+        $userPlaylistContent1 = [
+            'content_id' => $content1['id'],
+            'user_playlist_id' => $myListId,
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+        $this->query()
+            ->table(ConfigService::$tablePlaylistContents)
+            ->insertGetId($userPlaylistContent1);
+
+        $userPlaylistContent2 = [
+            'content_id' => $content2['id'],
+            'user_playlist_id' => $myListId,
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+        $this->query()
+            ->table(ConfigService::$tablePlaylistContents)
+            ->insertGetId($userPlaylistContent2);
 
         $response = $this->call(
             'GET',
@@ -165,7 +175,6 @@ class MyListJsonControllerTest extends RailcontentTestCase
                 Carbon::now()
                     ->subMinute($i)
             );
-            $difficulty[$i] = $this->contentFieldFactory->create($courses[$i]['id'], 'difficulty', $i);
         }
 
         $userContent = [
