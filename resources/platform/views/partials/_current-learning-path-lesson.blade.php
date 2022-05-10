@@ -5,8 +5,8 @@
                 @if(!empty($showLogo))
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}">
                         <img
-                            src="{{ imgix('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
-                            ["q" => 80, "w" => 200]) }}"
+                            src="{{ cf_img('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
+                            ["quality" => 80, "width" => 200]) }}"
                             alt="The {{ $brand }} Method Logo"
                             class="invert-fill"
                             style="max-width:225px;width:200px;height:auto; padding-left: 1px;"
@@ -38,7 +38,7 @@
                         data-user-id="{{ auth()->id() }}"
                         :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     >
-                        @include('bladesora::members.skeletons.list-item', [
+                        @include('partials.bladesora.members.skeletons.list-item', [
                             "overview" => true,
                             "showNumbers" => false,
                             "thumbnailType" => 'widescreen'

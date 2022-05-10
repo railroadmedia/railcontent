@@ -232,30 +232,31 @@ return [
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
             \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
-//            \App\Decorators\MultiPartParentDecorator::class, // this one
-//            \App\Decorators\ContentLikesDecorator::class, // this one
-//            \App\Decorators\ResourceDecorator::class, // this one
-//            \App\Decorators\ContentExperienceDecorator::class, // this one
-//            \App\Decorators\ContentUserWatchPositionDecorator::class, // this one
-//            \App\Decorators\PackBundleLessonDecorator::class,
-//            \App\Decorators\PackBundleDecorator::class,
-//            \App\Decorators\PackDecorator::class,
-//            \App\Decorators\InstructorDecorator::class,
-//            \App\Decorators\PianoteMethodLearningPathDecorator::class,
-//            \App\Decorators\LearningPathCourseDecorator::class,
-//            \App\Decorators\LearningPathLessonDecorator::class,
-//            \App\Decorators\NewDecorator::class,
-//            \App\Decorators\LiveEventDecorator::class
+            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
+            \App\Decorators\Content\ContentLikesDecorator::class, // this one
+            \App\Decorators\Content\ResourceDecorator::class, // this one
+            \App\Decorators\Content\ContentExperienceDecorator::class,
+//            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
+            \App\Decorators\Content\PackBundleLessonDecorator::class,
+            \App\Decorators\Content\PackBundleDecorator::class,
+            \App\Decorators\Content\PackDecorator::class,
+            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
+            \App\Decorators\Content\LearningPathCourseDecorator::class,
+            \App\Decorators\Content\LearningPathLessonDecorator::class,
+            \App\Decorators\Content\NewDecorator::class,
+            \App\Decorators\Content\LiveEventDecorator::class
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
+            \App\Decorators\Comments\CommentUserDecorator::class,
+            \App\Decorators\Comments\CommentLikesUserDecorator::class,
         ],
         'comment_likes' => [
-
+            \App\Decorators\Content\ContentCommentLikesUserDecorator::class,
         ],
         'content_likes' => [
-
+            \App\Decorators\Content\ContentLikesUserDecorator::class,
         ],
     ],
 
