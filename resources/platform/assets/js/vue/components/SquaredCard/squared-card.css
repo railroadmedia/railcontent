@@ -9,19 +9,9 @@
     transition: all 0.5s ease;
 }
 
-.SquaredCard__overlay--drumeo {
-    background: linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55)),
-        linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));
-}
-
 .SquaredCard__overlay--drumeo:hover {
     background: linear-gradient(197.77deg, rgba(11, 118, 219, 0.208) 8.89%, rgba(11, 118, 219, 0.632) 100.9%),
         linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));
-}
-
-.SquaredCard__overlay--pianote {
-    background: linear-gradient(0deg, rgba(0, 32, 57, 0.46), rgba(0, 32, 57, 0.46)),
-        linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));
 }
 
 .SquaredCard__overlay--pianote:hover {
@@ -29,21 +19,10 @@
         linear-gradient(0deg, rgba(0, 32, 57, 0.55), rgba(0, 32, 57, 0.55));
 }
 
-.SquaredCard__overlay--guitareo {
-    background: linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45)),
-        linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));
-}
-
 .SquaredCard__overlay--guitareo:hover {
     background: linear-gradient(183.73deg, rgba(0, 201, 172, 0) -60.95%, rgba(0, 201, 172, 0.33) 108.67%),
         linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
 }
-
-.SquaredCard__overlay--singeo {
-    background: linear-gradient(0deg, rgba(131, 0, 233, 0.1), rgba(131, 0, 233, 0.1)),
-        linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
-}
-
 .SquaredCard__overlay--singeo:hover {
     background: linear-gradient(
             177.71deg,
