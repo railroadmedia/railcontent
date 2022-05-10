@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\UserController;
+use Modules\UserManagementSystem\Controllers\PasswordController;
+use Modules\UserManagementSystem\Controllers\EmailChangeController;
+
 
 Route::group(
     ['prefix' => config('user_management_system.route_prefix'),],
@@ -38,6 +41,26 @@ Route::group(
             UserController::class . '@index'
         )
             ->name('user_management_system.user.index');
+
+        Route::patch(
+            'password/update',
+            PasswordController::class . '@update'
+        )
+            ->name('user_management_system.password.update');
+
+        Route::post(
+            'email-change/request',
+            EmailChangeController::class . '@request'
+        )
+            ->name('user_management_system.email-change.request');
+
+        Route::get(
+            'email-change/confirm',
+            EmailChangeController::class . '@confirm'
+        )
+            ->name('user_management_system.email-change.confirm');
+
+
     }
 );
 
