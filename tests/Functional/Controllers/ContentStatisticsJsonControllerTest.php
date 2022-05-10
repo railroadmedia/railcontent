@@ -400,6 +400,8 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
                 'state' => $state,
                 'progress_percent' => $progressPercent,
                 'updated_on' => $updatedOn,
+                'started_on' => $updatedOn,
+                'completed_on' => $updatedOn
             ]
         );
     }

@@ -551,22 +551,22 @@ EOT;
     {
         $query =
             $this->query()
-                ->from(ConfigService::$tableContent)
+                ->from(ConfigService::$tablePlaylistContents)
                 ->leftJoin(
-                    ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tablePlaylists,
+                    ConfigService::$tablePlaylistContents . '.user_playlist_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tablePlaylists . '.id'
                 )
-                ->where(ConfigService::$tableContent . '.type', 'user-playlist')
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $id);
+                ->where(ConfigService::$tablePlaylists . '.type', 'primary-playlist')
+                ->where(ConfigService::$tablePlaylistContents . '.content_id', $id);
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableContentHierarchy . '.created_on', '>=', $smallDate);
+            $query->where(ConfigService::$tablePlaylistContents . '.created_at', '>=', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableContentHierarchy . '.created_on', '<=', $bigDate);
+            $query->where(ConfigService::$tablePlaylistContents . '.created_at', '<=', $bigDate);
         }
 
         return $query->count();
