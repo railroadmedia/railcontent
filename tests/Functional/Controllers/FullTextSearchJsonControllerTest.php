@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -76,8 +77,9 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                     ->hour($i)
                     ->toDateTimeString()
             );
-
+            sleep(1);
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field '.$i);
+            sleep(1);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'name');
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
@@ -88,19 +90,19 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = $content[$i]->getArrayCopy();
         }
 
-        //  $this->artisan('command:createSearchIndexesForContents');
-
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
             'limit' => $limit,
         ]);
 
         $results = $response->decodeResponseJson();
+
         $espectedResults = array_splice($content, 0, $limit);
 
         $this->assertEquals(200, $response->getStatusCode());
-        //$this->assertArraySubset($espectedResults, $results['data']);
-        $this->assertEquals(6, $results['meta']['totalResults']);
+        foreach(Arr::pluck($results['data'], 'id') as $id){
+            $this->assertTrue(in_array($id, Arr::pluck($content, 'id')));
+        }
     }
 
     public function test_search_sort_by_relevance()

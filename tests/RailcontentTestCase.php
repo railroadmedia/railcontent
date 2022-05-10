@@ -81,6 +81,8 @@ class RailcontentTestCase extends BaseTestCase
         $this->router = $this->app->make(Router::class);
 
         $this->elasticService = $this->app->make(ElasticService::class);
+        $this->elasticService->deleteIndex(config('railcontent.elastic_index_name','content'));
+
         $this->elasticService->createContentIndex();
 
         RepositoryBase::$connectionMask = null;
@@ -282,10 +284,6 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown(): void
     {
-        $this->elasticService->deleteIndex(config('railcontent.elastic_index_name','content'));
-
-        $this->elasticService->createContentIndex();
-
         parent::tearDown();
     }
 

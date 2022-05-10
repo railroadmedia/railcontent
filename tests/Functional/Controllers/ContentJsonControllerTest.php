@@ -1541,9 +1541,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ->table(ConfigService::$tableContent)
                 ->insertGetId($content11);
 
-        $content = $this->classBeingTested->getById($content1);
-
-        $this->elasticService->syncDocument($content);
+        $this->elasticService->syncDocument($content1);
 
         $content12 = [
             'slug' => ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
@@ -1562,9 +1560,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->query()
                 ->table(ConfigService::$tableContent)
                 ->insertGetId($content12);
-        $content2 = $this->classBeingTested->getById($content122);
 
-        $this->elasticService->syncDocument($content2);
+        $this->elasticService->syncDocument($content122);
 
         $content13 = [
             'slug' => ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
@@ -1582,9 +1579,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->query()
                 ->table(ConfigService::$tableContent)
                 ->insertGetId($content13);
-        $content3 = $this->classBeingTested->getById($content113);
 
-        $this->elasticService->syncDocument($content3);
+        $this->elasticService->syncDocument($content113);
 
         sleep(1);
 
