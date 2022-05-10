@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
-use MikeMcLin\WpPassword\Facades\WpPassword;
+
+//use MikeMcLin\WpPassword\Facades\WpPassword;
 use Modules\UserManagementSystem\Models\User;
 
 class PasswordController extends Controller
@@ -82,7 +83,7 @@ class PasswordController extends Controller
 
         if (
             !$this->hasher->check($request->get('current_password'), $user->password)
-            && !WpPassword::check(trim($request->get('current_password')), $user->password)
+//            && !WpPassword::check(trim($request->get('current_password')), $user->password)
         ) {
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
