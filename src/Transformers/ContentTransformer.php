@@ -54,6 +54,7 @@ class ContentTransformer
                 'language' => $data['language'] ?? null,
                 'parent_id' => $data['parent_id'] ?? null,
                 'child_id' => $data['child_id'] ?? null,
+                'popularity' => $data['popularity'] ?? 0,
             ];
 
             $results = $content;
@@ -94,6 +95,7 @@ class ContentTransformer
                         'language' => $row['language'] ?? null,
                         'parent_id' => $row['parent_id'] ?? null,
                         'child_id' => $row['child_id'] ?? null,
+                        'popularity' => $row['popularity'] ?? 0,
                     ];
 
                     $results[] = $content;

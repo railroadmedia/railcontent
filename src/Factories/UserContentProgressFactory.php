@@ -40,7 +40,6 @@ class UserContentProgressFactory extends UserContentProgressService
         $userContentId = parent::startContent(...$parameters);
 
         $content = $this->contentService->getById($parameters[0]);
-        $this->elasticService->syncDocument($content);
 
         return $userContentId;
     }

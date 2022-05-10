@@ -2,13 +2,11 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Config;
 use Carbon\Carbon;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\UserContentProgressFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -33,11 +31,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
      */
     protected $datumFactory;
 
-    /**
-     * @var UserContentProgressFactory
-     */
-    protected $userContentProgressFactory;
-
     protected function setUp()
     : void
     {
@@ -48,7 +41,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
         $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
     public function test_no_results()
@@ -66,110 +58,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $response->decodeResponseJson()
                 ->json('meta')['totalResults']
         );
-    }
-
-    public function test_sort_contents_by_popularity()
-    {
-        $this->createAndLogInNewUser();
-
-        $content1 = $this->contentFactory->create(
-            $this->faker->word,
-            'course',
-            'published',
-            null,
-            null,
-            null,
-            Carbon::now()
-                ->subDays(20)
-        );
-        $content2 = $this->contentFactory->create(
-            $this->faker->word,
-            'course',
-            'published',
-            null,
-            null,
-            null,
-            Carbon::now()->subDays(3)
-        );
-
-        $content3 = $this->contentFactory->create(
-            $this->faker->word,
-            'course',
-            'published',
-            null,
-            null,
-            null,
-            Carbon::now()->subDays(5)
-        );
-
-        $userContent1 = [
-            'content_id' => $content1['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
-
-        $userContent2 = [
-            'content_id' => $content2['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_COMPLETED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
-
-        $userContent3 = [
-            'content_id' => $content2['id'],
-            'user_id' => rand(),
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateString(),
-        ];
-
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent1);
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent2);
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent3);
-
-        $this->artisan('CalculateContentPopularity');
-
-        //need to wait until popularity is calculated and elasticsearch documents are sync
-        sleep(60);
-
-        $response = $this->call('GET', 'railcontent/content', [
-            'included_types' => ['course'],
-            'statuses' => ['published'],
-            'sort' => '-popularity',
-            'brand' => config('railcontent.brand'),
-            'limit' => 10,
-        ]);
-
-        $this->assertEquals(
-            3,
-            $response->decodeResponseJson()
-                ->json('meta')['totalResults']
-        );
-
-        $firstPopularity =
-            $response->decodeResponseJson()
-                ->json('data')[0]['popularity'];
-        $secondPopularity =
-            $response->decodeResponseJson()
-                ->json('data')[1]['popularity'];
-        $thirdPopularity =
-            $response->decodeResponseJson()
-                ->json('data')[2]['popularity'];
-
-        $this->assertTrue($firstPopularity > $secondPopularity);
-        $this->assertTrue($secondPopularity > $thirdPopularity);
     }
 
     public function test_search_results_paginated()
@@ -457,21 +345,21 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 ->toDateTimeString()
         );
 
-//        for ($i = 0; $i < 6; $i++) {
-//            $content[$i] = $this->contentFactory->create(
-//                'slug',
-//                $this->faker->randomElement(config('railcontent.showTypes')),
-//                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
-//                ConfigService::$defaultLanguage,
-//                ConfigService::$brand,
-//                rand(),
-//                Carbon::yesterday()
-//                    ->hour($i)
-//                    ->toDateTimeString()
-//            );
-//
-//            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
-//        }
+        //        for ($i = 0; $i < 6; $i++) {
+        //            $content[$i] = $this->contentFactory->create(
+        //                'slug',
+        //                $this->faker->randomElement(config('railcontent.showTypes')),
+        //                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+        //                ConfigService::$defaultLanguage,
+        //                ConfigService::$brand,
+        //                rand(),
+        //                Carbon::yesterday()
+        //                    ->hour($i)
+        //                    ->toDateTimeString()
+        //            );
+        //
+        //            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+        //        }
 
         $this->artisan('command:createSearchIndexesForContents');
 
