@@ -607,7 +607,7 @@ EOT;
                         ConfigService::$tableContentStatistics . '.content_type',
                         ConfigService::$tableContentStatistics . '.content_published_on',
                         ConfigService::$tableContent . '.brand as content_brand',
-                        ConfigService::$tableContentFields . '.value as content_title',
+                        ConfigService::$tableContent . '.title as content_title',
                         $this->databaseManager->raw(
                             'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
                         ),
@@ -625,17 +625,6 @@ EOT;
                         ),
                     ]
                 )
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    function (JoinClause $joinClause) {
-                        $joinClause->on(
-                            ConfigService::$tableContentStatistics . '.content_id',
-                            '=',
-                            ConfigService::$tableContentFields . '.content_id'
-                        )
-                            ->where(ConfigService::$tableContentFields . '.key', 'title');
-                    }
-                )
                 ->join(
                     ConfigService::$tableContent,
                     ConfigService::$tableContent . '.id',
@@ -646,7 +635,6 @@ EOT;
                     ConfigService::$tableContentStatistics . '.content_id',
                     ConfigService::$tableContentStatistics . '.content_type',
                     ConfigService::$tableContentStatistics . '.content_published_on',
-                    ConfigService::$tableContentFields . '.value',
                 ]);
 
         if ($smallDate) {
