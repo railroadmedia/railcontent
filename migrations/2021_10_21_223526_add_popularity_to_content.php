@@ -13,7 +13,6 @@ class AddPopularityToContent extends Migration
      */
     public function up()
     {
-        if (config()->get('database.default') != 'testbench') {
             Schema::connection(ConfigService::$databaseConnectionName)->table(
                 ConfigService::$tableContent,
                 function ($table) {
@@ -24,7 +23,6 @@ class AddPopularityToContent extends Migration
                     $table->integer('popularity')->after('total_xp')->nullable()->index();
                 }
             );
-        }
     }
 
     /**
@@ -34,7 +32,6 @@ class AddPopularityToContent extends Migration
      */
     public function down()
     {
-        if (config()->get('database.default') != 'testbench') {
 
             Schema::connection(ConfigService::$databaseConnectionName)->table(
                 ConfigService::$tableContent,
@@ -46,6 +43,5 @@ class AddPopularityToContent extends Migration
                     $table->dropColumn('popularity');
                 }
             );
-        }
     }
 }
