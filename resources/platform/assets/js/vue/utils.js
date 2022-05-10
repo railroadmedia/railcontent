@@ -18,7 +18,7 @@ const getResultValue = (el, searchKey, searchObj) => {
 };
 
 
-export const parseCoachesCardData = (result) => {
+export const transformCoachesCardData = (result) => {
     return result.data.data.map((coach) => {
         const img = getResultValue(coach, 'coach_card_image', 'data');
         const focusText = getResultValue(coach, 'focus_text', 'data');

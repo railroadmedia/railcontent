@@ -7,8 +7,7 @@ import CoachCarousel from "../../CoachCarousel/CoachCarousel.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import { SearchIcon } from "@heroicons/vue/solid";
 import { useDebounceFn } from "../../../hooks/debounce/useDebounce";
-import { searchCoaches, parseCoachesCardData } from "../../../utils";
-
+import { searchCoaches, transformCoachesCardData } from "../../../utils";
 import { ref, onMounted } from "vue";
 
 const props = defineProps({
@@ -29,7 +28,7 @@ const coachResults = ref([]);
 
 const handleCoachSearch = (value) => {
   searchCoaches(props.brand, value).then((result) => {
-    coachResults.value = parseCoachesCardData(result);
+    coachResults.value = transformCoachesCardData(result);
   });
 };
 
