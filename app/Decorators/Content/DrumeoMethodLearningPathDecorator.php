@@ -47,7 +47,6 @@ class DrumeoMethodLearningPathDecorator extends TypeDecoratorBase
             ->groupBy('parent_id');
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $contentsOfType[$contentIndex]['url'] = url()->route('members.learning-path.show', [$content['slug']]);
             $contentsOfType[$contentIndex]['levels'] = $lessons[$content['id']] ?? [];
             $contentsOfType[$contentIndex]['xp'] = $content->fetch(
                 'fields.xp',
