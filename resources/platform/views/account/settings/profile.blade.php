@@ -16,7 +16,7 @@
         <h1 class="heading">Profile</h1>
     </div>
     <div id="editForm" class="tw-flex tw-flex-row">
-        <div class="tw-flex tw-flex-column tw-grow">
+        <div class="tw-flex tw-flex-col tw-grow">
             <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
                 @include('partials.bladesora.members.account.settings.profile.display-name-form', [
                     'brand' => '{{ $brand }}',

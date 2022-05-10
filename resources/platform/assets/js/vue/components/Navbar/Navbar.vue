@@ -23,10 +23,6 @@ const props = defineProps({
   },
   accountUrl: {
     type: String
-  },
-  withReferralButton: {
-    type: Boolean,
-    default: false
   }
 });
 const emit = defineEmits([
@@ -116,21 +112,7 @@ const toggleSearchModal = (val) => {
         :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="emit('onColorModeToggle')"
       />
-
-      <!-- Referral Button -->
-      <div v-if="withReferralButton" class="pa-1 noselect tw-grow-0 tw-bg-inherit tw-ml-2 tw-px-0" 
-            style="z-index: 10;">
-        <a href="/referral/invite-a-friend" 
-          class="tw-btn-primary tw-text-base tw-mb-0 tw-px-3 md:tw-px-4 tw-h-[42px] tw-w-[42px] md:tw-w-auto tw-tracking-wide tw-btn-small"
-          :class="`tw-bg-${brand}`" 
-        >
-          <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i> 
-          <span class="tw-hidden md:tw-inline-block tw-leading-none tw-mt-0.5">invite a friend</span>
-        </a>
-      </div>
     </div>
-
-
 
     <SearchModal @onClose="() => toggleSearchModal(false)" v-if="showSearchModal" />
   </nav>

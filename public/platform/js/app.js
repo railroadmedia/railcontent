@@ -22619,10 +22619,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     accountUrl: {
       type: String
-    },
-    withReferralButton: {
-      type: Boolean,
-      "default": false
     }
   },
   emits: ["onCollapseSidebar", "onBrandSelect", "onColorModeToggle"],
@@ -23910,10 +23906,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchUrl: {
       type: String
-    },
-    withReferralButton: {
-      type: Boolean,
-      "default": false
     }
   },
   setup: function setup(props, context) {
@@ -35154,28 +35146,6 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_4 = {
   "class": "tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]"
 };
-var _hoisted_5 = {
-  key: 0,
-  "class": "pa-1 noselect tw-grow-0 tw-bg-inherit tw-ml-2 tw-px-0",
-  style: {
-    "z-index": "10"
-  }
-};
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "aria-hidden": "true",
-  "class": "fas fa-gift md:tw-mr-2"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "tw-hidden md:tw-inline-block tw-leading-none tw-mt-0.5"
-}, "invite a friend", -1
-/* HOISTED */
-);
-
-var _hoisted_8 = [_hoisted_6, _hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["HamburguerButton"], {
     isSidebarHidden: $props.isSidebarHidden,
@@ -35211,12 +35181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["brand", "user-avatar", "user-name", "account-url", "has-notifications", "isDarkModeSelected"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Referral Button "), $props.withReferralButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: "/referral/invite-a-friend",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["tw-btn-primary tw-text-base tw-mb-0 tw-px-3 md:tw-px-4 tw-h-[42px] tw-w-[42px] md:tw-w-auto tw-tracking-wide tw-btn-small", "tw-bg-".concat($props.brand)])
-  }, _hoisted_8, 2
-  /* CLASS */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $setup.showSearchModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["SearchModal"], {
+  , ["brand", "user-avatar", "user-name", "account-url", "has-notifications", "isDarkModeSelected"])]), $setup.showSearchModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["SearchModal"], {
     key: 0,
     onOnClose: _cache[4] || (_cache[4] = function () {
       return $setup.toggleSearchModal(false);
@@ -35252,34 +35217,26 @@ var _hoisted_3 = {
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_6 = [_hoisted_4, _hoisted_5];
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Notifications ");
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Notifications ");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Playlists ");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Playlists ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Schedule ");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Schedule ");
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Apply For Review ");
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Apply For Review ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Settings ");
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Settings ");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Support ");
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Support ");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Shop ");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Shop ");
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Logout ");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Logout ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
@@ -35306,7 +35263,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "tw-h-[42px] tw-w-[42px] tw-rounded-full"
   }, null, 8
   /* PROPS */
-  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification Indicator "), $props.hasNotifications ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $setup.isUserMenuOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AvatarMenu, {
+  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification Indicator "), $props.hasNotifications ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <span class=\"tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75\"></span> "), _hoisted_4])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $setup.isUserMenuOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AvatarMenu, {
     key: 0,
     onOnCloseMenu: _cache[1] || (_cache[1] = function () {
       return $setup.handleMenuOpen(false);
@@ -35329,7 +35286,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "bell",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_7];
+              }), _hoisted_5];
             }),
             _: 1
             /* STABLE */
@@ -35343,7 +35300,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "playlist",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_8];
+              }), _hoisted_6];
             }),
             _: 1
             /* STABLE */
@@ -35357,7 +35314,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "calendar",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_9];
+              }), _hoisted_7];
             }),
             _: 1
             /* STABLE */
@@ -35371,7 +35328,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "board-complete",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_10];
+              }), _hoisted_8];
             }),
             _: 1
             /* STABLE */
@@ -35385,7 +35342,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "settings",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_11];
+              }), _hoisted_9];
             }),
             _: 1
             /* STABLE */
@@ -35427,7 +35384,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "phone",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_12];
+              }), _hoisted_10];
             }),
             _: 1
             /* STABLE */
@@ -35448,7 +35405,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "cart",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_13];
+              }), _hoisted_11];
             }),
             _: 1
             /* STABLE */
@@ -35462,7 +35419,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_musora_icon, {
                 "icon-name": "sign-out",
                 "class": "tw-w-[20px] tw-mr-2"
-              }), _hoisted_14];
+              }), _hoisted_12];
             }),
             _: 1
             /* STABLE */
@@ -36786,12 +36743,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     isSidebarHidden: $setup.isSidebarHidden,
     isDarkModeSelected: $setup.isDarkModeSelected,
     isSidebarCollapsed: $setup.isSidebarCollapsed,
-    "with-referral-button": $props.withReferralButton,
     onOnCollapseSidebar: $setup.onCollapseSidebar,
     onOnColorModeToggle: $setup.onColorModeToggle
   }, null, 8
   /* PROPS */
-  , ["brand", "has-notifications", "user-name", "user-avatar", "account-url", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "with-referral-button", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
+  , ["brand", "has-notifications", "user-name", "user-avatar", "account-url", "isSidebarHidden", "isDarkModeSelected", "isSidebarCollapsed", "onOnCollapseSidebar", "onOnColorModeToggle"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Sidebar, {
     brand: $props.brand,
     isLive: $props.isLive,
     isSidebarCollapsed: $setup.isSidebarCollapsed,

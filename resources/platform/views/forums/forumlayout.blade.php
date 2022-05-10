@@ -54,7 +54,6 @@
                     user-avatar=""
                     account-url=""
                     search-url=""
-                    :with-referral-button="true"
                 >  
                     @yield('breadcrumbs')
                     @yield('content')
