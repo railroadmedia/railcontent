@@ -226,6 +226,26 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
             \App\Decorators\Content\UrlDecorator::class,
             \App\Decorators\Content\InstructorDecorator::class,
+            \App\Decorators\Content\AddedToPrimaryPlaylistDecorator::class,
+            \App\Decorators\Content\ContentTimezoneDecorator::class,
+            \App\Decorators\Content\PianoteFoundationsLearningPathDecorator::class,
+            \App\Decorators\Content\LearningPathLevelDecorator::class,
+            \App\Decorators\Content\ChapterDecorator::class,
+            \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
+//            \App\Decorators\MultiPartParentDecorator::class, // this one
+//            \App\Decorators\ContentLikesDecorator::class, // this one
+//            \App\Decorators\ResourceDecorator::class, // this one
+//            \App\Decorators\ContentExperienceDecorator::class, // this one
+//            \App\Decorators\ContentUserWatchPositionDecorator::class, // this one
+//            \App\Decorators\PackBundleLessonDecorator::class,
+//            \App\Decorators\PackBundleDecorator::class,
+//            \App\Decorators\PackDecorator::class,
+//            \App\Decorators\InstructorDecorator::class,
+//            \App\Decorators\PianoteMethodLearningPathDecorator::class,
+//            \App\Decorators\LearningPathCourseDecorator::class,
+//            \App\Decorators\LearningPathLessonDecorator::class,
+//            \App\Decorators\NewDecorator::class,
+//            \App\Decorators\LiveEventDecorator::class
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,

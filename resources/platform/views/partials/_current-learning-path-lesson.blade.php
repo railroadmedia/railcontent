@@ -36,7 +36,7 @@
                         :display-items-as-overview="true"
                         :lock-unowned="true"
                         data-user-id="{{ auth()->id() }}"
-                        :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}"
+                        :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     >
                         @include('bladesora::members.skeletons.list-item', [
                             "overview" => true,

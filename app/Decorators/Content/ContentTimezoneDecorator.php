@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Decorators\Content;
+
+use App\Maps\ContentTypes;
+use Carbon\Carbon;
+use Railroad\Railcontent\Support\Collection;
+
+class ContentTimezoneDecorator extends TypeDecoratorBase
+{
+    public function decorate(Collection $contents)
+    {
+        $contentsOfType = $contents->whereIn('type', ContentTypes::searchableContentTypes());
+
+        if ($contentsOfType->isEmpty() || empty(auth()->user())) {
+            return $contents;
+        }
+
+        $timezone = user()->timezone;
+
+        foreach ($contentsOfType as $contentIndex => $content) {
+            if (!empty($content->fetch('fields.live_event_start_time'))) {
+                try {
+                    $contentsOfType[$contentIndex]['live_event_start_time_in_timezone'] =
+                        Carbon::parse($content->fetch('fields.live_event_start_time'), 'UTC')
+                            ->timezone($timezone);
+                } catch (\Exception $exception) {
+                    $contentsOfType[$contentIndex]['live_event_start_time_in_timezone'] = null;
+                    $contentsOfType[$contentIndex]['live_event_start_time'] = null;
+                }
+            }
+
+            if (!empty($content->fetch('fields.live_event_end_time'))) {
+                try {
+                    $contentsOfType[$contentIndex]['live_event_end_time_in_timezone'] =
+                        Carbon::parse($content->fetch('fields.live_event_end_time'), 'UTC')
+                            ->timezone($timezone);
+                } catch (\Exception $exception) {
+                    $contentsOfType[$contentIndex]['live_event_end_time_in_timezone'] = null;
+                    $contentsOfType[$contentIndex]['live_event_end_time'] = null;
+                }
+            }
+
+            $contentsOfType[$contentIndex]['published_on_in_timezone'] =
+                Carbon::parse($content['published_on'], 'UTC')
+                    ->timezone($timezone);
+        }
+
+        return $this->mergeDecorated($contents, $contentsOfType);
+    }
+}

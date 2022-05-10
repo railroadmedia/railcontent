@@ -35,7 +35,7 @@
                             initial-page="{{ $initialPage }}"
                             :force-wide-thumbs="true"
                             :lock-unowned="true"
-                            :is-admin="<?php echo e(json_encode(current_user()->getPermissionLevel() === 'administrator')); ?>"
+                            :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
                             @if($resetProgress)
                             :reset-progress="true"
                             @endif
