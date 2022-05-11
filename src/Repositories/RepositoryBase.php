@@ -60,7 +60,8 @@ abstract class RepositoryBase
         'topic' => ContentTopicRepository::class,
         'style' => ContentStyleRepository::class,
         'bpm' => ContentBpmRepository::class,
-        'video' => ContentVideoRepository::class
+        'video' => ContentVideoRepository::class,
+        'focus' => ContentFocusRepository::class
     ];
 
     /**

@@ -147,7 +147,7 @@ class ContentRepository extends RepositoryBase
 
         $data = $contentRows[0] ?? null;
 
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video','focus'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -582,7 +582,7 @@ class ContentRepository extends RepositoryBase
                 )
                 ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress.'.state', $state)
-                ->groupBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
+                ->groupBy('updated_on', ConfigService::$tableUserContentProgress.'.id')
                 ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
                 ->limit($limit)
                 ->skip($skip)
@@ -970,20 +970,11 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $contentRows->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     /**

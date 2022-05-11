@@ -166,7 +166,7 @@ class ContentTransformer
 
         if (is_array($value)) {
             foreach ($value as $val) {
-                if (($key == 'style') || ($key == 'bpm') || ($key == 'topic')) {
+                if (($key == 'style') || ($key == 'bpm') || ($key == 'topic') || ($key == 'focus')) {
 
                         $field[$key][$val['content_id']][] = [
                             'content_id' => $val['content_id'],
