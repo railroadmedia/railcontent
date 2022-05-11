@@ -3,14 +3,14 @@
     :href="item.url"
     class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white"
   >
-    <img :src="item.coach_card_image" :alt="coachName" class="tw-w-full" />
+    <img :src="coachImage" :alt="coachName" class="tw-w-full" />
     <!-- Coach Details -->
     <div
       class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-px-2 tw-text-center tw-absolute tw-w-full tw-bottom-0 tw-left-0"
       style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
     >
       <h3
-        class="tw-uppercase tw-font-bebas-neue tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
+        class="tw-uppercase tw-font-bebas-neue tw-text-white tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
       >
         <span>{{ coachFirstName }}</span
         ><br />
@@ -64,7 +64,8 @@ export default {
   data() {
     return {
       coachName: "",
-      coachFocus: ""
+      coachFocus: "",
+      coachImage: "",
     };
   },
   props: {
@@ -106,6 +107,9 @@ export default {
       if (obj.key === "focus_text") {
         this.coachFocus = obj.value;
       }
+      if (obj.key === "coach_card_image") {
+        this.coachImage = obj.value;
+      }
     })
   },
   //Get new name when updated
@@ -119,6 +123,9 @@ export default {
     this.item["data"].forEach((obj) => {
       if (obj.key === "focus_text") {
         this.coachFocus = obj.value;
+      }
+      if (obj.key === "coach_card_image") {
+        this.coachImage = obj.value;
       }
     })
   },

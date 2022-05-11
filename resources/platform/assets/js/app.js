@@ -1,8 +1,16 @@
 require('./bootstrap');
 
 import { createApp } from 'vue';
+
+//Libraries
 import store from './vue/store';
 import router from './vue/router';
+import Chatsora from '@musora/chatsora';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import 'simplebar';
+import 'simplebar/dist/simplebar.css';
+//App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
@@ -13,8 +21,14 @@ import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+//Vuesora Functions
+import './vue/vuesora/assets/js/functions/navigation';
+import './vue/vuesora/assets/js/functions/user-events';
+import './vue/vuesora/assets/js/functions/dropdown';
+import './vue/vuesora/assets/js/functions/modal';
+import './vue/vuesora/assets/js/functions/accordion';
+import './vue/vuesora/assets/js/functions/instructor-info';
+import './vue/vuesora/assets/js/third-party/add-event-atc';
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
@@ -41,8 +55,6 @@ const app = createApp({
         userNavigationDropdownLinks: window.userNavigationDropdownLinks,
     }
 });
-
-console.log(window.userNavigationDropdownLinks);
 
 //Register Global Components
 app.component('AppContainer', AppContainer)
@@ -87,6 +99,7 @@ app.directive('click-outside', {
 })
 
 app.use(store);
-app.use(router);
+// app.use(router);
 app.use(VueAxios, axios);
+app.use(Chatsora);
 app.mount('#app');

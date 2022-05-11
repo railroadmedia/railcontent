@@ -61,11 +61,11 @@
             @endif
 
             @if ($hasFeaturedLessons)
-                <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
+                <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-5 tw-mb-3">
                     <div class="tw-flex tw-flex-row tw-mb-3">
                         <div class="tw-flex tw-flex-col tw-flex-grow">
-                            <div class="tw-flex tw-flex-row align-v-center pv-2">
-                                <h2 class="heading tw-capitalize tw-flex-grow dark:tw-text-white">
+                            <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+                                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">
                                     Featured Lessons
                                 </h2>
                             </div>
@@ -80,7 +80,7 @@
                                         catalogue-type="coach-grid" 
                                         limit="16"
                                         :lock-unowned="true" 
-                                        :four-wide="true" 
+                                        :six-wide="true" 
                                         :force-wide-thumbs="true"
                                         :pre-loaded-content="{{ $featuredLessons }}"
                                     >
@@ -123,15 +123,18 @@
                     $catalogueProps['searchBar'] = true;
                     $catalogueProps['totalResults'] = $totalResults;
                     $catalogueProps['paginate'] = true;
-                    $catalogueProps['fourWide'] = true;
+                    $catalogueProps['sixWide'] = true;
                 }
             @endphp
 
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-3">
-                <content-catalogue-container brand="{{ $brand }}" :catalogue-props="{{ json_encode($catalogueProps) }}">
+                <content-catalogue-container 
+                    brand="{{ $brand }}" 
+                    :catalogue-props="{{ json_encode($catalogueProps) }}"
+                >
                     @for ($i = 0; $i < ($limitOverride ?? 16); $i++)
                         @include('partials.bladesora.members.skeletons.card-item', [
-                            "cardClass" => 'four-wide',
+                            "cardClass" => 'six-wide',
                         ])
                     @endfor
                 </content-catalogue-container>

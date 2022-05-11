@@ -5,9 +5,8 @@ import SingleCoach from "./SingleCoach.vue";
 import { textColor } from "../../../constants/brands";
 
 const props = defineProps({
-  coaches: {
+  coachResults: {
     type: Object,
-    default: [{}, {}, {}, {}, {}, {}, {}],
   },
   brand: {
     type: String,
@@ -32,12 +31,11 @@ const updateGradientState = (container) => {
   if (scrollValue === 0) {
     currentGradientBorder.value = "right";
     stopScroll();
-  }
-  else if (Math.round(scrollValue) === Math.round(width)) {
+  } else if (Math.round(scrollValue) === Math.round(width)) {
     currentGradientBorder.value = "left";
     stopScroll();
   } else if (currentGradientBorder.value !== "both") {
-    currentGradientBorder.value = "both"
+    currentGradientBorder.value = "both";
   }
 };
 
@@ -47,7 +45,7 @@ const scrollCarouselLeft = () => {
       "coach-carousel-results-container"
     );
     scrollContainer.scrollLeft -= 20;
-    updateGradientState(scrollContainer)
+    updateGradientState(scrollContainer);
   }, 30);
 };
 
@@ -57,7 +55,7 @@ const scrollCarouselRight = () => {
       "coach-carousel-results-container"
     );
     scrollContainer.scrollLeft += 20;
-    updateGradientState(scrollContainer)
+    updateGradientState(scrollContainer);
   }, 30);
 };
 
@@ -76,7 +74,7 @@ function onWheelScroll(e) {
   } else {
     scrollContainer.scrollLeft -= 25;
   }
-  updateGradientState(scrollContainer)
+  updateGradientState(scrollContainer);
 }
 </script>
 
@@ -88,8 +86,18 @@ function onWheelScroll(e) {
       id="coach-carousel-results-container"
       @wheel="onWheelScroll"
     >
-      <div class="tw-gap-2 tw-flex tw-transition-all tw-pl-[8px]" :ref="resultsRef">
-        <SingleCoach v-for="n in 7" :key="n" />
+      <div
+        class="tw-gap-2 tw-flex tw-transition-all tw-pl-[8px]"
+        :ref="resultsRef"
+      >
+        <SingleCoach
+          v-for="coach in coachResults"
+          :key="coach.id"
+          :id="coach.id"
+          :cardImg="coach.img"
+          :name="coach.name"
+          :focusText="coach.focusText"
+        />
       </div>
     </div>
     <button
@@ -105,17 +113,19 @@ function onWheelScroll(e) {
         tw-top-[50%]
         tw-rounded-full
         hover:tw-bg-opacity-100
-        ${currentGradientBorder === 'right' ? 'tw-hidden' : 'tw-hidden md:tw-flex'}
-        `
-      "
+        ${
+          currentGradientBorder === 'right'
+            ? 'tw-hidden'
+            : 'tw-hidden md:tw-flex'
+        }
+        `"
       @mousedown="scrollCarouselLeft"
       @mouseup="stopScroll"
     >
       <ChevronLeftIcon :class="`tw-p-[12px] ${textColor[brand]}`" />
     </button>
     <button
-      :class="
-        `tw-w-[60px]
+      :class="`tw-w-[60px]
         tw-h-[60px]
         tw-bg-[#445f74]
         tw-bg-opacity-20
@@ -127,9 +137,12 @@ function onWheelScroll(e) {
         tw-top-[50%]
         tw-rounded-full
         hover:tw-bg-opacity-100
-        ${currentGradientBorder === 'left' ? 'tw-hidden' : 'tw-hidden md:tw-flex'}
-        `
-      "
+        ${
+          currentGradientBorder === 'left'
+            ? 'tw-hidden'
+            : 'tw-hidden md:tw-flex'
+        }
+        `"
       @mousedown="scrollCarouselRight"
       @mouseup="stopScroll"
     >

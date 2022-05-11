@@ -35,7 +35,7 @@
                                     theme-color="{{ $brand }}"
                                     limit="20"
                                     user-id="{{ auth()->id() }}"
-                                    :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}"
+                                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
                                     :infinite-scroll="true"
                                     :filterable-values="{{ json_encode([]) }}"
                                     :included-types="{{ json_encode(['learning-path']) }}"

@@ -10,13 +10,15 @@
     @slot('formData')
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row tw-flex-wrap align-center">
-                <div class="tw-flex tw-flex-col image-col align-center tw-relative">
+                <div class="tw-flex tw-flex-col tw-bg-top tw-bg-cover tw-h-52 tw-items-center tw-relative tw-w-52 tw-rounded-full"
+                     style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
+                >
                     <img class="rounded"
                          src="{{ $profilePictureUrl }}"
                          data-avatar-update="true">
 
                     @if($canClearAvatar)
-                        <span id="clearAvatar" class="tw-rounded clear-button">
+                        <span id="clearAvatar" class="tw-rounded-full clear-button">
                             <i class="fas fa-times"></i>
                         </span>
                     @endif

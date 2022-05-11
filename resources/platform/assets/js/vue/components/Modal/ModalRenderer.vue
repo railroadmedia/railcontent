@@ -7,11 +7,9 @@ export default {
     emits: ['onClose'],
     setup(props, context) {
         const onClose = () => {
-            console.log('on close modal renderer')
             context.emit('onClose', true)
         }
         const onWrapperClick = (event) => {
-            console.log(event)
             if (event.target.id === 'slot-wrapper') {
                 context.emit('onClose', true)
             }

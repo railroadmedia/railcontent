@@ -444,7 +444,6 @@ export default {
             this.formValid = this.formState;
 
             if(!this.formValid) {
-                console.log('form is invalid')
                 return
             }
 

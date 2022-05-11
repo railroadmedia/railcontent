@@ -97,7 +97,7 @@ class ProfilePublicPagesController extends BaseController
                 'userMetrics' => $userMetrics,
                 'startedProgressContents' => $startedProgressContents,
                 'completedProgressContents' => $completedProgressContents,
-                'user' => $user,
+                'dashboardUser' => $user,
                 'isCurrentUsersProfile' => $isCurrentUsersProfile,
                 'userXP' => $userXP,
                 'currentUser' => $currentUser,

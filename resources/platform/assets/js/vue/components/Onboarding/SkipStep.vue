@@ -2,17 +2,18 @@
 const props = defineProps({
     title: {
         type: String,
-        default: 'SKIP ACCOUNT SET UP'
+        default: 'SKIP ACCOUNT SETUP'
     }
 })
-const emit = defineEmits(['onSkip'])
+const handleSkip = () => {
+    window.location.href = '/members'
+};
 </script>
 
 <template>
     <button
-        class="tw-mt-[12px] tw-text-[18px] tw-text-white tw-underline"
-        style="font-family: Bebas Neue"
-        v-on:click="() => emit('onSkip')"
+        class="tw-mt-[12px] tw-text-[18px] tw-text-white tw-underline tw-font-bebas-neue"
+        v-on:click="handleSkip"
     >
         {{ title }}
     </button>

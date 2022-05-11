@@ -1,7 +1,11 @@
 <template>
   <section id="content-catalogue">
     <div class="tw-flex tw-justify-between tw-items-center">
-      <h1 class="tw-text-4xl tw-font-bold dark:tw-text-white">All Lessons</h1>
+      <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-3">
+            All Lessons
+        </h2>
+      </div>
       <button
         v-on:click="changeGridState"
         class="tw-bg-transparent tw-border-none tw-cursor-pointer"
@@ -17,6 +21,7 @@
         </span>
       </button>
     </div>
+
     <content-catalogue
       :theme-color="catalogueProps.themeColor"
       :brand="catalogueProps.brand"

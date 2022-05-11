@@ -20,5 +20,6 @@ mix
     .options({
         postCss: [ tailwindcss('./resources/platform/tailwind.config.js') ],
     })
+    .sourceMaps()
     .version()
     .mergeManifest();

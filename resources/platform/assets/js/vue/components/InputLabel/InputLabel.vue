@@ -59,7 +59,6 @@ const onClear = () => {
 
 const onEnter = () => {
   emit("onEnter");
-  console.log("enter key pressed");
 };
 </script>
 

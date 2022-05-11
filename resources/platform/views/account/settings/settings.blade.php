@@ -10,7 +10,7 @@
     </div>
     <div class="tw-flex tw-flex-row">
         <div id="editForm" class="tw-flex tw-flex-col">
-            <form method="POST" action="/usora/user/update/{{ current_user()->getId() }}">
+            <form method="POST" action="/usora/user/update/{{ user()->id }}">
                 <input type="hidden" name="redirect" value="{{ url()->current() }}">
                 {{ method_field('PATCH') }}
                 {{ csrf_field() }}
@@ -26,7 +26,7 @@
                                 "inputID" => "weeklyUpdates",
                                 "inputName" => "notify_weekly_update",
                                 "inputLabel" => "Weekly Community Updates.",
-                                "checked" => (boolean) current_user()->getNotifyWeeklyUpdate()
+                                "checked" => (boolean) user()->notify_weekly_update
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -34,7 +34,7 @@
                                 "inputID" => "repliesComment",
                                 "inputName" => "notify_on_lesson_comment_reply",
                                 "inputLabel" => "When a member replies to my lesson comment.",
-                                "checked" => (boolean) current_user()->getNotifyOnLessonCommentReply()
+                                "checked" => (boolean) user()->notify_on_lesson_comment_reply
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -42,7 +42,7 @@
                                 "inputID" => "likesComment",
                                 "inputName" => "notify_on_lesson_comment_like",
                                 "inputLabel" => "When a member likes my lesson comment.",
-                                "checked" => (boolean) current_user()->getNotifyOnLessonCommentLike()
+                                "checked" => (boolean) user()->notify_on_lesson_comment_like
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -50,7 +50,7 @@
                                 "inputID" => "repliesForum",
                                 "inputName" => "notify_on_forum_followed_thread_reply",
                                 "inputLabel" => "When a member posts in a forum thread I created or follow.",
-                                "checked" => (boolean) current_user()->getNotifyOnForumFollowedThreadReply()
+                                "checked" => (boolean) user()->notify_on_forum_followed_thread_reply
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -58,7 +58,7 @@
                                 "inputID" => "likesForum",
                                 "inputName" => "notify_on_forum_post_like",
                                 "inputLabel" => "When a member likes my forum posts",
-                                "checked" => (boolean) current_user()->getNotifyOnForumPostLike()
+                                "checked" => (boolean) user()->notify_on_forum_post_like
                             ])
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                                 "inputName" => "notifications_summary_frequency_minutes",
                                 "inputLabel" => "Send me notifications right away.",
                                 "inputValue" => null,
-                                "checked" => current_user()->getNotificationsSummaryFrequencyMinutes() === null
+                                "checked" => user()->notifications_summary_frequency_minutes === null
                             ])
                         </div>
 
@@ -85,7 +85,7 @@
                                 "inputName" => "notifications_summary_frequency_minutes",
                                 "inputLabel" => "Email me a summary of my notifications once per day.",
                                 "inputValue" => 1440,
-                                "checked" => current_user()->getNotificationsSummaryFrequencyMinutes() === 1440
+                                "checked" => user()->notifications_summary_frequency_minutes === 1440
                             ])
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                                 "inputID" => "useLegacyPlayer",
                                 "inputName" => "use_legacy_video_player",
                                 "inputLabel" => "Use legacy video player.",
-                                "checked" => (boolean) current_user()->getUseLegacyVideoPlayer()
+                                "checked" => (boolean) user()->use_legacy_video_player
                             ])
                         </div>
                     </div>

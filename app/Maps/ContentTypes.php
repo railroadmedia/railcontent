@@ -12,7 +12,8 @@ class ContentTypes
         return array_merge(
             config('railcontent.showTypes'),
             config('railcontent.topLevelContentTypes'),
-            config('railcontent.searchable_content_types', [])
+            config('railcontent.searchable_content_types', []),
+            config('railcontent.liveContentTypes')
         );
     }
 

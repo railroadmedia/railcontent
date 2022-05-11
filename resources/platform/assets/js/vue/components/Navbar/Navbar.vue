@@ -23,10 +23,6 @@ const props = defineProps({
   },
   accountUrl: {
     type: String
-  },
-  withReferralButton: {
-    type: Boolean,
-    default: false
   }
 });
 const emit = defineEmits([
@@ -99,23 +95,12 @@ const toggleSearchModal = (val) => {
     </div>
     <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]">
 
-      <!-- Referral Button -->
-      <div v-if="withReferralButton" class="pa-1 noselect tw-grow-0 tw-bg-inherit" 
-           style="padding-left: 0px; z-index: 10;">
-        <a href="/referral/invite-a-friend" 
-          class="tw-btn-primary tw-h-[40px] tw-text-base tw-mb-0 tw-px-4 tw-tracking-wide tw-btn-small"
-          :class="`tw-bg-${brand}`" 
-        >
-          <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i> 
-          <span class="tw-hidden md:tw-inline-block tw-leading-none tw-mt-0.5">invite a friend</span>
-        </a>
-      </div>
-
+      <!-- Search Trigger -->
       <button
         @click="() => toggleSearchModal(true)"
-        :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-justify-center ${bgColor[brand]}`"
+        :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-mr-1 tw-justify-center`"
       >
-        <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-white" />
+        <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-black dark:tw-text-white" />
       </button>
 
       <UserIcon

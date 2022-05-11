@@ -10,8 +10,8 @@
       tw-border-[#E4E4E7]
       dark:tw-border-[#223457]
       tw-no-underline
-      hover:tw-bg-gray-100/[10]
-      dark:hover:tw-bg-gray-900/[10]
+      hover:tw-bg-gray-[#E7EFF6]
+      dark:hover:tw-bg-[#002039]
     "
     :class="class_object"
     :href="renderLink ? item.url : false"
@@ -126,7 +126,7 @@
       </p>
 
       <p
-        class="tw-text-black dark:tw-text-white tw-font-bold item-title"
+        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
         :class="overview ? 'heading' : 'tiny font-compressed'"
       >
         {{ mappedData.black_title }}

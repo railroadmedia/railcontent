@@ -40,7 +40,6 @@
                     user-avatar="{{ user()->profile_picture_url }}"
                     account-url="{{ user()->getDashboardUrl() }}"
                     search-url=""
-                    :with-referral-button="true"
                 >
                     @yield('content')
                 </page-container>
