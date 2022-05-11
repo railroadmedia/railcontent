@@ -1,5 +1,5 @@
-<div class="container fluid bg-grey-7 collapsed-h">
-    <div class="container">
+<div class="tw-container tw-px-4 md:tw-px-8 tw-bg-[#002039] tw-bg-[#E7EFF6]">
+    <div class="">
         <div class="flex flex-column grow pv-2">
             <div class="flex flex-row align-v-center">
                 @if(!empty($showLogo))
@@ -21,12 +21,12 @@
                         See All
                     </a>
                 @else
-                    <p class="body text-grey-3 uppercase">
+                    <p class="tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-xl tw-font-bold tw-leading-none">
                         Your Next Lesson...
                     </p>
                 @endif
             </div>
-            <div class="flex flex-row remove-borders">
+            <div class="flex flex-row remove-borders tw--ml-3">
                 <transition appear name="fade">
                     <content-catalogue
                         brand="{{ $brand }}"

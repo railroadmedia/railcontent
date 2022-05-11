@@ -122,7 +122,7 @@
 
                     {{-- About You --}}
                     <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph" dusk="about-user">
-                        <div class="tw-flex tw-flex-column xs-12 tw-mb-3">
+                        <div class="tw-flex tw-flex-col xs-12 tw-mb-3">
                             {{-- Title --}}
                             <div class="tw-flex tw-flex-col tw-mb-4">
                                 <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
