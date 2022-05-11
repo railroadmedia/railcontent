@@ -46,9 +46,8 @@ class FullTextSearchService
         $this->userPermissionRepository = $userPermissionsRepository;
     }
 
-    /** Full text search by term
-     *
-     * @param string $term
+    /**
+     * @param $term
      * @param int $page
      * @param int $limit
      * @param array $contentTypes
@@ -56,8 +55,9 @@ class FullTextSearchService
      * @param string $sort
      * @param null $dateTimeCutoff
      * @param null $brands
-     * @return array|null
-     * @internal param null $brand
+     * @param array $instructorIds
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function search(
         $term,
@@ -70,7 +70,7 @@ class FullTextSearchService
         $brands = null,
         $instructorIds = []
     ) {
-        if($term) {
+        if ($term) {
             $term = $output = preg_replace(
                 '!\s+!',
                 ' ',
@@ -98,7 +98,7 @@ class FullTextSearchService
             $permissionIds = [];
             if (auth()->id()) {
                 $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
-                $permissionIds = array_pluck($userPermissions,'permission_id');
+                $permissionIds = array_pluck($userPermissions, 'permission_id');
             }
 
             ElasticQueryBuilder::$userPermissions = $permissionIds;
@@ -110,7 +110,8 @@ class FullTextSearchService
                 $contentTypes,
                 $contentStatuses,
                 $dateTimeCutoff,
-                $sort
+                $sort,
+                $instructorIds
             );
 
             $totalResults = $elasticData['hits']['total']['value'];
@@ -145,12 +146,10 @@ class FullTextSearchService
                     'total_pages' => ceil($totalResults / $limit),
                     'links' => [],
                 ],
-                // 'qb' => $qb->addSelect('p'),
             ];
             config(['railcontent.available_brands' => $oldBrands]);
 
             return $return;
-
         } else {
             $return = [
                 'results' => $this->contentService->getByIds(

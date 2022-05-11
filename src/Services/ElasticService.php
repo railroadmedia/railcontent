@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
 use Elasticsearch\ClientBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 
@@ -117,7 +116,8 @@ class ElasticService
      * @param array|null $includedContentsIdsByState
      * @param array $requiredUserPlaylistIds
      * @param null $searchTerm
-     * @return array|callable
+     * @param array $followedContents
+     * @return array|callable|void
      */
     public function getElasticFiltered(
         $page = 1,
@@ -187,6 +187,7 @@ class ElasticService
      * @param array $contentStatuses
      * @param null $dateTimeCutoff
      * @param string $sort
+     * @param array $instructorIds
      * @return array|callable
      */
     public function search(
@@ -196,7 +197,8 @@ class ElasticService
         $contentTypes = [],
         $contentStatuses = [],
         $dateTimeCutoff = null,
-        $sort = 'score'
+        $sort = 'score',
+        $instructorIds = []
     ) {
         $client = $this->getClient();
         if ($term) {
@@ -211,6 +213,7 @@ class ElasticService
                 ->restrictByContentStatuses($contentStatuses)
                 ->restrictByTerm($arrTerm ?? [])
                 ->restrictByPublishedDate($dateTimeCutoff)
+                ->restrictByInstructorIds($instructorIds)
                 ->setResultRelevanceBasedOnConfigSettings($arrTerm)
                 ->sortResults($sort);
 
@@ -336,6 +339,9 @@ class ElasticService
         return $filteredContents;
     }
 
+    /**
+     * @param $indexName
+     */
     public function deleteIndex($indexName)
     {
         $client = $this->getClient();
@@ -344,29 +350,34 @@ class ElasticService
             ->delete(['index' => $indexName]);
     }
 
+    /**
+     * @param $contentId
+     * @return array
+     */
     public function syncDocument($contentId)
     {
         $client = $this->getClient();
 
         $this->contentService = app(ContentService::class);
         $elasticData = $this->contentService->getElasticData($contentId);
-
+        $indexName = config('railcontent.elastic_index_name', 'content');
 
         $paramsContent = [
-            'index' => 'content',
+            'index' => $indexName,
+            'refresh' => true,
             'body' => $elasticData,
         ];
 
         // Create indexes if not exists
         if (!$client->indices()
-            ->exists(['index' => 'content'])) {
+            ->exists(['index' => $indexName])) {
             $this->createContentIndex();
         }
 
         //update or create document
         try {
             $paramsSearch = [
-                'index' => 'content',
+                'index' => $indexName,
                 'body' => [
                     'query' => [
                         'term' => [
@@ -377,35 +388,11 @@ class ElasticService
             ];
 
             $documents = $client->search($paramsSearch);
-//            if($elasticData['title'] != '') {
-//                dd($client->search([
-//                                       'index' => 'content',
-//                                       'body' => [
-//                                           'query' => [
-//                                               'term' => [
-//                                                   'content_id' => 1,
-//                                               ],
-//                                           ],
-//                                       ],
-//                                   ]));
-//            }
-//            if(!empty($elasticData['permission_ids'])){
-//                dd($client->search([
-//                                       'index' => 'content',
-//                                       'body' => [
-//                                           'query' => [
-//                                               'term' => [
-//                                                   'content_id' => $contentId,
-//                                               ],
-//                                           ],
-//                                       ],
-//                                   ]));
-//            }
+
             //delete document if exists
             foreach ($documents['hits']['hits'] as $elData) {
-//dd($contentId);
                 $paramsDelete = [
-                    'index' => 'content',
+                    'index' => $indexName,
                     'id' => $elData['_id'],
                     'refresh' => true,
                 ];
@@ -414,7 +401,6 @@ class ElasticService
             }
 
             $client->index($paramsContent);
-
         } catch (Exception $exception) {
             error_log('Can not delete elasticsearch index '.print_r($exception->getMessage(), true));
         }

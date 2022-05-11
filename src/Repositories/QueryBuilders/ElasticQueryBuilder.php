@@ -2,17 +2,13 @@
 
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
+use Illuminate\Support\Arr;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Illuminate\Support\Arr;
 
 class ElasticQueryBuilder
 {
     public static $userPermissions = [];
-
-    public static $userTopics = [];
-
-    public static $skillLevel;
 
     private $must = [];
 
@@ -163,11 +159,6 @@ class ElasticQueryBuilder
                 $this->must[] = [
                     ['range' => [$requiredFieldData['name'] => ['lte' => $requiredFieldData['value']]]],
                 ];
-                //            } elseif (!$requiredFieldData['property']) {
-                //                $this->must[] = [
-                //                    ['match_phrase' => [$requiredFieldData['name'].'.raw' => strtolower($requiredFieldData['value'])]],
-                //
-                //                ];
             } elseif ($requiredFieldData['operator'] == 'like') {
                 $this->must[] = [
                     ['match' => [$requiredFieldData['name'] => $requiredFieldData['value']]],
@@ -535,5 +526,29 @@ class ElasticQueryBuilder
     public function getFilters()
     {
         return $this->filters;
+    }
+
+    /**
+     * @param array $instructorIds
+     * @return $this
+     */
+    public function restrictByInstructorIds(array $instructorIds)
+    {
+        if (empty($instructorIds)) {
+            return $this;
+        }
+
+        $terms = [];
+        foreach ($instructorIds as $instructorId) {
+            $terms[] = ['terms' => ['instructor' => [$instructorId]]];
+        }
+
+        $this->must[] = [
+            'bool' => [
+                'should' => $terms,
+            ],
+        ];
+
+        return $this;
     }
 }

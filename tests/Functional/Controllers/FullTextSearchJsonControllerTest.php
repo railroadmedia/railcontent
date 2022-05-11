@@ -97,10 +97,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
         $results = $response->decodeResponseJson();
 
-        $espectedResults = array_splice($content, 0, $limit);
-
         $this->assertEquals(200, $response->getStatusCode());
-        foreach(Arr::pluck($results['data'], 'id') as $id){
+        foreach (Arr::pluck($results['data'], 'id') as $id) {
             $this->assertTrue(in_array($id, Arr::pluck($content, 'id')));
         }
     }
@@ -183,8 +181,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $this->artisan('command:createSearchIndexesForContents');
-
         $contentType = $this->faker->randomElement(config('railcontent.showTypes'));
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
@@ -230,10 +226,9 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $this->artisan('command:createSearchIndexesForContents');
-
         $contentStatus =
             $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
+
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
             'limit' => $limit,
@@ -245,19 +240,12 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $response->decodeResponseJson()
                 ->json('data');
 
-        $expectedResults = $this->call('GET', 'railcontent/content', [
-            'page' => $page,
-            'limit' => $limit,
-            'sort' => '-published_on',
-            'statuses' => [$contentStatus],
-            'auth_level' => 'administrator',
-        ]);
-
-        $this->assertEquals(
-            $expectedResults->decodeResponseJson()
-                ->json('data'),
-            array_values($results)
-        );
+        foreach ($results as $result) {
+            $this->assertEquals(
+                $contentStatus,
+                $result['status']
+            );
+        }
     }
 
     public function test_search_for_coach_content()
@@ -310,14 +298,12 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $this->artisan('command:createSearchIndexesForContents');
-
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
             'limit' => $limit,
             'sort' => '-content_published_on',
             'included_types' => [$contentType],
-            'included_fields' => ['instructor,'.$coach['id']],
+            'included_fields' => ['instructor,'.$instructor['id']],
         ]);
 
         $results =
@@ -346,24 +332,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             Carbon::yesterday()
                 ->toDateTimeString()
         );
-
-        //        for ($i = 0; $i < 6; $i++) {
-        //            $content[$i] = $this->contentFactory->create(
-        //                'slug',
-        //                $this->faker->randomElement(config('railcontent.showTypes')),
-        //                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
-        //                ConfigService::$defaultLanguage,
-        //                ConfigService::$brand,
-        //                rand(),
-        //                Carbon::yesterday()
-        //                    ->hour($i)
-        //                    ->toDateTimeString()
-        //            );
-        //
-        //            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
-        //        }
-
-        $this->artisan('command:createSearchIndexesForContents');
 
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
