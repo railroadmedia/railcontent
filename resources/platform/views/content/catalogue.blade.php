@@ -27,7 +27,8 @@
 
 @section('layout-scripts')
     @if($lessonType === 'student-review')
-        <script src="{{ mix('assets/members/js/student-review-form.js') }}"></script>
+{{-- todo: script --}}
+{{--        <script src="{{ mix('assets/members/js/student-review-form.js') }}"></script>--}}
     @endif
 @endsection
 
@@ -122,9 +123,9 @@
         {{--                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>--}}
         {{--                </div>--}}
         {{--                <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 mb-3">--}}
-        {{--                    <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">--}}                       
+        {{--                    <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">--}}
         {{--                            <i class="fas fa-calendar-plus mr-1"></i>--}}
-        {{--                            Subscribe to Calendar--}}                    
+        {{--                            Subscribe to Calendar--}}
         {{--                    </button>--}}
         {{--                </div>--}}
         {{--            </div>--}}
@@ -139,9 +140,9 @@
                                 <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                             </div>
                             <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
-                                <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">                      
+                                <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
                                     <i class="fas fa-calendar-plus mr-1"></i>
-                                    Subscribe to Calendar                   
+                                    Subscribe to Calendar
                                 </button>
                             </div>
                         </div>

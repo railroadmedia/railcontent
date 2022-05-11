@@ -564,7 +564,7 @@ class HomePageController extends BaseController
         // Only take 4 items since that's all we need
         $recentShowTypes = array_slice($recentShowTypes, 0, 6);
 
-        $showData = config('railcontent.cataloguesMetadata');
+        $showData = config('railcontent.cataloguesMetadata')[brand()];
         $showTypes = [];
 
         // Map the shows meta data to the array

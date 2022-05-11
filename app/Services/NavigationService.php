@@ -144,7 +144,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'Podcast',
-                        'path' => '/' . brand() . '/podcast',
+                        'path' => '/' . brand() . '/podcasts',
                         'icon' => 'podcast',
                     ],
                     [

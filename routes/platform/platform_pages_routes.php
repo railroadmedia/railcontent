@@ -47,17 +47,25 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', [Brand::Guitareo->value])
             ->name('platform.lessons');
 
-        Route::get('/{brand}/songs', [ContentPagesController::class, 'songs'])
+        Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
-            ->name('platform.songs');
-
-        Route::get('/{brand}/courses', [ContentPagesController::class, 'courses'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.courses');
-
-        Route::get('/{brand}/quick-tips', [ContentPagesController::class, 'quickTips'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.quick-tips');
+            ->whereIn('contentTypeName', [
+                'courses',
+                'songs',
+                'quick-tips',
+                'podcasts',
+                'question-and-answer',
+                'student-reviews',
+                'boot-camps',
+                'chords-and-scales',
+                'bootcamps',
+                'chords-scales',
+                'library',
+                'recording',
+                'play-alongs',
+                'archives',
+            ])
+            ->name('platform.content-type-catalog');
 
         Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
             ->whereIn('brand', all_brands())
@@ -177,7 +185,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.forums.category');
 
-        Route::get('/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}', [ForumPagesController::class, 'thread'])
+        Route::get(
+            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
+            [ForumPagesController::class, 'thread']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.forums.thread');
 

@@ -1,60 +1,39 @@
 <?php
 
-namespace Railroad\Usora\Controllers;
+namespace Modules\UserManagementSystem\Controllers;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
-use MikeMcLin\WpPassword\Facades\WpPassword;
-use Railroad\Permissions\Exceptions\NotAllowedException;
-use Railroad\Permissions\Services\PermissionService;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Repositories\UserRepository;
+
+//use MikeMcLin\WpPassword\Facades\WpPassword;
+use Modules\UserManagementSystem\Models\User;
 
 class PasswordController extends Controller
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    use ValidatesRequests;
+    use AuthorizesRequests;
 
     /**
      * @var Hasher
      */
     private $hasher;
 
-    /**
-     * @var PermissionService
-     */
-    private $permissionService;
 
     /**
      * CookieController constructor.
      *
-     * @param UserRepository $userRepository
      * @param Hasher $hasher
-     * @param PermissionService $permissionService
      */
-    public function __construct(UsoraEntityManager $entityManager, Hasher $hasher, PermissionService $permissionService)
+    public function __construct(Hasher $hasher)
     {
-        $this->entityManager = $entityManager;
         $this->hasher = $hasher;
-        $this->permissionService = $permissionService;
-
-        $this->userRepository = $this->entityManager->getRepository(User::class);
     }
 
     /**
@@ -66,34 +45,30 @@ class PasswordController extends Controller
      * @bodyParam current_password required
      * @bodyParam new_password required
      *
-     * @param  Request $request
+     * @param Request $request
      * @return RedirectResponse
-     * @throws NotAllowedException
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @throws ValidationException
      */
     public function update(Request $request)
     {
-        if (!$this->permissionService->can(auth()->id(), 'edit-users') &&
-            $request->has('user_id') &&
-            $request->get('user_id') != auth()->id()) {
-            throw new NotAllowedException('You do not have permission to update this users password.');
-        }
+        $this->authorize('edit-users');
 
-        try{
-            $request->validate(
+        try {
+            $validationRules =
                 [
                     'current_password' => 'required',
-                    'new_password' => 'required|' . config('usora.password_creation_rules', 'confirmed|min:8|max:128'),
-                ]
+                    'new_password' => 'required|confirmed|min:8|max:128'
+                ];
+            $this->validate(
+                $request,
+                $validationRules
             );
-        }catch(ValidationException $e){
-
+        } catch (ValidationException $e) {
             $messagesByField = $e->validator->getMessageBag()->getMessages();
 
             $messagesForFieldFailingField = reset($messagesByField);
 
-            foreach($messagesForFieldFailingField as $messagesForField){
+            foreach ($messagesForFieldFailingField as $messagesForField) {
                 $errorMessageToUser = $messagesForField;
                 break;
             }
@@ -102,27 +77,23 @@ class PasswordController extends Controller
 
             return redirect()->back()->with('error-message', 'Error: ' . ($errorMessageToUser ?? $default));
         }
+        $user = user();
 
-        /**
-         * @var $user User
-         */
-        $user = $this->userRepository->find(auth()->id());
+        $user = User::findOrFail($user->id);
 
         if (
-            !$this->hasher->check($request->get('current_password'), $user->getPassword())
-            && !WpPassword::check(trim($request->get('current_password')), $user->getPassword())
+            !$this->hasher->check($request->get('current_password'), $user->password)
+//            && !WpPassword::check(trim($request->get('current_password')), $user->password)
         ) {
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
 
         $user->setPassword($request->get('new_password'));
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $user->save();
 
         event(new PasswordReset($user));
 
-        auth()->loginUsingId($user->getId());
+        auth()->loginUsingId($user->id);
 
         return redirect()
             ->back()
