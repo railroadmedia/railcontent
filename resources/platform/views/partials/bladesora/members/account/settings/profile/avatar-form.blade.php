@@ -9,8 +9,8 @@
 
     @slot('formData')
         <div class="tw-flex tw-flex-col tw-w-full">
-            <div class="tw-flex tw-flex-row tw-w-full tw-items-center">
-                <div class="tw-flex tw-flex-col tw-bg-top tw-bg-cover tw-flex-shrink-0 tw-h-52 tw-items-center tw-relative tw-w-52 tw-rounded-full"
+            <div class="tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-center tw-flex-wrap lg:tw-flex-nowrap">
+                <div class="tw-flex tw-flex-col tw-bg-top tw-bg-cover tw-flex-shrink-0 tw-h-52 tw-items-center tw-relative tw-w-52 tw-rounded-full tw-mb-4 lg:tw-mb-0"
                      style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
                 >
                     <img class="rounded"
@@ -23,7 +23,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="tw-flex tw-flex-col tw-w-full tw-items-center text-grey-3 dark:tw-text-[#9EC0DC] tw-pr-[100px]">
+                <div class="tw-flex tw-flex-col tw-w-full tw-items-center text-grey-3 dark:tw-text-[#9EC0DC] lg:tw-pr-[100px]">
                     <p class="tiny">For best results upload a square photo.</p>
                     <p class="tiny tw-italic">Max file size: <strong>5MB</strong></p>
                 </div>
