@@ -461,7 +461,7 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'sort',
             ],
-            'live' => [
+            'live-streams' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/show-live.jpg',
                 'name' => 'Live',
                 'shortname' => 'Live Lessons',
@@ -876,7 +876,7 @@ return [
         'quick-tips',
         'question-and-answer',
         'student-collaborations',
-        'live',
+        'live-streams',
         'podcasts',
         'solos',
         'boot-camps',
