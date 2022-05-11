@@ -19,6 +19,7 @@ use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * App\Modules\UserManagementSystem\Models\User
@@ -462,5 +463,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected static function newFactory()
     {
         return UserFactory::new();
+    }
+
+    /**
+     * @param string $password
+     * @param bool $hash
+     */
+    public function setPassword($password, $hash = true)
+    {
+        $this->password = $hash ? Hash::make($password) : $password;
     }
 }
