@@ -62,7 +62,7 @@
                 ])
             @endif
 
-            <div class="tw-container tw-mx-auto tw-px-4 mv-3">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4">
                 <div class="tw-flex tw-flex-col">
                     <div class="tw-flex tw-w-full tw-flex-row">
                         <content-catalogue
