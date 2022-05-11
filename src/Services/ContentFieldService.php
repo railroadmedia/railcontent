@@ -242,6 +242,8 @@ class ContentFieldService
         //delete cache for associated content id
         CacheHelper::deleteCache('content_'.$field['content_id']);
 
+        event(new ElasticDataShouldUpdate($field['content_id']));
+
         return $deleted;
     }
 
@@ -273,13 +275,6 @@ class ContentFieldService
 
         CacheHelper::deleteUserFields(null, 'contents');
         event(new ElasticDataShouldUpdate($data['content_id']));
-        //        $newField = $this->get($id);
-        //
-        //        if (!empty($data['id'])) {
-        //            event(new ContentFieldUpdated($newField, $oldField));
-        //        } else {
-        //            event(new ContentFieldCreated($newField, $data));
-        //        }
 
         return $content;
     }
