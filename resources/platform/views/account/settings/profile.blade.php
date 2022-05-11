@@ -12,12 +12,10 @@
 @section('edit-forms')
     <input id="userInfo" type="hidden" data-user-id="{{ auth()->id() }}">
 
-    <div class="tw-flex tw-flex-row pa-3 tw-flex-auto">
-        <h1 class="heading">Profile</h1>
-    </div>
     <div id="editForm" class="tw-flex tw-flex-row">
         <div class="tw-flex tw-flex-col tw-grow">
-            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
+
+            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                 @include('partials.bladesora.members.account.settings.profile.display-name-form', [
                     'brand' => '{{ $brand }}',
                     'method' => 'patch',
@@ -30,7 +28,7 @@
                 ])
             </div>
 
-            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
+            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                 @include('partials.bladesora.members.account.settings.profile.avatar-form', [
                     'brand' => '{{ $brand }}',
                     'method' => 'POST',
@@ -42,7 +40,7 @@
                 ])
             </div>
 
-            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
+            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                 @include('partials.bladesora.members.account.settings.profile.about-form', [
                     'brand' => '{{ $brand }}',
                     'fullName' => user()->first_name . ' ' . user()->last_name,
@@ -83,7 +81,7 @@
                 ])
             </div>
 
-{{--            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">--}}
+{{--            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">--}}
 {{--                @include('partials.bladesora.members.account.settings.profile.piano-gear-form', [--}}
 {{--                    'brand' => '{{ $brand }}',--}}
 {{--                    'playingSince' => current_user()->getPianoPlayingSinceYear(),--}}
@@ -116,7 +114,7 @@
 {{--                ])--}}
 {{--            </div>--}}
 
-{{--            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">--}}
+{{--            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">--}}
 {{--                @include('partials.bladesora.members.account.settings.profile.gear-photo-form', [--}}
 {{--                    'brand' => '{{ $brand }}',--}}
 {{--                    'method' => 'POST',--}}
@@ -128,7 +126,7 @@
 {{--                ])--}}
 {{--            </div>--}}
 
-            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
+            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                 <h1 id="signatureForm"></h1>
                 @include('partials.bladesora.members.account.settings.profile.signature-form', [
                     'brand' => '{{ $brand }}',

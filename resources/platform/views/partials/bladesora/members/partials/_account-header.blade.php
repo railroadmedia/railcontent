@@ -65,7 +65,7 @@
                     {{-- Complete Your Account --}}
                     @if(true) {{-- Check if User Has Finished Account --}}
                         <a href="/referral/invite-a-friend" 
-                            class="tw-btn-secondary tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
+                            class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
                         >
                             Complete Your Account
                         </a>

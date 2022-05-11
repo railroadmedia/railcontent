@@ -10,13 +10,13 @@
     @slot('formData')
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row tw-flex-wrap align-center">
-                <div class="tw-flex tw-flex-col image-col align-center tw-relative">
+                <div class="tw-flex tw-flex-col tw-h-52 tw-items-center tw-relative tw-w-52 tw-rounded-full">
                     <img class="rounded"
                          src="{{ $profilePictureUrl }}"
                          data-avatar-update="true">
 
                     @if($canClearAvatar)
-                        <span id="clearAvatar" class="tw-rounded clear-button">
+                        <span id="clearAvatar" class="tw-rounded-full clear-button">
                             <i class="fas fa-times"></i>
                         </span>
                     @endif
