@@ -1061,7 +1061,7 @@ class ContentService
 
                         unset($filterOptions['instructors']);
                         usort($instructors, function ($a, $b) {
-                            return strncmp($a['name'], $b['name'], 15);
+                            return strncmp(ContentHelper::getFieldValue($a, 'name'), ContentHelper::getFieldValue($b, 'name'), 15);
                         });
                         $filterOptions['instructor'] = $instructors;
                     }
