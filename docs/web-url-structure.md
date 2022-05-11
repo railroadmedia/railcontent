@@ -59,7 +59,7 @@ Old URLs:
 - musora.com/{BRAND}/profile/{USER_ID}/settings/profile (currently under 'Profile' tab)
 - musora.com/{BRAND}/profile/{USER_ID}/settings/login-credentials (currently under 'Login Credentials' tab)
 - musora.com/{BRAND}/profile/{USER_ID}/settings/payments (currently under 'Payments' tab)
-- musora.com/{BRAND}/profile/{USER_ID}/settings/notifications (currently under 'Settings' tab)
+- musora.com/{BRAND}/profile/{USER_ID}/settings/settings (currently under 'Settings' tab)
 - musora.com/{BRAND}/profile/{USER_ID}/settings/membership (currently under 'Access' tab)
 
 ---

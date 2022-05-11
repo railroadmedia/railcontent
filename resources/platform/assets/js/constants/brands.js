@@ -1,12 +1,12 @@
-import drumeoBgImg from '../vue/images/drumeo-bg.png'; 
-import singeoBgImg from '../vue/images/singeo-bg.png'; 
-import pianoteBgImg from '../vue/images/pianote-bg.png'; 
-import guitareoBgImg from '../vue/images/guitareo-bg.png';
+import drumeoBgImg from '../vue/images/drumeo-bg.jpg'; 
+import singeoBgImg from '../vue/images/singeo-bg.jpg'; 
+import pianoteBgImg from '../vue/images/pianote-bg.jpg'; 
+import guitareoBgImg from '../vue/images/guitareo-bg.jpg';
 
-import drumeoBgImgLight from '../vue/images/drumeo-bg-light.jpg'; 
-import singeoBgImgLight from '../vue/images/singeo-bg-light.jpg'; 
-import pianoteBgImgLight from '../vue/images/pianote-bg-light.jpg'; 
-import guitareoBgImgLight from '../vue/images/guitareo-bg-light.jpg'; 
+import drumeoBgImgOnboarding from '../vue/images/onboarding-drumeo-bg.jpg'; 
+import singeoBgImgOnboarding from '../vue/images/onboarding-singeo-bg.jpg'; 
+import pianoteBgImgOnboarding from '../vue/images/onboarding-pianote-bg.jpg'; 
+import guitareoBgImgOnboarding from '../vue/images/onboarding-guitareo-bg.jpg'; 
 
 export const brandUrl = {
   drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
@@ -63,11 +63,11 @@ export const bgImg = {
   pianote: pianoteBgImg
 }
 
-export const bgImgLight = {
-  drumeo: drumeoBgImgLight,
-  singeo: singeoBgImgLight,
-  guitareo: guitareoBgImgLight,
-  pianote: pianoteBgImgLight
+export const bgImgOnboarding = {
+  drumeo: drumeoBgImgOnboarding,
+  singeo: singeoBgImgOnboarding,
+  guitareo: guitareoBgImgOnboarding,
+  pianote: pianoteBgImgOnboarding
 }
 
 // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style

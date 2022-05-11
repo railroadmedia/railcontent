@@ -226,16 +226,54 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
             \App\Decorators\Content\UrlDecorator::class,
             \App\Decorators\Content\InstructorDecorator::class,
+            \App\Decorators\Content\AddedToPrimaryPlaylistDecorator::class,
+            \App\Decorators\Content\ContentTimezoneDecorator::class,
+            \App\Decorators\Content\PianoteFoundationsLearningPathDecorator::class,
+            \App\Decorators\Content\LearningPathLevelDecorator::class,
+            \App\Decorators\Content\ChapterDecorator::class,
+            \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
+            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
+            \App\Decorators\Content\ContentLikesDecorator::class, // this one
+            \App\Decorators\Content\ResourceDecorator::class, // this one
+            \App\Decorators\Content\ContentExperienceDecorator::class,
+//            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
+            \App\Decorators\Content\PackBundleLessonDecorator::class,
+            \App\Decorators\Content\PackBundleDecorator::class,
+            \App\Decorators\Content\PackDecorator::class,
+            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
+            \App\Decorators\Content\LearningPathCourseDecorator::class,
+            \App\Decorators\Content\LearningPathLessonDecorator::class,
+            \App\Decorators\Content\NewDecorator::class,
+            \App\Decorators\Content\LiveEventDecorator::class,
+            \App\Decorators\Content\DefaultDifficultyDecorator::class,
+            \App\Decorators\Content\AssignmentXPDecorator::class,
+
+            \App\Decorators\Content\CourseDecorator::class,
+            \App\Decorators\Content\CoursePartDecorator::class,
+            \App\Decorators\Content\ShowsDecorator::class,
+            \App\Decorators\Content\SongsDecorator::class,
+            \App\Decorators\Content\PlayAlongDecorator::class,
+            \App\Decorators\Content\StudentFocusDecorator::class,
+            \App\Decorators\Content\RudimentDecorator::class,
+
+            \App\Decorators\Content\SemesterPackDecorator::class,
+            \App\Decorators\Content\SemesterPackLessonDecorator::class,
+
+            // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
+            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
+
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
+            \App\Decorators\Comments\CommentUserDecorator::class,
+            \App\Decorators\Comments\CommentLikesUserDecorator::class,
         ],
         'comment_likes' => [
-
+            \App\Decorators\Content\ContentCommentLikesUserDecorator::class,
         ],
         'content_likes' => [
-
+            \App\Decorators\Content\ContentLikesUserDecorator::class,
         ],
     ],
 

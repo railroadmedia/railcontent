@@ -7,7 +7,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $user->display_name }} | Musora</title>
+    <title>{{ $dashboardUser->display_name }} | Musora</title>
 @endsection
 
 @section('content')
@@ -15,19 +15,19 @@
 
             @include('partials.bladesora.members.partials._account-header', [
                 "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
-                "userAvatar" => $user->profile_picture_url,
-                "userName" => $user->display_name,
+                "userAvatar" => $dashboardUser->profile_picture_url,
+                "userName" => $dashboardUser->display_name,
                 "appName" => 'Musora',
-                "memberSince" => $user->created_at,
+                "memberSince" => $dashboardUser->created_at,
             ])
 
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14">
                 <div class="tw-flex tw-flex-col">
-                    
+
                     {{-- Dashboard Header --}}
                     <div class="tw-flex tw-flex-row tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-mb-5 md:tw-mb-7">
                         <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
-                            {{ $isCurrentUsersProfile ? 'My' : possessivize($user->display_name) }} Dashboard
+                            {{ $isCurrentUsersProfile ? 'My' : possessivize($dashboardUser->display_name) }} Dashboard
                         </h1>
                     </div>
 
@@ -37,10 +37,10 @@
                             {{-- Title --}}
                             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                                 <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
-                            </div> 
+                            </div>
                             {{-- Metrics --}}
                             <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
-                                @foreach($userMetrics as $userMetric)                                
+                                @foreach($userMetrics as $userMetric)
                                     @include('partials.bladesora.members.components.user-metric', [
                                         "themeColor" => $brand,
                                         "icon" => $userMetric['icon'],
@@ -55,19 +55,19 @@
                     {{-- Completed Lessons --}}
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         @if($isCurrentUsersProfile)
-                            <a href="{{ '' }}" 
-                                dusk="see-all-started" 
+                            <a href="{{ '' }}"
+                                dusk="see-all-started"
                                 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                             >
                                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed Lessons</h2>
                             </a>
-                            <a href="{{ '' }}" 
+                            <a href="{{ '' }}"
                                 dusk="see-all-started"
                                 class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
-                            > 
-                                See All 
+                            >
+                                See All
                             </a>
-                        @else                  
+                        @else
                             <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed Lessons</h2>
                         @endif
                     </div>
@@ -89,19 +89,19 @@
                     {{-- Started Lessons --}}
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         @if($isCurrentUsersProfile)
-                            <a href="{{ '' }}" 
-                                dusk="see-all-started" 
+                            <a href="{{ '' }}"
+                                dusk="see-all-started"
                                 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                             >
                                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started Lessons</h2>
                             </a>
-                            <a href="{{ '' }}" 
+                            <a href="{{ '' }}"
                                 dusk="see-all-started"
                                 class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
-                            > 
-                                See All 
+                            >
+                                See All
                             </a>
-                        @else                  
+                        @else
                             <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started Lessons</h2>
                         @endif
                     </div>
@@ -126,12 +126,12 @@
                             {{-- Title --}}
                             <div class="tw-flex tw-flex-col tw-mb-4">
                                 <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
-                                    About {{ $isCurrentUsersProfile ? 'You' : $user->display_name }}
+                                    About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
                                 </h1>
 
                                 @if($isCurrentUsersProfile)
-                                    <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $user->id]) }}"
-                                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg tw-tracking-wide" 
+                                    <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
+                                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg tw-tracking-wide"
                                         dusk="edit-user">
                                         Edit
                                     </a>

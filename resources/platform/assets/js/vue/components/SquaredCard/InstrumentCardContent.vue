@@ -10,8 +10,7 @@ export default {
         class="tw-flex tw-h-full tw-w-full tw-flex-col tw-items-center tw-justify-center tw-text-white"
     >
         <div
-            class="tw-text-[75px] tw-leading-[45px]"
-            style="font-family: Bebas Neue"
+            class="tw-text-[75px] tw-leading-[45px] tw-font-bebas-neue"
         >
             {{ instrumentText }}
         </div>

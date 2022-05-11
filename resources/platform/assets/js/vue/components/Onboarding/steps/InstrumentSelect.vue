@@ -1,12 +1,12 @@
 <script setup>
 import SquaredCard from "../../SquaredCard/SquaredCard.vue";
 import SquaresContainer from "../../SquaredCard/SquaresContainer.vue";
-import InstrumentCardContent from "../InstrumentCardContent.vue";
+import InstrumentCardContent from "../../SquaredCard/InstrumentCardContent.vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 
-import { brandUrl, bgColor, bgImg } from "../../../../constants/brands";
+import { brandUrl, bgImg } from "../../../../constants/brands";
 const props = defineProps({
   brand: {
     type: String,

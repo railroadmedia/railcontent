@@ -18,6 +18,7 @@ const props = defineProps({
     default: [],
   },
 });
+
 const currentSlide = ref(0);
 const slides = ref([]);
 const slideInterval = ref(null);
