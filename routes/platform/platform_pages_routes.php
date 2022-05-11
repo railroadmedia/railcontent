@@ -94,13 +94,13 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo'])
             ->name('platform.shows');
 
-        Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])
-            ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
-            ->name('platform.play-alongs');
-
         Route::get('/{brand}/student-focus', [ContentPagesController::class, 'studentFocus'])
             ->whereIn('brand', all_brands())
             ->name('platform.student-focus');
+
+        Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])
+            ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
+            ->name('platform.play-alongs');
 
         Route::get('/{brand}/rudiments', [ContentPagesController::class, 'rudiments'])
             ->whereIn('brand', [Brand::Drumeo->value])

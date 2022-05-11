@@ -7,7 +7,7 @@
 @section('content')
         <div v-cloak>
 
-        @component('partials._header-banner')
+        @component('partials._header-banner', ['backgroundImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/backgrounds/default-3840.jpg'])
             @slot('content')
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
@@ -28,15 +28,13 @@
             <div class="tw-flex tw-flex-col mv-3">
                 <div class="tw-flex tw-flex-row tw-flex-wrap">
                     @foreach($lessonTypes as $lessonType)
-                        <a href="{{ url()->route('members.catalogues.show', ["contentType" => $lessonType['type']]) }}"
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $lessonType['type']]) }}"
                         class="tw-flex tw-flex-col xs-6 sm-3 pa-1"
                         dusk="{{$lessonType['type']}}">
 
                             {{--                        <div class="show-index-card square corners-10 shadow relative" style="background-image:url({{ $lessonType['thumbnail'] }});">--}}
-                            <div class="show-index-card square corners-10 tw-shadow tw-relative" style="background-image:url({{imgix(
-                $lessonType['thumbnail'],
-                ["q" => 80, "w" => 650, "h" => 650, "auto" => "format"]
-            )}});">
+                            <div class="show-index-card square corners-10 tw-shadow tw-relative"
+                                 style="background-image:url({{cf_img($lessonType['thumbnail'],["quality" => 80, "width" => 650, "height" => 650,])}});">
                                 <span class="box-hover heading corners-10">
                                     <i class="fas fa-arrow-right"></i>
                                 </span>

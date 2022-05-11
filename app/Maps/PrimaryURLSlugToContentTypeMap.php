@@ -21,6 +21,7 @@ class PrimaryURLSlugToContentTypeMap
         'library' => 'recording',
         'recording' => 'recording',
         'play-alongs' => 'play-along',
+        'student-focus' => 'student-focus',
         'archives' => 'recording',
         'live-streams' => 'live',
         'the-history-of-electronic-drums' => 'the-history-of-electronic-drums',
