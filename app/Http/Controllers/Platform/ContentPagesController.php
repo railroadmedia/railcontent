@@ -26,8 +26,8 @@ class ContentPagesController extends BaseController
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
 
     /**
-     * @param  ContentService  $contentService
-     * @param  VimeoVideoSourcesDecorator  $vimeoVideoSourcesDecorator
+     * @param ContentService $contentService
+     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      */
     public function __construct(
         ContentService $contentService,
@@ -182,7 +182,7 @@ class ContentPagesController extends BaseController
         }
 
         $progressLabelText =
-            $firstLevelContent->fetch('level_rank') ? 'Level - '.$firstLevelContent->fetch('level_rank') : '';
+            $firstLevelContent->fetch('level_rank') ? 'Level - ' . $firstLevelContent->fetch('level_rank') : '';
 
         return view(
             'content.overview',
@@ -246,7 +246,7 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - ' . $firstContent->fetch('level_rank');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -286,8 +286,7 @@ class ContentPagesController extends BaseController
         $secondId,
         $thirdSlug,
         $thirdId,
-    )
-    {
+    ) {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $firstContent = $this->contentService->getById($firstId);
@@ -368,13 +367,58 @@ class ContentPagesController extends BaseController
         return view('content.shows-index', ['shows' => $showsViewData]);
     }
 
-    public function studentFocus()
+    public function studentFocus(Request $request, $domain, $brand)
     {
+        if (brand() === 'drumeo') {
+            return $this->contentTypeCatalog($request, $domain, $brand, 'student-focus');
+        }
 
+        if (brand() === 'pianote') {
+            $lessonTypes = [
+                [
+                    "type" => "student-reviews",
+                    "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg",
+                ],
+                [
+                    "type" => "question-and-answer",
+                    "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg",
+                ],
+            ];
+        }
+
+        if (brand() === 'guitareo') {
+            $lessonTypes = [
+                [
+                    "type" => "student-reviews",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png",
+                ],
+                [
+                    "type" => "question-and-answer",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/question-answer-singeo.png",
+                ],
+            ];
+        }
+
+        if (brand() === 'singeo') {
+            $lessonTypes = [
+                [
+                    "type" => "student-reviews",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/student-reviews.png",
+                ],
+                [
+                    "type" => "question-and-answer",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/question-answer.png",
+                ],
+            ];
+        }
+
+        return view('content.student-focus', [
+            "lessonTypes" => $lessonTypes,
+        ]);
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @param $contentId
      * @return RedirectResponse
      */
