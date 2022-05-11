@@ -59,6 +59,11 @@ Route::domain('{musoraDomain}')
                 'boot-camps',
                 'chords-and-scales',
                 'bootcamps',
+                'chords-scales',
+                'library',
+                'recording',
+                'play-alongs',
+                'archives',
             ])
             ->name('platform.content-type-catalog');
 

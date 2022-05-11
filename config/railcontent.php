@@ -739,6 +739,67 @@ return [
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
         ],
+        'guitareo' => [
+            'courses' => [
+                "name" => "Courses",
+                "icon" => "icon-courses",
+                "description" => "The Courses area is where you will find all of the individual step-by-step Guitareo video courses. You will find a wide variety of topics including but not limited to strumming, scales, chords, techniques, exercises, reading music, music theory, lead guitar, rhythm guitar, and more.",
+                "allowableFilters" => ['difficulty', 'topic', 'instructor', 'progress'],
+            ],
+            'songs' => [
+                "name" => "Songs",
+                "icon" => "icon-songs",
+                "description" => "Want to learn famous cover songs? You are in the right place! Each song series here breaks down the tune and then turns you loose to jam with it for yourself over a fully produced jam track, TAB, and sheet music so you can be the guitarist in the band. It may seem like a lot of work to learn an entire song, but there is no better way to learn new things on the guitar. ",
+                "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+            ],
+            'play-alongs' => [
+                "name" => "Play Alongs",
+                "icon" => "icon-play-alongs",
+                "description" => "The Play-Alongs has to be the most underrated area of the site. Each Play-Along teaches you a track in the style of a famous song or artist. You will learn every element you need to play each play-along - the chords, strumming patterns, riffs, and song layout. From there you Play-Along to the full jam track complete with sheet music and TAB. There is nothing like learning the guitar through playing music!",
+                "allowableFilters" => ['difficulty', 'style', 'topic', 'progress'],
+            ],
+            'chords-scales' => [
+                "name" => "Chords & Scales",
+                "icon" => "icon-chords-scales-guitareo",
+                "description" => "Chords and scales are some of the building blocks of our playing. I know that there are loads of chords and scales out there so sometimes it can feel a bit overwhelming to keep learning more. This area is a great resource to use when you need to learn a new chord or scale for a song or when you just feel like expanding your personal chord or scale library.",
+                "allowableFilters" => [],
+            ],
+            'archives' => [
+                "name" => "Archives",
+                "shortname" => "Lessons",
+                "icon" => "icon-library",
+                "description" => "Miss a live event or just want to watch a particular episode again? This is the place to do it. All of the Guitareo live broadcasts are archived here for you to watch at your leisure. If you have any questions or want to discuss the topics mentioned in the videos you can always post in the forum.",
+                "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+            ],
+            'quick-tips' => [
+                "name" => "Quick Tips",
+                "shortname" => "quick-tips",
+                "icon" => "icon-shows",
+                "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you play your way to success!",
+                "allowableFilters" => ['difficulty', 'topic', 'progress'],
+            ],
+            'question-and-answer' => [
+                "name" => "Q&A",
+                "icon" => "fas fa-question-circle",
+                "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
+                "allowableFilters" => [],
+            ],
+            'student-reviews' => [
+                "name" => "Student Reviews",
+                "icon" => "icon-student-focus",
+                "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
+                "allowableFilters" => [],
+            ],
+            'subscribed' => [
+                'name' => 'Subscribed',
+                'shortname' => 'Content',
+                'icon' => 'fas fa-bell',
+                'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
+
+        ],
     ],
 
 //    ---------------------------------------

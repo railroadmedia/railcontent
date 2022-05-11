@@ -17,5 +17,10 @@ class PrimaryURLSlugToContentTypeMap
         'bootcamps' => 'boot-camps',
         'chords-and-scales' => 'chord-and-scale',
         'podcasts' => 'podcasts',
+        'chords-scales' => 'chord-and-scale',
+        'library' => 'recording',
+        'recording' => 'recording',
+        'play-alongs' => 'play-along',
+        'archives' => 'recording',
     ];
 }
