@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Usora\Events;
+namespace Modules\UserManagementSystem\Events;
 
 use Illuminate\Queue\SerializesModels;
 
