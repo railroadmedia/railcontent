@@ -10,9 +10,7 @@ const onClose = () => {
 };
 
 const onOverlayClick = (event) => {
-  console.log(event.target.id);
   if (event.target.id === `${props.modalId}-overlay`) {
-    console.log("onOverlayClick");
     emit("onClose", true);
   }
 };

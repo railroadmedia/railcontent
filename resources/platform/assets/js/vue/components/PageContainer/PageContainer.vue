@@ -3,11 +3,9 @@ import { ref } from "vue";
 import Navbar from "../Navbar/Navbar.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
-import { useRouter, useRoute } from "vue-router";
+// import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
 import { setEndpointPrefix } from "../../utils"
-import simplebar from "simplebar-vue";
-import "simplebar/dist/simplebar.min.css";
 
 export default {
   name: "PageContainer",
@@ -43,8 +41,8 @@ export default {
     const isSidebarCollapsed = ref(false);
     const isSidebarHidden = ref(false);
     const isDarkModeSelected = ref(false);
-    const route = useRoute();
-    const router = useRouter();
+    // const route = useRoute();
+    // const router = useRouter();
 
     const setDarkMode = (isSelected) => {
       const body = document.getElementById("app-body");
@@ -56,7 +54,6 @@ export default {
     };
 
     const onCollapseSidebar = (val) => {
-      console.log("collapse sidebar called");
       if (typeof val === "boolean") {
         isSidebarCollapsed.value = val;
         isSidebarHidden.value = val;
