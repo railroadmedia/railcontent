@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypeHierarchyMap;
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +14,6 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Support\Collection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,25 +25,24 @@ class ContentPagesController extends BaseController
 
     /**
      * @param  ContentService  $contentService
-     * @param  ContentFollowsService  $contentFollowsService
+     * @param  VimeoVideoSourcesDecorator  $vimeoVideoSourcesDecorator
      */
     public function __construct(
         ContentService $contentService,
-        ContentFollowsService $contentFollowsService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
     }
 
-    public function courses(Request $request, $domain)
+    public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
     {
         ConfigService::$availableBrands = [brand()];
         ContentRepository::$bypassPermissions = true;
 
-        $lessonType = 'course';
-        $catalogName = 'courses';
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$catalogName] ?? [];
+        $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
+        $catalogName = $contentTypeName;
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
 
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];

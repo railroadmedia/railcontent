@@ -20,13 +20,13 @@
               action=""
               accept-charset="UTF-8">
 
-            <input type="hidden" name="subject" value="Student Review Application from: {{ user()->display_name }} ({{ current_user()->getEmail() }})">
+            <input type="hidden" name="subject" value="Student Review Application from: {{ user()->display_name }} ({{ user()->email }})">
 
-            <input type="hidden" name="student progress info" value="https://{{ environmentSubdomain() }}musora.com/admin/user-progress-info/{{ current_user()->getId() }}">
+            <input type="hidden" name="student progress info" value="https://{{ current_subdomain() }}musora.com/admin/user-progress-info/{{ user()->id }}">
             <div class="flex flex-column mb-2">
                 <p class="body">What is your goal as a singer?</p>
 
-                @include('bladesora::members.inputs.text-input', [
+                @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => $brand,
                     "inputId" => "pianoGoal",
                     "inputLabel" => "",
@@ -41,7 +41,7 @@
 
             <div class="flex flex-column mb-2">
                 <p class="body">What is one skill you'd like to improve on?</p>
-                @include('bladesora::members.inputs.text-input', [
+                @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => $brand,
                     "inputId" => "skillImproval",
                     "inputLabel" => "",
@@ -56,7 +56,7 @@
 
             <div class="flex flex-column mb-2">
                 <p class="body">What is your biggest weakness as a singer?</p>
-                @include('bladesora::members.inputs.text-input', [
+                @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => $brand,
                     "inputId" => "pianoWeakness",
                     "inputLabel" => "",
@@ -71,7 +71,7 @@
 
             <div class="flex flex-column mb-2">
                 <p class="body">Tell us about your submission. What are you singing and what would you like the instructor to focus on?</p>
-                @include('bladesora::members.inputs.textarea-input', [
+                @include('partials.bladesora.members.inputs.textarea-input', [
                     "brand" => $brand,
                     "inputId" => "applicationFocus",
                     "inputLabel" => "",
@@ -86,7 +86,7 @@
 
             <div class="flex flex-column mb-2">
                 <p class="body">Youtube Video URL</p>
-                @include('bladesora::members.inputs.text-input', [
+                @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => $brand,
                     "inputId" => "applicationFocus",
                     "inputLabel" => "",
