@@ -64,11 +64,34 @@ Route::domain('{musoraDomain}')
                 'recording',
                 'play-alongs',
                 'archives',
+                'the-history-of-electronic-drums',
+                'backstage-secrets',
+                'student-collaborations',
+                'live-streams',
+                'solos',
+                'boot-amps',
+                'gear-guides',
+                'performances',
+                'in-rhythm', /* 2020 */
+                'challenges', /* 2020 */
+                'on-the-road', /* 2020 */
+                'diy-drum-experiments', /* 2019*/
+                'rhythmic-adventures-of-captain-carson', /* 2019*/
+                'study-the-greats', /* 2019*/
+                'rhythms-from-another-planet', /* 2019*/
+                'tama-drums', /* 2019*/
+                'paiste-cymbals', /* 2019*/
+                'behind-the-scenes', /* 2019*/
+//        'namm-2019', /* 2019*/
+//        'camp-drumeo-ah', /* 2019*/
+//        '25-days-of-christmas', /* 2019*/
+                'exploring-beats', /* 2018*/
+                'sonor-drums', /* 2018*/
             ])
             ->name('platform.content-type-catalog');
 
         Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
-            ->whereIn('brand', all_brands())
+            ->whereIn('brand', ['drumeo'])
             ->name('platform.shows');
 
         Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])

@@ -461,7 +461,7 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'sort',
             ],
-            'live' => [
+            'live-streams' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/show-live.jpg',
                 'name' => 'Live',
                 'shortname' => 'Live Lessons',
@@ -798,7 +798,69 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
-
+        ],
+        'singeo' => [
+            'all' =>
+                [
+                    'name' => 'New Content',
+                    'shortname' => 'Content',
+                    'icon' => 'fas fa-star',
+                    'description' => "Here's a list of every lesson that's been published in Singeo. Browse on your
+                own or use search to find whatever it is you'd like to learn!",
+                    'allowableFilters' => [],
+                    'sortBy' => '-published_on',
+                ],
+            'subscribed' =>
+                [
+                    'name' => 'Subscribed',
+                    'shortname' => 'Content',
+                    'icon' => 'fas fa-bell',
+                    'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
+                    'allowableFilters' => [],
+                    'sortBy' => '-published_on',
+                ],
+            'courses' =>
+                [
+                    "name" => "Courses",
+                    "icon" => "icon-courses",
+                    "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
+                    "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+                ],
+            'songs' =>
+                [
+                    "name" => "Songs",
+                    "icon" => "icon-songs",
+                    "description" => "We all love singing along with our favorite songs!  Here you'll find a wide variety of songs from different artists and styles that you can sing along with.  You can even choose between three vocal ranges to fit your unique voice!",
+                    "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+                ],
+            'quick-tips' =>
+                [
+                    "name" => "Quick Tips",
+                    "icon" => "icon-shows",
+                    "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
+                    "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+                ],
+            'question-and-answer' =>
+                [
+                    "name" => "Q&A",
+                    "icon" => "fas fa-question-circle",
+                    "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
+                    "allowableFilters" => [],
+                ],
+            'student-reviews' =>
+                [
+                    "name" => "Student Reviews",
+                    "icon" => "icon-student-focus",
+                    "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
+                    "allowableFilters" => [],
+                ],
+            'routines' =>
+                [
+                    "name" => "Routines",
+                    "icon" => "icon-shows",
+                    "description" => "Finding the perfect practice routine to build your singing skills can be tough, especially on a busy schedule. Start your day right or warm-up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for the busy days when you just want to shake things up a bit.",
+                    "allowableFilters" => [],
+                ],
         ],
     ],
 
@@ -814,7 +876,7 @@ return [
         'quick-tips',
         'question-and-answer',
         'student-collaborations',
-        'live',
+        'live-streams',
         'podcasts',
         'solos',
         'boot-camps',

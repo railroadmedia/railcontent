@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypeHierarchyMap;
+use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -284,7 +286,8 @@ class ContentPagesController extends BaseController
         $secondId,
         $thirdSlug,
         $thirdId,
-    ) {
+    )
+    {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $firstContent = $this->contentService->getById($firstId);
@@ -325,7 +328,7 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - ' . $firstContent->fetch('level_rank');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -356,6 +359,18 @@ class ContentPagesController extends BaseController
                 'xpAmount' => $thirdContent->fetch('total_xp'),
             ]
         );
+    }
+
+    public function shows(Request $request, $domain, $brand)
+    {
+        $showsViewData = DrumeoShowDataMapper::cards();
+
+        return view('content.shows-index', ['shows' => $showsViewData]);
+    }
+
+    public function studentFocus()
+    {
+
     }
 
     /**
