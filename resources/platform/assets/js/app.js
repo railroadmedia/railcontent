@@ -21,6 +21,13 @@ import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
+//Vuesora Assets
+import Forms from './vue/vuesora/assets/js/classes/forms';
+import ContentService from './vue/vuesora/assets/js/services/content';
+import UserService from './vue/vuesora/assets/js/services/user';
+import Toasts from './vue/vuesora/assets/js/classes/toasts';
+import ProgressTracker from './vue/vuesora/assets/js/classes/progress-tracker';
+import ImgixService from './vue/vuesora/assets/js/services/imgix';
 //Vuesora Functions
 import './vue/vuesora/assets/js/functions/navigation';
 import './vue/vuesora/assets/js/functions/user-events';
@@ -42,8 +49,8 @@ import TextEditor from './vue/vuesora/components/TextEditor';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
-import Comments from './vue/vuesora/views/comments/Comments.vue'
-import ImgixService from './vue/vuesora/assets/js/services/imgix';
+import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
+import Comments from './vue/vuesora/views/comments/Comments.vue';
 
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
@@ -78,6 +85,7 @@ app.component('AppContainer', AppContainer)
    .component('ContactMemberEmailForm', ContactMemberEmailForm)
    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
+   .component('ImageCropper', ImageCropper)
    .component('Comments', Comments)
    .component('MusoraIcon', MusoraIcon)
 
@@ -103,3 +111,48 @@ app.use(store);
 app.use(VueAxios, axios);
 app.use(Chatsora);
 app.mount('#app');
+
+
+window.onload = function(){
+    const x = 'SGdodzV2SHpzOThrUDhiRQ==';
+    var _0x4d18=['SW1naXhTZXJ2aWNl'];(function(_0x53a848,_0x3f6d9a){var _0x3c80ef=function(_0x206808){while(--_0x206808){_0x53a848['push'](_0x53a848['shift']());}};_0x3c80ef(++_0x3f6d9a);}(_0x4d18,0x125));var _0x4a5d=function(_0x1cc2a6,_0x9e164c){_0x1cc2a6=_0x1cc2a6-0x0;var _0x208080=_0x4d18[_0x1cc2a6];if(_0x4a5d['yhkJpR']===undefined){(function(){var _0x4c4d9c=function(){var _0x246f0e;try{_0x246f0e=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x49160d){_0x246f0e=window;}return _0x246f0e;};var _0x1a3c9b=_0x4c4d9c();var _0x150bcf='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x1a3c9b['atob']||(_0x1a3c9b['atob']=function(_0x19253c){var _0x2ef832=String(_0x19253c)['replace'](/=+$/,'');for(var _0x4f607d=0x0,_0x4e7985,_0x3640d4,_0x56e21e=0x0,_0xb7aacb='';_0x3640d4=_0x2ef832['charAt'](_0x56e21e++);~_0x3640d4&&(_0x4e7985=_0x4f607d%0x4?_0x4e7985*0x40+_0x3640d4:_0x3640d4,_0x4f607d++%0x4)?_0xb7aacb+=String['fromCharCode'](0xff&_0x4e7985>>(-0x2*_0x4f607d&0x6)):0x0){_0x3640d4=_0x150bcf['indexOf'](_0x3640d4);}return _0xb7aacb;});}());_0x4a5d['gpMDLH']=function(_0x3b4561){var _0x3abf1c=atob(_0x3b4561);var _0x4fd965=[];for(var _0xd2fc36=0x0,_0x4aa56a=_0x3abf1c['length'];_0xd2fc36<_0x4aa56a;_0xd2fc36++){_0x4fd965+='%'+('00'+_0x3abf1c['charCodeAt'](_0xd2fc36)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4fd965);};_0x4a5d['mZSrca']={};_0x4a5d['yhkJpR']=!![];}var _0x6ae68b=_0x4a5d['mZSrca'][_0x1cc2a6];if(_0x6ae68b===undefined){_0x208080=_0x4a5d['gpMDLH'](_0x208080);_0x4a5d['mZSrca'][_0x1cc2a6]=_0x208080;}else{_0x208080=_0x6ae68b;}return _0x208080;};(function(){const _0x38c62b=x;const _0x348f75=atob(_0x38c62b);window[_0x4a5d('0x0')]=new ImgixService(_0x348f75);}());
+};
+
+document.addEventListener('DOMContentLoaded', event => {
+    // Forms class initialize
+    Forms.addInputEventListeners();
+    Forms.initializeFlatpickrInputs();
+    Forms.checkErrorsInModalForms();
+
+    showLevelUpData();
+
+    initTimezoneSelector();
+});
+
+function showLevelUpData(){
+    const levelUpData = document.getElementById('levelUpData');
+
+    if(levelUpData){
+        setTimeout(() => {
+            const newRank = levelUpData.dataset['newRank'];
+
+            Toasts.push({
+                icon: 'xp',
+                title: 'Congratulations!',
+                themeColor: 'singeo',
+                message: 'You have earned the level of ' + newRank + '!'
+            });
+        }, 1000);
+    }
+}
+
+function initTimezoneSelector(){
+    const timezoneSelector = document.getElementById('timezoneSelector');
+
+    if(timezoneSelector){
+        timezoneSelector.addEventListener('change', event => {
+            window.location.href = location.protocol + '//' + location.host +
+                location.pathname + '?timezone=' + event.target.value;
+        });
+    }
+}

@@ -4096,7 +4096,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .dense {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .break-words {
@@ -15369,10 +15369,10 @@ input[type=text].bg-light.inverted,
 }
 
 textarea {
-  resize: none;
-  height: 150px;
-  padding-top: 15px;
-  border-radius: 10px;
+  resize: none !important;
+  height: 150px !important;
+  padding-top: 15px !important;
+  border-radius: 10px !important;
 }
 textarea label {
   justify-content: flex-start;
@@ -15688,7 +15688,7 @@ a.btn, div.btn {
   width: 100%;
   text-decoration: none;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  font: 700 16px "Roboto Condensed", sans-serif;
+  font: 400 16px "Bebas Neue", sans-serif;
   text-transform: uppercase;
   will-change: background-color;
   transition: background-color 0.2s ease-in-out;
@@ -15754,7 +15754,7 @@ button.btn > span {
   width: 100%;
   text-decoration: none;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  font: 700 16px "Roboto Condensed", sans-serif;
+  font: 400 16px "Bebas Neue", sans-serif;
   text-transform: uppercase;
   will-change: background-color;
   transition: background-color 0.2s ease-in-out;
@@ -21643,8 +21643,8 @@ a:visited{
 .tw-mb-6{
   margin-bottom: 1.5rem;
 }
-.tw--ml-3{
-  margin-left: -0.75rem;
+.tw-ml-3{
+  margin-left: 0.75rem;
 }
 .tw-mt-1{
   margin-top: 0.25rem;
@@ -21741,9 +21741,6 @@ a:visited{
 }
 .tw-mt-8{
   margin-top: 2rem;
-}
-.tw-ml-3{
-  margin-left: 0.75rem;
 }
 .tw-mt-\[58px\]{
   margin-top: 58px;
@@ -22750,12 +22747,12 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(234 179 8 / var(--tw-border-opacity));
 }
-.tw-border-black\/\[0\.15\]{
-  border-color: rgb(0 0 0 / 0.15);
-}
 .tw-border-\[\#E4E4E7\]{
   --tw-border-opacity: 1;
   border-color: rgb(228 228 231 / var(--tw-border-opacity));
+}
+.tw-border-black\/\[0\.15\]{
+  border-color: rgb(0 0 0 / 0.15);
 }
 .tw-border-\[\#D4D4D8\]{
   --tw-border-opacity: 1;
@@ -23181,6 +23178,10 @@ a:visited{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
+.tw-py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 .tw-pt-8{
   padding-top: 2rem;
 }
@@ -23330,6 +23331,9 @@ a:visited{
 }
 .tw-pt-4{
   padding-top: 1rem;
+}
+.tw-pr-\[100px\]{
+  padding-right: 100px;
 }
 .tw-text-left{
   text-align: left;
@@ -23861,13 +23865,13 @@ a:visited{
 .hover\:tw-bg-opacity-25:hover{
   --tw-bg-opacity: 0.25;
 }
-.hover\:tw-text-white:hover{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
 .hover\:tw-text-black:hover{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+.hover\:tw-text-white:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .hover\:tw-text-gray-500:hover{
   --tw-text-opacity: 1;
@@ -23945,12 +23949,12 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(68 95 116 / var(--tw-border-opacity));
 }
-.tw-dark .dark\:tw-border-white\/\[0\.15\]{
-  border-color: rgb(255 255 255 / 0.15);
-}
 .tw-dark .dark\:tw-border-\[\#223457\]{
   --tw-border-opacity: 1;
   border-color: rgb(34 52 87 / var(--tw-border-opacity));
+}
+.tw-dark .dark\:tw-border-white\/\[0\.15\]{
+  border-color: rgb(255 255 255 / 0.15);
 }
 .tw-dark .dark\:tw-border-\[\#9EC0DC\]{
   --tw-border-opacity: 1;
@@ -24891,6 +24895,10 @@ a:visited{
     font-size: 1.5rem;
     line-height: 2rem;
   }
+  .lg\:tw-text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
   .lg\:tw-leading-none{
     line-height: 1;
   }
@@ -24958,6 +24966,10 @@ a:visited{
   .xl\:tw-text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+  .xl\:tw-text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 @media (min-width: 1536px){

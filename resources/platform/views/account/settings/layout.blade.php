@@ -129,10 +129,10 @@
                 <div class="tw-flex tw-flex-col grow">
                     <div class="tw-flex tw-flex-row tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                         @foreach($sections as $index => $section)
-                            <a href="{{ $section['url'] }}" class="tw-z-10 tw-mb-[-2px] tw-w-full tw-flex tw-flex-row tw-items-center tw-justify-center tw-font-bebas-neue tw-text-xl tw-pb-2 ph-1 tw-mr-2 tw-no-underline
-                            {{ $section['active'] ? 'tw-border-b-2 tw-border-black dark:tw-border-white tw-text-black dark:tw-text-white' : 'visited:tw-text-gray-400 tw-text-gray-400 dark:tw-text-[#80A0B9]' }}">
-                                <i class="tw-text-lg {{ $section['icon'] }} {{ $section['active'] ? 'tw-text-black dark:tw-text-white' : 'tw-text-gray-400 dark:tw-text-[#80A0B9]' }}"></i>
-                                <span class="hide-xs-only">&nbsp; {{ $section['title'] }}</span>
+                            <a href="{{ $section['url'] }}" class="tw-z-10 tw-mb-[-2px] tw-w-full tw-flex tw-flex-row tw-items-center tw-justify-center tw-font-bebas-neue tw-pb-2 ph-1 tw-mr-2 tw-transition tw-no-underline hover:tw-text-black dark:hover:tw-text-white
+                                {{ $section['active'] ? 'tw-border-b-2 tw-border-black dark:tw-border-white tw-text-black dark:tw-text-white' : 'visited:tw-text-gray-400 tw-text-gray-400 dark:tw-text-[#80A0B9]' }}">
+                                <i class="tw-text-lg {{ $section['icon'] }}"></i>
+                                <span class="hide-xs-only tw-ml-2 tw-text-lg xl:tw-text-xl tw-leading-none">{{ $section['title'] }}</span>
                             </a>
                         @endforeach
                     </div>

@@ -357,11 +357,12 @@
   }
 }
 
+//Force these styles (for now)
 textarea {
-  resize:none;
-  height:150px;
-  padding-top:15px;
-  border-radius:10px;
+  resize:none !important;
+  height:150px !important;
+  padding-top:15px !important;
+  border-radius:10px !important; 
 
   label {
     justify-content:flex-start;
