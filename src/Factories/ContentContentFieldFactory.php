@@ -30,7 +30,7 @@ class ContentContentFieldFactory extends ContentFieldService
 
         $data = [
             'content_id' => $contentId ?? rand(),
-            'key' => $key ??  $this->faker->randomElement(config('railcontent.contentColumnNamesForFields')),
+            'key' => $key ??  'name',
             'value' => $value ??  $this->faker->word,
             'position' => $position ?? 1,
             'type' => $type ?? 'string',
