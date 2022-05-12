@@ -410,4 +410,70 @@ class ElasticService
 
         return $elasticData;
     }
+
+    /**
+     * @param $contentType
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function syncDocumentsByContentType($contentType)
+    {
+        $client = $this->getClient();
+
+        $this->contentService = app(ContentService::class);
+        $elasticData = $this->contentService->getElasticDataByContentType($contentType);
+
+        $indexName = config('railcontent.elastic_index_name', 'content');
+        $paramsContent['body'][] = [
+            'index' => [
+                '_index' => $indexName,
+            ],
+            'refresh' => true,
+        ];
+
+        $paramsContent['body'][]= $elasticData;
+
+        // Create indexes if not exists
+        if (!$client->indices()
+            ->exists(['index' => $indexName])) {
+            $this->createContentIndex();
+        }
+
+        //update or create document
+        try {
+            $paramsSearch = [
+                'index' => $indexName,
+                'body' => [
+                    'query' => [
+                        'term' => [
+                            'content_type' => $contentType,
+                        ],
+                    ],
+                ],
+            ];
+
+            $documents = $client->search($paramsSearch);
+
+            //delete document if exists
+            foreach ($documents['hits']['hits'] as $elData) {
+                $paramsContent = [
+                    'index' => $indexName,
+                    'refresh' => true,
+                    'body' => $elasticData[$elData['_source']['content_id']],
+                ];
+                $paramsDelete = [
+                    'index' => $indexName,
+                    'id' => $elData['_id'],
+                    'refresh' => true,
+                ];
+
+                $client->delete($paramsDelete);
+                $client->index($paramsContent);
+            }
+        } catch (Exception $exception) {
+            error_log('Can not delete elasticsearch index '.print_r($exception->getMessage(), true));
+        }
+
+        return $elasticData;
+    }
 }

@@ -41,7 +41,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $key = $this->faker->word;
+        $key = 'description';
         $value = $this->faker->text(500);
 
         $response = $this->call(

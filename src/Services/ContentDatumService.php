@@ -97,6 +97,8 @@ class ContentDatumService
         //save a content version
         event(new ContentDatumUpdated($datum['content_id'], $datum, $data));
 
+        event(new ElasticDataShouldUpdate($datum['content_id']));
+
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $datum['content_id']);
 
@@ -117,11 +119,10 @@ class ContentDatumService
 
         $delete = $this->datumRepository->deleteAndReposition($datum);
 
-        //save a content version 
-//        event(new ContentDatumDeleted($datum['content_id'], $datum));
-
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $datum['content_id']);
+
+        event(new ElasticDataShouldUpdate($datum['content_id']));
 
         return $delete;
     }

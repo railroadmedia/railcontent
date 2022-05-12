@@ -3,17 +3,14 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
-use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\ContentTransformer;
-use Railroad\Railcontent\Transformers\DataTransformer;
 use Railroad\Railcontent\Transformers\ParentContentTransformer;
 use Railroad\Railcontent\Transformers\VideoTransformer;
 
@@ -147,13 +144,12 @@ class ContentRepository extends RepositoryBase
 
         $data = $contentRows[0] ?? null;
 
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video','focus'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video', 'focus'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
 
         return $this->parserResult($data);
-
     }
 
     /**
@@ -179,7 +175,8 @@ class ContentRepository extends RepositoryBase
                 }
             }
         }
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'style', 'topic', 'bpm', 'video'], $contentRows);
+        $extraData =
+            $this->geExtraDataInOldStyle(['data', 'instructor', 'style', 'topic', 'bpm', 'video'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -244,7 +241,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -278,7 +275,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -315,7 +312,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->selectInheritenceColumns()
                 ->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -364,7 +361,7 @@ class ContentRepository extends RepositoryBase
                 ->whereIn(ConfigService::$tableContentHierarchy.'.parent_id', $parentIds)
                 ->selectInheritenceColumns()
                 ->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor','video'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
         $parser = $this->setPresenter(ParentContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -392,7 +389,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -420,7 +417,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -452,7 +449,6 @@ class ContentRepository extends RepositoryBase
         $this->setPresenter(ContentTransformer::class);
 
         return $this->parserResult($contentRows);
-
     }
 
     /**
@@ -477,7 +473,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -504,15 +500,14 @@ class ContentRepository extends RepositoryBase
                 )
                 ->havingRaw(
                     ConfigService::$tableContent.".type IN (".implode(",", array_fill(0, count([$type]), "?")).")",
-                    [$type]
-                )
+                    [$type])
                 ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress.'.state', $state)
                 ->orderBy('published_on', 'desc')
                 ->limit($limit)
                 ->skip($skip)
                 ->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -659,26 +654,12 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
 
         $merged = array_merge($beforeContents, $afterContents);
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $merged);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $merged);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
 
         $processedContents = $this->parserResult($merged);
-//        $contentFieldRows = $this->getFieldsByContentIds($merged);
-//        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($merged, 'id'));
-//
-//        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-//            array_column($merged, 'id'),
-//            array_column($merged, 'type')
-//        );
-//
-//        $processedContents = $this->processRows(
-//            $merged,
-//            $contentFieldRows,
-//            $contentDatumRows,
-//            $contentPermissionRows
-//        );
 
         foreach ($afterContents as $afterContentIndex => $afterContent) {
             foreach ($processedContents as $processedContentIndex => $processedContent) {
@@ -793,7 +774,7 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->where(ConfigService::$tableContent.'.user_id', $userId)
                 ->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor','video','style','bpm'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video', 'style', 'bpm'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -818,8 +799,7 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->selectInheritenceColumns()
                 ->restrictByUserAccess()
-                ->leftJoin(
-                    ConfigService::$tableContentHierarchy,
+                ->leftJoin(ConfigService::$tableContentHierarchy,
                     function (JoinClause $joinClause) use ($childContentIds) {
                         $joinClause->on(
                             ConfigService::$tableContentHierarchy.'.parent_id',
@@ -827,8 +807,7 @@ class ContentRepository extends RepositoryBase
                             ConfigService::$tableContent.'.id'
                         )
                             ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childContentIds);
-                    }
-                )
+                    })
                 ->where(ConfigService::$tableContent.'.user_id', $userId);
 
         if (!empty($slug)) {
@@ -836,7 +815,7 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentRows = $query->getToArray();
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -970,7 +949,7 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $contentRows->getToArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data','instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
 
@@ -1159,7 +1138,6 @@ class ContentRepository extends RepositoryBase
                 ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();
-
 
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic'], $contentRows);
 

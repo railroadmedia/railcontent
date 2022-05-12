@@ -26,7 +26,7 @@ class SyncElasticsearchListener
     public function handleSync(ElasticDataShouldUpdate $event)
     {
         if (config('railcontent.use_elastic_search')) {
-            $this->elasticService->syncDocument($event->contentId);
+            $elasticDocument = ($event->contentType)?$this->elasticService->syncDocumentsByContentType($event->contentType):$this->elasticService->syncDocument($event->contentId);
         }
     }
 }

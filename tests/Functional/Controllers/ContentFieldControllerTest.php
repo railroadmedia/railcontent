@@ -130,78 +130,6 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedErrors, $response->decodeResponseJson()->json('meta')['errors']);
     }
 
-    public function test_update_content_field_controller_method_response()
-    {
-        $content = $this->contentFactory->create();
-
-        $field = $this->contentFieldFactory->create($content['id']);
-
-        $new_value = $this->faker->text(255);
-
-        $response = $this->call(
-            'PATCH',
-            'railcontent/content/field/' . $field['id'],
-            [
-                'content_id' => $content['id'],
-                'key' => $field['key'],
-                'value' => $new_value,
-                'position' => $field['position'],
-                'type' => $field['type'],
-            ]
-        );
-
-        $this->assertEquals(200, $response->status());
-
-        $expectedResults = [
-            "id" => "1",
-            "content_id" => $content['id'],
-            "key" => $field['key'],
-            "value" => $new_value,
-            "type" => $field['type'],
-            "position" => $field['position'],
-        ];
-
-        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json()['field']);
-    }
-
-    public function _test_update_content_field_not_pass_validation()
-    {
-        $content = $this->contentFactory->create();
-
-        $field = $this->contentFieldFactory->create($content['id']);
-
-        $response = $this->call(
-            'PATCH',
-            'railcontent/content/field/' . $field['id'],
-            [
-                'content_id' => $this->faker->numberBetween(),
-            ]
-        );
-        $decodedResponse = $response->decodeResponseJson()->json('meta');
-
-        $this->assertEquals(422, $response->status());
-        $this->assertArrayHasKey('errors', $decodedResponse);
-
-        $expectedErrors = [
-            [
-                "source" => "content_id",
-                "detail" => "The selected content id is invalid.",
-            ],
-        ];
-        $this->assertEquals($expectedErrors, $decodedResponse['errors']);
-    }
-
-    public function test_delete_content_field_controller()
-    {
-        $content = $this->contentFactory->create();
-
-        $field = $this->contentFieldFactory->create($content['id']);
-
-        $response = $this->call('DELETE', 'railcontent/content/field/' . $field['id']);
-
-        $this->assertEquals(202, $response->status());
-    }
-
     public function test_delete_content_field_not_exist()
     {
         $fieldId = $this->faker->numberBetween();
@@ -242,9 +170,9 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $results = $this->contentFieldService->delete($field['id']);
+        $results = $this->contentFieldService->deleteByContentIdAndKey($field['content_id'], $field['key'], $field['value']);
 
-        $this->assertTrue($results);
+        $this->assertEquals([],$results['fields']);
     }
 
     public function content_updated_event_dispatched_when_link_content_field()
@@ -324,16 +252,15 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $key = $this->faker->text(255);
+        $key = 'name';
         $value = $this->faker->text(255);
-        $type = $this->faker->word;
+        $type = 'string';
         $position = $this->faker->numberBetween();
 
         $response = $this->call(
             'PUT',
             'railcontent/content/field',
             [
-                'id' => $field['id'],
                 'content_id' => $content['id'],
                 'key' => $key,
                 'value' => $value,
@@ -341,17 +268,17 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 'position' => $position,
             ]
         );
-        $expectedResults = [
-            "id" => $field['id'],
+
+        $expectedResults = [[
             "content_id" => $content['id'],
             "key" => $key,
             "value" => $value,
             "type" => $type,
             "position" => 1,
-        ];
+        ]];
 
         $this->assertEquals(201, $response->status());
-        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json()['field']);
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('post')['fields']);
 
     }
 }

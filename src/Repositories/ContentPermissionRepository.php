@@ -87,7 +87,7 @@ class ContentPermissionRepository extends RepositoryBase
             ]
         );
 
-        event(new ElasticDataShouldUpdate($contentId));
+        event(new ElasticDataShouldUpdate($contentId, $contentType));
 
         return $contentPermissionId;
     }
@@ -105,13 +105,17 @@ class ContentPermissionRepository extends RepositoryBase
 
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        return $this->query()->where(
+        $results = $this->query()->where(
             [
                 'content_id' => $contentId,
                 'content_type' => $contentType,
                 'permission_id' => $permissionId
             ]
         )->delete();
+
+        event(new ElasticDataShouldUpdate($contentId, $contentType));
+
+        return $results;
     }
 
     /**

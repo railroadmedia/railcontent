@@ -1032,7 +1032,7 @@ class ContentService
                 $unorderedContentRows = $this->getByIds($ids);
                 $finish = microtime(true) - $start;
 
-               // error_log('get contents by ids from elasticsearch '.$finish.'  contentIds = '.print_r($elasticData['hits']['hits'], true));
+                // error_log('get contents by ids from elasticsearch '.$finish.'  contentIds = '.print_r($elasticData['hits']['hits'], true));
 
                 $data = [];
                 foreach ($ids as $id) {
@@ -1061,7 +1061,11 @@ class ContentService
 
                         unset($filterOptions['instructors']);
                         usort($instructors, function ($a, $b) {
-                            return strncmp(ContentHelper::getFieldValue($a, 'name'), ContentHelper::getFieldValue($b, 'name'), 15);
+                            return strncmp(
+                                ContentHelper::getFieldValue($a, 'name'),
+                                ContentHelper::getFieldValue($b, 'name'),
+                                15
+                            );
                         });
                         $filterOptions['instructor'] = $instructors;
                     }
@@ -1201,6 +1205,8 @@ class ContentService
             return null;
         }
         event(new ContentDeleted($id));
+
+        event(new ElasticDataShouldUpdate($id));
 
         CacheHelper::deleteCache('content_'.$id);
 
@@ -1734,21 +1740,22 @@ class ContentService
         $styles = $this->contentStyleRepository->getByContentIds([$content['id']]);
         $instructors = $this->contentInstructorRepository->getByContentIds([$content['id']]);
         $bpm = $this->contentBpmRepository->getByContentIds([$content['id']]);
-        if(isset( $content['video'])) {
+        if (isset($content['video'])) {
             $video = $this->contentRepository->getById($content['video']);
 
             $vimeoVideoId = $video ? $video['vimeo_video_id'] : '';
             $youtubeVideoId = $video ? $video['youtube_video_id'] : '';
         }
 
-        $permissions = $this->contentPermissionRepository->query()
-            ->select('permission_id')
-            ->where('content_id', $content['id'])
-            ->orWhere('content_type', $content['type'])
-            ->orderBy('id', 'asc')
-            ->get();
+        $permissions =
+            $this->contentPermissionRepository->query()
+                ->select('permission_id')
+                ->where('content_id', $content['id'])
+                ->orWhere('content_type', $content['type'])
+                ->orderBy('id', 'asc')
+                ->get();
 
-
+        $data = $this->datumRepository->getByContentIdAndKey($content['id'], 'description');
 
         $document = [
             'content_id' => $content['id'],
@@ -1756,11 +1763,12 @@ class ContentService
             'slug' => utf8_encode($content['slug'] ?? ''),
             'name' => utf8_encode($content['name'] ?? ''),
             'difficulty' => $content['difficulty'] ?? null,
+            'description' => (!empty($data)) ? $data[0]['value'] : '',
             'status' => $content['status'],
             'brand' => $content['brand'],
             'style' => Arr::pluck($styles, 'style'),
             'instructor' => Arr::pluck($instructors, 'id'),
-            'internal_video_id' => $content['video']??'',
+            'internal_video_id' => $content['video'] ?? '',
             'vimeo_video_id' => $vimeoVideoId ?? '',
             'youtube_video_id' => $youtubeVideoId ?? '',
             'content_type' => $content['type'],
@@ -1791,6 +1799,71 @@ class ContentService
     public function getContentForElastic($id)
     {
         return $this->contentRepository->getElasticContentById($id);
+    }
+
+    /**
+     * @param $contentType
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getElasticDataByContentType($contentType)
+    {
+        $contents = $this->contentRepository->getByType($contentType);
+        $documents = [];
+        foreach ($contents as $contentRow) {
+            $content = $this->getContentForElastic($contentRow['id']);
+
+            $topics = $this->contentTopicRepository->getByContentIds([$contentRow['id']]);
+            $styles = $this->contentStyleRepository->getByContentIds([$contentRow['id']]);
+            $instructors = $this->contentInstructorRepository->getByContentIds([$contentRow['id']]);
+            $bpm = $this->contentBpmRepository->getByContentIds([$contentRow['id']]);
+            if (isset($contentRow['video'])) {
+                $video = $this->contentRepository->getById($contentRow['video']);
+
+                $vimeoVideoId = $video ? $video['vimeo_video_id'] : '';
+                $youtubeVideoId = $video ? $video['youtube_video_id'] : '';
+            }
+
+            $permissions =
+                $this->contentPermissionRepository->query()
+                    ->select('permission_id')
+                    ->where('content_id', $contentRow['id'])
+                    ->orWhere('content_type', $contentRow['type'])
+                    ->orderBy('id', 'asc')
+                    ->get();
+
+            $documents[$contentRow['id']] = [
+                'content_id' => $contentRow['id'],
+                'title' => utf8_encode($content['title'] ?? ''),
+                'slug' => utf8_encode($content['slug'] ?? ''),
+                'name' => utf8_encode($content['name'] ?? ''),
+                'description' => utf8_encode($content['description'] ?? ''),
+                'difficulty' => $content['difficulty'] ?? null,
+                'status' => $content['status'],
+                'brand' => $content['brand'],
+                'style' => Arr::pluck($styles, 'style'),
+                'instructor' => Arr::pluck($instructors, 'id'),
+                'internal_video_id' => $content['video'] ?? '',
+                'vimeo_video_id' => $vimeoVideoId ?? '',
+                'youtube_video_id' => $youtubeVideoId ?? '',
+                'content_type' => $content['type'],
+                'published_on' => $content['published_on'],
+                'created_on' => $content['created_on'],
+                'topic' => Arr::pluck($topics, 'topic'),
+                'bpm' => Arr::pluck($bpm, 'bpm'),
+                'staff_pick_rating' => $content['staff_pick_rating'] ?? null,
+                'is_coach' => $content['is_coach'] ?? 0,
+                'is_active' => $content['is_active'] ?? 0,
+                'is_coach_of_the_month' => $content['is_coach_of_the_month'] ?? 0,
+                'is_featured' => $content['is_featured'] ?? 0,
+                'associated_user_id' => $content['associated_user_id'] ?? null,
+                'popularity' => $content['popularity'] ?? 0,
+                'permission_ids' => $permissions->pluck('permission_id')
+                    ->toArray(),
+            ];
+        }
+
+        return $documents;
     }
 
 }

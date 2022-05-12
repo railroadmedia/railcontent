@@ -438,11 +438,19 @@ class PermissionControllerTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
+
+        $content2 = $this->contentFactory->create(
+            $this->faker->word,
+            $content['type'],
+            ContentService::STATUS_PUBLISHED
+        );
         $this->contentPermissionService->create(null, $content['type'], $permission['id']);
+
         $data = ['content_type' => $content['type'], 'permission_id' => $permission['id']];
         $this->assertDatabaseHas(ConfigService::$tableContentPermissions, $data);
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
+
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing(ConfigService::$tableContentPermissions, $data);
     }

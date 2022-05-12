@@ -13,6 +13,7 @@ use Railroad\Railcontent\Repositories\ContentInstructorRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentStyleRepository;
 use Railroad\Railcontent\Repositories\ContentTopicRepository;
+use Railroad\Railcontent\Repositories\RepositoryBase;
 
 class ContentFieldService
 {
@@ -254,18 +255,19 @@ class ContentFieldService
     public function createOrUpdate($data)
     {
         if (in_array($data['key'], config('railcontent.contentColumnNamesForFields', []))) {
-            $this->contentRepository->update($data['content_id'], [$data['key'] => $data['value']]);
+            $this->contentRepository->updateOrCreate(['id' => $data['content_id']], [$data['key'] => $data['value']]);
             // event(new ContentUpdated($id, $content, $data));
-
         } else {
             $key = ($data['key'] == 'instructor') ? 'instructor_id' : $data['key'];
-            $repository = 'content'.ucfirst($data['key']).'Repository';
-
-            $newFields = $this->$repository->create([
-                                                        'content_id' => $data['content_id'],
-                                                        "$key" => $data['value'],
-                                                        'position' => $data['position'],
-                                                    ]);
+            $repositoryName = RepositoryBase::REPOSITORYMAPPING[$data['key']] ?? null;
+            if ($repositoryName) {
+                $repository = app()->make($repositoryName);
+                $repository->create([
+                                        'content_id' => $data['content_id'],
+                                        "$key" => $data['value'],
+                                        'position' => $data['position'],
+                                    ]);
+            }
         }
 
         $content = $this->contentService->getById($data['content_id']);
@@ -274,7 +276,47 @@ class ContentFieldService
         CacheHelper::deleteCache('content_'.$data['content_id']);
 
         CacheHelper::deleteUserFields(null, 'contents');
+
         event(new ElasticDataShouldUpdate($data['content_id']));
+
+        return $content;
+    }
+
+    /**
+     * @param $contentId
+     * @param $key
+     * @param null $value
+     * @return array|mixed|\Railroad\Railcontent\Entities\ContentEntity|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function deleteByContentIdAndKey($contentId, $key, $value = null)
+    {
+        if (in_array($key, config('railcontent.contentColumnNamesForFields', []))) {
+            $this->contentRepository->update($contentId, [$key => null]);
+        } else {
+            $keyColumnName = ($key == 'instructor') ? 'instructor_id' : $key;
+
+            $repositoryName = RepositoryBase::REPOSITORYMAPPING[$key] ?? null;
+            if ($repositoryName) {
+                $repository = app()->make($repositoryName);
+                $repository->query()
+                    ->where(
+                        'content_id',
+                        $contentId
+                    )
+                    ->where("$keyColumnName", $value)
+                    ->delete();
+            }
+        }
+
+        $content = $this->contentService->getById($contentId);
+
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_'.$contentId);
+
+        CacheHelper::deleteUserFields(null, 'contents');
+
+        event(new ElasticDataShouldUpdate($contentId));
 
         return $content;
     }
