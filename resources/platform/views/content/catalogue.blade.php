@@ -230,6 +230,5 @@
                     </content-catalogue>
                 </transition>
             </div>
-            <div>Here ends catalogue.blade.php</div>
         </div>
 @endsection
