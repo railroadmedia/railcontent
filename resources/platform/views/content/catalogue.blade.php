@@ -59,8 +59,20 @@
                 @endslot
 
                 @slot('interactionSlot')
-                    @if($lessonType === 'student-review')
-                        @include('partials._student-review-application')
+                    @if($lessonType === 'student-review' && $brand === 'singeo')
+                        @include('partials._student-review-application-singeo')
+                    @endif
+
+                    @if($lessonType === 'student-review' && $brand === 'guitareo')
+                        @include('partials._student-review-application-guitareo')
+                    @endif
+
+                    @if($lessonType === 'student-review' && $brand === 'pianote')
+                        @include('partials._student-review-application-pianote')
+                    @endif
+
+                    @if($lessonType === 'student-focus' && $brand === 'drumeo')
+                        @include('partials._student-focus-application-drumeo')
                     @endif
 
                     @if($lessonType === 'question-and-answer')
@@ -218,6 +230,6 @@
                     </content-catalogue>
                 </transition>
             </div>
-
+            <div>Here ends catalogue.blade.php</div>
         </div>
 @endsection
