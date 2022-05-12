@@ -82,6 +82,12 @@ class ContentFieldJsonController extends Controller
         );
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
+        $extraColumns = config('railcontent.contentColumnNamesForFields', []);
+        foreach ($extraColumns as $extraColumn) {
+            if (isset($currentContent[$extraColumn])) {
+                unset($currentContent[$extraColumn]);
+            }
+        }
         $data = ["field" => $contentField, "post" => $currentContent];
 
         return response()->json(
@@ -160,6 +166,30 @@ class ContentFieldJsonController extends Controller
 
         $content_id = $field['content_id'];
         $currentContent = $this->contentService->getById($content_id);
+
+        $data = ["post" => $currentContent];
+
+        return response()->json(
+            $data,
+            202,
+            [
+                'Content-Type' => 'application/vnd.api+json',
+            ]
+        );
+    }
+
+    /**
+     * @param $contentId
+     * @param $key
+     * @param $value
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function deleteByContentIdAndKey($contentId, $key, $value)
+    {
+        $deleted = $this->fieldService->deleteByContentIdAndKey($contentId, $key, $value);
+
+        $currentContent = $this->contentService->getById($contentId);
 
         $data = ["post" => $currentContent];
 

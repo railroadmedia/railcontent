@@ -54,6 +54,12 @@ class ContentDatumJsonController extends Controller
 
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
+        $extraColumns = config('railcontent.contentColumnNamesForFields', []);
+        foreach ($extraColumns as $extraColumn) {
+            if (isset($currentContent[$extraColumn])) {
+                unset($currentContent[$extraColumn]);
+            }
+        }
         $data = ["datum" => $contentData, "post" => $currentContent];
 
         return response()->json(
@@ -95,6 +101,12 @@ class ContentDatumJsonController extends Controller
 
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
+        $extraColumns = config('railcontent.contentColumnNamesForFields', []);
+        foreach ($extraColumns as $extraColumn) {
+            if (isset($currentContent[$extraColumn])) {
+                unset($currentContent[$extraColumn]);
+            }
+        }
         $data = ["datum" => $contentData, "post" => $currentContent];
 
         return response()->json(

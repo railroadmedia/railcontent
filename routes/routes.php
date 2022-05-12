@@ -336,6 +336,135 @@ Route::group(
                     '/user-permission',
                     \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@index'
                 )->name('user.permissions.index');
+
+                //new routes for additional tables
+                // bpm
+                Route::put(
+                    '/content/bpm',
+                    \Railroad\Railcontent\Controllers\ContentBpmJsonController::class . '@store'
+                )->name('content.bpm.store');
+
+                Route::patch(
+                    '/content/bpm/{bpmId}',
+                    \Railroad\Railcontent\Controllers\ContentBpmJsonController::class . '@update'
+                )->name('content.bpm.update');
+
+                Route::delete(
+                    '/content/bpm/{bpmId}',
+                    \Railroad\Railcontent\Controllers\ContentBpmJsonController::class . '@delete'
+                )->name('content.bpm.delete');
+
+                // focus
+                Route::put(
+                    '/content/focus',
+                    \Railroad\Railcontent\Controllers\ContentFocusJsonController::class . '@store'
+                )->name('content.focus.store');
+
+                Route::patch(
+                    '/content/focus/{focusId}',
+                    \Railroad\Railcontent\Controllers\ContentFocusJsonController::class . '@update'
+                )->name('content.focus.update');
+
+                Route::delete(
+                    '/content/focus/{focusId}',
+                    \Railroad\Railcontent\Controllers\ContentFocusJsonController::class . '@delete'
+                )->name('content.focus.delete');
+
+                // key
+                Route::put(
+                    '/content/key',
+                    \Railroad\Railcontent\Controllers\ContentKeyJsonController::class . '@store'
+                )->name('content.key.store');
+
+                Route::patch(
+                    '/content/key/{keyId}',
+                    \Railroad\Railcontent\Controllers\ContentKeyJsonController::class . '@update'
+                )->name('content.key.update');
+
+                Route::delete(
+                    '/content/key/{keyId}',
+                    \Railroad\Railcontent\Controllers\ContentKeyJsonController::class . '@delete'
+                )->name('content.key.delete');
+
+                // key pitch type
+                Route::put(
+                    '/content/key-pitch-type',
+                    \Railroad\Railcontent\Controllers\ContentKeyPitchTypeJsonController::class . '@store'
+                )->name('content.key-pitch-type.store');
+
+                Route::patch(
+                    '/content/key-pitch-type/{keyPitchTypeId}',
+                    \Railroad\Railcontent\Controllers\ContentKeyPitchTypeJsonController::class . '@update'
+                )->name('content.key-pitch-type.update');
+
+                Route::delete(
+                    '/content/key-pitch-type/{keyPitchTypeId}',
+                    \Railroad\Railcontent\Controllers\ContentKeyPitchTypeJsonController::class . '@delete'
+                )->name('content.key-pitch-type.delete');
+
+                // style
+                Route::put(
+                    '/content/style',
+                    \Railroad\Railcontent\Controllers\ContentStyleJsonController::class . '@store'
+                )->name('content.style.store');
+
+                Route::patch(
+                    '/content/style/{styleId}',
+                    \Railroad\Railcontent\Controllers\ContentStyleJsonController::class . '@update'
+                )->name('content.style.update');
+
+                Route::delete(
+                    '/content/style/{styleId}',
+                    \Railroad\Railcontent\Controllers\ContentStyleJsonController::class . '@delete'
+                )->name('content.style.delete');
+
+                // tag
+                Route::put(
+                    '/content/tag',
+                    \Railroad\Railcontent\Controllers\ContentTagJsonController::class . '@store'
+                )->name('content.tag.store');
+
+                Route::patch(
+                    '/content/tag/{tagId}',
+                    \Railroad\Railcontent\Controllers\ContentTagJsonController::class . '@update'
+                )->name('content.tag.update');
+
+                Route::delete(
+                    '/content/tag/{tagId}',
+                    \Railroad\Railcontent\Controllers\ContentTagJsonController::class . '@delete'
+                )->name('content.tag.delete');
+
+                // topic
+                Route::put(
+                    '/content/topic',
+                    \Railroad\Railcontent\Controllers\ContentTopicJsonController::class . '@store'
+                )->name('content.topic.store');
+
+                Route::patch(
+                    '/content/topic/{topicId}',
+                    \Railroad\Railcontent\Controllers\ContentTopicJsonController::class . '@update'
+                )->name('content.topic.update');
+
+                Route::delete(
+                    '/content/topic/{topicId}',
+                    \Railroad\Railcontent\Controllers\ContentTopicJsonController::class . '@delete'
+                )->name('content.topic.delete');
+
+                // instructor
+                Route::put(
+                    '/content/instructor',
+                    \Railroad\Railcontent\Controllers\ContentInstructorJsonController::class . '@store'
+                )->name('content.instructor.store');
+
+                Route::patch(
+                    '/content/instructor/{instructorId}',
+                    \Railroad\Railcontent\Controllers\ContentInstructorJsonController::class . '@update'
+                )->name('content.instructor.update');
+
+                Route::delete(
+                    '/content/instructor/{instructorId}',
+                    \Railroad\Railcontent\Controllers\ContentInstructorJsonController::class . '@delete'
+                )->name('content.instructor.delete');
             }
         );
     }
