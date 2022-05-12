@@ -112,6 +112,27 @@ class UrlDecorator extends ModeDecoratorBase
 //                );
             }
 
+            // packs
+            if ($content['type'] == 'pack' || $content['type'] == 'semester-pack') {
+                $contents[$contentIndex]['url'] = url()->route(
+                    'platform.packs.first-level',
+                    [
+                        $content['slug'],
+                        $content['id'],
+                    ]
+                );
+            }
+
+            // pack bundle
+            if ($content['type'] == 'pack-bundle') {
+                $contents[$contentIndex]['url'] = url()->route(
+                    'platform.content.jump-to-content-id',
+                    [
+                        $content['id'],
+                    ]
+                );
+            }
+
             // coaches
             if ($content['type'] == 'instructor') {
                 $contents[$contentIndex]['url'] =

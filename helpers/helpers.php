@@ -90,3 +90,29 @@ if (!function_exists('current_subdomain')) {
         return $subdomain;
     }
 }
+
+if(!function_exists('get_resource_icon')){
+    /**
+     * @param $filename
+     * @return string
+     */
+    function get_resource_icon($filename){
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        switch($extension){
+            case 'png':
+                return 'fa-file-text';
+            case 'pdf':
+                return 'fa-file-pdf';
+            case 'zip':
+                return 'fa-file-archive';
+            case 'mp3':
+            case 'wav':
+                return 'fa-file-audio';
+            case 'mp4':
+                return 'fa-file-video';
+            default:
+                return 'fa-cloud-download';
+        }
+    }
+}

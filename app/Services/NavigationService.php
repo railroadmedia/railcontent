@@ -276,11 +276,6 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => 'Packs',
-                        'path' => '/' . brand() . '/packs',
-                        'icon' => 'box',
-                    ],
-                    [
                         'name' => 'Courses',
                         'path' => '/' . brand() . '/courses',
                         'icon' => 'academic-cap',

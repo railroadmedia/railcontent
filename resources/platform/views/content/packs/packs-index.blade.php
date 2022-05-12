@@ -7,7 +7,8 @@
 @section('content')
        <div v-cloak>
 
-            @component('partials._header-banner')
+            @component('partials._header-banner',
+                ['backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-members-header-background-image.jpg',])
                 @slot('content')
                     <div class="tw-flex tw-flex-col tw-pr-1">
                         <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
