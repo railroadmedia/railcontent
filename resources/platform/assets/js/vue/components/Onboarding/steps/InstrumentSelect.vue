@@ -6,7 +6,7 @@ import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 
-import { brandUrl, bgImg } from "../../../../constants/brands";
+import { brandUrl, bgImgCard } from "../../../../constants/brands";
 const props = defineProps({
   brand: {
     type: String,
@@ -54,7 +54,7 @@ function goBack() {
       />
       <SquaresContainer>
         <SquaredCard
-          :backgroundUrl="bgImg.drumeo"
+          :backgroundUrl="bgImgCard.drumeo"
           type="drumeo"
           :active="info.instrument === 'drums'"
           @onSelect="() => onInstrumentSelection('drums')"
@@ -66,7 +66,7 @@ function goBack() {
           />
         </SquaredCard>
         <SquaredCard
-          :backgroundUrl="bgImg.pianote"
+          :backgroundUrl="bgImgCard.pianote"
           :active="info.instrument === 'piano'"
           type="pianote"
           @onSelect="() => onInstrumentSelection('piano')"
@@ -78,7 +78,7 @@ function goBack() {
           />
         </SquaredCard>
         <SquaredCard
-          :backgroundUrl="bgImg.guitareo"
+          :backgroundUrl="bgImgCard.guitareo"
           :active="info.instrument === 'guitar'"
           type="guitareo"
           @onSelect="() => onInstrumentSelection('guitar')"
@@ -90,7 +90,7 @@ function goBack() {
           />
         </SquaredCard>
         <SquaredCard
-          :backgroundUrl="bgImg.singeo"
+          :backgroundUrl="bgImgCard.singeo"
           :active="info.instrument === 'singing'"
           type="singeo"
           @onSelect="() => onInstrumentSelection('singing')"

@@ -1,5 +1,5 @@
 <script setup>
-import { bgImgOnboarding, whiteLogos } from "../../../constants/brands";
+import { bgImg, whiteLogos } from "../../../constants/brands";
 const props = defineProps({
   brand: {
     type: String,
@@ -18,7 +18,7 @@ const props = defineProps({
 <template>
   <div
     :class="`StepWrapper StepWrapper--${brand}`"
-    :style="showBgImg ? { backgroundImage: `url('${bgImgOnboarding[brand]}')` } : {}"
+    :style="showBgImg ? { backgroundImage: `url('${bgImg[brand]}')` } : {}"
   >
     <div
       :class="`tw-flex tw-absolute tw-w-full tw-h-full tw-flex-col tw-items-center tw-justify-between ${

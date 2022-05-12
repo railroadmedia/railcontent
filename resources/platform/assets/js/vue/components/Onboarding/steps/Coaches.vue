@@ -47,6 +47,10 @@ const onInputChange = (value) => {
 function goBack() {
   emit("onChangeStep", 5);
 }
+
+const handleRedirect = () => {
+    window.location.href = '/members'
+};
 </script>
 
 <template>
@@ -121,11 +125,7 @@ function goBack() {
       />
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 1);
-          }
-        "
+        @onButtonClick="handleRedirect"
         :isDisabled="!steps[0].checked"
         classOverride="md:tw-w-[543px] tw-uppercase tw-mt-[40px] tw-hidden md:tw-block"
         >Complete Your Account</Button

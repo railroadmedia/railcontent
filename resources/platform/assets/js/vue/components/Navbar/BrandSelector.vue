@@ -4,10 +4,9 @@ import ModalRenderer from '../Modal/ModalRenderer.vue'
 import SquaredCard from '../SquaredCard/SquaredCard.vue'
 import SquaresContainer from "../SquaredCard/SquaresContainer.vue";
 import InstrumentCardContent from "../SquaredCard/InstrumentCardContent.vue";
-import { textColor, bgImg, brandUrl } from '../../../constants/brands.js'
+import { textColor, bgImgCard, brandUrl } from '../../../constants/brands.js'
 
 const brandNames = ['drumeo', 'pianote', 'guitareo', 'singeo']
-const instrumentPerBrand = [];
 
 export default {
     name: 'BrandSelector',
@@ -42,7 +41,7 @@ export default {
             handleBrandOpen,
             handleSelect,
             textColor,
-            bgImg,
+            bgImgCard,
             brandUrl,
             brandNames
         }
@@ -59,22 +58,22 @@ export default {
                     Select your instrument
                 </h2>
                 <SquaresContainer>
-                    <SquaredCard :backgroundUrl="bgImg.drumeo" type="drumeo" :active="brand === 'drums'"
+                    <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="brand === 'drums'"
                         @onSelect="() => handleSelect('drumeo')">
                         <InstrumentCardContent instrumentText="DRUMS" :logoUrl="brandUrl.drumeo"
                             logoAltText="Drumeo Logo" />
                     </SquaredCard>
-                    <SquaredCard :backgroundUrl="bgImg.pianote" :active="brand === 'pianote'" type="pianote"
+                    <SquaredCard :backgroundUrl="bgImgCard.pianote" :active="brand === 'pianote'" type="pianote"
                         @onSelect="() => handleSelect('pianote')">
                         <InstrumentCardContent instrumentText="PIANO" :logoUrl="brandUrl.pianote"
                             logoAltText="Pianote Logo" />
                     </SquaredCard>
-                    <SquaredCard :backgroundUrl="bgImg.guitareo" :active="brand === 'guitareo'" type="guitareo"
+                    <SquaredCard :backgroundUrl="bgImgCard.guitareo" :active="brand === 'guitareo'" type="guitareo"
                         @onSelect="() => handleSelect('guitareo')">
                         <InstrumentCardContent instrumentText="GUITAR" :logoUrl="brandUrl.guitareo"
                             logoAltText="Guitareo Logo" />
                     </SquaredCard>
-                    <SquaredCard :backgroundUrl="bgImg.singeo" :active="brand === 'singeo'" type="singeo"
+                    <SquaredCard :backgroundUrl="bgImgCard.singeo" :active="brand === 'singeo'" type="singeo"
                         @onSelect="() => handleSelect('singeo')">
                         <InstrumentCardContent instrumentText="SINGING" :logoUrl="brandUrl.singeo"
                             logoAltText="Singeo Logo" />
