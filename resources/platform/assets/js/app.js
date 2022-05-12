@@ -60,6 +60,81 @@ const app = createApp({
     provide: {
         sidebarNavigationLinks: window.sidebarNavigationLinks,
         userNavigationDropdownLinks: window.userNavigationDropdownLinks,
+    },
+    methods: {
+        avatarUploaded(payload){
+            UserService.setUserAttributes(currentUserId, {
+                'profile_picture_url': payload.image_url
+            })
+                .then(response => {
+                    const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
+                    window.closeAllModals();
+                    Array.from(avatarPhotos).forEach(photo => {
+                        photo.setAttribute(
+                            'src', payload.image_url
+                        );
+                    });
+                    payload.cropper.resetCropper();
+                    Toasts.push({
+                        icon: 'happy',
+                        title: 'AHH, MUCH BETTER!',
+                        themeColor: 'singeo',
+                        message: 'The new "you" is being refreshed...'
+                    });
+                });
+        },
+
+        gearPhotoUploaded(payload){
+            UserService.setUserAttributes(currentUserId, {
+                'piano_gear_photo': payload.image_url
+            })
+                .then(response => {
+                    const gearPhoto = document.querySelector('[data-gear-update]');
+                    window.closeAllModals();
+                    gearPhoto.setAttribute(
+                        'src', payload.image_url
+                    );
+                    payload.cropper.resetCropper();
+                    Toasts.push({
+                        icon: 'happy',
+                        title: 'WOOHOO!',
+                        themeColor: 'singeo',
+                        message: 'Your gear looks fantastic!'
+                    });
+                });
+        },
+
+        handleVideoPlay(payload){
+            if(['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed){
+                ContentService.markContentAsStarted(payload.contentId);
+            }
+            if(progressTracker == null){
+                progressTracker = new ProgressTracker();
+
+                const { mediaElementVueInstance } = this.$refs;
+
+                if(mediaElementVueInstance){
+                    window.addEventListener('unload', (event) => {
+                        progressTracker.send({
+                            mediaId: mediaElementVueInstance.videoId,
+                            mediaType: 'video',
+                            mediaCategory: 'vimeo',
+                            watchPosition: mediaElementVueInstance.currentTimeInSeconds
+                                || mediaElementVueInstance.currentTime,
+                            totalDuration: mediaElementVueInstance.videoLength
+                                || mediaElementVueInstance.totalDuration,
+                            sessionToken: sessionTokenElement.value || null
+                        });
+                    });
+                }
+            }
+            hasBeenPlayed = true;
+            progressTracker.start();
+        },
+
+        handleVideoPause(payload){
+            progressTracker.stop();
+        }
     }
 });
 
@@ -125,10 +200,12 @@ document.addEventListener('DOMContentLoaded', event => {
     Forms.checkErrorsInModalForms();
 
     showLevelUpData();
-
     initTimezoneSelector();
 });
 
+/**
+ * Pushes A Toast when user has been promoted to new rank
+ */
 function showLevelUpData(){
     const levelUpData = document.getElementById('levelUpData');
 
@@ -139,13 +216,16 @@ function showLevelUpData(){
             Toasts.push({
                 icon: 'xp',
                 title: 'Congratulations!',
-                themeColor: 'singeo',
+                themeColor: 'drumeo',
                 message: 'You have earned the level of ' + newRank + '!'
             });
         }, 1000);
     }
 }
 
+/**
+ * Changes timezone query string when timezoneSelector element changes
+ */
 function initTimezoneSelector(){
     const timezoneSelector = document.getElementById('timezoneSelector');
 
