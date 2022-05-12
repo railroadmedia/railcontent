@@ -127,6 +127,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
+        $app['config']->set('railcontent.elastic_index_name', 'testing');
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);

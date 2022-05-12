@@ -346,8 +346,11 @@ class ElasticService
     {
         $client = $this->getClient();
 
-        $client->indices()
-            ->delete(['index' => $indexName]);
+        if ($client->indices()
+            ->exists(['index' => $indexName])) {
+            $client->indices()
+                ->delete(['index' => $indexName]);
+        }
     }
 
     /**
