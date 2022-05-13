@@ -39,13 +39,13 @@
             {{-- Account Header --}}
             <div class="tw-flex tw-w-full tw-items-center">
                 <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start tw-mb-4">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none tw-text-white lg:tw-text-3xl tw-mb-2">
+                    <h2 class="tw-font-bold tw-text-[36px] tw-leading-none lg:tw-leading-none tw-text-white lg:tw-text-3xl tw-mb-1">
                         @if(!empty($countryCode))
                             <span class="flag flag-{{ strtolower($countryCode) }}"></span>
                         @endif
                         {{ $userName }}
                     </h2>
-                    <p class="body tw-text-white tw-uppercase font-light">
+                    <p class="tw-text-white tw-uppercase tw-font-bebas-neue tw-text-[28px]">
                         {{ $appName }} Member Since {{ \Carbon\Carbon::parse($memberSince)->format('Y') }}
                     </p>
                 </div>
