@@ -19,7 +19,7 @@
                 @include('partials.bladesora.members.account.settings.profile.display-name-form', [
                     'brand' => '{{ $brand }}',
                     'method' => 'patch',
-                    'action' => '/usora/user/update/' . user()->id,
+                    'action' => '/user-management-system/user/update/' . user()->id,
                     'displayName' => user()->display_name,
                     'displayNameInput' => [
                         'inputErrors' => $errors->get('display_name'),
@@ -34,7 +34,7 @@
                     'method' => 'POST',
                     'profilePictureUrl' => user()->profile_picture_url,
                     'uploadRequestEndpoint' => '/avatar/upload',
-                    'fieldSaveRequestEndpoint' => '/usora/json-api/user/update/'  . user()->id,
+                    'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
                     'userId' => user()->id,
                     'canClearAvatar' => stripos(user()->profile_picture_url, 'defaults') === false
                 ])
@@ -51,7 +51,7 @@
                     'biography' => nl2br(user()->biography),
                     'displayName' => user()->display_name,
                     'method' => 'patch',
-                    'action' => '/usora/user/update/' . user()->id,
+                    'action' => '/user-management-system/user/update/' . user()->id,
                     'firstNameInput' => [
                         'inputName' => 'first_name',
                         'inputValue' => old('first_name', user()->first_name),

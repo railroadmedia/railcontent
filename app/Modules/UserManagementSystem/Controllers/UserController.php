@@ -5,14 +5,11 @@ namespace Modules\UserManagementSystem\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
-use Psy\Util\Json;
-use ReflectionException;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserDeleted;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -131,51 +128,26 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $isJson = request()->expectsJson();
-        $this->authorize('update-users');
-
-        try {
-            $validationRules = [
-                //todo: make email and display_name unique
-                'email' => 'required|email|max:255',
-                'display_name' => 'required|string|max:64|min:2'
-            ];
-
-            $this->validate(
-                $request,
-                $validationRules
-            );
-        } catch (ValidationException $exception) {
-            if ($isJson) {
-                return json_encode(
-                    array(
-                        "status" => "error",
-                        "errors" => json_encode($exception->errors())
-                    )
-                );
-            }
-
-
-            return $request->has('redirect') ?
-                redirect()
-                    ->away($request->get('redirect'))
-                    ->with($exception->errors()) :
-                redirect()
-                    ->back()
-                    ->with($exception->errors());
+        if (auth()->user()->id != $id) {
+            $this->authorize('update-users');
         }
 
         $user = User::findOrFail($id);
 
+        if (!empty($request->input('data.attributes.email'))) {
+            $this->authorize('update-users-email-without-confirmation');
+        }
+
+        //todo: create exception and add error message if user is not found
         if ($user) {
             $oldUser = clone($user);
 
-            $user->email = $request->email;
-            $user->display_name = $request->display_name;
+            // todo: find a way to check how to give an error message in case q request attribute is not fillable
+            $user->fill($request->all());
             $user->save();
 
             event(new UserUpdated($user, $oldUser));
         }
-
 
         if (!$isJson) {
             $message = ['success' => true];

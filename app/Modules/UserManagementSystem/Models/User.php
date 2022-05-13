@@ -195,6 +195,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $sessionSalt;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [ 'first_name', 'last_name', 'location', 'birthday', 'biography', 'profile_picture_url'];
+
+    /**
      * @param array $attributes
      * @return void
      */
