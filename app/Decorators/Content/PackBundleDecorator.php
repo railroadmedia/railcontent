@@ -47,8 +47,6 @@ class PackBundleDecorator extends TypeDecoratorBase
                 'fields.xp',
                 config('xp_ranks.pack_bundle_content_completed')
             );
-            $contentsOfType[$contentIndex]['url'] = url()->route('members.packs.bundle', [$parents[0]['slug'], $content['slug'], $content['id']]);
-            $contentsOfType[$contentIndex]['mobile_app_url'] =  url()->route('mobile.members.packs.show', [$content['id']]);
             foreach ($parents as $parent) {
                 if (in_array($content['id'], $parent['child_ids'])) {
 //                    $contentsOfType[$contentIndex]['url'] =

@@ -195,7 +195,7 @@ class ProfileSettingsPagesController extends BaseController
                 [
                     "url" => url()->route('platform.profile.settings.membership', ['userId' => user()->id]),
                     'icon' => 'fas fa-calendar-alt',
-                    'title' => 'Access',
+                    'title' => 'Account Details',
                     'active' => $section === 'access',
                 ],
             ];

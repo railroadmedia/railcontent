@@ -15,7 +15,7 @@
                 'memberSince' => current_user()->getCreatedAt(),
             ])
 
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
                 <div class="tw-flex tw-flex-col">
                     <div class="tw-flex tw-flex-row">
                         <content-catalogue

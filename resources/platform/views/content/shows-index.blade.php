@@ -10,9 +10,9 @@
         @component('partials._header-banner',
             ['backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-members-header-background-image.jpg',])
             @slot('content')
-                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
+                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <i class="icon-student-focus tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
+                        <musora-icon icon-name="shows-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         <span class="tw-text-32">Shows</span>
                     </h1>
 
@@ -24,7 +24,7 @@
             @endslot
         @endcomponent
 
-        <div class="container mv-2">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-2">
             <div class="flex flex-row flex-wrap nmh-1">
                 @foreach($shows as $type=>$show)
                     <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $type]) }}"

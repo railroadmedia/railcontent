@@ -41,13 +41,19 @@
                     <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">
                             @if($catalogueMeta['name'] == 'Q&A')
-                                <musora-icon icon-name="light-bulb" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="light-bulb-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Routines')
                                 <musora-icon icon-name="routines" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Quick Tips')
-                                <musora-icon icon-name="light-bulb" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="light-bulb-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            @elseif($catalogueMeta['name'] == 'Songs')
+                                <musora-icon icon-name="headphones-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            @elseif($catalogueMeta['name'] == 'Bootcamps')
+                                <musora-icon icon-name="keys-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
+                                <musora-icon icon-name="podcast" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @else
-                                <musora-icon icon-name="academic-cap" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="academic-cap-solid" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @endif
                             <span class="tw-text-32">{{ ucfirst($catalogueMeta['name']) }}</span>
                         </h1>
@@ -59,8 +65,20 @@
                 @endslot
 
                 @slot('interactionSlot')
-                    @if($lessonType === 'student-review')
-                        @include('partials._student-review-application')
+                    @if($lessonType === 'student-review' && $brand === 'singeo')
+                        @include('partials._student-review-application-singeo')
+                    @endif
+
+                    @if($lessonType === 'student-review' && $brand === 'guitareo')
+                        @include('partials._student-review-application-guitareo')
+                    @endif
+
+                    @if($lessonType === 'student-review' && $brand === 'pianote')
+                        @include('partials._student-review-application-pianote')
+                    @endif
+
+                    @if($lessonType === 'student-focus' && $brand === 'drumeo')
+                        @include('partials._student-focus-application-drumeo')
                     @endif
 
                     @if($lessonType === 'question-and-answer')
@@ -85,7 +103,7 @@
         {{--    @endif--}}
 
             @if($lessonType === 'routine' && $hasRecentRoutines)
-                <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
+                <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
                     <div class="tw-flex tw-flex-col tw-flex-grow">
                         <div class="tw-flex tw-flex-row tw-items-center pv-2">
                             <div class="tw-text-black dark:tw-text-white tw-no-underline heading tw-capitalize tw-flex-grow">Recently Viewed</div>
@@ -218,6 +236,5 @@
                     </content-catalogue>
                 </transition>
             </div>
-
         </div>
 @endsection

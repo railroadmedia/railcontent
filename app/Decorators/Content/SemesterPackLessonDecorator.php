@@ -29,16 +29,6 @@ class SemesterPackLessonDecorator extends TypeDecoratorBase
             foreach ($parents as $parent) {
                 if (in_array($content['id'], $parent['child_ids'])) {
 
-                    $contentsOfType[$contentIndex]['url'] = url()->route(
-                        'semester-packs.lessons.show',
-                        [$parent['slug'], $content['slug']]
-                    );
-
-                    $contentsOfType[$contentIndex]['mobile_app_url'] = url()->route(
-                        'mobile.semester-packs.lessons.show',
-                        [$content['id']]
-                    );
-
                     // get instructor from parent if its empty
                     if (empty($contentsOfType[$contentIndex]->fetch('fields.instructor'))) {
                         foreach ($parent['fields'] as $field) {

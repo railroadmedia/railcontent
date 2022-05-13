@@ -35,9 +35,6 @@ class PackDecorator extends TypeDecoratorBase
         );
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $contentsOfType[$contentIndex]['url'] = url()->route('members.packs.show', [$content['slug']]);
-            $contentsOfType[$contentIndex]['mobile_app_url'] =  url()->route('mobile.members.packs.show', [$content['id']]);
-
             $contentsOfType[$contentIndex]['xp'] = $content->fetch(
                 'fields.xp',
                 config('xp_ranks.pack_content_completed')
@@ -48,10 +45,10 @@ class PackDecorator extends TypeDecoratorBase
             );
 
             if (($content['completed'] ?? false) !== true) {
-                $contentsOfType[$contentIndex]['next_lesson_url'] =
-                    url()->route('members.packs.jump-to-next-lesson', [$content['id']]);
-                $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
-                    url()->route('mobile.packs.jump-to-next-lesson', [$content['id']]);
+//                $contentsOfType[$contentIndex]['next_lesson_url'] =
+//                    url()->route('members.packs.jump-to-next-lesson', [$content['id']]);
+//                $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
+//                    url()->route('mobile.packs.jump-to-next-lesson', [$content['id']]);
 
             }
 

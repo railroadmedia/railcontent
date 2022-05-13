@@ -11,11 +11,11 @@
                 "pages" => [
                     [
                         "title" => 'Home',
-                        "url" => url()->route('members.home'),
+                        "url" => url()->route('platform.home', [brand()]),
                     ],
                     [
                         "title" => "Packs",
-                        "url" => url()->route('members.packs.index'),
+                        "url" => url()->route('platform.packs'),
                     ],
                     [
                         "title" => $pack->fetch('fields.title'),
@@ -74,6 +74,7 @@
                 "instructorInfo" => false,
                 "downloadableResources" => $pack['resources'] ?? [],
                 'addToList' => false,
+                'isAdded' => false,
                 'brand' => '{{ $brand }}',
             ])
 

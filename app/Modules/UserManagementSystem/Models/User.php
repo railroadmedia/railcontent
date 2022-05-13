@@ -323,8 +323,20 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isSubscriber()
+    public function isAMember()
     {
+        return true; // todo: connect
+    }
+
+    /**
+     * @return bool
+     */
+    public function isALifetimeMember($brand = null)
+    {
+        if ($brand == 'drumeo') {
+
+        }
+
         return true; // todo: connect
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\NotificationPagesController;
+use App\Http\Controllers\Platform\PackPagesController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
@@ -31,8 +32,8 @@ Route::domain('{musoraDomain}')
         /*
          * Primary Content Pages
          */
-        Route::get('/{brand}/packs', [ContentPagesController::class, 'packs'])
-            ->whereIn('brand', all_brands())
+        Route::get('/{brand}/packs', [PackPagesController::class, 'index'])
+            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs');
 
         Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
@@ -139,6 +140,17 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.content.coach.show');
+
+        /*
+         * Packs Sub-Content Hierarchy Pages
+         */
+        Route::get('/{brand}/packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
+            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->name('platform.packs.first-level');
+
+        Route::get('/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}', [PackPagesController::class, 'packBundleLessons'])
+            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->name('platform.packs.second-level');
 
         /*
          * Catch-All Sub-Content Hierarchy Pages

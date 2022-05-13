@@ -477,6 +477,33 @@ class ContentPagesController extends BaseController
             );
         }
 
+        if ($contentRow->type == 'pack-bundle') {
+            $hierarchyData =
+                DB::connection(config('railcontent.database_connection_name'))
+                    ->table('railcontent_content_hierarchy as ch_1')
+                    ->select(
+                        [
+                            'ch_1.parent_id as pack_id',
+                            'c_1.slug as pack_slug',
+                            'ch_1.child_position as child_position',
+                        ]
+                    )
+                    ->join('railcontent_content as c_1', 'c_1.id', '=', 'ch_1.parent_id')
+                    ->where('c_1.type', 'pack')
+                    ->where('ch_1.child_id', $contentId)
+                    ->first();
+
+            return redirect()->route(
+                'platform.packs.second-level',
+                [
+                    $hierarchyData->pack_slug,
+                    $hierarchyData->pack_id,
+                    $contentRow->slug,
+                    $contentRow->id,
+                ]
+            );
+        }
+
         if (empty($contentRow)) {
             throw new NotFoundHttpException();
         }

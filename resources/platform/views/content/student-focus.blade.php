@@ -7,11 +7,11 @@
 @section('content')
         <div v-cloak>
 
-        @component('partials._header-banner', ['backgroundImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/backgrounds/default-3840.jpg'])
+        @component('partials._header-banner', ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
             @slot('content')
-                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
+                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <i class="icon-student-focus tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
+                        <musora-icon icon-name="person-plus-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         <span class="tw-text-32">Student Focus</span>
                     </h1>
 
@@ -24,7 +24,7 @@
             @endslot
         @endcomponent
 
-        <div class="tw-container tw-mx-auto">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col mv-3">
                 <div class="tw-flex tw-flex-row tw-flex-wrap">
                     @foreach($lessonTypes as $lessonType)

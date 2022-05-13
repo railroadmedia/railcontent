@@ -4274,12 +4274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b97d8dbef5f2cb74cdf9aaee80eb56ea92ea744a"
+                "reference": "be8e5caf5ebf36f424a8124806fbf55fb69783c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b97d8dbef5f2cb74cdf9aaee80eb56ea92ea744a",
-                "reference": "b97d8dbef5f2cb74cdf9aaee80eb56ea92ea744a",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/be8e5caf5ebf36f424a8124806fbf55fb69783c8",
+                "reference": "be8e5caf5ebf36f424a8124806fbf55fb69783c8",
                 "shasum": ""
             },
             "require": {
@@ -4333,7 +4333,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/0.5-php-mysql-8-migration"
             },
-            "time": "2022-04-22T17:18:49+00:00"
+            "time": "2022-05-12T16:46:24+00:00"
         },
         {
             "name": "railroad/resora",
