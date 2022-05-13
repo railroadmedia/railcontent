@@ -48,7 +48,7 @@ const toggleSearchModal = (val) => {
       tw-justify-between
       tw-px-4
       tw-transition
-      tw-bg-[#F9FBFB]/90
+      tw-bg-white/90
       dark:tw-bg-[#081825]/90
       tw-backdrop-blur-xl
       tw-shadow-[0_0_5px_rgb(0,0,0,.2)]

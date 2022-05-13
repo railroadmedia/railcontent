@@ -1,7 +1,7 @@
 <template>
     <section class="tw-grid tw-grid-cols-3 tw-gap-1 sm:tw-gap-4 tw-mb-6 md:tw-mb-8">
         <!-- Method -->
-        <a :href="`/members/method?brand=${brand}`" 
+        <a :href="`/${brand}/method/`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
         >
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center focus:tw-bottom-1"
@@ -18,7 +18,7 @@
             <div class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-bg-black tw-opacity-0 group-hover:tw-opacity-30 tw-left-0 tw-transition-all tw-duration-200 tw-ease-in-out"></div>
         </a>
         <!-- Songs -->
-        <a :href="`/members/songs?brand=${brand}`" 
+        <a :href="`/${brand}/songs/`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
         >
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center focus:tw-bottom-1"
@@ -36,7 +36,7 @@
         </a>
 
         <!-- Coaches -->
-        <a :href="`/members/coaches?brand=${brand}`" 
+        <a :href="`/${brand}/coaches/`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group">
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-text-[#FFA710] coaches-card focus:tw-bottom-1">
                 <!-- Icon -->
