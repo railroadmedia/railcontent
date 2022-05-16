@@ -157,7 +157,7 @@
         {{--    </div>--}}
 
             @if($lessonType === 'student-review' || !empty($isAllContent))
-                <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
+                <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
                     <div class="tw-flex tw-flex-col tw-mt-3">
                         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
                             <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-3">
@@ -174,7 +174,7 @@
                 </div>
             @endif
 
-            <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
                 <transition appear name="fade">
                     <content-catalogue
                         dusk="content-catalogue"

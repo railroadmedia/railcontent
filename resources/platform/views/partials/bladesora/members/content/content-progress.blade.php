@@ -1,4 +1,4 @@
-<div class="tw-container tw-mx-auto tw-px-4 bg-{{ $themeColor }}">
+<div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 bg-{{ $themeColor }}">
     <div class="content-progress flex flex-row flex-wrap pv-2">
 
         @if(!empty($labelText))
