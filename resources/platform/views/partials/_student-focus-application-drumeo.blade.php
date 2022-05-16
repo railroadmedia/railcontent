@@ -19,7 +19,7 @@
         <button class="tw-btn tw-btn-primary tw-bg-drumeo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="applicationModal">
             <span class="tw-text-white">
-                Apply
+                Apply Now
             </span>
         </button>
     </div>
@@ -38,7 +38,7 @@
 </div>
 
 <div id="howApplyModal" class="modal">
-    <div class="flex flex-column corners-10">
+    <div class="twflex tw-flex-col tw-rounded-[10px]">
         <div class="video-wrap">
             <div class="widescreen">
                 <div class="flex flex-column video-player user-active">
@@ -50,9 +50,9 @@
 </div>
 
 <div id="applicationModal" class="modal">
-    <div class="flex flex-column bg-white corners-10 shadow pa-3">
+    <div class="tw-text-black tw-flex tw-flex-col tw-bg-white tw-rounded-[10px] tw-shadow tw-p-[30px]">
 
-        <div class="flex flex-row mb-3">
+        <div class="tw-flex tw-flex-row tw-mb-[30px]">
             <h1 class="subheading">Student Review Application</h1>
         </div>
 
@@ -151,20 +151,15 @@
                     "inputLabel" => null
                 ])
             </div>
-
-            <div class="flex flex-row align-h-right">
-                <button class="btn collapse-150 mr-1 close-modal"
+            <div class="tw-flex tw-flex-row tw-w-full tw-justify-end">
+                <button class="close-modal tw-btn tw-btn-secondary tw-min-h-[30px] tw-w-[118px] tw-text-[#A1A1A9] tw-border-[#A1A1A9] tw-mr-[12px] tw-text-[16px] tw-font-bold"
                         type="reset">
-                    <span class="bg-grey-2 text-grey-3 flat short">
-                        Cancel
-                    </span>
+                    Cancel
                 </button>
 
-                <button class="btn collapse-150"
-                        type="submit">
-                    <span class="bg-drumeo text-white short">
-                        Apply
-                    </span>
+                <button class="tw-btn tw-btn-primary tw-bg-drumeo tw-min-h-[30px] tw-w-[118px] tw-text-white tw-text-center tw-text-[16px] tw-font-bold"
+                type="submit">
+                    Apply
                 </button>
             </div>
         </form>

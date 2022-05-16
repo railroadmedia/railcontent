@@ -50,9 +50,9 @@
 </div>
 
 <div id="applicationModal" class="modal">
-    <div class="flex flex-column bg-white corners-10 shadow pa-3">
+    <div class="tw-text-black tw-flex tw-flex-col tw-bg-white tw-rounded-[10px] tw-shadow tw-p-[30px]">
 
-        <div class="flex flex-row mb-3">
+        <div class="tw-flex tw-flex-row tw-mb-3">
             <h1 class="subheading">Student Review Application</h1>
         </div>
 
@@ -140,19 +140,15 @@
                 ])
             </div>
 
-            <div class="flex flex-row align-h-right">
-                <button class="btn collapse-150 mr-1 close-modal"
+            <div class="tw-flex tw-flex-row tw-w-full tw-justify-end">
+                <button class="close-modal tw-btn tw-btn-secondary tw-min-h-[30px] tw-w-[118px] tw-text-[#A1A1A9] tw-border-[#A1A1A9] tw-mr-[12px] tw-text-[16px] tw-font-bold"
                         type="reset">
-                    <span class="bg-grey-2 text-grey-3 flat short">
-                        Cancel
-                    </span>
+                    Cancel
                 </button>
 
-                <button class="btn collapse-150"
-                        type="submit">
-                    <span class="bg-guitareo text-white short">
-                        Apply
-                    </span>
+                <button class="tw-btn tw-btn-primary tw-bg-guitareo tw-min-h-[30px] tw-w-[118px] tw-text-white tw-text-center tw-text-[16px] tw-font-bold"
+                type="submit">
+                    Apply
                 </button>
             </div>
         </form>

@@ -57,7 +57,7 @@
                             @elseif($catalogueMeta['name'] == 'Q & A')
                                 <musora-icon icon-name="question-mark-circle" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Student Reviews')
-                                <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="person-plus-solid" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @else
                                 <musora-icon icon-name="academic-cap-solid" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @endif
