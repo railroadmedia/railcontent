@@ -22264,6 +22264,18 @@ a:visited{
 .tw-w-9\/12{
   width: 75%;
 }
+.tw-w-\[40px\]{
+  width: 40px;
+}
+.tw-w-10{
+  width: 2.5rem;
+}
+.tw-w-\[10px\]{
+  width: 10px;
+}
+.tw-w-\[14px\]{
+  width: 14px;
+}
 .tw-min-w-\[232px\]{
   min-width: 232px;
 }
@@ -22797,6 +22809,10 @@ a:visited{
 .tw-border-gray-200{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+.tw-border-\[\#A1A1A9\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(161 161 169 / var(--tw-border-opacity));
 }
 .tw-bg-white{
   --tw-bg-opacity: 1;
@@ -23693,6 +23709,13 @@ a:visited{
 .tw-text-\[\#232e30\]{
   --tw-text-opacity: 1;
   color: rgb(35 46 48 / var(--tw-text-opacity));
+}
+.tw-text-\[\#22C55E\]{
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
+}
+.tw-text-current{
+  color: currentColor;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline;

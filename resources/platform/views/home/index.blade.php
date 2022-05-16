@@ -25,7 +25,17 @@
                 </header-carousel>
 
                 <!-- Home Card Links -->
-                <home-card-links brand="{{ $brand }}"></home-card-links>
+                <home-card-links 
+                    brand="{{ $brand }}"
+                    {{-- :hasStartedMethod="{{ $hasStartedMethod }}"
+                    :hasCompletedMethod = "{{ $hasCompletedMethod }}"
+                    completedLevelsUrl = "{{ $completedLevelsUrl }}"
+                    methodUrl="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : 'methods' }}"
+                    nextLearningPathLessonTitle = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}",
+                    nextLearningPathLevel = "{{ $nextLearningPathLevel }}" --}}
+                ></home-card-links>
+
+                {{-- bladesora::members.components.home._card-links --}}
 
                 {{-- Continue Section --}}
                 @if($startedContentCount > 0)
