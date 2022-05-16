@@ -18,7 +18,7 @@
                 "showEmpty" => true
             ])
 
-            <p class="body tw-font-bold tw-mb-1 tw-mt-3">Biography</p>
+            <p class="tw-font-bold tw-mb-1 tw-mt-3">Biography</p>
             <p class="body">{!! $biography !!}</p>
         </div>
     @endslot
