@@ -350,7 +350,7 @@ class NavigationService
             'settingsPageUrl' => '/' . brand() . '/profile/' . user()->id . '/settings/profile',
             'supportPageUrl' => '/' . brand() . '/support',
             'shopPageUrl' => 'https://' . brand() . '.com/shop',
-            'logoutPageUrl' => '/usora/deauthenticate',
+            'logoutPageUrl' => '/user-management-system/logout/cookie',
         ];
     }
 
