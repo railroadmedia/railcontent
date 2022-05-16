@@ -173,6 +173,7 @@ return [
          */
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
+        Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
 
         /*
          * Application Service Providers...

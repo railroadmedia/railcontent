@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\ViewComposers\NavigationViewComposer;
 use Illuminate\Support\ServiceProvider;
+use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', NavigationViewComposer::class);
+
+        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
     }
 }
