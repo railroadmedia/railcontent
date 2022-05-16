@@ -429,13 +429,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function sendPasswordResetNotification($token)
     {
-        $class = config('usora.password_reset_notification_class');
-
-        (new AnonymousNotifiable())->route(
-            config('usora.password_reset_notification_channel'),
-            $this->getEmailForPasswordReset()
-        )
-            ->notify(new $class($token));
+        //todo: to be configured
+//        $class = config('usora.password_reset_notification_class');
+//
+//        (new AnonymousNotifiable())->route(
+//            config('usora.password_reset_notification_channel'),
+//            $this->getEmailForPasswordReset()
+//        )
+//            ->notify(new $class($token));
     }
 
     /**

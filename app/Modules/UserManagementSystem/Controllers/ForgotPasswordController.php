@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Usora\Controllers;
+namespace Modules\UserManagementSystem\Controllers;
 
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Http\RedirectResponse;
@@ -14,20 +14,13 @@ class ForgotPasswordController extends Controller
     /**
      * Send a reset link to the given user.
      *
-     * @param  Request $request
+     * @param Request $request
      * @return RedirectResponse
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $request->validate(
-            [
-                'email' => 'required|email|exists:' .
-                    config('usora.database_connection_name') .
-                    '.' .
-                    config('usora.tables.users') .
-                    ',email',
-            ]
-        );
+        //todo: check email exists also
+        $request->validate(['email' => 'required|email|']);
 
         $response =
             $this->broker()

@@ -88,8 +88,8 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
+            'provider' => 'user-management-system',
+            'table' => 'musora_laravel.usora_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
