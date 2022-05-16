@@ -11,14 +11,12 @@
             @slot('content')
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <musora-icon icon-name="person-plus-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         <span class="tw-text-32">Student Focus</span>
                     </h1>
 
                     <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                        We want to create a learning experience that best suits your singing goals. Within Student Focus, we
-                        offer personalized feedback and Q&A lessons to help you reach your potential. These live sessions
-                        are available on-demand, so you can catch up anytime - no matter where life takes you.
+                        Want to customize your learning? Within Student Focus you will find all the extra features you need to help you focus on the areas that mean most to you! Student Focus includes Quick Tip lessons, Student Reviews and a library of our live Q&A lessons so that you can create the learning experience that best suits your needs and interests.
                     </p>
                 </div>
             @endslot

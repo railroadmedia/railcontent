@@ -56,6 +56,8 @@
                                 <musora-icon icon-name="person-plus-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Q & A')
                                 <musora-icon icon-name="question-mark-circle" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            @elseif($catalogueMeta['name'] == 'Student Reviews')
+                                <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @else
                                 <musora-icon icon-name="academic-cap-solid" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @endif
@@ -154,7 +156,7 @@
         {{--        </div>--}}
         {{--    </div>--}}
 
-            @if(!empty($isAllContent))
+            @if($lessonType === 'student-review' || !empty($isAllContent))
                 <div class="tw-container tw-mx-auto tw-px-4 tw-my-4 dark:tw-text-white">
                     <div class="tw-flex tw-flex-col tw-mt-3">
                         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">

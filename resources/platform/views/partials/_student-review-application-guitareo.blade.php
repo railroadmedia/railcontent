@@ -1,26 +1,26 @@
-<div class="flex flex-row flex-wrap mt-2">
-    <div class="flex flex-column xs-12 md-4 ph-1">
-        <button class="btn mb-1"
+<div class="tw-flex tw-flex-col lg:tw-flex-row tw-flex-wrap tw-mt-2">
+    <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
+        <button class="tw-btn tw-btn-primary tw-bg-guitareo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="whatIsModal">
-            <span class="bg-guitareo text-white ph-1">
-                <i class="fas fa-question-circle"></i>&nbsp; What is Student Review?
+            <span class="tw-text-white">
+                What is Student Review?
             </span>
         </button>
     </div>
-    <div class="flex flex-column xs-12 md-4 ph-1">
-        <button class="btn mb-1"
+    <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
+        <button class="tw-btn tw-btn-primary tw-bg-guitareo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="howApplyModal">
-                    <span class="bg-guitareo text-white ph-1">
-                <i class="fas fa-question-circle"></i>&nbsp; How to Apply
-                    </span>
+            <span class="tw-text-white">
+                How to Apply
+            </span>
         </button>
     </div>
-    <div class="flex flex-column xs-12 md-4 ph-1">
-        <button class="btn mb-1"
+    <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
+        <button class="tw-btn tw-btn-primary tw-bg-guitareo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="applicationModal">
-                    <span class="bg-guitareo text-white ph-1">
-                        Apply &raquo;
-                    </span>
+            <span class="tw-text-white">
+                Apply
+            </span>
         </button>
     </div>
 </div>

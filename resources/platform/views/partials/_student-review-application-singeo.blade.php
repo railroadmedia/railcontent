@@ -1,17 +1,35 @@
-<div class="flex flex-row align-left">
-    <button class="tw-btn-primary tw-bg-{{ $brand }}"
-            data-open-modal="applicationModal">
-        <span class="tw-text-white">
-            APPLY
-        </span>
-    </button>
+<div class="tw-flex tw-flex-col lg:tw-flex-row tw-flex-wrap tw-mt-2">
+    <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
+        <button class="tw-btn tw-btn-primary tw-bg-singeo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
+                data-open-modal="whatIsModal">
+            <span class="tw-text-white">
+                What is Student Review?
+            </span>
+        </button>
+    </div>
+    <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
+        <button class="tw-btn tw-btn-primary tw-bg-singeo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
+                data-open-modal="howApplyModal">
+            <span class="tw-text-white">
+                How to Apply
+            </span>
+        </button>
+    </div>
+    <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
+        <button class="tw-btn tw-btn-primary tw-bg-singeo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
+                data-open-modal="applicationModal">
+            <span class="tw-text-white">
+                Apply Now
+            </span>
+        </button>
+    </div>
 </div>
 
 
 <div id="applicationModal" class="modal">
-    <div class="flex flex-column bg-white corners-10 shadow pa-3">
+    <div class="tw-text-black tw-flex tw-flex-col tw-bg-white tw-rounded-[10px] tw-shadow tw-p-[20px]">
 
-        <div class="flex flex-row mb-3">
+        <div class="tw-flex tw-flex-row tw-mb-3">
             <h1 class="subheading">Student Review Application</h1>
         </div>
 
