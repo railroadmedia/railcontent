@@ -199,7 +199,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @var array
      */
-    protected $fillable = [ 'first_name', 'last_name', 'location', 'birthday', 'biography', 'profile_picture_url'];
+    protected $fillable = [ 'first_name', 'last_name', 'location', 'birthday', 'biography', 'profile_picture_url', 'display_name'];
 
     /**
      * @param array $attributes
