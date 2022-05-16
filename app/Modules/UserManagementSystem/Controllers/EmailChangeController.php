@@ -14,6 +14,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+
 //use MikeMcLin\WpPassword\Facades\WpPassword;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
@@ -60,15 +61,11 @@ class EmailChangeController extends Controller
 
         if (
             !$this->hasher->check($request->get('user_password'), $user->password)
-//            && !WpPassword::check(trim($request->get('user_password')), $user->password)
         ) {
-            return back()
-                ->withInput($request->except('user_password'))
-                ->withErrors(
-                    ['user_password' => 'The current password you entered is incorrect.']
-                );
+            return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
 
+        //todo: validation: check if email is unique
         $payload = [
             'email' => $request->get('email'),
             'token' => $this->createNewToken($request->get('email')),
@@ -86,6 +83,7 @@ class EmailChangeController extends Controller
         $emailChange->token = $payload['token'];
         $emailChange->user_id = $user->id;
         $emailChange->save();
+
 
         event(new EmailChangeRequest($payload['token'], $payload['email']));
 
@@ -143,7 +141,7 @@ class EmailChangeController extends Controller
         $emailChange = EmailChange::where('token', $request->get('code'))->first();
 
         if (!$emailChange) {
-            return redirect()->back()->with('error-message', 'Token has not been found in db table');
+            return redirect()->back()->with('error-message', 'Token is invalid');
         }
 
         // todo: email_change_token_ttl should be declared in a config file
