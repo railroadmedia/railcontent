@@ -4,7 +4,7 @@
         <a :href="methodUrl" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
         >
-            <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center focus:tw-bottom-1"
+            <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-transition-all tw-justify-center focus:tw-bottom-1"
                  :class="`${brand}-card tw-text-${brand}`"
             >
                 <!-- Icon -->
@@ -16,10 +16,12 @@
                 <!-- Text Description -->
                 <p class="tw-hidden lg:tw-block tw-uppercase tw-text-lg tw-font-bebas-neue tw-mt-2">
                     <template v-if="hasCompletedMethod">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5002 14.3002C11.2557 14.3002 14.3002 11.2557 14.3002 7.5002C14.3002 3.74466 11.2557 0.700195 7.5002 0.700195C3.74466 0.700195 0.700195 3.74466 0.700195 7.5002C0.700195 11.2557 3.74466 14.3002 7.5002 14.3002ZM10.6512 6.40124C10.9832 6.06929 10.9832 5.5311 10.6512 5.19915C10.3193 4.86721 9.7811 4.86721 9.44915 5.19915L6.6502 7.99811L5.55124 6.89915C5.21929 6.56721 4.6811 6.56721 4.34915 6.89915C4.01721 7.2311 4.01721 7.76929 4.34915 8.10124L6.04915 9.80124C6.3811 10.1332 6.91929 10.1332 7.25124 9.80124L10.6512 6.40124Z" fill="#22C55E"/>
-                        </svg>
-                        <span class="tw-text-[#22C55E]">Completed</span>
+                        <span class="tw-flex tw-items-center tw-text-[#22C55E]">
+                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-mr-2">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5002 14.3002C11.2557 14.3002 14.3002 11.2557 14.3002 7.5002C14.3002 3.74466 11.2557 0.700195 7.5002 0.700195C3.74466 0.700195 0.700195 3.74466 0.700195 7.5002C0.700195 11.2557 3.74466 14.3002 7.5002 14.3002ZM10.6512 6.40124C10.9832 6.06929 10.9832 5.5311 10.6512 5.19915C10.3193 4.86721 9.7811 4.86721 9.44915 5.19915L6.6502 7.99811L5.55124 6.89915C5.21929 6.56721 4.6811 6.56721 4.34915 6.89915C4.01721 7.2311 4.01721 7.76929 4.34915 8.10124L6.04915 9.80124C6.3811 10.1332 6.91929 10.1332 7.25124 9.80124L10.6512 6.40124Z" fill="currentColor"/>
+                            </svg>
+                            Completed
+                        </span>
                     </template>
                     <template v-else>
                         <span v-if="hasStartedMethod" :class="`tw-text-${brand}`">
@@ -36,12 +38,11 @@
             </div>
         </a>
 
-
         <!-- Songs -->
         <a :href="`/${brand}/songs/`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
         >
-            <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center focus:tw-bottom-1"
+            <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-transition-all tw-items-center tw-justify-center focus:tw-bottom-1"
                  :class="[ brand === 'pianote'? `songs-card-blue tw-text-[#5FCFF5]` : `songs-card-pink tw-text-[#DD4572]`]"
             >
                 <!-- Icon -->
@@ -58,7 +59,7 @@
         <!-- Coaches -->
         <a :href="`/${brand}/coaches/`" 
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group">
-            <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-justify-center tw-text-[#FFA710] coaches-card focus:tw-bottom-1">
+            <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-transition-all tw-justify-center tw-text-[#FFA710] coaches-card focus:tw-bottom-1">
                 <!-- Icon -->
                 <musora-icon icon-name="whistle" class="tw-w-4 tw-h-4 sm:tw-h-9 sm:tw-w-9 tw-mb-1 sm:tw-mb-2"/>
                 <!--Name SVG-->
