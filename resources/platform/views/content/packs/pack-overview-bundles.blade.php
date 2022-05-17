@@ -92,7 +92,7 @@
                         <h1 class="tw-text-[30px] tw-font-bold dark:tw-text-white tw-capitalize">{{ $pack->fetch('fields.title') }}</h1>
                     </div>
 
-                    <div class="tw-flex tw-flex-row bb-grey-1-1">
+                    <div class="tw-flex tw-flex-row tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57]">
                         <content-catalogue
                                 brand="{{ $brand }}"
                                 catalogue-type="grid"
