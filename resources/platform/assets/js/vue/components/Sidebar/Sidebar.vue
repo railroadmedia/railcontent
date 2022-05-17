@@ -59,13 +59,16 @@ export default {
     <!-- Sidebar Link Sections -->
     <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">
       <ul>
-        <li v-for="(link, j) in section" :key="j" :class="[pathName === `${link.path}` ? ` ${textColor[brand]}` : '']">
+        <li v-for="(link, j) in section" :key="j" :class="[pathName ===  link.path ? textColor[brand] : '']">
           <a :href="`${link.path}`"
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
              class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[pathName === `${link.path}` ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
-            <musora-icon :icon-name="link.icon" class="tw-w-[24px] tw-mx-4"/>
+            <musora-icon 
+              :icon-name="pathName === link.path ? `${link.icon}-filled` : `${link.icon}`" 
+              class="tw-w-[24px] tw-mx-4"
+            />
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
               {{ link.name }}
                 <!-- Live Indicator -->

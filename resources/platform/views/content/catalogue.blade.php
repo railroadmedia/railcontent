@@ -41,25 +41,29 @@
                     <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">
                             @if($catalogueMeta['name'] == 'Q&A')
-                                <musora-icon icon-name="light-bulb-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="light-bulb-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Routines')
                                 <musora-icon icon-name="routines" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Quick Tips')
-                                <musora-icon icon-name="light-bulb-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="light-bulb-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Songs')
-                                <musora-icon icon-name="headphones-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="headphones-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Bootcamps')
-                                <musora-icon icon-name="keys-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="keys-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
                                 <musora-icon icon-name="podcast" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Student Focus')
-                                <musora-icon icon-name="person-plus-solid" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="person-plus-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Q & A')
                                 <musora-icon icon-name="question-mark-circle" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Student Reviews')
-                                <musora-icon icon-name="person-plus-solid" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            @elseif($catalogueMeta['name'] == 'Chords & Scales')
+                                <musora-icon icon-name="guitar-tabs-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            @elseif($catalogueMeta['name'] == 'Archives')
+                                <musora-icon icon-name="archives-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @else
-                                <musora-icon icon-name="academic-cap-solid" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="academic-cap-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @endif
                             <span class="tw-text-32">{{ ucfirst($catalogueMeta['name']) }}</span>
                         </h1>

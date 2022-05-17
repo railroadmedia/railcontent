@@ -22764,6 +22764,10 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
+.tw-border-\[\#D4D4D8\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(212 212 216 / var(--tw-border-opacity));
+}
 .tw-border-\[\#445f74\]\/10{
   border-color: rgb(68 95 116 / 0.1);
 }
@@ -22801,10 +22805,6 @@ a:visited{
 .tw-border-yellow-500{
   --tw-border-opacity: 1;
   border-color: rgb(234 179 8 / var(--tw-border-opacity));
-}
-.tw-border-\[\#D4D4D8\]{
-  --tw-border-opacity: 1;
-  border-color: rgb(212 212 216 / var(--tw-border-opacity));
 }
 .tw-border-\[\#E4E4E7\]{
   --tw-border-opacity: 1;
