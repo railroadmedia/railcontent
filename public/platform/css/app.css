@@ -17040,7 +17040,10 @@ content-catalogue, transition {
   left: 0;
   bottom: -20px;
   right: 0;
-  background: linear-gradient(to bottom, transparent 0%, #fff 100%);
+  background: linear-gradient(to bottom, transparent 0%, #F9F9F9 58%);
+}
+.tw-dark .item-description:after {
+  background: linear-gradient(to bottom, transparent 0%, #000C17 58%);
 }
 .item-description.always-truncate {
   max-height: 3em;
