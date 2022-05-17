@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAccessAndXpAndLevelColumnsToUsersTable extends Migration
+class AddMembershipExpirationDateToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddAccessAndXpAndLevelColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('usora_users', function (Blueprint $table) {
-            $table->string('access_level')->after('last_used_brand')->nullable()->index();
-            $table->integer('total_xp')->after('access_level')->nullable()->index();
-            $table->json('brand_method_levels')->after('total_xp')->nullable();
+            $table->dateTime('membership_expiration_date')->after('last_used_brand')->nullable()->index();
+            $table->boolean('is_lifetime_member')->after('membership_expiration_date')->default(false)->index();
         });
     }
 
@@ -28,9 +27,8 @@ class AddAccessAndXpAndLevelColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('usora_users', function (Blueprint $table) {
-            $table->dropColumn('access_level');
-            $table->dropColumn('total_xp');
-            $table->dropColumn('brand_method_levels');
+            $table->dropColumn('membership_expiration_date');
+            $table->dropColumn('is_lifetime_member');
         });
     }
 }
