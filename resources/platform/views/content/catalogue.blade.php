@@ -51,7 +51,7 @@
                             @elseif($catalogueMeta['name'] == 'Bootcamps')
                                 <musora-icon icon-name="keys-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
-                                <musora-icon icon-name="podcast" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                                <musora-icon icon-name="podcast-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Student Focus')
                                 <musora-icon icon-name="person-plus-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                             @elseif($catalogueMeta['name'] == 'Q & A')
