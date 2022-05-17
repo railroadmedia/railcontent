@@ -27,17 +27,13 @@
                 <!-- Home Card Links -->
                 <home-card-links 
                     brand="{{ $brand }}"
-                {{-- 
-                    :hasStartedMethod="{{ $hasStartedMethod }}"
-                    :hasCompletedMethod = "{{ $hasCompletedMethod }}"
-                    completedLevelsUrl = "{{ $completedLevelsUrl }}"
-                    methodUrl="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : 'methods' }}"
-                    nextLearningPathLessonTitle = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}",
-                    nextLearningPathLevel = "{{ $nextLearningPathLevel }}" 
-                --}}
+                    :has-started-method="{{ !empty($hasStartedMethod) ? $hasStartedMethod : 'false' }}"
+                    :has-completed-method = "{{ !empty($hasCompletedMethod) ? $hasCompletedMethod : 'false' }}"
+                    completed-levels-url = "{{ $completedLevelsUrl }}"
+                    method-url="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : '/'.$brand.'/methods' }}"
+                    next-learning-path-lesson-title = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
+                    next-learning-path-level = "{{ $nextLearningPathLevel }}" 
                 ></home-card-links>
-
-                {{-- bladesora::members.components.home._card-links --}}
 
                 {{-- Continue Section --}}
                 @if($startedContentCount > 0)
