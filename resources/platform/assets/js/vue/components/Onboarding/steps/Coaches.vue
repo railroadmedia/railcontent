@@ -25,10 +25,12 @@ const props = defineProps({
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
 const coachResults = ref([]);
+const searchString = ref("");
 
 const handleCoachSearch = (value) => {
   searchCoaches(props.brand, value).then((result) => {
     coachResults.value = transformCoachesCardData(result);
+    searchString.value = value;
   });
 };
 
@@ -96,7 +98,7 @@ const handleRedirect = () => {
           "
         />
       </div>
-      <CoachCarousel :brand="brand" :coachResults="coachResults" />
+      <CoachCarousel :brand="brand" :coachResults="coachResults" :searchString="searchString" />
     </div>
     <div
       class="

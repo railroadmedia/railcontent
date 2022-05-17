@@ -209,7 +209,7 @@
         {{--        </div>--}}
         {{--    </div>--}}
 
-        @if($lessonType === 'student-review' || !empty($isAllContent))
+        @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent))
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
                 <div class="tw-flex tw-flex-col tw-mt-3">
                     <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
