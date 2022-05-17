@@ -29,10 +29,11 @@
                         <!-- Badge -->
                         <div
                             class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-6 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
-                            <svg class="tw-block" width="16" height="16" aria-hidden="true" fill="white"
-                                focusable="false">
-                                <use href="#whistle"></use>
-                            </svg>
+                            <musora-icon 
+                                icon-name="whistle-filled"
+                                height="12px" 
+                                class="tw-text-white tw-mr-1 tw-w-[20px] tw-leading-none"
+                            ></musora-icon>
                         </div>
                     </div>
                 </div>

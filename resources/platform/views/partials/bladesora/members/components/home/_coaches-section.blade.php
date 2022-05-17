@@ -41,8 +41,12 @@
                                 </p>
 
                                 @if ($coach->fetch('is_house_coach'))
-                                    <div class="tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
-                                        <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
+                                    <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+                                        <musora-icon 
+                                            icon-name="whistle-filled"
+                                            height="12px" 
+                                            class="tw-text-white tw-mr-1 tw-w-[16px] tw-leading-none"
+                                        ></musora-icon>
                                         HOUSE
                                     </div>
                                 @endif
