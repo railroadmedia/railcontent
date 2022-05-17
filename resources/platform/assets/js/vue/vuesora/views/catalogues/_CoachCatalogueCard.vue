@@ -88,7 +88,7 @@
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                         class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-100/20"
                         :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-black dark:tw-text-white'"
-                        :title="is_added ? 'Remove from list' : 'Add to list'"
+                        :title="is_added ? 'Remove from My List' : 'Add to My List'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"
                         @click.stop.prevent="addToList"

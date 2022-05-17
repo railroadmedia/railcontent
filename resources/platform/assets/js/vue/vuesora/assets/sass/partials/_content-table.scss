@@ -275,9 +275,12 @@
     left:0;
     bottom:-20px;
     right:0;
-    @include topToBottomGradient(transparent, #fff);
+    background: linear-gradient(to bottom, transparent 0%, #F9F9F9 58%);
   }
 
+  .tw-dark  &:after { 
+    background: linear-gradient(to bottom, transparent 0%, #000C17 58%);
+  }
   &.always-truncate {
     max-height:3em;
     overflow:hidden;

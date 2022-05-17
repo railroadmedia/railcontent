@@ -20,6 +20,7 @@ URL::defaults(['drumeoDomain' => !empty($subDomain) ? $subDomain . '.drumeo.com'
 URL::defaults(['pianoteDomain' => !empty($subDomain) ? $subDomain . '.pianote.com' : 'pianote.com']);
 URL::defaults(['guitareoDomain' => !empty($subDomain) ? $subDomain . '.guitareo.com' : 'guitareo.com']);
 URL::defaults(['singeoDomain' => !empty($subDomain) ? $subDomain . '.singeo.com' : 'singeo.com']);
+URL::defaults(['brand' => 'musora']);
 
 /*
  * Public Routes
