@@ -78,8 +78,8 @@ const onEnter = () => {
       <input
         :placeholder="placeholder"
         :id="id"
-        :class="`tw-h-[42px] tw-rounded-[63px] tw-text-black tw-border-[#D1D5DB] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
-          inputOverride ? inputOverride : ''
+        :class="`tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
+          inputOverride ? inputOverride : 'tw-text-black tw-border-[#D1D5DB]'
         }`"
         v-model="input"
         v-on:keyup.enter="onEnter"
