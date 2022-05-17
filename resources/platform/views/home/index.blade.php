@@ -85,7 +85,7 @@
 
                 {{-- Subscribed Coaches --}}
                 @component('partials.bladesora.members.components.home._coaches-section', [
-                    'brand' => 'drumeo',
+                    'brand' => brand(),
                     'hasSubscribedCoaches' => $hasSubscribedCoaches,
                     'subscribedCoaches' => $subscribedCoaches,
                     'subscribedCoachesUrl' => '', // todo: url

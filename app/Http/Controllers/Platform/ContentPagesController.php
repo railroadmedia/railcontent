@@ -107,8 +107,23 @@ class ContentPagesController extends BaseController
 
         $isStudentFocus = in_array($lessonType, ['student-review', 'question-and-answer']);
 
+        $startedLessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            [$lessonType],
+            auth()->id(),
+            'started',
+            6,
+            0
+        );
+
+        $startedListLessons =
+            count($startedLessons) > 0 ?
+                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
+        $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
+
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
+            "startedLessons" => $startedListLessons,
+            "hasStartedLessons" => $hasStartedLessons,
             "lessonType" => $lessonType,
             "sortOverride" => $sortOverride,
             "isStudentFocus" => $isStudentFocus,

@@ -22327,6 +22327,18 @@ a:visited{
 .tw-max-w-md{
   max-width: 28rem;
 }
+.tw-max-w-screen-md{
+  max-width: 768px;
+}
+.tw-max-w-screen-lg{
+  max-width: 1024px;
+}
+.tw-max-w-screen-xl{
+  max-width: 1280px;
+}
+.tw-max-w-screen-2xl{
+  max-width: 1536px;
+}
 .tw-flex-auto{
   flex: 1 1 auto;
 }
@@ -24722,6 +24734,10 @@ a:visited{
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
+  .md\:tw-px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
   .md\:tw-pb-0{
     padding-bottom: 0px;
   }
@@ -24736,6 +24752,12 @@ a:visited{
   }
   .md\:tw-pl-4{
     padding-left: 1rem;
+  }
+  .md\:tw-pt-6{
+    padding-top: 1.5rem;
+  }
+  .md\:tw-pt-5{
+    padding-top: 1.25rem;
   }
   .md\:tw-text-\[16px\]{
     font-size: 16px;

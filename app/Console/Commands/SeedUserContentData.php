@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Modules\Brand\Enums\Brand;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -33,6 +32,7 @@ class SeedUserContentData extends Command
             351402,
             350629,
             351885,
+            350060,
             351876,
             350627,
             350628,
@@ -40,11 +40,13 @@ class SeedUserContentData extends Command
             349916,
             350603,
             342015,
+            349476,
             350226,
             350695,
             348765,
             349937,
             349930,
+            350694,
             350694,
             349935,
             349725,
@@ -133,10 +135,19 @@ class SeedUserContentData extends Command
         ],
         'pianote' => [
             351708,
+            353236,
+            352634,
+            352651,
             351659,
+            352963,
+            352650,
+            352648,
             349999,
+            353249,
             351016,
+            351659,
             347389,
+            347390,
             347388,
             347387,
             347383,
@@ -235,9 +246,16 @@ class SeedUserContentData extends Command
         ],
         'guitareo' => [
             331406,
+            351856,
             350122,
+            354007,
+            313472,
             339020,
+            314660,
+            352437,
+            322813,
             339026,
+            353343,
             339025,
             339024,
             339023,
@@ -337,15 +355,22 @@ class SeedUserContentData extends Command
         ],
         'singeo' => [
             350329,
+            345462,
             351578,
             349380,
             351165,
             350715,
+            349380,
             350793,
+            351165,
             350792,
+            348473,
             350791,
+            338652,
             350790,
+            341305,
             349361,
+            343384,
             348473,
             349793,
             345460,
@@ -436,14 +461,14 @@ class SeedUserContentData extends Command
             339231,
             339230,
             339100,
-        ]
+        ],
     ];
 
     protected $coachIdMap = [
         'drumeo' => [311690, 31888, 236681, 273806, 234095, 265267, 189973],
         'pianote' => [323470, 320027, 197087, 197077, 196999],
         'guitareo' => [354026, 350843, 342307, 313460, 278722, 211443],
-        'singeo' => [347694, 322496, 309845, 305432]
+        'singeo' => [347694, 322496, 309845, 305432],
     ];
 
     private ContentRepository $contentRepository;
