@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap);
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -22309,6 +22310,9 @@ a:visited{
 .tw-max-w-\[287px\]{
   max-width: 287px;
 }
+.tw-max-w-screen-2xl{
+  max-width: 1536px;
+}
 .tw-max-w-7xl{
   max-width: 80rem;
 }
@@ -22326,18 +22330,6 @@ a:visited{
 }
 .tw-max-w-md{
   max-width: 28rem;
-}
-.tw-max-w-screen-md{
-  max-width: 768px;
-}
-.tw-max-w-screen-lg{
-  max-width: 1024px;
-}
-.tw-max-w-screen-xl{
-  max-width: 1280px;
-}
-.tw-max-w-screen-2xl{
-  max-width: 1536px;
 }
 .tw-flex-auto{
   flex: 1 1 auto;
@@ -22728,6 +22720,10 @@ a:visited{
 .tw-border-transparent{
   border-color: transparent;
 }
+.tw-border-\[\#E4E4E7\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(228 228 231 / var(--tw-border-opacity));
+}
 .tw-border-\[\#A1A1A9\]{
   --tw-border-opacity: 1;
   border-color: rgb(161 161 169 / var(--tw-border-opacity));
@@ -22817,10 +22813,6 @@ a:visited{
 .tw-border-yellow-500{
   --tw-border-opacity: 1;
   border-color: rgb(234 179 8 / var(--tw-border-opacity));
-}
-.tw-border-\[\#E4E4E7\]{
-  --tw-border-opacity: 1;
-  border-color: rgb(228 228 231 / var(--tw-border-opacity));
 }
 .tw-border-black\/\[0\.15\]{
   border-color: rgb(0 0 0 / 0.15);
@@ -23277,20 +23269,23 @@ a:visited{
 .tw-pr-12{
   padding-right: 3rem;
 }
-.tw-pr-1{
-  padding-right: 0.25rem;
+.tw-pt-4{
+  padding-top: 1rem;
 }
 .tw-pt-5{
   padding-top: 1.25rem;
+}
+.tw-pb-2{
+  padding-bottom: 0.5rem;
+}
+.tw-pr-1{
+  padding-right: 0.25rem;
 }
 .tw-pb-0{
   padding-bottom: 0px;
 }
 .tw-pl-6{
   padding-left: 1.5rem;
-}
-.tw-pb-2{
-  padding-bottom: 0.5rem;
 }
 .tw-pl-8{
   padding-left: 2rem;
@@ -23417,9 +23412,6 @@ a:visited{
 }
 .tw-pl-5{
   padding-left: 1.25rem;
-}
-.tw-pt-4{
-  padding-top: 1rem;
 }
 .tw-text-left{
   text-align: left;
@@ -24056,6 +24048,10 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(34 63 87 / var(--tw-border-opacity));
 }
+.tw-dark .dark\:tw-border-\[\#223457\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(34 52 87 / var(--tw-border-opacity));
+}
 .tw-dark .dark\:tw-border-white{
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
@@ -24067,10 +24063,6 @@ a:visited{
 .tw-dark .dark\:tw-border-\[\#445F74\]{
   --tw-border-opacity: 1;
   border-color: rgb(68 95 116 / var(--tw-border-opacity));
-}
-.tw-dark .dark\:tw-border-\[\#223457\]{
-  --tw-border-opacity: 1;
-  border-color: rgb(34 52 87 / var(--tw-border-opacity));
 }
 .tw-dark .dark\:tw-border-white\/\[0\.15\]{
   border-color: rgb(255 255 255 / 0.15);
@@ -24734,9 +24726,8 @@ a:visited{
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
-  .md\:tw-px-6{
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+  .md\:tw-pt-5{
+    padding-top: 1.25rem;
   }
   .md\:tw-pb-0{
     padding-bottom: 0px;
@@ -24752,12 +24743,6 @@ a:visited{
   }
   .md\:tw-pl-4{
     padding-left: 1rem;
-  }
-  .md\:tw-pt-6{
-    padding-top: 1.5rem;
-  }
-  .md\:tw-pt-5{
-    padding-top: 1.25rem;
   }
   .md\:tw-text-\[16px\]{
     font-size: 16px;
