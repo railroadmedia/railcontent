@@ -20,10 +20,10 @@
       <div v-if="item.is_house_coach" class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
         <musora-icon 
             icon-name="whistle-filled"
-            height="12px" 
-            class="tw-text-white tw-mr-1 tw-w-[16px] tw-leading-none"
+            height="12" 
+            class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
         ></musora-icon>
-        HOUSE
+        <span class="tw-mt-1">HOUSE</span>
       </div>
     </div>
 

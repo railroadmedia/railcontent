@@ -47,7 +47,7 @@
                                             height="12px" 
                                             class="tw-text-white tw-mr-1 tw-w-[16px] tw-leading-none"
                                         ></musora-icon>
-                                        HOUSE
+                                        <span class="tw-mt-0.5">HOUSE</span>
                                     </div>
                                 @endif
                             </div>

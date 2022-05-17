@@ -32,8 +32,8 @@
                                     class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-3 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
                                     <musora-icon 
                                         icon-name="whistle-filled"
-                                        height="12px" 
-                                        class="tw-text-white tw-mr-1 tw-w-[16px] tw-leading-none"
+                                        height="16" 
+                                        class="tw-text-white tw-w-[16px] tw-leading-none"
                                     ></musora-icon>
                                 </div>
                             </a>
