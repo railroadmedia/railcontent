@@ -25,7 +25,7 @@
                          :class="item.type === 'song' ? 'tw-blur-sm' : ''"
                     >
                     <!-- Song Overlay -->
-                    <div v-if="item.type === 'song'" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/80 tw-flex tw-justify-center">
+                    <div v-if="item.type === 'song'" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                         <img class="tw-h-full" :src="mappedData.thumbnail" :alt="mappedData.black_title"/>
                     </div>
 
@@ -75,7 +75,7 @@
                     </h4>
                     <!-- Video Description -->
                     <p v-if="mappedData.show_description"
-                       class="tw-text-xs font-compressed text-grey-4 dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description always-truncate"
+                       class="tw-text-xs font-compressed text-grey-4 dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description tw-line-clamp-2"
                     >
                         {{ mappedData.description.replace(/<[^>]+>/g, '') }}
                     </p>
