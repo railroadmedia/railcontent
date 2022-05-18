@@ -18,7 +18,7 @@ class AuthenticationController extends Controller
     use ValidatesRequests;
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @return JsonResponse|RedirectResponse
      */
     public function loginCookie(Request $request)
@@ -36,8 +36,8 @@ class AuthenticationController extends Controller
         } catch (ValidationException $exception) {
             return redirect()
                 ->to(
-                    config('user_management_system.login_page_path').
-                    ($request->has('redirect') ? ('?redirect_to='.$request->get('redirect')) : '')
+                    config('user_management_system.login_page_path') .
+                    ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
                 )
                 ->withErrors($exception->errors());
         }
@@ -66,8 +66,8 @@ class AuthenticationController extends Controller
 
         return redirect()
             ->to(
-                config('user_management_system.login_page_path').
-                ($request->has('redirect') ? ('?redirect_to='.$request->get('redirect')) : '')
+                config('user_management_system.login_page_path') .
+                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -75,7 +75,7 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @return JsonResponse|RedirectResponse
      */
     public function loginToken(Request $request)
@@ -124,11 +124,16 @@ class AuthenticationController extends Controller
             return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
         }
 
-        return response()->json(['error' => 'Invalid login credentials.']);
+        return response()->json(
+            [
+                'success' => false,
+                "message" => 'Invalid Email or Password'
+            ]
+        );
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @return RedirectResponse
      */
     public function logoutCookie(Request $request)
@@ -144,7 +149,7 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @return JsonResponse
      */
     public function logoutToken(Request $request)
