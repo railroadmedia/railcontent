@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tw-grid tw-gap-3 tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 2xl:tw-grid-cols-7 3xl:tw-grid-cols-8 tw-mb-4"
+    class="tw-grid tw-gap-3 tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 2xl:tw-grid-cols-7 3xl:tw-grid-cols-8 tw-mb-4"
   >
     <NotificationToasts :icon="toast.icon" :text="toast.text" :isError="toast.showErrorMessage" :brandName="brand"/>
     <!-- Loop through Cards -->

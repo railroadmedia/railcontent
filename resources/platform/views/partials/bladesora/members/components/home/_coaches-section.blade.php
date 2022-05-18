@@ -36,7 +36,7 @@
                                     {{ implode(' ', $exploded) }}
                                 </h4>
                                 <!-- Coach Title -->
-                                <p class="tw-text-yellow-400 tw-px-2 tw-fluid-text-sm-xs tw-mb-8 tw-uppercase tw-h-8 tw-leading-tight">
+                                <p class="tw-text-yellow-400 tw-px-2 tw-text-xs tw-mb-8 tw-uppercase tw-h-8 tw-leading-tight">
                                     {{ $coach->fetch('data.focus_text.value') }}
                                 </p>
 

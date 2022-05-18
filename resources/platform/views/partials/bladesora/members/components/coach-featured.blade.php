@@ -18,7 +18,7 @@
                         </a>
                     </div>
                     <div
-                        class="tw-inline-flex tw-flex-col tw-justify-center {{ $singleFeaturedCoach ? 'md:tw-w-1/2' : '' }}">
+                        class="tw-inline-flex tw-flex-col tw-mb-6 md:tw-mb-0 tw-justify-center {{ $singleFeaturedCoach ? 'md:tw-w-1/2' : '' }}">
                         <!-- Card Header -->
                         <div class="tw-flex tw-items-center tw-mb-4">
                             <!-- Coach Headshot -->
@@ -56,7 +56,7 @@
                             </a>
                         </div>
                         <!-- Card Body -->
-                        <div class="tw-flex tw-flex-col tw-mb-6">
+                        <div class="tw-flex tw-flex-col md:tw-mb-6">
                             <h3 class="tw-text-xl tw-font-bold dark:tw-text-white tw-uppercase tw-mb-4">
                                 {{ $featured->fetch('data.focus_text.value') }}
                             </h3>

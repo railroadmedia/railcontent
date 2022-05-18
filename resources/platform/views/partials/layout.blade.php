@@ -11,7 +11,7 @@
         <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
 
         {{-- Styles --}}
-        <link rel=" preload" as="style" href="{{ mix('platform/css/app.css') }}" onload="this.rel='stylesheet' ">
+        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
         @yield('layout-styles')
 
         @include('partials._favicons')

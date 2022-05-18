@@ -141,7 +141,7 @@ function onFollow(e) {
         class="
           tw-text-yellow-400
           tw-font-open-sans
-          tw-fluid-text-sm-xs
+          tw-text-xs
           tw-h-8
           tw-leading-snug
           tw-mb-8
