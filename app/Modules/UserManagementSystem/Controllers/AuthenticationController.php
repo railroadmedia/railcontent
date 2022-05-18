@@ -145,7 +145,7 @@ class AuthenticationController extends Controller
 
     /**
      * @param  Request  $request
-     * @return RedirectResponse
+     * @return JsonResponse
      */
     public function logoutToken(Request $request)
     {
@@ -157,7 +157,11 @@ class AuthenticationController extends Controller
             auth()->logout();
         }
 
-        return $request->has('redirect') ? redirect()->away($request->get('redirect')) :
-            redirect()->to(config('usora.login_page_path'));
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Successfully logged out',
+            ]
+        );
     }
 }
