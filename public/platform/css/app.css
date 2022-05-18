@@ -20851,9 +20851,6 @@ a:visited{
 .tw-fluid-text-2xl-base{
   font-size: clamp( 1rem, 2vw, 1.5rem );
 }
-.tw-fluid-text-sm-xs{
-  font-size: clamp( 0.75rem, 1vw, 0.875rem );
-}
 .tw-btn-primary, .tw-btn-secondary{
   align-items: center;
   border-style: solid;
@@ -22988,9 +22985,21 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
+.tw-bg-black\/50{
+  background-color: rgb(0 0 0 / 0.5);
+}
 .tw-bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.tw-bg-black\/60{
+  background-color: rgb(0 0 0 / 0.6);
+}
+.tw-bg-black\/70{
+  background-color: rgb(0 0 0 / 0.7);
+}
+.tw-bg-black\/80{
+  background-color: rgb(0 0 0 / 0.8);
 }
 .tw-bg-opacity-20{
   --tw-bg-opacity: 0.2;
@@ -24481,11 +24490,11 @@ a:visited{
   .md\:tw-mr-0{
     margin-right: 0px;
   }
-  .md\:tw-mr-14{
-    margin-right: 3.5rem;
-  }
   .md\:tw-mb-0{
     margin-bottom: 0px;
+  }
+  .md\:tw-mr-14{
+    margin-right: 3.5rem;
   }
   .md\:tw-ml-1{
     margin-left: 0.25rem;
@@ -24954,6 +24963,9 @@ a:visited{
   }
   .lg\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .lg\:tw-grid-cols-5{
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
   .lg\:tw-flex-row{
     flex-direction: row;

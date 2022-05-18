@@ -15,7 +15,7 @@
                 </a>
             </div>
 
-            <div class="tw-grid tw-gap-3 tw-grid-cols-3 sm:tw-grid-cols-4 md:tw-grid-cols-5 xl:tw-grid-cols-6 3xl:tw-grid-cols-7">
+            <div class="tw-grid tw-gap-3 tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 lg:tw-grid-cols-5 xl:tw-grid-cols-6 3xl:tw-grid-cols-7">
                 @foreach($subscribedCoaches->results() as $coach)
                     <a href="{{ $coach->fetch('url','') }}"
                         class="tw-no-underline ">
