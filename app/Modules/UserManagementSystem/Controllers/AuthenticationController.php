@@ -157,8 +157,7 @@ class AuthenticationController extends Controller
         $user = auth()->user();
 
         if (!empty($user) && !empty($user->currentAccessToken())) {
-            $user->currentAccessToken()->accessToken->delete();
-
+            $user->currentAccessToken()->delete();
             auth()->logout();
         }
 
