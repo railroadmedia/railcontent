@@ -22803,6 +22803,10 @@ a:visited{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
+.tw-border-\[\#3fd525\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(63 213 37 / var(--tw-border-opacity));
+}
 .tw-bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -22965,6 +22969,14 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
+.tw-bg-\[\#c7ff9b\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(199 255 155 / var(--tw-bg-opacity));
+}
+.tw-bg-\[\#eee\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 238 238 / var(--tw-bg-opacity));
+}
 .tw-bg-opacity-20{
   --tw-bg-opacity: 0.2;
 }
@@ -23071,6 +23083,9 @@ a:visited{
 }
 .tw-p-0\.5{
   padding: 0.125rem;
+}
+.tw-p-\[20px\]{
+  padding: 20px;
 }
 .tw-px-4{
   padding-left: 1rem;
@@ -23832,12 +23847,6 @@ a:visited{
 }
 .tw-ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-.tw-line-clamp-1{
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
 }
 .tw-line-clamp-2{
   overflow: hidden;

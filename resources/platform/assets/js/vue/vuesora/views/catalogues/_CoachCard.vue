@@ -23,7 +23,7 @@
             height="12" 
             class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
         ></musora-icon>
-        <span class="tw-mt-1">HOUSE</span>
+        <span class="tw-mt-1 tracking-wider">HOUSE</span>
       </div>
     </div>
 
