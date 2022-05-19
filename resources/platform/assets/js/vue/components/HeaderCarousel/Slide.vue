@@ -9,6 +9,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  titleClasses: {
+    type: String,
+    default: ""
+  },
   ctaText: {
     type: String,
     default: "",
@@ -73,7 +77,9 @@ const goToUrl = (url) => {
             tw-mb-1
             tw-uppercase
             tw-leading-none
-          ">
+          "
+          :class="titleClasses"
+          >
           {{ title }}
         </h2>
 
