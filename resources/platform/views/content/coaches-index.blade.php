@@ -43,11 +43,11 @@
             event-coach-profile-url="{{ $eventCoachProfileUrl }}"
         ></coach-event>
 
-        <!-- Featured Coaches -->
+        {{-- Featured Coach --}}
         @component('partials.bladesora.members.components.coach-featured', [
             'hasFeaturedCoaches' => $hasFeaturedCoaches,
             'featuredCoaches' => $featuredCoaches,
-            'brand' => '{{ $brand }}',
+            'brand' => $brand,
         ])
         @endcomponent
 

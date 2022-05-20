@@ -175,6 +175,7 @@ function onFollow(e) {
 
 .single-coach:hover .single-coach__bell {
   opacity: 1;
+  transform: rotate(15deg);
 }
 
 .single-coach:hover {

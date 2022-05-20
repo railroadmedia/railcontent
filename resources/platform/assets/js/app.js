@@ -17,6 +17,7 @@ import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
+import StaticHeader from './vue/components/HeaderCarousel/StaticHeader.vue'
 import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
@@ -165,6 +166,7 @@ app.component('AppContainer', AppContainer)
    .component('Comments', Comments)
    .component('MusoraIcon', MusoraIcon)
    .component('EmailForm', EmailForm)
+   .component('StaticHeader', StaticHeader)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

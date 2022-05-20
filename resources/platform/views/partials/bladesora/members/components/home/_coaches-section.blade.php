@@ -9,7 +9,7 @@
                 </a>
                 <a href="{{ $subscribedCoachesUrl }}"
                     aria-label="See All Coaches"
-                    class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                    class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                 >
                     See All
                 </a>
@@ -47,7 +47,7 @@
                                             height="12px" 
                                             class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
                                         ></musora-icon>
-                                        <span class="tw-mt-1">HOUSE</span>
+                                        <span class="tw-mt-1 tw-tracking-wider">HOUSE</span>
                                     </div>
                                 @endif
                             </div>

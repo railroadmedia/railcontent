@@ -9,6 +9,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  titleClasses: {
+    type: String,
+    default: ""
+  },
   ctaText: {
     type: String,
     default: "",
@@ -29,6 +33,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  textContentOverride: {
+    type: String,
+    default: ''
+  }
 });
 const goToUrl = (url) => {
   if (url) {
@@ -51,20 +59,20 @@ const goToUrl = (url) => {
     backgroundImage: `url('${img}')`,
   }" @click="goToUrl(ctaUrl)">
     <div class="tw-w-full tw-h-full tw-rounded-[10px] header-carousel-slide-bg">
-      <div class="
+      <div :class="`
           tw-flex
           tw-flex-col
           tw-text-white
           tw-text-uppercase
           tw-h-full
           tw-justify-end
-          tw-pb-[26px]
           lg:tw-mb-0
           lg:tw-justify-center
           tw-px-[26px]
           tw-font-open-sans
           lg:tw-w-1/2
-        ">
+          ${textContentOverride}
+        `">
         <h4 class="tw-font-bold tw-text-[16px] tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
         <h2 class="
             tw-font-bold
@@ -73,11 +81,13 @@ const goToUrl = (url) => {
             tw-mb-1
             tw-uppercase
             tw-leading-none
-          ">
+          "
+          :class="titleClasses"
+          >
           {{ title }}
         </h2>
 
-        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block">{{ description }}</p>
+        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block" v-html="description"></p>
 
         <span class="
             tw-text-white

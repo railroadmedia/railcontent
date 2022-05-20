@@ -20,7 +20,7 @@ const handleFocus = () => {
 
 <template>
   <div
-    class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded-[5px]"
+    class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded-[5px] tw-hidden lg:tw-block"
   >
     <MusoraIcon
       icon-name="search"
@@ -40,12 +40,10 @@ const handleFocus = () => {
         tw-text-xs
         tw-rounded-[5px]
         tw-transition-color
-        dark:tw-text-[#9EC0DC]
+        dark:tw-text-white
         tw-bg-transparent
-        focus:tw-outline-[#445f74] focus:tw-outline-1
-        dark:focus:tw-outline-[#9EC0DC]
+        focus:tw-outline-[#445f74] focus:tw-outline-1 focus:tw-ring-transparent dark:focus:tw-outline-[#9EC0DC]
         tw-shadow-none
-        focus:tw-ring-transparent
         ${isSidebarCollapsed
           ? 'placeholder:tw-text-transparent tw-pl-6 tw-cursor-pointer'
           : 'dark:placeholder:tw-text-[#9EC0DC] tw-pl-8'}

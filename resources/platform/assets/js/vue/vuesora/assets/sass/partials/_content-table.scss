@@ -268,39 +268,8 @@
   position:relative;
   box-sizing:content-box;
 
-  &:after {
-    content: '';
-    position:absolute;
-    top:0;
-    left:0;
-    bottom:-20px;
-    right:0;
-    background: linear-gradient(to bottom, transparent 0%, #F9F9F9 58%);
-  }
-
-  .tw-dark  &:after { 
-    background: linear-gradient(to bottom, transparent 0%, #000C17 58%);
-  }
-  &.always-truncate {
-    max-height:3em;
-    overflow:hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow:ellipsis;
-
-    &.active {
-      overflow:visible;
-      -webkit-line-clamp:initial;
-
-      &:after {
-        @include topToBottomGradient(transparent, transparent);
-      }
-    }
-  }
-
   &.font-compressed {
-    max-height:2.5em;
+    max-height:1.4rem;
   }
 
   @include xSmallOnly {
