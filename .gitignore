@@ -112,4 +112,8 @@ dist
 
 .idea
 .phpunit*
-auth.json
+auth.json.vapor/
+.env.production
+.env.staging
+
+.vapor

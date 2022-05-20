@@ -1,0 +1,23 @@
+id: 31058
+name: musora-web-platform
+environments:
+    production:
+        memory: 1024
+        cli-memory: 512
+        runtime: 'php-8.1:al2'
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+            - 'php artisan event:cache'
+            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+    staging:
+        domain: 'alpha.musora.com'
+        memory: 1024
+        cli-memory: 512
+        runtime: 'php-8.1:al2'
+        cache: staging-cache
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install'
+            - 'php artisan event:cache'
+            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
