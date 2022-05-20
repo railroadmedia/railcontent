@@ -4,7 +4,7 @@
     @endif
     @foreach ($features as $feature)
         <div class="tw-p-3 tw-text-center sm:tw-w-1/3 ">
-            <i class="fas {{ $feature['icon']  }} tw-text-white tw-rounded-full tw-text-3xl tw-leading-7 tw-w-16 tw-h-16 tw-flex tw-items-center tw-justify-center tw-mx-auto bg-drumeo"></i>
+            <i class="fas {{ $feature['icon']  }} tw-text-white tw-rounded-full tw-text-3xl tw-leading-7 tw-w-16 tw-h-16 tw-flex tw-items-center tw-justify-center tw-mx-auto bg-drumeo tw-pt-4"></i>
             <div class="tw-text-sm tw-leading-6 tw-mb-4 sm:tw-mb-0">
                 <strong class="tw-block tw-py-2 tw-text-base ">{{ $feature['heading']  }}</strong>
                 {{ $feature['text']  }}
