@@ -59,6 +59,14 @@ class EmailChangeController extends Controller
                 );
         }
 
+        if (!$request->get('user_password')) {
+            return back()
+                ->withInput($request->except('email'))
+                ->withErrors(
+                    ['user_password' => 'Email is missing from request']
+                );
+        }
+
         if (
             !$this->hasher->check($request->get('user_password'), $user->password)
         ) {
@@ -141,7 +149,7 @@ class EmailChangeController extends Controller
         $emailChange = EmailChange::where('token', $request->get('code'))->first();
 
         if (!$emailChange) {
-            return redirect()->back()->with('error-message', 'Token is invalid');
+            return redirect()->back()->withErrors(['error-message' => 'Token is invalid']);
         }
 
         // todo: email_change_token_ttl should be declared in a config file
