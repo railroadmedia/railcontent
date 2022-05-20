@@ -23,18 +23,15 @@
                 @if (!empty($images))
                     @foreach ($images as $image)
                         <div style="display: none;">
-                            <img class="tw-w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $image }}">
+                            <img class="tw-w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $image->path }}">
                         </div>
                     @endforeach
                 @endif
             </div>
             <div class="slider-nav tw-mx-auto tw-w-full @if(!empty($noSlider)) tw-hidden @endif">
                 @if(!empty($images))
-                    @if(!empty($videoSrc))
-                        <div style="display: none;"><img class="tw-w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $videoThumb  }}"></div>
-                    @endif
                     @foreach ($images as $image)
-                        <div style="display: none;"><img class="tw-w-full tw-rounded tw-border-4 tw-border-solid tw-w-full" style="border-color: #FFF;" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $image }}"></div>
+                        <div><img class="tw-w-full tw-rounded tw-border-4 tw-border-solid tw-w-full" style="border-color: #FFF;" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $image->path }}"></div>
                     @endforeach
                 @endif
             </div>

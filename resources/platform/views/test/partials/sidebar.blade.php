@@ -10,7 +10,7 @@
                 <p class="instructor tw-hidden lg:tw-inline"><em>{{ $instructor }} </em></p>
             @endif
             @if(!empty($logo))
-                <img class="tw-hidden tw-max-h-20 tw-w-full tw-mx-auto tw-mb-4 tw-object-contain lg:tw-block" src="{{ $logo }}">
+                <img class="tw-hidden tw-max-h-20 tw-w-full tw-mx-auto tw-mb-4 tw-object-contain lg:tw-block" src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $logo }}">
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
@@ -30,8 +30,8 @@
                 <p class="tw-text-center tw-mx-auto tw-mb-1 tw-text-sm tw-italic md:tw-text-base" style="color:#F71B26;">{!! $specialText  !!}</p>
             @endif
 
-            @if(empty($soldOut))
-                @if(empty($bundle) && empty($options))
+            @if(!$soldOut)
+                @if(empty($bundle) && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
@@ -42,17 +42,17 @@
                     </a>
                 @endif
 
-                @if(!empty($options))
+                @if(!empty($sizes) && count($sizes) !== 0)
                     <select class="pack-pick tw-mx-auto tw-mt-4 tw-border-2 tw-rounded-full tw-font-bold tw-text-xl tw-uppercase tw-w-full tw-h-auto tw-py-2 tw-pr-7 tw-pl-5 tw-bg-white md:tw-py-2 lg:tw-py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
                         <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
-                        @foreach($variations as $variant)
+                        @foreach($sizes as $size)
                             <option
-                                class="tw-bg-white tw-text-black"
-                                @if(isset($variant->soldOut) && $variant->soldOut) disabled @endif
-                                value="{{$variant->sku}}"
-                                data-price="{{$variant->price ?? 0}}"
-                                data-product-json='{"{{$variant->sku}}": 1}'
-                            >{{ $variant->name }}</option>
+                                class="tw-bg-white @if($size->sold_out) tw-text-gray @else tw-text-black @endif"
+                                @if($size->sold_out) disabled @endif
+                                value="{{$product->sku . '-' . $size}}"
+                                data-price="{{$product->price ?? 0}}"
+                                data-product-json='{"{{$product->sku . '-' . $size}}": 1}'
+                            >{{ $size->name }}</option>
                         @endforeach
                     </select>
 
