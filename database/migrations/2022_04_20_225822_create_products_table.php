@@ -19,9 +19,11 @@ return new class extends Migration
             $table->integer('product_type_id');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('sku')->unique();
             $table->string('header_text');
             $table->string('short_desc')->nullable();
             $table->string('meta_desc');
+            $table->string('meta_img');
             $table->string('special_text')->nullable();
             $table->string('study_text')->nullable();
             $table->string('logo')->nullable()->unique();
@@ -31,6 +33,7 @@ return new class extends Migration
             $table->longText('overview')->nullable();
             $table->string('about_img')->nullable();
             $table->string('instructor_name')->nullable();
+            $table->string('instructor_img')->nullable()->unique();
             $table->longText('instructor_desc')->nullable();
             $table->boolean('sold_out')->default(false);
             $table->boolean('free_shipping')->default(false);
