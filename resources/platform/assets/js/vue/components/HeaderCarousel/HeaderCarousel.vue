@@ -6,7 +6,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/vue/solid";
-import StaticHeader from "./StaticHeader.vue";
+import Slide from "./Slide.vue";
 
 const props = defineProps({
   brand: {
@@ -79,7 +79,7 @@ onMounted(() => {
 <template>
   <div
     class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4">
-    <StaticHeader v-for="(slide, i) in slides" :showSlide="i === currentSlide" :key="slide.title"
+    <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :key="slide.title"
       textContentOverride="tw-pb-[26px]" :topSubtitle="slide.topSubtitle" :title="slide.title" :ctaText="slide.ctaText"
       :description="slide.description" :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval"
       @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" />
