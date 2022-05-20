@@ -3,20 +3,22 @@
 namespace App\Nova;
 
 use App\Nova\Flexible\Layouts\FeatureLayout;
+use App\Nova\Flexible\Layouts\ImageLayout;
+use App\Nova\Flexible\Layouts\SizeLayout;
 use App\Nova\Flexible\Layouts\SpectLayout;
 use App\Nova\Flexible\Presets\FeaturePreset;
+use App\Nova\Flexible\Presets\ImagePreset;
+use App\Nova\Flexible\Presets\SizePreset;
 use App\Nova\Flexible\Presets\SpecPreset;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -58,8 +60,16 @@ class Product extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
             BelongsTo::make('ProductType', 'productType', 'App\Nova\ProductType'),
             Text::make('Name'),
-            Text::make('Slug')->hideFromIndex(),
+            Text::make('Slug')->hideFromIndex()->required(),
+            Text::make('Sku')->hideFromIndex()->required(),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
+            Image::make('Meta Image', 'meta_img')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->storeAs(function (Request $request){
+                    return $request->file('meta_img')->getClientOriginalName();
+                }),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Currency::make('Price')->hideFromIndex(),
@@ -72,6 +82,7 @@ class Product extends Resource
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Free Bonus', 'free_bonus')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
@@ -80,14 +91,31 @@ class Product extends Resource
             Image::make('Logo')
                 ->disk('s3')
                 ->prunable()
+                ->hideFromIndex()
                 ->storeAs(function (Request $request){
                     return $request->file('logo')->getClientOriginalName();
-                }),
+                })
+                ->nullable(),
             Text::make('Video Link', 'video_src')->hideFromIndex(),
             Text::make('Instructor Name', 'instructor_name')->hideFromIndex(),
+            Image::make('Instructor Image', 'instructor_img')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->storeAs(function (Request $request){
+                    return $request->file('instructor_img')->getClientOriginalName();
+                })
+                ->nullable(),
+            Markdown::make('Instructor Description', 'instructor_desc')->hideFromIndex(),
             Text::make('Study Text', 'study_text')->hideFromIndex(),
             Markdown::make('Overview')->hideFromIndex(),
-            Markdown::make('Instructor Description', 'instructor_desc')->hideFromIndex(),
+            Heading::make('Clothing'),
+            Flexible::make('Sizes')
+                ->addLayout(SizeLayout::class)
+                ->preset(SizePreset::class),
+            Flexible::make('Image')
+                ->addLayout(ImageLayout::class)
+                ->preset(ImagePreset::class),
         ];
     }
 
