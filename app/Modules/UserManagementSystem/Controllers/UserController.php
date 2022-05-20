@@ -179,11 +179,18 @@ class UserController extends Controller
 
         $this->authorize('delete-users');
 
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         if ($user) {
+//die("plm1");
             $user->delete();
             event(new UserDeleted($user));
 
+        } else {
+//die("plm2");
+
+//            throw new NotFoundHttpException();
+            return response('', 404);
+//            return redirect()->back(404);
         }
 
         if (!$isJson) {

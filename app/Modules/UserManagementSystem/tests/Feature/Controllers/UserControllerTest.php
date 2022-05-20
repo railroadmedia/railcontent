@@ -70,4 +70,92 @@ class UserControllerTest extends UserManagementSystemTestCase
 
 //        $this->assertEmpty(auth()->id());
     }
+
+
+
+    public function test_user_delete_with_permission()
+    {
+        $userId = 1;
+        $user = User::factory()->create([
+            'id'=> $userId,
+            'email' => $this->faker->email,
+            'password' => Hash::make($this->faker->words(3, true)),
+        ]);
+
+        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'delete-users']);
+        $user->givePermissionTo($permission);
+
+        auth()->login($user);
+
+        $response = $this->call(
+            'DELETE',
+            config('user_management_system.route_prefix') . '/user/delete/' . $userId
+        );
+
+
+        // assert the user was not removed from the db
+        $this->assertDatabaseMissing(
+            'usora_users',
+            [
+                'id' => $userId,
+            ]
+        );
+    }
+
+
+
+    public function test_user_delete_without_permission()
+    {
+        $userId = 1;
+
+        $user = User::factory()->create([
+            'email' => $this->faker->email,
+            'password' => Hash::make($this->faker->words(3, true)),
+        ]);
+
+        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'create-users']);
+        $user->givePermissionTo($permission);
+
+        auth()->login($user);
+
+        $response = $this->call(
+            'DELETE',
+            config('user_management_system.route_prefix') . '/user/delete/' . $userId
+        );
+
+        // assert the response code is not found
+        $this->assertEquals(403, $response->getStatusCode());
+
+        // assert the user was not removed from the db
+        $this->assertDatabaseHas(
+            'usora_users',
+            [
+                'id' => $userId,
+            ]
+        );
+    }
+
+    
+    public function test_user_update_validation_fail()
+    {
+        $userId = 1;
+
+        $user = User::factory()->create([
+            'email' => $this->faker->email,
+            'password' => Hash::make($this->faker->words(3, true)),
+        ]);
+
+        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'test']);
+        $user->givePermissionTo($permission);
+
+        auth()->login($user);
+
+        $response = $this->call(
+            'PATCH',
+            config('user_management_system.route_prefix') . '/user/update/' . rand(),
+            ['display_name' => 123]
+        );
+
+        $this->assertEquals(403, $response->getStatusCode());
+    }
 }
