@@ -59,17 +59,17 @@ return [
     |
     */
 
-    'providers' => [
-        'user-management-system' => [
-            'driver' => 'user-management-system',
-            'model' => \Modules\UserManagementSystem\Models\User::class,
-        ],
+        'providers' => [
+            'user-management-system' => [
+                'driver' => 'user-management-system',
+                'model' => \Modules\UserManagementSystem\Models\User::class,
+            ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
+            // 'users' => [
+            //     'driver' => 'database',
+            //     'table' => 'users',
+            // ],
+        ],
 
     /*
     |--------------------------------------------------------------------------
@@ -89,7 +89,7 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'user-management-system',
-            'table' => 'musora_laravel.usora_password_resets',
+            'table' => 'usora_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

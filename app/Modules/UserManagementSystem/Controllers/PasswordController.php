@@ -94,8 +94,6 @@ class PasswordController extends Controller
             ->with(
                 'successes',
                 new MessageBag(['password' => 'Your password has been reset successfully.'])
-            )
-            ->with($message);
-
+            );
     }
 }

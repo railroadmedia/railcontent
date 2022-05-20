@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\AuthenticationController;
 use Modules\UserManagementSystem\Controllers\ForgotPasswordController;
+use Modules\UserManagementSystem\Controllers\ResetPasswordController;
+
 
 Route::group(
     ['prefix' => config('user_management_system.route_prefix'),],
@@ -39,5 +41,12 @@ Route::group(
             ForgotPasswordController::class . '@sendResetLinkEmail'
         )
             ->name('user_management_system.password.send-reset-email');
+
+        Route::post(
+            'password/reset',
+            ResetPasswordController::class . '@reset'
+        )
+            ->name('user_management_system.password.reset');
+
     }
 );
