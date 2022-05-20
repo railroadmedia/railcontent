@@ -30,7 +30,8 @@ class SpectLayout extends Layout
     {
         return [
             Text::make('Title', 'title'),
-            Text::make('Description', 'desc')
+            Text::make('Description', 'desc'),
+            Text::make('Id', 'id')->hide()->hideFromDetail(),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
+use App\Models\Feature;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class FeatureResolver implements ResolverInterface
@@ -23,7 +24,10 @@ class FeatureResolver implements ResolverInterface
 
             if(!$layout) return;
 
-            return $layout->duplicateAndHydrate($feature->id, ['desc' => $feature->desc]);
+            return $layout->duplicateAndHydrate($feature->id, [
+                'desc' => $feature->desc,
+                'id' => $feature->id,
+            ]);
         })->filter();
     }
 
@@ -43,15 +47,44 @@ class FeatureResolver implements ResolverInterface
            $features = $groups->map(function($group, $index){
               return [
                   'desc' => $group->getAttributes()['desc'],
-                  'order' => $index
+                  'order' => $index,
+                  'id' => $group->getAttributes()['id']
               ];
            });
 
+           //update and insert items
+           foreach($features as $feature){
+               if(empty($feature['desc'])) {
+                   dd('hey');
+               }
+               else {
+                   if(!is_null($feature['id'])){
+                       $dbFeature = Feature::find($feature['id']);
+                       if($dbFeature->desc !== $feature['desc']){
+                           $dbFeature->desc = $feature['desc'];
+                           $dbFeature->save();
+                       }
 
+                       $updatedIds[] = $feature['id'];
+                   }
+                   else{
+                       $addFeature = new Feature();
+                       $addFeature->product_id = $model['id'];
+                       $addFeature->desc = $feature['desc'];
+                       $addFeature->save();
 
-            $model->features()->delete();
-            $model->features()->createMany($features);
+                       $updatedIds[] = $addFeature->id;
+                   }
+               }
 
+           }
+
+           if(isset($updatedIds)){
+               $deleteIds = Feature::where('product_id', '=', $model['id'])
+                   ->whereNotIn('id', $updatedIds)->select('id')->get();
+
+               Feature::destroy($deleteIds);
+           }
         });
     }
 }
