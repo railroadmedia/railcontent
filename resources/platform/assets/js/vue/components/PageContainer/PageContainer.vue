@@ -58,7 +58,7 @@ export default {
         isSidebarCollapsed.value = val;
         isSidebarHidden.value = val;
       } else {
-        const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+        const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
         if (smallBreakpoint.matches) {
           isSidebarHidden.value = !isSidebarHidden.value;
           isSidebarCollapsed.value = false;

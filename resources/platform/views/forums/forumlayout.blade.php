@@ -13,15 +13,15 @@
         <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
         @include('partials._svg-icons')
 
-        {{-- Styles --}}
-        {{-- <link rel="stylesheet" href="{{ mix('assets/members/css/app.css') }}"> --}}
-        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
-        @yield('styles')
-
-        {{-- Google Fonts --}}
+        {{-- Fonts --}}
         @include('partials._fonts')
 
+        {{-- Favicons --}}
         @include('partials._favicons')
+
+        {{-- Styles --}}
+        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+        @yield('styles')
 
         {{-- Header Analytics --}}
         {!! \App\Analytics\Tracker::trackPageView() !!}

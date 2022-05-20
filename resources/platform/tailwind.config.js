@@ -93,9 +93,6 @@ module.exports = {
             maxWidth: '2256px',
           }
         },
-        '.font-bebas-neue': {
-          letterSpacing: '0.025em',
-        }
       })
     })
   ],

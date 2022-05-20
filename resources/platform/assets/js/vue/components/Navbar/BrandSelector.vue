@@ -82,9 +82,9 @@ export default {
             </div>
         </ModalRenderer>
         <button v-on:click="() => handleBrandOpen(true)"
-            :class="`tw-flex tw-h-full tw-flex-row tw-items-center lg:tw-px-[12px] ${isSelectorOpen}`">
-            <img :src="brandUrl[brand]" class="tw-w-full tw-max-w-[144px] tw-max-h-8" />
-            <i :class="`fas fa-chevron-down ${textColor[brand]} tw-text-xs tw-pl-[4px] tw-align-middle`"></i>
+            :class="`tw-group tw-flex tw-h-full tw-h-[58px] tw-flex-row tw-items-center lg:tw-px-[12px] tw-transition-all hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] ${isSelectorOpen}`">
+            <img :src="brandUrl[brand]" class="tw-w-full tw-min-w-[92px] tw-max-w-[144px] tw-max-h-8" />
+            <i :class="`fas fa-chevron-down ${textColor[brand]} tw-text-xs tw-pl-[4px] tw-transition-all group-hover:tw-mt-1 tw-align-middle`"></i>
         </button>
     </div>
 </template>
