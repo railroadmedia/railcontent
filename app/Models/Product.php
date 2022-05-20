@@ -32,6 +32,22 @@ class Product extends Model
         return $this->hasMany(Spec::class);
     }
 
+    public function sizes()
+    {
+        return $this->hasManyThrough(Size::class, Product_Size::class, 'product_id', 'id', 'id', 'size_id')
+                    ->addSelect(['product__sizes.sold_out', 'sizes.*']);
+    }
+
+    public function product_size()
+    {
+        return $this->hasMany(Product_Size::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
     protected $guarded = [
         'id'
     ];
