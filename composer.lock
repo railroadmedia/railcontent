@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18f3a0e041281bf108b0f56e12e131ec",
+    "content-hash": "91664bca563d486a59abe9d8be632f48",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -114,16 +114,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.13",
+            "version": "3.222.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "007ddbbded7b753c2ceda61f3648774597a2615f"
+                "reference": "23b31a966ea85e7ec8e76062a072695f832a0b96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/007ddbbded7b753c2ceda61f3648774597a2615f",
-                "reference": "007ddbbded7b753c2ceda61f3648774597a2615f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/23b31a966ea85e7ec8e76062a072695f832a0b96",
+                "reference": "23b31a966ea85e7ec8e76062a072695f832a0b96",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.13"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.16"
             },
-            "time": "2022-05-16T18:15:06+00:00"
+            "time": "2022-05-19T18:27:39+00:00"
         },
         {
             "name": "box/spout",
@@ -2313,17 +2313,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.5.4",
+            "version": "4.6.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "23a2001aeb28cdce4dbb84f638477fd87c1067e4"
+                "reference": "661c0b2127f13b6942245c3285a620219ae5fd9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-23a2001aeb28cdce4dbb84f638477fd87c1067e4-zip-512dac.zip",
-                "reference": "23a2001aeb28cdce4dbb84f638477fd87c1067e4",
-                "shasum": "9f10a19383ab876a0b66f72923a737c356b37bb0"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-661c0b2127f13b6942245c3285a620219ae5fd9a-zip-f1afc6.zip",
+                "reference": "661c0b2127f13b6942245c3285a620219ae5fd9a",
+                "shasum": "730778b80cac408e0e2696e8bfa6275d62c5d1c5"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -2416,9 +2416,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.5.4"
+                "source": "https://github.com/laravel/nova/tree/v4.6.1"
             },
-            "time": "2022-05-12T18:43:40+00:00"
+            "time": "2022-05-18T21:38:11+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4456,12 +4456,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "3fb926ff33127fc80b12022fff75a589015b3e81"
+                "reference": "b5babbdb6ead583dfebc4abaabb190590982898f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3fb926ff33127fc80b12022fff75a589015b3e81",
-                "reference": "3fb926ff33127fc80b12022fff75a589015b3e81",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b5babbdb6ead583dfebc4abaabb190590982898f",
+                "reference": "b5babbdb6ead583dfebc4abaabb190590982898f",
                 "shasum": ""
             },
             "require": {
@@ -4476,7 +4476,7 @@
                 "league/flysystem-aws-s3-v3": "^3.0",
                 "php": "^8.1",
                 "predis/predis": "^1.1",
-                "railroad/response": "^2.0",
+                "railroad/response": "2.0.x-dev",
                 "ramsey/uuid": "^4.3",
                 "vimeo/vimeo-api": "^1.2"
             },
@@ -4516,7 +4516,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-"
             },
-            "time": "2022-04-25T21:20:51+00:00"
+            "time": "2022-05-12T15:32:31+00:00"
         },
         {
             "name": "railroad/resora",
@@ -4572,7 +4572,7 @@
         },
         {
             "name": "railroad/response",
-            "version": "v2.0.1",
+            "version": "2.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/response.git",
@@ -4608,7 +4608,7 @@
             "description": "Create response based on laravel-fractal package",
             "support": {
                 "issues": "https://github.com/railroadmedia/response/issues",
-                "source": "https://github.com/railroadmedia/response/tree/v2.0.1"
+                "source": "https://github.com/railroadmedia/response/tree/2.0"
             },
             "time": "2022-05-16T23:19:30+00:00"
         },
@@ -8712,16 +8712,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.14.5",
+            "version": "v1.14.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "1da083e30e6b0d646535c0afc2afeffdccb7181d"
+                "reference": "f00f3a8f83e71436d473cda7700ae7b4b68d26cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/1da083e30e6b0d646535c0afc2afeffdccb7181d",
-                "reference": "1da083e30e6b0d646535c0afc2afeffdccb7181d",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/f00f3a8f83e71436d473cda7700ae7b4b68d26cc",
+                "reference": "f00f3a8f83e71436d473cda7700ae7b4b68d26cc",
                 "shasum": ""
             },
             "require": {
@@ -8768,7 +8768,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-05-16T18:13:03+00:00"
+            "time": "2022-05-18T15:56:59+00:00"
         },
         {
             "name": "maximebf/debugbar",
