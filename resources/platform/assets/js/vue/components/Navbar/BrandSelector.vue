@@ -58,7 +58,7 @@ export default {
                     What instrument would you like to learn? 
                 </h2>
                 <SquaresContainer>
-                    <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="brand === 'drums'"
+                    <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="brand === 'drumeo'"
                         @onSelect="() => handleSelect('drumeo')">
                         <InstrumentCardContent instrumentText="DRUMS" :logoUrl="brandUrl.drumeo"
                             logoAltText="Drumeo Logo" />
