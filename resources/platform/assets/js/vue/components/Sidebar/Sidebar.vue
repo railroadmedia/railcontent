@@ -44,7 +44,7 @@ export default {
       let windowPathArray = window.location.pathname.split('/');
       let pathArray = path.split('/');
       //Homepage Check
-        return windowPathArray[2] === pathArray[2];
+      return windowPathArray[2] === pathArray[2];
     }
   },
 }
@@ -64,7 +64,7 @@ export default {
         <li v-for="(link, j) in section" :key="j" :class="[activePath(link.path) ? textColor[brand] : '']">
           <a :href="`${link.path}`"
              :title="[ isSidebarCollapsed ? `${link.name}`: '' ]"
-             class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+             class="tw-text-sm tw-h-[42px] tw-mb-[5px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[activePath(link.path) ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
             <musora-icon 

@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
         @yield('layout-styles')
 
+        @include('partials._fonts')
+
         @include('partials._favicons')
     </head>
 

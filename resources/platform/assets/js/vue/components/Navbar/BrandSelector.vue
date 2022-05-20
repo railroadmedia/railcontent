@@ -54,8 +54,8 @@ export default {
         <ModalRenderer v-if="isSelectorOpen" @onClose="() => handleBrandOpen(false)"
             key="ModalRendererKeyToMakeItDestroyByVif">
             <div class="tw-flex tw-flex-col">
-                <h2 class="tw-mb-[36px] tw-w-full tw-text-center tw-font-bold tw-text-white">
-                    Select your instrument
+                <h2 class="tw-mb-[36px] tw-w-full tw-text-center tw-font-extrabold tw-text-white">
+                    What instrument would you like to learn? 
                 </h2>
                 <SquaresContainer>
                     <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="brand === 'drums'"

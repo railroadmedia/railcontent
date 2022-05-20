@@ -7,6 +7,7 @@
                         Featured Coach
                     </h2>
                 </div>
+                {{-- There will be multiple featured coaches --}}
                 @foreach ($featuredCoaches->results() as $featured)
                     @php
                         $singleFeaturedCoach = count($featuredCoaches->results()) === 1; //Not sure if this is still needed

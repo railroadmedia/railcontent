@@ -20,7 +20,7 @@ const handleFocus = () => {
 
 <template>
   <div
-    class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded-[5px]"
+    class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded-[5px] tw-hidden lg:tw-block"
   >
     <MusoraIcon
       icon-name="search"
