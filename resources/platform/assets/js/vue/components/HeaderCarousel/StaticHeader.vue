@@ -39,7 +39,14 @@ const props = defineProps({
 <template>
     <div
         class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative">
-        <Slide :showSlide="true" :topSubtitle="topsubtitle" :title="title" :titleClasses="titleclasses"
-            :ctaText="ctatext" :description="description" :ctaUrl="ctaurl" :img="img" />
+        <Slide :showSlide="true" 
+                :topSubtitle="topsubtitle" 
+                :title="title" 
+                :titleClasses="titleclasses"
+                :ctaText="ctatext" 
+                :description="description" 
+                :ctaUrl="ctaurl" 
+                :img="img" 
+        />
     </div>
 </template>

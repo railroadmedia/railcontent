@@ -87,7 +87,7 @@ const goToUrl = (url) => {
           {{ title }}
         </h2>
 
-        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block">{{ description }}</p>
+        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block" v-html="description"></p>
 
         <span class="
             tw-text-white

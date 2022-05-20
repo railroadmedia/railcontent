@@ -43,27 +43,13 @@
             event-coach-profile-url="{{ $eventCoachProfileUrl }}"
         ></coach-event>
 
-        <!-- Featured Coach -->
-        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-[24px]">
-            <div class="tw-flex tw-flex-row tw-mb-3">
-                <div class="tw-flex tw-flex-col tw-flex-grow">
-                    <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-                        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-[15px]">
-                            Featured Coach
-                        </h2>
-                    </div>
-                    <static-header
-                        topSubtitle="FUNK MASTERY"
-                        titleclasses="tw-text-[#FAA300]"
-                        title="DENNIS CHAMBER"
-                        ctaText="VISIT DENNIS COACH PAGE"
-                        description="Dennis Chambers is a drumming legend who has recorded and performed with artists such as Santana, Steely Dan, Parliament/Funkadelic, John Scofield, Carl Filipiak, John McLaughlin, Niacin, and Mike Stern."
-                        ctaUrl="/"
-                        img="https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-chambers-coach.jpg"
-                    />
-                </div>
-            </div>
-        </div>
+        {{-- Featured Coach --}}
+        @component('partials.bladesora.members.components.coach-featured', [
+            'hasFeaturedCoaches' => $hasFeaturedCoaches,
+            'featuredCoaches' => $featuredCoaches,
+            'brand' => $brand,
+        ])
+        @endcomponent
 
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
             <div class="tw-flex tw-flex-row tw-mb-3">
