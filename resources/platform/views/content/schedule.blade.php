@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @component('partials._header-banner')
@@ -85,7 +84,6 @@
             </div>
 
         </div>
-    </page-container>
 @endsection
 
 @section('layout-styles')

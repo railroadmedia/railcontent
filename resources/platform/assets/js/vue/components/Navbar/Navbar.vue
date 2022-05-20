@@ -11,6 +11,19 @@ const props = defineProps({
   isSidebarHidden: Boolean,
   isSidebarCollapsed: Boolean,
   isDarkModeSelected: Boolean,
+  hasNotifications: {
+    type: Boolean,
+    default: false
+  },
+  userName: {
+    type: String
+  },
+  userAvatar: {
+    type: String
+  },
+  accountUrl: {
+    type: String
+  }
 });
 const emit = defineEmits([
   "onCollapseSidebar",
@@ -35,7 +48,7 @@ const toggleSearchModal = (val) => {
       tw-justify-between
       tw-px-4
       tw-transition
-      tw-bg-[#F9FBFB]/90
+      tw-bg-white/90
       dark:tw-bg-[#081825]/90
       tw-backdrop-blur-xl
       tw-shadow-[0_0_5px_rgb(0,0,0,.2)]
@@ -81,20 +94,26 @@ const toggleSearchModal = (val) => {
       />
     </div>
     <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]">
+
+      <!-- Search Trigger -->
       <button
         @click="() => toggleSearchModal(true)"
-        :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-justify-center ${bgColor[brand]}`"
+        :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-mr-1 tw-justify-center`"
       >
-        <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-white" />
+        <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-black dark:tw-text-white" />
       </button>
+
       <UserIcon
         :brand="brand"
+        :user-avatar="userAvatar"
+        :user-name="userName"
+        :account-url="accountUrl"
+        :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
         @onColorModeToggle="emit('onColorModeToggle')"
-        userName="John Doe"
-        userPhoto="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
       />
     </div>
+
     <SearchModal @onClose="() => toggleSearchModal(false)" v-if="showSearchModal" />
   </nav>
 </template>

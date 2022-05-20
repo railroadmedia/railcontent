@@ -27,8 +27,16 @@ class SetLastUsedBrand
      */
     public function handle($request, Closure $next)
     {
+        // web requests
         if (!empty(user()) && in_array($request->segment(1), config('brands'))) {
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->segment(1)));
+        }
+
+        // API requests will have the brand in the params
+        if (!empty(user()) &&
+            !empty($request->get('brand')) &&
+            in_array($request->get('brand'), config('brands'))) {
+            $this->brandService->setLastUsedBrand(user(), Brand::from($request->get('brand')));
         }
 
         return $next($request);

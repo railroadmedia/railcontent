@@ -1,22 +1,21 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>My Lists | Singeo</title>
+    <title>My Lists | Musora</title>
 @endsection
 
 @section('content')
-    <page-container>
 
         <div v-cloak>
 
             @include('partials.bladesora.members.partials._account-header', [
-                'userAvatar' => current_user()->getProfilePictureUrl(),
-                'userName' => current_user()->getDisplayName(),
-                'appName' => 'Singeo',
+                'userAvatar' => user()->profile_picture_url,
+                'userName' => user()->display_name,
+                'appName' => 'Musora',
                 'memberSince' => current_user()->getCreatedAt(),
             ])
 
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
                 <div class="tw-flex tw-flex-col">
                     <div class="tw-flex tw-flex-row">
                         <content-catalogue
@@ -36,7 +35,7 @@
                             initial-page="{{ $initialPage }}"
                             :force-wide-thumbs="true"
                             :lock-unowned="true"
-                            :is-admin="<?php echo e(json_encode(current_user()->getPermissionLevel() === 'administrator')); ?>"
+                            :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
                             @if($resetProgress)
                             :reset-progress="true"
                             @endif
@@ -48,5 +47,4 @@
 
         </div>
 
-    </page-container>
 @endsection

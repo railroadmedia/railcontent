@@ -13,7 +13,7 @@
 
             {!! html_entity_decode($signature) !!}
 
-            <p class="tiny text-grey-3 tw-italic tw-mt-3">
+            <p class="tiny text-grey-3 tw-italic tw-mt-3 dark:tw-text-[#9EC0DC]">
                 This will appear below your posts on the forums page.
             </p>
         </div>

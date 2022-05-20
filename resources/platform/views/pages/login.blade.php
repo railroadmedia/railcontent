@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.login-layout')
 
 @section('meta')
     <title>Login | Musora</title>
@@ -37,15 +37,23 @@
             <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
         </section>
 
-        @include('partials.bladesora.members.login-form', [
-            "brand" => "drumeo",
-            "loginUrl" => url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])),
-            "resetUrl" => '// todo',
-            "joinUrl" => url('/#orderNow'),
-            "joinPitch" => "tw-text-black",
-            "labelClasses" => "text-grey-3 tiny",
-            "checked" => true,
-        ])
+        <login-form
+            brand="drumeo"
+            loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])) }}"
+            reseturl="//todo"
+            joinurl="{{url('/#orderNow')}}"
+            :errors="{{json_encode($errors->all())}}"
+            hassessionstatus="{{session()->has('status')}}"
+            sessionstatus="{{ session()->get('status') }}"
+            :usecsrftoken="!!({{$useCsrfToken ?? true}})"
+        >
+            <template v-slot:csrf>{{ csrf_field() }}</template>
+        </login-form>
 
+        <p class="tiny tw-text-center tw-py-[20px] tw-text-[16px] {{ $joinPitch ?? '' }}">
+            <span>Not a member yet?</span>
+            <br/>
+            <a class="tw-text-white tw-font-extrabold tw-underline" href="{{ url('/#orderNow') }}">Join the community here!</a>
+        </p>
     </div>
 @endsection

@@ -3,7 +3,7 @@
     <div class="tw-flex tw-flex-col tw-grow">
 
         <!-- Section Title -->
-        <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
+        <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
             <a href="{{ $packsUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Your Training Packs</h2>
             </a>

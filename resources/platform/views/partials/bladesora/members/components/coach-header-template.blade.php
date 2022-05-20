@@ -57,17 +57,10 @@ $brandColors = $colors[$brand];
 @endphp
 
 <section class="tw-grid xs:tw-grid-cols-1 sm:tw-grid-cols-1 md:tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-0">
-    <div class="lg:tw-hidden tw-bg-top"
+    <div class="lg:tw-hidden tw-bg-top tw-bg-cover tw-text-white tw-min-h-[25vh]"
         style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
-            background-image: url({{ _imgix(
-                $backgroundImage,
-                []
-            ) }});
-            color: #fff;
-            background-size: cover;
-            min-height: 25vh;
-            background-position: 50%;">
+            background-image: url({{ cf_img($backgroundImage, []) }});">
         <div style="width: 100%; height: 100%; background: linear-gradient(180deg,{{ $colors["$brand"]['bgRgbStart'] }} 50%,{{ $colors["$brand"]['solidBg'] }});"></div>
     </div>
     <div class="tw-text-white" style="background-color: {{ $brandColors['solidBg'] }}">
@@ -93,16 +86,10 @@ $brandColors = $colors[$brand];
             </div>
         </div>
     </div>
-    <div class="tw-hidden lg:tw-flex tw-bg-top"
+    <div class="tw-hidden lg:tw-flex tw-bg-top tw-bg-cover tw-text-white"
         style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
-            background-image: url({{ _imgix(
-                $backgroundImage,
-                []
-            ) }});
-            color: #fff;
-            background-size: cover;
-            background-position: 50%;">
+            background-image: url({{ cf_img($backgroundImage, []) }});">
         <div style="width: 100%; height: 100%; background: linear-gradient(268deg,{{ $colors["$brand"]['bgRgbStart'] }} 50%,{{ $colors["$brand"]['solidBg'] }});"></div>
     </div>
 </section>
@@ -115,7 +102,7 @@ $brandColors = $colors[$brand];
                 <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close"
                     src="https://player.vimeo.com/video/{{$vimeoVideo}}?title=0&byline=0&portrait=0"
                     frameborder="0"
-                    allow="autoplay; fullscreen;" 
+                    allow="autoplay; fullscreen;"
                     id="coachVideoIframe">
                 </iframe>
             </div>

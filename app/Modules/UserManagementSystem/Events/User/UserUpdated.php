@@ -1,8 +1,8 @@
 <?php
 
-namespace Railroad\Usora\Events\User;
+namespace Modules\UserManagementSystem\Events\User;
 
-use Railroad\Usora\Entities\User;
+use Modules\UserManagementSystem\Models\User;
 
 class UserUpdated
 {

@@ -1,7 +1,3 @@
-@php
-  require_once(resource_path('platform/views/home/test_data.php'))
-@endphp
-
 @extends('partials.layout')
 
 @section('meta')
@@ -10,121 +6,148 @@
 
 @section('content')
 
-    <page-container>
-        
+
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
 
-            @if ($isSubscriber)
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
-                <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
+                {{-- On Boarding --}}
+                {{-- <onboarding></onboarding> --}}
 
-                    {{-- On Boarding --}}
-                    {{-- <onboarding></onboarding> --}}
-                    
-                    {{-- On Boarding TriggerBanner --}}
-                    <trigger-banner :v-if="true"></trigger-banner>
+                {{-- On Boarding TriggerBanner --}}
+                <trigger-banner :v-if="true"></trigger-banner>
 
-                    {{-- Carousel --}}
-                    <header-carousel 
-                        :preloaded-carousel="[]" 
-                        brand="{{ $brand }}">
-                    </header-carousel>
-                    
-                    <!-- Home Card Links -->
-                    <home-card-links brand="{{ $brand }}"></home-card-links>
-                    
-                    {{-- Continue Section --}}
-                    {{-- @component('partials.bladesora.members.components.home._continue-section', [
-                        'hasStartedContent' => !empty($startedContentArray),
+                {{-- Carousel --}}
+                <header-carousel
+                    :preloaded-carousel="[]"
+                    brand="{{ $brand }}">
+                </header-carousel>
+
+                {{-- Invite Email Message --}}
+                @if(session()->has('email-invite-message'))
+                    <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
+                        <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#c7ff9b] tw-border tw-border-[#3fd525]">
+                            <h3 class="tw-text-black tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
+                        </div>
+                    </div>
+                @endif
+                {{-- Access Code Message --}}
+                @if(session()->has('access-code-claimed-success') && session()->get('access-code-claimed-success') == true)
+                    <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
+                        <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#eee]">
+                            <h3 class="tw-text-black tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Home Card Links -->
+                <home-card-links 
+                    brand="{{ $brand }}"
+                    :has-started-method="{{ !empty($hasStartedMethod) ? $hasStartedMethod : 'false' }}"
+                    :has-completed-method = "{{ !empty($hasCompletedMethod) ? $hasCompletedMethod : 'false' }}"
+                    completed-levels-url = "{{ $completedLevelsUrl }}"
+                    method-url="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : '/'.$brand.'/methods' }}"
+                    next-learning-path-lesson-title = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
+                    next-learning-path-level = "{{ $nextLearningPathLevel }}" 
+                ></home-card-links>
+
+                {{-- Continue Section --}}
+                @if($startedContentCount > 0)
+                    @component('partials.bladesora.members.components.home._continue-section', [
+                        'brand' => brand(),
+                        'hasStartedContent' => $startedContentCount > 0,
                         'contentEndpoint' => '/railcontent/content',
-                        'continueUrl' => url()->route('members.profile.lists', ['state' => 'started']),
-                        'seeAllUrl' => url()->route('members.profile.lists', ['state' => 'started']),
-                        'brand' => 'pianote',
-                        'startedContent' => $startedContentJson,
+                        'continueUrl' => '', // todo: need url
+                        'seeAllUrl' => '', // todo: need url
+                        'startedContentJson' => $startedContentJson,
                         ])
-                    @endcomponent --}}
+                    @endcomponent
+                @endif
 
-                    {{-- New Section --}}
-                    {{-- @component('partials.bladesora.members.components.home._new-section', [
-                        'brand' => 'drumeo',
-                        'contentEndpoint' => '/laravel/public/railcontent/content',
-                        'allLessonsUrl' => url()->route('members.lessons.all'),
-                        'newContent' => $newContent,
-                        ])
-                    @endcomponent --}}
+                {{-- New Section --}}
+                @component('partials.bladesora.members.components.home._new-section', [
+                    'brand' => brand(),
+                    'contentEndpoint' => '/laravel/public/railcontent/content',
+                    'allLessonsUrl' => '', // todo: need url
+                    'newContentJson' => $newContentJson,
+                    ])
+                @endcomponent
 
-                    {{-- Popular Conversations --}}
-                    {{-- @component('partials.bladesora.members.components.home._conversations-section', [
-                        'brand' => 'drumeo',
-                        'forumUrl' => 'https://forums.drumeo.com',
+                {{-- Popular Conversations --}}
+                @if(count($hotForumTopics) > 0)
+                    @component('partials.bladesora.members.components.home._conversations-section', [
+                        'brand' => brand(),
+                        'forumUrl' => brand() . '/forums',
                         'forumPosts' => $hotForumTopics,
                         ])
-                    @endcomponent --}}
+                    @endcomponent
+                @endif
 
-                    {{-- From Subscribed Coaches --}}
-                    {{-- @component('partials.bladesora.members.components.home._followed-section', [
-                        'brand' => 'drumeo',
-                        'subscribedLessons' => url()->route('members.lessons.subscribed'),
+                {{-- From Subscribed Coaches --}}
+                @if($hasfollowedLessons)
+                    @component('partials.bladesora.members.components.home._followed-section', [
+                        'brand' => brand(),
+                        'subscribedLessons' => '', // todo: need url
                         'contentEndpoint' => '/laravel/public/railcontent/content',
                         'followedLessons' => $followedLessons,
                         'hasfollowedLessons' => $hasfollowedLessons,
                         ])
-                    @endcomponent --}}
+                    @endcomponent
+                @endif
 
-                    {{-- Subscribed Coaches --}}
-                    {{-- @component('partials.bladesora.members.components.home._coaches-section', [
-                        'brand' => 'drumeo',
-                        'hasSubscribedCoaches' => $hasSubscribedCoaches,
-                        'subscribedCoaches' => $subscribedCoaches,
-                        'subscribedCoachesUrl' => '/members/coaches?only_subscribed=true#coach-section',
-                        'allCoachesUrl' => '/members/coaches?only_subscribed=true#coach-section"',
-                        ])
-                    @endcomponent --}}
+                {{-- Subscribed Coaches --}}
+                @component('partials.bladesora.members.components.home._coaches-section', [
+                    'brand' => brand(),
+                    'hasSubscribedCoaches' => $hasSubscribedCoaches,
+                    'subscribedCoaches' => $subscribedCoaches,
+                    'subscribedCoachesUrl' => '', // todo: url
+                    'allCoachesUrl' => '', // todo: url
+                    ])
+                @endcomponent
 
-                    {{-- My Playlists --}}
-                    {{-- @component('partials.bladesora.members.components.home._list-section', [
-                        'brand' => 'drumeo',
-                        'myListUrl' => url()->route('user.lists', ['id' => auth()->id()]),
-                        'contentEndpoint' => '/laravel/public/railcontent/content',
-                        'usersList' => $usersList,
-                        ])
-                    @endcomponent --}}
-                    
-                    {{-- Live Banner --}}
-                    <coach-event 
-                        brand="{{ $brand }}" 
-                        :preloaded-content='{{ $coachEvent }}'
-                        current-date-string="{{ $currentDate }}" 
-                        subscription-calendar-id="{{ $calendarId }}"
-                        youtube-event-id="{{ $youtubeId }}" 
-                        :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-                        event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-                    ></coach-event>
+                {{-- My Playlists --}}
+                @component('partials.bladesora.members.components.home._list-section', [
+                    'brand' => brand(),
+                    'myListUrl' => '', // todo: need url
+                    'contentEndpoint' => '/laravel/public/railcontent/content',
+                    'usersList' => $usersList,
+                    ])
+                @endcomponent
 
-                    {{-- Upcoming Events --}}
-                    {{-- @component('partials.bladesora.members.components.home._upcoming-section', [
-                        'brand' => 'drumeo',
-                        'upcomingUrl' => url()->route('members.live'),
+                {{-- Live Banner --}}
+                <coach-event
+                    brand="{{ $brand }}"
+                    :preloaded-content='{{ $coachEvent }}'
+                    current-date-string="{{ $currentDate }}"
+                    subscription-calendar-id="{{ $calendarId }}"
+                    youtube-event-id="{{ $youtubeId }}"
+                    :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                    event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+                ></coach-event>
+
+                {{-- Upcoming Events --}}
+                @if($hasUpcomingEvents)
+                    @component('partials.bladesora.members.components.home._upcoming-section', [
+                        'brand' => brand(),
+                        'upcomingUrl' => '', // todo: url
                         'upcomingEvents' => $upcomingEvents,
                         'contentEndpoint' => '/laravel/public/railcontent/content',
                         ])
-                    @endcomponent --}}
+                    @endcomponent
+                @endif
 
-                    {{-- My Stats --}}
-                    <stats-section
-                        brand="{{ $brand }}"
-                        :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-                        next-learning-path-level="{{ $nextLearningPathLevel }}"
-                        :userMetrics="{{ $userMetrics }}"
-                    ></stats-section>
-                </div>
+                {{-- My Stats --}}
+                <stats-section
+                    brand="{{ $brand }}"
+                    :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+                    next-learning-path-level="{{ $nextLearningPathLevel }}"
+                    :userMetrics="{{ json_encode($userMetrics) }}"
+                ></stats-section>
 
-            @endif
-            
+            </div>
         </div>
-        
-    </page-container>
+
 @endsection
 
 

@@ -3,7 +3,7 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home'),
+                "url" => url()->route('platform.home', ['brand' => brand()]),
             ],
             [
                 "title" => $parentContent->fetch('fields.title'),
@@ -14,8 +14,8 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Singeo Method',
-                "url" => url()->route('members.learning-paths.show', ['singeo-method', 308514]),
+                "title" => ucwords(brand()) . ' Method',
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
             ],
             [
                 "title" => $parentContent->fetch('fields.title'),
@@ -26,15 +26,15 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
-                "title" => 'Singeo Method',
-                "url" => url()->route('members.learning-paths.show', ['singeo-method', 308514]),
+                "title" => ucwords(brand()) . ' Method',
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
             ],
             [
-                "title" => $parentLevel->fetch('fields.title'),
-                "url" => $parentLevel->fetch('url'),
+                "title" => $secondContent->fetch('fields.title'),
+                "url" => $secondContent->fetch('url'),
             ],
             [
-                "title" => $parentContent->fetch('fields.title'),
+                "title" => $thirdContent->fetch('fields.title'),
             ]
         ]
     ])
@@ -58,12 +58,32 @@
             ]
         ]
     ])
+@elseif($parentContent->fetch('type') === 'pack-bundle')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+            [
+                "title" => 'Home',
+                "url" => url()->route('platform.home'),
+            ],
+            [
+                "title" => 'Packs',
+                "url" => url()->route('platform.packs'),
+            ],
+            [
+                "title" => $pack->fetch('fields.title'),
+                "url" => $pack->fetch('url'),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ]
+    ])
 @else
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home'),
+                "url" => url()->route('platform.home'),
             ],
             [
                 "title" => parse_lesson_type_readable($parentContent->fetch('type'), true),

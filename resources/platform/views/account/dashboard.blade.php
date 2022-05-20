@@ -1,90 +1,77 @@
+@php
+/**
+ * @var \Modules\UserManagementSystem\Models\User $user
+ */
+@endphp
+
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $user->getDisplayName() }} | Singeo</title>
+    <title>{{ $dashboardUser->display_name }} | Musora</title>
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @include('partials.bladesora.members.partials._account-header', [
-                "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
-                "userAvatar" => $user->getProfilePictureUrl(),
-                "userName" => $user->getDisplayName(),
-                "appName" => 'Singeo',
-                "memberSince" => $user->getCreatedAt(),
+                "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+                "userAvatar" => $dashboardUser->profile_picture_url,
+                "userName" => $dashboardUser->display_name,
+                "appName" => 'Musora',
+                "memberSince" => $dashboardUser->created_at,
             ])
 
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14">
                 <div class="tw-flex tw-flex-col">
 
-                    <div class="tw-flex tw-flex-row pv-3 ph {{ $isSubscriber ? 'bb-grey-1-1' : '' }}">
-                        <h1 class="heading grow">{{ $isCurrentUsersProfile ? 'My' : possessivize($user->getDisplayName()) }} Dashboard</h1>
+                    {{-- Dashboard Header --}}
+                    <div class="tw-flex tw-flex-row tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-mb-5 md:tw-mb-7">
+                        <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
+                            {{ $isCurrentUsersProfile ? 'My' : possessivize($dashboardUser->display_name) }} Dashboard
+                        </h1>
                     </div>
 
+                    {{-- User Stats --}}
                     @if($isSubscriber)
-                        <div class="tw-flex tw-flex-row tw-flex-wrap nmh-1 pv-3">
-                            @foreach($userMetrics as $userMetric)
-                                <div class="tw-flex tw-flex-column xs-6 sm-3 tw-no-underline">
+                        <section class="tw-flex tw-flex-col tw-mb-5 md:tw-mb-7 tw-text-[#00101D] dark:tw-text-white tw-w-full">
+                            {{-- Title --}}
+                            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                                <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
+                            </div>
+                            {{-- Metrics --}}
+                            <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
+                                @foreach($userMetrics as $userMetric)
                                     @include('partials.bladesora.members.components.user-metric', [
-                                        "themeColor" => '{{ $brand }}',
+                                        "themeColor" => $brand,
                                         "icon" => $userMetric['icon'],
                                         "value" => $userMetric['value'],
                                         "label" => $userMetric['label'],
                                     ])
-                                </div>
-                            @endforeach
-                        </div>
+                                @endforeach
+                            </div>
+                        </section>
                     @endif
 
-                    <div class="tw-flex tw-flex-row pv-3 ph bt-grey-1-1 tw-items-center" dusk="started-lessons">
+                    {{-- Completed Lessons --}}
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         @if($isCurrentUsersProfile)
-                            <a href="{{ url()->route('members.profile.lists', ['state' => 'started']) }}"
-                                    class="tw-text-black subheading tw-grow tw-no-underline"
-                                    dusk="see-all-started">
-                                Started Lessons
+                            <a href="{{ '' }}"
+                                dusk="see-all-started"
+                                class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                            >
+                                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed Lessons</h2>
                             </a>
-                            <a href="{{ url()->route('members.profile.lists', ['state' => 'started']) }}"
-                            class="tiny text-grey-3 tw-uppercase dense tw-font-bold tw-flex-auto tw-no-underline"
-                            dusk="see-all-started">
-                                See All &raquo;
+                            <a href="{{ '' }}"
+                                dusk="see-all-started"
+                                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                            >
+                                See All
                             </a>
                         @else
-                            <h1 class="subheading grow">Started Lessons </h1>
+                            <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed Lessons</h2>
                         @endif
                     </div>
-                    <div class="tw-flex tw-flex-row tw-pb-3 four-cards-row" dusk="started-lesson-grid">
-                        <content-catalogue
-                            brand="{{ $brand }}"
-                            theme-color="{{ $brand }}"
-                            catalogue-type="grid"
-                            limit="4"
-                            :force-wide-thumbs="true"
-                            :use-theme-color="true"
-                            :pre-loaded-content="{{ $startedProgressContents }}"
-                            no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you start will show up here. Check out the <a href=\"" . url()->route('members.learning-paths.show', ['singeo-method', 308514]) . "\">Singeo Method</a> to get started." : "This member has not started any lessons yet." }}"
-                            no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
-                        />
-                    </div>
-
-                    <div class="tw-flex tw-flex-row pv-3 ph bt-grey-1-1 align-v-center" dusk="completed-lessons">
-
-                        @if($isCurrentUsersProfile)
-                            <a href="{{ url()->route('members.profile.lists', ['state' => 'completed']) }}"
-                                    class="text-black subheading grow tw-no-underline"
-                                    dusk="see-all-completed">
-                                Completed
-                            </a>
-                            <a href="{{ url()->route('members.profile.lists', ['state' => 'completed']) }}"
-                            class="tiny text-grey-3 tw-uppercase dense tw-font-bold tw-flex-auto tw-no-underline"
-                            dusk="see-all-completed">
-                                See All &raquo;
-                            </a>
-                        @else
-                            <h1 class="subheading grow">Completed Lessons</h1>
-                        @endif
-                    </div>
+                    {{-- Completed Catalogue --}}
                     <div class="tw-flex tw-flex-row pb-3 four-cards-row" dusk="completed-lesson-grid">
                         <content-catalogue
                             brand="{{ $brand }}"
@@ -94,40 +81,67 @@
                             :force-wide-thumbs="true"
                             :use-theme-color="true"
                             :pre-loaded-content="{{ $completedProgressContents }}"
-                            no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you complete will show up here. Check out our <a href=\"" . url()->route('members.learning-paths.index') . "\">Learning Paths</a> to get started." : "This member has not completed any lessons yet." }}"
+                            no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you complete will show up here." : "This member has not completed any lessons yet." }}"
                             no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
                         />
                     </div>
 
-                    <div id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph bt-grey-1-1" dusk="about-user">
-                        <div class="tw-flex tw-flex-column xs-12 tw-mb-3 pv-3">
-                            <div class="tw-flex tw-flex-row">
-                                <h1 class="subheading grow">About {{ $isCurrentUsersProfile ? 'You' : $user->getDisplayName() }}</h1>
+                    {{-- Started Lessons --}}
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        @if($isCurrentUsersProfile)
+                            <a href="{{ '' }}"
+                                dusk="see-all-started"
+                                class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                            >
+                                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started Lessons</h2>
+                            </a>
+                            <a href="{{ '' }}"
+                                dusk="see-all-started"
+                                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                            >
+                                See All
+                            </a>
+                        @else
+                            <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started Lessons</h2>
+                        @endif
+                    </div>
+                    {{-- Started Catalogue --}}
+                    <div class="tw-flex tw-flex-row tw-pb-3 four-cards-row" dusk="started-lesson-grid">
+                        <content-catalogue
+                            brand="{{ $brand }}"
+                            theme-color="{{ $brand }}"
+                            catalogue-type="grid"
+                            limit="4"
+                            :force-wide-thumbs="true"
+                            :use-theme-color="true"
+                            :pre-loaded-content="{{ $startedProgressContents }}"
+                            no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you start will show up here." : "This member has not started any lessons yet." }}"
+                            no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
+                        />
+                    </div>
+
+                    {{-- About You --}}
+                    <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph" dusk="about-user">
+                        <div class="tw-flex tw-flex-col xs-12 tw-mb-3">
+                            {{-- Title --}}
+                            <div class="tw-flex tw-flex-col tw-mb-4">
+                                <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
+                                    About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
+                                </h1>
 
                                 @if($isCurrentUsersProfile)
-                                    <a href="{{ url()->route('members.profile.settings') }}"
-                                    class="tiny text-grey-3 tw-uppercase dense tw-font-bold tw-flex-auto tw-no-underline" dusk="edit-user">
+                                    <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
+                                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg tw-tracking-wide"
+                                        dusk="edit-user">
                                         Edit
                                     </a>
                                 @endif
                             </div>
                         </div>
-                        <div class="tw-flex tw-flex-column xs-12 md-7 tw-mb-2 tw-pr-2">
-                            @include('partials.bladesora.members.account.partials._text-fields', [
-                                "fields" => [
-                                    "Name" => !empty($user->getFirstName()) && !empty($user->getFirstName()) ? $user->getFirstName() . ' ' . $user->getLastName() : null,
-                                    "Birthday" => !empty($user->getBirthday()) ? \Carbon\Carbon::parse($user->getBirthday())->format('F j, Y') : '',
-                                ]
-                            ])
+                    </section>
 
-                            @if($user->getBiography())
-                                <p class="body">{!! nl2br($user->getBiography()) !!}</p>
-                            @endif
-                        </div>
-                    </div>
                 </div>
             </div>
 
         </div>
-    </page-container>
 @endsection

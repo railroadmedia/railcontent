@@ -2,9 +2,10 @@
     <page-container 
       v-if="vueRouter"
     >
-      <router-view ></router-view>
+      <!-- <router-view ></router-view> -->
     </page-container>
-    <slot v-if="!vueRouter" />
+    <!-- SSR -->
+    <slot v-if="!vueRouter" :brand="brand"/>
 </template>
 <script>
   export default {
@@ -15,8 +16,5 @@
       },
       brand: String
     },
-    setup(props) {
-      console.log(`Has Vue Router: ${props.vueRouter}`)
-    }
   }
 </script>

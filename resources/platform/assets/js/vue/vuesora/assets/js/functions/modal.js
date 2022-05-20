@@ -3,7 +3,6 @@ import Player from '@vimeo/player';
 
 export default (function () {
     document.addEventListener('DOMContentLoaded', () => {
-        const topBar = document.getElementById('nav');
         const closeEvent = new CustomEvent('modalClose');
 
         document.body.addEventListener('click', (event) => {
@@ -63,7 +62,6 @@ export default (function () {
                 document.documentElement.classList.remove('no-scroll');
 
                 document.body.style.paddingRight = '0';
-                topBar.style.paddingRight = '0';
 
                 window.dispatchEvent(closeEvent);
             }
@@ -113,7 +111,6 @@ export default (function () {
 
             if (bodyHeight > clientHeight) {
                 document.body.style.paddingRight = `${Utils.getScrollBarWidth()}px`;
-                topBar.style.paddingRight = `${Utils.getScrollBarWidth()}px`;
             }
         };
     });

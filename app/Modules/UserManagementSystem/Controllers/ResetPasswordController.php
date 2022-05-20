@@ -1,43 +1,21 @@
 <?php
 
-namespace Railroad\Usora\Controllers;
+namespace Modules\UserManagementSystem\Controllers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\MessageBag;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Events\UserEvent;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Repositories\UserRepository;
+use Illuminate\Validation\ValidationException;
+use Modules\UserManagementSystem\Events\UserEvent;
 
 class ResetPasswordController extends Controller
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * CookieController constructor.
-     *
-     * @param UserRepository $userRepository
-     */
-    public function __construct(UsoraEntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-
-        $this->userRepository = $this->entityManager->getRepository(User::class);
-    }
+    use ValidatesRequests;
 
     /**
      * Reset the given user's password.
@@ -47,13 +25,34 @@ class ResetPasswordController extends Controller
      */
     public function reset(Request $request)
     {
-        $request->validate(
-            [
-                'token' => 'required',
-                'email' => 'required|email',
-                'password' => 'required|' . config('usora.password_creation_rules', 'confirmed|min:8|max:128'),
-            ]
-        );
+
+        try {
+            $validationRules =
+                [
+                    'token' => 'required',
+                    'email' => 'required|email',
+                    'password' => 'required|confirmed|min:8|max:128'
+                ];
+            $this->validate(
+                $request,
+                $validationRules
+            );
+        } catch (ValidationException $e) {
+            $messagesByField = $e->validator->getMessageBag()->getMessages();
+            $messagesForFieldFailingField = reset($messagesByField);
+
+            foreach ($messagesForFieldFailingField as $messagesForField) {
+                $errorMessageToUser = $messagesForField;
+                break;
+            }
+
+            $default = 'Please try again, and contact support if the problem persists.';
+
+            return redirect()
+                ->back()
+                ->withErrors(['password' => 'Password reset failed. Error: '  . ($errorMessageToUser ?? $default)]);
+
+        }
 
         $response =
             $this->broker()
@@ -67,14 +66,10 @@ class ResetPasswordController extends Controller
                     function ($user, $password) {
 
                         $user->setPassword($password);
-
-                        $this->entityManager->persist($user);
-                        $this->entityManager->flush();
+                        $user->save();
 
                         event(new PasswordReset($user));
-
                         auth()->loginUsingId($user->getId());
-
                         event(new UserEvent($user->getId(), 'authenticated'));
                     }
                 );
@@ -82,8 +77,10 @@ class ResetPasswordController extends Controller
         if ($response === Password::PASSWORD_RESET) {
             session()->put('skip-third-party-auth-check', true);
 
+//            todo: define redirect path
             return redirect()
-                ->to(config('usora.login_success_redirect_path'))
+                ->back()
+//                ->to(config('usora.login_success_redirect_path'))
                 ->with(
                     'successes',
                     new MessageBag(['password' => 'Your password has been reset successfully.'])

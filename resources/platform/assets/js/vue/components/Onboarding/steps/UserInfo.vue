@@ -5,8 +5,6 @@ import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
-import SkipStep from "../SkipStep.vue";
-import { ref } from "vue";
 const props = defineProps({
   brand: {
     type: String,
@@ -28,7 +26,8 @@ function onInputChange(value) {
 }
 
 function skipStep() {
-  alert("* the user skipped the step *");
+  emit("onChangeStep", 1)
+  emit("onCheckStep", 0, true);
 }
 
 </script>
@@ -80,7 +79,12 @@ function skipStep() {
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >
-      <SkipStep @onSkip="skipStep" title="SKIP THIS STEP" classOverride="tw-mt-[20px] md:tw-mt-0" />
+      <button
+        class="tw-mt-[20px] md:tw-mt-0 tw-text-[18px] tw-text-white tw-underline tw-font-bebas-neue"
+        @click="skipStep"
+    >
+        SKIP THIS STEP
+    </button>
     </div>
   </StepWrapper>
 </template>

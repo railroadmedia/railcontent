@@ -3,46 +3,26 @@
         class="flex flex-column pa-1 catalogue-card"
         :class="class_object"
     >
-        <a
-            :href="renderLink ? item.url : false"
-            class="no-decoration flex"
-            :class="displayInline ? 'flex-row' : 'flex-column'"
+        <div class="flex"
+           :class="displayInline ? 'flex-row' : 'flex-column'"
         >
-            <div
-                class="flex flex-column"
-                :class="[{'thumbnail-col': displayInline}, item.type + '-thumbnail']"
+            <!-- Thumbnail Section -->
+            <a :href="renderLink ? item.url : false"
+               class="no-decoration flex flex-column"
+               :class="[
+                    {'thumbnail-col': displayInline}, 
+                    item.type + '-thumbnail'
+                ]"
             >
-                <div
-                    class="card-media bg-grey-2 active corners-10"
-                    :class="[thumbnailType, {'mb-1': !displayInline}]"
+                <div class="card-media bg-grey-2 active corners-10"
+                     :class="[thumbnailType]"
                 >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="mappedData.thumbnail"
-                        data-ix-fade
-                        class="bg-grey-2"
+                    <!-- Video Thumbnail -->
+                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
+                         :data-ix-src="mappedData.thumbnail"
+                         data-ix-fade
+                         class="bg-grey-2"
                     >
-
-                    <!-- this is generally for packs only -->
-                    <div v-if="mappedData.logo_image"
-                         style="width: 100%;height: 40%;position: absolute;z-index: 999999;bottom: 0px;text-align: center;">
-
-                        <img v-if="mappedData.logo_image"
-                             style="height: 100%;object-fit: contain;width: 60%;;"
-                             :src="'https://cdn.musora.com/image/fetch/c_fit,w_360,h_180,q_auto:good/' + mappedData.logo_image"
-                             :alt="mappedData.black_title">
-                    </div>
-
-                    <i
-                        v-if="item.type !== 'pack-bundle' && showMyListAction"
-                        class="add-to-list fas fa-plus"
-                        :class="is_added ? 'is-added ' + themeTextClass : 'text-white'"
-                        :title="is_added ? 'Remove from list' : 'Add to list'"
-                        :data-content-id="item.id"
-                        :data-content-type="item.type"
-                        @click.stop.prevent="addToList"
-                    ></i>
-
                     <div class="lesson-progress overflow">
                         <span
                             class="progress"
@@ -50,56 +30,76 @@
                             :style="'width:' + progress_percent + '%'"
                         ></span>
                     </div>
-
-                    <span
-                        v-if="showTrophy"
-                        class="bundle-complete flex-center"
+                    <span v-if="showTrophy"
+                          class="bundle-complete flex-center"
                     >
                         <i class="fas fa-trophy"></i>
                     </span>
-                    <span
-                        v-else
-                        class="thumb-hover flex-center"
+                    <span v-else
+                          class="thumb-hover flex-center"
                     >
-                        <i
-                            class="fas"
-                            :class="thumbnailIcon"
+                        <i class="fas"
+                           :class="thumbnailIcon"
                         ></i>
-
-                        <p
-                            v-if="!isReleased"
-                            class="tw-text-sm tw-leading-snug text-white font-bold"
+                        <p v-if="!isReleased"
+                           class="tiny text-white font-bold"
                         >
                             {{ releaseDate }}
                         </p>
                     </span>
                 </div>
-            </div>
+            </a>
 
-            <div
-                class="card-info flex flex-column"
-                :class="displayInline ? 'ph-1 align-v-center' : ''"
-            >
-                <h5
-                    class="tw-text-xs text-grey-4 capitalize tw-font-normal tw-font-normal"
-                    v-if="!isGuitareoChordAndScale" v-html="mappedData.grey_title">
+            <!-- Description Section -->
+            <div class="tw-flex">
+                <a :href="renderLink ? item.url : false" 
+                   class="card-info flex flex-column tw-p-1 tw-rounded-lg"
+                   :class="displayInline ? 'align-v-center' : 'tw-py-2'"
+                >
+                    <!-- Coach Title -->
+                    <h5 class="tw-text-xs tw-font-normal tw-leading-none text-grey-4 tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
+                        v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                     </h5>
-
-                <h4
-                    class="tw-text-sm tw-leading-snug text-black font-compressed font-bold capitalize mb-1"
-                    :class="{'text-center': isGuitareoChordAndScale}"
-                >
-                    {{ mappedData.black_title }}
-                </h4>
-
-                <p
-                    v-if="mappedData.show_description"
-                    class="tw-text-xs font-compressed text-grey-4 pb-1 mb-1 item-description always-truncate"
-                >
-                    {{ mappedData.description.replace(/<[^>]+>/g, '') }}
-                </p>
+                    <!-- Video Title -->
+                    <h4 class="tw-text-sm tw-leading-snug tw-text-black font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
+                        :class="{'text-center': isGuitareoChordAndScale}"
+                    >
+                        {{ mappedData.black_title }}
+                    </h4>
+                    <!-- Video Description -->
+                    <p v-if="mappedData.show_description"
+                       class="tw-text-xs font-compressed text-grey-4 dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description always-truncate"
+                    >
+                        {{ mappedData.description.replace(/<[^>]+>/g, '') }}
+                    </p>
+                    <!-- Content -->
+                    <h6 class="tw-text-xs tw-font-normal text-grey-3 tw-capitalize dark:tw-text-[#9EC0DC]"
+                        :class="{'text-center': isGuitareoChordAndScale}"
+                    >
+                        <span v-html="mappedData.content_type"></span>
+                        <span v-if="mappedData.grey_title && mappedData.grey_title !== ''">
+                            - {{ mappedData.grey_title }}
+                        </span>
+                        &nbsp;
+                    </h6>
+                </a>
+                <!-- Add to My List -->
+                <div class="tw-inline-flex tw-items-start tw-p-1">
+                    <button v-if="item.type !== 'pack-bundle' && showMyListAction"
+                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-100/20"
+                        :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-black dark:tw-text-white'"
+                        :title="is_added ? 'Remove from My List' : 'Add to My List'"
+                        :data-content-id="item.id"
+                        :data-content-type="item.type"
+                        @click.stop.prevent="addToList"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </a>
+        </div>
     </div>
 </template>
 <script>

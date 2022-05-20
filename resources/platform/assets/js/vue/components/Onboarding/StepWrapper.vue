@@ -21,8 +21,8 @@ const props = defineProps({
     :style="showBgImg ? { backgroundImage: `url('${bgImg[brand]}')` } : {}"
   >
     <div
-      :class="`StepWrapper__overlay ${
-        showBgImg ? 'StepWrapper__overlay--gradient' : ''
+      :class="`tw-flex tw-absolute tw-w-full tw-h-full tw-flex-col tw-items-center tw-justify-between ${
+        showBgImg ? 'tw-bg-transparent' : 'tw-bg-[#000c17]'
       }`"
     >
       <div class="tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-h-full tw-w-full">
@@ -60,52 +60,5 @@ const props = defineProps({
   width: 100%;
   height: 100%;
   background-size: cover;
-}
-
-.StepWrapper__overlay {
-  display: flex;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background: #000c17;
-}
-
-.StepWrapper--drumeo .StepWrapper__overlay--gradient {
-  background: linear-gradient(
-      0deg,
-      rgba(0, 32, 57, 0.55),
-      rgba(0, 32, 57, 0.55)
-    ),
-    linear-gradient(0deg, rgba(11, 118, 219, 0.4), rgba(11, 118, 219, 0.4));
-}
-
-.StepWrapper--pianote .StepWrapper__overlay--gradient {
-  background: linear-gradient(
-      0deg,
-      rgba(0, 32, 57, 0.46),
-      rgba(0, 32, 57, 0.46)
-    ),
-    linear-gradient(0deg, rgba(246, 26, 48, 0.4), rgba(246, 26, 48, 0.4));
-}
-
-.StepWrapper--guitareo .StepWrapper__overlay--gradient {
-  background: linear-gradient(
-      0deg,
-      rgba(0, 32, 57, 0.45),
-      rgba(0, 32, 57, 0.45)
-    ),
-    linear-gradient(0deg, rgba(0, 201, 172, 0.2), rgba(0, 201, 172, 0.2));
-}
-
-.StepWrapper--singeo .StepWrapper__overlay--gradient {
-  background: linear-gradient(
-      0deg,
-      rgba(131, 0, 233, 0.1),
-      rgba(131, 0, 233, 0.1)
-    ),
-    linear-gradient(0deg, rgba(0, 32, 57, 0.45), rgba(0, 32, 57, 0.45));
 }
 </style>

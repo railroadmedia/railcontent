@@ -1,7 +1,12 @@
-import drumeoBgImg from '../vue/images/drumeo-bg.png'; 
-import singeoBgImg from '../vue/images/singeo-bg.png'; 
-import pianoteBgImg from '../vue/images/pianote-bg.png'; 
-import guitareoBgImg from '../vue/images/guitareo-bg.png'; 
+import drumeoBgImg from '../vue/images/drumeo-bg.jpg'; 
+import singeoBgImg from '../vue/images/singeo-bg.jpg'; 
+import pianoteBgImg from '../vue/images/pianote-bg.jpg'; 
+import guitareoBgImg from '../vue/images/guitareo-bg.jpg';
+
+import drumeoBgImgCard from '../vue/images/drumeo-card.jpg'; 
+import singeoBgImgCard from '../vue/images/singeo-card.jpg'; 
+import pianoteBgImgCard from '../vue/images/pianote-card.jpg'; 
+import guitareoBgImgCard from '../vue/images/guitareo-card.jpg'; 
 
 export const brandUrl = {
   drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
@@ -54,8 +59,15 @@ export const borderColor = {
 export const bgImg = {
   drumeo: drumeoBgImg,
   singeo: singeoBgImg,
-  guitareo: pianoteBgImg,
-  pianote: guitareoBgImg
+  guitareo: guitareoBgImg,
+  pianote: pianoteBgImg
+}
+
+export const bgImgCard = {
+  drumeo: drumeoBgImgCard,
+  singeo: singeoBgImgCard,
+  guitareo: guitareoBgImgCard,
+  pianote: pianoteBgImgCard
 }
 
 // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
@@ -67,5 +79,9 @@ const __usedVars = [
   'hover:tw-border-red-400',
   'hover:tw-border-green-400',
   'hover:tw-border-blue-400',
-  'hover:tw-border-yellow-400'
+  'hover:tw-border-yellow-400',
+  'md:tw-bg-drumeo',
+  'md:tw-bg-singeo',
+  'md:tw-bg-guitareo',
+  'md:tw-bg-pianote'
 ]

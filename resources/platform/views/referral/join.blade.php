@@ -72,17 +72,15 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             @include(
                 'partials.bladesora.members.referral.join',
                 [
                     'joinUrl' => url()->route('referral.email-invite'),
-                    'brand' => 'singeo',
+                    'brand' => $brand,
                 ]
             )
 
-        </div>
-    </page-container>           
+        </div>        
 @endsection

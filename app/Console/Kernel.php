@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
+use App\Console\Commands\PopulateUserRolesTable;
+use App\Console\Commands\SeedUserContentData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+	SeedUserContentData::class,	
+	PopulateNewRolesAndPermissionsTables::class,
+	PopulateUserRolesTable::class
     ];
 
     /**

@@ -19,6 +19,7 @@ use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * App\Modules\UserManagementSystem\Models\User
@@ -168,6 +169,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereAccessLevel($value)
  * @method static Builder|User whereBrandMethodLevels($value)
  * @method static Builder|User whereTotalXp($value)
+ * @property string|null $membership_expiration_date
+ * @property int $is_lifetime_member
+ * @method static Builder|User whereIsLifetimeMember($value)
+ * @method static Builder|User whereMembershipExpirationDate($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -245,7 +250,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function getDashboardUrl()
     {
-        return url()->route('platform.profile.settings.profile', ['brand' => brand(), 'userId' => $this->id]);
+        return url()->route('platform.profile.dashboard', [$this->id]);
     }
 
     /**
@@ -317,6 +322,26 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function isAdmin()
     {
         return $this->permission_level == 'administrator';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAMember()
+    {
+        return true; // todo: connect
+    }
+
+    /**
+     * @return bool
+     */
+    public function isALifetimeMember($brand = null)
+    {
+        if ($brand == 'drumeo') {
+
+        }
+
+        return true; // todo: connect
     }
 
     /**
@@ -454,5 +479,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected static function newFactory()
     {
         return UserFactory::new();
+    }
+
+    /**
+     * @param string $password
+     * @param bool $hash
+     */
+    public function setPassword($password, $hash = true)
+    {
+        $this->password = $hash ? Hash::make($password) : $password;
     }
 }

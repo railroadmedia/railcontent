@@ -99,7 +99,6 @@ function goBack() {
         >Next</Button
       >
       <SkipStep
-        @onSkip="skipStep"
         title="SKIP ACCOUNT SETUP"
         classOverride="tw-mt-[20px] md:tw-mt-0"
       />

@@ -141,7 +141,6 @@ ul {
 
 #pageHeader {
   background-size:cover;
-  background-position:center;
   background-repeat:no-repeat;
   background-color:#000;
 
@@ -177,8 +176,8 @@ ul {
     }
 
     .header-avatar {
-      flex:0 0 175px;
-      max-width:175px;
+      flex:0 0 165px;
+      max-width:165px;
     }
 
     .flex-column:not(.header-avatar) {
@@ -637,6 +636,10 @@ ul {
 
   &.pianote {
     background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($pianoteRed, 10%), 0.3) 100%);
+  }
+
+  &.guitareo {
+    background: linear-gradient(180deg,hsla(0, 0%, 0%, 0.05) 45%,transparentize(darken($guitareoGreen, 10%), 0.3) 100%);
   }
 
   &.singeo {

@@ -10,7 +10,6 @@
 @endsection
 
 @section('content')
-    <page-container>
 
         <div v-cloak>
 
@@ -26,5 +25,4 @@
 
         </div>
         
-    </page-container>
 @endsection

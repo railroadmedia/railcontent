@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
             <div class="tw-container tw-mx-auto fluid bg-grey-5 pv-3">
@@ -15,8 +14,8 @@
                         "themeColor" => "{{ $brand }}",
                         "youtubeId" => $liveStreamId,
                         "lessonTitle" => $lessonContent->fetch('fields.title'),
-                        "userAvatar" => current_user()->getProfilePictureUrl(),
-                        "userName" => current_user()->getDisplayName(),
+                        "userAvatar" => user()->profile_picture_url,
+                        "userName" => user()->display_name,
                         "userEmail" => current_user()->getEmail(),
                         "emailRecipient" =>  "questions@drumeo.com", // If changed, update "Email addresses set in sites" doc
                         "emailLogo" =>  "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
@@ -65,7 +64,7 @@
                     </div>
 
                     <div class="tw-flex tw-flex-row">
-                        <content-schedule 
+                        <content-schedule
                             :preloaded-content="{{ $scheduleEvents }}"
                             theme-color="{{ $brand }}"
                         />
@@ -74,5 +73,4 @@
             </div>
 
         </div>
-    </page-container>
 @endsection

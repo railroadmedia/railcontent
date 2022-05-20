@@ -19,7 +19,7 @@ const getStepType = (stepIndex, checked) => {
         return 'number'
     }
     if (!checked) {
-        return 'white'
+        return 'unchecked'
     }
     if (checked) {
         return 'tick'

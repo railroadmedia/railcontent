@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "bgColor", "selfContained"]);
+const props = defineProps(["modalId", "title", "selfContained"]);
 const emit = defineEmits(["onClose"]);
 
 const onClose = () => {
@@ -10,9 +10,7 @@ const onClose = () => {
 };
 
 const onOverlayClick = (event) => {
-  console.log(event.target.id);
   if (event.target.id === `${props.modalId}-overlay`) {
-    console.log("onOverlayClick");
     emit("onClose", true);
   }
 };
@@ -51,19 +49,25 @@ onUnmounted(() => {
         tw-w-full
         tw-items-center
         tw-justify-center
+        tw-px-[16px]
+        md:tw-px-[28px]
       "
     >
       <div
         class="
-          tw-w-[750px]
+          lg:tw-w-[750px]
+          tw-w-full
           tw-rounded-[8px]
           tw-z-30
           tw-pt-[24px]
           tw-pb-[42px]
           tw-flex
           tw-flex-col
+          tw-border-[#223F57]
+          tw-border-[1px]
+          tw-bg-[#081825]
         "
-        :class="bgColor && `tw-bg-[${bgColor}]`"
+        :class="selfContained && `tw-bg-transparent tw-border-0`"
       >
         <div
           class="

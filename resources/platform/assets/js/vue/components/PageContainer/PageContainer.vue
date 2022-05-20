@@ -3,26 +3,46 @@ import { ref } from "vue";
 import Navbar from "../Navbar/Navbar.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
-import { useRouter, useRoute } from "vue-router";
+// import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
-import simplebar from "simplebar-vue";
-import "simplebar/dist/simplebar.min.css";
+import { setEndpointPrefix } from "../../utils"
 
 export default {
   name: "PageContainer",
   components: { Navbar, Sidebar, Footer, SpriteSheet },
-  data() {
-    return {
-      brand: "drumeo",
-    };
+  props: {
+    brand: {
+      type: String,
+      default: 'drumeo'
+    },
+    isLive: {
+      type: Boolean,
+      default: false
+    },
+    hasNotifications: {
+      type: Boolean,
+      default: false
+    },
+    userName: {
+      type: String
+    },
+    userAvatar: {
+      type: String
+    },
+    accountUrl: {
+      type: String
+    },
+    searchUrl: {
+      type: String
+    }
   },
 
   setup(props, context) {
     const isSidebarCollapsed = ref(false);
     const isSidebarHidden = ref(false);
     const isDarkModeSelected = ref(false);
-    const route = useRoute();
-    const router = useRouter();
+    // const route = useRoute();
+    // const router = useRouter();
 
     const setDarkMode = (isSelected) => {
       const body = document.getElementById("app-body");
@@ -34,7 +54,6 @@ export default {
     };
 
     const onCollapseSidebar = (val) => {
-      console.log("collapse sidebar called");
       if (typeof val === "boolean") {
         isSidebarCollapsed.value = val;
         isSidebarHidden.value = val;
@@ -62,23 +81,12 @@ export default {
       }
     };
 
-    const onBrandSelect = (val) => {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      if (typeof val === "string") {
-        brand.value = val;
-        urlSearchParams.set("brand", val);
-        //if using router
-        router.push({ path: "/members", query: { brand: val } });
-      }
-    };
-
     return {
       isSidebarCollapsed,
       isSidebarHidden,
       isDarkModeSelected,
       onCollapseSidebar,
       onColorModeToggle,
-      onBrandSelect,
       setDarkMode
     };
   },
@@ -94,26 +102,16 @@ export default {
       ).matches;
       this.setDarkMode(this.isDarkModeSelected);
     }
-    //Get Query String
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const brandParam = urlSearchParams.get("brand");
-    this.brand = brandParam || "drumeo";
     //Set Sidebar State
-    const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+    const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
     if (smallBreakpoint.matches) {
       this.isSidebarHidden = true;
       this.isSidebarCollapsed = false;
     }
+    setEndpointPrefix();
   },
 
   created() {
-    this.$watch(
-      //Watch for changes in route params
-      () => this.$route.query,
-      (toParams, previousParams) => {
-        this.brand = this.$route.query.brand;
-      }
-    );
     //Check if Mobile on Resize
     window.addEventListener("resize", this.onResize);
   },
@@ -124,7 +122,7 @@ export default {
 
   methods: {
     onResize(e) {
-      const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+      const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
       if (smallBreakpoint.matches) {
         this.isSidebarHidden = true;
         this.isSidebarCollapsed = false;
@@ -140,10 +138,13 @@ export default {
 
     <Navbar
       :brand="brand"
+      :has-notifications="hasNotifications"
+      :user-name="userName"
+      :user-avatar="userAvatar"
+      :account-url="accountUrl"
       :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed"
-      @onBrandSelect="onBrandSelect"
       @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle"
     />
@@ -152,13 +153,14 @@ export default {
     <div
       class="
         tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
-        dark:tw-bg-[#000C17]
+        dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
         tw-overflow-hidden
       "
     >
       <!-- Sidebar -->
       <Sidebar
         :brand="brand"
+        :isLive="isLive"
         :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden"
         @onCollapseSidebar="onCollapseSidebar"

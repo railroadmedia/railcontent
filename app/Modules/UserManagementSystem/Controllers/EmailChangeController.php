@@ -1,44 +1,27 @@
 <?php
 
-namespace Railroad\Usora\Controllers;
+namespace Modules\UserManagementSystem\Controllers;
 
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
-use MikeMcLin\WpPassword\Facades\WpPassword;
-use Railroad\Usora\Entities\EmailChange;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Events\EmailChangeRequest as EmailChangeRequestEvent;
-use Railroad\Usora\Events\User\UserUpdated;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Repositories\EmailChangeRepository;
-use Railroad\Usora\Repositories\UserRepository;
-use Railroad\Usora\Requests\EmailChangeRequest;
+use Illuminate\Validation\ValidationException;
+//use MikeMcLin\WpPassword\Facades\WpPassword;
+use Modules\UserManagementSystem\Models\EmailChange;
+use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Events\EmailChangeRequest;
 
 class EmailChangeController extends Controller
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     * @var EmailChangeRepository
-     */
-    private $emailChangeRepository;
-
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    use ValidatesRequests;
 
     /**
      * @var Hasher
@@ -49,34 +32,35 @@ class EmailChangeController extends Controller
      * EmailChangeController constructor.
      *
      * @param Hasher $hasher
-     * @param EntityManager $entityManager
      */
     public function __construct(
         Hasher $hasher,
-        UsoraEntityManager $entityManager
-    ) {
+    )
+    {
         $this->hasher = $hasher;
-        $this->entityManager = $entityManager;
-
-        $this->userRepository = $this->entityManager->getRepository(User::class);
-        $this->emailChangeRepository = $this->entityManager->getRepository(EmailChange::class);
     }
 
     /**
      * Perform an email change request action.
      *
-     * @param  EmailChangeRequest $request
+     * @param Request $request
      * @return RedirectResponse
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
-    public function request(EmailChangeRequest $request)
+    public function request(Request $request)
     {
-        $user = $this->userRepository->find(auth()->id());
+        $user = User::findOrFail(auth()->id());
+
+        if (!$request->get('email')) {
+            return back()
+                ->withInput($request->except('email'))
+                ->withErrors(
+                    ['email' => 'Email is missing from request']
+                );
+        }
 
         if (
-            !$this->hasher->check($request->get('user_password'), $user->getPassword())
-            && !WpPassword::check(trim($request->get('user_password')), $user->getPassword())
+            !$this->hasher->check($request->get('user_password'), $user->password)
+//            && !WpPassword::check(trim($request->get('user_password')), $user->password)
         ) {
             return back()
                 ->withInput($request->except('user_password'))
@@ -92,22 +76,20 @@ class EmailChangeController extends Controller
                 ->toDateTimeString(),
         ];
 
-        $emailChange = $this->emailChangeRepository->findOneBy(['user' => $user->getId()]);
+        $emailChange = EmailChange::where('email', $user->email)->first();
 
         if (!$emailChange) {
             $emailChange = new EmailChange();
         }
 
-        $emailChange->setEmail($payload['email']);
-        $emailChange->setToken($payload['token']);
-        $emailChange->setUser($user);
+        $emailChange->email = $payload['email'];
+        $emailChange->token = $payload['token'];
+        $emailChange->user_id = $user->id;
+        $emailChange->save();
 
-        $this->entityManager->persist($emailChange);
-        $this->entityManager->flush();
+        event(new EmailChangeRequest($payload['token'], $payload['email']));
 
-        event(new EmailChangeRequestEvent($payload['token'], $payload['email']));
-
-        $this->sendEmailChangeNotification($payload['token'], $payload['email']);
+//        todo: sendEmailChangeNotification($payload['token'], $payload['email']);
 
         $message = [
             'successes' => new MessageBag(
@@ -126,63 +108,68 @@ class EmailChangeController extends Controller
 
     /**
      * Perform an email change confirmation action.
-     *
+     * @bodyParam code required
      * @param Request $request
      * @return RedirectResponse
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @throws ValidationException
      */
     public function confirm(Request $request)
     {
-        $validator = validator(
-            $request->all(),
-            [
-                'code' => 'bail|required|string|exists:' .
-                    config('usora.database_connection_name') .
-                    '.' .
-                    config('usora.tables.email_changes') .
-                    ',token',
-            ]
-        );
+        try {
+            //todo: check if <code> <exists> also!
+//            $validationRules = ['code' => 'bail|required|string|exists'];
+            $validationRules = ['code' => 'bail|required|string'];
+            $this->validate(
+                $request,
+                $validationRules
+            );
+        } catch (ValidationException $e) {
+            $messagesByField = $e->validator->getMessageBag()->getMessages();
 
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator);
+            $messagesForFieldFailingField = reset($messagesByField);
+
+            foreach ($messagesForFieldFailingField as $messagesForField) {
+                $errorMessageToUser = $messagesForField;
+                break;
+            }
+
+            $default = 'Please try again, and contact support if the problem persists.';
+
+            $message = ['code' => 'Error: ' . ($errorMessageToUser ?? $default)];
+
+            return redirect()->back()->withErrors($message);
         }
 
-        $emailChangeData = $this->emailChangeRepository->findOneBy(['token' => $request->get('code')]);
+        $emailChange = EmailChange::where('token', $request->get('code'))->first();
 
+        if (!$emailChange) {
+            return redirect()->back()->with('error-message', 'Token has not been found in db table');
+        }
+
+        // todo: email_change_token_ttl should be declared in a config file
         if (Carbon::parse(
-                $emailChangeData->getUpdatedAt()
+                $emailChange->updated_at
                     ->format('Y-m-d H:i:s')
             ) <
             Carbon::now()
-                ->subHours(config('usora.email_change_token_ttl'))) {
-
-            return redirect()
-                ->back()
-                ->withErrors(['code' => 'Your email reset code has expired.']);
+//                ->subHours(config('usora.email_change_token_ttl')))
+                ->subHours(24)) {
+            {
+                return redirect()
+                    ->back()
+                    ->withErrors(['code' => 'Your email reset code has expired.']);
+            }
         }
 
-        $user = $this->userRepository->findOneBy(
-            [
-                'id' => $emailChangeData->getUser()
-                    ->getId(),
-            ]
-        );
+        $user = User::find($emailChange->user_id);
 
         $oldUser = clone($user);
 
-        $user->setEmail($emailChangeData->getEmail());
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $user->email = $emailChange->email;
+        $user->save();
 
         event(new UserUpdated($user, $oldUser));
-
-        $this->entityManager->remove($emailChangeData);
-        $this->entityManager->flush();
+        $emailChange->save();
 
         $message = [
             'successes' => new MessageBag(
@@ -190,12 +177,14 @@ class EmailChangeController extends Controller
             ),
         ];
 
+        //todo: define route of redirect!
         return $request->has('redirect') ?
             redirect()
                 ->away($request->get('redirect'))
                 ->with($message) :
             redirect()
-                ->to(config('usora.email_change_confirmation_success_redirect_path'))
+                ->back()
+//                ->to(config('usora.email_change_confirmation_success_redirect_path'))
                 ->with($message);
     }
 
@@ -206,20 +195,21 @@ class EmailChangeController extends Controller
      * @param string $hash
      * @return string
      */
-    public function createNewToken($hash)
-    {
+    public function createNewToken(
+        $hash
+    ) {
         return hash_hmac('sha256', Str::random(40), $hash);
     }
 
-    /**
-     * @param $token
-     * @param $email
-     */
-    public function sendEmailChangeNotification($token, $email)
-    {
-        $class = config('usora.email_change_notification_class');
-
-        (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $email)
-            ->notify(new $class($token));
-    }
+//    /**
+//     * @param $token
+//     * @param $email
+//     */
+//    public function sendEmailChangeNotification($token, $email)
+//    {
+//        $class = config('usora.email_change_notification_class');
+//
+//        (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $email)
+//            ->notify(new $class($token));
+//    }
 }

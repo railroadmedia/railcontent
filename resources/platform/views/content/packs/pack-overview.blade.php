@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <page-container>
         <div v-cloak>
 
         @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
@@ -77,7 +76,7 @@
             "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
         ])
 
-        <div class="container mv-3">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
             <div class="tw-flex tw-flex-col">
                 <div class="tw-flex tw-flex-row">
                     <content-catalogue
@@ -110,5 +109,4 @@
         </div>
 
         </div>
-    </page-container>
 @endsection

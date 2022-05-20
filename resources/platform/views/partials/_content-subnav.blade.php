@@ -1,5 +1,5 @@
 @include('bladesora::members.navigation.subnav', [
-    "themeColor" => 'singeo',
+    "themeColor" => $brand,
     "subSections" => [
         [
             'title' => 'Foundations',

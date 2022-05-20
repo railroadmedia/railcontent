@@ -12,13 +12,12 @@ import Coaches from './steps/Coaches.vue'
 const props = defineProps({
     brand: {
         type: String,
-        default: 'drumeo'
     }
 })
 const initialSteps = [
     { label: 'ABOUT', checked: false },
     { label: 'INSTRUMENT', checked: false },
-    { label: 'TYPE', checked: false },
+    { label: 'GEAR', checked: false },
     { label: 'EXPERIENCE', checked: false },
     { label: 'GENRES', checked: false },
     { label: 'TOPICS', checked: false },

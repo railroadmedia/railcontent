@@ -1,15 +1,15 @@
 <!-- // todo - review & clean -->
-<div class="tw-container tw-mx-auto fluid collapsed-h pv-5 relative tw-bg-black">
-    <div class="header-background-container absolute-fill tw-bg-top"
+<div class="tw-w-full fluid collapsed-h pv-5 relative tw-bg-black">
+    <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top"
             style="background-image: url({{ cf_img($backgroundImage, ["quality" => 80, "blur" => 150, "width" => 640]) }});" data-ix-bg="{{ $backgroundImage }}"
     ></div>
-    <div class="header-background-container absolute-fill tw-bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
+    <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
-    <div class="tw-container tw-mx-auto tw-relative">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative">
         <div class="tw-flex tw-flex-row align-center">
             {{ $content }}
 
-            @if(empty($hideUser))
+            {{-- @if(empty($hideUser))
                 <div class="header-avatar tw-flex tw-flex-col hide-xs-only">
                     <div class="user-avatar tw-rounded tw-bg-black
                                 {{ in_array(user()->access_level, ['edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
@@ -39,7 +39,7 @@
                         @endif
                     @endif
                 </div>
-            @endif
+            @endif --}}
         </div>
 
         {{ $interactionSlot ?? '' }}

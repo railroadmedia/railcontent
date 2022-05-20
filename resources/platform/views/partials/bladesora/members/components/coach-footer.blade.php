@@ -1,4 +1,4 @@
-<div class="tw-relative tw-bg-black">
+<div class="tw-relative tw-bg-black tw--mb-7">
     <div class="tw-text-white">
         <div class="sm:tw-py-12 md:tw-py-12 lg:tw-py-16 tw-py-16 tw-px-14">
             <div class="tw-flex tw-flex-col-reverse lg:tw-flex-row">
@@ -11,7 +11,7 @@
                             $focusArray;
                             $lastFocus = array_pop($focusArray);
                         @endphp
-                        {{ implode($focusArray, ', ') }}
+                        {{ implode(', ', $focusArray) }}
                         @if (count($focusArray) !== 0)
                             <span>AND</span>
                         @endif
@@ -25,14 +25,15 @@
                     <div
                         class="tw-mx-auto tw-mb-6 lg:tw-mb-0 lg:tw-mx-0 lg:tw-mr-4 tw-rounded-full tw-relative tw-w-48 tw-h-48 tw-overflow-hidden tw-flex-shrink-0">
                         <img class="tw-w-48 tw-h-48 tw-rounded-full tw-border-4 tw-border-solid tw-border-yellow-500"
-                            src="{{ imgix($headShotPicture, ['w' => 300]) }} ">
+                            src="{{ cf_img($headShotPicture, ['width' => 300]) }} ">
                         <!-- Badge -->
                         <div
                             class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-6 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
-                            <svg class="tw-block" width="16" height="16" aria-hidden="true" fill="white"
-                                focusable="false">
-                                <use href="#whistle"></use>
-                            </svg>
+                            <musora-icon 
+                                icon-name="whistle-filled"
+                                height="20" 
+                                class="tw-text-white tw-w-[20px] tw-leading-none"
+                            ></musora-icon>
                         </div>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
                         @php
                             $lastBand = array_pop($bandsArray);
                         @endphp
-                        {{ implode($bandsArray, ', ') }}
+                        {{ implode(', ', $bandsArray) }}
                         @if (count($bandsArray) !== 0)
                             <span>and</span>
                         @endif

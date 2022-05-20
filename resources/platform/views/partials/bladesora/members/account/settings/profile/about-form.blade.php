@@ -18,7 +18,7 @@
                 "showEmpty" => true
             ])
 
-            <p class="body tw-font-bold tw-mb-1 tw-mt-3">Biography</p>
+            <p class="tw-font-bold tw-mb-1">Biography</p>
             <p class="body">{!! $biography !!}</p>
         </div>
     @endslot
@@ -35,8 +35,8 @@
                     {{ csrf_field() }}
 
                     @if(!empty($firstNameInput) && !empty($lastNameInput))
-                    <div class="tw-flex tw-flex-row ph-3 inline-inputs">
-                        <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
+                        <div class="tw-flex tw-flex-col tw-w-full tw-pr-1">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "text",
@@ -47,7 +47,7 @@
                                 "inputErrors" => [],
                             ], $firstNameInput ?? []))
                         </div>
-                        <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-col tw-w-full tw-pl-1">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "text",
@@ -62,8 +62,8 @@
                     @endif
 
                     @if(!empty($fullNameInput))
-                        <div class="tw-flex tw-flex-row ph-3 mb-1">
-                            <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-row ph-3">
+                            <div class="tw-flex tw-flex-col tw-flex-grow">
                                 @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "text",
@@ -77,8 +77,8 @@
                         </div>
                     @endif
 
-                    <div class="tw-flex tw-flex-row ph-3 inline-inputs tw-mb-1">
-                        <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
+                        <div class="tw-flex tw-flex-col tw-w-full tw-pr-1">
                             @include('partials.bladesora.members.inputs.select-input', array_merge([
                                 "brand" => $brand,
                                 "inputId" => "profileCountry",
@@ -86,7 +86,7 @@
                                 "inputLabel" => "Country",
                             ], $countryInput ?? []))
                         </div>
-                        <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-col tw-w-full tw-pl-1">
                             @include('partials.bladesora.members.inputs.datetime-input', array_merge([
                                 "brand" => $brand,
                                 "inputId" => "profileBirthday",
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-1">
-                        <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-col tw-flex-grow">
                             @include('partials.bladesora.members.inputs.textarea-input', array_merge([
                                 "brand" => $brand,
                                 "inputId" => "profileBio",

@@ -3,23 +3,27 @@
     :href="item.url"
     class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white"
   >
-    <img :src="item.coach_card_image" :alt="coachName" class="tw-w-full" />
+    <img :src="coachImage" :alt="coachName" class="tw-w-full" />
     <!-- Coach Details -->
     <div
       class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-px-2 tw-text-center tw-absolute tw-w-full tw-bottom-0 tw-left-0"
       style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
     >
       <h3
-        class="tw-uppercase tw-font-roboto-condensed tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
+        class="tw-uppercase tw-font-bebas-neue tw-text-white tw-text-2xl xl:tw-text-3xl tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
       >
         <span>{{ coachFirstName }}</span
         ><br />
         <span v-if="hasLastName">{{ coachLastName }}</span>
       </h3>
-      <p class="tw-text-yellow-400 tw-fluid-text-sm-xs tw-h-8 tw-leading-snug tw-mb-8 tw-uppercase">{{ coachFocus }}</p>
-      <div v-if="item.is_house_coach" class="tw-text-white tw-text-xs tw-font-roboto-condensed tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
-        <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
-        HOUSE
+      <p class="tw-text-yellow-400 tw-text-xs tw-h-8 tw-leading-snug tw-mb-8 tw-uppercase">{{ coachFocus }}</p>
+      <div v-if="item.is_house_coach" class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+        <musora-icon 
+            icon-name="whistle-filled"
+            height="12" 
+            class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
+        ></musora-icon>
+        <span class="tw-mt-1 tracking-wider">HOUSE</span>
       </div>
     </div>
 
@@ -64,7 +68,8 @@ export default {
   data() {
     return {
       coachName: "",
-      coachFocus: ""
+      coachFocus: "",
+      coachImage: "",
     };
   },
   props: {
@@ -106,6 +111,9 @@ export default {
       if (obj.key === "focus_text") {
         this.coachFocus = obj.value;
       }
+      if (obj.key === "coach_card_image") {
+        this.coachImage = obj.value;
+      }
     })
   },
   //Get new name when updated
@@ -119,6 +127,9 @@ export default {
     this.item["data"].forEach((obj) => {
       if (obj.key === "focus_text") {
         this.coachFocus = obj.value;
+      }
+      if (obj.key === "coach_card_image") {
+        this.coachImage = obj.value;
       }
     })
   },

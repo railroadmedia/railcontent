@@ -8,7 +8,7 @@
     @endslot
 
     @slot('formData')
-        <div class="tw-flex tw-flex-col">
+        <div class="tw-flex tw-flex-col tw-w-full">
             @include('partials.bladesora.members.account.partials._text-fields', [
                 "fields" => [
                     "Current Password" => "********",
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-3">
-                        <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-col tw-w-full">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "password",
@@ -47,8 +47,8 @@
                         </div>
                     </div>
 
-                    <div class="tw-flex tw-flex-row ph-3 tw-mb-1">
-                        <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
+                        <div class="tw-flex tw-flex-col tw-w-full">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "password",
@@ -61,8 +61,8 @@
                         </div>
                     </div>
 
-                    <div class="tw-flex tw-flex-row ph-3 tw-mb-1">
-                        <div class="tw-flex tw-flex-col">
+                    <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
+                        <div class="tw-flex tw-flex-col tw-w-full">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "password",
