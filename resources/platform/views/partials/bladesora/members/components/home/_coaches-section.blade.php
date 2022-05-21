@@ -9,13 +9,13 @@
                 </a>
                 <a href="{{ $subscribedCoachesUrl }}"
                     aria-label="See All Coaches"
-                    class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                    class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                 >
                     See All
                 </a>
             </div>
 
-            <div class="tw-grid tw-gap-3 tw-grid-cols-3 sm:tw-grid-cols-4 md:tw-grid-cols-5 xl:tw-grid-cols-6 3xl:tw-grid-cols-7">
+            <div class="tw-grid tw-gap-3 tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 lg:tw-grid-cols-5 xl:tw-grid-cols-6 3xl:tw-grid-cols-7">
                 @foreach($subscribedCoaches->results() as $coach)
                     <a href="{{ $coach->fetch('url','') }}"
                         class="tw-no-underline ">
@@ -36,14 +36,18 @@
                                     {{ implode(' ', $exploded) }}
                                 </h4>
                                 <!-- Coach Title -->
-                                <p class="tw-text-yellow-400 tw-px-2 tw-fluid-text-sm-xs tw-mb-8 tw-uppercase tw-h-8 tw-leading-tight">
+                                <p class="tw-text-yellow-400 tw-px-2 tw-text-xs tw-mb-8 tw-uppercase tw-h-8 tw-leading-tight">
                                     {{ $coach->fetch('data.focus_text.value') }}
                                 </p>
 
                                 @if ($coach->fetch('is_house_coach'))
-                                    <div class="tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
-                                        <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
-                                        HOUSE
+                                    <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+                                        <musora-icon 
+                                            icon-name="whistle-filled"
+                                            height="12px" 
+                                            class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
+                                        ></musora-icon>
+                                        <span class="tw-mt-1 tw-tracking-wider">HOUSE</span>
                                     </div>
                                 @endif
                             </div>

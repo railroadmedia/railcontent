@@ -17,6 +17,7 @@ import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
 import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
+import StaticHeader from './vue/components/HeaderCarousel/StaticHeader.vue'
 import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
@@ -51,6 +52,7 @@ import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue';
+import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
 
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
@@ -163,7 +165,8 @@ app.component('AppContainer', AppContainer)
    .component('ImageCropper', ImageCropper)
    .component('Comments', Comments)
    .component('MusoraIcon', MusoraIcon)
-
+   .component('EmailForm', EmailForm)
+   .component('StaticHeader', StaticHeader)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

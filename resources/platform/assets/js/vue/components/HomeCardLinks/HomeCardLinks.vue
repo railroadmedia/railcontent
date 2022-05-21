@@ -2,7 +2,8 @@
     <section class="tw-grid tw-grid-cols-3 tw-gap-1 sm:tw-gap-4 tw-mb-6 md:tw-mb-8">
         <!-- Method -->
         <a :href="methodUrl" 
-            class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
+            class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-transition-all tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
+            :class="`hover:tw-border-${brand} hover:dark:tw-border-${brand}`"
         >
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-transition-all tw-justify-center focus:tw-bottom-1"
                  :class="`${brand}-card tw-text-${brand}`"
@@ -27,7 +28,7 @@
                         <span v-if="hasStartedMethod" :class="`tw-text-${brand}`">
                             Continue Level {{ nextLearningPathLevel }} - {{ nextLearningPathLessonTitle }}
                         </span>
-                        <span v-else :class="`tw-text-${brand} dark:tw-text-white tw-flex tw-items-center`">
+                        <span v-else :class="`tw-text-${brand} tw-flex tw-items-center`">
                             Start
                             <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-ml-1">
                                 <path d="M5.08333 0.5L8 3.5M8 3.5L5.08333 6.5M8 3.5L1 3.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -40,7 +41,8 @@
 
         <!-- Songs -->
         <a :href="`/${brand}/songs/`" 
-            class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
+            class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-transition-all tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
+            :class="[ brand === 'pianote'? `hover:tw-border-[#5FCFF5] hover:dark:tw-border-[#5FCFF5]` : `hover:tw-border-[#DD4572] hover:dark:tw-border-[#DD4572]`]"
         >
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-transition-all tw-items-center tw-justify-center focus:tw-bottom-1"
                  :class="[ brand === 'pianote'? `songs-card-blue tw-text-[#5FCFF5]` : `songs-card-pink tw-text-[#DD4572]`]"
@@ -58,7 +60,8 @@
 
         <!-- Coaches -->
         <a :href="`/${brand}/coaches/`" 
-            class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group">
+            class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-transition-all tw-border-[#A1A1A9] dark:tw-border-[#344858] hover:tw-border-[#ffac00] hover:dark:tw-border-[#ffac00] tw-rounded-xl tw-overflow-hidden tw-group"
+        >
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-transition-all tw-justify-center tw-text-[#FFA710] coaches-card focus:tw-bottom-1">
                 <!-- Icon -->
                 <musora-icon icon-name="whistle" class="tw-w-4 tw-h-4 sm:tw-h-9 sm:tw-w-9 tw-mb-1 sm:tw-mb-2"/>
