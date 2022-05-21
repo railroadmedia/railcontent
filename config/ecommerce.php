@@ -4,28 +4,28 @@ return [
     'development_mode' => env('APP_DEBUG', true),
 
     // brands
-    'brand' => 'drumeo',
-    'available_brands' => ['drumeo'],
+    'brand' => 'musora',
+    'available_brands' => ['drumeo', 'pianote', 'guitareo', 'singeo', 'musora'],
 
     // database
-    'database_connection_name' => 'musora_mysql_writer_only',
-    'database_name' => env('DB_MUSORA_DATABASE_NAME'),
-    'database_user' => env('DB_MUSORA_USER_NAME'),
-    'database_password' => env('DB_MUSORA_PASSWORD'),
-    'database_host' => env('DB_MUSORA_HOST'),
+    'database_connection_name' => 'musora_laravel_mysql_writer_only',
+    'database_name' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME'),
+    'database_user' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME'),
+    'database_password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD'),
+    'database_host' => env('DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST'),
     'database_driver' => 'pdo_mysql',
     'database_in_memory' => false,
     'enable_query_log' => false,
 
     // unique user validation database info
     'database_info_for_unique_user_email_validation' => [
-        'database_connection_name' => 'musora_mysql',
+        'database_connection_name' => 'musora_laravel_mysql',
         'table' => 'usora_users',
         'email_column' => 'email',
     ],
 
     // host does the db migrations, clients do not
-    'data_mode' => 'client', // 'host' or 'client'
+    'data_mode' => 'host', // 'host' or 'client'
 
     // cache
     'redis_host' => env('REDIS_HOST', 'redis'),
@@ -42,8 +42,8 @@ return [
     // routes
     'route_prefix' => 'ecommerce',
     'autoload_all_routes' => true,
-    'route_middleware_public_groups' => ['web'],
-    'route_middleware_logged_in_groups' => ['web_authed'],
+    'route_middleware_public_groups' => ['web_public'],
+    'route_middleware_logged_in_groups' => ['web_authenticated'],
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',

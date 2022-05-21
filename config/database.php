@@ -63,9 +63,23 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'options' => [],
+        ],
+
+        'musora_laravel_mysql_writer_only' => [
+            'driver' => 'mysql',
+            'host' => env('DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST'),
+            'port' => env('DB_MUSORA_LARAVEL_MYSQL_PORT', '3306'),
+            'database' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME', 'forge'),
+            'username' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME', 'forge'),
+            'password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => [],
         ],
 
     ],
