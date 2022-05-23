@@ -167,6 +167,7 @@ return [
          */
         Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
         Railroad\Response\Providers\ResponseServiceProvider::class,
+        Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
 
         /*
          * Module Service Providers

@@ -19,7 +19,7 @@ return [
     ],
 
     // elastic search
-    'use_elastic_search' => true,
+    'use_elastic_search' => false,
     'elastic_search_host' => env('ELASTIC_SEARCH_HOST', 'elasticsearch'),
     'elastic_search_username' => env('ELASTIC_SEARCH_USERNAME', 'elastic'),
     'elastic_search_password' => env('ELASTIC_SEARCH_PASSWORD', 'changeme'),
@@ -96,13 +96,22 @@ return [
         ],
     ],
 
+//    'awsS3_remote_storage' => [
+//        'accessKey' => env('S3_KEY'),
+//        'accessSecret' => env('S3_SECRET'),
+//        'region' => env('S3_REGION'),
+//        'bucket' => env('S3_BUCKET'),
+//    ],
+//    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
+
+    // aws integration
     'awsS3_remote_storage' => [
-        'accessKey' => env('S3_KEY'),
-        'accessSecret' => env('S3_SECRET'),
-        'region' => env('S3_REGION'),
-        'bucket' => env('S3_BUCKET'),
+        'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
+        'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
+        'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
+        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
     ],
-    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
+    'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
 
     'indexable_content_statuses' => [
         ContentService::STATUS_PUBLISHED,
