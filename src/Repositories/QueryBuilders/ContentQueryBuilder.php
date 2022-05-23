@@ -716,7 +716,7 @@ class ContentQueryBuilder extends QueryBuilder
             } elseif ($orderByColumn == 'title') {
                 array_unshift($groupByColumns, 'field.value');
             } elseif ($orderByColumn == 'progress') {
-                array_unshift($groupByColumns, 'railcontent.railcontent_user_content_progress.updated_on');
+                array_unshift($groupByColumns, ConfigService::$tableUserContentProgress.'.updated_on');
             }
         }
 
