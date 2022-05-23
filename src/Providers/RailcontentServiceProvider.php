@@ -18,6 +18,7 @@ use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
+use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
@@ -127,6 +128,7 @@ class RailcontentServiceProvider extends ServiceProvider
             MigrateContentVideos::class,
             MigrateContentToElasticsearch::class,
             MigrateUserPlaylist::class,
+            DeleteContentAndHierarchiesForUserPlaylists::class,
         ]);
 
         Validator::extend(
