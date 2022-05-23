@@ -255,7 +255,7 @@ class ContentFieldService
     public function createOrUpdate($data)
     {
         if (in_array($data['key'], config('railcontent.contentColumnNamesForFields', []))) {
-            $this->contentRepository->updateOrCreate(['id' => $data['content_id']], [$data['key'] => $data['value']]);
+            $this->contentRepository->update($data['content_id'], [$data['key'] => $data['value']]);
             // event(new ContentUpdated($id, $content, $data));
         } else {
             $key = ($data['key'] == 'instructor') ? 'instructor_id' : $data['key'];
