@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.16",
+            "version": "3.222.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "23b31a966ea85e7ec8e76062a072695f832a0b96"
+                "reference": "dfcaf44f64be4f844b44515f31d9f6d9293244a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/23b31a966ea85e7ec8e76062a072695f832a0b96",
-                "reference": "23b31a966ea85e7ec8e76062a072695f832a0b96",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dfcaf44f64be4f844b44515f31d9f6d9293244a4",
+                "reference": "dfcaf44f64be4f844b44515f31d9f6d9293244a4",
                 "shasum": ""
             },
             "require": {
@@ -261,9 +261,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.16"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.17"
             },
-            "time": "2022-05-19T18:27:39+00:00"
+            "time": "2022-05-20T18:23:52+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -658,16 +658,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "331b4d5dbaeab3827976273e9356b3b453c300ce"
+                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/331b4d5dbaeab3827976273e9356b3b453c300ce",
-                "reference": "331b4d5dbaeab3827976273e9356b3b453c300ce",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/1ca8f21980e770095a31456042471a57bc4c68fb",
+                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb",
                 "shasum": ""
             },
             "require": {
@@ -677,18 +677,12 @@
                 "doctrine/common": ">2.2,<2.4"
             },
             "require-dev": {
-                "alcaeus/mongo-php-adapter": "^1.1",
                 "cache/integration-tests": "dev-master",
-                "doctrine/coding-standard": "^8.0",
-                "mongodb/mongodb": "^1.1",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
-                "predis/predis": "~1.0",
+                "doctrine/coding-standard": "^9",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0",
-                "symfony/cache": "^4.4 || ^5.2 || ^6.0@dev",
-                "symfony/var-exporter": "^4.4 || ^5.2 || ^6.0@dev"
-            },
-            "suggest": {
-                "alcaeus/mongo-php-adapter": "Required to use legacy MongoDB driver"
+                "symfony/cache": "^4.4 || ^5.4 || ^6",
+                "symfony/var-exporter": "^4.4 || ^5.4 || ^6"
             },
             "type": "library",
             "autoload": {
@@ -737,7 +731,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/cache/issues",
-                "source": "https://github.com/doctrine/cache/tree/2.1.1"
+                "source": "https://github.com/doctrine/cache/tree/2.2.0"
             },
             "funding": [
                 {
@@ -753,7 +747,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-17T14:49:29+00:00"
+            "time": "2022-05-20T20:07:39+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -2379,16 +2373,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.249.0",
+            "version": "v0.250.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "95df14183356e45291e1c686cea57850281101db"
+                "reference": "3db4c0db2a5452e623b54f06dd993c432e6d6f8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/95df14183356e45291e1c686cea57850281101db",
-                "reference": "95df14183356e45291e1c686cea57850281101db",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3db4c0db2a5452e623b54f06dd993c432e6d6f8c",
+                "reference": "3db4c0db2a5452e623b54f06dd993c432e6d6f8c",
                 "shasum": ""
             },
             "require": {
@@ -2417,9 +2411,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.249.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.250.0"
             },
-            "time": "2022-05-16T01:10:12+00:00"
+            "time": "2022-05-22T01:16:11+00:00"
         },
         {
             "name": "google/auth",
@@ -5417,16 +5411,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.1",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "12e82c4260fa8d0b2044e0d3535de3d38b2213db"
+                "reference": "af99c385f386d4697cf72162ddf27cf5ed76ec86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/12e82c4260fa8d0b2044e0d3535de3d38b2213db",
-                "reference": "12e82c4260fa8d0b2044e0d3535de3d38b2213db",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/af99c385f386d4697cf72162ddf27cf5ed76ec86",
+                "reference": "af99c385f386d4697cf72162ddf27cf5ed76ec86",
                 "shasum": ""
             },
             "require": {
@@ -5462,9 +5456,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.1"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.3"
             },
-            "time": "2022-05-16T23:57:46+00:00"
+            "time": "2022-05-21T19:09:39+00:00"
         },
         {
             "name": "railroad/location",
@@ -5514,12 +5508,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "e61503b7b241b8ff4888b5b83817631f81cab7ba"
+                "reference": "a5af5ead8b85f2f2a31ac996d7ee2967b44fd4d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e61503b7b241b8ff4888b5b83817631f81cab7ba",
-                "reference": "e61503b7b241b8ff4888b5b83817631f81cab7ba",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a5af5ead8b85f2f2a31ac996d7ee2967b44fd4d6",
+                "reference": "a5af5ead8b85f2f2a31ac996d7ee2967b44fd4d6",
                 "shasum": ""
             },
             "require": {
@@ -5550,7 +5544,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-05-18T10:54:43+00:00"
+            "time": "2022-05-23T13:29:33+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -5608,12 +5602,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b5babbdb6ead583dfebc4abaabb190590982898f"
+                "reference": "db5b6f72fd981ef06aa2091cec0c739a3b5edcc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b5babbdb6ead583dfebc4abaabb190590982898f",
-                "reference": "b5babbdb6ead583dfebc4abaabb190590982898f",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/db5b6f72fd981ef06aa2091cec0c739a3b5edcc6",
+                "reference": "db5b6f72fd981ef06aa2091cec0c739a3b5edcc6",
                 "shasum": ""
             },
             "require": {
@@ -5668,7 +5662,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-"
             },
-            "time": "2022-05-12T15:32:31+00:00"
+            "time": "2022-05-23T13:26:06+00:00"
         },
         {
             "name": "railroad/remotestorage",
