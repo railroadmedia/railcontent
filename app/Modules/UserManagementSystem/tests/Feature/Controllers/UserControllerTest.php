@@ -135,7 +135,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         );
     }
 
-    
+
     public function test_user_update_validation_fail()
     {
         $userId = 1;
@@ -158,4 +158,124 @@ class UserControllerTest extends UserManagementSystemTestCase
 
         $this->assertEquals(403, $response->getStatusCode());
     }
+
+
+
+    public function test_users_store_with_permission()
+    {
+        $user = User::factory()->create([
+            'email' => $this->faker->email,
+            'password' => Hash::make($this->faker->words(3, true)),
+        ]);
+
+        auth()->login($user);
+        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'create-users']);
+        $user->givePermissionTo($permission);
+
+        $userData = [
+            'display_name' => $this->faker->words(4, true),
+            'email' => $this->faker->email,
+            'password' => '12345678',
+        ];
+
+
+        $response = $this->call(
+            'PUT',
+            config('user_management_system.route_prefix') . '/user/store/',
+            $userData
+        );
+
+        $this->assertDatabaseHas(
+            'usora_users',
+            [
+                'display_name' => $userData['display_name'],
+                'email' => $userData['email'],
+            ]
+        );
+
+        // assert the users password was encrypted and saved, and that they can login
+        $this->assertTrue(auth()->attempt(['email' => $userData['email'], 'password' => $userData['password']]));
+
+        // assert the session has the success message
+        $response->assertSessionHas('success', true);
+    }
+
+
+
+    public function test_users_store_without_login()
+    {
+        $userData = [
+            'display_name' => $this->faker->words(4, true),
+            'email' => $this->faker->email,
+            'password' => '12345678',
+        ];
+
+
+        $response = $this->call(
+            'PUT',
+            config('user_management_system.route_prefix') . '/user/store/',
+            $userData
+        );
+
+        $this->assertDatabaseMissing(
+            'usora_users',
+            [
+                'display_name' => $userData['display_name'],
+                'email' => $userData['email'],
+            ]
+        );
+
+        // assert the users password was encrypted and saved, and that they can login
+        $this->assertFalse(auth()->attempt(['email' => $userData['email'], 'password' => $userData['password']]));
+    }
+
+
+    public function test_users_store_without_permission()
+    {
+        $user = User::factory()->create([
+            'email' => $this->faker->email,
+            'password' => Hash::make($this->faker->words(3, true)),
+        ]);
+
+        auth()->login($user);
+        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'invalid-permission']);
+        $user->givePermissionTo($permission);
+
+        $userData = [
+            'display_name' => $this->faker->words(4, true),
+            'email' => $this->faker->email,
+            'password' => '12345678',
+        ];
+
+
+        $response = $this->call(
+            'PUT',
+            config('user_management_system.route_prefix') . '/user/store/',
+            $userData
+        );
+
+        $this->assertDatabaseMissing(
+            'usora_users',
+            [
+                'display_name' => $userData['display_name'],
+                'email' => $userData['email'],
+            ]
+        );
+
+        // assert the users password was encrypted and saved, and that they can login
+        $this->assertFalse(auth()->attempt(['email' => $userData['email'], 'password' => $userData['password']]));
+    }
+
+
+    public function test_users_store_validation_fail()
+    {
+        $response = $this->call(
+            'PUT',
+            config('user_management_system.route_prefix') . '/user/store/',
+            []
+        );
+
+        $response->assertSessionMissing('success', true);
+    }
+
 }
