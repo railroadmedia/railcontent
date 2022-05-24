@@ -66,7 +66,7 @@ export default {
   <button
     v-on:click="handleMenuOpen"
     tabindex="0"
-    class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-cursor-pointer"
+    class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-relative tw-cursor-pointer"
   >
     <!-- User Image -->
     <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover"
@@ -75,7 +75,7 @@ export default {
 
       <!-- Notification Indicator -->
       <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">
-        <span class="tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"></span>
+        <!-- <span class="tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"></span> -->
         <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
       </span>
     </div>

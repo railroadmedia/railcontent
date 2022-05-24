@@ -296,7 +296,7 @@ class CoachPagesController extends Controller
             $request->get('included_user_states', [])
         );
 
-        $catalogueMeta = config('railcontent.cataloguesMetadata')['coaches'] ?? [];
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['coaches'] ?? [];
 
         //featured lessons for coach
         $featuredLessons = $this->contentService->getFiltered(

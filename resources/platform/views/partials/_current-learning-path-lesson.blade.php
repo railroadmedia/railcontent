@@ -1,12 +1,12 @@
-<div class="container fluid bg-grey-7 collapsed-h">
-    <div class="container">
+<div class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6]">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
         <div class="flex flex-column grow pv-2">
             <div class="flex flex-row align-v-center">
                 @if(!empty($showLogo))
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}">
                         <img
-                            src="{{ imgix('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
-                            ["q" => 80, "w" => 200]) }}"
+                            src="{{ cf_img('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
+                            ["quality" => 80, "width" => 200]) }}"
                             alt="The {{ $brand }} Method Logo"
                             class="invert-fill"
                             style="max-width:225px;width:200px;height:auto; padding-left: 1px;"
@@ -21,7 +21,7 @@
                         See All
                     </a>
                 @else
-                    <p class="body text-grey-3 uppercase">
+                    <p class="tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-xl tw-font-bold tw-mt-2 tw-ml-3 tw-leading-none">
                         Your Next Lesson...
                     </p>
                 @endif
@@ -36,9 +36,9 @@
                         :display-items-as-overview="true"
                         :lock-unowned="true"
                         data-user-id="{{ auth()->id() }}"
-                        :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}"
+                        :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     >
-                        @include('bladesora::members.skeletons.list-item', [
+                        @include('partials.bladesora.members.skeletons.list-item', [
                             "overview" => true,
                             "showNumbers" => false,
                             "thumbnailType" => 'widescreen'

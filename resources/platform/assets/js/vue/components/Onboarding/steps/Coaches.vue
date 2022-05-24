@@ -6,8 +6,9 @@ import StepHeader from "../StepHeader.vue";
 import CoachCarousel from "../../CoachCarousel/CoachCarousel.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import { SearchIcon } from "@heroicons/vue/solid";
-
-import { ref } from "vue";
+import { useDebounceFn } from "../../../hooks/debounce/useDebounce";
+import { searchCoaches, transformCoachesCardData } from "../../../utils";
+import { ref, onMounted } from "vue";
 
 const props = defineProps({
   brand: {
@@ -23,13 +24,35 @@ const props = defineProps({
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
-function onInputChange(value) {
-  console.log("searching for", value);
-}
+const coachResults = ref([]);
+const searchString = ref("");
+
+const handleCoachSearch = (value) => {
+  searchCoaches(props.brand, value).then((result) => {
+    coachResults.value = transformCoachesCardData(result);
+    searchString.value = value;
+  });
+};
+
+onMounted(() => {
+  handleCoachSearch();
+});
+
+const debouncedSearch = useDebounceFn((value) => {
+  handleCoachSearch(value);
+}, 350);
+
+const onInputChange = (value) => {
+  debouncedSearch(value);
+};
 
 function goBack() {
-  emit('onChangeStep', 5);
+  emit("onChangeStep", 5);
 }
+
+const handleRedirect = () => {
+    window.location.href = '/members'
+};
 </script>
 
 <template>
@@ -51,7 +74,14 @@ function goBack() {
       release new content."
         @onGoBack="goBack"
       />
-      <div class="tw-relative tw-h-[42px] tw-mb-[20px] md:tw-mb-[40px] tw-w-[90vw] md:tw-w-[600px]">
+      <div
+        class="
+          tw-relative tw-h-[42px] tw-mb-[20px]
+          md:tw-mb-[40px]
+          tw-w-[90vw]
+          md:tw-w-[600px]
+        "
+      >
         <InputLabel
           placeholder="Find a coach..."
           inputOverride="tw-text-white tw-w-full tw-bg-[#002039]/90 tw-absolute tw-pl-[36px] tw-box-border"
@@ -68,7 +98,7 @@ function goBack() {
           "
         />
       </div>
-      <CoachCarousel :brand="brand" />
+      <CoachCarousel :brand="brand" :coachResults="coachResults" :searchString="searchString" />
     </div>
     <div
       class="
@@ -97,11 +127,7 @@ function goBack() {
       />
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 1);
-          }
-        "
+        @onButtonClick="handleRedirect"
         :isDisabled="!steps[0].checked"
         classOverride="md:tw-w-[543px] tw-uppercase tw-mt-[40px] tw-hidden md:tw-block"
         >Complete Your Account</Button

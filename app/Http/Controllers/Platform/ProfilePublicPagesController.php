@@ -89,7 +89,7 @@ class ProfilePublicPagesController extends BaseController
             "xp_rank" => $user->getXpRank(),
         ];
 
-        $isSubscriber = $user->isSubscriber();
+        $isSubscriber = $user->isAMember();
 
         return view(
             'account.dashboard',
@@ -97,7 +97,7 @@ class ProfilePublicPagesController extends BaseController
                 'userMetrics' => $userMetrics,
                 'startedProgressContents' => $startedProgressContents,
                 'completedProgressContents' => $completedProgressContents,
-                'user' => $user,
+                'dashboardUser' => $user,
                 'isCurrentUsersProfile' => $isCurrentUsersProfile,
                 'userXP' => $userXP,
                 'currentUser' => $currentUser,

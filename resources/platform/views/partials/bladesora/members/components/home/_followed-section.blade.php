@@ -3,13 +3,13 @@
         <div class="tw-flex tw-flex-col tw-grow">
 
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mb-3 tw-w-full tw-justify-between">
+            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <a href="{{ $subscribedLessons }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
                 </a>
                 <a href="{{ $subscribedLessons }}"  
                     aria-label="See All Subscribed Lessons"
-                    class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                    class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                 >
                     See All
                 </a>
@@ -25,15 +25,15 @@
                             no-results-message="You haven't added any lessons yet, once you add a lesson of this type it will show up here for you to access later."
                             catalogue-type="grid"
                             limit="16"
-                            :four-wide="true"
+                            :six-wide="true"
                             :lock-unowned="true"
                             :force-wide-thumbs="true"
                             :pre-loaded-content="{{ $followedLessons }}"
                     >
                         <div class="tw-flex tw-flex-row nmh-1">
-                            @for($i = 0; $i < 4; $i++)
+                            @for($i = 0; $i < 6; $i++)
                                 @include('partials.bladesora.members.skeletons.card-item', [
-                                    "cardClass" => 'four-wide',
+                                    "cardClass" => 'six-wide',
                                 ])
                             @endfor
                         </div>

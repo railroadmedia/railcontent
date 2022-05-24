@@ -17,7 +17,7 @@ const props = defineProps({
 const initialSteps = [
     { label: 'ABOUT', checked: false },
     { label: 'INSTRUMENT', checked: false },
-    { label: 'TYPE', checked: false },
+    { label: 'GEAR', checked: false },
     { label: 'EXPERIENCE', checked: false },
     { label: 'GENRES', checked: false },
     { label: 'TOPICS', checked: false },

@@ -16,7 +16,6 @@ export default class ProgressTracker {
     start() {
         this.startTime = performance.now();
         this.running = true;
-        //console.log(this.startTime + ' (this.startTime in start)');
     }
 
     /**
@@ -34,10 +33,6 @@ export default class ProgressTracker {
         let secondsToAddToSecondsWatched = millisecondsToAddToSecondsWatched/1000;
 
         this.secondsWatched = this.secondsWatched + secondsToAddToSecondsWatched;
-
-        //console.log(this.endTime + ' (this.endTime in calculateSecondsWatched)');
-        //console.log(secondsToAddToSecondsWatched + '(secondsToAddToSecondsWatched in calculateSecondsWatched)');
-        //console.log(this.secondsWatched + ' (this.secondsWatched in calculateSecondsWatched)');
     }
 
     /**

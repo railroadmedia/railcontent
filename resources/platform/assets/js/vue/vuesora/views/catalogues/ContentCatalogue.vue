@@ -3,13 +3,13 @@
 
     <div v-if="isCoachesGrid" 
          id="coach-section"
-         class="tw-flex tw-flex-col tw-pt-4 tw-mb-6">
+         class="tw-flex tw-flex-col tw-mb-6">
         <div class="tw-flex tw-flex-wrap">
             <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
                :href="coachIndexUrl + '#coach-section'"
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[!isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[!isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
               >
                 All Coaches
               </h3>
@@ -18,7 +18,7 @@
                :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
               >
                   Subscribed Coaches
               </h3>

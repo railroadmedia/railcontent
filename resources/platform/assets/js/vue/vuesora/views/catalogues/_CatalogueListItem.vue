@@ -10,8 +10,8 @@
       tw-border-[#E4E4E7]
       dark:tw-border-[#223457]
       tw-no-underline
-      hover:tw-bg-gray-100/[10]
-      dark:hover:tw-bg-gray-900/[10]
+      hover:tw-bg-gray-[#E7EFF6]
+      dark:hover:tw-bg-[#002039]
     "
     :class="class_object"
     :href="renderLink ? item.url : false"
@@ -126,7 +126,7 @@
       </p>
 
       <p
-        class="tw-text-black dark:tw-text-white tw-font-bold item-title"
+        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
         :class="overview ? 'heading' : 'tiny font-compressed'"
       >
         {{ mappedData.black_title }}
@@ -241,9 +241,9 @@
       </div>
       <div v-else class="body">
         <i
-          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black"
-          :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]'"
-          :title="is_added ? 'Remove from list' : 'Add to list'"
+          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black tw-transform-g"
+          :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]'"
+          :title="is_added ? 'Remove from My List' : 'Add to My List'"
           @click.stop.prevent="addToList"
         ></i>
       </div>

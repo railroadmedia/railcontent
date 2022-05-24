@@ -1,14 +1,14 @@
 @if ($hasActiveCoaches)
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
-        <div class="tw-flex tw-items-center tw-mb-6">
-            <h2 class="heading sans dark:tw-text-white">
+        <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl  tw-mb-3">
                 Active Coaches
             </h2>
         </div>
 
         <!-- Active Coaches -->
         <div class="tw-my-3">
-            <div class="tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-3">
+            <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-6 tw-gap-3">
                 @foreach ($activeCoaches as $coach)
                     <a href="{{ $coach->fetch('url') }}"
                         class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
@@ -37,9 +37,13 @@
                             </p>
 
                             @if ($coach->fetch('is_house_coach'))
-                                <div class="tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-4 tw-justify-center tw-items-center">
-                                    <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
-                                    HOUSE
+                                <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-4 tw-justify-center tw-items-center">
+                                    <musora-icon 
+                                        icon-name="whistle-filled"
+                                        height="12" 
+                                        class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
+                                    ></musora-icon>
+                                    <span class="tw-mt-1 tw-tracking-wider">HOUSE</span>
                                 </div>
                             @endif
                         </div>

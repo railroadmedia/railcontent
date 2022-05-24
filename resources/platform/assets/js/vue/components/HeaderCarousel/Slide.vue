@@ -9,6 +9,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  titleClasses: {
+    type: String,
+    default: ""
+  },
   ctaText: {
     type: String,
     default: "",
@@ -29,43 +33,48 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  textContentOverride: {
+    type: String,
+    default: ''
+  }
 });
+const goToUrl = (url) => {
+  if (url) {
+    window.location.href = url;
+  }
+}
 </script>
 
 <template>
-  <div
-    :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%] ${
-      showSlide
-        ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative'
-        : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'
-    }`"
-    :style="{
-      backgroundImage: `url('${img}')`,
-    }"
-  >
-    <div
-      class="tw-w-full tw-h-full tw-rounded-[10px]"
-      :style="{
-        background:
-          'linear-gradient(89.96deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%), linear-gradient(182.34deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(89.96deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%)',
-      }"
-    >
-      <div
-        class="
+  <div :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%]
+  ${showSlide
+    ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative'
+    : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'
+  }
+  ${ctaUrl
+    ? 'tw-cursor-pointer'
+    : ''
+  }
+  `" :style="{
+    backgroundImage: `url('${img}')`,
+  }" @click="goToUrl(ctaUrl)">
+    <div class="tw-w-full tw-h-full tw-rounded-[10px] header-carousel-slide-bg">
+      <div :class="`
           tw-flex
           tw-flex-col
           tw-text-white
           tw-text-uppercase
           tw-h-full
-          tw-justify-center
+          tw-justify-end
+          lg:tw-mb-0
+          lg:tw-justify-center
           tw-px-[26px]
           tw-font-open-sans
-          tw-w-1/2
-        "
-      >
+          lg:tw-w-1/2
+          ${textContentOverride}
+        `">
         <h4 class="tw-font-bold tw-text-[16px] tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
-        <h2
-          class="
+        <h2 class="
             tw-font-bold
             tw-font-bebas-neue
             tw-text-[60px]
@@ -73,26 +82,37 @@ const props = defineProps({
             tw-uppercase
             tw-leading-none
           "
-        >
+          :class="titleClasses"
+          >
           {{ title }}
         </h2>
 
-        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block">{{ description }}</p>
-        
-        <a
-          class="
+        <p class="tw-text-[16px] tw-mb-3 tw-hidden xl:tw-block" v-html="description"></p>
+
+        <span class="
             tw-text-white
             tw-font-bold
             tw-font-bebas-neue
             tw-text-[20px]
             tw-hidden
             xl:tw-block
-          "
-          :href="ctaUrl"
-          >{{ ctaText }}
-          <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]"
-        /></a>
+          ">{{ ctaText }}
+          <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]" />
+        </span>
       </div>
     </div>
   </div>
 </template>
+
+<style type="text/css">
+.header-carousel-slide-bg {
+  background: linear-gradient(0deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%), linear-gradient(180deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(0deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);
+}
+
+/* Same as .md */
+@media (min-width: 768px) {
+  .header-carousel-slide-bg {
+    background: linear-gradient(89.96deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%), linear-gradient(182.34deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(89.96deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);
+  }
+}
+</style>

@@ -16,9 +16,9 @@
                         user-name="{{ user()->display_name }}"
                         user-avatar="{{ user()->profile_picture_url }}"
                         user-xp="{{ Railroad\Points\Services\UserPointsService::fetchPoints(current_user()->getId()) }}"
-                        user-access-level="{{ current_user()->getPermissionLevel() === 'administrator' ? 'team' : 'piano' }}"
+                        user-access-level="{{ user()->isAdmin() ? 'team' : 'piano' }}"
                         profile-base-route="/members/profile/"
-                        :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}"
+                        :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     />
                 </div>
             </div>

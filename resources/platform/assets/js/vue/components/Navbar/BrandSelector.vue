@@ -2,13 +2,15 @@
 import { ref } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import SquaredCard from '../SquaredCard/SquaredCard.vue'
-import { textColor, bgImg, brandUrl } from '../../../constants/brands.js'
+import SquaresContainer from "../SquaredCard/SquaresContainer.vue";
+import InstrumentCardContent from "../SquaredCard/InstrumentCardContent.vue";
+import { textColor, bgImgCard, brandUrl } from '../../../constants/brands.js'
 
 const brandNames = ['drumeo', 'pianote', 'guitareo', 'singeo']
 
 export default {
     name: 'BrandSelector',
-    components: { ModalRenderer, SquaredCard },
+    components: { ModalRenderer, SquaredCard, SquaresContainer, InstrumentCardContent },
     props: {
         brand: {
             type: String,
@@ -30,7 +32,7 @@ export default {
 
         const handleSelect = (brand) => {
             //Refresh the Page with new brand
-            const host = window.location.host;   
+            const host = window.location.host;
             window.location.href = `/${brand}`;
         }
 
@@ -39,7 +41,7 @@ export default {
             handleBrandOpen,
             handleSelect,
             textColor,
-            bgImg,
+            bgImgCard,
             brandUrl,
             brandNames
         }
@@ -49,39 +51,40 @@ export default {
 
 <template>
     <div>
-        <ModalRenderer
-            v-if="isSelectorOpen"
-            @onClose="() => handleBrandOpen(false)"
-            key="ModalRendererKeyToMakeItDestroyByVif"
-        >
+        <ModalRenderer v-if="isSelectorOpen" @onClose="() => handleBrandOpen(false)"
+            key="ModalRendererKeyToMakeItDestroyByVif">
             <div class="tw-flex tw-flex-col">
-                <h2
-                    class="tw-mb-[36px] tw-w-full tw-text-center tw-font-bold tw-text-white"
-                >
-                    Select your instrument
+                <h2 class="tw-mb-[36px] tw-w-full tw-text-center tw-font-extrabold tw-text-white">
+                    What instrument would you like to learn? 
                 </h2>
-                <div class="tw-flex tw-space-x-6">
-                    <SquaredCard
-                        v-for="brandName in brandNames"
-                        v-bind:key="`${brandName}-card`"
-                        :backgroundUrl="bgImg[brandName]"
-                        :active="brand === brandName"
-                        :type="brandName"
-                        @onSelect="() => handleSelect(brandName)"
-                    >
-                        <img :src="brandUrl[brandName]" class="tw-h-[40px]" />
+                <SquaresContainer>
+                    <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="brand === 'drumeo'"
+                        @onSelect="() => handleSelect('drumeo')">
+                        <InstrumentCardContent instrumentText="DRUMS" :logoUrl="brandUrl.drumeo"
+                            logoAltText="Drumeo Logo" />
                     </SquaredCard>
-                </div>
+                    <SquaredCard :backgroundUrl="bgImgCard.pianote" :active="brand === 'pianote'" type="pianote"
+                        @onSelect="() => handleSelect('pianote')">
+                        <InstrumentCardContent instrumentText="PIANO" :logoUrl="brandUrl.pianote"
+                            logoAltText="Pianote Logo" />
+                    </SquaredCard>
+                    <SquaredCard :backgroundUrl="bgImgCard.guitareo" :active="brand === 'guitareo'" type="guitareo"
+                        @onSelect="() => handleSelect('guitareo')">
+                        <InstrumentCardContent instrumentText="GUITAR" :logoUrl="brandUrl.guitareo"
+                            logoAltText="Guitareo Logo" />
+                    </SquaredCard>
+                    <SquaredCard :backgroundUrl="bgImgCard.singeo" :active="brand === 'singeo'" type="singeo"
+                        @onSelect="() => handleSelect('singeo')">
+                        <InstrumentCardContent instrumentText="SINGING" :logoUrl="brandUrl.singeo"
+                            logoAltText="Singeo Logo" />
+                    </SquaredCard>
+                </SquaresContainer>
             </div>
         </ModalRenderer>
-        <button
-            v-on:click="() => handleBrandOpen(true)"
-            :class="`tw-flex tw-h-full tw-flex-row tw-items-center lg:tw-px-[12px] ${ isSelectorOpen }`"
-        >
-            <img :src="brandUrl[brand]" class="tw-w-full tw-max-w-[144px] tw-max-h-8" />
-            <i
-                :class="`fas fa-chevron-down ${textColor[brand]} tw-text-xs tw-pl-[4px] tw-align-middle`"
-            ></i>
+        <button v-on:click="() => handleBrandOpen(true)"
+            :class="`tw-group tw-flex tw-h-full tw-h-[58px] tw-flex-row tw-items-center lg:tw-px-[12px] tw-transition-all hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] ${isSelectorOpen}`">
+            <img :src="brandUrl[brand]" class="tw-w-full tw-min-w-[92px] tw-max-w-[144px] tw-max-h-8" />
+            <i :class="`fas fa-chevron-down ${textColor[brand]} tw-text-xs tw-pl-[4px] tw-transition-all group-hover:tw-mt-1 tw-align-middle`"></i>
         </button>
     </div>
 </template>

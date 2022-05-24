@@ -1,21 +1,17 @@
 <div class="tw-flex tw-flex-col tw-grow">
-    <div class="tw-flex tw-flex-row tw-flex-auto tw-items-center tw-mb-2">
+    <div class="tw-flex tw-flex-row tw-flex-auto tw-items-center tw-mb-4">
         <div class="tw-flex tw-flex-col">
-            <h2 class="subheading">
+            <h2 class="tw-text-lg tw-font-bold dark:tw-text-white">
                 {{ $formTitle }}
             </h2>
         </div>
-        <div class="tw-flex tw-flex-col edit-button">
-            <button class="btn" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">
-                <span class="tw-text-black tw-bg-black inverted corners-10 short">
-                    Edit
-                </span>
-            </button>
+        <div class="tw-ml-auto tw-flex tw-flex-col edit-button">
+            <button class="tw-btn-secondary tw-btn-small tw-mb-0 tw-text-black dark:tw-text-[#9EC0DC] tw-text-lg tw-tracking-wide tw-px-4" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">Edit</button>
         </div>
     </div>
     <div class="tw-flex tw-flex-row">
         <div class="tw-flex tw-flex-col tw-grow">
-            <div class="tw-flex tw-flex-row">
+            <div class="tw-flex tw-flex-row dark:tw-text-white">
                 {{ $formData }}
             </div>
         </div>

@@ -3,10 +3,9 @@ import { ref } from "vue";
 import Navbar from "../Navbar/Navbar.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
-import { useRouter, useRoute } from "vue-router";
+// import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
-import simplebar from "simplebar-vue";
-import "simplebar/dist/simplebar.min.css";
+import { setEndpointPrefix } from "../../utils"
 
 export default {
   name: "PageContainer",
@@ -35,10 +34,6 @@ export default {
     },
     searchUrl: {
       type: String
-    },
-    withReferralButton: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -46,8 +41,8 @@ export default {
     const isSidebarCollapsed = ref(false);
     const isSidebarHidden = ref(false);
     const isDarkModeSelected = ref(false);
-    const route = useRoute();
-    const router = useRouter();
+    // const route = useRoute();
+    // const router = useRouter();
 
     const setDarkMode = (isSelected) => {
       const body = document.getElementById("app-body");
@@ -59,12 +54,11 @@ export default {
     };
 
     const onCollapseSidebar = (val) => {
-      console.log("collapse sidebar called");
       if (typeof val === "boolean") {
         isSidebarCollapsed.value = val;
         isSidebarHidden.value = val;
       } else {
-        const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+        const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
         if (smallBreakpoint.matches) {
           isSidebarHidden.value = !isSidebarHidden.value;
           isSidebarCollapsed.value = false;
@@ -109,11 +103,12 @@ export default {
       this.setDarkMode(this.isDarkModeSelected);
     }
     //Set Sidebar State
-    const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+    const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
     if (smallBreakpoint.matches) {
       this.isSidebarHidden = true;
       this.isSidebarCollapsed = false;
     }
+    setEndpointPrefix();
   },
 
   created() {
@@ -127,7 +122,7 @@ export default {
 
   methods: {
     onResize(e) {
-      const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+      const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
       if (smallBreakpoint.matches) {
         this.isSidebarHidden = true;
         this.isSidebarCollapsed = false;
@@ -150,7 +145,6 @@ export default {
       :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed"
-      :with-referral-button="withReferralButton"
       @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle"
     />
@@ -159,7 +153,7 @@ export default {
     <div
       class="
         tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
-        dark:tw-bg-[#000C17]
+        dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
         tw-overflow-hidden
       "
     >

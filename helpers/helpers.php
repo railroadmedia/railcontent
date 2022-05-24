@@ -2,7 +2,7 @@
 
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 
-if (! function_exists('cf_img')) {
+if (!function_exists('cf_img')) {
     /**
      * Process image and Get a CDN URL using our cloudflare images account.
      * https://developers.cloudflare.com/images/image-resizing/url-format/
@@ -23,24 +23,30 @@ if (! function_exists('cf_img')) {
      *
      * @return string
      */
-    function cf_img(string $pathFromOriginOrUrl, array $options = [])
+    function cf_img(string|null $pathFromOriginOrUrl, array $options = [])
     {
+        if (empty($pathFromOriginOrUrl)) {
+            return '';
+        }
+
         $urlString = 'https://musora.com/cdn-cgi/image/';
         $optionsStringArray = [];
 
         foreach ($options as $optionKey => $optionValue) {
-            $optionsStringArray[] = $optionKey . '=' . $optionValue;
+            $optionsStringArray[] = $optionKey.'='.$optionValue;
         }
 
         $optionsStringArray[] = 'metadata=none';
 
         $urlString .= implode(',', $optionsStringArray);
 
-        $urlString .= '/' . $pathFromOriginOrUrl;
+        $urlString .= '/'.$pathFromOriginOrUrl;
 
         return $urlString;
     }
+}
 
+if (!function_exists('content_to_json')) {
     /**
      * @param $contents
      * @return string
@@ -54,5 +60,59 @@ if (! function_exists('cf_img')) {
         }
 
         return '';
+    }
+}
+
+if (!function_exists('possessivize')) {
+    /**
+     * @return string
+     */
+    function possessivize($string)
+    {
+        return $string.'\''.($string[strlen($string) - 1] !== 's' ? 's' : '');
+    }
+}
+
+if (!function_exists('current_subdomain')) {
+    /**
+     * @return string
+     */
+    function current_subdomain()
+    {
+        $url = \Illuminate\Support\Facades\URL::current();
+
+        $parsedUrl = parse_url($url);
+
+        $host = explode('.', $parsedUrl['host']);
+
+        $subdomain = $host[0];
+
+        return $subdomain;
+    }
+}
+
+if(!function_exists('get_resource_icon')){
+    /**
+     * @param $filename
+     * @return string
+     */
+    function get_resource_icon($filename){
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        switch($extension){
+            case 'png':
+                return 'fa-file-text';
+            case 'pdf':
+                return 'fa-file-pdf';
+            case 'zip':
+                return 'fa-file-archive';
+            case 'mp3':
+            case 'wav':
+                return 'fa-file-audio';
+            case 'mp4':
+                return 'fa-file-video';
+            default:
+                return 'fa-cloud-download';
+        }
     }
 }

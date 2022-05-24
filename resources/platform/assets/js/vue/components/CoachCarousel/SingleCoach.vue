@@ -1,16 +1,17 @@
 <script setup>
 import { ref } from "vue";
 const props = defineProps({
-  coach: {
-    type: Object,
-    default: {
-      id: "test",
-      name: "Aaron Pearson",
-      tagline: "YOUR GUIDE TO METAL",
-    },
-    key: {
-      type: Number,
-    },
+  id: {
+    type: String,
+  },
+  cardImg: {
+    type: String,
+  },
+  name: {
+    type: String,
+  },
+  focusText: {
+    type: String,
   },
 });
 
@@ -29,12 +30,12 @@ const unfollowEndpoint = (id) => {
 function onFollow(e) {
   e.preventDefault();
   if (isCoachFollowed.value) {
-    unfollowEndpoint(props.coach.id).then(() => {
+    unfollowEndpoint(props.id).then(() => {
       console.log('then unfollow')
       isCoachFollowed.value = false;
     });
   } else {
-    followEndpoint(props.coach.id).then(() => {
+    followEndpoint(props.id).then(() => {
       console.log('then follow')
       isCoachFollowed.value = true;
     });
@@ -60,7 +61,7 @@ function onFollow(e) {
       `"
   >
     <img
-      src="https://cdn.musora.com/image/fetch/c_fill,w_660,h_960,q_auto:good/https://d1923uyy6spedc.cloudfront.net/coaches-2022/drumeo/Ash-Pearson-HEAD.jpg"
+      :src="cardImg"
       alt="Ash Pearson"
       class="tw-w-[232px]"
     />
@@ -134,20 +135,20 @@ function onFollow(e) {
           tw-text-white
         "
       >
-        <span>Ash</span><br /><span>Pearson</span>
+        <div v-for="n in name.split(' ')" :key="n">{{ n }}</div>
       </h3>
       <p
         class="
           tw-text-yellow-400
           tw-font-open-sans
-          tw-fluid-text-sm-xs
+          tw-text-xs
           tw-h-8
           tw-leading-snug
           tw-mb-8
           tw-uppercase
         "
       >
-        Your Guide To Metal
+        {{ focusText }}
       </p>
       <!---->
     </div>
@@ -174,6 +175,7 @@ function onFollow(e) {
 
 .single-coach:hover .single-coach__bell {
   opacity: 1;
+  transform: rotate(15deg);
 }
 
 .single-coach:hover {
