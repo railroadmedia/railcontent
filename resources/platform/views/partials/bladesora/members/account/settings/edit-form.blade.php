@@ -6,7 +6,7 @@
             </h2>
         </div>
         <div class="tw-ml-auto tw-flex tw-flex-col edit-button">
-            <button class="tw-btn-secondary tw-btn-small tw-mb-0 tw-text-black dark:tw-text-[#9EC0DC] tw-text-lg tw-tracking-wide tw-px-4" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">Edit</button>
+            <button class="tw-btn-secondary tw-btn-small tw-mb-0 tw-text-black dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">Edit</button>
         </div>
     </div>
     <div class="tw-flex tw-flex-row">

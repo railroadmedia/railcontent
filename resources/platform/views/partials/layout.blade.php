@@ -18,7 +18,7 @@
 
         {{-- Styles --}}
         <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
-        
+
         @yield('styles')
     </head>
 

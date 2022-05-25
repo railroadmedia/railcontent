@@ -38,7 +38,7 @@ function toggleOnboarding() {
     </div>
     <button
       @click="toggleOnboarding"
-      class="tw-btn-secondary tw-text-black tw-border-3 tw-leading-none tw-text-lg tw-tracking-wide tw-mr-6 dark:tw-text-white"
+      class="tw-btn-secondary tw-text-black tw-border-3 tw-leading-none tw-text-lg tw-mr-6 dark:tw-text-white"
       >Complete Your Account
     </button>
     <Onboarding v-if="showOnboarding" />

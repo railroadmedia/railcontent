@@ -80,7 +80,7 @@ const changeCurrentForm = (val) => {
       </ul>
       <div class="tw-flex tw-flex-col tw-mb-[20px]">
         <InputLabel
-          inputOverride="tw-w-full tw-h-[50px]"
+          inputOverride="tw-w-full tw-text-black tw-h-[50px]"
           :brand="brand"
           inputType="email"
           id="loginEmail"
@@ -93,7 +93,7 @@ const changeCurrentForm = (val) => {
       <div class="tw-flex tw-flex-col tw-mb-[20px]">
         <InputLabel
           wrapperOverride="tw-text-[16px]"
-          inputOverride="tw-w-full tw-h-[50px]"
+          inputOverride="tw-w-full tw-text-black tw-h-[50px]"
           :brand="brand"
           inputType="password"
           id="loginPassword"
