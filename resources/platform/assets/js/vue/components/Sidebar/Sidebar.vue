@@ -76,7 +76,7 @@ export default {
                 <!-- Live Indicator -->
                 <span v-if="link.name === 'Live' && isLive" class="tw-relative  tw-w-[37px] tw-h-[18px] tw-ml-3">
                   <span class="tw-animate-grow-shrink tw-blur-sm tw-origin-center tw-scale-125 tw-absolute tw-left-0 tw-top-0 tw-inline-flex tw-h-full tw-w-full tw-rounded tw-bg-[#F71B26] tw-opacity-75"></span>
-                  <span class="tw-relative tw-base tw-pt-[2px] tw-pb-0 tw-px-[3px] tw-rounded tw-leading-none tw-text-white tw-bg-[#DC2626] tw-uppercase tw-leading-none tw-font-bebas-neue">On-Air</span>
+                  <span class="tw-relative tw-base tw-pt-[2px] tw-pb-0 tw-px-[3px] tw-rounded tw-leading-none tw-text-white tw-bg-[#DC2626] tw-uppercase tw-font-bebas-neue">On-Air</span>
                 </span>
             </span>
           </a>

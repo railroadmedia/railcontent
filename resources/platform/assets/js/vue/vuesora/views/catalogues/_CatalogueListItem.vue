@@ -126,7 +126,7 @@
       </p>
 
       <p
-        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
+        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title tw-mb-1"
         :class="overview ? 'heading' : 'tiny font-compressed'"
       >
         {{ mappedData.black_title }}
@@ -134,14 +134,14 @@
 
       <p
         v-if="mappedData.grey_title && overview"
-        class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body mv-2"
+        class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body tw-mt-1 tw-mb-4"
       >
         {{ mappedData.grey_title }}
       </p>
 
       <p
         v-if="overview && mappedData.description"
-        class="tiny text-grey-6 dark:tw-text-white mb-1 m-xs-only"
+        class="tw-text-base text-grey-6 dark:tw-text-white mb-1 m-xs-only"
         v-html="mappedData.description"
       >
       </p>

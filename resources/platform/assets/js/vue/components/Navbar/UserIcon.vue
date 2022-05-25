@@ -91,6 +91,11 @@ export default {
         <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
           <musora-icon icon-name="bell" class="tw-w-[20px] tw-mr-2"/>
           Notifications
+          <!-- Notification Indicator -->
+          <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">
+            <!-- <span class="tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"></span> -->
+            <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
+          </span>
         </OptionElement>
         <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>

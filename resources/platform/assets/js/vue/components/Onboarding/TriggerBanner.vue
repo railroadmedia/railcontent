@@ -33,12 +33,12 @@ function toggleOnboarding() {
       tw-my-4
     "
   >
-    <div class="tw-text-center tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-font-bold tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
+    <div class="tw-text-center tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
       You haven’t set up your account for this instrument.
     </div>
     <button
       @click="toggleOnboarding"
-      class="tw-btn-secondary tw-text-black tw-border-3 tw-leading-none tw-text-lg tw-mr-6 dark:tw-text-white"
+      class="tw-btn-secondary tw-text-black tw-border-3 tw-leading-none tw-mr-6 dark:tw-text-white"
       >Complete Your Account
     </button>
     <Onboarding v-if="showOnboarding" />

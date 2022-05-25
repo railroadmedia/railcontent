@@ -6388,10 +6388,10 @@ stylehacks@^5.1.0:
     browserslist "^4.16.6"
     postcss-selector-parser "^6.0.4"
 
-stylesora@^1.0.102-t3.7:
-  version "1.0.102-t3.7"
-  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.7.tgz#de826eb4b9b5c37293c051b6dac5ea71db2957d3"
-  integrity sha512-bU+FBjmO+QYK/Oh1pjpiR8pVClP5kK4o43n1lVzjZ4yQAm2xPOokyVL5Irw4I2ivJK6z77d5VRVQuRcobz2b+Q==
+stylesora@^1.0.102-t3.9:
+  version "1.0.102-t3.9"
+  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.9.tgz#942243b6f8b65f353f408594093d0f61617532aa"
+  integrity sha512-HYbalZYbjUPbscCXeKowgB/E6wqVhj4omBP8iyJ+3ddM8NVkhkrwHUD5Dtkg3RS0/QsQnSzaIc/8upVRdxTnOw==
   dependencies:
     cssnano "^5.0.6"
 

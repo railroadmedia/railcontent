@@ -20714,6 +20714,9 @@ a{
 a:visited{
   color: currentColor;
 }
+.font-bebas-neue{
+  letter-spacing: 0.1em;
+}
 *, ::before, ::after{
   --tw-translate-x: 0;
   --tw-translate-y: 0;
@@ -20829,9 +20832,8 @@ a:visited{
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1rem;
+  font-size: 1.25rem;
   justify-content: center;
-  letter-spacing: 0.1em;
   line-height: 1;
   margin-bottom: 0.25rem;
   min-height: 50px;
@@ -20943,7 +20945,7 @@ a:visited{
   width: 50px;
 }
 .tw-btn-small{
-  font-size: 14px;
+  font-size: 0.875rem;
   height: 34px;
   min-height: auto;
   padding: 8px 48px;
@@ -23575,12 +23577,6 @@ a:visited{
 .tw-leading-4{
   line-height: 1rem;
 }
-.tw-tracking-wide{
-  letter-spacing: 0.025em;
-}
-.tw-tracking-wider{
-  letter-spacing: 0.05em;
-}
 .tw-text-\[\#00101D\]{
   --tw-text-opacity: 1;
   color: rgb(0 16 29 / var(--tw-text-opacity));
@@ -23874,6 +23870,9 @@ a:visited{
   .tw-container{
     max-width: 2256px;
   }
+}
+.tw-font-bebas-neue{
+  font-weight: 400 !important;
 }
 .placeholder\:tw-text-transparent::-moz-placeholder{
   color: transparent;
@@ -24198,7 +24197,7 @@ a:visited{
 }
 @media (min-width: 640px){
   .sm\:tw-btn-small{
-    font-size: 14px;
+    font-size: 0.875rem;
     height: 34px;
     min-height: auto;
     padding: 8px 48px;
@@ -25039,10 +25038,6 @@ a:visited{
   .lg\:tw-text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;
-  }
-  .lg\:tw-text-lg{
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
   .lg\:tw-text-\[30px\]{
     font-size: 30px;

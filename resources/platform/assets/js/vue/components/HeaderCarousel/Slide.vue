@@ -75,7 +75,6 @@ const goToUrl = (url) => {
         `">
         <h4 class="tw-font-bold tw-text-[16px] tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
         <h2 class="
-            tw-font-bold
             tw-font-bebas-neue
             tw-text-[60px]
             tw-mb-1
@@ -91,7 +90,6 @@ const goToUrl = (url) => {
 
         <span class="
             tw-text-white
-            tw-font-bold
             tw-font-bebas-neue
             tw-text-[20px]
             tw-hidden

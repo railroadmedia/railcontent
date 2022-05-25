@@ -20,7 +20,7 @@
                         <div class="tw-absolute tw-w-full tw-left-0 tw-bottom-0 tw-text-white tw-flex tw-flex-col tw-text-center tw-uppercase tw-h-3/4"
                             style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);">
                             <!-- Coach Name -->
-                            <p class="tw-text-2xl xl:tw-text-3xl tw-font-bold tw-font-bebas-neue tw-break-words tw-flex tw-flex-col tw-mt-auto tw-mb-4"
+                            <p class="tw-text-2xl xl:tw-text-3xl tw-font-bebas-neue tw-break-words tw-flex tw-flex-col tw-mt-auto tw-mb-4"
                                 style="line-height:1.1 !important; hyphens: auto;">
                                 @php
                                     $fullName = $coach->fetch('fields.name');
@@ -37,7 +37,7 @@
                             </p>
 
                             @if ($coach->fetch('is_house_coach'))
-                                <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-4 tw-justify-center tw-items-center">
+                                <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-4 tw-justify-center tw-items-center">
                                     <musora-icon 
                                         icon-name="whistle-filled"
                                         height="12" 
