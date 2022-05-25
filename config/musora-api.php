@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'auth-middleware' => 'api_authenticated',
+    'auth-middleware' => ['api_authenticated',
+        \Railroad\MusoraApi\Middleware\SetCustomDecorators::class
+    ],
 //        [
 ////        \Railroad\MusoraApi\Middleware\MobileAppTokenAuth::class,
 //        \Railroad\MusoraApi\Middleware\SetCustomDecorators::class,
@@ -63,6 +65,10 @@ return [
             'long_bio',
             'focus',
             'genre',
+            'lesson_count',
+            'lessons' => [
+                'id',
+            ],
         ],
 
         'instructor' => [
@@ -916,6 +922,7 @@ return [
             'pack_logo',
             'apple_product_id',
             'google_product_id',
+            'child_ids',
             'bundles' => [
                 'fields.title',
                 'data.thumbnail_url',
