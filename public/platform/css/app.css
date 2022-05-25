@@ -21440,6 +21440,12 @@ a:visited{
 .tw-right-1{
   right: 0.25rem;
 }
+.tw-top-\[14px\]{
+  top: 14px;
+}
+.tw-right-\[12px\]{
+  right: 12px;
+}
 .tw-top-\[9px\]{
   top: 9px;
 }
@@ -21481,18 +21487,6 @@ a:visited{
 }
 .tw--bottom-44{
   bottom: -11rem;
-}
-.tw-top-\[5px\]{
-  top: 5px;
-}
-.tw-top-\[14px\]{
-  top: 14px;
-}
-.tw-right-\[6px\]{
-  right: 6px;
-}
-.tw-right-\[12px\]{
-  right: 12px;
 }
 .tw-z-\[150\]{
   z-index: 150;
