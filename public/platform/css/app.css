@@ -22878,10 +22878,6 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(0 16 29 / var(--tw-bg-opacity));
 }
-.tw-bg-\[\#F9FBFB\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 251 251 / var(--tw-bg-opacity));
-}
 .tw-bg-\[\#c4c4c4\]\/50{
   background-color: rgb(196 196 196 / 0.5);
 }
@@ -22912,9 +22908,9 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(0 12 23 / var(--tw-bg-opacity));
 }
-.tw-bg-\[\#F3F4F6\]{
+.tw-bg-\[\#E4E4E7\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 .tw-bg-\[\#F9F9F9\]{
   --tw-bg-opacity: 1;
@@ -22950,11 +22946,19 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
+.tw-bg-\[\#FAFAFA\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
+}
 .tw-bg-inherit{
   background-color: inherit;
 }
 .tw-bg-\[\#002039\]\/90{
   background-color: rgb(0 32 57 / 0.9);
+}
+.tw-bg-\[\#F3F4F6\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 .tw-bg-gray-400{
   --tw-bg-opacity: 1;
@@ -22974,10 +22978,6 @@ a:visited{
 .tw-bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-.tw-bg-\[\#E4E4E7\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 .tw-bg-opacity-20{
   --tw-bg-opacity: 0.2;
@@ -24115,6 +24115,10 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/50{
   background-color: rgb(68 95 116 / 0.5);
 }
+.tw-dark .dark\:tw-bg-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
 .tw-dark .dark\:tw-bg-\[\#002039\]\/\[0\.7\]{
   background-color: rgb(0 32 57 / 0.7);
 }
@@ -24129,6 +24133,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#80A0B9\]{
   --tw-text-opacity: 1;
   color: rgb(128 160 185 / var(--tw-text-opacity));
+}
+.tw-dark .dark\:tw-text-\[\#A1A1A9\]{
+  --tw-text-opacity: 1;
+  color: rgb(161 161 169 / var(--tw-text-opacity));
 }
 .tw-dark .dark\:tw-text-\[\#445F74\]{
   --tw-text-opacity: 1;
