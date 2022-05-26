@@ -105,7 +105,7 @@ export default {
           <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
           Schedule
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.applyForReviewPageUrl">
+        <OptionElement data-open-modal="applicationModal">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>

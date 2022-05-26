@@ -23,10 +23,10 @@
     </head>
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
-        <!-- Modal Container -->
+        {{-- Modal Container --}}
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
-        <!-- App Container -->
+        {{-- App Container --}}
         <div id="app" class="flex-1">
             <app-container
                 :vue-router="false"
@@ -46,14 +46,28 @@
             </app-container>
         </div>
 
-        <!-- Scripts -->
+        {{-- Review Modals Must Be Global --}}
+        @if($brand === 'singeo')
+            @include('partials._review-modal-singeo')
+        @endif
+        @if($brand === 'guitareo')
+            @include('partials._review-modal-guitareo')
+        @endif
+        @if($brand === 'pianote')
+            @include('partials._review-modal-pianote')
+        @endif
+        @if($brand === 'drumeo')
+            @include('partials._review-modal-drumeo')
+        @endif
+
+        {{-- Scripts --}}
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
         </script>
 
         @yield('layout-scripts')
-        <script src="{{ mix('platform/js/app.js') }}"></script>
+            <script src="{{ mix('platform/js/app.js') }}"></script>
         @yield('inject-components')
 
         {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
