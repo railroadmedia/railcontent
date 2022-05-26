@@ -50,4 +50,4 @@
 </div>
 
 {{-- Review Application Modal --}}
-@include('partials._review-modal-drumeo');
+@include('partials._review-modal-drumeo')
