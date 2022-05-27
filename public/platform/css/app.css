@@ -23076,8 +23076,8 @@ a:visited{
 .tw-p-\[12px\]{
   padding: 12px;
 }
-.tw-p-\[6px\]{
-  padding: 6px;
+.tw-p-2{
+  padding: 0.5rem;
 }
 .tw-p-6{
   padding: 1.5rem;
@@ -23087,9 +23087,6 @@ a:visited{
 }
 .tw-p-1\.5{
   padding: 0.375rem;
-}
-.tw-p-2{
-  padding: 0.5rem;
 }
 .tw-p-0\.5{
   padding: 0.125rem;
@@ -23987,6 +23984,9 @@ a:visited{
 .hover\:tw-bg-\[\#7E9AB1\]\/20:hover{
   background-color: rgb(126 154 177 / 0.2);
 }
+.hover\:tw-bg-black\/10:hover{
+  background-color: rgb(0 0 0 / 0.1);
+}
 .hover\:tw-bg-gray-100:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -24150,6 +24150,18 @@ a:visited{
   --tw-text-opacity: 1;
   color: rgb(68 95 116 / var(--tw-text-opacity));
 }
+.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-placeholder-opacity));
+}
+.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]:-ms-input-placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-placeholder-opacity));
+}
+.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-placeholder-opacity));
+}
 .tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::-moz-placeholder{
   --tw-text-opacity: 1;
   color: rgb(158 192 220 / var(--tw-text-opacity));
@@ -24209,6 +24221,9 @@ a:visited{
 .tw-dark .hover\:dark\:tw-bg-\[\#102230\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity));
+}
+.tw-dark .dark\:hover\:tw-bg-white\/10:hover{
+  background-color: rgb(255 255 255 / 0.1);
 }
 .tw-dark .dark\:hover\:tw-bg-\[\#002039\]:hover{
   --tw-bg-opacity: 1;

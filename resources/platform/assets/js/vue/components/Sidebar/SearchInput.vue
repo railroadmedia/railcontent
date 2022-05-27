@@ -44,6 +44,7 @@ const handleFocus = () => {
         tw-bg-transparent
         focus:tw-outline-[#445f74] focus:tw-outline-1 focus:tw-ring-transparent dark:focus:tw-outline-[#9EC0DC]
         tw-shadow-none
+        tw-pr-[36px]
         ${isSidebarCollapsed
           ? 'placeholder:tw-text-transparent tw-pl-6 tw-cursor-pointer'
           : 'dark:placeholder:tw-text-[#9EC0DC] tw-pl-8'}
