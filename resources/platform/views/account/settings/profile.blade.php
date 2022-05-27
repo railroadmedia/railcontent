@@ -85,42 +85,15 @@
             </div>
 
             {{-- GEAR LISTS --}}
-            {{-- <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                @include('partials.bladesora.members.account.settings.profile.piano-gear-form', [
-                        'brand' => '{{ $brand }}',
-                        'playingSince' => user()->getPianoPlayingSinceYear(),
-                        'piano' => user()->getPianoGearPianoBrands(),
-                        'keyboard' => user()->getPianoGearKeyboardBrands(),
-                        'gearPhoto' => user()->getPianoGearPhoto(),
-
-                        'method' => 'patch',
-                        'action' => '/usora/user/update/' . user()->id,
-                        'playedSinceInput' => [
-                            'inputName' => 'piano_playing_since_year',
-                            'inputValue' => old('piano_playing_since_year', user()->getPianoPlayingSinceYear() ?? ''),
-                            'inputErrors' => $errors->get('piano_playing_since_year'),
-                        ],
-                        'pianoBrandInput' => [
-                            'inputName' => 'piano_gear_piano_brands',
-                            'inputValue' => old('piano_gear_piano_brands', user()->getPianoGearPianoBrands() ?? ''),
-                            'inputErrors' => $errors->get('piano_gear_piano_brands'),
-                        ],
-                        'keyboardBrandInput' => [
-                            'inputName' => 'piano_gear_keyboard_brands',
-                            'inputValue' => old('piano_gear_keyboard_brands', user()->getPianoGearKeyboardBrands() ?? ''),
-                            'inputErrors' => $errors->get('piano_gear_keyboard_brands'),
-                        ],
-                        'gearInput' => [
-                            'inputName' => 'piano_gear_photo',
-                            'inputValue' => old('piano_gear_photo', user()->getPianoGearPhoto() ?? ''),
-                            'inputErrors' => $errors->get('piano_gear_photo'),
-                        ]
-                    ])
-            </div> --}}
+            <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                @include('partials.bladesora.members.account.settings.profile.gear-forms', [
+                    'brand' => $brand
+                ])
+            </div>
 
             {{-- GEAR PHOTO --}}
             {{-- <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                @include('partials.bladesora.members.account.settings.profile.gear-photo-form', [
+                @include('partials.bladesora.members.account.settings.profile.photo-form', [
                     'brand' => '{{ $brand }}',
                     'method' => 'POST',
                     'gearPhotoUrl' => user()->getGearPhoto(),

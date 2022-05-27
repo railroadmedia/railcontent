@@ -195,7 +195,7 @@ export default {
             @click="isSidebarHidden = true"
             class="
               tw-absolute
-              md:tw-hidden
+              lg:tw-hidden
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
             "
           ></div>

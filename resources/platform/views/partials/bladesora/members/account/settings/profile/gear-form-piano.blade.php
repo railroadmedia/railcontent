@@ -1,4 +1,4 @@
-@component('bladesora::members.account.settings.edit-form')
+@component('partials.bladesora.members.account.settings.edit-form')
     @slot('formTitle')
         My Gear
     @endslot
@@ -9,7 +9,7 @@
 
     @slot('formData')
         <div class="flex flex-column grow">
-            @include('bladesora::members.account.partials._text-fields', [
+            @include('partials.bladesora.members.account.partials._text-fields', [
                 "fields" => [
                     "Playing Since" => $playingSince,
                     "Piano" => $piano,
@@ -34,7 +34,7 @@
 
                     <div class="flex flex-row ph-3 mb-1">
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.select-input', array_merge([
+                            @include('partials.bladesora.members.inputs.select-input', array_merge([
                                 "brand" => $brand ?? "pianote",
                                 "inputId" => "playedSince",
                                 "inputName" => "piano_playing_since_year",
@@ -47,7 +47,7 @@
                     </div>
                     <div class="flex flex-row ph-3 inline-inputs">
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.text-input', array_merge([
+                            @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand ?? "pianote",
                                 "type" => "text",
                                 "inputId" => "pianoBrand",
@@ -58,7 +58,7 @@
                             ], $pianoBrandInput ?? []))
                         </div>
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.text-input', array_merge([
+                            @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand ?? "pianote",
                                 "type" => "text",
                                 "inputId" => "keyboardBrand",

@@ -22482,6 +22482,9 @@ a:visited{
 .tw-grid-cols-1{
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
+.tw-grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 .tw-grid-rows-2{
   grid-template-rows: repeat(2, minmax(0, 1fr));
 }
@@ -22535,6 +22538,9 @@ a:visited{
 }
 .tw-gap-1{
   gap: 0.25rem;
+}
+.tw-gap-4{
+  gap: 1rem;
 }
 .tw-space-y-1 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
@@ -22796,6 +22802,9 @@ a:visited{
 .tw-border-\[\#445f74\]{
   --tw-border-opacity: 1;
   border-color: rgb(68 95 116 / var(--tw-border-opacity));
+}
+.tw-border-\[\#445f74\]\/40{
+  border-color: rgb(68 95 116 / 0.4);
 }
 .tw-border-yellow-500{
   --tw-border-opacity: 1;
@@ -23347,6 +23356,9 @@ a:visited{
 }
 .tw-pl-\[48px\]{
   padding-left: 48px;
+}
+.tw-pr-\[36px\]{
+  padding-right: 36px;
 }
 .tw-pl-1{
   padding-left: 0.25rem;

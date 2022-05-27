@@ -1,7 +1,7 @@
 <div class="tw-flex tw-flex-col tw-grow">
     <div class="tw-flex tw-flex-row tw-flex-auto tw-items-center tw-mb-4">
         <div class="tw-flex tw-flex-col">
-            <h2 class="tw-text-lg tw-font-bold dark:tw-text-white">
+            <h2 class="tw-text-2xl tw-font-bold dark:tw-text-white">
                 {{ $formTitle }}
             </h2>
         </div>
