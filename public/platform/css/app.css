@@ -23988,12 +23988,12 @@ a:visited{
 .hover\:tw-bg-\[\#7E9AB1\]\/20:hover{
   background-color: rgb(126 154 177 / 0.2);
 }
+.hover\:tw-bg-black\/10:hover{
+  background-color: rgb(0 0 0 / 0.1);
+}
 .hover\:tw-bg-gray-100:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-.hover\:tw-bg-black\/10:hover{
-  background-color: rgb(0 0 0 / 0.1);
 }
 .hover\:tw-bg-opacity-100:hover{
   --tw-bg-opacity: 1;
@@ -24226,26 +24226,16 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity));
 }
+.tw-dark .dark\:hover\:tw-bg-white\/10:hover{
+  background-color: rgb(255 255 255 / 0.1);
+}
 .tw-dark .dark\:hover\:tw-bg-\[\#002039\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(0 32 57 / var(--tw-bg-opacity));
 }
-.tw-dark .dark\:hover\:tw-bg-white:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.tw-dark .dark\:hover\:tw-bg-white\/20:hover{
-  background-color: rgb(255 255 255 / 0.2);
-}
-.tw-dark .dark\:hover\:tw-bg-white\/10:hover{
-  background-color: rgb(255 255 255 / 0.1);
-}
 .tw-dark .dark\:hover\:tw-text-white:hover{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.tw-dark .dark\:hover\:tw-text-transparent:hover{
-  color: transparent;
 }
 .tw-dark .dark\:focus\:tw-outline-\[\#9EC0DC\]:focus{
   outline-color: #9EC0DC;
