@@ -66,9 +66,7 @@ class ContentQueryBuilder extends QueryBuilder
         $this->addSelect(
             [
                 ConfigService::$tableContent . '.type as content_type',
-//                ConfigService::$tableContentFields . '.key as key',
-//                ConfigService::$tableContentFields . '.value as value',
-//                ConfigService::$tableContentFields . '.type as type',
+                ConfigService::$tableContent . '.*',
             ]
         );
 

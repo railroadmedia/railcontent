@@ -52,15 +52,23 @@ class ContentTransformer
                 'archived_on' => $data['archived_on'] ?? null,
                 'brand' => $data['brand'] ?? null,
                 'language' => $data['language'] ?? null,
-                'parent_id' => $data['parent_id'] ?? null,
-                'child_id' => $data['child_id'] ?? null,
                 'popularity' => $data['popularity'] ?? 0,
             ];
+
+            if (!empty($data['child_id'])) {
+                $content['child_ids'][] = $data['child_id'];
+            }
+
+            if (!empty($data['parent_id'])) {
+                $content['parent_id'] = $data['parent_id'];
+                $content['position'] = $data['child_position'] ?? null;
+            }
 
             $results = $content;
         } else {
 
             foreach ($data as $rowIndex => $row) {
+
                 if (is_array($row) && (isset($row['id']))) {
                     $fields = [];
                     foreach ($fieldsColumns as $column) {
@@ -79,7 +87,8 @@ class ContentTransformer
                         $fields = array_merge($fields, $value[$row['id']] ?? []);
                     }
 
-                    $content = [
+
+                    $content[$row['id']] = [
                         'id' => $row['id'] ?? null,
                         'slug' => $row['slug'] ?? '',
                         'status' => $row['status'] ?? '',
@@ -94,13 +103,22 @@ class ContentTransformer
                         'brand' => $row['brand'] ?? null,
                         'language' => $row['language'] ?? null,
                         'parent_id' => $row['parent_id'] ?? null,
-                        'child_id' => $row['child_id'] ?? null,
                         'popularity' => $row['popularity'] ?? 0,
                     ];
 
-                    $results[] = $content;
+                    if (!empty($row['child_id'])) {
+                        $content[$row['id']]['child_ids'][] = $row['child_id'];
+                    }
+
+                    if (!empty($row['parent_id'])) {
+                        $content[$row['id']]['parent_id'] = $row['parent_id'];
+                        $content[$row['id']]['position'] = $row['child_position'] ?? null;
+                    }
+
+
                 }
             }
+            $results = array_values($content);
         }
 
         return $results;

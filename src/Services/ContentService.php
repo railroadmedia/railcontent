@@ -1085,12 +1085,14 @@ class ContentService
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
-                $resultsDB = new ContentFilterResultsEntity([
-                                                                'results' => $filter->retrieveFilter(),
-                                                                'total_results' => $pullPagination ?
-                                                                    $filter->countFilter() : 0,
-                                                                'filter_options' => $pullFilterFields ? [] : [],
-                                                            ]);
+                $resultsDB = new ContentFilterResultsEntity(
+                    [
+                        'results' => $filter->retrieveFilter(),
+                        'total_results' => $pullPagination ? $filter->countFilter() : 0,
+                        'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                    ]
+                );
+
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             }
