@@ -22,12 +22,12 @@
                 {{ $brand }}
                 {{ $user->access_level }}"
             >
-                <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[175px] tw-w-[175px]"
+                <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]"
                    style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
                 >
                     @if($userAvatar)
                         <img class="tw-inline-block tw-rounded-full"
-                            src="{{ cf_img($userAvatar, ["quality" => 50, "blur" => 2, "width" => 175, "height" => 175, "fit" => "crop"]) }}"
+                            src="{{ cf_img($userAvatar, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
                             data-ix-src="{{ $userAvatar }}"
                         >
                     @endif
@@ -38,7 +38,7 @@
         <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-end xl:tw-items-center tw-pl-6">
             {{-- Account Header --}}
             <div class="tw-flex tw-w-full tw-items-center">
-                <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start tw-mb-4">
+                <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start tw-mb-4 xl:tw-mb-0">
                     <h2 class="tw-font-bold tw-text-[36px] tw-leading-none lg:tw-leading-none tw-text-white lg:tw-text-3xl tw-mb-1">
                         @if(!empty($countryCode))
                             <span class="flag flag-{{ strtolower($countryCode) }}"></span>

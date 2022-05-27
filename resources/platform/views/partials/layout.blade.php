@@ -10,11 +10,16 @@
         <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
         <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
 
+        {{-- Fonts --}}
+        @include('partials._fonts')
+
+        {{-- Favicons --}}
+        @include('partials._favicons')
+
         {{-- Styles --}}
         <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
-        @yield('layout-styles')
-
-        @include('partials._favicons')
+        
+        @yield('styles')
     </head>
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
