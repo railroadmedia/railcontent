@@ -66,7 +66,7 @@ export default {
   <button
     v-on:click="handleMenuOpen"
     tabindex="0"
-    class="tw-flex tw-shrink-0 tw-h-full tw-rounded-full tw-flex-row tw-items-center tw-p-[6px] tw-relative tw-cursor-pointer"
+    class="tw-flex tw-shrink-0 tw-h-full tw-flex-row tw-transition tw-items-center tw-p-2 tw-relative tw-cursor-pointer hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
   >
     <!-- User Image -->
     <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover"
@@ -91,6 +91,11 @@ export default {
         <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
           <musora-icon icon-name="bell" class="tw-w-[20px] tw-mr-2"/>
           Notifications
+          <!-- Notification Indicator -->
+          <span v-if="hasNotifications" class="tw-absolute tw-top-[14px] tw-right-[12px] tw-flex tw-h-[8px] tw-w-[8px]">
+            <!-- <span class="tw-animate-ping tw-absolute tw-inline-flex tw-h-full tw-w-full tw-rounded-full tw-bg-red-500 tw-opacity-75"></span> -->
+            <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
+          </span>
         </OptionElement>
         <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
@@ -100,7 +105,7 @@ export default {
           <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
           Schedule
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.applyForReviewPageUrl">
+        <OptionElement data-open-modal="applicationModal">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>

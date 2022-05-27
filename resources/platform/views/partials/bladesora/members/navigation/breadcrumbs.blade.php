@@ -1,5 +1,5 @@
-<div id="breadCrumbs" class="tw-fluid tw-w-full tw-bg-black bb-grey-5-1 collapsed hide-xs-only" dusk="breadcrumbs">
-    <div class="tw-container tw-mx-auto tw-px-4 text-grey-3 pa-1 tw-uppercase tw-text-center">
+<div id="breadCrumbs" class="tw-fluid tw-w-full tw-bg-[#F9F9F9] tw-text-[#3F3F46] dark:tw-bg-black dark:tw-text-[#A1A1A9] collapsed hide-xs-only" dusk="breadcrumbs">
+    <div class="tw-container tw-mx-auto tw-px-4 pa-1 tw-uppercase tw-text-center">
         {{--<div class="flex flex-row">--}}
             @foreach($pages as $index => $page)
                 @if($index !== 0)

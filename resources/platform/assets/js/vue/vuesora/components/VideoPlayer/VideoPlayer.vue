@@ -350,7 +350,7 @@
 </template>
 <script>
 import shaka from 'shaka-player';
-import Utils from '../assets/js/helper-functions/utils.js';
+import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
 import ContentService from '../../assets/js/services/content';
 import PlayerUtils from './player-utils';
