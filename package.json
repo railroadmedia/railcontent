@@ -58,6 +58,8 @@
         "normalize.css": "^8.0.1",
         "noty": "^3.2.0-beta-deprecated",
         "query-string": "^7.1.1",
+        "screenfull": "^6.0.1",
+        "shaka-player": "^4.0.1",
         "simplebar": "^5.3.6",
         "smoothscroll-polyfill": "^0.4.4",
         "vue": "^3.2.19",
