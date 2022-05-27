@@ -38,7 +38,8 @@ function toggleOnboarding() {
     </div>
     <button
       @click="toggleOnboarding"
-      class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none tw-mr-6 dark:tw-text-white"
+      class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none tw-mr-6 dark:tw-text-white 
+        hover:tw-bg-black/10 dark:hover:tw-bg-white/10"
       >Complete Your Account
     </button>
     <Onboarding v-if="showOnboarding" />
@@ -58,6 +59,8 @@ function toggleOnboarding() {
         tw-items-center
         tw-top-[9px]
         tw-right-[14px]
+        hover:tw-bg-black/10
+        dark:hover:tw-bg-white/10
       "
       @click="() => emit('onClose')"
     >

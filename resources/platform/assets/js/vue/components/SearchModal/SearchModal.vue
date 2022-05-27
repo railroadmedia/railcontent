@@ -44,7 +44,8 @@ const onSearch = () => {
         tw-border-none
         tw-text-xs
         tw-transition-color
-        dark:tw-text-[#9EC0DC]
+        dark:tw-placeholder-[#9EC0DC]
+        dark:tw-text-white
         tw-bg-transparent
         tw-shadow-none
         tw-pl-[48px]

@@ -20832,8 +20832,9 @@ a:visited{
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1.25rem;
+  font-size: 1rem;
   justify-content: center;
+  letter-spacing: 0.1em;
   line-height: 1;
   margin-bottom: 0.25rem;
   min-height: 50px;
@@ -20945,7 +20946,7 @@ a:visited{
   width: 50px;
 }
 .tw-btn-small{
-  font-size: 0.875rem;
+  font-size: 14px;
   height: 34px;
   min-height: auto;
   padding: 8px 48px;
@@ -23991,6 +23992,9 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
+.hover\:tw-bg-black\/10:hover{
+  background-color: rgb(0 0 0 / 0.1);
+}
 .hover\:tw-bg-opacity-100:hover{
   --tw-bg-opacity: 1;
 }
@@ -24150,6 +24154,18 @@ a:visited{
   --tw-text-opacity: 1;
   color: rgb(68 95 116 / var(--tw-text-opacity));
 }
+.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-placeholder-opacity));
+}
+.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]:-ms-input-placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-placeholder-opacity));
+}
+.tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::placeholder{
+  --tw-placeholder-opacity: 1;
+  color: rgb(158 192 220 / var(--tw-placeholder-opacity));
+}
 .tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::-moz-placeholder{
   --tw-text-opacity: 1;
   color: rgb(158 192 220 / var(--tw-text-opacity));
@@ -24214,16 +24230,29 @@ a:visited{
   --tw-bg-opacity: 1;
   background-color: rgb(0 32 57 / var(--tw-bg-opacity));
 }
+.tw-dark .dark\:hover\:tw-bg-white:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.tw-dark .dark\:hover\:tw-bg-white\/20:hover{
+  background-color: rgb(255 255 255 / 0.2);
+}
+.tw-dark .dark\:hover\:tw-bg-white\/10:hover{
+  background-color: rgb(255 255 255 / 0.1);
+}
 .tw-dark .dark\:hover\:tw-text-white:hover{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.tw-dark .dark\:hover\:tw-text-transparent:hover{
+  color: transparent;
 }
 .tw-dark .dark\:focus\:tw-outline-\[\#9EC0DC\]:focus{
   outline-color: #9EC0DC;
 }
 @media (min-width: 640px){
   .sm\:tw-btn-small{
-    font-size: 0.875rem;
+    font-size: 14px;
     height: 34px;
     min-height: auto;
     padding: 8px 48px;
