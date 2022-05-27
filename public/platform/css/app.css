@@ -20832,9 +20832,8 @@ a:visited{
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1rem;
+  font-size: 1.25rem;
   justify-content: center;
-  letter-spacing: 0.1em;
   line-height: 1;
   margin-bottom: 0.25rem;
   min-height: 50px;
@@ -20946,7 +20945,7 @@ a:visited{
   width: 50px;
 }
 .tw-btn-small{
-  font-size: 14px;
+  font-size: 0.875rem;
   height: 34px;
   min-height: auto;
   padding: 8px 48px;
@@ -23077,8 +23076,8 @@ a:visited{
 .tw-p-\[12px\]{
   padding: 12px;
 }
-.tw-p-\[6px\]{
-  padding: 6px;
+.tw-p-2{
+  padding: 0.5rem;
 }
 .tw-p-6{
   padding: 1.5rem;
@@ -23088,9 +23087,6 @@ a:visited{
 }
 .tw-p-1\.5{
   padding: 0.375rem;
-}
-.tw-p-2{
-  padding: 0.5rem;
 }
 .tw-p-0\.5{
   padding: 0.125rem;
@@ -24242,7 +24238,7 @@ a:visited{
 }
 @media (min-width: 640px){
   .sm\:tw-btn-small{
-    font-size: 14px;
+    font-size: 0.875rem;
     height: 34px;
     min-height: auto;
     padding: 8px 48px;
