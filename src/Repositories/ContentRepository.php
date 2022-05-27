@@ -144,7 +144,7 @@ class ContentRepository extends RepositoryBase
 
         $data = $contentRows[0] ?? null;
 
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video', 'focus'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video', 'focus', 'style'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -417,6 +417,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
+
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
@@ -500,7 +501,8 @@ class ContentRepository extends RepositoryBase
                 )
                 ->havingRaw(
                     ConfigService::$tableContent.".type IN (".implode(",", array_fill(0, count([$type]), "?")).")",
-                    [$type])
+                    [$type]
+                )
                 ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress.'.state', $state)
                 ->orderBy('published_on', 'desc')
@@ -799,7 +801,8 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->selectInheritenceColumns()
                 ->restrictByUserAccess()
-                ->leftJoin(ConfigService::$tableContentHierarchy,
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
                     function (JoinClause $joinClause) use ($childContentIds) {
                         $joinClause->on(
                             ConfigService::$tableContentHierarchy.'.parent_id',
@@ -807,7 +810,8 @@ class ContentRepository extends RepositoryBase
                             ConfigService::$tableContent.'.id'
                         )
                             ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childContentIds);
-                    })
+                    }
+                )
                 ->where(ConfigService::$tableContent.'.user_id', $userId);
 
         if (!empty($slug)) {
@@ -1139,7 +1143,7 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic', 'style'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
@@ -1199,6 +1203,13 @@ class ContentRepository extends RepositoryBase
         $possibleContentFields =
             $query->get()
                 ->toArray();
+
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic', 'style'], $possibleContentFields);
+
+        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser->presenter->addParam($extraData);
+
+        $possibleContentFields = $this->parserResult($possibleContentFields);
 
         return $this->parseAvailableFields($possibleContentFields);
     }
@@ -1339,43 +1350,29 @@ class ContentRepository extends RepositoryBase
         return $parsedContents;
     }
 
-    private function parseAvailableFields($rows)
+    private function parseAvailableFields($contentRows)
     {
-        $rows = array_map("unserialize", array_unique(array_map("serialize", $rows)));
+        $contentRows = array_map("unserialize", array_unique(array_map("serialize", $contentRows)));
 
         $availableFields = [];
-        $subContentIds = [];
 
-        foreach ($rows as $row) {
-            $availableFields['content_type'][] = $row['content_type'];
-            if ($row['type'] == 'content_id') {
-                $subContentIds[] = $row['value'];
-            } else {
-                $availableFields[$row['key']][] = trim(ucfirst($row['value']));
-                // only uniques - despite of upper/lowercase
-                $data = array_intersect_key(
-                    $availableFields[$row['key']],
-                    array_unique(array_map('strtolower', $availableFields[$row['key']]))
-                );
+        foreach ($contentRows as $contentRow) {
+            foreach ($contentRow['fields'] as $row) {
+                $availableFields['content_type'][] = $contentRow['type'];
+                if ($row['type'] == 'content') {
+                    $availableFields[$row['key']][$row['value']['id']] = $row['value'];
+                } else {
+                    $availableFields[$row['key']][] = trim(ucfirst($row['value']));
+                    // only uniques - despite of upper/lowercase
+                    $data = array_intersect_key(
+                        $availableFields[$row['key']],
+                        array_unique(array_map('strtolower', $availableFields[$row['key']]))
+                    );
 
-                $availableFields[$row['key']] = array_values($data);
-            }
+                    $availableFields[$row['key']] = array_values($data);
+                }
 
-            $availableFields['content_type'] = array_values(array_unique($availableFields['content_type']));
-        }
-
-        $subContents = $this->getByIds($subContentIds);
-        $subContents = array_combine(array_column($subContents, 'id'), $subContents);
-
-        foreach ($rows as $row) {
-            if ($row['type'] == 'content_id' && !empty($subContents[$row['value']])) {
-                $availableFields[$row['key']][] = $subContents[strtolower($row['value'])];
-
-                // only uniques (this is a multidimensional array_unique equivalent)
-                $availableFields[$row['key']] =
-                    array_map("unserialize", array_unique(array_map("serialize", $availableFields[$row['key']])));
-
-                $availableFields[$row['key']] = array_values($availableFields[$row['key']]);
+                $availableFields['content_type'] = array_values(array_unique($availableFields['content_type']));
             }
         }
 
