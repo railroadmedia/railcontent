@@ -16,7 +16,7 @@
                 "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                 "brand" => $brand,
                 "currentUser" =>$user,
-                'profileUrl' => url()->route('members.profile.dashboard', [auth()->id()]),
+                'profileUrl' => user()->getDashboardUrl(),
             ])
                 @slot('content')
                     <div class="tw-inline-flex tw-w-full tw-flex-col sm:tw-pr-4 sm:tw-mt-10">
@@ -40,9 +40,9 @@
                                 </a>
                             @endif
 
-                            <a href="/members/forums/platform-update-feedback-discussion/5/forum-rules/3" 
+                            <a href="/members/forums/platform-update-feedback-discussion/5/forum-rules/3"
                                class="tw-btn-secondary sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto">
-                                <i class="fas fa-clipboard-list tw-mr-2"></i> 
+                                <i class="fas fa-clipboard-list tw-mr-2"></i>
                                 <span>Forum Rules</span>
                             </a>
                         </div>

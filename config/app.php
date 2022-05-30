@@ -174,6 +174,9 @@ return [
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
         Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
+        Railroad\Usora\Providers\UsoraServiceProvider::class,
+        Railroad\Railforums\Providers\ForumServiceProvider::class,
+        Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
 
         /*
          * Application Service Providers...

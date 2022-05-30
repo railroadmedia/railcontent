@@ -53,7 +53,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         $user = User::query()->find($id);
 
         if ($user) {
-            return new EcommerceUser($user->getId(), $user->getEmail());
+            return new EcommerceUser($user->id, $user->email);
         }
 
         return null;

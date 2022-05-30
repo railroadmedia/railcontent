@@ -1,0 +1,76 @@
+<?php
+
+/*
+ * html_purifier_settings.settings.default array is passed directly in to HTMLPurifier_Config->loadArray()
+ */
+
+return array(
+    // brand
+    'brand' => 'musora',
+
+    // database
+    'database_connection_name' => 'musora_laravel_mysql_writer_only',
+
+    // host does the db migrations, clients do not
+    'data_mode' => 'host', // 'host' or 'client'
+
+    // cache
+    'cache_driver' => 'array',
+    'cache_key_prefix' => 'singeo_railforums_cache_',
+    'cache_minutes' => 60,
+
+    'table_prefix' => 'forum_',
+    'tables' => [
+        'categories' => 'categories',
+        'threads' => 'threads',
+        'thread_follows' => 'thread_follows',
+        'thread_reads' => 'thread_reads',
+        'posts' => 'posts',
+        'post_likes' => 'post_likes',
+        'post_reports' => 'post_reports',
+        'post_replies' => 'post_replies',
+        'search_indexes' => 'search_indexes',
+        'user_signatures' => 'user_signatures',
+    ],
+
+    // middleware
+    'controller_middleware' => [
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+//        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+    ],
+
+    'author_database_connection' => 'musora_laravel_mysql_writer_only',
+    'author_table_name' => 'usora_users',
+    'author_table_id_column_name' => 'id',
+    'author_table_display_name_column_name' => 'display_name',
+    'author_table_avatar_column_name' => 'profile_picture_url',
+    'author_default_avatar_url' => 'https://s3.amazonaws.com/singeo/defaults/avatar.png',
+
+    'post_report_notification_class' => \Railroad\Railforums\Notifications\PostReport::class,
+    'post_report_notification_channel' => 'mail',
+    'post_report_notification_recipients' => ['julia@singeo.com'],
+    'post_report_notification_view_post_route' => 'forums.post.jump-to', // laravel route name, eg: 'railforums.api.post.show' or 'forums.post.jump-to'
+
+    'search' => [
+        'high_value_multiplier' => 4,
+        'medium_value_multiplier' => 2,
+        'low_value_multiplier' => 1,
+    ],
+
+    'html_purifier_settings' => [
+        'encoding' => 'UTF-8',
+        'finalize' => true,
+        'settings' => [
+            'default' => [
+                'HTML.Doctype' => 'XHTML 1.0 Strict',
+                'HTML.Allowed' => 'div,b,strong,i,em,a[href|title],ul,ol,li,p[style|class],br,span[style|class],img[width|height|alt|src],blockquote',
+                'CSS.AllowedProperties' => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
+                'AutoFormat.AutoParagraph' => true,
+                'HTML.TargetBlank' => true,
+                'AutoFormat.RemoveEmpty' => true,
+            ],
+        ],
+    ],
+);

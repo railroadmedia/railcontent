@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\ContentPagesController;
+use App\Http\Controllers\Platform\ForumController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
@@ -148,7 +149,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs.first-level');
 
-        Route::get('/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}', [PackPagesController::class, 'packBundleLessons'])
+        Route::get(
+            '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
+            [PackPagesController::class, 'packBundleLessons']
+        )
             ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs.second-level');
 
@@ -279,4 +283,125 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
             ->whereIn('brand', all_brands())
             ->name('platform.invite-a-friend');
+
+        /*
+         * Forums
+         */
+        // all threads and discussions
+        Route::get(
+            '/{brand}/forums',
+            [
+                'as' => 'forums.index',
+                'uses' => ForumController::class . '@forumIndex'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+
+        // create forum view
+        Route::get(
+            '/{brand}/forums/create-forum',
+            [
+                'as' => 'forums.forum.create',
+                'uses' => ForumController::class . '@createForum'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // edit forum view
+        Route::get(
+            '/{brand}/forums/update-forum/{forumId}',
+            [
+                'as' => 'forums.forum.update',
+                'uses' => ForumController::class . '@updateForum'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // create thread list view
+        Route::get(
+            '/{brand}/forums/threads/{categorySlug}/{categoryId}',
+            [
+                'as' => 'forums.thread.list',
+                'uses' => ForumController::class . '@threadList'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // create thread view
+        Route::get(
+            '/{brand}/forums/threads/create-thread',
+            [
+                'as' => 'forums.thread.create',
+                'uses' => ForumController::class . '@createThread'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // edit thread view
+        Route::get(
+            '/{brand}/forums/edit-thread/{threadId}',
+            [
+                'as' => 'forums.thread.update',
+                'uses' => ForumController::class . '@updateThread'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // jump
+        Route::get(
+            '/{brand}/forums/jump-to-post/{id}',
+            [
+                'as' => 'forums.post.jump-to',
+                'uses' => ForumController::class . '@jumpToPost'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+        Route::get(
+            '/{brand}/forums/jump-to-thread/{id}',
+            [
+                'as' => 'forums.thread.jump-to',
+                'uses' => ForumController::class . '@jumpToThread'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // search
+        Route::get(
+            '/{brand}/forums/search',
+            [
+                'as' => 'forums.search',
+                'uses' => ForumController::class . '@searchIndex'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // view thread
+        Route::get(
+            '/{brand}/forums/{threadSlugAndId}',
+            [
+                'as' => 'forums.thread',
+                'uses' => ForumController::class . '@showThreadById'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        // follow thread
+        Route::get(
+            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
+            [
+                'as' => 'forums.thread.show',
+                'uses' => ForumController::class . '@showThread'
+            ]
+        )
+            ->whereIn('brand', all_brands());
+
+        Route::get(
+            '/{brand}/forums/threads/latest',
+            [
+                'as' => 'forums.index.latest',
+                'uses' => ForumController::class . '@forumIndexNew'
+            ]
+        )
+            ->whereIn('brand', all_brands());
     });
