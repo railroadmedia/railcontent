@@ -177,6 +177,7 @@ return [
         Railroad\Usora\Providers\UsoraServiceProvider::class,
         Railroad\Railforums\Providers\ForumServiceProvider::class,
         Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
+        \Railroad\Permissions\Providers\PermissionsServiceProvider::class,
 
         /*
          * Application Service Providers...
