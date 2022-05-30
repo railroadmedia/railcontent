@@ -21446,6 +21446,9 @@ a:visited{
 .tw-right-\[12px\]{
   right: 12px;
 }
+.tw-bottom-\[36px\]{
+  bottom: 36px;
+}
 .tw-top-\[9px\]{
   top: 9px;
 }
@@ -21511,6 +21514,9 @@ a:visited{
 }
 .tw-z-50{
   z-index: 50;
+}
+.tw-z-\[2000\]{
+  z-index: 2000;
 }
 .tw-z-\[99\]{
   z-index: 99;
@@ -22188,6 +22194,9 @@ a:visited{
 .tw-w-\[8px\]{
   width: 8px;
 }
+.tw-w-4\/6{
+  width: 66.666667%;
+}
 .tw-w-\[90vw\]{
   width: 90vw;
 }
@@ -22229,9 +22238,6 @@ a:visited{
 }
 .tw-w-48{
   width: 12rem;
-}
-.tw-w-4\/6{
-  width: 66.666667%;
 }
 .tw-w-28{
   width: 7rem;
@@ -22622,14 +22628,14 @@ a:visited{
 .tw-rounded-\[8px\]{
   border-radius: 8px;
 }
+.tw-rounded-md{
+  border-radius: 0.375rem;
+}
 .tw-rounded-\[5px\]{
   border-radius: 5px;
 }
 .tw-rounded-3xl{
   border-radius: 1.5rem;
-}
-.tw-rounded-md{
-  border-radius: 0.375rem;
 }
 .tw-rounded-sm{
   border-radius: 0.125rem;
@@ -23199,6 +23205,14 @@ a:visited{
   padding-left: 25px;
   padding-right: 25px;
 }
+.tw-px-\[22px\]{
+  padding-left: 22px;
+  padding-right: 22px;
+}
+.tw-py-\[16px\]{
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
 .tw-px-\[3px\]{
   padding-left: 3px;
   padding-right: 3px;
@@ -23342,6 +23356,9 @@ a:visited{
 .tw-pl-\[4px\]{
   padding-left: 4px;
 }
+.tw-pb-6{
+  padding-bottom: 1.5rem;
+}
 .tw-pb-\[40px\]{
   padding-bottom: 40px;
 }
@@ -23374,9 +23391,6 @@ a:visited{
 }
 .tw-pl-\[27px\]{
   padding-left: 27px;
-}
-.tw-pb-6{
-  padding-bottom: 1.5rem;
 }
 .tw-pl-0{
   padding-left: 0px;
@@ -23761,6 +23775,9 @@ a:visited{
 }
 .tw-opacity-70{
   opacity: 0.7;
+}
+.tw-opacity-95{
+  opacity: 0.95;
 }
 .tw-opacity-30{
   opacity: 0.3;
