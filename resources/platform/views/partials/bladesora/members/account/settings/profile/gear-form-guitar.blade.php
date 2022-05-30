@@ -1,4 +1,4 @@
-@component('bladesora::members.account.settings.edit-form')
+@component('partials.bladesora.members.account.settings.edit-form')
     @slot('formTitle')
         My Gear
     @endslot
@@ -9,7 +9,7 @@
 
     @slot('formData')
         <div class="flex flex-column grow">
-            @include('bladesora::members.account.partials._text-fields', [
+            @include('partials.bladesora.members.account.partials._text-fields', [
                 "fields" => [
                     "Played Guitar Since" => $playedGuitarSince,
                     "Guitars" => $guitars,
@@ -36,7 +36,7 @@
 
                     <div class="flex flex-row ph-3 mb-1">
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.select-input', array_merge([
+                            @include('partials.bladesora.members.inputs.select-input', array_merge([
                                 "brand" => $brand ?? "guitareo",
                                 "inputId" => "playedGuitarSince",
                                 "inputName" => "played_guitar_since",
@@ -49,7 +49,7 @@
                     </div>
                     <div class="flex flex-row ph-3 inline-inputs">
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.text-input', array_merge([
+                            @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand ?? "guitareo",
                                 "type" => "text",
                                 "inputId" => "guitars",
@@ -60,7 +60,7 @@
                             ], $guitarsInput ?? []))
                         </div>
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.text-input', array_merge([
+                            @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand ?? "guitareo",
                                 "type" => "text",
                                 "inputId" => "amps",
@@ -74,7 +74,7 @@
 
                     <div class="flex flex-row ph-3 inline-inputs">
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.text-input', array_merge([
+                            @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand ?? "guitareo",
                                 "type" => "text",
                                 "inputId" => "pedals",
@@ -85,7 +85,7 @@
                             ], $pedalsInput ?? []))
                         </div>
                         <div class="flex flex-column">
-                            @include('bladesora::members.inputs.text-input', array_merge([
+                            @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand ?? "guitareo",
                                 "type" => "text",
                                 "inputId" => "strings",

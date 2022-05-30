@@ -43,7 +43,7 @@ export default {
             >
                 <button
                     v-on:click="() => {}"
-                    :class="`tw-btn tw-btn-primary tw-static tw-transition lg:tw-mr-4 tw-bg-${brand} hover:tw-bg-${brand}-600 tw-px-auto tw-mb-4 tw-box-border tw-w-[200px]`"
+                    :class="`tw-btn-primary tw-static tw-transition lg:tw-mr-4 tw-bg-${brand} hover:tw-bg-${brand}-600 tw-px-auto tw-mb-4 tw-box-border tw-w-[200px]`"
                 >
                     <span>SEE COACH</span>
                 </button>
@@ -55,7 +55,7 @@ export default {
                 <button
                     onclick="() => {}"
                     data-open-modal="coach-trailer-modal"
-                    class="tw-btn tw-px-auto tw-btn-secondary tw-static tw-mb-4 tw-box-border tw-transition hover:tw-bg-white hover:tw-bg-opacity-10"
+                    class="tw-px-auto tw-btn-secondary tw-static tw-mb-4 tw-box-border tw-transition hover:tw-bg-white hover:tw-bg-opacity-10"
                     style="width: 200px"
                 >
                     <span>

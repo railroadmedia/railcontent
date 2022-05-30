@@ -34,7 +34,7 @@ const handleClick = (e) => {
     dusk="submit-button"
     @click="handleClick"
   >
-    <span class="tw-font-bebas-neue tw-font-extrabold tw-uppercase">
+    <span class="tw-font-bebas-neue tw-uppercase">
       {{ label }}
     </span>
   </button>

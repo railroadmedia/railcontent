@@ -65,6 +65,7 @@ const handleNavClick = (index) => {
 
 onBeforeMount(() => {
   if (props.preloadedCarousel.length > 0) {
+    console.log(props.preloadedCarousel)
     slides.value = props.preloadedCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
   } else {
     slides.value = testCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
@@ -80,7 +81,7 @@ onMounted(() => {
   <div
     class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4">
     <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :key="slide.title"
-      textContentOverride="tw-pb-[26px]" :topSubtitle="slide.topSubtitle" :title="slide.title" :ctaText="slide.ctaText"
+      textContentOverride="tw-pb-[26px]" :topSubtitle="slide.topSubtitle" :title="slide.title" :titleClasses="slide.titleClasses" :ctaText="slide.ctaText"
       :description="slide.description" :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval"
       @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" />
 

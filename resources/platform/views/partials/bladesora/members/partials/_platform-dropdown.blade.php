@@ -9,7 +9,7 @@
         <i class="fas fa-chevron-down tw-text-{{ $themeColor }} tw-text-sm"></i>
     </button>
     <div class="tw-rounded-b-lg tw-bg-inherit tw-right-0 tw-top-full tw-absolute tw-z-100 tw-w-44 tw-max-h-0 tw-overflow-hidden tw-transition-all" id="platformDropdown">
-        <p class="tw-uppercase tw-text-gray-200 tw-my-2 tw-whitespace-nowrap tw-px-4 tw-tracking-wide" style="font-size: 9px;">Choose A Platform</p>
+        <p class="tw-uppercase tw-text-gray-200 tw-my-2 tw-whitespace-nowrap tw-px-4" style="font-size: 9px;">Choose A Platform</p>
         <ul class="tw-pl-0 tw-pb-3">
             @foreach ($platforms as $platform)
                 @if ($platform['name'] != $themeColor )

@@ -117,3 +117,6 @@ auth.json.vapor/
 .env.staging
 
 .vapor
+auth.json
+
+.env.*

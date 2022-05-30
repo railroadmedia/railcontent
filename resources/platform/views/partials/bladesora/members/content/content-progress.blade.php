@@ -40,7 +40,7 @@
         <div class="tw-flex tw-flex-col tw-text-white">
             @if(empty($showCompleteButton))
                 <a href="{{ $isCompleted ? $backButton['url'] : $nextLessonUrl }}"
-                   class="tw-btn-secondary tw-text-lg tw-mb-0 tw-tracking-wide tw-leading-[0] tw-border-[3px] tw-text-white">
+                   class="tw-btn-secondary tw-text-lg tw-mb-0 tw-leading-[0] tw-border-[3px] tw-text-white">
                     @if(!$isCompleted)
                         @if($isStarted)
                             Next Lesson &raquo;

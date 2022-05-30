@@ -50,6 +50,7 @@ import TextEditor from './vue/vuesora/components/TextEditor';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
+import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';
 import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue';
 import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';

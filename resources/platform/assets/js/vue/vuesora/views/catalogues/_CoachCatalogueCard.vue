@@ -14,7 +14,7 @@
                     item.type + '-thumbnail'
                 ]"
             >
-                <div class="card-media bg-grey-2 active corners-10"
+                <div class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
                      :class="[thumbnailType]"
                 >
                     <!-- Video Thumbnail -->

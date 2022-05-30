@@ -89,7 +89,7 @@ export default {
                 <button
                     onclick="onModalButtonClick()"
                     data-open-modal="coach-trailer-modal"
-                    class="tw-btn tw-px-auto tw-btn-secondary tw-static tw-mb-4 tw-box-border tw-transition hover:tw-bg-white hover:tw-bg-opacity-10"
+                    class="tw-px-auto tw-btn-secondary tw-static tw-mb-4 tw-box-border tw-transition hover:tw-bg-white hover:tw-bg-opacity-10"
                     style="width: 200px"
                 >
                     <span>
