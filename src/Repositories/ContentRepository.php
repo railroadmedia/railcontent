@@ -656,7 +656,7 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
 
         $merged = array_merge($beforeContents, $afterContents);
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $merged);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor','video'], $merged);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);

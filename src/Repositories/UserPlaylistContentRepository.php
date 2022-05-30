@@ -70,7 +70,7 @@ class UserPlaylistContentRepository extends RepositoryBase
                 ->get()
                 ->toArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor'], $contentRows);
+        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
