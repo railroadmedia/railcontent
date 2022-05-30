@@ -190,11 +190,13 @@ class ForumController extends Controller
 
         foreach ($discussions as $discussion) {
             $latestPost = $discussion->latest_post;
-            if ($latestPost) {
+            if (!empty($latestPost)) {
                 $latestPost['created_at_diff'] =
                     Carbon::parse($latestPost['created_at'])
                         ->diffForHumans();
                 $latestPost['url'] = url()->route('forums.post.jump-to', [$latestPost['id']]);
+            } else {
+                continue;
             }
 
             $mappedDiscussions[] = [
@@ -635,7 +637,7 @@ class ForumController extends Controller
         ];
 
         return view(
-            'members.forums.threads',
+            'forums.threads',
             [
                 'discussion' => $category,
                 "threads" => $mappedThreads,
@@ -658,7 +660,6 @@ class ForumController extends Controller
      */
     public function showThread(Request $request, $domain, $brand, $categorySlug, $categoryId, $threadSlug, $id)
     {
-        $currentUser = auth()->user();
         $amount = $request->get('amount', 15);
         $page = $request->get('page', 1);
 
@@ -719,13 +720,7 @@ class ForumController extends Controller
             $authorIds[] = $post['author_id'];
         }
 
-        $users = $this->userRepository->findBy(['id' => $authorIds]);
-
-        $keyedUsers = [];
-
-        foreach ($users as $user) {
-            $keyedUsers[$user->id] = $user;
-        }
+//        $users = User::query()->whereIn('id', $authorIds)->get()->keyBy('id');
 
         $mappedPosts = [];
 
@@ -743,14 +738,14 @@ class ForumController extends Controller
                 "xp" => $author['xp_rank'],
                 "access_level" => $author['access_level'],
                 "authorProfileUrl" => $author['associated_coach'] ? $author['associated_coach']['url'] : url()->route(
-                    'members.profile.dashboard',
+                    'platform.profile.dashboard',
                     [$post->author_id]
                 ),
                 "authorId" => $post->author_id,
                 "createdOn" => Carbon::parse($post->published_on)
-                        ->timezone(current_user()->getTimezone())
+                        ->timezone(user()->timezone)
                         ->format('M j, Y') . ' AT ' . Carbon::parse($post->published_on)
-                        ->timezone(current_user()->getTimezone())
+                        ->timezone(user()->timezone)
                         ->format('g:i A'),
                 "totalLikes" => $post->like_count,
                 "isLiked" => $post->is_liked_by_viewer,
@@ -788,7 +783,7 @@ class ForumController extends Controller
         $threadTitle = $mappedThread['title'];
 
         return view(
-            'members.forums.thread',
+            'forums.thread',
             [
                 "thread" => json_encode($mappedThread),
                 "currentUser" => json_encode($mappedCurrentUser),

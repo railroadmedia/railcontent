@@ -1,7 +1,8 @@
 @php
-    $bodyClass = ($bodyClass ?? '') . 'tw-bg-gray-50  sidebar';
+    $bodyClass = ($bodyClass ?? '') . ' sidebar';
 @endphp
-@extends('forums.forumlayout')
+
+@extends('partials.layout')
 
 @section('meta')
     <title>{{ $threadTitle }} | {{$categoryTitle}} | Forums | {{ $brand }}</title>
@@ -12,7 +13,7 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('home'),
+                "url" => url()->route('platform.home'),
             ],
             [
                 "title" => "Forums",

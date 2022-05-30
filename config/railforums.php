@@ -8,6 +8,14 @@ return array(
     // brand
     'brand' => 'musora',
 
+    // brand database connection names (each brand is on its own database for now)
+    'brand_database_connection_names' => [
+        'drumeo' => 'drumeo_laravel_mysql_writer_only',
+        'pianote' => 'pianote_laravel_mysql_writer_only',
+        'guitareo' => 'guitareo_laravel_mysql_writer_only',
+        'singeo' => 'singeo_laravel_mysql_writer_only',
+    ],
+
     // database
     'database_connection_name' => 'musora_laravel_mysql_writer_only',
 
@@ -35,9 +43,14 @@ return array(
 
     // middleware
     'controller_middleware' => [
-        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \App\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
+        \App\Http\Middleware\SetContentPermissions::class,
 //        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
     ],
 
@@ -73,4 +86,6 @@ return array(
             ],
         ],
     ],
+
+    'excludedOldForumsIds' => [3, 14, 13, 8]
 );

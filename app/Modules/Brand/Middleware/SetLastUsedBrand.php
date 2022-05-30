@@ -39,6 +39,12 @@ class SetLastUsedBrand
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->get('brand')));
         }
 
+        // set railforums brand and DB connection
+        $railforumsConnectionName = config('railforums.brand_database_connection_names')[brand()];
+        \Railroad\Railforums\Services\ConfigService::$databaseConnectionName = $railforumsConnectionName;
+        config()->set('railforums.database_connection', $railforumsConnectionName);
+        config()->set('railforums.brand', brand());
+
         return $next($request);
     }
 }

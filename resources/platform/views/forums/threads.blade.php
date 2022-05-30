@@ -1,8 +1,8 @@
 @php
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
 @endphp
-@extends('forums.forumlayout')
+
+@extends('partials.layout')
 
 @section('meta')
     <title>{{$discussion['title']}} | Forums | {{ $brand }}</title>
@@ -13,7 +13,7 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('home'),
+                "url" => url()->route('platform.home', ['brand' => brand()]),
             ],
             [
                 "title" => "Forums",
@@ -33,7 +33,7 @@
                 "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                 "brand" => "{{ $brand }}",
                 "currentUser" =>$user,
-                'profileUrl' => url()->route('members.profile.dashboard', [auth()->id()]),
+                'profileUrl' => user()->getDashboardUrl(),
             ])
                 @slot('content')
                     <div class="tw-inline-flex tw-w-full tw-flex-col sm:tw-pr-4 sm:tw-mt-14">
@@ -57,14 +57,14 @@
                             <a href="{{ url()->route('forums.thread.create') }}?thread-title={{$discussion['title']}}"
                             class="tw-btn-primary tw-bg-{{ $brand }} sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                             dusk="create-post-button">
-                                <i class="fas fa-pencil tw-mr-2"></i> 
+                                <i class="fas fa-pencil tw-mr-2"></i>
                                 Create Thread
                             </a>
                             @if($isAdmin)
                                 <a href="{{ url()->route('forums.forum.update', $discussion['id']) }}"
                                 class="tw-btn-secondary  tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                                 dusk="create-post-button">
-                                    <i class="fas fa-pencil tw-mr-2"></i> 
+                                    <i class="fas fa-pencil tw-mr-2"></i>
                                     Edit Forum
                                 </a>
                             @endif

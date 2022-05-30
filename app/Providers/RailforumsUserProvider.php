@@ -100,8 +100,8 @@ class RailforumsUserProvider implements UserProviderInterface
 
         foreach ($users as $user) {
             $xp[$user->id]['xp'] = $user->total_xp;
-            $xp[$user->id]['xp_rank'] = map_experience_rank($user->total_xp);
-            $xp[$user->id]['level_rank'] = (array)$user->brand_method_levels[brand()] ?? '1.0';
+            $xp[$user->id]['xp_rank'] = $user->getXpRank();
+            $xp[$user->id]['level_rank'] = $user->getMethodLevel() ?? '1.0';
         }
 
         return $xp;
