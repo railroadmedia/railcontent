@@ -44,8 +44,8 @@ import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCat
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
 import PaymentMethods from './vue/vuesora/views/payment-methods';
-import ForumThreadsTable from './vue/vuesora/views/forum';
-import ForumThread from './vue/vuesora/views/forum/thread';
+import ForumThreadsTable from './vue/vuesora/views/forum/ForumThreadsTable.vue';
+import ForumThread from './vue/vuesora/views/forum/thread/ForumThread.vue';
 import TextEditor from './vue/vuesora/components/TextEditor';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';

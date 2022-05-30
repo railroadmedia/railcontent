@@ -3,7 +3,7 @@
     <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
 
         <!-- Forum Tabs -->
-        <div v-if="!onlyFollowed && showTabs" 
+        <div v-if="!onlyFollowed && showTabs"
             class="tw-flex tw-px-4 tw-mt-4">
             <div class="tw-flex tw-flex-col tw-mb-6">
                 <div class="tw-flex">
@@ -39,7 +39,7 @@
                         All New Threads
                     </h3>
                 </div>
-            </div>   
+            </div>
         </div>
 
         <!-- Search -->
@@ -121,12 +121,12 @@
                     Showing results for <span class="font-bold text-black">"{{ searchInterface }}"</span> in All Forums.
                 </p>
             </div>
-        </div>  
+        </div>
 
         <template v-if="!searching">
             <!-- Forum Items -->
             <div v-if="forumsArray.length !== 0" class="tw-mb-12">
-                <forum-item 
+                <forum-item
                     v-for="forum in forumsArray"
                     :key="forum.id"
                     :forum="forum"
@@ -147,15 +147,15 @@
                     <p class="tw-text-base">Any thread you reply to or follow will appear here.</p>
                 </template>
             </div>
-            
+
             <!-- Threads Table Header -->
             <div v-if="pinnedThreads.length !== 0 || threadsArray.length !== 0"
                 class="tw-flex tw-bg-gray-200 tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
-            >   
+            >
                 <div class="tw-uppercase tw-text-gray-500 tw-text-sm tw-font-bold tw-pl-8 tw-w-full lg:tw-w-9/12">
                     Thread Details
                 </div>
-                <div v-if="!showTabs && !onlyFollowed" 
+                <div v-if="!showTabs && !onlyFollowed"
                      class="tw-uppercase tw-mx-6 tw-w-52 tw-text-gray-500 tw-text-sm tw-font-bold tw-hidden tw-flex-shrink-0 xl:tw-inline-flex">
                     Forum
                 </div>
@@ -253,7 +253,7 @@ export default {
             default: () => '',
         },
         threadCount: {
-            type: Number | String,
+            type: Number,
             default: () => 0,
         },
         onlyFollowed: {
@@ -264,10 +264,10 @@ export default {
             type: Boolean,
             default: () => true,
         },
-      latestThreadsUrl: {
-        type: String,
-        default: () => '/threads/latest',
-      },
+        latestThreadsUrl: {
+          type: String,
+          default: () => '/threads/latest',
+        },
     },
     data() {
         return {

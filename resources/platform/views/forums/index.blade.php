@@ -57,7 +57,7 @@
                             theme-color="{{ $brand }}"
                             brand="{{ $brand }}"
                             :only-followed="true"
-                            latest-threads-url="{{ url()->route('forums.index.latest') }}"
+                            latest-threads-url="{{ '' }}"
                             :pinned-threads="{{ json_encode($pinnedThreads) }}"
                             :threads="{{ json_encode($threads) }}"
                             :forums="{{ json_encode($discussions) }}"
