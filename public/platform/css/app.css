@@ -22056,6 +22056,15 @@ a:visited{
 .tw-max-h-full{
   max-height: 100%;
 }
+.tw-max-h-\[80vh\]{
+  max-height: 80vh;
+}
+.tw-max-h-screen{
+  max-height: 100vh;
+}
+.tw-max-h-\[70vh\]{
+  max-height: 70vh;
+}
 .tw-min-h-screen{
   min-height: 100vh;
 }
