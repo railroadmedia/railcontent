@@ -40,7 +40,7 @@
                                 </a>
                             @endif
 
-                            <a href="/members/forums/platform-update-feedback-discussion/5/forum-rules/3"
+                            <a href="{{ \App\Modules\Brand\Services\BrandService::getForumsUrl() }}"
                                class="tw-btn-secondary sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto">
                                 <i class="fas fa-clipboard-list tw-mr-2"></i>
                                 <span>Forum Rules</span>

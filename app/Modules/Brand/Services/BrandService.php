@@ -83,4 +83,23 @@ class BrandService
 
         return $default;
     }
+
+    /**
+     * @return string|void
+     */
+    public static function getForumsUrl()
+    {
+        switch (self::getLastUsedBrand()) {
+            case 'drumeo':
+                return url()->route('forums.jump-to-post', [4721]);
+            case 'pianote':
+                return url()->route('forums.jump-to-post', [1]);
+            case 'guitareo':
+                return ''; // todo
+            case 'singeo':
+                return url()->route('forums.jump-to-post', [3]);
+            default:
+                return '';
+        }
+    }
 }
