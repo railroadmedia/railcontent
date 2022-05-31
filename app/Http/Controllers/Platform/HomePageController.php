@@ -17,6 +17,7 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends BaseController
@@ -25,6 +26,7 @@ class HomePageController extends BaseController
     private ContentFollowsService $contentFollowService;
     private LiveStreamEventService $liveStreamEventService;
     private UserMetricsService $userMetricsService;
+    private UserPlaylistsService $userPlaylistsService;
 
     /**
      * @param ContentService $contentService
@@ -34,12 +36,14 @@ class HomePageController extends BaseController
         ContentService $contentService,
         ContentFollowsService $contentFollowsService,
         LiveStreamEventService $liveStreamEventService,
-        UserMetricsService $userMetricsService
+        UserMetricsService $userMetricsService,
+        UserPlaylistsService $userPlaylistsService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
         $this->liveStreamEventService = $liveStreamEventService;
         $this->userMetricsService = $userMetricsService;
+        $this->userPlaylistsService = $userPlaylistsService;
     }
 
     public function homeRedirect()
@@ -445,27 +449,20 @@ class HomePageController extends BaseController
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
 
-        $usersPrimaryPlaylist = $this->contentService->getByUserIdTypeSlug(
-            user()->id,
-            'user-playlist',
-            'primary-playlist'
-        )
-            ->first();
+        $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => user()->id], [
+            'user_id' => user()->id,
+            'type' => 'primary-playlist',
+            'brand' => brand(),
+            'created_at' => Carbon::now()->toDateTimeString()
+        ]);
 
-        if (empty($usersPrimaryPlaylist)) {
+        if (empty($userPrimaryPlaylist)) {
             return (new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]));
         }
 
-        $usersPrimaryList = $this->contentService->getByParentIdWhereTypeInPaginated(
-            $usersPrimaryPlaylist['id'],
-            $this->parseContentTypes($contentTypes),
-            4
-        );
+        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents($userPrimaryPlaylist['id'], $this->parseContentTypes($contentTypes), 4);
 
-        $usersListTotalResults = $this->contentService->countByParentIdWhereTypeIn(
-            $usersPrimaryPlaylist['id'],
-            $contentTypes
-        );
+        $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents($userPrimaryPlaylist['id'], $contentTypes);
 
         return (new ContentFilterResultsEntity(
             ['results' => $usersPrimaryList, 'total_results' => $usersListTotalResults]
