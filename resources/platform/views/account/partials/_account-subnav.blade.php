@@ -4,7 +4,7 @@
         [
             'title' => 'Dashboard',
             'icon' => 'fas fa-tachometer',
-            'url' => url()->route('members.profile.dashboard', [auth()->id()]),
+            'url' => user()->getDashboardUrl(),
             'active' => Route::currentRouteNamed('members.profile.dashboard')
         ],
         [
