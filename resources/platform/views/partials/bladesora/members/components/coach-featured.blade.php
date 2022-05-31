@@ -1,75 +1,59 @@
 @if ($hasFeaturedCoaches)
-    <div class="tw-container tw-mt-2 tw-mb-6">
-        <div class="tw-flex tw-flex-row align-v-center pv-2 tw-mb-4">
-            <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
-                <i class="fas fa-star"></i>
-            </span>
-
-            <h2 class="heading tw-capitalize tw-flex-grow">
-                Featured Coaches
-            </h2>
-        </div>
-        <?php $singleFeaturedCoach = count($featuredCoaches->results()) === 1; ?>
-        <div class="tw-grid tw-grid-cols-1 tw-gap-6 {{ $singleFeaturedCoach ? '' : 'md:tw-grid-cols-2' }}">
-            @foreach ($featuredCoaches->results() as $featured)
-                <?php //dd($featured->dot()); ?>
-                <div class="tw-flex {{ $singleFeaturedCoach ? 'tw-flex-col md:tw-flex-row' : 'tw-flex-col' }}">
-                    <!-- Card Thumbnail -->
-                    <div class="{{ $singleFeaturedCoach ? 'md:tw-mr-6 md:tw-w-1/2' : 'md:tw-mr-0' }}">
-                        <a href="{{ $featured->fetch('url') }}" class="tw-w-full tw-flex tw-rounded-xl tw-mb-4 tw-bg-cover tw-bg-top tw-h-80 tw-bg-gray-200"
-                            style="background-image: url( {{ cf_img($featured->fetch('data.coach_featured_image'), ['width' => 720]) }} );">
-                            <span class="sr-only">Image of {{ $featured->fetch('fields.name') }}</span>
-                        </a>
-                    </div>
-                    <div
-                        class="tw-inline-flex tw-flex-col tw-justify-center {{ $singleFeaturedCoach ? 'md:tw-w-1/2' : '' }}">
-                        <!-- Card Header -->
-                        <div class="tw-flex tw-items-center tw-mb-4">
-                            <!-- Coach Headshot -->
-                            <a href="{{ $featured->fetch('url') }}"
-                                class="tw-mr-4 tw-rounded-full tw-relative tw-w-16 tw-h-16 tw-overflow-hidden tw-flex-shrink-0">
-                                <img class="tw-w-16 tw-h-16 tw-rounded-full tw-border-2 tw-border-solid tw-border-yellow-500"
-                                    src="{{ cf_img($featured->fetch('coach_profile_image'), ['width' => 300]) }} ">
-                                <!-- Badge -->
-                                <div
-                                    class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-3 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
-                                    <svg class="tw-block" width="10" height="10" aria-hidden="true" fill="white"
-                                        focusable="false">
-                                        <use href="#whistle"></use>
-                                    </svg>
-                                </div>
-                            </a>
-                            <!-- Header -->
-                            <a class="tw-text-2xl tw-text-black tw-no-underline tw-font-bold tw-uppercase tw-mr-4"
-                               href="{{ $featured->fetch('url') }}"
-                            >
-                                @php
-                                    $fullName = $featured->fetch('fields.name');
-                                    $exploded = explode(' ', $fullName);
-                                    $firstName = array_shift($exploded);
-                                @endphp
-                                <span class="tw-font-normal">{{ $firstName }}</span>
-                                {{ implode(' ', $exploded) }}
-                            </a>
-                            <!-- Buttons -->
-                            <a href="{{ $featured->fetch('url') }}"
-                                class="tw-btn tw-btn-primary tw-bg-{{ $brand }} tw-ml-auto tw-hidden hover:tw-bg-{{ $brand }}-600 {{ $singleFeaturedCoach ? '' : 'xl:tw-inline-flex' }}">
-                                SEE COACH
-                            </a>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="tw-flex tw-flex-col tw-mb-6">
-                            <h3 class="tw-text-xl tw-font-bold tw-uppercase tw-mb-4">
-                                {{ $featured->fetch('data.focus_text.value') }}
-                            </h3>
-                            <div class="tw-text-sm">{!! $featured->fetch('data.short_bio.value') !!}</div>
-                        </div>
-                        <!-- Buttons -->
-                        <a href="{{ $featured->fetch('url') }}"
-                            class="tw-btn tw-btn-primary tw-bg-{{ $brand }} tw-mr-auto hover:tw-bg-{{ $brand }}-600 {{ $singleFeaturedCoach ? '' : 'xl:tw-hidden' }}">SEE COACH</a>
-                    </div>
+    <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-[24px]">
+        <div class="tw-flex tw-flex-row tw-mb-3">
+            <div class="tw-flex tw-flex-col tw-flex-grow">
+                <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-[15px]">
+                        Featured Coach
+                    </h2>
                 </div>
-            @endforeach
+                {{-- There will be multiple featured coaches --}}
+                @php
+                $formattedResults = [];
+                @endphp
+                @foreach ($featuredCoaches->results() as $featured)
+                    @php
+                        $fullName = $featured->fetch('fields.name');
+                        $exploded = explode(' ', $fullName);
+                        $firstName = array_shift($exploded);
+
+                        $currentCoach = new stdClass();
+                        $currentCoach->ctaText = "Visit $firstName's Coach Page";
+                        $currentCoach->description = $featured->fetch('data.short_bio.value');
+                        $currentCoach->titleClasses = "tw-text-[#FAA300]";
+                        $currentCoach->title = $fullName;
+                        $currentCoach->topSubtitle = $featured->fetch('data.focus_text.value');
+                        $currentCoach->ctaUrl = $featured->fetch('url');
+                        $currentCoach->img = cf_img($featured->fetch('data.coach_featured_image'), ['width' => 720]);
+
+                        array_push($formattedResults, $currentCoach);
+                    @endphp
+                @endforeach
+                @if(count($formattedResults) === 1)
+                    <static-header
+                        top-subtitle="{{ $formattedResults[0]->topSubtitle }}"
+                        title-classes="{{ $formattedResults[0]->titleClasses }}"
+                        title="{{ $formattedResults[0]->title }}"
+                        cta-text="{{ $formattedResults[0]->ctaText }}"
+                        description="{{ $formattedResults[0]->description }}"
+                        cta-url="{{ $formattedResults[0]->ctaUrl }}"
+                        img="{{ $formattedResults[0]->img }}"
+                    />
+                @elseif(count($formattedResults) > 1)
+                    @php
+                        $slidesOnBrand = new stdClass();
+                        $slidesOnBrand->brand = $brand;
+                        $slidesOnBrand->slides = $formattedResults;
+                    @endphp
+                    {{-- Carousel --}}
+                    <header-carousel
+                        :preloaded-carousel="{{ json_encode([$slidesOnBrand]) }}"
+                        brand="{{ $brand }}">
+                    </header-carousel>
+                @else
+                <span></span>
+                @endif
+            </div>
         </div>
     </div>
 @endif

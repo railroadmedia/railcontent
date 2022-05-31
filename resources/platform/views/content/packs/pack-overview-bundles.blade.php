@@ -11,11 +11,11 @@
                 "pages" => [
                     [
                         "title" => 'Home',
-                        "url" => url()->route('members.home'),
+                        "url" => url()->route('platform.home', [brand()]),
                     ],
                     [
                         "title" => "Packs",
-                        "url" => url()->route('members.packs.index'),
+                        "url" => url()->route('platform.packs'),
                     ],
                     [
                         "title" => $pack->fetch('fields.title'),
@@ -74,6 +74,7 @@
                 "instructorInfo" => false,
                 "downloadableResources" => $pack['resources'] ?? [],
                 'addToList' => false,
+                'isAdded' => false,
                 'brand' => '{{ $brand }}',
             ])
 
@@ -84,14 +85,14 @@
                 ])
             @endif
 
-            <div class="tw-container tw-mx-auto tw-mt-2 tw-mb-3">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
                 <div class="tw-flex tw-flex-col">
 
                     <div class="tw-flex tw-flex-row pv-3">
-                        <h1 class="heading tw-capitalize">{{ $pack->fetch('fields.title') }}</h1>
+                        <h1 class="tw-text-[30px] tw-font-bold dark:tw-text-white tw-capitalize">{{ $pack->fetch('fields.title') }}</h1>
                     </div>
 
-                    <div class="tw-flex tw-flex-row bb-grey-1-1">
+                    <div class="tw-flex tw-flex-row tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57]">
                         <content-catalogue
                                 brand="{{ $brand }}"
                                 catalogue-type="grid"

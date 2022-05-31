@@ -20,6 +20,10 @@ class AuthenticateIfAvailable
     {
         $passed = Auth::guard('sanctum')->check();
 
+        if ($passed) {
+            auth()->setUser(Auth::guard('sanctum')->user());
+        }
+
         if (!$passed) {
             Auth::guard('user-management-system')->check();
         }

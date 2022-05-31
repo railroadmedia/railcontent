@@ -1,6 +1,6 @@
 <div class="flex flex-row flex-wrap pv">
     <div class="flex flex-column xs-6 sm-3 text-center user-stats-col">
-        <a href="{{ url()->route('members.profile.dashboard', [auth()->id()]) }}"
+        <a href="{{ user()->getDashboardUrl() }}"
            class="bg-white pa corners-10 text-black no-decoration relative">
             <div class="flex flex-column bg-{{ $brand }} square rounded relative stats-dial" dusk="xp-dial">
                 <div class="flex flex-column flex-center bg-white rounded stats-content">
@@ -47,7 +47,7 @@
         </a>
     </div>
     <div class="flex flex-column xs-6 sm-3 text-center user-stats-col">
-        <a @if(!$isPublic) href="{{ url()->route('members.profile.dashboard', [auth()->id()]) }}" @endif
+        <a @if(!$isPublic) href="{{ user()->getDashboardUrl() }}" @endif
            class="bg-white pa corners-10 text-black no-decoration relative">
 
             <div class="flex flex-column bg-{{ $brand }} square rounded relative stats-dial" dusk="member-time-dial">

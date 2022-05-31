@@ -13,10 +13,10 @@
         <div v-cloak>
 
             @component('partials._forum-header-banner',[
-                "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
+                "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                 "brand" => $brand,
                 "currentUser" =>$user,
-                'profileUrl' => url()->route('members.profile.dashboard', [auth()->id()]),
+                'profileUrl' => user()->getDashboardUrl(),
             ])
                 @slot('content')
                     <div class="tw-inline-flex tw-w-full tw-flex-col sm:tw-pr-4 sm:tw-mt-10">
@@ -40,9 +40,9 @@
                                 </a>
                             @endif
 
-                            <a href="/members/forums/platform-update-feedback-discussion/5/forum-rules/3" 
+                            <a href="{{ \App\Modules\Brand\Services\BrandService::getForumsUrl() }}"
                                class="tw-btn-secondary sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto">
-                                <i class="fas fa-clipboard-list tw-mr-2"></i> 
+                                <i class="fas fa-clipboard-list tw-mr-2"></i>
                                 <span>Forum Rules</span>
                             </a>
                         </div>
@@ -57,11 +57,12 @@
                             theme-color="{{ $brand }}"
                             brand="{{ $brand }}"
                             :only-followed="true"
-                            latest-threads-url="{{ url()->route('forums.index.latest') }}"
                             :pinned-threads="{{ json_encode($pinnedThreads) }}"
                             :threads="{{ json_encode($threads) }}"
                             :forums="{{ json_encode($discussions) }}"
                             :thread-count="{{ $threadCount }}"
+                            latest-threads-url="{{ url()->route('forums.show-all-latest-threads') }}"
+                            search-json-results-endpoint-url="{{ url()->route('forums.get-search-results-json') }}"
                         />
                     </div>
                 </div>

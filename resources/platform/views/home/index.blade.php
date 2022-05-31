@@ -10,7 +10,7 @@
         {{-- v-cloak: Wait Until Page Container has loaded --}}
         <div v-cloak>
 
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
                 {{-- On Boarding --}}
                 {{-- <onboarding></onboarding> --}}
@@ -24,8 +24,33 @@
                     brand="{{ $brand }}">
                 </header-carousel>
 
+                {{-- Invite Email Message --}}
+                @if(session()->has('email-invite-message'))
+                    <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
+                        <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#c7ff9b] tw-border tw-border-[#3fd525]">
+                            <h3 class="tw-text-black tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
+                        </div>
+                    </div>
+                @endif
+                {{-- Access Code Message --}}
+                @if(session()->has('access-code-claimed-success') && session()->get('access-code-claimed-success') == true)
+                    <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
+                        <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#eee]">
+                            <h3 class="tw-text-black tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Home Card Links -->
-                <home-card-links brand="{{ $brand }}"></home-card-links>
+                <home-card-links 
+                    brand="{{ $brand }}"
+                    :has-started-method="{{ !empty($hasStartedMethod) ? $hasStartedMethod : 'false' }}"
+                    :has-completed-method = "{{ !empty($hasCompletedMethod) ? $hasCompletedMethod : 'false' }}"
+                    completed-levels-url = "{{ $completedLevelsUrl }}"
+                    method-url="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : '/'.$brand.'/methods' }}"
+                    next-learning-path-lesson-title = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
+                    next-learning-path-level = "{{ $nextLearningPathLevel }}" 
+                ></home-card-links>
 
                 {{-- Continue Section --}}
                 @if($startedContentCount > 0)
@@ -73,7 +98,7 @@
 
                 {{-- Subscribed Coaches --}}
                 @component('partials.bladesora.members.components.home._coaches-section', [
-                    'brand' => 'drumeo',
+                    'brand' => brand(),
                     'hasSubscribedCoaches' => $hasSubscribedCoaches,
                     'subscribedCoaches' => $subscribedCoaches,
                     'subscribedCoachesUrl' => '', // todo: url
@@ -93,7 +118,7 @@
                 {{-- Live Banner --}}
                 <coach-event
                     brand="{{ $brand }}"
-                    :preloaded-content='{{ json_encode($coachEvent) }}'
+                    :preloaded-content='{{ $coachEvent }}'
                     current-date-string="{{ $currentDate }}"
                     subscription-calendar-id="{{ $calendarId }}"
                     youtube-event-id="{{ $youtubeId }}"
@@ -119,6 +144,7 @@
                     next-learning-path-level="{{ $nextLearningPathLevel }}"
                     :userMetrics="{{ json_encode($userMetrics) }}"
                 ></stats-section>
+
             </div>
         </div>
 

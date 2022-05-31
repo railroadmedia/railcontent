@@ -29,7 +29,7 @@ const emit = defineEmits(['onButtonClick'])
     <button
         type="button"
         @click="!isDisabled && emit('onButtonClick')"
-        :class="`MusoraButton tw-flex tw-items-center tw-justify-center tw-uppercase tw-font-bebas-neue tw-font-normal tw-font-bold tw-leading-[24px] tw-text-[20px] tw-rounded-[25px] tw-py-[13px] tw-px-[36px] tw-text-white ${
+        :class="`MusoraButton tw-flex tw-items-center tw-justify-center tw-uppercase tw-font-bebas-neue tw-leading-[24px] tw-text-[20px] tw-rounded-[25px] tw-py-[13px] tw-px-[36px] tw-text-white ${
             bgColor[brand]
         } ${classOverride} ${isDisabled ? 'MusoraButton__disabled' : ''}`"
     >

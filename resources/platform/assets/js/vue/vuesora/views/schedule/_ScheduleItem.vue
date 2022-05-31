@@ -38,7 +38,7 @@
             </p>
 
             <p class="x-tiny text-grey-3 text-truncate font-italic uppercase hide-md-up">
-                <span v-for="(item, i) in mappedData.column_data">
+                <span v-for="(item, i) in mappedData.column_data" :key="i">
                     <span
                         v-if="i > 0"
                         class="bullet"
@@ -53,9 +53,9 @@
             {{ releaseType }}
         </div>
 
-        <div
-            v-for="(item, i) in mappedData.column_data"
-            class="flex flex-column uppercase align-center basic-col text-grey-3 font-italic x-tiny hide-sm-down text-center"
+        <div v-for="(item, i) in mappedData.column_data"
+             :key="i"
+             class="flex flex-column uppercase align-center basic-col text-grey-3 font-italic x-tiny hide-sm-down text-center"
         >
             {{ item }}
         </div>
@@ -66,7 +66,7 @@
                 <i
                     class="add-to-list fas fa-plus flex-center pointer"
                     :class="is_added ? 'is-added ' + themeTextClass : 'text-grey-2'"
-                    :title="is_added ? 'Remove from list' : 'Add to list'"
+                    :title="is_added ? 'Remove from My List' : 'Add to My List'"
                     @click.stop.prevent="addToList"
                 ></i>
             </div>

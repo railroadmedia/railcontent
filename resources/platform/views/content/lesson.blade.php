@@ -20,8 +20,8 @@
                 <div class="tw-container tw-mx-auto p-lg-only lean">
                     {{-- Video Player --}}
                     @if ($lessonType == 'song')
-                        <youtube-player 
-                            ref="mediaElementVueInstance" 
+                        <youtube-player
+                            ref="mediaElementVueInstance"
                             video-id="{{ $rangesVideoIds['original'] ?? '' }}"
                             :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
                             :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
@@ -49,7 +49,7 @@
                         <div id="lessonVideoWrap">
                             @if (current_user()->getUseLegacyVideoPlayer() || $agent->isSamsung())
                                 <transition appear name="fade">
-                                    <video-media-element 
+                                    <video-media-element
                                         ref="mediaElementVueInstance" element-id="lessonPlayer"
                                         brand="{{ $brand }}"
                                         theme-color="{{ $brand }}" poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
@@ -73,7 +73,7 @@
                                 </transition>
                             @else
                                 <transition appear name="fade">
-                                    <video-player  
+                                    <video-player
                                         ref="mediaElementVueInstance"
                                         theme-color="{{ $brand }}"
                                         poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
@@ -137,7 +137,7 @@
                             email-subject="{{ $emailSubjectOverride ?? 'Question on Lesson: ' . $lessonContent->fetch('fields.title') . ' from: ' . current_user()->getEmail() }}"
                             email-type="{{ $emailTypeOverride ?? 'ask-question' }}" email-endpoint="/mailora/secure/send"
                             success-message="Your question has been sent!"
-                            user-avatar="{{ current_user()->getProfilePictureUrl() }}" :lesson-page="true" theme-color="{{ $brand }}">
+                            user-avatar="{{ user()->profile_picture_url }}" :lesson-page="true" theme-color="{{ $brand }}">
                         </email-form>
                     </div>
                 @endif
@@ -244,11 +244,11 @@
                     <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
                         <div class="tw-flex tw-flex-row">
                             <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"
-                                user-id="{{ current_user()->getId() }}" user-name="{{ current_user()->getDisplayName() }}"
-                                user-avatar="{{ current_user()->getProfilePictureUrl() }}"
+                                user-id="{{ current_user()->getId() }}" user-name="{{ user()->display_name }}"
+                                user-avatar="{{ user()->profile_picture_url }}"
                                 user-xp="{{ Railroad\Points\Services\UserPointsService::fetchPoints(current_user()->getId()) }}"
                                 user-access-level="{{ $userAccessLevel }}" profile-base-route="/members/profile/"
-                                :is-admin="{{ json_encode(current_user()->getPermissionLevel() === 'administrator') }}">
+                                :is-admin="{{ json_encode(user()->isAdmin()) }}">
                             </comments>
                         </div>
                     </div>

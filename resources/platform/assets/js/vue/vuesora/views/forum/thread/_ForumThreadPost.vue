@@ -23,12 +23,12 @@
                 <h2 class="tw-mb-1 tw-text-2xl tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal">
                     {{ post.authorUsername }}
                 </h2>
-                <div class="tw-text-sm tw-text-gray-500 tw-font-medium tw-uppercase tw-font-roboto-condensed tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
+                <div class="tw-text-sm tw-text-gray-500 tw-font-medium tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
                     <span>{{ post.authorTotalPosts }} Posts</span> -
                     <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
                 </div>
-                <div class="tw-inline-flex tw-text-sm tw-text-gray-500 tw-italic tw-font-medium tw-uppercase tw-font-roboto-condensed md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
+                <div class="tw-inline-flex tw-text-sm tw-text-gray-500 tw-italic tw-font-medium tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
                     <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
                     <span>&nbsp;- #{{ postNumber }}</span>
                 </div>

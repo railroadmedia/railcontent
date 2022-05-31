@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Decorators\Content\LessonAssignmentDecorator;
+use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypeHierarchyMap;
+use App\Maps\DrumeoShowDataMapper;
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +16,6 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Support\Collection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,26 +26,25 @@ class ContentPagesController extends BaseController
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
 
     /**
-     * @param  ContentService  $contentService
-     * @param  ContentFollowsService  $contentFollowsService
+     * @param ContentService $contentService
+     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      */
     public function __construct(
         ContentService $contentService,
-        ContentFollowsService $contentFollowsService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
     }
 
-    public function courses(Request $request, $domain)
+    public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
     {
         ConfigService::$availableBrands = [brand()];
         ContentRepository::$bypassPermissions = true;
 
-        $lessonType = 'course';
-        $catalogName = 'courses';
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[$catalogName] ?? [];
+        $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
+        $catalogName = $contentTypeName;
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
 
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
@@ -107,8 +107,23 @@ class ContentPagesController extends BaseController
 
         $isStudentFocus = in_array($lessonType, ['student-review', 'question-and-answer']);
 
+        $startedLessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            [$lessonType],
+            auth()->id(),
+            'started',
+            6,
+            0
+        );
+
+        $startedListLessons =
+            count($startedLessons) > 0 ?
+                (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
+        $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
+
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
+            "startedLessons" => $startedListLessons,
+            "hasStartedLessons" => $hasStartedLessons,
             "lessonType" => $lessonType,
             "sortOverride" => $sortOverride,
             "isStudentFocus" => $isStudentFocus,
@@ -182,7 +197,7 @@ class ContentPagesController extends BaseController
         }
 
         $progressLabelText =
-            $firstLevelContent->fetch('level_rank') ? 'Level - '.$firstLevelContent->fetch('level_rank') : '';
+            $firstLevelContent->fetch('level_rank') ? 'Level - ' . $firstLevelContent->fetch('level_rank') : '';
 
         return view(
             'content.overview',
@@ -246,7 +261,7 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - ' . $firstContent->fetch('level_rank');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -327,7 +342,7 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - ' . $firstContent->fetch('level_rank');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -360,8 +375,65 @@ class ContentPagesController extends BaseController
         );
     }
 
+    public function shows(Request $request, $domain, $brand)
+    {
+        $showsViewData = DrumeoShowDataMapper::cards();
+
+        return view('content.shows-index', ['shows' => $showsViewData]);
+    }
+
+    public function studentFocus(Request $request, $domain, $brand)
+    {
+        if (brand() === 'drumeo') {
+            return $this->contentTypeCatalog($request, $domain, $brand, 'student-focus');
+        }
+
+        if (brand() === 'pianote') {
+            $lessonTypes = [
+                [
+                    "type" => "student-reviews",
+                    "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg",
+                ],
+                [
+                    "type" => "question-and-answer",
+                    "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg",
+                ],
+            ];
+        }
+
+        if (brand() === 'guitareo') {
+            $lessonTypes = [
+                [
+                    "type" => "student-reviews",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png",
+                ],
+                [
+                    "type" => "question-and-answer",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/question-answer-singeo.png",
+                ],
+            ];
+        }
+
+        if (brand() === 'singeo') {
+            $lessonTypes = [
+                [
+                    "type" => "student-reviews",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/student-reviews.png",
+                ],
+                [
+                    "type" => "question-and-answer",
+                    "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/question-answer.png",
+                ],
+            ];
+        }
+
+        return view('content.student-focus', [
+            "lessonTypes" => $lessonTypes,
+        ]);
+    }
+
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @param $contentId
      * @return RedirectResponse
      */
@@ -414,6 +486,33 @@ class ContentPagesController extends BaseController
                     $hierarchyData->learning_path_id,
                     $hierarchyData->level_slug,
                     $hierarchyData->level_id,
+                    $contentRow->slug,
+                    $contentRow->id,
+                ]
+            );
+        }
+
+        if ($contentRow->type == 'pack-bundle') {
+            $hierarchyData =
+                DB::connection(config('railcontent.database_connection_name'))
+                    ->table('railcontent_content_hierarchy as ch_1')
+                    ->select(
+                        [
+                            'ch_1.parent_id as pack_id',
+                            'c_1.slug as pack_slug',
+                            'ch_1.child_position as child_position',
+                        ]
+                    )
+                    ->join('railcontent_content as c_1', 'c_1.id', '=', 'ch_1.parent_id')
+                    ->where('c_1.type', 'pack')
+                    ->where('ch_1.child_id', $contentId)
+                    ->first();
+
+            return redirect()->route(
+                'platform.packs.second-level',
+                [
+                    $hierarchyData->pack_slug,
+                    $hierarchyData->pack_id,
                     $contentRow->slug,
                     $contentRow->id,
                 ]

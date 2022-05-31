@@ -1,10 +1,10 @@
 @component('members.partials._header-banner', [
         'hideUser' => true,
         'backgroundImage' => $displayFoundations
-            ? 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg'
+            ? 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'
             : $featuredContent->fetch(
                 'data.header_image_url',
-                'https://singeo.s3.amazonaws.com/singeo-header-image.jpg'
+                'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'
             ),
     ])
     @slot('content')

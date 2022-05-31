@@ -17,7 +17,7 @@
                         "pageTitle" => $parentContent->fetch('fields.title'),
                         "overviewType" => $parentContent->fetch('type') == 'learning-path' ? ucwords(brand()) : $parentContent->fetch('type'),
                         "difficulty" => $parentContent->fetch('difficulty'),
-                        "backgroundImage" => 'https://singeo.s3.amazonaws.com/singeo-header-image.jpg',
+                        "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                         "avatarImage" => $parentContent->fetch('fields.instructor.data.head_shot_picture_url'),
                         "pageDescription" => $parentContent->fetch('data.description'),
                     ])
@@ -62,8 +62,8 @@
                 ])
             @endif
 
-            <div class="tw-container tw-mx-auto tw-px-4 mv-3">
-                <div class="tw-flex tw-flex-column">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4">
+                <div class="tw-flex tw-flex-col">
                     <div class="tw-flex tw-w-full tw-flex-row">
                         <content-catalogue
                             brand="{{ $brand }}"

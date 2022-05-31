@@ -115,3 +115,4 @@ dist
 auth.json
 
 storage/clockwork/*
+.env.*

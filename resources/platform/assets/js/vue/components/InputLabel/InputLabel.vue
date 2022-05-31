@@ -59,7 +59,6 @@ const onClear = () => {
 
 const onEnter = () => {
   emit("onEnter");
-  console.log("enter key pressed");
 };
 </script>
 
@@ -79,8 +78,8 @@ const onEnter = () => {
       <input
         :placeholder="placeholder"
         :id="id"
-        :class="`tw-h-[42px] tw-rounded-[63px] tw-text-black tw-border-[#D1D5DB] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
-          inputOverride ? inputOverride : ''
+        :class="`tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
+          inputOverride ? inputOverride : 'tw-text-black tw-border-[#D1D5DB]'
         }`"
         v-model="input"
         v-on:keyup.enter="onEnter"
@@ -90,7 +89,7 @@ const onEnter = () => {
         :type="inputType"
       />
       <div v-if="showClearButton" :class="`dark:tw-text-white tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'}`">
-        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-20" @click="onClear">
+        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">
           <XIcon class="tw-h-full tw-w-full" />
         </button>
       </div>

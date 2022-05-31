@@ -6,54 +6,71 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
         @yield('meta')
 
-        {{-- Google Fonts --}}
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-
         {{-- Icons --}}
         <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
         <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
 
+        {{-- Fonts --}}
+        @include('partials._fonts')
+
+        {{-- Favicons --}}
+        @include('partials._favicons')
+
         {{-- Styles --}}
         <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
-        @yield('layout-styles')
 
-        @include('partials._favicons')
+        @yield('styles')
     </head>
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
-        <!-- Modal Container -->
+        {{-- Notifications Container --}}
+        <div id="notifications-container"></div>
+
+        {{-- Modal Container --}}
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
-        <!-- App Container -->
+        {{-- App Container --}}
         <div id="app" class="flex-1">
             <app-container
                 :vue-router="false"
                 brand="{{ $brand }}"
             >
-                <page-container 
-                    brand="{{ $brand }}" 
-                    :is-live="true" 
+                <page-container
+                    brand="{{ $brand }}"
+                    :is-live="true"
                     :has-notifications="true"
-                    user-name="John Smith"
-                    user-avatar=""
-                    account-url=""
+                    user-name="{{ user()->display_name }}"
+                    user-avatar="{{ user()->profile_picture_url }}"
+                    account-url="{{ user()->getDashboardUrl() }}"
                     search-url=""
-                    :with-referral-button="true"
-                >   
+                >
                     @yield('content')
                 </page-container>
             </app-container>
         </div>
 
-        <!-- Scripts -->
+        {{-- Review Modals Must Be Global --}}
+        @if($brand === 'singeo')
+            @include('partials._review-modal-singeo')
+        @endif
+        @if($brand === 'guitareo')
+            @include('partials._review-modal-guitareo')
+        @endif
+        @if($brand === 'pianote')
+            @include('partials._review-modal-pianote')
+        @endif
+        @if($brand === 'drumeo')
+            @include('partials._review-modal-drumeo')
+        @endif
+
+        {{-- Scripts --}}
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
+            window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
         </script>
 
         @yield('layout-scripts')
-        <script src="{{ mix('platform/js/app.js') }}"></script>
+            <script src="{{ mix('platform/js/app.js') }}"></script>
         @yield('inject-components')
 
         {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}

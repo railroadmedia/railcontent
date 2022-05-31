@@ -81,13 +81,13 @@ export default {
     <section id="stats-section" class="tw-flex tw-flex-col tw-mb-5 tw-text-[#00101D] dark:tw-text-white tw-w-full">
 
         <!-- Section Title -->
-        <div class="tw-flex tw-items-center tw-mb-5 tw-w-full tw-justify-between">
+        <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
             <a href="" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
             </a>
             <a href="https://www.drumeo.com/laravel/public/members/profile" 
                 aria-label="See My Dashboard" 
-                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Dashboard
             </a>
@@ -125,7 +125,7 @@ export default {
                                 :class="textColor[brand]"
                 />
                 <h4 class="tw-text-3xl md:tw-text-5xl tw-my-1 tw-font-bold">{{ metric.value }}</h4> 
-                <h6 class="tw-text-xs md:tw-text-sm xl:tw-text-base tw-font-bold tw-tracking-wider tw-font-bebas-neue tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-px-5">{{ metric.label }}</h6>
+                <h6 class="tw-text-xs md:tw-text-sm xl:tw-text-base tw-font-bebas-neue tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-px-5">{{ metric.label }}</h6>
             </a> 
         </div>
     </section>

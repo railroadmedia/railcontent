@@ -11,9 +11,8 @@
 
         <div class="progress-bar bg-white ba-white-3 relative">
             <div class="progress bg-{{$brand}}" style="width:{{ $progress }}%">
-                <span
-                    class="amount text-white tiny font-bold
-                        {{ $progress < 20 ? ('text-'.$brand. ' right') : 'text-white' }}"
+                <span class="amount text-white tiny font-bold
+                      {{ $progress < 20 ? ('text-'.$brand. ' right') : 'text-white' }}"
                 >
                     {{ $progress }}%
                 </span>

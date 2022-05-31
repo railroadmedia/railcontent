@@ -1,4 +1,4 @@
-<div class="tw-relative tw-bg-black">
+<div class="tw-relative tw-bg-black tw--mb-7">
     <div class="tw-text-white">
         <div class="sm:tw-py-12 md:tw-py-12 lg:tw-py-16 tw-py-16 tw-px-14">
             <div class="tw-flex tw-flex-col-reverse lg:tw-flex-row">
@@ -29,10 +29,11 @@
                         <!-- Badge -->
                         <div
                             class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-6 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
-                            <svg class="tw-block" width="16" height="16" aria-hidden="true" fill="white"
-                                focusable="false">
-                                <use href="#whistle"></use>
-                            </svg>
+                            <musora-icon 
+                                icon-name="whistle-filled"
+                                height="20" 
+                                class="tw-text-white tw-w-[20px] tw-leading-none"
+                            ></musora-icon>
                         </div>
                     </div>
                 </div>

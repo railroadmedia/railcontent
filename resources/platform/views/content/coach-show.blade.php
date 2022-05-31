@@ -41,18 +41,19 @@
                 ])
             @endcomponent
 
-            <!-- Coach Event -->
-            @if(!empty($currentEvent))
-                <section class="tw-flex tw-py-2 tw-bg-gray-100">
-                    <coach-event brand="{{ $brand }}" :preloaded-content='{{ $coachEvent }}' current-date-string="{{ $currentDate }}"
-                        subscription-calendar-id="{{ $currentEventCalendarId }}" youtube-event-id="{{ $youtubeId }}"
-                        :time-cutoff-minutes="{{ $timeCutoffMinutes }}" event-coach-profile-url="{{ $eventCoachProfileUrl }}">
-                    </coach-event>
-                </section>
-            @endif
+            {{-- Live Banner --}}
+            <coach-event
+                brand="{{ $brand }}"
+                :preloaded-content='{{ $coachEvent }}'
+                current-date-string="{{ $currentDate }}"
+                subscription-calendar-id="{{ $currentEventCalendarId }}"
+                youtube-event-id="{{ $youtubeId }}"
+                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            ></coach-event>
 
             @if (session()->has('success-message'))
-                <div class="form-success-message tw-container tw-mx-auto tw-mt-3">
+                <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
                     <div class="tw-flex tw-flex-col bg-success tw-shadow corners-10 pa">
                         <p class="body tw-text-white">{{ session()->get('success-message') }}</p>
                     </div>
@@ -60,25 +61,29 @@
             @endif
 
             @if ($hasFeaturedLessons)
-                <div class="tw-container tw-mx-auto tw-mt-2 tw-mb-3">
+                <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-5 tw-mb-3">
                     <div class="tw-flex tw-flex-row tw-mb-3">
                         <div class="tw-flex tw-flex-col tw-flex-grow">
-                            <div class="tw-flex tw-flex-row align-v-center pv-2">
-                                <span class="tw-rounded tw-bg-{{ $brand }} tw-text-white icon-bg-circle body tw-mr-1">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </span>
-
-                                <h2 class="heading tw-capitalize tw-flex-grow">
+                            <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
+                                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">
                                     Featured Lessons
                                 </h2>
                             </div>
 
                             <div class="tw-flex tw-flex-row six-cards-row">
                                 <transition appear name="fade">
-                                    <content-catalogue brand="{{ $brand }}" theme-color="{{ $brand }}" :use-theme-color="true"
-                                        content-endpoint="/railcontent/content" catalogue-type="coach-grid" limit="16"
-                                        :lock-unowned="true" :four-wide="true" :force-wide-thumbs="true"
-                                        :pre-loaded-content="{{ $featuredLessons }}">
+                                    <content-catalogue 
+                                        brand="{{ $brand }}" 
+                                        theme-color="{{ $brand }}" 
+                                        :use-theme-color="true"
+                                        content-endpoint="/railcontent/content" 
+                                        catalogue-type="coach-grid" 
+                                        limit="16"
+                                        :lock-unowned="true" 
+                                        :six-wide="true" 
+                                        :force-wide-thumbs="true"
+                                        :pre-loaded-content="{{ $featuredLessons }}"
+                                    >
                                         <div class="tw-flex tw-flex-row nmh-1">
                                             @for ($i = 0; $i < 4; $i++)
                                                 @include('partials.bladesora.members.skeletons.card-item', [
@@ -118,15 +123,18 @@
                     $catalogueProps['searchBar'] = true;
                     $catalogueProps['totalResults'] = $totalResults;
                     $catalogueProps['paginate'] = true;
-                    $catalogueProps['fourWide'] = true;
+                    $catalogueProps['sixWide'] = true;
                 }
             @endphp
 
-            <div class="tw-container tw-mx-auto tw-mt-3 tw-mb-3">
-                <content-catalogue-container brand="{{ $brand }}" :catalogue-props="{{ json_encode($catalogueProps) }}">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-3">
+                <content-catalogue-container 
+                    brand="{{ $brand }}" 
+                    :catalogue-props="{{ json_encode($catalogueProps) }}"
+                >
                     @for ($i = 0; $i < ($limitOverride ?? 16); $i++)
                         @include('partials.bladesora.members.skeletons.card-item', [
-                            "cardClass" => 'four-wide',
+                            "cardClass" => 'six-wide',
                         ])
                     @endfor
                 </content-catalogue-container>

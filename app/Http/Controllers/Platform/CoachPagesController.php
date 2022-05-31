@@ -10,7 +10,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -139,7 +138,10 @@ class CoachPagesController extends Controller
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
-            $eventCoachUrl = url()->route('members.coaches.show', ['coachSlug' => $eventCoachSlug]);
+            $eventCoachUrl = url()->route(
+                'platform.content.coach.show',
+                ['firstContentSlug' => $currentEvent->fetch('slug'), 'firstContentId' => $currentEvent->fetch('id'),]
+            );
 
             $brandOverview = config('addevent.uniquekeys.brand-overview');
             $env = config('app.env') === 'production' ? 'prod' : 'sandbox';
@@ -294,7 +296,7 @@ class CoachPagesController extends Controller
             $request->get('included_user_states', [])
         );
 
-        $catalogueMeta = config('railcontent.cataloguesMetadata')['coaches'] ?? [];
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['coaches'] ?? [];
 
         //featured lessons for coach
         $featuredLessons = $this->contentService->getFiltered(

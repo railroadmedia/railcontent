@@ -1,6 +1,6 @@
-<div class="tw-container tw-mx-auto tw-px-4 bg-{{ $themeColor }}">
-    <div class="content-progress flex flex-row flex-wrap pv-3">
-        
+<div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 bg-{{ $themeColor }}">
+    <div class="content-progress flex flex-row flex-wrap pv-2">
+
         @if(!empty($labelText))
             <div class="flex flex-column left-column align-v-center">
                 <h3 class="display text-white nowrap">
@@ -40,7 +40,7 @@
         <div class="tw-flex tw-flex-col tw-text-white">
             @if(empty($showCompleteButton))
                 <a href="{{ $isCompleted ? $backButton['url'] : $nextLessonUrl }}"
-                   class="tw-btn-secondary tw-text-lg tw-mb-0 tw-tracking-wide tw-leading-[0] tw-border-[3px] tw-text-white">
+                   class="tw-btn-secondary tw-text-lg tw-mb-0 tw-leading-[0] tw-border-[3px] tw-text-white">
                     @if(!$isCompleted)
                         @if($isStarted)
                             Next Lesson &raquo;

@@ -94,7 +94,7 @@ module.exports = {
           }
         },
         '.font-bebas-neue': {
-          letterSpacing: '0.025em',
+          fontWeight: '400 !important', //force font weight
         }
       })
     })
