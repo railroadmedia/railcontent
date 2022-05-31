@@ -17,7 +17,7 @@
             ],
             [
                 "title" => "Forums",
-                "url" => url()->route('forums.index'),
+                "url" => url()->route('forums.show-categories'),
             ],
             [
                 "title" => $categoryTitle,
@@ -39,7 +39,8 @@
                 :thread="{{ $thread }}"
                 :current-user="{{ $currentUser }}"
                 previous-page="{{ $categoryUrl }}"
-                update-post-base-route={{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.post.jump-to',['#####']) }}
+                post-store-form-url="{{ url()->route('railforums.post.store').'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
+                update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
             />
 
         </div>

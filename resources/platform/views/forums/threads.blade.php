@@ -17,7 +17,7 @@
             ],
             [
                 "title" => "Forums",
-                "url" => url()->route('forums.index'),
+                "url" => url()->route('forums.show-categories'),
             ],
             [
                 "title" => $discussion['title'],
@@ -54,14 +54,14 @@
                         </p>
 
                         <div class="tw-inline-flex tw-items-center tw-flex-wrap header-buttons">
-                            <a href="{{ url()->route('forums.thread.create') }}?thread-title={{$discussion['title']}}"
+                            <a href="{{ url()->route('forums.show-create-thread-form') }}?thread-title={{$discussion['title']}}"
                             class="tw-btn-primary tw-bg-{{ $brand }} sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                             dusk="create-post-button">
                                 <i class="fas fa-pencil tw-mr-2"></i>
                                 Create Thread
                             </a>
                             @if($isAdmin)
-                                <a href="{{ url()->route('forums.forum.update', $discussion['id']) }}"
+                                <a href="{{ url()->route('forums.show-update-category-form', $discussion['id']) }}"
                                 class="tw-btn-secondary  tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                                 dusk="create-post-button">
                                     <i class="fas fa-pencil tw-mr-2"></i>

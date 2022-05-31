@@ -57,11 +57,11 @@
                             theme-color="{{ $brand }}"
                             brand="{{ $brand }}"
                             :only-followed="true"
-                            latest-threads-url="{{ '' }}"
                             :pinned-threads="{{ json_encode($pinnedThreads) }}"
                             :threads="{{ json_encode($threads) }}"
                             :forums="{{ json_encode($discussions) }}"
                             :thread-count="{{ $threadCount }}"
+                            latest-threads-url="{{ url()->route('forums.show-all-latest-threads') }}"
                         />
                     </div>
                 </div>

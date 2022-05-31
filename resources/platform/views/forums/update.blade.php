@@ -1,6 +1,7 @@
 @php
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
 @endphp
+
 @extends('partials.layout')
 
 @section('meta')
@@ -13,7 +14,7 @@
             <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
                 @include('partials.bladesora.members.forums.update-thread', [
                     "brand" => "{{ $brand }}",
-                    "forumUrl" => url()->route('forums.index'),
+                    "forumUrl" => url()->route('forums.show-categories'),
                     "formAction" => url()->route('railforums.thread.update', [$thread['id']]),
                     "thread" => $thread,
                     "method" => 'PATCH',
@@ -21,7 +22,7 @@
                 ])
 
                 <div class="tw-flex tw-flex-row pa tw-mt-5">
-                    <form action="{{ url()->route('railforums.thread.delete', [$thread['id']]) . '?redirect=' . url()->route('forums.index') }}"
+                    <form action="{{ url()->route('railforums.thread.delete', [$thread['id']]) . '?redirect=' . url()->route('forums.show-categories') }}"
                         method="POST"
                         onSubmit="confirm('Are you sure you wish to delete this thread?')"
                         class="tw-flex tw-items-center tw-pt-5">

@@ -46,8 +46,8 @@ import NotificationsTable from './vue/vuesora/views/notifications/NotificationsT
 import PaymentMethods from './vue/vuesora/views/payment-methods';
 import ForumThreadsTable from './vue/vuesora/views/forum/ForumThreadsTable.vue';
 import ForumThread from './vue/vuesora/views/forum/thread/ForumThread.vue';
-import TextEditor from './vue/vuesora/components/TextEditor';
-import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm';
+import TextEditor from './vue/vuesora/components/TextEditor/TextEditor.vue';
+import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';

@@ -19,6 +19,12 @@ return array(
     // database
     'database_connection_name' => 'musora_laravel_mysql_writer_only',
 
+    // url
+    // NOTE: this gets updated on the fly depending on the brand in the SetLastUsedBrandMiddleware
+    'jump_to_post_url_prefix' => '/brand/forums/jump-to-post/',
+    'jump_to_thread_url_prefix' => '/brand/forums/jump-to-thread/',
+    'forums_index_page_url' => '/brand/forums',
+
     // host does the db migrations, clients do not
     'data_mode' => 'host', // 'host' or 'client'
 
@@ -64,7 +70,7 @@ return array(
     'post_report_notification_class' => \Railroad\Railforums\Notifications\PostReport::class,
     'post_report_notification_channel' => 'mail',
     'post_report_notification_recipients' => ['julia@singeo.com'],
-    'post_report_notification_view_post_route' => 'forums.post.jump-to', // laravel route name, eg: 'railforums.api.post.show' or 'forums.post.jump-to'
+    'post_report_notification_view_post_route' => 'forums.jump-to-post', // laravel route name, eg: 'railforums.api.post.show' or 'forums.jump-to-post'
 
     'search' => [
         'high_value_multiplier' => 4,

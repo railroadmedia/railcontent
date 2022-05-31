@@ -2,7 +2,7 @@
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
 @endphp
 
-@extends('forums.forumlayout')
+@extends('partials.layout')
 
 @section('meta')
     <title>Update a Forum | {{ $brand }}</title>
@@ -14,14 +14,14 @@
             <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
                 @include('partials.bladesora.members.forums.update-forum', [
                     "brand" => "{{ $brand }}",
-                    "forumUrl" => url()->route('forums.index'),
+                    "forumUrl" => url()->route('forums.show-categories'),
                     "formAction" => url()->route('railforums.discussion.update', $forumId),
                     "method" => 'PATCH',
                 ])
             </div>
 
             <div class="tw-flex tw-flex-row pa tw-mt-5">
-                <form action="{{ url()->route('railforums.discussion.delete', [$forumId]) . '?redirect=' . url()->route('forums.index') }}"
+                <form action="{{ url()->route('railforums.discussion.delete', [$forumId]) . '?redirect=' . url()->route('forums.show-categories') }}"
                     method="POST"
                     onSubmit="confirm('Are you sure you wish to delete this forum?')"
                     class="tw-flex tw-flex-center tw-pt-5">
