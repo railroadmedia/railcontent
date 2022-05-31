@@ -91,7 +91,7 @@ class UserServiceProvider extends EloquentUserProvider
      */
     public function deleteRememberToken($token, $userId)
     {
-        RememberToken::query()->where(['token' => $token, 'user' => $userId])->delete();
+        RememberToken::query()->where(['token' => $token, 'user_id' => $userId])->delete();
     }
 
     /**

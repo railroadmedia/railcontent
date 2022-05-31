@@ -199,6 +199,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $sessionSalt;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [ 'first_name', 'last_name', 'location', 'birthday', 'biography', 'profile_picture_url', 'display_name'];
+
+    /**
      * @param array $attributes
      * @return void
      */
@@ -438,13 +445,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function sendPasswordResetNotification($token)
     {
-        $class = config('usora.password_reset_notification_class');
-
-        (new AnonymousNotifiable())->route(
-            config('usora.password_reset_notification_channel'),
-            $this->getEmailForPasswordReset()
-        )
-            ->notify(new $class($token));
+        //todo: to be configured
+//        $class = config('usora.password_reset_notification_class');
+//
+//        (new AnonymousNotifiable())->route(
+//            config('usora.password_reset_notification_channel'),
+//            $this->getEmailForPasswordReset()
+//        )
+//            ->notify(new $class($token));
     }
 
     /**

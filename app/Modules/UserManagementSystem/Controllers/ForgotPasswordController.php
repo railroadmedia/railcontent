@@ -1,8 +1,9 @@
 <?php
 
-namespace Railroad\Usora\Controllers;
+namespace Modules\UserManagementSystem\Controllers;
 
 use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,20 +15,14 @@ class ForgotPasswordController extends Controller
     /**
      * Send a reset link to the given user.
      *
-     * @param  Request $request
-     * @return RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse|JsonResponse
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $request->validate(
-            [
-                'email' => 'required|email|exists:' .
-                    config('usora.database_connection_name') .
-                    '.' .
-                    config('usora.tables.users') .
-                    ',email',
-            ]
-        );
+
+        //todo: check email exists also
+        $request->validate(['email' => 'required|email|']);
 
         $response =
             $this->broker()
@@ -35,20 +30,37 @@ class ForgotPasswordController extends Controller
                     $request->only('email')
                 );
 
-        if ($response === Password::RESET_LINK_SENT) {
-            session()->put('skip-third-party-auth-check', true);
+        if (!request()->expectsJson()) {
+            if ($response === Password::RESET_LINK_SENT) {
+                session()->put('skip-third-party-auth-check', true);
 
-            return redirect()
-                ->to(config('usora.login_page_path'))
-                ->with(
-                    'status',
-                    'Password reset link has been sent to your email.'
+                return redirect()
+                    ->to(config('usora.login_page_path'))  // todo: to be defined
+                    ->with(
+                        'status',
+                        'Password reset link has been sent to your email.'
+                    );
+            }
+
+            return back()->withErrors(
+                ['email' => 'Failed to reset password, please double check your email or contact support.']
+            );
+        } else {
+            if ($response === Password::RESET_LINK_SENT) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Password reset link has been sent to your email.',
+                    ]
                 );
+            }
+            return response()->json(
+                [
+                    'success' => false,
+                    'errors' => 'Failed to reset password, please double check your email or contact support.',
+                ]
+            );
         }
-
-        return back()->withErrors(
-            ['email' => 'Failed to reset password, please double check your email or contact support.']
-        );
     }
 
     /**
