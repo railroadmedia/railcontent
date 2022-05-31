@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
+use Railroad\MusoraApi\Contracts\ChatProviderInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         app()->instance(UserProviderInterface::class, app()->make(MusoraApiUserProvider::class));
         app()->instance(ProductProviderInterface::class, app()->make(MusoraApiProductProvider::class));
         app()->instance(RailTrackerProviderInterface::class, app()->make(RailTrackerProvider::class));
+        app()->instance(ChatProviderInterface::class, app()->make(MusoraApiChatProvider::class));
     }
 }
