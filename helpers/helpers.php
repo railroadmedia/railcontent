@@ -28,7 +28,7 @@ if (!function_exists('cf_img')) {
         if (empty($pathFromOriginOrUrl)) {
             return '';
         }
-        
+
         $urlString = 'https://musora.com/cdn-cgi/image/';
         $optionsStringArray = [];
 
@@ -67,10 +67,52 @@ if (!function_exists('possessivize')) {
     /**
      * @return string
      */
-    if (!function_exists('possessivize')) {
-        function possessivize($string)
-        {
-            return $string.'\''.($string[strlen($string) - 1] !== 's' ? 's' : '');
+    function possessivize($string)
+    {
+        return $string.'\''.($string[strlen($string) - 1] !== 's' ? 's' : '');
+    }
+}
+
+if (!function_exists('current_subdomain')) {
+    /**
+     * @return string
+     */
+    function current_subdomain()
+    {
+        $url = \Illuminate\Support\Facades\URL::current();
+
+        $parsedUrl = parse_url($url);
+
+        $host = explode('.', $parsedUrl['host']);
+
+        $subdomain = $host[0];
+
+        return $subdomain;
+    }
+}
+
+if(!function_exists('get_resource_icon')){
+    /**
+     * @param $filename
+     * @return string
+     */
+    function get_resource_icon($filename){
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        switch($extension){
+            case 'png':
+                return 'fa-file-text';
+            case 'pdf':
+                return 'fa-file-pdf';
+            case 'zip':
+                return 'fa-file-archive';
+            case 'mp3':
+            case 'wav':
+                return 'fa-file-audio';
+            case 'mp4':
+                return 'fa-file-video';
+            default:
+                return 'fa-cloud-download';
         }
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\NotificationPagesController;
+use App\Http\Controllers\Platform\PackPagesController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
@@ -31,8 +32,8 @@ Route::domain('{musoraDomain}')
         /*
          * Primary Content Pages
          */
-        Route::get('/{brand}/packs', [ContentPagesController::class, 'packs'])
-            ->whereIn('brand', all_brands())
+        Route::get('/{brand}/packs', [PackPagesController::class, 'index'])
+            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs');
 
         Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
@@ -47,29 +48,60 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', [Brand::Guitareo->value])
             ->name('platform.lessons');
 
-        Route::get('/{brand}/songs', [ContentPagesController::class, 'songs'])
+        Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
-            ->name('platform.songs');
-
-        Route::get('/{brand}/courses', [ContentPagesController::class, 'courses'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.courses');
-
-        Route::get('/{brand}/quick-tips', [ContentPagesController::class, 'quickTips'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.quick-tips');
+            ->whereIn('contentTypeName', [
+                'courses',
+                'songs',
+                'quick-tips',
+                'podcasts',
+                'question-and-answer',
+                'student-reviews',
+                'boot-camps',
+                'chords-and-scales',
+                'bootcamps',
+                'chords-scales',
+                'library',
+                'recording',
+                'play-alongs',
+                'archives',
+                'the-history-of-electronic-drums',
+                'backstage-secrets',
+                'student-collaborations',
+                'live-streams',
+                'solos',
+                'boot-amps',
+                'gear-guides',
+                'performances',
+                'in-rhythm', /* 2020 */
+                'challenges', /* 2020 */
+                'on-the-road', /* 2020 */
+                'diy-drum-experiments', /* 2019*/
+                'rhythmic-adventures-of-captain-carson', /* 2019*/
+                'study-the-greats', /* 2019*/
+                'rhythms-from-another-planet', /* 2019*/
+                'tama-drums', /* 2019*/
+                'paiste-cymbals', /* 2019*/
+                'behind-the-scenes', /* 2019*/
+//        'namm-2019', /* 2019*/
+//        'camp-drumeo-ah', /* 2019*/
+//        '25-days-of-christmas', /* 2019*/
+                'exploring-beats', /* 2018*/
+                'sonor-drums', /* 2018*/
+            ])
+            ->name('platform.content-type-catalog');
 
         Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
-            ->whereIn('brand', all_brands())
+            ->whereIn('brand', ['drumeo'])
             ->name('platform.shows');
-
-        Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])
-            ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
-            ->name('platform.play-alongs');
 
         Route::get('/{brand}/student-focus', [ContentPagesController::class, 'studentFocus'])
             ->whereIn('brand', all_brands())
             ->name('platform.student-focus');
+
+        Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])
+            ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
+            ->name('platform.play-alongs');
 
         Route::get('/{brand}/rudiments', [ContentPagesController::class, 'rudiments'])
             ->whereIn('brand', [Brand::Drumeo->value])
@@ -108,6 +140,17 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.content.coach.show');
+
+        /*
+         * Packs Sub-Content Hierarchy Pages
+         */
+        Route::get('/{brand}/packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
+            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->name('platform.packs.first-level');
+
+        Route::get('/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}', [PackPagesController::class, 'packBundleLessons'])
+            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->name('platform.packs.second-level');
 
         /*
          * Catch-All Sub-Content Hierarchy Pages
@@ -177,7 +220,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.forums.category');
 
-        Route::get('/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}', [ForumPagesController::class, 'thread'])
+        Route::get(
+            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
+            [ForumPagesController::class, 'thread']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.forums.thread');
 

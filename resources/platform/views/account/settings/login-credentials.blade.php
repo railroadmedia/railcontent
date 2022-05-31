@@ -6,11 +6,12 @@
 
 @section('edit-forms')
     <div id="editForm" class="tw-flex tw-flex-col">
-        <div class="tw-flex tw-flex-row pa-3 bb-grey-1-1 tw-flex-auto">
-            <h1 class="heading">Login Credentials</h1>
+        
+        <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
+            <h1 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">Login Credentials</h1>
         </div>
 
-        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
+        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
             @include('partials.bladesora.members.account.settings.login-credentials.email-form', [
                 'brand' => brand(),
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',
@@ -30,7 +31,7 @@
            ])
         </div>
 
-        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1 body">
+        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto body">
             @include('partials.bladesora.members.account.settings.login-credentials.password-form', [
                 'brand' => '{{ $brand }}',
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',

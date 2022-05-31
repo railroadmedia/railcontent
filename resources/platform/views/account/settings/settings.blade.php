@@ -5,21 +5,22 @@
 @endsection
 
 @section('edit-forms')
-    <div class="tw-flex tw-flex-col pa-3 tw-flex-auto">
-        <h1 class="heading">Settings</h1>
+    <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
+        <h1 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">Settings</h1>
     </div>
+
     <div class="tw-flex tw-flex-row">
-        <div id="editForm" class="tw-flex tw-flex-col">
+        <div id="editForm" class="tw-flex tw-flex-col tw-w-full">
             <form method="POST" action="/usora/user/update/{{ user()->id }}">
                 <input type="hidden" name="redirect" value="{{ url()->current() }}">
                 {{ method_field('PATCH') }}
                 {{ csrf_field() }}
 
-                <div class="tw-flex tw-flex-row tw-flex-auto bt-grey-1-1 pa-3">
-                    <h2 class="subheading">When would you like to receive email notifications?</h2>
+                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
+                    <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
 
-                <div class="tw-flex tw-flex-row ph-3 pb-3">
+                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
@@ -64,10 +65,11 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row tw-flex-auto bt-grey-1-1 pa-3">
-                    <h2 class="subheading">How often would you like to receive email notifications?</h2>
+                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
+                    <h2 class="tw-font-bold tw-text-lg">How often would you like to receive email notifications?</h2>
                 </div>
-                <div class="tw-flex tw-flex-row ph-3 pb-3">
+
+                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.radio-input', [
@@ -91,14 +93,18 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row tw-flex-auto bt-grey-1-1 pa-3" style="padding-bottom: 10px;">
-                    <h2 class="subheading">Would you like to use our legacy video player?</h2>
-                </div>
-                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">
-                    <p class="body">Our video player may have compatibility issues with older devices and operating systems. <br>We recommend switching to our legacy video player if you are experiencing playback issues.</p>
+                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
+                    <h2 class="tw-font-bold tw-text-lg">Would you like to use our legacy video player?</h2>
                 </div>
 
-                <div class="tw-flex tw-flex-row ph-3 pb-3 pt-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">
+                    <p class="body tw-text-black dark:tw-text-white tw-mb-3">
+                        Our video player may have compatibility issues with older devices and operating systems. 
+                        <br>We recommend switching to our legacy video player if you are experiencing playback issues.
+                    </p>
+                </div>
+
+                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-3 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
@@ -112,15 +118,11 @@
                 </div>
 
                 <div class="tw-flex tw-flex-row pa-3">
-                    <button class="btn collapse-150" type="submit">
-                        <span class="tw-bg-{{ $brand }} tw-text-white short">
-                            Save
-                        </span>
+                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white tw-btn-small" type="submit">
+                        Save
                     </button>
-                    <button class="btn collapse-150 tw-ml-1" type="reset">
-                        <span class="flat tw-text-black short">
-                            Cancel
-                        </span>
+                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent tw-text-black dark:tw-text-white tw-ml-1" type="reset">
+                        Cancel
                     </button>
                 </div>
             </form>

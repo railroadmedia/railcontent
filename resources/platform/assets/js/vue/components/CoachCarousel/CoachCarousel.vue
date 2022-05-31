@@ -3,10 +3,15 @@ import { ref } from "vue";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import SingleCoach from "./SingleCoach.vue";
 import { textColor } from "../../../constants/brands";
+import EmptyState from "./EmptyState.vue";
 
 const props = defineProps({
   coachResults: {
     type: Object,
+  },
+  searchString: {
+    type: String,
+    default: ''
   },
   brand: {
     type: String,
@@ -79,7 +84,7 @@ function onWheelScroll(e) {
 </script>
 
 <template>
-  <div class="tw-relative tw-mb-[20px] md:tw-mb-[40px]">
+  <div class="tw-relative tw-mb-[20px] md:tw-mb-[40px]" v-if="coachResults.length > 0">
     <div
       :class="`lg:tw-w-[948px] 2xl:tw-w-[1350px] sm:tw-w-[640px] tw-w-[100vw] tw-overflow-hidden ${gradientMaskMap[currentGradientBorder]}`"
       style="overflow-x: scroll"
@@ -148,6 +153,9 @@ function onWheelScroll(e) {
     >
       <ChevronRightIcon :class="`tw-p-[12px] ${textColor[brand]}`" />
     </button>
+  </div>
+  <div v-if="coachResults.length === 0">
+    <EmptyState :typedText="searchString" />
   </div>
 </template>
 

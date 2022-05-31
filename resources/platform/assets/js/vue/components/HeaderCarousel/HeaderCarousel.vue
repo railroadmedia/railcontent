@@ -80,8 +80,9 @@ onMounted(() => {
   <div
     class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4">
     <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :key="slide.title"
-      :topSubtitle="slide.topSubtitle" :title="slide.title" :ctaText="slide.ctaText" :description="slide.description"
-      :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval" @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" />
+      textContentOverride="tw-pb-[26px]" :topSubtitle="slide.topSubtitle" :title="slide.title" :ctaText="slide.ctaText"
+      :description="slide.description" :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval"
+      @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" />
 
     <!-- Directional Buttons -->
     <div :key="`carousel-directional-buttons`"

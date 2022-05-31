@@ -544,7 +544,7 @@ export default {
         a {
             color: #FFF;
             padding: 12px;
-            font: 700 17px "Roboto Condensed",sans-serif;
+            font: 700 17px "Bebas Neue",sans-serif;
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 50px;

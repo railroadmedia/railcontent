@@ -210,6 +210,12 @@ if(!function_exists('parse_lesson_type_readable')){
             case 'semester-pack-lesson':
                 $parsedType = 'Pack';
                 break;
+            case 'pack-bundle':
+                $parsedType = 'Pack';
+                break;
+            case 'pack-bundle-lesson':
+                $parsedType = 'Pack';
+                break;
             case 'student-review':
                 $parsedType = 'Student Reviews';
                 break;

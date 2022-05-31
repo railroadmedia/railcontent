@@ -15,7 +15,7 @@
             @slot('content')
                 <div class="tw-flex tw-flex-col tw-pr-1">
                     <h1 class="heading tw-text-white tw-flex tw-flex-row tw-justify-start tw-mb-2">
-                        <musora-icon icon-name="whistle" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        <musora-icon icon-name="whistle-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         Coaches
                     </h1>
 
@@ -43,11 +43,11 @@
             event-coach-profile-url="{{ $eventCoachProfileUrl }}"
         ></coach-event>
 
-        <!-- Featured Coaches -->
+        {{-- Featured Coach --}}
         @component('partials.bladesora.members.components.coach-featured', [
             'hasFeaturedCoaches' => $hasFeaturedCoaches,
             'featuredCoaches' => $featuredCoaches,
-            'brand' => '{{ $brand }}',
+            'brand' => $brand,
         ])
         @endcomponent
 

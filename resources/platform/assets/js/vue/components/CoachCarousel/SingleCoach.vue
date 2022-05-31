@@ -141,7 +141,7 @@ function onFollow(e) {
         class="
           tw-text-yellow-400
           tw-font-open-sans
-          tw-fluid-text-sm-xs
+          tw-text-xs
           tw-h-8
           tw-leading-snug
           tw-mb-8
@@ -175,6 +175,7 @@ function onFollow(e) {
 
 .single-coach:hover .single-coach__bell {
   opacity: 1;
+  transform: rotate(15deg);
 }
 
 .single-coach:hover {

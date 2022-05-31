@@ -280,6 +280,14 @@
     pointer-events: none;
     z-index: 1;
   }
+  body.tw-dark & {
+    input[type="radio"]:checked ~ .toggle {
+      background-color:#445F74;
+    }
+    .toggle {
+      background-color:#E4E4E7;
+    }
+  }
 }
 
 .toggle-input {
@@ -355,13 +363,27 @@
       transition:transform .2s ease-in-out;
     }
   }
+  //dark mode...
+  body.tw-dark & {
+    input[type="checkbox"] {
+      &:checked ~ .toggle {
+        background-color:#445F74;
+      }
+    }
+    .toggle {
+      background-color:#E4E4E7;
+    }
+  }
 }
 
+
+
+//Force these styles (for now)
 textarea {
-  resize:none;
-  height:150px;
-  padding-top:15px;
-  border-radius:10px;
+  resize:none !important;
+  height:150px !important;
+  padding-top:15px !important;
+  border-radius:10px !important; 
 
   label {
     justify-content:flex-start;

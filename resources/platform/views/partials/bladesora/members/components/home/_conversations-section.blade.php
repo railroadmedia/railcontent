@@ -8,7 +8,7 @@
             </a>
             <a href="{{ $forumUrl }}" 
                 aria-label="See All Popular Conversations" 
-                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Forums
             </a>

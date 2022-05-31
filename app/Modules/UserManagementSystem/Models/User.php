@@ -169,6 +169,10 @@ use Illuminate\Support\Facades\Hash;
  * @method static Builder|User whereAccessLevel($value)
  * @method static Builder|User whereBrandMethodLevels($value)
  * @method static Builder|User whereTotalXp($value)
+ * @property string|null $membership_expiration_date
+ * @property int $is_lifetime_member
+ * @method static Builder|User whereIsLifetimeMember($value)
+ * @method static Builder|User whereMembershipExpirationDate($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -330,8 +334,20 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return bool
      */
-    public function isSubscriber()
+    public function isAMember()
     {
+        return true; // todo: connect
+    }
+
+    /**
+     * @return bool
+     */
+    public function isALifetimeMember($brand = null)
+    {
+        if ($brand == 'drumeo') {
+
+        }
+
         return true; // todo: connect
     }
 

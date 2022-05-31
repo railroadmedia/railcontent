@@ -63,7 +63,7 @@
                             </a>
                             <a href="{{ '' }}"
                                 dusk="see-all-started"
-                                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                                class="tw-text-base lg:tw-text-lg lg:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                             >
                                 See All
                             </a>
@@ -97,7 +97,7 @@
                             </a>
                             <a href="{{ '' }}"
                                 dusk="see-all-started"
-                                class="tw-tracking-wider tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                                class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                             >
                                 See All
                             </a>

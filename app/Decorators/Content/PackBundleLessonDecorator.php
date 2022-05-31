@@ -43,16 +43,10 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
                             if ($parentParent['slug'] == 'piano-technique-made-easy' ||
                                 $parentParent['slug'] == 'de-stupefy-your-left-hand' ||
                                 $parentParent['slug'] == 'victoria-theodore-teaches-classical-piano') {
-                                $contentsOfType[$contentIndex]['url'] = url()->route(
-                                    'members.packs.bundle.lesson',
-                                    [$parentParent['slug'], $parent['slug'], $content['slug'], $content['id']]
-                                );
                             } else {
-                                $contentsOfType[$contentIndex]['url'] = url()->route(
-                                    'members.packs.lesson',
-                                    [$parentParent['slug'], $content['slug'], $content['id']]
-                                );
+
                             }
+
                             if (!empty($content['resources']) || !empty($parent['resources']??[]) || !empty($parentParent['resources']??[])) {
                                 $contentsOfType[$contentIndex]['resources'] = array_merge(
                                     $contentsOfType[$contentIndex]['resources'] ?? [],
@@ -65,10 +59,6 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
 
                 }
             }
-            $contentsOfType[$contentIndex]['mobile_app_url'] = url()->route(
-                'mobile.content.show',
-                [$content['id']]
-            );
         }
 
         PackBundleDecorator::$skip = false;

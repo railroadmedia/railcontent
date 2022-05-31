@@ -58,7 +58,7 @@ export default {
         isSidebarCollapsed.value = val;
         isSidebarHidden.value = val;
       } else {
-        const smallBreakpoint = window.matchMedia("(max-width: 767px)");
+        const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
         if (smallBreakpoint.matches) {
           isSidebarHidden.value = !isSidebarHidden.value;
           isSidebarCollapsed.value = false;
@@ -153,7 +153,7 @@ export default {
     <div
       class="
         tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
-        dark:tw-bg-[#000C17]
+        dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
         tw-overflow-hidden
       "
     >

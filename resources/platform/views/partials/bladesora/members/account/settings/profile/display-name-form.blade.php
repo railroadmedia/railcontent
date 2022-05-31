@@ -34,7 +34,7 @@
                     {{ csrf_field() }}
 
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-1">
-                        <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-col tw-w-full">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
                                 "brand" => $brand,
                                 "type" => "text",
@@ -49,7 +49,7 @@
 
                     <div class="tw-flex tw-flex-row ph-3 tw-pb-3">
                         <button class="btn collapse-150 tw-mr-1">
-                            <span class="tw-bg-{{ $brand }} tw-text-white corners-10 short">
+                            <span class="tw-bg-{{ $brand }} tw-text-white corners-10 short tw-font-bebas-neue">
                                 Save
                             </span>
                         </button>

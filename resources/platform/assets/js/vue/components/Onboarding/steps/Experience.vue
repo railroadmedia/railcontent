@@ -66,7 +66,7 @@ function goBack() {
           <ExperienceCardContent
             title="Level 1"
             subtitle="Start from the beginning. No experience required!"
-            color="green"
+            level="1"
           />
         </SquaredCard>
         <SquaredCard
@@ -78,7 +78,7 @@ function goBack() {
           <ExperienceCardContent
             title="Level 2-3"
             subtitle="For beginners who can hold your sticks, set-up your kit, and can play a few beats and fills"
-            color="blue"
+            level="2-3"
           />
         </SquaredCard>
         <SquaredCard
@@ -90,7 +90,7 @@ function goBack() {
           <ExperienceCardContent
             title="Level 4-6"
             subtitle="For intermediate player who are comfortable playing some songs and have some hand and foot independence."
-            color="yellow"
+            level="4-6"
           />
         </SquaredCard>
         <SquaredCard
@@ -102,7 +102,7 @@ function goBack() {
           <ExperienceCardContent
             title="Level 7-10"
             subtitle="For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills."
-            color="red"
+            level="7-10"
           />
         </SquaredCard>
       </SquaresContainer>

@@ -1,6 +1,6 @@
 @foreach($fields as $key => $value)
     @if($value || !empty($showEmpty))
-        <div class="tw-flex tw-flex-row text-field tw-flex-auto tw-mb-1">
+        <div class="tw-flex tw-flex-row text-field tw-flex-auto tw-mb-2 tw-w-full tw-text-black dark:tw-text-white">
             <div class="tw-flex tw-flex-col key">
                 <p class="tw-font-bold">{{ ucwords($key) }}</p>
             </div>

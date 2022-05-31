@@ -1,5 +1,5 @@
 <div id="instructorInfo" class="tw-container tw-mx-auto fluid bg-grey-5">
-    <div class="tw-container tw-mx-auto lean pv-2">
+    <div class="tw-max-w-screen-2xl tw-px-4 md:tw-px-8 tw-mx-auto lean pv-2">
         @if(!empty($lessonList))
             <div class="tw-flex tw-flex-row">
                 <h6 class="body tw-font-bold tw-uppercase tw-text-white tw-mb-1">Course Lessons</h6>
@@ -21,7 +21,7 @@
             <div  class="tw-flex tw-flex-row mb-3">
                 <div class="tw-flex tw-flex-col tw-flexgrow tw-text-white">
                     <div id="collapsableInfo">
-                        <h6 class="body tw-font-bold tw-uppercase tw-mb-1">{{ $contentDescriptionHeader ?? 'About the Lesson' }}</h6>
+                        <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">{{ $contentDescriptionHeader ?? 'About the Lesson' }}</h6>
                         <div class="body">
                             {!! $contentDescription !!}
                         </div>
@@ -33,7 +33,7 @@
         @if(!empty($contentChapters))
             <div class="tw-flex tw-flex-row mb-3">
                 <div class="tw-flex tw-flex-col tw-flexgrow tw-text-white">
-                    <h6 class="body tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
+                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
                     @foreach($contentChapters as $chapter)
                         <p class="body tw-text-white">
                             <a class="tw-font-bold font-underline"
@@ -49,7 +49,7 @@
                 <div  class="tw-flex tw-flex-row mb-3">
                     <div class="tw-flex tw-flex-col tw-flexgrow tw-text-white">
                         <div id="collapsableInfo">
-                            <h6 class="body tw-font-bold tw-uppercase tw-mb-1">About {{ $instructor->fetch('fields.name') }}</h6>
+                            <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About {{ $instructor->fetch('fields.name') }}</h6>
                             <div class="body">
                                 {!! $instructor->fetch('data.biography')  !!}
                             </div>
@@ -63,7 +63,7 @@
     </div>
 </div>
 <div class="tw-container tw-mx-auto fluid">
-    <div class="tw-flex tw-flex-col align-center">
+    <div class="tw-flex tw-flex-col tw-items-center">
         <div id="toggleInstructorInfo" class="tw-text-center bg-grey-5 tw-text-white tw-pointer" style="margin-bottom: -20px;">
             <span class="x-tiny tw-uppercase tw-font-bold">Info</span>
             <i class="fas fa-chevron-down"></i>

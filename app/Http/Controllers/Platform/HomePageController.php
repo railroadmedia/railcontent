@@ -74,7 +74,7 @@ class HomePageController extends BaseController
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
 
-        $userHasInteractedWithDrumeoMethod = $methodContent['started'];
+        $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
 
         $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
@@ -191,8 +191,8 @@ class HomePageController extends BaseController
             "usersList" => $usersList->toResponseRawJson(),
             "usersListCount" => $usersList->totalResults(),
             "userMetrics" => $userMetrics,
-            "displayMethod" => !$userHasInteractedWithDrumeoMethod,
-            "userHasInteractedWithDrumeoMethod" => $userHasInteractedWithDrumeoMethod,
+            "displayMethod" => !$hasStartedMethod,
+            "userHasInteractedWithDrumeoMethod" => $hasStartedMethod,
             "nextLearningPathLesson" => $nextLearningPathLesson,
             "nextLearningPathLessonUrl" => $nextLearningPathLessonUrl,
             "nextLearningPathLevel" => $nextLearningPathLevel,
@@ -216,6 +216,8 @@ class HomePageController extends BaseController
             'hasUpcomingEvents' => $upcomingEvents->totalResults() > 0,
             'coachOfTheMonth' => $coachOfTheMonth->first(),
             'hasCompletedMethod' => $hasCompletedMethod,
+            'hasStartedMethod' => $hasStartedMethod,
+            'methodUrl' => $methodContent['url'] ?? '',
             'completedLevelsUrl' => $methodContent['url'] ?? '',
         ]);
     }
@@ -564,7 +566,7 @@ class HomePageController extends BaseController
         // Only take 4 items since that's all we need
         $recentShowTypes = array_slice($recentShowTypes, 0, 6);
 
-        $showData = config('railcontent.cataloguesMetadata');
+        $showData = config('railcontent.cataloguesMetadata')[brand()];
         $showTypes = [];
 
         // Map the shows meta data to the array

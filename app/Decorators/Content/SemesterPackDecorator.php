@@ -20,17 +20,9 @@ class SemesterPackDecorator extends TypeDecoratorBase
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $contentsOfType[$contentIndex]['url'] = url()->route('semester-packs.lessons', [$content['slug']]);
-            $contentsOfType[$contentIndex]['mobile_app_url'] = url()->route(
-                'mobile.semester-packs.lessons',
-                [
-                    $content['id'],
-                ]
-            );
-
             if (($content['completed'] ?? false) !== true) {
-                $contentsOfType[$contentIndex]['next_lesson_url'] =
-                    url()->route('packs.jump-to-next-lesson', [$content['id']]);
+//                $contentsOfType[$contentIndex]['next_lesson_url'] =
+//                    url()->route('packs.jump-to-next-lesson', [$content['id']]);
             }
         }
 

@@ -10,16 +10,20 @@
       style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
     >
       <h3
-        class="tw-uppercase tw-font-bebas-neue tw-text-white tw-fluid-text-2xl-base tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
+        class="tw-uppercase tw-font-bebas-neue tw-text-white tw-text-2xl xl:tw-text-3xl tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
       >
         <span>{{ coachFirstName }}</span
         ><br />
         <span v-if="hasLastName">{{ coachLastName }}</span>
       </h3>
-      <p class="tw-text-yellow-400 tw-fluid-text-sm-xs tw-h-8 tw-leading-snug tw-mb-8 tw-uppercase">{{ coachFocus }}</p>
-      <div v-if="item.is_house_coach" class="tw-text-white tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
-        <svg width="11" height="11" fill="#ffffff" class="tw-mr-1" aria-hidden="true" focusable="false"><use xlink:href="#whistle"></use></svg>
-        HOUSE
+      <p class="tw-text-yellow-400 tw-text-xs tw-h-8 tw-leading-snug tw-mb-8 tw-uppercase">{{ coachFocus }}</p>
+      <div v-if="item.is_house_coach" class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+        <musora-icon 
+            icon-name="whistle-filled"
+            height="12" 
+            class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
+        ></musora-icon>
+        <span class="tw-mt-1 tracking-wider">HOUSE</span>
       </div>
     </div>
 

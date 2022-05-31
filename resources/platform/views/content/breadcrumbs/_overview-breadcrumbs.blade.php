@@ -58,12 +58,32 @@
             ]
         ]
     ])
+@elseif($parentContent->fetch('type') === 'pack-bundle')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+            [
+                "title" => 'Home',
+                "url" => url()->route('platform.home'),
+            ],
+            [
+                "title" => 'Packs',
+                "url" => url()->route('platform.packs'),
+            ],
+            [
+                "title" => $pack->fetch('fields.title'),
+                "url" => $pack->fetch('url'),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ]
+    ])
 @else
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home'),
+                "url" => url()->route('platform.home'),
             ],
             [
                 "title" => parse_lesson_type_readable($parentContent->fetch('type'), true),
