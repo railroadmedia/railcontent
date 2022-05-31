@@ -62,6 +62,7 @@
                             :forums="{{ json_encode($discussions) }}"
                             :thread-count="{{ $threadCount }}"
                             latest-threads-url="{{ url()->route('forums.show-all-latest-threads') }}"
+                            search-json-results-endpoint-url="{{ url()->route('forums.get-search-results-json') }}"
                         />
                     </div>
                 </div>

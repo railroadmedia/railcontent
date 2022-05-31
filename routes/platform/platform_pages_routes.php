@@ -298,9 +298,9 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('forums.jump-to-thread');
 
-        Route::get('/{brand}/forums/search', [ForumPagesController::class, 'showSearchResults'])
+        Route::get('/{brand}/forums/search', [ForumPagesController::class, 'getSearchResultsJson'])
             ->whereIn('brand', all_brands())
-            ->name('forums.show-search-results');
+            ->name('forums.get-search-results-json');
 
         Route::get('/{brand}/forums/create-forum', [ForumPagesController::class, 'showCreateCategoryForm'])
             ->whereIn('brand', all_brands())

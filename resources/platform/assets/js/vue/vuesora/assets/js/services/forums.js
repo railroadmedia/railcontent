@@ -12,6 +12,7 @@ export default {
     /**
      * Get the forum search results
      *
+     * @param {string} searchJsonResultsEndpointUrl
      * @param {string} term - the search terms
      * @param {string} type - the search type, 'posts' or 'threads' - default null
      * @param {number} page - the results page - default 1
@@ -19,26 +20,18 @@ export default {
      * @param {string} sort - the column to sort - default 'score'
      * @returns {Promise} - resolved promise with the response.data object
      */
-    getForumSearchResults(term, type, page, limit, sort) {
+    getForumSearchResults(searchJsonResultsEndpointUrl, term, type, page, limit, sort) {
         const params = {
             term,
             page: page || 1,
             limit: limit || 8,
             sort: sort || 'score',
         };
-        let endpoint;
-
-        if ( window.location.origin.includes("drumeo.com") ) {
-            endpoint = "/laravel/public/members/forums/search";
-        } else {
-            endpoint = '/members/forums/search';
-        }
-
         if (type) {
             params.type = type;
         }
 
-        return axios.get(endpoint, {
+        return axios.get(searchJsonResultsEndpointUrl, {
             params,
         })
             .then(response => response.data)

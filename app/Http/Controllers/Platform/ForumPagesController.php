@@ -597,7 +597,7 @@ class ForumPagesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function showSearchResults(Request $request, $domain, $brand)
+    public function getSearchResultsJson(Request $request, $domain, $brand)
     {
         $term = trim($request->get('term', null));
 
@@ -626,8 +626,6 @@ class ForumPagesController extends Controller
         $users = $this->userRepository->findBy(['id' => $authorIds]);
 
         foreach ($results as $index => $post) {
-            $authors[$post['author_id']][] = $index;
-
             if (empty($post['thread'])) {
                 continue;
             }

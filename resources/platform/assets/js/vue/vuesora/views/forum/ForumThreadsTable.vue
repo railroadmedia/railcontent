@@ -268,6 +268,10 @@ export default {
           type: String,
           default: () => '/threads/latest',
         },
+        searchJsonResultsEndpointUrl: {
+          type: String,
+          default: () => '/threads/latest',
+        },
     },
     data() {
         return {
@@ -410,6 +414,7 @@ export default {
             this.loading = true;
 
             ForumService.getForumSearchResults(
+                this.searchJsonResultsEndpointUrl,
                 this.searchTerm,
                 null,
                 this.searchResultsPage,
