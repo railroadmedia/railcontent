@@ -148,7 +148,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs.first-level');
 
-        Route::get('/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}', [PackPagesController::class, 'packBundleLessons'])
+        Route::get(
+            '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
+            [PackPagesController::class, 'packBundleLessons']
+        )
             ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs.second-level');
 
@@ -210,24 +213,6 @@ Route::domain('{musoraDomain}')
             ->name('platform.lists.completed');
 
         /*
-         * Forums Pages
-         */
-        Route::get('/{brand}/forums', [ForumPagesController::class, 'index'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.forums.index');
-
-        Route::get('/{brand}/forums/{categorySlug}/{categoryId}', [ForumPagesController::class, 'category'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.forums.category');
-
-        Route::get(
-            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
-            [ForumPagesController::class, 'thread']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.forums.thread');
-
-        /*
          * Profile Public Pages
          */
         Route::get('/{brand}/profile/{userId}/dashboard', [ProfilePublicPagesController::class, 'dashboard'])
@@ -279,4 +264,57 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
             ->whereIn('brand', all_brands())
             ->name('platform.invite-a-friend');
+
+        /*
+         * Forums
+         */
+        Route::get('/{brand}/forums', [ForumPagesController::class, 'showCategories'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-categories');
+
+        Route::get('/{brand}/forums/threads/latest', [ForumPagesController::class, 'showAllLatestThreads'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-all-latest-threads');
+
+        Route::get(
+            '/{brand}/forums/threads/{categorySlug}/{categoryId}',
+            [ForumPagesController::class, 'showCategoryThreads']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-category-threads');
+
+        Route::get(
+            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
+            [ForumPagesController::class, 'showThreadPosts']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-thread-posts');
+
+        Route::get('/{brand}/forums/jump-to-post/{postId}', [ForumPagesController::class, 'jumpToPost'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.jump-to-post');
+
+        Route::get('/{brand}/forums/jump-to-thread/{threadId}', [ForumPagesController::class, 'jumpToThread'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.jump-to-thread');
+
+        Route::get('/{brand}/forums/search', [ForumPagesController::class, 'getSearchResultsJson'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.get-search-results-json');
+
+        Route::get('/{brand}/forums/create-forum', [ForumPagesController::class, 'showCreateCategoryForm'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-create-category-form');
+
+        Route::get('/{brand}/forums/update-forum/{forumId}', [ForumPagesController::class, 'showUpdateCategoryForm'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-update-category-form');
+
+        Route::get('/{brand}/forums/threads/create-thread', [ForumPagesController::class, 'showCreateThreadForm'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-create-thread-form');
+
+        Route::get('/{brand}/forums/edit-thread/{threadId}', [ForumPagesController::class, 'showUpdateThreadForm'])
+            ->whereIn('brand', all_brands())
+            ->name('forums.show-update-thread-form');
     });

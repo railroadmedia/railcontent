@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <footer data-component="Footer" class="tw-py-6 tw-bg-[#F9FBFB] dark:tw-bg-[#081825]/90">
+  <footer data-component="Footer" class="tw-py-6 tw-bg-white dark:tw-bg-[#081825]/90">
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col lg:tw-flex-row ">
       <!-- Logo -->
       <a href="/" class="tw-text-black dark:tw-text-white tw-mb-2 lg:tw-mb-0">

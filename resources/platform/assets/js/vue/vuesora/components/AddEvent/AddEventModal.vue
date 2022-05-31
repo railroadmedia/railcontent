@@ -39,7 +39,6 @@
                 tw-rounded-full
                 tw-py-4
                 tw-uppercase
-                tw-font-bold
                 tw-font-bebas-neue
               "
               :class="'tw-' + themeBgClass"

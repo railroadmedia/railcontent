@@ -21,6 +21,7 @@
 
         {{-- Styles --}}
         <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+
         @yield('styles')
 
         {{-- Header Analytics --}}
@@ -60,6 +61,20 @@
                 
             </app-container>
         </div>
+
+        {{-- Review Modals Must Be Global --}}
+        @if($brand === 'singeo')
+            @include('partials._review-modal-singeo')
+        @endif
+        @if($brand === 'guitareo')
+            @include('partials._review-modal-guitareo')
+        @endif
+        @if($brand === 'pianote')
+            @include('partials._review-modal-pianote')
+        @endif
+        @if($brand === 'drumeo')
+            @include('partials._review-modal-drumeo')
+        @endif
 
         {{-- Scripts --}}
         <script src="{{ mix('platform/js/app.js') }}"></script>

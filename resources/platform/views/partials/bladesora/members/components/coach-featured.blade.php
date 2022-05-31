@@ -8,24 +8,51 @@
                     </h2>
                 </div>
                 {{-- There will be multiple featured coaches --}}
+                @php
+                $formattedResults = [];
+                @endphp
                 @foreach ($featuredCoaches->results() as $featured)
                     @php
-                        $singleFeaturedCoach = count($featuredCoaches->results()) === 1; //Not sure if this is still needed
                         $fullName = $featured->fetch('fields.name');
                         $exploded = explode(' ', $fullName);
                         $firstName = array_shift($exploded);
-                        $description = $featured->fetch('data.short_bio.value');
+
+                        $currentCoach = new stdClass();
+                        $currentCoach->ctaText = "Visit $firstName's Coach Page";
+                        $currentCoach->description = $featured->fetch('data.short_bio.value');
+                        $currentCoach->titleClasses = "tw-text-[#FAA300]";
+                        $currentCoach->title = $fullName;
+                        $currentCoach->topSubtitle = $featured->fetch('data.focus_text.value');
+                        $currentCoach->ctaUrl = $featured->fetch('url');
+                        $currentCoach->img = cf_img($featured->fetch('data.coach_featured_image'), ['width' => 720]);
+
+                        array_push($formattedResults, $currentCoach);
                     @endphp
-                    <static-header
-                        topSubtitle="{{ $featured->fetch('data.focus_text.value') }}"
-                        titleclasses="tw-text-[#FAA300]"
-                        title="{{ $featured->fetch('fields.name') }}"
-                        ctaText="Visit {{ $firstName }}'s Coach Page"
-                        description="{{ $description }}"
-                        ctaUrl="{{ $featured->fetch('url') }}"
-                        img="{{ cf_img($featured->fetch('data.coach_featured_image'), ['width' => 720]) }}"
-                    />
                 @endforeach
+                @if(count($formattedResults) === 1)
+                    <static-header
+                        top-subtitle="{{ $formattedResults[0]->topSubtitle }}"
+                        title-classes="{{ $formattedResults[0]->titleClasses }}"
+                        title="{{ $formattedResults[0]->title }}"
+                        cta-text="{{ $formattedResults[0]->ctaText }}"
+                        description="{{ $formattedResults[0]->description }}"
+                        cta-url="{{ $formattedResults[0]->ctaUrl }}"
+                        img="{{ $formattedResults[0]->img }}"
+                    />
+                @elseif(count($formattedResults) > 1)
+                    @php
+                        $slidesOnBrand = new stdClass();
+                        $slidesOnBrand->brand = $brand;
+                        $slidesOnBrand->slides = $formattedResults;
+                    @endphp
+                    {{-- Carousel --}}
+                    <header-carousel
+                        :preloaded-carousel="{{ json_encode([$slidesOnBrand]) }}"
+                        brand="{{ $brand }}">
+                    </header-carousel>
+                @else
+                <span></span>
+                @endif
             </div>
         </div>
     </div>

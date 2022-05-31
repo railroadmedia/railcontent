@@ -55,7 +55,7 @@ function rotate() {
   <div class="tw-w-full tw-h-full">
     <Cropper
       ref="cropper"
-      class="upload-example-cropper"
+      class="musora-cropper"
       :src="selectedImage"
       :stencil-component="Stencil"
     />
@@ -122,3 +122,9 @@ function rotate() {
     </div>
   </div>
 </template>
+
+<style type="text/css">
+.musora-cropper {
+  max-height: 60vh !important;
+}
+</style>
