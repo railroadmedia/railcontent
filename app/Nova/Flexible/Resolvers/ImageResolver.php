@@ -49,7 +49,7 @@ class ImageResolver implements ResolverInterface
             $images = $groups->map(function($group, $index) use($model){
                 return [
                     'path' => $group->getAttributes()['path'],
-                    'id' => $group->getAttributes()['id'],
+                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                     'order' => $index
                 ];
             });

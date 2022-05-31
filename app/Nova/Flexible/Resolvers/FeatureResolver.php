@@ -48,7 +48,7 @@ class FeatureResolver implements ResolverInterface
               return [
                   'desc' => $group->getAttributes()['desc'],
                   'order' => $index,
-                  'id' => $group->getAttributes()['id']
+                  'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
               ];
            });
 

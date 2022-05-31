@@ -51,14 +51,14 @@ class SpecResolver implements ResolverInterface
                 return [
                     'title' => $group->getAttributes()['title'],
                     'desc' => $group->getAttributes()['desc'],
-                    'id' => $group->getAttributes()['id'],
+                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
 
             //update and insert items
             foreach ($specs as $spec){
                 if(empty($spec['title']) || empty($spec['desc'])) {
-                    dd('yo');
+                    dd('title and description can\'t be null');
                 }
                 else {
                     if(!is_null($spec['id'])){
@@ -78,7 +78,7 @@ class SpecResolver implements ResolverInterface
                         $addSpec->desc = $spec['desc'];
                         $addSpec->save();
 
-                        $updatedIds[] = $addSpec->id;
+                        $updatedIds[] = $addSpec['id'];
                     }
                 }
             }
