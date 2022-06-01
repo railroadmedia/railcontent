@@ -54,8 +54,6 @@ class ImageResolver implements ResolverInterface
                 ];
             });
 
-//            dd($model);
-
             //update and insert items
             foreach($images as $image){
                 if(empty($image['path'])){
