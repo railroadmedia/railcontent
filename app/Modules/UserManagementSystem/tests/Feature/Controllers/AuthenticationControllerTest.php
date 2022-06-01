@@ -64,7 +64,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             ['email' => 'fail', 'password' => '123', 'device_name' => 'test_device']
         );
 
-        $this->assertEquals('{"message":"Unauthenticated."}', $response->getContent());
+        $this->assertEquals('{"success":false,"message":"Invalid Email or Password"}', $response->getContent());
 
         $this->assertEmpty(auth()->id());
     }
@@ -247,8 +247,6 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             config('user_management_system.route_prefix') . '/logout/token',
             ['Authorization' => 'Bearer ' . json_decode($response->getContent())->token]
         );
-
-        $this->assertEmpty(auth()->user());
 
         $this->assertDatabaseMissing('personal_access_tokens', ['id' => 1, 'tokenable_id' => $user->id]);
     }

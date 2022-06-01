@@ -5,14 +5,12 @@ namespace Modules\UserManagementSystem\Controllers;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
-
-//use MikeMcLin\WpPassword\Facades\WpPassword;
 use Modules\UserManagementSystem\Models\User;
 
 class PasswordController extends Controller
@@ -34,6 +32,7 @@ class PasswordController extends Controller
     public function __construct(Hasher $hasher)
     {
         $this->hasher = $hasher;
+        $this->middleware([ConvertEmptyStringsToNull::class]);
     }
 
     /**
@@ -46,13 +45,10 @@ class PasswordController extends Controller
      * @bodyParam new_password required
      *
      * @param Request $request
-     * @return RedirectResponse
      * @throws ValidationException
      */
     public function update(Request $request)
     {
-        $this->authorize('edit-users');
-
         try {
             $validationRules =
                 [
@@ -79,11 +75,11 @@ class PasswordController extends Controller
         }
         $user = user();
 
+        //todo: check if user with pass == with user from auth; if not, $this->authorize('edit-users');
         $user = User::findOrFail($user->id);
 
         if (
             !$this->hasher->check($request->get('current_password'), $user->password)
-//            && !WpPassword::check(trim($request->get('current_password')), $user->password)
         ) {
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
@@ -92,8 +88,6 @@ class PasswordController extends Controller
         $user->save();
 
         event(new PasswordReset($user));
-
-        auth()->loginUsingId($user->id);
 
         return redirect()
             ->back()
