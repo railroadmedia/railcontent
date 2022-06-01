@@ -15,7 +15,7 @@
             @include('partials.bladesora.members.account.settings.login-credentials.email-form', [
                 'brand' => brand(),
                 'otherBrands' => 'Drumeo, Pianote, and Guitareo',
-                'action' => '/usora/email-change/request',
+                'action' =>  route('user_management_system.email-change.request'),
                 'method' => 'post',
                 'emailInput' => [
                     'inputErrors' => $errors->get('email'),

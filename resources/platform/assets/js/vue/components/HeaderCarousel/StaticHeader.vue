@@ -1,7 +1,7 @@
 <script setup>
 import Slide from './Slide.vue'
 const props = defineProps({
-    topsubtitle: {
+    topSubtitle: {
         type: String,
         default: "",
     },
@@ -9,11 +9,11 @@ const props = defineProps({
         type: String,
         default: "",
     },
-    titleclasses: {
+    titleClasses: {
         type: String,
         default: ""
     },
-    ctatext: {
+    ctaText: {
         type: String,
         default: "",
     },
@@ -21,7 +21,7 @@ const props = defineProps({
         type: String,
         default: "",
     },
-    ctaurl: {
+    ctaUrl: {
         type: String,
         default: "",
     },
@@ -29,7 +29,7 @@ const props = defineProps({
         type: String,
         default: "",
     },
-    showslide: {
+    showSlide: {
         type: Boolean,
         default: false,
     },
@@ -40,12 +40,12 @@ const props = defineProps({
     <div
         class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative">
         <Slide :showSlide="true" 
-                :topSubtitle="topsubtitle" 
+                :topSubtitle="topSubtitle" 
                 :title="title" 
-                :titleClasses="titleclasses"
-                :ctaText="ctatext" 
+                :titleClasses="titleClasses"
+                :ctaText="ctaText" 
                 :description="description" 
-                :ctaUrl="ctaurl" 
+                :ctaUrl="ctaUrl" 
                 :img="img" 
         />
     </div>

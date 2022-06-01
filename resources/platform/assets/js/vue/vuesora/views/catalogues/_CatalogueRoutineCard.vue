@@ -9,7 +9,7 @@
                 :class="[item.type + '-thumbnail']"
             >
                 <div
-                    class="card-media bg-grey-2 active corners-10"
+                    class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
                     :class="[thumbnailType]"
                 >
                     <img

@@ -59,17 +59,17 @@ return [
     |
     */
 
-    'providers' => [
-        'user-management-system' => [
-            'driver' => 'user-management-system',
-            'model' => \Modules\UserManagementSystem\Models\User::class,
-        ],
+        'providers' => [
+            'user-management-system' => [
+                'driver' => 'user-management-system',
+                'model' => \Modules\UserManagementSystem\Models\User::class,
+            ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
+            // 'users' => [
+            //     'driver' => 'database',
+            //     'table' => 'users',
+            // ],
+        ],
 
     /*
     |--------------------------------------------------------------------------
@@ -88,8 +88,8 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
+            'provider' => 'user-management-system',
+            'table' => 'usora_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

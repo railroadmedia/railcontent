@@ -93,6 +93,9 @@ module.exports = {
             maxWidth: '2256px',
           }
         },
+        '.font-bebas-neue': {
+          fontWeight: '400 !important', //force font weight
+        }
       })
     })
   ],

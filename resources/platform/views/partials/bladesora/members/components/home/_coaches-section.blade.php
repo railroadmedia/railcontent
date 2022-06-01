@@ -9,7 +9,7 @@
                 </a>
                 <a href="{{ $subscribedCoachesUrl }}"
                     aria-label="See All Coaches"
-                    class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                    class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                 >
                     See All
                 </a>
@@ -41,13 +41,13 @@
                                 </p>
 
                                 @if ($coach->fetch('is_house_coach'))
-                                    <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-font-bold tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+                                    <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
                                         <musora-icon 
                                             icon-name="whistle-filled"
                                             height="12px" 
                                             class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
                                         ></musora-icon>
-                                        <span class="tw-mt-1 tw-tracking-wider">HOUSE</span>
+                                        <span class="tw-mt-1">HOUSE</span>
                                     </div>
                                 @endif
                             </div>

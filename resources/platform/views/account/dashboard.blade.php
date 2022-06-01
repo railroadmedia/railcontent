@@ -63,7 +63,7 @@
                             </a>
                             <a href="{{ '' }}"
                                 dusk="see-all-started"
-                                class="tw-text-base lg:tw-text-lg lg:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                                class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                             >
                                 See All
                             </a>
@@ -97,7 +97,7 @@
                             </a>
                             <a href="{{ '' }}"
                                 dusk="see-all-started"
-                                class="tw-text-base lg:tw-text-lg tw-uppercase tw-leading-none lg:tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                                class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                             >
                                 See All
                             </a>
@@ -131,7 +131,7 @@
 
                                 @if($isCurrentUsersProfile)
                                     <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
-                                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg tw-tracking-wide"
+                                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg"
                                         dusk="edit-user">
                                         Edit
                                     </a>

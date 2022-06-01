@@ -87,7 +87,7 @@ export default {
             </a>
             <a href="https://www.drumeo.com/laravel/public/members/profile" 
                 aria-label="See My Dashboard" 
-                class="tw-text-lg lg:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Dashboard
             </a>
@@ -125,7 +125,7 @@ export default {
                                 :class="textColor[brand]"
                 />
                 <h4 class="tw-text-3xl md:tw-text-5xl tw-my-1 tw-font-bold">{{ metric.value }}</h4> 
-                <h6 class="tw-text-xs md:tw-text-sm xl:tw-text-base tw-font-bold tw-tracking-wider tw-font-bebas-neue tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-px-5">{{ metric.label }}</h6>
+                <h6 class="tw-text-xs md:tw-text-sm xl:tw-text-base tw-font-bebas-neue tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-px-5">{{ metric.label }}</h6>
             </a> 
         </div>
     </section>

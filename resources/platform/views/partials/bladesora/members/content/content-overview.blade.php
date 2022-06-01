@@ -67,7 +67,7 @@
                 @if(\Carbon\Carbon::parse($releaseDate) < \Carbon\Carbon::now() && $isOwned)
                     <div class="flex flex-row align-v-center overview-links tw-mt-2 tw-flex-wrap">
                         <a href="{{ $itemUrl }}"
-                           class="tw-btn-primary tw-tracking-wide tw-bg-{{ $brand }} tw-text-xl go-to-button tw-mb-2 tw-mr-3">
+                           class="tw-btn-primary tw-bg-{{ $brand }} tw-text-xl go-to-button tw-mb-2 tw-mr-3">
                             @if($itemProgress === 'started')
                                 <i class="fas fa-play mr-1"></i>
                                 Next Lesson
@@ -82,7 +82,7 @@
 
                         @if(!empty($lessonsUrl))
                             <a href="{{ $lessonsUrl }}"
-                               class="tw-btn-secondary tw-tracking-wide tw-text-black dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
+                               class="tw-btn-secondary tw-text-black dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
                                 <i class="fas fa-arrow-circle-right mr-1"></i> 
                                 See Lessons
                             </a>
@@ -102,7 +102,7 @@
                 <div class="flex flex-column buy-col align-center">
                     <a  href="/#customize-anchor"
                         target="_blank"
-                        class="tw-btn-primary tw-tracking-wide tw-bg-{{ $brand }} tw-text-xl go-to-button tw-mb-2">
+                        class="tw-btn-primary tw-bg-{{ $brand }} tw-text-xl go-to-button tw-mb-2">
                         <i class="fas fa-plus mr-1"></i>
                         Upgrade Membership
                     </a>

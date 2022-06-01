@@ -15,7 +15,7 @@ return [
     'default_timezone' => 'America/Los_Angeles',
 
     // routes
-    'route_prefix' => 'usora',
+    'route_prefix' => 'user-management-system',
     'autoload_all_routes' => true,
     'web_route_middleware_public_groups' => ['web_public'],
     'web_route_middleware_logged_in_groups' => ['web_authenticated'],

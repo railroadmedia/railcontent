@@ -38,7 +38,7 @@
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.49.9",
         "sass-loader": "^12.1.0",
-        "stylesora": "^1.0.102-t3.7",
+        "stylesora": "^1.0.102-t3.9",
         "tailwindcss": "^3.0.23"
     },
     "dependencies": {
@@ -58,6 +58,8 @@
         "normalize.css": "^8.0.1",
         "noty": "^3.2.0-beta-deprecated",
         "query-string": "^7.1.1",
+        "screenfull": "^6.0.1",
+        "shaka-player": "^2.5.7",
         "simplebar": "^5.3.6",
         "smoothscroll-polyfill": "^0.4.4",
         "vue": "^3.2.19",

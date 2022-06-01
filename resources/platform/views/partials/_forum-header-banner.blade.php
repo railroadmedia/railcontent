@@ -1,9 +1,9 @@
 <!-- Forum Header Banner -->
 <div class="tw-container tw-mx-auto fluid collapsed-h pv-5 tw-relative tw-bg-black">
     <div class="header-background-container absolute-fill bg-top"
-         style="background-image: url({{ _imgix(
+         style="background-image: url({{ cf_img(
                 $backgroundImage,
-                ["q" => 80, "blur" => 40, "w" => 640]
+                ["quality" => 80, "blur" => 40, "width" => 640]
             ) }});" data-ix-bg="{{ $backgroundImage }}"
     ></div>
     <div class="header-background-container absolute-fill bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
@@ -22,9 +22,9 @@
                         <a href="{{ $profileUrl }}" class="tw-no-underline">
                             <img
                                 class="tw-rounded inset-border"
-                                src="{{ _imgix(
+                                src="{{ cf_img(
                                     $currentUser['avatar'],
-                                    ["q" => 50, "blur" => 2, "w" => 50, "h" => 50]
+                                    ["quality" => 50, "blur" => 2, "width" => 50, "height" => 50]
                                 ) }}"
                                 data-ix-src="{{ $currentUser['avatar'] }}"
                             >
@@ -36,7 +36,7 @@
                             @if($currentUser['access_level'] === 'team')
                                 {{ $brand }} Team
                             @else
-                                {{ map_experience_rank($currentUser['xp']) }}
+                                {{ user()->getXpRank() }}
                             @endif
                         </p>
 

@@ -89,7 +89,7 @@ const onEnter = () => {
         :type="inputType"
       />
       <div v-if="showClearButton" :class="`dark:tw-text-white tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'}`">
-        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-20" @click="onClear">
+        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">
           <XIcon class="tw-h-full tw-w-full" />
         </button>
       </div>
