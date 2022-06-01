@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 
 class Product extends Model
@@ -46,6 +47,23 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function delete()
+    {
+        Feature::where('product_id', '=', $this->id)->delete();
+        Product_Size::where('product_id', '=', $this->id)->delete();
+        Spec::where('product_id', '=', $this->id)->delete();
+
+        $imgs = Image::where('product_id', '=', $this->id)->get();
+
+        foreach($imgs as $img){
+            Storage::disk('s3')->delete($img->path);
+        }
+
+        Image::where('product_id', '=', $this->id)->delete();
+
+        Product::where('id', '=', $this->id)->delete();
     }
 
     protected $guarded = [
