@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Brand\Services\BrandService;
 
 if (! function_exists('brand')) {
     /**
@@ -10,15 +11,11 @@ if (! function_exists('brand')) {
      */
     function brand()
     {
-        if (in_array(request()->segment(1), config('brands'))) {
-            return request()->segment(1);
-        }
-
         if (!empty(user())) {
-            return user()->last_used_brand;
+            return BrandService::getLastUsedBrand(user());
         }
 
-        return 'drumeo';
+        return 'musora';
     }
 }
 
