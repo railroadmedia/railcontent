@@ -39,6 +39,20 @@ class SetLastUsedBrand
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->get('brand')));
         }
 
+        if (!empty(user())) {
+            $brand = BrandService::getLastUsedBrand(user());
+
+            // set railforums brand and DB connection
+            $railforumsConnectionName = config('railforums.brand_database_connection_names')[$brand];
+            \Railroad\Railforums\Services\ConfigService::$databaseConnectionName = $railforumsConnectionName;
+            config()->set('railforums.database_connection', $railforumsConnectionName);
+            config()->set('railforums.database_connection_name', $railforumsConnectionName);
+            config()->set('railforums.brand', $brand);
+            config()->set('railforums.jump_to_post_url_prefix', $brand . '/forums/jump-to-post/');
+            config()->set('railforums.jump_to_thread_url_prefix', $brand . '/forums/jump-to-thread/');
+            config()->set('railforums.forums_index_page_url', $brand . '/forums');
+        }
+
         return $next($request);
     }
 }

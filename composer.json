@@ -21,7 +21,11 @@
         "laravel/vapor-core": "^2.22",
         "laravel/vapor-ui": "^1.5",
         "league/flysystem-aws-s3-v3": "^3.0",
+        "railroad/ecommerce": "^5.0",
+        "railroad/event-data-synchronizer": "8.0.*",
         "railroad/railcontent": "dev-0.5-php-mysql-8-migration",
+        "railroad/railforums": "2.0.*",
+        "railroad/usora": "3.0.*",
         "spatie/laravel-permission": "^5.5",
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0"

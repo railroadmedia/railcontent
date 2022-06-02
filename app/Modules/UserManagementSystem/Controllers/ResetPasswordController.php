@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\UserEvent;
+use Modules\UserManagementSystem\Models\User;
 
 class ResetPasswordController extends Controller
 {
@@ -25,6 +26,8 @@ class ResetPasswordController extends Controller
      */
     public function reset(Request $request)
     {
+
+        $isJson = request()->expectsJson();
 
         try {
             $validationRules =
@@ -74,22 +77,54 @@ class ResetPasswordController extends Controller
                     }
                 );
 
-        if ($response === Password::PASSWORD_RESET) {
-            session()->put('skip-third-party-auth-check', true);
+        if (!$isJson)
+        {
+            if ($response === Password::PASSWORD_RESET) {
+                session()->put('skip-third-party-auth-check', true);
 
 //            todo: define redirect path
+                return redirect()
+                    ->back()
+//                ->to(config('usora.login_success_redirect_path'))
+                    ->with(
+                        'successes',
+                        new MessageBag(['password' => 'Your password has been reset successfully.'])
+                    );
+            }
+
             return redirect()
                 ->back()
-//                ->to(config('usora.login_success_redirect_path'))
-                ->with(
-                    'successes',
-                    new MessageBag(['password' => 'Your password has been reset successfully.'])
+                ->withErrors(['password' => 'Password reset failed, please try again.']);
+        } else {
+            if ($response === Password::PASSWORD_RESET) {
+                $user = User::find(auth()->id());
+                if (!$user) {
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'title' => 'Invalid user identification',
+                            'message' => 'Password reset failed, please try again.',
+                        ],
+                        500
+                    );
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'token' => $user->currentAccessToken(),
+                    'id' => $user->id,
+                ]);
+            } else {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Password reset failed, please try again.',
+                    ],
+                    500
                 );
+            }
         }
 
-        return redirect()
-            ->back()
-            ->withErrors(['password' => 'Password reset failed, please try again.']);
     }
 
     /**

@@ -2,7 +2,7 @@
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
 @endphp
 
-@extends('forums.forumlayout')
+@extends('partials.layout')
 
 @section('meta')
     <title>Create a Discussion | {{ $brand }}</title>
@@ -15,8 +15,8 @@
             <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
                 @include('partials.bladesora.members.forums.create-thread', [
                     "brand" => $brand,
-                    "userAvatar" => $user->getProfilePictureUrl(),
-                    "forumUrl" => url()->route('forums.index'),
+                    "userAvatar" => user()->profile_picture_url,
+                    "forumUrl" => url()->route('forums.show-categories'),
                     "formAction" => url()->route('railforums.thread.store'),
                     "method" => 'PUT',
                     "topicOptions" => $categories
@@ -24,5 +24,5 @@
             </div>
 
         </div>
-        
+
 @endsection

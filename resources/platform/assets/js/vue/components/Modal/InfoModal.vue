@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "selfContained"]);
+const props = defineProps(["modalId", "title", "selfContained", "classOverride"]);
 const emit = defineEmits(["onClose"]);
 
 const onClose = () => {
@@ -67,7 +67,7 @@ onUnmounted(() => {
           tw-border-[1px]
           tw-bg-[#081825]
         "
-        :class="selfContained && `tw-bg-transparent tw-border-0`"
+        :class="selfContained ? `tw-bg-transparent tw-border-0 ${classOverride}` : classOverride"
       >
         <div
           class="

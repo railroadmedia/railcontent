@@ -36,8 +36,7 @@ function skipStep() {
 const hideErrorNotification = () => {
   showErrorNotification.value = false;
 };
-/*
-Uncomment if you want to see the notification appear/disappear
+/* uncomment if you want to check the notifications component
 onMounted(() => {
   setTimeout(() => {
     showErrorNotification.value = true;
@@ -76,8 +75,11 @@ onMounted(() => {
         SKIP THIS STEP
       </button>
     </div>
-    <NotificationToast v-if="showErrorNotification" text="Hmm, something has gone wrong. Your information has been saved up to this point."
-      @onHide="hideErrorNotification" classOverride="tw-bg-[#002039] tw-text-white tw-opacity-95">
+    <NotificationToast
+      v-if="showErrorNotification"
+      text="Hmm, something has gone wrong. Your information has been saved up to this point."
+      @onHide="hideErrorNotification"
+      classOverride="tw-bg-[#002039] tw-text-white tw-opacity-95">
     </NotificationToast>
   </StepWrapper>
 </template>

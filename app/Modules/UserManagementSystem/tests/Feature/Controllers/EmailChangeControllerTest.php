@@ -189,7 +189,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
         // assert session has error for invalid token
         $response->assertSessionHasErrors(
-            ['code']
+            ['error-message']
         );
 
         app('session.store')->flush();
@@ -202,7 +202,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
         // assert session has error for expired token
         $response->assertSessionHasErrors(
-            ['code']
+            ['error-message']
         );
     }
 

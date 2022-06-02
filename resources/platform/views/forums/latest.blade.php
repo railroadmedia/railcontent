@@ -1,7 +1,8 @@
 @php
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
 @endphp
-@extends('members.forums.forumlayout')
+
+@extends('partials.layout')
 
 @section('meta')
     <title>All latest threads  | Forums | {{ $brand }}</title>
@@ -12,11 +13,11 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home'),
+                "url" => url()->route('platform.home'),
             ],
             [
                 "title" => "Forums",
-                "url" => url()->route('forums.index'),
+                "url" => url()->route('forums.show-categories'),
             ],
             [
                 "title" => "All latest threads",
@@ -32,7 +33,7 @@
                         "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
                         "brand" => "{{ $brand }}",
                         "currentUser" => $user,
-                        'profileUrl' => url()->route('members.profile.dashboard', [auth()->id()]),
+                        'profileUrl' => user()->getDashboardUrl(),
             ])
                 @slot('content')
                     <div class="tw-inline-flex tw-w-full tw-flex-col sm:tw-pr-4 sm:tw-mt-14">
@@ -47,7 +48,7 @@
                             Checkout all the latest threads from all our forums!
                         </p>
                         <div class="tw-inline-flex tw-items-center tw-flex-wrap header-buttons">
-                            <a href="{{ url()->route('forums.thread.create') }}"
+                            <a href="{{ url()->route('forums.show-create-thread-form') }}"
                             class="tw-btn-primary tw-bg-{{ $brand }} sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                             dusk="create-post-button">
                                 <i class="fas fa-pencil tw-mr-2"></i> Create Thread

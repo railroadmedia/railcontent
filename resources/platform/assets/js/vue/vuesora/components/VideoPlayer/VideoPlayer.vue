@@ -5,6 +5,7 @@
             class="video-wrap"
             :class="{'picture-in-picture': isPipEnabled}"
         >
+
             <div class="widescreen bg-black">
                 <div
                     ref="container"
@@ -738,11 +739,10 @@ export default {
                 this.shakaPlayer.addEventListener(event, this.eventHandlers[event]);
             });
 
-            // this.mediaElement = player;
             this.shakaPlayer.attach(player)
+                console.log('this ran')
                 .then(() => {
                     this.mediaElement = this.shakaPlayer.getMediaElement();
-
                     this.shakaPlayer.configure({
                         abr: {
                             restrictions: {

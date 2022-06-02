@@ -6,13 +6,13 @@
             <a href="{{ $forumUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Popular Conversations</h2>
             </a>
-            <a href="{{ $forumUrl }}" 
-                aria-label="See All Popular Conversations" 
+            <a href="{{ $forumUrl }}"
+                aria-label="See All Popular Conversations"
                 class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Forums
             </a>
-        </div> 
+        </div>
 
         <div class="tw-flex tw-flex-row tw-flex-wrap">
             @foreach($forumPosts as $post)
@@ -25,10 +25,10 @@
                     "date" => \Carbon\Carbon::parse($post->updated_at)->diffForHumans(),
                     "author" => $post->user->getDisplayName(),
                     "post" =>  substr(strip_tags($post->content),0,255),
-                    "url" => url()->route('forums.post.jump-to', ['id' => $post->id])
+                    "url" => url()->route('forums.jump-to-post', ['id' => $post->id])
                 ])
             @endforeach
         </div>
-        
+
     </div>
 </section>
