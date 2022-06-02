@@ -10,9 +10,6 @@ use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\RememberToken;
 use Modules\UserManagementSystem\Models\User;
 
-/**
- * @method User retrieveById($identifier)
- */
 class UserServiceProvider extends EloquentUserProvider
 {
     /**
