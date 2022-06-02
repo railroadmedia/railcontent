@@ -33,9 +33,9 @@ class RailforumsUserProvider implements UserProviderInterface
 
     /**
      * @param $userId
-     * @return ForumUser
+     * @return ?ForumUser
      */
-    public function getUser($userId): ForumUser
+    public function getUser($userId): ?ForumUser
     {
         if (!empty(user()) && $userId === user()->id) {
             $user = user();
@@ -43,7 +43,11 @@ class RailforumsUserProvider implements UserProviderInterface
             $user = User::query()->find($userId);
         }
 
-        return $this->forumUserFromUserModel($user);
+        if (!empty($user)) {
+            return $this->forumUserFromUserModel($user);
+        }
+
+        return null;
     }
 
     /**
