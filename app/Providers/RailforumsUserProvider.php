@@ -6,36 +6,22 @@ use DB;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Contracts\UserProviderInterface;
-use Railroad\Usora\Repositories\UserRepository;
+use Railroad\Railforums\Entities\User as ForumUser;
 
 class RailforumsUserProvider implements UserProviderInterface
 {
-    private UserRepository $userRepository;
     private ContentService $contentService;
 
-    public function __construct(UserRepository $userRepository, ContentService $contentService)
+    public function __construct(ContentService $contentService)
     {
-        $this->userRepository = $userRepository;
         $this->contentService = $contentService;
-    }
-
-    /**
-     * @return mixed|\Railroad\Usora\Entities\User|null
-     */
-    public function getCurrentUser()
-    {
-        if (!auth()->id()) {
-            return null;
-        }
-
-        return $this->userRepository->find(auth()->id());
     }
 
     /**
      * @param $userId
      * @return mixed|string
      */
-    public function getUserAccessLevel($userId)
+    public function getUserAccessLevel($userId): string
     {
         return DB::connection(config('user_management_system.database_connection_name'))
                 ->table('usora_users')
@@ -47,20 +33,38 @@ class RailforumsUserProvider implements UserProviderInterface
 
     /**
      * @param $userId
-     * @return \Railroad\Usora\Entities\User
+     * @return ?ForumUser
      */
-    public function getUser($userId)
+    public function getUser($userId): ?ForumUser
     {
-        return $this->userRepository->find($userId);
+        if (!empty(user()) && $userId === user()->id) {
+            $user = user();
+        } else {
+            $user = User::query()->find($userId);
+        }
+
+        if (!empty($user)) {
+            return $this->forumUserFromUserModel($user);
+        }
+
+        return null;
     }
 
     /**
      * @param array $userIds
-     * @return array|\Railroad\Usora\Entities\User[]
+     * @return array|ForumUser[]
      */
     public function getUsersByIds(array $userIds): array
     {
-        return $this->userRepository->findByIds($userIds);
+        $users = User::query()->whereIn('id', $userIds)->get();
+
+        $forumUsers = [];
+
+        foreach ($users as $user) {
+            $forumUsers[$user->id] = $this->forumUserFromUserModel($user);
+        }
+
+        return $forumUsers;
     }
 
     /**
@@ -142,5 +146,20 @@ class RailforumsUserProvider implements UserProviderInterface
         }
 
         return $associatedUsers;
+    }
+
+    /**
+     * @param User $userModel
+     * @return ForumUser
+     */
+    private function forumUserFromUserModel(User $userModel)
+    {
+        return new ForumUser(
+            $userModel->id,
+            $userModel->display_name,
+            $userModel->profile_picture_url,
+            $userModel->created_at,
+            $userModel->timezone ?? ''
+        );
     }
 }

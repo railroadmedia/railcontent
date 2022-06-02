@@ -12,7 +12,7 @@ export const testCarousel = [
                 img: "https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-method+1.jpg",
             },
             {
-                topSubtitle: "Coach of the Month",
+                topSubtitle: "Featured Coach",
                 title: "Dennis Chambers",
                 ctaText: "Visit Dennis's Coach Page",
                 description: "Dennis Chambers is a drumming legend who has recorded and performed with artists such as Santana, Steely Dan, Parliament/Funkadelic, and many more.",
@@ -50,7 +50,7 @@ export const testCarousel = [
                 img: "https://musora-web-platform.s3.amazonaws.com/carousel/pianote-method+1.jpg",
             },
             {
-                topSubtitle: "Coach of the Month",
+                topSubtitle: "Featured Coach",
                 title: "Erskine Hawkins",
                 ctaText: "Visit Erskine's Coach Page",
                 description: "As a music director for Disney star Zendaya, producer and performer, Erskine Hawkins has done a lot. But his favorite thing in the world is playing gospel piano.",
@@ -88,7 +88,7 @@ export const testCarousel = [
                 img: "https://musora-web-platform.s3.amazonaws.com/carousel/Guitareo-Method_Lesson+3+1.jpg",
             },
             {
-                topSubtitle: "Coach of the Month",
+                topSubtitle: "Featured Coach",
                 title: "Sami Ghawi",
                 ctaText: "Visit Sami's Coach Page",
                 description: 'Sami has been a professional musician, producer & educator for over 20 years, dedicating his life to "helping artists do what they love," as well as spreading the beautiful & universal language of music.',
@@ -126,7 +126,7 @@ export const testCarousel = [
                 img: "https://musora-web-platform.s3.amazonaws.com/carousel/singeo-method+1.jpg",
             },
             {
-                topSubtitle: "Coach of the Month",
+                topSubtitle: "Featured Coach",
                 title: "SHELÉA",
                 ctaText: "Visit SHELÉA's Coach Page",
                 description: "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent who has a very important message on singing your truth.",

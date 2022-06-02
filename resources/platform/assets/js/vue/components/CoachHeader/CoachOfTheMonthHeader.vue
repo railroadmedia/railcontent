@@ -28,7 +28,7 @@ export default {
     <HeaderTemplate
         brand="drumeo"
         backgroundImage="https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fgreyson-playing-1643737463.jpg?auto=format&crop=faces%2Cedges&fit=crop&ixlib=php-1.2.1&s=0e22ebce257b6a48adda52d3ba4027bd"
-        topSubtitle="COACH OF THE MONTH"
+        topSubtitle="FEATURED COACH"
         :shortBio="shortBio"
     >
         <template v-if="name && lastName" #titleSlot
