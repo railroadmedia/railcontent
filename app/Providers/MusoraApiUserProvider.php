@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Providers\UserServiceProvider;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
@@ -28,7 +30,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         if (user()) {
             return new User(
-                user()->id, user()->email, user()->display_name, user()->profile_picture_url, user()->phone_number
+                user()->id, user()->email, user()->display_name, user()->profile_picture_url ?? '', user()->phone_number
             );
         }
 
@@ -36,8 +38,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     }
 
     public function getCurrentUserMembershipData(?string $brand)
-    : array
-    {
+    : array {
         // TODO: Implement getCurrentUserMembershipData() method.
         return [
             'isEdge' => true,
@@ -45,7 +46,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'edgeExpirationDate' => null,
             'isPackOlyOwner' => false,
             'isAppleAppSubscriber' => true,
-            'isGoogleAppSubscriber' => false
+            'isGoogleAppSubscriber' => false,
         ];
     }
 
@@ -81,9 +82,30 @@ class MusoraApiUserProvider implements UserProviderInterface
         // TODO: Implement setCurrentUserFirebaseTokens() method.
     }
 
+    /**
+     * @param string $deviceType
+     * @param int $reviewCount
+     * @return mixed|\Modules\UserManagementSystem\Models\User|null
+     */
     public function setReviewDataForCurrentUser(string $deviceType, int $reviewCount)
     {
-        // TODO: Implement setReviewDataForCurrentUser() method.
+        $user = user();
+        if ($user) {
+            $oldUser = clone($user);
+            if ($deviceType == 'ios') {
+                $user->ios_latest_review_display_date = Carbon::now();
+                $user->ios_count_review_display = $reviewCount;
+            } elseif ($deviceType == 'android') {
+                $user->google_latest_review_display_date = Carbon::now();
+                $user->google_count_review_display = $reviewCount;
+            }
+
+            $user->save();
+
+            event(new UserUpdated($user, $oldUser));
+        }
+
+        return $user;
     }
 
     public function getUsoraCurrentUser()
@@ -99,11 +121,16 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function login($request)
     {
-        $passedCheck = auth()->guard('user-management-system')
-            ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
+        $passedCheck =
+            auth()
+                ->guard('user-management-system')
+                ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
 
         if ($passedCheck) {
-            $user = \Modules\UserManagementSystem\Models\User::query()->where(['email' => $request->get('email')])->firstOrFail();
+            $user =
+                \Modules\UserManagementSystem\Models\User::query()
+                    ->where(['email' => $request->get('email')])
+                    ->firstOrFail();
 
             auth()->login($user);
 
@@ -111,7 +138,7 @@ class MusoraApiUserProvider implements UserProviderInterface
                 new MobileAppLogin($user, $request->get('firebase_token'), $request->get('platform'))
             );
 
-            $token = $user->createToken($request->get('platform',''));
+            $token = $user->createToken($request->get('platform', ''));
             $user->withAccessToken($token);
 
             return ['token' => $token->plainTextToken, 'user' => $user];
