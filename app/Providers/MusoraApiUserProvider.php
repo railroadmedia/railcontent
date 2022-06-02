@@ -2,22 +2,51 @@
 
 namespace App\Providers;
 
+use Modules\UserManagementSystem\Events\MobileAppLogin;
+use Modules\UserManagementSystem\Events\UserEvent;
+use Modules\UserManagementSystem\Providers\UserServiceProvider;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
+    /**
+     * @var UserServiceProvider
+     */
+    private $userServiceProvider;
+
+    /**
+     * @param UserServiceProvider $userServiceProvider
+     */
+    public function __construct(UserServiceProvider $userServiceProvider)
+    {
+        $this->userServiceProvider = $userServiceProvider;
+    }
 
     public function getCurrentUser()
     : ?User
     {
-        // TODO: Implement getCurrentUser() method.
+        if (user()) {
+            return new User(
+                user()->id, user()->email, user()->display_name, user()->profile_picture_url, user()->phone_number
+            );
+        }
+
+        return null;
     }
 
-    public function getCurrentUserMembershipData()
+    public function getCurrentUserMembershipData(?string $brand)
     : array
     {
         // TODO: Implement getCurrentUserMembershipData() method.
+        return [
+            'isEdge' => true,
+            'isEdgeExpired' => false,
+            'edgeExpirationDate' => null,
+            'isPackOlyOwner' => false,
+            'isAppleAppSubscriber' => true,
+            'isGoogleAppSubscriber' => false
+        ];
     }
 
     public function getCurrentUserProfileData()
@@ -66,5 +95,28 @@ class MusoraApiUserProvider implements UserProviderInterface
     : string
     {
         return '';
+    }
+
+    public function login($request)
+    {
+        $passedCheck = auth()->guard('user-management-system')
+            ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
+
+        if ($passedCheck) {
+            $user = \Modules\UserManagementSystem\Models\User::query()->where(['email' => $request->get('email')])->firstOrFail();
+
+            auth()->login($user);
+
+            event(
+                new MobileAppLogin($user, $request->get('firebase_token'), $request->get('platform'))
+            );
+
+            $token = $user->createToken($request->get('platform',''));
+            $user->withAccessToken($token);
+
+            return ['token' => $token->plainTextToken, 'user' => $user];
+        }
+
+        return null;
     }
 }
