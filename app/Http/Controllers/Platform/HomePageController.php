@@ -460,7 +460,7 @@ class HomePageController extends BaseController
             return (new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]));
         }
 
-        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents($userPrimaryPlaylist['id'], $this->parseContentTypes($contentTypes), 4);
+        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents($userPrimaryPlaylist['id'], $this->parseContentTypes($contentTypes), 6);
 
         $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents($userPrimaryPlaylist['id'], $contentTypes);
 
