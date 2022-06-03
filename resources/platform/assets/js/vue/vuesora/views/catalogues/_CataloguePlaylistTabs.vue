@@ -7,7 +7,7 @@
                    :href="`/${brand}/lists/my-list`"
                 >
                     <h3 class="heading flex-auto hover-text-black"
-                        :class="selected_tab === 'added' ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
+                        :class="isActive(`/${brand}/lists/my-list`) ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
                     >
                         Added
                     </h3>
@@ -17,7 +17,7 @@
                    :href="`/${brand}/lists/in-progress`"
                 >
                     <h3 class="heading flex-auto hover-text-black"
-                        :class="selected_tab === 'started' ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
+                        :class="isActive(`/${brand}/lists/in-progress`) ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
                     >
                         In Progress
                     </h3>
@@ -27,7 +27,7 @@
                    :href="`/${brand}/lists/completed`"
                 >
                     <h3 class="heading flex-auto hover-text-black"
-                        :class="selected_tab === 'completed' ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
+                        :class="isActive(`/${brand}/lists/completed`) ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
                     >
                         Complete
                     </h3>
@@ -105,9 +105,27 @@ export default {
         },
     },
     methods: {
+        changeFilter(item) {
+            const params = window.location.search;
+            const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
+
+            console.log(item.value);
+
+            if (item.value) {
+                query_object.type = item.value;
+            } else if (query_object.type) {
+                delete query_object.type;
+            }
+
+            window.location.href = `${location.protocol}//${location.host 
+            }${location.pathname}?${QueryString.stringify(query_object)}`;
+        },
         formatOption(option) {
             return option.replace(/-/g, ' ').replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
         },
+        isActive(path) {
+            return window.location.pathname === path;
+        }
     },
 };
 </script>
