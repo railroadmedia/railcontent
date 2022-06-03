@@ -321,8 +321,15 @@ class CoachPagesController extends Controller
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
-            $eventCoachUrl = url()->route('members.coaches.show', ['coachSlug' => $eventCoachSlug]);
-
+            $eventCoachId = $currentEvent->fetch('fields.instructor.id');
+            $eventCoachUrl = url()->route('platform.content.first-level',
+                                          [
+                                              'brand' => brand(),
+                                              'primaryPage' => 'coaches',
+                                              'firstContentSlug' => $eventCoachSlug,
+                                              'firstContentId' => $eventCoachId
+                                          ]
+            );
             $brandOverview = config('addevent.uniquekeys.brand-overview');
             $env = config('app.env') === 'production' ? 'prod' : 'sandbox';
             $coachCalendar = config('addevent.uniquekeys.by-coach')[$coachSlug] ?? null;
