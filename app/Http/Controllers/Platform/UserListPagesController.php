@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 
 class UserListPagesController extends BaseController
@@ -39,73 +40,37 @@ class UserListPagesController extends BaseController
 
         ContentRepository::$pullFutureContent = true;
 
-        $noResultsMessage = '';
-
-        $resetProgress = true;
-        if (!$request->has('state')) {
-            $request->attributes->set('state', 'in-primary-playlist');
-            $resetProgress = false;
-        }
+        $request->attributes->set('state', 'in-primary-playlist');
 
         if (!empty($request->get('type'))) {
-            if ($request->get('type') == 'shows') {
-                $contentTypes = config('railcontent.showTypes');
-            } else {
-                $contentTypes = [$request->get('type')];
-            }
+            $contentTypes = [$request->get('type')];
         } else {
             $contentTypes = ContentTypes::userListContentTypes();
         }
 
-        if ($request->get('state') == 'in-primary-playlist') {
-            $noResultsMessage =
-                'You haven\'t added any lessons of that type yet, once you add a lesson of this type it will show up here for you to access later.';
+        $noResultsMessage =
+            'You haven\'t added any lessons of that type yet, once you add a lesson of this type it will show up here for you to access later.';
 
-            if (empty($request->get('type'))) {
-                $contentTypes[] = 'course-part';
-            }
+        if (empty($request->get('type'))) {
+            $contentTypes[] = 'course-part';
+        }
 
-            $usersPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => auth()->id()], [
-                'user_id' => auth()->id(),
-                'type' => 'primary-playlist',
-                'brand' => $brand ?? config('railcontent.brand'),
-                'created_at' => Carbon::now()
-                    ->toDateTimeString(),
-            ]);
+        $usersPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'primary-playlist', brand());
 
-            if (empty($usersPrimaryPlaylist)) {
-                $lessons = [];
-                $totalResults = 0;
-            } else {
-                $lessons = $this->userPlaylistsService->getUserPlaylistContents(
-                    $usersPrimaryPlaylist['id'],
-                    $contentTypes,
-                    $request->get('limit', 20),
-                    ($request->get('page', 1) - 1) * $request->get('limit', 20)
-                );
-
-                $totalResults =
-                    $this->userPlaylistsService->countUserPlaylistContents($usersPrimaryPlaylist['id'], $contentTypes);
-            }
+        if (empty($usersPrimaryPlaylist)) {
+            $lessons = [];
+            $totalResults = 0;
         } else {
-            $noResultsMessage =
-                $request->get('state') === 'started' ?
-                    'You haven\'t started any lessons of that type yet, once you start a lesson of this type it will show up here for you to access later.' : 'You haven\'t completed any lessons of that type yet, once you complete a lesson of this type it will show up here for you to access later.
-';
-
-            $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            $userPrimaryPlaylistId = $usersPrimaryPlaylist[0]['id'];
+            $lessons = $this->userPlaylistsService->getUserPlaylistContents(
+                $userPrimaryPlaylistId,
                 $contentTypes,
-                auth()->id(),
-                $request->get('state', 'started'),
                 $request->get('limit', 20),
                 ($request->get('page', 1) - 1) * $request->get('limit', 20)
             );
 
-            $totalResults = $this->contentService->countByTypesUserProgressState(
-                $contentTypes,
-                auth()->id(),
-                $request->get('state', 'started')
-            );
+            $totalResults =
+                $this->userPlaylistsService->countUserPlaylistContents($userPrimaryPlaylistId, $contentTypes);
         }
 
         $listLessons =
@@ -123,7 +88,109 @@ class UserListPagesController extends BaseController
         return view('account.playlists', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
-            "resetProgress" => $resetProgress,
+            "resetProgress" => false,
+            "initialPage" => $initialPage,
+            "noResultsMessage" => $noResultsMessage,
+        ]);
+    }
+
+    public function inProgress(Request $request, $domain, $brand)
+    {
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
+
+        ContentRepository::$pullFutureContent = true;
+
+        if (!empty($request->get('type'))) {
+            $contentTypes = [$request->get('type')];
+        } else {
+            $contentTypes = ContentTypes::userListContentTypes();
+        }
+
+        $noResultsMessage =
+            'You haven\'t started any lessons of that type yet, once you start a lesson of this type it will show up here for you to access later.';
+
+        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            $contentTypes,
+            auth()->id(),
+            UserContentProgressService::STATE_STARTED,
+            $request->get('limit', 20),
+            ($request->get('page', 1) - 1) * $request->get('limit', 20)
+        );
+
+        $totalResults = $this->contentService->countByTypesUserProgressState(
+            $contentTypes,
+            auth()->id(),
+            UserContentProgressService::STATE_STARTED,
+        );
+
+        $listLessons =
+            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]
+            ))->toResponseRawJson();
+
+        $initialPage = $request->get('page', 1);
+
+        $allowedTypes = ContentTypes::userListContentTypes();
+
+        usort($allowedTypes, function ($a, $b) {
+            return strcmp($a, $b);
+        });
+
+        return view('account.playlists', [
+            "listLessons" => $listLessons,
+            "allowedTypes" => $allowedTypes,
+            "resetProgress" => true,
+            "initialPage" => $initialPage,
+            "noResultsMessage" => $noResultsMessage,
+        ]);
+    }
+
+    public function completed(Request $request, $domain, $brand)
+    {
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
+
+        ContentRepository::$pullFutureContent = true;
+
+        if (!empty($request->get('type'))) {
+                $contentTypes = [$request->get('type')];
+        } else {
+            $contentTypes = ContentTypes::userListContentTypes();
+        }
+
+        $noResultsMessage =
+            'You haven\'t completed any lessons of that type yet, once you complete a lesson of this type it will show up here for you to access later.';
+
+        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            $contentTypes,
+            auth()->id(),
+            UserContentProgressService::STATE_COMPLETED,
+            $request->get('limit', 20),
+            ($request->get('page', 1) - 1) * $request->get('limit', 20)
+        );
+
+        $totalResults = $this->contentService->countByTypesUserProgressState(
+            $contentTypes,
+            auth()->id(),
+            UserContentProgressService::STATE_COMPLETED,
+        );
+
+        $listLessons =
+            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]
+            ))->toResponseRawJson();
+
+        $initialPage = $request->get('page', 1);
+
+        $allowedTypes = ContentTypes::userListContentTypes();
+
+        usort($allowedTypes, function ($a, $b) {
+            return strcmp($a, $b);
+        });
+
+        return view('account.playlists', [
+            "listLessons" => $listLessons,
+            "allowedTypes" => $allowedTypes,
+            "resetProgress" => true,
             "initialPage" => $initialPage,
             "noResultsMessage" => $noResultsMessage,
         ]);
