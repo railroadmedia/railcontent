@@ -172,6 +172,7 @@
             <content-schedule
               :subscription-calendar-id="subscriptionCalendarId"
               :theme-color="brand"
+              :brand="brand"
               :toggleSubscribePopup="toggleSubscribePopup"
               v-if="showSubscribePopup"
             ></content-schedule>

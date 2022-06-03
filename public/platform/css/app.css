@@ -24029,13 +24029,13 @@ a:visited{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
-.hover\:tw-text-gray-400:hover{
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
 .hover\:tw-text-\[\#00101D\]:hover{
   --tw-text-opacity: 1;
   color: rgb(0 16 29 / var(--tw-text-opacity));
+}
+.hover\:tw-text-gray-400:hover{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 .hover\:tw-underline:hover{
   -webkit-text-decoration-line: underline;
