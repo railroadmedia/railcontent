@@ -26,31 +26,14 @@ class CalculateContentPopularity extends Command
     protected $description = 'CalculateContentPopularity';
 
     /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * Create a new command instance.
-     *
-     * @param DatabaseManager $databaseManager
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager)
     {
         $this->info('CalculateContentPopularity start.');
-        $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConnection = $databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
         $pdo = $dbConnection->getPdo();
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
@@ -91,7 +74,7 @@ EOT;
 
             );
 
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            $databaseManager->connection(config('railcontent.database_connection_name'))
                 ->statement($statement);
 
         $this->info('Total time::  '.(microtime(true) - $startTime));

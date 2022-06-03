@@ -25,37 +25,14 @@ class CalculateTotalXP extends Command
     protected $description = 'CalculateTotalXP';
 
     /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    /**
-     * Create a new command instance.
-     *
-     * @param DatabaseManager $databaseManager
-     */
-    public function __construct(DatabaseManager $databaseManager, ContentService $contentService)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-        $this->contentService = $contentService;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager, ContentService $contentService)
     {
         $this->info('Calculate total XP values.');
-        $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConnection = $databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
         $pdo = $dbConnection->getPdo();
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
@@ -124,7 +101,7 @@ class CalculateTotalXP extends Command
 
             $start = microtime(true);
 
-            $this->calculateChildrenTotalXP($lessonType);
+            $this->calculateChildrenTotalXP($databaseManager, $lessonType);
 
             $sql = <<<'EOT'
 UPDATE `%s` cs
@@ -180,7 +157,7 @@ EOT;
                 $lessonType
             );
 
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            $databaseManager->connection(config('railcontent.database_connection_name'))
                 ->statement($statement);
 
             $finish = microtime(true) - $start;
@@ -218,7 +195,7 @@ EOT;
      * @param string $type
      * @return array
      */
-    private function calculateChildrenTotalXP(string $type)
+    private function calculateChildrenTotalXP(DatabaseManager $databaseManager, string $type)
     {
 
         $sql = <<<'EOT'
@@ -252,7 +229,7 @@ EOT;
             $type
         );
 
-        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+        $databaseManager->connection(config('railcontent.database_connection_name'))
             ->statement($statement);
 
         return $statement;

@@ -15,8 +15,6 @@ class CreateVimeoVideoContentRecords extends Command
     protected $signature = 'CreateVimeoVideoContentRecords {totalNumberToProcess?}';
     protected $description = 'Content from external resources.';
 
-    private $contentService;
-    private $databaseManager;
     private $lib;
 
     private $perPage;
@@ -27,17 +25,10 @@ class CreateVimeoVideoContentRecords extends Command
     private $totalNumberOfPagesToProcess;
     private $numberOnLastPage;
 
-    public function __construct(
+    public function handle(
         ContentService $contentService,
         DatabaseManager $databaseManager
     ) {
-        parent::__construct();
-        $this->contentService = $contentService;
-        $this->databaseManager = $databaseManager;
-    }
-
-    public function handle()
-    {
         $this->numberOnLastPage = null;
         $this->total = null;
         $this->totalNumberToProcess = null;
@@ -105,7 +96,7 @@ class CreateVimeoVideoContentRecords extends Command
                     }
                     // create if needed
                     $noRecordOfVideoInCMS = count(
-                            $this->contentService->getBySlugAndType(
+                            $contentService->getBySlugAndType(
                                 'vimeo-video-' . $id,
                                 'vimeo-video'
                             )
@@ -113,7 +104,7 @@ class CreateVimeoVideoContentRecords extends Command
 
                     if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
                         // store and add to array for mass insert
-                        $content = $this->contentService->create(
+                        $content = $contentService->create(
                             'vimeo-video-' . $id,
                             'vimeo-video',
                             ContentService::STATUS_PUBLISHED,
@@ -185,7 +176,7 @@ class CreateVimeoVideoContentRecords extends Command
             }
 
             // content-field data insert and assess DB-writing success
-            $contentFieldsWriteSuccess = $this->databaseManager->connection(
+            $contentFieldsWriteSuccess = $databaseManager->connection(
                 ConfigService::$databaseConnectionName
             )
                 ->table(ConfigService::$tableContentFields)->insert($contentFieldsInsertData);

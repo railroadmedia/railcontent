@@ -23,35 +23,18 @@ class CleanMetadata extends Command
     protected $description = 'Clean content metadata';
 
     /**
-     * @var DatabaseManager
-     */
-    protected $databaseManager;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void
      */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager)
     {
         $this->info('Started cleaning content metadata');
 
         $allDifficultyVariants = ['A', 'a', 'Al', 'al', 'All', 'all'];
         $allDifficultyValue = 'All Skill Levels';
 
-        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+        $databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContentFields)
             ->join(
                 ConfigService::$tableContent,
