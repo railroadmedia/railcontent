@@ -2652,21 +2652,21 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.45.0",
+            "version": "v1.46.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "28181b5ec2d40e9c9cdf2085096b33bac1f237fd"
+                "reference": "784a1d361c7dbc5de133feac590f549798c80f5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/28181b5ec2d40e9c9cdf2085096b33bac1f237fd",
-                "reference": "28181b5ec2d40e9c9cdf2085096b33bac1f237fd",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/784a1d361c7dbc5de133feac590f549798c80f5e",
+                "reference": "784a1d361c7dbc5de133feac590f549798c80f5e",
                 "shasum": ""
             },
             "require": {
                 "google/auth": "^1.18",
-                "guzzlehttp/guzzle": "^5.3|^6.0|^7.0",
+                "guzzlehttp/guzzle": "^5.3|^6.5.6|^7.4.3",
                 "guzzlehttp/promises": "^1.3",
                 "guzzlehttp/psr7": "^1.7|^2.0",
                 "monolog/monolog": "^1.1|^2.0",
@@ -2679,7 +2679,7 @@
                 "google/common-protos": "^1.0||^2.0",
                 "google/gax": "^1.9",
                 "opis/closure": "^3",
-                "phpdocumentor/reflection": "^3.0",
+                "phpdocumentor/reflection": "^3.0||^4.0",
                 "phpunit/phpunit": "^4.8|^5.0|^8.0",
                 "squizlabs/php_codesniffer": "2.*",
                 "yoast/phpunit-polyfills": "^1.0"
@@ -2711,22 +2711,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.45.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.46.0"
             },
-            "time": "2022-05-13T22:51:50+00:00"
+            "time": "2022-06-02T21:53:43+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.27.0",
+            "version": "v1.27.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "51edfafd86ca3fc71e542a16961fb35bd59d7186"
+                "reference": "f66d228d5991674c015bd32e5ed8d857d9d8352d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/51edfafd86ca3fc71e542a16961fb35bd59d7186",
-                "reference": "51edfafd86ca3fc71e542a16961fb35bd59d7186",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/f66d228d5991674c015bd32e5ed8d857d9d8352d",
+                "reference": "f66d228d5991674c015bd32e5ed8d857d9d8352d",
                 "shasum": ""
             },
             "require": {
@@ -2736,7 +2736,7 @@
             "require-dev": {
                 "erusev/parsedown": "^1.6",
                 "google/cloud-pubsub": "^1.0",
-                "phpdocumentor/reflection": "^3.0",
+                "phpdocumentor/reflection": "^3.0||^4.0",
                 "phpseclib/phpseclib": "^2.0||^3.0",
                 "phpunit/phpunit": "^4.8|^5.0|^8.0",
                 "squizlabs/php_codesniffer": "2.*",
@@ -2766,9 +2766,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.27.0"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.27.1"
             },
-            "time": "2022-05-13T22:51:50+00:00"
+            "time": "2022-06-02T21:53:43+00:00"
         },
         {
             "name": "google/crc32",
@@ -4304,16 +4304,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "cb36fee279f7fca01d5d9399ddd1b37e48e2eca1"
+                "reference": "6eddb90a9e4a1a8c5773226068fcfb48cb36812a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/cb36fee279f7fca01d5d9399ddd1b37e48e2eca1",
-                "reference": "cb36fee279f7fca01d5d9399ddd1b37e48e2eca1",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/6eddb90a9e4a1a8c5773226068fcfb48cb36812a",
+                "reference": "6eddb90a9e4a1a8c5773226068fcfb48cb36812a",
                 "shasum": ""
             },
             "require": {
@@ -4406,7 +4406,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-14T15:37:39+00:00"
+            "time": "2022-06-03T14:07:39+00:00"
         },
         {
             "name": "league/config",
@@ -6706,16 +6706,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.4",
+            "version": "v5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "fd87e8a7f801f2c9a7426fad2bb3c0649d02fbf5"
+                "reference": "fc1bd065f31ad5acec964bac784231fd936777cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/fd87e8a7f801f2c9a7426fad2bb3c0649d02fbf5",
-                "reference": "fd87e8a7f801f2c9a7426fad2bb3c0649d02fbf5",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/fc1bd065f31ad5acec964bac784231fd936777cd",
+                "reference": "fc1bd065f31ad5acec964bac784231fd936777cd",
                 "shasum": ""
             },
             "require": {
@@ -6751,22 +6751,22 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.4"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.5"
             },
-            "time": "2022-05-25T15:29:00+00:00"
+            "time": "2022-06-03T17:37:08+00:00"
         },
         {
             "name": "railroad/event-data-synchronizer",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "6418240ff2ec50e313acf2585464705f3162d5e0"
+                "reference": "ac229524c9b155c723a338d753a9945e6f5aaaae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/6418240ff2ec50e313acf2585464705f3162d5e0",
-                "reference": "6418240ff2ec50e313acf2585464705f3162d5e0",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/ac229524c9b155c723a338d753a9945e6f5aaaae",
+                "reference": "ac229524c9b155c723a338d753a9945e6f5aaaae",
                 "shasum": ""
             },
             "require": {
@@ -6813,9 +6813,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
-                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.0"
+                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.1"
             },
-            "time": "2022-05-27T22:47:20+00:00"
+            "time": "2022-06-03T17:55:38+00:00"
         },
         {
             "name": "railroad/location",
@@ -11518,21 +11518,21 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25"
+                "reference": "11cb2199493b2f8a3b53e7f19068fc6aac760991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6964c76c7804814a842473e0c8fd15bab0f18e25",
-                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/11cb2199493b2f8a3b53e7f19068fc6aac760991",
+                "reference": "11cb2199493b2f8a3b53e7f19068fc6aac760991",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "symfony/polyfill-ctype": "^1.8"
+                "ext-ctype": "*",
+                "php": "^7.2 || ^8.0"
             },
             "conflict": {
                 "phpstan/phpstan": "<0.12.20",
@@ -11570,9 +11570,9 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/1.10.0"
+                "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
-            "time": "2021-03-09T10:59:23+00:00"
+            "time": "2022-06-03T18:03:27+00:00"
         }
     ],
     "packages-dev": [
