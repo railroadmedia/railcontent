@@ -81,13 +81,14 @@
                     <tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                         <td style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 20px;" valign="top">
                             <table width="100%" cellpadding="0" cellspacing="0" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                {{--                                @foreach($input['lines'] as $line)--}}
-                                {{--                                    <tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">--}}
-                                {{--                                        <td style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0 0 20px;" valign="top">--}}
-                                {{--                                            {!! nl2br($line) !!}--}}
-                                {{--                                        </td>--}}
-                                {{--                                    </tr>--}}
-                                {{--                                @endforeach--}}
+                                @foreach($input['lines'] as $line)
+                                    <tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                        <td style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0 0 20px;" valign="top">
+{{--                                            {{$line}}--}}
+                                            {!! nl2br($line) !!}
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </td>
                     </tr>
