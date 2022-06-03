@@ -30,6 +30,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-one:
         domain: 'web-staging-one.musora.com'
+        runtime: docker
         memory: 1024
         cli-memory: 512
         runtime: 'php-8.1:al2'
