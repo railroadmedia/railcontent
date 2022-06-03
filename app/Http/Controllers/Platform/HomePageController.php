@@ -449,20 +449,15 @@ class HomePageController extends BaseController
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
 
-        $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => user()->id], [
-            'user_id' => user()->id,
-            'type' => 'primary-playlist',
-            'brand' => brand(),
-            'created_at' => Carbon::now()->toDateTimeString()
-        ]);
+        $userPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'primary-playlist', brand());
 
         if (empty($userPrimaryPlaylist)) {
             return (new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]));
         }
+        $userPrimaryPlaylistId = $userPrimaryPlaylist[0]['id'];
+        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents($userPrimaryPlaylistId, $this->parseContentTypes($contentTypes), 6);
 
-        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents($userPrimaryPlaylist['id'], $this->parseContentTypes($contentTypes), 6);
-
-        $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents($userPrimaryPlaylist['id'], $contentTypes);
+        $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents($userPrimaryPlaylistId, $contentTypes);
 
         return (new ContentFilterResultsEntity(
             ['results' => $usersPrimaryList, 'total_results' => $usersListTotalResults]

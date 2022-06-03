@@ -2,50 +2,33 @@
 
 namespace App\Decorators\Content;
 
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ContentHierarchyService;
-use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
+use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Support\Collection;
-use Railroad\Resora\Decorators\DecoratorInterface;
 
 class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
 {
     /**
-     * @var ContentService
+     * @var UserPlaylistContentRepository
      */
-    protected $contentService;
+    protected $userPlaylistContentRepository;
     /**
-     * @var ContentRepository
+     * @var UserPlaylistsRepository
      */
-    protected $contentRepository;
-    /**
-     * @var ContentHierarchyRepository
-     */
-    protected $contentHierarchyRepository;
+    protected $userPlaylistsRepository;
 
     private static $cache = [];
 
     /**
-     * AddedToPrimaryPlaylistDecorator constructor.
-     *
-     * @param ContentService $contentService
-     * @param ContentRepository $contentRepository
-     * @param ContentHierarchyRepository $contentHierarchyRepository
+     * @param UserPlaylistContentRepository $userPlaylistContentRepository
+     * @param UserPlaylistsRepository $userPlaylistsRepository
      */
     public function __construct(
-        ContentService $contentService,
-        ContentRepository $contentRepository,
-        ContentHierarchyRepository $contentHierarchyRepository,
-        UserContentProgressService $userContentProgressService,
-        ContentHierarchyService $contentHierarchyService
+        UserPlaylistContentRepository $userPlaylistContentRepository,
+        UserPlaylistsRepository $userPlaylistsRepository
     ) {
-        $this->contentService = $contentService;
-        $this->contentRepository = $contentRepository;
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
-        $this->userContentProgressService = $userContentProgressService;
-        $this->contentHierarchyService = $contentHierarchyService;
+        $this->userPlaylistContentRepository = $userPlaylistContentRepository;
+        $this->userPlaylistsRepository = $userPlaylistsRepository;
     }
 
     /**
@@ -67,13 +50,15 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
         if (key_exists(user()->id, self::$cache)) {
             $userPlaylistContents = self::$cache[user()->id];
         } else {
-            $userPlaylistContents = $this->contentRepository->getByUserIdWhereChildIdIn(
-                user()->id,
-                $contentIds,
-                'primary-playlist'
-            );
+            $userPlaylist =
+                \Arr::first($this->userPlaylistsRepository->getUserPlaylist(user()->id, 'primary-playlist', brand()));
 
-            self::$cache[user()->id] = $userPlaylistContents;
+            if ($userPlaylist) {
+                $userPlaylistContents =
+                    $this->userPlaylistContentRepository->getUserPlaylistContents($userPlaylist['id']);
+
+                self::$cache[user()->id] = $userPlaylistContents;
+            }
         }
 
         foreach ($contentsOfType as $index => $content) {
@@ -85,23 +70,13 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
             return $contents;
         }
 
-        $contentsHierarchy = $this->contentHierarchyRepository->getByParentIdWhereChildIdIn(
-            $userPlaylistContents[0]['id'],
-            $contentsOfType->pluck('id')
-                ->toArray()
-        );
-
         $contentsOfType = $contentsOfType->toArray();
 
         foreach ($contentsOfType as $index => $content) {
             foreach ($userPlaylistContents as $userPlaylistContent) {
-                foreach ($contentsHierarchy as $contentHierarchy) {
-
-                    if ($contentHierarchy['parent_id'] == $userPlaylistContent['id'] &&
-                        $contentHierarchy['child_id'] == $content['id']) {
-                        $contentsOfType[$index]['user_playlists'][user()->id][] = $userPlaylistContent;
-                        $contentsOfType[$index]['is_added_to_primary_playlist'] = true;
-                    }
+                if ($userPlaylistContent['id'] == $content['id']) {
+                    $contentsOfType[$index]['user_playlists'][user()->id][] = $userPlaylistContent;
+                    $contentsOfType[$index]['is_added_to_primary_playlist'] = true;
                 }
             }
         }
