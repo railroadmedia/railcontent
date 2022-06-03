@@ -74,12 +74,28 @@ class MyListJsonController extends Controller
             return response()->json(['error' => 'Incorrect content']);
         }
 
-        $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => $userId], [
-            'user_id' => $userId,
-            'type' => 'primary-playlist',
-            'brand' => $request->get('brand'),
-            'created_at' => Carbon::now()->toDateTimeString()
-        ]);
+        $userPrimaryPlaylists =
+            $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
+
+        if (empty($userPrimaryPlaylists)) {
+            $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate([
+                                                                                  'user_id' => $userId,
+                                                                                  'type' => 'primary-playlist',
+                                                                                  'brand' => $request->get('brand')
+                                                                                      ??
+                                                                                      config('railcontent.brand'),
+                                                                              ], [
+                                                                                  'user_id' => $userId,
+                                                                                  'type' => 'primary-playlist',
+                                                                                  'brand' => $request->get('brand')
+                                                                                      ??
+                                                                                      config('railcontent.brand'),
+                                                                                  'created_at' => Carbon::now()
+                                                                                      ->toDateTimeString(),
+                                                                              ]);
+        } else {
+            $userPrimaryPlaylist = Arr::first($userPrimaryPlaylists);
+        }
 
         $this->userPlaylistsService->addContentToUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
 
@@ -100,11 +116,15 @@ class MyListJsonController extends Controller
 
         $userId = auth()->id();
 
-        $userPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist',$request->get('brand'));
+        $userPrimaryPlaylist =
+            $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
 
-        if(!empty($userPrimaryPlaylist)){
+        if (!empty($userPrimaryPlaylist)) {
             $userPrimaryPlaylistId = Arr::first($userPrimaryPlaylist)['id'];
-            $this->userPlaylistsService->removeContentFromUserPlaylist($userPrimaryPlaylistId, $request->get('content_id'));
+            $this->userPlaylistsService->removeContentFromUserPlaylist(
+                $userPrimaryPlaylistId,
+                $request->get('content_id')
+            );
         }
 
         return response()->json(['success']);
@@ -135,12 +155,21 @@ class MyListJsonController extends Controller
         $includedFields = $request->get('included_fields', []);
 
         if (!$state) {
-            $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate(['user_id' => $userId], [
-                'user_id' => $userId,
-                'type' => 'primary-playlist',
-                'brand' => $request->get('brand') ?? config('railcontent.brand'),
-                'created_at' => Carbon::now()->toDateTimeString()
-            ]);
+            $usersPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate([
+                                                                                   'user_id' => $userId,
+                                                                                   'type' => 'primary-playlist',
+                                                                                   'brand' => $request->get('brand')
+                                                                                       ??
+                                                                                       config('railcontent.brand'),
+                                                                               ], [
+                                                                                   'user_id' => $userId,
+                                                                                   'type' => 'primary-playlist',
+                                                                                   'brand' => $request->get('brand')
+                                                                                       ??
+                                                                                       config('railcontent.brand'),
+                                                                                   'created_at' => Carbon::now()
+                                                                                       ->toDateTimeString(),
+                                                                               ]);
 
             if (empty($usersPrimaryPlaylist)) {
                 return (new ContentFilterResultsEntity([
