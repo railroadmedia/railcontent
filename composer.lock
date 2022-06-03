@@ -7274,12 +7274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "628f1a955f0fb808d6cfe5b939c179027d419e8e"
+                "reference": "4255543a1c965cd77314ebfb1afb6387cc250425"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/628f1a955f0fb808d6cfe5b939c179027d419e8e",
-                "reference": "628f1a955f0fb808d6cfe5b939c179027d419e8e",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/4255543a1c965cd77314ebfb1afb6387cc250425",
+                "reference": "4255543a1c965cd77314ebfb1afb6387cc250425",
                 "shasum": ""
             },
             "require": {
@@ -7333,7 +7333,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/0.5-php-mysql-8-migration"
             },
-            "time": "2022-05-27T20:06:54+00:00"
+            "time": "2022-06-03T22:20:05+00:00"
         },
         {
             "name": "railroad/railforums",
