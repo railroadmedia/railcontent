@@ -23,28 +23,11 @@ class ComputePastStats extends Command
     protected $description = 'Compute content statistics for a past interval';
 
     /**
-     * @var ContentStatisticsService
-     */
-    protected $contentStatisticsService;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(ContentStatisticsService $contentStatisticsService)
-    {
-        parent::__construct();
-
-        $this->contentStatisticsService = $contentStatisticsService;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void
      */
-    public function handle()
+    public function handle(ContentStatisticsService $contentStatisticsService)
     {
         $startDateString = $this->argument('startDate') ?: '2011-01-01';
         $startDate = Carbon::parse($startDateString);
@@ -59,7 +42,7 @@ class ComputePastStats extends Command
 
         $start = microtime(true);
 
-        $this->contentStatisticsService->computeContentStatistics($startDate, $endDate, $this);
+        $contentStatisticsService->computeContentStatistics($startDate, $endDate, $this);
 
         $finish = microtime(true) - $start;
 
