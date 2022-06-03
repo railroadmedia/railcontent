@@ -2,55 +2,39 @@
     <div class="flex flex-row flex-wrap align-v-center">
         <div class="flex flex-column xs-12 sm-8 pv-3">
             <div class="flex flex-row flex-wrap filter-tabs align-v-center">
-                <div
-                    class="heading-tab pointer mr-3 flex flex-auto"
-                    @click="changeTab('added')"
+                <!-- Added Tab -->
+                <a class="heading-tab pointer mr-3 flex flex-auto"
+                   :href="`/${brand}/lists/my-list`"
                 >
-                    <h3
-                        class="heading flex-auto hover-text-black"
+                    <h3 class="heading flex-auto hover-text-black"
                         :class="selected_tab === 'added' ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
                     >
                         Added
                     </h3>
-                </div>
-
-                <div
-                    class="heading-tab pointer mr-3 flex flex-auto"
-                    @click="changeTab('started')"
+                </a>
+                <!-- In Progress Tab -->
+                <a class="heading-tab pointer mr-3 flex flex-auto"
+                   :href="`/${brand}/lists/in-progress`"
                 >
-                    <h3
-                        class="heading flex-auto hover-text-black"
+                    <h3 class="heading flex-auto hover-text-black"
                         :class="selected_tab === 'started' ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
                     >
                         In Progress
                     </h3>
-                </div>
-
-                <div
-                    class="heading-tab pointer mr-3 flex flex-auto"
-                    @click="changeTab('completed')"
+                </a>
+                <!-- Completed Tab -->
+                <a class="heading-tab pointer mr-3 flex flex-auto"
+                   :href="`/${brand}/lists/completed`"
                 >
-                    <h3
-                        class="heading flex-auto hover-text-black"
+                    <h3 class="heading flex-auto hover-text-black"
                         :class="selected_tab === 'completed' ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
                     >
                         Complete
                     </h3>
-                </div>
-
-
-                <!--<h2 class="heading mh pointer"-->
-                <!--:class="selected_tab === 'added' ? 'text-black bb-' + themeColor + '-2' : 'text-grey-2'"-->
-                <!--@click="changeTab('added')">Added</h2>-->
-                <!--<h2 class="heading mh pointer"-->
-                <!--:class="selected_tab === 'started' ? 'text-black bb-' + themeColor + '-2' : 'text-grey-2'"-->
-                <!--@click="changeTab('started')">In Progress</h2>-->
-                <!--<h2 class="heading mh pointer"-->
-                <!--:class="selected_tab === 'completed' ? 'text-black bb-' + themeColor + '-2' : 'text-grey-2'"-->
-                <!--@click="changeTab('completed')">Completed</h2>-->
+                </a>
             </div>
         </div>
-
+        <!-- Catalog -->
         <div class="flex flex-column xs-12 sm-4 pv-1 align-v-center">
             <div class="flex flex-row nmh-1">
                 <catalogue-filter
@@ -91,6 +75,10 @@ export default {
             type: String,
             default: () => undefined,
         },
+        brand: {
+            type: String,
+            default: 'drumeo',
+        }
     },
     data() {
         return {
@@ -116,60 +104,7 @@ export default {
             }));
         },
     },
-    mounted() {
-        const params = window.location.search;
-        const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
-        const keys = Object.keys(query_object);
-
-        keys.forEach((key) => {
-            if (key === 'type') {
-                if (this.includedTypes.indexOf(query_object[key]) !== -1) {
-                    this.selected_types = query_object[key];
-                }
-            }
-
-            if (key === 'state') {
-                if (query_object[key] === 'started') {
-                    this.selected_tab = 'started';
-                }
-
-                if (query_object[key] === 'completed') {
-                    this.selected_tab = 'completed';
-                }
-            }
-        });
-    },
     methods: {
-        changeFilter(item) {
-            const params = window.location.search;
-            const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
-
-            console.log(item.value);
-
-            if (item.value) {
-                query_object.type = item.value;
-            } else if (query_object.type) {
-                delete query_object.type;
-            }
-
-            window.location.href = `${location.protocol}//${location.host 
-            }${location.pathname}?${QueryString.stringify(query_object)}`;
-        },
-
-        changeTab(tab) {
-            const params = window.location.search;
-            const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
-
-            if (tab !== 'added') {
-                query_object.state = tab;
-            } else if (query_object.state) {
-                delete query_object.state;
-            }
-
-            window.location.href = `${location.protocol}//${location.host 
-            }${location.pathname}?${QueryString.stringify(query_object)}`;
-        },
-
         formatOption(option) {
             return option.replace(/-/g, ' ').replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
         },

@@ -57,6 +57,7 @@
 
         <catalogue-playlist-tabs
             v-if="isPlaylists && !isCoach"
+            :brand="brand"
             :theme-color="themeColor"
             :included-types="includedTypes"
         />
