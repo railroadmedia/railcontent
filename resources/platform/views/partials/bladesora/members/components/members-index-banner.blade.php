@@ -9,7 +9,7 @@
         'vimeoVideo' => $vimeoVideo,
         ])
         @slot('topSubtitle')
-            Coach of The Month
+            Featured Coach
         @endslot
         @slot('title')
             @php

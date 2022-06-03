@@ -233,14 +233,14 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true)
+    public function profilePictureUrl($usingCDN = true): Attribute
     {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
 
-                if (!empty($this->profile_picture_url)) {
-                    $imageUrl = $this->profile_picture_url;
+                if (!empty($value)) {
+                    $imageUrl = $value;
                 }
 
                 if ($usingCDN) {
