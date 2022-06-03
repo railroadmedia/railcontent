@@ -6,8 +6,8 @@
                 <a class="heading-tab pointer mr-3 flex flex-auto"
                    :href="`/${brand}/lists/my-list`"
                 >
-                    <h3 class="heading flex-auto hover-text-black"
-                        :class="isActive(`/${brand}/lists/my-list`) ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
+                    <h3 class="tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white"
+                        :class="isActive(`/${brand}/lists/my-list`) ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                     >
                         Added
                     </h3>
@@ -16,8 +16,8 @@
                 <a class="heading-tab pointer mr-3 flex flex-auto"
                    :href="`/${brand}/lists/in-progress`"
                 >
-                    <h3 class="heading flex-auto hover-text-black"
-                        :class="isActive(`/${brand}/lists/in-progress`) ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
+                    <h3 class="tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white"
+                        :class="isActive(`/${brand}/lists/in-progress`) ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                     >
                         In Progress
                     </h3>
@@ -26,8 +26,8 @@
                 <a class="heading-tab pointer mr-3 flex flex-auto"
                    :href="`/${brand}/lists/completed`"
                 >
-                    <h3 class="heading flex-auto hover-text-black"
-                        :class="isActive(`/${brand}/lists/completed`) ? ('text-black bb-' + themeColor + '-2') : 'text-grey-3 font-regular'"
+                    <h3 class="tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white"
+                        :class="isActive(`/${brand}/lists/completed`) ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                     >
                         Complete
                     </h3>
