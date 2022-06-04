@@ -5,7 +5,7 @@ environments:
         domain: 'platform.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -14,7 +14,7 @@ environments:
         domain: 'pre-production.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -23,7 +23,7 @@ environments:
         domain: 'beta-testing.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -41,7 +41,7 @@ environments:
         domain: 'web-staging-two.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -50,7 +50,7 @@ environments:
         domain: 'web-staging-three.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -59,7 +59,7 @@ environments:
         domain: 'web-staging-four.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -68,7 +68,7 @@ environments:
         domain: 'web-staging-five.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -77,7 +77,7 @@ environments:
         domain: 'app-staging-one.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -86,7 +86,7 @@ environments:
         domain: 'app-staging-two.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -95,7 +95,7 @@ environments:
         domain: 'app-staging-three.musora.com'
         memory: 1024
         cli-memory: 512
-        runtime: 'php-8.1:al2'
+        runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'

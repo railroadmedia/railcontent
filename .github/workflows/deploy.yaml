@@ -5,7 +5,7 @@ on:
     branches: [ project-laravel-vapor ]
 
 jobs:
-  deploy:
+  deploy-web-staging-one:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/project-laravel-vapor'
     steps:
