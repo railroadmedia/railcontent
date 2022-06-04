@@ -7,7 +7,7 @@ on:
 jobs:
   deploy-web-staging-one:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/project-laravel-vapor'
+    if: github.ref == 'refs/heads/web-staging-one'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
