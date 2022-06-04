@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ project-laravel-vapor ]
+    branches: [ web-staging-one ]
 
 jobs:
   deploy-web-staging-one:
