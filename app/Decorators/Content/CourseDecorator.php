@@ -35,7 +35,6 @@ class CourseDecorator extends TypeDecoratorBase
 
         // lesson count first and add lessons
         foreach ($contentsOfType as $contentIndex => $content) {
-            $contentsOfType[$contentIndex]['lesson_count'] = 0;
             $contentsOfType[$contentIndex]['duration'] = 0;
             $contentsOfType[$contentIndex]['xp'] = $content->fetch(
                 'fields.xp',
@@ -49,7 +48,6 @@ class CourseDecorator extends TypeDecoratorBase
 
             foreach ($courseLessons as $courseLessonIndex => $courseLesson) {
                 if ($courseLesson['parent_id'] == $content['id']) {
-                    $contentsOfType[$contentIndex]['lesson_count'] += 1;
                     $contentsOfType[$contentIndex]['lessons'][] = $courseLesson;
 
                     $contentsOfType[$contentIndex]['duration'] = $contentsOfType[$contentIndex]['total_length_in_seconds'] =
