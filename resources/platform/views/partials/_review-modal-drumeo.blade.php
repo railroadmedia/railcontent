@@ -7,13 +7,14 @@
 
         <form id="studentFocusForm"
               method="POST"
-              action=""
+              action="{{url()->route('platform.mail'),}}"
               accept-charset="UTF-8">
+            {{ csrf_field() }}
 
-            <input type="hidden" name="type" value="student-focus-application">
+            <input type="hidden" name="type" value="student-focus-application-drumeo">
             <?php $user = auth()->user(); /** @var Railroad\Usora\Entities\User $user */ ?>
-            <input type="hidden" name="subject" value="Student Focus Application from {{ user()->email }}">
             <input type="hidden" name="success-message" value="Your email has been sent. We'll be in touch very soon!">
+            <input type="hidden" name="brand" value="{{ $brand }}">
 
             <div class="flex flex-column mb-2">
                 <p class="body">What is your current drumming skill level?</p>
