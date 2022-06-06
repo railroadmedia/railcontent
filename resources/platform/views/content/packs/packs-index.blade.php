@@ -14,7 +14,7 @@
                         <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                             <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                                 <i class="icon-packs tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                                <span class="tw-text-32">Packs</span>
+                                <span class="tw-text-32 tw-font-bold">Packs</span>
                             </h1>
                             <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
                                 Here you can access Musora training packs. If you've purchased access to these packs

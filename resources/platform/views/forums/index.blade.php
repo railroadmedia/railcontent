@@ -19,10 +19,11 @@
                 'profileUrl' => user()->getDashboardUrl(),
             ])
                 @slot('content')
-                    <div class="tw-inline-flex tw-w-full tw-flex-col sm:tw-pr-4 sm:tw-mt-10">
+                    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                            <i class="fas fa-comments tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                            <span class="tw-text-32"><span class="tw-capitalize">{{ $brand }}</span> Forums</span>
+                            <musora-icon icon-name="messages-filled" 
+                                         class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                            <span class="tw-text-32 tw-font-bold"><span class="tw-capitalize">{{ $brand }}</span> Forums</span>
                         </h1>
 
                         <p class="tw-text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
