@@ -471,30 +471,16 @@ class SeedUserContentData extends Command
         'singeo' => [347694, 322496, 309845, 305432],
     ];
 
-    private ContentRepository $contentRepository;
-    private ContentService $contentService;
-    private ContentHierarchyService $contentHierarchyService;
-
-    public function __construct(
-        ContentRepository $contentRepository,
-        ContentService $contentService,
-        ContentHierarchyService $contentHierarchyService
-    ) {
-        parent::__construct();
-
-        $this->contentRepository = $contentRepository;
-        $this->contentService = $contentService;
-        $this->contentHierarchyService = $contentHierarchyService;
-    }
-
-
     /**
      * Execute the console command.
      *
      * @return int
      */
-    public function handle()
-    {
+    public function handle(
+        ContentRepository $contentRepository,
+        ContentService $contentService,
+        ContentHierarchyService $contentHierarchyService
+    ) {
         $user = User::query()->where('email', $this->argument('userEmail'))->firstOrFail();
         $dbConnection = DB::connection(config('railcontent.database_connection_name'));
 
@@ -539,7 +525,14 @@ class SeedUserContentData extends Command
 
             // user my-list additions
             for ($i = 3; $i < 40; $i++) {
-                $this->addToPrimaryPlaylist($brandString, $this->contentIdMap[$brandString][$i], $user->id);
+                $this->addToPrimaryPlaylist(
+                    $contentRepository,
+                    $contentService,
+                    $contentHierarchyService,
+                    $brandString,
+                    $this->contentIdMap[$brandString][$i],
+                    $user->id
+                );
             }
             $this->info('Done adding my list content.');
 
@@ -562,15 +555,21 @@ class SeedUserContentData extends Command
 
     /**
      */
-    public function addToPrimaryPlaylist($brand, $contentId, $userId)
-    {
+    public function addToPrimaryPlaylist(
+        ContentRepository $contentRepository,
+        ContentService $contentService,
+        ContentHierarchyService $contentHierarchyService,
+        $brand,
+        $contentId,
+        $userId
+    ) {
         $userPrimaryPlaylists =
-            collect($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            collect($contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
 
         $userPrimaryPlaylist = $userPrimaryPlaylists->where('brand', $brand)->first();
 
         if (!$userPrimaryPlaylist) {
-            $userPrimaryPlaylist = $this->contentService->create(
+            $userPrimaryPlaylist = $contentService->create(
                 'primary-playlist',
                 'user-playlist',
                 ContentService::STATUS_PUBLISHED,
@@ -582,7 +581,7 @@ class SeedUserContentData extends Command
             );
         }
 
-        $this->contentHierarchyService->create($userPrimaryPlaylist['id'], $contentId, 1);
+        $contentHierarchyService->create($userPrimaryPlaylist['id'], $contentId, 1);
 
         return response()->json(['success']);
     }
