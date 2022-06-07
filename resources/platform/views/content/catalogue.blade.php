@@ -41,40 +41,40 @@
                 <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">
                         @if($catalogueMeta['name'] == 'Q&A')
-                            <musora-icon icon-name="light-bulb-filled" 
+                            <musora-icon icon-name="light-bulb-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Routines')
-                            <musora-icon icon-name="routines" 
+                            <musora-icon icon-name="routines"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Quick Tips')
-                            <musora-icon icon-name="light-bulb-filled" 
+                            <musora-icon icon-name="light-bulb-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Songs')
-                            <musora-icon icon-name="headphones-filled" 
+                            <musora-icon icon-name="headphones-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Bootcamps')
-                            <musora-icon icon-name="keys-filled" 
+                            <musora-icon icon-name="keys-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
-                            <musora-icon icon-name="podcast-filled" 
+                            <musora-icon icon-name="podcast-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Student Focus')
-                            <musora-icon icon-name="person-plus-filled" 
+                            <musora-icon icon-name="person-plus-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Q & A')
-                            <musora-icon icon-name="question-mark-circle" 
+                            <musora-icon icon-name="question-mark-circle"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Student Reviews')
-                            <musora-icon icon-name="person-plus-filled" 
+                            <musora-icon icon-name="person-plus-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Chords & Scales')
-                            <musora-icon icon-name="guitar-tabs-filled" 
+                            <musora-icon icon-name="guitar-tabs-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Archives')
-                            <musora-icon icon-name="archives-filled" 
+                            <musora-icon icon-name="archives-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @else
-                            <musora-icon icon-name="academic-cap-filled" 
+                            <musora-icon icon-name="academic-cap-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @endif
                         <span class="tw-text-32">{{ ucfirst($catalogueMeta['name']) }}</span>
@@ -111,6 +111,14 @@
                 @endif
             @endslot
         @endcomponent
+
+        @if(session()->has('success-message'))
+            <div class="form-success-message container mt-3">
+                <div class="flex flex-column bg-success shadow corners-10 pa">
+                    <p class="body text-white">{{ session()->get('success-message') }}</p>
+                </div>
+            </div>
+        @endif
 
         @if($hasStartedLessons)
             <section class="tw-container tw-mx-auto tw-pt-4 md:tw-pt-5 md:tw-px-8">
