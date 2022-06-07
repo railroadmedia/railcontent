@@ -33,15 +33,20 @@ class MailController extends Controller
      */
     public function sendFromMember(Request $request)
     {
+        $input = $request->all();
+
         $request->validate([
-            'experience' => 'required',
+            'instructor_focus' => 'required',
             'improvement' => 'required',
             'weakness' => 'required',
-            'instructor_focus' => 'required',
             'goal' => 'required'
         ]);
 
-        $input = $request->all();
+        if ($input['brand'] == 'drumeo') {
+            $request->validate(['experience' => 'required']);
+        } else {
+            $request->validate(['youtube_url' => 'required']);
+        }
 
         $result = $this->mailService->sendStudentFocusApplicationEmail($input);
 
@@ -49,9 +54,6 @@ class MailController extends Controller
             $errorMessage =
                 "Error while trying to send. Please send your request directly to support, and we'll " .
                 "ensure it gets to the correct person.";
-            if (isset($input['error-message']) && $input['error-message']) {
-                $errorMessage = $input['error-message'];
-            }
 
             return redirect()
                 ->back()
@@ -77,7 +79,6 @@ class MailController extends Controller
 //                'Awarded for submitting a student focus application.'
 //            );
 //        }
-
 
         return redirect()
             ->back()
