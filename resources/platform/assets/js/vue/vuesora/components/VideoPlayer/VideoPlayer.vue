@@ -485,7 +485,7 @@ export default {
             playerErrorCode: null,
             isFullscreen: false,
             contextMenu: false,
-            shakaPlayer: null,
+            $shakaPlayer: null,
             mediaElement: null,
             textTracks: [],
             currentTextTrackLanguage: null,
@@ -539,11 +539,11 @@ export default {
         isAbrEnabled: {
             cache: false,
             get() {
-                // if (this.shakaPlayer == null) {
+                // if (this.$shakaPlayer == null) {
                 //     return false;
                 // }
                 //
-                // const { abr } = this.shakaPlayer.getConfiguration();
+                // const { abr } = this.$shakaPlayer.getConfiguration();
                 //
                 // return abr ? abr.enabled : false;
 
@@ -554,11 +554,11 @@ export default {
         playbackQualities: {
             cache: false,
             get() {
-                if (this.shakaPlayer == null) {
+                if (this.$shakaPlayer == null) {
                     return [];
                 }
 
-                // const qualities = this.shakaPlayer.getVariantTracks().map(source => ({
+                // const qualities = this.$shakaPlayer.getVariantTracks().map(source => ({
                 //     ...source,
                 //     label: PlayerUtils.getQualityLabelByHeight(source.height),
                 // }));
@@ -632,10 +632,10 @@ export default {
         bufferedTimeRanges: {
             cache: false,
             get() {
-                if (this.shakaPlayer != null) {
+                if (this.$shakaPlayer != null) {
                     // const supportsMSE = typeof MediaSource === 'function';
                     // if (supportsMSE) {
-                    //     return this.shakaPlayer.getBufferedInfo().total;
+                    //     return this.$shakaPlayer.getBufferedInfo().total;
                     // }
 
                     if (this.mediaElement) {
@@ -667,8 +667,8 @@ export default {
 
         playerStats: {
             get() {
-                if (this.shakaPlayer != null) {
-                    return this.shakaPlayer.getStats();
+                if (this.$shakaPlayer != null) {
+                    return this.$shakaPlayer.getStats();
                 }
 
                 return null;
@@ -733,21 +733,21 @@ export default {
         shaka.polyfill.installAll()
 
         if (shaka.Player.isBrowserSupported() && !PlayerUtils.isIE()) {
-            this.shakaPlayer = new shaka.Player();
+            this.$shakaPlayer = new shaka.Player();
 
             Object.keys(this.eventHandlers).forEach((event) => {
-                this.shakaPlayer.addEventListener(event, this.eventHandlers[event]);
+                this.$shakaPlayer.addEventListener(event, this.eventHandlers[event]);
             });
 
             //this.mediaElement = player;
 
-            console.log('this shakaplayer', typeof this.shakaPlayer.attach)
-            this.shakaPlayer.attach(this.$refs.player)
+            console.log('this shakaplayer', typeof this.$shakaPlayer.attach)
+            this.$shakaPlayer.attach(this.$refs.player)
                 .then(() => {
                     console.log('attach was done')
-                    this.mediaElement = this.shakaPlayer.getMediaElement();
+                    this.mediaElement = this.$shakaPlayer.getMediaElement();
 
-                    this.shakaPlayer.configure({
+                    this.$shakaPlayer.configure({
                         abr: {
                             restrictions: {
                                 maxHeight: window.screen.height,
@@ -840,7 +840,7 @@ export default {
         document.removeEventListener('click', this.closeDrawers);
         document.removeEventListener('mouseup', this.mouseUpEventHandler);
 
-        this.shakaPlayer.destroy();
+        this.$shakaPlayer.destroy();
     },
     methods: {
 
@@ -879,17 +879,17 @@ export default {
                 // Caleb - May 2020
 
                 // if (supportsMSE) {
-                // this.shakaPlayer.load(this.source.file, null, 'video/mp4')
+                // this.$shakaPlayer.load(this.source.file, null, 'video/mp4')
                 //     .then(() => {
                 //         this.$nextTick(() => this.$forceUpdate());
                 //
-                //         console.log(this.shakaPlayer.loadMode_);
+                //         console.log(this.$shakaPlayer.loadMode_);
                 //
                 //         resolve();
                 //
                 //         if (this.captions) {
                 //             setTimeout(() => {
-                //                 let promise1 = this.shakaPlayer.addTextTrack('https://gofile.io/d/ha1xNl', 'en', 'subtitle', 'text/vtt', null, 'English')
+                //                 let promise1 = this.$shakaPlayer.addTextTrack('https://gofile.io/d/ha1xNl', 'en', 'subtitle', 'text/vtt', null, 'English')
                 //                 console.log(promise1);
                 //
                 //             }, 5000);
@@ -1139,11 +1139,11 @@ export default {
                 });
 
             // if (payload === 'auto') {
-            //     this.shakaPlayer.configure('abr.enabled', true);
+            //     this.$shakaPlayer.configure('abr.enabled', true);
             // } else {
-            //     this.shakaPlayer.configure('abr.enabled', false);
+            //     this.$shakaPlayer.configure('abr.enabled', false);
             //
-            //     this.shakaPlayer.selectVariantTrack(payload, true);
+            //     this.$shakaPlayer.selectVariantTrack(payload, true);
             // }
         },
 
