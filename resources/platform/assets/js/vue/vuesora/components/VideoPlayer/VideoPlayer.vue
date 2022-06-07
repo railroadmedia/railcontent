@@ -5,11 +5,10 @@
             class="video-wrap"
             :class="{'picture-in-picture': isPipEnabled}"
         >
-
             <div class="widescreen bg-black">
                 <div
                     ref="container"
-                    class="tw-flex tw-flex-col video-player"
+                    class="flex flex-column video-player"
                     :class="{'user-active': userActive || !isPlaying}"
                     @contextmenu.stop.prevent="toggleContextMenu"
                     @mousemove="trackMousePosition"
@@ -41,7 +40,7 @@
                     <transition name="fade">
                         <span
                             v-show="currentPlaybackRate !== 1"
-                            class="rate-indicator title tw-text-white pa-1"
+                            class="rate-indicator title text-white pa-1"
                         >
                             {{ currentPlaybackRate }}x
                         </span>
@@ -50,11 +49,11 @@
                     <div
                         v-show="contextMenu"
                         ref="contextMenu"
-                        class="context-menu bg-grey-5 tw-pointer tw-text-white tw-shadow overflow"
+                        class="context-menu bg-grey-5 pointer text-white shadow overflow"
                         :style="contextMenuPosition"
                         @click.stop.prevent
                     >
-                        <ul class="tw-list-none tiny dense tw-font-bold">
+                        <ul class="list-style-none tiny dense font-bold">
                             <li
                                 v-if="!isMobile && useKeyboard"
                                 class="pa-1 hover-bg-grey-4"
@@ -92,7 +91,7 @@
                     <transition name="fade">
                         <div
                             v-show="isChromeCastConnected"
-                            class="cast-dialog tw-flex flex-center pa-3 text-center text-white"
+                            class="cast-dialog flex flex-center pa-3 text-center text-white"
                         >
                             <span style="font-size:72px;">
                                 <i class="fab fa-chromecast"></i>
@@ -111,7 +110,6 @@
                     >
 
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
-
                     </video>
 
                     <div
@@ -125,7 +123,7 @@
                                 v-show="isTransitioning"
                                 class="player-overlay big-play-button pointer"
                             >
-                                <div class="overlay-play tw-rounded flex-center shadows">
+                                <div class="overlay-play rounded flex-center shadows">
                                     <i
                                         class="fas"
                                         :class="isPlaying ? 'fa-pause' : 'fa-play'"
@@ -135,7 +133,7 @@
                         </transition>
 
                         <div class="top-controls">
-                            <div class="tw-flex tw-flex-row tw-justify-center">
+                            <div class="flex flex-row align-h-right">
                                 <transition name="grow-fade">
                                     <PlayerButton
                                         v-if="isChromeCastSupported && controls.chromecast && !isPipEnabled"
@@ -173,10 +171,10 @@
                             </div>
                         </div>
 
-                        <div class="player-controls tw-flex tw-flex-col noselect">
+                        <div class="player-controls flex flex-column noselect">
                             <!--  TOP ROW  -->
                             <div
-                                class="tw-flex tw-flex-row"
+                                class="flex flex-row"
                                 style="min-height:50px;"
                                 @dblclick.stop.prevent="() => false"
                                 @click.stop.prevent="() => false"
@@ -191,7 +189,7 @@
                                     <i class="fas fa-undo"></i>
                                 </PlayerButton>
 
-                                <div class="tw-flex tw-flex-col spacer"></div>
+                                <div class="flex flex-column spacer"></div>
 
                                 <PlayerButton
                                     v-if="controls.forward"
@@ -207,7 +205,7 @@
                             <!--  MIDDLE ROW  -->
                             <div
                                 v-if="controls.progress"
-                                class="tw-flex tw-flex-row"
+                                class="flex flex-row"
                                 @dblclick.stop.prevent="() => false"
                             >
                                 <PlayerProgress
@@ -228,7 +226,7 @@
 
                             <!--  BOTTOM ROW  -->
                             <div
-                                class="tw-flex tw-flex-row"
+                                class="flex flex-row"
                                 @dblclick.stop.prevent="() => false"
                                 @click.stop.prevent="() => false"
                             >
@@ -247,12 +245,12 @@
 
                                 <div
                                     v-if="controls.time"
-                                    class="tw-flex tw-flex-col tw-text-white body tw-justifyt-center noselect tw-flex-auto"
+                                    class="flex flex-column text-white body align-v-center noselect flex-auto"
                                 >
                                     {{ parseTime(currentTime) }} / {{ parseTime(totalDuration) }}
                                 </div>
 
-                                <div class="tw-flex tw-flex-col spacer"></div>
+                                <div class="flex flex-column spacer"></div>
 
                                 <PlayerVolume
                                     v-if="!isMobile && controls.volume"
@@ -350,7 +348,7 @@
     </div>
 </template>
 <script>
-import shaka from 'shaka-player';
+import shaka from 'shaka-player/dist/shaka-player.compiled.debug';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
 import ContentService from '../../assets/js/services/content';
@@ -716,6 +714,8 @@ export default {
     },
     mounted() {
         const { player, videoWrap } = this.$refs;
+        console.log(player)
+        console.log(this.sources)
         const supportsMSE = false;
 
         this.currentRange = window.localStorage.getItem('currentRange') || 'original';
@@ -730,7 +730,7 @@ export default {
         //     window.muxjs = muxjs;
         // }
 
-        shaka.polyfill.installAll();
+        shaka.polyfill.installAll()
 
         if (shaka.Player.isBrowserSupported() && !PlayerUtils.isIE()) {
             this.shakaPlayer = new shaka.Player();
@@ -739,10 +739,14 @@ export default {
                 this.shakaPlayer.addEventListener(event, this.eventHandlers[event]);
             });
 
-            this.shakaPlayer.attach(player)
-                console.log('this ran')
+            //this.mediaElement = player;
+
+            console.log('this shakaplayer', typeof this.shakaPlayer.attach)
+            this.shakaPlayer.attach(this.$refs.player)
                 .then(() => {
+                    console.log('attach was done')
                     this.mediaElement = this.shakaPlayer.getMediaElement();
+
                     this.shakaPlayer.configure({
                         abr: {
                             restrictions: {
@@ -760,14 +764,17 @@ export default {
                     return this.loadSource();
                 })
                 .then(() => {
+                    console.log('second then for attach function')
                     this.initializePlayer();
                 })
                 .catch((error) => {
+                    console.log('error catch log', error)
                     if (error.severity === 2) {
                         this.playerError = true;
                         this.playerErrorCode = error.code;
                     }
                 });
+                
         } else {
             this.playerError = true;
             this.playerErrorCode = 'Browser Not Supported';
@@ -862,6 +869,7 @@ export default {
         },
 
         loadSource(source) {
+            console.log('load source', source)
             // const supportsMSE = typeof MediaSource === 'function';
             this.getSource(source);
 
@@ -905,6 +913,7 @@ export default {
                 // } else {
 
                 this.mediaElement.src = this.source.file;
+                console.log(this.source.file)
 
                 setTimeout(() => {
                     resolve();
