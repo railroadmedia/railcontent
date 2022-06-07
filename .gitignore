@@ -112,6 +112,21 @@ dist
 
 .idea
 .phpunit*
+auth.json.vapor/
+.env.production
+.env.staging
+
+.vapor
 auth.json
 
 .env.*
+.env.pre-production
+.env.app-staging-three
+.env.beta-testing
+.env.web-staging-one
+.env.web-staging-two
+.env.web-staging-three
+.env.web-staging-four
+.env.web-staging-five
+.env.app-staging-one
+.env.app-staging-two

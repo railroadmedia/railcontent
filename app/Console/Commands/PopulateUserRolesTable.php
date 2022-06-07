@@ -28,31 +28,15 @@ class PopulateUserRolesTable extends Command
     protected $description = 'Populate new roles table, permission_model_has_roles, with roles from old user_roles table.';
 
     /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-
-    /**
-     * PopulateNewUserProgressDateTimeColumns constructor.
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager)
     {
         print_r("##### PopulateUserRolesTable command starts now ######\n");
 
-        $dbConn = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConn = $databaseManager->connection(config('railcontent.database_connection_name'));
 
         $userRoles = $dbConn->table('user_roles')->select('*')->get()->toArray();
 
