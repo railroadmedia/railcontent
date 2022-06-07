@@ -28,7 +28,8 @@
                     "inputValue" => old('experience'),
                     "inputErrors" => $errors->get('experience') ?? null,
                     "inputOptions" => ['beginner', 'intermediate', 'advanced'],
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -42,7 +43,8 @@
                     "inputValue" => old('improvement'),
                     "inputErrors" => $errors->get('improvement') ?? null,
                     "type" => "text",
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -56,7 +58,8 @@
                     "inputValue" => old('weakness'),
                     "inputErrors" => $errors->get('weakness') ?? null,
                     "type" => "text",
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -70,7 +73,8 @@
                     "inputValue" => old('instructor_focus'),
                     "inputErrors" => $errors->get('instructor_focus') ?? null,
                     "type" => "text",
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -85,7 +89,8 @@
                     "inputValue" => old('goal'),
                     "inputErrors" => $errors->get('goal') ?? null,
                     "inputOptions" => ['fun/hobbyist', 'cover band', 'professional'],
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
