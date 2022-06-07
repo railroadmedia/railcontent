@@ -35,5 +35,11 @@ class AppServiceProvider extends ServiceProvider
             EventDataSynchronizerUserProviderInterface::class,
             app()->make(EventDataSynchronizerUserProvider::class)
         );
+
+        //railnotifications package providers
+        app()->instance(\Railroad\Railnotifications\Contracts\UserProviderInterface::class, app()->make(RailnotificationsUserProvider::class));
+        app()->instance(\Railroad\Railnotifications\Contracts\ContentProviderInterface::class, app()->make(RailnotificationsContentProvider::class));
+        app()->instance(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, app()->make(RailnotificationsForumProvider::class));
+
     }
 }
