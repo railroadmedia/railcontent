@@ -24,7 +24,7 @@ return [
     'elastic_search_username' => env('ELASTIC_SEARCH_USERNAME', 'elastic'),
     'elastic_search_password' => env('ELASTIC_SEARCH_PASSWORD', 'changeme'),
     'elastic_search_port' => env('ELASTIC_SEARCH_PORT', 9200),
-    'elastic_search_transport' => env('ELASTIC_SEARCH_TRANSPORT','http'),
+    'elastic_search_transport' => env('ELASTIC_SEARCH_TRANSPORT', 'http'),
     'elastic_index_name' => 'content',
 
     'field_option_list' => [
@@ -1076,7 +1076,7 @@ return [
         281911 => 311690,
         325266 => 255287,
     ],
-    'coachesFilePath' => __DIR__.'/../Coaches v2.0.2.csv',
+    'coachesFilePath' => __DIR__ . '/../Coaches v2.0.2.csv',
 
     'coachContentTypes' => [
         'course',
@@ -1086,6 +1086,16 @@ return [
         'quick-tips',
         'pack',
         'semester-pack',
+    ],
+
+    'contentTypesWithChildren' => [
+        'course',
+        'song',
+    ],
+
+    'contentTypesWithSingularParent' => [
+        'course-part',
+        'song-part',
     ],
 
     'contentColumnNamesForFields' => [

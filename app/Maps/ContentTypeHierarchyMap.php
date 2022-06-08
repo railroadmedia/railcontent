@@ -12,5 +12,8 @@ class ContentTypeHierarchyMap
         'learning-path' => 'learning-path-level',
         'learning-path-level' => 'learning-path-course',
         'learning-path-course' => 'learning-path-lesson',
+        'unit' => 'unit-part',
+        'song' => 'song-part',
+        'course' => 'course-part',
     ];
 }

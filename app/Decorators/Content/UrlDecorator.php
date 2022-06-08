@@ -2,7 +2,9 @@
 
 namespace App\Decorators\Content;
 
+use App\Maps\ContentTypeHierarchyMap;
 use App\Maps\ContentTypes;
+use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
@@ -206,94 +208,19 @@ class UrlDecorator extends ModeDecoratorBase
 //                    ]
 //                );
 //            }
-//
-//            if ($content['type'] == 'learning-path-level') {
-//
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.learning-path.level.show',
-//                    [
-//                        'pianote-method',
-//                        $content['slug'],
-//                    ]
-//                );
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.musora-api.learning-path.level.show',
-//                    [
-//                        'pianote-method',
-//                        $content['slug'],
-//                    ]
-//                );
-//
-//                $musoraApiUrl= url()->route(
-//                    'mobile.musora-api.learning-path.level.show',
-//                    [
-//                        'pianote-method',
-//                        $content['slug'],
-//                    ]
-//                );
-//
-//            }
-//            if ($content['type'] == 'learning-path-course') {
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.learning-path.jump-to-course',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.members.learning-path.course.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $musoraApiUrl= url()->route(
-//                    'mobile.musora-api.learning-path.course.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//            }
-//
-//            if ($content['type'] == 'learning-path-lesson') {
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.learning-path.jump-to-lesson',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.members.learning-path.level.course.lesson.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $musoraApiUrl= url()->route(
-//                    'mobile.musora-api.learning-path.lesson.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//            }
-//
+
 //            // courses/songs
-//            if (in_array($content['type'], ContentTypes::$contentTypesWithChildren)) {
-//
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.parent.show',
-//                    [
-//                        array_flip(ContentTypes::$urlSegmentToContentType)[$content['type']],
-//                        $content['slug'],
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                self::$contentCache[$content['id']] = $content;
-//
+            if (in_array($content['type'], ContentTypes::contentTypesWithChildren())) {
+                $contents[$contentIndex]['url'] =
+                    url()->route(
+                        'platform.content.first-level',
+                        [
+                            array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']],
+                            $content['slug'],
+                            $content['id']
+                        ]
+                    );
+
 //                $mobileUrl = url()->route(
 //                    'mobile.content.show',
 //                    [
@@ -307,26 +234,22 @@ class UrlDecorator extends ModeDecoratorBase
 //                        $content['id'],
 //                    ]
 //                );
-//            }
-//
-//            // lessons with single parent
-//            if (in_array($content['type'], ContentTypes::$contentTypesWithSingularParent) &&
-//                !empty($parent1 = self::$contentCache[$content['parent_id']] ?? null) &&
-//                !empty(array_flip(ContentTypes::$urlSegmentToContentType)[$parent1['type']] ?? null)) {
-//
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.lesson.show',
-//                    [
-//                        array_flip(ContentTypes::$urlSegmentToContentType)[$parent1['type']],
-//                        $parent1['slug'],
-//                        $parent1['id'],
-//                        $content['slug'],
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                self::$contentCache[$content['id']] = $content;
-//
+            }
+
+            // lessons with single parent
+            if (in_array($content['type'], ContentTypes::contentTypesWithSingularParent()) &&
+                !empty($parent = self::$contentCache[$content['parent_id']] ?? null)) {
+                $contents[$contentIndex]['url'] = url()->route(
+                    'platform.content.second-level',
+                    [
+                        array_flip(PrimaryURLSlugToContentTypeMap::$map)[$parent['type']],
+                        $parent['slug'],
+                        $parent['id'],
+                        $content['slug'],
+                        $content['id'],
+                    ]
+                );
+
 //                $mobileUrl = url()->route(
 //                    'mobile.content.show',
 //                    [
@@ -340,22 +263,20 @@ class UrlDecorator extends ModeDecoratorBase
 //                        $content['id'],
 //                    ]
 //                );
-//            }
-//
-//            // lessons without parents
-//            if (in_array($content['type'], ContentTypes::$lessonContentTypesWithoutParents) &&
-//                !empty(array_flip(ContentTypes::$urlSegmentToContentType)[$content['type']] ?? null)) {
-//
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.lesson.show',
-//                    [
-//                        array_flip(ContentTypes::$urlSegmentToContentType)[$content['type']],
-//                        $content['slug'],
-//                        $content['id'],
-//                    ]
-//                );
-//                self::$contentCache[$content['id']] = $content;
-//
+            }
+
+            // lessons without parents
+            if (in_array($content['type'], ContentTypes::singularContentTypes()) &&
+                !empty(array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']] ?? null)) {
+                $contents[$contentIndex]['url'] = url()->route(
+                    'platform.content.first-level',
+                    [
+                        array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']],
+                        $content['slug'],
+                        $content['id'],
+                    ]
+                );
+
 //                $mobileUrl = url()->route(
 //                    'mobile.content.show',
 //                    [
@@ -369,7 +290,7 @@ class UrlDecorator extends ModeDecoratorBase
 //                        $content['id'],
 //                    ]
 //                );
-//            }
+            }
 //
 //            if ($content['type'] == 'pack-bundle') {
 //                $mobileUrl = url()->route(
@@ -381,15 +302,13 @@ class UrlDecorator extends ModeDecoratorBase
 //            }
 //
 //
-//            if ($content['type'] == 'instructor') {
-//
-//                $contents[$contentIndex]['url'] =
-//                    url()->route('members.coaches.show', [ $content['slug']]);
-//                self::$contentCache[$content['id']] = $content;
-//
+            if ($content['type'] == 'instructor') {
+                $contents[$contentIndex]['url'] =
+                    url()->route('platform.content.coach.show', [$content['slug'], $content['id']]);
+
 //                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
 //                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-//            }
+            }
 //
 //            $content['mobile_app_url'] = $mobileUrl;
 //
@@ -406,9 +325,9 @@ class UrlDecorator extends ModeDecoratorBase
         $parentTypes = [];
 
         foreach ($contents as $content) {
-            if (isset(ContentTypes::$childParentTypeMap[$content['type']])) {
+            if (isset(array_flip(ContentTypeHierarchyMap::$map)[$content['type']])) {
                 $childIds[] = $content['id'];
-                $parentTypes[] = ContentTypes::$childParentTypeMap[$content['type']];
+                $parentTypes[] = array_flip(ContentTypeHierarchyMap::$map)[$content['type']];
             }
         }
 
