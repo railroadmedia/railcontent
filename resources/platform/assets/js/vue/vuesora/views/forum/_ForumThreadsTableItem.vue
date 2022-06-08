@@ -1,12 +1,12 @@
 <template>
-    <div class="tw-relative tw-flex tw-flex-row tw-items-center tw-text-black tw-border-0 tw-border-b tw-border-solid tw-border-gray-200">
+    <div class="tw-relative tw-flex tw-flex-row tw-items-center tw-text-black tw-border-0 tw-border-b tw-border-solid tw-border-gray-200 dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039]/50 hover:tw-bg-[#F5F5F6] tw-transition">
         <a :href="thread.url+'?sortby_val=-published_on'" 
            :class="[brandHoverColor]"
            class="tw-py-4 tw-pl-2 tw-transition-colors tw-inline-flex tw-no-underline tw-w-full" 
         >
             <!-- Avatar -->
             <div class="tw-h-14 tw-w-14 tw-rounded-full tw-flex tw-justify-center tw-items-center tw-relative tw-mr-6 tw-flex-shrink-0">
-                <div class="user-avatar"
+                <div class="user-avatar tw-w-full"
                     :class="[avatarClassObject, brand]"    
                 >
                     <img :src="thread.authorAvatar" class="tw-rounded-full tw-border-3">
@@ -16,16 +16,16 @@
         
             <!-- Description -->
             <div class="tw-flex tw-flex-col tw-justify-center tw-pr-4 tw-mr-auto">
-                <p class="tw-text-13 tw-text-black tw-font-bold">
-                    <i v-if="thread.isPinned" class="fas fa-thumbtack"></i>
-                    <i v-if="thread.isLocked" class="fas fa-lock"></i>
+                <p class="tw-text-13 tw-text-black tw-font-bold dark:tw-text-white">
+                    <i v-if="thread.isPinned" class="fas fa-thumbtack tw-mr-1"></i>
+                    <i v-if="thread.isLocked" class="fas fa-lock tw-mr-1"></i>
                     {{ thread.title }}
                 </p>
-                <p class="tw-text-13 tw-text-gray-600">
-                    Started <strong>{{ thread.createdOn }}</strong> by <strong>{{ thread.authorUsername }}</strong> 
+                <p class="tw-text-13 tw-text-gray-600 dark:tw-text-white">
+                    Started <strong class="dark:tw-text-[#9EC0DC]">{{ thread.createdOn }}</strong> by <strong class="dark:tw-text-[#9EC0DC]">{{ thread.authorUsername }}</strong> 
                 </p>
                 <!-- Responsive version (could not reorder with flex) -->
-                <p class="tw-text-13 tw-text-gray-600 lg:tw-hidden">
+                <p class="tw-text-13 tw-text-gray-600 dark:tw-text-white lg:tw-hidden">
                     <span class="tw-text-13 tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</span>
                     <span>By: <span class="tw-font-bold">{{  thread.latestPost ? thread.latestPost.author_display_name : '' }}</span></span>
                 </p>
@@ -40,16 +40,16 @@
             </div>
 
             <!-- Reply Count -->
-            <div class="tw-items-center tw-text-gray-600 tw-flex-shrink-0 tw-flex-shrink-0 tw-w-24 tw-text-left tw-hidden tw-pr-2 sm:tw-inline-flex">
+            <div class="tw-items-center tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-flex-shrink-0 tw-flex-shrink-0 tw-w-24 tw-text-left tw-hidden tw-pr-2 sm:tw-inline-flex">
                 <h6 class="tw-text-13 tw-font-bold">
                     <i class="fas fa-comment-lines tw-mr-1"></i>
                     {{ replyCount }}
                 </h6>
             </div>
         </a>
-        <a :href="thread.latestPost ? thread.latestPost.url : '#'" class="tw-bg-gray-50 tw-transition-colors hover:tw-bg-gray-100 tw-py-6 tw-inline-flex tw-items-center tw-no-underline tw-h-full tw-px-4 sm:tw-px-8 sm:tw-w-28 lg:tw-w-full lg:tw-max-w-xs">
+        <a :href="thread.latestPost ? thread.latestPost.url : '#'" class="tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-transition-colors hover:tw-bg-gray-100 tw-py-6 tw-inline-flex tw-items-center tw-no-underline tw-h-full tw-px-4 sm:tw-px-8 sm:tw-w-28 lg:tw-w-full lg:tw-max-w-xs">
             <!-- Post Date -->
-            <div class="tw-flex-col tw-justify-center tw-mr-6 tw-text-gray-600 tw-flex-shrink-0 tw-w-28 tw-hidden lg:tw-flex">
+            <div class="tw-flex-col tw-justify-center tw-mr-6 tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-flex-shrink-0 tw-w-28 tw-hidden lg:tw-flex">
                 <h6 class="tw-text-13 tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</h6>
                 <p class="tw-text-13 tw-truncate">
                     <span class="">By:</span>
@@ -69,7 +69,7 @@
             <!-- Arrow -->
             <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-ml-auto">
                 <i class="fas fa-arrow-circle-right tw-rounded-full tw-text-3xl"
-                :class="thread.isRead ? 'tw-text-gray-300' : brandTextColor"
+                :class="thread.isRead ? 'tw-text-gray-300 dark:tw-text-[#9EC0DC]' : brandTextColor"
                 ></i>
             </div>
         </a>
