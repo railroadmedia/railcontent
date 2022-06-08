@@ -71,7 +71,10 @@ class UrlDecorator extends ModeDecoratorBase
             // learning paths
             if ($content['type'] == 'learning-path') {
                 $contents[$contentIndex]['url'] =
-                    url()->route('platform.content.first-level', ['method', $content['slug'], $content['id']]);
+                    url()->route(
+                        'platform.content.first-level',
+                        ['brand' => $content['brand'], 'method', $content['slug'], $content['id']]
+                    );
 
 //                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
 //                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.show', [$content['slug']]);
@@ -83,7 +86,14 @@ class UrlDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['url'] =
                     url()->route(
                         'platform.content.second-level',
-                        ['method', $parent['slug'], $parent['id'], $content['slug'], $content['id']]
+                        [
+                            'brand' => $content['brand'],
+                            'method',
+                            $parent['slug'],
+                            $parent['id'],
+                            $content['slug'],
+                            $content['id']
+                        ]
                     );
 
 //                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
@@ -95,6 +105,7 @@ class UrlDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['url'] = url()->route(
                     'platform.content.jump-to-content-id',
                     [
+                        'brand' => $content['brand'],
                         $content['id'],
                     ]
                 );
@@ -119,6 +130,7 @@ class UrlDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['url'] = url()->route(
                     'platform.packs.first-level',
                     [
+                        'brand' => $content['brand'],
                         $content['slug'],
                         $content['id'],
                     ]
@@ -130,6 +142,7 @@ class UrlDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['url'] = url()->route(
                     'platform.content.jump-to-content-id',
                     [
+                        'brand' => $content['brand'],
                         $content['id'],
                     ]
                 );
@@ -138,7 +151,10 @@ class UrlDecorator extends ModeDecoratorBase
             // coaches
             if ($content['type'] == 'instructor') {
                 $contents[$contentIndex]['url'] =
-                    url()->route('platform.content.first-level', ['coaches', $content['slug'], $content['id']]);
+                    url()->route(
+                        'platform.content.first-level',
+                        ['brand' => $content['brand'], 'coaches', $content['slug'], $content['id']]
+                    );
 
 //                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
 //                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
@@ -215,6 +231,7 @@ class UrlDecorator extends ModeDecoratorBase
                     url()->route(
                         'platform.content.first-level',
                         [
+                            'brand' => $content['brand'],
                             array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']],
                             $content['slug'],
                             $content['id']
@@ -242,6 +259,7 @@ class UrlDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['url'] = url()->route(
                     'platform.content.second-level',
                     [
+                        'brand' => $content['brand'],
                         array_flip(PrimaryURLSlugToContentTypeMap::$map)[$parent['type']],
                         $parent['slug'],
                         $parent['id'],
@@ -271,6 +289,7 @@ class UrlDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['url'] = url()->route(
                     'platform.content.first-level',
                     [
+                        'brand' => $content['brand'],
                         array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']],
                         $content['slug'],
                         $content['id'],
@@ -304,7 +323,10 @@ class UrlDecorator extends ModeDecoratorBase
 //
             if ($content['type'] == 'instructor') {
                 $contents[$contentIndex]['url'] =
-                    url()->route('platform.content.coach.show', [$content['slug'], $content['id']]);
+                    url()->route(
+                        'platform.content.coach.show',
+                        ['brand' => $content['brand'], $content['slug'], $content['id']]
+                    );
 
 //                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
 //                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);

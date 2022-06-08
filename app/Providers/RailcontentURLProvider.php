@@ -31,7 +31,10 @@ class RailcontentURLProvider implements RailcontentURLProviderInterface
         if (!empty($contentEntity)) {
             $decoratedEntity = $urlDecorator->decorate(new Collection([$contentEntity]))->first();
 
-            return new ContentURLs($decoratedEntity['url'] ?? '', $decoratedEntity['mobile_app_url'] ?? '');
+            return new ContentURLs(
+                parse_url($decoratedEntity['url'] ?? '', PHP_URL_PATH),
+                parse_url($decoratedEntity['mobile_app_url'] ?? '', PHP_URL_PATH)
+            );
         }
 
         return null;
