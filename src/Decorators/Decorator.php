@@ -7,6 +7,8 @@ use Railroad\Railcontent\Support\Collection;
 
 class Decorator
 {
+    public static bool $typeDecoratorsEnabled = true;
+
     /**
      * @param $data
      * @param $type
@@ -39,6 +41,13 @@ class Decorator
                 $decoratorClassNames = ConfigService::$decorators[$type];
             } else {
                 $decoratorClassNames = [$decoratorClass];
+            }
+
+            if (!self::$typeDecoratorsEnabled) {
+                $decoratorClassNames = [
+                    \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
+                    \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+                ];
             }
 
             foreach ($decoratorClassNames as $decoratorClassName) {

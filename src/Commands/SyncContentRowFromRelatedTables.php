@@ -23,6 +23,8 @@ class SyncContentRowFromRelatedTables extends Command
         RailcontentV2DataSyncingService $railcontentV2DataSyncingService,
         DatabaseManager $databaseManager
     ) {
+        $databaseManager->connection(config('railcontent.database_connection_name'))->disableQueryLog();
+
         $contentId = $this->argument('contentId');
 
         $this->info('Syncing content ID: ' . $contentId);
