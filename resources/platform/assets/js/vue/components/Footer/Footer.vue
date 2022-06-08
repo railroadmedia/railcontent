@@ -21,11 +21,11 @@ export default {
       <div class="tw-flex tw-px-4 tw-text-xs tw-text-gray-[#3F3F46] dark:tw-text-[#9EC0DC] tw-justify-center tw-w-full tw-items-center ">
         <span class="tw-hidden lg:tw-block tw-mr-1">Musora Media Inc 2021</span>
         <ul class="tw-flex tw-items-center tw-text-xs">
-          <li class="tw-mx-1"><a :href="`/terms`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-black dark:tw-text-white">Terms</a></li>/
-          <li class="tw-mx-1"><a :href="`/privacy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-black dark:tw-text-white">Privacy</a></li>/
-          <li class="tw-mx-1"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-black dark:tw-text-white">Legacy Resources</a></li>/
-          <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-black dark:tw-text-white">Support</a></li>/
-          <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-black dark:tw-text-white">Logout</a></li>
+          <li class="tw-mx-1"><a :href="`/terms`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
+          <li class="tw-mx-1"><a :href="`/privacy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
+          <li class="tw-mx-1"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Legacy Resources</a></li>/
+          <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Support</a></li>/
+          <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Logout</a></li>
         </ul>
       </div>
     </div>

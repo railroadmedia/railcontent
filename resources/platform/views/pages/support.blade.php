@@ -17,8 +17,8 @@
             
                 <div class="tw-container tw-flex tw-flex-col tw-items-center tw-items-end tw-items-center tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
                     <h1 class="tw-text-white">
-                        <i class="fas fa-phone fa-flip-horizontal tw-text-2xl"></i>
-                        <span class="tw-text-3xl tw-font-bold"> Support </span>
+                        <i class="fas fa-phone fa-flip-horizontal tw-text-3xl"></i>
+                        <span class="tw-text-4xl tw-font-bold"> Support </span>
                     </h1>
                 </div>
             </div>
