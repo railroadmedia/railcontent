@@ -25,18 +25,18 @@ class Product extends Model
 
     public function features()
     {
-        return $this->hasMany(Feature::class);
+        return $this->hasMany(Feature::class)->orderBy('order_number');
     }
 
     public function specs()
     {
-        return $this->hasMany(Spec::class);
+        return $this->hasMany(Spec::class)->orderBy('order_number');
     }
 
     public function sizes()
     {
         return $this->hasManyThrough(Size::class, Product_Size::class, 'product_id', 'id', 'id', 'size_id')
-                    ->addSelect(['product__sizes.sold_out', 'sizes.*']);
+                    ->addSelect(['product__sizes.sold_out', 'sizes.*'])->orderBy('id');
     }
 
     public function product_size()
@@ -46,7 +46,12 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Image::class)->orderBy('order_number');
+    }
+
+    public function sizeChart()
+    {
+        return $this->belongsTo(SizeChart::class, 'size_chart_id');
     }
 
     public function delete()
