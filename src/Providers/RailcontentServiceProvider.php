@@ -27,6 +27,7 @@ use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
+use Railroad\Railcontent\Commands\SyncContentRowFromRelatedTables;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -129,6 +130,7 @@ class RailcontentServiceProvider extends ServiceProvider
             MigrateContentToElasticsearch::class,
             MigrateUserPlaylist::class,
             DeleteContentAndHierarchiesForUserPlaylists::class,
+            SyncContentRowFromRelatedTables::class,
         ]);
 
         Validator::extend(

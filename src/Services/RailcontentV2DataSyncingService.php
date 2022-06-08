@@ -2,180 +2,38 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
-use Railroad\Railcontent\Decorators\Decorator;
-use Railroad\Railcontent\Entities\ContentEntity;
-use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
-use Railroad\Railcontent\Events\ContentCreated;
-use Railroad\Railcontent\Events\ContentDeleted;
-use Railroad\Railcontent\Events\ContentFieldUpdated;
-use Railroad\Railcontent\Events\ContentSoftDeleted;
-use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
-use Railroad\Railcontent\Events\HierarchyUpdated;
-
-//use Railroad\Railcontent\Events\XPModified;
-use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
-use Railroad\Railcontent\Repositories\CommentRepository;
-use Railroad\Railcontent\Repositories\ContentBpmRepository;
-use Railroad\Railcontent\Repositories\ContentDatumRepository;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
-use Railroad\Railcontent\Repositories\ContentFollowsRepository;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
-use Railroad\Railcontent\Repositories\ContentInstructorRepository;
-use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\ContentStyleRepository;
-use Railroad\Railcontent\Repositories\ContentTopicRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
-use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
-use Railroad\Railcontent\Repositories\UserContentProgressRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
-use Railroad\Railcontent\Support\Collection;
+use DateTime;
+use Illuminate\Database\DatabaseManager;
+use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
+use Throwable;
 
 class RailcontentV2DataSyncingService
 {
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
+    private DatabaseManager $databaseManager;
+    private RailcontentURLProviderInterface $railcontentURLProvider;
 
-    /**
-     * @var ContentVersionRepository
-     */
-    private $versionRepository;
-
-    /**
-     * @var ContentFieldRepository
-     */
-    private $fieldRepository;
-
-    /**
-     * @var ContentDatumRepository
-     */
-    private $datumRepository;
-
-    /**
-     * @var ContentHierarchyRepository
-     */
-    private $contentHierarchyRepository;
-
-    /**
-     * @var CommentRepository
-     */
-    private $commentRepository;
-
-    /**
-     * @var CommentAssignmentRepository
-     */
-    private $commentAssignationRepository;
-
-    /**
-     * @var ContentPermissionRepository
-     */
-    private $contentPermissionRepository;
-
-    /**
-     * @var UserContentProgressRepository
-     */
-    private $userContentProgressRepository;
-
-    /**
-     * @var UserPermissionsRepository
-     */
-    private $userPermissionRepository;
-    /**
-     * @var ContentFollowsRepository
-     */
-    private $contentFollowRepository;
-
-    /**
-     * @var ElasticService
-     */
-    private $elasticService;
-    /**
-     * @var ContentTopicRepository
-     */
-    private $contentTopicRepository;
-    /**
-     * @var ContentInstructorRepository
-     */
-    private $contentInstructorRepository;
-    /**
-     * @var ContentStyleRepository
-     */
-    private $contentStyleRepository;
-
-    private $contentBpmRepository;
-
-    // all possible content statuses
-    const STATUS_DRAFT = 'draft';
-    const STATUS_PUBLISHED = 'published';
-    const STATUS_SCHEDULED = 'scheduled';
-    const STATUS_ARCHIVED = 'archived';
-    const STATUS_DELETED = 'deleted';
-
-    private $idContentCache = [];
-
-    /**
-     * @param ContentRepository $contentRepository
-     * @param ContentVersionRepository $versionRepository
-     * @param ContentFieldRepository $fieldRepository
-     * @param ContentDatumRepository $datumRepository
-     * @param ContentHierarchyRepository $contentHierarchyRepository
-     * @param ContentPermissionRepository $contentPermissionRepository
-     * @param CommentRepository $commentRepository
-     * @param CommentAssignmentRepository $commentAssignmentRepository
-     * @param UserContentProgressRepository $userContentProgressRepository
-     * @param UserPermissionsRepository $userPermissionsRepository
-     * @param ContentFollowsRepository $contentFollowsRepository
-     * @param ElasticService $elasticService
-     * @param ContentTopicRepository $contentTopicRepository
-     * @param ContentInstructorRepository $contentInstructorRepository
-     * @param ContentStyleRepository $contentStyleRepository
-     * @param ContentBpmRepository $contentBpmRepository
-     */
     public function __construct(
-        ContentRepository $contentRepository,
-        ContentVersionRepository $versionRepository,
-        ContentFieldRepository $fieldRepository,
-        ContentDatumRepository $datumRepository,
-        ContentHierarchyRepository $contentHierarchyRepository,
-        ContentPermissionRepository $contentPermissionRepository,
-        CommentRepository $commentRepository,
-        CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository,
-        UserPermissionsRepository $userPermissionsRepository,
-        ContentFollowsRepository $contentFollowsRepository,
-        ElasticService $elasticService,
-        ContentTopicRepository $contentTopicRepository,
-        ContentInstructorRepository $contentInstructorRepository,
-        ContentStyleRepository $contentStyleRepository,
-        ContentBpmRepository $contentBpmRepository
+        DatabaseManager $databaseManager,
+        RailcontentURLProviderInterface $railcontentURLProvider
     ) {
-        $this->contentRepository = $contentRepository;
-        $this->versionRepository = $versionRepository;
-        $this->fieldRepository = $fieldRepository;
-        $this->datumRepository = $datumRepository;
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
-        $this->contentPermissionRepository = $contentPermissionRepository;
-        $this->commentRepository = $commentRepository;
-        $this->commentAssignationRepository = $commentAssignmentRepository;
-        $this->userContentProgressRepository = $userContentProgressRepository;
-        $this->userPermissionRepository = $userPermissionsRepository;
-        $this->contentFollowsRepository = $contentFollowsRepository;
-        $this->elasticService = $elasticService;
-        $this->contentTopicRepository = $contentTopicRepository;
-        $this->contentInstructorRepository = $contentInstructorRepository;
-        $this->contentStyleRepository = $contentStyleRepository;
-        $this->contentBpmRepository = $contentBpmRepository;
+        $this->databaseManager = $databaseManager;
+        $this->railcontentURLProvider = $railcontentURLProvider;
     }
 
+    /**
+     * For now the fields are always the source of truth.
+     *
+     * @throws Throwable
+     */
     public function syncContentId($contentId, $forUserId = null)
     {
+        $databaseConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+
+        $contentRow = $databaseConnection->table(config('railcontent.table_prefix') . 'content')
+            ->where('id', $contentId)
+            ->first();
+
+        // update content hierarchy rows
         if (!empty($forUserId)) {
             // --- content hierarchy rows to sync:
             // current_child_content_id
@@ -186,64 +44,177 @@ class RailcontentV2DataSyncingService
             // next_child_content_url
         }
 
-        // --- content rows to sync:
-        // album
-        // artist
-        // associated_user_id
-        // avatar_url
-        // bands
-        // cd_tracks
-        // chord_or_scale
-        // difficulty
-        // difficulty_range
-        // endorsements
-        // episode_number
-        // exercise_book_pages
-        // fast_bpm
-        // forum_thread_id
-        // high_soundslice_slug
-        // high_video
-        // home_staff_pick_rating
-        // includes_song
-        // is_active
-        // is_coach
-        // is_coach_of_the_month
-        // is_featured
-        // is_house_coach
-        // length_in_seconds
-        // live_event_start_time
-        // live_event_end_time
-        // live_event_youtube_id
-        // live_stream_feed_type
-        // low_soundslice_slug
-        // low_video
-        // name
-        // original_video
-        // pdf
-        // pdf_in_g
-        // qna_video
-        // show_in_new_feed
-        // slow_bpm
-        // song_name
-        // soundslice_slug
-        // soundslice_xml_file_url
-        // staff_pick_rating
-        // student_id
-        // title
-        // transcriber_name
-        // video
-        // vimeo_video_id
-        // youtube_video_id
-        // xp
-        // week
-        // released
-        // total_xp
-        // popularity
-        // web_url
-        // mobile_url
-        // child_count
-        // hierarchy_position_number
-        // like_count
+        // update content row
+        $contentFieldRows = $databaseConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->where('content_id', $contentId)
+            ->whereNotNull('value')
+            ->whereNotIn('value', ['Invalid date'])
+            ->get();
 
+//        $contentDataRows = $databaseConnection->table(config('railcontent.table_prefix').'content_fields')
+//            ->where('content_id', $contentId)
+//            ->whereNotNull('value')
+//            ->whereNotIn('value', ['Invalid date'])
+//            ->get();
+
+        // fields first
+        $fieldNameToContentColumnNameMap = [
+            'album' => 'album',
+            'artist' => 'artist',
+            'associated_user_id' => 'associated_user_id',
+            'avatar_url' => 'avatar_url',
+            'bands' => 'bands',
+            'cd-tracks' => 'cd_tracks', // dashes
+            'chord_or_scale' => 'chord_or_scale',
+            'difficulty' => 'difficulty',
+            'difficulty_range' => 'difficulty_range',
+            'endorsements' => 'endorsements',
+            'episode_number' => 'episode_number',
+            'exercise-book-pages' => 'exercise_book_pages', // dashes
+            'fast_bpm' => 'fast_bpm',
+            'forum_thread_id' => 'forum_thread_id',
+            'high_soundslice_slug' => 'high_soundslice_slug',
+            'high_video' => 'high_video',
+            'home_staff_pick_rating' => 'home_staff_pick_rating',
+            'includes_song' => 'includes_song',
+            'is_active' => 'is_active',
+            'is_coach' => 'is_coach',
+            'is_coach_of_the_month' => 'is_coach_of_the_month',
+            'is_featured' => 'is_featured',
+            'is_house_coach' => 'is_house_coach',
+            'length_in_seconds' => 'length_in_seconds',
+            'live_event_start_time' => 'live_event_start_time',
+            'live_event_end_time' => 'live_event_end_time',
+            'live_event_youtube_id' => 'live_event_youtube_id',
+            'live_stream_feed_type' => 'live_stream_feed_type',
+            'low_soundslice_slug' => 'low_soundslice_slug',
+            'low_video' => 'low_video',
+            'name' => 'name',
+            'original_video' => 'original_video',
+            'pdf' => 'pdf',
+            'pdf_in_g' => 'pdf_in_g',
+            'qna_video' => 'qna_video',
+            'show_in_new_feed' => 'show_in_new_feed',
+            'slow_bpm' => 'slow_bpm',
+            'song_name' => 'song_name',
+            'soundslice_slug' => 'soundslice_slug',
+            'soundslice_xml_file_url' => 'soundslice_xml_file_url',
+            'staff_pick_rating' => 'staff_pick_rating',
+            'student_id' => 'student_id',
+            'title' => 'title',
+            'transcriber_name' => 'transcriber_name',
+            'video' => 'video',
+            'vimeo_video_id' => 'vimeo_video_id',
+            'youtube_video_id' => 'youtube_video_id',
+            'xp' => 'xp',
+            'week' => 'week',
+            'released' => 'released',
+            'total_xp' => 'total_xp',
+        ];
+
+        $contentColumnsToUpdate = [];
+
+        foreach ($fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
+            $contentColumnsToUpdate[$contentColumnName] = null;
+
+            foreach ($contentFieldRows as $contentFieldRow) {
+                // skip misc data errors
+                if (($contentFieldRow->key == 'home_staff_pick_rating' && !is_numeric($contentFieldRow->value)) ||
+                    ($contentFieldRow->key == 'xp' && !is_numeric($contentFieldRow->value)) ||
+                    (in_array($contentFieldRow->key, ['live_event_start_time', 'live_event_end_time']) &&
+                        !$this->validateDate($contentFieldRow->value))) {
+                    continue;
+                }
+
+                if ($contentFieldRow->key === $fieldName) {
+                    $contentColumnsToUpdate[$contentColumnName] = $contentFieldRow->value;
+                }
+            }
+        }
+
+
+        // other columns
+        // 'web_url_path' => 'web_url_path' // implemented on implementation side using interface binding
+        // 'mobile_url_path' => 'mobile_url_path' // implemented on implementation side using interface binding
+        // 'child_count' => 'child_count'
+        // 'hierarchy_position_number' => 'hierarchy_position_number'
+        // 'like_count' => 'like_count'
+
+        $contentURLs = $this->railcontentURLProvider->getContentURLs($contentId, $contentRow->slug, $contentRow->type);
+
+        $contentColumnsToUpdate['web_url_path'] = $contentURLs->getWebURLPath();
+        $contentColumnsToUpdate['mobile_app_url_path'] = $contentURLs->getMobileAppURLPath();
+
+        $contentHierarchyRows = $databaseConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
+            ->where('child_id', $contentId)
+            ->orWhere('parent_id', $contentId)
+            ->get();
+
+        $contentColumnsToUpdate['child_count'] = $contentHierarchyRows->where('parent_id', $contentId)->count();
+
+        $contentColumnsToUpdate['hierarchy_position_number'] =
+            $contentHierarchyRows
+                ->where('child_id', $contentId)
+                ->first()
+                ->child_position ?? null;
+
+        $contentColumnsToUpdate['like_count'] =
+            $databaseConnection->table(config('railcontent.table_prefix') . 'content_likes')
+                ->where('content_id', $contentId)
+                ->count();
+
+        dd($contentColumnsToUpdate);
+
+        $databaseConnection->table(config('railcontent.table_prefix') . 'content')
+            ->where('id', $contentId)
+            ->update($contentColumnsToUpdate);
+
+        // update field tables
+        $fieldNameToTableMap = [
+            'topic' => config('railcontent.table_prefix') . 'content_topics',
+            'tag' => config('railcontent.table_prefix') . 'content_tags',
+            'playlist' => config('railcontent.table_prefix') . 'content_playlists',
+            'key' => config('railcontent.table_prefix') . 'content_keys',
+            'key_pitch_type' => config('railcontent.table_prefix') . 'content_key_pitch_types',
+            'exercise_id' => config('railcontent.table_prefix') . 'content_exercises',
+            'style' => config('railcontent.table_prefix') . 'content_styles',
+            'focus' => config('railcontent.table_prefix') . 'content_focus',
+            'bpm' => config('railcontent.table_prefix') . 'content_bpm',
+            'instructor_id' => config('railcontent.table_prefix') . 'content_instructors',
+        ];
+
+        foreach ($fieldNameToTableMap as $fieldAndColumnName => $tableName) {
+            $rowsToInsert = [];
+
+            foreach ($contentFieldRows as $contentFieldRow) {
+                if ($contentFieldRow->key === $fieldAndColumnName ||
+                    ($fieldAndColumnName === 'instructor_id' && $contentFieldRow->key === 'instructor')) {
+                    $rowsToInsert[] = [
+                        'content_id' => $contentId,
+                        $fieldAndColumnName => $contentFieldRow->value,
+                        'position' => $contentFieldRow->position,
+                    ];
+                }
+            }
+
+            $databaseConnection->beginTransaction();
+            $databaseConnection->table($tableName)
+                ->where('content_id', $contentId)
+                ->delete();
+            $databaseConnection->table($tableName)->insert($rowsToInsert);
+            $databaseConnection->commit();
+        }
+    }
+
+    /**
+     * @param string $date
+     * @param string $format
+     * @return bool
+     */
+    public function validateDate(string $date, string $format = 'Y-m-d H:i:s'): bool
+    {
+        $d = DateTime::createFromFormat($format, $date);
+
+        return $d && $d->format($format) === $date;
     }
 }

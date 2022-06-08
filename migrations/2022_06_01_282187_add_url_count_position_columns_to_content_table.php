@@ -15,17 +15,17 @@ class AddUrlCountPositionColumnsToContentTable extends Migration
     {
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix').'content', function (Blueprint $table) {
-                $table->text('web_url')
+                $table->text('web_url_path')
                     ->after('popularity')
                     ->nullable();
 
-                $table->text('mobile_url')
-                    ->after('web_url')
+                $table->text('mobile_app_url_path')
+                    ->after('web_url_path')
                     ->nullable();
 
                 $table->integer('child_count')
                     ->index()
-                    ->after('mobile_url')
+                    ->after('mobile_app_url_path')
                     ->nullable();
 
                 $table->integer('hierarchy_position_number')
@@ -50,8 +50,8 @@ class AddUrlCountPositionColumnsToContentTable extends Migration
     {
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix').'content', function (Blueprint $table) {
-                $table->dropColumn('web_url');
-                $table->dropColumn('mobile_url');
+                $table->dropColumn('web_url_path');
+                $table->dropColumn('mobile_url_path');
                 $table->dropColumn('child_count');
                 $table->dropColumn('hierarchy_position_number');
                 $table->dropColumn('like_count');
