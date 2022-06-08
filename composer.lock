@@ -7666,12 +7666,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8dc5fdd04c7df5cd6d0c326cd00d1599049e294b"
+                "reference": "671a4c0f3c1c6ad8663f2f3c30842890c01f0a54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8dc5fdd04c7df5cd6d0c326cd00d1599049e294b",
-                "reference": "8dc5fdd04c7df5cd6d0c326cd00d1599049e294b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/671a4c0f3c1c6ad8663f2f3c30842890c01f0a54",
+                "reference": "671a4c0f3c1c6ad8663f2f3c30842890c01f0a54",
                 "shasum": ""
             },
             "require": {
@@ -7686,7 +7686,7 @@
                 "league/flysystem-aws-s3-v3": "^3.0",
                 "php": "^8.1",
                 "predis/predis": "^1.1",
-                "railroad/response": "2.0.x-dev",
+                "railroad/response": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "vimeo/vimeo-api": "^1.2"
             },
@@ -7726,7 +7726,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-"
             },
-            "time": "2022-06-03T13:42:32+00:00"
+            "time": "2022-06-08T18:04:25+00:00"
         },
         {
             "name": "railroad/railforums",
