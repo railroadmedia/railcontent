@@ -35,6 +35,7 @@ class ImageLayout extends Layout
                 ->disk('s3')
                 ->prunable()
                 ->deletable(false)
+                ->disableDownload()
                 ->thumbnail(function($value){
                     return 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 })
