@@ -1,4 +1,7 @@
 {
+    "engines" : {
+        "node" : ">=16.0.0"
+    },
     "private": true,
     "scripts": {
         "platform-development": "mix --mix-config=resources/platform/webpack.mix.js",
