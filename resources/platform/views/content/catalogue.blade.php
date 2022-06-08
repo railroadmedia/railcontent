@@ -192,27 +192,29 @@
             </div>
         @endif
 
-        {{-- todo: readd once cal is working --}}
-        {{--    <div class="container ph-1">--}}
-        {{--        <div class="tw-flex tw-flex-col mt-3">--}}
-        {{--            <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 align-v-center">--}}
-        {{--                <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 mb-3">--}}
-        {{--                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>--}}
-        {{--                </div>--}}
-        {{--                <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 mb-3">--}}
-        {{--                    <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">--}}
-        {{--                            <i class="fas fa-calendar-plus mr-1"></i>--}}
-        {{--                            Subscribe to Calendar--}}
-        {{--                    </button>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
-        {{--    </div>--}}
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
+            <div class="tw-flex tw-flex-col mt-3">
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
+                    <div class="tw-flex tw-flex-col tw-mb-3">
+                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
+                    </div>
+                    {{-- todo: readd once cal is working --}}
+                    @if($catalogueMeta['name'] !== "Songs")
+                        <div class="tw-flex tw-flex-col tw-ml-auto">
+                            <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
+                                    <i class="fas fa-calendar-plus mr-1"></i>
+                                    Subscribe to Calendar
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
 
         @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent))
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
                 <div class="tw-flex tw-flex-col tw-mt-3">
-                    <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
+                    <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                         <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-3">
                             <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">
                                 All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
