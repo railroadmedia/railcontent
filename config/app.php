@@ -167,6 +167,11 @@ return [
          */
         Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
         Railroad\Response\Providers\ResponseServiceProvider::class,
+        Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
+        Railroad\Usora\Providers\UsoraServiceProvider::class,
+        Railroad\Railforums\Providers\ForumServiceProvider::class,
+        Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
+        Railroad\Permissions\Providers\PermissionsServiceProvider::class,
         Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
 
         /*
@@ -174,11 +179,6 @@ return [
          */
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
-        Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
-        Railroad\Usora\Providers\UsoraServiceProvider::class,
-        Railroad\Railforums\Providers\ForumServiceProvider::class,
-        Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
-        \Railroad\Permissions\Providers\PermissionsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -189,6 +189,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\VaporUiServiceProvider::class,
 
     ],
 

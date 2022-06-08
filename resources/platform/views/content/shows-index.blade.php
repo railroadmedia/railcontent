@@ -13,7 +13,7 @@
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                         <musora-icon icon-name="shows-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                        <span class="tw-text-32">Shows</span>
+                        <span class="tw-text-32 tw-font-bold">Shows</span>
                     </h1>
 
                     <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">

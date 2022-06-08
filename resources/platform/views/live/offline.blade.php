@@ -12,7 +12,7 @@
                     <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                             <i class="icon-live tw-text-{{$brand}} tw-mr-3 tw-text-3xl"></i>
-                            <span class="tw-text-32"><span class="tw-capitalize">{{ $brand }}</span> Live</span>
+                            <span class="tw-text-32 tw-font-bold"><span class="tw-capitalize">{{ $brand }}</span> Live</span>
                         </h1>
 
                         <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base" >

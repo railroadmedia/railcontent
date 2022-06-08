@@ -82,19 +82,21 @@
                         <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">
                             <input
                                 id="threadSearch"
+                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57] tw-pb-0"
                                 ref="searchInput"
                                 v-model.lazy="searchInterface"
                                 type="text"
                             >
                             <label
                                 for="threadSearch"
+                                class="dark:tw-text-[#9EC0DC]"
                                 :class="brand"
                             >Search</label>
 
                             <span
                                 v-if="searching"
                                 id="clearSearch"
-                                class="tw-p-4 tw-cursor-pointer tw-absolute tw-right-0"
+                                class="tw-px-4 tw-py-3 tw-cursor-pointer tw-absolute tw-right-0"
                                 @click="clearSearch"
                             >
                                 <i class="fas fa-times"></i>
@@ -141,7 +143,7 @@
                     <a :href="latestThreadsUrl" class="tw-btn-primary" :class="[brandBGColor]">View All Latest Threads</a>
                 </div>
 
-                <h2 class="tw-text-32 tw-mb-6">Followed Threads</h2>
+                <h2 class="tw-text-32 tw-mb-3 tw-font-bold">Followed Threads</h2>
 
                 <template v-if="pinnedThreads.length === 0 && threadsArray.length === 0">
                     <p class="tw-text-base">Any thread you reply to or follow will appear here.</p>

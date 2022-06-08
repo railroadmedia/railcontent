@@ -33,16 +33,39 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', NavigationViewComposer::class);
 
-        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
-        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
-        app()->instance(
-            EventDataSynchronizerUserProviderInterface::class,
-            app()->make(EventDataSynchronizerUserProvider::class)
-        );
+//        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
+//        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
+//        app()->instance(
+//            EventDataSynchronizerUserProviderInterface::class,
+//            app()->make(EventDataSynchronizerUserProvider::class)
+//        );
 
-        app()->instance(MusoraUserProviderInterface::class, app()->make(MusoraApiUserProvider::class));
-        app()->instance(ProductProviderInterface::class, app()->make(MusoraApiProductProvider::class));
-        app()->instance(RailTrackerProviderInterface::class, app()->make(RailTrackerProvider::class));
-        app()->instance(ChatProviderInterface::class, app()->make(MusoraApiChatProvider::class));
+        $this->app->singleton(EcommerceUserProviderInterface::class, function ($app) {
+            $app->make(EcommerceUserProvider::class);
+        });
+
+        $this->app->singleton(RailforumsUserProviderInterface::class, function ($app) {
+            $app->make(RailforumsUserProvider::class);
+        });
+
+        $this->app->singleton(EventDataSynchronizerUserProviderInterface::class, function ($app) {
+            $app->make(EventDataSynchronizerUserProvider::class);
+        });
+
+        $this->app->singleton(MusoraUserProviderInterface::class, function ($app) {
+            $app->make(MusoraApiUserProvider::class);
+        });
+
+        $this->app->singleton(ProductProviderInterface::class, function ($app) {
+            $app->make(MusoraApiProductProvider::class);
+        });
+
+        $this->app->singleton(RailTrackerProviderInterface::class, function ($app) {
+            $app->make(RailTrackerProvider::class);
+        });
+
+        $this->app->singleton(ChatProviderInterface::class, function ($app) {
+            $app->make(MusoraApiChatProvider::class);
+        });
     }
 }

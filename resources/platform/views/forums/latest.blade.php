@@ -42,7 +42,7 @@
                                 <i class="fas fa-arrow-circle-left tw-text-white tw-text-32"></i>
                             </a>
 
-                            <span class="tw-text-32">All Latest Threads</span>
+                            <span class="tw-text-32 tw-font-bold">All Latest Threads</span>
                         </h1>
                         <p class="tw-text-white body tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12">
                             Checkout all the latest threads from all our forums!

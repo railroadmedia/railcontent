@@ -18,6 +18,8 @@
         "laravel/nova": "~4.0",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7",
+        "laravel/vapor-core": "^2.22",
+        "laravel/vapor-ui": "^1.5",
         "league/flysystem-aws-s3-v3": "^3.0",
         "railroad/ecommerce": "^5.0",
         "railroad/event-data-synchronizer": "dev-v8.0-railcontent-2-integration",

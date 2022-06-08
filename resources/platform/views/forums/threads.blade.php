@@ -46,7 +46,7 @@
                             @else
                                 <i class="fas fa-comments tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
                             @endif
-                            <span class="tw-text-32">{{$discussion['title']}}</span>
+                            <span class="tw-text-32 tw-font-bold">{{$discussion['title']}}</span>
                         </h1>
 
                         <p class="tw-text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
