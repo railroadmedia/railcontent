@@ -338,7 +338,7 @@ class NavigationService
 
         return [
             'dashboardPageUrl' => '/' . brand() . '/profile/' . user()->id . '/dashboard',
-            'notificationsPageUrl' => '/',
+            'notificationsPageUrl' => '/'. brand() . '/notifications',
             'playlistsPageUrl' => '/',
             'schedulePageUrl' => '/',
             'applyForReviewPageUrl' => '/',

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railnotifications\Contracts\UserProviderInterface;
 use Railroad\Railnotifications\Entities\User as RailnotificationUser;
+use Railroad\Railnotifications\Transformers\UserTransformer;
 
 class RailnotificationsUserProvider implements UserProviderInterface
 {
@@ -29,7 +30,6 @@ class RailnotificationsUserProvider implements UserProviderInterface
     public function getRailnotificationsUserId(RailnotificationUser $user)
     : ?int {
         return $user->getId();
-        // TODO: Implement getRailnotificationsUserId() method.
     }
 
     public function getUserFirebaseTokens(int $userId, $types = [])
@@ -45,5 +45,13 @@ class RailnotificationsUserProvider implements UserProviderInterface
     public function updateUserFirebaseToken($userId, $oldToken, $newToken)
     {
         // TODO: Implement updateUserFirebaseToken() method.
+    }
+
+    /**
+     * @return TransformerAbstract
+     */
+    public function getUserTransformer()
+    {
+        return new UserTransformer();
     }
 }
