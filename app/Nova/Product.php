@@ -57,8 +57,6 @@ class Product extends Resource
      */
     public function fields(NovaRequest $request)
     {
-
-        dd($request);
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
