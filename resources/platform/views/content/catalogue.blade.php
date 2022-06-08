@@ -147,16 +147,16 @@
             </section>
         @endif
 
-        {{--    @if($catalogueMeta['name'] == 'Routines')--}}
-        {{--        <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">--}}
-        {{--            <div class="container">--}}
-        {{--                <h2 class="tw-text-white"> --}}
-        {{--                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span> --}}
-        {{--                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>    --}}
-        {{--                </h2>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
-        {{--    @endif--}}
+        @if($catalogueMeta['name'] == 'Routines')
+            <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">
+                <div class="container">
+                    <h2 class="tw-text-white"> 
+                        <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span> 
+                        <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>    
+                    </h2>
+                </div>
+            </div>
+        @endif
 
         @if($lessonType === 'routine' && $hasRecentRoutines)
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
