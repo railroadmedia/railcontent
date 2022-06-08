@@ -47,7 +47,7 @@ class FeatureResolver implements ResolverInterface
            $features = $groups->map(function($group, $index){
               return [
                   'desc' => $group->getAttributes()['desc'],
-                  'order' => $index,
+                  'order_number' => $index,
                   'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
               ];
            });
@@ -62,15 +62,21 @@ class FeatureResolver implements ResolverInterface
                        $dbFeature = Feature::find($feature['id']);
                        if($dbFeature->desc !== $feature['desc']){
                            $dbFeature->desc = $feature['desc'];
-                           $dbFeature->save();
+
                        }
 
+                       if($dbFeature->order_number !== $feature['order_number']){
+                           $dbFeature->order_number = $feature['order_number'];
+                       }
+
+                       $dbFeature->save();
                        $updatedIds[] = $feature['id'];
                    }
                    else{
                        $addFeature = new Feature();
                        $addFeature->product_id = $model['id'];
                        $addFeature->desc = $feature['desc'];
+                       $addFeature->order_number = $feature['order_number'];
                        $addFeature->save();
 
                        $updatedIds[] = $addFeature->id;

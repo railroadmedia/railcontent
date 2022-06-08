@@ -52,6 +52,7 @@ class SpecResolver implements ResolverInterface
                     'title' => $group->getAttributes()['title'],
                     'desc' => $group->getAttributes()['desc'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
+                    'order_number' => $index,
                 ];
             });
 
@@ -66,9 +67,12 @@ class SpecResolver implements ResolverInterface
                         if($dbSpec->title !== $spec['title'] || $dbSpec->desc !== $spec['desc']){
                             $dbSpec->title = $spec['title'];
                             $dbSpec->desc = $spec['desc'];
-                            $dbSpec->save();
-                         }
+                        }
 
+                        if($dbSpec->order_number !== $spec['order_number']){
+                            $dbSpec->order_number = $spec['order_number'];
+                        }
+                        $dbSpec->save();
                         $updatedIds[] = $spec['id'];
                     }
                     else {
@@ -76,6 +80,7 @@ class SpecResolver implements ResolverInterface
                         $addSpec->product_id = $model['id'];
                         $addSpec->title = $spec['title'];
                         $addSpec->desc = $spec['desc'];
+                        $addSpec->order_number = $spec['order_number'];
                         $addSpec->save();
 
                         $updatedIds[] = $addSpec['id'];

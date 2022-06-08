@@ -2,6 +2,7 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
+use App\Models\Product_Size;
 use App\Models\Size;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
@@ -19,14 +20,15 @@ class SizeResolver implements ResolverInterface
     {
         $sizes = $resource->sizes()->get();
 
-        return $sizes->map(function($size) use ($layouts) {
+        return $sizes->map(function($size) use ($layouts, $resource) {
             $layout = $layouts->find('size-layout');
 
             if(!$layout) return;
 
             return $layout->duplicateAndHydrate($size->id, [
                 'size' => $size->name,
-                'sold_out' => $size->sold_out
+                'sold_out' => $size->sold_out,
+                'id' => Product_Size::where('product_id', '=', $resource['id'])->where('size_id', '=', $size['id'])->first()->id
             ]);
         })->filter();
     }
@@ -47,13 +49,51 @@ class SizeResolver implements ResolverInterface
             $sizes = $groups->map(function($group, $index) use($model){
                 return [
                     'size_id' => Size::firstWhere('name', $group->getAttributes()['size'])->id,
-                    'sold_out' => $group->getAttributes()['sold_out']
+                    'sold_out' => $group->getAttributes()['sold_out'],
+                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
 
-            $model->product_size()->delete();
-            $model->product_size()->createMany($sizes);
+            $sizeIds = array();
 
+            foreach($sizes as $size){
+                if(empty($size['size_id'])){
+                    dd('size id can\'t be null');
+                }
+                else {
+                    if(in_array($size['size_id'], $sizeIds)){
+                        dd('the size already exists');
+                    }
+
+                    array_push($sizeIds, $size['size_id']);
+
+                    //update and insert items
+                    if(!is_null($size['id'])){
+                        $dbSize = Product_Size::find($size['id']);
+                        if($dbSize->size_id !== $size['size_id']){
+                            $dbSize->size_id = $size['size_id'];
+                            $dbSize->save();
+                        }
+
+                        $updatedIds[] = $size['id'];
+                    }
+                    else {
+                        $addSize = new Product_Size();
+                        $addSize->product_id = $model['id'];
+                        $addSize->size_id = $size['size_id'];
+                        $addSize->save();
+
+                        $updatedIds[] = $addSize->id;
+                    }
+                }
+            }
+
+            if(isset($updatedIds)){
+                $deleteIds = Product_Size::where("product_id", '=', $model['id'])
+                    ->whereNotIn('id', $updatedIds)->select('id')->get();
+
+                Product_Size::destroy($deleteIds);
+            }
         });
     }
 }

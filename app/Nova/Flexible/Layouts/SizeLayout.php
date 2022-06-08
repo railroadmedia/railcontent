@@ -4,6 +4,7 @@ namespace App\Nova\Flexible\Layouts;
 
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Layouts\Layout;
 
 class SizeLayout extends Layout
@@ -32,8 +33,8 @@ class SizeLayout extends Layout
         return [
             Select::make('Sizes', 'size')
             ->options(\App\Models\Size::pluck('name', 'name')),
-            Boolean::make('Sold Out', 'sold_out')
-            // Define the layout's fields.
+            Boolean::make('Sold Out', 'sold_out'),
+            Text::make('id', 'id')->hide()->hideFromDetail()
         ];
     }
 

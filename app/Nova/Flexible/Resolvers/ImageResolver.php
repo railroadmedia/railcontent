@@ -50,7 +50,7 @@ class ImageResolver implements ResolverInterface
                 return [
                     'path' => $group->getAttributes()['path'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
-                    'order' => $index
+                    'order_number' => $index
                 ];
             });
 
@@ -58,6 +58,7 @@ class ImageResolver implements ResolverInterface
             foreach($images as $image){
                 if(empty($image['path'])){
                     dd('Image path cannot be null');
+
                 }
                 else {
                     if(!is_null($image['id'])) {
@@ -67,8 +68,14 @@ class ImageResolver implements ResolverInterface
                             Storage::disk('s3')->put('/', $image['path']);
 
                             $dbImg->path = $image['path'];
-                            $dbImg->save();
                         }
+
+                        if($dbImg->order_number !== $image['order_number']){
+                            $dbImg->order_number = $image['order_number'];
+                        }
+
+                        $dbImg->save();
+
                         $updateIds[] = $image['id'];
                     }
 
@@ -76,6 +83,7 @@ class ImageResolver implements ResolverInterface
                         $addImg = new Image();
                         $addImg->path = $image['path'];
                         $addImg->product_id = $model['id'];
+                        $addImg->order_number = $image['order_number'];
                         $addImg->save();
 
                         $updateIds[] = $addImg->id;
