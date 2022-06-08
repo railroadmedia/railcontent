@@ -28,38 +28,14 @@ class CreateYoutubeVideoContentRecordsViaClientAPI extends Command
      */
     protected $description = 'Pull YT videos from channel and sync to content database.';
 
-    /**
-     * @var ContentService
-     */
-    protected $contentService;
-
     protected $scope = 'https://www.googleapis.com/auth/youtube';
-
-    /**
-     * @var ContentFieldService
-     */
-    protected $contentFieldService;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(ContentFieldService $contentFieldService, ContentService $contentService)
-    {
-        parent::__construct();
-
-        $this->contentFieldService = $contentFieldService;
-
-        $this->contentService = $contentService;
-    }
 
     /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(ContentFieldService $contentFieldService, ContentService $contentService)
     {
         $client = new Google_Client();
         $youtube = new Google_Service_YouTube($client);
@@ -171,7 +147,7 @@ class CreateYoutubeVideoContentRecordsViaClientAPI extends Command
             }
 
             // create if needed
-            $existingRecords = $this->contentService->getBySlugAndType(
+            $existingRecords = $contentService->getBySlugAndType(
                 'youtube-video-'.$video['videoId'],
                 'youtube-video'
             );
@@ -180,7 +156,7 @@ class CreateYoutubeVideoContentRecordsViaClientAPI extends Command
                 $this->info('video '.$video['videoId'].' not found in our database');
 
                 // store a new content
-                $content = $this->contentService->create(
+                $content = $contentService->create(
                     'youtube-video-'.$video['videoId'],
                     'youtube-video',
                     ContentService::STATUS_PUBLISHED,
@@ -197,14 +173,14 @@ class CreateYoutubeVideoContentRecordsViaClientAPI extends Command
                     $contentCreationFailed[] = $video['videoId'];
                 } else {
                     $contentCreatedCount++;
-                    $contentFieldsInsertData[] = $this->contentFieldService->create(
+                    $contentFieldsInsertData[] = $contentFieldService->create(
                         $content['id'],
                         'youtube_video_id',
                         $video['videoId'],
                         1,
                         'string'
                     );
-                    $contentFieldsInsertData[] = $this->contentFieldService->create(
+                    $contentFieldsInsertData[] = $contentFieldService->create(
                         $content['id'],
                         'length_in_seconds',
                         $video['duration'],

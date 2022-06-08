@@ -50,9 +50,18 @@ class ContentFollowsRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
-        return $query->orderBy(ConfigService::$tableContentFollows . '.created_on', 'desc')
+        $rows = $query->orderBy(ConfigService::$tableContentFollows . '.created_on', 'desc')
             ->get()
             ->toArray();
+
+        // remove duplicate rows
+        $rowsWithoutDuplicates = [];
+
+        foreach ($rows as $row) {
+            $rowsWithoutDuplicates[$row['content_id']] = $row;
+        }
+
+        return $rowsWithoutDuplicates;
     }
 
     /**
@@ -87,11 +96,16 @@ class ContentFollowsRepository extends RepositoryBase
     public function getFollowedContentIds()
     {
         if (!isset($this->cache[auth()->id()])) {
-            $contents =  $this->query()
-                ->select(ConfigService::$tableContentFollows.'.content_id')
-                ->join(ConfigService::$tableContent, ConfigService::$tableContentFollows.'.content_id','=', ConfigService::$tableContent.'.id')
+            $contents = $this->query()
+                ->select(ConfigService::$tableContentFollows . '.content_id')
+                ->join(
+                    ConfigService::$tableContent,
+                    ConfigService::$tableContentFollows . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
                 ->where([
-                    ConfigService::$tableContentFollows.'.user_id' => auth()->id(),
+                    ConfigService::$tableContentFollows . '.user_id' => auth()->id(),
                     'brand' => config('railcontent.brand')
                 ])->get();
 

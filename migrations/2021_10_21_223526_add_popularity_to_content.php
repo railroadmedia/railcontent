@@ -13,16 +13,16 @@ class AddPopularityToContent extends Migration
      */
     public function up()
     {
-            Schema::connection(ConfigService::$databaseConnectionName)->table(
-                ConfigService::$tableContent,
-                function ($table) {
-                    /**
-                     * @var $table \Illuminate\Database\Schema\Blueprint
-                     */
+        Schema::connection(ConfigService::$databaseConnectionName)->table(
+            ConfigService::$tableContent,
+            function ($table) {
+                /**
+                 * @var $table \Illuminate\Database\Schema\Blueprint
+                 */
 
-                    $table->integer('popularity')->after('total_xp')->nullable()->index();
-                }
-            );
+                $table->integer('popularity')->after('total_xp')->nullable()->index();
+            }
+        );
     }
 
     /**
@@ -32,16 +32,15 @@ class AddPopularityToContent extends Migration
      */
     public function down()
     {
+        Schema::connection(ConfigService::$databaseConnectionName)->table(
+            ConfigService::$tableContent,
+            function ($table) {
+                /**
+                 * @var $table \Illuminate\Database\Schema\Blueprint
+                 */
 
-            Schema::connection(ConfigService::$databaseConnectionName)->table(
-                ConfigService::$tableContent,
-                function ($table) {
-                    /**
-                     * @var $table \Illuminate\Database\Schema\Blueprint
-                     */
-
-                    $table->dropColumn('popularity');
-                }
-            );
+                $table->dropColumn('popularity');
+            }
+        );
     }
 }

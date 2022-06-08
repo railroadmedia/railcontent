@@ -25,28 +25,11 @@ class AddDefaultShowNewField extends Command
     protected $description = 'Adds the show_in_new_feed content field with default value based on content type';
 
     /**
-     * @var DatabaseManager
-     */
-    protected $databaseManager;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void
      */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager)
     {
         $start = microtime(true);
 
@@ -84,13 +67,13 @@ class AddDefaultShowNewField extends Command
         $chunkSize = 1000;
         $insertData = [];
 
-        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+        $databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContent)
             ->whereIn('type', $showNewFieldDefaultTrueTypes)
             ->orderBy('id', 'desc')
             ->chunk(
                 $chunkSize,
-                function (Collection $rows) {
+                function (Collection $rows) use ($databaseManager) {
 
                     foreach ($rows as $item) {
 
@@ -103,7 +86,7 @@ class AddDefaultShowNewField extends Command
                         ];
                     }
 
-                    $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                    $databaseManager->connection(config('railcontent.database_connection_name'))
                         ->table(ConfigService::$tableContentFields)
                         ->insert($insertData);
 
