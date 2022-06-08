@@ -2,7 +2,7 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
-use App\Models\Product_Size;
+use App\Models\ProductSize;
 use App\Models\Size;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
@@ -28,7 +28,7 @@ class SizeResolver implements ResolverInterface
             return $layout->duplicateAndHydrate($size->id, [
                 'size' => $size->name,
                 'sold_out' => $size->sold_out,
-                'id' => Product_Size::where('product_id', '=', $resource['id'])->where('size_id', '=', $size['id'])->first()->id
+                'id' => ProductSize::where('product_id', '=', $resource['id'])->where('size_id', '=', $size['id'])->first()->id
             ]);
         })->filter();
     }
@@ -69,7 +69,7 @@ class SizeResolver implements ResolverInterface
 
                     //update and insert items
                     if(!is_null($size['id'])){
-                        $dbSize = Product_Size::find($size['id']);
+                        $dbSize = ProductSize::find($size['id']);
                         if($dbSize->size_id !== $size['size_id']){
                             $dbSize->size_id = $size['size_id'];
                             $dbSize->save();
@@ -78,7 +78,7 @@ class SizeResolver implements ResolverInterface
                         $updatedIds[] = $size['id'];
                     }
                     else {
-                        $addSize = new Product_Size();
+                        $addSize = new ProductSize();
                         $addSize->product_id = $model['id'];
                         $addSize->size_id = $size['size_id'];
                         $addSize->save();
@@ -89,10 +89,10 @@ class SizeResolver implements ResolverInterface
             }
 
             if(isset($updatedIds)){
-                $deleteIds = Product_Size::where("product_id", '=', $model['id'])
+                $deleteIds = ProductSize::where("product_id", '=', $model['id'])
                     ->whereNotIn('id', $updatedIds)->select('id')->get();
 
-                Product_Size::destroy($deleteIds);
+                ProductSize::destroy($deleteIds);
             }
         });
     }

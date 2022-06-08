@@ -34,13 +34,13 @@ class Product extends Model
 
     public function sizes()
     {
-        return $this->hasManyThrough(Size::class, Product_Size::class, 'product_id', 'id', 'id', 'size_id')
-                    ->addSelect(['product__sizes.sold_out', 'sizes.*'])->orderBy('id');
+        return $this->hasManyThrough(Size::class, ProductSize::class, 'product_id', 'id', 'id', 'size_id')
+                    ->addSelect(['product_sizes.sold_out', 'sizes.*'])->orderBy('id');
     }
 
     public function product_size()
     {
-        return $this->hasMany(Product_Size::class);
+        return $this->hasMany(ProductSize::class);
     }
 
     public function images()
@@ -56,7 +56,7 @@ class Product extends Model
     public function delete()
     {
         Feature::where('product_id', '=', $this->id)->delete();
-        Product_Size::where('product_id', '=', $this->id)->delete();
+        ProductSize::where('product_id', '=', $this->id)->delete();
         Spec::where('product_id', '=', $this->id)->delete();
 
         $imgs = Image::where('product_id', '=', $this->id)->get();
