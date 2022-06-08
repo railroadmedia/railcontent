@@ -191,6 +191,9 @@ Route::group(
                     '/followed-lessons',
                     Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
                 )->name('followed.lessons');
+
+                Route::post('/add-to-primary-playlist', \Railroad\Railcontent\Controllers\MyListJsonController::class . '@addToPrimaryPlaylist');
+                Route::post('/remove-from-primary-playlist', \Railroad\Railcontent\Controllers\MyListJsonController::class . '@removeFromPrimaryPlaylist');
             }
         );
 

@@ -31,7 +31,7 @@ class InstructorTransformer
                 }
             }
 
-            $results[$instructor['content_id']] = [
+            $results[$instructor['content_id']][] = [
                 'id' => $instructor['id'] ?? null,
                 'slug' => $instructor['slug'] ?? '',
                 'status' => $instructor['status'] ?? '',

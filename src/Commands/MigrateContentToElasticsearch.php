@@ -54,6 +54,12 @@ class MigrateContentToElasticsearch extends Command
 
     public function handle()
     {
+        if (!config('railcontent.use_elastic_search')) {
+            $this->info('Elasticsearch not available. Content was not migrated to elasticsearch.');
+
+            return;
+        }
+
         $this->info('Starting MigrateContentToElasticsearch.');
 
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
@@ -186,8 +192,8 @@ class MigrateContentToElasticsearch extends Command
                         'is_coach_of_the_month' => $row->is_coach_of_the_month,
                         'associated_user_id' => $row->associated_user_id,
                         'name' => $row->name,
-                        'vimeo_video_id' => $row->vimeo_video_id ,
-                        'youtube_video_id' => $row->youtube_video_id ,
+                        'vimeo_video_id' => $row->vimeo_video_id,
+                        'youtube_video_id' => $row->youtube_video_id,
                         'style' => (!$styles->isEmpty()) ? array_map(
                             'strtolower',
                             $styles->pluck('style')

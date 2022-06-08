@@ -24,36 +24,16 @@ class CreateSearchIndexes extends Command
      */
     protected $description = 'Create search indexes';
 
-    protected $searchRepository;
-
-    protected $contentRepository;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(FullTextSearchRepository $searchRepository, ContentRepository $contentRepository)
-    {
-        parent::__construct();
-
-        $this->searchRepository = $searchRepository;
-
-        $this->contentRepository = $contentRepository;
-    }
-
     /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(FullTextSearchRepository $searchRepository, ContentRepository $contentRepository)
     {
         ContentRepository::$availableContentStatues = ConfigService::$indexableContentStatuses;
         ContentRepository::$pullFutureContent = false;
 
-        $this->searchRepository->createSearchIndexes();
+        $searchRepository->createSearchIndexes();
     }
-
-
 }

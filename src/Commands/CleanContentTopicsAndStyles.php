@@ -23,28 +23,11 @@ class CleanContentTopicsAndStyles extends Command
     protected $description = 'Clean content topics and content style';
 
     /**
-     * @var DatabaseManager
-     */
-    protected $databaseManager;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    /**
      * Execute the console command.
      *
      * @return void
      */
-    public function handle()
+    public function handle(DatabaseManager $databaseManager)
     {
         $this->info('Started cleaning content metadata');
 
@@ -71,7 +54,7 @@ class CleanContentTopicsAndStyles extends Command
 
         foreach ($replaceOldValueInto as $key => $value) {
             $rows =
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                $databaseManager->connection(config('railcontent.database_connection_name'))
                     ->table(ConfigService::$tableContentFields)
                     ->join(
                         ConfigService::$tableContent,
@@ -88,13 +71,13 @@ class CleanContentTopicsAndStyles extends Command
                     );
         }
 
-        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+        $databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContentFields)
             ->where('key', 'topic')
             ->where('value', '-')
             ->delete();
 
-        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+        $databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContentFields)
             ->where('key', 'style')
             ->where('value', '-')

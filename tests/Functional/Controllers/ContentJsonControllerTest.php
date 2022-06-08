@@ -798,10 +798,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     ->json('data')
             )
         );
-        unset($firstChild['position']);
-        unset($firstChild['child_ids']);
-        unset($secondChild['position']);
-        unset($secondChild['child_ids']);
+
+        unset($firstChild['child_id']);
+        unset($secondChild['child_id']);
         $expectedResults = [
             (array)$firstChild,
             (array)$secondChild,

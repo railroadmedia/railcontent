@@ -29,7 +29,7 @@
     "vimeo/vimeo-api": "^1.2",
     "predis/predis": "^1.1",
     "google/apiclient":"^2.2",
-    "railroad/response": "2.0.x-dev",
+    "railroad/response": "^2.0",
     "elasticsearch/elasticsearch": "~7.0",
     "ext-pdo": "*"
   },

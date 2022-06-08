@@ -195,13 +195,24 @@ class ContentTransformer
                         ];
 
                 } else {
-                    $field[$key][$val['content_id']][] = [
-                        'content_id' => $val['content_id'],
-                        'key' => $key,
-                        'position' => $val['position'] ?? 1,
-                        'value' => $val,
-                        'type' => 'content',
-                    ];
+                    if(is_array($val) && !isset($val['id'])) {
+                    foreach($val as $v) {
+                        $field[$key][$v['content_id']][] = [
+                            'content_id' => $v['content_id'],
+                            'key' => $key,
+                            'position' => $v['position'] ?? 1,
+                            'value' => $v,
+                            'type' => 'content',
+                        ];
+                    }}else{
+                        $field[$key][$val['content_id']][] = [
+                            'content_id' => $val['content_id'],
+                            'key' => $key,
+                            'position' => $val['position'] ?? 1,
+                            'value' => $val,
+                            'type' => 'content',
+                        ];
+                    }
                 }
             }
         } else {
