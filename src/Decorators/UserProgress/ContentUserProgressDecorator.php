@@ -27,8 +27,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
     public function __construct(
         UserContentProgressRepository $userContentProgressRepository,
         UserContentProgressService $userContentProgressService
-    )
-    {
+    ) {
         $this->userContentProgressRepository = $userContentProgressRepository;
         $this->userContentProgressService = $userContentProgressService;
     }
@@ -59,10 +58,8 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
             foreach ($contentProgressions as $contentProgression) {
                 if (isset($contentProgressionsByContentId[$contentProgression['content_id']])) {
-
                     if (($contentProgression['state'] == 'started' &&
                         $contentProgressionsByContentId[$contentProgression['content_id']]['state'] == 'completed')) {
-
                         $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
 
                         $this->userContentProgressRepository->query()
@@ -83,7 +80,6 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
                     if (($contentProgression['state'] == 'completed' &&
                         $contentProgressionsByContentId[$contentProgression['content_id']]['state'] == 'started')) {
-
                         $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
 
                         $this->userContentProgressRepository->query()
@@ -103,8 +99,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
                         $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
                     }
-                }
-                else {
+                } else {
                     $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
                 }
             }
@@ -123,14 +118,16 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
                     $contents[$index]['progress_percent'] =
                         $contentProgressionsByContentId[$content['id']]['progress_percent'];
-                }
-                else {
+                } else {
                     $contents[$index]['user_progress'][$userId] = [];
 
                     $contents[$index][UserContentProgressService::STATE_COMPLETED] = false;
                     $contents[$index][UserContentProgressService::STATE_STARTED] = false;
                     $contents[$index]['progress_percent'] = 0;
                 }
+
+                $contents[$index]['higher_key_progress'] =
+                    $contentProgressionsByContentId[$content['id']]['higher_key_progress'] ?? '';
             }
         }
 
