@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('product_id');
             $table->string('title');
             $table->string('desc');
+            $table->integer('order_number');
             $table->timestamps();
         });
     }

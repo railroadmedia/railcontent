@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('product_id');
             $table->string('path')->unique();
+            $table->integer('order_number');
             $table->timestamps();
         });
     }
