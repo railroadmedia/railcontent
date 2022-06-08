@@ -4,7 +4,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => 'musora_laravel_mysql_writer_only',
+    'database_connection_name' => 'musora_laravel_mysql',
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
