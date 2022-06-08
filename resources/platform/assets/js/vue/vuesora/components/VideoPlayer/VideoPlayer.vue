@@ -348,7 +348,7 @@
     </div>
 </template>
 <script>
-import shaka from 'shaka-player/dist/shaka-player.compiled.debug';
+import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
 import ContentService from '../../assets/js/services/content';
@@ -714,8 +714,6 @@ export default {
     },
     mounted() {
         const { player, videoWrap } = this.$refs;
-        console.log(player)
-        console.log(this.sources)
         const supportsMSE = false;
 
         this.currentRange = window.localStorage.getItem('currentRange') || 'original';
@@ -740,11 +738,8 @@ export default {
             });
 
             //this.mediaElement = player;
-
-            console.log('this shakaplayer', typeof this.$shakaPlayer.attach)
             this.$shakaPlayer.attach(this.$refs.player)
                 .then(() => {
-                    console.log('attach was done')
                     this.mediaElement = this.$shakaPlayer.getMediaElement();
 
                     this.$shakaPlayer.configure({
@@ -764,11 +759,9 @@ export default {
                     return this.loadSource();
                 })
                 .then(() => {
-                    console.log('second then for attach function')
                     this.initializePlayer();
                 })
                 .catch((error) => {
-                    console.log('error catch log', error)
                     if (error.severity === 2) {
                         this.playerError = true;
                         this.playerErrorCode = error.code;
@@ -869,7 +862,6 @@ export default {
         },
 
         loadSource(source) {
-            console.log('load source', source)
             // const supportsMSE = typeof MediaSource === 'function';
             this.getSource(source);
 
@@ -913,7 +905,6 @@ export default {
                 // } else {
 
                 this.mediaElement.src = this.source.file;
-                console.log(this.source.file)
 
                 setTimeout(() => {
                     resolve();
