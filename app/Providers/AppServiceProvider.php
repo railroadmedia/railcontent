@@ -37,15 +37,15 @@ class AppServiceProvider extends ServiceProvider
 //        );
 
         $this->app->singleton(EcommerceUserProviderInterface::class, function ($app) {
-            $app->make(EcommerceUserProvider::class);
+            return $app->make(EcommerceUserProvider::class);
         });
 
         $this->app->singleton(RailforumsUserProviderInterface::class, function ($app) {
-            $app->make(RailforumsUserProvider::class);
+            return $app->make(RailforumsUserProvider::class);
         });
 
         $this->app->singleton(EventDataSynchronizerUserProviderInterface::class, function ($app) {
-            $app->make(EventDataSynchronizerUserProvider::class);
+            return $app->make(EventDataSynchronizerUserProvider::class);
         });
     }
 }
