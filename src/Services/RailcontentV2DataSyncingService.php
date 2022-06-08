@@ -51,12 +51,6 @@ class RailcontentV2DataSyncingService
             ->whereNotIn('value', ['Invalid date'])
             ->get();
 
-//        $contentDataRows = $databaseConnection->table(config('railcontent.table_prefix').'content_fields')
-//            ->where('content_id', $contentId)
-//            ->whereNotNull('value')
-//            ->whereNotIn('value', ['Invalid date'])
-//            ->get();
-
         // fields first
         $fieldNameToContentColumnNameMap = [
             'album' => 'album',
@@ -140,10 +134,15 @@ class RailcontentV2DataSyncingService
         // 'hierarchy_position_number' => 'hierarchy_position_number'
         // 'like_count' => 'like_count'
 
+        $contentColumnsToUpdate['web_url_path'] = null;
+        $contentColumnsToUpdate['mobile_app_url_path'] = null;
+
         $contentURLs = $this->railcontentURLProvider->getContentURLs($contentId, $contentRow->slug, $contentRow->type);
 
-        $contentColumnsToUpdate['web_url_path'] = $contentURLs->getWebURLPath();
-        $contentColumnsToUpdate['mobile_app_url_path'] = $contentURLs->getMobileAppURLPath();
+        if (!empty($contentURLs)) {
+            $contentColumnsToUpdate['web_url_path'] = $contentURLs->getWebURLPath();
+            $contentColumnsToUpdate['mobile_app_url_path'] = $contentURLs->getMobileAppURLPath();
+        }
 
         $contentHierarchyRows = $databaseConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
             ->where('child_id', $contentId)
@@ -162,8 +161,6 @@ class RailcontentV2DataSyncingService
             $databaseConnection->table(config('railcontent.table_prefix') . 'content_likes')
                 ->where('content_id', $contentId)
                 ->count();
-
-        dd($contentColumnsToUpdate);
 
         $databaseConnection->table(config('railcontent.table_prefix') . 'content')
             ->where('id', $contentId)
