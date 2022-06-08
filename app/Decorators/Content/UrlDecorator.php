@@ -3,50 +3,26 @@
 namespace App\Decorators\Content;
 
 use App\Maps\ContentTypeHierarchyMap;
-use App\Maps\ContentTypes;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentHierarchyService;
-use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 
 class UrlDecorator extends ModeDecoratorBase
 {
-    /**
-     * @var ContentService
-     */
-    protected $contentService;
+    private ContentRepository $contentRepository;
 
-    /**
-     * @var UserContentProgressService
-     */
-    protected $userContentProgressService;
-
-    /**
-     * @var ContentHierarchyService
-     */
-    protected $contentHierarchyService;
-
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
-
-    private static $contentCache = [];
+    private static array $contentCache = [];
 
     public function __construct(
-        ContentService $contentService,
         ContentRepository $contentRepository
     ) {
-        $this->contentService = $contentService;
         $this->contentRepository = $contentRepository;
     }
 
     /**
      * @param Collection $contents
-     * @return Collection
+     * @return array|Collection
      */
     public function decorate(Collection $contents)
     {
@@ -61,280 +37,64 @@ class UrlDecorator extends ModeDecoratorBase
 
         $contents = $this->fetchAndCacheParents($contents);
 
-        // todo: if the parents dont exist we need to pull them
-
         // set url based on type
         foreach ($contents as $contentIndex => $content) {
-            $mobileUrl = '';
-            $musoraApiUrl = '';
+            $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
 
-            // learning paths
-            if ($content['type'] == 'learning-path') {
+            // first-level types
+            if (empty($content['parent_id']) &&
+                !empty($contentTypeToURLSlugMap[$content['type']])) {
                 $contents[$contentIndex]['url'] =
                     url()->route(
                         'platform.content.first-level',
-                        ['brand' => $content['brand'], 'method', $content['slug'], $content['id']]
+                        [
+                            'brand' => $content['brand'],
+                            $contentTypeToURLSlugMap[$content['type']],
+                            $content['slug'],
+                            $content['id']
+                        ]
                     );
-
-//                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.show', [$content['slug']]);
             }
 
-            // learning path levels
-            if ($content['type'] == 'learning-path-level' &&
-                !empty($parent = self::$contentCache[$content['parent_id']] ?? null)) {
+            // second-level types
+            if (!empty($content['parent_id']) &&
+                !empty($parent1 = self::$contentCache[$content['parent_id']] ?? null) &&
+                empty($parent1['parent_id']) &&
+                !empty($contentTypeToURLSlugMap[$parent1['type']])) {
                 $contents[$contentIndex]['url'] =
                     url()->route(
                         'platform.content.second-level',
                         [
                             'brand' => $content['brand'],
-                            'method',
-                            $parent['slug'],
-                            $parent['id'],
+                            $contentTypeToURLSlugMap[$parent1['type']],
+                            $parent1['slug'],
+                            $parent1['id'],
                             $content['slug'],
                             $content['id']
                         ]
                     );
-
-//                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.show', [$content['slug']]);
             }
 
-            // learning path courses
-            if ($content['type'] == 'learning-path-course') {
+            // third-level types
+            if (!empty($content['parent_id']) &&
+                !empty($parent1 = self::$contentCache[$content['parent_id']] ?? null) &&
+                !empty($parent1['parent_id']) &&
+                !empty($parent2 = self::$contentCache[$parent1['parent_id']] ?? null) &&
+                !empty($contentTypeToURLSlugMap[$parent2['type']])) {
                 $contents[$contentIndex]['url'] = url()->route(
-                    'platform.content.jump-to-content-id',
+                    'platform.content.third-level',
                     [
                         'brand' => $content['brand'],
-                        $content['id'],
-                    ]
-                );
-
-//                $mobileUrl = url()->route(
-//                    'mobile.members.learning-path.course.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $musoraApiUrl = url()->route(
-//                    'mobile.musora-api.learning-path.course.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-            }
-
-            // packs
-            if ($content['type'] == 'pack' || $content['type'] == 'semester-pack') {
-                $contents[$contentIndex]['url'] = url()->route(
-                    'platform.packs.first-level',
-                    [
-                        'brand' => $content['brand'],
+                        $contentTypeToURLSlugMap[$parent2['type']],
+                        $parent2['slug'],
+                        $parent2['id'],
+                        $parent1['slug'],
+                        $parent1['id'],
                         $content['slug'],
                         $content['id'],
                     ]
                 );
             }
-
-            // pack bundle
-            if ($content['type'] == 'pack-bundle') {
-                $contents[$contentIndex]['url'] = url()->route(
-                    'platform.content.jump-to-content-id',
-                    [
-                        'brand' => $content['brand'],
-                        $content['id'],
-                    ]
-                );
-            }
-
-            // coaches
-            if ($content['type'] == 'instructor') {
-                $contents[$contentIndex]['url'] =
-                    url()->route(
-                        'platform.content.first-level',
-                        ['brand' => $content['brand'], 'coaches', $content['slug'], $content['id']]
-                    );
-
-//                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-            }
-
-//            // learning paths
-//            if ($content['type'] == 'learning-path') {
-//
-//                $contents[$contentIndex]['url'] =
-//                    url()->route('members.learning-paths.show', [$content['slug'], $content['id']]);
-//                self::$contentCache[$content['id']] = $content;
-//
-//                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.show', [$content['slug']]);
-//            }
-//
-//            // units
-//            if (($content['type'] == 'unit') && !empty($parent = self::$contentCache[$content['parent_id']] ?? null)) {
-//
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.learning-paths.units.show',
-//                    [$parent['slug'], $parent['id'], $content['slug'], $content['id']]
-//                );
-//
-//                self::$contentCache[$content['id']] = $content;
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.musora-api.learning-path.level.show',
-//                    [$parent['slug'], $content['slug']]
-//                );
-//                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.level.show', [$parent['slug'], $content['slug']]);
-//                //mobile.musora-api.learning-path.level.show
-//            }
-//
-//            // unit lessons
-//            if ($content['type'] == 'unit-part' &&
-//                !empty($content['parent_id']) &&
-//                !empty($parent1 = self::$contentCache[$content['parent_id']] ?? null) &&
-//                !empty($parent1['parent_id']) &&
-//                !empty($parent2 = self::$contentCache[$parent1['parent_id']] ?? null)) {
-//
-//                $contents[$contentIndex]['url'] = url()->route(
-//                    'members.learning-paths.units.lessons.show',
-//                    [
-//                        $parent2['slug'],
-//                        $parent2['id'],
-//                        $parent1['slug'],
-//                        $parent1['id'],
-//                        $content['slug'],
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                self::$contentCache[$content['id']] = $content;
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.musora-api.learning-paths.unit-part.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $musoraApiUrl= url()->route(
-//                    'mobile.musora-api.learning-paths.unit-part.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//            }
-
-//            // courses/songs
-            if (in_array($content['type'], ContentTypes::contentTypesWithChildren())) {
-                $contents[$contentIndex]['url'] =
-                    url()->route(
-                        'platform.content.first-level',
-                        [
-                            'brand' => $content['brand'],
-                            array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']],
-                            $content['slug'],
-                            $content['id']
-                        ]
-                    );
-
-//                $mobileUrl = url()->route(
-//                    'mobile.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.musora-api.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-            }
-
-            // lessons with single parent
-            if (in_array($content['type'], ContentTypes::contentTypesWithSingularParent()) &&
-                !empty($parent = self::$contentCache[$content['parent_id']] ?? null)) {
-                $contents[$contentIndex]['url'] = url()->route(
-                    'platform.content.second-level',
-                    [
-                        'brand' => $content['brand'],
-                        array_flip(PrimaryURLSlugToContentTypeMap::$map)[$parent['type']],
-                        $parent['slug'],
-                        $parent['id'],
-                        $content['slug'],
-                        $content['id'],
-                    ]
-                );
-
-//                $mobileUrl = url()->route(
-//                    'mobile.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $musoraApiUrl = url()->route(
-//                    'mobile.musora-api.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-            }
-
-            // lessons without parents
-            if (in_array($content['type'], ContentTypes::singularContentTypes()) &&
-                !empty(array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']] ?? null)) {
-                $contents[$contentIndex]['url'] = url()->route(
-                    'platform.content.first-level',
-                    [
-                        'brand' => $content['brand'],
-                        array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['type']],
-                        $content['slug'],
-                        $content['id'],
-                    ]
-                );
-
-//                $mobileUrl = url()->route(
-//                    'mobile.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//
-//                $mobileUrl = url()->route(
-//                    'mobile.musora-api.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-            }
-//
-//            if ($content['type'] == 'pack-bundle') {
-//                $mobileUrl = url()->route(
-//                    'mobile.content.show',
-//                    [
-//                        $content['id'],
-//                    ]
-//                );
-//            }
-//
-//
-            if ($content['type'] == 'instructor') {
-                $contents[$contentIndex]['url'] =
-                    url()->route(
-                        'platform.content.coach.show',
-                        ['brand' => $content['brand'], $content['slug'], $content['id']]
-                    );
-
-//                $mobileUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.content.show', [$content['id']]);
-            }
-//
-//            $content['mobile_app_url'] = $mobileUrl;
-//
-//            $content['musora_api_mobile_app_url'] = $musoraApiUrl;
         }
 
 

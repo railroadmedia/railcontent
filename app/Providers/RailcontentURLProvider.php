@@ -13,6 +13,10 @@ class RailcontentURLProvider implements RailcontentURLProviderInterface
 {
     public function getContentURLs($contentId, $contentSlug, $contentType): ?ContentURLs
     {
+        if ($contentType == 'assignment' || $contentType == 'vimeo-video' || $contentType == 'youtube-video') {
+            return null;
+        }
+
         /**
          * @var $contentService ContentService
          */

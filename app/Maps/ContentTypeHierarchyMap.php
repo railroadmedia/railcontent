@@ -15,5 +15,7 @@ class ContentTypeHierarchyMap
         'unit' => 'unit-part',
         'song' => 'song-part',
         'course' => 'course-part',
+        'pack' => 'pack-bundle',
+        'pack-bundle' => 'pack-bundle-lesson',
     ];
 }

@@ -48,27 +48,31 @@ class LearningPathLevelDecorator extends TypeDecoratorBase
                     ->count('child_id');
 
             // next lesson
-            $childProgressRows =
-                $this->railcontentDB()
-                    ->table('railcontent_content_hierarchy')
-                    ->leftJoin(
-                        'railcontent_user_content_progress',
-                        function (JoinClause $join) {
-                            $join->on(
-                                'railcontent_user_content_progress.content_id',
-                                '=',
-                                'railcontent_content_hierarchy.child_id'
-                            )
-                                ->where(
-                                    function (Builder $builder) {
-                                        $builder->where('railcontent_user_content_progress.user_id', user()->id);
-                                    }
-                                );
-                        }
-                    )
-                    ->where('parent_id', $content['id'])
-                    ->orderBy('railcontent_content_hierarchy.child_position', 'asc')
-                    ->get();
+            $childProgressRows = [];
+
+            if (!empty(user())) {
+                $childProgressRows =
+                    $this->railcontentDB()
+                        ->table('railcontent_content_hierarchy')
+                        ->leftJoin(
+                            'railcontent_user_content_progress',
+                            function (JoinClause $join) {
+                                $join->on(
+                                    'railcontent_user_content_progress.content_id',
+                                    '=',
+                                    'railcontent_content_hierarchy.child_id'
+                                )
+                                    ->where(
+                                        function (Builder $builder) {
+                                            $builder->where('railcontent_user_content_progress.user_id', user()->id);
+                                        }
+                                    );
+                            }
+                        )
+                        ->where('parent_id', $content['id'])
+                        ->orderBy('railcontent_content_hierarchy.child_position', 'asc')
+                        ->get();
+            }
 
             $nextLesson = null;
             foreach ($childProgressRows as $childProgressRow) {
