@@ -10,15 +10,14 @@ use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\RememberToken;
 use Modules\UserManagementSystem\Models\User;
 
-/**
- * @method User retrieveById($identifier)
- */
 class UserServiceProvider extends EloquentUserProvider
 {
     /**
      * @var Hasher
      */
     protected $hasher;
+
+    protected array $internalIdentifierCache = [];
 
     /**
      * @param Hasher $hasher
@@ -37,6 +36,30 @@ class UserServiceProvider extends EloquentUserProvider
     public function createModel()
     {
         return new User();
+    }
+
+    /**
+     * Retrieve a user by their unique identifier.
+     *
+     * @param  mixed  $identifier
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function retrieveById($identifier)
+    {
+
+        if (empty($this->internalIdentifierCache[$identifier])) {
+            $model = $this->createModel();
+
+            $result = $this->newModelQuery($model)
+                ->where($model->getAuthIdentifierName(), $identifier)
+                ->first();
+        }
+
+        if (!empty($result)) {
+            $this->internalIdentifierCache[$identifier] = $result;
+        }
+
+        return $this->internalIdentifierCache[$identifier];
     }
 
     /**
@@ -101,17 +124,9 @@ class UserServiceProvider extends EloquentUserProvider
      */
     public function updateSessionSalt(Authenticatable $user, $salt)
     {
-        $user = User::query()->find($user->getAuthIdentifier());
+        // NOTE: session salt is no longer used for anything
 
-        if (!is_null($user)) {
-            $user->session_salt = $salt;
-
-            $user->save();
-
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**

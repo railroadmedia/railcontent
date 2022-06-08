@@ -13,7 +13,11 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 - run `r musora-web-platform composer install` -- NOTE: if asked for nova package credentials, 
   input 'caleb@drumeo.com' for the username and for the password use our Nova license key which is inside the 1pass note: 
   "Laravel Nova v4.0 License Key". When it asks if you want to store a composer auth file, enter Y
-- run `r musora db8 local fromprod` -- NOTE: this is just 'musora' since we only need the musora_laravel tables
+- run `r musora db8 local fromprod`
+- run `r drumeo db8 local fromprod`
+- run `r pianote db8 local fromprod`
+- run `r guitareo db8 local fromprod`
+- run `r singeo db8 local fromprod`
   run `r musora-web-platform artisan migrate`
 - navigate to the /app/musora-web-platform folder with `cd /app/musora-web-platform`
 - run `nvm use 16` then `yarn` then `yarn platform-prod` then `yarn marketing-prod`

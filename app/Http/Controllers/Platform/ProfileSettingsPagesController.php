@@ -189,7 +189,7 @@ class ProfileSettingsPagesController extends BaseController
                 [
                     "url" => url()->route('platform.profile.settings.notifications', ['userId' => user()->id]),
                     'icon' => 'fas fa-bell',
-                    'title' => 'Settings',
+                    'title' => 'Notification Settings',
                     'active' => $section === 'settings',
                 ],
                 [

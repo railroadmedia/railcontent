@@ -1,7 +1,7 @@
 <template>
     <a
         :href="forum.url"
-        class="tw-relative tw-flex tw-flex-row tw-items-center tw-py-4 tw-px-2 tw-text-black tw-no-underline tw-border-0 tw-border-b tw-border-solid tw-border-gray-200"
+        class="tw-relative tw-flex tw-flex-row tw-items-center tw-py-4 tw-px-2 tw-text-black tw-no-underline tw-border-0 tw-border-b tw-border-solid dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039] hover:tw-bg-[#F5F5F6] tw-transition tw-border-[#D4D4D8]"
         :class="[brandHoverColor]"
     >
         <!-- Avatar -->
@@ -12,7 +12,7 @@
             </i>
         </div>
        
-        <div class="tw-w-full tw-min-w-0 tw-pr-0"
+        <div class="tw-w-full tw-min-w-0 tw-pr-0 dark:tw-text-white tw-text-[#00101D]"
         >
             <div class="tw-flex">
                 <!-- Title -->
@@ -21,13 +21,13 @@
                 </h4>
 
                 <!-- Reply Amount MOBILE ONLY -->
-                <div class="tw-ml-auto tw-items-start tw-text-gray-600 tw-mt-1 tw-mr-4 tw-flex-shrink-0 tw-w-16 tw-text-left tw-flex md:tw-hidden">
+                <div class="tw-ml-auto tw-items-start tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-4 tw-flex-shrink-0 tw-w-16 tw-text-left tw-flex md:tw-hidden">
                     <h6 class="tw-text-13 tw-font-bold tw-with-tooltip tw-tooltip-center tw-tooltip-top tw-ml-auto sm:tw-ml-0 sm:tw-mr-auto">
                         <i class="fas fa-comment-lines tw-mr-1"></i>
                         {{ replyCount }}
 
                         <!-- Tool Tip -->
-                        <div class="tw-tooltip tw-tooltip-dark">
+                        <div class="tw-tooltip tw-tooltip-dark" :class="`tw-bg-${brand}`">
                             Total Threads
                         </div>
                     </h6>
@@ -36,26 +36,26 @@
             </div>
             
             <!-- Description -->
-            <p v-if="forum.description" class=" md:tw-pr-10 tw-text-13  tw-mt-2">
+            <p v-if="forum.description" class=" md:tw-pr-10 tw-text-13  tw-mt-2 dark:tw-text-white tw-text-[#00101D]">
                 {{ forum.description }}
             </p>
         </div>
 
         <!-- Reply Amount -->
-        <div class="tw-items-center tw-text-gray-600 tw-mr-4 lg:tw-mr-12 tw-flex-shrink-0 tw-w-16 tw-text-left tw-hidden md:tw-flex">
+        <div class="tw-items-center tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-mr-4 lg:tw-mr-12 tw-flex-shrink-0 tw-w-16 tw-text-left tw-hidden md:tw-flex">
             <h6 class="tw-text-13 tw-font-bold tw-with-tooltip tw-tooltip-center tw-tooltip-top tw-ml-auto sm:tw-ml-0 sm:tw-mr-auto">
                 <i class="fas fa-comment-lines tw-mr-1"></i>
                 {{ replyCount }}
 
                 <!-- Tool Tip -->
-                <div class="tw-tooltip tw-tooltip-dark">
+                <div class="tw-tooltip tw-tooltip-dark" :class="`tw-bg-${brand}`">
                     Total Threads
                 </div>
             </h6>
         </div>
 
         <!-- Post Date -->
-        <div class="tw-flex-col tw-justify-center tw-text-gray-600 tw-flex-shrink-0 tw-w-28 tw-hidden lg:tw-flex">
+        <div class="tw-flex-col tw-justify-center tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-flex-shrink-0 tw-w-28 tw-hidden lg:tw-flex">
             <h6 class="tw-text-13 tw-font-bold">{{ forum.latestPost ? forum.latestPost.created_at_diff : '' }}</h6>
             <!-- <p class="tw-text-13"><span class="tw-font-bold">In:</spanZ> </p> -->
             <p class="tw-text-13 tw-truncate">
