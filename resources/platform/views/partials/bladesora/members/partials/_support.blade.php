@@ -11,19 +11,33 @@
     <section class="tw-flex tw-flex-row tw-flex-wrap mv-3">
         <div class="tw-flex tw-flex-col">
 
+
+
             {{--TODO: Requires an instance of Vue with the Vuesora plugin ...? --}}
-                <contact-member-email-form
-                    brand="{{ $brand }}"
-                    email-subject="{{ $emailSubject }}"
-                    email-type="{{ $emailType }}"
-                    email-endpoint="{{ $emailEndpoint }}"
-                    email-logo="{{ $emailLogo }}"
-                    email-alert="{{ $emailSubject }}"
-                    input-label="{{ $emailInputLabel }}"
-                    :lesson-page="false"
-                    recipient="{{ $recipient ?? 'support@' . $brand . '.com' }}"
-                    success-message="{{ $emailSuccessMessage }}"
-                />
+            <contact-member-email-form
+                brand="drumeo"
+                email-subject="test subject"
+                email-type="layouts/inline/alert"
+                email-endpoint="/mailora/secure/send"
+                email-logo="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                email-alert="test subject"
+                input-label="test ;abe;"
+                :lesson-page="false"
+                recipient="musora@support.ro"
+                success-message="test success message"
+            />
+{{--                <contact-member-email-form--}}
+{{--                    brand="{{ $brand }}"--}}
+{{--                    email-subject="{{ $emailSubject }}"--}}
+{{--                    email-type="{{ $emailType }}"--}}
+{{--                    email-endpoint="{{ $emailEndpoint }}"--}}
+{{--                    email-logo="{{ $emailLogo }}"--}}
+{{--                    email-alert="{{ $emailSubject }}"--}}
+{{--                    input-label="{{ $emailInputLabel }}"--}}
+{{--                    :lesson-page="false"--}}
+{{--                    recipient="{{ $recipient ?? 'support@' . $brand . '.com' }}"--}}
+{{--                    success-message="{{ $emailSuccessMessage }}"--}}
+{{--                />--}}
             {{--TODO: Requires an instance of Vue with the Vuesora plugin ...? --}}
         </div>
     </section>
