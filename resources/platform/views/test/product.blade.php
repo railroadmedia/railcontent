@@ -78,6 +78,10 @@
                     ])
                 @endif
 
+                @if(!is_null($product->size_chart_id))
+                    <img src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->sizeChart->chart }}" />
+                @endif
+
             </div>
         </div>
     </div>

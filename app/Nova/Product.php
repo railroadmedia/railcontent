@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\SizeChart;
 use App\Nova\Flexible\Layouts\FeatureLayout;
 use App\Nova\Flexible\Layouts\ImageLayout;
 use App\Nova\Flexible\Layouts\SizeLayout;
@@ -18,6 +19,7 @@ use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -55,18 +57,38 @@ class Product extends Resource
      */
     public function fields(NovaRequest $request)
     {
+
+        dd($request);
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
             BelongsTo::make('ProductType', 'productType', 'App\Nova\ProductType'),
             Text::make('Name'),
-            Text::make('Slug')->hideFromIndex()->required(),
+            Text::make('Slug')
+                ->displayUsing(function($value){
+                    return '<a class="link-default" target="_blank" href="/products/'.$value.'">'.$value.'</a>';
+                })
+                ->asHtml()
+                ->required(),
             Text::make('Sku')->hideFromIndex()->required(),
-            Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
-            Image::make('Meta Image', 'meta_img')
+            Image::make('Thumbnail')
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
+                ->storeAs(function (Request $request){
+                    return $request->file('thumbnail')->getClientOriginalName();
+                })
+                ->disableDownload()
+                ->nullable(),
+            Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
+            Image::make('Meta Image', 'meta_img')
+                ->thumbnail(function($value, $disk){
+                    return 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                })
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
                 ->storeAs(function (Request $request){
                     return $request->file('meta_img')->getClientOriginalName();
                 }),
@@ -95,27 +117,43 @@ class Product extends Resource
                 ->storeAs(function (Request $request){
                     return $request->file('logo')->getClientOriginalName();
                 })
+                ->disableDownload()
                 ->nullable(),
             Text::make('Video Link', 'video_src')->hideFromIndex(),
             Text::make('Instructor Name', 'instructor_name')->hideFromIndex(),
             Image::make('Instructor Image', 'instructor_img')
+                ->thumbnail(function($value){
+                    return $value ? 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value : '';
+                })
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->storeAs(function (Request $request){
                     return $request->file('instructor_img')->getClientOriginalName();
                 })
+                ->disableDownload()
                 ->nullable(),
             Markdown::make('Instructor Description', 'instructor_desc')->hideFromIndex(),
             Text::make('Study Text', 'study_text')->hideFromIndex(),
             Markdown::make('Overview')->hideFromIndex(),
             Heading::make('Clothing'),
-            Flexible::make('Sizes')
-                ->addLayout(SizeLayout::class)
-                ->preset(SizePreset::class),
             Flexible::make('Image')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
+            Select::make('Size Chart', 'size_chart_id')
+                ->options(\App\Models\SizeChart::pluck('chart', 'id'))
+                ->onlyOnForms()
+                ->hideFromIndex(),
+            Text::make('Size Chart', 'size_chart_id')
+                ->displayUsing(function($value){
+//                    $chartName = is_null($value) ? '-' :SizeChart::where('id', '=', $value)->first()->chart;
+                    return is_null($value) ? "-" : "<img src=\"https://laravel-nova.s3.us-east-2.amazonaws.com/".SizeChart::where('id', '=', $value)->first()->chart."\" alt='size chart' />";
+                })
+                ->asHtml()
+                ->hideFromIndex(),
+            Flexible::make('Sizes')
+                ->addLayout(SizeLayout::class)
+                ->preset(SizePreset::class),
         ];
     }
 
