@@ -434,9 +434,8 @@ a:visited {
   cursor: pointer;
   display: inline-flex;
   font-family: "Bebas Neue", cursive;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   justify-content: center;
-  letter-spacing: 0.1em;
   line-height: 1;
   margin-bottom: 0.25rem;
   min-height: 50px;
@@ -535,7 +534,7 @@ a:visited {
 }
 .btn-secondary.text-recordeo:active {}
 .btn-small {
-  font-size: 14px;
+  font-size: 0.875rem;
   height: 34px;
   min-height: auto;
   padding: 8px 48px;
