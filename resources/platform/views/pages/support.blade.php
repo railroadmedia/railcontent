@@ -6,24 +6,19 @@
 
 @section('content')
         <div v-cloak>
-
-{{--            <header id="pageHeader" class="tw-container tw-mx-auto fluid tw-py-20" style="background-image:url(https://musora-web-platform.s3.amazonaws.com/headers/".$brand."Header.jpg);">--}}
-{{--                <div class="tw-container tw-mx-auto tw-text-center">--}}
-{{--                    <h1 class="tw-text-white">--}}
-{{--                        <i class="fas fa-phone fa-flip-horizontal tw-text-drumeo"></i>--}}
-{{--                        <i class="fas fa-phone fa-flip-horizontal tw-text-{{ $brand }}"></i>--}}
-{{--                        Support--}}
-{{--                    </h1>--}}
-{{--                </div>--}}
-{{--            </header>--}}
-{{--            <div id="pageHeader" class="tw-container tw-mx-auto fluid tw-py-20" style="background-image:url(https://musora-web-platform.s3.amazonaws.com/headers/".$brand."Header.jpg);">--}}
-            <div id="pageHeader" class="tw-container tw-mx-auto fluid tw-py-20">
-
-                <div class="tw-container tw-mx-auto tw-text-center">
+            <div
+                id="pageHeader"
+                class="fluid tw-py-20 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
+                dusk="profile-header"
+                style="background-image:url({{ cf_img('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg', ["quality" => 80, "blur" => 40, "width" => 600, "fit" => "crop"]) }});"
+                data-ix-bg="{{ 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg' }}"
+            >
+                <div class="header-gradient-overlay absolute-fill"></div>
+            
+                <div class="tw-container tw-flex tw-flex-col tw-items-center tw-items-end tw-items-center tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
                     <h1 class="tw-text-white">
-{{--                        <i class="fas fa-phone fa-flip-horizontal tw-text-drumeo"></i>--}}
-                        <i class="fas fa-phone fa-flip-horizontal tw-text-{{ $brand }}"></i>
-                        Support
+                        <i class="fas fa-phone fa-flip-horizontal tw-text-2xl"></i>
+                        <span class="tw-text-3xl tw-font-bold"> Support </span>
                     </h1>
                 </div>
             </div>
