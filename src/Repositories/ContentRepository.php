@@ -46,6 +46,8 @@ class ContentRepository extends RepositoryBase
      */
     public static $bypassPermissions = false;
 
+    public static $catalogMetaAllowableFilters = null;
+
     private $requiredFields = [];
     private $includedFields = [];
 
@@ -1204,7 +1206,9 @@ class ContentRepository extends RepositoryBase
             $query->get()
                 ->toArray();
 
-        $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'topic', 'style'], $possibleContentFields);
+        $filterOptions = self::$catalogMetaAllowableFilters ?? ['data', 'instructor'];
+
+        $extraData = $this->geExtraDataInOldStyle($filterOptions, $possibleContentFields);
 
         $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
