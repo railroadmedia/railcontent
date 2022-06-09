@@ -11,6 +11,7 @@ use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\UserListPagesController;
+use App\Http\Controllers\Platform\MailController;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -317,4 +318,11 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/forums/edit-thread/{threadId}', [ForumPagesController::class, 'showUpdateThreadForm'])
             ->whereIn('brand', all_brands())
             ->name('forums.show-update-thread-form');
+
+        /*
+         * Mails
+         */
+        Route::post('//{brand}/mail', [MailController::class, 'sendFromMember'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.mail');
     });

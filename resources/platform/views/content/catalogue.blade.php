@@ -41,40 +41,40 @@
                 <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">
                         @if($catalogueMeta['name'] == 'Q&A')
-                            <musora-icon icon-name="light-bulb-filled" 
+                            <musora-icon icon-name="light-bulb-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Routines')
-                            <musora-icon icon-name="routines" 
+                            <musora-icon icon-name="routines"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Quick Tips')
-                            <musora-icon icon-name="light-bulb-filled" 
+                            <musora-icon icon-name="light-bulb-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Songs')
-                            <musora-icon icon-name="headphones-filled" 
+                            <musora-icon icon-name="headphones-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Bootcamps')
-                            <musora-icon icon-name="keys-filled" 
+                            <musora-icon icon-name="keys-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
-                            <musora-icon icon-name="podcast-filled" 
+                            <musora-icon icon-name="podcast-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Student Focus')
-                            <musora-icon icon-name="person-plus-filled" 
+                            <musora-icon icon-name="person-plus-filled"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Q & A')
-                            <musora-icon icon-name="question-mark-circle" 
+                            <musora-icon icon-name="question-mark-circle"
                                          class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Student Reviews')
-                            <musora-icon icon-name="person-plus-filled" 
+                            <musora-icon icon-name="person-plus-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Chords & Scales')
-                            <musora-icon icon-name="guitar-tabs-filled" 
+                            <musora-icon icon-name="guitar-tabs-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @elseif($catalogueMeta['name'] == 'Archives')
-                            <musora-icon icon-name="archives-filled" 
+                            <musora-icon icon-name="archives-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @else
-                            <musora-icon icon-name="academic-cap-filled" 
+                            <musora-icon icon-name="academic-cap-filled"
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @endif
                         <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
@@ -112,6 +112,14 @@
             @endslot
         @endcomponent
 
+        @if(session()->has('success-message'))
+            <div class="form-success-message container mt-3">
+                <div class="flex flex-column bg-success shadow corners-10 pa">
+                    <p class="body text-white">{{ session()->get('success-message') }}</p>
+                </div>
+            </div>
+        @endif
+
         @if($hasStartedLessons)
             <section class="tw-container tw-mx-auto tw-pt-4 md:tw-pt-5 md:tw-px-8">
                 <div class="flex flex-row tw-pt-4">
@@ -147,16 +155,16 @@
             </section>
         @endif
 
-        {{--    @if($catalogueMeta['name'] == 'Routines')--}}
-        {{--        <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">--}}
-        {{--            <div class="container">--}}
-        {{--                <h2 class="tw-text-white"> --}}
-        {{--                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span> --}}
-        {{--                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>    --}}
-        {{--                </h2>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
-        {{--    @endif--}}
+        @if($catalogueMeta['name'] == 'Routines')
+            <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">
+                <div class="container">
+                    <h2 class="tw-text-white"> 
+                        <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span> 
+                        <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>    
+                    </h2>
+                </div>
+            </div>
+        @endif
 
         @if($lessonType === 'routine' && $hasRecentRoutines)
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
@@ -192,27 +200,29 @@
             </div>
         @endif
 
-        {{-- todo: readd once cal is working --}}
-        {{--    <div class="container ph-1">--}}
-        {{--        <div class="tw-flex tw-flex-col mt-3">--}}
-        {{--            <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 align-v-center">--}}
-        {{--                <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 mb-3">--}}
-        {{--                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>--}}
-        {{--                </div>--}}
-        {{--                <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 mb-3">--}}
-        {{--                    <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">--}}
-        {{--                            <i class="fas fa-calendar-plus mr-1"></i>--}}
-        {{--                            Subscribe to Calendar--}}
-        {{--                    </button>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
-        {{--    </div>--}}
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
+            <div class="tw-flex tw-flex-col mt-3">
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
+                    <div class="tw-flex tw-flex-col tw-mb-3">
+                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
+                    </div>
+                    {{-- todo: readd once cal is working --}}
+                    @if($catalogueMeta['name'] !== "Songs")
+                        <div class="tw-flex tw-flex-col tw-ml-auto">
+                            <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
+                                    <i class="fas fa-calendar-plus mr-1"></i>
+                                    Subscribe to Calendar
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
 
         @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent))
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
                 <div class="tw-flex tw-flex-col tw-mt-3">
-                    <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
+                    <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                         <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-3">
                             <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">
                                 All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
