@@ -76,17 +76,17 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // learning path levels
-            if ($content['type'] == 'learning-path-level' &&
-                !empty($parent = self::$contentCache[$content['parent_id']] ?? null)) {
-                $contents[$contentIndex]['url'] =
-                    url()->route(
-                        'platform.content.second-level',
-                        ['method', $parent['slug'], $parent['id'], $content['slug'], $content['id']]
-                    );
-
-//                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
-//                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.show', [$content['slug']]);
-            }
+//            if ($content['type'] == 'learning-path-level' &&
+//                !empty($parent = self::$contentCache[$content['parent_id']] ?? null)) {
+//                $contents[$contentIndex]['url'] =
+//                    url()->route(
+//                        'platform.content.second-level',
+//                        ['method', $parent['slug'], $parent['id'], $content['slug'], $content['id']]
+//                    );
+//
+////                $mobileUrl = url()->route('mobile.members.learning-path.show', [$content['slug']]);
+////                $musoraApiUrl = url()->route('mobile.musora-api.learning-path.show', [$content['slug']]);
+//            }
 
             // learning path courses
             if ($content['type'] == 'learning-path-course') {
