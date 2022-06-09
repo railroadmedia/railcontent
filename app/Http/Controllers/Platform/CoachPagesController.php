@@ -77,6 +77,8 @@ class CoachPagesController extends Controller
 
         $lessonType = 'instructor';
 
+        ContentRepository::$catalogMetaAllowableFilters = ['focus', 'style'];
+
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 18),

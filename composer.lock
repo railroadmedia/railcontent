@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.224.5",
+            "version": "3.225.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "00719404b6a7f29d7fb183211dfbef7f7f22a0c0"
+                "reference": "5a5f99a528d741820a77f0fc19c54ac7eca72d80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/00719404b6a7f29d7fb183211dfbef7f7f22a0c0",
-                "reference": "00719404b6a7f29d7fb183211dfbef7f7f22a0c0",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5a5f99a528d741820a77f0fc19c54ac7eca72d80",
+                "reference": "5a5f99a528d741820a77f0fc19c54ac7eca72d80",
                 "shasum": ""
             },
             "require": {
@@ -261,9 +261,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.224.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.225.0"
             },
-            "time": "2022-06-07T18:15:41+00:00"
+            "time": "2022-06-08T19:56:56+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3265,16 +3265,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2"
+                "reference": "83260bb50b8fc753c72d14dc1621a2dac31877ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c94a94f120803a18554c1805ef2e539f8285f9a2",
-                "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/83260bb50b8fc753c72d14dc1621a2dac31877ee",
+                "reference": "83260bb50b8fc753c72d14dc1621a2dac31877ee",
                 "shasum": ""
             },
             "require": {
@@ -3298,7 +3298,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -3360,7 +3360,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.2.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.3.0"
             },
             "funding": [
                 {
@@ -3376,7 +3376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-20T21:55:58+00:00"
+            "time": "2022-06-09T08:26:02+00:00"
         },
         {
             "name": "hollodotme/fast-cgi-client",
@@ -4204,17 +4204,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.8.0",
+            "version": "4.8.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "974021666fa056be0e83f0443c9a717009e62d52"
+                "reference": "022293753437ce057804701db0896c2ed01c3782"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-974021666fa056be0e83f0443c9a717009e62d52-zip-c74307.zip",
-                "reference": "974021666fa056be0e83f0443c9a717009e62d52",
-                "shasum": "7062a29353b392e1d5da30483978bea4428ccc44"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-022293753437ce057804701db0896c2ed01c3782-zip-b7e828.zip",
+                "reference": "022293753437ce057804701db0896c2ed01c3782",
+                "shasum": "f1a18dea34879001a6a520b6d3f8fce216b75dd6"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -4307,9 +4307,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.8.0"
+                "source": "https://github.com/laravel/nova/tree/v4.8.1"
             },
-            "time": "2022-06-08T16:41:08+00:00"
+            "time": "2022-06-08T18:40:31+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5488,16 +5488,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0"
+                "reference": "5579edf28aee1190a798bfa5be8bc16c563bd524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/247918972acd74356b0a91dfaa5adcaec069b6c0",
-                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5579edf28aee1190a798bfa5be8bc16c563bd524",
+                "reference": "5579edf28aee1190a798bfa5be8bc16c563bd524",
                 "shasum": ""
             },
             "require": {
@@ -5576,7 +5576,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.6.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.7.0"
             },
             "funding": [
                 {
@@ -5588,7 +5588,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-10T09:36:00+00:00"
+            "time": "2022-06-09T08:59:12+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -7666,12 +7666,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "671a4c0f3c1c6ad8663f2f3c30842890c01f0a54"
+                "reference": "c2bffd63d58d10b9e3c3b896a3264c4903c18f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/671a4c0f3c1c6ad8663f2f3c30842890c01f0a54",
-                "reference": "671a4c0f3c1c6ad8663f2f3c30842890c01f0a54",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c2bffd63d58d10b9e3c3b896a3264c4903c18f42",
+                "reference": "c2bffd63d58d10b9e3c3b896a3264c4903c18f42",
                 "shasum": ""
             },
             "require": {
@@ -7726,7 +7726,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-"
             },
-            "time": "2022-06-08T18:04:25+00:00"
+            "time": "2022-06-09T14:39:52+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -13142,16 +13142,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.14.9",
+            "version": "v1.14.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "8435763e7735f6eff15b03df014cea1217fc826e"
+                "reference": "0ea5d683af4d189071efcdb9e83946c10dab82c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/8435763e7735f6eff15b03df014cea1217fc826e",
-                "reference": "8435763e7735f6eff15b03df014cea1217fc826e",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/0ea5d683af4d189071efcdb9e83946c10dab82c3",
+                "reference": "0ea5d683af4d189071efcdb9e83946c10dab82c3",
                 "shasum": ""
             },
             "require": {
@@ -13198,7 +13198,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-06-06T14:28:04+00:00"
+            "time": "2022-06-09T07:10:28+00:00"
         },
         {
             "name": "maximebf/debugbar",
