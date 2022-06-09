@@ -101,8 +101,8 @@
                     'brand' => brand(),
                     'hasSubscribedCoaches' => $hasSubscribedCoaches,
                     'subscribedCoaches' => $subscribedCoaches,
-                    'subscribedCoachesUrl' => '', // todo: url
-                    'allCoachesUrl' => '', // todo: url
+                    'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>true]).'#coach-section', // todo: url
+                    'allCoachesUrl' => route('platform.coaches') // todo: url
                     ])
                 @endcomponent
 

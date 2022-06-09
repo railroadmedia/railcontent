@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column grow align-v-center">
 
-    <div v-if="isCoachesGrid" 
+    <div v-if="isCoachesGrid"
          id="coach-section"
          class="tw-flex tw-flex-col tw-mb-6">
         <div class="tw-flex tw-flex-wrap">
@@ -554,7 +554,7 @@ export default {
       },
     },
     coachIndexUrl() {
-        return '/members/coaches';
+        return 'coaches';
     },
     isOnlySubscribed() {
        return String(location.search).includes('only_subscribed=true');
