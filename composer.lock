@@ -3509,16 +3509,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "6.3.1",
+            "version": "6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "dba320d74f6529dab8fe33978b9a37fa83286e35"
+                "reference": "8aa5b1229718daa160261debd2db29a07ef192c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/dba320d74f6529dab8fe33978b9a37fa83286e35",
-                "reference": "dba320d74f6529dab8fe33978b9a37fa83286e35",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/8aa5b1229718daa160261debd2db29a07ef192c5",
+                "reference": "8aa5b1229718daa160261debd2db29a07ef192c5",
                 "shasum": ""
             },
             "require": {
@@ -3549,7 +3549,7 @@
                 "phpstan/phpstan": "^1.4",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpunit/phpunit": "^9.5.10",
-                "rector/rector": "^0.12.5",
+                "rector/rector": "^0.13.4",
                 "symfony/var-dumper": "^5.4|^6.0",
                 "symplify/easy-coding-standard": "^10.0"
             },
@@ -3600,7 +3600,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-06T23:28:27+00:00"
+            "time": "2022-06-08T15:49:32+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -3857,17 +3857,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.7.0",
+            "version": "4.8.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "a07d9b466dca14810e7db14c4438312c075c5e7a"
+                "reference": "974021666fa056be0e83f0443c9a717009e62d52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-a07d9b466dca14810e7db14c4438312c075c5e7a-zip-9e7c08.zip",
-                "reference": "a07d9b466dca14810e7db14c4438312c075c5e7a",
-                "shasum": "244d7f8634b4160032bd8666ed402dbe2f198be5"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-974021666fa056be0e83f0443c9a717009e62d52-zip-c74307.zip",
+                "reference": "974021666fa056be0e83f0443c9a717009e62d52",
+                "shasum": "7062a29353b392e1d5da30483978bea4428ccc44"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -3960,9 +3960,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.7.0"
+                "source": "https://github.com/laravel/nova/tree/v4.8.0"
             },
-            "time": "2022-05-25T17:03:24+00:00"
+            "time": "2022-06-08T16:41:08+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7394,16 +7394,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "f6501343c17083f40f011f4ffd6852ad9f0e3a03"
+                "reference": "8599abf48f6741ecd01198d66074d9a7dbf6236b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/f6501343c17083f40f011f4ffd6852ad9f0e3a03",
-                "reference": "f6501343c17083f40f011f4ffd6852ad9f0e3a03",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/8599abf48f6741ecd01198d66074d9a7dbf6236b",
+                "reference": "8599abf48f6741ecd01198d66074d9a7dbf6236b",
                 "shasum": ""
             },
             "require": {
@@ -7442,9 +7442,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.5"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.6"
             },
-            "time": "2022-06-03T21:30:06+00:00"
+            "time": "2022-06-08T17:34:48+00:00"
         },
         {
             "name": "railroad/railhelpscout",
@@ -15003,16 +15003,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "51e5daaa7e43c154fe57f1ddfbba862f9fe57646"
+                "reference": "b90026ba26fe6589101dc5cd6527846290560aea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/51e5daaa7e43c154fe57f1ddfbba862f9fe57646",
-                "reference": "51e5daaa7e43c154fe57f1ddfbba862f9fe57646",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/b90026ba26fe6589101dc5cd6527846290560aea",
+                "reference": "b90026ba26fe6589101dc5cd6527846290560aea",
                 "shasum": ""
             },
             "require": {
@@ -15089,7 +15089,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-05T15:53:24+00:00"
+            "time": "2022-06-08T07:07:57+00:00"
         },
         {
             "name": "symfony/debug",
