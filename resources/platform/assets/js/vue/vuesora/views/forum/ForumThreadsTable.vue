@@ -55,7 +55,7 @@
                                 <select
                                     id="threadSort"
                                     v-model="filterInterface"
-                                    class="has-input tw-text-black dark:tw-text-white tw-pb-0"
+                                    class="has-input tw-text-black dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
                                 >
                                     <option
                                         v-for="option in filterOptions"

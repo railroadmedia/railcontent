@@ -17437,6 +17437,25 @@ content-catalogue, transition {
   min-height: 300px !important;
 }
 
+.tox:not(.tox-tinymce-inline) .tox-editor-header {
+  padding: 0 !important;
+}
+
+.tw-dark #replyContainer .tox-tinymce {
+  border: 2px solid #002039;
+  color: white;
+}
+.tw-dark #replyContainer .tox .tox-edit-area__iframe {
+  background-color: transparent;
+}
+.tw-dark #replyContainer .tox .tox-toolbar__primary,
+.tw-dark #replyContainer .tox .tox-toolbar {
+  background-color: #002039 !important;
+}
+.tw-dark #replyContainer .tox .tox-edit-area__iframe body#tinymce {
+  color: white;
+}
+
 /**
 * Make a horizontal gradient with 2 colors
 *
@@ -17487,14 +17506,11 @@ blockquote.singeo, .singeo blockquote {
   }
 }
 
-.quote-heading strong {
-  font-size: 13px;
-}
 .quote-heading em {
-  font-size: 10px;
-  font-style: italic;
+  font-style: normal;
+  font-family: "Bebas Neue", cursive;
+  opacity: 0.6;
   text-transform: uppercase;
-  color: #5e5e5e;
 }
 
 .post-body.guitareo p {
@@ -21083,14 +21099,14 @@ a:visited{
   background-color: #374151;
   color: #fff;
 }
-.tw-input-field[disabled=true]{
+.tw-input-field[disabled]{
   pointer-events: none;
 }
-.tw-input-field[disabled=true] input[type=date], .tw-input-field[disabled=true] input[type=email], .tw-input-field[disabled=true] input[type=number], .tw-input-field[disabled=true] input[type=search], .tw-input-field[disabled=true] input[type=tel], .tw-input-field[disabled=true] input[type=password], .tw-input-field[disabled=true] input[type=text], .tw-input-field[disabled=true] select, .tw-input-field[disabled=true] textarea, .tw-input-field[disabled=true] button[type="button"]{
+.tw-input-field[disabled] input[type=date], .tw-input-field[disabled] input[type=email], .tw-input-field[disabled] input[type=number], .tw-input-field[disabled] input[type=search], .tw-input-field[disabled] input[type=tel], .tw-input-field[disabled] input[type=password], .tw-input-field[disabled] input[type=text], .tw-input-field[disabled] select, .tw-input-field[disabled] textarea, .tw-input-field[disabled] button[type="button"]{
   background-color: #f3f4f6;
   color: #9ca3af;
 }
-.tw-input-field[disabled=true] label{
+.tw-input-field[disabled] label{
   color: #d1d5db;
 }
 .tw-input-field .tw-input-icon{
@@ -21191,15 +21207,15 @@ a:visited{
 .tw-file-field label[aria-valid="true"] .tw-input-icon svg:not(.tw-valid-icon), .tw-file-field label[aria-valid="true"] .tw-input-icon i{
   display: none;
 }
-.tw-file-field[disabled=true]{
+.tw-file-field[disabled]{
   pointer-events: none;
 }
-.tw-file-field[disabled=true] label{
+.tw-file-field[disabled] label{
   background-color: #f3f4f6 !important;
   border-color: #d1d5db !important;
   color: #9ca3af !important;
 }
-.tw-file-field[disabled=true] .tw-input-messages{
+.tw-file-field[disabled] .tw-input-messages{
   display: none;
 }
 .tw-toggle-field .tw-input-message{
@@ -21226,7 +21242,7 @@ a:visited{
 .tw-radio-group .tw-radio-field label{
   font-size: 0.875rem;
 }
-[disabled=true] .tw-radio-group .tw-radio-field label{
+[disabled] .tw-radio-group .tw-radio-field label{
   color: #9ca3af;
 }
 .tw-fieldset{
@@ -21250,13 +21266,13 @@ a:visited{
   display: block;
   color: #ef4444;
 }
-.tw-fieldset[disabled=true]{
+.tw-fieldset[disabled]{
   pointer-events: none;
 }
-.tw-fieldset[disabled=true] .tw-fieldset-title{
+.tw-fieldset[disabled] .tw-fieldset-title{
   color: #d1d5db;
 }
-.tw-fieldset[disabled=true] .tw-input-message{
+.tw-fieldset[disabled] .tw-input-message{
   display: none;
 }
 .tw-with-tooltip{
@@ -23559,9 +23575,6 @@ a:visited{
 .tw-font-normal{
   font-weight: 400 !important;
 }
-.tw-font-medium{
-  font-weight: 500 !important;
-}
 .tw-uppercase{
   text-transform: uppercase !important;
 }
@@ -24036,10 +24049,6 @@ a:visited{
 .hover\:tw-text-gray-500:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
-}
-.hover\:tw-text-gray-400:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(156 163 175 / var(--tw-text-opacity)) !important;
 }
 .hover\:tw-underline:hover{
   -webkit-text-decoration-line: underline !important;

@@ -70,3 +70,28 @@
 .tox-tinymce {
   min-height: 300px !important;
 }
+
+.tox:not(.tox-tinymce-inline) .tox-editor-header {
+  padding: 0 !important;
+}
+
+.tw-dark #replyContainer {
+  .tox-tinymce {
+    border: 2px solid #002039;
+    color: white;
+  }
+  .tox .tox-edit-area__iframe {
+    background-color:  transparent;
+  }
+  .tox .tox-toolbar__primary,
+  .tox .tox-toolbar {
+    background-color: #002039 !important;
+  }
+  // .tox .tox-toolbar__group button.tox-tbtn,
+  // .tox .tox-toolbar--scrolling .tox-toolbar__group {
+  //   opacity: .6;
+  // }
+  .tox .tox-edit-area__iframe body#tinymce {
+    color: white;
+  }
+}
