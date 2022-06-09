@@ -45,23 +45,23 @@ class ContentFollowsService
     {
         $this->contentFollowsRepository->query()
             ->updateOrInsert([
-                'content_id' => $contentId,
-                'user_id' => $userId,
-            ], [
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]);
+                                 'content_id' => $contentId,
+                                 'user_id' => $userId,
+                             ], [
+                                 'created_on' => Carbon::now()
+                                     ->toDateTimeString(),
+                             ]);
 
         //delete the cached results
-        CacheHelper::deleteCache('content_' . $contentId);
+        CacheHelper::deleteCache('content_'.$contentId);
 
         event(new ContentFollow($contentId, $userId));
 
         return $this->contentFollowsRepository->query()
             ->where([
-                'content_id' => $contentId,
-                'user_id' => $userId,
-            ])
+                        'content_id' => $contentId,
+                        'user_id' => $userId,
+                    ])
             ->first();
     }
 
@@ -73,14 +73,15 @@ class ContentFollowsService
     public function unfollow($contentId, $userId)
     {
         //delete the cached results
-        CacheHelper::deleteCache('content_' . $contentId);
+        CacheHelper::deleteCache('content_'.$contentId);
 
-        $results = $this->contentFollowsRepository->query()
-            ->where([
-                'content_id' => $contentId,
-                'user_id' => $userId,
-            ])
-            ->delete();
+        $results =
+            $this->contentFollowsRepository->query()
+                ->where([
+                            'content_id' => $contentId,
+                            'user_id' => $userId,
+                        ])
+                ->delete();
 
         event(new ContentUnfollow($contentId, $userId));
 
@@ -103,9 +104,13 @@ class ContentFollowsService
         $contents = $this->contentService->getByIds($contentIds);
 
         $results = new ContentFilterResultsEntity([
-            'results' => $contents,
-            'total_results' => $this->contentFollowsRepository->countFollowedContent($userId, $brand, $contentType),
-        ]);
+                                                      'results' => $contents,
+                                                      'total_results' => $this->contentFollowsRepository->countFollowedContent(
+                                                          $userId,
+                                                          $brand,
+                                                          $contentType
+                                                      ),
+                                                  ]);
 
         return Decorator::decorate($results, 'content');
     }
@@ -141,12 +146,12 @@ class ContentFollowsService
             $includedFields = [];
 
             foreach ($followedContent as $content) {
-                $includedFields[] = 'instructor,' . $content['id'];
+                $includedFields[] = 'instructor,'.$content['id'];
                 $instructor =
                     $this->contentService->getBySlugAndType($content['slug'], 'coach')
                         ->first();
                 if ($instructor) {
-                    $includedFields[] = 'instructor,' . $instructor['id'];
+                    $includedFields[] = 'instructor,'.$instructor['id'];
                 }
             }
 
@@ -184,16 +189,15 @@ class ContentFollowsService
         $limit = 10,
         $sort = '-published_on'
     ) {
-
         $content = $this->contentService->getById($contentId);
 
         $includedFields = [];
-        $includedFields[] = 'instructor,' . $contentId;
+        $includedFields[] = 'instructor,'.$contentId;
         $instructor =
             $this->contentService->getBySlugAndType($content['slug'], 'instructor')
                 ->first();
         if ($instructor) {
-            $includedFields[] = 'instructor,' . $instructor['id'];
+            $includedFields[] = 'instructor,'.$instructor['id'];
         }
 
         ContentRepository::$pullFutureContent = false;
@@ -226,10 +230,11 @@ class ContentFollowsService
     }
 
     /**
+     * @param string|null $brand
      * @return array|mixed
      */
-    public function getCurrentUserFollowedContentIds()
+    public function getCurrentUserFollowedContentIds(?string $brand = null)
     {
-        return $this->contentFollowsRepository->getFollowedContentIds();
+        return $this->contentFollowsRepository->getFollowedContentIds($brand);
     }
 }
