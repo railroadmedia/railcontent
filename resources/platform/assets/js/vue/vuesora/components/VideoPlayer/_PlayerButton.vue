@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col player-button">
+    <div class="flex flex-column player-button">
         <button
             class="btn collapse-square"
             :title="title"
@@ -7,7 +7,7 @@
             :disabled="disabled"
         >
             <span
-                class="flat tw-text-white"
+                class="flat text-white"
                 :class="active ? themeTextClass : ''"
             >
                 <slot></slot>

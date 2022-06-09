@@ -1,14 +1,14 @@
 <template>
     <div
-        class="player-error bg-error tw-text-white corners-10 tw-shadow pa-1 tw-text-center"
+        class="player-error bg-error text-white corners-10 shadow pa-1 text-center"
     >
-        <p class="body tw-font-bold tw-mb-2">
+        <p class="body font-bold mb-2">
             Oops! An error occurred on the player and it can't seem to recover.
         </p>
 
         <p
             v-if="errorCode"
-            class="body dense tw-mb-2"
+            class="body dense mb-2"
         >
             Error Code: <br> <strong>{{ errorCode }}</strong>
         </p>
