@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf5be9efd5f5d1ce4bf68b667e5b164f",
+    "content-hash": "225e225074426907e29e7b4e81994312",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -7175,6 +7175,63 @@
                 "source": "https://github.com/railroadmedia/location/tree/v3.0.2"
             },
             "time": "2022-05-16T22:15:04+00:00"
+        },
+        {
+            "name": "railroad/mailora",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/mailora.git",
+                "reference": "906301002d79bc4261a166d675188e4876297175"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/906301002d79bc4261a166d675188e4876297175",
+                "reference": "906301002d79bc4261a166d675188e4876297175",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3.3",
+                "guzzlehttp/guzzle": "^7.2",
+                "laravel/framework": "^9.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dms/phpunit-arraysubset-asserts": "^0.4.0",
+                "orchestra/testbench": "^7.4",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Railroad\\Mailora\\Providers\\MailoraServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Railroad\\Mailora\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Wrapper for Laravel's email functionality that adds HTTP API and front-end-dev-friendly view-creation and use.",
+            "homepage": "https://github.com/railroad/mailora",
+            "keywords": [
+                "api",
+                "email",
+                "laravel",
+                "mail",
+                "wrapper"
+            ],
+            "support": {
+                "issues": "https://github.com/railroadmedia/mailora/issues",
+                "source": "https://github.com/railroadmedia/mailora/tree/3.0"
+            },
+            "time": "2022-05-26T09:22:55+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -15165,5 +15222,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
