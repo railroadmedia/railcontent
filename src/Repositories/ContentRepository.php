@@ -1904,7 +1904,10 @@ class ContentRepository extends RepositoryBase
     {
         $filterOptionsArray = [];
 
-        $contentQueryBuilder->select([]);
+        $joinTablesQuery = clone($contentQueryBuilder);
+        $contentTableQuery = clone($contentQueryBuilder);
+
+        $joinTablesQuery->select([]);
 
         // get values that are in other tables
         $filterNameToTableNameAndColumnName = [
@@ -1934,7 +1937,7 @@ class ContentRepository extends RepositoryBase
                 continue;
             }
 
-            $contentQueryBuilder->leftJoin(
+            $joinTablesQuery->leftJoin(
                 $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
                 $filterOptionTableAliasName . '.content_id',
                 '=',
@@ -1949,9 +1952,9 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
 
-        $contentQueryBuilder->groupBy($groupBy);
+        $joinTablesQuery->groupBy($groupBy);
 
-        $tableResults = $contentQueryBuilder->get();
+        $tableResults = $joinTablesQuery->get();
 
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
@@ -1973,6 +1976,7 @@ class ContentRepository extends RepositoryBase
         // todo: handle instructors which need to be pulled from matching content rows
         if (!empty($filterOptionsArray['instructor_id'])) {
             $instructorRows = $this->query()
+                ->select(['railcontent_content.id as id', 'name'])
                 ->whereIn('id', $filterOptionsArray['instructor_id'])
                 ->orderBy('name')
                 ->get()
@@ -1990,8 +1994,53 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray['instructor'] = $instructorRows;
         }
 
-        // todo: get values that are in the content table
+        // todo: now to the right place
+        $filterOptionNameToContentTableColumnName = [
+            'difficulty' => 'difficulty',
+            'difficulty_range' => 'difficulty_range',
+            'artist' => 'artist',
+        ];
+
+        $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
+            ->select($filterOptionNameToContentTableColumnName);
+
+        $tableResults = $contentTableQuery->get();
+
+        foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
+            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
+                ->pluck($filterOptionName)
+                ->unique()
+                ->values()
+                ->toArray();
+
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                    $filterOptionValueToClean
+                );
+            }
+
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
+        }
 
         return $filterOptionsArray;
+    }
+
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    private function sortByAlphaThenNumeric($a, $b)
+    {
+        if (is_numeric($a) && !is_numeric($b)) {
+            return 1;
+        } else {
+            if (!is_numeric($a) && is_numeric($b)) {
+                return -1;
+            } else {
+                return ($a < $b) ? -1 : 1;
+            }
+        }
     }
 }
