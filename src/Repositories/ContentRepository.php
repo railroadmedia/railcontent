@@ -1959,6 +1959,35 @@ class ContentRepository extends RepositoryBase
                 ->unique()
                 ->values()
                 ->toArray();
+
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                    $filterOptionValueToClean
+                );
+            }
+
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            sort($filterOptionsArray[$filterOptionName]);
+        }
+
+        // todo: handle instructors which need to be pulled from matching content rows
+        if (!empty($filterOptionsArray['instructor_id'])) {
+            $instructorRows = $this->query()
+                ->whereIn('id', $filterOptionsArray['instructor_id'])
+                ->orderBy('name')
+                ->get()
+                ->toArray();
+
+            foreach ($instructorRows as $instructorRowIndex => $instructorRow) {
+                $instructorRows[$instructorRowIndex]["fields"][] = [
+                    'id' => 1,
+                    'key' => 'name',
+                    'value' => $instructorRow["name"]
+                ];
+                $instructorRows[$instructorRowIndex]["data"] = [];
+            }
+
+            $filterOptionsArray['instructor'] = $instructorRows;
         }
 
         // todo: get values that are in the content table
