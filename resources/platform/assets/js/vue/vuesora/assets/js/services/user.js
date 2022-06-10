@@ -155,7 +155,7 @@ export default {
 
         formData.append('type', type);
         formData.append('subject', subject);
-        formData.append('lines', lines);
+        formData.append('lines[]', lines);
         formData.append('attachment', attachment);
         formData.append('callToAction', callToAction);
         formData.append('alert', alert);

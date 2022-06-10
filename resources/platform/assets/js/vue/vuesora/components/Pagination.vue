@@ -1,51 +1,47 @@
 <template>
-    <div class="tw-flex tw-flex-row pagination align-center">
+    <div class="tw-flex tw-flex-row pagination tw-items-center tw-justify-center tw-w-full tw-pt-4">
+        <!-- Left Arrow -->
         <button
             v-show="currentPage > 1"
             class="btn short collapse-square page-button"
             @click="goToPage(currentPage - 1)"
         >
-            <span
-                class="bg-grey-3 flat"
-                :class="themeTextClass"
-            >
+            <span class="flat tw-font-primary tw-text-lg tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 <i class="far fa-chevron-left"></i>
             </span>
         </button>
 
+        <!-- Page is greater thatn 2 -->
         <button
             v-show="currentPage > 2"
             class="btn short collapse-square page-button"
             @click="goToPage(1)"
         >
-            <span
-                class="flat"
-                :class="[themeTextClass, themeBgClass]">
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 1
             </span>
         </button>
 
+        <!-- Page is greater thatn 3 -->
         <button
             v-show="currentPage > 3"
             disabled
             class="btn short collapse-square page-button"
         >
-            <span
-                class="flat"
-                :class="[themeTextClass, themeBgClass]"
-            >
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 ...
             </span>
         </button>
 
+        <!-- First Set -->
         <button
             v-for="i in activePages"
             :key="`page-${i}`"
             class="btn short collapse-square page-button"
             @click="goToPage(i)"
         >
-            <span
-                :class="currentPage === i ? activeClasses : inactiveClasses"
+            <span class="tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none"
+                :class="currentPage === i ? 'tw-text-white tw-bg-[#52525A] dark:tw-bg-[#002039]' : 'tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]'"
             >
                 {{ i }}
             </span>
@@ -56,10 +52,7 @@
             disabled
             class="btn short collapse-square page-button"
         >
-            <span
-                class="flat"
-                :class="[themeTextClass, themeBgClass]"
-            >
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 ...
             </span>
         </button>
@@ -69,23 +62,18 @@
             class="btn short collapse-square page-button"
             @click="goToPage(totalPages)"
         >
-            <span
-                class="flat"
-                :class="[themeTextClass, themeBgClass]"
-            >
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 {{ totalPages }}
             </span>
         </button>
-
+        
+        <!-- Right Arrow -->
         <button
             v-show="currentPage < totalPages"
             class="btn short collapse-square page-button"
             @click="goToPage(currentPage + 1)"
         >
-            <span
-                class="flat"
-                :class="[themeTextClass, themeBgClass]"
-            >
+            <span class="flat tw-font-primary tw-text-lg tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 <i class="far fa-chevron-right"></i>
             </span>
         </button>
@@ -113,14 +101,6 @@ export default {
         },
     },
     computed: {
-        activeClasses() {
-            return ['tw-text-white', this.themeBgClass];
-        },
-
-        inactiveClasses() {
-            return [this.themeTextClass, 'flat'];
-        },
-
         activePages() {
             const pages = this.range(this.totalPages, 1);
 

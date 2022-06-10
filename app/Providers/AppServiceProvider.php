@@ -29,17 +29,28 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', NavigationViewComposer::class);
 
-        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
-        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
-        app()->instance(
-            EventDataSynchronizerUserProviderInterface::class,
-            app()->make(EventDataSynchronizerUserProvider::class)
-        );
+//        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
+//        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
+//        app()->instance(
+//            EventDataSynchronizerUserProviderInterface::class,
+//            app()->make(EventDataSynchronizerUserProvider::class)
+//        );
+
+        $this->app->singleton(EcommerceUserProviderInterface::class, function ($app) {
+            return $app->make(EcommerceUserProvider::class);
+        });
+
+        $this->app->singleton(RailforumsUserProviderInterface::class, function ($app) {
+            return $app->make(RailforumsUserProvider::class);
+        });
+
+        $this->app->singleton(EventDataSynchronizerUserProviderInterface::class, function ($app) {
+            return $app->make(EventDataSynchronizerUserProvider::class);
+        });
 
         //railnotifications package providers
         app()->instance(\Railroad\Railnotifications\Contracts\UserProviderInterface::class, app()->make(RailnotificationsUserProvider::class));
         app()->instance(\Railroad\Railnotifications\Contracts\ContentProviderInterface::class, app()->make(RailnotificationsContentProvider::class));
         app()->instance(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, app()->make(RailnotificationsForumProvider::class));
-
     }
 }

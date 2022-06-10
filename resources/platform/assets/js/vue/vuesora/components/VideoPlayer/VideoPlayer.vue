@@ -5,11 +5,10 @@
             class="video-wrap"
             :class="{'picture-in-picture': isPipEnabled}"
         >
-
             <div class="widescreen bg-black">
                 <div
                     ref="container"
-                    class="tw-flex tw-flex-col video-player"
+                    class="flex flex-column video-player"
                     :class="{'user-active': userActive || !isPlaying}"
                     @contextmenu.stop.prevent="toggleContextMenu"
                     @mousemove="trackMousePosition"
@@ -41,7 +40,7 @@
                     <transition name="fade">
                         <span
                             v-show="currentPlaybackRate !== 1"
-                            class="rate-indicator title tw-text-white pa-1"
+                            class="rate-indicator title text-white pa-1"
                         >
                             {{ currentPlaybackRate }}x
                         </span>
@@ -50,11 +49,11 @@
                     <div
                         v-show="contextMenu"
                         ref="contextMenu"
-                        class="context-menu bg-grey-5 tw-pointer tw-text-white tw-shadow overflow"
+                        class="context-menu bg-grey-5 pointer text-white shadow overflow"
                         :style="contextMenuPosition"
                         @click.stop.prevent
                     >
-                        <ul class="tw-list-none tiny dense tw-font-bold">
+                        <ul class="list-style-none tiny dense font-bold">
                             <li
                                 v-if="!isMobile && useKeyboard"
                                 class="pa-1 hover-bg-grey-4"
@@ -92,7 +91,7 @@
                     <transition name="fade">
                         <div
                             v-show="isChromeCastConnected"
-                            class="cast-dialog tw-flex flex-center pa-3 text-center text-white"
+                            class="cast-dialog flex flex-center pa-3 text-center text-white"
                         >
                             <span style="font-size:72px;">
                                 <i class="fab fa-chromecast"></i>
@@ -111,7 +110,6 @@
                     >
 
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
-
                     </video>
 
                     <div
@@ -125,7 +123,7 @@
                                 v-show="isTransitioning"
                                 class="player-overlay big-play-button pointer"
                             >
-                                <div class="overlay-play tw-rounded flex-center shadows">
+                                <div class="overlay-play rounded flex-center shadows">
                                     <i
                                         class="fas"
                                         :class="isPlaying ? 'fa-pause' : 'fa-play'"
@@ -135,7 +133,7 @@
                         </transition>
 
                         <div class="top-controls">
-                            <div class="tw-flex tw-flex-row tw-justify-center">
+                            <div class="flex flex-row align-h-right">
                                 <transition name="grow-fade">
                                     <PlayerButton
                                         v-if="isChromeCastSupported && controls.chromecast && !isPipEnabled"
@@ -173,10 +171,10 @@
                             </div>
                         </div>
 
-                        <div class="player-controls tw-flex tw-flex-col noselect">
+                        <div class="player-controls flex flex-column noselect">
                             <!--  TOP ROW  -->
                             <div
-                                class="tw-flex tw-flex-row"
+                                class="flex flex-row"
                                 style="min-height:50px;"
                                 @dblclick.stop.prevent="() => false"
                                 @click.stop.prevent="() => false"
@@ -191,7 +189,7 @@
                                     <i class="fas fa-undo"></i>
                                 </PlayerButton>
 
-                                <div class="tw-flex tw-flex-col spacer"></div>
+                                <div class="flex flex-column spacer"></div>
 
                                 <PlayerButton
                                     v-if="controls.forward"
@@ -207,7 +205,7 @@
                             <!--  MIDDLE ROW  -->
                             <div
                                 v-if="controls.progress"
-                                class="tw-flex tw-flex-row"
+                                class="flex flex-row"
                                 @dblclick.stop.prevent="() => false"
                             >
                                 <PlayerProgress
@@ -228,7 +226,7 @@
 
                             <!--  BOTTOM ROW  -->
                             <div
-                                class="tw-flex tw-flex-row"
+                                class="flex flex-row"
                                 @dblclick.stop.prevent="() => false"
                                 @click.stop.prevent="() => false"
                             >
@@ -247,12 +245,12 @@
 
                                 <div
                                     v-if="controls.time"
-                                    class="tw-flex tw-flex-col tw-text-white body tw-justifyt-center noselect tw-flex-auto"
+                                    class="flex flex-column text-white body align-v-center noselect flex-auto"
                                 >
                                     {{ parseTime(currentTime) }} / {{ parseTime(totalDuration) }}
                                 </div>
 
-                                <div class="tw-flex tw-flex-col spacer"></div>
+                                <div class="flex flex-column spacer"></div>
 
                                 <PlayerVolume
                                     v-if="!isMobile && controls.volume"
@@ -487,7 +485,7 @@ export default {
             playerErrorCode: null,
             isFullscreen: false,
             contextMenu: false,
-            shakaPlayer: null,
+            $shakaPlayer: null,
             mediaElement: null,
             textTracks: [],
             currentTextTrackLanguage: null,
@@ -541,11 +539,11 @@ export default {
         isAbrEnabled: {
             cache: false,
             get() {
-                // if (this.shakaPlayer == null) {
+                // if (this.$shakaPlayer == null) {
                 //     return false;
                 // }
                 //
-                // const { abr } = this.shakaPlayer.getConfiguration();
+                // const { abr } = this.$shakaPlayer.getConfiguration();
                 //
                 // return abr ? abr.enabled : false;
 
@@ -556,11 +554,11 @@ export default {
         playbackQualities: {
             cache: false,
             get() {
-                if (this.shakaPlayer == null) {
+                if (this.$shakaPlayer == null) {
                     return [];
                 }
 
-                // const qualities = this.shakaPlayer.getVariantTracks().map(source => ({
+                // const qualities = this.$shakaPlayer.getVariantTracks().map(source => ({
                 //     ...source,
                 //     label: PlayerUtils.getQualityLabelByHeight(source.height),
                 // }));
@@ -634,10 +632,10 @@ export default {
         bufferedTimeRanges: {
             cache: false,
             get() {
-                if (this.shakaPlayer != null) {
+                if (this.$shakaPlayer != null) {
                     // const supportsMSE = typeof MediaSource === 'function';
                     // if (supportsMSE) {
-                    //     return this.shakaPlayer.getBufferedInfo().total;
+                    //     return this.$shakaPlayer.getBufferedInfo().total;
                     // }
 
                     if (this.mediaElement) {
@@ -669,8 +667,8 @@ export default {
 
         playerStats: {
             get() {
-                if (this.shakaPlayer != null) {
-                    return this.shakaPlayer.getStats();
+                if (this.$shakaPlayer != null) {
+                    return this.$shakaPlayer.getStats();
                 }
 
                 return null;
@@ -730,20 +728,21 @@ export default {
         //     window.muxjs = muxjs;
         // }
 
-        shaka.polyfill.installAll();
+        shaka.polyfill.installAll()
 
         if (shaka.Player.isBrowserSupported() && !PlayerUtils.isIE()) {
-            this.shakaPlayer = new shaka.Player();
+            this.$shakaPlayer = new shaka.Player();
 
             Object.keys(this.eventHandlers).forEach((event) => {
-                this.shakaPlayer.addEventListener(event, this.eventHandlers[event]);
+                this.$shakaPlayer.addEventListener(event, this.eventHandlers[event]);
             });
 
-            this.shakaPlayer.attach(player)
-                console.log('this ran')
+            //this.mediaElement = player;
+            this.$shakaPlayer.attach(this.$refs.player)
                 .then(() => {
-                    this.mediaElement = this.shakaPlayer.getMediaElement();
-                    this.shakaPlayer.configure({
+                    this.mediaElement = this.$shakaPlayer.getMediaElement();
+
+                    this.$shakaPlayer.configure({
                         abr: {
                             restrictions: {
                                 maxHeight: window.screen.height,
@@ -768,6 +767,7 @@ export default {
                         this.playerErrorCode = error.code;
                     }
                 });
+                
         } else {
             this.playerError = true;
             this.playerErrorCode = 'Browser Not Supported';
@@ -833,7 +833,7 @@ export default {
         document.removeEventListener('click', this.closeDrawers);
         document.removeEventListener('mouseup', this.mouseUpEventHandler);
 
-        this.shakaPlayer.destroy();
+        this.$shakaPlayer.destroy();
     },
     methods: {
 
@@ -871,17 +871,17 @@ export default {
                 // Caleb - May 2020
 
                 // if (supportsMSE) {
-                // this.shakaPlayer.load(this.source.file, null, 'video/mp4')
+                // this.$shakaPlayer.load(this.source.file, null, 'video/mp4')
                 //     .then(() => {
                 //         this.$nextTick(() => this.$forceUpdate());
                 //
-                //         console.log(this.shakaPlayer.loadMode_);
+                //         console.log(this.$shakaPlayer.loadMode_);
                 //
                 //         resolve();
                 //
                 //         if (this.captions) {
                 //             setTimeout(() => {
-                //                 let promise1 = this.shakaPlayer.addTextTrack('https://gofile.io/d/ha1xNl', 'en', 'subtitle', 'text/vtt', null, 'English')
+                //                 let promise1 = this.$shakaPlayer.addTextTrack('https://gofile.io/d/ha1xNl', 'en', 'subtitle', 'text/vtt', null, 'English')
                 //                 console.log(promise1);
                 //
                 //             }, 5000);
@@ -1130,11 +1130,11 @@ export default {
                 });
 
             // if (payload === 'auto') {
-            //     this.shakaPlayer.configure('abr.enabled', true);
+            //     this.$shakaPlayer.configure('abr.enabled', true);
             // } else {
-            //     this.shakaPlayer.configure('abr.enabled', false);
+            //     this.$shakaPlayer.configure('abr.enabled', false);
             //
-            //     this.shakaPlayer.selectVariantTrack(payload, true);
+            //     this.$shakaPlayer.selectVariantTrack(payload, true);
             // }
         },
 
