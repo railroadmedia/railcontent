@@ -11,7 +11,6 @@ use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\ContentTransformer;
-use Railroad\Railcontent\Transformers\ParentContentTransformer;
 use Railroad\Railcontent\Transformers\VideoTransformer;
 
 class ContentRepository extends RepositoryBase
@@ -365,7 +364,7 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
-        $parser = $this->setPresenter(ParentContentTransformer::class);
+        $parser = $this->setPresenter(ContentTransformer::class);
         $parser->presenter->addParam($extraData);
 
         return $this->parserResult($contentRows);
