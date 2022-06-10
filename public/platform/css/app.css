@@ -17456,6 +17456,10 @@ content-catalogue, transition {
   color: white;
 }
 
+.tw-dark iframe body {
+  color: white;
+}
+
 /**
 * Make a horizontal gradient with 2 colors
 *

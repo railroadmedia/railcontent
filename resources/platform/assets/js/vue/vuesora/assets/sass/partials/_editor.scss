@@ -87,11 +87,11 @@
   .tox .tox-toolbar {
     background-color: #002039 !important;
   }
-  // .tox .tox-toolbar__group button.tox-tbtn,
-  // .tox .tox-toolbar--scrolling .tox-toolbar__group {
-  //   opacity: .6;
-  // }
   .tox .tox-edit-area__iframe body#tinymce {
     color: white;
   }
+}
+
+.tw-dark iframe body {
+  color: white;
 }
