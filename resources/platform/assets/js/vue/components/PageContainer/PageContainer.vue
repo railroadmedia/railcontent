@@ -176,8 +176,7 @@ export default {
           tw-pt-[58px]
           tw-flex-col
           tw-relative
-          tw-overflow-y-auto
-          tw-overflow-x-hidden
+          tw-overflow-auto
         "
       >
         <!-- Content -->
