@@ -59,6 +59,11 @@ window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
 };
 
+// This three variables come from Drumeo implementation, are tightly related to play functionality.
+let progressTracker;
+let playAlongsProgressTracker;
+let hasBeenPlayed = false;
+
 const app = createApp({
     provide: {
         sidebarNavigationLinks: window.sidebarNavigationLinks,
@@ -137,6 +142,30 @@ const app = createApp({
 
         handleVideoPause(payload){
             progressTracker.stop();
+        },
+
+        handlePlayAlongsPlay(){
+            if(playAlongsProgressTracker == null){
+                playAlongsProgressTracker = new ProgressTracker();
+
+                const { playAlongsVueInstance } = this.$refs;
+
+                if(playAlongsVueInstance){
+                    window.addEventListener('unload', (event) => {
+                        progressTracker.send({
+                            mediaType: 'practice',
+                            mediaCategory: 'play-alongs',
+                            sessionToken: sessionTokenElement.value || null
+                        });
+                    });
+                }
+            }
+
+            playAlongsProgressTracker.start();
+        },
+
+        handlePlayAlongsPause(){
+            playAlongsProgressTracker.stop();
         }
     }
 });

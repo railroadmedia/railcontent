@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=ed84b486ed4dbae9ef0d684abd782285",
     "/platform/css/app.css": "/platform/css/app.css?id=80b1836402d106b473bd37f3a36e537a"
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=0d0c72bd7119811c9b86fdd05dddde4a",
+    "/platform/css/app.css": "/platform/css/app.css?id=050a86d6622394c7c6e7263b94a0b313"
+>>>>>>> master
 }
