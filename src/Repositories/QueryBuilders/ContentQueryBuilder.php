@@ -612,10 +612,7 @@ class ContentQueryBuilder extends QueryBuilder
                 );
             }
             elseif ($orderByColumn != 'progress') {
-                array_unshift(
-                    $orderByColumns,
-                    ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $orderDirection
-                );
+                $orderByColumns = [ConfigService::$tableContent . '.' . $orderByColumn];
             } else {
                 array_unshift(
                     $orderByColumns,
