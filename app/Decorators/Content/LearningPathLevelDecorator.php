@@ -36,7 +36,10 @@ class LearningPathLevelDecorator extends TypeDecoratorBase
                     ->where('child_id', $content['id'])
                     ->where('railcontent_content.type', 'learning-path')
                     ->first();
-            $contentsOfType[$contentIndex]['level_number'] = $hierarchy->child_position;
+
+            if (!empty($hierarchy)) {
+                $contentsOfType[$contentIndex]['level_number'] = $hierarchy->child_position ?? 1;
+            }
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
