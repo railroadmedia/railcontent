@@ -347,6 +347,7 @@
         ></PlayerRanges>
     </div>
 </template>
+
 <script>
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
