@@ -201,8 +201,8 @@ export default {
      *
      * @returns {Promise} resolved promise with the response.data object
      */
-    markAllNotificationsAsRead() {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-all-read`)
+    markAllNotificationsAsRead(brand) {
+        return axios.put(`${endpointPrefix}/railnotifications/read-all`, { brand: brand })
             .then(response => response.data)
             .catch(ErrorHandler);
     },

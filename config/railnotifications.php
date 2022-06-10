@@ -93,7 +93,7 @@ return [
     ],
 
     'decorators' => [
-//        \App\Decorators\Content\NotificationDecorator::class,
+        \App\Decorators\Notification\NotificationDecorator::class,
     ],
 
     // urls
