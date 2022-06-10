@@ -376,8 +376,15 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
+        // this should not be here, todo: refactor properly
+        $contentTableColumns = config('railcontent.content_fields_that_are_now_columns_in_the_content_table', []);
+
         foreach ($requiredFields as $index => $requiredFieldData) {
             $tableName = 'cf_' . $index;
+
+            if (in_array($requiredFieldData['name'], $contentTableColumns)) {
+                $this->where($requiredFieldData['name'], $requiredFieldData['value']);
+            }
 
             if ($requiredFieldData['field'] != '') {
                 $this->join(ConfigService::$tableContentFields . ' as ' . $tableName,
@@ -423,36 +430,6 @@ class ContentQueryBuilder extends QueryBuilder
                                     )
                                 );
                         });
-            } else {
-                $this->join(
-                    ConfigService::$tableContentFields . ' as ' . $tableName,
-                    function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
-                        $joinClause->on(
-                            $tableName . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->on(
-                                $tableName . '.key',
-                                '=',
-                                $joinClause->raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($requiredFieldData['name'])
-                                )
-                            )
-                            ->on(
-                                $tableName . '.value',
-                                $requiredFieldData['operator'],
-                                is_numeric($requiredFieldData['value']) ?
-                                    $joinClause->raw($requiredFieldData['value']) : $joinClause->raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($requiredFieldData['value'])
-                                )
-                            );
-                    }
-                );
             }
         }
 
@@ -467,6 +444,24 @@ class ContentQueryBuilder extends QueryBuilder
     {
         if (empty($includedFields)) {
             return $this;
+        }
+
+        $instructorIdsToInclude = [];
+
+        foreach ($includedFields as $index => $includedFieldData) {
+            if ($includedFieldData['name'] == 'instructor') {
+                $instructorIdsToInclude[] = $includedFieldData['value'];
+                unset($includedFields[$index]);
+            }
+        }
+
+        if (!empty($instructorIdsToInclude)) {
+            $this->leftJoin(
+                'railcontent_content_instructors',
+                'railcontent_content_instructors.content_id',
+                '=',
+                'railcontent_content.id'
+            )->whereIn('railcontent_content_instructors.id', $instructorIdsToInclude);
         }
 
         $tableName = '_icf';

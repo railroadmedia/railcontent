@@ -31,17 +31,14 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->string('avatar_url')
-                    ->index()
                     ->after('associated_user_id')
                     ->nullable();
 
                 $table->string('bands')
-                    ->index()
                     ->after('avatar_url')
                     ->nullable();
 
                 $table->string('cd_tracks')
-                    ->index()
                     ->after('bands')
                     ->nullable();
 
@@ -61,7 +58,6 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->string('endorsements')
-                    ->index()
                     ->after('difficulty_range')
                     ->nullable();
 
@@ -71,7 +67,6 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->string('exercise_book_pages')
-                    ->index()
                     ->after('episode_number')
                     ->nullable();
 
@@ -81,17 +76,14 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->integer('forum_thread_id')
-                    ->index()
                     ->after('fast_bpm')
                     ->nullable();
 
                 $table->string('high_soundslice_slug')
-                    ->index()
                     ->after('forum_thread_id')
                     ->nullable();
 
                 $table->integer('high_video')
-                    ->index()
                     ->after('high_soundslice_slug')
                     ->nullable();
 
@@ -101,7 +93,6 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->boolean('includes_song')
-                    ->index()
                     ->after('home_staff_pick_rating')
                     ->nullable();
 
@@ -130,16 +121,6 @@ class AddCoreColumnsToContentTable extends Migration
                     ->after('is_featured')
                     ->nullable();
 
-                $table->integer('legacy_id')
-                    ->index()
-                    ->after('is_house_coach')
-                    ->nullable();
-
-                $table->integer('legacy_wordpress_post_id')
-                    ->index()
-                    ->after('legacy_id')
-                    ->nullable();
-
                 $table->integer('length_in_seconds')
                     ->index()
                     ->after('legacy_wordpress_post_id')
@@ -156,22 +137,18 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->string('live_event_youtube_id')
-                    ->index()
                     ->after('live_event_end_time')
                     ->nullable();
 
                 $table->string('live_stream_feed_type')
-                    ->index()
                     ->after('live_event_youtube_id')
                     ->nullable();
 
                 $table->string('low_soundslice_slug')
-                    ->index()
                     ->after('live_stream_feed_type')
                     ->nullable();
 
                 $table->integer('low_video')
-                    ->index()
                     ->after('low_soundslice_slug')
                     ->nullable();
 
@@ -181,38 +158,24 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->integer('original_video')
-                    ->index()
                     ->after('name')
                     ->nullable();
 
                 $table->string('pdf')
-                    ->index()
                     ->after('original_video')
                     ->nullable();
 
                 $table->string('pdf_in_g')
-                    ->index()
                     ->after('pdf')
                     ->nullable();
 
                 $table->string('qna_video')
-                    ->index()
                     ->after('pdf_in_g')
                     ->nullable();
 
                 $table->string('released')
                     ->after('qna_video')
                     ->nullable();
-
-//                $table->string('sbt_bpm')
-//                    ->index()
-//                    ->after('released')
-//                    ->nullable();
-//
-//                $table->integer('sbt_exercise_number')
-//                    ->index()
-//                    ->after('sbt_bpm')
-//                    ->nullable();
 
                 $table->boolean('show_in_new_feed')
                     ->after('qna_video')
@@ -229,12 +192,10 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->string('soundslice_slug')
-                    ->index()
                     ->after('song_name')
                     ->nullable();
 
-                $table->string('soundslice_xml_file_url')
-                    ->index()
+                $table->text('soundslice_xml_file_url')
                     ->after('soundslice_slug')
                     ->nullable();
 
@@ -259,17 +220,14 @@ class AddCoreColumnsToContentTable extends Migration
                     ->nullable();
 
                 $table->string('video')
-                    ->index()
                     ->after('transcriber_name')
                     ->nullable();
 
                 $table->string('vimeo_video_id')
-                    ->index()
                     ->after('video')
                     ->nullable();
 
                 $table->string('youtube_video_id')
-                    ->index()
                     ->after('vimeo_video_id')
                     ->nullable();
 
