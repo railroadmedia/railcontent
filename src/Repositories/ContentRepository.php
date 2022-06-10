@@ -1908,11 +1908,11 @@ class ContentRepository extends RepositoryBase
 
         // get values that are in other tables
         $filterNameToTableNameAndColumnName = [
-            'instructor' => ['table' => 'railcontent_content_instructors', 'column' => 'instructor_id'],
-            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style'],
-            'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic'],
-            'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus'],
-            'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm'],
+            'instructor' => ['table' => 'railcontent_content_instructors', 'column' => 'instructor_id', 'alias' => '_rci'],
+            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style',  'alias' => '_rcs'],
+            'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic',  'alias' => '_rct'],
+            'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus',  'alias' => '_rcf'],
+            'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm',  'alias' => '_rcb'],
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
@@ -1923,8 +1923,11 @@ class ContentRepository extends RepositoryBase
                 'bpm',
             ];
 
+        $filterOptions = array_unique($filterOptions);
+
         foreach ($filterOptions as $filterOption) {
             $filterOptionTableName = $filterNameToTableNameAndColumnName[$filterOption]['table'] ?? null;
+            $filterOptionTableAliasName = $filterNameToTableNameAndColumnName[$filterOption]['alias'] ?? null;
             $filterOptionColumnName = $filterNameToTableNameAndColumnName[$filterOption]['column'] ?? null;
 
             if (empty($filterOptionTableName) || empty($filterOptionColumnName)) {
@@ -1932,13 +1935,13 @@ class ContentRepository extends RepositoryBase
             }
 
             $contentQueryBuilder->leftJoin(
-                $filterOptionTableName,
-                $filterOptionTableName . '.content_id',
+                $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
+                $filterOptionTableAliasName . '.content_id',
                 '=',
                 'railcontent_content.id'
             )
                 ->addSelect(
-                    [$filterOptionTableName . '.' . $filterOptionColumnName . ' as ' . $filterOptionColumnName]
+                    [$filterOptionTableAliasName . '.' . $filterOptionColumnName . ' as ' . $filterOptionColumnName]
                 );
 
             $groupBy[] = $filterOptionColumnName;
@@ -1954,6 +1957,7 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
                 ->pluck($filterOptionName)
                 ->unique()
+                ->values()
                 ->toArray();
         }
 
