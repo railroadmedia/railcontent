@@ -18,6 +18,10 @@ class CmsSizeSeeder extends Seeder
         //
         $sizes = [
             [
+                'name' => 'X-Small',
+                'code' => 'XS',
+            ],
+            [
                 'name' => 'Small',
                 'code' => 'S',
             ],
