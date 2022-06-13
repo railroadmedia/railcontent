@@ -37,7 +37,7 @@ export default function ({
 
             if (event.state === 'src-equals') {
                 nextTick(() => {
-                    mediaElement.load();
+                    mediaElement.value.load();
                 });
             }
         },
@@ -57,8 +57,8 @@ export default function ({
     };
     const mediaElementEventHandlers = {
         canplaythrough: (event) => {
-            totalDuration.value = mediaElement.duration;
-            currentTime.value = mediaElement.currentTime;
+            totalDuration.value = mediaElement.value.duration;
+            currentTime.value = mediaElement.value.currentTime;
 
             setTimeout(() => {
                 loading.value = false;
@@ -76,7 +76,7 @@ export default function ({
         },
 
         durationchange: (event) => {
-            totalDuration.value = mediaElement.duration;
+            totalDuration.value = mediaElement.value.duration;
             // cant find a way to test or refactor emits
             // this.$emit('durationchange', event);
         },
@@ -125,8 +125,8 @@ export default function ({
         },
 
         timeupdate: (event) => {
-            totalDuration.value = mediaElement.duration;
-            currentTime.value = mediaElement.currentTime;
+            totalDuration.value = mediaElement.value.duration;
+            currentTime.value = mediaElement.value.currentTime;
             // cant find a way to test or refactor emits
             // this.$emit('timeupdate', event);
         },
@@ -143,8 +143,8 @@ export default function ({
         },
 
         ratechange: () => {
-            if (mediaElement.playbackRate !== 0) {
-                currentPlaybackRate.value = mediaElement.playbackRate;
+            if (mediaElement.value.playbackRate !== 0) {
+                currentPlaybackRate.value = mediaElement.value.playbackRate;
             }
         },
 
@@ -156,7 +156,7 @@ export default function ({
             loading.value = false;
 
             if (hasBeenPlayed.value && !isChromeCastConnected.value) {
-                mediaElement.play();
+                mediaElement.value.play();
             }
         },
 
@@ -198,8 +198,8 @@ export default function ({
                 seek(currentTime.value);
             }
 
-            mediaElement.pause();
-            mediaElement.volume = 0;
+            mediaElement.value.pause();
+            mediaElement.value.volume = 0;
 
             // cant find a way to test or refactor emits
             // this.$emit('cc-media', event);
@@ -208,11 +208,11 @@ export default function ({
         disconnect: (event) => {
             isChromeCastConnected.value = false;
             isPlaying.value = true;
-            mediaElement.volume = this.currentVolume;
+            mediaElement.value.volume = this.currentVolume;
 
             if (currentTime.value) {
                 seek(currentTime.value);
-                mediaElement.play();
+                mediaElement.value.play();
             }
 
             // cant find a way to test or refactor emits

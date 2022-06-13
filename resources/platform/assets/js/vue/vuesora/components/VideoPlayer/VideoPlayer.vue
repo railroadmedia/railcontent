@@ -128,7 +128,8 @@ const props = defineProps({
 
 // Non reactive vars
 let shakaPlayer = null;
-let mediaElement = null;
+
+const mediaElement = ref(null);
 
 // Template refs
 const container = ref(null);
@@ -185,11 +186,32 @@ const currentRange = ref('original');
 
 //methods
 
+function getDefaultPlaybackQualityIndex() {
+    console.log('getDefaultPlaybackQualityIndex called')
+    const widthToCheck = window.localStorage.getItem('vuesoraDefaultVideoQuality')
+        || document.documentElement.clientWidth;
+    console.log('widthToCheck', widthToCheck)
+    const matchedQualities = playbackQualities.value.filter(quality => quality.width >= widthToCheck);
+    console.log('matchedQualities', matchedQualities)
+
+    return matchedQualities[0] || playbackQualities.value[0];
+}
+
+function getSource(src) {
+    console.log('getSource called', src)
+    if (src) {
+        source.value = src;
+    } else {
+        source.value = getDefaultPlaybackQualityIndex();
+    }
+}
+
 function loadSource(src) {
+    console.log('loadSource src', src)
     getSource(src);
 
     return new Promise((resolve) => {
-        mediaElement.src = source.value.file;
+        mediaElement.value.src = source.value.file;
 
         setTimeout(() => {
             resolve();
@@ -202,7 +224,7 @@ function setRange({ range }) {
         currentRange.value = range;
         window.localStorage.setItem('currentRange', range);
 
-        const { currentTime: currTime } = mediaElement;
+        const { currentTime: currTime } = mediaElement.value;
 
         loadSource()
             .then(() => {
@@ -213,17 +235,10 @@ function setRange({ range }) {
     }
 }
 
-function getSource(src) {
-    if (src) {
-        source.value = src;
-    } else {
-        source.value = getDefaultPlaybackQualityIndex();
-    }
-}
-
 function initializePlayer(time) {
     const urlParams = new URLSearchParams(window.location.search);
-    const timeToSeekTo = time || (urlParams.get('time') || window.localStorage.getItem(`${contentCurrentTimeStorageKey}_currentTime`) || props.currentSecond);
+    const timeToSeekTo = time || (urlParams.get('time') || window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond);
+    console.log('initialize Player')
 
     if (parseInt(timeToSeekTo) !== parseInt(currentTime.value)) {
         seek(timeToSeekTo);
@@ -233,9 +248,9 @@ function initializePlayer(time) {
 
     getDefaultVolume();
 
-    if (mediaElement) {
-        for (let i = 0, L = mediaElement.textTracks.length; i < L; i++) {
-            const thisTextTrack = mediaElement.textTracks[i];
+    if (mediaElement.value) {
+        for (let i = 0, L = mediaElement.value.textTracks.length; i < L; i++) {
+            const thisTextTrack = mediaElement.value.textTracks[i];
 
             if (thisTextTrack.label !== 'Shaka Player TextTrack') {
                 textTracks.value.push(thisTextTrack);
@@ -263,11 +278,11 @@ function initializePlayer(time) {
 
     setTimeout(() => {
         hasRetriedSource.value = false;
-        mediaElement.focus();
+        mediaElement.value.focus();
     }, 100);
 
     setInterval(() => {
-        window.localStorage.setItem(`${contentCurrentTimeStorageKey}_currentTime`, currentTime.value);
+        window.localStorage.setItem(`${contentCurrentTimeStorageKey.value}_currentTime`, currentTime.value);
     }, 2500);
 }
 
@@ -299,7 +314,7 @@ function retryVimeoUrl(error) {
 
 function attachMediaElementEventHandlers() {
     Object.keys(mediaElementEventHandlers).forEach((event) => {
-        mediaElement.addEventListener(
+        mediaElement.value.addEventListener(
             event,
             mediaElementEventHandlers[event],
         );
@@ -332,9 +347,9 @@ function playPause() {
     if (chromeCast.value && chromeCast.value.Connected && isChromeCastConnected.value) {
         chromeCast.value.playOrPause();
     } else if (isPlaying.value) {
-        mediaElement.pause();
+        mediaElement.value.pause();
     } else {
-        mediaElement.play();
+        mediaElement.value.play();
     }
 }
 
@@ -349,7 +364,7 @@ function playPauseViaControlWrap(event) {
     if (event.detail === 1) {
         if (userActive.value || !isPlaying.value) {
             timeouts.value.controlWrapClick = setTimeout(() => {
-                if (settingsDrawer.value || captionsDrawer.value || !canPlayPause) {
+                if (settingsDrawer.value || captionsDrawer.value || !canPlayPause.value) {
                     settingsDrawer.value = false;
                     captionsDrawer.value = false;
 
@@ -369,7 +384,7 @@ function playPauseViaControlWrap(event) {
 }
 
 function seek(time) {
-    mediaElement.pause();
+    mediaElement.value.pause();
     const seekTime = Number(time) > 0 ? Math.round(Number(time)) : 0;
 
     currentTime.value = seekTime;
@@ -378,7 +393,7 @@ function seek(time) {
         chromeCast.value.seek(seekTime);
     }
 
-    mediaElement.currentTime = seekTime;
+    mediaElement.value.currentTime = seekTime;
 }
 
 function fullscreen() {
@@ -389,7 +404,7 @@ function fullscreen() {
         Screenfull.toggle(container.value);
     } else {
         // Otherwise we just take the video element and make it fullscreen
-        mediaElement.webkitEnterFullScreen();
+        mediaElement.value.webkitEnterFullScreen();
     }
 }
 
@@ -400,13 +415,13 @@ function changeVolume(payload, remember = true) {
 
     if (isChromeCastConnected.value) {
         chromeCast.value.volume(payload.volume);
-        mediaElement.volume = 0;
+        mediaElement.value.volume = 0;
 
         return;
     }
 
-    mediaElement.volume = payload.volume / 100;
-    currentVolume.value = mediaElement.volume;
+    mediaElement.value.volume = payload.volume / 100;
+    currentVolume.value = mediaElement.value.volume;
 }
 
 const parseTime = time => PlayerUtils.parseTime(time)
@@ -414,18 +429,18 @@ const parseTime = time => PlayerUtils.parseTime(time)
 function trackMousePosition(event) {
     currentMousePosition.value = PlayerUtils.getMousePosition(event, container.value);
 
-    if (mediaElement) {
-        Utils.triggerEvent(mediaElement, 'useractive');
+    if (mediaElement.value) {
+        Utils.triggerEvent(mediaElement.value, 'useractive');
 
         clearTimeout(userActiveTimeout.value);
         userActiveTimeout.value = setTimeout(() => {
-            Utils.triggerEvent(mediaElement, 'userinactive');
+            Utils.triggerEvent(mediaElement.value, 'userinactive');
         }, 3000);
     }
 }
 
 function setQuality(payload) {
-    const { currentTime: currTime } = mediaElement;
+    const { currentTime: currTime } = mediaElement.value;
     setDefaultPlaybackQualityWidth(payload.width);
 
     loadSource(payload)
@@ -438,20 +453,12 @@ function setQuality(payload) {
 
 function setRate(payload) {
     if (payload.rate > 0.25 && payload.rate <= 2) {
-        mediaElement.playbackRate = payload.rate;
+        mediaElement.value.playbackRate = payload.rate;
     }
 }
 
 function setDefaultPlaybackQualityWidth(width) {
     window.localStorage.setItem('vuesoraDefaultVideoQuality', width);
-}
-
-function getDefaultPlaybackQualityIndex() {
-    const widthToCheck = window.localStorage.getItem('vuesoraDefaultVideoQuality')
-        || document.documentElement.clientWidth;
-    const matchedQualities = playbackQualities.filter(quality => quality.width >= widthToCheck);
-
-    return matchedQualities[0] || playbackQualities[0];
 }
 
 function toggleSettingsDrawer() {
@@ -636,7 +643,7 @@ function toggleExperimentalPip() {
                     reject(error);
                 });
         } else {
-            mediaElement.requestPictureInPicture()
+            mediaElement.value.requestPictureInPicture()
                 .then(() => {
                     resolve();
                 })
@@ -713,15 +720,19 @@ onMounted(() => {
 
     if (shaka.Player.isBrowserSupported() && !PlayerUtils.isIE()) {
         shakaPlayer = new shaka.Player();
+        console.log('shakaPlayer init', shakaPlayer)
 
         Object.keys(eventHandlers).forEach((event) => {
             shakaPlayer.addEventListener(event, eventHandlers[event]);
         });
 
-        //mediaElement = player;
+        //mediaElement.value = player;
+        console.log('player obj', player)
+        console.log('player val', player.value)
         shakaPlayer.attach(player.value)
             .then(() => {
-                mediaElement = shakaPlayer.getMediaElement();
+                mediaElement.value = shakaPlayer.getMediaElement();
+                console.log('then mediaElement.value', mediaElement.value)
 
                 shakaPlayer.configure({
                     abr: {
@@ -740,9 +751,11 @@ onMounted(() => {
                 return loadSource();
             })
             .then(() => {
+                console.log('before calling initialize player')
                 initializePlayer();
             })
             .catch((error) => {
+                console.log('there was an error (?)')
                 if (error.severity === 2) {
                     playerError.value = true;
                     playerErrorCode.value = error.code;
@@ -813,23 +826,35 @@ onMounted(() => {
 
 // computed
 
-const playerWidth = computed(() => player.value ? player.value.clientWidth : 0);
 
-const isAbrEnabled = computed(() => {
-    return false;
+const playerWidth = computed({
+    get() {
+        return player.value ? player.value.clientWidth : 0;
+    },
+    set(val) {
+        return val;
+    }
 });
 
-const playbackQualities = computed(() => {
-    if (shakaPlayer == null) {
-        return [];
+const isAbrEnabled = computed({
+    get() {
+        return false;
     }
+});
 
-    const qualities = $_sources.map(src => ({
-        ...src,
-        label: PlayerUtils.getQualityLabelByHeight(src.height),
-    }));
+const playbackQualities = computed({
+    get() {
+        if (shakaPlayer == null) {
+            return [];
+        }
 
-    return Utils.dynamicSort(qualities, 'height');
+        const qualities = $_sources.value.map(source => ({
+            ...source,
+            label: PlayerUtils.getQualityLabelByHeight(source.height),
+        }));
+
+        return Utils.dynamicSort(qualities, 'height');
+    }
 })
 
 const currentProgress = computed(() => {
@@ -844,18 +869,24 @@ const currentProgress = computed(() => {
     return isNaN(progress) ? 0 : progress;
 });
 
-const currentSource = computed(() => mediaElement ? mediaElement.src : '');
+const currentSource = computed({
+    get() {
+        return mediaElement.value ? mediaElement.value.src : '';
+    },
+});
 
-const $_sources = computed(() => {
-    let tempSources;
+const $_sources = computed({
+    get() {
+        let src;
 
-    if (props.sources.length) {
-        tempSources = props.sources;
-    } else if (props.ranges[currentRange.value] && props.ranges[currentRange.value].length) {
-        tempSources = props.ranges[currentRange.value];
-    }
+        if (props.sources.length) {
+            src = props.sources;
+        } else if (ranges.value[currentRange.value] && ranges.value[currentRange.value].length) {
+            src = ranges.value[currentRange.value];
+        }
 
-    return tempSources;
+        return src;
+    },
 });
 
 const contentCurrentTimeStorageKey = computed(() => {
@@ -866,33 +897,37 @@ const contentCurrentTimeStorageKey = computed(() => {
     }
 });
 
-const $_videoId = computed(() => {
-    let tempVideoId;
+const $_videoId = computed({
+    get() {
+        let vidId;
 
-    if (props.sources.length) {
-        tempVideoId = props.videoId;
-    } else if (props.rangesVideoIds[currentRange.value] && props.rangesVideoIds[currentRange.value].length) {
-        tempVideoId = props.rangesVideoIds[currentRange.value];
-    }
+        if (props.sources.length) {
+            vidId = props.videoId;
+        } else if (props.rangesVideoIds[currentRange.value] && props.rangesVideoIds[currentRange.value].length) {
+            vidId = props.rangesVideoIds[currentRange.value];
+        }
 
-    return tempVideoId;
+        return vidId;
+    },
 });
 
-const bufferedTimeRanges = computed(() => {
-    if (shakaPlayer != null) {
-        // const supportsMSE = typeof MediaSource === 'function';
-        // if (supportsMSE) {
-        //     return shakaPlayer.getBufferedInfo().total;
-        // }
+const bufferedTimeRanges = computed({
+    get() {
+        if (shakaPlayer != null) {
+            // const supportsMSE = typeof MediaSource === 'function';
+            // if (supportsMSE) {
+            //     return this.$shakaPlayer.getBufferedInfo().total;
+            // }
 
-        if (mediaElement) {
-            return PlayerUtils.parseTimeRangesAsArray(mediaElement.buffered);
+            if (mediaElement.value) {
+                return PlayerUtils.parseTimeRangesAsArray(mediaElement.value.buffered);
+            }
+
+            return [];
         }
 
         return [];
-    }
-
-    return [];
+    },
 });
 
 const canPlayPause = computed(() => {
@@ -900,31 +935,39 @@ const canPlayPause = computed(() => {
         return true;
     }
 
-    if (isMobile) {
-        return userActive;
+    if (isMobile.value) {
+        return userActive.value;
     }
 
     return true;
 });
 
-const isCaptionsEnabled = computed(() => currentTextTrackLanguage.value !== null);
-
-const playerStats = computed(() => {
-    if (shakaPlayer != null) {
-        return shakaPlayer.getStats();
-    }
-
-    return null;
+const isCaptionsEnabled = computed(() => {
+    return currentTextTrackLanguage.value !== null;
 });
 
-const isMobile = computed(() => PlayerUtils.isMobile().any)
+const playerStats = computed({
+    get() {
+        if (shakaPlayer != null) {
+            return shakaPlayer.getStats();
+        }
 
-const isMobileViewport = computed(() => window.matchMedia('(min-width: 641px)').matches === false)
+        return null;
+    },
+});
+
+const isMobile = computed(() => PlayerUtils.isMobile().any);
+
+const isMobileViewport = computed({
+    get() {
+        return window.matchMedia('(min-width: 641px)').matches === false;
+    },
+});
 
 const isSafari = computed(() => PlayerUtils.isSafari());
 
 const isMobileDrawerOpen = computed(() => {
-    if ((settingsDrawer.value || captionsDrawer.value) && drawersShouldOpenFromBottom) {
+    if ((settingsDrawer.value || captionsDrawer.value) && drawersShouldOpenFromBottom.value) {
         Intercom.hideWidget();
         Helpscout.hideWidget();
     } else {
@@ -932,12 +975,20 @@ const isMobileDrawerOpen = computed(() => {
         Helpscout.showWidget();
     }
 
-    return (settingsDrawer.value || captionsDrawer.value) && drawersShouldOpenFromBottom;
+    return (settingsDrawer.value || captionsDrawer.value) && drawersShouldOpenFromBottom.value;
 });
 
-const drawersShouldOpenFromBottom = computed(() => isMobileViewport || isPipEnabled.value);
+const drawersShouldOpenFromBottom = computed({
+    get() {
+        return isMobileViewport.value || isPipEnabled.value;
+    }
+});
 
-const currentTimeInSeconds = computed(() => currentTime.value)
+const currentTimeInSeconds = computed({
+    get() {
+        return currentTime.value;
+    },
+});
 
 onBeforeUnmount(() => {
     document.removeEventListener('click', closeDrawers);
@@ -1025,7 +1076,7 @@ const {
                             <!--                            </li>-->
                             <li v-if="!isMobile" class="pa-1 hover-bg-grey-4" @click="togglePip">
                                 {{ isPipEnabled || isExperimentalPictureInPictureEnabled
-                                ? 'Disable' : 'Enable'
+                                        ? 'Disable' : 'Enable'
                                 }} Picture in Picture
                             </li>
                         </ul>
