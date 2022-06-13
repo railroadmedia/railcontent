@@ -48,7 +48,7 @@ class SizeResolver implements ResolverInterface
         $class::saved(function ($model) use ($groups){
             $sizes = $groups->map(function($group, $index) use($model){
                 return [
-                    'size_id' => Size::firstWhere('name', $group->getAttributes()['size'])->id,
+                    'size_id' => is_null($group->getAttributes()['size']) ? null : Size::firstWhere('name', $group->getAttributes()['size'])->id,
                     'sold_out' => $group->getAttributes()['sold_out'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
@@ -57,10 +57,7 @@ class SizeResolver implements ResolverInterface
             $sizeIds = array();
 
             foreach($sizes as $size){
-                if(empty($size['size_id'])){
-                    dd('size id can\'t be null');
-                }
-                else {
+                if(!is_null($size['size_id'])){
                     if(in_array($size['size_id'], $sizeIds)){
                         dd('the size already exists');
                     }
@@ -72,15 +69,20 @@ class SizeResolver implements ResolverInterface
                         $dbSize = ProductSize::find($size['id']);
                         if($dbSize->size_id !== $size['size_id']){
                             $dbSize->size_id = $size['size_id'];
-                            $dbSize->save();
                         }
 
+                        if($dbSize->sold_out !== $size['sold_out']){
+                            $dbSize->sold_out = $size['sold_out'];
+                        }
+
+                        $dbSize->save();
                         $updatedIds[] = $size['id'];
                     }
                     else {
                         $addSize = new ProductSize();
                         $addSize->product_id = $model['id'];
                         $addSize->size_id = $size['size_id'];
+                        $addSize->sold_out = $size['sold_out'];
                         $addSize->save();
 
                         $updatedIds[] = $addSize->id;
