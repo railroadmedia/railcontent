@@ -52,38 +52,38 @@ class FeatureResolver implements ResolverInterface
               ];
            });
 
-           //update and insert items
-           foreach($features as $feature){
-               if(empty($feature['desc'])) {
-                   dd('hey');
-               }
-               else {
-                   if(!is_null($feature['id'])){
-                       $dbFeature = Feature::find($feature['id']);
-                       if($dbFeature->desc !== $feature['desc']){
-                           $dbFeature->desc = $feature['desc'];
+            //update and insert items
+            foreach($features as $feature){
+                if(!is_null($feature['id'])){
+                    $dbFeature = Feature::find($feature['id']);
 
-                       }
+                    if(empty($feature['desc'])){
+                        $dbFeature->delete();
+                    }
+                    else {
+                        if($dbFeature->desc !== $feature['desc']){
+                            $dbFeature->desc = $feature['desc'];
+                        }
 
-                       if($dbFeature->order_number !== $feature['order_number']){
-                           $dbFeature->order_number = $feature['order_number'];
-                       }
+                        if($dbFeature->order_number !== $feature['order_number']){
+                            $dbFeature->order_number = $feature['order_number'];
+                        }
 
-                       $dbFeature->save();
-                       $updatedIds[] = $feature['id'];
-                   }
-                   else{
-                       $addFeature = new Feature();
-                       $addFeature->product_id = $model['id'];
-                       $addFeature->desc = $feature['desc'];
-                       $addFeature->order_number = $feature['order_number'];
-                       $addFeature->save();
+                        $dbFeature->save();
+                    }
 
-                       $updatedIds[] = $addFeature->id;
-                   }
-               }
+                    $updatedIds[] = $feature['id'];
+                }
+                elseif(!empty($feature['desc'])){
+                    $addFeature = new Feature();
+                    $addFeature->product_id = $model['id'];
+                    $addFeature->desc = $feature['desc'];
+                    $addFeature->order_number = $feature['order_number'];
+                    $addFeature->save();
 
-           }
+                    $updatedIds[] = $addFeature->id;
+                }
+            }
 
            if(isset($updatedIds)){
                $deleteIds = Feature::where('product_id', '=', $model['id'])
