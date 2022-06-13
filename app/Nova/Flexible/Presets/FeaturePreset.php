@@ -20,7 +20,7 @@ class FeaturePreset extends Preset
     {
 
         $field->resolver(FeatureResolver::class);
-        $field->button('Add a feature');
+        $field->button('Add a feature/topic');
         // You can call all available methods on the Flexible field.
         // $field->addLayout(...)
         // $field->button(...)
