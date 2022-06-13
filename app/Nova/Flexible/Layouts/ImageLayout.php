@@ -37,7 +37,7 @@ class ImageLayout extends Layout
                 ->deletable(false)
                 ->disableDownload()
                 ->thumbnail(function($value){
-                    return 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return !is_null($value) ? 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value : null;
                 })
                 ->storeAs(function (Request $request){
                     return $request->file('path')->getClientOriginalName();
