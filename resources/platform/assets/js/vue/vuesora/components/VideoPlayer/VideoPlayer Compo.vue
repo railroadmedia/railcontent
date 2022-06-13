@@ -337,7 +337,7 @@ function playPauseViaControlWrap(event) {
 
     if (event.detail === 1) {
         if (userActive.value || !isPlaying.value) {
-            timeouts..value.controlWrapClick = setTimeout(() => {
+            timeouts.value.controlWrapClick = setTimeout(() => {
                 if (settingsDrawer.value || captionsDrawer.value || !canPlayPause) {
                     settingsDrawer.value = false;
                     captionsDrawer.value = false;
@@ -833,7 +833,7 @@ const currentProgress = computed(() => {
     return isNaN(progress) ? 0 : progress;
 });
 
-const currentSource = computed(() = > mediaElement ? mediaElement.src : '');
+const currentSource = computed(() => mediaElement ? mediaElement.src : '');
 
 const $_sources = computed(() => {
     let tempSources;

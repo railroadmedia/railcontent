@@ -17,7 +17,9 @@ export default function ({
     currentPlaybackRate,
     isChromeCastConnected,
     isExperimentalPictureInPictureEnabled,
-    isPipEnabled
+    isPipEnabled,
+    chromeCast,
+    seek,
 }) {
     const eventHandlers = {
         loading: () => {
@@ -148,7 +150,7 @@ export default function ({
         seeked: () => {
             loading.value = false;
 
-            if (hasBeenPlayed && !isChromeCastConnected) {
+            if (hasBeenPlayed.value && !isChromeCastConnected.value) {
                 mediaElement.play();
             }
         },
@@ -165,8 +167,64 @@ export default function ({
             isPipEnabled.value = false;
         },
     };
+
+    const chromeCastEventHandlers = {
+        time: (event) => {
+            if (chromeCast.value.Connected) {
+                currentTime.value = event.time || 0;
+            }
+
+            // cant find a way to test or refactor emits
+            // this.$emit('cc-time', event);
+        },
+
+        playOrPause: (event) => {
+            isPlaying.value = !event;
+
+            // cant find a way to test or refactor emits
+            // this.$emit('cc-playpause', event);
+        },
+
+        media: (event) => {
+            isPlaying.value = true;
+            isChromeCastConnected.value = true;
+
+            if (currentTime.value) {
+                seek(currentTime.value);
+            }
+
+            mediaElement.pause();
+            mediaElement.volume = 0;
+
+            // cant find a way to test or refactor emits
+            // this.$emit('cc-media', event);
+        },
+
+        disconnect: (event) => {
+            isChromeCastConnected.value = false;
+            isPlaying.value = true;
+            mediaElement.volume = this.currentVolume;
+
+            if (currentTime.value) {
+                seek(currentTime.value);
+                mediaElement.play();
+            }
+
+            // cant find a way to test or refactor emits
+            // this.$emit('cc-disconnect', event);
+        },
+
+        state: (event) => {
+            if (event === 'IDLE') {
+                chromeCast.disconnect();
+            }
+            // cant find a way to test or refactor emits
+            // this.$emit('cc-state', event);
+        },
+    };
     return {
         eventHandlers,
         mediaElementEventHandlers,
+        chromeCastEventHandlers
     }
 }
