@@ -56,38 +56,32 @@ class ImageResolver implements ResolverInterface
 
             //update and insert items
             foreach($images as $image){
-                if(empty($image['path'])){
-                    dd('Image path cannot be null');
+                if(!is_null($image['id'])) {
+                    $dbImg = Image::find($image['id']);
+                    if($dbImg->path !== $image['path']){
+                        Storage::disk('s3')->delete($dbImg->path);
+                        Storage::disk('s3')->put('/', $image['path']);
 
+                        $dbImg->path = $image['path'];
+                    }
+
+                    if($dbImg->order_number !== $image['order_number']){
+                        $dbImg->order_number = $image['order_number'];
+                    }
+
+                    $dbImg->save();
+
+                    $updateIds[] = $image['id'];
                 }
-                else {
-                    if(!is_null($image['id'])) {
-                        $dbImg = Image::find($image['id']);
-                        if($dbImg->path !== $image['path']){
-                            Storage::disk('s3')->delete($dbImg->path);
-                            Storage::disk('s3')->put('/', $image['path']);
 
-                            $dbImg->path = $image['path'];
-                        }
+                elseif(!empty($image['path'])) {
+                    $addImg = new Image();
+                    $addImg->path = $image['path'];
+                    $addImg->product_id = $model['id'];
+                    $addImg->order_number = $image['order_number'];
+                    $addImg->save();
 
-                        if($dbImg->order_number !== $image['order_number']){
-                            $dbImg->order_number = $image['order_number'];
-                        }
-
-                        $dbImg->save();
-
-                        $updateIds[] = $image['id'];
-                    }
-
-                    else {
-                        $addImg = new Image();
-                        $addImg->path = $image['path'];
-                        $addImg->product_id = $model['id'];
-                        $addImg->order_number = $image['order_number'];
-                        $addImg->save();
-
-                        $updateIds[] = $addImg->id;
-                    }
+                    $updateIds[] = $addImg->id;
                 }
             }
 
