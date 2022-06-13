@@ -1,5 +1,5 @@
-// useCounter.js
-import { ref, computed, nextTick } from "vue";
+// useEventHandlers.js
+import { nextTick } from "vue";
 
 export default function ({
     loading,
@@ -20,6 +20,11 @@ export default function ({
     isPipEnabled,
     chromeCast,
     seek,
+    playPause,
+    fullscreen,
+    changeVolume,
+    currentVolume,
+    setRate,
 }) {
     const eventHandlers = {
         loading: () => {
@@ -222,9 +227,55 @@ export default function ({
             // this.$emit('cc-state', event);
         },
     };
+
+    const keyboardEventHandlers = {
+        Space: () => playPause(),
+        KeyK: () => playPause(),
+        ArrowLeft: () => seek(currentTime.value - 5),
+        ArrowRight: () => seek(currentTime.value + 5),
+        Digit1: () => seek(totalDuration.value * 0.10),
+        Digit2: () => seek(totalDuration.value * 0.20),
+        Digit3: () => seek(totalDuration.value * 0.30),
+        Digit4: () => seek(totalDuration.value * 0.40),
+        Digit5: () => seek(totalDuration.value * 0.50),
+        Digit6: () => seek(totalDuration.value * 0.60),
+        Digit7: () => seek(totalDuration.value * 0.70),
+        Digit8: () => seek(totalDuration.value * 0.80),
+        Digit9: () => seek(totalDuration.value * 0.90),
+        Digit0: () => seek(0),
+        Home: () => seek(0),
+        End: () => seek(totalDuration.value),
+        KeyJ: () => seek(currentTime.value - 10),
+        KeyL: () => seek(currentTime.value + 10),
+        KeyF: () => fullscreen(),
+        // next line was: this.videojsInstance.isFullscreen ? this.fullscreen() : () => {}
+        Escape: () => (false ? fullscreen() : () => {}),
+        ArrowUp: () => changeVolume({ volume: (currentVolume.value * 100) + 5 }),
+        ArrowDown: () => changeVolume({ volume: (currentVolume.value * 100) - 5 }),
+        KeyM: () => {
+            if (window.localStorage.getItem('isMuted') === null) {
+                window.localStorage.setItem('isMuted', true);
+                changeVolume({ volume: 0 }, false);
+            } else {
+                window.localStorage.removeItem('isMuted');
+                changeVolume({ volume: Number(window.localStorage.getItem('playerVolume') || 75) });
+            }
+        },
+        Minus: () => setRate({ rate: currentPlaybackRate.value - 0.25 }),
+        Equal: () => setRate({ rate: currentPlaybackRate.value + 0.25 }),
+        Period: () => setRate({ rate: currentPlaybackRate.value + 0.25 }),
+        Comma: () => setRate({ rate: currentPlaybackRate.value - 0.25 }),
+    };
+
+    const keyboardEventHandlersShift = {
+        Period: true,
+        Comma: true,
+    };
     return {
         eventHandlers,
         mediaElementEventHandlers,
-        chromeCastEventHandlers
+        chromeCastEventHandlers,
+        keyboardEventHandlers,
+        keyboardEventHandlersShift
     }
 }
