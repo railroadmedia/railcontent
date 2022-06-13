@@ -61,38 +61,38 @@ class Product extends Resource
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
             BelongsTo::make('ProductType', 'productType', 'App\Nova\ProductType'),
-            Text::make('Name'),
+            Text::make('Name')->required(),
             Text::make('Slug')
-                ->displayUsing(function($value){
-                    return '<a class="link-default" target="_blank" href="/products/'.$value.'">'.$value.'</a>';
-                })
                 ->asHtml()
-                ->required(),
+                ->required()
+                ->displayUsing(function($value){
+                    return '<a class="link-default" target="_blank" href="/product/'.$value.'">'.$value.'</a>';
+                }),
             Text::make('Sku')->hideFromIndex()->required(),
             Image::make('Thumbnail')
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('thumbnail')->getClientOriginalName();
-                })
-                ->disableDownload()
-                ->nullable(),
-            Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
+                }),
+            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
             Image::make('Meta Image', 'meta_img')
-                ->thumbnail(function($value, $disk){
-                    return 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
-                })
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
+                ->deletable(false)
+                ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('meta_img')->getClientOriginalName();
                 }),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
-            Text::make('Header Text', 'header_text')->hideFromIndex(),
-            Currency::make('Price')->hideFromIndex(),
+            Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
+            Currency::make('Price')->hideFromIndex()->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Flexible::make('Features/Topics')
@@ -112,30 +112,27 @@ class Product extends Resource
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
                 ->storeAs(function (Request $request){
                     return $request->file('logo')->getClientOriginalName();
-                })
-                ->disableDownload()
-                ->nullable(),
+                }),
             Text::make('Video Link', 'video_src')->hideFromIndex(),
             Text::make('Instructor Name', 'instructor_name')->hideFromIndex(),
             Image::make('Instructor Image', 'instructor_img')
-                ->thumbnail(function($value){
-                    return $value ? 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value : '';
-                })
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
                 ->storeAs(function (Request $request){
                     return $request->file('instructor_img')->getClientOriginalName();
-                })
-                ->disableDownload()
-                ->nullable(),
+                }),
             Markdown::make('Instructor Description', 'instructor_desc')->hideFromIndex(),
             Text::make('Study Text', 'study_text')->hideFromIndex(),
             Markdown::make('Overview')->hideFromIndex(),
-            Heading::make('Clothing'),
-            Flexible::make('Image')
+            Heading::make('Clothing/Accessory'),
+            Flexible::make('Images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
             Select::make('Size Chart', 'size_chart_id')
@@ -143,12 +140,11 @@ class Product extends Resource
                 ->onlyOnForms()
                 ->hideFromIndex(),
             Text::make('Size Chart', 'size_chart_id')
-                ->displayUsing(function($value){
-//                    $chartName = is_null($value) ? '-' :SizeChart::where('id', '=', $value)->first()->chart;
-                    return is_null($value) ? "-" : "<img src=\"https://laravel-nova.s3.us-east-2.amazonaws.com/".SizeChart::where('id', '=', $value)->first()->chart."\" alt='size chart' />";
-                })
                 ->asHtml()
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->displayUsing(function($value){
+                    return is_null($value) ? "-" : "<img src=\"https://laravel-nova.s3.us-east-2.amazonaws.com/".SizeChart::where('id', '=', $value)->first()->chart."\" alt='size chart' />";
+                }),
             Flexible::make('Sizes')
                 ->addLayout(SizeLayout::class)
                 ->preset(SizePreset::class),
