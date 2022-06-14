@@ -10,18 +10,17 @@
 
     <section class="tw-flex tw-flex-row tw-flex-wrap mv-3 tw-w-full">
         <div class="tw-flex tw-flex-col tw-w-full">
-            {{-- Contact Form Component --}}
             <contact-member-email-form
                 brand="{{ $brand }}"
-                email-subject="test subject"
-                email-type="layouts/inline/alert"
-                email-endpoint="/mailora/secure/send"
-                email-logo="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
-                email-alert="test subject"
-                input-label="test ;abe;"
+                email-subject="{{ $emailSubject }}"
+                email-type="{{ $emailType }}"
+                email-endpoint="{{ $emailEndpoint }}"
+                email-logo="{{ $emailLogo }}"
+                email-alert="{{ $emailSubject }}"
+                input-label="{{ $emailInputLabel }}"
                 :lesson-page="false"
-                recipient="musora@support.ro"
-                success-message="test success message"
+                recipient="{{ $emailRecipient ?? 'support@' . $brand . '.com' }}"
+                success-message="{{ $emailSuccessMessage }}"
             />
         </div>
     </section>

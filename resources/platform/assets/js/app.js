@@ -48,6 +48,7 @@ import ForumThreadsTable from './vue/vuesora/views/forum/ForumThreadsTable.vue';
 import ForumThread from './vue/vuesora/views/forum/thread/ForumThread.vue';
 import TextEditor from './vue/vuesora/components/TextEditor/TextEditor.vue';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue';
+import ContactEmailForm from './vue/vuesora/components/ContactEmailForm/ContactEmailForm.vue';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';
@@ -161,7 +162,8 @@ app.component('AppContainer', AppContainer)
    .component('ForumThread', ForumThread)
    .component('TextEditor', TextEditor)
    .component('ContactMemberEmailForm', ContactMemberEmailForm)
-   .component('ContentSchedule', ContentSchedule)
+    .component('ContactEmailForm', ContactEmailForm)
+    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('VideoPlayer', VideoPlayer)
    .component('ImageCropper', ImageCropper)

@@ -14,7 +14,7 @@
                 data-ix-bg="{{ 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg' }}"
             >
                 <div class="header-gradient-overlay absolute-fill"></div>
-            
+
                 <div class="tw-container tw-flex tw-flex-col tw-items-center tw-items-end tw-items-center tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
                     <h1 class="tw-text-white">
                         <i class="fas fa-phone fa-flip-horizontal tw-text-3xl"></i>
@@ -23,23 +23,21 @@
                 </div>
             </div>
 
-
             <div class="tw-max-w-3xl tw-mx-auto mv-3">
                 @include('partials.bladesora.members.partials._support', [
                     "themeColor" => "{{ $brand }}",
                     "brand" => "{{ $brand }}",
                     "internationalNumber" => "1-604-855-7605",
                     "tollFree" => "1-800-439-8921",
-                    "emailRecipient" => config('mail-recipients.members-area-support') ?? 'support@singeo.com',
+                    "emailRecipient" => "{{ $emailRecipient }}",
                     "emailSubject" => "Support Request from: " . user()->display_name . " (" . user()->email . ")",
                     "emailType" => "support-contact",
                     "emailInputLabel" => "Report your issue here..",
                     "emailEndpoint" => '/mailora/secure/send',
-                    "emailLogo" => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple.png',
+                    "emailLogo" => "{{ $logoLink  }}",
                     "emailSuccessMessage" => "Your email has been sent!",
-                    "emailAddress" => config('mail-recipients.members-area-support') ?? 'support@singeo.com'
+                    "emailAddress" => "{{ $emailRecipient }}"
                 ])
             </div>
-
         </div>
 @endsection

@@ -333,5 +333,10 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/support', [SupportController::class, 'memberSupport'])
             ->whereIn('brand', all_brands())
             ->name('platform.support');
-        
+
+//        //todo: to be moved outside members area
+        Route::get('/{brand}/contact', [SupportController::class, 'contact'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.contact');
+
     });

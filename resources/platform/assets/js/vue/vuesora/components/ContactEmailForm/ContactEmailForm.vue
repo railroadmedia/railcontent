@@ -4,7 +4,7 @@
           @submit.prevent="submitForm"
     >
         <!-- Name -->
-        <text-input 
+        <text-input
             name="name"
             :required="true"
             :invalid="!formValid && !textFieldValid"
@@ -29,7 +29,7 @@
         />
 
         <!-- Email -->
-        <email-input 
+        <email-input
             name="Email Address"
             :required="true"
             :invalid="!formValid && !emailFieldValid"
@@ -41,7 +41,7 @@
         />
 
         <!-- Help Dropdown -->
-        <multilevel-dropdown 
+        <multilevel-dropdown
             label="What can we help you with?"
             name="support-options"
             id="support-listbox"
@@ -56,7 +56,7 @@
         />
 
         <!-- Description -->
-        <textarea-input 
+        <textarea-input
             name="description"
             :required="true"
             :invalid="!formValid && !messageFieldValid"
@@ -73,12 +73,12 @@
             <div class="tw-my-4 tw-inline-flex tw-mx-auto sm:tw-mx-0 sm:tw-my-0 sm:tw-w-1/2">
                 <!-- Recaptcha -->
                 <recaptcha :siteKey="captchakey"
-                           @update:verified="formVerified = $event"    
+                           @update:verified="formVerified = $event"
                 />
             </div>
             <div class="sm:tw-w-72 sm:tw-ml-auto">
                 <!-- File Upload Button -->
-                <file-input 
+                <file-input
                     name="attach file"
                     id="support-file"
                     :required="false"
@@ -97,10 +97,10 @@
         </div>
 
         <!-- SUBMIT BUTTON -->
-        <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min" 
+        <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min"
                 type="submit"
-                :disabled="!formVerified || !formValid"
-                :class="themeBgClass" 
+                :disabled="!formValid"
+                :class="themeBgClass"
         >
                 Submit
         </button>
@@ -203,7 +203,7 @@ export default {
             default: () => 'emailFom',
         },
     },
-    
+
     data() {
         return {
             formValid: true, //set true by default
@@ -391,7 +391,7 @@ export default {
         selectFieldValid() {
             return this.formData.supportOption.length !== 0 ? true : false;
         },
-        
+
         formState() {
             if(this.messageFieldValid && this.selectFieldValid && this.textFieldValid && this.emailFieldValid && this.radioFieldsValid) return true;
         },
@@ -423,7 +423,7 @@ export default {
             this.formData.isMember = val;
         },
 
-        attachFile(file) {     
+        attachFile(file) {
             this.formData.attachments.push(file);
         },
         removeFile(index) {
@@ -452,9 +452,9 @@ export default {
             const email = this.formData.email;
             const message = this.formData.message;
             const supportOption = this.formData.supportOption;
-            let attachment; 
+            let attachment;
             let membership;
-            //convert file(s) to image blobs 
+            //convert file(s) to image blobs
             if(this.formData.attachments[0]) {
                 attachment = this.formData.attachments[0];
             } else {
@@ -496,7 +496,7 @@ export default {
                         this.$emit('formSuccess');
                         window.closeAllModals();
 
-                        //reset option 
+                        //reset option
                         this.formData = {
                             name: '',
                             email: '',
