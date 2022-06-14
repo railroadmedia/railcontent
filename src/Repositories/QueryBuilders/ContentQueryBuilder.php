@@ -430,6 +430,36 @@ class ContentQueryBuilder extends QueryBuilder
                                     )
                                 );
                         });
+            } else {
+                $this->join(
+                    ConfigService::$tableContentFields . ' as ' . $tableName,
+                    function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
+                        $joinClause->on(
+                            $tableName . '.content_id',
+                            '=',
+                            ConfigService::$tableContent . '.id'
+                        )
+                            ->on(
+                                $tableName . '.key',
+                                '=',
+                                $joinClause->raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($requiredFieldData['name'])
+                                )
+                            )
+                            ->on(
+                                $tableName . '.value',
+                                $requiredFieldData['operator'],
+                                is_numeric($requiredFieldData['value']) ?
+                                    $joinClause->raw($requiredFieldData['value']) : $joinClause->raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($requiredFieldData['value'])
+                                )
+                            );
+                    }
+                );
             }
         }
 
