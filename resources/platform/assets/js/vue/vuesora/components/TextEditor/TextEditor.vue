@@ -50,12 +50,15 @@ export default {
         isReplySection: {
             type: Boolean, 
             default: false,
+        },
+        isDarkMode: {
+            type: Boolean, 
+            default: false,
         }
     },
     data() {
         return {
             currentValue: this.initialValue,
-            isDarkMode: false,
         };
     },
     computed: {
@@ -111,21 +114,8 @@ export default {
             this.$emit('input', {
                 currentValue: this.currentValue,
             });
-        },
-
-        onColorModeToggle(val) {
-            console.log('color mode toggle')
-            if (typeof val === "boolean") {
-                this.isDarkMode = val;
-            }
         }
     },
-    //Set Dark Mode
-    beforeMount() {
-        if( document.body.classList.contains('tw-dark') ) {
-            this.isDarkMode = true;
-        }
-    }
 }
 </script>
 

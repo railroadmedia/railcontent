@@ -75,17 +75,25 @@
   padding: 0 !important;
 }
 
-.tw-dark #replyContainer {
+#replyContainer {
   .tox-tinymce {
-    border: 2px solid #002039;
-    color: white;
+    border-width: 1px;
+  }
+}
+.tw-dark #replyContainer {
+  .tox:not(.tox-tinymce-inline) .tox-editor-header {
+    background-color: transparent;
+  }
+  .tox-tinymce {
+    border: none;
+    background-color: #002039;
   }
   .tox .tox-edit-area__iframe {
     background-color:  transparent;
   }
   .tox .tox-toolbar__primary,
   .tox .tox-toolbar {
-    background-color: #002039 !important;
+    background-color: #081825 !important;
   }
   .tox .tox-edit-area__iframe body#tinymce {
     color: white;

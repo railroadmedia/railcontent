@@ -17441,16 +17441,23 @@ content-catalogue, transition {
   padding: 0 !important;
 }
 
+#replyContainer .tox-tinymce {
+  border-width: 1px;
+}
+
+.tw-dark #replyContainer .tox:not(.tox-tinymce-inline) .tox-editor-header {
+  background-color: transparent;
+}
 .tw-dark #replyContainer .tox-tinymce {
-  border: 2px solid #002039;
-  color: white;
+  border: none;
+  background-color: #002039;
 }
 .tw-dark #replyContainer .tox .tox-edit-area__iframe {
   background-color: transparent;
 }
 .tw-dark #replyContainer .tox .tox-toolbar__primary,
 .tw-dark #replyContainer .tox .tox-toolbar {
-  background-color: #002039 !important;
+  background-color: #081825 !important;
 }
 .tw-dark #replyContainer .tox .tox-edit-area__iframe body#tinymce {
   color: white;

@@ -89,6 +89,7 @@ export default {
       onColorModeToggle,
       setDarkMode
     };
+    
   },
 
   beforeMount() {
@@ -182,7 +183,7 @@ export default {
       >
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">
-          <slot />
+          <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 
         <!-- Footer -->

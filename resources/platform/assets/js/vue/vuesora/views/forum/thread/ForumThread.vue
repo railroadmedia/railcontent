@@ -219,10 +219,10 @@
                         </div>
                     </div>
                     <!-- User Info -->
-                    <div class="tw-font-bebas-neue tw-uppercase tw-text-center">
-                        <p class="tw-text-lg tw-mb-0.5 dark:tw-text-white">{{ currentUser.userExpVal }}</p>
-                        <p class="tw-text-base tw-mb-0.5 dark:tw-text-white">Level {{ currentUser.progressLevel }}</p>
-                        <p class="tw-text-base tw-text-gray-400 dark:tw-text-[#9EC0DC] ">{{ currentUser.totalPosts }} Posts</p>
+                    <div class="tw-text-center">
+                        <p class="tw-font-bebas-neue tw-uppercase tw-text-xl dark:tw-text-white">{{ currentUser.userExpVal }}</p>
+                        <p class="tw-font-bebas-neue tw-uppercase tw-text-base dark:tw-text-white">Level {{ currentUser.progressLevel }}</p>
+                        <p class="tw-text-sm tw-text-gray-400 dark:tw-text-white ">{{ currentUser.totalPosts }} Posts</p>
                     </div>
                 </div>
 
@@ -237,6 +237,8 @@
                         
                         <text-editor
                             ref="textEditor"
+                            :key="editorKey"
+                            :isDarkMode="isDarkMode"
                             :is-reply-section="true"
                             v-model="postReplyInterface"
                             @input="handleInput"
@@ -413,6 +415,7 @@ export default {
                     value: 'mine'
                 }
             ],
+            editorKey: 0,
         };
     },
     computed: {
@@ -691,6 +694,13 @@ export default {
                 });
         },
     },
+    //Force Rerender if Dark Mode prop changes
+    //TinyMCE's init object is not reactive
+    watch: {
+        isDarkMode() {
+            this.editorKey += 1;
+        }
+    }
 };
 </script>
 <style lang="scss">
