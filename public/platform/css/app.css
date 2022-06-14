@@ -21103,14 +21103,14 @@ a:visited{
   background-color: #374151;
   color: #fff;
 }
-.tw-input-field[disabled=true]{
+.tw-input-field[disabled]{
   pointer-events: none;
 }
-.tw-input-field[disabled=true] input[type=date], .tw-input-field[disabled=true] input[type=email], .tw-input-field[disabled=true] input[type=number], .tw-input-field[disabled=true] input[type=search], .tw-input-field[disabled=true] input[type=tel], .tw-input-field[disabled=true] input[type=password], .tw-input-field[disabled=true] input[type=text], .tw-input-field[disabled=true] select, .tw-input-field[disabled=true] textarea, .tw-input-field[disabled=true] button[type="button"]{
+.tw-input-field[disabled] input[type=date], .tw-input-field[disabled] input[type=email], .tw-input-field[disabled] input[type=number], .tw-input-field[disabled] input[type=search], .tw-input-field[disabled] input[type=tel], .tw-input-field[disabled] input[type=password], .tw-input-field[disabled] input[type=text], .tw-input-field[disabled] select, .tw-input-field[disabled] textarea, .tw-input-field[disabled] button[type="button"]{
   background-color: #f3f4f6;
   color: #9ca3af;
 }
-.tw-input-field[disabled=true] label{
+.tw-input-field[disabled] label{
   color: #d1d5db;
 }
 .tw-input-field .tw-input-icon{
@@ -21211,15 +21211,15 @@ a:visited{
 .tw-file-field label[aria-valid="true"] .tw-input-icon svg:not(.tw-valid-icon), .tw-file-field label[aria-valid="true"] .tw-input-icon i{
   display: none;
 }
-.tw-file-field[disabled=true]{
+.tw-file-field[disabled]{
   pointer-events: none;
 }
-.tw-file-field[disabled=true] label{
+.tw-file-field[disabled] label{
   background-color: #f3f4f6 !important;
   border-color: #d1d5db !important;
   color: #9ca3af !important;
 }
-.tw-file-field[disabled=true] .tw-input-messages{
+.tw-file-field[disabled] .tw-input-messages{
   display: none;
 }
 .tw-toggle-field .tw-input-message{
@@ -21246,7 +21246,7 @@ a:visited{
 .tw-radio-group .tw-radio-field label{
   font-size: 0.875rem;
 }
-[disabled=true] .tw-radio-group .tw-radio-field label{
+[disabled] .tw-radio-group .tw-radio-field label{
   color: #9ca3af;
 }
 .tw-fieldset{
@@ -21270,13 +21270,13 @@ a:visited{
   display: block;
   color: #ef4444;
 }
-.tw-fieldset[disabled=true]{
+.tw-fieldset[disabled]{
   pointer-events: none;
 }
-.tw-fieldset[disabled=true] .tw-fieldset-title{
+.tw-fieldset[disabled] .tw-fieldset-title{
   color: #d1d5db;
 }
-.tw-fieldset[disabled=true] .tw-input-message{
+.tw-fieldset[disabled] .tw-input-message{
   display: none;
 }
 .tw-with-tooltip{
