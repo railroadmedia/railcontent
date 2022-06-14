@@ -258,7 +258,7 @@ export default function ({
                 changeVolume({ volume: 0 }, false);
             } else {
                 window.localStorage.removeItem('isMuted');
-                changeVolume({ volume: Number(window.localStorage.getItem('playerVolume') || 75) });
+                changeVolume({ volume: parseInt(window.localStorage.getItem('playerVolume') || 75) });
             }
         },
         Minus: () => setRate({ rate: currentPlaybackRate.value - 0.25 }),

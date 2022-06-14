@@ -133,7 +133,7 @@ const mediaElement = ref(null);
 
 // Template refs
 const container = ref(null);
-const player = ref(null);
+const player = ref({});
 const contextMenu = ref(null);
 const videoWrap = ref(null);
 
@@ -187,18 +187,14 @@ const currentRange = ref('original');
 //methods
 
 function getDefaultPlaybackQualityIndex() {
-    console.log('getDefaultPlaybackQualityIndex called')
     const widthToCheck = window.localStorage.getItem('vuesoraDefaultVideoQuality')
         || document.documentElement.clientWidth;
-    console.log('widthToCheck', widthToCheck)
     const matchedQualities = playbackQualities.value.filter(quality => quality.width >= widthToCheck);
-    console.log('matchedQualities', matchedQualities)
 
     return matchedQualities[0] || playbackQualities.value[0];
 }
 
 function getSource(src) {
-    console.log('getSource called', src)
     if (src) {
         source.value = src;
     } else {
@@ -207,7 +203,6 @@ function getSource(src) {
 }
 
 function loadSource(src) {
-    console.log('loadSource src', src)
     getSource(src);
 
     return new Promise((resolve) => {
@@ -238,7 +233,6 @@ function setRange({ range }) {
 function initializePlayer(time) {
     const urlParams = new URLSearchParams(window.location.search);
     const timeToSeekTo = time || (urlParams.get('time') || window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond);
-    console.log('initialize Player')
 
     if (parseInt(timeToSeekTo) !== parseInt(currentTime.value)) {
         seek(timeToSeekTo);
@@ -561,8 +555,8 @@ function toggleContextMenu() {
 }
 
 function getContextMenuPosition() {
-    const playerWidth = player.value ? player.value.clientWidth : 0;
-    const playerHeight = player.value ? player.value.clientHeight : 0;
+    const playerWidth = player.value.clientWidth ? player.value.clientWidth : 0;
+    const playerHeight = player.value.clientHeight ? player.value.clientHeight : 0;
     const menuWidth = contextMenu.value ? contextMenu.value.clientWidth : 0;
     const menuHeight = contextMenu.value ? contextMenu.value.clientHeight : 0;
 
@@ -589,7 +583,7 @@ function mouseUpEventHandler(event) {
             const timeToSeekTo = totalDuration.value * (
                 PlayerUtils.getTimeRailMouseEventOffsetPercentage(
                     currentMousePosition.value.x,
-                    playerWidth,
+                    player.value && player.value.clientWidth ? player.value.clientWidth : 0,
                 )
             );
             seek(timeToSeekTo);
@@ -720,19 +714,15 @@ onMounted(() => {
 
     if (shaka.Player.isBrowserSupported() && !PlayerUtils.isIE()) {
         shakaPlayer = new shaka.Player();
-        console.log('shakaPlayer init', shakaPlayer)
 
         Object.keys(eventHandlers).forEach((event) => {
             shakaPlayer.addEventListener(event, eventHandlers[event]);
         });
 
         //mediaElement.value = player;
-        console.log('player obj', player)
-        console.log('player val', player.value)
         shakaPlayer.attach(player.value)
             .then(() => {
                 mediaElement.value = shakaPlayer.getMediaElement();
-                console.log('then mediaElement.value', mediaElement.value)
 
                 shakaPlayer.configure({
                     abr: {
@@ -751,11 +741,9 @@ onMounted(() => {
                 return loadSource();
             })
             .then(() => {
-                console.log('before calling initialize player')
                 initializePlayer();
             })
             .catch((error) => {
-                console.log('there was an error (?)')
                 if (error.severity === 2) {
                     playerError.value = true;
                     playerErrorCode.value = error.code;
@@ -823,18 +811,6 @@ onMounted(() => {
         enableIntersectionObserver(videoWrap.value);
     }
 })
-
-// computed
-
-
-const playerWidth = computed({
-    get() {
-        return player.value ? player.value.clientWidth : 0;
-    },
-    set(val) {
-        return val;
-    }
-});
 
 const isAbrEnabled = computed({
     get() {
@@ -1165,7 +1141,7 @@ const {
                             <!--  MIDDLE ROW  -->
                             <div v-if="controls.progress" class="flex flex-row" @dblclick.stop.prevent="() => false">
                                 <PlayerProgress :theme-color="themeColor" :current-progress="currentProgress"
-                                    :current-time="currentTime" :player-width="playerWidth"
+                                    :current-time="currentTime" :player-width="(player.value && player.value.clientWidth) || 0"
                                     :current-mouse-x="currentMousePosition.x" :total-duration="totalDuration"
                                     :buffered-time-ranges="bufferedTimeRanges" :chapters="chapters"
                                     :mousedown="mousedown" data-cy="progress-rail"
