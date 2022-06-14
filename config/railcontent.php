@@ -258,7 +258,7 @@ return [
             \App\Decorators\Content\PackBundleLessonDecorator::class,
             \App\Decorators\Content\PackBundleDecorator::class,
             \App\Decorators\Content\PackDecorator::class,
-            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
+//            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
             \App\Decorators\Content\LearningPathCourseDecorator::class,
             \App\Decorators\Content\LearningPathLessonDecorator::class,
             \App\Decorators\Content\NewDecorator::class,

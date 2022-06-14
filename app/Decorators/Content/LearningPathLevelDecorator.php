@@ -23,68 +23,14 @@ class LearningPathLevelDecorator extends TypeDecoratorBase
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            //level number
-            $hierarchy =
-                $this->railcontentDB()
-                    ->table('railcontent_content_hierarchy')
-                    ->join(
-                        'railcontent_content',
-                        'railcontent_content_hierarchy.parent_id',
-                        '=',
-                        'railcontent_content.id'
-                    )
-                    ->where('child_id', $content['id'])
-                    ->where('railcontent_content.type', 'learning-path')
-                    ->first();
+            // level number
+            $contentsOfType[$contentIndex]['level_number'] = $content['hierarchy_position_number'];
 
-            if (!empty($hierarchy)) {
-                $contentsOfType[$contentIndex]['level_number'] = $hierarchy->child_position ?? 1;
-            }
-        }
-
-        foreach ($contentsOfType as $contentIndex => $content) {
             // course count
-            $contentsOfType[$contentIndex]['lesson_count'] =
-                $this->railcontentDB()
-                    ->table('railcontent_content_hierarchy')
-                    ->where('parent_id', $content['id'])
-                    ->count('child_id');
+            $contentsOfType[$contentIndex]['lesson_count'] =$content['child_count'];
 
             // next lesson
-            $childProgressRows = [];
-
-            if (!empty(user())) {
-                $childProgressRows =
-                    $this->railcontentDB()
-                        ->table('railcontent_content_hierarchy')
-                        ->leftJoin(
-                            'railcontent_user_content_progress',
-                            function (JoinClause $join) {
-                                $join->on(
-                                    'railcontent_user_content_progress.content_id',
-                                    '=',
-                                    'railcontent_content_hierarchy.child_id'
-                                )
-                                    ->where(
-                                        function (Builder $builder) {
-                                            $builder->where('railcontent_user_content_progress.user_id', user()->id);
-                                        }
-                                    );
-                            }
-                        )
-                        ->where('parent_id', $content['id'])
-                        ->orderBy('railcontent_content_hierarchy.child_position', 'asc')
-                        ->get();
-            }
-
-            $nextLesson = null;
-            foreach ($childProgressRows as $childProgressRow) {
-                if ($childProgressRow->state != 'completed' && $childProgressRow->progress_percent != 100) {
-                    $nextLesson = $this->contentService->getById($childProgressRow->child_id);
-
-                    break;
-                }
-            }
+            // todo:
 
             if (!empty($nextLesson['current_lesson'])) {
                 $contentsOfType[$contentIndex]['next_lesson'] = $nextLesson['current_lesson'];
