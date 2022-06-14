@@ -29,12 +29,12 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', NavigationViewComposer::class);
 
-//        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
-//        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
-//        app()->instance(
-//            EventDataSynchronizerUserProviderInterface::class,
-//            app()->make(EventDataSynchronizerUserProvider::class)
-//        );
+        //        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
+        //        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
+        //        app()->instance(
+        //            EventDataSynchronizerUserProviderInterface::class,
+        //            app()->make(EventDataSynchronizerUserProvider::class)
+        //        );
 
         $this->app->singleton(EcommerceUserProviderInterface::class, function ($app) {
             return $app->make(EcommerceUserProvider::class);
@@ -46,6 +46,19 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(EventDataSynchronizerUserProviderInterface::class, function ($app) {
             return $app->make(EventDataSynchronizerUserProvider::class);
+        });
+
+        //railnotifications package providers
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\UserProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsUserProvider::class);
+        });
+
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\ContentProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsContentProvider::class);
+        });
+
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsForumProvider::class);
         });
     }
 }
