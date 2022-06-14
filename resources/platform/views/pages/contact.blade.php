@@ -28,7 +28,7 @@
                 <div class="tw-flex tw-flex-col tw-w-full">
                     <contact-email-form
                         brand="{{ $brand }}"
-                        captchakey="6LcBSxYUAAAAANEVgiFM3kmHOjzbcrkspWBtQd9n "
+                        captchakey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"
                         email-subject="Support Request From {{ $brandSenderName }}"
                         email-type="support-contact"
                         email-endpoint="/mailora/public/send"
