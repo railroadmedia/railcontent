@@ -60,7 +60,9 @@
                             name="_method"
                             value="patch"
                         >
-                        <text-editor :initial-value="post.postBody"></text-editor>
+                        <text-editor 
+                            :initial-value="post.postBody"
+                        />
 
                         <div class="tw-flex tw-flex-row align-h-right tw-mt-2">
                             <a
@@ -111,7 +113,7 @@
 
                     <p
                         v-if="!post.isLocked"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-pointer reply-like noselect"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
                         @click="replyToPost"
                     >
                     Reply

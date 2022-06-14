@@ -47,10 +47,15 @@ export default {
             type: String,
             default: () => 'content',
         },
+        isReplySection: {
+            type: Boolean, 
+            default: false,
+        }
     },
     data() {
         return {
             currentValue: this.initialValue,
+            isDarkMode: false,
         };
     },
     computed: {
@@ -66,10 +71,10 @@ export default {
         initObject() {
             return {
                 autoresize_min_height: this.height,
+                body_class: `${this.isDarkMode ? 'tw-dark' : ''}`,
                 branding: false,
                 content_id: '#textEditor',
-                content_style: `font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; }`,
-                body_class: 'dark:tw-text-white',
+                content_style: `body.tw-dark { color: white } body { font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; }`,
                 convert_urls: false,
                 default_link_target: '_blank',
                 elementpath: false,
@@ -100,9 +105,6 @@ export default {
                 },
             };
         },
-        isDarkMode() {
-            return document.body.classList.contains('tw-dark');
-        },
     },
     methods: {
         handleInput() {
@@ -110,7 +112,20 @@ export default {
                 currentValue: this.currentValue,
             });
         },
+
+        onColorModeToggle(val) {
+            console.log('color mode toggle')
+            if (typeof val === "boolean") {
+                this.isDarkMode = val;
+            }
+        }
     },
-};
+    //Set Dark Mode
+    beforeMount() {
+        if( document.body.classList.contains('tw-dark') ) {
+            this.isDarkMode = true;
+        }
+    }
+}
 </script>
 

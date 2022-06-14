@@ -234,11 +234,13 @@
                         :action="postStoreFormUrl"
                         @submit="formDisabled = !formDisabled"
                     >
+                        
                         <text-editor
                             ref="textEditor"
+                            :is-reply-section="true"
                             v-model="postReplyInterface"
                             @input="handleInput"
-                        ></text-editor>
+                        />
 
                         <input
                             type="hidden"
@@ -254,7 +256,7 @@
 
                         <div class="flex tw-flex-col md:tw-flex-row mt-2 tw-justify-center md:tw-justify-between">
                             <a :href="signatureURL" 
-                               class="tw-btn-primary tw-text-gray-400 tw-bg-transparent tw-px-4 hover:tw-bg-gray-100 tw-mb-2"
+                               class="tw-btn-primary tw-text-gray-400 dark:tw-text-[#7E9AB1] tw-bg-transparent tw-px-4 hover:tw-bg-gray-100 dark:hover:tw-bg-[#002039] tw-mb-2"
                             >
                                 <i class="fas fa-file-signature tw-mr-1"></i>
                                 Add Signature
@@ -262,7 +264,7 @@
                             
                             <button
                                 class="tw-btn-primary thread-reply-button"
-                                :class="themeBgClass"
+                                :class="`tw-bg-${ brand }`"
                                 type="submit"
                                 :disabled="formDisabled"
                             >
@@ -271,6 +273,7 @@
                                 </span>
                             </button>
                         </div>
+
                     </form>
                 </div>
             </section>
@@ -359,18 +362,22 @@ export default {
                 progressLevel: '1.0',
             }),
         },
-      postStoreFormUrl: {
-        type: String,
-        default: () => '/post/store',
-      },
-      updatePostBaseRoute: {
-        type: String,
-        default: '/post/update/',
-      },
-      previousPage: {
-        type: String,
-        default: () => document.referrer,
-      },
+        postStoreFormUrl: {
+            type: String,
+            default: () => '/post/store',
+        },
+        updatePostBaseRoute: {
+            type: String,
+            default: '/post/update/',
+        },
+        previousPage: {
+            type: String,
+            default: () => document.referrer,
+        },
+        isDarkMode: {
+            type: Boolean, 
+            default: false,
+        },
     },
     data() {
         return {
