@@ -26,6 +26,7 @@
         "railroad/railcontent": "dev-2.0- as v2.0.0",
         "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
         "railroad/railforums": "2.0.*",
+        "railroad/railnotifications": "v3.0.x-dev as v3.0",
         "railroad/usora": "3.0.*",
 	    "railroad/mailora": "^3.0",
         "spatie/laravel-permission": "^5.5",

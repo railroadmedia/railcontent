@@ -179,7 +179,7 @@ export default {
      * @returns {Promise} resolved promise with the response.data object
      */
     markNotificationAsRead(id) {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-read/${id}`)
+        return axios.put(`${endpointPrefix}/railnotifications/read/${id}`)
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -191,7 +191,7 @@ export default {
      * @returns {Promise} resolved promise with the response.data object
      */
     markNotificationAsUnRead(id) {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-unread/${id}`)
+        return axios.put(`${endpointPrefix}/railnotifications/unread/${id}`)
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -201,8 +201,8 @@ export default {
      *
      * @returns {Promise} resolved promise with the response.data object
      */
-    markAllNotificationsAsRead() {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-all-read`)
+    markAllNotificationsAsRead(brand) {
+        return axios.put(`${endpointPrefix}/railnotifications/read-all`, { brand: brand })
             .then(response => response.data)
             .catch(ErrorHandler);
     },
