@@ -31,10 +31,11 @@
 @endsection
 
 @section('content')
-        <div v-cloak>
+        <template v-cloak v-slot="slotProps">
 
             <forum-thread
                 theme-color="{{ $brand }}"
+                :is-dark-mode="slotProps.isDarkMode"
                 brand="{{ $brand }}"
                 :thread="{{ $thread }}"
                 :current-user="{{ $currentUser }}"
@@ -43,5 +44,5 @@
                 update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
             />
 
-        </div>
+        </template>
 @endsection
