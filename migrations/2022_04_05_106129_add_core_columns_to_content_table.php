@@ -123,7 +123,7 @@ class AddCoreColumnsToContentTable extends Migration
 
                 $table->integer('length_in_seconds')
                     ->index()
-                    ->after('legacy_wordpress_post_id')
+                    ->after('is_house_coach')
                     ->nullable();
 
                 $table->dateTime('live_event_start_time')
@@ -259,8 +259,6 @@ class AddCoreColumnsToContentTable extends Migration
 
                 $table->dropColumn('difficulty');
                 $table->dropColumn('home_staff_pick_rating');
-                $table->dropColumn('legacy_id');
-                $table->dropColumn('legacy_wordpress_post_id');
                 $table->dropColumn('qna_video');
                 $table->dropColumn('style');
                 $table->dropColumn('title');

@@ -661,8 +661,6 @@ return [
     'contentColumnNamesForFields' => [
         'difficulty',
         'home_staff_pick_rating',
-        'legacy_id',
-        'legacy_wordpress_post_id',
         'title',
         'xp',
         'album',
