@@ -463,11 +463,8 @@ export default {
                         event.target.dataset.jumpToTime,
                         true,
                     );
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                    });
+                    //Scroll To Top
+                    document.getElementById('content-container').scrollTop = 0
                 }
             });
         },

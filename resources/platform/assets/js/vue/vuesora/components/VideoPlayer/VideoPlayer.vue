@@ -773,11 +773,7 @@ onMounted(() => {
 
         if (element.matches('[data-jump-to-time]')) {
             seek(element.dataset.jumpToTime);
-
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-            });
+            document.getElementById('content-container').scrollTop=0;
         }
     });
 

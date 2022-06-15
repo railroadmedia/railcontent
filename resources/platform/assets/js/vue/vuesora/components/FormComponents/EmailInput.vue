@@ -2,7 +2,7 @@
     <div class="tw-input-field"
         :disabled="disabled"
     >
-        <label :for="id" class="tw-label">
+        <label :for="id" class="tw-label tw-text-[#00101D] dark:tw-text-white">
             <span v-if="required" class="tw-text-red-500">*</span>
             {{ name }}
         </label>
@@ -10,7 +10,7 @@
             <input  type="email" 
                     :id="id"
                     :placeholder="placeholder"
-                    class="focus:tw-border-drumeo"
+                    class="focus:tw-border-drumeo dark:tw-bg-[#00101D] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74]"
                     :aria-required="required"
                     :aria-invalid="invalid"
                     v-model="valueInterface"

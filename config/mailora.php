@@ -6,7 +6,7 @@ return [
 
     // required to make "public" route work
     'approved-recipients' => [],
-    'approved-recipient-domains' => ['drumeo.com', 'pianote.com', 'musora.com'],
+    'approved-recipient-domains' => ['drumeo.com', 'singeo.com', 'pianote.com', 'guitareo.com', 'musora.com'],
 
     // required to make "authentication-protected" route work
     'route_middleware_public_groups' => ['web_public'],
@@ -22,11 +22,11 @@ return [
 
     // 2. Some required, some optional...
     'defaults' => [
-
         // 2.0 REQUIRED (either hardcoded here, or provided by environmental variables)
-        'sender-address' => env('MAILORA_DEFAULT_SENDER_ADDRESS', 'support@drumeo.com'), // REQUIRED
-        'sender-name' => env('MAILORA_DEFAULT_SENDER_NAME', 'Drumeo'), // REQUIRED
-        'recipient-address' => env('MAILORA_DEFAULT_RECIPIENT_ADDRESS', 'support@drumeo.com'), // REQUIRED
+        // 3.0 - we are setting the defaults directly from the config for each brand; we might not need these parameters later; to be checked and deleted if not needed
+        'sender-address' => env('MAILORA_DEFAULT_SENDER_ADDRESS', 'support@musora.com'), // REQUIRED
+        'sender-name' => env('MAILORA_DEFAULT_SENDER_NAME', 'Musora'), // REQUIRED
+        'recipient-address' => env('MAILORA_DEFAULT_RECIPIENT_ADDRESS', 'musora@drumeo.com'), // REQUIRED
 
         // 2.1 Optional
         'recipient-name' => env('MAILORA_DEFAULT_RECIPIENT_NAME', 'Caleb'),
@@ -38,10 +38,32 @@ return [
         'users-email-set-reply-to' => true,
     ],
 
-    'submit_student_focus_recipient' => [
-        'drumeo' => 'support@drumeo.com',
-        'pianote' => 'team+studentreviews@pianote.com',
-        'guitareo' => 'team+studentreviews@guitareo.com',
-        'singeo' => 'team+studentreviews@singeo.com'
+    'drumeo' => [
+        'support-email-address' => 'support@drumeo.com',
+        'support-sender-name' => 'Drumeo',
+        'submit-student-focus-recipient' => 'support@drumeo.com',
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png'
     ],
+
+    'pianote' => [
+        'support-email-address' => 'support@pianote.com',
+        'support-sender-name' => 'Pianote System',
+        'submit-student-focus-recipient' => 'team+studentreviews@pianote.com',
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png'
+    ],
+
+    'guitareo' => [
+        'support-email-address' => 'support@guitareo.com',
+        'support-sender-name' => 'Guitareo System',
+        'submit-student-focus-recipient' => 'support@guitareo.com',
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo.png'
+    ],
+
+    'singeo' => [
+        'support-email-address' => 'support@singeo.com',
+        'support-sender-name' => 'Singeo System',
+        'submit-student-focus-recipient' => 'support@singeo.com',
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple'
+    ]
+
 ];

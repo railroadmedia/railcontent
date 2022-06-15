@@ -129,8 +129,8 @@
                     </button>
                 </div>
                 </div>
-                <div class="tw-flex tw-flex-col mb-1">
-                <div class="tw-flex tw-flex-row tw-items-center align-h-right">
+                <div class="tw-flex tw-flex-col mb-1 tw-ml-auto">
+                <div class="tw-flex tw-flex-row tw-items-center">
                     <p
                         class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
                         @click="reportPost"
@@ -143,14 +143,14 @@
                     <!--</p>-->
                     <p
                         v-if="index !== 0 && canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
                         @click="deletePost"
                     >
                     Delete
                     </p>
                     <p
                         v-if="canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
                         @click="editing = !editing"
                     >
                     Edit

@@ -17441,16 +17441,24 @@ content-catalogue, transition {
   padding: 0 !important;
 }
 
+#replyContainer .tox-tinymce {
+  border-width: 1px;
+}
+
+.tw-dark #replyContainer .tox .tox-toolbar-overlord,
+.tw-dark #replyContainer .tox:not(.tox-tinymce-inline) .tox-editor-header {
+  background-color: transparent;
+}
 .tw-dark #replyContainer .tox-tinymce {
-  border: 2px solid #002039;
-  color: white;
+  border: none;
+  background-color: #002039;
 }
 .tw-dark #replyContainer .tox .tox-edit-area__iframe {
   background-color: transparent;
 }
 .tw-dark #replyContainer .tox .tox-toolbar__primary,
 .tw-dark #replyContainer .tox .tox-toolbar {
-  background-color: #002039 !important;
+  background-color: #081825 !important;
 }
 .tw-dark #replyContainer .tox .tox-edit-area__iframe body#tinymce {
   color: white;
@@ -19584,6 +19592,7 @@ body.play-alongs-player-open #intercom-container {
 html {
   box-sizing: border-box;
   height: 100%;
+  scroll-behavior: smooth;
 }
 html.no-scroll {
   overflow: hidden;
@@ -21103,14 +21112,14 @@ a:visited{
   background-color: #374151;
   color: #fff;
 }
-.tw-input-field[disabled]{
+.tw-input-field[disabled=true]{
   pointer-events: none;
 }
-.tw-input-field[disabled] input[type=date], .tw-input-field[disabled] input[type=email], .tw-input-field[disabled] input[type=number], .tw-input-field[disabled] input[type=search], .tw-input-field[disabled] input[type=tel], .tw-input-field[disabled] input[type=password], .tw-input-field[disabled] input[type=text], .tw-input-field[disabled] select, .tw-input-field[disabled] textarea, .tw-input-field[disabled] button[type="button"]{
+.tw-input-field[disabled=true] input[type=date], .tw-input-field[disabled=true] input[type=email], .tw-input-field[disabled=true] input[type=number], .tw-input-field[disabled=true] input[type=search], .tw-input-field[disabled=true] input[type=tel], .tw-input-field[disabled=true] input[type=password], .tw-input-field[disabled=true] input[type=text], .tw-input-field[disabled=true] select, .tw-input-field[disabled=true] textarea, .tw-input-field[disabled=true] button[type="button"]{
   background-color: #f3f4f6;
   color: #9ca3af;
 }
-.tw-input-field[disabled] label{
+.tw-input-field[disabled=true] label{
   color: #d1d5db;
 }
 .tw-input-field .tw-input-icon{
@@ -21211,15 +21220,15 @@ a:visited{
 .tw-file-field label[aria-valid="true"] .tw-input-icon svg:not(.tw-valid-icon), .tw-file-field label[aria-valid="true"] .tw-input-icon i{
   display: none;
 }
-.tw-file-field[disabled]{
+.tw-file-field[disabled=true]{
   pointer-events: none;
 }
-.tw-file-field[disabled] label{
+.tw-file-field[disabled=true] label{
   background-color: #f3f4f6 !important;
   border-color: #d1d5db !important;
   color: #9ca3af !important;
 }
-.tw-file-field[disabled] .tw-input-messages{
+.tw-file-field[disabled=true] .tw-input-messages{
   display: none;
 }
 .tw-toggle-field .tw-input-message{
@@ -21246,7 +21255,7 @@ a:visited{
 .tw-radio-group .tw-radio-field label{
   font-size: 0.875rem;
 }
-[disabled] .tw-radio-group .tw-radio-field label{
+[disabled=true] .tw-radio-group .tw-radio-field label{
   color: #9ca3af;
 }
 .tw-fieldset{
@@ -21270,13 +21279,13 @@ a:visited{
   display: block;
   color: #ef4444;
 }
-.tw-fieldset[disabled]{
+.tw-fieldset[disabled=true]{
   pointer-events: none;
 }
-.tw-fieldset[disabled] .tw-fieldset-title{
+.tw-fieldset[disabled=true] .tw-fieldset-title{
   color: #d1d5db;
 }
-.tw-fieldset[disabled] .tw-input-message{
+.tw-fieldset[disabled=true] .tw-input-message{
   display: none;
 }
 .tw-with-tooltip{
@@ -21511,11 +21520,11 @@ a:visited{
 .tw--bottom-44{
   bottom: -11rem !important;
 }
-.tw-z-\[150\]{
-  z-index: 150 !important;
-}
 .tw-z-10{
   z-index: 10 !important;
+}
+.tw-z-\[150\]{
+  z-index: 150 !important;
 }
 .tw-z-0{
   z-index: 0 !important;
@@ -21540,6 +21549,9 @@ a:visited{
 }
 .tw-z-\[99\]{
   z-index: 99 !important;
+}
+.tw-z-\[100\]{
+  z-index: 100 !important;
 }
 .tw-order-first{
   order: -9999 !important;
@@ -21856,9 +21868,6 @@ a:visited{
 }
 .tw-mr-10{
   margin-right: 2.5rem !important;
-}
-.tw-mb-0\.5{
-  margin-bottom: 0.125rem !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
@@ -22301,11 +22310,11 @@ a:visited{
 .tw-max-w-4xl{
   max-width: 56rem !important;
 }
-.tw-max-w-\[280px\]{
-  max-width: 280px !important;
-}
 .tw-max-w-3xl{
   max-width: 48rem !important;
+}
+.tw-max-w-\[280px\]{
+  max-width: 280px !important;
 }
 .tw-max-w-\[267px\]{
   max-width: 267px !important;
@@ -22532,6 +22541,9 @@ a:visited{
 .tw-items-start{
   align-items: flex-start !important;
 }
+.tw-items-end{
+  align-items: flex-end !important;
+}
 .tw-items-center{
   align-items: center !important;
 }
@@ -22599,6 +22611,9 @@ a:visited{
 }
 .tw-overflow-y-scroll{
   overflow-y: scroll !important;
+}
+.tw-scroll-smooth{
+  scroll-behavior: smooth !important;
 }
 .tw-truncate{
   overflow: hidden !important;
@@ -22852,6 +22867,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(238 238 238 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-black{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-\[\#000C17\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
@@ -22863,10 +22882,6 @@ a:visited{
 .tw-bg-\[\#E7EFF6\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(231 239 246 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-black{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-guitareo{
   --tw-bg-opacity: 1 !important;
@@ -23130,13 +23145,13 @@ a:visited{
   padding-left: 4rem !important;
   padding-right: 4rem !important;
 }
-.tw-py-\[20px\]{
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
-}
 .tw-py-20{
   padding-top: 5rem !important;
   padding-bottom: 5rem !important;
+}
+.tw-py-\[20px\]{
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
 }
 .tw-py-1{
   padding-top: 0.25rem !important;
@@ -23496,6 +23511,10 @@ a:visited{
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
 }
+.tw-text-4xl{
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
+}
 .tw-text-\[16px\]{
   font-size: 16px !important;
 }
@@ -23552,10 +23571,6 @@ a:visited{
 }
 .tw-text-\[75px\]{
   font-size: 75px !important;
-}
-.tw-text-4xl{
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important;
 }
 .tw-text-13{
   font-size: 13px !important;
@@ -24164,6 +24179,10 @@ a:visited{
 }
 .tw-dark .dark\:tw-bg-\[\#002039\]\/\[0\.7\]{
   background-color: rgb(0 32 57 / 0.7) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#00101D\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-bg-transparent{
   background-color: transparent !important;

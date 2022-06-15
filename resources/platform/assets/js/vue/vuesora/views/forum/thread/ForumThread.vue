@@ -201,7 +201,6 @@
                     />
                 </div>
             </div>
-
             <!-- Thread Reply Section -->
             <section v-if="!thread.isLocked"
                 class="tw-flex tw-flex-row pv-3"
@@ -219,10 +218,10 @@
                         </div>
                     </div>
                     <!-- User Info -->
-                    <div class="tw-font-bebas-neue tw-uppercase tw-text-center">
-                        <p class="tw-text-lg tw-mb-0.5 dark:tw-text-white">{{ currentUser.userExpVal }}</p>
-                        <p class="tw-text-base tw-mb-0.5 dark:tw-text-white">Level {{ currentUser.progressLevel }}</p>
-                        <p class="tw-text-base tw-text-gray-400 dark:tw-text-[#9EC0DC] ">{{ currentUser.totalPosts }} Posts</p>
+                    <div class="tw-text-center">
+                        <p class="tw-font-bebas-neue tw-uppercase tw-text-xl dark:tw-text-white">{{ currentUser.userExpVal }}</p>
+                        <p class="tw-font-bebas-neue tw-uppercase tw-text-base dark:tw-text-white">Level {{ currentUser.progressLevel }}</p>
+                        <p class="tw-text-sm tw-text-gray-400 dark:tw-text-white ">{{ currentUser.totalPosts }} Posts</p>
                     </div>
                 </div>
 
@@ -237,6 +236,8 @@
                         
                         <text-editor
                             ref="textEditor"
+                            :key="editorKey"
+                            :isDarkMode="isDarkMode"
                             :is-reply-section="true"
                             v-model="postReplyInterface"
                             @input="handleInput"
@@ -255,7 +256,7 @@
                         >
 
                         <div class="flex tw-flex-col md:tw-flex-row mt-2 tw-justify-center md:tw-justify-between">
-                            <a :href="signatureURL" 
+                            <a :href="`/${brand}/profile/${currentUser.id}/settings/profile#signatureForm`" 
                                class="tw-btn-primary tw-text-gray-400 dark:tw-text-[#7E9AB1] tw-bg-transparent tw-px-4 hover:tw-bg-gray-100 dark:hover:tw-bg-[#002039] tw-mb-2"
                             >
                                 <i class="fas fa-file-signature tw-mr-1"></i>
@@ -413,19 +414,10 @@ export default {
                     value: 'mine'
                 }
             ],
+            editorKey: 0,
         };
     },
     computed: {
-        signatureURL() {
-            if(this.brand === "drumeo") {
-                return '/members/settings/profile#signatureForm'
-            } else if (this.brand === "guitareo") {
-                return '/members/account/settings#signatureForm';
-            } else {
-                return '/members/profile/settings#signatureForm';
-            }
-        },
-
         brandBgColor() {
             return `tw-bg-${this.brand}`;
         },
@@ -652,7 +644,7 @@ export default {
         },
 
         scrollToReply() {
-            window.scrollTo(0, document.getElementById('replyContainer').offsetTop);
+            document.getElementById('replyContainer').scrollIntoView();
         },
 
         addLikeUsersToModal(payload) {
@@ -691,6 +683,13 @@ export default {
                 });
         },
     },
+    //Force Rerender if Dark Mode prop changes
+    //TinyMCE's init object is not reactive
+    watch: {
+        isDarkMode() {
+            this.editorKey += 1;
+        }
+    }
 };
 </script>
 <style lang="scss">
