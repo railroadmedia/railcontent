@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Modules\UserManagementSystem\Models\FirebaseToken;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railnotifications\Contracts\UserProviderInterface;
 use Railroad\Railnotifications\Entities\User as RailnotificationUser;
@@ -34,7 +35,9 @@ class RailnotificationsUserProvider implements UserProviderInterface
 
     public function getUserFirebaseTokens(int $userId, $types = [])
     : ?array {
-        // TODO: Implement getUserFirebaseTokens() method.
+        $tokens = FirebaseToken::whereUserId($userId)->get()->toArray();
+
+        return $tokens;
     }
 
     public function deleteUserFirebaseTokens(int $userId, array $tokens)
