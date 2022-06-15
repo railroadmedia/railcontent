@@ -10,7 +10,6 @@
         @stop
 
         <div class="flex flex-column pr-1 align-center">
-
             @if(!empty($learningPathSlug) && $learningPathSlug == $brand.'-method')
                 @if($brand==="drumeo" || $brand==="pianote")
                     <div
