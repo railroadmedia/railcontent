@@ -89,6 +89,7 @@ export default {
       onColorModeToggle,
       setDarkMode
     };
+    
   },
 
   beforeMount() {
@@ -176,12 +177,15 @@ export default {
           tw-pt-[58px]
           tw-flex-col
           tw-relative
-          tw-overflow-auto
+          tw-overflow-y-auto
+          tw-overflow-x-hidden
+          tw-scroll-smooth
         "
+        id="content-container"
       >
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">
-          <slot />
+          <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 
         <!-- Footer -->

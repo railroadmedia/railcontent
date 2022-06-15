@@ -135,7 +135,7 @@ export default {
                 this.markingAllAsRead = true;
 
                 // Send request to server
-                UserService.markAllNotificationsAsRead()
+                UserService.markAllNotificationsAsRead(this.brand)
                     .then((resolved) => {
                         if (resolved) {
                             this.notifications.forEach((notification) => {
@@ -177,7 +177,7 @@ export default {
 
             urlParams.page = payload.page;
 
-            window.location.href = `${location.protocol}//${location.host 
+            window.location.href = `${location.protocol}//${location.host
             }${location.pathname}?${QueryString.stringify(urlParams)}`;
         },
     },
