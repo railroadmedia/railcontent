@@ -555,7 +555,7 @@ export default {
                 if (this.cartRequiresAccountInfo) {
                     this.$refs.accountForm.validateForm();
                     if (!this.$refs.accountForm.formValid) {
-                        window.scrollTo({ top: (this.$refs.accountForm.$el.offsetTop - 100), behavior: 'smooth' });
+                        this.$refs.accountForm.$el.scrollIntoView({block: "start"})
                         return;
                     }                                                                                                                                                                                                                       
                 }
@@ -564,7 +564,7 @@ export default {
                     if (!this.shippingAddresses || this.newAddress) {
                         this.$refs.shippingForm.validateForm();
                         if (!this.$refs.shippingForm.formValid) {
-                            window.scrollTo({ top: (this.$refs.shippingForm.$el.offsetTop - 100), behavior: 'smooth' });
+                            this.$refs.shippingForm.$el.scrollIntoView({block: "start"})
                             return;
                         }
                     }
@@ -591,8 +591,7 @@ export default {
                                         message: error.message,
                                         timeout: 7500,
                                     });
-                                    
-                                    window.scrollTo({ top: (this.$refs.paymentForm.$el.offsetTop - 100), behavior: 'smooth' });
+                                    this.$refs.paymentForm.$el.scrollIntoView({block: "start"})
                                     return;
                                 }
                                 this.stripeToken = token;

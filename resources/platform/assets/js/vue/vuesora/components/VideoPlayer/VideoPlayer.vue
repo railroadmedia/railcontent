@@ -787,11 +787,7 @@ export default {
 
             if (element.matches('[data-jump-to-time]')) {
                 this.seek(element.dataset.jumpToTime);
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth',
-                });
+                document.getElementById('replyContainer').scrollIntoView();
             }
         });
 

@@ -655,7 +655,7 @@ export default {
         },
 
         scrollToReply() {
-            window.scrollTo(0, document.getElementById('replyContainer').offsetTop);
+            document.getElementById('replyContainer').scrollIntoView();
         },
 
         addLikeUsersToModal(payload) {

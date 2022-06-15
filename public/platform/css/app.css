@@ -17445,6 +17445,7 @@ content-catalogue, transition {
   border-width: 1px;
 }
 
+.tw-dark #replyContainer .tox .tox-toolbar-overlord,
 .tw-dark #replyContainer .tox:not(.tox-tinymce-inline) .tox-editor-header {
   background-color: transparent;
 }
@@ -19591,6 +19592,7 @@ body.play-alongs-player-open #intercom-container {
 html {
   box-sizing: border-box;
   height: 100%;
+  scroll-behavior: smooth;
 }
 html.no-scroll {
   overflow: hidden;
@@ -21864,9 +21866,6 @@ a:visited{
 .tw-mr-10{
   margin-right: 2.5rem !important;
 }
-.tw-mb-0\.5{
-  margin-bottom: 0.125rem !important;
-}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22606,6 +22605,9 @@ a:visited{
 }
 .tw-overflow-y-scroll{
   overflow-y: scroll !important;
+}
+.tw-scroll-smooth{
+  scroll-behavior: smooth !important;
 }
 .tw-truncate{
   overflow: hidden !important;

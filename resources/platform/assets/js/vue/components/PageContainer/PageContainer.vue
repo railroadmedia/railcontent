@@ -179,7 +179,9 @@ export default {
           tw-relative
           tw-overflow-y-auto
           tw-overflow-x-hidden
+          tw-scroll-smooth
         "
+        id="content-container"
       >
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">
