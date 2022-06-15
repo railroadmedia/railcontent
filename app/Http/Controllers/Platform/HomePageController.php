@@ -195,17 +195,22 @@ class HomePageController extends BaseController
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachId = $currentEvent->fetch('fields.instructor.id');
-            $eventCoachUrl = url()->route('platform.content.first-level',
-                [
-                    'brand' => brand(),
-                    'primaryPage' => 'coaches',
-                    'firstContentSlug' => $eventCoachSlug,
-                    'firstContentId' => $eventCoachId
-                ]
-            );
-            $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
-                    'fields.instructor.slug'
-                )] ?? config('addevent.uniquekeys.brand-overview');
+            if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
+                $eventCoachUrl = url()->route('platform.content.first-level',
+                    [
+                        'brand' => brand(),
+                        'primaryPage' => 'coaches',
+                        'firstContentSlug' => $eventCoachSlug,
+                        'firstContentId' => $eventCoachId
+                    ]
+                );
+                $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
+                        'fields.instructor.slug'
+                    )] ?? config('addevent.uniquekeys.brand-overview');
+            } else {
+                $currentEvent = null;
+            }
+
         }
 
         return view('home.index', [
