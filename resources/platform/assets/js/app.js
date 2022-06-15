@@ -39,6 +39,7 @@ import './vue/vuesora/assets/js/functions/instructor-info';
 import './vue/vuesora/assets/js/third-party/add-event-atc';
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
+import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
@@ -191,8 +192,8 @@ app.component('AppContainer', AppContainer)
    .component('ForumThread', ForumThread)
    .component('TextEditor', TextEditor)
    .component('ContactMemberEmailForm', ContactMemberEmailForm)
-    .component('ContactEmailForm', ContactEmailForm)
-    .component('ContentSchedule', ContentSchedule)
+   .component('ContactEmailForm', ContactEmailForm)
+   .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('VideoPlayer', VideoPlayer)
    .component('ImageCropper', ImageCropper)
@@ -200,6 +201,7 @@ app.component('AppContainer', AppContainer)
    .component('MusoraIcon', MusoraIcon)
    .component('EmailForm', EmailForm)
    .component('StaticHeader', StaticHeader)
+   .component('AddEventModal', AddEventModal)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

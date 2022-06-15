@@ -214,6 +214,13 @@
                                     Subscribe to Calendar
                             </button>
                         </div>
+                        <add-event-modal
+                            modal-id="addToCalendarModal"
+                            subscription-calendar-id="subscriptionCalendarId"
+                            single-event="singleEvent"
+                            theme-color="drumeo"
+                            toggleSubscribe="toggleSubscribe"
+                    ></add-event-modal>
                     @endif
                 </div>
             </div>
@@ -235,6 +242,13 @@
                         </div>
                     </div>
                 </div>
+                <add-event-modal
+                    modal-id="addToCalendarModal"
+                    subscription-calendar-id="subscriptionCalendarId"
+                    single-event="singleEvent"
+                    theme-color="drumeo"
+                    toggleSubscribe="toggleSubscribe"
+                ></add-event-modal>
             </div>
         @endif
 
