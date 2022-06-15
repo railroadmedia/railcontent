@@ -14,10 +14,10 @@ class NotificationDecorator
             $url = str_replace(
                 ['www.drumeo.com', 'laravel/public/members', 'members/forums'],
                 [$domain, brand(), 'forums'],
-                $notification['content']['url']
+                $notification->getContentUrl()
             );
 
-            $notifications[$index]['content']['url'] = $url;
+            $notification->setContentUrl($url);
         }
 
         return $notifications;
