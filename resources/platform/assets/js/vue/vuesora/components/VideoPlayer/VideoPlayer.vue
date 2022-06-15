@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -695,6 +695,10 @@ function enableIntersectionObserver(videoWrap) {
     intersection.value.observe(videoWrap.parentElement);
 }
 
+function handleOverlayClick () {
+    playPause();
+};
+
 onMounted(() => {
     const supportsMSE = false;
 
@@ -807,6 +811,14 @@ onMounted(() => {
         enableIntersectionObserver(videoWrap.value);
     }
 })
+
+onUpdated(() => {
+    const overlay = document.getElementById('modalOverlay');
+    if (overlay && !overlay.getAttribute('overlay-click-pause-video')) {
+        overlay.addEventListener("click", handleOverlayClick);
+        overlay.setAttribute('overlay-click-pause-video', true)
+    }
+});
 
 const isAbrEnabled = computed({
     get() {
@@ -965,6 +977,12 @@ const currentTimeInSeconds = computed({
 onBeforeUnmount(() => {
     document.removeEventListener('click', closeDrawers);
     document.removeEventListener('mouseup', mouseUpEventHandler);
+
+    const overlay = document.getElementById('modalOverlay');
+    if (overlay && overlay.getAttribute('overlay-click-pause-video')) {
+        overlay.removeEventListener("click", handleOverlayClick);
+        overlay.removeAttribute('overlay-click-pause-video');
+    }
 
     shakaPlayer.destroy();
 })
