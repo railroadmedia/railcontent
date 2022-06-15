@@ -110,19 +110,19 @@
     {{-- SINGEO --}}
     {{-- @include('partials.bladesora.members.account.settings.profile.gear-form-singing', [
         'brand' => '{{ $brand }}',
-        'singingSince' => user()->getSingingSinceYear(),
-        'mic' => user()->getSingingGearMicBrands(),
+        'singingSince' => user()->singing_since_year,
+        'mic' => user()->singing_gear_mic_brands,
 
         'method' => 'patch',
         'action' => '/user-management-system/user/update/' . user()->id,
         'singingSinceInput' => [
             'inputName' => 'singing_since_year',
-            'inputValue' => old('singing_since_year', user()->getSingingSinceYear() ?? ''),
+            'inputValue' => old('singing_since_year', user()->singing_since_year ?? ''),
             'inputErrors' => $errors->get('singing_since_year'),
         ],
         'micBrandInput' => [
             'inputName' => 'singing_gear_mic_brands',
-            'inputValue' => old('singing_gear_mic_brands', user()->getSingingGearMicBrands() ?? ''),
+            'inputValue' => old('singing_gear_mic_brands', user()->singing_gear_mic_brands ?? ''),
             'inputErrors' => $errors->get('singing_gear_mic_brands'),
         ]
     ]) --}}
