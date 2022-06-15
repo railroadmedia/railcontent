@@ -14,7 +14,7 @@
         'sticks' => user()->drums_gear_stick_brands,
 
         'method' => 'patch',
-        'action' => '/usora/user/update/' . user()->id . '/',
+        'action' => '/user-management-system/user/update/' . user()->id,
         'drummingSinceInput' => [
             'inputName' => 'drums_playing_since_year',
             'inputValue' => old('drums_playing_since_year', user()->drums_playing_since_year ?? ''),
@@ -50,7 +50,7 @@
         'keyboard' => user()->piano_gear_keyboard_brands,
 
         'method' => 'patch',
-        'action' => '/usora/user/update/' . user()->id,
+        'action' => '/user-management-system/user/update/' . user()->id,
         'playedSinceInput' => [
             'inputName' => 'piano_playing_since_year',
             'inputValue' => old('piano_playing_since_year', user()->piano_playing_since_year ?? ''),
@@ -78,7 +78,7 @@
         'strings' => user()->guitar_gear_string_brands,
 
         'method' => 'patch',
-        'action' => '/usora/user/update/' . user()->id,
+        'action' => '/user-management-system/user/update/' . user()->id,
         'playedGuitarSinceInput' => [
             'inputName' => 'guitar_playing_since_year',
             'inputValue' => old('guitar_playing_since_year', user()->guitar_playing_since_year ?? ''),
@@ -108,19 +108,19 @@
     ])
 
     {{-- SINGEO --}}
-    {{-- @include('partials.bladesora.members.account.settings.profile.gear-form-piano', [
+    {{-- @include('partials.bladesora.members.account.settings.profile.gear-form-singing', [
         'brand' => '{{ $brand }}',
         'singingSince' => user()->getSingingSinceYear(),
         'mic' => user()->getSingingGearMicBrands(),
 
         'method' => 'patch',
-        'action' => '/usora/user/update/' . user()->id,
-        'playedSinceInput' => [
+        'action' => '/user-management-system/user/update/' . user()->id,
+        'singingSinceInput' => [
             'inputName' => 'singing_since_year',
             'inputValue' => old('singing_since_year', user()->getSingingSinceYear() ?? ''),
             'inputErrors' => $errors->get('singing_since_year'),
         ],
-        'pianoBrandInput' => [
+        'micBrandInput' => [
             'inputName' => 'singing_gear_mic_brands',
             'inputValue' => old('singing_gear_mic_brands', user()->getSingingGearMicBrands() ?? ''),
             'inputErrors' => $errors->get('singing_gear_mic_brands'),

@@ -4,7 +4,7 @@
  */
 
 // import validator from 'validator';
-import flatpickr from "flatpickr";
+import flatpickr from 'flatpickr';
 
 export default class Forms {
     constructor(form) {
@@ -95,7 +95,7 @@ export default class Forms {
      */
     static initializeFlatpickrInputs() {
         const flatpickrInputs = document.querySelectorAll('.flatpickr');
-        console.log(flatpickrInputs)
+
         Array.from(flatpickrInputs).forEach((input) => {
             // Check for the class .enable-time to enable the time input
             const enableTime = input.classList.contains('enable-time');
