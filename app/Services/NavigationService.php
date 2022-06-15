@@ -87,7 +87,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/' . brand() . '/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -161,7 +161,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/' . brand() . '/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -245,7 +245,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/' . brand() . '/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -309,7 +309,7 @@ class NavigationService
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/' . brand() . '/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],

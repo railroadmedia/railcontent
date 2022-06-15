@@ -69,6 +69,7 @@
                     </div>
 
                     <content-schedule :preloaded-content="{{ $scheduleEvents }}"
+                                    brand="{{ $brand }}"
                                     subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
                                     theme-color="{{ $brand }}"></content-schedule>
                 </div>
