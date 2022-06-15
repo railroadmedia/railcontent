@@ -13,10 +13,10 @@
         <div id="editForm" class="tw-flex tw-flex-col tw-w-full">
             <form method="POST" action="/railnotifications/user-notification-settings/update">
                 <input type="hidden" name="redirect" value="{{ url()->current() }}">
-                <input type="hidden" name="brand" value="{{ brand() }}">
                 {{ method_field('PATCH') }}
                 {{ csrf_field() }}
 
+                @include('account.settings.partials._brand-notifications-settings', ['allBrands' => $allBrands])
                 <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
                     <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
