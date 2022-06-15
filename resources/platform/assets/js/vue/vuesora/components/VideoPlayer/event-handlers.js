@@ -236,7 +236,6 @@ export default {
                 Period: () => this.setRate({ rate: this.currentPlaybackRate + 0.25 }),
                 Comma: () => this.setRate({ rate: this.currentPlaybackRate - 0.25 }),
             },
-
             keyboardEventHandlersShift: {
                 Period: true,
                 Comma: true,
