@@ -21869,21 +21869,6 @@ a:visited{
 .tw-mr-10{
   margin-right: 2.5rem !important;
 }
-.tw-mb-4{
-  margin-bottom: 1rem !important;
-}
-.tw-ml-4{
-  margin-left: 1rem !important;
-}
-.tw-ml-auto{
-  margin-left: auto !important;
-}
-.tw-mb-0{
-  margin-bottom: 0px !important;
-}
-.tw-mb-4{
-  margin-bottom: 1rem !important;
-}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22373,9 +22358,6 @@ a:visited{
 .tw-flex-none{
   flex: none !important;
 }
-.tw-flex-auto{
-  flex: 1 1 auto !important;
-}
 .tw-flex-shrink-0{
   flex-shrink: 0 !important;
 }
@@ -22393,9 +22375,6 @@ a:visited{
 }
 .tw-grow-0{
   flex-grow: 0 !important;
-}
-.tw-grow{
-  flex-grow: 1 !important;
 }
 .tw-origin-center{
   transform-origin: center !important;
@@ -23329,10 +23308,6 @@ a:visited{
   padding-left: 2.5rem !important;
   padding-right: 2.5rem !important;
 }
-.tw-px-4{
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -23604,18 +23579,6 @@ a:visited{
   font-size: 13px !important;
   line-height: 16.25px !important;
 }
-.tw-text-2xl{
-  font-size: 1.5rem !important;
-  line-height: 2rem !important;
-}
-.tw-text-lg{
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important;
-}
-.tw-text-2xl{
-  font-size: 1.5rem !important;
-  line-height: 2rem !important;
-}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -23633,9 +23596,6 @@ a:visited{
 }
 .tw-font-normal{
   font-weight: 400 !important;
-}
-.tw-font-bold{
-  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -23828,10 +23788,6 @@ a:visited{
 .tw-text-\[\#232e30\]{
   --tw-text-opacity: 1 !important;
   color: rgb(35 46 48 / var(--tw-text-opacity)) !important;
-}
-.tw-text-black{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -24258,18 +24214,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
 }
-.tw-dark .dark\:tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
-.tw-dark .dark\:tw-text-\[\#9EC0DC\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
-}
-.tw-dark .dark\:tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-placeholder-opacity)) !important;
@@ -24466,12 +24410,6 @@ a:visited{
   }
   .sm\:tw-grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-  .sm\:tw-grid-cols-2{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-  .sm\:tw-grid-cols-2{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
   .sm\:tw-grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -25261,12 +25199,6 @@ a:visited{
   }
   .xl\:tw-grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-  }
-  .xl\:tw-grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  }
-  .xl\:tw-grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
   .xl\:tw-grid-rows-1{
     grid-template-rows: repeat(1, minmax(0, 1fr)) !important;
