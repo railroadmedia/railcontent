@@ -52,7 +52,8 @@ environments:
     web-staging-three:
         domain: 'web-staging-three.musora.com'
         memory: 1024
-        cli-memory: 512
+        cli-memory: 2048
+        timeout: 900
         runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
