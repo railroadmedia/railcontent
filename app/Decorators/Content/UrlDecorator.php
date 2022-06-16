@@ -4,6 +4,7 @@ namespace App\Decorators\Content;
 
 use App\Maps\ContentTypeHierarchyMap;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Support\Collection;
@@ -21,7 +22,7 @@ class UrlDecorator extends ModeDecoratorBase
     }
 
     /**
-     * @param Collection $contents
+     * @param Collection|ContentEntity[] $contents
      * @return array|Collection
      */
     public function decorate(Collection $contents)
@@ -35,14 +36,17 @@ class UrlDecorator extends ModeDecoratorBase
             self::$contentCache[$content['id']] = $content;
         }
 
-        $contents = $this->fetchAndCacheParents($contents);
-
         // set url based on type
         foreach ($contents as $contentIndex => $content) {
+            /**
+             * @var $content ContentEntity
+             */
+
             $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
+            $contentParentData = $content->getParentContentData();
 
             // first-level types
-            if (empty($content['parent_id']) &&
+            if (count($contentParentData) == 1 &&
                 !empty($contentTypeToURLSlugMap[$content['type']])) {
                 $contents[$contentIndex]['url'] =
                     url()->route(
@@ -50,53 +54,47 @@ class UrlDecorator extends ModeDecoratorBase
                         [
                             'brand' => $content['brand'],
                             $contentTypeToURLSlugMap[$content['type']],
-                            $content['slug'],
-                            $content['id']
+                            $contentParentData[0]->slug,
+                            $contentParentData[0]->id,
                         ]
                     );
             }
 
             // second-level types
-            if (!empty($content['parent_id']) &&
-                !empty($parent1 = self::$contentCache[$content['parent_id']] ?? null) &&
-                empty($parent1['parent_id']) &&
-                !empty($contentTypeToURLSlugMap[$parent1['type']])) {
+            if (count($contentParentData) == 2 &&
+                !empty($contentTypeToURLSlugMap[$contentParentData[1]->type])) {
                 $contents[$contentIndex]['url'] =
                     url()->route(
                         'platform.content.second-level',
                         [
                             'brand' => $content['brand'],
-                            $contentTypeToURLSlugMap[$parent1['type']],
-                            $parent1['slug'],
-                            $parent1['id'],
-                            $content['slug'],
-                            $content['id']
+                            $contentTypeToURLSlugMap[$contentParentData[1]->type],
+                            $contentParentData[1]->slug,
+                            $contentParentData[1]->id,
+                            $contentParentData[0]->slug,
+                            $contentParentData[0]->id,
                         ]
                     );
             }
 
             // third-level types
-            if (!empty($content['parent_id']) &&
-                !empty($parent1 = self::$contentCache[$content['parent_id']] ?? null) &&
-                !empty($parent1['parent_id']) &&
-                !empty($parent2 = self::$contentCache[$parent1['parent_id']] ?? null) &&
-                !empty($contentTypeToURLSlugMap[$parent2['type']])) {
+            if (count($contentParentData) == 3 &&
+                !empty($contentTypeToURLSlugMap[$contentParentData[2]->type])) {
                 $contents[$contentIndex]['url'] = url()->route(
                     'platform.content.third-level',
                     [
                         'brand' => $content['brand'],
-                        $contentTypeToURLSlugMap[$parent2['type']],
-                        $parent2['slug'],
-                        $parent2['id'],
-                        $parent1['slug'],
-                        $parent1['id'],
-                        $content['slug'],
-                        $content['id'],
+                        $contentTypeToURLSlugMap[$contentParentData[2]->type],
+                        $contentParentData[2]->slug,
+                        $contentParentData[2]->id,
+                        $contentParentData[1]->slug,
+                        $contentParentData[1]->id,
+                        $contentParentData[0]->slug,
+                        $contentParentData[0]->id,
                     ]
                 );
             }
         }
-
 
         return $contents;
     }

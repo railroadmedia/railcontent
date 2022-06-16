@@ -12,6 +12,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     pre-production:
         domain: 'pre-production.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
@@ -21,6 +22,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     beta-testing:
         domain: 'beta-testing.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
@@ -30,6 +32,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-one:
         domain: 'web-staging-one.musora.com'
+        scheduler: false
         runtime: docker
         memory: 1024
         cli-memory: 512
@@ -39,6 +42,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-two:
         domain: 'web-staging-two.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 2048
         tmp-storage: 8192
@@ -51,9 +55,11 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-three:
         domain: 'web-staging-three.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 2048
-        timeout: 900
+        timeout: 120
+        cli-timeout: 900
         runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -61,6 +67,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-four:
         domain: 'web-staging-four.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
@@ -70,6 +77,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-five:
         domain: 'web-staging-five.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
@@ -79,6 +87,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-one:
         domain: 'app-staging-one.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
@@ -88,6 +97,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-two:
         domain: 'app-staging-two.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
@@ -97,6 +107,7 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-three:
         domain: 'app-staging-three.musora.com'
+        scheduler: false
         memory: 1024
         cli-memory: 512
         runtime: docker
