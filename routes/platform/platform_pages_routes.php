@@ -12,6 +12,7 @@ use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Http\Controllers\Platform\MailController;
+use App\Http\Controllers\Platform\SupportController;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -322,7 +323,20 @@ Route::domain('{musoraDomain}')
         /*
          * Mails
          */
-        Route::post('//{brand}/mail', [MailController::class, 'sendFromMember'])
+        Route::post('/{brand}/mail', [MailController::class, 'sendFromMember'])
             ->whereIn('brand', all_brands())
             ->name('platform.mail');
+
+        /*
+         * Support
+         */
+        Route::get('/{brand}/support', [SupportController::class, 'memberSupport'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.support');
+
+//        //todo: to be moved outside members area
+        Route::get('/{brand}/contact', [SupportController::class, 'contact'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.contact');
+
     });

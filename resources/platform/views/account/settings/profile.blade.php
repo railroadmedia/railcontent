@@ -85,11 +85,11 @@
             </div>
 
             {{-- GEAR LISTS --}}
-            {{-- <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+            <div class="tw-flex tw-flex-col pa-3 tw-w-full tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                 @include('partials.bladesora.members.account.settings.profile.gear-forms', [
                     'brand' => $brand
                 ])
-            </div> --}}
+            </div>
 
             {{-- GEAR PHOTO --}}
             {{-- <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">

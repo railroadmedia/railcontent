@@ -51,7 +51,7 @@
             'hideUser' => true,
         ])
             @slot('content')
-                <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center">
+                <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full">
                     <div class="pv-5"></div>
                     <div class="pv-5 hide-xs-only"></div>
                     <div class="pv-5 hide-md-down"></div>

@@ -1,6 +1,6 @@
 <template>
     <div class="tw-input-field" :disabled="disabled">
-        <label :id="id" class="tw-label">
+        <label :id="id" class="tw-label tw-text-[#00101D] dark:tw-text-white">
             <span v-if="required" class="tw-text-red-500">*</span>
             {{ label }}
         </label>
@@ -8,7 +8,7 @@
         <div class="tw-input-wrapper">
             <!-- Dropdown Trigger / Label -->
             <button type="button"
-                    class="tw-text-sm tw-h-12 tw-transition-all tw-py-1 tw-leading-4"
+                    class="tw-text-sm tw-h-12 tw-transition-all tw-py-1 tw-leading-4 dark:tw-bg-[#00101D] dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74]"
                     :class="[themeFocusBorder, selectedValue ? 'tw-bg-gray-100' : 'tw-bg-white']"
                     @click="dropdownMenuOpen = ! dropdownMenuOpen"
                     @keyup.esc="closeDropdowns()"
