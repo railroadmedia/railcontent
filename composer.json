@@ -24,7 +24,7 @@
         "railroad/ecommerce": "^5.0",
         "railroad/event-data-synchronizer": "8.0.*",
         "railroad/railcontent": "dev-0.5-php-mysql-8-migration",
-        "railroad/railforums": "2.0.*",
+        "railroad/railforums": "v2.0.x-dev as v2.0.6",
         "railroad/railnotifications": "v3.0.x-dev as v3.0",
         "railroad/usora": "3.0.*",
 	    "railroad/mailora": "^3.0",
