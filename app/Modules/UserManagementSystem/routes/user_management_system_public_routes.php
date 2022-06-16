@@ -14,8 +14,11 @@ Route::group(
          */
         Route::post(
             'login/token',
-            AuthenticationController::class . '@loginToken'
-        )
+            AuthenticationController::class . '@loginToken',
+        )->middleware(     [
+//            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
+            \Railroad\MusoraApi\Middleware\AddMemberData::class,
+        ])
             ->name('user_management_system.login.token');
 
         Route::get(

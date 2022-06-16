@@ -10,7 +10,7 @@
       tw-border-[#E4E4E7]
       dark:tw-border-[#223457]
       tw-no-underline
-      hover:tw-bg-gray-[#E7EFF6]
+      hover:tw-bg-[#E7EFF6]
       dark:hover:tw-bg-[#002039]
     "
     :class="class_object"

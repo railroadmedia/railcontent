@@ -5,6 +5,7 @@ const colors = require("tailwindcss/colors");
 const { keyframes } = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  important: true,
   mode: 'jit',
   prefix: "tw-",
   darkMode: "class",

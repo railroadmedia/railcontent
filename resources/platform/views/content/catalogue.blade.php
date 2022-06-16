@@ -77,7 +77,7 @@
                             <musora-icon icon-name="academic-cap-filled" 
                                          class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         @endif
-                        <span class="tw-text-32">{{ ucfirst($catalogueMeta['name']) }}</span>
+                        <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                     </h1>
                     <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
                         {{ $catalogueMeta['description'] }}

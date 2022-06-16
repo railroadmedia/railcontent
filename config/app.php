@@ -172,6 +172,7 @@ return [
         Railroad\Railforums\Providers\ForumServiceProvider::class,
         Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
         Railroad\Permissions\Providers\PermissionsServiceProvider::class,
+        Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
 
         /*
          * Module Service Providers

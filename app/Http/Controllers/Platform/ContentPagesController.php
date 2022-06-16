@@ -55,7 +55,19 @@ class ContentPagesController extends BaseController
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
-        $futureLessons = $this->contentService->getFiltered(1, 10, '-published_on', [$lessonType]);
+        $futureLessons = $this->contentService->getFiltered(
+            1,
+            10,
+            '-published_on',
+            [$lessonType],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false
+        );
 
         foreach ($futureLessons['results'] as $futureLessonIndex => $futureLesson) {
             if (Carbon::parse($futureLesson['published_on']) < Carbon::now()) {
@@ -77,6 +89,8 @@ class ContentPagesController extends BaseController
             $defaultPage = $defaultPage - count($futureLessons['results']);
         }
 
+        ContentRepository::$pullFilterResultsOptionsAndCount = true;
+
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', $defaultPage),
@@ -87,8 +101,11 @@ class ContentPagesController extends BaseController
             $request->get('required_fields', []),
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
+            $request->get('included_user_states', []),
+            true
         );
+
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
         $routinesCount = $recentRoutines = null;
         $hasRecentRoutines = false;

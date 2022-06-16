@@ -12,7 +12,7 @@
                     <div class="tw-flex tw-flex-col tw-pr-1">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                             <i class="fas fa-calendar-alt tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                            <span class="tw-text-32">Schedule</span>
+                            <span class="tw-text-32 tw-font-bold">Schedule</span>
                         </h1>
 
                         <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
@@ -52,7 +52,7 @@
                 @endslot
             @endcomponent
 
-            <div class="tw-container tw-mx-auto mv-2">
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
                 <div class="content-table tw-flex tw-flex-col tw-mb-3">
                     <div id="scheduleHeader" class="tw-flex tw-flex-row pv-3 tw-flex-wrap tw-items-center">
                         <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-2 m-xs-only">
@@ -69,6 +69,7 @@
                     </div>
 
                     <content-schedule :preloaded-content="{{ $scheduleEvents }}"
+                                    brand="{{ $brand }}"
                                     subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
                                     theme-color="{{ $brand }}"></content-schedule>
                 </div>

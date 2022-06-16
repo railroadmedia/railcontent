@@ -7,7 +7,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class LessonAssignmentDecorator extends TypeDecoratorBase
 {
-    public static $skip = true;
+    public static $skip = false;
 
     public function decorate(Collection $contents)
     {

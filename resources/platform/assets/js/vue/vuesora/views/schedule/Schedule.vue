@@ -35,6 +35,10 @@ export default {
     },
     mixins: [UserCatalogueEvents],
     props: {
+        brand: {
+            type: String,
+            default: () => 'drumeo',
+        },
         themeColor: {
             type: String,
             default: () => 'drumeo',
