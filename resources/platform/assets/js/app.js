@@ -172,6 +172,7 @@ const app = createApp({
     }
 });
 
+// in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
 
 //Register Global Components
@@ -226,7 +227,6 @@ app.use(store);
 app.use(VueAxios, axios);
 app.use(Chatsora);
 app.mount('#app');
-// in order to use provide/inject this will be default in vue v3.3
 
 
 window.onload = function(){
