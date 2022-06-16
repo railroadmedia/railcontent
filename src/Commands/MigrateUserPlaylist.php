@@ -66,6 +66,7 @@ class MigrateUserPlaylist extends Command
         );
 
         // this allows the command to run after if fails once
+        $this->info('Setting old ID column on user_playlists table.');
         if (Schema::connection(config('railcontent.database_connection_name'))
             ->hasColumn(config('railcontent.table_prefix') . 'user_playlists', 'old_id')) {
             $dbConnection->table(config('railcontent.table_prefix') . 'user_playlists')
@@ -79,6 +80,7 @@ class MigrateUserPlaylist extends Command
         }
 
         // fix up invalid date time error
+        $this->info('Cleaning up invalid date data on RC tables...');
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->where('created_on', '<', '2000-01-01')
             ->update(['created_on' => '2011-01-01 00:00:00']);
@@ -110,6 +112,8 @@ WHERE
     c.`type` IN ('%s')
 EOT;
 
+        $this->info('Inserting content rows in to user_playlists table...');
+
         $statement = sprintf(
             $sql,
             config('railcontent.table_prefix') . 'user_playlists',
@@ -134,6 +138,7 @@ JOIN `%s` p
     ON c.`parent_id` = p.`old_id`
 EOT;
 
+        $this->info('Inserting link rows in to user_playlist_content table...');
         $statement2 = sprintf(
             $sql2,
             config('railcontent.table_prefix') . 'user_playlist_content',
@@ -146,6 +151,8 @@ EOT;
         $finish = microtime(true) - $start;
         $format = "Finished user playlist data migration  in total %s seconds\n ";
         $this->info(sprintf($format, $finish));
+
+        $this->info('Dropping temp column from user_playlists...');
 
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix') . 'user_playlists', function (Blueprint $table) {
