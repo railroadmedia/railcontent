@@ -47,7 +47,6 @@
                     @endif
 
                     <text-editor field-key="first_post_content"
-                                 :is-dark-mode="slotProps.isDarkMode"
                                  initial-value="{{ old('first_post_content') }}">
                     </text-editor>
 

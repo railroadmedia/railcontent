@@ -1,18 +1,8 @@
 <template>
-    <div class="tw-flex tw-flex-col">
-        <input
-            v-model="contentInterface"
-            type="hidden"
-            :name="fieldKey"
-            class=""
-        >
-
-        <tinymce-editor
-            v-model="contentInterface"
-            api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
-            :init="initObject"
-            @input="handleInput"
-        ></tinymce-editor>
+    <div class="tw-flex tw-flex-col" v-if="renderTinyMCE">
+        <input v-model="contentInterface" type="hidden" :name="fieldKey" class="">
+        <tinymce-editor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
+            :init="initObject" @input="handleInput"></tinymce-editor>
     </div>
 </template>
 <script>
@@ -23,6 +13,7 @@ export default {
     components: {
         'tinymce-editor': Editor,
     },
+    inject: ['isDarkModeSelected'],
     model: {
         prop: 'contentInterface',
         event: 'input',
@@ -48,27 +39,41 @@ export default {
             default: () => 'content',
         },
         isReplySection: {
-            type: Boolean, 
-            default: false,
-        },
-        isDarkMode: {
-            type: Boolean, 
+            type: Boolean,
             default: false,
         }
     },
+
     data() {
         return {
             currentValue: this.initialValue,
+            renderTinyMCE: true,
         };
     },
+
+    watch: {
+        initObject(newInit, oldInit) {
+            if (newInit.body_class !== oldInit.body_class) {
+                this.forceReRender();
+            }
+        }
+    },
+
     computed: {
         contentInterface: {
             get() {
                 return this.currentValue;
-            },              
+            },
             set(val) {
                 this.currentValue = val;
             },
+        },
+
+        isDarkMode: {
+            get() {
+                // Has to access .value because it was created with computed() function
+                return this.isDarkModeSelected.value;
+            }
         },
 
         initObject() {
@@ -113,6 +118,13 @@ export default {
         handleInput() {
             this.$emit('input', {
                 currentValue: this.currentValue,
+            });
+        },
+        forceReRender() {
+            this.renderTinyMCE = false;
+
+            this.$nextTick().then(() => {
+                this.renderTinyMCE = true;
             });
         }
     },

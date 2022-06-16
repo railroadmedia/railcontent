@@ -236,8 +236,6 @@
                         
                         <text-editor
                             ref="textEditor"
-                            :key="editorKey"
-                            :isDarkMode="isDarkMode"
                             :is-reply-section="true"
                             v-model="postReplyInterface"
                             @input="handleInput"
@@ -375,10 +373,6 @@ export default {
             type: String,
             default: () => document.referrer,
         },
-        isDarkMode: {
-            type: Boolean, 
-            default: false,
-        },
     },
     data() {
         return {
@@ -414,7 +408,6 @@ export default {
                     value: 'mine'
                 }
             ],
-            editorKey: 0,
         };
     },
     computed: {
@@ -683,13 +676,6 @@ export default {
                 });
         },
     },
-    //Force Rerender if Dark Mode prop changes
-    //TinyMCE's init object is not reactive
-    watch: {
-        isDarkMode() {
-            this.editorKey += 1;
-        }
-    }
 };
 </script>
 <style lang="scss">
