@@ -71,8 +71,7 @@ export default {
 
         isDarkMode: {
             get() {
-                // Has to access .value because it was created with computed() function
-                return this.isDarkModeSelected.value;
+                return this.isDarkModeSelected;
             }
         },
 
