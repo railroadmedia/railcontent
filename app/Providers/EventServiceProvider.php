@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Railroad\Railforums\EventListeners\ThreadEventListener;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\PostLiked;
+use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
 
 class EventServiceProvider extends ServiceProvider
@@ -20,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PostCreated::class => [
             NotificationEventListener::class.'@handlePostCreated',
+        ],
+        ThreadCreated::class => [
+            ThreadEventListener::class.'@onCreated',
         ],
 
     ];
