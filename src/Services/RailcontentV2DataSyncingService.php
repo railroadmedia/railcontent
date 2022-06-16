@@ -11,13 +11,16 @@ class RailcontentV2DataSyncingService
 {
     private DatabaseManager $databaseManager;
     private RailcontentURLProviderInterface $railcontentURLProvider;
+    private ContentService $contentService;
 
     public function __construct(
         DatabaseManager $databaseManager,
-        RailcontentURLProviderInterface $railcontentURLProvider
+        RailcontentURLProviderInterface $railcontentURLProvider,
+        ContentService $contentService
     ) {
         $this->databaseManager = $databaseManager;
         $this->railcontentURLProvider = $railcontentURLProvider;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -133,6 +136,7 @@ class RailcontentV2DataSyncingService
         // 'child_count' => 'child_count'
         // 'hierarchy_position_number' => 'hierarchy_position_number'
         // 'like_count' => 'like_count'
+        // 'length_in_seconds' => 'length_in_seconds'
 
         $contentColumnsToUpdate['web_url_path'] = null;
         $contentColumnsToUpdate['mobile_app_url_path'] = null;
@@ -161,6 +165,20 @@ class RailcontentV2DataSyncingService
             $databaseConnection->table(config('railcontent.table_prefix') . 'content_likes')
                 ->where('content_id', $contentId)
                 ->count();
+
+        // length_in_seconds
+        if (!empty($contentRow->video)) {
+            $lengthInSecondsFieldValue = $databaseConnection
+                    ->table(config('railcontent.table_prefix') . 'content_fields')
+                    ->where('content_id', $contentRow->video)
+                    ->where('key', 'length_in_seconds')
+                    ->first()
+                    ->value ?? 0;
+
+            var_dump($lengthInSecondsFieldValue);
+
+            $contentColumnsToUpdate['length_in_seconds'] = $lengthInSecondsFieldValue;
+        }
 
         $databaseConnection->table(config('railcontent.table_prefix') . 'content')
             ->where('id', $contentId)
@@ -201,6 +219,8 @@ class RailcontentV2DataSyncingService
             $databaseConnection->table($tableName)->insert($rowsToInsert);
             $databaseConnection->commit();
         }
+
+        $this->contentService->fillParentContentDataColumnForContentIds([$contentId]);
     }
 
     /**
