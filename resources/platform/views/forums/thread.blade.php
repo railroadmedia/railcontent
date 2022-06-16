@@ -31,18 +31,16 @@
 @endsection
 
 @section('content')
-        <template v-cloak v-slot="slotProps">
 
-            <forum-thread
-                theme-color="{{ $brand }}"
-                :is-dark-mode="slotProps.isDarkMode"
-                brand="{{ $brand }}"
-                :thread="{{ $thread }}"
-                :current-user="{{ $currentUser }}"
-                previous-page="{{ $categoryUrl }}"
-                post-store-form-url="{{ url()->route('railforums.post.store').'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
-                update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
-            />
+    <forum-thread
+        theme-color="{{ $brand }}"
+        :is-dark-mode="slotProps.isDarkMode"
+        brand="{{ $brand }}"
+        :thread="{{ $thread }}"
+        :current-user="{{ $currentUser }}"
+        previous-page="{{ $categoryUrl }}"
+        post-store-form-url="{{ url()->route('railforums.post.store').'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
+        update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
+    />
 
-        </template>
 @endsection

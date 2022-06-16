@@ -1,15 +1,15 @@
 <div class="tw-flex tw-flex-col tw-bg-white tw-shadow corners-10">
     <div class="tw-flex tw-flex-col pa-3 bb-light-1">
-        <h1 class="heading">
-            <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-1">
-                <i class="fas fa-arrow-circle-left text-grey-2"></i>
+        <h1 class="tw-text-3xl tw-font-bold tw-text-[#000C17] dark:tw-text-white tw-flex tw-items-center tw-leading-none">
+            <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-2">
+                <i class="fas fa-arrow-circle-left tw-text-3xl tw-mt-1 dark:tw-text-white"></i>
             </a>
             Edit Thread Details
         </h1>
     </div>
     <div class="tw-flex tw-flex-col ph pv-3">
         <div class="tw-flex tw-flex-row">
-            <div class="tw-flex tw-flex-col ph">
+            <div class="tw-flex tw-flex-col ph tw-w-full">
                 <form action="{{ $formAction }}" method="post">
                     {{ csrf_field() }}
                     {{ method_field($method) }}
@@ -26,9 +26,10 @@
 
                     @if(!empty($topicOptions))
                     <div class="form-group tw-mb-2">
-                        <select id="postTopic" name="category_id">
+                        <select id="postTopic" name="category_id" class="dark:tw-text-white tw-pb-0">
                             @foreach($topicOptions as $topicId => $topic)
                                 <option
+                                    class="dark:tw-text-black"
                                     {{ $thread['category_id'] == ($topicId) ? 'selected' : '' }}
                                     value="{{ $topicId }}">{{ $topic }}</option>
                             @endforeach
@@ -41,16 +42,14 @@
                     </div>
                     @endif
 
-                    <div class="tw-flex tw-flex-row align-h-right tw-mt-2">
+                    <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end ">
                         <a href="{{ $forumUrl }}"
-                           class="btn tw-bg-black tw-text-black tw-no-underline flat collapse-150 tw-border-none tw-mr-1">
+                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 tw-mr-1">
                             Cancel
                         </a>
 
-                        <button class="btn collapse-320" type="submit">
-                            <span class="tw-bg-{{ $brand }} tw-text-white corners-10">
-                                Edit Thread
-                            </span>
+                        <button class="tw-btn-primary tw-bg-{{ $brand }}" type="submit">
+                            Edit Thread
                         </button>
                     </div>
                 </form>
