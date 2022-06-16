@@ -55,7 +55,9 @@ class ProfileSettingsPagesController extends BaseController
             'user' => user(),
             'signature' => ($userSignature) ? $userSignature['signature'] : '', // todo: railforums integration
             'sections' => $this->settingSections('settings'),
-            'userNotificationsSettings' => $this->notificationSettingsService->getUserNotificationSettings(user()->id, null, brand())
+            'userNotificationsSettings' => $this->notificationSettingsService->getUserNotificationSettings(user()->id, null, $request->get('selected-brand', $brand)),
+            'allBrands' => all_brands(),
+            'selectedBrand' => $request->get('selected-brand', $brand)
 
         ]);
     }

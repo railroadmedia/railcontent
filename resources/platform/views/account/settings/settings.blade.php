@@ -12,11 +12,12 @@
     <div class="tw-flex tw-flex-row">
         <div id="editForm" class="tw-flex tw-flex-col tw-w-full">
             <form method="POST" action="/railnotifications/user-notification-settings/update">
-                <input type="hidden" name="redirect" value="{{ url()->current() }}">
-                <input type="hidden" name="brand" value="{{ brand() }}">
+                <input type="hidden" name="redirect" value="{{ url()->current().'?selected-brand='.$selectedBrand }}">
+                <input type="hidden" name="brand" value="{{ $selectedBrand }}">
                 {{ method_field('PATCH') }}
                 {{ csrf_field() }}
 
+                @include('account.settings.partials._brand-notifications-settings', ['allBrands' => $allBrands])
                 <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
                     <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
@@ -111,29 +112,29 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
-                    <h2 class="tw-font-bold tw-text-lg">Would you like to use our legacy video player?</h2>
-                </div>
+{{--                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">--}}
+{{--                    <h2 class="tw-font-bold tw-text-lg">Would you like to use our legacy video player?</h2>--}}
+{{--                </div>--}}
 
-                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">
-                    <p class="body tw-text-black dark:tw-text-white tw-mb-3">
-                        Our video player may have compatibility issues with older devices and operating systems.
-                        <br>We recommend switching to our legacy video player if you are experiencing playback issues.
-                    </p>
-                </div>
+{{--                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">--}}
+{{--                    <p class="body tw-text-black dark:tw-text-white tw-mb-3">--}}
+{{--                        Our video player may have compatibility issues with older devices and operating systems.--}}
+{{--                        <br>We recommend switching to our legacy video player if you are experiencing playback issues.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
 
-                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-3 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                    <div class="tw-flex tw-flex-col">
-                        <div class="tw-flex tw-flex-row tw-mb-2">
-                            @include('partials.bladesora.members.inputs.toggle-input', [
-                                "inputID" => "useLegacyPlayer",
-                                "inputName" => "use_legacy_video_player",
-                                "inputLabel" => "Use legacy video player.",
-                                "checked" => (boolean) user()->use_legacy_video_player
-                            ])
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-3 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">--}}
+{{--                    <div class="tw-flex tw-flex-col">--}}
+{{--                        <div class="tw-flex tw-flex-row tw-mb-2">--}}
+{{--                            @include('partials.bladesora.members.inputs.toggle-input', [--}}
+{{--                                "inputID" => "useLegacyPlayer",--}}
+{{--                                "inputName" => "use_legacy_video_player",--}}
+{{--                                "inputLabel" => "Use legacy video player.",--}}
+{{--                                "checked" => (boolean) user()->use_legacy_video_player--}}
+{{--                            ])--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                 <div class="tw-flex tw-flex-row pa-3">
                     <button class="tw-btn-secondary tw-text-black dark:tw-text-white tw-btn-small" type="submit">
