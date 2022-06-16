@@ -40,10 +40,10 @@ environments:
     web-staging-two:
         domain: 'web-staging-two.musora.com'
         memory: 1024
-        cli-memory: 4096
-        tmp-storage: 2048
-        cli-tmp-storage: 2048
-        queue-tmp-storage: 2048
+        cli-memory: 2048
+        tmp-storage: 8192
+        cli-tmp-storage: 8192
+        queue-tmp-storage: 8192
         runtime: docker
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
