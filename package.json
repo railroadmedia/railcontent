@@ -48,7 +48,6 @@
     "dependencies": {
         "@musora/chatsora": "^0.1.17",
         "@musora/helper-functions": "^0.1.21",
-        "mux.js": "^5.5.1",
         "@musora/icons": "^1.0.6",
         "@tinymce/tinymce-vue": "^5.0.0",
         "@vimeo/player": "^2.15.0",
@@ -61,6 +60,7 @@
         "imgix-core-js": "^2.3.2",
         "lodash": "^4.17.19",
         "luxon": "^2.3.1",
+        "mux.js": "^5.5.1",
         "normalize.css": "^8.0.1",
         "noty": "^3.2.0-beta-deprecated",
         "query-string": "^7.1.1",
