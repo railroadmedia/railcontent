@@ -103,14 +103,15 @@
                     'canClear' => !empty(user()->getGearPhoto())
                 ])
             </div> --}}
-            
+
             {{-- SIGNATURE --}}
             <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                 <h1 id="signatureForm"></h1>
+
                 @include('partials.bladesora.members.account.settings.profile.signature-form', [
                     'brand' => '{{ $brand }}',
                     'method' => 'patch',
-                    'action' => '/signature/update/' . user()->id. '?redirect=' . url()->route('platform.profile.settings.profile', ['userId' => user()->id]),
+                    'action' => url()->route('railforums.signature.update',['id' => user()->id]),
                     'signature' => $signature,
                     'displayName' => user()->display_name,
                     'displayNameInput' => [

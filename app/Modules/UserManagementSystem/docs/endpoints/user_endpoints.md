@@ -84,6 +84,10 @@ Parameters and validation for PUT/PATCH:
     'piano_gear_photo' => 'nullable|url',
     'piano_gear_piano_brands' => 'nullable|string',
     'piano_gear_keyboard_brands' => 'nullable|string',
+
+    'singing_since_year' => 'nullable|integer|between:1900,' . date('Y'),
+    'singing_gear_mic_brands' => 'nullable|string',
+    'singing_gear_photo' => 'nullable|url'
 ];
 ```
 
