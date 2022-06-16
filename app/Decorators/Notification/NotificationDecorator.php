@@ -12,12 +12,12 @@ class NotificationDecorator
 
         foreach ($notifications as $index => $notification) {
             $url = str_replace(
-                ['www.drumeo.com', 'laravel/public/members', 'members/forums'],
-                [$domain, brand(), 'forums'],
-                $notification->getContentUrl()
+                ['www.drumeo.com', 'laravel/public', 'members/forums'],
+                [$domain, '', brand().'/forums'],
+                $notification['content']['url']
             );
 
-            $notification->setContentUrl($url);
+            $notifications[$index]['content']['url'] = $url;
         }
 
         return $notifications;
