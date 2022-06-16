@@ -177,4 +177,20 @@ class ContentEntity extends Entity
 
         return $results;
     }
+
+    /**
+     * Lowest key is the nearest parent.
+     *
+     * Structure:
+     * [
+     *     0 => {id: 123, slug: 'my-content', type: 'my-type'},
+     *     1 => {id: 123, slug: 'my-content', type: 'my-type'},
+     * ]
+     *
+     * @return array
+     */
+    public function getParentContentData()
+    {
+        return json_decode($this['parent_content_data']) ?? [];
+    }
 }

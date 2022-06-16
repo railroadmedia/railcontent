@@ -4,18 +4,16 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
-use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
-
-//use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
@@ -35,6 +33,8 @@ use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Support\Collection;
+
+//use Railroad\Railcontent\Events\XPModified;
 
 class ContentService
 {
@@ -1866,6 +1866,156 @@ class ContentService
         }
 
         return $documents;
+    }
+
+    public function fillParentContentDataColumnForContentIds(array $contentIds)
+    {
+        $hierarchyRows = DB::connection(config('railcontent.database_connection_name'))
+            ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content as rcp1',
+                'rcp1.id',
+                '=',
+                'rch1.parent_id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content_hierarchy as rch2',
+                'rch2.child_id',
+                '=',
+                'rch1.parent_id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content as rcp2',
+                'rcp2.id',
+                '=',
+                'rch2.parent_id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content_hierarchy as rch3',
+                'rch3.child_id',
+                '=',
+                'rch2.parent_id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content as rcp3',
+                'rcp3.id',
+                '=',
+                'rch3.parent_id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content_hierarchy as rch4',
+                'rch4.child_id',
+                '=',
+                'rch3.parent_id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content as rcp4',
+                'rcp4.id',
+                '=',
+                'rch4.parent_id'
+            )
+            ->select(
+                [
+                    'rch1.child_id as rch1_child_id',
+                    'rch1.parent_id as rch1_parent_id',
+                    'rcp1.id as rcp1_content_id',
+                    'rcp1.slug as rcp1_content_slug',
+                    'rcp1.type as rcp1_content_type',
+                    'rch2.child_id as rch2_child_id',
+                    'rch2.parent_id as rch2_parent_id',
+                    'rcp2.id as rcp2_content_id',
+                    'rcp2.slug as rcp2_content_slug',
+                    'rcp2.type as rcp2_content_type',
+                    'rch3.child_id as rch3_child_id',
+                    'rch3.parent_id as rch3_parent_id',
+                    'rcp3.id as rcp3_content_id',
+                    'rcp3.slug as rcp3_content_slug',
+                    'rcp3.type as rcp3_content_type',
+                    'rch4.child_id as rch4_child_id',
+                    'rch4.parent_id as rch4_parent_id',
+                    'rcp4.id as rcp4_content_id',
+                    'rcp4.slug as rcp4_content_slug',
+                    'rcp4.type as rcp4_content_type',
+                ]
+            )
+            ->whereIn('rch1.child_id', $contentIds)
+            ->get();
+
+        $cases = [];
+        $ids = [];
+        $params = [];
+
+        foreach ($contentIds as $contentId) {
+            $hierarchyData = $hierarchyRows->where('rch1_child_id', $contentId)->first();
+
+            if (!empty($hierarchyData)) {
+                $parentContentDataForDatabase = [];
+
+                if (!empty($hierarchyData->rch1_parent_id) &&
+                    !empty($hierarchyData->rcp1_content_id) &&
+                    !empty($hierarchyData->rcp1_content_slug)) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData->rcp1_content_id,
+                        'slug' => $hierarchyData->rcp1_content_slug,
+                        'type' => $hierarchyData->rcp1_content_type,
+                    ];
+                }
+
+                if (!empty($hierarchyData->rch2_parent_id) &&
+                    !empty($hierarchyData->rcp2_content_id) &&
+                    !empty($hierarchyData->rcp2_content_slug)) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData->rcp2_content_id,
+                        'slug' => $hierarchyData->rcp2_content_slug,
+                        'type' => $hierarchyData->rcp2_content_type,
+                    ];
+                }
+
+                if (!empty($hierarchyData->rch3_parent_id) &&
+                    !empty($hierarchyData->rcp3_content_id) &&
+                    !empty($hierarchyData->rcp3_content_slug)) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData->rcp3_content_id,
+                        'slug' => $hierarchyData->rcp3_content_slug,
+                        'type' => $hierarchyData->rcp3_content_type,
+                    ];
+                }
+
+                if (!empty($hierarchyData->rch4_parent_id) &&
+                    !empty($hierarchyData->rcp4_content_id) &&
+                    !empty($hierarchyData->rcp4_content_slug)) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData->rcp4_content_id,
+                        'slug' => $hierarchyData->rcp4_content_slug,
+                        'type' => $hierarchyData->rcp4_content_type,
+                    ];
+                }
+
+                // save
+
+                if (!empty($parentContentDataForDatabase)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = json_encode($parentContentDataForDatabase);
+                    $ids[] = $contentId;
+                } elseif (!empty($contentRow->parent_content_data)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = null;
+                    $ids[] = $contentId;
+                }
+            }
+        }
+
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+
+        if (!empty($ids)) {
+            DB::connection(config('railcontent.database_connection_name'))->update(
+                "UPDATE railcontent_content SET `parent_content_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
+                $params
+            );
+        }
+
+        return true;
     }
 
 }

@@ -104,11 +104,11 @@ class ContentTransformer
                 'week' => $data['week'],
                 'released' => $data['released'],
                 'total_xp' => $data['total_xp'],
-                'popularity' => $data['popularity'],
                 'web_url_path' => $data['web_url_path'],
                 'mobile_app_url_path' => $data['mobile_app_url_path'],
                 'child_count' => $data['child_count'],
                 'hierarchy_position_number' => $data['hierarchy_position_number'],
+                'parent_content_data' => $data['parent_content_data'],
                 'like_count' => $data['like_count'],
             ];
 
@@ -211,11 +211,11 @@ class ContentTransformer
                         'week' => $row['week'],
                         'released' => $row['released'],
                         'total_xp' => $row['total_xp'],
-                        'popularity' => $row['popularity'],
                         'web_url_path' => $row['web_url_path'],
                         'mobile_app_url_path' => $row['mobile_app_url_path'],
                         'child_count' => $row['child_count'],
                         'hierarchy_position_number' => $row['hierarchy_position_number'],
+                        'parent_content_data' => $row['parent_content_data'],
                         'like_count' => $row['like_count'],
                     ];
 

@@ -12,7 +12,7 @@ class SyncContentRowFromRelatedTables extends Command
     /**
      * Example content IDS: Course: 349360, Instructor: 317639, Course Lesson: 340136
      */
-    protected $signature = 'SyncContentRowFromRelatedTables {contentId}';
+    protected $signature = 'SyncContentRowFromRelatedTables {contentId} {startingContentId?}';
 
     protected $description = 'Syncs content row content and relevant data tables from the content fields table.';
 
@@ -31,11 +31,16 @@ class SyncContentRowFromRelatedTables extends Command
 
         if ($contentId === 'all') {
             $this->info('Syncing all content IDs.');
-            $contentIdRows = $databaseManager->connection(config('railcontent.database_connection_name'))
+            $query = $databaseManager->connection(config('railcontent.database_connection_name'))
                 ->table(config('railcontent.table_prefix') . 'content')
                 ->whereNotIn('type', ['vimeo-video', 'youtube-video', 'assignment'])
-                ->orderBy('id', 'desc')
-                ->get(['id']);
+                ->orderBy('id', 'desc');
+
+            if (!empty($this->argument('startingContentId'))) {
+                $query->where('id', '<', $this->argument('startingContentId'));
+            }
+
+            $contentIdRows = $query->get(['id']);
 
             $this->info('Syncing total content IDs: ' . count($contentIdRows));
 
@@ -43,7 +48,10 @@ class SyncContentRowFromRelatedTables extends Command
                 $railcontentV2DataSyncingService->syncContentId($contentIdRow->id);
 
                 if ($contentIdRowIndex % 100 === 0) {
-                    $this->info('Done syncing ' . $contentIdRowIndex . ' out of ' . count($contentIdRows));
+                    $this->info(
+                        'Done syncing ' . $contentIdRowIndex .
+                        ' out of ' . count($contentIdRows) . ', last processed content ID: ' . $contentIdRow->id
+                    );
                 }
             }
         } else {

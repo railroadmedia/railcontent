@@ -45,6 +45,7 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
      */
     public function handle()
     {
+        $start = microtime(true);
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
 
@@ -65,7 +66,6 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
         $dbConnection->statement("insert into railcontent_content_hierarchy select rch_temp.* from rch_temp JOIN railcontent_content ON railcontent_content.id = rch_temp.parent_id AND railcontent_content.type != 'user-playlist';");
 
         $this->info('Done purging railcontent_content_hierarchy table, deleting user playlists from content table...');
-        die();
 
         $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
         $statement .= " WHERE type = 'user-playlist'";
