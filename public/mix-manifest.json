@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=a591f23b56fdf870172a13e470d91b2f",
-    "/platform/css/app.css": "/platform/css/app.css?id=01b6cf3e2b5d051eb0c9d57b67d75201",
+    "/platform/js/app.js": "/platform/js/app.js?id=0c8ca56446f2f12f8900bed978ae832f",
+    "/platform/css/app.css": "/platform/css/app.css?id=b4238897032433bf2d658bece81d507f",
     "/marketing/js/app.js": "/marketing/js/app.js?id=8e7457eda3c6e79dc1955db8654679e3",
     "/marketing/css/app.css": "/marketing/css/app.css?id=ad05670e68c41dafe3aaa6a81a52928f"
-=======
-    "/platform/js/app.js": "/platform/js/app.js?id=d7e70f9ff53443ad378d9a9f6a680037",
-    "/platform/css/app.css": "/platform/css/app.css?id=7d9c7f87a691ee53c5b215c71e145c40"
->>>>>>> master
 }
