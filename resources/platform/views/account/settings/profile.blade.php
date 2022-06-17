@@ -91,18 +91,12 @@
                 ])
             </div>
 
-            {{-- GEAR PHOTO --}}
-            {{-- <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                @include('partials.bladesora.members.account.settings.profile.photo-form', [
-                    'brand' => '{{ $brand }}',
-                    'method' => 'POST',
-                    'gearPhotoUrl' => user()->getGearPhoto(),
-                    'uploadRequestEndpoint' => '/avatar/upload',
-                    'fieldSaveRequestEndpoint' => '/usora/json-api/user/update',
-                    'userId' => user()->id,
-                    'canClear' => !empty(user()->getGearPhoto())
+            {{-- GEAR PHOTOS --}}
+            <div class="tw-flex tw-flex-col pa-3 tw-w-full tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                @include('partials.bladesora.members.account.settings.profile.gear-photos', [
+                    'brand' => $brand
                 ])
-            </div> --}}
+            </div>
 
             {{-- SIGNATURE --}}
             <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
