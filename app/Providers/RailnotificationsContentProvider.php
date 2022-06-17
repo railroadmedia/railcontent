@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\ContentTransformer;
@@ -24,6 +25,8 @@ private CommentService $commentService;
 
     public function getContentById($id)
     {
+        ContentRepository::$bypassPermissions = true;
+
         return $this->contentService->getById($id);
     }
 
