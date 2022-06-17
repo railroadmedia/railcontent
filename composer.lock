@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af9b8086a11065035499572b6ebdfdeb",
+    "content-hash": "55943387f4e99cf032cfc76c1c145c58",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -7666,12 +7666,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "abb1bd3d495f986e773308deb14939fee466ffe0"
+                "reference": "b54c2a491fa341b78e188ef42ea79b2ce7f97bae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/abb1bd3d495f986e773308deb14939fee466ffe0",
-                "reference": "abb1bd3d495f986e773308deb14939fee466ffe0",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b54c2a491fa341b78e188ef42ea79b2ce7f97bae",
+                "reference": "b54c2a491fa341b78e188ef42ea79b2ce7f97bae",
                 "shasum": ""
             },
             "require": {
