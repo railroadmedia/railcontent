@@ -34,7 +34,6 @@
 
     <forum-thread
         theme-color="{{ $brand }}"
-        :is-dark-mode="slotProps.isDarkMode"
         brand="{{ $brand }}"
         :thread="{{ $thread }}"
         :current-user="{{ $currentUser }}"

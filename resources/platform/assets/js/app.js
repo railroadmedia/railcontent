@@ -172,6 +172,9 @@ const app = createApp({
     }
 });
 
+// in order to use provide/inject this will be default in vue v3.3
+app.config.unwrapInjectedRef = true;
+
 //Register Global Components
 app.component('AppContainer', AppContainer)
    .component('PageContainer', PageContainer)
