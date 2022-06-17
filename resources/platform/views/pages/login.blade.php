@@ -29,7 +29,7 @@
 @section('content')
     <div class="tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-bg-[#000C17] tw-text-white tw-bg-cover"
          style="background-image: url('https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg');"
-         v-cloak>
+    >
 
         <section id="logoContainer" class="tw-flex-col tw-flex tw-items-center tw-text-center">
             <img class="logo tw-max-w-[280px] tw-mb-6"

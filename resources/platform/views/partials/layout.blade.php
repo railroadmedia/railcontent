@@ -44,7 +44,11 @@
                     account-url="{{ user()->getDashboardUrl() }}"
                     search-url=""
                 >
-                    @yield('content')
+                    <template v-cloak v-slot="slotProps">
+
+                        @yield('content')
+                        
+                    </template>
                 </page-container>
             </app-container>
         </div>
