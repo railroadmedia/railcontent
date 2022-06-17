@@ -54,9 +54,12 @@
                     account-url=""
                     search-url=""
                 >  
-                    @yield('breadcrumbs')
-                    @yield('content')
-                    
+                    <template v-cloak v-slot="slotProps">
+
+                        @yield('breadcrumbs')
+                        @yield('content')
+
+                    </template>      
                 </page-container>
                 
             </app-container>

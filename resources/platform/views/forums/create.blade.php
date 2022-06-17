@@ -10,19 +10,15 @@
 
 @section('content')
 
-        <div v-cloak>
-
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
-                @include('partials.bladesora.members.forums.create-thread', [
-                    "brand" => $brand,
-                    "userAvatar" => user()->profile_picture_url,
-                    "forumUrl" => url()->route('forums.show-categories'),
-                    "formAction" => url()->route('railforums.thread.store'),
-                    "method" => 'PUT',
-                    "topicOptions" => $categories
-                ])
-            </div>
-
-        </div>
+    <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">
+        @include('partials.bladesora.members.forums.create-thread', [
+            "brand" => $brand,
+            "userAvatar" => user()->profile_picture_url,
+            "forumUrl" => url()->route('forums.show-categories'),
+            "formAction" => url()->route('railforums.thread.store'),
+            "method" => 'PUT',
+            "topicOptions" => $categories
+        ])
+    </div>
 
 @endsection

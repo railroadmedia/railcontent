@@ -17441,30 +17441,30 @@ content-catalogue, transition {
   padding: 0 !important;
 }
 
-#replyContainer .tox-tinymce {
+#replyContainer .tox-tinymce, #createThreadForm .tox-tinymce {
   border-width: 1px;
 }
 
 .tw-dark #replyContainer .tox .tox-toolbar-overlord,
-.tw-dark #replyContainer .tox:not(.tox-tinymce-inline) .tox-editor-header {
+.tw-dark #replyContainer .tox:not(.tox-tinymce-inline) .tox-editor-header, .tw-dark #createThreadForm .tox .tox-toolbar-overlord,
+.tw-dark #createThreadForm .tox:not(.tox-tinymce-inline) .tox-editor-header {
   background-color: transparent;
 }
-.tw-dark #replyContainer .tox-tinymce {
+.tw-dark #replyContainer .tox-tinymce, .tw-dark #createThreadForm .tox-tinymce {
   border: none;
   background-color: #002039;
 }
-.tw-dark #replyContainer .tox .tox-edit-area__iframe {
+.tw-dark #replyContainer .tox .tox-edit-area__iframe, .tw-dark #createThreadForm .tox .tox-edit-area__iframe {
   background-color: transparent;
 }
 .tw-dark #replyContainer .tox .tox-toolbar__primary,
-.tw-dark #replyContainer .tox .tox-toolbar {
+.tw-dark #replyContainer .tox .tox-toolbar, .tw-dark #createThreadForm .tox .tox-toolbar__primary,
+.tw-dark #createThreadForm .tox .tox-toolbar {
   background-color: #081825 !important;
 }
-.tw-dark #replyContainer .tox .tox-edit-area__iframe body#tinymce {
-  color: white;
-}
-
-.tw-dark iframe body {
+.tw-dark #replyContainer .tox .tox-edit-area__iframe body#tinymce,
+.tw-dark #replyContainer iframe body, .tw-dark #createThreadForm .tox .tox-edit-area__iframe body#tinymce,
+.tw-dark #createThreadForm iframe body {
   color: white;
 }
 
@@ -23752,6 +23752,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(209 213 219 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#000C17\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
+}
 .tw-text-gray-200{
   --tw-text-opacity: 1 !important;
   color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
@@ -24055,6 +24059,9 @@ a:visited{
 .hover\:tw-bg-black\/10:hover{
   background-color: rgb(0 0 0 / 0.1) !important;
 }
+.hover\:tw-bg-slate-200\/50:hover{
+  background-color: rgb(226 232 240 / 0.5) !important;
+}
 .hover\:tw-bg-\[\#E7EFF6\]:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(231 239 246 / var(--tw-bg-opacity)) !important;
@@ -24191,6 +24198,9 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/50{
   background-color: rgb(68 95 116 / 0.5) !important;
 }
+.tw-dark .dark\:tw-bg-transparent{
+  background-color: transparent !important;
+}
 .tw-dark .dark\:tw-bg-black{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
@@ -24201,9 +24211,6 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#00101D\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
-}
-.tw-dark .dark\:tw-bg-transparent{
-  background-color: transparent !important;
 }
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
@@ -24220,6 +24227,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#7E9AB1\]{
   --tw-text-opacity: 1 !important;
   color: rgb(126 154 177 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-black{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-\[\#A1A1A9\]{
   --tw-text-opacity: 1 !important;
