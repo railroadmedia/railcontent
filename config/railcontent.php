@@ -17,6 +17,15 @@ return [
     'data_mode' => 'host',
     'table_prefix' => 'railcontent_',
 
+    // elastic search
+    'use_elastic_search' => true,
+    'elastic_search_host' => 'elasticsearch',
+    'elastic_search_username' => 'elastic',
+    'elastic_search_password' => 'changeme',
+    'elastic_search_port' => 9200,
+    'elastic_search_transport' => 'Http',
+    'elastic_index_name' => 'content',
+
     // languages
     'default_language' => 'en-US',
     'available_languages' => [
@@ -152,7 +161,7 @@ return [
     ],
 
     'user_ids_excluded_from_stats' => [
-        0
+        0,
     ],
 
     // progress bubbling
@@ -209,7 +218,7 @@ return [
         'content-type',
         'content-type',
     ],
-    
+
     // ['type' => depth]
     'content_types_and_depth_to_calculate_hierarchy_higher_key_progress' => [
         'learning-path',
@@ -464,15 +473,15 @@ return [
             'allowableFilters' => [],
             'sortedBy' => '-published_on',
         ],
-//        'the-polyrhythms-of' => [
-//            'thumbnailUrl' => 'https://placehold.it/500x500?text=The+Polyrhythms+Of',
-//            "name" => "The Polyrhythms Of...",
-//            "shortname" => "Episodes",
-//            "icon" => "icon-shows",
-//            "description" => "Aaron tackles the toughest rhythms of iconic songs, and breaks them down for you in a simple way. With practice loops included with each episode, this is the best way to break down those trouble sections of the songs you love the most!",
-//            "allowableFilters" => [],
-//            "sortedBy" => "published_on",
-//        ],
+        //        'the-polyrhythms-of' => [
+        //            'thumbnailUrl' => 'https://placehold.it/500x500?text=The+Polyrhythms+Of',
+        //            "name" => "The Polyrhythms Of...",
+        //            "shortname" => "Episodes",
+        //            "icon" => "icon-shows",
+        //            "description" => "Aaron tackles the toughest rhythms of iconic songs, and breaks them down for you in a simple way. With practice loops included with each episode, this is the best way to break down those trouble sections of the songs you love the most!",
+        //            "allowableFilters" => [],
+        //            "sortedBy" => "published_on",
+        //        ],
     ],
     /**
      * When a new show type it's created it's REQUIRED to add the show type in this array.
@@ -647,6 +656,59 @@ return [
         'song',
     ],
 
-    'coachesFilePath' => __DIR__ . '/../../database/seeds/Coaches v2.0.csv',
+    'coachesFilePath' => __DIR__.'/../../database/seeds/Coaches v2.0.csv',
+
+    'contentColumnNamesForFields' => [
+        'difficulty',
+        'home_staff_pick_rating',
+        'legacy_id',
+        'legacy_wordpress_post_id',
+        'title',
+        'xp',
+        'album',
+        'artist',
+        'cd-tracks',
+        'chord_or_scale',
+        'difficulty_range',
+        'episode_number',
+        'exercise-book-pages',
+        'fast_bpm',
+        'includes_song',
+        'live_event_start_time',
+        'live_event_end_time',
+        'live_event_youtube_id',
+        'live_stream_feed_type',
+        'name',
+        'released',
+        'slow_bpm',
+        'transcriber_name',
+        'week',
+        'avatar_url',
+        'length_in_seconds',
+        'soundslice_slug',
+        'staff_pick_rating',
+        'student_id',
+        'vimeo_video_id',
+        'youtube_video_id',
+        'show_in_new_feed',
+        'bands',
+        'endorsements',
+        'focus',
+        'forum_thread_id',
+        'is_active',
+        'is_coach',
+        'is_house_coach',
+        'is_coach_of_the_month',
+        'is_featured',
+        'associated_user_id',
+        'high_soundslice_slug',
+        'low_soundslice_slug',
+        'pdf',
+        'pdf_in_g',
+        'sbt_bpm',
+        'sbt_exercise_number',
+        'song_name',
+        'soundslice_xml_file_url',
+    ],
 
 ];

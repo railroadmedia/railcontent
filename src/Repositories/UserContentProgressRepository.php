@@ -257,7 +257,7 @@ class UserContentProgressRepository extends RepositoryBase
      * @param bool $count
      * @return mixed
      */
-    public function countUserProgress($userId, $date = null, $state = null)
+    public function countUserProgress($userId, $date = null, $state = null, $brand = null)
     {
         $query =
             $this->query()
@@ -276,9 +276,12 @@ class UserContentProgressRepository extends RepositoryBase
                         );
                     }
                 )
-                ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
                 ->whereIn(ConfigService::$tableContent . '.type', config('railcontent.singularContentTypes',[]))
                 ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $userId);
+
+        if ($brand) {
+            $query->where(ConfigService::$tableContent . '.brand', '=', $brand);
+        }
 
         if ($state) {
             $query->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
@@ -291,4 +294,72 @@ class UserContentProgressRepository extends RepositoryBase
         return $query->get()
             ->first()['count'];
     }
+
+    /**
+     * @param $id
+     * @param array $types
+     * @param string $state
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param int $limit
+     * @return array
+     */
+    public function getUserProgressForState(
+        $id,
+        $state,
+        $orderByColumn = 'updated_on',
+        $orderByDirection = 'desc'
+    ) {
+        return $this->query()
+            ->join(
+                ConfigService::$tableContent,
+                function (JoinClause $join) {
+                    $join->on(
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    );
+                }
+            )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+            ->where(ConfigService::$tableUserContentProgress . '.state', '=', $state)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
+            ->orderBy($orderByColumn, $orderByDirection)
+            ->get()
+            ->toArray();
+    }
+
+    public function countContentProgress($contentId, $date = null, $state = null)
+    {
+        $query =
+            $this->query()
+                ->select(
+                    $this->databaseManager->raw(
+                        'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
+                    )
+                )
+                ->join(
+                    ConfigService::$tableContent,
+                    function (JoinClause $join) {
+                        $join->on(
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        );
+                    }
+                )
+                ->where(ConfigService::$tableContent . '.id', $contentId);
+
+        if ($state) {
+            $query->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
+        }
+
+        if ($date) {
+            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $date);
+        }
+
+        return $query->get()
+            ->first()['count'];
+    }
+
 }

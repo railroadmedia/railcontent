@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -86,6 +87,8 @@ class ContentPermissionRepository extends RepositoryBase
             ]
         );
 
+        event(new ElasticDataShouldUpdate($contentId, $contentType));
+
         return $contentPermissionId;
     }
 
@@ -102,13 +105,17 @@ class ContentPermissionRepository extends RepositoryBase
 
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        return $this->query()->where(
+        $results = $this->query()->where(
             [
                 'content_id' => $contentId,
                 'content_type' => $contentType,
                 'permission_id' => $permissionId
             ]
         )->delete();
+
+        event(new ElasticDataShouldUpdate($contentId, $contentType));
+
+        return $results;
     }
 
     /**

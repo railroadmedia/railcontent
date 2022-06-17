@@ -47,4 +47,46 @@ class ContentUpdateRequest extends CustomFormRequest
         //get the validation rules
         return parent::rules();
     }
+
+    /**
+     * @return array
+     */
+    public function onlyAllowed()
+    {
+        return
+            $this->only(
+                [
+                    'slug',
+                    'type',
+                    'sort',
+                    'status',
+                    'brand',
+                    'language' ,
+                    'published_on',
+                    'is_coach',
+                    'is_coach_of_the_month',
+                    'is_featured',
+                    'is_active',
+                    'is_house_coach',
+                    'difficulty',
+                    'title',
+                    'xp',
+                    'total_xp',
+                    'album',
+                    'artist',
+                    'song_name',
+                    'chord_or_scale',
+                    'difficulty_range',
+                    'episode_number',
+                    'name',
+                    'bands',
+                    'endorsements',
+                    'forum_thread_id',
+                    'associated_user_id',
+                    'show_in_new_feed',
+                    'bpm',
+                    'video'
+                ]
+            );
+    }
 }

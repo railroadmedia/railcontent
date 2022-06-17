@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
+use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
 class UserContentProgressFactory extends UserContentProgressService
@@ -12,6 +14,8 @@ class UserContentProgressFactory extends UserContentProgressService
      */
     protected $faker;
 
+    protected $contentService;
+
     /**
      * @param int|null $contentId
      * @param int|null $userId
@@ -20,6 +24,9 @@ class UserContentProgressFactory extends UserContentProgressService
     public function startContent($contentId = null, $userId = null, $forceEvenIfComplete = false)
     {
         $this->faker = app(Generator::class);
+        $this->elasticService = app(ElasticService::class);
+        $this->contentService = app(ContentService::class);
+
 
         $parameters =
             func_get_args() + [
@@ -29,6 +36,8 @@ class UserContentProgressFactory extends UserContentProgressService
             ];
 
         $userContentId = parent::startContent(...$parameters);
+
+        $content = $this->contentService->getById($parameters[0]);
 
         return $userContentId;
     }
@@ -71,6 +80,7 @@ class UserContentProgressFactory extends UserContentProgressService
             ];
 
         $userContentId = parent::saveContentProgress(...$parameters);
+
 
         return $userContentId;
     }

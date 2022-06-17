@@ -551,22 +551,22 @@ EOT;
     {
         $query =
             $this->query()
-                ->from(ConfigService::$tableContent)
+                ->from(ConfigService::$tablePlaylistContents)
                 ->leftJoin(
-                    ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tablePlaylists,
+                    ConfigService::$tablePlaylistContents . '.user_playlist_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tablePlaylists . '.id'
                 )
-                ->where(ConfigService::$tableContent . '.type', 'user-playlist')
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $id);
+                ->where(ConfigService::$tablePlaylists . '.type', 'primary-playlist')
+                ->where(ConfigService::$tablePlaylistContents . '.content_id', $id);
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableContentHierarchy . '.created_on', '>=', $smallDate);
+            $query->where(ConfigService::$tablePlaylistContents . '.created_at', '>=', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableContentHierarchy . '.created_on', '<=', $bigDate);
+            $query->where(ConfigService::$tablePlaylistContents . '.created_at', '<=', $bigDate);
         }
 
         return $query->count();
@@ -607,7 +607,7 @@ EOT;
                         ConfigService::$tableContentStatistics . '.content_type',
                         ConfigService::$tableContentStatistics . '.content_published_on',
                         ConfigService::$tableContent . '.brand as content_brand',
-                        ConfigService::$tableContentFields . '.value as content_title',
+                        ConfigService::$tableContent . '.title as content_title',
                         $this->databaseManager->raw(
                             'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
                         ),
@@ -625,17 +625,6 @@ EOT;
                         ),
                     ]
                 )
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    function (JoinClause $joinClause) {
-                        $joinClause->on(
-                            ConfigService::$tableContentStatistics . '.content_id',
-                            '=',
-                            ConfigService::$tableContentFields . '.content_id'
-                        )
-                            ->where(ConfigService::$tableContentFields . '.key', 'title');
-                    }
-                )
                 ->join(
                     ConfigService::$tableContent,
                     ConfigService::$tableContent . '.id',
@@ -646,7 +635,6 @@ EOT;
                     ConfigService::$tableContentStatistics . '.content_id',
                     ConfigService::$tableContentStatistics . '.content_type',
                     ConfigService::$tableContentStatistics . '.content_published_on',
-                    ConfigService::$tableContentFields . '.value',
                 ]);
 
         if ($smallDate) {

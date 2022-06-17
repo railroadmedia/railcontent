@@ -6,6 +6,7 @@ use Faker\Generator;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ElasticService;
 
 class ContentFactory extends ContentService
 {
@@ -13,6 +14,8 @@ class ContentFactory extends ContentService
      * @var Generator
      */
     protected $faker;
+
+    protected $elasticService;
 
     /**
      * @param  null  $slug
@@ -38,6 +41,7 @@ class ContentFactory extends ContentService
         $slugify = null
     ) {
         $this->faker = app(Generator::class);
+        $this->elasticService = app(ElasticService::class);
 
         $parameters =
             func_get_args() + [
@@ -55,6 +59,11 @@ class ContentFactory extends ContentService
                 $this->faker->dateTimeThisCentury(),
             ];
 
-        return parent::create(...$parameters);
+        $content = (parent::create(...$parameters));
+
+
+       // $this->elasticService->syncDocument($content['id']);
+
+        return $content;
     }
 }

@@ -400,6 +400,8 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
                 'state' => $state,
                 'progress_percent' => $progressPercent,
                 'updated_on' => $updatedOn,
+                'started_on' => $updatedOn,
+                'completed_on' => $updatedOn
             ]
         );
     }
@@ -450,19 +452,27 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
 
         $createdOn = $createdOn->toDateTimeString();
 
-        $contentUserPlaylist = $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
-            'user-playlist',
-            ContentService::STATUS_PUBLISHED
-        );
+        $myList = [
+            'brand' => config('railcontent.brand'),
+            'type' => 'primary-playlist',
+            'user_id' => rand(),
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
 
-        $this->contentHierarchyRepository->create(
-            [
-                'parent_id' => $contentUserPlaylist['id'],
-                'child_id' => $contentId,
-                'child_position' => 0,
-                'created_on' => $createdOn,
-            ]
-        );
+        $myListId =
+            $this->query()
+                ->table(ConfigService::$tablePlaylists)
+                ->insertGetId($myList);
+
+        $userPlaylistContent1 = [
+            'content_id' => $contentId,
+            'user_playlist_id' => $myListId,
+            'created_at' => $createdOn,
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tablePlaylistContents)
+            ->insertGetId($userPlaylistContent1);
     }
 }

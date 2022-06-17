@@ -13,7 +13,7 @@ class CleanContentTopicsAndStyles extends Command
      *
      * @var string
      */
-    protected $signature = 'CleanTopicsAndStyles';
+    protected $signature = 'CleanContentTopicsAndStyles';
 
     /**
      * The console command description.

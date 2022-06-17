@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Helpers\CacheHelper;
@@ -60,12 +61,10 @@ class UserPermissionsService
         }
 
         //delete the cache for user
-        CacheHelper::deleteCacheKeys(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userPermission['user_id'],
-            ]
-        );
+        CacheHelper::deleteCacheKeys([
+                                         Cache::store(ConfigService::$cacheDriver)
+                                             ->getPrefix().'userId_'.$userPermission['user_id'],
+                                     ]);
 
         return $this->userPermissionsRepository->delete($id);
     }
@@ -113,35 +112,34 @@ class UserPermissionsService
      */
     private function setTTLOrDeleteUserCache($userId, $startDate)
     {
-        if ($startDate ==
-            Carbon::now()
-                ->toDateTimeString()) {
-
-            //should delete the cache for user
-            CacheHelper::deleteCacheKeys(
-                [
+        if (Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            if ($startDate ==
+                Carbon::now()
+                    ->toDateTimeString()) {
+                //should delete the cache for user
+                CacheHelper::deleteCacheKeys([
+                                                 Cache::store(ConfigService::$cacheDriver)
+                                                     ->getPrefix().'userId_'.$userId,
+                                             ]);
+            } else {
+                $existingTTL = Redis::ttl(
                     Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'userId_' . $userId,
-                ]
-            );
-        } else {
-            $existingTTL = Redis::ttl(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId
-            );
-            if ((Carbon::parse($startDate)
-                    ->gt(Carbon::now())) &&
-                (($existingTTL == -2) ||
-                    ($existingTTL >
-                        Carbon::parse($startDate)
-                            ->diffInSeconds(Carbon::now())))) {
-                CacheHelper::setTimeToLiveForKey(
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'userId_' . $userId,
-                    Carbon::parse($startDate)
-                        ->diffInSeconds(Carbon::now())
+                        ->getPrefix().'userId_'.$userId
                 );
-
+                if ((Carbon::parse($startDate)
+                        ->gt(Carbon::now())) &&
+                    (($existingTTL == -2) ||
+                        ($existingTTL >
+                            Carbon::parse($startDate)
+                                ->diffInSeconds(Carbon::now())))) {
+                    CacheHelper::setTimeToLiveForKey(
+                        Cache::store(ConfigService::$cacheDriver)
+                            ->getPrefix().'userId_'.$userId,
+                        Carbon::parse($startDate)
+                            ->diffInSeconds(Carbon::now())
+                    );
+                }
             }
         }
     }

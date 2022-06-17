@@ -28,7 +28,7 @@ class ExpireCacheTest extends RailcontentTestCase
         $this->contentService = $this->app->make(ContentService::class);
     }
 
-    public function test_command()
+    public function _test_command()
     {
         CacheHelper::setPrefix();
         $type = $this->faker->word;

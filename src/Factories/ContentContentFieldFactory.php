@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
 use Railroad\Railcontent\Services\ContentFieldService;
+use Railroad\Railcontent\Services\ElasticService;
 
 class ContentContentFieldFactory extends ContentFieldService
 {
@@ -11,6 +12,8 @@ class ContentContentFieldFactory extends ContentFieldService
      * @var Generator
      */
     protected $faker;
+
+    protected $elasticService;
 
     /**
      * @param null $contentId
@@ -23,16 +26,22 @@ class ContentContentFieldFactory extends ContentFieldService
     public function create($contentId = null, $key = null, $value = null, $position = null, $type = null)
     {
         $this->faker = app(Generator::class);
+        $this->elasticService = app(ElasticService::class);
 
-        $parameters =
-            func_get_args() + [
-                rand(),
-                $this->faker->word,
-                $this->faker->word,
-                rand(),
-                $this->faker->word
-            ];
+        $data = [
+            'content_id' => $contentId ?? rand(),
+            'key' => $key ??  'name',
+            'value' => $value ??  $this->faker->word,
+            'position' => $position ?? 1,
+            'type' => $type ?? 'string',
+        ];
 
-        return parent::create(...$parameters);
+        $content = parent::createOrUpdate($data);
+
+//        $this->elasticService->syncDocument($content['id']);
+//
+//        sleep(1);
+
+        return $data;
     }
 }

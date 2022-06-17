@@ -41,7 +41,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $key = $this->faker->word;
+        $key = 'description';
         $value = $this->faker->text(500);
 
         $response = $this->call(
@@ -271,7 +271,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function content_updated_event_dispatched_when_unlink_content_datum()
     {
-        Event::fake();
+        //Event::fake();
 
         $contentId = $this->createContent();
 

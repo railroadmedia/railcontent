@@ -91,12 +91,13 @@ class ContentFollowsRepository extends RepositoryBase
     }
 
     /**
-     * @return array|mixed
+     * @param string|null $brand
+     * @return array|mixed|mixed[]
      */
-    public function getFollowedContentIds()
+    public function getFollowedContentIds(?string $brand = null)
     {
         if (!isset($this->cache[auth()->id()])) {
-            $contents = $this->query()
+            $query = $this->query()
                 ->select(ConfigService::$tableContentFollows . '.content_id')
                 ->join(
                     ConfigService::$tableContent,
@@ -105,10 +106,12 @@ class ContentFollowsRepository extends RepositoryBase
                     ConfigService::$tableContent . '.id'
                 )
                 ->where([
-                    ConfigService::$tableContentFollows . '.user_id' => auth()->id(),
-                    'brand' => config('railcontent.brand')
-                ])->get();
-
+                    ConfigService::$tableContentFollows . '.user_id' => auth()->id()
+                ]);
+            if($brand){
+                $query->where('brand', $brand);
+            }
+            $contents = $query->get();
             $this->cache[auth()->id()] = $contents->pluck('content_id')->toArray();
         }
 

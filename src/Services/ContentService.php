@@ -12,19 +12,28 @@ use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
+
 //use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
+use Railroad\Railcontent\Repositories\ContentBpmRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
+use Railroad\Railcontent\Repositories\ContentInstructorRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\ContentStyleRepository;
+use Railroad\Railcontent\Repositories\ContentTopicRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
+use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Support\Collection;
 
 class ContentService
@@ -74,6 +83,34 @@ class ContentService
      */
     private $userContentProgressRepository;
 
+    /**
+     * @var UserPermissionsRepository
+     */
+    private $userPermissionRepository;
+    /**
+     * @var ContentFollowsRepository
+     */
+    private $contentFollowRepository;
+
+    /**
+     * @var ElasticService
+     */
+    private $elasticService;
+    /**
+     * @var ContentTopicRepository
+     */
+    private $contentTopicRepository;
+    /**
+     * @var ContentInstructorRepository
+     */
+    private $contentInstructorRepository;
+    /**
+     * @var ContentStyleRepository
+     */
+    private $contentStyleRepository;
+
+    private $contentBpmRepository;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -84,8 +121,6 @@ class ContentService
     private $idContentCache = [];
 
     /**
-     * ContentService constructor.
-     *
      * @param ContentRepository $contentRepository
      * @param ContentVersionRepository $versionRepository
      * @param ContentFieldRepository $fieldRepository
@@ -95,6 +130,13 @@ class ContentService
      * @param CommentRepository $commentRepository
      * @param CommentAssignmentRepository $commentAssignmentRepository
      * @param UserContentProgressRepository $userContentProgressRepository
+     * @param UserPermissionsRepository $userPermissionsRepository
+     * @param ContentFollowsRepository $contentFollowsRepository
+     * @param ElasticService $elasticService
+     * @param ContentTopicRepository $contentTopicRepository
+     * @param ContentInstructorRepository $contentInstructorRepository
+     * @param ContentStyleRepository $contentStyleRepository
+     * @param ContentBpmRepository $contentBpmRepository
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -105,7 +147,14 @@ class ContentService
         ContentPermissionRepository $contentPermissionRepository,
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository
+        UserContentProgressRepository $userContentProgressRepository,
+        UserPermissionsRepository $userPermissionsRepository,
+        ContentFollowsRepository $contentFollowsRepository,
+        ElasticService $elasticService,
+        ContentTopicRepository $contentTopicRepository,
+        ContentInstructorRepository $contentInstructorRepository,
+        ContentStyleRepository $contentStyleRepository,
+        ContentBpmRepository $contentBpmRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
@@ -116,6 +165,13 @@ class ContentService
         $this->commentRepository = $commentRepository;
         $this->commentAssignationRepository = $commentAssignmentRepository;
         $this->userContentProgressRepository = $userContentProgressRepository;
+        $this->userPermissionRepository = $userPermissionsRepository;
+        $this->contentFollowsRepository = $contentFollowsRepository;
+        $this->elasticService = $elasticService;
+        $this->contentTopicRepository = $contentTopicRepository;
+        $this->contentInstructorRepository = $contentInstructorRepository;
+        $this->contentStyleRepository = $contentStyleRepository;
+        $this->contentBpmRepository = $contentBpmRepository;
     }
 
     /**
@@ -126,7 +182,7 @@ class ContentService
      */
     public function getById($id)
     {
-        $hash = 'contents_by_id_' . CacheHelper::getKey($id);
+        $hash = 'contents_by_id_'.CacheHelper::getKey($id);
 
         if (isset($this->idContentCache[$hash])) {
             return $this->idContentCache[$hash];
@@ -151,7 +207,7 @@ class ContentService
      */
     public function getByIds($ids)
     {
-        $hash = 'contents_by_ids_' . CacheHelper::getKey(...$ids);
+        $hash = 'contents_by_ids_'.CacheHelper::getKey(...$ids);
 
         if (isset($this->idContentCache[$hash])) {
             return $this->idContentCache[$hash];
@@ -176,7 +232,7 @@ class ContentService
      */
     public function getAllByType($type)
     {
-        $hash = 'contents_by_type_' . $type . '_' . CacheHelper::getKey($type);
+        $hash = 'contents_by_type_'.$type.'_'.CacheHelper::getKey($type);
 
         $results = CacheHelper::getCachedResultsForKey($hash);
 
@@ -206,7 +262,7 @@ class ContentService
         $fieldType,
         $fieldComparisonOperator = '='
     ) {
-        $hash = 'contents_by_types_field_and_status_' . CacheHelper::getKey(
+        $hash = 'contents_by_types_field_and_status_'.CacheHelper::getKey(
                 $types,
                 $status,
                 $fieldKey,
@@ -277,7 +333,7 @@ class ContentService
      */
     public function getBySlugAndType($slug, $type)
     {
-        $hash = 'contents_by_slug_type_' . $type . '_' . CacheHelper::getKey($slug, $type);
+        $hash = 'contents_by_slug_type_'.$type.'_'.CacheHelper::getKey($slug, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -297,7 +353,7 @@ class ContentService
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
-        $hash = 'contents_by_user_slug_type_' . $type . '_' . CacheHelper::getKey($userId, $type, $slug);
+        $hash = 'contents_by_user_slug_type_'.$type.'_'.CacheHelper::getKey($userId, $type, $slug);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -318,7 +374,7 @@ class ContentService
      */
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        $hash = 'contents_by_parent_id_' . CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_id_'.CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -346,7 +402,7 @@ class ContentService
         $orderByDirection = 'asc'
     ) {
         $hash =
-            'contents_by_parent_id_paginated_' .
+            'contents_by_parent_id_paginated_'.
             CacheHelper::getKey($parentId, $limit, $skip, $orderBy, $orderByDirection);
 
         $results = CacheHelper::getCachedResultsForKey($hash);
@@ -381,7 +437,7 @@ class ContentService
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
     ) {
-        $hash = 'contents_by_parent_id_type_' . CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_id_type_'.CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -415,7 +471,7 @@ class ContentService
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
     ) {
-        $hash = 'contents_by_parent_id_type_in_' . CacheHelper::getKey(
+        $hash = 'contents_by_parent_id_type_in_'.CacheHelper::getKey(
                 $parentId,
                 $types,
                 $limit,
@@ -468,7 +524,7 @@ class ContentService
      */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        $hash = 'contents_by_parent_ids_' . CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_ids_'.CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -489,7 +545,7 @@ class ContentService
      */
     public function getByChildIdWhereType($childId, $type)
     {
-        $hash = 'contents_by_child_id_and_type_' . $type . '_' . CacheHelper::getKey($childId, $type);
+        $hash = 'contents_by_child_id_and_type_'.$type.'_'.CacheHelper::getKey($childId, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -510,7 +566,7 @@ class ContentService
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
-        $hash = 'contents_by_child_ids_and_type_' . $type . '_' . CacheHelper::getKey($childIds, $type);
+        $hash = 'contents_by_child_ids_and_type_'.$type.'_'.CacheHelper::getKey($childIds, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -531,7 +587,7 @@ class ContentService
      */
     public function getByChildIdsWhereTypeForUrl(array $childIds, $type)
     {
-        $hash = 'contents_by_child_ids_and_type_for_url_' . $type . '_' . CacheHelper::getKey($childIds, $type);
+        $hash = 'contents_by_child_ids_and_type_for_url_'.$type.'_'.CacheHelper::getKey($childIds, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -552,7 +608,7 @@ class ContentService
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
-        $hash = 'contents_by_child_ids_and_parent_types_' . CacheHelper::getKey($childId, $types);
+        $hash = 'contents_by_child_ids_and_parent_types_'.CacheHelper::getKey($childId, $types);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (is_null($results)) {
@@ -576,7 +632,7 @@ class ContentService
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
-        $hash = 'contents_paginated_by_type_' . $type . '_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+        $hash = 'contents_paginated_by_type_'.$type.'_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $type,
                 $userId,
                 $state,
@@ -618,7 +674,7 @@ class ContentService
         $limit = 25,
         $skip = 0
     ) {
-        $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+        $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $types,
                 $userId,
                 $state,
@@ -660,7 +716,7 @@ class ContentService
         $limit = 25,
         $skip = 0
     ) {
-        $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+        $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $types,
                 $userId,
                 $state,
@@ -726,7 +782,7 @@ class ContentService
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
     ) {
-        $hash = 'contents_type_neighbouring_siblings_' . CacheHelper::getKey(
+        $hash = 'contents_type_neighbouring_siblings_'.CacheHelper::getKey(
                 $type,
                 $columnName,
                 $columnValue,
@@ -830,7 +886,7 @@ class ContentService
         $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $hash = 'contents_results_' . CacheHelper::getKey(
+        $hash = 'contents_results_'.CacheHelper::getKey(
                 $page,
                 $limit,
                 $orderByColumn,
@@ -893,16 +949,153 @@ class ContentService
                 );
             }
 
-            $resultsDB = new ContentFilterResultsEntity(
-                [
-                    'results' => $filter->retrieveFilter(),
-                    'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
-                ]
-            );
+            if (config('railcontent.use_elastic_search') == true) {
+                $filters = [];
 
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
-            $results = new ContentFilterResultsEntity($results);
+                if (!empty($includedUserStates)) {
+                    $includedContentsIdsByState = [];
+                    $includedContentsByState =
+                        $this->userContentProgressRepository->createQueryBuilder('up')
+                            ->where('up.user = :userId')
+                            ->andWhere('up.state IN (:state)')
+                            ->setParameter('userId', auth()->id())
+                            ->setParameter('state', $includedUserStates)
+                            ->getQuery()
+                            ->getResult();
+                    foreach ($includedContentsByState as $progress) {
+                        $includedContentsIdsByState[] =
+                            $progress->getContent()
+                                ->getId();
+                    }
+                }
+
+                $followedContents = [];
+                if ($getFollowedContentOnly) {
+                    $followedContents = $this->contentFollowsRepository->getFollowedContentIds();
+                    if (empty($followedContents)) {
+                        $resultsDB = new ContentFilterResultsEntity([
+                                                                        'results' => $followedContents,
+                                                                        'total_results' => 0,
+                                                                        'filter_options' => [],
+                                                                    ]);
+
+                        $results =
+                            CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
+
+                        return new ContentFilterResultsEntity($results);
+                    }
+                }
+
+                if (!empty($requiredUserStates)) {
+                    $requiredContentsByState = $this->userContentProgressRepository->getUserProgressForState(
+                        auth()->id(),
+                        $requiredUserStates[0]
+                    );
+
+                    $requiredContentIdsByState = Arr::pluck($requiredContentsByState, 'content_id');
+                }
+
+                $permissionIds = [];
+                if (auth()->id()) {
+                    $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+                    $permissionIds = Arr::pluck($userPermissions, 'permission_id');
+                }
+
+                ElasticQueryBuilder::$userPermissions = $permissionIds;
+
+                $requiredUserPlaylistIds = [];
+                $start = microtime(true);
+                $elasticData = $this->elasticService->getElasticFiltered(
+                    $page,
+                    $limit,
+                    $orderByAndDirection,
+                    $includedTypes,
+                    $slugHierarchy,
+                    $requiredParentIds,
+                    $filter->getRequiredFields(),
+                    $filter->getIncludedFields(),
+                    $requiredContentIdsByState ?? null,
+                    $includedContentsIdsByState ?? null,
+                    $requiredUserPlaylistIds,
+                    null,
+                    $followedContents
+                );
+                $finish = microtime(true) - $start;
+                error_log('get elastic data in '.$finish);
+                $totalResults = $elasticData['hits']['total']['value'];
+
+                $ids = [];
+                foreach ($elasticData['hits']['hits'] as $elData) {
+                    $ids[] = $elData['_source']['content_id'];
+                }
+                $start = microtime(true);
+                $unorderedContentRows = $this->getByIds($ids);
+                $finish = microtime(true) - $start;
+
+                // error_log('get contents by ids from elasticsearch '.$finish.'  contentIds = '.print_r($elasticData['hits']['hits'], true));
+
+                $data = [];
+                foreach ($ids as $id) {
+                    foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                        if ($id == $unorderedContentRow['id']) {
+                            $data[] = $unorderedContentRow;
+                        }
+                    }
+                }
+
+                if ($pullFilterFields === true) {
+                    $start = microtime(true);
+                    $filterOptions = $this->elasticService->getFilterFields(
+                        $includedTypes,
+                        $slugHierarchy,
+                        $requiredParentIds,
+                        $filter->getRequiredFields(),
+                        $filter->getIncludedFields(),
+                        $requiredContentIdsByState ?? null,
+                        $includedContentsIdsByState ?? null,
+                        $requiredUserPlaylistIds
+                    );
+
+                    if (array_key_exists('instructors', $filterOptions)) {
+                        $instructors = $this->contentRepository->getByIds($filterOptions['instructors']);
+
+                        unset($filterOptions['instructors']);
+                        usort($instructors, function ($a, $b) {
+                            return strncmp(
+                                ContentHelper::getFieldValue($a, 'name'),
+                                ContentHelper::getFieldValue($b, 'name'),
+                                15
+                            );
+                        });
+                        $filterOptions['instructor'] = $instructors;
+                    }
+
+                    $filters = $filterOptions;
+                    $finish = microtime(true) - $start;
+
+                    error_log('get filter options in  '.$finish);
+                }
+
+                $resultsDB = new ContentFilterResultsEntity([
+                                                                'results' => $data,
+                                                                'total_results' => $totalResults,
+                                                                'filter_options' => $filters,
+                                                            ]);
+
+                $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
+                $results = new ContentFilterResultsEntity($results);
+            } else {
+                $resultsDB = new ContentFilterResultsEntity(
+                    [
+                        'results' => $filter->retrieveFilter(),
+                        'total_results' => $pullPagination ? $filter->countFilter() : 0,
+                        'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                    ]
+                );
+
+                $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
+                $results = new ContentFilterResultsEntity($results);
+            }
         }
 
         return Decorator::decorate($results, 'content');
@@ -939,21 +1132,19 @@ class ContentService
             $slug = ContentHelper::slugify($slug);
         }
 
-        $id = $this->contentRepository->create(
-            [
-                'slug' => $slug,
-                'type' => $type,
-                'sort' => $sort,
-                'status' => $status ?? self::STATUS_DRAFT,
-                'language' => $language ?? ConfigService::$defaultLanguage,
-                'brand' => $brand ?? ConfigService::$brand,
-                'total_xp' => $this->getDefaultXP($type, 0),
-                'user_id' => $userId,
-                'published_on' => $publishedOn,
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
-        );
+        $id = $this->contentRepository->create([
+                                                   'slug' => $slug,
+                                                   'type' => $type,
+                                                   'sort' => $sort,
+                                                   'status' => $status ?? self::STATUS_DRAFT,
+                                                   'language' => $language ?? ConfigService::$defaultLanguage,
+                                                   'brand' => $brand ?? ConfigService::$brand,
+                                                   'total_xp' => $this->getDefaultXP($type, 0),
+                                                   'user_id' => $userId,
+                                                   'published_on' => $publishedOn,
+                                                   'created_on' => Carbon::now()
+                                                       ->toDateTimeString(),
+                                               ]);
 
         //save the link with parent if the parent id exist on the request
         if ($parentId) {
@@ -969,6 +1160,8 @@ class ContentService
         CacheHelper::deleteUserFields(null, 'contents');
 
         event(new ContentCreated($id));
+
+        event(new ElasticDataShouldUpdate($id));
 
         return $this->getById($id);
     }
@@ -991,7 +1184,9 @@ class ContentService
 
         event(new ContentUpdated($id, $content, $data));
 
-        CacheHelper::deleteCache('content_' . $id);
+        event(new ElasticDataShouldUpdate($id));
+
+        CacheHelper::deleteCache('content_'.$id);
 
         CacheHelper::deleteUserFields(null, 'contents');
 
@@ -1013,7 +1208,9 @@ class ContentService
         }
         event(new ContentDeleted($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        event(new ElasticDataShouldUpdate($id));
+
+        CacheHelper::deleteCache('content_'.$id);
 
         return $this->contentRepository->delete($id);
     }
@@ -1107,7 +1304,9 @@ class ContentService
 
         event(new ContentSoftDeleted($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        event(new ElasticDataShouldUpdate($id));
+
+        CacheHelper::deleteCache('content_'.$id);
 
         return $this->contentRepository->softDelete([$id]);
     }
@@ -1123,7 +1322,7 @@ class ContentService
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
 
         //delete parent content cache
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_'.$id);
 
         return $this->contentRepository->softDelete(Arr::pluck($children, 'child_id'));
     }
@@ -1141,7 +1340,7 @@ class ContentService
         $contentFieldKey,
         array $contentFieldValues = []
     ) {
-        $hash = 'contents_by_types_and_field_value_' . CacheHelper::getKey(
+        $hash = 'contents_by_types_and_field_value_'.CacheHelper::getKey(
                 $contentTypes,
                 $contentFieldKey,
                 $contentFieldValues
@@ -1178,15 +1377,15 @@ class ContentService
             (array)config('railcontent.contentReleaseContentTypes', [])
         );
 
-        if(empty($liveEventsTypes) && empty($contentReleasesTypes)){
+        if (empty($liveEventsTypes) && empty($contentReleasesTypes)) {
             // Accommodates AddEvent calling this method from Musora, where railcontent config is different than expected.
             $liveEventsTypes = array_merge(
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.showTypes', []),
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.liveContentTypes', [])
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.liveContentTypes', [])
             );
             $contentReleasesTypes = array_merge(
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.showTypes', []),
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.contentReleaseContentTypes', [])
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.contentReleaseContentTypes', [])
             );
         }
 
@@ -1213,7 +1412,7 @@ class ContentService
         ContentRepository::$pullFutureContent = true;
 
         if ($includeSemesterPackLessons) {
-            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
+            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.'.$brand, []);
         }
 
         if (empty($liveEventsTypes) && empty($contentReleasesTypes) && empty($semesterPacksToGet)) {
@@ -1313,7 +1512,7 @@ class ContentService
             foreach ($semesterPackLessons as $lesson) {
                 foreach ($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds) {
                     if (in_array($lesson['id'], $setOfIds)) {
-                        $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
+                        $labels = config('railcontent.semester-pack-schedule-labels.'.$brand);
                         if (array_key_exists($parentSlug, $labels)) {
                             $result =
                                 $this->getByChildIdWhereParentTypeIn($lesson['id'], ['semester-pack'])
@@ -1381,10 +1580,7 @@ class ContentService
             ];
         }
 
-        $setWithThis = array_merge(
-            ContentRepository::$availableContentStatues,
-            [ContentService::STATUS_DRAFT]
-        );
+        $setWithThis = array_merge(ContentRepository::$availableContentStatues, [ContentService::STATUS_DRAFT]);
 
         // include drafts because packs might not be published, but we still want to get their *lessons*
         ContentRepository::$availableContentStatues = $setWithThis;
@@ -1404,7 +1600,7 @@ class ContentService
      */
     public function countByTypes(array $types, $groupBy = '')
     {
-        $hash = 'count_by_types_' . CacheHelper::getKey(implode($types), $groupBy);
+        $hash = 'count_by_types_'.CacheHelper::getKey(implode($types), $groupBy);
 
         if (isset($this->idContentCache[$hash])) {
             return $this->idContentCache[$hash];
@@ -1433,7 +1629,7 @@ class ContentService
 
     public function getByChildId($childId)
     {
-        $hash = 'contents_by_child_id_' . '_' . CacheHelper::getKey($childId);
+        $hash = 'contents_by_child_id_'.'_'.CacheHelper::getKey($childId);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -1532,6 +1728,144 @@ class ContentService
         }
 
         return $defaultXp;
+    }
+
+    /**
+     * @param $contentId
+     * @return array
+     */
+    public function getElasticData($contentId)
+    {
+        $content = $this->getContentForElastic($contentId);
+
+        $topics = $this->contentTopicRepository->getByContentIds([$content['id']]);
+        $styles = $this->contentStyleRepository->getByContentIds([$content['id']]);
+        $instructors = $this->contentInstructorRepository->getByContentIds([$content['id']]);
+        $bpm = $this->contentBpmRepository->getByContentIds([$content['id']]);
+        if (isset($content['video'])) {
+            $video = $this->contentRepository->getById($content['video']);
+
+            $vimeoVideoId = $video ? $video['vimeo_video_id'] : '';
+            $youtubeVideoId = $video ? $video['youtube_video_id'] : '';
+        }
+
+        $permissions =
+            $this->contentPermissionRepository->query()
+                ->select('permission_id')
+                ->where('content_id', $content['id'])
+                ->orWhere('content_type', $content['type'])
+                ->orderBy('id', 'asc')
+                ->get();
+
+        $data = $this->datumRepository->getByContentIdAndKey($content['id'], 'description');
+
+        $document = [
+            'content_id' => $content['id'],
+            'title' => utf8_encode($content['title'] ?? ''),
+            'slug' => utf8_encode($content['slug'] ?? ''),
+            'name' => utf8_encode($content['name'] ?? ''),
+            'difficulty' => $content['difficulty'] ?? null,
+            'description' => (!empty($data)) ? $data[0]['value'] : '',
+            'status' => $content['status'],
+            'brand' => $content['brand'],
+            'style' => Arr::pluck($styles, 'style'),
+            'instructor' => Arr::pluck($instructors, 'id'),
+            'internal_video_id' => $content['video'] ?? '',
+            'vimeo_video_id' => $vimeoVideoId ?? '',
+            'youtube_video_id' => $youtubeVideoId ?? '',
+            'content_type' => $content['type'],
+            'published_on' => $content['published_on'],
+            'created_on' => $content['created_on'],
+            'topic' => Arr::pluck($topics, 'topic'),
+            'bpm' => Arr::pluck($bpm, 'bpm'),
+            'staff_pick_rating' => $content['staff_pick_rating'] ?? null,
+            'is_coach' => $content['is_coach'] ?? 0,
+            'is_active' => $content['is_active'] ?? 0,
+            'is_coach_of_the_month' => $content['is_coach_of_the_month'] ?? 0,
+            'is_featured' => $content['is_featured'] ?? 0,
+            'associated_user_id' => $content['associated_user_id'] ?? null,
+            'popularity' => $content['popularity'] ?? 0,
+            'permission_ids' => $permissions->pluck('permission_id')
+                ->toArray(),
+        ];
+
+        return $document;
+    }
+
+    /**
+     * Call the getElasticContentById method from repository and return the data for elasticsearch documents
+     *
+     * @param integer $id
+     * @return ContentEntity|array|null
+     */
+    public function getContentForElastic($id)
+    {
+        return $this->contentRepository->getElasticContentById($id);
+    }
+
+    /**
+     * @param $contentType
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getElasticDataByContentType($contentType)
+    {
+        $contents = $this->contentRepository->getByType($contentType);
+        $documents = [];
+        foreach ($contents as $contentRow) {
+            $content = $this->getContentForElastic($contentRow['id']);
+
+            $topics = $this->contentTopicRepository->getByContentIds([$contentRow['id']]);
+            $styles = $this->contentStyleRepository->getByContentIds([$contentRow['id']]);
+            $instructors = $this->contentInstructorRepository->getByContentIds([$contentRow['id']]);
+            $bpm = $this->contentBpmRepository->getByContentIds([$contentRow['id']]);
+            if (isset($contentRow['video'])) {
+                $video = $this->contentRepository->getById($contentRow['video']);
+
+                $vimeoVideoId = $video ? $video['vimeo_video_id'] : '';
+                $youtubeVideoId = $video ? $video['youtube_video_id'] : '';
+            }
+
+            $permissions =
+                $this->contentPermissionRepository->query()
+                    ->select('permission_id')
+                    ->where('content_id', $contentRow['id'])
+                    ->orWhere('content_type', $contentRow['type'])
+                    ->orderBy('id', 'asc')
+                    ->get();
+
+            $documents[$contentRow['id']] = [
+                'content_id' => $contentRow['id'],
+                'title' => utf8_encode($content['title'] ?? ''),
+                'slug' => utf8_encode($content['slug'] ?? ''),
+                'name' => utf8_encode($content['name'] ?? ''),
+                'description' => utf8_encode($content['description'] ?? ''),
+                'difficulty' => $content['difficulty'] ?? null,
+                'status' => $content['status'],
+                'brand' => $content['brand'],
+                'style' => Arr::pluck($styles, 'style'),
+                'instructor' => Arr::pluck($instructors, 'id'),
+                'internal_video_id' => $content['video'] ?? '',
+                'vimeo_video_id' => $vimeoVideoId ?? '',
+                'youtube_video_id' => $youtubeVideoId ?? '',
+                'content_type' => $content['type'],
+                'published_on' => $content['published_on'],
+                'created_on' => $content['created_on'],
+                'topic' => Arr::pluck($topics, 'topic'),
+                'bpm' => Arr::pluck($bpm, 'bpm'),
+                'staff_pick_rating' => $content['staff_pick_rating'] ?? null,
+                'is_coach' => $content['is_coach'] ?? 0,
+                'is_active' => $content['is_active'] ?? 0,
+                'is_coach_of_the_month' => $content['is_coach_of_the_month'] ?? 0,
+                'is_featured' => $content['is_featured'] ?? 0,
+                'associated_user_id' => $content['associated_user_id'] ?? null,
+                'popularity' => $content['popularity'] ?? 0,
+                'permission_ids' => $permissions->pluck('permission_id')
+                    ->toArray(),
+            ];
+        }
+
+        return $documents;
     }
 
 }

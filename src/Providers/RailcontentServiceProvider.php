@@ -18,7 +18,14 @@ use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
+use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
+use Railroad\Railcontent\Commands\MigrateContentColumns;
+use Railroad\Railcontent\Commands\MigrateContentFields;
+use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
+use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
+use Railroad\Railcontent\Commands\MigrateContentVideos;
+use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -32,14 +39,15 @@ use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
+use Railroad\Railcontent\Listeners\ContentTotalXPListener;
+use Railroad\Railcontent\Listeners\SyncElasticsearchListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
-use Railroad\Railcontent\Listeners\VersionContentEventListener;
-use Railroad\Railcontent\Listeners\ContentTotalXPListener;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
@@ -53,6 +61,9 @@ class RailcontentServiceProvider extends ServiceProvider
         ContentFieldCreated::class => [
             // VersionContentEventListener::class . '@handleFieldCreated',
             ContentTotalXPListener::class . '@handleFieldCreated',
+
+            // todo: some functions are missing so this is commented our for now.
+//            SyncElasticsearchListener::class . '@handleSync',
         ],
         ContentFieldUpdated::class => [
             // VersionContentEventListener::class . '@handleFieldUpdated',
@@ -69,6 +80,7 @@ class RailcontentServiceProvider extends ServiceProvider
         CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
         UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
         HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
+        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class.'@handleSync']
     ];
 
     /**
@@ -96,23 +108,28 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
 
-        $this->commands(
-            [
-                AddDefaultShowNewField::class,
-                ComputePastStats::class,
-                ComputeWeeklyStats::class,
-                CreateSearchIndexes::class,
-                CreateVimeoVideoContentRecords::class,
-                RepairMissingDurations::class,
-                CreateYoutubeVideoContentRecords::class,
-                CreateYoutubeVideoContentRecordsViaClientAPI::class,
-                ExpireCache::class,
-                CalculateTotalXP::class,
-                CleanMetadata::class,
-                CleanContentTopicsAndStyles::class,
-                CalculateContentPopularity::class,
-            ]
-        );
+        $this->commands([
+            AddDefaultShowNewField::class,
+            ComputePastStats::class,
+            ComputeWeeklyStats::class,
+            CreateSearchIndexes::class,
+            CreateVimeoVideoContentRecords::class,
+            RepairMissingDurations::class,
+            CreateYoutubeVideoContentRecords::class,
+            CreateYoutubeVideoContentRecordsViaClientAPI::class,
+            ExpireCache::class,
+            CalculateTotalXP::class,
+            CleanMetadata::class,
+            CleanContentTopicsAndStyles::class,
+            CalculateContentPopularity::class,
+            MigrateContentToNewStructure::class,
+            MigrateContentColumns::class,
+            MigrateContentFields::class,
+            MigrateContentVideos::class,
+            MigrateContentToElasticsearch::class,
+            MigrateUserPlaylist::class,
+            DeleteContentAndHierarchiesForUserPlaylists::class,
+        ]);
 
         Validator::extend(
             'exists_multiple_columns',
@@ -145,8 +162,8 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
         ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
         ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
-        ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
-        ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
+        ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'user_playlists';
+        ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'user_playlist_content';
         ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
         ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
         ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
@@ -222,7 +239,7 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Event::listen(StatementPrepared::class, function($event) {
+        Event::listen(StatementPrepared::class, function ($event) {
             /** @var StatementPrepared $event */
             if ($event->connection->getName() ==
                 ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {

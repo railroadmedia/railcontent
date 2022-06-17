@@ -19,6 +19,7 @@ use PDO;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
+use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 use Railroad\Response\Providers\ResponseServiceProvider;
@@ -55,7 +56,12 @@ class RailcontentTestCase extends BaseTestCase
      * @var string database connexion type
      * by default it's testbench; for full text search it's mysql
      */
-    protected $connectionType = 'mysql';
+    protected $connectionType = 'testbench';
+
+    /**
+     * @var ElasticService
+     */
+    protected $elasticService;
 
     protected function setUp(): void
     {
@@ -73,6 +79,11 @@ class RailcontentTestCase extends BaseTestCase
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
+
+        $this->elasticService = $this->app->make(ElasticService::class);
+        $this->elasticService->deleteIndex(config('railcontent.elastic_index_name','content'));
+
+        $this->elasticService->createContentIndex();
 
         RepositoryBase::$connectionMask = null;
 
@@ -116,10 +127,12 @@ class RailcontentTestCase extends BaseTestCase
 
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
+        $app['config']->set('railcontent.elastic_index_name', 'testing');
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
         $app['config']->set('railcontent.data_mode', $defaultConfig['data_mode']);
+        $app['config']->set('railcontent.use_elastic_search', $defaultConfig['use_elastic_search']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
         $app['config']->set('railcontent.available_brands', $defaultConfig['available_brands']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
@@ -139,6 +152,7 @@ class RailcontentTestCase extends BaseTestCase
         );
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.statistics_content_types', $defaultConfig['statistics_content_types']);
+        $app['config']->set('railcontent.contentColumnNamesForFields', $defaultConfig['contentColumnNamesForFields']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
         $app['config']->set(
             'railcontent.allowed_types_for_bubble_progress',
@@ -429,5 +443,4 @@ class RailcontentTestCase extends BaseTestCase
     {
         return $this->connectionType;
     }
-
-}
+    }

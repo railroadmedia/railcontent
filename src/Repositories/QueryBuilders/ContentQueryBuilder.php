@@ -19,18 +19,7 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $this->addSelect(
             [
-                ConfigService::$tableContent . '.id as id',
-                ConfigService::$tableContent . '.slug as slug',
-                ConfigService::$tableContent . '.type as type',
-                ConfigService::$tableContent . '.sort as sort',
-                ConfigService::$tableContent . '.status as status',
-                ConfigService::$tableContent . '.language as language',
-                ConfigService::$tableContent . '.brand as brand',
-                ConfigService::$tableContent . '.total_xp as total_xp',
-                ConfigService::$tableContent . '.published_on as published_on',
-                ConfigService::$tableContent . '.created_on as created_on',
-                ConfigService::$tableContent . '.archived_on as archived_on',
-                ConfigService::$tableContent . '.popularity as popularity',
+                ConfigService::$tableContent . '.*',
             ]
         );
 
@@ -77,9 +66,7 @@ class ContentQueryBuilder extends QueryBuilder
         $this->addSelect(
             [
                 ConfigService::$tableContent . '.type as content_type',
-                ConfigService::$tableContentFields . '.key as key',
-                ConfigService::$tableContentFields . '.value as value',
-                ConfigService::$tableContentFields . '.type as type',
+                ConfigService::$tableContent . '.*',
             ]
         );
 
@@ -727,7 +714,7 @@ class ContentQueryBuilder extends QueryBuilder
             } elseif ($orderByColumn == 'title') {
                 array_unshift($groupByColumns, 'field.value');
             } elseif ($orderByColumn == 'progress') {
-                array_unshift($groupByColumns, 'railcontent.railcontent_user_content_progress.updated_on');
+                array_unshift($groupByColumns, ConfigService::$tableUserContentProgress.'.updated_on');
             }
         }
 
