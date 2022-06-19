@@ -1,6 +1,6 @@
 {
-    "engines" : {
-        "node" : ">=16.0.0"
+    "engines": {
+        "node": ">=16.0.0"
     },
     "private": true,
     "scripts": {
@@ -22,11 +22,12 @@
         "marketing-prod": "npm run marketing-production",
         "md": "npm run marketing-development",
         "mp": "npm run marketing-production",
-        "mrk": "parcel build resources/assets/marketing/*.js --out-dir public/assets/marketing --no-cache --log-level 4",
-        "mrkw": "parcel watch resources/assets/marketing/*.js --out-dir public/assets/marketing --log-level 4"
+        "mrk": "parcel build resources/marketing/assets/parcel/*.js --dist-dir public/marketing/parcel/css --no-cache --log-level error",
+        "mrkw": "parcel watch resources/marketing/assets/parcel/*.js --out-dir public/assets/parcel --log-level 4"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
+        "@parcel/transformer-sass": "^2.6.0",
         "@tailwindcss/aspect-ratio": "^0.4.0",
         "@tailwindcss/forms": "^0.5.0",
         "@tailwindcss/line-clamp": "^0.4.0",
@@ -37,6 +38,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "laravel-mix": "^6.0.43",
         "laravel-mix-merge-manifest": "^2.0.0",
+        "parcel": "^2.6.0",
         "postcss": "^8.3.9",
         "prettier": "^2.5.1",
         "prettier-plugin-tailwindcss": "^0.1.4",
@@ -62,7 +64,6 @@
         "luxon": "^2.3.1",
         "normalize.css": "^8.0.1",
         "noty": "^3.2.0-beta-deprecated",
-        "parcel-bundler": "^1.12.5",
         "query-string": "^7.1.1",
         "screenfull": "^6.0.1",
         "shaka-player": "^2.5.7",
