@@ -12,16 +12,43 @@ class ProductPagesController extends BaseController
     {
         $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->where('visible', '=', 1)->get();
 
+
+        $lessons = $products->filter(function($value, $key){
+            return $value->productType->name === 'Lesson';
+        });
+
+        $accessories = $products->filter(function($value, $key){
+            return $value->productType->name === 'Accessory';
+        });
+
+        $hats = $products->filter(function($value, $key){
+            return $value->productType->name === 'Hat';
+        });
+
+        $shirts = $products->filter(function($value, $key){
+            return $value->productType->name === 'Shirt';
+        });
+
+        $hoodies = $products->filter(function($value, $key){
+            return $value->productType->name === 'Hoodie';
+        });
+
         return view('product.products',[
-            'products' => $products
+            'lessons' => $lessons,
+            'accessories' => $accessories,
+            'hats' => $hats,
+            'shirts' => $shirts,
+            'hoodies' => $hoodies,
+            'theme' => $brand,
         ]);
     }
 
-    public function product($slug){
-        $product = Product::firstWhere('slug', $slug);
+    public function product($brand, $slug){
+        $product = Product::where('slug', $slug)->firstOrFail();
 
         return view('product.product',[
-            'product' => $product
+            'product' => $product,
+            'theme' => $brand,
         ]);
     }
 }
