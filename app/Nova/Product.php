@@ -66,7 +66,7 @@ class Product extends Resource
                 ->asHtml()
                 ->required()
                 ->displayUsing(function($value){
-                    return '<a class="link-default" target="_blank" href="/product/'.$value.'">'.$value.'</a>';
+                    return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$value.'">'.$value.'</a>';
                 }),
             Text::make('Sku')->hideFromIndex()->required(),
             Image::make('Thumbnail')
@@ -142,6 +142,8 @@ class Product extends Resource
             Text::make('Size Chart', 'size_chart_id')
                 ->asHtml()
                 ->hideFromIndex()
+                ->hideWhenCreating()
+                ->hideWhenUpdating()
                 ->displayUsing(function($value){
                     return is_null($value) ? "-" : "<img src=\"https://laravel-nova.s3.us-east-2.amazonaws.com/".SizeChart::where('id', '=', $value)->first()->chart."\" alt='size chart' />";
                 }),
