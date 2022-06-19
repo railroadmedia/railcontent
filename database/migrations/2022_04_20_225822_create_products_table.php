@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('sku')->unique();
+            $table->string('thumbnail')->unique();
             $table->string('header_text');
             $table->string('short_desc')->nullable();
             $table->string('meta_desc');
-            $table->string('meta_img');
+            $table->string('meta_img')->unique();
             $table->string('special_text')->nullable();
             $table->string('study_text')->nullable();
             $table->string('logo')->nullable()->unique();
@@ -31,7 +32,6 @@ return new class extends Migration
             $table->decimal('discounted_price',8,2)->nullable();
             $table->string('video_src')->nullable();
             $table->longText('overview')->nullable();
-            $table->string('about_img')->nullable();
             $table->string('instructor_name')->nullable();
             $table->string('instructor_img')->nullable()->unique();
             $table->longText('instructor_desc')->nullable();
@@ -42,6 +42,7 @@ return new class extends Migration
             $table->boolean('free_bonus')->default(false);
             $table->boolean('membership_discount')->default(false);
             $table->boolean('lifetime_access')->default(false);
+            $table->integer()->nullable();
             $table->timestamps();
         });
     }
