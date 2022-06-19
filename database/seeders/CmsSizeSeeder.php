@@ -39,15 +39,15 @@ class CmsSizeSeeder extends Seeder
             ],
             [
                 'name' => 'XX-Large',
-                'code' => '2XL',
+                'code' => 'XXL',
             ],
             [
                 'name' => 'XXX-Large',
-                'code' => '3XL',
+                'code' => 'XXXL',
             ],
             [
                 'name' => 'XXXX-Large',
-                'code' => '4XL',
+                'code' => 'XXXXL',
             ],
         ];
 
