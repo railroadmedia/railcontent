@@ -1,6 +1,9 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=6d3866444f9a17d87b4e24023ab3ff8b",
-    "/platform/css/app.css": "/platform/css/app.css?id=e8392bcdba893aa4862b6c7f786f293e",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=8e7457eda3c6e79dc1955db8654679e3",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=ad05670e68c41dafe3aaa6a81a52928f"
+    "/platform/js/app.js": "/platform/js/app.js?id=8fd903010940ca77e51e4ea5a3932159",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=335e397c44edfe85d8b34e2e71d75b78",
+    "/platform/css/app.css": "/platform/css/app.css?id=0d1d77c91588383d175284c28ce64580",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=1470c1bc38b2183f267066ac80870234",
+    "/platform/js/play-alongs.js": "/platform/js/play-alongs.js?id=34565ad0441a051110b59eb52dfc05d5",
+    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=d0f5e25ffaeaabd08c0de972e3f538ca",
+    "/platform/js/forum.js": "/platform/js/forum.js?id=34565ad0441a051110b59eb52dfc05d5"
 }

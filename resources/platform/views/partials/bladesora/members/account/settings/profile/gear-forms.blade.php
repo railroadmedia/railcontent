@@ -108,7 +108,7 @@
     ])
 
     {{-- SINGEO --}}
-    {{-- @include('partials.bladesora.members.account.settings.profile.gear-form-singing', [
+     @include('partials.bladesora.members.account.settings.profile.gear-form-singing', [
         'brand' => '{{ $brand }}',
         'singingSince' => user()->singing_since_year,
         'mic' => user()->singing_gear_mic_brands,
@@ -125,5 +125,5 @@
             'inputValue' => old('singing_gear_mic_brands', user()->singing_gear_mic_brands ?? ''),
             'inputErrors' => $errors->get('singing_gear_mic_brands'),
         ]
-    ]) --}}
+    ])
 </div>

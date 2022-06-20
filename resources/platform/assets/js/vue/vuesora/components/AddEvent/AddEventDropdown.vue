@@ -9,7 +9,7 @@
                 :key="i"
                 :href="'https://www.addevent.com/subscribe/' + subscriptionCalendarId + '+' + platform.key"
                 target="_blank"
-                class="text-black pointer bg-white no-decoration"
+                class="text-black pointer bg-white no-decoration tw-text-left"
             >
 
                 <p

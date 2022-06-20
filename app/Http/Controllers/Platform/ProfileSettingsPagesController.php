@@ -11,6 +11,7 @@ use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Location\Services\CountryListService;
+use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
 
 class ProfileSettingsPagesController extends BaseController
@@ -20,15 +21,16 @@ class ProfileSettingsPagesController extends BaseController
     /**
      * @param NotificationSettingsService $notificationSettingsService
      */
-    public function __construct(NotificationSettingsService $notificationSettingsService)
+    public function __construct(NotificationSettingsService $notificationSettingsService, UserSignaturesRepository $userSignaturesRepository)
     {
         $this->notificationSettingsService = $notificationSettingsService;
+        $this->userSignaturesRepository = $userSignaturesRepository;
+
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
     {
-        $userSignature = [];
-
+        $userSignature = $this->userSignaturesRepository->getUserSignature();
         return view('account.settings.profile', [
             'user' => user(),
             'signature' => ($userSignature) ? $userSignature['signature'] : '', // todo: railforums integration
@@ -38,7 +40,7 @@ class ProfileSettingsPagesController extends BaseController
 
     public function loginCredentials(Request $request, $domain, $brand, $userId)
     {
-        $userSignature = [];
+        $userSignature = $this->userSignaturesRepository->getUserSignature();
 
         return view('account.settings.login-credentials', [
             'user' => user(),
