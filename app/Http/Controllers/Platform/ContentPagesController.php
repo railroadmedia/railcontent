@@ -666,29 +666,10 @@ class ContentPagesController extends BaseController
             ['results' => $parentChildrenTrimmed]
         ))->toResponseRawJson();
 
-//        dd([
-//            "parentType" => $contentToRenderAsLessonParent['type'],
-//            "lessonType" => $contentToRenderAsLesson['type'],
-//            "lessonContent" => $contentToRenderAsLesson,
-//            "parent" => $contentToRenderAsLessonParent,
-//            "parentChildren" => $parentChildren,
-//            "hasSiblings" => !empty($parentChildren),
-//            "nextChild" => $nextChild,
-//            "previousChild" => $previousChild,
-//            "isLive" => false,
-//            "relatedLessons" => $relatedLessons,
-//            "themeColor" => $themeColor,
-//            "isHiddenContentType" => $isHiddenContentType,
-//            "hasLessonInfo" => $hasLessonInfo,
-//            "thisLessonJson" => $thisLessonJson,
-//            "nextLessonJson" => content_to_json($nextChild),
-//            "showEmail" => false,
-//        ]);
-
         return view(
             'content.lesson',
             [
-                "parentType" => $contentToRenderAsLessonParent['type'],
+                "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
                 "lessonType" => $contentToRenderAsLesson['type'],
                 "lessonContent" => $contentToRenderAsLesson,
                 "parent" => $contentToRenderAsLessonParent,
