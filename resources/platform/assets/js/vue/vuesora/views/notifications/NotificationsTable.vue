@@ -81,7 +81,7 @@ export default {
     props: {
         brand: {
             type: String,
-            default: () => 'recordeo',
+            default: () => 'drumeo',
         },
         notifications: {
             type: Array,
@@ -96,8 +96,8 @@ export default {
             default: () => '',
         },
         notificationCount: {
-            type: Number | String,
-            default: () => 1,
+            type: [Number, String],
+            default: () => '1',
         },
         hasUnreadNotifications: {
             type: Boolean,
@@ -106,7 +106,7 @@ export default {
     },
     data() {
         return {
-            notificationsArray: this.notifications,
+            notificationsArray: this.notifications || [],
             markingAllAsRead: false,
             hasUnread: false,
         };
