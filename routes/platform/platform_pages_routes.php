@@ -158,7 +158,7 @@ Route::domain('{musoraDomain}')
             ->name('platform.packs.second-level');
 
         /*
-         * Catch-All Sub-Content Hierarchy Pages
+         * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
          */
         Route::get(
             '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',
@@ -183,6 +183,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->whereIn('primaryPage', ['packs', 'method'])
             ->name('platform.content.third-level');
+
+        Route::get(
+            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}/{fourthContentSlug}/{fourthContentId}',
+            [ContentPagesController::class, 'fourthLevel']
+        )
+            ->whereIn('brand', all_brands())
+            ->whereIn('primaryPage', ['method'])
+            ->name('platform.content.fourth-level');
 
         Route::get(
             '/{brand}/jump-to-content-id/{contentId}',

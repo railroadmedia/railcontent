@@ -27,7 +27,7 @@
             "pages" => [
                 [
                     "title" => 'Singeo Method',
-                    "url" => url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')])
+                    "url" => url()->route('platform.content.first-level', ['method', $firstContent['slug'], $firstContent['id']])
                 ],
                 [
                     "title" => $parent->fetch('fields.title'),
