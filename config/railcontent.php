@@ -184,9 +184,9 @@ return [
     'video_sync' => [
         'vimeo' => [
             'musora' => [
-                'client_id' => env('VIMEO_CLIENT_ID_DRUMEO'),
-                'client_secret' => env('VIMEO_CLIENT_SECRET_DRUMEO'),
-                'access_token' => env('VIMEO_ACCESS_TOKEN_DRUMEO'),
+                'client_id' => env('VIMEO_CLIENT_ID'),
+                'client_secret' => env('VIMEO_CLIENT_SECRET'),
+                'access_token' => env('VIMEO_ACCESS_TOKEN'),
             ],
         ],
         'youtube' => [

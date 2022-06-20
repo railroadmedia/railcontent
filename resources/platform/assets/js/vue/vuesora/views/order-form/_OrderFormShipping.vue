@@ -303,7 +303,7 @@
     </div>
 </template>
 <script>
-import Utils from '../assets/js/helper-functions/utils.js';
+import Utils from '../../assets/js/helper-functions/utils.js';
 import Validation from './_validation';
 
 export default {

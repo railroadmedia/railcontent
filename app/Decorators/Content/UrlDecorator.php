@@ -76,6 +76,26 @@ class UrlDecorator extends ModeDecoratorBase
                     ]
                 );
             }
+
+            // fourth-level types
+            if (count($contentParentData) == 3 &&
+                !empty($contentTypeToURLSlugMap[$contentParentData[2]->type])) {
+                $contents[$contentIndex]['url'] = url()->route(
+                    'platform.content.fourth-level',
+                    [
+                        'brand' => $content['brand'],
+                        $contentTypeToURLSlugMap[$contentParentData[2]->type],
+                        $contentParentData[2]->slug,
+                        $contentParentData[2]->id,
+                        $contentParentData[1]->slug,
+                        $contentParentData[1]->id,
+                        $contentParentData[0]->slug,
+                        $contentParentData[0]->id,
+                        $content['slug'],
+                        $content['id'],
+                    ]
+                );
+            }
         }
 
         return $contents;
