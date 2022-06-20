@@ -36,64 +36,62 @@
 @endsection
 
 @section('content')
-        <div v-cloak>
 
-            <section id="logoContainer" class="pa-2 tw-text-center">
-                <img class="logo"
-                    src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
-            </section>
+    <section id="logoContainer" class="pa-2 tw-text-center">
+        <img class="logo"
+            src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
+    </section>
 
-            <p class="tw-pb-3 tw-text-center tw-italic">Your start-to-finish guide to learning music.</p>
+    <p class="tw-pb-3 tw-text-center tw-italic">Your start-to-finish guide to learning music.</p>
 
-            <section class="tw-flex tw-flex-col bg-grey-1 pa-3 tw-mb-3 corners-10">
+    <section class="tw-flex tw-flex-col bg-grey-1 pa-3 tw-mb-3 corners-10">
 
-                <form method="post" action="{{ url()->route('usora.password.reset') }}" class="tw-flex tw-flex-col">
-                    @if($useCsrfToken ?? true)
-                        {{ csrf_field() }}
-                    @endif
+        <form method="post" action="{{ url()->route('usora.password.reset') }}" class="tw-flex tw-flex-col">
+            @if($useCsrfToken ?? true)
+                {{ csrf_field() }}
+            @endif
 
-                    @if(!empty($errors->all()))
-                        <ul class="tw-flex tw-flex-col mb-3 tiny text-error tw-list-none">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
+            @if(!empty($errors->all()))
+                <ul class="tw-flex tw-flex-col mb-3 tiny text-error tw-list-none">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
 
-                    <input type="hidden" name="token" value="{{ $token }}">
-                    <input type="hidden" name="email" value="{{ $email }}">
+            <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="email" value="{{ $email }}">
 
-                    <p class="tiny tw-mb-2 tw-text-center">Reset password for <strong>{{ $email }}</strong></p>
+            <p class="tiny tw-mb-2 tw-text-center">Reset password for <strong>{{ $email }}</strong></p>
 
-                    <div class="tw-flex tw-flex-col tw-mb-2">
-                        @include('partials.bladesora.members.inputs.text-input', [
-                        "brand" => '{{ $brand }}',
-                        "type" => "password",
-                        "inputId" => "newPassword",
-                        "inputName" => "password",
-                        "inputLabel" => "New Password",
-                        "inputValue" => "",
-                        "inputErrors" => []
-                    ])
-                    </div>
+            <div class="tw-flex tw-flex-col tw-mb-2">
+                @include('partials.bladesora.members.inputs.text-input', [
+                "brand" => '{{ $brand }}',
+                "type" => "password",
+                "inputId" => "newPassword",
+                "inputName" => "password",
+                "inputLabel" => "New Password",
+                "inputValue" => "",
+                "inputErrors" => []
+            ])
+            </div>
 
-                    <div class="tw-flex tw-flex-col tw-mb-2">
-                        @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => '{{ $brand }}',
-                            "type" => "password",
-                            "inputId" => "confirmNewPassword",
-                            "inputName" => "password_confirmation",
-                            "inputLabel" => "Confirm New Password",
-                            "inputValue" => "",
-                            "inputErrors" => []
-                        ])
-                    </div>
+            <div class="tw-flex tw-flex-col tw-mb-2">
+                @include('partials.bladesora.members.inputs.text-input', [
+                    "brand" => '{{ $brand }}',
+                    "type" => "password",
+                    "inputId" => "confirmNewPassword",
+                    "inputName" => "password_confirmation",
+                    "inputLabel" => "Confirm New Password",
+                    "inputValue" => "",
+                    "inputErrors" => []
+                ])
+            </div>
 
-                    <button type="submit" class="btn">
-                        <span class="tw-text-white tw-bg-{{ $brand }}">Sign In</span>
-                    </button>
-                </form>
-            </section>
+            <button type="submit" class="btn">
+                <span class="tw-text-white tw-bg-{{ $brand }}">Sign In</span>
+            </button>
+        </form>
+    </section>
 
-        </div>
 @endsection

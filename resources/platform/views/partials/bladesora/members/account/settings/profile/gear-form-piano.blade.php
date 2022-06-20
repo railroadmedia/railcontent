@@ -1,10 +1,12 @@
-@component('partials.bladesora.members.account.settings.edit-form')
+@component('partials.bladesora.members.account.settings.edit-form', [
+    "gearForm" => true
+])
     @slot('formTitle')
-        My Gear
+        My Piano Gear
     @endslot
 
     @slot('modalId')
-        gearModal
+        pianoGearModal
     @endslot
 
     @slot('formData')
@@ -21,10 +23,10 @@
     @endslot
 
     @slot('formModal')
-        <div id="gearModal" class="modal">
+        <div id="pianoGearModal" class="modal">
             <div class="flex flex-column bg-white corners-10 shadow">
                 <div class="flex flex-row pa-3">
-                    <h2 class="subheading">Edit: My Gear</h2>
+                    <h2 class="subheading">Edit: My Piano Gear</h2>
                 </div>
 
                 <form method="POST" action="{{ $action }}" enctype="multipart/form-data">

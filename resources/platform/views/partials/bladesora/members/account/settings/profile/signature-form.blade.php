@@ -34,9 +34,9 @@
                     {{ csrf_field() }}
 
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-1">
-                        <div class="tw-flex tw-flex-col">
-                            <div class="tw-flex tw-flex-row tw-mb-1">
-                                <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-col tw-w-full">
+                            <div class="tw-flex tw-flex-row tw-mb-1 tw-w-full">
+                                <div class="tw-flex tw-flex-col tw-w-full">
                                     @include('partials.bladesora.members.inputs.textarea-input', [
                                         "brand" => $brand,
                                         "inputId" => "signature",
@@ -45,6 +45,7 @@
                                         "inputValue" => $signature,
                                         "inputErrors" => [],
                                     ])
+                                    
                                 </div>
                             </div>
                         </div>

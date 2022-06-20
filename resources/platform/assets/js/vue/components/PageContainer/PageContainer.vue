@@ -1,5 +1,5 @@
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Navbar from "../Navbar/Navbar.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
@@ -34,6 +34,11 @@ export default {
     },
     searchUrl: {
       type: String
+    }
+  },
+  provide() {
+    return {
+      isDarkModeSelected: computed(() => this.isDarkModeSelected)
     }
   },
 
@@ -89,6 +94,7 @@ export default {
       onColorModeToggle,
       setDarkMode
     };
+
   },
 
   beforeMount() {
@@ -136,39 +142,23 @@ export default {
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
 
-    <Navbar
-      :brand="brand"
-      :has-notifications="hasNotifications"
-      :user-name="userName"
-      :user-avatar="userAvatar"
-      :account-url="accountUrl"
-      :isSidebarHidden="isSidebarHidden"
-      :isDarkModeSelected="isDarkModeSelected"
-      :isSidebarCollapsed="isSidebarCollapsed"
-      @onCollapseSidebar="onCollapseSidebar"
-      @onColorModeToggle="onColorModeToggle"
-    />
+    <Navbar :brand="brand" :has-notifications="hasNotifications" :user-name="userName" :user-avatar="userAvatar"
+      :account-url="accountUrl" :isSidebarHidden="isSidebarHidden" :isDarkModeSelected="isDarkModeSelected"
+      :isSidebarCollapsed="isSidebarCollapsed" @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->
-    <div
-      class="
+    <div class="
         tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
         dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
         tw-overflow-hidden
-      "
-    >
+      ">
       <!-- Sidebar -->
-      <Sidebar
-        :brand="brand"
-        :isLive="isLive"
-        :isSidebarCollapsed="isSidebarCollapsed"
-        :isSidebarHidden="isSidebarHidden"
-        @onCollapseSidebar="onCollapseSidebar"
-      />
+      <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
+        :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar" />
 
       <!-- Content Container -->
-      <main
-        class="
+      <main class="
           tw-flex
           tw-w-full
           tw-h-full
@@ -178,11 +168,11 @@ export default {
           tw-relative
           tw-overflow-y-auto
           tw-overflow-x-hidden
-        "
-      >
+          tw-scroll-smooth
+        " id="content-container">
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-pb-7">
-          <slot />
+          <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 
         <!-- Footer -->
@@ -190,15 +180,11 @@ export default {
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">
-          <div
-            v-if="!isSidebarCollapsed && !isSidebarHidden"
-            @click="isSidebarHidden = true"
-            class="
+          <div v-if="!isSidebarCollapsed && !isSidebarHidden" @click="isSidebarHidden = true" class="
               tw-absolute
               lg:tw-hidden
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
-            "
-          ></div>
+            "></div>
         </Transition>
       </main>
     </div>

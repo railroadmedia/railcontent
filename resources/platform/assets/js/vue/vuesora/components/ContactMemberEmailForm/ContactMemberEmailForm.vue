@@ -63,7 +63,7 @@
         </button>
 
         <!-- Response Message -->
-        <div class="tw-flex tw-z-150 tw-fixed tw-rounded-lg tw-left-8 tw-p-6 tw-text-base tw-shadow-lg tw-mr-8 tw-transition-all tw-duration-200 tw-ease-in-out"
+        <div class="tw-flex tw-z-[100] tw-fixed tw-rounded-lg tw-left-8 tw-p-6 tw-text-base tw-shadow-lg tw-mr-8 tw-transition-all tw-duration-200 tw-ease-in-out"
              :class="[responseMessageVisible ? 'tw-bottom-8': 'tw--bottom-44', formSuccessful ? 'tw-bg-green-50 tw-text-green-600' : 'tw-bg-red-50 tw-text-red-600']"
         >
             <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6 tw-text-green-500 tw-mr-4" viewBox="0 0 20 20" fill="currentColor">

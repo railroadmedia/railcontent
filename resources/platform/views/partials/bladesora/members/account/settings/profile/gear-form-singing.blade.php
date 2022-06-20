@@ -1,19 +1,20 @@
-@component('partials.bladesora.members.account.settings.edit-form')
+@component('partials.bladesora.members.account.settings.edit-form', [
+    "gearForm" => true
+])
     @slot('formTitle')
-        My Gear
+        My Singing Gear
     @endslot
 
     @slot('modalId')
-        gearModal
+        singingGearModal
     @endslot
 
     @slot('formData')
         <div class="flex flex-column grow">
             @include('partials.bladesora.members.account.partials._text-fields', [
                 "fields" => [
-                    "Playing Since" => $playingSince,
-                    "Piano" => $piano,
-                    "Keyboard" => $keyboard,
+                    "Singing Since" => $singingSince,
+                    "Mic" => $mic
                 ],
                 "showEmpty" => true
             ])
@@ -21,52 +22,40 @@
     @endslot
 
     @slot('formModal')
-        <div id="gearModal" class="modal">
+        <div id="singingGearModal" class="modal">
             <div class="flex flex-column bg-white corners-10 shadow">
                 <div class="flex flex-row pa-3">
-                    <h2 class="subheading">Edit: My Gear</h2>
+                    <h2 class="subheading">Edit: My Singing Gear</h2>
                 </div>
 
                 <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
                     {{ method_field($method) }}
                     {{ csrf_field() }}
 
-
                     <div class="flex flex-row ph-3 mb-1">
                         <div class="flex flex-column">
                             @include('partials.bladesora.members.inputs.select-input', array_merge([
-                                "brand" => $brand ?? "pianote",
-                                "inputId" => "playedSince",
-                                "inputName" => "piano_playing_since_year",
-                                "inputLabel" => "Played Since",
+                                "brand" => $brand ?? "singeo",
+                                "inputId" => "singingSince",
+                                "inputName" => "singing_since_year",
+                                "inputLabel" => "Singing Since",
                                 "inputValue" => '',
                                 "inputOptions" => array_reverse(range(1900, date('Y'))),
                                 "inputErrors" => [],
-                            ], $playedSinceInput ?? []))
+                            ], $singingSinceInput ?? []))
                         </div>
                     </div>
                     <div class="flex flex-row ph-3 inline-inputs">
                         <div class="flex flex-column">
                             @include('partials.bladesora.members.inputs.text-input', array_merge([
-                                "brand" => $brand ?? "pianote",
+                                "brand" => $brand ?? "singeo",
                                 "type" => "text",
-                                "inputId" => "pianoBrand",
-                                "inputName" => "piano_gear_piano_brands",
-                                "inputLabel" => "Piano",
+                                "inputId" => "singingMic",
+                                "inputName" => "singing_gear_mic_brands",
+                                "inputLabel" => "Mic",
                                 "inputValue" => "",
                                 "inputErrors" => [],
-                            ], $pianoBrandInput ?? []))
-                        </div>
-                        <div class="flex flex-column">
-                            @include('partials.bladesora.members.inputs.text-input', array_merge([
-                                "brand" => $brand ?? "pianote",
-                                "type" => "text",
-                                "inputId" => "keyboardBrand",
-                                "inputName" => "piano_gear_keyboard_brands",
-                                "inputLabel" => "Keyboard",
-                                "inputValue" => "",
-                                "inputErrors" => [],
-                            ], $keyboardBrandInput ?? []))
+                            ], $micBrandInput ?? []))
                         </div>
                     </div>
 

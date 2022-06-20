@@ -95,7 +95,7 @@ export default {
             .catch((error) => {
                 if (error.response && error.response.status == 422) {
                     return error.response.data;
-                } 
+                }
                 ErrorHandler(error);
             });
     },
@@ -155,7 +155,7 @@ export default {
 
         formData.append('type', type);
         formData.append('subject', subject);
-        formData.append('lines', lines);
+        formData.append('lines[]', lines);
         formData.append('attachment', attachment);
         formData.append('callToAction', callToAction);
         formData.append('alert', alert);
@@ -179,7 +179,7 @@ export default {
      * @returns {Promise} resolved promise with the response.data object
      */
     markNotificationAsRead(id) {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-read/${id}`)
+        return axios.put(`${endpointPrefix}/railnotifications/read/${id}`)
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -191,7 +191,7 @@ export default {
      * @returns {Promise} resolved promise with the response.data object
      */
     markNotificationAsUnRead(id) {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-unread/${id}`)
+        return axios.put(`${endpointPrefix}/railnotifications/unread/${id}`)
             .then(response => response.data)
             .catch(ErrorHandler);
     },
@@ -201,8 +201,8 @@ export default {
      *
      * @returns {Promise} resolved promise with the response.data object
      */
-    markAllNotificationsAsRead() {
-        return axios.post(`${endpointPrefix}/members/notifications/mark-all-read`)
+    markAllNotificationsAsRead(brand) {
+        return axios.put(`${endpointPrefix}/railnotifications/read-all`, { brand: brand })
             .then(response => response.data)
             .catch(ErrorHandler);
     },

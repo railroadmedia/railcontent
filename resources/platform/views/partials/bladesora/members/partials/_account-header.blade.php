@@ -27,8 +27,8 @@
                 >
                     @if($userAvatar)
                         <img class="tw-inline-block tw-rounded-full tw-h-full"
-                             src="{{ cf_img($userAvatar, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
-                             data-ix-src="{{ $userAvatar }}"
+                            src="{{ cf_img( $userAvatar, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"] ) }}"
+                            data-ix-src="{{ $userAvatar }}"
                         >
                     @endif
                 </div>

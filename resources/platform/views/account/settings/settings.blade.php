@@ -1,21 +1,23 @@
 @extends('account.settings.layout')
 
 @section('meta')
-    <title>Settings | Musora</title>
+    <title>Notification Settings | Musora</title>
 @endsection
 
 @section('edit-forms')
     <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
-        <h1 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">Settings</h1>
+        <h1 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">Notification Settings</h1>
     </div>
 
     <div class="tw-flex tw-flex-row">
         <div id="editForm" class="tw-flex tw-flex-col tw-w-full">
-            <form method="POST" action="/usora/user/update/{{ user()->id }}">
-                <input type="hidden" name="redirect" value="{{ url()->current() }}">
+            <form method="POST" action="/railnotifications/user-notification-settings/update">
+                <input type="hidden" name="redirect" value="{{ url()->current().'?selected-brand='.$selectedBrand }}">
+                <input type="hidden" name="brand" value="{{ $selectedBrand }}">
                 {{ method_field('PATCH') }}
                 {{ csrf_field() }}
 
+                @include('account.settings.partials._brand-notifications-settings', ['allBrands' => $allBrands])
                 <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
                     <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
@@ -27,7 +29,7 @@
                                 "inputID" => "weeklyUpdates",
                                 "inputName" => "notify_weekly_update",
                                 "inputLabel" => "Weekly Community Updates.",
-                                "checked" => (boolean) user()->notify_weekly_update
+                                "checked" => (boolean) ($userNotificationsSettings['notify_weekly_update'] ?? user()->notify_weekly_update)
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -35,7 +37,7 @@
                                 "inputID" => "repliesComment",
                                 "inputName" => "notify_on_lesson_comment_reply",
                                 "inputLabel" => "When a member replies to my lesson comment.",
-                                "checked" => (boolean) user()->notify_on_lesson_comment_reply
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_lesson_comment_reply'] ?? user()->notify_on_lesson_comment_reply)
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -43,7 +45,7 @@
                                 "inputID" => "likesComment",
                                 "inputName" => "notify_on_lesson_comment_like",
                                 "inputLabel" => "When a member likes my lesson comment.",
-                                "checked" => (boolean) user()->notify_on_lesson_comment_like
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_lesson_comment_like'] ?? user()->notify_on_lesson_comment_like)
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -51,7 +53,7 @@
                                 "inputID" => "repliesForum",
                                 "inputName" => "notify_on_forum_followed_thread_reply",
                                 "inputLabel" => "When a member posts in a forum thread I created or follow.",
-                                "checked" => (boolean) user()->notify_on_forum_followed_thread_reply
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_followed_thread_reply'] ?? user()->notify_on_forum_followed_thread_reply)
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -59,7 +61,24 @@
                                 "inputID" => "likesForum",
                                 "inputName" => "notify_on_forum_post_like",
                                 "inputLabel" => "When a member likes my forum posts",
-                                "checked" => (boolean) user()->notify_on_forum_post_like
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_post_like'] ?? user()->notify_on_forum_post_like)
+                            ])
+                        </div>
+                        <div class="tw-flex tw-flex-row tw-mb-2">
+                            @include('partials.bladesora.members.inputs.toggle-input', [
+                                "inputID" => "sendEmailNotifications",
+                                "inputName" => "send_email",
+                                "inputLabel" => "Send email notifications.",
+                                "checked" => (boolean) ($userNotificationsSettings['send_email'] ?? user()->send_email_notifications)
+                            ])
+                        </div>
+
+                        <div class="tw-flex tw-flex-row tw-mb-2">
+                            @include('partials.bladesora.members.inputs.toggle-input', [
+                                "inputID" => "sendMobileAppPushNotifications",
+                                "inputName" => "send_in_app_push_notification",
+                                "inputLabel" => "Send mobile push notifications.",
+                                "checked" => (boolean) ($userNotificationsSettings['send_in_app_push_notification'] ?? user()->send_mobile_app_push_notifications)
                             ])
                         </div>
                     </div>
@@ -93,29 +112,29 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
-                    <h2 class="tw-font-bold tw-text-lg">Would you like to use our legacy video player?</h2>
-                </div>
+{{--                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">--}}
+{{--                    <h2 class="tw-font-bold tw-text-lg">Would you like to use our legacy video player?</h2>--}}
+{{--                </div>--}}
 
-                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">
-                    <p class="body tw-text-black dark:tw-text-white tw-mb-3">
-                        Our video player may have compatibility issues with older devices and operating systems. 
-                        <br>We recommend switching to our legacy video player if you are experiencing playback issues.
-                    </p>
-                </div>
+{{--                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">--}}
+{{--                    <p class="body tw-text-black dark:tw-text-white tw-mb-3">--}}
+{{--                        Our video player may have compatibility issues with older devices and operating systems.--}}
+{{--                        <br>We recommend switching to our legacy video player if you are experiencing playback issues.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
 
-                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-3 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                    <div class="tw-flex tw-flex-col">
-                        <div class="tw-flex tw-flex-row tw-mb-2">
-                            @include('partials.bladesora.members.inputs.toggle-input', [
-                                "inputID" => "useLegacyPlayer",
-                                "inputName" => "use_legacy_video_player",
-                                "inputLabel" => "Use legacy video player.",
-                                "checked" => (boolean) user()->use_legacy_video_player
-                            ])
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-3 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">--}}
+{{--                    <div class="tw-flex tw-flex-col">--}}
+{{--                        <div class="tw-flex tw-flex-row tw-mb-2">--}}
+{{--                            @include('partials.bladesora.members.inputs.toggle-input', [--}}
+{{--                                "inputID" => "useLegacyPlayer",--}}
+{{--                                "inputName" => "use_legacy_video_player",--}}
+{{--                                "inputLabel" => "Use legacy video player.",--}}
+{{--                                "checked" => (boolean) user()->use_legacy_video_player--}}
+{{--                            ])--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                 <div class="tw-flex tw-flex-row pa-3">
                     <button class="tw-btn-secondary tw-text-black dark:tw-text-white tw-btn-small" type="submit">

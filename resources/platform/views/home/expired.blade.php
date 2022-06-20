@@ -6,16 +6,11 @@
 
 @section('content')
 
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
-        {{-- v-cloak: Wait Until Page Container has loaded --}}
-        <div v-cloak>
+        {{-- Add Header Slide "Upgrade Your Membership" --}}
 
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-
-                {{-- Add Header Slide "Upgrade Your Membership" --}}
-
-            </div>
-        </div>
+    </div>
 
 @endsection
 
