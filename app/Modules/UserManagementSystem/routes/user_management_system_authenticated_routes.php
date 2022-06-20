@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\UserController;
 use Modules\UserManagementSystem\Controllers\PasswordController;
 use Modules\UserManagementSystem\Controllers\EmailChangeController;
+use Modules\UserManagementSystem\Controllers\OnboardingController;
 
 
 Route::group(
@@ -60,6 +61,21 @@ Route::group(
         )
             ->name('user_management_system.email-change.confirm');
 
+        /*
+          * Onboarding API
+          */
+        Route::post(
+            'onboarding-gears',
+            OnboardingController::class . '@updateGears'
+        )
+            ->name('user_management_system.onboarding.gears');
+
+
+        Route::get(
+            'onboarding-gears',
+            OnboardingController::class . '@readGears'
+        )
+            ->name('user_management_system.onboarding.gears');
 
     }
 );
