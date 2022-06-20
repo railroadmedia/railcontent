@@ -98,6 +98,34 @@ class ContentRepository extends RepositoryBase
      */
     private $contentBpmRepository;
 
+    const TABLESFORFIELDS = [
+            'instructor' => [
+                'table' => 'railcontent_content_instructors',
+                'column' => 'instructor_id',
+                'alias' => '_rci',
+            ],
+            'style' => [
+                'table' => 'railcontent_content_styles',
+                'column' => 'style',
+                'alias' => '_rcs',
+            ],
+            'topic' => [
+                'table' => 'railcontent_content_topics',
+                'column' => 'topic',
+                'alias' => '_rct',
+            ],
+            'focus' => [
+                'table' => 'railcontent_content_focus',
+                'column' => 'focus',
+                'alias' => '_rcf',
+            ],
+            'bpm' => [
+                'table' => 'railcontent_content_bpm',
+                'column' => 'bpm',
+                'alias' => '_rcb',
+            ],
+        ];
+
     /**
      * @param ContentPermissionRepository $contentPermissionRepository
      * @param ContentFieldRepository $fieldRepository
@@ -1177,7 +1205,7 @@ class ContentRepository extends RepositoryBase
     public function requireField($name, $value, $type = '', $operator = '=', $field = '')
     {
         $this->requiredFields[] =
-            ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator, 'field' => $field];
+            ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator, 'field' => $field, 'associated_table' => self::TABLESFORFIELDS[$name] ?? [], 'is_content_column' => in_array($name, config('railcontent.content_fields_that_are_now_columns_in_the_content_table', []) )];
 
         return $this;
     }
@@ -1194,7 +1222,7 @@ class ContentRepository extends RepositoryBase
      */
     public function includeField($name, $value, $type = '', $operator = '=')
     {
-        $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator];
+        $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator, 'associated_table' => self::TABLESFORFIELDS[$name] ?? [], 'is_content_column' => in_array($name, config('railcontent.content_fields_that_are_now_columns_in_the_content_table', []) )];
 
         return $this;
     }
@@ -1883,6 +1911,7 @@ class ContentRepository extends RepositoryBase
                     'topic',
                     'focus',
                     'bpm',
+                    'video'
                 ];
         }
 
@@ -1996,9 +2025,9 @@ class ContentRepository extends RepositoryBase
 
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
-            'difficulty' => 'difficulty',
-            'difficulty_range' => 'difficulty_range',
-            'artist' => 'artist',
+            'difficulty' => ConfigService::$tableContent.'.difficulty',
+            'difficulty_range' => ConfigService::$tableContent.'.difficulty_range',
+            'artist' => ConfigService::$tableContent.'.artist',
         ];
 
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
