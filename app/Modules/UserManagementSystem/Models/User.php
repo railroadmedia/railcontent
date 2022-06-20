@@ -179,6 +179,10 @@ use Illuminate\Support\Facades\Hash;
  * @property int $is_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
  * @method static Builder|User whereMembershipExpirationDate($value)
+ * @property int $send_mobile_app_push_notifications
+ * @property int $send_email_notifications
+ * @method static Builder|User whereSendEmailNotifications($value)
+ * @method static Builder|User whereSendMobileAppPushNotifications($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {

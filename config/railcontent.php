@@ -266,7 +266,7 @@ return [
             \App\Decorators\Content\DefaultDifficultyDecorator::class,
             \App\Decorators\Content\AssignmentXPDecorator::class,
 
-//            \App\Decorators\Content\CourseDecorator::class,
+            \App\Decorators\Content\CourseDecorator::class,
 //            \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
 //            \App\Decorators\Content\SongsDecorator::class,

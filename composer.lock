@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "058b2488148fc54319c5aa45a9e997a2",
+    "content-hash": "f0248f5a0b94b3fc45fd6a7892bdf6ed",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -3057,22 +3057,22 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.4.4",
+            "version": "7.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "e3ff079b22820c2029d4c2a87796b6a0b8716ad8"
+                "reference": "1dd98b0564cb3f6bd16ce683cb755f94c10fbd82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/e3ff079b22820c2029d4c2a87796b6a0b8716ad8",
-                "reference": "e3ff079b22820c2029d4c2a87796b6a0b8716ad8",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/1dd98b0564cb3f6bd16ce683cb755f94c10fbd82",
+                "reference": "1dd98b0564cb3f6bd16ce683cb755f94c10fbd82",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/promises": "^1.5",
-                "guzzlehttp/psr7": "^1.8.3 || ^2.1",
+                "guzzlehttp/psr7": "^1.9 || ^2.4",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0"
@@ -3161,7 +3161,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.4.4"
+                "source": "https://github.com/guzzle/guzzle/tree/7.4.5"
             },
             "funding": [
                 {
@@ -3177,7 +3177,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-09T21:39:15+00:00"
+            "time": "2022-06-20T22:16:13+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -3265,16 +3265,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "83260bb50b8fc753c72d14dc1621a2dac31877ee"
+                "reference": "13388f00956b1503577598873fffb5ae994b5737"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/83260bb50b8fc753c72d14dc1621a2dac31877ee",
-                "reference": "83260bb50b8fc753c72d14dc1621a2dac31877ee",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/13388f00956b1503577598873fffb5ae994b5737",
+                "reference": "13388f00956b1503577598873fffb5ae994b5737",
                 "shasum": ""
             },
             "require": {
@@ -3298,7 +3298,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -3360,7 +3360,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.3.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.4.0"
             },
             "funding": [
                 {
@@ -3376,7 +3376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-09T08:26:02+00:00"
+            "time": "2022-06-20T21:43:11+00:00"
         },
         {
             "name": "hollodotme/fast-cgi-client",
@@ -3427,6 +3427,63 @@
                 "source": "https://github.com/hollodotme/fast-cgi-client/tree/v3.1.7"
             },
             "time": "2021-12-07T10:10:20+00:00"
+        },
+        {
+            "name": "iksaku/laravel-mass-update",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iksaku/laravel-mass-update.git",
+                "reference": "5a8bda6739b83903070f5ee9643fc88de370b886"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iksaku/laravel-mass-update/zipball/5a8bda6739b83903070f5ee9643fc88de370b886",
+                "reference": "5a8bda6739b83903070f5ee9643fc88de370b886",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.71|^9.0",
+                "illuminate/support": "^8.71|^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.4",
+                "orchestra/testbench": "^6.15|^7.0",
+                "pestphp/pest": "^1.19",
+                "pestphp/pest-plugin-parallel": "^0.3.1",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^4.18"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iksaku\\Laravel\\MassUpdate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jorge González",
+                    "email": "yo@jorgeglz.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Update multiple Laravel Model records, each with different values, using a single query!",
+            "homepage": "https://github.com/iksaku/laravel-mass-update",
+            "keywords": [
+                "iksaku",
+                "laravel",
+                "laravel-mass-update"
+            ],
+            "support": {
+                "issues": "https://github.com/iksaku/laravel-mass-update/issues",
+                "source": "https://github.com/iksaku/laravel-mass-update/tree/1.0.4"
+            },
+            "time": "2022-01-22T01:05:11+00:00"
         },
         {
             "name": "inertiajs/inertia-laravel",
@@ -7723,12 +7780,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8355ab41617b4ded8c608280b5c80bc3ba742b42"
+                "reference": "d1ed8d1db746c98e942cd0896259c1cffeb7c312"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8355ab41617b4ded8c608280b5c80bc3ba742b42",
-                "reference": "8355ab41617b4ded8c608280b5c80bc3ba742b42",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d1ed8d1db746c98e942cd0896259c1cffeb7c312",
+                "reference": "d1ed8d1db746c98e942cd0896259c1cffeb7c312",
                 "shasum": ""
             },
             "require": {
@@ -7738,6 +7795,7 @@
                 "ext-pdo": "*",
                 "google/apiclient": "^2.2",
                 "guzzlehttp/guzzle": "^7.2",
+                "iksaku/laravel-mass-update": "^1.0",
                 "laravel/framework": "^9.0",
                 "league/flysystem": "^3.0",
                 "league/flysystem-aws-s3-v3": "^3.0",
@@ -7783,7 +7841,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-06-20T19:21:23+00:00"
+            "time": "2022-06-20T23:14:23+00:00"
         },
         {
             "name": "railroad/railforums",
