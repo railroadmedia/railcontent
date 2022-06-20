@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use DateTime;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Models\Content;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Throwable;
 
@@ -143,6 +144,13 @@ class RailcontentV2DataSyncingService
             ->get()
             ->keyBy('content_id');
 
+        // delete current field tables for content ids
+        foreach ($this->fieldNameToTableMap as $fieldAndColumnName => $tableName) {
+            $databaseConnection->table($tableName)
+                ->where('content_id', $contentIds)
+                ->delete();
+        }
+
         // update content hierarchy rows
         if (!empty($forUserId)) {
             // --- content hierarchy rows to sync:
@@ -154,15 +162,14 @@ class RailcontentV2DataSyncingService
             // next_child_content_url
         }
 
-        $databaseConnection->beginTransaction();
+        $tableRowsToInsert = [];
+        $contentsColumnsToUpdate = [];
 
         foreach ($contentRows as $contentRow) {
             $contentFieldRows = $contentsFieldRows[$contentRow->id] ?? [];
             $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->id] ?? null;
 
             // fields first
-            $contentColumnsToUpdate = [];
-
             foreach ($this->fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
                 // update content columns from fields using map
                 $contentColumnsToUpdate[$contentColumnName] = null;
@@ -217,36 +224,33 @@ class RailcontentV2DataSyncingService
             $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
 
             // update content row
-            $databaseConnection->table(config('railcontent.table_prefix').'content')
-                ->where('id', $contentRow->id)
-                ->update($contentColumnsToUpdate);
+            $contentColumnsToUpdate['id'] = $contentRow->id;
+
+            $contentsColumnsToUpdate[] = $contentColumnsToUpdate;
 
             // update field tables
             foreach ($this->fieldNameToTableMap as $fieldAndColumnName => $tableName) {
-                $rowsToInsert = [];
 
                 foreach ($contentFieldRows as $contentFieldRow) {
                     if ($contentFieldRow->key === $fieldAndColumnName ||
                         ($fieldAndColumnName === 'instructor_id' &&
                             $contentFieldRow->key === 'instructor' &&
                             is_numeric($contentFieldRow->value))) {
-                        $rowsToInsert[] = [
+                        $tableRowsToInsert[$tableName][] = [
                             'content_id' => $contentRow->id,
                             $fieldAndColumnName => $contentFieldRow->value,
                             'position' => $contentFieldRow->position,
                         ];
                     }
                 }
-
-                $databaseConnection->table($tableName)
-                    ->where('content_id', $contentRow->id)
-                    ->delete();
-
-                $databaseConnection->table($tableName)->insert($rowsToInsert);
             }
         }
 
-        $databaseConnection->commit();
+        Content::massUpdate(values: $contentsColumnsToUpdate);
+
+        foreach ($tableRowsToInsert as $tableName => $rowsToInsert) {
+            $databaseConnection->table($tableName)->insert($rowsToInsert);
+        }
 
         $this->contentService->fillParentContentDataColumnForContentIds($contentIds);
     }

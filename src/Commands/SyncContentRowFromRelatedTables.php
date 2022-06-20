@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Throwable;
 
@@ -41,12 +42,13 @@ class SyncContentRowFromRelatedTables extends Command
             $totalSynced = 0;
 
             $this->info('Total to sync: ' . $totalToSync);
+            Log::info('Total to sync: ' . $totalToSync);
 
             $databaseManager->connection(config('railcontent.database_connection_name'))
                 ->table(config('railcontent.table_prefix').'content')
                 ->whereNotIn('type', ['vimeo-video', 'youtube-video', 'assignment'])
                 ->orderBy('id', 'desc')
-                ->chunkById(250, function (Collection $rows) use (&$totalSynced, $railcontentV2DataSyncingService) {
+                ->chunkById(500, function (Collection $rows) use (&$totalSynced, $railcontentV2DataSyncingService) {
                     $railcontentV2DataSyncingService->syncContentIds($rows->pluck('id')->toArray());
 
                     $totalSynced += $rows->count();
@@ -54,6 +56,7 @@ class SyncContentRowFromRelatedTables extends Command
                     $this->info(
                         'Done syncing '.$totalSynced.', last processed content ID: '.$rows->last()->id
                     );
+                    Log::info('Done syncing '.$totalSynced.', last processed content ID: '.$rows->last()->id);
                 });
         } else {
             $this->info('Syncing content ID: '.$contentId);
@@ -61,6 +64,7 @@ class SyncContentRowFromRelatedTables extends Command
         }
 
         $this->info('Done');
+        Log::info('Done');
 
         return true;
     }
