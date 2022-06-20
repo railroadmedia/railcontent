@@ -3,7 +3,7 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home')
+                "url" => url()->route('platform.home')
             ],
             [
                 "title" => 'Learning Paths',
@@ -44,7 +44,7 @@
             "pages" => [
                 [
                     "title" => 'Home',
-                    "url" => url()->route('members.home'),
+                    "url" => url()->route('platform.home'),
                 ],
                 [
                     "title" => "Packs",
@@ -71,7 +71,7 @@
                 "pages" => [
                     [
                         "title" => 'Home',
-                        "url" => url()->route('members.home')
+                        "url" => url()->route('platform.home')
                     ],
                     [
                         "title" => "Packs",
@@ -93,11 +93,11 @@
                 "pages" => [
                     [
                         "title" => 'Home',
-                        "url" => url()->route('members.home')
+                        "url" => url()->route('platform.home')
                     ],
                     [
                         "title" => parse_lesson_type_readable($parent->fetch('type'), true),
-                        "url" => url()->route("members.catalogues.show", ["contentType" => parse_lesson_type_readable($parent->fetch('type'), true)]),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => parse_lesson_type_readable($parent->fetch('type'), true)]),
                     ],
                     [
                         "title" => $parent->fetch('fields.title'),
@@ -114,12 +114,12 @@
             "pages" => [
                 [
                     "title" => 'Home',
-                    "url" => url()->route('members.home')
+                    "url" => url()->route('platform.home')
                 ],
-                [
-                    "title" => parse_lesson_type_readable($lessonContent->fetch('type'), true),
-                    "url" => url()->route("members.catalogues.show", ["contentType" => parse_lesson_type_for_url($lessonContent->fetch('type'))]),
-                ],
+                    [
+                        "title" => parse_lesson_type_readable($lessonContent->fetch('type'), true),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => parse_lesson_type_readable($lessonContent->fetch('type'), true)]),
+                    ],
                 [
                     "title" => $lessonContent->fetch('fields.title')
                 ]

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Platform;
 
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
+use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypeHierarchyMap;
@@ -26,6 +27,7 @@ class ContentPagesController extends BaseController
 {
     private ContentService $contentService;
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
+    private LessonAssignmentDecorator $lessonAssignmentDecorator;
 
     /**
      * @param  ContentService  $contentService
@@ -33,10 +35,12 @@ class ContentPagesController extends BaseController
      */
     public function __construct(
         ContentService $contentService,
-        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
+        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
+        LessonAssignmentDecorator $lessonAssignmentDecorator
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
+        $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -167,6 +171,17 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
+        if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes())) {
+            return $this->videoLessonPage(
+                $request,
+                $domain,
+                $brand,
+                $primaryPage,
+                $firstSlug,
+                $firstId
+            );
+        }
+
         $childrenContent =
             $this->contentService->getByParentIdWhereTypeIn(
                 $firstLevelContent['id'],
@@ -246,13 +261,26 @@ class ContentPagesController extends BaseController
     ) {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
-        $firstContent = $this->contentService->getById($firstId);
-
-        throw_if(empty($firstContent), new NotFoundHttpException());
-
         $secondContent = $this->contentService->getById($secondId);
 
         throw_if(empty($secondContent), new NotFoundHttpException());
+
+        if (in_array($secondContent['type'], ContentTypes::singularContentTypes())) {
+            return $this->videoLessonPage(
+                $request,
+                $domain,
+                $brand,
+                $primaryPage,
+                $firstSlug,
+                $firstId,
+                $secondSlug,
+                $secondId
+            );
+        }
+
+        $firstContent = $this->contentService->getById($firstId);
+
+        throw_if(empty($firstContent), new NotFoundHttpException());
 
         if ((empty($secondContent['published_on']) ||
                 Carbon::parse($secondContent['published_on']) > Carbon::now() ||
@@ -595,6 +623,10 @@ class ContentPagesController extends BaseController
                 $matched = true;
             }
         }
+
+        LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+        $this->lessonAssignmentDecorator->decorate(new Collection([$contentToRenderAsLesson]))
+            ->first();
 
         $lessonAssignments = $contentToRenderAsLesson['assignments'] ?? [];
 

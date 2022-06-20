@@ -170,15 +170,15 @@
         <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
 
 
-        @if(!empty($allAssignments))
+        @if(!empty($lessonContent->fetch('*assignments', [])))
             <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3">
                 <div class="tw-flex tw-flex-row pv-3">
                     <h1 class="heading">Assignments</h1>
                     @php
                         $formattedAssignments = [];
-                        foreach ($allAssignments as $index => $assignment) {
+                        foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
                             $content = [];
-                            $content['themeColor'] = $themeColor;
+                            $content['themeColor'] = brand();
                             $content['timecode'] = $assignment->fetch('data.timecode', 0);
                             $content['id'] = $assignment->fetch('id');
                             $content['xp'] = $assignment->fetch('xp');
@@ -193,10 +193,10 @@
                 </div>
                 @php
                     $formattedAssignments = [];
-                    foreach ($allAssignments as $index => $assignment) {
+                    foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
                         $content = [];
                         $content['dusk'] = 'content-assignment';
-                        $content['themeColor'] = '{{ $brand }}';
+                        $content['themeColor'] = brand();
                         $content['timecode'] = $assignment->fetch('data.timecode', 0);
                         $content['id'] = $assignment->fetch('id');
                         $content['xp'] = $assignment->fetch('xp');
@@ -214,7 +214,7 @@
                             @include('partials.bladesora.members.partials._completion-bonus', [
                                 "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
                                 "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
-                                "themeColor" => '{{ $brand }}'
+                                "themeColor" => brand()
                             ])
                         </template>
                     </assignments-container>
@@ -243,13 +243,13 @@
 
             <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
                 <div class="tw-flex tw-flex-row">
-                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"
-                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"
-                        user-avatar="{{ user()->profile_picture_url }}"
-                        user-xp="{{ user()->total_xp }}"
-                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"
-                        :is-admin="{{ json_encode(user()->isAdmin()) }}">
-                    </comments>
+{{--                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"--}}
+{{--                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"--}}
+{{--                        user-avatar="{{ user()->profile_picture_url }}"--}}
+{{--                        user-xp="{{ user()->total_xp }}"--}}
+{{--                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"--}}
+{{--                        :is-admin="{{ json_encode(user()->isAdmin()) }}">--}}
+{{--                    </comments>--}}
                 </div>
             </div>
         </div>

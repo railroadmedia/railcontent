@@ -146,7 +146,7 @@
 </template>
 
 <script>
-import Utils from '../assets/js/helper-functions/utils.js';
+import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import Toasts from '../../assets/js/classes/toasts';
 import ContentService from '../../assets/js/services/content';

@@ -67,7 +67,7 @@
                         </span>
                     </button>
                 </div>
-                
+
                 <div class="form-group mb-2">
                     <div class="flex flex-row form-group align-v-center">
                         <span class="toggle-input mr-1">
