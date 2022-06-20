@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-        <div v-cloak>
 
         @component('partials._header-banner', ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
             @slot('content')
@@ -43,5 +42,4 @@
             </div>
         </div>
 
-        </div>
 @endsection

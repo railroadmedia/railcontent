@@ -70,3 +70,36 @@
 .tox-tinymce {
   min-height: 300px !important;
 }
+
+.tox:not(.tox-tinymce-inline) .tox-editor-header {
+  padding: 0 !important;
+}
+
+#replyContainer, #createThreadForm {
+  .tox-tinymce {
+    border-width: 1px;
+  }
+}
+.tw-dark {
+  #replyContainer, #createThreadForm {
+    .tox .tox-toolbar-overlord,
+    .tox:not(.tox-tinymce-inline) .tox-editor-header {
+      background-color: transparent;
+    }
+    .tox-tinymce {
+      border: none;
+      background-color: #002039;
+    }
+    .tox .tox-edit-area__iframe {
+      background-color:  transparent;
+    }
+    .tox .tox-toolbar__primary,
+    .tox .tox-toolbar {
+      background-color: #081825 !important;
+    }
+    .tox .tox-edit-area__iframe body#tinymce,
+    iframe body {
+      color: white;
+    }
+  }
+}

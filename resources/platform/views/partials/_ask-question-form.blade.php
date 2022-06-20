@@ -13,6 +13,7 @@
 
         <p class="tiny mb-3 tw-text-black">Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.</p>
 
+{{--        todo: set logo based to brand; ex: https://singeo.s3.amazonaws.com/sales/2021/{{$brand}}-logo.png --}}
         <email-form
                 email-subject="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
                 brand="{{ $brand }}"

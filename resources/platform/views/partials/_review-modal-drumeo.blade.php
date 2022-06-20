@@ -7,13 +7,15 @@
 
         <form id="studentFocusForm"
               method="POST"
-              action=""
+              action="{{url()->route('platform.mail')}}"
               accept-charset="UTF-8">
+            {{ csrf_field() }}
 
-            <input type="hidden" name="type" value="student-focus-application">
+            <input type="hidden" name="type" value="student-focus-application-drumeo">
             <?php $user = auth()->user(); /** @var Railroad\Usora\Entities\User $user */ ?>
-            <input type="hidden" name="subject" value="Student Focus Application from {{ user()->email }}">
             <input type="hidden" name="success-message" value="Your email has been sent. We'll be in touch very soon!">
+            <input type="hidden" name="brand" value="{{ $brand }}">
+            <input type="hidden" name="subject" value="Student Focus Application from {{ user()->display_name }} ({{ user()->email }})">
 
             <div class="flex flex-column mb-2">
                 <p class="body">What is your current drumming skill level?</p>
@@ -26,7 +28,8 @@
                     "inputValue" => old('experience'),
                     "inputErrors" => $errors->get('experience') ?? null,
                     "inputOptions" => ['beginner', 'intermediate', 'advanced'],
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -40,7 +43,8 @@
                     "inputValue" => old('improvement'),
                     "inputErrors" => $errors->get('improvement') ?? null,
                     "type" => "text",
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -54,7 +58,8 @@
                     "inputValue" => old('weakness'),
                     "inputErrors" => $errors->get('weakness') ?? null,
                     "type" => "text",
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -68,7 +73,8 @@
                     "inputValue" => old('instructor_focus'),
                     "inputErrors" => $errors->get('instructor_focus') ?? null,
                     "type" => "text",
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 
@@ -83,7 +89,8 @@
                     "inputValue" => old('goal'),
                     "inputErrors" => $errors->get('goal') ?? null,
                     "inputOptions" => ['fun/hobbyist', 'cover band', 'professional'],
-                    "inputLabel" => null
+                    "inputLabel" => null,
+                    "validateRequired" => true,
                 ])
             </div>
 

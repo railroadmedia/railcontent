@@ -2,7 +2,7 @@
     <div class="tw-input-field"
          :disabled="disabled"
     >
-        <label :for="id" class="tw-label">
+        <label :for="id" class="tw-label tw-text-[#00101D] dark:tw-text-white">
             <span v-if="required" class="tw-text-red-500">*</span>
             {{ name }}
         </label>
@@ -11,7 +11,7 @@
                     :id="id"
                     :rows="rows" 
                     :placeholder="placeholder"
-                    class="focus:tw-border-drumeo tw-font-primary"
+                    class="focus:tw-border-drumeo tw-font-primary dark:tw-bg-[#00101D] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74]"
                     :class="[inputValue.length ? 'has-input' : '', !resize ? 'tw-resize-none' : 'tw-resize-y']"
                     :aria-required="required"
                     :aria-invalid="invalid"

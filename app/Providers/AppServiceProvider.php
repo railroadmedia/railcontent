@@ -29,23 +29,36 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', NavigationViewComposer::class);
 
-//        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
-//        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
-//        app()->instance(
-//            EventDataSynchronizerUserProviderInterface::class,
-//            app()->make(EventDataSynchronizerUserProvider::class)
-//        );
+        //        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
+        //        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
+        //        app()->instance(
+        //            EventDataSynchronizerUserProviderInterface::class,
+        //            app()->make(EventDataSynchronizerUserProvider::class)
+        //        );
 
         $this->app->singleton(EcommerceUserProviderInterface::class, function ($app) {
-            $app->make(EcommerceUserProvider::class);
+            return $app->make(EcommerceUserProvider::class);
         });
 
         $this->app->singleton(RailforumsUserProviderInterface::class, function ($app) {
-            $app->make(RailforumsUserProvider::class);
+            return $app->make(RailforumsUserProvider::class);
         });
 
         $this->app->singleton(EventDataSynchronizerUserProviderInterface::class, function ($app) {
-            $app->make(EventDataSynchronizerUserProvider::class);
+            return $app->make(EventDataSynchronizerUserProvider::class);
+        });
+
+        //railnotifications package providers
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\UserProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsUserProvider::class);
+        });
+
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\ContentProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsContentProvider::class);
+        });
+
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsForumProvider::class);
         });
     }
 }

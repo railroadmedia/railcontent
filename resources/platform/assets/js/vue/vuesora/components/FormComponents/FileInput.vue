@@ -26,7 +26,7 @@
         </label>
         <!-- Message -->
         <div class="tw-input-messages">
-            <p class="tw-primary-message">{{ messageController }}</p>
+            <p class="tw-primary-message tw-text-[#00101D] dark:tw-text-[#9EC0DC]">{{ messageController }}</p>
             <p v-if="this.formState !== 2" class="tw-secondary-message">Max File Size {{ megabiteLimit }}MB</p>
         </div>
         <!-- Uploadedd Files -->

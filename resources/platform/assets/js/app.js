@@ -39,6 +39,7 @@ import './vue/vuesora/assets/js/functions/instructor-info';
 import './vue/vuesora/assets/js/third-party/add-event-atc';
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
+import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
@@ -48,6 +49,7 @@ import ForumThreadsTable from './vue/vuesora/views/forum/ForumThreadsTable.vue';
 import ForumThread from './vue/vuesora/views/forum/thread/ForumThread.vue';
 import TextEditor from './vue/vuesora/components/TextEditor/TextEditor.vue';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue';
+import ContactEmailForm from './vue/vuesora/components/ContactEmailForm/ContactEmailForm.vue';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';
@@ -58,6 +60,11 @@ import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
 };
+
+// This three variables come from Drumeo implementation, are tightly related to play functionality.
+let progressTracker;
+let playAlongsProgressTracker;
+let hasBeenPlayed = false;
 
 const app = createApp({
     provide: {
@@ -137,9 +144,36 @@ const app = createApp({
 
         handleVideoPause(payload){
             progressTracker.stop();
+        },
+
+        handlePlayAlongsPlay(){
+            if(playAlongsProgressTracker == null){
+                playAlongsProgressTracker = new ProgressTracker();
+
+                const { playAlongsVueInstance } = this.$refs;
+
+                if(playAlongsVueInstance){
+                    window.addEventListener('unload', (event) => {
+                        progressTracker.send({
+                            mediaType: 'practice',
+                            mediaCategory: 'play-alongs',
+                            sessionToken: sessionTokenElement.value || null
+                        });
+                    });
+                }
+            }
+
+            playAlongsProgressTracker.start();
+        },
+
+        handlePlayAlongsPause(){
+            playAlongsProgressTracker.stop();
         }
     }
 });
+
+// in order to use provide/inject this will be default in vue v3.3
+app.config.unwrapInjectedRef = true;
 
 //Register Global Components
 app.component('AppContainer', AppContainer)
@@ -161,6 +195,7 @@ app.component('AppContainer', AppContainer)
    .component('ForumThread', ForumThread)
    .component('TextEditor', TextEditor)
    .component('ContactMemberEmailForm', ContactMemberEmailForm)
+   .component('ContactEmailForm', ContactEmailForm)
    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('VideoPlayer', VideoPlayer)
@@ -169,6 +204,7 @@ app.component('AppContainer', AppContainer)
    .component('MusoraIcon', MusoraIcon)
    .component('EmailForm', EmailForm)
    .component('StaticHeader', StaticHeader)
+   .component('AddEventModal', AddEventModal)
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
