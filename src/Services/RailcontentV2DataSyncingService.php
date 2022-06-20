@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use DateTime;
 use Illuminate\Database\DatabaseManager;
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Throwable;
 
@@ -13,6 +14,9 @@ class RailcontentV2DataSyncingService
     private RailcontentURLProviderInterface $railcontentURLProvider;
     private ContentService $contentService;
 
+    private array $fieldNameToContentColumnNameMap;
+    private array $fieldNameToTableMap;
+
     public function __construct(
         DatabaseManager $databaseManager,
         RailcontentURLProviderInterface $railcontentURLProvider,
@@ -21,41 +25,8 @@ class RailcontentV2DataSyncingService
         $this->databaseManager = $databaseManager;
         $this->railcontentURLProvider = $railcontentURLProvider;
         $this->contentService = $contentService;
-    }
 
-    /**
-     * For now the fields are always the source of truth.
-     *
-     * @throws Throwable
-     */
-    public function syncContentId($contentId, $forUserId = null)
-    {
-        $databaseConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
-
-        $contentRow = $databaseConnection->table(config('railcontent.table_prefix') . 'content')
-            ->where('id', $contentId)
-            ->first();
-
-        // update content hierarchy rows
-        if (!empty($forUserId)) {
-            // --- content hierarchy rows to sync:
-            // current_child_content_id
-            // current_child_content_index
-            // current_child_content_url
-            // next_child_content_id
-            // next_child_content_index
-            // next_child_content_url
-        }
-
-        // update content row
-        $contentFieldRows = $databaseConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->where('content_id', $contentId)
-            ->whereNotNull('value')
-            ->whereNotIn('value', ['Invalid date'])
-            ->get();
-
-        // fields first
-        $fieldNameToContentColumnNameMap = [
+        $this->fieldNameToContentColumnNameMap = [
             'album' => 'album',
             'artist' => 'artist',
             'associated_user_id' => 'associated_user_id',
@@ -109,121 +80,180 @@ class RailcontentV2DataSyncingService
             'total_xp' => 'total_xp',
         ];
 
-        $contentColumnsToUpdate = [];
-
-        foreach ($fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
-            $contentColumnsToUpdate[$contentColumnName] = null;
-
-            foreach ($contentFieldRows as $contentFieldRow) {
-                // skip misc data errors
-                if (($contentFieldRow->key == 'home_staff_pick_rating' && !is_numeric($contentFieldRow->value)) ||
-                    ($contentFieldRow->key == 'xp' && !is_numeric($contentFieldRow->value)) ||
-                    (in_array($contentFieldRow->key, ['live_event_start_time', 'live_event_end_time']) &&
-                        !$this->validateDate($contentFieldRow->value))) {
-                    continue;
-                }
-
-                if ($contentFieldRow->key === $fieldName) {
-                    $contentColumnsToUpdate[$contentColumnName] = $contentFieldRow->value;
-                }
-            }
-        }
-
-
-        // other columns
-        // 'web_url_path' => 'web_url_path' // implemented on implementation side using interface binding
-        // 'mobile_url_path' => 'mobile_url_path' // implemented on implementation side using interface binding
-        // 'child_count' => 'child_count'
-        // 'hierarchy_position_number' => 'hierarchy_position_number'
-        // 'like_count' => 'like_count'
-        // 'length_in_seconds' => 'length_in_seconds'
-
-        $contentColumnsToUpdate['web_url_path'] = null;
-        $contentColumnsToUpdate['mobile_app_url_path'] = null;
-
-        $contentURLs = $this->railcontentURLProvider->getContentURLs($contentId, $contentRow->slug, $contentRow->type);
-
-        if (!empty($contentURLs)) {
-            $contentColumnsToUpdate['web_url_path'] = $contentURLs->getWebURLPath();
-            $contentColumnsToUpdate['mobile_app_url_path'] = $contentURLs->getMobileAppURLPath();
-        }
-
-        $contentHierarchyRows = $databaseConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
-            ->where('child_id', $contentId)
-            ->orWhere('parent_id', $contentId)
-            ->get();
-
-        $contentColumnsToUpdate['child_count'] = $contentHierarchyRows->where('parent_id', $contentId)->count();
-
-        $contentColumnsToUpdate['hierarchy_position_number'] =
-            $contentHierarchyRows
-                ->where('child_id', $contentId)
-                ->first()
-                ->child_position ?? null;
-
-        $contentColumnsToUpdate['like_count'] =
-            $databaseConnection->table(config('railcontent.table_prefix') . 'content_likes')
-                ->where('content_id', $contentId)
-                ->count();
-
-        // length_in_seconds
-        if (!empty($contentRow->video)) {
-            $lengthInSecondsFieldValue = $databaseConnection
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->where('content_id', $contentRow->video)
-                    ->where('key', 'length_in_seconds')
-                    ->first()
-                    ->value ?? 0;
-
-            $contentColumnsToUpdate['length_in_seconds'] = (integer) $lengthInSecondsFieldValue;
-        }
-
-        $databaseConnection->table(config('railcontent.table_prefix') . 'content')
-            ->where('id', $contentId)
-            ->update($contentColumnsToUpdate);
-
-        // update field tables
-        $fieldNameToTableMap = [
-            'topic' => config('railcontent.table_prefix') . 'content_topics',
-            'tag' => config('railcontent.table_prefix') . 'content_tags',
-            'playlist' => config('railcontent.table_prefix') . 'content_playlists',
-            'key' => config('railcontent.table_prefix') . 'content_keys',
-            'key_pitch_type' => config('railcontent.table_prefix') . 'content_key_pitch_types',
-            'exercise_id' => config('railcontent.table_prefix') . 'content_exercises',
-            'style' => config('railcontent.table_prefix') . 'content_styles',
-            'focus' => config('railcontent.table_prefix') . 'content_focus',
-            'bpm' => config('railcontent.table_prefix') . 'content_bpm',
-            'instructor_id' => config('railcontent.table_prefix') . 'content_instructors',
+        $this->fieldNameToTableMap = [
+            'topic' => config('railcontent.table_prefix').'content_topics',
+            'tag' => config('railcontent.table_prefix').'content_tags',
+            'playlist' => config('railcontent.table_prefix').'content_playlists',
+            'key' => config('railcontent.table_prefix').'content_keys',
+            'key_pitch_type' => config('railcontent.table_prefix').'content_key_pitch_types',
+            'exercise_id' => config('railcontent.table_prefix').'content_exercises',
+            'style' => config('railcontent.table_prefix').'content_styles',
+            'focus' => config('railcontent.table_prefix').'content_focus',
+            'bpm' => config('railcontent.table_prefix').'content_bpm',
+            'instructor_id' => config('railcontent.table_prefix').'content_instructors',
         ];
-
-        foreach ($fieldNameToTableMap as $fieldAndColumnName => $tableName) {
-            $rowsToInsert = [];
-
-            foreach ($contentFieldRows as $contentFieldRow) {
-                if ($contentFieldRow->key === $fieldAndColumnName ||
-                    ($fieldAndColumnName === 'instructor_id' && $contentFieldRow->key === 'instructor')) {
-                    $rowsToInsert[] = [
-                        'content_id' => $contentId,
-                        $fieldAndColumnName => $contentFieldRow->value,
-                        'position' => $contentFieldRow->position,
-                    ];
-                }
-            }
-
-            $databaseConnection->beginTransaction();
-            $databaseConnection->table($tableName)
-                ->where('content_id', $contentId)
-                ->delete();
-            $databaseConnection->table($tableName)->insert($rowsToInsert);
-            $databaseConnection->commit();
-        }
-
-        $this->contentService->fillParentContentDataColumnForContentIds([$contentId]);
     }
 
     /**
-     * @param string $date
-     * @param string $format
+     * For now the fields are always the source of truth.
+     *
+     * @throws Throwable
+     */
+    public function syncContentId($contentId, $forUserId = null)
+    {
+        $this->syncContentIds([$contentId], $forUserId);
+    }
+
+    /**
+     * For now the fields are always the source of truth.
+     *
+     * @throws Throwable
+     */
+    public function syncContentIds(array $contentIds, $forUserId = null)
+    {
+        $databaseConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+
+        $contentRows = $databaseConnection->table(config('railcontent.table_prefix').'content')
+            ->whereIn('id', $contentIds)
+            ->get();
+
+        $contentsFieldRows = $databaseConnection->table(config('railcontent.table_prefix').'content_fields')
+            ->whereIn('content_id', $contentIds)
+            ->whereNotNull('value')
+            ->whereNotIn('value', ['Invalid date'])
+            ->get()
+            ->groupBy('content_id');
+
+        $contentsHierarchyRows = $databaseConnection->table(config('railcontent.table_prefix').'content_hierarchy')
+            ->whereIn('child_id', $contentIds)
+            ->orWhereIn('parent_id', $contentIds)
+            ->get();
+
+        $contentsLikeCounts = $databaseConnection->table(config('railcontent.table_prefix').'content_likes')
+            ->whereIn('content_id', $contentIds)
+            ->selectRaw('COUNT(*) as count, content_id')
+            ->groupBy(['content_id'])
+            ->get()
+            ->keyBy('content_id');
+
+        $contentsLengthInSecondsFields = $databaseConnection
+            ->table(config('railcontent.table_prefix').'content_fields')
+            ->whereIn('content_id', $contentRows->pluck('video')->toArray())
+            ->where('key', 'length_in_seconds')
+            ->get()
+            ->keyBy('content_id');
+
+        // update content hierarchy rows
+        if (!empty($forUserId)) {
+            // --- content hierarchy rows to sync:
+            // current_child_content_id
+            // current_child_content_index
+            // current_child_content_url
+            // next_child_content_id
+            // next_child_content_index
+            // next_child_content_url
+        }
+
+        $databaseConnection->beginTransaction();
+
+        foreach ($contentRows as $contentRow) {
+            $contentFieldRows = $contentsFieldRows[$contentRow->id] ?? [];
+            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->id] ?? null;
+
+            // fields first
+            $contentColumnsToUpdate = [];
+
+            foreach ($this->fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
+                // update content columns from fields using map
+                $contentColumnsToUpdate[$contentColumnName] = null;
+
+                foreach ($contentFieldRows as $contentFieldRow) {
+                    // skip misc data errors
+                    if (($contentFieldRow->key == 'home_staff_pick_rating' && !is_numeric($contentFieldRow->value)) ||
+                        ($contentFieldRow->key == 'xp' && !is_numeric($contentFieldRow->value)) ||
+                        (in_array($contentFieldRow->key, ['live_event_start_time', 'live_event_end_time']) &&
+                            !$this->validateDate($contentFieldRow->value))) {
+                        continue;
+                    }
+
+                    if ($contentFieldRow->key === $fieldName) {
+                        $contentColumnsToUpdate[$contentColumnName] = $contentFieldRow->value;
+                    }
+                }
+            }
+
+            // urls
+            $contentColumnsToUpdate['web_url_path'] = null;
+            $contentColumnsToUpdate['mobile_app_url_path'] = null;
+
+            $contentURLs =
+                $this->railcontentURLProvider->getContentURLs(
+                    $contentRow->id,
+                    $contentRow->slug,
+                    $contentRow->type,
+                    new ContentEntity((array)$contentRow)
+                );
+
+            if (!empty($contentURLs)) {
+                $contentColumnsToUpdate['web_url_path'] = $contentURLs->getWebURLPath();
+                $contentColumnsToUpdate['mobile_app_url_path'] = $contentURLs->getMobileAppURLPath();
+            }
+
+            // child count
+            $contentColumnsToUpdate['child_count'] = $contentsHierarchyRows->where('parent_id', $contentRow->id)
+                ->count();
+
+            // hierarchy position number
+            $contentColumnsToUpdate['hierarchy_position_number'] =
+                $contentsHierarchyRows
+                    ->where('child_id', $contentRow->id)
+                    ->first()
+                    ->child_position ?? null;
+
+            // like count
+            $contentColumnsToUpdate['like_count'] = $contentsLikeCounts[$contentRow->id]->count ?? 0;
+
+            // length in seconds
+            $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
+
+            // update content row
+            $databaseConnection->table(config('railcontent.table_prefix').'content')
+                ->where('id', $contentRow->id)
+                ->update($contentColumnsToUpdate);
+
+            // update field tables
+            foreach ($this->fieldNameToTableMap as $fieldAndColumnName => $tableName) {
+                $rowsToInsert = [];
+
+                foreach ($contentFieldRows as $contentFieldRow) {
+                    if ($contentFieldRow->key === $fieldAndColumnName ||
+                        ($fieldAndColumnName === 'instructor_id' &&
+                            $contentFieldRow->key === 'instructor' &&
+                            is_numeric($contentFieldRow->value))) {
+                        $rowsToInsert[] = [
+                            'content_id' => $contentRow->id,
+                            $fieldAndColumnName => $contentFieldRow->value,
+                            'position' => $contentFieldRow->position,
+                        ];
+                    }
+                }
+
+                $databaseConnection->table($tableName)
+                    ->where('content_id', $contentRow->id)
+                    ->delete();
+
+                $databaseConnection->table($tableName)->insert($rowsToInsert);
+            }
+        }
+
+        $databaseConnection->commit();
+
+        $this->contentService->fillParentContentDataColumnForContentIds($contentIds);
+    }
+
+    /**
+     * @param  string  $date
+     * @param  string  $format
      * @return bool
      */
     public function validateDate(string $date, string $format = 'Y-m-d H:i:s'): bool

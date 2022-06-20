@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Throwable;
 
@@ -12,7 +13,7 @@ class SyncContentRowFromRelatedTables extends Command
     /**
      * Example content IDS: Course: 349360, Instructor: 317639, Course Lesson: 340136
      */
-    protected $signature = 'SyncContentRowFromRelatedTables {contentId} {startingContentId?}';
+    protected $signature = 'SyncContentRowFromRelatedTables {contentId}';
 
     protected $description = 'Syncs content row content and relevant data tables from the content fields table.';
 
@@ -27,35 +28,35 @@ class SyncContentRowFromRelatedTables extends Command
 
         $contentId = $this->argument('contentId');
 
-        $this->info('Syncing content ID: ' . $contentId);
+        $this->info('Syncing content ID: '.$contentId);
 
         if ($contentId === 'all') {
             $this->info('Syncing all content IDs.');
-            $query = $databaseManager->connection(config('railcontent.database_connection_name'))
-                ->table(config('railcontent.table_prefix') . 'content')
+
+            $totalToSync = $databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table(config('railcontent.table_prefix').'content')
                 ->whereNotIn('type', ['vimeo-video', 'youtube-video', 'assignment'])
-                ->orderBy('id', 'desc');
+                ->count();
 
-            if (!empty($this->argument('startingContentId'))) {
-                $query->where('id', '<', $this->argument('startingContentId'));
-            }
+            $totalSynced = 0;
 
-            $contentIdRows = $query->get(['id']);
+            $this->info('Total to sync: ' . $totalToSync);
 
-            $this->info('Syncing total content IDs: ' . count($contentIdRows));
+            $databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table(config('railcontent.table_prefix').'content')
+                ->whereNotIn('type', ['vimeo-video', 'youtube-video', 'assignment'])
+                ->orderBy('id', 'desc')
+                ->chunkById(250, function (Collection $rows) use (&$totalSynced, $railcontentV2DataSyncingService) {
+                    $railcontentV2DataSyncingService->syncContentIds($rows->pluck('id')->toArray());
 
-            foreach ($contentIdRows as $contentIdRowIndex => $contentIdRow) {
-                $railcontentV2DataSyncingService->syncContentId($contentIdRow->id);
+                    $totalSynced += $rows->count();
 
-                if ($contentIdRowIndex % 100 === 0) {
                     $this->info(
-                        'Done syncing ' . $contentIdRowIndex .
-                        ' out of ' . count($contentIdRows) . ', last processed content ID: ' . $contentIdRow->id
+                        'Done syncing '.$totalSynced.', last processed content ID: '.$rows->last()->id
                     );
-                }
-            }
+                });
         } else {
-            $this->info('Syncing content ID: ' . $contentId);
+            $this->info('Syncing content ID: '.$contentId);
             $railcontentV2DataSyncingService->syncContentId($contentId);
         }
 
