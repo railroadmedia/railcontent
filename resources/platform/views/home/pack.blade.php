@@ -6,48 +6,43 @@
 
 @section('content')
 
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
-        {{-- v-cloak: Wait Until Page Container has loaded --}}
-        <div v-cloak>
+        {{-- Add Header Slide "Welcome Username" --}}
 
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        {{-- Continue Section --}}
+        @if($startedContentCount > 0)
+            @component('partials.bladesora.members.components.home._continue-section', [
+                'brand' => brand(),
+                'hasStartedContent' => $startedContentCount > 0,
+                'contentEndpoint' => '/railcontent/content',
+                'continueUrl' => '', // todo: need url
+                'seeAllUrl' => '', // todo: need url
+                'startedContentJson' => $startedContentJson,
+                ])
+            @endcomponent
+        @endif
 
-                {{-- Add Header Slide "Welcome Username" --}}
+        {{-- Packs Section --}}
+        @component('partials.bladesora.members.components.home._packs-section', [
+            'brand' => brand(),
+            'packsUrl' => '/'.$brand.'/packs',
+            'hasPacks' => !empty($packs),
+            'packs' => $packs,
+            ])
+        @endcomponent
 
-                {{-- Continue Section --}}
-                @if($startedContentCount > 0)
-                    @component('partials.bladesora.members.components.home._continue-section', [
-                        'brand' => brand(),
-                        'hasStartedContent' => $startedContentCount > 0,
-                        'contentEndpoint' => '/railcontent/content',
-                        'continueUrl' => '', // todo: need url
-                        'seeAllUrl' => '', // todo: need url
-                        'startedContentJson' => $startedContentJson,
-                        ])
-                    @endcomponent
-                @endif
+        {{-- Popular Conversations --}}
+        @if(count($hotForumTopics) > 0)
+            @component('partials.bladesora.members.components.home._conversations-section', [
+                'brand' => brand(),
+                'forumUrl' => brand() . '/forums',
+                'forumPosts' => $hotForumTopics,
+                ])
+            @endcomponent
+        @endif
 
-                {{-- Packs Section --}}
-                @component('partials.bladesora.members.components.home._packs-section', [
-                    'brand' => brand(),
-                    'packsUrl' => '/'.$brand.'/packs',
-                    'hasPacks' => !empty($packs),
-                    'packs' => $packs,
-                    ])
-                @endcomponent
-
-                {{-- Popular Conversations --}}
-                @if(count($hotForumTopics) > 0)
-                    @component('partials.bladesora.members.components.home._conversations-section', [
-                        'brand' => brand(),
-                        'forumUrl' => brand() . '/forums',
-                        'forumPosts' => $hotForumTopics,
-                        ])
-                    @endcomponent
-                @endif
-
-            </div>
-        </div>
+    </div>
 
 @endsection
 

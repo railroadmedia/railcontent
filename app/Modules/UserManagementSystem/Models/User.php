@@ -61,6 +61,9 @@ use Illuminate\Support\Facades\Hash;
  * @property string|null $drums_gear_cymbal_brands
  * @property string|null $drums_gear_photo
  * @property int|null $drums_playing_since_year
+ * @property int|null $singing_since_year
+ * @property int|null $singing_gear_mic_brands
+ * @property int|null $singing_gear_photo
  * @property int $notify_on_lesson_comment_like
  * @property int|null $notifications_summary_frequency_minutes
  * @property int $notify_on_forum_post_reply
@@ -138,6 +141,9 @@ use Illuminate\Support\Facades\Hash;
  * @method static Builder|User wherePianoSkillLevel($value)
  * @method static Builder|User whereProfilePictureUrl($value)
  * @method static Builder|User whereRegion($value)
+ * @method static Builder|User whereSingingSinceYear($value)
+ * @method static Builder|User whereSingingGearMicBrands($value)
+ * @method static Builder|User whereSingingGearPhoto($value)
  * @method static Builder|User whereSessionSalt($value)
  * @method static Builder|User whereSupportNote($value)
  * @method static Builder|User whereTimezone($value)
@@ -203,7 +209,34 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @var array
      */
-    protected $fillable = [ 'first_name', 'last_name', 'location', 'birthday', 'biography', 'profile_picture_url', 'display_name'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'location',
+        'birthday',
+        'biography',
+        'profile_picture_url',
+        'display_name',
+        'drums_gear_stick_brands',
+        'drums_gear_hardware_brands',
+        'drums_gear_cymbal_brands',
+        'drums_gear_set_brands',
+        'drums_playing_since_year',
+        'piano_gear_keyboard_brands',
+        'piano_gear_piano_brands',
+        'piano_gear_photo',
+        'piano_playing_since_year',
+        'guitar_gear_string_brands',
+        'guitar_gear_pedal_brands',
+        'guitar_gear_amp_brands',
+        'guitar_gear_guitar_brands',
+        'guitar_gear_photo',
+        'guitar_playing_since_year',
+        'singing_since_year',
+        'singing_gear_mic_brands',
+        'singing_gear_photo'
+    ];
+
 
     /**
      * @param array $attributes

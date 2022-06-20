@@ -12,7 +12,7 @@
             <div class="tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-center tw-flex-wrap lg:tw-flex-nowrap">
                 <div class="tw-flex tw-flex-col tw-bg-top tw-bg-cover tw-flex-shrink-0 tw-h-52 tw-w-52 tw-items-center tw-relative tw-rounded-full tw-mb-4 lg:tw-mb-0">
                     @if($profilePictureUrl) 
-                        <img class="rounded"
+                        <img class="rounded tw-w-full tw-h-full"
                              src="{{ $profilePictureUrl }}"
                              data-avatar-update="true"
                         >

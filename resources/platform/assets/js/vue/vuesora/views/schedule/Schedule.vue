@@ -11,14 +11,14 @@
         ></schedule-item>
 
         <!-- todo: component needs css -->
-<!--        <add-event-modal-->
-<!--            modal-id="scheduleAddToCalendarModal"-->
-<!--            :subscription-calendar-id="subscriptionCalendarId"-->
-<!--            :single-event="singleEvent"-->
-<!--            :theme-color="themeColor"-->
-<!--            @modalClose="handleModalClose"-->
-<!--            :toggleSubscribe="toggleSubscribe"-->
-<!--        ></add-event-modal>-->
+        <add-event-modal
+            modal-id="scheduleAddToCalendarModal"
+            :subscription-calendar-id="subscriptionCalendarId"
+            :single-event="singleEvent"
+            :theme-color="themeColor"
+            @modalClose="handleModalClose"
+            :toggleSubscribe="toggleSubscribe"
+        ></add-event-modal>
     </div>
 </template>
 <script>

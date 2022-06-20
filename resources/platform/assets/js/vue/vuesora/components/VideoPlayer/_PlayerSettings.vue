@@ -1,24 +1,24 @@
 <template>
-    <div class="settings-drawer bg-grey-5 tw-text-white tw-shadow overflow">
-        <div class="tw-flex tw-flex-col">
+    <div class="settings-drawer bg-grey-5 text-white shadow overflow">
+        <div class="flex flex-column">
             <div
-                class="tw-flex tw-flex-row pa hover-bg-grey-4 bb-grey-4-1 tw-pointer noselect"
+                class="flex flex-row pa hover-bg-grey-4 bb-grey-4-1 pointer noselect"
                 :class="isSingleSource ? 'bg-grey-4' : ''"
                 @click.stop="toggleQualities"
             >
-                <div class="tw-flex tw-flex-col">
-                    <p class="body dense tw-font-bold">
+                <div class="flex flex-column">
+                    <p class="body dense font-bold">
                         Quality:
                     </p>
                 </div>
-                <div class="tw-flex tw-flex-col tw-justify-center">
+                <div class="flex flex-column align-v-center">
                     <p
-                        class="tiny dense tw-font-bold tw-text-right"
+                        class="tiny dense font-bold text-right"
                         :class="themeTextClass"
                     >
                         {{ currentSourceLabel }}
                         <i
-                            class="fas tw-ml-1"
+                            class="fas ml-1"
                             :class="qualitiesDropdown ? 'fa-caret-down' : 'fa-caret-up'"
                         ></i>
                     </p>
@@ -27,14 +27,14 @@
 
             <div
                 v-show="qualitiesDropdown"
-                class="tw-flex tw-flex-row bb-grey-4-1"
+                class="flex flex-row bb-grey-4-1"
             >
-                <div class="tw-flex tw-flex-col">
-                    <ul class="tw-list-none tiny tw-text-right dense tw-font-bold">
+                <div class="flex flex-column">
+                    <ul class="list-style-none tiny text-right dense font-bold">
                         <li
                             v-for="quality in playbackQualities"
                             :key="quality.label"
-                            class="pa-1 hover-bg-grey-4 tw-pointer"
+                            class="pa-1 hover-bg-grey-4 pointer"
                             :class="quality.file === currentSource ? themeTextClass : ''"
                             @click="setQuality(quality)"
                         >
@@ -53,22 +53,22 @@
             </div>
 
             <div
-                class="tw-flex tw-flex-row pa hover-bg-grey-4 tw-pointer noselect"
+                class="flex flex-row pa hover-bg-grey-4 pointer noselect"
                 @click.stop="toggleRates"
             >
-                <div class="tw-flex tw-flex-col">
-                    <p class="body dense tw-font-bold">
+                <div class="flex flex-column">
+                    <p class="body dense font-bold">
                         Playback Rate:
                     </p>
                 </div>
-                <div class="tw-flex tw-flex-col tw-justify-center">
+                <div class="flex flex-column align-v-center">
                     <p
-                        class="tiny dense tw-font-bold tw-text-right"
+                        class="tiny dense font-bold text-right"
                         :class="themeTextClass"
                     >
                         {{ currentPlaybackRate }}x
                         <i
-                            class="fas tw-ml-1"
+                            class="fas ml-1"
                             :class="ratesDropdown ? 'fa-caret-down' : 'fa-caret-up'"
                         ></i>
                     </p>
@@ -77,14 +77,14 @@
 
             <div
                 v-show="ratesDropdown"
-                class="tw-flex tw-flex-row bt-grey-4-1"
+                class="flex flex-row bt-grey-4-1"
             >
-                <div class="tw-flex tw-flex-col tw-justify-center">
-                    <ul class="tw-list-none tiny tw-text-right dense tw-font-bold">
+                <div class="flex flex-column align-v-center">
+                    <ul class="list-style-none tiny text-right dense font-bold">
                         <li
                             v-for="rate in playbackRates"
                             :key="`playbackRate-${rate}`"
-                            class="pa-1 hover-bg-grey-4 tw-pointer"
+                            class="pa-1 hover-bg-grey-4 pointer"
                             :class="rate === currentPlaybackRate ? themeTextClass : ''"
                             @click="setRate(rate)"
                         >

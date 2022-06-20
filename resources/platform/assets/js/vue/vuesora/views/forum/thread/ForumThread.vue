@@ -5,7 +5,7 @@
             <div class="tw-flex tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-8 tw-flex-col md:tw-flex-row">
                 
                 <div class="tw-flex tw-w-full tw-mb-5 tw-justify-center md:tw-justify-start tw-items-center md:tw-mb-0 md:tw-w-1/2">
-                    <h1 class="heading thread-title">
+                    <h1 class="heading thread-title dark:tw-text-white">
                         {{ thread.title }}
                     </h1>
                 </div>
@@ -15,7 +15,7 @@
                     <div class="tw-flex tw-items-center tw-w-full tw-mb-5 md:tw-mb-0">
                         <!-- Mobile Back Button -->
                         <a :href="previousPage" 
-                            class="tw-no-underline tw-transition tw-inline-flex tw-text-gray-300 tw-items-center hover:tw-text-gray-400 md:tw-hidden"
+                            class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center md:tw-hidden"
                         >
                             <i class="fas fa-arrow-circle-left tw-text-4xl"></i>
                         </a>
@@ -75,7 +75,7 @@
 
                             <!-- Hides Signatures -->
                             <button
-                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-2 tw-with-tooltip tw-tooltip-center"
                                 @click="hideSignatures"
                             >
                                 <span :class="[themeBgClass, signaturesHidden ? 'tw-text-white' : 'inverted ' + themeTextClass]">
@@ -93,7 +93,7 @@
                     <div class="tw-flex tw-justify-center tw-items-center md:tw-w-1/2">
                         <!-- Follow -->
                         <button
-                            class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-bg-{{$brand}} tw-px-4 tw-h-10"
+                            class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl" 
                             :class="[brandBgColor]"
                             @click="followPost"
                         >
@@ -104,7 +104,7 @@
 
                         <!-- Reply -->
                         <button
-                            class="tw-btn-primary tw-btn-small tw-w-full tw-bg-{{$brand}} tw-px-4 tw-h-10"
+                            class="tw-btn-primary tw-btn-small tw-w-full tw-px-4 tw-h-10 tw-mb-0 tw-text-xl"
                             :class="[brandBgColor]"
                             @click="scrollToReply"
                         >
@@ -121,10 +121,10 @@
                 <!-- Previous Button -->
                 <div class="tw-hidden tw-w-full tw-justify-center tw-mb-6 md:tw-mb-0 md:tw-justify-start sm:tw-w-auto md:tw-inline-flex">
                     <a :href="previousPage"
-                        class="tw-no-underline tw-transition tw-inline-flex tw-text-gray-300 tw-items-center hover:tw-text-gray-400"
+                        class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center"
                     >
                         <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2"></i>
-                        <span class="tw-font-bebas-neue tw-text-sm tw-uppercase">Back To Forum</span>
+                        <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back To Forum</span>
                     </a>
                 </div>
                 <!-- Pagination -->
@@ -145,12 +145,13 @@
                         <select
                             id="postSort"
                             v-model="filterInterface"
-                            class="has-input tw-bg-white"
+                            class="has-input tw-text-black dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
                         >
                             <option
                                 v-for="option in filterOptions"
                                 :key="option.label"
                                 :value="option.value"
+                                class="tw-text-black"
                             >
                                 {{ option.label }}
                             </option>
@@ -186,10 +187,10 @@
             <div class="tw-flex tw-flex-row tw-mb-8 tw-flex-wrap">
                 <div class="tw-w-full tw-inline-flex tw-justify-center tw-mb-4 sm:tw-mb-0 sm:tw-justify-start sm:tw-w-auto">
                     <a :href="previousPage"
-                        class="tw-no-underline tw-transition tw-inline-flex tw-text-gray-300 tw-items-center hover:tw-text-gray-400"
+                        class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center"
                     >
                         <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2"></i>
-                        <span class="tw-font-bebas-neue tw-text-sm tw-uppercase">Back To Forum</span>
+                        <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back To Forum</span>
                     </a>
                 </div>
                 <div class="tw-flex-grow tw-w-full sm:tw-w-auto" v-if="totalPages > 1">
@@ -200,7 +201,6 @@
                     />
                 </div>
             </div>
-
             <!-- Thread Reply Section -->
             <section v-if="!thread.isLocked"
                 class="tw-flex tw-flex-row pv-3"
@@ -212,16 +212,16 @@
                             :class="[userAvatarClassObject, brand]"
                         >
                             <img
-                                class="tw-rounded"
+                                class="tw-rounded-full"
                                 :src="currentUser.avatar"
                             >               
                         </div>
                     </div>
                     <!-- User Info -->
-                    <div class="tw-font-bebas-neue tw-uppercase tw-text-center">
-                        <p class="tw-text-base tw-mb-1">{{ currentUser.userExpVal }}</p>
-                        <p class="tw-text-sm tw-mb-0.5">Level {{ currentUser.progressLevel }}</p>
-                        <p class="tw-text-13 tw-text-gray-400">{{ currentUser.totalPosts }} Posts</p>
+                    <div class="tw-text-center">
+                        <p class="tw-font-bebas-neue tw-uppercase tw-text-xl dark:tw-text-white">{{ currentUser.userExpVal }}</p>
+                        <p class="tw-font-bebas-neue tw-uppercase tw-text-base dark:tw-text-white">Level {{ currentUser.progressLevel }}</p>
+                        <p class="tw-text-sm tw-text-gray-400 dark:tw-text-white ">{{ currentUser.totalPosts }} Posts</p>
                     </div>
                 </div>
 
@@ -233,11 +233,13 @@
                         :action="postStoreFormUrl"
                         @submit="formDisabled = !formDisabled"
                     >
+                        
                         <text-editor
                             ref="textEditor"
+                            :is-reply-section="true"
                             v-model="postReplyInterface"
                             @input="handleInput"
-                        ></text-editor>
+                        />
 
                         <input
                             type="hidden"
@@ -252,8 +254,8 @@
                         >
 
                         <div class="flex tw-flex-col md:tw-flex-row mt-2 tw-justify-center md:tw-justify-between">
-                            <a :href="signatureURL" 
-                               class="tw-btn-primary tw-text-gray-400 tw-bg-transparent tw-px-4 hover:tw-bg-gray-100 tw-mb-2"
+                            <a :href="`/${brand}/profile/${currentUser.id}/settings/profile#signatureForm`" 
+                               class="tw-btn-primary tw-text-gray-400 dark:tw-text-[#7E9AB1] tw-bg-transparent tw-px-4 hover:tw-bg-gray-100 dark:hover:tw-bg-[#002039] tw-mb-2"
                             >
                                 <i class="fas fa-file-signature tw-mr-1"></i>
                                 Add Signature
@@ -261,7 +263,7 @@
                             
                             <button
                                 class="tw-btn-primary thread-reply-button"
-                                :class="themeBgClass"
+                                :class="`tw-bg-${ brand }`"
                                 type="submit"
                                 :disabled="formDisabled"
                             >
@@ -270,6 +272,7 @@
                                 </span>
                             </button>
                         </div>
+
                     </form>
                 </div>
             </section>
@@ -358,18 +361,18 @@ export default {
                 progressLevel: '1.0',
             }),
         },
-      postStoreFormUrl: {
-        type: String,
-        default: () => '/post/store',
-      },
-      updatePostBaseRoute: {
-        type: String,
-        default: '/post/update/',
-      },
-      previousPage: {
-        type: String,
-        default: () => document.referrer,
-      },
+        postStoreFormUrl: {
+            type: String,
+            default: () => '/post/store',
+        },
+        updatePostBaseRoute: {
+            type: String,
+            default: '/post/update/',
+        },
+        previousPage: {
+            type: String,
+            default: () => document.referrer,
+        },
     },
     data() {
         return {
@@ -408,16 +411,6 @@ export default {
         };
     },
     computed: {
-        signatureURL() {
-            if(this.brand === "drumeo") {
-                return '/members/settings/profile#signatureForm'
-            } else if (this.brand === "guitareo") {
-                return '/members/account/settings#signatureForm';
-            } else {
-                return '/members/profile/settings#signatureForm';
-            }
-        },
-
         brandBgColor() {
             return `tw-bg-${this.brand}`;
         },
@@ -591,8 +584,8 @@ export default {
                 <blockquote class="${this.brand}">
                     <span class="post-id">${payload.id}</span>
                     <p class="quote-heading">
-                        <strong>${payload.userName}</strong>
-                        <em> - ${payload.createdOn}</em>
+                        <strong>${payload.userName}</strong><br>
+                        <span> - ${payload.createdOn}</span>
                     </p><br>
                     ${ payload.postBody }
                 </blockquote>
@@ -644,7 +637,7 @@ export default {
         },
 
         scrollToReply() {
-            window.scrollTo(0, document.getElementById('replyContainer').offsetTop);
+            document.getElementById('replyContainer').scrollIntoView();
         },
 
         addLikeUsersToModal(payload) {

@@ -31,17 +31,15 @@
 @endsection
 
 @section('content')
-        <div v-cloak>
 
-            <forum-thread
-                theme-color="{{ $brand }}"
-                brand="{{ $brand }}"
-                :thread="{{ $thread }}"
-                :current-user="{{ $currentUser }}"
-                previous-page="{{ $categoryUrl }}"
-                post-store-form-url="{{ url()->route('railforums.post.store').'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
-                update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
-            />
+    <forum-thread
+        theme-color="{{ $brand }}"
+        brand="{{ $brand }}"
+        :thread="{{ $thread }}"
+        :current-user="{{ $currentUser }}"
+        previous-page="{{ $categoryUrl }}"
+        post-store-form-url="{{ url()->route('railforums.post.store').'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
+        update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
+    />
 
-        </div>
 @endsection

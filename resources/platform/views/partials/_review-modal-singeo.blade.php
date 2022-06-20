@@ -7,12 +7,15 @@
 
         <form id="studentReviewForm"
               method="POST"
-              action=""
+              action="{{url()->route('platform.mail')}}"
               accept-charset="UTF-8">
+            {{ csrf_field() }}
 
+            <input type="hidden" name="type" value="student-review-application-singeo">
+            <input type="hidden" name="success-message" value="Your email has been sent. We'll be in touch very soon!">
+            <input type="hidden" name="brand" value="{{ $brand }}">
             <input type="hidden" name="subject" value="Student Review Application from: {{ user()->display_name }} ({{ user()->email }})">
 
-            <input type="hidden" name="student progress info" value="https://{{ current_subdomain() }}musora.com/admin/user-progress-info/{{ user()->id }}">
             <div class="flex flex-column mb-2">
                 <p class="body">What is your goal as a singer?</p>
 

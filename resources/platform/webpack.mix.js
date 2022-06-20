@@ -15,6 +15,10 @@ require('laravel-mix-merge-manifest');
 
 mix
     .js('resources/platform/assets/js/app.js', 'public/platform/js')
+    //JS From Existing Platforms
+    .js('resources/platform/assets/js/profile.js','public/platform/js')
+    .js('resources/platform/assets/js/lesson-page.js','public/platform/js')
+    .js('resources/platform/assets/js/learning-path-preview.js','public/platform/js')
     .vue()
     .sass('resources/platform/assets/css/app.scss', 'public/platform/css')
     .options({
