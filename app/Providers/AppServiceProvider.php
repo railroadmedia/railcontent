@@ -6,7 +6,12 @@ use App\ViewComposers\NavigationViewComposer;
 use Illuminate\Support\ServiceProvider;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 use Railroad\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
+use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
+use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\MusoraApi\Contracts\UserProviderInterface as MusoraUserProviderInterface;
+use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
+use Railroad\MusoraApi\Contracts\ChatProviderInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +51,26 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(EventDataSynchronizerUserProviderInterface::class, function ($app) {
             return $app->make(EventDataSynchronizerUserProvider::class);
+        });
+
+        $this->app->singleton(MusoraUserProviderInterface::class, function ($app) {
+            return $app->make(MusoraApiUserProvider::class);
+        });
+
+        $this->app->singleton(ProductProviderInterface::class, function ($app) {
+            return $app->make(MusoraApiProductProvider::class);
+        });
+
+        $this->app->singleton(RailTrackerProviderInterface::class, function ($app) {
+            return $app->make(RailTrackerProvider::class);
+        });
+
+        $this->app->singleton(ChatProviderInterface::class, function ($app) {
+            return $app->make(MusoraApiChatProvider::class);
+        });
+
+        $this->app->singleton(RailcontentURLProviderInterface::class, function ($app) {
+            return $app->make(RailcontentURLProvider::class);
         });
 
         //railnotifications package providers

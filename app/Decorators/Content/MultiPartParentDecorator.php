@@ -28,7 +28,7 @@ class MultiPartParentDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $contentsOfType[$contentIndex]['lessons'] = $lessons[$content['id']] ?? [];
-            $contentsOfType[$contentIndex]['lesson_count'] = count($contentsOfType[$contentIndex]['lessons']);
+            $contentsOfType[$contentIndex]['lesson_count'] = count($lessons[$content['id']] ?? []);
             $currentIndex = 0;
             $isSet = false;
             $totalLengthInSeconds = 0;
