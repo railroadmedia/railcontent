@@ -175,9 +175,7 @@ class RailcontentV2DataSyncingService
                     ->first()
                     ->value ?? 0;
 
-            var_dump($lengthInSecondsFieldValue);
-
-            $contentColumnsToUpdate['length_in_seconds'] = $lengthInSecondsFieldValue;
+            $contentColumnsToUpdate['length_in_seconds'] = (integer) $lengthInSecondsFieldValue;
         }
 
         $databaseConnection->table(config('railcontent.table_prefix') . 'content')
