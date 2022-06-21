@@ -88,6 +88,19 @@ class CalculateTotalXP extends Command
             "student-review",
         ];
 
+        if (Schema::connection(config('railcontent.database_connection_name'))->hasColumn(
+            config('railcontent.table_prefix').'content',
+            'children_total_xp'
+        )) {
+            Schema::connection(config('railcontent.database_connection_name'))
+                ->table(
+                    config('railcontent.table_prefix').'content',
+                    function (Blueprint $table) {
+                        $table->dropColumn('children_total_xp');
+                    }
+                );
+        }
+
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 config('railcontent.table_prefix') . 'content',
@@ -124,9 +137,9 @@ SET cs.`total_xp` = IF(n.xp IS NULL, (
          when cs.type = '%s' then '%s'
          when cs.type = '%s' then '%s'
          when cs.type = '%s' then '%s'
-         when n.difficulty in (1, 2, 3, 'beginner') then 100
-         when n.difficulty in (4, 5, 6, 'intermediate', 'all') then 150
-         when n.difficulty in (7, 8, 9, 10, 'advanced') then 200
+         when n.difficulty in ('1', '2', '3', 'beginner') then 100
+         when n.difficulty in ('4', '5', '6', 'intermediate', 'all') then 150
+         when n.difficulty in ('7', '8', '9', '10', 'advanced') then 200
          else 150
                       
         end
