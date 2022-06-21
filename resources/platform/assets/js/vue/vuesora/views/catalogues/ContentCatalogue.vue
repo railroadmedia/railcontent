@@ -889,7 +889,7 @@ export default {
     },
 
     handleFilterChange(payload) {
-      this.$set(this.filter_params, payload.key, payload.value);
+      this.filter_params[payload.key] = payload.value;
       this.page = 1;
 
       if (this.useUrlParams) {

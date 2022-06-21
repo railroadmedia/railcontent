@@ -31,11 +31,6 @@ class ContentLikesDecorator extends ModeDecoratorBase
             return $contents;
         }
 
-        $likeCounts = $this->contentLikeService->countForContentIds(
-            $contents->pluck('id')
-                ->toArray()
-        );
-
         $thisUsersLikes = $this->contentLikeService->index(
             $this->contentLikeService->builder()
                 ->whereIn(
@@ -47,8 +42,6 @@ class ContentLikesDecorator extends ModeDecoratorBase
         );
 
         foreach ($contents as $contentIndex => $content) {
-            $contents[$contentIndex]['like_count'] = $likeCounts[$content['id']] ?? 0;
-
             foreach ($thisUsersLikes as $thisUsersLike) {
                 if ($thisUsersLike['content_id'] == $content['id']) {
                     $contents[$contentIndex]['is_liked_by_current_user'] = true;

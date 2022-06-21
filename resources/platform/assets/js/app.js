@@ -56,6 +56,11 @@ import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';
 import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue';
 import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
+import AssignmentsContainer from './vue/vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
+import ContentAssignment from './vue/vuesora/components/ContentAssignment/ContentAssignment.vue';
+import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
+import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
+import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
@@ -172,6 +177,9 @@ const app = createApp({
     }
 });
 
+// in order to use provide/inject this will be default in vue v3.3
+app.config.unwrapInjectedRef = true;
+
 //Register Global Components
 app.component('AppContainer', AppContainer)
    .component('PageContainer', PageContainer)
@@ -202,6 +210,11 @@ app.component('AppContainer', AppContainer)
    .component('EmailForm', EmailForm)
    .component('StaticHeader', StaticHeader)
    .component('AddEventModal', AddEventModal)
+   .component('AssignmentsContainer', AssignmentsContainer)
+   .component('ContentAssignment', ContentAssignment)
+   .component('LegacyLoops', LegacyLoops)
+   .component('VideoResources', VideoResources)
+   .component('ContentLessonActionButtons', ContentLessonActionButtons);
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

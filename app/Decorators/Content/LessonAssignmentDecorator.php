@@ -25,6 +25,7 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
                 ->toArray()
         );
 
+
         if (empty($childHierarchyRows)) {
             return $contents;
         }

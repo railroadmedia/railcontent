@@ -53,19 +53,6 @@ class AppServiceProvider extends ServiceProvider
             return $app->make(EventDataSynchronizerUserProvider::class);
         });
 
-        //railnotifications package providers
-        $this->app->singleton(\Railroad\Railnotifications\Contracts\UserProviderInterface::class, function ($app) {
-            return $app->make(RailnotificationsUserProvider::class);
-        });
-
-        $this->app->singleton(\Railroad\Railnotifications\Contracts\ContentProviderInterface::class, function ($app) {
-            return $app->make(RailnotificationsContentProvider::class);
-        });
-
-        $this->app->singleton(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, function ($app) {
-            return $app->make(RailnotificationsForumProvider::class);
-        });
-
         $this->app->singleton(MusoraUserProviderInterface::class, function ($app) {
             return $app->make(MusoraApiUserProvider::class);
         });
@@ -84,6 +71,19 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(RailcontentURLProviderInterface::class, function ($app) {
             return $app->make(RailcontentURLProvider::class);
+        });
+
+        //railnotifications package providers
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\UserProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsUserProvider::class);
+        });
+
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\ContentProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsContentProvider::class);
+        });
+
+        $this->app->singleton(\Railroad\Railnotifications\Contracts\RailforumProviderInterface::class, function ($app) {
+            return $app->make(RailnotificationsForumProvider::class);
         });
     }
 }
