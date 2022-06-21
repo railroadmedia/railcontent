@@ -34,14 +34,14 @@
         @endif
 
         <!-- Home Card Links -->
-        <home-card-links 
+        <home-card-links
             brand="{{ $brand }}"
             :has-started-method="{{ !empty($hasStartedMethod) ? $hasStartedMethod : 'false' }}"
             :has-completed-method = "{{ !empty($hasCompletedMethod) ? $hasCompletedMethod : 'false' }}"
             completed-levels-url = "{{ $completedLevelsUrl }}"
             method-url="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : '/'.$brand.'/methods' }}"
             next-learning-path-lesson-title = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
-            next-learning-path-level = "{{ $nextLearningPathLevel }}" 
+            next-learning-path-level = "{{ $nextLearningPathLevel }}"
         ></home-card-links>
 
         {{-- Continue Section --}}
@@ -50,8 +50,8 @@
                 'brand' => brand(),
                 'hasStartedContent' => $startedContentCount > 0,
                 'contentEndpoint' => '/railcontent/content',
-                'continueUrl' => '', // todo: need url
-                'seeAllUrl' => '', // todo: need url
+                'continueUrl' => url()->route('platform.lists.in-progress'),
+                'seeAllUrl' => url()->route('platform.lists.in-progress'),
                 'startedContentJson' => $startedContentJson,
                 ])
             @endcomponent
@@ -93,15 +93,15 @@
             'brand' => brand(),
             'hasSubscribedCoaches' => $hasSubscribedCoaches,
             'subscribedCoaches' => $subscribedCoaches,
-            'subscribedCoachesUrl' => '', // todo: url
-            'allCoachesUrl' => '', // todo: url
+            'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>'true']).'#coach-section',
+            'allCoachesUrl' => route('platform.coaches'),
             ])
         @endcomponent
 
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
-            'myListUrl' => '', // todo: need url
+            'myListUrl' => url()->route('platform.lists.my-list'),
             'contentEndpoint' => '/laravel/public/railcontent/content',
             'usersList' => $usersList,
             ])
