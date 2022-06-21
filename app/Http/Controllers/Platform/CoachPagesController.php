@@ -259,6 +259,10 @@ class CoachPagesController extends Controller
             $fieldIds[] = $instructor['id'];
         }
 
+        if ($request->has('title')) {
+            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
+        }
+
         $includedTypes =
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
 
