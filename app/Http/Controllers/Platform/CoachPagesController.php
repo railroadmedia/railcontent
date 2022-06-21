@@ -249,14 +249,16 @@ class CoachPagesController extends Controller
         $includedFields = [];
         $requiredFields = [];
 
-        $includedFields[] = 'instructor,' . $thisCoach['id'];
         $fieldIds = [$thisCoach['id']];
         $instructor =
             $this->contentService->getBySlugAndType($coachSlug, 'coach')
                 ->first();
         if ($instructor) {
+            $includedFields[] = 'instructor,' . $thisCoach['id'];
             $includedFields[] = 'instructor,' . $instructor['id'];
             $fieldIds[] = $instructor['id'];
+        } else{
+            $requiredFields[] = 'instructor,' . $thisCoach['id'];
         }
 
         if ($request->has('title')) {
@@ -328,8 +330,8 @@ class CoachPagesController extends Controller
             "sortOverride" => '-published_on',
             "availableContentStatues" => ContentRepository::$availableContentStatues,
             "catalogueMeta" => $catalogueMeta,
-            "includedFields" => $requiredFields,
-            "requiredFields" => [],
+            "includedFields" => $includedFields,
+            "requiredFields" => $requiredFields,
             'totalResults' => $listLessons->totalResults(),
             'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['type'] ?? []),
             'featuredLessons' => $featuredLessons->toResponseRawJson(),
