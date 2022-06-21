@@ -77,8 +77,6 @@ class CoachPagesController extends Controller
 
         $lessonType = 'instructor';
 
-        ContentRepository::$catalogMetaAllowableFilters = ['focus', 'style'];
-
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 18),
@@ -248,14 +246,16 @@ class CoachPagesController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $includedFields = [];
         $requiredFields = [];
-        $requiredFields[] = 'instructor,' . $thisCoach['id'];
+
+        $includedFields[] = 'instructor,' . $thisCoach['id'];
         $fieldIds = [$thisCoach['id']];
         $instructor =
             $this->contentService->getBySlugAndType($coachSlug, 'coach')
                 ->first();
         if ($instructor) {
-            $requiredFields[] = 'instructor,' . $instructor['id'];
+            $includedFields[] = 'instructor,' . $instructor['id'];
             $fieldIds[] = $instructor['id'];
         }
 
@@ -274,7 +274,7 @@ class CoachPagesController extends Controller
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             $request->get('required_fields', $requiredFields),
-            $request->get('included_fields', []),
+            $request->get('included_fields', $includedFields),
             $request->get('required_user_states', []),
             $request->get('included_user_states', [])
         );
@@ -331,7 +331,7 @@ class CoachPagesController extends Controller
             "includedFields" => $requiredFields,
             "requiredFields" => [],
             'totalResults' => $listLessons->totalResults(),
-            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['content_type'] ?? []),
+            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['type'] ?? []),
             'featuredLessons' => $featuredLessons->toResponseRawJson(),
             "hasFeaturedLessons" => $featuredLessons->totalResults() > 0,
             'showSearch' => true,
