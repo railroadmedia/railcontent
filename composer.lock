@@ -3556,16 +3556,16 @@
         },
         {
             "name": "intervention/gif",
-            "version": "3.0.0-alpha.2",
+            "version": "3.0.0-alpha.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/gif.git",
-                "reference": "e8d7c6206b62ec6112a3e705e5ecc3c4718184ea"
+                "reference": "7d893db9f7444fbb82ba3bc75807ab0cea28750f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/gif/zipball/e8d7c6206b62ec6112a3e705e5ecc3c4718184ea",
-                "reference": "e8d7c6206b62ec6112a3e705e5ecc3c4718184ea",
+                "url": "https://api.github.com/repos/Intervention/gif/zipball/7d893db9f7444fbb82ba3bc75807ab0cea28750f",
+                "reference": "7d893db9f7444fbb82ba3bc75807ab0cea28750f",
                 "shasum": ""
             },
             "require": {
@@ -3602,9 +3602,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/gif/issues",
-                "source": "https://github.com/Intervention/gif/tree/3.0.0-alpha.2"
+                "source": "https://github.com/Intervention/gif/tree/3.0.0-alpha.3"
             },
-            "time": "2022-05-20T14:05:56+00:00"
+            "time": "2022-06-21T08:11:36+00:00"
         },
         {
             "name": "intervention/image",
@@ -7780,12 +7780,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "d1ed8d1db746c98e942cd0896259c1cffeb7c312"
+                "reference": "ca2e784ed733b75635734fc4058356687f5b5933"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d1ed8d1db746c98e942cd0896259c1cffeb7c312",
-                "reference": "d1ed8d1db746c98e942cd0896259c1cffeb7c312",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/ca2e784ed733b75635734fc4058356687f5b5933",
+                "reference": "ca2e784ed733b75635734fc4058356687f5b5933",
                 "shasum": ""
             },
             "require": {
@@ -7841,7 +7841,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-06-20T23:14:23+00:00"
+            "time": "2022-06-21T09:53:30+00:00"
         },
         {
             "name": "railroad/railforums",

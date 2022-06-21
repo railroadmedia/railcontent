@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'auth-middleware' => ['api_authenticated',
+    'auth-middleware' => ['api_authenticated', 'auth:sanctum',
         \Railroad\MusoraApi\Middleware\SetCustomDecorators::class
     ],
 //        [
