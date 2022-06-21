@@ -5,7 +5,7 @@
 @endsection
 
 @section('inject-components')
-    <script src="{{ mix('assets/members/js/lesson-page.js') }}"></script>
+    <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
 @endsection
 
 @section('content')
@@ -13,7 +13,8 @@
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
-    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
+{{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
+{{-- TODO: RT integration --}}
 
     <div class="tw-container tw-mx-auto fluid bg-grey-5 tw-pb-3">
         <div class="tw-container tw-mx-auto p-lg-only lean">
@@ -46,7 +47,7 @@
                 </div>
             @else
                 <div id="lessonVideoWrap">
-                    @if (current_user()->getUseLegacyVideoPlayer() || $agent->isSamsung())
+                    @if (user()->use_legacy_video_player ?? false || $agent->isSamsung())
                         <transition appear name="fade">
                             <video-media-element
                                 ref="mediaElementVueInstance" element-id="lessonPlayer"
@@ -60,7 +61,7 @@
                                 progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                 video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                 :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
-                                user-id="{{ current_user()->getId() }}"
+                                user-id="{{ user()->id }}"
                                 like-count="{{ $lessonContent['like_count'] ?? 0 }}"
                                 :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
                                 :check-for-timecode="true" @playing="handleVideoPlay" @pause="handleVideoPause">
@@ -87,7 +88,7 @@
                                 :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
                                 current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
                                 content-id="{{ $lessonContent->fetch('id') }}"
-                                user-id="{{ current_user()->getId() }}"
+                                user-id="{{ user()->id }}"
                                 video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
                                 cast-title="{{ $lessonContent->fetch('fields.title') }}"
                                 :use-intersection-observer="true"
@@ -133,7 +134,7 @@
         @if ($showEmail === true)
             <div class="tw-flex tw-flex-row tw-mt-3" dusk="question-email">
                 <email-form
-                    email-subject="{{ $emailSubjectOverride ?? 'Question on Lesson: ' . $lessonContent->fetch('fields.title') . ' from: ' . current_user()->getEmail() }}"
+                    email-subject="{{ $emailSubjectOverride ?? 'Question on Lesson: ' . $lessonContent->fetch('fields.title') . ' from: ' . user()->email }}"
                     email-type="{{ $emailTypeOverride ?? 'ask-question' }}" email-endpoint="/mailora/secure/send"
                     success-message="Your question has been sent!"
                     user-avatar="{{ user()->profile_picture_url }}" :lesson-page="true" theme-color="{{ $brand }}">
@@ -169,15 +170,15 @@
         <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
 
 
-        @if(!empty($allAssignments))
+        @if(!empty($lessonContent->fetch('*assignments', [])))
             <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3">
                 <div class="tw-flex tw-flex-row pv-3">
                     <h1 class="heading">Assignments</h1>
                     @php
                         $formattedAssignments = [];
-                        foreach ($allAssignments as $index => $assignment) {
+                        foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
                             $content = [];
-                            $content['themeColor'] = $themeColor;
+                            $content['themeColor'] = brand();
                             $content['timecode'] = $assignment->fetch('data.timecode', 0);
                             $content['id'] = $assignment->fetch('id');
                             $content['xp'] = $assignment->fetch('xp');
@@ -192,10 +193,10 @@
                 </div>
                 @php
                     $formattedAssignments = [];
-                    foreach ($allAssignments as $index => $assignment) {
+                    foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
                         $content = [];
                         $content['dusk'] = 'content-assignment';
-                        $content['themeColor'] = '{{ $brand }}';
+                        $content['themeColor'] = brand();
                         $content['timecode'] = $assignment->fetch('data.timecode', 0);
                         $content['id'] = $assignment->fetch('id');
                         $content['xp'] = $assignment->fetch('xp');
@@ -213,7 +214,7 @@
                             @include('partials.bladesora.members.partials._completion-bonus', [
                                 "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
                                 "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
-                                "themeColor" => '{{ $brand }}'
+                                "themeColor" => brand()
                             ])
                         </template>
                     </assignments-container>
@@ -242,13 +243,13 @@
 
             <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
                 <div class="tw-flex tw-flex-row">
-                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"
-                        user-id="{{ current_user()->getId() }}" user-name="{{ user()->display_name }}"
-                        user-avatar="{{ user()->profile_picture_url }}"
-                        user-xp="{{ Railroad\Points\Services\UserPointsService::fetchPoints(current_user()->getId()) }}"
-                        user-access-level="{{ $userAccessLevel }}" profile-base-route="/members/profile/"
-                        :is-admin="{{ json_encode(user()->isAdmin()) }}">
-                    </comments>
+{{--                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"--}}
+{{--                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"--}}
+{{--                        user-avatar="{{ user()->profile_picture_url }}"--}}
+{{--                        user-xp="{{ user()->total_xp }}"--}}
+{{--                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"--}}
+{{--                        :is-admin="{{ json_encode(user()->isAdmin()) }}">--}}
+{{--                    </comments>--}}
                 </div>
             </div>
         </div>
