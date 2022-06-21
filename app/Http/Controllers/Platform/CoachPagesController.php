@@ -163,14 +163,14 @@ class CoachPagesController extends Controller
             4
         );
 
-        $includedFields = [];
+        $requiredFields = [];
         foreach ($featuredCoaches->results() as $featuredCoache) {
-            $includedFields[] = 'instructor,' . $featuredCoache['id'];
+            $requiredFields[] = 'instructor,' . $featuredCoache['id'];
             $instructor =
                 $this->contentService->getBySlugAndType($featuredCoache['slug'], 'instructor')
                     ->first();
             if ($instructor) {
-                $includedFields[] = 'instructor,' . $instructor['id'];
+                $requiredFields[] = 'instructor,' . $instructor['id'];
             }
         }
 
@@ -187,8 +187,8 @@ class CoachPagesController extends Controller
             $includedTypes,
             [],
             [],
+            $requiredFields,
             [],
-            $includedFields,
             [],
             [],
             false,
@@ -250,16 +250,7 @@ class CoachPagesController extends Controller
         $requiredFields = [];
 
         $fieldIds = [$thisCoach['id']];
-        $instructor =
-            $this->contentService->getBySlugAndType($coachSlug, 'coach')
-                ->first();
-        if ($instructor) {
-            $includedFields[] = 'instructor,' . $thisCoach['id'];
-            $includedFields[] = 'instructor,' . $instructor['id'];
-            $fieldIds[] = $instructor['id'];
-        } else{
-            $requiredFields[] = 'instructor,' . $thisCoach['id'];
-        }
+        $requiredFields[] = 'instructor,' . $thisCoach['id'];
 
         if ($request->has('title')) {
             $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';

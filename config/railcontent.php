@@ -900,6 +900,7 @@ return [
         'quick-tips',
         'question-and-answer',
         'student-collaborations',
+        'live',
         'live-streams',
         'podcasts',
         'solos',
