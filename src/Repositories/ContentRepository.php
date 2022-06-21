@@ -2028,6 +2028,7 @@ class ContentRepository extends RepositoryBase
             'difficulty' => ConfigService::$tableContent.'.difficulty',
             'difficulty_range' => ConfigService::$tableContent.'.difficulty_range',
             'artist' => ConfigService::$tableContent.'.artist',
+            'type' => ConfigService::$tableContent.'.type',
         ];
 
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
