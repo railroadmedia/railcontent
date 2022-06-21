@@ -76,10 +76,12 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function addSubJoinToQuery(Builder $subQuery)
     {
-        $this->join($this->connection->raw('('.$subQuery->toSql().') inner_content'),
+        $this->join(
+            $this->connection->raw('('.$subQuery->toSql().') inner_content'),
             function (JoinClause $joinClause) {
                 $joinClause->on(ConfigService::$tableContent.'.id', '=', 'inner_content.id');
-            })
+            }
+        )
             ->addBinding($subQuery->getBindings());
 
         return $this;
@@ -269,7 +271,8 @@ class ContentQueryBuilder extends QueryBuilder
         foreach ($requiredUserStates as $index => $requiredUserState) {
             $tableName = 'ucp_'.$index;
 
-            $this->join(ConfigService::$tableUserContentProgress.' as '.$tableName,
+            $this->join(
+                ConfigService::$tableUserContentProgress.' as '.$tableName,
                 function (JoinClause $joinClause) use ($requiredUserState, $tableName) {
                     $joinClause->on(
                         $tableName.'.content_id',
@@ -294,7 +297,8 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->quote($requiredUserState['state'])
                             )
                         );
-                });
+                }
+            );
         }
 
         return $this;
@@ -310,8 +314,7 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->join(
-            ConfigService::$tableUserContentProgress,
+        $this->join(ConfigService::$tableUserContentProgress,
             function (JoinClause $joinClause) use ($includedUserStates) {
                 $joinClause->on(
                     ConfigService::$tableUserContentProgress.'.content_id',
@@ -345,8 +348,7 @@ class ContentQueryBuilder extends QueryBuilder
                 }
 
                 );
-            }
-        );
+            });
 
         return $this;
     }
@@ -363,14 +365,19 @@ class ContentQueryBuilder extends QueryBuilder
 
         foreach ($requiredFields as $index => $requiredFieldData) {
             if ($requiredFieldData['is_content_column']) {
-                $this->where(ConfigService::$tableContent.'.'.$requiredFieldData['name'], $requiredFieldData['value']);
+                $this->where(
+                    ConfigService::$tableContent.'.'.$requiredFieldData['name'],
+                    $requiredFieldData['operator'],
+                    $requiredFieldData['value']
+                );
             } elseif (!empty($requiredFieldData['associated_table'])) {
                 $this->leftJoin(
                     $requiredFieldData['associated_table']['table'].
                     ' as '.
+                    'r'.
                     $requiredFieldData['associated_table']['alias'].
                     $index,
-                    $requiredFieldData['associated_table']['alias'].$index.'.content_id',
+                    'r'.$requiredFieldData['associated_table']['alias'].$index.'.content_id',
                     '=',
                     ConfigService::$tableContent.'.id'
                 );
@@ -379,6 +386,7 @@ class ContentQueryBuilder extends QueryBuilder
                     $index
                 ) {
                     return $builder->where(
+                        'r'.
                         $requiredFieldData['associated_table']['alias'].
                         $index.
                         '.'.
@@ -405,8 +413,7 @@ class ContentQueryBuilder extends QueryBuilder
 
         $tableName = '_icf';
 
-        $this->join(
-            ConfigService::$tableContent.' as '.$tableName,
+        $this->join(ConfigService::$tableContent.' as '.$tableName,
             function (JoinClause $joinClause) use ($includedFields, $tableName) {
                 $joinClause->on(
                     $tableName.'.id',
@@ -417,20 +424,18 @@ class ContentQueryBuilder extends QueryBuilder
                 $joinClause->on(function (JoinClause $joinClause) use ($tableName, $includedFields) {
                     foreach ($includedFields as $index => $includedFieldData) {
                         if ($includedFieldData['is_content_column']) {
-                            $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
-                                    $joinClause->on(
-                                        $tableName.'.'.$includedFieldData['name'],
-                                        $includedFieldData['operator'],
-                                        is_numeric($includedFieldData['value']) ?
-                                            $joinClause->raw($includedFieldData['value']) : $joinClause->raw(
-                                            DB::connection()
-                                                ->getPdo()
-                                                ->quote($includedFieldData['value'])
-                                        )
-                                    );
-                                }
-                            );
+                            $joinClause->orOn(function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
+                                $joinClause->on(
+                                    $tableName.'.'.$includedFieldData['name'],
+                                    $includedFieldData['operator'],
+                                    is_numeric($includedFieldData['value']) ?
+                                        $joinClause->raw($includedFieldData['value']) : $joinClause->raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($includedFieldData['value'])
+                                    )
+                                );
+                            });
                         } elseif (!empty($includedFieldData['associated_table'])) {
                             $joinClause->orOn(
                                 function (JoinClause $joinClause) use ($tableName, $includedFieldData, $index) {
@@ -456,15 +461,13 @@ class ContentQueryBuilder extends QueryBuilder
                                             $includedFieldData['value']
                                         );
                                     });
-                                }
-                            );
+                                });
                         }
                     }
                 }
 
                 );
-            }
-        );
+            });
 
         return $this;
     }
@@ -478,25 +481,21 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->leftJoin(
-            ConfigService::$tableContentPermissions.' as id_content_permissions',
+        $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
             function (JoinClause $join) {
                 $join->on(
                     'id_content_permissions'.'.content_id',
                     ConfigService::$tableContent.'.id'
                 );
-            }
-        )
-            ->leftJoin(
-                ConfigService::$tableContentPermissions.' as type_content_permissions',
+            })
+            ->leftJoin(ConfigService::$tableContentPermissions.' as type_content_permissions',
                 function (JoinClause $join) {
                     $join->on(
                         'type_content_permissions'.'.content_type',
                         ConfigService::$tableContent.'.type'
                     )
                         ->whereIn('type_content_permissions'.'.brand', ConfigService::$availableBrands);
-                }
-            )
+                })
             ->where(function (Builder $builder) {
                 return $builder->where(function (Builder $builder) {
                     return $builder->whereNull(
