@@ -1915,6 +1915,11 @@ class ContentRepository extends RepositoryBase
                 ];
         }
 
+        // we always need the related data
+        if (!in_array('data', $filterOptions)) {
+            $filterOptions[] = 'data';
+        }
+
         $extraData = $this->geExtraDataInOldStyle($filterOptions, $contentRows);
 
         $this->presenter->addParam($extraData);
@@ -1948,12 +1953,18 @@ class ContentRepository extends RepositoryBase
         ];
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'data',
                 'instructor',
                 'style',
                 'topic',
                 'focus',
                 'bpm',
             ];
+
+        // we always need the related data
+        if (!in_array('data', $filterOptions)) {
+            $filterOptions[] = 'data';
+        }
 
         $filterOptions = array_unique($filterOptions);
 
