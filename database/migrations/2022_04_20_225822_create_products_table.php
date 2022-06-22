@@ -36,12 +36,14 @@ return new class extends Migration
             $table->string('instructor_img')->nullable()->unique();
             $table->longText('instructor_desc')->nullable();
             $table->boolean('sold_out')->default(false);
-            $table->boolean('free_shipping')->default(false);
             $table->boolean('guaranteed')->default(false);
             $table->boolean('visible')->default(true);
             $table->boolean('free_bonus')->default(false);
             $table->boolean('membership_discount')->default(false);
             $table->boolean('lifetime_access')->default(false);
+            $table->boolean('free_shipping')->default(false);
+            $table->boolean('bundle_lifetime_access')->default(false);
+            $table->boolean('bundle_free_shipping')->default(false);
             $table->integer()->nullable();
             $table->timestamps();
         });
