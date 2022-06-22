@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 
 /**
- * App\Modules\UserManagementSystem\Models\EmailChange
+ * App\Modules\UserManagementSystem\Models\OnboardingGear
  *
  * @property int $id
  * @property int $user_id
@@ -32,16 +32,15 @@ use Illuminate\Support\Carbon;
  */
 class OnboardingGear extends Model
 {
-    protected $table = 'onboarding_gears';
-
     use HasFactory;
+    protected $table = 'onboarding_gears';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [ 'gear'];
+    protected $fillable = [ 'gear', 'user_id', 'brand'];
 
     public function user()
     {

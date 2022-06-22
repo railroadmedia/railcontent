@@ -2,11 +2,13 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\UserManagementSystem\Models\OnboardingExperience;
 use Modules\UserManagementSystem\Models\OnboardingGear;
+use Modules\UserManagementSystem\Models\OnboardingTopic;
+use Modules\UserManagementSystem\Models\OnboardingGenre;
+
 
 class OnboardingController extends Controller
 {
@@ -15,57 +17,67 @@ class OnboardingController extends Controller
      *
      * @param Request $request
      */
-    public function updateGears(Request $request)
+    public function gears(Request $request)
     {
         $request->validate(['data' => 'required']);
 
-        $userGears = OnboardingGear::where([
-            ['brand', '=', brand()],
-            ['user_id', '=', user()->id]
-        ])->get();
+        OnboardingGear::where(['brand' => brand(), 'user_id' => user()->id])->delete();
 
         foreach ($request->data as $gear) {
-            $requestGears[] = $gear;
+            OnboardingGear::create(['gear' => $gear, 'brand' => brand(), 'user_id' => user()->id]);
         }
 
-        $deleteGearIds = [];
-        foreach ($userGears as $oldGear) {
-            if (in_array($oldGear->gear, $requestGears)) {
-                unset($requestGears[array_search($oldGear->gear, $requestGears)]);
-            } else {
-                $deleteGearIds[] = $oldGear->id;
-            }
-        }
-
-
-        foreach ($requestGears as $newGear) {
-            OnboardingGear::create(['gear' => $newGear, 'brand' => brand(), 'user_id' => user()->id]);
-        }
-        OnboardingGear::whereIn('id', $deleteGearIds)->delete();
-
-
-        return response('done', 200);
+        return response('Success', 200);
     }
 
     /**
      *
      * @param Request $request
      */
-    public function readGears(Request $request)
+    public function topics(Request $request)
     {
-        $selectedGears = OnboardingGear::where([
-            ['brand', '=', brand()],
-            ['user_id', '=', user()->id]
-        ])->get();
+        $request->validate(['data' => 'required']);
 
-        $allGears = config('user_management_system.onboarding.') . brand() . ('gears');
+        OnboardingTopic::where(['brand' => brand(), 'user_id' => user()->id])->delete();
 
-        return json_encode(
-            array(
-                "selected" => json_encode($selectedGears),
-                "all" => json_encode($allGears)
-            )
+        foreach ($request->data as $topic) {
+            OnboardingTopic::create(['topic' => $topic, 'brand' => brand(), 'user_id' => user()->id]);
+        }
+
+        return response('Success', 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     */
+    public function genres(Request $request)
+    {
+        $request->validate(['data' => 'required']);
+
+        OnboardingGenre::where(['brand' => brand(), 'user_id' => user()->id])->delete();
+
+        foreach ($request->data as $genre) {
+            OnboardingGenre::create(['genre' => $genre, 'brand' => brand(), 'user_id' => user()->id]);
+        }
+
+        return response('Success', 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     */
+    public function experience(Request $request)
+    {
+        $request->validate(['experience_level' => 'integer|required|max:3']);
+
+        OnboardingExperience::where(['brand' => brand(), 'user_id' => user()->id])->delete();
+        OnboardingExperience::create(
+            ['experience_level' => $request->experience_level, 'brand' => brand(), 'user_id' => user()->id]
         );
+
+        return response('Success', 200);
     }
 
 

@@ -66,16 +66,27 @@ Route::group(
           */
         Route::post(
             'onboarding-gears',
-            OnboardingController::class . '@updateGears'
+            OnboardingController::class . '@gears'
         )
             ->name('user_management_system.onboarding.gears');
 
-
-        Route::get(
-            'onboarding-gears',
-            OnboardingController::class . '@readGears'
+        Route::post(
+            'onboarding-topics',
+            OnboardingController::class . '@topics'
         )
-            ->name('user_management_system.onboarding.gears');
+            ->name('user_management_system.onboarding.topics');
+
+        Route::post(
+            'onboarding-genres',
+            OnboardingController::class . '@genres'
+        )
+            ->name('user_management_system.onboarding.genres');
+
+        Route::post(
+            'onboarding-experience',
+            OnboardingController::class . '@experience'
+        )
+            ->name('user_management_system.onboarding.experience');
 
     }
 );
