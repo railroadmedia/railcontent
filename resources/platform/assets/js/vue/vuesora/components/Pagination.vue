@@ -66,7 +66,7 @@
                 {{ totalPages }}
             </span>
         </button>
-        
+
         <!-- Right Arrow -->
         <button
             v-show="currentPage < totalPages"

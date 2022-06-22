@@ -60,6 +60,7 @@ export default {
      */
     flattenFilters(filter_options){
         let keys = Object.keys(filter_options);
+        console.log(filter_options);
         let filter_map = {
             artist: [],
             bpm: [],

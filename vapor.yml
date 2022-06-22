@@ -3,99 +3,164 @@ name: musora-web-platform
 environments:
     production:
         domain: 'platform.musora.com'
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 768
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     pre-production:
         domain: 'pre-production.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     beta-testing:
         domain: 'beta-testing.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-one:
         domain: 'web-staging-one.musora.com'
+        scheduler: false
         runtime: docker
-        memory: 1024
-        cli-memory: 512
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-two:
         domain: 'web-staging-two.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-three:
         domain: 'web-staging-three.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-four:
         domain: 'web-staging-four.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-five:
         domain: 'web-staging-five.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-one:
         domain: 'app-staging-one.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-two:
         domain: 'app-staging-two.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-three:
         domain: 'app-staging-three.musora.com'
-        memory: 1024
-        cli-memory: 512
+        scheduler: false
         runtime: docker
+        memory: 512
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'

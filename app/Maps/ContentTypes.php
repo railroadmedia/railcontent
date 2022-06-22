@@ -164,4 +164,20 @@ class ContentTypes
             config('railcontent.singularContentTypes')
         );
     }
+
+    /**
+     * @return array
+     */
+    public static function contentTypesWithChildren()
+    {
+        return config('railcontent.contentTypesWithChildren', []);
+    }
+
+    /**
+     * @return array
+     */
+    public static function contentTypesWithSingularParent()
+    {
+        return config('railcontent.contentTypesWithSingularParent', []);
+    }
 }
