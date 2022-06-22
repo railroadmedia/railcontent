@@ -16,7 +16,8 @@
         "washing" => "fa-tint",
         "microwave" => "fa-bolt",
         "style" => "fa-cut",
-        "manufacturer" => "fa-tshirt"
+        "manufacturer" => "fa-tshirt",
+        "size" => "fa-arrows",
     ];
 ?>
 
