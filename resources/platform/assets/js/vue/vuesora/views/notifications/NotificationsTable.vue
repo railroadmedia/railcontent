@@ -1,26 +1,28 @@
 <template>
     <div class="tw-flex tw-flex-col">
-        <div class="tw-flex tw-flex-row pv-3 tw-items-center tw-flex-wrap">
-            <div class="tw-flex tw-flex-col">
-                <h1 class="heading">
+        <div class="tw-flex tw-flex-row pv-3 tw-items-center tw-flex-wrap tw-justify-between">
+            <div class="tw-flex tw-flex-row tw-items-center">
+                <BellIcon class="tw-h-[26px] tw-w-[26px] tw-mr-[10px]" :class="textColor[brand]" />
+                <h1 class="tw-text-[30px] tw-font-bold">
                     Notifications
                 </h1>
             </div>
 
+            <div class="tw-flex tw-flex-row">
+                <div class="tw-flex tw-flex-col tw-mr-[12px]">
+                <button class="tw-btn-primary tw-h-[50px] tw-text-white" :class="bgColor[brand]" :disabled="hasUnread"
+                    @click.stop="markAllAsRead">
+                    <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
+                    Mark All As Read
+                </button>
+            </div>
+
             <div class="tw-flex tw-flex-col">
-                <a :href="settingsUrl" class="tw-btn-secondary" :class="bgColor[brand]">
+                <a :href="settingsUrl" class="tw-btn-secondary tw-text-white">
                     <CogIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
                     My Settings
                 </a>
             </div>
-
-            <div class="tw-flex tw-flex-col">
-                <button class="tw-btn-primary tw-h-[50px] tw-text-white" :class="bgColor[brand]" :disabled="!hasUnread"
-                    @click.stop="markAllAsRead">
-                    <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
-                    Mark All As Read
-
-                </button>
             </div>
         </div>
 
@@ -45,8 +47,9 @@ import * as QueryString from 'query-string';
 import NotificationsTableRow from './_NotificationsTableRow.vue';
 import Pagination from '../../components/Pagination.vue';
 import UserService from '../../assets/js/services/user';
+import { BellIcon } from '@heroicons/vue/solid';
 import { EyeIcon, CogIcon } from '@heroicons/vue/outline';
-import { bgColor } from '../../../../constants/brands';
+import { bgColor, textColor } from '../../../../constants/brands';
 
 const props = defineProps({
     brand: {

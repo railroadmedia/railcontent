@@ -123,7 +123,6 @@ const formattedCreatedOn = computed(() => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     // TODO: We need to pass Date a valid date, createdOn is not valid
     const date = new Date();
-    console.log(date)
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 });
 
