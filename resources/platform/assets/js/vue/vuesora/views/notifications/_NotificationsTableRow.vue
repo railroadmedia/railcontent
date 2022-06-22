@@ -1,18 +1,18 @@
 <template>
     <a :href="linkedContent.url"
-        class="tw-flex tw-flex-row tw-bg-[#00101D] tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white"
+        class="tw-flex tw-flex-row tw-bg-[#00101D] tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
         :class="{ 'is-read': isRead }" @click="markAsRead(false)">
         <div class="tw-flex">
-            <div class="tw-flex tw-flex-col avatar-col tw-justify-center">
-                <div class="tw-rounded-full">
+            <div class="tw-flex tw-flex-col tw-justify-center">
+                <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">
                     <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="userAvatar" data-ix-fade alt="User Avatar" class="rounded">
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow">
+            <div class="tw-flex tw-flex-col tw-justify-center overflow">
 
-                <p class="tiny tw-text-black dark:tw-text-white item-title">
+                <p class="tw-text-[16px] tw-text-black dark:tw-text-white">
                     <span class="tw-font-bold">{{ userName }}</span>
 
                     {{ notificationTypeString }}
@@ -20,11 +20,11 @@
                     <span class="tw-font-bold">{{ linkedContent.title }}</span>
                 </p>
 
-                <p v-html="subContent" class="tiny dark:tw-text-white tw-text-black tw-mt-1">
+                <p v-html="subContent" class="tw-text-[16px] dark:tw-text-white tw-text-black tw-mt-[3px]">
                 </p>
 
-                <p class="tiny text-grey-3 dark:tw-text-[#9ec0dc] tw-italic tw-mt-1" style="font-size: 8pt;">
-                    {{ createdOn }}
+                <p class="tw-text-[14px] tw-text-black dark:tw-text-[#9ec0dc] tw-italic tw-mt-[4px]">
+                    {{ formattedCreatedOn }}
                 </p>
             </div>
 
@@ -49,7 +49,8 @@
     </a>
 </template>
 <script setup>
-import { computed } from 'vue'
+import { borderColor } from '../../../../constants/brands';
+import { computed, onMounted } from 'vue'
 import { TrashIcon, EyeIcon, ArrowCircleRightIcon } from '@heroicons/vue/solid'
 const props = defineProps({
     createdOn: {
@@ -87,12 +88,15 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
+    brand: {
+        type: String,
+        default: 'drumeo'
+    }
 });
 
 const emit = defineEmits('notificationRead');
 
 const notificationTypeString = computed(() => {
-    console.log(props.notificationType)
     switch (props.notificationType) {
         case 'comment-reply':
             return 'replied to your lesson comment on:';
@@ -115,6 +119,14 @@ const notificationTypeString = computed(() => {
     }
 });
 
+const formattedCreatedOn = computed(() => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    // TODO: We need to pass Date a valid date, createdOn is not valid
+    const date = new Date();
+    console.log(date)
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+});
+
 function markAsRead(canCancel = true) {
     emit('notificationRead', {
         id: props.id,
@@ -122,5 +134,9 @@ function markAsRead(canCancel = true) {
         canCancel,
     });
 }
+
+onMounted(() => {
+    console.log(Object.entries(props))
+})
 
 </script>
