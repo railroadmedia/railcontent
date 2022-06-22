@@ -1,6 +1,6 @@
 <template>
     <a :href="linkedContent.url"
-        class="tw-flex tw-flex-row tw-bg-[#00101D] tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
+        class="tw-flex tw-flex-row dark:tw-bg-[#00101D] tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
         :class="{ 'is-read': isRead }" @click="markAsRead(false)">
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">

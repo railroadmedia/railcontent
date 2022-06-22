@@ -21878,12 +21878,6 @@ a:visited{
 .tw-ml-\[35px\]{
   margin-left: 35px !important;
 }
-.tw-mr-\[2px\]{
-  margin-right: 2px !important;
-}
-.tw-mr-\[12px\]{
-  margin-right: 12px !important;
-}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22093,15 +22087,6 @@ a:visited{
 }
 .tw-h-52{
   height: 13rem !important;
-}
-.tw-h-\[26px\]{
-  height: 26px !important;
-}
-.tw-h-\[50px\]{
-  height: 50px !important;
-}
-.tw-h-\[22px\]{
-  height: 22px !important;
 }
 .tw-max-h-8{
   max-height: 2rem !important;
@@ -22330,12 +22315,6 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75% !important;
-}
-.tw-w-\[26px\]{
-  width: 26px !important;
-}
-.tw-w-\[22px\]{
-  width: 22px !important;
 }
 .tw-min-w-\[232px\]{
   min-width: 232px !important;
@@ -23070,10 +23049,6 @@ a:visited{
 .tw-bg-\[\#F4F4F5\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(244 244 245 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-\[\#00101D\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-gray-100{
   --tw-bg-opacity: 1 !important;
@@ -23854,10 +23829,6 @@ a:visited{
 .tw-text-\[\#002039\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
-}
-.tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
