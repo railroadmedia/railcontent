@@ -75,6 +75,14 @@ class RunMWPPhaseOneLaunchMigrations extends Command
         Log::info('Starting SyncContentRowFromRelatedTables...');
         $this->call('SyncContentRowFromRelatedTables', ['contentId' => 'all']);
 
+        $this->info('Starting MigrateCoachesToInstructors...');
+        Log::info('Starting MigrateCoachesToInstructors...');
+        $this->call('MigrateCoachesToInstructors');
+
+        $this->info('Starting command:CalculateTotalXP...');
+        Log::info('Starting command:CalculateTotalXP...');
+        $this->call('command:CalculateTotalXP');
+
         $this->info('---------------------------------------------------');
         $this->info('Finished RunMWPPhaseOneLaunchMigrations!');
         Log::info('Finished RunMWPPhaseOneLaunchMigrations!');

@@ -51,6 +51,7 @@ class ContentPagesController extends BaseController
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogName = $contentTypeName;
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];

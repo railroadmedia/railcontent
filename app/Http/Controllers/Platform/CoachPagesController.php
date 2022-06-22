@@ -163,14 +163,14 @@ class CoachPagesController extends Controller
             4
         );
 
-        $includedFields = [];
+        $requiredFields = [];
         foreach ($featuredCoaches->results() as $featuredCoache) {
-            $includedFields[] = 'instructor,' . $featuredCoache['id'];
+            $requiredFields[] = 'instructor,' . $featuredCoache['id'];
             $instructor =
                 $this->contentService->getBySlugAndType($featuredCoache['slug'], 'instructor')
                     ->first();
             if ($instructor) {
-                $includedFields[] = 'instructor,' . $instructor['id'];
+                $requiredFields[] = 'instructor,' . $instructor['id'];
             }
         }
 
@@ -187,8 +187,8 @@ class CoachPagesController extends Controller
             $includedTypes,
             [],
             [],
+            $requiredFields,
             [],
-            $includedFields,
             [],
             [],
             false,
@@ -246,15 +246,14 @@ class CoachPagesController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $includedFields = [];
         $requiredFields = [];
-        $requiredFields[] = 'instructor,' . $thisCoach['id'];
+
         $fieldIds = [$thisCoach['id']];
-        $instructor =
-            $this->contentService->getBySlugAndType($coachSlug, 'coach')
-                ->first();
-        if ($instructor) {
-            $requiredFields[] = 'instructor,' . $instructor['id'];
-            $fieldIds[] = $instructor['id'];
+        $requiredFields[] = 'instructor,' . $thisCoach['id'];
+
+        if ($request->has('title')) {
+            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
         }
 
         $includedTypes =
@@ -268,7 +267,7 @@ class CoachPagesController extends Controller
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             $request->get('required_fields', $requiredFields),
-            $request->get('included_fields', []),
+            $request->get('included_fields', $includedFields),
             $request->get('required_user_states', []),
             $request->get('included_user_states', [])
         );
@@ -322,10 +321,10 @@ class CoachPagesController extends Controller
             "sortOverride" => '-published_on',
             "availableContentStatues" => ContentRepository::$availableContentStatues,
             "catalogueMeta" => $catalogueMeta,
-            "includedFields" => $requiredFields,
-            "requiredFields" => [],
+            "includedFields" => $includedFields,
+            "requiredFields" => $requiredFields,
             'totalResults' => $listLessons->totalResults(),
-            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['content_type'] ?? []),
+            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['type'] ?? []),
             'featuredLessons' => $featuredLessons->toResponseRawJson(),
             "hasFeaturedLessons" => $featuredLessons->totalResults() > 0,
             'showSearch' => true,

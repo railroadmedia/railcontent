@@ -3,10 +3,12 @@
 return [
     'pack_content_completed' => 5000,
     'pack_bundle_content_completed' => 500,
+    'unit_content_completed' => 1000,
     'learning_path_content_completed' => 5000,
     'learning_path_level_content_completed' => 1000,
     'learning_path_course_content_completed' => 500,
     'learning_path_lesson_content_completed' => 150,
+    'song_content_completed' => 150,
     'course_content_completed' => 500,
     'assignment_content_completed' => 25,
 

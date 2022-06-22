@@ -106,10 +106,10 @@ return [
 
     // aws integration
     'awsS3_remote_storage' => [
-        'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
-        'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
-        'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
+        'accessKey' => env('S3_KEY'),
+        'accessSecret' => env('S3_SECRET'),
+        'region' => env('S3_REGION'),
+        'bucket' => env('S3_BUCKET'),
     ],
     'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
 
@@ -644,6 +644,12 @@ return [
                 'amountOfFutureLessonsToShow' => 10,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'play-alongs' => [
+                "name" => "Play Alongs",
+                "icon" => "icon-play-alongs",
+                "description" => "The Play-Alongs has to be the most underrated area of the site. Each Play-Along teaches you a track in the style of a famous song or artist. You will learn every element you need to play each play-along - the chords, strumming patterns, riffs, and song layout. From there you Play-Along to the full jam track complete with sheet music and TAB. There is nothing like learning the guitar through playing music!",
+                "allowableFilters" => ['bpm', 'style'],
+            ],
         ],
         'pianote' => [
             'all' => [
@@ -894,6 +900,7 @@ return [
         'quick-tips',
         'question-and-answer',
         'student-collaborations',
+        'live',
         'live-streams',
         'podcasts',
         'solos',
