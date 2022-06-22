@@ -3,9 +3,14 @@ name: musora-web-platform
 environments:
     production:
         domain: 'platform.musora.com'
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 800
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -13,9 +18,14 @@ environments:
     pre-production:
         domain: 'pre-production.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -23,9 +33,14 @@ environments:
     beta-testing:
         domain: 'beta-testing.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -34,8 +49,13 @@ environments:
         domain: 'web-staging-one.musora.com'
         scheduler: false
         runtime: docker
-        memory: 1024
-        cli-memory: 512
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -43,12 +63,14 @@ environments:
     web-staging-two:
         domain: 'web-staging-two.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 2048
-        tmp-storage: 8192
-        cli-tmp-storage: 8192
-        queue-tmp-storage: 8192
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -56,11 +78,14 @@ environments:
     web-staging-three:
         domain: 'web-staging-three.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 2048
-        timeout: 120
-        cli-timeout: 900
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -68,9 +93,14 @@ environments:
     web-staging-four:
         domain: 'web-staging-four.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -78,9 +108,14 @@ environments:
     web-staging-five:
         domain: 'web-staging-five.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -88,9 +123,14 @@ environments:
     app-staging-one:
         domain: 'app-staging-one.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -98,9 +138,14 @@ environments:
     app-staging-two:
         domain: 'app-staging-two.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -108,9 +153,14 @@ environments:
     app-staging-three:
         domain: 'app-staging-three.musora.com'
         scheduler: false
-        memory: 1024
-        cli-memory: 512
         runtime: docker
+        memory: 500
+        cli-memory: 2048
+        cli-timeout: 900
+        timeout: 120
+        tmp-storage: 2048
+        cli-tmp-storage: 2048
+        queue-tmp-storage: 2048
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
