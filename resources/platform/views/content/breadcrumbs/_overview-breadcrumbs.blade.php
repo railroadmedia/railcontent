@@ -87,7 +87,7 @@
             ],
             [
                 "title" => parse_lesson_type_readable($parentContent->fetch('type'), true),
-                "url" => url()->route('members.catalogues.show', ["contentType" => parse_lesson_type_readable($parentContent->fetch('type'), true)]),
+                "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => parse_lesson_type_readable($parentContent->fetch('type'), true)]),
             ],
             [
                 "title" => $parentContent->fetch('fields.title'),

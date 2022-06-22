@@ -4,7 +4,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME'),
+    'database_connection_name' => 'musora_laravel_mysql',
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
@@ -17,6 +17,15 @@ return [
     'available_languages' => [
         'en-US',
     ],
+
+    // elastic search
+    'use_elastic_search' => false,
+    'elastic_search_host' => env('ELASTIC_SEARCH_HOST', 'elasticsearch'),
+    'elastic_search_username' => env('ELASTIC_SEARCH_USERNAME', 'elastic'),
+    'elastic_search_password' => env('ELASTIC_SEARCH_PASSWORD', 'changeme'),
+    'elastic_search_port' => env('ELASTIC_SEARCH_PORT', 9200),
+    'elastic_search_transport' => env('ELASTIC_SEARCH_TRANSPORT', 'http'),
+    'elastic_index_name' => 'content',
 
     'field_option_list' => [
         'instructor',
@@ -87,13 +96,22 @@ return [
         ],
     ],
 
+//    'awsS3_remote_storage' => [
+//        'accessKey' => env('S3_KEY'),
+//        'accessSecret' => env('S3_SECRET'),
+//        'region' => env('S3_REGION'),
+//        'bucket' => env('S3_BUCKET'),
+//    ],
+//    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
+
+    // aws integration
     'awsS3_remote_storage' => [
         'accessKey' => env('S3_KEY'),
         'accessSecret' => env('S3_SECRET'),
         'region' => env('S3_REGION'),
         'bucket' => env('S3_BUCKET'),
     ],
-    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
+    'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
 
     'indexable_content_statuses' => [
         ContentService::STATUS_PUBLISHED,
@@ -166,9 +184,9 @@ return [
     'video_sync' => [
         'vimeo' => [
             'musora' => [
-                'client_id' => env('VIMEO_CLIENT_ID_DRUMEO'),
-                'client_secret' => env('VIMEO_CLIENT_SECRET_DRUMEO'),
-                'access_token' => env('VIMEO_ACCESS_TOKEN_DRUMEO'),
+                'client_id' => env('VIMEO_CLIENT_ID'),
+                'client_secret' => env('VIMEO_CLIENT_SECRET'),
+                'access_token' => env('VIMEO_ACCESS_TOKEN'),
             ],
         ],
         'youtube' => [
@@ -232,7 +250,7 @@ return [
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
             \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
-            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
+//            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
             \App\Decorators\Content\ContentLikesDecorator::class, // this one
             \App\Decorators\Content\ResourceDecorator::class, // this one
             \App\Decorators\Content\ContentExperienceDecorator::class,
@@ -240,7 +258,7 @@ return [
             \App\Decorators\Content\PackBundleLessonDecorator::class,
             \App\Decorators\Content\PackBundleDecorator::class,
             \App\Decorators\Content\PackDecorator::class,
-            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
+//            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
             \App\Decorators\Content\LearningPathCourseDecorator::class,
             \App\Decorators\Content\LearningPathLessonDecorator::class,
             \App\Decorators\Content\NewDecorator::class,
@@ -249,9 +267,9 @@ return [
             \App\Decorators\Content\AssignmentXPDecorator::class,
 
             \App\Decorators\Content\CourseDecorator::class,
-            \App\Decorators\Content\CoursePartDecorator::class,
+//            \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
-            \App\Decorators\Content\SongsDecorator::class,
+//            \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
             \App\Decorators\Content\StudentFocusDecorator::class,
             \App\Decorators\Content\RudimentDecorator::class,
@@ -260,7 +278,7 @@ return [
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
-            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
+//            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
 
         ],
         'comment' => [
@@ -626,6 +644,12 @@ return [
                 'amountOfFutureLessonsToShow' => 10,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'play-alongs' => [
+                "name" => "Play Alongs",
+                "icon" => "icon-play-alongs",
+                "description" => "The Play-Alongs has to be the most underrated area of the site. Each Play-Along teaches you a track in the style of a famous song or artist. You will learn every element you need to play each play-along - the chords, strumming patterns, riffs, and song layout. From there you Play-Along to the full jam track complete with sheet music and TAB. There is nothing like learning the guitar through playing music!",
+                "allowableFilters" => ['bpm', 'style'],
+            ],
         ],
         'pianote' => [
             'all' => [
@@ -876,6 +900,7 @@ return [
         'quick-tips',
         'question-and-answer',
         'student-collaborations',
+        'live',
         'live-streams',
         'podcasts',
         'solos',
@@ -1058,7 +1083,7 @@ return [
         281911 => 311690,
         325266 => 255287,
     ],
-    'coachesFilePath' => __DIR__.'/../Coaches v2.0.2.csv',
+    'coachesFilePath' => __DIR__ . '/../Coaches v2.0.2.csv',
 
     'coachContentTypes' => [
         'course',
@@ -1070,4 +1095,140 @@ return [
         'semester-pack',
     ],
 
+    'contentTypesWithChildren' => [
+        'course',
+        'song',
+    ],
+
+    'contentTypesWithSingularParent' => [
+        'course-part',
+        'song-part',
+    ],
+
+    'contentColumnNamesForFields' => [
+        'difficulty',
+        'home_staff_pick_rating',
+        'legacy_id',
+        'legacy_wordpress_post_id',
+        'title',
+        'xp',
+        'album',
+        'artist',
+        'cd-tracks',
+        'chord_or_scale',
+        'difficulty_range',
+        'episode_number',
+        'exercise-book-pages',
+        'fast_bpm',
+        'includes_song',
+        'live_event_start_time',
+        'live_event_end_time',
+        'live_event_youtube_id',
+        'live_stream_feed_type',
+        'name',
+        'released',
+        'slow_bpm',
+        'transcriber_name',
+        'week',
+        'avatar_url',
+        'length_in_seconds',
+        'soundslice_slug',
+        'staff_pick_rating',
+        'student_id',
+        'vimeo_video_id',
+        'youtube_video_id',
+        'show_in_new_feed',
+        'bands',
+        'endorsements',
+        'focus',
+        'forum_thread_id',
+        'is_active',
+        'is_coach',
+        'is_house_coach',
+        'is_coach_of_the_month',
+        'is_featured',
+        'associated_user_id',
+        'high_soundslice_slug',
+        'low_soundslice_slug',
+        'pdf',
+        'pdf_in_g',
+        'sbt_bpm',
+        'sbt_exercise_number',
+        'song_name',
+        'soundslice_xml_file_url',
+    ],
+
+    // field key => column name
+    'content_fields_that_are_now_columns_in_the_content_table' => [
+        'id' => 'id',
+        'slug' => 'slug',
+        'type' => 'type',
+        'sort' => 'sort',
+        'status' => 'status',
+        'brand' => 'brand',
+        'language' => 'language',
+        'user_id' => 'user_id',
+        'album' => 'album',
+        'artist' => 'artist',
+        'associated_user_id' => 'associated_user_id',
+        'avatar_url' => 'avatar_url',
+        'bands' => 'bands',
+        'cd_tracks' => 'cd_tracks',
+        'chord_or_scale' => 'chord_or_scale',
+        'difficulty' => 'difficulty',
+        'difficulty_range' => 'difficulty_range',
+        'endorsements' => 'endorsements',
+        'episode_number' => 'episode_number',
+        'exercise_book_pages' => 'exercise_book_pages',
+        'fast_bpm' => 'fast_bpm',
+        'forum_thread_id' => 'forum_thread_id',
+        'high_soundslice_slug' => 'high_soundslice_slug',
+        'high_video' => 'high_video',
+        'home_staff_pick_rating' => 'home_staff_pick_rating',
+        'includes_song' => 'includes_song',
+        'is_active' => 'is_active',
+        'is_coach' => 'is_coach',
+        'is_coach_of_the_month' => 'is_coach_of_the_month',
+        'is_featured' => 'is_featured',
+        'is_house_coach' => 'is_house_coach',
+        'legacy_id' => 'legacy_id',
+        'legacy_wordpress_post_id' => 'legacy_wordpress_post_id',
+        'length_in_seconds' => 'length_in_seconds',
+        'live_event_start_time' => 'live_event_start_time',
+        'live_event_end_time' => 'live_event_end_time',
+        'live_event_youtube_id' => 'live_event_youtube_id',
+        'live_stream_feed_type' => 'live_stream_feed_type',
+        'low_soundslice_slug' => 'low_soundslice_slug',
+        'low_video' => 'low_video',
+        'name' => 'name',
+        'original_video' => 'original_video',
+        'pdf' => 'pdf',
+        'pdf_in_g' => 'pdf_in_g',
+        'qna_video' => 'qna_video',
+        'show_in_new_feed' => 'show_in_new_feed',
+        'slow_bpm' => 'slow_bpm',
+        'song_name' => 'song_name',
+        'soundslice_slug' => 'soundslice_slug',
+        'soundslice_xml_file_url' => 'soundslice_xml_file_url',
+        'staff_pick_rating' => 'staff_pick_rating',
+        'student_id' => 'student_id',
+        'title' => 'title',
+        'transcriber_name' => 'transcriber_name',
+        'video' => 'video',
+        'vimeo_video_id' => 'vimeo_video_id',
+        'youtube_video_id' => 'youtube_video_id',
+        'xp' => 'xp',
+        'week' => 'week',
+        'released' => 'released',
+        'total_xp' => 'total_xp',
+        'popularity' => 'popularity',
+        'web_url_path' => 'web_url_path',
+        'mobile_app_url_path' => 'mobile_app_url_path',
+        'child_count' => 'child_count',
+        'hierarchy_position_number' => 'hierarchy_position_number',
+        'like_count' => 'like_count',
+        'published_on' => 'published_on',
+        'created_on' => 'created_on',
+        'archived_on' => 'archived_on',
+    ]
 ];

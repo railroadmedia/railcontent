@@ -9,11 +9,11 @@
           align-h-center
           tw-overflow-visible tw-max-w-lg
         ">
-      <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl">
+      <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl tw-text-black">
         Subscribe to Calendar
       </h1>
 
-      <p class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4">
+      <p class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4 tw-text-black">
         Here you can subscribe to {{ toCapitalCase(brand) }}'s Lesson Calendar -
         Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all
         supported.
@@ -42,7 +42,7 @@
         </transition>
       </div>
 
-      <p v-show="subscriptionCalendarId" class="tw-text-[10px] tw-italic tw-text-center tw-mb-2">
+      <p v-show="subscriptionCalendarId" class="tw-text-[10px] tw-italic tw-text-center tw-mb-2 tw-text-black">
         Any upcoming releases will automatically show up in this calendar as
         they are scheduled by the {{ toCapitalCase(brand) }} Team.
       </p>
