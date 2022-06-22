@@ -2016,8 +2016,19 @@ class ContentRepository extends RepositoryBase
         // todo: handle instructors which need to be pulled from matching content rows
         if (!empty($filterOptionsArray['instructor_id'])) {
             $instructorRows = $this->query()
-                ->select(['railcontent_content.id as id', 'name'])
-                ->whereIn('id', $filterOptionsArray['instructor_id'])
+                ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url' ])
+                ->leftJoin(
+                    ConfigService::$tableContentData,
+                    function (JoinClause $joinClause)  {
+                        $joinClause->on(
+                            ConfigService::$tableContentData . '.content_id',
+                            '=',
+                            ConfigService::$tableContent . '.id'
+                        )
+                            ->where( ConfigService::$tableContentData . '.key','=', 'head_shot_picture_url');
+                    }
+                )
+                ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
                 ->orderBy('name')
                 ->get()
                 ->toArray();
@@ -2028,7 +2039,6 @@ class ContentRepository extends RepositoryBase
                     'key' => 'name',
                     'value' => $instructorRow["name"]
                 ];
-                $instructorRows[$instructorRowIndex]["data"] = [];
             }
 
             $filterOptionsArray['instructor'] = $instructorRows;
