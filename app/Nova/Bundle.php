@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Nova;
+
+use App\Models\ProductType;
+use App\Nova\Flexible\Layouts\BundleLayout;
+use App\Nova\Flexible\Presets\BundlePreset;
+use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Hidden;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Whitecube\NovaFlexibleContent\Flexible;
+
+class Bundle extends Resource
+{
+    public static $model = \App\Models\Product::class;
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
+            ->where('product_types.name', 'Bundle')->select('products.*');
+    }
+
+    public function fields(NovaRequest $request)
+    {
+        return [
+            ID::make()->sortable(),
+            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
+            Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundle')->first()->id),
+            Text::make('Name')->required(),
+            Text::make('Slug')
+                ->asHtml()
+                ->required()
+                ->displayUsing(function($value){
+                    return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$value.'">'.$value.'</a>';
+                }),
+            Text::make('Sku')->hideFromIndex()->required(),
+            Image::make('Thumbnail')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->required()
+                ->storeAs(function (Request $request){
+                    return $request->file('thumbnail')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
+            Image::make('Meta Image', 'meta_img')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->deletable(false)
+                ->required()
+                ->storeAs(function (Request $request){
+                    return $request->file('meta_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Text::make('Short Description', 'short_desc')->hideFromIndex(),
+            Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
+            Currency::make('Price')->hideFromIndex()->required(),
+            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
+            Text::make('Special Text', 'special_text')->hideFromIndex(),
+            Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
+            Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
+            Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
+            Flexible::make('Products')
+                ->addLayout(BundleLayout::class)
+                ->preset(BundlePreset::class),
+        ];
+    }
+}
