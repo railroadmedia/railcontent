@@ -33,7 +33,7 @@
         </div>
 
         <notifications-table-row v-for="(item, i) in notificationsArray" :key="item.id" v-bind="item"
-            notification-type="comment-reply" @notificationRead="markAsRead"></notifications-table-row>
+            @notificationRead="markAsRead"></notifications-table-row>
 
         <div v-if="totalPages > 1" class="tw-flex tw-flex-row bg-light pagination-row align-h-right">
             <pagination :current-page="currentPage" :total-pages="totalPages" @pageChange="handlePageChange">
