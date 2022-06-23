@@ -191,6 +191,6 @@ class ContentEntity extends Entity
      */
     public function getParentContentData()
     {
-        return json_decode($this['parent_content_data']) ?? [];
+        return json_decode($this['parent_content_data'] ?? '') ?? [];
     }
 }
