@@ -87,12 +87,7 @@ class ImageResolver implements ResolverInterface
 
             //delete items
             if(isset($updateIds)){
-                $deleteImgs = Image::where('product_id', '=', $model['id'])->whereNotIn('id', $updateIds)->get();
-
-                foreach($deleteImgs as $deleteImg){
-                    Storage::disk('s3')->delete($deleteImg->path);
-                    Image::destroy($deleteImg->id);
-                }
+                $deleteImgs = Image::where('product_id', '=', $model['id'])->whereNotIn('id', $updateIds)->delete();
             }
         });
     }

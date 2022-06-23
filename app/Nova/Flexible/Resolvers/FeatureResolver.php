@@ -87,9 +87,7 @@ class FeatureResolver implements ResolverInterface
 
            if(isset($updatedIds)){
                $deleteIds = Feature::where('product_id', '=', $model['id'])
-                   ->whereNotIn('id', $updatedIds)->select('id')->get();
-
-               Feature::destroy($deleteIds);
+                   ->whereNotIn('id', $updatedIds)->delete();
            }
         });
     }
