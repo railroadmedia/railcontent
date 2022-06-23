@@ -90,9 +90,7 @@ class SpecResolver implements ResolverInterface
 
             if(isset($updatedIds)){
                 $deleteIds = Spec::where('product_id', '=', $model['id'])
-                    ->whereNotIn('id', $updatedIds)->select('id')->get();
-
-                Spec::destroy($deleteIds);
+                    ->whereNotIn('id', $updatedIds)->select('id')->delete();
             }
         });
     }
