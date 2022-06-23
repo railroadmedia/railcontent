@@ -35,7 +35,7 @@ class Product extends Model
     public function sizes()
     {
         return $this->hasManyThrough(Size::class, ProductSize::class, 'product_id', 'id', 'id', 'size_id')
-                    ->addSelect(['product_sizes.sold_out', 'sizes.*'])->orderBy('id');
+                    ->addSelect(['product_sizes.sold_out', 'product_sizes.id', 'sizes.name', 'sizes.id as sizeId'])->orderBy('sizeId');
     }
 
     public function product_size()
@@ -46,6 +46,11 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(Image::class)->orderBy('order_number');
+    }
+
+    public function bundles()
+    {
+        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id'])->orderBy('order_number');
     }
 
     public function sizeChart()
@@ -66,6 +71,8 @@ class Product extends Model
         }
 
         Image::where('product_id', '=', $this->id)->delete();
+
+        Bundle::where('bundle_id', '=', $this->id)->delete();
 
         Product::where('id', '=', $this->id)->delete();
     }
