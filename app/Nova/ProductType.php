@@ -44,7 +44,6 @@ class ProductType extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Name'),
-            HasMany::make('Products', 'products', 'App\Nova\Product'),
         ];
     }
 
