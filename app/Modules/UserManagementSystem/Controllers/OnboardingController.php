@@ -27,7 +27,7 @@ class OnboardingController extends Controller
             OnboardingGear::create(['gear' => $gear, 'brand' => brand(), 'user_id' => user()->id]);
         }
 
-        return response('Success', 200);
+        return response(json_encode(user()), 200);
     }
 
     /**
@@ -44,7 +44,7 @@ class OnboardingController extends Controller
             OnboardingTopic::create(['topic' => $topic, 'brand' => brand(), 'user_id' => user()->id]);
         }
 
-        return response('Success', 200);
+        return response(json_encode(user()), 200);
     }
 
     /**
@@ -61,7 +61,7 @@ class OnboardingController extends Controller
             OnboardingGenre::create(['genre' => $genre, 'brand' => brand(), 'user_id' => user()->id]);
         }
 
-        return response('Success', 200);
+        return response(json_encode(user()), 200);
     }
 
     /**
@@ -77,7 +77,7 @@ class OnboardingController extends Controller
             ['experience_level' => $request->experience_level, 'brand' => brand(), 'user_id' => user()->id]
         );
 
-        return response('Success', 200);
+        return response(json_encode(user()), 200);
     }
 
 
