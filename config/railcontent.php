@@ -1253,5 +1253,15 @@ return [
         'published_on' => 'published_on',
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
+    ],
+    'content_hierarchy' => [
+        'learning-path' => 'learning-path-level',
+        'learning-path-level' => 'learning-path-course',
+        'learning-path-course' => 'learning-path-lesson',
+        'unit' => 'unit-part',
+        'song' => 'song-part',
+        'course' => 'course-part',
+        'pack' => 'pack-bundle',
+        'pack-bundle' => 'pack-bundle-lesson',
     ]
 ];
