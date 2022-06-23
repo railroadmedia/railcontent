@@ -17,7 +17,7 @@ class CmsProductTypeSeeder extends Seeder
     {
         //
         $types = [
-            'Lesson', 'Accessory', 'Hat', 'Shirt', 'Hoodie'
+            'Lesson', 'Accessory', 'Hat', 'Shirt', 'Hoodie', 'Bundle'
         ];
 
         foreach($types as $type){
