@@ -24,7 +24,7 @@
                 </p>
 
                 <p class="tw-text-[14px] tw-text-black dark:tw-text-[#9ec0dc] tw-italic tw-mt-[4px]">
-                    {{ formattedCreatedOn }}
+                    {{ createdOn }}
                 </p>
             </div>
 
@@ -117,13 +117,6 @@ const notificationTypeString = computed(() => {
         case 'thread-reply':
             return 'posted in a forum thread you follow:';
     }
-});
-
-const formattedCreatedOn = computed(() => {
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-    // TODO: We need to pass Date a valid date, createdOn is not valid
-    const date = new Date();
-    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 });
 
 function markAsRead(canCancel = true) {

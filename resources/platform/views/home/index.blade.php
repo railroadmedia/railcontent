@@ -16,6 +16,15 @@
                 {{-- On Boarding --}}
                 {{-- <onboarding></onboarding> --}}
 
+                {{-- On Boarding TriggerBanner --}}
+                <trigger-banner :v-if="true"></trigger-banner>
+
+                {{-- Carousel --}}
+                <header-carousel
+                    :preloaded-carousel="[]"
+                    brand="{{ $brand }}">
+                </header-carousel>
+
         {{-- Invite Email Message --}}
         @if(session()->has('email-invite-message'))
             <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">

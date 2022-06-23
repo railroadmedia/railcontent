@@ -65,7 +65,7 @@
         ])
     @endif
 @else
-    @if($parent)
+    @if(isset($parent))
         @if($parent->fetch('type') === 'pack-bundle')
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
