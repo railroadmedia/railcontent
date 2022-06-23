@@ -342,8 +342,10 @@ function playPause() {
         chromeCast.value.playOrPause();
     } else if (isPlaying.value) {
         mediaElement.value.pause();
+        isPlaying.value = false;
     } else {
         mediaElement.value.play();
+        isPlaying.value = true;
     }
 }
 
@@ -696,7 +698,7 @@ function enableIntersectionObserver(videoWrap) {
 }
 
 function handleOverlayClick () {
-    playPause();
+    mediaElement.value.pause();
 };
 
 onMounted(() => {

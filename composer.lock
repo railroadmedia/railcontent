@@ -7427,16 +7427,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.7",
+            "version": "v5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10"
+                "reference": "0102bfb10575639a82dbab68be187685cb48fef9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/61d64fa626e8279221dca814d0f0459c323f0c10",
-                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/0102bfb10575639a82dbab68be187685cb48fef9",
+                "reference": "0102bfb10575639a82dbab68be187685cb48fef9",
                 "shasum": ""
             },
             "require": {
@@ -7472,9 +7472,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.7"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.6"
             },
-            "time": "2022-06-22T20:01:34+00:00"
+            "time": "2022-06-22T18:15:06+00:00"
         },
         {
             "name": "railroad/event-data-synchronizer",
@@ -7780,12 +7780,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "51ae42eefd444b2f821644c3675cc92d914b17a8"
+                "reference": "c7f6bb2f83730db5f82fc2562ee2a679e4263f8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/51ae42eefd444b2f821644c3675cc92d914b17a8",
-                "reference": "51ae42eefd444b2f821644c3675cc92d914b17a8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c7f6bb2f83730db5f82fc2562ee2a679e4263f8e",
+                "reference": "c7f6bb2f83730db5f82fc2562ee2a679e4263f8e",
                 "shasum": ""
             },
             "require": {
@@ -7841,7 +7841,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-06-22T22:35:03+00:00"
+            "time": "2022-06-22T09:40:54+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -15771,5 +15771,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
