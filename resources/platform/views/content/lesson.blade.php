@@ -18,6 +18,9 @@
 
     <div class="tw-container tw-mx-auto fluid bg-grey-5 tw-pb-3">
         <div class="tw-container tw-mx-auto p-lg-only lean">
+            @php
+            //dd($lessonContent['video_playback_endpoints'])
+            @endphp
             {{-- Video Player --}}
             @if ($lessonType == 'song')
                 <youtube-player
