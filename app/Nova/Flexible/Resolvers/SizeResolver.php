@@ -28,7 +28,7 @@ class SizeResolver implements ResolverInterface
             return $layout->duplicateAndHydrate($size->id, [
                 'size' => $size->name,
                 'sold_out' => $size->sold_out,
-                'id' => ProductSize::where('product_id', '=', $resource['id'])->where('size_id', '=', $size['id'])->first()->id
+                'id' => $size->id
             ]);
         })->filter();
     }
