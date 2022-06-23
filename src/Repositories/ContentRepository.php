@@ -2039,6 +2039,7 @@ class ContentRepository extends RepositoryBase
                     'key' => 'name',
                     'value' => $instructorRow["name"]
                 ];
+                $instructorRows[$instructorRowIndex]["data"] = [];
             }
 
             $filterOptionsArray['instructor'] = $instructorRows;
