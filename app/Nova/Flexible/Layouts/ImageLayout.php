@@ -36,11 +36,11 @@ class ImageLayout extends Layout
                 ->prunable()
                 ->deletable(false)
                 ->disableDownload()
-                ->thumbnail(function($value){
-                    return !is_null($value) ? 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value : null;
-                })
                 ->storeAs(function (Request $request){
                     return $request->file('path')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('id', 'id')->hide()->hideFromDetail()
         ];
