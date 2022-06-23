@@ -1,18 +1,5 @@
 {{-- Gear Photo Form: Drums --}}
 <div class="tw-flex tw-flex-col tw-grow">
-    {{-- <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-4 tw-flex-grow-0" >
-        <div class="tw-flex tw-flex-col">
-            <h2 class="tw-font-bold dark:tw-text-white">
-                Drum Gear Photo
-            </h2>
-        </div>
-
-        <div class="tw-ml-4 edit-button">
-            <button class="" data-open-modal="drumGearPhotoModal" dusk="drumGearPhotoModal">
-                <i class="tw-text-lg fas fa-edit tw-text-black dark:tw-text-white" aria-hidden="true"></i>
-            </button>
-        </div>    
-    </div> --}}
 
     <div class="tw-flex tw-flex-row">
         <div class="tw-flex tw-flex-col tw-grow">
@@ -39,7 +26,7 @@
         
                             @if(!empty($gearPhotoUrl))
                                 <img src="{{ !empty($gearPhotoUrl) ? $gearPhotoUrl : 'https://dmmior4id2ysr.cloudfront.net/assets/images/default-gear-photo.jpg' }}"
-                                    data-gear-update="true"    
+                                     data-gear-update="true"    
                                 >
                             @endif
         
@@ -68,8 +55,8 @@
                 brand="{{ $brand }}"
                 :aspect-ratio="1.78"
                 upload-endpoint="{{ $uploadRequestEndpoint }}"
-                save-endpoint="{{ $fieldSaveRequestEndpoint }}"
                 user-id="{{ $userId }}"
+                send-method="patch"
                 @image-uploaded="gearPhotoUploaded"></image-cropper>
         </div>
     </div>

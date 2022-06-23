@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Collections\PackCollection;
-use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
@@ -13,10 +12,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Railroad\Points\Services\UserPointsService;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
+use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends BaseController
@@ -25,6 +27,7 @@ class HomePageController extends BaseController
     private ContentFollowsService $contentFollowService;
     private LiveStreamEventService $liveStreamEventService;
     private UserMetricsService $userMetricsService;
+    private UserPlaylistsService $userPlaylistsService;
 
     /**
      * @param ContentService $contentService
@@ -34,12 +37,14 @@ class HomePageController extends BaseController
         ContentService $contentService,
         ContentFollowsService $contentFollowsService,
         LiveStreamEventService $liveStreamEventService,
-        UserMetricsService $userMetricsService
+        UserMetricsService $userMetricsService,
+        UserPlaylistsService $userPlaylistsService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
         $this->liveStreamEventService = $liveStreamEventService;
         $this->userMetricsService = $userMetricsService;
+        $this->userPlaylistsService = $userPlaylistsService;
     }
 
     public function homeRedirect()
@@ -49,7 +54,10 @@ class HomePageController extends BaseController
 
     public function home(Request $request, $brand)
     {
-        switch(brand()) {
+        Decorator::$typeDecoratorsEnabled = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+
+        switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
                 break;
@@ -74,16 +82,6 @@ class HomePageController extends BaseController
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
 
-        $hasStartedMethod = $methodContent['started'];
-        $hasCompletedMethod = $methodContent['completed'];
-
-        $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
-        $showNextLearningPathLesson = !empty($methodContent['next_lesson']);
-
-        $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
-        $nextLearningPathLevel = $methodContent['level_rank'] ?? '1.1';
-        $nextLearningPathProgressPercent = $methodContent['progress_percent'];
-
         $startedLessons = $this->getUsersStartedContent();
 
         $usersList = $this->getUsersList();
@@ -97,18 +95,6 @@ class HomePageController extends BaseController
             'published_on',
             'asc'
         );
-
-        $upcomingEventsCount = $upcomingEvents->count();
-        $upcomingEvents = $upcomingEvents->sort(function ($a, $b) {
-            return strtotime($a->fetch('fields.live_event_start_time')) -
-                strtotime($b->fetch('fields.live_event_start_time'));
-        })
-            ->slice(0, 4)
-            ->values();
-        $upcomingEvents = new ContentFilterResultsEntity([
-            'results' => $upcomingEvents,
-            'total_results' => $upcomingEventsCount,
-        ]);
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
@@ -148,22 +134,6 @@ class HomePageController extends BaseController
         }
 
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
-        if ($currentEvent) {
-            $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
-            $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
-            $eventCoachId = $currentEvent->fetch('fields.instructor.id');
-            $eventCoachUrl = url()->route('platform.content.first-level',
-                [
-                    'brand' => brand(),
-                    'primaryPage' => 'coaches',
-                    'firstContentSlug' => $eventCoachSlug,
-                    'firstContentId' => $eventCoachId
-                ]
-            );
-            $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
-                    'fields.instructor.slug'
-                )] ?? config('addevent.uniquekeys.brand-overview');
-        }
 
         $coachOfTheMonth = $this->contentService->getFiltered(
             1,
@@ -181,6 +151,67 @@ class HomePageController extends BaseController
             false
         )
             ->results();
+
+        $collectionForDecoration = new RailcontentCollection();
+        $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
+        if (!empty($currentEvent)) {
+            $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
+        }
+        $collectionForDecoration = $collectionForDecoration->merge($coachOfTheMonth);
+        $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
+        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
+        $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
+        $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
+        $collectionForDecoration = $collectionForDecoration->merge($packs);
+        $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
+        $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
+        $hasStartedMethod = $methodContent['started'];
+        $hasCompletedMethod = $methodContent['completed'];
+
+        $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
+        $showNextLearningPathLesson = !empty($methodContent['next_lesson']);
+
+        $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
+        $nextLearningPathLevel = $methodContent['level_rank'] ?? '1.1';
+        $nextLearningPathProgressPercent = $methodContent['progress_percent'];
+
+        $upcomingEventsCount = $upcomingEvents->count();
+        $upcomingEvents = $upcomingEvents->sort(function ($a, $b) {
+            return strtotime($a->fetch('fields.live_event_start_time')) -
+                strtotime($b->fetch('fields.live_event_start_time'));
+        })
+            ->slice(0, 4)
+            ->values();
+        $upcomingEvents = new ContentFilterResultsEntity([
+            'results' => $upcomingEvents,
+            'total_results' => $upcomingEventsCount,
+        ]);
+
+        if ($currentEvent) {
+            $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
+            $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
+            $eventCoachId = $currentEvent->fetch('fields.instructor.id');
+            if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
+                $eventCoachUrl = url()->route('platform.content.first-level',
+                    [
+                        'brand' => brand(),
+                        'primaryPage' => 'coaches',
+                        'firstContentSlug' => $eventCoachSlug,
+                        'firstContentId' => $eventCoachId
+                    ]
+                );
+                $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
+                        'fields.instructor.slug'
+                    )] ?? config('addevent.uniquekeys.brand-overview');
+            } else {
+                $currentEvent = null;
+            }
+
+        }
 
         return view('home.index', [
             'brand' => $brand,
@@ -445,25 +476,20 @@ class HomePageController extends BaseController
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
 
-        $usersPrimaryPlaylist = $this->contentService->getByUserIdTypeSlug(
-            user()->id,
-            'user-playlist',
-            'primary-playlist'
-        )
-            ->first();
+        $userPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'primary-playlist', brand());
 
-        if (empty($usersPrimaryPlaylist)) {
+        if (empty($userPrimaryPlaylist)) {
             return (new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]));
         }
-
-        $usersPrimaryList = $this->contentService->getByParentIdWhereTypeInPaginated(
-            $usersPrimaryPlaylist['id'],
+        $userPrimaryPlaylistId = $userPrimaryPlaylist[0]['id'];
+        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents(
+            $userPrimaryPlaylistId,
             $this->parseContentTypes($contentTypes),
-            4
+            6
         );
 
-        $usersListTotalResults = $this->contentService->countByParentIdWhereTypeIn(
-            $usersPrimaryPlaylist['id'],
+        $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents(
+            $userPrimaryPlaylistId,
             $contentTypes
         );
 

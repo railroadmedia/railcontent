@@ -1,7 +1,6 @@
 <script>
 import SidebarContainer from './SidebarContainer.vue'
 import { textColor, borderColor } from '../../../constants/brands.js'
-import { sidebarLinks } from '../../../constants/sidebar_links.js'
 import PlaylistsSection from './PlaylistsSection.vue'
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
@@ -35,7 +34,6 @@ export default {
     return {
       textColor,
       borderColor,
-      sidebarLinks,
       handleCollapse
     }
   },

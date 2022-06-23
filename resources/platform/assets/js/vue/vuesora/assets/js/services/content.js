@@ -195,13 +195,14 @@ export default {
      *
      * @returns {Promise} resolved promise with the response.data object
      */
-    addOrRemoveContentFromList(content_id, is_added) {
-        const delete_endpoint = `${endpointPrefix}/members-area/event-json-api/remove-from-primary-playlist-list`;
-        const put_endpoint = `${endpointPrefix}/members-area/event-json-api/add-to-primary-playlist-list`;
+    addOrRemoveContentFromList(content_id, is_added, brand) {
+        const delete_endpoint = `${endpointPrefix}/railcontent/remove-from-primary-playlist`;
+        const put_endpoint = `${endpointPrefix}/railcontent/add-to-primary-playlist`;
 
         return axios.post(is_added ? delete_endpoint : put_endpoint, {
             content_id,
             type: is_added ? 'remove-from-list' : 'my-list-addition',
+            brand: brand
         })
             .then(response => response)
             .catch(ErrorHandler);

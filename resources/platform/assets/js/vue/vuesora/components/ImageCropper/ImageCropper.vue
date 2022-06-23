@@ -180,6 +180,16 @@ export default {
             default: 'profile_picture_image_url',
         },
 
+        fieldKey: {
+            type: String,
+            default: 'profile_picture_image_url',
+        },
+
+        sendMethod: {
+            type: String,
+            default: 'POST',
+        },
+
         dropzoneConfig: {
             type: Object,
             default: () => ({
@@ -330,7 +340,7 @@ export default {
 
             formData.append('file', this.imageBlob, newFileName);
             formData.append('target', newFileName);
-            formData.append('_method', 'PUT');
+            formData.append('_method', this.sendMethod);
 
             this.loading = true;
 

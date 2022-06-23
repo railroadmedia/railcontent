@@ -10,6 +10,7 @@ return array(
 
     // brand database connection names (each brand is on its own database for now)
     'brand_database_connection_names' => [
+        'musora' => 'musora_laravel_mysql_writer_only',
         'drumeo' => 'drumeo_laravel_mysql_writer_only',
         'pianote' => 'pianote_laravel_mysql_writer_only',
         'guitareo' => 'guitareo_laravel_mysql_writer_only',
@@ -26,7 +27,7 @@ return array(
     'forums_index_page_url' => '/brand/forums',
 
     // host does the db migrations, clients do not
-    'data_mode' => 'host', // 'host' or 'client'
+    'data_mode' => 'client', // 'host' or 'client'
 
     // cache
     'cache_driver' => 'array',

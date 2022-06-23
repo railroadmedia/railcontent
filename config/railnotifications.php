@@ -79,6 +79,9 @@ return [
     ],
 
     'api_middleware' => [
+        \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
     ],
 
     'user_routes_middleware' => [
