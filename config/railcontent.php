@@ -37,7 +37,7 @@ return [
         'vimeo_video_id',
         'focus',
         'genre'
-//        'video'
+        //        'video'
     ],
     'commentable_content_types' => [
         'course-part',
@@ -96,13 +96,13 @@ return [
         ],
     ],
 
-//    'awsS3_remote_storage' => [
-//        'accessKey' => env('S3_KEY'),
-//        'accessSecret' => env('S3_SECRET'),
-//        'region' => env('S3_REGION'),
-//        'bucket' => env('S3_BUCKET'),
-//    ],
-//    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
+    //    'awsS3_remote_storage' => [
+    //        'accessKey' => env('S3_KEY'),
+    //        'accessSecret' => env('S3_SECRET'),
+    //        'region' => env('S3_REGION'),
+    //        'bucket' => env('S3_BUCKET'),
+    //    ],
+    //    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
 
     // aws integration
     'awsS3_remote_storage' => [
@@ -250,15 +250,15 @@ return [
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
             \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
-//            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
+            //            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
             \App\Decorators\Content\ContentLikesDecorator::class, // this one
             \App\Decorators\Content\ResourceDecorator::class, // this one
             \App\Decorators\Content\ContentExperienceDecorator::class,
-//            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
+            //            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
             \App\Decorators\Content\PackBundleLessonDecorator::class,
             \App\Decorators\Content\PackBundleDecorator::class,
             \App\Decorators\Content\PackDecorator::class,
-//            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
+            //            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
             \App\Decorators\Content\LearningPathCourseDecorator::class,
             \App\Decorators\Content\LearningPathLessonDecorator::class,
             \App\Decorators\Content\NewDecorator::class,
@@ -267,9 +267,9 @@ return [
             \App\Decorators\Content\AssignmentXPDecorator::class,
 
             \App\Decorators\Content\CourseDecorator::class,
-//            \App\Decorators\Content\CoursePartDecorator::class,
+            //            \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
-//            \App\Decorators\Content\SongsDecorator::class,
+            //            \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
             \App\Decorators\Content\StudentFocusDecorator::class,
             \App\Decorators\Content\RudimentDecorator::class,
@@ -278,7 +278,7 @@ return [
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
-//            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
+            //            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
 
         ],
         'comment' => [
@@ -534,15 +534,15 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'published_on',
             ],
-//        '25-days-of-christmas' => [
-//            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/advent-calendar-show-card.jpg',
-//            'name' => '25 Days of Christmas',
-//            'shortname' => 'Videos',
-//            'icon' => 'icon-shows',
-//            'description' => "Join Jared, Dave, and Reuben in Drumeo’s version of a Christmas Advent Calendar! You will receive a new drumming treat each day counting down to Christmas! Be sure to “Subscribe” to the calendar to make sure you never miss an episode!",
-//            'allowableFilters' => [],
-//            'sortBy' => 'sort',
-//        ],
+            //        '25-days-of-christmas' => [
+            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/advent-calendar-show-card.jpg',
+            //            'name' => '25 Days of Christmas',
+            //            'shortname' => 'Videos',
+            //            'icon' => 'icon-shows',
+            //            'description' => "Join Jared, Dave, and Reuben in Drumeo’s version of a Christmas Advent Calendar! You will receive a new drumming treat each day counting down to Christmas! Be sure to “Subscribe” to the calendar to make sure you never miss an episode!",
+            //            'allowableFilters' => [],
+            //            'sortBy' => 'sort',
+            //        ],
             'rhythms-from-another-planet' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/rythms-from-another-planet.jpg',
                 'name' => 'Rhythms From Another Planet',
@@ -552,15 +552,15 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'sort',
             ],
-//        'namm-2019' => [
-//            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card.jpg',
-//            'name' => 'NAMM 2019',
-//            'shortname' => 'Episodes',
-//            'icon' => 'icon-shows',
-//            'description' => "Take a closer look at the 2019 NAMM show, including the best and most obscure products and booths from the show, and performances from the worlds best drummers at the Drumeo booth!",
-//            'allowableFilters' => [],
-//            'sortBy' => 'published_on',
-//        ],
+            //        'namm-2019' => [
+            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card.jpg',
+            //            'name' => 'NAMM 2019',
+            //            'shortname' => 'Episodes',
+            //            'icon' => 'icon-shows',
+            //            'description' => "Take a closer look at the 2019 NAMM show, including the best and most obscure products and booths from the show, and performances from the worlds best drummers at the Drumeo booth!",
+            //            'allowableFilters' => [],
+            //            'sortBy' => 'published_on',
+            //        ],
             'tama-drums' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/tama-drums.jpg',
                 'name' => 'Tama Drums',
@@ -588,15 +588,15 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
-//        'camp-drumeo-ah' => [
-//            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/camp-drumeo-ah.jpg',
-//            'name' => 'Camp Drumeo-Ah: Summer 2019',
-//            'shortname' => 'Episodes',
-//            'icon' => 'icon-shows',
-//            'description' => "Welcome to Camp Drum-eh-oh-ah! I’m K-Rad, the camp counselor, and are you in for a treat fellow drummers :). Get your sunscreen on and take your sticks out of hiding because we are in for some super awesome fun this summer!!!",
-//            'allowableFilters' => ['instructor'],
-//            'sortBy' => '-published_on',
-//        ],
+            //        'camp-drumeo-ah' => [
+            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/camp-drumeo-ah.jpg',
+            //            'name' => 'Camp Drumeo-Ah: Summer 2019',
+            //            'shortname' => 'Episodes',
+            //            'icon' => 'icon-shows',
+            //            'description' => "Welcome to Camp Drum-eh-oh-ah! I’m K-Rad, the camp counselor, and are you in for a treat fellow drummers :). Get your sunscreen on and take your sticks out of hiding because we are in for some super awesome fun this summer!!!",
+            //            'allowableFilters' => ['instructor'],
+            //            'sortBy' => '-published_on',
+            //        ],
             'diy-drum-experiments' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg',
                 'name' => 'DIY Drum Experiments',
@@ -824,72 +824,64 @@ return [
             ],
         ],
         'singeo' => [
-            'all' =>
-                [
-                    'name' => 'New Content',
-                    'shortname' => 'Content',
-                    'icon' => 'fas fa-star',
-                    'description' => "Here's a list of every lesson that's been published in Singeo. Browse on your
+            'all' => [
+                'name' => 'New Content',
+                'shortname' => 'Content',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of every lesson that's been published in Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                    'allowableFilters' => [],
-                    'sortBy' => '-published_on',
-                ],
-            'subscribed' =>
-                [
-                    'name' => 'Subscribed',
-                    'shortname' => 'Content',
-                    'icon' => 'fas fa-bell',
-                    'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
-                    'allowableFilters' => [],
-                    'sortBy' => '-published_on',
-                ],
-            'courses' =>
-                [
-                    "name" => "Courses",
-                    "icon" => "icon-courses",
-                    "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
-                    "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                ],
-            'songs' =>
-                [
-                    "name" => "Songs",
-                    "icon" => "icon-songs",
-                    "description" => "We all love singing along with our favorite songs!  Here you'll find a wide variety of songs from different artists and styles that you can sing along with.  You can even choose between three vocal ranges to fit your unique voice!",
-                    "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
-                ],
-            'quick-tips' =>
-                [
-                    "name" => "Quick Tips",
-                    "icon" => "icon-shows",
-                    "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
-                    "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                ],
-            'question-and-answer' =>
-                [
-                    "name" => "Q&A",
-                    "icon" => "fas fa-question-circle",
-                    "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
-                    "allowableFilters" => [],
-                ],
-            'student-reviews' =>
-                [
-                    "name" => "Student Reviews",
-                    "icon" => "icon-student-focus",
-                    "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                    "allowableFilters" => [],
-                ],
-            'routines' =>
-                [
-                    "name" => "Routines",
-                    "icon" => "icon-shows",
-                    "description" => "Finding the perfect practice routine to build your singing skills can be tough, especially on a busy schedule. Start your day right or warm-up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for the busy days when you just want to shake things up a bit.",
-                    "allowableFilters" => [],
-                ],
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
+            'subscribed' => [
+                'name' => 'Subscribed',
+                'shortname' => 'Content',
+                'icon' => 'fas fa-bell',
+                'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
+            'courses' => [
+                "name" => "Courses",
+                "icon" => "icon-courses",
+                "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
+                "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+            ],
+            'songs' => [
+                "name" => "Songs",
+                "icon" => "icon-songs",
+                "description" => "We all love singing along with our favorite songs!  Here you'll find a wide variety of songs from different artists and styles that you can sing along with.  You can even choose between three vocal ranges to fit your unique voice!",
+                "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+            ],
+            'quick-tips' => [
+                "name" => "Quick Tips",
+                "icon" => "icon-shows",
+                "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
+                "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+            ],
+            'question-and-answer' => [
+                "name" => "Q&A",
+                "icon" => "fas fa-question-circle",
+                "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
+                "allowableFilters" => [],
+            ],
+            'student-reviews' => [
+                "name" => "Student Reviews",
+                "icon" => "icon-student-focus",
+                "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
+                "allowableFilters" => [],
+            ],
+            'routines' => [
+                "name" => "Routines",
+                "icon" => "icon-shows",
+                "description" => "Finding the perfect practice routine to build your singing skills can be tough, especially on a busy schedule. Start your day right or warm-up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for the busy days when you just want to shake things up a bit.",
+                "allowableFilters" => [],
+            ],
         ],
     ],
 
-//    ---------------------------------------
-//    Content Types
+    //    ---------------------------------------
+    //    Content Types
     /**
      * The order of the show types it's IMPORTANT.
      * The show cards on 'Shows' page are displayed in this order.
@@ -916,9 +908,9 @@ return [
         'tama-drums', /* 2019*/
         'paiste-cymbals', /* 2019*/
         'behind-the-scenes', /* 2019*/
-//        'namm-2019', /* 2019*/
-//        'camp-drumeo-ah', /* 2019*/
-//        '25-days-of-christmas', /* 2019*/
+        //        'namm-2019', /* 2019*/
+        //        'camp-drumeo-ah', /* 2019*/
+        //        '25-days-of-christmas', /* 2019*/
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
     ],
@@ -967,7 +959,7 @@ return [
         'play-along',
         'student-focus',
         'course-part',
-//        'song',
+        //        'song',
     ],
     'countedCompletedContentTypes' => [
         'course',
@@ -985,7 +977,7 @@ return [
         'play-along',
         'student-focus',
         'coach-stream',
-//        'song',
+        //        'song',
     ],
     'homeInProgressContentTypes' => [
         'course',
@@ -1082,7 +1074,7 @@ return [
         281911 => 311690,
         325266 => 255287,
     ],
-    'coachesFilePath' => __DIR__ . '/../Coaches v2.0.2.csv',
+    'coachesFilePath' => __DIR__.'/../Coaches v2.0.2.csv',
 
     'coachContentTypes' => [
         'course',
@@ -1263,5 +1255,13 @@ return [
         'course' => 'course-part',
         'pack' => 'pack-bundle',
         'pack-bundle' => 'pack-bundle-lesson',
-    ]
+    ],
+    'children_name_mapping' => [
+        'learning-path' => 'levels',
+        'learning-path-level' => 'courses',
+        'learning-path-course' => 'lessons',
+        'course' => 'lessons',
+        'pack' => 'bundles',
+        'pack-bundle' => 'lessons',
+    ],
 ];
