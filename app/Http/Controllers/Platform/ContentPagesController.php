@@ -172,6 +172,10 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
+        if ($primaryPage == 'songs' && $brand == 'drumeo') {
+            return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
+        }
+
         if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes())) {
             return $this->videoLessonPage(
                 $request,
@@ -687,6 +691,136 @@ class ContentPagesController extends BaseController
                 "nextLessonJson" => content_to_json($nextChild),
                 "showEmail" => false,
                 "firstContent" => $firstContent,
+            ]
+        );
+    }
+
+    public function drumeoSongPage(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
+    {
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+
+        if (user()->isAdmin()) {
+            ContentRepository::$pullFutureContent = true;
+            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT);
+        }
+
+        $lessonContent = $this->contentService->getById($firstId);
+
+        if ($lessonContent instanceof Collection && $lessonContent->isEmpty()) {
+            return redirect()->route('members.unreleased');
+        }
+
+        ContentRepository::$pullFutureContent = false;
+
+        if (user()->isAdmin()) {
+            ContentRepository::$pullFutureContent = true;
+            $unpublished = Carbon::createFromTimeString($lessonContent['published_on'])->isFuture();
+            if ($unpublished) {
+                echo '<h2 style="background:yellow;text-align:center;padding:20px;">' .
+                    'ADMIN PREVIEW (publish_on: "' . $lessonContent['published_on'] . '")' . '</h2>';
+            }
+        }
+
+        $lessonContent =
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$lessonContent]))
+                ->first();
+
+        $lessonAssignments = $lessonContent['assignments'] ?? [];
+
+        $lessonContent['assignments'] = $lessonAssignments;
+
+        $themeColor = 'drumeo';
+
+        $isHiddenContentType = in_array(
+            $lessonContent->fetch('type'),
+            config('railcontent.hiddenContentTypes')
+        );
+
+        $hasLessonInfo = !empty($lessonContent->fetch('*fields.instructor')) ||
+            !empty($lessonContent->fetch('data.description')) ||
+            !empty($lessonContent['chapters']);
+
+        $thisLessonJson = clone $lessonContent;
+        $thisLessonJson['completed'] = true;
+        $thisLessonJson = (new ContentFilterResultsEntity(
+            ['results' => [$thisLessonJson], 'total_results' => 1]
+        ))->toResponseRawJson();
+
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+
+        $songsFromSameArtist = $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 10),
+            '-published_on',
+            [$lessonContent['type']],
+            [],
+            [],
+            ['artist,' . $lessonContent->fetch('fields.artist')]
+        )['results'];
+
+        // remove requested song if in related lessons, part one of two
+        foreach ($songsFromSameArtist as $songFromSameArtistIndex => $songFromSameArtist) {
+            if ($lessonContent['id'] == $songFromSameArtist['id']) {
+                unset($songsFromSameArtist[$songFromSameArtistIndex]);
+            }
+        }
+
+        $songsFromSameArtist = $songsFromSameArtist->sortByFieldValue('title');
+
+        $songsFromSameStyle = new Collection();
+
+        if (count($songsFromSameArtist) < 10) {
+            $songsFromSameStyle = $this->contentService->getFiltered(
+                1,
+                19,
+                '-published_on',
+                [$lessonContent['type']],
+                [],
+                [],
+                ['style,' . $lessonContent->fetch('fields.style')]
+            )['results'];
+
+            // remove requested song if in related lessons, part two of two (because sometimes in $songsFromSameStyle)
+            foreach ($songsFromSameStyle as $songFromSameStyleIndex => $songFromSameStyle) {
+                if ($lessonContent['id'] == $songFromSameStyle['id']) {
+                    unset($songsFromSameStyle[$songFromSameStyleIndex]);
+                }
+            }
+
+            $songsFromSameStyle = $songsFromSameStyle->sortByFieldValue('title');
+
+            foreach ($songsFromSameStyle as $songFromSameStyleIndex => $songFromSameStyle) {
+                foreach ($songsFromSameArtist as $songFromSameArtistIndex => $songFromSameArtist) {
+                    if ($songFromSameStyle['id'] == $songFromSameArtist['id']) {
+                        unset($songsFromSameStyle[$songFromSameStyleIndex]);
+                    }
+                }
+            }
+        }
+
+        $relatedLessons = (new ContentFilterResultsEntity(
+            [
+                'results' => array_slice(
+                    array_merge($songsFromSameArtist->toArray(), $songsFromSameStyle->toArray()),
+                    0,
+                    10
+                )
+            ]
+        ))->toResponseRawJson();
+
+        return view(
+            'content.song',
+            [
+                "lessonType" => 'songs',
+                "lessonContent" => $lessonContent,
+                "hasSiblings" => !empty($parentChildren),
+                "relatedLessons" => $relatedLessons,
+                "themeColor" => $themeColor,
+                "isHiddenContentType" => $isHiddenContentType,
+                "hasLessonInfo" => $hasLessonInfo,
+                "thisLessonJson" => $thisLessonJson,
+                "showEmail" => false,
             ]
         );
     }

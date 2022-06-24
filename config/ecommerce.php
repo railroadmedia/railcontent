@@ -8,7 +8,7 @@ return [
     'available_brands' => ['drumeo', 'pianote', 'guitareo', 'singeo', 'musora'],
 
     // database
-    'database_connection_name' => 'musora_laravel_mysql_writer_only',
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
     'database_name' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME'),
     'database_user' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME'),
     'database_password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD'),
@@ -19,7 +19,7 @@ return [
 
     // unique user validation database info
     'database_info_for_unique_user_email_validation' => [
-        'database_connection_name' => 'musora_laravel_mysql',
+        'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME','musora_laravel_mysql'),
         'table' => 'usora_users',
         'email_column' => 'email',
     ],

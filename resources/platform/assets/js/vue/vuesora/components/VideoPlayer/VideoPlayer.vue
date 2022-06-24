@@ -130,6 +130,7 @@ const props = defineProps({
 let shakaPlayer = null;
 
 const mediaElement = ref(null);
+const isShakaInitialized = ref(false);
 
 // Template refs
 const container = ref(null);
@@ -190,7 +191,6 @@ function getDefaultPlaybackQualityIndex() {
     const widthToCheck = window.localStorage.getItem('vuesoraDefaultVideoQuality')
         || document.documentElement.clientWidth;
     const matchedQualities = playbackQualities.value.filter(quality => quality.width >= widthToCheck);
-
     return matchedQualities[0] || playbackQualities.value[0];
 }
 
@@ -288,7 +288,6 @@ function retryVimeoUrl(error) {
         playerErrorCode.value = error.code;
     } else {
         loading.value = true;
-
         ContentService.getVimeoUrlByVimeoId($_videoId)
             .then((response) => {
                 if (response) {
@@ -342,8 +341,10 @@ function playPause() {
         chromeCast.value.playOrPause();
     } else if (isPlaying.value) {
         mediaElement.value.pause();
+        isPlaying.value = false;
     } else {
         mediaElement.value.play();
+        isPlaying.value = true;
     }
 }
 
@@ -696,7 +697,7 @@ function enableIntersectionObserver(videoWrap) {
 }
 
 function handleOverlayClick () {
-    playPause();
+    mediaElement.value.pause();
 };
 
 onMounted(() => {
@@ -741,6 +742,8 @@ onMounted(() => {
                         useNativeHlsOnSafari: true,
                     },
                 });
+
+                isShakaInitialized.value = true;
 
                 return loadSource();
             })
@@ -828,16 +831,14 @@ const isAbrEnabled = computed({
 
 const playbackQualities = computed({
     get() {
-        if (shakaPlayer == null) {
-            return [];
+        if (isShakaInitialized.value) {
+            const qualities = $_sources.value.map(source => ({
+                ...source,
+                label: PlayerUtils.getQualityLabelByHeight(source.height),
+            }));
+            return Utils.dynamicSort(qualities, 'height');
         }
-
-        const qualities = $_sources.value.map(source => ({
-            ...source,
-            label: PlayerUtils.getQualityLabelByHeight(source.height),
-        }));
-
-        return Utils.dynamicSort(qualities, 'height');
+        return [];
     }
 })
 

@@ -8,10 +8,9 @@
     {{-- DRUMS --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-drums', [
         'brand' => '{{ $brand }}',
-        'method' => 'POST',
+        'method' => 'patch',
         'gearPhotoUrl' => user()->drums_gear_photo,
-        'uploadRequestEndpoint' => '/avatar/upload',
-        'fieldSaveRequestEndpoint' => '/usora/json-api/user/update',
+        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->drums_gear_photo)
     ])
@@ -19,10 +18,9 @@
     {{-- PIANO --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-piano', [
         'brand' => '{{ $brand }}',
-        'method' => 'POST',
+        'method' => 'patch',
         'gearPhotoUrl' => user()->piano_gear_photo,
-        'uploadRequestEndpoint' => '/avatar/upload',
-        'fieldSaveRequestEndpoint' => '/usora/json-api/user/update',
+        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->piano_gear_photo)
     ])
@@ -30,10 +28,9 @@
     {{-- GUITAREO --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-guitars', [
         'brand' => '{{ $brand }}',
-        'method' => 'POST',
+        'method' => 'patch',
         'gearPhotoUrl' => user()->guitar_gear_photo,
-        'uploadRequestEndpoint' => '/avatar/upload',
-        'fieldSaveRequestEndpoint' => '/usora/json-api/user/update',
+        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->guitar_gear_photo)
     ])
@@ -41,10 +38,9 @@
     {{-- SINGEO --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-singing', [
         'brand' => '{{ $brand }}',
-        'method' => 'POST',
+        'method' => 'patch',
         'gearPhotoUrl' => user()->singing_gear_photo,
-        'uploadRequestEndpoint' => '/avatar/upload',
-        'fieldSaveRequestEndpoint' => '/usora/json-api/user/update',
+        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->singing_gear_photo)
     ])
