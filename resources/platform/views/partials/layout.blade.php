@@ -42,6 +42,7 @@
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
                     account-url="{{ user()->getDashboardUrl() }}"
+                    {{-- isSidebarHidden="{{ true }}" --}}
                     search-url=""
                 >
                     <template v-cloak v-slot="slotProps">

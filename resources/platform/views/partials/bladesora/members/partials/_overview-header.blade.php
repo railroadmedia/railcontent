@@ -1,5 +1,5 @@
 <header id="pageHeader" 
-        class="container fluid pv-4 relative" 
+        class="fluid pv-4 relative" 
         style="background-image:url({{ $backgroundImage }});"
 >
     <div class="header-gradient-overlay absolute-fill {{ $themeColor }}"></div>
