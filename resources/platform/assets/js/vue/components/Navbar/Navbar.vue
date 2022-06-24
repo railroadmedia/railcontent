@@ -98,6 +98,7 @@ const toggleSearchModal = (val) => {
       <button
         @click="() => toggleSearchModal(true)"
         class="tw-block tw-shrink-0 lg:tw-hidden tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+        title="Musora Search"
       >
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-black dark:tw-text-white" />
       </button>
@@ -106,6 +107,7 @@ const toggleSearchModal = (val) => {
       <a :href="`/${ brand }/referral/invite-a-friend`"
         @click="() => toggleSearchModal(true)"
         class="tw-block tw-shrink-0 tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+        title="Invite a Friend"
       >
         <span class="tw-text-black dark:tw-text-white">
           <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
