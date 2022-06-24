@@ -1,5 +1,5 @@
-<script>
-import { ref, computed } from "vue";
+<script setup>
+import { ref, computed, provide, onBeforeMount, onMounted, onUnmounted } from "vue";
 import Navbar from "../Navbar/Navbar.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
@@ -7,135 +7,125 @@ import Footer from "../Footer/Footer.vue";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
 import { setEndpointPrefix } from "../../utils"
 
-export default {
-  name: "PageContainer",
-  components: { Navbar, Sidebar, Footer, SpriteSheet },
-  props: {
-    brand: {
-      type: String,
-      default: 'drumeo'
-    },
-    isLive: {
-      type: Boolean,
-      default: false
-    },
-    hasNotifications: {
-      type: Boolean,
-      default: false
-    },
-    userName: {
-      type: String
-    },
-    userAvatar: {
-      type: String
-    },
-    accountUrl: {
-      type: String
-    },
-    searchUrl: {
-      type: String
-    }
+const props = defineProps({
+  brand: {
+    type: String,
+    default: 'drumeo'
   },
-  provide() {
-    return {
-      isDarkModeSelected: computed(() => this.isDarkModeSelected)
-    }
+  isLive: {
+    type: Boolean,
+    default: false
   },
-
-  setup(props, context) {
-    const isSidebarCollapsed = ref(false);
-    const isSidebarHidden = ref(false);
-    const isDarkModeSelected = ref(false);
-    // const route = useRoute();
-    // const router = useRouter();
-
-    const setDarkMode = (isSelected) => {
-      const body = document.getElementById("app-body");
-      if (isSelected) {
-        body.classList.add("tw-dark");
-      } else {
-        body.classList.remove("tw-dark");
-      }
-    };
-
-    const onCollapseSidebar = (val) => {
-      if (typeof val === "boolean") {
-        isSidebarCollapsed.value = val;
-        isSidebarHidden.value = val;
-      } else {
-        const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
-        if (smallBreakpoint.matches) {
-          isSidebarHidden.value = !isSidebarHidden.value;
-          isSidebarCollapsed.value = false;
-        } else {
-          isSidebarHidden.value = false;
-          isSidebarCollapsed.value = !isSidebarCollapsed.value;
-        }
-      }
-    };
-
-    const onColorModeToggle = (val) => {
-      if (typeof val === "boolean") {
-        isDarkModeSelected.value = val;
-        setDarkMode(val);
-        localStorage.setItem("darkMode", val);
-      } else {
-        isDarkModeSelected.value = !isDarkModeSelected.value;
-        setDarkMode(isDarkModeSelected.value);
-        localStorage.setItem("darkMode", isDarkModeSelected.value);
-      }
-    };
-
-    return {
-      isSidebarCollapsed,
-      isSidebarHidden,
-      isDarkModeSelected,
-      onCollapseSidebar,
-      onColorModeToggle,
-      setDarkMode
-    };
-
+  hasNotifications: {
+    type: Boolean,
+    default: false
   },
+  userName: {
+    type: String
+  },
+  userAvatar: {
+    type: String
+  },
+  accountUrl: {
+    type: String
+  },
+  searchUrl: {
+    type: String
+  }
+});
 
-  beforeMount() {
-    //Set Dark Mode Based on User Preferences
-    if (localStorage.getItem("darkMode")) {
-      this.isDarkModeSelected = JSON.parse(localStorage.getItem("darkMode"));
-      this.setDarkMode(this.isDarkModeSelected);
-    } else {
-      this.isDarkModeSelected = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      this.setDarkMode(this.isDarkModeSelected);
-    }
-    //Set Sidebar State
+const isSidebarCollapsed = ref(false);
+const isSidebarHidden = ref(false);
+const isDarkModeSelected = ref(false);
+provide('isDarkModeSelected', isDarkModeSelected);
+// const route = useRoute();
+// const router = useRouter();
+
+const setDarkMode = (isSelected) => {
+  const body = document.getElementById("app-body");
+  if (isSelected) {
+    body.classList.add("tw-dark");
+  } else {
+    body.classList.remove("tw-dark");
+  }
+};
+
+const onCollapseSidebar = (val) => {
+  if (typeof val === "boolean") {
+    isSidebarCollapsed.value = val;
+    isSidebarHidden.value = val;
+  } else {
     const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
     if (smallBreakpoint.matches) {
-      this.isSidebarHidden = true;
-      this.isSidebarCollapsed = false;
+      isSidebarHidden.value = !isSidebarHidden.value;
+      isSidebarCollapsed.value = false;
+      localStorage.setItem("isSidebarHidden", isSidebarHidden.value);
+    } else {
+      isSidebarHidden.value = false;
+      isSidebarCollapsed.value = !isSidebarCollapsed.value;
     }
-    setEndpointPrefix();
-  },
-
-  created() {
-    //Check if Mobile on Resize
-    window.addEventListener("resize", this.onResize);
-  },
-
-  destroyed() {
-    window.removeEventListener("resize", this.onResize);
-  },
-
-  methods: {
-    onResize(e) {
-      const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
-      if (smallBreakpoint.matches) {
-        this.isSidebarHidden = true;
-        this.isSidebarCollapsed = false;
-      }
-    },
-  },
+  }
+  localStorage.setItem("isSidebarCollapsed", isSidebarCollapsed.value);
 };
+
+const onColorModeToggle = (val) => {
+  if (typeof val === "boolean") {
+    isDarkModeSelected.value = val;
+    setDarkMode(val);
+    localStorage.setItem("darkMode", val);
+  } else {
+    isDarkModeSelected.value = !isDarkModeSelected.value;
+    setDarkMode(isDarkModeSelected.value);
+    localStorage.setItem("darkMode", isDarkModeSelected.value);
+  }
+};
+
+
+onBeforeMount(() => {
+  //Set Dark Mode Based on User Preferences
+  if (localStorage.getItem("darkMode")) {
+    isDarkModeSelected.value = JSON.parse(localStorage.getItem("darkMode"));
+    setDarkMode(isDarkModeSelected.value);
+  } else {
+    isDarkModeSelected.value = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setDarkMode(isDarkModeSelected.value);
+  }
+
+  //Set Sidebar State
+  const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
+  if (smallBreakpoint.matches) {
+    if(localStorage.getItem("isSidebarHidden")) {
+      isSidebarHidden.value = JSON.parse(localStorage.getItem("isSidebarHidden"));
+    } else {
+      isSidebarHidden.value = true;
+    }
+      isSidebarCollapsed.value = false;
+  } else if (localStorage.getItem("isSidebarCollapsed")) {
+    // On desktop load the sidebar collapsed value saved on local storage
+    isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
+  }
+  setEndpointPrefix();
+})
+
+const onResize = (e) => {
+  const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
+  if (smallBreakpoint.matches) {
+    isSidebarHidden.value = true;
+    isSidebarCollapsed.value = false;
+  }
+}
+
+onMounted(() => {
+  //Check if Mobile on Resize
+  window.addEventListener("resize", onResize);
+})
+
+onUnmounted(() => {
+  window.removeEventListener("resize", onResize);
+})
+
 </script>
 
 <template>
