@@ -1555,20 +1555,9 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->getFieldsByContentIds($contentRows);
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $this->configurePresenterForResults($contentRows);
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $this->parserResult($contentRows);
     }
 
     public function getRequiredFields()
