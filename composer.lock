@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.228.1",
+            "version": "3.228.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "53b7f43945b19bb0700c75d4c5f130055096e817"
+                "reference": "e7c4d70aef99e71f9114a302ec576dc2689df283"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/53b7f43945b19bb0700c75d4c5f130055096e817",
-                "reference": "53b7f43945b19bb0700c75d4c5f130055096e817",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e7c4d70aef99e71f9114a302ec576dc2689df283",
+                "reference": "e7c4d70aef99e71f9114a302ec576dc2689df283",
                 "shasum": ""
             },
             "require": {
@@ -193,7 +193,7 @@
                 "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
-                "guzzlehttp/guzzle": "^6.5.7 || ^7.4.4",
+                "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
                 "guzzlehttp/promises": "^1.4.0",
                 "guzzlehttp/psr7": "^1.8.5 || ^2.3",
                 "mtdowling/jmespath.php": "^2.6",
@@ -261,9 +261,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.228.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.228.2"
             },
-            "time": "2022-06-22T18:16:48+00:00"
+            "time": "2022-06-23T18:17:44+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4261,17 +4261,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.10.0",
+            "version": "4.10.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "ad98757e2a8b8814f672806e964f25a98a025ebc"
+                "reference": "f06e6057b318199dbcee362eb528f6d30bafda5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-ad98757e2a8b8814f672806e964f25a98a025ebc-zip-e9c34d.zip",
-                "reference": "ad98757e2a8b8814f672806e964f25a98a025ebc",
-                "shasum": "b609af041de6b2c467568a2cd2a022adcb4d613c"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-f06e6057b318199dbcee362eb528f6d30bafda5e-zip-fd5f60.zip",
+                "reference": "f06e6057b318199dbcee362eb528f6d30bafda5e",
+                "shasum": "a11d5461fac2c9d32af5432bdbc59efd7bbded85"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -4285,11 +4285,12 @@
                 "spatie/once": "^1.1|^2.0|^3.0",
                 "symfony/console": "^5.4|^6.0",
                 "symfony/finder": "^5.4|^6.0",
-                "symfony/intl": "^5.4|^6.0",
+                "symfony/polyfill-intl-icu": "^1.22.1",
                 "symfony/process": "^5.4|^6.0"
             },
             "require-dev": {
                 "laravel/nova-dusk-suite": "8.4.x-dev|9.4.x-dev",
+                "laravel/pint": "^0.1.0",
                 "laravel/scout": "^9.4",
                 "mockery/mockery": "^1.4.4",
                 "nunomaduro/larastan": "^1.0.1|^2.0",
@@ -4364,9 +4365,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.10.0"
+                "source": "https://github.com/laravel/nova/tree/v4.10.1"
             },
-            "time": "2022-06-21T18:10:52+00:00"
+            "time": "2022-06-23T15:06:36+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7427,16 +7428,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.6",
+            "version": "v5.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "0102bfb10575639a82dbab68be187685cb48fef9"
+                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/0102bfb10575639a82dbab68be187685cb48fef9",
-                "reference": "0102bfb10575639a82dbab68be187685cb48fef9",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/61d64fa626e8279221dca814d0f0459c323f0c10",
+                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10",
                 "shasum": ""
             },
             "require": {
@@ -7472,9 +7473,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.6"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.7"
             },
-            "time": "2022-06-22T18:15:06+00:00"
+            "time": "2022-06-22T20:01:34+00:00"
         },
         {
             "name": "railroad/event-data-synchronizer",
@@ -7643,12 +7644,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "743c8f95863d23bd0c13ee7a50c3ac768f20b5db"
+                "reference": "cb834895df81dac2a7fb75f25f8cb49a36d1e7a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/743c8f95863d23bd0c13ee7a50c3ac768f20b5db",
-                "reference": "743c8f95863d23bd0c13ee7a50c3ac768f20b5db",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/cb834895df81dac2a7fb75f25f8cb49a36d1e7a2",
+                "reference": "cb834895df81dac2a7fb75f25f8cb49a36d1e7a2",
                 "shasum": ""
             },
             "require": {
@@ -7680,7 +7681,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-06-22T14:26:53+00:00"
+            "time": "2022-06-24T12:56:41+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -7780,12 +7781,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c7f6bb2f83730db5f82fc2562ee2a679e4263f8e"
+                "reference": "d3f5e480289b00611dca63d623b96d70ca33488e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c7f6bb2f83730db5f82fc2562ee2a679e4263f8e",
-                "reference": "c7f6bb2f83730db5f82fc2562ee2a679e4263f8e",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d3f5e480289b00611dca63d623b96d70ca33488e",
+                "reference": "d3f5e480289b00611dca63d623b96d70ca33488e",
                 "shasum": ""
             },
             "require": {
@@ -7841,7 +7842,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-06-22T09:40:54+00:00"
+            "time": "2022-06-24T08:23:31+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -10482,86 +10483,6 @@
             "time": "2022-06-09T17:31:33+00:00"
         },
         {
-            "name": "symfony/intl",
-            "version": "v6.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/intl.git",
-                "reference": "9fc07ba57eb33d44c6b3b86b4e1ef927620d1a39"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/9fc07ba57eb33d44c6b3b86b4e1ef927620d1a39",
-                "reference": "9fc07ba57eb33d44c6b3b86b4e1ef927620d1a39",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "symfony/filesystem": "^5.4|^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Intl\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                },
-                {
-                    "name": "Eriksen Costa",
-                    "email": "eriksen.costa@infranology.com.br"
-                },
-                {
-                    "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides a PHP replacement layer for the C intl extension that includes additional data from the ICU library",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "i18n",
-                "icu",
-                "internationalization",
-                "intl",
-                "l10n",
-                "localization"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/intl/tree/v6.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2022-04-12T16:22:53+00:00"
-        },
-        {
             "name": "symfony/mailer",
             "version": "v6.1.1",
             "source": {
@@ -10927,6 +10848,93 @@
             ],
             "support": {
                 "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.26.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-24T11:49:31+00:00"
+        },
+        {
+            "name": "symfony/polyfill-intl-icu",
+            "version": "v1.26.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-icu.git",
+                "reference": "e407643d610e5f2c8a4b14189150f68934bf5e48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/e407643d610e5f2c8a4b14189150f68934bf5e48",
+                "reference": "e407643d610e5f2c8a4b14189150f68934bf5e48",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "suggest": {
+                "ext-intl": "For best performance and support of other locales than \"en\""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.26-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Icu\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's ICU-related data and classes",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "icu",
+                "intl",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.26.0"
             },
             "funding": [
                 {
