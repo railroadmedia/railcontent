@@ -52,7 +52,7 @@
                                     progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                     content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                                     theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
-                                </youtube-player>
+                                </youtube-player>lesson-sidebar
                             </transition>
                         </div>
                     @else
@@ -239,14 +239,26 @@
                 "nextLessonJson" => !empty($nextChild) ? $nextLessonJson : null,
             ])
 
+            <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
+                <div class="tw-flex tw-flex-row">
+            {{--                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"--}}
+            {{--                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"--}}
+            {{--                        user-avatar="{{ user()->profile_picture_url }}"--}}
+            {{--                        user-xp="{{ user()->total_xp }}"--}}
+            {{--                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"--}}
+            {{--                        :is-admin="{{ json_encode(user()->isAdmin()) }}">--}}
+            {{--                    </comments>--}}
+                </div>
+            </div>
+
         </div>
 
         {{-- Related Lessons Section --}}
-        <div class="mv-3">
+        <div class="">
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col lesson-sidebar tw-mb-3">
-                    <div class="tw-flex tw-flex-row tw-mb-2 ph-1">
-                        <h6 class="title tw-text-black">
+                <div class="tw-flex tw-flex-col xl:tw-w-[420px] tw-m-4">
+                    <div class="tw-flex tw-flex-row tw-mb-4">
+                        <h6 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">
                             Related Lessons
                         </h6>
                     </div>
@@ -258,18 +270,6 @@
                         :display-inline="true"
                         user-id="{{ auth()->id() }}"
                         ></content-catalogue>
-                </div>
-
-                <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
-                    <div class="tw-flex tw-flex-row">
-    {{--                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"--}}
-    {{--                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"--}}
-    {{--                        user-avatar="{{ user()->profile_picture_url }}"--}}
-    {{--                        user-xp="{{ user()->total_xp }}"--}}
-    {{--                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"--}}
-    {{--                        :is-admin="{{ json_encode(user()->isAdmin()) }}">--}}
-    {{--                    </comments>--}}
-                    </div>
                 </div>
             </div>
         </div>
