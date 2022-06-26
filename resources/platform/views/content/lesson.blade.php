@@ -18,13 +18,13 @@
     {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
     {{-- TODO: RT integration --}}
 
-    <div class="tw-flex tw-w-full">
+    <div class="tw-flex tw-w-full tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-mt-3">
 
         <div class="tw-flex tw-flex-col tw-w-full">
             
-            <div class="fluid bg-grey-5 tw-pb-3">
+            <div class="fluid tw-pb-3">
 
-                <div class="tw-container tw-mx-auto p-lg-only lean">
+                <div class="p-lg-only lean">
                     @php
                     //dd($lessonContent['video_playback_endpoints'])
                     @endphp
@@ -177,7 +177,7 @@
             </div>
 
             {{-- Assignments --}}
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-mt-3">
+            <div class="tw-px-4 md:tw-px-8 tw-flex tw-mt-3">
                 <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
         
                 @if(!empty($lessonContent->fetch('*assignments', [])))
@@ -256,7 +256,7 @@
         {{-- Related Lessons Section --}}
         <div class="">
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col xl:tw-w-[420px] tw-m-4">
+                <div class="tw-flex tw-flex-col xl:tw-w-[420px] tw-m-4 tw-mr-0">
                     <div class="tw-flex tw-flex-row tw-mb-4">
                         <h6 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">
                             Related Lessons
