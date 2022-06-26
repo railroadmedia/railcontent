@@ -58,7 +58,7 @@
             </a>
 
             <!-- Description Section -->
-            <div class="tw-flex">
+            <div class="tw-flex tw-w-full">
                 <a :href="renderLink ? item.url : false" 
                    class="card-info flex flex-column tw-p-1 tw-rounded-lg"
                    :class="displayInline ? 'align-v-center' : 'tw-py-2'"
