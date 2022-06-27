@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="flex flex-row flex-wrap align-v-center pv-2">
-      <div class="flex flex-column xs-12 sm-5 md-7 tw-text-[#00101D] dark:tw-text-white">
+      <div class="flex flex-column tw-text-[#00101D] dark:tw-text-white">
         <h1 class="heading">
           {{ title }}
         </h1>
       </div>
 
-      <div class="flex flex-column pv-2 xs-12 sm-7 md-5">
+      <div class="flex flex-column pv-2">
         <div class="flex flex-row nmh-1 flex-wrap resource-buttons">
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" @click="likeContent">

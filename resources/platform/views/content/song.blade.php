@@ -12,42 +12,41 @@
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
-{{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
+    {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="flex flex-row align-v-top">
 
             <div class="flex flex-column pr-1 p-sm-down grow">
-                <a
-                    href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}"
-                    class="no-decoration mr-1 heading"
-                >
-                    <i class="fas fa-arrow-circle-left text-grey-2"></i>
+                {{-- Back Button --}}
+                <a href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}" 
+                   class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center">
+                   <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
+                   <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
-                <div class="flex flex-row flex-wrap pt-4 pb-4 song-content-container">
+                {{-- Song Container --}}
+                <div class="flex flex-row pt-4 pb-4 song-content-container">
 
-                    <div class="flex flex-column xs-12 md-4 flex-center song-play-button song-album-cover align-v-center">
-                        <div class="square corners-10 hover-text-drumeo flex-center flex-column shadow-md"
-                             style="width: 100%; max-width: 400px; max-height: 400px;">
+                    <div class="tw-flex tw-flex-col song-play-button song-album-cover tw-mr-6">
+                        <div class="tw-w-screen tw-aspect-square tw-max-w-[338px] tw-min-w-[175px] corners-10 flex-center flex-column shadow-md">
                             <img src="{{ cf_img($lessonContent->fetch('data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url')), ['width' => 400, 'height' => 400]) }}"
                                  alt="Album Art"
                                  class="corners-10"
                             >
-                        </div>
-
-                        <div class="thumb-title flex-center text-center ph-1 rounded ba-white-2 hover-border-drumeo"
-                             style="width: 80px; height: 80px; position: absolute;">
-                            <div class="square heading rounded pointer text-white hover-text-drumeo shadow-md"
-                                 style="width: 80px; height: 80px;">
-                                <i class="fas fa-play absolute-center" style="margin-left: 2px;"></i>
+                            {{-- Play Icon --}}
+                            <div class="thumb-title flex-center text-center ph-1 rounded ba-white-2 hover-border-drumeo"
+                                    style="width: 80px; height: 80px; position: absolute;">
+                                <div class="square heading rounded pointer text-white hover-text-drumeo shadow-md"
+                                        style="width: 80px; height: 80px;">
+                                    <i class="fas fa-play absolute-center" style="margin-left: 2px;"></i>
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <div class="flex flex-column xs-12 md-8 align-v-center song-details">
+                    <div class="flex flex-column tw-w-full align-v-center song-details">
                         <div>
-                            <h1 class="text-black font-bold item-title heading">{{ $lessonContent->fetch('fields.title') }}</h1>
+                            <h1 class="text-black font-bold item-title heading dark:tw-text-white">{{ $lessonContent->fetch('fields.title') }}</h1>
                             <p class="text-grey-3 item-title body mt-1 mb-3">
                                 {{ $lessonContent->fetch('fields.artist') }} -
                                 {{ $lessonContent->fetch('fields.album') }} -
@@ -99,7 +98,7 @@
                 {{-- Mobile Small Sidebar --}}
                 <div class="flex flex-column mb-3 hide-sm-up">
                     <div class="flex flex-row mb-2 ph-1">
-                        <h6 class="title text-black">
+                        <h6 class="title text-black dark:tw-text-white">
                             Related Lessons
                         </h6>
                     </div>
@@ -172,7 +171,7 @@
             {{-- Desktop Sidebar --}}
             <div class="flex flex-column lesson-sidebar mb-3 hide-xs-only">
                 <div class="flex flex-row mb-2 ph-1">
-                    <h6 class="title text-black">
+                    <h6 class="title text-black dark:tw-text-white">
                         Related Lessons
                     </h6>
                 </div>

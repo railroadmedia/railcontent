@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-row flex-wrap align-v-center pv-2">
-        <div class="flex flex-column pv-2 xs-12">
+        <div class="flex flex-column pv-2">
             <div
-                class="flex flex-row nmh-1 flex-wrap resource-buttons"
+                class="flex flex-row nmh-1 flex-wrap"
             >
                 <div class="flex flex-column resource-button ph-1">
                     <button
