@@ -177,6 +177,7 @@
         {
             "name": "aws/aws-sdk-php",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "3.226.0",
             "source": {
                 "type": "git",
@@ -189,6 +190,9 @@
                 "reference": "d76d4fe0fa603ddc3f5c54d9664438dc1a808859",
 =======
             "version": "3.228.2",
+=======
+            "version": "3.228.1",
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
@@ -196,9 +200,14 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e7c4d70aef99e71f9114a302ec576dc2689df283",
                 "reference": "e7c4d70aef99e71f9114a302ec576dc2689df283",
 >>>>>>> master
+=======
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/53b7f43945b19bb0700c75d4c5f130055096e817",
+                "reference": "53b7f43945b19bb0700c75d4c5f130055096e817",
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
                 "shasum": ""
             },
             "require": {
@@ -275,6 +284,7 @@
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.226.0"
             },
             "time": "2022-06-16T18:14:10+00:00"
@@ -283,6 +293,11 @@
             },
             "time": "2022-06-23T18:17:44+00:00"
 >>>>>>> master
+=======
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.228.1"
+            },
+            "time": "2022-06-22T18:16:48+00:00"
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
         },
         {
             "name": "behat/transliterator",
@@ -4281,6 +4296,7 @@
         {
             "name": "laravel/nova",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "4.9.2",
             "source": {
                 "type": "git",
@@ -4294,6 +4310,9 @@
                 "shasum": "6e0571450a2c47a230657b27e75733a0c1a26d2e"
 =======
             "version": "4.10.1",
+=======
+            "version": "4.10.0",
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
@@ -4301,10 +4320,16 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-f06e6057b318199dbcee362eb528f6d30bafda5e-zip-fd5f60.zip",
                 "reference": "f06e6057b318199dbcee362eb528f6d30bafda5e",
                 "shasum": "a11d5461fac2c9d32af5432bdbc59efd7bbded85"
 >>>>>>> master
+=======
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-ad98757e2a8b8814f672806e964f25a98a025ebc-zip-e9c34d.zip",
+                "reference": "ad98757e2a8b8814f672806e964f25a98a025ebc",
+                "shasum": "b609af041de6b2c467568a2cd2a022adcb4d613c"
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -4399,6 +4424,7 @@
             ],
             "support": {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "source": "https://github.com/laravel/nova/tree/v4.9.2"
             },
             "time": "2022-06-16T15:58:16+00:00"
@@ -4407,6 +4433,11 @@
             },
             "time": "2022-06-23T15:06:36+00:00"
 >>>>>>> master
+=======
+                "source": "https://github.com/laravel/nova/tree/v4.10.0"
+            },
+            "time": "2022-06-21T18:10:52+00:00"
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
         },
         {
             "name": "laravel/sanctum",
@@ -7821,6 +7852,7 @@
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "reference": "c338732e2fe3baf5842f59b0d047a4db5f0c501c"
             },
             "dist": {
@@ -7835,6 +7867,14 @@
                 "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d3f5e480289b00611dca63d623b96d70ca33488e",
                 "reference": "d3f5e480289b00611dca63d623b96d70ca33488e",
 >>>>>>> master
+=======
+                "reference": "51ae42eefd444b2f821644c3675cc92d914b17a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/51ae42eefd444b2f821644c3675cc92d914b17a8",
+                "reference": "51ae42eefd444b2f821644c3675cc92d914b17a8",
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
                 "shasum": ""
             },
             "require": {
@@ -7891,10 +7931,14 @@
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2022-06-17T10:41:30+00:00"
 =======
             "time": "2022-06-24T08:23:31+00:00"
 >>>>>>> master
+=======
+            "time": "2022-06-22T22:35:03+00:00"
+>>>>>>> c858957de5aacb646266eb1043c48b141597232d
         },
         {
             "name": "railroad/railforums",

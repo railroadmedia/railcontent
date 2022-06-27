@@ -1,7 +1,9 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=d15703dd8d6f355ee9a234266c62c5a4",
+    "/platform/js/app.js": "/platform/js/app.js?id=2f9fb278c0a62bd9aeea23e02a1a9950",
     "/platform/js/profile.js": "/platform/js/profile.js?id=9e4afc3ad627caf1ec9f682f13526b76",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=1b2b4aff8d29c7a284b7eca1f6fb973b",
     "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=fe957a9c5c645cd90ea47f2cdc5893d7",
-    "/platform/css/app.css": "/platform/css/app.css?id=7dffb7cf990f9b531c701ce0b83adae1"
+    "/platform/css/app.css": "/platform/css/app.css?id=c55b68c79d521d7bc8593158d0870d98",
+    "/marketing/js/app.js": "/marketing/js/app.js?id=8e7457eda3c6e79dc1955db8654679e3",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=ad05670e68c41dafe3aaa6a81a52928f"
 }
