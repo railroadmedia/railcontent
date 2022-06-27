@@ -257,10 +257,10 @@ export default {
                     setTimeout(() => {
                         const binStr = atob(canvas.toDataURL(type, quality).split(',')[1]);
 
-                                
+
                         const len = binStr.length;
 
-                                
+
                         const arr = new Uint8Array(len);
 
                         for (let i = 0; i < len; i++) {
@@ -347,7 +347,7 @@ export default {
             UserService.remoteResourceUpload(this.uploadEndpoint, formData)
                 .then((resolved) => {
                     if (resolved) {
-                        const remoteStorageUrl = resolved.results || resolved.data[0].url;
+                        const remoteStorageUrl = resolved.profile_picture_url;
 
                         this.$emit('image-uploaded', {
                             image_url: remoteStorageUrl,
@@ -357,6 +357,27 @@ export default {
                         // this.setImageAsAvatar(remoteStorageUrl);
                     }
                 });
+
+            // NOTE: we may need this in the future, leave for now
+            // Vapor.store(formData.get('file'), {
+            //     visibility: 'public-read',
+            //     progress: progress => {
+            //         // console.log(Math.round(progress * 100));
+            //     }
+            // }).then(response => {
+            //     axios.post('/user-management-system/profile-picture/upload', {
+            //         uuid: response.uuid,
+            //         s3_bucket_path: response.key,
+            //         bucket: response.bucket,
+            //     }).then((resolved) => {
+            //         console.log(resolved);
+            //
+            //         if (resolved) {
+            //             this.loading = false;
+            //             location.reload();
+            //         }
+            //     });
+            // });
         },
 
         resetCropper() {
