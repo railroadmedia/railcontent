@@ -1,25 +1,31 @@
 <script setup>
-import InputLabel from "../InputLabel/InputLabel.vue";
-import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
-const props = defineProps({
-  isSidebarCollapsed: {
+  import InputLabel from "../InputLabel/InputLabel.vue";
+  import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
+  const props = defineProps({
+    isSidebarCollapsed: {
       type: Boolean,
-  },
-});
+    },
+    brand: {
+      type: String,
+      default: 'Drumeo',
+    }
+  });
 
-const emit = defineEmits(['onCollapse'])
+  const emit = defineEmits(['onCollapse'])
 
-const handleChange = () => {
-    console.log('handle change called')
-};
+  const handleChange = () => {
+      console.log('handle change called')
+  };
 
-const handleFocus = () => {
-    emit('onCollapse', false);
-};
+  const handleFocus = () => {
+      emit('onCollapse', false);
+  };
 </script>
 
 <template>
-  <div
+  <form 
+    method="GET"
+    :action="`/${brand}/search`"
     class="tw-m-4 tw-relative dark:tw-bg-[#000C17] tw-bg-[#E6E7E9] tw-rounded-[5px] tw-hidden lg:tw-block tw-overflow-hidden"
   >
     <!-- Search Icon -->
@@ -33,6 +39,8 @@ const handleFocus = () => {
     <InputLabel
       :showClearButton="true"
       placeholder="Search"
+      inputName="term"
+      id="sidebar-search"
       @onChange="handleChange"
       :inputOverride="`
         tw-outline-offset-0
@@ -56,5 +64,5 @@ const handleFocus = () => {
       "
       @onFocus="handleFocus"
     />
-  </div>
+  </form>
 </template>

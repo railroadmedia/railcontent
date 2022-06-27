@@ -14,7 +14,7 @@
     {{-- Session Token for Railtracker progress tracking --}}
 {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
 
-    <div class="container mv-3">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="flex flex-row align-v-top">
 
             <div class="flex flex-column pr-1 p-sm-down grow">
