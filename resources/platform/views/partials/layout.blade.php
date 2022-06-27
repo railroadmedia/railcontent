@@ -38,6 +38,9 @@
                 <page-container
                     brand="{{ $brand }}"
                     :is-live="true"
+                    @if(isset($forceHideSidebar))
+                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+                    @endif
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
