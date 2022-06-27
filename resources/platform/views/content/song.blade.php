@@ -14,7 +14,7 @@
     {{-- Session Token for Railtracker progress tracking --}}
 {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
 
-    <div class="container mv-3">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="flex flex-row align-v-top">
 
             <div class="flex flex-column pr-1 p-sm-down grow">
@@ -126,7 +126,7 @@
                             <div class="flex flex-column">
                                 @foreach($lessonContent->fetch('*assignments', []) as $index => $assignment)
                                     <div class="flex flex-row">
-                                        <div class="flex flex-column grow bt-grey-1-1">
+                                        <div class="flex flex-column grow bt-grey-1-1 dark:tw-border-[#223F57]">
                                             <content-assignment
                                                 theme-color="{{ $themeColor }}"
                                                 timecode="{{ $assignment->fetch('data.timecode', 0) }}"

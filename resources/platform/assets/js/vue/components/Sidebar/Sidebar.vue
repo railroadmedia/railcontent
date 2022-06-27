@@ -54,7 +54,7 @@ export default {
                     :brand="brand"
   >
     <!-- Sidebar Search -->
-    <SearchInput :isSidebarCollapsed="isSidebarCollapsed" @onCollapse="handleCollapse" />
+    <SearchInput :isSidebarCollapsed="isSidebarCollapsed" :brand="brand" @onCollapse="handleCollapse"/>
 
     <!-- Sidebar Link Sections -->
     <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">

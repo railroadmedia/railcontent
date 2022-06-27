@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-column">
         <div v-for="(assignment, index) in assignments" :key="assignment.id" class="flex flex-row" dusk="assignments">
-            <div class="flex flex-column grow bt-grey-1-1">
+            <div class="flex flex-column grow bt-grey-1-1 dark:tw-border-[#223F57]">
                 <ContentAssignment
                     :theme-color="assignment.themeColor"
                     :timecode="assignment.timecode"

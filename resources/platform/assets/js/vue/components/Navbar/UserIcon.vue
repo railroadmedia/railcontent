@@ -97,10 +97,16 @@ export default {
             <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
           </span>
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
+        <!-- <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
+        </OptionElement> -->
+
+        <OptionElement :href="`/${ brand }/lists/my-list`">
+          <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
+          My List
         </OptionElement>
+
         <OptionElement :href="this.userNavigationDropdownLinks.schedulePageUrl">
           <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
           Schedule
