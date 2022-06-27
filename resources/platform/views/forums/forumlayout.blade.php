@@ -48,7 +48,9 @@
                 <page-container 
                     brand="{{ $brand }}" 
                     :is-live="true" 
-                    :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                    @if(!empty( $hasUnreadNotifications ))
+                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                    @endif
                     user-name="John Smith"
                     user-avatar=""
                     account-url=""
