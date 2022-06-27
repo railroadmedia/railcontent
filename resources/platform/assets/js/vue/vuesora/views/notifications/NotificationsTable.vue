@@ -27,12 +27,12 @@
         </div>
 
         <div v-if="notifications.length === 0" class="tw-flex tw-flex-row pa-3">
-            <p class="tiny text-grey-3 tw-italic">
+            <p class="tw-text-sm text-grey-3 dark:tw-text-[#9EC0DC] tw-italic">
                 You do not appear to have any notifications at this time.
             </p>
         </div>
 
-        <notifications-table-row v-for="(item, i) in notificationsArray" :key="item.id" v-bind="item"
+        <notifications-table-row v-for="item in notificationsArray" :key="item.id" v-bind="item"
             @notificationRead="markAsRead"></notifications-table-row>
 
         <div v-if="totalPages > 1" class="tw-flex tw-flex-row bg-light pagination-row align-h-right">

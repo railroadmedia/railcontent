@@ -38,7 +38,7 @@
                 <page-container
                     brand="{{ $brand }}"
                     :is-live="true"
-                    :has-notifications="true"
+                    :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
                     account-url="{{ user()->getDashboardUrl() }}"

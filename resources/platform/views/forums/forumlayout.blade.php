@@ -48,7 +48,7 @@
                 <page-container 
                     brand="{{ $brand }}" 
                     :is-live="true" 
-                    :has-notifications="true"
+                    :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     user-name="John Smith"
                     user-avatar=""
                     account-url=""
