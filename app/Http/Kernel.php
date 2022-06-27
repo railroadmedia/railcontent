@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Railroad\MusoraApi\Middleware\BrandMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -65,6 +66,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
+            BrandMiddleware::class,
         ],
     ];
 

@@ -5,7 +5,7 @@ return [
     'cache_duration' => 60 * 60 * 24 * 30,
     'cache_driver' => 'array',
 
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME','musora_laravel_mysql'),
     'database_mode' => 'host',
 
     'table_prefix' => 'permissions_',

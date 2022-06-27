@@ -116,3 +116,52 @@ if(!function_exists('get_resource_icon')){
         }
     }
 }
+
+if(!function_exists('parse_lesson_type_readable')){
+    function parse_lesson_type_readable($type, $plural = false){
+        switch ($type) {
+            case 'course-part':
+                $parsedType = 'Courses';
+                break;
+            case 'song-part':
+                $parsedType = 'Songs';
+                break;
+            case 'play-along-part':
+                $parsedType = 'Play-Alongs';
+                break;
+            case 'recording':
+                $parsedType = 'Archives';
+                break;
+            case 'unit-part':
+                $parsedType = 'Learning Paths';
+                break;
+            case 'chord-and-scale':
+                $parsedType = 'Chords & Scales';
+                break;
+            case 'semester-pack':
+                $parsedType =  'Pack';
+                break;
+            case 'semester-pack-lesson':
+                $parsedType = 'Pack';
+                break;
+            case 'pack-bundle':
+                $parsedType = 'Pack';
+                break;
+            case 'pack-bundle-lesson':
+                $parsedType = 'Pack';
+                break;
+            case 'student-review':
+                $parsedType = 'Student Reviews';
+                break;
+            default:
+                $parsedType = $type;
+                break;
+        }
+
+        if($plural){
+            return $parsedType[strlen($parsedType)-1] == 's' ? $parsedType : ($parsedType . 's');
+        }
+
+        return $parsedType;
+    }
+}

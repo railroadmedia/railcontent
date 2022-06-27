@@ -3,7 +3,7 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home')
+                "url" => url()->route('platform.home')
             ],
             [
                 "title" => 'Learning Paths',
@@ -27,7 +27,7 @@
             "pages" => [
                 [
                     "title" => 'Singeo Method',
-                    "url" => url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')])
+                    "url" => url()->route('platform.content.first-level', ['method', $firstContent['slug'], $firstContent['id']])
                 ],
                 [
                     "title" => $parent->fetch('fields.title'),
@@ -44,7 +44,7 @@
             "pages" => [
                 [
                     "title" => 'Home',
-                    "url" => url()->route('members.home'),
+                    "url" => url()->route('platform.home'),
                 ],
                 [
                     "title" => "Packs",
@@ -65,13 +65,13 @@
         ])
     @endif
 @else
-    @if($parent)
+    @if(isset($parent))
         @if($parent->fetch('type') === 'pack-bundle')
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
                         "title" => 'Home',
-                        "url" => url()->route('members.home')
+                        "url" => url()->route('platform.home')
                     ],
                     [
                         "title" => "Packs",
@@ -93,11 +93,11 @@
                 "pages" => [
                     [
                         "title" => 'Home',
-                        "url" => url()->route('members.home')
+                        "url" => url()->route('platform.home')
                     ],
                     [
                         "title" => parse_lesson_type_readable($parent->fetch('type'), true),
-                        "url" => url()->route("members.catalogues.show", ["contentType" => parse_lesson_type_readable($parent->fetch('type'), true)]),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => parse_lesson_type_readable($parent->fetch('type'), true)]),
                     ],
                     [
                         "title" => $parent->fetch('fields.title'),
@@ -114,12 +114,12 @@
             "pages" => [
                 [
                     "title" => 'Home',
-                    "url" => url()->route('members.home')
+                    "url" => url()->route('platform.home')
                 ],
-                [
-                    "title" => parse_lesson_type_readable($lessonContent->fetch('type'), true),
-                    "url" => url()->route("members.catalogues.show", ["contentType" => parse_lesson_type_for_url($lessonContent->fetch('type'))]),
-                ],
+                    [
+                        "title" => parse_lesson_type_readable($lessonContent->fetch('type'), true),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => parse_lesson_type_readable($lessonContent->fetch('type'), true)]),
+                    ],
                 [
                     "title" => $lessonContent->fetch('fields.title')
                 ]
