@@ -28,6 +28,8 @@ const props = defineProps({
   },
 });
 
+const imgUrlRef = ref(props.imgUrl);
+
 function handleImage(image) {
   selectedImage.value = image;
   uploadStep.value = "crop";
@@ -42,6 +44,10 @@ function openUploadForm() {
   showUploadForm.value = !showUploadForm.value;
   selectedImage.value = null;
   uploadStep.value = "dropzone";
+}
+
+function handleUploadDone(imgUrl) {
+  imgUrlRef.value = imgUrl;
 }
 </script>
 
@@ -65,6 +71,7 @@ function openUploadForm() {
       <ImageUploadProgress
         v-if="uploadStep === 'upload'"
         :image="croppedImage"
+        @onUploadDone="handleUploadDone"
       />
     </InfoModal>
 
@@ -86,8 +93,9 @@ function openUploadForm() {
           tw-border-2
           tw-color-[#344858]
         "
+        :style="{ ...imgUrlRef ? { backgroundImage: `url(${imgUrlRef})`, backgroundSize: 'cover' } : {} }"
       >
-        <UserIcon />
+        <UserIcon v-if="!imgUrlRef" />
         <div
           class="
             tw-absolute
