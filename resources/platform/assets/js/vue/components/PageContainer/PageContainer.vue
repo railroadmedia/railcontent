@@ -107,9 +107,11 @@ onBeforeMount(() => {
       isSidebarHidden.value = true;
     }
     isSidebarCollapsed.value = false;
-  } else if (localStorage.getItem("isSidebarCollapsed")) {
-    // On desktop load the sidebar collapsed value saved on local storage
+  } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
+    // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
+  } else if (props.forceSidebarHidden) {
+    isSidebarCollapsed.value = true;
   }
   setEndpointPrefix();
 })
