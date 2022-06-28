@@ -55,13 +55,8 @@ function changeStep(step) {
 }
 function changeInfo(newInfo) {
     info.value = newInfo
-
-    if (newInfo.user.name && newInfo.user.name.length > 0) {
-        checkStepToggle(0, true)
-    } else {
-        checkStepToggle(0, false)
-    }
 }
+
 function checkStepToggle(step, val) {
     const newSteps = steps.value
     newSteps[step].checked = val
