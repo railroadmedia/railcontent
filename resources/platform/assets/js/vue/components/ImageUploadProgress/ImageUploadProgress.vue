@@ -53,7 +53,6 @@ onMounted(() => {
     processData: false,
     contentType: false,
     onUploadProgress: function (progressEvent) {
-      console.log(progressEvent.loaded)
       percentCompleted.value = Math.round(
         (progressEvent.loaded * 100) / progressEvent.total
       );
@@ -63,7 +62,6 @@ onMounted(() => {
   axios
     .post(FILE_UPLOAD_SERVICE(), data, config)
     .then(function (res) {
-      console.log('upload res', res.data.profile_picture_url)
       emit('onUploadDone', res.data.profile_picture_url);
     })
     .catch(function (err) {
