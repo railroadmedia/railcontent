@@ -1247,14 +1247,42 @@ return [
         'archived_on' => 'archived_on',
     ],
     'content_hierarchy' => [
+        'drumeo' => [
         'learning-path' => 'learning-path-level',
         'learning-path-level' => 'learning-path-course',
         'learning-path-course' => 'learning-path-lesson',
-        'unit' => 'unit-part',
         'song' => 'song-part',
         'course' => 'course-part',
         'pack' => 'pack-bundle',
         'pack-bundle' => 'pack-bundle-lesson',
+            ],
+        'pianote' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-course',
+            'learning-path-course' => 'learning-path-lesson',
+            'unit' => 'unit-part',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+        ],
+        'singeo' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-lesson',
+            'unit' => 'unit-part',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+        ],
+        'guitareo' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-lesson',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+        ]
     ],
     'children_name_mapping' => [
         'learning-path' => 'levels',
