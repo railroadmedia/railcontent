@@ -2,7 +2,7 @@
 
 export default {
   name: 'SidebarContainer',
-  props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden'],
+  props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden', 'forceSidebarHidden'],
 }
 </script>
 <template>
@@ -11,7 +11,8 @@ export default {
     class="tw-h-[calc(100vh-58px)] tw-mt-[58px] tw-transition-all tw-shrink-0 tw-absolute lg:tw-relative tw-z-[99] tw-w-64 lg:tw-left-0 tw-shadow-[0_0_5px_rgb(0,0,0,.13)]"
     style="clip-path: inset(0 -200px 0 0);"
     :class="[
-      isSidebarCollapsed && !isSidebarHidden ? 'lg:tw-w-[68px] ' : '',
+      isSidebarCollapsed && forceSidebarHidden ? 'lg:tw-w-0 ' : '',
+      isSidebarCollapsed && !isSidebarHidden && !forceSidebarHidden ? 'lg:tw-w-[68px] ' : '',
       isSidebarHidden ? 'tw--left-64 ' : 'tw-left-0',
     ]"
   >

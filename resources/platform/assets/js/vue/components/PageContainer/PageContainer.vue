@@ -31,6 +31,10 @@ const props = defineProps({
   },
   searchUrl: {
     type: String
+  },
+  forceSidebarHidden: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -56,7 +60,7 @@ const onCollapseSidebar = (val) => {
     isSidebarHidden.value = val;
   } else {
     const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
-    
+
     if (smallBreakpoint.matches) {
       isSidebarHidden.value = !isSidebarHidden.value;
       isSidebarCollapsed.value = false;
@@ -97,12 +101,12 @@ onBeforeMount(() => {
   //Set Sidebar State
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
   if (smallBreakpoint.matches) {
-    if(localStorage.getItem("isSidebarHidden")) {
+    if (localStorage.getItem("isSidebarHidden")) {
       isSidebarHidden.value = JSON.parse(localStorage.getItem("isSidebarHidden"));
     } else {
       isSidebarHidden.value = true;
     }
-      isSidebarCollapsed.value = false;
+    isSidebarCollapsed.value = false;
   } else if (localStorage.getItem("isSidebarCollapsed")) {
     // On desktop load the sidebar collapsed value saved on local storage
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
@@ -133,17 +137,10 @@ onUnmounted(() => {
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
 
-    <Navbar :brand="brand" 
-            :has-notifications="hasNotifications" 
-            :user-name="userName" 
-            :user-avatar="userAvatar"
-            :account-url="accountUrl" 
-            :isSidebarHidden="isSidebarHidden" 
-            :isDarkModeSelected="isDarkModeSelected"
-            :isSidebarCollapsed="isSidebarCollapsed" 
-            @onCollapseSidebar="onCollapseSidebar"
-            @onColorModeToggle="onColorModeToggle" 
-    />
+    <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications" :user-name="userName" :user-avatar="userAvatar"
+      :account-url="accountUrl" :isSidebarHidden="isSidebarHidden" :isDarkModeSelected="isDarkModeSelected"
+      :isSidebarCollapsed="isSidebarCollapsed" @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->
     <div class="
@@ -153,12 +150,8 @@ onUnmounted(() => {
       ">
 
       <!-- Sidebar -->
-      <Sidebar :brand="brand" 
-              :isLive="isLive" 
-              :isSidebarCollapsed="isSidebarCollapsed"
-              :isSidebarHidden="isSidebarHidden" 
-              @onCollapseSidebar="onCollapseSidebar" 
-      />
+      <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
+        :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar" :forceSidebarHidden="forceSidebarHidden" />
 
       <!-- Content Container -->
       <main class="
