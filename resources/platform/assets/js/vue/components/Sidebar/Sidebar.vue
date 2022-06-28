@@ -25,6 +25,10 @@ export default {
     playlist: {
       type: Array,
       default: []
+    },
+    forceSidebarHidden: {
+      type: Boolean,
+      default: false,
     }
   },
   setup(props, { emit }) {
@@ -52,6 +56,7 @@ export default {
   <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed"
                     :isSidebarHidden="isSidebarHidden"
                     :brand="brand"
+                    :forceSidebarHidden="forceSidebarHidden"
   >
     <!-- Sidebar Search -->
     <SearchInput :isSidebarCollapsed="isSidebarCollapsed" :brand="brand" @onCollapse="handleCollapse"/>

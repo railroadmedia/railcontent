@@ -38,7 +38,12 @@
                 <page-container
                     brand="{{ $brand }}"
                     :is-live="true"
-                    :has-notifications="true"
+                    @if(isset($forceHideSidebar))
+                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+                    @endif
+                    @if(!empty( $hasUnreadNotifications ))
+                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                    @endif
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
                     account-url="{{ user()->getDashboardUrl() }}"

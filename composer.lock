@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0248f5a0b94b3fc45fd6a7892bdf6ed",
+    "content-hash": "f6af3dfde36b312597194a88138e6157",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.228.3",
+            "version": "3.228.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4dad57c95c7ff1dfcea29a7877ce64720b3318c3"
+                "reference": "c8ab968e44b3371b1ed055b61f947dcd1f3a6aab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4dad57c95c7ff1dfcea29a7877ce64720b3318c3",
-                "reference": "4dad57c95c7ff1dfcea29a7877ce64720b3318c3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c8ab968e44b3371b1ed055b61f947dcd1f3a6aab",
+                "reference": "c8ab968e44b3371b1ed055b61f947dcd1f3a6aab",
                 "shasum": ""
             },
             "require": {
@@ -261,9 +261,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.228.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.228.4"
             },
-            "time": "2022-06-24T20:24:09+00:00"
+            "time": "2022-06-27T18:13:31+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3488,16 +3488,16 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
-            "version": "v0.6.2",
+            "version": "v0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "75859fb1586c3d37ed8705500b5f43e87eee3cb2"
+                "reference": "540b953ec383364264f9bd633849db16560a4461"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/75859fb1586c3d37ed8705500b5f43e87eee3cb2",
-                "reference": "75859fb1586c3d37ed8705500b5f43e87eee3cb2",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/540b953ec383364264f9bd633849db16560a4461",
+                "reference": "540b953ec383364264f9bd633849db16560a4461",
                 "shasum": ""
             },
             "require": {
@@ -3545,7 +3545,7 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.2"
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.3"
             },
             "funding": [
                 {
@@ -3553,33 +3553,53 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-25T02:00:06+00:00"
+            "time": "2022-06-27T23:21:15+00:00"
         },
         {
-            "name": "intervention/gif",
-            "version": "3.0.0-alpha.3",
+            "name": "intervention/image",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Intervention/gif.git",
-                "reference": "7d893db9f7444fbb82ba3bc75807ab0cea28750f"
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/gif/zipball/7d893db9f7444fbb82ba3bc75807ab0cea28750f",
-                "reference": "7d893db9f7444fbb82ba3bc75807ab0cea28750f",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/04be355f8d6734c826045d02a1079ad658322dad",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0"
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
+                "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1",
-                "phpunit/phpunit": "^9.0"
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Intervention\\Gif\\": "src"
+                    "Intervention\\Image\\": "src/Intervention/Image"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3593,61 +3613,7 @@
                     "homepage": "https://intervention.io/"
                 }
             ],
-            "description": "Native PHP GIF Encoder/Decoder",
-            "homepage": "https://github.com/intervention/gif",
-            "keywords": [
-                "animation",
-                "gd",
-                "gif",
-                "image"
-            ],
-            "support": {
-                "issues": "https://github.com/Intervention/gif/issues",
-                "source": "https://github.com/Intervention/gif/tree/3.0.0-alpha.3"
-            },
-            "time": "2022-06-21T08:11:36+00:00"
-        },
-        {
-            "name": "intervention/image",
-            "version": "3.0.0-alpha.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Intervention/image.git",
-                "reference": "87267764b9d3f067419316fc06cf0f2e30bfcb6f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/87267764b9d3f067419316fc06cf0f2e30bfcb6f",
-                "reference": "87267764b9d3f067419316fc06cf0f2e30bfcb6f",
-                "shasum": ""
-            },
-            "require": {
-                "intervention/gif": "^3.0",
-                "intervention/mimesniffer": "^0.4.2",
-                "php": "^8"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.4",
-                "phpunit/phpunit": "^9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Intervention\\Image\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oliver Vogel",
-                    "email": "oliver@olivervogel.com",
-                    "homepage": "http://intervention.io/"
-                }
-            ],
-            "description": "PHP image manipulation",
+            "description": "Image handling and manipulation library with support for Laravel integration",
             "homepage": "http://image.intervention.io/",
             "keywords": [
                 "gd",
@@ -3659,11 +3625,11 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/3.0.0-alpha.3"
+                "source": "https://github.com/Intervention/image/tree/2.7.2"
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.me/interventionphp",
+                    "url": "https://paypal.me/interventionio",
                     "type": "custom"
                 },
                 {
@@ -3671,59 +3637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-02T09:25:40+00:00"
-        },
-        {
-            "name": "intervention/mimesniffer",
-            "version": "0.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Intervention/mimesniffer.git",
-                "reference": "50f6086af5fa3302ad362864bc5daef15ed702e8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/mimesniffer/zipball/50f6086af5fa3302ad362864bc5daef15ed702e8",
-                "reference": "50f6086af5fa3302ad362864bc5daef15ed702e8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^0.12.11",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Intervention\\MimeSniffer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oliver Vogel",
-                    "email": "oliver@olivervogel.com",
-                    "homepage": "https://olivervogel.com/"
-                }
-            ],
-            "description": "PHP MIME Type Sniffer",
-            "homepage": "http://intervention.io/",
-            "keywords": [
-                "detector",
-                "mime",
-                "sniffer",
-                "type"
-            ],
-            "support": {
-                "issues": "https://github.com/Intervention/mimesniffer/issues",
-                "source": "https://github.com/Intervention/mimesniffer/tree/0.4.2"
-            },
-            "time": "2020-12-29T09:20:18+00:00"
+            "time": "2022-05-21T17:30:32+00:00"
         },
         {
             "name": "jms/metadata",
@@ -3914,16 +3828,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "6.5.0",
+            "version": "6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "2ed045c97dbe7e3af5852ff3b8a299d164b6488b"
+                "reference": "960f897d3a24da48b286a84b87b39b2b4734fd29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/2ed045c97dbe7e3af5852ff3b8a299d164b6488b",
-                "reference": "2ed045c97dbe7e3af5852ff3b8a299d164b6488b",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/960f897d3a24da48b286a84b87b39b2b4734fd29",
+                "reference": "960f897d3a24da48b286a84b87b39b2b4734fd29",
                 "shasum": ""
             },
             "require": {
@@ -4005,7 +3919,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-21T22:48:22+00:00"
+            "time": "2022-06-27T17:54:11+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -7645,16 +7559,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "7c2b564ba38fe292ac784db032ac31c419af444d"
+                "reference": "1c13d3fec8f6d7d7fac8f2a28405b41f09ffc0d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/7c2b564ba38fe292ac784db032ac31c419af444d",
-                "reference": "7c2b564ba38fe292ac784db032ac31c419af444d",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1c13d3fec8f6d7d7fac8f2a28405b41f09ffc0d0",
+                "reference": "1c13d3fec8f6d7d7fac8f2a28405b41f09ffc0d0",
                 "shasum": ""
             },
             "require": {
-                "intervention/image": "^3.0",
+                "intervention/image": "^2.0",
                 "laravel/framework": "^9.0",
                 "php": "^8.1",
                 "railroad/ecommerce": "^5.0",
@@ -7682,7 +7596,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-06-27T12:55:47+00:00"
+            "time": "2022-06-27T17:43:59+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -13523,16 +13437,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v6.2.0",
+            "version": "v6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "c379636dc50e829edb3a8bcb944a01aa1aed8f25"
+                "reference": "5f058f7e39278b701e455b3c82ec5298cf001d89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/c379636dc50e829edb3a8bcb944a01aa1aed8f25",
-                "reference": "c379636dc50e829edb3a8bcb944a01aa1aed8f25",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/5f058f7e39278b701e455b3c82ec5298cf001d89",
+                "reference": "5f058f7e39278b701e455b3c82ec5298cf001d89",
                 "shasum": ""
             },
             "require": {
@@ -13544,6 +13458,7 @@
             "require-dev": {
                 "brianium/paratest": "^6.4.1",
                 "laravel/framework": "^9.7",
+                "laravel/pint": "^0.2.1",
                 "nunomaduro/larastan": "^1.0.2",
                 "nunomaduro/mock-final-classes": "^1.1.0",
                 "orchestra/testbench": "^7.3.0",
@@ -13606,7 +13521,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-04-05T15:31:38+00:00"
+            "time": "2022-06-27T16:11:16+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -15769,8 +15684,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/event-data-synchronizer": 20,
-        "railroad/railcontent": 20,
         "railroad/musora-api": 20,
+        "railroad/railcontent": 20,
         "railroad/railforums": 20,
         "railroad/railnotifications": 20
     },

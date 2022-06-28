@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.layout', ['forceHideSidebar' => true])
 
 @section('meta')
     <title>{{ $lessonContent->fetch('fields.title') }} | {{ $brand }} | Musora</title>
@@ -11,23 +11,19 @@
 
 
 @section('content')
-
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
     {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
     {{-- TODO: RT integration --}}
 
-    <div class="tw-flex tw-w-full tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col xl:tw-flex-row">
+    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col xl:tw-flex-row">
 
         <div class="tw-flex tw-flex-col tw-w-full">
             
-            <div class="fluid tw-pb-3">
+            <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
 
                 <div class="p-lg-only lean">
-                    @php
-                    //dd($lessonContent['video_playback_endpoints'])
-                    @endphp
                     {{-- Video Player --}}
                     @if ($lessonType == 'song')
                         <youtube-player

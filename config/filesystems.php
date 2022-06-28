@@ -42,15 +42,19 @@ return [
             'visibility' => 'public',
         ],
 
-        's3' => [
+        'musora_web_platform_s3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => env('MWP_AWS_S3_ACCESS_KEY_ID'),
+            'secret' => env('MWP_AWS_S3_SECRET_ACCESS_KEY'),
+            'region' => env('MWP_AWS_S3_DEFAULT_REGION'),
+            'bucket' => env('MWP_AWS_S3_BUCKET'),
+            'url' => null, // not needed
+            'endpoint' => null,// not needed
+            'use_path_style_endpoint' => env('MWP_AWS_S3_USE_PATH_STYLE_ENDPOINT', false),
+            'visibility' => 'public',
+
+            // used to access files in the bucket, should always end with /
+            'cloudfront_access_url' => env('MWP_AWS_S3_CLOUDFRONT_ACCESS_URL'),
         ],
 
     ],

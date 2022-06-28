@@ -8,22 +8,17 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
-        {{-- v-cloak: Wait Until Page Container has loaded --}}
-        <div v-cloak>
+        {{-- On Boarding --}}
+        {{-- <onboarding></onboarding> --}}
 
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        {{-- On Boarding TriggerBanner --}}
+        <trigger-banner :v-if="true"></trigger-banner>
 
-                {{-- On Boarding --}}
-                {{-- <onboarding></onboarding> --}}
-
-                {{-- On Boarding TriggerBanner --}}
-                <trigger-banner :v-if="true"></trigger-banner>
-
-                {{-- Carousel --}}
-                <header-carousel
-                    :preloaded-carousel="[]"
-                    brand="{{ $brand }}">
-                </header-carousel>
+        {{-- Carousel --}}
+        <header-carousel
+            :preloaded-carousel="[]"
+            brand="{{ $brand }}">
+        </header-carousel>
 
         {{-- Invite Email Message --}}
         @if(session()->has('email-invite-message'))
