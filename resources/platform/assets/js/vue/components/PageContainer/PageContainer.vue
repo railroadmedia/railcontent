@@ -23,6 +23,9 @@ const props = defineProps({
   userName: {
     type: String
   },
+  userId: {
+    type: String
+  },
   userAvatar: {
     type: String
   },
@@ -41,7 +44,11 @@ const props = defineProps({
 const isSidebarCollapsed = ref(false);
 const isSidebarHidden = ref(false);
 const isDarkModeSelected = ref(false);
+
 provide('isDarkModeSelected', isDarkModeSelected);
+provide('userAvatar', props.userAvatar)
+provide('userName', props.userName)
+provide('userId', props.userId)
 // const route = useRoute();
 // const router = useRouter();
 
@@ -139,7 +146,7 @@ onUnmounted(() => {
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
 
-    <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications" :user-name="userName" :user-avatar="userAvatar"
+    <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications" :user-name="userName" :userAvatar="userAvatar"
       :account-url="accountUrl" :isSidebarHidden="isSidebarHidden" :isDarkModeSelected="isDarkModeSelected"
       :isSidebarCollapsed="isSidebarCollapsed" @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle" />

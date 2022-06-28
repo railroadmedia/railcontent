@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -14,6 +14,11 @@ const props = defineProps({
         type: String,
     }
 })
+
+const userId = inject('userId');
+const userName = inject('userName');
+const userAvatar = inject('userAvatar');
+
 const initialSteps = [
     { label: 'ABOUT', checked: false },
     { label: 'INSTRUMENT', checked: false },
@@ -33,8 +38,9 @@ const instrumentBrand = {
 }
 const initialInfo = {
     user: {
-        name: '',
-        avatarUrl: ''
+        id: userId,
+        name: userName || null,
+        avatarUrl: userAvatar || null
     },
     instrument: 'default',
     instrumentTypes: {}

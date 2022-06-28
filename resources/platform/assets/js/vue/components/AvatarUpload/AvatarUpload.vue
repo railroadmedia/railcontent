@@ -26,6 +26,14 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  userName : {
+    type: String,
+    default: null
+  },
+  userId: {
+    type: String,
+    default: null
+  }
 });
 
 const imgUrlRef = ref(props.imgUrl);
@@ -71,6 +79,7 @@ function handleUploadDone(imgUrl) {
       <ImageUploadProgress
         v-if="uploadStep === 'upload'"
         :image="croppedImage"
+        :userId="userId"
         @onUploadDone="handleUploadDone"
       />
     </InfoModal>
