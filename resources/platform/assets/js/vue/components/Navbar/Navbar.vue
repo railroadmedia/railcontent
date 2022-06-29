@@ -118,7 +118,7 @@ const toggleSearchModal = (val) => {
 
       <UserIcon
         :brand="brand"
-        :user-avatar="userAvatar"
+        :userAvatar="userAvatar"
         :user-name="userName"
         :account-url="accountUrl"
         :has-notifications="hasNotifications"

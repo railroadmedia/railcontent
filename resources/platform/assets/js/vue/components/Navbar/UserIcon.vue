@@ -71,7 +71,7 @@ export default {
     <!-- User Image -->
     <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover"
           style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?blur=2&fit=crop&h=50&ixlib=php-1.2.1&q=50&w=50&s=0a284a726ec34f3bca2bb253a0dfc869)">
-      <img v-if="userAvatar.lenth" :src="userAvatar" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
+      <img v-if="userAvatar.length" :src="userAvatar" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
 
       <!-- Notification Indicator -->
       <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">

@@ -326,6 +326,7 @@ export default {
 
         cropImage() {
             const canvasOutput = this.cropperInstance.getCroppedCanvas(this.imageDimensions);
+            console.log('typeof canvasoutput',typeof canvasOutput)
 
             canvasOutput.toBlob((blob) => {
                 this.imageBlob = blob;
@@ -337,6 +338,8 @@ export default {
         uploadImage() {
             const formData = new FormData();
             const newFileName = `${this.userId}_${Date.now()}.png`;
+
+            console.log('typeof imageblob', typeof this.imageBlob)
 
             formData.append('file', this.imageBlob, newFileName);
             formData.append('target', newFileName);

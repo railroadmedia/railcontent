@@ -3,7 +3,7 @@
         style="background-image:url({{ $backgroundImage }});"
 >
     <div class="header-gradient-overlay absolute-fill {{ $themeColor }}"></div>
-    <div class="tw-container tw-mx-auto tw-px-4 tw-relative">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-relative">
         <div class="flex flex-row">
             @if(!empty($avatarImage))
                 <div class="header-avatar flex flex-column hide-xs-only">

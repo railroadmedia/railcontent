@@ -46,6 +46,7 @@
                     @endif
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
+                    user-id="{{ user()->id }}"
                     account-url="{{ user()->getDashboardUrl() }}"
                     {{-- isSidebarHidden="{{ true }}" --}}
                     search-url=""

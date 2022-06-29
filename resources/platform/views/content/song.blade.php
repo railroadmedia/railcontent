@@ -117,7 +117,7 @@
                             <div class="flex flex-column">
                                 @foreach($lessonContent->fetch('*assignments', []) as $index => $assignment)
                                     <div class="flex flex-row">
-                                        <div class="flex flex-column grow bt-grey-1-1 dark:tw-border-[#223F57]">
+                                        <div class="flex flex-column grow">
                                             <content-assignment
                                                 theme-color="{{ $themeColor }}"
                                                 timecode="{{ $assignment->fetch('data.timecode', 0) }}"
