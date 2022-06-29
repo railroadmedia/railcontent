@@ -56,6 +56,7 @@ function openUploadForm() {
 
 function handleUploadDone(imgUrl) {
   imgUrlRef.value = imgUrl;
+  showUploadForm.value = false;
 }
 </script>
 
@@ -116,7 +117,7 @@ function handleUploadDone(imgUrl) {
         ></div>
       </div>
       <div class="tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]" style="text-decoration: inherit;">
-        UPLOAD PHOTO
+        {{ imgUrlRef ? 'UPDATE PROFILE PICTURE' : 'UPLOAD PHOTO' }}
       </div>
     </button>
   </div>
