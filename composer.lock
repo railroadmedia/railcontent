@@ -4998,16 +4998,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.0.21",
+            "version": "3.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "8f1fcf9d2304ff77a006aa36dd2cb5f236999b12"
+                "reference": "5b461a96d01144744077343908a2c196682c71e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8f1fcf9d2304ff77a006aa36dd2cb5f236999b12",
-                "reference": "8f1fcf9d2304ff77a006aa36dd2cb5f236999b12",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5b461a96d01144744077343908a2c196682c71e6",
+                "reference": "5b461a96d01144744077343908a2c196682c71e6",
                 "shasum": ""
             },
             "require": {
@@ -5068,7 +5068,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.0.21"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.0.23"
             },
             "funding": [
                 {
@@ -5084,20 +5084,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-12T17:54:28+00:00"
+            "time": "2022-06-29T08:19:13+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
-            "version": "3.0.21",
+            "version": "3.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-                "reference": "f4ee238279f1eb39a32539a18ef845db7251fd05"
+                "reference": "e5fc508faf83df2fbd2a215d2b4bea9584906221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/f4ee238279f1eb39a32539a18ef845db7251fd05",
-                "reference": "f4ee238279f1eb39a32539a18ef845db7251fd05",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/e5fc508faf83df2fbd2a215d2b4bea9584906221",
+                "reference": "e5fc508faf83df2fbd2a215d2b4bea9584906221",
                 "shasum": ""
             },
             "require": {
@@ -5138,9 +5138,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-aws-s3-v3/issues",
-                "source": "https://github.com/thephpleague/flysystem-aws-s3-v3/tree/3.0.21"
+                "source": "https://github.com/thephpleague/flysystem-aws-s3-v3/tree/3.0.22"
             },
-            "time": "2022-06-12T17:34:31+00:00"
+            "time": "2022-06-29T07:09:46+00:00"
         },
         {
             "name": "league/fractal",
@@ -7559,12 +7559,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "2f2a9339de2b1ff8443b08ea4afc920c3ee61039"
+                "reference": "bfddf9cf8ad012cea65b5967796dca0fddc66e3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/2f2a9339de2b1ff8443b08ea4afc920c3ee61039",
-                "reference": "2f2a9339de2b1ff8443b08ea4afc920c3ee61039",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/bfddf9cf8ad012cea65b5967796dca0fddc66e3d",
+                "reference": "bfddf9cf8ad012cea65b5967796dca0fddc66e3d",
                 "shasum": ""
             },
             "require": {
@@ -7596,7 +7596,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-06-28T16:09:14+00:00"
+            "time": "2022-06-29T09:29:28+00:00"
         },
         {
             "name": "railroad/permissions",

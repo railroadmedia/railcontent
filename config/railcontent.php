@@ -249,10 +249,13 @@ return [
             \App\Decorators\Content\PianoteFoundationsLearningPathDecorator::class,
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
-            \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
+            \App\Decorators\Content\LessonAssignmentDecorator::class,
+            // this one
             //            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
-            \App\Decorators\Content\ContentLikesDecorator::class, // this one
-            \App\Decorators\Content\ResourceDecorator::class, // this one
+            \App\Decorators\Content\ContentLikesDecorator::class,
+            // this one
+            \App\Decorators\Content\ResourceDecorator::class,
+            // this one
             \App\Decorators\Content\ContentExperienceDecorator::class,
             //            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
             \App\Decorators\Content\PackBundleLessonDecorator::class,
@@ -1248,14 +1251,15 @@ return [
     ],
     'content_hierarchy' => [
         'drumeo' => [
-        'learning-path' => 'learning-path-level',
-        'learning-path-level' => 'learning-path-course',
-        'learning-path-course' => 'learning-path-lesson',
-        'song' => 'song-part',
-        'course' => 'course-part',
-        'pack' => 'pack-bundle',
-        'pack-bundle' => 'pack-bundle-lesson',
-            ],
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-course',
+            'learning-path-course' => 'learning-path-lesson',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+            'semester-pack' => 'semester-pack-lesson',
+        ],
         'pianote' => [
             'learning-path' => 'learning-path-level',
             'learning-path-level' => 'learning-path-course',
@@ -1282,7 +1286,8 @@ return [
             'course' => 'course-part',
             'pack' => 'pack-bundle',
             'pack-bundle' => 'pack-bundle-lesson',
-        ]
+            'semester-pack' => 'semester-pack-lesson',
+        ],
     ],
     'children_name_mapping' => [
         'learning-path' => 'levels',
@@ -1291,5 +1296,6 @@ return [
         'course' => 'lessons',
         'pack' => 'bundles',
         'pack-bundle' => 'lessons',
+        'semester-packsss' => 'lessons',
     ],
 ];
