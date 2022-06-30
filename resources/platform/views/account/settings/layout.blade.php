@@ -21,12 +21,12 @@
                     {{ $user->access_level }}"
                 >
                     <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]"
-                    style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
+                        style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
                     >
                         @if($user->profile_picture_url)
                             <img class="tw-inline-block tw-rounded-full tw-h-full" 
-                                src="{{ cf_img($user->profile_picture_url, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
-                                data-ix-src="{{ $user->profile_picture_url }}"
+                                 src="{{ cf_img($user->profile_picture_url, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
+                                 data-ix-src="{{ $user->profile_picture_url }}"
                             >
                         @endif
                     </div>

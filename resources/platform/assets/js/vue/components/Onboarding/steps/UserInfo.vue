@@ -51,9 +51,9 @@ onMounted(() => {
       class="tw-h-full md:tw-h-auto tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-mt-[40px] md:tw-mt-0">
       <StepHeader title="Just a few quick questions to set up your account" subtitle="Your musical journey is personalized to you. Tell us a little bit
             about yourself so that we can get it right." :hideBackButton="true" />
-      <AvatarUpload />
-      <InputLabel :initialValue="info.user.name" labelValue="Display Name" placeholder="Enter your display name..."
-        inputOverride="tw-mb-[56px] tw-w-[90vw] md:tw-w-[471px]" @onChange="onInputChange" />
+      <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" :userId="info.user.id" />
+      <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-mb-[56px]" :initialValue="info.user.name" labelValue="Display Name" placeholder="Enter your display name..."
+        inputOverride="tw-w-[90vw] md:tw-w-[471px]" @onChange="onInputChange" :showClearButton="true" />
     </div>
     <div
       class="tw-justify-self-end md:tw-justify-self-center tw-flex tw-flex-col tw-items-center tw-pb-[20px] md:tw-pb-0">

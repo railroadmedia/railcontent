@@ -37,7 +37,7 @@
         </button>
 
         <transition name="grow-fade">
-          <add-event-dropdown v-show="subscriptionCalendarDropdown" key="subscriptionCalendar"
+          <add-event-dropdown :single-event="singleEvent" v-show="subscriptionCalendarDropdown" key="subscriptionCalendar"
             :subscription-calendar-id="subscriptionCalendarId" :is-subscription="true"></add-event-dropdown>
         </transition>
       </div>
@@ -59,7 +59,7 @@
         </button>
 
         <transition name="grow-fade">
-          <add-event-dropdown v-show="singleEventDropdown" key="singleEvent" :single-event="singleEvent">
+          <add-event-dropdown v-show="singleEventDropdown" :single-event="singleEvent">
           </add-event-dropdown>
         </transition>
       </div>
@@ -94,8 +94,11 @@ export default {
       default: () => "Musora",
     },
     singleEvent: {
-      title: null,
-      date: null,
+      type: Object,
+      default: () => ({
+        title: null,
+        date: null,
+      })
     },
     subscriptionCalendarId: {
       type: String,

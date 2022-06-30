@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-row flex-wrap align-v-center pv-2">
-        <div class="flex flex-column pv-2 xs-12">
+        <div class="flex flex-column pv-2">
             <div
-                class="flex flex-row nmh-1 flex-wrap resource-buttons"
+                class="flex flex-row nmh-1 flex-wrap"
             >
                 <div class="flex flex-column resource-button ph-1">
                     <button
@@ -11,7 +11,7 @@
                     >
                         <span
                             style="padding:0 8px; border: none; box-shadow: none;"
-                            :class="hasLiked ? themeTextClass : 'text-grey-3'"
+                            :class="hasLiked ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                         >
                             <i
                                 class="fa-thumbs-up mb-1"
@@ -28,7 +28,7 @@
                         data-open-modal="shareVideoModal"
                     >
                         <span
-                            class="text-grey-3"
+                            class="text-grey-3 dark:tw-text-white"
                             style="padding:0 8px; box-shadow: none;"
                         >
                             <i class="fas fa-share mb-1"></i>
@@ -46,7 +46,7 @@
                         @click="resourceDropdown = !resourceDropdown"
                     >
                         <span
-                            :class="resourceDropdown ? themeTextClass : 'text-grey-3'"
+                            :class="resourceDropdown ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                             style="padding:0 8px; box-shadow: none;"
                         >
                             <i class="fas fa-download mb-1"></i>
@@ -89,7 +89,7 @@
                     >
                         <span
                             style="padding:0 8px; box-shadow: none;"
-                            :class="hasAdded ? themeTextClass : 'text-grey-3'"
+                            :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                         >
                             <i
                                 class="fas mb-1"
@@ -137,7 +137,7 @@
                     </button>
                 </div>
 
-                <p class="tiny font-italic text-grey-3">
+                <p class="tiny font-italic text-grey-3 dark:tw-text-white">
                     This link is only accessible by {{ toCapitalCase(brand) }} Members.
                 </p>
             </div>

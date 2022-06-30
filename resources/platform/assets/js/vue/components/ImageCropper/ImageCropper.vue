@@ -12,7 +12,7 @@ import Stencil from "./Stencil.vue";
 
 const props = defineProps({
   selectedImage: {
-    type: String,
+    type: Blob,
     default: null,
   },
 });
