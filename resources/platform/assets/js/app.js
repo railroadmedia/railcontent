@@ -66,6 +66,9 @@ window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
 };
 
+// laravel vapor library for file uploading to S3 directly
+window.Vapor = require('laravel-vapor');
+
 // This three variables come from Drumeo implementation, are tightly related to play functionality.
 let progressTracker;
 let playAlongsProgressTracker;
@@ -78,25 +81,20 @@ const app = createApp({
     },
     methods: {
         avatarUploaded(payload){
-            UserService.setUserAttributes(currentUserId, {
-                'profile_picture_url': payload.image_url
-            })
-                .then(response => {
-                    const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
-                    window.closeAllModals();
-                    Array.from(avatarPhotos).forEach(photo => {
-                        photo.setAttribute(
-                            'src', payload.image_url
-                        );
-                    });
-                    payload.cropper.resetCropper();
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'AHH, MUCH BETTER!',
-                        themeColor: 'singeo',
-                        message: 'The new "you" is being refreshed...'
-                    });
-                });
+            const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
+            window.closeAllModals();
+            Array.from(avatarPhotos).forEach(photo => {
+                photo.setAttribute(
+                    'src', payload.image_url
+                );
+            });
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'AHH, MUCH BETTER!',
+                themeColor: 'singeo',
+                message: 'The new "you" is being refreshed...'
+            });
         },
 
         gearPhotoUploaded(payload){

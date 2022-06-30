@@ -4,9 +4,23 @@ namespace App\ViewComposers;
 
 use App\Services\NavigationService;
 use Illuminate\View\View;
+use Railroad\Railnotifications\Services\NotificationService;
 
 class NavigationViewComposer
 {
+    /**
+     * @var NotificationService
+     */
+    private $notificationService;
+
+    /**
+     * SidebarComposer constructor.
+     */
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
     /**
      * Check the users permission levels and render a different nav for different levels
      *
@@ -15,9 +29,12 @@ class NavigationViewComposer
      */
     public function compose(View $view)
     {
+        $unread = $this->notificationService->getUnreadCount(user()->id, brand());
+
         $view->with([
             'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
             'userNavigationDropdownLinksJson' => NavigationService::getUserDropDownLinksJson(),
+            "hasUnreadNotifications" => $unread > 0,
         ]);
     }
 }

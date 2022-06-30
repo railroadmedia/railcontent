@@ -11,7 +11,6 @@
             brand="{{ $brand }}"
             theme-color="{{ $brand }}"
             :notifications="{{ $notifications }}"
-            notifications-endpoint=""
             settings-url="{{ url()->route('platform.profile.settings.notifications', ['userId' => user()->id]) }}"
             notification-count="{{ $notificationCount }}"
             :has-unread-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"

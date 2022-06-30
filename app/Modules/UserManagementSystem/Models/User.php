@@ -281,7 +281,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
                 }
 
                 if ($usingCDN) {
-                    $imageUrl = cf_img($imageUrl, ["quality" => 75, "width" => 50, "height" => 50]);
+                    $imageUrl = cf_img($imageUrl, ["quality" => 75, "width" => 250, "height" => 250]);
                 }
 
                 return $imageUrl;

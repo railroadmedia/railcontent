@@ -184,3 +184,28 @@ $.ajax({
 ```
 
 
+
+## Upload and update profile picture URL
+
+
+### HTTP Request
+    `PUT user_management_system/profile-picture/upload`
+
+
+### Permissions
+    - Must be logged in
+
+### Request Parameters
+
+
+|Type|Key|Required| Notes         |
+|----|---|--------|---------------|
+|body|file|    | Max 5MB size. |
+
+
+### Request Example:
+
+See: [https://github.com/railroadmedia/musora-web-platform/blob/master/resources/platform/assets/js/vue/vuesora/components/ImageCropper/ImageCropper.vue#L337](https://github.com/railroadmedia/musora-web-platform/blob/master/resources/platform/assets/js/vue/vuesora/components/ImageCropper/ImageCropper.vue#L337)
+
+### Return:
+Returns entire user JSON object. Can get new profile pic URL with: response.profile_picture_url.

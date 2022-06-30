@@ -1,4 +1,7 @@
-<header id="pageHeader" class="container fluid pv-4" style="background-image:url({{ $backgroundImage }});">
+<header id="pageHeader" 
+        class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black" 
+        style="background-image:url({{ $backgroundImage }});"
+>
     <div class="container">
         <div class="flex flex-row align-v-center">
             <div class="flex flex-column grow">
