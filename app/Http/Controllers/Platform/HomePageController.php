@@ -173,7 +173,9 @@ class HomePageController extends BaseController
         $hasCompletedMethod = $methodContent['completed'];
 
         $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
-        $showNextLearningPathLesson = !empty($methodContent['next_lesson']);
+        $showNextLearningPathLesson = !$hasCompletedMethod;
+
+        $nextLearningPathLesson = $this->contentService->getNextContentForParentContentForUser($methodContent['id'], user()->id);
 
         $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
         $nextLearningPathLevel = $methodContent['level_rank'] ?? '1.1';
@@ -248,7 +250,7 @@ class HomePageController extends BaseController
             'coachOfTheMonth' => $coachOfTheMonth->first(),
             'hasCompletedMethod' => $hasCompletedMethod,
             'hasStartedMethod' => $hasStartedMethod,
-            'methodUrl' => $methodContent['url'] ?? '',
+            'methodUrl' => url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
         ]);
     }
