@@ -253,6 +253,12 @@ class HomePageController extends BaseController
         ]);
     }
 
+
+    public function onboarding(Request $request)
+    {
+        return view('home.onboarding');
+    }
+
     /**
      * @return PackCollection
      */
