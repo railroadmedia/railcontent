@@ -29,7 +29,7 @@ class NavigationViewComposer
      */
     public function compose(View $view)
     {
-        $unread = $this->notificationService->getUnreadCount(user()->id, brand());
+        $unread = (user())?$this->notificationService->getUnreadCount(user()->id, brand()):0;
 
         $view->with([
             'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
