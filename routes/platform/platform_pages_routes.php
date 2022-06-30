@@ -5,14 +5,14 @@ use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
+use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\PackPagesController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
-use App\Http\Controllers\Platform\UserListPagesController;
-use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\SupportController;
+use App\Http\Controllers\Platform\UserListPagesController;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -193,12 +193,16 @@ Route::domain('{musoraDomain}')
             ->name('platform.content.fourth-level');
 
         Route::get(
-            '/{brand}/jump-to-content-id/{contentId}',
+            '/jump-to-content-id/{contentId}',
             [ContentPagesController::class, 'jumpToContentId']
         )
-            ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method'])
             ->name('platform.content.jump-to-content-id');
+
+        Route::get(
+            '/jump-to-continue-content/{contentId}',
+            [ContentPagesController::class, 'jumpToContinueContent']
+        )
+            ->name('platform.content.jump-to-continue-content');
 
         /*
          * Live & Schedule
@@ -346,5 +350,4 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
-
     });
