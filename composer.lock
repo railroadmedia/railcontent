@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.229.0",
+            "version": "3.229.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d"
+                "reference": "5cffc0b16d1f33029628586313e9cf140f18b06d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5e01f0809682060dc5018bf5f267f40c32f4944d",
-                "reference": "5e01f0809682060dc5018bf5f267f40c32f4944d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5cffc0b16d1f33029628586313e9cf140f18b06d",
+                "reference": "5cffc0b16d1f33029628586313e9cf140f18b06d",
                 "shasum": ""
             },
             "require": {
@@ -261,9 +261,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.1"
             },
-            "time": "2022-06-29T18:15:30+00:00"
+            "time": "2022-06-30T18:16:30+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7701,12 +7701,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "e9fe635546bc2ae557b4a8f695ffbee28dc8c9d3"
+                "reference": "28e497ea816ba7cec84333db7a3ee1626643ebae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/e9fe635546bc2ae557b4a8f695ffbee28dc8c9d3",
-                "reference": "e9fe635546bc2ae557b4a8f695ffbee28dc8c9d3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/28e497ea816ba7cec84333db7a3ee1626643ebae",
+                "reference": "28e497ea816ba7cec84333db7a3ee1626643ebae",
                 "shasum": ""
             },
             "require": {
@@ -7762,7 +7762,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-06-27T12:54:25+00:00"
+            "time": "2022-06-30T20:56:14+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -12569,16 +12569,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.6.7",
+            "version": "v3.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "b96f9820aaf1ff9afe945207883149e1c7afb298"
+                "reference": "814b36a08a60f4159cdcbb1c466a6a0027440b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/b96f9820aaf1ff9afe945207883149e1c7afb298",
-                "reference": "b96f9820aaf1ff9afe945207883149e1c7afb298",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/814b36a08a60f4159cdcbb1c466a6a0027440b6c",
+                "reference": "814b36a08a60f4159cdcbb1c466a6a0027440b6c",
                 "shasum": ""
             },
             "require": {
@@ -12638,7 +12638,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.6.7"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.6.8"
             },
             "funding": [
                 {
@@ -12650,7 +12650,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-09T07:52:32+00:00"
+            "time": "2022-06-08T15:03:05+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",

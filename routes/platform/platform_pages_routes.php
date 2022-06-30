@@ -147,15 +147,22 @@ Route::domain('{musoraDomain}')
          * Packs Sub-Content Hierarchy Pages
          */
         Route::get('/{brand}/packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
-            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->whereIn('brand', all_brands())
             ->name('platform.packs.first-level');
 
         Route::get(
             '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
             [PackPagesController::class, 'packBundleLessons']
         )
-            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->whereIn('brand', all_brands())
             ->name('platform.packs.second-level');
+
+        Route::get(
+            '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}/{packBundleLessonSlug}/{packBundleLessonId}',
+            [PackPagesController::class, 'packBundleLesson']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.packs.third-level');
 
         /*
          * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
