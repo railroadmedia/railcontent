@@ -16,19 +16,19 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  configOptions: {
+    type: Object,
+  }
 });
+
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
-const options = [
-  { value: "a", text: "Hipopotamo" },
-  { value: "b", text: "Rinoceronte" },
-  { value: "c", text: "Cachicamo" },
-  { value: "aa", text: "Hipopotamo" },
-  { value: "bb", text: "Perro" },
-  { value: "cc", text: "Cachicamo" },
-  { value: "aas", text: "Gato" },
-  { value: "bbs", text: "Rinoceronte" },
-  { value: "ccs", text: "Ave" },
-];
+
+const options = ref(
+  props.configOptions[props.brand].gears.map(
+    gear => ({ text: gear, value: gear })
+  )
+);
+
 function handleMultiSelection(selection) {
   emit(
     "onCheckStep",

@@ -17,13 +17,18 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  configOptions: {
+    type: Object,
+  }
 });
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
-const options = [
-  { value: "g", text: "G" },
-  { value: "h", text: "H" },
-  { value: "i", text: "I" },
-];
+
+const options = ref(
+  props.configOptions[props.brand].topics.map(
+    topic => ({ text: topic, value: topic })
+  )
+);
+
 function handleMultiSelection(selection) {
   emit(
     "onCheckStep",

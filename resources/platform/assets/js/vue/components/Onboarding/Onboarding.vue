@@ -12,6 +12,9 @@ import Coaches from './steps/Coaches.vue'
 const props = defineProps({
     brand: {
         type: String,
+    },
+    configOptions: {
+        type: Object,
     }
 })
 
@@ -74,6 +77,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <InstrumentSelect
             :brand="instrumentBrand[info.instrument]"
@@ -83,6 +87,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <InstrumentType
             :brand="instrumentBrand[info.instrument]"
@@ -92,6 +97,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Experience
             :brand="instrumentBrand[info.instrument]"
@@ -101,6 +107,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Genre
             :brand="instrumentBrand[info.instrument]"
@@ -110,6 +117,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Topics
             :brand="instrumentBrand[info.instrument]"
@@ -119,6 +127,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Coaches
             :brand="instrumentBrand[info.instrument]"
@@ -128,6 +137,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
     </ModalRenderer>
 </template>
