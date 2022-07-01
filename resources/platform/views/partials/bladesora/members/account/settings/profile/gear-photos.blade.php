@@ -10,7 +10,7 @@
         'brand' => '{{ $brand }}',
         'method' => 'post',
         'gearPhotoUrl' => user()->drums_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/gear-picture/upload',
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
         'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->drums_gear_photo)
@@ -21,7 +21,7 @@
         'brand' => '{{ $brand }}',
         'method' => 'post',
         'gearPhotoUrl' => user()->piano_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/gear-picture/upload',
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
         'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->piano_gear_photo)
@@ -32,7 +32,7 @@
         'brand' => '{{ $brand }}',
         'method' => 'post',
         'gearPhotoUrl' => user()->guitar_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/gear-picture/upload',
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
         'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->guitar_gear_photo)
@@ -43,7 +43,7 @@
         'brand' => '{{ $brand }}',
         'method' => 'post',
         'gearPhotoUrl' => user()->singing_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/gear-picture/upload',
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
         'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->singing_gear_photo)

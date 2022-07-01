@@ -50,6 +50,7 @@
                     upload-endpoint="{{ $uploadRequestEndpoint }}"
                     save-endpoint="{{ $fieldSaveRequestEndpoint }}"
                     user-id="{{ $userId }}"
+                    field-key="profile_picture_url"
                     @image-uploaded="avatarUploaded"
                 />
 
