@@ -37,7 +37,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $brand)
+    public function getCurrentUserMembershipData(?string $brand = null)
     : array {
         // TODO: Implement getCurrentUserMembershipData() method.
         return [
@@ -53,13 +53,26 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function getCurrentUserProfileData()
     : array
     {
-        // TODO: Implement getCurrentUserProfileData() method.
+        $user = user();
+        return [
+            'id' => $user->id,
+            'email' => $user->email,
+            'permission_level' => $user->permission_level,
+            'display_name' => $user->display_name,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'avatarUrl' => $user->profile_picture_url,
+            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id')
+        ];
     }
 
     public function getCurrentUserExperienceData()
     : array
     {
-        // TODO: Implement getCurrentUserExperienceData() method.
+        return [
+            'totalXp' => user()->totalXp(),
+            'xpRank' => user()->getXpRank(),
+        ];
     }
 
     public function setCurrentUserProfilePictureUrl(string $profilePictureUrl)
