@@ -4,12 +4,12 @@
     <div class="tw-flex tw-flex-row">
         <div class="tw-flex tw-flex-col tw-grow">
             <div class="tw-flex tw-flex-row dark:tw-text-white">
-                
+
                 {{-- Form Content --}}
                 <div class="flex flex-column">
                     <div class="flex flex-row flex-wrap align-center">
                         <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition"
-                                data-open-modal="guitarGearPhotoModal" 
+                                data-open-modal="guitarGearPhotoModal"
                                 dusk="guitarGearPhotoModal"
                         >
                             @if(empty($gearPhotoUrl))
@@ -20,13 +20,13 @@
                                 </svg>
                                 <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> guitar gear</p>
                             @endif
-        
+
                             @if(!empty($gearPhotoUrl))
                                 <img src="{{ !empty($gearPhotoUrl) ? $gearPhotoUrl : 'https://dmmior4id2ysr.cloudfront.net/assets/images/default-gear-photo.jpg' }}"
-                                    data-gear-update="true"    
+                                    data-guitareo-gear-update="true"
                                 >
                             @endif
-        
+
                             @if($canClear)
                                 <span id="clearGearPhoto" class="rounded clear-button">
                                     <i class="fas fa-times"></i>
@@ -53,7 +53,9 @@
                 :aspect-ratio="1.78"
                 upload-endpoint="{{ $uploadRequestEndpoint }}"
                 user-id="{{ $userId }}"
-                @image-uploaded="gearPhotoUploaded"></image-cropper>
+                send-method="post"
+                field-key="guitar_gear_photo"
+                @image-uploaded="gearGuitareoPhotoUploaded"></image-cropper>
         </div>
     </div>
 

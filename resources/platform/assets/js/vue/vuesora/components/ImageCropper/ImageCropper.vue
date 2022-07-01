@@ -180,11 +180,6 @@ export default {
             default: 'profile_picture_image_url',
         },
 
-        fieldKey: {
-            type: String,
-            default: 'profile_picture_image_url',
-        },
-
         sendMethod: {
             type: String,
             default: 'POST',
@@ -344,13 +339,26 @@ export default {
             formData.append('file', this.imageBlob, newFileName);
             formData.append('target', newFileName);
             formData.append('_method', this.sendMethod);
+            formData.append('fieldKey', this.fieldKey);
 
             this.loading = true;
 
             UserService.remoteResourceUpload(this.uploadEndpoint, formData)
                 .then((resolved) => {
                     if (resolved) {
-                        const remoteStorageUrl = resolved.profile_picture_url;
+
+                        let remoteStorageUrl = null;
+                        if (this.fieldKey == 'profile_picture_image_url'){
+                            remoteStorageUrl = resolved.profile_picture_url
+                        } else if (this.fieldKey == 'drums_gear_photo') {
+                            remoteStorageUrl = resolved.drums_gear_photo
+                        } else if (this.fieldKey == 'piano_gear_photo') {
+                            remoteStorageUrl = resolved.piano_gear_photo
+                        } else if (this.fieldKey == 'guitar_gear_photo') {
+                            remoteStorageUrl = resolved.guitar_gear_photo
+                        } else if (this.fieldKey == 'singing_gear_photo') {
+                            remoteStorageUrl = resolved.singing_gear_photo
+                        }
 
                         this.$emit('image-uploaded', {
                             image_url: remoteStorageUrl,

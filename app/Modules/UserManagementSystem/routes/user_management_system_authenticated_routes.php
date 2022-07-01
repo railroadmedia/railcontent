@@ -65,7 +65,7 @@ Route::group(
             'profile-picture/upload',
             [
                 'as' => 'user_management_system.profile-picture.upload',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@upload',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadProfilePhoto',
             ]
         );
 
@@ -74,7 +74,17 @@ Route::group(
             'profile-picture/upload-from-s3-front-end',
             [
                 'as' => 'user_management_system.profile-picture.upload-from-s3-front-end',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@uploadFromS3FrontEnd',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadProfilePhotoFromS3FrontEnd',
+            ]
+        );
+
+
+        Route::match(
+            ['post', 'put'],
+            'gear-picture/upload',
+            [
+                'as' => 'user_management_system.gear-picture.upload',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadGearPhoto',
             ]
         );
     }

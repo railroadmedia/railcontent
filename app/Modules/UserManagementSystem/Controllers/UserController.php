@@ -127,6 +127,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $isJson = request()->expectsJson();
         if (auth()->user()->id != $id) {
             $this->authorize('update-users');
@@ -181,16 +182,11 @@ class UserController extends Controller
 
         $user = User::find($id);
         if ($user) {
-//die("plm1");
             $user->delete();
             event(new UserDeleted($user));
 
         } else {
-//die("plm2");
-
-//            throw new NotFoundHttpException();
             return response('', 404);
-//            return redirect()->back(404);
         }
 
         if (!$isJson) {

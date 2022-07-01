@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function(){
     const membershipForm = document.getElementById('membershipMain');
     const openUnsubscribeForm = document.getElementById('openUnsubscribeForm');
     const cancelUnsubscribeForm = document.getElementById('cancelUnsubscribeForm');
-    const userIdInput = document.getElementById('currentUserId');
-    const userId = userIdInput ? userIdInput.value : null;
+    const userInfo = document.getElementById('userInfo');
+    let userId = userInfo ? userInfo.dataset['userId'] : null;
 
     if(clearAvatar){
         clearAvatar.addEventListener('click', () => {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     text: '<span class="bg-drumeo text-white short">YES</span>',
                     callback: () => {
 
-                        let url = '/usora/json-api/user/update/' + userId;
+                        let url = '/user-management-system/user/update/' + userId;
 
                         axios.patch(url, {
                             data: {
@@ -74,10 +74,11 @@ document.addEventListener('DOMContentLoaded', function(){
                     text: '<span class="bg-drumeo text-white short">YES</span>',
                     callback: () => {
 
-                        let url = '/usora/json-api/user/update/' + userId;
+                        let url = '/user-management-system/user/update/' + userId;
 
                         axios.patch(url, {
                             data: {
+                                //todo: update also for pianote/guitareo/singeo
                                 attributes: {
                                     'drums_gear_photo': null
                                 }
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function(){
         Tiny MCE's recomendation for limiting characters
     */
     function getStats(id) {
-        var body = tinymce.get(id).getBody(), 
+        var body = tinymce.get(id).getBody(),
         text = tinymce.trim(body.innerText || body.textContent);
 
         return {
