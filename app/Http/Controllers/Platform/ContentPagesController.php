@@ -10,6 +10,7 @@ use App\Maps\ContentTypeHierarchyMap;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use App\Providers\RailcontentURLProvider;
 use App\Services\User\UserAccessService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -28,19 +29,22 @@ class ContentPagesController extends BaseController
     private ContentService $contentService;
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
+    private RailcontentURLProvider $railcontentURLProvider;
 
     /**
-     * @param  ContentService  $contentService
-     * @param  VimeoVideoSourcesDecorator  $vimeoVideoSourcesDecorator
+     * @param ContentService $contentService
+     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      */
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
-        LessonAssignmentDecorator $lessonAssignmentDecorator
+        LessonAssignmentDecorator $lessonAssignmentDecorator,
+        RailcontentURLProvider $railcontentURLProvider
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
+        $this->railcontentURLProvider = $railcontentURLProvider;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -168,6 +172,11 @@ class ContentPagesController extends BaseController
 
         $firstLevelContent = $this->contentService->getById($firstId);
 
+        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+            $firstLevelContent['id'],
+            auth()->id()
+        );
+
         if (empty($firstLevelContent)) {
             throw new NotFoundHttpException();
         }
@@ -200,12 +209,8 @@ class ContentPagesController extends BaseController
             "xp" => $firstLevelContent->fetch('xp', 0),
         ];
 
-        $nextLessonUrl =
-            !empty($firstLevelContent->fetch('current_lesson')) ?
-                $firstLevelContent->fetch('current_lesson')
-                    ->fetch('url') : null;
-
-        $nextLessonJson = $firstLevelContent['current_lesson'] ?? null;
+        $nextLessonUrl = $nextContentForUser['web_url'] ?? '';
+        $nextLessonJson = $nextContentForUser ?? null;
 
         if (!empty($nextLessonJson)) {
             $nextLessonJson = (new ContentFilterResultsEntity(
@@ -236,7 +241,7 @@ class ContentPagesController extends BaseController
         }
 
         $progressLabelText =
-            $firstLevelContent->fetch('level_rank') ? 'Level - '.$firstLevelContent->fetch('level_rank') : '';
+            $firstLevelContent->fetch('level_rank') ? 'Level - ' . $firstLevelContent->fetch('level_rank') : '';
 
         return view(
             'content.overview',
@@ -313,7 +318,7 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - ' . $firstContent->fetch('level_rank');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -406,7 +411,7 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - ' . $firstContent->fetch('level_rank');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -549,8 +554,8 @@ class ContentPagesController extends BaseController
             ContentRepository::$pullFutureContent = true;
             $unpublished = Carbon::createFromTimeString($contentToRenderAsLesson['published_on'])->isFuture();
             if ($unpublished) {
-                echo '<h2 style="background:yellow;text-align:center;padding:20px;">'.
-                    'ADMIN PREVIEW (publish_on: "'.$contentToRenderAsLesson['published_on'].'")'.'</h2>';
+                echo '<h2 style="background:yellow;text-align:center;padding:20px;">' .
+                    'ADMIN PREVIEW (publish_on: "' . $contentToRenderAsLesson['published_on'] . '")' . '</h2>';
             }
         }
 
@@ -580,7 +585,7 @@ class ContentPagesController extends BaseController
             $parentChildren = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', 10),
-                '-'.$sort,
+                '-' . $sort,
                 [$contentToRenderAsLesson['type']]
             )['results'];
 
@@ -702,7 +707,11 @@ class ContentPagesController extends BaseController
 
         if (user()->isAdmin()) {
             ContentRepository::$pullFutureContent = true;
-            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT);
+            array_push(
+                ContentRepository::$availableContentStatues,
+                ContentService::STATUS_SCHEDULED,
+                ContentService::STATUS_DRAFT
+            );
         }
 
         $lessonContent = $this->contentService->getById($firstId);
@@ -883,14 +892,13 @@ class ContentPagesController extends BaseController
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @param $contentId
      * @return RedirectResponse
      */
     public function jumpToContentId(
         Request $request,
         $domain,
-        $brand,
         $contentId
     ) {
         $contentRow =
@@ -972,5 +980,35 @@ class ContentPagesController extends BaseController
         if (empty($contentRow)) {
             throw new NotFoundHttpException();
         }
+    }
+
+    /**
+     * @param Request $request
+     * @param $contentId
+     * @return RedirectResponse
+     */
+    public function jumpToContinueContent(
+        Request $request,
+        $domain,
+        $contentId
+    ) {
+        $nextContent = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
+
+        if (empty($nextContent)) {
+            throw new NotFoundHttpException();
+        }
+
+        $urls = $this->railcontentURLProvider->getContentURLs(
+            $nextContent['id'],
+            $nextContent['slug'],
+            $nextContent['type'],
+            $nextContent
+        );
+
+        if (!empty($urls) && !empty($urls->getWebURLPath())) {
+            return redirect()->to($urls->getWebURLPath());
+        }
+
+        throw new NotFoundHttpException();
     }
 }

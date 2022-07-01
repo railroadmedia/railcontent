@@ -83,10 +83,10 @@ onMounted(() => {
         style="font-family: Open Sans"
       >
         <h2 class="tw-text-bold tw-mb-[12px] tw-text-[16px]">
-          {{ percentCompleted === 100 ? 'Image uploaded' : 'Uploading in progress'  }}
+          {{ percentCompleted === 100 ? 'Your profile image has successfully uploaded' : 'Uploading in progress'  }}
         </h2>
         <p class="tw-italic tw-text-[14px] tw-text-[#E5E5E5]">
-          {{ percentCompleted === 100 ? 'You can close this modal' : 'This will take a few short seconds'  }}
+          {{ percentCompleted === 100 ? '' : 'This will take a few short seconds'  }}
         </p>
       </div>
       <UploadProgress :percentage="percentCompleted" />

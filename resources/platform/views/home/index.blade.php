@@ -40,12 +40,12 @@
         <!-- Home Card Links -->
         <home-card-links
             brand="{{ $brand }}"
-            :has-started-method="{{ !empty($hasStartedMethod) ? $hasStartedMethod : 'false' }}"
-            :has-completed-method = "{{ !empty($hasCompletedMethod) ? $hasCompletedMethod : 'false' }}"
-            completed-levels-url = "{{ $completedLevelsUrl }}"
-            method-url="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : '/'.$brand.'/methods' }}"
-            next-learning-path-lesson-title = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
-            next-learning-path-level = "{{ $nextLearningPathLevel }}"
+            :has-started-method="{{ isset($hasStartedMethod) && $hasStartedMethod ? 'true' : 'false' }}"
+            :has-completed-method="{{ isset($hasCompletedMethod) && $hasCompletedMethod ? 'true' : 'false' }}"
+            completed-levels-url="{{ $completedLevelsUrl }}"
+            method-url="{{ $methodUrl }}"
+            next-learning-path-lesson-title="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
+            next-learning-path-level="{{ $nextLearningPathLevel }}"
         ></home-card-links>
 
         {{-- Continue Section --}}

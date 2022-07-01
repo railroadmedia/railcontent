@@ -1005,8 +1005,6 @@ return [
         'pack-bundle-lesson',
         'podcasts',
         'learning-path-lesson',
-        'learning-path-course',
-        'learning-path-level',
     ],
     'dashboardInProgressContentTypes' => [
         'course',

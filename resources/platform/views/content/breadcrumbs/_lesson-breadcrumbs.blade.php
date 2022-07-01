@@ -75,12 +75,13 @@
                     ],
                     [
                         "title" => "Packs",
-                        "url" => url()->route('members.packs.index'),
+                        "url" => url()->route('platform.packs'),
                     ],
                     [
                         "title" => $pack->fetch('fields.title'),
-                        "url" => url()->route('members.packs.show', [
-                            "packSlug" => $pack->fetch('slug')
+                        "url" => url()->route('platform.packs.first-level', [
+                            "packSlug" => $pack->fetch('slug'),
+                            "packId" => $pack->fetch('id'),
                         ]),
                     ],
                     [
