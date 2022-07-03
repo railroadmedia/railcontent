@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -67,11 +68,39 @@ class Bundle extends Resource
                 ->preview(function($value){
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+            Image::make('Bundle Image', 'bundle_img')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    return $request->file('bundle_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Image::make('Logo')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    return $request->file('logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Text::make('Video Link', 'video_src')
+                ->hideFromIndex(),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
             Currency::make('Price')->hideFromIndex()->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
+            Markdown::make('Overview')
+                ->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
