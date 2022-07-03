@@ -50,7 +50,7 @@ class Product extends Model
 
     public function bundles()
     {
-        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id'])->orderBy('order_number');
+        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id', 'products.thumbnail', 'products.bundle_lifetime_access', 'products.bundle_free_shipping', 'products.price', 'products.free_bonus', 'products.short_desc'])->orderBy('order_number');
     }
 
     public function sizeChart()
