@@ -31,7 +31,7 @@ class BundleLayout extends Layout
     {
         return [
             Select::make('Product')
-            ->options(\App\Models\Product::join('product_types', 'product_types.id', '=', 'product_type_id')->whereNot('product_types.name', 'Bundle')->select('products.name', 'products.id')->pluck('name', 'name')),
+            ->options(\App\Models\Product::join('product_types', 'product_types.id', '=', 'product_type_id')->whereNot('product_types.name', 'Bundle')->select('products.name', 'products.id')->orderBy('name')->pluck('name', 'name')),
             Text::make('id')->hideFromIndex()->hide()->hideFromDetail()
         ];
     }
