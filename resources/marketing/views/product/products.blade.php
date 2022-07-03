@@ -17,16 +17,25 @@
 @section('layout-body')
     @include('product.partials._shop-header')
 
-    <div class="container mx-auto px-4 py-10">
+    <div class="container mx-auto px-4 py-10" x-data="{ filter: 'all' }">
+
+        <div class="px-2 md:px-3 text-4xl mb-10">
+            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'all'">All</span>
+            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'lessons'">Lessons</span>
+            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'accessories'">Accessories</span>
+            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'clothing'">Clothing</span>
+        </div>
+
         @if(count($lessons) > 0)
-        <section class="grid-view">
+        <section class="grid-view" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="fixed-cards">
                 <li>
-                    <h1 class="px-2 md:px-3">
+                    <h1 class="px-2 md:px-3" >
                         <div class="heading-icon text-{{ $theme }}"><i class="fas fa-video"></i></div>
                             Online Lessons
                     </h1>
                 </li>
+
                 @foreach($lessons as $lesson){
                     @include('product.partials._drum-shop-card', [
                         "sku" => $lesson->sku,
@@ -37,7 +46,7 @@
                         "packAuthor" => $lesson->instructor_name,
                         "cardDescription" => $lesson->short_desc,
                         "fullPrice" => $lesson->price,
-                        "price" => 22,
+                        "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
                         "productJson" => '{ "'.$lesson->sku.'": 1 }',
                     ])
                 }
@@ -46,8 +55,36 @@
         </section>
         @endif
 
+        @if(count($accessories) > 0)
+            <section class="grid-view" x-show="filter === 'accessories' || filter === 'all'">
+                <ul class="fixed-cards">
+                    <li>
+                        <h1 class="px-2 md:px-3">
+                            <div class="heading-icon text-{{ $theme }}"><i class="fas fa-suitcase"></i></div>
+                            Accessories
+                        </h1>
+                    </li>
+                    @foreach($accessories as $accessory){
+                        @include('product.partials._drum-shop-card', [
+                            "sku" => $accessory->sku,
+                            "itemURL" => '/'.$theme.'/shop/'.$accessory->slug,
+                            "thumbnail" => $accessory->thumbnail,
+                            "title" => $accessory->name,
+                            "cardDescription" => $accessory->short_desc,
+                            "fullPrice" => $accessory->price,
+                            "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                            "physical" => true,
+                            "sizes" => $accessory->sizes,
+                            "soldOut" => $accessory->sold_out,
+                        ])
+                    }
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
         @if(count($shirts) > 0)
-        <section class="grid-view">
+        <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
@@ -63,7 +100,7 @@
                         "title" => $shirt->name,
                         "cardDescription" => $shirt->short_desc,
                         "fullPrice" => $shirt->price,
-                        "price" => is_null($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                        "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
                         "physical" => true,
                         "sizes" => $shirt->sizes,
                         "soldOut" => $shirt->sold_out,
@@ -75,7 +112,7 @@
         @endif
 
         @if(count($hoodies) > 0)
-            <section class="grid-view">
+            <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                 <ul class="fixed-cards container mx-auto">
                     <li>
                         <h1 class="px-2 md:px-3">
@@ -91,7 +128,7 @@
                         "title" => $hoodie->name,
                         "cardDescription" => $hoodie->short_desc,
                         "fullPrice" => $hoodie->price,
-                        "price" => is_null($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                        "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                         "physical" => true,
                         "sizes" => $hoodie->sizes,
                         "soldOut" => $hoodie->sold_out,
