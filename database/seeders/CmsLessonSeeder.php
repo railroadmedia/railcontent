@@ -9,7 +9,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use function PHPUnit\Framework\isEmpty;
 
-class CmsProductSeeder extends Seeder
+class CmsLessonSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -165,6 +165,7 @@ class CmsProductSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/The%20Language%20Of%20Drumming/og-image.jpg",
                 "shortDesc" => "Benny Greb’s system for musical expression -- featuring over three hours of online video lessons to help you express your ideas on the drums.",
                 "headerText" => "Benny Greb’s System For Musical Expression",
+                "specialText" => "",
                 "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
@@ -228,6 +229,7 @@ class CmsProductSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Great%20Hands%20For%20A%20Lifetime/og-image.jpg",
                 "shortDesc" => "Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.",
                 "headerText" => "Improve Your Hand Strength, Speed, Stamina, Comfort, & Control On The Drums",
+                "specialText" => "",
                 "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
@@ -293,6 +295,7 @@ class CmsProductSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Hands%20Grooves%20And%20Fills/og-image.jpg",
                 "shortDesc" => "Pat Petrillo’s curriculum for developing technique, groove ideas, and a drum fill vocabulary -- with three hours of video lessons and a 52-page workbook.",
                 "headerText" => "Better Hand Technique, More Groove Ideas, & More Creative Drum Fills",
+                "specialText" => "",
                 "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
@@ -362,6 +365,7 @@ class CmsProductSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/In%20Constant%20Motion/og-image.jpg",
                 "shortDesc" => "Seven hours of instruction, live and studio performances, and insights into Mike Portnoy’s various drumming projects.",
                 "headerText" => "Mike Portnoy’s Performances, Drum Solos, & Musical Insights",
+                "specialText" => "",
                 "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
@@ -422,6 +426,7 @@ class CmsProductSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Creative%20Control/og-image.jpg",
                 "shortDesc" => "Thomas Lang’s innovative system for developing technique so you can play more effectively in any style of music. Includes more than four hours of video.",
                 "headerText" => "Hone Your Chops & Play More Effectively In Any Style Of Music",
+                "specialText" => "",
                 "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
@@ -478,6 +483,7 @@ class CmsProductSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/The%20Grid/og-image.jpg",
                 "shortDesc" => "Mike Mangini’s system for creative drumming and improvisation -- including more than three hours of online video for expanding your skills.",
                 "headerText" => "Mike Mangini’s System For Creative Drumming & Improvisation",
+                "specialText" => "",
                 "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
@@ -524,39 +530,48 @@ class CmsProductSeeder extends Seeder
                 Mangini taught at the Berklee College of Music for eleven years - and chose to release The Grid to define “improvisation”, break it down, and show how it works.",
                 "instructorImg" => "https://s3.amazonaws.com/drumeo-packs/Instructors/mike-mangini.jpg",
                 "studyText" => "Drummer for Dream Theater, Accomplished Educator, & World’s Fastest Drummer in five categories.",
-                "overview" => "",
-                "images" => [
+                "overview" => "**“Best Instructional Video”, Modern Drummer Readers Poll (2015)**
 
-                ],
-                "sizeChart" => "",
-                "sizes" => [
+                With The Grid, Mike Mangini presents a complete system for expanding your skills as a creative player and improviser, focusing in on your own musical identity.
 
-                ]
+                This system is presented through performed examples and graphics, and applies to drummers of all musical styles. Dividing your drumming into time signature, subdivision, dynamics, instrument sounds, limbs, style, and phrases, Mike demonstrates dozens of grooves, fills, and patterns from easy to extremely advanced -- systematically showing you how to use “the grid” to expand your understanding of music and drumming, and improve your physical abilities.
+
+                You will increase your speed, develop better independence, learn how to use ostinatos, expand your knowledge of styles, learn polyrhythms, play in odd time signatures, develop a deeper understanding of rhythm, and become a more creative player.",
             ],
             [
                 "brand" => 1,
                 "productType" => 1,
-                "name" => "",
-                "slug" => "",
-                "sku" => "",
-                "thumbnail" => "",
-                "metaDesc" => "",
-                "metaImg" => "",
-                "shortDesc" => "",
-                "headerText" => "",
-                "price" => 1,
+                "name" => "Beyond The Chops",
+                "slug" => "beyond-the-chops",
+                "sku" => "BTC-DIGI",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/beyond-the-chops.jpg",
+                "metaDesc" => "Beyond The Chops gives you a unique masterclass experience, showcasing Aaron Spears’ phenomenal drumming that critics, fans, and even his peers have described as “beyond category”.",
+                "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Beyond%20The%20Chops/og-image.jpg",
+                "shortDesc" => "A three-hour masterclass experience showcasing Aaron Spears’ phenomenal drumming through performances, educational segments, and interviews.",
+                "headerText" => "Groove, Musicality, & Technique",
+                "specialText" => "",
+                "price" => 29.99,
                 "discountedPrice" => "",
                 "features" => [
-
+                    "Shuffle variations.",
+                    "Grooves and fills.",
+                    "Bass drum pedal technique.",
+                    "Hand-to-foot combinations.",
+                    "Drum fill orchestration.",
+                    "How to develop a sense of time.",
+                    "Coming up with new ideas on the drums.",
+                    "Modern drum beats.",
+                    "Technique and setup.",
+                    "Creativity in drum solos.",
                 ],
                 "specs" => [
                     [
                         "title" => "Publisher",
-                        "desc" => "Hudson Music, 2010"
+                        "desc" => "Hudson Music, 2009"
                     ],
                     [
                         "title" => "Video",
-                        "desc" => "minutes"
+                        "desc" => "187 minutes"
                     ],
                     [
                         "title" => "Online",
@@ -564,7 +579,7 @@ class CmsProductSeeder extends Seeder
                     ],
                     [
                         "title" => "Skill",
-                        "desc" => ""
+                        "desc" => "All Levels"
                     ],
                 ],
                 "visible" => true,
@@ -573,21 +588,75 @@ class CmsProductSeeder extends Seeder
                 "badge" => true,
                 "lifeTime" => true,
                 "freeShipping" => false,
-                "logo" => "",
-                "video" => "",
-                "instructorName" => "",
-                "instructorDesc" => "",
-                "instructorImg" => "",
-                "studyText" => "",
-                "overview" => "",
-                "images" => [
+                "logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Beyond%20The%20Chops/logo.png",
+                "video" => "//player.vimeo.com/video/292144401",
+                "instructorName" => "Aaron Spears",
+                "instructorDesc" => "Aaron Spears is a two-time winner of the “Best R&B Drummer” award in the Modern Drummer Readers Poll -- and his “in the pocket” style of playing and authentic delivery is unparalleled in the world of drummers today.
 
-                ],
-                "sizeChart" => "",
-                "sizes" => [
+                His playing style has given him the opportunity to perform with some of the most popular musicians on the planet including Usher, Ariana Grande, Carrie Underwood, Britney Spears, Chamillionaire, the Backstreet Boys, James Brown, Alicia Keys, Adam Lambert, Jordin Sparks, Lil Wayne, Miley Cyrus, and many more.",
+                "instructorImg" => "https://s3.amazonaws.com/drumeo-packs/Instructors/aaron-spears.jpg",
+                "studyText" => "Drummer for mega-platinum superstars including Usher, Ariana Grande, and Carrie Underwood.",
+                "overview" => "Beyond The Chops gives you a unique masterclass experience, showcasing Aaron Spears’ phenomenal drumming that critics, fans, and even his peers have described as “beyond category”.
 
-                ]
+                This 3-hour program offers amazing performances, enlightening educational segments, and revealing interviews as Spears displays his natural talent, incredible groove, and deep skills in a set of performances with Gospel, R&B, Motown, rock, shuffle, and odd-meter tracks. You’ll get an in-depth look at his exceptional ability to combine a wide range of musical genres and influences into a seamless, powerful, new style of drumming.
+
+                Spears also hosts a Q&A session in front of a masterclass and then sits down with drumming icon Jojo Mayer for a candid interview covering everything from his gospel roots to his recent work with Usher, the Backstreet Boys, and the American Idol tour. You’ll gain insights into the unique rhythmic vocabulary he has created with many of the grooves and fills transcribed in an accompanying 21-page workbook.",
             ],
+//            [
+//                "brand" => 2,
+//                "productType" => 1,
+//                "name" => "",
+//                "slug" => "",
+//                "sku" => "",
+//                "thumbnail" => "",
+//                "metaDesc" => "",
+//                "metaImg" => "",
+//                "shortDesc" => "",
+//                "headerText" => "",
+//                "price" => 1,
+//                "discountedPrice" => "",
+//                "features" => [
+//
+//                ],
+//                "specs" => [
+//                    [
+//                        "title" => "Publisher",
+//                        "desc" => "Hudson Music, 2010"
+//                    ],
+//                    [
+//                        "title" => "Video",
+//                        "desc" => "minutes"
+//                    ],
+//                    [
+//                        "title" => "Online",
+//                        "desc" => "Lifetime access to all content"
+//                    ],
+//                    [
+//                        "title" => "Skill",
+//                        "desc" => ""
+//                    ],
+//                ],
+//                "visible" => true,
+//                "soldOut" => false,
+//                "freeBonus" => false,
+//                "badge" => true,
+//                "lifeTime" => true,
+//                "freeShipping" => false,
+//                "logo" => "",
+//                "video" => "",
+//                "instructorName" => "",
+//                "instructorDesc" => "",
+//                "instructorImg" => "",
+//                "studyText" => "",
+//                "overview" => "",
+//                "images" => [
+//
+//                ],
+//                "sizeChart" => "",
+//                "sizes" => [
+//
+//                ]
+//            ],
         ];
 
         foreach($products as $product){
@@ -619,32 +688,26 @@ class CmsProductSeeder extends Seeder
                             'free_bonus' => $product['freeBonus'],
                             'membership_discount' => false,
                             'lifetime_access' => $product['lifeTime'],
-                            'size_chart_id' => null,
                             'created_at' => now(),
                             'updated_at' => now(),
                         ]);
-            if(!isEmpty($product['features'])){
-                foreach($product['features'] as $key => $feature){
-                    Feature::create([
-                        'product_id' => $newProduct->id,
-                        'desc' => $feature,
-                        'order_number' => $key
-                    ]);
-                }
-            }
-
-            if(!isEmpty($product['specs'])){
-                foreach($product['specs'] as $key => $spec){
-                    Spec::create([
-                        'product_id' => 6,
-                        'title' => $spec['title'],
-                        'desc' => $spec['desc'],
-                        'order_number' => $key,
-                    ]);
-                }
+            foreach($product['features'] as $key => $feature){
+                Feature::create([
+                    'product_id' => $newProduct->id,
+                    'desc' => $feature,
+                    'order_number' => $key
+                ]);
             }
 
 
+            foreach($product['specs'] as $key => $spec){
+                Spec::create([
+                    'product_id' => $newProduct->id,
+                    'title' => $spec['title'],
+                    'desc' => $spec['desc'],
+                    'order_number' => $key,
+                ]);
+            }
         }
     }
 }

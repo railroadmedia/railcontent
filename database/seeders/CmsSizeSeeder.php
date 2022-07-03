@@ -49,6 +49,14 @@ class CmsSizeSeeder extends Seeder
                 'name' => 'XXXX-Large',
                 'code' => 'XXXXL',
             ],
+            [
+                'name' => 'S/M',
+                'code' => 'S',
+            ],
+            [
+                'name' => 'L/XL',
+                'code' => 'L',
+            ],
         ];
 
         foreach($sizes as $size){
