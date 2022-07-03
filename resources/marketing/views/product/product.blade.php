@@ -4,7 +4,7 @@
     <title>{{ $product->name }}</title>
     <meta property="og:description" content="{{ $product->meta_desc  }}}">
     <meta property="og:url" content="">
-    <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif" style="display: none;">
+    <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/navigation-sales.css') }}">
@@ -31,6 +31,8 @@
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
                 "soldOut" => $product->sold_out,
+                "specialText" => $product->special_text,
+                "freeShipping" => $product->free_shipping,
             ])
         </div>
 
@@ -75,6 +77,23 @@
                         "topicList" => $product->features
                     ])
 
+                @elseif($product->productType->name === 'Bundle')
+                    <img class="mb-4" src="@if(str_contains($product->bundle_img, 'amazonaws') || str_contains($product->bundle_img, 'cloudfront')) {{$product->bundle_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->bundle_img  }}@endif" />
+
+                    @include('product.partials.overview',[
+                        "overview" => $product->overview,
+                        "interactive" => false,
+                    ])
+
+                    <hr class="my-8" />
+
+                    <p class="mb-4">
+                        <strong>Say hello to your free bonuses:</strong><br>
+                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $theme }}, and they’re yours forever.</em>
+                    </p>
+
+
+                    @include('product.partials.bonuses')
                 @else
                     @include('product.partials.specs',[
                         'specList'=> $product->specs,
@@ -83,7 +102,7 @@
                 @endif
 
                 @if(!is_null($product->size_chart_id))
-                    <img src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->sizeChart->chart }}" />
+                    <img src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->sizeChart->chart }}" alt="bundle image" />
                 @endif
 
             </div>
