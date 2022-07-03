@@ -31,7 +31,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  clearButtonOverride: {
+    type: String,
+    default: "",
+  },
   wrapperOverride: {
+    type: String,
+    default: "",
+  },
+  labelOverride: {
     type: String,
     default: "",
   },
@@ -52,12 +60,14 @@ const { input, errors } = useInputValidator(
   (value) => emit("onChange", value)
 );
 
-const onClear = () => {
+const onClear = (e) => {
+  e.preventDefault();
   emit("onChange", '');
   input.value = '';
 };
 
-const onEnter = () => {
+const onEnter = (e) => {
+  e.preventDefault();
   emit("onEnter");
 };
 </script>
@@ -71,10 +81,10 @@ const onEnter = () => {
     <label
       v-if="labelValue"
       :for="id"
-      :class="`tw-px-[13px] tw-pb-[5px] dark:tw-text-white ${id+'-label'}`"
+      :class="`tw-px-[13px] tw-pb-[5px] ${id+'-label'} ${labelOverride ? labelOverride : 'dark:tw-text-white'}`"
       >{{ labelValue }}</label
     >
-    <div class="tw-flex">
+    <div class="tw-flex tw-relative">
       <input
         :placeholder="placeholder"
         :id="id"
@@ -82,13 +92,13 @@ const onEnter = () => {
           inputOverride ? inputOverride : 'tw-text-black tw-border-[#D1D5DB]'
         }`"
         v-model="input"
-        v-on:keyup.enter="onEnter"
+        v-on:keypress.enter.prevent="onEnter"
         @focus="() => emit('onFocus')"
         autocomplete="off"
         :name="inputName"
         :type="inputType"
       />
-      <div v-if="showClearButton" :class="`dark:tw-text-white tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'}`">
+      <div v-if="showClearButton" :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
         <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">
           <XIcon class="tw-h-full tw-w-full" />
         </button>

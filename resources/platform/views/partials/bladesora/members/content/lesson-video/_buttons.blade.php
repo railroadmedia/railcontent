@@ -3,7 +3,7 @@
         @if(!empty($prevLessonUrl))
             <a href="{{ $prevLessonUrl }}"
                data-tooltip="Previous Lesson"
-               class="btn bg-{{ $themeColor }} inverted text-{{ $themeColor }}">
+               class="btn bg-{{ $brand }} inverted text-{{ $brand }}">
                 <i class="fas fa-chevron-left"></i>
                 <span class="hide-xs-only ml-1">Previous Lesson</span>
             </a>
@@ -22,11 +22,11 @@
                     <button id="playQAVideo"
                             data-tooltip="Play QnA Video"
                             class="btn">
-                        <span class="qa bg-{{ $themeColor }} inverted text-{{ $themeColor }}">
+                        <span class="qa bg-{{ $brand }} inverted text-{{ $brand }}">
                             <i class="fas fa-question-circle"></i>
                             <span class="hide-xs-only ml-1">Watch Q&A</span>
                         </span>
-                        <span class="lesson bg-{{ $themeColor }} inverted text-{{ $themeColor }}">
+                        <span class="lesson bg-{{ $brand }} inverted text-{{ $brand }}">
                             <i class="fas fa-play"></i>
                             <span class="hide-xs-only ml-1">Watch Lesson</span>
                         </span>
@@ -39,7 +39,7 @@
     <div class="flex flex-column next-prev-button-col ml-1" dusk="next-lesson">
         @if(!empty($nextLessonUrl))
             <a href="{{ $nextLessonUrl }}"
-               class="btn bg-{{ $themeColor }} inverted text-{{ $themeColor }}"
+               class="btn bg-{{ $brand }} inverted text-{{ $brand }}"
                data-tooltip="Next Lesson">
                 <span class="hide-xs-only mr-1">Next Lesson</span>
                 <i class="fas fa-chevron-right"></i>

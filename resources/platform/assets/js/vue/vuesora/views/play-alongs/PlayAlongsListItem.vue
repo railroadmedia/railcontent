@@ -63,7 +63,7 @@
 
         <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
         <div
-            v-for="(item, i) in mappedData.column_data"
+            v-for="(item) in mappedData.column_data"
             :key="item"
             class="flex flex-column uppercase align-center basic-col text-center font-italic x-tiny font-compressed hide-sm-down"
         >

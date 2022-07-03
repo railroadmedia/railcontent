@@ -86,7 +86,7 @@
             tw-text-left tw-px-0 tw-py-0 tw-text-xs
             sm:tw-text-base
             tw-transition-none
-            tw-text-white
+            tw-text-[#00101D] dark:tw-text-white
             tw-border-none
             tw-bg-transparent
             tw-uppercase

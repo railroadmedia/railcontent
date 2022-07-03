@@ -41,7 +41,6 @@
         <div class="tw-flex tw-flex-col tw-mr-2 form-group ">
           <select
               id="sortInput"
-              type="text"
               class="tw-pb-0 tw-text-black dark:tw-text-white borderless"
               @change="handleContentSort($event)"
               v-model="sort"

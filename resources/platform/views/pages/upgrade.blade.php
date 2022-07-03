@@ -7,7 +7,7 @@
 @section('content')
 
     <header id="pageHeader"
-            class="tw-container tw-mx-auto fluid pv-4"
+            class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
             style="background-image:url('https://musora-web-platform.s3.amazonaws.com/headers/{{ $brand }}-header.jpg');">
         <div class="tw-container tw-mx-auto tw-text-center">
             <h1 class="heading tw-text-white tw-mb-2">

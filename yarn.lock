@@ -4206,6 +4206,13 @@ kind-of@^6.0.2:
     webpackbar "^5.0.0-3"
     yargs "^17.2.1"
 
+laravel-vapor@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/laravel-vapor/-/laravel-vapor-0.6.0.tgz#69118989668125666b0258799b5765c1cab834a1"
+  integrity sha512-bfEnyaIAmUInIYAE/XBwuP9hiZMkXmL+X7Qx7Fr7e/I91fwftNr3xvsMXz2CjDVmxXoY0mBaSbZAJvKSTBZGSg==
+  dependencies:
+    axios "^0.21.1"
+
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"

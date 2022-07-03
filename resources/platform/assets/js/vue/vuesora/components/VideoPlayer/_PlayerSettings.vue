@@ -172,7 +172,8 @@ export default {
     mounted() {
         document.addEventListener('click', this.closeDrawer);
 
-        this.$parent.$on('userinactive', this.closeDrawer);
+        // TODO: Close Drawer on user inactive
+        //this.$parent.$on('userinactive', this.closeDrawer);
     },
     beforeDestroy() {
         document.removeEventListener('click', this.closeDrawer);

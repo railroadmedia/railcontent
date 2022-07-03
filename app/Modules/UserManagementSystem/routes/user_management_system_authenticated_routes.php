@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\UserManagementSystem\Controllers\UserController;
-use Modules\UserManagementSystem\Controllers\PasswordController;
 use Modules\UserManagementSystem\Controllers\EmailChangeController;
+use Modules\UserManagementSystem\Controllers\PasswordController;
+use Modules\UserManagementSystem\Controllers\UserController;
 
 
 Route::group(
@@ -60,7 +60,23 @@ Route::group(
         )
             ->name('user_management_system.email-change.confirm');
 
+        Route::match(
+            ['post', 'put'],
+            'profile-picture/upload',
+            [
+                'as' => 'user_management_system.profile-picture.upload',
+                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@upload',
+            ]
+        );
 
+        Route::match(
+            ['post', 'put'],
+            'profile-picture/upload-from-s3-front-end',
+            [
+                'as' => 'user_management_system.profile-picture.upload-from-s3-front-end',
+                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@uploadFromS3FrontEnd',
+            ]
+        );
     }
 );
 

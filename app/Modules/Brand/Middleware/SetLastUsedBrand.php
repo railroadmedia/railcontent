@@ -51,6 +51,8 @@ class SetLastUsedBrand
             config()->set('railforums.jump_to_post_url_prefix', $brand . '/forums/jump-to-post/');
             config()->set('railforums.jump_to_thread_url_prefix', $brand . '/forums/jump-to-thread/');
             config()->set('railforums.forums_index_page_url', $brand . '/forums');
+
+            config()->set('railcontent.brand', $brand);
         }
 
         return $next($request);

@@ -55,13 +55,14 @@
             @if($user->access_level !== 'pack' && ($isCurrentUsersProfile ?? true))
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
 
-                    <!-- Referral Button -->
-                    <a href="/referral/invite-a-friend"
+                    {{-- Referral Button --}}
+                    {{-- <a href="/referral/invite-a-friend"
                         class="tw-btn-primary tw-w-auto tw-inline-flex tw-bg-{{$brand}} tw-mb-2 tw-max-w-[267px] tw-mx-2 "
                     >
                         <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i>
                         <span class="tw-leading-none tw-mt-0.5">invite a friend</span>
-                    </a>
+                    </a> --}}
+
                     {{-- Complete Your Account --}}
                     @if(true) {{-- Check if User Has Finished Account --}}
                         <a href="/referral/invite-a-friend" 
