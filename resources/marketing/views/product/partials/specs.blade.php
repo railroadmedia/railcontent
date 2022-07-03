@@ -18,6 +18,7 @@
         "style" => "fa-cut",
         "manufacturer" => "fa-tshirt",
         "size" => "fa-arrows",
+        "logo" => "fa-image"
     ];
 ?>
 
