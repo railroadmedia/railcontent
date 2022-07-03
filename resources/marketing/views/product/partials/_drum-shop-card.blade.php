@@ -25,18 +25,18 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{ $specialPrice }}</strong></p>
+                        <p><strong>{{ floatval($specialPrice) }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s class="text-[#9da6a8]">WAS ${{ $fullPrice }}</s>
                             <strong class="text-{{$theme}}"> NOW
                                 @if(number_format($price, 2) == intval($price))
-                                    ${{  $price  }}
+                                    ${{  floatval($price)  }}
                                 @else
-                                    ${{  number_format($price, 2)  }}
+                                    ${{  floatval(number_format($price, 2))  }}
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong class="text-{{$theme}}">${{  $price  }}</strong></p>
+                        <p><strong class="text-{{$theme}}">${{  floatval($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -54,11 +54,11 @@
                     @if(!empty($specialPrice))
                         <p><strong>{{  $specialPrice  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="text-[22px] md:text-[26px] lg:text-3xl mb-3"><s class="text-[#9da6a8]">${{ $fullPrice }}</s> <strong class="text-{{ $theme }}">
+                        <p class="text-[22px] md:text-[26px] lg:text-3xl mb-3"><s class="text-[#9da6a8]">${{ floatval($fullPrice) }}</s> <strong class="text-{{ $theme }}">
                                 @if(number_format($price, 2) == intval($price))
-                                    ${{  $price  }}
+                                    ${{  floatVal($price)  }}
                                 @else
-                                    ${{  number_format($price, 2)  }}
+                                    ${{  floatVal(number_format($price, 2))  }}
                                 @endif
                             </strong></p>
                     @else
@@ -116,7 +116,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ $itemURL }}" class="lg:text-lg font-bebas-neue tracking-widest block w-full py-2 rounded-full text-white bg-{{ $theme }} hover:bg-opacity-80" @if(!empty($externalURL)) target="_blank" @endif>
+                        <a target="_blank" href="{{ $itemURL }}" class="lg:text-lg font-bebas-neue tracking-widest block w-full py-2 rounded-full text-white bg-{{ $theme }} hover:bg-opacity-80" @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
