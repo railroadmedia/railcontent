@@ -118,6 +118,8 @@ const app = createApp({
         },
 
         handleVideoPlay(payload){
+            console.log('handleVideoPlay Called')
+            console.log('hasBeenPlayed', hasBeenPlayed)
             if(['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed){
                 ContentService.markContentAsStarted(payload.contentId);
             }
