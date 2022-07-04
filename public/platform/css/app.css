@@ -21568,9 +21568,6 @@ a:visited{
 .tw-m-0{
   margin: 0px !important;
 }
-.tw-m-4{
-  margin: 1rem !important;
-}
 .tw-mx-auto{
   margin-left: auto !important;
   margin-right: auto !important;
@@ -21638,6 +21635,10 @@ a:visited{
 .tw-mx-auto{
   margin-left: auto !important;
   margin-right: auto !important;
+}
+.tw-my-4{
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
@@ -21890,9 +21891,6 @@ a:visited{
 }
 .tw-mb-2{
   margin-bottom: 0.5rem !important;
-}
-.tw-mr-0{
-  margin-right: 0px !important;
 }
 .tw-mb-4{
   margin-bottom: 1rem !important;
@@ -25327,9 +25325,6 @@ a:visited{
   .xl\:tw-inline-flex{
     display: inline-flex !important;
   }
-  .xl\:tw-w-\[420px\]{
-    width: 420px !important;
-  }
   .xl\:tw-w-full{
     width: 100% !important;
   }
@@ -25338,9 +25333,6 @@ a:visited{
   }
   .xl\:tw-w-2\/3{
     width: 66.666667% !important;
-  }
-  .xl\:tw-w-\[420px\]{
-    width: 420px !important;
   }
   .xl\:tw-max-w-\[420px\]{
     max-width: 420px !important;
@@ -25389,11 +25381,20 @@ a:visited{
   }
 }
 @media (min-width: 1536px){
+  .\32xl\:tw-ml-4{
+    margin-left: 1rem !important;
+  }
+  .\32xl\:tw-w-\[420px\]{
+    width: 420px !important;
+  }
   .\32xl\:tw-w-screen{
     width: 100vw !important;
   }
   .\32xl\:tw-w-\[1350px\]{
     width: 1350px !important;
+  }
+  .\32xl\:tw-w-\[420px\]{
+    width: 420px !important;
   }
   .\32xl\:tw-grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
@@ -25403,6 +25404,9 @@ a:visited{
   }
   .\32xl\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  .\32xl\:tw-flex-row{
+    flex-direction: row !important;
   }
   .\32xl\:tw-flex-row{
     flex-direction: row !important;
@@ -25420,9 +25424,6 @@ a:visited{
   }
   .\33xl\:tw-grid-cols-7{
     grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
-  }
-  .\33xl\:tw-flex-row{
-    flex-direction: row !important;
   }
   .\33xl\:tw-bg-\[length\:70\%\]{
     background-size: 70% !important;
