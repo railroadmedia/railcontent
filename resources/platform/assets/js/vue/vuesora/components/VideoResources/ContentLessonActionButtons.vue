@@ -10,6 +10,7 @@
                         @click="likeContent"
                     >
                         <span
+                            class="tw-shadow-none"
                             style="padding:0 8px; border: none; box-shadow: none;"
                             :class="hasLiked ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                         >
@@ -28,7 +29,7 @@
                         data-open-modal="shareVideoModal"
                     >
                         <span
-                            class="text-grey-3 dark:tw-text-white"
+                            class="text-grey-3 dark:tw-text-white tw-shadow-none"
                             style="padding:0 8px; box-shadow: none;"
                         >
                             <i class="fas fa-share mb-1"></i>
@@ -46,6 +47,7 @@
                         @click="resourceDropdown = !resourceDropdown"
                     >
                         <span
+                            class="tw-shadow-none"
                             :class="resourceDropdown ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                             style="padding:0 8px; box-shadow: none;"
                         >
@@ -88,6 +90,7 @@
                         @click="addToList"
                     >
                         <span
+                            class="tw-shadow-none"
                             style="padding:0 8px; box-shadow: none;"
                             :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                         >
@@ -131,7 +134,7 @@
                         class="btn"
                         @click="copyTimecodeToClipboard"
                     >
-                        <span class="text-white bg-grey-3">
+                        <span class="text-white bg-grey-3 tw-shadow-none">
                             Copy
                         </span>
                     </button>
