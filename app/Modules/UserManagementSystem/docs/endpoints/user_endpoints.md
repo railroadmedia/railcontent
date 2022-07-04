@@ -185,11 +185,25 @@ $.ajax({
 
 
 
-## Upload and update profile picture URL
+## Upload and update picture URLs 
 
 
 ### HTTP Request
-    `PUT user_management_system/profile-picture/upload`
+    `PUT user_management_system/picture/upload`
+
+## Request parameters:
+- depending on the attributes sent, the request will update one of the following User attributes:
+- only one of the parameters should be added to the request
+
+```php
+[
+    'profile_picture_url' => 'url',
+    'drums_gear_photo' => 'url',
+    'piano_gear_photo' => 'url',
+    'guitar_gear_photo' => 'url',
+    'singing_gear_photo' => 'url',
+]
+```
 
 
 ### Permissions
@@ -209,3 +223,5 @@ See: [https://github.com/railroadmedia/musora-web-platform/blob/master/resources
 
 ### Return:
 Returns entire user JSON object. Can get new profile pic URL with: response.profile_picture_url.
+
+

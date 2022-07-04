@@ -233,13 +233,18 @@ class PackPagesController extends Controller
      * @param $lessonId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function lesson(
+    public function packBundleLesson(
         Request $request,
+        $domain,
+        $brand,
         $packSlug,
-        $lessonSlug,
-        $lessonId
+        $packId,
+        $packBundleSlug,
+        $packBundleId,
+        $packBundleLessonSlug,
+        $packBundleLessonId
     ) {
-        if (current_user()->getPermissionLevel() == 'administrator') {
+        if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues =
                 [
                     ContentService::STATUS_PUBLISHED,
@@ -252,7 +257,7 @@ class PackPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
         }
 
-        if (UserAccessService::isMember(current_user()->getId())) {
+        if (user()->isAMember()) {
             ContentRepository::$bypassPermissions = true;
         }
 
@@ -270,7 +275,7 @@ class PackPagesController extends Controller
         $parentChildren = $thisPackBundle['lessons'];
 
         foreach ($parentChildren as $parentChild) {
-            if ($parentChild['id'] == $lessonId) {
+            if ($parentChild['id'] == $packBundleLessonId) {
                 $lesson = $parentChild;
             }
         }
@@ -310,10 +315,10 @@ class PackPagesController extends Controller
         $lesson['assignments'] = $lessonAssignments;
         $lesson['assignmentszz'] = $lessonAssignments;
 
-        $userAccessLevel = UserAccessService::getAccessLevelName(current_user()->getId());
+        $userAccessLevel = user()->access_level;
 
         return view(
-            'members.content.lesson',
+            'content.lesson',
             [
                 "parentType" => 'pack',
                 "lessonType" => 'pack-lesson',
