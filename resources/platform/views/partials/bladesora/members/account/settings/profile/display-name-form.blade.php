@@ -15,7 +15,7 @@
                 ],
                 "showEmpty" => true
             ])
-            <p class="tiny text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">
+            <p class="tw-text-sm text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">
                 This is the name other users will see on your profile, comments and forum posts.
             </p>
         </div>

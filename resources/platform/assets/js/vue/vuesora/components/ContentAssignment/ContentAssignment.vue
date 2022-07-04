@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column assignment-component bb-grey-1-1">
+    <div class="flex flex-column assignment-component bb-grey-1-1 dark:tw-border-[#223F57]">
         <div class="flex flex-row align-v-center flex-wrap pv-3">
             <div class="flex flex-column xs-12 md-8">
                 <div class="flex flex-row align-v-center">
@@ -19,7 +19,7 @@
                     <div class="flex flex-column">
                         <div class="flex flex-row align-v-center">
                             <div class="flex flex-column pointer" @click="openAssignment">
-                                <h3 class="title noselect">
+                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white">
                                     {{ title }} 
                                 </h3>
                             </div>
@@ -54,14 +54,14 @@
         </div>
         <transition name="slide-down-fade">
             <div v-if="accordionActive && thisAssignment != null" v-show="!accordionLoading" class="flex flex-column">
-                <div v-show="$_description.length > 0" class="flex flex-row mb-3 pa-3">
-                    <div class="body" v-html="$_description">
+                <div v-show="$_description.length > 0" class="flex flex-row tw-pb-6">
+                    <div class="body tw-text-[#00101D] dark:tw-text-white" v-html="$_description">
                     </div>
                 </div>
-                <div v-show="$_totalPages > 0" class="flex flex-row pa-3">
+                <div v-show="$_totalPages > 0" class="flex flex-row tw-pb-6">
                     <div ref="carouselWrap" class="flex flex-column grow">
                         <div class="flex flex-column">
-                            <div ref="carouselContainer" class="flex flex-row carousel bg-white overflow mv pb-3">
+                            <div ref="carouselContainer" class="flex flex-row carousel tw-bg-white overflow tw-mb-3 tw-p-3">
                                 <div class="flex flex-row">
                                     <div v-for="(page, i) in $_sheet_music_pages" :key="'page' + (i + 1)" class="flex flex-column xs-12 grow page" :style="pageScrollPosition">
                                         <img class="sheet-music-image" :src="page">

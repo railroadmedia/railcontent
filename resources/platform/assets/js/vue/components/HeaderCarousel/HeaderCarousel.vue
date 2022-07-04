@@ -65,7 +65,6 @@ const handleNavClick = (index) => {
 
 onBeforeMount(() => {
   if (props.preloadedCarousel.length > 0) {
-    console.log(props.preloadedCarousel)
     slides.value = props.preloadedCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
   } else {
     slides.value = testCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;

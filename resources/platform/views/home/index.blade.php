@@ -8,22 +8,17 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
 
-        {{-- v-cloak: Wait Until Page Container has loaded --}}
-        <div v-cloak>
+        {{-- On Boarding --}}
+        {{-- <onboarding></onboarding> --}}
 
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        {{-- On Boarding TriggerBanner --}}
+        <trigger-banner :v-if="true"></trigger-banner>
 
-                {{-- On Boarding --}}
-                {{-- <onboarding></onboarding> --}}
-
-                {{-- On Boarding TriggerBanner --}}
-                <trigger-banner :v-if="true"></trigger-banner>
-
-                {{-- Carousel --}}
-                <header-carousel
-                    :preloaded-carousel="[]"
-                    brand="{{ $brand }}">
-                </header-carousel>
+        {{-- Carousel --}}
+        <header-carousel
+            :preloaded-carousel="[]"
+            brand="{{ $brand }}">
+        </header-carousel>
 
         {{-- Invite Email Message --}}
         @if(session()->has('email-invite-message'))
@@ -45,12 +40,12 @@
         <!-- Home Card Links -->
         <home-card-links
             brand="{{ $brand }}"
-            :has-started-method="{{ !empty($hasStartedMethod) ? $hasStartedMethod : 'false' }}"
-            :has-completed-method = "{{ !empty($hasCompletedMethod) ? $hasCompletedMethod : 'false' }}"
-            completed-levels-url = "{{ $completedLevelsUrl }}"
-            method-url="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('url') : '/'.$brand.'/methods' }}"
-            next-learning-path-lesson-title = "{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
-            next-learning-path-level = "{{ $nextLearningPathLevel }}"
+            :has-started-method="{{ isset($hasStartedMethod) && $hasStartedMethod ? 'true' : 'false' }}"
+            :has-completed-method="{{ isset($hasCompletedMethod) && $hasCompletedMethod ? 'true' : 'false' }}"
+            completed-levels-url="{{ $completedLevelsUrl }}"
+            method-url="{{ $methodUrl }}"
+            next-learning-path-lesson-title="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
+            next-learning-path-level="{{ $nextLearningPathLevel }}"
         ></home-card-links>
 
         {{-- Continue Section --}}
@@ -115,7 +110,7 @@
             'usersList' => $usersList,
             ])
         @endcomponent
-
+        
         {{-- Live Banner --}}
         <coach-event
             brand="{{ $brand }}"

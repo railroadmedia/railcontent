@@ -54,7 +54,6 @@
                 brand="{{ $brand }}"
                 :aspect-ratio="1.78"
                 upload-endpoint="{{ $uploadRequestEndpoint }}"
-                save-endpoint="{{ $fieldSaveRequestEndpoint }}"
                 user-id="{{ $userId }}"
                 @image-uploaded="gearPhotoUploaded"></image-cropper>
         </div>

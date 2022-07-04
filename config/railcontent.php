@@ -900,7 +900,6 @@ return [
         'quick-tips',
         'question-and-answer',
         'student-collaborations',
-        'live',
         'live-streams',
         'podcasts',
         'solos',
@@ -1011,8 +1010,6 @@ return [
         'pack-bundle-lesson',
         'podcasts',
         'learning-path-lesson',
-        'learning-path-course',
-        'learning-path-level',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1093,6 +1090,30 @@ return [
         'quick-tips',
         'pack',
         'semester-pack',
+        'the-history-of-electronic-drums',
+        'backstage-secrets',
+        'quick-tips',
+        'question-and-answer',
+        'student-collaborations',
+        'live-streams',
+        'live',
+        'podcasts',
+        'solos',
+        'boot-camps',
+        'gear-guides',
+        'performances',
+        'in-rhythm', /* 2020 */
+        'challenges', /* 2020 */
+        'on-the-road', /* 2020 */
+        'diy-drum-experiments', /* 2019*/
+        'rhythmic-adventures-of-captain-carson', /* 2019*/
+        'study-the-greats', /* 2019*/
+        'rhythms-from-another-planet', /* 2019*/
+        'tama-drums', /* 2019*/
+        'paiste-cymbals', /* 2019*/
+        'behind-the-scenes', /* 2019*/
+        'exploring-beats', /* 2018*/
+        'sonor-drums', /* 2018*/
     ],
 
     'contentTypesWithChildren' => [

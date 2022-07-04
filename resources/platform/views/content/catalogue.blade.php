@@ -205,7 +205,6 @@
                 <div class="tw-flex tw-flex-col tw-mb-3">
                     <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                 </div>
-                {{-- todo: readd once cal is working --}}
                 @if($catalogueMeta['name'] !== "Songs")
                     <div class="tw-flex tw-flex-col tw-ml-auto">
                         <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
@@ -215,9 +214,8 @@
                     </div>
                     <add-event-modal
                         modal-id="addToCalendarModal"
-                        subscription-calendar-id="subscriptionCalendarId"
-                        single-event="singleEvent"
-                        theme-color="drumeo"
+                        subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
+                        theme-color="{{ $brand }}"
                         toggleSubscribe="toggleSubscribe"
                 ></add-event-modal>
                 @endif
@@ -243,9 +241,8 @@
             </div>
             <add-event-modal
                 modal-id="addToCalendarModal"
-                subscription-calendar-id="subscriptionCalendarId"
-                single-event="singleEvent"
-                theme-color="drumeo"
+                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
+                theme-color="{{ $brand }}"
                 toggleSubscribe="toggleSubscribe"
             ></add-event-modal>
         </div>
@@ -290,7 +287,7 @@
                 @if(!empty($sortOverride))
                 sort-override="{{ $sortOverride }}"
                 @endif
-                subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
+                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
                 :lock-unowned="true"
                 :show-loading-animation="true"
                 catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"

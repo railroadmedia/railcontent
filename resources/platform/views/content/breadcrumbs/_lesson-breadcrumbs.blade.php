@@ -65,7 +65,7 @@
         ])
     @endif
 @else
-    @if($parent)
+    @if(isset($parent))
         @if($parent->fetch('type') === 'pack-bundle')
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
@@ -75,12 +75,13 @@
                     ],
                     [
                         "title" => "Packs",
-                        "url" => url()->route('members.packs.index'),
+                        "url" => url()->route('platform.packs'),
                     ],
                     [
                         "title" => $pack->fetch('fields.title'),
-                        "url" => url()->route('members.packs.show', [
-                            "packSlug" => $pack->fetch('slug')
+                        "url" => url()->route('platform.packs.first-level', [
+                            "packSlug" => $pack->fetch('slug'),
+                            "packId" => $pack->fetch('id'),
                         ]),
                     ],
                     [

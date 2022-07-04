@@ -64,7 +64,10 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function setCurrentUserProfilePictureUrl(string $profilePictureUrl)
     : User {
-        // TODO: Implement setCurrentUserProfilePictureUrl() method.
+        user()->profile_picture_url =  $profilePictureUrl;
+        user()->save();
+
+        return $this->getCurrentUser();
     }
 
     public function setCurrentUserPhoneNumber(string $phoneNumber)

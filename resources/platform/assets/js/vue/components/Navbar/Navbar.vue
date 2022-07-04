@@ -97,14 +97,28 @@ const toggleSearchModal = (val) => {
       <!-- Search Trigger -->
       <button
         @click="() => toggleSearchModal(true)"
-        :class="`tw-block tw-shrink-0 lg:tw-hidden tw-rounded-full tw-w-[42px] tw-h-[42px] tw-flex tw-items-center tw-mr-1 tw-justify-center`"
+        class="tw-block tw-shrink-0 lg:tw-hidden tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+        title="Musora Search"
       >
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-black dark:tw-text-white" />
       </button>
 
+      <!-- Invite a Friend -->
+      <a :href="`/${ brand }/referral/invite-a-friend`"
+        @click="() => toggleSearchModal(true)"
+        class="tw-block tw-shrink-0 tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+        title="Invite a Friend"
+      >
+        <span class="tw-text-black dark:tw-text-white">
+          <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.5 7V21.625M11.5 7C11.5 7 11.5 5.32063 11.5 4.75C11.5 3.50736 12.5074 2.5 13.75 2.5C14.9926 2.5 16 3.50736 16 4.75C16 5.99264 14.9926 7 13.75 7C13.078 7 11.5 7 11.5 7ZM11.5 7C11.5 7 11.5 4.82078 11.5 4.1875C11.5 2.6342 10.2408 1.375 8.6875 1.375C7.1342 1.375 5.875 2.6342 5.875 4.1875C5.875 5.7408 7.1342 7 8.6875 7C9.60752 7 11.5 7 11.5 7ZM3.625 11.5H19.375M3.625 11.5C2.38236 11.5 1.375 10.4926 1.375 9.25C1.375 8.00736 2.38236 7 3.625 7H19.375C20.6176 7 21.625 8.00736 21.625 9.25C21.625 10.4926 20.6176 11.5 19.375 11.5M3.625 11.5L3.625 19.375C3.625 20.6176 4.63236 21.625 5.875 21.625H17.125C18.3676 21.625 19.375 20.6176 19.375 19.375V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+
       <UserIcon
         :brand="brand"
-        :user-avatar="userAvatar"
+        :userAvatar="userAvatar"
         :user-name="userName"
         :account-url="accountUrl"
         :has-notifications="hasNotifications"
