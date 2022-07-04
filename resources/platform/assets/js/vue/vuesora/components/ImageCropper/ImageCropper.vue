@@ -348,6 +348,7 @@ export default {
                     if (resolved) {
 
                         let remoteStorageUrl = null;
+                        
                         if (this.fieldKey == 'profile_picture_url'){
                             remoteStorageUrl = resolved.profile_picture_url
                         } else if (this.fieldKey == 'drums_gear_photo') {

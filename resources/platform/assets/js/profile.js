@@ -6,13 +6,14 @@ document.addEventListener('DOMContentLoaded', function(){
     openModalOnPageLoad();
 
     const clearAvatar = document.getElementById('clearAvatar');
-    const clearGearPhoto = document.getElementById('clearGearPhoto');
+    const clearGearPhotoButtons = document.querySelectorAll('[data-clear-gear-photo]');
 
     const unsubscribeForm = document.getElementById('membershipUnsubscribe');
     const membershipForm = document.getElementById('membershipMain');
     const openUnsubscribeForm = document.getElementById('openUnsubscribeForm');
     const cancelUnsubscribeForm = document.getElementById('cancelUnsubscribeForm');
     const userInfo = document.getElementById('userInfo');
+    
     let userId = userInfo ? userInfo.dataset['userId'] : null;
 
     if(clearAvatar){
@@ -27,11 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         let url = '/user-management-system/user/update/' + userId;
 
                         axios.patch(url, {
-                            data: {
-                                attributes: {
-                                    'profile_picture_url': null
-                                }
-                            }
+                            'profile_picture_url': null
                         })
                             .then(response => {
                                 if(response.data){
@@ -65,55 +62,53 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
-    if(clearGearPhoto){
-        clearGearPhoto.addEventListener('click', () => {
+    if(clearGearPhotoButtons){
+        clearGearPhotoButtons.forEach( (clearButton) => {
+            
+            clearButton.addEventListener('click', () => {
+                console.log(clearButton.dataset)
+                Toasts.confirm({
+                    title: 'Do you really want to reset your gear photo?',
+                    submitButton: {
+                        text: '<span class="bg-drumeo text-white short">YES</span>',
+                        callback: () => {
+    
+                            let url = '/user-management-system/user/update/' + userId;
+                            let gearAttribute = { [`${clearButton.dataset.clearGearPhoto}_gear_photo`]: null }
 
-            Toasts.confirm({
-                title: 'Do you really want to reset your gear photo?',
-                submitButton: {
-                    text: '<span class="bg-drumeo text-white short">YES</span>',
-                    callback: () => {
-
-                        let url = '/user-management-system/user/update/' + userId;
-
-                        axios.patch(url, {
-                            data: {
-                                //todo: update also for pianote/guitareo/singeo
-                                attributes: {
-                                    'drums_gear_photo': null
-                                }
-                            }
-                        })
-                            .then(response => {
-                                if(response.data){
+                            axios.patch(url, gearAttribute)
+                                .then(response => {
+                                    if(response.data){
+                                        Toasts.push({
+                                            icon: 'happy',
+                                            title: 'Woohoo!',
+                                            themeColor: 'drumeo',
+                                            message: 'Gear Photo Successfully reset. Refreshing the page.'
+                                        });
+                                        location.reload();
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(error);
                                     Toasts.push({
-                                        icon: 'happy',
-                                        title: 'Woohoo!',
-                                        themeColor: 'drumeo',
-                                        message: 'Gear Photo Successfully reset. Refreshing the page.'
+                                        icon: 'doh',
+                                        title: 'An error happened on the server...',
+                                        themeColor: 'error',
+                                        message: 'Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
+                                            '<br><br><span class="font-italic text-grey-3">' +
+                                            'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
+                                            '</span></span>'
                                     });
-                                    location.reload();
-                                }
-                            })
-                            .catch(error => {
-                                console.error(error);
-                                Toasts.push({
-                                    icon: 'doh',
-                                    title: 'An error happened on the server...',
-                                    themeColor: 'error',
-                                    message: 'Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
-                                        '<br><br><span class="font-italic text-grey-3">' +
-                                        'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
-                                        '</span></span>'
                                 });
-                            });
+                        }
+                    },
+                    cancelButton: {
+                        text: '<span class="bg-dark inverted text-grey-3 short">NO</span>'
                     }
-                },
-                cancelButton: {
-                    text: '<span class="bg-dark inverted text-grey-3 short">NO</span>'
-                }
-            });
-        });
+                });
+            });  
+
+        })
     }
 
     function toggleUnsubscribeForm(){
