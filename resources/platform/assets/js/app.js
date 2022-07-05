@@ -103,6 +103,7 @@ const app = createApp({
             gearPhoto.setAttribute(
                 'src', payload.image_url
             );
+            gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
             Toasts.push({
                 icon: 'happy',
@@ -118,6 +119,7 @@ const app = createApp({
             gearPhoto.setAttribute(
                 'src', payload.image_url
             );
+            gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
             Toasts.push({
                 icon: 'happy',
@@ -133,6 +135,7 @@ const app = createApp({
             gearPhoto.setAttribute(
                 'src', payload.image_url
             );
+            gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
             Toasts.push({
                 icon: 'happy',
@@ -148,6 +151,7 @@ const app = createApp({
             gearPhoto.setAttribute(
                 'src', payload.image_url
             );
+            gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
             Toasts.push({
                 icon: 'happy',

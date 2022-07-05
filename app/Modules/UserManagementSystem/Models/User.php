@@ -225,6 +225,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'drums_gear_hardware_brands',
         'drums_gear_cymbal_brands',
         'drums_gear_set_brands',
+        'drums_gear_photo',
         'drums_playing_since_year',
         'piano_gear_keyboard_brands',
         'piano_gear_piano_brands',

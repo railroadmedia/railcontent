@@ -26,7 +26,7 @@
                                  data-singeo-gear-update="true"
                             >
                         </button>
-                        @if($canClear)
+                        @if( !empty($gearPhotoUrl) )
                             <span data-clear-gear-photo="singing" class="rounded clear-button tw-top-1 tw-right-1">
                                 <i class="fas fa-times"></i>
                             </span>
