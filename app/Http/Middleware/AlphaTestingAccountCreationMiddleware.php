@@ -45,7 +45,7 @@ class AlphaTestingAccountCreationMiddleware
 
             event(new UserCreated($newUser));
 
-            if (strpos($user->email, 'pack') !== 0) {
+            if (strpos($user->email, 'pack') !== false) {
                 // make pack only user
                 $this->userProductService->assignUserProduct(
                     new EcommerceUser($newUser->id, $newUser->email),
@@ -57,14 +57,14 @@ class AlphaTestingAccountCreationMiddleware
                     $this->productRepository->find(404),
                     null
                 );
-            } elseif (strpos($user->email, 'expired') !== 0) {
+            } elseif (strpos($user->email, 'expired') !== false) {
                 // make expired member (no packs)
                 $this->userProductService->assignUserProduct(
                     new EcommerceUser($newUser->id, $newUser->email),
                     $this->productRepository->find(125),
                     Carbon::now()->subMonth()
                 );
-            } elseif (strpos($user->email, 'member') !== 0) {
+            } elseif (strpos($user->email, 'member') !== false) {
                 // make member
                 $this->userProductService->assignUserProduct(
                     new EcommerceUser($newUser->id, $newUser->email),
