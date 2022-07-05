@@ -14,12 +14,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * App\Modules\UserManagementSystem\Models\User
@@ -373,7 +372,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isAMember()
     {
-        return true; // todo: connect
+        return $this->isALifetimeMember() ||
+            (!empty($this->membership_expiration_date) && $this->membership_expiration_date > Carbon::now());
     }
 
     /**
@@ -381,11 +381,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isALifetimeMember($brand = null)
     {
-        if ($brand == 'drumeo') {
+        // todo: may need to account for brand here in the future
 
-        }
-
-        return true; // todo: connect
+        return $this->is_lifetime_member ?? false;
     }
 
     /**
