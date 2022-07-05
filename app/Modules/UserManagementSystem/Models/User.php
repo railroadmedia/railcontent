@@ -271,8 +271,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true): Attribute
-    {
+    public function profilePictureUrl($usingCDN = true)
+    : Attribute {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
@@ -301,7 +301,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function totalXp(): Attribute
+    public function totalXp()
+    : Attribute
     {
         return Attribute::make(
             get: function ($value) {
@@ -374,7 +375,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isAMember()
     {
-        return true; // todo: connect
+        return $this->access_level == 'member';
     }
 
     /**
@@ -382,11 +383,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isALifetimeMember($brand = null)
     {
-        if ($brand == 'drumeo') {
-
-        }
-
-        return true; // todo: connect
+        return $this->is_lifetime_member;
     }
 
     /**
@@ -484,13 +481,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function sendPasswordResetNotification($token)
     {
         //todo: to be configured
-//        $class = config('usora.password_reset_notification_class');
-//
-//        (new AnonymousNotifiable())->route(
-//            config('usora.password_reset_notification_channel'),
-//            $this->getEmailForPasswordReset()
-//        )
-//            ->notify(new $class($token));
+        //        $class = config('usora.password_reset_notification_class');
+        //
+        //        (new AnonymousNotifiable())->route(
+        //            config('usora.password_reset_notification_channel'),
+        //            $this->getEmailForPasswordReset()
+        //        )
+        //            ->notify(new $class($token));
     }
 
     /**
