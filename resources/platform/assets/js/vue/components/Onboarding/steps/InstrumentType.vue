@@ -1,11 +1,13 @@
 <script setup>
+import { ref } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import SkipStep from "../SkipStep.vue";
 import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import { ref } from "vue";
+import { saveGear } from "../services"
+
 const props = defineProps({
   brand: {
     type: String,
@@ -40,6 +42,35 @@ function handleMultiSelection(selection) {
 function skipStep() {
   alert("* the user skipped the step *");
 }
+
+const handleNextStep = () => {
+  const data = [];
+
+  Object.entries(props.info.instrumentTypes).forEach(([type, isChecked]) => {
+    if (isChecked) {
+      data.push(type);
+    }
+  })
+
+  const instrumentBrand = {
+    guitar: 'guitareo',
+    drums: 'drumeo',
+    piano: 'pianote',
+    singing: 'singeo'
+  };
+
+  saveGear({
+    data,
+    brand: instrumentBrand[props.info.instrument]
+  }).then(() => {
+    emit('onChangeStep', 3);
+    emit('onCheckStep', 2, true);
+  }).catch(() => {
+    setTimeout(() => {
+      showErrorNotification.value = true;
+    }, 3000)
+  });
+};
 
 function goBack() {
   emit('onChangeStep', 1);
@@ -82,11 +113,7 @@ function goBack() {
     >
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 3);
-          }
-        "
+        @onButtonClick="handleNextStep"
         :isDisabled="!steps[2].checked"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
         >Next</Button
@@ -99,11 +126,7 @@ function goBack() {
       />
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 3);
-          }
-        "
+        @onButtonClick="handleNextStep"
         :isDisabled="!steps[2].checked"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button

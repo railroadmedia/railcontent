@@ -20,11 +20,12 @@ class OnboardingController extends Controller
     public function gears(Request $request)
     {
         $request->validate(['data' => 'required']);
+        $request->validate(['brand' => 'required']);
 
-        OnboardingGear::where(['brand' => brand(), 'user_id' => user()->id])->delete();
+        OnboardingGear::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
         foreach ($request->data as $gear) {
-            OnboardingGear::create(['gear' => $gear, 'brand' => brand(), 'user_id' => user()->id]);
+            OnboardingGear::create(['gear' => $gear, 'brand' => $request->brand, 'user_id' => user()->id]);
         }
 
         return response(json_encode(user()), 200);

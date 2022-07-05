@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from 'vue'
+import { ref, inject, onMounted } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -15,7 +15,23 @@ const props = defineProps({
     },
     configOptions: {
         type: Object,
-    }
+    },
+    selectedGear: {
+        type: Object,
+    },
+    selectedTopics: {
+        type: Object,
+    },
+    selectedGenres: {
+        type: Object,
+    },
+    selectedExperience: {
+        type: Object,
+    },
+})
+
+onMounted(() => {
+    console.log(props.selectedGear)
 })
 
 const userId = inject('userId');
