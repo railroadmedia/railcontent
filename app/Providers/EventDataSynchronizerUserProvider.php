@@ -42,4 +42,19 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         return false;
     }
 
+    public function savePackOwnerData(int $userId, bool $isPackOwner)
+    : bool {
+        $user = User::query()->find($userId);
+
+        if (!empty($user)) {
+            $user->is_pack_owner = $isPackOwner;
+
+            $user->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
 }

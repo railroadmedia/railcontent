@@ -179,6 +179,7 @@ use Illuminate\Support\Facades\Hash;
  * @property int $is_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
  * @method static Builder|User whereMembershipExpirationDate($value)
+ * @property int $is_pack_owner
  * @property int $send_mobile_app_push_notifications
  * @property int $send_email_notifications
  * @method static Builder|User whereSendEmailNotifications($value)
@@ -533,5 +534,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function setPassword($password, $hash = true)
     {
         $this->password = $hash ? Hash::make($password) : $password;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPackOwner()
+    {
+        return $this->is_pack_owner;
     }
 }
