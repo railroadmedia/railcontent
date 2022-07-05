@@ -25323,6 +25323,9 @@ a:visited{
   }
 }
 @media (min-width: 1536px){
+  .\32xl\:tw-mt-0{
+    margin-top: 0px !important;
+  }
   .\32xl\:tw-ml-4{
     margin-left: 1rem !important;
   }
