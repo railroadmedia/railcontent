@@ -3,11 +3,10 @@ import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import SquaredCard from "../../SquaredCard/SquaredCard.vue";
 import SquaresContainer from "../../SquaredCard/SquaresContainer.vue";
 import ExperienceCardContent from "../../SquaredCard/ExperienceCardContent.vue";
-import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
-import { ref } from "vue";
+
 const props = defineProps({
   brand: {
     type: String,
@@ -26,10 +25,6 @@ function onExperienceSelection(selection) {
   emit("onCheckStep", 3, true);
   emit("onChangeStep", 4);
   emit("onChangeInfo", { ...props.info, experience: selection });
-}
-
-function skipStep() {
-  alert("* the user skipped the step *");
 }
 
 function goBack() {
@@ -127,7 +122,7 @@ function goBack() {
         :steps="steps"
         @onChangeStep="(s) => emit('onChangeStep', s)"
       />
-      <SkipStep @onSkip="skipStep" />
+      <SkipStep />
     </div>
   </StepWrapper>
 </template>

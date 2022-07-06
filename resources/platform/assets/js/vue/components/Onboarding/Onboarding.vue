@@ -40,7 +40,7 @@ const userId = inject('userId');
 const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
-const initialInfo = getInitialInfo({ userId, userName, userAvatar });
+const initialInfo = getInitialInfo({ userId, userName, userAvatar, props });
 
 let currentStep = ref(0)
 let info = ref(initialInfo)
