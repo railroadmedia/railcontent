@@ -892,11 +892,17 @@ class ContentService
                 );
             }
 
+            $filterFields = $filter->getFilterFields() ?? [];
+
+            if ($pullFilterFields && !empty($filterFields['difficulty'])) {
+                $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup($filterFields['difficulty']);
+            }
+
             $resultsDB = new ContentFilterResultsEntity(
                 [
                     'results' => $filter->retrieveFilter(),
                     'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                    'filter_options' => $filterFields,
                 ]
             );
 
@@ -905,6 +911,27 @@ class ContentService
         }
 
         return Decorator::decorate($results, 'content');
+    }
+
+    // for remove extraneous options and order logically rather than alphabetically
+    private function difficultyFilterOptionsCleanup($difficultyOptions)
+    {
+        $hasBeginner = in_array('Beginner', $difficultyOptions);
+        $hasIntermediate = in_array('Intermediate', $difficultyOptions);
+        $hasAdvanced = in_array('Advanced', $difficultyOptions);
+        if ($hasBeginner || $hasIntermediate || $hasAdvanced) {
+            $difficultyOptions = [];
+            if ($hasBeginner) {
+                $difficultyOptions[] = 'Beginner';
+            }
+            if ($hasIntermediate) {
+                $difficultyOptions[] = 'Intermediate';
+            }
+            if ($hasAdvanced) {
+                $difficultyOptions[] = 'Advanced';
+            }
+        }
+        return $difficultyOptions;
     }
 
     /**
