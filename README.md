@@ -175,8 +175,7 @@ Generates content progress, list additions, coach follows, etc, for the user for
 Example:  
 `r mwp artisan SeedUserContentData "caleb@drumeo.com"`
 
-
-
+  
 # Creating Test Users
 When the correct middleware is enabled (during dev, qa, and for alpha testing) 
 you can spin up test users using the login page. Any email and password combination will work. It's recommended to use
@@ -194,3 +193,68 @@ You can use key words in the email to control which use case you would like the 
   - For example, you could use: caleb+expired1@drumeo.com
 - If the word 'pack' is in the email, the new user will be given 2 valid packs and no membership.
   - For example, you could use: caleb+pack1@drumeo.com
+   
+
+# Cloud Environments
+
+We have 11 total environments:
+- **production** - our primary environment that is live to students
+- **pre-production** - for testing large project deployment processes
+- **beta-testing** - for beta testing projects to internal staff or students
+- **web-staging-one** - for general purpose website testing, review, etc
+- **web-staging-two** - for general purpose website testing, review, etc
+- **web-staging-three** - for general purpose website testing, review, etc
+- **web-staging-four** - for general purpose website testing, review, etc
+- **web-staging-five** - for general purpose website testing, review, etc
+- **app-staging-one** - for general purpose mobile app API testing, review, etc
+- **app-staging-two** - for general purpose mobile app API testing, review, etc
+- **app-staging-three** - for general purpose mobile app API testing, review, etc
+
+Each environment deploys a specific branch in the musora-web-platform repository under the same name as the environment
+**except for 'production' which deploys the 'master' branch**.
+
+## Web URLs
+
+- [https://www.musora.com/](https://www.musora.com/)
+- [https://pre-production.musora.com/](https://pre-production.musora.com/)
+- [https://beta-testing.musora.com/](https://beta-testing.musora.com/)
+- [https://web-staging-one.musora.com/](https://web-staging-one.musora.com/)
+- [https://web-staging-two.musora.com/](https://web-staging-two.musora.com/)
+- [https://web-staging-three.musora.com/](https://web-staging-three.musora.com/)
+- [https://web-staging-four.musora.com/](https://web-staging-four.musora.com/)
+- [https://web-staging-five.musora.com/](https://web-staging-five.musora.com/)
+- [https://app-staging-one.musora.com/](https://app-staging-one.musora.com/)
+- [https://app-staging-two.musora.com/](https://app-staging-two.musora.com/)
+- [https://app-staging-three.musora.com/](https://app-staging-three.musora.com/)
+
+# How To Deploy
+
+## Any Staging/Testing/Beta/Pre Environment
+To deploy any environment except production, push to the branch. GitHub actions automatically deploys the branch
+anytime new changes are pushed. This usually takes around 5 minutes.
+
+## Production
+Coming soon...
+
+# How To Run Artisan Commands On Cloud Environments
+You can run commands on our staging and other vapor based cloud environments using
+the vapor CLI tool. We have already built integration with our 'r' CLI tool.  
+
+First, ensure you have a valid Laravel Vapor API token. Log in to your vapor account and create one here:
+[https://vapor.laravel.com/app/account/api-tokens](https://vapor.laravel.com/app/account/api-tokens)  
+
+Then, add your login email and API token (as the password) in your railenvironment credentials/credentials file.  
+`
+laravelVaporEmail="your-login-email@email.com"
+laravelVaporPassword="your-api-token"
+`  
+
+You should now be able to run any vapor command using the `r` tool from our manager container:
+`r vapor` to see a list of all possible commands.  
+
+You can run `r vapor env:list` to check if you are connected to our vapor project properly. You should see a list 
+of all our environments.  
+
+To run artisan commands including migrate on any vapor environment use the following command substituting 
+'web-staging-one' with whatever environment you wish to run it on:  
+`r vapor command web-staging-one --command="php artisan migrate"`
