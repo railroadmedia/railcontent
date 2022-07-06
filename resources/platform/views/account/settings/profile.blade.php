@@ -36,7 +36,7 @@
                     'brand' => '{{ $brand }}',
                     'method' => 'POST',
                     'profilePictureUrl' => user()->profile_picture_url,
-                    'uploadRequestEndpoint' => '/user-management-system/profile-picture/upload',
+                    'uploadRequestEndpoint' => '/user-management-system/picture/upload',
                     'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
                     'userId' => user()->id,
                     'canClearAvatar' => stripos(user()->profile_picture_url, 'defaults') === false

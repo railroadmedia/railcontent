@@ -21520,6 +21520,9 @@ a:visited{
 .tw--bottom-44{
   bottom: -11rem !important;
 }
+.tw-top-1{
+  top: 0.25rem !important;
+}
 .tw-z-10{
   z-index: 10 !important;
 }
@@ -21562,11 +21565,11 @@ a:visited{
 .tw-row-span-1{
   grid-row: span 1 / span 1 !important;
 }
-.tw-m-4{
-  margin: 1rem !important;
-}
 .tw-m-0{
   margin: 0px !important;
+}
+.tw-m-4{
+  margin: 1rem !important;
 }
 .tw-mx-auto{
   margin-left: auto !important;
@@ -21667,9 +21670,6 @@ a:visited{
 }
 .tw-mr-3{
   margin-right: 0.75rem !important;
-}
-.tw-mr-0{
-  margin-right: 0px !important;
 }
 .tw-mr-1{
   margin-right: 0.25rem !important;
@@ -21817,6 +21817,9 @@ a:visited{
 }
 .tw-mr-0\.5{
   margin-right: 0.125rem !important;
+}
+.tw-mr-0{
+  margin-right: 0px !important;
 }
 .tw-mt-\[30px\]{
   margin-top: 30px !important;
@@ -25264,9 +25267,6 @@ a:visited{
   .xl\:tw-inline-flex{
     display: inline-flex !important;
   }
-  .xl\:tw-w-\[420px\]{
-    width: 420px !important;
-  }
   .xl\:tw-w-full{
     width: 100% !important;
   }
@@ -25323,6 +25323,15 @@ a:visited{
   }
 }
 @media (min-width: 1536px){
+  .\32xl\:tw-mt-0{
+    margin-top: 0px !important;
+  }
+  .\32xl\:tw-ml-4{
+    margin-left: 1rem !important;
+  }
+  .\32xl\:tw-w-\[420px\]{
+    width: 420px !important;
+  }
   .\32xl\:tw-w-screen{
     width: 100vw !important;
   }
@@ -25337,6 +25346,9 @@ a:visited{
   }
   .\32xl\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  .\32xl\:tw-flex-row{
+    flex-direction: row !important;
   }
   .\32xl\:tw-text-\[24px\]{
     font-size: 24px !important;

@@ -12,6 +12,7 @@
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" @click="likeContent">
               <span
+                class="tw-shadow-none"
                 style="padding: 0 8px"
                 :class="hasLiked ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
               >
@@ -26,7 +27,7 @@
 
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" data-open-modal="shareVideoModal">
-              <span class="text-grey-3 dark:tw-text-white" style="padding: 0 8px">
+              <span class="tw-shadow-none text-grey-3 dark:tw-text-white" style="padding: 0 8px">
                 <i class="fas fa-share mb-1"></i>
                 Share
               </span>
@@ -42,6 +43,7 @@
               @click="resourceDropdown = !resourceDropdown"
             >
               <span
+                class="tw-shadow-none"
                 :class="resourceDropdown ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                 style="padding: 0 8px"
               >
@@ -89,6 +91,7 @@
           >
             <button class="btn stacked" @click="addToList">
               <span
+                class="tw-shadow-none"
                 style="padding: 0 8px"
                 :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
               >

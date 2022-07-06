@@ -1,4 +1,4 @@
-@extends('partials.layout', ['forceHideSidebar' => true])
+@extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
     <title>{{ $lessonContent->fetch('fields.title') }} | {{ $brand }} | Musora</title>
@@ -8,8 +8,6 @@
     <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
 @endsection
 
-
-
 @section('content')
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
@@ -17,7 +15,7 @@
     {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
     {{-- TODO: RT integration --}}
 
-    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col xl:tw-flex-row">
+    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
 
         <div class="tw-flex tw-flex-col tw-w-full">
             
@@ -252,9 +250,9 @@
         {{-- Related Lessons Section --}}
         <div class="">
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col xl:tw-w-[420px] tw-m-4 tw-mr-0">
-                    <div class="tw-flex tw-flex-row tw-mb-4">
-                        <h6 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">
+                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                    <div class="tw-flex tw-flex-row tw-mb-5">
+                        <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-black dark:tw-text-white">
                             Related Lessons
                         </h6>
                     </div>

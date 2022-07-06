@@ -97,24 +97,68 @@ const app = createApp({
             });
         },
 
-        gearPhotoUploaded(payload){
-            UserService.setUserAttributes(currentUserId, {
-                'piano_gear_photo': payload.image_url
-            })
-                .then(response => {
-                    const gearPhoto = document.querySelector('[data-gear-update]');
-                    window.closeAllModals();
-                    gearPhoto.setAttribute(
-                        'src', payload.image_url
-                    );
-                    payload.cropper.resetCropper();
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'WOOHOO!',
-                        themeColor: 'singeo',
-                        message: 'Your gear looks fantastic!'
-                    });
-                });
+        gearDrumeoPhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'drumeo',
+                message: 'Your drum gear looks fantastic!'
+            });
+        },
+
+        gearPianotePhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-pianote-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'pianote',
+                message: 'Your piano gear looks fantastic!'
+            });
+        },
+
+        gearGuitareoPhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'guitareo',
+                message: 'Your gear looks fantastic!'
+            });
+        },
+
+        gearSingeoPhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-singeo-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'singeo',
+                message: 'Your singing gear looks fantastic!'
+            });
         },
 
         handleVideoPlay(payload){

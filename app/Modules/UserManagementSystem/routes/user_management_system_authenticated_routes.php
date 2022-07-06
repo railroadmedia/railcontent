@@ -60,21 +60,23 @@ Route::group(
         )
             ->name('user_management_system.email-change.confirm');
 
-        Route::match(
-            ['post', 'put'],
-            'profile-picture/upload',
-            [
-                'as' => 'user_management_system.profile-picture.upload',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@upload',
-            ]
-        );
 
         Route::match(
             ['post', 'put'],
-            'profile-picture/upload-from-s3-front-end',
+            'picture/upload-from-s3-front-end',
             [
-                'as' => 'user_management_system.profile-picture.upload-from-s3-front-end',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@uploadFromS3FrontEnd',
+                'as' => 'user_management_system.picture.upload-from-s3-front-end',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhotoFromS3FrontEnd',
+            ]
+        );
+
+
+        Route::match(
+            ['post', 'put'],
+            'picture/upload',
+            [
+                'as' => 'user_management_system.picture.upload',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhoto',
             ]
         );
     }
