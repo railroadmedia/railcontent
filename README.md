@@ -244,10 +244,10 @@ First, ensure you have a valid Laravel Vapor API token. Log in to your vapor acc
 [https://vapor.laravel.com/app/account/api-tokens](https://vapor.laravel.com/app/account/api-tokens)  
 
 Then, add your login email and API token (as the password) in your railenvironment credentials/credentials file.  
-`
+```bash
 laravelVaporEmail="your-login-email@email.com"
 laravelVaporPassword="your-api-token"
-`  
+```  
 
 You should now be able to run any vapor command using the `r` tool from our manager container:
 `r vapor` to see a list of all possible commands.  
