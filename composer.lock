@@ -7404,12 +7404,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "ded9bc61f23a8cb0c7f9478c5fff0884e1490b28"
+                "reference": "a50b7865550fb40d5a07c0109bccde3c22491823"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/ded9bc61f23a8cb0c7f9478c5fff0884e1490b28",
-                "reference": "ded9bc61f23a8cb0c7f9478c5fff0884e1490b28",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/a50b7865550fb40d5a07c0109bccde3c22491823",
+                "reference": "a50b7865550fb40d5a07c0109bccde3c22491823",
                 "shasum": ""
             },
             "require": {
@@ -7458,7 +7458,7 @@
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
                 "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration"
             },
-            "time": "2022-07-05T22:40:39+00:00"
+            "time": "2022-07-06T15:06:38+00:00"
         },
         {
             "name": "railroad/location",
