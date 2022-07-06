@@ -8,6 +8,7 @@ import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Coaches from './steps/Coaches.vue'
+import { initialSteps, instrumentBrand, getInitialInfo } from './constants';
 
 const props = defineProps({
     brand: {
@@ -28,42 +29,18 @@ const props = defineProps({
     selectedExperience: {
         type: Object,
     },
-})
+});
 
+// TODO: Remove onMounted
 onMounted(() => {
     console.log(props.selectedGear)
-})
+});
 
 const userId = inject('userId');
 const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
-const initialSteps = [
-    { label: 'ABOUT', checked: false },
-    { label: 'INSTRUMENT', checked: false },
-    { label: 'GEAR', checked: false },
-    { label: 'EXPERIENCE', checked: false },
-    { label: 'GENRES', checked: false },
-    { label: 'TOPICS', checked: false },
-    { label: 'COACHES', checked: false }
-]
-
-const instrumentBrand = {
-    piano: 'pianote',
-    drums: 'drumeo',
-    guitar: 'guitareo',
-    singing: 'singeo',
-    default: 'drumeo'
-}
-const initialInfo = {
-    user: {
-        id: userId,
-        name: userName || null,
-        avatarUrl: userAvatar || null
-    },
-    instrument: 'default',
-    instrumentTypes: {}
-}
+const initialInfo = getInitialInfo({ userId, userName, userAvatar });
 
 let currentStep = ref(0)
 let info = ref(initialInfo)

@@ -39,10 +39,10 @@ class OnboardingController extends Controller
     {
         $request->validate(['data' => 'required']);
 
-        OnboardingTopic::where(['brand' => brand(), 'user_id' => user()->id])->delete();
+        OnboardingTopic::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
         foreach ($request->data as $topic) {
-            OnboardingTopic::create(['topic' => $topic, 'brand' => brand(), 'user_id' => user()->id]);
+            OnboardingTopic::create(['topic' => $topic, 'brand' => $request->brand, 'user_id' => user()->id]);
         }
 
         return response(json_encode(user()), 200);
@@ -56,10 +56,10 @@ class OnboardingController extends Controller
     {
         $request->validate(['data' => 'required']);
 
-        OnboardingGenre::where(['brand' => brand(), 'user_id' => user()->id])->delete();
+        OnboardingGenre::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
         foreach ($request->data as $genre) {
-            OnboardingGenre::create(['genre' => $genre, 'brand' => brand(), 'user_id' => user()->id]);
+            OnboardingGenre::create(['genre' => $genre, 'brand' => $request->brand, 'user_id' => user()->id]);
         }
 
         return response(json_encode(user()), 200);
@@ -73,9 +73,9 @@ class OnboardingController extends Controller
     {
         $request->validate(['experience_level' => 'integer|required|max:3']);
 
-        OnboardingExperience::where(['brand' => brand(), 'user_id' => user()->id])->delete();
+        OnboardingExperience::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
         OnboardingExperience::create(
-            ['experience_level' => $request->experience_level, 'brand' => brand(), 'user_id' => user()->id]
+            ['experience_level' => $request->experience_level, 'brand' => $request->brand, 'user_id' => user()->id]
         );
 
         return response(json_encode(user()), 200);

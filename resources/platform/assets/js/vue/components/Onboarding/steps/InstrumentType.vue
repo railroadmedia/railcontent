@@ -7,6 +7,7 @@ import SkipStep from "../SkipStep.vue";
 import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
 import { saveGear } from "../services"
+import { instrumentBrand } from "../constants"
 
 const props = defineProps({
   brand: {
@@ -39,9 +40,6 @@ function handleMultiSelection(selection) {
   );
   emit("onChangeInfo", { ...props.info, instrumentTypes: selection });
 }
-function skipStep() {
-  alert("* the user skipped the step *");
-}
 
 const handleNextStep = () => {
   const data = [];
@@ -51,13 +49,6 @@ const handleNextStep = () => {
       data.push(type);
     }
   })
-
-  const instrumentBrand = {
-    guitar: 'guitareo',
-    drums: 'drumeo',
-    piano: 'pianote',
-    singing: 'singeo'
-  };
 
   saveGear({
     data,

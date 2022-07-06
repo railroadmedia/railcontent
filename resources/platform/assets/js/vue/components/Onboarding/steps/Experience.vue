@@ -19,6 +19,7 @@ const props = defineProps({
     type: Object,
   },
 });
+
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
 function onExperienceSelection(selection) {
