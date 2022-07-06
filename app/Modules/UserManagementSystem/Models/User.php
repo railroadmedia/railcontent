@@ -540,4 +540,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return $this->is_pack_owner;
     }
+
+    /**
+     * @return bool
+     */
+    public function isPackOnlyOwner()
+    {
+        return $this->isPackOwner() && !$this->isAMember();
+    }
 }
