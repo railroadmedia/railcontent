@@ -70,7 +70,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     : array
     {
         return [
-            'totalXp' => user()->totalXp(),
+            'totalXp' => user()->total_xp,
             'xpRank' => user()->getXpRank(),
         ];
     }
