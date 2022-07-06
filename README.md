@@ -174,3 +174,23 @@ In your blade file you can load in these variables like this:
 Generates content progress, list additions, coach follows, etc, for the user for testing.  
 Example:  
 `r mwp artisan SeedUserContentData "caleb@drumeo.com"`
+
+
+
+# Creating Test Users
+When the correct middleware is enabled (during dev, qa, and for alpha testing) 
+you can spin up test users using the login page. Any email and password combination will work. It's recommended to use
+the email as the password for testing convenience.
+If an account with the 
+email you input does not exist, one will automatically be created with the email and password you entered. 
+You will be logged in under this new user.
+If you enter an email that already exists you must enter the correct password for that user.  
+
+
+You can use key words in the email to control which use case you would like the user to represent.  
+- If the word 'member' is in the email, the new user will be given a valid membership status.
+  - For example, you could use: caleb+member1@drumeo.com
+- If the word 'expired' is in the email, the new user will be given an expired membership.
+  - For example, you could use: caleb+expired1@drumeo.com
+- If the word 'pack' is in the email, the new user will be given 2 valid packs and no membership.
+  - For example, you could use: caleb+pack1@drumeo.com
