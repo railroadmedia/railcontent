@@ -6,6 +6,7 @@ import ExperienceCardContent from "../../SquaredCard/ExperienceCardContent.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
+import { saveExperience } from "../services"
 
 const props = defineProps({
   brand: {
@@ -22,10 +23,23 @@ const props = defineProps({
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
 function onExperienceSelection(selection) {
-  emit("onCheckStep", 3, true);
-  emit("onChangeStep", 4);
-  emit("onChangeInfo", { ...props.info, experience: selection });
+  emit("onChangeInfo", { ...props.info, experience: { ...props.info.experience, [props.brand]: selection } });
+  handleNextStep(selection);
 }
+
+const handleNextStep = (selection) => {
+  saveExperience({
+    level: selection,
+    brand: props.brand,
+  }).then(() => {
+    emit("onCheckStep", 3, true);
+    emit("onChangeStep", 4);
+  }).catch(() => {
+    setTimeout(() => {
+      showErrorNotification.value = true;
+    }, 3000)
+  });
+};
 
 function goBack() {
   emit('onChangeStep', 2);
@@ -55,9 +69,9 @@ function goBack() {
       <SquaresContainer>
         <SquaredCard
           type="green"
-          :active="info.experience === 1"
+          :active="info.experience[brand] === 0"
           defaultBorderColor="tw-border-[#7E9AB1]"
-          @onSelect="() => onExperienceSelection(1)"
+          @onSelect="() => onExperienceSelection(0)"
         >
           <ExperienceCardContent
             title="Level 1"
@@ -66,10 +80,10 @@ function goBack() {
           />
         </SquaredCard>
         <SquaredCard
-          :active="info.experience === 2"
+          :active="info.experience[brand] === 1"
           type="blue"
           defaultBorderColor="tw-border-[#7E9AB1]"
-          @onSelect="() => onExperienceSelection(2)"
+          @onSelect="() => onExperienceSelection(1)"
         >
           <ExperienceCardContent
             title="Level 2-3"
@@ -78,10 +92,10 @@ function goBack() {
           />
         </SquaredCard>
         <SquaredCard
-          :active="info.experience === 4"
+          :active="info.experience[brand] === 2"
           defaultBorderColor="tw-border-[#7E9AB1]"
           type="yellow"
-          @onSelect="() => onExperienceSelection(4)"
+          @onSelect="() => onExperienceSelection(2)"
         >
           <ExperienceCardContent
             title="Level 4-6"
@@ -90,10 +104,10 @@ function goBack() {
           />
         </SquaredCard>
         <SquaredCard
-          :active="info.experience === 7"
+          :active="info.experience[brand] === 3"
           defaultBorderColor="tw-border-[#7E9AB1]"
           type="red"
-          @onSelect="() => onExperienceSelection(7)"
+          @onSelect="() => onExperienceSelection(3)"
         >
           <ExperienceCardContent
             title="Level 7-10"

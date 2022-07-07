@@ -1,9 +1,9 @@
 # Onboarding apis for each step:
 
-For gears, topics, genres and experience, data can be found by calling the following attributes on the user object:
+For gear, topics, genres and experience, data can be found by calling the following attributes on the user object:
 
 ```php
-    user()->onboardingGears;
+    user()->onboardingGear;
     user()->onboardingTopics;
     user()->onboardingGenres;
     user()->onboardingExperience;
@@ -18,7 +18,7 @@ if exists: go to next page
 else: show the page
 
 when pressing 'next button':
-**`POST /user_management_system/user/update/{user_id}`**
+**`POST /user-management-system/user/update/{user_id}`**
 
 ```php
 ['display_name' => 'required']
@@ -29,17 +29,17 @@ when pressing 'next button':
 - if user comes from web app and the brand is already selected, jump this step
 - no api call needed
 
-## 3 GEARS
+## 3 GEAR
 
-- check if {{ user()->onboardingGears }} returns at least a gear from the selected brand
+- check if {{ user()->onboardingGear }} returns at least a gear from the selected brand
 
 if it returns: go to next step
 
-if it does not return: show the gears step
+if it does not return: show the gear step
 
 when pressing 'next button':
 
-**`POST /user_management_system/onboarding-gears`**
+**`POST /user-management-system/onboarding-gear`**
 
 ```php
 [
@@ -49,7 +49,7 @@ when pressing 'next button':
 ...
 ];
 ```
-('data' parameter is an array with all the gears values selected)
+('data' parameter is an array with all the gear values selected)
 
 
 ## 4 EXPERIENCE

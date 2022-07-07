@@ -8,6 +8,7 @@ import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
 import { saveGear } from "../services"
 import { instrumentBrand } from "../constants"
+import { getMultiSelectOptions } from "../utils";
 
 const props = defineProps({
   brand: {
@@ -27,24 +28,25 @@ const props = defineProps({
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 
 const options = ref(
-  props.configOptions[props.brand].gears.map(
-    gear => ({ text: gear, value: gear })
-  )
+  getMultiSelectOptions({
+    property: 'gears',
+    ...props
+  })
 );
 
 function handleMultiSelection(selection) {
   emit(
     "onCheckStep",
     2,
-    Object.values(selection).find((val) => val)
+    !!Object.values(selection).find((val) => val)
   );
-  emit("onChangeInfo", { ...props.info, instrumentTypes: selection });
+  emit("onChangeInfo", { ...props.info, instrumentTypes: { ...props.info.instrumentTypes, [props.brand]: selection} });
 }
 
 const handleNextStep = () => {
   const data = [];
 
-  Object.entries(props.info.instrumentTypes).forEach(([type, isChecked]) => {
+  Object.entries(props.info.instrumentTypes[props.brand]).forEach(([type, isChecked]) => {
     if (isChecked) {
       data.push(type);
     }
@@ -52,7 +54,7 @@ const handleNextStep = () => {
 
   saveGear({
     data,
-    brand: instrumentBrand[props.info.instrument]
+    brand: props.brand
   }).then(() => {
     emit('onChangeStep', 3);
     emit('onCheckStep', 2, true);
@@ -89,7 +91,7 @@ function goBack() {
       />
       <MultiSelect
         :options="options"
-        :initialSelection="info.instrumentTypes"
+        :initialSelection="info.instrumentTypes[brand]"
         classOverride="tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />

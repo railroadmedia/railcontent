@@ -8,7 +8,8 @@ import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Coaches from './steps/Coaches.vue'
-import { initialSteps, instrumentBrand, getInitialInfo } from './constants';
+import { initialSteps, instrumentBrand } from './constants';
+import { getInitialInfo } from './utils';
 
 const props = defineProps({
     brand: {
@@ -40,15 +41,14 @@ const userId = inject('userId');
 const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
-const initialInfo = getInitialInfo({ userId, userName, userAvatar, props });
-
-let currentStep = ref(0)
-let info = ref(initialInfo)
-let steps = ref(initialSteps)
+const currentStep = ref(0)
+const info = ref(getInitialInfo({ userId, userName, userAvatar, ...props }))
+const steps = ref(initialSteps)
 
 function changeStep(step) {
     currentStep.value = step
 }
+
 function changeInfo(newInfo) {
     info.value = newInfo
 }
