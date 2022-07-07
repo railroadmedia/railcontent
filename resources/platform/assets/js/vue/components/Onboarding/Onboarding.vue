@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject, onMounted } from 'vue'
+import { ref, inject } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -30,11 +30,6 @@ const props = defineProps({
     selectedExperience: {
         type: Object,
     },
-});
-
-// TODO: Remove onMounted
-onMounted(() => {
-    console.log(props.selectedGear)
 });
 
 const userId = inject('userId');
