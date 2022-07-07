@@ -39,12 +39,13 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function getCurrentUserMembershipData(?string $brand)
     : array {
-        // TODO: Implement getCurrentUserMembershipData() method.
+        $user = user();
+
         return [
-            'isEdge' => true,
-            'isEdgeExpired' => false,
-            'edgeExpirationDate' => null,
-            'isPackOlyOwner' => false,
+            'isEdge' => $user->isAMember(),
+            'isEdgeExpired' => $user->isAnExpiredMember(),
+            'edgeExpirationDate' => $user->membership_expiration_date,
+            'isPackOnlyOwner' => $user->isPackOnlyOwner(),
             'isAppleAppSubscriber' => true,
             'isGoogleAppSubscriber' => false,
         ];

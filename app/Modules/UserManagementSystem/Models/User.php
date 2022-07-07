@@ -551,4 +551,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return $this->isPackOwner() && !$this->isAMember();
     }
+
+    /**
+     * @return bool
+     */
+    public function isAnExpiredMember()
+    {
+        return
+            !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
+    }
 }
