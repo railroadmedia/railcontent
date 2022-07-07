@@ -3,7 +3,7 @@ import UploadProgress from "../UploadProgress/UploadProgress.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const FILE_UPLOAD_SERVICE = "/user-management-system/profile-picture/upload";
+const FILE_UPLOAD_SERVICE = "/user-management-system/picture/upload";
 
 const props = defineProps({
   image: {
@@ -47,6 +47,7 @@ onMounted(() => {
   data.append('file', dataURItoBlob(props.image), newFileName);
   data.append('target', newFileName);
   data.append('_method', 'POST');
+  data.append('fieldKey', 'profile_picture_url');
 
   var config = {
     'content-type': 'multipart/form-data',
@@ -60,7 +61,7 @@ onMounted(() => {
   };
 
   axios
-    .put(FILE_UPLOAD_SERVICE, data, config)
+    .post(FILE_UPLOAD_SERVICE, data, config)
     .then(function (res) {
       emit('onUploadDone', res.data.profile_picture_url);
     })
