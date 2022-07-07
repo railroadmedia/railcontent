@@ -15,3 +15,5 @@ export const instrumentBrand = {
     singing: 'singeo',
     default: 'drumeo'
 };
+
+export const brands = ['drumeo', 'singeo', 'pianote', 'guitareo'];
