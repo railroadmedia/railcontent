@@ -60,7 +60,7 @@ onMounted(() => {
   };
 
   axios
-    .post(FILE_UPLOAD_SERVICE, data, config)
+    .put(FILE_UPLOAD_SERVICE, data, config)
     .then(function (res) {
       emit('onUploadDone', res.data.profile_picture_url);
     })

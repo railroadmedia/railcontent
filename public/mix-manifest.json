@@ -1,13 +1,7 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=dabb9999ec0e4505147b1104e636167d",
+    "/platform/js/app.js": "/platform/js/app.js?id=25a09313ab95161b57bcaada2a4a4b6e",
     "/platform/js/profile.js": "/platform/js/profile.js?id=350fea0c1008c2d8b5e023e4e5e7aa70",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=1470c1bc38b2183f267066ac80870234",
     "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=d0f5e25ffaeaabd08c0de972e3f538ca",
-<<<<<<< HEAD
-    "/platform/css/app.css": "/platform/css/app.css?id=594bb89daa6e5446de6d613c23c819c2",
-=======
-    "/platform/css/app.css": "/platform/css/app.css?id=fcc26c0192e7618e8f19c9e79b472e13",
->>>>>>> 948f4a166ed31afc2726da7dd8a2bfa96bd33962
-    "/marketing/js/app.js": "/marketing/js/app.js?id=8e7457eda3c6e79dc1955db8654679e3",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=ad05670e68c41dafe3aaa6a81a52928f"
+    "/platform/css/app.css": "/platform/css/app.css?id=594bb89daa6e5446de6d613c23c819c2"
 }
