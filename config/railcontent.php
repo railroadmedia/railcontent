@@ -1043,6 +1043,7 @@ return [
         'semester-pack-lesson',
         'ha-oemurd-pmac',
         'learning-path-lesson',
+        'chord-and-scale',
     ],
     'appUserListContentTypes' => [
         'course',

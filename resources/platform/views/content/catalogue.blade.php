@@ -259,7 +259,7 @@
                 :paginate="true"
                 limit="12"
                 @else
-                catalogue-type="list"
+                catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
                 :infinite-scroll="true"
                 limit="20"
                 @endif
