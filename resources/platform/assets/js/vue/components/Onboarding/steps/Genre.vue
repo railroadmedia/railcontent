@@ -56,9 +56,7 @@ const handleNextStep = () => {
   }).then(() => {
     emit('onChangeStep', 5);
   }).catch(() => {
-    setTimeout(() => {
-      showErrorNotification.value = true;
-    }, 3000)
+    showErrorNotification.value = true;
   });
 };
 

@@ -15,7 +15,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['onUploadDone']);
+const emit = defineEmits(['onUploadDone', 'onUploadError']);
 
 const percentCompleted = ref(0);
 
@@ -66,7 +66,7 @@ onMounted(() => {
       emit('onUploadDone', res.data.profile_picture_url);
     })
     .catch(function (err) {
-      console.log(err);
+      emit('onUploadError')
     });
 });
 </script>

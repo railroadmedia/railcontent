@@ -19,6 +19,7 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
+
 function onInstrumentSelection(instrument) {
   emit("onChangeInfo", { ...props.info, user: props.info.user, instrument });
   emit("onCheckStep", 1, true);

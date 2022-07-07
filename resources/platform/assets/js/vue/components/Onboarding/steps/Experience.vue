@@ -35,9 +35,7 @@ const handleNextStep = (selection) => {
     emit("onCheckStep", 3, true);
     emit("onChangeStep", 4);
   }).catch(() => {
-    setTimeout(() => {
-      showErrorNotification.value = true;
-    }, 3000)
+    showErrorNotification.value = true;
   });
 };
 

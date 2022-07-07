@@ -48,10 +48,12 @@ const handleNextStep = () => {
     emit('onChangeStep', 1);
     emit('onCheckStep', 0, true);
   }).catch(() => {
-    setTimeout(() => {
-      showErrorNotification.value = true;
-    }, 3000)
+    showErrorNotification.value = true;
   });
+};
+
+const handleUploadError = () => {
+  showErrorNotification.value = true;
 };
 
 </script>
@@ -62,7 +64,7 @@ const handleNextStep = () => {
       class="tw-h-full md:tw-h-auto tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-mt-[40px] md:tw-mt-0">
       <StepHeader title="Just a few quick questions to set up your account" subtitle="Your musical journey is personalized to you. Tell us a little bit
             about yourself so that we can get it right." :hideBackButton="true" />
-      <AvatarUpload @onUploadComplete="handleUploadComplete" :imgUrl="info.user.avatarUrl" :userName="info.user.name"
+      <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleUploadError"
         :userId="info.user.id" />
       <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-mb-[56px]" :initialValue="info.user.name"
         labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
