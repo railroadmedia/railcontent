@@ -60,15 +60,6 @@ Route::group(
         )
             ->name('user_management_system.email-change.confirm');
 
-        /*
-        Route::match(
-            ['post', 'put'],
-            'profile-picture/upload',
-            [
-                'as' => 'user_management_system.profile-picture.upload',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@upload',
-            ]
-        );
 
         Route::match(
             ['post', 'put'],
@@ -78,7 +69,6 @@ Route::group(
                 'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhotoFromS3FrontEnd',
             ]
         );
-
 
         Route::match(
             ['post', 'put'],
@@ -115,15 +105,6 @@ Route::group(
             OnboardingController::class . '@experience'
         )
             ->name('user_management_system.onboarding.experience');
-        Route::match(
-            ['post', 'put'],
-            'profile-picture/upload',
-            [
-                'as' => 'user_management_system.profile-picture.upload',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@upload',
-            ]
-        );
-
     }
 );
 
