@@ -7,7 +7,8 @@ import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 import NotificationToast from "../../NotificationToastV2/NotificationToast.vue"
-import { saveDisplayName } from '../services'
+import { saveDisplayName } from '../services';
+
 const props = defineProps({
   brand: {
     type: String,
@@ -19,6 +20,7 @@ const props = defineProps({
     type: Object,
   },
 });
+
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
 const showErrorNotification = ref(false);
 
