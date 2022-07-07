@@ -157,9 +157,9 @@
     @if($catalogueMeta['name'] == 'Routines')
         <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">
             <div class="container">
-                <h2 class="tw-text-white"> 
-                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span> 
-                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>    
+                <h2 class="tw-text-white">
+                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span>
+                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>
                 </h2>
             </div>
         </div>
@@ -205,7 +205,8 @@
                 <div class="tw-flex tw-flex-col tw-mb-3">
                     <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                 </div>
-                @if($catalogueMeta['name'] !== "Songs")
+                @if($catalogueMeta['name'] !== "Songs" &&
+                    !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
                     <div class="tw-flex tw-flex-col tw-ml-auto">
                         <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
                                 <i class="fas fa-calendar-plus mr-1"></i>

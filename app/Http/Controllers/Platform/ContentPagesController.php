@@ -891,6 +891,52 @@ class ContentPagesController extends BaseController
         ]);
     }
 
+    public function rudiments(Request $request, $domain, $brand)
+    {
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+        ContentRepository::$pullFutureContent = false;
+
+        $rudiments = $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 20),
+            'sort',
+            ['rudiment'],
+            $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
+            $request->get('required_fields', []),
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', [])
+        );
+
+        $startedRudiments = $this->contentService->getPaginatedByTypesUserProgressState(
+            ['rudiment'],
+            auth()->id(),
+            'started',
+            5,
+            0
+        );
+
+        $sortOverride = 'sort';
+
+        $catalogueContentTypes = ContentTypes::catalogueContentTypes();
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['rudiments'] ?? [];
+
+        return view(
+            'content.catalogue',
+            [
+                "startedLessons" => (new ContentFilterResultsEntity(['results' => $startedRudiments]))->toResponseRawJson(),
+                "hasStartedLessons" => !$startedRudiments->isEmpty(),
+                "listLessons" => $rudiments->toResponseRawJson(),
+                "lessonType" => 'rudiment',
+                'sortOverride' => $sortOverride,
+                "catalogueContentTypes" => $catalogueContentTypes,
+                "themeColor" => 'drumeo',
+                "catalogueMeta" => $catalogueMeta,
+            ]
+        );
+    }
+
     /**
      * @param Request $request
      * @param $contentId

@@ -180,7 +180,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'firstLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'songs', 'courses', 'quick-tips'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'songs', 'courses', 'quick-tips', 'rudiments'])
             ->name('platform.content.first-level');
 
         Route::get(
