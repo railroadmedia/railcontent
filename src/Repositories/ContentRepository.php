@@ -1981,7 +1981,9 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
 
-        $joinTablesQuery->groupBy($groupBy);
+        if (empty($groupBy)) {
+            $joinTablesQuery->groupBy($groupBy);
+        }
 
         $tableResults = $joinTablesQuery->get();
 
