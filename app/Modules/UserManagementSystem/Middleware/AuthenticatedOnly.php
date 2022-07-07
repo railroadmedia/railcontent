@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class AuthenticatedOnly
 {
@@ -31,10 +32,11 @@ class AuthenticatedOnly
         if (Auth::guard('user-management-system')->check()) {
             return $next($request);
         } else {
+            $loginURL = url(config('user_management_system.login_page_path') . '?redirect_to=' . $request->getRequestUri());
             throw new AuthenticationException(
                 $message = 'Unauthenticated.',
                 [],
-                $redirectTo = config('user_management_system.login_page_path')
+                $redirectTo = $loginURL
             );
         }
     }
