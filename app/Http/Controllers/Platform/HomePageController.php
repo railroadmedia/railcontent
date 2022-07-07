@@ -82,6 +82,10 @@ class HomePageController extends BaseController
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
 
+        if (empty($methodContent)) {
+            return $this->homePackOnly($request, $brand);
+        }
+
         $startedLessons = $this->getUsersStartedContent();
 
         $usersList = $this->getUsersList();
@@ -167,6 +171,7 @@ class HomePageController extends BaseController
         $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
 
         Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $hasStartedMethod = $methodContent['started'];
@@ -259,6 +264,16 @@ class HomePageController extends BaseController
     public function onboarding(Request $request)
     {
         return view('home.onboarding');
+    }
+
+    /**
+     * @param Request $request
+     * @param $brand
+     * @return string
+     */
+    public function homePackOnly(Request $request, $brand)
+    {
+        return 'WIP';
     }
 
     /**
