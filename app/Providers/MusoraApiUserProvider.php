@@ -5,24 +5,22 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
-use Modules\UserManagementSystem\Events\UserEvent;
-use Modules\UserManagementSystem\Providers\UserServiceProvider;
+use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
-    /**
-     * @var UserServiceProvider
-     */
-    private $userServiceProvider;
+    private SubscriptionRepository $subscriptionRepository;
+    private ProductRepository $productRepository;
 
-    /**
-     * @param UserServiceProvider $userServiceProvider
-     */
-    public function __construct(UserServiceProvider $userServiceProvider)
-    {
-        $this->userServiceProvider = $userServiceProvider;
+    public function __construct(
+        SubscriptionRepository $subscriptionRepository,
+        ProductRepository $productRepository
+    ) {
+        $this->productRepository = $productRepository;
+        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     public function getCurrentUser()
@@ -37,17 +35,43 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $brand)
+    public function getCurrentUserMembershipData(?string $brand = null)
     : array {
         $user = user();
+        $productsIds = [];
+        $products = [];
+        foreach (config('ecommerce.available_brands', []) as $availableBrand) {
+            if (!isset(config('ecommerce.membership_product_skus')[$availableBrand])) {
+                break;
+            }
+            $products += $this->productRepository->bySkus(config('ecommerce.membership_product_skus')[$availableBrand]);
+        }
+
+        foreach ($products as $product) {
+            $productsIds[] = $product->getId();
+        }
+
+        $membershipSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
+            $user->id,
+            $productsIds,
+            true
+        );
+
+        $isAppleAppSubscriber = false;
+        $isGoogleAppSubscriber = false;
+
+        if ($membershipSubscription) {
+            $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
+            $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
+        }
 
         return [
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
-            'isAppleAppSubscriber' => true,
-            'isGoogleAppSubscriber' => false,
+            'isAppleAppSubscriber' => $isAppleAppSubscriber,
+            'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
         ];
     }
 
@@ -65,7 +89,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function setCurrentUserProfilePictureUrl(string $profilePictureUrl)
     : User {
-        user()->profile_picture_url =  $profilePictureUrl;
+        user()->profile_picture_url = $profilePictureUrl;
         user()->save();
 
         return $this->getCurrentUser();

@@ -1715,7 +1715,7 @@ return [
             'isEdge',
             'isEdgeExpired',
             'edgeExpirationDate',
-            'isPackOlyOwner',
+            'isPackOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
             'notify_weekly_update',
