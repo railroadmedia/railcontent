@@ -710,7 +710,7 @@ return [
             'student-reviews' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
@@ -721,7 +721,7 @@ return [
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -743,7 +743,7 @@ return [
             'podcasts' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/podcast.png',
                 'name' => 'The Pianote Podcast',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Podcast',
                 'icon' => 'icon-podcast',
