@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from 'vue'
+import { ref, inject, onMounted } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -8,51 +8,47 @@ import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Coaches from './steps/Coaches.vue'
+import { initialSteps, instrumentBrand } from './constants';
+import { getInitialInfo } from './utils';
 
 const props = defineProps({
     brand: {
         type: String,
-    }
-})
+    },
+    configOptions: {
+        type: Object,
+    },
+    selectedGear: {
+        type: Object,
+    },
+    selectedTopics: {
+        type: Object,
+    },
+    selectedGenres: {
+        type: Object,
+    },
+    selectedExperience: {
+        type: Object,
+    },
+});
+
+// TODO: Remove onMounted
+onMounted(() => {
+    console.log(props.selectedGear)
+});
 
 const userId = inject('userId');
 const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
-const initialSteps = [
-    { label: 'ABOUT', checked: false },
-    { label: 'INSTRUMENT', checked: false },
-    { label: 'GEAR', checked: false },
-    { label: 'EXPERIENCE', checked: false },
-    { label: 'GENRES', checked: false },
-    { label: 'TOPICS', checked: false },
-    { label: 'COACHES', checked: false }
-]
-
-const instrumentBrand = {
-    piano: 'pianote',
-    drums: 'drumeo',
-    guitar: 'guitareo',
-    singing: 'singeo',
-    default: 'drumeo'
-}
-const initialInfo = {
-    user: {
-        id: userId,
-        name: userName || null,
-        avatarUrl: userAvatar || null
-    },
-    instrument: 'default',
-    instrumentTypes: {}
-}
-
-let currentStep = ref(0)
-let info = ref(initialInfo)
-let steps = ref(initialSteps)
+const currentStep = ref(0)
+const info = ref(getInitialInfo({ userId, userName, userAvatar, ...props }))
+const steps = ref(initialSteps)
 
 function changeStep(step) {
     currentStep.value = step
 }
+
 function changeInfo(newInfo) {
     info.value = newInfo
 }
@@ -74,6 +70,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <InstrumentSelect
             :brand="instrumentBrand[info.instrument]"
@@ -83,6 +80,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <InstrumentType
             :brand="instrumentBrand[info.instrument]"
@@ -92,6 +90,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Experience
             :brand="instrumentBrand[info.instrument]"
@@ -101,6 +100,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Genre
             :brand="instrumentBrand[info.instrument]"
@@ -110,6 +110,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Topics
             :brand="instrumentBrand[info.instrument]"
@@ -119,6 +120,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
         <Coaches
             :brand="instrumentBrand[info.instrument]"
@@ -128,6 +130,7 @@ function checkStepToggle(step, val) {
             @onCheckStep="checkStepToggle"
             :steps="steps"
             :info="info"
+            :config-options="configOptions"
         />
     </ModalRenderer>
 </template>

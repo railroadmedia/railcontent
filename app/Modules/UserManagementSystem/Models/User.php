@@ -533,4 +533,24 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         $this->password = $hash ? Hash::make($password) : $password;
     }
+
+    public function onboardingGear()
+    {
+        return $this->hasMany(OnboardingGear::class);
+    }
+
+    public function onboardingTopics()
+    {
+        return $this->hasMany(OnboardingTopic::class);
+    }
+
+    public function onboardingGenres()
+    {
+        return $this->hasMany(OnboardingGenre::class);
+    }
+
+    public function onboardingExperience()
+    {
+        return $this->hasMany(OnboardingExperience::class);
+    }
 }
