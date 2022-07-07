@@ -65,6 +65,7 @@ return [
             'long_bio',
             'focus',
             'genre',
+            'data.guitar_chord_image_url',
             'lesson_count',
             'lessons' => [
                 'id',
