@@ -111,7 +111,7 @@ class HomePageController extends BaseController
 
         $followedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
             brand(),
-            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])),
+            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             [],
             1,
             4
@@ -578,7 +578,7 @@ class HomePageController extends BaseController
     private function getNewShowTypes()
     {
         ContentRepository::$pullFutureContent = false;
-        $allShowTypes = config('railcontent.showTypes');
+        $allShowTypes = config('railcontent.showTypes')[config('railcontent.brand')] ?? [];
 
         // Pull 20 of the most recent shows
         $recentShows = $this->contentService->getFiltered(

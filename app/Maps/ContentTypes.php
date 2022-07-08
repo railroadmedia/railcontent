@@ -160,7 +160,7 @@ class ContentTypes
     public static function singularContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
             config('railcontent.singularContentTypes')
         );
     }
