@@ -895,33 +895,33 @@ return [
      */
     'showTypes' => [
         'drumeo' => [
-        'the-history-of-electronic-drums',
-        'backstage-secrets',
-        'quick-tips',
-        'question-and-answer',
-        'student-collaborations',
-        'live-streams',
-        'podcasts',
-        'solos',
-        'boot-camps',
-        'gear-guides',
-        'performances',
-        'in-rhythm', /* 2020 */
-        'challenges', /* 2020 */
-        'on-the-road', /* 2020 */
-        'diy-drum-experiments', /* 2019*/
-        'rhythmic-adventures-of-captain-carson', /* 2019*/
-        'study-the-greats', /* 2019*/
-        'rhythms-from-another-planet', /* 2019*/
-        'tama-drums', /* 2019*/
-        'paiste-cymbals', /* 2019*/
-        'behind-the-scenes', /* 2019*/
-        //        'namm-2019', /* 2019*/
-        //        'camp-drumeo-ah', /* 2019*/
-        //        '25-days-of-christmas', /* 2019*/
-        'exploring-beats', /* 2018*/
-        'sonor-drums', /* 2018*/
-            ],
+            'the-history-of-electronic-drums',
+            'backstage-secrets',
+            'quick-tips',
+            'question-and-answer',
+            'student-collaborations',
+            'live-streams',
+            'podcasts',
+            'solos',
+            'boot-camps',
+            'gear-guides',
+            'performances',
+            'in-rhythm', /* 2020 */
+            'challenges', /* 2020 */
+            'on-the-road', /* 2020 */
+            'diy-drum-experiments', /* 2019*/
+            'rhythmic-adventures-of-captain-carson', /* 2019*/
+            'study-the-greats', /* 2019*/
+            'rhythms-from-another-planet', /* 2019*/
+            'tama-drums', /* 2019*/
+            'paiste-cymbals', /* 2019*/
+            'behind-the-scenes', /* 2019*/
+            //        'namm-2019', /* 2019*/
+            //        'camp-drumeo-ah', /* 2019*/
+            //        '25-days-of-christmas', /* 2019*/
+            'exploring-beats', /* 2018*/
+            'sonor-drums', /* 2018*/
+        ],
         'pianote' => [
             'student-review',
             'question-and-answer',
@@ -933,7 +933,7 @@ return [
         'singeo' => [
             'student-review',
             'question-and-answer',
-        ]
+        ],
     ],
     'userListContentTypes' => [
         'course',
@@ -1306,12 +1306,40 @@ return [
         ],
     ],
     'children_name_mapping' => [
-        'learning-path' => 'levels',
-        'learning-path-level' => 'courses',
-        'learning-path-course' => 'lessons',
-        'course' => 'lessons',
-        'pack' => 'bundles',
-        'pack-bundle' => 'lessons',
-        'semester-packsss' => 'lessons',
+        'drumeo' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'courses',
+            'learning-path-course' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-packsss' => 'lessons',
+        ],
+        'pianote' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'courses',
+            'learning-path-course' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-packsss' => 'lessons',
+        ],
+        'guitareo' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-packsss' => 'lessons',
+        ],
+        'singeo' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-packsss' => 'lessons',
+        ],
+
     ],
 ];
