@@ -9,6 +9,7 @@ use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Providers\UserServiceProvider;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
+use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
@@ -85,12 +86,24 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function setCurrentUserPhoneNumber(string $phoneNumber)
     : User {
-        // TODO: Implement setCurrentUserPhoneNumber() method.
+        user()->phone_number = $phoneNumber;
+        user()->save();
+
+        return $this->getCurrentUser();
     }
 
     public function setCurrentUserDisplayName(string $displayName)
     : ?User {
-        // TODO: Implement setCurrentUserDisplayName() method.
+        $inUseDisplayName = \Modules\UserManagementSystem\Models\User::where('display_name',$displayName)->get();
+
+        if(($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))){
+            throw new MusoraAPIException('This display name is already in use', 'Display name exist', 500);
+        }
+
+        user()->display_name = $displayName;
+        user()->save();
+
+        return $this->getCurrentUser();
     }
 
     public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)
