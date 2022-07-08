@@ -710,7 +710,7 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
-            'student-reviews' => [
+            'student-review' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
                 'allowableFilters' => [],
@@ -806,12 +806,14 @@ return [
                 "allowableFilters" => ['difficulty', 'topic', 'progress'],
             ],
             'question-and-answer' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer-singeo.png',
                 "name" => "Q&A",
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-reviews' => [
+            'student-review' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
@@ -863,12 +865,14 @@ return [
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'question-and-answer' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer.png',
                 "name" => "Q&A",
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-reviews' => [
+            'student-review' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
@@ -919,15 +923,15 @@ return [
         'sonor-drums', /* 2018*/
             ],
         'pianote' => [
-            'student-reviews',
+            'student-review',
             'question-and-answer',
         ],
         'guitareo' => [
-            'student-reviews',
+            'student-review',
             'question-and-answer',
         ],
         'singeo' => [
-            'student-reviews',
+            'student-review',
             'question-and-answer',
         ]
     ],
