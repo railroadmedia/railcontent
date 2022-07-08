@@ -91,6 +91,17 @@ class ContentJsonController extends Controller
         foreach ($filters as $key => $filterOptions) {
             if (is_array($filterOptions)) {
                 if (($key != 'content_type') && ($key != 'instructor') && ($key != 'focus') && ($key != 'style')) {
+
+                    // this skips adding "All" option to the topic or difficulty filter on student-review and
+                    // student-focus catalogues because—at least as of July 2022—it will make for poor options
+                    $includedTypes = $request->get('included_types', []);
+                    $isStudentFocusOrReview =
+                        ($includedTypes == ['student-focus']) || ($includedTypes == ['student-review']);
+                    if ($isStudentFocusOrReview && (($key == 'topic') || ($key == 'difficulty'))) {
+                        continue;
+                    }
+
+                    // add "All" option to filter options
                     $filters[$key] = array_diff($filterOptions, ['All']);
                     array_unshift($filters[$key], 'All');
                 }
