@@ -36,6 +36,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['onError'])
+
 const imgUrlRef = ref(props.imgUrl);
 
 function handleImage(image) {
@@ -56,6 +58,11 @@ function openUploadForm() {
 
 function handleUploadDone(imgUrl) {
   imgUrlRef.value = imgUrl;
+  showUploadForm.value = false;
+}
+
+function handleUploadError() {
+  emit('onError');
   showUploadForm.value = false;
 }
 </script>
@@ -82,6 +89,7 @@ function handleUploadDone(imgUrl) {
         :image="croppedImage"
         :userId="userId"
         @onUploadDone="handleUploadDone"
+        @onUploadError="handleUploadError"
       />
     </InfoModal>
 

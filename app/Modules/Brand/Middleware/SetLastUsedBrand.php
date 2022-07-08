@@ -53,6 +53,8 @@ class SetLastUsedBrand
             config()->set('railforums.forums_index_page_url', $brand . '/forums');
 
             config()->set('railcontent.brand', $brand);
+
+            config()->set('railnotifications.brand', $brand);
         }
 
         return $next($request);

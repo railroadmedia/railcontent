@@ -30,7 +30,7 @@ class MusoraApiChatProvider implements ChatProviderInterface
         $token = '';
 
         return [
-            'apiKey' => config('railchat.get_stream_credentials')['key'],
+            'apiKey' => config('railchat.get_stream_credentials')['key'] ?? '',
             'chatChannelName' => config('railchat.chat_channel_name'),
             'questionsChannelName' => config('railchat.questions_channel_name'),
             'token' => $token,
