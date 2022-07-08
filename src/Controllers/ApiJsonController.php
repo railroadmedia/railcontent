@@ -69,16 +69,17 @@ class ApiJsonController extends Controller
     public function getShows(Request $request)
     {
         $shows = [];
+        $brand = $request->get('brand', config('railcontent.brand'));
 
-        $metaData = config('railcontent.cataloguesMetadata')[$request->get('brand', config('railcontent.brand'))];
+        $metaData = config('railcontent.cataloguesMetadata')[$brand];
         if ($request->has('withCount')) {
             $episodesNumber = $this->contentService->countByTypes(
-                config('railcontent.showTypes'),
+                config('railcontent.showTypes')[$brand],
                 'type'
             );
         }
 
-        foreach (config('railcontent.showTypes') as $showType) {
+        foreach (config('railcontent.showTypes')[$brand] ?? [] as $showType) {
             if(array_key_exists($showType, $metaData)) {
                 $shows[$showType] = $metaData[$showType] ?? [];
                 $shows[$showType]['episodeNumber'] = $episodesNumber[$showType]['total'] ?? '';

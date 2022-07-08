@@ -145,7 +145,7 @@ class MyListJsonController extends Controller
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
-            array_values(config('railcontent.showTypes', []))
+            array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         );
 
         $page = $request->get('page', 1);

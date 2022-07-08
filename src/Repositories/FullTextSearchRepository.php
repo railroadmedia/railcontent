@@ -89,7 +89,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictByTypes(
                     array_unique(
                         array_merge(
-                            config('railcontent.showTypes', []),
+                            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
                             config('railcontent.topLevelContentTypes', []),
                             config('railcontent.searchable_content_types', [])
                         )
@@ -311,20 +311,20 @@ class FullTextSearchRepository extends RepositoryBase
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
                     $coach = $this->contentRepository->getById($coachId);
-                    $instructor = Arr::first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
-
-                    if ($instructor) {
-                        $builder->orwhere(function (Builder $builder2) use ($instructor, $coachId) {
-                            return $builder2->orwhereRaw(
-                                ' FIND_IN_SET(' . $instructor['id'] . ',content_instructors)'
-                            )
-                                ->orWhereRaw(
-                                    ' FIND_IN_SET(' . $coachId . ',content_instructors)'
-                                );
-                        });
-                    } else {
+//                    $instructor = Arr::first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
+//
+//                    if ($instructor) {
+//                        $builder->orwhere(function (Builder $builder2) use ($instructor, $coachId) {
+//                            return $builder2->orwhereRaw(
+//                                ' FIND_IN_SET(' . $instructor['id'] . ',content_instructors)'
+//                            )
+//                                ->orWhereRaw(
+//                                    ' FIND_IN_SET(' . $coachId . ',content_instructors)'
+//                                );
+//                        });
+//                    } else {
                         return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ',content_instructors)');
-                    }
+//                    }
                 }
             });
         }

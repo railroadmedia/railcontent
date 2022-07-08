@@ -68,7 +68,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 6; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(config('railcontent.showTypes')),
+                $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
                 ContentService::STATUS_PUBLISHED,
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -110,7 +110,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 5; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(config('railcontent.showTypes')),
+                $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
                 ContentService::STATUS_PUBLISHED,
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -160,7 +160,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 6; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(config('railcontent.showTypes')),
+                $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
                 $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -181,7 +181,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $contentType = $this->faker->randomElement(config('railcontent.showTypes'));
+        $contentType = $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
             'limit' => $limit,
@@ -214,7 +214,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 6; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(config('railcontent.showTypes')),
+                $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
                 $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -266,7 +266,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
         $this->contentFactory->create(
             'slug',
-            $this->faker->randomElement(config('railcontent.showTypes')),
+            $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
             $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
             ConfigService::$defaultLanguage,
             ConfigService::$brand,
@@ -276,7 +276,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         );
 
         for ($i = 0; $i < 6; $i++) {
-            $contentType = $this->faker->randomElement(config('railcontent.showTypes'));
+            $contentType = $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
             $content[$i] = $this->contentFactory->create(
                 'slug',
                 $contentType,
@@ -324,7 +324,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
         $this->contentFactory->create(
             'slug',
-            $this->faker->randomElement(config('railcontent.showTypes')),
+            $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
             $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
             ConfigService::$defaultLanguage,
             ConfigService::$brand,

@@ -81,7 +81,7 @@ class ApiJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->status());
 
         foreach ($results as $key => $result) {
-            $this->assertTrue(in_array($key, config('railcontent.showTypes')));
+            $this->assertTrue(in_array($key, config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
         }
 
     }

@@ -1369,11 +1369,11 @@ class ContentService
     public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
     {
         $liveEventsTypes = array_merge(
-            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
             (array)config('railcontent.liveContentTypes', [])
         );
         $contentReleasesTypes = array_merge(
-            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
             (array)config('railcontent.contentReleaseContentTypes', [])
         );
 
