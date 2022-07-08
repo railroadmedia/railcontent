@@ -10,7 +10,7 @@ class ContentTypes
     public static function searchableContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.topLevelContentTypes'),
             config('railcontent.searchable_content_types', []),
             config('railcontent.liveContentTypes')
@@ -23,7 +23,7 @@ class ContentTypes
     public static function userListContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.userListContentTypes')
         );
     }
@@ -37,7 +37,7 @@ class ContentTypes
     public static function liveContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.liveContentTypes')
         );
     }
@@ -51,7 +51,7 @@ class ContentTypes
     public static function contentReleaseContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.contentReleaseContentTypes')
         );
     }
@@ -65,7 +65,7 @@ class ContentTypes
     public static function catalogueContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.catalogueContentTypes')
         );
     }
@@ -81,7 +81,7 @@ class ContentTypes
             $contentTypeMap[$contentType] = $contentType;
         }
 
-        foreach (config('railcontent.showTypes') as $show) {
+        foreach ((config('railcontent.showTypes')[config('railcontent.brand')] ?? []) as $show) {
             $contentTypeMap[$show] = 'show';
         }
 
@@ -94,7 +94,7 @@ class ContentTypes
     public static function countedCompletedContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.countedCompletedContentTypes')
         );
     }
@@ -105,7 +105,7 @@ class ContentTypes
     public static function ourPicksContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.homeOurPicksContentTypes')
         );
     }
@@ -116,7 +116,7 @@ class ContentTypes
     public static function newContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.homeNewContentTypes')
         );
     }
@@ -127,7 +127,7 @@ class ContentTypes
     public static function inProgressContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.homeInProgressContentTypes')
         );
     }
@@ -138,7 +138,7 @@ class ContentTypes
     public static function dashboardInProgressContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.dashboardInProgressContentTypes')
         );
     }
@@ -149,7 +149,7 @@ class ContentTypes
     public static function userProgressListContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
             config('railcontent.userProgressListContentTypes')
         );
     }
@@ -160,7 +160,7 @@ class ContentTypes
     public static function singularContentTypes()
     {
         return array_merge(
-            config('railcontent.showTypes'),
+            config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
             config('railcontent.singularContentTypes')
         );
     }
