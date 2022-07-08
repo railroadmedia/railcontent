@@ -893,8 +893,15 @@ class ContentService
             }
 
             $filterFields = $filter->getFilterFields() ?? [];
+            $isStudentFocusOrReview =
+                ($includedTypes == ['student-focus']) || ($includedTypes == ['student-review']);
 
-            if ($pullFilterFields && !empty($filterFields['difficulty'])) {
+            /*
+             * for now limited to student-focus and student-reviews as those are currently undergoing some curation by
+             * the content team. for other content types we don't know if there might be a significant number of lessons
+             * that have options that fall outside the limited options that this is desgined to return.
+             */
+            if ($pullFilterFields && !empty($filterFields['difficulty']) && $isStudentFocusOrReview) {
                 $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup($filterFields['difficulty']);
             }
 
@@ -916,9 +923,13 @@ class ContentService
     // for remove extraneous options and order logically rather than alphabetically
     private function difficultyFilterOptionsCleanup($difficultyOptions)
     {
-        $hasBeginner = in_array('Beginner', $difficultyOptions);
-        $hasIntermediate = in_array('Intermediate', $difficultyOptions);
-        $hasAdvanced = in_array('Advanced', $difficultyOptions);
+        foreach ($difficultyOptions as &$option) {
+            $option = is_string($option) ? strtolower((string) $option) : $option;
+        }
+
+        $hasBeginner = in_array('beginner', $difficultyOptions);
+        $hasIntermediate = in_array('intermediate', $difficultyOptions);
+        $hasAdvanced = in_array('advanced', $difficultyOptions);
         if ($hasBeginner || $hasIntermediate || $hasAdvanced) {
             $difficultyOptions = [];
             if ($hasBeginner) {
