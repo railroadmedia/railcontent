@@ -26,6 +26,7 @@ function onInstrumentSelection(instrument) {
   emit("onChangeStep", 2);
   /*
   TODO: Check if this is still necessary.
+  
   for (let i = 2; i < 6; i++) {
     emit("onCheckStep", i, false);
   }
