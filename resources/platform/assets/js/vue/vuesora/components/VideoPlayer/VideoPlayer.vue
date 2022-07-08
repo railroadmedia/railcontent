@@ -126,6 +126,8 @@ const props = defineProps({
     },
 });
 
+const emit = defineEmits('play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
+
 // Non reactive vars
 let shakaPlayer = null;
 
@@ -1018,6 +1020,9 @@ const {
     changeVolume,
     currentVolume,
     setRate,
+    emit,
+    contentId: props.contentId,
+    progressState: currentProgress
 })
 </script>
 

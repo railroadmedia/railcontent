@@ -32,6 +32,14 @@ Route::domain('{musoraDomain}')
             ->name('platform.home-redirect');
 
         /*
+        * Onboarding
+        */
+        Route::get('/onboarding', [HomePageController::class, 'onboarding'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.onboarding');
+
+
+        /*
          * Primary Content Pages
          */
         Route::get('/{brand}/packs', [PackPagesController::class, 'index'])

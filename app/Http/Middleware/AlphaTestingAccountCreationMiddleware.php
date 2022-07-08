@@ -10,18 +10,22 @@ use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService;
+use Railroad\EventDataSynchronizer\Services\UserMembershipFieldsService;
 
 class AlphaTestingAccountCreationMiddleware
 {
     private UserProductService $userProductService;
     private ProductRepository $productRepository;
+    private UserMembershipFieldsService $userMembershipFieldsService;
 
     public function __construct(
         UserProductService $userProductService,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        UserMembershipFieldsService $userMembershipFieldsService
     ) {
         $this->userProductService = $userProductService;
         $this->productRepository = $productRepository;
+        $this->userMembershipFieldsService = $userMembershipFieldsService;
     }
 
     /**
@@ -72,6 +76,8 @@ class AlphaTestingAccountCreationMiddleware
                     Carbon::now()->addMonths(6)
                 );
             }
+
+            $this->userMembershipFieldsService->sync($user->id);
 
             auth()->login($user);
         }
