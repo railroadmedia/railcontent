@@ -99,32 +99,32 @@ class ContentRepository extends RepositoryBase
     private $contentBpmRepository;
 
     const TABLESFORFIELDS = [
-            'instructor' => [
-                'table' => 'railcontent_content_instructors',
-                'column' => 'instructor_id',
-                'alias' => '_rci',
-            ],
-            'style' => [
-                'table' => 'railcontent_content_styles',
-                'column' => 'style',
-                'alias' => '_rcs',
-            ],
-            'topic' => [
-                'table' => 'railcontent_content_topics',
-                'column' => 'topic',
-                'alias' => '_rct',
-            ],
-            'focus' => [
-                'table' => 'railcontent_content_focus',
-                'column' => 'focus',
-                'alias' => '_rcf',
-            ],
-            'bpm' => [
-                'table' => 'railcontent_content_bpm',
-                'column' => 'bpm',
-                'alias' => '_rcb',
-            ],
-        ];
+        'instructor' => [
+            'table' => 'railcontent_content_instructors',
+            'column' => 'instructor_id',
+            'alias' => '_rci',
+        ],
+        'style' => [
+            'table' => 'railcontent_content_styles',
+            'column' => 'style',
+            'alias' => '_rcs',
+        ],
+        'topic' => [
+            'table' => 'railcontent_content_topics',
+            'column' => 'topic',
+            'alias' => '_rct',
+        ],
+        'focus' => [
+            'table' => 'railcontent_content_focus',
+            'column' => 'focus',
+            'alias' => '_rcf',
+        ],
+        'bpm' => [
+            'table' => 'railcontent_content_bpm',
+            'column' => 'bpm',
+            'alias' => '_rcb',
+        ],
+    ];
 
     /**
      * @param ContentPermissionRepository $contentPermissionRepository
@@ -1981,7 +1981,11 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
 
-        $joinTablesQuery->groupBy($groupBy);
+        if (!empty($groupBy)) {
+            $joinTablesQuery->groupBy($groupBy);
+        } else {
+            return [];
+        }
 
         $tableResults = $joinTablesQuery->get();
 

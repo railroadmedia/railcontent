@@ -143,76 +143,15 @@ class UserContentProgressEventListener extends Event
 
             // set
             $this->userContentProgressRepository->updateOrCreate([
-                                                                     'content_id' => $event->contentId,
-                                                                     'user_id' => $event->userId,
-                                                                 ], [
-                                                                     'higher_key_progress' => $level1Position.
-                                                                         '.'.
-                                                                         $level2Position,
-                                                                     'updated_on' => Carbon::now()
-                                                                         ->toDateTimeString(),
-                                                                 ]);
-        }
-
-        if(!empty($type) && in_array($type, config('railcontent.content_hierarchy'))) {
-            $parentContentData =
-                $this->connection()
-                    ->table('railcontent_content')
-                    ->where('id', $event->contentId)
-                    ->get(['parent_content_data'])
-                    ->first()->parent_content_data ?? null;
-
-            if ($parentContentData) {
-                $parents = json_decode($parentContentData);
-                $firstParent = \Arr::first($parents);
-
-                $nextChildren =
-                    $this->connection()
-                        ->table('railcontent_content_hierarchy')
-                        ->leftJoin('railcontent_user_content_progress', function (JoinClause $join) use ($event) {
-                            $join->on(
-                                'railcontent_user_content_progress.content_id',
-                                '=',
-                                'railcontent_content_hierarchy.child_id'
-                            )
-                                ->where(function (Builder $builder) use ($event) {
-                                    $builder->where('railcontent_user_content_progress.user_id', $event->userId);
-                                });
-                        })
-                        ->leftJoin(
-                            'railcontent_content',
-                            'railcontent_content_hierarchy.child_id',
-                            '=',
-                            'railcontent_content.id'
-                        )
-                        ->where('parent_id', $firstParent->id)
-                        ->where(function (Builder $builder) use ($event) {
-                            $builder->where('railcontent_user_content_progress.state', 'started')
-                                ->orWhereNull('railcontent_user_content_progress.state');
-                        })
-                        ->orderBy('child_position', 'asc')
-                        ->first();
-
-                foreach ($parents as $parent) {
-                    $this->userContentProgressRepository->updateOrCreate([
-                                                                             'content_id' => $parent->id,
-                                                                             'user_id' => $event->userId,
-                                                                         ], [
-                                                                             'state' => 'started',
-                                                                             'next_child_content_id' => $nextChildren->child_id
-                                                                                 ??
-                                                                                 null,
-                                                                             'next_child_content_index' => $nextChildren->child_position
-                                                                                 ??
-                                                                                 null,
-                                                                             'next_child_content_url' => $nextChildren->web_url_path
-                                                                                 ??
-                                                                                 null,
-                                                                             'updated_on' => Carbon::now()
-                                                                                 ->toDateTimeString(),
-                                                                         ]);
-                }
-            }
+                'content_id' => $event->contentId,
+                'user_id' => $event->userId,
+            ], [
+                'higher_key_progress' => $level1Position .
+                    '.' .
+                    $level2Position,
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]);
         }
     }
 
