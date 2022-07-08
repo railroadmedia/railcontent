@@ -890,6 +890,7 @@ return [
      * The show cards on 'Shows' page are displayed in this order.
      */
     'showTypes' => [
+        'drumeo' => [
         'the-history-of-electronic-drums',
         'backstage-secrets',
         'quick-tips',
@@ -916,6 +917,19 @@ return [
         //        '25-days-of-christmas', /* 2019*/
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
+            ],
+        'pianote' => [
+            'student-reviews',
+            'question-and-answer',
+        ],
+        'guitareo' => [
+            'student-reviews',
+            'question-and-answer',
+        ],
+        'singeo' => [
+            'student-reviews',
+            'question-and-answer',
+        ]
     ],
     'userListContentTypes' => [
         'course',
