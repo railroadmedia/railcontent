@@ -4,6 +4,7 @@ environments:
     production:
         domain: 'platform.musora.com'
         runtime: docker
+        gateway-version: 2
         memory: 768
         cli-memory: 2048
         cli-timeout: 900
@@ -21,6 +22,7 @@ environments:
         domain: 'pre-production.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -38,6 +40,7 @@ environments:
         domain: 'beta-testing.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -55,6 +58,7 @@ environments:
         domain: 'web-staging-one.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -72,6 +76,7 @@ environments:
         domain: 'web-staging-two.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -89,6 +94,7 @@ environments:
         domain: 'web-staging-three.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -106,6 +112,7 @@ environments:
         domain: 'web-staging-four.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 1024
         cli-memory: 2048
         cli-timeout: 900
@@ -123,6 +130,7 @@ environments:
         domain: 'web-staging-five.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -140,6 +148,7 @@ environments:
         domain: 'app-staging-one.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -157,6 +166,7 @@ environments:
         domain: 'app-staging-two.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
@@ -174,6 +184,7 @@ environments:
         domain: 'app-staging-three.musora.com'
         scheduler: false
         runtime: docker
+        gateway-version: 2
         memory: 512
         cli-memory: 2048
         cli-timeout: 900
