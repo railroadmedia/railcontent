@@ -7350,16 +7350,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.7",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10"
+                "reference": "a7e353f4e7435ae6e8ba71cdfeb51be5864e1403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/61d64fa626e8279221dca814d0f0459c323f0c10",
-                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a7e353f4e7435ae6e8ba71cdfeb51be5864e1403",
+                "reference": "a7e353f4e7435ae6e8ba71cdfeb51be5864e1403",
                 "shasum": ""
             },
             "require": {
@@ -7395,9 +7395,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.7"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.8"
             },
-            "time": "2022-06-22T20:01:34+00:00"
+            "time": "2022-07-10T19:39:34+00:00"
         },
         {
             "name": "railroad/event-data-synchronizer",
@@ -7566,12 +7566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a6cb857aeb83379c9c32dfb8c2137eab7d04d82a"
+                "reference": "81d6c9ad645a5942f4647c917a8ea0756b1c959c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a6cb857aeb83379c9c32dfb8c2137eab7d04d82a",
-                "reference": "a6cb857aeb83379c9c32dfb8c2137eab7d04d82a",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/81d6c9ad645a5942f4647c917a8ea0756b1c959c",
+                "reference": "81d6c9ad645a5942f4647c917a8ea0756b1c959c",
                 "shasum": ""
             },
             "require": {
@@ -7603,7 +7603,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-08T10:49:53+00:00"
+            "time": "2022-07-10T19:49:43+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -7703,12 +7703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "55293b607da00c4aaae72c718f21279a0305b289"
+                "reference": "c9587b70e09ede526331f4d23bafdda166fe7a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/55293b607da00c4aaae72c718f21279a0305b289",
-                "reference": "55293b607da00c4aaae72c718f21279a0305b289",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c9587b70e09ede526331f4d23bafdda166fe7a78",
+                "reference": "c9587b70e09ede526331f4d23bafdda166fe7a78",
                 "shasum": ""
             },
             "require": {
@@ -7764,7 +7764,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-07-10T18:50:03+00:00"
+            "time": "2022-07-10T19:37:13+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -7772,12 +7772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "ee4821f971d715d797b760f64124d07829ffc743"
+                "reference": "f0cbd53f7d05e3919d86a8fc03742c78c137c983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/ee4821f971d715d797b760f64124d07829ffc743",
-                "reference": "ee4821f971d715d797b760f64124d07829ffc743",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/f0cbd53f7d05e3919d86a8fc03742c78c137c983",
+                "reference": "f0cbd53f7d05e3919d86a8fc03742c78c137c983",
                 "shasum": ""
             },
             "require": {
@@ -7818,7 +7818,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0"
             },
-            "time": "2022-06-16T14:20:50+00:00"
+            "time": "2022-07-10T19:43:16+00:00"
         },
         {
             "name": "railroad/railhelpscout",
@@ -7863,12 +7863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "bd1838956b078f49ed75ac7a783925f65225e063"
+                "reference": "eb5fc9301b18085cf412d1fa8e851d137a361811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/bd1838956b078f49ed75ac7a783925f65225e063",
-                "reference": "bd1838956b078f49ed75ac7a783925f65225e063",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/eb5fc9301b18085cf412d1fa8e851d137a361811",
+                "reference": "eb5fc9301b18085cf412d1fa8e851d137a361811",
                 "shasum": ""
             },
             "require": {
@@ -7920,7 +7920,7 @@
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
                 "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0"
             },
-            "time": "2022-07-07T12:07:41+00:00"
+            "time": "2022-07-10T19:53:19+00:00"
         },
         {
             "name": "railroad/referral",
