@@ -1106,8 +1106,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->order($this->orderBy, $this->orderDirection)
-                ->group($this->orderBy);
+                ->order($this->orderBy, $this->orderDirection);
 
         if (self::$getFutureContentOnly) {
             $subQuery->where(
@@ -1130,7 +1129,6 @@ class ContentRepository extends RepositoryBase
         $query =
             $this->query()
                 ->selectPrimaryColumns()
-                ->order($this->orderBy, $this->orderDirection)
                 ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();

@@ -30,7 +30,8 @@ class ContentQueryBuilder extends QueryBuilder
     public function selectCountColumns($orderBy = null)
     {
         $this->addSelect([
-                             ConfigService::$tableContent.'.id as id',
+                             $this->raw('DISTINCT('. ConfigService::$tableContent.'.id) as id'),
+            ConfigService::$tableContent . '.published_on'
                          ]);
 
         if ($orderBy && $orderBy == 'content_likes') {
