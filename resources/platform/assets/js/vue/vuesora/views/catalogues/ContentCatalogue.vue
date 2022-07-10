@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column grow align-v-center">
 
-    <div v-if="isCoachesGrid" 
+    <div v-if="isCoachesGrid"
          id="coach-section"
          class="tw-flex tw-flex-col tw-mb-6">
         <div class="tw-flex tw-flex-wrap">
@@ -9,7 +9,7 @@
                :href="coachIndexUrl + '#coach-section'"
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[!isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[!isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
               >
                 All Coaches
               </h3>
@@ -18,7 +18,7 @@
                :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500', brandBorderColor ]"
               >
                   Subscribed Coaches
               </h3>
@@ -57,6 +57,7 @@
 
         <catalogue-playlist-tabs
             v-if="isPlaylists && !isCoach"
+            :brand="brand"
             :theme-color="themeColor"
             :included-types="includedTypes"
         />
@@ -553,7 +554,7 @@ export default {
       },
     },
     coachIndexUrl() {
-        return '/members/coaches';
+        return 'coaches';
     },
     isOnlySubscribed() {
        return String(location.search).includes('only_subscribed=true');
@@ -888,7 +889,7 @@ export default {
     },
 
     handleFilterChange(payload) {
-      this.$set(this.filter_params, payload.key, payload.value);
+      this.filter_params[payload.key] = payload.value;
       this.page = 1;
 
       if (this.useUrlParams) {

@@ -26,7 +26,19 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  userName : {
+    type: String,
+    default: null
+  },
+  userId: {
+    type: String,
+    default: null
+  }
 });
+
+const emit = defineEmits(['onError'])
+
+const imgUrlRef = ref(props.imgUrl);
 
 function handleImage(image) {
   selectedImage.value = image;
@@ -42,6 +54,16 @@ function openUploadForm() {
   showUploadForm.value = !showUploadForm.value;
   selectedImage.value = null;
   uploadStep.value = "dropzone";
+}
+
+function handleUploadDone(imgUrl) {
+  imgUrlRef.value = imgUrl;
+  showUploadForm.value = false;
+}
+
+function handleUploadError() {
+  emit('onError');
+  showUploadForm.value = false;
 }
 </script>
 
@@ -65,6 +87,9 @@ function openUploadForm() {
       <ImageUploadProgress
         v-if="uploadStep === 'upload'"
         :image="croppedImage"
+        :userId="userId"
+        @onUploadDone="handleUploadDone"
+        @onUploadError="handleUploadError"
       />
     </InfoModal>
 
@@ -86,8 +111,9 @@ function openUploadForm() {
           tw-border-2
           tw-color-[#344858]
         "
+        :style="{ ...imgUrlRef ? { backgroundImage: `url(${imgUrlRef})`, backgroundSize: 'cover' } : {} }"
       >
-        <UserIcon />
+        <UserIcon v-if="!imgUrlRef" />
         <div
           class="
             tw-absolute
@@ -99,7 +125,7 @@ function openUploadForm() {
         ></div>
       </div>
       <div class="tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]" style="text-decoration: inherit;">
-        UPLOAD PHOTO
+        {{ imgUrlRef ? 'UPDATE PROFILE PICTURE' : 'UPLOAD PHOTO' }}
       </div>
     </button>
   </div>

@@ -163,14 +163,14 @@ class CoachPagesController extends Controller
             4
         );
 
-        $includedFields = [];
+        $requiredFields = [];
         foreach ($featuredCoaches->results() as $featuredCoache) {
-            $includedFields[] = 'instructor,' . $featuredCoache['id'];
+            $requiredFields[] = 'instructor,' . $featuredCoache['id'];
             $instructor =
                 $this->contentService->getBySlugAndType($featuredCoache['slug'], 'instructor')
                     ->first();
             if ($instructor) {
-                $includedFields[] = 'instructor,' . $instructor['id'];
+                $requiredFields[] = 'instructor,' . $instructor['id'];
             }
         }
 
@@ -178,7 +178,7 @@ class CoachPagesController extends Controller
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = true;
 
-        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
+        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
 
         $latestLessons = $this->contentService->getFiltered(
             1,
@@ -187,8 +187,8 @@ class CoachPagesController extends Controller
             $includedTypes,
             [],
             [],
+            $requiredFields,
             [],
-            $includedFields,
             [],
             [],
             false,
@@ -240,29 +240,6 @@ class CoachPagesController extends Controller
 
         $lessonType = 'instructor';
 
-        $coaches = $this->contentService->getFiltered(
-            1,
-            20,
-            'slug',
-            [$lessonType],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            true
-        )['results'];
-
-        $thisCoach = null;
-
-        foreach ($coaches as $coach) {
-            if ($coach['slug'] == $coachSlug) {
-                $thisCoach = $coach;
-                break;
-            }
-        }
-
         $thisCoach = $this->contentService->getById($coachId);
 
         if (empty($thisCoach)) {
@@ -270,18 +247,17 @@ class CoachPagesController extends Controller
         }
 
         $includedFields = [];
-        $includedFields[] = 'instructor,' . $thisCoach['id'];
+        $requiredFields = [];
+
         $fieldIds = [$thisCoach['id']];
-        $instructor =
-            $this->contentService->getBySlugAndType($coachSlug, 'coach')
-                ->first();
-        if ($instructor) {
-            $includedFields[] = 'instructor,' . $instructor['id'];
-            $fieldIds[] = $instructor['id'];
+        $requiredFields[] = 'instructor,' . $thisCoach['id'];
+
+        if ($request->has('title')) {
+            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
         }
 
         $includedTypes =
-            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
+            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
 
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -290,7 +266,7 @@ class CoachPagesController extends Controller
             $request->get('included_types', $includedTypes),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
+            $request->get('required_fields', $requiredFields),
             $request->get('included_fields', $includedFields),
             $request->get('required_user_states', []),
             $request->get('included_user_states', [])
@@ -306,8 +282,8 @@ class CoachPagesController extends Controller
             [],
             [],
             [],
-            ['is_featured,1'],
-            $includedFields,
+            array_merge(['is_featured,1'], $requiredFields),
+            [],
             [],
             []
         );
@@ -321,8 +297,15 @@ class CoachPagesController extends Controller
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
-            $eventCoachUrl = url()->route('members.coaches.show', ['coachSlug' => $eventCoachSlug]);
-
+            $eventCoachId = $currentEvent->fetch('fields.instructor.id');
+            $eventCoachUrl = url()->route('platform.content.first-level',
+                                          [
+                                              'brand' => brand(),
+                                              'primaryPage' => 'coaches',
+                                              'firstContentSlug' => $eventCoachSlug,
+                                              'firstContentId' => $eventCoachId
+                                          ]
+            );
             $brandOverview = config('addevent.uniquekeys.brand-overview');
             $env = config('app.env') === 'production' ? 'prod' : 'sandbox';
             $coachCalendar = config('addevent.uniquekeys.by-coach')[$coachSlug] ?? null;
@@ -339,9 +322,9 @@ class CoachPagesController extends Controller
             "availableContentStatues" => ContentRepository::$availableContentStatues,
             "catalogueMeta" => $catalogueMeta,
             "includedFields" => $includedFields,
-            "requiredFields" => [],
+            "requiredFields" => $requiredFields,
             'totalResults' => $listLessons->totalResults(),
-            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['content_type'] ?? []),
+            'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['type'] ?? []),
             'featuredLessons' => $featuredLessons->toResponseRawJson(),
             "hasFeaturedLessons" => $featuredLessons->totalResults() > 0,
             'showSearch' => true,

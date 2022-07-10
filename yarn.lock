@@ -1005,6 +1005,13 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
+"@babel/runtime@^7.11.2":
+  version "7.18.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.3.tgz#c7b654b57f6f63cf7f8b418ac9ca04408c4579f4"
+  integrity sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.12.5", "@babel/runtime@^7.15.4":
   version "7.17.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
@@ -1165,6 +1172,11 @@
     simplebar "^5.2.0"
     stream-chat "^2.11.5"
     vue "^2.6.11"
+
+"@musora/helper-functions@^0.1.21":
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/@musora/helper-functions/-/helper-functions-0.1.25.tgz#c07e60d3c270a1cd76918826b8a78f360cb5ba6b"
+  integrity sha512-tc7Z4BIcIq6NFYVDy71LhGI8RYBYrYzt+MvTeQuJJoiKU/BMCbALGDkhQcIsZwzMbz0J+tzqN+4WFvEAf6Dkrw==
 
 "@musora/icons@^1.0.6":
   version "1.0.6"
@@ -1495,7 +1507,7 @@
   dependencies:
     "@types/node" "*"
 
-"@vimeo/player@^2.16.4":
+"@vimeo/player@^2.15.0":
   version "2.16.4"
   resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.16.4.tgz#40043a55f440b94753461da44dfe94bae077133e"
   integrity sha512-i+ids9ziQuai3mp8XzF9Q5b2hLgRCekRcefdnoy+RkKUR8Xq0cJndnk9jHugEOw8v6PLj7tO3eEAw4lu2/AG2Q==
@@ -4353,6 +4365,13 @@ laravel-mix@^6.0.43:
     webpackbar "^5.0.0-3"
     yargs "^17.2.1"
 
+laravel-vapor@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/laravel-vapor/-/laravel-vapor-0.6.0.tgz#69118989668125666b0258799b5765c1cab834a1"
+  integrity sha512-bfEnyaIAmUInIYAE/XBwuP9hiZMkXmL+X7Qx7Fr7e/I91fwftNr3xvsMXz2CjDVmxXoY0mBaSbZAJvKSTBZGSg==
+  dependencies:
+    axios "^0.21.1"
+
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"
@@ -4684,6 +4703,13 @@ multicast-dns@^7.2.4:
   dependencies:
     dns-packet "^5.2.2"
     thunky "^1.0.2"
+
+mux.js@^5.5.1:
+  version "5.14.1"
+  resolved "https://registry.yarnpkg.com/mux.js/-/mux.js-5.14.1.tgz#209583f454255d9ba2ff1bb61ad5a6867cf61878"
+  integrity sha512-38kA/xjWRDzMbcpHQfhKbJAME8eTZVsb9U2Puk890oGvGqnyu8B/AkKdICKPHkigfqYX9MY20vje88TP14nhog==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
 
 nanocolors@^0.1.12:
   version "0.1.12"
@@ -6405,10 +6431,10 @@ stylehacks@^5.1.0:
     browserslist "^4.16.6"
     postcss-selector-parser "^6.0.4"
 
-stylesora@^1.0.102-t3.9:
-  version "1.0.102-t3.9"
-  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.9.tgz#942243b6f8b65f353f408594093d0f61617532aa"
-  integrity sha512-HYbalZYbjUPbscCXeKowgB/E6wqVhj4omBP8iyJ+3ddM8NVkhkrwHUD5Dtkg3RS0/QsQnSzaIc/8upVRdxTnOw==
+stylesora@^1.0.102-t3.10:
+  version "1.0.102-t3.10"
+  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.10.tgz#efb7c0eeacf1afac7d6183bd034ec14629f261a7"
+  integrity sha512-9wIHdJ9Tzr9cRNNkThTJBBiL7QztpbcFOosv4cUZC9o1OJsM8Vqk0m5DHPHePifJbhB3jxNcbfDDiEyQycx3cg==
   dependencies:
     cssnano "^5.0.6"
 
@@ -6570,9 +6596,9 @@ timsort@^0.3.0:
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
 "tinymce@^6.0.0 || ^5.5.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-6.0.1.tgz#ec832632e398661507cc51b2a7574d17655fb9c8"
-  integrity sha512-+y3Lhm65GFs87gUfKuSWm2JA6ULHCC29trof4umIk2+TT+ql2poSsqsmRCSPN4elEo4EssIgEPFVRyPvrS/pDg==
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-6.0.3.tgz#993db09afa473a764ad8b594cdaf744b2c7e2e74"
+  integrity sha512-4cu80kWF7nRGhviE10poZtjTkl3jNL+lycilCMfdm3KU5V7FtiQQrKbEo6GInXT05RY78Ha/NFP0gOBELcSpfg==
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
@@ -6752,6 +6778,11 @@ vue-axios@^3.4.1:
   resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-3.4.1.tgz#e092ec4060b42e941ea5059df9b8f09058c3eea9"
   integrity sha512-8YZYUOQrBEJktxoQtrM4rr2LfVcDaWfJqv8MqtLlgLlkuBvCYKFSZSo6AXQ4YcCzdgccDqstmuaEh68lcH9xWA==
 
+vue-demi@^0.12.1:
+  version "0.12.5"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.5.tgz#8eeed566a7d86eb090209a11723f887d28aeb2d1"
+  integrity sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==
+
 vue-loader@^16.8.1:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.8.1.tgz#354f12bc0897954158b71590f800295713a7792d"
@@ -6760,6 +6791,13 @@ vue-loader@^16.8.1:
     chalk "^4.1.0"
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
+
+vue-recaptcha@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue-recaptcha/-/vue-recaptcha-2.0.2.tgz#22f323089ff15f4eacde26215ca61ac4806d009a"
+  integrity sha512-bE5WMz9jyiiY1PlaBOSUvsgTZ/ONoRV7Oq4Fn4JVz//ul+DJ0LHIJERfoF0NNEIDWXv6GjhwGLveGhoq0sEerg==
+  dependencies:
+    vue-demi "^0.12.1"
 
 vue-router@^4.0.14:
   version "4.0.14"

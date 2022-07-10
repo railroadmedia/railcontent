@@ -79,7 +79,7 @@ export default {
                 this.content.splice(post_index, 1);
             }
 
-            ContentService.addOrRemoveContentFromList(payload.content_id, payload.is_added)
+            ContentService.addOrRemoveContentFromList(payload.content_id, payload.is_added, this.brand)
                 .then((response) => {
                     if (!response) {
                         this.content[post_index].is_added_to_primary_playlist = !this.content[post_index].is_added_to_primary_playlist;

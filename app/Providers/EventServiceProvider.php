@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\CommentCreated;
+use Railroad\Railcontent\Events\CommentLiked;
+use Railroad\Railforums\EventListeners\ThreadEventListener;
+use Railroad\Railforums\Events\PostCreated;
+use Railroad\Railforums\Events\PostLiked;
+use Railroad\Railforums\Events\ThreadCreated;
+use Railroad\Railnotifications\Listeners\NotificationEventListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -15,6 +19,21 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        PostLiked::class => [
+            NotificationEventListener::class.'@handlePostLiked',
+        ],
+        PostCreated::class => [
+            NotificationEventListener::class.'@handlePostCreated',
+        ],
+        ThreadCreated::class => [
+            ThreadEventListener::class.'@onCreated',
+        ],
+        CommentCreated::class => [
+            NotificationEventListener::class.'@handleCommentCreated',
+        ],
+        CommentLiked::class =>[
+            NotificationEventListener::class.'@handleCommentLiked',
+        ]
 
     ];
 

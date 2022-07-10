@@ -42,5 +42,7 @@ class PrimaryURLSlugToContentTypeMap
         'behind-the-scenes' => 'behind-the-scenes',
         'exploring-beats' => 'exploring-beats',
         'sonor-drums' => 'sonor-drums',
+        'packs' => 'pack',
+        'coaches' => 'instructor',
     ];
 }

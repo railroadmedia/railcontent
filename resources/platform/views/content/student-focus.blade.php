@@ -5,14 +5,13 @@
 @endsection
 
 @section('content')
-        <div v-cloak>
 
         @component('partials._header-banner', ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
             @slot('content')
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                         <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                        <span class="tw-text-32">Student Focus</span>
+                        <span class="tw-text-32 tw-font-bold">Student Focus</span>
                     </h1>
 
                     <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
@@ -43,5 +42,4 @@
             </div>
         </div>
 
-        </div>
 @endsection

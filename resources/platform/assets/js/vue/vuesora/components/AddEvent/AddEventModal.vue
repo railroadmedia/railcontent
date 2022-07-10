@@ -1,7 +1,6 @@
 <template>
-    <InfoModal :modalId="modalId" @onClose="toggleModal" :selfContained="true">
-      <div
-        class="
+  <div :id="modalId" class="modal small">
+    <div class="
           tw-flex tw-flex-col tw-bg-white
           shadow
           corners-10
@@ -9,101 +8,67 @@
           md:tw-p-7
           align-h-center
           tw-overflow-visible tw-max-w-lg
-        "
-      >
-        <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl">
-          Subscribe to Calendar
-        </h1>
+        ">
+      <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl tw-text-black">
+        Subscribe to Calendar
+      </h1>
 
-        <p class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4">
-          Here you can subscribe to {{ toCapitalCase(brand) }}'s Lesson Calendar -
-          Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all
-          supported.
-        </p>
+      <p class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4 tw-text-black">
+        Here you can subscribe to {{ toCapitalCase(brand) }}'s Lesson Calendar -
+        Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all
+        supported.
+      </p>
 
-        <div
-          v-show="subscriptionCalendarId"
-          class="tw-relative tw-text-center"
-          style="width: 100%"
-        >
-          <button
-            class="btn tw-mb-2 tw-w-full"
-            @click.stop="
-              subscriptionCalendarDropdown = !subscriptionCalendarDropdown
-            "
-          >
-            <div
-              class="
+      <div v-show="subscriptionCalendarId" class="tw-relative tw-text-center" style="width: 100%">
+        <button class="btn tw-mb-2 tw-w-full" @click.stop="
+          subscriptionCalendarDropdown = !subscriptionCalendarDropdown
+        ">
+          <div class="
                 tw-text-white
                 tw-max-w-full
                 tw-rounded-full
                 tw-py-4
                 tw-uppercase
                 tw-font-bebas-neue
-              "
-              :class="'tw-' + themeBgClass"
-            >
-              <i class="fas fa-calendar-plus tw-mr-1"></i>
-              Subscribe to calendar
-            </div>
-          </button>
+              " :class="'tw-' + themeBgClass">
+            <i class="fas fa-calendar-plus tw-mr-1"></i>
+            Subscribe to calendar
+          </div>
+        </button>
 
-          <transition name="grow-fade">
-            <add-event-dropdown
-              v-show="subscriptionCalendarDropdown"
-              key="subscriptionCalendar"
-              :subscription-calendar-id="subscriptionCalendarId"
-              :is-subscription="true"
-            ></add-event-dropdown>
-          </transition>
-        </div>
-
-        <p
-          v-show="subscriptionCalendarId"
-          class="tw-text-[10px] tw-italic tw-text-center tw-mb-2"
-        >
-          Any upcoming releases will automatically show up in this calendar as
-          they are scheduled by the {{ toCapitalCase(brand) }} Team.
-        </p>
-
-        <p
-          v-show="hasSingleEvent"
-          class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-2"
-        >
-          Or you can subscribe to this event only by clicking the button below.
-        </p>
-        <div
-          v-show="hasSingleEvent"
-          class="tw-text-[13px] tw-leading-normal pointer tw-relative"
-          style="width: 100%"
-        >
-          <button
-            class="btn tw-mb-1"
-            @click.stop="singleEventDropdown = !singleEventDropdown"
-          >
-            <span class="inverted" :class="[themeTextClass, themeBgClass]">
-              <i class="fas fa-calendar-plus tw-mr-1"></i>
-              Subscribe to this event only
-            </span>
-          </button>
-
-          <transition name="grow-fade">
-            <add-event-dropdown
-              v-show="singleEventDropdown"
-              key="singleEvent"
-              :single-event="singleEvent"
-            ></add-event-dropdown>
-          </transition>
-        </div>
-
-        <p
-          v-show="hasSingleEvent"
-          class="x-tiny tw-italic tw-text-center tw-mb-2"
-        >
-          {{ singleEventDescription }}
-        </p>
+        <transition name="grow-fade">
+          <add-event-dropdown :single-event="singleEvent" v-show="subscriptionCalendarDropdown" key="subscriptionCalendar"
+            :subscription-calendar-id="subscriptionCalendarId" :is-subscription="true"></add-event-dropdown>
+        </transition>
       </div>
-    </InfoModal>
+
+      <p v-show="subscriptionCalendarId" class="tw-text-[10px] tw-italic tw-text-center tw-mb-2 tw-text-black">
+        Any upcoming releases will automatically show up in this calendar as
+        they are scheduled by the {{ toCapitalCase(brand) }} Team.
+      </p>
+
+      <p v-show="hasSingleEvent" class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-2">
+        Or you can subscribe to this event only by clicking the button below.
+      </p>
+      <div v-show="hasSingleEvent" class="tw-text-[13px] tw-leading-normal pointer tw-relative" style="width: 100%">
+        <button class="btn tw-mb-1" @click.stop="singleEventDropdown = !singleEventDropdown">
+          <span class="inverted" :class="[themeTextClass, themeBgClass]">
+            <i class="fas fa-calendar-plus tw-mr-1"></i>
+            Subscribe to this event only
+          </span>
+        </button>
+
+        <transition name="grow-fade">
+          <add-event-dropdown v-show="singleEventDropdown" :single-event="singleEvent">
+          </add-event-dropdown>
+        </transition>
+      </div>
+
+      <p v-show="hasSingleEvent" class="x-tiny tw-italic tw-text-center tw-mb-2">
+        {{ singleEventDescription }}
+      </p>
+    </div>
+  </div>
 </template>
 <script>
 import UtilsHelpers from "../../assets/js/helper-functions/utils.js";
@@ -129,8 +94,11 @@ export default {
       default: () => "Musora",
     },
     singleEvent: {
-      title: null,
-      date: null,
+      type: Object,
+      default: () => ({
+        title: null,
+        date: null,
+      })
     },
     subscriptionCalendarId: {
       type: String,
@@ -142,7 +110,7 @@ export default {
     },
     toggleSubscribe: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
   },
   data() {

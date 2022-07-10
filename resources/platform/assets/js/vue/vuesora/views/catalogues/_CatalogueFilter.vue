@@ -6,7 +6,7 @@
             <select
                 :id="filterName + 'Filter'"
                 v-model="valueInterface"
-                class="tw-pb-0 tw-text-black dark:tw-text-white no-label"
+                class="tw-pb-0 tw-text-black dark:tw-text-white no-label tw-bg-white dark:tw-bg-transparent"
                 :class="{'is-clearable': valueInterface}"
                 :disabled="valueInterface"
                 @keydown.prevent

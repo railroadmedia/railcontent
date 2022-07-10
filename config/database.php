@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_DEFAULT_CONNECTION', 'musora_laravel_mysql'),
+    'default' => env('DB_DEFAULT_CONNECTION_NAME', 'musora_laravel_mysql_writer_only'),
 
     /*
     |--------------------------------------------------------------------------

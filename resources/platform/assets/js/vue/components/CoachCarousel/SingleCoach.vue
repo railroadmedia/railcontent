@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import ContentAPI from '../../vuesora/assets/js/services/content';
+
 const props = defineProps({
   id: {
     type: String,
@@ -13,18 +15,19 @@ const props = defineProps({
   focusText: {
     type: String,
   },
+  isFollowed: {
+    type: Boolean,
+  }
 });
 
-const isCoachFollowed = ref(false);
+const isCoachFollowed = ref(props.isFollowed);
 
 const followEndpoint = (id) => {
-  console.log("followed", id);
-  return Promise.resolve();
+  return ContentAPI.followCoach({ coachId: id });
 };
 
 const unfollowEndpoint = (id) => {
-  console.log("unfollowed", id);
-  return Promise.resolve();
+  return ContentAPI.unfollowCoach({ coachId: id });
 };
 
 function onFollow(e) {

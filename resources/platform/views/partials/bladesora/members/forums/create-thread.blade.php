@@ -1,25 +1,27 @@
 <div class="tw-flex tw-flex-col">
     <div class="tw-flex tw-flex-col pa-3 bb-light-1">
-        <h1 class="heading">
-            <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-1">
-                <i class="fas fa-arrow-circle-left text-grey-2"></i>
+        <h1 class="tw-text-3xl tw-font-bold tw-text-[#000C17] dark:tw-text-white tw-flex tw-items-center tw-leading-none">
+            <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-2">
+                <i class="fas fa-arrow-circle-left tw-text-3xl tw-mt-1 dark:tw-text-white"></i>
             </a>
             Create a Thread
         </h1>
     </div>
-    <div class="tw-flex tw-flex-col ph pv-3">
+    <div class="tw-flex tw-flex-col ph pv-3" >
         <div class="tw-flex tw-flex-row">
             <div class="tw-flex tw-flex-col avatar-column hide-xs-only">
                 <img class="rounded" src="{{ $userAvatar }}">
             </div>
-            <div class="tw-flex tw-flex-col ph">
-                <form action="{{ $formAction }}" method="post">
+            <div class="tw-flex tw-flex-col ph tw-w-full">
+                <form action="{{ $formAction }}" method="post" id="createThreadForm">
                     {{ csrf_field() }}
                     {{ method_field($method) }}
 
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="title" id="title" value="{{ old('title') }}">
-                        <label for="title" class="{{ $brand }}">Title</label>
+                        <input type="text" name="title" id="title" value="{{ old('title') }}" 
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57]"
+                        >
+                        <label for="title" class="dark:tw-text-[#9EC0DC] {{ $brand }}">Title</label>
 
                         @include('partials.bladesora.members.inputs.partials._errors', [
                             "inputErrors" => $errors->get('title')
@@ -28,10 +30,10 @@
 
                     @if(!empty($topicOptions))
                         <div class="form-group tw-mb-2">
-                            <select id="forum" name="category_id">
+                            <select id="forum" name="category_id" class="dark:tw-text-white tw-pb-0">
                                 <option selected disabled style="display:none;">
                                 @foreach($topicOptions as $index => $topic)
-                                    <option value="{{ $index }}" {!! (app('request')->input('thread-title') === $topic) ? 'selected' : '' !!} >{{ $topic }}</option>
+                                    <option class="dark:tw-text-black" value="{{ $index }}" {!! (app('request')->input('thread-title') === $topic) ? 'selected' : '' !!} >{{ $topic }}</option>
                                 @endforeach
                             </select>
                             <label for="forum" class="{{ $brand }}">Forum</label>
@@ -45,22 +47,21 @@
                     @endif
 
                     <text-editor field-key="first_post_content"
-                                 initial-value="{{ old('first_post_content') }}"></text-editor>
+                                 initial-value="{{ old('first_post_content') }}">
+                    </text-editor>
 
                     @if(!empty($errors->get('first_post_content')))
                         <p class="tiny text-error pa">* The post content field is required</p>
                     @endif
 
-                    <div class="tw-flex tw-flex-row align-h-right mt-2">
+                    <div class="tw-flex tw-flex-row tw-justify-end mt-2">
                         <a href="{{ $forumUrl }}"
-                           class="btn tw-bg-black tw-text-black tw-no-underline flat collapse-150 tw-border-none tw-mr-1" dusk="cancel-button">
+                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 tw-mr-1" dusk="cancel-button">
                             Cancel
                         </a>
 
-                        <button class="btn collapse-320" type="submit" dusk="submit-button">
-                            <span class="tw-bg-{{ $brand }} text-white corners-10">
-                                Create Thread
-                            </span>
+                        <button class="tw-btn-primary tw-bg-{{ $brand }}" type="submit" dusk="submit-button">
+                            Create Thread
                         </button>
                     </div>
                 </form>

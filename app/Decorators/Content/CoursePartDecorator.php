@@ -78,8 +78,6 @@ class CoursePartDecorator extends TypeDecoratorBase
                 ??
                 config('xp_ranks.difficulty_xp_map.all')
             );
-
-            $contentsOfType[$contentIndex]['length_in_seconds'] = $content->fetch('fields.video.fields.length_in_seconds', 0);
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

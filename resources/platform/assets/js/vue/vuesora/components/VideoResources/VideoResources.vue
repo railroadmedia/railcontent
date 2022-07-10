@@ -1,19 +1,20 @@
 <template>
   <div>
     <div class="flex flex-row flex-wrap align-v-center pv-2">
-      <div class="flex flex-column xs-12 sm-5 md-7 text-white">
+      <div class="flex flex-column tw-text-[#00101D] dark:tw-text-white">
         <h1 class="heading">
           {{ title }}
         </h1>
       </div>
 
-      <div class="flex flex-column pv-2 xs-12 sm-7 md-5">
+      <div class="flex flex-column pv-2">
         <div class="flex flex-row nmh-1 flex-wrap resource-buttons">
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" @click="likeContent">
               <span
+                class="tw-shadow-none"
                 style="padding: 0 8px"
-                :class="hasLiked ? themeTextClass : 'text-grey-3'"
+                :class="hasLiked ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
               >
                 <i
                   class="fa-thumbs-up mb-1"
@@ -26,7 +27,7 @@
 
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" data-open-modal="shareVideoModal">
-              <span class="text-grey-3" style="padding: 0 8px">
+              <span class="tw-shadow-none text-grey-3 dark:tw-text-white" style="padding: 0 8px">
                 <i class="fas fa-share mb-1"></i>
                 Share
               </span>
@@ -42,7 +43,8 @@
               @click="resourceDropdown = !resourceDropdown"
             >
               <span
-                :class="resourceDropdown ? themeTextClass : 'text-grey-3'"
+                class="tw-shadow-none"
+                :class="resourceDropdown ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                 style="padding: 0 8px"
               >
                 <i class="fas fa-download mb-1"></i>
@@ -89,8 +91,9 @@
           >
             <button class="btn stacked" @click="addToList">
               <span
+                class="tw-shadow-none"
                 style="padding: 0 8px"
-                :class="hasAdded ? themeTextClass : 'text-grey-3'"
+                :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
               >
                 <i
                   class="fas mb-1"
@@ -168,7 +171,7 @@
 </template>
 
 <script>
-import Utils from '../assets/js/helper-functions/utils.js';
+import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
 import Toasts from "../../assets/js/classes/toasts";
 import ContentService from "../../assets/js/services/content";

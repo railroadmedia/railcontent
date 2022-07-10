@@ -3,22 +3,56 @@ import UploadProgress from "../UploadProgress/UploadProgress.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const FILE_UPLOAD_SERVICE = "";
+const FILE_UPLOAD_SERVICE = "/user-management-system/picture/upload";
 
 const props = defineProps({
   image: {
+    type: Blob,
+  },
+  userId: {
     type: String,
+    default: 'random-uuid'
   },
 });
 
+const emit = defineEmits(['onUploadDone', 'onUploadError']);
+
 const percentCompleted = ref(0);
+
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+}
 
 onMounted(() => {
   var data = new FormData();
-  data.append("profile-pic", "profile-pic-img");
-  data.append("data", props.image);
+  const newFileName = `${props.userId}_${Date.now()}.png`;
+
+  // We need dataURItoBlob for the BE to accept the data transfer, it does not accept base64 string.
+  data.append('file', dataURItoBlob(props.image), newFileName);
+  data.append('target', newFileName);
+  data.append('_method', 'POST');
+  data.append('fieldKey', 'profile_picture_url');
 
   var config = {
+    'content-type': 'multipart/form-data',
+    processData: false,
+    contentType: false,
     onUploadProgress: function (progressEvent) {
       percentCompleted.value = Math.round(
         (progressEvent.loaded * 100) / progressEvent.total
@@ -29,10 +63,10 @@ onMounted(() => {
   axios
     .post(FILE_UPLOAD_SERVICE, data, config)
     .then(function (res) {
-      console.log("success", res);
+      emit('onUploadDone', res.data.profile_picture_url);
     })
     .catch(function (err) {
-      console.log(err);
+      emit('onUploadError')
     });
 });
 </script>
@@ -50,10 +84,10 @@ onMounted(() => {
         style="font-family: Open Sans"
       >
         <h2 class="tw-text-bold tw-mb-[12px] tw-text-[16px]">
-          Uploading in progress
+          {{ percentCompleted === 100 ? 'Your profile image has successfully uploaded' : 'Uploading in progress'  }}
         </h2>
         <p class="tw-italic tw-text-[14px] tw-text-[#E5E5E5]">
-          This will take a few short seconds
+          {{ percentCompleted === 100 ? '' : 'This will take a few short seconds'  }}
         </p>
       </div>
       <UploadProgress :percentage="percentCompleted" />

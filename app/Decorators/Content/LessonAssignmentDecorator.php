@@ -7,7 +7,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class LessonAssignmentDecorator extends TypeDecoratorBase
 {
-    public static $skip = true;
+    public static $skip = false;
 
     public function decorate(Collection $contents)
     {
@@ -24,6 +24,7 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
             $contentsOfTypes->pluck('id')
                 ->toArray()
         );
+
 
         if (empty($childHierarchyRows)) {
             return $contents;

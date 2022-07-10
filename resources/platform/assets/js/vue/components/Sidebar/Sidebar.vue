@@ -1,7 +1,6 @@
 <script>
 import SidebarContainer from './SidebarContainer.vue'
 import { textColor, borderColor } from '../../../constants/brands.js'
-import { sidebarLinks } from '../../../constants/sidebar_links.js'
 import PlaylistsSection from './PlaylistsSection.vue'
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
@@ -26,6 +25,10 @@ export default {
     playlist: {
       type: Array,
       default: []
+    },
+    forceSidebarHidden: {
+      type: Boolean,
+      default: false,
     }
   },
   setup(props, { emit }) {
@@ -35,7 +38,6 @@ export default {
     return {
       textColor,
       borderColor,
-      sidebarLinks,
       handleCollapse
     }
   },
@@ -54,9 +56,10 @@ export default {
   <SidebarContainer :isSidebarCollapsed="isSidebarCollapsed"
                     :isSidebarHidden="isSidebarHidden"
                     :brand="brand"
+                    :forceSidebarHidden="forceSidebarHidden"
   >
     <!-- Sidebar Search -->
-    <SearchInput :isSidebarCollapsed="isSidebarCollapsed" @onCollapse="handleCollapse" />
+    <SearchInput :isSidebarCollapsed="isSidebarCollapsed" :brand="brand" @onCollapse="handleCollapse"/>
 
     <!-- Sidebar Link Sections -->
     <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">

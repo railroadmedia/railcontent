@@ -1,14 +1,8 @@
 <script setup>
-import { ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
-import Onboarding from "./Onboarding.vue";
 import Button from "../Button/Button.vue";
 const emit = defineEmits(["onClose"]);
 
-const showOnboarding = ref(false);
-function toggleOnboarding() {
-  showOnboarding.value = !showOnboarding.value;
-}
 </script>
 
 <template>
@@ -36,13 +30,12 @@ function toggleOnboarding() {
     <div class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
       You haven’t set up your account for this instrument.
     </div>
-    <button
-      @click="toggleOnboarding"
+    <a
+      href="onboarding"
       class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none tw-mr-6 dark:tw-text-white 
         hover:tw-bg-black/10 dark:hover:tw-bg-white/10"
       >Complete Your Account
-    </button>
-    <Onboarding v-if="showOnboarding" />
+    </a>
     <button
       class="
         tw-absolute

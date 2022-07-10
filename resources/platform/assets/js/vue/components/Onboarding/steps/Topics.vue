@@ -1,12 +1,14 @@
 <script setup>
+import { ref } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
-
 import SkipStep from "../SkipStep.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import { ref } from "vue";
+import { getMultiSelectOptions } from "../utils";
+import { saveTopics } from "../services";
+
 const props = defineProps({
   brand: {
     type: String,
@@ -17,24 +19,47 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  configOptions: {
+    type: Object,
+  }
 });
+
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
-const options = [
-  { value: "g", text: "G" },
-  { value: "h", text: "H" },
-  { value: "i", text: "I" },
-];
+
+const options = ref(
+  getMultiSelectOptions({
+    property: 'topics',
+    ...props
+  })
+);
+
 function handleMultiSelection(selection) {
   emit(
     "onCheckStep",
     5,
-    Object.values(selection).find((val) => val)
+    !!Object.values(selection).find((val) => val)
   );
-  emit("onChangeInfo", { ...props.info, topics: selection });
+  emit("onChangeInfo", { ...props.info, topics: { ...props.info.topics, [props.brand]: selection} });
 }
-function skipStep() {
-  alert("* the user skipped the step *");
-}
+
+const handleNextStep = () => {
+  const data = [];
+
+  Object.entries(props.info.topics[props.brand]).forEach(([type, isChecked]) => {
+    if (isChecked) {
+      data.push(type);
+    }
+  })
+
+  saveTopics({
+    data,
+    brand: props.brand
+  }).then(() => {
+    emit('onChangeStep', 6);
+  }).catch(() => {
+    showErrorNotification.value = true;
+  });
+};
 
 function goBack() {
   emit('onChangeStep', 4);
@@ -57,7 +82,7 @@ function goBack() {
         @onGoBack="goBack" />
       <MultiSelect
         :options="options"
-        :initialSelection="info.topics"
+        :initialSelection="info.topics[brand]"
         classOverride="tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />
@@ -72,11 +97,7 @@ function goBack() {
     >
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 6);
-          }
-        "
+        @onButtonClick="handleNextStep"
         :isDisabled="!steps[5].checked"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
         >Next</Button
@@ -89,11 +110,7 @@ function goBack() {
       />
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 6);
-          }
-        "
+        @onButtonClick="handleNextStep"
         :isDisabled="!steps[5].checked"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button

@@ -45,10 +45,10 @@ class PackDecorator extends TypeDecoratorBase
             );
 
             if (($content['completed'] ?? false) !== true) {
-//                $contentsOfType[$contentIndex]['next_lesson_url'] =
-//                    url()->route('members.packs.jump-to-next-lesson', [$content['id']]);
-//                $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
-//                    url()->route('mobile.packs.jump-to-next-lesson', [$content['id']]);
+                $contentsOfType[$contentIndex]['next_lesson_url'] =
+                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
+                $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
+                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
 
             }
 

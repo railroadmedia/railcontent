@@ -84,6 +84,10 @@ Parameters and validation for PUT/PATCH:
     'piano_gear_photo' => 'nullable|url',
     'piano_gear_piano_brands' => 'nullable|string',
     'piano_gear_keyboard_brands' => 'nullable|string',
+
+    'singing_since_year' => 'nullable|integer|between:1900,' . date('Y'),
+    'singing_gear_mic_brands' => 'nullable|string',
+    'singing_gear_photo' => 'nullable|url'
 ];
 ```
 
@@ -178,5 +182,46 @@ $.ajax({
     error: function(response) {}
 });
 ```
+
+
+
+## Upload and update picture URLs 
+
+
+### HTTP Request
+    `PUT user_management_system/picture/upload`
+
+## Request parameters:
+- depending on the attributes sent, the request will update one of the following User attributes:
+- only one of the parameters should be added to the request
+
+```php
+[
+    'profile_picture_url' => 'url',
+    'drums_gear_photo' => 'url',
+    'piano_gear_photo' => 'url',
+    'guitar_gear_photo' => 'url',
+    'singing_gear_photo' => 'url',
+]
+```
+
+
+### Permissions
+    - Must be logged in
+
+### Request Parameters
+
+
+|Type|Key|Required| Notes         |
+|----|---|--------|---------------|
+|body|file|    | Max 5MB size. |
+
+
+### Request Example:
+
+See: [https://github.com/railroadmedia/musora-web-platform/blob/master/resources/platform/assets/js/vue/vuesora/components/ImageCropper/ImageCropper.vue#L337](https://github.com/railroadmedia/musora-web-platform/blob/master/resources/platform/assets/js/vue/vuesora/components/ImageCropper/ImageCropper.vue#L337)
+
+### Return:
+Returns entire user JSON object. Can get new profile pic URL with: response.profile_picture_url.
 
 

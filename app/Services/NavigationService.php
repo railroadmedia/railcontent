@@ -13,81 +13,112 @@ class NavigationService
             return [];
         }
 
+        if (user()->isPackOnlyOwner()) {
+            return [
+                [ // section
+                    [
+                        'name' => 'Home',
+                        'path' => '/'.brand(),
+                        'icon' => 'home',
+                    ],
+                ],
+                [ // section
+                    [
+                        'name' => 'Packs',
+                        'path' => '/'.brand().'/packs',
+                        'icon' => 'box',
+                    ],
+                ],
+                [ // section
+                    [
+                        'name' => 'Forums',
+                        'path' => '/'.brand().'/forums',
+                        'icon' => 'messages',
+                    ],
+                    [
+                        'name' => 'My List',
+                        'path' => '/'.brand().'/lists/my-list',
+                        'icon' => 'playlist',
+                    ],
+                ],
+            ];
+        }
+
         if (brand() === 'drumeo') {
             return [
                 [ // section
                     [
                         'name' => 'Home',
-                        'path' => '/' . brand(),
+                        'path' => '/'.brand(),
                         'icon' => 'home',
                     ],
                     [
                         'name' => 'Method',
-                        'path' => '/' . brand() . '/method/drumeo-method/241247',
+                        'path' => '/'.brand().'/method/drumeo-method/241247',
                         'icon' => 'method',
                     ],
                     [
                         'name' => 'Songs',
-                        'path' => '/' . brand() . '/songs',
+                        'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
                         'name' => 'Coaches',
-                        'path' => '/' . brand() . '/coaches',
+                        'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Packs',
-                        'path' => '/' . brand() . '/packs',
+                        'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                     [
                         'name' => 'Courses',
-                        'path' => '/' . brand() . '/courses',
+                        'path' => '/'.brand().'/courses',
                         'icon' => 'academic-cap',
                     ],
                     [
                         'name' => 'Quick Tips',
-                        'path' => '/' . brand() . '/quick-tips',
+                        'path' => '/'.brand().'/quick-tips',
                         'icon' => 'light-bulb',
                     ],
                     [
                         'name' => 'Student Focus',
-                        'path' => '/' . brand() . '/student-focus',
+                        'path' => '/'.brand().'/student-focus',
                         'icon' => 'person-plus',
                     ],
                     [
                         'name' => 'Live',
-                        'path' => '/' . brand() . '/live',
+                        'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
                     ],
                     [
                         'name' => 'Play-Alongs',
-                        'path' => '/' . brand() . '/play-alongs',
+                        'path' => '/'.brand().'/play-alongs',
                         'icon' => 'eigth-notes',
                     ],
                     [
                         'name' => 'Rudiments',
-                        'path' => '/' . brand() . '/rudiments',
+                        'path' => '/'.brand().'/rudiments',
                         'icon' => 'drum',
                     ],
                     [
                         'name' => 'Shows',
-                        'path' => '/' . brand() . '/shows',
+                        'path' => '/'.brand().'/shows',
                         'icon' => 'shows',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Forums',
-                        'path' => '/' . brand() . '/forums',
+                        'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -97,71 +128,71 @@ class NavigationService
                 [ // section
                     [
                         'name' => 'Home',
-                        'path' => '/' . brand(),
+                        'path' => '/'.brand(),
                         'icon' => 'home',
                     ],
                     [
                         'name' => 'Method',
-                        'path' => '/' . brand() . '/method/pianote-method/276693',
+                        'path' => '/'.brand().'/method/pianote-method/276693',
                         'icon' => 'method',
                     ],
                     [
                         'name' => 'Songs',
-                        'path' => '/' . brand() . '/songs',
+                        'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
                         'name' => 'Coaches',
-                        'path' => '/' . brand() . '/coaches',
+                        'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Packs',
-                        'path' => '/' . brand() . '/packs',
+                        'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                     [
                         'name' => 'Courses',
-                        'path' => '/' . brand() . '/courses',
+                        'path' => '/'.brand().'/courses',
                         'icon' => 'academic-cap',
                     ],
                     [
                         'name' => 'Quick Tips',
-                        'path' => '/' . brand() . '/quick-tips',
+                        'path' => '/'.brand().'/quick-tips',
                         'icon' => 'light-bulb',
                     ],
                     [
                         'name' => 'Student Focus',
-                        'path' => '/' . brand() . '/student-focus',
+                        'path' => '/'.brand().'/student-focus',
                         'icon' => 'person-plus',
                     ],
                     [
                         'name' => 'Live',
-                        'path' => '/' . brand() . '/live',
+                        'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
                     ],
                     [
                         'name' => 'Podcast',
-                        'path' => '/' . brand() . '/podcasts',
+                        'path' => '/'.brand().'/podcasts',
                         'icon' => 'podcast',
                     ],
                     [
                         'name' => 'Bootcamps',
-                        'path' => '/' . brand() . '/bootcamps',
+                        'path' => '/'.brand().'/bootcamps',
                         'icon' => 'keys',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Forums',
-                        'path' => '/' . brand() . '/forums',
+                        'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -171,81 +202,81 @@ class NavigationService
                 [ // section
                     [
                         'name' => 'Home',
-                        'path' => '/' . brand(),
+                        'path' => '/'.brand(),
                         'icon' => 'home',
                     ],
                     [
                         'name' => 'Method',
-                        'path' => '/' . brand() . '/method/guitareo-method/333652',
+                        'path' => '/'.brand().'/method/guitareo-method/333652',
                         'icon' => 'method',
                     ],
                     [
                         'name' => 'Songs',
-                        'path' => '/' . brand() . '/songs',
+                        'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
                         'name' => 'Coaches',
-                        'path' => '/' . brand() . '/coaches',
+                        'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Lessons',
-                        'path' => '/' . brand() . '/lessons',
+                        'path' => '/'.brand().'/lessons',
                         'icon' => 'electric-guitar',
                     ],
                     [
                         'name' => 'Packs',
-                        'path' => '/' . brand() . '/packs',
+                        'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                     [
                         'name' => 'Courses',
-                        'path' => '/' . brand() . '/courses',
+                        'path' => '/'.brand().'/courses',
                         'icon' => 'academic-cap',
                     ],
                     [
                         'name' => 'Quick Tips',
-                        'path' => '/' . brand() . '/quick-tips',
+                        'path' => '/'.brand().'/quick-tips',
                         'icon' => 'light-bulb',
                     ],
                     [
                         'name' => 'Student Focus',
-                        'path' => '/' . brand() . '/student-focus',
+                        'path' => '/'.brand().'/student-focus',
                         'icon' => 'person-plus',
                     ],
                     [
                         'name' => 'Live',
-                        'path' => '/' . brand() . '/live',
+                        'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
                     ],
                     [
                         'name' => '500 Songs',
-                        'path' => '/' . brand() . '/lessons',
+                        'path' => '/'.brand().'/lessons',
                         'icon' => '500-songs',
                     ],
                     [
                         'name' => 'Chords & Scales',
-                        'path' => '/' . brand() . '/chords-scales',
+                        'path' => '/'.brand().'/chords-scales',
                         'icon' => 'guitar-tabs',
                     ],
                     [
                         'name' => 'Archives',
-                        'path' => '/' . brand() . '/archives',
+                        'path' => '/'.brand().'/archives',
                         'icon' => 'archives',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Forums',
-                        'path' => '/' . brand() . '/forums',
+                        'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -255,61 +286,61 @@ class NavigationService
                 [ // section
                     [
                         'name' => 'Home',
-                        'path' => '/' . brand(),
+                        'path' => '/'.brand(),
                         'icon' => 'home',
                     ],
                     [
                         'name' => 'Method',
-                        'path' => '/' . brand() . '/method/singeo-method/308514',
+                        'path' => '/'.brand().'/method/singeo-method/308514',
                         'icon' => 'method',
                     ],
                     [
                         'name' => 'Songs',
-                        'path' => '/' . brand() . '/songs',
+                        'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
                     ],
                     [
                         'name' => 'Coaches',
-                        'path' => '/' . brand() . '/coaches',
+                        'path' => '/'.brand().'/coaches',
                         'icon' => 'whistle',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Courses',
-                        'path' => '/' . brand() . '/courses',
+                        'path' => '/'.brand().'/courses',
                         'icon' => 'academic-cap',
                     ],
                     [
                         'name' => 'Quick Tips',
-                        'path' => '/' . brand() . '/quick-tips',
+                        'path' => '/'.brand().'/quick-tips',
                         'icon' => 'light-bulb',
                     ],
                     [
                         'name' => 'Student Focus',
-                        'path' => '/' . brand() . '/student-focus',
+                        'path' => '/'.brand().'/student-focus',
                         'icon' => 'person-plus',
                     ],
                     [
                         'name' => 'Live',
-                        'path' => '/' . brand() . '/live',
+                        'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
                     ],
                     [
                         'name' => 'Routines',
-                        'path' => '/' . brand() . '/routines',
+                        'path' => '/'.brand().'/routines',
                         'icon' => 'routines',
                     ],
                 ],
                 [ // section
                     [
                         'name' => 'Forums',
-                        'path' => '/' . brand() . '/forums',
+                        'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
                     [
                         'name' => 'My List',
-                        'path' => '/' . brand() . '/my-list',
+                        'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
                 ],
@@ -337,14 +368,14 @@ class NavigationService
         }
 
         return [
-            'dashboardPageUrl' => '/' . brand() . '/profile/' . user()->id . '/dashboard',
-            'notificationsPageUrl' => '/',
+            'dashboardPageUrl' => '/'.brand().'/profile/'.user()->id.'/dashboard',
+            'notificationsPageUrl' => '/'.brand().'/notifications',
             'playlistsPageUrl' => '/',
             'schedulePageUrl' => '/',
             'applyForReviewPageUrl' => '/',
-            'settingsPageUrl' => '/' . brand() . '/profile/' . user()->id . '/settings/profile',
-            'supportPageUrl' => '/' . brand() . '/support',
-            'shopPageUrl' => 'https://' . brand() . '.com/shop',
+            'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
+            'supportPageUrl' => '/'.brand().'/support',
+            'shopPageUrl' => 'https://'.brand().'.com/shop',
             'logoutPageUrl' => '/user-management-system/logout/cookie',
         ];
     }

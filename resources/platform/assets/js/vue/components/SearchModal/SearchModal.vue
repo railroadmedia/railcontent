@@ -34,31 +34,43 @@ const onSearch = () => {
         box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1),
           0px 10px 10px -5px rgba(0, 0, 0, 0.04);
       ">
-      <div class="tw-relative tw-h-[62px] tw-flex tw-items-center tw-w-full">
+      <form 
+        method="GET"
+        :action="`/${brand}/search`" 
+        class="tw-relative tw-h-[62px] tw-flex tw-items-center tw-w-full"
+      >
         <MusoraIcon icon-name="search" class="tw-absolute tw-top-6 tw-left-6 dark:tw-text-[#9EC0DC] tw-z-0" />
-        <InputLabel :showClearButton="true" placeholder="Search" @onChange="handleChange" wrapperOverride="tw-flex-grow" :inputOverride="`
-        tw-outline-offset-0
-        tw-relative
-        tw-w-full
-        tw-h-[37px]
-        tw-border-none
-        tw-text-xs
-        tw-transition-color
-        dark:tw-placeholder-[#9EC0DC]
-        dark:tw-text-white
-        tw-bg-transparent
-        tw-shadow-none
-        tw-pl-[48px]
-        tw-pr-[36px]
-        focus:tw-ring-0
-        `" @onFocus="handleFocus" />
+        <InputLabel 
+          :showClearButton="true" 
+          placeholder="Search"
+          inputName="term"
+          id="modal-search"
+          @onChange="handleChange" 
+          wrapperOverride="tw-flex-grow" 
+          :inputOverride="`
+            tw-outline-offset-0
+            tw-relative
+            tw-w-full
+            tw-h-[37px]
+            tw-border-none
+            tw-text-xs
+            tw-transition-color
+            dark:tw-placeholder-[#9EC0DC]
+            dark:tw-text-white
+            tw-bg-transparent
+            tw-shadow-none
+            tw-pl-[48px]
+            tw-pr-[36px]
+            focus:tw-ring-0`" 
+          @onFocus="handleFocus" 
+        />
         <div class="tw-mr-[24px]">
           <button @click="onSearch"
             :class="`tw-rounded-full tw-w-[36px] tw-h-[36px] tw-flex tw-items-center tw-justify-center ${bgColor[brand]}`">
             <SearchIcon class="tw-w-[24px] tw-h-[24px]" />
           </button>
         </div>
-      </div>
+      </form>
       <div class="tw-border-t-[1px] tw-border-[#445f74]/40 tw-w-full tw-flex-grow"></div>
     </div>
   </ModalRenderer>

@@ -5,11 +5,13 @@ use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
 use App\Http\Controllers\Platform\LivePageController;
+use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\PackPagesController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
+use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,14 @@ Route::domain('{musoraDomain}')
         Route::get('/members', [HomePageController::class, 'homeRedirect'])
             ->whereIn('brand', all_brands())
             ->name('platform.home-redirect');
+
+        /*
+        * Onboarding
+        */
+        Route::get('/onboarding', [HomePageController::class, 'onboarding'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.onboarding');
+
 
         /*
          * Primary Content Pages
@@ -145,18 +155,25 @@ Route::domain('{musoraDomain}')
          * Packs Sub-Content Hierarchy Pages
          */
         Route::get('/{brand}/packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
-            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->whereIn('brand', all_brands())
             ->name('platform.packs.first-level');
 
         Route::get(
             '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
             [PackPagesController::class, 'packBundleLessons']
         )
-            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->whereIn('brand', all_brands())
             ->name('platform.packs.second-level');
 
+        Route::get(
+            '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}/{packBundleLessonSlug}/{packBundleLessonId}',
+            [PackPagesController::class, 'packBundleLesson']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.packs.third-level');
+
         /*
-         * Catch-All Sub-Content Hierarchy Pages
+         * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
          */
         Route::get(
             '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',
@@ -171,7 +188,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'secondLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses'])
             ->name('platform.content.second-level');
 
         Route::get(
@@ -183,12 +200,24 @@ Route::domain('{musoraDomain}')
             ->name('platform.content.third-level');
 
         Route::get(
-            '/{brand}/jump-to-content-id/{contentId}',
-            [ContentPagesController::class, 'jumpToContentId']
+            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}/{fourthContentSlug}/{fourthContentId}',
+            [ContentPagesController::class, 'fourthLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method'])
+            ->whereIn('primaryPage', ['method'])
+            ->name('platform.content.fourth-level');
+
+        Route::get(
+            '/jump-to-content-id/{contentId}',
+            [ContentPagesController::class, 'jumpToContentId']
+        )
             ->name('platform.content.jump-to-content-id');
+
+        Route::get(
+            '/jump-to-continue-content/{contentId}',
+            [ContentPagesController::class, 'jumpToContinueContent']
+        )
+            ->name('platform.content.jump-to-continue-content');
 
         /*
          * Live & Schedule
@@ -317,4 +346,23 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/forums/edit-thread/{threadId}', [ForumPagesController::class, 'showUpdateThreadForm'])
             ->whereIn('brand', all_brands())
             ->name('forums.show-update-thread-form');
+
+        /*
+         * Mails
+         */
+        Route::post('/{brand}/mail', [MailController::class, 'sendFromMember'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.mail');
+
+        /*
+         * Support
+         */
+        Route::get('/{brand}/support', [SupportController::class, 'memberSupport'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.support');
+
+//        //todo: to be moved outside members area
+        Route::get('/{brand}/contact', [SupportController::class, 'contact'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.contact');
     });

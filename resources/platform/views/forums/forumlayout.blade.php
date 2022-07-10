@@ -48,15 +48,20 @@
                 <page-container 
                     brand="{{ $brand }}" 
                     :is-live="true" 
-                    :has-notifications="true"
+                    @if(!empty( $hasUnreadNotifications ))
+                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                    @endif
                     user-name="John Smith"
                     user-avatar=""
                     account-url=""
                     search-url=""
                 >  
-                    @yield('breadcrumbs')
-                    @yield('content')
-                    
+                    <template v-cloak v-slot="slotProps">
+
+                        @yield('breadcrumbs')
+                        @yield('content')
+
+                    </template>      
                 </page-container>
                 
             </app-container>

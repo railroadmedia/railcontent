@@ -171,7 +171,7 @@
 </template>
 <script>
 import * as QueryString from 'query-string';
-import Utils from '../assets/js/helper-functions/utils.js';
+import Utils from '../../assets/js/helper-functions/utils.js';
 import ContentService from '../../assets/js/services/content';
 import PlayAlongsListItem from './PlayAlongsListItem.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
@@ -413,19 +413,19 @@ export default {
         parseBpmOptions(options) {
             const acceptedBpmOptions = [
                 {
-                    label: '50-90', min: 50, max: 90, active: false, 
+                    label: '50-90', min: 50, max: 90, active: false,
                 },
                 {
-                    label: '91-120', min: 91, max: 120, active: false, 
+                    label: '91-120', min: 91, max: 120, active: false,
                 },
                 {
-                    label: '121-150', min: 121, max: 150, active: false, 
+                    label: '121-150', min: 121, max: 150, active: false,
                 },
                 {
-                    label: '151-180', min: 151, max: 180, active: false, 
+                    label: '151-180', min: 151, max: 180, active: false,
                 },
                 {
-                    label: '181+', min: 181, max: 10000, active: false, 
+                    label: '181+', min: 181, max: 10000, active: false,
                 },
             ];
 
@@ -578,12 +578,7 @@ export default {
             if (!resume) {
                 this.$nextTick(() => {
                     const domElement = this.$refs[`list${this.activeItem.id}`][0].$el;
-
-                    window.scrollTo({
-                        top: domElement.offsetTop - 100,
-                        left: 0,
-                        behavior: 'smooth',
-                    });
+                    domElement.scrollIntoView({block: "start"})
                 });
             }
         },
@@ -910,7 +905,7 @@ export default {
                 return this.getContent(true);
             });
         },
-        
+
         getDefaultVolume() {
             if (window.localStorage.getItem('playAlongsVolume') != null) {
                 this.changeVolume(Number(window.localStorage.getItem('playAlongsVolume')));
@@ -963,14 +958,14 @@ export default {
                 this.shufflePlaylist = [];
             }
         },
-        
+
         addMouseEventHandlers() {
             document.addEventListener('mousemove', this.trackMousePosition);
             document.addEventListener('touchmove', this.trackMousePosition);
             document.addEventListener('mouseup', this.mouseUpEventHandler);
             document.addEventListener('touchend', this.mouseUpEventHandler);
         },
-        
+
         removeMouseEventHandlers() {
             document.removeEventListener('mousemove', this.trackMousePosition);
             document.removeEventListener('touchmove', this.trackMousePosition);

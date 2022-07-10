@@ -2,9 +2,12 @@
 
 namespace Modules\UserManagementSystem\Providers;
 
+use App\Modules\UserManagementSystem\Policies\UserPolicy;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Models\User;
 
 class UserManagementSystemServiceProvider extends ServiceProvider
 {
@@ -65,6 +68,15 @@ class UserManagementSystemServiceProvider extends ServiceProvider
 
         // views
 //        $this->loadViewsFrom(__DIR__ . '/../../views', 'usora');
+
+        // model policies
+        Gate::guessPolicyNamesUsing(function ($modelClass) {
+            if ($modelClass === User::class) {
+                return UserPolicy::class;
+            }
+
+            return null;
+        });
     }
 
     /**

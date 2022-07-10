@@ -31,6 +31,11 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
     private $brandsUserIsAMemberOfCache = [];
 
     /**
+     * @var array
+     */
+    private $userIdCache = [];
+
+    /**
      * @var Inflector
      */
     private $inflector;
@@ -50,13 +55,21 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
      */
     public function getUserById(int $id): ?EcommerceUser
     {
+        if (!empty(user()) && user()->id == $id) {
+            $user = user();
+        }
+
+        if (!empty($this->userIdCache[$id])) {
+            return $this->userIdCache[$id];
+        }
+
         $user = User::query()->find($id);
 
         if ($user) {
-            return new EcommerceUser($user->id, $user->email);
+            $this->userIdCache[$id] = new EcommerceUser($user->id, $user->email);
         }
 
-        return null;
+        return $this->userIdCache[$id] ?? null;
     }
 
     /**
@@ -85,8 +98,8 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         if (!user()) {
             return null;
         }
-
-        return user();
+        
+        return new EcommerceUser(user()->id, user()->email);
     }
 
     /**

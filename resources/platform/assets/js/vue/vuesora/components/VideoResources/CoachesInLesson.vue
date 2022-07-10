@@ -69,6 +69,7 @@
           tw-text-gray-500
           tw-uppercase
           tw-justify-between
+          tw-shrink-0
         "
       >
         <h4 v-on:click="goToCoachProfile(instructor.slug)" class="tw-cursor-pointer">
@@ -86,7 +87,7 @@
             tw-text-left tw-px-0 tw-py-0 tw-text-xs
             sm:tw-text-base
             tw-transition-none
-            tw-text-white
+            tw-text-[#00101D] dark:tw-text-white
             tw-border-none
             tw-bg-transparent
             tw-uppercase

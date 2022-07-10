@@ -177,7 +177,12 @@ export default {
 
         fieldKey: {
             type: String,
-            default: 'profile_picture_image_url',
+            default: 'profile_picture_url',
+        },
+
+        sendMethod: {
+            type: String,
+            default: 'POST',
         },
 
         dropzoneConfig: {
@@ -247,10 +252,10 @@ export default {
                     setTimeout(() => {
                         const binStr = atob(canvas.toDataURL(type, quality).split(',')[1]);
 
-                                
+
                         const len = binStr.length;
 
-                                
+
                         const arr = new Uint8Array(len);
 
                         for (let i = 0; i < len; i++) {
@@ -316,6 +321,7 @@ export default {
 
         cropImage() {
             const canvasOutput = this.cropperInstance.getCroppedCanvas(this.imageDimensions);
+            console.log('typeof canvasoutput',typeof canvasOutput)
 
             canvasOutput.toBlob((blob) => {
                 this.imageBlob = blob;
@@ -328,16 +334,32 @@ export default {
             const formData = new FormData();
             const newFileName = `${this.userId}_${Date.now()}.png`;
 
+            console.log('typeof imageblob', typeof this.imageBlob)
+
             formData.append('file', this.imageBlob, newFileName);
             formData.append('target', newFileName);
-            formData.append('_method', 'PUT');
+            formData.append('_method', this.sendMethod);
+            formData.append('fieldKey', this.fieldKey);
 
             this.loading = true;
 
             UserService.remoteResourceUpload(this.uploadEndpoint, formData)
                 .then((resolved) => {
                     if (resolved) {
-                        const remoteStorageUrl = resolved.results || resolved.data[0].url;
+
+                        let remoteStorageUrl = null;
+                        
+                        if (this.fieldKey == 'profile_picture_url'){
+                            remoteStorageUrl = resolved.profile_picture_url
+                        } else if (this.fieldKey == 'drums_gear_photo') {
+                            remoteStorageUrl = resolved.drums_gear_photo
+                        } else if (this.fieldKey == 'piano_gear_photo') {
+                            remoteStorageUrl = resolved.piano_gear_photo
+                        } else if (this.fieldKey == 'guitar_gear_photo') {
+                            remoteStorageUrl = resolved.guitar_gear_photo
+                        } else if (this.fieldKey == 'singing_gear_photo') {
+                            remoteStorageUrl = resolved.singing_gear_photo
+                        }
 
                         this.$emit('image-uploaded', {
                             image_url: remoteStorageUrl,
@@ -347,6 +369,27 @@ export default {
                         // this.setImageAsAvatar(remoteStorageUrl);
                     }
                 });
+
+            // NOTE: we may need this in the future, leave for now
+            // Vapor.store(formData.get('file'), {
+            //     visibility: 'public-read',
+            //     progress: progress => {
+            //         // console.log(Math.round(progress * 100));
+            //     }
+            // }).then(response => {
+            //     axios.post('/user-management-system/profile-picture/upload', {
+            //         uuid: response.uuid,
+            //         s3_bucket_path: response.key,
+            //         bucket: response.bucket,
+            //     }).then((resolved) => {
+            //         console.log(resolved);
+            //
+            //         if (resolved) {
+            //             this.loading = false;
+            //             location.reload();
+            //         }
+            //     });
+            // });
         },
 
         resetCropper() {

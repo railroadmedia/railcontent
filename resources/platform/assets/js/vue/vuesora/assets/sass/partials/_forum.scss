@@ -39,12 +39,11 @@ blockquote {
 } 
 
 .quote-heading {
-  strong { font-size:13px; }
   em { 
-    font-size:10px; 
-    font-style:italic;
+    font-style:normal;
+    font-family: 'Bebas Neue', cursive;
+    opacity: .6;
     text-transform:uppercase;
-    color:#5e5e5e; 
   } 
 }
 

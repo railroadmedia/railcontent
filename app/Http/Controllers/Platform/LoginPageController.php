@@ -7,8 +7,8 @@ use App\Http\Controllers\BaseController;
 
 class LoginPageController extends BaseController
 {
-    public function show()
+    public function show(Request $request)
     {
-        return view('pages.login');
+        return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }
 }

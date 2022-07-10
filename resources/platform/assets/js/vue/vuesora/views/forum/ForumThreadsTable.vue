@@ -4,22 +4,22 @@
 
         <!-- Forum Tabs -->
         <div v-if="!onlyFollowed && showTabs"
-            class="tw-flex tw-px-4 tw-mt-4">
+            class="tw-flex tw-px-4">
             <div class="tw-flex tw-flex-col tw-mb-6">
                 <div class="tw-flex">
                     <a class="tw-no-underline tw-mr-6"
                         :href="currentUrl"
-                        :class="[!isFollowedSection ? 'tw-text-black tw-border-0 tw-border-solid tw-border-b-2' : 'text-grey-2', brandBorderColor ]"
+                        :class="[!isFollowedSection ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', brandBorderColor ]"
                     >
-                        <h3 class="tw-text-2xl tw-cursor-pointer">
+                        <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             All Threads
                         </h3>
                     </a>
                     <a class="tw-no-underline"
                         :href=" currentUrl + '?followed=true' "
-                        :class="[isFollowedSection ? 'tw-text-black tw-border-0 tw-border-solid tw-border-b-2' : 'text-grey-2', brandBorderColor, {'hide': searching}]"
+                        :class="[isFollowedSection ? 'tw-text-black tw-border-0 tw-border-solid tw-border-b-2' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', brandBorderColor, {'hide': searching}]"
                     >
-                        <h3 class="tw-text-2xl tw-cursor-pointer">
+                        <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             Followed
                         </h3>
                     </a>
@@ -29,13 +29,13 @@
 
         <!-- All Threads -->
         <div v-if="!showTabs && !onlyFollowed"
-             class="tw-flex tw-px-4 tw-mt-4"
+             class="tw-flex tw-px-4"
         >
             <div class="tw-flex tw-flex-col tw-mb-6">
-                <div class="tw-no-underline tw-mr-6 tw-text-black tw-border-0 tw-border-solid tw-border-b-2"
+                <div class="tw-no-underline tw-mr-6 tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2"
                         :class="[ brandBorderColor ]"
                 >
-                    <h3 class="tw-text-2xl tw-cursor-pointer">
+                    <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                         All New Threads
                     </h3>
                 </div>
@@ -51,18 +51,17 @@
                         <!-- Filter -->
                         <div class="flex tw-ml-0 form-group tw-w-full md:tw-w-1/3 md:tw-pr-10">
                             <div
-                                class="form-group xs-12"
-                                style="width:100%;"
-                            >
+                                class="form-group xs-12 tw-w-full">
                                 <select
                                     id="threadSort"
                                     v-model="filterInterface"
-                                    class="has-input tw-bg-white"
+                                    class="has-input tw-text-black dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
                                 >
                                     <option
                                         v-for="option in filterOptions"
                                         :key="option.label"
                                         :value="option.value"
+                                        class="tw-text-black"
                                     >
                                         {{ option.label }}
                                     </option>
@@ -82,19 +81,21 @@
                         <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">
                             <input
                                 id="threadSearch"
+                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57] tw-pb-0"
                                 ref="searchInput"
                                 v-model.lazy="searchInterface"
                                 type="text"
                             >
                             <label
                                 for="threadSearch"
+                                class="dark:tw-text-[#9EC0DC]"
                                 :class="brand"
                             >Search</label>
 
                             <span
                                 v-if="searching"
                                 id="clearSearch"
-                                class="tw-p-4 tw-cursor-pointer tw-absolute tw-right-0"
+                                class="tw-px-4 tw-py-3 tw-cursor-pointer tw-absolute tw-right-0"
                                 @click="clearSearch"
                             >
                                 <i class="fas fa-times"></i>
@@ -141,7 +142,7 @@
                     <a :href="latestThreadsUrl" class="tw-btn-primary" :class="[brandBGColor]">View All Latest Threads</a>
                 </div>
 
-                <h2 class="tw-text-32 tw-mb-6">Followed Threads</h2>
+                <h2 class="tw-text-32 tw-mb-3 tw-font-bold">Followed Threads</h2>
 
                 <template v-if="pinnedThreads.length === 0 && threadsArray.length === 0">
                     <p class="tw-text-base">Any thread you reply to or follow will appear here.</p>
@@ -150,19 +151,19 @@
 
             <!-- Threads Table Header -->
             <div v-if="pinnedThreads.length !== 0 || threadsArray.length !== 0"
-                class="tw-flex tw-bg-gray-200 tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
+                class="tw-flex tw-bg-gray-200 dark:tw-bg-[#002039] tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
             >
-                <div class="tw-uppercase tw-text-gray-500 tw-text-sm tw-font-bold tw-pl-8 tw-w-full lg:tw-w-9/12">
+                <div class="tw-uppercase tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-pl-8 tw-w-full lg:tw-w-9/12">
                     Thread Details
                 </div>
                 <div v-if="!showTabs && !onlyFollowed"
-                     class="tw-uppercase tw-mx-6 tw-w-52 tw-text-gray-500 tw-text-sm tw-font-bold tw-hidden tw-flex-shrink-0 xl:tw-inline-flex">
+                     class="tw-uppercase tw-mx-6 tw-w-52 tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-hidden tw-flex-shrink-0 xl:tw-inline-flex">
                     Forum
                 </div>
-                <div class="tw-uppercase tw-pr-2 tw-text-gray-500 tw-text-sm tw-font-bold tw-hidden sm:tw-inline-flex tw-flex-shrink-0 tw-w-24">
+                <div class="tw-uppercase tw-ml-auto tw-pr-2 tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-hidden sm:tw-inline-flex tw-flex-shrink-0 tw-w-24">
                     Replies
                 </div>
-                <div class="tw-uppercase tw-text-gray-500 tw-text-sm tw-font-bold tw-inline-flex tw-px-2 tw-flex-shrink-0 tw-w-28 lg:tw-px-8 lg:tw-w-full lg:tw-max-w-xs">
+                <div class="tw-uppercase tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-inline-flex tw-px-2 tw-flex-shrink-0 tw-w-28 lg:tw-px-8 lg:tw-w-full lg:tw-max-w-xs">
                     Latest Post
                 </div>
             </div>

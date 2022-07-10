@@ -1,7 +1,7 @@
 <template>
     <div
-        class="tw-flex tw-flex-col tw-px-2 tw-pb-2 catalogue-card"
-        :class="class_object"
+        class="tw-flex tw-flex-col catalogue-card"
+        :class="[class_object, displayInline ? 'tw-py-3' : 'tw-px-2 tw-pb-2']"
     >
         <div class="flex"
            :class="displayInline ? 'flex-row' : 'flex-column'"
@@ -10,7 +10,7 @@
             <a :href="renderLink ? item.url : false"
                class="no-decoration flex flex-column"
                :class="[
-                    {'thumbnail-col': displayInline}, 
+                    {'thumbnail-col tw-mr-3': displayInline}, 
                     item.type + '-thumbnail'
                 ]"
             >
@@ -22,7 +22,7 @@
                          :data-ix-src="mappedData.thumbnail"
                          data-ix-fade
                          class="bg-grey-2"
-                         :class="item.type === 'song' ? 'tw-blur-sm' : ''"
+                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
                     >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
@@ -58,7 +58,7 @@
             </a>
 
             <!-- Description Section -->
-            <div class="tw-flex">
+            <div class="tw-flex tw-w-full">
                 <a :href="renderLink ? item.url : false" 
                    class="card-info flex flex-column tw-p-1 tw-rounded-lg"
                    :class="displayInline ? 'align-v-center' : 'tw-py-2'"
@@ -148,7 +148,7 @@ export default {
                 completed: this.item.completed,
                 'six-wide': this.sixWide,
                 'five-wide': this.fiveWide,
-                'bb-grey-1-1': this.displayInline,
+                'bb-grey-1-1 dark:tw-border-[#223F57]': this.displayInline,
                 'display-inline': this.displayInline,
             };
         },

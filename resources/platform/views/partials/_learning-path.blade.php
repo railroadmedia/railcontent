@@ -4,8 +4,12 @@
     'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/method/method-header-'.$brand.'.jpg',
 ])
     @slot('content')
-        <div class="flex flex-column pr-1 align-center">
+        @section('layout-scripts')
+        {{-- Warning: Script tag inside Vue component --}}
+        <script>(function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })()</script>
+        @stop
 
+        <div class="flex flex-column pr-1 align-center">
             @if(!empty($learningPathSlug) && $learningPathSlug == $brand.'-method')
                 @if($brand==="drumeo" || $brand==="pianote")
                     <div
@@ -34,17 +38,33 @@
                         WHERE TO BEGIN &nbsp; <i class="fas fa-question-circle tw-text-base"></i> 
                     </a>
                 @endif
-                
+
                 {{-- Preview Modal --}}
                 <div id="previewModal" class="modal">
                     <div class="flex flex-column corners-10">
-                        <video-player
+                        @if($brand !== 'drumeo')
+                            @php
+                            $vimeoUrl = array(
+                                'guitareo' => '//player.vimeo.com/video/494183465',
+                                'singeo' => '//player.vimeo.com/video/494183465',
+                                'pianote' => '//player.vimeo.com/video/494183465',
+                            );   
+                            @endphp
+                            <div class="video-wrap">
+                                <div class="widescreen">
+                                    <div class="flex flex-column video-player user-active">
+                                        <iframe style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" src="{{ $vimeoUrl[$brand] }}" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                        <video-player 
                             ref="learningPathPreview"
                             theme-color="{{ $brand }}"
                             poster="{{ $parentContent['video_poster_image_url'] ?? '' }}"
-                            :sources="{{ json_encode($parentContent['video_playback_endpoints'] ?? []) }}"
-                            hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
-                            captions="{{ $parentContent->fetch('fields.video.data.captions', $parentContent['captions'][0] ?? null) }}"
+                            :sources="{{json_encode($parentContent['video_playback_endpoints'])}}"
+                            hls-manifest-url=""
+                            captions=""
                             :current-second="0"
                             video-id="{{ $parentContent->fetch('fields.video.fields.vimeo_video_id') }}"
                             content-id="{{ $parentContent->fetch('id') }}"
@@ -65,6 +85,7 @@
                             }"
                         >
                         </video-player>
+                        @endif
                         <div class="flex flex-row pv align-v-center">
                             <h1 class="subheading text-white grow">
                                 {{ $parentContent->fetch('fields.title') }}
@@ -86,8 +107,6 @@
                         @elseif($brand === "pianote")
                             <div class="typeform-widget" data-url="https://form.typeform.com/to/huIKxOSj?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div> 
                         @endif
-                        {{-- Warning: Script tag inside Vue component --}}
-                        <script>(function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })()</script>
                     </div>
                 </div>
 
@@ -105,7 +124,6 @@
             @else
                 <p class="text-white font-bold heading">{{ $brand }} Method</p>
             @endif
-
         </div>
     @endslot
 @endcomponent

@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white tw-rounded-2xl tw-overflow-hidden">
+    <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#002039] tw-rounded-2xl tw-overflow-hidden">
         <a
             :id="'post' + post.id"
             style="position:relative;top:-75px;"
@@ -12,23 +12,23 @@
                 <div class="user-avatar tw-w-20 tw-h-20"
                     :class="[avatarClassObject, brand]">
                     <a :href="post.authorProfileUrl"
-                        class="tw-no-underline"
+                        class="tw-no-underline tw-block tw-h-full tw-w-full"
                     >
-                        <img class="tw-rounded" :src="post.authorAvatar">
+                        <img class="tw-rounded-full" :src="post.authorAvatar">
                     </a>
                 </div>
             </div>
             <div class="tw-flex tw-flex-wrap tw-w-9/12 sm:tw-w-full">
                 <!-- Name -->
-                <h2 class="tw-mb-1 tw-text-2xl tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal">
+                <h2 class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
                     {{ post.authorUsername }}
                 </h2>
-                <div class="tw-text-sm tw-text-gray-500 tw-font-medium tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
+                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
                     <span>{{ post.authorTotalPosts }} Posts</span> -
                     <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
                 </div>
-                <div class="tw-inline-flex tw-text-sm tw-text-gray-500 tw-italic tw-font-medium tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
+                <div class="tw-inline-flex tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
                     <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
                     <span>&nbsp;- #{{ postNumber }}</span>
                 </div>
@@ -41,6 +41,7 @@
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
+                    class="tw-text-[#00101D] dark:tw-text-white"
                     :class="['tw-flex', 'tw-flex-col', 'post-body', 'grow', brand]"
                     v-html="post.postBody"
                 >
@@ -59,7 +60,9 @@
                             name="_method"
                             value="patch"
                         >
-                        <text-editor :initial-value="post.postBody"></text-editor>
+                        <text-editor 
+                            :initial-value="post.postBody"
+                        />
 
                         <div class="tw-flex tw-flex-row align-h-right tw-mt-2">
                             <a
@@ -90,7 +93,7 @@
                 <div class="tw-flex tw-flex-col mb-1">
                 <div class="tw-flex tw-flex-row tw-items-center">
                     <p
-                        class="tw-text-sm tw-mr-1 tw-font-bold tw-uppercase dense tw-pointer reply-like noselect"
+                        class="tw-text-lg tw-mr-1 tw-uppercase dense tw-pointer reply-like noselect"
                         :class="post.isLiked ? themeTextClass : 'text-grey-3'"
                         @click="likePost"
                     >
@@ -100,8 +103,8 @@
                     ></i>
                     </p>
                     <p
-                        class="tw-text-sm tw-mr-2 font-bold tw-uppercase dense tw-pointer reply-like noselect"
-                        :class="post.isLiked ? themeTextClass : 'tw-text-gray-500'"
+                        class="tw-text-lg tw-mr-2 tw-uppercase dense tw-pointer reply-like noselect"
+                        :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :data-open-modal="openModalString"
                         @click="openLikes"
                     >
@@ -110,13 +113,13 @@
 
                     <p
                         v-if="!post.isLocked"
-                        class="tw-text-sm tw-text-gray-500 tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like noselect"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
                         @click="replyToPost"
                     >
                     Reply
                     </p>
                     <button
-                        class="tw-text-sm tw-text-gray-500 mr-3 font-bold tw-uppercase dense tw-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
                         data-open-modal="sharePostModal"
                         title="Share this post"
                         @click="$emit('updateCurrentPostID', post.id)"
@@ -126,10 +129,10 @@
                     </button>
                 </div>
                 </div>
-                <div class="tw-flex tw-flex-col mb-1">
-                <div class="tw-flex tw-flex-row tw-items-center align-h-right">
+                <div class="tw-flex tw-flex-col mb-1 tw-ml-auto">
+                <div class="tw-flex tw-flex-row tw-items-center">
                     <p
-                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
                         @click="reportPost"
                     >
                     Report
@@ -140,14 +143,14 @@
                     <!--</p>-->
                     <p
                         v-if="index !== 0 && canEdit"
-                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
                         @click="deletePost"
                     >
                     Delete
                     </p>
                     <p
                         v-if="canEdit"
-                        class="tw-text-xs tw-text-gray-500 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
                         @click="editing = !editing"
                     >
                     Edit
@@ -160,7 +163,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 tiny text-grey-3 tw-pt-4 tw-mt-0"
+                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 dark:tw-border-[#445F74] tiny tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>

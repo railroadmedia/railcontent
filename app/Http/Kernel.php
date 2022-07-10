@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AlphaTestingAccountCreationMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Railroad\MusoraApi\Middleware\BrandMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -36,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            AlphaTestingAccountCreationMiddleware::class, // todo: remove after alpha testing
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
@@ -65,6 +68,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
+            BrandMiddleware::class,
         ],
     ];
 

@@ -39,6 +39,7 @@ import './vue/vuesora/assets/js/functions/instructor-info';
 import './vue/vuesora/assets/js/third-party/add-event-atc';
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
+import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
@@ -48,16 +49,30 @@ import ForumThreadsTable from './vue/vuesora/views/forum/ForumThreadsTable.vue';
 import ForumThread from './vue/vuesora/views/forum/thread/ForumThread.vue';
 import TextEditor from './vue/vuesora/components/TextEditor/TextEditor.vue';
 import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue';
+import ContactEmailForm from './vue/vuesora/components/ContactEmailForm/ContactEmailForm.vue';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';
 import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue';
 import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
+import AssignmentsContainer from './vue/vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
+import ContentAssignment from './vue/vuesora/components/ContentAssignment/ContentAssignment.vue';
+import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
+import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
+import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
 };
+
+// laravel vapor library for file uploading to S3 directly
+window.Vapor = require('laravel-vapor');
+
+// This three variables come from Drumeo implementation, are tightly related to play functionality.
+let progressTracker;
+let playAlongsProgressTracker;
+let hasBeenPlayed = false;
 
 const app = createApp({
     provide: {
@@ -66,48 +81,89 @@ const app = createApp({
     },
     methods: {
         avatarUploaded(payload){
-            UserService.setUserAttributes(currentUserId, {
-                'profile_picture_url': payload.image_url
-            })
-                .then(response => {
-                    const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
-                    window.closeAllModals();
-                    Array.from(avatarPhotos).forEach(photo => {
-                        photo.setAttribute(
-                            'src', payload.image_url
-                        );
-                    });
-                    payload.cropper.resetCropper();
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'AHH, MUCH BETTER!',
-                        themeColor: 'singeo',
-                        message: 'The new "you" is being refreshed...'
-                    });
-                });
+            const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
+            window.closeAllModals();
+            Array.from(avatarPhotos).forEach(photo => {
+                photo.setAttribute(
+                    'src', payload.image_url
+                );
+            });
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'AHH, MUCH BETTER!',
+                themeColor: 'singeo',
+                message: 'The new "you" is being refreshed...'
+            });
         },
 
-        gearPhotoUploaded(payload){
-            UserService.setUserAttributes(currentUserId, {
-                'piano_gear_photo': payload.image_url
-            })
-                .then(response => {
-                    const gearPhoto = document.querySelector('[data-gear-update]');
-                    window.closeAllModals();
-                    gearPhoto.setAttribute(
-                        'src', payload.image_url
-                    );
-                    payload.cropper.resetCropper();
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'WOOHOO!',
-                        themeColor: 'singeo',
-                        message: 'Your gear looks fantastic!'
-                    });
-                });
+        gearDrumeoPhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'drumeo',
+                message: 'Your drum gear looks fantastic!'
+            });
+        },
+
+        gearPianotePhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-pianote-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'pianote',
+                message: 'Your piano gear looks fantastic!'
+            });
+        },
+
+        gearGuitareoPhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'guitareo',
+                message: 'Your gear looks fantastic!'
+            });
+        },
+
+        gearSingeoPhotoUploaded(payload){
+            const gearPhoto = document.querySelector('[data-singeo-gear-update]');
+            window.closeAllModals();
+            gearPhoto.setAttribute(
+                'src', payload.image_url
+            );
+            gearPhoto.classList.remove('tw-hidden');
+            payload.cropper.resetCropper();
+            Toasts.push({
+                icon: 'happy',
+                title: 'WOOHOO!',
+                themeColor: 'singeo',
+                message: 'Your singing gear looks fantastic!'
+            });
         },
 
         handleVideoPlay(payload){
+            console.log('handleVideoPlay Called')
+            console.log('hasBeenPlayed', hasBeenPlayed)
             if(['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed){
                 ContentService.markContentAsStarted(payload.contentId);
             }
@@ -137,9 +193,36 @@ const app = createApp({
 
         handleVideoPause(payload){
             progressTracker.stop();
+        },
+
+        handlePlayAlongsPlay(){
+            if(playAlongsProgressTracker == null){
+                playAlongsProgressTracker = new ProgressTracker();
+
+                const { playAlongsVueInstance } = this.$refs;
+
+                if(playAlongsVueInstance){
+                    window.addEventListener('unload', (event) => {
+                        progressTracker.send({
+                            mediaType: 'practice',
+                            mediaCategory: 'play-alongs',
+                            sessionToken: sessionTokenElement.value || null
+                        });
+                    });
+                }
+            }
+
+            playAlongsProgressTracker.start();
+        },
+
+        handlePlayAlongsPause(){
+            playAlongsProgressTracker.stop();
         }
     }
 });
+
+// in order to use provide/inject this will be default in vue v3.3
+app.config.unwrapInjectedRef = true;
 
 //Register Global Components
 app.component('AppContainer', AppContainer)
@@ -161,6 +244,7 @@ app.component('AppContainer', AppContainer)
    .component('ForumThread', ForumThread)
    .component('TextEditor', TextEditor)
    .component('ContactMemberEmailForm', ContactMemberEmailForm)
+   .component('ContactEmailForm', ContactEmailForm)
    .component('ContentSchedule', ContentSchedule)
    .component('YoutubePlayer', YoutubePlayer)
    .component('VideoPlayer', VideoPlayer)
@@ -169,6 +253,12 @@ app.component('AppContainer', AppContainer)
    .component('MusoraIcon', MusoraIcon)
    .component('EmailForm', EmailForm)
    .component('StaticHeader', StaticHeader)
+   .component('AddEventModal', AddEventModal)
+   .component('AssignmentsContainer', AssignmentsContainer)
+   .component('ContentAssignment', ContentAssignment)
+   .component('LegacyLoops', LegacyLoops)
+   .component('VideoResources', VideoResources)
+   .component('ContentLessonActionButtons', ContentLessonActionButtons);
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

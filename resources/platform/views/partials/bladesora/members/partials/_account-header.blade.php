@@ -18,16 +18,16 @@
         {{-- Avatar Image --}}
         <div class="header-avatar tw-flex tw-flex-col tw-mb-4 lg:tw-mb-0">
             <div class="user-avatar
-                {{ in_array($user->access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
-                {{ $brand }}
-                {{ $user->access_level }}"
+                 {{ in_array($user->access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
+                 {{ $brand }}
+                 {{ $user->access_level }}"
             >
                 <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]"
-                   style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
+                     style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
                 >
                     @if($userAvatar)
-                        <img class="tw-inline-block tw-rounded-full"
-                            src="{{ cf_img($userAvatar, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
+                        <img class="tw-inline-block tw-rounded-full tw-h-full"
+                            src="{{ cf_img( $userAvatar, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"] ) }}"
                             data-ix-src="{{ $userAvatar }}"
                         >
                     @endif
@@ -55,13 +55,14 @@
             @if($user->access_level !== 'pack' && ($isCurrentUsersProfile ?? true))
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
 
-                    <!-- Referral Button -->
-                    <a href="/referral/invite-a-friend"
+                    {{-- Referral Button --}}
+                    {{-- <a href="/referral/invite-a-friend"
                         class="tw-btn-primary tw-w-auto tw-inline-flex tw-bg-{{$brand}} tw-mb-2 tw-max-w-[267px] tw-mx-2 "
                     >
                         <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i>
                         <span class="tw-leading-none tw-mt-0.5">invite a friend</span>
-                    </a>
+                    </a> --}}
+
                     {{-- Complete Your Account --}}
                     @if(true) {{-- Check if User Has Finished Account --}}
                         <a href="/referral/invite-a-friend" 
