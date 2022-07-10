@@ -2,10 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
@@ -18,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
 
     /**
      * The controller namespace for the application.
@@ -55,47 +52,21 @@ class RouteServiceProvider extends ServiceProvider
         URL::defaults(['brand' => 'musora']);
 
         $this->routes(function () {
-            Route::group([], base_path('routes/routes.php'));
         });
 
         $this->routes(function () {
-            Route::group([], base_path('routes/marketing/login.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/marketing/homepage.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/musora/routes.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/drumeo/routes.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/pianote/routes.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/singeo/routes.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/guitareo/routes.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/platform/search.php'));
-        });
-
-        $this->routes(function () {
-            Route::group([], base_path('routes/platform/home.php'));
-        });
-
-        $this->routes(function () {
+            Route::group([], base_path('routes/routes.php')); // not actually needed
             Route::group([], base_path('routes/platform/platform_pages_routes.php'));
+
+            Route::group([], base_path('routes/musora/marketing/homepage.php'));
+            Route::group([], base_path('routes/musora/marketing/login.php'));
+            Route::group([], base_path('routes/musora/platform/home.php'));
+            Route::group([], base_path('routes/musora/platform/search.php'));
+
+            Route::group([], base_path('routes/drumeo/homepage.php'));
+            Route::group([], base_path('routes/guitareo/homepage.php'));
+            Route::group([], base_path('routes/pianote/homepage.php'));
+            Route::group([], base_path('routes/singeo/homepage.php'));
         });
     }
 }
