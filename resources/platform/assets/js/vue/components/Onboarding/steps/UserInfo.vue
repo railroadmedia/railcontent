@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import AvatarUpload from "../../AvatarUpload/AvatarUpload.vue";
-import SkipStep from "../SkipStep.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
