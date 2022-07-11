@@ -7,9 +7,7 @@ import Button from "../Button/Button.vue";
 const shouldShowBanner = ref(true);
 
 onBeforeMount(() => {
-  console.log(getCookie("hideOnboardingBanner"))
     const hideOnboardingBanner = !!getCookie("hideOnboardingBanner");
-    console.log(typeof hideOnboardingBanner)
     if (hideOnboardingBanner) {
       shouldShowBanner.value = false;
     }
