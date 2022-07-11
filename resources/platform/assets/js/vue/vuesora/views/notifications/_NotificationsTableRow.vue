@@ -1,7 +1,7 @@
 <template>
     <a :href="linkedContent.url"
         class="tw-flex tw-flex-row dark:tw-bg-[#00101D] tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
-        :class="{ 'is-read': isRead }" @click="markAsRead(false)">
+        :class="isRead ? 'tw-bg-[#e5e7eb] dark:tw-bg-[#00101D]' : ''" @click="markAsRead(false)">
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">

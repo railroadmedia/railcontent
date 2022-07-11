@@ -15,6 +15,7 @@ onBeforeMount(() => {
 
 const hideOnboardingBanner = () => {
     setCookie("hideOnboardingBanner", "true", 365);
+    shouldShowBanner.value = false;
 };
 </script>
 
