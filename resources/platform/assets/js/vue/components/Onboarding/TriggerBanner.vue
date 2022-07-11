@@ -1,13 +1,27 @@
 <script setup>
+import { ref, onBeforeMount } from 'vue';
+import { getCookie, setCookie } from '../../vuesora/assets/js/functions/cookies';
 import { XIcon } from "@heroicons/vue/solid";
 import Button from "../Button/Button.vue";
-const emit = defineEmits(["onClose"]);
 
+const shouldShowBanner = ref(true);
+
+onBeforeMount(() => {
+  console.log(getCookie("hideOnboardingBanner"))
+    const hideOnboardingBanner = !!getCookie("hideOnboardingBanner");
+    console.log(typeof hideOnboardingBanner)
+    if (hideOnboardingBanner) {
+      shouldShowBanner.value = false;
+    }
+});
+
+const hideOnboardingBanner = () => {
+    setCookie("hideOnboardingBanner", "true", 365);
+};
 </script>
 
 <template>
-  <div
-    class="
+  <div class="
       tw-flex
       tw-flex-col
       lg:tw-flex-row
@@ -25,19 +39,15 @@ const emit = defineEmits(["onClose"]);
       tw-relative
       tw-py-[13px]
       tw-my-4
-    "
-  >
-    <div class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
+    " v-if="shouldShowBanner">
+    <div
+      class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
       You haven’t set up your account for this instrument.
     </div>
-    <a
-      href="onboarding"
-      class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none tw-mr-6 dark:tw-text-white 
-        hover:tw-bg-black/10 dark:hover:tw-bg-white/10"
-      >Complete Your Account
+    <a href="onboarding" class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none tw-mr-6 dark:tw-text-white 
+        hover:tw-bg-black/10 dark:hover:tw-bg-white/10">Complete Your Account
     </a>
-    <button
-      class="
+    <button class="
         tw-absolute
         dark:tw-text-white
         dark:tw-border-white
@@ -54,9 +64,7 @@ const emit = defineEmits(["onClose"]);
         tw-right-[14px]
         hover:tw-bg-black/10
         dark:hover:tw-bg-white/10
-      "
-      @click="() => emit('onClose')"
-    >
+      " @click="hideOnboardingBanner">
       <XIcon class="tw-w-[12px] tw-h-[12px]" />
     </button>
   </div>
