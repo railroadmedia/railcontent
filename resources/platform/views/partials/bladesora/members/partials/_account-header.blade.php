@@ -63,9 +63,9 @@
                         <span class="tw-leading-none tw-mt-0.5">invite a friend</span>
                     </a> --}}
 
-                    {{-- Complete Your Account --}}
+                    {{-- Complete Your Account / Update Your Account --}}
                     @if(true) {{-- Check if User Has Finished Account --}}
-                        <a href="/referral/invite-a-friend" 
+                        <a href="/onboarding" 
                             class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
                         >
                             Complete Your Account
