@@ -2730,16 +2730,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.256.0",
+            "version": "v0.257.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "122e51021eb19b53f831904918460671d1e7259d"
+                "reference": "ae109202ee831a1fb70ba824181852e6179c848b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/122e51021eb19b53f831904918460671d1e7259d",
-                "reference": "122e51021eb19b53f831904918460671d1e7259d",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ae109202ee831a1fb70ba824181852e6179c848b",
+                "reference": "ae109202ee831a1fb70ba824181852e6179c848b",
                 "shasum": ""
             },
             "require": {
@@ -2768,9 +2768,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.256.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.257.0"
             },
-            "time": "2022-07-04T01:10:37+00:00"
+            "time": "2022-07-08T01:28:13+00:00"
         },
         {
             "name": "google/auth",
@@ -7405,12 +7405,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "a50b7865550fb40d5a07c0109bccde3c22491823"
+                "reference": "87eabaf3c5c6939166ac450fe0da933336f55a67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/a50b7865550fb40d5a07c0109bccde3c22491823",
-                "reference": "a50b7865550fb40d5a07c0109bccde3c22491823",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/87eabaf3c5c6939166ac450fe0da933336f55a67",
+                "reference": "87eabaf3c5c6939166ac450fe0da933336f55a67",
                 "shasum": ""
             },
             "require": {
@@ -7459,7 +7459,7 @@
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
                 "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration"
             },
-            "time": "2022-07-06T15:06:38+00:00"
+            "time": "2022-07-11T08:23:30+00:00"
         },
         {
             "name": "railroad/location",
