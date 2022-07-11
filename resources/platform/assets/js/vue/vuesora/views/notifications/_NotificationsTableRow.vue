@@ -31,17 +31,17 @@
         </div>
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">
-                <div class="body" title="Delete">
+                <div title="Delete" @click.stop.prevent="deleteNotification(id)">
                     <TrashIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
                 </div>
             </div>
             <div class="tw-flex tw-flex-col tw-justify-center">
-                <div class="body" title="Mark as Read" @click.stop.prevent="markAsRead(true)">
+                <div  title="Mark as Read" @click.stop.prevent="markAsRead(true)">
                     <EyeIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
                 </div>
             </div>
             <div class="tw-flex tw-flex-col tw-justify-center">
-                <div class="body">
+                <div title="Jump to Post">
                     <ArrowCircleRightIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
                 </div>
             </div>
@@ -49,6 +49,7 @@
     </a>
 </template>
 <script setup>
+import axios from 'axios';
 import { borderColor } from '../../../../constants/brands';
 import { computed, onMounted } from 'vue'
 import { TrashIcon, EyeIcon, ArrowCircleRightIcon } from '@heroicons/vue/solid'
@@ -125,6 +126,16 @@ function markAsRead(canCancel = true) {
         isRead: props.isRead,
         canCancel,
     });
+}
+
+function deleteNotification(id) {
+    axios.delete(window.ENDPOINT_PREFIX+'/railnotifications/notification/'+id)
+        .then(() => {
+            location.reload();
+        })
+        .catch((e) => {
+            console.error(e);
+        });
 }
 
 onMounted(() => {
