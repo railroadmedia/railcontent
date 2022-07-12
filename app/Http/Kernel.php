@@ -73,6 +73,7 @@ class Kernel extends HttpKernel
             BrandMiddleware::class,
         ],
 
+        // Do not add more middleware to these 2 without good reason!
         'web_or_api_public' => [
             DynamicWebOrAppMiddlewareGroupsPublic::class,
         ],
