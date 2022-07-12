@@ -805,6 +805,7 @@ return [
                 'xp',
                 'display_name',
                 'xp_level',
+                'rank',
             ],
             'comment',
             'created_on',
