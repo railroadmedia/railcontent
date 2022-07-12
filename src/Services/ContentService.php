@@ -892,7 +892,7 @@ class ContentService
                 );
             }
 
-            $filterFields = $filter->getFilterFields() ?? [];
+            $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
             $isStudentFocusOrReview =
                 ($includedTypes == ['student-focus']) || ($includedTypes == ['student-review']);
 
