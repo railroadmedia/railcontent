@@ -10,7 +10,7 @@
                     :soundslice-slug="assignment.soundsliceSlug"
                     :completed="assignment.completed"
                     :user-id="assignment.userId"
-                    :position="assignment.index"
+                    :position="index"
                     :force-open="forceIndex === index"
                     :disable-prev="assignments[index - 1] && !assignments[index - 1].soundsliceSlug"
                     :disable-next="assignments[index + 1] && !assignments[index + 1].soundsliceSlug"
