@@ -129,3 +129,20 @@ When bell is clicked, follow new coach:
 ```php
 ['content_id' => 'required'];
 ```
+
+
+## 8 SKIP ACCOUNT SETUP
+
+During onboarding process, once the brand is selected, the user can press 'SKIP ACCOUNT SETUP' button:
+This will set the user attribute [brand]_onboarding_skip_setup to 'true'
+
+**`POST /user_management_system/onboarding-skip-account-setup`**
+
+```php
+[
+    'brand' => 'string|required',
+    'skip' => 'boolean|required'
+];
+```
+
+The response will return the user json, together with the updated value. So if user()->pianote_onboarding_skip_setup == true, then 'Complete your account' div must be hidden on pianote.
