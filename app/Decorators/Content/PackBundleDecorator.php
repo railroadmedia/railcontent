@@ -21,22 +21,13 @@ class PackBundleDecorator extends TypeDecoratorBase
             return $contents;
         }
 
-        $parents = $this->contentService->getByChildIdsWhereType(
-            $contentsOfType->pluck('id')
-                ->toArray(),
-            'pack'
+        $lessons = new Collection(
+            $this->contentHierarchyService->getByParentIds(
+                $contentsOfType->pluck('id')
+                    ->toArray()
+            )
         );
-
-        $childCounts = $this->contentHierarchyService->countParentsChildren(
-            $contents->pluck('id')
-                ->toArray()
-        );
-
-        $lessons = $this->contentService->getByParentIds(
-            $contentsOfType->pluck('id')
-                ->toArray()
-        )
-            ->groupBy('parent_id');
+        $lessonsGrouped = $lessons->groupBy('parent_id');
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $contentsOfType[$contentIndex]['xp'] = $content->fetch(
@@ -47,21 +38,22 @@ class PackBundleDecorator extends TypeDecoratorBase
                 'fields.xp',
                 config('xp_ranks.pack_bundle_content_completed')
             );
-            foreach ($parents as $parent) {
-                if (in_array($content['id'], $parent['child_ids'])) {
-//                    $contentsOfType[$contentIndex]['url'] =
-//                        url()->route('members.packs.show', ["slug" => $parent['slug']]);
 
-                    $contentsOfType[$contentIndex]['lesson_count'] = $childCounts[$content['id']] ?? 0;
-                }
+            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
+
+            $lessonsIds = [];
+            if (isset($lessonsGrouped[$content['id']])) {
+                $lessonsIds =
+                    $lessonsGrouped[$content['id']]->pluck('child_id')
+                        ->toArray();
             }
-
-            $contentsOfType[$contentIndex]['lessons'] = $lessons[$content['id']] ?? new Collection();
+            $lessons = $this->contentService->getByIds($lessonsIds);
+            $contentsOfType[$contentIndex]['lessons'] = $lessons ?? new Collection();
 
             /**
              * @var $lesson ContentEntity
              */
-            foreach (($lessons[$content['id']] ?? []) as $lessonIndex => $lesson) {
+            foreach ($lessons ?? [] as $lessonIndex => $lesson) {
                 $contentsOfType[$contentIndex]['xp'] += $lesson->fetch(
                     'xp',
                     config('xp_ranks.difficulty_xp_map')[$lesson->fetch('fields.difficulty')]
@@ -70,20 +62,19 @@ class PackBundleDecorator extends TypeDecoratorBase
                 );
             }
 
-            foreach (($lessons[$content['id']] ?? []) as $lessonIndex => $lesson) {
-                if ($lesson->fetch('completed') != true) {
-                    $contentsOfType[$contentIndex]['current_lesson_index'] = $lessonIndex;
-                    $contentsOfType[$contentIndex]['current_lesson'] = $lessons[$content['id']][$lessonIndex];
-                    $contentsOfType[$contentIndex]['next_lesson'] = $lessons[$content['id']][$lessonIndex + 1] ?? null;
-                    $contentsOfType[$contentIndex]['mobile_next_lesson_url'] = $lessons[$content['id']][$lessonIndex]->fetch('mobile_app_url');
-
-                    break;
-                }
-
-            }
+//            foreach (($lessons[$content['id']] ?? []) as $lessonIndex => $lesson) {
+//                if ($lesson->fetch('completed') != true) {
+//                    $contentsOfType[$contentIndex]['current_lesson_index'] = $lessonIndex;
+//                    $contentsOfType[$contentIndex]['current_lesson'] = $lessons[$content['id']][$lessonIndex];
+//                    $contentsOfType[$contentIndex]['next_lesson'] = $lessons[$content['id']][$lessonIndex + 1] ?? null;
+//                    $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
+//                        $lessons[$content['id']][$lessonIndex]->fetch('mobile_app_url');
+//
+//                    break;
+//                }
+//            }
 
         }
-
         return $this->mergeDecorated($contents, $contentsOfType);
     }
 }
