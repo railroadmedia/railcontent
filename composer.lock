@@ -3830,16 +3830,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "6.6.0",
+            "version": "6.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "5725563770f433a09fd1d9460fa60f04344c2422"
+                "reference": "f9a9795eda1bc35ea75630041bbbe4a331284aa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/5725563770f433a09fd1d9460fa60f04344c2422",
-                "reference": "5725563770f433a09fd1d9460fa60f04344c2422",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/f9a9795eda1bc35ea75630041bbbe4a331284aa3",
+                "reference": "f9a9795eda1bc35ea75630041bbbe4a331284aa3",
                 "shasum": ""
             },
             "require": {
@@ -3921,7 +3921,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-07T20:47:55+00:00"
+            "time": "2022-07-12T10:51:05+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -7566,12 +7566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "f5320b4f553c653a9531304ab727e0e5f21eb279"
+                "reference": "1cb1728966d0d3665a837a22bc9f1f1ba7207dac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f5320b4f553c653a9531304ab727e0e5f21eb279",
-                "reference": "f5320b4f553c653a9531304ab727e0e5f21eb279",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1cb1728966d0d3665a837a22bc9f1f1ba7207dac",
+                "reference": "1cb1728966d0d3665a837a22bc9f1f1ba7207dac",
                 "shasum": ""
             },
             "require": {
@@ -7603,7 +7603,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-12T10:04:38+00:00"
+            "time": "2022-07-12T13:28:28+00:00"
         },
         {
             "name": "railroad/permissions",
