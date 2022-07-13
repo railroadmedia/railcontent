@@ -15,7 +15,7 @@
                 "lessonTitle" => $lessonContent->fetch('fields.title'),
                 "userAvatar" => user()->profile_picture_url,
                 "userName" => user()->display_name,
-                "userEmail" => current_user()->getEmail(),
+                "userEmail" => user()->email,
                 "emailRecipient" =>  "questions@drumeo.com", // If changed, update "Email addresses set in sites" doc
                 "emailLogo" =>  "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
                 "brand" =>  "{{ $brand }}",

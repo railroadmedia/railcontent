@@ -157,9 +157,9 @@
     @if($catalogueMeta['name'] == 'Routines')
         <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">
             <div class="container">
-                <h2 class="tw-text-white"> 
-                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span> 
-                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>    
+                <h2 class="tw-text-white">
+                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span>
+                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>
                 </h2>
             </div>
         </div>
@@ -246,6 +246,31 @@
                 toggleSubscribe="toggleSubscribe"
             ></add-event-modal>
         </div>
+    @else
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
+            <div class="tw-flex tw-flex-col mt-3">
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
+                    <div class="tw-flex tw-flex-col tw-mb-3">
+                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
+                    </div>
+                    @if($catalogueMeta['name'] !== "Songs" &&
+                        !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
+                        <div class="tw-flex tw-flex-col tw-ml-auto">
+                            <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
+                                <i class="fas fa-calendar-plus mr-1"></i>
+                                Subscribe to Calendar
+                            </button>
+                        </div>
+                        <add-event-modal
+                            modal-id="addToCalendarModal"
+                            subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
+                            theme-color="{{ $brand }}"
+                            toggleSubscribe="toggleSubscribe"
+                        ></add-event-modal>
+                    @endif
+                </div>
+            </div>
+        </div>
     @endif
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
@@ -258,7 +283,7 @@
                 :paginate="true"
                 limit="12"
                 @else
-                catalogue-type="list"
+                catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
                 :infinite-scroll="true"
                 limit="20"
                 @endif

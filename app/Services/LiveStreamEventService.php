@@ -188,10 +188,14 @@ class LiveStreamEventService
      *
      * @return null|string
      */
-    public function getCurrentOrNextYoutubeEventId()
+    public function getCurrentOrNextYoutubeEventId($brand = null)
     {
         // temp hack because of api limit
 //        return 'WY14xLIeBbc';
+
+        if (empty($brand)) {
+            $brand = brand();
+        }
 
         try {
             $cacheStore = cache()->store(config('cache.default'))->getStore();
@@ -201,28 +205,26 @@ class LiveStreamEventService
                 $cacheStore->setPrefix(config('cache.prefix'));
             }
 
-            if (cache()->has('drumeo_next_youtube_live_embed_id')) {
-                return cache()->get('drumeo_next_youtube_live_embed_id');
+            if (cache()->has($brand .'_next_youtube_live_embed_id')) {
+                return cache()->get($brand .'_next_youtube_live_embed_id');
             }
 
-            // get the youtube id from their API
-            // NOTE: this uses the YT API project inside the drumeolive@gmail.com google account
             $client = new Google_Client();
             $youtube = new Google_Service_YouTube($client);
 
-            if (cache()->has('drumeo-yt-access-token-data')) {
-                $tokenData = cache()->pull('drumeo-yt-access-token-data');
+            if (cache()->has($brand .'-yt-access-token-data')) {
+                $tokenData = cache()->pull($brand .'-yt-access-token-data');
             } else {
-                $client->setClientId(config('railcontent.video_sync.youtube_client_api.client_id'));
-                $client->setClientSecret(config('railcontent.video_sync.youtube_client_api.client_secret'));
+                $client->setClientId(config('railcontent.video_sync.' . $brand . '.youtube_client_api.client_id'));
+                $client->setClientSecret(config('railcontent.video_sync.' . $brand . '.youtube_client_api.client_secret'));
 
                 $client->setScopes(['https://www.googleapis.com/auth/youtube']);
                 $client->setAccessType("offline");
                 $client->setApprovalPrompt('force');
 
-                $tokenData = $client->refreshToken(config('railcontent.video_sync.youtube_client_api.refresh_token'));
+                $tokenData = $client->refreshToken(config('railcontent.video_sync.' . $brand . '.youtube_client_api.refresh_token'));
 
-                cache()->set('drumeo-yt-access-token-data', $tokenData, $tokenData['expires_in'] - 500);
+                cache()->set($brand .'-yt-access-token-data', $tokenData, $tokenData['expires_in'] - 500);
             }
 
             $client->setAccessToken($tokenData['access_token']);
@@ -270,11 +272,21 @@ class LiveStreamEventService
                 }
             }
 
-            cache()->put(
-                'drumeo_next_youtube_live_embed_id',
-                $broadcastToRender->id ?? null,
-                2
-            );
+            // if none at the right time are found just use the first, this is mainly for testing purposes
+            if (empty($broadcastToRender)) {
+                $broadcastToRender = $liveBroadcastItems[0];
+                cache()->put(
+                    $brand .'_next_youtube_live_embed_id',
+                    $broadcastToRender->id ?? null,
+                    1
+                );
+            } else {
+                cache()->put(
+                    $brand .'_next_youtube_live_embed_id',
+                    $broadcastToRender->id ?? null,
+                    2
+                );
+            }
 
             if (method_exists($cacheStore, 'setPrefix')) {
                 $cacheStore->setPrefix($oldPrefix);
