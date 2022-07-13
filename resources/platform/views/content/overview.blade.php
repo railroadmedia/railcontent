@@ -64,35 +64,35 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-w-full tw-flex-row">
-                <content-catalogue
-                    brand="{{ $brand }}"
-                    catalogue-type="list"
-                    theme-color="{{ $brand }}"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $childContent }}"
-                    :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
-                    @if($parentContent['type'] !== 'learning-path')
-                    :show-numbers="true"
-                    @endif
-                    @if($parentContent['type'] === 'learning-path')
-                    :display-items-as-overview="true"
-                    :lock-unowned="true"
-                    :force-wide-thumbs="false"
-                    @endif
-                    @if($parentContent['type'] === 'learning-path-level')
-                    :lock-unowned="true"
-                    @endif
-                    user-id="{{ user()->id }}"
-                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                >
-                    @for($i = 0; $i < 10; $i++)
-                        @include('partials.bladesora.members.skeletons.list-item', [
-                            "overview" => $parentContent['type'] === 'learning-path',
-                            "showNumbers" => $parentContent['type'] !== 'learning-path',
-                            "thumbnailType" => $parentContent['type'] === 'learning-path' ? 'square' : 'widescreen'
-                        ])
-                    @endfor
-                </content-catalogue>
+
+                <transition appear name="fade">
+                    <content-catalogue
+                        brand="{{ $brand }}"
+                        catalogue-type="list"
+                        theme-color="{{ $brand }}"
+                        user-id="{{ user()->id }}"
+                        :use-theme-color="true"
+                        :pre-loaded-content="{{ $childContent }}"
+                        :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
+                        {{-- :is-admin="{{ json_encode(user()->isAdmin()) }}" --}}
+                        @if($parentContent['type'] === 'learning-path'|| $parentContent['type'] === 'learning-path-level')
+                            :display-items-as-overview="true"
+                            :lock-unowned="true"
+                        @endif
+                        @if($parentContent['type'] !== 'learning-path')
+                            :show-numbers="true"
+                            :force-wide-thumbs="false"
+                        @endif
+                    >
+                        @for($i = 0; $i < 10; $i++)
+                            @include('partials.bladesora.members.skeletons.list-item', [
+                                "overview" => $parentContent['type'] === 'learning-path' || $parentContent['type'] === 'learning-path-level',
+                                "showNumbers" => $parentContent['type'] !== 'learning-path',
+                                "thumbnailType" => $parentContent['type'] === 'learning-path' ? 'square' : 'widescreen'
+                            ])
+                        @endfor
+                    </content-catalogue>
+                </transition>
             </div>
 
             @if($xpBonus > 0)
