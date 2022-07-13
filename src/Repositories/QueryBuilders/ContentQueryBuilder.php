@@ -31,7 +31,9 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $this->addSelect([
                              $this->raw('DISTINCT('. ConfigService::$tableContent.'.id) as id'),
-            ConfigService::$tableContent . '.published_on'
+                             ConfigService::$tableContent . '.published_on',
+                             ConfigService::$tableContent . '.slug',
+                             ConfigService::$tableContent . '.popularity',
                          ]);
 
         if ($orderBy && $orderBy == 'content_likes') {
