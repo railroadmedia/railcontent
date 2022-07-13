@@ -1296,6 +1296,7 @@ return [
             'is_liked_by_current_user',
             'like_count',
             'total_length_in_seconds',
+            'length_in_seconds',
             'level_position',
             'course_position',
             '*fields.instructor',
