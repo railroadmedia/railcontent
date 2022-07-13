@@ -9,8 +9,8 @@ return [
     'approved-recipient-domains' => ['drumeo.com', 'singeo.com', 'pianote.com', 'guitareo.com', 'musora.com'],
 
     // required to make "authentication-protected" route work
-    'route_middleware_public_groups' => ['web_public'],
-    'route_middleware_logged_in_groups' => ['web_authenticated'],
+    'route_middleware_public_groups' => ['web_or_api_public'],
+    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
 
     // 1. Advanced, see documentation for details
     'views-root-directory' => 'resources/platform/views',

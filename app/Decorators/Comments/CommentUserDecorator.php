@@ -52,6 +52,7 @@ class CommentUserDecorator extends ModeDecoratorBase
             $comments[$commentIndex]['user']['xp'] = $commentAuthor['total_xp'];
             $comments[$commentIndex]['user']['rank'] = $commentAuthor->getXpRank();
             $comments[$commentIndex]['user']['access_level'] = $commentAuthor['access_level'];
+            $comments[$commentIndex]['user']['xp_level'] = $commentAuthor->getMethodLevel();
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
                 if (!isset($keyedUsers[$reply['user_id']])) {
@@ -75,7 +76,7 @@ class CommentUserDecorator extends ModeDecoratorBase
                     $replyAuthor->getXpRank();
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['access_level'] = $replyAuthor['access_level'];
-
+                $comments[$commentIndex]['replies'][$replyIndex]['user']['xp_level'] = $replyAuthor->getMethodLevel();
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['fields.profile_picture_image_url'] =
                     $replyAuthor['profile_picture_url'];
             }

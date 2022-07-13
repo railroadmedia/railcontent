@@ -20,7 +20,7 @@ class SetLastUsedBrandTest extends UserManagementSystemTestCase
             function () {
                 return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
             }
-        )->middleware(['web_authenticated', SetLastUsedBrand::class]);
+        )->middleware(['web_or_api_authenticated', SetLastUsedBrand::class]);
     }
 
     public function test_brand_is_set()

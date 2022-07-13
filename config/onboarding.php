@@ -17,8 +17,7 @@ return [
         'guitareo' => [
             'gears' => ['Acoustic Guitar', 'Electric Guitar'],
             'experience' => ['Level 1', 'Level 2-3', 'Level 4-6', 'Level 7-10'],
-            //todo: topics from guitareo must be updated
-            'topics' => ['Dummy Topic 1', 'Dummy Topic 2', 'Dummy Topic 3'],
+            'topics' => ['Chords', 'Edutainment', 'Fingerstyle', 'Gear', 'Guitar Essentials', 'Improvisation & Soloing', 'Picking', 'Rhythm', 'Scales', 'Songwriting', 'Technique', 'Theory & EarTraining'],
             'genres' => ['Rock', 'Pop', 'Jazz', 'Blues', 'Country', 'Metal', 'Funk', 'Soul', 'CCM/Workship', 'Hip-Hop/Rap']
         ],
         'singeo' => [

@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\AlphaTestingAccountCreationMiddleware;
+use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
+use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Railroad\MusoraApi\Middleware\BrandMiddleware;
 
@@ -64,11 +66,20 @@ class Kernel extends HttpKernel
         ],
 
         'api_authenticated' => [
-            \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
             BrandMiddleware::class,
+        ],
+
+        // Do not add more middleware to these 2 without good reason!
+        'web_or_api_public' => [
+            DynamicWebOrAppMiddlewareGroupsPublic::class,
+        ],
+
+        'web_or_api_authenticated' => [
+            DynamicWebOrAppMiddlewareGroupsAuthenticated::class,
         ],
     ];
 

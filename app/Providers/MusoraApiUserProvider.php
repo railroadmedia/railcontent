@@ -101,7 +101,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function setCurrentUserProfilePictureUrl(string $profilePictureUrl)
+    public function setCurrentUserProfilePictureUrl(?string $profilePictureUrl = null)
     : User {
         user()->profile_picture_url = $profilePictureUrl;
         user()->save();

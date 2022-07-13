@@ -119,8 +119,8 @@ export default {
                 class="tw-inline-flex tw-w-full tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-justify-items-stretch tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-center"
             >
                 <musora-icon :icon-name="metric.icon" 
-                                width="24" 
-                                height="24" 
+                                width="35" 
+                                height="35" 
                                 class="" 
                                 :class="textColor[brand]"
                 />

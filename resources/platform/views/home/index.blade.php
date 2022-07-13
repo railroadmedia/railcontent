@@ -5,14 +5,12 @@
 @endsection
 
 @section('content')
-
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-
-        {{-- On Boarding --}}
-        {{-- <onboarding></onboarding> --}}
-
-        {{-- On Boarding TriggerBanner --}}
-        <trigger-banner :v-if="true"></trigger-banner>
+        @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
+            {{-- On Boarding TriggerBanner --}}
+            <trigger-banner>
+            </trigger-banner>
+        @endif
 
         {{-- Carousel --}}
         <header-carousel

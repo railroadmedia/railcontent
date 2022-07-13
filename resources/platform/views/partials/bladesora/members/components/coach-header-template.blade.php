@@ -66,7 +66,7 @@ $brandColors = $colors[$brand];
     <div class="tw-text-white" style="background-color: {{ $brandColors['solidBg'] }}">
         <div class="tw--mt-24 md:tw-mt-0 tw-text-center lg:tw-text-left md:tw-py-12 lg:tw-py-16 tw-py-12 md:tw-px-14 tw-px-6">
             @if (isset($topSubtitle))
-                <h2 class="tw-uppercase tw-font-semibold tw-mb-2 tw-font-bold" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
+                <h2 class="tw-uppercase tw-font-semibold tw-mb-2 tw-font-bold tw-text-lg" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
                     {{ $topSubtitle }}
                 </h2>
             @endif
@@ -74,11 +74,11 @@ $brandColors = $colors[$brand];
                 {{ $title }}
             </h1>
             @if (isset($bottomSubtitle))
-                <h2 class="tw-uppercase tw-font-semibold tw-mb-2 tw-font-bold" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
+                <h2 class="tw-uppercase tw-font-semibold tw-mb-2 tw-font-bold tw-text-lg" style="color: {{ $brandColors['subtitle'] }}; font-size: 14px; line-height: 24px;">
                     {{ $bottomSubtitle }}
                 </h2>
             @endif
-            <h3 class="tw-mb-6 tw-font-normal" style="font-size: 14px; line-height: 24px;">
+            <h3 class="tw-mb-6 tw-font-normal tw-text-base">
                 {{ $shortBio }}
             </h3>
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center xl:tw-items-start tw-flex-wrap xl:tw-flex-nowrap">

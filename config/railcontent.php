@@ -765,6 +765,17 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'boot-camps' => [
+                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
+                'name' => 'Bootcamps',
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+                'shortname' => 'Bootcamps',
+                'icon' => 'icon-chords-scales-icon',
+                'description' => "Ready to work? Bootcamps are designed to help you really integrate and develop new skills. Select a topic that you want to improve on and get ready to play along with the lesson.",
+                'amountOfFutureLessonsToShow' => 3,
+                'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
         ],
         'guitareo' => [
             'courses' => [
@@ -799,6 +810,7 @@ return [
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'quick-tips' => [
+                'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
                 "name" => "Quick Tips",
                 "shortname" => "quick-tips",
                 "icon" => "icon-shows",
@@ -859,6 +871,7 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
+                'thumbnailUrl' => 'https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg',
                 "name" => "Quick Tips",
                 "icon" => "icon-shows",
                 "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
