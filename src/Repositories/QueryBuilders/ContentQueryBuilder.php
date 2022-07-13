@@ -32,12 +32,18 @@ class ContentQueryBuilder extends QueryBuilder
         $this->addSelect([
                              $this->raw('DISTINCT('. ConfigService::$tableContent.'.id) as id'),
                              ConfigService::$tableContent . '.published_on',
+                             ConfigService::$tableContent . '.created_on',
                              ConfigService::$tableContent . '.slug',
                              ConfigService::$tableContent . '.popularity',
+                             ConfigService::$tableContent . '.title',
                          ]);
 
         if ($orderBy && $orderBy == 'content_likes') {
             $this->addSelect([DB::raw('count('.ConfigService::$tableContentLikes.'.id) as '.$orderBy)]);
+        }
+
+        if ($orderBy && $orderBy == 'progress') {
+            $this->addSelect([DB::raw(ConfigService::$tableUserContentProgress.'.updated_on ')]);
         }
 
         return $this;
@@ -574,11 +580,6 @@ class ContentQueryBuilder extends QueryBuilder
                     $orderByColumns,
                     $orderByColumn.' '.$orderDirection
                 );
-            } elseif ($orderByColumn == 'title') {
-                array_unshift(
-                    $orderByColumns,
-                    'field.value '.$orderDirection
-                );
             } elseif ($orderByColumn != 'progress') {
                 $orderByColumns = [ConfigService::$tableContent.'.'.$orderByColumn];
             } else {
@@ -611,25 +612,6 @@ class ContentQueryBuilder extends QueryBuilder
                     implode(', ', $orderByColumns).' '.$orderDirection
                 )
             );
-        } elseif ($orderBy == 'title') {
-            $this->join(ConfigService::$tableContentFields.' as field', function (JoinClause $joinClause) {
-                $joinClause->on(
-                    'field.content_id',
-                    '=',
-                    ConfigService::$tableContent.'.id'
-                )
-                    ->where(
-                        'field.key',
-                        '=',
-                        "title"
-                    );
-            });
-
-            $this->orderByRaw(
-                DB::raw(
-                    implode(', ', $orderByColumns).' '.$orderDirection
-                )
-            );
         } elseif ($orderBy == 'content_likes') {
             $this->leftJoin(ConfigService::$tableContentLikes, function (JoinClause $joinClause) {
                 $joinClause->on(
@@ -644,6 +626,7 @@ class ContentQueryBuilder extends QueryBuilder
                     implode(', ', $orderByColumns).' '.$orderDirection
                 )
             );
+            $this->groupBy(ConfigService::$tableContent.'.id');
         } else {
             $this->orderByRaw(
                 DB::raw(
