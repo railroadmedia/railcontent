@@ -12,14 +12,14 @@
             >
 
             @if($pack['slug'] !== 'learn-songs-faster')
-                <h1 class="heading text-white mb-2">
+                <h1 class="heading text-white mb-3">
                     {{ $parentContent->fetch('fields.title') }}
                 </h1>
             @endif
 
             @if($parentContent->fetch('type') === 'pack-bundle' && $pack->fetch('bundle_count') > 1)
-                <a href="{{ url()->route('packs.bundles', ["packSlug" => $pack->fetch('slug')]) }}"
-                   class="btn collapse-200 bg-white inverted short text-white">
+                <a href="{{ url()->route('platform.packs') }}"
+                   class="tw-btn-secondary tw-text-white">
                     Back to All Lessons
                 </a>
             @endif
