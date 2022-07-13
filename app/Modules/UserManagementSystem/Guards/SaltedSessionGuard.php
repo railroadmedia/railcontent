@@ -65,8 +65,6 @@ class SaltedSessionGuard extends SessionGuard
 
         $this->clearUserDataFromStorage();
 
-        $this->provider->updateSessionSalt($user, '');
-
         if (!is_null($this->user) && !empty($this->recaller())) {
             $recaller = $this->recaller();
 
@@ -98,12 +96,11 @@ class SaltedSessionGuard extends SessionGuard
         }
 
         $id = $this->session->get($this->getName());
-        $salt = $this->session->get($this->getSaltName());
 
-        if (!is_null($id) && !empty($salt)) {
+        if (!is_null($id)) {
             $user = $this->provider->retrieveById($id);
 
-            if ($user->getSessionSalt() === $salt) {
+            if (!empty($user)) {
                 $this->user = $user;
 
                 return $this->user;
@@ -125,11 +122,6 @@ class SaltedSessionGuard extends SessionGuard
         return null;
     }
 
-    protected function getSaltName()
-    {
-        return 'login_salt_' . $this->name . '_' . sha1(static::class);
-    }
-
     /**
      * @param AuthenticatableContract|User $user
      * @param bool $remember
@@ -147,15 +139,6 @@ class SaltedSessionGuard extends SessionGuard
                         $user->getAuthIdentifier() . '|' . $user->getRememberToken() . '|' . $user->getAuthPassword()
                     )
                 );
-        }
-
-        if (self::$updateSalt && empty($user->getSessionSalt())) {
-            $salt = Str::random(60);
-
-            $this->session->put($this->getSaltName(), $salt);
-            $this->provider->updateSessionSalt($user, $salt);
-        } else {
-            $this->session->put($this->getSaltName(), $user->getSessionSalt());
         }
 
         $this->fireLoginEvent($user, $remember);

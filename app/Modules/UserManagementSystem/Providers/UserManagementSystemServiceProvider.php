@@ -41,27 +41,16 @@ class UserManagementSystemServiceProvider extends ServiceProvider
 
         // routes
         if (config('user_management_system.autoload_all_routes') == true) {
-
-            // If there is an auth token present use the API middleware groups, otherwise it will use the web
-            // middleware groups.
-            if (!empty(request()->bearerToken())) {
-                Route::middleware('api_authenticated')
-                    ->group(__DIR__ . '/../routes/user_management_system_authenticated_routes.php');
-                Route::middleware('api_public')
-                    ->group(__DIR__ . '/../routes/user_management_system_public_routes.php');
-            } else {
-                Route::middleware('web_authenticated')
-                    ->group(__DIR__ . '/../routes/user_management_system_authenticated_routes.php');
-                Route::middleware('web_public')
-                    ->group(__DIR__ . '/../routes/user_management_system_public_routes.php');
-            }
+            Route::middleware('web_or_api_authenticated')
+                ->group(__DIR__ . '/../routes/user_management_system_authenticated_routes.php');
+            Route::middleware('web_or_api_public')
+                ->group(__DIR__ . '/../routes/user_management_system_public_routes.php');
         }
 
         // commands
         if ($this->app->runningInConsole()) {
             $this->commands(
                 [
-//                    MigrateUserFieldsToColumns::class,
                 ]
             );
         }

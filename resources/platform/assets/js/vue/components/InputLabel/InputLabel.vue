@@ -31,6 +31,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  removeDefaultInputStyles: {
+    type: Boolean,
+    default: false,
+  },
   clearButtonOverride: {
     type: String,
     default: "",
@@ -88,9 +92,8 @@ const onEnter = (e) => {
       <input
         :placeholder="placeholder"
         :id="id"
-        :class="`tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none ${
-          inputOverride ? inputOverride : 'tw-text-black tw-border-[#D1D5DB]'
-        }`"
+        :class="`${ removeDefaultInputStyles ? '' : 'tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
+                 ${ inputOverride ? inputOverride : 'tw-text-black tw-border-[#D1D5DB]' }`"
         v-model="input"
         v-on:keypress.enter.prevent="onEnter"
         @focus="() => emit('onFocus')"

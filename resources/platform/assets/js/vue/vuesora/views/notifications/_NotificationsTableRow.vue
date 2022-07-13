@@ -1,7 +1,7 @@
 <template>
     <a :href="linkedContent.url"
-        class="tw-flex tw-flex-row dark:tw-bg-[#00101D] tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
-        :class="{ 'is-read': isRead }" @click="markAsRead(false)">
+        class="tw-flex tw-flex-row dark:tw-bg-transparent tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
+        :class="isRead ? 'tw-bg-[#e4e4e7] dark:tw-bg-[#102230]' : ''">
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">
@@ -31,17 +31,18 @@
         </div>
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">
-                <div class="body" title="Delete">
+                <div title="Delete" @click.stop.prevent="deleteNotification(id)">
                     <TrashIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
                 </div>
             </div>
             <div class="tw-flex tw-flex-col tw-justify-center">
-                <div class="body" title="Mark as Read" @click.stop.prevent="markAsRead(true)">
-                    <EyeIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
+                <div :title="isRead ? 'Mark as Unread' : 'Mark as Read'" @click="toggleReadNotification">
+                    <EyeIcon v-if="!isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
+                    <EyeOffIcon v-if="isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
                 </div>
             </div>
             <div class="tw-flex tw-flex-col tw-justify-center">
-                <div class="body">
+                <div title="See notification">
                     <ArrowCircleRightIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />
                 </div>
             </div>
@@ -49,9 +50,11 @@
     </a>
 </template>
 <script setup>
+import axios from 'axios';
 import { borderColor } from '../../../../constants/brands';
-import { computed, onMounted } from 'vue'
-import { TrashIcon, EyeIcon, ArrowCircleRightIcon } from '@heroicons/vue/solid'
+import { computed } from 'vue';
+import { TrashIcon, EyeIcon, EyeOffIcon, ArrowCircleRightIcon } from '@heroicons/vue/solid';
+
 const props = defineProps({
     createdOn: {
         type: String,
@@ -113,22 +116,28 @@ const notificationTypeString = computed(() => {
                 return 'person liked your forum post in:';
             }
             return ' liked your forum post in:';
-
         case 'thread-reply':
             return 'posted in a forum thread you follow:';
     }
 });
 
-function markAsRead(canCancel = true) {
+function toggleReadNotification(e) {
+    e.preventDefault();
+
     emit('notificationRead', {
         id: props.id,
         isRead: props.isRead,
-        canCancel,
+        canCancel: true,
     });
 }
 
-onMounted(() => {
-    console.log(Object.entries(props))
-})
-
+function deleteNotification(id) {
+    axios.delete(window.ENDPOINT_PREFIX+'/railnotifications/notification/'+id)
+        .then(() => {
+            location.reload();
+        })
+        .catch((e) => {
+            console.error(e);
+        });
+}
 </script>
