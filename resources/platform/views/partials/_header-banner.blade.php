@@ -1,5 +1,5 @@
 <!-- // todo - review & clean -->
-<div class="tw-w-full fluid collapsed-h pv-5 relative tw-bg-black">
+<div class="tw-w-full fluid collapsed-h tw-py-8 md:tw-py-11 relative tw-bg-black">
     <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top"
             style="background-image: url({{ cf_img($backgroundImage, ["quality" => 80, "blur" => 150, "width" => 640]) }});" data-ix-bg="{{ $backgroundImage }}"
     ></div>

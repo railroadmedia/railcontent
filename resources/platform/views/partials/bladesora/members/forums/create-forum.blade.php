@@ -16,7 +16,7 @@
 
                     <div class="form-group tw-mb-2">
                         <input type="text" name="title" id="title" value="{{ old('title') }}" 
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
                         >
                         <label for="title" class="{{ $brand }}">Title</label>
 
@@ -27,7 +27,7 @@
 
                     <div class="form-group mb-2">
                         <input type="text" name="description" id="description" value="{{ old('description') }}"
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
                         >
                         <label for="description" class="{{ $brand }}">Description</label>
 
@@ -38,7 +38,7 @@
 
                     <div class="form-group tw-mb-2">
                         <input type="text" name="weight" id="weight" value="{{ old('weight') }}"
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
                         >
                         <label for="weight" class="{{ $brand }}">Weight (order), any number</label>
 
@@ -49,7 +49,7 @@
 
                     <div class="form-group tw-mb-2">
                         <input type="text" name="icon" id="icon" value="{{ old('icon-class') }}"
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
                         >
                         <label for="icon-class" class="{{ $brand }}">Icon class</label>
 
