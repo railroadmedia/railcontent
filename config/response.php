@@ -416,6 +416,7 @@ return [
         ],
 
         'song' => [
+            'ranges',
             'id',
             'type',
             'published_on',

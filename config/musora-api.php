@@ -685,6 +685,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'ranges',
             'assignments' => [
                 'id',
                 'xp',
