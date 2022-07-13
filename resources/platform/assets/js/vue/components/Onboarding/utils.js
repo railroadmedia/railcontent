@@ -1,4 +1,4 @@
-import { instrumentBrand } from './constants'
+import { brands } from './constants'
 
 export const getMultiSelectOptions = ({ configOptions, property, brand }) => {
     return configOptions[brand][property].map(
@@ -19,7 +19,7 @@ const getFormatPerBrand = ({ brand, options, plural, singular, configOptions }) 
 
 export const getSavedMultiSelect = (props) => {
   const multiSelectMap = {};
-  Object.values(instrumentBrand).forEach((brand) => {
+  brands.forEach((brand) => {
     multiSelectMap[brand] = getFormatPerBrand({ ...props, brand });
   });
 
@@ -28,7 +28,7 @@ export const getSavedMultiSelect = (props) => {
 
 const getSavedExperience = (selectedExperience) => {
   const multiSelectMap = {};
-  Object.values(instrumentBrand).forEach((brand) => {
+  brands.forEach((brand) => {
     const experiencePerBrand = selectedExperience.find((experience) => experience.brand === brand);
     if(!!experiencePerBrand) {
       multiSelectMap[brand] = parseInt(experiencePerBrand.experience_level);
@@ -51,4 +51,26 @@ export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, sel
       genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
       topics: getSavedMultiSelect({ options: selectedTopics, plural: 'topics', singular: 'topic', configOptions }),
   })
+};
+
+export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, selectedExperience, brand, steps }) => {
+  const newSteps = [...steps];
+  const hasGear = !!selectedGear.find(gear => gear.brand === brand);
+  const hasExperience = !!selectedExperience.find(exp => exp.brand === brand);
+  const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
+  const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
+  if (hasGear) {
+    newSteps[2].checked = true;
+  }
+  if (hasExperience) {
+    newSteps[3].checked = true;
+  }
+  if (hasGenres) {
+    newSteps[4].checked = true;
+  }
+  if (hasTopics) {
+    newSteps[5].checked = true;
+    newSteps[6].checked = true;
+  }
+  return newSteps;
 };

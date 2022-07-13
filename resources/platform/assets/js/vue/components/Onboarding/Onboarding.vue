@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject, onMounted } from 'vue'
+import { ref, inject, computed } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -9,12 +9,9 @@ import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Coaches from './steps/Coaches.vue'
 import { initialSteps, instrumentBrand } from './constants';
-import { getInitialInfo } from './utils';
+import { getInitialInfo, getCheckedSteps } from './utils';
 
 const props = defineProps({
-    brand: {
-        type: String,
-    },
     configOptions: {
         type: Object,
     },
@@ -32,38 +29,38 @@ const props = defineProps({
     },
 });
 
-// TODO: Remove onMounted
-onMounted(() => {
-    console.log(props.selectedGear)
-});
-
 const userId = inject('userId');
 const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
 const currentStep = ref(0)
 const info = ref(getInitialInfo({ userId, userName, userAvatar, ...props }))
-const steps = ref(initialSteps)
+const steps = ref(initialSteps);
+const brand = computed(() => instrumentBrand[info.value.instrument]);
 
 function changeStep(step) {
-    currentStep.value = step
+    if (step === 2) {
+        const newSteps = getCheckedSteps({ ...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: brand.value });
+        steps.value = newSteps;
+    }
+    currentStep.value = step;
 }
 
 function changeInfo(newInfo) {
-    info.value = newInfo
+    info.value = newInfo;
 }
 
 function checkStepToggle(step, val) {
     const newSteps = steps.value
     newSteps[step].checked = val
-    steps.value = newSteps
+    steps.value = newSteps;
 }
 </script>
 
 <template>
     <ModalRenderer>
         <UserInfo
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 0"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
@@ -73,7 +70,7 @@ function checkStepToggle(step, val) {
             :config-options="configOptions"
         />
         <InstrumentSelect
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 1"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
@@ -83,7 +80,7 @@ function checkStepToggle(step, val) {
             :config-options="configOptions"
         />
         <InstrumentType
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 2"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
@@ -93,7 +90,7 @@ function checkStepToggle(step, val) {
             :config-options="configOptions"
         />
         <Experience
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 3"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
@@ -103,7 +100,7 @@ function checkStepToggle(step, val) {
             :config-options="configOptions"
         />
         <Genre
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 4"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
@@ -113,7 +110,7 @@ function checkStepToggle(step, val) {
             :config-options="configOptions"
         />
         <Topics
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 5"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"
@@ -123,7 +120,7 @@ function checkStepToggle(step, val) {
             :config-options="configOptions"
         />
         <Coaches
-            :brand="instrumentBrand[info.instrument]"
+            :brand="brand"
             v-if="currentStep === 6"
             @onChangeStep="changeStep"
             @onChangeInfo="changeInfo"

@@ -81,7 +81,7 @@
                         <div class="tw-flex tw-flex-col tw-w-full tw-w-full tw-mr-3 form-group">
                             <input
                                 id="threadSearch"
-                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57] tw-pb-0"
+                                class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-pb-0"
                                 ref="searchInput"
                                 v-model.lazy="searchInterface"
                                 type="text"

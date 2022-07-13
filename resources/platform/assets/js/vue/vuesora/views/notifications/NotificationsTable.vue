@@ -10,7 +10,7 @@
 
             <div class="tw-flex tw-flex-row">
                 <div class="tw-flex tw-flex-col tw-mr-[12px]">
-                <button class="tw-btn-primary tw-h-[50px] tw-text-white" :class="bgColor[brand]" :disabled="hasUnread"
+                <button class="tw-btn-primary tw-h-[50px] tw-text-white" :class="bgColor[brand]" :disabled="!hasUnread"
                     @click.stop="markAllAsRead">
                     <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
                     Mark All As Read

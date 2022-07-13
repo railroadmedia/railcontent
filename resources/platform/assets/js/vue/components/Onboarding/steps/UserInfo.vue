@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import AvatarUpload from "../../AvatarUpload/AvatarUpload.vue";
+import SkipStep from "../SkipStep.vue";
 import InputLabel from "../../InputLabel/InputLabel.vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
@@ -79,7 +80,7 @@ const handleUploadError = () => {
       <Button :brand="brand" @onButtonClick="handleNextStep"
         :isDisabled="!info.user.avatarUrl.length && !info.user.name.length"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
-      <button class="tw-mt-[20px] md:tw-mt-0 tw-text-[18px] tw-text-white tw-underline tw-font-bebas-neue"
+      <button class="tw-mt-[12px] tw-text-[18px] tw-text-white tw-underline tw-font-bebas-neue"
         @click="handleSkipStep">
         SKIP THIS STEP
       </button>

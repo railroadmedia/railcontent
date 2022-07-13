@@ -5,24 +5,23 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
-use Modules\UserManagementSystem\Events\UserEvent;
-use Modules\UserManagementSystem\Providers\UserServiceProvider;
+use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
+use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
-    /**
-     * @var UserServiceProvider
-     */
-    private $userServiceProvider;
+    private SubscriptionRepository $subscriptionRepository;
+    private ProductRepository $productRepository;
 
-    /**
-     * @param UserServiceProvider $userServiceProvider
-     */
-    public function __construct(UserServiceProvider $userServiceProvider)
-    {
-        $this->userServiceProvider = $userServiceProvider;
+    public function __construct(
+        SubscriptionRepository $subscriptionRepository,
+        ProductRepository $productRepository
+    ) {
+        $this->productRepository = $productRepository;
+        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     public function getCurrentUser()
@@ -37,34 +36,74 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $brand)
+    public function getCurrentUserMembershipData(?string $brand = null)
     : array {
-        // TODO: Implement getCurrentUserMembershipData() method.
+        $user = user();
+        $productsIds = [];
+        $products = [];
+        foreach (config('ecommerce.available_brands', []) as $availableBrand) {
+            if (!isset(config('ecommerce.membership_product_skus')[$availableBrand])) {
+                break;
+            }
+            $products += $this->productRepository->bySkus(config('ecommerce.membership_product_skus')[$availableBrand]);
+        }
+
+        foreach ($products as $product) {
+            $productsIds[] = $product->getId();
+        }
+
+        $membershipSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
+            $user->id,
+            $productsIds,
+            true
+        );
+
+        $isAppleAppSubscriber = false;
+        $isGoogleAppSubscriber = false;
+
+        if ($membershipSubscription) {
+            $isAppleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_APPLE_SUBSCRIPTION;
+            $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
+        }
+
         return [
-            'isEdge' => true,
-            'isEdgeExpired' => false,
-            'edgeExpirationDate' => null,
-            'isPackOlyOwner' => false,
-            'isAppleAppSubscriber' => true,
-            'isGoogleAppSubscriber' => false,
+            'isEdge' => $user->isAMember(),
+            'isEdgeExpired' => $user->isAnExpiredMember(),
+            'edgeExpirationDate' => $user->membership_expiration_date,
+            'isPackOnlyOwner' => $user->isPackOnlyOwner(),
+            'isAppleAppSubscriber' => $isAppleAppSubscriber,
+            'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
         ];
     }
 
     public function getCurrentUserProfileData()
     : array
     {
-        // TODO: Implement getCurrentUserProfileData() method.
+        $user = user();
+        return [
+            'id' => $user->id,
+            'email' => $user->email,
+            'permission_level' => $user->permission_level,
+            'display_name' => $user->display_name,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'avatarUrl' => $user->profile_picture_url,
+            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id')
+        ];
     }
 
     public function getCurrentUserExperienceData()
     : array
     {
-        // TODO: Implement getCurrentUserExperienceData() method.
+        return [
+            'totalXp' => user()->total_xp,
+            'xpRank' => user()->getXpRank(),
+        ];
     }
 
-    public function setCurrentUserProfilePictureUrl(string $profilePictureUrl)
+    public function setCurrentUserProfilePictureUrl(?string $profilePictureUrl = null)
     : User {
-        user()->profile_picture_url =  $profilePictureUrl;
+        user()->profile_picture_url = $profilePictureUrl;
         user()->save();
 
         return $this->getCurrentUser();
@@ -72,12 +111,24 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function setCurrentUserPhoneNumber(string $phoneNumber)
     : User {
-        // TODO: Implement setCurrentUserPhoneNumber() method.
+        user()->phone_number = $phoneNumber;
+        user()->save();
+
+        return $this->getCurrentUser();
     }
 
     public function setCurrentUserDisplayName(string $displayName)
     : ?User {
-        // TODO: Implement setCurrentUserDisplayName() method.
+        $inUseDisplayName = \Modules\UserManagementSystem\Models\User::where('display_name',$displayName)->get();
+
+        if(($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))){
+            throw new MusoraAPIException('This display name is already in use', 'Display name exist', 500);
+        }
+
+        user()->display_name = $displayName;
+        user()->save();
+
+        return $this->getCurrentUser();
     }
 
     public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)

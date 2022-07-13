@@ -60,6 +60,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $drums_gear_cymbal_brands
  * @property string|null $drums_gear_photo
  * @property int|null $drums_playing_since_year
+ * @property boolean|false $drumeo_onboarding_skip_setup
+ * @property boolean|false $pianote_onboarding_skip_setup
+ * @property boolean|false $guitareo_onboarding_skip_setup
+ * @property boolean|false $singeo_onboarding_skip_setup
  * @property int|null $singing_since_year
  * @property int|null $singing_gear_mic_brands
  * @property int|null $singing_gear_photo
@@ -178,6 +182,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $is_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
  * @method static Builder|User whereMembershipExpirationDate($value)
+ * @property int $is_pack_owner
  * @property int $send_mobile_app_push_notifications
  * @property int $send_email_notifications
  * @method static Builder|User whereSendEmailNotifications($value)
@@ -238,7 +243,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'guitar_playing_since_year',
         'singing_since_year',
         'singing_gear_mic_brands',
-        'singing_gear_photo'
+        'singing_gear_photo',
+        'drumeo_onboarding_skip_setup',
+        'pianote_onboarding_skip_setup',
+        'guitareo_onboarding_skip_setup',
+        'singeo_onboarding_skip_setup'
     ];
 
 
@@ -270,8 +279,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true): Attribute
-    {
+    public function profilePictureUrl($usingCDN = true)
+    : Attribute {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
@@ -300,7 +309,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function totalXp(): Attribute
+    public function totalXp()
+    : Attribute
     {
         return Attribute::make(
             get: function ($value) {
@@ -482,13 +492,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function sendPasswordResetNotification($token)
     {
         //todo: to be configured
-//        $class = config('usora.password_reset_notification_class');
-//
-//        (new AnonymousNotifiable())->route(
-//            config('usora.password_reset_notification_channel'),
-//            $this->getEmailForPasswordReset()
-//        )
-//            ->notify(new $class($token));
+        //        $class = config('usora.password_reset_notification_class');
+        //
+        //        (new AnonymousNotifiable())->route(
+        //            config('usora.password_reset_notification_channel'),
+        //            $this->getEmailForPasswordReset()
+        //        )
+        //            ->notify(new $class($token));
     }
 
     /**
@@ -552,5 +562,30 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function onboardingExperience()
     {
         return $this->hasMany(OnboardingExperience::class);
+    }
+
+   /**
+     * @return bool
+     */
+    public function isPackOwner()
+    {
+        return $this->is_pack_owner;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPackOnlyOwner()
+    {
+        return $this->isPackOwner() && !$this->isAMember();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnExpiredMember()
+    {
+        return
+            !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
     }
 }

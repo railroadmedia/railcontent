@@ -103,8 +103,16 @@ Route::group(
         Route::post(
             'onboarding-experience',
             OnboardingController::class . '@experience'
+
         )
             ->name('user_management_system.onboarding.experience');
+
+
+        Route::post(
+            'onboarding-skip-account-setup',
+            OnboardingController::class . '@skipAccountSetup'
+        )
+            ->name('user_management_system.onboarding.test');
     }
 );
 
