@@ -889,6 +889,7 @@ class ContentRepository extends RepositoryBase
      * @param string $orderByColumn
      * @param string $orderByDirection
      * @param array $requiredField
+     * @param integer $limit
      * @return array
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -898,7 +899,8 @@ class ContentRepository extends RepositoryBase
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc',
-        $requiredField = []
+        $requiredField = [],
+        $limit = null
     ) {
         $contentRows =
             $this->query()
@@ -912,6 +914,10 @@ class ContentRepository extends RepositoryBase
                     $publishedOnValue
                 )
                 ->orderBy($orderByColumn, $orderByDirection);
+
+        if (!empty($limit)) {
+            $contentRows->limit($limit);
+        }
 
         if (!empty($requiredField)) {
             if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
@@ -937,7 +943,8 @@ class ContentRepository extends RepositoryBase
                         $table . '.' . $column,
                         $requiredField['value']
                     );
-            });
+            })
+            ->groupBy('railcontent_content.id');
         }
 
         $contentRows = $contentRows->getToArray();

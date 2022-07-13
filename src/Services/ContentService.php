@@ -305,6 +305,7 @@ class ContentService
      * @param string $publishedOnComparisonOperator
      * @param string $orderByColumn
      * @param string $orderByDirection
+     * @param integer $limit
      * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -314,7 +315,8 @@ class ContentService
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc',
-        $requiredField = []
+        $requiredField = [],
+        $limit = null
     ) {
         return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -324,7 +326,8 @@ class ContentService
                 $publishedOnComparisonOperator,
                 $orderByColumn,
                 $orderByDirection,
-                $requiredField
+                $requiredField,
+                $limit
             ),
             'content'
         );
