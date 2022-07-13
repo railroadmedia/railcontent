@@ -22,6 +22,8 @@ class AuthenticatedOnly
         // try token auth first
         if (!empty($request->bearerToken())) {
             if (Auth::guard('sanctum')->check()) {
+                auth()->setUser(Auth::guard('sanctum')->user());
+
                 return $next($request);
             } else {
                 throw new AuthenticationException();
