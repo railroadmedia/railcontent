@@ -7566,12 +7566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "1cb1728966d0d3665a837a22bc9f1f1ba7207dac"
+                "reference": "d22e8ddddd2b445617c066d308371d2ec4b7d258"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1cb1728966d0d3665a837a22bc9f1f1ba7207dac",
-                "reference": "1cb1728966d0d3665a837a22bc9f1f1ba7207dac",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d22e8ddddd2b445617c066d308371d2ec4b7d258",
+                "reference": "d22e8ddddd2b445617c066d308371d2ec4b7d258",
                 "shasum": ""
             },
             "require": {
@@ -7603,7 +7603,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-12T13:28:28+00:00"
+            "time": "2022-07-13T12:29:02+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -7703,12 +7703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b8685001cee3e94c822a4b41f7ff43d129783417"
+                "reference": "84e6a79ecb86f2b6114af1d872a69462681eca82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b8685001cee3e94c822a4b41f7ff43d129783417",
-                "reference": "b8685001cee3e94c822a4b41f7ff43d129783417",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/84e6a79ecb86f2b6114af1d872a69462681eca82",
+                "reference": "84e6a79ecb86f2b6114af1d872a69462681eca82",
                 "shasum": ""
             },
             "require": {
@@ -7764,7 +7764,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-07-13T08:44:14+00:00"
+            "time": "2022-07-13T11:27:18+00:00"
         },
         {
             "name": "railroad/railforums",
