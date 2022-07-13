@@ -1,6 +1,7 @@
 @component('partials.bladesora.members.components.header-banner', [
     'hideUser' => true,
-    'backgroundImage' => $learningPath->fetch('data.header_image_url', ''),
+    // 'backgroundImage' => $learningPath->fetch('data.header_image_url', ''),
+    'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
 ])
     @slot('content')
         <div class="flex flex-column pr-1 align-center">
@@ -20,7 +21,7 @@
             <div class="flex flex-row align-center mb-2">
                 <img
                     alt="{{ $learningPath->fetch('title') }} Logo"
-                    src="{{ $learningPath->fetch('data.logo_image_url') }}"
+                    src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg"
                     style="width:200px;height:auto;"
                 >
                 <h2 class="subheading uppercase text-white">
