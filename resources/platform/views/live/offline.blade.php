@@ -6,7 +6,7 @@
 
 @section('content')
 
-    @component('partials._header-banner')
+    @component('partials._header-banner', )
         @slot('content')
             <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
@@ -60,7 +60,7 @@
             </div>
 
             <div class="tw-flex tw-flex-row">
-                <content-schedule 
+                <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
                     theme-color="{{ $brand }}"
                 />

@@ -234,6 +234,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.live');
 
+        Route::get('/{brand}/live-chat', [LivePageController::class, 'chat'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.live-chat');
+
         /*
          * Users Lists Pages
          */

@@ -53,6 +53,11 @@ class SetLastUsedBrand
             config()->set('railforums.forums_index_page_url', $brand . '/forums');
 
             config()->set('railcontent.brand', $brand);
+
+            // set railchat config to be brand specific
+            foreach (config('railchat.' . $brand, []) as $configKey => $configValue) {
+                config()->set('railchat.' . $configKey, $configValue);
+            }
         }
 
         return $next($request);
