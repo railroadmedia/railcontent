@@ -13,7 +13,7 @@ class ShowsDecorator extends TypeDecoratorBase
      */
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->whereIn('type', config('railcontent.showTypes'));
+        $contentsOfType = $contents->whereIn('type', config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
 
         if ($contentsOfType->isEmpty()) {
             return $contents;

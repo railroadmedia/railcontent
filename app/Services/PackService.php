@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Collections\PackCollection;
-use App\Services\User\UserAccessService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -36,7 +35,7 @@ class PackService
      * @return PackCollection
      * @throws \Doctrine\ORM\ORMException
      */
-    public function getPacks(User $user, $getAll = false)
+    public function getPacks($user, $getAll = false)
     {
         $oldPullFutureContent = ContentRepository::$pullFutureContent;
         $oldAvailableContentStatues = ContentRepository::$availableContentStatues;
@@ -46,12 +45,12 @@ class PackService
 
         $packs = (new PackCollection(
             $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'])['results']
-        ))->sortByUserActivity($user->getId());
+        ))->sortByUserActivity($user->id);
 
         ContentRepository::$pullFutureContent = $oldPullFutureContent;
         ContentRepository::$availableContentStatues = $oldAvailableContentStatues;
 
-        if (UserAccessService::isPackOnlyOwner($user->getId())) {
+        if ($user->isPackOnlyOwner()) {
             if ($getAll) {
                 return $packs;
             }
@@ -62,7 +61,7 @@ class PackService
                 return $packs;
             }
 
-            $userProducts = $this->userProductService->getAllUsersProducts($user->getId());
+            $userProducts = $this->userProductService->getAllUsersProducts($user->id);
             $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
             $packsToShow = [];
 

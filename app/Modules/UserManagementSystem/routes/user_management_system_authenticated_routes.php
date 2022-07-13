@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\EmailChangeController;
 use Modules\UserManagementSystem\Controllers\PasswordController;
 use Modules\UserManagementSystem\Controllers\UserController;
-
+use Modules\UserManagementSystem\Controllers\OnboardingController;
 
 Route::group(
     ['prefix' => config('user_management_system.route_prefix'),],
@@ -60,23 +60,51 @@ Route::group(
         )
             ->name('user_management_system.email-change.confirm');
 
+
         Route::match(
             ['post', 'put'],
-            'profile-picture/upload',
+            'picture/upload-from-s3-front-end',
             [
-                'as' => 'user_management_system.profile-picture.upload',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@upload',
+                'as' => 'user_management_system.picture.upload-from-s3-front-end',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhotoFromS3FrontEnd',
             ]
         );
 
         Route::match(
             ['post', 'put'],
-            'profile-picture/upload-from-s3-front-end',
+            'picture/upload',
             [
-                'as' => 'user_management_system.profile-picture.upload-from-s3-front-end',
-                'uses' => \Modules\UserManagementSystem\Controllers\ProfilePictureUploadController::class . '@uploadFromS3FrontEnd',
+                'as' => 'user_management_system.picture.upload',
+                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhoto',
             ]
         );
+
+    	  /*
+          * Onboarding API
+          */
+        Route::post(
+            'onboarding-gear',
+            OnboardingController::class . '@gears'
+        )
+            ->name('user_management_system.onboarding.gears');
+
+        Route::post(
+            'onboarding-topics',
+            OnboardingController::class . '@topics'
+        )
+            ->name('user_management_system.onboarding.topics');
+
+        Route::post(
+            'onboarding-genres',
+            OnboardingController::class . '@genres'
+        )
+            ->name('user_management_system.onboarding.genres');
+
+        Route::post(
+            'onboarding-experience',
+            OnboardingController::class . '@experience'
+        )
+            ->name('user_management_system.onboarding.experience');
     }
 );
 

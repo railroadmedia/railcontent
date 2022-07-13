@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.229.2",
+            "version": "3.231.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "142a872fd7172bf5d067f4e30e4f89593296fc8f"
+                "reference": "9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/142a872fd7172bf5d067f4e30e4f89593296fc8f",
-                "reference": "142a872fd7172bf5d067f4e30e4f89593296fc8f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab",
+                "reference": "9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab",
                 "shasum": ""
             },
             "require": {
@@ -203,6 +203,7 @@
                 "andrewsville/php-token-reflection": "^1.4",
                 "aws/aws-php-sns-message-validator": "~1.0",
                 "behat/behat": "~3.0",
+                "composer/composer": "^1.10.22",
                 "doctrine/cache": "~1.4",
                 "ext-dom": "*",
                 "ext-openssl": "*",
@@ -261,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.229.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.2"
             },
-            "time": "2022-07-01T18:16:42+00:00"
+            "time": "2022-07-08T18:16:11+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3829,16 +3830,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "6.5.1",
+            "version": "6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "960f897d3a24da48b286a84b87b39b2b4734fd29"
+                "reference": "5725563770f433a09fd1d9460fa60f04344c2422"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/960f897d3a24da48b286a84b87b39b2b4734fd29",
-                "reference": "960f897d3a24da48b286a84b87b39b2b4734fd29",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/5725563770f433a09fd1d9460fa60f04344c2422",
+                "reference": "5725563770f433a09fd1d9460fa60f04344c2422",
                 "shasum": ""
             },
             "require": {
@@ -3920,7 +3921,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-27T17:54:11+00:00"
+            "time": "2022-07-07T20:47:55+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -4540,16 +4541,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.22.2",
+            "version": "v2.22.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "21ed689102015eb149d34a79de142b757ccfb91d"
+                "reference": "4a9bae3c1909fcaf7e1de2c3d7bb7f7abe05e9f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/21ed689102015eb149d34a79de142b757ccfb91d",
-                "reference": "21ed689102015eb149d34a79de142b757ccfb91d",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/4a9bae3c1909fcaf7e1de2c3d7bb7f7abe05e9f1",
+                "reference": "4a9bae3c1909fcaf7e1de2c3d7bb7f7abe05e9f1",
                 "shasum": ""
             },
             "require": {
@@ -4605,9 +4606,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.22.2"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.22.3"
             },
-            "time": "2022-06-18T18:44:15+00:00"
+            "time": "2022-07-07T13:13:47+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -7055,16 +7056,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.6",
+            "version": "v0.11.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "3f5b5f8aaa979fbd0d1783173f4c82ad529fe621"
+                "reference": "77fc7270031fbc28f9a7bea31385da5c4855cb7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/3f5b5f8aaa979fbd0d1783173f4c82ad529fe621",
-                "reference": "3f5b5f8aaa979fbd0d1783173f4c82ad529fe621",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/77fc7270031fbc28f9a7bea31385da5c4855cb7a",
+                "reference": "77fc7270031fbc28f9a7bea31385da5c4855cb7a",
                 "shasum": ""
             },
             "require": {
@@ -7125,9 +7126,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.6"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.7"
             },
-            "time": "2022-07-03T16:40:23+00:00"
+            "time": "2022-07-07T13:49:11+00:00"
         },
         {
             "name": "ql/uri-template",
@@ -7349,16 +7350,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.7",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10"
+                "reference": "a7e353f4e7435ae6e8ba71cdfeb51be5864e1403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/61d64fa626e8279221dca814d0f0459c323f0c10",
-                "reference": "61d64fa626e8279221dca814d0f0459c323f0c10",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a7e353f4e7435ae6e8ba71cdfeb51be5864e1403",
+                "reference": "a7e353f4e7435ae6e8ba71cdfeb51be5864e1403",
                 "shasum": ""
             },
             "require": {
@@ -7394,9 +7395,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.7"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.8"
             },
-            "time": "2022-06-22T20:01:34+00:00"
+            "time": "2022-07-10T19:39:34+00:00"
         },
         {
             "name": "railroad/event-data-synchronizer",
@@ -7404,12 +7405,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "9071b89b2d8c52eb1578a37fcb570365dc80e374"
+                "reference": "a50b7865550fb40d5a07c0109bccde3c22491823"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/9071b89b2d8c52eb1578a37fcb570365dc80e374",
-                "reference": "9071b89b2d8c52eb1578a37fcb570365dc80e374",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/a50b7865550fb40d5a07c0109bccde3c22491823",
+                "reference": "a50b7865550fb40d5a07c0109bccde3c22491823",
                 "shasum": ""
             },
             "require": {
@@ -7458,7 +7459,7 @@
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
                 "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration"
             },
-            "time": "2022-06-03T17:54:58+00:00"
+            "time": "2022-07-06T15:06:38+00:00"
         },
         {
             "name": "railroad/location",
@@ -7565,12 +7566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "46392fa5873b861444339be4f6c46145667699dc"
+                "reference": "81d6c9ad645a5942f4647c917a8ea0756b1c959c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/46392fa5873b861444339be4f6c46145667699dc",
-                "reference": "46392fa5873b861444339be4f6c46145667699dc",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/81d6c9ad645a5942f4647c917a8ea0756b1c959c",
+                "reference": "81d6c9ad645a5942f4647c917a8ea0756b1c959c",
                 "shasum": ""
             },
             "require": {
@@ -7602,7 +7603,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-04T13:55:31+00:00"
+            "time": "2022-07-10T19:49:43+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -7702,12 +7703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "28e497ea816ba7cec84333db7a3ee1626643ebae"
+                "reference": "c9587b70e09ede526331f4d23bafdda166fe7a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/28e497ea816ba7cec84333db7a3ee1626643ebae",
-                "reference": "28e497ea816ba7cec84333db7a3ee1626643ebae",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c9587b70e09ede526331f4d23bafdda166fe7a78",
+                "reference": "c9587b70e09ede526331f4d23bafdda166fe7a78",
                 "shasum": ""
             },
             "require": {
@@ -7763,7 +7764,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-06-30T20:56:14+00:00"
+            "time": "2022-07-10T19:37:13+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -7771,12 +7772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "ee4821f971d715d797b760f64124d07829ffc743"
+                "reference": "f0cbd53f7d05e3919d86a8fc03742c78c137c983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/ee4821f971d715d797b760f64124d07829ffc743",
-                "reference": "ee4821f971d715d797b760f64124d07829ffc743",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/f0cbd53f7d05e3919d86a8fc03742c78c137c983",
+                "reference": "f0cbd53f7d05e3919d86a8fc03742c78c137c983",
                 "shasum": ""
             },
             "require": {
@@ -7817,7 +7818,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0"
             },
-            "time": "2022-06-16T14:20:50+00:00"
+            "time": "2022-07-10T19:43:16+00:00"
         },
         {
             "name": "railroad/railhelpscout",
@@ -7862,12 +7863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "a38d4926bea8610aca59e69b43138d36d750c9df"
+                "reference": "eb5fc9301b18085cf412d1fa8e851d137a361811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/a38d4926bea8610aca59e69b43138d36d750c9df",
-                "reference": "a38d4926bea8610aca59e69b43138d36d750c9df",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/eb5fc9301b18085cf412d1fa8e851d137a361811",
+                "reference": "eb5fc9301b18085cf412d1fa8e851d137a361811",
                 "shasum": ""
             },
             "require": {
@@ -7919,7 +7920,7 @@
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
                 "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0"
             },
-            "time": "2022-06-17T09:48:54+00:00"
+            "time": "2022-07-10T19:53:19+00:00"
         },
         {
             "name": "railroad/referral",

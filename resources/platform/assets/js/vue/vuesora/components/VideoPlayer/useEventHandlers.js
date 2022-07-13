@@ -25,6 +25,9 @@ export default function ({
     changeVolume,
     currentVolume,
     setRate,
+    emit,
+    contentId,
+    progressState,
 }) {
     const eventHandlers = {
         loading: () => {
@@ -62,57 +65,49 @@ export default function ({
 
             setTimeout(() => {
                 loading.value = false;
-                // cant find a way to test or refactor emits
-                //this.$emit('canplaythrough', event);
+                emit('canplaythrough', event);
             }, 500);
         },
 
         loadedmetadata: (event) => {
             setTimeout(() => {
                 loading.value = false;
-                // cant find a way to test or refactor emits
-                // this.$emit('loadedmetadata', event);
+                emit('loadedmetadata', event);
             }, 500);
         },
 
         durationchange: (event) => {
             totalDuration.value = mediaElement.value.duration;
-            // cant find a way to test or refactor emits
-            // this.$emit('durationchange', event);
+            emit('durationchange', event);
         },
 
         waiting: (event) => {
             isPlaying.value = false;
             loading.value = true;
 
-            // this.$emit('waiting', event);
+            emit('waiting', event);
         },
 
         pause: (event) => {
             isPlaying.value = false;
             loading.value = false;
 
-            // cant find a way to test or refactor emits
-            /*
-            this.$emit('pause', {
+            emit('pause', {
                 ...event,
-                contentId: this.contentId,
+                contentId
             });
-            */
         },
 
         play: (event) => {
             isPlaying.value = true;
             loading.value = false;
             hasBeenPlayed.value = true;
-            // cant find a way to test or refactor emits
-            /*
-            this.$emit('play', {
+
+            emit('play', {
                 ...event,
-                contentId: this.contentId,
-                progressState: this.progressState,
+                contentId,
+                progressState,
             });
-            */
         },
 
         playing: (event) => {
@@ -120,15 +115,13 @@ export default function ({
                 isPlaying.value = true;
                 loading.value = false;
             }, 100);
-            // cant find a way to test or refactor emits
-            // this.$emit('playing', event);
+            emit('playing', event);
         },
 
         timeupdate: (event) => {
             totalDuration.value = mediaElement.value.duration;
             currentTime.value = mediaElement.value.currentTime;
-            // cant find a way to test or refactor emits
-            // this.$emit('timeupdate', event);
+            emit('timeupdate', event);
         },
 
         useractive: () => {
@@ -179,15 +172,13 @@ export default function ({
                 currentTime.value = event.time || 0;
             }
 
-            // cant find a way to test or refactor emits
-            // this.$emit('cc-time', event);
+            emit('cc-time', event);
         },
 
         playOrPause: (event) => {
             isPlaying.value = !event;
 
-            // cant find a way to test or refactor emits
-            // this.$emit('cc-playpause', event);
+            emit('cc-playpause', event);
         },
 
         media: (event) => {
@@ -201,8 +192,7 @@ export default function ({
             mediaElement.value.pause();
             mediaElement.value.volume = 0;
 
-            // cant find a way to test or refactor emits
-            // this.$emit('cc-media', event);
+            emit('cc-media', event);
         },
 
         disconnect: (event) => {
@@ -215,16 +205,15 @@ export default function ({
                 mediaElement.value.play();
             }
 
-            // cant find a way to test or refactor emits
-            // this.$emit('cc-disconnect', event);
+            
+            emit('cc-disconnect', event);
         },
 
         state: (event) => {
             if (event === 'IDLE') {
                 chromeCast.disconnect();
             }
-            // cant find a way to test or refactor emits
-            // this.$emit('cc-state', event);
+            emit('cc-state', event);
         },
     };
 
