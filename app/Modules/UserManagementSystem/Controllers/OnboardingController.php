@@ -81,5 +81,23 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
+    /**
+     *
+     * @param Request $request
+     */
+    public function skipAccountSetup(Request $request)
+    {
+        $request->validate([
+            'skip' => 'boolean|required',
+            'brand' => 'required'
+        ]);
+
+        $userAttribute = $request->get('brand') . '_onboarding_skip_setup';
+        user()->{$userAttribute} = $request->get('skip');
+        user()->save();
+
+        return response(json_encode(user()), 200);
+    }
+
 
 }
