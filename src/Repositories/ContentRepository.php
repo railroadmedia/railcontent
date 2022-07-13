@@ -1898,7 +1898,10 @@ class ContentRepository extends RepositoryBase
                     'topic',
                     'focus',
                     'bpm',
-                    'video'
+                    'video',
+                    'original_video',
+                    'high_video',
+                    'low_video'
                 ];
         }
 

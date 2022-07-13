@@ -23,7 +23,7 @@ class ContentVideoRepository extends RepositoryBase
         return $this->connection()->table(config('railcontent.table_prefix').'content');
     }
 
-    public function getByContentIds($contentIds)
+    public function getByContentIds($contentIds, $key = 'video')
     {
         if (empty($contentIds)) {
             return [];
@@ -34,7 +34,7 @@ class ContentVideoRepository extends RepositoryBase
                 ->select(config('railcontent.table_prefix').'content.id as content_id', 'videoRow.*')
                 ->join(
                     config('railcontent.table_prefix').'content as videoRow',
-                    config('railcontent.table_prefix').'content.video',
+                    config('railcontent.table_prefix').'content.'.$key,
                     '=',
                     'videoRow.id'
                 )
