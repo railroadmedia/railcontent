@@ -114,7 +114,7 @@
                         :pre-loaded-content="{{ $childContent }}"
                         :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
                         {{-- :is-admin="{{ json_encode(user()->isAdmin()) }}" --}}
-                        @if($parentContent['type'] === 'learning-path'|| $parentContent['type'] === 'learning-path-level')
+                        @if($displayItemAsOverview ?? false)
                             :display-items-as-overview="true"
                             :lock-unowned="true"
                         @endif
