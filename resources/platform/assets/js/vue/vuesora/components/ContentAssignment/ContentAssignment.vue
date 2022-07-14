@@ -61,10 +61,10 @@
                 <div v-show="$_totalPages > 0" class="flex flex-row tw-pb-6">
                     <div ref="carouselWrap" class="flex flex-column grow">
                         <div class="flex flex-column">
-                            <div ref="carouselContainer" class="flex flex-row carousel tw-bg-white overflow tw-mb-3 tw-p-3">
+                            <div ref="carouselContainer" class="flex flex-row carousel tw-bg-white dark:tw-bg-transparent overflow tw-mb-3 tw-p-3">
                                 <div class="flex flex-row">
                                     <div v-for="(page, i) in $_sheet_music_pages" :key="'page' + (i + 1)" class="flex flex-column xs-12 grow page" :style="pageScrollPosition">
-                                        <img class="sheet-music-image" :src="page">
+                                        <img class="sheet-music-image dark:tw-invert" :src="page">
                                     </div>
                                 </div>
     
