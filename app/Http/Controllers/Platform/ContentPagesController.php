@@ -259,6 +259,7 @@ class ContentPagesController extends BaseController
                 "nextLessonUrl" => $nextLessonUrl,
                 "nextLessonJson" => $nextLessonJson,
                 "xpBonus" => $xpBonus,
+                'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path'
             ]
         );
     }
@@ -316,9 +317,11 @@ class ContentPagesController extends BaseController
             $nextLearningPathLesson = '';
         }
 
+        $childrenLabel = (config('railcontent.children_name_mapping')[brand()][$secondContent['type']]);
+
         // set view data
         $infoData = [
-            "courses" => count($courses),
+            "$childrenLabel" => count($courses),
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
@@ -347,6 +350,7 @@ class ContentPagesController extends BaseController
                 'backButton' => $backButton,
                 'xpBonus' => $secondContent->fetch('xp'),
                 'xpAmount' => $secondContent->fetch('total_xp'),
+                'displayItemAsOverview' => $secondContent['type'] === 'learning-path-level'  && in_array(brand(),['drumeo', 'pianote'])
             ]
         );
     }
@@ -409,9 +413,11 @@ class ContentPagesController extends BaseController
             $nextLearningPathLesson = '';
         }
 
+        $childrenLabel = (config('railcontent.children_name_mapping')[brand()][$thirdContent['type']]);
+
         // set view data
         $infoData = [
-            "courses" => count($courses),
+            "$childrenLabel" => count($courses),
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
@@ -444,6 +450,7 @@ class ContentPagesController extends BaseController
                 'backButton' => $backButton,
                 'xpBonus' => $thirdContent->fetch('xp'),
                 'xpAmount' => $thirdContent->fetch('total_xp'),
+                'displayItemAsOverview' => false
             ]
         );
     }
