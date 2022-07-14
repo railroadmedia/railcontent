@@ -223,11 +223,6 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => 'Lessons',
-                        'path' => '/'.brand().'/lessons',
-                        'icon' => 'electric-guitar',
-                    ],
-                    [
                         'name' => 'Packs',
                         'path' => '/'.brand().'/packs',
                         'icon' => 'box',
@@ -251,6 +246,11 @@ class NavigationService
                         'name' => 'Live',
                         'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
+                    ],
+                    [
+                        'name' => 'Lessons',
+                        'path' => '/'.brand().'/lessons',
+                        'icon' => 'electric-guitar',
                     ],
                     [
                         'name' => '500 Songs',

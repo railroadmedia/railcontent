@@ -172,7 +172,7 @@
       v-if="mappedData.sheet_music && !is_search"
       class="flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
     >
-      <img :src="mappedData.sheet_music" />
+      <img class="dark:tw-invert" :src="mappedData.sheet_music" />
     </div>
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
