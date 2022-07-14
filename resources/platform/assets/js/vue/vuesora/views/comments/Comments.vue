@@ -71,7 +71,7 @@
                 </p>
             </div>
 
-            <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-col tw-grow">
                 <text-editor
                     ref="textEditor"
                     v-model="commentInterface"
@@ -79,7 +79,7 @@
                     :height="150"
                 ></text-editor>
 
-                <div class="tw-flex tw-flex-row align-h-right mv-1">
+                <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                     <button
                         class="btn collapse-150"
                         :disabled="loading"

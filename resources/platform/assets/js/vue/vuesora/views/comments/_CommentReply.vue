@@ -331,11 +331,13 @@ export default {
         },
     },
     mounted() {
+        /*
         this.$root.$on('replyOpened', (payload) => {
             if (this.comment.id !== payload.id) {
                 this.replying = false;
             }
         });
+        */
     },
     methods: {
         likeComment() {
