@@ -175,6 +175,13 @@ Generates content progress, list additions, coach follows, etc, for the user for
 Example:  
 `r mwp artisan SeedUserContentData "caleb@drumeo.com"`
 
+
+## Seed Live And Schduled Content
+`artisan SeedLiveAndScheduledContent --live-now`  
+This command adds a bunch content to the 
+schedule for all brands. When `--live-now` is added it also sets a currently live event
+so you can preview the live stream page.
+
   
 # Creating Test Users
 When the correct middleware is enabled (during dev, qa, and for alpha testing) 

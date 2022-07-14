@@ -43,122 +43,123 @@ const changeCurrentForm = (val) => {
 </script>
 
 <template>
-  <section
-    v-if="currentForm === 'login'"
-    id="loginForm"
-    class="
-      tw-flex
-      tw-flex-col
-      tw-bg-[#081825]/[90]
-      tw-rounded-xl
-      tw-w-[423px]
-      tw-min-h-[369px]
-      tw-border-[1px]
-      tw-border-[#223F57]
-      tw-px-[32px]
-    "
-  >
-    <form
-      method="post"
-      :action="loginurl"
-      class="tw-flex tw-flex-col tw-py-[42px]"
+  <div>
+    <section
+      v-if="currentForm === 'login'"
+      id="loginForm"
+      class="
+        tw-flex
+        tw-flex-col
+        tw-bg-[#081825]/[90]
+        tw-rounded-xl
+        tw-w-[423px]
+        tw-min-h-[369px]
+        tw-border-[1px]
+        tw-border-[#445F74]
+        tw-px-[32px]
+      "
     >
-      <slot v-if="usecsrftoken" name="csrf"></slot>
-      <ul
-        v-if="errors.length > 0"
-        class="tw-flex tw-flex-col tw-mb-3 tiny text-error list-style-none"
+      <form
+        method="post"
+        :action="loginurl"
+        class="tw-flex tw-flex-col tw-py-[42px]"
       >
-        <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
-          {{ error }}
-        </li>
-      </ul>
-      <ul
-        v-if="hassessionstatus && sessionstatus"
-        class="tw-flex tw-flex-col tw-mb-2 tiny text-success list-style-none"
-      >
-        <li>{{ sessionstatus }}</li>
-      </ul>
-      <div class="tw-flex tw-flex-col tw-mb-[20px]">
-        <InputLabel
-          inputOverride="tw-w-full tw-h-[50px] tw-text-black"
-          :brand="brand"
-          inputType="email"
-          id="loginEmail"
-          inputName="email"
-          labelValue="Email Address"
-          placeholder="Enter your email..."
-          :inputErrors="[]"
-        />
-      </div>
-      <div class="tw-flex tw-flex-col tw-mb-[20px]">
-        <InputLabel
-          wrapperOverride="tw-text-[16px]"
-          inputOverride="tw-w-full tw-h-[50px] tw-text-black"
-          :brand="brand"
-          inputType="password"
-          id="loginPassword"
-          inputName="password"
-          labelValue="Password"
-          placeholder="Enter your password..."
-          :inputErrors="[]"
-        />
-      </div>
-      
-      <RainbowButton type="submit" label="SIGN IN" />
+        <slot v-if="usecsrftoken" name="csrf"></slot>
+        <ul
+          v-if="errors.length > 0"
+          class="tw-flex tw-flex-col tw-mb-3 tiny text-error list-style-none"
+        >
+          <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
+            {{ error }}
+          </li>
+        </ul>
+        <ul
+          v-if="hassessionstatus && sessionstatus"
+          class="tw-flex tw-flex-col tw-mb-2 tiny text-success list-style-none"
+        >
+          <li>{{ sessionstatus }}</li>
+        </ul>
+        <div class="tw-flex tw-flex-col tw-mb-[20px]">
+          <InputLabel
+            inputOverride="tw-w-full tw-h-[50px] tw-text-black"
+            :brand="brand"
+            inputType="email"
+            id="loginEmail"
+            inputName="email"
+            labelValue="Email Address"
+            placeholder="Enter your email..."
+            :inputErrors="[]"
+          />
+        </div>
+        <div class="tw-flex tw-flex-col tw-mb-[20px]">
+          <InputLabel
+            wrapperOverride="tw-text-[16px]"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-black"
+            :brand="brand"
+            inputType="password"
+            id="loginPassword"
+            inputName="password"
+            labelValue="Password"
+            placeholder="Enter your password..."
+            :inputErrors="[]"
+          />
+        </div>
+        
+        <RainbowButton type="submit" label="SIGN IN" />
+        <a
+          id="resetToggle"
+          class="text-center text-grey-3 noselect tw-text-[16px]"
+          @click="() => changeCurrentForm('reset')"
+          >Forgot your password?</a
+        >
+      </form>
+    </section>
+    <section
+      v-if="currentForm === 'reset'"
+      id="resetForm"
+      class="
+        tw-flex
+        tw-flex-col
+        tw-bg-[#081825]/[90]
+        tw-rounded-xl
+        tw-w-[423px]
+        tw-h-[369px]
+        tw-border-[1px]
+        tw-border-[#445F74]
+        tw-py-[42px]
+        tw-px-[32px]
+      "
+    >
+      <p class="text-grey-3 tw-mb-[20px]">
+        Please enter your email address and we will send you instructions to reset
+        your password.
+      </p>
+
+      <form method="post" :action="reseturl" class="tw-flex tw-flex-col">
+        <slot v-if="usecsrftoken" name="csrf"></slot>
+        <div class="tw-flex tw-flex-col tw-mb-[20px]">
+          <InputLabel
+            inputOverride="tw-w-full tw-h-[50px]"
+            :brand="brand"
+            inputType="email"
+            id="resetEmail"
+            inputName="email"
+            labelValue="Email Address"
+            placeholder="Enter your email..."
+            :inputErrors="[]"
+          />
+        </div>
+        <RainbowButton type="submit" label="GET NEW PASSWORD" />
+      </form>
+
       <a
-        id="resetToggle"
-        class="text-center text-grey-3 noselect tw-text-[16px]"
-        @click="() => changeCurrentForm('reset')"
-        >Forgot your password?</a
+        id="loginToggle"
+        class="tw-text-center text-grey-3 noselect"
+        @click="() => changeCurrentForm('login')"
+        >Back to Login</a
       >
-    </form>
-  </section>
-
-  <section
-    v-if="currentForm === 'reset'"
-    id="resetForm"
-    class="
-      tw-flex
-      tw-flex-col
-      tw-bg-[#081825]/[90]
-      tw-rounded-xl
-      tw-w-[423px]
-      tw-h-[369px]
-      tw-border-[1px]
-      tw-border-[#223F57]
-      tw-py-[42px]
-      tw-px-[32px]
-    "
-  >
-    <p class="text-grey-3 tw-mb-[20px]">
-      Please enter your email address and we will send you instructions to reset
-      your password.
-    </p>
-
-    <form method="post" :action="reseturl" class="tw-flex tw-flex-col">
-      <slot v-if="usecsrftoken" name="csrf"></slot>
-      <div class="tw-flex tw-flex-col tw-mb-[20px]">
-        <InputLabel
-          inputOverride="tw-w-full tw-h-[50px]"
-          :brand="brand"
-          inputType="email"
-          id="resetEmail"
-          inputName="email"
-          labelValue="Email Address"
-          placeholder="Enter your email..."
-          :inputErrors="[]"
-        />
-      </div>
-      <RainbowButton type="submit" label="GET NEW PASSWORD" />
-    </form>
-
-    <a
-      id="loginToggle"
-      class="tw-text-center text-grey-3 noselect"
-      @click="() => changeCurrentForm('login')"
-      >Back to Login</a
-    >
-  </section>
+    </section>
+  </div>
 </template>
 
 <style type="text/css">

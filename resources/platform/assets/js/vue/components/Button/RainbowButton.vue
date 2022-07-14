@@ -22,6 +22,7 @@ const handleClick = (e) => {
   <button
     :type="type"
     class="
+      tw-text-xl
       tw-rounded-[25px]
       tw-mb-[20px]
       tw-h-[50px]
