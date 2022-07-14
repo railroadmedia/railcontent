@@ -21662,9 +21662,6 @@ a:visited{
 .tw-mt-3{
   margin-top: 0.75rem !important;
 }
-.tw-ml-auto{
-  margin-left: auto !important;
-}
 .tw-mt-8{
   margin-top: 2rem !important;
 }
@@ -21835,6 +21832,9 @@ a:visited{
 }
 .tw-mb-12{
   margin-bottom: 3rem !important;
+}
+.tw-ml-auto{
+  margin-left: auto !important;
 }
 .tw-mt-\[40px\]{
   margin-top: 40px !important;
@@ -24311,6 +24311,10 @@ a:visited{
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::placeholder{
   --tw-placeholder-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-placeholder-opacity)) !important;
+}
+.tw-dark .dark\:tw-invert{
+  --tw-invert: invert(100%) !important;
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 .tw-dark .dark\:placeholder\:tw-text-\[\#9EC0DC\]::-moz-placeholder{
   --tw-text-opacity: 1 !important;

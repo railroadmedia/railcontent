@@ -172,7 +172,7 @@
       v-if="mappedData.sheet_music && !is_search"
       class="flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
     >
-      <img :src="mappedData.sheet_music" />
+      <img class="dark:tw-invert" :src="mappedData.sheet_music" />
     </div>
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
@@ -346,7 +346,7 @@ export default {
         active: this.active,
         "background-cards tw-mt-3":
           this.item.type === "learning-path" ||
-          this.item.type === "learning-path-course",
+          this.item.type === "learning-path-course" || this.item.type === "learning-path-lesson",
       };
     },
 

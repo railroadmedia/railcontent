@@ -1,7 +1,7 @@
 <!-- // todo - review & clean -->
 <div class="tw-w-full fluid collapsed-h tw-py-8 md:tw-py-11 relative tw-bg-black">
     <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top"
-            style="background-image: url({{ cf_img($backgroundImage ?? 'https://d2vyvo0tyx8ig5.cloudfront.net/backgrounds/default-3840.jpg', ["quality" => 80, "blur" => 150, "width" => 640]) }});"
+            style="background-image: url({{ cf_img($backgroundImage ?? 'https://d2vyvo0tyx8ig5.cloudfront.net/backgrounds/default-3840.jpg', ["quality" => 80, "width" => 1000]) }});"
     ></div>
     <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
