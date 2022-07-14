@@ -189,16 +189,34 @@ return [
                 'access_token' => env('VIMEO_ACCESS_TOKEN'),
             ],
         ],
-        'youtube' => [
-            'key' => env('YOUTUBE_API_KEY'),
-            'musora' => [
-                'user' => env('YOUTUBE_USERNAME'),
+
+        'drumeo' => [
+            'youtube_client_api' => [
+                'client_id' => env('DRUMEO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('DRUMEO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('DRUMEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
             ],
         ],
-        'youtube_client_api' => [
-            'client_id' => env('YOUTUBE_API_CLIENT_ID', env('YOUTUBE_API_CLIENT_ID')),
-            'client_secret' => env('YOUTUBE_API_CLIENT_SECRET', env('YOUTUBE_API_CLIENT_SECRET')),
-            'refresh_token' => env('YOUTUBE_API_CLIENT_REFRESH_TOKEN', env('YOUTUBE_API_CLIENT_REFRESH_TOKEN')),
+        'pianote' => [
+            'youtube_client_api' => [
+                'client_id' => env('PIANOTE_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('PIANOTE_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('PIANOTE_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
+        ],
+        'guitareo' => [
+            'youtube_client_api' => [
+                'client_id' => env('GUITAREO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('GUITAREO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('GUITAREO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
+        ],
+        'singeo' => [
+            'youtube_client_api' => [
+                'client_id' => env('SINGEO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('SINGEO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('SINGEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
         ],
     ],
 
@@ -713,7 +731,7 @@ return [
             'student-review' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
@@ -724,7 +742,7 @@ return [
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -735,7 +753,7 @@ return [
             'bootcamps' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
                 'name' => 'Bootcamps',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',
@@ -746,7 +764,7 @@ return [
             'podcasts' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/podcast.png',
                 'name' => 'The Pianote Podcast',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Podcast',
                 'icon' => 'icon-podcast',
@@ -963,10 +981,12 @@ return [
     ],
     'liveContentTypes' => [
         'student-focus',
-        'song',
         'coach-stream',
         'live',
         'question-and-answer',
+        'student-review',
+        'boot-camps',
+        'recording',
     ],
     'topLevelContentTypes' => [
         'learning-path',
@@ -1069,6 +1089,7 @@ return [
         'semester-pack-lesson',
         'ha-oemurd-pmac',
         'learning-path-lesson',
+        'chord-and-scale',
     ],
     'appUserListContentTypes' => [
         'course',

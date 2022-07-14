@@ -60,6 +60,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $drums_gear_cymbal_brands
  * @property string|null $drums_gear_photo
  * @property int|null $drums_playing_since_year
+ * @property boolean|false $drumeo_onboarding_skip_setup
+ * @property boolean|false $pianote_onboarding_skip_setup
+ * @property boolean|false $guitareo_onboarding_skip_setup
+ * @property boolean|false $singeo_onboarding_skip_setup
  * @property int|null $singing_since_year
  * @property int|null $singing_gear_mic_brands
  * @property int|null $singing_gear_photo
@@ -239,7 +243,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'guitar_playing_since_year',
         'singing_since_year',
         'singing_gear_mic_brands',
-        'singing_gear_photo'
+        'singing_gear_photo',
+        'drumeo_onboarding_skip_setup',
+        'pianote_onboarding_skip_setup',
+        'guitareo_onboarding_skip_setup',
+        'singeo_onboarding_skip_setup'
     ];
 
 

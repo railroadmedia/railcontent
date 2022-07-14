@@ -66,6 +66,10 @@ class ContentPagesController extends BaseController
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
+        if (empty($lessonType)) {
+            throw new NotFoundHttpException();
+        }
+
         $futureLessons = $this->contentService->getFiltered(
             1,
             10,

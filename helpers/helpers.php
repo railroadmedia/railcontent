@@ -153,6 +153,9 @@ if(!function_exists('parse_lesson_type_readable')){
             case 'student-review':
                 $parsedType = 'Student Reviews';
                 break;
+            case 'boot-camps':
+                $parsedType = 'Bootcamps';
+                break;
             default:
                 $parsedType = $type;
                 break;

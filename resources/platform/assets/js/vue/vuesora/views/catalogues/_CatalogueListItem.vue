@@ -41,7 +41,7 @@
       class="tw-flex tw-flex-col tw-justify-center"
       :class="[thumbnailColumnClass, themeColor]"
     >
-      <div class="thumb-wrap corners-10 tw-ml-3">
+      <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10" :class="thumbnailType">
           <img
             src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
@@ -344,7 +344,7 @@ export default {
         "large-thumbnail": this.overview,
         "thumbnail-col": !this.overview,
         active: this.active,
-        "background-cards":
+        "background-cards tw-mt-3":
           this.item.type === "learning-path" ||
           this.item.type === "learning-path-course",
       };
