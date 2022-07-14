@@ -21635,14 +21635,6 @@ a:visited{
   margin-left: 1.5rem !important;
   margin-right: 1.5rem !important;
 }
-.tw-mx-auto{
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-.tw-my-4{
-  margin-top: 1rem !important;
-  margin-bottom: 1rem !important;
-}
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
 }
@@ -21669,6 +21661,9 @@ a:visited{
 }
 .tw-mt-3{
   margin-top: 0.75rem !important;
+}
+.tw-ml-auto{
+  margin-left: auto !important;
 }
 .tw-mt-8{
   margin-top: 2rem !important;
@@ -21840,9 +21835,6 @@ a:visited{
 }
 .tw-mb-12{
   margin-bottom: 3rem !important;
-}
-.tw-ml-auto{
-  margin-left: auto !important;
 }
 .tw-mt-\[40px\]{
   margin-top: 40px !important;
@@ -22329,9 +22321,6 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75% !important;
-}
-.tw-w-full{
-  width: 100% !important;
 }
 .tw-min-w-\[175px\]{
   min-width: 175px !important;
@@ -23374,10 +23363,6 @@ a:visited{
   padding-left: 2.5rem !important;
   padding-right: 2.5rem !important;
 }
-.tw-px-4{
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -23530,9 +23515,6 @@ a:visited{
 }
 .tw-pl-3{
   padding-left: 0.75rem !important;
-}
-.tw-pb-4{
-  padding-bottom: 1rem !important;
 }
 .tw-pr-0{
   padding-right: 0px !important;
@@ -24011,14 +23993,8 @@ a:visited{
   .tw-container{
     max-width: 1815px !important;
   }
-  .tw-container{
-    max-width: 1815px !important;
-  }
 }
 @media (min-width: 2256px){
-  .tw-container{
-    max-width: 2256px !important;
-  }
   .tw-container{
     max-width: 2256px !important;
   }
@@ -24977,10 +24953,6 @@ a:visited{
   .md\:tw-py-8{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
-  }
-  .md\:tw-px-8{
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
   }
   .md\:tw-pt-5{
     padding-top: 1.25rem !important;
