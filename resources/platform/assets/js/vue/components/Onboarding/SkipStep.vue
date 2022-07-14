@@ -3,10 +3,14 @@ const props = defineProps({
     title: {
         type: String,
         default: 'SKIP ACCOUNT SETUP'
+    },
+    brand: {
+        type: String,
+        default: 'drumeo'
     }
 })
 const handleSkip = () => {
-    window.location.href = '/members'
+    window.location.href = '/' + props.brand
 };
 </script>
 

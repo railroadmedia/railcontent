@@ -54,11 +54,18 @@ export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, sel
 };
 
 export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, selectedExperience, brand, steps }) => {
-  const newSteps = [...steps];
+  const newSteps = steps.map((step, index) => {
+    if (index > 1) {
+      return {...step, checked: false };
+    } else {
+      return step;
+    }
+  });
   const hasGear = !!selectedGear.find(gear => gear.brand === brand);
   const hasExperience = !!selectedExperience.find(exp => exp.brand === brand);
   const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
   const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
+
   if (hasGear) {
     newSteps[2].checked = true;
   }
