@@ -346,7 +346,7 @@ export default {
         active: this.active,
         "background-cards tw-mt-3":
           this.item.type === "learning-path" ||
-          this.item.type === "learning-path-course" || this.item.type === "learning-path-lesson",
+          this.item.type === "learning-path-course",
       };
     },
 
