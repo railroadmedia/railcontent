@@ -97,17 +97,18 @@ class UserPlaylistsService
      * @param $playlistId
      * @param array $contentType
      * @param null $limit
-     * @param int $skip
+     * @param int $page
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $skip = 0)
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
     {
         $results =
             $this->userPlaylistContentRepository->getUserPlaylistContents(
                 $playlistId,
                 $contentType,
                 $limit,
-                $skip
+                $page
             );
 
         return Decorator::decorate($results, 'content');

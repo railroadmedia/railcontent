@@ -40,11 +40,11 @@ class UserPlaylistContentRepository extends RepositoryBase
      * @param $playlistId
      * @param array $contentType
      * @param null $limit
-     * @param int $skip
+     * @param int $page
      * @return mixed
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $skip = 0)
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
     {
         $query =
             $this->query()
@@ -62,7 +62,7 @@ class UserPlaylistContentRepository extends RepositoryBase
 
         if ($limit) {
             $query->limit($limit)
-                ->skip($skip);
+                ->skip(($page - 1) * $limit);
         }
 
         $contentRows =
