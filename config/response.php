@@ -938,6 +938,7 @@ return [
             ],
             'comment',
             'created_on',
+            'created_on_diff'
         ],
 
         'learning-path' => [
