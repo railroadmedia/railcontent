@@ -892,11 +892,24 @@ class ContentService
                 );
             }
 
+            $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
+
+            // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+            // accommodates—have an "included_types" value like this—an array of one string.
+            $isContentTypeWithSpecialConditions = in_array($includedTypes, [
+                ['student-focus'],
+                ['student-review']
+            ]);
+            
+            if ($pullFilterFields && !empty($filterFields['difficulty']) && $isContentTypeWithSpecialConditions) {
+                $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup($filterFields['difficulty']);
+            }
+
             $resultsDB = new ContentFilterResultsEntity(
                 [
                     'results' => $filter->retrieveFilter(),
                     'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                    'filter_options' => $filterFields,
                 ]
             );
 
@@ -905,6 +918,31 @@ class ContentService
         }
 
         return Decorator::decorate($results, 'content');
+    }
+
+    // for remove extraneous options and order logically rather than alphabetically
+    private function difficultyFilterOptionsCleanup($difficultyOptions)
+    {
+        foreach ($difficultyOptions as &$option) {
+            $option = is_string($option) ? strtolower((string) $option) : $option;
+        }
+
+        $hasBeginner = in_array('beginner', $difficultyOptions);
+        $hasIntermediate = in_array('intermediate', $difficultyOptions);
+        $hasAdvanced = in_array('advanced', $difficultyOptions);
+        if ($hasBeginner || $hasIntermediate || $hasAdvanced) {
+            $difficultyOptions = [];
+            if ($hasBeginner) {
+                $difficultyOptions[] = 'Beginner';
+            }
+            if ($hasIntermediate) {
+                $difficultyOptions[] = 'Intermediate';
+            }
+            if ($hasAdvanced) {
+                $difficultyOptions[] = 'Advanced';
+            }
+        }
+        return $difficultyOptions;
     }
 
     /**

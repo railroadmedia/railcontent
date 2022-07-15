@@ -69,11 +69,13 @@ class ContentJsonController extends Controller
             $required_fields[] = 'title,%' . $request->get('title') . '%,string,like';
         }
 
+        $contentTypes = $request->get('included_types', []);
+
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', '-published_on'),
-            $request->get('included_types', []),
+            $contentTypes,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             $required_fields,
@@ -88,9 +90,23 @@ class ContentJsonController extends Controller
 
         $filters = $contentData['filter_options'];
 
+        // Add "All" option, but not in all cases
         foreach ($filters as $key => $filterOptions) {
             if (is_array($filterOptions)) {
-                if (($key != 'content_type') && ($key != 'instructor') && ($key != 'focus') && ($key != 'style')) {
+                $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
+
+                // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+                // accommodates—have an "included_types" value like this—an array of one string.
+                $isContentTypeWithSpecialConditions = in_array($contentTypes, [
+                    ['student-focus'],
+                    ['student-review']
+                ]);
+
+                if ($isContentTypeWithSpecialConditions) {
+                    $filtersToExclude = array_merge($filtersToExclude, ['topic', 'difficulty']);
+                }
+
+                if (!in_array($key, $filtersToExclude)) {
                     $filters[$key] = array_diff($filterOptions, ['All']);
                     array_unshift($filters[$key], 'All');
                 }
