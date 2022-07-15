@@ -54,13 +54,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', [Brand::Singeo->value])
             ->name('platform.routines');
 
-        Route::get('/{brand}/lessons', [ContentPagesController::class, 'lessons'])
-            ->whereIn('brand', [Brand::Guitareo->value])
-            ->name('platform.lessons');
-
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
             ->whereIn('contentTypeName', [
+                'lessons',
                 'courses',
                 'songs',
                 'quick-tips',
