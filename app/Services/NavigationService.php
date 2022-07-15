@@ -371,7 +371,7 @@ class NavigationService
             'dashboardPageUrl' => '/'.brand().'/profile/'.user()->id.'/dashboard',
             'notificationsPageUrl' => '/'.brand().'/notifications',
             'playlistsPageUrl' => '/',
-            'schedulePageUrl' => '/',
+            'schedulePageUrl' => '/'.brand().'/schedule',
             'applyForReviewPageUrl' => '/',
             'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
             'supportPageUrl' => '/'.brand().'/support',
