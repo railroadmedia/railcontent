@@ -893,15 +893,15 @@ class ContentService
             }
 
             $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
-            $isStudentFocusOrReview =
-                ($includedTypes == ['student-focus']) || ($includedTypes == ['student-review']);
 
-            /*
-             * for now limited to student-focus and student-reviews as those are currently undergoing some curation by
-             * the content team. for other content types we don't know if there might be a significant number of lessons
-             * that have options that fall outside the limited options that this is desgined to return.
-             */
-            if ($pullFilterFields && !empty($filterFields['difficulty']) && $isStudentFocusOrReview) {
+            // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+            // accommodates—have an "included_types" value like this—an array of one string.
+            $isContentTypeWithSpecialConditions = in_array($includedTypes, [
+                ['student-focus'],
+                ['student-review']
+            ]);
+            
+            if ($pullFilterFields && !empty($filterFields['difficulty']) && $isContentTypeWithSpecialConditions) {
                 $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup($filterFields['difficulty']);
             }
 
