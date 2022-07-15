@@ -98,7 +98,7 @@
                     ],
                     [
                         "title" => parse_lesson_type_readable($parent->fetch('type'), true),
-                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$parent->fetch('type')]]),
                     ],
                     [
                         "title" => $parent->fetch('fields.title'),
