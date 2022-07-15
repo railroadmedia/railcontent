@@ -37,7 +37,7 @@
     @component('partials._header-banner',
         ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',])
         @slot('content')
-            <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
+            <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     @if($catalogueMeta['name'] == 'Q&A')
                         <musora-icon icon-name="light-bulb-filled"
