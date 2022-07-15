@@ -141,8 +141,8 @@
                             class="rounded"
                         >
                     </div>
-                    <div class="tw-flex tw-flex-col">
-                        <div class="tw-flex tw-flex-row">
+                    <div class="tw-flex tw-flex-col tw-w-full">
+                        <div class="tw-flex tw-flex-row tw-w-full">
                             <text-editor
                                 ref="textEditor"
                                 v-model="replyInterface"
@@ -243,6 +243,9 @@ export default {
         hasPublicProfiles: {
             type: Boolean,
             default: () => true,
+        },
+        openedCommentId: {
+            type: [String, Number],
         },
     },
     data() {
@@ -362,7 +365,7 @@ export default {
 
         openReply() {
             this.replying = !this.replying;
-            this.$root.$emit('replyOpened', {
+            this.$emit('replyOpened', {
                 id: this.comment.id,
             });
         },
@@ -414,5 +417,12 @@ export default {
             });
         },
     },
+    watch: { 
+      	openedCommentId: function(newVal, oldVal) { // watch it
+          if (newVal !== oldVal && this.openedCommentId !== this.comment.id) {
+            this.replying = false;
+          }
+        }
+    }
 };
 </script>

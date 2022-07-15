@@ -18455,10 +18455,18 @@ body.play-alongs-player-open #intercom-container {
 * @param $primaryColor - the first color at the start of the gradient
 * @param $secondaryColor - the second color at the end of the gradient
 */
-.user-avatar {
+.comments-container .user-avatar {
   width: 100px;
   height: 100px;
+}
+.comments-container .user-avatar img {
+  position: absolute;
+  top: 0;
+}
+
+.user-avatar {
   position: relative;
+  height: 0;
   padding-bottom: 100%;
   border-radius: 50%;
   overflow: hidden;
@@ -18474,11 +18482,10 @@ body.play-alongs-player-open #intercom-container {
 }
 .user-avatar img {
   border: 2px solid #fff;
-  position: absolute;
+  position: relative;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  top: 0;
 }
 .user-avatar:after {
   content: "";

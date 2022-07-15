@@ -156,8 +156,8 @@
                             class="rounded"
                         >
                     </div>
-                    <div class="tw-flex tw-flex-col">
-                        <div class="tw-flex tw-flex-row">
+                    <div class="tw-flex tw-flex-col tw-w-full">
+                        <div class="tw-flex tw-flex-row  tw-w-full">
                             <text-editor
                                 ref="textEditor"
                                 v-model="replyInterface"
@@ -223,6 +223,8 @@
                     @deleteReply="deleteReply"
                     @openLikes="openLikes"
                     @replyPosted="replyPosted"
+                    :opened-comment-id="openedCommentId"
+                    @replyOpened="(payload) => this.$emit('replyOpened', payload)"
                 ></comment-reply>
             </transition-group>
 
@@ -288,6 +290,9 @@ export default {
             type: Boolean,
             default: () => false,
         },
+        openedCommentId: {
+            type: [String, Number],
+        },
     },
     data() {
         return {
@@ -299,7 +304,6 @@ export default {
     },
     computed: {
         avatarClassObject() {
-            console.log(this.comment.user.access_level)
             return {
                 subscriber: ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano'].indexOf(this.comment.user.access_level) !== -1,
                 coach: this.comment.user.access_level === 'coach',
@@ -410,19 +414,10 @@ export default {
             return this.userExpValue != null && this.comment.user.access_level !== 'team';
         },
     },
-    mounted() {
-        /*
-        this.$root.$on('replyOpened', (payload) => {
-            if (this.comment.id !== payload.id) {
-                this.replying = false;
-            }
-        });
-        */
-    },
     methods: {
         replyToComment() {
             this.replying = !this.replying;
-            this.$root.$emit('replyOpened', {
+            this.$emit('replyOpened', {
                 id: this.comment.id,
             });
         },
@@ -537,5 +532,18 @@ export default {
             }, 50);
         },
     },
+    watch: { 
+      	openedCommentId: function(newVal, oldVal) { // watch it
+          if (newVal !== oldVal && this.openedCommentId !== this.comment.id) {
+            this.replying = false;
+          }
+        }
+    }
 };
 </script>
+
+<style>
+.text-editor-container {
+    width: 100%;
+}
+</style>

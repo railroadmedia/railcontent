@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -119,11 +119,13 @@
             :theme-color="themeColor"
             :profile-base-route="profileBaseRoute"
             :has-public-profiles="hasPublicProfiles"
+            :opened-comment-id="openedCommentId"
             @likeComment="handleCommentLike"
             @likeReply="handleReplyLike"
             @deleteComment="handleCommentDelete"
             @deleteReply="handleReplyDelete"
             @openLikes="addLikeUsersToModal"
+            @replyOpened="handleReplyOpened"
         ></comment-post>
 
         <comment-post
@@ -135,11 +137,13 @@
             :theme-color="themeColor"
             :profile-base-route="profileBaseRoute"
             :has-public-profiles="hasPublicProfiles"
+            :opened-comment-id="openedCommentId"
             @likeComment="handleCommentLike"
             @likeReply="handleReplyLike"
             @deleteComment="handleCommentDelete"
             @deleteReply="handleReplyDelete"
             @openLikes="addLikeUsersToModal"
+            @replyOpened="handleReplyOpened"
         ></comment-post>
 
         <comment-likes-modal
@@ -184,6 +188,7 @@ export default {
     },
     data() {
         return {
+            openedCommentId: null,
             comments: [],
             pinnedComment: null,
             sortOption: '-like_count',
@@ -280,6 +285,9 @@ export default {
         });
     },
     methods: {
+        handleReplyOpened({id}) {
+            this.openedCommentId = id;
+        },
         getComments(params, replace = false) {
             this.requestingData = true;
 
