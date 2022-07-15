@@ -126,7 +126,11 @@
                 <transition appear name="fade">
                     <content-catalogue
                         brand="{{ $brand }}"
+                        @if(!empty($pack) && $pack['slug'] == '500-songs-in-5-days')
+                        catalogue-type="grid"
+                        @else
                         catalogue-type="list"
+                        @endif
                         theme-color="{{ $brand }}"
                         user-id="{{ user()->id }}"
                         :use-theme-color="true"
@@ -158,7 +162,7 @@
                 </transition>
             </div>
 
-            @if($xpBonus > 0)
+            @if($xpBonus > 0 && (empty($pack) || $pack['slug'] !== '500-songs-in-5-days'))
                 @include('partials.bladesora.members.partials._completion-bonus', [
                     "xpBonus" => $xpBonus,
                     "isComplete" => $parentContent->fetch('progress_percent', 0) === 100,
@@ -188,5 +192,27 @@
             @endif
         </div>
     </div>
+
+    {{-- for guitareo 500 songs special page --}}
+    @if(!empty($songsPdfs))
+        <div class="container mv-3">
+            <div class="flex flex-column bg-white corners-10">
+                <div class="flex flex-row bb-grey-1-1">
+                    <content-catalogue
+                            catalogue-type="downloads"
+                            theme-color="guitareo"
+                            brand="guitareo"
+                            :use-theme-color="true"
+                            sort-override="slug"
+                            :included-types="['song-pdf']"
+                            :filterable-values="['artist', 'style']"
+                            :pre-loaded-content="{{ $songsPdfs }}"
+                            user-id="{{ auth()->id() }}"
+                            :infinite-scroll="true"
+                    ></content-catalogue>
+                </div>
+            </div>
+        </div>
+    @endif
 
 @endsection
