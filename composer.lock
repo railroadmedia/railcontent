@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.5",
+            "version": "3.231.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4ea642d1c7f8002037ef46e5f17c9fc1273a6021"
+                "reference": "54c5fe6667c73010d954ce4c4d657d093f0bdcbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4ea642d1c7f8002037ef46e5f17c9fc1273a6021",
-                "reference": "4ea642d1c7f8002037ef46e5f17c9fc1273a6021",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/54c5fe6667c73010d954ce4c4d657d093f0bdcbf",
+                "reference": "54c5fe6667c73010d954ce4c4d657d093f0bdcbf",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.6"
             },
-            "time": "2022-07-13T18:36:03+00:00"
+            "time": "2022-07-14T18:20:54+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7678,12 +7678,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "e3ffb3218d8e0ae690d1fdf9566d261e4df689ae"
+                "reference": "ff60ea28b1a9227ae244e8bd21ebbc3008b33b4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e3ffb3218d8e0ae690d1fdf9566d261e4df689ae",
-                "reference": "e3ffb3218d8e0ae690d1fdf9566d261e4df689ae",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/ff60ea28b1a9227ae244e8bd21ebbc3008b33b4b",
+                "reference": "ff60ea28b1a9227ae244e8bd21ebbc3008b33b4b",
                 "shasum": ""
             },
             "require": {
@@ -7715,7 +7715,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-14T12:44:32+00:00"
+            "time": "2022-07-15T11:43:56+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -15785,5 +15785,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
