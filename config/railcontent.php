@@ -1224,6 +1224,9 @@ return [
         'sbt_exercise_number',
         'song_name',
         'soundslice_xml_file_url',
+        'original_video',
+        'low_video',
+        'high_video'
     ],
 
     // field key => column name
@@ -1347,7 +1350,7 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
         ],
         'pianote' => [
             'learning-path' => 'levels',
@@ -1356,7 +1359,8 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
+            'song' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',
@@ -1364,7 +1368,7 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
@@ -1372,7 +1376,7 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
         ],
 
     ],

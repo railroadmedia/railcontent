@@ -134,7 +134,7 @@ function goBack() {
         :steps="steps"
         @onChangeStep="(s) => emit('onChangeStep', s)"
       />
-      <SkipStep />
+      <SkipStep :brand="brand" />
     </div>
   </StepWrapper>
 </template>

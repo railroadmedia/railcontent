@@ -90,8 +90,7 @@
         <div class="icon-wrap square" :class="noResultsIcon"></div>
       </div>
       <div class="flex flex-column">
-        <h4 class="body" v-html="noResultsMessageWithProgress">
-        </h4>
+        <h4 class="body tw-text-black dark:tw-text-white" v-html="noResultsMessageWithProgress"></h4>
       </div>
     </div>
 
@@ -189,6 +188,8 @@
       :destroy-on-list-removal="destroyOnListRemoval"
       :compact-layout="compactLayout"
       :subscription-calendar-id="subscriptionCalendarId"
+      :branch-path-index="branchPathIndex"
+      :branch-path-content="branchPathContent"
       @addToList="addToListEventHandler"
       @progressReset="resetProgressEventHandler"
     />
@@ -470,6 +471,15 @@ export default {
         type: Boolean,
         default: () => true,
     },
+    //Branch Paths
+    branchPathIndex: {
+      type: Number,
+      default: () => 0,
+    },
+    branchPathContent: {
+      type: Object,
+      default: () => ({}),
+    }
   },
   data() {
     return {

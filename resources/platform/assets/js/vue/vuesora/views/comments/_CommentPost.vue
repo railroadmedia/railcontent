@@ -4,7 +4,7 @@
         class="tw-flex tw-flex-row comment-post pv mb-1"
         :class="{'pinned': pinned}"
     >
-        <div class="tw-flex tw-tw-flex-col avatar-column tw-pr">
+        <div class="tw-flex tw-flex-col avatar-column tw-pr">
             <div
                 v-if="hasPublicProfiles"
                 class="user-avatar smaller"
@@ -42,9 +42,9 @@
                 {{ userExpValue }} XP
             </p>
         </div>
-        <div class="tw-flex tw-tw-flex-col tw-flex-grow">
+        <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
-                <div class="tw-flex tw-tw-flex-col tw-flex-grow tw-mr-1">
+                <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
                     <h2 class="body tw-font-bold break-words">
                         <a
                             v-if="hasPublicProfiles"
@@ -67,7 +67,7 @@
                     </h2>
                 </div>
 
-                <div class="tw-flex tw-tw-flex-col tw-items-center tw-justify-center tw-flex-auto">
+                <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-flex-auto">
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
@@ -91,14 +91,14 @@
 
             <div class="tw-flex tw-flex-row body tw-mb-1">
                 <div
-                    class="tw-flex tw-tw-flex-col post-body tw-flex-grow"
+                    class="tw-flex tw-flex-col post-body tw-flex-grow"
                     v-html="comment.comment"
                 >
                 </div>
             </div>
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-tw-flex-col tw-mb-1">
+                <div class="tw-flex tw-flex-col tw-mb-1">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
                             class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
@@ -150,13 +150,13 @@
                     v-if="replying"
                     class="tw-flex tw-flex-row comment-post mv-2"
                 >
-                    <div class="tw-flex tw-tw-flex-col avatar-column pr hide-xs-only">
+                    <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
                         <img
                             :src="currentUser.avatar"
                             class="rounded"
                         >
                     </div>
-                    <div class="tw-flex tw-tw-flex-col">
+                    <div class="tw-flex tw-flex-col">
                         <div class="tw-flex tw-flex-row">
                             <text-editor
                                 ref="textEditor"
@@ -410,11 +410,13 @@ export default {
         },
     },
     mounted() {
+        /*
         this.$root.$on('replyOpened', (payload) => {
             if (this.comment.id !== payload.id) {
                 this.replying = false;
             }
         });
+        */
     },
     methods: {
         replyToComment() {

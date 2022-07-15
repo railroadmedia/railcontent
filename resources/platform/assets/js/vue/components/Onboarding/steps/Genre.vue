@@ -114,7 +114,7 @@ function goBack() {
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >
-      <SkipStep
+      <SkipStep :brand="brand"
         classOverride="tw-mt-[20px] md:tw-mt-0"
       />
     </div>

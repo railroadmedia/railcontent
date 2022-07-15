@@ -13,10 +13,9 @@
       hover:tw-bg-[#E7EFF6]
       dark:hover:tw-bg-[#002039]
     "
-    :class="class_object"
+    :class="[class_object, isBranchPath ? [branchPathBG, branchPathText]: 'hover-bg-grey-7 hover-text-black']"
     :href="renderLink ? item.url : false"
   >
-
     <!-- LESSON NUMBERS -->
     <div
       v-if="showNumbers"
@@ -115,6 +114,15 @@
 
     <!-- TITLES AND COLUMN DATA (on mobile) -->
     <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column overflow">
+
+      <!-- Is New -->
+      <div v-if="isBranchPath" 
+           class="tw-font-roboto-condensed tw-font-bold tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-pianote tw-p-1 tw-rounded"
+           style="width: fit-content;"
+      >
+           New Method Path
+      </div>
+
       <p
         v-if="brand !== 'guitareo' && !isCoach"
         class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
@@ -172,7 +180,7 @@
       v-if="mappedData.sheet_music && !is_search"
       class="flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
     >
-      <img :src="mappedData.sheet_music" />
+      <img class="dark:tw-invert" :src="mappedData.sheet_music" />
     </div>
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
@@ -235,6 +243,7 @@
       <div v-if="resetProgress" class="body">
         <i
           class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black reset"
+          :class="isBranchPath ? branchPathText: 'text-grey-2 hover-text-black'"
           title="Reset Progress"
           @click.stop.prevent="progressReset"
         ></i>
@@ -242,7 +251,9 @@
       <div v-else class="body">
         <i
           class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black tw-transform-g"
-          :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]'"
+          :class="[is_added ? 'is-added tw-rotate-45' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]', 
+                   isBranchPath ? branchPathText: 'text-grey-2 hover-text-black' 
+                  ]"
           :title="is_added ? 'Remove from My List' : 'Add to My List'"
           @click.stop.prevent="addToList"
         ></i>
@@ -259,10 +270,12 @@
       class="flex tw-flex-col icon-col tw-justify-center"
       :class="is_search || overview ? 'hide-xs-only' : ''"
     >
+    
       <!-- LOCK ICON OR ADD TO CALENDAR -->
       <div
         v-if="noAccess"
-        class="body tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black"
+        class="body"
+        :class="isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black'"
         title="Add to Calendar"
         data-open-modal="addToCalendarModal"
         @click="addEvent"
@@ -286,13 +299,11 @@
 
         <i
           v-else
-          class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black rounded"
-          :class="
-            ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(
-              item.type
-            ) !== -1
-              ? 'fa-arrow-circle-right'
-              : 'fa-play-circle'
+          class="fas flex-center rounded"
+          :class="[
+            ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle',
+              isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black'
+            ]
           "
         ></i>
       </div>
@@ -311,6 +322,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    isBranchPath: {
+      type: Boolean,
+      default: () => false,
+    }
   },
   computed: {
     mappedData() {

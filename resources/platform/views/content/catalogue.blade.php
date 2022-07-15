@@ -37,7 +37,7 @@
     @component('partials._header-banner',
         ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',])
         @slot('content')
-            <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
+            <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     @if($catalogueMeta['name'] == 'Q&A')
                         <musora-icon icon-name="light-bulb-filled"
@@ -199,7 +199,7 @@
         </div>
     @endif
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
+    {{-- <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
         <div class="tw-flex tw-flex-col mt-3">
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                 <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">
@@ -222,7 +222,7 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent)
         && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
@@ -249,15 +249,15 @@
             ></add-event-modal>
         </div>
     @else
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-4 dark:tw-text-white">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="tw-flex tw-flex-col mt-3">
                 <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
-                    <div class="tw-flex tw-flex-col tw-mb-3">
-                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
+                    <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
+                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                     </div>
                     @if($catalogueMeta['name'] !== "Songs" &&
                         !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
-                        <div class="tw-flex tw-flex-col tw-ml-auto">
+                        <div class="tw-flex tw-flex-col">
                             <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
                                 <i class="fas fa-calendar-plus mr-1"></i>
                                 Subscribe to Calendar
@@ -279,47 +279,47 @@
         <transition appear name="fade">
             <content-catalogue
                 dusk="content-catalogue"
-                @if($lessonType === 'routine')
-                catalogue-type="routines"
-                :infinite-scroll="false"
-                :paginate="true"
-                limit="12"
-                @else
-                catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
-                :infinite-scroll="true"
-                limit="20"
-                @endif
                 brand="{{ $brand }}"
                 theme-color="{{ $brand }}"
+                user-id="{{ auth()->id() }}"
+                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
+                catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
                 :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-                @if($lessonType === 'quick-tips')
-                :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
-                @else
-                :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : [$lessonType] ) }}"
-                @endif
                 :use-theme-color="true"
                 :pre-loaded-content="{{ $listLessons }}"
-                user-id="{{ auth()->id() }}"
                 :is-admin="{{ json_encode(user()->isAdmin()) }}"
                 :statuses="{{ json_encode(user()->isAdmin() ? ['published', 'draft'] : ['published']) }}"
                 :use-url-params="true"
-                @if($lessonType === 'student-review' || !empty($isAllContent))
-                :force-wide-thumbs="true"
-                @endif
-                @if(!empty($isAllContent))
-                :search-bar="true"
-                search-endpoint="/railcontent/search"
-                total-results="{{ $totalResults }}"
-                @endif
-                @if(!empty($sortOverride))
-                sort-override="{{ $sortOverride }}"
-                @endif
-                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
                 :lock-unowned="true"
                 :show-loading-animation="true"
-                catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
                 no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
                     that match those filters. Please remove some filters."
+                @if($lessonType === 'routine')
+                    catalogue-type="routines"
+                    :infinite-scroll="false"
+                    :paginate="true"
+                    limit="12"
+                @else
+                    catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
+                    :infinite-scroll="true"
+                    limit="20"
+                @endif
+                @if($lessonType === 'quick-tips')
+                    :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
+                @else
+                    :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : [$lessonType] ) }}"
+                @endif
+                @if($lessonType === 'student-review' || !empty($isAllContent))
+                    :force-wide-thumbs="true"
+                @endif
+                @if(!empty($isAllContent))
+                    :search-bar="true"
+                    search-endpoint="/railcontent/search"
+                    total-results="{{ $totalResults }}"
+                @endif
+                @if(!empty($sortOverride))
+                    sort-override="{{ $sortOverride }}"
+                @endif
             >
                 @include('partials.bladesora.members.skeletons.catalog-filters', [
                     "length" => count($catalogueMeta['allowableFilters']),

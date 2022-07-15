@@ -3,6 +3,7 @@
 namespace App\Decorators\Comments;
 
 use App\Decorators\Content\ModeDecoratorBase;
+use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Support\Collection;
 
@@ -13,6 +14,10 @@ class CommentUserDecorator extends ModeDecoratorBase
         $userIds = [];
 
         foreach ($comments as $commentIndex => $comment) {
+            $comment['created_on_diff'] =
+                Carbon::parse($comment['created_on'])
+                    ->diffForHumans();
+
             $userIds[] = $comment['user_id'];
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
@@ -55,6 +60,10 @@ class CommentUserDecorator extends ModeDecoratorBase
             $comments[$commentIndex]['user']['xp_level'] = $commentAuthor->getMethodLevel();
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
+                $comments[$commentIndex]['replies'][$replyIndex]['created_on_diff'] =
+                    Carbon::parse($reply['created_on'])
+                        ->diffForHumans();
+
                 if (!isset($keyedUsers[$reply['user_id']])) {
                     continue;
                 }
