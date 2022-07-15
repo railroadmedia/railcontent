@@ -1023,6 +1023,28 @@ class ContentPagesController extends BaseController
     }
 
     /**
+     * @return ContentFilterResultsEntity
+     */
+    private function getUsersStartedRoutinesContent()
+    {
+        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            ['routine'],
+            user()->id,
+            'started',
+            4
+        );
+
+        $totalResults = $this->contentService->countByTypesUserProgressState(
+            ['routine'],
+            user()->id,
+            'started'
+        );
+
+        return new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]);
+    }
+
+
+    /**
      * @param Request $request
      * @param $contentId
      * @return RedirectResponse
