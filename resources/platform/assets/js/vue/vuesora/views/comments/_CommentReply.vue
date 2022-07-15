@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-row comment-post pv mv-1">
-        <div class="tw-flex tw-flex-col avatar-column pr">
+        <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
                 class="user-avatar smaller"
@@ -15,14 +15,14 @@
                         src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="comment.user['fields.profile_picture_image_url']"
                         data-ix-fade
-                        class="tw-rounded"
+                        class="tw-rounded-full"
                     >
                 </a>
             </div>
             <img
                 v-if="!hasPublicProfiles"
                 :src="comment.user['fields.profile_picture_image_url']"
-                class="tw-rounded"
+                class="tw-rounded-full"
             >
 
             <p
@@ -98,7 +98,7 @@
                         >
                             <i class="fas fa-reply"></i>
                             <span class="hide-xs-only">
-                                {{ replying ? 'Replying' : 'Reply' }}
+                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
                             </span>
                         </p>
 
@@ -110,7 +110,7 @@
                         >
                             <i class="fas fa-thumbs-up"></i>
                             <span class="hide-xs-only">
-                                {{ comment.is_liked ? 'Liked' : 'Like' }}
+                                &nbsp;{{ comment.is_liked ? 'Liked' : 'Like' }}&nbsp;
                             </span>
                         </p>
 
@@ -135,7 +135,7 @@
                     v-if="replying"
                     class="tw-flex tw-flex-row comment-post mv-2"
                 >
-                    <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
+                    <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
                         <img
                             :src="currentUser.avatar"
                             class="rounded"

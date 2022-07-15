@@ -247,7 +247,7 @@
                         user-name="{{ user()->display_name }}"
                         user-avatar="{{ user()->profile_picture_url }}"
                         user-xp="0"
-                        user-access-level="member"
+                        user-access-level="lifetime"
                         profile-base-route="/members/profile/"
                         :is-admin="false">
                     </comments> 
