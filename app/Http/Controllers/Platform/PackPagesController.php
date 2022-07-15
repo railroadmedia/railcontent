@@ -205,6 +205,25 @@ class PackPagesController extends Controller
 
         $nextLessonUrl = '';
 
+        $songsPdfs = null;
+        $songsPdfsType = 'song-pdf';
+
+        if ($packSlug == '500-songs-in-5-days') {
+
+            $songsPdfs = $this->contentService->getFiltered(
+                $request->get('page', 1),
+                $request->get('limit', 10),
+                'slug',
+                [$songsPdfsType],
+                $request->get('slug_hierarchy', []),
+                $request->get('required_parent_ids', []),
+                $request->get('required_fields', []),
+                $request->get('included_fields', []),
+                $request->get('required_user_states', []),
+                $request->get('included_user_states', [])
+            )->toResponseRawJson();
+        }
+
         return view(
             'content.overview',
             [
@@ -216,6 +235,7 @@ class PackPagesController extends Controller
                 "xpBonus" => $xpBonus,
                 "themeColor" => "pack",
                 'nextLessonUrl' => $pack->fetch('next_lesson_url'),
+                "songsPdfs" => $songsPdfs,
             ]
         );
     }

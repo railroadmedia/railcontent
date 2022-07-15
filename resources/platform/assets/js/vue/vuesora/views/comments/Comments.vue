@@ -44,7 +44,7 @@
             id="postComment"
             class="tw-flex tw-flex-row comment-post mv-3"
         >
-            <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
+            <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
@@ -53,7 +53,7 @@
                         src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="currentUser.avatar"
                         data-ix-fade
-                        class="tw-rounded"
+                        class="tw-rounded-full"
                     >
                 </div>
 
@@ -258,6 +258,7 @@ export default {
         this.getComments(this.requestParams);
     },
     mounted() {
+        console.log(this.comments)
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
         // Run the goToComment method if it does
@@ -305,6 +306,8 @@ export default {
                         if (window.ImgixService) {
                             window.ImgixService.reloadCommentImages();
                         }
+
+                        console.log('on service', this.comments[0])
 
                         setTimeout(() => {
                             // Load the Imgix Service to load srcs and srcsets
