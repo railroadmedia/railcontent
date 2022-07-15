@@ -1034,6 +1034,19 @@ return [
                 'is_added_to_primary_playlist',
                 'progress_percent',
             ],
+            'lessons' => [
+                'id',
+                'type',
+                'published_on',
+                'started',
+                'completed',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'fields.video.fields.length_in_seconds',
+                'data.thumbnail_url',
+                'mobile_app_url',
+            ],
         ],
 
         'learning-path-course' => [
