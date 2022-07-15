@@ -188,6 +188,8 @@
       :destroy-on-list-removal="destroyOnListRemoval"
       :compact-layout="compactLayout"
       :subscription-calendar-id="subscriptionCalendarId"
+      :branch-path-index="branchPathIndex"
+      :branch-path-content="branchPathContent"
       @addToList="addToListEventHandler"
       @progressReset="resetProgressEventHandler"
     />
@@ -469,6 +471,15 @@ export default {
         type: Boolean,
         default: () => true,
     },
+    //Branch Paths
+    branchPathIndex: {
+      type: Number,
+      default: () => 0,
+    },
+    branchPathContent: {
+      type: Object,
+      default: () => ({}),
+    }
   },
   data() {
     return {
