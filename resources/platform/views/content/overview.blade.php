@@ -38,21 +38,7 @@
 
     @if($parentContent->fetch('type') === 'learning-path')
         @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
-    @else
-        {{-- @component('partials.bladesora.members.partials._overview-header', [
-                "themeColor" => $brand,
-                "pageTitle" => $parentContent->fetch('fields.title'),
-                "overviewType" => $parentContent->fetch('type') == 'learning-path' ? ucwords(brand()) : $parentContent->fetch('type'),
-                "difficulty" => $parentContent->fetch('difficulty'),
-                "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
-                "avatarImage" => $parentContent->fetch('fields.instructor.data.head_shot_picture_url'),
-                "pageDescription" => $parentContent->fetch('data.description'),
-            ])
-            @slot('interactionSlot')
-
-            @endslot
-        @endcomponent --}}
-        
+    @else        
         {{-- Overview Headers --}}
         @if($parentContent->fetch('type') === 'pack-bundle')
             @include('partials.content.overview-headers._pack-bundle')
@@ -64,6 +50,7 @@
             @include('partials.content.overview-headers._default')
         @endif
 
+        {{-- Level SubHeader --}}
         @include('partials.bladesora.members.content.content-info-subheader', [
             "brand" => $brand,
             "infoData" => $infoData,
@@ -77,7 +64,39 @@
         ])
     @endif
 
+    {{-- New Method Path? --}}
+    @if( !empty($classicalMethodPack) && $classicalMethodPack['published_on'] < \Carbon\Carbon::now() ) {{-- Check for Branch Path Content --}}
+        <div class="tw-text-white tw-flex tw-bg-[#232323] dark:tw-bg-[#000C17]">
+            <div class="container mv-3 tw-flex tw-items-center tw-flex-col lg:tw-flex-row">
+                <div class="lg:tw-mr-12 tw-flex-col tw-flex tw-items-center lg:tw-items-start">
+                    {{-- Label --}}
+                    <div class="tw-font-roboto-condensed tw-font-bold tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-{{ $brand }} tw-p-1 tw-rounded"
+                        style="width: fit-content;"
+                    >
+                        New Method Path
+                    </div>
+                    {{-- Content --}}
+                    <h3 class="tw-mb-2 tw-font-bold tw-text-2xl">
+                        Classical Piano Method Available Now!
+                    </h3>
+                    <p class="tw-text-base tw-text-center lg:tw-text-left">
+                        If you would like to explore the world of Classical Piano, the Classical Method is an excellent introduction to a range of classical styles, techniques, and theories.
+                    </p>
+                </div>
+                <div class="tw-flex-shrink-0">
+                    {{-- Scroll to Section --}}
+                    <a href="#branch-paths" class="tw-uppercase tw-text-white tw-font-bold tw-text-sm tw-no-underline tw-font-roboto-condensed tw-block tw-mt-4">
+                        Start Learning Now
+                        <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.0834 5.83764L6.00008 9.92097L1.91675 5.83764M10.0834 1.17098L6.00008 5.25431L1.91675 1.17097" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
 
+    {{-- Content Progress --}}
     <div class="tw-w-full fluid tw-bg-{{ $brand }}">
         @include('partials.bladesora.members.content.content-progress', [
             "themeColor" => $brand,
@@ -122,6 +141,11 @@
                             :show-numbers="true"
                             :force-wide-thumbs="false"
                         @endif
+                        {{-- New learning Paths? --}}
+                        @if(!empty($classicalMethodPackJson)) {{-- Check for Branch Path Content --}}
+                            :branch-path-index="4" {{-- Where does the branched content begin? (0 based) --}}
+                            :branch-path-content="{{ $classicalMethodPackJson }}"
+                        @endif
                     >
                         @for($i = 0; $i < 10; $i++)
                             @include('partials.bladesora.members.skeletons.list-item', [
@@ -141,137 +165,28 @@
                     "themeColor" => $brand
                 ])
             @endif
+
+            {{-- Pianote Foundations --}}
+            @if($parentContent['slug'] == 'pianote-method')
+                <a href="/pianote/method/foundations-2019/215952"
+                class="flex flex-row no-decoration hover-bg-grey-7 dark:hover:tw-bg-[#002039] tw-relative text-grey-3 hover-text-black content-overview pv-2">
+
+                    <div class="flex flex-column">
+                        <p class="tw-text-black dark:tw-text-white tw-text-2xl tw-font-bold tw-mt-[5px]">Pianote Foundations</p>
+                    </div>
+
+                    <div class="tw-text-black dark:tw-text-white tw-text-2xl tw-font-bold tw-flex tw-flex-col tw-justify-center tw-text-center hide-sm-down tw-mr-2">
+                        10 Levels
+                    </div>
+
+                    <div class="flex flex-column icon-col align-v-center hide-xs-only">
+                        <div class="body">
+                            <i class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black rounded fa-play-circle"></i>
+                        </div>
+                    </div>
+                </a>
+            @endif
         </div>
     </div>
 
 @endsection
-
-
-
-{{-- 
----------------------------------------------------------------------------------------------------
-
-@section('content')
-    @if($parentContent->fetch('type') === 'pack-bundle')
-        @include('members.content.partials.overview-headers._pack-bundle')
-    @elseif($parentContent->fetch('type') === 'learning-path')
-        @include('members.content.partials.overview-headers._learning-path')
-    @elseif($parentContent->fetch('type') === 'learning-path-level')
-        @include('members.content.partials.overview-headers._learning-path-level')
-    @elseif($parentContent->fetch('type') === 'learning-path-course')
-        @include('members.content.partials.overview-headers._learning-path-course')
-    @else
-        @include('members.content.partials.overview-headers._default')
-    @endif
-
-    @if($parentContent->fetch('type') !== 'learning-path')
-        @include('bladesora::members.content.content-info-subheader', [
-            "brand" => "drumeo",
-            "infoData" => $infoData,
-            "contentId" => $parentContent->fetch('id'),
-            "contentType" => $parentContent->fetch('type'),
-            "resetProgress" => $parentContent->fetch('progress_state', false) !== false,
-            "instructorInfo" => false,
-            "addToList" => !in_array($parentContent->fetch('type'), ['learning-path', 'pack-bundle']),
-            "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
-        ])
-
-        @if(!empty($parentContent->fetch('*fields.instructor')) || !empty($parentContent->fetch('data.description')))
-            @include('bladesora::members.content._content-info', [
-                "instructors" => $parentContent->fetch('*fields.instructor'),
-                "contentDescription" => $parentContent->fetch('data.description'),
-            ])
-        @endif
-    @endif
-
-    <div
-        class="container fluid bg-drumeo"
-    >
-        @if($parentContent['slug'] == 'drumeo-method' && $parentContent->fetch('completed'))
-            <div class="flex flex-column left-column align-v-center align-center pt-2">
-                <h3 class="display text-white nowrap">
-                    Congratulations!
-                </h3>
-                <p class="body text-white">
-                    Email us about your experience <a class="text-white" href="/support">here</a>
-                    and we'll send you a free pair of sticks!
-                </p>
-            </div>
-            @include('bladesora::members.content.content-progress', [
-                "brand" => "drumeo",
-                "themeColor" => 'drumeo',
-                "contentType" => $parentContent->fetch('type'),
-                "progress" => $parentContent->fetch('progress_percent'),
-                "nextLessonUrl" => $nextLessonUrl ?? '/',
-                "xpAmount" => $xpAmount ?? $parentContent->fetch('xp'),
-                "showCompleteButton" => false,
-                "contentId" => $parentContent->fetch('id'),
-                "labelText" => 'COMPLETE!',
-                "isCompleted" => $parentContent->fetch('completed'),
-                "isStarted" => $parentContent->fetch('started'),
-            ])
-        @else
-            @include('bladesora::members.content.content-progress', [
-                "brand" => "drumeo",
-                "themeColor" => 'drumeo',
-                "contentType" => $parentContent->fetch('type'),
-                "progress" => $parentContent->fetch('progress_percent'),
-                "nextLessonUrl" => $nextLessonUrl ?? '/',
-                "xpAmount" => $xpAmount ?? $parentContent->fetch('xp'),
-                "showCompleteButton" => false,
-                "contentId" => $parentContent->fetch('id'),
-                "labelText" => $progressLabelText ?? null,
-                "isCompleted" => $parentContent->fetch('completed'),
-                "isStarted" => $parentContent->fetch('started'),
-            ])
-        @endif
-
-    </div>
-
-    @if(($showNextLearningPathLesson ?? true) && !empty($nextLearningPathLesson) && $parentContent->fetch('started') === true)
-        @include('members.home.partials._next-learning-path-lesson', [
-            "nextDrumeoMethodLesson" => $nextLearningPathLesson,
-            "showLogo" => false,
-        ])
-    @endif
-
-    <div class="container mt-2 mb-3">
-        <div class="flex flex-column">
-            <div class="flex flex-row">
-                <transition appear name="fade">
-                    <content-catalogue
-                        catalogue-type="list"
-                        theme-color="drumeo"
-                        :pre-loaded-content="{{ $childContent }}"
-                        @if($parentContent['type'] === 'learning-path'
-                            || $parentContent['type'] === 'learning-path-level')
-                        :display-items-as-overview="true"
-                        @endif
-                        @if($parentContent['type'] !== 'learning-path')
-                        :show-numbers="true"
-                        @endif
-                        :lock-unowned="true"
-                        data-user-id="{{ auth()->id() }}"
-                        :is-admin="{{ json_encode(\App\Services\User\UserAccessService::isAdministrator(auth()->id())) }}"
-                    >
-                        @for($i = 0; $i < 10; $i++)
-                            @include('bladesora::members.skeletons.list-item', [
-                                "overview" => $parentContent['type'] === 'learning-path'
-                                    || $parentContent['type'] === 'learning-path-level',
-                                "showNumbers" => $parentContent['type'] !== 'learning-path',
-                                "thumbnailType" => $parentContent['type'] === 'learning-path' ? 'square' : 'widescreen'
-                            ])
-                        @endfor
-                    </content-catalogue>
-                </transition>
-            </div>
-
-            @include('bladesora::members.partials._completion-bonus', [
-                "xpBonus" => $xpBonus,
-                "isComplete" => $parentContent->fetch('progress_percent', 0) === 100,
-                "themeColor" => 'drumeo'
-            ])
-        </div>
-    </div>
-@endsection
- --}}
