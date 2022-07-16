@@ -195,9 +195,9 @@
 
     {{-- for guitareo 500 songs special page --}}
     @if(!empty($songsPdfs))
-        <div class="container mv-3">
-            <div class="flex flex-column bg-white corners-10">
-                <div class="flex flex-row bb-grey-1-1">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
+            <div class="flex flex-column">
+                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
                     <content-catalogue
                             catalogue-type="downloads"
                             theme-color="guitareo"
