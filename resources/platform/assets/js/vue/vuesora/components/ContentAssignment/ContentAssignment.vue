@@ -598,14 +598,12 @@ export default {
 
 #practiceOverlay {
     position: fixed;
-    top: 50px;
+    top: 58px;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 97;
-    @include medium {
-        top: 56px;
-    }
+    z-index: 100;
+
     .loading-exercise {
         position: absolute;
         top: 50%;

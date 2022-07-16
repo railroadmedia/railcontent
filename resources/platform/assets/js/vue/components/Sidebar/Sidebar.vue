@@ -46,8 +46,8 @@ export default {
       let windowPathArray = window.location.pathname.split('/');
       let pathArray = path.split('/');
 
-      console.log(windowPathArray);
-      console.log(pathArray);
+      // console.log(windowPathArray);
+      // console.log(pathArray);
 
       // special case for guitareo 500 songs
       if (windowPathArray[3] === '500-songs-in-5-days') {

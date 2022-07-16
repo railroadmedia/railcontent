@@ -26,17 +26,14 @@
 
 {{-- Content --}}
 @section('content')
-
-    <!-- PACKS SECTION-->
-    <div class="container mv-3">
-        <div class="flex flex-row mb-3 ph-1">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <!-- PACKS SECTION-->
+        <div class="flex flex-row mb-3">
             <div class="flex flex-column grow">
-                <div class="flex flex-row align-v-center pv-2">
-                    <i class="fas fa-guitar-electric tw-text-guitareo tw-text-2xl mr-1"></i>
-
+                <div class="flex flex-row align-v-center">
                     <a href="{{ url()->route('platform.packs') }}"
-                       aria-label="See All Lesson Packs Lessons"
-                       class="text-black no-decoration heading capitalize grow">
+                        aria-label="See All Lesson Packs Lessons"
+                        class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">
                         Lesson Packs
                     </a>
                 </div>
@@ -50,10 +47,8 @@
             'lessonsUrl' => $guitarQuestPack->fetch('url'),
             'itemProgress' => $guitarQuestPack->fetch('progress_state'),
         ])
-    </div>
 
-    <div class="container mb-3">
-        <div class="flex flex-row flex-wrap bg-white corners-10">
+        <div class="flex flex-row flex-wrap">
             @foreach($packs as $pack)
                 @include('partials.content._lessons-pack', [
                     'themeColor' => 'guitareo',
@@ -67,19 +62,15 @@
                 ])
             @endforeach
         </div>
-    </div>
 
-    <div class="container">
-        <div class="flex flex-column bg-white corners-10 mv-3 ph-1">
+        <div class="flex flex-column mv-3 ph-1">
             <!-- COURSES SECTION-->
             <div class="flex flex-row mb-3">
                 <div class="flex flex-column grow">
                     <div class="flex flex-row align-v-center pv-2">
-                        <i class="fas icon-courses tw-text-guitareo tw-text-2xl mr-1"></i>
-
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}"
-                           aria-label="See All Courses Lessons"
-                           class="text-black no-decoration heading capitalize grow">
+                            aria-label="See All Courses Lessons"
+                            class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">
                             Courses
                         </a>
 
@@ -122,13 +113,9 @@
             <div class="flex flex-row mb-3">
                 <div class="flex flex-column grow">
                     <div class="flex flex-row align-v-center pv-2">
-                        <svg width="28" height="28" class="mr-1" aria-hidden="true" focusable="false">
-                            <use xlink:href="#quick-tips-guitareo"></use>
-                        </svg>
-
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}"
-                           aria-label="See All Courses Lessons"
-                           class="text-black no-decoration heading capitalize grow">
+                        aria-label="See All Courses Lessons"
+                        class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">
                             Quick Tips
                         </a>
 
@@ -167,19 +154,13 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- TOPICS SECTION-->
-    <div class="container">
-        <div class="flex flex-column bg-white corners-10 mv-3">
+        <!-- TOPICS SECTION-->
+        <div class="flex flex-column mv-3">
             <div class="flex flex-row">
                 <div class="flex flex-column grow">
                     <div class="flex flex-row align-v-center pv-2 ph-1">
-                        <svg width="28" height="28" class="mr-1" aria-hidden="true" focusable="false">
-                            <use xlink:href="#quick-tips-guitareo"></use>
-                        </svg>
-
-                        <span class="text-black no-decoration heading capitalize grow">Topics</span>
+                        <span class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">Topics</span>
                     </div>
 
                     <div class="flex flex-row flex-wrap">
@@ -195,39 +176,37 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    @if(!empty($legacyPacks))
-    <!-- LEGACY PACKS SECTION-->
-    <div class="container mv-3">
-        <div class="flex flex-row mb-3 ph-1">
-            <div class="flex flex-column grow">
-                <div class="flex flex-row align-v-center pv-2">
-                    <i class="fas fa-guitar-electric tw-text-guitareo tw-text-2xl mr-1"></i>
+        @if(!empty($legacyPacks))
+            <!-- LEGACY PACKS SECTION-->
+            <div class="flex flex-row mb-3 ph-1">
+                <div class="flex flex-column grow">
+                    <div class="flex flex-row align-v-center pv-2">
+                        <i class="fas fa-guitar-electric tw-text-guitareo tw-text-2xl mr-1"></i>
 
-                    <a href="{{ url()->route('members.packs') }}"
-                       aria-label="See All Lesson Packs Lessons"
-                       class="text-black no-decoration heading capitalize grow">
-                        Legacy Packs
-                    </a>
+                        <a href="{{ url()->route('members.packs') }}"
+                        aria-label="See All Lesson Packs Lessons"
+                        class="text-black no-decoration heading capitalize grow">
+                            Legacy Packs
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex flex-row flex-wrap bg-white corners-10">
-            @foreach($legacyPacks as $pack)
-                @include('members.partials._lessons-pack', [
-                    'themeColor' => 'guitareo',
-                    'itemThumbnail' => $pack->fetch('data.thumbnail_url'),
-                    'itemTitle' => $pack->fetch('fields.title'),
-                    'lessonsUrl' => $pack->fetch('url'),
-                    'logoImage' => $pack->fetch('data.logo_image_url'),
-                    'nextItemUrl' => $pack->fetch('next_lesson_url'),
-                    'lessonsUrl' => $pack->fetch('url'),
-                    'itemProgress' => $pack->fetch('progress_state'),
-                ])
-            @endforeach
-        </div>
+            <div class="flex flex-row flex-wrap">
+                @foreach($legacyPacks as $pack)
+                    @include('members.partials._lessons-pack', [
+                        'themeColor' => 'guitareo',
+                        'itemThumbnail' => $pack->fetch('data.thumbnail_url'),
+                        'itemTitle' => $pack->fetch('fields.title'),
+                        'lessonsUrl' => $pack->fetch('url'),
+                        'logoImage' => $pack->fetch('data.logo_image_url'),
+                        'nextItemUrl' => $pack->fetch('next_lesson_url'),
+                        'lessonsUrl' => $pack->fetch('url'),
+                        'itemProgress' => $pack->fetch('progress_state'),
+                    ])
+                @endforeach
+            </div>
+        @endif
     </div>
-    @endif
 @endsection
