@@ -58,8 +58,8 @@
             </div>
         </div>
         <div class="tw-flex tw-flex-col mv-3">
-            <div class="tw-flex tw-flex-row pv-3 ph">
-                <h1 class="heading">Upcoming Lessons</h1>
+            <div class="tw-flex tw-flex-row mb-3 ph">
+                <h1 class="heading dark:tw-text-white">Upcoming Lessons</h1>
             </div>
 
             <div class="tw-flex tw-flex-row">

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-row content-table-row scheduled bt-grey-1-1 pa-1"
+        class="flex flex-row content-table-row scheduled pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
         :class="month"
     >
         <div class="month-col body text-white bg-grey-2">
@@ -33,7 +33,7 @@
                 {{ mappedData.color_title }}
             </p>
 
-            <p class="tiny text-black font-bold item-title">
+            <p class="tw-text-sm tw-text-black dark:tw-text-white tw-font-bold item-title">
                 {{ mappedData.black_title }}
             </p>
 
