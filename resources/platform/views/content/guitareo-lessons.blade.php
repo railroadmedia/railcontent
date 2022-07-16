@@ -28,7 +28,7 @@
 @section('content')
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
         <!-- PACKS SECTION-->
-        <div class="flex flex-row mb-3">
+        <div class="flex flex-row tw-mt-8 tw-mb-3">
             <div class="flex flex-column grow">
                 <div class="flex flex-row align-v-center">
                     <a href="{{ url()->route('platform.packs') }}"
@@ -67,17 +67,12 @@
             <!-- COURSES SECTION-->
             <div class="flex flex-row mb-3">
                 <div class="flex flex-column grow">
-                    <div class="flex flex-row align-v-center pv-2">
-                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}"
-                            aria-label="See All Courses Lessons"
-                            class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">
-                            Courses
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Courses</h2>
                         </a>
-
-                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}"
-                            aria-label="See All Courses Lessons"
-                            class="tw-text-guitareo tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
-                            See All
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" aria-label="See All New Lessons" class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"> 
+                            See All 
                         </a>
                     </div>
 
@@ -112,17 +107,12 @@
             <!-- QUICK TIPS SECTION-->
             <div class="flex flex-row mb-3">
                 <div class="flex flex-column grow">
-                    <div class="flex flex-row align-v-center pv-2">
-                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}"
-                        aria-label="See All Courses Lessons"
-                        class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">
-                            Quick Tips
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Quick Tips</h2>
                         </a>
-
-                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}"
-                            aria-label="See All Courses Lessons"
-                            class="tw-text-guitareo tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
-                            See All
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" aria-label="See All New Lessons" class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"> 
+                            See All 
                         </a>
                     </div>
 
@@ -159,17 +149,18 @@
         <div class="flex flex-column mv-3">
             <div class="flex flex-row">
                 <div class="flex flex-column grow">
-                    <div class="flex flex-row align-v-center pv-2 ph-1">
-                        <span class="tw-font-bold dark:tw-text-white tw-text-2xl lg:tw-text-3xl">Topics</span>
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        <h2 class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Topics</h2>
                     </div>
 
-                    <div class="flex flex-row flex-wrap">
+                    <div class="tw-grid tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-x-4 tw-gap-y-2">
                         @foreach($topics as $topic)
-                            <div class="lessons-topics-card flex flex-row">
-                                <a
-                                    href="{{ $topic['url'] }}"
-                                    class="flex flex-column align-h-center ma-1 pv-3 font-no-underline tw-border-3 tw-border-solid tw-border-gray-100 tw-rounded-lg tw-transition-all hover:tw-bg-gray-100"
-                                ><h3 class="title font-bold text-black">{{ $topic['topic'] }}</h3></a>
+                            <div class="flex flex-row">
+                                <a href="{{ $topic['url'] }}"
+                                   class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center tw-min-h-[103px] tw-p-4 font-no-underline tw-border-2 tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 dark:hover:tw-bg-[#445F74]/20 dark:tw-border-[#7E9AB1] dark:tw-bg-[#445F74]/10 tw-rounded-lg tw-transition-all"
+                                >
+                                    <h3 class="tw-text-2xl font-bold tw-text-black dark:tw-text-white tw-text-center">{{ $topic['topic'] }}</h3>
+                                </a>
                             </div>
                         @endforeach
                     </div>

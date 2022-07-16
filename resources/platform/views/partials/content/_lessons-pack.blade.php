@@ -23,7 +23,7 @@
         <div class="flex flex-column align-h-center mt-1">
             <a
                 href="{{ $nextItemUrl }}"
-                class="btn bg-{{ $themeColor }} text-white collapse-250 go-to-button mt-1"
+                class="tw-btn-primary tw-bg-{{ $brand }}"
             >
 
                 @if($itemProgress === 'started')
@@ -41,7 +41,7 @@
             @if(!empty($lessonsUrl))
                 <a
                     href="{{ $lessonsUrl }}"
-                    class="btn bg-black text-black inverted short collapse-200 mt-1"
+                    class="tw-btn-secondary tw-text-black dark:tw-text-white"
                 >
                     <i class="fas fa-arrow-circle-right mr-1"></i> See Lessons
                 </a>
