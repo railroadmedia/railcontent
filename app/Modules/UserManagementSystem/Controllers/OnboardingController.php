@@ -77,10 +77,10 @@ class OnboardingController extends Controller
      */
     public function experience(Request $request)
     {
-        $request->validate(
+        $request->validate([
+            'experience_level' => 'integer|required|max:3',
             'brand' => 'required',
-            ['experience_level' => 'integer|required|max:3']
-        );
+        ]);
 
         OnboardingExperience::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
         OnboardingExperience::create(
