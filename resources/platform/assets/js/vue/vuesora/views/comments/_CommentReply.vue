@@ -63,7 +63,7 @@
                     </h2>
                 </div>
 
-                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-flex-auto">
+                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-grow-0">
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
@@ -144,9 +144,10 @@
                     <div class="tw-flex tw-flex-col tw-w-full">
                         <div class="tw-flex tw-flex-row tw-w-full">
                             <text-editor
+                                :fieldKey="domID + '-editor'"
                                 ref="textEditor"
                                 v-model="replyInterface"
-                                toolbar="bold italic underline | bullist numlist | link"
+                                @input="handleInput"
                                 :height="150"
                             ></text-editor>
                         </div>
@@ -278,6 +279,7 @@ export default {
             },
             set(val) {
                 this.reply = val;
+                this.$refs.textEditor.contentInterface = this.reply;
             },
         },
 
@@ -343,6 +345,9 @@ export default {
         */
     },
     methods: {
+        handleInput(payload) {
+            this.reply = payload.currentValue;
+        },
         likeComment() {
             this.isLiked = !this.isLiked;
 
@@ -371,12 +376,12 @@ export default {
         },
 
         postReply() {
-            if (this.reply.currentValue) {
+            if (this.reply) {
                 this.loading = true;
 
                 return CommentService.postReply({
                     parent_id: this.parentId,
-                    comment: this.reply.currentValue,
+                    comment: this.reply,
                 })
                     .then((resolved) => {
                         if (resolved) {

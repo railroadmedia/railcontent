@@ -75,8 +75,10 @@
 
             <div class="tw-flex tw-flex-col tw-grow">
                 <text-editor
+                    :fieldKey="contentId + '-comment-text-editor'"
                     ref="textEditor"
                     v-model="commentInterface"
+                    @input="handleInput"
                     :height="150"
                 ></text-editor>
 
@@ -335,12 +337,12 @@ export default {
         },
 
         postComment() {
-            if (this.comment.currentValue) {
+            if (this.comment) {
                 this.loading = true;
 
                 return CommentService.postComment({
                     content_id: this.contentId,
-                    comment: this.comment.currentValue,
+                    comment: this.comment,
                 })
                     .then((resolved) => {
                         if (resolved) {
@@ -369,7 +371,7 @@ export default {
         },
 
         handleInput(payload) {
-            this.commentInterface = payload.currentValue;
+            this.comment = payload.currentValue;
         },
 
         // NOTE: you cannot jump to replies, only top level parent comments
