@@ -39,7 +39,7 @@ if it does not return: show the gear step
 
 when pressing 'next button':
 
-**`POST /user-management-system/onboarding-gear`**
+**`POST /user-management-system/onboarding-gears`**
 
 ```php
 [
