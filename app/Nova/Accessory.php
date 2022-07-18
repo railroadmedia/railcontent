@@ -16,7 +16,7 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -24,6 +24,8 @@ use Whitecube\NovaFlexibleContent\Flexible;
 class Accessory extends Resource
 {
     public static $model = \App\Models\Product::class;
+
+    public static $search = ['name'];
 
     public static function indexQuery(NovaRequest $request, $query)
     {
@@ -54,6 +56,11 @@ class Accessory extends Resource
                 ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('thumbnail')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(is_null($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
             Image::make('Meta Image', 'meta_img')
@@ -65,10 +72,15 @@ class Accessory extends Resource
                 ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('meta_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(is_null($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
-            Currency::make('Price')->hideFromIndex()->required(),
+            Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
@@ -79,7 +91,24 @@ class Accessory extends Resource
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Lifetime Access', 'bundle_lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
-            Flexible::make('Images')
+            Boolean::make('Membership Discount', 'membership_discount')->default(false)->hideFromIndex(),
+            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
+            Markdown::make('Overview')->hideFromIndex(),
+            Image::make('Product Image', 'product_img')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    return $request->file('product_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(is_null($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Flexible::make('Slide Images', 'images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
             Flexible::make('Features/Topics')
@@ -88,6 +117,13 @@ class Accessory extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+        ];
+    }
+
+    public function filters(NovaRequest $request)
+    {
+        return [
+            new \App\Nova\Filters\Brand()
         ];
     }
 }

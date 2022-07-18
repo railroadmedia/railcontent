@@ -27,6 +27,8 @@ class Clothing extends Resource
 {
     public static $model = \App\Models\Product::class;
 
+    public static $search = ['name'];
+
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
@@ -64,6 +66,8 @@ class Clothing extends Resource
                     return $request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
@@ -78,11 +82,13 @@ class Clothing extends Resource
                     return $request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
-            Currency::make('Price')->hideFromIndex()->required(),
+            Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
@@ -93,6 +99,8 @@ class Clothing extends Resource
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Lifetime Access', 'bundle_lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
+            Boolean::make('Membership Discount', 'membership_discount')->default(false)->hideFromIndex(),
+            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
             Flexible::make('Images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
@@ -117,6 +125,13 @@ class Clothing extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+        ];
+    }
+
+    public function filters(NovaRequest $request)
+    {
+        return [
+            new \App\Nova\Filters\Brand()
         ];
     }
 }

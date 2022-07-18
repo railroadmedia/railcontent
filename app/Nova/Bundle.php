@@ -21,6 +21,8 @@ class Bundle extends Resource
 {
     public static $model = \App\Models\Product::class;
 
+    public static $search = ['name'];
+
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
@@ -52,6 +54,22 @@ class Bundle extends Resource
                     return $request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Image::make('Thumbnail Logo', 'thumbnail_logo')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    return $request->file('thumbnail_logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
@@ -66,6 +84,8 @@ class Bundle extends Resource
                     return $request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Image::make('Bundle Image', 'bundle_img')
@@ -78,25 +98,29 @@ class Bundle extends Resource
                     return $request->file('bundle_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Image::make('Logo')
+            Image::make('Page Logo', 'page_logo')
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    return $request->file('logo')->getClientOriginalName();
+                    return $request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
-            Currency::make('Price')->hideFromIndex()->required(),
+            Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Markdown::make('Overview')
@@ -108,6 +132,13 @@ class Bundle extends Resource
             Flexible::make('Products')
                 ->addLayout(BundleLayout::class)
                 ->preset(BundlePreset::class),
+        ];
+    }
+
+    public function filters(NovaRequest $request)
+    {
+        return [
+            new \App\Nova\Filters\Brand()
         ];
     }
 }

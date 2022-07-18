@@ -23,6 +23,8 @@ class Lesson extends Resource
 {
     public static $model = \App\Models\Product::class;
 
+    public static $search = ['name'];
+
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
@@ -50,11 +52,26 @@ class Lesson extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
+            Image::make('Thumbnail Logo', 'thumbnail_logo')
+                ->disk('s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    return $request->file('thumbnail_logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
@@ -69,43 +86,49 @@ class Lesson extends Resource
                     return $request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
-            Currency::make('Price')->hideFromIndex()->required(),
+            Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
-            Image::make('Logo')
+            Image::make('Page Logo', 'page_logo')
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    return $request->file('logo')->getClientOriginalName();
+                    return $request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+//            Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
-            Markdown::make('Overview')
-                ->hideFromIndex(),
+            Markdown::make('Overview')->hideFromIndex(),
             Text::make('Study Text', 'study_text')
                 ->hideFromIndex(),
             Text::make('Instructor Name', 'instructor_name')
                 ->hideFromIndex(),
-            Image::make('Instructor Image', 'instructor_img')
+            Image::make('Instructor Image', 'product_img')
                 ->disk('s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    return $request->file('instructor_img')->getClientOriginalName();
+                    return $request->file('product_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
+                    if(is_null($value)) return null;
+
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Markdown::make('Instructor Description', 'instructor_desc')
@@ -116,6 +139,7 @@ class Lesson extends Resource
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
+            Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Lifetime Access', 'bundle_lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
             Flexible::make('Features/Topics')
@@ -124,6 +148,13 @@ class Lesson extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+        ];
+    }
+
+    public function filters(NovaRequest $request)
+    {
+        return [
+            new \App\Nova\Filters\Brand()
         ];
     }
 }
