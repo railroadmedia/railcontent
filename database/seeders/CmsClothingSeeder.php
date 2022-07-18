@@ -11,7 +11,7 @@ use App\Models\Spec;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CMSClothingSeeder extends Seeder
+class CmsClothingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -122,6 +122,7 @@ class CMSClothingSeeder extends Seeder
                 "badge" => false,
                 "lifeTime" => false,
                 "freeShipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hat-1.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hat-2.jpg",
@@ -556,7 +557,7 @@ class CMSClothingSeeder extends Seeder
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/vintage.jpg",
                 "shortDesc" => "This vintage-styled t-shirt features the view from Cheam Mountain in Canada, where we took a drumkit for a photo-op!",
                 "headerText" => "Vintage Mountain Shirt",
-                "price" => 1,
+                "price" => 25,
                 "discountedPrice" => "",
                 "specialText" => "",
                 "features" => [
@@ -809,7 +810,7 @@ class CMSClothingSeeder extends Seeder
                 "productType" => 5,
                 "name" => "Retro Hoodie",
                 "slug" => "hoodie-retro",
-                "sku" => "ind4000-retro-hoodie-",
+                "sku" => "ind4000-retro-hoodie",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/retro-hoodie.jpg",
                 "metaDesc" => "Stay cozy, comfy, AND colorful in this ultra-soft, vintage style Drumeo hoodie.",
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/retro1.jpg",
@@ -946,6 +947,7 @@ class CMSClothingSeeder extends Seeder
                 "visible" => true,
                 "soldOut" => false,
                 "freeBonus" => false,
+                "freeBonus" => false,
                 "badge" => false,
                 "lifeTime" => false,
                 "freeShipping" => false,
@@ -960,9 +962,705 @@ class CMSClothingSeeder extends Seeder
                     2,3,4,5,6
                 ]
             ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Rainbow Pianote T-Shirt",
+                "slug" => "shirt-rainbow",
+                "sku" => "tshirt-pianote-rainbow",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/rainbow-shirt.jpg",
+                "metaDesc" => "This shirt features a rainbow Pianote logo on a white tee.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/rainbow-1.jpg",
+                "shortDesc" => "This shirt features a rainbow Pianote logo on a white tee.",
+                "headerText" => "Rainbow Pianote T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Show your Pride. This comfortable short-sleeve T-shirt features a rainbow Pianote logo on a white tee."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "52% Cotton, 48% Polyester"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "White"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/rainbow-1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/rainbow-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/rainbow-3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Grand Piano T-Shirt",
+                "slug" => "shirt-grand-piano",
+                "sku" => "tshirt-grand-piano-black",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/black-piano-shirt.jpg",
+                "metaDesc" => "This T-shirt features a stylish grand piano graphic behind the iconic Pianote logo.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-black-piano-2.jpg",
+                "shortDesc" => "This T-shirt features a stylish grand piano graphic behind the iconic Pianote logo. ",
+                "headerText" => "Grand Piano T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Subtle, with a statement. This 100% cotton T-shirt features a stylish grand piano graphic behind the iconic Pianote logo. Simplicity is at the heart of this design."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-black-piano-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-black-piano1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-black-piano-3.jpg",
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Piano FunKeys T-Shirt",
+                "slug" => "shirt-funkeys",
+                "sku" => "tshirt-funkeys",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/funkeys-shirt.jpg",
+                "metaDesc" => "Piano players will get it right away. Others… not so much.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-funkeys-1.jpg",
+                "shortDesc" => "Piano players will get it right away. Others… not so much.",
+                "headerText" => "Piano FunKeys T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Fun, meet fashion. Stay cool with this funky red piano keys T-shirt. 100% cotton so it’s super-breathable featuring a custom artistic piano keyboard. Piano players will get it right away. Others… not so much."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Red"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-funkeys-1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-funkeys-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-funkeys-3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Minimalist Pianote T-Shirt",
+                "slug" => "shirt-minimalist-red",
+                "sku" => "tshirt-minimalist-black",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/black-red-pianote-shirt.jpg",
+                "metaDesc" => "This black T-shirt features the iconic red Pianote logo across the front.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-1.jpg",
+                "shortDesc" => "This black T-shirt features the iconic red Pianote logo across the front.",
+                "headerText" => "Minimalist Pianote T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Simple and clean, this black T-shirt features the iconic red Pianote logo across the front. Made from 100% cotton to keep you cool even while you’re looking hot."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Women's Grand Piano T-Shirt",
+                "slug" => "shirt-womens-grand-piano",
+                "sku" => "tshirt-womens-grand-piano-red",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/womens-red-vneck-shirt.jpg",
+                "metaDesc" => "This shirt features a minimalist grand piano logo on the front.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/red-v-2.jpg",
+                "shortDesc" => "This shirt features a minimalist grand piano logo on the front.",
+                "headerText" => "Women’s Grand Piano T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Relaxed is exactly how you’ll feel in this relaxed-fit T-shirt. Super soft with 100% cotton and a stylish v-neck, this shirt features a minimalist grand piano logo on the front."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Women's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Next Level"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Red"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Women’s Fine Jersey Relaxed V T-Shirt"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/red-v-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/red-v-1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/red-v-3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    1,2,3,4,5,6
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Men’s Pocket Keys T-Shirt",
+                "slug" => "shirt-mens-pocket",
+                "sku" => "tshirt-mens-pocket-gray",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/pocket-mens-shirt.jpg",
+                "metaDesc" => "This v-neck T-shirt features a subtle yet striking piano key design on the breast pocket.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-m-1.jpg",
+                "shortDesc" => "This v-neck T-shirt features a subtle yet striking piano key design on the breast pocket.",
+                "headerText" => "Men’s Pocket Keys T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Carry your love for the piano in your front pocket. This ultra-soft v-neck T-shirt features a subtle yet striking piano key design on the breast pocket."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Men's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "MONROE Short Sleeve Pocket Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "52% Cotton, 48% Polyester"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Gray"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "V-Neck Rib Knit Collar w/Contrast Pocket"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-m-1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-m-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-m-3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Women's Pocket Keys T-Shirt",
+                "slug" => "shirt-womens-pocket",
+                "sku" => "tshirt-womens-pocket-gray",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/pocket-womens-shirt.jpg",
+                "metaDesc" => "Ladies, carry your love for the piano in your front pocket.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-f-2.jpg",
+                "shortDesc" => "This v-neck T-shirt features a subtle yet striking piano key design on the breast pocket.",
+                "headerText" => "Women’s Pocket Keys T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Ladies, carry your love for the piano in your front pocket. This ultra-soft v-neck T-shirt features a subtle yet striking piano key design on the breast pocket."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Women's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "MONROE Short Sleeve Pocket Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "52% Cotton, 48% Polyester"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Gray"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "V-Neck Rib Knit Collar w/Contrast Pocket"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-f-2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/pocket-f-1.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    1,2,3,4,5,6
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Iconic Pianote T-Shirt",
+                "slug" => "shirt-iconic",
+                "sku" => "2019-TSHIRT",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/iconic-shirt.jpg",
+                "metaDesc" => "The iconic Pianote T-Shirt, as comfortable as it looks.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/1.jpg",
+                "shortDesc" => "Share your love for Pianote with the world!",
+                "headerText" => "Iconic Pianote T-shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "The iconic Pianote T-Shirt, as comfortable as it looks."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Vintage Black"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7,8
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Women's Black Floral T-Shirt",
+                "slug" => "shirt-floral",
+                "sku" => "Tshirt-Floral-Black",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/flora-shirt2.jpg",
+                "metaDesc" => "A stylish, floral design allows you to show your love of Pianote in a unique way.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt/1.jpg",
+                "shortDesc" => "A stylish, floral design allows you to show your love of Pianote in a unique way.",
+                "headerText" => "Women’s Black Floral T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "A stylish, floral design allows you to show your love of Pianote in a unique way. Featuring a scoop neck, short sleeves, and a modern, relaxed fit, this shirt will help you look as good as you play."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Women's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Boxercraft"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "80% Polyester, 20% Cotton Sueded Jersey"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Relaxed Fit Scoop Neck Short Sleeve T-Shirt"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt/1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt/2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    1,2,3,4,5
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Women's Mint Floral T-Shirt",
+                "slug" => "shirt-floral-mint",
+                "sku" => "Tshirt-Floral-Mint",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/floral-shirt-mint2.jpg",
+                "metaDesc" => "A stylish, floral design allows you to show your love of Pianote in a unique way.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt-mint/1.jpg",
+                "shortDesc" => "A stylish, floral design set against a beautiful mint green fabric allows you to show your love of Pianote in a bright, fun way.",
+                "headerText" => "Women’s Mint Floral T-Shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "A stylish, floral design set against a beautiful mint green fabric allows you to show your love of Pianote in a bright, fun way. Featuring a scoop neck, short sleeves, and a modern, relaxed fit, this shirt is Lisa’s favorite, and will help you look as good as you play."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Women's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Boxercraft"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "80% Polyester, 20% Cotton Sueded Jersey"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Mint"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Relaxed Fit Scoop Neck Short Sleeve T-Shirt"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt-mint/1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt-mint/2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt-mint/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    1,2,3,4,5
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 5,
+                "name" => "Grand Piano Hoodie",
+                "slug" => "hoodie-grand-piano",
+                "sku" => "hoodie-grand-piano-red",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/red-hoodie.jpg",
+                "metaDesc" => "This hoodie features a minimalist grand piano logo on the front.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hoodie-3.jpg",
+                "shortDesc" => "This hoodie features a minimalist grand piano logo on the front.",
+                "headerText" => "Grand Piano Hoodie",
+                "price" => 59,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "This ultra-soft, classic fit zip-up hoodie wears like a dream, and looks stunning. The grand piano logo will show everyone who you are (a piano player!), while the front kangaroo pockets will keep your fingers warmed and ready to play."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Hoodie",
+                        "desc" => "American Apparel"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "50% Cotton, 50% Polyester"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Red"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Zip-Up Hoodie With Kangaroo Pockets"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hoodie-3.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hoodie-1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hoodie-2.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 5,
+                "name" => "Iconic Pianote Hoodie",
+                "slug" => "hoodie-iconic",
+                "sku" => "Sweatshirt-Hooded-Black",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/iconic-hoodie.jpg",
+                "metaDesc" => "This ultra-soft, super warm fleeced hoodie will keep you cozy on those chilly days.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-hoodie/1.jpg",
+                "shortDesc" => "This ultra-soft, super warm fleeced hoodie will keep you cozy on those chilly days.",
+                "headerText" => "Iconic Pianote Hoodie",
+                "price" => 59,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "This ultra-soft, super warm fleeced hoodie will keep you cozy on those chilly days. Your piano playing fingers will be kept warm between practices thanks to the front pouch pocket. This hoodie fits beautifully and creates a flattering look because of the spandex waist. But the best part is the iconic Pianote logo."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Hoodie",
+                        "desc" => "J. America"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "60% Cotton, 40% Polyester Air-Spun Fleece"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Hooded Sweatshirt With Front Pouch Pocket"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-hoodie/1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-hoodie/2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-hoodie/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7
+                ]
+            ],
+            [
+                "brand" => 4,
+                "productType" => 4,
+                "name" => "Retro T-shirt",
+                "slug" => "shirt-retro",
+                "sku" => "retro-shirt",
+                "thumbnail" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
+                "metaDesc" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
+                "metaImg" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
+                "shortDesc" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
+                "headerText" => "The Singeo Retro T-shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Sing with confidence AND style with this super slick Singeo Retro T-shirt!"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "52% cotton, 48% polyester"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                'size_case_sensitive' => true,
+                "images" => [
+                    "https://singeo.s3.amazonaws.com/products/retro-shirt-thumb.png"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6
+                ]
+            ],
 //            [
-//                "brand" => 1,
-//                "productType" => 5,
+//                "brand" => 2,
+//                "productType" => 4,
 //                "name" => "",
 //                "slug" => "",
 //                "sku" => "",
@@ -971,7 +1669,7 @@ class CMSClothingSeeder extends Seeder
 //                "metaImg" => "",
 //                "shortDesc" => "",
 //                "headerText" => "",
-//                "price" => 1,
+//                "price" => 29,
 //                "discountedPrice" => "",
 //                "specialText" => "",
 //                "features" => [
@@ -1033,6 +1731,7 @@ class CMSClothingSeeder extends Seeder
                 'free_bonus' => $product['freeBonus'],
                 'membership_discount' => false,
                 'lifetime_access' => $product['lifeTime'],
+                'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'size_chart_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
