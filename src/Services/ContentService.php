@@ -1076,6 +1076,13 @@ class ContentService
                         $filterOptions['instructor'] = $instructors;
                     }
 
+                    if (!empty($filterOptions['difficulty'])) {
+                        $filterOptions['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                            $includedTypes,
+                            $filterOptions['difficulty']
+                        );
+                    }
+
                     $filters = $filterOptions;
                     $finish = microtime(true) - $start;
 
@@ -1091,11 +1098,21 @@ class ContentService
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
+
+                $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
+
+                if ($pullFilterFields && !empty($filterFields['difficulty'])) {
+                    $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                        $includedTypes,
+                        $filterFields['difficulty']
+                    );
+                }
+
                 $resultsDB = new ContentFilterResultsEntity(
                     [
                         'results' => $filter->retrieveFilter(),
                         'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                        'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                        'filter_options' => $filterFields,
                     ]
                 );
 
@@ -1105,6 +1122,42 @@ class ContentService
         }
 
         return Decorator::decorate($results, 'content');
+    }
+
+    // for remove extraneous options and order logically rather than alphabetically
+    private function difficultyFilterOptionsCleanup($includedContentTypes, $difficultyOptions)
+    {
+        // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+        // accommodates—have an "included_types" value like this—an array of one string.
+        $isContentTypeWithSpecialConditions = in_array($includedContentTypes, [
+            ['student-focus'],
+            ['student-review']
+        ]);
+
+        if (!$isContentTypeWithSpecialConditions) {
+            return $difficultyOptions;
+        }
+
+        foreach ($difficultyOptions as &$option) {
+            $option = is_string($option) ? strtolower((string) $option) : $option;
+        }
+
+        $hasBeginner = in_array('beginner', $difficultyOptions);
+        $hasIntermediate = in_array('intermediate', $difficultyOptions);
+        $hasAdvanced = in_array('advanced', $difficultyOptions);
+        if ($hasBeginner || $hasIntermediate || $hasAdvanced) {
+            $difficultyOptions = [];
+            if ($hasBeginner) {
+                $difficultyOptions[] = 'Beginner';
+            }
+            if ($hasIntermediate) {
+                $difficultyOptions[] = 'Intermediate';
+            }
+            if ($hasAdvanced) {
+                $difficultyOptions[] = 'Advanced';
+            }
+        }
+        return $difficultyOptions;
     }
 
     /**
