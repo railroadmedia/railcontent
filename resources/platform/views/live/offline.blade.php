@@ -22,7 +22,7 @@
                 </p>
                 
                 {{-- Header CTAs --}}
-                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3">
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3 tw-max-w-xl">
                     <div class="flex flex-column">
                         <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer">
                             <button class="tw-btn-secondary tw-text-white ">
