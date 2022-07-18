@@ -37,7 +37,10 @@ class OnboardingController extends Controller
      */
     public function topics(Request $request)
     {
-        $request->validate(['data' => 'required']);
+        $request->validate([
+            'brand' => 'required',
+            'data' => 'required'
+        ]);
 
         OnboardingTopic::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
@@ -54,7 +57,10 @@ class OnboardingController extends Controller
      */
     public function genres(Request $request)
     {
-        $request->validate(['data' => 'required']);
+        $request->validate([
+            'brand' => 'required',
+            'data' => 'required'
+        ]);
 
         OnboardingGenre::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
 
@@ -71,7 +77,10 @@ class OnboardingController extends Controller
      */
     public function experience(Request $request)
     {
-        $request->validate(['experience_level' => 'integer|required|max:3']);
+        $request->validate(
+            'brand' => 'required',
+            ['experience_level' => 'integer|required|max:3']
+        );
 
         OnboardingExperience::where(['brand' => $request->brand, 'user_id' => user()->id])->delete();
         OnboardingExperience::create(
