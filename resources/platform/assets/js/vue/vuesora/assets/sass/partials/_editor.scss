@@ -75,13 +75,13 @@
   padding: 0 !important;
 }
 
-#replyContainer, #createThreadForm {
+.text-editor-container {
   .tox-tinymce {
     border-width: 1px;
   }
 }
 .tw-dark {
-  #replyContainer, #createThreadForm {
+  .text-editor-container {
     .tox .tox-toolbar-overlord,
     .tox:not(.tox-tinymce-inline) .tox-editor-header {
       background-color: transparent;
