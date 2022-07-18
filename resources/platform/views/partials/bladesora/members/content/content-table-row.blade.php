@@ -34,7 +34,7 @@
                 {{ ucwords($colorTitle) }}
             </p>
         @endif
-        <p class="tiny text-black font-bold item-title">
+        <p class="tw-text-sm tw-text-black dark:tw-text-white tw-font-bold item-title">
             {{ $title }}
         </p>
         <p class="x-tiny text-grey-3 text-truncate font-italic uppercase hide-md-up">

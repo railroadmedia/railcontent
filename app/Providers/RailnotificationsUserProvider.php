@@ -57,4 +57,16 @@ class RailnotificationsUserProvider implements UserProviderInterface
     {
         return new UserTransformer();
     }
+
+    public function updateUserNotificationsSummaryFrequency(int $userId,?string $notificationsSummaryFrequency)
+    {
+        $user = User::query()->where('id', $userId)->first();
+
+        if($user){
+            $user->notifications_summary_frequency_minutes = $notificationsSummaryFrequency;
+            $user->save();
+        }
+
+        return $user;
+    }
 }

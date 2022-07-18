@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -17,23 +17,25 @@
                 >
                     <select
                         id="commentSort"
+                        class="dark:tw-text-white"
                         v-model="sortInterface"
                     >
-                        <option value="-like_count">
+                        <option class="tw-text-black" value="-like_count">
                             Popular
                         </option>
-                        <option value="-created_on">
+                        <option class="tw-text-black" value="-created_on">
                             Latest
                         </option>
-                        <option value="created_on">
+                        <option class="tw-text-black" value="created_on">
                             Oldest
                         </option>
-                        <option value="-mine">
+                        <option class="tw-text-black" value="-mine">
                             My Comments
                         </option>
                     </select>
                     <label
                         for="commentSort"
+                        class="dark:tw-text-white"
                         :class="themeColor"
                     >Sort By</label>
                 </div>
@@ -75,7 +77,6 @@
                 <text-editor
                     ref="textEditor"
                     v-model="commentInterface"
-                    toolbar="bold italic underline | bullist numlist | link"
                     :height="150"
                 ></text-editor>
 

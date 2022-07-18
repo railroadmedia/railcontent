@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1  dark:tw-text-white">
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
@@ -33,7 +33,7 @@
             </p>
             <p
                 v-if="showUserExp"
-                class="tiny dense tw-text-center font-compressed"
+                class="tiny dense dark:tw-text-[#9EC0DC] tw-text-center font-compressed"
             >
                 {{ userExpValue }} XP
             </p>
@@ -41,23 +41,23 @@
         <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-flex tw-flex-row tw-items-center tw-mb-1 comment-meta">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
-                    <h2 class="body tw-font-bold break-words">
+                    <h2 class="break-words">
                         <a
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-text-black tw-no-underline"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="text-black no-decoration"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
                         >
                             {{ comment.user.display_name }}
                         </span>
 
-                        <span class="x-tiny text-grey-3 tw-font-bold tw-italic tw-uppercase tw-ml-1">
+                        <span class="tw-font-bold tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px]">
                             {{ dateString }}
                         </span>
                     </h2>
@@ -88,19 +88,8 @@
 
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mb-1">
+                <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
-                        <p
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="replying ? themeTextClass : 'text-grey-3'"
-                            dusk="reply-button"
-                            @click="openReply"
-                        >
-                            <i class="fas fa-reply"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
-                            </span>
-                        </p>
 
                         <p
                             v-if="!isUsersPost"
@@ -111,6 +100,17 @@
                             <i class="fas fa-thumbs-up"></i>
                             <span class="hide-xs-only">
                                 &nbsp;{{ comment.is_liked ? 'Liked' : 'Like' }}&nbsp;
+                            </span>
+                        </p>
+                        <p
+                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
+                            :class="replying ? themeTextClass : 'text-grey-3'"
+                            dusk="reply-button"
+                            @click="openReply"
+                        >
+                            <i class="fas fa-reply"></i>
+                            <span class="hide-xs-only">
+                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
                             </span>
                         </p>
 
@@ -152,7 +152,7 @@
                         </div>
                         <div class="tw-flex tw-flex-row tw-justify-center mv-1">
                             <a
-                                class="btn flat tw-text-black collapse-150 short tw-mr-1"
+                                class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
                                 @click="replying = false"
                             >
                                 Cancel
