@@ -17,34 +17,34 @@
 @stop
 
 @section('layout-body')
-    @include('product.partials._shop-header')
+    @include('musora.product.partials._shop-header')
 
     <div class="container mx-auto px-4 py-10" x-data="{ filter: 'all' }">
 
         <div class="px-2 md:px-3 lg:pl-8 md:text-2xl lg:text-4xl mb-10">
             <span
                 class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                x-on:click="console.log({{$shirts}})"
+                x-on:click="filter = 'all'"
                 x-bind:class="filter === 'all' ? 'border-b-2' : 'text-gray-400'"
             >
                 All</span>
             <span
                 class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                x-on:click=" filter = 'lessons'"
+                x-on:click="filter = 'lessons'"
                 x-bind:class="filter === 'lessons' ? 'border-b-2' : 'text-gray-400'"
             >
                 Lessons
             </span>
             <span
                 class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                x-on:click=" filter = 'accessories'"
+                x-on:click="filter = 'accessories'"
                 x-bind:class="filter === 'accessories' ? 'border-b-2' : 'text-gray-400'"
             >
                 Accessories
             </span>
             <span
                 class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                x-on:click=" filter = 'clothing'"
+                x-on:click="filter = 'clothing'"
                 x-bind:class="filter === 'clothing' ? 'border-b-2' : 'text-gray-400'"
             >
                 Clothing
@@ -62,17 +62,21 @@
                 </li>
 
                 @foreach($lessons as $lesson){
-                    @include('product.partials._drum-shop-card', [
-                        "sku" => $lesson->sku,
+                    @include('musora.product.partials._drum-shop-card', [
+                        "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                         "itemURL" => '/'.$theme.'/shop/'.$lesson->slug,
                         "thumbnail" => $lesson->thumbnail,
-                        "packLogo" => $lesson->logo,
+                        "thumbnail_logo" => $lesson->thumbnail_logo,
+                        "packLogo" => $lesson->page_logo,
                         "title" => $lesson->name,
                         "packAuthor" => $lesson->instructor_name,
                         "cardDescription" => $lesson->short_desc,
                         "fullPrice" => $lesson->price,
                         "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
                         "productJson" => '{ "'.$lesson->sku.'": 1 }',
+                        "buttonText" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? 'see the deal' : null,
+                        "soldOut" => $lesson->sold_out,
+                        "includedEdge" => $lesson->included_edge,
                     ])
                 }
                 @endforeach
@@ -90,7 +94,7 @@
                         </h1>
                     </li>
                     @foreach($accessories as $accessory){
-                        @include('product.partials._drum-shop-card', [
+                        @include('musora.product.partials._drum-shop-card', [
                             "sku" => $accessory->sku,
                             "itemURL" => '/'.$theme.'/shop/'.$accessory->slug,
                             "thumbnail" => $accessory->thumbnail,
@@ -118,7 +122,7 @@
                         </h1>
                     </li>
                     @foreach($hats as $hat){
-                    @include('product.partials._drum-shop-card', [
+                    @include('musora.product.partials._drum-shop-card', [
                         "sku" => $hat->sku,
                         "itemURL" => '/'.$theme.'/shop/'.$hat->slug,
                         "thumbnail" => $hat->thumbnail,
@@ -146,7 +150,7 @@
                     </h1>
                 </li>
                 @foreach($shirts as $shirt){
-                    @include('product.partials._drum-shop-card', [
+                    @include('musora.product.partials._drum-shop-card', [
                         "sku" => $shirt->sku,
                         "itemURL" => '/'.$theme.'/shop/'.$shirt->slug,
                         "thumbnail" => $shirt->thumbnail,
@@ -175,7 +179,7 @@
                         </h1>
                     </li>
                     @foreach($hoodies as $hoodie){
-                    @include('product.partials._drum-shop-card', [
+                    @include('musora.product.partials._drum-shop-card', [
                         "sku" => $hoodie->sku,
                         "itemURL" => '/'.$theme.'/shop/'.$hoodie->slug,
                         "thumbnail" => $hoodie->thumbnail,
