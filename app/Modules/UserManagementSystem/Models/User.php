@@ -561,7 +561,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function onboardingExperience()
     {
-        return $this->hasMany(OnboardingExperience::class);
+        return $this->hasOne(OnboardingExperience::class);
     }
 
    /**
