@@ -66,7 +66,7 @@
                                 class="bg-white @if($size->sold_out) text-gray @else text-black @endif"
                                 @if($size->sold_out) disabled @endif
                                 value="{{$product->sku . '-' . $size->code}}"
-                                data-price="{{$product->price ?? 0}}"
+                                data-price="{{floatVal($product->price) ?? 0}}"
                                 data-product-json='{"{{$product->sku . '-' . $size->code}}": 1}'
                             >{{ $size->name }}</option>
                         @endforeach
