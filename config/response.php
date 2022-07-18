@@ -220,6 +220,7 @@ return [
             'type',
             'fields.title',
             'data.description',
+            'data.thumbnail_url',
             'completed',
             'started',
             'progress_percent',
