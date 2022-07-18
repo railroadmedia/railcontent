@@ -1,71 +1,60 @@
 <template>
     <div
-        class="flex flex-row content-table-row scheduled pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
+        class="flex flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
         :class="month"
     >
-        <div class="month-col body text-white bg-grey-2">
-            {{ month }}
-        </div>
+            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-black">
+                {{ month }}
+            </div> -->
 
-        <div class="flex flex-column align-v-center thumbnail-col">
-            <div class="thumb-wrap corners-10 bg-black">
-                <div
-                    class="thumb-img corners-10 widescreen text-center"
-                    style="background:black;"
-                >
-                    <div class="release-day">
-                        <p class="tiny text-white font-bold">
-                            {{ day }}
-                        </p>
-                        <p class="tiny text-white">
-                            {{ time }}
-                        </p>
+            <div class="tw-flex tw-flex-col tw-justify-center tw-w-[116px] md:tw-w-[143px] tw-shrink-0">
+                <div class="thumb-wrap corners-10">
+                    <div
+                        class="thumb-img corners-10 widescreen text-center"
+                        :style="`background-image: url( ${ item.original_thumbnail_url } )`"
+                    >
+                        <div class="release-day tw-bg-black/70 tw-h-full tw-flex tw-flex-col tw-items-center tw-justify-center">
+                            <p class="tw-text-xs text-white font-bold">
+                                {{ day }}
+                            </p>
+                            <p class="tw-text-xs  text-white">
+                                {{ time }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex flex-column align-v-center ph-1 title-column overflow">
-            <p
-                class="tiny uppercase text-truncate"
-                :class="themeTextClass"
-            >
-                {{ mappedData.color_title }}
-            </p>
-
-            <p class="tw-text-sm tw-text-black dark:tw-text-white tw-font-bold item-title">
-                {{ mappedData.black_title }}
-            </p>
-
-            <p class="x-tiny text-grey-3 text-truncate font-italic uppercase hide-md-up">
-                <span v-for="(item, i) in mappedData.column_data" :key="i">
-                    <span
-                        v-if="i > 0"
-                        class="bullet"
-                    >-</span>
-
-                    {{ item }}
-                </span>
-            </p>
-        </div>
-
-        <div class="flex flex-column uppercase align-center basic-col text-grey-3 font-italic x-tiny hide-sm-down">
-            {{ releaseType }}
-        </div>
-
-        <div v-for="(item, i) in mappedData.column_data"
-             :key="i"
-             class="flex flex-column uppercase align-center basic-col text-grey-3 font-italic x-tiny hide-sm-down text-center"
-        >
-            {{ item }}
-        </div>
+            <div class="tw-mr-auto tw-flex tw-w-full tw-flex-col xl:tw-flex-row xl:tw-justify-center">
+                <!-- Schedule Item Title -->
+                <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow tw-mr-auto tw-mb-1 xl:tw-mb-0">
+                    <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
+                        {{ mappedData.color_title }}
+                    </p>
+                    <p class="tw-text-sm tw-text-black dark:tw-text-white tw-font-bold item-title">
+                        {{ mappedData.black_title }}
+                    </p>
+                </div>
+                <!-- Schedule Item Data -->
+                <div class="tw-flex ph-1">
+                    <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
+                        {{ releaseType }}
+                    </div>
+                    <div v-for="(item, i) in mappedData.column_data"
+                        :key="i"
+                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center"
+                    >
+                        {{ item }}
+                    </div>
+                </div>
+            </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="flex flex-column icon-col align-v-center hide-xs-only">
+        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">
             <div class="body">
                 <i
                     class="add-to-list fas fa-plus flex-center pointer"
-                    :class="is_added ? 'is-added ' + themeTextClass : 'text-grey-2'"
+                    :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#52525A] dark:tw-text-[#9EC0DC]'"
                     :title="is_added ? 'Remove from My List' : 'Add to My List'"
                     @click.stop.prevent="addToList"
                 ></i>
@@ -73,7 +62,7 @@
         </div>
 
         <div
-            class="flex flex-column icon-col align-v-center"
+            class="tw-flex tw-flex-col icon-col tw-justify-center"
             style="position:relative;"
         >
             <div
@@ -82,7 +71,7 @@
                 data-open-modal="scheduleAddToCalendarModal"
                 @click="addEvent"
             >
-                <i class="fas fa-calendar-plus flex-center text-grey-2 rounded"></i>
+                <i class="fas fa-calendar-plus flex-center tw-text-[#52525A] dark:tw-text-[#9EC0DC] rounded"></i>
             </div>
         </div>
     </div>
@@ -113,16 +102,6 @@ export default {
     computed: {
 
         time_to_display() {
-            // Pull the live start time with timezoe if it exists
-            if (this.item.live_event_start_time_in_timezone) {
-                return this.item.live_event_start_time_in_timezone.date;
-            }
-
-            // Pull the published on with timezone if it exists
-            if (this.item.published_on_in_timezone) {
-                return this.item.published_on_in_timezone.date;
-            }
-
             // Just pull the default published on
             return this.item.published_on;
         },
