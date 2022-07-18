@@ -17,15 +17,15 @@
 @section('layout-body')
     <div class="clearfix mx-auto mx-auto max-w-6xl">
         <div class="lg:flex">
-            @include('product.partials.slider',[
+            @include('musora.product.partials.slider',[
                 "headerText" => $product->header_text,
                 "videoSrc" => $product->video_src,
                 "images" => $product->images,
             ])
 
-            @include('product.partials.sidebar',[
+            @include('musora.product.partials.sidebar',[
                 "sku" => $product->sku,
-                "logo" => $product->logo,
+                "logo" => $product->page_logo,
                 "fullPrice" => $product->price,
                 "price"=> $product->price,
                 "guaranteeBadge" => $product->guaranteed,
@@ -40,7 +40,7 @@
         <div class="product-wrap lg:w-2/3 px-3 md:px-4">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                 @if($product->productType->name === 'Lesson')
-                    @include('product.partials.features',[
+                    @include('musora.product.partials.features',[
                         'features' => [
                             [
                                 "icon" => "fa-trophy",
@@ -60,28 +60,28 @@
                         ]
                     ])
 
-                    @include('product.partials.overview',[
+                    @include('musora.product.partials.overview',[
                         "overview" => $product->overview,
                         "interactive" => true,
                     ])
 
-                    @include('product.partials.specs',[
+                    @include('musora.product.partials.specs',[
                         'specList'=> $product->specs,
                     ])
 
-                    @include('product.partials.instructor',[
+                    @include('musora.product.partials.instructor',[
                         "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc
                     ])
 
-                    @include('product.partials.topics',[
+                    @include('musora.product.partials.topics',[
                         "topicList" => $product->features
                     ])
 
                 @elseif($product->productType->name === 'Bundle')
                     <img class="mb-4" src="@if(str_contains($product->bundle_img, 'amazonaws') || str_contains($product->bundle_img, 'cloudfront')) {{$product->bundle_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->bundle_img  }}@endif" />
 
-                    @include('product.partials.overview',[
+                    @include('musora.product.partials.overview',[
                         "overview" => $product->overview,
                         "interactive" => false,
                     ])
@@ -94,7 +94,7 @@
                     </p>
 
 
-                    @include('product.partials.bonuses')
+                    @include('musora.product.partials.bonuses')
                 @else
                     @if(!empty($product->overview))
                         <p><x-markdown>{!! nl2br($product->overview) !!}</x-markdown></p>
@@ -104,7 +104,7 @@
                             <img class="my-4" src="@if(str_contains($product->product_img, 'amazonaws') || str_contains($product->product_img, 'cloudfront')) {{$product->product_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->product_img  }}@endif" alt="product image" />
                         @endif
 
-                    @include('product.partials.specs',[
+                    @include('musora.product.partials.specs',[
                         'specList'=> $product->specs,
                         'featureList' => $product->features
                     ])

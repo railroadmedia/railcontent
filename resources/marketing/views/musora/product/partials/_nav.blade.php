@@ -54,22 +54,22 @@
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('product.partials._nav-link', [
+        @include('musora.product.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
             "linkUrl" => "/login"
         ])
-        @include('product.partials._nav-link', [
+        @include('musora.product.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
             "linkUrl" => "/contact/"
         ])
-        @include('product.partials._nav-link', [
+        @include('musora.product.partials._nav-link', [
             "linkName" => "Drumeo",
             "linkIcon" => "icon-courses",
             "linkUrl" => "/",
         ])
-        @include('product.partials._nav-link', [
+        @include('musora.product.partials._nav-link', [
             "linkName" => "Drum Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => "/drumshop",
@@ -85,74 +85,74 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "Drumeo Beat",
                 "linkUrl" => "/beat/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "Getting Started On The Drums",
                 "linkUrl" => "/getting-started/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "40 Drum Rudiments",
                 "linkUrl" => "/beat/rudiments/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "The Drumeo Podcast",
                 "linkUrl" => "/beat/podcasts/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "Free Video Drum Lessons",
                 "linkUrl" => "/beat/videos/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "Free Articles For Drummers",
                 "linkUrl" => "/beat/articles/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "How To Play Drums",
                 "linkUrl" => "/beat/how-to-play-drums/",
                 "linkIcon" => ''
             ])
-            @include('product.partials._nav-link', [
+            @include('musora.product.partials._nav-link', [
                 "linkName" => "40 Free Songs",
                 "linkUrl" => "/40-songs",
                 "linkIcon" => ''
             ])
         </div>
         <span class="shim"></span>
-        @include('product.partials._secondary-nav-link', [
+        @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-mobile-alt'></i>&nbsp; Drumeo Kids App ",
             "linkUrl" => "/kids/",
             "externalLink" => false
         ])
-        @include('product.partials._secondary-nav-link', [
+        @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/freedrumlessons/",
             "externalLink" => true
         ])
-        @include('product.partials._secondary-nav-link', [
+        @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://facebook.com/drumeo/",
             "externalLink" => true
         ])
-        @include('product.partials._secondary-nav-link', [
+        @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://instagram.com/drumeoofficial/",
             "externalLink" => true
         ])
-        @include('product.partials._secondary-nav-link', [
+        @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
             "linkUrl" => "https://www.tiktok.com/@drumeoofficial",
             "externalLink" => true
         ])
-        @include('product.partials._secondary-nav-link', [
+        @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.drumeo.com/",
             "externalLink" => false
