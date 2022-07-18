@@ -14,8 +14,7 @@
     <link href="{{ asset('/marketing/parcel/css/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css')}}">
-
+    <link rel="stylesheet" href="/marketing/css/animate.css">
     <style>
         .dropdowns {
             max-width: 1100px;
@@ -55,10 +54,10 @@
 
 @section('layout-body')
 {{--    @include('products.partials.promo-banner', [--}}
-{{--        "name" => "New Drummers Start Here",--}}
-{{--        "fullPrice" => Prices::$ndshFull,--}}
-{{--        "price" => Prices::$ndshRegular,--}}
-{{--        "noBreadcrumb" => true--}}
+{{--                    "name" => "New Drummers Start Here",--}}
+{{--                    "fullPrice" => Prices::$ndshFull,--}}
+{{--                    "price" => Prices::$ndshRegular,--}}
+{{--                "noBreadcrumb" => true--}}
 {{--    ])--}}
 
     <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#020d1f;background-image: url(https://cdn.musora.com/image/fetch/w_3000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/header.jpg);">
@@ -67,10 +66,16 @@
             <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" data-open="trailer"></i>
             <h2><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
-            <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
-{{--                    @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif--}}
+            <h4 class="text-yellow-400 mb-3 md:mb-5">
+{{--                <strong>ONLY--}}
+{{--                    @if(Prices::$ndshFull > Prices::$ndshRegular) --}}
+{{--                        <s class="opacity-60">--}}
+{{--                            ${{ Prices::$ndshFull }}--}}
+{{--                        </s> --}}
+{{--                    @endif--}}
 {{--                    ${{ Prices::$ndshRegular }}--}}
-                </strong></h4>
+{{--                </strong>--}}
+            </h4>
 {{--            <a class="join ndsh anchor-slide" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>--}}
         </div>
     </header>
@@ -463,8 +468,8 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td><img class="lazyload inline-block" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png"></td>
-                        <td><img class="lazyload inline-block" data-src="https://cdn.musora.com/image/fetch/w_190,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/edge.png"></td>
+                        <td><img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png"></td>
+                        <td><img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_190,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"></td>
                         <td class="cursor-pointer">Other Online<br> Courses</td>
                         <td class="cursor-pointer"><img src="https://cdn.musora.com/image/fetch/w_190,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/udemy.png"></td>
                         <td class="cursor-pointer"><img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/masterclass.png"></td>
@@ -526,7 +531,8 @@
                     </tr>
                     <tr style="background-color:transparent!important;">
                         <td>TOTAL INVESTMENT</td>
-{{--                        <td>@if(Prices::$ndshFull > Prices::$ndshRegular)--}}
+                        <td>
+{{--                            @if(Prices::$ndshFull > Prices::$ndshRegular)--}}
 {{--                                <s>${{ Prices::$ndshFull }}</s>--}}
 {{--                            @endif--}}
 {{--                            @if(Prices::$ndshRegular == 0)--}}
@@ -534,7 +540,7 @@
 {{--                            @else--}}
 {{--                                ${{ Prices::$ndshRegular }}--}}
 {{--                            @endif--}}
-{{--                        </td>--}}
+                        </td>
 {{--                        <td>${{ Prices::$drumeoEdgeAnnual }}/yr</td>--}}
                         <td>$89-$270</td>
                         <td>$89.99</td>
@@ -577,9 +583,15 @@
             {{--or add a practice pad and drumsticks for a discount. </em></h6>--}}
 
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
-            <h4 class="text-yellow-400 mb-10 md:mb-14"><strong>ONLY
-{{--                    @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif--}}
-{{--                    ${{ Prices::$ndshRegular }}</strong></h4>--}}
+            <h4 class="text-yellow-400 mb-10 md:mb-14">
+                <strong>
+{{--                    ONLY--}}
+{{--                    @if(Prices::$ndshFull > Prices::$ndshRegular) --}}
+{{--                        <s class="opacity-60">${{ Prices::$ndshFull }}</s> --}}
+{{--                    @endif--}}
+{{--                    ${{ Prices::$ndshRegular }}--}}
+                </strong>
+            </h4>
 
 {{--            <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>--}}
 
@@ -602,21 +614,21 @@
         <div class="container mx-auto">
             <h3><strong>Still have questions?</strong></h3>
             <div class="dropdowns">
-                @include('musora.product.pages.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                         "customClass" => "border-blue md:rounded-full",
                         "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "Do I need a full drum set to complete the course?",
                         "description" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
                         ])
-                @include('musora.product.pages.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                         "customClass" => "border-blue md:rounded-full",
                         "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "How much time per week will this course require?",
                         "description" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
                         ])
-                @include('musora.product.pages.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                         "customClass" => "border-blue md:rounded-full",
                         "customArrow" => "text-blue",
                         "question" => true,
@@ -627,6 +639,12 @@
         </div>
     </section>
 
+{{--    @include("sales.partials._footer")--}}
+
+
+@stop
+
+@section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/js/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/js/modal.js') }}"></script>
@@ -727,5 +745,5 @@
                 });
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/js/modal-autoplay.js') }}"></script>
 @stop

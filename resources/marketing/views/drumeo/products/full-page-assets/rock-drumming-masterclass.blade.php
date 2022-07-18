@@ -1,24 +1,22 @@
-@extends('products.misc-products-layout')
+@extends('drumeo._partials.layout')
 
-
-@section('meta')
-    @parent
+@section('head-includes')
     <title>Rock Drumming Masterclass | Drumeo</title>
     <meta name="description" content="Unlock your rock drumming potential in this exclusive 26-week masterclass with Todd Sucherman.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Unlock your rock drumming potential in this exclusive 26-week masterclass with Todd Sucherman.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    @parent
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/css/drum-shop-rdm.css') }}" rel="stylesheet">
+<!--    --><?php //\App\Analytics\Tracker::trackProductImpression('rock-drumming-masterclass'); ?>
 @stop()
 
-@section('head')
-    @parent
-    <link href="{{ asset('/assets/members-area/css/gulp/drum-shop-rdm.css') }}" rel="stylesheet">
-    <?php \App\Analytics\Tracker::trackProductImpression('rock-drumming-masterclass'); ?>
-@stop()
-
-@section('scripts')
-    @parent
-    <script src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>
+@section('layout-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>
         $(function () {
             $(document).foundation();
@@ -37,16 +35,10 @@
             });
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/js/modal-autoplay.js') }}"></script>
 @stop()
 
-@section('content')
-    @include('products.partials.promo-banner', [
-                    "name" => "Rock Drumming Masterclass",
-                    "fullPrice" => Prices::$rdmFull,
-                    "price" => Prices::$rdmRegular,
-                "noBreadcrumb" => true
-                ])
+@section('layout-body')
     <header class="hero-header">
         <div class="row">
             <div class="columns video-wrap autoplay-video" data-open="trailer">
@@ -59,14 +51,14 @@
             <h3 class="columns">The Rock Drumming Masterclass is a
                 <br class="show-for-medium-only">26-week online course with Todd Sucherman.</h3>
 
-            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
+{{--            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>--}}
 
             <p class="columns uppercase price">
-                @if(Prices::$rdmFull > Prices::$rdmRegular)
-                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)
-                @else
-                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>
-                @endif
+{{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}
+{{--                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)--}}
+{{--                @else--}}
+{{--                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>--}}
+{{--                @endif--}}
 
                 <br>
                 <u class="text-blue"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -78,7 +70,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400735162?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>
+{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>--}}
             </div>
         </div>
     </header>
@@ -91,51 +83,51 @@
                     Your <strong> Rock Drumming</strong></h1>
             </div>
             <div class="columns tile-wrap small-up-1 medium-up-2 large-up-3">
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Must-Know Rock Beats",
                 "tileDescription" => "Discover the straight rock beats that ALWAYS work -- and that everyone should know -- along with Todd’s advice for adding variations and texture within the grooves to make them your own. ",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Effective Drum Fills",
                 "tileDescription" => "The most effective rock drum fills are often much simpler than you’d think. Todd will share his toolkit of drum fills that EVERY rock drummer should be able to play like their life depended on it.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "The Foundation Of Musicality",
                 "tileDescription" => "Todd will share the “Rosetta Stone of 2 & 4” so you can decipher ALL there is to play in 4/4 backbeat time -- the foundation for becoming a musical drummer in a 20th century rock and roll context.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Bass Drum Combinations",
                 "tileDescription" => "You’ll get extensive bass and double bass drum ideas that you can apply to a variety of musical situations, from more creative drum fills to creative hand/foot combinations and ending songs effectively.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Expressive Drum Solos",
                 "tileDescription" => "Soloing gives you the opportunity to tell a story and make your own creative ideas come to life. Todd will give you the tools you need to orchestrate effective drum solos for a variety of musical situations.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Rhythmic Ear Training",
                 "tileDescription" => "Rock drumming is more than a learned motion. This course will help you train your ears to hear the patterns within the patterns -- so you can explore your imagination for new rhythmic possibilities.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Better Hand Technique",
                 "tileDescription" => "Get Todd’s best insights for improving your hand technique and natural motions for more speed, power, and longevity -- from holding your sticks to cymbal techniques for creating the sounds and patterns you want.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Utilizing Ghost Notes",
                 "tileDescription" => "Add more flavor to your drumming by exploring the ghost note possibilities that Todd utilizes in his own performances, whether it’s a flurry of audible notes or soft comments between the accents.",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Drum Rudiment Orchestrations",
                 "tileDescription" => "Add the most effective rudiment orchestrations and variations to your arsenal, with exercises that will help you internalize the patterns and express them more effectively on the drum set. ",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Shuffles And Variations",
                 "tileDescription" => "Explore the most useful rock shuffles throughout history and the different ways you can play them predicated on the style, tempo, bass drum patterns, and hand patterns you choose. ",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Linear Drumming Grooves",
                 "tileDescription" => "Linear drumming is where no two sound sources play at the same time. You’ll dive into Gary Chaffee style linear drumming that uses a number system for creating your own ideas and figures. ",
                 ])
-                @include('products.partials.lesson-tile', [
+                @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Exploring Your Creativity",
                 "tileDescription" => "While you’ll explore the concepts that Todd uses in his own playing, you’ll be pushed to explore your own imagination and develop ideas that are uniquely YOURS (and have way more fun on the drums).",
                 ])
@@ -207,158 +199,158 @@
                 </div>
             </div>
             <div class="lesson-descriptions columns">
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "1",
                 "weekTitle" => "Introduction To Rock Drumming",
                 "weekDate" => "Jul. 22",
                 "weekDescription" => "Every drummer has their own heartbeat. You are the only YOU that exists. So you’ll get an introduction to rock drumming with some concepts that have been proven to work for most drummers, but you’ll also hear about some other ideas that might work better just for you!",
                 "defaultOpen" => true
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "2",
                 "weekTitle" => "Rock Beats",
                 "weekDate" => "Jul. 29",
                 "weekDescription" => "We’re going to build your rock drumming from the bottom up by focusing on foundational beats, bass drum patterns, and how you express yourself within those parameters by HOW you hit the drums. The simplest grooves along with some tasteful variations can carry you a long way. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "3",
                 "weekTitle" => "Rock Fills",
                 "weekDate" => "Aug. 5",
                 "weekDescription" => "You don’t have to save the world with every drum fill you play. Simple fills work for a reason - they telegraph changes to other musicians and the listener. You’ll gain a series of simple fills that will always work in rock music and the guidance to play them with purpose and intent."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "4",
                 "weekTitle" => "Song Forms",
                 "weekDate" => "Aug. 12",
                 "weekDescription" => "When you understand the form of a song you’re playing, you can get inside the music and sculpt the sections dynamically and emotionally. Todd will help you understand the foundations of songs and be able to map out songs -- the different sections and number of bars -- so you can feel the music and let it show you what it needs. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "5",
                 "weekTitle" => "The Motions of Drumming",
                 "weekDate" => "Aug. 19",
                 "weekDescription" => "Motion exercises are a great way to practice a few things at the same time -- including subdivisions, your timing, and your motions around the kit. You’ll become more comfortable with various sticking patterns and make practical improvements to your coordination. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "6",
                 "weekTitle" => "The Rosetta Stone - Part 1",
                 "weekDate" => "Aug. 26",
                 "weekDescription" => "You’ll get Todd’s “Rosetta Stone of 2 & 4”: the key to deciphering the ability to play WHATEVER you want in a 2&4 back beat 4/4 time context -- which is largely what drummers play in a late 20th century Rock & Roll context."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "7",
                 "weekTitle" => "The Rosetta Stone - Part 2",
                 "weekDate" => "Sep. 2",
                 "weekDescription" => 'You will find new ways to go through "The Rosetta Stone of 2 & 4" to reinforce your back beats, add different variations, and improve your playing on so many levels. Your independence will grow by leaps and bounds.'
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "8",
                 "weekTitle" => "Ghost Notes - Part 1",
                 "weekDate" => "Sep. 9",
                 "weekDescription" => "Ghost Notes are the soft snare drum notes played in between the main back beat accent notes -- such as 2 & 4 or whatever accents you're playing - in any given time feel. You'll explore different possibilities for applying them in your drumming. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "9",
                 "weekTitle" => "Ghost Notes - Part 2",
                 "weekDate" => "Sep. 16",
                 "weekDescription" => "Ghost Notes add another voice and dimension to your time feels. In Part 2, you'll focus on the hands and take a look at the buzz roll, along with ideas for alternating accents to add more flavor to your grooves. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "10",
                 "weekTitle" => "Natural Motions",
                 "weekDate" => "Sep. 23",
                 "weekDescription" => "You'll dive into four of Todd's go-to techniques including shank tip hi-hat 16ths, the moeller method, flag-tip-snap ride cymbal technique (for swing and three note patterns), and hitting crashes with a glancing blow. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "11",
                 "weekTitle" => "Ear Training",
                 "weekDate" => "Sep. 30",
                 "weekDescription" => "It's vital to understand the relationship between the right and left hands in whatever you're playing. Anything you play on a drum is a two-note melody -- and Todd will help you understand the singular melody in each hand for when you're learning stickings or practicing rudiments. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "12",
                 "weekTitle" => "Six Stroke Rolls & Three Note Conjunctions",
                 "weekDate" => "Oct. 7",
                 "weekDescription" => "Todd will train you to think differently about three note triplet conjunctions (and the different ways to orchestrate the six stroke roll). You'll find all-new ideas come alive and take shape -- from a boring printed page and into the magical realm of music. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "13",
                 "weekTitle" => "What Does Music Mean?",
                 "weekDate" => "Oct. 14",
                 "weekDescription" => "Music encompasses the human experience: love, loss, joy, pain, happiness, fear, birth, death, surprise, elation. It can express every feeling and emotion that we experience -- and to become a great musician, and a great storyteller, you need to add emotion to your playing to convey ideas without words. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "14",
                 "weekTitle" => "Shuffles - Part 1",
                 "weekDate" => "Oct. 21",
                 "weekDescription" => "The shuffle feel emerged from the blues, and bluesy big band swing, through the birth of rock and roll. There are many kinds of shuffles and ways to play them predicated on the style, the tempo, bass drum patterns, and hand patterns you choose. We'll start with the Texas shuffle (or Chicago shuffle)."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "15",
                 "weekTitle" => "Shuffles - Part 2",
                 "weekDate" => "Oct. 28",
                 "weekDescription" => "Todd will take you through some of the most popular shuffles including a Motown shuffle; some half-time shuffles made famous by Bernard Purdie, John Bonham, and Jeff Porcaro; Reggae time feels; and more -- and give you a handle on a variety of shuffle and swing time feels that will serve you well."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "16",
                 "weekTitle" => "Hand To Foot Combinations - Part 1",
                 "weekDate" => "Nov. 4",
                 "weekDescription" => "It's time to work on some hand-foot combinations. Todd will introduce you to his Bass Drum Combination System -- along with a piece of music for applying your new found combinations to real music."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "17",
                 "weekTitle" => "Hand To Foot Combinations - Part 2",
                 "weekDate" => "Nov. 11",
                 "weekDescription" => "Discover additional hand-foot combinations that you'll need to be effective in any rock setting. Todd will challenge you with more complex combination templates for a variety of musical situations -- and share the thought process behind the combinations so you can create your own series of numbers and orchestrations. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "18",
                 "weekTitle" => "Chaffee Style Linear Grooves - Part 1",
                 "weekDate" => "Nov. 18",
                 "weekDescription" => "It’s time to talk about linear drumming. Gary Chaffee came up with a number system for linear concepts that are incredibly deep -- and Todd will give you an introduction to these concepts and help you apply them in a truly fun and creatively useful way. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "19",
                 "weekTitle" => "Chaffee Style Linear Grooves - Part 2",
                 "weekDate" => "Nov. 25",
                 "weekDescription" => "You’ll dive deeper into the universe of linear drumming, exploring Gary Chaffee’s number system more intimately and finding new ways to apply linear patterns to various rock rhythms."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "20",
                 "weekTitle" => "Creative Flow",
                 "weekDate" => "Dec. 2",
                 "weekDescription" => "It happens to the best of us: you’re trying to think up ideas to play, but they’re just not coming together. Todd will share a personal example of brainstorming different musical possibilities -- and the creative process he used when writing the groove for the song “Raven” from the Taylor Mills “Lullagoodbye” record."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "21",
                 "weekTitle" => "Triplet Orchestrations",
                 "weekDate" => "Dec. 9",
                 "weekDescription" => "We'll dive into a series of triplet orchestrations around the drums - including ones made famous by drummers like John Bonham, Buddy Rich, and Steve Gadd. You'll see how the patterns can come together in a rock setting, orchestrated in different ways. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "22",
                 "weekTitle" => "Tuning & Rhythmic Bending",
                 "weekDate" => "Dec. 16",
                 "weekDescription" => "Rhythmic bending is basically stretching the time like a rubber band - blurring the line between triplets and some eighth and 16th note figures. Todd will share how these ideas can create musical tension and release in drum fill ideas."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "23",
                 "weekTitle" => "Brushes in Rock",
                 "weekDate" => "Dec. 23",
                 "weekDescription" => "Every drummer, yes EVEN a rock drummer, should have a pair of brushes in their bag. Todd will share the many useful textures brushes can create in a pop-rock setting that goes beyond your regular jazz standards -- and then dive into some Styx licks so you can pull some ideas out for your own musical settings."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "24",
                 "weekTitle" => " Solo Construction",
                 "weekDate" => "Dec. 30",
                 "weekDescription" => "The phrase &quot;music is a language&quot; isn't a cliche - it's the truth. There are many kinds of drum solos for many different musical situations. Todd will walk through some of the most common rock soloing ideas and share his creative tools for improvisation and saying something POWERFUL on the drums. "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "25",
                 "weekTitle" => "Todd’s Drum Licks",
                 "weekDate" => "Jan. 6",
                 "weekDescription" => "Todd will share some of his favorite drum licks and challenge you to apply your toolbox of rock skills to the tracks (including &quot;Lunchroom Hoedown&quot; and a few grooves from Styx's &quot;The Mission&quot; album). "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "26",
                 "weekTitle" => "Rock Drumming Philosophies",
                 "weekDate" => "Jan. 13",
@@ -476,7 +468,11 @@
     <section class="compare-table">
         <div class="row">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>while saving {{ round(100 - (100 * (round(Prices::$rdmRegular / 26, 2) / 30))) }}% or more <br class="hide-for-medium"> compared to private lessons.</h3>
+            <h3>
+                while saving
+{{--                {{ round(100 - (100 * (round(Prices::$rdmRegular / 26, 2) / 30))) }}--}}
+                % or more <br class="hide-for-medium"> compared to private lessons.
+            </h3>
             <table>
                 <tbody>
                 <tr>
@@ -549,13 +545,22 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>${{ round(Prices::$rdmRegular / 26, 2) }}/week</td>
+                    <td>
+                        $
+{{--                        {{ round(Prices::$rdmRegular / 26, 2) }}--}}
+                        /week
+                    </td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just ${{ round(Prices::$rdmRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$rdmRegular }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong>
+                to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just $
+{{--                    {{ round(Prices::$rdmRegular / 26, 2) }}--}}
+                    per week</u> (billed at $
+{{--                {{ Prices::$rdmRegular }}--}}
+                for the entire course).
                 <br><br>
                 You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
@@ -566,42 +571,42 @@
         <div class="testimonial-section">
             <div class="row">
                 <h1><strong>What past students are saying</strong> about<br class="show-for-medium"> Todd & the Rock Drumming Masterclass.</h1>
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Alan-Shaffer.jpg",
                 "testimonialHighlight" => "If you’ve ever wondered “how do they do THAT?!”",
                 "fullTestimonial" => "If you've seen a drummer live, or have heard fills or drum parts and wondered, &quot;How the hell does he do that?&quot;, well, it's explained in Rock Drumming Masterclass. You'll find out it's easier than you think. <br><br> Every week there's an &quot;ah-ha!&quot; moment to learn from. Todd shares 40 years of drumming expertise within a few months of lessons. There's nothing you can't practice or work on for the rest of your life. If there's a drum fill or phrase I need to work out and learn, I know where to go in the lessons. The information is there, word for word from Todd himself. <br><br> Todd will tell you point-blank what you've probably been doing wrong, and then show you how to correct it. There are several instances when he says, &quot;This is the only way to do it properly&quot;, and I wish someone had shown me these things years ago.",
                 "name" => "Alan Shaffer",
                 "location" => "Texas, USA"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Pamm-Cobo.jpg",
                 "testimonialHighlight" => "My drumming and musicianship is finally unlocked!",
                 "fullTestimonial" => "It feels like life is now unlocked for all that it has to offer musically. It’s amazing to realize all the possibilities we have when playing the drums! Todd gave interesting tips that helped me understand how my body works, particularly when I learned that the moment we change the sticking, we change the melody. You will enjoy the ride with Todd. With his help, reaching your goals will be easier.",
                 "name" => "Pamm Cobo",
                 "location" => "Mexico"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Rob-Scalici.jpg",
                 "testimonialHighlight" => "I was skeptical about online instruction.",
                 "fullTestimonial" => "I was skeptical about online instruction, but this has made me a believer. I’m now looking at drumming as a continuous learning journey as opposed to an ‘instant cure.’ Todd takes a no fluff, straight-to-the-point, no-magic-pill approach, which I really appreciate! I love the fact that you can continuously reference previous lessons, slow or speed up tempos, and see the instructor break it all down.",
                 "name" => "Rob Scalici",
                 "location" => "Michigan, USA"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Shawn-Preston.jpg",
                 "testimonialHighlight" => "I was squeezing my drum sticks too much.",
                 "fullTestimonial" => "Rock Drumming Masterclass was a breath of fresh air. I was squeezing too much on the sticks before, and fixing that has made such a difference. After 25 years as a full time drumming professional, I’m already using the techniques learned here with my own students. The course is wonderfully conceived, well produced, and highly informative. It’s given me a new perspective!",
                 "name" => "Shawn Preston",
                 "location" => "Pennsylvania, USA"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Michael-Malo.jpg",
                 "testimonialHighlight" => "I can play just about anything on the fly!",
                 "fullTestimonial" => "The really powerful thing about Rock Drumming Masterclass is that while each lesson focuses on very specific things, you’ll notice how they’re all connected as your playing evolves. Now when I start jamming along to a song, I can play just about any sticking or fills on the fly. My hands seem to know how to resolve patterns without thinking. This course proves that with the right material and some honest work and discipline, you can vastly improve your musicianship! <br><br> Dear future students: if you choose RDM, you will be given the keys to open some very important doors in your musical career. It will not only change how you play, but how you learn, too! I can’t think of another class that offers you as many crucial tools to become a seriously great drummer. Don’t pass up this chance!",
                 "name" => "Michael Malo",
                 "location" => "Quebec, Canada"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Robert-Abraham.jpg",
                 "testimonialHighlight" => "This is my road map for getting better.",
                 "fullTestimonial" => "Step by step, Todd ‘peels the onion’. Step by step, each week builds on the prior week. He comes off as a relatable teacher who's been where we are and remembers that - not someone who’s looking down his nose at us. I now have a road map to follow to get better. That's the simple truth. Rock Drumming Masterclass is the gift that will keep on giving.",
@@ -632,16 +637,18 @@
 
             <h1 class="columns">
                 Todd Sucherman’s 26-Week Online <br class="hide-for-large">
-                Course For Just ${{ round(Prices::$rdmRegular / 26, 2) }} Per Week</h1>
+                Course For Just $
+{{--                {{ round(Prices::$rdmRegular / 26, 2) }}--}}
+                Per Week</h1>
 
-            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
+{{--            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>--}}
 
             <h2 class="columns uppercase">
-                @if(Prices::$rdmFull > Prices::$rdmRegular)
-                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)
-                @else
-                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>
-                @endif
+{{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}
+{{--                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)--}}
+{{--                @else--}}
+{{--                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>--}}
+{{--                @endif--}}
                 <br>
                 <u class="text-blue"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
                 <br>
@@ -665,23 +672,23 @@
         <div class="row">
             <h1 class="columns upper">Still Have Questions?</h1>
             <div class="columns">
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "When does the course officially start?",
                 "answer" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "Do these lessons work for electronic and acoustic drum-sets?",
                 "answer" => "Yes, the lessons will work on both electric and acoustic drum-sets. While you’ll even gain plenty of value with just a practice pad, it’s recommended that you have access to a drum set to get the most from this course."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "How much time per week will this course require?",
                 "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "Will I still have full access to the course after 26 weeks?",
                 "answer" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside The Rock Drumming Masterclass, so you can review the materials or re-watch the lessons, anytime."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "What if I can’t follow the lessons EVERY week?",
                 "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
                 ])

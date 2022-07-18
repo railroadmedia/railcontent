@@ -1,24 +1,21 @@
-@extends('products.misc-products-layout')
+@extends('drumeo._partials.layout')
 
-
-@section('meta')
-    @parent
+@section('head-includes')
     <title>Drum Technique Made Easy | Drumeo</title>
     <meta name="description" content="Drum Technique Made Easy is a 26-week online course with Bruce Becker.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Drum Technique Made Easy is a 26-week online course with Bruce Becker.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-@stop()
 
-@section('head')
     @parent
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
     <link href="{{ asset('/assets/members-area/css/gulp/drum-shop-dtme.css') }}" rel="stylesheet">
 
-    <?php \App\Analytics\Tracker::trackProductImpression('drum-technique-made-easy'); ?>
+<!--    --><?php //\App\Analytics\Tracker::trackProductImpression('drum-technique-made-easy'); ?>
 @stop()
 
-@section('scripts')
-    @parent
+@section('layout-scripts')
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
@@ -54,16 +51,10 @@
             });
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/js/modal-autoplay.js') }}"></script>
 @stop()
 
-@section('content')
-    @include('products.partials.promo-banner', [
-                    "name" => "Drum Technique Made Easy",
-                    "fullPrice" => Prices::$dtmeFull,
-                    "price" => Prices::$dtmeRegular,
-                "noBreadcrumb" => true
-                ])
+@section('layout-body')
     <header class="hero-header">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <div class="video-wrap autoplay-video" data-open="trailer">
@@ -73,14 +64,16 @@
             <h3>Drum Technique Made Easy is a 26-week
                 <br class="inline lg:hidden">online course with Bruce Becker & Jared Falk.</h3>
 
-            <div><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div>
+{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
+            </div>
 
             <p class="uppercase price">
-                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
-                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
-                @else
-                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
-                @endif
+{{--                @if(Prices::$dtmeFull > Prices::$dtmeRegular)--}}
+{{--                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)--}}
+{{--                @else--}}
+{{--                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>--}}
+{{--                @endif--}}
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
                 <br>
@@ -91,7 +84,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
             </div>
         </div>
     </header>
@@ -212,162 +205,162 @@
             </div>
 
             <div class="lesson-descriptions">
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => " 0",
                 "weekTitle" => "Overview of Each Grip",
                 "weekDate" => "10 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => " 0",
                 "weekTitle" => "Ergonomic Drum Setup",
                 "weekDate" => "5 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => " 0",
                 "weekTitle" => "Practice Space",
                 "weekDate" => "2 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "1",
                 "weekTitle" => "Setting Up The Choreography",
                 "weekDate" => "23 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "2",
                 "weekTitle" => "Hand To Hand Triplets",
                 "weekDate" => "17 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "3",
                 "weekTitle" => "Hand To Hand 16th Notes",
                 "weekDate" => "12 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "4",
                 "weekTitle" => "Four Note Groupings In Triplets",
                 "weekDate" => "9 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "5",
                 "weekTitle" => "Five Note Groupings In 16th Notes",
                 "weekDate" => "9 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "6",
                 "weekTitle" => "Five Note Groupings In Triplets",
                 "weekDate" => "7 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "7",
                 "weekTitle" => "The Motions Applied To Rudiments",
                 "weekDate" => "22 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "8",
                 "weekTitle" => "Working With Paradiddles",
                 "weekDate" => "17 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "9",
                 "weekTitle" => "The Moeller Technique",
                 "weekDate" => "23 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "10",
                 "weekTitle" => "Moeller Motion With Opposite Hand Filling In",
                 "weekDate" => "15 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "11",
                 "weekTitle" => "Applying Paradiddles To Grooves",
                 "weekDate" => "14 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "12",
                 "weekTitle" => "Paradiddle Grooves With Displaced Accents",
                 "weekDate" => "11 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "13",
                 "weekTitle" => "Bass Drum Technique",
                 "weekDate" => "16 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "14",
                 "weekTitle" => "Hand To Foot Combinations",
                 "weekDate" => "18 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "15",
                 "weekTitle" => "Applying Bass Drum In Patterns",
                 "weekDate" => "16 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "16",
                 "weekTitle" => "Analysis Of French Grip",
                 "weekDate" => "13 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "17",
                 "weekTitle" => "Identifying The Move For The Jazz Ride Pattern",
                 "weekDate" => "25 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "18",
                 "weekTitle" => "Combining French & German Grip (Part I)",
                 "weekDate" => "14 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "19",
                 "weekTitle" => "Combining French & German Grip (Part II)",
                 "weekDate" => "14 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "20",
                 "weekTitle" => "The Push-Pull Technique",
                 "weekDate" => "24 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "21",
                 "weekTitle" => "Drags, Ruffs & Diddles",
                 "weekDate" => "17 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "22",
                 "weekTitle" => "The 3 Stroke Ruff",
                 "weekDate" => "23 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "23",
                 "weekTitle" => "Moving Paradiddles To The Tips For Speed",
                 "weekDate" => "30 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "24",
                 "weekTitle" => "Applying Movements To Different Drums",
                 "weekDate" => "18 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "25",
                 "weekTitle" => "Time Concepts",
                 "weekDate" => "25 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "26",
                 "weekTitle" => "Afro-Cuban Applications",
                 "weekDate" => "34 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "bonusNumber" => "1",
                 "weekTitle" => "Traditional Grip",
                 "weekDate" => "9 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "bonusNumber" => "2",
                 "weekTitle" => "Clarifying The Motions & Traditional Grip Expansion",
                 "weekDate" => "9 min",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "bonusNumber" => "3",
                 "weekTitle" => "Pivoting Over The Middle Finger",
                 "weekDate" => "3 min",
@@ -501,8 +494,12 @@
     <section class="compare-table">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>while saving {{ round(100 - (100 * (round(Prices::$dtmeRegular / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
-                compared to private lessons.</h3>
+            <h3>
+                while saving
+{{--                {{ round(100 - (100 * (round(Prices::$dtmeRegular / 26, 2) / 30))) }}--}}
+                % or more <br class="inline sm:inline">
+                compared to private lessons.
+            </h3>
 
             <table>
                 <tbody>
@@ -571,13 +568,21 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>${{ round(Prices::$dtmeRegular / 26, 2) }}/week</td>
+                    <td>
+                        $
+{{--                        {{ round(Prices::$dtmeRegular / 26, 2) }}--}}
+                        /week
+                    </td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(Prices::$dtmeRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$dtmeRegular }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just
+{{--                    {{ round(Prices::$dtmeRegular / 26, 2) }} --}}
+                    per week</u> (billed at $
+{{--                {{ Prices::$dtmeRegular }} --}}
+                for the entire course).
                 <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
@@ -589,42 +594,42 @@
             <div class="container clearfix lg:mx-auto max-w-6xl">
                 <h1><strong>What past students are saying</strong> about<br class="hidden sm:inline"> Bruce & Drum Technique Made Easy.</h1>
 
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/KenBrashear.jpg",
                 "testimonialHighlight" => "I broke through a 5-year impasse!",
                 "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique -- it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
                 "name" => "Ken Brashear",
                 "location" => "North Carolina, USA"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/PaulSquires.jpg",
                 "testimonialHighlight" => "I was trying to take shortcuts, but they weren’t working.",
                 "fullTestimonial" => "This is my technique bible. I took up the drums again at 56 years old and for the past six years I was trying to take shortcuts, but they weren’t working. This course basically taught me drum technique from scratch. It has helped immensely and now I’m much more relaxed while drumming, more confident in my abilities, and my band is playing more gigs while growing our following!",
                 "name" => "Paul Squires",
                 "location" => "London, United Kingdom"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/TitoMartinez.jpg",
                 "testimonialHighlight" => "This is the best explanation of technique I’ve seen in my 40+ years of drumming.",
                 "fullTestimonial" => "My drumming speed and fluidity was hitting a wall and I just couldn’t break through. Drum Technique Made Easy gave me the tools to start working out my problems and develop those skills. I’m still not exactly where I’d like to be, but my technique has improved significantly and I have a pathway to get there through application and practice. This is the best explanation of technique I’ve seen in my 40+ years of drumming. I highly recommend it.",
                 "name" => "Tito Martinez",
                 "location" => "Arizona, USA"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/ElizaGagnon.jpg",
                 "testimonialHighlight" => "It gave me a new fluency and fluidity for playing grooves!",
                 "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly -- and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
                 "name" => "Eliza Gagnon",
                 "location" => "Massachusetts, USA"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/MagnusSkarstedt.jpg",
                 "testimonialHighlight" => "I started playing more musically with the band.",
                 "fullTestimonial" => "The 26 weeks made me take the time to actually work in a structured way to take me from point a-b-c-d. And I realized Drum Technique Made Easy was working when I started playing more musically with the band. I had more self-confidence and played more relaxed. This comes slowly, it doesn't happen suddenly. It is small steps and it takes the time it needs to change the way you are used to playing.<br><br> No matter how good a player you are today, you will be even better after a course like this. It is definitely worth the money if you are willing to put in the time.",
                 "name" => "Magnus Skarstedt",
                 "location" => "Sweden"
                 ])
-                @include('products.partials._testimonial', [
+                @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/WilliamHoyt.jpg",
                 "testimonialHighlight" => "The drum set has become much more fun!",
                 "fullTestimonial" => "It’s just amazing to feel the difference in playing things that were difficult before Drum Technique Made Easy. It almost seemed to sneak up on me from nowhere. Bruce is such a brilliant musician and teacher. It was a pleasure to get new great lessons every week that were explained so well.<br><br> The drum set has become much more fun, with ease and fluidity naturally coming through my motions. Take the course! If you stick with it, it will forever change your playing for the better!",
@@ -654,16 +659,21 @@
 
             <h1>
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">
-                Course For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week</h1>
+                Course For Just $
+{{--                {{ round(Prices::$dtmeRegular / 26, 2) }} --}}
+                Per Week
+            </h1>
 
-            <div><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div>
+{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
+            </div>
 
             <h2 class="uppercase">
-                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
-                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
-                @else
-                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
-                @endif
+{{--                @if(Prices::$dtmeFull > Prices::$dtmeRegular)--}}
+{{--                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)--}}
+{{--                @else--}}
+{{--                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>--}}
+{{--                @endif--}}
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
                 <br>
@@ -686,23 +696,23 @@
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1 class="upper">Still Have Questions?</h1>
             <div>
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "When does the course officially start?",
                 "answer" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "Do these lessons work for electronic and acoustic drum-sets?",
                 "answer" => "Yes, the lessons will work on both electric and acoustic drum-sets. Since you'll be developing your drum technique, you can even use a practice pad."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "How much time per week will this course require?",
                 "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "Will I still have full access to the course after 26 weeks?",
                 "answer" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Drum Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "What if I can’t follow the lessons EVERY week?",
                 "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
                 ])
