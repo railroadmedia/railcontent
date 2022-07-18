@@ -33,6 +33,7 @@
                 "soldOut" => $product->sold_out,
                 "specialText" => $product->special_text,
                 "freeShipping" => $product->free_shipping,
+                "size_case_sensitive" => $product->size_case_sensitive,
             ])
         </div>
 
@@ -69,7 +70,7 @@
                     ])
 
                     @include('product.partials.instructor',[
-                        "instructorPhoto" => $product->instructor_img,
+                        "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc
                     ])
 
@@ -95,6 +96,14 @@
 
                     @include('product.partials.bonuses')
                 @else
+                    @if(!empty($product->overview))
+                        <p><x-markdown>{!! nl2br($product->overview) !!}</x-markdown></p>
+                    @endif
+
+                        @if(!empty($product->product_img))
+                            <img class="my-4" src="@if(str_contains($product->product_img, 'amazonaws') || str_contains($product->product_img, 'cloudfront')) {{$product->product_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->product_img  }}@endif" alt="product image" />
+                        @endif
+
                     @include('product.partials.specs',[
                         'specList'=> $product->specs,
                         'featureList' => $product->features

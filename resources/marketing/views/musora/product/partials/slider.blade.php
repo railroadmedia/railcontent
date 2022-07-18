@@ -29,7 +29,7 @@
                 @endif
             </div>
             <div class="slider-nav mx-auto w-full @if(!empty($noSlider)) hidden @endif">
-                @if(!empty($images))
+                @if(!empty($images) && count($images) > 1)
                     @foreach ($images as $image)
                         <div>
                             <img

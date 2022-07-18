@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/navigation-sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/shop.css') }}">
     <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
+
+    @parent
 @stop
 
 @section('layout-body')
@@ -19,11 +21,34 @@
 
     <div class="container mx-auto px-4 py-10" x-data="{ filter: 'all' }">
 
-        <div class="px-2 md:px-3 text-4xl mb-10">
-            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'all'">All</span>
-            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'lessons'">Lessons</span>
-            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'accessories'">Accessories</span>
-            <span class="mr-4 cursor-pointer" x-on:click=" filter = 'clothing'">Clothing</span>
+        <div class="px-2 md:px-3 lg:pl-8 md:text-2xl lg:text-4xl mb-10">
+            <span
+                class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                x-on:click="console.log({{$shirts}})"
+                x-bind:class="filter === 'all' ? 'border-b-2' : 'text-gray-400'"
+            >
+                All</span>
+            <span
+                class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                x-on:click=" filter = 'lessons'"
+                x-bind:class="filter === 'lessons' ? 'border-b-2' : 'text-gray-400'"
+            >
+                Lessons
+            </span>
+            <span
+                class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                x-on:click=" filter = 'accessories'"
+                x-bind:class="filter === 'accessories' ? 'border-b-2' : 'text-gray-400'"
+            >
+                Accessories
+            </span>
+            <span
+                class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                x-on:click=" filter = 'clothing'"
+                x-bind:class="filter === 'clothing' ? 'border-b-2' : 'text-gray-400'"
+            >
+                Clothing
+            </span>
         </div>
 
         @if(count($lessons) > 0)
@@ -83,6 +108,34 @@
             </section>
         @endif
 
+        @if(count($hats) > 0)
+            <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
+                <ul class="fixed-cards">
+                    <li>
+                        <h1 class="px-2 md:px-3">
+                            <div class="heading-icon text-{{ $theme }}"><i class="fas fa-tshirt"></i></div>
+                            Hats
+                        </h1>
+                    </li>
+                    @foreach($hats as $hat){
+                    @include('product.partials._drum-shop-card', [
+                        "sku" => $hat->sku,
+                        "itemURL" => '/'.$theme.'/shop/'.$hat->slug,
+                        "thumbnail" => $hat->thumbnail,
+                        "title" => $hat->name,
+                        "cardDescription" => $hat->short_desc,
+                        "fullPrice" => $hat->price,
+                        "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
+                        "physical" => true,
+                        "sizes" => $hat->sizes,
+                        "soldOut" => $hat->sold_out,
+                    ])
+                    }
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
         @if(count($shirts) > 0)
         <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="fixed-cards">
@@ -104,6 +157,7 @@
                         "physical" => true,
                         "sizes" => $shirt->sizes,
                         "soldOut" => $shirt->sold_out,
+                        "size_case_sensitive" => $shirt->size_case_sensitive,
                     ])
                 }
                 @endforeach

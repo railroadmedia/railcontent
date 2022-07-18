@@ -31,15 +31,15 @@
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
                 <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
-                <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">${{ $fullPrice }}</s>
+                <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
                     @if(number_format($price, 2) == intval($price))
-                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  $price  }}</span></strong>
+                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
                     @else
-                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  number_format($price, 2)  }}</span></strong>
+                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
                     @endif
                 </h1>
             @elseif(isset($price))
-                <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ $price }}</span></strong></h1>
+                <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif
 
             @if(!empty($specialText))
@@ -65,9 +65,9 @@
                             <option
                                 class="bg-white @if($size->sold_out) text-gray @else text-black @endif"
                                 @if($size->sold_out) disabled @endif
-                                value="{{$product->sku . '-' . $size}}"
+                                value="{{$product->sku . '-' . $size->code}}"
                                 data-price="{{$product->price ?? 0}}"
-                                data-product-json='{"{{$product->sku . '-' . $size}}": 1}'
+                                data-product-json='{"{{$product->sku . '-' . $size->code}}": 1}'
                             >{{ $size->name }}</option>
                         @endforeach
                     </select>

@@ -26,6 +26,8 @@
                     @endif
                     @if(!empty($specialPrice))
                         <p><strong>{{ floatval($specialPrice) }}</strong></p>
+                    @elseif(!empty($soldOut) && $soldOut)
+                        <p class="text-{{$theme}}"><strong>SOLD OUT</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s class="text-[#9da6a8]">WAS ${{ $fullPrice }}</s>
                             <strong class="text-{{$theme}}"> NOW
@@ -62,19 +64,19 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="text-{{ $theme }} text-[22px] md:text-[26px] lg:text-3xl mb-3"><strong> ${{  $price  }}</strong></p>
+                        <p class="text-{{ $theme }} text-[22px] md:text-[26px] lg:text-3xl mb-3"><strong> ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description relative m-0" style="top: -13px;"><em class="text-red">Or free with {{ ucfirst($theme) }}</em></p>
                     @endif
                     @if(empty($soldOut))
-                        @if(!empty($sizes))
+                        @if(!empty($sizes) && count($sizes) > 0)
                             <select class="pack-pick" title="Shirt Size" required>
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
                                         @if($size->sold_out) disabled @endif
-                                    value="{{ "&products[".$sku."-".$size->code."]=1" }}"data-product-json='{{'{"'.$sku.'-'.$size->code.'": 1}'}}'
+                                    value="&products[{{ $sku }}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"data-product-json='{"{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                                     >
                                         {{ $size->name }}
                                     </option>
