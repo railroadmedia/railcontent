@@ -17422,30 +17422,27 @@ content-catalogue, transition {
   padding: 0 !important;
 }
 
-#replyContainer .tox-tinymce, #createThreadForm .tox-tinymce {
+.text-editor-container .tox-tinymce {
   border-width: 1px;
 }
 
-.tw-dark #replyContainer .tox .tox-toolbar-overlord,
-.tw-dark #replyContainer .tox:not(.tox-tinymce-inline) .tox-editor-header, .tw-dark #createThreadForm .tox .tox-toolbar-overlord,
-.tw-dark #createThreadForm .tox:not(.tox-tinymce-inline) .tox-editor-header {
+.tw-dark .text-editor-container .tox .tox-toolbar-overlord,
+.tw-dark .text-editor-container .tox:not(.tox-tinymce-inline) .tox-editor-header {
   background-color: transparent;
 }
-.tw-dark #replyContainer .tox-tinymce, .tw-dark #createThreadForm .tox-tinymce {
+.tw-dark .text-editor-container .tox-tinymce {
   border: none;
   background-color: #002039;
 }
-.tw-dark #replyContainer .tox .tox-edit-area__iframe, .tw-dark #createThreadForm .tox .tox-edit-area__iframe {
+.tw-dark .text-editor-container .tox .tox-edit-area__iframe {
   background-color: transparent;
 }
-.tw-dark #replyContainer .tox .tox-toolbar__primary,
-.tw-dark #replyContainer .tox .tox-toolbar, .tw-dark #createThreadForm .tox .tox-toolbar__primary,
-.tw-dark #createThreadForm .tox .tox-toolbar {
+.tw-dark .text-editor-container .tox .tox-toolbar__primary,
+.tw-dark .text-editor-container .tox .tox-toolbar {
   background-color: #081825 !important;
 }
-.tw-dark #replyContainer .tox .tox-edit-area__iframe body#tinymce,
-.tw-dark #replyContainer iframe body, .tw-dark #createThreadForm .tox .tox-edit-area__iframe body#tinymce,
-.tw-dark #createThreadForm iframe body {
+.tw-dark .text-editor-container .tox .tox-edit-area__iframe body#tinymce,
+.tw-dark .text-editor-container iframe body {
   color: white;
 }
 
@@ -21865,6 +21862,9 @@ a:visited{
 .tw-mr-\[15px\]{
   margin-right: 15px !important;
 }
+.tw-ml-\[9px\]{
+  margin-left: 9px !important;
+}
 .tw-ml-0{
   margin-left: 0px !important;
 }
@@ -23870,6 +23870,10 @@ a:visited{
 .tw-text-\[\#8c9698\]{
   --tw-text-opacity: 1 !important;
   color: rgb(140 150 152 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
 .tw-text-\[\#52525A\]{
   --tw-text-opacity: 1 !important;
