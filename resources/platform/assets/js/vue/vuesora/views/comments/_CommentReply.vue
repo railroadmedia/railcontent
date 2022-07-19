@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1  dark:tw-text-white">
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
@@ -27,13 +27,13 @@
 
             <p
                 v-if="showUserExp"
-                class="body dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
+                class="tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none"
             >
                 {{ userExpRank }}
             </p>
             <p
                 v-if="showUserExp"
-                class="tiny dense tw-text-center font-compressed"
+                class="tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none"
             >
                 {{ userExpValue }} XP
             </p>
@@ -41,38 +41,36 @@
         <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-flex tw-flex-row tw-items-center tw-mb-1 comment-meta">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
-                    <h2 class="body tw-font-bold break-words">
+                    <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
                         <a
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-text-black tw-no-underline"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="text-black no-decoration"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </span>
 
-                        <span class="x-tiny text-grey-3 tw-font-bold tw-italic tw-uppercase tw-ml-1">
+                        <span class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
                             {{ dateString }}
                         </span>
                     </h2>
                 </div>
 
-                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-flex-auto">
+                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-grow-0">
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tiny no-decoration text-grey-3 tw-pointer tw-mr-1"
+                            class="tiny no-decoration tw-pointer tw-mr-1"
+                            @click="deleteComment"
                         >
-                            <i
-                                class="fas fa-trash"
-                                @click="deleteComment"
-                            ></i>
+                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-black dark:tw-text-[#9EC0DC]" />
                         </span>
                     </div>
                 </div>
@@ -88,43 +86,44 @@
 
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mb-1">
+                <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="replying ? themeTextClass : 'text-grey-3'"
-                            dusk="reply-button"
-                            @click="openReply"
+                            v-if="!isUsersPost"
+                            class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            :class="comment.is_liked ? themeTextClass : 'tw-text-white'"
+                            dusk="like-button"
+                            @click="likeComment"
                         >
-                            <i class="fas fa-reply"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
+                            <ThumbUpIconOutline class="tw-h-[22px] tw-w-[22px]" />
+                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                &nbsp;{{ comment.like_count }}
                             </span>
                         </p>
 
                         <p
-                            v-if="!isUsersPost"
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'text-grey-3'"
-                            @click="likeComment"
+                            class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            :class="replying ? themeTextClass : 'tw-text-white'"
+                            dusk="reply-button"
+                            @click="replyToComment"
                         >
-                            <i class="fas fa-thumbs-up"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ comment.is_liked ? 'Liked' : 'Like' }}&nbsp;
+                            <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
+                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                &nbsp;REPLY&nbsp;
                             </span>
                         </p>
 
                         <span class="tw-flex-grow"></span>
 
                         <p
-                            class="x-tiny tw-font-bold text-grey-3 tw-uppercase nowrap tw-pointer noselect"
+                            class="dark:tw-text-white tw-text-black tw-cursor-pointer tw-flex tw-items-center"
                             :data-open-modal="openModalString"
                             @click="openLikes"
                         >
-                            <i
-                                class="fas fa-thumbs-up tw-text-white likes-icon"
+                            <ThumbUpIcon
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
-                            ></i> {{ comment.like_count }}
+                            />&nbsp;{{ comment.like_count }}
                         </p>
                     </div>
                 </div>
@@ -144,15 +143,16 @@
                     <div class="tw-flex tw-flex-col tw-w-full">
                         <div class="tw-flex tw-flex-row tw-w-full">
                             <text-editor
+                                :fieldKey="domID + '-editor'"
                                 ref="textEditor"
                                 v-model="replyInterface"
-                                toolbar="bold italic underline | bullist numlist | link"
+                                @input="handleInput"
                                 :height="150"
                             ></text-editor>
                         </div>
                         <div class="tw-flex tw-flex-row tw-justify-center mv-1">
                             <a
-                                class="btn flat tw-text-black collapse-150 short tw-mr-1"
+                                class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
                                 @click="replying = false"
                             >
                                 Cancel
@@ -194,14 +194,21 @@
 import { DateTime } from 'luxon';
 import Utils from '../../assets/js/classes/utils';
 import TextEditor from '../../components/TextEditor/TextEditor.vue';
+import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue'
 import Toasts from '../../assets/js/classes/toasts';
 import CommentService from '../../assets/js/services/comments';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
+import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentReply',
     components: {
         'text-editor': TextEditor,
+        TrashIcon,
+        ThumbUpIcon,
+        ThumbUpIconOutline,
+        MusoraIcon
     },
     mixins: [ThemeClasses],
     props: {
@@ -278,6 +285,7 @@ export default {
             },
             set(val) {
                 this.reply = val;
+                this.$refs.textEditor.contentInterface = this.reply;
             },
         },
 
@@ -343,6 +351,9 @@ export default {
         */
     },
     methods: {
+        handleInput(payload) {
+            this.reply = payload.currentValue;
+        },
         likeComment() {
             this.isLiked = !this.isLiked;
 
@@ -371,12 +382,12 @@ export default {
         },
 
         postReply() {
-            if (this.reply.currentValue) {
+            if (this.reply) {
                 this.loading = true;
 
                 return CommentService.postReply({
                     parent_id: this.parentId,
-                    comment: this.reply.currentValue,
+                    comment: this.reply,
                 })
                     .then((resolved) => {
                         if (resolved) {

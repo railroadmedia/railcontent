@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -17,24 +17,25 @@
                 >
                     <select
                         id="commentSort"
+                        class="dark:tw-text-white"
                         v-model="sortInterface"
                     >
-                        <option value="-like_count">
+                        <option class="tw-text-black" value="-like_count">
                             Popular
                         </option>
-                        <option value="-created_on">
+                        <option class="tw-text-black" value="-created_on">
                             Latest
                         </option>
-                        <option value="created_on">
+                        <option class="tw-text-black" value="created_on">
                             Oldest
                         </option>
-                        <option value="-mine">
+                        <option class="tw-text-black" value="-mine">
                             My Comments
                         </option>
                     </select>
                     <label
                         for="commentSort"
-                        :class="themeColor"
+                        :class="brandTextColor"
                     >Sort By</label>
                 </div>
             </div>
@@ -56,26 +57,14 @@
                         class="tw-rounded-full"
                     >
                 </div>
-
-                <p
-                    v-if="showUserExp"
-                    class="x-tiny dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
-                >
-                    {{ userExpRank }}
-                </p>
-                <p
-                    v-if="showUserExp"
-                    class="x-tiny dense tw-text-center font-compressed"
-                >
-                    {{ userExpValue }} XP
-                </p>
             </div>
 
             <div class="tw-flex tw-flex-col tw-grow">
                 <text-editor
+                    :fieldKey="contentId + '-comment-text-editor'"
                     ref="textEditor"
                     v-model="commentInterface"
-                    toolbar="bold italic underline | bullist numlist | link"
+                    @input="handleInput"
                     :height="150"
                 ></text-editor>
 
@@ -170,6 +159,7 @@ import Utils from '../../assets/js/classes/utils';
 import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { textColor } from '../../../../constants/brands'
 
 export default {
     name: 'Comments',
@@ -207,6 +197,10 @@ export default {
                 team: this.currentUser.access_level === 'team',
                 lifetime: this.currentUser.access_level === 'lifetime',
             };
+        },
+
+        brandTextColor() {
+            return textColor[this.brand];
         },
 
         userExpValue() {
@@ -334,12 +328,12 @@ export default {
         },
 
         postComment() {
-            if (this.comment.currentValue) {
+            if (this.comment) {
                 this.loading = true;
 
                 return CommentService.postComment({
                     content_id: this.contentId,
-                    comment: this.comment.currentValue,
+                    comment: this.comment,
                 })
                     .then((resolved) => {
                         if (resolved) {
@@ -368,7 +362,7 @@ export default {
         },
 
         handleInput(payload) {
-            this.commentInterface = payload.currentValue;
+            this.comment = payload.currentValue;
         },
 
         // NOTE: you cannot jump to replies, only top level parent comments

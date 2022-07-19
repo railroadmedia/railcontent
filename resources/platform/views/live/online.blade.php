@@ -6,8 +6,8 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto fluid bg-grey-5 pv-3">
-        <div class="tw-container tw-mx-auto">
+    <div class="fluid bg-grey-5 pv-3">
+        <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
             {{-- Youtube Live Embed --}}
             @include('partials.bladesora.members.content.lesson-video._live-embed', [
                 "themeColor" => "{{ $brand }}",
@@ -36,7 +36,7 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14" style="margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; max-width: 100%; padding-left: 87px; padding-right: 87px;">
         <div id="lessonInfo" class="tw-flex tw-flex-row tw-items-center">
-            <div class="tw-flex tw-flex-col tw-grow tw-bg-white tw-shadow corners-10">
+            <div class="tw-flex tw-flex-col tw-grow tw-shadow">
                 @if(!empty($lessonContent->fetch('*assignments')))
                     @foreach($lessonContent->fetch('*assignments', []) as $assignment)
                         <div class="tw-flex tw-flex-row">
@@ -59,7 +59,7 @@
         </div>
         <div class="tw-flex tw-flex-col mv-3">
             <div class="tw-flex tw-flex-row mb-3 ph">
-                <h1 class="heading dark:tw-text-white">Upcoming Lessons</h1>
+                <h1 class="heading dark:tw-text-white">Live Schedule</h1>
             </div>
 
             <div class="tw-flex tw-flex-row">
