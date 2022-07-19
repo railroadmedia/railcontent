@@ -31,13 +31,13 @@
 
             <p
                 v-if="showUserExp"
-                class="body dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
+                class="tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none"
             >
                 {{ userExpRank }}
             </p>
             <p
                 v-if="showUserExp"
-                class="tiny dense tw-text-[#9EC0DC] tw-text-center font-compressed"
+                class="tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none"
             >
                 {{ userExpValue }} XP
             </p>
@@ -45,23 +45,23 @@
         <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
-                    <h2 class="break-words">
+                    <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
                         <a
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </span>
 
-                        <span class="tw-font-bold tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px]">
+                        <span class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
                             {{ dateString }}
                         </span>
                     </h2>
@@ -71,12 +71,10 @@
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tiny no-decoration text-grey-3 tw-pointer tw-mr-1"
+                            class="tiny no-decoration tw-pointer tw-mr-1"
+                            @click="deleteComment"
                         >
-                            <i
-                                class="fas fa-trash"
-                                @click="deleteComment"
-                            ></i>
+                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-black dark:tw-text-[#9EC0DC]" />
                         </span>
 
                         <!--<span class="tiny no-decoration text-grey-3 pointer">-->
@@ -102,40 +100,40 @@
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
                             v-if="!isUsersPost"
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'text-grey-3'"
+                            class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            :class="comment.is_liked ? themeTextClass : 'tw-text-white'"
                             dusk="like-button"
                             @click="likeComment"
                         >
-                            <i class="fas fa-thumbs-up"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ comment.is_liked ? 'Liked' : 'Like' }}&nbsp;
+                            <ThumbUpIconOutline class="tw-h-[22px] tw-w-[22px]" />
+                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                &nbsp;{{ comment.like_count }}
                             </span>
                         </p>
 
                         <p
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="replying ? themeTextClass : 'text-grey-3'"
+                            class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            :class="replying ? themeTextClass : 'tw-text-white'"
                             dusk="reply-button"
                             @click="replyToComment"
                         >
-                            <i class="fas fa-reply"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
+                            <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
+                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                <span v-if="repliesToShow.length > 0">&nbsp;{{repliesToShow.length}}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}&nbsp;
                             </span>
                         </p>
 
                         <span class="tw-flex-grow"></span>
 
                         <p
-                            class="x-tiny tw-font-bold text-grey-3 tw-uppercase nowrap tw-pointer noselect"
+                            class="dark:tw-text-white tw-text-black tw-cursor-pointer tw-flex tw-items-center"
                             :data-open-modal="openModalString"
                             @click="openLikes"
                         >
-                            <i
-                                class="fas fa-thumbs-up tw-text-white likes-icon"
+                            <ThumbUpIcon
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
-                            ></i> {{ comment.like_count }}
+                            />&nbsp;{{ comment.like_count }}
                         </p>
                     </div>
                 </div>
@@ -231,10 +229,10 @@
 
             <div
                 v-if="comment.replies && comment.replies.length > 2"
-                class="tw-flex tw-flex-row align-center"
+                class="tw-flex tw-flex-row tw-items-center tw-justify-center tw-text-center"
             >
                 <a
-                    class="btn btn-tiny flat text-grey-3 collapse-150"
+                    class="btn btn-tiny flat dark:tw-text-[#9EC0DC] tw-text-[18px] collapse-150"
                     @click="showAllReplies = !showAllReplies"
                 >
                     {{ showAllReplies ? 'Hide Replies' : 'Show All Replies' }}
@@ -249,14 +247,21 @@ import Toasts from '../../assets/js/classes/toasts';
 import CommentService from '../../assets/js/services/comments';
 import TextEditor from '../../components/TextEditor/TextEditor.vue';
 import CommentReply from './_CommentReply.vue';
+import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue'
 import Utils from '../../assets/js/classes/utils';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
+import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentPost',
     components: {
         'text-editor': TextEditor,
         'comment-reply': CommentReply,
+        TrashIcon,
+        ThumbUpIcon,
+        ThumbUpIconOutline,
+        MusoraIcon,
     },
     mixins: [ThemeClasses],
     props: {
