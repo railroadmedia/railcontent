@@ -71,7 +71,7 @@
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tiny no-decoration tw-pointer tw-mr-1"
+                            class="no-decoration tw-cursor-pointer tw-mr-1"
                             @click="deleteComment"
                         >
                             <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-black dark:tw-text-[#9EC0DC]" />
@@ -99,7 +99,6 @@
                 <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
-                            v-if="!isUsersPost"
                             class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
                             :class="comment.is_liked ? themeTextClass : 'tw-text-white'"
                             dusk="like-button"
