@@ -119,7 +119,7 @@
                         >
                             <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
                             <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
-                                <span v-if="repliesToShow.length > 0">&nbsp;{{repliesToShow.length}}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}&nbsp;
+                                <span v-if="comment.replies && comment.replies.length > 0">&nbsp;{{ comment.replies.length }}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}&nbsp;
                             </span>
                         </p>
 
