@@ -1,5 +1,17 @@
 @import './_variables.scss';
 
+.comments-container {
+  & .user-avatar {
+    width: 100px;
+    height: 100px;
+
+    & img {
+      position: absolute;
+      top: 0;
+    }
+  }
+}
+
 .user-avatar {
   position:relative;
   height:0;

@@ -45,8 +45,18 @@ export default {
     activePath(path) {
       let windowPathArray = window.location.pathname.split('/');
       let pathArray = path.split('/');
-      //Homepage Check
-      return windowPathArray[2] === pathArray[2];
+
+      //Page Check
+      if(pathArray[3] !== '500-songs-in-5-days' && windowPathArray[3] !== '500-songs-in-5-days'){
+        return windowPathArray[2] === pathArray[2];
+      }
+
+      // special case for guitareo 500 songs
+      if (windowPathArray[3] === '500-songs-in-5-days' && pathArray[3] === '500-songs-in-5-days') {
+        return true;
+      }
+
+
     }
   },
 }

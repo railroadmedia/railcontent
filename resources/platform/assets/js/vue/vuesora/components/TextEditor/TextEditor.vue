@@ -1,8 +1,8 @@
 <template>
-    <div class="tw-flex tw-flex-col" v-if="renderTinyMCE">
+    <div class="text-editor-container tw-flex tw-flex-col" v-if="renderTinyMCE">
         <input v-model="contentInterface" type="hidden" :name="fieldKey" class="">
         <tinymce-editor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
-            :init="initObject" @input="handleInput"></tinymce-editor>
+            :init="initObject" @change="handleInput"></tinymce-editor>
     </div>
 </template>
 <script>

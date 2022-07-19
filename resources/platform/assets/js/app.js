@@ -11,6 +11,7 @@ import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 //App Components
+import chat from '@musora/chatsora/src/components/Chat/Chat.vue';
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
@@ -258,7 +259,8 @@ app.component('AppContainer', AppContainer)
    .component('ContentAssignment', ContentAssignment)
    .component('LegacyLoops', LegacyLoops)
    .component('VideoResources', VideoResources)
-   .component('ContentLessonActionButtons', ContentLessonActionButtons);
+   .component('ContentLessonActionButtons', ContentLessonActionButtons)
+   .component('chat', chat);
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

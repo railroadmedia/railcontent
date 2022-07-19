@@ -45,5 +45,6 @@ class PrimaryURLSlugToContentTypeMap
         'packs' => 'pack',
         'coaches' => 'instructor',
         'rudiments' => 'rudiment',
+        'routines' => 'routine',
     ];
 }

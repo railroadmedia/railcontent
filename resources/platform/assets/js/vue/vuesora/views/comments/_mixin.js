@@ -19,7 +19,7 @@ export default {
         },
 
         userId: {
-            type: Number | String,
+            type: [String, Number],
         },
 
         userName: {

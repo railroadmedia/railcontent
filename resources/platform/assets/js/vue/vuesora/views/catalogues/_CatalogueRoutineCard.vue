@@ -52,7 +52,7 @@
             </div>
 
             <div class="card-info tw-flex tw-flex-col">
-                <p class="tiny tw-text-black mb-1 mt-1">{{ mappedData.description }}</p>
+                <p class="tw-text-sm dark:tw-text-white tw-text-black mb-1 mt-1">{{ mappedData.description }}</p>
             </div>
         </div>
     </div>

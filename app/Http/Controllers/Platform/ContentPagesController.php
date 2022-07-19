@@ -52,6 +52,10 @@ class ContentPagesController extends BaseController
         ConfigService::$availableBrands = [brand()];
         ContentRepository::$bypassPermissions = true;
 
+        if ($contentTypeName == 'lessons' && $brand == 'guitareo') {
+            return $this->guitareoLessonsPage($request, $domain, $brand);
+        }
+
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogName = $contentTypeName;
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
@@ -259,6 +263,7 @@ class ContentPagesController extends BaseController
                 "nextLessonUrl" => $nextLessonUrl,
                 "nextLessonJson" => $nextLessonJson,
                 "xpBonus" => $xpBonus,
+                'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path'
             ]
         );
     }
@@ -316,9 +321,11 @@ class ContentPagesController extends BaseController
             $nextLearningPathLesson = '';
         }
 
+        $childrenLabel = (config('railcontent.children_name_mapping')[brand()][$secondContent['type']]);
+
         // set view data
         $infoData = [
-            "courses" => count($courses),
+            "$childrenLabel" => count($courses),
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
@@ -347,6 +354,7 @@ class ContentPagesController extends BaseController
                 'backButton' => $backButton,
                 'xpBonus' => $secondContent->fetch('xp'),
                 'xpAmount' => $secondContent->fetch('total_xp'),
+                'displayItemAsOverview' => $secondContent['type'] === 'learning-path-level'  && in_array(brand(),['drumeo', 'pianote'])
             ]
         );
     }
@@ -409,9 +417,11 @@ class ContentPagesController extends BaseController
             $nextLearningPathLesson = '';
         }
 
+        $childrenLabel = (config('railcontent.children_name_mapping')[brand()][$thirdContent['type']]);
+
         // set view data
         $infoData = [
-            "courses" => count($courses),
+            "$childrenLabel" => count($courses),
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
@@ -444,6 +454,7 @@ class ContentPagesController extends BaseController
                 'backButton' => $backButton,
                 'xpBonus' => $thirdContent->fetch('xp'),
                 'xpAmount' => $thirdContent->fetch('total_xp'),
+                'displayItemAsOverview' => false
             ]
         );
     }
@@ -838,6 +849,122 @@ class ContentPagesController extends BaseController
         );
     }
 
+    public function guitareoLessonsPage(Request $request, $domain, $brand)
+    {
+        // all members have access to all packs atm
+        if (user()->isAMember()) {
+            ContentRepository::$bypassPermissions = true;
+        }
+
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+        ContentRepository::$pullFutureContent = false;
+
+        $packs = [];
+
+        $packs[] = $this->contentService->getById(217320);
+        $packs[] = $this->contentService->getById(214542);
+        $packs[] = $this->contentService->getBySlugAndType('the-ultimate-guide-to-recording-guitar', 'pack')->first();
+        $packs[] = $this->contentService->getBySlugAndType('guitar-system', 'pack')->first();
+
+        $guitarQuestPack = $this->contentService->getBySlugAndType('guitar-quest', 'pack')->first();
+
+        $newCourses = $this->contentService->getFiltered(
+            1,
+            10,
+            '-published_on',
+            ['course'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false
+        );
+
+        $newQuickTips = $this->contentService->getFiltered(
+            1,
+            10,
+            '-published_on',
+            ['quick-tips'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false
+        );
+
+        $legacyPacks = [];
+
+//        $legacyPacks[] = $this->contentService->getBySlugAndType('blues-guitar-blueprint', 'pack')->first();
+//        $legacyPacks[] = $this->contentService->getBySlugAndType('beginner-guitar-system', 'pack')->first();
+
+        $topics = [
+            [
+                'topic' => 'Chords',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CChords',
+            ],
+            [
+                'topic' => 'Fingerstyle',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CFingerstyle',
+            ],
+            [
+                'topic' => 'Gear',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CGear',
+            ],
+            [
+                'topic' => 'Guitar Essentials',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CGuitar%20Essentials',
+            ],
+            [
+                'topic' => 'Improvisation & Soloing',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CImprovisation%20%26%20Soloing',
+            ],
+            [
+                'topic' => 'Picking',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CPicking',
+            ],
+//            [
+//                'topic' => 'Reading Music',
+//                'url' => '/guitareo/courses?required_fields[]=topic%2CReading%20Music',
+//            ],
+            [
+                'topic' => 'Rhythm',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CRhythm',
+            ],
+            [
+                'topic' => 'Scales',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CScales',
+            ],
+            [
+                'topic' => 'Songwriting',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CSongwriting',
+            ],
+            [
+                'topic' => 'Technique',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CTechnique',
+            ],
+            [
+                'topic' => 'Theory & Ear Training',
+                'url' => '/guitareo/courses?required_fields[]=topic%2CTheory%20%26%20Ear%20Training',
+            ],
+        ];
+
+        return view(
+            'content.guitareo-lessons',
+            [
+                'guitarQuestPack' => $guitarQuestPack,
+                'packs' => $packs,
+                'newCourses' => $newCourses->toResponseRawJson(),
+                'newQuickTips' => $newQuickTips->toResponseRawJson(),
+                'topics' => $topics,
+                'legacyPacks' => $legacyPacks,
+            ]
+        );
+    }
+
     public function shows(Request $request, $domain, $brand)
     {
         $showsViewData = DrumeoShowDataMapper::cards();
@@ -894,6 +1021,28 @@ class ContentPagesController extends BaseController
             "lessonTypes" => $lessonTypes,
         ]);
     }
+
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    private function getUsersStartedRoutinesContent()
+    {
+        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+            ['routine'],
+            user()->id,
+            'started',
+            4
+        );
+
+        $totalResults = $this->contentService->countByTypesUserProgressState(
+            ['routine'],
+            user()->id,
+            'started'
+        );
+
+        return new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]);
+    }
+
 
     /**
      * @param Request $request

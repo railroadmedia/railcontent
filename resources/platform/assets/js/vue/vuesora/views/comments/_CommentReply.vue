@@ -1,6 +1,6 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1">
-        <div class="tw-flex tw-flex-col avatar-column pr">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1  dark:tw-text-white">
+        <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
                 class="user-avatar smaller"
@@ -15,14 +15,14 @@
                         src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="comment.user['fields.profile_picture_image_url']"
                         data-ix-fade
-                        class="tw-rounded"
+                        class="tw-rounded-full"
                     >
                 </a>
             </div>
             <img
                 v-if="!hasPublicProfiles"
                 :src="comment.user['fields.profile_picture_image_url']"
-                class="tw-rounded"
+                class="tw-rounded-full"
             >
 
             <p
@@ -33,7 +33,7 @@
             </p>
             <p
                 v-if="showUserExp"
-                class="tiny dense tw-text-center font-compressed"
+                class="tiny dense dark:tw-text-[#9EC0DC] tw-text-center font-compressed"
             >
                 {{ userExpValue }} XP
             </p>
@@ -41,29 +41,29 @@
         <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-flex tw-flex-row tw-items-center tw-mb-1 comment-meta">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
-                    <h2 class="body tw-font-bold break-words">
+                    <h2 class="break-words">
                         <a
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-text-black tw-no-underline"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="text-black no-decoration"
+                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
                         >
                             {{ comment.user.display_name }}
                         </span>
 
-                        <span class="x-tiny text-grey-3 tw-font-bold tw-italic tw-uppercase tw-ml-1">
+                        <span class="tw-font-bold tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px]">
                             {{ dateString }}
                         </span>
                     </h2>
                 </div>
 
-                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-flex-auto">
+                <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-grow-0">
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
@@ -88,19 +88,8 @@
 
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mb-1">
+                <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
-                        <p
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="replying ? themeTextClass : 'text-grey-3'"
-                            dusk="reply-button"
-                            @click="openReply"
-                        >
-                            <i class="fas fa-reply"></i>
-                            <span class="hide-xs-only">
-                                {{ replying ? 'Replying' : 'Reply' }}
-                            </span>
-                        </p>
 
                         <p
                             v-if="!isUsersPost"
@@ -110,7 +99,18 @@
                         >
                             <i class="fas fa-thumbs-up"></i>
                             <span class="hide-xs-only">
-                                {{ comment.is_liked ? 'Liked' : 'Like' }}
+                                &nbsp;{{ comment.is_liked ? 'Liked' : 'Like' }}&nbsp;
+                            </span>
+                        </p>
+                        <p
+                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
+                            :class="replying ? themeTextClass : 'text-grey-3'"
+                            dusk="reply-button"
+                            @click="openReply"
+                        >
+                            <i class="fas fa-reply"></i>
+                            <span class="hide-xs-only">
+                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
                             </span>
                         </p>
 
@@ -135,24 +135,25 @@
                     v-if="replying"
                     class="tw-flex tw-flex-row comment-post mv-2"
                 >
-                    <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
+                    <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
                         <img
                             :src="currentUser.avatar"
                             class="rounded"
                         >
                     </div>
-                    <div class="tw-flex tw-flex-col">
-                        <div class="tw-flex tw-flex-row">
+                    <div class="tw-flex tw-flex-col tw-w-full">
+                        <div class="tw-flex tw-flex-row tw-w-full">
                             <text-editor
+                                :fieldKey="domID + '-editor'"
                                 ref="textEditor"
                                 v-model="replyInterface"
-                                toolbar="bold italic underline | bullist numlist | link"
+                                @input="handleInput"
                                 :height="150"
                             ></text-editor>
                         </div>
                         <div class="tw-flex tw-flex-row tw-justify-center mv-1">
                             <a
-                                class="btn flat tw-text-black collapse-150 short tw-mr-1"
+                                class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
                                 @click="replying = false"
                             >
                                 Cancel
@@ -244,6 +245,9 @@ export default {
             type: Boolean,
             default: () => true,
         },
+        openedCommentId: {
+            type: [String, Number],
+        },
     },
     data() {
         return {
@@ -275,6 +279,7 @@ export default {
             },
             set(val) {
                 this.reply = val;
+                this.$refs.textEditor.contentInterface = this.reply;
             },
         },
 
@@ -331,13 +336,18 @@ export default {
         },
     },
     mounted() {
+        /*
         this.$root.$on('replyOpened', (payload) => {
             if (this.comment.id !== payload.id) {
                 this.replying = false;
             }
         });
+        */
     },
     methods: {
+        handleInput(payload) {
+            this.reply = payload.currentValue;
+        },
         likeComment() {
             this.isLiked = !this.isLiked;
 
@@ -360,18 +370,18 @@ export default {
 
         openReply() {
             this.replying = !this.replying;
-            this.$root.$emit('replyOpened', {
+            this.$emit('replyOpened', {
                 id: this.comment.id,
             });
         },
 
         postReply() {
-            if (this.reply.currentValue) {
+            if (this.reply) {
                 this.loading = true;
 
                 return CommentService.postReply({
                     parent_id: this.parentId,
-                    comment: this.reply.currentValue,
+                    comment: this.reply,
                 })
                     .then((resolved) => {
                         if (resolved) {
@@ -412,5 +422,12 @@ export default {
             });
         },
     },
+    watch: { 
+      	openedCommentId: function(newVal, oldVal) { // watch it
+          if (newVal !== oldVal && this.openedCommentId !== this.comment.id) {
+            this.replying = false;
+          }
+        }
+    }
 };
 </script>

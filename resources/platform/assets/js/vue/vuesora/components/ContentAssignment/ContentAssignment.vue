@@ -104,7 +104,7 @@
                                 <i class="fas fa-chevron-left ml-1"></i> <span class="tw-hidden sm:tw-inline-block tw-pl-2">Previous</span>
                             </button>
                         </div>
-                        <div class="tw-tw-flex tw-flex-column self-center tw-text-center tw-flex-grow">
+                        <div class="tw-flex tw-flex-column self-center tw-text-center tw-flex-grow">
                             <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center">
                                 {{ title }}
                             </h2>
@@ -598,14 +598,12 @@ export default {
 
 #practiceOverlay {
     position: fixed;
-    top: 50px;
+    top: 58px;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 97;
-    @include medium {
-        top: 56px;
-    }
+    z-index: 100;
+
     .loading-exercise {
         position: absolute;
         top: 50%;

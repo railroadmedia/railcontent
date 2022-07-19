@@ -254,7 +254,7 @@ class NavigationService
                     ],
                     [
                         'name' => '500 Songs',
-                        'path' => '/'.brand().'/lessons',
+                        'path' => '/'.brand().'/packs/500-songs-in-5-days/233612/introduction/233941',
                         'icon' => '500-songs',
                     ],
                     [
@@ -371,7 +371,7 @@ class NavigationService
             'dashboardPageUrl' => '/'.brand().'/profile/'.user()->id.'/dashboard',
             'notificationsPageUrl' => '/'.brand().'/notifications',
             'playlistsPageUrl' => '/',
-            'schedulePageUrl' => '/',
+            'schedulePageUrl' => '/'.brand().'/schedule',
             'applyForReviewPageUrl' => '/',
             'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
             'supportPageUrl' => '/'.brand().'/support',

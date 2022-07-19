@@ -37,13 +37,13 @@
     @component('partials._header-banner',
         ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',])
         @slot('content')
-            <div class="tw-inline-tw-flex tw-w-full tw-tw-flex-col tw-pr-4">
+            <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     @if($catalogueMeta['name'] == 'Q&A')
                         <musora-icon icon-name="light-bulb-filled"
                                         class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Routines')
-                        <musora-icon icon-name="routines"
+                        <musora-icon icon-name="routines-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     @elseif($catalogueMeta['name'] == 'Quick Tips')
                         <musora-icon icon-name="light-bulb-filled"
@@ -152,17 +152,6 @@
                 </transition>
             </div>
         </section>
-    @endif
-
-    @if($catalogueMeta['name'] == 'Routines')
-        <div class="tw-py-8 tw-w-full tw-bg-true-gray-800">
-            <div class="container">
-                <h2 class="tw-text-white">
-                    <span class="tw-font-black tw-text-2xl">{{ $routinesCount }}</span>
-                    <span class="tw-text-base tw-uppercase tw-font-semibold">Routines</span>
-                </h2>
-            </div>
-        </div>
     @endif
 
     @if($lessonType === 'routine' && $hasRecentRoutines)
