@@ -44,5 +44,7 @@ class PrimaryURLSlugToContentTypeMap
         'sonor-drums' => 'sonor-drums',
         'packs' => 'pack',
         'coaches' => 'instructor',
+        'rudiments' => 'rudiment',
+        'routines' => 'routine',
     ];
 }

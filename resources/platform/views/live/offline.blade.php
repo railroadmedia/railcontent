@@ -6,7 +6,8 @@
 
 @section('content')
 
-    @component('partials._header-banner')
+    @component('partials._header-banner',
+        ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
         @slot('content')
             <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
@@ -20,27 +21,25 @@
                     don't miss out. Whenever we stream live you'll be able to watch the lesson here and chat with
                     other Musora members!
                 </p>
-
-                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3">
-                    <div class="tw-flex tw-flex-col xs-12 sm-6 md-4 tw-mb-1">
-                        <label id="timezoneLabel" for="timezoneSelector" class="tw-flex-auto body">
-                            <button class="btn ph-1">
-                            <span class="tw-bg-white tw-text-white inverted short">
-                                <i class="fas fa-globe tw-mr-1"></i>
+                
+                {{-- Header CTAs --}}
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3 tw-max-w-xl">
+                    <div class="flex flex-column">
+                        <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer">
+                            <button class="tw-btn-secondary tw-text-white ">
+                                <i class="fas fa-globe mr-1"></i>
                                 Change Your Timezone
-                            </span>
                             </button>
-
                             <select name="timezone" id="timezoneSelector">
                                 @foreach($timezones as $timezone)
-                                    <option value="{{ substr($timezone, 0, strpos($timezone, ' - ')) }}"
-                                        {{
-                                            substr(
-                                                $timezone,
-                                                0,
-                                                strpos($timezone, ' - ')
-                                            ) == $fullTimezoneString ? 'selected' : ''
-                                        }}
+                                    <option class="tw-text-black"
+                                            {{
+                                                substr(
+                                                    $timezone,
+                                                    0,
+                                                    strpos($timezone, ' - ')
+                                                ) == $fullTimezoneString ? 'selected' : ''
+                                            }}
                                     >
                                         {{ $timezone }}
                                     </option>
@@ -53,14 +52,23 @@
         @endslot
     @endcomponent
 
-    <div class="tw-container tw-mx-auto">
-        <div class="tw-flex tw-flex-col mv-3">
-            <div class="tw-flex tw-flex-row pv-3">
-                <h1 class="heading">Upcoming Lessons</h1>
-            </div>
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
 
+        <div class="tw-flex tw-flex-col mv-3">
+            <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-[10px]">
+                <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
+                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                        Scheduled Releases
+                    </h1>
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
+                        Subscribe to Calendar 
+                    </button>
+                </div>
+            </div>   
             <div class="tw-flex tw-flex-row">
-                <content-schedule 
+                <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
                     theme-color="{{ $brand }}"
                 />

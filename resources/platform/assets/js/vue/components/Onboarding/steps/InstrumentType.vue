@@ -1,11 +1,14 @@
 <script setup>
+import { ref } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import SkipStep from "../SkipStep.vue";
 import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import { ref } from "vue";
+import { saveGear } from "../services"
+import { getMultiSelectOptions } from "../utils";
+
 const props = defineProps({
   brand: {
     type: String,
@@ -16,30 +19,48 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  configOptions: {
+    type: Object,
+  }
 });
+
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
-const options = [
-  { value: "a", text: "Hipopotamo" },
-  { value: "b", text: "Rinoceronte" },
-  { value: "c", text: "Cachicamo" },
-  { value: "aa", text: "Hipopotamo" },
-  { value: "bb", text: "Perro" },
-  { value: "cc", text: "Cachicamo" },
-  { value: "aas", text: "Gato" },
-  { value: "bbs", text: "Rinoceronte" },
-  { value: "ccs", text: "Ave" },
-];
+
+const options = ref(
+  getMultiSelectOptions({
+    property: 'gears',
+    ...props
+  })
+);
+
 function handleMultiSelection(selection) {
   emit(
     "onCheckStep",
     2,
-    Object.values(selection).find((val) => val)
+    !!Object.values(selection).find((val) => val)
   );
-  emit("onChangeInfo", { ...props.info, instrumentTypes: selection });
+  emit("onChangeInfo", { ...props.info, instrumentTypes: { ...props.info.instrumentTypes, [props.brand]: selection} });
 }
-function skipStep() {
-  alert("* the user skipped the step *");
-}
+
+const handleNextStep = () => {
+  const data = [];
+
+  Object.entries(props.info.instrumentTypes[props.brand]).forEach(([type, isChecked]) => {
+    if (isChecked) {
+      data.push(type);
+    }
+  })
+
+  saveGear({
+    data,
+    brand: props.brand
+  }).then(() => {
+    emit('onChangeStep', 3);
+    emit('onCheckStep', 2, true);
+  }).catch(() => {
+    showErrorNotification.value = true;
+  });
+};
 
 function goBack() {
   emit('onChangeStep', 1);
@@ -61,13 +82,13 @@ function goBack() {
       <StepHeader
         title="What kind of gear will you be practicing with?"
         :subtitle="`You selected ${info.instrument}! Now it’s time to tell us about
-            your practice set-up. You can select multiple gear types and change
+            your practice set up. You can select multiple gear types and change
             your settings in your profile at anytime.`"
         @onGoBack="goBack"
       />
       <MultiSelect
         :options="options"
-        :initialSelection="info.instrumentTypes"
+        :initialSelection="info.instrumentTypes[brand]"
         classOverride="tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />
@@ -82,11 +103,7 @@ function goBack() {
     >
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 3);
-          }
-        "
+        @onButtonClick="handleNextStep"
         :isDisabled="!steps[2].checked"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
         >Next</Button
@@ -99,17 +116,12 @@ function goBack() {
       />
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 3);
-          }
-        "
+        @onButtonClick="handleNextStep"
         :isDisabled="!steps[2].checked"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >
-      <SkipStep
-        title="SKIP ACCOUNT SETUP"
+      <SkipStep :brand="brand"
         classOverride="tw-mt-[20px] md:tw-mt-0"
       />
     </div>

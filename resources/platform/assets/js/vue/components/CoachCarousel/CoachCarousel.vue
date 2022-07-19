@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onUpdated } from "vue";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import SingleCoach from "./SingleCoach.vue";
 import { textColor } from "../../../constants/brands";
@@ -102,6 +102,7 @@ function onWheelScroll(e) {
           :cardImg="coach.img"
           :name="coach.name"
           :focusText="coach.focusText"
+          :isFollowed="coach.isFollowed"
         />
       </div>
     </div>

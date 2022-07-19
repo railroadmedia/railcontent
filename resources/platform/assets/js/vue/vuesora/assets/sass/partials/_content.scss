@@ -788,22 +788,6 @@ content-catalogue, transition {
   }
 }
 
-.lessons-topics-card {
-  flex:0 0 100%;
-
-  @include small {
-    flex:0 0 50%;
-  }
-
-  @include medium {
-    flex:0 0 33.33%;
-  }
-
-  @include xLarge {
-    flex:0 0 25%;
-  }
-}
-
 @media screen and (max-width: 639px) {
   .gq-container {
     background-image: url(https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background-mobile.jpg);

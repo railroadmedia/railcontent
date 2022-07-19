@@ -19,13 +19,18 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
+
 function onInstrumentSelection(instrument) {
-  emit("onChangeInfo", { user: props.info.user, instrument });
+  emit("onChangeInfo", { ...props.info, user: props.info.user, instrument });
   emit("onCheckStep", 1, true);
   emit("onChangeStep", 2);
+  /*
+  TODO: Check if this is still necessary.
+  
   for (let i = 2; i < 6; i++) {
     emit("onCheckStep", i, false);
   }
+  */
 }
 function goBack() {
   emit('onChangeStep', 0);

@@ -178,7 +178,7 @@ class CoachPagesController extends Controller
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = true;
 
-        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
+        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
 
         $latestLessons = $this->contentService->getFiltered(
             1,
@@ -257,7 +257,7 @@ class CoachPagesController extends Controller
         }
 
         $includedTypes =
-            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', []));
+            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
 
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),

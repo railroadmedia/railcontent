@@ -14,12 +14,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * App\Modules\UserManagementSystem\Models\User
@@ -61,6 +60,10 @@ use Illuminate\Support\Facades\Hash;
  * @property string|null $drums_gear_cymbal_brands
  * @property string|null $drums_gear_photo
  * @property int|null $drums_playing_since_year
+ * @property boolean|false $drumeo_onboarding_skip_setup
+ * @property boolean|false $pianote_onboarding_skip_setup
+ * @property boolean|false $guitareo_onboarding_skip_setup
+ * @property boolean|false $singeo_onboarding_skip_setup
  * @property int|null $singing_since_year
  * @property int|null $singing_gear_mic_brands
  * @property int|null $singing_gear_photo
@@ -179,6 +182,7 @@ use Illuminate\Support\Facades\Hash;
  * @property int $is_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
  * @method static Builder|User whereMembershipExpirationDate($value)
+ * @property int $is_pack_owner
  * @property int $send_mobile_app_push_notifications
  * @property int $send_email_notifications
  * @method static Builder|User whereSendEmailNotifications($value)
@@ -225,6 +229,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'drums_gear_hardware_brands',
         'drums_gear_cymbal_brands',
         'drums_gear_set_brands',
+        'drums_gear_photo',
         'drums_playing_since_year',
         'piano_gear_keyboard_brands',
         'piano_gear_piano_brands',
@@ -238,7 +243,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'guitar_playing_since_year',
         'singing_since_year',
         'singing_gear_mic_brands',
-        'singing_gear_photo'
+        'singing_gear_photo',
+        'drumeo_onboarding_skip_setup',
+        'pianote_onboarding_skip_setup',
+        'guitareo_onboarding_skip_setup',
+        'singeo_onboarding_skip_setup'
     ];
 
 
@@ -270,8 +279,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true): Attribute
-    {
+    public function profilePictureUrl($usingCDN = true)
+    : Attribute {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
@@ -300,7 +309,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function totalXp(): Attribute
+    public function totalXp()
+    : Attribute
     {
         return Attribute::make(
             get: function ($value) {
@@ -373,7 +383,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isAMember()
     {
-        return true; // todo: connect
+        return $this->isALifetimeMember() ||
+            (!empty($this->membership_expiration_date) && $this->membership_expiration_date > Carbon::now());
     }
 
     /**
@@ -381,11 +392,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function isALifetimeMember($brand = null)
     {
-        if ($brand == 'drumeo') {
+        // todo: may need to account for brand here in the future
 
-        }
-
-        return true; // todo: connect
+        return $this->is_lifetime_member ?? false;
     }
 
     /**
@@ -483,13 +492,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function sendPasswordResetNotification($token)
     {
         //todo: to be configured
-//        $class = config('usora.password_reset_notification_class');
-//
-//        (new AnonymousNotifiable())->route(
-//            config('usora.password_reset_notification_channel'),
-//            $this->getEmailForPasswordReset()
-//        )
-//            ->notify(new $class($token));
+        //        $class = config('usora.password_reset_notification_class');
+        //
+        //        (new AnonymousNotifiable())->route(
+        //            config('usora.password_reset_notification_channel'),
+        //            $this->getEmailForPasswordReset()
+        //        )
+        //            ->notify(new $class($token));
     }
 
     /**
@@ -533,5 +542,50 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function setPassword($password, $hash = true)
     {
         $this->password = $hash ? Hash::make($password) : $password;
+    }
+
+    public function onboardingGear()
+    {
+        return $this->hasMany(OnboardingGear::class);
+    }
+
+    public function onboardingTopics()
+    {
+        return $this->hasMany(OnboardingTopic::class);
+    }
+
+    public function onboardingGenres()
+    {
+        return $this->hasMany(OnboardingGenre::class);
+    }
+
+    public function onboardingExperience()
+    {
+        return $this->hasMany(OnboardingExperience::class);
+    }
+
+   /**
+     * @return bool
+     */
+    public function isPackOwner()
+    {
+        return $this->is_pack_owner;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPackOnlyOwner()
+    {
+        return $this->isPackOwner() && !$this->isAMember();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnExpiredMember()
+    {
+        return
+            !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
     }
 }

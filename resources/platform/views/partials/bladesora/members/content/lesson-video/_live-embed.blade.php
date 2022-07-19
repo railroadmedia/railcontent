@@ -52,15 +52,16 @@
         </div>
     </div>
     <div id="chat-container" class="tw-flex tw-flex-col" dusk="chat-container">
-        <chat
-            api-key="{{ $apiKey }}"
-            token="{{ $token }}"
-            user-id="{{ current_user()->getId() }}"
-            chat-channel-name="{{ $chatChannelName }}"
-            questions-channel-name="{{ $questionsChannelName }}"
-            :is-administrator="{{ json_encode(boolval($isAdministrator)) }}"
-            :user-data="{{ json_encode($userData) }}"
-            embed-url="{{ $embedUrl }}"
-        ></chat>
+{{-- todo: fix --}}
+{{--        <chat--}}
+{{--            api-key="{{ $apiKey }}"--}}
+{{--            token="{{ $token }}"--}}
+{{--            user-id="{{ user()->id }}"--}}
+{{--            chat-channel-name="{{ $chatChannelName }}"--}}
+{{--            questions-channel-name="{{ $questionsChannelName }}"--}}
+{{--            :is-administrator="{{ json_encode(boolval($isAdministrator)) }}"--}}
+{{--            :user-data="{{ json_encode($userData) }}"--}}
+{{--            embed-url="{{ $embedUrl }}"--}}
+{{--        ></chat>--}}
     </div>
 </div>

@@ -98,7 +98,7 @@
                     ],
                     [
                         "title" => parse_lesson_type_readable($parent->fetch('type'), true),
-                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => parse_lesson_type_readable($parent->fetch('type'), true)]),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$parent->fetch('type')]]),
                     ],
                     [
                         "title" => $parent->fetch('fields.title'),
@@ -119,7 +119,7 @@
                 ],
                     [
                         "title" => parse_lesson_type_readable($lessonContent->fetch('type'), true),
-                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => parse_lesson_type_readable($lessonContent->fetch('type'), true)]),
+                        "url" => url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]),
                     ],
                 [
                     "title" => $lessonContent->fetch('fields.title')

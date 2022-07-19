@@ -19,7 +19,7 @@
 
                     <div class="form-group tw-mb-2">
                         <input type="text" name="title" id="title" value="{{ old('title') }}" 
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#223F57]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
                         >
                         <label for="title" class="dark:tw-text-[#9EC0DC] {{ $brand }}">Title</label>
 

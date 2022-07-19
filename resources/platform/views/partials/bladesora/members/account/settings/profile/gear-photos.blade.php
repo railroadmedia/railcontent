@@ -4,13 +4,14 @@
     </div>
 </div>
 <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-4 tw-gap-4">
-    
+
     {{-- DRUMS --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-drums', [
         'brand' => '{{ $brand }}',
-        'method' => 'patch',
+        'method' => 'post',
         'gearPhotoUrl' => user()->drums_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
+        'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->drums_gear_photo)
     ])
@@ -18,9 +19,10 @@
     {{-- PIANO --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-piano', [
         'brand' => '{{ $brand }}',
-        'method' => 'patch',
+        'method' => 'post',
         'gearPhotoUrl' => user()->piano_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
+        'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->piano_gear_photo)
     ])
@@ -28,9 +30,10 @@
     {{-- GUITAREO --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-guitars', [
         'brand' => '{{ $brand }}',
-        'method' => 'patch',
+        'method' => 'post',
         'gearPhotoUrl' => user()->guitar_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
+        'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->guitar_gear_photo)
     ])
@@ -38,9 +41,10 @@
     {{-- SINGEO --}}
     @include('partials.bladesora.members.account.settings.profile.photo-form-singing', [
         'brand' => '{{ $brand }}',
-        'method' => 'patch',
+        'method' => 'post',
         'gearPhotoUrl' => user()->singing_gear_photo,
-        'uploadRequestEndpoint' => '/user-management-system/user/update/' . user()->id,
+        'uploadRequestEndpoint' => '/user-management-system/picture/upload',
+        'fieldSaveRequestEndpoint' => '/user-management-system/user/update/'  . user()->id,
         'userId' => user()->id,
         'canClear' => !empty(user()->singing_gear_photo)
     ])

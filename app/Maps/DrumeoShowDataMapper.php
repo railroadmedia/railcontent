@@ -8,7 +8,7 @@ class DrumeoShowDataMapper
 {
     public static function cards()
     {
-        $showTypes = array_flip(config('railcontent.showTypes'));
+        $showTypes = array_flip(config('railcontent.showTypes')['drumeo']);
 
         return array_intersect_key(array_replace($showTypes, config('railcontent.cataloguesMetadata')['drumeo']), $showTypes);
     }

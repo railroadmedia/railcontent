@@ -99,7 +99,7 @@
         <!-- SUBMIT BUTTON -->
         <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min"
                 type="submit"
-                :disabled="!formValid"
+                :disabled="!formValid || !formVerified"
                 :class="themeBgClass"
         >
                 Submit

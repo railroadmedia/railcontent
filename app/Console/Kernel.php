@@ -6,6 +6,7 @@ use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
+use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         SeedUserContentData::class,
+        SeedLiveAndScheduledContent::class,
         PopulateNewRolesAndPermissionsTables::class,
         PopulateUserRolesTable::class,
         RunMWPPhaseOneLaunchMigrations::class,

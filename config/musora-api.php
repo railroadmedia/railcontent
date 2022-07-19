@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'auth-middleware' => ['api_authenticated', 'auth:sanctum',
+    'auth-middleware' => ['web_or_api_authenticated', 'auth:sanctum',
         \Railroad\MusoraApi\Middleware\SetCustomDecorators::class
     ],
 //        [
@@ -65,10 +65,13 @@ return [
             'long_bio',
             'focus',
             'genre',
+            'data.guitar_chord_image_url',
             'lesson_count',
             'lessons' => [
                 'id',
             ],
+            'pdf',
+            'pdf_in_g'
         ],
 
         'instructor' => [
@@ -459,6 +462,18 @@ return [
             ],
             '*fields.instructor',
             'total_length_in_seconds',
+            'next_lesson' => [
+                'id',
+                'type',
+                'published_on',
+                'completed',
+                'started',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'length_in_seconds',
+                'data.thumbnail_url',
+            ],
         ],
 
         'course-part' => [
@@ -670,6 +685,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'ranges',
             'assignments' => [
                 'id',
                 'xp',
@@ -1134,6 +1150,7 @@ return [
                 'xp',
                 'display_name',
                 'xp_level',
+                'rank',
             ],
             'comment',
             'created_on',
@@ -1237,6 +1254,20 @@ return [
                 'is_added_to_primary_playlist',
                 'progress_percent',
             ],
+            'lessons' => [
+                'id',
+                'type',
+                'published_on',
+                'started',
+                'completed',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'fields.video.fields.length_in_seconds',
+                'data.thumbnail_url',
+                'mobile_app_url',
+                'musora_api_mobile_app_url',
+            ],
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1265,6 +1296,7 @@ return [
             'is_liked_by_current_user',
             'like_count',
             'total_length_in_seconds',
+            'length_in_seconds',
             'level_position',
             'course_position',
             '*fields.instructor',
@@ -1715,16 +1747,16 @@ return [
             'isEdge',
             'isEdgeExpired',
             'edgeExpirationDate',
-            'isPackOlyOwner',
+            'isPackOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
-            'notify_weekly_update',
-            'notify_on_lesson_comment_reply',
-            'notify_on_lesson_comment_like',
-            'notify_on_forum_followed_thread_reply',
-            'notify_on_forum_post_like',
-            'notify_on_forum_post_reply',
-            'notifications_summary_frequency_minutes',
+//            'notify_weekly_update',
+//            'notify_on_lesson_comment_reply',
+//            'notify_on_lesson_comment_like',
+//            'notify_on_forum_followed_thread_reply',
+//            'notify_on_forum_post_like',
+//            'notify_on_forum_post_reply',
+//            'notifications_summary_frequency_minutes',
             'permission_level',
             'helpscout_beacon_id'
         ],

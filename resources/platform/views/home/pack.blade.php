@@ -42,6 +42,12 @@
             @endcomponent
         @endif
 
+        {{-- My Stats --}}
+        <stats-section
+            brand="{{ $brand }}"
+            :userMetrics="{{ json_encode($userMetrics) }}"
+        ></stats-section>
+
     </div>
 
 @endsection

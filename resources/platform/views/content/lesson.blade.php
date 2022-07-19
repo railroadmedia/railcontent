@@ -1,4 +1,8 @@
-@extends('partials.layout', ['forceHideSidebar' => true])
+@php
+//dd(user())
+@endphp
+
+@extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
     <title>{{ $lessonContent->fetch('fields.title') }} | {{ $brand }} | Musora</title>
@@ -8,8 +12,6 @@
     <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
 @endsection
 
-
-
 @section('content')
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
@@ -17,10 +19,10 @@
     {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
     {{-- TODO: RT integration --}}
 
-    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col xl:tw-flex-row">
+    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
 
         <div class="tw-flex tw-flex-col tw-w-full">
-            
+
             <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
 
                 <div class="p-lg-only lean">
@@ -175,7 +177,7 @@
             {{-- Assignments --}}
             <div class="tw-flex">
                 <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
-        
+
                 @if(!empty($lessonContent->fetch('*assignments', [])))
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3">
                         <div class="tw-flex tw-flex-row pv-3">
@@ -228,7 +230,7 @@
                     </div>
                 @endif
             </div>
-        
+
             @include('partials.bladesora.members.content._lesson-complete', [
                 "themeColor" => '{{ $brand }}',
                 "thisLessonJson" => $thisLessonJson,
@@ -237,13 +239,18 @@
 
             <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
                 <div class="tw-flex tw-flex-row">
-            {{--                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"--}}
-            {{--                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"--}}
-            {{--                        user-avatar="{{ user()->profile_picture_url }}"--}}
-            {{--                        user-xp="{{ user()->total_xp }}"--}}
-            {{--                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"--}}
-            {{--                        :is-admin="{{ json_encode(user()->isAdmin()) }}">--}}
-            {{--                    </comments>--}}
+                    <comments 
+                        theme-color="{{ $brand }}"
+                        brand="{{ $brand }}"
+                        content-id="{{ $lessonContent->fetch('id') }}"
+                        user-id="{{ user()->id }}"
+                        user-name="{{ user()->display_name }}"
+                        user-avatar="{{ user()->profile_picture_url }}"
+                        user-xp="0"
+                        user-access-level="lifetime"
+                        profile-base-route="/members/profile/"
+                        :is-admin="false">
+                    </comments> 
                 </div>
             </div>
 
@@ -252,14 +259,15 @@
         {{-- Related Lessons Section --}}
         <div class="">
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col xl:tw-w-[420px] tw-m-4 tw-mr-0">
-                    <div class="tw-flex tw-flex-row tw-mb-4">
-                        <h6 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">
+                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                    <div class="tw-flex tw-flex-row tw-mb-5">
+                        <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-black dark:tw-text-white">
                             Related Lessons
                         </h6>
                     </div>
 
                     <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
+                        brand="{{ brand() }}"
                         :pre-loaded-content="{{ $relatedLessons }}" @if (!empty($lockUnowned))
                         :lock-unowned="true"
                         @endif

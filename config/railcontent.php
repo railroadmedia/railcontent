@@ -37,7 +37,7 @@ return [
         'vimeo_video_id',
         'focus',
         'genre'
-//        'video'
+        //        'video'
     ],
     'commentable_content_types' => [
         'course-part',
@@ -96,13 +96,13 @@ return [
         ],
     ],
 
-//    'awsS3_remote_storage' => [
-//        'accessKey' => env('S3_KEY'),
-//        'accessSecret' => env('S3_SECRET'),
-//        'region' => env('S3_REGION'),
-//        'bucket' => env('S3_BUCKET'),
-//    ],
-//    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
+    //    'awsS3_remote_storage' => [
+    //        'accessKey' => env('S3_KEY'),
+    //        'accessSecret' => env('S3_SECRET'),
+    //        'region' => env('S3_REGION'),
+    //        'bucket' => env('S3_BUCKET'),
+    //    ],
+    //    'awsCloudFront' => 'dzryyo1we6bm3.cloudfront.net',
 
     // aws integration
     'awsS3_remote_storage' => [
@@ -189,16 +189,34 @@ return [
                 'access_token' => env('VIMEO_ACCESS_TOKEN'),
             ],
         ],
-        'youtube' => [
-            'key' => env('YOUTUBE_API_KEY'),
-            'musora' => [
-                'user' => env('YOUTUBE_USERNAME'),
+
+        'drumeo' => [
+            'youtube_client_api' => [
+                'client_id' => env('DRUMEO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('DRUMEO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('DRUMEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
             ],
         ],
-        'youtube_client_api' => [
-            'client_id' => env('YOUTUBE_API_CLIENT_ID', env('YOUTUBE_API_CLIENT_ID')),
-            'client_secret' => env('YOUTUBE_API_CLIENT_SECRET', env('YOUTUBE_API_CLIENT_SECRET')),
-            'refresh_token' => env('YOUTUBE_API_CLIENT_REFRESH_TOKEN', env('YOUTUBE_API_CLIENT_REFRESH_TOKEN')),
+        'pianote' => [
+            'youtube_client_api' => [
+                'client_id' => env('PIANOTE_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('PIANOTE_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('PIANOTE_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
+        ],
+        'guitareo' => [
+            'youtube_client_api' => [
+                'client_id' => env('GUITAREO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('GUITAREO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('GUITAREO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
+        ],
+        'singeo' => [
+            'youtube_client_api' => [
+                'client_id' => env('SINGEO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('SINGEO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('SINGEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
         ],
     ],
 
@@ -249,16 +267,19 @@ return [
             \App\Decorators\Content\PianoteFoundationsLearningPathDecorator::class,
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
-            \App\Decorators\Content\LessonAssignmentDecorator::class, // this one
-//            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
-            \App\Decorators\Content\ContentLikesDecorator::class, // this one
-            \App\Decorators\Content\ResourceDecorator::class, // this one
+            \App\Decorators\Content\LessonAssignmentDecorator::class,
+            // this one
+            //            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
+            \App\Decorators\Content\ContentLikesDecorator::class,
+            // this one
+            \App\Decorators\Content\ResourceDecorator::class,
+            // this one
             \App\Decorators\Content\ContentExperienceDecorator::class,
-//            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
+            //            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
             \App\Decorators\Content\PackBundleLessonDecorator::class,
             \App\Decorators\Content\PackBundleDecorator::class,
             \App\Decorators\Content\PackDecorator::class,
-//            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
+            //            \App\Decorators\Content\PianoteMethodLearningPathDecorator::class,
             \App\Decorators\Content\LearningPathCourseDecorator::class,
             \App\Decorators\Content\LearningPathLessonDecorator::class,
             \App\Decorators\Content\NewDecorator::class,
@@ -267,9 +288,9 @@ return [
             \App\Decorators\Content\AssignmentXPDecorator::class,
 
             \App\Decorators\Content\CourseDecorator::class,
-//            \App\Decorators\Content\CoursePartDecorator::class,
+            //            \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
-//            \App\Decorators\Content\SongsDecorator::class,
+            //            \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
             \App\Decorators\Content\StudentFocusDecorator::class,
             \App\Decorators\Content\RudimentDecorator::class,
@@ -278,7 +299,7 @@ return [
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
-//            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
+            //            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
 
         ],
         'comment' => [
@@ -534,15 +555,15 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'published_on',
             ],
-//        '25-days-of-christmas' => [
-//            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/advent-calendar-show-card.jpg',
-//            'name' => '25 Days of Christmas',
-//            'shortname' => 'Videos',
-//            'icon' => 'icon-shows',
-//            'description' => "Join Jared, Dave, and Reuben in Drumeo’s version of a Christmas Advent Calendar! You will receive a new drumming treat each day counting down to Christmas! Be sure to “Subscribe” to the calendar to make sure you never miss an episode!",
-//            'allowableFilters' => [],
-//            'sortBy' => 'sort',
-//        ],
+            //        '25-days-of-christmas' => [
+            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/advent-calendar-show-card.jpg',
+            //            'name' => '25 Days of Christmas',
+            //            'shortname' => 'Videos',
+            //            'icon' => 'icon-shows',
+            //            'description' => "Join Jared, Dave, and Reuben in Drumeo’s version of a Christmas Advent Calendar! You will receive a new drumming treat each day counting down to Christmas! Be sure to “Subscribe” to the calendar to make sure you never miss an episode!",
+            //            'allowableFilters' => [],
+            //            'sortBy' => 'sort',
+            //        ],
             'rhythms-from-another-planet' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/rythms-from-another-planet.jpg',
                 'name' => 'Rhythms From Another Planet',
@@ -552,15 +573,15 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'sort',
             ],
-//        'namm-2019' => [
-//            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card.jpg',
-//            'name' => 'NAMM 2019',
-//            'shortname' => 'Episodes',
-//            'icon' => 'icon-shows',
-//            'description' => "Take a closer look at the 2019 NAMM show, including the best and most obscure products and booths from the show, and performances from the worlds best drummers at the Drumeo booth!",
-//            'allowableFilters' => [],
-//            'sortBy' => 'published_on',
-//        ],
+            //        'namm-2019' => [
+            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card.jpg',
+            //            'name' => 'NAMM 2019',
+            //            'shortname' => 'Episodes',
+            //            'icon' => 'icon-shows',
+            //            'description' => "Take a closer look at the 2019 NAMM show, including the best and most obscure products and booths from the show, and performances from the worlds best drummers at the Drumeo booth!",
+            //            'allowableFilters' => [],
+            //            'sortBy' => 'published_on',
+            //        ],
             'tama-drums' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/tama-drums.jpg',
                 'name' => 'Tama Drums',
@@ -588,15 +609,15 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
-//        'camp-drumeo-ah' => [
-//            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/camp-drumeo-ah.jpg',
-//            'name' => 'Camp Drumeo-Ah: Summer 2019',
-//            'shortname' => 'Episodes',
-//            'icon' => 'icon-shows',
-//            'description' => "Welcome to Camp Drum-eh-oh-ah! I’m K-Rad, the camp counselor, and are you in for a treat fellow drummers :). Get your sunscreen on and take your sticks out of hiding because we are in for some super awesome fun this summer!!!",
-//            'allowableFilters' => ['instructor'],
-//            'sortBy' => '-published_on',
-//        ],
+            //        'camp-drumeo-ah' => [
+            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/camp-drumeo-ah.jpg',
+            //            'name' => 'Camp Drumeo-Ah: Summer 2019',
+            //            'shortname' => 'Episodes',
+            //            'icon' => 'icon-shows',
+            //            'description' => "Welcome to Camp Drum-eh-oh-ah! I’m K-Rad, the camp counselor, and are you in for a treat fellow drummers :). Get your sunscreen on and take your sticks out of hiding because we are in for some super awesome fun this summer!!!",
+            //            'allowableFilters' => ['instructor'],
+            //            'sortBy' => '-published_on',
+            //        ],
             'diy-drum-experiments' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg',
                 'name' => 'DIY Drum Experiments',
@@ -707,10 +728,10 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
-            'student-reviews' => [
+            'student-review' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
@@ -721,7 +742,7 @@ return [
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -732,7 +753,7 @@ return [
             'bootcamps' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
                 'name' => 'Bootcamps',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',
@@ -743,7 +764,7 @@ return [
             'podcasts' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/podcast.png',
                 'name' => 'The Pianote Podcast',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Podcast',
                 'icon' => 'icon-podcast',
@@ -759,6 +780,17 @@ return [
                 "shortname" => "Chords & Scales",
                 "icon" => "icon-chords-scales-icon",
                 "description" => "Chords and scales will unlock the piano for you. They will help you to develop keyboard familiarity, dexterity, speed, accuracy, hand independance and more. We suggest working a major and minor chord/scale practice into your daily routine.",
+                'amountOfFutureLessonsToShow' => 3,
+                'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
+            'boot-camps' => [
+                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
+                'name' => 'Bootcamps',
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+                'shortname' => 'Bootcamps',
+                'icon' => 'icon-chords-scales-icon',
+                'description' => "Ready to work? Bootcamps are designed to help you really integrate and develop new skills. Select a topic that you want to improve on and get ready to play along with the lesson.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -796,6 +828,7 @@ return [
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'quick-tips' => [
+                'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
                 "name" => "Quick Tips",
                 "shortname" => "quick-tips",
                 "icon" => "icon-shows",
@@ -803,12 +836,14 @@ return [
                 "allowableFilters" => ['difficulty', 'topic', 'progress'],
             ],
             'question-and-answer' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer-singeo.png',
                 "name" => "Q&A",
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-reviews' => [
+            'student-review' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
@@ -824,103 +859,112 @@ return [
             ],
         ],
         'singeo' => [
-            'all' =>
-                [
-                    'name' => 'New Content',
-                    'shortname' => 'Content',
-                    'icon' => 'fas fa-star',
-                    'description' => "Here's a list of every lesson that's been published in Singeo. Browse on your
+            'all' => [
+                'name' => 'New Content',
+                'shortname' => 'Content',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of every lesson that's been published in Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                    'allowableFilters' => [],
-                    'sortBy' => '-published_on',
-                ],
-            'subscribed' =>
-                [
-                    'name' => 'Subscribed',
-                    'shortname' => 'Content',
-                    'icon' => 'fas fa-bell',
-                    'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
-                    'allowableFilters' => [],
-                    'sortBy' => '-published_on',
-                ],
-            'courses' =>
-                [
-                    "name" => "Courses",
-                    "icon" => "icon-courses",
-                    "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
-                    "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                ],
-            'songs' =>
-                [
-                    "name" => "Songs",
-                    "icon" => "icon-songs",
-                    "description" => "We all love singing along with our favorite songs!  Here you'll find a wide variety of songs from different artists and styles that you can sing along with.  You can even choose between three vocal ranges to fit your unique voice!",
-                    "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
-                ],
-            'quick-tips' =>
-                [
-                    "name" => "Quick Tips",
-                    "icon" => "icon-shows",
-                    "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
-                    "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                ],
-            'question-and-answer' =>
-                [
-                    "name" => "Q&A",
-                    "icon" => "fas fa-question-circle",
-                    "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
-                    "allowableFilters" => [],
-                ],
-            'student-reviews' =>
-                [
-                    "name" => "Student Reviews",
-                    "icon" => "icon-student-focus",
-                    "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                    "allowableFilters" => [],
-                ],
-            'routines' =>
-                [
-                    "name" => "Routines",
-                    "icon" => "icon-shows",
-                    "description" => "Finding the perfect practice routine to build your singing skills can be tough, especially on a busy schedule. Start your day right or warm-up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for the busy days when you just want to shake things up a bit.",
-                    "allowableFilters" => [],
-                ],
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
+            'subscribed' => [
+                'name' => 'Subscribed',
+                'shortname' => 'Content',
+                'icon' => 'fas fa-bell',
+                'description' => "This is a list of all of the releases by the coaches and topics that you have subscribed to across the member's area. You can filter by the type of content it is, or use the search bar to find all lessons by a specific coach or topic!",
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
+            'courses' => [
+                "name" => "Courses",
+                "icon" => "icon-courses",
+                "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
+                "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+            ],
+            'songs' => [
+                "name" => "Songs",
+                "icon" => "icon-songs",
+                "description" => "We all love singing along with our favorite songs!  Here you'll find a wide variety of songs from different artists and styles that you can sing along with.  You can even choose between three vocal ranges to fit your unique voice!",
+                "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+            ],
+            'quick-tips' => [
+                'thumbnailUrl' => 'https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg',
+                "name" => "Quick Tips",
+                "icon" => "icon-shows",
+                "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
+                "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+            ],
+            'question-and-answer' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer.png',
+                "name" => "Q&A",
+                "icon" => "fas fa-question-circle",
+                "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
+                "allowableFilters" => [],
+            ],
+            'student-review' => [
+                'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
+                "name" => "Student Reviews",
+                "icon" => "icon-student-focus",
+                "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
+                "allowableFilters" => [],
+            ],
+            'routines' => [
+                "name" => "Routines",
+                "icon" => "icon-shows",
+                "description" => "Finding the perfect practice routine to build your singing skills can be tough, especially on a busy schedule. Start your day right or warm-up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for the busy days when you just want to shake things up a bit.",
+                "allowableFilters" => [],
+            ],
         ],
     ],
 
-//    ---------------------------------------
-//    Content Types
+    //    ---------------------------------------
+    //    Content Types
     /**
      * The order of the show types it's IMPORTANT.
      * The show cards on 'Shows' page are displayed in this order.
      */
     'showTypes' => [
-        'the-history-of-electronic-drums',
-        'backstage-secrets',
-        'quick-tips',
-        'question-and-answer',
-        'student-collaborations',
-        'live-streams',
-        'podcasts',
-        'solos',
-        'boot-camps',
-        'gear-guides',
-        'performances',
-        'in-rhythm', /* 2020 */
-        'challenges', /* 2020 */
-        'on-the-road', /* 2020 */
-        'diy-drum-experiments', /* 2019*/
-        'rhythmic-adventures-of-captain-carson', /* 2019*/
-        'study-the-greats', /* 2019*/
-        'rhythms-from-another-planet', /* 2019*/
-        'tama-drums', /* 2019*/
-        'paiste-cymbals', /* 2019*/
-        'behind-the-scenes', /* 2019*/
-//        'namm-2019', /* 2019*/
-//        'camp-drumeo-ah', /* 2019*/
-//        '25-days-of-christmas', /* 2019*/
-        'exploring-beats', /* 2018*/
-        'sonor-drums', /* 2018*/
+        'drumeo' => [
+            'the-history-of-electronic-drums',
+            'backstage-secrets',
+            'quick-tips',
+            'question-and-answer',
+            'student-collaborations',
+            'live-streams',
+            'podcasts',
+            'solos',
+            'boot-camps',
+            'gear-guides',
+            'performances',
+            'in-rhythm', /* 2020 */
+            'challenges', /* 2020 */
+            'on-the-road', /* 2020 */
+            'diy-drum-experiments', /* 2019*/
+            'rhythmic-adventures-of-captain-carson', /* 2019*/
+            'study-the-greats', /* 2019*/
+            'rhythms-from-another-planet', /* 2019*/
+            'tama-drums', /* 2019*/
+            'paiste-cymbals', /* 2019*/
+            'behind-the-scenes', /* 2019*/
+            //        'namm-2019', /* 2019*/
+            //        'camp-drumeo-ah', /* 2019*/
+            //        '25-days-of-christmas', /* 2019*/
+            'exploring-beats', /* 2018*/
+            'sonor-drums', /* 2018*/
+        ],
+        'pianote' => [
+            'student-review',
+            'question-and-answer',
+        ],
+        'guitareo' => [
+            'student-review',
+            'question-and-answer',
+        ],
+        'singeo' => [
+            'student-review',
+            'question-and-answer',
+        ],
     ],
     'userListContentTypes' => [
         'course',
@@ -937,10 +981,12 @@ return [
     ],
     'liveContentTypes' => [
         'student-focus',
-        'song',
         'coach-stream',
         'live',
         'question-and-answer',
+        'student-review',
+        'boot-camps',
+        'recording',
     ],
     'topLevelContentTypes' => [
         'learning-path',
@@ -967,7 +1013,7 @@ return [
         'play-along',
         'student-focus',
         'course-part',
-//        'song',
+        //        'song',
     ],
     'countedCompletedContentTypes' => [
         'course',
@@ -985,7 +1031,7 @@ return [
         'play-along',
         'student-focus',
         'coach-stream',
-//        'song',
+        //        'song',
     ],
     'homeInProgressContentTypes' => [
         'course',
@@ -1043,6 +1089,7 @@ return [
         'semester-pack-lesson',
         'ha-oemurd-pmac',
         'learning-path-lesson',
+        'chord-and-scale',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1080,7 +1127,7 @@ return [
         281911 => 311690,
         325266 => 255287,
     ],
-    'coachesFilePath' => __DIR__ . '/../Coaches v2.0.2.csv',
+    'coachesFilePath' => __DIR__.'/../Coaches v2.0.2.csv',
 
     'coachContentTypes' => [
         'course',
@@ -1177,6 +1224,9 @@ return [
         'sbt_exercise_number',
         'song_name',
         'soundslice_xml_file_url',
+        'original_video',
+        'low_video',
+        'high_video'
     ],
 
     // field key => column name
@@ -1251,5 +1301,83 @@ return [
         'published_on' => 'published_on',
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
-    ]
+    ],
+    'content_hierarchy' => [
+        'drumeo' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-course',
+            'learning-path-course' => 'learning-path-lesson',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+            'semester-pack' => 'semester-pack-lesson',
+        ],
+        'pianote' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-course',
+            'learning-path-course' => 'learning-path-lesson',
+            'unit' => 'unit-part',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+        ],
+        'singeo' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-lesson',
+            'unit' => 'unit-part',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+        ],
+        'guitareo' => [
+            'learning-path' => 'learning-path-level',
+            'learning-path-level' => 'learning-path-lesson',
+            'song' => 'song-part',
+            'course' => 'course-part',
+            'pack' => 'pack-bundle',
+            'pack-bundle' => 'pack-bundle-lesson',
+            'semester-pack' => 'semester-pack-lesson',
+        ],
+    ],
+    'children_name_mapping' => [
+        'drumeo' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'courses',
+            'learning-path-course' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-pack' => 'lessons',
+        ],
+        'pianote' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'courses',
+            'learning-path-course' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-pack' => 'lessons',
+            'song' => 'lessons',
+        ],
+        'guitareo' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-pack' => 'lessons',
+        ],
+        'singeo' => [
+            'learning-path' => 'levels',
+            'learning-path-level' => 'lessons',
+            'course' => 'lessons',
+            'pack' => 'bundles',
+            'pack-bundle' => 'lessons',
+            'semester-pack' => 'lessons',
+        ],
+
+    ],
 ];
