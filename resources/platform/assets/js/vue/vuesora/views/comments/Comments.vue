@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -17,23 +17,25 @@
                 >
                     <select
                         id="commentSort"
+                        class="dark:tw-text-white"
                         v-model="sortInterface"
                     >
-                        <option value="-like_count">
+                        <option class="tw-text-black" value="-like_count">
                             Popular
                         </option>
-                        <option value="-created_on">
+                        <option class="tw-text-black" value="-created_on">
                             Latest
                         </option>
-                        <option value="created_on">
+                        <option class="tw-text-black" value="created_on">
                             Oldest
                         </option>
-                        <option value="-mine">
+                        <option class="tw-text-black" value="-mine">
                             My Comments
                         </option>
                     </select>
                     <label
                         for="commentSort"
+                        class="dark:tw-text-white"
                         :class="themeColor"
                     >Sort By</label>
                 </div>
@@ -44,7 +46,7 @@
             id="postComment"
             class="tw-flex tw-flex-row comment-post mv-3"
         >
-            <div class="tw-flex tw-flex-col avatar-column pr hide-xs-only">
+            <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
@@ -53,7 +55,7 @@
                         src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         :data-ix-src="currentUser.avatar"
                         data-ix-fade
-                        class="tw-rounded"
+                        class="tw-rounded-full"
                     >
                 </div>
 
@@ -71,15 +73,16 @@
                 </p>
             </div>
 
-            <div class="tw-flex tw-flex-col">
+            <div class="tw-flex tw-flex-col tw-grow">
                 <text-editor
+                    :fieldKey="contentId + '-comment-text-editor'"
                     ref="textEditor"
                     v-model="commentInterface"
-                    toolbar="bold italic underline | bullist numlist | link"
+                    @input="handleInput"
                     :height="150"
                 ></text-editor>
 
-                <div class="tw-flex tw-flex-row align-h-right mv-1">
+                <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                     <button
                         class="btn collapse-150"
                         :disabled="loading"
@@ -119,11 +122,13 @@
             :theme-color="themeColor"
             :profile-base-route="profileBaseRoute"
             :has-public-profiles="hasPublicProfiles"
+            :opened-comment-id="openedCommentId"
             @likeComment="handleCommentLike"
             @likeReply="handleReplyLike"
             @deleteComment="handleCommentDelete"
             @deleteReply="handleReplyDelete"
             @openLikes="addLikeUsersToModal"
+            @replyOpened="handleReplyOpened"
         ></comment-post>
 
         <comment-post
@@ -135,11 +140,13 @@
             :theme-color="themeColor"
             :profile-base-route="profileBaseRoute"
             :has-public-profiles="hasPublicProfiles"
+            :opened-comment-id="openedCommentId"
             @likeComment="handleCommentLike"
             @likeReply="handleReplyLike"
             @deleteComment="handleCommentDelete"
             @deleteReply="handleReplyDelete"
             @openLikes="addLikeUsersToModal"
+            @replyOpened="handleReplyOpened"
         ></comment-post>
 
         <comment-likes-modal
@@ -184,6 +191,7 @@ export default {
     },
     data() {
         return {
+            openedCommentId: null,
             comments: [],
             pinnedComment: null,
             sortOption: '-like_count',
@@ -258,6 +266,7 @@ export default {
         this.getComments(this.requestParams);
     },
     mounted() {
+        console.log(this.comments)
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
         // Run the goToComment method if it does
@@ -279,6 +288,9 @@ export default {
         });
     },
     methods: {
+        handleReplyOpened({id}) {
+            this.openedCommentId = id;
+        },
         getComments(params, replace = false) {
             this.requestingData = true;
 
@@ -306,6 +318,8 @@ export default {
                             window.ImgixService.reloadCommentImages();
                         }
 
+                        console.log('on service', this.comments[0])
+
                         setTimeout(() => {
                             // Load the Imgix Service to load srcs and srcsets
                             if (window.ImgixService) {
@@ -323,12 +337,12 @@ export default {
         },
 
         postComment() {
-            if (this.comment.currentValue) {
+            if (this.comment) {
                 this.loading = true;
 
                 return CommentService.postComment({
                     content_id: this.contentId,
-                    comment: this.comment.currentValue,
+                    comment: this.comment,
                 })
                     .then((resolved) => {
                         if (resolved) {
@@ -357,7 +371,7 @@ export default {
         },
 
         handleInput(payload) {
-            this.commentInterface = payload.currentValue;
+            this.comment = payload.currentValue;
         },
 
         // NOTE: you cannot jump to replies, only top level parent comments

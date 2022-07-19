@@ -1,6 +1,6 @@
 <template>
     <div
-        class="content-table-row flex flex-row bb-grey-1-1
+        class="content-table-row flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]
          no-decoration pv-1 pointer relative text-grey-3 hover-bg-grey-7 hover-text-black"
         :class="stateClasses"
     >

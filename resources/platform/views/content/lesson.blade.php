@@ -1,3 +1,7 @@
+@php
+//dd(user())
+@endphp
+
 @extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
@@ -235,13 +239,18 @@
 
             <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
                 <div class="tw-flex tw-flex-row">
-            {{--                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}" content-id="{{ $lessonContent->fetch('id') }}"--}}
-            {{--                        user-id="{{ user()->id }}" user-name="{{ user()->display_name }}"--}}
-            {{--                        user-avatar="{{ user()->profile_picture_url }}"--}}
-            {{--                        user-xp="{{ user()->total_xp }}"--}}
-            {{--                        user-access-level="{{ user()->access_level }}" profile-base-route="/members/profile/"--}}
-            {{--                        :is-admin="{{ json_encode(user()->isAdmin()) }}">--}}
-            {{--                    </comments>--}}
+                    <comments 
+                        theme-color="{{ $brand }}"
+                        brand="{{ $brand }}"
+                        content-id="{{ $lessonContent->fetch('id') }}"
+                        user-id="{{ user()->id }}"
+                        user-name="{{ user()->display_name }}"
+                        user-avatar="{{ user()->profile_picture_url }}"
+                        user-xp="0"
+                        user-access-level="lifetime"
+                        profile-base-route="/members/profile/"
+                        :is-admin="false">
+                    </comments> 
                 </div>
             </div>
 
