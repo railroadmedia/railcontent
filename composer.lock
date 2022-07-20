@@ -7779,12 +7779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d5db2044979cc1a473bf130f725dfa3b72ab4def"
+                "reference": "c8938d6e64d8017023d8f7914ed6626d6cca5747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d5db2044979cc1a473bf130f725dfa3b72ab4def",
-                "reference": "d5db2044979cc1a473bf130f725dfa3b72ab4def",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c8938d6e64d8017023d8f7914ed6626d6cca5747",
+                "reference": "c8938d6e64d8017023d8f7914ed6626d6cca5747",
                 "shasum": ""
             },
             "require": {
@@ -7816,7 +7816,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-20T06:44:52+00:00"
+            "time": "2022-07-20T11:27:06+00:00"
         },
         {
             "name": "railroad/permissions",
