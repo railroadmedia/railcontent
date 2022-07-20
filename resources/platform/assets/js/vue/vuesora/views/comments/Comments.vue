@@ -35,8 +35,7 @@
                     </select>
                     <label
                         for="commentSort"
-                        class="dark:tw-text-white"
-                        :class="themeColor"
+                        :class="brandTextColor"
                     >Sort By</label>
                 </div>
             </div>
@@ -58,19 +57,6 @@
                         class="tw-rounded-full"
                     >
                 </div>
-
-                <p
-                    v-if="showUserExp"
-                    class="x-tiny dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
-                >
-                    {{ userExpRank }}
-                </p>
-                <p
-                    v-if="showUserExp"
-                    class="x-tiny dense tw-text-center font-compressed"
-                >
-                    {{ userExpValue }} XP
-                </p>
             </div>
 
             <div class="tw-flex tw-flex-col tw-grow">
@@ -173,6 +159,7 @@ import Utils from '../../assets/js/classes/utils';
 import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { textColor } from '../../../../constants/brands'
 
 export default {
     name: 'Comments',
@@ -210,6 +197,10 @@ export default {
                 team: this.currentUser.access_level === 'team',
                 lifetime: this.currentUser.access_level === 'lifetime',
             };
+        },
+
+        brandTextColor() {
+            return textColor[this.brand];
         },
 
         userExpValue() {

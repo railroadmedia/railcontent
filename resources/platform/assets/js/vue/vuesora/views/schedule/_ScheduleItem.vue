@@ -13,7 +13,7 @@
                         class="thumb-img corners-10 widescreen text-center"
                         :style="`background-image: url( ${ item.original_thumbnail_url } )`"
                     >
-                        <div class="release-day tw-bg-black/70 tw-h-full tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/70 tw-h-full tw-flex tw-flex-col tw-items-center tw-justify-center">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }}
                             </p>

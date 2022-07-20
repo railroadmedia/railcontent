@@ -52,16 +52,24 @@
         </div>
     </div>
     <div id="chat-container" class="tw-flex tw-flex-col" dusk="chat-container">
-{{-- todo: fix --}}
-{{--        <chat--}}
-{{--            api-key="{{ $apiKey }}"--}}
-{{--            token="{{ $token }}"--}}
-{{--            user-id="{{ user()->id }}"--}}
-{{--            chat-channel-name="{{ $chatChannelName }}"--}}
-{{--            questions-channel-name="{{ $questionsChannelName }}"--}}
-{{--            :is-administrator="{{ json_encode(boolval($isAdministrator)) }}"--}}
-{{--            :user-data="{{ json_encode($userData) }}"--}}
-{{--            embed-url="{{ $embedUrl }}"--}}
-{{--        ></chat>--}}
+    {{-- todo: fix --}}
+    {{-- <p class="tw-text-white tw-text-sm">API Key: {{ $apiKey }}</p>
+    <p class="tw-text-white tw-text-sm">Token: {{ $token }}</p>
+    <p class="tw-text-white tw-text-sm">User ID: {{ user()->id }}</p>
+    <p class="tw-text-white tw-text-sm">Chat Channel Name: {{ $chatChannelName }}</p>
+    <p class="tw-text-white tw-text-sm">Questions Channel Name: {{ $questionsChannelName }}</p>
+    <p class="tw-text-white tw-text-sm">Is Admin: {{ json_encode(boolval($isAdministrator)) }}</p>
+    <p class="tw-text-white tw-text-sm">User Data: {{ json_encode($userData) }}</p>
+    <p class="tw-text-white tw-text-sm">Embed Url: {{ $embedUrl }}</p> --}}
+     <chat
+         api-key="{{ $apiKey }}"
+         token="{{ $token }}"
+         user-id="{{ user()->id }}"
+         chat-channel-name="{{ $chatChannelName }}"
+         questions-channel-name="{{ $questionsChannelName }}"
+         :is-administrator="{{ json_encode(boolval($isAdministrator)) }}"
+         :user-data="{{ json_encode($userData) }}"
+         embed-url="{{ $embedUrl }}"
+     ></chat>
     </div>
 </div>
