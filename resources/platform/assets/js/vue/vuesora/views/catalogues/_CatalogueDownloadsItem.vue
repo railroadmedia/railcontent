@@ -1,6 +1,6 @@
 <template>
     <div
-        class="downloads-item flex flex-row bb-grey-1-1 no-decoration hover-bg-grey-7 relative text-grey-3 hover-text-black pv-1"
+        class="downloads-item flex flex-row no-decoration relative text-grey-3 pv-1 tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]"
     >
         <!-- THUMBNAIL COLUMN -->
         <div
@@ -31,7 +31,7 @@
                     :class="[themeTextClass]"
                 >{{ contentModel.artist }}</h3>
                 <h3
-                    class="item-title font-bold text-black"
+                    class="item-title font-bold tw-text-black dark:tw-text-white"
                 >{{ contentModel.title }}</h3>
             </div>
 
@@ -42,10 +42,10 @@
                 >
                     <a
                         :href="contentModel.pdf_in_g"
-                        class="btn"
+                        class="tw-btn-secondary tw-text-[#8c9698] dark:tw-text-white"
                     >
-                        <span class="text-grey-3 bg-gray-3 inverted">key of g</span>
-                        <i class="text-grey-3 fas fa-file-pdf ml-1 hide-xs-only"></i>
+                        <span class="">key of g</span>
+                        <i class="fas fa-file-pdf ml-1 hide-xs-only"></i>
                     </a>
                 </div>
                 <div
@@ -53,10 +53,10 @@
                 >
                     <a
                         :href="contentModel.pdf"
-                        class="btn"
+                        class="tw-btn-secondary tw-text-[#8c9698] dark:tw-text-white"
                     >
-                        <span class="text-grey-3 bg-gray-3 inverted">original key</span>
-                        <i class="text-grey-3 fas fa-file-pdf ml-1 hide-xs-only"></i>
+                        <span class="">original key</span>
+                        <i class="fas fa-file-pdf ml-1 hide-xs-only"></i>
                     </a>
                 </div>
             </div>

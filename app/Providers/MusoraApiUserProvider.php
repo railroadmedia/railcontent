@@ -88,6 +88,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'avatarUrl' => $user->profile_picture_url,
+            'profile_picture_url' => $user->profile_picture_url,
             'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id')
         ];
     }
@@ -101,7 +102,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function setCurrentUserProfilePictureUrl(string $profilePictureUrl)
+    public function setCurrentUserProfilePictureUrl(?string $profilePictureUrl = null)
     : User {
         user()->profile_picture_url = $profilePictureUrl;
         user()->save();

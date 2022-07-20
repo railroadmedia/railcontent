@@ -85,7 +85,7 @@ function goBack() {
         >
           <ExperienceCardContent
             title="Level 2-3"
-            subtitle="For beginners who can hold your sticks, set-up your kit, and can play a few beats and fills"
+            subtitle="For beginners who can hold your sticks, set up your kit, and can play a few beats and fills"
             level="2-3"
           />
         </SquaredCard>
@@ -134,7 +134,7 @@ function goBack() {
         :steps="steps"
         @onChangeStep="(s) => emit('onChangeStep', s)"
       />
-      <SkipStep />
+      <SkipStep :brand="brand" />
     </div>
   </StepWrapper>
 </template>

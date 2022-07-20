@@ -19,7 +19,9 @@ export default {
         return axios.get(`${endpointPrefix}/railcontent/comment`, {
             params,
         })
-            .then(response => response.data)
+            .then(response => {
+                return response.data
+            })
             .catch(ErrorHandler);
     },
 

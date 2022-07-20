@@ -189,16 +189,34 @@ return [
                 'access_token' => env('VIMEO_ACCESS_TOKEN'),
             ],
         ],
-        'youtube' => [
-            'key' => env('YOUTUBE_API_KEY'),
-            'musora' => [
-                'user' => env('YOUTUBE_USERNAME'),
+
+        'drumeo' => [
+            'youtube_client_api' => [
+                'client_id' => env('DRUMEO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('DRUMEO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('DRUMEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
             ],
         ],
-        'youtube_client_api' => [
-            'client_id' => env('YOUTUBE_API_CLIENT_ID', env('YOUTUBE_API_CLIENT_ID')),
-            'client_secret' => env('YOUTUBE_API_CLIENT_SECRET', env('YOUTUBE_API_CLIENT_SECRET')),
-            'refresh_token' => env('YOUTUBE_API_CLIENT_REFRESH_TOKEN', env('YOUTUBE_API_CLIENT_REFRESH_TOKEN')),
+        'pianote' => [
+            'youtube_client_api' => [
+                'client_id' => env('PIANOTE_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('PIANOTE_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('PIANOTE_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
+        ],
+        'guitareo' => [
+            'youtube_client_api' => [
+                'client_id' => env('GUITAREO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('GUITAREO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('GUITAREO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
+        ],
+        'singeo' => [
+            'youtube_client_api' => [
+                'client_id' => env('SINGEO_YOUTUBE_API_CLIENT_ID'),
+                'client_secret' => env('SINGEO_YOUTUBE_API_CLIENT_SECRET'),
+                'refresh_token' => env('SINGEO_YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+            ],
         ],
     ],
 
@@ -713,7 +731,7 @@ return [
             'student-review' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
@@ -724,7 +742,7 @@ return [
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/question-answer.jpg',
                 'name' => 'Q&A',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
@@ -735,7 +753,7 @@ return [
             'bootcamps' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
                 'name' => 'Bootcamps',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',
@@ -746,7 +764,7 @@ return [
             'podcasts' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/podcast.png',
                 'name' => 'The Pianote Podcast',
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Podcast',
                 'icon' => 'icon-podcast',
@@ -762,6 +780,17 @@ return [
                 "shortname" => "Chords & Scales",
                 "icon" => "icon-chords-scales-icon",
                 "description" => "Chords and scales will unlock the piano for you. They will help you to develop keyboard familiarity, dexterity, speed, accuracy, hand independance and more. We suggest working a major and minor chord/scale practice into your daily routine.",
+                'amountOfFutureLessonsToShow' => 3,
+                'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
+            'boot-camps' => [
+                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
+                'name' => 'Bootcamps',
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+                'shortname' => 'Bootcamps',
+                'icon' => 'icon-chords-scales-icon',
+                'description' => "Ready to work? Bootcamps are designed to help you really integrate and develop new skills. Select a topic that you want to improve on and get ready to play along with the lesson.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -799,6 +828,7 @@ return [
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'quick-tips' => [
+                'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
                 "name" => "Quick Tips",
                 "shortname" => "quick-tips",
                 "icon" => "icon-shows",
@@ -859,6 +889,7 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
+                'thumbnailUrl' => 'https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg',
                 "name" => "Quick Tips",
                 "icon" => "icon-shows",
                 "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
@@ -950,10 +981,12 @@ return [
     ],
     'liveContentTypes' => [
         'student-focus',
-        'song',
         'coach-stream',
         'live',
         'question-and-answer',
+        'student-review',
+        'boot-camps',
+        'recording',
     ],
     'topLevelContentTypes' => [
         'learning-path',
@@ -1056,6 +1089,7 @@ return [
         'semester-pack-lesson',
         'ha-oemurd-pmac',
         'learning-path-lesson',
+        'chord-and-scale',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1190,6 +1224,9 @@ return [
         'sbt_exercise_number',
         'song_name',
         'soundslice_xml_file_url',
+        'original_video',
+        'low_video',
+        'high_video'
     ],
 
     // field key => column name
@@ -1313,7 +1350,7 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
         ],
         'pianote' => [
             'learning-path' => 'levels',
@@ -1322,7 +1359,8 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
+            'song' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',
@@ -1330,7 +1368,7 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
@@ -1338,7 +1376,7 @@ return [
             'course' => 'lessons',
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
-            'semester-packsss' => 'lessons',
+            'semester-pack' => 'lessons',
         ],
 
     ],

@@ -45,7 +45,7 @@
                                 :class="getUserAvatarClassObject(user)"
                             >
                                 <img
-                                    class="tw-rounded"
+                                    class="tw-rounded-full"
                                     :src="user.avatar_url"
                                 >
                             </div>

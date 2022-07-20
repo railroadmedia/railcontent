@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'auth-middleware' => ['api_authenticated', 'auth:sanctum',
+    'auth-middleware' => ['web_or_api_authenticated', 'auth:sanctum',
         \Railroad\MusoraApi\Middleware\SetCustomDecorators::class
     ],
 //        [
@@ -70,6 +70,8 @@ return [
             'lessons' => [
                 'id',
             ],
+            'pdf',
+            'pdf_in_g'
         ],
 
         'instructor' => [
@@ -683,6 +685,7 @@ return [
             'chapters',
             'user_progress',
             'resources',
+            'ranges',
             'assignments' => [
                 'id',
                 'xp',
@@ -1147,6 +1150,7 @@ return [
                 'xp',
                 'display_name',
                 'xp_level',
+                'rank',
             ],
             'comment',
             'created_on',
@@ -1292,6 +1296,7 @@ return [
             'is_liked_by_current_user',
             'like_count',
             'total_length_in_seconds',
+            'length_in_seconds',
             'level_position',
             'course_position',
             '*fields.instructor',

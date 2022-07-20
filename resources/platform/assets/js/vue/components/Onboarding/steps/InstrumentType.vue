@@ -7,7 +7,6 @@ import SkipStep from "../SkipStep.vue";
 import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
 import { saveGear } from "../services"
-import { instrumentBrand } from "../constants"
 import { getMultiSelectOptions } from "../utils";
 
 const props = defineProps({
@@ -83,7 +82,7 @@ function goBack() {
       <StepHeader
         title="What kind of gear will you be practicing with?"
         :subtitle="`You selected ${info.instrument}! Now it’s time to tell us about
-            your practice set-up. You can select multiple gear types and change
+            your practice set up. You can select multiple gear types and change
             your settings in your profile at anytime.`"
         @onGoBack="goBack"
       />
@@ -122,8 +121,7 @@ function goBack() {
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >
-      <SkipStep
-        title="SKIP ACCOUNT SETUP"
+      <SkipStep :brand="brand"
         classOverride="tw-mt-[20px] md:tw-mt-0"
       />
     </div>

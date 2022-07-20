@@ -105,12 +105,6 @@ class PackPagesController extends Controller
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
 
-        $totalLessonCount = 0;
-
-        foreach ($packBundles as $packBundle) {
-            $totalLessonCount += count($packBundle['lessons'] ?? []);
-        }
-
         $thisPackBundle = $packBundles[0];
 
         if (empty($thisPackBundle)) {
@@ -125,7 +119,7 @@ class PackPagesController extends Controller
         }
 
         $infoData = [
-            "lessons" => $totalLessonCount,
+            "lessons" => $thisPackBundle['child_count'],
             "xp" => $pack->fetch('total_xp'),
         ];
 
@@ -211,6 +205,25 @@ class PackPagesController extends Controller
 
         $nextLessonUrl = '';
 
+        $songsPdfs = null;
+        $songsPdfsType = 'song-pdf';
+
+        if ($packSlug == '500-songs-in-5-days') {
+
+            $songsPdfs = $this->contentService->getFiltered(
+                $request->get('page', 1),
+                $request->get('limit', 10),
+                'slug',
+                [$songsPdfsType],
+                $request->get('slug_hierarchy', []),
+                $request->get('required_parent_ids', []),
+                $request->get('required_fields', []),
+                $request->get('included_fields', []),
+                $request->get('required_user_states', []),
+                $request->get('included_user_states', [])
+            )->toResponseRawJson();
+        }
+
         return view(
             'content.overview',
             [
@@ -222,6 +235,7 @@ class PackPagesController extends Controller
                 "xpBonus" => $xpBonus,
                 "themeColor" => "pack",
                 'nextLessonUrl' => $pack->fetch('next_lesson_url'),
+                "songsPdfs" => $songsPdfs,
             ]
         );
     }
@@ -269,10 +283,13 @@ class PackPagesController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $packBundles = $this->contentService->getByParentId($pack['id']);
-        $thisPackBundle = $packBundles[0];
+        $thisPackBundle = $this->contentService->getById($packBundleId);
 
-        $parentChildren = $thisPackBundle['lessons'];
+        if (empty($thisPackBundle)) {
+            throw new NotFoundHttpException();
+        }
+
+        $parentChildren = $this->contentService->getByParentId($thisPackBundle['id']);
 
         foreach ($parentChildren as $parentChild) {
             if ($parentChild['id'] == $packBundleLessonId) {
@@ -313,7 +330,6 @@ class PackPagesController extends Controller
         ))->toResponseRawJson();
 
         $lesson['assignments'] = $lessonAssignments;
-        $lesson['assignmentszz'] = $lessonAssignments;
 
         $userAccessLevel = user()->access_level;
 

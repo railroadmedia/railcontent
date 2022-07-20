@@ -223,11 +223,6 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => 'Lessons',
-                        'path' => '/'.brand().'/lessons',
-                        'icon' => 'electric-guitar',
-                    ],
-                    [
                         'name' => 'Packs',
                         'path' => '/'.brand().'/packs',
                         'icon' => 'box',
@@ -253,8 +248,13 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
-                        'name' => '500 Songs',
+                        'name' => 'Lessons',
                         'path' => '/'.brand().'/lessons',
+                        'icon' => 'electric-guitar',
+                    ],
+                    [
+                        'name' => '500 Songs',
+                        'path' => '/'.brand().'/packs/500-songs-in-5-days/233612/introduction/233941',
                         'icon' => '500-songs',
                     ],
                     [
@@ -371,7 +371,7 @@ class NavigationService
             'dashboardPageUrl' => '/'.brand().'/profile/'.user()->id.'/dashboard',
             'notificationsPageUrl' => '/'.brand().'/notifications',
             'playlistsPageUrl' => '/',
-            'schedulePageUrl' => '/',
+            'schedulePageUrl' => '/'.brand().'/schedule',
             'applyForReviewPageUrl' => '/',
             'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
             'supportPageUrl' => '/'.brand().'/support',

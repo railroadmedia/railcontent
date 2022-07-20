@@ -182,6 +182,19 @@ class HomePageController extends BaseController
         $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
+        $hasGear = count(user()->onboardingGear->filter(function($item) {
+            return $item->brand == brand();
+        })) > 0;
+        $hasTopics = count(user()->onboardingTopics->filter(function($item) {
+            return $item->brand == brand();
+        })) > 0;
+        $hasGenres = count(user()->onboardingGenres->filter(function($item) {
+            return $item->brand == brand();
+        })) > 0;
+        $hasExperience = count(user()->onboardingExperience->filter(function($item) {
+            return $item->brand == brand();
+        })) > 0;
+
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
 
@@ -263,6 +276,10 @@ class HomePageController extends BaseController
             'coachOfTheMonth' => $coachOfTheMonth->first(),
             'hasCompletedMethod' => $hasCompletedMethod,
             'hasStartedMethod' => $hasStartedMethod,
+            'hasGear' => $hasGear,
+            'hasGenres' => $hasGenres,
+            'hasTopics' => $hasTopics,
+            'hasExperience' => $hasExperience,
             'methodUrl' => url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
         ]);

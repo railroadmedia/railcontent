@@ -51,6 +51,9 @@ when pressing 'next button':
 ```
 ('data' parameter is an array with all the gear values selected)
 
+<a href="https://red-shadow-611407.postman.co/workspace/Team-Workspace~38bb093f-0978-4a83-8423-944a3c78fd51/request/9725390-a64d3e6f-cc0f-489a-b021-11cacf3c7846"  target="_blank" style="float:right;">
+<img width="120px" src="https://images.ctfassets.net/1wryd5vd9xez/1sHuHRROdF7ifCjy4QKVXk/a44e85c6138dbe13126c4ede8650cf29/https___cdn-images-1.medium.com_max_2000_1_O0OZO4m6nbwwnYAtkSQO0g.png"/>
+</a>
 
 ## 4 EXPERIENCE
 
@@ -69,6 +72,9 @@ when pressing 'next button':
 ```
 ('experience_level' parameter must take one of the following values: [0,1,2,3])
 
+<a href="https://red-shadow-611407.postman.co/workspace/Team-Workspace~38bb093f-0978-4a83-8423-944a3c78fd51/request/9725390-f6bda40a-171d-4389-aa2e-d63390713ee6"  target="_blank" style="float:right;">
+<img width="120px" src="https://images.ctfassets.net/1wryd5vd9xez/1sHuHRROdF7ifCjy4QKVXk/a44e85c6138dbe13126c4ede8650cf29/https___cdn-images-1.medium.com_max_2000_1_O0OZO4m6nbwwnYAtkSQO0g.png"/>
+</a>
 
 
 ## 5 GENRES
@@ -129,3 +135,20 @@ When bell is clicked, follow new coach:
 ```php
 ['content_id' => 'required'];
 ```
+
+
+## 8 SKIP ACCOUNT SETUP
+
+During onboarding process, once the brand is selected, the user can press 'SKIP ACCOUNT SETUP' button:
+This will set the user attribute [brand]_onboarding_skip_setup to 'true'
+
+**`POST /user_management_system/onboarding-skip-account-setup`**
+
+```php
+[
+    'brand' => 'string|required',
+    'skip' => 'boolean|required'
+];
+```
+
+The response will return the user json, together with the updated value. So if user()->pianote_onboarding_skip_setup == true, then 'Complete your account' div must be hidden on pianote.

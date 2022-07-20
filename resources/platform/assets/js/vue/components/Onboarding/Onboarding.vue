@@ -41,7 +41,6 @@ const brand = computed(() => instrumentBrand[info.value.instrument]);
 function changeStep(step) {
     if (step === 2) {
         const newSteps = getCheckedSteps({ ...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: brand.value });
-        newSteps.forEach(step => console.log(JSON.stringify(step)));
         steps.value = newSteps;
     }
     currentStep.value = step;
