@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.8",
+            "version": "3.231.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "99b3e4585ac82a6e9ab6d1944d90231456fefbea"
+                "reference": "fbda3e544226b44f79ead89de78f220d30ef3796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/99b3e4585ac82a6e9ab6d1944d90231456fefbea",
-                "reference": "99b3e4585ac82a6e9ab6d1944d90231456fefbea",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fbda3e544226b44f79ead89de78f220d30ef3796",
+                "reference": "fbda3e544226b44f79ead89de78f220d30ef3796",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.9"
             },
-            "time": "2022-07-18T18:20:47+00:00"
+            "time": "2022-07-19T18:14:37+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4111,16 +4111,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.20.0",
+            "version": "v9.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c99868f1c9bf2f5d250993121838db905591864f"
+                "reference": "a8a529d371faaa38bde087aa6171a5b53a6a8760"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c99868f1c9bf2f5d250993121838db905591864f",
-                "reference": "c99868f1c9bf2f5d250993121838db905591864f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a8a529d371faaa38bde087aa6171a5b53a6a8760",
+                "reference": "a8a529d371faaa38bde087aa6171a5b53a6a8760",
                 "shasum": ""
             },
             "require": {
@@ -4135,6 +4135,7 @@
                 "league/flysystem": "^3.0.16",
                 "monolog/monolog": "^2.0",
                 "nesbot/carbon": "^2.53.1",
+                "nunomaduro/termwind": "^1.13",
                 "php": "^8.0.2",
                 "psr/container": "^1.1.1|^2.0.1",
                 "psr/log": "^1.0|^2.0|^3.0",
@@ -4286,21 +4287,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-13T13:26:22+00:00"
+            "time": "2022-07-19T14:12:19+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.12.6",
+            "version": "4.12.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "65b9c6e4d8a3c5b4234a2005a42db9c8f83eb4f3"
+                "reference": "52202ee78d00370e4b8dc54f48164506c4efb3af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-65b9c6e4d8a3c5b4234a2005a42db9c8f83eb4f3-zip-39bdd6.zip",
-                "reference": "65b9c6e4d8a3c5b4234a2005a42db9c8f83eb4f3",
-                "shasum": "62a4cc8266a63b3ea4dc5d6b6dc5120ba9548320"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-52202ee78d00370e4b8dc54f48164506c4efb3af-zip-e38518.zip",
+                "reference": "52202ee78d00370e4b8dc54f48164506c4efb3af",
+                "shasum": "ad2f9286a802eaf4b94a70365b15700efffb3ddc"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -4394,9 +4395,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.12.6"
+                "source": "https://github.com/laravel/nova/tree/v4.12.7"
             },
-            "time": "2022-07-13T15:31:53+00:00"
+            "time": "2022-07-19T17:00:55+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6125,6 +6126,92 @@
             "time": "2022-05-31T20:59:12+00:00"
         },
         {
+            "name": "nunomaduro/termwind",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nunomaduro/termwind.git",
+                "reference": "132a24bd3e8c559e7f14fa14ba1b83772a0f97f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/132a24bd3e8c559e7f14fa14ba1b83772a0f97f8",
+                "reference": "132a24bd3e8c559e7f14fa14ba1b83772a0f97f8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.0",
+                "symfony/console": "^5.3.0|^6.0.0"
+            },
+            "require-dev": {
+                "ergebnis/phpstan-rules": "^1.0.",
+                "illuminate/console": "^8.0|^9.0",
+                "illuminate/support": "^8.0|^9.0",
+                "laravel/pint": "^0.2.0",
+                "pestphp/pest": "^1.21.0",
+                "pestphp/pest-plugin-mock": "^1.0",
+                "phpstan/phpstan": "^1.4.6",
+                "phpstan/phpstan-strict-rules": "^1.1.0",
+                "symfony/var-dumper": "^5.2.7|^6.0.0",
+                "thecodingmachine/phpstan-strict-rules": "^1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Termwind\\Laravel\\TermwindServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Functions.php"
+                ],
+                "psr-4": {
+                    "Termwind\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "Its like Tailwind CSS, but for the console.",
+            "keywords": [
+                "cli",
+                "console",
+                "css",
+                "package",
+                "php",
+                "style"
+            ],
+            "support": {
+                "issues": "https://github.com/nunomaduro/termwind/issues",
+                "source": "https://github.com/nunomaduro/termwind/tree/v1.13.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/xiCO2k",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-07-01T15:06:55+00:00"
+        },
+        {
             "name": "nyholm/psr7",
             "version": "1.5.1",
             "source": {
@@ -7692,12 +7779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a7c303564843f29f6ad6654f1915217fe1bd74a9"
+                "reference": "d5db2044979cc1a473bf130f725dfa3b72ab4def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a7c303564843f29f6ad6654f1915217fe1bd74a9",
-                "reference": "a7c303564843f29f6ad6654f1915217fe1bd74a9",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d5db2044979cc1a473bf130f725dfa3b72ab4def",
+                "reference": "d5db2044979cc1a473bf130f725dfa3b72ab4def",
                 "shasum": ""
             },
             "require": {
@@ -7729,7 +7816,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-18T14:32:19+00:00"
+            "time": "2022-07-20T06:44:52+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -7870,12 +7957,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "af7f5f3f2d9c50dee5f386023ed6544c93462f7b"
+                "reference": "d0eb94a9184548d5d8d11795dbddbcafb1a07b14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/af7f5f3f2d9c50dee5f386023ed6544c93462f7b",
-                "reference": "af7f5f3f2d9c50dee5f386023ed6544c93462f7b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d0eb94a9184548d5d8d11795dbddbcafb1a07b14",
+                "reference": "d0eb94a9184548d5d8d11795dbddbcafb1a07b14",
                 "shasum": ""
             },
             "require": {
@@ -7931,7 +8018,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-07-19T13:36:51+00:00"
+            "time": "2022-07-20T06:42:36+00:00"
         },
         {
             "name": "railroad/railforums",
