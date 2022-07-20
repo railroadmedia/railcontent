@@ -198,6 +198,12 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'current_lesson' => [
                 'fields.title',
@@ -324,6 +330,12 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -475,6 +487,12 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -542,6 +560,12 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -731,6 +755,12 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -969,6 +999,12 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -1214,12 +1250,6 @@ return [
             'user_progress',
             'progress_percent',
             'published_on',
-            'next_lesson_id',
-            'next_lesson_thumbnail_url',
-            'next_lesson_title',
-            'next_lesson_url',
-            'nextLessonLengthInMinValue',
-            'is_last_incomplete_lesson_from_course',
             'next_lesson' => [
                 'id',
                 'type',
@@ -1233,8 +1263,14 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
-            'prev_lesson' => [
+            'previous_lesson' => [
                 'id',
                 'type',
                 'published_on',
@@ -1247,36 +1283,6 @@ return [
                 'data.thumbnail_url',
                 'status',
                 'mobile_app_url',
-            ],
-            'current_course' => [
-                'id',
-                'fields.title',
-                'fields.xp',
-                'data.thumbnail_url',
-            ],
-            'next_course' => [
-                'id',
-                'fields.title',
-                'mobile_app_url',
-                'level_rank',
-                'data.thumbnail_url',
-                'lesson_count',
-            ],
-            'current_level' => [
-                'id',
-                'fields.title',
-                'fields.xp',
-                'level_number',
-                'data.thumbnail_url',
-            ],
-            'next_level' => [
-                'id',
-                'fields.title',
-                'mobile_app_url',
-                'level_number',
-                'data.thumbnail_url',
-                'published_on',
-                'is_added_to_primary_playlist',
             ],
             'assignments' => [
                 'id',
@@ -1311,8 +1317,6 @@ return [
             'video_playback_endpoints',
             'captions',
             'last_watch_position_in_seconds',
-            'last_incomplete_lesson_from_course',
-            'is_last_incomplete_course_from_level',
             'resources',
         ],
 
@@ -1374,6 +1378,12 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -1451,6 +1461,12 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -1531,6 +1547,12 @@ return [
                     'length_in_seconds',
                     'is_liked_by_current_user',
                     'parent_id',
+                    'instructor' => [
+                        'id',
+                        'fields.name',
+                        'data.biography',
+                        'data.head_shot_picture_url',
+                    ],
                 ],
                 'previous_lesson' => [
                     'id',
@@ -1624,6 +1646,12 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -1669,6 +1697,12 @@ return [
                 'fields.title',
                 'id',
                 'type',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
@@ -1746,6 +1780,12 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
             ],
             'previous_lesson' => [
                 'id',
