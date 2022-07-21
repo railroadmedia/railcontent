@@ -204,6 +204,9 @@ Route::domain('{musoraDomain}')
                     'behind-the-scenes',
                     'exploring-beats',
                     'sonor-drums',
+                    'student-reviews',
+                    'archives',
+                    'recording',
                 ]
             )
             ->name('platform.content.first-level');
