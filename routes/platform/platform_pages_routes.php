@@ -181,6 +181,8 @@ Route::domain('{musoraDomain}')
                     'rudiments',
                     'bootcamps',
                     'chords-scales',
+                    'performances',
+                    'podcasts',
                 ]
             )
             ->name('platform.content.first-level');
