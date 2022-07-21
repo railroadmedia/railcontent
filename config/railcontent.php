@@ -932,6 +932,7 @@ return [
             'question-and-answer',
             'student-collaborations',
             'live-streams',
+            'live',
             'podcasts',
             'solos',
             'boot-camps',
