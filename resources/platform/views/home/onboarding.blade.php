@@ -1,5 +1,5 @@
 @php
-    //dd(json_encode(config('onboarding.options.pianote')));
+    //dd(json_encode(user()->onboardingExperience));
 @endphp
 
 @extends('partials.layout')

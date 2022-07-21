@@ -100,7 +100,7 @@
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
                             class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'tw-text-white'"
+                            :class="comment.is_liked ? themeTextClass : 'tw-text-black dark:tw-text-white'"
                             dusk="like-button"
                             @click="likeComment"
                         >
@@ -112,7 +112,7 @@
 
                         <p
                             class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="replying ? themeTextClass : 'tw-text-white'"
+                            :class="replying ? themeTextClass : 'tw-text-black dark:tw-text-white'"
                             dusk="reply-button"
                             @click="replyToComment"
                         >
@@ -130,7 +130,7 @@
                             @click="openLikes"
                         >
                             <ThumbUpIcon
-                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             />&nbsp;{{ comment.like_count }}
                         </p>
@@ -163,7 +163,7 @@
                                 :height="150"
                             ></text-editor>
                         </div>
-                        <div class="tw-flex tw-flex-row tw-justify-center mv-1">
+                        <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                             <a
                                 class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
                                 @click="cancelReply"

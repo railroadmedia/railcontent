@@ -60,7 +60,7 @@ function handleDrop(e) {
 
 <template>
     <div
-        :class="`hover:tw-cursor-pointer tw-relative tw-mx-[40px] tw-border-2 tw-border-dashed tw-border-[#445F74] tw-w-auto tw-h-[223px] tw-rounded-[6px] tw-pb-[38px] ${dragged ? 'tw-border-white' : ''}`"
+        :class="`hover:tw-cursor-pointer tw-relative tw-mx-[40px] tw-border-2 tw-border-dashed tw-border-[#445F74] hover:tw-border-[#9EC0DC] tw-w-auto tw-h-[223px] tw-rounded-[6px] tw-pb-[38px] ${dragged ? 'tw-border-white' : ''}`"
     >   
         <div
             v-on:drop="handleDrop"
@@ -78,7 +78,7 @@ function handleDrop(e) {
                     <PhotographIcon class="tw-text-[#91acc1] tw-w-[32px] tw-h-[32px]" />
                 </div>
             </div>
-            <div class="tw-w-full tw-text-center tw-text-white tw-mt-[18px] tw-text-[16px]">Drop your image here, or <span class="tw-text-[#445F74] tw-font-bold">upload from your computer</span></div>
+            <div class="tw-w-full tw-text-center tw-text-white tw-mt-[18px] tw-text-[16px]">Drop your image here, or <span class="tw-text-[#3B82F6] tw-font-bold">upload from your computer</span></div>
             <div class="tw-w-full tw-text-center tw-text-white tw-italic tw-text-[14px]">Max file size: 5MB</div>
         </div>
         <input id="fileUploadInput" type="file" style="visibility:hidden" accept=".jpg,.jpeg,.png,.gif" @change="handleFileChange" />

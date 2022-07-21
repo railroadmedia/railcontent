@@ -47,7 +47,7 @@ export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, sel
       },
       instrument: 'default',
       instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),
-      experience: getSavedExperience(selectedExperience),
+      experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
       genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
       topics: getSavedMultiSelect({ options: selectedTopics, plural: 'topics', singular: 'topic', configOptions }),
   })
@@ -62,7 +62,16 @@ export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, s
     }
   });
   const hasGear = !!selectedGear.find(gear => gear.brand === brand);
-  const hasExperience = !!selectedExperience.find(exp => exp.brand === brand);
+  const hasExperience = () => {
+    if (!selectedExperience) {
+      return false;
+    }
+    if (selectedExperience.length) {
+      return !!selectedExperience.find(exp => exp.brand === brand);
+    } else {
+      return selectedExperience.brand === brand;
+    }
+  }
   const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
   const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
 

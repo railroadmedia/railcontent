@@ -299,6 +299,24 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
+     * Values: pack, member, lifetime, coach, house-coach, team
+     *
+     * @return Attribute
+     */
+    public function accessLevel()
+    : Attribute {
+        return Attribute::make(
+            get: function ($value) {
+                if (!empty($value)) {
+                    return $value;
+                }
+
+                return 'pack';
+            },
+        );
+    }
+
+    /**
      * @return string
      */
     public function getDashboardUrl()
