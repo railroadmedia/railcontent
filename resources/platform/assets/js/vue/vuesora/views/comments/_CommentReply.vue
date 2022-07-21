@@ -91,7 +91,7 @@
                         <p
                             v-if="!isUsersPost"
                             class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'tw-text-white'"
+                            :class="comment.is_liked ? themeTextClass : 'dark:tw-text-white tw-text-black'"
                             dusk="like-button"
                             @click="likeComment"
                         >
@@ -103,9 +103,9 @@
 
                         <p
                             class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="replying ? themeTextClass : 'tw-text-white'"
+                            :class="replying ? themeTextClass : 'dark:tw-text-white tw-text-black'"
                             dusk="reply-button"
-                            @click="replyToComment"
+                            @click="openReply"
                         >
                             <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
                             <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
@@ -121,7 +121,7 @@
                             @click="openLikes"
                         >
                             <ThumbUpIcon
-                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             />&nbsp;{{ comment.like_count }}
                         </p>
@@ -150,7 +150,7 @@
                                 :height="150"
                             ></text-editor>
                         </div>
-                        <div class="tw-flex tw-flex-row tw-justify-center mv-1">
+                        <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                             <a
                                 class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
                                 @click="replying = false"
@@ -340,15 +340,6 @@ export default {
         showUserExp() {
             return this.userExpValue != null && this.comment.user.access_level !== 'team';
         },
-    },
-    mounted() {
-        /*
-        this.$root.$on('replyOpened', (payload) => {
-            if (this.comment.id !== payload.id) {
-                this.replying = false;
-            }
-        });
-        */
     },
     methods: {
         handleInput(payload) {
