@@ -23,10 +23,10 @@
                 </p>
                 
                 {{-- Header CTAs --}}
-                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3 tw-max-w-xl">
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3">
                     <div class="flex flex-column">
-                        <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer">
-                            <button class="tw-btn-secondary tw-text-white ">
+                        <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer tw-w-fit">
+                            <button class="tw-btn-secondary tw-text-white">
                                 <i class="fas fa-globe mr-1"></i>
                                 Change Your Timezone
                             </button>

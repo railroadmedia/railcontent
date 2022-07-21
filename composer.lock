@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.9",
+            "version": "3.231.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "fbda3e544226b44f79ead89de78f220d30ef3796"
+                "reference": "e46b7c5fcb70fadf38079755982cc1d3f0583c41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fbda3e544226b44f79ead89de78f220d30ef3796",
-                "reference": "fbda3e544226b44f79ead89de78f220d30ef3796",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e46b7c5fcb70fadf38079755982cc1d3f0583c41",
+                "reference": "e46b7c5fcb70fadf38079755982cc1d3f0583c41",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.10"
             },
-            "time": "2022-07-19T18:14:37+00:00"
+            "time": "2022-07-20T18:17:18+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4111,16 +4111,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.21.0",
+            "version": "v9.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a8a529d371faaa38bde087aa6171a5b53a6a8760"
+                "reference": "66bfa61e61ffceddb6370b57306c76ead7667622"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a8a529d371faaa38bde087aa6171a5b53a6a8760",
-                "reference": "a8a529d371faaa38bde087aa6171a5b53a6a8760",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/66bfa61e61ffceddb6370b57306c76ead7667622",
+                "reference": "66bfa61e61ffceddb6370b57306c76ead7667622",
                 "shasum": ""
             },
             "require": {
@@ -4287,21 +4287,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-19T14:12:19+00:00"
+            "time": "2022-07-20T18:00:32+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.12.7",
+            "version": "4.12.11",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "52202ee78d00370e4b8dc54f48164506c4efb3af"
+                "reference": "11d83651e3006ded9a26af83861d67cf30b5ebbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-52202ee78d00370e4b8dc54f48164506c4efb3af-zip-e38518.zip",
-                "reference": "52202ee78d00370e4b8dc54f48164506c4efb3af",
-                "shasum": "ad2f9286a802eaf4b94a70365b15700efffb3ddc"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-11d83651e3006ded9a26af83861d67cf30b5ebbd-zip-dae373.zip",
+                "reference": "11d83651e3006ded9a26af83861d67cf30b5ebbd",
+                "shasum": "e05524e7089bdb8082b648607d9657b1b1d02023"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -4395,9 +4395,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.12.7"
+                "source": "https://github.com/laravel/nova/tree/v4.12.11"
             },
-            "time": "2022-07-19T17:00:55+00:00"
+            "time": "2022-07-20T19:56:34+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7618,12 +7618,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "87eabaf3c5c6939166ac450fe0da933336f55a67"
+                "reference": "cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/87eabaf3c5c6939166ac450fe0da933336f55a67",
-                "reference": "87eabaf3c5c6939166ac450fe0da933336f55a67",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1",
+                "reference": "cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1",
                 "shasum": ""
             },
             "require": {
@@ -7672,7 +7672,7 @@
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
                 "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration"
             },
-            "time": "2022-07-11T08:23:30+00:00"
+            "time": "2022-07-20T23:08:26+00:00"
         },
         {
             "name": "railroad/location",
@@ -7779,12 +7779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "ff81c9c8162e46c0cb475a0f0c93c856725820ce"
+                "reference": "19ad71e32650247f50782018421b3280db357272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/ff81c9c8162e46c0cb475a0f0c93c856725820ce",
-                "reference": "ff81c9c8162e46c0cb475a0f0c93c856725820ce",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/19ad71e32650247f50782018421b3280db357272",
+                "reference": "19ad71e32650247f50782018421b3280db357272",
                 "shasum": ""
             },
             "require": {
@@ -7816,7 +7816,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-07-20T12:51:05+00:00"
+            "time": "2022-07-20T14:32:59+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -13179,16 +13179,16 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.19.0",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "d7f08a622b3346766325488aa32ddc93ccdecc75"
+                "reference": "37f751c67a5372d4e26353bd9384bc03744ec77b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/d7f08a622b3346766325488aa32ddc93ccdecc75",
-                "reference": "d7f08a622b3346766325488aa32ddc93ccdecc75",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/37f751c67a5372d4e26353bd9384bc03744ec77b",
+                "reference": "37f751c67a5372d4e26353bd9384bc03744ec77b",
                 "shasum": ""
             },
             "require": {
@@ -13215,7 +13215,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "v1.19-dev"
+                    "dev-main": "v1.20-dev"
                 }
             },
             "autoload": {
@@ -13240,9 +13240,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.19.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.20.0"
             },
-            "time": "2022-02-02T17:38:57+00:00"
+            "time": "2022-07-20T13:12:54+00:00"
         },
         {
             "name": "filp/whoops",
