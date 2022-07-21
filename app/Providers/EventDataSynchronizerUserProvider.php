@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
-use Illuminate\Database\DatabaseManager;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\EventDataSynchronizer\Providers\UserProviderInterface;
 
@@ -24,7 +23,8 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         int $userId,
         ?Carbon $membershipExpirationDate,
         bool $isLifetimeMember,
-        string $accessLevel
+        string $accessLevel,
+        bool $isPackOwner
     ): bool {
         $user = User::query()->find($userId);
 
@@ -33,20 +33,6 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
                 $membershipExpirationDate->toDateTimeString() : null;
             $user->is_lifetime_member = $isLifetimeMember;
             $user->access_level = $accessLevel;
-
-            $user->save();
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public function savePackOwnerData(int $userId, bool $isPackOwner)
-    : bool {
-        $user = User::query()->find($userId);
-
-        if (!empty($user)) {
             $user->is_pack_owner = $isPackOwner;
 
             $user->save();
@@ -56,5 +42,4 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
 
         return false;
     }
-
 }
