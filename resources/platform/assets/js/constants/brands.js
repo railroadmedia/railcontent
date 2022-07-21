@@ -1,27 +1,17 @@
-import drumeoBgImg from '../vue/images/drumeo-bg.jpg'; 
-import singeoBgImg from '../vue/images/singeo-bg.jpg'; 
-import pianoteBgImg from '../vue/images/pianote-bg.jpg'; 
-import guitareoBgImg from '../vue/images/guitareo-bg.jpg';
-
-import drumeoBgImgCard from '../vue/images/drumeo-card.jpg'; 
-import singeoBgImgCard from '../vue/images/singeo-card.jpg'; 
-import pianoteBgImgCard from '../vue/images/pianote-card.jpg'; 
-import guitareoBgImgCard from '../vue/images/guitareo-card.jpg'; 
-
 export const brandUrl = {
-  drumeo: 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
-  singeo: 'https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png',
-  guitareo: 'https://musora-ui.s3.amazonaws.com/logos/guitareo.svg',
+  drumeo: 'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
+  singeo: 'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png',
+  guitareo: 'https://d38h3dn806jqj1.cloudfront.net/logos/guitareo.svg',
   pianote:
-    'https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png'
+    'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png'
 }
 
 export const whiteLogos = {
-  drumeo:'https://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg',
-  singeo:'https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg',
-  guitareo:'https://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg',
-  pianote:'https://musora-ui.s3.amazonaws.com/logos/pianote-white.svg',
-  musora: 'https://musora-ui.s3.amazonaws.com/logos/musora-white.svg'
+  drumeo:'https://d38h3dn806jqj1.cloudfront.net/logos/drumeo-white.svg',
+  singeo:'https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg',
+  guitareo:'https://d38h3dn806jqj1.cloudfront.net/logos/guitareo-white.svg',
+  pianote:'https://d38h3dn806jqj1.cloudfront.net/logos/pianote-white.svg',
+  musora: 'https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg'
 }
 
 export const bgColor = {
@@ -57,17 +47,17 @@ export const borderColor = {
 }
 
 export const bgImg = {
-  drumeo: drumeoBgImg,
-  singeo: singeoBgImg,
-  guitareo: guitareoBgImg,
-  pianote: pianoteBgImg
+  drumeo: 'https://musora.com/cdn-cgi/image/quality=85,width=1920,height=1080,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/drumeo-bg.jpg',
+  singeo: 'https://musora.com/cdn-cgi/image/quality=85,width=1920,height=1080,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/singeo-bg.jpg',
+  guitareo: 'https://musora.com/cdn-cgi/image/quality=85,width=1920,height=1080,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/guitareo-bg.jpg',
+  pianote: 'https://musora.com/cdn-cgi/image/quality=85,width=1920,height=1080,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/pianote-bg.jpg'
 }
 
 export const bgImgCard = {
-  drumeo: drumeoBgImgCard,
-  singeo: singeoBgImgCard,
-  guitareo: guitareoBgImgCard,
-  pianote: pianoteBgImgCard
+  drumeo: 'https://musora.com/cdn-cgi/image/quality=75,width=500,height=500,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/drumeo-card.jpg',
+  singeo: 'https://musora.com/cdn-cgi/image/quality=75,width=500,height=500,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/singeo-card.jpg',
+  guitareo: 'https://musora.com/cdn-cgi/image/quality=75,width=500,height=500,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/guitareo-card.jpg',
+  pianote: 'https://musora.com/cdn-cgi/image/quality=75,width=500,height=500,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/onboarding-images/pianote-card.jpg'
 }
 
 // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style

@@ -728,7 +728,7 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
                 'allowableFilters' => ['instructor'],
@@ -842,7 +842,7 @@ return [
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
@@ -932,6 +932,7 @@ return [
             'question-and-answer',
             'student-collaborations',
             'live-streams',
+            'live',
             'podcasts',
             'solos',
             'boot-camps',
@@ -955,14 +956,19 @@ return [
         ],
         'pianote' => [
             'student-review',
+            'student-reviews',
             'question-and-answer',
         ],
         'guitareo' => [
             'student-review',
+            'student-reviews',
             'question-and-answer',
+            'archives',
+            'recording',
         ],
         'singeo' => [
             'student-review',
+            'student-reviews',
             'question-and-answer',
         ],
     ],
@@ -1090,6 +1096,9 @@ return [
         'ha-oemurd-pmac',
         'learning-path-lesson',
         'chord-and-scale',
+        'podcasts',
+        'boot-camps',
+        'quick-tips'
     ],
     'appUserListContentTypes' => [
         'course',

@@ -148,7 +148,7 @@
     @component('partials.bladesora.members.components.coach-footer', [
         'brandName' => '{{ $brand }}',
         'shortBio' => $thisCoach->fetch('data.long_bio'),
-        'focusArray' => $thisCoach->fetch('*fields.focus.value'),
+        'focusArray' => $thisCoach->fetch('*fields.focus.value', []),
         'firstName' => $firstLastName[0] ?? '',
         'lastName' => $firstLastName[1] ?? '',
         'coachId' => $thisCoach->fetch('id'),
