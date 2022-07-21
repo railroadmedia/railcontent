@@ -359,4 +359,10 @@ class CommentService
         return floor($countLatestComments / $limit) + 1;
     }
 
+
+    public function markUserCommentsAsDeleted($userId)
+    {
+        return $this->commentRepository->markUserCommentsAsDeleted($userId);
+    }
+
 }
