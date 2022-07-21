@@ -3,12 +3,12 @@
         @if(!empty($prevLessonUrl))
             <a href="{{ $prevLessonUrl }}"
                data-tooltip="Previous Lesson"
-               class="btn bg-{{ $brand }} inverted text-{{ $brand }}">
+               class="tw-btn-secondary tw-text-{{ $brand }}">
                 <i class="fas fa-chevron-left"></i>
                 <span class="hide-xs-only ml-1">Previous Lesson</span>
             </a>
         @else
-            <a class="btn bg-grey-3 inverted text-grey-3 no-events">
+            <a class="tw-btn-secondary tw-text-gray-400 no-events">
                 <i class="fas fa-chevron-left"></i>
                 <span class="hide-xs-only ml-1">Previous Lesson</span>
             </a>
@@ -39,13 +39,13 @@
     <div class="flex flex-column next-prev-button-col ml-1" dusk="next-lesson">
         @if(!empty($nextLessonUrl))
             <a href="{{ $nextLessonUrl }}"
-               class="btn bg-{{ $brand }} inverted text-{{ $brand }}"
+               class="tw-btn-secondary tw-text-{{ $brand }}"
                data-tooltip="Next Lesson">
                 <span class="hide-xs-only mr-1">Next Lesson</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
         @else
-            <a class="btn bg-grey-3 inverted text-grey-3 no-events">
+            <a class="tw-btn-secondary tw-text-gray-400 no-events">
                 <span class="hide-xs-only mr-1">Next Lesson</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
