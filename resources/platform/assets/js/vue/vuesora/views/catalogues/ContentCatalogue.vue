@@ -629,7 +629,7 @@ export default {
     }
 
     if (this.infiniteScroll && !this.loadMoreButton) {
-      window.addEventListener("scroll", this.infiniteScrollEventHandler);
+      document.querySelector('#content-container').addEventListener("scroll", this.infiniteScrollEventHandler);
     }
 
     if (this.useUrlParams) {
@@ -649,7 +649,7 @@ export default {
   },
   beforeDestroy() {
     if (this.infiniteScroll && !this.loadMoreButton) {
-      window.removeEventListener("scroll", this.infiniteScrollEventHandler);
+      document.querySelector('#content-container').removeEventListener("scroll", this.infiniteScrollEventHandler);
     }
   },
   methods: {
@@ -859,7 +859,7 @@ export default {
     },
 
     infiniteScrollEventHandler() {
-      const scroll_position = window.pageYOffset + window.innerHeight;
+      const scroll_position = document.querySelector('#content-container').offsetTop + document.querySelector('#content-container').offsetHeight;
       const scroll_buffer = document.body.scrollHeight * 0.75;
 
       if (scroll_position >= scroll_buffer && this.page < this.total_pages) {
