@@ -1197,6 +1197,7 @@ return [
             'published_on',
             'is_liked_by_current_user',
             'like_count',
+            'length_in_seconds',
             'total_length_in_seconds',
             'level_position',
             'course_position',
