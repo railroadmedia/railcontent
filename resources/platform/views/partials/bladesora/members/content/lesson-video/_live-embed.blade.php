@@ -1,4 +1,4 @@
-<div class="tw-flex tw-flex-row tw-flex-wrap">
+<div class="tw-flex tw-flex-row">
     <div id="video-container" class="tw-flex tw-flex-col" dusk="video-player">
         <div class="widescreen">
             <iframe id="player" frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" src="https://www.youtube.com/embed/{{ $youtubeId }}?rel=0&autoplay=1&playsinline=1&modestthemeColoring=1"></iframe>
