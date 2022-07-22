@@ -1,4 +1,4 @@
-<div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-flex-col 2xl:tw-flex-row">
+<div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-flex-col">
     
     {{-- Video --}}
     <div id="video-container" class="tw-w-full tw-flex tw-flex-col tw-mb-8 2xl:tw-mb-0" dusk="video-player">

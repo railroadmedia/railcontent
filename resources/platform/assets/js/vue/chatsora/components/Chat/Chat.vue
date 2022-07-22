@@ -555,7 +555,6 @@ export default {
         },
     },
     mounted() {
-        console.log('initialized Chat!')
         this.setupChat();
 
         this.$root.$on('updateMessage', this.updateMessage);

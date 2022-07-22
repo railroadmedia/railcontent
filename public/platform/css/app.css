@@ -22086,10 +22086,6 @@ a:visited{
   margin-left: 16px !important;
   margin-right: 16px !important;
 }
-.tw-mx-auto{
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
 }
@@ -22356,18 +22352,6 @@ a:visited{
 }
 .tw-ml-\[35px\]{
   margin-left: 35px !important;
-}
-.tw-mb-4{
-  margin-bottom: 1rem !important;
-}
-.tw-mr-2{
-  margin-right: 0.5rem !important;
-}
-.tw-mr-1{
-  margin-right: 0.25rem !important;
-}
-.tw-mt-1{
-  margin-top: 0.25rem !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
@@ -22836,9 +22820,6 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
-.tw-w-full{
-  width: 100% !important;
-}
 .tw-min-w-\[175px\]{
   min-width: 175px !important;
 }
@@ -22907,9 +22888,6 @@ a:visited{
 }
 .tw-max-w-md{
   max-width: 28rem !important;
-}
-.tw-max-w-\[1703px\]{
-  max-width: 1703px !important;
 }
 .tw-flex-auto{
   flex: 1 1 auto !important;
@@ -23671,10 +23649,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-white{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
-}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23981,14 +23955,6 @@ a:visited{
   padding-left: 2.5rem !important;
   padding-right: 2.5rem !important;
 }
-.tw-px-4{
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-}
-.tw-px-1{
-  padding-left: 0.25rem !important;
-  padding-right: 0.25rem !important;
-}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -24160,9 +24126,6 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
-.tw-pt-1{
-  padding-top: 0.25rem !important;
-}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24293,9 +24256,6 @@ a:visited{
 }
 .tw-font-semibold{
   font-weight: 600 !important;
-}
-.tw-font-bold{
-  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24525,14 +24485,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
 }
-.tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
-.tw-text-black{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24590,11 +24542,6 @@ a:visited{
 .tw-shadow-lg{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color) !important;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-}
-.tw-shadow{
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 .tw-outline-offset-0{
@@ -25694,10 +25641,6 @@ a:visited{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  .md\:tw-px-8{
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-  }
   .md\:tw-pt-5{
     padding-top: 1.25rem !important;
   }
@@ -26112,9 +26055,6 @@ a:visited{
   .\32xl\:tw-mb-0{
     margin-bottom: 0px !important;
   }
-  .\32xl\:tw-ml-4{
-    margin-left: 1rem !important;
-  }
   .\32xl\:tw-w-\[420px\]{
     width: 420px !important;
   }
@@ -26124,9 +26064,6 @@ a:visited{
   .\32xl\:tw-w-\[1350px\]{
     width: 1350px !important;
   }
-  .\32xl\:tw-w-\[420px\]{
-    width: 420px !important;
-  }
   .\32xl\:tw-grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
   }
@@ -26135,9 +26072,6 @@ a:visited{
   }
   .\32xl\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  }
-  .\32xl\:tw-flex-row{
-    flex-direction: row !important;
   }
   .\32xl\:tw-flex-row{
     flex-direction: row !important;
