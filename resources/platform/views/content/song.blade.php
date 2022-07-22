@@ -153,10 +153,8 @@
                 @endif
 
                 <div class="flex flex-row mt-3 song-comments-container">
-                    {{-- todo: fix once comment component is working --}}
-                    
-                    {{-- <comments
-                        brand="drumeo"
+                    <comments
+                        :brand="$brand"
                         theme-color="{{ $themeColor }}"
                         content-id="{{ $lessonContent->fetch('id') }}"
                         user-id="{{ user()->id }}"
@@ -165,7 +163,7 @@
                         user-xp="{{ user()->total_xp }}"
                         user-access-level="{{ user()->access_level }}"
                         :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                    ></comments>  --}}
+                    ></comments>
                 </div>
             </div>
 
