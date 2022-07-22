@@ -191,9 +191,8 @@ class HomePageController extends BaseController
         $hasGenres = count(user()->onboardingGenres->filter(function($item) {
             return $item->brand == brand();
         })) > 0;
-        $hasExperience = count(user()->onboardingExperience->filter(function($item) {
-            return $item->brand == brand();
-        })) > 0;
+
+        $hasExperience = user()->onboardingExperience ? true : false;
 
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];

@@ -83,7 +83,7 @@ Route::group(
           * Onboarding API
           */
         Route::post(
-            'onboarding-gear',
+            'onboarding-gears',
             OnboardingController::class . '@gears'
         )
             ->name('user_management_system.onboarding.gears');
