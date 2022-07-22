@@ -142,7 +142,7 @@
                                     </div>
                                 @endforeach
 
-                                @include('bladesora::members.partials._completion-bonus', [
+                                @include('partials.bladesora.members.partials._completion-bonus', [
                                     "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
                                     "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
                                     "themeColor" => 'drumeo'
