@@ -393,6 +393,7 @@ return [
             'data.description',
             'xp',
             'xp_bonus',
+            'total_xp',
             'duration',
             'banner_button_url',
             'is_liked_by_current_user',
