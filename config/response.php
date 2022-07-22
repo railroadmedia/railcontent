@@ -1580,6 +1580,7 @@ return [
             'profile_picture_url',
             'totalXp',
             'xpRank',
+            'level_rank',
             'isEdge',
             'isEdgeExpired',
             'edgeExpirationDate',
