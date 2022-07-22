@@ -9,7 +9,7 @@
     @component('partials._header-banner',
         ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
         @slot('content')
-            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
+            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     <i class="icon-live tw-text-{{$brand}} tw-mr-3 tw-text-3xl"></i>
                     <span class="tw-text-32 tw-font-bold"><span class="tw-capitalize">{{ $brand }}</span> Live</span>

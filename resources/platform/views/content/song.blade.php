@@ -34,7 +34,7 @@
                    <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 {{-- Song Container --}}
-                <div class="flex flex-row pt-4 pb-4 song-content-container">
+                <div class="tw-flex tw-flex-row pt-4 pb-4 song-content-container">
 
                     <div class="tw-flex tw-flex-col song-play-button song-album-cover tw-mr-6">
                         <div class="2xl:tw-w-screen tw-aspect-square tw-max-w-[338px] tw-min-w-[175px] corners-10 flex-center flex-column shadow-md">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-column tw-w-full song-details">
+                    <div class="tw-flex flex-column tw-w-full song-details">
                         <div>
                             <h1 class="text-black font-bold item-title heading dark:tw-text-white">{{ $lessonContent->fetch('fields.title') }}</h1>
                             <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] mt-1 mb-3">
@@ -152,7 +152,7 @@
                     </div>
                 @endif
 
-                <div class="flex flex-row mt-3 song-comments-container">
+                <div class="flex flex-row song-comments-container">
                     <comments
                         :brand="$brand"
                         theme-color="{{ $themeColor }}"
