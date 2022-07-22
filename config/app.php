@@ -183,6 +183,7 @@ return [
          */
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
+        App\Modules\Mentor\Providers\MentorServiceProvider::class,
 
         /*
          * Application Service Providers...
