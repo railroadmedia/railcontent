@@ -859,8 +859,9 @@ export default {
     },
 
     infiniteScrollEventHandler() {
-      const scroll_position = document.querySelector('#content-container').offsetTop + document.querySelector('#content-container').offsetHeight;
-      const scroll_buffer = document.body.scrollHeight * 0.75;
+      let scrollEl = document.querySelector('#content-container');
+      const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
+      const scroll_buffer = scrollEl.scrollHeight * 0.9;
 
       if (scroll_position >= scroll_buffer && this.page < this.total_pages) {
         this.loadMore();
