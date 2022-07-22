@@ -37,7 +37,7 @@
             </div>
             <div class="flex flex-column xs-12 md-4 complete-column">
                 <div class="flex flex-row">
-                    <button v-if="soundsliceSlug" class="btn mr-1" @click="openExercise">
+                    <button id="open-exercise-button" v-if="soundsliceSlug" class="btn mr-1" @click="openExercise">
                             <span class="text-white bg-grey-3 inverted text-grey-3">
                                 <i class="fas fa-play mr-1"></i> Practice
                             </span>
@@ -342,6 +342,7 @@ export default {
         },
     },
     mounted() {
+        console.log(this.soundsliceSlug)
         if (this.position < 3) {
             this.openAssignment();
         }
