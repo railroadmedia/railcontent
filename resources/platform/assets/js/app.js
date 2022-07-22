@@ -5,13 +5,11 @@ import { createApp } from 'vue';
 //Libraries
 import store from './vue/store';
 import router from './vue/router';
-import Chatsora from '@musora/chatsora';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 //App Components
-import chat from '@musora/chatsora/src/components/Chat/Chat.vue';
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
 import HomeCardLinks from './vue/components/HomeCardLinks/HomeCardLinks.vue';
@@ -62,6 +60,8 @@ import ContentAssignment from './vue/vuesora/components/ContentAssignment/Conten
 import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
 import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
 import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
+//Chatsora
+import chat from './vue/chatsora/components/Chat/Chat.vue';
 
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
@@ -281,9 +281,7 @@ app.directive('click-outside', {
 app.use(store);
 // app.use(router);
 app.use(VueAxios, axios);
-app.use(Chatsora);
 app.mount('#app');
-
 
 window.onload = function(){
     const x = 'SGdodzV2SHpzOThrUDhiRQ==';
