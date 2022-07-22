@@ -35,6 +35,14 @@ class FirebaseToken extends Model
 
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [ 'type','token', 'user_id', 'brand'];
+    public $timestamps = false;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

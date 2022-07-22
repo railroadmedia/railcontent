@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Models\FirebaseToken;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
@@ -80,6 +81,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     : array
     {
         $user = user();
+
         return [
             'id' => $user->id,
             'email' => $user->email,
@@ -90,7 +92,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'avatarUrl' => $user->profile_picture_url,
             'profile_picture_url' => $user->profile_picture_url,
             'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id'),
-            'level_rank' => $user->getMethodLevel()
+            'level_rank' => $user->getMethodLevel(),
         ];
     }
 
@@ -121,9 +123,11 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function setCurrentUserDisplayName(string $displayName)
     : ?User {
-        $inUseDisplayName = \Modules\UserManagementSystem\Models\User::where('display_name',$displayName)->get();
+        $inUseDisplayName =
+            \Modules\UserManagementSystem\Models\User::where('display_name', $displayName)
+                ->get();
 
-        if(($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))){
+        if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
             throw new MusoraAPIException('This display name is already in use', 'Display name exist', 500);
         }
 
@@ -133,9 +137,25 @@ class MusoraApiUserProvider implements UserProviderInterface
         return $this->getCurrentUser();
     }
 
+    /**
+     * @param string|null $iosToken
+     * @param string|null $androidToken
+     * @return User|null
+     */
     public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)
     {
-        // TODO: Implement setCurrentUserFirebaseTokens() method.
+       $firebaseToken =
+            [
+                'type' => ($iosToken) ? 'ios' : 'android',
+                'brand' => brand(),
+                'user_id' => user()->id,
+                'token' => $iosToken ?? $androidToken,
+            ]
+        ;
+
+       FirebaseToken::firstOrNew($firebaseToken)->save();
+
+        return $this->getCurrentUser();
     }
 
     /**
