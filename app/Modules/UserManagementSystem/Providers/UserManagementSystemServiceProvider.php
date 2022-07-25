@@ -56,7 +56,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
         }
 
         // views
-//        $this->loadViewsFrom(__DIR__ . '/../../views', 'usora');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'user-management-system');
 
         // model policies
         Gate::guessPolicyNamesUsing(function ($modelClass) {

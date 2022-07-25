@@ -11,4 +11,9 @@ class LoginPageController extends BaseController
     {
         return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }
+
+    public function showResetForm(Request $request)
+    {
+        return view('pages.login', ['redirect' => $request->get('redirect_to')]);
+    }
 }
