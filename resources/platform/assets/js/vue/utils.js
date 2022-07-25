@@ -10,7 +10,8 @@ export const setEndpointPrefix = () => {
 };
 
 export const searchCoaches = (brand, term) => {
-    return axios.get(`https://${location.hostname}:${location.port}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`);
+    const coachesUrl = `https://${location.hostname}${location.port ? ':'+location.port : ''}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
+    return axios.get(coachesUrl);
 }
 
 const getResultValue = (el, searchKey, searchObj) => {

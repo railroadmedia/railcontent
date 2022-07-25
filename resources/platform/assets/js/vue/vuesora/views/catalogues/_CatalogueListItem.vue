@@ -158,10 +158,12 @@
         v-if="!is_search"
         class="
           tw-text-xs
+          tw-mt-4
           font-compressed
           tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
           tw-uppercase
-          hide-md-up
+          xl:tw-hidden
+          tw-flex
         "
       >
         <span
@@ -189,15 +191,15 @@
       v-if="!is_search"
       :key="`${item.id}-mappedData-${i}`"
       class="
-        tw-flex 
-        tw-flex-col
+        tw-hidden
+        xl:tw-flex 
         tw-uppercase
+        tw-items-center
         tw-justify-center
         basic-col
         tw-text-center
         tw-text-xs
         font-compressed
-        hide-sm-down
       "
       :data-test="column_data"
     >
@@ -208,13 +210,14 @@
     <div
       v-if="is_search"
       class="
-        tw-flex tw-flex-col
+        tw-hidden
+        sm:tw-flex 
+        tw-flex-col
         tw-uppercase
         tw-justify-center
         basic-col
         tw-text-center
         tw-text-xs
-        hide-sm-down
       "
     >
       {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}

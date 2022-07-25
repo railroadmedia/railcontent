@@ -5,11 +5,13 @@ namespace App\Console\Commands;
 use App\Modules\Brand\Enums\Brand;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 
 class SeedUserContentData extends Command
 {
@@ -463,7 +465,6 @@ class SeedUserContentData extends Command
             339100,
         ],
     ];
-
     protected $coachIdMap = [
         'drumeo' => [311690, 31888, 236681, 273806, 234095, 265267, 189973],
         'pianote' => [323470, 320027, 197087, 197077, 196999],
@@ -479,7 +480,8 @@ class SeedUserContentData extends Command
     public function handle(
         ContentRepository $contentRepository,
         ContentService $contentService,
-        ContentHierarchyService $contentHierarchyService
+        ContentHierarchyService $contentHierarchyService,
+        UserPlaylistsService $userPlaylistsService
     ) {
         $user = User::query()->where('email', $this->argument('userEmail'))->firstOrFail();
         $dbConnection = DB::connection(config('railcontent.database_connection_name'));
@@ -488,7 +490,7 @@ class SeedUserContentData extends Command
             $brandString = $brandEnum->value;
 
             // user content progress starts
-            for ($i = 0; $i < 50; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $date = Carbon::now()->subDays(rand(1, 100))->subHours(rand(1, 100))->subMinutes(rand(1, 100));
 
                 $dbConnection->table('railcontent_user_content_progress')
@@ -506,7 +508,7 @@ class SeedUserContentData extends Command
             $this->info('Done adding started content.');
 
             // user content progress completes
-            for ($i = 50; $i < 100; $i++) {
+            for ($i = 50; $i < 55; $i++) {
                 $date = Carbon::now()->subDays(rand(1, 100))->subHours(rand(1, 100))->subMinutes(rand(1, 100));
 
                 $dbConnection->table('railcontent_user_content_progress')
@@ -524,11 +526,12 @@ class SeedUserContentData extends Command
             $this->info('Done adding completed content.');
 
             // user my-list additions
-            for ($i = 3; $i < 40; $i++) {
+            for ($i = 60; $i < 68; $i++) {
                 $this->addToPrimaryPlaylist(
                     $contentRepository,
                     $contentService,
                     $contentHierarchyService,
+                    $userPlaylistsService,
                     $brandString,
                     $this->contentIdMap[$brandString][$i],
                     $user->id
@@ -559,29 +562,35 @@ class SeedUserContentData extends Command
         ContentRepository $contentRepository,
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService,
+        UserPlaylistsService $userPlaylistsService,
         $brand,
         $contentId,
         $userId
     ) {
         $userPrimaryPlaylists =
-            collect($contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            $userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $brand);
 
-        $userPrimaryPlaylist = $userPrimaryPlaylists->where('brand', $brand)->first();
-
-        if (!$userPrimaryPlaylist) {
-            $userPrimaryPlaylist = $contentService->create(
-                'primary-playlist',
-                'user-playlist',
-                ContentService::STATUS_PUBLISHED,
-                null,
-                $brand,
-                $userId,
-                Carbon::now()->subSeconds(rand(1, 1000))
-                    ->toDateTimeString()
-            );
+        if (empty($userPrimaryPlaylists)) {
+            $userPrimaryPlaylist = $userPlaylistsService->updateOrCeate([
+                'user_id' => $userId,
+                'type' => 'primary-playlist',
+                'brand' => $brand
+                    ??
+                    config('railcontent.brand'),
+            ], [
+                'user_id' => $userId,
+                'type' => 'primary-playlist',
+                'brand' => $brand
+                    ??
+                    config('railcontent.brand'),
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
+            ]);
+        } else {
+            $userPrimaryPlaylist = Arr::first($userPrimaryPlaylists);
         }
 
-        $contentHierarchyService->create($userPrimaryPlaylist['id'], $contentId, 1);
+        $userPlaylistsService->addContentToUserPlaylist($userPrimaryPlaylist['id'], $contentId);
 
         return response()->json(['success']);
     }
