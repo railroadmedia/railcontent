@@ -135,7 +135,7 @@ class FullTextSearchRepository extends RepositoryBase
         });
 
         $this->connection()
-            ->statement('OPTIMIZE table ' . ConfigService::$tableSearchIndexes);
+            ->statement('OPTIMIZE table '.ConfigService::$tableSearchIndexes);
     }
 
     /** Delete old indexes for the brand
@@ -237,64 +237,14 @@ class FullTextSearchRepository extends RepositoryBase
         $query =
             $this->query()
                 ->selectColumns($term)
-                ->leftJoin(
-                    ConfigService::$tableContentPermissions . ' as id_content_permissions',
-                    function (JoinClause $join) {
-                        $join->on(
-                            'id_content_permissions' . '.content_id',
-                            ConfigService::$tableSearchIndexes . '.content_id'
-                        );
-                    }
-                )
-                ->leftJoin(
-                    ConfigService::$tableContentPermissions . ' as type_content_permissions',
-                    function (JoinClause $join) {
-                        $join->on(
-                            'type_content_permissions' . '.content_type',
-                            ConfigService::$tableSearchIndexes . '.content_type'
-                        )
-                            ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
-                    }
-                )
-                ->where(function (Builder $builder) {
-                    return $builder->where(function (Builder $builder) {
-                        return $builder->whereNull(
-                            'id_content_permissions' . '.permission_id'
-                        )
-                            ->whereNull(
-                                'type_content_permissions' . '.permission_id'
-                            );
-                    })
-                        ->orWhereExists(function (Builder $builder) {
-                            return $builder->select('id')
-                                ->from(ConfigService::$tableUserPermissions)
-                                ->where('user_id', auth()->id() ?? null)
-                                ->where(function (Builder $builder) {
-                                    return $builder->whereRaw(
-                                        'permission_id = id_content_permissions.permission_id'
-                                    )
-                                        ->orWhereRaw(
-                                            'permission_id = type_content_permissions.permission_id'
-                                        );
-                                })
-                                ->where(function (Builder $builder) {
-                                    return $builder->where(
-                                        'expiration_date',
-                                        '>=',
-                                        Carbon::now()
-                                            ->toDateTimeString()
-                                    )
-                                        ->orWhereNull('expiration_date');
-                                });
-                        });
-                })
+                ->restrictByPermissions()
                 ->restrictBrand()
                 ->restrictByTerm($term)
                 ->order($orderByColumn, $orderByDirection)
                 ->directPaginate($page, $limit);
 
         if (!empty($contentTypes)) {
-            $query->whereIn(ConfigService::$tableSearchIndexes . '.content_type', $contentTypes);
+            $query->whereIn(ConfigService::$tableSearchIndexes.'.content_type', $contentTypes);
         }
 
         if (!empty($contentStatuses)) {
@@ -308,21 +258,7 @@ class FullTextSearchRepository extends RepositoryBase
         if (!empty($coachIds)) {
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
-                    $coach = $this->contentRepository->getById($coachId);
-//                    $instructor = Arr::first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
-//
-//                    if ($instructor) {
-//                        $builder->orwhere(function (Builder $builder2) use ($instructor, $coachId) {
-//                            return $builder2->orwhereRaw(
-//                                ' FIND_IN_SET(' . $instructor['id'] . ',content_instructors)'
-//                            )
-//                                ->orWhereRaw(
-//                                    ' FIND_IN_SET(' . $coachId . ',content_instructors)'
-//                                );
-//                        });
-//                    } else {
-                        return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ',content_instructors)');
-//                    }
+                     return $builder->orwhereRaw(' FIND_IN_SET('.$coachId.',content_instructors)');
                 }
             });
         }
@@ -330,7 +266,6 @@ class FullTextSearchRepository extends RepositoryBase
         $contentRows = $query->getToArray();
 
         return array_column($contentRows, 'content_id');
-
     }
 
     /** Count all the matches
@@ -349,55 +284,12 @@ class FullTextSearchRepository extends RepositoryBase
         $query =
             $this->query()
                 ->selectColumns($term)
-                ->leftJoin(
-                    ConfigService::$tableContentPermissions . ' as id_content_permissions',
-                    function (JoinClause $join) {
-                        $join->on(
-                            'id_content_permissions' . '.content_id',
-                            ConfigService::$tableSearchIndexes . '.content_id'
-                        );
-                    }
-                )
-                ->where(function (Builder $builder) {
-                    return $builder->where(function (Builder $builder) {
-                        return $builder->whereNull(
-                            'id_content_permissions' . '.permission_id'
-                        );
-                    })
-                        ->orWhereExists(function (Builder $builder) {
-                            return $builder->select('id')
-                                ->from(ConfigService::$tableUserPermissions)
-                                ->where('user_id', auth()->id() ?? null)
-                                ->where(function (Builder $builder) {
-                                    return $builder->whereRaw(
-                                        'permission_id = id_content_permissions.permission_id'
-                                    );
-                                })
-                                ->where(function (Builder $builder) {
-                                    return $builder->where(
-                                        'expiration_date',
-                                        '>=',
-                                        Carbon::now()
-                                            ->toDateTimeString()
-                                    )
-                                        ->orWhereNull('expiration_date');
-                                })
-                                ->where(function ($query) {
-                                    $query->whereDate(
-                                        'start_date',
-                                        '<=',
-                                        Carbon::now()
-                                            ->toDateTimeString()
-                                    )
-                                        ->orWhereNull('start_date');
-                                });
-                        });
-                })
+                ->restrictByPermissions()
                 ->restrictByTerm($term)
                 ->restrictBrand();
 
         if (!empty($contentType)) {
-            $query->whereIn(ConfigService::$tableSearchIndexes . '.content_type', $contentType);
+            $query->whereIn(ConfigService::$tableSearchIndexes.'.content_type', $contentType);
         }
 
         if (!empty($contentStatus)) {
@@ -411,21 +303,7 @@ class FullTextSearchRepository extends RepositoryBase
         if (!empty($coachIds)) {
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
-                    $coach = $this->contentRepository->getById($coachId);
-                    $instructor = Arr::first($this->contentRepository->getBySlugAndType($coach['slug'], 'instructor'));
-
-                    if ($instructor) {
-                        $builder->orwhere(function (Builder $builder2) use ($instructor, $coachId) {
-                            return $builder2->orwhereRaw(
-                                ' FIND_IN_SET(' . $instructor['id'] . ',content_instructors)'
-                            )
-                                ->orWhereRaw(
-                                    ' FIND_IN_SET(' . $coachId . ',content_instructors)'
-                                );
-                        });
-                    } else {
-                        return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ',content_instructors)');
-                    }
+                    return $builder->orwhereRaw(' FIND_IN_SET('.$coachId.',content_instructors)');
                 }
             });
         }
