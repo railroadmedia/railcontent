@@ -123,8 +123,8 @@ return [
     'force_remember' => true,
 
     // password reset
-    'password_reset_form_route_name' => 'members-area.reset-password',
-    'password_reset_notification_class' => '',
+    'password_reset_form_route_name' => 'user_management_system.password.reset',
+    'password_reset_notification_class' => \Modules\UserManagementSystem\Notifications\ResetPassword::class,
     'password_reset_notification_channel' => 'mail',
 
     'email_change_notification_class' => '',
