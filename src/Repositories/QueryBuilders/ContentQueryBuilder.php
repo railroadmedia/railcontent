@@ -425,20 +425,24 @@ class ContentQueryBuilder extends QueryBuilder
         $includedFieldsGroupedByTable = [];
 
         foreach ($includedFields as $includedFieldIndex => $includedField) {
-            $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+            if (!empty($includedField['associated_table']['table'])) {
+                $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+            } else {
+                $includedFieldsGroupedByTable[$includedField['name']][] = $includedField;
+            }
         }
 
         // set the joins first, then we'll add the where's after
         foreach ($includedFieldsGroupedByTable as $name => $includedFieldDataGrouped) {
             if ($includedFieldDataGrouped[0]['is_content_column']) {
                 $this->where(
-                    '_icf.' . $includedFieldDataGrouped[0]['name'],
+                    'railcontent_content.' . $includedFieldDataGrouped[0]['name'],
                     $includedFieldDataGrouped[0]['operator'],
-                    is_numeric($includedFieldData['value']) ?
-                        DB::raw($includedFieldData['value']) : DB::raw(
+                    is_numeric($includedFieldDataGrouped[0]['value']) ?
+                        DB::raw($includedFieldDataGrouped[0]['value']) : DB::raw(
                         DB::connection()
                             ->getPdo()
-                            ->quote($includedFieldData['value'])
+                            ->quote($includedFieldDataGrouped[0]['value'])
                     )
                 );
             } elseif (!empty($includedFieldDataGrouped[0]['associated_table'])) {
@@ -458,8 +462,8 @@ class ContentQueryBuilder extends QueryBuilder
                 }
 
                 $this->whereIn(
-                    $includedFieldData['associated_table']['alias'] . '.' .
-                    $includedFieldData['associated_table']['column'],
+                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.' .
+                    $includedFieldDataGrouped[0]['associated_table']['column'],
                     $whereInArray
                 );
             }
