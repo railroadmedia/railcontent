@@ -1786,4 +1786,6 @@ return [
         'drumeo' => 'Your submission has been sent to a Drumeo Instructor. Typically, they\'ll email you within 48 hours to let you know when your review and custom Student Plan will be ready!',
         'pianote' => 'You\'ll be hearing from us soon!',
     ],
+
+    'routine_trailer' => 318971
 ];
