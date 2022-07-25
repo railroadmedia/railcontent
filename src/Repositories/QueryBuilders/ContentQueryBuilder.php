@@ -421,63 +421,49 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $tableName = '_icf';
+        // group the included fields by name first since we only need 1 join per associated table
+        $includedFieldsGroupedByTable = [];
 
-        $this->join(ConfigService::$tableContent.' as '.$tableName,
-            function (JoinClause $joinClause) use ($includedFields, $tableName) {
-                $joinClause->on(
-                    $tableName.'.id',
+        foreach ($includedFields as $includedFieldIndex => $includedField) {
+            $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+        }
+
+        // set the joins first, then we'll add the where's after
+        foreach ($includedFieldsGroupedByTable as $name => $includedFieldDataGrouped) {
+            if ($includedFieldDataGrouped[0]['is_content_column']) {
+                $this->where(
+                    '_icf.' . $includedFieldDataGrouped[0]['name'],
+                    $includedFieldDataGrouped[0]['operator'],
+                    is_numeric($includedFieldData['value']) ?
+                        DB::raw($includedFieldData['value']) : DB::raw(
+                        DB::connection()
+                            ->getPdo()
+                            ->quote($includedFieldData['value'])
+                    )
+                );
+            } elseif (!empty($includedFieldDataGrouped[0]['associated_table'])) {
+                $this->leftJoin(
+                    $includedFieldDataGrouped[0]['associated_table']['table'].
+                    ' as '.
+                    $includedFieldDataGrouped[0]['associated_table']['alias'],
+                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.content_id',
                     '=',
-                    ConfigService::$tableContent.'.id'
+                    ConfigService::$tableContent . '.id'
                 );
 
-                $joinClause->on(function (JoinClause $joinClause) use ($tableName, $includedFields) {
-                    foreach ($includedFields as $index => $includedFieldData) {
-                        if ($includedFieldData['is_content_column']) {
-                            $joinClause->orOn(function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
-                                $joinClause->on(
-                                    $tableName.'.'.$includedFieldData['name'],
-                                    $includedFieldData['operator'],
-                                    is_numeric($includedFieldData['value']) ?
-                                        $joinClause->raw($includedFieldData['value']) : $joinClause->raw(
-                                        DB::connection()
-                                            ->getPdo()
-                                            ->quote($includedFieldData['value'])
-                                    )
-                                );
-                            });
-                        } elseif (!empty($includedFieldData['associated_table'])) {
-                            $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($tableName, $includedFieldData, $index) {
-                                    $this->leftJoin(
-                                        $includedFieldData['associated_table']['table'].
-                                        ' as '.
-                                        $includedFieldData['associated_table']['alias'].
-                                        $index,
-                                        $includedFieldData['associated_table']['alias'].$index.'.content_id',
-                                        '=',
-                                        ConfigService::$tableContent.'.id'
-                                    );
-                                    $joinClause->where(function (Builder $builder) use (
-                                        $includedFieldData,
-                                        $index
-                                    ) {
-                                        return $builder->orWhere(
-                                            $includedFieldData['associated_table']['alias'].
-                                            $index.
-                                            '.'.
-                                            $includedFieldData['associated_table']['column'],
-                                            '=',
-                                            $includedFieldData['value']
-                                        );
-                                    });
-                                });
-                        }
-                    }
+                $whereInArray = [];
+
+                foreach ($includedFieldDataGrouped as $includedFieldData) {
+                    $whereInArray[] = $includedFieldData['value'];
                 }
 
+                $this->whereIn(
+                    $includedFieldData['associated_table']['alias'] . '.' .
+                    $includedFieldData['associated_table']['column'],
+                    $whereInArray
                 );
-            });
+            }
+        }
 
         return $this;
     }

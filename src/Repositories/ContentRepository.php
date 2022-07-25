@@ -1974,13 +1974,29 @@ class ContentRepository extends RepositoryBase
                 continue;
             }
 
-            $joinTablesQuery->leftJoin(
-                $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
-                $filterOptionTableAliasName . '.content_id',
-                '=',
-                'railcontent_content.id'
-            )
-                ->addSelect(
+            $hasJoinAlready = false;
+
+            if (!empty($joinTablesQuery->joins)) {
+                foreach ($joinTablesQuery->joins as $existingJoin) {
+                    /**
+                     * @var $existingJoin JoinClause
+                     */
+                    if ($existingJoin->table == $filterOptionTableName . ' as ' . $filterOptionTableAliasName) {
+                        $hasJoinAlready = true;
+                    }
+                }
+            }
+
+            if (!$hasJoinAlready) {
+                $joinTablesQuery->leftJoin(
+                    $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
+                    $filterOptionTableAliasName . '.content_id',
+                    '=',
+                    'railcontent_content.id'
+                );
+            }
+
+            $joinTablesQuery->addSelect(
                     [$filterOptionTableAliasName . '.' . $filterOptionColumnName . ' as ' . $filterOptionColumnName]
                 );
 
