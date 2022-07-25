@@ -98,10 +98,8 @@ class FullTextSearchRepository extends RepositoryBase
                 ->orderBy('id');
 
         $query->chunk(100, function ($query) {
-            $contentFieldRows = $this->fieldRepository->getByContentIds(
-                $query->pluck('id')
-                    ->toArray()
-            );
+            $contentRows = $query->toArray();
+            $contentFieldRows = $this->contentRepository->getFieldsByContentIds($contentRows);
             $contentDatumRows = $this->datumRepository->getByContentIds(
                 $query->pluck('id')
                     ->toArray()
