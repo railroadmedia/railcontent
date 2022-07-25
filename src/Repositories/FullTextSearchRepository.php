@@ -91,7 +91,8 @@ class FullTextSearchRepository extends RepositoryBase
                         array_merge(
                             config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
                             config('railcontent.topLevelContentTypes', []),
-                            config('railcontent.searchable_content_types', [])
+                            config('railcontent.searchable_content_types', []),
+                            config('railcontent.singularContentTypes', [])
                         )
                     )
                 )
