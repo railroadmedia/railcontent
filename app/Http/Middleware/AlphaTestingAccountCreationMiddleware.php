@@ -80,9 +80,13 @@ class AlphaTestingAccountCreationMiddleware
 
             $this->userMembershipFieldsService->sync($user->id);
 
-            Artisan::call('SeedUserContentData', ['userEmail' => $user->email]);
-
             auth()->login($user);
+        }
+
+        // generate data for all logins even existing accounts
+        if ($request->routeIs('user_management_system.login.cookie') &&
+            User::query()->where('email', $request->get('email'))->exists()) {
+            Artisan::call('SeedUserContentData', ['userEmail' => $request->get('email')]);
         }
 
         return $next($request);
