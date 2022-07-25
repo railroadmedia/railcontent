@@ -63,9 +63,11 @@
         "laravel-vapor": "^0.6.0",
         "lodash": "^4.17.19",
         "luxon": "^3.0.1",
+        "mitt": "^3.0.0",
         "mux.js": "^5.5.1",
         "normalize.css": "^8.0.1",
         "noty": "^3.2.0-beta-deprecated",
+        "pinia": "^2.0.17",
         "query-string": "^7.1.1",
         "screenfull": "^6.0.1",
         "shaka-player": "^2.5.7",
@@ -76,7 +78,6 @@
         "vue-advanced-cropper": "^2.8.1",
         "vue-axios": "^3.4.1",
         "vue-loader": "^16.8.1",
-        "vue-router": "^4.0.14",
-        "vuex": "^4.0.2"
+        "vue-router": "^4.0.14"
     }
 }

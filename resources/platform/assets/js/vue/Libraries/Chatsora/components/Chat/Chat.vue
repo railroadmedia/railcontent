@@ -557,19 +557,19 @@ export default {
     mounted() {
         this.setupChat();
 
-        this.$root.$on('updateMessage', this.updateMessage);
-        this.$root.$on('removeMessage', this.removeMessage);
-        this.$root.$on('removeAllMessages', this.removeAllMessages);
-        this.$root.$on('blockUser', this.blockUser);
-        this.$root.$on('toggleMessageReaction', this.toggleMessageReaction);
-        this.$root.$on('messageThread', this.showMessageThread);
-        this.$root.$on('pinMessage', this.pinMessage);
-        this.$root.$on('unpinMessage', this.unpinMessage);
-        this.$root.$on('insertEmoji', this.insertEmoji);
-        this.$root.$on('closeEmojiWindow', this.closeEmojiWindow);
-        this.$root.$on('markAsAnswered', this.markAsAnswered);
-        this.$root.$on('postQuestion', this.postQuestion);
-        this.$root.$on('messageMenuToggled', this.messageMenuToggledHandler);
+        this.chatEventBus.on('updateMessage', this.updateMessage);
+        this.chatEventBus.on('removeMessage', this.removeMessage);
+        this.chatEventBus.on('removeAllMessages', this.removeAllMessages);
+        this.chatEventBus.on('blockUser', this.blockUser);
+        this.chatEventBus.on('toggleMessageReaction', this.toggleMessageReaction);
+        this.chatEventBus.on('messageThread', this.showMessageThread);
+        this.chatEventBus.on('pinMessage', this.pinMessage);
+        this.chatEventBus.on('unpinMessage', this.unpinMessage);
+        this.chatEventBus.on('insertEmoji', this.insertEmoji);
+        this.chatEventBus.on('closeEmojiWindow', this.closeEmojiWindow);
+        this.chatEventBus.on('markAsAnswered', this.markAsAnswered);
+        this.chatEventBus.on('postQuestion', this.postQuestion);
+        this.chatEventBus.on('messageMenuToggled', this.messageMenuToggledHandler);
 
 
     },
@@ -607,7 +607,7 @@ export default {
             let firstMessage = this.$_messages[0];
             this.messagesPage++;
             this.$nextTick(() => {
-                this.$root.$emit('scrollIntoView', { message: firstMessage });
+                this.chatEventBus.$emit('scrollIntoView', { message: firstMessage });
             });
         },
 
@@ -1282,7 +1282,7 @@ export default {
             storedMessage.reaction_scores = messageRectionScores;
             if (reaction.user.id == this.userId) {
                 storedMessage.own_reactions.push({ type: reaction.type, score: reaction.score });
-                this.$root.$emit('messageOwnReactionUpdate', { message: storedMessage });
+                this.chatEventBus.$emit('messageOwnReactionUpdate', { message: storedMessage });
             }
         },
 
@@ -1350,7 +1350,7 @@ export default {
                                 ownReaction.score = reaction.score;
                             }
                         });
-                        this.$root.$emit('messageOwnReactionUpdate', { message });
+                        this.chatEventBus.$emit('messageOwnReactionUpdate', { message });
                     }
                 }
             });

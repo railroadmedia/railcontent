@@ -3,12 +3,11 @@ require('./bootstrap');
 import { createApp } from 'vue';
 
 //Libraries
-import store from './vue/store';
-import router from './vue/router';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
+// import { createPinia } from 'pinia';
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
@@ -61,7 +60,9 @@ import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
 import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
 import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 //Chatsora
-import chat from './vue/chatsora/components/Chat/Chat.vue';
+    import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
+    import Chatsora from './vue/Chatsora/components/index';
+    const chatEventBus = mitt();
 
 window.onload = function(){
     window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
@@ -224,6 +225,8 @@ const app = createApp({
 
 // in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
+//Temporary Emitter for Chatsora
+app.config.globalProperties.chatEventBus = chatEventBus;
 
 //Register Global Components
 app.component('AppContainer', AppContainer)
@@ -260,7 +263,6 @@ app.component('AppContainer', AppContainer)
    .component('LegacyLoops', LegacyLoops)
    .component('VideoResources', VideoResources)
    .component('ContentLessonActionButtons', ContentLessonActionButtons)
-   .component('chat', chat);
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
@@ -278,9 +280,10 @@ app.directive('click-outside', {
     }
 })
 
-app.use(store);
+// app.use(createPinia());
 // app.use(router);
 app.use(VueAxios, axios);
+app.use(Chatsora)
 app.mount('#app');
 
 window.onload = function(){

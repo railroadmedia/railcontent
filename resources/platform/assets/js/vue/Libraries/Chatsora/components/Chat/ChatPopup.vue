@@ -98,8 +98,8 @@ export default {
         },
     },
     mounted() {
-        this.$root
-            .$on(
+        this.chatEventBus
+            .on(
                 'toggleChatPopup',
                 ({ message, domRect }) => {
                     this.position.left = this.roundedPixels(domRect.left + domRect.width);
