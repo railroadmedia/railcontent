@@ -64,8 +64,8 @@ function onFollow(e) {
       `"
   >
     <img
-      :src="cardImg"
-      alt="Ash Pearson"
+      :src="`https://musora.com/cdn-cgi/image/width=232,quality=75/${cardImg}`"
+      :alt="name"
       class="tw-w-[232px]"
     />
     <div

@@ -750,6 +750,14 @@ class ContentPagesController extends BaseController
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$lessonContent]))
                 ->first();
 
+        LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+
+        $lessonContent =
+            $this->lessonAssignmentDecorator->decorate(new Collection([$lessonContent]))
+                ->first();
+
+        LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MINIMUM;
+
         $lessonAssignments = $lessonContent['assignments'] ?? [];
 
         $lessonContent['assignments'] = $lessonAssignments;
