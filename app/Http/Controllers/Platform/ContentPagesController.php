@@ -21,7 +21,9 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentPagesController extends BaseController
@@ -30,21 +32,27 @@ class ContentPagesController extends BaseController
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RailcontentURLProvider $railcontentURLProvider;
+    private FullTextSearchService $fullTextSearchService;
 
     /**
      * @param ContentService $contentService
      * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
+     * @param LessonAssignmentDecorator $lessonAssignmentDecorator
+     * @param RailcontentURLProvider $railcontentURLProvider
+     * @param FullTextSearchService $fullTextSearchService
      */
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
-        RailcontentURLProvider $railcontentURLProvider
+        RailcontentURLProvider $railcontentURLProvider,
+        FullTextSearchService $fullTextSearchService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->railcontentURLProvider = $railcontentURLProvider;
+        $this->fullTextSearchService = $fullTextSearchService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -1171,5 +1179,47 @@ class ContentPagesController extends BaseController
         }
 
         throw new NotFoundHttpException();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function search(Request $request)
+    {
+        ContentRepository::$availableContentStatues =
+            $request->get('statuses', ContentRepository::$availableContentStatues);
+
+        $includedTypes = ContentTypes::searchableContentTypes();
+
+        $lessons = $this->fullTextSearchService->search(
+            $request->get('term', null),
+            $request->get('page', 1),
+            $request->get('limit', 20),
+            $request->get('included_types', $includedTypes),
+            $request->get('statuses', []),
+            $request->get('sort', '-score'),
+            $request->get('date_time_cutoff', null),
+            $request->get('brands', null),
+            $request->get('coach_ids', [])
+        );
+
+        $listLessons = reply()
+            ->json(
+                $lessons['results'],
+                [
+                    'transformer' => DataTransformer::class,
+                    'totalResults' => $lessons['total_results'],
+                ]
+            )
+            ->content();
+
+        return view('content.search', [
+            "lessons" => $listLessons,
+            "searchTerm" => $request->get('term', null),
+            "totalResults" => $lessons['total_results'],
+            "includedTypes" => json_encode($includedTypes)
+        ]);
     }
 }
