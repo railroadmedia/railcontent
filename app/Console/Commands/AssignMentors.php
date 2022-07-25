@@ -8,15 +8,7 @@ use App\Services\DatabaseService;
 use App\Services\DatabaseServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Modules\Mentor\Controllers\MentorController;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use Railroad\Ecommerce\Repositories\OrderRepository;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Services\DateTimeService;
-use Railroad\Ecommerce\Services\UserProductService;
-use Request;
 
 class AssignMentors extends Command
 {
@@ -31,7 +23,7 @@ class AssignMentors extends Command
      * @var string
      */
     protected $description = 'Assigns a mentor to each active user without one';
-private $mentorService;
+    private MentorService $mentorService;
 
     public function __construct(MentorService $mentorService)
     {
@@ -46,7 +38,6 @@ private $mentorService;
      */
     public function handle(DatabaseManager $databaseManager)
     {
-        $this->info("Starting AssignMentors.");
         $connection = $databaseManager->connection('musora_laravel_mysql');
         $db = new DatabaseService($connection);
 
@@ -60,12 +51,14 @@ private $mentorService;
             $this->info("Mentors not populated.  Populate Mentor Table");
 
             $mentorData = collect([
-//                451393 => ["name" => "Carlos Borges", "supported_brand" => "Pianote"],
-//                360053 => ["name" => "Job Byers", "supported_brand" => "Guitareo"],
-                154064 => ["name" => "Celina Kathler", "supported_brand" => "Pianote, Drumeo"]
+                451393 => ["name" => "Carlos Borges", "supported_brands" => "pianote", "maxStudents" => 5000],
+                451394 => ["name" => "Carlos Borges2", "supported_brands" => "pianote", "maxStudents" => 2500],
+                360053 => ["name" => "Job Byers", "supported_brands" => "guitareo", "maxStudents" => 5000],
+                154064 => ["name" => "Celina Kathler", "supported_brands" => "pianote, drumeo", "maxStudents" => 5000],
+                154065 => ["name" => "Celina Kathler2", "supported_brands" => "singeo", "maxStudents" => 5000]
             ]);
             $mentorData->each(function ($mentor, $userId) {
-                $this->mentorService->store($userId);
+                $this->mentorService->store($userId, $mentor["supported_brands"], $mentor["maxStudents"]);
             });
         }
 
@@ -74,17 +67,14 @@ private $mentorService;
             inner join (
                 select user_id, max(paid_until) as paid_until
                 from ecommerce_subscriptions group by user_id) s on s.user_id = u.id
-            where s.paid_until >= DATE_ADD(NOW(), INTERVAL -30 DAY) and NOT EXISTS(select * FROM mentor_students where user_id = u.id);"));
+            where NOT EXISTS(select * FROM user_roles WHERE role = 'administrator' and user_id = u.id) AND
+                  s.paid_until >= DATE_ADD(NOW(), INTERVAL -30 DAY) AND
+                  NOT EXISTS(select * FROM mentor_students where user_id = u.id);"));
         $this->info("Found {$active_users->count()} active unassigned users");
-
-        $active_users->each(function ($user) {
+        $this->info("Assigning Users...");
+        $this->withProgressBar($active_users, function ($user) {
             $this->mentorService->autoAssignMentor($user->id);
         });
-
-
-        $this->info("---------------------------------------------------");
-        $this->info("Finished AssignMentors!");
-
         return true;
     }
 }
