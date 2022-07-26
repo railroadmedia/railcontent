@@ -479,20 +479,12 @@ export default {
                     // Otherwise we remove the plus sign and add a dash between the two values
                     if (keyValue[0] === 'bpm') {
                         if (this.selectedFilters.bpm == null) {
-                            this.$set(
-                                this.selectedFilters,
-                                'bpm',
-                                `${keyValue[1]}+`,
-                            );
+                            this.selectedFilters.bpm = `${keyValue[1]}+`;
                         } else {
-                            this.$set(
-                                this.selectedFilters,
-                                'bpm',
-                                `${this.selectedFilters.bpm.replace('+', '')}-${keyValue[1]}`,
-                            );
+                            this.selectedFilters.bpm = `${this.selectedFilters.bpm.replace('+', '')}-${keyValue[1]}`;
                         }
                     } else {
-                        this.$set(this.selectedFilters, keyValue[0], keyValue[1]);
+                        this.selectedFilters[0] = keyValue[1];
                     }
                 });
             }
@@ -720,12 +712,12 @@ export default {
             this.loop = !this.loop;
             this.audioPlayer.loop = this.loop;
 
-            this.$set(this.anchorOffsets, 'a', 0);
-            this.$set(this.anchorOffsets, 'b', 100);
+            this.anchorOffsets.a= 0;
+            this.anchorOffsets.b= 100;
         },
 
         handleAnchorMouseDown(anchor) {
-            this.$set(this.anchorMouseDown, anchor, true);
+            this.anchorMouseDown.anchor=true;
         },
 
         handleAnchorButtonClick(anchor) {
@@ -737,20 +729,20 @@ export default {
                 offset = 0;
             }
 
-            this.$set(this.anchorOffsets, anchor, offset);
+            this.anchorOffsets.anchor = offset;
         },
 
         resetAnchors() {
-            this.$set(this.anchorOffsets, 'a', 0);
-            this.$set(this.anchorOffsets, 'b', 100);
+            this.anchorOffsets.a= 0;
+            this.anchorOffsets.b= 100;
         },
 
         trackMousePosition(event) {
             const posX = event.clientX != null ? event.clientX : event.touches[0].clientX;
             const posY = event.clientY != null ? event.clientY : event.touches[0].clientY;
 
-            this.$set(this.currentMousePosition, 'x', posX);
-            this.$set(this.currentMousePosition, 'y', posY);
+            this.currentMousePosition.x=posX;
+            this.currentMousePosition.y=posY;
 
             this.handleAnchorDrag();
         },
@@ -765,7 +757,7 @@ export default {
                     mousePositionOffset = 0;
                 }
 
-                this.$set(this.anchorOffsets, 'a', mousePositionOffset);
+                this.anchorOffsets.a=mousePositionOffset;
             }
 
             if (this.anchorMouseDown.b) {
@@ -775,7 +767,7 @@ export default {
                     mousePositionOffset = 100;
                 }
 
-                this.$set(this.anchorOffsets, 'b', mousePositionOffset);
+                this.anchorOffsets.b=mousePositionOffset;
             }
         },
 
@@ -784,8 +776,8 @@ export default {
         },
 
         mouseUpEventHandler() {
-            this.$set(this.anchorMouseDown, 'a', false);
-            this.$set(this.anchorMouseDown, 'b', false);
+            this.anchorMouseDown.a=false;
+            this.anchorMouseDown.b=false;
         },
 
         updatePageUrl() {
@@ -796,7 +788,7 @@ export default {
 
         handleFilterChange(payload) {
             this.page = 1;
-            this.$set(this.selectedFilters, payload.key, payload.value);
+            this.selectedFilters.payload.key= payload.value;
 
             if (this.useUrlParams) {
                 this.updatePageUrl();

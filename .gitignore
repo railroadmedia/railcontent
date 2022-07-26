@@ -106,8 +106,6 @@ dist
 /vendor/
 
 # Get built by Laravel
-public/platform/
-public/marketing/
 public/mix-manifest.json
 
 .idea
