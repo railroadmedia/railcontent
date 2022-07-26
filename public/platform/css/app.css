@@ -21798,6 +21798,9 @@ a:visited{
 .tw-mb-\[12px\]{
   margin-bottom: 12px !important;
 }
+.-tw-ml-1{
+  margin-left: -0.25rem !important;
+}
 .tw-mb-\[24px\]{
   margin-bottom: 24px !important;
 }
@@ -22535,6 +22538,20 @@ a:visited{
 }
 .tw-transform-gpu{
   transform: translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+}
+@-webkit-keyframes tw-spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes tw-spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+.tw-animate-spin{
+  -webkit-animation: tw-spin 1s linear infinite !important;
+          animation: tw-spin 1s linear infinite !important;
 }
 @-webkit-keyframes tw-ping{
   75%, 100%{
@@ -23995,6 +24012,9 @@ a:visited{
 }
 .tw-opacity-40{
   opacity: 0.4 !important;
+}
+.tw-opacity-25{
+  opacity: 0.25 !important;
 }
 .tw-opacity-75{
   opacity: 0.75 !important;

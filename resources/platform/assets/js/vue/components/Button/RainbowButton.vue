@@ -14,7 +14,9 @@ const props = defineProps({
 });
 const emit = defineEmits(["onButtonClick"]);
 const handleClick = (e) => {
-  if (props.type === "button") {
+  if (props.disabled) {
+    e.preventDefault();
+  } else if (props.type === "button" && !props.disabled) {
     e.preventDefault();
     emit("onButtonClick", e);
   }

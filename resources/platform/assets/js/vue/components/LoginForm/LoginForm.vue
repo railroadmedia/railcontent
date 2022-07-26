@@ -126,9 +126,9 @@ const handleButtonClick = (e) => {
           />
         </div>
         
-        <RainbowButton :disabled="!passwordInput.length || !emailInput.length" type="button" @on-button-click="handleButtonClick">
-          <span v-if="!isLoading"><LoadingSpinner /> SIGNING IN</span>
-          <span v-if="isLoading">SIGN IN</span>
+        <RainbowButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
+          <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading"><LoadingSpinner /> SIGNING IN</span>
+          <span v-if="!isLoading">SIGN IN</span>
         </RainbowButton>
         <button id="hidden-submit" type="submit" hidden>Submit</button>
         <a
