@@ -1,7 +1,7 @@
 <template>
     <div
         id="playAlongsPlayer"
-        class="container collapsed fluid bg-white shadow"
+        class="container collapsed fluid bg-white shadow tw-transition"
         :class="collapsed ? 'collapsed-down' : ''"
     >
         <div

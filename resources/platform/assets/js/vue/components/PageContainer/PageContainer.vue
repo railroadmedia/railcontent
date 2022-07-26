@@ -75,8 +75,15 @@ const onCollapseSidebar = (val) => {
     } else {
       isSidebarHidden.value = false;
       isSidebarCollapsed.value = !isSidebarCollapsed.value;
+      //Dom manipulation... 
+      if(isSidebarCollapsed.value) {
+        document.body.classList.add('sidebar-collapsed')
+      } else {
+        document.body.classList.remove('sidebar-collapsed')
+      }
     }
   }
+  //save to local storage
   localStorage.setItem("isSidebarCollapsed", isSidebarCollapsed.value);
 };
 
@@ -117,6 +124,12 @@ onBeforeMount(() => {
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
+      //Dom manipulation... 
+      if(isSidebarCollapsed.value) {
+        document.body.classList.add('sidebar-collapsed')
+      } else {
+        document.body.classList.remove('sidebar-collapsed')
+      }
   } else if (props.forceSidebarHidden) {
     isSidebarCollapsed.value = true;
   }

@@ -35,6 +35,10 @@ body.play-alongs-player-open #content-container{
 
   @media(min-width: 1024px) {
     left:256px;
+
+    body.sidebar-collapsed & {
+      left:68px;
+    }
   }
 
   &.collapsed-down {
