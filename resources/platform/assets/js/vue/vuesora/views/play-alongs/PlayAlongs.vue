@@ -11,32 +11,21 @@
             </div>
 
             <div class="flex flex-column enable-filters mr-1">
-                <button
-                    class="btn collapse-square mr-1"
-                    title="Toggle Shuffle"
-                    @click="toggleShuffle"
+                <button class="tw-btn-circle tw-mr-1"
+                        :class="isShuffle ? 'tw-btn-primary tw-bg-[#3F3F46] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]' : 'tw-btn-secondary tw-text-[#3F3F46] dark:tw-text-white '" 
+                        title="Toggle Shuffle"
+                        @click="toggleShuffle"
                 >
-                    <span
-                        class="bg-drumeo"
-                        :class="isShuffle ? 'text-white' : 'inverted text-drumeo'"
-                    >
-                        <i class="fas fa-random"></i>
-                    </span>
+                    <i class="fas fa-random"></i>
                 </button>
             </div>
-
             <div class="flex flex-column enable-filters">
-                <button
-                    class="btn collapse-square"
-                    title="Toggle Filters"
-                    @click="displayFilters = !displayFilters"
+                <button class="tw-btn-circle tw-mr-1"
+                        :class="displayFilters ? 'tw-btn-primary tw-bg-[#3F3F46] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]' : 'tw-btn-secondary tw-text-[#3F3F46] dark:tw-text-white '" 
+                        title="Toggle Filters"
+                        @click="displayFilters = !displayFilters"
                 >
-                    <span
-                        class="bg-drumeo"
-                        :class="displayFilters ? 'text-white' : 'inverted text-drumeo'"
-                    >
-                        <i class="fas fa-filter"></i>
-                    </span>
+                    <i class="fas fa-filter"></i>
                 </button>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <template>
     <div
         class="content-table-row flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]
-         no-decoration pv-1 pointer relative hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039] hover-text-black"
+         no-decoration pv-1 pointer relative hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]"
         :class="stateClasses"
     >
         <!-- THUMBNAIL COLUMN -->
@@ -33,7 +33,7 @@
         </div>
 
         <!-- TITLES AND COLUMN DATA (on mobile) -->
-        <div class="flex flex-column align-v-center ph-1 title-column overflow tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">
+        <div class="flex flex-column align-v-center ph-1 title-column overflow">
             <p
                 class="tw-text-sm font-compressed uppercase text-truncate dark:tw-text-[#9EC0DC]"
                 :class="themeTextClass"
@@ -46,7 +46,7 @@
             </p>
 
             <p
-                class="tw-text-xs font-compressed text-truncate uppercase hide-md-up"
+                class="tw-text-xs font-compressed text-truncate uppercase hide-md-up tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
             >
                 <span
                     v-for="(item, i) in mappedData.column_data"
@@ -65,7 +65,7 @@
         <div
             v-for="(item) in mappedData.column_data"
             :key="item"
-            class="flex flex-column uppercase align-center basic-col text-center tw-text-xs font-compressed hide-sm-down"
+            class="flex flex-column uppercase align-center basic-col text-center tw-text-xs font-compressed hide-sm-down tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
         >
             {{ item }}
         </div>
@@ -81,7 +81,7 @@
                 @click.stop
             >
                 <i
-                    class="fas fa-video flex-center text-grey-2"
+                    class="fas fa-video flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                     :class="themeHoverTextClass"
                     title="Watch Lesson Video"
                 ></i>
@@ -98,7 +98,7 @@
                 @click.stop.prevent="addToList"
             >
                 <i
-                    class="add-to-list fa-star flex-center hover-text-black"
+                    class="add-to-list fa-star flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                     :class="addedToListClasses"
                     :title="is_added ? 'Remove from Favorites' : 'Add to Favorites'"
                 ></i>
@@ -115,7 +115,7 @@
                 @click.stop.prevent="markAsComplete"
             >
                 <i
-                    class="add-to-list fa-check-circle flex-center hover-text-black"
+                    class="add-to-list fa-check-circle flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                     :class="markedAsCompletedClasses"
                     :title="isCompleted ? 'Restart Progress' : 'Mark as Complete'"
                 ></i>
