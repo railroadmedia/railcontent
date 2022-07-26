@@ -2,9 +2,11 @@
 
 namespace App\Modules\Mentor\Providers;
 
+use App\Modules\Mentor\Listeners\EnsureMentorAssigned;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Railroad\Ecommerce\Events\GiveContentAccess;
 
 class MentorServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,9 @@ class MentorServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        GiveContentAccess::class =>[
+            EnsureMentorAssigned::class,
+        ]
     ];
 
     /**
