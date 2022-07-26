@@ -1,7 +1,7 @@
 <template>
     <div
         class="content-table-row flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]
-         no-decoration pv-1 pointer relative text-grey-3 hover-bg-grey-7 hover-text-black"
+         no-decoration pv-1 pointer relative hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039] hover-text-black"
         :class="stateClasses"
     >
         <!-- THUMBNAIL COLUMN -->
@@ -33,20 +33,20 @@
         </div>
 
         <!-- TITLES AND COLUMN DATA (on mobile) -->
-        <div class="flex flex-column align-v-center ph-1 title-column overflow">
+        <div class="flex flex-column align-v-center ph-1 title-column overflow tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">
             <p
-                class="tiny font-compressed uppercase text-truncate"
+                class="tw-text-sm font-compressed uppercase text-truncate dark:tw-text-[#9EC0DC]"
                 :class="themeTextClass"
             >
                 {{ mappedData.color_title }}
             </p>
 
-            <p class="tiny font-compressed tw-text-black dark:tw-text-white font-bold item-title">
+            <p class="tw-text-sm font-compressed tw-text-black dark:tw-text-white font-bold item-title">
                 {{ mappedData.black_title }}
             </p>
 
             <p
-                class="x-tiny font-compressed text-grey-3 text-truncate font-italic uppercase hide-md-up"
+                class="tw-text-xs font-compressed text-truncate uppercase hide-md-up"
             >
                 <span
                     v-for="(item, i) in mappedData.column_data"
@@ -65,7 +65,7 @@
         <div
             v-for="(item) in mappedData.column_data"
             :key="item"
-            class="flex flex-column uppercase align-center basic-col text-center font-italic x-tiny font-compressed hide-sm-down"
+            class="flex flex-column uppercase align-center basic-col text-center tw-text-xs font-compressed hide-sm-down"
         >
             {{ item }}
         </div>
