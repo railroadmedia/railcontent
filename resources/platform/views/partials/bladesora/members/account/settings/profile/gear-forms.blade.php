@@ -3,7 +3,7 @@
         <h2 class="tw-text-2xl tw-font-bold dark:tw-text-white">Gear Info</h2>
     </div>
 </div>
-<div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-4 tw-gap-4">
+<div class="tw-grid tw-grid-cols-1 tw-gap-6 sm:tw-grid-cols-2 sm:tw-gap-8">
     {{-- DRUMS --}}
     @include('partials.bladesora.members.account.settings.profile.gear-form-drums', [
         'brand' => 'drumeo',
