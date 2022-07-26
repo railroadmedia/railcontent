@@ -1,31 +1,7 @@
 @import './_variables.scss';
 
-body.play-alongs-player-open {
-  padding-bottom: 325px;
-
-  footer {
-    margin-bottom:263px;
-  }
-
-  &.has-public-footer {
-    padding-bottom:891px;
-
-    footer {
-      padding-bottom:260px;
-    }
-
-    @include small {
-      padding-bottom:539px;
-
-      footer {
-        padding-bottom:263px;
-      }
-    }
-  }
-
-  #intercom-container {
-    display:none;
-  }
+body.play-alongs-player-open #content-container{
+  padding-bottom: 263px;
 }
 
 .play-alongs {
@@ -56,6 +32,10 @@ body.play-alongs-player-open {
   transition:.2s transform ease-in-out;
   will-change:transform;
   touch-action: manipulation;
+
+  @media(min-width: 1024px) {
+    left:256px;
+  }
 
   &.collapsed-down {
     transform:translateY(calc(100% - 10px));

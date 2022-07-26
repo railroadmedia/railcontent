@@ -288,10 +288,7 @@
 }
 
 .thumbnail-col {
-  flex:0 0 75px;
-  @include small {
-    flex:0 0 100px;
-  }
+  flex:0 0 142px;
 
   &.large-thumbnail {
     flex:0 0 320px;
@@ -480,7 +477,7 @@
 }
 
 .basic-col {
-  flex:0 0 100px;
+  flex:0 0 110px;
   transition:color .2s ease-in-out;
 }
 

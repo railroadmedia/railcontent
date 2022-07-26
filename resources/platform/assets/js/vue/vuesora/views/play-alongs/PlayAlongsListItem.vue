@@ -41,12 +41,12 @@
                 {{ mappedData.color_title }}
             </p>
 
-            <p class="tw-text-sm font-compressed tw-text-black dark:tw-text-white font-bold item-title">
+            <p class="tw-text-base font-compressed tw-text-black dark:tw-text-white font-bold item-title">
                 {{ mappedData.black_title }}
             </p>
 
             <p
-                class="tw-text-xs font-compressed text-truncate uppercase hide-md-up tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+                class="tw-text-sm font-compressed text-truncate uppercase hide-md-up tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
             >
                 <span
                     v-for="(item, i) in mappedData.column_data"
@@ -65,7 +65,7 @@
         <div
             v-for="(item) in mappedData.column_data"
             :key="item"
-            class="flex flex-column uppercase align-center basic-col text-center tw-text-xs font-compressed hide-sm-down tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+            class="flex flex-column uppercase align-center basic-col text-center tw-text-sm font-compressed hide-sm-down tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
         >
             {{ item }}
         </div>
@@ -149,7 +149,7 @@ export default {
         stateClasses() {
             return {
                 active: this.active,
-                'bg-grey-7': this.active,
+                'tw-bg-[#E7EFF6] dark:tw-bg-[#002039]': this.active,
             };
         },
 

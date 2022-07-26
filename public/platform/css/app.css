@@ -17033,12 +17033,7 @@ content-catalogue, transition {
 }
 
 .thumbnail-col {
-  flex: 0 0 75px;
-}
-@media screen and (min-width: 40rem) {
-  .thumbnail-col {
-    flex: 0 0 100px;
-  }
+  flex: 0 0 142px;
 }
 .thumbnail-col.large-thumbnail {
   flex: 0 0 320px;
@@ -17202,7 +17197,7 @@ content-catalogue, transition {
 }
 
 .basic-col {
-  flex: 0 0 100px;
+  flex: 0 0 110px;
   transition: color 0.2s ease-in-out;
 }
 
@@ -18295,28 +18290,8 @@ blockquote.singeo, .singeo blockquote {
 * @param $primaryColor - the first color at the start of the gradient
 * @param $secondaryColor - the second color at the end of the gradient
 */
-body.play-alongs-player-open {
-  padding-bottom: 325px;
-}
-body.play-alongs-player-open footer {
-  margin-bottom: 263px;
-}
-body.play-alongs-player-open.has-public-footer {
-  padding-bottom: 891px;
-}
-body.play-alongs-player-open.has-public-footer footer {
-  padding-bottom: 260px;
-}
-@media screen and (min-width: 40rem) {
-  body.play-alongs-player-open.has-public-footer {
-    padding-bottom: 539px;
-  }
-  body.play-alongs-player-open.has-public-footer footer {
-    padding-bottom: 263px;
-  }
-}
-body.play-alongs-player-open #intercom-container {
-  display: none;
+body.play-alongs-player-open #content-container {
+  padding-bottom: 263px;
 }
 
 .play-alongs .loading {
@@ -18344,6 +18319,11 @@ body.play-alongs-player-open #intercom-container {
   transition: 0.2s transform ease-in-out;
   will-change: transform;
   touch-action: manipulation;
+}
+@media (min-width: 1024px) {
+  #playAlongsPlayer {
+    left: 256px;
+  }
 }
 #playAlongsPlayer.collapsed-down {
   transform: translateY(calc(100% - 10px));
