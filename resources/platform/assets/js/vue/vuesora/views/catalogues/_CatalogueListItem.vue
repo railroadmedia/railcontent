@@ -158,13 +158,13 @@
         v-if="!is_search"
         class="
           tw-text-xs
-          tw-mt-4
           font-compressed
           tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
           tw-uppercase
           xl:tw-hidden
           tw-flex
         "
+        :class="`${this.overview ? 'tw-mt-4' : ''}`"
       >
         <span
           v-for="(column_data, i) in mappedData.column_data"

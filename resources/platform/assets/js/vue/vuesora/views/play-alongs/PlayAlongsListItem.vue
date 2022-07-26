@@ -41,7 +41,7 @@
                 {{ mappedData.color_title }}
             </p>
 
-            <p class="tiny font-compressed text-black font-bold item-title">
+            <p class="tiny font-compressed tw-text-black dark:tw-text-white font-bold item-title">
                 {{ mappedData.black_title }}
             </p>
 
