@@ -130,7 +130,7 @@
                 <span class="flat bg-black">
                     <i
                         class="fas tw-text-black"
-                        :class="isPlaying ? 'fa-pause' : 'fa-play'"
+                        :class="!audioPlayer.paused ? 'fa-pause' : 'fa-play'"
                     ></i>
                 </span>
             </button>
