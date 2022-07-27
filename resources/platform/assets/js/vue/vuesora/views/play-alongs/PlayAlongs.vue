@@ -125,7 +125,7 @@
             :active-item="activeItem"
             :audio-player="audioPlayer"
             :drums="drums"
-            :click="click"
+            :metronome="metronome"
             :loop="loop"
             :current-time="currentTime"
             :total-duration="totalDuration"
@@ -142,7 +142,7 @@
             @previousTrack="playPreviousTrack"
             @seek="seek"
             @drums="toggleDrums"
-            @click="toggleClick"
+            @metronome="toggleMetronome"
             @loop="toggleLoop"
             @anchorMouseDown="handleAnchorMouseDown"
             @anchorButtonClick="handleAnchorButtonClick"
@@ -259,7 +259,7 @@ export default {
             activeItem: null,
             audioPlayer: this.$refs.audioPlayer,
             drums: false,
-            click: true,
+            metronome: true,
             loop: false,
             currentTime: 0,
             totalDuration: 0,
@@ -528,9 +528,12 @@ export default {
         },
 
         playPause() {
+            console.log('hit playPause')
             if (this.isPlaying) {
+                console.log('is playing')
                 this.audioPlayer.pause();
             } else {
+                console.log('is not playing')
                 this.audioPlayer.play();
             }
 
@@ -551,7 +554,7 @@ export default {
         switchTrack(resume) {
             const { currentTime } = this;
             const trackUrl = this.activeItem.getPostDatum(
-                `mp3_${this.drums ? 'yes' : 'no'}_drums_${this.click ? 'yes' : 'no'}_click_url`,
+                `mp3_${this.drums ? 'yes' : 'no'}_drums_${this.metronome ? 'yes' : 'no'}_click_url`,
             );
 
             this.updateSource(trackUrl, resume, currentTime);
@@ -695,20 +698,22 @@ export default {
         },
 
         toggleDrums() {
+            console.log('drums')
             this.drums = !this.drums;
 
             this.switchTrack(true);
             this.playPause();
         },
 
-        toggleClick() {
-            this.click = !this.click;
+        toggleMetronome() {
+            this.metronome = !this.metronome;
 
             this.switchTrack(true);
             this.playPause();
         },
 
         toggleLoop() {
+            console.log('loop')
             this.loop = !this.loop;
             this.audioPlayer.loop = this.loop;
 
