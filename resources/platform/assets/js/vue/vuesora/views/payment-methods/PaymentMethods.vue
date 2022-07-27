@@ -270,7 +270,7 @@ export default {
         },
 
         updatePaymentData({ key, value }) {
-            this.$set(this.editingPaymentMethod, key, value);
+            this.editingPaymentMethod[key] = value;
 
             if (key === 'billingCountry' || key === 'billingRegion') {
                 EcommerceService.updateAddressesInSession({

@@ -890,13 +890,13 @@ export default {
 
                     this.chatChannel
                         .on('user.watching.start', ({ user }) => {
-                            this.$set(this.channelWatchers, user.id, user);
+                            this.channelWatchers[user.id] = user;
                         });
 
                     this.chatChannel
                         .on('user.watching.stop', ({ user }) => {
                             if (this.channelWatchers[user.id]) {
-                                this.$delete(this.channelWatchers, user.id);
+                                delete this.channelWatchers[user.id];
                             }
                         });
 
@@ -918,7 +918,7 @@ export default {
 
         fetchWatchers() {
 
-            const limit = 1000;
+            const limit = 100;
 
             this.chatChannel
                 .query({
@@ -927,7 +927,7 @@ export default {
                 .then(({ watchers }) => {
                     if (watchers) {
                         watchers.forEach(user => {
-                            this.$set(this.channelWatchers, user.id, user);
+                            this.channelWatchers[user.id] = user;
                         });
                     }
                 });
@@ -937,25 +937,25 @@ export default {
             this.fetchingBannedUsers = true;
             this.bannedUsers = {};
 
-            const limit = 1000;
+            const limit = 100;
 
             this.streamClient
                 .queryUsers({ banned:true }, {}, { limit, offset:0 })
                 .then(({ users }) => {
                     users.forEach(user => {
-                        this.$set(this.bannedUsers, user.id, user);
+                        this.bannedUsers[user.id] = user;
                     });
                     this.fetchingBannedUsers = false;
                 });
         },
 
         fetchPinnedMessages() {
-            const limit = 1000;
+            const limit = 100;
 
             this.chatChannel
                 .search(
                     { pinned: true },
-                    null,
+                    '',
                     { limit, offset: 0 }
                 )
                 .then(({ results }) => {
@@ -1050,7 +1050,7 @@ export default {
 
             } else {
                 this.chatChannel
-                    .getReactions(message.id, { limit: 1000 })
+                    .getReactions(message.id, { limit: 100 })
                     .then(({ reactions }) => {
                         reactions.forEach((reaction) => {
                             messageCopy.reactions.push({ type: reaction.type, user: this.getUserCopy(reaction.user) });
@@ -1073,7 +1073,7 @@ export default {
 
             if (message.reply_count) {
                 this.chatChannel
-                    .getReplies(message.id, { limit: 1000 })
+                    .getReplies(message.id, { limit: 100 })
                     .then(({ messages }) => {
                         messages.forEach((reply) => {
                             messageCopy.replies.push(this.getMessageCopy(reply));
@@ -1170,7 +1170,7 @@ export default {
 
                 if (message.reply_count) {
                     this.chatChannel
-                        .getReplies(message.id, { limit: 1000 })
+                        .getReplies(message.id, { limit: 100 })
                         .then(({ messages }) => {
                             messages.forEach((reply) => {
                                 messageCopy.replies.push(this.getMessageCopy(reply));
