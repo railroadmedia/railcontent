@@ -145,13 +145,13 @@ class LivePageController extends BaseController
             ContentTypes::liveContentTypes(),
             ContentService::STATUS_SCHEDULED,
             Carbon::now()
-                ->subHours(24)
+                ->subHours(6)
                 ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
             [],
-            10
+            15
         );
 
         $contentReleases = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
