@@ -551,6 +551,38 @@ class SeedUserContentData extends Command
                 }
             }
             $this->info('Done subscribing to coaches.');
+
+            // set users profile data
+            if(empty($user->first_name)) $user->first_name = fake()->name;
+            if(empty($user->last_name)) $user->last_name = fake()->name;
+            if(empty($user->gender)) $user->gender = fake()->randomElement(['male', 'female']);
+            if(empty($user->country)) $user->country = fake()->country;
+            if(empty($user->region)) $user->region = 'British Columbia';
+            if(empty($user->city)) $user->city = fake()->city;
+            if(empty($user->birthday)) $user->birthday = fake()->date;
+            if(empty($user->profile_picture_url)) $user->profile_picture_url = fake()->imageUrl(300, 300);
+            if(empty($user->piano_gear_keyboard_brands)) $user->piano_gear_keyboard_brands = 'Roland, Casio';
+            if(empty($user->piano_gear_piano_brands)) $user->piano_gear_piano_brands = 'Korg, Yamaha';
+            if(empty($user->piano_gear_photo)) $user->piano_gear_photo = fake()->imageUrl(300, 600);
+            if(empty($user->piano_playing_since_year)) $user->piano_playing_since_year = rand(1990, 2022);
+            if(empty($user->guitar_gear_string_brands)) $user->guitar_gear_string_brands = 'Gibson, Fender';
+            if(empty($user->guitar_gear_pedal_brands)) $user->guitar_gear_pedal_brands = 'Rickenbacker';
+            if(empty($user->guitar_gear_amp_brands)) $user->guitar_gear_amp_brands = 'Ibanez';
+            if(empty($user->guitar_gear_guitar_brands)) $user->guitar_gear_guitar_brands = 'Jackson';
+            if(empty($user->guitar_gear_photo)) $user->guitar_gear_photo = fake()->imageUrl(300, 600);
+            if(empty($user->guitar_playing_since_year)) $user->guitar_playing_since_year = rand(1990, 2022);
+            if(empty($user->drums_gear_stick_brands)) $user->drums_gear_stick_brands = 'Tama, Yamaha';
+            if(empty($user->drums_gear_hardware_brands)) $user->drums_gear_hardware_brands = 'Sonor';
+            if(empty($user->drums_gear_set_brands)) $user->drums_gear_set_brands = 'Pearl';
+            if(empty($user->drums_gear_cymbal_brands)) $user->drums_gear_cymbal_brands = 'Ludwig';
+            if(empty($user->drums_gear_photo)) $user->drums_gear_photo = fake()->imageUrl(300, 600);
+            if(empty($user->drums_playing_since_year)) $user->drums_playing_since_year = rand(1990, 2022);
+            if(empty($user->singing_since_year)) $user->singing_since_year = rand(1990, 2022);
+            if(empty($user->singing_gear_mic_brands)) $user->singing_gear_mic_brands = 'Sony';
+            if(empty($user->singing_gear_photo)) $user->singing_gear_photo = fake()->imageUrl(300, 600);
+            if(empty($user->biography)) $user->biography = fake()->sentences(2, true);
+
+            $user->save();
         }
 
         return 0;
