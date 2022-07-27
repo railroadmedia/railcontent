@@ -123,7 +123,7 @@ class MentorService
         return $mentors;
     }
 
-    private function hasMentor(int $userId): bool
+    public function hasMentor(int $userId): bool
     {
         return Mentor::query()->whereKey($userId)->exists();
     }

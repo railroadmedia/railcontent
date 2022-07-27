@@ -2,21 +2,26 @@
 
 namespace App\Modules\Mentor\tests\Feature\Services;
 
-use App\Modules\Mentor\tests\Services\UserManagementSystemTestCase;
+use App\Modules\Mentor\Services\MentorService;
 use Modules\UserManagementSystem\Models\User;
-use Tests\GeneralTestCase;
+use Tests\TestCase;
 
-class MentorServiceTest extends UserManagementSystemTestCase
+class MentorServiceTest extends TestCase
 {
+
+    private MentorService $mentorService;
+
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->mentorService = app(MentorService::class);
     }
 
-    public function test_auto_assign_mentor()
+    public function test_assign_mentor()
     {
-        $user = User::factory()->make();
-$this->ass
+        $user = User::factory()->create();
+        $this->assertFalse($this->mentorService->hasMentor($user->id));
+        $this->mentorService->assignMentor($user->id);
+        $this->assertTrue($this->mentorService->hasMentor($user->id));
     }
 }
