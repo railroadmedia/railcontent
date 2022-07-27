@@ -1,4 +1,4 @@
-<div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 md:tw-w-1/3 tw-rounded pa-2 hover:tw-shadow-lg">
+<div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded pa-2 hover:tw-shadow-lg">
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
         <div class="tw-flex tw-flex-col tw-text-black dark:tw-text-white hot-forum-avatar-col">
             <img
