@@ -45,12 +45,16 @@ class MentorService
      * @param int $userId
      * @return void
      */
-    public function autoAssignMentor(int $userId)
+    public function assignMentor(int $userId)
     {
         $brand = $this->getPrimaryBrandForAssigningMentor($userId);
-        if (!$brand) return;
+        if (!$brand) {
+            return;
+        }
         $mentor = $this->chooseMentor($brand);
-        if (!$mentor) return;
+        if (!$mentor) {
+            return;
+        }
         $mentorStudent = new MentorStudent();
         $mentorStudent->user_id = $userId;
         $mentorStudent->primary_brand = $brand;
@@ -60,6 +64,14 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentor->save();
     }
+
+    public function ensureMentorAssigned(int $userId)
+    {
+        if ($this->hasMentor($userId)) {
+            $this->assignMentor($userId);
+        }
+    }
+
 
     /**
      * @param $userId
@@ -95,7 +107,9 @@ class MentorService
     private function getMentorsWithLowestStudentPercentage($mentors): mixed
     {
         $lowestStudentPercentage = $mentors->map(fn($t) => $t->getActiveStudentPercentage())->min();
-        $mentorsWithLowestStudentPercentage = $mentors->where(fn($t) => $t->getActiveStudentPercentage() == $lowestStudentPercentage);
+        $mentorsWithLowestStudentPercentage = $mentors->where(
+            fn($t) => $t->getActiveStudentPercentage() == $lowestStudentPercentage
+        );
         return $mentorsWithLowestStudentPercentage;
     }
 
@@ -107,5 +121,10 @@ class MentorService
     {
         $mentors = Mentor::where('supported_brands', 'like', "%$brand%")->get();
         return $mentors;
+    }
+
+    private function hasMentor(int $userId): bool
+    {
+        return Mentor::query()->whereKey($userId)->exists();
     }
 }
