@@ -558,7 +558,7 @@ export default {
 
             if (!resume) {
                 this.$nextTick(() => {
-                    const domElement = this.$refs[`list${this.activeItem.id}`][0].$el;
+                    const domElement = this.$refs[`list${this.activeItem.id}`].$el;
                     domElement.scrollIntoView({block: "start"})
                 });
             }
