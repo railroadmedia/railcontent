@@ -1,7 +1,7 @@
 <template>
     <div
         id="playAlongsPlayer"
-        class="container collapsed fluid bg-white shadow"
+        class="container collapsed fluid bg-white shadow tw-transition"
         :class="collapsed ? 'collapsed-down' : ''"
     >
         <div
@@ -28,7 +28,7 @@
 
         <div
             class="player-tab title text-drumeo bg-white shadow flex-center pointer"
-            @click="collapsed = !collapsed"
+            @click.stop="collapsed = !collapsed"
         >
             <i
                 class="fas"
@@ -55,7 +55,7 @@
             >
                 <button
                     class="btn collapse-square short mb-1"
-                    @click="emitAnchorButtonClick('a')"
+                    @click.stop="emitAnchorButtonClick('a')"
                 >
                     <span class="bg-black text-white">
                         A
@@ -68,7 +68,7 @@
             </div>
 
             <div class="flex flex-column align-center grow no-events">
-                <h4 class="title text-center">
+                <h4 class="title text-center tw-text-black">
                     {{ $_title }}
                 </h4>
                 <h6 class="body text-center text-grey-4 mb-2">
@@ -85,7 +85,7 @@
             >
                 <button
                     class="btn collapse-square short mb-1"
-                    @click="emitAnchorButtonClick('b')"
+                    @click.stop="emitAnchorButtonClick('b')"
                 >
                     <span class="bg-black text-white">
                         B
@@ -102,34 +102,34 @@
             <button
                 class="btn collapse-square mh-1"
                 :disabled="disablePreviousTrack"
-                @click="previousTrack"
+                @click.stop="previousTrack"
                 @keyup.prevent
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-step-backward"></i>
+                    <i class="fas fa-step-backward tw-text-black"></i>
                 </span>
             </button>
 
             <button
                 class="btn collapse-square mh-1 skip-5"
-                @click="skipFive(false)"
+                @click.stop="skipFive(false)"
                 @keyup.prevent
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-undo"></i>
+                    <i class="fas fa-undo tw-text-black"></i>
                 </span>
             </button>
 
             <button
                 class="btn collapse-square mh-1"
-                @click="playPause"
+                @click.stop="playPause"
                 @keydown.prevent
             >
                 <span class="flat bg-black">
                     <i
-                        class="fas"
+                        class="fas tw-text-black"
                         :class="isPlaying ? 'fa-pause' : 'fa-play'"
                     ></i>
                 </span>
@@ -137,22 +137,22 @@
 
             <button
                 class="btn collapse-square mh-1 skip-5"
-                @click="skipFive(true)"
+                @click.stop="skipFive(true)"
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-redo"></i>
+                    <i class="fas fa-redo tw-text-black"></i>
                 </span>
             </button>
 
             <button
                 class="btn collapse-square mh-1"
                 :disabled="isShuffle && playedContent.length === totalResults"
-                @click="nextTrack"
+                @click.stop="nextTrack"
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-step-forward"></i>
+                    <i class="fas fa-step-forward tw-text-black"></i>
                 </span>
             </button>
         </div>
@@ -161,15 +161,16 @@
             <div class="flex flex-column ph-1 grow"></div>
             <div class="flex flex-column player-buttons">
                 <div class="flex flex-row">
+
                     <button
                         class="btn collapse-square mh-1"
-                        :title="click ? 'Disable Click Track' : 'Enable Click Track'"
-                        @click="toggleMetronome"
+                        :title="metronome ? 'Disable Click Track' : 'Enable Click Track'"
+                        @click.self.stop.prevent="toggleMetronome"
                         @keydown.prevent
                     >
                         <span
                             class="bg-white rounded"
-                            :class="click ? 'text-grey-5' : 'inverted text-white'"
+                            :class="metronome ? 'text-grey-5' : 'inverted text-white'"
                         >
                             <i class="icon-metronome"></i>
                         </span>
@@ -178,7 +179,7 @@
                     <button
                         class="btn collapse-square mh-1"
                         :title="drums ? 'Disable Drum Track' : 'Enable Drum Track'"
-                        @click="toggleDrums"
+                        @click.stop="toggleDrums"
                         @keydown.prevent
                     >
                         <span
@@ -192,7 +193,7 @@
                     <button
                         class="btn collapse-square mh-1"
                         :title="loop ? 'Disable Loop' : 'Enable Loop'"
-                        @click="toggleLoop"
+                        @click.stop="toggleLoop"
                         @keydown.prevent
                     >
                         <span
@@ -219,7 +220,7 @@
                                     <div
                                         class="volume-fill bg-white"
                                         :style="volumeOffset"
-                                        @click.stop
+                                        @click.stop.stop
                                     ></div>
 
                                     <input
@@ -228,7 +229,7 @@
                                         min="0"
                                         max="100"
                                         :value="currentVolume"
-                                        @click.stop
+                                        @click.stop.stop
                                         @input="emitVolumeChange"
                                     >
                                 </div>
@@ -237,7 +238,7 @@
                             <button
                                 :title="currentVolume === 0 ? 'Unmute (M)' : 'Mute (M)'"
                                 class="btn collapse-square text-white"
-                                @click="emitVolumeChange(0)"
+                                @click.stop="emitVolumeChange(0)"
                                 @keydown.prevent
                             >
                                 <span
@@ -277,7 +278,7 @@ export default {
             default: () => false,
         },
 
-        click: {
+        metronome: {
             type: Boolean,
             default: () => false,
         },
@@ -452,7 +453,7 @@ export default {
         },
 
         toggleMetronome() {
-            this.$emit('click', !this.click);
+            this.$emit('metronome', !this.metronome);
         },
 
         toggleLoop() {

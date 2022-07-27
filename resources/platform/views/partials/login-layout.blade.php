@@ -44,11 +44,11 @@
         @yield('inject-components')
 
         {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             Beacon('on', 'ready', () => {
                 document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
             })
-        </script>
+        </script> --}}
         {{-- {!! \App\Analytics\Tracker::bodyBottom() !!} --}}
     </body>
 </html>

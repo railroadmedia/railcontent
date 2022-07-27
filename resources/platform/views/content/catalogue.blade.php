@@ -238,99 +238,121 @@
             ></add-event-modal>
         </div>
     @else
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-            <div class="tw-flex tw-flex-col mt-3">
-                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
-                    <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
-                    </div>
-                    @if($catalogueMeta['name'] !== "Songs" &&
-                        !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
-                        <div class="tw-flex tw-flex-col">
-                            <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
-                                <i class="fas fa-calendar-plus mr-1"></i>
-                                Subscribe to Calendar
-                            </button>
+        @if($catalogueMeta['name'] !== "Play Alongs" )
+            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+                <div class="tw-flex tw-flex-col mt-3">
+                    <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
+                        <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
+                            <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                                All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
+                            </h1>
                         </div>
-                        <add-event-modal
-                            modal-id="addToCalendarModal"
-                            subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
-                            theme-color="{{ $brand }}"
-                            toggleSubscribe="toggleSubscribe"
-                        ></add-event-modal>
-                    @endif
+                        @if($catalogueMeta['name'] !== "Songs" &&
+                            !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
+                            <div class="tw-flex tw-flex-col">
+                                <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
+                                    <i class="fas fa-calendar-plus mr-1"></i>
+                                    Subscribe to Calendar
+                                </button>
+                            </div>
+                            <add-event-modal
+                                modal-id="addToCalendarModal"
+                                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
+                                theme-color="{{ $brand }}"
+                                toggleSubscribe="toggleSubscribe"
+                            ></add-event-modal>
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     @endif
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
-        <transition appear name="fade">
-            <content-catalogue
-                dusk="content-catalogue"
-                brand="{{ $brand }}"
+
+        {{-- Play Alongs Catalogue --}}
+        @if( $catalogueMeta['name'] === "Play Alongs" )
+
+            <play-alongs
+                ref="playAlongsVueInstance"
+                content-endpoint="/laravel/public/railcontent/content"
                 theme-color="{{ $brand }}"
-                user-id="{{ auth()->id() }}"
-                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
-                catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
-                :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-                :use-theme-color="true"
                 :pre-loaded-content="{{ $listLessons }}"
-                :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                :statuses="{{ json_encode(user()->isAdmin() ? ['published', 'draft'] : ['published']) }}"
-                :use-url-params="true"
-                :lock-unowned="true"
-                :show-loading-animation="true"
-                no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
-                    that match those filters. Please remove some filters."
-                @if($lessonType === 'routine')
-                    catalogue-type="routines"
-                    :infinite-scroll="false"
-                    :paginate="true"
-                    limit="12"
-                @else
-                    catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
-                    :infinite-scroll="true"
-                    limit="20"
-                @endif
-                @if($lessonType === 'quick-tips')
-                    :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
-                @else
-                    :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : [$lessonType] ) }}"
-                @endif
-                @if($lessonType === 'student-review' || !empty($isAllContent))
-                    :force-wide-thumbs="true"
-                @endif
-                @if(!empty($isAllContent))
-                    :search-bar="true"
-                    search-endpoint="/railcontent/search"
-                    total-results="{{ $totalResults }}"
-                @endif
-                @if(!empty($sortOverride))
-                    sort-override="{{ $sortOverride }}"
-                @endif
-            >
-                @include('partials.bladesora.members.skeletons.catalog-filters', [
-                    "length" => count($catalogueMeta['allowableFilters']),
-                ])
-                @if($lessonType === 'routine')
-                    <div class="tw-flex tw-flex-row nmh-1">
-                        @for($i = 0; $i < 4; $i++)
-                            @include('partials.bladesora.members.skeletons.card-item', [
+                {{-- user-playlist-id="{{ $usersPrimaryPlaylistId }}" --}}
+                {{-- session-token="{{ railtracker_session_token() }}" --}}
+                @play="handlePlayAlongsPlay"
+                @pause="handlePlayAlongsPause"
+            ></play-alongs>
+
+        @else
+
+            <transition appear name="fade">
+                <content-catalogue
+                    dusk="content-catalogue"
+                    brand="{{ $brand }}"
+                    theme-color="{{ $brand }}"
+                    user-id="{{ auth()->id() }}"
+                    subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
+                    catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
+                    :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+                    :use-theme-color="true"
+                    :pre-loaded-content="{{ $listLessons }}"
+                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
+                    :statuses="{{ json_encode(user()->isAdmin() ? ['published', 'draft'] : ['published']) }}"
+                    :use-url-params="true"
+                    :lock-unowned="true"
+                    :show-loading-animation="true"
+                    no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }} that match those filters. Please remove some filters."
+                    @if($lessonType === 'routine')
+                        catalogue-type="routines"
+                        :infinite-scroll="false"
+                        :paginate="true"
+                        limit="12"
+                    @else
+                        catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"
+                        :infinite-scroll="true"
+                        limit="20"
+                    @endif
+                    @if($lessonType === 'quick-tips')
+                        :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
+                    @else
+                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : [$lessonType] ) }}"
+                    @endif
+                    @if($lessonType === 'student-review' || !empty($isAllContent))
+                        :force-wide-thumbs="true"
+                    @endif
+                    @if(!empty($isAllContent))
+                        :search-bar="true"
+                        search-endpoint="/railcontent/search"
+                        total-results="{{ $totalResults }}"
+                    @endif
+                    @if(!empty($sortOverride))
+                        sort-override="{{ $sortOverride }}"
+                    @endif
+                >
+                    @include('partials.bladesora.members.skeletons.catalog-filters', [
+                        "length" => count($catalogueMeta['allowableFilters']),
+                    ])
+                    @if($lessonType === 'routine')
+                        <div class="tw-flex tw-flex-row nmh-1">
+                            @for($i = 0; $i < 4; $i++)
+                                @include('partials.bladesora.members.skeletons.card-item', [
+                                ])
+                            @endfor
+                        </div>
+                    @else
+                        @for($i = 0; $i < 10; $i++)
+                            @include('partials.bladesora.members.skeletons.list-item', [
+                                "overview" => false,
+                                "showNumbers" => false,
+                                "thumbnailType" => $lessonType === 'song' ? 'square' : 'widescreen'
                             ])
                         @endfor
-                    </div>
-                @else
-                    @for($i = 0; $i < 10; $i++)
-                        @include('partials.bladesora.members.skeletons.list-item', [
-                            "overview" => false,
-                            "showNumbers" => false,
-                            "thumbnailType" => $lessonType === 'song' ? 'square' : 'widescreen'
-                        ])
-                    @endfor
-                @endif
-            </content-catalogue>
-        </transition>
+                    @endif
+                </content-catalogue>
+            </transition>
+
+        @endif
     </div>
 
 @endsection

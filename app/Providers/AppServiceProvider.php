@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\ViewComposers\NavigationViewComposer;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 use Railroad\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
@@ -32,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (!$this->app->environment('production')) {
+            Mail::alwaysTo('musora-dev-test-5632c3@inbox.mailtrap.io');
+        }
+
         view()->composer('*', NavigationViewComposer::class);
 
         //        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));

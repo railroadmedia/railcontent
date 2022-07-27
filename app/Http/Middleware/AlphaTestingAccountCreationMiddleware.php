@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
@@ -80,6 +81,12 @@ class AlphaTestingAccountCreationMiddleware
             $this->userMembershipFieldsService->sync($user->id);
 
             auth()->login($user);
+        }
+
+        // generate data for all logins even existing accounts
+        if ($request->routeIs('user_management_system.login.cookie') &&
+            User::query()->where('email', $request->get('email'))->exists()) {
+            Artisan::call('SeedUserContentData', ['userEmail' => $request->get('email')]);
         }
 
         return $next($request);

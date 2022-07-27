@@ -39,6 +39,7 @@ import './vue/vuesora/assets/js/third-party/add-event-atc';
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
+import PlayAlongs from './vue/vuesora/views/play-alongs/PlayAlongs.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
@@ -61,7 +62,7 @@ import VideoResources from './vue/vuesora/components/VideoResources/VideoResourc
 import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 //Chatsora
     import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
-    import Chatsora from './vue/Chatsora/components/index';
+    import Chatsora from './vue/Libraries/Chatsora/components/index';
     const chatEventBus = mitt();
 
 window.onload = function(){
@@ -237,6 +238,7 @@ app.component('AppContainer', AppContainer)
    .component('StatsSection', StatsSection)
    .component('CoachEvent', CoachEvent)
    .component('ContentCatalogue', ContentCatalogue)
+   .component('PlayAlongs', PlayAlongs)
    .component('ContentCatalogueContainer', ContentCatalogueContainer)
    .component('CommentsCatalogue', CommentsCatalogue)
    .component('Onboarding', Onboarding)
