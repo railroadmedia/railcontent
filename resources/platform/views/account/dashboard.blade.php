@@ -31,8 +31,7 @@
             </div>
 
             {{-- User Stats --}}
-            @if($isSubscriber)
-                <section class="tw-flex tw-flex-col tw-mb-5 md:tw-mb-7 tw-text-[#00101D] dark:tw-text-white tw-w-full">
+            <section class="tw-flex tw-flex-col tw-mb-5 md:tw-mb-7 tw-text-[#00101D] dark:tw-text-white tw-w-full">
                     {{-- Title --}}
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
@@ -48,8 +47,7 @@
                             ])
                         @endforeach
                     </div>
-                </section>
-            @endif
+            </section>
 
             {{-- Completed Lessons --}}
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
@@ -66,24 +64,26 @@
                     >
                         See All
                     </a>
-                @else
                     <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed Lessons</h2>
                 @endif
             </div>
+
             {{-- Completed Catalogue --}}
-            <div class="tw-flex tw-flex-row pb-3 four-cards-row" dusk="completed-lesson-grid">
-                <content-catalogue
-                    brand="{{ $brand }}"
-                    theme-color="{{ $brand }}"
-                    catalogue-type="grid"
-                    limit="4"
-                    :force-wide-thumbs="true"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $completedProgressContents }}"
-                    no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you complete will show up here." : "This member has not completed any lessons yet." }}"
-                    no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
-                />
-            </div>
+            @if($isCurrentUsersProfile)
+                <div class="tw-flex tw-flex-row pb-3 four-cards-row" dusk="completed-lesson-grid">
+                    <content-catalogue
+                        brand="{{ $brand }}"
+                        theme-color="{{ $brand }}"
+                        catalogue-type="grid"
+                        limit="4"
+                        :force-wide-thumbs="true"
+                        :use-theme-color="true"
+                        :pre-loaded-content="{{ $completedProgressContents }}"
+                        no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you complete will show up here." : "This member has not completed any lessons yet." }}"
+                        no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
+                    />
+                </div>
+            @endif
 
             {{-- Started Lessons --}}
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
@@ -100,24 +100,26 @@
                     >
                         See All
                     </a>
-                @else
                     <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started Lessons</h2>
                 @endif
             </div>
             {{-- Started Catalogue --}}
-            <div class="tw-flex tw-flex-row tw-pb-3 four-cards-row" dusk="started-lesson-grid">
-                <content-catalogue
-                    brand="{{ $brand }}"
-                    theme-color="{{ $brand }}"
-                    catalogue-type="grid"
-                    limit="4"
-                    :force-wide-thumbs="true"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $startedProgressContents }}"
-                    no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you start will show up here." : "This member has not started any lessons yet." }}"
-                    no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
-                />
-            </div>
+
+            @if($isCurrentUsersProfile)
+                <div class="tw-flex tw-flex-row tw-pb-3 four-cards-row" dusk="started-lesson-grid">
+                    <content-catalogue
+                        brand="{{ $brand }}"
+                        theme-color="{{ $brand }}"
+                        catalogue-type="grid"
+                        limit="4"
+                        :force-wide-thumbs="true"
+                        :use-theme-color="true"
+                        :pre-loaded-content="{{ $startedProgressContents }}"
+                        no-results-message="{{ $isCurrentUsersProfile ? "Any lessons that you start will show up here." : "This member has not started any lessons yet." }}"
+                        no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}"
+                    />
+                </div>
+            @endif
 
             {{-- About You --}}
             <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph" dusk="about-user">
