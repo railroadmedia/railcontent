@@ -231,7 +231,7 @@ export default {
         },
         profileBaseRoute: {
             type: String,
-            default: '/laravel/public/members/profile/',
+            default: '',
         },
         comment: {
             type: Object,
@@ -314,7 +314,7 @@ export default {
         },
 
         profileRoute() {
-            return this.profileBaseRoute + this.comment.user_id;
+            return this.profileBaseRoute + this.comment.user_id + '/dashboard';
         },
 
         commentUrl() {

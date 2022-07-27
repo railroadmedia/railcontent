@@ -53,6 +53,10 @@ export default {
         width: 100%;
         height: 100%;
 
+        @media(min-width: 1024px) {
+            margin-left:256px;
+        }
+
         .spinner {
             position: absolute;
             height: 60px;

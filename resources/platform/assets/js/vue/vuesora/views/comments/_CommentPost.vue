@@ -266,7 +266,7 @@ export default {
     props: {
         brand: {
             type: String,
-            default: () => '',
+            default: () => 'drumeo',
         },
         currentUser: {
             type: Object,
@@ -277,10 +277,7 @@ export default {
                 avatar: '',
             }),
         },
-        profileBaseRoute: {
-            type: String,
-            default: '/laravel/public/members/profile/',
-        },
+
         comment: {
             type: Object,
             default: () => ({
@@ -328,6 +325,10 @@ export default {
             }
 
             return Utils.parseXpValue(this.comment.user.xp);
+        },
+
+        profileBaseRoute() {
+            return '/' + this.brand + '/profile/'
         },
 
         userExpRank() {
@@ -389,7 +390,7 @@ export default {
         },
 
         profileRoute() {
-            return this.profileBaseRoute + this.comment.user_id;
+            return this.profileBaseRoute + this.comment.user_id + '/dashboard';
         },
 
         isLiked() {

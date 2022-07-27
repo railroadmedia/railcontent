@@ -1,9 +1,7 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=32ddac251c5040a2e1db09e1ba23bef7",
-    "/platform/js/profile.js": "/platform/js/profile.js?id=350fea0c1008c2d8b5e023e4e5e7aa70",
-    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=1470c1bc38b2183f267066ac80870234",
-    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=d0f5e25ffaeaabd08c0de972e3f538ca",
-    "/platform/css/app.css": "/platform/css/app.css?id=8df28a8cc3c85f40768521e97d08cf80",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=8e7457eda3c6e79dc1955db8654679e3",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=ad05670e68c41dafe3aaa6a81a52928f"
+    "/platform/js/app.js": "/platform/js/app.js?id=7134efe8c5e7fa008e24b58c1ae2f591",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=61fdba777c4460fe97067f218ddcc966",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=1b2b4aff8d29c7a284b7eca1f6fb973b",
+    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=fe957a9c5c645cd90ea47f2cdc5893d7",
+    "/platform/css/app.css": "/platform/css/app.css?id=83ce65fb8192dc0510835198274682b9"
 }

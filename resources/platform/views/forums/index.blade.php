@@ -17,7 +17,7 @@
         'profileUrl' => user()->getDashboardUrl(),
     ])
         @slot('content')
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+            <div class="tw-container tw-mx-auto dark:tw-text-white">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     <musora-icon icon-name="messages-filled" 
                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
