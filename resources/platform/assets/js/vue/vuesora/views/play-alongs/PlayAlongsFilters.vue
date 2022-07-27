@@ -56,7 +56,6 @@
                         <div class="flex flex-column form-group mr-1">
                             <select
                                 id="sortInput"
-                                type="text"
                                 class="borderless dark:tw-text-white tw-pb-0"
                                 style="width:175px;"
                                 @change="handleContentSort"
@@ -102,7 +101,6 @@
                         <div class="flex flex-column form-group">
                             <select
                                 id="limitInput"
-                                type="text"
                                 class="borderless dark:tw-text-white tw-pb-0"
                                 style="width:75px;"
                                 @change="handleContentLimit"
