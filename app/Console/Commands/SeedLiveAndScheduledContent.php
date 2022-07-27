@@ -45,13 +45,13 @@ class SeedLiveAndScheduledContent extends Command
                 ->limit(50)
                 ->get();
 
-            $contentRowsToReset = $dbConnection->table('railcontent_content')
+            $dbConnection->table('railcontent_content')
                 ->whereIn('type', ContentTypes::liveContentTypes())
                 ->where('brand', $brandString)
                 ->where('status', 'scheduled')
                 ->whereBetween(
                     'published_on',
-                    [Carbon::now()->subDay()->toDateTimeString(), Carbon::now()->addDay()->toDateTimeString()]
+                    [Carbon::now()->subDays(4)->toDateTimeString(), Carbon::now()->addDays(5)->toDateTimeString()]
                 )
                 ->update(
                     [
