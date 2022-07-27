@@ -278,19 +278,16 @@ export default {
             showMobileFilters: false,
             displayFilters: false,
             progressTracker: this.trackProgress ? new ProgressTracker() : null,
+            isPlaying: false,
         };
     },
     computed: {
-        isPlaying: {
-            cache: false,
-            get() {
-                if (this.audioPlayer != null) {
-                    return this.audioPlayer.paused === false;
-                }
-
-                return false;
-            },
-        },
+        // isPlaying: {
+            // cache: false,
+            // get() {
+            //     return this.audioPlayer ? !this.audioPlayer.paused : false;
+            // },
+        // },
 
         currentPosition() {
             return (this.currentTime / this.totalDuration) * 100;
@@ -528,15 +525,13 @@ export default {
         },
 
         playPause() {
-            console.log('hit playPause')
-            if (this.isPlaying) {
-                console.log('is playing')
+            if (this.audioPlayer.paused === false) {
+                this.isPlaying = false;
                 this.audioPlayer.pause();
             } else {
-                console.log('is not playing')
+                this.isPlaying = true;
                 this.audioPlayer.play();
             }
-
             this.$nextTick(() => this.$forceUpdate());
         },
 
@@ -698,7 +693,6 @@ export default {
         },
 
         toggleDrums() {
-            console.log('drums')
             this.drums = !this.drums;
 
             this.switchTrack(true);
@@ -713,7 +707,6 @@ export default {
         },
 
         toggleLoop() {
-            console.log('loop')
             this.loop = !this.loop;
             this.audioPlayer.loop = this.loop;
 
