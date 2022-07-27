@@ -20,12 +20,12 @@
                     "themeColor" => $brand,
                     "xp" => $post->user_xp,
                     "rank" => $post->xp_rank,
-                    "avatar" => $post->user->getProfilePictureUrl(),
+                    "avatar" => $post->user->profile_picture_url,
                     "title" => $post->title,
                     "date" => \Carbon\Carbon::parse($post->updated_at)->diffForHumans(),
-                    "author" => $post->user->getDisplayName(),
+                    "author" => $post->user->display_name,
                     "post" =>  substr(strip_tags($post->content),0,255),
-                    "url" => url()->route('forums.jump-to-post', ['id' => $post->id])
+                    "url" => url()->route('forums.jump-to-post', ['brand' => brand(), 'postId' => $post->id])
                 ])
             @endforeach
         </div>
