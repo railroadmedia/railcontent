@@ -42,6 +42,7 @@ import './vue/vuesora/assets/js/third-party/add-event-atc';
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
 import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
+import PlayAlongs from './vue/vuesora/views/play-alongs/PlayAlongs.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
@@ -234,6 +235,7 @@ app.component('AppContainer', AppContainer)
    .component('StatsSection', StatsSection)
    .component('CoachEvent', CoachEvent)
    .component('ContentCatalogue', ContentCatalogue)
+   .component('PlayAlongs', PlayAlongs)
    .component('ContentCatalogueContainer', ContentCatalogueContainer)
    .component('CommentsCatalogue', CommentsCatalogue)
    .component('Onboarding', Onboarding)
