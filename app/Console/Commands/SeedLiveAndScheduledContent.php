@@ -45,10 +45,24 @@ class SeedLiveAndScheduledContent extends Command
                 ->limit(50)
                 ->get();
 
+            $dbConnection->table('railcontent_content')
+                ->whereIn('type', ContentTypes::liveContentTypes())
+                ->where('brand', $brandString)
+                ->where('status', 'scheduled')
+                ->whereBetween(
+                    'published_on',
+                    [Carbon::now()->subDays(4)->toDateTimeString(), Carbon::now()->addDays(5)->toDateTimeString()]
+                )
+                ->update(
+                    [
+                        'status' => 'published',
+                        'published_on' => Carbon::now()->addDays(rand(1, 100))->toDateTimeString(),
+                    ]
+                );
+
             $liveNowSet = false;
 
             foreach ($contentRows as $contentRowIndex => $contentRow) {
-
                 // set up as if it's an upcoming live stream (scheduled)
                 if (in_array($contentRow->type, ContentTypes::liveContentTypes())) {
                     if (!$liveNowSet &&
@@ -57,7 +71,7 @@ class SeedLiveAndScheduledContent extends Command
                         $liveNowSet = true;
                     } else {
                         $liveStart =
-                            Carbon::now()->addDays(rand(0, 50))->addHours(rand(0, 24))->addMinutes(rand(0, 1000));
+                            Carbon::now()->addDays(rand(1, 50))->addHours(rand(0, 24))->addMinutes(rand(0, 1000));
                     }
 
                     $dbConnection->table('railcontent_content')

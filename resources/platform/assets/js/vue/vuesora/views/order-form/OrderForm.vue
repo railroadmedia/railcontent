@@ -25,7 +25,7 @@
             />
 
             <!-- Shipping Section -->
-            <section 
+            <section
                 v-if="cartRequiresShippingAddress"
                 class="mb-2"
             >
@@ -87,7 +87,7 @@
             </section>
 
             <!-- Payment Section -->
-            <section 
+            <section
                 v-if="cartData.items.length"
                 class="mb-3"
             >
@@ -160,7 +160,7 @@
                 </span>
             </button>
 
-            <tos-message 
+            <tos-message
                 :brand = "brand"
                 :cartData="cartData"
                 :all-membership-product-skus = "allMembershipProductSkus"
@@ -458,7 +458,7 @@ export default {
         },
 
         addNewAddress() {
-            this.newAddress = true; 
+            this.newAddress = true;
             this.selectedAddress = null;
             this.updateAddressesInSession();
         },
@@ -470,7 +470,7 @@ export default {
         },
 
         addNewPayment() {
-            this.newPayment = true; 
+            this.newPayment = true;
             this.selectedPaymentMethod = null;
             this.updateAddressesInSession();
         },
@@ -480,7 +480,7 @@ export default {
         },
 
         updateAccountData({ key, value }) {
-            this.$set(this.accountStateFactory, key, value);
+            this.accountStateFactory[key] = value;
 
             if (key === 'billingEmail') {
                 this.updateAddressesInSession();
@@ -488,17 +488,17 @@ export default {
         },
 
         updateShippingData({ key, value }) {
-            this.$set(this.shippingStateFactory, key, value);
+            this.shippingStateFactory[key] = value;
 
             this.updateAddressesInSession();
         },
 
         updatePaymentData({ key, value }) {
-            this.$set(this.paymentStateFactory, key, value);
+            this.paymentStateFactory[key] = value;
 
             this.updateAddressesInSession();
         },
-            
+
         updateAddressesInSession() {
             clearTimeout(this.updateTimeout);
 
@@ -557,9 +557,9 @@ export default {
                     if (!this.$refs.accountForm.formValid) {
                         this.$refs.accountForm.$el.scrollIntoView({block: "start"})
                         return;
-                    }                                                                                                                                                                                                                       
+                    }
                 }
-                
+
                 if (this.cartRequiresShippingAddress) {
                     if (!this.shippingAddresses || this.newAddress) {
                         this.$refs.shippingForm.validateForm();
@@ -619,7 +619,7 @@ export default {
             if (!this.selectedPaymentMethod || this.newPayment) {
                 payload.payment_method_type = this.paymentStateFactory.methodType;
             }
-            
+
             if (this.selectedPaymentMethod || !this.newPayment) {
                 payload.payment_method_id = this.selectedPaymentMethod.id;
             }
@@ -656,7 +656,7 @@ export default {
                     payload.shipping_city = this.shippingStateFactory.city;
                     payload.shipping_region = this.shippingStateFactory.region;
                     payload.shipping_country = this.shippingStateFactory.country;
-                }        
+                }
             }
 
             if (this.paymentStateFactory.methodType === 'credit_card' && (!this.selectedPaymentMethod || this.newPayment)) {
@@ -743,7 +743,7 @@ export default {
             right:0;
         }
     }
-    
+
     .loading-overlay {
         content: '';
         position:fixed;

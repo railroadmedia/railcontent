@@ -62,9 +62,9 @@ class LivePageController extends BaseController
     public function chat(Request $request, $domain, $brand)
     {
         $userRoleAdmin = user()->isAdmin();
-        $chatChannelName = config('railchat.' . $brand . 'chat_channel_name');
-        $questionsChannelName = config('railchat.' . $brand . 'questions_channel_name');
-        $embedUrl = config('railchat.' . $brand . 'embed_url');
+        $chatChannelName = config('railchat.' . $brand . '.chat_channel_name');
+        $questionsChannelName = config('railchat.' . $brand . '.questions_channel_name');
+        $embedUrl = config('railchat.' . $brand . '.embed_url');
 
         $userData = [
             'id' => user()->id,
@@ -90,7 +90,7 @@ class LivePageController extends BaseController
         return view(
             'live.embed',
             [
-                'apiKey' => config('railchat.' . $brand . '.get_stream_credentials')['key'],
+                'apiKey' => config('railchat.' . $brand . '..get_stream_credentials')['key'],
                 'token' => $token,
                 'chatChannelName' => $chatChannelName,
                 'questionsChannelName' => $questionsChannelName,
@@ -114,9 +114,9 @@ class LivePageController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         $userRoleAdmin = user()->isAdmin();
-        $chatChannelName = config('railchat.' . $brand . 'chat_channel_name');
-        $questionsChannelName = config('railchat.' . $brand . 'questions_channel_name');
-        $embedUrl = config('railchat.' . $brand . 'embed_url');
+        $chatChannelName = config('railchat.' . $brand . '.chat_channel_name');
+        $questionsChannelName = config('railchat.' . $brand . '.questions_channel_name');
+        $embedUrl = config('railchat.' . $brand . '.embed_url');
 
         $userData = [
             'id' => user()->id,
@@ -145,13 +145,13 @@ class LivePageController extends BaseController
             ContentTypes::liveContentTypes(),
             ContentService::STATUS_SCHEDULED,
             Carbon::now()
-                ->subHours(24)
+                ->subHours(6)
                 ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
             [],
-            10
+            15
         );
 
         $contentReleases = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(

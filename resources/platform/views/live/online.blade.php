@@ -7,31 +7,29 @@
 @section('content')
 
     <div class="fluid bg-grey-5 pv-3">
-        <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
-            {{-- Youtube Live Embed --}}
-            @include('partials.bladesora.members.content.lesson-video._live-embed', [
-                "themeColor" => "{{ $brand }}",
-                "youtubeId" => $liveStreamId,
-                "lessonTitle" => $lessonContent->fetch('fields.title'),
-                "userAvatar" => user()->profile_picture_url,
-                "userName" => user()->display_name,
-                "userEmail" => user()->email,
-                "emailRecipient" =>  "questions@drumeo.com", // If changed, update "Email addresses set in sites" doc
-                "emailLogo" =>  "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
-                "brand" =>  "{{ $brand }}",
-                "apiKey" => $apiKey,
-                "token" => $token,
-                "chatChannelName" => $chatChannelName,
-                "questionsChannelName" => $questionsChannelName,
-                "isAdministrator" => $isAdministrator,
-                "userData" => $userData,
+        {{-- Youtube Live Embed --}}
+        @include('partials.bladesora.members.content.lesson-video._live-embed', [
+            "themeColor" => "{{ $brand }}",
+            "youtubeId" => $liveStreamId,
+            "lessonTitle" => $lessonContent->fetch('fields.title'),
+            "userAvatar" => user()->profile_picture_url,
+            "userName" => user()->display_name,
+            "userEmail" => user()->email,
+            "emailRecipient" =>  "questions@drumeo.com", // If changed, update "Email addresses set in sites" doc
+            "emailLogo" =>  "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
+            "brand" =>  "{{ $brand }}",
+            "apiKey" => $apiKey,
+            "token" => $token,
+            "chatChannelName" => $chatChannelName,
+            "questionsChannelName" => $questionsChannelName,
+            "isAdministrator" => $isAdministrator,
+            "userData" => $userData,
 
-                "lessonTitle" => $lessonContent->fetch('fields.title'),
-                "contentType" => $lessonContent->fetch('type'),
-                "instructors" => $lessonContent->fetch('*fields.instructor', []),
-                "lessonResources" => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
-            ])
-        </div>
+            "lessonTitle" => $lessonContent->fetch('fields.title'),
+            "contentType" => $lessonContent->fetch('type'),
+            "instructors" => $lessonContent->fetch('*fields.instructor', []),
+            "lessonResources" => array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? []),
+        ])
     </div>
 
     <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
