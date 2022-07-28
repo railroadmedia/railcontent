@@ -123,6 +123,7 @@ const handleButtonClick = (e) => {
             placeholder="Enter your password..."
             :inputErrors="[]"
             @onChange="handlePasswordChange"
+            @onEnter="handleButtonClick"
           />
         </div>
         
