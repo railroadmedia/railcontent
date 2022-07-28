@@ -20,6 +20,7 @@ import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
+import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue'
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
 import ContentService from './vue/vuesora/assets/js/services/content';
@@ -257,6 +258,7 @@ app.component('AppContainer', AppContainer)
    .component('ImageCropper', ImageCropper)
    .component('Comments', Comments)
    .component('MusoraIcon', MusoraIcon)
+   .component('GearCarousel', GearCarousel)
    .component('EmailForm', EmailForm)
    .component('StaticHeader', StaticHeader)
    .component('AddEventModal', AddEventModal)

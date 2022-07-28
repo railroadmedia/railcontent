@@ -18,6 +18,7 @@
         "userName" => $dashboardUser->display_name,
         "appName" => 'Musora',
         "memberSince" => $dashboardUser->created_at,
+        "isCurrentUsersProfile" => $isCurrentUsersProfile
     ])
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14">
@@ -25,7 +26,7 @@
 
             {{-- Dashboard Header --}}
             <div class="tw-flex tw-flex-row tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-mb-5 md:tw-mb-7">
-                <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
+                <h1 class="tw-font-bold tw-text-[24px] tw-leading-none lg:tw-leading-none tw-mb-4 md:tw-mb-6">
                     {{ $isCurrentUsersProfile ? 'My' : possessivize($dashboardUser->display_name) }} Dashboard
                 </h1>
             </div>
@@ -34,7 +35,7 @@
             <section class="tw-flex tw-flex-col tw-mb-5 md:tw-mb-7 tw-text-[#00101D] dark:tw-text-white tw-w-full">
                     {{-- Title --}}
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                        <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
+                        <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-[18px] tw-leading-none lg:tw-leading-none ">My Stats</h2>
                     </div>
                     {{-- Metrics --}}
                     <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
@@ -64,7 +65,6 @@
                     >
                         See All
                     </a>
-                    <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed Lessons</h2>
                 @endif
             </div>
 
@@ -100,7 +100,6 @@
                     >
                         See All
                     </a>
-                    <h2 class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started Lessons</h2>
                 @endif
             </div>
             {{-- Started Catalogue --}}
@@ -141,6 +140,7 @@
                 </div>
             </section>
 
+            <gear-carousel :gear-info="{{ json_encode($dashboardUser) }}" />
         </div>
     </div>
 
