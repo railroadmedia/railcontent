@@ -56,7 +56,7 @@
 
                     <div class="tw-flex tw-flex-row tw-justify-end mt-2">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 tw-mr-1" dusk="cancel-button">
+                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1" dusk="cancel-button">
                             Cancel
                         </a>
 

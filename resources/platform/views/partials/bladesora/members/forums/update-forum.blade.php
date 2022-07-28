@@ -15,7 +15,7 @@
                     {{ method_field($method) }}
 
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="title" id="title" value="{{ old('title') }}">
+                        <input type="text" name="title" id="title" value="{{ old('title') }}" class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]">
                         <label for="title" class="{{ $brand }}">Title</label>
 
                         @include('partials.bladesora.members.inputs.partials._errors', [
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="description" id="description" value="{{ old('description') }}">
+                        <input type="text" name="description" id="description" value="{{ old('description') }}" class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]">
                         <label for="description" class="{{ $brand }}">Description</label>
 
                         @include('partials.bladesora.members.inputs.partials._errors', [
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="weight" id="weight" value="{{ old('weight') }}">
+                        <input type="text" name="weight" id="weight" value="{{ old('weight') }}" class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]">
                         <label for="weight" class="{{ $brand }}">Weight (order), any number</label>
 
                         @include('partials.bladesora.members.inputs.partials._errors', [
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="icon" id="icon" value="{{ old('icon-class') }}">
+                        <input type="text" name="icon" id="icon" value="{{ old('icon-class') }}" class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]">
                         <label for="icon-class" class="{{ $brand }}">Icon class</label>
 
                         @include('partials.bladesora.members.inputs.partials._errors', [
@@ -52,7 +52,7 @@
 
                     <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end ">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 tw-mr-1" dusk="cancel-button">
+                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1" dusk="cancel-button">
                             Cancel
                         </a>
 
