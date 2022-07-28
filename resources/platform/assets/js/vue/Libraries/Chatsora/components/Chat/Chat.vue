@@ -50,7 +50,8 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex tw-flex-col tw-z-40" v-show="showThread">
+        <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex-col tw-z-40"
+             :class="showTread ? 'tw-flex' : 'tw-hidden'">
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-place-items-center tw-justify-between">
                     <a
@@ -63,7 +64,9 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40" v-show="showMembers">
+        <div class="tw-absolute tw-inset-0 tw-flex-col tw-z-40" 
+             :class="showMembers ? 'tw-flex' : 'tw-hidden'"
+        >
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
@@ -91,7 +94,9 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40" v-show="showBannedUsers">
+        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40"
+             :class="showBannedUsers ? 'tw-flex' : 'tw-hidden'"
+        >
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
@@ -571,7 +576,7 @@ export default {
         this.chatEventBus.on('postQuestion', this.postQuestion);
         this.chatEventBus.on('messageMenuToggled', this.messageMenuToggledHandler);
 
-
+        // console.log(this.chatEventBus)
     },
     watch: {
         $_messages_count: function () {
