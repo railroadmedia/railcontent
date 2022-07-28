@@ -21,11 +21,11 @@
                             <i class="unopen fas fa-download no-events tw-text-{{ $brand }}"></i>
                             <i class="open fas fa-download no-events tw-text-white"></i>
 
-                            <div class="dropdown-content tw-bg-white tw-shadow tiny tw-text-black">
+                            <div class="dropdown-content tw-bg-white tw-shadow tiny tw-text-[#00101D]">
                                 <ul>
                                     @foreach($lessonResources as $resource)
                                         <li>
-                                            <a class="tw-no-underline tw-text-black pa-1"
+                                            <a class="tw-no-underline tw-text-[#00101D] pa-1"
                                                href="{{ $resource['resource_url'] }}"
                                                target="_blank"
                                                download>

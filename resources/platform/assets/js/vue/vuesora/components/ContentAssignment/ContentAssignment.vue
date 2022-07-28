@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-column assignment-component bb-grey-1-1 dark:tw-border-[#223F57]">
-        <div class="flex flex-row align-v-center flex-wrap pv-3">
-            <div class="flex flex-column xs-12 md-8">
+        <div class="flex flex-row align-v-center tw-flex-wrap md:tw-flex-nowrap pv-3">
+            <div class="flex flex-column tw-w-full">
                 <div class="flex flex-row align-v-center">
                     <div class="flex flex-column arrow-column hide-xs-only">
                         <button class="btn collapse-square" @click="openAssignment">
@@ -35,13 +35,15 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-column xs-12 md-4 complete-column">
+            <div class="flex flex-column tw-ml-auto complete-column">
                 <div class="flex flex-row tw-justify-end">
-                    <button id="open-exercise-button" v-if="soundsliceSlug" class="btn mr-1" @click="openExercise">
-                            <span class="text-white bg-grey-3 inverted text-grey-3">
-                                <i class="fas fa-play mr-1"></i> Practice
-                            </span>
-                        </button>
+                    
+                    <button id="open-exercise-button" 
+                            v-if="soundsliceSlug" 
+                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] mr-1" 
+                            @click="openExercise">
+                        <i class="fas fa-play mr-1"></i> Practice
+                    </button>
     
                     <button :class="`tw-btn-secondary tw-text-${brand}`" :disabled="isRequesting" @click.stop="markAsComplete">
                             <i class="fas fa-check mr-1"></i>

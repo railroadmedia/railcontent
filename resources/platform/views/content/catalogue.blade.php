@@ -122,7 +122,7 @@
     @if($hasStartedLessons)
         <section class="tw-container tw-mx-auto tw-pt-4 md:tw-pt-5 md:tw-px-8">
             <div class="flex flex-row tw-pt-4">
-                <h1 class="heading capitalize pointer noselect tw-text-black dark:tw-text-white tw-border-b-2 tw-border-{{ $brand }}"
+                <h1 class="heading capitalize pointer noselect tw-text-[#00101D] dark:tw-text-white tw-border-b-2 tw-border-{{ $brand }}"
                     data-toggle-catalogue="inProgress">
                     In Progress
                 </h1>
@@ -159,7 +159,7 @@
             <div class="tw-flex tw-flex-col tw-flex-grow">
                 <div class="tw-flex tw-flex-row tw-items-center pv-2">
                     <div
-                        class="tw-text-black dark:tw-text-white tw-no-underline heading tw-capitalize tw-flex-grow">
+                        class="tw-text-[#00101D] dark:tw-text-white tw-no-underline heading tw-capitalize tw-flex-grow">
                         Recently Viewed
                     </div>
                 </div>
@@ -192,7 +192,7 @@
         <div class="tw-flex tw-flex-col mt-3">
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                 <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">
-                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
+                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                 </div>
                 @if($catalogueMeta['name'] !== "Songs"
                     && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
@@ -219,7 +219,7 @@
             <div class="tw-flex tw-flex-col tw-mt-3">
                 <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                     <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">
-                        <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                             All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                     </div>
                     <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-0">
@@ -243,7 +243,7 @@
                 <div class="tw-flex tw-flex-col mt-3">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                         <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                            <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                            <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                                 All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
                             </h1>
                         </div>

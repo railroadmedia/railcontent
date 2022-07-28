@@ -41,7 +41,7 @@
             @if(!empty($lessonsUrl))
                 <a
                     href="{{ $lessonsUrl }}"
-                    class="tw-btn-secondary tw-text-black dark:tw-text-white"
+                    class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white"
                 >
                     <i class="fas fa-arrow-circle-right mr-1"></i> See Lessons
                 </a>

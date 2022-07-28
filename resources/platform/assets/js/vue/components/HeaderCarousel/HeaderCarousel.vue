@@ -89,13 +89,13 @@ onMounted(() => {
       class="tw-absolute tw-bottom-0 tw-right-0 tw-flex tw-justify-end tw-py-[8px] tw-z-30 tw-mr-[21px] tw-mb-[9px] md:tw-mr-[21px] md:tw-mb-[12px] lg:tw-mr-[26px] lg:tw-mb-[20px]">
 
       <button
-        class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
+        class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
         @click="handleLeft()">
         <ChevronLeftIcon />
       </button>
 
       <button
-        class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-black hover:tw-bg-white hover:tw-border-none"
+        class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
         @click="handleRight()">
         <ChevronRightIcon />
       </button>

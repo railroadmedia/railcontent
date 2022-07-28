@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-relative tw-flex tw-flex-row tw-items-center tw-text-black tw-border-0 tw-border-b tw-border-solid tw-border-gray-200 dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039]/50 hover:tw-bg-[#F5F5F6] tw-transition">
+    <div class="tw-relative tw-flex tw-flex-row tw-items-center tw-text-[#00101D] tw-border-0 tw-border-b tw-border-solid tw-border-gray-200 dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039]/50 hover:tw-bg-[#F5F5F6] tw-transition">
         <a :href="thread.url+'?sortby_val=-published_on'" 
            :class="[brandHoverColor]"
            class="tw-py-4 tw-pl-2 tw-transition-colors tw-inline-flex tw-no-underline tw-w-full" 
@@ -16,7 +16,7 @@
         
             <!-- Description -->
             <div class="tw-flex tw-flex-col tw-justify-center tw-pr-4 tw-mr-auto">
-                <p class="tw-text-sm tw-text-black tw-font-bold dark:tw-text-white">
+                <p class="tw-text-sm tw-text-[#00101D] tw-font-bold dark:tw-text-white">
                     <i v-if="thread.isPinned" class="fas fa-thumbtack tw-mr-1"></i>
                     <i v-if="thread.isLocked" class="fas fa-lock tw-mr-1"></i>
                     {{ thread.title }}
@@ -34,7 +34,7 @@
             <!-- Thread Category -->
             <div v-if="thread.category"
                 class="tw-hidden tw-mx-6 tw-w-52 tw-items-center tw-flex-shrink-0 xl:tw-flex">
-                <p class="tw-text-sm tw-text-black tw-font-bold">
+                <p class="tw-text-sm tw-text-[#00101D] tw-font-bold">
                     {{ thread.category }}
                 </p>
             </div>

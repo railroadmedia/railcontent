@@ -61,7 +61,7 @@
                         v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                     </h5>
                     <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-black font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
+                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         {{ mappedData.black_title }}
@@ -87,7 +87,7 @@
                 <div class="tw-inline-flex tw-items-start tw-p-1">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                         class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5"
-                        :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-black dark:tw-text-white'"
+                        :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from My List' : 'Add to My List'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"

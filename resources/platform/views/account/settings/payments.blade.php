@@ -62,7 +62,7 @@
             @if($payments)
                 @foreach($payments as $payment)
                     <a href="{{ url()->route('members.payment-invoice', $payment->getId()) }}"
-                       class="tw-flex tw-flex-row tw-flex-wrap tw-mb-1 tw-text-black tw-no-underline"
+                       class="tw-flex tw-flex-row tw-flex-wrap tw-mb-1 tw-text-[#00101D] tw-no-underline"
                        target="_blank">
                         <div class="tw-flex tw-flex-col xs-12 md-6">
                             <div class="tw-flex tw-flex-row">

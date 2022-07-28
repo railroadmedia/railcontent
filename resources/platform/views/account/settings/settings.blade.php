@@ -6,7 +6,7 @@
 
 @section('edit-forms')
     <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
-        <h1 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">Notification Settings</h1>
+        <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white">Notification Settings</h1>
     </div>
 
     <div class="tw-flex tw-flex-row">
@@ -18,7 +18,7 @@
                 {{ csrf_field() }}
 
                 @include('account.settings.partials._brand-notifications-settings', ['allBrands' => $allBrands])
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-[#00101D] dark:tw-text-white tw-py-3">
                     <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
 
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-[#00101D] dark:tw-text-white tw-py-3">
                     <h2 class="tw-font-bold tw-text-lg">How often would you like to receive email notifications?</h2>
                 </div>
 
@@ -112,12 +112,12 @@
                     </div>
                 </div>
 
-{{--                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-black dark:tw-text-white tw-py-3">--}}
+{{--                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-[#00101D] dark:tw-text-white tw-py-3">--}}
 {{--                    <h2 class="tw-font-bold tw-text-lg">Would you like to use our legacy video player?</h2>--}}
 {{--                </div>--}}
 
 {{--                <div class="tw-flex tw-flex-row tw-flex-auto ph-3">--}}
-{{--                    <p class="body tw-text-black dark:tw-text-white tw-mb-3">--}}
+{{--                    <p class="body tw-text-[#00101D] dark:tw-text-white tw-mb-3">--}}
 {{--                        Our video player may have compatibility issues with older devices and operating systems.--}}
 {{--                        <br>We recommend switching to our legacy video player if you are experiencing playback issues.--}}
 {{--                    </p>--}}
@@ -137,10 +137,10 @@
 {{--                </div>--}}
 
                 <div class="tw-flex tw-flex-row pa-3">
-                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white tw-btn-small" type="submit">
+                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mr-2" type="submit">
                         Save
                     </button>
-                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent tw-text-black dark:tw-text-white tw-ml-1" type="reset">
+                    <button class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-white/10 hover:tw-bg-black/10" type="reset">
                         Cancel
                     </button>
                 </div>

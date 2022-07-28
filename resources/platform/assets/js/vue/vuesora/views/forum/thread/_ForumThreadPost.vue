@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#002039] tw-rounded-2xl tw-overflow-hidden">
+    <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
         <a
             :id="'post' + post.id"
             style="position:relative;top:-75px;"
@@ -66,7 +66,7 @@
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4">
                             <a
-                                class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
+                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
                                 @click="editing = false"
                             >
                                 Cancel

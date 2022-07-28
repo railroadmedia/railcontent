@@ -145,13 +145,13 @@
                         <select
                             id="postSort"
                             v-model="filterInterface"
-                            class="has-input tw-text-black dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
+                            class="has-input tw-text-[#00101D] dark:tw-text-white tw-pb-0 tw-bg-white dark:tw-bg-transparent"
                         >
                             <option
                                 v-for="option in filterOptions"
                                 :key="option.label"
                                 :value="option.value"
-                                class="tw-text-black"
+                                class="tw-text-[#00101D]"
                             >
                                 {{ option.label }}
                             </option>

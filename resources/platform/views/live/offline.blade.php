@@ -32,7 +32,7 @@
                             </button>
                             <select name="timezone" id="timezoneSelector">
                                 @foreach($timezones as $timezone)
-                                    <option class="tw-text-black"
+                                    <option class="tw-text-[#00101D]"
                                             {{
                                                 substr(
                                                     $timezone,
@@ -57,12 +57,12 @@
         <div class="tw-flex tw-flex-col mv-3">
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-[10px]">
                 <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                         Scheduled Releases
                     </h1>
                 </div>
                 <div class="tw-flex tw-flex-col">
-                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
+                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
                         Subscribe to Calendar 
                     </button>
                 </div>
