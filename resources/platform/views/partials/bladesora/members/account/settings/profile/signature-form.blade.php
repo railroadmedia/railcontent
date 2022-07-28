@@ -25,8 +25,8 @@
             <div class="tw-flex tw-flex-col tw-bg-white corners-10 tw-shadow">
                 <div class="pa-3 tw-pb-3">
                     <h2 class="subheading">Edit: Signature</h2>
-                    <p class="tw-mt-1 tw-italic tw-text-13 tw-text-gray-400">Limit of 200 characters</p>
-                    <p id="signatureErrorMessage" class="tw-text-13 tw-text-red-500 tw-mt-2 tw-transition tw-opacity-0">You have entered more than 200 characters.</p>
+                    <p class="tw-mt-1 tw-italic tw-text-sm tw-text-gray-400">Limit of 200 characters</p>
+                    <p id="signatureErrorMessage" class="tw-text-sm tw-text-red-500 tw-mt-2 tw-transition tw-opacity-0">You have entered more than 200 characters.</p>
                 </div>
                 <span>
                 <form method="POST" action="{{ $action }}">
