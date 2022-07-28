@@ -12,7 +12,7 @@
                 <img :src="user.avatarUrl" class="tw-max-w-full tw-h-auto">
             </a>
         </div>
-        <div class="tw-flex-grow cs-text-sm tw-text-white tw-flex tw-flex-col">
+        <div class="tw-flex-grow cs-text-sm tw-text-white tw-flex tw-flex-col tw-w-full tw-overflow-hidden">
             <div class="tw-flex tw-flex-row">
                 <a
                     :href="user.profileUrl"

@@ -68,10 +68,12 @@ class SeedLiveAndScheduledContent extends Command
                     if (!$liveNowSet &&
                         $this->option('live-now')) {
                         $liveStart = Carbon::now()->subMinutes(rand(1, 15));
+                        $liveEnd = $liveStart->copy()->addHours(8);
                         $liveNowSet = true;
                     } else {
                         $liveStart =
                             Carbon::now()->addDays(rand(1, 50))->addHours(rand(0, 24))->addMinutes(rand(0, 1000));
+                        $liveEnd = $liveStart->copy()->addHours(1);
                     }
 
                     $dbConnection->table('railcontent_content')
@@ -80,7 +82,7 @@ class SeedLiveAndScheduledContent extends Command
                             'published_on' => $liveStart->toDateTimeString(),
                             'status' => 'scheduled',
                             'live_event_start_time' => $liveStart->toDateTimeString(),
-                            'live_event_end_time' => $liveStart->copy()->addHour()->toDateTimeString(),
+                            'live_event_end_time' => $liveEnd->toDateTimeString(),
                         ]);
 
                     $dbConnection->table('railcontent_content_fields')
@@ -99,7 +101,7 @@ class SeedLiveAndScheduledContent extends Command
                             'key' => 'live_event_end_time',
                             'position' => 1,
                         ], [
-                            'value' => $liveStart->copy()->addHour()->toDateTimeString(),
+                            'value' => $liveEnd->toDateTimeString(),
                             'type' => 'datetime',
                         ]);
                 }
