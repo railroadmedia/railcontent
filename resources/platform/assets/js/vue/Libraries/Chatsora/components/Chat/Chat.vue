@@ -1,6 +1,6 @@
 <template>
     <div
-        class="cs-container tw-relative tw-h-full tw-w-full tw-flex tw-flex-col vuesora-override"
+        class="cs-container tw-relative tw-h-full tw-w-full tw-max-h-[690px] tw-flex tw-flex-col vuesora-override"
         :class="brand"
     >
         <div class="cs-top tw-flex-none">

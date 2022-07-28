@@ -2,6 +2,7 @@
     /**
      * @var \Modules\UserManagementSystem\Models\User $user
      */
+    //dd($user->access_level)
 @endphp
 
 <div
@@ -11,7 +12,7 @@
     style="background-image:url({{ cf_img($backgroundImage, ["quality" => 80, "blur" => 40, "width" => 600, "fit" => "crop"]) }});"
     data-ix-bg="{{ $backgroundImage }}"
 >
-    <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
+    <div class="header-gradient-overlay absolute-fill"></div>
 
     <div class="account-header tw-container tw-flex tw-flex-col tw-items-center lg:tw-items-end xl:tw-items-center lg:tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
 
@@ -52,7 +53,7 @@
             </div>
 
             {{-- Calls To Action --}}
-            @if($user->access_level !== 'pack' && ($isCurrentUsersProfile ?? true))
+            @if($user->access_level !== 'pack' && $isCurrentUsersProfile)
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
 
                     {{-- Referral Button --}}
