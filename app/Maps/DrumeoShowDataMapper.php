@@ -10,7 +10,17 @@ class DrumeoShowDataMapper
     {
         $showTypes = array_flip(config('railcontent.showTypes')['drumeo']);
 
-        return array_intersect_key(array_replace($showTypes, config('railcontent.cataloguesMetadata')['drumeo']), $showTypes);
+        $showsData = array_intersect_key(array_replace($showTypes, config('railcontent.cataloguesMetadata')['drumeo']), $showTypes);
+
+        // filter out shows with no data set
+
+        foreach ($showsData as $showName => $showData) {
+            if (empty($showData['name']) || empty($showData['thumbnailUrl'])) {
+                unset($showsData[$showName]);
+            }
+        }
+
+        return $showsData;
     }
 
     public static function filterOptions($filterInput, $allFilterOptions)

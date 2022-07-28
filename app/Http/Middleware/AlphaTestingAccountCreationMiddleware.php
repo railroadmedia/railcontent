@@ -69,7 +69,8 @@ class AlphaTestingAccountCreationMiddleware
                     $this->productRepository->find(125),
                     Carbon::now()->subMonth()
                 );
-            } elseif (strpos($user->email, 'member') !== false) {
+//            } elseif (strpos($user->email, 'member') !== false) {
+            } else { // for now always make them a member by default
                 // make member
                 $this->userProductService->assignUserProduct(
                     new EcommerceUser($newUser->id, $newUser->email),
