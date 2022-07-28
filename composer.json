@@ -54,7 +54,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "app/Modules",
-            "Modules\\UserManagementSystem\\Factories\\": "app/Modules/UserManagementSystem/database/factories"
+            "Modules\\UserManagementSystem\\Factories\\": "app/Modules/UserManagementSystem/database/factories",
+            "Laravel\\Vapor\\Runtime\\": "app/VaporCoreClassOverrides"
         },
         "files": [
             "helpers/helpers.php",
