@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column assignment-component bb-grey-1-1 dark:tw-border-[#223F57]">
-        <div class="flex flex-row align-v-center tw-flex-wrap lg:tw-flex-nowrap pv-3">
+        <div class="flex flex-row align-v-center tw-flex-wrap md:tw-flex-nowrap pv-3">
             <div class="flex flex-column tw-w-full">
                 <div class="flex flex-row align-v-center">
                     <div class="flex flex-column arrow-column hide-xs-only">
