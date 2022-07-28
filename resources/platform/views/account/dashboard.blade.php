@@ -125,10 +125,10 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
             @endif
 
             {{-- About You --}}
-            <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph" dusk="about-user">
-                <div class="tw-flex tw-justify-between tw-mb-3 tw-w-full">
+            <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap tw-pt-[24px]" dusk="about-user">
+                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-justify-between tw-mb-3 tw-w-full">
                     {{-- User Details --}}
-                    <div class="tw-flex tw-flex-col tw-mb-4">
+                    <div class="tw-flex tw-flex-col tw-mb-4 tw-mr-[36px]">
                         <h1
                             class="tw-font-bold tw-text-[24px] tw-leading-none tw-mb-[19px]">
                             About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
