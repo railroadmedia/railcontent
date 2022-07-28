@@ -16,7 +16,7 @@
 
                     <input type="hidden" name="redirect" value="{{ $forumUrl }}">
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="title" id="title" value="{{ $thread['title'] }}">
+                        <input type="text" name="title" id="title" value="{{ $thread['title'] }}" class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]">
                         <label for="title" class="{{ $brand }}">Title</label>
 
                         @include('partials.bladesora.members.inputs.partials._errors', [
@@ -29,7 +29,7 @@
                         <select id="postTopic" name="category_id" class="dark:tw-text-white tw-pb-0">
                             @foreach($topicOptions as $topicId => $topic)
                                 <option
-                                    class="dark:tw-text-black"
+                                    class="dark:tw-text-[#00101D]"
                                     {{ $thread['category_id'] == ($topicId) ? 'selected' : '' }}
                                     value="{{ $topicId }}">{{ $topic }}</option>
                             @endforeach
@@ -44,7 +44,7 @@
 
                     <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end ">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 tw-mr-1">
+                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1">
                             Cancel
                         </a>
 

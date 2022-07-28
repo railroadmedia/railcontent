@@ -1,4 +1,4 @@
-<div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 bg-{{ $brand }}">
+<div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 bg-{{ $brand }} tw-rounded-[10px]">
     <div class="content-progress flex flex-row flex-wrap tw-py-6">
 
         @if(!empty($labelText))

@@ -86,7 +86,7 @@
                             YOUR GUITAR JOURNEY
                         </h1>
                         <a href="{{ $nextLessonUrl }}">
-                            <button class="tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-4 tw-inline-block tw-uppercase tw-text-black font-roboto-condensed-bold tw-rounded-full tw-mt-6">
+                            <button class="tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-4 tw-inline-block tw-uppercase tw-text-[#00101D] font-roboto-condensed-bold tw-rounded-full tw-mt-6">
                                 Start Your Quest!
                             </button>
                         </a>
@@ -95,7 +95,7 @@
                             <i class="fas fa-trophy-alt text-goldenrod tw-transform tw--rotate-12"></i> Your Quest is Complete!
                         </h1>
                         <a href="/members/packs/guitar-quest/chapter-1-play-a-show-song-in-an-hour/280600/intro/280601">
-                            <button class="tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-4 tw-inline-block tw-uppercase tw-text-black font-roboto-condensed-bold tw-rounded-full tw-mt-6">
+                            <button class="tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-4 tw-inline-block tw-uppercase tw-text-[#00101D] font-roboto-condensed-bold tw-rounded-full tw-mt-6">
                                 Start From The Beginning!
                             </button>
                         </a>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="flex flex-row flex-wrap align-h-center">
                         <a  href="{{ $nextLessonUrl }}"
-                            class="tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-4 tw-inline-block tw-uppercase tw-text-black font-roboto-condensed-bold tw-rounded-full tw-mt-3">
+                            class="tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-4 tw-inline-block tw-uppercase tw-text-[#00101D] font-roboto-condensed-bold tw-rounded-full tw-mt-3">
                             Continue Your Quest!
                         </a>
                     </div>

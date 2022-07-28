@@ -9,9 +9,9 @@
 
 <div class="modal" id="askQuestionModal">
     <div class="flex flex-column bg-white shadow corners-10 pa-3">
-        <h1 class="heading mb-2 tw-text-black">Ask a Question</h1>
+        <h1 class="heading mb-2 tw-text-[#00101D]">Ask a Question</h1>
 
-        <p class="tiny mb-3 tw-text-black">Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.</p>
+        <p class="tiny mb-3 tw-text-[#00101D]">Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.</p>
 
 {{--        todo: set logo based to brand; ex: https://singeo.s3.amazonaws.com/sales/2021/{{$brand}}-logo.png --}}
         <email-form

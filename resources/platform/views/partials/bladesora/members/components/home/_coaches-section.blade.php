@@ -14,13 +14,12 @@
                     See All
                 </a>
             </div>
-
             <div class="tw-grid tw-gap-3 tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 lg:tw-grid-cols-5 xl:tw-grid-cols-6 3xl:tw-grid-cols-7">
                 @foreach($subscribedCoaches->results() as $coach)
                     <a href="{{ $coach->fetch('url','') }}"
                         class="tw-no-underline ">
                         <div class="tw-flex tw-bg-cover tw-bg-top tw-relative tw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white">
-                            <img src="{{ $coach->fetch('data.coach_card_image') }}" alt="{{ $coach->fetch('fields.name') }}" class="tw-w-full">
+                            <img src="{{ cf_img($coach->fetch('data.coach_card_image'), ['width' => 660, 'height' => 960, 'quality' => '90']) }}" alt="{{ $coach->fetch('fields.name') }}" class="tw-w-full">
                             <div class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-text-center tw-absolute tw-bottom-0 tw-left-0 tw-w-full"
                                 style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
                             >

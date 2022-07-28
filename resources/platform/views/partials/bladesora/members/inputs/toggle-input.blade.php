@@ -14,7 +14,7 @@
         </span>
     </span>
 
-    <label for="{{ $inputID }}" class="toggle-label tw-text-black dark:tw-text-white">
+    <label for="{{ $inputID }}" class="toggle-label tw-text-[#00101D] dark:tw-text-white">
         {{ $inputLabel }}
     </label>
 </div>

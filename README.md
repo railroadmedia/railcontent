@@ -265,3 +265,11 @@ of all our environments.
 To run artisan commands including migrate on any vapor environment use the following command substituting 
 'web-staging-one' with whatever environment you wish to run it on:  
 `r vapor command web-staging-one --command="php artisan migrate"`
+
+# Emails and Testing Emails
+All non-production environment emails sent by our system go to our mailtrap account and email address be default:
+[https://mailtrap.io/inboxes/1620451/messages](https://mailtrap.io/inboxes/1620451/messages)
+This mailtrap receiving email address is the only verified email that we can send to from our SES account for 
+non-production environments. This prevents accidentally sending emails to students from staging/testing environments.
+
+Emails for all environments including production are sent through AWS SES in the us-east-2 region.

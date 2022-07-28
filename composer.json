@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": "^8.1",
+        "fakerphp/faker": "^1.9.1",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "iksaku/laravel-mass-update": "^1.0",
@@ -53,7 +54,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "app/Modules",
-            "Modules\\UserManagementSystem\\Factories\\": "app/Modules/UserManagementSystem/database/factories"
+            "Modules\\UserManagementSystem\\Factories\\": "app/Modules/UserManagementSystem/database/factories",
+            "Laravel\\Vapor\\Runtime\\": "app/VaporCoreClassOverrides"
         },
         "files": [
             "helpers/helpers.php",

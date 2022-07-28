@@ -7,7 +7,7 @@
         <!-- Avatar -->
 
         <!-- Result Body -->
-        <div class="tw-flex tw-flex-col tw-text-black tw-mr-10">
+        <div class="tw-flex tw-flex-col tw-text-[#00101D] tw-mr-10">
             <p
                 class="tw-font-bold tw-mb-1"
                 v-html="item.thread.title"
@@ -76,7 +76,7 @@ export default {
                     // insert closing span tag
                     bodyString = `${this.item.postBody.substr(0, end)}</span>${this.item.postBody.substr(end)}`;
                     // insert opening span tag
-                    bodyString = `${bodyString.substr(0, start)}<span class="tw-font-bold tw-text-black">${bodyString.substr(start)}`;
+                    bodyString = `${bodyString.substr(0, start)}<span class="tw-font-bold tw-text-[#00101D]">${bodyString.substr(start)}`;
                 });
             }
 

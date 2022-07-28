@@ -56,30 +56,33 @@
                         <div class="flex flex-column form-group mr-1">
                             <select
                                 id="sortInput"
-                                type="text"
-                                class="borderless"
+                                class="borderless dark:tw-text-white tw-pb-0"
                                 style="width:175px;"
                                 @change="handleContentSort"
                             >
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="-published_on"
                                     :selected="sort === '-published_on'"
                                 >
                                     Newest First
                                 </option>
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="published_on"
                                     :selected="sort === 'published_on'"
                                 >
                                     Oldest First
                                 </option>
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="slug"
                                     :selected="sort === 'slug'"
                                 >
                                     Name: A to Z
                                 </option>
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="-slug"
                                     :selected="sort === '-slug'"
                                 >
@@ -98,24 +101,26 @@
                         <div class="flex flex-column form-group">
                             <select
                                 id="limitInput"
-                                type="text"
-                                class="borderless"
+                                class="borderless dark:tw-text-white tw-pb-0"
                                 style="width:75px;"
                                 @change="handleContentLimit"
                             >
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="10"
                                     :selected="Number(limit) === 10"
                                 >
                                     10
                                 </option>
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="20"
                                     :selected="Number(limit) === 20"
                                 >
                                     20
                                 </option>
                                 <option
+                                    class="tw-text-[#00101D]"
                                     value="50"
                                     :selected="Number(limit) === 50"
                                 >

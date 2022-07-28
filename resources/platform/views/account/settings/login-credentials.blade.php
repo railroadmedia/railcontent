@@ -8,7 +8,7 @@
     <div id="editForm" class="tw-flex tw-flex-col">
         
         <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
-            <h1 class="tw-text-2xl tw-font-bold tw-text-black dark:tw-text-white">Login Credentials</h1>
+            <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white">Login Credentials</h1>
         </div>
 
         <div class="tw-flex tw-flex-row pa-3 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">

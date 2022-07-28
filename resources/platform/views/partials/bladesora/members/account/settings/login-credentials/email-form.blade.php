@@ -80,7 +80,7 @@
                             </span>
                         </button>
 
-                        <a class="btn collapse-150 close-modal corners-10 flat tw-text-black flat short">
+                        <a class="btn collapse-150 close-modal corners-10 flat tw-text-[#00101D] flat short">
                             Cancel
                         </a>
                     </div>

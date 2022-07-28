@@ -50,13 +50,13 @@
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </span>
@@ -74,7 +74,7 @@
                             class="no-decoration tw-cursor-pointer tw-mr-1"
                             @click="deleteComment"
                         >
-                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-black dark:tw-text-[#9EC0DC]" />
+                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
                         </span>
 
                         <!--<span class="tiny no-decoration text-grey-3 pointer">-->
@@ -96,11 +96,11 @@
             </div>
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
+                <div class="tw-flex tw-flex-col tw-my-2 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
                             class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'tw-text-black dark:tw-text-white'"
+                            :class="comment.is_liked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             dusk="like-button"
                             @click="likeComment"
                         >
@@ -112,7 +112,7 @@
 
                         <p
                             class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="replying ? themeTextClass : 'tw-text-black dark:tw-text-white'"
+                            :class="replying ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             dusk="reply-button"
                             @click="replyToComment"
                         >
@@ -125,12 +125,12 @@
                         <span class="tw-flex-grow"></span>
 
                         <p
-                            class="dark:tw-text-white tw-text-black tw-cursor-pointer tw-flex tw-items-center"
+                            class="dark:tw-text-white tw-text-[#00101D] tw-cursor-pointer tw-flex tw-items-center"
                             :data-open-modal="openModalString"
                             @click="openLikes"
                         >
                             <ThumbUpIcon
-                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-[#00101D] tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             />&nbsp;{{ comment.like_count }}
                         </p>
@@ -165,7 +165,7 @@
                         </div>
                         <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                             <a
-                                class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
+                                class="btn flat dark:tw-text-white tw-text-[#00101D] collapse-150 short tw-mr-1"
                                 @click="cancelReply"
                             >
                                 Cancel
@@ -266,7 +266,7 @@ export default {
     props: {
         brand: {
             type: String,
-            default: () => '',
+            default: () => 'drumeo',
         },
         currentUser: {
             type: Object,
@@ -277,10 +277,7 @@ export default {
                 avatar: '',
             }),
         },
-        profileBaseRoute: {
-            type: String,
-            default: '/laravel/public/members/profile/',
-        },
+
         comment: {
             type: Object,
             default: () => ({
@@ -328,6 +325,10 @@ export default {
             }
 
             return Utils.parseXpValue(this.comment.user.xp);
+        },
+
+        profileBaseRoute() {
+            return '/' + this.brand + '/profile/'
         },
 
         userExpRank() {
@@ -389,7 +390,7 @@ export default {
         },
 
         profileRoute() {
-            return this.profileBaseRoute + this.comment.user_id;
+            return this.profileBaseRoute + this.comment.user_id + '/dashboard';
         },
 
         isLiked() {

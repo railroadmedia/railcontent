@@ -8,7 +8,7 @@
 
     @component('partials._header-banner')
         @slot('content')
-            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
+            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     <i class="icon-learning-paths tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
                     <span class="tw-text-32 tw-font-bold">Learning Paths</span>

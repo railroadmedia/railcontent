@@ -33,7 +33,7 @@
                 <div class="pv-5 hide-md-down"></div>
                 @if($pack['slug'] == 'piano-technique-made-easy')
                     <div
-                        class="tw-flex tw-flex-col tw-mb-4 tw-rounded ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-pointer"
+                        class="tw-flex tw-flex-col tw-mb-4 tw-rounded ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
                         data-open-modal="previewModal"
                         style="width:80px;"
                     >

@@ -97,7 +97,7 @@
     @endif
 
     {{-- Content Progress --}}
-    <div class="tw-w-full fluid tw-bg-{{ $brand }}">
+    <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
         @include('partials.bladesora.members.content.content-progress', [
             "themeColor" => $brand,
             "brand" => $brand,
@@ -176,16 +176,16 @@
                 class="flex flex-row no-decoration hover-bg-grey-7 dark:hover:tw-bg-[#002039] tw-relative text-grey-3 hover-text-black content-overview pv-2">
 
                     <div class="flex flex-column">
-                        <p class="tw-text-black dark:tw-text-white tw-text-2xl tw-font-bold tw-mt-[5px]">Pianote Foundations</p>
+                        <p class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-mt-[5px]">Pianote Foundations</p>
                     </div>
 
-                    <div class="tw-text-black dark:tw-text-white tw-text-2xl tw-font-bold tw-flex tw-flex-col tw-justify-center tw-text-center hide-sm-down tw-mr-2">
+                    <div class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-flex tw-flex-col tw-justify-center tw-text-center hide-sm-down tw-mr-2">
                         10 Levels
                     </div>
 
                     <div class="flex flex-column icon-col align-v-center hide-xs-only">
                         <div class="body">
-                            <i class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black rounded fa-play-circle"></i>
+                            <i class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] rounded fa-play-circle"></i>
                         </div>
                     </div>
                 </a>

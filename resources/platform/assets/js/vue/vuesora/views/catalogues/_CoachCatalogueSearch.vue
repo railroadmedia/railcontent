@@ -11,7 +11,7 @@
           name="search"
           autocomplete="off"
           placeholder="Search..."
-          class="no-label tw-bg-transparent tw-w-full tw-mr-5 tw-py-0 tw-h-[50px] dark:placeholder:tw-text-white tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-black tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+          class="no-label tw-bg-transparent tw-w-full tw-mr-5 tw-py-0 tw-h-[50px] dark:placeholder:tw-text-white tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
           @keydown.enter="submitSearch"
         />
         <button
@@ -50,7 +50,7 @@
             >
               <option v-for="(option, i) in coachFilterOptions" 
                      :key="i" 
-                     class="tw-text-black"
+                     class="tw-text-[#00101D]"
                      :value="option.value"
                      :selected="sort === option.value"     
               >
