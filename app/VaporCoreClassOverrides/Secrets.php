@@ -1,6 +1,6 @@
 <?php
 
-namespace App\VaporCoreClassOverrides;
+namespace Laravel\Vapor\Runtime;
 
 use Aws\Ssm\SsmClient;
 use Dotenv\Dotenv;
@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
  *
  * For class override also see: https://stackoverflow.com/questions/28104574/strategy-to-override-a-class-in-a-library-installed-with-composer
  */
-class Secrets extends \Laravel\Vapor\Runtime\Secrets
+class Secrets
 {
     /**
      * Add all of the secret parameters at the given path to the environment.
