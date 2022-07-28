@@ -47,23 +47,25 @@
           >
             <option
                 value="-popularity"
+                class="dark:tw-text-black"
                 :selected="sort === '-popularity'"
             >
               Most Popular
             </option>
             <option
                 value="-published_on"
+                class="dark:tw-text-black"
                 :selected="sort === '-published_on'"
             >
               Newest First
             </option>
-            <option value="published_on" :selected="sort === 'published_on'">
+            <option value="published_on" class="dark:tw-text-black" :selected="sort === 'published_on'">
               Oldest First
             </option>
-            <option value="slug" :selected="sort === 'slug'">
+            <option value="slug" :selected="sort === 'slug'" class="dark:tw-text-black">
               Name: A to Z
             </option>
-            <option value="-slug" :selected="sort === '-slug'">
+            <option value="-slug" :selected="sort === '-slug'" class="dark:tw-text-black">
               Name: Z to A
             </option>
           </select>

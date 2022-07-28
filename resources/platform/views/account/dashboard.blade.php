@@ -48,7 +48,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 
             {{-- Dashboard Header --}}
             <div class="tw-flex tw-flex-row tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-mb-5 md:tw-mb-7">
-                <h1 class="tw-font-bold tw-text-[24px] tw-leading-none lg:tw-leading-none tw-mb-4 md:tw-mb-6">
+                <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
                     {{ $isCurrentUsersProfile ? 'My' : possessivize($dashboardUser->display_name) }} Dashboard
                 </h1>
             </div>
@@ -57,9 +57,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
             <section class="tw-flex tw-flex-col tw-mb-5 md:tw-mb-7 tw-text-[#00101D] dark:tw-text-white tw-w-full">
                 {{-- Title --}}
                 <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                    <h2
-                        class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-[18px] tw-leading-none lg:tw-leading-none ">
-                        My Stats</h2>
+                    <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-2xl lg:tw-text-3xl tw-leading-none lg:tw-leading-none">My Stats</h2>
                 </div>
                 {{-- Metrics --}}
                 <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
