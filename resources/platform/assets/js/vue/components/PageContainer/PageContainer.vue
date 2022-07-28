@@ -99,6 +99,7 @@ const onColorModeToggle = (val) => {
   }
 };
 
+//LifeCycle Methods
 
 onBeforeMount(() => {
   //Set Dark Mode Based on User Preferences
@@ -114,13 +115,13 @@ onBeforeMount(() => {
 
   //Set Sidebar State
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
+
   if (smallBreakpoint.matches) {
-    if (localStorage.getItem("isSidebarHidden")) {
-      isSidebarHidden.value = JSON.parse(localStorage.getItem("isSidebarHidden"));
-    } else {
+    //Close sidebar by default in mobile
+    if(!isSidebarHidden.value) {
       isSidebarHidden.value = true;
+      isSidebarCollapsed.value = false;
     }
-    isSidebarCollapsed.value = false;
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));

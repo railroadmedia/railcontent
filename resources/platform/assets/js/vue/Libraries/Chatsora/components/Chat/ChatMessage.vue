@@ -15,10 +15,10 @@
                 ><i class="fal fa-thumbtack"></i><span class="tw-ml-1 leading-none">Pinned</span></a>
             </div>
         </div>
-        <div class="tw-flex tw-flex-col tw-max-w-full" v-if="messageEdit.id != message.id && message.type != 'system'">
+        <div class="tw-flex tw-flex-col tw-max-w-full" v-if="messageEdit.id != message.id && message.type != 'system'" lang="en">
             <chat-user :user="message.user">
                 <template v-slot:footer>
-                    <div v-html="message.text" class="cs-message-text tw-whitespace-normal cs-text-sm"></div>
+                    <div v-html="message.text" class="cs-message-text tw-break-words cs-text-sm"></div>
                     <div class="tw-inline-flex tw-items-center" v-if="$_has_reactions || showUpvote">
                         <div
                             class="cs-upvote tw-flex tw-flex-row tw-items-center tw-px-3 tw-rounded-full cs-text-xs"
