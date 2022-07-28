@@ -21952,6 +21952,12 @@ a:visited{
 .tw-top-1{
   top: 0.25rem !important;
 }
+.tw-right-0{
+  right: 0px !important;
+}
+.tw-top-0{
+  top: 0px !important;
+}
 .tw-z-10{
   z-index: 10 !important;
 }
@@ -22346,6 +22352,18 @@ a:visited{
 .tw-ml-\[35px\]{
   margin-left: 35px !important;
 }
+.tw-ml-auto{
+  margin-left: auto !important;
+}
+.tw-mb-3{
+  margin-bottom: 0.75rem !important;
+}
+.tw-mr-12{
+  margin-right: 3rem !important;
+}
+.tw-mr-2{
+  margin-right: 0.5rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22555,6 +22573,12 @@ a:visited{
 }
 .tw-h-52{
   height: 13rem !important;
+}
+.tw-h-12{
+  height: 3rem !important;
+}
+.tw-h-full{
+  height: 100% !important;
 }
 .tw-max-h-8{
   max-height: 2rem !important;
@@ -22816,6 +22840,12 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-12{
+  width: 3rem !important;
+}
 .tw-min-w-\[175px\]{
   min-width: 175px !important;
 }
@@ -22908,6 +22938,9 @@ a:visited{
 }
 .tw-flex-grow-0{
   flex-grow: 0 !important;
+}
+.tw-flex-grow{
+  flex-grow: 1 !important;
 }
 .tw-grow{
   flex-grow: 1 !important;
@@ -23669,6 +23702,13 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-white{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-transparent{
+  background-color: transparent !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23793,6 +23833,9 @@ a:visited{
 }
 .tw-p-\[3px\]{
   padding: 3px !important;
+}
+.tw-p-3{
+  padding: 0.75rem !important;
 }
 .tw-px-4{
   padding-left: 1rem !important;
@@ -24149,6 +24192,15 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
+.tw-pb-6{
+  padding-bottom: 1.5rem !important;
+}
+.tw-pl-2{
+  padding-left: 0.5rem !important;
+}
+.tw-pr-2{
+  padding-right: 0.5rem !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24175,12 +24227,6 @@ a:visited{
 }
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
-}
-.tw-text-\[24px\]{
-  font-size: 24px !important;
-}
-.tw-text-\[18px\]{
-  font-size: 18px !important;
 }
 .tw-text-2xl{
   font-size: 1.5rem !important;
@@ -24239,6 +24285,9 @@ a:visited{
 .tw-text-\[20px\]{
   font-size: 20px !important;
 }
+.tw-text-\[24px\]{
+  font-size: 24px !important;
+}
 .tw-text-\[44px\]{
   font-size: 44px !important;
 }
@@ -24252,6 +24301,9 @@ a:visited{
 .tw-text-\[13px\]{
   font-size: 13px !important;
 }
+.tw-text-\[18px\]{
+  font-size: 18px !important;
+}
 .tw-text-\[10px\]{
   font-size: 10px !important;
 }
@@ -24260,6 +24312,10 @@ a:visited{
 }
 .tw-text-\[75px\]{
   font-size: 75px !important;
+}
+.tw-text-sm{
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
 }
 .tw-font-bold{
   font-weight: 700 !important;
@@ -24507,6 +24563,14 @@ a:visited{
 .tw-text-\[\#002039\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -24888,6 +24952,10 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(158 192 220 / var(--tw-border-opacity)) !important;
 }
+.tw-dark .dark\:tw-border-\[\#223F57\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(34 63 87 / var(--tw-border-opacity)) !important;
+}
 .tw-dark .dark\:tw-border-b-\[\#102230\]{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(16 34 48 / var(--tw-border-opacity)) !important;
@@ -24938,6 +25006,9 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+.tw-dark .dark\:tw-bg-transparent{
+  background-color: transparent !important;
+}
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -24973,6 +25044,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#000C17\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -25129,6 +25204,9 @@ a:visited{
   .sm\:tw-inline-block{
     display: inline-block !important;
   }
+  .sm\:tw-inline-block{
+    display: inline-block !important;
+  }
   .sm\:tw-flex{
     display: flex !important;
   }
@@ -25275,6 +25353,10 @@ a:visited{
   .sm\:tw-text-xs{
     font-size: 0.75rem !important;
     line-height: 1rem !important;
+  }
+  .sm\:tw-text-xl{
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
   }
 }
 @media (min-width: 768px){
@@ -25588,6 +25670,9 @@ a:visited{
   }
   .md\:tw-flex-wrap{
     flex-wrap: wrap !important;
+  }
+  .md\:tw-flex-nowrap{
+    flex-wrap: nowrap !important;
   }
   .md\:tw-items-center{
     align-items: center !important;
