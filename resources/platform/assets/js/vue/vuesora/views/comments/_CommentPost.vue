@@ -96,7 +96,7 @@
             </div>
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
+                <div class="tw-flex tw-flex-col tw-my-2 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
                             class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
