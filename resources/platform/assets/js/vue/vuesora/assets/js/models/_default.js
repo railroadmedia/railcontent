@@ -66,7 +66,9 @@ export default class ContentModel {
             return instructor.fields.find(field => field.key === 'name').value;
         }
 
-        return 'TBD';
+        const randomTestInstructors = ['Jared Falk', 'Steve Smith', 'Simon Philips', 'Sharon Ransom', 'Hannah Welton', 'John Wooton'];
+
+        return randomTestInstructors[Math.floor(Math.random()*randomTestInstructors.length)];
     }
 
     getInstructors() {
