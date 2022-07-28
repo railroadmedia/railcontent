@@ -20451,6 +20451,11 @@ ul {
 .cs-messages-container:not(.cs-fit) {
   min-height: 300px !important;
 }
+@media screen and (max-width: 1535px) {
+  .cs-messages-container:not(.cs-fit) {
+    padding-bottom: 85px;
+  }
+}
 .cs-messages-container::-webkit-scrollbar {
   width: 10px;
 }
@@ -20588,6 +20593,7 @@ ul {
 }
 .cs-new-message-container .cs-new-message-wrapper textarea {
   padding: 0;
+  padding-top: 0px !important;
   width: 100% !important;
   height: 100% !important;
   color: #8C9698;
@@ -20622,6 +20628,7 @@ ul {
 .cs-new-message-container .cs-new-message-wrapper textarea:focus {
   outline-color: transparent;
   outline-style: none;
+  box-shadow: none;
 }
 .cs-new-message-container .cs-new-message-wrapper textarea:-moz-focusring {
   color: #8C9698;
@@ -23217,9 +23224,6 @@ a:visited{
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
-}
-.tw-whitespace-normal{
-  white-space: normal !important;
 }
 .tw-whitespace-nowrap{
   white-space: nowrap !important;

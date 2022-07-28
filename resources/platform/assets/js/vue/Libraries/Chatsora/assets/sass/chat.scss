@@ -236,6 +236,11 @@
 
   &:not(.cs-fit) {
     min-height: 300px !important;
+
+    @media screen and (max-width: 1535px) {
+      padding-bottom: 85px;
+    }
+
   }
 
   /* width */
@@ -403,6 +408,7 @@
 
     textarea {
       padding: 0;
+      padding-top: 0px !important;
       width: 100% !important;
       height: 100% !important;
       color: $gray2Color;
@@ -429,6 +435,7 @@
       &:focus {
         outline-color: transparent;
         outline-style: none;
+        box-shadow: none;
       }
     }
 
