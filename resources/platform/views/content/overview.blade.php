@@ -97,7 +97,7 @@
     @endif
 
     {{-- Content Progress --}}
-    <div class="tw-w-full fluid tw-bg-{{ $brand }}">
+    <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
         @include('partials.bladesora.members.content.content-progress', [
             "themeColor" => $brand,
             "brand" => $brand,

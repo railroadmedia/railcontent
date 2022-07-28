@@ -137,10 +137,10 @@
 {{--                </div>--}}
 
                 <div class="tw-flex tw-flex-row pa-3">
-                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white tw-btn-small" type="submit">
+                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white tw-mr-2" type="submit">
                         Save
                     </button>
-                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent tw-text-black dark:tw-text-white tw-ml-1" type="reset">
+                    <button class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white dark:hover:tw-bg-white/10 hover:tw-bg-black/10" type="reset">
                         Cancel
                     </button>
                 </div>

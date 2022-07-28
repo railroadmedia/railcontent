@@ -160,7 +160,7 @@
                 ])
             @endif
 
-            <div class="container-fluid tw-bg-{{ $brand }}">
+            <div class="container-fluid tw-bg-{{ $brand }} tw-rounded-[10px]">
                 @include('partials.bladesora.members.content.content-progress', [
                     "themeColor" => '{{ $brand }}',
                     "contentType" => $lessonContent->fetch('type'),
