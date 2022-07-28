@@ -49,12 +49,14 @@ class MentorService
     {
         $brand = $this->getPrimaryBrandForAssigningMentor($userId);
         if (!$brand) {
-            return;
+            throw new Exception("Unable to choose a brand for user '$userId'");
         }
+        $this->assignMentorByBrand($brand, $userId);
+    }
+
+    public function assignMentorByBrand(int $userId, string $brand): void
+    {
         $mentor = $this->chooseMentor($brand);
-        if (!$mentor) {
-            return;
-        }
         $mentorStudent = new MentorStudent();
         $mentorStudent->user_id = $userId;
         $mentorStudent->primary_brand = $brand;
@@ -63,6 +65,14 @@ class MentorService
 
         $mentor->active_student_count += 1;
         $mentor->save();
+    }
+
+    public function reassignMentor(MentorStudent $mentorStudent)
+    {
+        $mentor = $this->chooseMentor($mentorStudent->primary_brand);
+        $mentorStudent->mentor_user_id = $mentor->user_id;
+
+        $mentor->active_student_count += 1;
     }
 
     public function ensureMentorAssigned(int $userId)
@@ -87,7 +97,7 @@ class MentorService
      * @param string $brand
      * @return Mentor|null
      */
-    private function chooseMentor(string $brand): ?Mentor
+    public function chooseMentor(string $brand): ?Mentor
     {
         $mentors = $this->getMentorsByBrand($brand);
         if ($mentors->count() == 0) {
@@ -97,6 +107,9 @@ class MentorService
         $mentorsWithLowestStudentPercentage = $this->getMentorsWithLowestStudentPercentage($mentors);
         $index = rand(0, $mentorsWithLowestStudentPercentage->count() - 1);
         $mentor = $mentorsWithLowestStudentPercentage->values()[$index];
+        if (!$mentor) {
+            throw new Exception("Unable to choose a mentor for brand '$brand'");
+        }
         return $mentor;
     }
 
@@ -123,8 +136,21 @@ class MentorService
         return $mentors;
     }
 
-    public function hasMentor(int $userId): bool
+    public function delete(int $mentorUserId)
     {
-        return Mentor::query()->whereKey($userId)->exists();
+        $mentorStudents = MentorStudent::query()
+            ->where('mentor_user_id', '=', $mentorUserId)
+            ->get();
+        Mentor::query()->where('user_id', '=', $mentorUserId)->delete();
+        foreach ($mentorStudents as $mentorStudent) {
+            $this->reassignMentor($mentorStudent);
+        }
     }
+
+    public function hasMentor(int $userId)
+    {
+        return MentorStudent::query()->where('user_id', '=', $userId)->exists();
+    }
+
+
 }

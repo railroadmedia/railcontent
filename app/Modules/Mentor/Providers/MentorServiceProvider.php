@@ -39,7 +39,7 @@ class MentorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php',
+            __DIR__ . '/../config/mentor.php',
             'mentor'
         );
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Mentor\Listeners;
+namespace Modules\Mentor\Listeners;
 
 use App\Modules\Mentor\Services\MentorService;
 use Railroad\Ecommerce\Events\GiveContentAccess;
