@@ -49,7 +49,7 @@
 
                 <div
                     v-if="editing"
-                    class="tw-flex tw-flex-col tw-mb-1"
+                    class="tw-flex tw-flex-col tw-mb-1 tw-w-full"
                 >
                     <form
                         :action="updatePostRoute"
@@ -64,24 +64,20 @@
                             :initial-value="post.postBody"
                         />
 
-                        <div class="tw-flex tw-flex-row align-h-right tw-mt-2">
+                        <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4">
                             <a
-                                class="btn tw-bg-black tw-text-black tw-no-underline flat collapse-150 tw-border-none tw-mr-1"
+                                class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
                                 @click="editing = false"
                             >
                                 Cancel
                             </a>
 
                             <button
-                                class="btn collapse-250"
+                                class="tw-btn-primary"
+                                :class="`tw-bg-${ brand }`"
                                 type="submit"
                             >
-                                <span
-                                    class="tw-text-white corners-10"
-                                    :class="themeBgClass"
-                                >
                                     Save Post
-                                </span>
                             </button>
                         </div>
                     </form>
@@ -93,7 +89,7 @@
                 <div class="tw-flex tw-flex-col mb-1">
                 <div class="tw-flex tw-flex-row tw-items-center">
                     <p
-                        class="tw-text-lg tw-mr-1 tw-uppercase dense tw-pointer reply-like noselect"
+                        class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
                         :class="post.isLiked ? themeTextClass : 'text-grey-3'"
                         @click="likePost"
                     >
@@ -103,7 +99,7 @@
                     ></i>
                     </p>
                     <p
-                        class="tw-text-lg tw-mr-2 tw-uppercase dense tw-pointer reply-like noselect"
+                        class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
                         :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :data-open-modal="openModalString"
                         @click="openLikes"
@@ -119,7 +115,7 @@
                     Reply
                     </p>
                     <button
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
                         data-open-modal="sharePostModal"
                         title="Share this post"
                         @click="$emit('updateCurrentPostID', post.id)"
@@ -132,25 +128,25 @@
                 <div class="tw-flex tw-flex-col mb-1 tw-ml-auto">
                 <div class="tw-flex tw-flex-row tw-items-center">
                     <p
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                         @click="reportPost"
                     >
                     Report
                     </p>
-                    <!--<p v-if="currentUser.isAdmin" class="x-tiny text-grey-2 ml-3 font-bold font-italic tw-uppercase dense tw-pointer"-->
+                    <!--<p v-if="currentUser.isAdmin" class="x-tiny text-grey-2 ml-3 font-bold font-italic tw-uppercase dense tw-cursor-pointer"-->
                     <!--@click="hidePost">-->
                     <!--Hide-->
                     <!--</p>-->
                     <p
                         v-if="index !== 0 && canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                         @click="deletePost"
                     >
                     Delete
                     </p>
                     <p
                         v-if="canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-pointer"
+                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                         @click="editing = !editing"
                     >
                     Edit

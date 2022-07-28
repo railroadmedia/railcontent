@@ -55,8 +55,7 @@ const props = defineProps({
 const buildCarouselData = (info) => {
     return gearCarouselMap.map(({ imgKey, attributes, ...rest }) => {
         return ({
-            // img_src: info[imgKey],
-            img_src: 'https://via.placeholder.com/600x300.png/00aa55?text=omnis',
+            img_src: info[imgKey],
             attributes: attributes.map(({ label, key }) => ({
                 label, value: info[key]
             })),

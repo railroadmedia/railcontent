@@ -16,17 +16,17 @@
         
             <!-- Description -->
             <div class="tw-flex tw-flex-col tw-justify-center tw-pr-4 tw-mr-auto">
-                <p class="tw-text-13 tw-text-black tw-font-bold dark:tw-text-white">
+                <p class="tw-text-sm tw-text-black tw-font-bold dark:tw-text-white">
                     <i v-if="thread.isPinned" class="fas fa-thumbtack tw-mr-1"></i>
                     <i v-if="thread.isLocked" class="fas fa-lock tw-mr-1"></i>
                     {{ thread.title }}
                 </p>
-                <p class="tw-text-13 tw-text-gray-600 dark:tw-text-white">
+                <p class="tw-text-sm tw-text-gray-600 dark:tw-text-white">
                     Started <strong class="dark:tw-text-[#9EC0DC]">{{ thread.createdOn }}</strong> by <strong class="dark:tw-text-[#9EC0DC]">{{ thread.authorUsername }}</strong> 
                 </p>
                 <!-- Responsive version (could not reorder with flex) -->
-                <p class="tw-text-13 tw-text-gray-600 dark:tw-text-white lg:tw-hidden">
-                    <span class="tw-text-13 tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</span>
+                <p class="tw-text-sm tw-text-gray-600 dark:tw-text-white lg:tw-hidden">
+                    <span class="tw-text-sm tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</span>
                     <span>By: <span class="tw-font-bold">{{  thread.latestPost ? thread.latestPost.author_display_name : '' }}</span></span>
                 </p>
             </div>
@@ -34,14 +34,14 @@
             <!-- Thread Category -->
             <div v-if="thread.category"
                 class="tw-hidden tw-mx-6 tw-w-52 tw-items-center tw-flex-shrink-0 xl:tw-flex">
-                <p class="tw-text-13 tw-text-black tw-font-bold">
+                <p class="tw-text-sm tw-text-black tw-font-bold">
                     {{ thread.category }}
                 </p>
             </div>
 
             <!-- Reply Count -->
             <div class="tw-items-center tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-flex-shrink-0 tw-flex-shrink-0 tw-w-24 tw-text-left tw-hidden tw-pr-2 sm:tw-inline-flex">
-                <h6 class="tw-text-13 tw-font-bold">
+                <h6 class="tw-text-sm tw-font-bold">
                     <i class="fas fa-comment-lines tw-mr-1"></i>
                     {{ replyCount }}
                 </h6>
@@ -50,8 +50,8 @@
         <a :href="thread.latestPost ? thread.latestPost.url : '#'" class="tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-transition-colors hover:tw-bg-gray-100 tw-py-6 tw-inline-flex tw-items-center tw-no-underline tw-h-full tw-px-4 sm:tw-px-8 sm:tw-w-28 lg:tw-w-full lg:tw-max-w-xs">
             <!-- Post Date -->
             <div class="tw-flex-col tw-justify-center tw-mr-6 tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-flex-shrink-0 tw-w-28 tw-hidden lg:tw-flex">
-                <h6 class="tw-text-13 tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</h6>
-                <p class="tw-text-13 tw-truncate">
+                <h6 class="tw-text-sm tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</h6>
+                <p class="tw-text-sm tw-truncate">
                     <span class="">By:</span>
                     <span class="tw-font-bold">{{  thread.latestPost ? thread.latestPost.author_display_name : ''}}</span>
                 </p>
@@ -60,7 +60,7 @@
             <!-- New Badge-->
             <div v-if="thread.isNew"
                  class="tw-flex-col tw-hidden tw-mr-6 tw-hidden lg:tw-flex">
-                <span class="tw-text-white tw-rounded-sm tw-rounded-full tw-uppercase tw-flex tw-px-2 tw-py-1.5 tw-text-13 tw-items-center tw-font-bold"
+                <span class="tw-text-white tw-rounded-sm tw-rounded-full tw-uppercase tw-flex tw-px-2 tw-py-1.5 tw-text-sm tw-items-center tw-font-bold"
                     :class="brandBgColor">
                     <i class="fas fa-star tw-mr-0.5"></i> New
                 </span>
