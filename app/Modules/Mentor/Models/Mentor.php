@@ -21,10 +21,17 @@ class Mentor extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function students()
+    {
+        return $this->hasMany(MentorStudent::class, 'user_id');
+    }
+
     public function getActiveStudentPercentage(): float
     {
         $max = $this->active_student_max_count;
-        if ($max == 0) $max = config('mentor.default_active_student_max_count');
+        if ($max == 0) {
+            $max = config('mentor.default_active_student_max_count');
+        }
         return $this->active_student_count / $max;
     }
 

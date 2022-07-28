@@ -30,31 +30,46 @@ class MentorServiceTest extends TestCase
         $this->mentorService = app(MentorService::class);
     }
 
-    private function assignMentor($brand)
+    public function test_assign_mentor()
     {
+        $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
         $user = User::factory()->create();
 
         $this->assertFalse($this->mentorService->hasMentor($user->id));
         $this->mentorService->assignMentorByBrand($user->id, $brand);
         $this->assertTrue($this->mentorService->hasMentor($user->id));
-        return [$user, $mentor];
     }
 
-
-    public function test_assign_mentor()
+    public function test_mentor_student_count()
     {
         $brand = 'drumeo';
-        list($user, $mentor) = $this->assignMentor($brand);
+        $mentor = $this->createMentor($brand);
+        $user = User::factory()->create();
+        $this->mentorService->assignMentorByBrand($user->id, $brand);
+        $user2 = User::factory()->create();
+        $this->mentorService->assignMentorByBrand($user2->id, $brand);
+        $user3 = User::factory()->create();
+        $this->mentorService->assignMentorByBrand($user3->id, $brand);
+        $this->assertEquals(3, $user3->mentorStudent->mentor->active_student_count);
     }
 
+    /** @var User $user */
     public function test_delete_mentor()
     {
         $brand = 'drumeo';
+        $mentor = $this->createMentor($brand);
+        $user = User::factory()->create();
+        $this->mentorService->assignMentorByBrand($user->id, $brand);
+        $user = User::factory()->create();
+        $this->mentorService->assignMentorByBrand($user->id, $brand);
 
-        list($user, $mentor) = $this->assignMentor($brand);
         $mentor2 = $this->createMentor($brand);
+
         $this->mentorService->delete($mentor->user_id);
         $this->assertTrue($this->mentorService->hasMentor($user->id));
+        $this->assertTrue($mentor2->is($user->mentorStudent->mentor));
+        $this->assertEquals(2, $user->mentorStudent->mentor->active_student_count);
+
     }
 }

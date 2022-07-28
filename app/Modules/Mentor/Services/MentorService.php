@@ -60,7 +60,7 @@ class MentorService
         $mentorStudent = new MentorStudent();
         $mentorStudent->user_id = $userId;
         $mentorStudent->primary_brand = $brand;
-        $mentorStudent->mentor_user_id = $mentor->user_id;
+        $mentorStudent->mentor()->associate($mentor);
         $mentorStudent->save();
 
         $mentor->active_student_count += 1;
@@ -70,9 +70,11 @@ class MentorService
     public function reassignMentor(MentorStudent $mentorStudent)
     {
         $mentor = $this->chooseMentor($mentorStudent->primary_brand);
-        $mentorStudent->mentor_user_id = $mentor->user_id;
+        $mentorStudent->mentor()->associate($mentor);
+        $mentorStudent->save();
 
         $mentor->active_student_count += 1;
+        $mentor->save();
     }
 
     public function ensureMentorAssigned(int $userId)
@@ -119,7 +121,7 @@ class MentorService
      */
     private function getMentorsWithLowestStudentPercentage($mentors): mixed
     {
-        $lowestStudentPercentage = $mentors->map(fn($t) => $t->getActiveStudentPercentage())->min();
+        $lowestStudentPercentage = $mentors->map(fn(Mentor $t) => $t->getActiveStudentPercentage())->min();
         $mentorsWithLowestStudentPercentage = $mentors->where(
             fn($t) => $t->getActiveStudentPercentage() == $lowestStudentPercentage
         );
@@ -151,6 +153,4 @@ class MentorService
     {
         return MentorStudent::query()->where('user_id', '=', $userId)->exists();
     }
-
-
 }
