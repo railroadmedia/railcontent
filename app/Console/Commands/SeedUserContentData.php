@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Maps\ContentTypes;
 use App\Modules\Brand\Enums\Brand;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -488,6 +489,17 @@ class SeedUserContentData extends Command
 
         foreach (Brand::cases() as $brandEnum) {
             $brandString = $brandEnum->value;
+
+            for ($i = 0; $i < 68; $i++) {
+                $dbConnection->table('railcontent_content')
+                    ->where('id', $this->contentIdMap[$brandString][$i])
+                    ->update(
+                        [
+                            'status' => 'published',
+                            'published_on' => Carbon::now()->subDays(rand(1, 100))->toDateTimeString(),
+                        ]
+                    );
+            }
 
             // user content progress starts
             for ($i = 0; $i < 10; $i++) {
