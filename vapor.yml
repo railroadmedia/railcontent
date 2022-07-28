@@ -38,10 +38,11 @@ environments:
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     beta-testing:
         domain: 'beta-testing.musora.com'
+        warm: 1
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
+        memory: 1024
         cli-memory: 2048
         cli-timeout: 900
         timeout: 120
