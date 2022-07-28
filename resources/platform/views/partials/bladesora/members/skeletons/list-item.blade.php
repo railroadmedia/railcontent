@@ -2,7 +2,7 @@
      pa-1 tw-cursor-pointer tw-relative text-grey-3 hover-bg-grey-7 hover-text-black"
 >
     @if($showNumbers)
-        <div class="tw-flex tw-flex-col align-left number-col title tw-text-black hide-xs-only">
+        <div class="tw-flex tw-flex-col align-left number-col title tw-text-[#00101D] hide-xs-only">
             <div class="skeleton-loader corners-10" style="height:12px;width:8px;"></div>
         </div>
     @endif

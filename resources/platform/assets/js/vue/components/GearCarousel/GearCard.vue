@@ -35,13 +35,13 @@ onMounted(() => {
 <template>
     <div :style="{ ...isCurrentSlide ? {} : { width: '0 !important', padding: '0 !important', margin: '0 !important', border: '0 !important' } }"
         class="tw-flex tw-flex-col tw-rounded-[8px] tw-border-[1px] tw-border-[#223F57] tw-bg-[#223F57]/10 tw-w-full xl:tw-max-w-[665px] tw-p-[32px] tw-shrink-0 tw-overflow-hidden">
-        <div class="tw-flex tw-text-black dark:tw-text-white tw-justify-between tw-items-center">
+        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-justify-between tw-items-center">
             <button @click="emit('onPrevSlide')" class="tw-cursor-pointer">
-                <ChevronLeftIcon class=" tw-text-black dark:tw-text-[#9EC0DC] tw-h-[32px]" />
+                <ChevronLeftIcon class=" tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-h-[32px]" />
             </button>
             <h2 class="tw-text-[16px] tw-font-bold">{{ title }}</h2>
             <button @click="emit('onNextSlide')" class="tw-cursor-pointer">
-                <ChevronRightIcon class=" tw-text-black dark:tw-text-[#9EC0DC] tw-h-[32px]" />
+                <ChevronRightIcon class=" tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-h-[32px]" />
             </button>
         </div>
         <div class="tw-w-full tw-py-[24px]">
@@ -55,7 +55,7 @@ onMounted(() => {
                 <div class="tw-pt-[24px] tw-italic tw-text-[#9EC0DC] tw-text-[16px]">No Gear Photo Added</div>
             </div>
         </div>
-        <div v-for="{ label, value } in attributes" class="tw-grid tw-grid-cols-2 tw-text-black dark:tw-text-[#9EC0DC]">
+        <div v-for="{ label, value } in attributes" class="tw-grid tw-grid-cols-2 tw-text-[#00101D] dark:tw-text-[#9EC0DC]">
             <div>{{ label }}:</div>
             <div>{{ value }}</div>
         </div>

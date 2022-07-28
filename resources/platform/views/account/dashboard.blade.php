@@ -134,17 +134,17 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                             About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
                         </h1>
 
-                        <div class="tw-flex tw-text-black dark:tw-text-white tw-mb-[12px]">
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[12px]">
                             <span class="tw-font-bold">Full Name:&nbsp;</span>
                             <span>{{ $dashboardUser->first_name }}&nbsp;{{ $dashboardUser->last_name }}</span>
                         </div>
 
-                        <div class="tw-flex tw-text-black dark:tw-text-white tw-mb-[25px]">
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
                             <span class="tw-font-bold">Birthday:&nbsp;</span>
                             <span>{{ $dashboardUser->birthday }}</span>
                         </div>
 
-                        <div class="tw-flex tw-text-black dark:tw-text-white tw-mb-[25px]">
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
                             {{ $dashboardUser->biography }}
                         </div>
                     </div>

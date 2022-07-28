@@ -68,7 +68,7 @@
             </div>
 
             <div class="flex flex-column align-center grow no-events">
-                <h4 class="title text-center tw-text-black">
+                <h4 class="title text-center tw-text-[#00101D]">
                     {{ $_title }}
                 </h4>
                 <h6 class="body text-center text-grey-4 mb-2">
@@ -107,7 +107,7 @@
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-step-backward tw-text-black"></i>
+                    <i class="fas fa-step-backward tw-text-[#00101D]"></i>
                 </span>
             </button>
 
@@ -118,7 +118,7 @@
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-undo tw-text-black"></i>
+                    <i class="fas fa-undo tw-text-[#00101D]"></i>
                 </span>
             </button>
 
@@ -129,7 +129,7 @@
             >
                 <span class="flat bg-black">
                     <i
-                        class="fas tw-text-black"
+                        class="fas tw-text-[#00101D]"
                         :class="!audioPlayer.paused ? 'fa-pause' : 'fa-play'"
                     ></i>
                 </span>
@@ -141,7 +141,7 @@
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-redo tw-text-black"></i>
+                    <i class="fas fa-redo tw-text-[#00101D]"></i>
                 </span>
             </button>
 
@@ -152,7 +152,7 @@
                 @keydown.prevent
             >
                 <span class="flat bg-black">
-                    <i class="fas fa-step-forward tw-text-black"></i>
+                    <i class="fas fa-step-forward tw-text-[#00101D]"></i>
                 </span>
             </button>
         </div>

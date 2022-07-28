@@ -66,7 +66,7 @@
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4">
                             <a
-                                class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
+                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
                                 @click="editing = false"
                             >
                                 Cancel

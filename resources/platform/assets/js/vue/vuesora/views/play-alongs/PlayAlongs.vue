@@ -5,7 +5,7 @@
             class="flex flex-row mt-2"
         >
             <div class="flex flex-column align-v-center">
-                <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                     {{ totalResults }} Play Alongs
                 </h1>
             </div>

@@ -58,7 +58,7 @@
                 @endif
 
                 <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif
-                   class="tw-font-bold tw-text-black dark:tw-text-white no-decoration tw-mb-2 tw-text-xl">                  
+                   class="tw-font-bold tw-text-[#00101D] dark:tw-text-white no-decoration tw-mb-2 tw-text-xl">                  
                    {{ $itemTitle }}
                 </a>
 
@@ -82,7 +82,7 @@
 
                         @if(!empty($lessonsUrl))
                             <a href="{{ $lessonsUrl }}"
-                               class="tw-btn-secondary tw-text-black dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
+                               class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
                                 <i class="fas fa-arrow-circle-right mr-1"></i> 
                                 See Lessons
                             </a>

@@ -22,7 +22,7 @@
       class="
         tw-flex 
         tw-flex-col
-        tw-text-black
+        tw-text-[#00101D]
         dark:tw-text-white
         align-left 
         tw-justify-center
@@ -245,7 +245,7 @@
     >
       <div v-if="resetProgress" class="body">
         <i
-          class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black reset"
+          class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] reset"
           :class="isBranchPath ? branchPathText: 'text-grey-2 hover-text-black'"
           title="Reset Progress"
           @click.stop.prevent="progressReset"
@@ -253,7 +253,7 @@
       </div>
       <div v-else class="body">
         <i
-          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black tw-transform-g"
+          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-[#00101D] tw-transform-g"
           :class="[is_added ? 'is-added tw-rotate-45' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]', 
                    isBranchPath ? branchPathText: 'text-grey-2 hover-text-black' 
                   ]"
@@ -278,7 +278,7 @@
       <div
         v-if="noAccess"
         class="body"
-        :class="isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black'"
+        :class="isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'"
         title="Add to Calendar"
         data-open-modal="addToCalendarModal"
         @click="addEvent"
@@ -293,7 +293,7 @@
       <div v-else class="body">
         <i
           v-if="item.started || item.completed"
-          class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-black"
+          class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
           :class="[
             item.completed ? completedIcon : 'fa-adjust',
             themeTextClass,
@@ -305,7 +305,7 @@
           class="fas flex-center rounded"
           :class="[
             ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle',
-              isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black'
+              isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'
             ]
           "
         ></i>

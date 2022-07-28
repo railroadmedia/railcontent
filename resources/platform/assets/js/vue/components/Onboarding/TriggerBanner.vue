@@ -50,7 +50,7 @@ const hideOnboardingBanner = () => {
         tw-absolute
         dark:tw-text-white
         dark:tw-border-white
-        tw-text-black
+        tw-text-[#00101D]
         tw-border-black
         tw-border-[2px]
         tw-rounded-full

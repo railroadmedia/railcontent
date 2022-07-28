@@ -20,16 +20,16 @@
                         class="dark:tw-text-white"
                         v-model="sortInterface"
                     >
-                        <option class="tw-text-black" value="-like_count">
+                        <option class="tw-text-[#00101D]" value="-like_count">
                             Popular
                         </option>
-                        <option class="tw-text-black" value="-created_on">
+                        <option class="tw-text-[#00101D]" value="-created_on">
                             Latest
                         </option>
-                        <option class="tw-text-black" value="created_on">
+                        <option class="tw-text-[#00101D]" value="created_on">
                             Oldest
                         </option>
-                        <option class="tw-text-black" value="-mine">
+                        <option class="tw-text-[#00101D]" value="-mine">
                             My Comments
                         </option>
                     </select>

@@ -8,12 +8,12 @@
         @if( !empty($gearForm) && $gearForm )
             <div class="tw-ml-4 edit-button">
                 <button class="" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">
-                    <i class="tw-text-lg fas fa-edit tw-text-black dark:tw-text-white" aria-hidden="true"></i>
+                    <i class="tw-text-lg fas fa-edit tw-text-[#00101D] dark:tw-text-white" aria-hidden="true"></i>
                 </button>
             </div>    
         @else
             <div class="tw-ml-auto tw-flex tw-flex-col edit-button">
-                <button class="tw-btn-secondary tw-btn-small tw-mb-0 tw-text-black dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">Edit</button>
+                <button class="tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" data-open-modal="{{ $modalId }}" dusk="{{ $modalId }}">Edit</button>
             </div>
         @endif
     </div>

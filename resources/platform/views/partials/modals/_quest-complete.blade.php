@@ -37,7 +37,7 @@
 {{--                    </p>--}}
                     <!-- <a  href="/"
                         title="return to map"
-                        class="tw-mb-6 tw-no-underline tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-3 tw-inline-block tw-uppercase tw-text-black tw-text-center font-roboto-condensed-bold tw-rounded-full tw-w-2/3">
+                        class="tw-mb-6 tw-no-underline tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-3 tw-inline-block tw-uppercase tw-text-[#00101D] tw-text-center font-roboto-condensed-bold tw-rounded-full tw-w-2/3">
                         Share
                     </a> -->
                     <a  href="/members/packs/guitar-quest" 

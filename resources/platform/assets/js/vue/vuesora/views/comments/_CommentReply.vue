@@ -46,13 +46,13 @@
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </span>
@@ -70,7 +70,7 @@
                             class="tiny no-decoration tw-cursor-pointer tw-mr-1"
                             @click="deleteComment"
                         >
-                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-black dark:tw-text-[#9EC0DC]" />
+                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
                         </span>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <p
                             v-if="!isUsersPost"
                             class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'dark:tw-text-white tw-text-black'"
+                            :class="comment.is_liked ? themeTextClass : 'dark:tw-text-white tw-text-[#00101D]'"
                             dusk="like-button"
                             @click="likeComment"
                         >
@@ -103,7 +103,7 @@
 
                         <p
                             class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
-                            :class="replying ? themeTextClass : 'dark:tw-text-white tw-text-black'"
+                            :class="replying ? themeTextClass : 'dark:tw-text-white tw-text-[#00101D]'"
                             dusk="reply-button"
                             @click="openReply"
                         >
@@ -116,12 +116,12 @@
                         <span class="tw-flex-grow"></span>
 
                         <p
-                            class="dark:tw-text-white tw-text-black tw-cursor-pointer tw-flex tw-items-center"
+                            class="dark:tw-text-white tw-text-[#00101D] tw-cursor-pointer tw-flex tw-items-center"
                             :data-open-modal="openModalString"
                             @click="openLikes"
                         >
                             <ThumbUpIcon
-                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-black tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-[#00101D] tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             />&nbsp;{{ comment.like_count }}
                         </p>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                             <a
-                                class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
+                                class="btn flat dark:tw-text-white tw-text-[#00101D] collapse-150 short tw-mr-1"
                                 @click="replying = false"
                             >
                                 Cancel

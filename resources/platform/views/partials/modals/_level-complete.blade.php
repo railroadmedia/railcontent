@@ -58,7 +58,7 @@
                             >
                             </a>
                             <a  href="{{ $nextChild->fetch('url') }}"
-                                class="tw-cursor-pointer tw-text-xl bg-goldenrod-gradient tw-transition tw-duration-300 tw-px-12 tw-py-3 tw-inline-block tw-uppercase tw-text-black font-roboto-condensed-bold tw-no-underline tw-text-center tw-rounded-full tw-mt-3">
+                                class="tw-cursor-pointer tw-text-xl bg-goldenrod-gradient tw-transition tw-duration-300 tw-px-12 tw-py-3 tw-inline-block tw-uppercase tw-text-[#00101D] font-roboto-condensed-bold tw-no-underline tw-text-center tw-rounded-full tw-mt-3">
                                 Start Next Level
                             </a>
                         </div>

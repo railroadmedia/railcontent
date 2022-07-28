@@ -12,7 +12,7 @@
 
             <div class="tw-flex tw-flex-col tw-justify-center overflow">
 
-                <p class="tw-text-[16px] tw-text-black dark:tw-text-white">
+                <p class="tw-text-[16px] tw-text-[#00101D] dark:tw-text-white">
                     <span class="tw-font-bold">{{ userName }}</span>
 
                     {{ notificationTypeString }}
@@ -20,10 +20,10 @@
                     <span class="tw-font-bold">{{ linkedContent.title }}</span>
                 </p>
 
-                <p v-html="subContent" class="tw-text-[16px] dark:tw-text-white tw-text-black tw-mt-[3px]">
+                <p v-html="subContent" class="tw-text-[16px] dark:tw-text-white tw-text-[#00101D] tw-mt-[3px]">
                 </p>
 
-                <p class="tw-text-[14px] tw-text-black dark:tw-text-[#9ec0dc] tw-italic tw-mt-[4px]">
+                <p class="tw-text-[14px] tw-text-[#00101D] dark:tw-text-[#9ec0dc] tw-italic tw-mt-[4px]">
                     {{ createdOn }}
                 </p>
             </div>

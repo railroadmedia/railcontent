@@ -100,7 +100,7 @@ const handleButtonClick = (e) => {
         </ul>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
-            inputOverride="tw-w-full tw-h-[50px] tw-text-black"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
             id="loginEmail"
@@ -114,7 +114,7 @@ const handleButtonClick = (e) => {
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
             wrapperOverride="tw-text-[16px]"
-            inputOverride="tw-w-full tw-h-[50px] tw-text-black"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="password"
             id="loginPassword"

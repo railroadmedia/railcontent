@@ -3,7 +3,7 @@
         class="flex flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
         :class="month"
     >
-            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-black">
+            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-[#00101D]">
                 {{ month }}
             </div> -->
 
@@ -31,7 +31,7 @@
                     <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
                         {{ mappedData.color_title }}
                     </p>
-                    <p class="tw-text-sm tw-text-black dark:tw-text-white tw-font-bold item-title">
+                    <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
                         {{ mappedData.black_title }}
                     </p>
                 </div>

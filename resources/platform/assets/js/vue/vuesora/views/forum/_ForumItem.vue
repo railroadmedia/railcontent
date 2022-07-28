@@ -1,7 +1,7 @@
 <template>
     <a
         :href="forum.url"
-        class="tw-relative tw-flex tw-flex-row tw-items-center tw-py-4 tw-px-2 tw-text-black tw-no-underline tw-border-0 tw-border-b tw-border-solid dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039] hover:tw-bg-[#F5F5F6] tw-transition tw-border-[#D4D4D8]"
+        class="tw-relative tw-flex tw-flex-row tw-items-center tw-py-4 tw-px-2 tw-text-[#00101D] tw-no-underline tw-border-0 tw-border-b tw-border-solid dark:tw-border-[#223F57] dark:hover:tw-bg-[#002039] hover:tw-bg-[#F5F5F6] tw-transition tw-border-[#D4D4D8]"
         :class="[brandHoverColor]"
     >
         <!-- Avatar -->

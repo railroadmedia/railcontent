@@ -31,7 +31,7 @@
                     :class="[themeTextClass]"
                 >{{ contentModel.artist }}</h3>
                 <h3
-                    class="item-title font-bold tw-text-black dark:tw-text-white"
+                    class="item-title font-bold tw-text-[#00101D] dark:tw-text-white"
                 >{{ contentModel.title }}</h3>
             </div>
 
