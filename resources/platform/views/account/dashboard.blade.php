@@ -126,25 +126,38 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 
             {{-- About You --}}
             <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap ph" dusk="about-user">
-                <div class="tw-flex tw-flex-col xs-12 tw-mb-3">
-                    {{-- Title --}}
+                <div class="tw-flex tw-justify-between tw-mb-3 tw-w-full">
+                    {{-- User Details --}}
                     <div class="tw-flex tw-flex-col tw-mb-4">
                         <h1
-                            class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-4 md:tw-mb-6">
+                            class="tw-font-bold tw-text-[24px] tw-leading-none tw-mb-[19px]">
                             About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
                         </h1>
 
-                        @if ($isCurrentUsersProfile)
-                            <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
-                                class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg" dusk="edit-user">
-                                Edit
-                            </a>
-                        @endif
-                    </div>
-                </div>
-            </section>
+                        <div class="tw-flex tw-text-black dark:tw-text-white tw-mb-[12px]">
+                            <span class="tw-font-bold">Full Name:&nbsp;</span>
+                            <span>{{ $dashboardUser->first_name }}&nbsp;{{ $dashboardUser->last_name }}</span>
+                        </div>
 
-            <gear-carousel :gear-info="{{ json_encode($dashboardUser) }}" />
+                        <div class="tw-flex tw-text-black dark:tw-text-white tw-mb-[25px]">
+                            <span class="tw-font-bold">Birthday:&nbsp;</span>
+                            <span>{{ $dashboardUser->birthday }}</span>
+                        </div>
+
+                        <div class="tw-flex tw-text-black dark:tw-text-white tw-mb-[25px]">
+                            {{ $dashboardUser->biography }}
+                        </div>
+                    </div>
+                    {{-- User Gear Details --}}
+                    <gear-carousel :gear-info="{{ json_encode($dashboardUser) }}" />
+                </div>
+                @if ($isCurrentUsersProfile)
+                    <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
+                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg" dusk="edit-user">
+                        Edit
+                    </a>
+                @endif
+            </section>
         </div>
     </div>
 @endsection
