@@ -91,6 +91,8 @@ class Secrets extends \Laravel\Vapor\Runtime\Secrets
                 try {
                     $parsedDotEnv = Dotenv::parse($value);
 
+                    var_dump($parsedDotEnv);
+
                     self::setEnvironmentVariables($parsedDotEnv);
 
                 } catch (InvalidFileException $e) {
