@@ -17,7 +17,7 @@
                     </a>
                     <a class="tw-no-underline"
                         :href=" currentUrl + '?followed=true' "
-                        :class="[isFollowedSection ? 'tw-text-black tw-border-0 tw-border-solid tw-border-b-2' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', brandBorderColor, {'hide': searching}]"
+                        :class="[isFollowedSection ? 'tw-text-black dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', brandBorderColor, {'hide': searching}]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             Followed

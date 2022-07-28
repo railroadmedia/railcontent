@@ -22088,6 +22088,9 @@ a:visited{
 .tw-mb-3{
   margin-bottom: 0.75rem !important;
 }
+.tw-mr-\[36px\]{
+  margin-right: 36px !important;
+}
 .tw-mb-\[19px\]{
   margin-bottom: 19px !important;
 }
@@ -24003,6 +24006,9 @@ a:visited{
 .tw-pb-3{
   padding-bottom: 0.75rem !important;
 }
+.tw-pt-\[24px\]{
+  padding-top: 24px !important;
+}
 .tw-pr-4{
   padding-right: 1rem !important;
 }
@@ -24020,6 +24026,9 @@ a:visited{
 }
 .tw-pr-1{
   padding-right: 0.25rem !important;
+}
+.tw-pt-3{
+  padding-top: 0.75rem !important;
 }
 .tw-pl-6{
   padding-left: 1.5rem !important;
@@ -24047,9 +24056,6 @@ a:visited{
 }
 .tw-pb-16{
   padding-bottom: 4rem !important;
-}
-.tw-pt-\[24px\]{
-  padding-top: 24px !important;
 }
 .tw-pb-\[12px\]{
   padding-bottom: 12px !important;
@@ -24137,9 +24143,6 @@ a:visited{
 }
 .tw-pb-\[30px\]{
   padding-bottom: 30px !important;
-}
-.tw-pt-3{
-  padding-top: 0.75rem !important;
 }
 .tw-pl-2{
   padding-left: 0.5rem !important;
@@ -24401,6 +24404,10 @@ a:visited{
 .tw-text-yellow-400{
   --tw-text-opacity: 1 !important;
   color: rgb(250 204 21 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
 .tw-text-\[\#22C55E\]{
   --tw-text-opacity: 1 !important;

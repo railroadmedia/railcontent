@@ -93,6 +93,7 @@ const handlePrev = () => {
           :attributes="attributes"
           :img_src="img_src"
           :title="cardTitle"
+          :brand="brand"
           :isCurrentSlide="currentSlide === index"
           @onNextSlide="handleNext"
           @onPrevSlide="handlePrev"
