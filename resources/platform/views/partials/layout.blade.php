@@ -37,19 +37,18 @@
             >
                 <page-container
                     brand="{{ $brand }}"
-                    :is-live="true"
-                    @if(isset($forceHideSidebar))
-                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
-                    @endif
-                    @if(!empty( $hasUnreadNotifications ))
-                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
-                    @endif
+                    :is-live="false"
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
                     user-id="{{ user()->id }}"
                     account-url="{{ user()->getDashboardUrl() }}"
-                    {{-- isSidebarHidden="{{ true }}" --}}
                     search-url=""
+                    {{-- @if(isset($forceHideSidebar))
+                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+                    @endif --}}
+                    @if(!empty( $hasUnreadNotifications ))
+                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                    @endif
                 >
                     <template v-cloak v-slot="slotProps">
 
