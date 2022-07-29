@@ -1,3 +1,31 @@
+@php
+    /**
+     * @var \Modules\UserManagementSystem\Models\User $user
+     */
+    $hasGear =
+        count(
+            user()->onboardingGear->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasTopics =
+        count(
+            user()->onboardingTopics->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasGenres =
+        count(
+            user()->onboardingGenres->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+
+    $hasExperience = user()->onboardingExperience ? true : false;
+
+    $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience;
+@endphp
+
 @extends('partials.layout')
 
 @section('content')
@@ -51,13 +79,11 @@
     
                 {{-- Calls To Action --}}
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
-
                     {{-- Complete Your Account / Update Your Account --}}
                     <a href="/onboarding" 
                         class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
                     >
-                        {{-- {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }} --}}
-                        Complete Your Account
+                        {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }}
                     </a>
                 </div>
 
