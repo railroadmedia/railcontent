@@ -24457,10 +24457,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(25 27 28 / var(--tw-text-opacity)) !important;
 }
-.tw-text-gray-300{
-  --tw-text-opacity: 1 !important;
-  color: rgb(209 213 219 / var(--tw-text-opacity)) !important;
-}
 .tw-text-\[\#000C17\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
@@ -24504,6 +24500,10 @@ a:visited{
 .tw-text-\[\#8c9698\]{
   --tw-text-opacity: 1 !important;
   color: rgb(140 150 152 / var(--tw-text-opacity)) !important;
+}
+.tw-text-gray-300{
+  --tw-text-opacity: 1 !important;
+  color: rgb(209 213 219 / var(--tw-text-opacity)) !important;
 }
 .tw-text-\[\#52525A\]{
   --tw-text-opacity: 1 !important;
