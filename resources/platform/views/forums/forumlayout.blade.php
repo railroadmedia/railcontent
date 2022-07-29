@@ -47,14 +47,15 @@
 
                 <page-container 
                     brand="{{ $brand }}" 
-                    :is-live="true" 
+                    :is-live="false" 
+                    user-name="{{ user()->display_name }}"
+                    user-avatar="{{ user()->profile_picture_url }}"
+                    user-id="{{ user()->id }}"
+                    account-url="{{ user()->getDashboardUrl() }}"
+                    search-url=""
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
-                    user-name="John Smith"
-                    user-avatar=""
-                    account-url=""
-                    search-url=""
                 >  
                     <template v-cloak v-slot="slotProps">
 

@@ -176,3 +176,10 @@ export default {
     },
 };
 </script>
+<style>
+    /* Add Scroll Margin Top for Scroll Into View and Fixed Header */
+    .content-table-row {
+        scroll-margin-top: 68px ;
+        scroll-snap-margin-top: 68px ; /* For Safari */
+    }
+</style>

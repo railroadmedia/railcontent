@@ -19,14 +19,14 @@
             </p>
         </div>
         <div class="tw-flex tw-flex-col tw-flex-grow tw-pl-3">
-            <h5 class="dark:tw-text-white tw-text-[#00101D] tw-text-sm tw-font-bold">
+            <h5 class="dark:tw-text-white tw-text-[#00101D] tw-text-sm tw-font-bold tw-mb-1">
                 {!! $title !!}
             </h5>
-            <h6 class="tw-text-xs tw-text-gray-300 dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] tw-uppercase dark:tw-text-white tw-text-[#00101D] tw-mb-1">
+            <h6 class="tw-text-xs tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] tw-uppercase dark:tw-text-white tw-text-[#00101D] tw-mb-1">
                 Posted
-                <strong>{{ $date }}</strong>
+                <strong class="tw-text-{{ $brand }}">{{ $date }}</strong>
                 by
-                <strong>{{ $author }}</strong>
+                <strong class="tw-text-{{ $brand }}">{{ $author }}</strong>
             </h6>
             <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D] tw-break-words">
                 {!! str_replace('&nbsp;', '', $post) !!}...
