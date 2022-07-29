@@ -33,6 +33,15 @@
         />
 
         <div class="tw-flex tw-flex-col-reverse sm:tw-flex-row tw-full">
+            <!-- SUBMIT BUTTON -->
+            <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min" 
+                    type="submit"
+                    :disabled="!formValid"
+                    :class="themeBgClass" 
+            >
+                Submit
+            </button>
+
             <div class="sm:tw-w-72 sm:tw-ml-auto">
                 <!-- File Upload Button -->
                 <file-input 
@@ -53,14 +62,6 @@
 
         </div>
 
-        <!-- SUBMIT BUTTON -->
-        <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min" 
-                type="submit"
-                :disabled="!formValid"
-                :class="themeBgClass" 
-        >
-                Submit
-        </button>
 
         <!-- Response Message -->
         <div class="tw-flex tw-z-[100] tw-fixed tw-rounded-lg tw-left-8 tw-p-6 tw-text-base tw-shadow-lg tw-mr-8 tw-transition-all tw-duration-200 tw-ease-in-out"
