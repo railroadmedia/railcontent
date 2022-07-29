@@ -118,7 +118,7 @@
             youtube-event-id="{{ $youtubeId }}"
             :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
             event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-        ></coach-event>
+        />
 
         {{-- Upcoming Events --}}
         @if($hasUpcomingEvents)
