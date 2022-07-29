@@ -200,7 +200,7 @@ onUnmounted(() => {
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">
           <div v-if="!isSidebarCollapsed && !isSidebarHidden" @click="isSidebarHidden = true" class="
-              tw-absolute
+              tw-fixed
               lg:tw-hidden
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
             "></div>
