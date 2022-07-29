@@ -25,7 +25,7 @@
         </div>
     </section>
 
-    <section class="tw-flex tw-flex-col tw-text-center tw-my-8 tw-text-[#00101D] dark:tw-text-white">
+    <section class="tw-flex tw-flex-col tw-text-center tw-mb-8 tw-text-[#00101D] dark:tw-text-white">
         <h2 class="tw-font-bold tw-text-3xl">Old fashioned phone calls work too!</h2>
         <div class="tw-flex tw-my-8 tw-flex-col tw-items-center sm:tw-flex-row">
             <div class="tw-flex tw-flex-col tw-w-10/12 sm:tw-w-1/3 tw-font-bold tw-justify-center tw-p-3 tw-border-solid tw-border-0 tw-border-b-2 sm:tw-border-b-0 sm:tw-border-r-2 tw-border-gray-300">
