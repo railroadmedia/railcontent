@@ -13,10 +13,17 @@
             </div>
 
             @if(!empty($addToList) && $addToList === true)
-                <div class="tw-flex tw-flex-col button-col">
-                    <button class="addToList tw-btn-secondary tw-border-[3px] tw-transform-gpu tw-btn-circle tw-text-white {{ $isAdded ? 'added' : '' }}"
-                            data-content-id="{{ $contentId }}">
-                        <i class="fas fa-plus {{ $isAdded ? 'tw-rotate-45' : 'tw-rotate-0' }}"></i>
+                <div class="flex flex-column align-center sq-btn-col ml-1">
+                    <button class="addToList btn {{ $isAdded ? 'added' : '' }}"
+                            data-tooltip="Add To List"
+                        data-content-id="{{ $contentId }}">
+                        <span class="un-added bg-{{ $brand }} inverted text-{{ $brand }}">
+                            <i class="fas fa-plus"></i>
+                        </span>
+
+                        <span class="is-added bg-{{ $brand }} text-white">
+                            <i class="fas fa-plus rotate-45"></i>
+                        </span>
                     </button>
                 </div>
             @endif

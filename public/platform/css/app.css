@@ -22166,12 +22166,6 @@ a:visited{
 .tw-mb-1{
   margin-bottom: 0.25rem !important;
 }
-.tw-mt-0\.5{
-  margin-top: 0.125rem !important;
-}
-.tw-mt-0{
-  margin-top: 0px !important;
-}
 .tw-mb-\[-2px\]{
   margin-bottom: -2px !important;
 }
@@ -22357,6 +22351,9 @@ a:visited{
 }
 .tw-ml-\[35px\]{
   margin-left: 35px !important;
+}
+.tw-mt-0{
+  margin-top: 0px !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
@@ -25385,9 +25382,6 @@ a:visited{
   .md\:tw-mb-0{
     margin-bottom: 0px !important;
   }
-  .md\:tw-mr-2{
-    margin-right: 0.5rem !important;
-  }
   .md\:tw--mb-2{
     margin-bottom: -0.5rem !important;
   }
@@ -25417,6 +25411,9 @@ a:visited{
   }
   .md\:tw-mr-14{
     margin-right: 3.5rem !important;
+  }
+  .md\:tw-mr-2{
+    margin-right: 0.5rem !important;
   }
   .md\:tw-ml-1{
     margin-left: 0.25rem !important;
