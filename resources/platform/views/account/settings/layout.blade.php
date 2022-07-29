@@ -50,27 +50,17 @@
                 </div>
     
                 {{-- Calls To Action --}}
-                @if($user->access_level !== 'pack')
-                    <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
-    
-                        {{-- Referral Button --}}  
-                        {{-- <a href="/referral/invite-a-friend" 
-                            class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-mb-2 tw-max-w-[267px] tw-mx-2 "
-                        >
-                            <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i> 
-                            <span class="tw-leading-none tw-mt-0.5">invite a friend</span>
-                        </a> --}}
-                        
-                        {{-- Complete Your Account --}}
-                        @if(true) {{-- Check if User Has Finished Account --}}
-                            <a href="/onboarding" 
-                                class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
-                            >
-                                Complete Your Account
-                            </a>
-                        @endif
-                    </div>
-                @endif
+                <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
+
+                    {{-- Complete Your Account / Update Your Account --}}
+                    <a href="/onboarding" 
+                        class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
+                    >
+                        {{-- {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }} --}}
+                        Complete Your Account
+                    </a>
+                </div>
+
             </div>
     
         </div>
