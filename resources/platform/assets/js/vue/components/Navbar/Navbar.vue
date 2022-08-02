@@ -92,7 +92,7 @@ const toggleSearchModal = (val) => {
         :brand="brand"
       />
     </div>
-    <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]">
+    <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-auto">
 
       <!-- Search Trigger -->
       <button
