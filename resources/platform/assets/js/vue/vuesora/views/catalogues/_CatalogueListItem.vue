@@ -180,7 +180,7 @@
     <!-- SHEET MUSIC IMAGE IF IT EXISTS -->
     <div
       v-if="mappedData.sheet_music && !is_search"
-      class="flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
+      class="flex tw-flex-col tw-justify-center sheet-music-col ph-1 hide-xs-only"
     >
       <img class="dark:tw-invert" :src="mappedData.sheet_music" />
     </div>

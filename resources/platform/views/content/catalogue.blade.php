@@ -120,7 +120,7 @@
     @endif
 
     @if($hasStartedLessons)
-        <section class="tw-container tw-mx-auto tw-pt-4 md:tw-pt-5 md:tw-px-8">
+        <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row tw-pt-4">
                 <h1 class="heading capitalize pointer noselect tw-text-[#00101D] dark:tw-text-white tw-border-b-2 tw-border-{{ $brand }}"
                     data-toggle-catalogue="inProgress">
