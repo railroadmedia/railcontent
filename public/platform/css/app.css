@@ -22150,11 +22150,11 @@ a:visited{
 .tw-mt-1{
   margin-top: 0.25rem !important;
 }
-.tw-mb-\[30px\]{
-  margin-bottom: 30px !important;
-}
 .tw-mr-\[12px\]{
   margin-right: 12px !important;
+}
+.tw-mb-\[30px\]{
+  margin-bottom: 30px !important;
 }
 .tw-mb-1{
   margin-bottom: 0.25rem !important;
@@ -22471,9 +22471,6 @@ a:visited{
 .tw-h-\[30px\]{
   height: 30px !important;
 }
-.tw-h-screen{
-  height: 100vh !important;
-}
 .tw-h-\[58px\]{
   height: 58px !important;
 }
@@ -22497,6 +22494,9 @@ a:visited{
 }
 .tw-h-\[12px\]{
   height: 12px !important;
+}
+.tw-h-screen{
+  height: 100vh !important;
 }
 .tw-h-\[9px\]{
   height: 9px !important;
@@ -23518,13 +23518,13 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-pianote{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
-}
 .tw-bg-singeo{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-pianote{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-gray-200{
   --tw-bg-opacity: 1 !important;
