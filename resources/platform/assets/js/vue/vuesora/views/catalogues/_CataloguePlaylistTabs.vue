@@ -1,9 +1,9 @@
 <template>
-    <div class="flex flex-row flex-wrap align-v-center">
-        <div class="flex flex-column xs-12 sm-8 pv-3">
+    <div class="flex flex-row flex-wrap align-v-center tw-mt-8">
+        <div class="flex flex-column tw-w-fit tw-shrink-0">
             <div class="flex flex-row flex-wrap filter-tabs align-v-center">
                 <!-- Added Tab -->
-                <a class="heading-tab pointer mr-3 flex flex-auto"
+                <a class="heading-tab pointer tw-mr-5 tw-mb-3 tw-flex tw-w-fit"
                    :href="`/${brand}/lists/my-list`"
                 >
                     <h3 class="tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white"
@@ -13,7 +13,7 @@
                     </h3>
                 </a>
                 <!-- In Progress Tab -->
-                <a class="heading-tab pointer mr-3 flex flex-auto"
+                <a class="heading-tab pointer tw-mr-5 tw-mb-3 tw-flex tw-w-fit"
                    :href="`/${brand}/lists/in-progress`"
                 >
                     <h3 class="tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white"
@@ -23,7 +23,7 @@
                     </h3>
                 </a>
                 <!-- Completed Tab -->
-                <a class="heading-tab pointer mr-3 flex flex-auto"
+                <a class="heading-tab pointer tw-mr-5 tw-mb-3 tw-flex tw-w-fit"
                    :href="`/${brand}/lists/completed`"
                 >
                     <h3 class="tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white"
