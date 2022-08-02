@@ -98,7 +98,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         if (!user()) {
             return null;
         }
-        
+
         return new EcommerceUser(user()->id, user()->email);
     }
 
@@ -159,8 +159,11 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
     {
         $parts = explode('@', $email);
 
-        $user = new User(['email' => $email, 'display_name' => $parts[0].rand(10000, 99999), 'password' => $password]);
-
+        $user = new User;
+        $user->email = $email;
+        $user->setPassword($password);
+        $user->display_name = $parts[0].rand(10000, 99999);
+        $user->save();
         event(new UserCreated($user));
 
         return new EcommerceUser($user->id, $user->email);

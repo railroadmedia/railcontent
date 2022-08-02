@@ -13,8 +13,7 @@ $cardImages = [
     'guitareo' => 'https://drumeo-assets.s3.amazonaws.com/redeem/referral/guitareo-guest-pass.png',
 ];
 
-$cardImage = $cardImages[brand()];
-
+$cardImage = $cardImages[$brand];
 @endphp
 <div class="referral-sections">
     @if (isset($showToast) && $showToast)
@@ -104,30 +103,30 @@ $cardImage = $cardImages[brand()];
         </div>
     </section>
 </div>
-{{--<script>--}}
-{{--    function copyLink() {--}}
-{{--        var link = document.getElementById("referral-link");--}}
-{{--        navigator.clipboard.writeText(link.value);--}}
-{{--    }--}}
+<script>
+    function copyLink() {
+        var link = document.getElementById("referral-link");
+        navigator.clipboard.writeText(link.value);
+    }
 
-{{--    function hideToast() {--}}
-{{--        var toast = document.getElementById("emailSentToast");--}}
-{{--        if (!toast.classList.contains("tw-hidden")) {--}}
-{{--            toast.classList.add("tw-hidden");--}}
-{{--        }--}}
-{{--    }--}}
+    function hideToast() {
+        var toast = document.getElementById("emailSentToast");
+        if (!toast.classList.contains("tw-hidden")) {
+            toast.classList.add("tw-hidden");
+        }
+    }
 
-{{--    function docReady(fn) {--}}
-{{--        if (document.readyState === "complete" || document.readyState === "interactive") {--}}
-{{--            setTimeout(fn, 1);--}}
-{{--        } else {--}}
-{{--            document.addEventListener("DOMContentLoaded", fn);--}}
-{{--        }--}}
-{{--    }--}}
+    function docReady(fn) {
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
 
-{{--    docReady(function() {--}}
-{{--        setTimeout(() => {--}}
-{{--            hideToast();--}}
-{{--        }, 3000);--}}
-{{--    });--}}
-{{--</script>--}}
+    docReady(function() {
+        setTimeout(() => {
+            hideToast();
+        }, 3000);
+    });
+</script>
