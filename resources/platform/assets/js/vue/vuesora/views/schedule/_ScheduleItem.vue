@@ -36,13 +36,13 @@
                     </p>
                 </div>
                 <!-- Schedule Item Data -->
-                <div class="tw-flex ph-1">
+                <div class="ph-1 tw-hidden sm:tw-flex">
                     <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
                         {{ releaseType }}
                     </div>
                     <div v-for="(item, i) in mappedData.column_data"
                         :key="i"
-                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center"
+                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-center"
                     >
                         {{ item }}
                     </div>

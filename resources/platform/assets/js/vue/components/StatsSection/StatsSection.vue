@@ -20,7 +20,7 @@ export default {
                     label: 'Forum Post Likes',
                 },
                 {
-                    icon: 'thumb-like',
+                    icon: 'thumb-like-filled',
                     value: 0,
                     label: 'Comment Likes',
                 },
@@ -98,7 +98,7 @@ export default {
             <div class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-w-full lg:tw-w-7/12">
                 <img :src="`https://musora-ui.s3.amazonaws.com/logos/${ brand }-method.svg`" :alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
             </div> 
-            <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-8 tw-w-full lg:tw-w-5/12">
+            <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-10 sm:tw-px-8 tw-w-full lg:tw-w-5/12">
                 <div class="tw-text-center tw-w-full tw-max-w-[287px]">
                     <h3 class="text-white tw-text-4xl xl:tw-text-[54px] tw-font-bold tw-leading-none tw-mb-2 tw-uppercase">Level {{ nextLearningPathLevel }}</h3> 
                     <!-- progress bar -->

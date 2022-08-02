@@ -4,6 +4,7 @@
             <div
                 class="flex flex-row nmh-1 flex-wrap"
             >
+                <!-- Likes Button -->
                 <div class="flex flex-column resource-button ph-1">
                     <button
                         class="btn stacked"
@@ -14,15 +15,13 @@
                             style="padding:0 8px; border: none; box-shadow: none;"
                             :class="hasLiked ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                         >
-                            <i
-                                class="fa-thumbs-up mb-1"
-                                :class="hasLiked ? 'fas' : 'fal'"
-                            ></i>
+                            <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mb-1" />
                             {{ totalLikes }}
                         </span>
                     </button>
                 </div>
 
+                <!-- Share Button -->
                 <div class="flex flex-column resource-button ph-1">
                     <button
                         class="btn stacked"
@@ -32,12 +31,13 @@
                             class="text-grey-3 dark:tw-text-white tw-shadow-none"
                             style="padding:0 8px; box-shadow: none;"
                         >
-                            <i class="fas fa-share mb-1"></i>
+                            <musora-icon icon-name="share"  class="tw-w-6 tw-h-6 tw-mb-1" />
                             Share
                         </span>
                     </button>
                 </div>
 
+                <!-- Downloads -->
                 <div
                     v-if="resources.length > 0"
                     class="flex flex-column resource-button ph-1 relative"
@@ -51,7 +51,7 @@
                             :class="resourceDropdown ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                             style="padding:0 8px; box-shadow: none;"
                         >
-                            <i class="fas fa-download mb-1"></i>
+                            <musora-icon icon-name="download"  class="tw-w-6 tw-h-6 tw-mb-1" />
                             Downloads
                         </span>
                     </button>
@@ -84,6 +84,7 @@
                     </transition>
                 </div>
 
+                <!-- Add to list button -->
                 <div class="flex flex-column resource-button ph-1">
                     <button
                         class="btn stacked"
@@ -94,10 +95,7 @@
                             style="padding:0 8px; box-shadow: none;"
                             :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
                         >
-                            <i
-                                class="fas mb-1"
-                                :class="hasAdded ? 'fa-times' : 'fa-plus'"
-                            ></i>
+                            <musora-icon icon-name="plus" class="tw-w-7 tw-h-7 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
                             <span class="hide-xs-only">
                                 {{ hasAdded ? 'Added' : 'Add to List' }}
                             </span>

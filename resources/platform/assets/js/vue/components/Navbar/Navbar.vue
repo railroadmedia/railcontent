@@ -46,7 +46,8 @@ const toggleSearchModal = (val) => {
       tw-h-[58px]
       tw-w-full
       tw-justify-between
-      tw-px-4
+      tw-px-2
+      md:tw-px-4
       tw-transition
       tw-bg-white
       dark:tw-bg-[#081825]
@@ -92,12 +93,12 @@ const toggleSearchModal = (val) => {
         :brand="brand"
       />
     </div>
-    <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-[36px]">
+    <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-auto">
 
       <!-- Search Trigger -->
       <button
         @click="() => toggleSearchModal(true)"
-        class="tw-block tw-shrink-0 lg:tw-hidden tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+        class="tw-shrink-0 lg:tw-hidden tw-w-[40px] sm:tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
         title="Musora Search"
       >
         <SearchIcon class="tw-w-[24px] tw-h-[24px] tw-text-[#00101D] dark:tw-text-white" />
@@ -106,7 +107,7 @@ const toggleSearchModal = (val) => {
       <!-- Invite a Friend -->
       <a :href="`/${ brand }/referral/invite-a-friend`"
         @click="() => toggleSearchModal(true)"
-        class="tw-block tw-shrink-0 tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+        class="tw-shrink-0 tw-w-[40px] sm:tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
         title="Invite a Friend"
       >
         <span class="tw-text-[#00101D] dark:tw-text-white">

@@ -147,7 +147,7 @@
                     v-if="replying"
                     class="tw-flex tw-flex-row comment-post mv-2"
                 >
-                    <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
+                    <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
                         <img
                             :src="currentUser.avatar"
                             class="rounded"

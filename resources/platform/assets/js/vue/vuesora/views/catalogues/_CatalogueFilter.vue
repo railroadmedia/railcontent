@@ -12,6 +12,7 @@
                 @keydown.prevent
             >
                 <option
+                    class="tw-text-[#00101D]"
                     selected
                     disabled
                     :value="null"
@@ -107,17 +108,17 @@ export default {
 
         placeholderLabel() {
             const labelMap = {
-                difficulty: 'Choose a Level...',
-                instructor: 'Choose an Instructor...',
-                topic: 'Choose a Topic...',
-                progress: 'Your Progress...',
-                artist: 'Choose an Artist...',
-                focus: 'Filter by Focus',
-                style: 'Filter by Style',
-                bpm: 'Choose a Tempo...',
-                type: 'Choose a Type...',
-                key: 'Choose a Key...',
-                key_pitch_type: 'Choose a Type...',
+                difficulty: 'Skill Level',
+                instructor: 'Instructor',
+                topic: 'Topic',
+                progress: 'Progress',
+                artist: 'Artist',
+                focus: 'Focus',
+                style: 'Style',
+                bpm: 'Tempo',
+                type: 'Type',
+                key: 'Key',
+                key_pitch_type: 'Type',
             };
 
             return this.filtersLabels[this.filterName] || labelMap[this.filterName];

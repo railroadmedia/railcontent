@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -17,7 +17,7 @@
                 >
                     <select
                         id="commentSort"
-                        class="dark:tw-text-white"
+                        class="dark:tw-text-white tw-pb-0"
                         v-model="sortInterface"
                     >
                         <option class="tw-text-[#00101D]" value="-like_count">
@@ -45,7 +45,7 @@
             id="postComment"
             class="tw-flex tw-flex-row comment-post mv-3"
         >
-            <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
+            <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
@@ -57,9 +57,21 @@
                         class="tw-rounded-full"
                     >
                 </div>
+                <p
+                    v-if="showUserExp"
+                    class="tw-text-sm dense tw-uppercase tw-text-center mt-1"
+                >
+                    {{ userExpRank }}
+                </p>
+                <p
+                    v-if="showUserExp"
+                    class="tw-text-sm dense tw-text-center font-compressed"
+                >
+                    {{ userExpValue }} XP
+                </p>
             </div>
 
-            <div class="tw-flex tw-flex-col tw-grow">
+            <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                 <text-editor
                     :fieldKey="contentId + '-comment-text-editor'"
                     ref="textEditor"

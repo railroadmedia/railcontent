@@ -165,7 +165,7 @@ const handleButtonClick = (e) => {
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
-            inputOverride="tw-w-full tw-h-[50px]"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
             id="resetEmail"
