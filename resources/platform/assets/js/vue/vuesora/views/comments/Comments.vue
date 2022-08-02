@@ -57,6 +57,18 @@
                         class="tw-rounded-full"
                     >
                 </div>
+                <p
+                    v-if="showUserExp"
+                    class="tw-text-sm dense tw-uppercase tw-text-center mt-1"
+                >
+                    {{ userExpRank }}
+                </p>
+                <p
+                    v-if="showUserExp"
+                    class="tw-text-sm dense tw-text-center font-compressed"
+                >
+                    {{ userExpValue }} XP
+                </p>
             </div>
 
             <div class="tw-flex tw-flex-col tw-grow tw-w-full">
