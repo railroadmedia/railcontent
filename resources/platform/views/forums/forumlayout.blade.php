@@ -69,15 +69,7 @@
         </div>
 
         {{-- Review Modals Must Be Global --}}
-        @if($brand === 'singeo')
-            @include('partials._review-modal-singeo')
-        @endif
-        @if($brand === 'guitareo')
-            @include('partials._review-modal-guitareo')
-        @endif
-        @if($brand === 'drumeo' || $brand === 'pianote')
-            @include('partials._review-modal')
-        @endif
+        @include('partials._review-modal')
 
         {{-- Scripts --}}
         <script src="{{ mix('platform/js/app.js') }}"></script>
