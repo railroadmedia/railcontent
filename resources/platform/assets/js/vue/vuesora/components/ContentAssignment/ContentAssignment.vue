@@ -30,12 +30,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer" @click="openAssignment">
+                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer dark:tw-text-white" @click="openAssignment">
                         <i class="fas" :class="accordionButtonIconClasses"></i>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-column tw-ml-auto complete-column">
+            <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
                 <div class="flex flex-row tw-justify-end">
                     
                     <button id="open-exercise-button" 

@@ -74,7 +74,7 @@ function rotate() {
       "
     >
       <div
-        class="tw-w-auto tw-flex tw-text-[13px] tw-font-bebas-neue"
+        class="tw-w-auto tw-flex tw-text-sm tw-font-bebas-neue"
       >
         <button
           :class="`tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px] ${

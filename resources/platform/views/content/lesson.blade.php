@@ -237,8 +237,8 @@
                 "nextLessonJson" => !empty($nextChild) ? $nextLessonJson : null,
             ])
 
-            <div class="tw-flex tw-flex-col pr-1 p-sm-down tw-flex-grow">
-                <div class="tw-flex tw-flex-row">
+            <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
+                <div class="tw-flex tw-flex-row tw-w-full">
                     <comments 
                         theme-color="{{ $brand }}"
                         brand="{{ $brand }}"

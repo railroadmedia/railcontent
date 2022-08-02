@@ -53,8 +53,8 @@ export default {
     <div>
         <ModalRenderer v-if="isSelectorOpen" @onClose="() => handleBrandOpen(false)"
             key="ModalRendererKeyToMakeItDestroyByVif">
-            <div class="tw-flex tw-flex-col">
-                <h2 class="tw-mb-[36px] tw-w-full tw-text-center tw-font-extrabold tw-text-white">
+            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-4 tw-h-screen">
+                <h2 class="tw-mb-[36px] tw-w-full tw-text-2xl md:tw-text-3xl tw-text-center tw-font-extrabold tw-text-white">
                     What instrument would you like to learn? 
                 </h2>
                 <SquaresContainer>
