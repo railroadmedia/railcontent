@@ -75,11 +75,8 @@
         @if($brand === 'guitareo')
             @include('partials._review-modal-guitareo')
         @endif
-        @if($brand === 'pianote')
-            @include('partials._review-modal-pianote')
-        @endif
-        @if($brand === 'drumeo')
-            @include('partials._review-modal-drumeo')
+        @if($brand === 'drumeo' || $brand === 'pianote')
+            @include('partials._review-modal')
         @endif
 
         {{-- Scripts --}}
