@@ -21,7 +21,7 @@
 
                 @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => $brand,
-                    "inputId" => "pianoGoal",
+                    "inputId" => "singingGoal",
                     "inputLabel" => "",
                     "inputName" => "goal",
                     "customClasses" => 'no-label',
@@ -51,7 +51,7 @@
                 <p class="body">What is your biggest weakness as a singer?</p>
                 @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => $brand,
-                    "inputId" => "pianoWeakness",
+                    "inputId" => "singingWeakness",
                     "inputLabel" => "",
                     "inputName" => "weakness",
                     "customClasses" => 'no-label',
