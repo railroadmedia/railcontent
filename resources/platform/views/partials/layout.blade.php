@@ -60,18 +60,7 @@
         </div>
 
         {{-- Review Modals Must Be Global --}}
-        @if($brand === 'singeo')
-            @include('partials._review-modal-singeo')
-        @endif
-        @if($brand === 'guitareo')
-            @include('partials._review-modal-guitareo')
-        @endif
-        @if($brand === 'pianote')
-            @include('partials._review-modal-pianote')
-        @endif
-        @if($brand === 'drumeo')
-            @include('partials._review-modal-drumeo')
-        @endif
+        @include('partials._review-modal')
 
         {{-- Scripts --}}
         <script type="application/javascript">

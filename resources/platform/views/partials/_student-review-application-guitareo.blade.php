@@ -58,4 +58,4 @@
 </div>
 
 {{-- Review Application Modal --}}
-@include('partials._review-modal-guitareo')
+@include('partials._review-modal')
