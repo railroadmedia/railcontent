@@ -20,7 +20,7 @@ export default {
                     label: 'Forum Post Likes',
                 },
                 {
-                    icon: 'thumb-like',
+                    icon: 'thumb-like-filled',
                     value: 0,
                     label: 'Comment Likes',
                 },
