@@ -1,16 +1,16 @@
 <template>
     <div class="tw-flex tw-flex-col">
-        <div class="tw-flex tw-flex-row pv-3 tw-items-center tw-flex-wrap tw-justify-between">
+        <div class="tw-flex tw-flex-row tw-pb-8 tw-items-center tw-flex-wrap tw-justify-between">
             <div class="tw-flex tw-flex-row tw-items-center">
                 <BellIcon class="tw-h-[26px] tw-w-[26px] tw-mr-[10px]" :class="textColor[brand]" />
-                <h1 class="tw-text-[30px] tw-font-bold">
+                <h1 class="tw-text-[30px] tw-font-bold tw-mb-2">
                     Notifications
                 </h1>
             </div>
 
-            <div class="tw-flex tw-flex-row">
+            <div class="tw-flex tw-flex-row tw-flex-wrap">
                 <div class="tw-flex tw-flex-col tw-mr-[12px]">
-                <button class="tw-btn-primary tw-h-[50px] tw-text-white" :class="bgColor[brand]" :disabled="!hasUnread"
+                <button class="tw-btn-primary" :class="bgColor[brand]" :disabled="!hasUnread"
                     @click.stop="markAllAsRead">
                     <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
                     Mark All As Read
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div v-if="notifications.length === 0" class="tw-flex tw-flex-row pa-3">
+        <div v-if="notifications.length === 0" class="tw-flex tw-flex-row">
             <p class="tw-text-sm text-grey-3 dark:tw-text-[#9EC0DC] tw-italic">
                 You do not appear to have any notifications at this time.
             </p>
