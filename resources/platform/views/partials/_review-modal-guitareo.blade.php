@@ -20,7 +20,7 @@
 
                 @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => 'guitareo',
-                    "inputId" => "pianoGoal",
+                    "inputId" => "guitarGoal",
                     "inputLabel" => "",
                     "inputName" => "goal",
                     "customClasses" => 'no-label',
@@ -50,7 +50,7 @@
                 <p class="body">What is your biggest weakness as a guitarist?</p>
                 @include('partials.bladesora.members.inputs.text-input', [
                     "brand" => 'guitareo',
-                    "inputId" => "pianoWeakness",
+                    "inputId" => "guitarWeakness",
                     "inputLabel" => "",
                     "inputName" => "weakness",
                     "customClasses" => 'no-label',
