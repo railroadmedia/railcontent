@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -45,7 +45,7 @@
             id="postComment"
             class="tw-flex tw-flex-row comment-post mv-3"
         >
-            <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
+            <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-col tw-grow">
+            <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                 <text-editor
                     :fieldKey="contentId + '-comment-text-editor'"
                     ref="textEditor"
