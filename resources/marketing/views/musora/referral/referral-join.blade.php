@@ -1,18 +1,7 @@
-@extends('_partials.layout.global-layout')
-@section('global-head')
+@extends('musora._partials.layout')
+
+@section('head-includes')
     <title>Join | Pianote</title>
-    <meta property="og:title" content="Pianote | The Ultimate Online Piano Lesson Experience">
-
-    <meta name="description" content="Learn to play the piano faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee. ">
-    <meta property="og:description" content="Reach your piano goals with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-
-    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/fb-share-image.jpg" style="display: none;">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css"/>
-    <link href="/assets/css/tailwind-helpers.css" rel="stylesheet">
-    <link href="/assets/marketing/nav-footer.css" rel="stylesheet">
-
 
     <style>
         h1 strong,
@@ -22,7 +11,7 @@
         h1, h5, li, p {
             font-weight:400;
             line-height:1em;
-            font-family:"Open Sans", sans-serif;
+            /* font-family:"Open Sans", sans-serif; */
             margin:0 auto
         }
         h1 {
@@ -77,27 +66,13 @@
             background:linear-gradient(to bottom, #010e2c, #000c17);
         }
     </style>
-
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        function onSubmit(token) {
-            document.getElementById("join-form").submit();
-        }
-    </script>
 @stop
 
-{{--@section('body-class', 'tw-m-0')--}}
+<!-- Main -->
+@section('layout-body')
 
-{{--@section('global-body')--}}
-{{--    @include('sales.nav', [--}}
-{{--        'cartVersion' => true--}}
-{{--    ])--}}
+@include(
+    'musora.referral.join'
+)
 
-    @include(
-        'musora.referral.join'
-    )
-{{--    @include('sales.footer')--}}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
-{{--@endsection--}}
+@stop
