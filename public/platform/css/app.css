@@ -21876,6 +21876,12 @@ a:visited{
 .tw-bottom-0{
   bottom: 0px !important;
 }
+.tw-right-2{
+  right: 0.5rem !important;
+}
+.tw-top-2{
+  top: 0.5rem !important;
+}
 .tw-left-1\/2{
   left: 50% !important;
 }
@@ -21935,9 +21941,6 @@ a:visited{
 }
 .tw-right-4{
   right: 1rem !important;
-}
-.tw-top-2{
-  top: 0.5rem !important;
 }
 .tw-right-3{
   right: 0.75rem !important;
@@ -22080,6 +22083,10 @@ a:visited{
 .tw-mx-8{
   margin-left: 2rem !important;
   margin-right: 2rem !important;
+}
+.tw-mx-10{
+  margin-left: 2.5rem !important;
+  margin-right: 2.5rem !important;
 }
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
@@ -23812,6 +23819,9 @@ a:visited{
 .tw-p-\[32px\]{
   padding: 32px !important;
 }
+.tw-p-12{
+  padding: 3rem !important;
+}
 .tw-p-2{
   padding: 0.5rem !important;
 }
@@ -24014,10 +24024,6 @@ a:visited{
 .tw-py-12{
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
-}
-.tw-px-4{
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
 }
 .tw-pt-8{
   padding-top: 2rem !important;
