@@ -73,7 +73,7 @@ class AssignMentors extends Command
         $this->info("Found {$active_users->count()} active unassigned users");
         $this->info("Assigning Users...");
         $this->withProgressBar($active_users, function ($user) {
-            $this->mentorService->autoAssignMentor($user->id);
+            $this->mentorService->assignMentor($user->id);
         });
         return true;
     }

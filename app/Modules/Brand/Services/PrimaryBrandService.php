@@ -3,6 +3,7 @@
 namespace App\Modules\Brand\Services;
 
 use Illuminate\Support\Facades\Log;
+use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 
 class PrimaryBrandService

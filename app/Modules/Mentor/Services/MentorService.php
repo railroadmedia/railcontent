@@ -51,7 +51,7 @@ class MentorService
         if (!$brand) {
             throw new Exception("Unable to choose a brand for user '$userId'");
         }
-        $this->assignMentorByBrand($brand, $userId);
+        $this->assignMentorByBrand($userId, $brand);
     }
 
     public function assignMentorByBrand(int $userId, string $brand): void
@@ -60,17 +60,18 @@ class MentorService
         $mentorStudent = new MentorStudent();
         $mentorStudent->user_id = $userId;
         $mentorStudent->primary_brand = $brand;
-        $mentorStudent->mentor()->associate($mentor);
-        $mentorStudent->save();
-
-        $mentor->active_student_count += 1;
-        $mentor->save();
+        $this->updateMentorData($mentorStudent, $mentor);
     }
 
     public function reassignMentor(MentorStudent $mentorStudent)
     {
         $mentor = $this->chooseMentor($mentorStudent->primary_brand);
-        $mentorStudent->mentor()->associate($mentor);
+        $this->updateMentorData($mentorStudent, $mentor);
+    }
+
+    private function updateMentorData(MentorStudent $mentorStudent, ?Mentor $mentor): void
+    {
+        $mentorStudent->mentor_user_id = $mentor->user_id;
         $mentorStudent->save();
 
         $mentor->active_student_count += 1;
@@ -152,5 +153,18 @@ class MentorService
     public function hasMentor(int $userId)
     {
         return MentorStudent::query()->where('user_id', '=', $userId)->exists();
+    }
+
+    public function getMentorIdByStudent(int $userId): ?int
+    {
+        $result = MentorStudent::query()->select('mentor_user_id')->where('user_id', '=', $userId)->first();
+        return $result->mentor_user_id;
+    }
+
+    public function updateMentor(int $userId, int $newMentorId)
+    {
+        $mentorStudent = MentorStudent::query()->where('user_id', '=', $userId)->first();
+        $mentor = Mentor::query()->where('user_id', '=', $newMentorId)->first();
+        $this->updateMentorData($mentorStudent, $mentor);
     }
 }
