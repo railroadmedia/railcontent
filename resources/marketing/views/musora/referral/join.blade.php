@@ -15,7 +15,7 @@
 @endphp
 
 <div class="referral-sections">
-    <section class="text-center text-white py-6 md:py-10 lg:pt-12 lg:pb-16" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
+    <section class="text-center text-white py-6 md:py-10 lg:py-12 lg:py-16 mt-8" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
         <div class="container mx-auto max-w-6xl">
             @if ($canRefer && !$errors->has('email-invite-message'))
                 <h1 class="leading-tight lg:mb-14"><strong>{{ $referredByUserName }} gifted you 30 days<br class="hidden md:inline"> of free lessons!</strong></h1>
@@ -55,7 +55,7 @@
                                 @if($errors->has('g-recaptcha-response')) <label class="inline-block w-full text-left  text-red-600">  <em class="text-red-600 opacity-70 text-xs md:float-right"> {{ $errors->first('g-recaptcha-response') }}</em></label>@endif
                                 <div class="g-recaptcha mx-auto @if($errors->has('g-recaptcha-response')) text-red-600 @endif " name="recaptcha" style="display: inline-block;" id='recaptcha_token' data-sitekey="{{ $googleRecaptchaSiteKey }}"></div>
                             @endif
-                            <input name="button" type="submit" id="button" class="mt-2 text-white bg-{{ $brand }} leading-none text-base font-bold border-0 rounded-full select-none cursor-pointer text-center py-4 px-16 uppercase font-roboto" value="Redeem Guest Pass"/>
+                            <input name="button" type="submit" id="button" class="mt-2 text-white bg-{{ $brand }} leading-none text-lg border-0 rounded-full select-none cursor-pointer text-center py-4 px-16 uppercase font-bebas-neue" value="Redeem Guest Pass"/>
                         </form>
 
                     </div>

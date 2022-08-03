@@ -101,7 +101,7 @@
 @section('global-layout-body')
     @include("guitareo.sales.partials._nav")
 
-    <section class="text-center text-white py-6 md:py-10 lg:pt-12 lg:pb-16" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
+    <section class="text-center text-white py-6 md:py-10 lg:py-12 lg:py-16 mt-8" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
         <div class="container mx-auto max-w-6xl">
             <h1 class="leading-tight lg:mb-14"><strong>{{ 'todo' }} gifted you 30 days<br class="hidden md:inline"> of free guitar lessons!</strong></h1>
             <div class="flex flex-wrap lg:flex-nowrap items-center px-4">
@@ -135,7 +135,7 @@
                         <label class="inline-block w-full text-left" for="password_confirmation"><strong>Password confirm</strong> <em class="opacity-70 text-xs md:float-right">No typos.</em></label>
                         <input class="inline-block w-full mt-1 mb-4 default-form-field" type="password" id="password_confirmation" name="password_confirmation" placeholder="Password Confirm..." value="">
 
-                        <input name="button" type="submit" id="button" class="bg-guitareo leading-none text-base font-bold border-0 rounded-full select-none cursor-pointer text-center py-4 px-16 uppercase font-roboto" value="Redeem Guest Pass"/>
+                        <input name="button" type="submit" id="button" class="bg-guitareo leading-none text-lg border-0 rounded-full select-none cursor-pointer text-center py-4 px-16 uppercase font-bebas-neue" value="Redeem Guest Pass"/>
                     </form>
                 </div>
             </div>
@@ -143,7 +143,7 @@
     </section>
 
     {{--members area version--}}
-    <section class="text-center text-white py-6 md:py-10 lg:pt-12 lg:pb-16" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
+    <section class="text-center text-white py-6 md:py-10 lg:py-12 lg:py-16 mt-8" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
         <div class="container mx-auto max-w-6xl">
             <h1 class="leading-tight lg:mb-14"><strong>Share a free 30-day pass<br> with up to five friends.</strong></h1>
             <div class="flex flex-wrap lg:flex-nowrap items-center px-4">
