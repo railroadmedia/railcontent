@@ -27,9 +27,6 @@ const props = defineProps({
         default: false,
     }
 });
-onMounted(() => {
-    console.log(props.brand)
-})
 </script>
 
 <template>

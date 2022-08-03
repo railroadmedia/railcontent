@@ -4,13 +4,15 @@ import ModalRenderer from '../Modal/ModalRenderer.vue'
 import SquaredCard from '../SquaredCard/SquaredCard.vue'
 import SquaresContainer from "../SquaredCard/SquaresContainer.vue";
 import InstrumentCardContent from "../SquaredCard/InstrumentCardContent.vue";
-import { textColor, bgImgCard, brandUrl } from '../../../constants/brands.js'
+import { textColor, bgImgCard, brandUrl } from '../../../constants/brands.js';
+import { XIcon } from "@heroicons/vue/solid";
+
 
 const brandNames = ['drumeo', 'pianote', 'guitareo', 'singeo']
 
 export default {
     name: 'BrandSelector',
-    components: { ModalRenderer, SquaredCard, SquaresContainer, InstrumentCardContent },
+    components: { ModalRenderer, SquaredCard, SquaresContainer, InstrumentCardContent, XIcon },
     props: {
         brand: {
             type: String,
@@ -36,6 +38,10 @@ export default {
             window.location.href = `/${brand}`;
         }
 
+        const handleClose = () => {
+            isSelectorOpen.value = false;
+        }
+
         return {
             isSelectorOpen,
             handleBrandOpen,
@@ -43,7 +49,8 @@ export default {
             textColor,
             bgImgCard,
             brandUrl,
-            brandNames
+            brandNames,
+            handleClose
         }
     }
 }
@@ -53,7 +60,8 @@ export default {
     <div>
         <ModalRenderer v-if="isSelectorOpen" @onClose="() => handleBrandOpen(false)"
             key="ModalRendererKeyToMakeItDestroyByVif">
-            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-4 tw-h-screen md:tw-justify-center">
+            <button @click="handleClose" class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px]"><XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" /></button>
+            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-4 tw-h-screen md:tw-justify-center tw-relative">
                 <h2 class="tw-mb-[36px] tw-w-full tw-text-2xl md:tw-text-3xl tw-text-center tw-font-extrabold tw-text-white">
                     What instrument would you like to learn? 
                 </h2>
