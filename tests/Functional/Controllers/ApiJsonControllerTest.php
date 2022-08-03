@@ -2,14 +2,12 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
-use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -43,19 +41,6 @@ class ApiJsonControllerTest extends RailcontentTestCase
      */
     protected $commentFactory;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->contentDataFactory = $this->app->make(ContentDatumFactory::class);
-
-        $this->userId = $this->createAndLogInNewUser();
-    }
-
     public function test_onboarding()
     {
         $contents[] = $this->contentFactory->create();
@@ -83,7 +68,6 @@ class ApiJsonControllerTest extends RailcontentTestCase
         foreach ($results as $key => $result) {
             $this->assertTrue(in_array($key, config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
         }
-
     }
 
     public function test_strip_comments()
@@ -107,5 +91,18 @@ class ApiJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals($commentText, $response->decodeResponseJson()->json('data')[0]['comment']);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->contentDataFactory = $this->app->make(ContentDatumFactory::class);
+
+        $this->userId = $this->createAndLogInNewUser();
     }
 }

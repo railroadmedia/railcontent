@@ -32,18 +32,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
      */
     protected $datumFactory;
 
-    protected function setUp()
-    : void
-    {
-        $this->setConnectionType('mysql');
-
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-    }
-
     public function test_no_results()
     {
         $response = $this->call('GET', 'railcontent/search');
@@ -78,14 +66,14 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString()
             );
             sleep(1);
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field '.$i);
+            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
             sleep(1);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'name');
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
             $descriptionData =
-                $this->datumFactory->create($content[$i]['id'], 'description', 'description '.$this->faker->word);
-            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum '.$i);
+                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
+            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
             $content[$i] = $content[$i]->getArrayCopy();
         }
@@ -120,12 +108,12 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString()
             );
 
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', $this->faker->word.$i);
+            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', $this->faker->word . $i);
             $content[$i]['fields'] = [$titleField[$i]];
 
             $descriptionData =
-                $this->datumFactory->create($content[$i]['id'], 'description', 'description '.$this->faker->word);
-            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum '.$i);
+                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
+            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
             $content[$i] = $content[$i]->getArrayCopy();
         }
@@ -170,18 +158,19 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString()
             );
 
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field '.$i);
+            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'album');
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
             $descriptionData =
-                $this->datumFactory->create($content[$i]['id'], 'description', 'description '.$this->faker->word);
-            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum '.$i);
+                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
+            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $contentType = $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
+        $contentType =
+            $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
             'limit' => $limit,
@@ -276,7 +265,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         );
 
         for ($i = 0; $i < 6; $i++) {
-            $contentType = $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
+            $contentType =
+                $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
             $content[$i] = $this->contentFactory->create(
                 'slug',
                 $contentType,
@@ -303,7 +293,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             'limit' => $limit,
             'sort' => '-content_published_on',
             'included_types' => [$contentType],
-            'included_fields' => ['instructor,'.$instructor['id']],
+            'included_fields' => ['instructor,' . $instructor['id']],
         ]);
 
         $results =
@@ -337,7 +327,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             'page' => $page,
             'limit' => $limit,
             'sort' => '-content_published_on',
-            'included_fields' => ['instructor,'.$coach['id']],
+            'included_fields' => ['instructor,' . $coach['id']],
         ]);
 
         $results = $response->decodeResponseJson();
@@ -423,5 +413,16 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             'id' => $content3['id'],
             'popularity' => 0,
         ]);
+    }
+
+    protected function setUp(): void
+    {
+        $this->setConnectionType('mysql');
+
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
     }
 }

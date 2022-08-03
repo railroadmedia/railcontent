@@ -25,23 +25,13 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
 
     protected $datumFactory;
 
-
-    protected function setUp()
-    {
-        $this->setConnectionType('mysql');
-        
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(FullTextSearchRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-
-    }
-
     public function test_indexes_are_created()
     {
-        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
+        $content =
+            $this->contentFactory->create(
+                $this->faker->slug(),
+                $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            );
 
         $titleField = $this->fieldFactory->create($content['id'], 'title');
         $otherField = $this->fieldFactory->create($content['id'], $this->faker->word);
@@ -53,21 +43,31 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
 
         $this->classBeingTested->createSearchIndexes([$content]);
 
-        $this->assertDatabaseHas(ConfigService::$tableSearchIndexes,
+        $this->assertDatabaseHas(
+            ConfigService::$tableSearchIndexes,
             [
                 'content_id' => $content['id'],
                 'high_value' => $content['slug'] . ' ' . $titleField['value'],
-                'medium_value' => $titleField['value'] . ' ' . $otherField['value'] . ' ' . $descriptionData['value'] . ' ' . $otherData['value'],
-                'low_value' => $titleField['value'] . ' ' . $otherField['value'] . ' ' . $descriptionData['value']
-            ]);
+                'medium_value' => $titleField['value'] .
+                    ' ' .
+                    $otherField['value'] .
+                    ' ' .
+                    $descriptionData['value'] .
+                    ' ' .
+                    $otherData['value'],
+                'low_value' => $titleField['value'] . ' ' . $otherField['value'] . ' ' . $descriptionData['value'],
+            ]
+        );
     }
 
     public function test_search()
     {
         for ($i = 1; $i < 10; $i++) {
-            $content[$i] = (array)$this->contentFactory->create( $this->faker->word,
+            $content[$i] = (array)$this->contentFactory->create(
+                $this->faker->word,
                 $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
-                ContentService::STATUS_PUBLISHED);
+                ContentService::STATUS_PUBLISHED
+            );
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title');
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], $this->faker->word);
@@ -89,17 +89,19 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
     public function test_search_no_results()
     {
         for ($i = 0; $i < 10; $i++) {
-            $content[$i] = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
+            $content[$i] =
+                $this->contentFactory->create(
+                    $this->faker->slug(),
+                    $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+                );
 
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field'.$i);
-            $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field'.$i);
+            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field' . $i);
+            $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field' . $i);
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
-            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description'.$i);
-            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum'.$i);
+            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description' . $i);
+            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-
-
         }
         $this->classBeingTested->createSearchIndexes($content);
 
@@ -114,22 +116,38 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
         $page = 1;
         $limit = 10;
         for ($i = 0; $i < 15; $i++) {
-            $content[$i] = $this->contentFactory->create('slug',  $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
+            $content[$i] =
+                $this->contentFactory->create(
+                    'slug',
+                    $this->faker->randomElement(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+                );
 
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field '.$i);
-            $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field '.$i);
+            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
+            $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field ' . $i);
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
-            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description '.$i);
-            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum '.$i);
+            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description ' . $i);
+            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
         }
 
         $this->classBeingTested->createSearchIndexes($content);
-        $results = $this->classBeingTested->search('slug field description',$page, $limit);
+        $results = $this->classBeingTested->search('slug field description', $page, $limit);
 
         //check that the results are returned paginated
         $this->assertEquals($limit, count($results));
+    }
+
+    protected function setUp(): void
+    {
+        $this->setConnectionType('mysql');
+
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(FullTextSearchRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
     }
 
 }

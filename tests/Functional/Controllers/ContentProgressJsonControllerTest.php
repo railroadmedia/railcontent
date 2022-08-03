@@ -29,16 +29,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
     protected $userId;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->userId = $this->createAndLogInNewUser();
-    }
-
     public function test_start_content()
     {
         $content = $this->contentFactory->create();
@@ -72,7 +62,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         ];
 
         $this->assertEquals([$expectedErrors], $responseErrors);
-
     }
 
     public function test_complete_content()
@@ -84,7 +73,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
                 'content_id' => $content['id'],
             ]
         );
-
 
 
         $response = $this->put(
@@ -240,8 +228,18 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
         foreach ($results as $result) {
             $this->assertEquals('course', $result['type']);
-            $this->assertTrue(in_array($result['id'],[2, 4]));
+            $this->assertTrue(in_array($result['id'], [2, 4]));
             $this->assertEquals($result['brand'], config('railcontent.brand'));
         }
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->serviceBeingTested = $this->app->make(ContentService::class);
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->userId = $this->createAndLogInNewUser();
     }
 }

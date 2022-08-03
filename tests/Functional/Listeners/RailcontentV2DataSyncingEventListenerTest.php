@@ -74,23 +74,6 @@ class RailcontentV2DataSyncingEventListenerTest extends RailcontentTestCase
      */
     protected $userContentProgressFactory;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(RailcontentV2DataSyncingEventListener::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
-    }
-
     public function test_update_content_children_parent_data_columns()
     {
         $parent = $this->contentFactory->create(
@@ -234,9 +217,18 @@ class RailcontentV2DataSyncingEventListenerTest extends RailcontentTestCase
             ->get()
             ->first();
 
-        $this->assertEquals($contentLinked['id'], json_decode($linkedContent1Row['compiled_view_data'], true)['instructor']['id']);
-        $this->assertEquals('Billy Joel', json_decode($linkedContent1Row['compiled_view_data'], true)['instructor']['name']);
-        $this->assertEquals(['Billy Joel'], json_decode($linkedContent1Row['compiled_view_data'], true)['instructor_names']);
+        $this->assertEquals(
+            $contentLinked['id'],
+            json_decode($linkedContent1Row['compiled_view_data'], true)['instructor']['id']
+        );
+        $this->assertEquals(
+            'Billy Joel',
+            json_decode($linkedContent1Row['compiled_view_data'], true)['instructor']['name']
+        );
+        $this->assertEquals(
+            ['Billy Joel'],
+            json_decode($linkedContent1Row['compiled_view_data'], true)['instructor_names']
+        );
 
         $linkedContent2Row = $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContent)
@@ -244,9 +236,18 @@ class RailcontentV2DataSyncingEventListenerTest extends RailcontentTestCase
             ->get()
             ->first();
 
-        $this->assertEquals($contentLinked['id'], json_decode($linkedContent2Row['compiled_view_data'], true)['instructor']['id']);
-        $this->assertEquals('Billy Joel', json_decode($linkedContent2Row['compiled_view_data'], true)['instructor']['name']);
-        $this->assertEquals(['Billy Joel'], json_decode($linkedContent2Row['compiled_view_data'], true)['instructor_names']);
+        $this->assertEquals(
+            $contentLinked['id'],
+            json_decode($linkedContent2Row['compiled_view_data'], true)['instructor']['id']
+        );
+        $this->assertEquals(
+            'Billy Joel',
+            json_decode($linkedContent2Row['compiled_view_data'], true)['instructor']['name']
+        );
+        $this->assertEquals(
+            ['Billy Joel'],
+            json_decode($linkedContent2Row['compiled_view_data'], true)['instructor_names']
+        );
 
         $linkedContent3Row = $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table(ConfigService::$tableContent)
@@ -254,8 +255,34 @@ class RailcontentV2DataSyncingEventListenerTest extends RailcontentTestCase
             ->get()
             ->first();
 
-        $this->assertEquals($contentLinked['id'], json_decode($linkedContent3Row['compiled_view_data'], true)['instructor']['id']);
-        $this->assertEquals('Billy Joel', json_decode($linkedContent3Row['compiled_view_data'], true)['instructor']['name']);
-        $this->assertEquals(['Billy Joel'], json_decode($linkedContent3Row['compiled_view_data'], true)['instructor_names']);
+        $this->assertEquals(
+            $contentLinked['id'],
+            json_decode($linkedContent3Row['compiled_view_data'], true)['instructor']['id']
+        );
+        $this->assertEquals(
+            'Billy Joel',
+            json_decode($linkedContent3Row['compiled_view_data'], true)['instructor']['name']
+        );
+        $this->assertEquals(
+            ['Billy Joel'],
+            json_decode($linkedContent3Row['compiled_view_data'], true)['instructor_names']
+        );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(RailcontentV2DataSyncingEventListener::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 }

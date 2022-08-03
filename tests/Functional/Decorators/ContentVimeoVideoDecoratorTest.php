@@ -45,16 +45,6 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
      */
     protected $serviceBeingTested;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-    }
-
     public function test_decorate()
     {
         $content = $this->contentFactory->create();
@@ -79,6 +69,16 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
         $this->assertArrayHasKey(270, $contentResults['vimeo_video_playback_endpoints']);
         $this->assertArrayHasKey(360, $contentResults['vimeo_video_playback_endpoints']);
         $this->assertArrayHasKey(720, $contentResults['vimeo_video_playback_endpoints']);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+
+        $this->serviceBeingTested = $this->app->make(ContentService::class);
     }
 
     protected function getEnvironmentSetUp($app)

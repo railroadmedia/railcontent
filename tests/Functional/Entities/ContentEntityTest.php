@@ -10,7 +10,6 @@ use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -52,24 +51,8 @@ class ContentEntityTest extends RailcontentTestCase
      */
     protected $userPermissionsRepository;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionsFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
-
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-
-    }
-
     public function test_get_by_entity_mapping()
     {
-
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create();
         $linkedContent = $this->contentFactory->create();
@@ -205,6 +188,20 @@ class ContentEntityTest extends RailcontentTestCase
                 );
             }
         }
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionsFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
+
+        $this->serviceBeingTested = $this->app->make(ContentService::class);
     }
 
     protected function getEnvironmentSetUp($app)

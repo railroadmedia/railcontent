@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
@@ -15,7 +16,6 @@ use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Illuminate\Support\Facades\Event;
 
 class ContentVersionEventsTest extends RailcontentTestCase
 {
@@ -34,15 +34,6 @@ class ContentVersionEventsTest extends RailcontentTestCase
      */
     protected $contentFieldFactory;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
-    }
-
     public function _test_version_content_on_content_creation()
     {
         //Event::fake();
@@ -54,11 +45,11 @@ class ContentVersionEventsTest extends RailcontentTestCase
             'position' => $this->faker->numberBetween(),
             'status' => ContentService::STATUS_PUBLISHED,
             'parent_id' => null,
-            'type' => $this->faker->word
+            'type' => $this->faker->word,
         ]);
 
         //check that the ContentCreated event was dispatched with the correct content id
-        Event::assertDispatched(ContentCreated::class, function($event) use ($content) {
+        Event::assertDispatched(ContentCreated::class, function ($event) use ($content) {
             return $event->contentId == $content['id'];
         });
     }
@@ -69,12 +60,12 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create();
 
-        $this->call('PATCH', 'railcontent/content/'.$content['id'], [
-            'slug' => $this->faker->word
+        $this->call('PATCH', 'railcontent/content/' . $content['id'], [
+            'slug' => $this->faker->word,
         ]);
 
         //check that the ContentUpdated event was dispatched with the correct content id
-        Event::assertDispatched(ContentUpdated::class, function($event) use ($content) {
+        Event::assertDispatched(ContentUpdated::class, function ($event) use ($content) {
             return $event->contentId == $content['id'];
         });
     }
@@ -85,16 +76,19 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create();
 
-        $this->call('PUT', 'railcontent/content/datum',
+        $this->call(
+            'PUT',
+            'railcontent/content/datum',
             [
                 'content_id' => $content['id'],
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => $this->faker->numberBetween()
-            ]);
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
 
         //check that the ContentDatumCreated event was dispatched with the correct content id
-        Event::assertDispatched(ContentDatumCreated::class, function($event) use ($content) {
+        Event::assertDispatched(ContentDatumCreated::class, function ($event) use ($content) {
             return $event->contentId == $content['id'];
         });
     }
@@ -107,16 +101,19 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $datum = $this->contentDatumFactory->create($content['id']);
 
-        $this->call('PATCH', 'railcontent/content/datum/'.$datum['id'],
+        $this->call(
+            'PATCH',
+            'railcontent/content/datum/' . $datum['id'],
             [
                 'content_id' => $content['id'],
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => $this->faker->numberBetween()
-            ]);
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
 
         //check that the ContentDatumUpdated event was dispatched with the correct content id
-        Event::assertDispatched(ContentDatumUpdated::class, function($event) use ($content) {
+        Event::assertDispatched(ContentDatumUpdated::class, function ($event) use ($content) {
             return $event->contentId == $content['id'];
         });
     }
@@ -129,10 +126,10 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $datum = $this->contentDatumFactory->create($content['id']);
 
-        $this->call('DELETE', 'railcontent/content/datum/'.$datum['id']);
+        $this->call('DELETE', 'railcontent/content/datum/' . $datum['id']);
 
         //check that the ContentDatumDeleted event was dispatched with the correct content id
-        Event::assertDispatched(ContentDatumDeleted::class, function($event) use ($content) {
+        Event::assertDispatched(ContentDatumDeleted::class, function ($event) use ($content) {
             return $event->contentId == $content['id'];
         });
     }
@@ -143,17 +140,20 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create();
 
-        $this->call('PUT', 'railcontent/content/field',
+        $this->call(
+            'PUT',
+            'railcontent/content/field',
             [
                 'content_id' => $content['id'],
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
                 'position' => $this->faker->numberBetween(),
-                'type' => $this->faker->word
-            ]);
+                'type' => $this->faker->word,
+            ]
+        );
 
         //check that the ContentFieldCreated event was dispatched with the correct content id
-        Event::assertDispatched(ContentFieldCreated::class, function($event) use ($content) {
+        Event::assertDispatched(ContentFieldCreated::class, function ($event) use ($content) {
             return $event->newField['content_id'] == $content['id'];
         });
     }
@@ -166,14 +166,17 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $this->call('PATCH', 'railcontent/content/field/'.$field['id'],
+        $this->call(
+            'PATCH',
+            'railcontent/content/field/' . $field['id'],
             [
                 'content_id' => $content['id'],
-                'value' => $this->faker->word
-            ]);
+                'value' => $this->faker->word,
+            ]
+        );
 
         //check that the ContentFieldUpdated event was dispatched with the correct content id
-        Event::assertDispatched(ContentFieldUpdated::class, function($event) use ($content) {
+        Event::assertDispatched(ContentFieldUpdated::class, function ($event) use ($content) {
             return $event->newField['content_id'] == $content['id'];
         });
     }
@@ -186,12 +189,21 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $this->call('DELETE', 'railcontent/content/field/'.$field['id']);
+        $this->call('DELETE', 'railcontent/content/field/' . $field['id']);
 
         //check that the ContentFieldDeleted event was dispatched with the correct content id
-        Event::assertDispatched(ContentFieldDeleted::class, function($event) use ($content) {
+        Event::assertDispatched(ContentFieldDeleted::class, function ($event) use ($content) {
             return $event->deletedField['content_id'] == $content['id'];
         });
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 
 }

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -30,15 +29,6 @@ class ContentFieldControllerTest extends RailcontentTestCase
      * @var ContentContentFieldFactory
      */
     protected $contentFieldFactory;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFieldService = $this->app->make(ContentFieldService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
-    }
 
     public function test_create_content_field_controller_method_response()
     {
@@ -69,7 +59,6 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('field')['fields'][0]);
-
     }
 
     public function test_add_content_field_not_pass_the_validation()
@@ -170,9 +159,10 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $results = $this->contentFieldService->deleteByContentIdAndKey($field['content_id'], $field['key'], $field['value']);
+        $results =
+            $this->contentFieldService->deleteByContentIdAndKey($field['content_id'], $field['key'], $field['value']);
 
-        $this->assertEquals([],$results['fields']);
+        $this->assertEquals([], $results['fields']);
     }
 
     public function content_updated_event_dispatched_when_link_content_field()
@@ -269,16 +259,26 @@ class ContentFieldControllerTest extends RailcontentTestCase
             ]
         );
 
-        $expectedResults = [[
-            "content_id" => $content['id'],
-            "key" => $key,
-            "value" => $value,
-            "type" => $type,
-            "position" => 1,
-        ]];
+        $expectedResults = [
+            [
+                "content_id" => $content['id'],
+                "key" => $key,
+                "value" => $value,
+                "type" => $type,
+                "position" => 1,
+            ],
+        ];
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals($expectedResults, $response->decodeResponseJson()->json('post')['fields']);
+    }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFieldService = $this->app->make(ContentFieldService::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 }

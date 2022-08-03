@@ -54,24 +54,6 @@ class ContentRepositoryTest extends RailcontentTestCase
      */
     protected $contentPermissionFactory;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-
-        ContentRepository::$pullFutureContent = true;
-        ContentRepository::$availableContentStatues = false;
-        ContentRepository::$includedLanguages = false;
-    }
-
     public function test_get_by_id()
     {
         $content = [
@@ -97,7 +79,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'data' => [],
                 'permissions' => [],
                 'parent_id' => null,
-                'child_id' => null
+                'child_id' => null,
             ]),
             $results
         );
@@ -105,16 +87,18 @@ class ContentRepositoryTest extends RailcontentTestCase
 
     public function test_get_by_id_with_fields_datum()
     {
-        $content = $this->contentFactory->create($this->faker->word,
+        $content = $this->contentFactory->create(
+            $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED);
+            ContentService::STATUS_PUBLISHED
+        );
         $contentId = $content['id'];
 
         $expectedFields = [];
         $expectedData = [];
         $expectedPermissions = [];
 
-       for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $expectedFields[] = $this->contentFieldFactory->create($contentId);
             $expectedData[] = $this->contentDatumFactory->create($contentId);
         }
@@ -130,7 +114,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                     'data' => $expectedData,
                     'permissions' => [],
                     'parent_id' => null,
-                    'child_id' => null
+                    'child_id' => null,
                 ]
             ),
             $results
@@ -283,7 +267,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             'brand' => ConfigService::$brand,
             'published_on' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'archived_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $contentId = $this->classBeingTested->create($data);
@@ -309,7 +293,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             'brand' => ConfigService::$brand,
             'published_on' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'archived_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $contentId = $this->classBeingTested->create($oldContent);
@@ -322,7 +306,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             'brand' => ConfigService::$brand,
             'published_on' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'archived_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $this->classBeingTested->update($contentId, $newContent);
@@ -351,7 +335,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'brand' => ConfigService::$brand,
                 'published_on' => Carbon::now()->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => Carbon::now()->toDateTimeString()
+                'archived_on' => Carbon::now()->toDateTimeString(),
             ];
 
             $contentId = $this->classBeingTested->create($contents[$i + 1]);
@@ -378,5 +362,23 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             ['id' => 4]
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+
+        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = false;
+        ContentRepository::$includedLanguages = false;
     }
 }

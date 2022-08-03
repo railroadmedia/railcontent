@@ -6,7 +6,6 @@ use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -33,19 +32,6 @@ class FullTextSearchServiceTest extends RailcontentTestCase
      * @var FullTextSearchRepository $fullSearchRepository
      */
     protected $fullSearchRepository;
-
-    protected function setUp()
-    {
-        $this->setConnectionType('mysql');
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(FullTextSearchService::class);
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->fullSearchRepository = $this->app->make(FullTextSearchRepository::class);
-    }
 
     public function test_search_no_results()
     {
@@ -87,6 +73,19 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
         $this->assertArraySubset($expectedContents, $results['results']->toArray());
         $this->assertEquals(count($content), $results['total_results']);
+    }
+
+    protected function setUp(): void
+    {
+        $this->setConnectionType('mysql');
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(FullTextSearchService::class);
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->fullSearchRepository = $this->app->make(FullTextSearchRepository::class);
     }
 
 }
