@@ -20,6 +20,7 @@ use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
 use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
+use Railroad\Railcontent\Commands\FillContentCompiledViewData;
 use Railroad\Railcontent\Commands\FillContentParentContentDataColumnFromHierarchy;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
@@ -133,6 +134,7 @@ class RailcontentServiceProvider extends ServiceProvider
             DeleteContentAndHierarchiesForUserPlaylists::class,
             SyncContentRowFromRelatedTables::class,
             FillContentParentContentDataColumnFromHierarchy::class,
+            FillContentCompiledViewData::class,
         ]);
 
         Validator::extend(

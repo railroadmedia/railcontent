@@ -125,22 +125,22 @@ class ContentService
     private $idContentCache = [];
 
     /**
-     * @param ContentRepository $contentRepository
-     * @param ContentVersionRepository $versionRepository
-     * @param ContentFieldRepository $fieldRepository
-     * @param ContentDatumRepository $datumRepository
-     * @param ContentHierarchyRepository $contentHierarchyRepository
-     * @param ContentPermissionRepository $contentPermissionRepository
-     * @param CommentRepository $commentRepository
-     * @param CommentAssignmentRepository $commentAssignmentRepository
-     * @param UserContentProgressRepository $userContentProgressRepository
-     * @param UserPermissionsRepository $userPermissionsRepository
-     * @param ContentFollowsRepository $contentFollowsRepository
-     * @param ElasticService $elasticService
-     * @param ContentTopicRepository $contentTopicRepository
-     * @param ContentInstructorRepository $contentInstructorRepository
-     * @param ContentStyleRepository $contentStyleRepository
-     * @param ContentBpmRepository $contentBpmRepository
+     * @param  ContentRepository  $contentRepository
+     * @param  ContentVersionRepository  $versionRepository
+     * @param  ContentFieldRepository  $fieldRepository
+     * @param  ContentDatumRepository  $datumRepository
+     * @param  ContentHierarchyRepository  $contentHierarchyRepository
+     * @param  ContentPermissionRepository  $contentPermissionRepository
+     * @param  CommentRepository  $commentRepository
+     * @param  CommentAssignmentRepository  $commentAssignmentRepository
+     * @param  UserContentProgressRepository  $userContentProgressRepository
+     * @param  UserPermissionsRepository  $userPermissionsRepository
+     * @param  ContentFollowsRepository  $contentFollowsRepository
+     * @param  ElasticService  $elasticService
+     * @param  ContentTopicRepository  $contentTopicRepository
+     * @param  ContentInstructorRepository  $contentInstructorRepository
+     * @param  ContentStyleRepository  $contentStyleRepository
+     * @param  ContentBpmRepository  $contentBpmRepository
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -183,7 +183,7 @@ class ContentService
     /**
      * Call the get by id method from repository and return the content
      *
-     * @param integer $id
+     * @param  integer  $id
      * @return ContentEntity|array|null
      */
     public function getById($id)
@@ -208,7 +208,7 @@ class ContentService
     /**
      * Call the get by ids method from repository
      *
-     * @param integer[] $ids
+     * @param  integer[]  $ids
      * @return array|Collection|ContentEntity[]
      */
     public function getByIds($ids)
@@ -233,7 +233,7 @@ class ContentService
     /**
      * Get all contents with specified type.
      *
-     * @param string $type
+     * @param  string  $type
      * @return array|Collection|ContentEntity[]
      */
     public function getAllByType($type)
@@ -252,12 +252,12 @@ class ContentService
     /**
      * Get all contents with specified status, field and type.
      *
-     * @param array $types
-     * @param string $status
-     * @param string $fieldKey
-     * @param string $fieldValue
-     * @param string $fieldType
-     * @param string $fieldComparisonOperator
+     * @param  array  $types
+     * @param  string  $status
+     * @param  string  $fieldKey
+     * @param  string  $fieldValue
+     * @param  string  $fieldType
+     * @param  string  $fieldComparisonOperator
      * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndField(
@@ -299,13 +299,13 @@ class ContentService
     /**
      * Get ordered contents by type, status and published_on date.
      *
-     * @param array $types
-     * @param string $status
-     * @param string $publishedOnValue
-     * @param string $publishedOnComparisonOperator
-     * @param string $orderByColumn
-     * @param string $orderByDirection
-     * @param integer $limit
+     * @param  array  $types
+     * @param  string  $status
+     * @param  string  $publishedOnValue
+     * @param  string  $publishedOnComparisonOperator
+     * @param  string  $orderByColumn
+     * @param  string  $orderByDirection
+     * @param  integer  $limit
      * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -336,8 +336,8 @@ class ContentService
     /**
      * Get contents by slug and title.
      *
-     * @param string $slug
-     * @param string $type
+     * @param  string  $slug
+     * @param  string  $type
      * @return array|Collection|ContentEntity[]
      */
     public function getBySlugAndType($slug, $type)
@@ -355,9 +355,9 @@ class ContentService
     /**
      * Get contents by userId, type and slug.
      *
-     * @param integer $userId
-     * @param string $type
-     * @param string $slug
+     * @param  integer  $userId
+     * @param  string  $type
+     * @param  string  $slug
      * @return array|Collection|ContentEntity[]
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
@@ -376,9 +376,9 @@ class ContentService
     /**
      * Get contents based on parent id.
      *
-     * @param integer $parentId
-     * @param string $orderBy
-     * @param string $orderByDirection
+     * @param  integer  $parentId
+     * @param  string  $orderBy
+     * @param  string  $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
@@ -398,9 +398,9 @@ class ContentService
     /**
      * Get paginated contents by parent id.
      *
-     * @param integer $parentId
-     * @param string $orderBy
-     * @param string $orderByDirection
+     * @param  integer  $parentId
+     * @param  string  $orderBy
+     * @param  string  $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdPaginated(
@@ -434,10 +434,10 @@ class ContentService
     /**
      * Get ordered contents by parent id with specified type.
      *
-     * @param integer $parentId
-     * @param array $types
-     * @param string $orderBy
-     * @param string $orderByDirection
+     * @param  integer  $parentId
+     * @param  array  $types
+     * @param  string  $orderBy
+     * @param  string  $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdWhereTypeIn(
@@ -466,10 +466,10 @@ class ContentService
     /**
      * Get ordered contents by parent id and type.
      *
-     * @param integer $parentId
-     * @param array $types
-     * @param string $orderBy
-     * @param string $orderByDirection
+     * @param  integer  $parentId
+     * @param  array  $types
+     * @param  string  $orderBy
+     * @param  string  $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdWhereTypeInPaginated(
@@ -509,8 +509,8 @@ class ContentService
     /**
      * Count contents with specified type and parent id.
      *
-     * @param integer $parentId
-     * @param array $types
+     * @param  integer  $parentId
+     * @param  array  $types
      * @return integer
      */
     public function countByParentIdWhereTypeIn(
@@ -526,9 +526,9 @@ class ContentService
     /**
      * Get ordered contents based on parent ids.
      *
-     * @param array $parentIds
-     * @param string $orderBy
-     * @param string $orderByDirection
+     * @param  array  $parentIds
+     * @param  string  $orderBy
+     * @param  string  $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
@@ -548,8 +548,8 @@ class ContentService
     /**
      * Get contents by child and type.
      *
-     * @param integer $childId
-     * @param string $type
+     * @param  integer  $childId
+     * @param  string  $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereType($childId, $type)
@@ -569,8 +569,8 @@ class ContentService
     /**
      * Get contents by child ids with specified type.
      *
-     * @param array $childIds
-     * @param string $type
+     * @param  array  $childIds
+     * @param  string  $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdsWhereType(array $childIds, $type)
@@ -590,8 +590,8 @@ class ContentService
     /**
      * Get contents by child ids with specified type.
      *
-     * @param array $childIds
-     * @param string $type
+     * @param  array  $childIds
+     * @param  string  $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdsWhereTypeForUrl(array $childIds, $type)
@@ -611,8 +611,8 @@ class ContentService
     /**
      * Get contents by child id where parent type met the criteria.
      *
-     * @param integer $childId
-     * @param array $types
+     * @param  integer  $childId
+     * @param  array  $types
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
@@ -632,11 +632,11 @@ class ContentService
     /**
      * Get paginated contents by type and user progress state.
      *
-     * @param string $type
-     * @param integer $userId
-     * @param string $state
-     * @param int $limit
-     * @param int $skip
+     * @param  string  $type
+     * @param  integer  $userId
+     * @param  string  $state
+     * @param  int  $limit
+     * @param  int  $skip
      * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
@@ -669,11 +669,11 @@ class ContentService
     /**
      * Get paginated contents by types and user progress state.
      *
-     * @param array $types
-     * @param integer $userId
-     * @param string $state
-     * @param int $limit
-     * @param int $skip
+     * @param  array  $types
+     * @param  integer  $userId
+     * @param  string  $state
+     * @param  int  $limit
+     * @param  int  $skip
      * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypesUserProgressState(
@@ -711,11 +711,11 @@ class ContentService
     /**
      * Get recent paginated contents by types and user progress state.
      *
-     * @param array $types
-     * @param integer $userId
-     * @param string $state
-     * @param int $limit
-     * @param int $skip
+     * @param  array  $types
+     * @param  integer  $userId
+     * @param  string  $state
+     * @param  int  $limit
+     * @param  int  $skip
      * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypesRecentUserProgressState(
@@ -753,11 +753,11 @@ class ContentService
     /**
      * Count recent contents with user progress state and type.
      *
-     * @param array $types
-     * @param integer $userId
-     * @param string $state
-     * @param int $limit
-     * @param int $skip
+     * @param  array  $types
+     * @param  integer  $userId
+     * @param  string  $state
+     * @param  int  $limit
+     * @param  int  $skip
      * @return array|Collection|ContentEntity[]
      */
     public function countByTypesRecentUserProgressState(
@@ -775,12 +775,12 @@ class ContentService
     /**
      * Get neighbouring siblings by type.
      *
-     * @param string $type
-     * @param string $columnName
-     * @param string $columnValue
-     * @param int $siblingPairLimit
-     * @param string $orderColumn
-     * @param string $orderDirection
+     * @param  string  $type
+     * @param  string  $columnName
+     * @param  string  $columnValue
+     * @param  int  $siblingPairLimit
+     * @param  string  $orderColumn
+     * @param  string  $orderDirection
      * @return array|ContentEntity|Collection
      */
     public function getTypeNeighbouringSiblings(
@@ -834,9 +834,9 @@ class ContentService
     /**
      * Count contents by type and user progress state.
      *
-     * @param array $types
-     * @param integer $userId
-     * @param string $state
+     * @param  array  $types
+     * @param  integer  $userId
+     * @param  string  $state
      * @return integer
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
@@ -857,18 +857,18 @@ class ContentService
      *
      * @param $page
      * @param $limit
-     * @param string $orderByAndDirection
-     * @param array $includedTypes
-     * @param array $slugHierarchy
-     * @param array $requiredParentIds
-     * @param array $requiredFields
-     * @param array $includedFields
-     * @param array $requiredUserStates
-     * @param array $includedUserStates
-     * @param bool $pullFilterFields
-     * @param false $getFutureContentOnly
-     * @param bool $pullPagination
-     * @param false $getFollowedContentOnly
+     * @param  string  $orderByAndDirection
+     * @param  array  $includedTypes
+     * @param  array  $slugHierarchy
+     * @param  array  $requiredParentIds
+     * @param  array  $requiredFields
+     * @param  array  $includedFields
+     * @param  array  $requiredUserStates
+     * @param  array  $includedUserStates
+     * @param  bool  $pullFilterFields
+     * @param  false  $getFutureContentOnly
+     * @param  bool  $pullPagination
+     * @param  false  $getFollowedContentOnly
      * @return mixed|Collection|null
      */
     public function getFiltered(
@@ -1113,16 +1113,16 @@ class ContentService
     /**
      * Call the create method from ContentRepository and return the new created content
      *
-     * @param string $slug
-     * @param string $type
-     * @param string $status
-     * @param string|null $language
-     * @param string|null $brand
-     * @param int|null $userId
-     * @param string|null $publishedOn
-     * @param int|null $parentId
-     * @param int $sort
-     * @param bool $slugify
+     * @param  string  $slug
+     * @param  string  $type
+     * @param  string  $status
+     * @param  string|null  $language
+     * @param  string|null  $brand
+     * @param  int|null  $userId
+     * @param  string|null  $publishedOn
+     * @param  int|null  $parentId
+     * @param  int  $sort
+     * @param  bool  $slugify
      * @return array|ContentEntity
      */
     public function create(
@@ -1178,8 +1178,8 @@ class ContentService
     /**
      * Update and return the updated content.
      *
-     * @param integer $id
-     * @param array $data
+     * @param  integer  $id
+     * @param  array  $data
      * @return array|ContentEntity
      */
     public function update($id, array $data)
@@ -1227,7 +1227,7 @@ class ContentService
     /**
      * Delete data related with the specified content id.
      *
-     * @param integer $contentId
+     * @param  integer  $contentId
      */
     public function deleteContentRelated($contentId)
     {
@@ -1259,8 +1259,8 @@ class ContentService
 
     /**
      * @param $userId
-     * @param array $contents
-     * @param null $singlePlaylistSlug
+     * @param  array  $contents
+     * @param  null  $singlePlaylistSlug
      * @return array|Collection|ContentEntity[]
      */
     public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
@@ -1323,7 +1323,7 @@ class ContentService
     /**
      * Soft delete the children for specified content id.
      *
-     * @param int $id
+     * @param  int  $id
      * @return int
      */
     public function softDeleteContentChildren($id)
@@ -1339,9 +1339,9 @@ class ContentService
     /**
      * Get contents by field value and types.
      *
-     * @param array $contentTypes
-     * @param string $contentFieldKey
-     * @param array $contentFieldValues
+     * @param  array  $contentTypes
+     * @param  string  $contentFieldKey
+     * @param  array  $contentFieldValues
      * @return mixed
      */
     public function getByContentFieldValuesForTypes(
@@ -1371,8 +1371,8 @@ class ContentService
     }
 
     /**
-     * @param null $brand
-     * @param bool $includeSemesterPackLessons
+     * @param  null  $brand
+     * @param  bool  $includeSemesterPackLessons
      * @return Collection|ContentEntity[]
      */
     public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
@@ -1606,8 +1606,8 @@ class ContentService
     }
 
     /**
-     * @param array $types
-     * @param string $groupBy
+     * @param  array  $types
+     * @param  string  $groupBy
      * @return mixed
      */
     public function countByTypes(array $types, $groupBy = '')
@@ -1807,7 +1807,7 @@ class ContentService
     /**
      * Call the getElasticContentById method from repository and return the data for elasticsearch documents
      *
-     * @param integer $id
+     * @param  integer  $id
      * @return ContentEntity|array|null
      */
     public function getContentForElastic($id)
@@ -1967,46 +1967,46 @@ class ContentService
             if (!empty($hierarchyData)) {
                 $parentContentDataForDatabase = [];
 
-                if (!empty($hierarchyData->rch1_parent_id) &&
-                    !empty($hierarchyData->rcp1_content_id) &&
-                    !empty($hierarchyData->rcp1_content_slug)) {
+                if (!empty($hierarchyData['rch1_parent_id']) &&
+                    !empty($hierarchyData['rcp1_content_id']) &&
+                    !empty($hierarchyData['rcp1_content_slug'])) {
                     $parentContentDataForDatabase[] = (object)[
-                        'id' => $hierarchyData->rcp1_content_id,
-                        'slug' => $hierarchyData->rcp1_content_slug,
-                        'type' => $hierarchyData->rcp1_content_type,
-                        'position' => $hierarchyData->rch2_child_position,
+                        'id' => $hierarchyData['rcp1_content_id'],
+                        'slug' => $hierarchyData['rcp1_content_slug'],
+                        'type' => $hierarchyData['rcp1_content_type'],
+                        'position' => $hierarchyData['rch2_child_position'],
                     ];
                 }
 
-                if (!empty($hierarchyData->rch2_parent_id) &&
-                    !empty($hierarchyData->rcp2_content_id) &&
-                    !empty($hierarchyData->rcp2_content_slug)) {
+                if (!empty($hierarchyData['rch2_parent_id']) &&
+                    !empty($hierarchyData['rcp2_content_id']) &&
+                    !empty($hierarchyData['rcp2_content_slug'])) {
                     $parentContentDataForDatabase[] = (object)[
-                        'id' => $hierarchyData->rcp2_content_id,
-                        'slug' => $hierarchyData->rcp2_content_slug,
-                        'type' => $hierarchyData->rcp2_content_type,
-                        'position' => $hierarchyData->rch3_child_position,
+                        'id' => $hierarchyData['rcp2_content_id'],
+                        'slug' => $hierarchyData['rcp2_content_slug'],
+                        'type' => $hierarchyData['rcp2_content_type'],
+                        'position' => $hierarchyData['rch3_child_position'],
                     ];
                 }
 
-                if (!empty($hierarchyData->rch3_parent_id) &&
-                    !empty($hierarchyData->rcp3_content_id) &&
-                    !empty($hierarchyData->rcp3_content_slug)) {
+                if (!empty($hierarchyData['rch3_parent_id']) &&
+                    !empty($hierarchyData['rcp3_content_id']) &&
+                    !empty($hierarchyData['rcp3_content_slug'])) {
                     $parentContentDataForDatabase[] = (object)[
-                        'id' => $hierarchyData->rcp3_content_id,
-                        'slug' => $hierarchyData->rcp3_content_slug,
-                        'type' => $hierarchyData->rcp3_content_type,
-                        'position' => $hierarchyData->rch4_child_position,
+                        'id' => $hierarchyData['rcp3_content_id'],
+                        'slug' => $hierarchyData['rcp3_content_slug'],
+                        'type' => $hierarchyData['rcp3_content_type'],
+                        'position' => $hierarchyData['rch4_child_position'],
                     ];
                 }
 
-                if (!empty($hierarchyData->rch4_parent_id) &&
-                    !empty($hierarchyData->rcp4_content_id) &&
-                    !empty($hierarchyData->rcp4_content_slug)) {
+                if (!empty($hierarchyData['rch4_parent_id']) &&
+                    !empty($hierarchyData['rcp4_content_id']) &&
+                    !empty($hierarchyData['rcp4_content_slug'])) {
                     $parentContentDataForDatabase[] = (object)[
-                        'id' => $hierarchyData->rcp4_content_id,
-                        'slug' => $hierarchyData->rcp4_content_slug,
-                        'type' => $hierarchyData->rcp4_content_type,
+                        'id' => $hierarchyData['rcp4_content_id'],
+                        'slug' => $hierarchyData['rcp4_content_slug'],
+                        'type' => $hierarchyData['rcp4_content_type'],
                         'position' => null,
                     ];
                 }
@@ -2162,4 +2162,238 @@ class ContentService
     public function getLatestActiveContentForParentContentForUser($parentContentId, $userId)
     {
     }
+
+    public function fillCompiledViewContentDataColumnForContentIds(array $contentIds)
+    {
+        /*
+         * Keys:
+         * title
+         * instructor_names
+         * type
+         * difficulty
+         * description
+         * song_styles
+         * song_artist
+         * song_album
+         * coach_name
+         * coach_focus_text
+         */
+        $contentRowsById = $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            ->table('railcontent_content')
+            ->whereIn('id', $contentIds)
+            ->get()
+            ->keyBy('id');
+
+        // content fields are the source of truth at the moment but that will change eventually
+        $contentsFieldRows =
+            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_content_fields')
+                ->whereIn('content_id', $contentIds)
+                ->get();
+
+        $contentsFieldRowsByContentId = $contentsFieldRows->groupBy('content_id');
+
+        $contentsDataRowsByContentId =
+            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_content_data')
+                ->whereIn('content_id', $contentIds)
+                ->get()
+                ->groupBy('content_id');
+
+        // get all content that is linked via field
+        $keysThatLinkToOtherContent = ['instructor', 'video'];
+        $linkedContentIds = $contentsFieldRows->whereIn('key', $keysThatLinkToOtherContent)->pluck('value');
+
+        $contentsFieldLinkedContentRowsById = collect();
+        $contentsFieldLinkedContentsFieldRowsById = collect();
+        $contentsFieldLinkedContentsDataRowsById = collect();
+
+        if (!empty($linkedContentIds)) {
+            $contentsFieldLinkedContentRowsById =
+                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                    ->table('railcontent_content')
+                    ->whereIn('id', $linkedContentIds)
+                    ->get()
+                    ->keyBy('id');
+
+            $contentsFieldLinkedContentsFieldRowsById =
+                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                    ->table('railcontent_content_fields')
+                    ->whereIn('content_id', $linkedContentIds)
+                    ->get()
+                    ->groupBy('content_id');
+
+            $contentsFieldLinkedContentsDataRowsById =
+                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                    ->table('railcontent_content_data')
+                    ->whereIn('content_id', $linkedContentIds)
+                    ->get()
+                    ->groupBy('content_id');
+        }
+
+
+        $cases = [];
+        $ids = [];
+        $params = [];
+
+        foreach ($contentIds as $contentId) {
+            $contentRow = $contentRowsById[$contentId];
+
+            if (!empty($contentRow)) {
+                // compile
+                $contentFieldRows = $contentsFieldRowsByContentId[$contentId] ?? collect();
+                $contentDataRows = $contentsDataRowsByContentId[$contentId] ?? collect();
+
+                $jsonArray = $this->compileContentData($contentRow, $contentFieldRows, $contentDataRows);
+
+                // handle contents linked by fields
+                foreach ($linkedContentIds as $linkedContentId) {
+                    $linkedContentRow = $contentsFieldLinkedContentRowsById[$linkedContentId] ?? [];
+                    $linkedContentFieldRows = $contentsFieldRowsByContentId[$linkedContentId] ?? collect();
+                    $linkedContentDataRows = $contentsDataRowsByContentId[$linkedContentId] ?? collect();
+
+                    if (!empty($linkedContentRow)) {
+                        $subContentJsonArray =
+                            $this->compileContentData(
+                                $linkedContentRow,
+                                $linkedContentFieldRows,
+                                $linkedContentDataRows
+                            );
+
+                        // substitute the field id with the compiled data
+                        foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+
+                            if (in_array($jsonArrayKey, $keysThatLinkToOtherContent) &&
+                                !empty($subContentJsonArray)) {
+
+                                if (is_array($jsonArrayValue)) {
+                                    foreach ($jsonArrayValue as $jsonArraySubKey => $jsonArraySubValue) {
+                                        if ((integer)$jsonArraySubValue == $linkedContentRow['id'] && $jsonArraySubKey !== 'id') {
+                                            $jsonArray[$jsonArrayKey][$jsonArraySubKey] = $subContentJsonArray;
+                                        }
+                                    }
+                                } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
+                                    $jsonArray[$jsonArrayKey] = $subContentJsonArray;
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+
+                // add a few shorthand compiled keys for easy usage
+                // instructor_names
+                $instructorNames = [];
+
+                foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+
+                    if ($jsonArrayKey == 'instructor') {
+                        if (is_array($jsonArrayValue) && empty($jsonArrayValue['id'])) {
+                            foreach ($jsonArrayValue as $jsonArraySubValue) {
+                                if (!empty($jsonArraySubValue['name'])) {
+                                    $instructorNames[] = $jsonArraySubValue['name'];
+                                }
+                            }
+                        } else {
+                            if (!empty($jsonArrayValue['name'])) {
+                                $instructorNames[] = $jsonArrayValue['name'];
+                            }
+                        }
+                    }
+
+                }
+
+                if (!empty($instructorNames)) {
+                    $jsonArray['instructor_names'] = $instructorNames;
+                }
+
+                // remove compiled view data from json data
+                foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                    if ($jsonArrayKey == 'compiled_view_data') {
+                        unset($jsonArray[$jsonArrayKey]);
+                    }
+                }
+
+                // save
+                if (!empty($jsonArray)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = json_encode($jsonArray);
+                    $ids[] = $contentId;
+                } elseif (!empty($contentRow->compiled_view_data)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = null;
+                    $ids[] = $contentId;
+                }
+            }
+        }
+
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+
+        if (!empty($ids)) {
+            DB::connection(config('railcontent.database_connection_name'))->update(
+                "UPDATE railcontent_content SET `compiled_view_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
+                $params
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $contentRow
+     * @param  \Illuminate\Support\Collection  $contentFieldRows
+     * @param  \Illuminate\Support\Collection  $contentDataRows
+     * @return array
+     */
+    public function compileContentData(
+        $contentRow,
+        \Illuminate\Support\Collection $contentFieldRows,
+        \Illuminate\Support\Collection $contentDataRows
+    ) {
+        $compiledData = (array)$contentRow;
+
+        // remove null/empty values
+        foreach ($compiledData as $contentRowColumnKey => $contentRowColumnValue) {
+            if (empty($contentRowColumnValue)) {
+                unset($compiledData[$contentRowColumnKey]);
+            }
+        }
+
+        $contentFieldDataRows = $contentFieldRows->merge($contentDataRows);
+        $contentFieldDataRowsGroupedByKey = $contentFieldDataRows->groupBy('key');
+
+        foreach ($contentFieldDataRowsGroupedByKey as $key => $rows) {
+            foreach ($rows as $row) {
+
+                // skip empty values except 0
+                if ($row['value'] === '' || $row['value'] === null) {
+                    continue;
+                }
+
+                if (empty($compiledData[$key])) {
+                    $compiledData[$key] = $row['value'];
+                } elseif(!empty($compiledData[$key]) && !is_array($compiledData[$key])) {
+                    $existingValue = $compiledData[$key];
+                    $compiledData[$key] = [$existingValue, $row['value']];
+                } elseif(is_array($compiledData[$key])) {
+                    $compiledData[$key][] = $row['value'];
+                }
+
+                // remove dupes
+                if (is_array($compiledData[$key])) {
+                    $compiledData[$key] = array_unique($compiledData[$key]);
+                }
+
+                // if its an array with a single value, change it back to a single value instead of an array
+                if (is_array($compiledData[$key]) && count($compiledData[$key]) === 1) {
+                    $compiledData[$key] = reset($compiledData[$key]);
+                }
+            }
+        }
+
+        return $compiledData;
+    }
+
 }
