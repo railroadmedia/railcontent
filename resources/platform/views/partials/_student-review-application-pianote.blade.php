@@ -26,4 +26,4 @@
 </div>
 
 {{-- Review Application Modal --}}
-@include('partials._review-modal-pianote')
+@include('partials._review-modal')

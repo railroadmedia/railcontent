@@ -35,10 +35,10 @@
             </div>
         </div>
 
-        <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-end xl:tw-items-center tw-pl-6">
+        <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-end xl:tw-items-center lg:tw-pl-6">
             {{-- Account Header --}}
             <div class="tw-flex tw-w-full tw-items-center">
-                <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start tw-mb-4 xl:tw-mb-0">
+                <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start tw-mb-2 xl:tw-mb-0">
                     <h2 class="tw-font-bold tw-text-[36px] tw-leading-none lg:tw-leading-none tw-text-white lg:tw-text-3xl tw-mb-1">
                         @if(!empty($countryCode))
                             <span class="flag flag-{{ strtolower($countryCode) }}"></span>
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            @if($isCurrentUsersProfile)
+            @if(!empty($isCurrentUsersProfile))
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
                     {{-- Complete Your Account / Update Your Account --}}
                     <a href="/onboarding" 
@@ -61,8 +61,8 @@
                     </a>
                 </div>
             @else
-                <div class="tw-flex tw-flex-col tw-w-full tw-h-full tw-items-end">
-                    <div class="tw-flex tw-flex-col">
+                <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start lg:tw-w-fit tw-flex-shrink-0">
+                    <div class="tw-flex tw-flex-col tw-items-center lg:tw-items-start">
                         <div class="tw-flex tw-items-center tw-font-bebas-neue tw-text-[24px] tw-text-[#0B76DB]">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.50018 9.00018L8.16685 10.6668L11.5002 7.33352M5.52913 2.91439C6.12708 2.86667 6.69473 2.63154 7.15128 2.24247C8.21669 1.33454 9.78368 1.33454 10.8491 2.24247C11.3056 2.63154 11.8733 2.86667 12.4712 2.91439C13.8666 3.02574 14.9746 4.13377 15.086 5.52913C15.1337 6.12708 15.3688 6.69473 15.7579 7.15128C16.6658 8.21669 16.6658 9.78368 15.7579 10.8491C15.3688 11.3056 15.1337 11.8733 15.086 12.4712C14.9746 13.8666 13.8666 14.9746 12.4712 15.086C11.8733 15.1337 11.3056 15.3688 10.8491 15.7579C9.78368 16.6658 8.21669 16.6658 7.15128 15.7579C6.69473 15.3688 6.12708 15.1337 5.52913 15.086C4.13377 14.9746 3.02574 13.8666 2.91439 12.4712C2.86667 11.8733 2.63154 11.3056 2.24247 10.8491C1.33454 9.78368 1.33454 8.21669 2.24247 7.15128C2.63154 6.69473 2.86667 6.12708 2.91439 5.52913C3.02574 4.13377 4.13377 3.02574 5.52913 2.91439Z" stroke="#0B76DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

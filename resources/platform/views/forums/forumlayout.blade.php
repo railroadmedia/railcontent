@@ -5,7 +5,7 @@
         {{-- Meta --}}
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
         @yield('meta')
         
         {{-- Icons --}}
@@ -69,18 +69,7 @@
         </div>
 
         {{-- Review Modals Must Be Global --}}
-        @if($brand === 'singeo')
-            @include('partials._review-modal-singeo')
-        @endif
-        @if($brand === 'guitareo')
-            @include('partials._review-modal-guitareo')
-        @endif
-        @if($brand === 'pianote')
-            @include('partials._review-modal-pianote')
-        @endif
-        @if($brand === 'drumeo')
-            @include('partials._review-modal-drumeo')
-        @endif
+        @include('partials._review-modal')
 
         {{-- Scripts --}}
         <script src="{{ mix('platform/js/app.js') }}"></script>
