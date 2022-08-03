@@ -543,10 +543,6 @@ a:visited {
   height: 34px;
   width: 34px;
 }
-.input-field {
-  margin-bottom: 1rem;
-  position: relative;
-}
 .input-field .label {
   color: #000;
   display: block;
@@ -554,51 +550,6 @@ a:visited {
   font-weight: bold;
   margin-bottom: 0.5rem;
   text-transform: capitalize;
-}
-.input-field .input-wrapper {
-  position: relative;
-}
-.input-field input[type=date], .input-field input[type=email], .input-field input[type=number], .input-field input[type=search], .input-field input[type=tel], .input-field input[type=password], .input-field input[type=text], .input-field select, .input-field textarea, .input-field button {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-color: #fff;
-  border: 1px solid;
-  border-color: #d1d5db;
-  border-radius: 9999px;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  color: #374151;
-  display: block;
-  font-size: 0.875rem;
-  height: 3rem;
-  line-height: 1.5rem;
-  margin-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 3.5rem;
-  width: 100%;
-}
-.input-field input[type=date]:focus, .input-field input[type=email]:focus, .input-field input[type=number]:focus, .input-field input[type=search]:focus, .input-field input[type=tel]:focus, .input-field input[type=password]:focus, .input-field input[type=text]:focus, .input-field select:focus, .input-field textarea:focus, .input-field button:focus {
-  outline: none;
-}
-.input-field input[type=date] + .input-icon svg.invalid-icon, .input-field input[type=date] .input-icon svg.invalid-icon, .input-field input[type=email] + .input-icon svg.invalid-icon, .input-field input[type=email] .input-icon svg.invalid-icon, .input-field input[type=number] + .input-icon svg.invalid-icon, .input-field input[type=number] .input-icon svg.invalid-icon, .input-field input[type=search] + .input-icon svg.invalid-icon, .input-field input[type=search] .input-icon svg.invalid-icon, .input-field input[type=tel] + .input-icon svg.invalid-icon, .input-field input[type=tel] .input-icon svg.invalid-icon, .input-field input[type=password] + .input-icon svg.invalid-icon, .input-field input[type=password] .input-icon svg.invalid-icon, .input-field input[type=text] + .input-icon svg.invalid-icon, .input-field input[type=text] .input-icon svg.invalid-icon, .input-field select + .input-icon svg.invalid-icon, .input-field select .input-icon svg.invalid-icon, .input-field textarea + .input-icon svg.invalid-icon, .input-field textarea .input-icon svg.invalid-icon, .input-field button + .input-icon svg.invalid-icon, .input-field button .input-icon svg.invalid-icon {
-  display: none;
-}
-.input-field input[type=search] {
-  padding-right: 1rem;
-}
-.input-field textarea {
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  height: auto;
-  padding-right: 2.5rem;
-}
-.input-field textarea + .input-icon {
-  height: 2.5rem;
-}
-.input-field button {
-  text-align: left;
 }
 .input-field ul.dropdown {
   background-color: #fff;
@@ -663,54 +614,6 @@ a:visited {
 .input-field ul.dropdown li input[type="checkbox"]:checked + .option, .input-field ul.dropdown li input[type="radio"]:checked + .option {
   background-color: #374151;
   color: #fff;
-}
-.input-field[disabled=true] {
-  pointer-events: none;
-}
-.input-field[disabled=true] input[type=date], .input-field[disabled=true] input[type=email], .input-field[disabled=true] input[type=number], .input-field[disabled=true] input[type=search], .input-field[disabled=true] input[type=tel], .input-field[disabled=true] input[type=password], .input-field[disabled=true] input[type=text], .input-field[disabled=true] select, .input-field[disabled=true] textarea, .input-field[disabled=true] button[type="button"] {
-  background-color: #f3f4f6;
-  color: #9ca3af;
-}
-.input-field[disabled=true] label {
-  color: #d1d5db;
-}
-.input-field .input-icon {
-  align-items: center;
-  bottom: 0;
-  display: flex;
-  height: 3rem;
-  padding-right: 0.75rem;
-  position: absolute;
-  pointer-events: none;
-  right: 0;
-  top: 1px;
-}
-.input-field .input-icon svg {
-  color: #6b7280;
-  height: 1.25rem;
-  width: 1.25rem;
-}
-.input-field .input-message {
-  display: none;
-  font-size: 0.875rem;
-  font-style: italic;
-}
-.input-field input[type=date][aria-required="true"][aria-invalid="true"], .input-field input[type=email][aria-required="true"][aria-invalid="true"], .input-field input[type=number][aria-required="true"][aria-invalid="true"], .input-field input[type=search][aria-required="true"][aria-invalid="true"], .input-field input[type=tel][aria-required="true"][aria-invalid="true"], .input-field input[type=password][aria-required="true"][aria-invalid="true"], .input-field input[type=text][aria-required="true"][aria-invalid="true"], .input-field select[aria-required="true"][aria-invalid="true"], .input-field textarea[aria-required="true"][aria-invalid="true"], .input-field button[type="button"][aria-required="true"][aria-invalid="true"] {
-  border-color: #ef4444 !important;
-  background-color: #fef2f2 !important;
-}
-.input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=date][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=email][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=number][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=search][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=tel][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=password][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field input[type=text][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field select[aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field textarea[aria-required="true"][aria-invalid="true"]:-webkit-autofill:active, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill:hover, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill:focus, .input-field button[type="button"][aria-required="true"][aria-invalid="true"]:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #fef2f2 inset !important;
-}
-.input-field input[type=date][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=email][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=number][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=search][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=password][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field input[type=text][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field select[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field textarea[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] ~ .input-message, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] ~ .input-message {
-  color: #ef4444;
-  display: block;
-}
-.input-field input[type=date][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] + .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="true"] .input-icon svg.invalid-icon {
-  display: block;
-}
-.input-field input[type=date][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=date][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=email][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=number][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=search][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=tel][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=password][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field input[type=text][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field select[aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field textarea[aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="false"] + .input-icon svg.invalid-icon, .input-field button[type="button"][aria-required="true"][aria-invalid="false"] .input-icon svg.invalid-icon {
-  display: none;
 }
 .toggle-field input[type="checkbox"] + label .toggle {
   border: 2px solid;
@@ -1132,6 +1035,9 @@ a:visited {
 .mt-2 {
   margin-top: 0.5rem;
 }
+.mt-8 {
+  margin-top: 2rem;
+}
 .ml-6 {
   margin-left: 1.5rem;
 }
@@ -1185,9 +1091,6 @@ a:visited {
 }
 .mb-64 {
   margin-bottom: 16rem;
-}
-.mt-8 {
-  margin-top: 2rem;
 }
 .mb-9 {
   margin-bottom: 2.25rem;
@@ -2280,6 +2183,10 @@ a:visited {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -2287,10 +2194,6 @@ a:visited {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 .text-4xl {
   font-size: 2.25rem;
@@ -2590,10 +2493,6 @@ a:visited {
 }
 .hover\:opacity-100:hover {
   opacity: 1;
-}
-.focus\:border-drumeo:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(11 118 219 / var(--tw-border-opacity));
 }
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
@@ -4033,6 +3932,14 @@ a:visited {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+  .lg\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .lg\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
   .lg\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -4073,14 +3980,6 @@ a:visited {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
-  .lg\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-  .lg\:py-12 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
   .lg\:py-24 {
     padding-top: 6rem;
     padding-bottom: 6rem;
@@ -4117,20 +4016,20 @@ a:visited {
     padding-top: 15rem;
     padding-bottom: 15rem;
   }
-  .lg\:pt-12 {
-    padding-top: 3rem;
-  }
-  .lg\:pb-16 {
-    padding-bottom: 4rem;
-  }
   .lg\:pl-10 {
     padding-left: 2.5rem;
+  }
+  .lg\:pt-12 {
+    padding-top: 3rem;
   }
   .lg\:pb-20 {
     padding-bottom: 5rem;
   }
   .lg\:pr-10 {
     padding-right: 2.5rem;
+  }
+  .lg\:pb-16 {
+    padding-bottom: 4rem;
   }
   .lg\:pt-96 {
     padding-top: 24rem;

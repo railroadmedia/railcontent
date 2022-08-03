@@ -26,9 +26,9 @@
                         </div>
 
                         <ul class="fa-ul text-left mb-0 mt-4 md:mt-6 xl:mt-14 ml-6 md:ml-7 xl:ml-8 w-auto inline-block">
-                            <li class="mb-4 xl:mb-6 leading-tight"><i class="fas fa-li fa-check text-drumeo"></i> Organized step-by-step lessons for all skill levels.</li>
-                            <li class="mb-4 xl:mb-6 leading-tight"><i class="fas fa-li fa-check text-drumeo"></i> Play your favorite songs with better practice tools.</li>
-                            <li class="leading-tight"><i class="fas fa-li fa-check text-drumeo"></i> Get your questions answered by helpful teachers.</li>
+                            <li class="mb-4 xl:mb-6 leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Organized step-by-step lessons for all skill levels.</li>
+                            <li class="mb-4 xl:mb-6 leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Play your favorite songs with better practice tools.</li>
+                            <li class="leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Get your questions answered by helpful teachers.</li>
                         </ul>
                     </div>
 
