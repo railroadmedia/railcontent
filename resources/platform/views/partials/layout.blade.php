@@ -69,7 +69,9 @@
         </script>
 
         @yield('layout-scripts')
-            <script src="{{ mix('platform/js/app.js') }}"></script>
+        
+        <script src="{{ mix('platform/js/app.js') }}"></script>
+        
         @yield('inject-components')
 
         {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}

@@ -71,8 +71,15 @@
 <!-- Main -->
 @section('layout-body')
 
-@include(
-    'musora.referral.join'
-)
-
+    @include('musora.referral.join')
+    
 @stop
+
+@section('layout-scripts')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("join-form").submit();
+        }
+    </script>
+@endsection
