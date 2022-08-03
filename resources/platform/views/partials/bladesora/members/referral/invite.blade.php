@@ -16,9 +16,10 @@ $cardImages = [
 $cardImage = $cardImages[brand()];
 
 @endphp
-<div class="referral-sections">
+
+<div class="referral-sections tw-h-full">
     @if (isset($showToast) && $showToast)
-        <div class="tw-bottom-0 tw-text-center tw-pb-6" id="emailSentToast"
+        <div class="tw-bottom-0 tw-text-center" id="emailSentToast"
         style="z-index: 2000; position: fixed !important; width: 100%">
         <div
             class="
@@ -39,16 +40,17 @@ $cardImage = $cardImages[brand()];
         </div>
     </div>
     @endif
-    <section class="tw-text-center tw-text-white tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16">
-        <div class="tw-container tw-mx-auto tw-max-w-7xl">
-            <h1 class="tw-leading-tight lg:tw-mb-14"><strong>{{ $titleLineOne }}<br> {{ $titleLineTwo }}</strong>
+    <section class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-transition-colors tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16">
+        <div class="tw-max-w-7xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
+            <h1 class="lg:tw-mb-14 tw-text-2xl sm:tw-text-3xl xl:tw-text-5xl">
+                <strong>{{ $titleLineOne }}<br> {{ $titleLineTwo }}</strong>
             </h1>
-            <div class="tw-flex tw-flex-col xl:tw-flex-row tw-items-center tw-px-4 {{ $containerClass }}">
+            <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4 {{ $containerClass }}">
                 <div class="tw-flex-shrink-0 tw-w-full lg:tw-w-auto tw-my-5 md:tw-my-6 lg:tw-my-0">
                     <div class="tw-relative">
                         <img class="tw-inline-block tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl"
                             src="{{ $cardImage }}">
-                        <div class="tw-absolute tw-bottom-0 tw-w-full tw-p-4">
+                        <div class="tw-absolute tw-bottom-0 tw-w-full tw-p-4 tw-text-white">
                             <p class="tw-leading-none">PASSES REDEEMED</p>
                             <h1 class="tw-leading-none">
                                 <strong>{{ $userReferralsPerformed }}/{{ $referralsPerUser }}</strong>
@@ -58,8 +60,8 @@ $cardImage = $cardImages[brand()];
                 </div>
                 @if ($canRefer)
                     <div
-                        class="tw-flex tw-flex-col lg:tw-h-full lg:tw-pl-10 tw-w-full tw-max-w-lg lg:tw-max-w-none tw-mx-auto">
-                        <h5 class="tw-leading-tight tw-py-4">Give a friend unlimited access to {{ ucfirst($brand) }}, free for 30 days
+                        class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg 2xl:tw-max-w-none tw-mx-auto">
+                        <h5 class="tw-leading-tight tw-py-4 tw-text-lg">Give a friend unlimited access to {{ ucfirst($brand) }}, free for 30 days
                         </h5>
                         <form id="invite-email-form" name="invite-email-form" method="post"
                             action="{{ $emailInviteUrl }}">
@@ -70,10 +72,10 @@ $cardImage = $cardImages[brand()];
                                 <input type="hidden" name="_token" class="sort-input"
                                     value="{{ csrf_token() }}" />
                                 <input
-                                    class="tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-pt-0"
+                                    class="tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="email" id="email" name="email" placeholder="Email address..." value="">
                                 <input name="button" type="submit" id="button"
-                                    class="tw-bg-{{ $brand }} tw-leading-none tw-text-base tw-font-bold tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-roboto tw-text-white tw-flex-none tw-w-52"
+                                    class=" tw-btn-primary tw-bg-{{ $brand }} tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Send Guest Pass" />
                             </div>
                         </form>
@@ -84,11 +86,11 @@ $cardImage = $cardImages[brand()];
                             <div
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input
-                                    class="tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-pt-0"
+                                    class="tw-text-black tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="text" id="referral-link" readonly name="referral-link" placeholder="link"
                                     value="{{ $userReferralLink }}">
                                 <input onclick="copyLink()" name="button" id="button" readonly
-                                    class="tw-bg-{{ $brand }} tw-leading-none tw-text-base tw-font-bold tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-roboto tw-text-white tw-flex-none tw-w-52"
+                                    class="tw-bg-{{ $brand }} tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Copy Link" />
                             </div>
                         </form>
@@ -97,9 +99,9 @@ $cardImage = $cardImages[brand()];
             </div>
         </div>
     </section>
-    <section class="tw-text-center tw-text-white tw-py-5 md:tw-py-8" style="background-color:#081f35;">
-        <div class="tw-container tw-mx-auto tw-max-w-6xl">
-            <h5 class="tw-leading-normal tw-opacity-70">{{ $footerLineOne }}<br class="tw-hidden lg:tw-inline">
+    <section class="tw-text-center dark:tw-text-white tw-py-5 md:tw-py-8 dark:tw-bg-[#081f35] tw-bg-[#E6E7E9]">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4 md:tw-px-8">
+            <h5 class="tw-leading-normal tw-opacity-70 tw-text-lg">{{ $footerLineOne }}<br class="tw-hidden lg:tw-inline">
                 {{ $footerLineTwo }}</h5>
         </div>
     </section>
