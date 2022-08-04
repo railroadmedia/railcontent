@@ -3,7 +3,6 @@
 namespace App\Modules\Mentor\Services;
 
 
-use App\Modules\Brand\Services\BrandService;
 use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
@@ -57,8 +56,7 @@ class MentorService
     public function assignMentorByBrand(int $userId, string $brand): void
     {
         $mentor = $this->chooseMentor($brand);
-        $mentorStudent = new MentorStudent();
-        $mentorStudent->user_id = $userId;
+        $mentorStudent = $this->getMentorStudent($userId);
         $mentorStudent->primary_brand = $brand;
         $this->updateMentorData($mentorStudent, $mentor);
     }
@@ -158,13 +156,23 @@ class MentorService
     public function getMentorIdByStudent(int $userId): ?int
     {
         $result = MentorStudent::query()->select('mentor_user_id')->where('user_id', '=', $userId)->first();
-        return $result->mentor_user_id;
+        return $result?->mentor_user_id;
     }
 
     public function updateMentor(int $userId, int $newMentorId)
     {
-        $mentorStudent = MentorStudent::query()->where('user_id', '=', $userId)->first();
+        $mentorStudent = $this->getMentorStudent($userId);
         $mentor = Mentor::query()->where('user_id', '=', $newMentorId)->first();
         $this->updateMentorData($mentorStudent, $mentor);
+    }
+
+    private function getMentorStudent(int $userId): MentorStudent
+    {
+        $mentorStudent = MentorStudent::query()->where('user_id', '=', $userId)->first();
+        if (!$mentorStudent) {
+            $mentorStudent = new MentorStudent();
+            $mentorStudent->user_id = $userId;
+        }
+        return $mentorStudent;
     }
 }
