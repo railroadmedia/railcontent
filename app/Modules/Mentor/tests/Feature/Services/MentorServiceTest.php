@@ -23,11 +23,26 @@ class MentorServiceTest extends TestCase
         return $mentor;
     }
 
-
     protected function setUp(): void
     {
         parent::setUp();
         $this->mentorService = app(MentorService::class);
+    }
+
+    public function assertHasMentor(User $user, Mentor $mentor): void
+    {
+        $this->assertDatabaseHas('mentor_students', [
+            'user_id' => $user->id,
+            'mentor_user_id' => $mentor->user_id
+        ]);
+    }
+
+    public function assertMentorCount(Mentor $mentor, int $count): void
+    {
+        $this->assertDatabaseHas('mentors', [
+            'user_id' => $mentor->user_id,
+            'active_student_count' => $count
+        ]);
     }
 
     public function test_assign_mentor()
@@ -36,9 +51,8 @@ class MentorServiceTest extends TestCase
         $mentor = $this->createMentor($brand);
         $user = User::factory()->create();
 
-        $this->assertFalse($this->mentorService->hasMentor($user->id));
         $this->mentorService->assignMentorByBrand($user->id, $brand);
-        $this->assertTrue($this->mentorService->hasMentor($user->id));
+        $this->assertHasMentor($user, $mentor);
     }
 
     public function test_mentor_student_count()
@@ -46,12 +60,15 @@ class MentorServiceTest extends TestCase
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
         $user = User::factory()->create();
+
         $this->mentorService->assignMentorByBrand($user->id, $brand);
         $user2 = User::factory()->create();
         $this->mentorService->assignMentorByBrand($user2->id, $brand);
         $user3 = User::factory()->create();
         $this->mentorService->assignMentorByBrand($user3->id, $brand);
-        $this->assertEquals(3, $user3->mentorStudent->mentor->active_student_count);
+
+        $this->assertHasMentor($user3, $mentor);
+        $this->assertMentorCount($mentor, 3);
     }
 
     /** @var User $user */
@@ -62,14 +79,15 @@ class MentorServiceTest extends TestCase
         $user = User::factory()->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
         $user = User::factory()->create();
-        $this->mentorService->assignMentorByBrand($user->id, $brand);
 
+        $this->mentorService->assignMentorByBrand($user->id, $brand);
+        $this->assertHasMentor($user, $mentor);
+        $this->assertMentorCount($mentor, 2);
         $mentor2 = $this->createMentor($brand);
+        $this->assertMentorCount($mentor2, 0);
 
         $this->mentorService->delete($mentor->user_id);
-        $this->assertTrue($this->mentorService->hasMentor($user->id));
-        $this->assertTrue($mentor2->is($user->mentorStudent->mentor));
-        $this->assertEquals(2, $user->mentorStudent->mentor->active_student_count);
-
+        $this->assertHasMentor($user, $mentor2);
+        $this->assertMentorCount($mentor2, 2);
     }
 }

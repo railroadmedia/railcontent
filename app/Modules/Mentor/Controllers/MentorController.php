@@ -47,4 +47,21 @@ class MentorController extends Controller
         $this->mentorService->updateMentor($userId, $newMentorId);
     }
 
+    public function getMentorsPaged(Request $request, $page)
+    {
+        $searchTerm = $request->input('searchTerm');
+        $query = Mentor::query()
+            ->from('mentors as m')
+            ->join('usora_users as u', 'u.id', '=', 'm.user_id')
+            ->select(['m.*', 'u.display_name', 'u.profile_picture_url', 'u.email']);;
+        if ($searchTerm) {
+            $query = $query->where('u.display_name', 'like', "%$searchTerm%")
+                ->orWhere('u.email', 'like', "%$searchTerm%")
+                ->orWhere('m.supported_brands', 'like', "%$searchTerm%");
+        }
+
+        //dd($query->toSql());
+        $result = $query->paginate(page: $page, perPage: 25);
+        return $result;
+    }
 }

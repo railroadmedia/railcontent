@@ -15,6 +15,7 @@ Route::group(
         Route::get('/getMentors', [MentorController::class, 'getMentors']);
         //Todo:Change to patch once msuora runs on MWP domain
         Route::get('/updateMentor', [MentorController::class, 'updateMentor']);
+        Route::get('/getMentors/{page}', [MentorController::class, 'getMentorsPaged']);
     }
 );
 

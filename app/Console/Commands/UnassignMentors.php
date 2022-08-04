@@ -39,14 +39,14 @@ class UnassignMentors extends Command
      */
     public function handle(DatabaseManager $databaseManager)
     {
-        MentorStudent::truncate();
-        Mentor::truncate();
 
+        MentorStudent::query()->delete();
+        Mentor::query()->delete();
 
-        foreach(Mentor::all() as $mentor){
-            $mentor->active_student_count = 0;
-            $mentor->save();
-        }
+//        foreach(Mentor::all() as $mentor){
+//            $mentor->active_student_count = 0;
+//            $mentor->save();
+//        }
 
         $this->info("Unassigned all Mentors.");
     }

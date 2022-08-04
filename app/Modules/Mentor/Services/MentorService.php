@@ -150,7 +150,7 @@ class MentorService
         }
     }
 
-    public function hasMentor(int $userId)
+    private function hasMentor(int $userId): bool
     {
         return MentorStudent::query()->where('user_id', '=', $userId)->exists();
     }
