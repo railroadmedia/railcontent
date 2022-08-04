@@ -51,11 +51,67 @@ class AssignMentors extends Command
             $this->info("Mentors not populated.  Populate Mentor Table");
 
             $mentorData = collect([
-                451393 => ["name" => "Carlos Borges", "supported_brands" => "pianote", "maxStudents" => 5000],
-                451394 => ["name" => "Carlos Borges2", "supported_brands" => "pianote", "maxStudents" => 2500],
-                360053 => ["name" => "Job Byers", "supported_brands" => "guitareo", "maxStudents" => 5000],
-                154064 => ["name" => "Celina Kathler", "supported_brands" => "pianote, drumeo", "maxStudents" => 5000],
-                154065 => ["name" => "Celina Kathler2", "supported_brands" => "singeo", "maxStudents" => 5000]
+                429774 => [
+                    "name" => "veronica",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                451392 => [
+                    "name" => "sara",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                454844 => [
+                    "name" => "karissa",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                150447 => [
+                    "name" => "kaitlyn",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                427720 => [
+                    "name" => "joy",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                427608 => [
+                    "name" => "jorge",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                361772 => [
+                    "name" => "jennvo",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                155762 => [
+                    "name" => "jenn",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                403844 => [
+                    "name" => "hannah",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                451390 => [
+                    "name" => "emily",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                154064 => [
+                    "name" => "celina",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+                451393 => [
+                    "name" => "carlos",
+                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
+                    "maxStudents" => 5000
+                ],
+
             ]);
             $mentorData->each(function ($mentor, $userId) {
                 $this->mentorService->store($userId, $mentor["supported_brands"], $mentor["maxStudents"]);
