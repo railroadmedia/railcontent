@@ -16,8 +16,8 @@
 
         <!-- Nav CTA buttons -->
         <div class="ml-auto flex items-center">
-            <a href="/shop" class="btn-secondary btn-small text-white mr-1.5 py-1 px-3 md:py-2.5 md:px-8 mb-0 h-auto md:h-initial hover:text-black hover:bg-white hover:border-white">Shop</a>
-            <a href="/#join" class="btn-primary btn-small {{ $theme_bg }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">Join Musora</a>
+            {{-- <a href="/shop" class="btn-secondary btn-small text-base leading-none text-white mr-1.5 py-1 px-3 md:py-2.5 md:px-8 mb-0 h-auto md:h-initial hover:text-black hover:bg-white hover:border-white">Shop</a> --}}
+            <a href="/#join" class="btn-primary btn-small text-base leading-none {{ $theme_bg }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">Join Musora</a>
         </div>
 
     </div>

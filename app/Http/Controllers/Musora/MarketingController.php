@@ -26,4 +26,14 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.ambassador');
     }
+
+    public function about()
+    {
+        return view('musora.pages.about');
+    }
+
+    public function brand()
+    {
+        return view('musora.pages.brand');
+    }
 }

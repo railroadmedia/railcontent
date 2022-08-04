@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     </head>
 
-    <body class="flex flex-col w-full min-h-screen" x-data="{ sidebarOpen: false, showOverlay: false }">
+    <body class="flex flex-col w-full min-h-screen lg:pt-[56px]" x-data="{ sidebarOpen: false, showOverlay: false }">
 
         @yield('layout-header')
 

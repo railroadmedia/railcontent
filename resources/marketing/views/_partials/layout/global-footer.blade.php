@@ -47,7 +47,7 @@
             Musora Media, Inc. © 2022 - &nbsp; 
             <a class="text-xs md:text-sm" href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a href="/privacy" class="text-xs md:text-sm">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;
-            <a rel="noopener" href="https://www.musora.com/jobs" class="text-xs md:text-sm">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a rel="noopener" href="/careers" class="text-xs md:text-sm">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a rel="noopener" href="https://www.musora.com/brand" class="text-xs md:text-sm">Brand Guide</a>
         </p>
     </div>
