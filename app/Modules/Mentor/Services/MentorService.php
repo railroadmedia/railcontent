@@ -142,10 +142,16 @@ class MentorService
         $mentorStudents = MentorStudent::query()
             ->where('mentor_user_id', '=', $mentorUserId)
             ->get();
-        Mentor::query()->where('user_id', '=', $mentorUserId)->delete();
+
+        $mentor = $this->getMentorOrNull($mentorUserId);
+        //clear supporting brands so reassignMentor will not be able to use this mentor
+        $mentor->supported_brands = "";
+        $mentor->save();
+
         foreach ($mentorStudents as $mentorStudent) {
             $this->reassignMentor($mentorStudent);
         }
+        $mentor->delete();
     }
 
     private function hasMentor(int $userId): bool
@@ -159,10 +165,10 @@ class MentorService
         return $result?->mentor_user_id;
     }
 
-    public function updateMentor(int $userId, int $newMentorId)
+    public function updateStudentMentor(int $userId, int $newMentorId)
     {
         $mentorStudent = $this->getMentorStudent($userId);
-        $mentor = Mentor::query()->where('user_id', '=', $newMentorId)->first();
+        $mentor = $this->getMentorOrNull($newMentorId);
         $this->updateMentorData($mentorStudent, $mentor);
     }
 
@@ -175,4 +181,24 @@ class MentorService
         }
         return $mentorStudent;
     }
+
+    public function getMentorOrNull(int $userId): ?Mentor
+    {
+        $mentor = Mentor::query()->where('user_id', '=', $userId)->first();
+        return $mentor;
+    }
+
+    public function updateMentor(int $userId, string $supportedBrands, int $activeStudentMaxCount)
+    {
+        $mentor = $this->getMentorOrNull($userId);
+        if (!$mentor) {
+            $mentor = new Mentor();
+            $mentor->user_id = $userId;
+            $mentor->active_student_count = 0;
+        }
+        $mentor->supported_brands = $supportedBrands;
+        $mentor->active_student_max_count = $activeStudentMaxCount;
+        $mentor->save();
+    }
+
 }
