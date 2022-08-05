@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('usora_users');
-            $table->json('supported_brands');
+            $table->string('supported_brands')->nullable();
             $table->unsignedInteger('active_student_max_count');
             $table->unsignedInteger('active_student_count');
         });
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('usora_users');
-            $table->string('primary_brand');
+            $table->string('primary_brand')->nullable();
             $table->unsignedInteger('mentor_user_id');
             $table->foreign('mentor_user_id')->references('id')->on('usora_users');
             $table->foreign('mentor_user_id', 'mentor_students_mentors_foreign')->references('user_id')->on('mentors');
@@ -42,7 +42,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mentors');
         Schema::dropIfExists('mentor_students');
+        Schema::dropIfExists('mentors');
     }
 };
