@@ -1,7 +1,3 @@
-@php
-//dd(user())
-@endphp
-
 @extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
@@ -280,4 +276,9 @@
 
     </div>
 
+@endsection
+
+@section('layout-scripts')
+    @parent
+    <script src="{{ mix('platform/js/vendor~player.js') }}"></script>
 @endsection
