@@ -31,8 +31,17 @@
         ></div>
 
         <!-- Scripts -->
-        @yield('layout-scripts')
-        <script src="{{ mix('marketing/js/app.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-304523-137"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
+            gtag('config', 'UA-304523-137');
+        </script>
+        <script src="{{ mix('marketing/js/app.js') }}"></script>
+         @yield('layout-scripts')
     </body>
 </html>
