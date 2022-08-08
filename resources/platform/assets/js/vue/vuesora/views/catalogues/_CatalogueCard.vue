@@ -14,15 +14,18 @@
                     item.type + '-thumbnail'
                 ]"
             >
-                <div class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
+                <div class="card-media active corners-10"
                      :class="[thumbnailType]"
                 >
                     <!-- Video Thumbnail -->
-                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                         :data-ix-src="mappedData.thumbnail"
-                         data-ix-fade
-                         class="bg-grey-2"
-                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
+                    <img :src="`https://musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail} `"
+                         class="tw-transition-opacity tw-duration-500"
+                         :class="[ 
+                            item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',
+                            item.type === 'song' ? 'tw-blur-sm' : ''
+                         ]"
+                         loading="lazy"
+                         @load="item.imageLoaded = true"
                     >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">

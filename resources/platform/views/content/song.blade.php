@@ -38,7 +38,7 @@
 
                     <div class="tw-flex tw-flex-col song-play-button song-album-cover tw-mr-6">
                         <div class="2xl:tw-w-screen tw-aspect-square tw-max-w-[338px] tw-min-w-[175px] corners-10 flex-center flex-column shadow-md">
-                            <img src="{{ cf_img($lessonContent->fetch('data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url')), ['width' => 400, 'height' => 400]) }}"
+                            <img src="{{ $lessonContent->fetch( 'data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url') ) }}"
                                  alt="Album Art"
                                  class="corners-10"
                             >
@@ -129,6 +129,7 @@
                                         <div class="flex flex-column grow">
                                             <content-assignment
                                                 theme-color="{{ $themeColor }}"
+                                                brand="{{ $brand }}"
                                                 timecode="{{ $assignment->fetch('data.timecode', 0) }}"
                                                 id="{{ $assignment->fetch('id') }}"
                                                 xp="{{ $assignment->fetch('xp') }}"

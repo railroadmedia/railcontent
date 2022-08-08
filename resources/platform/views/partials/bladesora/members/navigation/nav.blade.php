@@ -67,7 +67,7 @@
                 <a href="{{ $livePageUrl }}"
                    @if(!empty($isIframe)) target="_parent" @endif
                    id="liveIndicator"
-                   class="bg-error text-white tiny font-bold corners-3 text-center uppercase no-decoration">
+                   class="bg-error text-white tw-text-xs font-bold corners-3 text-center uppercase no-decoration">
                     Live
                 </a>
             </div>

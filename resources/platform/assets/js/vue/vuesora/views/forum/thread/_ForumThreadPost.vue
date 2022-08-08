@@ -159,7 +159,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 dark:tw-border-[#445F74] tiny tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
+                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>

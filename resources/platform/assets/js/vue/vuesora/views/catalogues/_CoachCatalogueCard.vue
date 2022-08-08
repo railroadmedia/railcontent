@@ -17,12 +17,17 @@
                 <div class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
                      :class="[thumbnailType]"
                 >
-                    <!-- Video Thumbnail -->
-                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                         :data-ix-src="mappedData.thumbnail"
-                         data-ix-fade
-                         class="bg-grey-2"
-                    >
+                    <!-- Coach Thumbnail -->
+                    <img
+                        :src="mappedData.thumbnail"
+                        alt="thumbnail"
+                        class="tw-transition-opacity tw-duration-500"
+                        loading="lazy"
+                        :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                        @load="mappedData.imageLoaded = true"
+                    />
+
+
                     <div class="lesson-progress overflow">
                         <span
                             class="progress"

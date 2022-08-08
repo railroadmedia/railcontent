@@ -2,7 +2,7 @@
     <div class="container">
         <div class="flex flex-row flex-wrap align-h-center">
             <section class="flex flex-column xs-12 md-3 pv-2">
-                <div class="flex flex-row tiny align-v-center">
+                <div class="flex flex-row tw-text-xs align-v-center">
                     <img
                         alt="Musora Media Inc."
                         src="{{ $logoImage }}"
@@ -12,7 +12,7 @@
             </section>
 
             <section class="flex flex-column xs-12 md-9 pv-2">
-                <div class="flex flex-row tiny align-v-center">
+                <div class="flex flex-row tw-text-xs align-v-center">
                     <span class="hide-xs-only">Musora Media Inc &copy; {{ date('Y') }}</span>
                     <span class="hide-xs-only" style="margin:0 4px">-</span>
                     <a href="{{ $termsUrl }}" target="_blank" class="text-grey-3">Terms</a>

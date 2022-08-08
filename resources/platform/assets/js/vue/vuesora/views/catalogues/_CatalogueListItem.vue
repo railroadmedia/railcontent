@@ -41,13 +41,16 @@
       :class="[thumbnailColumnClass, themeColor]"
     >
       <div class="thumb-wrap corners-10">
-        <div class="thumb-img corners-10" :class="thumbnailType">
+        <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
           <img
-            src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-            :data-ix-src="mappedData.thumbnail"
-            data-ix-fade
+            :src="`https://musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail}`"
             alt="Lesson Thumbnail"
+            class="tw-transition-opacity tw-duration-500"
+            loading="lazy"
+            :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+            @load="mappedData.imageLoaded = true"
           />
+
           <div class="lesson-progress overflow">
             <span
               class="progress"
@@ -134,8 +137,8 @@
       </p>
 
       <p
-        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title tw-mb-1"
-        :class="overview ? 'heading' : 'tiny font-compressed'"
+        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
+        :class="overview ? 'heading' : 'tw-text-sm lg:tw-text-base'"
       >
         {{ mappedData.black_title }}
       </p>

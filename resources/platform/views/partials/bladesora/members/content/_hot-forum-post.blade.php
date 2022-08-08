@@ -1,13 +1,15 @@
 <div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded pa-2 hover:tw-shadow-lg">
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col">
-            <img
-                src="https://musora.com/cdn-cgi/image/quality=90/https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                data-ix-src="{{ $avatar }}"
-                data-ix-fade
-                class="tw-bg-gray-300 tw-rounded-full tw-mb-1"
-                alt="{{ $author }} Avatar"
-            >
+            {{-- Avatar Thumbnail --}}
+            <div class="tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1">
+                <img src="{{ $avatar }}"
+                     alt="{{ $author }} Avatar"
+                     loading="lazy"
+                     class="tw-rounded-full"
+                >
+            </div>
+            {{-- Rank Data --}}
             <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed">
                 {{ $rank }}
             </p>

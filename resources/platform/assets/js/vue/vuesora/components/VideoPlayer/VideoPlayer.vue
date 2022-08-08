@@ -1063,7 +1063,7 @@ const {
                     <div v-show="showContextMenu" ref="contextMenu"
                         class="context-menu bg-grey-5 pointer text-white shadow overflow" :style="contextMenuPosition"
                         @click.stop.prevent>
-                        <ul class="list-style-none tiny dense font-bold">
+                        <ul class="list-style-none tw-text-xs dense font-bold">
                             <li v-if="!isMobile && useKeyboard" class="pa-1 hover-bg-grey-4"
                                 @click="openDialog('keyboardShortcuts')">
                                 {{ dialogs.keyboardShortcuts ? 'Hide' : 'Show' }} Keyboard Shortcuts

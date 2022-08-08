@@ -95,7 +95,7 @@
 
                     <span
                         v-if="loading"
-                        class="loading-element tiny font-italic"
+                        class="loading-element tw-text-xs font-italic"
                         :class="themeTextClass"
                     >
                         <i class="fas fa-spinner fa-spin"></i>

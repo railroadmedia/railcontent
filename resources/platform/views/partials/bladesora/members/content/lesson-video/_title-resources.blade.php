@@ -23,7 +23,7 @@
                 <i class="unopen fas fa-download no-events text-{{ $brand }}"></i>
                 <i class="open fas fa-download no-events text-white"></i>
 
-                <div class="dropdown-content bg-white shadow tiny text-black">
+                <div class="dropdown-content bg-white shadow tw-text-xs text-black">
                     <ul>
                         @foreach($lessonResources as $resource)
                             <li>
