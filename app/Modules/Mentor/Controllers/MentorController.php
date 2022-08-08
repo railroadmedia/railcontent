@@ -68,7 +68,8 @@ class MentorController extends Controller
 
     public function demoteMentor(Request $request, $userId)
     {
-        $this->mentorService->delete($userId);
+        $mentorStudents = $this->mentorService->delete($userId);
+        return $mentorStudents->map(fn($mentorStudent) => $mentorStudent->user->email);
     }
 
 

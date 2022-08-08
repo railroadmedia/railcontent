@@ -6,7 +6,9 @@ namespace App\Modules\Mentor\Services;
 use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
+use Str;
 
 class MentorService
 {
@@ -14,6 +16,7 @@ class MentorService
      * @var PrimaryBrandService
      */
     private PrimaryBrandService $primaryBrandService;
+    private ?Collection $mentors = null;
 
     /**
      * @param PrimaryBrandService $primaryBrandService
@@ -58,22 +61,20 @@ class MentorService
         $mentor = $this->chooseMentor($brand);
         $mentorStudent = $this->getMentorStudent($userId);
         $mentorStudent->primary_brand = $brand;
-        $this->updateMentorData($mentorStudent, $mentor);
-    }
-
-    public function reassignMentor(MentorStudent $mentorStudent)
-    {
-        $mentor = $this->chooseMentor($mentorStudent->primary_brand);
-        $this->updateMentorData($mentorStudent, $mentor);
-    }
-
-    private function updateMentorData(MentorStudent $mentorStudent, ?Mentor $mentor): void
-    {
         $mentorStudent->mentor_user_id = $mentor->user_id;
-        $mentorStudent->save();
-
         $mentor->active_student_count += 1;
+        $mentorStudent->save();
         $mentor->save();
+    }
+
+    private function chooseNewMentor(MentorStudent $mentorStudent): ?Mentor
+    {
+        $brand = $mentorStudent->primary_brand;
+        if (!$brand) {
+            $brand = $this->getPrimaryBrandForAssigningMentor($mentorStudent->user_id);
+        }
+        $mentor = $this->chooseMentor($brand);
+        return $mentor;
     }
 
     public function ensureMentorAssigned(int $userId)
@@ -83,24 +84,16 @@ class MentorService
         }
     }
 
-
-    /**
-     * @param $userId
-     * @return mixed|null
-     */
-    private function getPrimaryBrandForAssigningMentor($userId)
+    private function getPrimaryBrandForAssigningMentor($userId): string
     {
         $primaryBrand = $this->primaryBrandService->getInitialBrand($userId);
         return $primaryBrand;
     }
 
-    /**
-     * @param string $brand
-     * @return Mentor|null
-     */
     public function chooseMentor(string $brand): ?Mentor
     {
         $mentors = $this->getMentorsByBrand($brand);
+        $test= $mentors->map(function($t){ return $t->active_student_count;});
         if ($mentors->count() == 0) {
             Log::warning("Unable to find mentor for brand '$brand'");
             return null;
@@ -114,10 +107,6 @@ class MentorService
         return $mentor;
     }
 
-    /**
-     * @param $mentors
-     * @return mixed
-     */
     private function getMentorsWithLowestStudentPercentage($mentors): mixed
     {
         $lowestStudentPercentage = $mentors->map(fn(Mentor $t) => $t->getActiveStudentPercentage())->min();
@@ -133,13 +122,17 @@ class MentorService
      */
     private function getMentorsByBrand(string $brand)
     {
-        $mentors = Mentor::where('supported_brands', 'like', "%$brand%")->get();
+        if(!$this->mentors){
+            $this->mentors = Mentor::all();
+        }
+        $mentors = $this->mentors->where(fn(Mentor $t)=> Str::contains($t->supported_brands, $brand));
         return $mentors;
     }
 
-    public function delete(int $mentorUserId)
+    public function delete(int $mentorUserId): Collection
     {
         $mentorStudents = MentorStudent::query()
+            ->with('user')
             ->where('mentor_user_id', '=', $mentorUserId)
             ->get();
 
@@ -147,11 +140,11 @@ class MentorService
         //clear supporting brands so reassignMentor will not be able to use this mentor
         $mentor->supported_brands = "";
         $mentor->save();
+        $this->mentors = null; //refresh locally stored mentors in case it contains the mentor to be deleted
 
-        foreach ($mentorStudents as $mentorStudent) {
-            $this->reassignMentor($mentorStudent);
-        }
+        $this->bulkReassignMentors($mentorStudents);
         $mentor->delete();
+        return $mentorStudents;
     }
 
     private function hasMentor(int $userId): bool
@@ -169,7 +162,10 @@ class MentorService
     {
         $mentorStudent = $this->getMentorStudent($userId);
         $mentor = $this->getMentorOrNull($newMentorId);
-        $this->updateMentorData($mentorStudent, $mentor);
+        $mentorStudent->mentor_user_id = $mentor->user_id;
+        $mentor->active_student_count += 1;
+        $mentor->save();
+        $mentorStudent->save();
     }
 
     private function getMentorStudent(int $userId): MentorStudent
@@ -199,6 +195,26 @@ class MentorService
         $mentor->supported_brands = $supportedBrands;
         $mentor->active_student_max_count = $activeStudentMaxCount;
         $mentor->save();
+    }
+
+    public function bulkReassignMentors(Collection|array $mentorStudents): void
+    {
+        $mentors = [];
+        foreach ($mentorStudents as $mentorStudent) {
+            $newMentor = $this->chooseNewMentor($mentorStudent);
+            $mentorStudent->mentor_user_id = $newMentor->user_id;
+            $newMentor->active_student_count += 1;
+            if (!array_key_exists($newMentor->user_id, $mentors)) {
+                $mentors[$newMentor->user_id] = $newMentor;
+            }
+        }
+
+        $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
+            $ids = $data->map(fn($t) => $t->id);
+            MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId]);
+            $newMentor = $mentors[$mentorUserId];
+            $newMentor->save();
+        });
     }
 
 }

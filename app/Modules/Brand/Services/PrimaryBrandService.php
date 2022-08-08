@@ -26,11 +26,13 @@ class PrimaryBrandService
      * @param int $userId
      * @return mixed|null
      */
-    public function getInitialBrand(int $userId)
+    public function getInitialBrand(int $userId): string
     {
         $brand = $this->subscriptionRepository->getFirstSubscriptionBrand($userId, config('brands'));
-        if ($brand) return $brand;
+        if ($brand) {
+            return $brand;
+        }
         Log::warning("Unable to determine initial brand for user '$userId'");
-        return null;
+        return '';
     }
 }
