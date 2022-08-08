@@ -23,9 +23,9 @@ mix
     .options({
         postCss: [ tailwindcss('./resources/platform/tailwind.config.js') ],
     })
-    .extract(['alpinejs','fast-glob'], '/platform/js/vendor~unused.js')
-    .extract(['shaka-player', 'screenful'], 'platform/js/vendor~player.js')
-    .extract(['vue-advanced-cropper'], 'platform/js/vendor~onboarding.js')
+    .extract(['alpinejs','fast-glob'], 'vendor~unused.js')
+    .extract(['shaka-player', 'screenful'], 'vendor~player.js')
+    .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()
     .version()

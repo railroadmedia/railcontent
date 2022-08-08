@@ -12,7 +12,7 @@
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
-    {{--    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">--}}
+    {{-- <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}"> --}}
     {{-- TODO: RT integration --}}
 
     <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
@@ -54,9 +54,11 @@
                             @if (user()->use_legacy_video_player ?? false || $agent->isSamsung())
                                 <transition appear name="fade">
                                     <video-media-element
-                                        ref="mediaElementVueInstance" element-id="lessonPlayer"
+                                        ref="mediaElementVueInstance"
+                                        element-id="lessonPlayer"
                                         brand="{{ $brand }}"
-                                        theme-color="{{ $brand }}" poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
+                                        theme-color="{{ $brand }}"
+                                        poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
                                         :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
                                         hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
                                         video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
@@ -65,8 +67,7 @@
                                         progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                         video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                         :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
-                                        user-id="{{ user()->id }}"
-                                        like-count="{{ $lessonContent['like_count'] ?? 0 }}"
+                                        user-id="{{ user()->id }}" like-count="{{ $lessonContent['like_count'] ?? 0 }}"
                                         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
                                         :check-for-timecode="true" @playing="handleVideoPlay" @pause="handleVideoPause">
 
@@ -77,30 +78,30 @@
                                 </transition>
                             @else
                                 <transition appear name="fade">
-                                    <video-player
-                                        ref="mediaElementVueInstance"
-                                        theme-color="{{ $brand }}"
-                                        poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
-                                        :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
-                                        @if ($lessonType == 'song')
-                                            :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
-                                            :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
-                                            :show-range-buttons="true"
-                                        @endif
-                                        hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
-                                        captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
-                                        :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
-                                        current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
-                                        content-id="{{ $lessonContent->fetch('id') }}"
-                                        user-id="{{ user()->id }}"
-                                        video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
-                                        cast-title="{{ $lessonContent->fetch('fields.title') }}"
-                                        :use-intersection-observer="true"
-                                        @play="handleVideoPlay"
-                                        @pause="handleVideoPause"
-                                    >
-                                        <div class="widescreen title tw-text-{{ $brand }} tw-mb-2"></div>
-                                    </video-player>
+                                            <video-player
+                                                ref="mediaElementVueInstance"
+                                                theme-color="{{ $brand }}"
+                                                poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
+                                                :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
+                                                @if ($lessonType == 'song')
+                                                    :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
+                                                    :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
+                                                    :show-range-buttons="true"
+                                                @endif
+                                                hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
+                                                captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
+                                                :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
+                                                current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
+                                                content-id="{{ $lessonContent->fetch('id') }}"
+                                                user-id="{{ user()->id }}"
+                                                video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+                                                cast-title="{{ $lessonContent->fetch('fields.title') }}"
+                                                :use-intersection-observer="true"
+                                                @play="handleVideoPlay"
+                                                @pause="handleVideoPause"
+                                            >
+                                                <div class="widescreen title tw-text-{{ $brand }} tw-mb-2"></div>
+                                            </video-player>
                                 </transition>
                             @endif
                         </div>
@@ -108,30 +109,26 @@
                 </div>
 
                 <div class="tw-container tw-mx-auto lean">
-                    <video-resources
-                        theme-color="{{ $brand }}"
-                        brand="{{ $brand }}"
+                    <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
                         title="{{ $lessonContent->fetch('fields.title') }}"
                         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
                         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
                         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
                         :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
                         :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
-                        content-id="{{ $lessonContent->fetch('id') }}"
-                        user-id="{{ auth()->id() }}"
+                        content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ auth()->id() }}"
                         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"
-                    ></video-resources>
+                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"></video-resources>
 
-                    {{--Add to List and Next/Prev Buttons --}}
+                    {{-- Add to List and Next/Prev Buttons --}}
                     @include('partials.bladesora.members.content.lesson-video._buttons', [
-                        "themeColor" => '{{ $brand }}',
-                        "prevLessonUrl" => !empty($previousChild) ? $previousChild->fetch('url') : null,
-                        "nextLessonUrl" => !empty($nextChild) ? $nextChild->fetch('url') : null,
-                        "hasQAVideo" => !empty($lessonContent['qna_video_playback_endpoints']),
-                        "isCompleted" => $lessonContent->fetch('completed'),
-                        "contentId" => $lessonContent->fetch('id'),
-                        "xpAmount" => $lessonContent->fetch('xp')
+                        'themeColor' => '{{ $brand }}',
+                        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+                        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+                        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+                        'isCompleted' => $lessonContent->fetch('completed'),
+                        'contentId' => $lessonContent->fetch('id'),
+                        'xpAmount' => $lessonContent->fetch('xp'),
                     ])
 
                     {{-- Ask a Question Input --}}
@@ -139,34 +136,37 @@
                         <div class="tw-flex tw-flex-row tw-mt-3" dusk="question-email">
                             <email-form
                                 email-subject="{{ $emailSubjectOverride ?? 'Question on Lesson: ' . $lessonContent->fetch('fields.title') . ' from: ' . user()->email }}"
-                                email-type="{{ $emailTypeOverride ?? 'ask-question' }}" email-endpoint="/mailora/secure/send"
-                                success-message="Your question has been sent!"
-                                user-avatar="{{ user()->profile_picture_url }}" :lesson-page="true" theme-color="{{ $brand }}">
+                                email-type="{{ $emailTypeOverride ?? 'ask-question' }}"
+                                email-endpoint="/mailora/secure/send" success-message="Your question has been sent!"
+                                user-avatar="{{ user()->profile_picture_url }}" :lesson-page="true"
+                                theme-color="{{ $brand }}">
                             </email-form>
                         </div>
                     @endif
                 </div>
             </div>
 
-            @if (!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters']))
+            @if (!empty($lessonContent->fetch('*fields.instructor')) ||
+                !empty($lessonContent->fetch('data.description')) ||
+                !empty($lessonContent['chapters']))
                 @include('partials.bladesora.members.content._content-info', [
-                    "instructors" => $lessonContent->fetch('*fields.instructor'),
-                    "contentDescription" => $lessonContent->fetch('data.description', null),
-                    "contentChapters" => $lessonContent['chapters'] ?? [],
+                    'instructors' => $lessonContent->fetch('*fields.instructor'),
+                    'contentDescription' => $lessonContent->fetch('data.description', null),
+                    'contentChapters' => $lessonContent['chapters'] ?? [],
                 ])
             @endif
 
             <div class="container-fluid tw-bg-{{ $brand }} tw-rounded-[10px]">
                 @include('partials.bladesora.members.content.content-progress', [
-                    "themeColor" => '{{ $brand }}',
-                    "contentType" => $lessonContent->fetch('type'),
-                    "progress" => $lessonContent->fetch('progress_percent'),
-                    "nextLessonUrl" => '',
-                    "xpAmount" => $lessonContent->fetch('xp'),
-                    "showCompleteButton" => true,
-                    "contentId" => $lessonContent->fetch('id'),
-                    "brand" => '{{ $brand }}',
-                    "isCompleted" => $lessonContent->fetch('completed')
+                    'themeColor' => '{{ $brand }}',
+                    'contentType' => $lessonContent->fetch('type'),
+                    'progress' => $lessonContent->fetch('progress_percent'),
+                    'nextLessonUrl' => '',
+                    'xpAmount' => $lessonContent->fetch('xp'),
+                    'showCompleteButton' => true,
+                    'contentId' => $lessonContent->fetch('id'),
+                    'brand' => '{{ $brand }}',
+                    'isCompleted' => $lessonContent->fetch('completed'),
                 ])
             </div>
 
@@ -174,7 +174,7 @@
             <div class="tw-flex">
                 <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
 
-                @if(!empty($lessonContent->fetch('*assignments', [])))
+                @if (!empty($lessonContent->fetch('*assignments', [])))
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3">
                         <div class="tw-flex tw-flex-row pv-3">
                             <h1 class="heading dark:tw-text-white">Assignments</h1>
@@ -216,9 +216,9 @@
                             <assignments-container :assignments="{{ json_encode($formattedAssignments) }}">
                                 <template slot="completion-bonus">
                                     @include('partials.bladesora.members.partials._completion-bonus', [
-                                        "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
-                                        "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
-                                        "themeColor" => brand()
+                                        'xpBonus' => $lessonContent->fetch('xp_bonus', 0),
+                                        'isComplete' => $lessonContent->fetch('progress_percent', 0) === 100,
+                                        'themeColor' => brand(),
                                     ])
                                 </template>
                             </assignments-container>
@@ -228,25 +228,19 @@
             </div>
 
             @include('partials.bladesora.members.content._lesson-complete', [
-                "themeColor" => '{{ $brand }}',
-                "thisLessonJson" => $thisLessonJson,
-                "nextLessonJson" => !empty($nextChild) ? $nextLessonJson : null,
+                'themeColor' => '{{ $brand }}',
+                'thisLessonJson' => $thisLessonJson,
+                'nextLessonJson' => !empty($nextChild) ? $nextLessonJson : null,
             ])
 
             <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                 <div class="tw-flex tw-flex-row tw-w-full">
-                    <comments 
-                        theme-color="{{ $brand }}"
-                        brand="{{ $brand }}"
-                        content-id="{{ $lessonContent->fetch('id') }}"
-                        user-id="{{ user()->id }}"
-                        user-name="{{ user()->display_name }}"
-                        user-avatar="{{ user()->profile_picture_url }}"
-                        user-xp="0"
-                        user-access-level="lifetime"
-                        profile-base-route="/members/profile/"
+                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}"
+                        content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ user()->id }}"
+                        user-name="{{ user()->display_name }}" user-avatar="{{ user()->profile_picture_url }}"
+                        user-xp="0" user-access-level="lifetime" profile-base-route="/members/profile/"
                         :is-admin="false">
-                    </comments> 
+                    </comments>
                 </div>
             </div>
 
@@ -263,17 +257,12 @@
                     </div>
 
                     <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
-                        brand="{{ brand() }}"
-                        :pre-loaded-content="{{ $relatedLessons }}" @if (!empty($lockUnowned))
-                        :lock-unowned="true"
-                        @endif
-                        :display-inline="true"
-                        user-id="{{ auth()->id() }}"
-                        ></content-catalogue>
+                        brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
+                        @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
+                        user-id="{{ auth()->id() }}"></content-catalogue>
                 </div>
             </div>
         </div>
-
     </div>
 
 @endsection
