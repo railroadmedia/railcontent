@@ -49,12 +49,13 @@
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
-                >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="currentUser.avatar"
-                        data-ix-fade
-                        class="tw-rounded-full"
+                >   
+                    <!-- User Avatar -->
+                    <img :src="currentUser.avatar"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="currentUser.imageLoaded = true"
                     >
                 </div>
                 <p

@@ -34,7 +34,7 @@
         id="pageHeader"
         class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
         dusk="profile-header"
-        style="background-image:url({{ cf_img('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg', ["quality" => 90]) }});"
+        style="background-image:url('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg');"
     >
         <div class="header-gradient-overlay absolute-fill"></div>
     

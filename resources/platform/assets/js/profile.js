@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function(){
         relative_urls: false,
     });
     /*
-        Tiny MCE's recomendation for limiting characters
+        tw-text-xs MCE's recomendation for limiting characters
     */
     function getStats(id) {
         var body = tinymce.get(id).getBody(),

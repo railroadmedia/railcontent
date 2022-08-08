@@ -10,12 +10,11 @@
         id="pageHeader"
         class="fluid tw-py-20 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
         dusk="profile-header"
-        style="background-image:url({{ cf_img('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg', ["quality" => 80, "blur" => 40, "width" => 600, "fit" => "crop"]) }});"
-        data-ix-bg="{{ 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg' }}"
+        style="background-image:url( 'https://musora.com/cdn-cgi/image/width=1400/https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg');"
     >
         <div class="header-gradient-overlay absolute-fill"></div>
 
-        <div class="tw-container tw-flex tw-flex-col tw-items-center tw-items-end tw-items-center tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
+        <div class="tw-container tw-flex tw-items-center tw-justify-center tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
             <h1 class="tw-text-white">
                 <i class="fas fa-phone fa-flip-horizontal tw-text-3xl"></i>
                 <span class="tw-text-4xl tw-font-bold"> Support </span>

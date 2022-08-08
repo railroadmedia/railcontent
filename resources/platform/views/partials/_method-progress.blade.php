@@ -12,7 +12,7 @@
         <div class="progress-bar bg-white ba-white-3 relative">
             <div class="progress bg-{{ $brand }}" style="width:{{ $progress }}%">
                 <span
-                    class="amount text-white tiny font-bold
+                    class="amount text-white tw-text-xs font-bold
                         {{ $progress < 20 ? 'text-singeo right' : 'text-white' }}"
                 >
                     {{ $progress }}%

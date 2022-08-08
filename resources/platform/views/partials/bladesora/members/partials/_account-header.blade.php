@@ -8,7 +8,7 @@
     id="pageHeader"
     class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
     dusk="profile-header"
-    style="background-image:url({{ cf_img($backgroundImage, ["quality" => 90]) }});"
+    style="background-image:url(https://musora.com/cdn-cgi/image/quality=90/{{ $backgroundImage }});"
 >
     <div class="header-gradient-overlay absolute-fill"></div>
 
@@ -24,8 +24,7 @@
                 <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
                     @if($user->profile_picture_url)
                         <img class="tw-inline-block tw-rounded-full tw-h-full" 
-                                src="{{ cf_img($user->profile_picture_url, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
-                                data-ix-src="{{ $user->profile_picture_url }}"
+                             src="https://musora.com/cdn-cgi/image/width=165,height=165,quality=90/{{ $user->profile_picture_url }}"
                         >
                     @endif
                 </div>

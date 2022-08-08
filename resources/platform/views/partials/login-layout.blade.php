@@ -43,12 +43,9 @@
         <script src="{{ mix('platform/js/app.js') }}"></script>
         @yield('inject-components')
 
-        {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
-        {{-- <script type="text/javascript">
-            Beacon('on', 'ready', () => {
-                document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
-            })
-        </script> --}}
+        {{-- Helpscout Beacon --}}
+        @include('partials.third-party.helpscout-tracking-beacon-script', ['email' => !empty(user()) ? user()->email : null])
+        
         {{-- {!! \App\Analytics\Tracker::bodyBottom() !!} --}}
     </body>
 </html>

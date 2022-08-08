@@ -16,7 +16,7 @@
             <a
                 href="{{ $sectionUrl }}"
                 aria-label="{{ $sectionUrlLabel }}"
-                class="text-{{ $brand }} tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
+                class="text-{{ $brand }} tw-text-xs no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
                 See All
             </a>
         </div>

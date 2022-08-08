@@ -12,7 +12,7 @@
                     </h2>
 
                     <div
-                        class="close-exercise tiny uppercase text-white flex-auto align-v-center pv-1 pointer"
+                        class="close-exercise tw-text-xs uppercase text-white flex-auto align-v-center pv-1 pointer"
                         @click="closeExercise"
                     >
                         Close <i class="fas fa-times"></i>
