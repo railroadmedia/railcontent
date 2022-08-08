@@ -11,18 +11,23 @@
                     target="_blank"
                     class="tw-no-underline"
                 >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="comment.user['fields.profile_picture_image_url']"
-                        data-ix-fade
-                        class="tw-rounded-full"
+                    <!-- User Avatar -->
+                    <img :src="comment.user['fields.profile_picture_image_url']"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="comment.user.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="comment.user.imageLoaded = true"
                     >
                 </a>
             </div>
-            <img
-                v-if="!hasPublicProfiles"
-                :src="comment.user['fields.profile_picture_image_url']"
-                class="tw-rounded-full"
+
+            <!-- User Avatar -->
+            <img v-if="!hasPublicProfiles"
+                 :src="comment.user['fields.profile_picture_image_url']"
+                 loading="lazy"
+                 class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                 :class="comment.user.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                 @load="comment.user.imageLoaded = true"
             >
 
             <p

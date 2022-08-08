@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     </head>
 
-    <body class="flex flex-col w-full min-h-screen" x-data="{ sidebarOpen: false, showOverlay: false }">
+    <body class="flex flex-col w-full min-h-screen lg:pt-[56px]" x-data="{ sidebarOpen: false, showOverlay: false }">
 
         @yield('layout-header')
 
@@ -31,8 +31,17 @@
         ></div>
 
         <!-- Scripts -->
-        @yield('layout-scripts')
-        <script src="{{ mix('marketing/js/app.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-304523-137"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
+            gtag('config', 'UA-304523-137');
+        </script>
+        <script src="{{ mix('marketing/js/app.js') }}"></script>
+         @yield('layout-scripts')
     </body>
 </html>

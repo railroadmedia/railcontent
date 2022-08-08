@@ -371,7 +371,7 @@
                                 <div class="form-group">
                                     <div class="stripe-element-container">
                                         <div id="card-number" class="stripe-element"></div>
-                                        <h5 class="stripe-element-error tiny mt-1">Invalid Credit Card Number.</h5>
+                                        <h5 class="stripe-element-error tw-text-xs mt-1">Invalid Credit Card Number.</h5>
                                     </div>
                                     <label for="card-number" class="{{ $brand }}">Credit Card Number</label>
                                 </div>
@@ -380,7 +380,7 @@
                                 <div class="form-group">
                                     <div class="stripe-element-container">
                                         <div id="card-expiry" class="stripe-element"></div>
-                                        <h5 class="stripe-element-error tiny mt-1">Invalid Credit Card Expiry</h5>
+                                        <h5 class="stripe-element-error tw-text-xs mt-1">Invalid Credit Card Expiry</h5>
                                     </div>
                                     <label for="card-expiry" class="{{ $brand }}">Credit Card Expiry</label>
                                 </div>
@@ -389,7 +389,7 @@
                                 <div class="form-group">
                                     <div class="stripe-element-container">
                                         <div id="card-cvc" class="stripe-element"></div>
-                                        <h5 class="stripe-element-error tiny mt-1">Invalid Credit Card CVV/CVC</h5>
+                                        <h5 class="stripe-element-error tw-text-xs mt-1">Invalid Credit Card CVV/CVC</h5>
                                     </div>
                                     <label for="card-cvc" class="{{ $brand }}">CVV/CVC</label>
                                 </div>

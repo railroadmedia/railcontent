@@ -6,7 +6,7 @@
         @endif
 
         @if(!empty($errors->all()))
-            <ul class="tw-flex tw-flex-col tw-mb-3 tiny text-error list-style-none">
+            <ul class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none">
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -14,7 +14,7 @@
         @endif
 
         @if(session()->has('status'))
-            <ul class="tw-flex tw-flex-col tw-mb-2 tiny text-success list-style-none">
+            <ul class="tw-flex tw-flex-col tw-mb-2 tw-text-xs text-success list-style-none">
                 <li>{{ session()->get('status') }}</li>
             </ul>
         @endif

@@ -4,10 +4,18 @@
         :class="isRead ? 'tw-bg-[#e4e4e7] dark:tw-bg-[#102230]' : ''">
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">
+                
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">
-                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="userAvatar" data-ix-fade alt="User Avatar" class="rounded">
+                    <!-- User Avatar -->
+                    <img :src="userAvatar"
+                         alt="User Avatar"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="linkedContent.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="linkedContent.imageLoaded = true"
+                    >
                 </div>
+
             </div>
 
             <div class="tw-flex tw-flex-col tw-justify-center overflow">

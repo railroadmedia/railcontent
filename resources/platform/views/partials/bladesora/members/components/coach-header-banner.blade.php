@@ -164,11 +164,8 @@
                     <a href="{{ $profileUrl }}" class="tw-no-underline">
                         <img
                             class="tw-rounded inset-border"
-                            src="{{ cf_img(
-                                $currentUser['avatar'],
-                                ["quality" => 50, "blur" => 2, "width" => 50, "height" => 50]
-                            ) }}"
-                            data-ix-src="{{ $currentUser['avatar'] }}"
+                            src="https://musora.com/cdn-cgi/image/width=50,height=50/{{ currentUser['avatar'] }}"
+                            alt="User Avatar"
                         >
                     </a>
                 </div>

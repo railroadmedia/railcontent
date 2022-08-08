@@ -24,7 +24,7 @@
                                 </h3>
                             </div>
                             <div v-if="timecode != 0" class="flex flex-column flex-auto">
-                                <a class="flex flex-column flex-auto tiny font-bold font-underline hide-xs-only ph-2" :class="'text-' + themeColor" :data-jump-to-time="timecode">
+                                <a class="flex flex-column flex-auto tw-text-xs font-bold font-underline hide-xs-only ph-2" :class="'text-' + themeColor" :data-jump-to-time="timecode">
                                         {{ formattedTimecode }} 
                                     </a>
                             </div>
@@ -45,7 +45,7 @@
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
     
-                    <button :class="`tw-btn-secondary tw-text-${brand}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                    <button :class="`tw-btn-secondary tw-text-${themeColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
                             <i class="fas fa-check mr-1"></i>
                             {{ isComplete ? 'Completed' : 'Complete' }}
                         </button>
@@ -324,16 +324,9 @@ export default {
                 return 1100;
             },
         },
-
-        imgixParams() {
-            return {
-                auto: 'format',
-                width: `${this.carouselWidth}px`,
-            };
-        },
     },
     mounted() {
-        console.log(this.soundsliceSlug)
+        // console.log(this.soundsliceSlug)
         if (this.position < 3) {
             this.openAssignment();
         }

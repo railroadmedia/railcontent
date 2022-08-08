@@ -25,7 +25,7 @@
                         class="flex flex-row align-h-left align-v-center"
                     >
                         <div class="flex flex-column flex-auto">
-                            <h4 class="quantity-label tiny dense font-bold uppercase">
+                            <h4 class="quantity-label tw-text-xs dense font-bold uppercase">
                                 Quantity:
                             </h4>
                         </div>
@@ -58,7 +58,7 @@
                     >
                         <div class="flex flex-column flex-auto">
                             <a
-                                class="text-error tiny dense font-bold pointer uppercase"
+                                class="text-error tw-text-xs dense font-bold pointer uppercase"
                                 title="Remove Item"
                                 @click.stop.prevent="removeCartItem"
                             >

@@ -49,12 +49,13 @@
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
-                >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="currentUser.avatar"
-                        data-ix-fade
-                        class="tw-rounded-full"
+                >   
+                    <!-- User Avatar -->
+                    <img :src="currentUser.avatar"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="currentUser.imageLoaded = true"
                     >
                 </div>
                 <p
@@ -317,18 +318,8 @@ export default {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
 
-                        if (window.ImgixService) {
-                            window.ImgixService.reloadCommentImages();
-                        }
+                        // console.log('on service', this.comments[0])
 
-                        console.log('on service', this.comments[0])
-
-                        setTimeout(() => {
-                            // Load the Imgix Service to load srcs and srcsets
-                            if (window.ImgixService) {
-                                window.ImgixService.loadImageSources();
-                            }
-                        }, 500);
                     }
                 });
         },
@@ -362,10 +353,6 @@ export default {
                             });
 
                             this.comments.splice(0, 0, thisComment);
-
-                            if (window.ImgixService) {
-                                window.ImgixService.reloadCommentImages();
-                            }
                         }
 
                         this.loading = false;

@@ -17,7 +17,7 @@
                         class="flex flex-column close-exercise uppercase text-white align-v-center pv-1 pointer flex-auto"
                         @click="closeExercise"
                     >
-                        <div class="flex flex-row tiny align-v-center">
+                        <div class="flex flex-row tw-text-xs align-v-center">
                             Close <i class="fas fa-times ml-1"></i>
                         </div>
                     </div>

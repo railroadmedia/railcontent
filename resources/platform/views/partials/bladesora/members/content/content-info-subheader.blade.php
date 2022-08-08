@@ -34,7 +34,7 @@
                         <i class="unopen fas fa-download no-events tw-text-white"></i>
                         <i class="open fas fa-download no-events text-x-dark"></i>
 
-                        <div class="dropdown-content tw-bg-white tw-shadow tiny tw-text-[#00101D]">
+                        <div class="dropdown-content tw-bg-white tw-shadow tw-text-xs tw-text-[#00101D]">
                             <ul>
                                 @foreach($downloadableResources as $resource)
                                     <li>

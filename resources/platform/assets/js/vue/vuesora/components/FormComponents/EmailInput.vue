@@ -80,7 +80,7 @@ export default {
                 this.errorMessage = "Please enter a valid email."
                 this.$emit('update:emailFieldValid', false)
             } else {
-                console.log('nothing')
+                // console.log('nothing')
                 this.errorMessage = '';
                 this.$emit('update:emailFieldValid', true)
             }

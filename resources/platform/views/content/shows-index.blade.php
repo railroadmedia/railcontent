@@ -28,13 +28,12 @@
             @foreach($shows as $type=>$show)
                 <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $type]) }}"
                     class="flex flex-column xs-6 sm-3 lg-2 pa-1">
-                    <div class="show-index-card square corners-10 bg-grey-2 relative">
+                    <div class="show-index-card square corners-10 bg-grey-2 dark:tw-bg-[#081825] relative">
                         <img
-                            src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                            data-ix-src="{{ $show['thumbnailUrl'] }}"
-                            data-ix-fade
-                            class="bg-grey-2 corners-10"
+                            src="{{ $show['thumbnailUrl'] }}"
+                            class="corners-10"
                             alt="{{ $type }} Show Card"
+                            loading="lazy"
                         >
 
                         <span class="box-hover heading corners-10">

@@ -53,7 +53,7 @@
                         :style="contextMenuPosition"
                         @click.stop.prevent
                     >
-                        <ul class="list-style-none tiny dense font-bold">
+                        <ul class="list-style-none tw-text-xs dense font-bold">
                             <li
                                 v-if="!isMobile && useKeyboard"
                                 class="pa-1 hover-bg-grey-4"
