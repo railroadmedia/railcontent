@@ -5,8 +5,8 @@
     "private": true,
     "scripts": {
         "platform-development": "mix --mix-config=resources/platform/webpack.mix.js",
-        "platform-production": "mix --mix-config=resources/platform/webpack.mix.js --production",
-        "platform-watch": "mix --mix-config=resources/platform/webpack.mix.js watch",
+        "platform-production": " npx mix --mix-config=resources/platform/webpack.mix.js --production",
+        "platform-watch": "npx mix --mix-config=resources/platform/webpack.mix.js watch",
         "pw": "mix --mix-config=resources/platform/webpack.mix.js watch",
         "platform-watch-poll": "mix --mix-config=resources/platform/webpack.mix.js watch -- --watch-options-poll=1000",
         "platform-hot": "mix --mix-config=resources/platform/webpack.mix.js watch --hot",
@@ -48,7 +48,6 @@
         "vue-recaptcha": "^2.0.2"
     },
     "dependencies": {
-        "@musora/helper-functions": "^0.1.21",
         "@musora/icons": "^1.0.6",
         "@tinymce/tinymce-vue": "^5.0.0",
         "@vimeo/player": "^2.15.0",

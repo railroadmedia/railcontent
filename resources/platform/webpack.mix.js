@@ -12,7 +12,6 @@ require('laravel-mix-merge-manifest');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 mix
     .js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms
@@ -24,6 +23,10 @@ mix
     .options({
         postCss: [ tailwindcss('./resources/platform/tailwind.config.js') ],
     })
+    .extract(['alpinejs','fast-glob'], 'vendor~unused.js')
+    .extract(['shaka-player', 'screenful'], 'vendor~player.js')
+    .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
+    .extract()
     .sourceMaps()
     .version()
     .mergeManifest();
