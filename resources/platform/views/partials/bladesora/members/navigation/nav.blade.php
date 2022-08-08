@@ -133,7 +133,7 @@
                    @if(!empty($isIframe)) target="_parent" @endif>
                     <div class="pa-1 wrap">
                         <img class="rounded tw-h-7 tw-w-7 lg:tw-w-9 lg:tw-h-9 tw-box-border"
-                             src="{{ imgix($userAvatar, ["q" => 50, "blur" => 2, "w" => 50, "h" => 50, "fit" => "crop"]) }}"
+                             src="https://musora.com/cdn-cgi/image/height=50,width=50,quality=90/{{ $userAvatar }}"
                              data-avatar-update="true">
                     </div>
                 </a>
@@ -167,7 +167,7 @@
             <div class="sidebar-member-section flex flex-row align-v-center bb-grey-1-1">
                 <div class="member-avatar">
                     <a href="{{ $member['profileUrl'] ?? '#' }}">
-                        <img class="bg-grey-2 rounded {{ $themeColor }}" src="{{ imgix($member['avatar'], ['q' => 50, 'blur' => 2, 'w' => 60, 'h' => 60, 'fit' => 'crop']) }}" alt="member avatar">
+                        <img class="bg-grey-2 rounded {{ $themeColor }}" src="https://musora.com/cdn-cgi/image/width=60,height=60,quality=90/{{ $member['avatar'] }}" alt="member avatar">
                     </a>
                 </div>
                 <div class="member-details">

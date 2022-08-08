@@ -555,12 +555,12 @@
                 <div class="tw-flex tw-flex-row tw-mt-6">
 
                     <img
-                            src="{{ imgix("https://d2vyvo0tyx8ig5.cloudfront.net/avatars/149630_1609278320825-1609278322-149630.jpg", ["q" => 80, "w" => 100, "h" => 100, "fit" => "fill", "auto" => "format"]) }}"
+                            src="https://musora.com/cdn-cgi/image/width=100,height=100,quality=80/https://d2vyvo0tyx8ig5.cloudfront.net/avatars/149630_1609278320825-1609278322-149630.jpg"
                             class="rounded"
                             alt="Lisa Witt Portrait">
 
                     <img
-                            src="{{ imgix("https://d1923uyy6spedc.cloudfront.net/jared-sig.jpg", ["q" => 80, "w" => 100, "h" => 80, "fit" => "fill", "auto" => "format"]) }}"
+                            src="https://musora.com/cdn-cgi/image/width=100,height=100,quality=80/https://d1923uyy6spedc.cloudfront.net/jared-sig.jpg"
                             alt="Lisa Witt Portrait"
                             class="tw-ml-6 tw-mt-4 tw-h-16">
 

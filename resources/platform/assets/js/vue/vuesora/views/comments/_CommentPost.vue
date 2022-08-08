@@ -356,10 +356,6 @@ export default {
                     window.addeventatc.refresh();
                 }
 
-                // Load the Imgix Service to load srcs and srcsets
-                if (window.ImgixService) {
-                    window.ImgixService.loadImageSources();
-                }
             }, 300);
 
             if (this.showAllReplies || this.pinned) {
@@ -376,7 +372,7 @@ export default {
                 return this.reply;
             },
             set(val) {
-                console.log(val)
+                // console.log(val)
                 this.reply = val;
             },
         },

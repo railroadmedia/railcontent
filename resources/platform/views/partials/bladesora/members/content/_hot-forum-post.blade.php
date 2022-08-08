@@ -2,7 +2,7 @@
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col">
             <img
-                src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
+                src="https://musora.com/cdn-cgi/image/quality=90/https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                 data-ix-src="{{ $avatar }}"
                 data-ix-fade
                 class="tw-bg-gray-300 tw-rounded-full tw-mb-1"

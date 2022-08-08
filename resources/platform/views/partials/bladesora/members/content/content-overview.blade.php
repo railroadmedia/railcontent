@@ -4,7 +4,7 @@
             <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif>
                 <div class="thumb-img bg-center corners-10 {{ $forceSquareThumb === true ? 'square' : 'widescreen' }}">
                     <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
+                        src="https://musora.com/cdn-cgi/image/quality=90/https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
                         data-ix-src="{{ $itemThumbnail }}"
                         data-ix-fade
                         class="bg-grey-2"

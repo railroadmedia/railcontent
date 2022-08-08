@@ -144,14 +144,14 @@ export default {
               text,
               icon: "fa-envelope",
             });
-            console.log("Subscribed to: " + this.coachName);
+            // console.log("Subscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = false;
             this.$emit("onShowNotification", {
               error: true,
             });
-            console.log("Subscribed did not work");
+            // console.log("Subscribed did not work");
           });
       } else {
         this.item.current_user_is_subscribed = false;
@@ -162,14 +162,14 @@ export default {
               text,
               icon: "fa-bell-slash",
             });
-            console.log("Unsubscribed to: " + this.coachName);
+            // console.log("Unsubscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = true;
             this.$emit("onShowNotification", {
               error: true,
             });
-            console.log("Unubscribed did not work");
+            // console.log("Unubscribed did not work");
           });
       }
     },

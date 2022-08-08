@@ -311,7 +311,7 @@ export default {
             ele.parentNode.insertBefore(iframeDiv, ele.nextSibling);
             ele.remove();
 
-            console.log(vm.ytEmbedCount);
+            // console.log(vm.ytEmbedCount);
           });
 
           return temp.innerHTML;

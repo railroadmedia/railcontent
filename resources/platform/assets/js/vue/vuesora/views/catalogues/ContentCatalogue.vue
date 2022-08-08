@@ -848,10 +848,6 @@ export default {
           window.addeventatc.refresh();
         }
 
-        // Load the Imgix Service to load srcs and srcsets
-        if (window.ImgixService) {
-          window.ImgixService.loadImageSources();
-        }
       }, 500);
 
       this.loading = false;
