@@ -16,7 +16,6 @@ import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './vue/components/HeaderCarousel/StaticHeader.vue'
-//import Onboarding from './vue/components/Onboarding/Onboarding.vue';
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
@@ -51,7 +50,6 @@ import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailF
 import ContactEmailForm from './vue/vuesora/components/ContactEmailForm/ContactEmailForm.vue';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
 import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
-//import VideoPlayer from './vue/vuesora/components/VideoPlayer/VideoPlayer.vue';
 import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue';
 import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
