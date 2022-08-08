@@ -317,18 +317,8 @@ export default {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
 
-                        if (window.ImgixService) {
-                            window.ImgixService.reloadCommentImages();
-                        }
+                        // console.log('on service', this.comments[0])
 
-                        console.log('on service', this.comments[0])
-
-                        setTimeout(() => {
-                            // Load the Imgix Service to load srcs and srcsets
-                            if (window.ImgixService) {
-                                window.ImgixService.loadImageSources();
-                            }
-                        }, 500);
                     }
                 });
         },
@@ -362,10 +352,6 @@ export default {
                             });
 
                             this.comments.splice(0, 0, thisComment);
-
-                            if (window.ImgixService) {
-                                window.ImgixService.reloadCommentImages();
-                            }
                         }
 
                         this.loading = false;

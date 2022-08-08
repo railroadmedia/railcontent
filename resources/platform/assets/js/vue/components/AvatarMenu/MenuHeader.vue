@@ -24,8 +24,7 @@ export default {
     class="tw-flex tw-h-full tw-w-full tw-px-[16px] tw-pb-[12px] tw-leading-[18px] tw-text-[#00101D] dark:tw-text-white"
     v-on:click="onButtonClick"
   >
-    <div v-on:click="onButtonClick" class="tw-relative tw-h-[53px] tw-w-[53px] tw-rounded-full tw-bg-cover"
-      style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?blur=2&fit=crop&h=50&ixlib=php-1.2.1&q=50&w=50&s=0a284a726ec34f3bca2bb253a0dfc869)">
+    <div v-on:click="onButtonClick" class="tw-relative tw-h-[53px] tw-w-[53px] tw-rounded-full tw-bg-cover">
         <img v-if="userPhoto.length" :src="userPhoto" class="tw-h-[53px] tw-w-[53px] tw-rounded-full"/>
     </div>
       

@@ -34,12 +34,12 @@ function onFollow(e) {
   e.preventDefault();
   if (isCoachFollowed.value) {
     unfollowEndpoint(props.id).then(() => {
-      console.log('then unfollow')
+      // console.log('then unfollow')
       isCoachFollowed.value = false;
     });
   } else {
     followEndpoint(props.id).then(() => {
-      console.log('then follow')
+      // console.log('then follow')
       isCoachFollowed.value = true;
     });
   }

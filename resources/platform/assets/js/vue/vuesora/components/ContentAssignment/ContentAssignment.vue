@@ -324,16 +324,9 @@ export default {
                 return 1100;
             },
         },
-
-        imgixParams() {
-            return {
-                auto: 'format',
-                width: `${this.carouselWidth}px`,
-            };
-        },
     },
     mounted() {
-        console.log(this.soundsliceSlug)
+        // console.log(this.soundsliceSlug)
         if (this.position < 3) {
             this.openAssignment();
         }

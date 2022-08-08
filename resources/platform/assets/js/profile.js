@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
         clearGearPhotoButtons.forEach( (clearButton) => {
             
             clearButton.addEventListener('click', () => {
-                console.log(clearButton.dataset)
+                // console.log(clearButton.dataset)
                 Toasts.confirm({
                     title: 'Do you really want to reset your gear photo?',
                     submitButton: {

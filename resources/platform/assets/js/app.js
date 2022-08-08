@@ -27,7 +27,6 @@ import ContentService from './vue/vuesora/assets/js/services/content';
 import UserService from './vue/vuesora/assets/js/services/user';
 import Toasts from './vue/vuesora/assets/js/classes/toasts';
 import ProgressTracker from './vue/vuesora/assets/js/classes/progress-tracker';
-import ImgixService from './vue/vuesora/assets/js/services/imgix';
 //Vuesora Functions
 import './vue/vuesora/assets/js/functions/navigation';
 import './vue/vuesora/assets/js/functions/user-events';
@@ -66,9 +65,6 @@ import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/
     import Chatsora from './vue/Libraries/Chatsora/components/index';
     const chatEventBus = mitt();
 
-window.onload = function(){
-    window.ImgixService = new ImgixService('Hghw5vHzs98kP8bE');
-};
 
 // laravel vapor library for file uploading to S3 directly
 window.Vapor = require('laravel-vapor');
@@ -166,8 +162,8 @@ const app = createApp({
         },
 
         handleVideoPlay(payload){
-            console.log('handleVideoPlay Called')
-            console.log('hasBeenPlayed', hasBeenPlayed)
+            // console.log('handleVideoPlay Called')
+            // console.log('hasBeenPlayed', hasBeenPlayed)
             if(['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed){
                 ContentService.markContentAsStarted(payload.contentId);
             }
@@ -290,9 +286,10 @@ app.use(VueAxios, axios);
 app.use(Chatsora)
 app.mount('#app');
 
+//What does this do??
 window.onload = function(){
     const x = 'SGdodzV2SHpzOThrUDhiRQ==';
-    var _0x4d18=['SW1naXhTZXJ2aWNl'];(function(_0x53a848,_0x3f6d9a){var _0x3c80ef=function(_0x206808){while(--_0x206808){_0x53a848['push'](_0x53a848['shift']());}};_0x3c80ef(++_0x3f6d9a);}(_0x4d18,0x125));var _0x4a5d=function(_0x1cc2a6,_0x9e164c){_0x1cc2a6=_0x1cc2a6-0x0;var _0x208080=_0x4d18[_0x1cc2a6];if(_0x4a5d['yhkJpR']===undefined){(function(){var _0x4c4d9c=function(){var _0x246f0e;try{_0x246f0e=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x49160d){_0x246f0e=window;}return _0x246f0e;};var _0x1a3c9b=_0x4c4d9c();var _0x150bcf='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x1a3c9b['atob']||(_0x1a3c9b['atob']=function(_0x19253c){var _0x2ef832=String(_0x19253c)['replace'](/=+$/,'');for(var _0x4f607d=0x0,_0x4e7985,_0x3640d4,_0x56e21e=0x0,_0xb7aacb='';_0x3640d4=_0x2ef832['charAt'](_0x56e21e++);~_0x3640d4&&(_0x4e7985=_0x4f607d%0x4?_0x4e7985*0x40+_0x3640d4:_0x3640d4,_0x4f607d++%0x4)?_0xb7aacb+=String['fromCharCode'](0xff&_0x4e7985>>(-0x2*_0x4f607d&0x6)):0x0){_0x3640d4=_0x150bcf['indexOf'](_0x3640d4);}return _0xb7aacb;});}());_0x4a5d['gpMDLH']=function(_0x3b4561){var _0x3abf1c=atob(_0x3b4561);var _0x4fd965=[];for(var _0xd2fc36=0x0,_0x4aa56a=_0x3abf1c['length'];_0xd2fc36<_0x4aa56a;_0xd2fc36++){_0x4fd965+='%'+('00'+_0x3abf1c['charCodeAt'](_0xd2fc36)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4fd965);};_0x4a5d['mZSrca']={};_0x4a5d['yhkJpR']=!![];}var _0x6ae68b=_0x4a5d['mZSrca'][_0x1cc2a6];if(_0x6ae68b===undefined){_0x208080=_0x4a5d['gpMDLH'](_0x208080);_0x4a5d['mZSrca'][_0x1cc2a6]=_0x208080;}else{_0x208080=_0x6ae68b;}return _0x208080;};(function(){const _0x38c62b=x;const _0x348f75=atob(_0x38c62b);window[_0x4a5d('0x0')]=new ImgixService(_0x348f75);}());
+    var _0x4d18=['SW1naXhTZXJ2aWNl'];(function(_0x53a848,_0x3f6d9a){var _0x3c80ef=function(_0x206808){while(--_0x206808){_0x53a848['push'](_0x53a848['shift']());}};_0x3c80ef(++_0x3f6d9a);}(_0x4d18,0x125));var _0x4a5d=function(_0x1cc2a6,_0x9e164c){_0x1cc2a6=_0x1cc2a6-0x0;var _0x208080=_0x4d18[_0x1cc2a6];if(_0x4a5d['yhkJpR']===undefined){(function(){var _0x4c4d9c=function(){var _0x246f0e;try{_0x246f0e=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x49160d){_0x246f0e=window;}return _0x246f0e;};var _0x1a3c9b=_0x4c4d9c();var _0x150bcf='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x1a3c9b['atob']||(_0x1a3c9b['atob']=function(_0x19253c){var _0x2ef832=String(_0x19253c)['replace'](/=+$/,'');for(var _0x4f607d=0x0,_0x4e7985,_0x3640d4,_0x56e21e=0x0,_0xb7aacb='';_0x3640d4=_0x2ef832['charAt'](_0x56e21e++);~_0x3640d4&&(_0x4e7985=_0x4f607d%0x4?_0x4e7985*0x40+_0x3640d4:_0x3640d4,_0x4f607d++%0x4)?_0xb7aacb+=String['fromCharCode'](0xff&_0x4e7985>>(-0x2*_0x4f607d&0x6)):0x0){_0x3640d4=_0x150bcf['indexOf'](_0x3640d4);}return _0xb7aacb;});}());_0x4a5d['gpMDLH']=function(_0x3b4561){var _0x3abf1c=atob(_0x3b4561);var _0x4fd965=[];for(var _0xd2fc36=0x0,_0x4aa56a=_0x3abf1c['length'];_0xd2fc36<_0x4aa56a;_0xd2fc36++){_0x4fd965+='%'+('00'+_0x3abf1c['charCodeAt'](_0xd2fc36)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4fd965);};_0x4a5d['mZSrca']={};_0x4a5d['yhkJpR']=!![];}var _0x6ae68b=_0x4a5d['mZSrca'][_0x1cc2a6];if(_0x6ae68b===undefined){_0x208080=_0x4a5d['gpMDLH'](_0x208080);_0x4a5d['mZSrca'][_0x1cc2a6]=_0x208080;}else{_0x208080=_0x6ae68b;}return _0x208080;};(function(){const _0x38c62b=x;const _0x348f75=atob(_0x38c62b);}());
 };
 
 document.addEventListener('DOMContentLoaded', event => {
