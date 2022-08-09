@@ -30,7 +30,7 @@
                 class="flex flex-row bb-grey-4-1"
             >
                 <div class="flex flex-column">
-                    <ul class="list-style-none tiny text-right dense font-bold">
+                    <ul class="list-style-none tw-text-xs text-right dense font-bold">
                         <li
                             v-for="quality in playbackQualities"
                             :key="quality.label"
@@ -80,7 +80,7 @@
                 class="flex flex-row bt-grey-4-1"
             >
                 <div class="flex flex-column align-v-center">
-                    <ul class="list-style-none tiny text-right dense font-bold">
+                    <ul class="list-style-none tw-text-xs text-right dense font-bold">
                         <li
                             v-for="rate in playbackRates"
                             :key="`playbackRate-${rate}`"

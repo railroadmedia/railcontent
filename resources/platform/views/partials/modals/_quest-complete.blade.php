@@ -7,7 +7,7 @@
 <div x-show.transition.opacity="modalOpen === 'questComplete'" 
      x-cloak
      class="tw-overflow-scroll tw-fixed tw-inset-0 tw-z-250 soft-block tw-bg-fixed"
-     style="background-image: url( {{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg", ["auto" => "format", "w" => 1500]) }} ); background-color: #000718;"
+     style="background-image: url( https://musora.com/cdn-cgi/image/width=1500,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg ); background-color: #000718;"
 >
     <button class="tw-text-white tw-text-7xl tw-fixed tw-cursor-pointer tw-z-250 tw-bg-transparent tw-border-0 tw-top-0 tw-right-1 lg:tw-top-2 lg:tw-right-2 tw-p-0"
             x-on:click.prevent="modalOpen = false;">
@@ -22,24 +22,16 @@
                     <img width="730px" 
                          class="tw-absolute tw-max-w-none" 
                          style="top: -360px; right: -90px;"
-                         src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-header.png", ["auto" => "format", "w" => 730]) }}">
+                         src="https://musora.com/cdn-cgi/image/width=730,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-header.png">
                 </div>
                 <div class="tw-flex tw-flex-col tw-items-center tw-w-3/4 md:tw-w-1/2 tw-mx-auto tw-z-250">
                     <img id="packLogo"
-                        src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png", ["auto" => "format", "w" => 1000]) }}"
+                        src="https://musora.com/cdn-cgi/image/width=1000,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png"
                         class="tw-mt-24 tw-w-full tw-block"
                     >
                     <h1 class="heading tw-text-white tw-mt-4 tw-mb-8 tw-uppercase tw-font-normal tw-text-center tw-items-center tw-flex tw-tracking-widest">
                     Completed!
                     </h1>
-{{--                    <p class="tw-text-white tw-text-center tw-mb-8 tw-px-8 tw-text-base">--}}
-{{--                        You've unlocked 2 secret videos "The Making of Guitar Quest" & "Making the Music of Guitar Quest".--}}
-{{--                    </p>--}}
-                    <!-- <a  href="/"
-                        title="return to map"
-                        class="tw-mb-6 tw-no-underline tw-cursor-pointer bg-goldenrod-gradient tw-text-base tw-transition tw-duration-300 tw-px-12 tw-py-3 tw-inline-block tw-uppercase tw-text-[#00101D] tw-text-center font-roboto-condensed-bold tw-rounded-full tw-w-2/3">
-                        Share
-                    </a> -->
                     <a  href="/members/packs/guitar-quest" 
                         class="btn bg-guitareoGuitarQuest inverted text-guitareoGuitarQuest tw-w-2/3">
                         <span class="mr-1">Return To Map</span> 
@@ -74,15 +66,15 @@
                         <div class="tw-w-full md:tw-w-3/4 tw-mx-auto tw-flex tw-justify-around">
                             <!-- Lessons Crushed -->
                             <div class="tw-flex tw-flex-col tw-items-center">
-                                <img class="tw-w-24 sm:tw-w-32 md:tw-w-36 tw-block" src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-lessons-crushed.png", ["auto" => "format", "w" => 185]) }}">
+                                <img class="tw-w-24 sm:tw-w-32 md:tw-w-36 tw-block" src="https://musora.com/cdn-cgi/image/width=185,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-lessons-crushed.png">
                                 <h4 class="tw-uppercase tw-text-white mt-2 tw-text-sm font-roboto-condensed-bold">Lessons Crushed</h4>
-                                <h3 class="tw-text-7xl w-text-white tw-font-bold tw-text-white font-roboto-condensed-bold">{{ $totalCompletedLessons ?? 0 }}</h3>
+                                <h3 class="tw-text-7xl tw-font-bold tw-text-white font-roboto-condensed-bold">{{ $totalCompletedLessons ?? 0 }}</h3>
                             </div>
                             <!-- Challenges Completed -->
                             <div class="tw-flex tw-flex-col tw-items-center">
-                                <img class="tw-w-24 sm:tw-w-32 md:tw-w-36 tw-block" src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-challenges-completed.png", ["auto" => "format", "w" => 185]) }}">
+                                <img class="tw-w-24 sm:tw-w-32 md:tw-w-36 tw-block" src="https://musora.com/cdn-cgi/image/width=185,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-challenges-completed.png">
                                 <h4 class="tw-uppercase tw-text-white mt-2 tw-text-sm font-roboto-condensed-bold">Challenges Completed</h4>
-                                <h3 class="tw-text-7xl tw-text-white tw-font-bold tw-text-white font-roboto-condensed-bold">{{ ($totalCompletedLevels ?? 0) + 1 }}</h3>
+                                <h3 class="tw-text-7xl tw-font-bold tw-text-white font-roboto-condensed-bold">{{ ($totalCompletedLevels ?? 0) + 1 }}</h3>
                             </div>
                         </div>
                     </div>

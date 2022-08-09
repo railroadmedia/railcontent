@@ -19461,11 +19461,11 @@ body.play-alongs-player-open #content-container {
 * @param $primaryColor - the first color at the start of the gradient
 * @param $secondaryColor - the second color at the end of the gradient
 */
-[data-ix-fade] {
+[data-image-fade] {
   opacity: 0;
   transition: opacity 0.5s;
 }
-[data-ix-fade].ix-loaded {
+[data-image-fade].image-loaded {
   opacity: 1;
 }
 
@@ -22348,6 +22348,24 @@ a:visited{
 .tw-mt-0{
   margin-top: 0px !important;
 }
+.tw-mr-auto{
+  margin-right: auto !important;
+}
+.tw-mb-2{
+  margin-bottom: 0.5rem !important;
+}
+.tw-mt-1{
+  margin-top: 0.25rem !important;
+}
+.tw-mb-4{
+  margin-bottom: 1rem !important;
+}
+.tw-mt-4{
+  margin-top: 1rem !important;
+}
+.tw-mt-3{
+  margin-top: 0.75rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22812,6 +22830,11 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-fit{
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
 .tw-min-w-\[175px\]{
   min-width: 175px !important;
 }
@@ -22968,6 +22991,10 @@ a:visited{
 }
 .tw--rotate-90{
   --tw-rotate: -90deg !important;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+}
+.tw-rotate-45{
+  --tw-rotate: 45deg !important;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 .tw-scale-125{
@@ -23279,6 +23306,9 @@ a:visited{
 .tw-rounded-none{
   border-radius: 0px !important;
 }
+.tw-rounded{
+  border-radius: 0.25rem !important;
+}
 .tw-rounded-b-lg{
   border-bottom-right-radius: 0.5rem !important;
   border-bottom-left-radius: 0.5rem !important;
@@ -23333,6 +23363,9 @@ a:visited{
   border-left-width: 4px !important;
 }
 .tw-border-b-\[1px\]{
+  border-bottom-width: 1px !important;
+}
+.tw-border-b{
   border-bottom-width: 1px !important;
 }
 .tw-border-solid{
@@ -23470,6 +23503,10 @@ a:visited{
 .tw-border-gray-800{
   --tw-border-opacity: 1 !important;
   border-color: rgb(31 41 55 / var(--tw-border-opacity)) !important;
+}
+.tw-border-\[\#E4E4E7\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(228 228 231 / var(--tw-border-opacity)) !important;
 }
 .tw-border-b-\[\#223F57\]{
   --tw-border-opacity: 1 !important;
@@ -23620,10 +23657,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-gray-300{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity)) !important;
-}
 .tw-bg-inherit{
   background-color: inherit !important;
 }
@@ -23668,6 +23701,10 @@ a:visited{
 .tw-bg-\[\#D4D4D8\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-pianote{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
@@ -23794,6 +23831,9 @@ a:visited{
 .tw-p-\[3px\]{
   padding: 3px !important;
 }
+.tw-p-1{
+  padding: 0.25rem !important;
+}
 .tw-px-4{
   padding-left: 1rem !important;
   padding-right: 1rem !important;
@@ -23841,10 +23881,6 @@ a:visited{
 .tw-px-12{
   padding-left: 3rem !important;
   padding-right: 3rem !important;
-}
-.tw-px-8{
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
 }
 .tw-py-4{
   padding-top: 1rem !important;
@@ -23930,6 +23966,10 @@ a:visited{
   padding-left: 25px !important;
   padding-right: 25px !important;
 }
+.tw-px-10{
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
 .tw-px-2{
   padding-left: 0.5rem !important;
   padding-right: 0.5rem !important;
@@ -23950,9 +23990,9 @@ a:visited{
   padding-left: 8px !important;
   padding-right: 8px !important;
 }
-.tw-px-10{
-  padding-left: 2.5rem !important;
-  padding-right: 2.5rem !important;
+.tw-px-8{
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
 }
 .tw-px-5{
   padding-left: 1.25rem !important;
@@ -24170,6 +24210,9 @@ a:visited{
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
 }
+.tw-font-roboto-condensed{
+  font-family: "Roboto Condensed", Segoe UI, sans-serif !important;
+}
 .tw-text-2xl{
   font-size: 1.5rem !important;
   line-height: 2rem !important;
@@ -24252,6 +24295,18 @@ a:visited{
 .tw-text-\[75px\]{
   font-size: 75px !important;
 }
+.tw-text-sm{
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+.tw-text-xs{
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+.tw-text-base{
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24266,6 +24321,9 @@ a:visited{
 }
 .tw-font-semibold{
   font-weight: 600 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24314,6 +24372,9 @@ a:visited{
 }
 .tw-leading-4{
   line-height: 1rem !important;
+}
+.tw-leading-none{
+  line-height: 1 !important;
 }
 .tw-tracking-widest{
   letter-spacing: 0.1em !important;
@@ -24507,6 +24568,22 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#3F3F46\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(63 63 70 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#D4D4D8\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(212 212 216 / var(--tw-text-opacity)) !important;
+}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24538,6 +24615,9 @@ a:visited{
 }
 .tw-opacity-30{
   opacity: 0.3 !important;
+}
+.tw-opacity-0{
+  opacity: 0 !important;
 }
 .tw-shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
@@ -24610,6 +24690,11 @@ a:visited{
 .tw-transition-none{
   transition-property: none !important;
 }
+.tw-transition-opacity{
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
 .tw-duration-300{
   transition-duration: 300ms !important;
 }
@@ -24618,6 +24703,9 @@ a:visited{
 }
 .tw-duration-200{
   transition-duration: 200ms !important;
+}
+.tw-duration-500{
+  transition-duration: 500ms !important;
 }
 .tw-ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -24800,6 +24888,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
 }
+.hover\:tw-text-\[\#00101D\]:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
 .hover\:tw-underline:hover{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24879,6 +24971,10 @@ a:visited{
 .tw-dark .dark\:tw-border-white\/\[0\.15\]{
   border-color: rgb(255 255 255 / 0.15) !important;
 }
+.tw-dark .dark\:tw-border-\[\#223457\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(34 52 87 / var(--tw-border-opacity)) !important;
+}
 .tw-dark .dark\:tw-border-b-\[\#102230\]{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(16 34 48 / var(--tw-border-opacity)) !important;
@@ -24890,13 +24986,13 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
-.tw-dark .dark\:tw-bg-\[\#002039\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 32 57 / var(--tw-bg-opacity)) !important;
-}
 .tw-dark .dark\:tw-bg-\[\#081825\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(8 24 37 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#002039\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 32 57 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-bg-\[\#081825\]\/90{
   background-color: rgb(8 24 37 / 0.9) !important;
@@ -24937,6 +25033,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#081825\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 24 37 / var(--tw-bg-opacity)) !important;
+}
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -24972,6 +25072,14 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#000C17\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -25066,6 +25174,10 @@ a:visited{
 .tw-dark .dark\:hover\:tw-bg-\[\#002039\]\/50:hover{
   background-color: rgb(0 32 57 / 0.5) !important;
 }
+.tw-dark .dark\:hover\:tw-bg-\[\#002039\]:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 32 57 / var(--tw-bg-opacity)) !important;
+}
 .tw-dark .dark\:hover\:tw-text-white:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -25127,6 +25239,9 @@ a:visited{
   }
   .sm\:tw-inline-block{
     display: inline-block !important;
+  }
+  .sm\:tw-flex{
+    display: flex !important;
   }
   .sm\:tw-flex{
     display: flex !important;
@@ -26020,6 +26135,10 @@ a:visited{
     font-size: 1.5rem !important;
     line-height: 2rem !important;
   }
+  .lg\:tw-text-base{
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
   .lg\:tw-leading-none{
     line-height: 1 !important;
   }
@@ -26038,8 +26157,14 @@ a:visited{
   .xl\:tw-flex{
     display: flex !important;
   }
+  .xl\:tw-flex{
+    display: flex !important;
+  }
   .xl\:tw-inline-flex{
     display: inline-flex !important;
+  }
+  .xl\:tw-hidden{
+    display: none !important;
   }
   .xl\:tw-hidden{
     display: none !important;

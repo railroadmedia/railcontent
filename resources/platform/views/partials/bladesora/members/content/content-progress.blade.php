@@ -25,7 +25,7 @@
                     </span>
                 </div>
                 <div class="flex flex-column align-center trophy ph-2 title">
-                    <div class="reward flex flex-row text-{{ $brand }} align-v-center dense tiny font-bold nowrap">
+                    <div class="reward flex flex-row text-{{ $brand }} align-v-center dense tw-text-xs font-bold nowrap">
                         <i class="fas fa-trophy text-{{ $brand }}"></i>
                         @if(!empty($xpAmount))
                         &nbsp;&nbsp;{{ $xpAmount }} XP

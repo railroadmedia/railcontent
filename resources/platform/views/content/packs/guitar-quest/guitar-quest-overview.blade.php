@@ -70,7 +70,7 @@
             'levelNineStatus': '{{ $packBundles[8]->fetch('progress_state') }}',
         }"
         class="tw-flex tw-flex-col tw-bg-fixed"
-        style="background-image: url( {{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg", ["auto" => "format", "w" => 1500]) }} ); background-color: #000718;"
+        style="background-image: url(https://musora.com/cdn-cgi/image/width=1500,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg); background-color: #000718;"
     >
 
         {{-- header --}}
@@ -78,7 +78,7 @@
             <div class="container">
                 <div class="tw-flex tw-flex-col tw-relative tw-items-center">
                     <img id="packLogo"
-                         src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png", ["auto" => "format", "w" => 1000]) }}"
+                         src="https://musora.com/cdn-cgi/image/width=1000,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png"
                          class="tw-mt-12 tw-w-3/5 md:tw-w-2/5 lg:tw-w-1/2 tw-block">
 
                     @if(empty($state)) {{-- unstarted --}}
@@ -118,7 +118,7 @@
                         <div class="flex flex-column sm-4">
                             <a href="{{ $nextLessonUrl }}">
                                 <img style="align-self: center;"
-                                     src="{{ imgix($nextLesson->fetch('data.thumbnail_url'), ["auto" => "format", "w" => 450]) }}">
+                                     src="https://musora.com/cdn-cgi/image/width=450,quality=90/{{ $nextLesson->fetch('data.thumbnail_url') }}">
                             </a>
                         </div>
                         <div class="flex flex-column ph-2 sm-4 tw-mt-6 md:tw-mt-6">
@@ -177,15 +177,15 @@
                 <div class="tw-w-full md:tw-w-3/4 tw-mx-auto tw-flex tw-justify-around">
                     {{-- Lessons Crushed --}}
                     <div class="tw-flex tw-flex-col tw-items-center">
-                        <img class="tw-w-24 sm:tw-w-32 md:tw-w-44 tw-block" src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-lessons-crushed.png", ["auto" => "format", "w" => 185]) }}">
+                        <img class="tw-w-24 sm:tw-w-32 md:tw-w-44 tw-block" src="https://musora.com/cdn-cgi/image/width=180,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-lessons-crushed.png">
                         <h4 class="tw-uppercase text-goldenrod font-bison-bold mt-2">Lessons Crushed</h4>
-                        <h3 class="tw-text-7xl w-text-white tw-font-bold tw-text-white font-bison-bold">{{ $totalCompletedLessons }}</h3>
+                        <h3 class="tw-text-7xl tw-font-bold tw-text-white font-bison-bold">{{ $totalCompletedLessons }}</h3>
                     </div>
                     {{-- Challenges Completed --}}
                     <div class="tw-flex tw-flex-col tw-items-center">
-                        <img class="tw-w-24 sm:tw-w-32 md:tw-w-44 tw-block" src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-challenges-completed.png", ["auto" => "format", "w" => 185]) }}">
+                        <img class="tw-w-24 sm:tw-w-32 md:tw-w-44 tw-block" src="https://musora.com/cdn-cgi/image/width=180,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/coin-challenges-completed.png">
                         <h4 class="tw-uppercase text-goldenrod font-bison-bold mt-2">Challenges Completed</h4>
-                        <h3 class="tw-text-7xl tw-text-white tw-font-bold tw-text-white font-bison-bold">{{ $totalCompletedLevels }}</h3>
+                        <h3 class="tw-text-7xl tw-text-white tw-font-bold font-bison-bold">{{ $totalCompletedLevels }}</h3>
                     </div>
                 </div>
             </div>

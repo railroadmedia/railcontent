@@ -8,14 +8,14 @@
             :class="[themeColor]"
         >
             <div class="thumb-wrap corners-10">
-                <div
-                    class="thumb-img corners-10 square"
-                >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="mappedData.thumbnail"
-                        data-ix-fade
-                        alt="Lesson Thumbnail"
+                <div class="thumb-img corners-10 square bg-grey-2 dark:tw-bg-[#081825]">
+                    <!-- Catalog Item Thumbnail -->
+                    <img :src="mappedData.thumbnail"
+                         loading="lazy"
+                         alt="Lesson Thumbnail"
+                         class="tw-transition-opacity tw-duration-500"
+                         :class="contentModel.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="contentModel.imageLoaded = true"
                     >
                 </div>
             </div>

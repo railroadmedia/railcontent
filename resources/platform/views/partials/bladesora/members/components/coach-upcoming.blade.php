@@ -11,7 +11,7 @@
                 @foreach ($upcomingCoaches as $coach)
                     <div class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
                         <!-- Coach Image -->
-                        <img src="{{ imgix($coach['image'], ['h' => 436, 'w' => 300, 'fit' => 'crop', 'crop' => 'faces']) }}"
+                        <img src="https://musora.com/cdn-cgi/image/width=300,height=436,quality=90/{{ $coach['image'] }}"
                             class="tw-w-full tw-flex tw-object-cover tw-filter tw-grayscale" alt="{{ $coach['name'] }} Card">
                         @if (isset($coach['date']))
                             <div class="tw-absolute tw-leading-none tw-uppercase tw-rounded tw-p-1 tw-m-4 tw-bg-yellow-400">

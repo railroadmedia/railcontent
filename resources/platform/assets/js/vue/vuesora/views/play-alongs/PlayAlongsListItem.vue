@@ -11,7 +11,7 @@
         >
             <div class="thumb-wrap corners-10">
                 <div
-                    class="thumb-img corners-10"
+                    class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825]"
                     :class="thumbnailType"
                     :style="'background-image:url( ' + mappedData.thumbnail + ' );'"
                 >

@@ -86,7 +86,7 @@ const handleButtonClick = (e) => {
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <ul
           v-if="errors.length > 0"
-          class="tw-flex tw-flex-col tw-mb-3 tiny text-error list-style-none"
+          class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none"
         >
           <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
             {{ error }}
@@ -94,7 +94,7 @@ const handleButtonClick = (e) => {
         </ul>
         <ul
           v-if="hassessionstatus && sessionstatus"
-          class="tw-flex tw-flex-col tw-mb-2 tiny text-success list-style-none"
+          class="tw-flex tw-flex-col tw-mb-2 tw-text-xs text-success list-style-none"
         >
           <li>{{ sessionstatus }}</li>
         </ul>

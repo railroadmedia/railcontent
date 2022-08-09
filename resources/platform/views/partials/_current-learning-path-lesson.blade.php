@@ -5,8 +5,7 @@
                 @if(!empty($showLogo))
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}">
                         <img
-                            src="{{ cf_img('https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg',
-                            ["quality" => 80, "width" => 200]) }}"
+                            src="https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg"
                             alt="The {{ $brand }} Method Logo"
                             class="invert-fill"
                             style="max-width:225px;width:200px;height:auto; padding-left: 1px;"
@@ -17,7 +16,7 @@
 
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}"
                        aria-label="See All {{ $brand }} Method Lessons"
-                       class="text-{{ $brand }} tiny no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
+                       class="text-{{ $brand }} tw-text-xs no-decoration nowrap raised-hover pa-1 dense font-bold uppercase corners-10">
                         See All
                     </a>
                 @else

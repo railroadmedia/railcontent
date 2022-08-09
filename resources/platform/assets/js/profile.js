@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
         clearGearPhotoButtons.forEach( (clearButton) => {
             
             clearButton.addEventListener('click', () => {
-                console.log(clearButton.dataset)
+                // console.log(clearButton.dataset)
                 Toasts.confirm({
                     title: 'Do you really want to reset your gear photo?',
                     submitButton: {
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function(){
         relative_urls: false,
     });
     /*
-        Tiny MCE's recomendation for limiting characters
+        tw-text-xs MCE's recomendation for limiting characters
     */
     function getStats(id) {
         var body = tinymce.get(id).getBody(),
