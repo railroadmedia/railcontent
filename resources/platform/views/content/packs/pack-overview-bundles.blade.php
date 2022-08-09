@@ -111,3 +111,8 @@
     </div>
 
 @endsection
+
+@section('layout-scripts')
+    <script src="{{ mix('platform/js/vendor~player.js') }}"></script>
+    @parent
+@endsection

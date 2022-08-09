@@ -1010,11 +1010,6 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@musora/helper-functions@^0.1.21":
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/@musora/helper-functions/-/helper-functions-0.1.27.tgz#1c94b61dc3e49d96e2f18ee2cc2af0ec8f07b98d"
-  integrity sha512-989oj9clYT9qS42MB0EnBMDlpNqzvPCWVuOUzrG2jEVoBS5wO6jddPISm1/9OoBawaBvGXZ/pCny2XQVT9YLVw==
-
 "@musora/icons@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@musora/icons/-/icons-1.0.6.tgz#dff1880a5169b4712b7e3e696f077b2ac791c88b"
