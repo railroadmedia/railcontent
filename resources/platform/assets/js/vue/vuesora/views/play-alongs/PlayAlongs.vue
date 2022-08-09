@@ -475,11 +475,10 @@ export default {
                     // If it's only one value then that's a minimum only, so we add a plus sign
                     // Otherwise we remove the plus sign and add a dash between the two values
                     if (keyValue[0] === 'bpm') {
-                        if (this.selectedFilters.bpm == null) {
-                            this.selectedFilters.bpm = `${keyValue[1]}+`;
+                        if (this.selectedFilters['bpm'] == null) {
+                            this.selectedFilters['bpm'] = `${keyValue[1]}+`;
                         } else {
-                            this.selectedFilters.bpm = `${this.selectedFilters.bpm.replace('+', '')}-${keyValue[1]}`;
-                            
+                            this.selectedFilters['bpm'] = `${this.selectedFilters['bpm'].replace('+', '')}-${keyValue[1]}`;
                         }
                     } else {
                         this.selectedFilters[0] = keyValue[1];
@@ -786,6 +785,7 @@ export default {
         },
 
         handleFilterChange(payload) {
+
             this.page = 1;
             this.selectedFilters[payload.key]= payload.value;
 
