@@ -1,6 +1,8 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 require('laravel-mix-merge-manifest');
+const ASSET_URL =
+  process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
 /*
  |--------------------------------------------------------------------------
@@ -12,18 +14,35 @@ require('laravel-mix-merge-manifest');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 mix
     .js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms
-    .js('resources/platform/assets/js/profile.js','public/platform/js')
-    .js('resources/platform/assets/js/lesson-page.js','public/platform/js')
-    .js('resources/platform/assets/js/learning-path-preview.js','public/platform/js')
-    .vue()
+    .js('resources/platform/assets/js/profile.js', 'public/platform/js')
+    .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
+    .js('resources/platform/assets/js/learning-path-preview.js', 'public/platform/js')
+    .vue({ version: 3 })
     .sass('resources/platform/assets/css/app.scss', 'public/platform/css')
     .options({
-        postCss: [ tailwindcss('./resources/platform/tailwind.config.js') ],
+        postCss: [tailwindcss('./resources/platform/tailwind.config.js')],
     })
+    .extract(['alpinejs', 'fast-glob'], 'vendor~unused.js')
+    .extract(['shaka-player', 'screenful', 'mux.js'], 'vendor~player.js')
+    .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
+    .extract()
     .sourceMaps()
     .version()
     .mergeManifest();
+
+mix.webpackConfig(webpack => {
+    return {
+        output: {
+            publicPath: ASSET_URL
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+            })
+        ]
+    };
+});
+

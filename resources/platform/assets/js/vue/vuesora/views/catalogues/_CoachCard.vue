@@ -11,7 +11,7 @@
             item.type === 'song' ? 'tw-blur-sm' : ''
          ]"
          loading="lazy"
-         @load="item.imageLoaded = true"
+         :onload="item.imageLoaded = true"
     />
     <!-- Coach Details -->
     <div
