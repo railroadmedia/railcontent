@@ -47,9 +47,9 @@
             </div>
         </div>
         <div v-if="catalogueType !== 'coaches-grid'" 
-             class="flex flex-row ph-1 pb-1"
+             class="flex flex-row pb-1"
         >
-            <p class="tiny text-grey-3 font-italic">
+            <p class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] font-italic">
                 Displaying <span v-if="totalResults > 0">{{ currentResults }} of</span> {{ totalResults }} results.
             </p>
         </div>
