@@ -2,7 +2,7 @@ const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 require('laravel-mix-merge-manifest');
 const ASSET_URL =
-  process.env.NODE_ENV === "production" ? process.env.ASSET_URL + "/" : "/";
+  process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
 /*
  |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ mix
         postCss: [tailwindcss('./resources/platform/tailwind.config.js')],
     })
     .extract(['alpinejs', 'fast-glob'], 'vendor~unused.js')
-    .extract(['shaka-player', 'screenful'], 'vendor~player.js')
+    .extract(['shaka-player', 'screenful', 'mux.js'], 'vendor~player.js')
     .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()

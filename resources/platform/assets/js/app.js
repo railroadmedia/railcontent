@@ -40,16 +40,9 @@ import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import PlayAlongs from './vue/vuesora/views/play-alongs/PlayAlongs.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
-import CommentsCatalogue from './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
 import PaymentMethods from './vue/vuesora/views/payment-methods';
-import ForumThreadsTable from './vue/vuesora/views/forum/ForumThreadsTable.vue';
-import ForumThread from './vue/vuesora/views/forum/thread/ForumThread.vue';
-import TextEditor from './vue/vuesora/components/TextEditor/TextEditor.vue';
-import ContactMemberEmailForm from './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue';
-import ContactEmailForm from './vue/vuesora/components/ContactEmailForm/ContactEmailForm.vue';
 import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
-import YoutubePlayer from './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
 import Comments from './vue/vuesora/views/comments/Comments.vue';
 import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
@@ -229,27 +222,82 @@ app.config.globalProperties.chatEventBus = chatEventBus;
 app.component('AppContainer', AppContainer)
     .component('PageContainer', PageContainer)
     .component('HeaderCarousel', HeaderCarousel)
+    .component('StaticHeader', StaticHeader)
     .component('HomeCardLinks', HomeCardLinks)
     .component('CatalogSection', CatalogSection)
     .component('StatsSection', StatsSection)
     .component('CoachEvent', CoachEvent)
-    .component('ContentCatalogue', ContentCatalogue)
-    .component('PlayAlongs', PlayAlongs)
     .component('ContentCatalogueContainer', ContentCatalogueContainer)
-    .component('CommentsCatalogue', CommentsCatalogue)
     .component('TriggerBanner', TriggerBanner)
     .component('LoginForm', LoginForm)
     .component('NotificationsTable', NotificationsTable)
     .component('PaymentMethods', PaymentMethods)
-    .component('ForumThreadsTable', ForumThreadsTable)
-    .component('ForumThread', ForumThread)
-    .component('TextEditor', TextEditor)
-    .component('ContactMemberEmailForm', ContactMemberEmailForm)
-    .component('ContactEmailForm', ContactEmailForm)
-    .component('ContentSchedule', ContentSchedule)
-    .component('YoutubePlayer', YoutubePlayer)
-    //.component('VideoPlayer', VideoPlayer)
-    //.component('Onboarding', Onboarding)
+    .component('MusoraIcon', MusoraIcon)
+    .component('LegacyLoops', LegacyLoops)
+    .component('ContentCatalogue', ContentCatalogue)
+    .component('PlayAlongs', PlayAlongs)
+    .component('GearCarousel', GearCarousel)
+    .component('VideoResources', VideoResources)
+    .component('ContentLessonActionButtons', ContentLessonActionButtons)
+    .component('AssignmentsContainer', AssignmentsContainer)
+    .component('ContentAssignment', ContentAssignment)
+    .component('AddEventModal', AddEventModal)
+
+    .component('ContentSchedule', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "content-schedule-component" */
+            './vue/vuesora/views/schedule/Schedule.vue'
+        )
+    ))
+
+    .component('CommentsCatalogue', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "comments-catalogue-component" */
+            './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue'
+        )
+    ))
+
+    .component('ForumThreadsTable', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/vuesora/views/forum/ForumThreadsTable.vue'
+        )
+    ))
+
+    .component('ForumThread', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/vuesora/views/forum/thread/ForumThread.vue'
+        )
+    ))
+
+    .component('TextEditor', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "text-editor-component" */
+            './vue/vuesora/components/TextEditor/TextEditor.vue'
+        )
+    ))
+
+    .component('ContactMemberEmailForm', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "contact-member-form" */
+            './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue'
+        )
+    ))
+
+    .component('ContactEmailForm', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "contact-email-form" */
+            './vue/vuesora/components/ContactEmailForm/ContactEmailForm.vue'
+        )
+    ))
+
+    .component('YoutubePlayer', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "youtube-player-component" */
+            './vue/vuesora/components/YoutubePlayer/YoutubePlayer.vue'
+        )
+    ))
 
     .component('Onboarding', defineAsyncComponent(() =>
         import(
@@ -257,24 +305,34 @@ app.component('AppContainer', AppContainer)
             './vue/components/Onboarding/Onboarding.vue'
         )
     ))
+
     .component('VideoPlayer', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "video-player-component" */
             './vue/vuesora/components/VideoPlayer/VideoPlayer.vue'
         )
     ))
-    .component('ImageCropper', ImageCropper)
-    .component('Comments', Comments)
-    .component('MusoraIcon', MusoraIcon)
-    .component('GearCarousel', GearCarousel)
-    .component('EmailForm', EmailForm)
-    .component('StaticHeader', StaticHeader)
-    .component('AddEventModal', AddEventModal)
-    .component('AssignmentsContainer', AssignmentsContainer)
-    .component('ContentAssignment', ContentAssignment)
-    .component('LegacyLoops', LegacyLoops)
-    .component('VideoResources', VideoResources)
-    .component('ContentLessonActionButtons', ContentLessonActionButtons)
+
+    .component('ImageCropper', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "image-cropper-component" */
+            './vue/vuesora/components/ImageCropper/ImageCropper.vue'
+        )
+    ))
+
+    .component('Comments', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "comments-component" */
+            './vue/vuesora/views/comments/Comments.vue'
+        )
+    ))
+
+    .component('EmailForm', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "email-form-component" */
+            './vue/vuesora/components/EmailForm/EmailForm.vue'
+        )
+    ))
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
