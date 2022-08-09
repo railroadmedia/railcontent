@@ -15,11 +15,12 @@
                     target="_blank"
                     class="tw-no-underline"
                 >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="comment.user['fields.profile_picture_image_url']"
-                        data-ix-fade
-                        class="tw-rounded-full"
+                    <!-- User Avatar -->
+                    <img :src="comment.user['fields.profile_picture_image_url']"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="comment.user.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="comment.user.imageLoaded = true"
                     >
                 </a>
             </div>
@@ -356,10 +357,6 @@ export default {
                     window.addeventatc.refresh();
                 }
 
-                // Load the Imgix Service to load srcs and srcsets
-                if (window.ImgixService) {
-                    window.ImgixService.loadImageSources();
-                }
             }, 300);
 
             if (this.showAllReplies || this.pinned) {
@@ -376,7 +373,7 @@ export default {
                 return this.reply;
             },
             set(val) {
-                console.log(val)
+                // console.log(val)
                 this.reply = val;
             },
         },

@@ -67,7 +67,7 @@
                         >
                             Card Number
                         </label>
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.cardNumber"
                                 :key="'cardNumberError' + i"
@@ -93,7 +93,7 @@
                                 >
                                     Expiry (MM / YY)
                                 </label>
-                                <ul class="errors tiny">
+                                <ul class="errors tw-text-sm">
                                     <li
                                         v-for="(error, i) in errors.cardExpiry"
                                         :key="'cardExpiryError' + i"
@@ -117,7 +117,7 @@
                                 >
                                     CVC
                                 </label>
-                                <ul class="errors tiny">
+                                <ul class="errors tw-text-sm">
                                     <li
                                         v-for="(error, i) in errors.cardCvc"
                                         :key="'cardCvcError' + i"
@@ -156,7 +156,7 @@
                         >
                             Country
                         </label>
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.billingCountry"
                                 :key="'billingCountryError' + i"
@@ -192,7 +192,7 @@
                         >
                             State/Province
                         </label>
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.billingRegion"
                                 :key="'billingRegionError' + i"
@@ -208,7 +208,7 @@
                 v-if="$_paymentMethod === 'paypal'"
                 class="flex flex-row pa-1"
             >
-                <h3 class="tiny text-grey-3 font-italic">
+                <h3 class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] font-italic">
                     * Submitting this form will redirect you to PayPal to complete your order.
                 </h3>
             </div>
@@ -276,7 +276,7 @@
                             class="flex flex-row mb-2"
                         >
                             <div class="flex flex-column">
-                                <p class="tiny font-italic text-grey-3">
+                                <p class="tw-text-sm font-italic text-grey-3">
                                     * Submitting this form will create a new default payment method for you.
                                     Your current subscription will be billed to this payment method when it's due.
                                 </p>

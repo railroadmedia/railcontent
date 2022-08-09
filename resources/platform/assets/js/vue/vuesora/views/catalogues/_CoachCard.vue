@@ -3,7 +3,16 @@
     :href="item.url"
     class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white"
   >
-    <img :src="coachImage" :alt="coachName" class="tw-w-full" />
+    <img :src="`https://musora.com/cdn-cgi/image/width=300/${coachImage}`" 
+         :alt="coachName" 
+         class="tw-w-full tw-transition-opacity tw-duration-500"
+         :class="[ 
+            item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',
+            item.type === 'song' ? 'tw-blur-sm' : ''
+         ]"
+         loading="lazy"
+         @load="item.imageLoaded = true"
+    />
     <!-- Coach Details -->
     <div
       class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-px-2 tw-text-center tw-absolute tw-w-full tw-bottom-0 tw-left-0"
@@ -144,14 +153,14 @@ export default {
               text,
               icon: "fa-envelope",
             });
-            console.log("Subscribed to: " + this.coachName);
+            // console.log("Subscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = false;
             this.$emit("onShowNotification", {
               error: true,
             });
-            console.log("Subscribed did not work");
+            // console.log("Subscribed did not work");
           });
       } else {
         this.item.current_user_is_subscribed = false;
@@ -162,14 +171,14 @@ export default {
               text,
               icon: "fa-bell-slash",
             });
-            console.log("Unsubscribed to: " + this.coachName);
+            // console.log("Unsubscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = true;
             this.$emit("onShowNotification", {
               error: true,
             });
-            console.log("Unubscribed did not work");
+            // console.log("Unubscribed did not work");
           });
       }
     },

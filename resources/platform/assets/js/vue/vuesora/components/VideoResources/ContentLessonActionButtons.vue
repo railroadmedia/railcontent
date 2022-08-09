@@ -67,7 +67,7 @@
                                     :key="resource.resource_name"
                                     :href="resource.resource_url"
                                     :aria-label="`Download ${resource.resource_name}`"
-                                    class="flex flex-row pa-1 tiny no-decoration text-black
+                                    class="flex flex-row pa-1 tw-text-xs no-decoration text-black
                                            hover-bg-grey-1 align-v-center nowrap"
                                     target="_blank"
                                     download

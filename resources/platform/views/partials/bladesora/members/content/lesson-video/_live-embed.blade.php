@@ -21,7 +21,7 @@
                             <i class="unopen fas fa-download no-events tw-text-{{ $brand }}"></i>
                             <i class="open fas fa-download no-events tw-text-white"></i>
 
-                            <div class="dropdown-content tw-bg-white tw-shadow tiny tw-text-[#00101D]">
+                            <div class="dropdown-content tw-bg-white tw-shadow tw-text-xs tw-text-[#00101D]">
                                 <ul>
                                     @foreach($lessonResources as $resource)
                                         <li>
@@ -41,7 +41,7 @@
                 
                 {{-- Live Indicator --}}
                 <div class="">
-                    <p id="liveIndicator" class="bg-error tw-mt-1 tw-text-white tiny tw-font-bold corners-3 tw-text-center tw-uppercase tw-px-1">live</p>
+                    <p id="liveIndicator" class="bg-error tw-mt-1 tw-text-white tw-text-xs tw-font-bold corners-3 tw-text-center tw-uppercase tw-px-1">live</p>
                 </div>
 
             </div>

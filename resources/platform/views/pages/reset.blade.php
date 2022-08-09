@@ -52,7 +52,7 @@
             @endif
 
             @if(!empty($errors->all()))
-                <ul class="tw-flex tw-flex-col mb-3 tiny text-error tw-list-none">
+                <ul class="tw-flex tw-flex-col mb-3 tw-text-xs text-error tw-list-none">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach

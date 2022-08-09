@@ -21,7 +21,7 @@ const getResultValue = (el, searchKey, searchObj) => {
 
 export const transformCoachesCardData = (result) => {
     return result.data.data.map((coach) => {
-        console.log(coach)
+        // console.log(coach)
         const img = getResultValue(coach, 'coach_card_image', 'data');
         const focusText = getResultValue(coach, 'focus_text', 'data');
         const name = getResultValue(coach, 'name', 'fields');

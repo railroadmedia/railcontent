@@ -14,8 +14,11 @@
                         class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                         <!-- Coach Image -->
-                        <img src="{{ cf_img($coach->fetch('data.coach_card_image'), ['width' => 300]) }}"
-                            class="tw-w-full tw-flex tw-object-cover" alt="{{ $coach->fetch('fields.name') }} Card">
+                        <img src="https://musora.com/cdn-cgi/image/width=300/{{ $coach->fetch('data.coach_card_image') }}"
+                             class="tw-w-full tw-flex tw-object-cover" 
+                             alt="{{ $coach->fetch('fields.name') }} Card"
+                             loading="lazy"
+                        >
 
                         <div class="tw-absolute tw-w-full tw-left-0 tw-bottom-0 tw-text-white tw-flex tw-flex-col tw-text-center tw-uppercase tw-h-3/4"
                             style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);">
