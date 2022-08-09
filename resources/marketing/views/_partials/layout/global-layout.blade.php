@@ -4,7 +4,7 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-        
+
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
         @yield('head-includes')
-    >
     </head>
 
     <body class="flex flex-col w-full min-h-screen lg:pt-[56px]" x-data="{ sidebarOpen: false, showOverlay: false }">
@@ -33,7 +32,7 @@
         @yield('layout-footer')
 
         <!-- Overlay -->
-        <div id="page-overlay" 
+        <div id="page-overlay"
              x-cloak
              x-transition.opacity.duration.200ms
              x-show="showOverlay"
