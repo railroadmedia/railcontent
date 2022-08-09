@@ -28,7 +28,8 @@ class ReferralPagesController extends BaseController
          */
         $referrer = $this->referralService->getOrCreateReferrer(
             user()->id,
-            config('referral.saasquatch_referral_program_id', 'drumeo-30-day-referral-staging')  // check here
+            config('referral.saasquatch_referral_program_id.' . brand()),
+            brand()
         );
 
         $referralsPerUser = $this->referralService->getReferralsPerUser();

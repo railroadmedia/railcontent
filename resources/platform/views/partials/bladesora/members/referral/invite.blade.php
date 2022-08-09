@@ -71,6 +71,8 @@ $cardImage = $cardImages[brand()];
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input type="hidden" name="_token" class="sort-input"
                                     value="{{ csrf_token() }}" />
+                                <input type="hidden" name="brand" class="sort-input"
+                                       value="{{ $brand }}" />
                                 <input
                                     class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="email" id="email" name="email" placeholder="Email address..." value="">

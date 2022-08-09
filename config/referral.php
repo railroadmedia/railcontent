@@ -16,24 +16,23 @@ return [
 
     'password_creation_rules' => 'confirmed|min:8|max:128',
 
-    'brand' => 'pianote',
-
     'route_prefix' => 'referral',
-
     'route_middleware_public_groups' => ['web_or_api_public'],
-//    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
-    'route_middleware_public_groups' => ['web_or_api_authenticated'],
+    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
 
-//    'email_invite_redirect_route' => 'members.referral.invite-a-friend',
-    'email_invite_redirect_route' => 'platform.invite-a-friend',
-//    'claim_redirect_route' => 'members.home',
+    'email_invite_redirect_route' => 'platform.home',
     'claim_redirect_route' => 'platform.home',
 
     'referrals_per_user' => 5,
 
     'saasquatch_api_key' => env('SAASQUATCH_API_KEY', 'TEST_HHxOG6K0aWBwLVFXiQOippYPDo6jxXIC'),
     'saasquatch_tenant_alias' => env('SAASQUATCH_TENANT_ALIAS', 'test_aqv1e8qhpmnxs'),
-    'saasquatch_referral_program_id' => env('SAASQUATCH_CURRENT_PROGRAM_ID', 'pianote-30-day-referral-test'),
+    'saasquatch_referral_program_id' => [
+        'drumeo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_DRUMEO'),
+        'pianote' => env('SAASQUATCH_CURRENT_PROGRAM_ID_PIANOTE'),
+        'guitareo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_GUITAREO'),
+        'singeo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_SINGEO'),
+    ],
 
     'messages' => [
         'email_invite_success' => 'Your invitation was emailed successfully!',

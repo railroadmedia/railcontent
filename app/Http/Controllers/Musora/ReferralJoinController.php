@@ -42,7 +42,7 @@ class ReferralJoinController extends BaseController
             [
                 'canRefer' => $this->referralService->canRefer($referrer),
                 'referredByUserName' => $user->firstname ? $user->firstname : $user->email,
-                'brand' => config("referral.brand"),
+                'referralBrand' => $referrer->brand,
                 'googleRecaptchaSiteKey' => config("referral.recaptcha_site_secret")
             ]
         );

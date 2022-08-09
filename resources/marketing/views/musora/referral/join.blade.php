@@ -6,12 +6,9 @@
         'guitareo' => 'https://drumeo-assets.s3.amazonaws.com/redeem/referral/guitareo-guest-pass.png',
     ];
 
-    if ($brand) {
-            $cardImage = $cardImages[$brand];
-    } else {
-        //todo: change this
-        $cardImage = $cardImages['drumeo'];
-    }
+    $brand = $referralBrand;
+    $cardImage = $cardImages[$brand];
+
 @endphp
 
 <div class="referral-sections">
@@ -38,6 +35,7 @@
                             <input type="hidden" name="_token" class="sort-input" value="{{ csrf_token() }}" />
                             <input type="hidden" name="redirect" value="/members">
                             <input type="hidden" name="referral_code" value="{{ $referralCode ?? request()->get('rsCode') }}">
+                            <input type="hidden" name="brand" value="{{ $brand }}">
 
                             <label class="inline-block w-full text-left @if($errors->has('name')) text-red-600 @endif" for="name"><strong>Your name</strong> <em class="opacity-70 text-xs md:float-right">@if($errors->has('name')) {{ $errors->first('name') }} @else Used to say hello! @endif</em></label>
                             <input class="main-form pt-0 inline-block w-full mt-1 mb-4 default-form-field @if($errors->has('name')) text-red-600 @else text-black @endif" type="text" id="name" name="name" placeholder="Your name..." value="{{ old('name') }}">
