@@ -22348,6 +22348,9 @@ a:visited{
 .tw-mt-0{
   margin-top: 0px !important;
 }
+.tw-ml-4{
+  margin-left: 1rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -25411,6 +25414,9 @@ a:visited{
   }
   .md\:tw-mb-4{
     margin-bottom: 1rem !important;
+  }
+  .md\:tw-ml-8{
+    margin-left: 2rem !important;
   }
   .md\:tw-block{
     display: block !important;

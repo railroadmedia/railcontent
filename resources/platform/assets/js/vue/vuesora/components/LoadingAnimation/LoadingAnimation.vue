@@ -1,5 +1,5 @@
 <template>
-    <div class="spin-wrapper">
+    <div class="tw-ml-4 md:tw-ml-8  spin-wrapper">
         <div
             class="spinner"
             :style="`border-top-color:${colorCode};`"
