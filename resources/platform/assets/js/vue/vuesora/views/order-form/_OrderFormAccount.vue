@@ -31,7 +31,7 @@
                             Email Address
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li v-for="(error, i) in errors.accountEmail"
                                 :key="'accountEmailError' + i">
                                 {{ error || null }}
@@ -84,7 +84,7 @@
                                 Email Address
                             </label>
 
-                            <ul class="errors tiny">
+                            <ul class="errors tw-text-sm">
                                 <li
                                     v-for="(error, i) in errors.accountEmail"
                                     :key="'accountEmailError' + i"
@@ -115,7 +115,7 @@
                             >
                                 Password
                             </label>
-                            <ul class="errors tiny">
+                            <ul class="errors tw-text-sm">
                                 <li
                                     v-for="(error, i) in errors.accountPassword"
                                     :key="'accountPasswordError' + i"
@@ -149,7 +149,7 @@
 
             <div class="flex flex-row pa-3">
                 <div class="flex flex-column text-center">
-                    <h4 class="body text-grey-3 mb-1">
+                    <h4 class="body tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] mb-1">
                         You are currently logged in as:
                     </h4>
 
@@ -157,7 +157,7 @@
                         {{ currentUser.email }}
                     </h4>
 
-                    <h4 class="tiny text-grey-3 font-italic">
+                    <h4 class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] font-italic">
                         Your products will be added to the account you are currently logged in with.
                     </h4>
                 </div>
