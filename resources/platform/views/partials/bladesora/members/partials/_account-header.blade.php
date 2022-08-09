@@ -24,7 +24,7 @@
                 <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
                     @if($user->profile_picture_url)
                         <img class="tw-inline-block tw-rounded-full tw-h-full" 
-                             src="https://musora.com/cdn-cgi/image/width=165,height=165,quality=90/{{ $user->profile_picture_url }}"
+                             src="{{ $user->profile_picture_url }}"
                         >
                     @endif
                 </div>
