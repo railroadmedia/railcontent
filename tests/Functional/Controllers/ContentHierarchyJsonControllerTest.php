@@ -23,14 +23,6 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
      */
     protected $contentHierarchyFactory;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-    }
-
     public function test_create_validation_fails()
     {
         $response = $this->call('PUT', 'railcontent/content/hierarchy', [rand(), rand()]);
@@ -156,5 +148,13 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(202, $response->status());
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
     }
 }

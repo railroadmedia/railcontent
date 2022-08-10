@@ -21,7 +21,7 @@ class ExpireCacheTest extends RailcontentTestCase
      */
     private $contentService;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->contentFactory = $this->app->make(ContentFactory::class);
@@ -40,12 +40,20 @@ class ExpireCacheTest extends RailcontentTestCase
             'en-US',
             ConfigService::$brand,
             null,
-            Carbon::now()->addSeconds(30)->toDateTimeString());
+            Carbon::now()->addSeconds(30)->toDateTimeString()
+        );
 
-        $results =  $this->contentService->getAllByType($type);
+        $results = $this->contentService->getAllByType($type);
 
-        $this->assertEquals(1, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys(Cache::store(ConfigService::$cacheDriver)
-            ->getPrefix().'content*')));
+        $this->assertEquals(
+            1,
+            count(
+                Cache::store(ConfigService::$cacheDriver)->getRedis()->keys(
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->getPrefix() . 'content*'
+                )
+            )
+        );
 
         $content2 = $this->contentFactory->create(
             ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
@@ -54,7 +62,8 @@ class ExpireCacheTest extends RailcontentTestCase
             'en-US',
             ConfigService::$brand,
             null,
-            Carbon::now()->toDateTimeString());
+            Carbon::now()->toDateTimeString()
+        );
 
         $this->artisan('command:expireCache');
 

@@ -26,15 +26,6 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
      */
     protected $contentHierarchyFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-    }
-
     public function test_empty()
     {
         $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [], [])
@@ -56,7 +47,7 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
         $slugHierarchyToInclude = [
             'top-slug-' . rand(),
             'second-slug-' . rand(),
-            'third-slug-' . rand()
+            'third-slug-' . rand(),
         ];
 
         $includedParentContentIds = [];
@@ -78,7 +69,7 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
         $slugHierarchyToExclude = [
             $slugHierarchyToInclude[0],
             $slugHierarchyToInclude[1],
-            'random-slug-' . rand()
+            'random-slug-' . rand(),
         ];
 
         $excludedParentContentIds = [];
@@ -149,5 +140,14 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
         var_dump($tEnd - $tStart);
 
         $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
     }
 }

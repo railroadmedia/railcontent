@@ -29,15 +29,6 @@ class CommentServiceTest extends RailcontentTestCase
      */
     protected $commentFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(CommentService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-    }
-
     public function test_get_comment()
     {
         $content = $this->contentFactory->create(
@@ -298,7 +289,6 @@ class CommentServiceTest extends RailcontentTestCase
 
     public function test_soft_delete_comment_with_replies()
     {
-
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
@@ -368,5 +358,14 @@ class CommentServiceTest extends RailcontentTestCase
                 'id' => $reply['id'],
             ]
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(CommentService::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
     }
 }

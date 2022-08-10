@@ -42,20 +42,6 @@ class ContentServiceTest extends RailcontentTestCase
      */
     protected $serviceBeingTested;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionsFactory = $this->app->make(ContentPermissionsFactory::class);
-
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-
-    }
-
     public function test_get_by_id()
     {
         $content = $this->contentFactory->create();
@@ -64,8 +50,8 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_merge($content->getArrayCopy(), [
-                    'id' => $content['id'],
-                ]),
+                'id' => $content['id'],
+            ]),
             $results->getArrayCopy()
         );
     }
@@ -99,10 +85,10 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_merge($content->getArrayCopy(), [
-                    'id' => $content['id'],
-                    'fields' => [$randomField],
-                    'data' => [$randomDatum],
-                ]),
+                'id' => $content['id'],
+                'fields' => [$randomField],
+                'data' => [$randomDatum],
+            ]),
             $results->getArrayCopy()
         );
     }
@@ -122,13 +108,25 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_get_by_ids_not_exists()
     {
-
         $results = $this->serviceBeingTested->getByIds([3, 4]);
 
         $this->assertEquals(
             [],
             $results->toArray()
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionsFactory = $this->app->make(ContentPermissionsFactory::class);
+
+        $this->serviceBeingTested = $this->app->make(ContentService::class);
     }
 
 }

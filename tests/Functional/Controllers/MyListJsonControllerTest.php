@@ -18,15 +18,6 @@ class MyListJsonControllerTest extends RailcontentTestCase
     /** @var  ContentFactory */
     protected $contentFactory;
 
-    protected function setUp()
-    : void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->userId = $this->createAndLogInNewUser();
-    }
-
     public function test_add_to_my_list()
     {
         $content = $this->contentFactory->create(
@@ -47,7 +38,7 @@ class MyListJsonControllerTest extends RailcontentTestCase
                 ->json()[0]
         );
 
-        $this->assertDatabaseHas(config('railcontent.table_prefix').'user_playlist_content', [
+        $this->assertDatabaseHas(config('railcontent.table_prefix') . 'user_playlist_content', [
             'content_id' => $content['id'],
         ]);
     }
@@ -211,5 +202,13 @@ class MyListJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals(2, count($response->decodeResponseJson('data')));
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->userId = $this->createAndLogInNewUser();
     }
 }

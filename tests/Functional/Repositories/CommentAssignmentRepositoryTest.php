@@ -34,23 +34,6 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
      */
     protected $commentAssignationFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-
-        $this->classBeingTested = $this->app->make(CommentAssignmentRepository::class);
-
-        CommentRepository::$availableContentType = false;
-        CommentRepository::$availableUserId = false;
-        CommentRepository::$availableContentId = false;
-      //  CommentAssignmentRepository::$availableAssociatedManagerId = false;
-       // CommentAssignmentRepository::$availableCommentId = false;
-    }
-
     public function get_assigned_comments_empty()
     {
         //CommentAssignmentRepository::$availableAssociatedManagerId = rand();
@@ -60,10 +43,12 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
     public function test_get_assigned_comments()
     {
         $oneContent = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
-        $otherContent = $this->contentFactory->create($this->faker->word, 'course lesson', ContentService::STATUS_PUBLISHED);
+        $otherContent =
+            $this->contentFactory->create($this->faker->word, 'course lesson', ContentService::STATUS_PUBLISHED);
         $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
         for ($i = 0; $i <= 4; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand())->getArrayCopy();
+            $comments[$i] =
+                $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand())->getArrayCopy();
             $assignedComments[$i] = $this->commentAssignationFactory->create($comments[$i]['id'], $userId);
             unset($comments[$i]['replies']);
             unset($comments[$i]['like_count']);
@@ -71,7 +56,7 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
             unset($comments[$i]['is_liked']);
         }
 
-        $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1,25,'comment_id','asc');
+        $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1, 25, 'comment_id', 'asc');
 
         $this->assertEquals($comments, $response);
     }
@@ -92,8 +77,26 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableCommentsAssignment,
             [
                 'comment_id' => $comments['id'],
-                'user_id' => $managerId]
+                'user_id' => $managerId,
+            ]
 
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+
+        $this->classBeingTested = $this->app->make(CommentAssignmentRepository::class);
+
+        CommentRepository::$availableContentType = false;
+        CommentRepository::$availableUserId = false;
+        CommentRepository::$availableContentId = false;
+        //  CommentAssignmentRepository::$availableAssociatedManagerId = false;
+        // CommentAssignmentRepository::$availableCommentId = false;
     }
 }

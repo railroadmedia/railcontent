@@ -7,7 +7,6 @@ use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -30,15 +29,6 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
      * @var CommentAssignationFactory
      */
     protected $commentAssignationFactory;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-    }
 
     public function test_pull_my_assigned_comments_when_not_exists()
     {
@@ -74,7 +64,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
             unset($assignedComments[$i]['assigned_on']);
         }
 
-        $response = $this->call('GET', 'railcontent/assigned-comments',['user_id' => $userId]);
+        $response = $this->call('GET', 'railcontent/assigned-comments', ['user_id' => $userId]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -93,8 +83,17 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
         $assignedComments = $this->commentAssignationFactory->create($comment['id'], rand());
 
-        $response = $this->call('DELETE', 'railcontent/assigned-comment/'.$comment['id']);
+        $response = $this->call('DELETE', 'railcontent/assigned-comment/' . $comment['id']);
 
         $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
     }
 }

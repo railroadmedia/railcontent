@@ -39,21 +39,6 @@ class PermissionControllerTest extends RailcontentTestCase
      */
     protected $contentPermissionService;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->serviceBeingTested = $this->app->make(PermissionService::class);
-        $this->classBeingTested = $this->app->make(PermissionRepository::class);
-        $this->contentPermissionService = $this->app->make(ContentPermissionService::class);
-
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-
-        $this->userId = $this->createAndLogInNewUser();
-    }
-
     public function test_store_response()
     {
         $name = $this->faker->word;
@@ -86,7 +71,7 @@ class PermissionControllerTest extends RailcontentTestCase
             [
                 "source" => "name",
                 "detail" => "The name field is required.",
-            ]
+            ],
         ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
@@ -134,7 +119,6 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_update_not_exist_permission()
     {
-
         $name = $this->faker->word;
 
         $response = $this->call(
@@ -453,5 +437,20 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing(ConfigService::$tableContentPermissions, $data);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->serviceBeingTested = $this->app->make(PermissionService::class);
+        $this->classBeingTested = $this->app->make(PermissionRepository::class);
+        $this->contentPermissionService = $this->app->make(ContentPermissionService::class);
+
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+
+        $this->userId = $this->createAndLogInNewUser();
     }
 }

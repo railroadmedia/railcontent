@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Stress;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
@@ -19,34 +18,29 @@ class ContentStressTest extends RailcontentTestCase
 {
     use SeedDatabase;
 
+    protected static $migrationsRun = false;
     /**
      * @var UserPermissionsRepository
      */
     private $userPermissionRepository;
-
     /**
      * @var \Railroad\Railcontent\Repositories\ContentRepository
      */
     private $contentRepository;
-
     /**
      * @var \Railroad\Railcontent\Repositories\ContentHierarchyRepository
      */
     private $contentHierarchyRepository;
-
     /**
      * @var ContentFieldRepository
      */
     private $contentFieldRepository;
-
     /**
      * @var PermissionRepository
      */
     private $permissionRepository;
 
-    protected static $migrationsRun = false;
-
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -464,10 +458,9 @@ class ContentStressTest extends RailcontentTestCase
 
         $tEnd = microtime(true) - $tStart;
         $this->assertLessThan(0.3, $tEnd);
-
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }

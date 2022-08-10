@@ -3,8 +3,8 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -13,26 +13,20 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class UserContentProgressServiceTest extends RailcontentTestCase
 {
-    /** @var array */
-    private $allowedTypes;
-
-    /** @var string */
-    private $typeAllowedForStartedButNotCompleted;
-
-    /** @var string */
-    private $typeAllowedForCompletedButNotStarted;
-
-
     /**
      * @var UserContentProgressService
      */
     protected $classBeingTested;
-
     /**
      * @var ContentFactory
      */
     protected $contentFactory;
-
+    /** @var array */
+    private $allowedTypes;
+    /** @var string */
+    private $typeAllowedForStartedButNotCompleted;
+    /** @var string */
+    private $typeAllowedForCompletedButNotStarted;
     /**
      * @var ContentService
      */
@@ -47,31 +41,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
      * @var UserContentProgressEventListener
      */
     private $progressEventListener;
-
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(UserContentProgressService::class);
-        $this->contentService = $this->app->make(ContentService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyService = $this->app->make(ContentHierarchyService::class);
-        $this->progressEventListener = $this->app->make(UserContentProgressEventListener::class);
-    }
-
-    protected function getEnvironmentSetUp($app){
-        parent::getEnvironmentSetUp($app);
-        $this->typeAllowedForStartedButNotCompleted = 'baz';
-        $this->typeAllowedForCompletedButNotStarted = 'qux';
-
-        $this->allowedTypes = [
-            'started' =>    [ 'foo','bar', $this->typeAllowedForStartedButNotCompleted ],
-            'completed' =>  [ 'foo','bar', $this->typeAllowedForCompletedButNotStarted ]
-        ];
-
-        $app['config']->set('railcontent.allowed_types_for_bubble_progress', $this->allowedTypes);
-    }
 
     public function test_start_content()
     {
@@ -93,7 +62,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'content_id' => $content['id'],
                 'user_id' => $userId,
                 'state' => $state,
-                'progress_percent' => 0
+                'progress_percent' => 0,
             ]
         );
     }
@@ -112,7 +81,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             'user_id' => $userId,
             'state' => UserContentProgressService::STATE_STARTED,
             'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()->toDateString()
+            'updated_on' => Carbon::now()->toDateString(),
         ];
         $userContentId =
             $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -126,7 +95,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'content_id' => $content['id'],
                 'user_id' => $userId,
                 'state' => UserContentProgressService::STATE_COMPLETED,
-                'progress_percent' => 100
+                'progress_percent' => 100,
             ]
         );
     }
@@ -147,7 +116,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             'user_id' => $userId,
             'state' => $state,
             'progress_percent' => $progress,
-            'updated_on' => Carbon::now()->toDateString()
+            'updated_on' => Carbon::now()->toDateString(),
         ];
 
         $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -161,7 +130,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'content_id' => $content['id'],
                 'user_id' => $userId,
                 'state' => $state,
-                'progress_percent' => $progress
+                'progress_percent' => $progress,
             ]
         );
     }
@@ -204,7 +173,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'state' => UserContentProgressService::STATE_STARTED,
                 'progress_percent' => '0',
                 'higher_key_progress' => null,
-                'updated_on' => Carbon::now()->toDateTimeString()
+                'updated_on' => Carbon::now()->toDateTimeString(),
             ];
             $expectedContents[] = $content->getArrayCopy();
 
@@ -315,8 +284,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         // setting the parent as complete—which is what we're aiming to test here.
 
         $randomChild = $content[rand(0, $numberOfChildren - 1)];
-        foreach($content as $child){
-            if($child['id'] !== $randomChild['id']){
+        foreach ($content as $child) {
+            if ($child['id'] !== $randomChild['id']) {
                 $this->classBeingTested->completeContent($child['id'], $userId);
             }
         }
@@ -381,8 +350,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         // setting the parent as complete—which is what we're aiming to test here.
 
         $randomChild = $content[rand(0, $numberOfChildren - 1)];
-        foreach($content as $child){
-            if($child['id'] !== $randomChild['id']){
+        foreach ($content as $child) {
+            if ($child['id'] !== $randomChild['id']) {
                 $this->classBeingTested->saveContentProgress($child['id'], 20, $userId);
             }
         }
@@ -394,9 +363,9 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $userProgressForParentContent = reset($parentWithProgressAttached['user_progress']);
 
-        if ( !empty($userProgressForParentContent) ) {
-            $parentProgress = (integer) $userProgressForParentContent['progress_percent'];
-            if($parentProgress !== 15){ // (20 + 20 + 20 + 0) / 4 = 15
+        if (!empty($userProgressForParentContent)) {
+            $parentProgress = (integer)$userProgressForParentContent['progress_percent'];
+            if ($parentProgress !== 15) { // (20 + 20 + 20 + 0) / 4 = 15
                 $this->fail('$parentWithProgressAttached[\'started\'] should be false at this point in the test');
             }
         }
@@ -414,7 +383,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $userProgressForParentContent = reset($parentWithProgressAttached['user_progress']);
 
-        if(empty($userProgressForParentContent)){
+        if (empty($userProgressForParentContent)) {
             $this->fail('\'$parentWithProgressAttached\' should not be empty here. This test is likely broken.');
         }
 
@@ -439,10 +408,12 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         //$parent = $this->contentFactory->create(null, $type);
         $parent = $this->contentFactory->create($this->faker->words(rand(2, 6), true), $type);
 
-        if(in_array($type, $this->allowedTypes)){ // todo: update per new config structure
+        if (in_array($type, $this->allowedTypes)) { // todo: update per new config structure
             $this->markTestIncomplete('This test must be updated as per new config structure.');
-            $this->fail('Oops, Faker just so happened to have picked a random word that was also the random "' .
-            'allowed type" set for this test. Just run this test again and things will likely be just fine.');
+            $this->fail(
+                'Oops, Faker just so happened to have picked a random word that was also the random "' .
+                'allowed type" set for this test. Just run this test again and things will likely be just fine.'
+            );
         }
 
         for ($i = 0; $i < $numberOfChildren; $i++) {
@@ -492,7 +463,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $this->parentBubblingRestrictionTestSubRoutine($this->typeAllowedForStartedButNotCompleted);
     }
 
-    private function parentBubblingRestrictionTestSubRoutine($childType){
+    private function parentBubblingRestrictionTestSubRoutine($childType)
+    {
         $userId = rand();
         $numberOfChildren = 5;
         $content = [];
@@ -575,7 +547,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $twoRandomChildren = $this->faker->randomElements($content, 2);
 
-        foreach($twoRandomChildren as $child){
+        foreach ($twoRandomChildren as $child) {
             $this->classBeingTested->saveContentProgress($child['id'], 80, $userId);
         }
 
@@ -604,5 +576,30 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $parentProgress = $parentWithProgressAttached['user_progress'][$userId];
 
         $this->assertEquals(32, $parentProgress['progress_percent']);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(UserContentProgressService::class);
+        $this->contentService = $this->app->make(ContentService::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyService = $this->app->make(ContentHierarchyService::class);
+        $this->progressEventListener = $this->app->make(UserContentProgressEventListener::class);
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
+        $this->typeAllowedForStartedButNotCompleted = 'baz';
+        $this->typeAllowedForCompletedButNotStarted = 'qux';
+
+        $this->allowedTypes = [
+            'started' => ['foo', 'bar', $this->typeAllowedForStartedButNotCompleted],
+            'completed' => ['foo', 'bar', $this->typeAllowedForCompletedButNotStarted],
+        ];
+
+        $app['config']->set('railcontent.allowed_types_for_bubble_progress', $this->allowedTypes);
     }
 }

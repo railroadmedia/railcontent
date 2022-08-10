@@ -84,25 +84,14 @@ class FullTextSearchQueryBuilder extends QueryBuilder
             function (JoinClause $join) {
                 $join->on(
                     'id_content_permissions'.'.content_id',
-                    ConfigService::$tableContent.'.id'
+                    ConfigService::$tableSearchIndexes.'.content_id'
                 );
             })
-            ->leftJoin(ConfigService::$tableContentPermissions.' as type_content_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                        'type_content_permissions'.'.content_type',
-                        ConfigService::$tableContent.'.type'
-                    )
-                        ->whereIn('type_content_permissions'.'.brand', ConfigService::$availableBrands);
-                })
             ->where(function (Builder $builder) {
                 return $builder->where(function (Builder $builder) {
                     return $builder->whereNull(
                         'id_content_permissions'.'.permission_id'
-                    )
-                        ->whereNull(
-                            'type_content_permissions'.'.permission_id'
-                        );
+                    );
                 })
                     ->orWhereExists(function (Builder $builder) {
                         return $builder->select('id')
@@ -111,10 +100,7 @@ class FullTextSearchQueryBuilder extends QueryBuilder
                             ->where(function (Builder $builder) {
                                 return $builder->whereRaw(
                                     'permission_id = id_content_permissions.permission_id'
-                                )
-                                    ->orWhereRaw(
-                                        'permission_id = type_content_permissions.permission_id'
-                                    );
+                                );
                             })
                             ->where(function (Builder $builder) {
                                 return $builder->where(

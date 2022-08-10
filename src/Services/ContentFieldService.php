@@ -270,6 +270,8 @@ class ContentFieldService
             }
         }
 
+        $this->fieldRepository->createOrUpdateAndReposition($data['id'], $data);
+
         $content = $this->contentService->getById($data['content_id']);
 
         //delete cache associated with the content id
