@@ -24145,18 +24145,6 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
-.tw-pb-0{
-  padding-bottom: 0px !important;
-}
-.tw-pt-4{
-  padding-top: 1rem !important;
-}
-.tw-pt-0{
-  padding-top: 0px !important;
-}
-.tw-pb-0{
-  padding-bottom: 0px !important;
-}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24516,10 +24504,6 @@ a:visited{
 .tw-text-\[\#002039\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
-}
-.tw-text-\[\#00101D\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -24983,10 +24967,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
 }
-.tw-dark .dark\:tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-placeholder-opacity)) !important;
@@ -25255,17 +25235,13 @@ a:visited{
     padding-left: 3rem !important;
     padding-right: 3rem !important;
   }
+  .sm\:tw-py-4{
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
   .sm\:tw-px-14{
     padding-left: 3.5rem !important;
     padding-right: 3.5rem !important;
-  }
-  .sm\:tw-py-4{
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-  .sm\:tw-py-4{
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
   }
   .sm\:tw-pr-12{
     padding-right: 3rem !important;
@@ -25285,11 +25261,11 @@ a:visited{
   .sm\:tw-pl-0{
     padding-left: 0px !important;
   }
-  .sm\:tw-pl-4{
-    padding-left: 1rem !important;
-  }
   .sm\:tw-pt-2{
     padding-top: 0.5rem !important;
+  }
+  .sm\:tw-pl-4{
+    padding-left: 1rem !important;
   }
   .sm\:tw-text-xl{
     font-size: 1.25rem !important;
@@ -25716,10 +25692,6 @@ a:visited{
   .md\:tw-py-8{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
-  }
-  .md\:tw-py-4{
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
   }
   .md\:tw-pb-0{
     padding-bottom: 0px !important;

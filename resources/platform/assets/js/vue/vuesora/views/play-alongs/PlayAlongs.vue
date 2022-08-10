@@ -63,22 +63,24 @@
             ></pagination>
         </div>
 
-        <play-alongs-list-item
-            v-for="(item, i) in content"
-            :ref="`list${item.id}`"
-            :key="`list${item.id}`"
-            :index="i + 1"
-            :item="item"
-            :brand="brand"
-            :active="activeItem != null ? item.id === activeItem.id : false"
-            :display-user-interactions="false"
-            :no-link="true"
-            :theme-color="themeColor"
-            :show-user-actions="showUserActions"
-            @addToList="addToListEventHandler"
-            @markAsComplete="completedEventHandler"
-            @click.native="updateTrack(item)"
-        ></play-alongs-list-item>
+        <div class="tw-flex tw-flex-col tw-grow">
+            <play-alongs-list-item
+                v-for="(item, i) in content"
+                :ref="`list${item.id}`"
+                :key="`list${item.id}`"
+                :index="i + 1"
+                :item="item"
+                :brand="brand"
+                :active="activeItem != null ? item.id === activeItem.id : false"
+                :display-user-interactions="false"
+                :no-link="true"
+                :theme-color="themeColor"
+                :show-user-actions="showUserActions"
+                @addToList="addToListEventHandler"
+                @markAsComplete="completedEventHandler"
+                @click.native="updateTrack(item)"
+            />
+        </div>
 
         <div
             v-if="content.length === 0"
@@ -112,7 +114,7 @@
         <transition name="show-from-bottom">
             <div
                 v-show="loading"
-                class="loading corners shadow pa-2"
+                class="loading corners pa-2"
                 @click.stop.prevent
             >
                 <loading-animation :theme-color="themeColor" />
