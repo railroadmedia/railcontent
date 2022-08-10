@@ -373,37 +373,56 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        foreach ($requiredFields as $index => $requiredFieldData) {
-            if ($requiredFieldData['is_content_column']) {
+        // group the required fields by name first since we only need 1 join per associated table
+        $requiredFieldsGroupedByTable = [];
+
+        foreach ($requiredFields as $requiredFieldIndex => $requiredField) {
+            if (!empty($requiredField['associated_table']['table'])) {
+                $requiredFieldsGroupedByTable[$requiredField['associated_table']['table']][] = $requiredField;
+            } else {
+                $requiredFieldsGroupedByTable[$requiredField['name']][] = $requiredField;
+            }
+        }
+
+        // set the joins first, then we'll add the where's after
+        foreach ($requiredFieldsGroupedByTable as $name => $requiredFieldDataGrouped) {
+            if ($requiredFieldDataGrouped[0]['is_content_column']) {
                 $this->where(
-                    ConfigService::$tableContent.'.'.$requiredFieldData['name'],
-                    $requiredFieldData['operator'],
-                    $requiredFieldData['value']
+                    'railcontent_content.'.$requiredFieldDataGrouped[0]['name'],
+                    $requiredFieldDataGrouped[0]['operator'],
+                    is_numeric($requiredFieldDataGrouped[0]['value']) ? DB::raw($requiredFieldDataGrouped[0]['value']) :
+                        DB::raw(
+                            DB::connection()
+                                ->getPdo()
+                                ->quote($requiredFieldDataGrouped[0]['value'])
+                        )
                 );
-            } elseif (!empty($requiredFieldData['associated_table'])) {
+            } elseif (!empty($requiredFieldDataGrouped[0]['associated_table'])) {
                 $this->leftJoin(
-                    $requiredFieldData['associated_table']['table'].
+                    $requiredFieldDataGrouped[0]['associated_table']['table'].
                     ' as '.
-                    'r'.
-                    $requiredFieldData['associated_table']['alias'].
-                    $index,
-                    'r'.$requiredFieldData['associated_table']['alias'].$index.'.content_id',
+                    $requiredFieldDataGrouped[0]['associated_table']['alias'],
+                    $requiredFieldDataGrouped[0]['associated_table']['alias'].'.content_id',
                     '=',
                     ConfigService::$tableContent.'.id'
                 );
                 $this->where(function (Builder $builder) use (
-                    $requiredFieldData,
-                    $index
+                    $requiredFieldDataGrouped
                 ) {
-                    return $builder->where(
-                        'r'.
-                        $requiredFieldData['associated_table']['alias'].
-                        $index.
-                        '.'.
-                        $requiredFieldData['associated_table']['column'],
-                        '=',
-                        $requiredFieldData['value']
-                    );
+                    foreach ($requiredFieldDataGrouped as $requiredFieldGroup) {
+                        $this->where(
+                            $requiredFieldGroup['associated_table']['alias'].
+                            '.'.
+                            $requiredFieldGroup['associated_table']['column'],
+                            $requiredFieldGroup['operator'],
+                            is_numeric($requiredFieldGroup['value']) ? DB::raw($requiredFieldGroup['value']) :
+                                DB::raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($requiredFieldGroup['value'])
+                                )
+                        );
+                    }
                 });
             };
         }
