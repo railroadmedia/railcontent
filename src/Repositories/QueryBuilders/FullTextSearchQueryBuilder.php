@@ -68,6 +68,8 @@ class FullTextSearchQueryBuilder extends QueryBuilder
             $this->orderByRaw($column .' '. $direction);
         }
 
+        $this->orderByRaw(' content_id '. $direction);
+
         return $this;
     }
 
