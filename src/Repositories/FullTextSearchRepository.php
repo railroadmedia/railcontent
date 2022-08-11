@@ -100,19 +100,24 @@ class FullTextSearchRepository extends RepositoryBase
 
         $query->chunk(100, function ($query) {
             $contentRows = $query->toArray();
-            $contentFieldRows = $this->contentRepository->getFieldsByContentIds($contentRows);
+
+            $fieldRowsGrouped = $this->contentRepository->getFieldsByContentIds($contentRows);
             $contentDatumRows = $this->datumRepository->getByContentIds(
                 $query->pluck('id')
                     ->toArray()
             );
-
-            $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
             $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
 
             // insert new indexes in the DB
-            foreach ($query as $content) {
+            foreach ($contentRows as $content) {
                 $content['fields'] = $fieldRowsGrouped[$content['id']] ?? [];
                 $content['data'] = $datumRowsGrouped[$content['id']] ?? [];
+
+                $instructors = ContentHelper::getFieldValues($content, 'instructor');
+                $instructorNames = [];
+                if (!empty($instructors)) {
+                    $instructorNames = (Arr::pluck($instructors, 'id'));
+                }
 
                 $searchInsertData = [
                     'high_value' => $this->prepareIndexesValues('high_value', $content),
@@ -121,7 +126,7 @@ class FullTextSearchRepository extends RepositoryBase
                     'brand' => $content['brand'],
                     'content_type' => $content['type'],
                     'content_status' => $content['status'],
-                    'content_instructors' => implode(',', ContentHelper::getFieldValues($content, 'instructor')),
+                    'content_instructors' => implode(',', $instructorNames),
                     'content_published_on' => $content['published_on'] ?? Carbon::now(),
                     'created_at' => Carbon::now()
                         ->toDateTimeString(),
@@ -146,7 +151,6 @@ class FullTextSearchRepository extends RepositoryBase
     private function deleteOldIndexes()
     {
         return $this->query()
-            ->where('brand', ConfigService::$brand)
             ->delete();
     }
 
@@ -259,7 +263,7 @@ class FullTextSearchRepository extends RepositoryBase
         if (!empty($coachIds)) {
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
-                     return $builder->orwhereRaw(' FIND_IN_SET('.$coachId.',content_instructors)');
+                    return $builder->orwhereRaw(' FIND_IN_SET('.$coachId.',content_instructors)');
                 }
             });
         }
