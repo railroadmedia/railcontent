@@ -1692,6 +1692,7 @@ class ContentRepository extends RepositoryBase
         $bpm = [];
         $topics = [];
         $videos = [];
+        $tags = [];
 
         if (!$withoutAssociatedJoin) {
             $videos = $this->getVideoForContents(array_column($contentRows, 'id'));
@@ -1748,6 +1749,26 @@ class ContentRepository extends RepositoryBase
                         config('railcontent.table_prefix') . 'content' . '.id',
                         '=',
                         config('railcontent.table_prefix') . 'content_topics' . '.content_id'
+                    )
+                    ->whereIn(
+                        config('railcontent.table_prefix') . 'content' . '.id',
+                        array_column($contentRows, 'id')
+                    )
+                    ->get()
+                    ->groupBy('id')
+                    ->toArray();
+
+            $tags =
+                $this->query()
+                    ->select([
+                                 config('railcontent.table_prefix') . 'content_tags' . '.tag as field_value',
+                                 config('railcontent.table_prefix') . 'content' . '.id',
+                             ])
+                    ->join(
+                        config('railcontent.table_prefix') . 'content_tags',
+                        config('railcontent.table_prefix') . 'content' . '.id',
+                        '=',
+                        config('railcontent.table_prefix') . 'content_tags' . '.content_id'
                     )
                     ->whereIn(
                         config('railcontent.table_prefix') . 'content' . '.id',
@@ -1820,6 +1841,19 @@ class ContentRepository extends RepositoryBase
                         "key" => 'topic',
                         "value" => $topic['field_value'] ?? '',
                         "type" => "integer",
+                        "position" => $index,
+
+                    ];
+                }
+            }
+
+            if (array_key_exists($contentRow['id'], $tags)) {
+                foreach ($tags[$contentRow['id']] as $index => $tag) {
+                    $fields[$contentRow['id']][] = [
+                        "content_id" => $contentRow['id'],
+                        "key" => 'tag',
+                        "value" => $tag['field_value'] ?? '',
+                        "type" => "string",
                         "position" => $index,
 
                     ];
