@@ -512,6 +512,7 @@ return [
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
+            'fields.video.fields.length_in_seconds',
             'parent',
         ],
 
