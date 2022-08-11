@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97c5e16c8871c18dd4cb86016ef706b5",
+    "content-hash": "dbeda6da95cc435068bc78ff88fb2ac3",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.232.4",
+            "version": "3.232.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c23943f845b4418d82b8a804ebc2b961de9f9eea"
+                "reference": "68c15b670a5bb8bb4ebee025683a73bf7f969eee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c23943f845b4418d82b8a804ebc2b961de9f9eea",
-                "reference": "c23943f845b4418d82b8a804ebc2b961de9f9eea",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/68c15b670a5bb8bb4ebee025683a73bf7f969eee",
+                "reference": "68c15b670a5bb8bb4ebee025683a73bf7f969eee",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.5"
             },
-            "time": "2022-08-09T18:20:29+00:00"
+            "time": "2022-08-10T18:17:16+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7693,16 +7693,16 @@
         },
         {
             "name": "railroad/event-data-synchronizer",
-            "version": "dev-v8.0-railcontent-2-integration",
+            "version": "dev-v8.0-railcontent-2-integration-referral-3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1"
+                "reference": "c21b95f1e10e2b803cb7cdfc5daaf9757c5339b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1",
-                "reference": "cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/c21b95f1e10e2b803cb7cdfc5daaf9757c5339b2",
+                "reference": "c21b95f1e10e2b803cb7cdfc5daaf9757c5339b2",
                 "shasum": ""
             },
             "require": {
@@ -7714,7 +7714,7 @@
                 "railroad/railcontent": "2.0.0",
                 "railroad/railforums": "2.0.*",
                 "railroad/railhelpscout": "2.0.*",
-                "railroad/referral": "2.0.*",
+                "railroad/referral": "3.0.*",
                 "railroad/usora": "3.0.*"
             },
             "require-dev": {
@@ -7749,9 +7749,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
-                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration"
+                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration-referral-3"
             },
-            "time": "2022-07-20T23:08:26+00:00"
+            "time": "2022-08-11T06:59:41+00:00"
         },
         {
             "name": "railroad/location",
@@ -8036,12 +8036,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "5d837833ccebbda365a70f202b8e6006b63b9bb3"
+                "reference": "a8f94827c590ff4242d19d340e5dfd0cf4546b2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5d837833ccebbda365a70f202b8e6006b63b9bb3",
-                "reference": "5d837833ccebbda365a70f202b8e6006b63b9bb3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a8f94827c590ff4242d19d340e5dfd0cf4546b2a",
+                "reference": "a8f94827c590ff4242d19d340e5dfd0cf4546b2a",
                 "shasum": ""
             },
             "require": {
@@ -8097,7 +8097,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-08-10T10:51:19+00:00"
+            "time": "2022-08-11T09:01:58+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8257,16 +8257,16 @@
         },
         {
             "name": "railroad/referral",
-            "version": "v2.0.0",
+            "version": "v3.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/referral.git",
-                "reference": "f26c141191d5aff1baf5d877f2eb0f870a94a9ac"
+                "reference": "c5c25c5d08bc2cb5697751209fd342d0a801f4b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/f26c141191d5aff1baf5d877f2eb0f870a94a9ac",
-                "reference": "f26c141191d5aff1baf5d877f2eb0f870a94a9ac",
+                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/c5c25c5d08bc2cb5697751209fd342d0a801f4b2",
+                "reference": "c5c25c5d08bc2cb5697751209fd342d0a801f4b2",
                 "shasum": ""
             },
             "require": {
@@ -8292,9 +8292,9 @@
             "description": "Musora referral package",
             "support": {
                 "issues": "https://github.com/railroadmedia/referral/issues",
-                "source": "https://github.com/railroadmedia/referral/tree/v2.0.0"
+                "source": "https://github.com/railroadmedia/referral/tree/v3.0"
             },
-            "time": "2022-05-20T21:39:09+00:00"
+            "time": "2022-08-10T16:00:54+00:00"
         },
         {
             "name": "railroad/remotestorage",

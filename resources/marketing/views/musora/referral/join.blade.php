@@ -11,26 +11,26 @@
 
 @endphp
 
-<div class="referral-sections">
-    <section class="text-center text-white py-6 md:py-10 lg:py-12 lg:py-16 mt-8" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
-        <div class="container mx-auto max-w-6xl">
+<div class="referral-sections pt-8 lg:pt-0" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
+    <section class="text-center text-white py-16">
+        <div class="container mx-auto max-w-6xl px-4 md:px-8">
             @if ($canRefer && !$errors->has('email-invite-message'))
                 <h1 class="leading-tight lg:mb-14"><strong>{{ $referredByUserName }} gifted you 30 days<br class="hidden md:inline"> of free lessons!</strong></h1>
-                <div class="flex flex-wrap xl:flex-nowrap items-center px-4">
-                    <div class="flex-shrink-0 w-full xl:w-auto my-5 md:my-6 xl:my-0">
+                <div class="flex flex-wrap lg:flex-nowrap items-center px-4">
+                    <div class="flex-shrink-0 w-full lg:w-auto my-5 md:my-6 lg:my-0">
                         <div class="relative">
                             <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl" src="{{ $cardImage }}">
                         </div>
 
-                        <ul class="fa-ul text-left mb-0 mt-4 md:mt-6 xl:mt-14 ml-6 md:ml-7 xl:ml-8 w-auto inline-block">
-                            <li class="mb-4 xl:mb-6 leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Organized step-by-step lessons for all skill levels.</li>
-                            <li class="mb-4 xl:mb-6 leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Play your favorite songs with better practice tools.</li>
+                        <ul class="fa-ul text-left mb-0 mt-4 md:mt-6 lg:mt-14 ml-6 md:ml-7 lg:ml-8 w-auto inline-block">
+                            <li class="mb-4 lg:mb-6 leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Organized step-by-step lessons for all skill levels.</li>
+                            <li class="mb-4 lg:mb-6 leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Play your favorite songs with better practice tools.</li>
                             <li class="leading-tight"><i class="fas fa-li fa-check text-{{ $brand }}"></i> Get your questions answered by helpful teachers.</li>
                         </ul>
                     </div>
 
 
-                    <div class="xl:pl-10 max-w-md xl:max-w-none mx-auto">
+                    <div class="lg:pl-10 max-w-md lg:max-w-none mx-auto">
                         <form id="join-form" name="join-form" method="post" action="{{ url()->route('referral.claiming-join') }}">
                             <input type="hidden" name="_token" class="sort-input" value="{{ csrf_token() }}" />
                             <input type="hidden" name="redirect" value="/members">
