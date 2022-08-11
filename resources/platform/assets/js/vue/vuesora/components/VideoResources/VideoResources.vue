@@ -95,7 +95,7 @@
                 style="padding: 0 8px"
                 :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
               >
-                <musora-icon icon-name="plus" class="tw-w-7 tw-h-7 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
+                <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
                 <span class="hide-xs-only">
                   {{ hasAdded ? "Added" : "Add to List" }}
                 </span>
