@@ -22296,6 +22296,24 @@ a:visited{
 .tw-mt-0{
   margin-top: 0px !important;
 }
+.tw-mb-3{
+  margin-bottom: 0.75rem !important;
+}
+.tw-mr-\[15px\]{
+  margin-right: 15px !important;
+}
+.tw-mb-2{
+  margin-bottom: 0.5rem !important;
+}
+.tw-mb-3{
+  margin-bottom: 0.75rem !important;
+}
+.tw-mr-\[15px\]{
+  margin-right: 15px !important;
+}
+.tw-mb-2{
+  margin-bottom: 0.5rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22763,6 +22781,9 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-full{
+  width: 100% !important;
+}
 .tw-min-w-\[175px\]{
   min-width: 175px !important;
 }
@@ -22856,11 +22877,17 @@ a:visited{
 .tw-flex-grow-0{
   flex-grow: 0 !important;
 }
+.tw-flex-grow{
+  flex-grow: 1 !important;
+}
 .tw-grow{
   flex-grow: 1 !important;
 }
 .tw-grow-0{
   flex-grow: 0 !important;
+}
+.tw-grow{
+  flex-grow: 1 !important;
 }
 .tw-origin-center{
   transform-origin: center !important;
@@ -23228,6 +23255,9 @@ a:visited{
 }
 .tw-rounded-none{
   border-radius: 0px !important;
+}
+.tw-rounded-full{
+  border-radius: 9999px !important;
 }
 .tw-rounded-b-lg{
   border-bottom-right-radius: 0.5rem !important;
@@ -24099,6 +24129,9 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
+.tw-pb-0{
+  padding-bottom: 0px !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24208,6 +24241,10 @@ a:visited{
 .tw-text-\[75px\]{
   font-size: 75px !important;
 }
+.tw-text-sm{
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24222,6 +24259,9 @@ a:visited{
 }
 .tw-font-semibold{
   font-weight: 600 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24459,6 +24499,22 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24490,6 +24546,9 @@ a:visited{
 }
 .tw-opacity-30{
   opacity: 0.3 !important;
+}
+.tw-opacity-0{
+  opacity: 0 !important;
 }
 .tw-shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
@@ -24562,6 +24621,11 @@ a:visited{
 .tw-transition-none{
   transition-property: none !important;
 }
+.tw-transition-opacity{
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
 .tw-duration-300{
   transition-duration: 300ms !important;
 }
@@ -24570,6 +24634,9 @@ a:visited{
 }
 .tw-duration-200{
   transition-duration: 200ms !important;
+}
+.tw-duration-500{
+  transition-duration: 500ms !important;
 }
 .tw-ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -24608,6 +24675,11 @@ a:visited{
 }
 .tw-font-bebas-neue{
   font-weight: 400 !important;
+}
+.tw-forum-post ul, .tw-forum-post ol{
+  list-style: revert !important;
+  padding-left: 40px !important;
+  margin-bottom: 10px !important;
 }
 .placeholder\:tw-text-transparent::-moz-placeholder{
   color: transparent !important;
@@ -24876,6 +24948,12 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#F9F9F9\]\/80{
+  background-color: rgb(249 249 249 / 0.8) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
+  background-color: rgb(0 12 23 / 0.8) !important;
+}
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -24911,6 +24989,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#000C17\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
