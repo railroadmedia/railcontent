@@ -1169,6 +1169,8 @@ return [
                 'data.thumbnail_url',
                 'is_added_to_primary_playlist',
                 'progress_percent',
+                'completed',
+                'started',
             ],
             'lessons' => [
                 'id',
