@@ -29,7 +29,7 @@
                     >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full" :src="mappedData.thumbnail" :alt="mappedData.black_title"/>
+                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title"/>
                     </div>
 
                     <!-- Progress -->
