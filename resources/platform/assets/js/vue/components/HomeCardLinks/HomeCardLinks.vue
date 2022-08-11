@@ -67,7 +67,7 @@
         </a>
 
         <!-- Coaches -->
-        <a :href="`/${brand}/coaches/`"
+        <a :href="`/${brand}/coaches`"
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-transition-all tw-border-[#A1A1A9] dark:tw-border-[#344858] hover:tw-border-[#ffac00] hover:dark:tw-border-[#ffac00] tw-rounded-xl tw-overflow-hidden tw-group">
             <div
                 class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-items-center tw-transition-all tw-justify-center tw-text-[#FFA710] coaches-card focus:tw-bottom-1">
