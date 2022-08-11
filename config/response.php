@@ -164,6 +164,7 @@ return [
             'pack_logo',
             'apple_product_id',
             'google_product_id',
+            'lesson_count',
             'lessons' => [
                 'id',
                 'type',
@@ -183,7 +184,6 @@ return [
                 'parent_id',
             ],
             'current_lesson_index',
-            'mobile_app_url',
             'next_lesson' => [
                 'fields.title',
                 'fields.artist',
@@ -893,6 +893,7 @@ return [
             'bundles' => [
                 'fields.title',
                 'data.thumbnail_url',
+                'data.description',
                 'id',
                 'progress_percent',
                 'mobile_app_url',
@@ -969,6 +970,7 @@ return [
             'type',
             'fields.title',
             'data.description',
+            'data.thumbnail_url',
             'completed',
             'started',
             'progress_percent',

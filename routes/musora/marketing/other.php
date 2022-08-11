@@ -7,6 +7,7 @@ Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('about', [MarketingController::class, 'about']);
+        Route::get('contact', [MarketingController::class, 'contact']);
         Route::get('terms-of-service', [MarketingController::class, 'terms']);
         Route::get('privacy-policy', [MarketingController::class, 'privacy']);
         Route::get('careers', [MarketingController::class, 'careers']);

@@ -96,6 +96,13 @@ module.exports = {
         },
         '.font-bebas-neue': {
           fontWeight: '400 !important', //force font weight
+        },
+        '.forum-post': {
+          'ul, ol': {
+            listStyle: 'revert',
+            paddingLeft: '40px',
+            marginBottom: '10px',
+          }
         }
       })
     })

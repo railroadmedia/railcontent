@@ -39,7 +39,7 @@
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.49.9",
         "sass-loader": "^12.1.0",
-        "stylesora": "^1.0.102-t3.10",
+        "stylesora": "^1.0.102-t3.11",
         "tailwindcss": "^3.0.23",
         "vue-recaptcha": "^2.0.2"
     },
