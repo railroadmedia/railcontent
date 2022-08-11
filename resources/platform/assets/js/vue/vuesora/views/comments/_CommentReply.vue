@@ -83,7 +83,7 @@
 
             <div class="tw-flex tw-flex-row body tw-mb-1">
                 <div
-                    class="tw-flex tw-flex-col post-body tw-flex-grow"
+                    class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post"
                     v-html="comment.comment"
                 >
                 </div>
@@ -178,14 +178,14 @@
                         </div>
 
                         <div
-                            v-show="loading"
-                            class="loading-reply tw-flex-center"
+                            :class="loading ? 'tw-flex' : 'tw-hidden' "
+                            class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center"
                         >
                             <i
-                                class="fas fa-spinner fa-spin"
+                                class="fas fa-spinner fa-spin tw-mb-2"
                                 :class="themeTextClass"
                             ></i>
-                            <p class="x-tiny text-grey-3">
+                            <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
                                 loading...
                             </p>
                         </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row">
         <div class="flex flex-column">
-            <div class="flex flex-row flex-wrap-xs-only pv-2 nmh-1">
+            <div class="flex flex-row flex-wrap-xs-only tw-pt-4 sm:tw-py-4 nmh-1">
                 <catalogue-filter
                     v-for="option in availableFilters"
                     :key="option"
@@ -15,7 +15,7 @@
             </div>
 
             <div class="flex flex-row flex-wrap-xs-only nmh-1">
-                <div class="flex flex-column xs-12 sm-6 pa-1">
+                <div class="flex flex-column xs-12 sm-6 tw-p-2 tw-pt-0 sm:tw-pt-2">
                     <div class="flex flex-row flex-wrap-xs-only">
                         <div class="flex flex-column mr-1">
                             <button
@@ -33,9 +33,9 @@
                             </button>
                         </div>
 
-                        <div class="flex flex-column mr-1">
+                        <div class="flex flex-column tw-mr-0 sm:tw-mr-2">
                             <button
-                                class="btn mr-1"
+                                class="btn"
                                 title="Toggle Completed"
                                 @click="toggleCompleted"
                             >

@@ -26,10 +26,10 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="tw-flex xl:tw-flex-row tw-flex-col align-v-top ">
 
-            <div class="flex flex-column pr-1 p-sm-down grow">
+            <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow">
                 {{-- Back Button --}}
                 <a href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}" 
-                   class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center">
+                   class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center tw-w-fit">
                    <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
                    <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
@@ -68,14 +68,21 @@
                                     Play
                                 </button>
 
-                                <button class="tw-mb-3 {{ $lessonContent->fetch('progress_percent', 0) === 100 ? 'tw-btn-primary tw-bg-'.$brand : 'tw-btn-secondary tw-text-'.$brand }}">
-                                    <i class="fas fa-check tw-mr-2 tw-text-base"></i>
-                                    @if($lessonContent->fetch('progress_percent', 0) === 100)
-                                        <span>Completed</span> 
-                                    @else
-                                        <span>Mark as Complete</span>
-                                    @endif
+                                <button class="btn tw-mb-3 completeButton collapse-250 {{ $lessonContent->fetch('progress_percent', 0) === 100 ? 'is-complete' : '' }}"
+                                    data-tooltip="Mark Lesson as Complete"
+                                    data-content-id="{{ $lessonContent['id'] }}">
+
+                                    <span class="incompleted bg-{{ $themeColor }} inverted text-{{ $themeColor }}">
+                                        <i class="fas fa-check"></i>
+                                        <span class="ml-1 tw-text-lg">Mark as Complete</span>
+                                    </span>
+
+                                    <span class="completed bg-{{ $themeColor }} text-white">
+                                            <i class="fas fa-check"></i>
+                                            <span class="ml-1 tw-text-lg">Completed</span>
+                                        </span>
                                 </button>
+
                             </div>
 
                             <div class="flex-row content-lesson-action-buttons">

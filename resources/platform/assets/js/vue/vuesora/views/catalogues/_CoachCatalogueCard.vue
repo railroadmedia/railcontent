@@ -91,8 +91,8 @@
                 <!-- Add to My List -->
                 <div class="tw-inline-flex tw-items-start tw-p-1">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
-                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5"
-                        :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-transform-gpu tw-transition"
+                        :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from My List' : 'Add to My List'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"

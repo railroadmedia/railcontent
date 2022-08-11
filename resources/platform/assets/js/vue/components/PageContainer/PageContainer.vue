@@ -195,7 +195,7 @@ onUnmounted(() => {
         </section>
 
         <!-- Footer -->
-        <Footer />
+        <Footer :brand="brand"/>
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">
