@@ -29,7 +29,7 @@
                         class="tw-flex tw-flex-col xs-6 sm-3 pa-1"
                         dusk="{{$lessonType['type']}}">
                             <div class="show-index-card square corners-10 tw-shadow tw-relative"
-                                 style="background-image:url( https://musora.com/cdn-cgi/image/width=650,height=650,quality=90/{{ $lessonType }} );">
+                                 style="background-image:url( https://musora.com/cdn-cgi/image/width=650,height=650,quality=90/{{ $lessonType['thumbnail'] }} );">
                                 <span class="box-hover heading corners-10">
                                     <i class="fas fa-arrow-right"></i>
                                 </span>
