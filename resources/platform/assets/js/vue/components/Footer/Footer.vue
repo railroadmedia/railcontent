@@ -23,7 +23,7 @@ export default {
         <ul class="tw-flex tw-items-center tw-text-xs">
           <li class="tw-mx-1"><a :href="`/terms-of-service`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
           <li class="tw-mx-1"><a :href="`/privacy-policy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
-          <li class="tw-mx-1 tw-text-center"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Legacy Resources</a></li>/
+          <li v-if="brand === 'drumeo'" class="tw-mx-1 tw-text-center"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Legacy Resources</a> /</li>
           <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Support</a></li>/
           <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Logout</a></li>
         </ul>
