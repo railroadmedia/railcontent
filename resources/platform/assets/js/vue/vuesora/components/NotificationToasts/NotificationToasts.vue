@@ -14,7 +14,7 @@
           tw-mx-auto
           tw-rounded-md
         "
-        :class="isError ? '' : 'tw-bg-' + brandName"
+        :class="isError ? '' : 'tw-bg-' + brand"
       >
         <div class="tw-flex tw-justify-between tw-text-white tw-text-small">
           <div>
@@ -50,7 +50,7 @@ const autoHide = (context) => {
 export default {
   name: "NotificationToasts",
   props: {
-    brandName: {
+    brand: {
       type: String,
       default: () => "drumeo",
     },
