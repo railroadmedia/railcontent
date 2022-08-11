@@ -46,7 +46,7 @@
         </a>
 
         <!-- Songs -->
-        <a :href="`/${brand}/songs/`"
+        <a :href="`/${brand}/songs`"
             class="tw-relative tw-h-14 sm:tw-h-32 tw-w-full tw-border-[0.5px] tw-transition-all tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-rounded-xl tw-overflow-hidden tw-group"
             :class="[brand === 'pianote' ? `hover:tw-border-[#5FCFF5] hover:dark:tw-border-[#5FCFF5]` : `hover:tw-border-[#DD4572] hover:dark:tw-border-[#DD4572]`]">
             <div class="tw-absolute tw-w-full tw-h-full tw-inline-flex tw-flex-col tw-transition-all tw-items-center tw-justify-center focus:tw-bottom-1"
