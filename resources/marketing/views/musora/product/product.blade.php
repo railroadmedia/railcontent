@@ -4,10 +4,12 @@
     <title>{{ $product->name }}</title>
     <meta property="og:description" content="{{ $product->meta_desc  }}}">
     <meta property="og:url" content="">
-    <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif" style="display: none;">
+    @if(!is_null($product->meta_img))
+        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
+    @endif
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/navigation-sales.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/shop-product.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
 
@@ -40,29 +42,12 @@
         <div class="product-wrap lg:w-2/3 px-3 md:px-4">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                 @if($product->productType->name === 'Lesson')
-                    @include('musora.product.partials.features',[
-                        'features' => [
-                            [
-                                "icon" => "fa-trophy",
-                                "heading" => "Study With ". $product->instructor_name,
-                                "text" => $product->study_text,
-                            ],
-                            [
-                                "icon" => "fa-users",
-                                "heading" => "Drumeo Interactive Edition",
-                                "text" => "The famous Hudson Music DVD has been reformatted for a world-class digital, interactive experience.",
-                            ],
-                            [
-                                "icon" => "fa-smile",
-                                "heading" => "100% Happiness Guaranteed",
-                                "text" => "We think you’ll love these lessons, and that’s why you can try them risk-free with our 90-day guarantee!"
-                            ],
-                        ]
+                    @include('musora.product.partials.benefits',[
+                        'benefits' => $product->benefits
                     ])
 
                     @include('musora.product.partials.overview',[
                         "overview" => $product->overview,
-                        "interactive" => true,
                     ])
 
                     @include('musora.product.partials.specs',[
@@ -111,7 +96,7 @@
                 @endif
 
                 @if(!is_null($product->size_chart_id))
-                    <img src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->sizeChart->chart }}" alt="bundle image" />
+                    <img class="mt-10" src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->sizeChart->chart }}" alt="size chart" />
                 @endif
 
             </div>
@@ -121,7 +106,7 @@
     <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('marketing/parcel/js/pack-drumshop.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('marketing/parcel/js/drumeo/pack-drumshop.js')  }}"></script>
     <script>
         $(document).ready(function(){
 
