@@ -796,6 +796,14 @@ return [
             ],
         ],
         'guitareo' => [
+            'all' => [
+                'name' => 'New Content',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of every lesson that's been published in Guitareo. Browse on your
+                own or use search to find whatever it is you'd like to learn!",
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
             'courses' => [
                 "name" => "Courses",
                 "icon" => "icon-courses",
@@ -993,6 +1001,7 @@ return [
         'student-review',
         'boot-camps',
         'recording',
+        'pack-bundle-lesson',
     ],
     'topLevelContentTypes' => [
         'learning-path',
@@ -1370,6 +1379,7 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
+            'unit' => 'lessons'
         ],
         'guitareo' => [
             'learning-path' => 'levels',

@@ -316,7 +316,7 @@
                     @if($lessonType === 'quick-tips')
                         :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"
                     @else
-                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : [$lessonType] ) }}"
+                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
                     @endif
                     @if($lessonType === 'student-review' || !empty($isAllContent))
                         :force-wide-thumbs="true"
