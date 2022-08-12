@@ -10,7 +10,7 @@
     @parent
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/css/drum-shop-rdm.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/css/drumeo/drum-shop-rdm.css') }}" rel="stylesheet">
 <!--    --><?php //\App\Analytics\Tracker::trackProductImpression('rock-drumming-masterclass'); ?>
 @stop()
 
@@ -36,6 +36,7 @@
         });
     </script>
     <script src="{{ asset('/marketing/parcel/js/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/js/modal.js') }}"></script>
 @stop()
 
 @section('layout-body')
@@ -478,8 +479,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook"><br>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook mx-auto inline-block"><br>
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo mx-auto">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
