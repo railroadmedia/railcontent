@@ -25,6 +25,9 @@
         "weight" => "fa-balance-scale",
         "page material" => "fa-box",
         "binding" => "fa-book",
+        "audio" => "fa-volume-up",
+        "books" => "fa-book",
+        "sweatshirt" => "fa-tshirt"
     ];
 ?>
 
