@@ -10,7 +10,7 @@ class ProductPagesController extends BaseController
 {
     public function products($brand)
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->where('visible', '=', 1)->get();
+        $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->where('visible', '=', 1)->orderBy('display_order')->get();
 
         $lessons = $products->filter(function($value, $key){
             return $value->productType->name === 'Lesson';
@@ -43,7 +43,7 @@ class ProductPagesController extends BaseController
     }
 
     public function product($brand, $slug){
-        $product = Product::where('slug', $slug)->firstOrFail();
+        $product = Product::where('slug', ucfirst($brand).'-'.$slug)->firstOrFail();
 
         return view('musora.product.product',[
             'product' => $product,
