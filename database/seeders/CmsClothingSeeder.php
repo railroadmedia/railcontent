@@ -25,7 +25,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 3,
                 "name" => "Minimalist Hat",
-                "slug" => "hat-minimalist",
+                "slug" => "Druemo-hat-minimalist",
                 "sku" => "6477-wool-flexfit-cap-black",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/minimalist-hat.jpg",
                 "metaDesc" => "Simple and clean, this hat features a branded snare icon on the front and a discreet Drumeo logo on the back.",
@@ -135,41 +135,37 @@ class CmsClothingSeeder extends Seeder
             ],
             [
                 "brand" => 1,
-                "productType" => 3,
-                "name" => "Drumeo Beanie",
-                "slug" => "beanie",
-                "sku" => "Drumeo-Beanie",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/beanie.jpg",
-                "metaDesc" => "Smooth, slim fit keeps you warm + Drumeo logo keeps you cool.",
-                "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
-                "shortDesc" => "When it gets cold, you need to keep your ears warm. This all-black beanie features a 4” wide Drumeo logo on the front.",
-                "headerText" => "Drumeo Beanie",
-                "price" => 19,
+                "productType" => 4,
+                "name" => "Sketchy Drums Shirt",
+                "slug" => "Drumeo-tshirt-sketchy-drums",
+                "sku" => "3001-unisex-jersey-sketchy-shirt",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/sketchy-shirt.jpg",
+                "metaDesc" => "Stay cool flying the Drumeo flag with this 100% cotton t-shirt featuring the iconic hand-drawn “Sketchy Drums” logo.",
+                "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch1.jpg",
+                "shortDesc" => "Stay cool flying the Drumeo flag with this 100% cotton t-shirt featuring the iconic hand-drawn “Sketchy Drums” logo.",
+                "headerText" => "Sketchy Drums Shirt",
+                "price" => 25,
                 "discountedPrice" => "",
                 "specialText" => "",
                 "features" => [
-                    "It gets cold here at the Drumeo HQ in Canada, so we’ve finally embraced the cold with a Drumeo-branded beanie to keep every drummer warm and styling!"
+                    "he classic Drumeo hand-drawn drum set logo. Created by Drumeo’s own Catrina Jackson, wearing this shirt is like joining an exclusive club. Be prepared for secretive winks and curt nods of approval from Drumeo die-hards around the globe flying the “Sketchy Drums” flag."
                 ],
                 "specs" => [
                     [
-                        "title" => "Size",
-                        "desc" => "8.5"
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
                     ],
                     [
-                        "title" => "ManuFacturer",
-                        "desc" => "Apollo"
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
                     ],
                     [
                         "title" => "Fabric",
-                        "desc" => "100% Acrylic"
+                        "desc" => "100% Cotton"
                     ],
                     [
                         "title" => "Color",
-                        "desc" => "Black"
-                    ],
-                    [
-                        "title" => "Logo",
-                        "desc" => '4” wide, front embroidery.'
+                        "desc" => "Black with a blue Drumeo logo"
                     ],
                 ],
                 "visible" => true,
@@ -179,20 +175,19 @@ class CmsClothingSeeder extends Seeder
                 "lifeTime" => false,
                 "freeShipping" => false,
                 "images" => [
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/3.jpg",
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/4.jpg"
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch1.jpg",
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch2.jpg"
                 ],
                 "sizeChart" => "",
                 "sizes" => [
-
+                    2,3,4,5,6,7
                 ]
             ],
             [
                 "brand" => 1,
                 "productType" => 4,
-                "name" => "Sketchy Drums Shirt",
-                "slug" => "tshirt-sketchy-drums",
+                "name" => "Discounted Sketchy Drums Shirt",
+                "slug" => "Drumeo-tshirt-sketchy-drums",
                 "sku" => "3001-unisex-jersey-sketchy-shirt",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/sketchy-shirt.jpg",
                 "metaDesc" => "Stay cool flying the Drumeo flag with this 100% cotton t-shirt featuring the iconic hand-drawn “Sketchy Drums” logo.",
@@ -242,7 +237,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Drumeo Gab Shirt",
-                "slug" => "tshirt-drumeo-gab",
+                "slug" => "Drumeo-tshirt-drumeo-gab",
                 "sku" => "dt1350-tri-v-neck-drumeo-gab",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/drumeo-gab-shirt.jpg",
                 "metaDesc" => "The official t-shirt of the world’s hottest drumming podcast.",
@@ -293,7 +288,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Women’s Sleeveless Shirt",
-                "slug" => "ladies-sleeveless",
+                "slug" => "Drumeo-ladies-sleeveless",
                 "sku" => "28712-womens-sleeveless",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/womens-tank.jpg",
                 "metaDesc" => "Show your drumming pride in this loose and flowy fitting sleeveless t-shirt made of 100% organic & recycled cotton.",
@@ -343,7 +338,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Binary Rudiments Shirt",
-                "slug" => "tshirt-rudiments",
+                "slug" => "Drumeo-tshirt-rudiments",
                 "sku" => "3001C-crew-binary-shirt",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/rudiments.jpg",
                 "metaDesc" => "Never miss a beat! Get your rudiment sticking patterns down with the Binary Rudiment shirt.",
@@ -395,7 +390,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Gray Minimalist Shirt",
-                "slug" => "tshirt-minimalist-gray",
+                "slug" => "Drumeo-tshirt-minimalist-gray",
                 "sku" => "3001C-crew-minimalist-shirt-grey",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/minimalist-gray.jpg",
                 "metaDesc" => "Simple and clean. What's not to love about the new minimalist look?",
@@ -447,7 +442,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Teal Minimalist Shirt",
-                "slug" => "tshirt-minimalist-teal",
+                "slug" => "Drumeo-tshirt-minimalist-teal",
                 "sku" => "3001C-crew-minimalist-shirt-teal",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/minimalist-teal.jpg",
                 "metaDesc" => "Simple and clean. What's not to love about the new minimalist look?",
@@ -499,7 +494,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Dino-Space-Goblin Shirt",
-                "slug" => "tshirt-dino",
+                "slug" => "Drumeo-tshirt-dino",
                 "sku" => "3005C-v-neck-dino-space-goblin",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/space-goblin.jpg",
                 "metaDesc" => "No matter your species, profession, or universe of origin, you'll represent your love for the drums with this quirky v-neck shirt!",
@@ -550,7 +545,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Vintage Mountain Tee",
-                "slug" => "tshirt-vintage",
+                "slug" => "Drumeo-tshirt-vintage",
                 "sku" => "3604-nl-jersey-ringer-tee-vintage-shirt",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/vintage-shirt.jpg",
                 "metaDesc" => "This vintage-styled t-shirt features the view from Cheam Mountain in Canada, where we took a drumkit for a photo-op!",
@@ -602,7 +597,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Jokester Shirt",
-                "slug" => "tshirt-jokester",
+                "slug" => "Drumeo-tshirt-jokester",
                 "sku" => "3001C-unisex-crew-budumtss-shirt",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/jokester.jpg",
                 "metaDesc" => "Ba-Dum-Tss. Wear the sound effect that's perfect for all of your good, bad, and dad jokes.",
@@ -654,7 +649,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Team-Player Shirt",
-                "slug" => "tshirt-team-player",
+                "slug" => "Drumeo-tshirt-team-player",
                 "sku" => "3200-3-4-baseball-shirt",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/team-player.jpg",
                 "metaDesc" => "Be a sport! Knock your next gig or practice session out of the park with this baseball styled shirt.",
@@ -707,7 +702,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 4,
                 "name" => "Death Drummer Shirt",
-                "slug" => "tshirt-skull",
+                "slug" => "Drumeo-tshirt-skull",
                 "sku" => "3200c-3-4-baseball-skull-shirt",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/skull.jpg",
                 "metaDesc" => "Rock on, metal heads! Pair yourself up with The Death Drummer and you'll be sure to make skeletons dance out of their graves.",
@@ -759,7 +754,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 5,
                 "name" => "Sketchy Drums Hoodie",
-                "slug" => "hoodie-sketchy-drums",
+                "slug" => "Drumeo-hoodie-sketchy-drums",
                 "sku" => "86228-sketchy-hoodie",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/sketchy-hoodie.jpg",
                 "metaDesc" => "Stay warm before & after the gig in the iconic “Sketchy Drums” Drumeo hoodie.",
@@ -809,7 +804,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 5,
                 "name" => "Retro Hoodie",
-                "slug" => "hoodie-retro",
+                "slug" => "Drumeo-hoodie-retro",
                 "sku" => "ind4000-retro-hoodie",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/retro-hoodie.jpg",
                 "metaDesc" => "Stay cozy, comfy, AND colorful in this ultra-soft, vintage style Drumeo hoodie.",
@@ -860,7 +855,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 5,
                 "name" => "Minimalist Zip-Up Hoodie",
-                "slug" => "hoodie-minimalist",
+                "slug" => "Drumeo-hoodie-minimalist",
                 "sku" => "3939-full-zip-minimalist-hoodie",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/minimalist-hoodie.jpg",
                 "metaDesc" => "Simple and clean. The minimalist zip-up hoodie features a discreet Drumeo logo and a branded snare icon on the back.",
@@ -913,7 +908,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 1,
                 "productType" => 5,
                 "name" => "Vintage Mountain Hoodie",
-                "slug" => "hoodie-vintage",
+                "slug" => "Drumeo-hoodie-vintage",
                 "sku" => "8885-hooded-vintage-pullover-hoodie",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/vintage-hoodie.jpg",
                 "metaDesc" => "This vintage-styled hoodie features the view from Cheam Mountain in Canada, where we took a drumkit for a photo-op!",
@@ -1658,6 +1653,164 @@ class CmsClothingSeeder extends Seeder
                     2,3,4,5,6
                 ]
             ],
+            [
+                "brand" => 1,
+                "productType" => 4,
+                "name" => "Women's Sketchy Drums Shirt",
+                "slug" => "ladies-shirt",
+                "sku" => "2017-Black-Ladies-Shirt",
+                "thumbnail" => "",
+                "metaDesc" => "Featuring a V-neck, short sleeves, and a modern, relaxed fit for effortless style.",
+                "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Merch/ladies-shirt/2.jpg",
+                "shortDesc" => "",
+                "headerText" => "Women's Sketchy Drums Shirt",
+                "price" => 25,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Featuring a V-neck, short sleeves, and a modern, relaxed fit for effortless style - the Sketchy Drums Shirt lets you share your love for Drumeo while you’re playing the drums!"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Manufacturer",
+                        "desc" => "Bella + Canvas"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "	100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Relaxed fit v-neck shirt."
+                    ],
+                    [
+                        "title" => "Log",
+                        "desc" => "8” wide front screenprint"
+                    ],
+                ],
+                "visible" => false,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/ladies-shirt/2.jpg",
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/ladies-shirt/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5
+                ]
+            ],
+            [
+                "brand" => 1,
+                "productType" => 4,
+                "name" => "The Holiday T-Shirt",
+                "slug" => "tshirt-holiday",
+                "sku" => "holidayshirt",
+                "thumbnail" => "",
+                "metaDesc" => "Get in the Christmas spirit with the Drumeo Holiday T-shirt, featuring a bold Drumeo logo with antlers and holiday flair!",
+                "metaImg" => "https://www.drumeo.com/laravel/public/assets/order-form/images/product-images/holidayshirt-XXL.png",
+                "shortDesc" => "",
+                "headerText" => "The Holiday T-Shirt",
+                "price" => 0,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Get in the Christmas spirit with the Drumeo Holiday T-shirt, featuring a bold Drumeo logo with antlers and holiday flair!"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "All sizes are listed in Men's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "American Apparel Unisex 100% Cotton Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Combed Cotton, with a soft feel"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black, with superior screen printing"
+                    ],
+                ],
+                "visible" => false,
+                "soldOut" => true,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
+                "name" => "Women’s Funnel Neck Sweatshirt",
+                "slug" => "sweatshirt-funnel",
+                "sku" => "Sweatshirt-Womens-Oatmeal",
+                "thumbnail" => "",
+                "metaDesc" => "Designed with pianists in mind, this SUPER-SOFT funnel neck sweatshirt is a must-have for your wardrobe.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/1.jpg",
+                "shortDesc" => "",
+                "headerText" => "Women’s Funnel Neck Sweatshirt",
+                "price" => 59,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "Designed with pianists in mind, this SUPER-SOFT funnel neck sweatshirt is a must-have for your wardrobe. The eye-catching funnel neck is as fashionable as it is comfortable, and discreet side pockets add versatility without affecting the shirt line."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Women's"
+                    ],
+                    [
+                        "title" => "Sweatshirt",
+                        "desc" => "Weatherproof"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "60% Polyester, 35% Rayon, 5% Spandex Faux Cashmere"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Oatmeal"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Funnel Neck With Matching Drawcord & Side Pockets"
+                    ],
+                ],
+                "visible" => false,
+                "soldOut" => true,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    1,2,3,4,5
+                ]
+            ],
 //            [
 //                "brand" => 2,
 //                "productType" => 4,
@@ -1693,7 +1846,7 @@ class CmsClothingSeeder extends Seeder
 //                        "desc" => "Black"
 //                    ],
 //                ],
-//                "visible" => true,
+//                "visible" => false,
 //                "soldOut" => false,
 //                "freeBonus" => false,
 //                "badge" => false,
@@ -1765,7 +1918,7 @@ class CmsClothingSeeder extends Seeder
             foreach($product['sizes'] as $size){
                 ProductSize::create([
                     'product_id' => $newProduct->id,
-                    'size_id' => $size
+                    'size_id' => $size,
                 ]);
             }
         }
