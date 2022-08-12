@@ -26,7 +26,7 @@
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
-                    "title" => 'Singeo Method',
+                    "title" => $brand.' Method',
                     "url" => url()->route('platform.content.first-level', ['method', $firstContent['slug'], $firstContent['id']])
                 ],
                 [

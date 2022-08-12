@@ -48,6 +48,8 @@
             'itemProgress' => $guitarQuestPack->fetch('progress_state'),
         ])
 
+        <p>{{ $guitarQuestPack->fetch('url') }}</p>
+
         <div class="flex flex-row flex-wrap">
             @foreach($packs as $pack)
                 @include('partials.content._lessons-pack', [
@@ -159,7 +161,7 @@
                                 <a href="{{ $topic['url'] }}"
                                    class="tw-flex tw-w-full tw-flex-col tw-items-center tw-justify-center tw-min-h-[103px] tw-p-4 font-no-underline tw-border-2 tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 dark:hover:tw-bg-[#445F74]/20 dark:tw-border-[#7E9AB1] dark:tw-bg-[#445F74]/10 tw-rounded-lg tw-transition-all"
                                 >
-                                    <h3 class="tw-text-2xl font-bold tw-text-black dark:tw-text-white tw-text-center">{{ $topic['topic'] }}</h3>
+                                    <h3 class="tw-text-2xl font-bold tw-text-[#00101D] dark:tw-text-white tw-text-center">{{ $topic['topic'] }}</h3>
                                 </a>
                             </div>
                         @endforeach

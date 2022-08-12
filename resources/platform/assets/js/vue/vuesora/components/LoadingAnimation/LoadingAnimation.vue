@@ -1,5 +1,5 @@
 <template>
-    <div class="spin-wrapper">
+    <div class="tw-ml-4 md:tw-ml-8 spin-wrapper">
         <div
             class="spinner"
             :style="`border-top-color:${colorCode};`"
@@ -52,6 +52,10 @@ export default {
         left:0;
         width: 100%;
         height: 100%;
+
+        @media(min-width: 1024px) {
+            margin-left:256px;
+        }
 
         .spinner {
             position: absolute;

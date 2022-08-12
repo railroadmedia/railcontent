@@ -2,20 +2,16 @@
     <div class="flex flex-column align-v-center large-thumbnail {{ !empty($showBackgroundCards) && $showBackgroundCards === true ? 'background-cards' : '' }} {{ $themeColor }} {{ !empty($releaseDate) && \Carbon\Carbon::parse($releaseDate) > \Carbon\Carbon::now() ? 'desaturate' : '' }}">
         <div class="thumb-wrap corners-10">
             <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif>
-                <div class="thumb-img bg-center corners-10 {{ $forceSquareThumb === true ? 'square' : 'widescreen' }}">
+                <div class="thumb-img bg-center corners-10 bg-grey-2 dark:tw-bg-[#081825] {{ $forceSquareThumb === true ? 'square' : 'widescreen' }}">
                     <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        data-ix-src="{{ $itemThumbnail }}"
-                        data-ix-fade
-                        class="bg-grey-2"
+                        src="https://musora.com/cdn-cgi/image/width=280,height=280,quality=90/{{ $itemThumbnail }}"
                         alt="{{ $itemTitle }} Thumbnail"
+                        class="tw-transition-opacity tw-duration-500"
+                        loading="lazy"
                     >
-
 
                     @if(!empty($logoImage))
                         <div class="logo-image pa-1 corners-bottom-3">
-                            {{--data-ix-fade--}}
-                            {{--data-ix---}}
                             <img
                                 src="{{ $logoImage }}"
                                 alt="{{ $itemTitle }} Logo">
@@ -58,7 +54,7 @@
                 @endif
 
                 <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif
-                   class="tw-font-bold tw-text-black dark:tw-text-white no-decoration tw-mb-2 tw-text-xl">                  
+                   class="tw-font-bold tw-text-[#00101D] dark:tw-text-white no-decoration tw-mb-2 tw-text-xl">                  
                    {{ $itemTitle }}
                 </a>
 
@@ -82,7 +78,7 @@
 
                         @if(!empty($lessonsUrl))
                             <a href="{{ $lessonsUrl }}"
-                               class="tw-btn-secondary tw-text-black dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
+                               class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
                                 <i class="fas fa-arrow-circle-right mr-1"></i> 
                                 See Lessons
                             </a>

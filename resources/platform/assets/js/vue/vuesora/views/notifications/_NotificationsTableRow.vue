@@ -4,15 +4,23 @@
         :class="isRead ? 'tw-bg-[#e4e4e7] dark:tw-bg-[#102230]' : ''">
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col tw-justify-center">
+                
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">
-                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="userAvatar" data-ix-fade alt="User Avatar" class="rounded">
+                    <!-- User Avatar -->
+                    <img :src="userAvatar"
+                         alt="User Avatar"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="linkedContent.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="linkedContent.imageLoaded = true"
+                    >
                 </div>
+
             </div>
 
             <div class="tw-flex tw-flex-col tw-justify-center overflow">
 
-                <p class="tw-text-[16px] tw-text-black dark:tw-text-white">
+                <p class="tw-text-[16px] tw-text-[#00101D] dark:tw-text-white">
                     <span class="tw-font-bold">{{ userName }}</span>
 
                     {{ notificationTypeString }}
@@ -20,10 +28,10 @@
                     <span class="tw-font-bold">{{ linkedContent.title }}</span>
                 </p>
 
-                <p v-html="subContent" class="tw-text-[16px] dark:tw-text-white tw-text-black tw-mt-[3px]">
+                <p v-html="subContent" class="tw-text-[16px] dark:tw-text-white tw-text-[#00101D] tw-mt-[3px]">
                 </p>
 
-                <p class="tw-text-[14px] tw-text-black dark:tw-text-[#9ec0dc] tw-italic tw-mt-[4px]">
+                <p class="tw-text-[14px] tw-text-[#00101D] dark:tw-text-[#9ec0dc] tw-italic tw-mt-[4px]">
                     {{ createdOn }}
                 </p>
             </div>

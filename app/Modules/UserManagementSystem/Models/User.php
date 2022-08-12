@@ -14,10 +14,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\UserManagementSystem\Factories\UserFactory;
+use Modules\UserManagementSystem\Notifications\ResetPassword;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -299,6 +301,24 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
+     * Values: pack, member, lifetime, coach, house-coach, team
+     *
+     * @return Attribute
+     */
+    public function accessLevel()
+    : Attribute {
+        return Attribute::make(
+            get: function ($value) {
+                if (!empty($value)) {
+                    return $value;
+                }
+
+                return 'pack';
+            },
+        );
+    }
+
+    /**
      * @return string
      */
     public function getDashboardUrl()
@@ -491,14 +511,13 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function sendPasswordResetNotification($token)
     {
-        //todo: to be configured
-        //        $class = config('usora.password_reset_notification_class');
-        //
-        //        (new AnonymousNotifiable())->route(
-        //            config('usora.password_reset_notification_channel'),
-        //            $this->getEmailForPasswordReset()
-        //        )
-        //            ->notify(new $class($token));
+        $class = ResetPassword::class;
+
+        (new AnonymousNotifiable())->route(
+            'mail',
+            $this->getEmailForPasswordReset()
+        )
+            ->notify(new $class($token));
     }
 
     /**

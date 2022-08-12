@@ -46,7 +46,7 @@ class ProfilePublicPagesController extends BaseController
             $user = user();
         }
 
-        $userMetrics = $this->getUserMetrics();
+        $userMetrics = $this->getUserMetrics($user);
 
         // completed/started lessons
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
@@ -109,15 +109,15 @@ class ProfilePublicPagesController extends BaseController
     /**
      * @return array
      */
-    private function getUserMetrics()
+    private function getUserMetrics(User $user)
     {
-        $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics(user()->id);
+        $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics($user->id);
 
         return [
             "xp" => [
                 "icon" => "icon-experience-points",
-                "value" => user()->total_xp,
-                "label" => user()->getXpRank(),
+                "value" => $user->total_xp,
+                "label" => $user->getXpRank(),
             ],
             "forums_likes" => [
                 "icon" => "fa fa-comments",

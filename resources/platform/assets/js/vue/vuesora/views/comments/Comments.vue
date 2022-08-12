@@ -1,7 +1,7 @@
 <template>
     <div
         id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white"
+        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full"
     >
         <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
             <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
@@ -17,26 +17,25 @@
                 >
                     <select
                         id="commentSort"
-                        class="dark:tw-text-white"
+                        class="dark:tw-text-white tw-pb-0"
                         v-model="sortInterface"
                     >
-                        <option class="tw-text-black" value="-like_count">
+                        <option class="tw-text-[#00101D]" value="-like_count">
                             Popular
                         </option>
-                        <option class="tw-text-black" value="-created_on">
+                        <option class="tw-text-[#00101D]" value="-created_on">
                             Latest
                         </option>
-                        <option class="tw-text-black" value="created_on">
+                        <option class="tw-text-[#00101D]" value="created_on">
                             Oldest
                         </option>
-                        <option class="tw-text-black" value="-mine">
+                        <option class="tw-text-[#00101D]" value="-mine">
                             My Comments
                         </option>
                     </select>
                     <label
                         for="commentSort"
-                        class="dark:tw-text-white"
-                        :class="themeColor"
+                        :class="brandTextColor"
                     >Sort By</label>
                 </div>
             </div>
@@ -46,34 +45,34 @@
             id="postComment"
             class="tw-flex tw-flex-row comment-post mv-3"
         >
-            <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
+            <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
                 <div
                     class="user-avatar smaller"
                     :class="avatarClassObject"
-                >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="currentUser.avatar"
-                        data-ix-fade
-                        class="tw-rounded-full"
+                >   
+                    <!-- User Avatar -->
+                    <img :src="currentUser.avatar"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="currentUser.imageLoaded = true"
                     >
                 </div>
-
                 <p
                     v-if="showUserExp"
-                    class="x-tiny dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
+                    class="tw-text-sm dense tw-uppercase tw-text-center mt-1"
                 >
                     {{ userExpRank }}
                 </p>
                 <p
                     v-if="showUserExp"
-                    class="x-tiny dense tw-text-center font-compressed"
+                    class="tw-text-sm dense tw-text-center font-compressed"
                 >
                     {{ userExpValue }} XP
                 </p>
             </div>
 
-            <div class="tw-flex tw-flex-col tw-grow">
+            <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                 <text-editor
                     :fieldKey="contentId + '-comment-text-editor'"
                     ref="textEditor"
@@ -99,14 +98,14 @@
                 </div>
 
                 <div
-                    v-show="loading"
-                    class="loading-reply tw-flex-center"
+                    :class="loading ? 'tw-flex' : 'tw-hidden' "
+                    class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center"
                 >
                     <i
-                        class="fas fa-spinner fa-spin"
+                        class="fas fa-spinner fa-spin tw-mb-2"
                         :class="themeTextClass"
                     ></i>
-                    <p class="x-tiny text-grey-3">
+                    <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
                         loading...
                     </p>
                 </div>
@@ -173,6 +172,7 @@ import Utils from '../../assets/js/classes/utils';
 import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { textColor } from '../../../../constants/brands'
 
 export default {
     name: 'Comments',
@@ -210,6 +210,10 @@ export default {
                 team: this.currentUser.access_level === 'team',
                 lifetime: this.currentUser.access_level === 'lifetime',
             };
+        },
+
+        brandTextColor() {
+            return textColor[this.brand];
         },
 
         userExpValue() {
@@ -314,18 +318,8 @@ export default {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
 
-                        if (window.ImgixService) {
-                            window.ImgixService.reloadCommentImages();
-                        }
+                        // console.log('on service', this.comments[0])
 
-                        console.log('on service', this.comments[0])
-
-                        setTimeout(() => {
-                            // Load the Imgix Service to load srcs and srcsets
-                            if (window.ImgixService) {
-                                window.ImgixService.loadImageSources();
-                            }
-                        }, 500);
                     }
                 });
         },
@@ -359,10 +353,6 @@ export default {
                             });
 
                             this.comments.splice(0, 0, thisComment);
-
-                            if (window.ImgixService) {
-                                window.ImgixService.reloadCommentImages();
-                            }
                         }
 
                         this.loading = false;

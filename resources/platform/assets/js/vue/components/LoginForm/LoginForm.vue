@@ -5,9 +5,10 @@
 */
 
 import { ref } from "vue";
-import { bgColor } from "../../../constants/brands";
 import InputLabel from "../InputLabel/InputLabel.vue";
 import RainbowButton from "../Button/RainbowButton.vue";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
+
 const props = defineProps({
   brand: {
     type: String,
@@ -36,9 +37,27 @@ const props = defineProps({
     default: "",
   },
 });
+
 const currentForm = ref("login");
+const emailInput = ref('');
+const passwordInput = ref('');
+const isLoading = ref(false);
+
 const changeCurrentForm = (val) => {
   currentForm.value = val;
+};
+
+const handleEmailChange = (val) => {
+  emailInput.value = val;
+};
+
+const handlePasswordChange = (val) => {
+  passwordInput.value = val;
+};
+
+const handleButtonClick = (e) => {
+  isLoading.value = true;
+  document.getElementById('hidden-submit').click();
 };
 </script>
 
@@ -67,7 +86,7 @@ const changeCurrentForm = (val) => {
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <ul
           v-if="errors.length > 0"
-          class="tw-flex tw-flex-col tw-mb-3 tiny text-error list-style-none"
+          class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none"
         >
           <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
             {{ error }}
@@ -75,13 +94,13 @@ const changeCurrentForm = (val) => {
         </ul>
         <ul
           v-if="hassessionstatus && sessionstatus"
-          class="tw-flex tw-flex-col tw-mb-2 tiny text-success list-style-none"
+          class="tw-flex tw-flex-col tw-mb-2 tw-text-xs text-success list-style-none"
         >
           <li>{{ sessionstatus }}</li>
         </ul>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
-            inputOverride="tw-w-full tw-h-[50px] tw-text-black"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
             id="loginEmail"
@@ -89,12 +108,13 @@ const changeCurrentForm = (val) => {
             labelValue="Email Address"
             placeholder="Enter your email..."
             :inputErrors="[]"
+            @onChange="handleEmailChange"
           />
         </div>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
             wrapperOverride="tw-text-[16px]"
-            inputOverride="tw-w-full tw-h-[50px] tw-text-black"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="password"
             id="loginPassword"
@@ -102,10 +122,16 @@ const changeCurrentForm = (val) => {
             labelValue="Password"
             placeholder="Enter your password..."
             :inputErrors="[]"
+            @onChange="handlePasswordChange"
+            @onEnter="handleButtonClick"
           />
         </div>
         
-        <RainbowButton type="submit" label="SIGN IN" />
+        <RainbowButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
+          <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading"><LoadingSpinner /> SIGNING IN</span>
+          <span v-if="!isLoading">SIGN IN</span>
+        </RainbowButton>
+        <button id="hidden-submit" type="submit" hidden>Submit</button>
         <a
           id="resetToggle"
           class="text-center text-grey-3 noselect tw-text-[16px]"
@@ -139,7 +165,7 @@ const changeCurrentForm = (val) => {
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
-            inputOverride="tw-w-full tw-h-[50px]"
+            inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
             id="resetEmail"
@@ -163,32 +189,9 @@ const changeCurrentForm = (val) => {
 </template>
 
 <style type="text/css">
-.login-submit-btn:hover {
-  border: none;
-}
-
 .loginEmail-label,
 .loginPassword-label {
   font-weight: 700;
   font-size: 16px;
-}
-
-.login-submit-btn:hover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 25px;
-  border: 2px solid transparent;
-  background: linear-gradient(
-      90.69deg,
-      #00c9ac 1.54%,
-      #0b76db 30.83%,
-      #9a00ee 72.12%,
-      #f61a30 95.24%
-    )
-    border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
 }
 </style>

@@ -12,12 +12,15 @@
                     class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
                     :class="[thumbnailType]"
                 >
+
                     <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="mappedData.thumbnail"
-                        data-ix-fade
-                        class="bg-grey-2"
-                    >
+                        :src="mappedData.thumbnail"
+                        alt="thumbnail"
+                        class="tw-transition-opacity tw-duration-500"
+                        loading="lazy"
+                        :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                        @load="mappedData.imageLoaded = true"
+                    />
 
                     <div class="lesson-progress overflow">
                         <span
@@ -52,7 +55,7 @@
             </div>
 
             <div class="card-info tw-flex tw-flex-col">
-                <p class="tw-text-sm dark:tw-text-white tw-text-black mb-1 mt-1">{{ mappedData.description }}</p>
+                <p class="tw-text-sm dark:tw-text-white tw-text-[#00101D] mb-1 mt-1">{{ mappedData.description }}</p>
             </div>
         </div>
     </div>

@@ -73,7 +73,7 @@
           <div class="tw-mb-1.5">
             <a
               href="/members/live"
-              class="tw-font-bold tw-no-underline tw-text-black tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white"
+              class="tw-font-bold tw-no-underline tw-text-[#00101D] tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white"
             >
               {{ content.title }}
             </a>
@@ -88,7 +88,7 @@
               <a :href="`/members/coaches/${coach.slug}`"
                  class="tw-no-underline tw-mr-1.5 tw-block"
               >
-                <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-black dark:tw-text-white">
+                <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
                   <span class="tw-mr-1">{{ coach.name.split(" ")[0] }}</span>
                   <span class="tw-font-bold">{{ coach.name.split(" ")[1] }}</span>
                   <!-- Optional third name -->

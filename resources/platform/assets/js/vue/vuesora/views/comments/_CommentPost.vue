@@ -15,11 +15,12 @@
                     target="_blank"
                     class="tw-no-underline"
                 >
-                    <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        :data-ix-src="comment.user['fields.profile_picture_image_url']"
-                        data-ix-fade
-                        class="tw-rounded-full"
+                    <!-- User Avatar -->
+                    <img :src="comment.user['fields.profile_picture_image_url']"
+                         loading="lazy"
+                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                         :class="comment.user.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                         @load="comment.user.imageLoaded = true"
                     >
                 </a>
             </div>
@@ -31,13 +32,13 @@
 
             <p
                 v-if="showUserExp"
-                class="body dense tw-font-bold tw-uppercase tw-text-center tw-mt-1"
+                class="tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none"
             >
                 {{ userExpRank }}
             </p>
             <p
                 v-if="showUserExp"
-                class="tiny dense tw-text-[#9EC0DC] tw-text-center font-compressed"
+                class="tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none"
             >
                 {{ userExpValue }} XP
             </p>
@@ -45,23 +46,23 @@
         <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
-                    <h2 class="break-words">
+                    <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
                         <a
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </a>
                         <span
                             v-else
-                            class="tw-font-bold tw-text-black tw-text-[18px] dark:tw-text-white tw-no-underline"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
                         >
                             {{ comment.user.display_name }}
                         </span>
 
-                        <span class="tw-font-bold tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px]">
+                        <span class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
                             {{ dateString }}
                         </span>
                     </h2>
@@ -71,12 +72,10 @@
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tiny no-decoration text-grey-3 tw-pointer tw-mr-1"
+                            class="no-decoration tw-cursor-pointer tw-mr-1"
+                            @click="deleteComment"
                         >
-                            <i
-                                class="fas fa-trash"
-                                @click="deleteComment"
-                            ></i>
+                            <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
                         </span>
 
                         <!--<span class="tiny no-decoration text-grey-3 pointer">-->
@@ -91,51 +90,50 @@
 
             <div class="tw-flex tw-flex-row body tw-mb-1">
                 <div
-                    class="tw-flex tw-flex-col post-body tw-flex-grow"
+                    class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post"
                     v-html="comment.comment"
                 >
                 </div>
             </div>
 
             <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
+                <div class="tw-flex tw-flex-col tw-my-2 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p
-                            v-if="!isUsersPost"
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="comment.is_liked ? themeTextClass : 'text-grey-3'"
+                            class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            :class="comment.is_liked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             dusk="like-button"
                             @click="likeComment"
                         >
-                            <i class="fas fa-thumbs-up"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ comment.is_liked ? 'Liked' : 'Like' }}&nbsp;
+                            <ThumbUpIconOutline class="tw-h-[22px] tw-w-[22px]" />
+                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                &nbsp;{{ comment.like_count }}
                             </span>
                         </p>
 
                         <p
-                            class="tiny tw-mr-3 tw-font-bold tw-uppercase dense tw-pointer reply-like nowrap noselect"
-                            :class="replying ? themeTextClass : 'text-grey-3'"
+                            class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            :class="replying ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                             dusk="reply-button"
                             @click="replyToComment"
                         >
-                            <i class="fas fa-reply"></i>
-                            <span class="hide-xs-only">
-                                &nbsp;{{ replying ? 'Replying' : 'Reply' }}&nbsp;
+                            <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]" width="22" height="22" viewBox="0 0 22 22"/>
+                            <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
+                                <span v-if="comment.replies && comment.replies.length > 0">&nbsp;{{ comment.replies.length }}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}&nbsp;
                             </span>
                         </p>
 
                         <span class="tw-flex-grow"></span>
 
                         <p
-                            class="x-tiny tw-font-bold text-grey-3 tw-uppercase nowrap tw-pointer noselect"
+                            class="dark:tw-text-white tw-text-[#00101D] tw-cursor-pointer tw-flex tw-items-center"
                             :data-open-modal="openModalString"
                             @click="openLikes"
                         >
-                            <i
-                                class="fas fa-thumbs-up tw-text-white likes-icon"
+                            <ThumbUpIcon
+                                class="tw-inline tw-mr-[5px] dark:tw-text-white tw-text-[#00101D] tw-border-black dark:tw-border-white tw-border-2 tw-rounded-full tw-bg-transparent tw-p-[3px] tw-w-[22px] tw-h-[22px]"
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
-                            ></i> {{ comment.like_count }}
+                            />&nbsp;{{ comment.like_count }}
                         </p>
                     </div>
                 </div>
@@ -150,7 +148,7 @@
                     v-if="replying"
                     class="tw-flex tw-flex-row comment-post mv-2"
                 >
-                    <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px] hide-xs-only">
+                    <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
                         <img
                             :src="currentUser.avatar"
                             class="rounded"
@@ -166,9 +164,9 @@
                                 :height="150"
                             ></text-editor>
                         </div>
-                        <div class="tw-flex tw-flex-row tw-justify-center mv-1">
+                        <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                             <a
-                                class="btn flat dark:tw-text-white tw-text-black collapse-150 short tw-mr-1"
+                                class="btn flat dark:tw-text-white tw-text-[#00101D] collapse-150 short tw-mr-1"
                                 @click="cancelReply"
                             >
                                 Cancel
@@ -189,14 +187,14 @@
                         </div>
 
                         <div
-                            v-show="loading"
-                            class="loading-reply tw-flex-center"
+                            :class="loading ? 'tw-flex' : 'tw-hidden' "
+                            class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center"
                         >
                             <i
-                                class="fas fa-spinner fa-spin"
+                                class="fas fa-spinner fa-spin tw-mb-2"
                                 :class="themeTextClass"
                             ></i>
-                            <p class="x-tiny text-grey-3">
+                            <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
                                 loading...
                             </p>
                         </div>
@@ -231,10 +229,10 @@
 
             <div
                 v-if="comment.replies && comment.replies.length > 2"
-                class="tw-flex tw-flex-row align-center"
+                class="tw-flex tw-flex-row tw-items-center tw-justify-center tw-text-center"
             >
                 <a
-                    class="btn btn-tiny flat text-grey-3 collapse-150"
+                    class="btn btn-tiny flat dark:tw-text-[#9EC0DC] tw-text-[18px] collapse-150"
                     @click="showAllReplies = !showAllReplies"
                 >
                     {{ showAllReplies ? 'Hide Replies' : 'Show All Replies' }}
@@ -249,20 +247,27 @@ import Toasts from '../../assets/js/classes/toasts';
 import CommentService from '../../assets/js/services/comments';
 import TextEditor from '../../components/TextEditor/TextEditor.vue';
 import CommentReply from './_CommentReply.vue';
+import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue'
 import Utils from '../../assets/js/classes/utils';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
+import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentPost',
     components: {
         'text-editor': TextEditor,
         'comment-reply': CommentReply,
+        TrashIcon,
+        ThumbUpIcon,
+        ThumbUpIconOutline,
+        MusoraIcon,
     },
     mixins: [ThemeClasses],
     props: {
         brand: {
             type: String,
-            default: () => '',
+            default: () => 'drumeo',
         },
         currentUser: {
             type: Object,
@@ -273,10 +278,7 @@ export default {
                 avatar: '',
             }),
         },
-        profileBaseRoute: {
-            type: String,
-            default: '/laravel/public/members/profile/',
-        },
+
         comment: {
             type: Object,
             default: () => ({
@@ -326,6 +328,10 @@ export default {
             return Utils.parseXpValue(this.comment.user.xp);
         },
 
+        profileBaseRoute() {
+            return '/' + this.brand + '/profile/'
+        },
+
         userExpRank() {
             if (this.comment.user.access_level === 'coach') {
                 return 'Coach';
@@ -344,17 +350,10 @@ export default {
 
         repliesToShow() {
             setTimeout(() => {
-                // Sometimes vue caches the add event button.
-                // If it doesn't we need to force a refresh, done with a timeout to
-                // Prevent race conditions.
                 if (window.addeventatc) {
                     window.addeventatc.refresh();
                 }
 
-                // Load the Imgix Service to load srcs and srcsets
-                if (window.ImgixService) {
-                    window.ImgixService.loadImageSources();
-                }
             }, 300);
 
             if (this.showAllReplies || this.pinned) {
@@ -371,7 +370,7 @@ export default {
                 return this.reply;
             },
             set(val) {
-                console.log(val)
+                // console.log(val)
                 this.reply = val;
             },
         },
@@ -385,7 +384,7 @@ export default {
         },
 
         profileRoute() {
-            return this.profileBaseRoute + this.comment.user_id;
+            return this.profileBaseRoute + this.comment.user_id + '/dashboard';
         },
 
         isLiked() {

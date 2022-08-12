@@ -7,6 +7,7 @@ import {
 } from "@heroicons/vue/solid";
 import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
+import MusoraIcon from "../../components/MusoraIcons/MusoraIcon.vue"
 
 import Stencil from "./Stencil.vue";
 
@@ -73,7 +74,7 @@ function rotate() {
       "
     >
       <div
-        class="tw-w-auto tw-flex tw-text-[13px] tw-font-bebas-neue"
+        class="tw-w-auto tw-flex tw-text-sm tw-font-bebas-neue"
       >
         <button
           :class="`tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px] ${
@@ -99,6 +100,7 @@ function rotate() {
           "
           @click="rotate"
         >
+          <MusoraIcon icon-name="rotate-right" class="tw-w-[25px] tw-h-[25px]" width="25" height="25" viewBox="0 0 25 25" />
           Rotate
         </button>
       </div>
@@ -108,13 +110,13 @@ function rotate() {
           tw-border-white
           tw-border-2
           tw-rounded-[25px]
-          tw-text-[14px]
-          tw-w-[164px]
-          tw-h-[30px]
           tw-flex
           tw-items-center
           tw-justify-center
           tw-font-bebas-neue
+          tw-h-[42px]
+          tw-text-[20px]
+          tw-px-[42px]
         "
       >
         <CheckIcon class="tw-w-[20px] tw-h-[20px] tw-inline" /> FINISH CROPPING

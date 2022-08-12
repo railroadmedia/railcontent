@@ -34,12 +34,12 @@ function onFollow(e) {
   e.preventDefault();
   if (isCoachFollowed.value) {
     unfollowEndpoint(props.id).then(() => {
-      console.log('then unfollow')
+      // console.log('then unfollow')
       isCoachFollowed.value = false;
     });
   } else {
     followEndpoint(props.id).then(() => {
-      console.log('then follow')
+      // console.log('then follow')
       isCoachFollowed.value = true;
     });
   }
@@ -64,8 +64,8 @@ function onFollow(e) {
       `"
   >
     <img
-      :src="cardImg"
-      alt="Ash Pearson"
+      :src="`https://musora.com/cdn-cgi/image/width=232,quality=75/${cardImg}`"
+      :alt="name"
       class="tw-w-[232px]"
     />
     <div

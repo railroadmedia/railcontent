@@ -50,6 +50,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.coaches');
 
+        Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.new-lessons');
+
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
             ->whereIn('contentTypeName', [
@@ -181,6 +185,32 @@ Route::domain('{musoraDomain}')
                     'rudiments',
                     'bootcamps',
                     'chords-scales',
+                    'podcasts',
+                    'question-and-answer',
+                    'the-history-of-electronic-drums',
+                    'backstage-secrets',
+                    'student-collaborations',
+                    'live-streams',
+                    'podcasts',
+                    'solos',
+                    'boot-camps',
+                    'gear-guides',
+                    'performances',
+                    'in-rhythm',
+                    'challenges',
+                    'on-the-road',
+                    'diy-drum-experiments',
+                    'rhythmic-adventures-of-captain-carson',
+                    'study-the-greats',
+                    'rhythms-from-another-planet',
+                    'tama-drums',
+                    'paiste-cymbals',
+                    'behind-the-scenes',
+                    'exploring-beats',
+                    'sonor-drums',
+                    'student-reviews',
+                    'archives',
+                    'recording',
                 ]
             )
             ->name('platform.content.first-level');

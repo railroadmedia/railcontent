@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-column assignment-component bb-grey-1-1 dark:tw-border-[#223F57]">
-        <div class="flex flex-row align-v-center flex-wrap pv-3">
-            <div class="flex flex-column xs-12 md-8">
+        <div class="flex flex-row align-v-center tw-flex-wrap md:tw-flex-nowrap pv-3">
+            <div class="flex flex-column tw-w-full">
                 <div class="flex flex-row align-v-center">
                     <div class="flex flex-column arrow-column hide-xs-only">
                         <button class="btn collapse-square" @click="openAssignment">
@@ -24,30 +24,30 @@
                                 </h3>
                             </div>
                             <div v-if="timecode != 0" class="flex flex-column flex-auto">
-                                <a class="flex flex-column flex-auto tiny font-bold font-underline hide-xs-only ph-2" :class="'text-' + themeColor" :data-jump-to-time="timecode">
+                                <a class="flex flex-column flex-auto tw-text-xs font-bold font-underline hide-xs-only ph-2" :class="'text-' + themeColor" :data-jump-to-time="timecode">
                                         {{ formattedTimecode }} 
                                     </a>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer" @click="openAssignment">
+                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer dark:tw-text-white" @click="openAssignment">
                         <i class="fas" :class="accordionButtonIconClasses"></i>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-column xs-12 md-4 complete-column">
-                <div class="flex flex-row">
-                    <button v-if="soundsliceSlug" class="btn mr-1" @click="openExercise">
-                            <span class="text-white bg-grey-3 inverted text-grey-3">
-                                <i class="fas fa-play mr-1"></i> Practice
-                            </span>
-                        </button>
+            <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
+                <div class="flex flex-row tw-justify-end">
+                    
+                    <button id="open-exercise-button" 
+                            v-if="soundsliceSlug" 
+                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] mr-1" 
+                            @click="openExercise">
+                        <i class="fas fa-play mr-1"></i> Practice
+                    </button>
     
-                    <button class="btn" :disabled="isRequesting" @click.stop="markAsComplete">
-                            <span :class="completeButtonClasses">
-                                <i class="fas fa-check mr-1"></i>
-                                {{ isComplete ? 'Completed' : 'Complete' }}
-                            </span>
+                    <button :class="`tw-btn-secondary tw-text-${themeColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                            <i class="fas fa-check mr-1"></i>
+                            {{ isComplete ? 'Completed' : 'Complete' }}
                         </button>
                 </div>
             </div>
@@ -257,15 +257,6 @@ export default {
             return `transform:translateX(-${100 * (this.currentPage - 1)}%)`;
         },
 
-        completeButtonClasses() {
-            const textColor = `text-${this.themeColor}`;
-            const bgColor = `bg-${this.themeColor}`;
-
-            return this.isComplete ?
-                `text-white ${bgColor}` :
-                `inverted ${bgColor} ${textColor}`;
-        },
-
         accordionButtonClasses() {
             return {
                 inverted: this.accordionActive,
@@ -333,15 +324,9 @@ export default {
                 return 1100;
             },
         },
-
-        imgixParams() {
-            return {
-                auto: 'format',
-                width: `${this.carouselWidth}px`,
-            };
-        },
     },
     mounted() {
+        // console.log(this.soundsliceSlug)
         if (this.position < 3) {
             this.openAssignment();
         }

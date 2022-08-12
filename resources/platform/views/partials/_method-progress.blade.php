@@ -1,7 +1,7 @@
 <div class="method-progress flex flex-row flex-wrap ba-grey-1-5 p-sm-up bg-{{ $brand }} align-center">
     <div class="flex flex-column xs-12 sm-7 ph-3 align-center">
         <img
-            src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/singeo-method.png"
+            src="https://musora.com/cdn-cgi/image/quality=90/https://d2vyvo0tyx8ig5.cloudfront.net/logo/singeo-method.png"
             alt="The Singeo Method Logo"
         >
     </div>
@@ -12,7 +12,7 @@
         <div class="progress-bar bg-white ba-white-3 relative">
             <div class="progress bg-{{ $brand }}" style="width:{{ $progress }}%">
                 <span
-                    class="amount text-white tiny font-bold
+                    class="amount text-white tw-text-xs font-bold
                         {{ $progress < 20 ? 'text-singeo right' : 'text-white' }}"
                 >
                     {{ $progress }}%

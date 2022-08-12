@@ -41,29 +41,31 @@
         <div class="tw-flex tw-flex-col tw-mr-2 form-group ">
           <select
               id="sortInput"
-              class="tw-pb-0 tw-text-black dark:tw-text-white borderless"
+              class="tw-pb-0 tw-text-[#00101D] dark:tw-text-white borderless"
               @change="handleContentSort($event)"
               v-model="sort"
           >
             <option
                 value="-popularity"
+                class="dark:tw-text-[#00101D]"
                 :selected="sort === '-popularity'"
             >
               Most Popular
             </option>
             <option
                 value="-published_on"
+                class="dark:tw-text-[#00101D]"
                 :selected="sort === '-published_on'"
             >
               Newest First
             </option>
-            <option value="published_on" :selected="sort === 'published_on'">
+            <option value="published_on" class="dark:tw-text-[#00101D]" :selected="sort === 'published_on'">
               Oldest First
             </option>
-            <option value="slug" :selected="sort === 'slug'">
+            <option value="slug" :selected="sort === 'slug'" class="dark:tw-text-[#00101D]">
               Name: A to Z
             </option>
-            <option value="-slug" :selected="sort === '-slug'">
+            <option value="-slug" :selected="sort === '-slug'" class="dark:tw-text-[#00101D]">
               Name: Z to A
             </option>
           </select>

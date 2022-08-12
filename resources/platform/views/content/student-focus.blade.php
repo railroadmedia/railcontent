@@ -28,10 +28,8 @@
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $lessonType['type']]) }}"
                         class="tw-flex tw-flex-col xs-6 sm-3 pa-1"
                         dusk="{{$lessonType['type']}}">
-
-                            {{--                        <div class="show-index-card square corners-10 shadow relative" style="background-image:url({{ $lessonType['thumbnail'] }});">--}}
                             <div class="show-index-card square corners-10 tw-shadow tw-relative"
-                                 style="background-image:url({{cf_img($lessonType['thumbnail'],["quality" => 80, "width" => 650, "height" => 650,])}});">
+                                 style="background-image:url( https://musora.com/cdn-cgi/image/width=650,height=650,quality=90/{{ $lessonType['thumbnail'] }} );">
                                 <span class="box-hover heading corners-10">
                                     <i class="fas fa-arrow-right"></i>
                                 </span>

@@ -111,13 +111,11 @@
                 </div>
 
             @elseif(!empty($learningPathSlug) && $learningPathSlug == 'foundations-2019')
-                <p class="text-white font-bold heading">Singeo Foundations</p>
+                <p class="text-white font-bold heading tw-capitalize">{{ $brand }} Foundations</p>
                 <div class="flex flex-row align-left mt-3">
-                    <a href="https://www.singeo.com/resources" class="btn collapse-320">
+                    <a href="/{{ $brand }}/resources" class="tw-btn-primary tw-bg-{{ $brand }}">
                         <button class="btn collapse-320">
-                            <span class="bg-{{$brand}} text-white short ph-5">
-                                FOUNDATIONS BOOK RESOURCES
-                            </span>
+                            FOUNDATIONS BOOK RESOURCES
                         </button>
                     </a>
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <div
         class="content-table-row flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]
-         no-decoration pv-1 pointer relative text-grey-3 hover-bg-grey-7 hover-text-black"
+         no-decoration pv-1 pointer relative hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]"
         :class="stateClasses"
     >
         <!-- THUMBNAIL COLUMN -->
@@ -11,7 +11,7 @@
         >
             <div class="thumb-wrap corners-10">
                 <div
-                    class="thumb-img corners-10"
+                    class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825]"
                     :class="thumbnailType"
                     :style="'background-image:url( ' + mappedData.thumbnail + ' );'"
                 >
@@ -35,18 +35,18 @@
         <!-- TITLES AND COLUMN DATA (on mobile) -->
         <div class="flex flex-column align-v-center ph-1 title-column overflow">
             <p
-                class="tiny font-compressed uppercase text-truncate"
+                class="tw-text-sm font-compressed uppercase text-truncate dark:tw-text-[#9EC0DC]"
                 :class="themeTextClass"
             >
                 {{ mappedData.color_title }}
             </p>
 
-            <p class="tiny font-compressed text-black font-bold item-title">
+            <p class="tw-text-base font-compressed tw-text-[#00101D] dark:tw-text-white font-bold item-title">
                 {{ mappedData.black_title }}
             </p>
 
             <p
-                class="x-tiny font-compressed text-grey-3 text-truncate font-italic uppercase hide-md-up"
+                class="tw-text-sm font-compressed text-truncate uppercase hide-md-up tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
             >
                 <span
                     v-for="(item, i) in mappedData.column_data"
@@ -65,7 +65,7 @@
         <div
             v-for="(item) in mappedData.column_data"
             :key="item"
-            class="flex flex-column uppercase align-center basic-col text-center font-italic x-tiny font-compressed hide-sm-down"
+            class="flex flex-column uppercase align-center basic-col text-center tw-text-sm font-compressed hide-sm-down tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
         >
             {{ item }}
         </div>
@@ -81,7 +81,7 @@
                 @click.stop
             >
                 <i
-                    class="fas fa-video flex-center text-grey-2"
+                    class="fas fa-video flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                     :class="themeHoverTextClass"
                     title="Watch Lesson Video"
                 ></i>
@@ -98,7 +98,7 @@
                 @click.stop.prevent="addToList"
             >
                 <i
-                    class="add-to-list fa-star flex-center hover-text-black"
+                    class="add-to-list fa-star flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                     :class="addedToListClasses"
                     :title="is_added ? 'Remove from Favorites' : 'Add to Favorites'"
                 ></i>
@@ -115,7 +115,7 @@
                 @click.stop.prevent="markAsComplete"
             >
                 <i
-                    class="add-to-list fa-check-circle flex-center hover-text-black"
+                    class="add-to-list fa-check-circle flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                     :class="markedAsCompletedClasses"
                     :title="isCompleted ? 'Restart Progress' : 'Mark as Complete'"
                 ></i>
@@ -149,7 +149,7 @@ export default {
         stateClasses() {
             return {
                 active: this.active,
-                'bg-grey-7': this.active,
+                'tw-bg-[#E7EFF6] dark:tw-bg-[#002039]': this.active,
             };
         },
 
@@ -176,3 +176,10 @@ export default {
     },
 };
 </script>
+<style>
+    /* Add Scroll Margin Top for Scroll Into View and Fixed Header */
+    .content-table-row {
+        scroll-margin-top: 68px ;
+        scroll-snap-margin-top: 68px ; /* For Safari */
+    }
+</style>

@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated, onBeforeMount } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -702,6 +702,10 @@ function handleOverlayClick () {
     mediaElement.value.pause();
 };
 
+onBeforeMount(() => {
+    console.log('chaca chaca', typeof shaka)
+});
+
 onMounted(() => {
     const supportsMSE = false;
 
@@ -811,10 +815,6 @@ onMounted(() => {
             isAirplayConnected.value = !isAirplayConnected.value;
         });
     }
-
-    if (props.useIntersectionObserver && typeof IntersectionObserver !== 'undefined') {
-        enableIntersectionObserver(videoWrap.value);
-    }
 })
 
 onUpdated(() => {
@@ -822,6 +822,10 @@ onUpdated(() => {
     if (overlay && !overlay.getAttribute('overlay-click-pause-video')) {
         overlay.addEventListener("click", handleOverlayClick);
         overlay.setAttribute('overlay-click-pause-video', true)
+    }
+
+    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
+        enableIntersectionObserver(videoWrap.value);
     }
 });
 
@@ -1059,7 +1063,7 @@ const {
                     <div v-show="showContextMenu" ref="contextMenu"
                         class="context-menu bg-grey-5 pointer text-white shadow overflow" :style="contextMenuPosition"
                         @click.stop.prevent>
-                        <ul class="list-style-none tiny dense font-bold">
+                        <ul class="list-style-none tw-text-xs dense font-bold">
                             <li v-if="!isMobile && useKeyboard" class="pa-1 hover-bg-grey-4"
                                 @click="openDialog('keyboardShortcuts')">
                                 {{ dialogs.keyboardShortcuts ? 'Hide' : 'Show' }} Keyboard Shortcuts
@@ -1101,7 +1105,7 @@ const {
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
                     </video>
 
-                    <div ref="controls" class="controls-wrap" @dblclick.stop.prevent="fullscreen"
+                    <div ref="controls-wrapper" class="controls-wrap" @dblclick.stop.prevent="fullscreen"
                         @click.stop="playPauseViaControlWrap">
                         <transition name="fast-fade">
                             <div v-show="isTransitioning" class="player-overlay big-play-button pointer">

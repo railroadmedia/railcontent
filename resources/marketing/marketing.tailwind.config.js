@@ -1,11 +1,12 @@
 // tailwind.config.js
 const stylesoraTheme = require('stylesora/theme');
 const plugin = require('tailwindcss/plugin')
-
+const colors = require("tailwindcss/colors");
 
 module.exports = {
-    important: true,
+  important: true,
   mode: 'jit',
+  darkMode: "class",
   content: require('fast-glob').sync([
     './resources/marketing/**/*.{blade.php,js}',
   ]),
@@ -25,8 +26,13 @@ module.exports = {
     },
   },
   plugins: [
-    require('stylesora/base/')(),
-    require('stylesora/components/')(),
+    //Stylesora's Attributes
+    require("stylesora/attributes")(),
+    //Stylesora's Utility Classes
+    require("stylesora/utilities/")(),
+    //Stylesora's Component Styles
+    require("stylesora/components/")(),
+    //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
         '[x-cloak]': {

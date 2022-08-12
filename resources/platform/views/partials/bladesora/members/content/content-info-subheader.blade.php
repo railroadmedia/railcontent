@@ -13,10 +13,17 @@
             </div>
 
             @if(!empty($addToList) && $addToList === true)
-                <div class="tw-flex tw-flex-col button-col">
-                    <button class="addToList tw-btn-secondary tw-border-[3px] tw-transform-gpu tw-btn-circle tw-text-white {{ $isAdded ? 'added' : '' }}"
-                            data-content-id="{{ $contentId }}">
-                        <i class="fas fa-plus {{ $isAdded ? 'tw-rotate-45' : 'tw-rotate-0' }}"></i>
+                <div class="flex flex-column align-center sq-btn-col ml-1">
+                    <button class="addToList btn {{ $isAdded ? 'added' : '' }}"
+                            data-tooltip="Add To List"
+                        data-content-id="{{ $contentId }}">
+                        <span class="un-added bg-{{ $brand }} inverted text-{{ $brand }}">
+                            <i class="fas fa-plus"></i>
+                        </span>
+
+                        <span class="is-added bg-{{ $brand }} text-white">
+                            <i class="fas fa-plus rotate-45"></i>
+                        </span>
                     </button>
                 </div>
             @endif
@@ -27,11 +34,11 @@
                         <i class="unopen fas fa-download no-events tw-text-white"></i>
                         <i class="open fas fa-download no-events text-x-dark"></i>
 
-                        <div class="dropdown-content tw-bg-white tw-shadow tiny tw-text-black">
+                        <div class="dropdown-content tw-bg-white tw-shadow tw-text-xs tw-text-[#00101D]">
                             <ul>
                                 @foreach($downloadableResources as $resource)
                                     <li>
-                                        <a class="tw-no-underline tw-text-black pa-1"
+                                        <a class="tw-no-underline tw-text-[#00101D] pa-1"
                                            href="{{ $resource['resource_url'] }}"
                                            target="_blank"
                                            download>

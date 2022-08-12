@@ -1,7 +1,3 @@
-@php
-    //dd(json_encode(config('onboarding.options.pianote')));
-@endphp
-
 @extends('partials.layout')
 
 @section('meta')
@@ -18,4 +14,9 @@
             :selected-experience="{{ json_encode(user()->onboardingExperience) }}"
         ></onboarding>
     </div>
+@endsection
+
+@section('layout-scripts')
+    @parent
+    <script src="{{ mix('platform/js/vendor~onboarding.js') }}"></script>
 @endsection

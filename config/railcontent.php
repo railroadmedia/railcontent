@@ -121,8 +121,8 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug'],
-            'field_keys' => ['title', 'instructor:name'],
+            'content_attributes' => ['slug','title'],
+            'field_keys' => ['instructor:name'],
             'data_keys' => [],
         ],
         'medium_value' => [
@@ -728,7 +728,7 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
                 'allowableFilters' => ['instructor'],
@@ -796,6 +796,14 @@ return [
             ],
         ],
         'guitareo' => [
+            'all' => [
+                'name' => 'New Content',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of every lesson that's been published in Guitareo. Browse on your
+                own or use search to find whatever it is you'd like to learn!",
+                'allowableFilters' => [],
+                'sortBy' => '-published_on',
+            ],
             'courses' => [
                 "name" => "Courses",
                 "icon" => "icon-courses",
@@ -842,7 +850,7 @@ return [
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
@@ -932,6 +940,7 @@ return [
             'question-and-answer',
             'student-collaborations',
             'live-streams',
+            'live',
             'podcasts',
             'solos',
             'boot-camps',
@@ -955,14 +964,19 @@ return [
         ],
         'pianote' => [
             'student-review',
+            'student-reviews',
             'question-and-answer',
         ],
         'guitareo' => [
             'student-review',
+            'student-reviews',
             'question-and-answer',
+            'archives',
+            'recording',
         ],
         'singeo' => [
             'student-review',
+            'student-reviews',
             'question-and-answer',
         ],
     ],
@@ -987,6 +1001,7 @@ return [
         'student-review',
         'boot-camps',
         'recording',
+        'pack-bundle-lesson',
     ],
     'topLevelContentTypes' => [
         'learning-path',
@@ -1090,6 +1105,9 @@ return [
         'ha-oemurd-pmac',
         'learning-path-lesson',
         'chord-and-scale',
+        'podcasts',
+        'boot-camps',
+        'quick-tips'
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1361,6 +1379,7 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
+            'unit' => 'lessons'
         ],
         'guitareo' => [
             'learning-path' => 'levels',

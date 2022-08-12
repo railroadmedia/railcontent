@@ -3,7 +3,7 @@
         class="flex flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
         :class="month"
     >
-            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-black">
+            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-[#00101D]">
                 {{ month }}
             </div> -->
 
@@ -13,7 +13,7 @@
                         class="thumb-img corners-10 widescreen text-center"
                         :style="`background-image: url( ${ item.original_thumbnail_url } )`"
                     >
-                        <div class="release-day tw-bg-black/70 tw-h-full tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/70 tw-h-full tw-flex tw-flex-col tw-items-center tw-justify-center">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }}
                             </p>
@@ -31,18 +31,18 @@
                     <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
                         {{ mappedData.color_title }}
                     </p>
-                    <p class="tw-text-sm tw-text-black dark:tw-text-white tw-font-bold item-title">
+                    <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
                         {{ mappedData.black_title }}
                     </p>
                 </div>
                 <!-- Schedule Item Data -->
-                <div class="tw-flex ph-1">
+                <div class="ph-1 tw-hidden sm:tw-flex">
                     <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
                         {{ releaseType }}
                     </div>
                     <div v-for="(item, i) in mappedData.column_data"
                         :key="i"
-                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center"
+                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-center"
                     >
                         {{ item }}
                     </div>

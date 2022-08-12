@@ -25,7 +25,7 @@
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => '/support',
+                "url" => '/contact',
             ],
             "Guitareo" => [
                 "iconClass" => "icon-courses",

@@ -39,10 +39,11 @@ if it does not return: show the gear step
 
 when pressing 'next button':
 
-**`POST /user-management-system/onboarding-gear`**
+**`POST /user-management-system/onboarding-gears`**
 
 ```php
 [
+    'brand'   => 'required',
     'data[0]' => 'required',
     'data[1]' => '',
     'data[2]' => '',
@@ -68,7 +69,10 @@ when pressing 'next button':
 **`POST /user_management_system/onboarding-experience`**
 
 ```php
-['experience_level' => 'required|[0-3]'];
+[
+    'brand' => 'required',
+    'experience_level' => 'required|[0-3]'
+];
 ```
 ('experience_level' parameter must take one of the following values: [0,1,2,3])
 
@@ -91,6 +95,7 @@ when pressing 'next button':
 
 ```php
 [
+    'brand'   => 'required',
     'data[0]' => 'required',
     'data[1]' => '',
     'data[2]' => '',
@@ -113,6 +118,7 @@ when pressing 'next button':
 
 ```php
 [
+    'brand'   => 'required',
     'data[0]' => 'required',
     'data[1]' => '',
     'data[2]' => '',

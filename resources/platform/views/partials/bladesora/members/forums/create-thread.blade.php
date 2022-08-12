@@ -33,7 +33,7 @@
                             <select id="forum" name="category_id" class="dark:tw-text-white tw-pb-0">
                                 <option selected disabled style="display:none;">
                                 @foreach($topicOptions as $index => $topic)
-                                    <option class="dark:tw-text-black" value="{{ $index }}" {!! (app('request')->input('thread-title') === $topic) ? 'selected' : '' !!} >{{ $topic }}</option>
+                                    <option class="dark:tw-text-[#00101D]" value="{{ $index }}" {!! (app('request')->input('thread-title') === $topic) ? 'selected' : '' !!} >{{ $topic }}</option>
                                 @endforeach
                             </select>
                             <label for="forum" class="{{ $brand }}">Forum</label>
@@ -56,7 +56,7 @@
 
                     <div class="tw-flex tw-flex-row tw-justify-end mt-2">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-black dark:tw-text-white hover:tw-bg-slate-200/50 tw-mr-1" dusk="cancel-button">
+                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1" dusk="cancel-button">
                             Cancel
                         </a>
 

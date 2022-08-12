@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
         @yield('meta')
         
         {{-- Icons --}}
@@ -40,15 +40,14 @@
 
         <!-- Scripts -->
         @yield('layout-scripts')
+        <script src="{{ mix('platform/js/manifest.js') }}"></script>
+        <script src="{{ mix('platform/js/vendor.js') }}"></script>
         <script src="{{ mix('platform/js/app.js') }}"></script>
         @yield('inject-components')
 
-        {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
-        <script type="text/javascript">
-            Beacon('on', 'ready', () => {
-                document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
-            })
-        </script>
+        {{-- Helpscout Beacon --}}
+        @include('partials.third-party.helpscout-tracking-beacon-script', ['email' => !empty(user()) ? user()->email : null])
+        
         {{-- {!! \App\Analytics\Tracker::bodyBottom() !!} --}}
     </body>
 </html>

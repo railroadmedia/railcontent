@@ -5,7 +5,7 @@
         {{-- Meta --}}
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
         @yield('meta')
         
         {{-- Icons --}}
@@ -47,14 +47,15 @@
 
                 <page-container 
                     brand="{{ $brand }}" 
-                    :is-live="true" 
+                    :is-live="false" 
+                    user-name="{{ user()->display_name }}"
+                    user-avatar="{{ user()->profile_picture_url }}"
+                    user-id="{{ user()->id }}"
+                    account-url="{{ user()->getDashboardUrl() }}"
+                    search-url=""
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
-                    user-name="John Smith"
-                    user-avatar=""
-                    account-url=""
-                    search-url=""
                 >  
                     <template v-cloak v-slot="slotProps">
 
@@ -68,30 +69,18 @@
         </div>
 
         {{-- Review Modals Must Be Global --}}
-        @if($brand === 'singeo')
-            @include('partials._review-modal-singeo')
-        @endif
-        @if($brand === 'guitareo')
-            @include('partials._review-modal-guitareo')
-        @endif
-        @if($brand === 'pianote')
-            @include('partials._review-modal-pianote')
-        @endif
-        @if($brand === 'drumeo')
-            @include('partials._review-modal-drumeo')
-        @endif
+        @include('partials._review-modal')
 
         {{-- Scripts --}}
+        <script src="{{ mix('platform/js/manifest.js') }}"></script>
+        <script src="{{ mix('platform/js/vendor.js') }}"></script>
         <script src="{{ mix('platform/js/app.js') }}"></script>
         @yield('scripts')
         @yield('inject-components')
 
-        {{-- @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null]) --}}
-        <script type="text/javascript">
-            Beacon('on', 'ready', () => {
-                document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
-            })
-        </script>
+        {{-- Helpscout Beacon --}}
+        @include('partials.third-party.helpscout-tracking-beacon-script', ['email' => !empty(user()) ? user()->email : null])
+        
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
 </html>

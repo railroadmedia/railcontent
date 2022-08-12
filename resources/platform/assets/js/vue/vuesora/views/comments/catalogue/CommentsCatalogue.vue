@@ -122,7 +122,7 @@
             </div>
         </transition>
 
-        <div class="flex flex-row bb-grey-1-1 pa-2 tiny align-v-center">
+        <div class="flex flex-row bb-grey-1-1 pa-2 tw-text-xs align-v-center">
             <p class="tiny dense mr-3">
                 <i class="fas fa-check-square text-success mr-1"></i> Replied to (no response)
             </p>
@@ -135,22 +135,22 @@
         </div>
 
         <div class="flex flex-row pa-2 bg-grey-7 bb-grey-1-1 comment-data">
-            <div class="flex flex-column user-name tiny dense font-bold ph-1">
+            <div class="flex flex-column user-name tw-text-xs dense font-bold ph-1">
                 User
             </div>
-            <div class="flex flex-column comment-body tiny dense font-bold ph-1">
+            <div class="flex flex-column comment-body tw-text-xs dense font-bold ph-1">
                 Comment Body
             </div>
-            <div class="flex flex-column lesson-title tiny dense font-bold hide-xs-only ph-1">
+            <div class="flex flex-column lesson-title tw-text-xs dense font-bold hide-xs-only ph-1">
                 Title
             </div>
-            <div class="flex flex-column lesson-type tiny dense font-bold hide-xs-only ph-1 text-center">
+            <div class="flex flex-column lesson-type tw-text-xs dense font-bold hide-xs-only ph-1 text-center">
                 Type
             </div>
-            <div class="flex flex-column replied-to tiny dense font-bold ph-1 text-center">
+            <div class="flex flex-column replied-to tw-text-xs dense font-bold ph-1 text-center">
                 Replied
             </div>
-            <div class="flex flex-column status tiny dense font-bold ph-1 text-center">
+            <div class="flex flex-column status tw-text-xs dense font-bold ph-1 text-center">
                 Status
             </div>
         </div>
@@ -175,7 +175,7 @@
                     </div>
 
                     <div
-                        class="flex flex-column comment-body tiny ph-1"
+                        class="flex flex-column comment-body tw-text-xs ph-1"
                         v-html="comment.comment"
                     >
                     </div>

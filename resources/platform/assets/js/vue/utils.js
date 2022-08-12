@@ -10,7 +10,8 @@ export const setEndpointPrefix = () => {
 };
 
 export const searchCoaches = (brand, term) => {
-    return axios.get(`${window.ENDPOINT_PREFIX}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`);
+    const coachesUrl = `https://${location.hostname}${location.port ? ':'+location.port : ''}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
+    return axios.get(coachesUrl);
 }
 
 const getResultValue = (el, searchKey, searchObj) => {
@@ -20,7 +21,7 @@ const getResultValue = (el, searchKey, searchObj) => {
 
 export const transformCoachesCardData = (result) => {
     return result.data.data.map((coach) => {
-        console.log(coach)
+        // console.log(coach)
         const img = getResultValue(coach, 'coach_card_image', 'data');
         const focusText = getResultValue(coach, 'focus_text', 'data');
         const name = getResultValue(coach, 'name', 'fields');

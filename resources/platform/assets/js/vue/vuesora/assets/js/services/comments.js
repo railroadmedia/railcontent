@@ -16,32 +16,11 @@ export default {
      * @returns {Promise} resolved promise with the response.data object, containing the comments array
      */
     getComments(params) {
-        // TODO
-        // UNDO CHANGES ON THIS FILE!
         return axios.get(`${endpointPrefix}/railcontent/comment`, {
             params,
         })
             .then(response => {
-                const items = ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano'];
-                console.log(items[Math.floor(Math.random()*items.length)])
-                const data = response.data.data.map((comment) => {
-                    return {
-                        ...comment,
-                        user: {
-                            ...comment.user,
-                            access_level: items[Math.floor(Math.random()*items.length)]
-                        },
-                        replies: comment.replies.map((reply)=> ({
-                            ...reply,
-                            user: {
-                                ...reply.user,
-                                access_level: items[Math.floor(Math.random()*items.length)]
-                            }
-                        }))
-                    }
-                })
-                return {...response.data, data};
-                //return response.data
+                return response.data
             })
             .catch(ErrorHandler);
     },

@@ -6,12 +6,13 @@
             <select
                 :id="filterName + 'Filter'"
                 v-model="valueInterface"
-                class="tw-pb-0 tw-text-black dark:tw-text-white no-label tw-bg-white dark:tw-bg-transparent"
+                class="tw-pb-0 tw-text-[#00101D] dark:tw-text-white no-label tw-bg-white dark:tw-bg-transparent"
                 :class="{'is-clearable': valueInterface}"
                 :disabled="valueInterface"
                 @keydown.prevent
             >
                 <option
+                    class="tw-text-[#00101D]"
                     selected
                     disabled
                     :value="null"
@@ -19,7 +20,7 @@
                     {{ placeholderLabel }}
                 </option>
                 <option
-                    class="tw-text-black"
+                    class="tw-text-[#00101D]"
                     v-for="filter in sortedOptions"
                     :key="filter.key"
                     :value="filter.value"
@@ -107,17 +108,17 @@ export default {
 
         placeholderLabel() {
             const labelMap = {
-                difficulty: 'Choose a Level...',
-                instructor: 'Choose an Instructor...',
-                topic: 'Choose a Topic...',
-                progress: 'Your Progress...',
-                artist: 'Choose an Artist...',
-                focus: 'Filter by Focus',
-                style: 'Filter by Style',
-                bpm: 'Choose a Tempo...',
-                type: 'Choose a Type...',
-                key: 'Choose a Key...',
-                key_pitch_type: 'Choose a Type...',
+                difficulty: 'Skill Level',
+                instructor: 'Instructor',
+                topic: 'Topic',
+                progress: 'Progress',
+                artist: 'Artist',
+                focus: 'Focus',
+                style: 'Style',
+                bpm: 'Tempo',
+                type: 'Type',
+                key: 'Key',
+                key_pitch_type: 'Type',
             };
 
             return this.filtersLabels[this.filterName] || labelMap[this.filterName];

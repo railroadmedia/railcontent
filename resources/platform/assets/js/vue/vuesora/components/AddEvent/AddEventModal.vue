@@ -9,11 +9,11 @@
           align-h-center
           tw-overflow-visible tw-max-w-lg
         ">
-      <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl tw-text-black">
+      <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl tw-text-[#00101D]">
         Subscribe to Calendar
       </h1>
 
-      <p class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-4 tw-text-black">
+      <p class="tw-text-sm tw-leading-normal tw-text-center tw-mb-4 tw-text-[#00101D]">
         Here you can subscribe to {{ toCapitalCase(brand) }}'s Lesson Calendar -
         Apple Calendar, Google Calendar, Outlook, and Yahoo Calendar are all
         supported.
@@ -42,15 +42,15 @@
         </transition>
       </div>
 
-      <p v-show="subscriptionCalendarId" class="tw-text-[10px] tw-italic tw-text-center tw-mb-2 tw-text-black">
+      <p v-show="subscriptionCalendarId" class="tw-text-xs tw-italic tw-text-center tw-mb-2 tw-text-[#00101D]">
         Any upcoming releases will automatically show up in this calendar as
         they are scheduled by the {{ toCapitalCase(brand) }} Team.
       </p>
 
-      <p v-show="hasSingleEvent" class="tw-text-[13px] tw-leading-normal tw-text-center tw-mb-2">
+      <p v-show="hasSingleEvent" class="tw-text-sm tw-leading-normal tw-text-center tw-mb-2">
         Or you can subscribe to this event only by clicking the button below.
       </p>
-      <div v-show="hasSingleEvent" class="tw-text-[13px] tw-leading-normal pointer tw-relative" style="width: 100%">
+      <div v-show="hasSingleEvent" class="tw-text-sm tw-leading-normal pointer tw-relative" style="width: 100%">
         <button class="btn tw-mb-1" @click.stop="singleEventDropdown = !singleEventDropdown">
           <span class="inverted" :class="[themeTextClass, themeBgClass]">
             <i class="fas fa-calendar-plus tw-mr-1"></i>

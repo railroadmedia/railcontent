@@ -1,4 +1,4 @@
-<footer id="publicFooter" class="flex-none bg-black pb-9">
+<footer id="publicFooter" class="flex-none bg-black pt-10 pb-9">
 
     <!-- Footer Top -->
     @if( @isset($sections) )
@@ -10,7 +10,7 @@
                         @if( @isset($section['links']) )
                             <ul class="text-sm">
                                 @foreach($section['links'] as $link)
-                                    <li class="mb-1 leading-relaxed">
+                                    <li class="mb-1">
                                         <a class="text-sm" href="{{ $link['url'] }}" class="no-decoration text-gray-500">
                                             {{ $link['name'] }}
                                         </a>
@@ -45,9 +45,9 @@
         </div>
         <p class="text-xs md:text-sm">
             Musora Media, Inc. © 2022 - &nbsp;
-            <a class="text-xs md:text-sm" href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
-            <a href="/privacy" class="text-xs md:text-sm">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;
-            <a rel="noopener" href="https://www.musora.com/jobs" class="text-xs md:text-sm">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a class="text-xs md:text-sm" href="/terms-of-service">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a href="/privacy-policy" class="text-xs md:text-sm">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+            <a rel="noopener" href="/careers" class="text-xs md:text-sm">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a rel="noopener" href="https://www.musora.com/brand" class="text-xs md:text-sm">Brand Guide</a>
         </p>
     </div>

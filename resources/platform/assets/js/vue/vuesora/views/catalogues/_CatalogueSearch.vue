@@ -29,7 +29,7 @@
                             name="search"
                             autocomplete="off"
                             placeholder="Search..."
-                            class="no-label dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-black tw-border-[#D4D4D8] dark:tw-border-[#9EC0DC] dark:tw-text-white"
+                            class="no-label dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
                             @keydown.enter="submitSearch($event)"
                         >
                     </div>
@@ -47,9 +47,9 @@
             </div>
         </div>
         <div v-if="catalogueType !== 'coaches-grid'" 
-             class="flex flex-row ph-1 pb-1"
+             class="flex flex-row pb-1"
         >
-            <p class="tiny text-grey-3 font-italic">
+            <p class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] font-italic">
                 Displaying <span v-if="totalResults > 0">{{ currentResults }} of</span> {{ totalResults }} results.
             </p>
         </div>

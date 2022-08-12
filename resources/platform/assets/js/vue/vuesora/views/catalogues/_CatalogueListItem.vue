@@ -22,7 +22,7 @@
       class="
         tw-flex 
         tw-flex-col
-        tw-text-black
+        tw-text-[#00101D]
         dark:tw-text-white
         align-left 
         tw-justify-center
@@ -41,13 +41,16 @@
       :class="[thumbnailColumnClass, themeColor]"
     >
       <div class="thumb-wrap corners-10">
-        <div class="thumb-img corners-10" :class="thumbnailType">
+        <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
           <img
-            src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-            :data-ix-src="mappedData.thumbnail"
-            data-ix-fade
+            :src="`https://musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail}`"
             alt="Lesson Thumbnail"
+            class="tw-transition-opacity tw-duration-500"
+            loading="lazy"
+            :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+            @load="mappedData.imageLoaded = true"
           />
+
           <div class="lesson-progress overflow">
             <span
               class="progress"
@@ -134,8 +137,8 @@
       </p>
 
       <p
-        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title tw-mb-1"
-        :class="overview ? 'heading' : 'tiny font-compressed'"
+        class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
+        :class="overview ? 'heading' : 'tw-text-sm lg:tw-text-base'"
       >
         {{ mappedData.black_title }}
       </p>
@@ -161,8 +164,10 @@
           font-compressed
           tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
           tw-uppercase
-          hide-md-up
+          xl:tw-hidden
+          tw-flex
         "
+        :class="`${this.overview ? 'tw-mt-4' : ''}`"
       >
         <span
           v-for="(column_data, i) in mappedData.column_data"
@@ -178,7 +183,7 @@
     <!-- SHEET MUSIC IMAGE IF IT EXISTS -->
     <div
       v-if="mappedData.sheet_music && !is_search"
-      class="flex tw-flex-col sheet-music-col ph-1 hide-xs-only"
+      class="flex tw-flex-col tw-justify-center sheet-music-col ph-1 hide-xs-only"
     >
       <img class="dark:tw-invert" :src="mappedData.sheet_music" />
     </div>
@@ -189,15 +194,15 @@
       v-if="!is_search"
       :key="`${item.id}-mappedData-${i}`"
       class="
-        tw-flex 
-        tw-flex-col
+        tw-hidden
+        xl:tw-flex 
         tw-uppercase
+        tw-items-center
         tw-justify-center
         basic-col
         tw-text-center
         tw-text-xs
         font-compressed
-        hide-sm-down
       "
       :data-test="column_data"
     >
@@ -208,13 +213,14 @@
     <div
       v-if="is_search"
       class="
-        tw-flex tw-flex-col
+        tw-hidden
+        sm:tw-flex 
+        tw-flex-col
         tw-uppercase
         tw-justify-center
         basic-col
         tw-text-center
         tw-text-xs
-        hide-sm-down
       "
     >
       {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
@@ -242,7 +248,7 @@
     >
       <div v-if="resetProgress" class="body">
         <i
-          class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black reset"
+          class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] reset"
           :class="isBranchPath ? branchPathText: 'text-grey-2 hover-text-black'"
           title="Reset Progress"
           @click.stop.prevent="progressReset"
@@ -250,7 +256,7 @@
       </div>
       <div v-else class="body">
         <i
-          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-black tw-transform-g"
+          class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-[#00101D] tw-transform-g"
           :class="[is_added ? 'is-added tw-rotate-45' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]', 
                    isBranchPath ? branchPathText: 'text-grey-2 hover-text-black' 
                   ]"
@@ -275,7 +281,7 @@
       <div
         v-if="noAccess"
         class="body"
-        :class="isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black'"
+        :class="isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'"
         title="Add to Calendar"
         data-open-modal="addToCalendarModal"
         @click="addEvent"
@@ -290,7 +296,7 @@
       <div v-else class="body">
         <i
           v-if="item.started || item.completed"
-          class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-black"
+          class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]"
           :class="[
             item.completed ? completedIcon : 'fa-adjust',
             themeTextClass,
@@ -302,7 +308,7 @@
           class="fas flex-center rounded"
           :class="[
             ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle',
-              isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-black'
+              isBranchPath ? branchPathText: 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'
             ]
           "
         ></i>

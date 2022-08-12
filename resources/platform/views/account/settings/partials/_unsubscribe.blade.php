@@ -151,7 +151,7 @@
                 </button>
 
                 <button id="cancelUnsubscribeForm" type="reset" class="btn collapse-150">
-                    <span class="short flat tw-text-black">
+                    <span class="short flat tw-text-[#00101D]">
                         Cancel
                     </span>
                 </button>

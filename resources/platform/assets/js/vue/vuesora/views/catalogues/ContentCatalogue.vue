@@ -9,7 +9,7 @@
                :href="coachIndexUrl + '#coach-section'"
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[!isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500', brandBorderColor ]"
               >
                 All Coaches
               </h3>
@@ -18,7 +18,7 @@
                :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[isOnlySubscribed ? 'tw-text-black dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500', brandBorderColor ]"
               >
                   Subscribed Coaches
               </h3>
@@ -90,7 +90,7 @@
         <div class="icon-wrap square" :class="noResultsIcon"></div>
       </div>
       <div class="flex flex-column">
-        <h4 class="body tw-text-black dark:tw-text-white" v-html="noResultsMessageWithProgress"></h4>
+        <h4 class="body tw-text-[#00101D] dark:tw-text-white" v-html="noResultsMessageWithProgress"></h4>
       </div>
     </div>
 
@@ -629,7 +629,7 @@ export default {
     }
 
     if (this.infiniteScroll && !this.loadMoreButton) {
-      window.addEventListener("scroll", this.infiniteScrollEventHandler);
+      document.querySelector('#content-container').addEventListener("scroll", this.infiniteScrollEventHandler);
     }
 
     if (this.useUrlParams) {
@@ -649,7 +649,7 @@ export default {
   },
   beforeDestroy() {
     if (this.infiniteScroll && !this.loadMoreButton) {
-      window.removeEventListener("scroll", this.infiniteScrollEventHandler);
+      document.querySelector('#content-container').removeEventListener("scroll", this.infiniteScrollEventHandler);
     }
   },
   methods: {
@@ -848,10 +848,6 @@ export default {
           window.addeventatc.refresh();
         }
 
-        // Load the Imgix Service to load srcs and srcsets
-        if (window.ImgixService) {
-          window.ImgixService.loadImageSources();
-        }
       }, 500);
 
       this.loading = false;
@@ -859,8 +855,9 @@ export default {
     },
 
     infiniteScrollEventHandler() {
-      const scroll_position = window.pageYOffset + window.innerHeight;
-      const scroll_buffer = document.body.scrollHeight * 0.75;
+      let scrollEl = document.querySelector('#content-container');
+      const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
+      const scroll_buffer = scrollEl.scrollHeight * 0.9;
 
       if (scroll_position >= scroll_buffer && this.page < this.total_pages) {
         this.loadMore();

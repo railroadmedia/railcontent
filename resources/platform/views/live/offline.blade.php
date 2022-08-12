@@ -9,7 +9,7 @@
     @component('partials._header-banner',
         ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
         @slot('content')
-            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4 tw-mt-14">
+            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                     <i class="icon-live tw-text-{{$brand}} tw-mr-3 tw-text-3xl"></i>
                     <span class="tw-text-32 tw-font-bold"><span class="tw-capitalize">{{ $brand }}</span> Live</span>
@@ -23,16 +23,16 @@
                 </p>
                 
                 {{-- Header CTAs --}}
-                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3 tw-max-w-xl">
+                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3">
                     <div class="flex flex-column">
-                        <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer">
-                            <button class="tw-btn-secondary tw-text-white ">
+                        <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer tw-w-fit">
+                            <button class="tw-btn-secondary tw-text-white">
                                 <i class="fas fa-globe mr-1"></i>
                                 Change Your Timezone
                             </button>
                             <select name="timezone" id="timezoneSelector">
                                 @foreach($timezones as $timezone)
-                                    <option class="tw-text-black"
+                                    <option class="tw-text-[#00101D]"
                                             {{
                                                 substr(
                                                     $timezone,
@@ -55,14 +55,14 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
 
         <div class="tw-flex tw-flex-col mv-3">
-            <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-[10px]">
+            <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                 <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                    <h1 class="tw-text-black dark:tw-text-white heading tw-capitalize tw-mr-2">
+                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                         Scheduled Releases
                     </h1>
                 </div>
                 <div class="tw-flex tw-flex-col">
-                    <button class="tw-btn-secondary tw-text-black dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
+                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
                         Subscribe to Calendar 
                     </button>
                 </div>

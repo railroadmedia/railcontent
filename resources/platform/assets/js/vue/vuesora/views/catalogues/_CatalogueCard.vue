@@ -14,19 +14,22 @@
                     item.type + '-thumbnail'
                 ]"
             >
-                <div class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
+                <div class="card-media active corners-10"
                      :class="[thumbnailType]"
                 >
                     <!-- Video Thumbnail -->
-                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                         :data-ix-src="mappedData.thumbnail"
-                         data-ix-fade
-                         class="bg-grey-2"
-                         :class="[item.type === 'song' ? 'tw-blur-sm' : '']"
+                    <img :src="`https://musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail} `"
+                         class="tw-transition-opacity tw-duration-500"
+                         :class="[ 
+                            item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',
+                            item.type === 'song' ? 'tw-blur-sm' : ''
+                         ]"
+                         loading="lazy"
+                         @load="item.imageLoaded = true"
                     >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full" :src="mappedData.thumbnail" :alt="mappedData.black_title"/>
+                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title"/>
                     </div>
 
                     <!-- Progress -->
@@ -68,7 +71,7 @@
                         v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                     </h5>
                     <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-black font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
+                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         {{ mappedData.black_title }}
@@ -93,8 +96,8 @@
                 <!-- Add to My List -->
                 <div class="tw-inline-flex tw-items-start tw-p-1">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
-                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-transform-gpu"
-                        :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-black dark:tw-text-white'"
+                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-transform-gpu tw-transition"
+                        :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from My List' : 'Add to My List'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"

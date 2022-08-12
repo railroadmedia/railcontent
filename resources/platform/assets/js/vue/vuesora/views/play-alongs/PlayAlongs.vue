@@ -2,41 +2,30 @@
     <div class="flex flex-column grow play-alongs">
         <div
             v-if="showFilters"
-            class="flex flex-row pv-1"
+            class="flex flex-row mt-2"
         >
             <div class="flex flex-column align-v-center">
-                <h1 class="heading">
+                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                     {{ totalResults }} Play Alongs
                 </h1>
             </div>
 
             <div class="flex flex-column enable-filters mr-1">
-                <button
-                    class="btn collapse-square mr-1"
-                    title="Toggle Shuffle"
-                    @click="toggleShuffle"
+                <button class="tw-btn-circle tw-mr-1"
+                        :class="isShuffle ? 'tw-btn-primary tw-bg-[#3F3F46] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]' : 'tw-btn-secondary tw-text-[#3F3F46] dark:tw-text-white '" 
+                        title="Toggle Shuffle"
+                        @click="toggleShuffle"
                 >
-                    <span
-                        class="bg-drumeo"
-                        :class="isShuffle ? 'text-white' : 'inverted text-drumeo'"
-                    >
-                        <i class="fas fa-random"></i>
-                    </span>
+                    <i class="fas fa-random"></i>
                 </button>
             </div>
-
             <div class="flex flex-column enable-filters">
-                <button
-                    class="btn collapse-square"
-                    title="Toggle Filters"
-                    @click="displayFilters = !displayFilters"
+                <button class="tw-btn-circle tw-mr-1"
+                        :class="displayFilters ? 'tw-btn-primary tw-bg-[#3F3F46] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]' : 'tw-btn-secondary tw-text-[#3F3F46] dark:tw-text-white '" 
+                        title="Toggle Filters"
+                        @click="displayFilters = !displayFilters"
                 >
-                    <span
-                        class="bg-drumeo"
-                        :class="displayFilters ? 'text-white' : 'inverted text-drumeo'"
-                    >
-                        <i class="fas fa-filter"></i>
-                    </span>
+                    <i class="fas fa-filter"></i>
                 </button>
             </div>
         </div>
@@ -74,22 +63,24 @@
             ></pagination>
         </div>
 
-        <play-alongs-list-item
-            v-for="(item, i) in content"
-            :ref="`list${item.id}`"
-            :key="`list${item.id}`"
-            :index="i + 1"
-            :item="item"
-            :brand="brand"
-            :active="activeItem != null ? item.id === activeItem.id : false"
-            :display-user-interactions="false"
-            :no-link="true"
-            :theme-color="themeColor"
-            :show-user-actions="showUserActions"
-            @addToList="addToListEventHandler"
-            @markAsComplete="completedEventHandler"
-            @click.native="updateTrack(item)"
-        ></play-alongs-list-item>
+        <div class="tw-flex tw-flex-col tw-grow">
+            <play-alongs-list-item
+                v-for="(item, i) in content"
+                :ref="`list${item.id}`"
+                :key="`list${item.id}`"
+                :index="i + 1"
+                :item="item"
+                :brand="brand"
+                :active="activeItem != null ? item.id === activeItem.id : false"
+                :display-user-interactions="false"
+                :no-link="true"
+                :theme-color="themeColor"
+                :show-user-actions="showUserActions"
+                @addToList="addToListEventHandler"
+                @markAsComplete="completedEventHandler"
+                @click.native="updateTrack(item)"
+            />
+        </div>
 
         <div
             v-if="content.length === 0"
@@ -123,7 +114,7 @@
         <transition name="show-from-bottom">
             <div
                 v-show="loading"
-                class="loading bg-white corners shadow pa-2"
+                class="loading corners pa-2"
                 @click.stop.prevent
             >
                 <loading-animation :theme-color="themeColor" />
@@ -136,7 +127,7 @@
             :active-item="activeItem"
             :audio-player="audioPlayer"
             :drums="drums"
-            :click="click"
+            :metronome="metronome"
             :loop="loop"
             :current-time="currentTime"
             :total-duration="totalDuration"
@@ -153,7 +144,7 @@
             @previousTrack="playPreviousTrack"
             @seek="seek"
             @drums="toggleDrums"
-            @click="toggleClick"
+            @metronome="toggleMetronome"
             @loop="toggleLoop"
             @anchorMouseDown="handleAnchorMouseDown"
             @anchorButtonClick="handleAnchorButtonClick"
@@ -270,7 +261,7 @@ export default {
             activeItem: null,
             audioPlayer: this.$refs.audioPlayer,
             drums: false,
-            click: true,
+            metronome: true,
             loop: false,
             currentTime: 0,
             totalDuration: 0,
@@ -289,19 +280,16 @@ export default {
             showMobileFilters: false,
             displayFilters: false,
             progressTracker: this.trackProgress ? new ProgressTracker() : null,
+            isPlaying: false,
         };
     },
     computed: {
-        isPlaying: {
-            cache: false,
-            get() {
-                if (this.audioPlayer != null) {
-                    return this.audioPlayer.paused === false;
-                }
-
-                return false;
-            },
-        },
+        // isPlaying: {
+            // cache: false,
+            // get() {
+            //     return this.audioPlayer ? !this.audioPlayer.paused : false;
+            // },
+        // },
 
         currentPosition() {
             return (this.currentTime / this.totalDuration) * 100;
@@ -489,21 +477,13 @@ export default {
                     // If it's only one value then that's a minimum only, so we add a plus sign
                     // Otherwise we remove the plus sign and add a dash between the two values
                     if (keyValue[0] === 'bpm') {
-                        if (this.selectedFilters.bpm == null) {
-                            this.$set(
-                                this.selectedFilters,
-                                'bpm',
-                                `${keyValue[1]}+`,
-                            );
+                        if (this.selectedFilters['bpm'] == null) {
+                            this.selectedFilters['bpm'] = `${keyValue[1]}+`;
                         } else {
-                            this.$set(
-                                this.selectedFilters,
-                                'bpm',
-                                `${this.selectedFilters.bpm.replace('+', '')}-${keyValue[1]}`,
-                            );
+                            this.selectedFilters['bpm'] = `${this.selectedFilters['bpm'].replace('+', '')}-${keyValue[1]}`;
                         }
                     } else {
-                        this.$set(this.selectedFilters, keyValue[0], keyValue[1]);
+                        this.selectedFilters[0] = keyValue[1];
                     }
                 });
             }
@@ -547,12 +527,13 @@ export default {
         },
 
         playPause() {
-            if (this.isPlaying) {
+            if (this.audioPlayer.paused === false) {
+                this.isPlaying = false;
                 this.audioPlayer.pause();
             } else {
+                this.isPlaying = true;
                 this.audioPlayer.play();
             }
-
             this.$nextTick(() => this.$forceUpdate());
         },
 
@@ -570,14 +551,14 @@ export default {
         switchTrack(resume) {
             const { currentTime } = this;
             const trackUrl = this.activeItem.getPostDatum(
-                `mp3_${this.drums ? 'yes' : 'no'}_drums_${this.click ? 'yes' : 'no'}_click_url`,
+                `mp3_${this.drums ? 'yes' : 'no'}_drums_${this.metronome ? 'yes' : 'no'}_click_url`,
             );
 
             this.updateSource(trackUrl, resume, currentTime);
 
             if (!resume) {
                 this.$nextTick(() => {
-                    const domElement = this.$refs[`list${this.activeItem.id}`][0].$el;
+                    const domElement = this.$refs[`list${this.activeItem.id}`].$el;
                     domElement.scrollIntoView({block: "start"})
                 });
             }
@@ -720,8 +701,8 @@ export default {
             this.playPause();
         },
 
-        toggleClick() {
-            this.click = !this.click;
+        toggleMetronome() {
+            this.metronome = !this.metronome;
 
             this.switchTrack(true);
             this.playPause();
@@ -731,12 +712,12 @@ export default {
             this.loop = !this.loop;
             this.audioPlayer.loop = this.loop;
 
-            this.$set(this.anchorOffsets, 'a', 0);
-            this.$set(this.anchorOffsets, 'b', 100);
+            this.anchorOffsets.a= 0;
+            this.anchorOffsets.b= 100;
         },
 
         handleAnchorMouseDown(anchor) {
-            this.$set(this.anchorMouseDown, anchor, true);
+            this.anchorMouseDown.anchor=true;
         },
 
         handleAnchorButtonClick(anchor) {
@@ -748,20 +729,20 @@ export default {
                 offset = 0;
             }
 
-            this.$set(this.anchorOffsets, anchor, offset);
+            this.anchorOffsets.anchor = offset;
         },
 
         resetAnchors() {
-            this.$set(this.anchorOffsets, 'a', 0);
-            this.$set(this.anchorOffsets, 'b', 100);
+            this.anchorOffsets.a= 0;
+            this.anchorOffsets.b= 100;
         },
 
         trackMousePosition(event) {
             const posX = event.clientX != null ? event.clientX : event.touches[0].clientX;
             const posY = event.clientY != null ? event.clientY : event.touches[0].clientY;
 
-            this.$set(this.currentMousePosition, 'x', posX);
-            this.$set(this.currentMousePosition, 'y', posY);
+            this.currentMousePosition.x=posX;
+            this.currentMousePosition.y=posY;
 
             this.handleAnchorDrag();
         },
@@ -776,7 +757,7 @@ export default {
                     mousePositionOffset = 0;
                 }
 
-                this.$set(this.anchorOffsets, 'a', mousePositionOffset);
+                this.anchorOffsets.a=mousePositionOffset;
             }
 
             if (this.anchorMouseDown.b) {
@@ -786,7 +767,7 @@ export default {
                     mousePositionOffset = 100;
                 }
 
-                this.$set(this.anchorOffsets, 'b', mousePositionOffset);
+                this.anchorOffsets.b=mousePositionOffset;
             }
         },
 
@@ -795,8 +776,8 @@ export default {
         },
 
         mouseUpEventHandler() {
-            this.$set(this.anchorMouseDown, 'a', false);
-            this.$set(this.anchorMouseDown, 'b', false);
+            this.anchorMouseDown.a=false;
+            this.anchorMouseDown.b=false;
         },
 
         updatePageUrl() {
@@ -806,8 +787,9 @@ export default {
         },
 
         handleFilterChange(payload) {
+
             this.page = 1;
-            this.$set(this.selectedFilters, payload.key, payload.value);
+            this.selectedFilters[payload.key]= payload.value;
 
             if (this.useUrlParams) {
                 this.updatePageUrl();

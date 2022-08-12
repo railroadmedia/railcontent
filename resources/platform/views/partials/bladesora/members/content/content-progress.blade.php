@@ -1,4 +1,4 @@
-<div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 bg-{{ $brand }}">
+<div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 bg-{{ $brand }} tw-rounded-[10px]">
     <div class="content-progress flex flex-row flex-wrap tw-py-6">
 
         @if(!empty($labelText))
@@ -25,7 +25,7 @@
                     </span>
                 </div>
                 <div class="flex flex-column align-center trophy ph-2 title">
-                    <div class="reward flex flex-row text-{{ $brand }} align-v-center dense tiny font-bold nowrap">
+                    <div class="reward flex flex-row text-{{ $brand }} align-v-center dense tw-text-xs font-bold nowrap">
                         <i class="fas fa-trophy text-{{ $brand }}"></i>
                         @if(!empty($xpAmount))
                         &nbsp;&nbsp;{{ $xpAmount }} XP
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="tw-flex tw-flex-col tw-text-white">
+        <div class="tw-flex tw-flex-col tw-text-white tw-w-full sm:tw-w-auto">
             @if(empty($showCompleteButton))
                 <a href="{{ $isCompleted ? $backButton['url'] : $nextLessonUrl }}"
                    class="tw-btn-secondary tw-text-lg tw-mb-0 tw-leading-[0] tw-border-[3px] tw-text-white">

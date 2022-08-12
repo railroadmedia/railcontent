@@ -8,6 +8,33 @@ import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
 import { saveExperience } from "../services"
 
+const experienceDescriptionMap = {
+  pianote: {
+    0: 'Start from the beginning. No experience required!',
+    1: 'For beginners who are familiar with the layout of the keyboard, have good piano posture, and can play chords and scales in at least 2 key signatures.',
+    2: 'For intermediate players who are comfortable playing a few songs and have some hand independence and dexterity.',
+    3: 'For advanced players who are comfortable playing many songs in multiple styles from start to finish and are looking to improve specific skills.',
+  },
+  singeo: {
+    0: 'Start from the beginning. No experience required!',
+    1: 'For beginners who want to know more about how their voice works and what specific exercises they should focus on to become a better singer.',
+    2: 'For intermediate singers who want to become better at singing songs and developing their vocal style.',
+    3: 'For singers who have a solid understanding of their own voices and want to deepen their knowledge of music theory, harmony, and performance technique.',
+  },
+  drumeo: {
+    0: 'Start from the beginning. No experience required!',
+    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills',
+    2: 'For intermediate player who are comfortable playing some songs and have some hand and foot independence.',
+    3: 'For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
+  },
+  guitareo: {
+    0: 'Start from the beginning. No experience required!',
+    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills',
+    2: 'For intermediate player who are comfortable playing some songs and have some hand and foot independence.',
+    3: 'For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
+  }
+}
+
 const props = defineProps({
   brand: {
     type: String,
@@ -73,7 +100,7 @@ function goBack() {
         >
           <ExperienceCardContent
             title="Level 1"
-            subtitle="Start from the beginning. No experience required!"
+            :subtitle="experienceDescriptionMap[brand][0]"
             level="1"
           />
         </SquaredCard>
@@ -85,7 +112,7 @@ function goBack() {
         >
           <ExperienceCardContent
             title="Level 2-3"
-            subtitle="For beginners who can hold your sticks, set up your kit, and can play a few beats and fills"
+            :subtitle="experienceDescriptionMap[brand][1]"
             level="2-3"
           />
         </SquaredCard>
@@ -97,7 +124,7 @@ function goBack() {
         >
           <ExperienceCardContent
             title="Level 4-6"
-            subtitle="For intermediate player who are comfortable playing some songs and have some hand and foot independence."
+            :subtitle="experienceDescriptionMap[brand][2]"
             level="4-6"
           />
         </SquaredCard>
@@ -109,7 +136,7 @@ function goBack() {
         >
           <ExperienceCardContent
             title="Level 7-10"
-            subtitle="For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills."
+            :subtitle="experienceDescriptionMap[brand][3]"
             level="7-10"
           />
         </SquaredCard>

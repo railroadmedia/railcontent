@@ -22,7 +22,7 @@
         @if(session()->has('email-invite-message'))
             <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
                 <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#c7ff9b] tw-border tw-border-[#3fd525]">
-                    <h3 class="tw-text-black tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
+                    <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
                 </div>
             </div>
         @endif
@@ -30,7 +30,7 @@
         @if(session()->has('access-code-claimed-success') && session()->get('access-code-claimed-success') == true)
             <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
                 <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#eee]">
-                    <h3 class="tw-text-black tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
+                    <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
                 </div>
             </div>
         @endif
@@ -63,7 +63,7 @@
         @component('partials.bladesora.members.components.home._new-section', [
             'brand' => brand(),
             'contentEndpoint' => '/laravel/public/railcontent/content',
-            'allLessonsUrl' => '', // todo: need url
+            'allLessonsUrl' => url()->route('platform.new-lessons'),
             'newContentJson' => $newContentJson,
             ])
         @endcomponent
@@ -108,7 +108,7 @@
             'usersList' => $usersList,
             ])
         @endcomponent
-        
+
         {{-- Live Banner --}}
         <coach-event
             brand="{{ $brand }}"

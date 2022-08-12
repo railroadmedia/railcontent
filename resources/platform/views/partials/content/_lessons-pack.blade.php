@@ -2,13 +2,11 @@
     <div class="flex flex-column align-v-center large-thumbnail guitareo">
         <div class="thumb-wrap corners-10">
             <a href="{{ $lessonsUrl }}">
-                <div class="thumb-img bg-center corners-10 square">
+                <div class="thumb-img bg-center corners-10 square bg-grey-2 dark:tw-bg-[#081825]">
                     <img
-                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                        data-ix-src="{{ $itemThumbnail }}"
-                        data-ix-fade
-                        class="bg-grey-2"
+                        src="{{ $itemThumbnail }}"
                         alt="{{ $itemTitle }} Thumbnail"
+                        loading="lazy"
                     >
                     @if(!empty($logoImage))
                         <div class="logo-image pa-1 corners-bottom-3">
@@ -41,7 +39,7 @@
             @if(!empty($lessonsUrl))
                 <a
                     href="{{ $lessonsUrl }}"
-                    class="tw-btn-secondary tw-text-black dark:tw-text-white"
+                    class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white"
                 >
                     <i class="fas fa-arrow-circle-right mr-1"></i> See Lessons
                 </a>

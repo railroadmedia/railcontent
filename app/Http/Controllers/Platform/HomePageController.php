@@ -10,8 +10,10 @@ use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -30,14 +32,16 @@ class HomePageController extends BaseController
     private UserMetricsService $userMetricsService;
     private UserPlaylistsService $userPlaylistsService;
     private PackService $packService;
+    private DatabaseManager $databaseManager;
 
     /**
-     * @param ContentService $contentService
-     * @param ContentFollowsService $contentFollowsService
-     * @param LiveStreamEventService $liveStreamEventService
-     * @param UserMetricsService $userMetricsService
-     * @param UserPlaylistsService $userPlaylistsService
-     * @param PackService $packService
+     * @param  ContentService  $contentService
+     * @param  ContentFollowsService  $contentFollowsService
+     * @param  LiveStreamEventService  $liveStreamEventService
+     * @param  UserMetricsService  $userMetricsService
+     * @param  UserPlaylistsService  $userPlaylistsService
+     * @param  PackService  $packService
+     * @param  DatabaseManager  $databaseManager
      */
     public function __construct(
         ContentService $contentService,
@@ -45,7 +49,8 @@ class HomePageController extends BaseController
         LiveStreamEventService $liveStreamEventService,
         UserMetricsService $userMetricsService,
         UserPlaylistsService $userPlaylistsService,
-        PackService $packService
+        PackService $packService,
+        DatabaseManager $databaseManager
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -53,6 +58,7 @@ class HomePageController extends BaseController
         $this->userMetricsService = $userMetricsService;
         $this->userPlaylistsService = $userPlaylistsService;
         $this->packService = $packService;
+        $this->databaseManager = $databaseManager;
     }
 
     public function homeRedirect()
@@ -119,7 +125,10 @@ class HomePageController extends BaseController
 
         $followedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
             brand(),
-            array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
+            array_merge(
+                config('railcontent.coachContentTypes', []),
+                config('railcontent.showTypes')[config('railcontent.brand')] ?? []
+            ),
             [],
             1,
             4
@@ -182,18 +191,23 @@ class HomePageController extends BaseController
         $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
-        $hasGear = count(user()->onboardingGear->filter(function($item) {
-            return $item->brand == brand();
-        })) > 0;
-        $hasTopics = count(user()->onboardingTopics->filter(function($item) {
-            return $item->brand == brand();
-        })) > 0;
-        $hasGenres = count(user()->onboardingGenres->filter(function($item) {
-            return $item->brand == brand();
-        })) > 0;
-        $hasExperience = count(user()->onboardingExperience->filter(function($item) {
-            return $item->brand == brand();
-        })) > 0;
+        $hasGear = count(
+                user()->onboardingGear->filter(function ($item) {
+                    return $item->brand == brand();
+                })
+            ) > 0;
+        $hasTopics = count(
+                user()->onboardingTopics->filter(function ($item) {
+                    return $item->brand == brand();
+                })
+            ) > 0;
+        $hasGenres = count(
+                user()->onboardingGenres->filter(function ($item) {
+                    return $item->brand == brand();
+                })
+            ) > 0;
+
+        $hasExperience = user()->onboardingExperience ? true : false;
 
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
@@ -201,7 +215,8 @@ class HomePageController extends BaseController
         $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
         $showNextLearningPathLesson = !$hasCompletedMethod;
 
-        $nextLearningPathLesson = $this->contentService->getNextContentForParentContentForUser($methodContent['id'], user()->id);
+        $nextLearningPathLesson =
+            $this->contentService->getNextContentForParentContentForUser($methodContent['id'], user()->id);
 
         $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
         $nextLearningPathLevel = $methodContent['level_rank'] ?? '1.1';
@@ -229,7 +244,7 @@ class HomePageController extends BaseController
                         'brand' => brand(),
                         'primaryPage' => 'coaches',
                         'firstContentSlug' => $eventCoachSlug,
-                        'firstContentId' => $eventCoachId
+                        'firstContentId' => $eventCoachId,
                     ]
                 );
                 $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
@@ -238,7 +253,6 @@ class HomePageController extends BaseController
             } else {
                 $currentEvent = null;
             }
-
         }
 
         return view('home.index', [
@@ -292,7 +306,7 @@ class HomePageController extends BaseController
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @param $brand
      * @return string
      */
@@ -336,25 +350,10 @@ class HomePageController extends BaseController
      */
     private function getHotForumTopics()
     {
-        // todo: railforums integration
-        return [];
-        //forum posts by administrators should not be displayed on the homepage
-//        $query = $this->userRepository->createQueryBuilder('user');
-//
-//        $query =
-//            $query->select('user.id')
-//                ->where('user.permissionLevel IN (:permission)')
-//                ->setParameter('permission', ['administrator']);
-//
-//        $administrators = array_column(
-//            $query->getQuery()
-//                ->getResult(),
-//            'id'
-//        );
-
         // latest forum posts
         $forumPosts =
-            $this->databaseManager->table('forum_posts')
+            $this->databaseManager->connection(config('railforums.database_connection_name'))
+                ->table('forum_posts')
                 ->select(['forum_posts.*', 'forum_threads.title'])
                 ->leftJoin('forum_threads', 'forum_threads.id', '=', 'forum_posts.thread_id')
                 ->leftJoin('forum_categories', 'forum_threads.category_id', '=', 'forum_categories.id')
@@ -363,12 +362,12 @@ class HomePageController extends BaseController
                 ->whereNull('forum_threads.deleted_at')
                 ->whereNull('forum_categories.deleted_at')
                 ->where('forum_posts.state', 'published')
-             //   ->whereNotIn('forum_posts.author_id', array_values($administrators))
+                //   ->whereNotIn('forum_posts.author_id', array_values($administrators))
                 ->orderBy('forum_posts.created_at', 'desc')
                 ->get()
                 ->groupBy('thread_id');
 
-        $forumThreadPosts = $forumPosts->splice(0, 6);
+        $forumThreadPosts = $forumPosts->splice(0, 3);
 
         $forumPosts = new Collection();
 
@@ -376,35 +375,11 @@ class HomePageController extends BaseController
             $forumPosts[] = $forumThreadPosts[0];
         }
 
-        $query = $this->userRepository->createQueryBuilder('user');
-        $users = [];
-
-        if (!empty(
-        $forumPosts->pluck('author_id')
-            ->toArray()
-        )) {
-            $users = $query->where(
-                $query->expr()
-                    ->in(
-                        'user.id',
-                        $forumPosts->pluck('author_id')
-                            ->toArray()
-                    )
-            )
-                ->getQuery()
-                ->getResult();
-        }
-
-        $usersIndexed = [];
-
-        foreach ($users as $user) {
-            $usersIndexed[$user->getId()] = $user;
-        }
+        $usersIndexed = User::query()->whereIn('id', $forumPosts->pluck('author_id')->toArray())->get()->keyBy('id');
 
         foreach ($forumPosts as $forumPostIndex => $forumPost) {
             if (isset($usersIndexed[$forumPost->author_id])) {
                 $user = $usersIndexed[$forumPost->author_id];
-                $userXP = UserPointsService::fetchPoints($forumPost->author_id);
 
                 $forumPosts[$forumPostIndex]->user = $user;
                 $forumPosts[$forumPostIndex]->content = preg_replace(
@@ -413,8 +388,8 @@ class HomePageController extends BaseController
                     ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
-                $forumPosts[$forumPostIndex]->user_xp = $userXP;
-                $forumPosts[$forumPostIndex]->xp_rank = map_experience_rank($userXP);
+                $forumPosts[$forumPostIndex]->user_xp = $user->total_xp;
+                $forumPosts[$forumPostIndex]->xp_rank = $user->getXpRank();
             } else {
                 unset($forumPosts[$forumPostIndex]);
             }
@@ -613,6 +588,7 @@ class HomePageController extends BaseController
             false,
             false
         );
+
         return (new ContentFilterResultsEntity(
             ['results' => $courses['results'], 'total_results' => $courses['total_results']]
         ))->toResponseRawJson();

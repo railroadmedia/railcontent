@@ -1,9 +1,20 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=d338a0a783a205f1af0749638a2ef561",
-    "/platform/js/profile.js": "/platform/js/profile.js?id=350fea0c1008c2d8b5e023e4e5e7aa70",
-    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=1470c1bc38b2183f267066ac80870234",
-    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=d0f5e25ffaeaabd08c0de972e3f538ca",
-    "/platform/css/app.css": "/platform/css/app.css?id=22082f09c5a336f7242353772cb6bd4d",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=8e7457eda3c6e79dc1955db8654679e3",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=ad05670e68c41dafe3aaa6a81a52928f"
+    "/platform/js/app.js": "/platform/js/app.js?id=69974874a5d432fe4a4b40334035c8e7",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=52c8a38740ada8491a34ccc3a0555e83",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=85bc117f3464ddebca7018b9f14c9911",
+    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=82fd2061d77099d27eb66e163ac68a2c",
+    "/platform/css/app.css": "/platform/css/app.css?id=6727ef9da0806778b197778b75095e5b",
+    "/marketing/js/app.js": "/marketing/js/app.js?id=3cb1ba71e07cb8f567ed5da10870612e",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=1b935c2a3102273645ea2dda0bec6e3f",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=68d70d7957eaafbb640bf0b2ef818164",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=fe1ba5858a2b0936b1ddf3ce66b36b00",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=76f5b4a0c3cdfe5e448388e66674ece2",
+    "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=d16177f0e67c0380be0c0d3f26a4510f",
+    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=f3c44171923c2db077fa53c49653c1e6",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=3048a04735d43bb461bac292840ba56e",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=5418c03142eb1d5a882e79a255344c21",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=82d198fa7b042e45a615a89078ba9ec2",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=c0d1f718effc958056637c6015d2ac2d",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=76eb198bac1b38f4e57b225c84118c7b"
 }

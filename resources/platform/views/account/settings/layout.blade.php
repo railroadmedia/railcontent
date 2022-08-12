@@ -1,3 +1,31 @@
+@php
+    /**
+     * @var \Modules\UserManagementSystem\Models\User $user
+     */
+    $hasGear =
+        count(
+            user()->onboardingGear->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasTopics =
+        count(
+            user()->onboardingTopics->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasGenres =
+        count(
+            user()->onboardingGenres->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+
+    $hasExperience = user()->onboardingExperience ? true : false;
+
+    $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience;
+@endphp
+
 @extends('partials.layout')
 
 @section('content')
@@ -6,8 +34,7 @@
         id="pageHeader"
         class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
         dusk="profile-header"
-        style="background-image:url({{ cf_img('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg', ["quality" => 80, "blur" => 40, "width" => 600, "fit" => "crop"]) }});"
-        data-ix-bg="{{ 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg' }}"
+        style="background-image:url('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg');"
     >
         <div class="header-gradient-overlay absolute-fill"></div>
     
@@ -20,13 +47,10 @@
                     {{ $brand }}
                     {{ $user->access_level }}"
                 >
-                    <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]"
-                        style="background-image: url(https://musora.imgix.net/https%3A%2F%2Fs3.amazonaws.com%2Fpianote%2Fdefaults%2Favatar.png?ixlib=js-2.3.2&amp;fit=crop&amp;crop=faces%2Cedges&amp;auto=format&amp;w=171&amp;h=171&amp;dpr=1&amp;s=1bfa63f0a133082f4c2edb5f7f252f25)"
-                    >
+                    <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
                         @if($user->profile_picture_url)
                             <img class="tw-inline-block tw-rounded-full tw-h-full" 
-                                 src="{{ cf_img($user->profile_picture_url, ["quality" => 50, "blur" => 2, "width" => 165, "height" => 165, "fit" => "crop"]) }}"
-                                 data-ix-src="{{ $user->profile_picture_url }}"
+                                 src="{{ $user->profile_picture_url }}"
                             >
                         @endif
                     </div>
@@ -50,27 +74,15 @@
                 </div>
     
                 {{-- Calls To Action --}}
-                @if($user->access_level !== 'pack')
-                    <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
-    
-                        {{-- Referral Button --}}  
-                        {{-- <a href="/referral/invite-a-friend" 
-                            class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-mb-2 tw-max-w-[267px] tw-mx-2 "
-                        >
-                            <i aria-hidden="true" class="fas fa-gift md:tw-mr-2"></i> 
-                            <span class="tw-leading-none tw-mt-0.5">invite a friend</span>
-                        </a> --}}
-                        
-                        {{-- Complete Your Account --}}
-                        @if(true) {{-- Check if User Has Finished Account --}}
-                            <a href="/onboarding" 
-                                class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
-                            >
-                                Complete Your Account
-                            </a>
-                        @endif
-                    </div>
-                @endif
+                <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
+                    {{-- Complete Your Account / Update Your Account --}}
+                    <a href="/onboarding" 
+                        class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
+                    >
+                        {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }}
+                    </a>
+                </div>
+
             </div>
     
         </div>
@@ -129,8 +141,8 @@
             <div class="tw-flex tw-flex-col grow">
                 <div class="tw-flex tw-flex-row tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     @foreach($sections as $index => $section)
-                        <a href="{{ $section['url'] }}" class="tw-z-10 tw-mb-[-2px] tw-w-full tw-flex tw-flex-row tw-items-center tw-justify-center tw-font-bebas-neue tw-pb-2 ph-1 tw-mr-2 tw-transition tw-no-underline hover:tw-text-black dark:hover:tw-text-white
-                            {{ $section['active'] ? 'tw-border-b-2 tw-border-black dark:tw-border-white tw-text-black dark:tw-text-white' : 'visited:tw-text-gray-400 tw-text-gray-400 dark:tw-text-[#80A0B9]' }}">
+                        <a href="{{ $section['url'] }}" class="tw-z-10 tw-mb-[-2px] tw-w-full tw-flex tw-flex-row tw-items-center tw-justify-center tw-font-bebas-neue tw-pb-2 ph-1 tw-mr-2 tw-transition tw-no-underline hover:tw-text-[#00101D] dark:hover:tw-text-white
+                            {{ $section['active'] ? 'tw-border-b-2 tw-border-black dark:tw-border-white tw-text-[#00101D] dark:tw-text-white' : 'visited:tw-text-gray-400 tw-text-gray-400 dark:tw-text-[#80A0B9]' }}">
                             <i class="tw-text-lg {{ $section['icon'] }}"></i>
                             <span class="hide-xs-only tw-ml-2 tw-text-lg xl:tw-text-xl tw-leading-none">{{ $section['title'] }}</span>
                         </a>

@@ -107,7 +107,7 @@
 
         <!-- Response Message -->
         <div class="tw-flex tw-z-150 tw-fixed tw-rounded-lg tw-left-8 tw-p-6 tw-text-base tw-shadow-lg tw-mr-8 tw-transition-all tw-duration-200 tw-ease-in-out"
-             :class="[responseMessageVisible ? 'tw-bottom-8': 'tw--bottom-44', formSuccessful ? 'tw-bg-green-50 tw-text-green-600' : 'tw-bg-red-50 tw-text-red-600']"
+             :class="[responseMessageVisible ? 'tw-bottom-8': 'tw--bottom-52', formSuccessful ? 'tw-bg-green-50 tw-text-green-600' : 'tw-bg-red-50 tw-text-red-600']"
         >
             <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6 tw-text-green-500 tw-mr-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />

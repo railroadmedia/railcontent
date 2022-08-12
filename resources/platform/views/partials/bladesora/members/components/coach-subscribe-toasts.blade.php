@@ -2,7 +2,7 @@
     <div class="tw-sticky tw-bottom-0 tw-text-center tw-pb-6 tw-hidden" id="unsubscribeToast" style="z-index: 2000">
         <div
             class="
-                tw-bg-{{ $brandName }}
+                tw-bg-{{ $brand }}
                 tw-px-3
                 tw-py-2
                 tw-w-4/6
@@ -22,7 +22,7 @@
     <div class="tw-sticky tw-bottom-0 tw-text-center tw-pb-6 tw-hidden" id="subscribeToast" style="z-index: 2000">
         <div
             class="
-                tw-bg-{{ $brandName }}
+                tw-bg-{{ $brand }}
                 tw-px-3
                 tw-py-2
                 tw-w-4/6

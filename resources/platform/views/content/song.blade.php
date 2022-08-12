@@ -6,6 +6,15 @@
 
 @section('inject-components')
     <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
+
+    <script type="text/javascript">
+        document.querySelectorAll('.song-play-button').forEach(item => {
+            item.addEventListener("click", function () {
+                console.log('test');
+                document.getElementById('open-exercise-button').click();
+            });
+        })
+    </script>
 @endsection
 
 @section('content')
@@ -17,19 +26,19 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="tw-flex xl:tw-flex-row tw-flex-col align-v-top ">
 
-            <div class="flex flex-column pr-1 p-sm-down grow">
+            <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow">
                 {{-- Back Button --}}
                 <a href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}" 
-                   class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center">
+                   class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center tw-w-fit">
                    <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
                    <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 {{-- Song Container --}}
-                <div class="flex flex-row pt-4 pb-4 song-content-container">
+                <div class="tw-flex tw-flex-row pt-4 pb-4 song-content-container">
 
                     <div class="tw-flex tw-flex-col song-play-button song-album-cover tw-mr-6">
                         <div class="2xl:tw-w-screen tw-aspect-square tw-max-w-[338px] tw-min-w-[175px] corners-10 flex-center flex-column shadow-md">
-                            <img src="{{ cf_img($lessonContent->fetch('data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url')), ['width' => 400, 'height' => 400]) }}"
+                            <img src="{{ $lessonContent->fetch( 'data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url') ) }}"
                                  alt="Album Art"
                                  class="corners-10"
                             >
@@ -44,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-column tw-w-full song-details">
+                    <div class="tw-flex flex-column tw-w-full song-details">
                         <div>
                             <h1 class="text-black font-bold item-title heading dark:tw-text-white">{{ $lessonContent->fetch('fields.title') }}</h1>
                             <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] mt-1 mb-3">
@@ -59,14 +68,21 @@
                                     Play
                                 </button>
 
-                                <button class="tw-mb-3 {{ $lessonContent->fetch('progress_percent', 0) === 100 ? 'tw-btn-primary tw-bg-'.$brand : 'tw-btn-secondary tw-text-'.$brand }}">
-                                    <i class="fas fa-check tw-mr-2 tw-text-base"></i>
-                                    @if($lessonContent->fetch('progress_percent', 0) === 100)
-                                        <span>Completed</span> 
-                                    @else
-                                        <span>Mark as Complete</span>
-                                    @endif
+                                <button class="btn tw-mb-3 completeButton collapse-250 {{ $lessonContent->fetch('progress_percent', 0) === 100 ? 'is-complete' : '' }}"
+                                    data-tooltip="Mark Lesson as Complete"
+                                    data-content-id="{{ $lessonContent['id'] }}">
+
+                                    <span class="incompleted bg-{{ $themeColor }} inverted text-{{ $themeColor }}">
+                                        <i class="fas fa-check"></i>
+                                        <span class="ml-1 tw-text-lg">Mark as Complete</span>
+                                    </span>
+
+                                    <span class="completed bg-{{ $themeColor }} text-white">
+                                            <i class="fas fa-check"></i>
+                                            <span class="ml-1 tw-text-lg">Completed</span>
+                                        </span>
                                 </button>
+
                             </div>
 
                             <div class="flex-row content-lesson-action-buttons">
@@ -120,6 +136,7 @@
                                         <div class="flex flex-column grow">
                                             <content-assignment
                                                 theme-color="{{ $themeColor }}"
+                                                brand="{{ $brand }}"
                                                 timecode="{{ $assignment->fetch('data.timecode', 0) }}"
                                                 id="{{ $assignment->fetch('id') }}"
                                                 xp="{{ $assignment->fetch('xp') }}"
@@ -133,7 +150,7 @@
                                     </div>
                                 @endforeach
 
-                                @include('bladesora::members.partials._completion-bonus', [
+                                @include('partials.bladesora.members.partials._completion-bonus', [
                                     "xpBonus" => $lessonContent->fetch('xp_bonus', 0),
                                     "isComplete" => $lessonContent->fetch('progress_percent', 0) === 100,
                                     "themeColor" => 'drumeo'
@@ -143,11 +160,9 @@
                     </div>
                 @endif
 
-                <div class="flex flex-row mt-3 song-comments-container">
-                    {{-- todo: fix once comment component is working --}}
-                    
-                    {{-- <comments
-                        brand="drumeo"
+                <div class="flex flex-row song-comments-container">
+                    <comments
+                        :brand="$brand"
                         theme-color="{{ $themeColor }}"
                         content-id="{{ $lessonContent->fetch('id') }}"
                         user-id="{{ user()->id }}"
@@ -156,7 +171,7 @@
                         user-xp="{{ user()->total_xp }}"
                         user-access-level="{{ user()->access_level }}"
                         :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                    ></comments>  --}}
+                    ></comments>
                 </div>
             </div>
 

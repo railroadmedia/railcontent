@@ -29,7 +29,7 @@
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => '/support',
+                "url" => '/contact',
             ],
             "Careers" => [
                 "iconClass" => "fas fa-users",

@@ -75,8 +75,15 @@ const onCollapseSidebar = (val) => {
     } else {
       isSidebarHidden.value = false;
       isSidebarCollapsed.value = !isSidebarCollapsed.value;
+      //Dom manipulation... 
+      if(isSidebarCollapsed.value) {
+        document.body.classList.add('sidebar-collapsed')
+      } else {
+        document.body.classList.remove('sidebar-collapsed')
+      }
     }
   }
+  //save to local storage
   localStorage.setItem("isSidebarCollapsed", isSidebarCollapsed.value);
 };
 
@@ -92,6 +99,7 @@ const onColorModeToggle = (val) => {
   }
 };
 
+//LifeCycle Methods
 
 onBeforeMount(() => {
   //Set Dark Mode Based on User Preferences
@@ -107,16 +115,22 @@ onBeforeMount(() => {
 
   //Set Sidebar State
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
+
   if (smallBreakpoint.matches) {
-    if (localStorage.getItem("isSidebarHidden")) {
-      isSidebarHidden.value = JSON.parse(localStorage.getItem("isSidebarHidden"));
-    } else {
+    //Close sidebar by default in mobile
+    if(!isSidebarHidden.value) {
       isSidebarHidden.value = true;
+      isSidebarCollapsed.value = false;
     }
-    isSidebarCollapsed.value = false;
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
+      //Dom manipulation... 
+      if(isSidebarCollapsed.value) {
+        document.body.classList.add('sidebar-collapsed')
+      } else {
+        document.body.classList.remove('sidebar-collapsed')
+      }
   } else if (props.forceSidebarHidden) {
     isSidebarCollapsed.value = true;
   }
@@ -181,12 +195,12 @@ onUnmounted(() => {
         </section>
 
         <!-- Footer -->
-        <Footer />
+        <Footer :brand="brand"/>
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">
           <div v-if="!isSidebarCollapsed && !isSidebarHidden" @click="isSidebarHidden = true" class="
-              tw-absolute
+              tw-fixed
               lg:tw-hidden
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
             "></div>
