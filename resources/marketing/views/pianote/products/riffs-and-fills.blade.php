@@ -1,6 +1,6 @@
-@extends('global-layout')
+@extends('pianote._partials.layout')
 
-@section('global-head')
+@section('head-includes')
     <title>Piano Riffs & Fills | Pianote</title>
     <meta name="description" content="The Shortcuts To Sounding Great On The Piano">
 
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/assets/marketing/riffs-and-fills.css">
 @stop
 
-@section('global-body')
+@section('layout-body')
     @include('sales.nav', [
         "cartVersion" => true
     ])
@@ -280,6 +280,10 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
     </section>
 
     @include('sales.footer')
+
+@stop
+
+@section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
