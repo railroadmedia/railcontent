@@ -3,6 +3,8 @@
 namespace App\Nova\Flexible\Layouts;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Layouts\Layout;
@@ -30,19 +32,23 @@ class ImageLayout extends Layout
      */
     public function fields()
     {
+        $uuid  = Str::uuid();
+
         return [
             Image::make('Image','path')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-                    return $request->file('path')->getClientOriginalName();
+
+                    return $request->uuid.'-'.$request->file('path')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('id', 'id')->hide()->hideFromDetail()
+            Hidden::make('id', 'id'),
+            Hidden::make('uuid')->withMeta(["value" => $uuid]),
         ];
     }
 
