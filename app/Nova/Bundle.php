@@ -36,15 +36,14 @@ class Bundle extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
             Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundle')->first()->id),
             Text::make('Name')->required(),
-            Text::make('Slug')
-                ->asHtml()
-                ->required()
-                ->displayUsing(function($value){
-                    return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$value.'">'.$value.'</a>';
-                }),
+            //slug field for displaying to use a tag
+            Text::make('Slug', function(){
+                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';
+            })->required()->asHtml(),
+            //slug field for saving
             Text::make('Sku')->hideFromIndex()->required(),
             Image::make('Thumbnail')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->deletable(false)
@@ -59,7 +58,7 @@ class Bundle extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Image::make('Thumbnail Logo', 'thumbnail_logo')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
@@ -74,7 +73,7 @@ class Bundle extends Resource
                 }),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
             Image::make('Meta Image', 'meta_img')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
@@ -89,7 +88,7 @@ class Bundle extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Image::make('Bundle Image', 'bundle_img')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
@@ -103,7 +102,7 @@ class Bundle extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Image::make('Page Logo', 'page_logo')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()

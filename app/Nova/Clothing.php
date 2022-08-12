@@ -13,11 +13,14 @@ use App\Nova\Flexible\Presets\ImagePreset;
 use App\Nova\Flexible\Presets\SizePreset;
 use App\Nova\Flexible\Presets\SpecPreset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -38,6 +41,7 @@ class Clothing extends Resource
     public function fields(NovaRequest $request)
     {
         $types = ProductType::whereIn('name', ['Hat', 'Shirt', 'Hoodie'])->get();
+        $uuid  = Str::uuid();
 
         return [
             ID::make()->sortable(),
@@ -47,39 +51,74 @@ class Clothing extends Resource
                 $types->where('name', 'Shirt')->first()->id => 'Shirt',
                 $types->where('name', 'Hoodie')->first()->id => 'Hoodie'
             ])->displayUsingLabels(),
+            Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required(),
-            Text::make('Slug')
-                ->asHtml()
-                ->required()
-                ->displayUsing(function($value){
-                    return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$value.'">'.$value.'</a>';
-                }),
+            //slug field for displaying to use a tag
+            Text::make('Slug', function(){
+                $slug = str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $this->slug );
+
+                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$slug.'">'.$slug.'</a>';
+            })->asHtml(),
+            //slug field for saving
+            Text::make('Slug')->required()->hideFromDetail()->hideFromIndex(),
             Text::make('Sku')->hideFromIndex()->required(),
+            Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Image::make('Thumbnail')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->required()
                 ->storeAs(function (Request $request){
-                    return $request->file('thumbnail')->getClientOriginalName();
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(is_null($value)) return null;
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+            Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
             Image::make('Meta Image', 'meta_img')
-                ->disk('s3')
+                ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
                 ->deletable(false)
-                ->required()
                 ->storeAs(function (Request $request){
-                    return $request->file('meta_img')->getClientOriginalName();
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(is_null($value)) return null;
@@ -101,6 +140,7 @@ class Clothing extends Resource
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Membership Discount', 'membership_discount')->default(false)->hideFromIndex(),
             Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
+            Number::make('Display order', 'display_order'),
             Flexible::make('Images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
