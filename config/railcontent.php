@@ -993,6 +993,7 @@ return [
         'student-review',
         'boot-camps',
         'recording',
+        'pack-bundle-lesson',
     ],
     'topLevelContentTypes' => [
         'learning-path',
