@@ -50,6 +50,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.coaches');
 
+        Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.new-lessons');
+
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
             ->whereIn('contentTypeName', [
