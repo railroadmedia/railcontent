@@ -1022,13 +1022,9 @@
 
       }
 
-      //&.sold-out .card-inside section .top-image .top-left-badge {
-      //  transform: rotate(-35deg);
-      //  padding: 24px 28px 4px;
-      //  margin: -9px -30px;
-      //  border-radius: 0;
-      //  background: red;
-      //}
+      &.sold-out .card-inside section .top-image  {
+        filter: saturate(0.3);
+      }
 
       .card-inside {
         background: #FFF;
