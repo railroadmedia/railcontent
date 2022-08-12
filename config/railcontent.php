@@ -1370,6 +1370,7 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
+            'unit' => 'lessons'
         ],
         'guitareo' => [
             'learning-path' => 'levels',
