@@ -2067,6 +2067,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'length_in_seconds',
         ],
 
         'unit-part' => [
