@@ -1882,8 +1882,8 @@ class ContentService
 
     public function fillParentContentDataColumnForContentIds(array $contentIds)
     {
-        $hierarchyRows = DB::connection(config('railcontent.database_connection_name'))
-            ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
+        $hierarchyRows = $this->contentRepository->query()
+            ->from(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',
                 'rcp1.id',
