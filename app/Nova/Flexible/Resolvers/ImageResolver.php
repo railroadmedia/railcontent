@@ -54,13 +54,14 @@ class ImageResolver implements ResolverInterface
                 ];
             });
 
+
             //update and insert items
             foreach($images as $image){
                 if(!is_null($image['id'])) {
                     $dbImg = Image::find($image['id']);
                     if($dbImg->path !== $image['path']){
-                        Storage::disk('s3')->delete($dbImg->path);
-                        Storage::disk('s3')->put('/', $image['path']);
+                        Storage::disk('nova_s3')->delete($dbImg->path);
+                        Storage::disk('nova_s3')->put('/', $image['path']);
 
                         $dbImg->path = $image['path'];
                     }
