@@ -23,7 +23,9 @@
         "md": "npm run marketing-development",
         "mp": "npm run marketing-production",
         "mrk": "parcel build resources/marketing/assets/parcel/*.js --dist-dir public/marketing/parcel/css --no-cache --log-level error",
-        "mrkw": "parcel watch resources/marketing/assets/parcel/*.js --out-dir public/assets/parcel --log-level 4"
+        "mrkw": "parcel watch resources/marketing/assets/parcel/*.js --out-dir public/assets/parcel --log-level 4",
+        "build-filter": "cd nova-components/Filter && npm run dev",
+        "build-filter-prod": "cd nova-components/Filter && npm run prod"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
