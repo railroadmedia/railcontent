@@ -1,13 +1,13 @@
 <script>
-export default {
-  name: 'Footer',
-  props: {
-    brand: {
-      type: String,
-      default: () => "drumeo",
-    },
+  export default {
+    name: 'Footer',
+    props: {
+      brand: {
+        type: String,
+        default: () => "drumeo",
+      },
+    }
   }
-}
 </script>
 
 <template>
