@@ -20,20 +20,22 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('sku')->unique();
-            $table->string('thumbnail')->unique()->nullable();
+            $table->string('promo_code')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->string('badge_text')->nullable();
             $table->string('header_text')->nullable();
             $table->string('short_desc')->nullable();
             $table->string('meta_desc')->nullable();
-            $table->string('meta_img')->unique()->nullable();
+            $table->string('meta_img')->nullable();
             $table->string('special_text')->nullable();
-            $table->string('thumbnail_logo')->nullable()->unique();
-            $table->string('page_logo')->nullable()->unique();
+            $table->string('thumbnail_logo')->nullable();
+            $table->string('page_logo')->nullable();
             $table->decimal('price',8,2);
             $table->decimal('discounted_price',8,2)->nullable();
             $table->longText('overview')->nullable();
             $table->string('study_text')->nullable();
             $table->string('video_src')->nullable();
-            $table->string('product_img')->nullable()->unique();
+            $table->string('product_img')->nullable();
             $table->string('instructor_name')->nullable();
             $table->longText('instructor_desc')->nullable();
             $table->integer('size_chart_id')->nullable();
@@ -48,6 +50,7 @@ return new class extends Migration
             $table->boolean('bundle_lifetime_access')->default(false);
             $table->boolean('bundle_free_shipping')->default(false);
             $table->boolean('size_case_sensitive')->default(false);
+            $table->integer('display_order');
             $table->timestamps();
         });
     }
