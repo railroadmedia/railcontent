@@ -57,14 +57,14 @@ return [
             'cloudfront_access_url' => env('MWP_AWS_S3_CLOUDFRONT_ACCESS_URL'),
         ],
 
-        's3' => [
+        'nova_s3' => [
             'driver' => 's3',
-            'key' => env('S3_KEY'),
-            'secret' => env('S3_SECRET'),
-            'region' => env('S3_REGION'),
-            'bucket' => env('S3_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
+            'key' => env('NOVA_S3_KEY'),
+            'secret' => env('NOVA_S3_SECRET'),
+            'region' => env('NOVA_S3_REGION'),
+            'bucket' => env('NOVA_S3_BUCKET'),
+            'url' => null,
+            'endpoint' => null,
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'visibility' => 'public',
         ],
