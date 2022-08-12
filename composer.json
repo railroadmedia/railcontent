@@ -33,7 +33,6 @@
         "railroad/railnotifications": "v3.0.x-dev as v3.0",
         "railroad/usora": "3.0.*",
         "spatie/laravel-markdown": "^2.2",
-	    "railroad/mailora": "^3.0",
         "spatie/laravel-permission": "^5.5",
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0",
@@ -61,7 +60,8 @@
         "files": [
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
-            "app/Modules/Brand/helpers/brand_helpers.php"
+            "app/Modules/Brand/helpers/brand_helpers.php",
+            "app/Modules/Brand/helpers/prices.php"
         ]
     },
     "autoload-dev": {
