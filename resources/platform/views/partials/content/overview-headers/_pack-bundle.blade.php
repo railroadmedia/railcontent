@@ -4,7 +4,7 @@
 
 @component('partials.bladesora.members.components.header-banner', [
     'hideUser' => true,
-    'backgroundImage' => $packHeader,
+    'backgroundImage' => 'https://musora.com/cdn-cgi/image/width=1200/'.$packHeader,
 ])
     @slot('content')
         <div class="flex flex-column pr-1 align-v-bottom align-h-center">
