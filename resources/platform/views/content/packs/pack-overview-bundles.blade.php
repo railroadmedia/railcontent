@@ -56,10 +56,11 @@
                         </div>
                     </div>
                 @endif
-                <img
-                        alt="{{ $pack->fetch('title') }} Logo"
-                        src="{{ $pack->fetch('data.logo_image_url') }}"
-                        style="width: 100%;max-width:480px;"
+                {{-- Logo --}}
+                <img alt="{{ $pack->fetch('title') }} Logo"
+                    class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
+                    src="{{ $pack->fetch('data.logo_image_url') }}" 
+                    onload="this.classList.remove('tw-opacity-0')"
                 >
             </div>
         @endslot

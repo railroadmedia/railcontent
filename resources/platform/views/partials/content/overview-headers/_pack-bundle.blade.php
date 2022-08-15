@@ -11,11 +11,13 @@
             <div class="pv-5"></div> 
             <div class="pv-5 hide-xs-only"></div> 
             <div class="pv-5 hide-md-down"></div> 
+            {{-- Pack Logo --}}
             <img alt="{{ $pack->fetch('title') }} Logo"
+                 class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
                  src="{{ $pack->fetch('data.logo_image_url') }}" 
-                 style="width: 100%; max-width: 480px;"
+                 onload="this.classList.remove('tw-opacity-0')"
             >
-
+                
             {{-- @if($pack['slug'] !== 'learn-songs-faster')
                 <h1 class="heading text-white mb-3">
                     {{ $parentContent->fetch('fields.title') }}

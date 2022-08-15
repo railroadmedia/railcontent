@@ -21901,6 +21901,12 @@ a:visited{
 .tw-top-1{
   top: 0.25rem !important;
 }
+.tw-top-0{
+  top: 0px !important;
+}
+.tw-left-0{
+  left: 0px !important;
+}
 .tw-z-10{
   z-index: 10 !important;
 }
@@ -22027,6 +22033,10 @@ a:visited{
 .tw-mx-8{
   margin-left: 2rem !important;
   margin-right: 2rem !important;
+}
+.tw-mx-auto{
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
@@ -22508,6 +22518,9 @@ a:visited{
 .tw-h-52{
   height: 13rem !important;
 }
+.tw-h-full{
+  height: 100% !important;
+}
 .tw-max-h-8{
   max-height: 2rem !important;
 }
@@ -22765,6 +22778,12 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-32{
+  width: 8rem !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
 .tw-min-w-\[175px\]{
   min-width: 175px !important;
 }
@@ -22800,6 +22819,9 @@ a:visited{
 }
 .tw-max-w-none{
   max-width: none !important;
+}
+.tw-max-w-\[480px\]{
+  max-width: 480px !important;
 }
 .tw-max-w-\[665px\]{
   max-width: 665px !important;
@@ -23617,6 +23639,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-black{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23688,6 +23714,9 @@ a:visited{
 .tw-bg-contain{
   background-size: contain !important;
 }
+.tw-bg-cover{
+  background-size: cover !important;
+}
 .tw-bg-fixed{
   background-attachment: fixed !important;
 }
@@ -23697,12 +23726,27 @@ a:visited{
 .tw-bg-center{
   background-position: center !important;
 }
+.tw-bg-top{
+  background-position: top !important;
+}
 .tw-bg-no-repeat{
   background-repeat: no-repeat !important;
+}
+.tw-object-contain{
+  -o-object-fit: contain !important;
+     object-fit: contain !important;
 }
 .tw-object-cover{
   -o-object-fit: cover !important;
      object-fit: cover !important;
+}
+.tw-object-fill{
+  -o-object-fit: fill !important;
+     object-fit: fill !important;
+}
+.tw-object-top{
+  -o-object-position: top !important;
+     object-position: top !important;
 }
 .tw-p-4{
   padding: 1rem !important;
@@ -23930,6 +23974,18 @@ a:visited{
   padding-top: 0.375rem !important;
   padding-bottom: 0.375rem !important;
 }
+.tw-px-4{
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+.tw-py-8{
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+.tw-px-4{
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -24100,6 +24156,9 @@ a:visited{
 }
 .tw-pl-5{
   padding-left: 1.25rem !important;
+}
+.tw-pb-0{
+  padding-bottom: 0px !important;
 }
 .tw-text-left{
   text-align: left !important;
@@ -24493,6 +24552,9 @@ a:visited{
 .tw-opacity-30{
   opacity: 0.3 !important;
 }
+.tw-opacity-0{
+  opacity: 0 !important;
+}
 .tw-shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color) !important;
@@ -24563,6 +24625,11 @@ a:visited{
 }
 .tw-transition-none{
   transition-property: none !important;
+}
+.tw-transition-opacity{
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
 }
 .tw-duration-300{
   transition-duration: 300ms !important;
@@ -24921,6 +24988,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#000C17\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -25623,6 +25694,18 @@ a:visited{
   .md\:tw-py-8{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
+  }
+  .md\:tw-px-8{
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+  .md\:tw-py-11{
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+  .md\:tw-px-8{
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
   }
   .md\:tw-pb-0{
     padding-bottom: 0px !important;
