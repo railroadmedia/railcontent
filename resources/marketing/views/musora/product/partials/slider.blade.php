@@ -22,7 +22,7 @@
                 @endif
                 @if (!empty($images))
                     @foreach ($images as $image)
-                        <div style="display: none;">
+                        <div @if(count($images) > 1)style="display: none;"@endif>
                             <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif">
                         </div>
                     @endforeach
