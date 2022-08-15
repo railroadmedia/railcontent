@@ -1,11 +1,8 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=29ac24df4f9c2672260ba4cd0994f25b",
+    "/platform/js/app.js": "/platform/js/app.js?id=a510d6087f12030b44b35ebd2d2a4e1a",
     "/platform/js/profile.js": "/platform/js/profile.js?id=52c8a38740ada8491a34ccc3a0555e83",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=85bc117f3464ddebca7018b9f14c9911",
     "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=82fd2061d77099d27eb66e163ac68a2c",
-    "/platform/css/app.css": "/platform/css/app.css?id=c3c3ee1442285bd4026d8e482def7077",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=3cb1ba71e07cb8f567ed5da10870612e",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=1b935c2a3102273645ea2dda0bec6e3f",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=68d70d7957eaafbb640bf0b2ef818164",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=fe1ba5858a2b0936b1ddf3ce66b36b00",
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=76f5b4a0c3cdfe5e448388e66674ece2",
@@ -14,6 +11,7 @@
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=3048a04735d43bb461bac292840ba56e",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=8d928af8c921933eb34ef08375e1c712",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=82d198fa7b042e45a615a89078ba9ec2",
+    "/platform/css/app.css": "/platform/css/app.css?id=2104577d8774c7ac0219fb367e2c9503",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=c0d1f718effc958056637c6015d2ac2d",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=76eb198bac1b38f4e57b225c84118c7b"

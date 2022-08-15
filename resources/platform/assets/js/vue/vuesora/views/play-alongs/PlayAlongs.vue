@@ -10,18 +10,42 @@
                 </h1>
             </div>
 
-            <div class="flex flex-column enable-filters mr-1">
-                <button class="tw-btn-circle tw-mr-1"
-                        :class="isShuffle ? 'tw-btn-primary tw-bg-[#3F3F46] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]' : 'tw-btn-secondary tw-text-[#3F3F46] dark:tw-text-white '" 
+            <div class="flex flex-column mr-1">
+                <InputLabel
+                    inputOverride="tw-w-full dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+                    :brand="brand"
+                    inputType="text"
+                    id="playAlongsSearchInput"
+                    inputName="search"
+                    placeholder="Search..."
+                    :inputErrors="[]"
+                    :removeDefaultInputStyles="true"
+                    @onChange="handleTitleChange"
+                    @onEnter="handleTriggerSearch"
+                />
+            </div>
+
+            <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
+                <button :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]`" 
+                        title="Search Play Along by Term"
+                        @click="handleTriggerSearch"
+                >
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
+                <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
+                        :class="isShuffle ? `tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
                         title="Toggle Shuffle"
                         @click="toggleShuffle"
                 >
                     <i class="fas fa-random"></i>
                 </button>
             </div>
-            <div class="flex flex-column enable-filters">
-                <button class="tw-btn-circle tw-mr-1"
-                        :class="displayFilters ? 'tw-btn-primary tw-bg-[#3F3F46] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]' : 'tw-btn-secondary tw-text-[#3F3F46] dark:tw-text-white '" 
+            <div class="flex flex-column enable-filters tw-h-[50px]">
+                <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
+                        :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`" 
                         title="Toggle Filters"
                         @click="displayFilters = !displayFilters"
                 >
@@ -174,6 +198,8 @@ import PlayAlongsFilters from './PlayAlongsFilters.vue';
 import Pagination from '../../components/Pagination.vue';
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation.vue';
 import ProgressTracker from "../../assets/js/classes/progress-tracker";
+import InputLabel from "../../../components/InputLabel/InputLabel.vue";
+import { bgColor, textColor } from "../../../../constants/brands";
 
 export default {
     name: 'PlayAlongs',
@@ -183,6 +209,7 @@ export default {
         'play-alongs-filters': PlayAlongsFilters,
         'loading-animation': LoadingAnimation,
         pagination: Pagination,
+        InputLabel
     },
     mixins: [ThemeClasses, UserCatalogueEvents, EventHandlers],
     props: {
@@ -284,12 +311,13 @@ export default {
         };
     },
     computed: {
-        // isPlaying: {
-            // cache: false,
-            // get() {
-            //     return this.audioPlayer ? !this.audioPlayer.paused : false;
-            // },
-        // },
+        brandTextColor() {
+            return textColor[this.brand];
+        },
+
+        brandBgColor() {
+            return bgColor[this.brand];
+        },
 
         currentPosition() {
             return (this.currentTime / this.totalDuration) * 100;
@@ -355,6 +383,13 @@ export default {
         this.removeMouseEventHandlers();
     },
     methods: {
+        handleTitleChange(val)  {
+            this.selectedFilters = {
+                ...this.selectedFilters,
+                title: val === '' ? null : val,
+            };
+        },
+
         getContent(resetPlaylist = false) {
             this.loading = true;
 
@@ -805,6 +840,14 @@ export default {
         handlePageChange({ page }) {
             this.page = page;
 
+            if (this.useUrlParams) {
+                this.updatePageUrl();
+            }
+
+            return this.getContent();
+        },
+
+        handleTriggerSearch() {
             if (this.useUrlParams) {
                 this.updatePageUrl();
             }
