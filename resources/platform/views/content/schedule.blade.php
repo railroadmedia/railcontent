@@ -63,7 +63,7 @@
                     <button class="tw-btn-secondary tw-text-{{ $brand }}" 
                             data-open-modal="scheduleAddToCalendarModal"
                     >
-                        <i class="fas fa-calendar-plus tw-mr-1"></i>
+                        <i class="fas fa-calendar-plus tw-mr-2"></i>
                         Subscribe to Calendar 
                     </button>
                 </div>
