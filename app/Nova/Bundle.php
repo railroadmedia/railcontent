@@ -38,9 +38,12 @@ class Bundle extends Resource
             Text::make('Name')->required(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
-                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';
-            })->required()->asHtml(),
+                $slug = str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $this->slug );
+
+                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$slug.'">'.$slug.'</a>';
+            })->asHtml(),
             //slug field for saving
+            Text::make('Slug')->required()->hideFromDetail()->hideFromIndex(),
             Text::make('Sku')->hideFromIndex()->required(),
             Image::make('Thumbnail')
                 ->disk('nova_s3')
@@ -48,7 +51,6 @@ class Bundle extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('thumbnail')->getClientOriginalName();
                 })
@@ -78,7 +80,6 @@ class Bundle extends Resource
                 ->hideFromIndex()
                 ->disableDownload()
                 ->deletable(false)
-                ->required()
                 ->storeAs(function (Request $request){
                     return $request->file('meta_img')->getClientOriginalName();
                 })
@@ -118,7 +119,7 @@ class Bundle extends Resource
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
-            Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
+            Text::make('Header Text', 'header_text')->hideFromIndex(),
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
