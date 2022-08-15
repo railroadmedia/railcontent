@@ -6,7 +6,9 @@
 
 @section('content')
 
-    @component('partials._header-banner')
+    @component('partials._header-banner', [
+        'backgroundImage' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-members-header-background-image.jpg',
+    ])
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
