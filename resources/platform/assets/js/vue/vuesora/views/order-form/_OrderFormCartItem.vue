@@ -71,7 +71,7 @@
                     <div class="flex flex-column">
                         <h3
                             v-if="isDiscounted"
-                            class="tiny font-bold font-strike text-grey-3 mr-1 m-xs-only"
+                            class="tw-text-xs font-bold font-strike text-grey-3 mr-1 m-xs-only"
                         >
                             ${{ Number(item.price_before_discounts).toFixed(2) }}
                         </h3>
@@ -95,7 +95,7 @@
 
                     <h3
                         v-if="item.subscription_interval_type && totalPriceAfterDiscounts > 0"
-                        class="tiny"
+                        class="tw-text-xs"
                     >
                         <span v-if="item.subscription_renewal_price != totalPriceAfterDiscounts">
                             then ${{ Number(item.subscription_renewal_price).toFixed(2)}}
@@ -113,6 +113,7 @@ import EcommerceService from '../../assets/js/services/ecommerce.js';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import Toasts from '../../assets/js/classes/toasts';
 import CartEvents from './_events';
+import ErrorHandler from '../../assets/js/services/_error-handler';
 
 
 export default {
@@ -177,7 +178,11 @@ export default {
                 productSku: this.item.sku,
                 quantity,
             })
-                .then(this.handleResponse);
+                .then(this.handleResponse)
+                .catch(() => {
+                    this.showErrorToast();
+                    this.loading = false;
+                });
         },
 
         removeCartItem() {
@@ -193,7 +198,13 @@ export default {
             if (response) {
                 this.emitUpdateCartItem(response.data);
             } else {
-                Toasts.push({
+                this.showErrorToast();
+            }
+
+            this.loading = false;
+        },
+        showErrorToast() {
+                            Toasts.push({
                     icon: 'disappointed',
                     title: 'Something went wrong!',
                     themeColor: this.themeColor,
@@ -201,9 +212,6 @@ export default {
                 });
 
                 this.itemQuantity = this.item.quantity;
-            }
-
-            this.loading = false;
         },
     },
 };
