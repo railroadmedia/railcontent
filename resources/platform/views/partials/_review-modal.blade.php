@@ -7,24 +7,28 @@
 
         <div class="flex flex-column tw-w-full">
             @if($brand === "drumeo")
+                {{-- Drumeo Review Form --}}
                 <student-review-form
                     url="https://docs.google.com/forms/d/e/1FAIpQLSdRzf0Wg4meObJi0ovKlUDgbBDYDpJP7MCguIDmPFDybchViQ/viewform?embedded=true"
                     height="1600"
                 >
                 </student-review-form>
             @elseif($brand === "pianote")
+                {{-- Pianote Review Form --}}
                 <student-review-form
                     url="https://docs.google.com/forms/d/e/1FAIpQLSe4Soy7CDxk9Aw9_kuJvK9f3FyojMfLkuqezIsvKNUFQPD51w/viewform?embedded=true"
                     height="1400"
                 >
                 </student-review-form>
             @elseif($brand === "guitareo")
+                {{-- Guitareo Review Form --}}
                 <student-review-form
                     url="https://docs.google.com/forms/d/e/1FAIpQLSfqS5HTrmln2sd7QaNt9Er31fY2becXt4n6isN57HbGwVPHFg/viewform?embedded=true"
                     height="1400"
                 >
                 </student-review-form>
             @elseif($brand === "singeo")
+                {{-- Singeo Review Form --}}
                 <student-review-form
                     url="https://docs.google.com/forms/d/e/1FAIpQLSeWyMtqVuQjMdA7rrZMK2jCkAIaPLeycTr0zXUE6LEaD6OmyQ/viewform?embedded=true"
                     height="1400"

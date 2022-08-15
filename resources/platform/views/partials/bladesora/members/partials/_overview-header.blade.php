@@ -1,7 +1,14 @@
 <header id="pageHeader" 
         class="fluid pv-4 relative" 
-        style="background-image:url({{ $backgroundImage }});"
 >
+    {{-- Background Image --}}
+    <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
+        <img src="https://musora.com/cdn-cgi/image/width=640,quality=90/{{$backgroundImage}}" 
+            class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
+            onload="this.classList.remove('tw-opacity-0')"
+        >
+    </div>
+    {{-- Background Gradient --}}
     <div class="header-gradient-overlay absolute-fill {{ $themeColor }}"></div>
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-relative">
         <div class="flex flex-row">

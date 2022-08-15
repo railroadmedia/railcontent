@@ -185,7 +185,11 @@
       v-if="mappedData.sheet_music && !is_search"
       class="flex tw-flex-col tw-justify-center sheet-music-col ph-1 hide-xs-only"
     >
-      <img class="dark:tw-invert" :src="mappedData.sheet_music" />
+      <img class="dark:tw-invert tw-transition-opacity tw-duration-500" 
+           alt="Rudiment Image"
+           :src="mappedData.sheet_music" 
+           loading="lazy"
+      />
     </div>
 
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->

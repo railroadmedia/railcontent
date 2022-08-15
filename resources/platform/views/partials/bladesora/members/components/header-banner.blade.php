@@ -1,7 +1,13 @@
 <div class="tw-full fluid collapsed-h pv-5 relative bg-black">
-    <div class="header-background-container absolute-fill bg-top"
-            style="background-image: url({{ $backgroundImage }});"
-    ></div>
+    {{-- Background Image --}}
+    <div class="header-background-container absolute-fill bg-top">
+        <img src="{{ $backgroundImage }}" 
+             class="tw-h-full tw-w-full  tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
+             loading="lazy"
+             onload="this.classList.remove('tw-opacity-0')"
+        >
+    </div>
+    {{-- Background Gradient --}}
     <div class="header-background-container absolute-fill bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
     <div class="relative">
@@ -17,9 +23,11 @@
                     >
                         <a href="{{ $profileUrl }}" class="no-decoration">
                             <img
-                                class="rounded inset-border"
+                                alt="user avatar"
+                                class="rounded inset-border tw-transition-opacity tw-opacity-0"
                                 src="{{ $currentUser['avatar'] }}"
                                 loading="lazy"
+                                onload="this.classList.remove('tw-opacity-0')"
                             >
                         </a>
                     </div>

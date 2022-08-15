@@ -12,7 +12,11 @@
                     <div class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
                         <!-- Coach Image -->
                         <img src="https://musora.com/cdn-cgi/image/width=300,height=436,quality=90/{{ $coach['image'] }}"
-                            class="tw-w-full tw-flex tw-object-cover tw-filter tw-grayscale" alt="{{ $coach['name'] }} Card">
+                             class="tw-w-full tw-flex tw-object-top tw-object-cover tw-filter tw-grayscale tw-transition-opacity tw-opacity-0" 
+                             alt="{{ $coach['name'] }} Card"
+                             loading="lazy"
+                             onload="this.classList.remove('tw-opacity-0')"
+                        >
                         @if (isset($coach['date']))
                             <div class="tw-absolute tw-leading-none tw-uppercase tw-rounded tw-p-1 tw-m-4 tw-bg-yellow-400">
                                 <span class="tw-text-sm tw-text-[#00101D] tw-leading-none tw-font-bebas-neue">

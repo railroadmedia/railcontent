@@ -34,8 +34,15 @@
         id="pageHeader"
         class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
         dusk="profile-header"
-        style="background-image:url('https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg');"
     >
+        {{-- Background Image --}}
+        <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
+            <img src="https://musora.com/cdn-cgi/image/width=1000,quality=90/https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg" 
+                class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
+                onload="this.classList.remove('tw-opacity-0')"
+            >
+        </div>
+        {{-- Background Gradient --}}
         <div class="header-gradient-overlay absolute-fill"></div>
     
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 account-header tw-flex tw-flex-col tw-items-center lg:tw-items-end xl:tw-items-center lg:tw-flex-row dark:tw-text-white tw-relative tw-z-10 ">

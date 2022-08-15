@@ -13,6 +13,8 @@ use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Providers\RailcontentURLProvider;
 use App\Services\User\UserAccessService;
 use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
+use App\Services\CalendarService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentPagesController extends BaseController
@@ -33,6 +36,8 @@ class ContentPagesController extends BaseController
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RailcontentURLProvider $railcontentURLProvider;
     private FullTextSearchService $fullTextSearchService;
+    private CalendarService $calendarService;
+
 
     /**
      * @param ContentService $contentService
@@ -40,19 +45,23 @@ class ContentPagesController extends BaseController
      * @param LessonAssignmentDecorator $lessonAssignmentDecorator
      * @param RailcontentURLProvider $railcontentURLProvider
      * @param FullTextSearchService $fullTextSearchService
+     * @param CalendarService $calendarService
+     *
      */
     public function __construct(
         ContentService $contentService,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         RailcontentURLProvider $railcontentURLProvider,
-        FullTextSearchService $fullTextSearchService
+        FullTextSearchService $fullTextSearchService,
+        CalendarService $calendarService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->railcontentURLProvider = $railcontentURLProvider;
         $this->fullTextSearchService = $fullTextSearchService;
+        $this->calendarService = $calendarService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -1273,5 +1282,65 @@ class ContentPagesController extends BaseController
             "totalResults" => $listLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function schedule(Request $request)
+    {
+        $scheduleEvents = $this->contentService->getContentForCalendar(null, false);
+
+        $fullTimezoneString = $this->calendarService->getTimezone($request);
+
+        $timezones = $this->getTimezoneList();
+
+        foreach($scheduleEvents as $event){
+            $event['assignments'] = null;
+            $event['lessons'] = null;
+            $event['current_lesson'] = null;
+        }
+
+        return view('content.schedule', [
+            "scheduleEvents" => json_encode($scheduleEvents),
+            "fullTimezoneString" => $fullTimezoneString,
+            "timezones" => $timezones
+        ]);
+    }
+
+    private function getTimezoneList()
+    {
+        $regions = [
+            'Africa' => DateTimeZone::AFRICA,
+            'America' => DateTimeZone::AMERICA,
+            'Antarctica' => DateTimeZone::ANTARCTICA,
+            'Aisa' => DateTimeZone::ASIA,
+            'Atlantic' => DateTimeZone::ATLANTIC,
+            'Australia' => DateTimeZone::AUSTRALIA,
+            'Europe' => DateTimeZone::EUROPE,
+            'Indian' => DateTimeZone::INDIAN,
+            'Pacific' => DateTimeZone::PACIFIC,
+        ];
+
+        $formattedTimeZones = [];
+
+        foreach ($regions as $name => $mask) {
+            $zones = DateTimeZone::listIdentifiers($mask);
+
+            foreach ($zones as $timezone) {
+                $dateTimeZone = new DateTimeZone($timezone);
+                try {
+                    $time = new DateTime(null, $dateTimeZone);
+                    $formattedTimeForZone = ' - ' . $time->format('g:i a');
+                } catch (\Exception $e) {
+                    error_log($e);
+                }
+
+                $formattedTimeZones[] = $timezone . ($formattedTimeForZone ?? '');
+            }
+        }
+
+        return $formattedTimeZones;
     }
 }
