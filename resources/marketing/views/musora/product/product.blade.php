@@ -29,7 +29,7 @@
                 "sku" => $product->sku,
                 "logo" => $product->page_logo,
                 "fullPrice" => $product->price,
-                "price"=> $product->price,
+                "price"=> $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
                 "soldOut" => $product->sold_out,
@@ -64,7 +64,7 @@
                     ])
 
                 @elseif($product->productType->name === 'Bundle')
-                    <img class="mb-4" src="@if(str_contains($product->bundle_img, 'amazonaws') || str_contains($product->bundle_img, 'cloudfront')) {{$product->bundle_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->bundle_img  }}@endif" />
+                    @if(!is_null($product->bundle_img))<img class="mb-4" src="@if(str_contains($product->bundle_img, 'amazonaws') || str_contains($product->bundle_img, 'cloudfront')) {{$product->bundle_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->bundle_img  }}@endif" />@endif
 
                     @include('musora.product.partials.overview',[
                         "overview" => $product->overview,
