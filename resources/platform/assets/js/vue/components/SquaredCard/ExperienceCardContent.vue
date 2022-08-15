@@ -10,8 +10,7 @@ defineProps(["title", "subtitle", "level"]);
     <div class="tw-flex tw-flex-row md:tw-flex-col tw-items-center">
       <MusicIcon :level="level" />
       <div
-        class="tw-text-[24px] md:tw-text-[32px] tw-leading-[20px] md:tw-leading-[40px]"
-        style="font-family: Bebas Neue; font-weight: 700"
+        class="tw-text-[24px] md:tw-text-[32px] tw-leading-[20px] md:tw-leading-[40px] tw-font-bebas-neue tw-tracking-[1px]"
       >
         {{ title }}
       </div>

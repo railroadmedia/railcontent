@@ -545,6 +545,7 @@ export default {
             color: #FFF;
             padding: 12px;
             font: 700 17px "Bebas Neue",sans-serif;
+            letter-spacing: 1px;
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 50px;
