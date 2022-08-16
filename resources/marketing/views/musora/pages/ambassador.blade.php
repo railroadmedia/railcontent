@@ -1,5 +1,12 @@
 @extends('musora._partials.layout')
 
+@section('head-includes')
+    @parent
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+@endsection
+
 @section('body-data')
     x-data="{ modal: false }"
 @endsection
@@ -24,13 +31,15 @@
     </header>
     <section class="text-white py-8 md:py-10 lg:py-12 px-4" style="background:#000c18;">
         <div class="container mx-auto max-w-6xl">
-            <p class="leading-normal px-3">Musora is the home of Drumeo, Pianote, Guitareo, and Singeo -- and the leader in online music education with more than 15 years experience, 500 million video views, and 100 world-class instructors.
+            <p class="leading-normal px-3">
+                Musora is the home of Drumeo, Pianote, Guitareo, and Singeo -- and the leader in online music education with more than 15 years experience, 500 million video views, and 100 world-class instructors.
                 <br><br>
                 Each brand offers a membership platform for music students to learn with step-by-step lessons, useful practice tools, and a supportive community of qualified teachers. The unique differentiator is that we provide a home for students, blending technology with tradition to give them an affordable and supportive home base to reach their musical goals.
                 <br><br>
                 We believe in a transparent environment where diversity, equity, and inclusion are celebrated. All humans are unique and we care about ensuring that all of our people feel welcome, heard and appreciated.
                 <br><br>
-                Let’s work together to support and inspire musicians around the world!</p>
+                Let’s work together to support and inspire musicians around the world!
+            </p>
         </div>
     </section>
     <section class="text-white py-8 md:py-14 lg:py-20 px-4" style="background:#000c18;">
@@ -78,64 +87,121 @@
             </div>
         </div>
     </section>
-    <section class="text-white py-8 md:py-14 lg:py-20" style="background:#000c18;">
-        <div class="container mx-auto max-w-6xl">
-            <div class="slick-2 text-left">
-                <div class="px-3">
-                    <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
-                        <p class="leading-normal md:leading-relaxed">"Drumeo is by far the greatest drum community out there. Literally you can find everything about drums, from lessons, to play alongs, live streams, documentaries, tips, drum sheets. Everything is extremely well organized. It’s amazing!"</p>
-                        <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-alejandro.jpg">
-                            <div class="text pl-3 md:pl-5">
-                                <h6 class="uppercase"><strong>Alejandro Sifuentes</strong></h6>
-                                <h6 style="color:#405575" class="uppercase pt-2">Drum YouTuber &<br>
-                                    Musora Ambassador</h6>
+
+    <div
+        x-data="{
+            init() {
+                new Splide(this.$refs.splide, {
+                    type   : 'loop',
+                    perPage: 3,
+                    focus  : 'center',
+                    classes: {
+                        arrow: 'splide__arrow bg-white',
+                        pagination: 'splide__pagination hidden',
+                    }
+                }).mount()
+            },
+        }"
+    >
+        <section x-ref="splide" class="splide text-white bg-[#000c18] px-7 py-8 md:py-14 lg:py-20" aria-label="Splide/Alpine.js Carousel Example">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide flex flex-col items-center justify-center">
+                        <div class="px-3">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                                <p class="leading-normal md:leading-relaxed">
+                                    "Drumeo is by far the greatest drum community out there. Literally you can find everything about drums, from lessons, to play alongs, live streams, documentaries, tips, drum sheets. Everything is extremely well organized. It’s amazing!"
+                                </p>
+                                <div class="flex items-center pt-5 md:pt-8">
+                                    <img 
+                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-alejandro.jpg"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                    >
+                                    <div class="text pl-3 md:pl-5">
+                                        <h6 class="uppercase"><strong>Alejandro Sifuentes</strong></h6>
+                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Drum YouTuber &<br>
+                                            Musora Ambassador</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="px-3">
-                    <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
-                        <p class="leading-normal md:leading-relaxed">"Pianote avoids the one-size-fits-all feel that online piano methods can have, and gives in-person piano teachers a run for their money with several instructors with whom students can interact."</p>
-                        <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-piano-dreamers.jpg">
-                            <div class="text pl-3 md:pl-5">
-                                <h6 class="uppercase"><strong>Piano Dreamers</strong></h6>
-                                <h6 style="color:#405575" class="uppercase pt-2">Piano Community &<br>
-                                    Musora Ambassador</h6>
+                    </li>
+    
+                    <li class="splide__slide flex flex-col items-center justify-center">
+                        <div class="px-3">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                                <p class="leading-normal md:leading-relaxed">
+                                    "Pianote avoids the one-size-fits-all feel that online piano methods can have, and gives in-person piano teachers a run for their money with several instructors with whom students can interact."
+                                </p>
+                                <div class="flex items-center pt-5 md:pt-8">
+                                    <img 
+                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-piano-dreamers.jpg"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                    >
+                                    <div class="text pl-3 md:pl-5">
+                                        <h6 class="uppercase"><strong>Piano Dreamers</strong></h6>
+                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Piano Community &<br>
+                                            Musora Ambassador</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="px-3">
-                    <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
-                        <p class="leading-normal md:leading-relaxed">"The reason this approach appeals to me is because it’s kind of a more guided way to how I learned guitar. And that’s just doing the cool stuff! So if you tried the theory and exercise way and it’s just not working or you already play guitar and just want to have fun, check it out!"</p>
-                        <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-aguafish.jpg">
-                            <div class="text pl-3 md:pl-5">
-                                <h6 class="uppercase"><strong>Agufish</strong></h6>
-                                <h6 style="color:#405575" class="uppercase pt-2">Guitar YouTuber &<br>
-                                    Musora Ambassador</h6>
+                    </li>
+    
+                    <li class="splide__slide flex flex-col items-center justify-center">
+                        <div class="px-3">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                                <p class="leading-normal md:leading-relaxed">
+                                    "The reason this approach appeals to me is because it’s kind of a more guided way to how I learned guitar. And that’s just doing the cool stuff! So if you tried the theory and exercise way and it’s just not working or you already play guitar and just want to have fun, check it out!"
+                                </p>
+                                <div class="flex items-center pt-5 md:pt-8">
+                                    <img 
+                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-aguafish.jpg"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                    >
+                                    <div class="text pl-3 md:pl-5">
+                                        <h6 class="uppercase"><strong>Agufish</strong></h6>
+                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Guitar YouTuber &<br>
+                                            Musora Ambassador</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="px-3">
-                    <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
-                        <p class="leading-normal md:leading-relaxed">"I always recommend Drumeo because of the absolute wealth of knowledge they offer from so many of the world’s greatest drummers! Not only will you learn just about anything you could desire to learn, but you will be so inspired and entertained by your drum heroes with some of the best production value on the internet!"</p>
-                        <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg">
-                            <div class="text pl-3 md:pl-5">
-                                <h6 class="uppercase"><strong>Casey Cooper</strong></h6>
-                                <h6 style="color:#405575" class="uppercase pt-2">Drum YouTuber &<br>
-                                    Musora Ambassador</h6>
+                    </li>
+    
+                    <li class="splide__slide flex flex-col items-center justify-center">
+                        <div class="px-3">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                                <p class="leading-normal md:leading-relaxed">
+                                    "I always recommend Drumeo because of the absolute wealth of knowledge they offer from so many of the world’s greatest drummers! Not only will you learn just about anything you could desire to learn, but you will be so inspired and entertained by your drum heroes with some of the best production value on the internet!"
+                                </p>
+                                <div class="flex items-center pt-5 md:pt-8">
+                                    <img 
+                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                    >
+                                    <div class="text pl-3 md:pl-5">
+                                        <h6 class="uppercase"><strong>Casey Cooper</strong></h6>
+                                        <h6 style="color:#405575" class="uppercase pt-2 leading-none">Drum YouTuber &<br>
+                                            Musora Ambassador</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
     <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg">
         <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg"
             class="absolute object-cover transition-opacity opacity-0 z-[-2] w-full h-full top-0 left-0 object-cover"
