@@ -24,7 +24,7 @@ class HelpScoutUserService extends HelpScoutServiceBase
         $userId = HelpScoutUser::query()->select('helpscout_user_id')->where(['user_id' => $userId,])
             ->first()?->helpscout_user_id;
         if (!$userId) {
-            //TODO: how to populate this data better
+            //TODO: Can we populate this data more efficiently?
             $this->populateHelpScoutUserData();
 
             $userId = HelpScoutUser::query()->select('helpscout_user_id')->where(['user_id' => $userId,])
@@ -33,11 +33,6 @@ class HelpScoutUserService extends HelpScoutServiceBase
         return $userId;
     }
 
-    /**
-     * @param int $helpScoutCustomerId
-     * @param string $helpScoutEmail
-     * @return int|null
-     */
     public function getUserIdFromHelpScoutCustomerInfo(int $helpScoutCustomerId, string $helpScoutEmail): ?int
     {
         $userId = $this->getUserIdFromHelpScoutCustomerId($helpScoutCustomerId);
@@ -54,9 +49,6 @@ class HelpScoutUserService extends HelpScoutServiceBase
         return $userId;
     }
 
-    /**
-     * @return void
-     */
     public function populateHelpScoutUserData(): void
     {
         $externalHelpScoutUserData = $this->client->users()->list()->toArray();

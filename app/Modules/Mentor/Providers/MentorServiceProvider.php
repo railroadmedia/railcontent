@@ -4,6 +4,7 @@ namespace App\Modules\Mentor\Providers;
 
 use App\Modules\Mentor\Commands\AssignMentors;
 use App\Modules\Mentor\Commands\InitializeMentors;
+use App\Modules\Mentor\Commands\Mentors;
 use App\Modules\Mentor\Commands\UnassignMentors;
 use App\Modules\Mentor\Listeners\EnsureMentorAssigned;
 use Illuminate\Foundation\Application;
@@ -52,7 +53,7 @@ class MentorServiceProvider extends ServiceProvider
 
         $this->commands([
             InitializeMentors::class,
-            UnassignMentors::class
+            UnassignMentors::class, //used for debugging can be removed after initial launch
         ]);
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');

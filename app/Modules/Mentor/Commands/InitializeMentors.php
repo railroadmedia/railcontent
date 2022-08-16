@@ -14,10 +14,7 @@ use Railroad\Ecommerce\Services\DateTimeService;
 
 class InitializeMentors extends Command
 {
-
-    protected $name = 'InitializeMentors';
-
-    protected $signature = 'InitializeMentors';
+    protected $signature = 'mentors:init';
 
     /**
      * The console command description.

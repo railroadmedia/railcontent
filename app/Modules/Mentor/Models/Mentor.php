@@ -3,17 +3,28 @@
 namespace App\Modules\Mentor\Models;
 
 use App\Modules\Mentor\database\factories\MentorFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\UserManagementSystem\Models\User;
 
 /**
- * @method static \Modules\Mentor\Database\Factories\MentorFactory factory(...$parameters)
+ * Class Mentor
+ * @internal
+ *
+ * @package App\Modules\Mentor\Models
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $supported_brands
+ * @property integer $active_student_max_count
+ * @property integer $active_student_count
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property-read User $user
  */
 class Mentor extends Model
 {
-    use SoftDeletes;
     use HasFactory;
 
     protected $table = 'mentors';

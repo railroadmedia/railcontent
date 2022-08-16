@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('supported_brands')->nullable();
             $table->unsignedInteger('active_student_max_count');
             $table->unsignedInteger('active_student_count');
-            $table->softDeletes();
         });
 
         Schema::create('mentor_students', function (Blueprint $table) {

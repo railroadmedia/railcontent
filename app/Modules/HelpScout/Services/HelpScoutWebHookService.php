@@ -20,15 +20,15 @@ class HelpScoutWebHookService
     public function registerWebHook(string $url, array $events)
     {
         $webHooks = $this->getWebHooks();
-        Log::info("Register Web Hook $url");
-        Log::info("Existing Web Hooks:");
+        Log::debug("Register Web Hook $url");
+        Log::debug("Existing Web Hooks:");
         $alreadyRegistered = false;
         $webHooks->each(function ($webHook) use ($url, &$alreadyRegistered) {
-            Log::info($webHook);
+            Log::debug($webHook);
 
             if ($webHook['url'] == $url) {
                 $alreadyRegistered = true;
-                Log::warning("URL $url already registered");
+                Log::info("URL $url already registered");
             }
         });
 
@@ -47,12 +47,14 @@ class HelpScoutWebHookService
         return $this->client->webhooks()->create($webHook);
     }
 
-    private function unregisterAllWebHooks()
+    public function unregister($url)
     {
         $webHooks = $this->getWebHooks();
-        $webHooks->each(function ($webHook) {
-            Log::info($webHook);
-            $this->client->webhooks()->delete($webHook["id"]);
+        $webHooks->each(function ($webHook) use ($url) {
+            Log::debug($webHook);
+            if ($webHook["url"] == $url) {
+                $this->client->webhooks()->delete($webHook["id"]);
+            }
         });
     }
 

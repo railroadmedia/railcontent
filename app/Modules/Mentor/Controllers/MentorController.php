@@ -3,37 +3,26 @@
 namespace Modules\Mentor\Controllers;
 
 use App\Modules\Mentor\Models\Mentor;
-use App\Modules\Mentor\Services\HelpScoutMentorService;
 use App\Modules\Mentor\Services\MentorService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Log;
 
 class MentorController extends Controller
 {
     private MentorService $mentorService;
-    private HelpScoutMentorService $service;
 
-    public function __construct(MentorService $mentorService, HelpScoutMentorService $service)
+    public function __construct(MentorService $mentorService)
     {
         $this->mentorService = $mentorService;
-        $this->service = $service;
     }
 
-    public function getMentorIdByStudent(Request $request, $userId)
+    public function getMentorIdByStudent($userId): ?int
     {
         return $this->mentorService->getMentorIdByStudent($userId);
     }
 
-    public function getMentors(Request $request)
+    public function getMentors()
     {
-        Log::info('test');
-        Log::info('test');
-        Log::info('test');
-        Log::info('test');
-        Log::info('test');
-        Log::info('.....');
-
         return Mentor::all()->map(
             fn(Mentor $mentor) => ['mentorUserId' => $mentor->user->id, 'displayName' => $mentor->user->display_name]
         );
@@ -64,7 +53,7 @@ class MentorController extends Controller
         return $result;
     }
 
-    public function getMentor(Request $request, $userId)
+    public function getMentor($userId)
     {
         return $this->mentorService->getMentorOrNull($userId);
     }
@@ -77,7 +66,7 @@ class MentorController extends Controller
         $this->mentorService->updateMentor($userId, $supportedBrands, $activeStudentMaxCount);
     }
 
-    public function demoteMentor(Request $request, $userId)
+    public function demoteMentor($userId)
     {
         $mentorStudents = $this->mentorService->delete($userId);
         return $mentorStudents->map(fn($mentorStudent) => $mentorStudent->user->email);

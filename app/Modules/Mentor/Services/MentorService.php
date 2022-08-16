@@ -20,9 +20,6 @@ class MentorService
     private PrimaryBrandService $primaryBrandService;
     private ?Collection $mentors = null;
 
-    /**
-     * @param PrimaryBrandService $primaryBrandService
-     */
     public function __construct(PrimaryBrandService $primaryBrandService, UserService $session)
     {
         $this->primaryBrandService = $primaryBrandService;

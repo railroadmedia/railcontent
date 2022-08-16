@@ -11,12 +11,12 @@ Route::group(
     function () {
         Route::get('/getMentorIdByStudent/{userId}/', [MentorController::class, 'getMentorIdByStudent']);
         Route::get('/getMentors', [MentorController::class, 'getMentors']);
-        //Todo:Change to patch once msuora runs on MWP domain
+        //Todo:Change to patch once musora runs on MWP domain
         Route::get('/updateStudentMentor', [MentorController::class, 'updateStudentMentor']);
         Route::get('/getMentors/{page}', [MentorController::class, 'getMentorsPaged']);
         Route::get('/getMentor/{userId}', [MentorController::class, 'getMentor']);
         Route::get('/updateMentor', [MentorController::class, 'updateMentor']);
         Route::get('/demoteMentor/{userId}', [MentorController::class, 'demoteMentor']);
-        Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation']);
+        Route::post('/helpscout/conversation/new', [HelpScoutMentorController::class, 'newHelpScoutConversation'])->name('helpscout_conversation_new');
     }
 );

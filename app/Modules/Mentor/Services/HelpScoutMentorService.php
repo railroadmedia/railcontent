@@ -5,6 +5,7 @@ namespace App\Modules\Mentor\Services;
 
 use App\Modules\HelpScout\Services\HelpScoutUserService;
 use App\Modules\HelpScout\Services\HelpScoutWebHookService;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class HelpScoutMentorService
@@ -23,15 +24,20 @@ class HelpScoutMentorService
         $this->helpScoutUserService = $helpScoutUserService;
     }
 
-    public function registerHelpScoutWebHook()
+    public function registerHelpScoutWebHook(): void
     {
+        $url = route('helpscout_conversation_new');
+        Log::info("Registering help scout route $url");
+        if (!app()->isProduction()) {
+            throw new Exception("Can only use this method to register production web hook");
+        }
         $this->helpScoutWebHookService->registerWebHook(
-            config('mentor.helpscout_converasation_auto_assign_user.route'),
+            $url,
             ['convo.created']
         );
     }
 
-    public function newHelpScoutConveration(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail)
+    public function newHelpScoutConveration(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail): void
     {
         Log::debug("");
         Log::debug("New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail");
@@ -55,13 +61,14 @@ class HelpScoutMentorService
 
     private function updateConversationAssignedUser(int $conversationId, int $helpScoutUserId): void
     {
-        if (config('mentor.helpscout_converasation_auto_assign_user.debug')) {
+        if (app()->isProduction()) {
+            $this->helpScoutUserService->updateConversationAssignedUser($conversationId, $helpScoutUserId);
+        } else {
             Log::info(
                 "Suppressed update to helpscout to assign user $helpScoutUserId to conversation $conversationId."
             );
-        } else {
-            $this->helpScoutUserService->updateConversationAssignedUser($conversationId, $helpScoutUserId);
         }
     }
+
 
 }
