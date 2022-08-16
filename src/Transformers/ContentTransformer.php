@@ -109,7 +109,7 @@ class ContentTransformer
                 'child_count' => $data['child_count'],
                 'hierarchy_position_number' => $data['hierarchy_position_number'],
                 'parent_content_data' => $data['parent_content_data'],
-                'like_count' => $data['like_count'],
+                'like_count' => $data['like_count'] ?? 0,
             ];
 
             if (!empty($data['child_id'])) {
@@ -216,7 +216,7 @@ class ContentTransformer
                         'child_count' => $row['child_count'],
                         'hierarchy_position_number' => $row['hierarchy_position_number'],
                         'parent_content_data' => $row['parent_content_data'],
-                        'like_count' => $row['like_count'],
+                        'like_count' => $row['like_count'] ?? 0,
                     ];
 
                     if (!empty($row['child_id'])) {
