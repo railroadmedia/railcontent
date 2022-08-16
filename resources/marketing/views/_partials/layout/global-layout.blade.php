@@ -15,7 +15,7 @@
 
         @yield('layout-header')
 
-        <main class="flex-1">
+        <main class="flex-1" @yield('body-data')>
             @yield('global-layout-body')
         </main>
 
