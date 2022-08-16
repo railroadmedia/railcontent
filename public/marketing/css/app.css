@@ -1075,6 +1075,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .z-20 {
   z-index: 20 !important;
 }
+.z-\[-2\] {
+  z-index: -2 !important;
+}
 .z-50 {
   z-index: 50 !important;
 }
@@ -2224,6 +2227,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .object-contain {
   -o-object-fit: contain !important;
      object-fit: contain !important;
+}
+.object-cover {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
 }
 .p-4 {
   padding: 1rem !important;
