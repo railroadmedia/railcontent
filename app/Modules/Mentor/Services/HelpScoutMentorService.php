@@ -52,7 +52,7 @@ class HelpScoutMentorService
         Log::debug("User Id: $userId");
         $mentorUserId = $this->mentorService->getMentorIdByStudent($userId);
         if (!$mentorUserId) {
-            Log::info("Unable to find mentor for user $userId");
+            Log::info("User $userId has no assigned mentor");
             return;
         }
         $mentorHelpScoutUserId = $this->helpScoutUserService->getHelpScoutUserIdFromUserId($mentorUserId);
