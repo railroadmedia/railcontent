@@ -54,6 +54,10 @@ const props = defineProps({
   showClearButton: {
     type: Boolean,
     default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   }
 });
 const emit = defineEmits(["onChange", "onFocus"]);
@@ -93,13 +97,14 @@ const onEnter = (e) => {
         :placeholder="placeholder"
         :id="id"
         :class="`${ removeDefaultInputStyles ? '' : 'tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
-                 ${ inputOverride ? inputOverride : 'tw-text-[#00101D] tw-border-[#D1D5DB]' }`"
+                 ${ inputOverride ? inputOverride + (disabled ? ' tw-bg-[#D3D3D3]' : '') : 'tw-text-[#00101D] tw-border-[#D1D5DB]' + (disabled ? ' tw-bg-[#D3D3D3]' : '') }`"
         v-model="input"
         v-on:keypress.enter.prevent="onEnter"
         @focus="() => emit('onFocus')"
         autocomplete="off"
         :name="inputName"
         :type="inputType"
+        :disabled="disabled"
       />
       <div v-if="showClearButton" :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
         <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">

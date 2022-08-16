@@ -25,7 +25,7 @@ export default {
     v-on:click="onButtonClick"
   >
     <div v-on:click="onButtonClick" class="tw-relative tw-h-[53px] tw-w-[53px] tw-rounded-full tw-bg-cover">
-        <img v-if="userPhoto.length" :src="userPhoto" class="tw-h-[53px] tw-w-[53px] tw-rounded-full"/>
+        <img v-if="userPhoto" :src="userPhoto" class="tw-h-[53px] tw-w-[53px] tw-rounded-full"/>
     </div>
       
     <div class="tw-flex tw-grow tw-flex-col tw-justify-center tw-pl-[10px]">
