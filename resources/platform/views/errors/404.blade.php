@@ -20,7 +20,7 @@
                 <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h1>
                 <p class="tw-mb-8">The Page you're looking for doesn't exist.</p>
 
-                <a href="{{ $brand }}/" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
+                <a href="javascript:history.back()" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
                 <p class="tw-mb-4">Go back or <a href="{{ $brand }}/support" class="tw-text-[#081825] dark:tw-text-white tw-underline tw-font-bold">contact support</a></p>
             </div>
         </div>

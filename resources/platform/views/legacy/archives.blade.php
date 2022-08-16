@@ -1,35 +1,38 @@
-@php
-    $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
-@endphp
-
-@extends('members.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Archives | Drumeo</title>
+    <title>Drumeo Archives | Musora</title>
 @endsection
 
 @section('content')
-    @include('members.partials._drumeo-sidebar')
 
-    <header id="pageHeader" class="container fluid pv-4" style="background-image:url({{ cdn('headers/members-header-background-image.jpg') }});">
-        <div class="container text-center">
-            <h1 class="heading text-white mb-2">
-                <i class="icon-legacy text-drumeo"></i> Lesson Archives
-            </h1>
-            <p class="body text-white">Legacy Resources are lessons or tools that are no longer added to or supported.</p>
-            <p class="body text-white">Rather than remove them from the site completely you can access them here.</p>
-        </div>
-    </header>
+    @component('partials._header-banner', [
+        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+    ])
+        @slot('content')
+            <div class="tw-flex tw-flex-col tw-pr-1">
+                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                    <i class="icon-legacy tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
+                    <span class="tw-text-32 tw-font-bold">Lesson Archives</span>
+                </h1>
+                <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
+                    Legacy Resources are lessons or tools that are no longer added to or supported.
+                </p>
+                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
+                    Rather than remove them from the site completely you can access them here.
+                </p>
+            </div>
+        @endslot
+    @endcomponent
 
-    <div class="container mv-3">
-        <div class="flex flex-column">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
+        <div class="tw-flex tw-flex-col">
 
-            <div class="flex flex-row pv-3">
-                <h1 class="heading capitalize">Search Archives</h1>
+            <div class="tw-flex tw-flex-row pv-3">
+                <h1 class="heading capitalize dark:tw-text-white">Search Archives</h1>
             </div>
 
-            <div class="flex flex-row bb-grey-1-1">
+            <div class="tw-flex tw-flex-row">
                 <content-catalogue
                         content-endpoint="/laravel/public/railcontent/content"
                         catalogue-type="list"
