@@ -160,6 +160,12 @@ class ContentPagesController extends BaseController
 
         $isStudentFocus = in_array($lessonType, ['student-review', 'question-and-answer']);
 
+        // Todo: make a migration to change all "student-focus" lessons to "student-review" lessons so they're in line
+        //  with the other brands. Then delete this ↓
+        if ($brand == 'drumeo') {
+            $isStudentFocus = in_array($lessonType, ['student-focus', 'question-and-answer']);
+        }
+
         $startedLessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
             [$lessonType],
             auth()->id(),
