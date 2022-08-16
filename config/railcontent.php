@@ -409,7 +409,7 @@ return [
                 'description' => "What do you want to focus on next? This is where you can submit your
                     student plan application and watch videos where we’ll break down student videos and offer
                     tips to improve your playing.",
-                'allowableFilters' => ['instructor', 'progress'],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
                 'sortBy' => '-published_on',
             ],
             'rudiments' => [
@@ -731,7 +731,7 @@ return [
             'student-reviews' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => ['instructor'],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
@@ -855,7 +855,7 @@ return [
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                "allowableFilters" => [],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -915,7 +915,7 @@ return [
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                "allowableFilters" => [],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
             ],
             'routines' => [
                 "name" => "Routines",
