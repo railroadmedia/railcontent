@@ -17,7 +17,7 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
     - `r musora db8 local fromprod && r drumeo db8 local fromprod && r pianote db8 local fromprod && r guitareo db8 local fromprod && r singeo db8 local fromprod && r musora-web-platform artisan migrate`
 - compile frontend assets by running
     - `cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production`
-- `https://devplatform.musora.com:8443` should now load and the app and automated testing should work
+- [https://devplatform.musora.com:8443](https://devplatform.musora.com:8443) should now load and the app and automated testing should work
 
 ### Running Commands:
 Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
