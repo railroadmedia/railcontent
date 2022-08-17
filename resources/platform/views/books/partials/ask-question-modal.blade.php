@@ -1,6 +1,6 @@
 @if(!empty(current_user()))
     <div
-        class="container fluid bg-grey-2 relative"
+        class="container fluid bg-grey-2 dark:tw-bg-[#002039] relative"
         style="z-index:2;"
     >
         <div class="container pv-2 collapsed-h">
@@ -18,8 +18,8 @@
                                 >
                             </div>
                         </div>
-                        <div class="flex flex-column pl-2">
-                            <p class="body">
+                        <div class="flex flex-column pl-2 tw-justify-center">
+                            <p class="body dark:tw-text-white">
                                 <strong>Have a Question?</strong>
                                 Ask ANY question and get answers from REAL teachers
                             </p>
