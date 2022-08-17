@@ -20,6 +20,7 @@ a, div {
     text-decoration:none;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
     font:400 16px $secondarySansSerif;
+    letter-spacing: 1px;
     text-transform:uppercase;
     will-change:background-color;
     transition:background-color .2s ease-in-out;
@@ -75,6 +76,7 @@ button {
       text-decoration:none;
       box-shadow: 0 0 2px rgba(0,0,0,0.2);
       font:400 16px $secondarySansSerif;
+      letter-spacing: 1px;
       text-transform:uppercase;
       will-change:background-color;
       transition:background-color .2s ease-in-out;

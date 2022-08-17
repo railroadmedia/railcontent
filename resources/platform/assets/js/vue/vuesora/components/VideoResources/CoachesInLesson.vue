@@ -73,10 +73,10 @@
         "
       >
         <h4 v-on:click="goToCoachProfile(instructor.slug)" class="tw-cursor-pointer">
-          <span class="tw-text-xs sm:tw-text-base tw-font-normal">
+          <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
-          <span class="tw-text-xs sm:tw-text-base tw-font-bold">
+          <span class="tw-text-xs sm:tw-text-base tw-font-bold tw-mr-1">
             {{ instructor.name.split(" ")[1] }}
           </span>
         </h4>

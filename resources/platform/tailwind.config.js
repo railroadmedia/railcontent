@@ -96,6 +96,7 @@ module.exports = {
         },
         '.font-bebas-neue': {
           fontWeight: '400 !important', //force font weight
+          letterSpacing: '1px !important',
         },
         '.forum-post': {
           'ul, ol': {

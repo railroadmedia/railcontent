@@ -46,6 +46,82 @@ module.exports = {
         '.bg-musora': {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
         },
+        '.font-bebas': {
+          fontFamily: '"Bebas Neue", sans-serif'
+        },
+        '.border-musora::before':{
+          content:"' '",
+          position: 'absolute',
+          top: '0',
+          right: '0',
+          bottom: '0',
+          left: '0',
+          zIndex: '-1',
+          borderRadius: 'inherit',
+          background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
+          margin: '-2px',
+        },
+        'h1':{
+          fontSize: '24px',
+          '@media (min-width: 768px)': {
+            fontSize: '36px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '48px',
+          },
+        },
+        'h2':{
+          fontSize: '20px',
+          '@media (min-width: 768px)': {
+            fontSize: '30px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '36px',
+          },
+        },
+        'h3':{
+          fontSize: '18px',
+          '@media (min-width: 768px)': {
+            fontSize: '24px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '30px',
+          },
+        },
+        'h4':{
+          fontSize: '16px',
+          '@media (min-width: 768px)': {
+            fontSize: '20px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '24px',
+          },
+        },
+        'h5':{
+          fontSize: '15px',
+          '@media (min-width: 768px)': {
+            fontSize: '18px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '20px',
+          },
+        },
+        'h6':{
+          fontSize: '15px',
+          '@media (min-width: 768px)': {
+            fontSize: '16px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '18px',
+          },
+        },
+        'p':{
+          lineHeight: '1.6em',
+          fontSize: '15px',
+          '@media (min-width: 768px)': {
+            fontSize: '16px',
+          },
+        }
       })
     }),
 

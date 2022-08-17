@@ -38,17 +38,19 @@
                 <page-container
                     brand="{{ $brand }}"
                     :is-live="false"
-                    user-name="{{ user()->display_name }}"
-                    user-avatar="{{ user()->profile_picture_url }}"
-                    user-id="{{ user()->id }}"
-                    account-url="{{ user()->getDashboardUrl() }}"
                     search-url=""
-                    {{-- @if(isset($forceHideSidebar))
-                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
-                    @endif --}}
+                    @if(!empty( user() ))
+                        user-name="{{ user()->display_name }}"
+                        user-avatar="{{ user()->profile_picture_url }}"
+                        user-id="{{ user()->id }}"
+                        account-url="{{ user()->getDashboardUrl() }}"
+                    @endif
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
+                    {{-- @if(isset($forceHideSidebar))
+                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+                    @endif --}}
                 >
                     <template v-cloak v-slot="slotProps">
 
@@ -57,10 +59,10 @@
                     </template>
                 </page-container>
             </app-container>
+            
+            {{-- Review Modals Must Be Global --}}
+            @include('partials._review-modal')
         </div>
-
-        {{-- Review Modals Must Be Global --}}
-        @include('partials._review-modal')
 
         {{-- Scripts --}}
         <script type="application/javascript">

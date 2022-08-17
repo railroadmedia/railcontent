@@ -13,7 +13,7 @@
             <div class="progress bg-{{ $brand }}" style="width:{{ $progress }}%">
                 <span
                     class="amount text-white tw-text-xs font-bold
-                        {{ $progress < 20 ? 'text-singeo right' : 'text-white' }}"
+                        {{ $progress < 20 ? 'tw-text-{{ $brand }} right' : 'tw-text-white' }}"
                 >
                     {{ $progress }}%
                 </span>

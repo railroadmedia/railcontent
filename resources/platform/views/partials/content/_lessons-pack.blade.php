@@ -6,8 +6,11 @@
                     <img
                         src="{{ $itemThumbnail }}"
                         alt="{{ $itemTitle }} Thumbnail"
+                        class="tw-transition-opacity tw-opacity-0"
                         loading="lazy"
+                        onload="this.classList.remove('tw-opacity-0')"
                     >
+
                     @if(!empty($logoImage))
                         <div class="logo-image pa-1 corners-bottom-3">
                             <img

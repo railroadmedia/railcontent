@@ -63,7 +63,7 @@
         @component('partials.bladesora.members.components.home._new-section', [
             'brand' => brand(),
             'contentEndpoint' => '/laravel/public/railcontent/content',
-            'allLessonsUrl' => '', // todo: need url
+            'allLessonsUrl' => url()->route('platform.new-lessons'),
             'newContentJson' => $newContentJson,
             ])
         @endcomponent
@@ -108,7 +108,7 @@
             'usersList' => $usersList,
             ])
         @endcomponent
-        
+
         {{-- Live Banner --}}
         <coach-event
             brand="{{ $brand }}"

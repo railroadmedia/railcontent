@@ -18,14 +18,16 @@
                     Coaches
                 </h1>
 
-                <p
-                    class="text-white body"
-                    style="max-width:960px"
-                >
-                    Every month, you’ll have new opportunities to learn from your coaches. You can choose the topics
-                    that you need help with OR follow the coach that works with your style and what you want to achieve
-                    with your voice. And you’ll always get the full recording so you never miss that ‘aha’ moment you’ve
-                    been waiting for.
+                <p class="text-white body tw-max-w-[960px]">
+                    @if($brand === "drumeo")
+                        Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world! 
+                    @elseif($brand === "pianote")
+                        Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!
+                    @elseif($brand === "guitareo")
+                        Tackle your next guitar goal with bite-sized courses from many of the world's best guitarists.
+                    @elseif($brand === "singeo")
+                        Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world! 
+                    @endif
                 </p>
             </div>
         @endslot

@@ -33,7 +33,7 @@
                 <div class="pv-5 hide-md-down"></div>
                 @if($pack['slug'] == 'piano-technique-made-easy')
                     <div
-                        class="tw-flex tw-flex-col tw-mb-4 tw-rounded ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
+                        class="tw-flex tw-flex-col tw-mb-4 tw-rounded-full ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
                         data-open-modal="previewModal"
                         style="width:80px;"
                     >
@@ -56,10 +56,11 @@
                         </div>
                     </div>
                 @endif
-                <img
-                        alt="{{ $pack->fetch('title') }} Logo"
-                        src="{{ $pack->fetch('data.logo_image_url') }}"
-                        style="width: 100%;max-width:480px;"
+                {{-- Logo --}}
+                <img alt="{{ $pack->fetch('title') }} Logo"
+                    class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
+                    src="{{ $pack->fetch('data.logo_image_url') }}" 
+                    onload="this.classList.remove('tw-opacity-0')"
                 >
             </div>
         @endslot
