@@ -230,7 +230,7 @@
                     'name' => 'modal',
                     'additionalClose' => 'jared = false; james = false; dave = false; pam = false; mary = false; caleb = false; victor = false; chad = false; amy = false; jordan = false;',
                     'content' => '
-                        <div x-show="jared" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="jared" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px] opacity-30"></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -247,7 +247,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="jared = false; james = true"></i>
                         </div>
 
-                        <div x-show="james" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="james" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="jared = true; james = false"></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -264,7 +264,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="james = false; dave = true"></i>
                         </div>
 
-                        <div x-show="dave" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="dave" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="james = true; dave = false"></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -281,7 +281,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="dave = false; pam = true "></i>
                         </div>
 
-                        <div x-show="pam" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="pam" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="dave = true; pam = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -298,7 +298,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="pam = false; mary = true "></i>
                         </div>
 
-                        <div x-show="mary" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="mary" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="pam = true; mary = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -315,7 +315,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="mary = false; caleb = true "></i>
                         </div>
 
-                        <div x-show="caleb" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="caleb" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="mary = true; caleb = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -332,7 +332,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="caleb = false; victor = true "></i>
                         </div>
 
-                        <div x-show="victor" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="victor" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="caleb = true; victor = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -349,7 +349,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="victor = false; chad = true "></i>
                         </div>
 
-                        <div x-show="chad" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="chad" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="victor = true; chad = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -366,7 +366,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="chad = false; amy = true "></i>
                         </div>
 
-                        <div x-show="amy" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="amy" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="chad = true; amy = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -383,7 +383,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="amy = false; jordan = true "></i>
                         </div>
 
-                        <div x-show="jordan" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="jordan" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="amy = true; jordan = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
