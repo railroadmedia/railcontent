@@ -209,8 +209,10 @@ Route::domain('{musoraDomain}')
                     'exploring-beats',
                     'sonor-drums',
                     'student-reviews',
+                    'student-focus',
                     'archives',
                     'recording',
+                    'play-alongs',
                 ]
             )
             ->name('platform.content.first-level');
