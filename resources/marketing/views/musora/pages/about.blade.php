@@ -235,6 +235,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jared-falk.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Jared Falk"
                             >
                             <h5><strong>Jared Falk</strong></h5>
                             <p>Chief Executive Officer</p>
@@ -256,6 +257,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/jame-falk.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="James Falk"
                             >
                             <h5><strong>James Falk</strong></h5>
                             <p>Chief Operating Officer</p>
@@ -277,6 +279,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/dave-atkinson.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Dave Atkinson"
                             >
                             <h5><strong>Dave Atkinson</strong></h5>
                             <p>Chief Content Officer</p>
@@ -298,6 +301,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/pam-black.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Pam Black"
                             >
                             <h5><strong>Pam Black</strong></h5>
                             <p>Controller</p>
@@ -319,6 +323,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/mary-liz-borseth.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Mary-Liz Borseth"
                             >
                             <h5><strong>Mary-Liz Borseth</strong></h5>
                             <p>HR Manager</p>
@@ -340,6 +345,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/caleb-favo.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Caleb Favor"
                             >
                             <h5><strong>Caleb Favor</strong></h5>
                             <p>Chief Product Officer</p>
@@ -361,6 +367,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/victor-guidera.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Victor Guidera"
                             >
                             <h5><strong>Victor Guidera</strong></h5>
                             <p>IT Director</p>
@@ -382,6 +389,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/chad-kettner.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Chad Kettner"
                             >
                             <h5><strong>Chad Kettner</strong></h5>
                             <p>Chief Marketing Officer</p>
@@ -403,6 +411,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/amy-malcomson.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Amy Malcomson"
                             >
                             <h5><strong>Amy Malcolmson</strong></h5>
                             <p>Student Experience Director</p>
@@ -424,6 +433,7 @@
                                 src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jord-paul.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove(\'opacity-0\')"
+                                alt="Jordan Paul"
                             >
                             <h5><strong>Jordan Paul</strong></h5>
                             <p>Creative Director</p>
@@ -442,14 +452,4 @@
 
     @include('musora._partials._lets-chat')
 
-@stop
-
-@section('layout-scripts')
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" defer></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
 @stop
