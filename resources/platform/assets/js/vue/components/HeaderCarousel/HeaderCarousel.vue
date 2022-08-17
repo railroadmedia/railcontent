@@ -2,7 +2,6 @@
 import { ref, onBeforeMount, onMounted } from "vue";
 import { testCarousel } from '../../../constants/carousel_data.js';
 import {
-  ArrowSmRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/vue/solid";
@@ -22,6 +21,8 @@ const props = defineProps({
 const currentSlide = ref(0);
 const slides = ref([]);
 const slideInterval = ref(null);
+const animateDirection = ref('right');
+const prevSlide = ref(0);
 
 const removeInterval = () => {
   if (slideInterval.value) {
@@ -33,6 +34,8 @@ const removeInterval = () => {
 const resetInterval = () => {
   removeInterval();
   slideInterval.value = setInterval(() => {
+    animateDirection.value = 'right';
+    prevSlide.value = currentSlide.value;
     if (slides.value.length > 0 && currentSlide.value !== slides.value.length - 1) {
       currentSlide.value = currentSlide.value + 1;
     } else {
@@ -42,6 +45,8 @@ const resetInterval = () => {
 };
 
 const handleLeft = () => {
+  animateDirection.value = 'left';
+  prevSlide.value = currentSlide.value;
   if (slides.value.length > 0 && currentSlide.value !== 0) {
     currentSlide.value = currentSlide.value - 1;
   } else {
@@ -51,6 +56,8 @@ const handleLeft = () => {
 };
 
 const handleRight = () => {
+  animateDirection.value = 'right';
+  prevSlide.value = currentSlide.value;
   if (slides.value.length > 0 && currentSlide.value !== slides.value.length - 1) {
     currentSlide.value = currentSlide.value + 1;
   } else {
@@ -69,6 +76,7 @@ onBeforeMount(() => {
   } else {
     slides.value = testCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
   }
+  prevSlide.value = slides.value.length - 1;
 });
 
 onMounted(() => {
@@ -78,11 +86,11 @@ onMounted(() => {
 
 <template>
   <div
-    class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4">
-    <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :key="slide.title"
+    class="tw-bg-[#000C17] tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden">
+    <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :isPrevSlide="i === prevSlide" :key="slide.title"
       textContentOverride="tw-pb-[26px]" :topSubtitle="slide.topSubtitle" :title="slide.title" :titleClasses="slide.titleClasses" :ctaText="slide.ctaText"
       :description="slide.description" :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval"
-      @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" />
+      @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" :animateDirection="animateDirection" />
 
     <!-- Directional Buttons -->
     <div :key="`carousel-directional-buttons`"
@@ -109,3 +117,64 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style type="text/css">
+.slide-in-right {
+	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.slide-in-left {
+	-webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+</style>
