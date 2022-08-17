@@ -16,8 +16,9 @@
                 </h1>
 
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Prepare to be educated, amazed, inspired and entertained as you take your drumming to the next
-                    level through our Drumeo Shows!
+                    @if($brand === 'drumeo')
+                        Whether you’re looking for drumming inspiration, entertainment, or education, Drumeo Shows has something for everyone. 
+                    @endif
                 </p>
             </div>
         @endslot

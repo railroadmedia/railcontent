@@ -26,7 +26,7 @@
             </div>
 
             <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
-                <button :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]`" 
+                <button :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary tw-bg-${brand}`" 
                         title="Search Play Along by Term"
                         @click="handleTriggerSearch"
                 >
@@ -119,7 +119,7 @@
                 <p class="body">
                     If you're certain you should be seeing content,
                     please contact support by using the chat widget on the bottom right of your screen.
-                    Alternatively, you can email <a href="mailto:support@drumeo.com">support@drumeo.com</a>.
+                    Alternatively, you can email <a href="mailto:support@musora.com">support@musora.com</a>.
                 </p>
             </div>
         </div>

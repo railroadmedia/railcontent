@@ -248,6 +248,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => 'Play-Alongs',
+                        'path' => '/'.brand().'/play-alongs',
+                        'icon' => 'eigth-notes',
+                    ],
+                    [
                         'name' => 'Lessons',
                         'path' => '/'.brand().'/lessons',
                         'icon' => 'electric-guitar',
