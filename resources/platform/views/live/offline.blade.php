@@ -16,10 +16,7 @@
                 </h1>
 
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base" >
-                    This is where you'll see the upcoming lesson release schedule.
-                    Make sure to click the "Add To Calendar" button for anything that catches your eye so you
-                    don't miss out. Whenever we stream live you'll be able to watch the lesson here and chat with
-                    other Musora members!
+                    Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">{{ $brand }}</span> live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!
                 </p>
                 
                 {{-- Header CTAs --}}

@@ -1,9 +1,6 @@
 <template>
     <div class="flex flex-column grow play-alongs">
-        <div
-            v-if="showFilters"
-            class="flex flex-row mt-2"
-        >
+        <div v-if="showFilters" class="flex flex-row mt-2">
             <div class="flex flex-column align-v-center">
                 <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                     {{ totalResults }} Play Alongs
@@ -13,103 +10,59 @@
             <div class="flex flex-column mr-1">
                 <InputLabel
                     inputOverride="tw-w-full dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
-                    :brand="brand"
-                    inputType="text"
-                    id="playAlongsSearchInput"
-                    inputName="search"
-                    placeholder="Search..."
-                    :inputErrors="[]"
-                    :removeDefaultInputStyles="true"
-                    @onChange="handleTitleChange"
-                    @onEnter="handleTriggerSearch"
-                />
+                    :brand="brand" inputType="text" id="playAlongsSearchInput" inputName="search"
+                    placeholder="Search..." :inputErrors="[]" :removeDefaultInputStyles="true"
+                    @onChange="handleTitleChange" @onEnter="handleTriggerSearch" :disabled="displayFilters" />
             </div>
 
             <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
-                <button :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]`" 
-                        title="Search Play Along by Term"
-                        @click="handleTriggerSearch"
-                >
+                <button
+                    :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary tw-bg-${brand}`"
+                    title="Search Play Along by Term" @click="handleTriggerSearch">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
 
             <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
                 <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
-                        :class="isShuffle ? `tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
-                        title="Toggle Shuffle"
-                        @click="toggleShuffle"
-                >
+                    :class="isShuffle ? `tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
+                    title="Toggle Shuffle" @click="toggleShuffle">
                     <i class="fas fa-random"></i>
                 </button>
             </div>
             <div class="flex flex-column enable-filters tw-h-[50px]">
                 <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
-                        :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`" 
-                        title="Toggle Filters"
-                        @click="displayFilters = !displayFilters"
-                >
+                    :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
+                    title="Toggle Filters" @click="displayFilters = !displayFilters">
                     <i class="fas fa-filter"></i>
                 </button>
             </div>
         </div>
 
         <transition name="show-from-top">
-            <play-alongs-filters
-                v-if="showFilters"
-                v-show="displayFilters"
-                :theme-color="themeColor"
-                :filter-options="filterOptions"
-                :selected-filters="selectedFilters"
-                :loading="loading"
-                :limit="limit"
-                :sort="sort"
-                :brand="brand"
-                :show-completed-only="showCompletedOnly"
-                :show-favorites-only="showFavoritesOnly"
-                :is-shuffle="isShuffle"
-                @filterChange="handleFilterChange"
-                @toggleFavorites="toggleFavorites"
-                @toggleCompleted="toggleCompleted"
-                @handleContentLimit="handleContentLimit"
-                @handleContentSort="handleContentSort"
-            ></play-alongs-filters>
+            <play-alongs-filters v-if="showFilters" v-show="displayFilters" :theme-color="themeColor"
+                :filter-options="filterOptions" :selected-filters="selectedFilters" :loading="loading" :limit="limit"
+                :sort="sort" :brand="brand" :show-completed-only="showCompletedOnly"
+                :show-favorites-only="showFavoritesOnly" :is-shuffle="isShuffle" @filterChange="handleFilterChange"
+                @toggleFavorites="toggleFavorites" @toggleCompleted="toggleCompleted"
+                @handleContentLimit="handleContentLimit" @handleContentSort="handleContentSort"></play-alongs-filters>
         </transition>
 
-        <div
-            v-if="showPagination"
-            class="flex flex-row pagination-row align-h-right"
-        >
-            <pagination
-                :current-page="Number(page)"
-                :total-pages="totalPages"
-                @pageChange="handlePageChange"
-            ></pagination>
+        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
+            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">
+            </pagination>
         </div>
 
         <div class="tw-flex tw-flex-col tw-grow">
-            <play-alongs-list-item
-                v-for="(item, i) in content"
-                :ref="`list${item.id}`"
-                :key="`list${item.id}`"
-                :index="i + 1"
-                :item="item"
-                :brand="brand"
-                :active="activeItem != null ? item.id === activeItem.id : false"
-                :display-user-interactions="false"
-                :no-link="true"
-                :theme-color="themeColor"
-                :show-user-actions="showUserActions"
-                @addToList="addToListEventHandler"
-                @markAsComplete="completedEventHandler"
-                @click.native="updateTrack(item)"
-            />
+            <play-alongs-list-item v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
+                :index="i + 1" :item="item" :brand="brand"
+                :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
+                :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
+                @addToList="addToListEventHandler" @markAsComplete="completedEventHandler"
+                @click.native="updateTrack(item)" />
         </div>
 
-        <div
-            v-if="content.length === 0"
-            class="flex flex-row pa-2"
-        >
+        <div v-if="content.length === 0" class="flex flex-row pa-2">
             <div class="flex flex-column">
                 <p class="body mb-2">
                     We're sorry, no results were found using those filters.
@@ -119,68 +72,34 @@
                 <p class="body">
                     If you're certain you should be seeing content,
                     please contact support by using the chat widget on the bottom right of your screen.
-                    Alternatively, you can email <a href="mailto:support@drumeo.com">support@drumeo.com</a>.
+                    Alternatively, you can email <a href="mailto:support@musora.com">support@musora.com</a>.
                 </p>
             </div>
         </div>
 
-        <div
-            v-if="showPagination"
-            class="flex flex-row pagination-row align-h-right"
-        >
-            <pagination
-                :current-page="Number(page)"
-                :total-pages="totalPages"
-                @pageChange="handlePageChange"
-            ></pagination>
+        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
+            <pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange">
+            </pagination>
         </div>
 
         <transition name="show-from-bottom">
-            <div
-                v-show="loading"
-                class="loading corners pa-2"
-                @click.stop.prevent
-            >
+            <div v-show="loading" class="loading corners pa-2" @click.stop.prevent>
                 <loading-animation :theme-color="themeColor" />
             </div>
         </transition>
 
-        <play-alongs-player
-            v-show="activeItem != null"
-            ref="progressBar"
-            :active-item="activeItem"
-            :audio-player="audioPlayer"
-            :drums="drums"
-            :metronome="metronome"
-            :loop="loop"
-            :current-time="currentTime"
-            :total-duration="totalDuration"
-            :current-position="currentPosition"
-            :is-playing="isPlaying"
-            :anchor-offsets="anchorOffsets"
-            :current-mouse-x="currentMousePosition.x"
-            :played-content="playedContent"
-            :total-results="totalResults"
-            :is-shuffle="isShuffle"
-            :current-volume="Number(currentVolume * 100)"
-            @playPause="playPause"
-            @nextTrack="playNextTrack"
-            @previousTrack="playPreviousTrack"
-            @seek="seek"
-            @drums="toggleDrums"
-            @metronome="toggleMetronome"
-            @loop="toggleLoop"
-            @anchorMouseDown="handleAnchorMouseDown"
-            @anchorButtonClick="handleAnchorButtonClick"
-            @volumeChange="changeVolume"
-        ></play-alongs-player>
+        <play-alongs-player v-show="activeItem != null" ref="progressBar" :active-item="activeItem"
+            :audio-player="audioPlayer" :drums="drums" :metronome="metronome" :loop="loop" :current-time="currentTime"
+            :total-duration="totalDuration" :current-position="currentPosition" :is-playing="isPlaying"
+            :anchor-offsets="anchorOffsets" :current-mouse-x="currentMousePosition.x" :played-content="playedContent"
+            :total-results="totalResults" :is-shuffle="isShuffle" :current-volume="Number(currentVolume * 100)"
+            @playPause="playPause" @nextTrack="playNextTrack" @previousTrack="playPreviousTrack" @seek="seek"
+            @drums="toggleDrums" @metronome="toggleMetronome" @loop="toggleLoop"
+            @anchorMouseDown="handleAnchorMouseDown" @anchorButtonClick="handleAnchorButtonClick"
+            @volumeChange="changeVolume"></play-alongs-player>
 
         <div class="flex flex-row hide">
-            <audio
-                id="playAlongsAudioPlayer"
-                ref="audioPlayer"
-                preload="auto"
-            ></audio>
+            <audio id="playAlongsAudioPlayer" ref="audioPlayer" preload="auto"></audio>
         </div>
     </div>
 </template>
@@ -265,6 +184,7 @@ export default {
     },
     data() {
         return {
+            searchTerm: null,
             content: this.preLoadedContent.data,
             loading: false,
             currentPlaybackRate: 1,
@@ -383,11 +303,8 @@ export default {
         this.removeMouseEventHandlers();
     },
     methods: {
-        handleTitleChange(val)  {
-            this.selectedFilters = {
-                ...this.selectedFilters,
-                title: val === '' ? null : val,
-            };
+        handleTitleChange(val) {
+            this.searchTerm = val === '' ? null : val;
         },
 
         getContent(resetPlaylist = false) {
@@ -416,6 +333,33 @@ export default {
                             }
                         });
                     }
+                });
+        },
+
+        searchContent() {
+            this.loading = true;
+
+            return ContentService.search({
+                ...this.filterQueryObject,
+                term: this.searchTerm,
+                brand: this.brand,
+                included_types: ['play-along'],
+                statuses: ['published'],
+                include_future: 0,
+            })
+                .then((response) => {
+                    if (response) {
+                        this.content = response.data.data;
+                        this.page = response.data.meta.page;
+                        this.totalResults = response.data.meta.totalResults;
+                        this.filterOptions = this.getFilterOptions(response.data.meta.filterOptions);
+                    }
+                }).catch((e) => {
+                    console.log('ERROR',e);
+                }).finally(() => {
+                    this.$nextTick(() => {
+                        this.loading = false;
+                    });
                 });
         },
 
@@ -594,7 +538,7 @@ export default {
             if (!resume) {
                 this.$nextTick(() => {
                     const domElement = this.$refs[`list${this.activeItem.id}`].$el;
-                    domElement.scrollIntoView({block: "start"})
+                    domElement.scrollIntoView({ block: "start" })
                 });
             }
         },
@@ -747,12 +691,12 @@ export default {
             this.loop = !this.loop;
             this.audioPlayer.loop = this.loop;
 
-            this.anchorOffsets.a= 0;
-            this.anchorOffsets.b= 100;
+            this.anchorOffsets.a = 0;
+            this.anchorOffsets.b = 100;
         },
 
         handleAnchorMouseDown(anchor) {
-            this.anchorMouseDown.anchor=true;
+            this.anchorMouseDown.anchor = true;
         },
 
         handleAnchorButtonClick(anchor) {
@@ -768,16 +712,16 @@ export default {
         },
 
         resetAnchors() {
-            this.anchorOffsets.a= 0;
-            this.anchorOffsets.b= 100;
+            this.anchorOffsets.a = 0;
+            this.anchorOffsets.b = 100;
         },
 
         trackMousePosition(event) {
             const posX = event.clientX != null ? event.clientX : event.touches[0].clientX;
             const posY = event.clientY != null ? event.clientY : event.touches[0].clientY;
 
-            this.currentMousePosition.x=posX;
-            this.currentMousePosition.y=posY;
+            this.currentMousePosition.x = posX;
+            this.currentMousePosition.y = posY;
 
             this.handleAnchorDrag();
         },
@@ -792,7 +736,7 @@ export default {
                     mousePositionOffset = 0;
                 }
 
-                this.anchorOffsets.a=mousePositionOffset;
+                this.anchorOffsets.a = mousePositionOffset;
             }
 
             if (this.anchorMouseDown.b) {
@@ -802,7 +746,7 @@ export default {
                     mousePositionOffset = 100;
                 }
 
-                this.anchorOffsets.b=mousePositionOffset;
+                this.anchorOffsets.b = mousePositionOffset;
             }
         },
 
@@ -811,8 +755,8 @@ export default {
         },
 
         mouseUpEventHandler() {
-            this.anchorMouseDown.a=false;
-            this.anchorMouseDown.b=false;
+            this.anchorMouseDown.a = false;
+            this.anchorMouseDown.b = false;
         },
 
         updatePageUrl() {
@@ -824,7 +768,7 @@ export default {
         handleFilterChange(payload) {
 
             this.page = 1;
-            this.selectedFilters[payload.key]= payload.value;
+            this.selectedFilters[payload.key] = payload.value;
 
             if (this.useUrlParams) {
                 this.updatePageUrl();
@@ -852,7 +796,7 @@ export default {
                 this.updatePageUrl();
             }
 
-            return this.getContent();
+            return this.searchContent();
         },
 
         handleContentSort(event) {

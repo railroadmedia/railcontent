@@ -10,6 +10,44 @@ if(typeof window != 'undefined'){
 export default {
 
     /**
+     * Search for a list of Content
+     *
+     * @returns {Promise} - resolved promise with the response object
+     */
+    search({
+        brand = 'drumeo',
+        limit = '20',
+        statuses = ['published', 'scheduled', 'draft'],
+        term,
+        included_types,
+        included_fields,
+        required_fields,
+        required_parent_ids,
+        required_user_states,
+        page = '1',
+        include_future = 1,
+    }) {
+        return axios
+            .get(`${endpointPrefix}/railcontent/search`, {
+                params: {
+                    brand,
+                    limit,
+                    statuses,
+                    term,
+                    included_types,
+                    included_fields,
+                    required_fields,
+                    required_parent_ids,
+                    required_user_states,
+                    page,
+                    include_future,
+                },
+            })
+            .then(response => response)
+            .catch(ErrorHandler.push);
+    },
+
+    /**
      * Get a list of Content
      *
      * @returns {Promise} - resolved promise with the response object
