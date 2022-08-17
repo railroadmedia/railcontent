@@ -15,7 +15,7 @@
     <!-- Panel -->
     <div
         x-show="{{ $name }}" x-transition
-        x-on:click="{{ $name }} = false"
+        x-on:click="{{ $name }} = false; @if(!empty($additionalClose)) {{ $additionalClose }} @endif"
         class="relative flex min-h-screen items-center justify-center p-4"
     >
         <!-- Close button -->
