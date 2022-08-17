@@ -2,6 +2,7 @@
 
 @section('body-data')
     x-data = '{ 
+        modal: false,
         jared: false,
         james: false,
         dave: false,
@@ -86,7 +87,7 @@
             <h3 class="mb-8 md:mb-14"><strong>Our Leadership Team</strong></h3>
             <div class="flex flex-wrap items-start justify-center mx-auto" style="max-width:1060px">
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jared-falk.jpg"
@@ -100,7 +101,7 @@
                     <p class="text-[#a1afc9]">Chief Executive Officer</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="james">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="james = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/jame-falk.jpg"
@@ -114,7 +115,7 @@
                     <p class="text-[#a1afc9]">Chief Operating Officer</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="dave">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="dave = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/dave-atkinson.jpg"
@@ -128,7 +129,7 @@
                     <p class="text-[#a1afc9]">Chief Content Officer</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="pam">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="pam = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/pam-black.jpg"
@@ -142,7 +143,7 @@
                     <p class="text-[#a1afc9]">Controller</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="maryliz">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="mary = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/mary-liz-borseth.jpg"
@@ -156,7 +157,7 @@
                     <p class="text-[#a1afc9]">HR Manager</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="caleb">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="caleb = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/caleb-favo.jpg"
@@ -170,7 +171,7 @@
                     <p class="text-[#a1afc9]">Chief Product Officer</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="victor">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="victor = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/victor-guidera.jpg"
@@ -184,7 +185,7 @@
                     <p class="text-[#a1afc9]">IT Director</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="chad">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="chad = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/chad-kettner.jpg"
@@ -198,7 +199,7 @@
                     <p class="text-[#a1afc9]">Chief Marketing Officer</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="amy">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="amy = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/amy-malcomson.jpg"
@@ -212,7 +213,7 @@
                     <p class="text-[#a1afc9]">Student Experience Director</p>
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" data-open="jord">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jordan = true; modal = true">
                         <img 
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0" 
                             src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jord-paul.jpg"
@@ -226,9 +227,9 @@
                     <p class="text-[#a1afc9]">Creative Director</p>
                 </div>
                 @include('musora._partials._modal',[
-                    'name' => 'jared',
+                    'name' => 'modal',
                     'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="jared" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px] opacity-30"></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -244,13 +245,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="jared = false; james = true"></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'james',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="james" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="jared = true; james = false"></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -266,13 +262,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="james = false; dave = true"></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'dave',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="dave" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="james = true; dave = false"></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -288,13 +279,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="dave = false; pam = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'pam',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="pam" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="dave = true; pam = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -310,13 +296,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="pam = false; mary = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'mary',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="mary" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="pam = true; mary = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -332,13 +313,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="mary = false; caleb = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'caleb',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="caleb" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="mary = true; caleb = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -354,13 +330,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="caleb = false; victor = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'victor',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="victor" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="caleb = true; victor = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -376,13 +347,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="victor = false; chad = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'chad',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="chad" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="victor = true; chad = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -398,13 +364,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="chad = false; amy = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'amy',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="amy" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="chad = true; amy = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
@@ -420,13 +381,8 @@
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="amy = false; jordan = true "></i>
                         </div>
-                    ',
-                ])
 
-                @include('musora._partials._modal',[
-                    'name' => 'jordan',
-                    'content' => '
-                        <div class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
+                        <div x-show="jordan" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="amy = true; jordan = false "></i>
                             <img 
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0" 
