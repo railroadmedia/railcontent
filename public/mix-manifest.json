@@ -1,4 +1,20 @@
 {
-    "/marketing/js/app.js": "/marketing/js/app.js?id=9d644b0c0a3bb0fa1983d7e493c64ef6",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=ab0fbc415602da6ace5f19a0651d99e9"
+    "/marketing/js/app.js": "/marketing/js/app.js?id=f3d5fcc2a88ba12fcd88bedf73ebd955",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=cd2a83f2046a9bda62e944140025cd13",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=a4413e07a1e599a7ba68e6b270bb7964",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=08a4776f764efa9dac358a879b5af654",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=5afd5560d91ed17d13420e2dbd339e28",
+    "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=4974462cc4e831e875fec3a14b095f85",
+    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=9390c413df792fe07ccb4734da023704",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=9bb602fc600b97e98e0f4892411e1b0a",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=f5690b6ce66d33000fd20701fd0049e6",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=96a04fe24713c7e01ed2421406e9e492",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=ff513fe34d3c22e27ef3360b1c99f082",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=06bd17392a8e2ba533590638828d4872",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=8be864fe0b062528526a8f9385ba6a29",
+    "/platform/js/app.js": "/platform/js/app.js?id=1d71ef07d32a9b7c7434e1db38e313c2",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=058218d2f06dd510f195a3e759c3ad0a",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
+    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=556c9a29d1562a74c391ca1d75809ca1",
+    "/platform/css/app.css": "/platform/css/app.css?id=af20b2159a08fa1938fb519f474fa7e2"
 }
