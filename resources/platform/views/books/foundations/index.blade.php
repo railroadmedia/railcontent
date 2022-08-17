@@ -1,58 +1,49 @@
-@extends('books.layout')
+@extends('partials.layout')
 
 @section('meta')
     @parent
 
-    <title>Pianote Foundations</title>
+    <title>Pianote Foundations | Musora</title>
 @endsection
 
 @section('content')
-    <div
-        class="container fluid collapsed-h pv-5 relative bg-black bg-center"
-        style="background-image:url({{_imgix(
-            'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/header-background.jpg',
-            ["q" => 80, "blur" => 40, "w" => 640]
-        )}});"
-        data-ix-bg="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/header-background.jpg"
-    >
-        <div class="header-gradient-overlay absolute-fill pianote"></div>
-        <div class="container relative">
-            <div class="flex flex-row align-v-center" style="min-height:400px;">
-                <div class="flex flex-column xs-12 sm-7 md-6">
-                    <h1 class="heading text-white">
-                        The Pianote Foundations
-                    </h1>
 
-                    <p class="text-white body">
-                        Welcome to the resources page for the Pianote Foundations books. Here you’ll find extra worksheets,
-                        exercises and video lessons to perfectly accompany the lessons from your book.
-                        <br>
-                        <br>
-                        Simply click on the relevant book to expand it and find the resources that are perfect for your
-                        practice.
-                    </p>
+    @component('partials._header-banner', ['backgroundImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/header-background.jpg'])
+        @slot('content')
+            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
+                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                    <span class="tw-text-32 tw-font-bold">The Pianote Foundations</span>
+                </h1>
 
-                    @if(empty($hasAccess))
-                        <button
-                            class="btn collapse-250 mt-2"
-                            data-open-modal="loginModal"
-                        >
-                            <span class="bg-pianote text-white">
-                                <i class="fas fa-external-link mr-1"></i>
-                                Login to Pianote
-                            </span>
-                        </button>
-                    @endif
-                </div>
+                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
+                    Welcome to the resources page for the Pianote Foundations books. Here you’ll find extra worksheets,
+                    exercises and video lessons to perfectly accompany the lessons from your book.
+                </p>
+                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
+                    Simply click on the relevant book to expand it and find the resources that are perfect for your
+                    practice.
+                </p>
+
+                @if(empty($hasAccess))
+                    <button
+                        class="btn collapse-250 mt-2"
+                        data-open-modal="loginModal"
+                    >
+                        <span class="bg-pianote text-white">
+                            <i class="fas fa-external-link mr-1"></i>
+                            Login to Pianote
+                        </span>
+                    </button>
+                @endif
             </div>
-        </div>
-    </div>
+        @endslot
+    @endcomponent
 
     @include('books.partials.login-modal')
 
     @include('books.partials.ask-question-modal')
 
-    <div class="container">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
         <div class="flex flex-row flex-wrap nmh-1 pv-1 mt-1">
             <div class="flex flex-column pr-1 xs-12 sm-4 mb-1 m-xs-only">
                 <a
@@ -114,4 +105,8 @@
             @endforeach
         </div>
     </div>
+@endsection
+
+@section('layout-scripts')
+    <script src="{{ mix('assets/members/js/books.js') }}"></script>
 @endsection

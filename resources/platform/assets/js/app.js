@@ -55,6 +55,7 @@ import ContentAssignment from './vue/vuesora/components/ContentAssignment/Conten
 import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
 import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
 import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
+import PianoBackingTracks from './vue/vuesora/components/PianoBackingTracks';
 
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
@@ -248,6 +249,7 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
     .component('StudentReviewForm', StudentReviewForm)
+    .component('PianoBackingTracks', PianoBackingTracks)
 
     .component('ContentSchedule', defineAsyncComponent(() =>
         import(
