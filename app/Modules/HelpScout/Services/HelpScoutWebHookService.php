@@ -50,12 +50,16 @@ class HelpScoutWebHookService
     public function unregister($url)
     {
         $webHooks = $this->getWebHooks();
-        $webHooks->each(function ($webHook) use ($url) {
+        $success = false;
+        $webHooks->each(function ($webHook) use ($url, &$success) {
             Log::debug($webHook);
             if ($webHook["url"] == $url) {
+                Log::info("Removing web hook $url");
+                $success = true;
                 $this->client->webhooks()->delete($webHook["id"]);
             }
         });
+        Log::info($success ? "Web hook unregistered" : "Web hook not found");
     }
 
     public function getWebHooks(): \Illuminate\Support\Collection

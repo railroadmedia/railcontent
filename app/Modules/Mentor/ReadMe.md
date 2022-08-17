@@ -24,6 +24,8 @@ r mwp artisan helpscout:register {url} convo.created
 ```
 
 #### Debugging
+> **Note**: This did not work when i tried it on the office network, only at home
+
 Use ngrok to create an endpoint to your local test environment.  May need to register an account online to complete this operation.
 ```
 ngrok http https://dev.musora.com:8443/

@@ -4,6 +4,7 @@ namespace App\Modules\Mentor\Services;
 
 
 use App\Modules\Brand\Services\PrimaryBrandService;
+use App\Modules\HelpScout\Models\HelpScoutCustomer;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\UserManagementSystem\Services\UserService;
