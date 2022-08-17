@@ -226,7 +226,7 @@ export default {
                         if (isValid && (element.classList.contains('selected-pack') || element.classList.contains('merch'))) {
                             isValid = element.classList.contains('active')
                         }
-                        
+
                         if (isValid) {
                             event.stopPropagation();
 
@@ -382,6 +382,8 @@ export default {
                         icon: 'fal fa-meh-rolling-eyes fa-3x toasted-icon',
                     }
                 );
+
+                this.handleCartUpdate(e?.response);
             } else {
                 this.$toasted.error(
                     'Something went wrong! Please try again or contact support using the chat widget at the bottom of the page.',
