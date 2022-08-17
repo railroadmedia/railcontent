@@ -72,6 +72,10 @@
                     @elseif($catalogueMeta['name'] == 'Archives')
                         <musora-icon icon-name="archives-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                    @elseif($catalogueMeta['name'] == 'Play Alongs')
+                        <musora-icon icon-name="eigth-notes-filled"
+                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                        </musora-icon>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
@@ -277,6 +281,7 @@
                 ref="playAlongsVueInstance"
                 content-endpoint="/laravel/public/railcontent/content"
                 theme-color="{{ $brand }}"
+                brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"
                 {{-- user-playlist-id="{{ $usersPrimaryPlaylistId }}" --}}
                 {{-- session-token="{{ railtracker_session_token() }}" --}}

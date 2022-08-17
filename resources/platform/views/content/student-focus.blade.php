@@ -15,7 +15,11 @@
                     </h1>
 
                     <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                        Want to customize your learning? Within Student Focus you will find all the extra features you need to help you focus on the areas that mean most to you! Student Focus includes Quick Tip lessons, Student Reviews and a library of our live Q&A lessons so that you can create the learning experience that best suits your needs and interests.
+                        @if($brand === 'pianote' || $brand === 'guitareo')
+                            Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
+                        @elseif($brand === 'singeo')
+                            Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
+                        @endif 
                     </p>
                 </div>
             @endslot

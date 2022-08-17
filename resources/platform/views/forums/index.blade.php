@@ -25,8 +25,15 @@
                 </h1>
 
                 <p class="tw-text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
-                    The <span class="tw-capitalize">{{ $brand }}</span> Forum is a great place for members and instructors alike to hang out, chat singing,
-                    and just get to know each other
+                    @if($brand === "drumeo")
+                        Connect with drummers from around the world! Our forums help you build social connections and find other students that share your goals and passions. 
+                    @elseif($brand === "pianote")
+                        Connect with piano players from around the world! Our forums help you build social connections and find other students that share your goals and passions. 
+                    @elseif($brand === "guitareo")
+                        Connect with guitarists from around the world! Our forums help you build social connections and find other students that share your goals and passions.
+                    @elseif($brand === "singeo")
+                        Connect with singers from around the world! Our forums help you build social connections and find other students that share your goals and passions.
+                    @endif
                 </p>
 
                 <div class="tw-inline-flex tw-items-center tw-flex-wrap header-buttons">

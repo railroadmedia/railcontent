@@ -17,9 +17,7 @@
                 </h1>
 
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    We'd LOVE for you to join us for a live lesson! This is where you'll see the upcoming schedule
-                    for live lessons and other releases. Take a look. And make sure to click the "Add To Calendar"
-                    button for anything that catches your eye so you don't miss out!
+                    Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">{{ $brand }}</span> live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!
                 </p>
 
                 <div class="tw-flex tw-flex-row">
