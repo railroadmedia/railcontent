@@ -228,7 +228,7 @@
                 </div>
                 @include('musora._partials._modal',[
                     'name' => 'modal',
-                    'additionalClose' => 'jared = false; james = false; dave = false; pam = false; mary = false; caleb = false; victor = false; chad = false; amy = false; jordan = false;',
+                    'additionalOnClose' => 'jared = false; james = false; dave = false; pam = false; mary = false; caleb = false; victor = false; chad = false; amy = false; jordan = false;',
                     'content' => '
                         <div x-show="jared" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px] opacity-30"></i>
