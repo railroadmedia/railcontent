@@ -1,10 +1,10 @@
-<div class="content-table-row flex flex-row flex-wrap pa-1 bt-grey-1-1">
+<div class="content-table-row flex flex-row flex-wrap pa-1 bt-grey-1-1 dark:tw-border-[#445F74]">
     <div class="flex flex-column xs-12 md-5 sm-7">
         <div class="flex flex-row">
             <div class="flex flex-column grow">
                 <div class="flex flex-row">
                     <div class="flex flex-column align-v-center grow">
-                        <h6 class="body font-bold text-black text-truncate-2-lines">{{ $relatedLesson['title'] }}</h6>
+                        <h6 class="body font-bold text-black dark:tw-text-white text-truncate-2-lines">{{ $relatedLesson['title'] }}</h6>
                     </div>
                 </div>
             </div>

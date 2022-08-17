@@ -2,7 +2,7 @@
     @if($hasAccess)
     href="{{ $members_url }}"
     @endif
-    class="content-table-row flex flex-row flex-wrap pa-1 hover-bg-grey-7 bt-grey-1-1 no-decoration"
+    class="content-table-row flex flex-row flex-wrap pa-1 hover-bg-grey-7 bt-grey-1-1 dark:hover:tw-bg-[#002039] dark:tw-border-[#445F74] no-decoration"
 >
     <div class="flex flex-column xs-12 sm-7">
         <div class="flex flex-row">

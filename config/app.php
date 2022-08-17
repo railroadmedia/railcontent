@@ -174,6 +174,7 @@ return [
         Railroad\Permissions\Providers\PermissionsServiceProvider::class,
         Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
         Railroad\Railnotifications\NotificationsServiceProvider::class,
+        Railroad\Referral\Providers\ReferralServiceProvider::class,
 
         /*
          * Module Service Providers
