@@ -1,22 +1,8 @@
-@extends('guitareo._partials.layout')
+@extends('musora._partials.layout')
 
 @section('head-includes')
-    @parent
+    <title>Join | Pianote</title>
 
-    <title>Join | Guitareo</title>
-    <meta property="og:title" content="Guitareo | The Ultimate Online Guitar Lesson Experience">
-
-    <meta name="description" content="Learn playing the guitar faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee. ">
-    <meta property="og:description" content="Reach your playing guitar goals with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-
-    <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/fb-share-image.jpg" style="display: none;">
-
-    @include('_partials.components.google-optimize')
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
-    <link rel="stylesheet" href="/assets/marketing/nav-footer.css">
-    <link href="/assets/css/tailwind-helpers.css" rel="stylesheet">
     <style>
         h1 strong,
         label strong {
@@ -25,7 +11,7 @@
         h1, h5, li, p {
             font-weight:400;
             line-height:1em;
-            font-family:"Open Sans", sans-serif;
+            /* font-family:"Open Sans", sans-serif; */
             margin:0 auto
         }
         h1 {
@@ -64,7 +50,7 @@
                 font-size:16px
             }
         }
-        input[type=email], input[type=tel], input[type=password], input[type=text], input[type=url] {
+        input[type=email].main-form, input[type=tel].main-form, input[type=password].main-form, input[type=text].main-form, input[type=url].main-form {
             height: 50px;
             border-radius: 25px;
             background: #fff;
@@ -80,28 +66,20 @@
             background:linear-gradient(to bottom, #010e2c, #000c17);
         }
     </style>
-@endsection
+@stop
+
+<!-- Main -->
+@section('layout-body')
+
+    @include('musora.referral.join')
+    
+@stop
+
 @section('layout-scripts')
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         function onSubmit(token) {
             document.getElementById("join-form").submit();
         }
     </script>
-@endsection
-
-@section('body-class', 'tw-m-0')
-
-
-@section('global-layout-body')
-    @include('guitareo.sales.partials._nav', [
-        'cartVersion' => true
-    ])
-
-    @include(
-        'bladesora::members.referral.join'
-    )
-
-    @include('guitareo.sales.partials._footer')
 @endsection

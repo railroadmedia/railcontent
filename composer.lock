@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97c5e16c8871c18dd4cb86016ef706b5",
+    "content-hash": "dbeda6da95cc435068bc78ff88fb2ac3",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.233.1",
+            "version": "3.233.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1eeac24f921f146b7cef5beb61375d7852df7cf8"
+                "reference": "0b9277a5c3d2fbccafc16b05a1b53404c9b67d1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1eeac24f921f146b7cef5beb61375d7852df7cf8",
-                "reference": "1eeac24f921f146b7cef5beb61375d7852df7cf8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0b9277a5c3d2fbccafc16b05a1b53404c9b67d1b",
+                "reference": "0b9277a5c3d2fbccafc16b05a1b53404c9b67d1b",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.233.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.233.3"
             },
-            "time": "2022-08-12T18:18:34+00:00"
+            "time": "2022-08-16T18:14:59+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1168,16 +1168,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "118a360e9437e88d49024f36283c8bcbd76105f5"
+                "reference": "94e016428884227245fb1219e0de7d8b86ca16d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/118a360e9437e88d49024f36283c8bcbd76105f5",
-                "reference": "118a360e9437e88d49024f36283c8bcbd76105f5",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/94e016428884227245fb1219e0de7d8b86ca16d7",
+                "reference": "94e016428884227245fb1219e0de7d8b86ca16d7",
                 "shasum": ""
             },
             "require": {
@@ -1259,7 +1259,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.4.0"
+                "source": "https://github.com/doctrine/dbal/tree/3.4.1"
             },
             "funding": [
                 {
@@ -1275,7 +1275,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-06T20:35:57+00:00"
+            "time": "2022-08-16T18:37:46+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -2830,16 +2830,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.261.0",
+            "version": "v0.262.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "c91c5a694e3b8bca37136b830072a23f2c1250fa"
+                "reference": "c2e1408ba2b9e31df2d1c0b136f3247e8818874d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/c91c5a694e3b8bca37136b830072a23f2c1250fa",
-                "reference": "c91c5a694e3b8bca37136b830072a23f2c1250fa",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/c2e1408ba2b9e31df2d1c0b136f3247e8818874d",
+                "reference": "c2e1408ba2b9e31df2d1c0b136f3247e8818874d",
                 "shasum": ""
             },
             "require": {
@@ -2868,9 +2868,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.261.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.262.0"
             },
-            "time": "2022-08-08T01:28:12+00:00"
+            "time": "2022-08-14T01:06:11+00:00"
         },
         {
             "name": "google/auth",
@@ -3930,16 +3930,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "6.7.0",
+            "version": "6.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "b091648d8cc81548248a94cb87f2ff8eaab5c01e"
+                "reference": "0a7c2186034c55733031c5b96aa860385842aa27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/b091648d8cc81548248a94cb87f2ff8eaab5c01e",
-                "reference": "b091648d8cc81548248a94cb87f2ff8eaab5c01e",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/0a7c2186034c55733031c5b96aa860385842aa27",
+                "reference": "0a7c2186034c55733031c5b96aa860385842aa27",
                 "shasum": ""
             },
             "require": {
@@ -4021,7 +4021,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-28T17:24:19+00:00"
+            "time": "2022-08-16T23:02:37+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -4099,16 +4099,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.24.0",
+            "version": "v9.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "053840f579cf01d353d81333802afced79b1c0af"
+                "reference": "e8af8c2212e3717757ea7f459a655a2e9e771109"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/053840f579cf01d353d81333802afced79b1c0af",
-                "reference": "053840f579cf01d353d81333802afced79b1c0af",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e8af8c2212e3717757ea7f459a655a2e9e771109",
+                "reference": "e8af8c2212e3717757ea7f459a655a2e9e771109",
                 "shasum": ""
             },
             "require": {
@@ -4275,7 +4275,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-08-09T13:43:22+00:00"
+            "time": "2022-08-16T16:36:05+00:00"
         },
         {
             "name": "laravel/nova",
@@ -5101,16 +5101,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "ed0ecc7f9b5c2f4a9872185846974a808a3b052a"
+                "reference": "81aea9e5217084c7850cd36e1587ee4aad721c6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/ed0ecc7f9b5c2f4a9872185846974a808a3b052a",
-                "reference": "ed0ecc7f9b5c2f4a9872185846974a808a3b052a",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/81aea9e5217084c7850cd36e1587ee4aad721c6b",
+                "reference": "81aea9e5217084c7850cd36e1587ee4aad721c6b",
                 "shasum": ""
             },
             "require": {
@@ -5171,7 +5171,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.2.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.2.1"
             },
             "funding": [
                 {
@@ -5187,7 +5187,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-26T07:26:36+00:00"
+            "time": "2022-08-14T20:48:34+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
@@ -7693,16 +7693,16 @@
         },
         {
             "name": "railroad/event-data-synchronizer",
-            "version": "dev-v8.0-railcontent-2-integration",
+            "version": "dev-v8.0-railcontent-2-integration-referral-3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1"
+                "reference": "c21b95f1e10e2b803cb7cdfc5daaf9757c5339b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1",
-                "reference": "cee5829addc826ff8e06a7a7f9fc9a9473f1c2e1",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/c21b95f1e10e2b803cb7cdfc5daaf9757c5339b2",
+                "reference": "c21b95f1e10e2b803cb7cdfc5daaf9757c5339b2",
                 "shasum": ""
             },
             "require": {
@@ -7714,7 +7714,7 @@
                 "railroad/railcontent": "2.0.0",
                 "railroad/railforums": "2.0.*",
                 "railroad/railhelpscout": "2.0.*",
-                "railroad/referral": "2.0.*",
+                "railroad/referral": "3.0.*",
                 "railroad/usora": "3.0.*"
             },
             "require-dev": {
@@ -7749,9 +7749,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
-                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration"
+                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration-referral-3"
             },
-            "time": "2022-07-20T23:08:26+00:00"
+            "time": "2022-08-11T06:59:41+00:00"
         },
         {
             "name": "railroad/location",
@@ -8036,12 +8036,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "78450978eb02c03a3ff2b64ec4efdfb3a397836c"
+                "reference": "1a83062c9488f512cdc78bef82abc56381eff16c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/78450978eb02c03a3ff2b64ec4efdfb3a397836c",
-                "reference": "78450978eb02c03a3ff2b64ec4efdfb3a397836c",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1a83062c9488f512cdc78bef82abc56381eff16c",
+                "reference": "1a83062c9488f512cdc78bef82abc56381eff16c",
                 "shasum": ""
             },
             "require": {
@@ -8097,7 +8097,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-08-12T18:44:49+00:00"
+            "time": "2022-08-16T21:55:10+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8105,12 +8105,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "f0cbd53f7d05e3919d86a8fc03742c78c137c983"
+                "reference": "14ff140c94aaeca0f8c37d276ebdcd56cc64ddb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/f0cbd53f7d05e3919d86a8fc03742c78c137c983",
-                "reference": "f0cbd53f7d05e3919d86a8fc03742c78c137c983",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/14ff140c94aaeca0f8c37d276ebdcd56cc64ddb0",
+                "reference": "14ff140c94aaeca0f8c37d276ebdcd56cc64ddb0",
                 "shasum": ""
             },
             "require": {
@@ -8151,7 +8151,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0"
             },
-            "time": "2022-07-10T19:43:16+00:00"
+            "time": "2022-08-17T12:07:12+00:00"
         },
         {
             "name": "railroad/railhelpscout",
@@ -8257,16 +8257,16 @@
         },
         {
             "name": "railroad/referral",
-            "version": "v2.0.0",
+            "version": "v3.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/referral.git",
-                "reference": "f26c141191d5aff1baf5d877f2eb0f870a94a9ac"
+                "reference": "c5c25c5d08bc2cb5697751209fd342d0a801f4b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/f26c141191d5aff1baf5d877f2eb0f870a94a9ac",
-                "reference": "f26c141191d5aff1baf5d877f2eb0f870a94a9ac",
+                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/c5c25c5d08bc2cb5697751209fd342d0a801f4b2",
+                "reference": "c5c25c5d08bc2cb5697751209fd342d0a801f4b2",
                 "shasum": ""
             },
             "require": {
@@ -8292,9 +8292,9 @@
             "description": "Musora referral package",
             "support": {
                 "issues": "https://github.com/railroadmedia/referral/issues",
-                "source": "https://github.com/railroadmedia/referral/tree/v2.0.0"
+                "source": "https://github.com/railroadmedia/referral/tree/v3.0"
             },
-            "time": "2022-05-20T21:39:09+00:00"
+            "time": "2022-08-10T16:00:54+00:00"
         },
         {
             "name": "railroad/remotestorage",
@@ -9138,16 +9138,16 @@
         },
         {
             "name": "sokil/php-isocodes-db-only",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sokil/php-isocodes-db-only.git",
-                "reference": "1b9367cbba1887283041267a5cdd022e2add81ef"
+                "reference": "ccfab2065c66d6253f1afe85dff2a16d0d728e2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sokil/php-isocodes-db-only/zipball/1b9367cbba1887283041267a5cdd022e2add81ef",
-                "reference": "1b9367cbba1887283041267a5cdd022e2add81ef",
+                "url": "https://api.github.com/repos/sokil/php-isocodes-db-only/zipball/ccfab2065c66d6253f1afe85dff2a16d0d728e2b",
+                "reference": "ccfab2065c66d6253f1afe85dff2a16d0d728e2b",
                 "shasum": ""
             },
             "require": {
@@ -9172,9 +9172,9 @@
             "description": "Database for ISO country, subdivision, language, currency and script definitions and their translations. Based on pythons pycountry and Debian's iso-codes.",
             "support": {
                 "issues": "https://github.com/sokil/php-isocodes-db-only/issues",
-                "source": "https://github.com/sokil/php-isocodes-db-only/tree/4.0.1"
+                "source": "https://github.com/sokil/php-isocodes-db-only/tree/4.0.2"
             },
-            "time": "2022-06-04T09:37:53+00:00"
+            "time": "2022-08-15T17:42:01+00:00"
         },
         {
             "name": "spatie/fractalistic",
@@ -13454,16 +13454,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.15.2",
+            "version": "v1.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "8eb6d7116deda5b0e26153c1993f3e326d67768c"
+                "reference": "7e7222ef0b0d7f0a0b9635543c0d7d09ef720cf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/8eb6d7116deda5b0e26153c1993f3e326d67768c",
-                "reference": "8eb6d7116deda5b0e26153c1993f3e326d67768c",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/7e7222ef0b0d7f0a0b9635543c0d7d09ef720cf1",
+                "reference": "7e7222ef0b0d7f0a0b9635543c0d7d09ef720cf1",
                 "shasum": ""
             },
             "require": {
@@ -13510,7 +13510,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-08-08T20:02:04+00:00"
+            "time": "2022-08-16T14:53:54+00:00"
         },
         {
             "name": "maximebf/debugbar",

@@ -209,8 +209,10 @@ Route::domain('{musoraDomain}')
                     'exploring-beats',
                     'sonor-drums',
                     'student-reviews',
+                    'student-focus',
                     'archives',
                     'recording',
+                    'play-alongs',
                 ]
             )
             ->name('platform.content.first-level');
@@ -402,3 +404,9 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
     });
+
+//Route fallback - when no route is matched
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+})
+    ->middleware(['web_authenticated']);

@@ -21,7 +21,7 @@
                 <p class="tw-mb-8">We're experiencing an internal server problem.</p>
 
                 <a href="{{ $brand }}/" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
-                <p class="tw-mb-4">Go back or <a href="{{ $brand }}/support" class="tw-text-[#081825] dark:tw-text-white tw-underline tw-font-bold">contact support</a></p>
+                <p class="tw-mb-4">Go back or <a href="/{{ $brand }}/support" class="tw-text-[#081825] dark:tw-text-white tw-underline tw-font-bold">contact support</a></p>
             </div>
         </div>
     </div>

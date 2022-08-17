@@ -1,26 +1,61 @@
-@php
-    $bodyClass = ($bodyClass ?? '') . ' sidebar';
-    $leftSidebar = true;
-@endphp
-
-@extends('members.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Dictionary of Terms | Drumeo</title>
+    <title>Drumeo Dictionary of Terms | Musora</title>
 @endsection
 
-@section('styles')
-    <style>
-        #backToTop {
-            position:fixed;
-            bottom:15px;
-            left:15px;
-            z-index:97;
-        }
-    </style>
+@section('content')
+
+    @component('partials._header-banner', [
+        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+    ])
+        @slot('content')
+            <div class="tw-flex tw-flex-col tw-pr-1 tw-text-center">
+                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2 tw-text-center">
+                    <i class="icon-dictionary-drum-terms tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
+                    <span class="tw-text-32 tw-font-bold">Drumeo Dictionary of Terms</span>
+                </h1>
+            </div>
+        @endslot
+    @endcomponent
+
+    <div id="dictionaryNav" class="container fluid bg-grey-5 pv tw-sticky tw-top-[58px]">
+        <div class="flex flex-row flex-wrap align-center">
+            @foreach($dictionaryTerms as $letter => $definition)
+                <div class="text-white flex flex-column letter-anchor align-center">
+                    <a class="subheading uppercase text-white no-decoration"
+                       href="#{{ $letter }}">{{ $letter }}</a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
+        <div class="flex flex-column">
+            @foreach($dictionaryTerms as $letter => $terms)
+                <div class="flex flex-column mb-2 tw-relative">
+                    <a id="{{ $letter }}" class="tw-absolute tw--top-[65px]"></a>
+                    <div class="tw-flex tw-flex-row bg-grey-2 dark:tw-bg-[#223457] tw-rounded tw-items-center tw-justify-center pa">
+                        <h1 class="heading tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-text-center">
+                            {{ $letter }}
+                        </h1>
+                    </div>
+                    <div class="tw-flex tw0flex-row pa">
+                        <div class="flex flex-column">
+                            @foreach($terms as $term => $definition)
+                                <p class="body mb-1 dark:tw-text-white">
+                                    <strong>{{ $term }}</strong> - {{ $definition }}
+                                </p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection
 
-@section('scripts')
+@section('layout-scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             var toTopButton = document.getElementById('backToTop');
@@ -40,54 +75,3 @@
         });
     </script>
 @endsection
-
-@section('content')
-    @include('members.partials._drumeo-sidebar')
-
-    <header id="pageHeader" class="container fluid pv-4" style="background-image:url({{ cdn('headers/members-header-background-image.jpg') }});">
-        <div class="container text-center">
-            <h1 class="heading text-white mb-2">
-                <i class="icon-dictionary-drum-terms text-drumeo"></i> Dictionary of Terms
-            </h1>
-        </div>
-    </header>
-
-    <a href="#pageHeader" id="backToTop" class="btn collapse-square bg-grey-5 text-white hide"
-       title="Back to Top">
-        <i class="fas fa-arrow-circle-up"></i>
-    </a>
-
-    <div id="dictionaryNav" class="container fluid bg-grey-5 pv">
-        <div class="flex flex-row flex-wrap align-center">
-            @foreach($dictionaryTerms as $letter => $definition)
-                <div class="text-white flex flex-column letter-anchor align-center">
-                    <a class="subheading uppercase text-white no-decoration"
-                       href="#{{ $letter }}">{{ $letter }}</a>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="container mv-3">
-        <div class="flex flex-column">
-            @foreach($dictionaryTerms as $letter => $terms)
-                <div class="flex flex-column mb-2" style="position:relative;">
-                    <a id="{{ $letter }}" style="position:absolute;top:-65px;"></a>
-                    <div class="flex flex-row bg-grey-2 align-center pa">
-                        <h1 class="heading text-drumeo uppercase text-center">{{ $letter }}</h1>
-                    </div>
-                    <div class="flex flex-row bg-white pa">
-                        <div class="flex flex-column">
-                            @foreach($terms as $term => $definition)
-                                <p class="body mb-1">
-                                    <strong>{{ $term }}</strong> - {{ $definition }}
-                                </p>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endsection
-

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Musora\MarketingController;
+use App\Http\Controllers\Musora\ReferralJoinController;
 use Illuminate\Support\Facades\Route;
 
 Route::domain('{musoraDomain}')
@@ -13,4 +14,5 @@ Route::domain('{musoraDomain}')
         Route::get('careers', [MarketingController::class, 'careers']);
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
+        Route::get('referral-join', [ReferralJoinController::class, 'join']);
     });
