@@ -125,22 +125,22 @@ class ContentService
     private $idContentCache = [];
 
     /**
-     * @param  ContentRepository  $contentRepository
-     * @param  ContentVersionRepository  $versionRepository
-     * @param  ContentFieldRepository  $fieldRepository
-     * @param  ContentDatumRepository  $datumRepository
-     * @param  ContentHierarchyRepository  $contentHierarchyRepository
-     * @param  ContentPermissionRepository  $contentPermissionRepository
-     * @param  CommentRepository  $commentRepository
-     * @param  CommentAssignmentRepository  $commentAssignmentRepository
-     * @param  UserContentProgressRepository  $userContentProgressRepository
-     * @param  UserPermissionsRepository  $userPermissionsRepository
-     * @param  ContentFollowsRepository  $contentFollowsRepository
-     * @param  ElasticService  $elasticService
-     * @param  ContentTopicRepository  $contentTopicRepository
-     * @param  ContentInstructorRepository  $contentInstructorRepository
-     * @param  ContentStyleRepository  $contentStyleRepository
-     * @param  ContentBpmRepository  $contentBpmRepository
+     * @param ContentRepository $contentRepository
+     * @param ContentVersionRepository $versionRepository
+     * @param ContentFieldRepository $fieldRepository
+     * @param ContentDatumRepository $datumRepository
+     * @param ContentHierarchyRepository $contentHierarchyRepository
+     * @param ContentPermissionRepository $contentPermissionRepository
+     * @param CommentRepository $commentRepository
+     * @param CommentAssignmentRepository $commentAssignmentRepository
+     * @param UserContentProgressRepository $userContentProgressRepository
+     * @param UserPermissionsRepository $userPermissionsRepository
+     * @param ContentFollowsRepository $contentFollowsRepository
+     * @param ElasticService $elasticService
+     * @param ContentTopicRepository $contentTopicRepository
+     * @param ContentInstructorRepository $contentInstructorRepository
+     * @param ContentStyleRepository $contentStyleRepository
+     * @param ContentBpmRepository $contentBpmRepository
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -183,12 +183,12 @@ class ContentService
     /**
      * Call the get by id method from repository and return the content
      *
-     * @param  integer  $id
+     * @param integer $id
      * @return ContentEntity|array|null
      */
     public function getById($id)
     {
-        $hash = 'contents_by_id_' . CacheHelper::getKey($id);
+        $hash = 'contents_by_id_'.CacheHelper::getKey($id);
 
         if (isset($this->idContentCache[$hash])) {
             return $this->idContentCache[$hash];
@@ -208,12 +208,12 @@ class ContentService
     /**
      * Call the get by ids method from repository
      *
-     * @param  integer[]  $ids
+     * @param integer[] $ids
      * @return array|Collection|ContentEntity[]
      */
     public function getByIds($ids)
     {
-        $hash = 'contents_by_ids_' . CacheHelper::getKey(...$ids);
+        $hash = 'contents_by_ids_'.CacheHelper::getKey(...$ids);
 
         if (isset($this->idContentCache[$hash])) {
             return $this->idContentCache[$hash];
@@ -233,12 +233,12 @@ class ContentService
     /**
      * Get all contents with specified type.
      *
-     * @param  string  $type
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getAllByType($type)
     {
-        $hash = 'contents_by_type_' . $type . '_' . CacheHelper::getKey($type);
+        $hash = 'contents_by_type_'.$type.'_'.CacheHelper::getKey($type);
 
         $results = CacheHelper::getCachedResultsForKey($hash);
 
@@ -252,12 +252,12 @@ class ContentService
     /**
      * Get all contents with specified status, field and type.
      *
-     * @param  array  $types
-     * @param  string  $status
-     * @param  string  $fieldKey
-     * @param  string  $fieldValue
-     * @param  string  $fieldType
-     * @param  string  $fieldComparisonOperator
+     * @param array $types
+     * @param string $status
+     * @param string $fieldKey
+     * @param string $fieldValue
+     * @param string $fieldType
+     * @param string $fieldComparisonOperator
      * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndField(
@@ -268,7 +268,7 @@ class ContentService
         $fieldType,
         $fieldComparisonOperator = '='
     ) {
-        $hash = 'contents_by_types_field_and_status_' . CacheHelper::getKey(
+        $hash = 'contents_by_types_field_and_status_'.CacheHelper::getKey(
                 $types,
                 $status,
                 $fieldKey,
@@ -299,13 +299,13 @@ class ContentService
     /**
      * Get ordered contents by type, status and published_on date.
      *
-     * @param  array  $types
-     * @param  string  $status
-     * @param  string  $publishedOnValue
-     * @param  string  $publishedOnComparisonOperator
-     * @param  string  $orderByColumn
-     * @param  string  $orderByDirection
-     * @param  integer  $limit
+     * @param array $types
+     * @param string $status
+     * @param string $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param integer $limit
      * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -336,13 +336,13 @@ class ContentService
     /**
      * Get contents by slug and title.
      *
-     * @param  string  $slug
-     * @param  string  $type
+     * @param string $slug
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getBySlugAndType($slug, $type)
     {
-        $hash = 'contents_by_slug_type_' . $type . '_' . CacheHelper::getKey($slug, $type);
+        $hash = 'contents_by_slug_type_'.$type.'_'.CacheHelper::getKey($slug, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -355,14 +355,14 @@ class ContentService
     /**
      * Get contents by userId, type and slug.
      *
-     * @param  integer  $userId
-     * @param  string  $type
-     * @param  string  $slug
+     * @param integer $userId
+     * @param string $type
+     * @param string $slug
      * @return array|Collection|ContentEntity[]
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
-        $hash = 'contents_by_user_slug_type_' . $type . '_' . CacheHelper::getKey($userId, $type, $slug);
+        $hash = 'contents_by_user_slug_type_'.$type.'_'.CacheHelper::getKey($userId, $type, $slug);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -376,14 +376,14 @@ class ContentService
     /**
      * Get contents based on parent id.
      *
-     * @param  integer  $parentId
-     * @param  string  $orderBy
-     * @param  string  $orderByDirection
+     * @param integer $parentId
+     * @param string $orderBy
+     * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        $hash = 'contents_by_parent_id_' . CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_id_'.CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -398,9 +398,9 @@ class ContentService
     /**
      * Get paginated contents by parent id.
      *
-     * @param  integer  $parentId
-     * @param  string  $orderBy
-     * @param  string  $orderByDirection
+     * @param integer $parentId
+     * @param string $orderBy
+     * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdPaginated(
@@ -411,7 +411,7 @@ class ContentService
         $orderByDirection = 'asc'
     ) {
         $hash =
-            'contents_by_parent_id_paginated_' .
+            'contents_by_parent_id_paginated_'.
             CacheHelper::getKey($parentId, $limit, $skip, $orderBy, $orderByDirection);
 
         $results = CacheHelper::getCachedResultsForKey($hash);
@@ -434,10 +434,10 @@ class ContentService
     /**
      * Get ordered contents by parent id with specified type.
      *
-     * @param  integer  $parentId
-     * @param  array  $types
-     * @param  string  $orderBy
-     * @param  string  $orderByDirection
+     * @param integer $parentId
+     * @param array $types
+     * @param string $orderBy
+     * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdWhereTypeIn(
@@ -446,7 +446,7 @@ class ContentService
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
     ) {
-        $hash = 'contents_by_parent_id_type_' . CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_id_type_'.CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -466,10 +466,10 @@ class ContentService
     /**
      * Get ordered contents by parent id and type.
      *
-     * @param  integer  $parentId
-     * @param  array  $types
-     * @param  string  $orderBy
-     * @param  string  $orderByDirection
+     * @param integer $parentId
+     * @param array $types
+     * @param string $orderBy
+     * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdWhereTypeInPaginated(
@@ -480,7 +480,7 @@ class ContentService
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
     ) {
-        $hash = 'contents_by_parent_id_type_in_' . CacheHelper::getKey(
+        $hash = 'contents_by_parent_id_type_in_'.CacheHelper::getKey(
                 $parentId,
                 $types,
                 $limit,
@@ -509,8 +509,8 @@ class ContentService
     /**
      * Count contents with specified type and parent id.
      *
-     * @param  integer  $parentId
-     * @param  array  $types
+     * @param integer $parentId
+     * @param array $types
      * @return integer
      */
     public function countByParentIdWhereTypeIn(
@@ -526,14 +526,14 @@ class ContentService
     /**
      * Get ordered contents based on parent ids.
      *
-     * @param  array  $parentIds
-     * @param  string  $orderBy
-     * @param  string  $orderByDirection
+     * @param array $parentIds
+     * @param string $orderBy
+     * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        $hash = 'contents_by_parent_ids_' . CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_ids_'.CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -548,13 +548,13 @@ class ContentService
     /**
      * Get contents by child and type.
      *
-     * @param  integer  $childId
-     * @param  string  $type
+     * @param integer $childId
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereType($childId, $type)
     {
-        $hash = 'contents_by_child_id_and_type_' . $type . '_' . CacheHelper::getKey($childId, $type);
+        $hash = 'contents_by_child_id_and_type_'.$type.'_'.CacheHelper::getKey($childId, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -569,13 +569,13 @@ class ContentService
     /**
      * Get contents by child ids with specified type.
      *
-     * @param  array  $childIds
-     * @param  string  $type
+     * @param array $childIds
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
-        $hash = 'contents_by_child_ids_and_type_' . $type . '_' . CacheHelper::getKey($childIds, $type);
+        $hash = 'contents_by_child_ids_and_type_'.$type.'_'.CacheHelper::getKey($childIds, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -590,13 +590,13 @@ class ContentService
     /**
      * Get contents by child ids with specified type.
      *
-     * @param  array  $childIds
-     * @param  string  $type
+     * @param array $childIds
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdsWhereTypeForUrl(array $childIds, $type)
     {
-        $hash = 'contents_by_child_ids_and_type_for_url_' . $type . '_' . CacheHelper::getKey($childIds, $type);
+        $hash = 'contents_by_child_ids_and_type_for_url_'.$type.'_'.CacheHelper::getKey($childIds, $type);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -611,13 +611,13 @@ class ContentService
     /**
      * Get contents by child id where parent type met the criteria.
      *
-     * @param  integer  $childId
-     * @param  array  $types
+     * @param integer $childId
+     * @param array $types
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
-        $hash = 'contents_by_child_ids_and_parent_types_' . CacheHelper::getKey($childId, $types);
+        $hash = 'contents_by_child_ids_and_parent_types_'.CacheHelper::getKey($childId, $types);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (is_null($results)) {
@@ -632,16 +632,16 @@ class ContentService
     /**
      * Get paginated contents by type and user progress state.
      *
-     * @param  string  $type
-     * @param  integer  $userId
-     * @param  string  $state
-     * @param  int  $limit
-     * @param  int  $skip
+     * @param string $type
+     * @param integer $userId
+     * @param string $state
+     * @param int $limit
+     * @param int $skip
      * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
-        $hash = 'contents_paginated_by_type_' . $type . '_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+        $hash = 'contents_paginated_by_type_'.$type.'_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $type,
                 $userId,
                 $state,
@@ -669,11 +669,11 @@ class ContentService
     /**
      * Get paginated contents by types and user progress state.
      *
-     * @param  array  $types
-     * @param  integer  $userId
-     * @param  string  $state
-     * @param  int  $limit
-     * @param  int  $skip
+     * @param array $types
+     * @param integer $userId
+     * @param string $state
+     * @param int $limit
+     * @param int $skip
      * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypesUserProgressState(
@@ -683,7 +683,7 @@ class ContentService
         $limit = 25,
         $skip = 0
     ) {
-        $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+        $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $types,
                 $userId,
                 $state,
@@ -711,11 +711,11 @@ class ContentService
     /**
      * Get recent paginated contents by types and user progress state.
      *
-     * @param  array  $types
-     * @param  integer  $userId
-     * @param  string  $state
-     * @param  int  $limit
-     * @param  int  $skip
+     * @param array $types
+     * @param integer $userId
+     * @param string $state
+     * @param int $limit
+     * @param int $skip
      * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypesRecentUserProgressState(
@@ -725,7 +725,7 @@ class ContentService
         $limit = 25,
         $skip = 0
     ) {
-        $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+        $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'.CacheHelper::getKey(
                 $types,
                 $userId,
                 $state,
@@ -753,11 +753,11 @@ class ContentService
     /**
      * Count recent contents with user progress state and type.
      *
-     * @param  array  $types
-     * @param  integer  $userId
-     * @param  string  $state
-     * @param  int  $limit
-     * @param  int  $skip
+     * @param array $types
+     * @param integer $userId
+     * @param string $state
+     * @param int $limit
+     * @param int $skip
      * @return array|Collection|ContentEntity[]
      */
     public function countByTypesRecentUserProgressState(
@@ -775,12 +775,12 @@ class ContentService
     /**
      * Get neighbouring siblings by type.
      *
-     * @param  string  $type
-     * @param  string  $columnName
-     * @param  string  $columnValue
-     * @param  int  $siblingPairLimit
-     * @param  string  $orderColumn
-     * @param  string  $orderDirection
+     * @param string $type
+     * @param string $columnName
+     * @param string $columnValue
+     * @param int $siblingPairLimit
+     * @param string $orderColumn
+     * @param string $orderDirection
      * @return array|ContentEntity|Collection
      */
     public function getTypeNeighbouringSiblings(
@@ -791,7 +791,7 @@ class ContentService
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
     ) {
-        $hash = 'contents_type_neighbouring_siblings_' . CacheHelper::getKey(
+        $hash = 'contents_type_neighbouring_siblings_'.CacheHelper::getKey(
                 $type,
                 $columnName,
                 $columnValue,
@@ -834,9 +834,9 @@ class ContentService
     /**
      * Count contents by type and user progress state.
      *
-     * @param  array  $types
-     * @param  integer  $userId
-     * @param  string  $state
+     * @param array $types
+     * @param integer $userId
+     * @param string $state
      * @return integer
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
@@ -857,18 +857,18 @@ class ContentService
      *
      * @param $page
      * @param $limit
-     * @param  string  $orderByAndDirection
-     * @param  array  $includedTypes
-     * @param  array  $slugHierarchy
-     * @param  array  $requiredParentIds
-     * @param  array  $requiredFields
-     * @param  array  $includedFields
-     * @param  array  $requiredUserStates
-     * @param  array  $includedUserStates
-     * @param  bool  $pullFilterFields
-     * @param  false  $getFutureContentOnly
-     * @param  bool  $pullPagination
-     * @param  false  $getFollowedContentOnly
+     * @param string $orderByAndDirection
+     * @param array $includedTypes
+     * @param array $slugHierarchy
+     * @param array $requiredParentIds
+     * @param array $requiredFields
+     * @param array $includedFields
+     * @param array $requiredUserStates
+     * @param array $includedUserStates
+     * @param bool $pullFilterFields
+     * @param false $getFutureContentOnly
+     * @param bool $pullPagination
+     * @param false $getFollowedContentOnly
      * @return mixed|Collection|null
      */
     public function getFiltered(
@@ -895,7 +895,7 @@ class ContentService
         $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $hash = 'contents_results_' . CacheHelper::getKey(
+        $hash = 'contents_results_'.CacheHelper::getKey(
                 $page,
                 $limit,
                 $orderByColumn,
@@ -983,10 +983,10 @@ class ContentService
                     $followedContents = $this->contentFollowsRepository->getFollowedContentIds();
                     if (empty($followedContents)) {
                         $resultsDB = new ContentFilterResultsEntity([
-                            'results' => $followedContents,
-                            'total_results' => 0,
-                            'filter_options' => [],
-                        ]);
+                                                                        'results' => $followedContents,
+                                                                        'total_results' => 0,
+                                                                        'filter_options' => [],
+                                                                    ]);
 
                         $results =
                             CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
@@ -1030,7 +1030,7 @@ class ContentService
                     $followedContents
                 );
                 $finish = microtime(true) - $start;
-                error_log('get elastic data in ' . $finish);
+                error_log('get elastic data in '.$finish);
                 $totalResults = $elasticData['hits']['total']['value'];
 
                 $ids = [];
@@ -1089,19 +1089,18 @@ class ContentService
                     $filters = $filterOptions;
                     $finish = microtime(true) - $start;
 
-                    error_log('get filter options in  ' . $finish);
+                    error_log('get filter options in  '.$finish);
                 }
 
                 $resultsDB = new ContentFilterResultsEntity([
-                    'results' => $data,
-                    'total_results' => $totalResults,
-                    'filter_options' => $filters,
-                ]);
+                                                                'results' => $data,
+                                                                'total_results' => $totalResults,
+                                                                'filter_options' => $filters,
+                                                            ]);
 
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
-
                 $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
 
                 if ($pullFilterFields && !empty($filterFields['difficulty'])) {
@@ -1111,13 +1110,12 @@ class ContentService
                     );
                 }
 
-                $resultsDB = new ContentFilterResultsEntity(
-                    [
-                        'results' => $filter->retrieveFilter(),
-                        'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                        'filter_options' => $filterFields,
-                    ]
-                );
+                $resultsDB = new ContentFilterResultsEntity([
+                                                                'results' => $filter->retrieveFilter(),
+                                                                'total_results' => $pullPagination ?
+                                                                    $filter->countFilter() : 0,
+                                                                'filter_options' => $filterFields,
+                                                            ]);
 
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
@@ -1134,7 +1132,7 @@ class ContentService
         // accommodates—have an "included_types" value like this—an array of one string.
         $isContentTypeWithSpecialConditions = in_array($includedContentTypes, [
             ['student-focus'],
-            ['student-review']
+            ['student-review'],
         ]);
 
         if (!$isContentTypeWithSpecialConditions) {
@@ -1142,7 +1140,7 @@ class ContentService
         }
 
         foreach ($difficultyOptions as &$option) {
-            $option = is_string($option) ? strtolower((string) $option) : $option;
+            $option = is_string($option) ? strtolower((string)$option) : $option;
         }
 
         $hasBeginner = in_array('beginner', $difficultyOptions);
@@ -1160,22 +1158,23 @@ class ContentService
                 $difficultyOptions[] = 'Advanced';
             }
         }
+
         return $difficultyOptions;
     }
 
     /**
      * Call the create method from ContentRepository and return the new created content
      *
-     * @param  string  $slug
-     * @param  string  $type
-     * @param  string  $status
-     * @param  string|null  $language
-     * @param  string|null  $brand
-     * @param  int|null  $userId
-     * @param  string|null  $publishedOn
-     * @param  int|null  $parentId
-     * @param  int  $sort
-     * @param  bool  $slugify
+     * @param string $slug
+     * @param string $type
+     * @param string $status
+     * @param string|null $language
+     * @param string|null $brand
+     * @param int|null $userId
+     * @param string|null $publishedOn
+     * @param int|null $parentId
+     * @param int $sort
+     * @param bool $slugify
      * @return array|ContentEntity
      */
     public function create(
@@ -1195,18 +1194,18 @@ class ContentService
         }
 
         $id = $this->contentRepository->create([
-            'slug' => $slug,
-            'type' => $type,
-            'sort' => $sort,
-            'status' => $status ?? self::STATUS_DRAFT,
-            'language' => $language ?? ConfigService::$defaultLanguage,
-            'brand' => $brand ?? ConfigService::$brand,
-            'total_xp' => $this->getDefaultXP($type, 0),
-            'user_id' => $userId,
-            'published_on' => $publishedOn,
-            'created_on' => Carbon::now()
-                ->toDateTimeString(),
-        ]);
+                                                   'slug' => $slug,
+                                                   'type' => $type,
+                                                   'sort' => $sort,
+                                                   'status' => $status ?? self::STATUS_DRAFT,
+                                                   'language' => $language ?? ConfigService::$defaultLanguage,
+                                                   'brand' => $brand ?? ConfigService::$brand,
+                                                   'total_xp' => $this->getDefaultXP($type, 0),
+                                                   'user_id' => $userId,
+                                                   'published_on' => $publishedOn,
+                                                   'created_on' => Carbon::now()
+                                                       ->toDateTimeString(),
+                                               ]);
 
         //save the link with parent if the parent id exist on the request
         if ($parentId) {
@@ -1231,8 +1230,8 @@ class ContentService
     /**
      * Update and return the updated content.
      *
-     * @param  integer  $id
-     * @param  array  $data
+     * @param integer $id
+     * @param array $data
      * @return array|ContentEntity
      */
     public function update($id, array $data)
@@ -1248,7 +1247,7 @@ class ContentService
 
         event(new ElasticDataShouldUpdate($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_'.$id);
 
         CacheHelper::deleteUserFields(null, 'contents');
 
@@ -1272,7 +1271,7 @@ class ContentService
 
         event(new ElasticDataShouldUpdate($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_'.$id);
 
         return $this->contentRepository->delete($id);
     }
@@ -1280,7 +1279,7 @@ class ContentService
     /**
      * Delete data related with the specified content id.
      *
-     * @param  integer  $contentId
+     * @param integer $contentId
      */
     public function deleteContentRelated($contentId)
     {
@@ -1312,8 +1311,8 @@ class ContentService
 
     /**
      * @param $userId
-     * @param  array  $contents
-     * @param  null  $singlePlaylistSlug
+     * @param array $contents
+     * @param null $singlePlaylistSlug
      * @return array|Collection|ContentEntity[]
      */
     public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
@@ -1368,7 +1367,7 @@ class ContentService
 
         event(new ElasticDataShouldUpdate($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_'.$id);
 
         return $this->contentRepository->softDelete([$id]);
     }
@@ -1376,7 +1375,7 @@ class ContentService
     /**
      * Soft delete the children for specified content id.
      *
-     * @param  int  $id
+     * @param int $id
      * @return int
      */
     public function softDeleteContentChildren($id)
@@ -1384,7 +1383,7 @@ class ContentService
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
 
         //delete parent content cache
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_'.$id);
 
         return $this->contentRepository->softDelete(Arr::pluck($children, 'child_id'));
     }
@@ -1392,9 +1391,9 @@ class ContentService
     /**
      * Get contents by field value and types.
      *
-     * @param  array  $contentTypes
-     * @param  string  $contentFieldKey
-     * @param  array  $contentFieldValues
+     * @param array $contentTypes
+     * @param string $contentFieldKey
+     * @param array $contentFieldValues
      * @return mixed
      */
     public function getByContentFieldValuesForTypes(
@@ -1402,7 +1401,7 @@ class ContentService
         $contentFieldKey,
         array $contentFieldValues = []
     ) {
-        $hash = 'contents_by_types_and_field_value_' . CacheHelper::getKey(
+        $hash = 'contents_by_types_and_field_value_'.CacheHelper::getKey(
                 $contentTypes,
                 $contentFieldKey,
                 $contentFieldValues
@@ -1424,8 +1423,8 @@ class ContentService
     }
 
     /**
-     * @param  null  $brand
-     * @param  bool  $includeSemesterPackLessons
+     * @param null $brand
+     * @param bool $includeSemesterPackLessons
      * @return Collection|ContentEntity[]
      */
     public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
@@ -1442,15 +1441,12 @@ class ContentService
         if (empty($liveEventsTypes) && empty($contentReleasesTypes)) {
             // Accommodates AddEvent calling this method from Musora, where railcontent config is different than expected.
             $liveEventsTypes = array_merge(
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.showTypes', []),
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.liveContentTypes', [])
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.liveContentTypes', [])
             );
             $contentReleasesTypes = array_merge(
-                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.showTypes', []),
-                (array)config(
-                    'railcontent.calendar-content-types-by-brand.' . $brand . '.contentReleaseContentTypes',
-                    []
-                )
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.contentReleaseContentTypes', [])
             );
         }
 
@@ -1477,7 +1473,7 @@ class ContentService
         ContentRepository::$pullFutureContent = true;
 
         if ($includeSemesterPackLessons) {
-            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
+            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.'.$brand, []);
         }
 
         if (empty($liveEventsTypes) && empty($contentReleasesTypes) && empty($semesterPacksToGet)) {
@@ -1577,7 +1573,7 @@ class ContentService
             foreach ($semesterPackLessons as $lesson) {
                 foreach ($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds) {
                     if (in_array($lesson['id'], $setOfIds)) {
-                        $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
+                        $labels = config('railcontent.semester-pack-schedule-labels.'.$brand);
                         if (array_key_exists($parentSlug, $labels)) {
                             $result =
                                 $this->getByChildIdWhereParentTypeIn($lesson['id'], ['semester-pack'])
@@ -1659,13 +1655,13 @@ class ContentService
     }
 
     /**
-     * @param  array  $types
-     * @param  string  $groupBy
+     * @param array $types
+     * @param string $groupBy
      * @return mixed
      */
     public function countByTypes(array $types, $groupBy = '')
     {
-        $hash = 'count_by_types_' . CacheHelper::getKey(implode($types), $groupBy);
+        $hash = 'count_by_types_'.CacheHelper::getKey(implode($types), $groupBy);
 
         if (isset($this->idContentCache[$hash])) {
             return $this->idContentCache[$hash];
@@ -1694,7 +1690,7 @@ class ContentService
 
     public function getByChildId($childId)
     {
-        $hash = 'contents_by_child_id_' . '_' . CacheHelper::getKey($childId);
+        $hash = 'contents_by_child_id_'.'_'.CacheHelper::getKey($childId);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -1860,7 +1856,7 @@ class ContentService
     /**
      * Call the getElasticContentById method from repository and return the data for elasticsearch documents
      *
-     * @param  integer  $id
+     * @param integer $id
      * @return ContentEntity|array|null
      */
     public function getContentForElastic($id)
@@ -1935,87 +1931,88 @@ class ContentService
 
     public function fillParentContentDataColumnForContentIds(array $contentIds)
     {
-        $hierarchyRows = $this->contentRepository->query()
-            ->from(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content as rcp1',
-                'rcp1.id',
-                '=',
-                'rch1.parent_id'
-            )
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content_hierarchy as rch2',
-                'rch2.child_id',
-                '=',
-                'rch1.parent_id'
-            )
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content as rcp2',
-                'rcp2.id',
-                '=',
-                'rch2.parent_id'
-            )
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content_hierarchy as rch3',
-                'rch3.child_id',
-                '=',
-                'rch2.parent_id'
-            )
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content as rcp3',
-                'rcp3.id',
-                '=',
-                'rch3.parent_id'
-            )
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content_hierarchy as rch4',
-                'rch4.child_id',
-                '=',
-                'rch3.parent_id'
-            )
-            ->leftJoin(
-                config('railcontent.table_prefix') . 'content as rcp4',
-                'rcp4.id',
-                '=',
-                'rch4.parent_id'
-            )
-            ->select(
-                [
-                    'rch1.child_id as rch1_child_id',
-                    'rch1.parent_id as rch1_parent_id',
-                    'rch1.child_position as rch1_child_position',
-                    'rcp1.id as rcp1_content_id',
-                    'rcp1.slug as rcp1_content_slug',
-                    'rcp1.type as rcp1_content_type',
-                    'rch2.child_id as rch2_child_id',
-                    'rch2.parent_id as rch2_parent_id',
-                    'rch2.child_position as rch2_child_position',
-                    'rcp2.id as rcp2_content_id',
-                    'rcp2.slug as rcp2_content_slug',
-                    'rcp2.type as rcp2_content_type',
-                    'rch3.child_id as rch3_child_id',
-                    'rch3.parent_id as rch3_parent_id',
-                    'rch3.child_position as rch3_child_position',
-                    'rcp3.id as rcp3_content_id',
-                    'rcp3.slug as rcp3_content_slug',
-                    'rcp3.type as rcp3_content_type',
-                    'rch4.child_id as rch4_child_id',
-                    'rch4.parent_id as rch4_parent_id',
-                    'rch4.child_position as rch4_child_position',
-                    'rcp4.id as rcp4_content_id',
-                    'rcp4.slug as rcp4_content_slug',
-                    'rcp4.type as rcp4_content_type',
-                ]
-            )
-            ->whereIn('rch1.child_id', $contentIds)
-            ->get();
+        $hierarchyRows =
+            $this->contentRepository->query()
+                ->from(config('railcontent.table_prefix').'content_hierarchy as rch1')
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp1',
+                    'rcp1.id',
+                    '=',
+                    'rch1.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content_hierarchy as rch2',
+                    'rch2.child_id',
+                    '=',
+                    'rch1.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp2',
+                    'rcp2.id',
+                    '=',
+                    'rch2.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content_hierarchy as rch3',
+                    'rch3.child_id',
+                    '=',
+                    'rch2.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp3',
+                    'rcp3.id',
+                    '=',
+                    'rch3.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content_hierarchy as rch4',
+                    'rch4.child_id',
+                    '=',
+                    'rch3.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp4',
+                    'rcp4.id',
+                    '=',
+                    'rch4.parent_id'
+                )
+                ->select([
+                             'rch1.child_id as rch1_child_id',
+                             'rch1.parent_id as rch1_parent_id',
+                             'rch1.child_position as rch1_child_position',
+                             'rcp1.id as rcp1_content_id',
+                             'rcp1.slug as rcp1_content_slug',
+                             'rcp1.type as rcp1_content_type',
+                             'rch2.child_id as rch2_child_id',
+                             'rch2.parent_id as rch2_parent_id',
+                             'rch2.child_position as rch2_child_position',
+                             'rcp2.id as rcp2_content_id',
+                             'rcp2.slug as rcp2_content_slug',
+                             'rcp2.type as rcp2_content_type',
+                             'rch3.child_id as rch3_child_id',
+                             'rch3.parent_id as rch3_parent_id',
+                             'rch3.child_position as rch3_child_position',
+                             'rcp3.id as rcp3_content_id',
+                             'rcp3.slug as rcp3_content_slug',
+                             'rcp3.type as rcp3_content_type',
+                             'rch4.child_id as rch4_child_id',
+                             'rch4.parent_id as rch4_parent_id',
+                             'rch4.child_position as rch4_child_position',
+                             'rcp4.id as rcp4_content_id',
+                             'rcp4.slug as rcp4_content_slug',
+                             'rcp4.type as rcp4_content_type',
+                         ])
+                ->whereIn('rch1.child_id', $contentIds)
+                ->get();
 
         $cases = [];
         $ids = [];
         $params = [];
 
         foreach ($contentIds as $contentId) {
-            $hierarchyData = $hierarchyRows->where('rch1_child_id', $contentId)->first();
+            $hierarchyData =
+                $hierarchyRows->where('rch1_child_id', $contentId)
+                    ->first();
 
             if (!empty($hierarchyData)) {
                 $parentContentDataForDatabase = [];
@@ -2082,10 +2079,11 @@ class ContentService
         $cases = implode(' ', $cases);
 
         if (!empty($ids)) {
-            DB::connection(config('railcontent.database_connection_name'))->update(
-                "UPDATE railcontent_content SET `parent_content_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
-                $params
-            );
+            DB::connection(config('railcontent.database_connection_name'))
+                ->update(
+                    "UPDATE railcontent_content SET `parent_content_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
+                    $params
+                );
         }
 
         return true;
@@ -2098,81 +2096,118 @@ class ContentService
      */
     public function getNextContentForParentContentForUser($parentContentId, $userId)
     {
-        $isParentComplete = $this->databaseManager->connection(config('railcontent.database_connection_name'))
-            ->table('railcontent_user_content_progress')
-            ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
-            ->exists();
+        $isParentComplete =
+            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_user_content_progress')
+                ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
+                ->exists();
 
-        $contentHierarchyDataQuery = $this->databaseManager->connection(config('railcontent.database_connection_name'))
-            ->table('railcontent_content_hierarchy AS ch_1')
-            ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
-            ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
-            ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
-            ->leftJoin('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
-                return $joinClause->on('ch_1_child.id', '=', 'ch_1.child_id')
-                    ->whereNot('ch_1_child.type', 'assignment')
-                    ->where('ch_1_child.status', '=', 'published')
-                    ->where('ch_1_child.published_on', '<', Carbon::now()->toDateTimeString());
-            })->leftJoin('railcontent_content AS ch_2_child', function (JoinClause $joinClause) {
-                return $joinClause->on('ch_2_child.id', '=', 'ch_2.child_id')
-                    ->whereNot('ch_2_child.type', 'assignment')
-                    ->where('ch_2_child.status', '=', 'published')
-                    ->where('ch_2_child.published_on', '<', Carbon::now()->toDateTimeString());
-            })->leftJoin('railcontent_content AS ch_3_child', function (JoinClause $joinClause) {
-                return $joinClause->on('ch_3_child.id', '=', 'ch_3.child_id')
-                    ->whereNot('ch_3_child.type', 'assignment')
-                    ->where('ch_2_child.status', '=', 'published')
-                    ->where('ch_2_child.published_on', '<', Carbon::now()->toDateTimeString());
-            })->leftJoin('railcontent_content AS ch_4_child', function (JoinClause $joinClause) {
-                return $joinClause->on('ch_4_child.id', '=', 'ch_4.child_id')
-                    ->whereNot('ch_4_child.type', 'assignment')
-                    ->where('ch_2_child.status', '=', 'published')
-                    ->where('ch_2_child.published_on', '<', Carbon::now()->toDateTimeString());
-            })
-            ->leftJoin('railcontent_user_content_progress AS ucp_1', function (JoinClause $joinClause) use ($userId) {
-                return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
-                    ->where('ucp_1.user_id', $userId);
-            })
-            ->leftJoin('railcontent_user_content_progress AS ucp_2', function (JoinClause $joinClause) use ($userId) {
-                return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
-                    ->where('ucp_2.user_id', $userId);
-            })
-            ->leftJoin('railcontent_user_content_progress AS ucp_3', function (JoinClause $joinClause) use ($userId) {
-                return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
-                    ->where('ucp_3.user_id', $userId);
-            })
-            ->leftJoin('railcontent_user_content_progress AS ucp_4', function (JoinClause $joinClause) use ($userId) {
-                return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
-                    ->where('ucp_4.user_id', $userId);
-            })
-            ->select([
-                'ch_1.parent_id AS ch_1_parent_id',
-                'ch_2.parent_id AS ch_2_parent_id',
-                'ch_3.parent_id AS ch_3_parent_id',
-                'ch_4.parent_id AS ch_4_parent_id',
-                'ch_1.child_id AS ch_1_child_id',
-                'ch_2.child_id AS ch_2_child_id',
-                'ch_3.child_id AS ch_3_child_id',
-                'ch_4.child_id AS ch_4_child_id',
-                'ch_1.child_position AS ch_1_child_position',
-                'ch_2.child_position AS ch_2_child_position',
-                'ch_3.child_position AS ch_3_child_position',
-                'ch_4.child_position AS ch_4_child_position',
-                'ch_1_child.slug AS ch_1_child_slug',
-                'ch_2_child.slug AS ch_2_child_slug',
-                'ch_3_child.slug AS ch_3_child_slug',
-                'ch_4_child.slug AS ch_4_child_slug',
-                'ucp_1.state AS ucp_1_state',
-                'ucp_2.state AS ucp_2_state',
-                'ucp_3.state AS ucp_3_state',
-                'ucp_4.state AS ucp_4_state',
-            ])
-            ->where('ch_1.parent_id', $parentContentId)
-            ->orderBy('ch_1.child_position')
-            ->orderBy('ch_2.child_position')
-            ->orderBy('ch_3.child_position')
-            ->orderBy('ch_4.child_position')
-            ->limit(1);
+        $contentHierarchyDataQuery =
+            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_content_hierarchy AS ch_1')
+                ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
+                ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
+                ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
+                ->leftJoin('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_1_child.id', '=', 'ch_1.child_id')
+                        ->whereNot('ch_1_child.type', 'assignment')
+                        ->where('ch_1_child.status', '=', 'published')
+                        ->where(
+                            'ch_1_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin('railcontent_content AS ch_2_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_2_child.id', '=', 'ch_2.child_id')
+                        ->whereNot('ch_2_child.type', 'assignment')
+                        ->where('ch_2_child.status', '=', 'published')
+                        ->where(
+                            'ch_2_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin('railcontent_content AS ch_3_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_3_child.id', '=', 'ch_3.child_id')
+                        ->whereNot('ch_3_child.type', 'assignment')
+                        ->where('ch_2_child.status', '=', 'published')
+                        ->where(
+                            'ch_2_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin('railcontent_content AS ch_4_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_4_child.id', '=', 'ch_4.child_id')
+                        ->whereNot('ch_4_child.type', 'assignment')
+                        ->where('ch_2_child.status', '=', 'published')
+                        ->where(
+                            'ch_2_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_1',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
+                            ->where('ucp_1.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_2',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
+                            ->where('ucp_2.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_3',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
+                            ->where('ucp_3.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_4',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
+                            ->where('ucp_4.user_id', $userId);
+                    }
+                )
+                ->select([
+                             'ch_1.parent_id AS ch_1_parent_id',
+                             'ch_2.parent_id AS ch_2_parent_id',
+                             'ch_3.parent_id AS ch_3_parent_id',
+                             'ch_4.parent_id AS ch_4_parent_id',
+                             'ch_1.child_id AS ch_1_child_id',
+                             'ch_2.child_id AS ch_2_child_id',
+                             'ch_3.child_id AS ch_3_child_id',
+                             'ch_4.child_id AS ch_4_child_id',
+                             'ch_1.child_position AS ch_1_child_position',
+                             'ch_2.child_position AS ch_2_child_position',
+                             'ch_3.child_position AS ch_3_child_position',
+                             'ch_4.child_position AS ch_4_child_position',
+                             'ch_1_child.slug AS ch_1_child_slug',
+                             'ch_2_child.slug AS ch_2_child_slug',
+                             'ch_3_child.slug AS ch_3_child_slug',
+                             'ch_4_child.slug AS ch_4_child_slug',
+                             'ucp_1.state AS ucp_1_state',
+                             'ucp_2.state AS ucp_2_state',
+                             'ucp_3.state AS ucp_3_state',
+                             'ucp_4.state AS ucp_4_state',
+                         ])
+                ->where('ch_1.parent_id', $parentContentId)
+                ->orderBy('ch_1.child_position')
+                ->orderBy('ch_2.child_position')
+                ->orderBy('ch_3.child_position')
+                ->orderBy('ch_4.child_position')
+                ->limit(1);
 
         // if the parent is complete, then just return the first lesson, otherwise get the next uncomplete lesson
         if (!$isParentComplete) {
@@ -2182,9 +2217,9 @@ class ContentService
                 ->where($this->databaseManager->raw('IFNULL(ucp_4.state, "")'), '!=', 'completed');
         }
 
-        $contentHierarchyDataRow = $contentHierarchyDataQuery
-            ->get()
-            ->first();
+        $contentHierarchyDataRow =
+            $contentHierarchyDataQuery->get()
+                ->first();
 
         $contentId = null;
 
@@ -2231,11 +2266,12 @@ class ContentService
          * coach_name
          * coach_focus_text
          */
-        $contentRowsById = $this->databaseManager->connection(config('railcontent.database_connection_name'))
-            ->table('railcontent_content')
-            ->whereIn('id', $contentIds)
-            ->get()
-            ->keyBy('id');
+        $contentRowsById =
+            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_content')
+                ->whereIn('id', $contentIds)
+                ->get()
+                ->keyBy('id');
 
         // content fields are the source of truth at the moment but that will change eventually
         $contentsFieldRows =
@@ -2255,7 +2291,9 @@ class ContentService
 
         // get all content that is linked via field
         $keysThatLinkToOtherContent = ['instructor', 'video'];
-        $linkedContentIds = $contentsFieldRows->whereIn('key', $keysThatLinkToOtherContent)->pluck('value');
+        $linkedContentIds =
+            $contentsFieldRows->whereIn('key', $keysThatLinkToOtherContent)
+                ->pluck('value');
 
         $contentsFieldLinkedContentRowsById = collect();
         $contentsFieldLinkedContentsFieldRowsById = collect();
@@ -2284,7 +2322,6 @@ class ContentService
                     ->groupBy('content_id');
         }
 
-
         $cases = [];
         $ids = [];
         $params = [];
@@ -2306,31 +2343,26 @@ class ContentService
                     $linkedContentDataRows = $contentsDataRowsByContentId[$linkedContentId] ?? collect();
 
                     if (!empty($linkedContentRow)) {
-                        $subContentJsonArray =
-                            $this->compileContentData(
-                                $linkedContentRow,
-                                $linkedContentFieldRows,
-                                $linkedContentDataRows
-                            );
+                        $subContentJsonArray = $this->compileContentData(
+                            $linkedContentRow,
+                            $linkedContentFieldRows,
+                            $linkedContentDataRows
+                        );
 
                         // substitute the field id with the compiled data
                         foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
-
-                            if (in_array($jsonArrayKey, $keysThatLinkToOtherContent) &&
-                                !empty($subContentJsonArray)) {
-
+                            if (in_array($jsonArrayKey, $keysThatLinkToOtherContent) && !empty($subContentJsonArray)) {
                                 if (is_array($jsonArrayValue)) {
                                     foreach ($jsonArrayValue as $jsonArraySubKey => $jsonArraySubValue) {
-                                        if ((integer)$jsonArraySubValue == $linkedContentRow['id'] && $jsonArraySubKey !== 'id') {
+                                        if ((integer)$jsonArraySubValue == $linkedContentRow['id'] &&
+                                            $jsonArraySubKey !== 'id') {
                                             $jsonArray[$jsonArrayKey][$jsonArraySubKey] = $subContentJsonArray;
                                         }
                                     }
                                 } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
                                     $jsonArray[$jsonArrayKey] = $subContentJsonArray;
                                 }
-
                             }
-
                         }
                     }
                 }
@@ -2340,7 +2372,6 @@ class ContentService
                 $instructorNames = [];
 
                 foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
-
                     if ($jsonArrayKey == 'instructor') {
                         if (is_array($jsonArrayValue) && empty($jsonArrayValue['id'])) {
                             foreach ($jsonArrayValue as $jsonArraySubValue) {
@@ -2354,7 +2385,6 @@ class ContentService
                             }
                         }
                     }
-
                 }
 
                 if (!empty($instructorNames)) {
@@ -2385,10 +2415,11 @@ class ContentService
         $cases = implode(' ', $cases);
 
         if (!empty($ids)) {
-            DB::connection(config('railcontent.database_connection_name'))->update(
-                "UPDATE railcontent_content SET `compiled_view_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
-                $params
-            );
+            DB::connection(config('railcontent.database_connection_name'))
+                ->update(
+                    "UPDATE railcontent_content SET `compiled_view_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
+                    $params
+                );
         }
 
         return true;
@@ -2396,8 +2427,8 @@ class ContentService
 
     /**
      * @param $contentRow
-     * @param  \Illuminate\Support\Collection  $contentFieldRows
-     * @param  \Illuminate\Support\Collection  $contentDataRows
+     * @param \Illuminate\Support\Collection $contentFieldRows
+     * @param \Illuminate\Support\Collection $contentDataRows
      * @return array
      */
     public function compileContentData(
@@ -2419,7 +2450,6 @@ class ContentService
 
         foreach ($contentFieldDataRowsGroupedByKey as $key => $rows) {
             foreach ($rows as $row) {
-
                 // skip empty values except 0
                 if ($row['value'] === '' || $row['value'] === null) {
                     continue;
@@ -2427,10 +2457,10 @@ class ContentService
 
                 if (empty($compiledData[$key])) {
                     $compiledData[$key] = $row['value'];
-                } elseif(!empty($compiledData[$key]) && !is_array($compiledData[$key])) {
+                } elseif (!empty($compiledData[$key]) && !is_array($compiledData[$key])) {
                     $existingValue = $compiledData[$key];
                     $compiledData[$key] = [$existingValue, $row['value']];
-                } elseif(is_array($compiledData[$key])) {
+                } elseif (is_array($compiledData[$key])) {
                     $compiledData[$key][] = $row['value'];
                 }
 
@@ -2447,6 +2477,134 @@ class ContentService
         }
 
         return $compiledData;
+    }
+
+    /**
+     * @param null $brand
+     * @param null $limit
+     * @param int $page
+     * @return ContentFilterResultsEntity|Collection
+     */
+    public function getScheduledContent($brand = null, $limit = null, $page = 1)
+    {
+        $liveEventsTypes = array_merge(
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
+            (array)config('railcontent.liveContentTypes', [])
+        );
+        $contentReleasesTypes = array_merge(
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
+            (array)config('railcontent.contentReleaseContentTypes', [])
+        );
+
+        if (empty($liveEventsTypes) && empty($contentReleasesTypes)) {
+            // Accommodates AddEvent calling this method from Musora, where railcontent config is different than expected.
+            $liveEventsTypes = array_merge(
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.liveContentTypes', [])
+            );
+            $contentReleasesTypes = array_merge(
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.contentReleaseContentTypes', [])
+            );
+        }
+
+        $oldStatuses = ContentRepository::$availableContentStatues;
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
+        $types = array_merge($liveEventsTypes, $contentReleasesTypes);
+
+        if (empty($types)) {
+            return new Collection();
+        }
+
+        $scheduleEvents = $this->contentRepository->getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+            $types,
+            [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
+            Carbon::now()
+                ->toDateTimeString(),
+            '>',
+            'published_on',
+            'asc',
+            [],
+            $limit,
+            $page
+        );
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
+            [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
+            Carbon::now()
+                                                                                            ->toDateTimeString(),
+            '>',
+            'published_on',
+            'asc',
+            []);
+
+        ContentRepository::$availableContentStatues = $oldStatuses;
+        ContentRepository::$pullFutureContent = $oldFutureContent;
+
+        return new ContentFilterResultsEntity([
+                                                  'results' => $scheduleEvents,
+                                                  'total_results' => $countEvents,
+                                              ]);
+    }
+
+    /**
+     * Get ordered contents by type, status and published_on date.
+     *
+     * @param array $types
+     * @param string $status
+     * @param string $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param integer $limit
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+        array $types,
+        $status,
+        $publishedOnValue,
+        $publishedOnComparisonOperator = '=',
+        $orderByColumn = 'published_on',
+        $orderByDirection = 'desc',
+        $requiredField = [],
+        $limit = null,
+        $page = 1
+    ) {
+        $scheduleEvents = Decorator::decorate(
+            $this->contentRepository->getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+                $types,
+                $status,
+                $publishedOnValue,
+                $publishedOnComparisonOperator,
+                $orderByColumn,
+                $orderByDirection,
+                $requiredField,
+                $limit,
+                $page
+            ),
+            'content'
+        );
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
+                                                                                        [ContentService::STATUS_SCHEDULED],
+                                                                                        Carbon::now()
+                                                                                            ->toDateTimeString(),
+                                                                                        '>',
+                                                                                        'published_on',
+                                                                                        'asc',
+                                                                                        []);
+
+        return new ContentFilterResultsEntity([
+                                                  'results' => $scheduleEvents,
+                                                  'total_results' => $countEvents,
+                                              ]);
+
     }
 
 }

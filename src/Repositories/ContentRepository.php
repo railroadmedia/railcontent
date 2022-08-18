@@ -2146,4 +2146,132 @@ class ContentRepository extends RepositoryBase
             }
         }
     }
+
+    /**
+     * @param array $types
+     * @param $status
+     * @param $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param array $requiredField
+     * @param integer $limit
+     * @return array
+     */
+    public function getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+        array $types,
+        $status,
+        $publishedOnValue,
+        $publishedOnComparisonOperator = '=',
+        $orderByColumn = 'published_on',
+        $orderByDirection = 'desc',
+        $requiredField = [],
+        $limit = null,
+        $page = 1
+    ) {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->whereIn(ConfigService::$tableContent . '.status', $status)
+                ->where(
+                    ConfigService::$tableContent . '.published_on',
+                    $publishedOnComparisonOperator,
+                    $publishedOnValue
+                )
+                ->orderBy($orderByColumn, $orderByDirection);
+
+        if (!empty($limit)) {
+            $contentRows->limit($limit)->skip(($page - 1) * $limit);
+        }
+
+        if (!empty($requiredField)) {
+            if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
+                $contentRows->where(
+                    ConfigService::$tableContent . '.' . $requiredField['key'],
+                    $requiredField['value']
+                );
+            } else {
+                $column = ($requiredField['key'] == 'instructor') ? 'instructor_id' : $requiredField['key'];
+                $table = config('railcontent.table_prefix') . 'content_' . $requiredField['key'] . 's';
+            }
+            $contentRows->join($table, function (JoinClause $joinClause) use (
+                $requiredField,
+                $table,
+                $column
+            ) {
+                $joinClause->on(
+                    $table . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                    ->whereIn(
+                        $table . '.' . $column,
+                        $requiredField['value']
+                    );
+            })
+                ->groupBy('railcontent_content.id');
+        }
+
+        $contentRows = $contentRows->getToArray();
+
+        $this->configurePresenterForResults($contentRows);
+
+        return $this->parserResult($contentRows);
+    }
+
+    /**
+     * @param $parentId
+     * @return array
+     */
+    public function countByTypeInAndStatusInAndPublishedOn( array $types,
+        $status,
+        $publishedOnValue,
+        $publishedOnComparisonOperator = '=',
+        $orderByColumn = 'published_on',
+        $orderByDirection = 'desc',
+        $requiredField = [])
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->whereIn(ConfigService::$tableContent . '.status', $status)
+            ->where(
+                ConfigService::$tableContent . '.published_on',
+                $publishedOnComparisonOperator,
+                $publishedOnValue
+            );
+
+        if (!empty($requiredField)) {
+            if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
+                $contentRows->where(
+                    ConfigService::$tableContent . '.' . $requiredField['key'],
+                    $requiredField['value']
+                );
+            } else {
+                $column = ($requiredField['key'] == 'instructor') ? 'instructor_id' : $requiredField['key'];
+                $table = config('railcontent.table_prefix') . 'content_' . $requiredField['key'] . 's';
+            }
+            $contentRows->join($table, function (JoinClause $joinClause) use (
+                $requiredField,
+                $table,
+                $column
+            ) {
+                $joinClause->on(
+                    $table . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                    ->whereIn(
+                        $table . '.' . $column,
+                        $requiredField['value']
+                    );
+            })
+                ->groupBy('railcontent_content.id');
+        }
+        return $contentRows->count();
+    }
+
 }
