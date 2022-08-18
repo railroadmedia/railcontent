@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
-use App\Maps\ProductAccessMap;
+use App\Modules\Crux\ProductAccessMap;
 use App\Services\User\UserAccessService;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Entities\Payment;
+use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Services\ResponseService;
+use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Location\Services\CountryListService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
@@ -64,9 +66,379 @@ class ProfileSettingsPagesController extends BaseController
         ]);
     }
 
-    public function membership(Request $request, $domain, $brand, $userId)
+    public function account(Request $request, $domain, $brand, $userId)
     {
-        return 'WIP.';
+/*  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+student permutation groups
+=============================
+
+(and in some cases their component student permutations)
+
+1. ACTIVE SUBSCRIPTION
+    * monthly
+    * annual
+    * annual and renewing soon
+2. OFFER FREE TRIAL
+    * no membership access, has never been a member, but owns a packs
+    * no membership access, has never been a member, does not own any packs (unimportant edge case)
+3. SALES PAGE LINK
+    * no membership access, has been a member previously, owns a packs
+    * no membership access, has been a member previously, does not own any packs
+    * monthly subscription, cancelled but access not yet expired
+    * annual subscription, cancelled but access not yet expired
+    * access from trial, with renewal
+    * access from one-time products
+    * access from trial, without renewal
+    * anomalous non-renewing access
+4. UNPAUSE
+    * monthly subscription, paused
+    * annual subscription, paused
+5. APP-PURCHASED
+    * access from app purchase, Google
+    * access from app purchase, Apple
+6. LIFETIME
+    * lifetime member
+
+For easy copy-pasta:
+
+
+1. ACTIVE SUBSCRIPTION
+2. OFFER FREE TRIAL
+3. SALES PAGE LINK
+4. UNPAUSE
+5. APP-PURCHASED
+6. LIFETIME
+
+ACTIVE SUBSCRIPTION
+OFFER FREE TRIAL
+SALES PAGE LINK
+UNPAUSE
+APP-PURCHASED
+LIFETIME
+
+Things to figure out before rendering page
+=================================================
+
+do they have membership access?
+    if yes
+        what is the product name?
+        is it recurring?
+            if yes
+                get renewal date
+                get price
+                If it's monthly then show the "UPGRADE" button
+    if no
+        have they ever had membership access before?
+            if no, THEY ARE "OFFER FREE TRIAL" PERMUTATION GROUP
+                pass $hideGetHelpRequestLink as true
+            if yes, THEY ARE "SALES PAGE LINK" PERMUTATION GROUPA
+
+
+If they are the "OFFER FREE TRIAL" permutation group
+    do NOT show Get-HelpRequestLink ("Click here if you'd like help getting the most out of your account")
+
+                     |  subscription-info       actions                         hideGetHelpRequestLink
+---------------------|---------------------------------------------------------------------------------
+ACTIVE SUBSCRIPTION  |  standard                standard                        no
+OFFER FREE TRIAL     |  logo-only               trial-offer                     YES
+SALES PAGE LINK      |  standard                link-to-sales                   no
+UNPAUSE              |  paused-msg              unpause                         no
+APP-PURCHASED        |  standard                app-subscription-links          no
+LIFETIME             |  lifetime-msg            no-action                       no
+
+subscription-info
+    "standard" (price, renewal and student created_on date)
+    "lifetime-msg" (standard-lite; student created_on date only)
+    "logo-only" (nothing except a logo)
+    "paused-msg" ("Your membership will continue on MONTH DD, YYYY and your next renewal date has been extended to MONTH DD, YYYY")
+action
+    "standard" (cancel if relevant and upgrade offer only if Monthly subscription)
+    "trial-offer" ("START FREE TRIAL", "One time offer: 7 days free, no payment plan, starts immediately")
+    "link-to-sales" ("RENEW YOUR MEMBERSHIP", "This link will take you to reorder on musora.com. Any purchased access will be added to your existing time. If you’d prefer, you can [click here](support contact page) to contact Support to restart your membership.")
+    "unpause" ("CONTINUE YOUR MEMBERSHIP", "The above button will restart your access right away. You can also [contact us](support contact page) for help.")
+    "app-subscription-links"
+    "no-action" (just blank)
+
+In summary...
+
+subscription-info possibilities: 4
+    standard
+    lifetime-msg
+    logo-only
+    paused-msg
+actions possibilities: 6
+    standard
+    trial-offer
+    link-to-sales
+    unpause-btn
+    app-subscription-links
+    no-action
+hideGetHelpRequestLink possibilities: 2
+    show
+    hide
+
+
+
+Thus, the controller must answer these three questions...
+1. what subscription-info?
+2. what actions?
+3. hideGetHelpRequestLink?
+
+
+
+Thus, the controller must answer these three questions...
+
+1. what subscription-info?
+
+    first eval for the most specific criteria
+        if "lifetime-msg"
+            specific permutation must be
+                lifetime member
+            trigger: is lifetime member
+        if "logo-only"
+            specific permutation must be one of these:
+                no membership access, has never been a member, but owns a packs
+                no membership access, has never been a member, does not own any packs (unimportant edge case)
+            trigger: has never had membership access
+        if "paused-msg",
+            specific permutation must be one of these:
+                monthly subscription, paused
+                annual subscription, paused
+            trigger:
+                subscription is paused (ensure not cancelled or anything like that)
+    If none of the above criteria are met, then by definition must be: "standard"
+        permutation-group must be one of:
+            ACTIVE SUBSCRIPTION
+            SALES PAGE LINK
+            APP-PURCHASED
+        specific permutation must be one of these:
+            * monthly
+            * annual
+            * annual and renewing soon
+            * no membership access, has been a member previously, owns a packs
+            * no membership access, has been a member previously, does not own any packs
+            * monthly subscription, cancelled but access not yet expired
+            * annual subscription, cancelled but access not yet expired
+            * access from trial, with renewal
+            * access from one-time products
+            * access from trial, without renewal
+            * anomalous non-renewing access
+            * access from app purchase, Google
+            * access from app purchase, Apple
+        trigger: default
+
+
+
+
+2. what actions?
+
+
+    first eval for the most specific criteria...?
+        trial-offer,            trigger: has never had membership access
+        link-to-sales,          trigger: does NOT have an active subscription
+        unpause-btn,            trigger: subscription is paused (ensure not cancelled or anything like that)
+        app-subscription-links, trigger: access from app purchase
+        no-action,              trigger: is lifetime member
+
+    if none of those are met, default to standard
+
+    though check that they have an active subscription. If they do not then yet we ended up here that may be an issue.
+
+
+
+3. hideGetHelpRequestLink?
+    return true if has never had membership access
+
+
+
+------------------------
+
+The sequence of checks
+
+
+* [ ] determine baseline info needed to populate page
+    * [ ] all owned digital non-membership products
+    * [ ] the active subscription
+    * [ ] has never had membership access
+    * [ ] does NOT have an active subscription
+    * [ ] subscription is paused (ensure not cancelled or anything like that)
+    * [ ] access from app purchase
+    * [ ] is lifetime member
+* [ ] using that determine
+    * [ ] what subscription-info?
+    * [ ] what actions?
+    * [ ] hideGetHelpRequestLink?
+
+
+Misc. Notes:
+
+* "click here for help getting the most of your account" always shows unless $doNothideGetHelpRequestLink is true
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: ownedNonMembershipProducts-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+        $userProductService = app(UserProductService::class);
+        $userProducts = $userProductService->getAllUsersProducts($userId);
+
+        $ownedNonMembershipProducts = [];
+
+        foreach ($userProducts as $userProduct) {
+            /** @var Product $product */
+            $product = $userProduct->getProduct();
+
+            $membershipProductIdsForBrand = [];
+
+            if (!empty(ProductAccessMap::membershipProductIds()[$brand])) {
+                $membershipProductIdsForBrand = ProductAccessMap::membershipProductIds()[$brand];
+            }
+
+            $isMembershipProduct = in_array($product->getId(), $membershipProductIdsForBrand);
+
+            //dump(($isMembershipProduct ? '===YES===' : '---no--- ') . ': ' . $product->getName()); // DEBUGGING AID; DELETE ANYTIME
+
+            if ($product->getBrand() == $brand && !$isMembershipProduct) {
+                $ownedNonMembershipProducts[$brand][] = $product;
+            }
+        }
+
+        $hasMembershipAccess = false;
+
+
+        // todo: figure how membership's gonna work for MWP
+        //  ===================================================================== PICK UP HERE ====== PICK UP HERE======
+
+
+
+        // ------------- THESE ARE EASY SO DO EM FIRST? -------------
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: the active subscription   -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: subscription is paused (ensure not cancelled or anything like that) -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: access from app purchase  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: is lifetime member  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+        // ------------- THESE ARE MORE CHALLENGING SO DON'T DO THEM IF NOT NEEDED? -------------
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: has never had membership access -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // foundational info: does NOT have an active subscription  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        // =============================================================================================================
+
+        // =============================================================================================================
+
+        // =============================================================================================================
+
+        // =============================================================================================================
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // determine page element: what subscription-info? -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // determine page element: what actions?  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // determine page element: hideGetHelpRequestLink? -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+        // -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // -------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        return view('account.settings.account',
+            [
+                'user' => user(),
+                'sections' => $this->settingSections('account'),
+                'ownedNonMembershipProducts' => $ownedNonMembershipProducts,
+                'hasMembershipAcess' => $hasMembershipAccess,
+            ]
+        );
     }
 
     public function payments(Request $request)
@@ -206,10 +578,10 @@ class ProfileSettingsPagesController extends BaseController
                     'active' => $section === 'settings',
                 ],
                 [
-                    "url" => url()->route('platform.profile.settings.membership', ['userId' => user()->id]),
+                    "url" => url()->route('platform.profile.settings.account', ['userId' => user()->id]),
                     'icon' => 'fas fa-calendar-alt',
                     'title' => 'Account Details',
-                    'active' => $section === 'access',
+                    'active' => $section === 'account',
                 ],
             ];
         } catch (\Exception $exception) {

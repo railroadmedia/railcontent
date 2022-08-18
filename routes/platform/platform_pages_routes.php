@@ -312,11 +312,11 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile.settings.notifications');
 
         Route::get(
-            '/{brand}/profile/{userId}/settings/membership',
-            [ProfileSettingsPagesController::class, 'membership']
+            '/{brand}/profile/{userId}/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
         )
             ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.membership');
+            ->name('platform.profile.settings.account');
 
         /*
          * Notifications Pages
