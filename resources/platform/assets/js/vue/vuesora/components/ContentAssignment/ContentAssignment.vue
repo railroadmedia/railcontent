@@ -24,7 +24,7 @@
                                 </h3>
                             </div>
                             <div v-if="timecode != 0" class="flex flex-column flex-auto">
-                                <a class="flex flex-column flex-auto tw-text-xs font-bold font-underline hide-xs-only ph-2" :class="'text-' + themeColor" :data-jump-to-time="timecode">
+                                <a class="flex flex-column flex-auto tw-text-xs font-bold font-underline hide-xs-only ph-2" :class="brandTextColor" :data-jump-to-time="timecode">
                                         {{ formattedTimecode }} 
                                     </a>
                             </div>
@@ -40,12 +40,12 @@
                     
                     <button id="open-exercise-button" 
                             v-if="soundsliceSlug" 
-                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] mr-1" 
+                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] mr-1 tw-w-[250px]" 
                             @click="openExercise">
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
     
-                    <button :class="`tw-btn-secondary tw-text-${themeColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                    <button class="tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
                             <i class="fas fa-check mr-1"></i>
                             {{ isComplete ? 'Completed' : 'Complete' }}
                         </button>
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div v-if="timecode != 0" class="flex flex-row hide-sm-up">
-                                <a class="tiny font-bold font-underline" :class="'text-' + themeColor" :data-jump-to-time="timecode">
+                                <a class="tiny font-bold font-underline" :class="brandTextColor" :data-jump-to-time="timecode">
                                         {{ formattedTimecode }}
                                     </a>
                             </div>
@@ -147,6 +147,7 @@ import ProgressTracker from '../../assets/js/classes/progress-tracker';
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import Intercom from "../../assets/js/services/intercom"
 import Helpscout from "../../assets/js/services/helpscout"
+import { bgColor, textColor } from "../../../../constants/brands";
 
 export default {
     name: 'ContentAssignment',
@@ -253,6 +254,14 @@ export default {
         };
     },
     computed: {
+        brandTextColor() {
+            return textColor[this.brand];
+        },
+
+        brandBgColor() {
+            return bgColor[this.brand];
+        },
+
         pageScrollPosition() {
             return `transform:translateX(-${100 * (this.currentPage - 1)}%)`;
         },
