@@ -4,7 +4,7 @@
 - Define if join url should be out or inside this component
 */
 
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "../InputLabel/InputLabel.vue";
 import RainbowButton from "../Button/RainbowButton.vue";
@@ -51,6 +51,7 @@ const changeCurrentForm = (val) => {
 
 const handleEmailChange = (val) => {
   emailInput.value = val;
+  localStorage.setItem("lastEmailUsed", val)
 };
 
 const handlePasswordChange = (val) => {
@@ -65,6 +66,13 @@ const handleButtonClick = (e) => {
 const toggleSeePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
+
+onBeforeMount(() => {
+  if(localStorage.getItem("lastEmailUsed") && props.errors.length) {
+    console.log(localStorage.getItem("lastEmailUsed"))
+    emailInput.value = localStorage.getItem("lastEmailUsed");
+  }
+});
 </script>
 
 <template>
@@ -106,6 +114,7 @@ const toggleSeePassword = () => {
         </ul>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
+            :initialValue="emailInput"
             inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"

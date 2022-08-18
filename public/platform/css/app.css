@@ -21840,6 +21840,9 @@ a:visited{
 .tw-bottom-0{
   bottom: 0px !important;
 }
+.tw-right-3{
+  right: 0.75rem !important;
+}
 .tw-right-2{
   right: 0.5rem !important;
 }
@@ -21905,9 +21908,6 @@ a:visited{
 }
 .tw-right-4{
   right: 1rem !important;
-}
-.tw-right-3{
-  right: 0.75rem !important;
 }
 .tw-bottom-4{
   bottom: 1rem !important;
@@ -22435,6 +22435,9 @@ a:visited{
 .tw-h-\[16px\]{
   height: 16px !important;
 }
+.tw-h-\[24px\]{
+  height: 24px !important;
+}
 .tw-h-\[30px\]{
   height: 30px !important;
 }
@@ -22452,9 +22455,6 @@ a:visited{
 }
 .tw-h-0{
   height: 0px !important;
-}
-.tw-h-\[24px\]{
-  height: 24px !important;
 }
 .tw-h-\[8px\]{
   height: 8px !important;
@@ -22674,6 +22674,9 @@ a:visited{
 .tw-w-\[16px\]{
   width: 16px !important;
 }
+.tw-w-\[24px\]{
+  width: 24px !important;
+}
 .tw-w-\[30px\]{
   width: 30px !important;
 }
@@ -22691,9 +22694,6 @@ a:visited{
 }
 .tw-w-\[40px\]{
   width: 40px !important;
-}
-.tw-w-\[24px\]{
-  width: 24px !important;
 }
 .tw-w-\[42px\]{
   width: 42px !important;
@@ -24404,6 +24404,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(229 229 229 / var(--tw-text-opacity)) !important;
 }
+.tw-text-black{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+}
 .tw-text-\[\#111827\]{
   --tw-text-opacity: 1 !important;
   color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
@@ -24439,10 +24443,6 @@ a:visited{
 .tw-text-gray-200{
   --tw-text-opacity: 1 !important;
   color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
-}
-.tw-text-black{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 .tw-text-\[\#7E9AB1\]{
   --tw-text-opacity: 1 !important;
