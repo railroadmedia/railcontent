@@ -86,7 +86,7 @@ export default {
 
         <!-- Section Title -->
         <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-            <a href="" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+            <a :href="`${accountUrl}`"  class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
             </a>
             <a :href="`${accountUrl}`" 
@@ -119,7 +119,7 @@ export default {
         <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
             <a v-for="(metric, i) in brandUserMetric" 
                 :key="i" 
-                href="/members/profile"
+                :href="`${accountUrl}`" 
                 class="tw-inline-flex tw-w-full tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-justify-items-stretch tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-center"
             >
                 <musora-icon :icon-name="metric.icon" 

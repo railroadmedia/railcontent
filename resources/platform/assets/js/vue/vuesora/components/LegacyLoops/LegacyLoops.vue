@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row pa-1 loops-audio-player">
+        <div class="flex flex-row pa-1 loops-audio-player tw-rounded-lg">
             <div
                 v-if="clickTrack"
                 class="flex flex-column icon-col"
