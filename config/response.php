@@ -29,6 +29,8 @@ return [
             'data.description',
             'fields.high_soundslice_slug',
             'fields.low_soundslice_slug',
+            'fields.live_event_start_time',
+            'fields.live_event_end_time',
         ],
 
         'instructor' => [
