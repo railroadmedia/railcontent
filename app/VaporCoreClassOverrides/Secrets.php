@@ -91,6 +91,9 @@ class Secrets
                 try {
                     $parsedDotEnv = Dotenv::parse($value);
 
+                    echo "Found DOT_ENV_ file [{$key}] secret which will be parsed as a .env file.";
+                    var_dump($parsedDotEnv);
+
                     self::setEnvironmentVariables($parsedDotEnv);
 
                 } catch (InvalidFileException $e) {

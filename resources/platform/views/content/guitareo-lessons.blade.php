@@ -73,7 +73,7 @@
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                             <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Courses</h2>
                         </a>
-                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" aria-label="See All New Lessons" class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"> 
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'course']) }}" aria-label="See All New Lessons" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"> 
                             See All 
                         </a>
                     </div>
@@ -113,7 +113,7 @@
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                             <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Quick Tips</h2>
                         </a>
-                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" aria-label="See All New Lessons" class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"> 
+                        <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => 'quick-tips']) }}" aria-label="See All New Lessons" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"> 
                             See All 
                         </a>
                     </div>

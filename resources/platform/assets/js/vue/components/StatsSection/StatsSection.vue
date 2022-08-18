@@ -48,7 +48,11 @@ export default {
         userMetrics: {
             type: Array,
             default: [],
-        }
+        },
+        accountUrl: {
+            type: String,
+            default: '/'
+        },
     },
     setup(_props) {
         return {
@@ -85,9 +89,9 @@ export default {
             <a href="" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">My Stats</h2>
             </a>
-            <a href="https://www.drumeo.com/laravel/public/members/profile" 
+            <a :href="`${accountUrl}`" 
                 aria-label="See My Dashboard" 
-                class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                class="tw-text-base tw-uppercase  xl:tw-text-lg xl:tw-leading-none tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 Dashboard
             </a>

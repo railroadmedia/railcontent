@@ -134,6 +134,7 @@
         {{-- My Stats --}}
         <stats-section
             brand="{{ $brand }}"
+            account-url="{{ user()->getDashboardUrl() }}"
             :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
             next-learning-path-level="{{ $nextLearningPathLevel }}"
             :userMetrics="{{ json_encode($userMetrics) }}"

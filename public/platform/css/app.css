@@ -26103,6 +26103,10 @@ a:visited{
   .xl\:tw-text-center{
     text-align: center !important;
   }
+  .xl\:tw-text-lg{
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
   .xl\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
@@ -26120,6 +26124,9 @@ a:visited{
   }
   .xl\:tw-text-5xl{
     font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+  .xl\:tw-leading-none{
     line-height: 1 !important;
   }
 }
