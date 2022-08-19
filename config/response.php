@@ -31,6 +31,9 @@ return [
             'fields.low_soundslice_slug',
             'fields.live_event_start_time',
             'fields.live_event_end_time',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone'
         ],
 
         'instructor' => [
@@ -60,6 +63,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'published_on_in_timezone'
             ],
             'total_lessons',
             'lessons_filter_options',
@@ -133,6 +137,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'published_on_in_timezone'
             ],
             'lessons_filter_options',
             'total_comments',
@@ -184,6 +189,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'published_on_in_timezone'
             ],
             'current_lesson_index',
             'next_lesson' => [
@@ -800,6 +806,9 @@ return [
             'parent',
             'fields.artist',
             'fields.style',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone'
         ],
 
         'top-header-pack' => [
@@ -855,6 +864,9 @@ return [
             'started',
             'instructors',
             'isLive',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone'
         ],
 
         'live' => [
@@ -877,6 +889,9 @@ return [
             'questionsChannelName',
             'token',
             'userId',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone'
         ],
 
         'pack' => [
