@@ -55,6 +55,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showCustomButton: {
+    type: Boolean,
+    default: false,
+  },
   disabled: {
     type: Boolean,
     default: false,
@@ -110,6 +114,9 @@ const onEnter = (e) => {
         <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">
           <XIcon class="tw-h-full tw-w-full" />
         </button>
+      </div>
+      <div v-if="showCustomButton" :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
+        <slot name="custom-btn"></slot>
       </div>
     </div>
   </div>
