@@ -6,6 +6,7 @@
                     {{ totalResults }} Play Alongs
                 </h1>
             </div>
+
             <!-- Play Along Actions -->
             <div class="tw-flex tw-flex-wrap tw-w-full md:tw-w-auto">
                 <div class="flex flex-row mr-1 tw-mb-3 tw-w-full md:tw-w-auto">

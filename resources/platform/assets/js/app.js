@@ -18,6 +18,7 @@ import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './vue/components/HeaderCarousel/StaticHeader.vue'
 import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
+import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import StudentReviewForm from './vue/components/IFrames/StudentReviewForm.vue';
@@ -236,6 +237,7 @@ app.component('AppContainer', AppContainer)
     .component('ContentCatalogueContainer', ContentCatalogueContainer)
     .component('TriggerBanner', TriggerBanner)
     .component('LoginForm', LoginForm)
+    .component('ResetPassForm', ResetPassForm)
     .component('NotificationsTable', NotificationsTable)
     .component('PaymentMethods', PaymentMethods)
     .component('MusoraIcon', MusoraIcon)
