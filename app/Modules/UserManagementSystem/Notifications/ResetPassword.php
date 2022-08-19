@@ -21,7 +21,7 @@ class ResetPassword extends ResetPasswordBase
                 'input' => [
                     'lines' => [
                     'We\'ve received a request to reset your password. To reset your password, click the button below.',
-                    'If you did not initiate this request please contact support@pianote.com',
+                    'If you did not initiate this request please contact support@musora.com',
                     'If the button does not work, copy and paste this url into your browser: ' . url()->route(
                         'platform.password.reset',
                         ['token' => $this->token, 'email' => request('email')]),
@@ -33,8 +33,8 @@ class ResetPassword extends ResetPasswordBase
                             ['token' => $this->token, 'email' => request('email')]
                         ),
                     ],
-                    'logo' => 'https://musora-center.s3.amazonaws.com/logos/pianote-logo-red.png',
-                    'brand' => 'pianote'
+                    'logo' => 'https://musora-ui.s3.amazonaws.com/logos/musora-black.svg',
+                    'brand' => ''
                 ]
             ]
         )->from('system@musora.com', 'Musora');
