@@ -72,8 +72,8 @@ class ResetPasswordController extends Controller
                         $user->save();
 
                         event(new PasswordReset($user));
-                        auth()->loginUsingId($user->getId());
-                        event(new UserEvent($user->getId(), 'authenticated'));
+                        auth()->loginUsingId($user->id);
+                        event(new UserEvent($user->id, 'authenticated'));
                     }
                 );
 
@@ -82,10 +82,8 @@ class ResetPasswordController extends Controller
             if ($response === Password::PASSWORD_RESET) {
                 session()->put('skip-third-party-auth-check', true);
 
-//            todo: define redirect path
                 return redirect()
-                    ->back()
-//                ->to(config('usora.login_success_redirect_path'))
+                    ->to(config('user_management_system.login_success_redirect_path'))
                     ->with(
                         'successes',
                         new MessageBag(['password' => 'Your password has been reset successfully.'])

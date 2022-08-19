@@ -102,20 +102,24 @@ export default {
     computed: {
 
         time_to_display() {
-            // Just pull the default published on
-            return this.item.published_on;
+            // time_to_display method should display live_event_start_time_in_timezone or published_on_in_timezone if exists
+            return this.item.published_on_in_timezone ? this.item.published_on_in_timezone : this.item.live_event_start_time_in_timezone;
+        },
+
+        formatted_time() {
+            return new Date(this.time_to_display).toISOString().slice(0, 19).replace('T', ' ')
         },
 
         month() {
-            return DateTime.fromSQL(this.time_to_display).toFormat('LLL').toLowerCase();
+            return DateTime.fromSQL(this.formatted_time).toFormat('LLL').toLowerCase();
         },
 
         day() {
-            return DateTime.fromSQL(this.time_to_display).toFormat('ccc d');
+            return DateTime.fromSQL(this.formatted_time).toFormat('ccc d');
         },
 
         time() {
-            return DateTime.fromSQL(this.time_to_display).toFormat('h:mm a');
+            return DateTime.fromSQL(this.formatted_time).toFormat('h:mm a');
         },
 
         releaseType() {
