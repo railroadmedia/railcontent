@@ -21918,11 +21918,14 @@ a:visited{
 .tw-z-10{
   z-index: 10 !important;
 }
-.tw-z-\[150\]{
-  z-index: 150 !important;
-}
 .tw-z-0{
   z-index: 0 !important;
+}
+.tw-z-20{
+  z-index: 20 !important;
+}
+.tw-z-\[150\]{
+  z-index: 150 !important;
 }
 .tw-z-\[200\]{
   z-index: 200 !important;
@@ -21932,9 +21935,6 @@ a:visited{
 }
 .tw-z-40{
   z-index: 40 !important;
-}
-.tw-z-20{
-  z-index: 20 !important;
 }
 .tw-z-\[2000\]{
   z-index: 2000 !important;
@@ -22341,6 +22341,9 @@ a:visited{
 }
 .tw-h-full{
   height: 100% !important;
+}
+.tw-h-\[100vh\]{
+  height: 100vh !important;
 }
 .tw-h-\[50px\]{
   height: 50px !important;
@@ -24907,6 +24910,9 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#081825\]\/90{
   background-color: rgb(8 24 37 / 0.9) !important;
 }
+.tw-dark .dark\:tw-bg-transparent{
+  background-color: transparent !important;
+}
 .tw-dark .dark\:tw-bg-\[\#002039B2\]\/70{
   background-color: rgb(0 32 57 / 0.7) !important;
 }
@@ -24916,9 +24922,6 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#191b1c\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(25 27 28 / var(--tw-bg-opacity)) !important;
-}
-.tw-dark .dark\:tw-bg-transparent{
-  background-color: transparent !important;
 }
 .tw-dark .dark\:tw-bg-black{
   --tw-bg-opacity: 1 !important;
@@ -24985,6 +24988,9 @@ a:visited{
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::placeholder{
   --tw-placeholder-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-placeholder-opacity)) !important;
+}
+.tw-dark .dark\:tw-opacity-20{
+  opacity: 0.2 !important;
 }
 .tw-dark .dark\:tw-invert{
   --tw-invert: invert(100%) !important;

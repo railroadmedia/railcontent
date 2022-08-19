@@ -192,6 +192,7 @@ onBeforeMount(() => {
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
+            :initialValue="emailInput"
             inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
@@ -200,9 +201,10 @@ onBeforeMount(() => {
             labelValue="Email Address"
             placeholder="Enter your email..."
             :inputErrors="[]"
+            @onChange="handleEmailChange"
           />
         </div>
-        <RainbowButton type="submit" label="GET NEW PASSWORD" />
+        <RainbowButton :disabled="!emailInput.length" type="submit" label="GET NEW PASSWORD" />
       </form>
 
       <a

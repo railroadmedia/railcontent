@@ -101,7 +101,7 @@ const onEnter = (e) => {
         :placeholder="placeholder"
         :id="id"
         :class="`${ removeDefaultInputStyles ? '' : 'tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
-                 ${ inputOverride ? inputOverride + (disabled ? ' tw-bg-[#D3D3D3]' : '') : 'tw-text-[#00101D] tw-border-[#D1D5DB]' + (disabled ? ' tw-bg-[#D3D3D3]' : '') }`"
+                 ${ inputOverride ? inputOverride + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '') : 'tw-text-[#00101D] tw-border-[#D1D5DB]' + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '') }`"
         v-model="input"
         v-on:keypress.enter.prevent="onEnter"
         @focus="() => emit('onFocus')"
