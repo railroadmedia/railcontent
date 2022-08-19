@@ -46,7 +46,7 @@
 
     <section class="tw-flex tw-flex-col bg-grey-1 pa-3 tw-mb-3 corners-10">
 
-        <form method="post" action="{{ url()->route('usora.password.reset') }}" class="tw-flex tw-flex-col">
+        <form method="get" action="{{ url()->route('user_management_system.password.reset') }}" class="tw-flex tw-flex-col">
             @if($useCsrfToken ?? true)
                 {{ csrf_field() }}
             @endif
