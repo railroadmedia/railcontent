@@ -189,6 +189,7 @@ class CmsClothingSeeder extends Seeder
                 "name" => "Discounted Sketchy Drums Shirt",
                 "slug" => "tshirt-sketchy-drums",
                 "sku" => "3001-unisex-jersey-sketchy-shirt",
+                "promoCode" => "25-off",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/sketchy-shirt.jpg",
                 "metaDesc" => "Stay cool flying the Drumeo flag with this 100% cotton t-shirt featuring the iconic hand-drawn “Sketchy Drums” logo.",
                 "metaImg" => "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch1.jpg",
@@ -1385,6 +1386,58 @@ class CmsClothingSeeder extends Seeder
             [
                 "brand" => 2,
                 "productType" => 4,
+                "name" => "Iconic Pianote T-Shirt",
+                "slug" => "shirt-iconic-discount",
+                "sku" => "2019-TSHIRT",
+                "promoCode" => "25-off",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/iconic-shirt.jpg",
+                "metaDesc" => "The iconic Pianote T-Shirt, as comfortable as it looks.",
+                "metaImg" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/1.jpg",
+                "shortDesc" => "Share your love for Pianote with the world!",
+                "headerText" => "Iconic Pianote T-shirt",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "The iconic Pianote T-Shirt, as comfortable as it looks."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Vintage Black"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/1.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/2.jpg",
+                    "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/3.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    2,3,4,5,6,7,8
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 4,
                 "name" => "Women's Black Floral T-Shirt",
                 "slug" => "shirt-floral",
                 "sku" => "Tshirt-Floral-Black",
@@ -1869,6 +1922,7 @@ class CmsClothingSeeder extends Seeder
                 'name' => $product['name'],
                 'slug' => $product['slug'],
                 'sku' => $product['sku'],
+                'promo_code' => empty($product['promoCode']) ? null : $product['promoCode'],
                 'thumbnail' => $product['thumbnail'],
                 'header_text' => $product['headerText'],
                 'short_desc' => $product['shortDesc'],

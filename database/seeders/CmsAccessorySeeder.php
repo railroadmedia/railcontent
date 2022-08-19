@@ -533,9 +533,128 @@ class CmsAccessorySeeder extends Seeder
             [
                 "brand" => 2,
                 "productType" => 2,
+                "name" => "Member Piano Chords & Scales",
+                "slug" => "chords-scales-book-members",
+                "sku" => "piano-chords-and-scales-guide",
+                "promoCode" => "member",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
+                "metaDesc" => "Master every single chord and scale with this comprehensive guide.",
+                "metaImg" => "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-110.jpg",
+                "shortDesc" => "Master Every Chord. Every Scale. In Every Key.",
+                "headerText" => "Piano Chords & Scales The Ultimate Guide",
+                "price" => 39,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                ],
+                "specs" => [
+                    [
+                        "title" => "Size",
+                        "desc" => '8.5" x 6.5"'
+                    ],
+                    [
+                        "title" => "Weight",
+                        "desc" => "1 lbs"
+                    ],
+                    [
+                        "title" => "Pages",
+                        "desc" => "143 pages"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-117.jpg",
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-110.jpg",
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-103-Edit.jpg",
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-109.jpg",
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-118.jpg",
+                    "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 2,
                 "name" => "Pianote Practice Planner",
                 "slug" => "practice-planner",
                 "sku" => "pianote-practice-planner",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-front-cover.jpg",
+                "metaDesc" => "The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.",
+                "metaImg" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner-6.jpg",
+                "shortDesc" => "Always know exactly what to practice.",
+                "headerText" => "The Pianote Practice Planner",
+                "price" => 39,
+                "discountedPrice" => "",
+                "page_logo" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/logo.png",
+                "specialText" => "",
+                "overview" => "Always know exactly what to practice.
+
+They say practice makes perfect.
+
+It’s a cliche -- but it’s not entirely true. Because if you’re not practicing the RIGHT things -- the RIGHT way....
+
+You won’t be perfect.
+
+Worse -- you could be wasting your time.
+
+The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.
+
+This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.",
+                "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
+                "features" => [
+                ],
+                "specs" => [
+                    [
+                        "title" => "Size",
+                        "desc" => '9.5" x 6"'
+                    ],
+                    [
+                        "title" => "Weight",
+                        "desc" => "1.3 lbs"
+                    ],
+                    [
+                        "title" => "Pages",
+                        "desc" => "198 pages total. Includes 12 undated months, chord reference chart, note reference guide, blank pages for notes, blank ledger-line pages"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-front-cover.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-side-thickness.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-back-cover.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-sample-week.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-welcome-goal-setting.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-chords.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-note-values-repertoire.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-blank-week.jpg",
+                    "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-staff-pages.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 2,
+                "name" => "Member Pianote Practice Planner",
+                "slug" => "practice-planner-members",
+                "sku" => "pianote-practice-planner",
+                "promoCode" => "member",
                 "thumbnail" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-front-cover.jpg",
                 "metaDesc" => "The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.",
                 "metaImg" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner-6.jpg",
@@ -1017,6 +1136,57 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 ]
             ],
             [
+                "brand" => 4,
+                "productType" => 2,
+                "name" => "Member Do Re Mi Tumbler",
+                "slug" => "tumbler-doremi-member",
+                "sku" => "wallflower-tumbler",
+                "promoCode" => "member",
+                "thumbnail" => "https://singeo.s3.amazonaws.com/products/tumbler-doremi2.png",
+                "metaDesc" => "Your new favorite practice tool.",
+                "metaImg" => "https://singeo.s3.amazonaws.com/products/tumbler-doremi2.png",
+                "shortDesc" => "This cozy tumbler will keep you hydrated at home or on the go.",
+                "headerText" => "Singeo Do-Re-Mi Tumbler",
+                "price" => 29,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "features" => [
+                    "The singer’s companion! This cozy tumbler will keep you hydrated at home or on the go."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Volume",
+                        "desc" => "20.9 oz"
+                    ],
+                    [
+                        "title" => "Materials",
+                        "desc" => "Double wall stainless steel with copper vacuum insulation"
+                    ],
+                    [
+                        "title" => "Finish",
+                        "desc" => "Matte pearlized finish"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-110.jpg",
+                    "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-100.jpg",
+                    "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-124.jpg",
+                    "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-109.jpg",
+                    "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-120-Edit.jpg",
+                    "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-104-2-up.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
                 "brand" => 1,
                 "productType" => 2,
                 "name" => "Drumeo Beanie",
@@ -1077,6 +1247,77 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "name" => "Classical Piano Pieces",
                 "slug" => "classical-book",
                 "sku" => "classical-book",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
+                "badgeText" => "New",
+                "metaDesc" => "Welcome to the world of classical piano music (you can actually play)!",
+                "metaImg" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                "shortDesc" => "What good is learning classical piano if you don’t have beautiful music to play?",
+                "headerText" => "Classical Piano Pieces (You Can Actually Play)",
+                "price" => 39,
+                "discountedPrice" => "",
+                "specialText" => "",
+                "overview" => "**Classical piano has a reputation.**
+
+Let’s be honest…
+
+Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
+
+So we’re out to change that reputation.
+
+Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
+
+It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
+
+Here are some of our favorites:
+  - Ukrainian Folk Song by Ludwig van Beethoven
+  - Minuet in F Major by Wolfgang Amadeus Mozart
+  - Prelude in C Major by Johann Sebastian Bach
+  - Sonatina in B-flat Major by George Frideric Handel
+  - Waltz in A Minor by Frédéric Chopin
+And so many more!",
+                "features" => [
+                ],
+                "specs" => [
+                    [
+                        "title" => "Size",
+                        "desc" => '11" x 8.5"'
+                    ],
+                    [
+                        "title" => "Weight",
+                        "desc" => "1 lbs"
+                    ],
+                    [
+                        "title" => "Pages",
+                        "desc" => "92 pages"
+                    ],
+                ],
+                "visible" => true,
+                "soldOut" => false,
+                "freeBonus" => false,
+                "badge" => false,
+                "lifeTime" => false,
+                "freeShipping" => false,
+                "images" => [
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
+                "brand" => 2,
+                "productType" => 2,
+                "name" => "Discounted Classical Piano Pieces",
+                "slug" => "classical-book-discount",
+                "sku" => "classical-book",
+                "promoCode" => "member",
                 "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
                 "badgeText" => "New",
                 "metaDesc" => "Welcome to the world of classical piano music (you can actually play)!",
@@ -1272,6 +1513,7 @@ And so many more!",
                 'name' => $product['name'],
                 'slug' => $product['slug'],
                 'sku' => $product['sku'],
+                'promo_code' => empty($product['promoCode']) ? null : $product['promoCode'],
                 'page_logo' => empty($product['page_logo']) ? null : $product['page_logo'],
                 'thumbnail' => $product['thumbnail'],
                 'badge_text' => empty($product['badgeText']) ? null : $product['badgeText'],
