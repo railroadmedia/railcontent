@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -16,13 +17,16 @@ class MusoraApiUserProvider implements UserProviderInterface
 {
     private SubscriptionRepository $subscriptionRepository;
     private ProductRepository $productRepository;
+    private CalendarService $calendarService;
 
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        CalendarService $calendarService
     ) {
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
+        $this->calendarService = $calendarService;
     }
 
     public function getCurrentUser()
@@ -192,7 +196,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function setAndGetUserTimezone()
     : string
     {
-        return '';
+        return $this->calendarService->getTimezone(request());
     }
 
     public function login($request)
