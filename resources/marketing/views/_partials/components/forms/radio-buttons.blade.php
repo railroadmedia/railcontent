@@ -1,29 +1,36 @@
-<fieldset class="fieldset border-none" 
-            x-bind:aria-required="required"
-            x-bind:aria-invalid="invalid" 
-            x-bind:disabled="disabled"
+<fieldset 
+    class="fieldset border-none" 
+    @if(!empty($required)) aria-required="required" @endif
+    {{-- x-bind:aria-invalid="invalid"  --}}
+    {{-- x-bind:disabled="disabled" --}}
 >
     <p class="fieldset-title">
         <span v-if="required" class="text-red-500">*</span>
-        {{ name }}
+        {{ $label }}
     </p>
     <div class="radio-group">
-        <div x-for="(button,i) in buttonsList" 
-                x-bind:key="i"
-            class="radio-field"
-        >
-            <input type="radio" 
-                    x-bind:id="'radio-'+groupName+'-'+i" 
-                    x-bind:name="groupName" 
-                    x-bind:value="button.value"
-                    x-model="selectedRadioButton">
-            <label x-bind:for="'radio-'+groupName+'-'+i">{{ button.label }}</label>
-        </div>
+        @foreach ($buttonList as $key => $button)
+            <div class="radio-field">
+                <input 
+                    type="radio" 
+                    id="radio-{{$name}}-{{$key}}" 
+                    name="{{$name}}" 
+                    value="{{$button['value']}}"
+                    x-model="formData.{{$name}}"
+                >
+                <label for="radio-{{$name}}-{{$key}}">
+                    {{ $button['label'] }}
+                </label>
+            </div>
+        @endforeach
+        
     </div>
-    <p class="input-message" id="">
+    {{-- <p class="input-message" id="">
         {{ errorMessage }}
-    </p>
-    <p class="text-sm italic text-blue-500" x-show="showSelectMessage">{{ selectMessage }}</p>
+    </p> --}}
+    {{-- <p class="text-sm italic text-blue-500" x-show="showSelectMessage">
+        {{ selectMessage }}
+    </p> --}}
 </fieldset>
 
 

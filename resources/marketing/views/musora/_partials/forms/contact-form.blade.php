@@ -1,10 +1,18 @@
 {{-- Contact Page Email Form --}}
 <form class="flex flex-col my-4"
         novalidate="true"
-        @submit.prevent="submitForm"
+        x-data='contactForm()'
+        @submit.prevent='submitForm'
 >
-    <!-- Name -->
-    <text-input
+    {{-- <!-- Name --> --}}
+    @include('_partials.components.forms.text-input',[
+        'name' => 'name',
+        'id' => 'customer-name',
+        'placeholder' => 'Enter your name...',
+        'required' => true,
+    ])
+
+    {{-- <text-input
         name="name"
         :required="true"
         :invalid="!formValid && !textFieldValid"
@@ -13,9 +21,25 @@
         @update:inputValue="formData.name = $event"
         id="customer-name"
         placeholder="Enter your name..."
-    />
+    /> --}}
 
-    <radio-buttons
+    @include('_partials.components.forms.radio-buttons',[
+        'label' => 'Do you have a membership with us?',
+        'name' => 'membership',
+        'required' => true,
+        'buttonList' => [
+            [
+                'label' => 'Yes',
+                'value' => 'Is currently a member',
+            ],
+            [
+                'label' => 'no',
+                'value' => 'Is not a member',
+            ]
+        ]
+    ])
+
+    {{-- <radio-buttons
         name="Do you have a membership with us?"
         groupName="membership"
         :required="true"
@@ -26,10 +50,20 @@
         :showSelectMessage="formData.isMember === true"
         errorMessage="Please select an option."
         selectMessage="If your account is under a different email address than noted below, please provide it in your description."
-    />
+    /> --}}
 
-    <!-- Email -->
-    <email-input
+    {{-- <!-- Email --> --}}
+
+    @include('_partials.components.forms.email-input',[
+        'label' => 'Email Address',
+        'name' => 'email',
+        'id' => 'support-listbox',
+        'placeholder' => 'Enter your email address...',
+        'required' => true,
+    ])
+
+
+    {{-- <email-input
         name="Email Address"
         :required="true"
         :invalid="!formValid && !emailFieldValid"
@@ -38,9 +72,172 @@
         @update:inputValue="formData.email = $event"
         id="customer-email"
         placeholder="Enter your email address..."
-    />
+    /> --}}
 
-    <!-- Help Dropdown -->
+   
+
+    {{-- <!-- Help Dropdown --> --}}
+    @include('_partials.components.forms.multi-level-dropdown',[
+        'label' => 'What can we help you with?',
+        'name' => 'support-options',
+        'id' => 'support-listbox',
+        'placeholder' => 'Please select the option that is closest to your request...',
+        'listData' => [
+            [
+                'label' => 'Shipping & Orders',
+                'selected' => false,
+                'options' => [
+                    [
+                        'label' => 'My shipment tracking inquiry',
+                        'value' => 'Shipping & Orders, My shipment tracking inquiry',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'I received the wrong items',
+                        'value' => 'Shipping & Orders, I received the wrong items',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Questions about shipping rates and fees',
+                        'value' => 'Shipping & Orders, Questions about shipping rates and fees',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Other',
+                        'value' => 'Shipping & Orders, Other',
+                        'checked' => false,
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Subscriptions & Membership',
+                'selected' => false,
+                'options' => [
+                    [
+                        'label' => 'Change or set up a subscription/membership',
+                        'value' => 'Subscriptions & Membership, Change or set up a subscription/membership',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Subscription or pack inquiry',
+                        'value' => 'Subscriptions & Membership, Subscription or pack inquiry',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Cancellation assistance',
+                        'value' => 'Subscriptions & Membership, Cancellation assistance',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Refund assistance',
+                        'value' => 'Subscriptions & Membership, Refund assistance',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Other',
+                        'value' => 'Subscriptions & Membership, Other',
+                        'checked' => false,
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Billing & Payment',
+                'selected' => false,
+                'options' => [
+                    [
+                        'label' => 'Need assistance changing billing method or schedule',
+                        'value' => 'Billing & Payment, Need assistance changing billing method or schedule',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Refund assistance',
+                        'value' => 'Billing & Payment, Refund assistance',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Cancellation assistance',
+                        'value' => 'Billing & Payment, Cancellation assistance',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Other',
+                        'value' => 'Billing & Payment, Other',
+                        'checked' => false,
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Account Settings & Login',
+                'selected' => false,
+                'options' => [
+                    [
+                        'label' => 'Can\'t log in',
+                        'value' => 'Account Settings & Login, Can\'t log in',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Other',
+                        'value' => 'Account Settings & Login, Other',
+                        'checked' => false,
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Technical Issues',
+                'selected' => false,
+                'options' => [
+                    [
+                        'label' => 'Problems with mobile Android or iOS app',
+                        'value' => 'Technical Issues, Problems with mobile Android or iOS app',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Content inaccessible or missing',
+                        'value' => 'Technical Issues, Content inaccessible or missing',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Video Issues',
+                        'value' => 'Technical Issues, Video Issues',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Other',
+                        'value' => 'Technical Issues, Other',
+                        'checked' => false,
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Site Navigation & Lessons',
+                'selected' => false,
+                'options' => [
+                    [
+                        'label' => 'Question about a lesson or instrument',
+                        'value' => 'Site Navigation & Lessons, Question about a lesson or instrument',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Assistance locating an area of the website',
+                        'value' => 'Site Navigation & Lessons, Assistance locating an area of the website',
+                        'checked' => false,
+                    ],
+                    [
+                        'label' => 'Other',
+                        'value' => 'Site Navigation & Lessons, Other',
+                        'checked' => false,
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Other',
+                'selected' => false,
+                'value' => 'Other'
+            ],
+        ],
+        'required' => true,
+    ])
+
     <multilevel-dropdown
         label="What can we help you with?"
         name="support-options"
@@ -56,6 +253,15 @@
     />
 
     <!-- Description -->
+    @include('_partials.components.forms.textarea-input',[
+        'label' => 'description',
+        'name' => 'description',
+        'id' => 'support-description',
+        'placeholder' => 'Add message here...',
+        'rows' => 4,
+        'required' => true
+    ])
+
     <textarea-input
         name="description"
         :required="true"
@@ -71,14 +277,21 @@
 
     <div class="flex flex-col-reverse sm:flex-row full">
         <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
-            <!-- Recaptcha -->
+            {{-- <!-- Recaptcha --> --}}
             <recaptcha :siteKey="captchakey"
                         @update:verified="formVerified = $event"
             />
         </div>
         <div class="sm:w-72 sm:ml-auto">
-            <!-- File Upload Button -->
-            <file-input
+            {{-- <!-- File Upload Button --> --}}
+            @include('_partials.components.forms.file-input',[
+                'name' => 'attach file',
+                'id' => 'support-file',
+                'accept' => 'video/*,image/*',
+                'megabiteLimit' => '100'
+            ])
+
+            {{-- <file-input
                 name="attach file"
                 id="support-file"
                 :required="false"
@@ -91,13 +304,13 @@
                 @attachFile="attachFile($event)"
                 @removeFile="removeFile($event)"
                 @clearFiles="clearFiles()"
-            />
+            /> --}}
         </div>
 
     </div>
 
-    <!-- SUBMIT BUTTON -->
-    <button class="btn-primary self-start mr-auto w-full sm:w-min"
+    {{-- <!-- SUBMIT BUTTON --> --}}
+    <button class="btn-primary bg-drumeo self-start mr-auto w-full sm:w-min"
             type="submit"
             :disabled="!formValid || !formVerified"
             :class="themeBgClass"
@@ -105,7 +318,7 @@
             Submit
     </button>
 
-    <!-- Response Message -->
+    {{-- <!-- Response Message --> --}}
     <div class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
             :class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
     >
@@ -127,6 +340,24 @@
         </div>
     </div>
 </form>
+
+<script>
+    function contactForm(){
+        return {
+            formData: {
+                name: '',
+                email: '',
+                membership: '',
+                description: '',
+                selectedOption: '',
+                attachments: [],
+            },
+            submitForm(){
+                console.log(this.formData)
+            }
+        }
+    }
+</script>
 
 <script>
 import SupportService from '../../assets/js/services/support';

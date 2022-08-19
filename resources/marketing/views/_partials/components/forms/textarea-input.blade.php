@@ -1,28 +1,29 @@
 <div class="input-field"
      x-bind:disabled="disabled"
 >
-    <label x-bind:for="id" class="label text-[#00101D] dark:text-white">
-        <span x-if="required" class="text-red-500">*</span>
-        {{ name }}
+    <label for="{{$id}}" class="label text-[#00101D] dark:text-white">
+        <span class="text-red-500 @if(empty($required)) hidden @endif">*</span>
+        {{ $label }}
     </label>
     <div class="input-wrapper">
-        <textarea type="text" 
-                x-bind:id="id"
-                x-bind:rows="rows" 
-                x-bind:placeholder="placeholder"
-                class="focus:border-drumeo font-primary dark:bg-[#00101D] dark:text-white dark:placeholder:text-[#9EC0DC] dark:border-[#445F74]"
-                x-bind:class="[inputValue.length ? 'has-input' : '', !resize ? 'resize-none' : 'resize-y']"
-                x-bind:aria-required="required"
-                x-bind:aria-invalid="invalid"
-                x-model="valueInterface">
-        </textarea>
+        <textarea 
+            type="text" 
+            id="{{$id}}"
+            rows="{{$rows}}"
+            name="{{$name}}" 
+            placeholder="{{$placeholder}}"
+            class="focus:border-drumeo font-primary dark:bg-[#00101D] dark:text-white dark:placeholder:text-[#9EC0DC] dark:border-[#445F74]"
+            {{-- x-bind:class="[inputValue.length ? 'has-input' : '', !resize ? 'resize-none' : 'resize-y']" --}}
+            @if(!empty($required)) aria-required="required" @endif 
+            {{-- x-bind:aria-invalid="invalid" --}}
+            x-model="formData.{{$name}}"></textarea>
         <span class="input-icon">
             <!-- Invalid Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" class="invalid-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
             </svg>
         </span>
-        <p class="input-message">{{ errorMessage }}</p>
+        {{-- <p class="input-message">{{ errorMessage }}</p> --}}
     </div> 
 </div>
 

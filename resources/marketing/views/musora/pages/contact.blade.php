@@ -1,6 +1,6 @@
 @extends('musora._partials.layout')
 
-<!-- Main -->
+{{-- <!-- Main --> --}}
 @section('layout-body')
 
     <section class="py-24 md:py-40 text-white text-center relative">
@@ -24,6 +24,10 @@
         </div>
     </div>
 
+    <div class="max-w-3xl mx-auto">
+        @include('musora._partials.forms.contact-form')
+    </div>
+    
     <div class="pt-28 text-white" style="background:#000c17;">
         <div class="container mx-auto text-center max-w-3xl">
             <div class="flex flex-wrap items-center">
