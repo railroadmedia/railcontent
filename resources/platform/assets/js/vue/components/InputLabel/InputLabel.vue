@@ -86,7 +86,7 @@ const onEnter = (e) => {
 
 <template>
   <div
-    :class="`tw-flex tw-flex-col tw-relative ${id+'-wrapper'} ${
+    :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id+'-wrapper'} ${
       wrapperOverride ? wrapperOverride : ''
     }`"
   >
