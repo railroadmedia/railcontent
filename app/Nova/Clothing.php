@@ -93,6 +93,7 @@ class Clothing extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+            Text::make('Thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
             Image::make('Meta Image', 'meta_img')
@@ -125,6 +126,7 @@ class Clothing extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+            Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Short Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex()->required(),
             Currency::make('Price')->required(),
