@@ -22099,9 +22099,6 @@ a:visited{
 .tw-mr-1{
   margin-right: 0.25rem !important;
 }
-.tw-mr-6{
-  margin-right: 1.5rem !important;
-}
 .tw-mb-8{
   margin-bottom: 2rem !important;
 }
@@ -22263,6 +22260,9 @@ a:visited{
 }
 .tw-mr-1\.5{
   margin-right: 0.375rem !important;
+}
+.tw-mr-6{
+  margin-right: 1.5rem !important;
 }
 .tw-mr-8{
   margin-right: 2rem !important;
@@ -22802,9 +22802,6 @@ a:visited{
 }
 .tw-max-w-\[1280px\]{
   max-width: 1280px !important;
-}
-.tw-max-w-\[338px\]{
-  max-width: 338px !important;
 }
 .tw-max-w-3xl{
   max-width: 48rem !important;
@@ -23451,6 +23448,10 @@ a:visited{
 .tw-bg-\[\#232323\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(35 35 35 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-\[\#d1d1d1\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(209 209 209 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-\[\#E5E5E5\]\/90{
   background-color: rgb(229 229 229 / 0.9) !important;
@@ -25098,6 +25099,12 @@ a:visited{
     margin-top: 0px !important;
     margin-bottom: 0px !important;
   }
+  .sm\:tw-mr-6{
+    margin-right: 1.5rem !important;
+  }
+  .sm\:tw-mb-0{
+    margin-bottom: 0px !important;
+  }
   .sm\:tw-mb-4{
     margin-bottom: 1rem !important;
   }
@@ -25109,9 +25116,6 @@ a:visited{
   }
   .sm\:tw-mb-2{
     margin-bottom: 0.5rem !important;
-  }
-  .sm\:tw-mb-0{
-    margin-bottom: 0px !important;
   }
   .sm\:tw-mr-4{
     margin-right: 1rem !important;
@@ -25186,6 +25190,9 @@ a:visited{
   }
   .sm\:tw-w-full{
     width: 100% !important;
+  }
+  .sm\:tw-max-w-\[338px\]{
+    max-width: 338px !important;
   }
   .sm\:tw-max-w-md{
     max-width: 28rem !important;
