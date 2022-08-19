@@ -1,97 +1,34 @@
-@extends('partials.layout')
+@extends('partials.login-layout')
 
 @section('meta')
-    <title>Login | Musora</title>
-@endsection
-
-@section('styles')
-    <style>
-        body {
-            position: fixed;
-            box-sizing: border-box;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #logoContainer {
-            margin-top: -125px;
-        }
-
-        #loginForm, #resetForm, #logoContainer {
-            flex: 0 0 auto;
-            max-width: 100%;
-            width:400px;
-        }
-    </style>
-@endsection
-
-@section('scripts')
-
+    <title>Reset Password | Musora</title>
 @endsection
 
 @section('content')
+<div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
+    <img
+        id="loginBgImg"
+        src="https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg"
+        class="tw-absolute tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-w-full tw-h-full tw-z-10"
+        loading="lazy"
+        onload="document.getElementById('loginBgImg').classList.remove('tw-opacity-0')"
+    >
+    <div class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20">
+        <section id="logoContainer" class="tw-flex-col tw-flex tw-items-center tw-text-center">
+            <img class="logo tw-max-w-[280px] tw-mb-6"
+                src="https://musora-ui.s3.amazonaws.com/logos/musora-white.svg" alt="Musora Logo">
+            <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
+        </section>
 
-    <section id="logoContainer" class="pa-2 tw-text-center">
-        <img class="logo"
-            src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="logo">
-    </section>
-
-    <p class="tw-pb-3 tw-text-center tw-italic">Your start-to-finish guide to learning music.</p>
-
-    <section class="tw-flex tw-flex-col bg-grey-1 pa-3 tw-mb-3 corners-10">
-
-        <form method="get" action="{{ url()->route('user_management_system.password.reset') }}" class="tw-flex tw-flex-col">
-            @if($useCsrfToken ?? true)
-                {{ csrf_field() }}
-            @endif
-
-            @if(!empty($errors->all()))
-                <ul class="tw-flex tw-flex-col mb-3 tw-text-xs text-error tw-list-none">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-            <input type="hidden" name="token" value="{{ $token }}">
-            <input type="hidden" name="email" value="{{ $email }}">
-
-            <p class="tiny tw-mb-2 tw-text-center">Reset password for <strong>{{ $email }}</strong></p>
-
-            <div class="tw-flex tw-flex-col tw-mb-2">
-                @include('partials.bladesora.members.inputs.text-input', [
-                "brand" => '{{ $brand }}',
-                "type" => "password",
-                "inputId" => "newPassword",
-                "inputName" => "password",
-                "inputLabel" => "New Password",
-                "inputValue" => "",
-                "inputErrors" => []
-            ])
-            </div>
-
-            <div class="tw-flex tw-flex-col tw-mb-2">
-                @include('partials.bladesora.members.inputs.text-input', [
-                    "brand" => '{{ $brand }}',
-                    "type" => "password",
-                    "inputId" => "confirmNewPassword",
-                    "inputName" => "password_confirmation",
-                    "inputLabel" => "Confirm New Password",
-                    "inputValue" => "",
-                    "inputErrors" => []
-                ])
-            </div>
-
-            <button type="submit" class="btn">
-                <span class="tw-text-white tw-bg-{{ $brand }}">Sign In</span>
-            </button>
-        </form>
-    </section>
-
+        <reset-pass-form
+            :errors="{{json_encode($errors->all())}}"
+            :usecsrftoken="!!({{$useCsrfToken ?? true}})"
+            :email="{{ json_encode($email) }}"
+            :resettoken="{{ json_encode($token) }}"
+            :reseturl="{{ json_encode(url()->route('user_management_system.password.reset')) }}"
+        >
+            <template #csrf>{{ csrf_field() }}</template>
+        </reset-pass-form>
+    </div>
+</div>
 @endsection
