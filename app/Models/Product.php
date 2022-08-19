@@ -80,10 +80,43 @@ class Product extends Model
             $uuid = $model['uuid'];
             unset($model['uuid']);
 
+            $brandId = $model['brand_id'];
+            $brand = '';
+
+
+            if($brandId === 1) {
+                $brand = 'Drumeo';
+            }
+            elseif($brandId === 2){
+                $brand = 'Pianote';
+            }
+            elseif($brandId === 3){
+                $brand = 'Guitareo';
+            }
+            elseif($brandId === 4){
+                $brand = 'Singeo';
+            }
+
             $model['slug'] = $model->brand->name.'-'.$model['slug'];
 
+            if(gettype($model['meta_img']) === 'object'){
+                $model['meta_img'] = $brand.'/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
+            }
+
+            if(gettype($model['thumbnail']) === 'object'){
+                $model['thumbnail'] = $brand.'/'.$uuid.'-'.$model['thumbnail']->getClientOriginalName();
+            }
+
+            if(gettype($model['thumbnail_logo']) === 'object'){
+                $model['thumbnail_logo'] = $brand.'/'.$uuid.'-'.$model['thumbnail_logo']->getClientOriginalName();
+            }
+
             if(gettype($model['page_logo']) === 'object'){
-                $model['page_logo'] = $uuid.$model['page_logo']->getClientOriginalName();
+                $model['page_logo'] = $brand.'/'.$uuid.'-'.$model['page_logo']->getClientOriginalName();
+            }
+
+            if(gettype($model['product_img']) === 'object'){
+                $model['product_img'] = $brand.'/'.$uuid.'-'.$model['product_img']->getClientOriginalName();
             }
         });
 
