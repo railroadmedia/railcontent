@@ -224,7 +224,7 @@
                         <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
                             <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                                 All
-                                @if($catalogueMeta['shortname'] === 'Podcast')
+                                @if( $catalogueMeta['shortname'] ?? $catalogueMeta['name'] === 'Podcast')
                                     Episodes {{-- Change Podcast Name}} --}}
                                 @else 
                                     {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
