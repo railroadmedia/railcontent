@@ -4,28 +4,6 @@
     <title>Login | Musora</title>
 @endsection
 
-@section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-
-            let loginForm = document.getElementById('loginForm'),
-                resetForm = document.getElementById('resetForm'),
-                loginToggle = document.getElementById('loginToggle'),
-                resetToggle = document.getElementById('resetToggle');
-
-            loginToggle.addEventListener('click', function () {
-                loginForm.classList.remove('hide');
-                resetForm.classList.add('hide');
-            });
-
-            resetToggle.addEventListener('click', function () {
-                loginForm.classList.add('hide');
-                resetForm.classList.remove('hide');
-            });
-        });
-    </script>
-@endsection
-
 @section('content')
 <div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
     <img
