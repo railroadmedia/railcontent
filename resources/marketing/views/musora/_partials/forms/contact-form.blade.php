@@ -4,11 +4,13 @@
         x-data='contactForm()'
         @submit.prevent='submitForm'
 >
-    {{-- <!-- Name --> --}}
+    <!-- Name -->
     @include('_partials.components.forms.text-input',[
+        'label' => 'name',
         'name' => 'name',
         'id' => 'customer-name',
         'placeholder' => 'Enter your name...',
+        'errorMessage' => 'Please enter your name.',
         'required' => true,
     ])
 
@@ -36,7 +38,9 @@
                 'label' => 'no',
                 'value' => 'Is not a member',
             ]
-        ]
+        ],
+        'errorMessage' => 'Please select an option.',
+        'selectMessage' => 'If your account is under a different email address than noted below, please provide it in your description.'
     ])
 
     {{-- <radio-buttons
@@ -52,8 +56,7 @@
         selectMessage="If your account is under a different email address than noted below, please provide it in your description."
     /> --}}
 
-    {{-- <!-- Email --> --}}
-
+    <!-- Email -->
     @include('_partials.components.forms.email-input',[
         'label' => 'Email Address',
         'name' => 'email',
@@ -76,12 +79,13 @@
 
    
 
-    {{-- <!-- Help Dropdown --> --}}
+    <!-- Help Dropdown -->
     @include('_partials.components.forms.multi-level-dropdown',[
         'label' => 'What can we help you with?',
-        'name' => 'support-options',
+        'name' => 'supportOption',
         'id' => 'support-listbox',
         'placeholder' => 'Please select the option that is closest to your request...',
+        'errorMessage' => 'Please select an option that is closest to your request.',
         'listData' => [
             [
                 'label' => 'Shipping & Orders',
@@ -259,6 +263,7 @@
         'id' => 'support-description',
         'placeholder' => 'Add message here...',
         'rows' => 4,
+        'errorMessage' => 'Please enter the details of your request.',
         'required' => true
     ])
 
@@ -277,18 +282,20 @@
 
     <div class="flex flex-col-reverse sm:flex-row full">
         <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
-            {{-- <!-- Recaptcha --> --}}
+            <!-- Recaptcha -->
             <recaptcha :siteKey="captchakey"
                         @update:verified="formVerified = $event"
             />
         </div>
         <div class="sm:w-72 sm:ml-auto">
-            {{-- <!-- File Upload Button --> --}}
+            <!-- File Upload Button -->
             @include('_partials.components.forms.file-input',[
-                'name' => 'attach file',
+                'label' => 'attach file',
+                'name' => 'attachment',
                 'id' => 'support-file',
                 'accept' => 'video/*,image/*',
-                'megabiteLimit' => '100'
+                'megabiteLimit' => '100',
+                'message' => 'For security reasons, we only accept image and video files.',
             ])
 
             {{-- <file-input
@@ -309,7 +316,7 @@
 
     </div>
 
-    {{-- <!-- SUBMIT BUTTON --> --}}
+    <!-- SUBMIT BUTTON -->
     <button class="btn-primary bg-drumeo self-start mr-auto w-full sm:w-min"
             type="submit"
             :disabled="!formValid || !formVerified"
@@ -318,7 +325,7 @@
             Submit
     </button>
 
-    {{-- <!-- Response Message --> --}}
+    <!-- Response Message -->
     <div class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
             :class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
     >
@@ -349,10 +356,42 @@
                 email: '',
                 membership: '',
                 description: '',
-                selectedOption: '',
-                attachments: [],
+                supportOption: '',
+                attachment: [],
             },
+            invalids: {
+                name: false,
+                email: {
+                    isInvalid: false,
+                    errorMessage: 'Please enter your email address.',
+                },
+                membership: false,
+                description: false,
+                supportOption: false,
+            },
+            hasValidated: false, 
             submitForm(){
+
+                if(this.formData.name === ''){
+                    this.invalids.name = true;
+                }
+
+                if(this.formData.email === ''){
+                    this.invalids.email.isInvalid = true;
+                }
+
+                if(this.formData.membership === ''){
+                    this.invalids.membership = true;
+                }
+
+                if(this.formData.description === ''){
+                    this.invalids.description = true;
+                }
+
+                if(this.formData.supportOption === ''){
+                    this.invalids.supportOption = true;
+                }
+
                 console.log(this.formData)
             }
         }
