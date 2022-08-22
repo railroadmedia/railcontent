@@ -65,18 +65,18 @@ const toggleSeePassword = () => {
         tw-px-[32px]
       ">
       <form method="get" :action="reseturl" class="tw-flex tw-flex-col tw-py-[42px]">
-        <slot v-if="usecsrftoken" name="csrf"></slot>
         <ul v-if="errors.length > 0" class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none">
           <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
             {{ error }}
           </li>
         </ul>
+        <slot v-if="usecsrftoken" name="csrf"></slot>
         <input type="hidden" name="token" :value="resettoken">
         <input type="hidden" name="email" :value="email">
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <p class="tw-mb-3">Reset password for <strong>{{ email }}</strong></p>
           <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
-            :inputType="isPasswordVisible ? 'text' : 'password'" id="newPassword" inputName="newPassword"
+            :inputType="isPasswordVisible ? 'text' : 'password'" id="newPassword" inputName="password"
             labelValue="Password" placeholder="Enter your password..." :inputErrors="[]"
             @onChange="handlePasswordChange" :showCustomButton="true">
             <template #custom-btn>

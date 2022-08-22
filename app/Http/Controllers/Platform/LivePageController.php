@@ -141,6 +141,9 @@ class LivePageController extends BaseController
 
         $timezones = CalendarService::getTimezoneList();
 
+        // get users timezone
+        $fullTimezoneString = $this->calendarService->getTimezone($request);
+
         $liveEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
             ContentTypes::liveContentTypes(),
             ContentService::STATUS_SCHEDULED,
@@ -175,9 +178,6 @@ class LivePageController extends BaseController
                 )
                 ->slice(0, 5)
                 ->values();
-
-        // get users timezone
-        $fullTimezoneString = $this->calendarService->getTimezone($request);
 
         // calculate if there is a current event and the previous/next events
         $showLivePage = false;
