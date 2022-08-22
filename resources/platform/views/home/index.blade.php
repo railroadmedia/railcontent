@@ -82,7 +82,7 @@
         @if($hasfollowedLessons)
             @component('partials.bladesora.members.components.home._followed-section', [
                 'brand' => brand(),
-                'subscribedLessons' => '', // todo: need url
+                'subscribedLessons' => '/'.$brand.'/lessons/subscribed', // todo: need url
                 'contentEndpoint' => '/laravel/public/railcontent/content',
                 'followedLessons' => $followedLessons,
                 'hasfollowedLessons' => $hasfollowedLessons,
