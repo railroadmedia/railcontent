@@ -23,7 +23,7 @@ class ContentTimezoneDecorator extends TypeDecoratorBase
                 try {
                     $contentsOfType[$contentIndex]['live_event_start_time_in_timezone'] =
                         Carbon::parse($content->fetch('fields.live_event_start_time'), 'UTC')
-                            ->timezone($timezone);
+                            ->timezone($timezone)->toDateTimeString();
                 } catch (\Exception $exception) {
                     $contentsOfType[$contentIndex]['live_event_start_time_in_timezone'] = null;
                     $contentsOfType[$contentIndex]['live_event_start_time'] = null;
@@ -34,7 +34,7 @@ class ContentTimezoneDecorator extends TypeDecoratorBase
                 try {
                     $contentsOfType[$contentIndex]['live_event_end_time_in_timezone'] =
                         Carbon::parse($content->fetch('fields.live_event_end_time'), 'UTC')
-                            ->timezone($timezone);
+                            ->timezone($timezone)->toDateTimeString();
                 } catch (\Exception $exception) {
                     $contentsOfType[$contentIndex]['live_event_end_time_in_timezone'] = null;
                     $contentsOfType[$contentIndex]['live_event_end_time'] = null;
@@ -43,7 +43,7 @@ class ContentTimezoneDecorator extends TypeDecoratorBase
 
             $contentsOfType[$contentIndex]['published_on_in_timezone'] =
                 Carbon::parse($content['published_on'], 'UTC')
-                    ->timezone($timezone);
+                    ->timezone($timezone)->toDateTimeString();
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

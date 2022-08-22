@@ -137,7 +137,7 @@
             account-url="{{ user()->getDashboardUrl() }}"
             :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
             next-learning-path-level="{{ $nextLearningPathLevel }}"
-            :userMetrics="{{ json_encode($userMetrics) }}"
+            :user-metrics="{{ json_encode($userMetrics) }}"
         ></stats-section>
 
     </div>

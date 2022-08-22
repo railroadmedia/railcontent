@@ -88,7 +88,8 @@
                                 @if(!empty($input['callToAction']))
                                     <tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                         <td itemprop="handler" itemscope="" itemtype="http://schema.org/HttpActionHandler" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0 0 20px;" align="center" valign="top">
-                                            <a href="{{ $input['callToAction']['url'] }}" itemprop="url" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; background-color: #f61a30; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; margin: 0; padding: 10px 20px;">
+                                            <a href="{{ $input['callToAction']['url'] }}" itemprop="url"
+                                               style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; background-color: black; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; margin: 0; padding: 10px 20px;">
                                                 {{ $input['callToAction']['text'] }}
                                             </a>
                                         </td>

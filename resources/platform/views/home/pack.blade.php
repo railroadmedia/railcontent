@@ -46,8 +46,8 @@
         <stats-section
             brand="{{ $brand }}"
             account-url="{{ user()->getDashboardUrl() }}"
-            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-            next-learning-path-level="{{ $nextLearningPathLevel }}"
+            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent ?? 0 }}"
+            next-learning-path-level="{{ $nextLearningPathLevel ?? '1.1' }}"
             :userMetrics="{{ json_encode($userMetrics) }}"
         ></stats-section>
 
