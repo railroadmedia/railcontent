@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=f07925e3e6e918cfa977afeb41613482",
+    "/platform/js/app.js": "/platform/js/app.js?id=c23e57a3e7946cefb84dd228d77b901c",
     "/platform/js/profile.js": "/platform/js/profile.js?id=058218d2f06dd510f195a3e759c3ad0a",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=556c9a29d1562a74c391ca1d75809ca1",
@@ -15,7 +15,5 @@
     "/platform/css/app.css": "/platform/css/app.css?id=a26bdf49a2b43b9ef1703d5fd0b8aa8d",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=ff513fe34d3c22e27ef3360b1c99f082",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=06bd17392a8e2ba533590638828d4872",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=64251f63df8c422cf0a803346593e10d",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=f3d5fcc2a88ba12fcd88bedf73ebd955",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=a6e353aa93088e9910fe4f4885974fa1"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=64251f63df8c422cf0a803346593e10d"
 }
