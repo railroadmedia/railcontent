@@ -124,7 +124,7 @@
         @if($hasUpcomingEvents)
             @component('partials.bladesora.members.components.home._upcoming-section', [
                 'brand' => brand(),
-                'upcomingUrl' => '', // todo: url
+                'upcomingUrl' => '/'.$brand.'/live', // todo: url
                 'upcomingEvents' => $upcomingEvents,
                 'contentEndpoint' => '/laravel/public/railcontent/content',
                 ])
