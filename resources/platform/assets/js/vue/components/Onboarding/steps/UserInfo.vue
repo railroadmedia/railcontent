@@ -66,7 +66,7 @@ const handleUploadError = () => {
             about yourself so that we can get it right." :hideBackButton="true" />
       <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleUploadError"
         :userId="info.user.id" />
-      <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-mb-[56px]" :initialValue="info.user.name"
+      <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-mb-[56px] tw-items-center" :initialValue="info.user.name"
         labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
         @onChange="onInputChange" :showClearButton="true" />
     </div>
