@@ -1296,9 +1296,9 @@ class ContentPagesController extends BaseController
      */
     public function schedule(Request $request)
     {
-        $scheduleEvents = $this->contentService->getContentForCalendar(null, false);
-
         $fullTimezoneString = $this->calendarService->getTimezone($request);
+
+        $scheduleEvents = $this->contentService->getContentForCalendar(null, false);
 
         $timezones = $this->getTimezoneList();
 
