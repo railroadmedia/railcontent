@@ -110,11 +110,7 @@ const handleRedirect = () => {
     >
       <Button
         :brand="brand"
-        @onButtonClick="
-          () => {
-            emit('onChangeStep', 1);
-          }
-        "
+        @onButtonClick="handleRedirect"
         :isDisabled="!steps[0].checked"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] tw-uppercase md:tw-hidden tw-block"
         >Complete Your Account</Button

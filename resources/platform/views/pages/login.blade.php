@@ -4,33 +4,16 @@
     <title>Login | Musora</title>
 @endsection
 
-@section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-
-            let loginForm = document.getElementById('loginForm'),
-                resetForm = document.getElementById('resetForm'),
-                loginToggle = document.getElementById('loginToggle'),
-                resetToggle = document.getElementById('resetToggle');
-
-            loginToggle.addEventListener('click', function () {
-                loginForm.classList.remove('hide');
-                resetForm.classList.add('hide');
-            });
-
-            resetToggle.addEventListener('click', function () {
-                loginForm.classList.add('hide');
-                resetForm.classList.remove('hide');
-            });
-        });
-    </script>
-@endsection
-
 @section('content')
-    <div class="tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-bg-[#000C17] tw-text-white tw-bg-cover"
-         style="background-image: url('https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg');"
+<div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
+    <img
+        id="loginBgImg"
+        src="https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg"
+        class="tw-absolute tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-w-full tw-h-full tw-z-10"
+        loading="lazy"
+        onload="document.getElementById('loginBgImg').classList.remove('tw-opacity-0')"
     >
-
+    <div class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20">
         <section id="logoContainer" class="tw-flex-col tw-flex tw-items-center tw-text-center">
             <img class="logo tw-max-w-[280px] tw-mb-6"
                 src="https://musora-ui.s3.amazonaws.com/logos/musora-white.svg" alt="Musora Logo">
@@ -56,4 +39,5 @@
             <a class="tw-text-white tw-font-extrabold tw-underline" href="{{ url('/#orderNow') }}">Join the community here!</a>
         </p>
     </div>
+</div>
 @endsection

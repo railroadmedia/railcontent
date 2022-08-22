@@ -27,7 +27,7 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-row pv-3">
+            <div class="tw-flex tw-flex-row pv-2">
                 <h1 class="heading dark:tw-text-white">Choose a Resource</h1>
             </div>
 

@@ -23,15 +23,15 @@ const experienceDescriptionMap = {
   },
   drumeo: {
     0: 'Start from the beginning. No experience required!',
-    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills',
-    2: 'For intermediate player who are comfortable playing some songs and have some hand and foot independence.',
-    3: 'For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
+    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills.',
+    2: 'For intermediate players who are comfortable playing some songs and have some hand and foot independence.',
+    3: 'For advanced players who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
   },
   guitareo: {
     0: 'Start from the beginning. No experience required!',
-    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills',
-    2: 'For intermediate player who are comfortable playing some songs and have some hand and foot independence.',
-    3: 'For advanced player who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
+    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills.',
+    2: 'For intermediate players who are comfortable playing some songs and have some hand and foot independence.',
+    3: 'For advanced players who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
   }
 }
 

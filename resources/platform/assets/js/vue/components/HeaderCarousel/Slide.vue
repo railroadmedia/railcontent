@@ -36,6 +36,14 @@ const props = defineProps({
   textContentOverride: {
     type: String,
     default: ''
+  },
+  animateDirection: {
+    type: String,
+    default: ''
+  },
+  isPrevSlide: {
+    type: Boolean,
+    default: false,
   }
 });
 const goToUrl = (url) => {
@@ -46,10 +54,10 @@ const goToUrl = (url) => {
 </script>
 
 <template>
-  <div :class="`tw-transition-opacity tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%]
+  <div v-if="showSlide || isPrevSlide" :class="`tw-bg-white tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%]
   ${showSlide
-    ? 'tw-opacity-100 tw-w-full tw-h-full tw-z-10 tw-relative'
-    : 'tw-opacity-0 tw-h-0 tw-w-0 tw-absolute tw-z-0'
+    ? `tw-absolute tw-w-full tw-h-full tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}`
+    : 'tw-absolute tw-w-full tw-h-full tw-z-0'
   }
   ${ctaUrl
     ? 'tw-cursor-pointer'
@@ -115,7 +123,6 @@ const goToUrl = (url) => {
 /* Same as .md */
 @media (min-width: 768px) {
   .header-carousel-slide-bg {
-    transition: all 1s;
     background: linear-gradient(89.96deg, #000C17 1.16%, #000C17 38.86%, rgba(0, 12, 23, 0) 70.78%), linear-gradient(182.34deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(89.96deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);
   }
   .header-carousel-slide-bg:hover {

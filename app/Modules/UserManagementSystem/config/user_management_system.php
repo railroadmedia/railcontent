@@ -36,32 +36,7 @@ return [
     'force_remember' => true,
 
 
-    'onboarding' => [
-        'levels' => [
-            0 => 'Level 1',
-            1 => 'Level 2',
-            2 => 'Level 3',
-            3 => 'Level 4'
-        ],
-        'drumeo' => [
-            'gears' => ['Acoustic Kit', 'E-Kit', 'Practice Pad'],
-            'genres' => ['Rock', 'Pop', 'Jazz', 'Blues', 'Country', 'Metal', 'Funk', 'Soul', 'CCM/Worship', 'Hip-Hop/Rap'],
-            'topics' => []
-        ],
-        'pianote' => [
-            'gears' => [],
-            'genres' => [],
-            'topics' => []
-        ],
-        'guitareo' => [
-            'gears' => [],
-            'genres' => [],
-            'topics' => []
-        ],
-        'singeo' => [
-            'gears' => [],
-            'genres' => [],
-            'topics' => []
-        ],
-    ]
+    // password reset
+    'password_reset_form_route_name' => 'members.pages.reset-password',
+    'login_success_redirect_path' => '/members',
 ];

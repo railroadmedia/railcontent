@@ -1,10 +1,6 @@
 <script setup>
-/* TODO:
-- Add real reset url
-- Define if join url should be out or inside this component
-*/
-
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
+import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "../InputLabel/InputLabel.vue";
 import RainbowButton from "../Button/RainbowButton.vue";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
@@ -42,6 +38,7 @@ const currentForm = ref("login");
 const emailInput = ref('');
 const passwordInput = ref('');
 const isLoading = ref(false);
+const isPasswordVisible = ref(false);
 
 const changeCurrentForm = (val) => {
   currentForm.value = val;
@@ -49,6 +46,7 @@ const changeCurrentForm = (val) => {
 
 const handleEmailChange = (val) => {
   emailInput.value = val;
+  localStorage.setItem("lastEmailUsed", val)
 };
 
 const handlePasswordChange = (val) => {
@@ -59,6 +57,16 @@ const handleButtonClick = (e) => {
   isLoading.value = true;
   document.getElementById('hidden-submit').click();
 };
+
+const toggleSeePassword = () => {
+  isPasswordVisible.value = !isPasswordVisible.value;
+};
+
+onBeforeMount(() => {
+  if(localStorage.getItem("lastEmailUsed") && props.errors.length) {
+    emailInput.value = localStorage.getItem("lastEmailUsed");
+  }
+});
 </script>
 
 <template>
@@ -100,6 +108,7 @@ const handleButtonClick = (e) => {
         </ul>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
+            :initialValue="emailInput"
             inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
@@ -111,12 +120,12 @@ const handleButtonClick = (e) => {
             @onChange="handleEmailChange"
           />
         </div>
-        <div class="tw-flex tw-flex-col tw-mb-[20px]">
+        <div class="tw-flex tw-flex-col tw-mb-[20px] tw-relative">
           <InputLabel
             wrapperOverride="tw-text-[16px]"
             inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
-            inputType="password"
+            :inputType="isPasswordVisible ? 'text' : 'password'"
             id="loginPassword"
             inputName="password"
             labelValue="Password"
@@ -124,7 +133,19 @@ const handleButtonClick = (e) => {
             :inputErrors="[]"
             @onChange="handlePasswordChange"
             @onEnter="handleButtonClick"
-          />
+            :showCustomButton="true"
+          >
+          <template #custom-btn>
+            <button
+              type="button"
+              class="tw-w-[24px] tw-h-[24px] tw-absolute tw-flex tw-items-center tw-justify-center tw-right-3 tw-text-black"
+              @click="toggleSeePassword"
+            >
+              <EyeIcon class="tw-w-[24px] tw-h-[24px]" v-if="!isPasswordVisible" />
+              <EyeOffIcon class="tw-w-[24px] tw-h-[24px]" v-if="isPasswordVisible" />
+            </button>
+          </template>
+          </InputLabel>
         </div>
         
         <RainbowButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
@@ -165,6 +186,7 @@ const handleButtonClick = (e) => {
         <slot v-if="usecsrftoken" name="csrf"></slot>
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
           <InputLabel
+            :initialValue="emailInput"
             inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :brand="brand"
             inputType="email"
@@ -173,9 +195,10 @@ const handleButtonClick = (e) => {
             labelValue="Email Address"
             placeholder="Enter your email..."
             :inputErrors="[]"
+            @onChange="handleEmailChange"
           />
         </div>
-        <RainbowButton type="submit" label="GET NEW PASSWORD" />
+        <RainbowButton :disabled="!emailInput.length" type="submit" label="GET NEW PASSWORD" />
       </form>
 
       <a
