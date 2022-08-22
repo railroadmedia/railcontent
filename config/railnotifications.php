@@ -46,13 +46,13 @@ return [
     'development_mode' => env('APP_DEBUG', false),
 
     // database
-    'database_connection_name' => 'musora_laravel_mysql_writer_only',
+    'database_connection_name' => env('USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME','musora_laravel_mysql_writer_only'),
     'database_name' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME'),
     'database_user' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME'),
     'database_password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD'),
     'database_host' => env('DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST'),
-    'database_driver' => 'pdo_mysql',
-    'database_in_memory' => false,
+    'database_driver' => env('DB_MYSQL_DRIVER', 'pdo_mysql'),
+    'database_in_memory' => env('DB_MYSQL_IN_MEMORY', false),
     'enable_query_log' => false,
 
     'data_mode' => 'client',

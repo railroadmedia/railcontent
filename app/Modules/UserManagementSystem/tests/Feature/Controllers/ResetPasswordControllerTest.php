@@ -14,7 +14,7 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
     {
         $response = $this->call(
             'POST',
-            config('user_management_system.route_prefix') . '/password/reset'
+            config('user_management_system.route_prefix') . '/password/reset-password-with-token'
         );
 
         $response->assertSessionHasErrors(['password']);
@@ -27,7 +27,7 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
         $response = $this->call(
             'POST',
-            config('user_management_system.route_prefix') . '/password/reset',
+            config('user_management_system.route_prefix') . '/password/reset-password-with-token',
             [
                 'email' => 'test+1@test.com',
                 'password' => $password,
@@ -43,9 +43,6 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
     public function test_reset_password()
     {
-        // there is an issue with the token
-        $this->markTestIncomplete();
-
         $email = $this->faker->email;
         $password = $this->faker->words(3, true);
 
@@ -83,12 +80,9 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
         // make sure no web based auth cookies are passed back
         $this->assertEquals(200, $response->getStatusCode());
 
-
-        // todo: investigate why we have this problem
-        // when we run the test, we get 'INVALID_TOKEN ('passwords.token') error; for some reason, the token is not found!
         $response = $this->call(
             'POST',
-            config('user_management_system.route_prefix') . '/password/reset',
+            config('user_management_system.route_prefix') . '/password/reset-password-with-token',
             [
                 'email' => $user->email,
                 'password' => $newPassword,
@@ -100,7 +94,6 @@ class ResetPasswordControllerTest extends UserManagementSystemTestCase
 
         $this->assertFalse(auth()->attempt(['email' => $user->email, 'password' => $password]));
         $this->assertTrue(auth()->attempt(['email' => $user->email, 'password' => $newPassword]));
-
     }
 
     protected function setUp(): void

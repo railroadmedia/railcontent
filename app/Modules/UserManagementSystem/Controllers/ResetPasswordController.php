@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller
      * @param  Request $request
      * @return RedirectResponse
      */
-    public function reset(Request $request)
+    public function resetPasswordWithToken(Request $request)
     {
 
         $isJson = request()->expectsJson();

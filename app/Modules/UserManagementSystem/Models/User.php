@@ -189,6 +189,19 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $send_email_notifications
  * @method static Builder|User whereSendEmailNotifications($value)
  * @method static Builder|User whereSendMobileAppPushNotifications($value)
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingExperience[] $onboardingExperience
+ * @property-read int|null $onboarding_experience_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGear[] $onboardingGear
+ * @property-read int|null $onboarding_gear_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGenre[] $onboardingGenres
+ * @property-read int|null $onboarding_genres_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingTopic[] $onboardingTopics
+ * @property-read int|null $onboarding_topics_count
+ * @method static Builder|User whereDrumeoOnboardingSkipSetup($value)
+ * @method static Builder|User whereGuitareoOnboardingSkipSetup($value)
+ * @method static Builder|User whereIsPackOwner($value)
+ * @method static Builder|User wherePianoteOnboardingSkipSetup($value)
+ * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
