@@ -729,9 +729,10 @@ class ForumPagesController extends Controller
     public function showCreateCategoryForm(Request $request, $domain, $brand)
     {
         return view(
-            'members.forums.create-forum',
+            'forums.create-forum',
             [
                 "user" => user(),
+                'brand' => $brand
             ]
         );
     }
