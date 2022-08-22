@@ -10,9 +10,9 @@
                     </h1>
                 </div>
                 
-                <div class="tw-flex tw-w-full tw-flex-col md:tw-flex-row md:tw-w-1/2">
+                <div class="tw-flex tw-w-full md:tw-w-1/2 tw-justify-end tw-flex-col md:tw-flex-row">
 
-                    <div class="tw-flex tw-items-center tw-w-full tw-mb-5 md:tw-mb-0">
+                    <div class="tw-flex tw-items-center tw-mb-5 md:tw-mb-0">
                         <!-- Mobile Back Button -->
                         <a :href="previousPage" 
                             class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center md:tw-hidden"
@@ -20,7 +20,7 @@
                             <i class="fas fa-arrow-circle-left tw-text-4xl"></i>
                         </a>
 
-                        <div class="tw-flex tw-flex-grow tw-justify-center tw-mr-6 md:tw-mr-0 md:tw-w-1/2 md:tw-justify-end xl:tw-w-2/3">
+                        <div class="tw-flex tw-flex-grow tw-justify-center tw-mr-6 md:tw-mr-0">
                             
                             <!-- Edit or delete the thread -->
                             <button
@@ -75,22 +75,18 @@
 
                             <!-- Hides Signatures -->
                             <button
-                                class="btn collapse-square short tw-mr-2 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-2 tw-w-[36px]"
+                                title="Hide All Signatures"
                                 @click="hideSignatures"
                             >
                                 <span :class="[themeBgClass, signaturesHidden ? 'tw-text-white' : 'inverted ' + themeTextClass]">
                                     <i class="fas fa-eye"></i>
                                 </span>
-
-                                <!-- Tool Tip -->
-                                <div class="tw-tooltip tw-tooltip-dark">
-                                    Hide All Signatures
-                                </div>
                             </button>
                         </div>
                     </div>
 
-                    <div class="tw-flex tw-justify-center tw-items-center md:tw-w-1/2">
+                    <div class="tw-flex tw-justify-center tw-items-center">
                         <!-- Follow -->
                         <button
                             class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl" 
