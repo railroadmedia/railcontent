@@ -2,7 +2,7 @@
     class="file-field" 
     {{-- x-bind:disabled="disabled" --}}
     x-data="{
-        message: 'For security reasons, we only accept image and video files.',
+        message: '{{$message}}',
     }"
 >
     <label 
@@ -24,7 +24,7 @@
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
         </div>
-            {{ $name }}
+            {{ $label }}
         <input 
             type="file" 
             id="{{$id}}" 
@@ -57,7 +57,7 @@
                 }
                 else {
                     message = '';
-                    formData.attachments.push($event.target.files[0]);
+                    formData.{{$name}}.push($event.target.files[0]);
                 }
 
             "
@@ -73,8 +73,8 @@
         </p>
     </div>
     {{-- <!-- Uploadedd Files --> --}}
-    <div x-bind:class="formData.attachments.length === 0 && 'hidden'">
-        <template x-for="file in formData.attachments">
+    <div x-bind:class="formData.{{$name}}.length === 0 && 'hidden'">
+        <template x-for="file in formData.{{$name}}">
             <div class="bg-green-50 p-2 inline-flex items-center font-bold text-xs w-full mb-2">
                 <span class="truncate" x-text="file.name"></span> 
                 <span class="ml-1 text-gray-500 mr-auto whitespace-nowrap" x-text="
@@ -88,7 +88,10 @@
                 </span>
                 {{-- <!-- Remove File --> --}}
                 <div class="ml-4 inline-flex"
-                        x-on:click="formData.attachments = [];">
+                        x-on:click="
+                            formData.{{$name}} = [];
+                            message = '{{$message}}'
+                        ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 h-4 w-4 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>

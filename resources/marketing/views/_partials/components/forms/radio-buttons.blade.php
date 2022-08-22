@@ -1,9 +1,4 @@
-<fieldset 
-    class="fieldset border-none" 
-    @if(!empty($required)) aria-required="required" @endif
-    {{-- x-bind:aria-invalid="invalid"  --}}
-    {{-- x-bind:disabled="disabled" --}}
->
+<fieldset class="fieldset border-none">
     <p class="fieldset-title">
         <span v-if="required" class="text-red-500">*</span>
         {{ $label }}
@@ -17,6 +12,7 @@
                     name="{{$name}}" 
                     value="{{$button['value']}}"
                     x-model="formData.{{$name}}"
+                    x-on:input.change="if(invalids.{{$name}}) invalids.{{$name}} = false;"
                 >
                 <label for="radio-{{$name}}-{{$key}}">
                     {{ $button['label'] }}
@@ -25,12 +21,15 @@
         @endforeach
         
     </div>
-    {{-- <p class="input-message" id="">
-        {{ errorMessage }}
-    </p> --}}
-    {{-- <p class="text-sm italic text-blue-500" x-show="showSelectMessage">
-        {{ selectMessage }}
-    </p> --}}
+    <p class="input-message text-[#EF4444]" x-bind:class="invalids.{{$name}} ? 'block' : 'hidden'">
+        {{ $errorMessage }}
+    </p>
+    <p 
+        class="text-sm italic text-blue-500" 
+        x-bind:class="(formData.{{$name}} === 'Is not a member' || formData.{{$name}} === '') && 'hidden'"
+    >
+        {{$selectMessage}}
+    </p>
 </fieldset>
 
 

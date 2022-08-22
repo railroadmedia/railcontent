@@ -14,11 +14,12 @@
     </label>
 
     <div class="input-wrapper">
-        {{-- <!-- Dropdown Trigger / Label --> --}}
+        <!-- Dropdown Trigger / Label -->
         <button 
             type="button"
-            class="text-sm h-12 transition-all py-1 leading-4 dark:bg-[#00101D] dark:text-[#9EC0DC] dark:border-[#445F74]"
-            x-bind:class="formData.selectedOption && 'bg-gray-100'"
+            class="text-sm h-12 transition-all py-1 leading-4"
+            x-bind:class="invalids.{{$name}} ? 'border-[#EF4444] bg-[#FEF2F2]' : `focus:border-drumeo dark:bg-[#00101D] dark:text-[#9EC0DC] dark:placeholder:text-[#9EC0DC] dark:border-[#445F74] ${formData.{{$name}} && 'bg-gray-100'}`;"
+            x-bind:class="formData.{{$name}} && 'bg-gray-100'"
             x-on:click="dropdownMenuOpen = ! dropdownMenuOpen;"
             x-on:keyup.esc="dropdownMenuOpen = false"
             aria-haspopup="listbox" 
@@ -29,29 +30,36 @@
             ref="dropdownButton"
             tabindex="0"
         >
-            {{-- <!-- Dropdown Selected Text --> --}}
-            <span x-text="formData.selectedOption || placeholder"></span>
+            <!-- Dropdown Selected Text -->
+            <span x-text="formData.{{$name}} || placeholder"></span>
 
-            {{-- <!-- Icons --> --}}
+            <!-- Icons -->
             <span class="input-icon">
-                {{-- <!-- Heroicon name: solid/exclamation-circle --> --}}
-                <svg xmlns="http://www.w3.org/2000/svg" class="invalid-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <!-- Heroicon name: solid/exclamation-circle -->
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="invalid-icon" 
+                    x-bind:class="invalids.{{$name}} && 'block text-[#EF4444]'"
+                    viewBox="0 0 20 20" 
+                    fill="currentColor" 
+                    aria-hidden="true"
+                >
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                 </svg>
-                {{-- <!-- Heroicon name: solid/chevron-down --> --}}
+                <!-- Heroicon name: solid/chevron-down -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
             </span>
         </button>
 
-        {{-- <!-- Clear input --> --}}
+        <!-- Clear input -->
         <button 
             x-if="selectedValue"
             tabindex="0"
-            x-on:click="formData.selectedOption = ''"
+            x-on:click="formData.{{$name}} = ''"
             class="h-12 w-12 border border-solid border-gray-300 absolute bg-white top-0 right-0 flex items-center justify-center p-0"
-            x-bind:class="formData.selectedOption === '' && 'hidden'"
+            x-bind:class="formData.{{$name}} === '' && 'hidden'"
             {{-- x-bind:class="themeFocusBorder" --}}
         >
             <span 
@@ -64,7 +72,7 @@
             </span>
         </button>
 
-        {{-- <!-- Separate the Dropdown from the Ul's - Make the container full width --> --}}
+        <!-- Separate the Dropdown from the Ul's - Make the container full width -->
         <div 
             x-show="dropdownMenuOpen"
             tabindex="-1"
@@ -83,7 +91,7 @@
                         class="with-dropdown md:bg-transparent"
                         x-on:class="activeCategory === {{$key}} ? 'bg-gray-200' : 'bg-transparent'"
                     >   
-                        {{-- <!-- no submenu --> --}}
+                        <!-- no submenu -->
                         @if(empty($category['options']))
                             <input 
                                 type="radio" 
@@ -91,14 +99,16 @@
                                 name="{{$name}}" 
                                 value="{{$category['label']}}" 
                                 checked="{{$category['selected']}}"
-                                x-model="formData.selectedOption"
-                                x-on:change="selectedValue = {{$category['label']}}"
+                                x-model="formData.{{$name}}"
+                                x-on:change="
+                                    dropdownMenuOpen = false;
+                                    if(invalids.{{$name}}) invalids.{{$name}} = false;
+                                "
                             >
 
                             <label 
                                 for="category-{{$key}}" 
                                 class="option" 
-                                {{-- x-bind:class="selectedOption === category.label ? themeBgClass : ''" --}}
                                 tabindex="0"
                                 role="option"
                                 x-on:mouseover="activeCategory = ''"
@@ -128,7 +138,7 @@
                             </div>
                         @endif
 
-                        {{-- <!-- Sub navigation --> --}}
+                        <!-- Sub navigation -->
                         @if(!empty($category['options']))
                             <div 
                                 x-show="activeCategory === {{$key}}" 
@@ -143,14 +153,15 @@
                                             name="{{$name}}" 
                                             value="{{$option['value']}}"
                                             checked="{{$option['checked']}}"
-                                            x-model="formData.selectedOption"
-                                            x-on:change="dropdownMenuOpen = false"
-                                            {{-- x-on:change="selectOption(i,j)" --}}
+                                            x-model="formData.{{$name}}"
+                                            x-on:change="
+                                                dropdownMenuOpen = false;
+                                                if(invalids.{{$name}}) invalids.{{$name}} = false;
+                                            "
                                         >
                                         <label 
                                             for="option-{{$subKey}}{{$key}}" 
                                             class="option pl-6 md:pl-4" 
-                                            {{-- x-bind:class="selectedOption === option.value ? themeBgClass : ''" --}}
                                             tabindex="0"
                                             role="option"
                                             x-on:keyup.enter="selectedOption = option.value"
@@ -168,7 +179,9 @@
         </div>
 
         <!-- Error Message -->
-        {{-- <p class="input-message">{{ errorMessage }}</p> --}}
+        <p class="input-message text-[#EF4444]" x-bind:class="invalids.{{$name}} ? 'block' : 'hidden'">
+            {{ $errorMessage }}
+        </p>
     </div>
 
     {{-- <!-- <code class="text-xs"><pre>{{ this.listData }}</pre></code> --> --}}
