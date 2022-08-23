@@ -24,9 +24,8 @@ class ResetPasswordController extends Controller
      * @param  Request $request
      * @return RedirectResponse
      */
-    public function reset(Request $request)
+    public function resetPasswordWithToken(Request $request)
     {
-
         $isJson = request()->expectsJson();
 
         try {
@@ -92,7 +91,7 @@ class ResetPasswordController extends Controller
 
             return redirect()
                 ->back()
-                ->withErrors(['password' => 'Password reset failed, please try again.']);
+                ->withErrors(['password' => 'Password reset failed, please try again. Error: ' . $response]);
         } else {
             if ($response === Password::PASSWORD_RESET) {
                 $user = User::find(auth()->id());

@@ -38,7 +38,12 @@ class AlphaTestingAccountCreationMiddleware
         Request $request,
         Closure $next
     ) {
-        if ($request->routeIs('user_management_system.login.cookie') && !User::query()->where('email', $request->get('email'))->exists()) {
+        if (app()->runningUnitTests()) {
+            return $next($request);
+        }
+
+        if ($request->routeIs('user_management_system.login.cookie') &&
+            !User::query()->where('email', $request->get('email'))->exists()) {
             $user = new User;
 
             $user->email = $request->get('email');

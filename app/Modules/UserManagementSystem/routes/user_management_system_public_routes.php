@@ -45,11 +45,11 @@ Route::group(
         )
             ->name('user_management_system.password.send-reset-email');
 
-        Route::get(
-            'password/reset',
-            ResetPasswordController::class . '@reset'
+        Route::post(
+            'password/reset-password-with-token',
+            ResetPasswordController::class . '@resetPasswordWithToken'
         )
-            ->name('user_management_system.password.reset');
+            ->name('user_management_system.password.reset-password-with-token');
 
     }
 );

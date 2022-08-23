@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -9,6 +10,7 @@ use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
+use PDO;
 
 class AuthenticationControllerTest extends UserManagementSystemTestCase
 {
@@ -103,6 +105,8 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
     public function test_authenticate_cookie_invalid_credentials()
     {
+        $pdo = DB::connection('musora_laravel_mysql_sqlite_testing')->getPdo();
+
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/login/cookie',
