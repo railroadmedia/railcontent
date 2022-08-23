@@ -44,7 +44,7 @@
 
         <!-- Search -->
         <div class="tw-flex tw-px-2 ">
-            <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
+            <div class="tw-flex tw-flex-col sm:tw-mb-6 tw-w-full">
                 <div class="tw-flex tw-flex-wrap">
 
                     <template v-if="!onlyFollowed && !searching">
@@ -104,12 +104,12 @@
                         <!-- Submit Button -->
                         <div class="tw-flex tw-flex-col">
                             <button
-                                class="tw-btn-primary tw-px-5 sm:tw-px-12"
+                                class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"
                                 :class="[brandBGColor]"
                                 @click="$refs.searchInput.blur()"
                             >
-                                <i class="fas fa-search tw-mr-1 tw-text-sm"></i>
-                                <span>Search</span>
+                                <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>
+                                <span class="tw-hidden sm:tw-inline-flex">Search</span>
                             </button>
                         </div>
                     </div>

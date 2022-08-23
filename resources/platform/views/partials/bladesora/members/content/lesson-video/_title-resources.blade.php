@@ -27,7 +27,7 @@
                     <ul>
                         @foreach($lessonResources as $resource)
                             <li>
-                                <a class="no-decoration text-black pa-1"
+                                <a class="no-decoration text-black dark:tw-text-white pa-1"
                                    href="{{ $resource['resource_url'] }}"
                                    target="_blank"
                                    download>

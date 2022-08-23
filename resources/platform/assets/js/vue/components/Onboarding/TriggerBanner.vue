@@ -59,8 +59,10 @@ const hideOnboardingBanner = () => {
         tw-flex
         tw-justify-center
         tw-items-center
-        tw-top-[9px]
-        tw-right-[14px]
+        tw-top-[5px]
+        tw-right-[5px]
+        md:tw-top-[9px]
+        md:tw-right-[9px]
         hover:tw-bg-black/10
         dark:hover:tw-bg-white/10
       " @click="hideOnboardingBanner">
