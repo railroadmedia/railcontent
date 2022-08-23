@@ -78,6 +78,8 @@
                         </musora-icon>
                     @elseif($catalogueMeta['name'] == 'New Content')
                         <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                    @elseif($catalogueMeta['name'] == 'Subscribed')
+                        <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
@@ -282,6 +284,7 @@
                     subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
                     catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
                     :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+                    content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}"
                     :use-theme-color="true"
                     :pre-loaded-content="{{ $listLessons }}"
                     :is-admin="{{ json_encode(user()->isAdmin()) }}"
