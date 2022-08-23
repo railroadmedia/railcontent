@@ -1348,6 +1348,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'song' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',

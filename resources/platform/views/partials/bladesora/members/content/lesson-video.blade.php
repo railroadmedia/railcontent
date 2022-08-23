@@ -15,12 +15,12 @@
 
         @if(!empty($lessonResources))
             <div class="flex flex-column align-center sq-btn-col">
-                <div class="btn bg-{{ $themeColor }} inverted text-{{ $themeColor }} is-dropdown"
+                <div class="btn bg-{{ $brand }} inverted text-{{ $brand }} is-dropdown"
                      data-tooltip="Download Resources">
-                    <i class="unopen fas fa-download no-events text-{{ $themeColor }}"></i>
+                    <i class="unopen fas fa-download no-events text-{{ $brand }}"></i>
                     <i class="open fas fa-download no-events text-white"></i>
 
-                    <div class="dropdown-content bg-white shadow tw-text-xs text-black">
+                    <div class="dropdown-content bg-white shadow tiny text-black">
                         <ul>
                             @foreach($lessonResources as $resource)
                                 <li>

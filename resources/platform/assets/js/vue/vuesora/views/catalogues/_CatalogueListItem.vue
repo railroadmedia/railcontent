@@ -166,6 +166,8 @@
           tw-uppercase
           xl:tw-hidden
           tw-flex
+          tw-flex-wrap
+          sm:tw-flex-nowrap
         "
         :class="`${this.overview ? 'tw-mt-4' : ''}`"
       >

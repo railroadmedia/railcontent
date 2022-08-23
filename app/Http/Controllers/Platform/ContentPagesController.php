@@ -22,6 +22,7 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Support\Collection;
@@ -37,7 +38,7 @@ class ContentPagesController extends BaseController
     private RailcontentURLProvider $railcontentURLProvider;
     private FullTextSearchService $fullTextSearchService;
     private CalendarService $calendarService;
-
+    private ContentFollowsService $contentFollowsService;
 
     /**
      * @param ContentService $contentService
@@ -46,7 +47,7 @@ class ContentPagesController extends BaseController
      * @param RailcontentURLProvider $railcontentURLProvider
      * @param FullTextSearchService $fullTextSearchService
      * @param CalendarService $calendarService
-     *
+     * @param ContentFollowsService $contentFollowsService
      */
     public function __construct(
         ContentService $contentService,
@@ -54,7 +55,8 @@ class ContentPagesController extends BaseController
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         RailcontentURLProvider $railcontentURLProvider,
         FullTextSearchService $fullTextSearchService,
-        CalendarService $calendarService
+        CalendarService $calendarService,
+        ContentFollowsService $contentFollowsService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -62,6 +64,7 @@ class ContentPagesController extends BaseController
         $this->railcontentURLProvider = $railcontentURLProvider;
         $this->fullTextSearchService = $fullTextSearchService;
         $this->calendarService = $calendarService;
+        $this->contentFollowsService = $contentFollowsService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -1348,5 +1351,39 @@ class ContentPagesController extends BaseController
         }
 
         return $formattedTimeZones;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function subscribedContent(Request $request)
+    {
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MINIMUM;
+
+        $includedTypes = array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
+        $lessonType = $request->get('included_types', $includedTypes);
+
+        $followedLessons =
+            $this->contentFollowsService->getLessonsForFollowedCoaches(
+                config('railcontent.brand'),
+                $lessonType,
+                [],
+                $request->get('page', 1),
+                $request->get('limit', 20)
+            );
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['subscribed'] ?? [];
+
+        return view('content.catalogue', [
+            "hasStartedLessons" => false,
+            'isAllContent' => true,
+            "listLessons" => $followedLessons->toResponseRawJson(),
+            "lessonType" => implode(',', array_map('ucfirst',$followedLessons->filterOptions()['type'] ?? []) ),
+            "endpointOverride" => "/railcontent/followed-lessons",
+            "totalResults" => $followedLessons['total_results'],
+            "catalogueMeta" => $catalogueMeta,
+        ]);
     }
 }
