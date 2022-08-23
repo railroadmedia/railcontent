@@ -55,7 +55,7 @@ return [
     'database_in_memory' => env('DB_MYSQL_IN_MEMORY', false),
     'enable_query_log' => false,
 
-    'data_mode' => 'client',
+    'data_mode' => 'host',
 
     // entities
     'entities' => [

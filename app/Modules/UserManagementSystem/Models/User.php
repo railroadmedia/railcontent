@@ -459,7 +459,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function passwordResets()
     {
-        return $this->hasMany(PasswordReset::class, 'user_id');
+        return $this->hasMany(PasswordReset::class, 'email', 'email');
     }
 
     /**

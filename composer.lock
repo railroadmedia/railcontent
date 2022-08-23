@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbeda6da95cc435068bc78ff88fb2ac3",
+    "content-hash": "6db6ac0e51ff226175f8a920a58d997a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.233.6",
+            "version": "3.234.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "cd9019a38cee8cabfd42dc7692e54106c93c1e6a"
+                "reference": "d2113f1e5ec9f7f19de2472f5063333b39a55280"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cd9019a38cee8cabfd42dc7692e54106c93c1e6a",
-                "reference": "cd9019a38cee8cabfd42dc7692e54106c93c1e6a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d2113f1e5ec9f7f19de2472f5063333b39a55280",
+                "reference": "d2113f1e5ec9f7f19de2472f5063333b39a55280",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.233.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.0"
             },
-            "time": "2022-08-19T18:16:02+00:00"
+            "time": "2022-08-22T18:20:42+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4027,16 +4027,16 @@
         },
         {
             "name": "kreait/firebase-tokens",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-tokens-php.git",
-                "reference": "3d69ddbce698c0f90b163730e60cb3734ef3ac0d"
+                "reference": "3f732ae04f6548f5130709daf06fcc1ca0561002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-tokens-php/zipball/3d69ddbce698c0f90b163730e60cb3734ef3ac0d",
-                "reference": "3d69ddbce698c0f90b163730e60cb3734ef3ac0d",
+                "url": "https://api.github.com/repos/kreait/firebase-tokens-php/zipball/3f732ae04f6548f5130709daf06fcc1ca0561002",
+                "reference": "3f732ae04f6548f5130709daf06fcc1ca0561002",
                 "shasum": ""
             },
             "require": {
@@ -4089,7 +4089,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kreait/firebase-tokens-php/issues",
-                "source": "https://github.com/kreait/firebase-tokens-php/tree/3.0.2"
+                "source": "https://github.com/kreait/firebase-tokens-php/tree/3.0.3"
             },
             "funding": [
                 {
@@ -4097,20 +4097,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-21T22:33:04+00:00"
+            "time": "2022-08-22T21:40:00+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v9.25.1",
+            "version": "v9.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e8af8c2212e3717757ea7f459a655a2e9e771109"
+                "reference": "53e20ba7c4df1d1628102811f5b7119e138247f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e8af8c2212e3717757ea7f459a655a2e9e771109",
-                "reference": "e8af8c2212e3717757ea7f459a655a2e9e771109",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/53e20ba7c4df1d1628102811f5b7119e138247f8",
+                "reference": "53e20ba7c4df1d1628102811f5b7119e138247f8",
                 "shasum": ""
             },
             "require": {
@@ -4277,7 +4277,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-08-16T16:36:05+00:00"
+            "time": "2022-08-23T13:31:34+00:00"
         },
         {
             "name": "laravel/nova",
@@ -4715,16 +4715,16 @@
         },
         {
             "name": "laravel/vapor-ui",
-            "version": "v1.5.2",
+            "version": "v1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-ui.git",
-                "reference": "3e85ba79a7588e940bf81c6d0a1b4ea8ab22b9e6"
+                "reference": "69fa2f94eb98f7e72d66bbdf8bc936260bdd9a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-ui/zipball/3e85ba79a7588e940bf81c6d0a1b4ea8ab22b9e6",
-                "reference": "3e85ba79a7588e940bf81c6d0a1b4ea8ab22b9e6",
+                "url": "https://api.github.com/repos/laravel/vapor-ui/zipball/69fa2f94eb98f7e72d66bbdf8bc936260bdd9a36",
+                "reference": "69fa2f94eb98f7e72d66bbdf8bc936260bdd9a36",
                 "shasum": ""
             },
             "require": {
@@ -4776,7 +4776,7 @@
                 "issues": "https://github.com/laravel/vapor-ui/issues",
                 "source": "https://github.com/laravel/vapor-ui"
             },
-            "time": "2022-02-01T16:35:52+00:00"
+            "time": "2022-08-19T15:04:13+00:00"
         },
         {
             "name": "lcobucci/clock",
@@ -8039,12 +8039,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c99c223f17779145d7617a019e94d8c77224e61d"
+                "reference": "a78f60d4d83e0e0a3e7d61aedbcbb8da5d96c984"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c99c223f17779145d7617a019e94d8c77224e61d",
-                "reference": "c99c223f17779145d7617a019e94d8c77224e61d",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a78f60d4d83e0e0a3e7d61aedbcbb8da5d96c984",
+                "reference": "a78f60d4d83e0e0a3e7d61aedbcbb8da5d96c984",
                 "shasum": ""
             },
             "require": {
@@ -8100,7 +8100,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-08-19T12:21:38+00:00"
+            "time": "2022-08-23T11:59:09+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8195,21 +8195,22 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.x-dev",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "dd48b3244cc70dba677ee5fcea5ac0b3c6d72784"
+                "reference": "8750efeb82dd464367e59557f678a07d89175405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/dd48b3244cc70dba677ee5fcea5ac0b3c6d72784",
-                "reference": "dd48b3244cc70dba677ee5fcea5ac0b3c6d72784",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/8750efeb82dd464367e59557f678a07d89175405",
+                "reference": "8750efeb82dd464367e59557f678a07d89175405",
                 "shasum": ""
             },
             "require": {
                 "code-lts/laravel-fcm": "1.7.*",
                 "doctrine/dbal": "^3.3",
+                "ext-pdo": "*",
                 "ext-redis": "*",
                 "guzzlehttp/guzzle": "^7.2",
                 "jms/serializer": "1.*",
@@ -8254,9 +8255,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.1"
             },
-            "time": "2022-07-18T08:51:24+00:00"
+            "time": "2022-08-23T17:04:49+00:00"
         },
         {
             "name": "railroad/referral",
@@ -15753,12 +15754,6 @@
             "version": "2.0.9999999.9999999-dev",
             "alias": "v2.0.6",
             "alias_normalized": "2.0.6.0"
-        },
-        {
-            "package": "railroad/railnotifications",
-            "version": "3.0.9999999.9999999-dev",
-            "alias": "v3.0",
-            "alias_normalized": "3.0.0.0"
         }
     ],
     "minimum-stability": "dev",
@@ -15766,8 +15761,7 @@
         "railroad/event-data-synchronizer": 20,
         "railroad/musora-api": 20,
         "railroad/railcontent": 20,
-        "railroad/railforums": 20,
-        "railroad/railnotifications": 20
+        "railroad/railforums": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
