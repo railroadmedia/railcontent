@@ -5,6 +5,7 @@ namespace App\Modules\Mentor\Services;
 
 use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\HelpScout\Models\HelpScoutCustomer;
+use App\Modules\Mentor\Events\StudentMentorUpdated;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -68,6 +69,7 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentorStudent->save();
         $mentor->save();
+        event(new StudentMentorUpdated($userId, $mentor->user_id));
     }
 
     private function chooseNewMentor(MentorStudent $mentorStudent): ?Mentor
@@ -171,6 +173,7 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentor->save();
         $mentorStudent->save();
+        event(new StudentMentorUpdated($userId, $mentor->user_id));
     }
 
     private function getMentorStudent(int $userId): MentorStudent
@@ -215,10 +218,13 @@ class MentorService
         }
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
-            $ids = $data->map(fn($t) => $t->id);
-            MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId]);
+            $userIds = $data->map(fn($t) => $t->id);
+            MentorStudent::query()->whereIn('id', $userIds)->update(['mentor_user_id' => $mentorUserId]);
             $newMentor = $mentors[$mentorUserId];
             $newMentor->save();
+            foreach ($userIds as $userId) {
+                event(new StudentMentorUpdated($userId, $mentorUserId));
+            }
         });
     }
 }

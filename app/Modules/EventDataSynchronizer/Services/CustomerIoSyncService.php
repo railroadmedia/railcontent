@@ -2,6 +2,8 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use App\Modules\Mentor\Services\MentorService;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
 use Modules\UserManagementSystem\Models\User;
@@ -35,27 +37,33 @@ class CustomerIoSyncService
      * @var ContentFollowsRepository
      */
     private $contentFollowsRepository;
+    private MentorService $mentorService;
+    private UserService $userService;
 
     /**
-     * @param  SubscriptionRepository  $subscriptionRepository
-     * @param  UserProductRepository  $userProductRepository
-     * @param  ProductRepository  $productRepository
+     * @param SubscriptionRepository $subscriptionRepository
+     * @param UserProductRepository $userProductRepository
+     * @param ProductRepository $productRepository
      */
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
         UserProductRepository $userProductRepository,
         ProductRepository $productRepository,
-        ContentFollowsRepository $contentFollowsRepository
+        ContentFollowsRepository $contentFollowsRepository,
+        MentorService $mentorService,
+        UserService $userService,
     ) {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductRepository = $userProductRepository;
         $this->productRepository = $productRepository;
         $this->contentFollowsRepository = $contentFollowsRepository;
+        $this->mentorService = $mentorService;
+        $this->userService = $userService;
     }
 
     /**
-     * @param  User  $user
-     * @param  array|null  $brands
+     * @param User $user
+     * @param array|null $brands
      * @return array
      */
     public function getUsersCustomAttributes(User $user, array $brands = null)
@@ -68,12 +76,12 @@ class CustomerIoSyncService
             $membershipAccessAttributes,
             $this->getUsersSubscriptionAttributes($user, $membershipAccessAttributes, $brands),
             $this->getUsersProductOwnershipStrings($user, $brands),
-            $contentFollowAttributes
+            $contentFollowAttributes,
         );
     }
 
     /**
-     * @param  User  $user
+     * @param User $user
      * @return array
      */
     public function getUsersMusoraProfileAttributes(User $user)
@@ -109,8 +117,8 @@ class CustomerIoSyncService
      * BRAND_membership_latest-start-date
      * BRAND_membership_first-start-date
      *
-     * @param  User  $user
-     * @param  array  $brands
+     * @param User $user
+     * @param array $brands
      * @return array
      */
     public function getUsersMembershipAccessAttributes(User $user, $brands = [])
@@ -135,7 +143,7 @@ class CustomerIoSyncService
                 // make sure the subscriptions product is in this brands pre-configured products that represent a membership
                 if (!in_array(
                     $userProduct->getProduct()->getSku(),
-                    config('event-data-synchronizer.'.$brand.'_membership_product_skus', [])
+                    config('event-data-synchronizer.' . $brand . '_membership_product_skus', [])
                 )) {
                     continue;
                 }
@@ -196,13 +204,13 @@ class CustomerIoSyncService
             }
 
             $productAttributes += [
-                $brand.'_membership_access-expiration-date' => !empty($membershipAccessExpirationDate) ?
+                $brand . '_membership_access-expiration-date' => !empty($membershipAccessExpirationDate) ?
                     $membershipAccessExpirationDate->timestamp : null,
-                $brand.'_membership_latest-access-start-date' => !empty($membershipLatestAccessStartDate) ?
+                $brand . '_membership_latest-access-start-date' => !empty($membershipLatestAccessStartDate) ?
                     $membershipLatestAccessStartDate->timestamp : null,
-                $brand.'_membership_first-access-start-date' => !empty($membershipFirstAccessStartDate) ?
+                $brand . '_membership_first-access-start-date' => !empty($membershipFirstAccessStartDate) ?
                     $membershipFirstAccessStartDate->timestamp : null,
-                $brand.'_membership_is_lifetime' => !empty($latestMembershipUserProductToSync) ?
+                $brand . '_membership_is_lifetime' => !empty($latestMembershipUserProductToSync) ?
                     empty($latestMembershipUserProductToSync->getExpirationDate()) : null,
             ];
         }
@@ -214,8 +222,8 @@ class CustomerIoSyncService
      * Attribute list:
      * BRAND_subscribed_coaches => 'ID123_FNAME_LNAME, ID1234_FNAME2_LNAME2, etc'
      *
-     * @param  User  $user
-     * @param  array  $brands
+     * @param User $user
+     * @param array $brands
      * @return array
      */
     public function getUsersContentFollowAttributes(User $user, $brands = [])
@@ -225,14 +233,14 @@ class CustomerIoSyncService
         $contentFollowRows = $this->contentFollowsRepository->query()
             ->join(
                 RailcontentConfigService::$tableContent,
-                RailcontentConfigService::$tableContent.'.id',
+                RailcontentConfigService::$tableContent . '.id',
                 '=',
-                RailcontentConfigService::$tableContentFollows.'.content_id'
+                RailcontentConfigService::$tableContentFollows . '.content_id'
             )
             ->where(
                 [
                     RailcontentConfigService::$tableContent . '.type' => 'instructor',
-                    RailcontentConfigService::$tableContentFollows. '.user_id' => $user->id,
+                    RailcontentConfigService::$tableContentFollows . '.user_id' => $user->id,
                 ]
             )
             ->get();
@@ -241,7 +249,7 @@ class CustomerIoSyncService
         $brandCoachFollows = [];
 
         foreach ($contentFollowRows as $contentFollowRow) {
-            $brandCoachFollows[$contentFollowRow['brand']][] = $contentFollowRow['content_id'].'_'.str_replace(
+            $brandCoachFollows[$contentFollowRow['brand']][] = $contentFollowRow['content_id'] . '_' . str_replace(
                     '-',
                     '_',
                     $contentFollowRow['slug']
@@ -251,7 +259,10 @@ class CustomerIoSyncService
         $contentFollowAttributes = [];
 
         foreach ($brandCoachFollows as $contentBrand => $followContentIdsAndSlugsString) {
-            $contentFollowAttributes[$contentBrand . '_subscribed_coaches'] = implode(', ', $followContentIdsAndSlugsString);
+            $contentFollowAttributes[$contentBrand . '_subscribed_coaches'] = implode(
+                ', ',
+                $followContentIdsAndSlugsString
+            );
         }
 
         return $contentFollowAttributes;
@@ -262,9 +273,9 @@ class CustomerIoSyncService
      * If no brands are passed in this will get attributes for all brands in the config.
      * We need the $userProductAttributes since if the user is lifetime all the attributes should be null.
      *
-     * @param  User  $user
-     * @param  array  $userMembershipAccessAttributes
-     * @param  array  $brands
+     * @param User $user
+     * @param array $userMembershipAccessAttributes
+     * @param array $brands
      * @return array
      */
     public function getUsersSubscriptionAttributes(User $user, array $userMembershipAccessAttributes, $brands = [])
@@ -317,9 +328,9 @@ class CustomerIoSyncService
                     $userSubscription->getProduct()
                         ->getSku(),
                     config(
-                        'event-data-synchronizer.'.
+                        'event-data-synchronizer.' .
                         $userSubscription->getProduct()
-                            ->getBrand().
+                            ->getBrand() .
                         '_membership_product_skus',
                         []
                     )
@@ -356,9 +367,9 @@ class CustomerIoSyncService
                     $userSubscription->getProduct()
                         ->getSku(),
                     config(
-                        'event-data-synchronizer.'.
+                        'event-data-synchronizer.' .
                         $userSubscription->getProduct()
-                            ->getBrand().
+                            ->getBrand() .
                         '_membership_product_skus',
                         []
                     )
@@ -446,7 +457,7 @@ class CustomerIoSyncService
 
             if (!empty($latestSubscriptionToSync)) {
                 $subscriptionProductTag =
-                    $latestSubscriptionToSync->getIntervalCount().'_'.$latestSubscriptionToSync->getIntervalType();
+                    $latestSubscriptionToSync->getIntervalCount() . '_' . $latestSubscriptionToSync->getIntervalType();
 
                 // trial type
                 $customerIoTrialProductSkuToType =
@@ -458,12 +469,12 @@ class CustomerIoSyncService
                     )][$latestSubscriptionToSync->getProduct()->getSku()]
                     )) {
                     $trialType = $customerIoTrialProductSkuToType[$latestSubscriptionToSync->getProduct()->getBrand()]
-                        [$latestSubscriptionToSync->getProduct()->getSku()] ?? null;
+                    [$latestSubscriptionToSync->getProduct()->getSku()] ?? null;
                 }
             }
 
             // if the user is a lifetime make sure all subscription related info is set to null
-            if (($userMembershipAccessAttributes[$brand.'_membership_is_lifetime'] ?? false) == true) {
+            if (($userMembershipAccessAttributes[$brand . '_membership_is_lifetime'] ?? false) == true) {
                 $subscriptionPriceCents = null;
                 $subscriptionCurrency = null;
                 $membershipRenewalDate = null;
@@ -481,23 +492,23 @@ class CustomerIoSyncService
 
 
             $subscriptionAttributes += [
-                $brand.'_membership_status' => $subscriptionStatus,
-                $brand.'_membership_subscription_type' => $subscriptionProductTag,
-                $brand.'_membership_subscription-rate-cents' => $subscriptionPriceCents,
-                $brand.'_membership_subscription-currency' => $subscriptionCurrency,
-                $brand.'_membership_subscription_renewal-date' => $membershipRenewalDate,
-                $brand.'_retention_failed-billing_membership_subscription-renewal-attempts' => $membershipRenewalAttempts,
-                $brand.'_membership_subscription_cancellation-date' => $membershipCancellationDate,
-                $brand.'_membership_subscription_cancellation-reason' => $membershipCancellationReason,
-                $brand.'_membership_subscription_latest-start-date' => $latestSubscriptionStartedDate,
-                $brand.'_membership_subscription_first-start-date' => $firstSubscriptionStartedDate,
-                $brand.'_membership_subscription_trial-type' => $trialType,
-                $brand.'_user_payment_primary-method-expiration-date' => $expirationDate,
-                $brand.'_membership_subscription_source_app-store' => $isAppSignup,
+                $brand . '_membership_status' => $subscriptionStatus,
+                $brand . '_membership_subscription_type' => $subscriptionProductTag,
+                $brand . '_membership_subscription-rate-cents' => $subscriptionPriceCents,
+                $brand . '_membership_subscription-currency' => $subscriptionCurrency,
+                $brand . '_membership_subscription_renewal-date' => $membershipRenewalDate,
+                $brand . '_retention_failed-billing_membership_subscription-renewal-attempts' => $membershipRenewalAttempts,
+                $brand . '_membership_subscription_cancellation-date' => $membershipCancellationDate,
+                $brand . '_membership_subscription_cancellation-reason' => $membershipCancellationReason,
+                $brand . '_membership_subscription_latest-start-date' => $latestSubscriptionStartedDate,
+                $brand . '_membership_subscription_first-start-date' => $firstSubscriptionStartedDate,
+                $brand . '_membership_subscription_trial-type' => $trialType,
+                $brand . '_user_payment_primary-method-expiration-date' => $expirationDate,
+                $brand . '_membership_subscription_source_app-store' => $isAppSignup,
             ];
 
             if ($isAppSignup) {
-                $subscriptionAttributes[$brand.'_membership_trial_type'] = '7_days_free';
+                $subscriptionAttributes[$brand . '_membership_trial_type'] = '7_days_free';
             }
 
             // if the subscription due date is passed by more than a day, or its cancelled or suspended, but the user
@@ -519,8 +530,8 @@ class CustomerIoSyncService
      * Ex: _electrify-your-drumming_, _rock-drumming-masterclass-pack_, _LDS-DIGI_
      * Ex: _523_, _9_, _3774_
      *
-     * @param  User  $user
-     * @param  array  $brands
+     * @param User $user
+     * @param array $brands
      * @return array
      */
     public function getUsersProductOwnershipStrings(User $user, $brands = [])
@@ -548,20 +559,28 @@ class CustomerIoSyncService
                 }
 
                 if (in_array($userProduct->getProduct()->getSku(), $packSkusToSync) && $userProduct->isValid()) {
-                    $productSkuArray[] = "_".$userProduct->getProduct()->getSku()."_";
-                    $idArray[] = "_".$userProduct->getProduct()->getId()."_";
+                    $productSkuArray[] = "_" . $userProduct->getProduct()->getSku() . "_";
+                    $idArray[] = "_" . $userProduct->getProduct()->getId() . "_";
                 }
             }
 
             if (!empty($productSkuArray)) {
-                $finalArray[$brand.'_owned_pack_product_skus'] = implode(', ', $productSkuArray);
+                $finalArray[$brand . '_owned_pack_product_skus'] = implode(', ', $productSkuArray);
             }
 
             if (!empty($idArray)) {
-                $finalArray[$brand.'_owned_pack_product_ids'] = implode(', ', $idArray);
+                $finalArray[$brand . '_owned_pack_product_ids'] = implode(', ', $idArray);
             }
         }
 
         return $finalArray;
+    }
+
+    public function getMentorAttributes(int $mentorUserId): array
+    {
+        $mentorUser = $this->userService->getByIdOrNull($mentorUserId);
+        $data = [];
+        $data['assigned_mentor_email'] = $mentorUser?->email ?? '';
+        return $data;
     }
 }

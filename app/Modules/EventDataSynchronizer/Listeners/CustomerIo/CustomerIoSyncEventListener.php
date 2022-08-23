@@ -2,6 +2,8 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncMentor;
+use App\Modules\Mentor\Events\StudentMentorUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -1198,4 +1200,28 @@ class CustomerIoSyncEventListener
             error_log($throwable);
         }
     }
+
+
+    public function handleMentorUpdated(StudentMentorUpdated $studentMentorUpdated): void
+    {
+        if (self::$disable) {
+            return;
+        }
+
+        try {
+            dispatch((new CustomerIoSyncMentor(
+                $studentMentorUpdated->getUserId(),
+                $studentMentorUpdated->getMentorUserId()
+            ))
+                ->onConnection($this->queueConnectionName)
+                ->onQueue($this->queueName)
+                ->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                ));
+        } catch (Throwable $throwable) {
+            error_log($throwable);
+        }
+    }
+
 }
