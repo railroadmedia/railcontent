@@ -1,12 +1,12 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=69733aef758cc208600dc6b493a11b5d",
+    "/platform/js/app.js": "/platform/js/app.js?id=82fbfcd2c3181ffd996274688dcc224d",
     "/platform/js/profile.js": "/platform/js/profile.js?id=52c8a38740ada8491a34ccc3a0555e83",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=85bc117f3464ddebca7018b9f14c9911",
     "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=82fd2061d77099d27eb66e163ac68a2c",
     "/platform/js/books.js": "/platform/js/books.js?id=11748a40f095d3c0832cc5e331d861e7",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=68d70d7957eaafbb640bf0b2ef818164",
-    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=fe1ba5858a2b0936b1ddf3ce66b36b00",
-    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=2eb3f16d12102c3bf4d5df35947768f9",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=2b5c938492dbd43bc7b1991728bd207e",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=26834a5d927007c08a087b743e2fa615",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=8af8b4b1fb5a988a9e2e58008d5b6b3b",
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=d16177f0e67c0380be0c0d3f26a4510f",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=f3c44171923c2db077fa53c49653c1e6",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=3048a04735d43bb461bac292840ba56e",
@@ -17,5 +17,11 @@
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=394feae81c9044a88b8750c51b5ada5a",
     "/marketing/js/app.js": "/marketing/js/app.js?id=f3d5fcc2a88ba12fcd88bedf73ebd955",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=a6e353aa93088e9910fe4f4885974fa1"
+    "/marketing/css/app.css": "/marketing/css/app.css?id=a6e353aa93088e9910fe4f4885974fa1",
+    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=6344d0fecc2a8e8defce5e7089d74c5d",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=a0fd581dd961a82ea00212b1624f43a5",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=ab48f0f9db2a1737f69342b85de55afd",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=76d3e8e540f1a1052406e265ee6ca790",
+    "/platform/js/student-review-form.js": "/platform/js/student-review-form.js?id=7c7d334a394bac0b548062d677951d8d",
+    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=904efe1216aa43bbff7a7e7651cc39a5"
 }
