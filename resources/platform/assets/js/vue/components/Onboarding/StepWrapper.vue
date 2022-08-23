@@ -17,6 +17,7 @@ const props = defineProps({
 
 <template>
   <div
+    class="tw-overflow-y-auto"
     :class="`StepWrapper StepWrapper--${brand}`"
     :style="showBgImg ? { backgroundImage: `url('${bgImg[brand]}')` } : {}"
   >

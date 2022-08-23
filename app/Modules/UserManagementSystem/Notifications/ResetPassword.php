@@ -34,7 +34,6 @@ class ResetPassword extends ResetPasswordBase
                         ),
                     ],
                     'logo' => 'https://musora-ui.s3.amazonaws.com/logos/musora-black.svg',
-                    'brand' => ''
                 ]
             ]
         )->from('system@musora.com', 'Musora');

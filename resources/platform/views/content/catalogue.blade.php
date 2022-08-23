@@ -76,6 +76,8 @@
                         <musora-icon icon-name="eigth-notes-filled"
                                      class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
                         </musora-icon>
+                    @elseif($catalogueMeta['name'] == 'New Content')
+                        <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
@@ -224,7 +226,7 @@
                         <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
                             <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                                 All
-                                @if( $catalogueMeta['shortname'] ?? $catalogueMeta['name'] === 'Podcast')
+                                @if( $catalogueMeta['name'] === 'Podcast')
                                     Episodes {{-- Change Podcast Name}} --}}
                                 @else 
                                     {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
