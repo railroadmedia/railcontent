@@ -51,7 +51,7 @@
         </div>
 
         <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex-col tw-z-40"
-             :class="showTread ? 'tw-flex' : 'tw-hidden'">
+             :class="showThread ? 'tw-flex' : 'tw-hidden'">
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-place-items-center tw-justify-between">
                     <a
