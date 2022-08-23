@@ -112,7 +112,17 @@ Route::group(
             'onboarding-skip-account-setup',
             OnboardingController::class . '@skipAccountSetup'
         )
-            ->name('user_management_system.onboarding.test');
+            ->name('user_management_system.onboarding.skip');
+
+        Route::get(
+            'onboarding-answer-history-instrument',
+            OnboardingController::class . '@saveOnboardingHistoryForInstrument'
+        );
+
+        Route::get(
+            'onboarding-answer-history-coach',
+            OnboardingController::class . '@saveOnboardingHistoryForCoach'
+        );
     }
 );
 
