@@ -23176,6 +23176,9 @@ a:visited{
 .tw-overflow-x-hidden{
   overflow-x: hidden !important;
 }
+.tw-overflow-x-scroll{
+  overflow-x: scroll !important;
+}
 .tw-overflow-y-scroll{
   overflow-y: scroll !important;
 }
