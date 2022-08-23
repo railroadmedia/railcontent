@@ -45,6 +45,12 @@ Route::group(
         )
             ->name('user_management_system.password.send-reset-email');
 
+        Route::get(
+            'password/password-reset-form',
+            ResetPasswordController::class . '@passwordResetForm'
+        )
+            ->name('user_management_system.password.show-reset-form');
+
         Route::post(
             'password/reset-password-with-token',
             ResetPasswordController::class . '@resetPasswordWithToken'
