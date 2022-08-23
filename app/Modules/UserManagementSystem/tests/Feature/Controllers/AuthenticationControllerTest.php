@@ -40,15 +40,15 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
                     [
                         'email' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The email field is required.',
                             ],
                         'password' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The password field is required.',
                             ],
                         'device_name' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The device name field is required.',
                             ],
                     ],
             ]),
