@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
 use App\Services\User\UserAccessService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
@@ -13,6 +14,7 @@ use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Location\Services\CountryListService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
 
@@ -21,13 +23,23 @@ class ProfileSettingsPagesController extends BaseController
     private NotificationSettingsService $notificationSettingsService;
 
     /**
+     * @var UserPermissionsService
+     */
+    private $userPermissionsService;
+
+    /**
      * @param NotificationSettingsService $notificationSettingsService
      */
-    public function __construct(NotificationSettingsService $notificationSettingsService, UserSignaturesRepository $userSignaturesRepository)
+    public function __construct(
+        NotificationSettingsService $notificationSettingsService,
+        UserSignaturesRepository $userSignaturesRepository,
+        UserPermissionsService $userPermissionsService
+    )
     {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
 
+        $this->userPermissionsService = $userPermissionsService;
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
@@ -278,6 +290,54 @@ Misc. Notes:
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+        if ($userId != auth()->id()) {
+            // ok so what now?
+        }
+
+        $userId = auth()->id();
+
+
+        $userPermissions = $this->userPermissionsService->getUserPermissions($userId);
+
+        $userPermissionsSorted = [
+            'eternal' => [],
+            'paused' => [],
+            'active' => [],
+            'expired' => [],
+        ];
+
+        foreach ($userPermissions as $userPermission) {
+            $startDate = !empty($userPermission['start_date']) ? $userPermission['start_date'] : false;
+            $expirationDate = !empty($userPermission['expiration_date']) ? $userPermission['expiration_date'] : false;
+            //$userPermission['name']
+
+            $startDateIsInFuture = false;
+            $expirationDateIsPast = false;
+
+            if ($startDate) {
+                $startDateIsInFuture = Carbon::parse($startDate)->gt(Carbon::now());
+            }
+
+            if ($startDateIsInFuture) {
+                $userPermissionsSorted['paused'][] = $userPermission;
+                break;
+            }
+
+            if ($expirationDate) {
+                $expirationDateIsPast = Carbon::parse($expirationDate)->gt(Carbon::now());
+            } else {
+                $userPermissionsSorted['eternal'][] = $userPermission;
+                break;
+            }
+
+            if ($expirationDateIsPast) {
+                $userPermissionsSorted['expired'][] = $userPermission;
+            } else {
+                $userPermissionsSorted['active'][] = $userPermission;
+            }
+        }
+
+        dd($userPermissionsSorted);
 
         // -------------------------------------------------------------------------------------------------------------
 
@@ -375,7 +435,7 @@ Misc. Notes:
 
 
 
-        
+
 
         // =============================================================================================================
 
