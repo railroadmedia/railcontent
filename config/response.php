@@ -667,6 +667,18 @@ return [
             'fields.artist',
             'fields.style',
             'lesson_count',
+            'lessons' => [
+                'id',
+                'type',
+                'published_on',
+                'completed',
+                'started',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'length_in_seconds',
+                'data.thumbnail_url',
+            ]
         ],
         'song-part' => [
             'ranges',
