@@ -31,8 +31,8 @@ class CustomerIOSyncUser extends Command
     ) {
         parent::__construct();
 
-        $this->queueConnectionName = config('event-data-synchronizer.usora_helpscout_queue_connection_name', 'database');
-        $this->queueName = config('event-data-synchronizer.usora_helpscout_queue_name', 'usorahelpscout');
+        $this->queueConnectionName = config('event-data-synchronizer.customer_io_queue_connection_name', 'database');
+        $this->queueName = config('event-data-synchronizer.customer_io_queue_name', 'usorahelpscout');
     }
 
     /**
@@ -42,7 +42,6 @@ class CustomerIOSyncUser extends Command
      */
     public function handle(UserService $userService)
     {
-        var_dump(openssl_get_cert_locations()); die;
         $userId = $this->argument('user');
         $user = $userService->getByIdOrNull($userId);
         dispatch(

@@ -2,20 +2,23 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\EventDataSynchronizer\Services\CustomerIoMentorSyncService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use Exception;
-use Railroad\CustomerIo\Services\CustomerIoService;
 
 class CustomerIoSyncMentor extends CustomerIoBaseJob
 {
 
     private int $userId;
     private int $mentorUserId;
+    private string $primaryBrand;
 
-    public function __construct(int $userId, int $mentorUserId)
+    public function __construct(int $userId, int $mentorUserId, string $primaryBrand)
     {
         $this->userId = $userId;
         $this->mentorUserId = $mentorUserId;
+        $this->primaryBrand = $primaryBrand;
     }
 
     /**
@@ -24,11 +27,11 @@ class CustomerIoSyncMentor extends CustomerIoBaseJob
      */
     public function handle(
         CustomerIoService $customerIoService,
-        CustomerIoSyncService $customerIoSyncService,
+        CustomerIoMentorSyncService $customerIoMentorSyncService,
     ) {
         try {
             $accountName = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
-            $attributes = $customerIoSyncService->getMentorAttributes($this->mentorUserId);
+            $attributes = $customerIoMentorSyncService->getMentorAttributes($this->mentorUserId, $this->primaryBrand);
 
             $customerIoService->createOrUpdateCustomerByUserId($this->userId, $accountName, null, $attributes);
         } catch (Exception $exception) {

@@ -4,7 +4,6 @@ namespace App\Modules\Mentor\Services;
 
 
 use App\Modules\Brand\Services\PrimaryBrandService;
-use App\Modules\HelpScout\Models\HelpScoutCustomer;
 use App\Modules\Mentor\Events\StudentMentorUpdated;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
@@ -22,7 +21,7 @@ class MentorService
     private PrimaryBrandService $primaryBrandService;
     private ?Collection $mentors = null;
 
-    public function __construct(PrimaryBrandService $primaryBrandService, UserService $session)
+    public function __construct(PrimaryBrandService $primaryBrandService)
     {
         $this->primaryBrandService = $primaryBrandService;
     }
@@ -69,7 +68,7 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentorStudent->save();
         $mentor->save();
-        event(new StudentMentorUpdated($userId, $mentor->user_id));
+        event(new StudentMentorUpdated($mentorStudent->user_id, $mentorStudent->mentor_user_id, $mentorStudent->primary_brand));
     }
 
     private function chooseNewMentor(MentorStudent $mentorStudent): ?Mentor
@@ -139,7 +138,6 @@ class MentorService
     public function delete(int $mentorUserId): Collection
     {
         $mentorStudents = MentorStudent::query()
-            ->with('user')
             ->where('mentor_user_id', '=', $mentorUserId)
             ->get();
 
@@ -173,7 +171,7 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentor->save();
         $mentorStudent->save();
-        event(new StudentMentorUpdated($userId, $mentor->user_id));
+        event(new StudentMentorUpdated($mentorStudent->user_id, $mentorStudent->mentor_user_id, $mentorStudent->primary_brand));
     }
 
     private function getMentorStudent(int $userId): MentorStudent
@@ -205,7 +203,7 @@ class MentorService
         $mentor->save();
     }
 
-    public function bulkReassignMentors(Collection|array $mentorStudents): void
+    public function bulkReassignMentors(Collection $mentorStudents): void
     {
         $mentors = [];
         foreach ($mentorStudents as $mentorStudent) {
@@ -218,12 +216,12 @@ class MentorService
         }
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
-            $userIds = $data->map(fn($t) => $t->id);
+            $userIds = $data->map(fn($t) => $t->user_id);
             MentorStudent::query()->whereIn('id', $userIds)->update(['mentor_user_id' => $mentorUserId]);
             $newMentor = $mentors[$mentorUserId];
             $newMentor->save();
-            foreach ($userIds as $userId) {
-                event(new StudentMentorUpdated($userId, $mentorUserId));
+            foreach ($data as $mentorStudent) {
+                event(new StudentMentorUpdated($mentorStudent->user_id, $mentorStudent->mentor_user_id, $mentorStudent->primary_brand));
             }
         });
     }

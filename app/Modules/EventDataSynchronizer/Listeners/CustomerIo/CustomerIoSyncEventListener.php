@@ -1211,7 +1211,8 @@ class CustomerIoSyncEventListener
         try {
             dispatch((new CustomerIoSyncMentor(
                 $studentMentorUpdated->getUserId(),
-                $studentMentorUpdated->getMentorUserId()
+                $studentMentorUpdated->getMentorUserId(),
+                $studentMentorUpdated->getPrimaryBrand(),
             ))
                 ->onConnection($this->queueConnectionName)
                 ->onQueue($this->queueName)

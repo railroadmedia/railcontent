@@ -2,8 +2,6 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
-use App\Modules\Mentor\Services\MentorService;
-use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
 use Modules\UserManagementSystem\Models\User;
@@ -37,8 +35,6 @@ class CustomerIoSyncService
      * @var ContentFollowsRepository
      */
     private $contentFollowsRepository;
-    private MentorService $mentorService;
-    private UserService $userService;
 
     /**
      * @param SubscriptionRepository $subscriptionRepository
@@ -50,15 +46,11 @@ class CustomerIoSyncService
         UserProductRepository $userProductRepository,
         ProductRepository $productRepository,
         ContentFollowsRepository $contentFollowsRepository,
-        MentorService $mentorService,
-        UserService $userService,
     ) {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductRepository = $userProductRepository;
         $this->productRepository = $productRepository;
         $this->contentFollowsRepository = $contentFollowsRepository;
-        $this->mentorService = $mentorService;
-        $this->userService = $userService;
     }
 
     /**
@@ -574,13 +566,5 @@ class CustomerIoSyncService
         }
 
         return $finalArray;
-    }
-
-    public function getMentorAttributes(int $mentorUserId): array
-    {
-        $mentorUser = $this->userService->getByIdOrNull($mentorUserId);
-        $data = [];
-        $data['assigned_mentor_email'] = $mentorUser?->email ?? '';
-        return $data;
     }
 }

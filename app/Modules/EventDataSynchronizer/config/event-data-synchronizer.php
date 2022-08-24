@@ -17,16 +17,16 @@ return [
 
     'help_scout_sync_brands' => ['drumeo', 'pianote', 'singeo', 'guitareo'],
 
-    'helpscout_queue_connection_name' => 'database',
+    'helpscout_queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
     'helpscout_queue_name' => 'helpscout',
 
     // impact railanalytics
-    'impact_queue_connection_name' => 'database',
+    'impact_queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
     'impact_queue_name' => 'impact',
 
     // customer.io
     // NOTE: you must add this queue to your queue worker setup, ex: artisan queue:work database --queue=customer_io
-    'customer_io_queue_connection_name' => 'database',
+    'customer_io_queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
     'customer_io_queue_name' => 'customer-io',
 
     'customer_io_brands_to_sync' => ['drumeo', 'pianote', 'guitareo'],
@@ -37,9 +37,7 @@ return [
     // only the brands set for a given customer.io account will have their info synced
     // see customer-io.php accounts config value
     'customer_io_account_name_brands_to_sync' => [
-        'account_1' => ['drumeo', 'pianote'],
-        'account_2' => ['musora'],
-        'account_3' => ['another_brand'],
+        'musora' => ['musora'],
     ],
 
     'customer_io_brand_activity_event' => 'drumeo',
