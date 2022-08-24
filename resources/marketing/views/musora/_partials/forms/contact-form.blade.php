@@ -1,18 +1,23 @@
+{{-- Form Data --}}
+@php
+  require_once(resource_path('marketing/views/musora/_partials/forms/data/support-options.php'))
+@endphp
+
 {{-- Contact Page Email Form --}}
 <form class="flex flex-col my-4"
         novalidate="true"
         x-data='contactForm()'
-        @submit.prevent='submitForm'
+        x-on:submit.prevent='submitForm'
 >
     <!-- Name -->
-    @include('_partials.components.forms.text-input',[
+    @component('_partials.components.forms.text-input',[
         'label' => 'name',
         'name' => 'name',
         'id' => 'customer-name',
         'placeholder' => 'Enter your name...',
         'errorMessage' => 'Please enter your name.',
         'required' => true,
-    ])
+    ])@endcomponent
 
     {{-- <text-input
         name="name"
@@ -25,7 +30,7 @@
         placeholder="Enter your name..."
     /> --}}
 
-    @include('_partials.components.forms.radio-buttons',[
+    @component('_partials.components.forms.radio-buttons',[
         'label' => 'Do you have a membership with us?',
         'name' => 'membership',
         'required' => true,
@@ -41,7 +46,7 @@
         ],
         'errorMessage' => 'Please select an option.',
         'selectMessage' => 'If your account is under a different email address than noted below, please provide it in your description.'
-    ])
+    ])@endcomponent
 
     {{-- <radio-buttons
         name="Do you have a membership with us?"
@@ -57,13 +62,13 @@
     /> --}}
 
     <!-- Email -->
-    @include('_partials.components.forms.email-input',[
+    @component('_partials.components.forms.email-input',[
         'label' => 'Email Address',
         'name' => 'email',
         'id' => 'support-listbox',
         'placeholder' => 'Enter your email address...',
         'required' => true,
-    ])
+    ])@endcomponent
 
 
     {{-- <email-input
@@ -77,170 +82,16 @@
         placeholder="Enter your email address..."
     /> --}}
 
-   
-
-    <!-- Help Dropdown -->
-    @include('_partials.components.forms.multi-level-dropdown',[
+    {{-- Multi Level Dropdown --}}
+    @component('_partials.components.forms.multi-level-dropdown',[
         'label' => 'What can we help you with?',
         'name' => 'supportOption',
         'id' => 'support-listbox',
         'placeholder' => 'Please select the option that is closest to your request...',
         'errorMessage' => 'Please select an option that is closest to your request.',
-        'listData' => [
-            [
-                'label' => 'Shipping & Orders',
-                'selected' => false,
-                'options' => [
-                    [
-                        'label' => 'My shipment tracking inquiry',
-                        'value' => 'Shipping & Orders, My shipment tracking inquiry',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'I received the wrong items',
-                        'value' => 'Shipping & Orders, I received the wrong items',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Questions about shipping rates and fees',
-                        'value' => 'Shipping & Orders, Questions about shipping rates and fees',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Other',
-                        'value' => 'Shipping & Orders, Other',
-                        'checked' => false,
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Subscriptions & Membership',
-                'selected' => false,
-                'options' => [
-                    [
-                        'label' => 'Change or set up a subscription/membership',
-                        'value' => 'Subscriptions & Membership, Change or set up a subscription/membership',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Subscription or pack inquiry',
-                        'value' => 'Subscriptions & Membership, Subscription or pack inquiry',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Cancellation assistance',
-                        'value' => 'Subscriptions & Membership, Cancellation assistance',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Refund assistance',
-                        'value' => 'Subscriptions & Membership, Refund assistance',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Other',
-                        'value' => 'Subscriptions & Membership, Other',
-                        'checked' => false,
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Billing & Payment',
-                'selected' => false,
-                'options' => [
-                    [
-                        'label' => 'Need assistance changing billing method or schedule',
-                        'value' => 'Billing & Payment, Need assistance changing billing method or schedule',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Refund assistance',
-                        'value' => 'Billing & Payment, Refund assistance',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Cancellation assistance',
-                        'value' => 'Billing & Payment, Cancellation assistance',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Other',
-                        'value' => 'Billing & Payment, Other',
-                        'checked' => false,
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Account Settings & Login',
-                'selected' => false,
-                'options' => [
-                    [
-                        'label' => 'Can\'t log in',
-                        'value' => 'Account Settings & Login, Can\'t log in',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Other',
-                        'value' => 'Account Settings & Login, Other',
-                        'checked' => false,
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Technical Issues',
-                'selected' => false,
-                'options' => [
-                    [
-                        'label' => 'Problems with mobile Android or iOS app',
-                        'value' => 'Technical Issues, Problems with mobile Android or iOS app',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Content inaccessible or missing',
-                        'value' => 'Technical Issues, Content inaccessible or missing',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Video Issues',
-                        'value' => 'Technical Issues, Video Issues',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Other',
-                        'value' => 'Technical Issues, Other',
-                        'checked' => false,
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Site Navigation & Lessons',
-                'selected' => false,
-                'options' => [
-                    [
-                        'label' => 'Question about a lesson or instrument',
-                        'value' => 'Site Navigation & Lessons, Question about a lesson or instrument',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Assistance locating an area of the website',
-                        'value' => 'Site Navigation & Lessons, Assistance locating an area of the website',
-                        'checked' => false,
-                    ],
-                    [
-                        'label' => 'Other',
-                        'value' => 'Site Navigation & Lessons, Other',
-                        'checked' => false,
-                    ],
-                ],
-            ],
-            [
-                'label' => 'Other',
-                'selected' => false,
-                'value' => 'Other'
-            ],
-        ],
+        'listData' => $supportOptions,
         'required' => true,
-    ])
+    ])@endcomponent
 
     {{-- <multilevel-dropdown
         label="What can we help you with?"
@@ -257,7 +108,7 @@
     /> --}}
 
     <!-- Description -->
-    @include('_partials.components.forms.textarea-input',[
+    @component('_partials.components.forms.textarea-input',[
         'label' => 'description',
         'name' => 'description',
         'id' => 'support-description',
@@ -265,7 +116,7 @@
         'rows' => 4,
         'errorMessage' => 'Please enter the details of your request.',
         'required' => true
-    ])
+    ])@endcomponent
 
     {{-- <textarea-input
         name="description"
@@ -282,23 +133,28 @@
 
     <div class="flex flex-col-reverse sm:flex-row full">
         <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
-            <!-- Recaptcha -->
+            
+            {{-- Recaptcha Form Component --}}
             {{-- <recaptcha :siteKey="captchakey"
                         @update:verified="formVerified = $event"
             /> --}}
-            <div class="g-recaptcha" data-sitekey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"></div>
+            @component('_partials.components.forms.recaptcha', [
+                "siteKey" => "6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx",
+                "tokenName" => "recaptchaToken"
+            ])
+            @endcomponent
         </div>
         
         <div class="sm:w-72 sm:ml-auto">
             <!-- File Upload Button -->
-            @include('_partials.components.forms.file-input',[
+            @component('_partials.components.forms.file-input',[
                 'label' => 'attach file',
                 'name' => 'attachment',
                 'id' => 'support-file',
                 'accept' => 'video/*,image/*',
                 'megabiteLimit' => '100',
                 'message' => 'For security reasons, we only accept image and video files.',
-            ])
+            ])@endcomponent
 
             {{-- <file-input
                 name="attach file"
@@ -327,7 +183,7 @@
     </button>
 
     <!-- Response Message -->
-    <div class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
+    <div x-cloak class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
             :class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
     >
         <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
@@ -339,12 +195,12 @@
         <div v-if="formSuccessful">
             <p class="font-bold mb-3">Your message was successfully sent!</p>
             <p class="mb-2">Your message has been submitted to the support team and will be reviewed shortly</p>
-            <p class="font-bold mb-2 cursor-pointer" @click="responseMessageVisible = false">Dismiss</p>
+            <p class="font-bold mb-2 cursor-pointer" x-on:click="responseMessageVisible = false">Dismiss</p>
         </div>
         <div v-else>
             <p class="font-bold mb-3">Your message was not sent</p>
             <p class="mb-2">We could not submit your message to the support team due to a servor error. </p>
-            <p class="font-bold mb-2 cursor-pointer" @click="responseMessageVisible = false">Dismiss</p>
+            <p class="font-bold mb-2 cursor-pointer" x-on:click="responseMessageVisible = false">Dismiss</p>
         </div>
     </div>
 </form>
@@ -397,7 +253,15 @@
                     this.invalids.supportOption = true;
                 }
 
-                console.log(this.formData)
+                console.log(this.formData);
+
+                grecaptcha.ready(() => {
+                    grecaptcha.execute('6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx', { action: 'post' }).then((token) => {
+                        
+                        console.log(token);
+                    
+                    })
+                })
             }
         }
     }
