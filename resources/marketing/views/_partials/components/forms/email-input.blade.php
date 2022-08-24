@@ -41,7 +41,7 @@
 
 
 
-
+{{-- 
 <script>
 export default {
     name: 'EmailInput',
@@ -121,4 +121,4 @@ export default {
         }
     },
 }
-</script>
+</script> --}}

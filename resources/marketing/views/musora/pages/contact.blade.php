@@ -1,5 +1,10 @@
 @extends('musora._partials.layout')
 
+@section('head-includes')
+    <!-- Scripts -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+@stop
+
 {{-- <!-- Main --> --}}
 @section('layout-body')
 
@@ -57,3 +62,4 @@
     ])
 
 @stop
+

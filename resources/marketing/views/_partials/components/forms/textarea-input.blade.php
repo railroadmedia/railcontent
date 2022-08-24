@@ -44,7 +44,7 @@
 
 
 
-
+{{-- 
 <script>
     export default {
     name: 'TextareaInput',
@@ -127,4 +127,4 @@
     }
     // lifecycle hooks
 }
-</script>
+</script> --}}

@@ -37,7 +37,7 @@
         </p>
     </div>
 </div>
-
+{{-- 
 <script>
 export default {
     name: 'TextInput',
@@ -114,4 +114,4 @@ export default {
 
     // lifecycle hooks
 }
-</script>
+</script> --}}

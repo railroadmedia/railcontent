@@ -4,7 +4,7 @@
 />
 
 
-
+{{-- 
 <script>
 import { VueRecaptcha } from 'vue-recaptcha';
 
@@ -28,4 +28,4 @@ export default {
 
 
 }
-</script>
+</script> --}}

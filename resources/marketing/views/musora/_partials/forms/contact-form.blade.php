@@ -242,7 +242,7 @@
         'required' => true,
     ])
 
-    <multilevel-dropdown
+    {{-- <multilevel-dropdown
         label="What can we help you with?"
         name="support-options"
         id="support-listbox"
@@ -254,7 +254,7 @@
         @updateValue="updateSupportOption($event)"
         placeholder="Please select the option that is closest to your request..."
         errorMessage="Please select an option that is closest to your request."
-    />
+    /> --}}
 
     <!-- Description -->
     @include('_partials.components.forms.textarea-input',[
@@ -267,7 +267,7 @@
         'required' => true
     ])
 
-    <textarea-input
+    {{-- <textarea-input
         name="description"
         :required="true"
         :invalid="!formValid && !messageFieldValid"
@@ -278,15 +278,17 @@
         @update:inputValue="formData.message = $event"
         id="support-description"
         placeholder="Add message here..."
-    />
+    /> --}}
 
     <div class="flex flex-col-reverse sm:flex-row full">
         <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
             <!-- Recaptcha -->
-            <recaptcha :siteKey="captchakey"
+            {{-- <recaptcha :siteKey="captchakey"
                         @update:verified="formVerified = $event"
-            />
+            /> --}}
+            <div class="g-recaptcha" data-sitekey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"></div>
         </div>
+        
         <div class="sm:w-72 sm:ml-auto">
             <!-- File Upload Button -->
             @include('_partials.components.forms.file-input',[
@@ -319,8 +321,7 @@
     <!-- SUBMIT BUTTON -->
     <button class="btn-primary bg-drumeo self-start mr-auto w-full sm:w-min"
             type="submit"
-            :disabled="!formValid || !formVerified"
-            :class="themeBgClass"
+            x-bind:disabled="!formValid || !formVerified"
     >
             Submit
     </button>
@@ -359,6 +360,10 @@
                 supportOption: '',
                 attachment: [],
             },
+            formValid: true, //update this
+            formVerified: true, //update this
+            formSuccessful: false, //update this
+            responseMessageVisible: false, 
             invalids: {
                 name: false,
                 email: {
@@ -398,7 +403,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
 import SupportService from '../../assets/js/services/support';
 //Form Components
 import TextareaInput from '../FormComponents/TextareaInput.vue'
@@ -812,4 +817,4 @@ export default {
         },
     }
 };
-</script>
+</script> --}}
