@@ -7,7 +7,6 @@ use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\Mentor\Events\StudentMentorUpdated;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
-use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -15,9 +14,6 @@ use Str;
 
 class MentorService
 {
-    /**
-     * @var PrimaryBrandService
-     */
     private PrimaryBrandService $primaryBrandService;
     private ?Collection $mentors = null;
 
@@ -26,13 +22,7 @@ class MentorService
         $this->primaryBrandService = $primaryBrandService;
     }
 
-    /**
-     * @param int $userId
-     * @param string $supportedBrand
-     * @param int $maxStudents
-     * @return void
-     */
-    public function store(int $userId, string $supportedBrand, int $maxStudents = 5000)
+    public function store(int $userId, string $supportedBrand, int $maxStudents = 5000): void
     {
         $mentor = new Mentor();
         $mentor->user_id = $userId;
@@ -42,13 +32,7 @@ class MentorService
         $mentor->save();
     }
 
-
-    /**
-     * @param int $userId
-     * @return void
-     * @throws Exception
-     */
-    public function assignMentor(int $userId)
+    public function assignMentor(int $userId): void
     {
         $brand = $this->getPrimaryBrandForAssigningMentor($userId);
         if (!$brand) {
@@ -81,7 +65,7 @@ class MentorService
         return $mentor;
     }
 
-    public function ensureMentorAssigned(int $userId)
+    public function ensureMentorAssigned(int $userId): void
     {
         if ($this->hasMentor($userId)) {
             $this->assignMentor($userId);
@@ -97,9 +81,6 @@ class MentorService
     public function chooseMentor(string $brand): ?Mentor
     {
         $mentors = $this->getMentorsByBrand($brand);
-        $test = $mentors->map(function ($t) {
-            return $t->active_student_count;
-        });
         if ($mentors->count() == 0) {
             Log::warning("Unable to find mentor for brand '$brand'");
             return null;
@@ -122,11 +103,7 @@ class MentorService
         return $mentorsWithLowestStudentPercentage;
     }
 
-    /**
-     * @param string $brand
-     * @return mixed
-     */
-    private function getMentorsByBrand(string $brand)
+    private function getMentorsByBrand(string $brand): Collection
     {
         if (!$this->mentors) {
             $this->mentors = Mentor::all();
@@ -163,7 +140,7 @@ class MentorService
         return $result?->mentor_user_id;
     }
 
-    public function updateStudentMentor(int $userId, int $newMentorId)
+    public function updateStudentMentor(int $userId, int $newMentorId): void
     {
         $mentorStudent = $this->getMentorStudent($userId);
         $mentor = $this->getMentorOrNull($newMentorId);
@@ -190,7 +167,7 @@ class MentorService
         return $mentor;
     }
 
-    public function updateMentor(int $userId, string $supportedBrands, int $activeStudentMaxCount)
+    public function updateMentor(int $userId, string $supportedBrands, int $activeStudentMaxCount): void
     {
         $mentor = $this->getMentorOrNull($userId);
         if (!$mentor) {
