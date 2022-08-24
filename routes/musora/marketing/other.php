@@ -16,5 +16,4 @@ Route::domain('{musoraDomain}')
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
-        Route::get('reset-password', [PasswordResetController::class, 'showResetForm'])->name('platform.password.reset');
     });

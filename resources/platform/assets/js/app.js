@@ -21,7 +21,6 @@ import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
-import StudentReviewForm from './vue/components/IFrames/StudentReviewForm.vue';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -47,16 +46,11 @@ import PlayAlongs from './vue/vuesora/views/play-alongs/PlayAlongs.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
 import PaymentMethods from './vue/vuesora/views/payment-methods';
-import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue';
-import ImageCropper from './vue/vuesora/components/ImageCropper/ImageCropper.vue';
-import Comments from './vue/vuesora/views/comments/Comments.vue';
-import EmailForm from './vue/vuesora/components/EmailForm/EmailForm.vue';
 import AssignmentsContainer from './vue/vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 import ContentAssignment from './vue/vuesora/components/ContentAssignment/ContentAssignment.vue';
 import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
 import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
 import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
-import PianoBackingTracks from './vue/vuesora/components/PianoBackingTracks';
 
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
@@ -250,8 +244,20 @@ app.component('AppContainer', AppContainer)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
-    .component('StudentReviewForm', StudentReviewForm)
-    .component('PianoBackingTracks', PianoBackingTracks)
+    
+    .component('PianoBackingTracks', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "piano-backing-tracks" */
+            './vue/vuesora/components/PianoBackingTracks'
+        )
+    ))
+    
+    .component('StudentReviewForm', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "student-review-form" */
+            './vue/components/IFrames/StudentReviewForm.vue'
+        )
+    ))
 
     .component('ContentSchedule', defineAsyncComponent(() =>
         import(

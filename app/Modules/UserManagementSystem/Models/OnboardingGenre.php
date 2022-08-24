@@ -11,26 +11,26 @@ use Illuminate\Database\Eloquent\Model;
 
 
 /**
-* App\Modules\UserManagementSystem\Models\OnboardingGenre
-*
-* @property int $id
-* @property int $user_id
-* @property string $brand
-* @property string $genre
-* @property Carbon|null $created_at
-* @property Carbon|null $updated_at
-* @method static Builder|OnboardingGenre newModelQuery()
-* @method static Builder|OnboardingGenre newQuery()
-* @method static Builder|OnboardingGenre query()
-* @method static Builder|OnboardingGenre whereId($value)
-* @method static Builder|OnboardingGenre whereBrand($value)
-* @method static Builder|OnboardingGenre whereGenre($value)
-* @method static Builder|OnboardingGenre whereUserId($value)
-* @method static Builder|OnboardingGenre whereCreatedAt($value)
-* @method static Builder|OnboardingGenre whereUpdatedAt($value)
-* @mixin Eloquent
-* @property-read User $user
-*/
+ * App\Modules\UserManagementSystem\Models\OnboardingGenre
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $brand
+ * @property string $genre
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|OnboardingGenre newModelQuery()
+ * @method static Builder|OnboardingGenre newQuery()
+ * @method static Builder|OnboardingGenre query()
+ * @method static Builder|OnboardingGenre whereId($value)
+ * @method static Builder|OnboardingGenre whereBrand($value)
+ * @method static Builder|OnboardingGenre whereGenre($value)
+ * @method static Builder|OnboardingGenre whereUserId($value)
+ * @method static Builder|OnboardingGenre whereCreatedAt($value)
+ * @method static Builder|OnboardingGenre whereUpdatedAt($value)
+ * @mixin Eloquent
+ * @property-read User $user
+ */
 class OnboardingGenre extends Model
 {
 

@@ -84,6 +84,16 @@ class UserFactory extends Factory
             'biography' => $this->faker->sentences(3, true),
             'support_note' => $this->faker->sentences(3, true),
             'created_at' => $this->faker->dateTime,
+            'membership_expiration_date' => null,
+            'is_lifetime_member' => rand(0, 1),
+            'singing_since_year' => rand(1950, 2022),
+            'singing_gear_mic_brands' => $this->faker->words(3, true),
+            'singing_gear_photo' => $this->faker->imageUrl,
+            'is_pack_owner' => rand(0, 1),
+            'singeo_onboarding_skip_setup' => 0,
+            'guitareo_onboarding_skip_setup' => 0,
+            'pianote_onboarding_skip_setup' => 0,
+            'drumeo_onboarding_skip_setup' => 0,
         ];
     }
 }
