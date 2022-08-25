@@ -30,7 +30,7 @@ const experienceDescriptionMap = {
   guitareo: {
     0: 'Start from the beginning. No experience required!',
     1: 'For beginners who want to learn their basic chords and some strumming patterns so they can play around the campfire.',
-    2: 'For intermediate playerss who want to be able to play tabs and chord charts, dive into some basic soloing, and learn some fancy chords.',
+    2: 'For intermediate players who want to be able to play tabs and chord charts, dive into some basic soloing, and learn some fancy chords.',
     3: 'For guitarists who have their essentials down and are looking for the final touches to improve their playing.',
   }
 }
