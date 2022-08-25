@@ -243,7 +243,7 @@ class ContentPagesController extends BaseController
             "xp" => $firstLevelContent->fetch('xp', 0),
         ];
 
-        $nextLessonUrl = $nextContentForUser['web_url'] ?? '';
+        $nextLessonUrl = $nextContentForUser['url'] ?? '';
         $nextLessonJson = $nextContentForUser ?? null;
 
         if (!empty($nextLessonJson)) {
@@ -333,11 +333,17 @@ class ContentPagesController extends BaseController
         $secondContentResultsEntity = new ContentFilterResultsEntity(['results' => $courses]);
 
         // next lesson for user
-        if ($firstContent->fetch('next_lesson_level_id') == $secondContent['id']) {
-            $nextLearningPathLesson =
-                (new ContentFilterResultsEntity(
-                    ['results' => [$firstContent->fetch('next_lesson', [])], 'total_results' => 1]))->toResponseRawJson(
-                );
+        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+            $secondContent['id'],
+            auth()->id()
+        );
+        $nextLessonUrl = $nextContentForUser['url'] ?? '';
+        $nextLessonJson = $nextContentForUser ?? null;
+
+        if (!empty($nextLessonJson)) {
+            $nextLearningPathLesson = (new ContentFilterResultsEntity(
+                ['results' => [$nextLessonJson], 'total_results' => 1]
+            ))->toResponseRawJson();
         } else {
             $nextLearningPathLesson = '';
         }
@@ -367,7 +373,7 @@ class ContentPagesController extends BaseController
                                           "parentContent" => $secondContent,
                                           "childContent" => $secondContentResultsEntity->toResponseRawJson(),
                                           "infoData" => $infoData,
-                                          "nextLessonUrl" => $secondContent->fetch('current_lesson')['url'] ?? '',
+                                          "nextLessonUrl" => $secondContent->fetch('current_lesson')['url'] ?? $nextLessonUrl,
                                           "progressLabelText" => $progressLabelText,
                                           "nextLessonJson" => $nextLearningPathLesson,
                                           'backButton' => $backButton,
