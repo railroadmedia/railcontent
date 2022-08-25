@@ -18,15 +18,19 @@ class ResetPasswordController extends Controller
 {
     use ValidatesRequests;
 
+    public function passwordResetForm(Request $request)
+    {
+        return view('pages.reset', $request->all());
+    }
+
     /**
      * Reset the given user's password.
      *
-     * @param  Request $request
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function reset(Request $request)
+    public function resetPasswordWithToken(Request $request)
     {
-
         $isJson = request()->expectsJson();
 
         try {
@@ -53,8 +57,7 @@ class ResetPasswordController extends Controller
 
             return redirect()
                 ->back()
-                ->withErrors(['password' => 'Password reset failed. Error: '  . ($errorMessageToUser ?? $default)]);
-
+                ->withErrors(['password' => 'Password reset failed. Error: ' . ($errorMessageToUser ?? $default)]);
         }
 
         $response =
@@ -67,7 +70,6 @@ class ResetPasswordController extends Controller
                         'token'
                     ),
                     function ($user, $password) {
-
                         $user->setPassword($password);
                         $user->save();
 
@@ -77,22 +79,29 @@ class ResetPasswordController extends Controller
                     }
                 );
 
-        if (!$isJson)
-        {
+        if (!$isJson) {
             if ($response === Password::PASSWORD_RESET) {
                 session()->put('skip-third-party-auth-check', true);
 
                 return redirect()
                     ->to(config('user_management_system.login_success_redirect_path'))
                     ->with(
-                        'successes',
+                        'success-message',
                         new MessageBag(['password' => 'Your password has been reset successfully.'])
                     );
             }
 
+            if ($response === Password::INVALID_TOKEN) {
+                session()->put('skip-third-party-auth-check', true);
+
+                return redirect()
+                    ->back()
+                    ->withErrors(['password' => 'Error could not reset password, reset link is expired.']);
+            }
+
             return redirect()
                 ->back()
-                ->withErrors(['password' => 'Password reset failed, please try again.']);
+                ->withErrors(['password' => 'Password reset failed, please try again. Error: ' . $response]);
         } else {
             if ($response === Password::PASSWORD_RESET) {
                 $user = User::find(auth()->id());
@@ -122,7 +131,6 @@ class ResetPasswordController extends Controller
                 );
             }
         }
-
     }
 
     /**

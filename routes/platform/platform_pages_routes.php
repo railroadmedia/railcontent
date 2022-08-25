@@ -55,6 +55,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.new-lessons');
 
+        Route::get('/{brand}/lessons/subscribed', [ContentPagesController::class, 'subscribedContent'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.subscribed-lessons');
+
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
             ->whereIn('contentTypeName', [
@@ -424,9 +428,3 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
     });
-
-//Route fallback - when no route is matched
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-})
-    ->middleware(['web_authenticated']);

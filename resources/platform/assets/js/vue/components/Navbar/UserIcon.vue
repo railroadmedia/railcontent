@@ -82,7 +82,7 @@ export default {
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader
         :name="userName"
-        :optionClick="() => {}"
+        :onOptionClick="() => {}"
         :userPhoto="userAvatar"
         :accountUrl="accountUrl"
       />
@@ -120,7 +120,7 @@ export default {
         </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement @optionClick="() => $emit('onColorModeToggle')">
+        <OptionElement @onOptionClick="() => $emit('onColorModeToggle')">
 
           <musora-icon v-if="!isDarkModeSelected" icon-name="sun" class="tw-w-[20px] tw-mr-2"/>
           <musora-icon v-if="isDarkModeSelected" icon-name="moon" class="tw-w-[20px] tw-mr-2"/>

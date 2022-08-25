@@ -78,6 +78,8 @@
                         </musora-icon>
                     @elseif($catalogueMeta['name'] == 'New Content')
                         <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                    @elseif($catalogueMeta['name'] == 'Subscribed')
+                        <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
@@ -226,7 +228,7 @@
                         <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
                             <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
                                 All
-                                @if( $catalogueMeta['name'] === 'Podcast')
+                                @if( !empty($catalogueMeta['shortname']) && $catalogueMeta['shortname'] === 'Podcast')
                                     Episodes {{-- Change Podcast Name}} --}}
                                 @else 
                                     {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
@@ -282,6 +284,7 @@
                     subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
                     catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
                     :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+                    content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}"
                     :use-theme-color="true"
                     :pre-loaded-content="{{ $listLessons }}"
                     :is-admin="{{ json_encode(user()->isAdmin()) }}"

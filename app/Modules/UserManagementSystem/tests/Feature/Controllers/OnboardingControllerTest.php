@@ -23,7 +23,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     }
 
 
-    public function test_gears_missing_brand() {
+    public function test_gears_missing_brand()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-gears',
@@ -35,7 +36,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_gears_missing_data() {
+    public function test_gears_missing_data()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-gears',
@@ -47,7 +49,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_gears_success() {
+    public function test_gears_success()
+    {
         $fakeData = [$this->faker->word, $this->faker->word];
         $response = $this->call(
             'POST',
@@ -61,12 +64,13 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
 
-        foreach($user->onboardingGear as $gear) {
+        foreach ($user->onboardingGear as $gear) {
             $this->assertTrue(in_array($gear->gear, $fakeData));
         }
     }
 
-    public function test_topics_missing_brand() {
+    public function test_topics_missing_brand()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-topics',
@@ -78,7 +82,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_topics_missing_data() {
+    public function test_topics_missing_data()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-topics',
@@ -90,7 +95,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_topics_success() {
+    public function test_topics_success()
+    {
         $fakeData = [$this->faker->word, $this->faker->word];
         $response = $this->call(
             'POST',
@@ -104,14 +110,14 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
 
-        foreach($user->onboardingTopics as $topic) {
+        foreach ($user->onboardingTopics as $topic) {
             $this->assertTrue(in_array($topic->topic, $fakeData));
         }
     }
 
 
-
-    public function test_genres_missing_brand() {
+    public function test_genres_missing_brand()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-genres',
@@ -123,7 +129,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_genres_missing_data() {
+    public function test_genres_missing_data()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-genres',
@@ -135,7 +142,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_genres_success() {
+    public function test_genres_success()
+    {
         $fakeData = [$this->faker->word, $this->faker->word];
         $response = $this->call(
             'POST',
@@ -149,13 +157,14 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
 
-        foreach($user->onboardingGenres as $genre) {
+        foreach ($user->onboardingGenres as $genre) {
             $this->assertTrue(in_array($genre->genre, $fakeData));
         }
     }
 
 
-    public function test_experience_missing_brand() {
+    public function test_experience_missing_brand()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-experience',
@@ -167,7 +176,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_experience_missing_data() {
+    public function test_experience_missing_data()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-experience',
@@ -180,8 +190,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     }
 
 
-
-    public function test_skip_account_missing_brand() {
+    public function test_skip_account_missing_brand()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-skip-account-setup',
@@ -193,7 +203,8 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function test_skip_account_missing_data() {
+    public function test_skip_account_missing_data()
+    {
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-skip-account-setup',
@@ -206,10 +217,9 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
     }
 
 
-
-
-    public function test_experience_success() {
-        $fakeExperienceLevel =  rand(0, 3);
+    public function test_experience_success()
+    {
+        $fakeExperienceLevel = rand(0, 3);
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-experience',
@@ -221,28 +231,45 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
-        $this->assertEquals($user->onboardingExperience->experience_level, $fakeExperienceLevel);
+        $this->assertEquals($user->onboardingExperience->first()->experience_level, $fakeExperienceLevel);
+    }
+
+    public function test_experience_success_one()
+    {
+        $fakeExperienceLevel = 1;
+        $response = $this->call(
+            'POST',
+            config('user_management_system.route_prefix') . '/onboarding-experience',
+            [
+                'brand' => 'drumeo',
+                'experience_level' => $fakeExperienceLevel
+            ]
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
+        $this->assertEquals($user->onboardingExperience->first()->experience_level, $fakeExperienceLevel);
     }
 
 
-    public function test_skip_account_success() {
-
+    public function test_skip_account_success()
+    {
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
         $this->assertEquals($user->drumeo_onboarding_skip_setup, 0);
         $this->assertEquals($user->pianote_onboarding_skip_setup, 0);
         $this->assertEquals($user->guitareo_onboarding_skip_setup, 0);
         $this->assertEquals($user->singeo_onboarding_skip_setup, 0);
 
-        $response =  $this->post_skip_setup_account('drumeo', true);
+        $response = $this->post_skip_setup_account('drumeo', true);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $response =  $this->post_skip_setup_account('pianote', true);
+        $response = $this->post_skip_setup_account('pianote', true);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $response =  $this->post_skip_setup_account('guitareo', true);
+        $response = $this->post_skip_setup_account('guitareo', true);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $response =  $this->post_skip_setup_account('singeo', true);
+        $response = $this->post_skip_setup_account('singeo', true);
         $this->assertEquals(200, $response->getStatusCode());
 
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
@@ -252,16 +279,16 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals($user->singeo_onboarding_skip_setup, 1);
 
 
-        $response =  $this->post_skip_setup_account('drumeo', false);
+        $response = $this->post_skip_setup_account('drumeo', false);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $response =  $this->post_skip_setup_account('pianote', false);
+        $response = $this->post_skip_setup_account('pianote', false);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $response =  $this->post_skip_setup_account('guitareo', false);
+        $response = $this->post_skip_setup_account('guitareo', false);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $response =  $this->post_skip_setup_account('singeo', false);
+        $response = $this->post_skip_setup_account('singeo', false);
         $this->assertEquals(200, $response->getStatusCode());
 
         $user = User::query()->where(['email' => $this->fakeEmail])->firstOrFail();
@@ -269,10 +296,10 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
         $this->assertEquals($user->pianote_onboarding_skip_setup, 0);
         $this->assertEquals($user->guitareo_onboarding_skip_setup, 0);
         $this->assertEquals($user->singeo_onboarding_skip_setup, 0);
-
     }
 
-    public function post_skip_setup_account($brand, $skip) {
+    public function post_skip_setup_account($brand, $skip)
+    {
         return $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/onboarding-skip-account-setup',
@@ -282,8 +309,6 @@ class OnboardingControllerTest extends UserManagementSystemTestCase
             ]
         );
     }
-
-
 
 
 }

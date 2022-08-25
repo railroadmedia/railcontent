@@ -25,7 +25,7 @@
             :usecsrftoken="!!({{$useCsrfToken ?? true}})"
             :email="{{ json_encode($email) }}"
             :resettoken="{{ json_encode($token) }}"
-            :reseturl="{{ json_encode(url()->route('user_management_system.password.reset')) }}"
+            :reseturl="{{ json_encode(url()->route('user_management_system.password.reset-password-with-token')) }}"
         >
             <template #csrf>{{ csrf_field() }}</template>
         </reset-pass-form>

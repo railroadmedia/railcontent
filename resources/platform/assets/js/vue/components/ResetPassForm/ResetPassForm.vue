@@ -64,8 +64,8 @@ const toggleSeePassword = () => {
         tw-border-[#445F74]
         tw-px-[32px]
       ">
-      <form method="get" :action="reseturl" class="tw-flex tw-flex-col tw-py-[42px]">
-        <ul v-if="errors.length > 0" class="tw-flex tw-flex-col tw-mb-3 tw-text-xs text-error list-style-none">
+      <form method="post" :action="reseturl" class="tw-flex tw-flex-col tw-py-[42px]">
+        <ul v-if="errors.length > 0" class="tw-flex tw-flex-col tw-mb-3 text-error list-style-none tw-px-[13px]">
           <li v-for="(error, i) in errors" v-bind:key="i + 'error'">
             {{ error }}
           </li>
@@ -74,10 +74,10 @@ const toggleSeePassword = () => {
         <input type="hidden" name="token" :value="resettoken">
         <input type="hidden" name="email" :value="email">
         <div class="tw-flex tw-flex-col tw-mb-[20px]">
-          <p class="tw-mb-3">Reset password for <strong>{{ email }}</strong></p>
+          <p class="tw-mb-3 tw-px-[13px]">Reset password for: <br><strong>{{ email }}</strong></p>
           <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :inputType="isPasswordVisible ? 'text' : 'password'" id="newPassword" inputName="password"
-            labelValue="Password" placeholder="Enter your password..." :inputErrors="[]"
+            labelValue="New Password (8 characters min)" placeholder="Enter your new password..." :inputErrors="[]"
             @onChange="handlePasswordChange" :showCustomButton="true">
             <template #custom-btn>
               <button type="button"
@@ -92,7 +92,7 @@ const toggleSeePassword = () => {
         <div class="tw-flex tw-flex-col tw-mb-[20px] tw-relative">
           <InputLabel wrapperOverride="tw-text-[16px]" inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]"
             :inputType="isPasswordVisible ? 'text' : 'password'" id="confirmNewPassword"
-            inputName="password_confirmation" labelValue="Confirm New Password" placeholder="Confirm New password..."
+            inputName="password_confirmation" labelValue="Confirm New Password" placeholder="Confirm your new password..."
             :inputErrors="[]" @onChange="handleConfirmPasswordChange" @onEnter="handleButtonClick"
             :showCustomButton="true">
             <template #custom-btn>
@@ -109,9 +109,9 @@ const toggleSeePassword = () => {
         <RainbowButton :disabled="!confirmPasswordInput.length || isLoading" type="button"
           @on-button-click="handleButtonClick">
           <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading">
-            <LoadingSpinner /> SIGNING IN
+            <LoadingSpinner /> RESETTING...
           </span>
-          <span v-if="!isLoading">SIGN IN</span>
+          <span v-if="!isLoading">RESET</span>
         </RainbowButton>
         <button id="hidden-submit" type="submit" hidden>Submit</button>
       </form>

@@ -17,7 +17,6 @@ class PasswordControllerTest extends UserManagementSystemTestCase
 
     public function test_update_password()
     {
-
         $email = $this->faker->email;
         $password = $this->faker->words(3, true);
         $newPassword = $this->faker->words(3, true);

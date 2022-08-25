@@ -53,15 +53,15 @@ class UserControllerTest extends UserManagementSystemTestCase
                     [
                         'email' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The email field is required.',
                             ],
                         'password' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The password field is required.',
                             ],
                         'display_name' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The display name field is required.',
                             ],
                     ],
             ]),
