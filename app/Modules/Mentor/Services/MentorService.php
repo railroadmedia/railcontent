@@ -4,7 +4,7 @@ namespace App\Modules\Mentor\Services;
 
 
 use App\Modules\Brand\Services\PrimaryBrandService;
-use App\Modules\Mentor\Events\StudentMentorUpdated;
+use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use Exception;
@@ -52,7 +52,7 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentorStudent->save();
         $mentor->save();
-        event(new StudentMentorUpdated($mentorStudent->user_id, $mentorStudent->mentor_user_id, $mentorStudent->primary_brand));
+        event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
     }
 
     private function chooseNewMentor(MentorStudent $mentorStudent): ?Mentor
@@ -148,7 +148,7 @@ class MentorService
         $mentor->active_student_count += 1;
         $mentor->save();
         $mentorStudent->save();
-        event(new StudentMentorUpdated($mentorStudent->user_id, $mentorStudent->mentor_user_id, $mentorStudent->primary_brand));
+        event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
     }
 
     private function getMentorStudent(int $userId): MentorStudent
@@ -193,13 +193,11 @@ class MentorService
         }
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
-            $userIds = $data->map(fn($t) => $t->user_id);
-            MentorStudent::query()->whereIn('id', $userIds)->update(['mentor_user_id' => $mentorUserId]);
+            $ids = $data->map(fn($t) => $t->id);
+            MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId]);
             $newMentor = $mentors[$mentorUserId];
             $newMentor->save();
-            foreach ($data as $mentorStudent) {
-                event(new StudentMentorUpdated($mentorStudent->user_id, $mentorStudent->mentor_user_id, $mentorStudent->primary_brand));
-            }
+            event(StudentMentorsUpdated::newWithMentorStudentCollection($data));
         });
     }
 }

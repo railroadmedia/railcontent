@@ -37,7 +37,7 @@ class HelpScoutMentorService
         );
     }
 
-    public function newHelpScoutConveration(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail): void
+    public function newHelpScoutConversation(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail): void
     {
         Log::debug("");
         Log::debug("New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail");

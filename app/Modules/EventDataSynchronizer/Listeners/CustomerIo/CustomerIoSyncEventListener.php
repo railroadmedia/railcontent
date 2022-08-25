@@ -3,7 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncMentor;
-use App\Modules\Mentor\Events\StudentMentorUpdated;
+use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -1202,7 +1202,7 @@ class CustomerIoSyncEventListener
     }
 
 
-    public function handleMentorUpdated(StudentMentorUpdated $studentMentorUpdated): void
+    public function handleMentorUpdated(StudentMentorsUpdated $studentMentorsUpdated): void
     {
         if (self::$disable) {
             return;
@@ -1210,9 +1210,7 @@ class CustomerIoSyncEventListener
 
         try {
             dispatch((new CustomerIoSyncMentor(
-                $studentMentorUpdated->getUserId(),
-                $studentMentorUpdated->getMentorUserId(),
-                $studentMentorUpdated->getPrimaryBrand(),
+                $studentMentorsUpdated->mentorStudentData
             ))
                 ->onConnection($this->queueConnectionName)
                 ->onQueue($this->queueName)

@@ -3,7 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Providers;
 
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
-use App\Modules\Mentor\Events\StudentMentorUpdated;
+use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
@@ -156,7 +156,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         CommandSubscriptionRenewFailed::class => [
             UserProductToUserContentPermissionListener::class . '@handleSubscriptionRenewalFailureFromDatabaseError'
         ],
-        StudentMentorUpdated::class => [
+        StudentMentorsUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleMentorUpdated',
         ]
     ];
