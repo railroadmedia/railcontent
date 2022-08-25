@@ -82,24 +82,25 @@
             </div>
         </div>
 
-        <div class="tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 md:tw-grid-cols-4 lg:tw-grid-cols-5 tw-mb-8">
+        <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 4xl:tw-grid-cols-6 tw-mb-8">
             @foreach($chapterThumbs as $index => $chapter)
                 <div class="flex flex-column chapter-thumb pa-1">
                     <a
                         href="{{ url()->route('platform.books.resources.chapter', [($index + 1)]) }}"
-                        class="book-cover bg-black corners-5 overflow"
+                        class="book-cover bg-grey-2 dark:tw-bg-[#081825] tw-rounded-xl tw-overflow-hidden tw-group"
                     >
-                        <div class="thumb-hover absolute-fill heading">
-                            <i class="fas fa-arrow-right absolute-center"></i>
-                        </div>
 
                         <img
                             src="{{ $chapter }}"
-                            data-ix-src="{{ $chapter }}"
-                            data-ix-fade
                             alt="Foundations Chapter {{ $index }} Thumbnail"
-                            class="corners-5"
+                            class="corners-5 tw-transition-opacity tw-opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('tw-opacity-0')"
                         >
+
+                        <div class="tw-bg-black/40 absolute-fill heading tw-transition tw-text-white tw-opacity-0 group-hover:tw-opacity-100">
+                            <i class="fas fa-arrow-right absolute-center"></i>
+                        </div>
                     </a>
                 </div>
             @endforeach
