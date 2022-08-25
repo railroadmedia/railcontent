@@ -184,6 +184,7 @@ return [
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
         App\Modules\Mentor\Providers\MentorServiceProvider::class,
+        App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
 
         /*
          * Application Service Providers...

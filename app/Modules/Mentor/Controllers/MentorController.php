@@ -3,17 +3,18 @@
 namespace Modules\Mentor\Controllers;
 
 use App\Modules\Mentor\Models\Mentor;
-use App\Modules\Mentor\Services\HelpScoutWebHookService;
+use App\Modules\Mentor\Services\HelpScoutMentorService;
 use App\Modules\Mentor\Services\MentorService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Log;
 
 class MentorController extends Controller
 {
     private MentorService $mentorService;
-    private HelpScoutWebHookService $service;
+    private HelpScoutMentorService $service;
 
-    public function __construct(MentorService $mentorService, HelpScoutWebHookService $service)
+    public function __construct(MentorService $mentorService, HelpScoutMentorService $service)
     {
         $this->mentorService = $mentorService;
         $this->service = $service;
@@ -26,6 +27,13 @@ class MentorController extends Controller
 
     public function getMentors(Request $request)
     {
+        Log::info('test');
+        Log::info('test');
+        Log::info('test');
+        Log::info('test');
+        Log::info('test');
+        Log::info('.....');
+
         return Mentor::all()->map(
             fn(Mentor $mentor) => ['mentorUserId' => $mentor->user->id, 'displayName' => $mentor->user->display_name]
         );
@@ -74,20 +82,4 @@ class MentorController extends Controller
         $mentorStudents = $this->mentorService->delete($userId);
         return $mentorStudents->map(fn($mentorStudent) => $mentorStudent->user->email);
     }
-
-    public function test()
-    {
-
-        //$data = $this->service->unregisterWebHook(43428);
-
-        //$data = $this->service->getWebHooks()->extract();
-
-//        $data = $this->service->unregisterWebHook(43422);
-//        $data = $this->service->unregisterWebHook(43423);
-//        $data = $this->service->unregisterWebHook(43424);
-//        $data = $this->service->unregisterWebHook(43425);
-
-        return $data;
-    }
-
 }

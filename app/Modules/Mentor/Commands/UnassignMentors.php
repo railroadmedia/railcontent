@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Mentor\Commands;
 
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Mentor\Services\MentorService;
-use App\Services\DatabaseService;
 use App\Services\DatabaseServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
@@ -24,12 +23,10 @@ class UnassignMentors extends Command
      * @var string
      */
     protected $description = 'Assigns a mentor to each active user without one';
-    private $mentorService;
 
-    public function __construct(MentorService $mentorService)
+    public function __construct()
     {
         parent::__construct();
-        $this->mentorService = $mentorService;
     }
 
     /**

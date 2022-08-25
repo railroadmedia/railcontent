@@ -5,6 +5,7 @@ namespace App\Modules\Mentor\Models;
 use App\Modules\Mentor\database\factories\MentorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\UserManagementSystem\Models\User;
 
 /**
@@ -12,6 +13,7 @@ use Modules\UserManagementSystem\Models\User;
  */
 class Mentor extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     protected $table = 'mentors';
@@ -30,7 +32,7 @@ class Mentor extends Model
         return $this->active_student_count / $max;
     }
 
-    protected static function newFactory()
+    protected static function newFactory(): MentorFactory
     {
         return MentorFactory::new();
     }

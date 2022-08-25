@@ -15,9 +15,7 @@ class MentorServiceTest extends TestCase
 
     public function createMentor(string $brand) :Mentor
     {
-        $user = User::factory()->create();
         $mentor = Mentor::factory()->create([
-            'user_id' => $user->id,
             'supported_brands' => $brand
         ]);
         return $mentor;

@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class HelpScoutMentorServiceTest extends TestCase
 {
-
     private HelpScoutMentorService $helpScoutMentorService;
 
     protected function setUp(): void

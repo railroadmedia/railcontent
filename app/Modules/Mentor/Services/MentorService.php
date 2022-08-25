@@ -6,6 +6,8 @@ namespace App\Modules\Mentor\Services;
 use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
+use App\Modules\UserManagementSystem\Services\UserService;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Str;
@@ -21,7 +23,7 @@ class MentorService
     /**
      * @param PrimaryBrandService $primaryBrandService
      */
-    public function __construct(PrimaryBrandService $primaryBrandService)
+    public function __construct(PrimaryBrandService $primaryBrandService, UserService $session)
     {
         $this->primaryBrandService = $primaryBrandService;
     }
@@ -46,12 +48,15 @@ class MentorService
     /**
      * @param int $userId
      * @return void
+     * @throws Exception
      */
     public function assignMentor(int $userId)
     {
         $brand = $this->getPrimaryBrandForAssigningMentor($userId);
         if (!$brand) {
-            throw new Exception("Unable to choose a brand for user '$userId'");
+            Log::warning("Unable to choose a brand for user '$userId'");
+            return;
+            //throw new Exception("Unable to choose a brand for user '$userId'");
         }
         $this->assignMentorByBrand($userId, $brand);
     }

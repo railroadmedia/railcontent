@@ -3,20 +3,65 @@
 namespace App\Modules\Mentor\Services;
 
 
+use App\Modules\HelpScout\Services\HelpScoutUserService;
+use App\Modules\HelpScout\Services\HelpScoutWebHookService;
+use Illuminate\Support\Facades\Log;
+
 class HelpScoutMentorService
 {
     private HelpScoutWebHookService $helpScoutWebHookService;
+    private MentorService $mentorService;
+    private HelpScoutUserService $helpScoutUserService;
 
-    public function __construct(HelpScoutWebHookService $helpScoutWebHookService)
-    {
+    public function __construct(
+        HelpScoutWebHookService $helpScoutWebHookService,
+        MentorService $mentorService,
+        HelpScoutUserService $helpScoutUserService,
+    ) {
         $this->helpScoutWebHookService = $helpScoutWebHookService;
+        $this->mentorService = $mentorService;
+        $this->helpScoutUserService = $helpScoutUserService;
     }
 
     public function registerHelpScoutWebHook()
     {
         $this->helpScoutWebHookService->registerWebHook(
-            "https://webhook.site/f91a694c-ebb8-4a67-baf5-e9d489664b8e",
+            config('mentor.helpscout_converasation_auto_assign_user.route'),
             ['convo.created']
         );
     }
+
+    public function newHelpScoutConveration(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail)
+    {
+        Log::debug("");
+        Log::debug("New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail");
+        $userId = $this->helpScoutUserService->getUserIdFromHelpScoutCustomerInfo(
+            $helpScoutCustomerId,
+            $helpScoutEmail
+        );
+        if (!$userId) {
+            Log::info("Unable to find user for helpscout customer $helpScoutCustomerId $helpScoutEmail");
+            return;
+        }
+        Log::debug("User Id: $userId");
+        $mentorUserId = $this->mentorService->getMentorIdByStudent($userId);
+        if (!$mentorUserId) {
+            Log::info("Unable to find mentor for user $userId");
+            return;
+        }
+        $mentorHelpScoutUserId = $this->helpScoutUserService->getHelpScoutUserIdFromUserId($mentorUserId);
+        $this->updateConversationAssignedUser($conversationId, $mentorHelpScoutUserId);
+    }
+
+    private function updateConversationAssignedUser(int $conversationId, int $helpScoutUserId): void
+    {
+        if (config('mentor.helpscout_converasation_auto_assign_user.debug')) {
+            Log::info(
+                "Suppressed update to helpscout to assign user $helpScoutUserId to conversation $conversationId."
+            );
+        } else {
+            $this->helpScoutUserService->updateConversationAssignedUser($conversationId, $helpScoutUserId);
+        }
+    }
+
 }

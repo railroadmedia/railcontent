@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Modules\Mentor\Services;
+namespace App\Modules\HelpScout\Services;
 
+use App\Modules\HelpScout\Factories\ClientFactory;
 use Exception;
 use HelpScout\Api\Webhooks\Webhook;
 use HelpScout\Api\ApiClient;
-use Railroad\RailHelpScout\Factories\ClientFactory;
+use Log;
 
-/**
- * TODO: This should be part of a HelpScout Module once its migrated to MWP
- **/
 class HelpScoutWebHookService
 {
     private ApiClient $client;
@@ -22,14 +20,24 @@ class HelpScoutWebHookService
     public function registerWebHook(string $url, array $events)
     {
         $webHooks = $this->getWebHooks();
-        $webHooks->each(function ($webHook) use ($url) {
+        Log::info("Register Web Hook $url");
+        Log::info("Existing Web Hooks:");
+        $alreadyRegistered = false;
+        $webHooks->each(function ($webHook) use ($url, &$alreadyRegistered) {
+            Log::info($webHook);
+
             if ($webHook['url'] == $url) {
-                throw new Exception("URL $url already registered");
+                $alreadyRegistered = true;
+                Log::warning("URL $url already registered");
             }
         });
 
+        if ($alreadyRegistered) {
+            return;
+        }
+
         $webHook = new Webhook();
-        $secret = config('railhelpscout.webhook_secret');
+        $secret = config('helpscout.webhook_secret');
         $webHook->hydrate([
                 "url" => $url,
                 "events" => $events,
@@ -39,14 +47,13 @@ class HelpScoutWebHookService
         return $this->client->webhooks()->create($webHook);
     }
 
-    public function unregisterWebHook(int $id)
+    private function unregisterAllWebHooks()
     {
-        return $this->client->webhooks()->delete($id);
-    }
-
-    public function getWebHook(int $id)
-    {
-        return $this->client->webhooks()->get($id);
+        $webHooks = $this->getWebHooks();
+        $webHooks->each(function ($webHook) {
+            Log::info($webHook);
+            $this->client->webhooks()->delete($webHook["id"]);
+        });
     }
 
     public function getWebHooks(): \Illuminate\Support\Collection

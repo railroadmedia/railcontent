@@ -1,0 +1,335 @@
+<?php
+
+namespace App\Modules\HelpScout\Services;
+
+use App\Modules\HelpScout\Models\HelpScoutUser;
+use Carbon\Carbon;
+use App\Modules\HelpScout\Models\HelpScoutCustomer as LocalCustomer;
+use HelpScout\Api\Customers\Customer;
+use HelpScout\Api\Customers\Entry\Email;
+use HelpScout\Api\Customers\Entry\Property;
+use HelpScout\Api\Customers\Entry\PropertyOperation;
+use HelpScout\Api\Entity\Collection;
+use HelpScout\Api\Entity\PagedCollection;
+
+class HelpScoutService extends HelpScoutServiceBase
+{
+
+    /**
+     * @param int $userId
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param array $email
+     *
+     * @throws Exception
+     */
+    public function createCustomer(
+        $userId,
+        $firstName,
+        $lastName,
+        $email,
+        $attributes
+    ) {
+        $customer = new Customer();
+        $customer
+            ->setFirstName($firstName)
+            ->setLastName($lastName)
+            ->addEmail($email, 'other');
+
+        $properties = [];
+
+        foreach ($attributes as $key => $value) {
+            if ($value) {
+                $prop = new Property();
+
+                $prop
+                    ->setName($key)
+                    ->setSlug($key)
+                    ->setValue($value);
+
+                $properties[] = $prop;
+            }
+        }
+
+        $customer->setProperties(new Collection($properties));
+
+        $customerId = $this->client->customers()->create($customer);
+
+        if ($customerId) {
+            $localCustomer = new LocalCustomer();
+
+            $localCustomer->internal_id = $userId;
+            $localCustomer->external_id = $customerId;
+
+            $localCustomer->setCreatedAt(Carbon::now());
+            $localCustomer->setUpdatedAt(Carbon::now());
+
+            $localCustomer->saveOrFail();
+        }
+    }
+
+    /**
+     * @param int $userId
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param array $attributes
+     * @param array $brandsAttributesKeys
+     *
+     * @throws Exception
+     */
+    public function updateCustomer(
+        $userId,
+        $firstName,
+        $lastName,
+        $email,
+        $attributes,
+        $brandsAttributesKeys
+    ) {
+        $customer = $this->getCustomerById($userId);
+
+        $emails = $customer->getEmails()->toArray();
+        $addEmail = true;
+
+        foreach ($emails as $customerEmail) {
+            if ($customerEmail->getValue() == $email) {
+                $addEmail = false;
+                break;
+            }
+        }
+
+        if ($addEmail) {
+            $newEmail = new Email();
+
+            $newEmail
+                ->setValue($email)
+                ->setType('other');
+
+            $this->client->customerEntry()->createEmail($customer->getId(), $newEmail);
+        }
+
+        $updateCustomer = false;
+
+        if ($firstName && $customer->getFirstName() != $firstName) {
+            $customer->setLastName($lastName);
+            $updateCustomer = true;
+        }
+
+        if ($lastName && $customer->getLastName() != $lastName) {
+            $customer->setLastName($lastName);
+            $updateCustomer = true;
+        }
+
+        if ($updateCustomer) {
+            $this->client->customers()->update($customer);
+        }
+
+        $operations = $this->getCustomerUpdateAttributesOperations($customer, $attributes, $brandsAttributesKeys);
+
+        if (count($operations)) {
+            $this->client->customerProperty()->updateProperties($customer->getId(), new Collection($operations));
+        }
+    }
+
+    /**
+     * @param int $userId
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param array $attributes
+     * @param array $brandsAttributesKeys
+     *
+     * @throws Exception
+     */
+    public function createOrUpdateCustomer(
+        $userId,
+        $firstName,
+        $lastName,
+        $email,
+        $attributes,
+        $brandsAttributesKeys
+    ) {
+        /**
+         * @var $localCustomer LocalCustomer
+         */
+        $localCustomer = LocalCustomer::query()->where(
+            [
+                'internal_id' => $userId,
+            ]
+        )->first();
+
+        if (empty($localCustomer)) {
+            $this->createCustomer($userId, $firstName, $lastName, $email, $attributes);
+        } else {
+            $this->updateCustomer($userId, $firstName, $lastName, $email, $attributes, $brandsAttributesKeys);
+        }
+    }
+
+    /**
+     * @param int $userId
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param array $attributes
+     * @param array $brandsAttributesKeys
+     * @param Customer $customer
+     *
+     * @throws Exception
+     */
+    public function syncExistingCustomer(
+        $userId,
+        $firstName,
+        $lastName,
+        $email,
+        $attributes,
+        $brandsAttributesKeys,
+        Customer $customer
+    ) {
+        $emails = $customer->getEmails()->toArray();
+        $addEmail = true;
+
+        foreach ($emails as $customerEmail) {
+            if ($customerEmail->getValue() == $email) {
+                $addEmail = false;
+                break;
+            }
+        }
+
+        if ($addEmail) {
+            $newEmail = new Email();
+
+            $newEmail
+                ->setValue($email)
+                ->setType('other');
+
+            $this->client->customerEntry()->createEmail($customer->getId(), $newEmail);
+        }
+
+        $updateCustomer = false;
+
+        if ($firstName && $customer->getFirstName() != $firstName) {
+            $customer->setLastName($lastName);
+            $updateCustomer = true;
+        }
+
+        if ($lastName && $customer->getLastName() != $lastName) {
+            $customer->setLastName($lastName);
+            $updateCustomer = true;
+        }
+
+        if ($updateCustomer) {
+            $this->client->customers()->update($customer);
+        }
+
+        $operations = $this->getCustomerUpdateAttributesOperations($customer, $attributes, $brandsAttributesKeys);
+
+        if (count($operations)) {
+            $this->client->customerProperty()->updateProperties($customer->getId(), new Collection($operations));
+        }
+
+        $localCustomer = new LocalCustomer();
+
+        $localCustomer->internal_id = $userId;
+        $localCustomer->external_id = $customer->getId();
+
+        $localCustomer->setCreatedAt(Carbon::now());
+        $localCustomer->setUpdatedAt(Carbon::now());
+
+        $localCustomer->saveOrFail();
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return Customer
+     *
+     * @throws Exception
+     */
+    public function getCustomerById($userId): Customer
+    {
+        /**
+         * @var $localCustomer LocalCustomer
+         */
+        $localCustomer = LocalCustomer::query()->where(
+            [
+                'internal_id' => $userId,
+            ]
+        )->firstOrFail();
+
+        $customer = $this->client->customers()->get($localCustomer->external_id);
+
+        return $customer;
+    }
+
+    /**
+     * @return PagedCollection
+     */
+    public function getCustomersPage(): PagedCollection
+    {
+        return $this->client->customers()->list();
+    }
+
+    /**
+     * @param Customer $customer
+     * @param array $attributes
+     * @param array $brandsAttributesKeys
+     *
+     * @return PropertyOperation[]|array
+     *
+     * @throws Exception
+     */
+    protected function getCustomerUpdateAttributesOperations(
+        Customer $customer,
+        array $attributes,
+        array $brandsAttributesKeys
+    ): array {
+        $props = $customer->getProperties();
+
+        $operations = [];
+
+        foreach ($props as $prop) {
+            if (isset($attributes[$prop->getName()])) {
+                if ($prop->getValue() != $attributes[$prop->getName()]) {
+                    if ($attributes[$prop->getName()]) {
+                        $operations[] = new PropertyOperation(
+                            PropertyOperation::OPERATION_REPLACE,
+                            $prop->getName(),
+                            $attributes[$prop->getName()]
+                        );
+                    } else {
+                        if (isset($brandsAttributesKeys[$prop->getName()])) {
+                            $operations[] = new PropertyOperation(
+                                PropertyOperation::OPERATION_REMOVE,
+                                $prop->getName()
+                            );
+                        }
+                    }
+                }
+            } else {
+                if (isset($brandsAttributesKeys[$prop->getName()]) && $prop->getValue()) {
+                    $operations[] = new PropertyOperation(
+                        PropertyOperation::OPERATION_REMOVE,
+                        $prop->getName()
+                    );
+                }
+            }
+        }
+
+        return $operations;
+    }
+
+    public function getHelpScoutUserIdFromUserId(int $userId): ?int
+    {
+        $userId = HelpScoutUser::query()->select('helpscout_user_id')->where(['user_id' => $userId,])
+            ->first();
+        if (!$userId) {
+           $helpScoutUserData = $this->client->users()->list()->extract();
+            foreach ($helpScoutUserData as $item) {
+
+           }
+        }
+        return $userId;
+    }
+
+}
