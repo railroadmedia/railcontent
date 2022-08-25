@@ -11,7 +11,7 @@
             <div class="container relative">
                 <div class="flex flex-row">
                     <a
-                        href="{{ url()->route('books.resources') }}"
+                        href="{{ url()->route('platform.books.resources') }}"
                         aria-label="Back to All"
                         class="text-white no-decoration tiny uppercase pa-1"
                     >
@@ -22,7 +22,7 @@
                 <div class="flex flex-row align-center pv-3">
                     <a
                         @if($chapterNumber > 1)
-                        href="{{ url()->route('books.resources.chapter',[$chapterNumber - 1]) }}"
+                        href="{{ url()->route('platform.books.resources.chapter',[$chapterNumber - 1]) }}"
                         @endif
                         class="btn short collapse-square rounded mr-2 bg-white text-white inverted
                         {{ $chapterNumber > 1 ? '' : 'disabled' }}"
@@ -34,7 +34,7 @@
                     </p>
                     <a
                         @if($chapterNumber < 10)
-                        href="{{ url()->route('books.resources.chapter', [$chapterNumber + 1]) }}"
+                        href="{{ url()->route('platform.books.resources.chapter', [$chapterNumber + 1]) }}"
                         @endif
                         class="btn short collapse-square rounded ml-2 bg-white text-white inverted
                         {{ $chapterNumber < 10 ? '' : 'disabled' }}"
@@ -144,5 +144,5 @@
 @endsection
 
 @section('layout-scripts')
-    <script src="{{ mix('assets/members/js/books.js') }}"></script>
+    <script src="{{ mix('platform/js/books.js') }}"></script>
 @endsection

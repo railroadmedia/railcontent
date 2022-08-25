@@ -1067,7 +1067,8 @@ return [
         'chord-and-scale',
         'podcasts',
         'boot-camps',
-        'quick-tips'
+        'quick-tips',
+        'unit-part',
     ],
     'appUserListContentTypes' => [
         'course',

@@ -86,7 +86,7 @@
             @foreach($chapterThumbs as $index => $chapter)
                 <div class="flex flex-column chapter-thumb pa-1">
                     <a
-                        href="{{ url()->route('books.resources.chapter', [($index + 1)]) }}"
+                        href="{{ url()->route('platform.books.resources.chapter', [($index + 1)]) }}"
                         class="book-cover bg-black corners-5 overflow"
                     >
                         <div class="thumb-hover absolute-fill heading">
@@ -94,7 +94,7 @@
                         </div>
 
                         <img
-                            src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
+                            src="{{ $chapter }}"
                             data-ix-src="{{ $chapter }}"
                             data-ix-fade
                             alt="Foundations Chapter {{ $index }} Thumbnail"
@@ -108,5 +108,5 @@
 @endsection
 
 @section('layout-scripts')
-    <script src="{{ mix('assets/members/js/books.js') }}"></script>
+    <script src="{{ mix('platform/js/books.js') }}"></script>
 @endsection

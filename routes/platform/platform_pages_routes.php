@@ -423,6 +423,17 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo'])
             ->name('platform.legacy-resources.loops');
 
+        /**
+         * Pianote Foundation Book
+         */
+        Route::get('/{brand}/resources', [\App\Http\Controllers\Platform\BooksController::class, 'resources'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources');
+
+        Route::get('/{brand}/resources/level-{chapterNumber}', [\App\Http\Controllers\Platform\BooksController::class, 'chapter'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources.chapter');
+
 //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())

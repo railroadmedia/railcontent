@@ -1,4 +1,4 @@
-@if(!empty(current_user()))
+@if(!empty(user()))
     <div
         class="container fluid bg-grey-2 dark:tw-bg-[#002039] relative"
         style="z-index:2;"
@@ -10,7 +10,7 @@
                         <div class="flex flex-column avatar-col">
                             <div class="square">
                                 <img
-                                    src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
+                                    src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/lisa-witt.jpg"
                                     data-ix-src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/lisa-witt.jpg"
                                     data-ix-fade
                                     class="rounded"
@@ -60,16 +60,16 @@
 <div id="askQuestionModal" class="modal">
     <div class="flex flex-column bg-white shadow corners-3 pa-2">
         <h1 class="heading mb-2">Ask a Question</h1>
-        @if(!empty(current_user()))
+        @if(!empty(user()))
             <email-form
-                    email-subject="Question Asked by: {{ current_user()->getDisplayName() }} ({{ current_user()->getEmail() }})"
+                    email-subject="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
                     brand="pianote"
                     recipient="{{ config('mail-recipients.ask-question-form') ?? 'brett@musora.com' }}"
                     input-label="Ask your question here..."
                     email-type="layouts/inline/alert"
                     email-endpoint="/mailora/secure/send"
                     email-logo="https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png"
-                    email-alert="Question Asked by: {{ current_user()->getDisplayName() }} ({{ current_user()->getEmail() }})"
+                    email-alert="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
                     theme-color="pianote"
                     success-message="Question successfully sent!"
                     :lesson-page="false"></email-form>
