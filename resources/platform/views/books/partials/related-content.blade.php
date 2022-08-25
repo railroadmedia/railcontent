@@ -47,7 +47,7 @@
                 @if(!empty($relatedLesson['content_id']))
                     @if($hasAccess)
                         <a
-                            href="{{ url()->route('members.content.shareable', [$relatedLesson['content_id']]) }}"
+                            href="{{ url()->route('platform.content.jump-to-content-id', [$relatedLesson['content_id']]) }}"
                             class="btn short text-pianote flat bg-pianote"
                             target="_blank"
                         >

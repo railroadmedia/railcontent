@@ -10,7 +10,7 @@
                 <div class="thumb-wrap corners-3 overflow">
                     <div class="thumb-img widescreen bg-center">
                         <img
-                            src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
+                            src="{{ $thumbnail }}"
                             data-ix-src="{{ $thumbnail }}"
                             data-ix-fade
                             alt="{{ $title }} Thumbnail"

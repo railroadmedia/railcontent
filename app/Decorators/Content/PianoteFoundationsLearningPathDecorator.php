@@ -13,7 +13,7 @@ class PianoteFoundationsLearningPathDecorator extends TypeDecoratorBase
      */
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->where('type', 'learning-path')->where('slug', 'foundations'); // todo: testing
+        $contentsOfType = $contents->where('type', 'learning-path')->where('slug', 'foundations-2019'); // todo: testing
 
         if ($contentsOfType->isEmpty()) {
             return $contents;
@@ -43,38 +43,7 @@ class PianoteFoundationsLearningPathDecorator extends TypeDecoratorBase
 
             foreach ($contentsOfType[$contentIndex]['units'] as $unitIndex => $unit) {
                 $contentsOfType[$contentIndex]['units'][$unitIndex]['lessons'] = $lessons[$unit['id']] ?? [];
-
-                if ($unit->fetch('completed') == true) {
-                    continue;
-                }
-
-                $contentsOfType[$contentIndex]['next_unit'] = $unit;
-
-                $currentIndex = 0;
-
-                foreach ($contentsOfType[$contentIndex]['units'][$unitIndex]['lessons'] as $lessonIndex => $lesson) {
-
-                    if ($lesson->fetch('completed') == true) {
-                        $currentIndex++;
-                    } else {
-                        $contentsOfType[$contentIndex]['current_lesson_index'] = $currentIndex;
-                        $contentsOfType[$contentIndex]['current_lesson'] =
-                            $contentsOfType[$contentIndex]['units'][$unitIndex]['lessons'][$currentIndex] ?? null;
-                        $contentsOfType[$contentIndex]['next_lesson'] =
-                            $contentsOfType[$contentIndex]['units'][$unitIndex]['lessons'][$currentIndex] ?? null;
-
-                        break;
-                    }
-
-                }
-
-                if (empty($contentsOfType[$contentIndex]['current_lesson']) &&
-                    !empty($contentsOfType[$contentIndex]['units'][$unitIndex]['lessons'][0])) {
-                    $contentsOfType[$contentIndex]['current_lesson'] =
-                        $contentsOfType[$contentIndex]['units'][$unitIndex]['lessons'][0] ?? null;
-                }
-
-                break;
+                $contentsOfType[$contentIndex]['units'][$unitIndex]['lesson_count'] = count($lessons[$unit['id']]) ?? 0;
             }
         }
 
