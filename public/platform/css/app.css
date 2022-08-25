@@ -22087,6 +22087,9 @@ a:visited{
 .tw-mr-3{
   margin-right: 0.75rem !important;
 }
+.tw-mb-1{
+  margin-bottom: 0.25rem !important;
+}
 .tw-mt-4{
   margin-top: 1rem !important;
 }
@@ -22113,9 +22116,6 @@ a:visited{
 }
 .tw-mb-\[30px\]{
   margin-bottom: 30px !important;
-}
-.tw-mb-1{
-  margin-bottom: 0.25rem !important;
 }
 .tw-mb-\[-2px\]{
   margin-bottom: -2px !important;
@@ -26116,6 +26116,9 @@ a:visited{
   }
   .xl\:tw-leading-none{
     line-height: 1 !important;
+  }
+  .xl\:tw-leading-tight{
+    line-height: 1.25 !important;
   }
 }
 @media (min-width: 1536px){
