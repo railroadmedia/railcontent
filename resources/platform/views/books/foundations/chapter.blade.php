@@ -98,7 +98,7 @@
                 <h1 class="heading dark:tw-text-white">Free Video Lessons</h1>
             </div>
             <div class="flex flex-row">
-                <div class="flex flex-column grow bb-grey-1-1 mb-3">
+                <div class="flex flex-column grow bb-grey-1-1 tw-border-[#445F74] mb-3">
                     @foreach($thisChapter['related_lessons'] as $relatedLesson)
                         @include('books.partials.related-content', [$relatedLesson])
                     @endforeach
@@ -124,14 +124,14 @@
 
     @if(!empty($thisChapter['backing_tracks']))
         <div class="container mb-3">
-            <div class="flex flex-row pv-3">
+            <div class="flex flex-row pv-3 tw-justify-center">
                 <h1 class="heading dark:tw-text-white">Backing Tracks</h1>
             </div>
 
             <div class="flex flex-row">
                 <a
                     href="{{ $thisChapter['backing_tracks'] }}"
-                    class="btn text-white bg-pianote"
+                    class="tw-btn-primary tw-bg-pianote"
                     download
                     target="_blank"
                 >
