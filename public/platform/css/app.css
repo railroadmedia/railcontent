@@ -23376,6 +23376,10 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(239 68 68 / var(--tw-border-opacity)) !important;
 }
+.tw-border-\[\#445F74\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
+}
 .tw-border-\[\#D4D4D8\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(212 212 216 / var(--tw-border-opacity)) !important;
@@ -23393,10 +23397,6 @@ a:visited{
 .tw-border-\[\#344858\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(52 72 88 / var(--tw-border-opacity)) !important;
-}
-.tw-border-\[\#445F74\]{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
 }
 .tw-border-\[\#223F57\]{
   --tw-border-opacity: 1 !important;
@@ -24363,6 +24363,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(75 85 99 / var(--tw-text-opacity)) !important;
 }
+.tw-text-black{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+}
 .tw-text-\[\#445F74\]{
   --tw-text-opacity: 1 !important;
   color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
@@ -24405,10 +24409,6 @@ a:visited{
 .tw-text-\[\#E5E5E5\]{
   --tw-text-opacity: 1 !important;
   color: rgb(229 229 229 / var(--tw-text-opacity)) !important;
-}
-.tw-text-black{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 .tw-text-\[\#111827\]{
   --tw-text-opacity: 1 !important;

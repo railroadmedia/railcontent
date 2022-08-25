@@ -107,8 +107,8 @@
 
                 {{-- Mobile Small Sidebar --}}
                 <div class="flex flex-column mb-3 hide-sm-up">
-                    <div class="flex flex-row mb-2 ph-1">
-                        <h6 class="title text-black dark:tw-text-white">
+                    <div class="flex flex-row mb-2">
+                        <h6 class="tw-text-3xl text-black dark:tw-text-white tw-font-bold">
                             Related Lessons
                         </h6>
                     </div>
@@ -179,8 +179,8 @@
 
             {{-- Desktop Sidebar --}}
             <div class="flex flex-column mb-3 hide-xs-only xl:tw-max-w-[420px]">
-                <div class="flex flex-row mb-2 ph-1">
-                    <h6 class="title text-black dark:tw-text-white">
+                <div class="flex flex-row mb-2">
+                    <h6 class="tw-text-3xl text-black dark:tw-text-white tw-font-bold">
                         Related Lessons
                     </h6>
                 </div>

@@ -12,7 +12,7 @@
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=3048a04735d43bb461bac292840ba56e",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=d775b1b40a7d6b56461fb665100dc802",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=c1df6c61cdf079c0e7f0feedbb3e1859",
-    "/platform/css/app.css": "/platform/css/app.css?id=e0a56edd15b6f7ffa5c5ae6e5f3d9e8a",
+    "/platform/css/app.css": "/platform/css/app.css?id=ebfb2214b6114c312a230f1aa8036d90",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=c0d1f718effc958056637c6015d2ac2d",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=394feae81c9044a88b8750c51b5ada5a",
@@ -22,6 +22,6 @@
     "/platform/js/student-review-form.js": "/platform/js/student-review-form.js?id=7c7d334a394bac0b548062d677951d8d",
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=6344d0fecc2a8e8defce5e7089d74c5d",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=a0fd581dd961a82ea00212b1624f43a5",
-    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=ab48f0f9db2a1737f69342b85de55afd",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=7ccda35a4015486a29bdd75cf55426db",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=76d3e8e540f1a1052406e265ee6ca790"
 }
