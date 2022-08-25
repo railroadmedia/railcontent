@@ -26117,9 +26117,6 @@ a:visited{
   .xl\:tw-leading-none{
     line-height: 1 !important;
   }
-  .xl\:tw-leading-tight{
-    line-height: 1.25 !important;
-  }
 }
 @media (min-width: 1536px){
   .\32xl\:tw-mt-0{
