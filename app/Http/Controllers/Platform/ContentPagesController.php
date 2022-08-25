@@ -230,7 +230,7 @@ class ContentPagesController extends BaseController
             );
         }
 
-        $childrenContent =
+        $childrenContent = $firstLevelContent['units'] ??
             $this->contentService->getByParentIdWhereTypeIn(
                 $firstLevelContent['id'],
                 [ContentTypeHierarchyMap::$map[$firstLevelContent['type']]]
@@ -273,8 +273,7 @@ class ContentPagesController extends BaseController
             }
         }
 
-        $progressLabelText =
-            $firstLevelContent->fetch('level_rank') ? 'Level - '.$firstLevelContent->fetch('level_rank') : '';
+        $progressLabelText = 'Level - '.$firstLevelContent->fetch('level_rank','1.1');
 
         return view('content.overview', [
                                           "parentContent" => $firstLevelContent,
@@ -351,7 +350,7 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank','1.1');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -445,7 +444,7 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank','1.1');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -1146,7 +1145,16 @@ class ContentPagesController extends BaseController
                                                                       $contentRow->id,
                                                                   ]);
         }
-
+        if (in_array($contentRow->type, ContentTypes::singularContentTypes())) {
+            return $this->videoLessonPage(
+                $request,
+                $domain,
+                brand(),
+                '',
+                $contentRow->slug,
+                $contentRow->id
+            );
+        }
         if (empty($contentRow)) {
             throw new NotFoundHttpException();
         }
