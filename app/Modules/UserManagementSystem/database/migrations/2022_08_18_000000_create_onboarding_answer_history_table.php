@@ -20,6 +20,7 @@ class CreateOnboardingAnswerHistoryTable extends Migration
                 $table->string('brand')->nullable();
                 $table->string('onboarding_question');
                 $table->text('onboarding_answer');
+                $table->text('coach_name')->nullable();
                 $table->timestamps();
             });
         }

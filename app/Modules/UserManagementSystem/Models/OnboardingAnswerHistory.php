@@ -55,7 +55,7 @@ class OnboardingAnswerHistory extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'user_id', 'brand', 'onboarding_question', 'onboarding_answer'];
+    protected $fillable = [ 'user_id', 'brand', 'onboarding_question', 'onboarding_answer', 'coach_name'];
 
     public function user()
     {

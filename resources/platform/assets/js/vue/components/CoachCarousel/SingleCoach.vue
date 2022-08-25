@@ -25,7 +25,7 @@ const isCoachFollowed = ref(props.isFollowed);
 
 const followEndpoint = (id, name) => {
 
-    saveCoachHistoryData({coachName: name})
+    saveCoachHistoryData({coachName: name, coachId: id})
     .then(response => response)
     .catch(error => {console.error(error)});
   return ContentAPI.followCoach({ coachId: id });

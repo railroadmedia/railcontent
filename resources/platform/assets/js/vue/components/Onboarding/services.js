@@ -24,6 +24,6 @@ export const saveInstrumentHistoryData = ({instrument}) => {
     return axios.get(`/user-management-system/onboarding-answer-history-instrument?instrument=${instrument}`);
 };
 
-export const saveCoachHistoryData = ({coachName}) => {
-    return axios.get(`/user-management-system/onboarding-answer-history-coach?coach=${coachName}`);
+export const saveCoachHistoryData = ({coachName, coachId}) => {
+    return axios.get(`/user-management-system/onboarding-answer-history-coach?coachName=${coachName}&coachId=${coachId}`);
 }

@@ -163,15 +163,18 @@ class OnboardingController extends Controller
     public function saveOnboardingHistoryForCoach(Request $request)
     {
         try {
-            $request->validate(['coach' => 'string|required|not-in:undefined']);
+            $request->validate(['coachName' => 'string|required|not-in:undefined']);
+            $request->validate(['coachId' => 'integer|required|not-in:undefined']);
+
         } catch (ValidationException $e) {
-            $message = ['error' => 'Get parameter coach is missing'];
+            $message = ['error' => 'Get parameter is missing from onboarding-answer-history-coach api request.'];
             return response($message, 400);
         }
 
         OnboardingAnswerHistory::create([
             'onboarding_question' => OnboardingAnswerHistory::QUESTION_COACH,
-            'onboarding_answer' => $request->get('coach'),
+            'onboarding_answer' => $request->get('coachId'),
+            'coach_name' => $request->get('coachName'),
             'brand' => brand(),
             'user_id' => user()->id
         ]);
