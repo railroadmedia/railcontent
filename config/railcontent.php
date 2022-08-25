@@ -673,7 +673,7 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
-                'shortname' => 'Quick Tips',
+                'shortname' => 'Courses',
                 "icon" => "icon-courses",
                 "description" => "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.",
                 'amountOfFutureLessonsToShow' => 3,
