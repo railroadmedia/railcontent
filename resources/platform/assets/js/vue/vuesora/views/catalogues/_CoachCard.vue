@@ -19,14 +19,14 @@
       style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
     >
       <h3
-        class="tw-uppercase tw-font-bebas-neue tw-text-white tw-text-2xl xl:tw-text-3xl tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-4 tw-text-center"
+        class="tw-uppercase tw-font-bebas-neue tw-text-white tw-text-2xl xl:tw-text-3xl xl:tw-leading-none tw-break-all tw-leading-tight md:tw-leading-none tw-mt-auto tw-mb-2 tw-text-center"
       >
         <span>{{ coachFirstName }}</span
         ><br />
         <span v-if="hasLastName">{{ coachLastName }}</span>
       </h3>
-      <p class="tw-text-yellow-400 tw-text-xs tw-h-8 tw-leading-snug tw-mb-8 tw-uppercase">{{ coachFocus }}</p>
-      <div v-if="item.is_house_coach" class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
+      <p class="tw-text-yellow-400 tw-text-xs tw-h-8 tw-leading-snug tw-mb-4 tw-uppercase">{{ coachFocus }}</p>
+      <div v-if="item.is_house_coach" class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center">
         <musora-icon 
             icon-name="whistle-filled"
             height="12" 

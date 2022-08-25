@@ -57,7 +57,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::group([], base_path('routes/routes.php')); // not actually needed
             Route::group([], base_path('routes/misc/manifest_files_routes.php'));
-            Route::group([], base_path('routes/misc/http_error_code_routes.php'));
             Route::group([], base_path('routes/platform/platform_pages_routes.php'));
 
             Route::group([], base_path('routes/musora/marketing/homepage.php'));
@@ -70,6 +69,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/guitareo/homepage.php'));
             Route::group([], base_path('routes/pianote/homepage.php'));
             Route::group([], base_path('routes/singeo/homepage.php'));
+
+            Route::group([], base_path('routes/misc/http_error_code_routes.php'));
         });
     }
 }

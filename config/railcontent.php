@@ -1071,6 +1071,7 @@ return [
         'boot-camps',
         'quick-tips',
         'unit-part',
+        'song-part',
     ],
     'appUserListContentTypes' => [
         'course',

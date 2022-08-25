@@ -219,7 +219,8 @@ class ContentPagesController extends BaseController
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
         }
 
-        if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes())) {
+        $areMultipartSongs = ($primaryPage == 'songs' && (in_array($brand,['pianote','guitareo'])));
+        if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes()) && !$areMultipartSongs) {
             return $this->videoLessonPage(
                 $request,
                 $domain,
@@ -258,6 +259,7 @@ class ContentPagesController extends BaseController
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
+            "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
         ];
 
         // attach the trailer video from vimeo
@@ -282,8 +284,8 @@ class ContentPagesController extends BaseController
                                           "showLevels" => true,
                                           "progressLabelText" => $progressLabelText,
                                           "infoData" => $infoData,
-                                          "nextLessonUrl" => $nextLessonUrl,
-                                          "nextLessonJson" => $nextLessonJson,
+                                          "nextLessonUrl" => !$areMultipartSongs?$nextLessonUrl:'',
+                                          "nextLessonJson" => !$areMultipartSongs?$nextLessonJson:'',
                                           "xpBonus" => $xpBonus,
                                           'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
                                       ]);
@@ -720,6 +722,28 @@ class ContentPagesController extends BaseController
 
         $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildrenTrimmed]))->toResponseRawJson();
 
+        $rangesVideoIds = [];
+        if($primaryPage == 'songs' && $brand == 'singeo') {
+            $rangesVideoIds = [];
+            $ranges = ['low', 'original', 'high'];
+            $contentToRenderAsLesson['ranges'] = [];
+
+            foreach ($contentToRenderAsLesson['fields'] as $field) {
+                foreach ($ranges as $range) {
+                    $fetchFieldTemplate = 'fields.%s_video.fields.youtube_video_id';
+                    $fetchFieldString = sprintf($fetchFieldTemplate, $range);
+                    $videoId = $contentToRenderAsLesson->fetch($fetchFieldString);
+
+                    if (!empty($videoId)) {
+                        $rangesVideoIds[$range] = $videoId;
+                        $contentToRenderAsLesson['ranges'][] = $range;
+                    }
+                }
+
+                $contentToRenderAsLesson['ranges'] = array_unique($contentToRenderAsLesson['ranges'] ?? []);
+            }
+        }
+
         return view('content.lesson', [
                                         "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
                                         "lessonType" => $contentToRenderAsLesson['type'],
@@ -738,6 +762,7 @@ class ContentPagesController extends BaseController
                                         "nextLessonJson" => content_to_json($nextChild),
                                         "showEmail" => false,
                                         "firstContent" => $firstContent,
+                                        "rangesVideoIds" => $rangesVideoIds
                                     ]);
     }
 
