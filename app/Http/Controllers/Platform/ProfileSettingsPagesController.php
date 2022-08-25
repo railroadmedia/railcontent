@@ -69,7 +69,7 @@ class ProfileSettingsPagesController extends BaseController
     {
         return view('account.settings.membership', [
             'user' => user(),
-            'sections' => $this->settingSections('settings'),
+            'sections' => $this->settingSections('account details'),
             'allBrands' => all_brands(),
             'selectedBrand' => $request->get('selected-brand', $brand)
         ]);
@@ -177,7 +177,7 @@ class ProfileSettingsPagesController extends BaseController
 
         return view('account.settings.payments', [
             'user' => user(),
-            'sections' => $this->settingSections('settings'),
+            'sections' => $this->settingSections('payments'),
             'allBrands' => all_brands(),
             'selectedBrand' => $request->get('selected-brand', $brand)
         ]);
@@ -220,7 +220,7 @@ class ProfileSettingsPagesController extends BaseController
                     "url" => url()->route('platform.profile.settings.membership', ['userId' => user()->id]),
                     'icon' => 'fas fa-calendar-alt',
                     'title' => 'Account Details',
-                    'active' => $section === 'access',
+                    'active' => $section === 'account details',
                 ],
             ];
         } catch (\Exception $exception) {
