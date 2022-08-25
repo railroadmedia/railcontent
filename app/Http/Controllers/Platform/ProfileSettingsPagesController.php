@@ -6,11 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ProductAccessMap;
 use App\Services\User\UserAccessService;
 use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
 use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
-use Railroad\Ecommerce\Entities\Payment;
-use Railroad\Ecommerce\Services\ResponseService;
-use Railroad\Location\Services\CountryListService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
 
@@ -21,11 +17,12 @@ class ProfileSettingsPagesController extends BaseController
     /**
      * @param NotificationSettingsService $notificationSettingsService
      */
-    public function __construct(NotificationSettingsService $notificationSettingsService, UserSignaturesRepository $userSignaturesRepository)
-    {
+    public function __construct(
+        NotificationSettingsService $notificationSettingsService,
+        UserSignaturesRepository $userSignaturesRepository
+    ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
-
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
@@ -57,7 +54,11 @@ class ProfileSettingsPagesController extends BaseController
             'user' => user(),
             'signature' => ($userSignature) ? $userSignature['signature'] : '', // todo: railforums integration
             'sections' => $this->settingSections('settings'),
-            'userNotificationsSettings' => $this->notificationSettingsService->getUserNotificationSettings(user()->id, null, $request->get('selected-brand', $brand)),
+            'userNotificationsSettings' => $this->notificationSettingsService->getUserNotificationSettings(
+                user()->id,
+                null,
+                $request->get('selected-brand', $brand)
+            ),
             'allBrands' => all_brands(),
             'selectedBrand' => $request->get('selected-brand', $brand)
 
@@ -66,10 +67,15 @@ class ProfileSettingsPagesController extends BaseController
 
     public function membership(Request $request, $domain, $brand, $userId)
     {
-        return 'WIP.';
+        return view('account.settings.membership', [
+            'user' => user(),
+            'sections' => $this->settingSections('settings'),
+            'allBrands' => all_brands(),
+            'selectedBrand' => $request->get('selected-brand', $brand)
+        ]);
     }
 
-    public function payments(Request $request)
+    public function payments(Request $request, $domain, $brand, $userId)
     {
 //        $this->ecommerceEntityManager->getFilters()
 //            ->disable('soft-deleteable');
@@ -169,7 +175,12 @@ class ProfileSettingsPagesController extends BaseController
 //            'cartJson' => json_encode($this->cartService->toArray()),
 //        ]);
 
-        return 'WIP.';
+        return view('account.settings.payments', [
+            'user' => user(),
+            'sections' => $this->settingSections('settings'),
+            'allBrands' => all_brands(),
+            'selectedBrand' => $request->get('selected-brand', $brand)
+        ]);
     }
 
     /**
