@@ -133,7 +133,6 @@
 
     <div class="flex flex-col-reverse sm:flex-row full">
         <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
-            
             {{-- Recaptcha Form Component --}}
             {{-- <recaptcha :siteKey="captchakey"
                         @update:verified="formVerified = $event"
@@ -144,7 +143,7 @@
             ])
             @endcomponent
         </div>
-        
+
         <div class="sm:w-72 sm:ml-auto">
             <!-- File Upload Button -->
             @component('_partials.components.forms.file-input',[
@@ -173,6 +172,7 @@
         </div>
 
     </div>
+
 
     <!-- SUBMIT BUTTON -->
     <button class="btn-primary bg-drumeo self-start mr-auto w-full sm:w-min"
@@ -219,7 +219,7 @@
             formValid: true, //update this
             formVerified: true, //update this
             formSuccessful: false, //update this
-            responseMessageVisible: false, 
+            responseMessageVisible: false,
             invalids: {
                 name: false,
                 email: {
@@ -230,7 +230,7 @@
                 description: false,
                 supportOption: false,
             },
-            hasValidated: false, 
+            hasValidated: false,
             submitForm(){
 
                 if(this.formData.name === ''){
@@ -257,10 +257,39 @@
 
                 grecaptcha.ready(() => {
                     grecaptcha.execute('6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx', { action: 'post' }).then((token) => {
-                        
+
                         console.log(token);
-                    
+
                     })
+                })
+
+                const formDataObj = new FormData();
+                formDataObj.append('type', 'support-contact');
+                formDataObj.append('subject', 'Contact request');  // append email or name
+                formDataObj.append('studentName', this.formData.name);
+                formDataObj.append('studentEmail', this.formData.email);
+                formDataObj.append('isMember', this.formData.membership);
+                formDataObj.append('supportOption', this.formData.supportOption);
+                formDataObj.append('message', this.formData.description);
+                formDataObj.append('attachment', this.formData.attachment);
+                formDataObj.append('logo', "https://dmmior4id2ysr.cloudfront.net/logos/musora-logo.png");
+                formDataObj.append('recipient', "support@musora.com");
+
+                axios.post("{{url()->route('mailora.public.send') }}", formDataObj, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                ).then((response) => {
+                    if (response) {
+                        this.formSuccessful = true;
+                        this.responseMessageVisible = true;
+                        this.formData.name = '';
+                        this.formData.membership = '';
+                        this.formData.supportOption = '';
+                        this.formData.description = '';
+                        this.formData.email = '';
+                    }
                 })
             }
         }
