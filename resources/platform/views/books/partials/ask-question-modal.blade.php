@@ -1,10 +1,10 @@
 @if(!empty(user()))
     <div
-        class="container fluid bg-grey-2 dark:tw-bg-[#002039] relative"
+        class="tw-w-full bg-grey-2 dark:tw-bg-[#002039] relative"
         style="z-index:2;"
     >
-        <div class="container pv-2 collapsed-h">
-            <div class="flex flex-row align-center flex-wrap nmh-1">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-py-4">
+            <div class="tw-flex tw-flex-row tw-justify-center tw-flex-wrap tw-w-full nmh-1">
                 <div class="flex flex-column xs-12 sm-6 md-5 pa-1">
                     <div class="flex flex-row">
                         <div class="flex flex-column avatar-col">
@@ -62,17 +62,18 @@
         <h1 class="heading mb-2">Ask a Question</h1>
         @if(!empty(user()))
             <email-form
-                    email-subject="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
-                    brand="pianote"
-                    recipient="{{ config('mail-recipients.ask-question-form') ?? 'brett@musora.com' }}"
-                    input-label="Ask your question here..."
-                    email-type="layouts/inline/alert"
-                    email-endpoint="/mailora/secure/send"
-                    email-logo="https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png"
-                    email-alert="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
-                    theme-color="pianote"
-                    success-message="Question successfully sent!"
-                    :lesson-page="false"></email-form>
+                email-subject="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
+                brand="pianote"
+                recipient="{{ config('mail-recipients.ask-question-form') ?? 'brett@musora.com' }}"
+                input-label="Ask your question here..."
+                email-type="layouts/inline/alert"
+                email-endpoint="/mailora/secure/send"
+                email-logo="https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png"
+                email-alert="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
+                theme-color="pianote"
+                success-message="Question successfully sent!"
+                :lesson-page="false">
+            </email-form>
         @endif
         {{--<form--}}
             {{--action="{{ url()->route('books.resources.ask-question') }}"--}}
