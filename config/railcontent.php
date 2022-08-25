@@ -157,6 +157,7 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit'
         ],
         'completed' => [
             'course',
@@ -178,6 +179,7 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit'
         ],
     ],
 
@@ -870,7 +872,7 @@ return [
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",

@@ -63,7 +63,7 @@ export default {
             <button @click="handleClose" class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
                 <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
             </button>
-            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-10 tw-h-screen md:tw-justify-center tw-relative">
+            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-10 tw-h-screen md:tw-items-center md:tw-justify-center tw-relative">
                 <h2 class="tw-mb-[36px] tw-w-full tw-text-2xl md:tw-text-3xl tw-text-center tw-font-extrabold tw-text-white">
                     What instrument would you like to learn? 
                 </h2>
