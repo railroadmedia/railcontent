@@ -6,7 +6,7 @@ use App\ViewComposers\NavigationViewComposer;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
-use Railroad\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
+use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;

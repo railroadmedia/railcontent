@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\EventDataSynchronizer\Providers\UserProviderInterface;
+use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 
 class EventDataSynchronizerUserProvider implements UserProviderInterface
 {

@@ -37,7 +37,7 @@ class HelpScoutUserService extends HelpScoutServiceBase
     {
         $userId = $this->getUserIdFromHelpScoutCustomerId($helpScoutCustomerId);
         if (!$userId) {
-            $userId = $this->userService->getUserOrNullByEmail($helpScoutEmail)?->id;
+            $userId = $this->userService->getByEmailOrNull($helpScoutEmail)?->id;
         }
         return $userId;
     }
@@ -58,7 +58,7 @@ class HelpScoutUserService extends HelpScoutServiceBase
             if (!$email) {
                 continue;
             }
-            $user = $this->userService->getUserOrNullByEmail($email);
+            $user = $this->userService->getByEmailOrNull($email);
             if ($user) {
                 $helpScoutUser = $localHelpScoutUserData->where(
                     'helpscout_user_id',

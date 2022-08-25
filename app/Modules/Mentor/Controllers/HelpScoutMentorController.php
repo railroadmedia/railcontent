@@ -23,7 +23,7 @@ class HelpScoutMentorController extends Controller
         $conversationId = $request->input("id");
         $helpScoutUserId = $request->input('createdBy.id');
         $helpScoutUserEmail = $request->input('createdBy.email') ?? '';
-        $this->helpScoutMentorService->newHelpScoutConveration($conversationId, $helpScoutUserId, $helpScoutUserEmail);
+        $this->helpScoutMentorService->newHelpScoutConversation($conversationId, $helpScoutUserId, $helpScoutUserEmail);
     }
 
 

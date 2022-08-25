@@ -13,9 +13,7 @@ use Railroad\Ecommerce\Services\DateTimeService;
 class UnassignMentors extends Command
 {
 
-    protected $name = 'UnassignMentors';
-
-    protected $signature = 'UnassignMentors';
+    protected $signature = 'mentors:unassign';
 
     /**
      * The console command description.

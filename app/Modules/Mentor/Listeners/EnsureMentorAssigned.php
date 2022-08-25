@@ -14,7 +14,7 @@ class EnsureMentorAssigned
         $this->mentorService = $mentorService;
     }
 
-    public function handle(GiveContentAccess $event)
+    public function handle(GiveContentAccess $event): void
     {
         $userId = $event->order->getUser()->getId();
         $this->mentorService->ensureMentorAssigned($userId);

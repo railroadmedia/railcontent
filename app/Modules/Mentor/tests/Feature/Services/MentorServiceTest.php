@@ -2,7 +2,6 @@
 
 namespace App\Modules\Mentor\tests\Feature\Services;
 
-use App\Modules\Brand\Enums\Brand;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Services\MentorService;
 use Modules\UserManagementSystem\Models\User;
