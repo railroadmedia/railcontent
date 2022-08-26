@@ -271,8 +271,6 @@ class ContentPagesController extends BaseController
                 case 'singeo':
                     $methodSlug = 'singeo-method';
                     break;
-                default:
-                    throw new NotFoundHttpException();
             }
             $methodContent =$this->contentService->getBySlugAndType($methodSlug, 'learning-path')->first();
             $backButton = [
