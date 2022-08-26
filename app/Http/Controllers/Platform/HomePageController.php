@@ -219,7 +219,7 @@ class HomePageController extends BaseController
             $this->contentService->getNextContentForParentContentForUser($methodContent['id'], user()->id);
 
         $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
-        $nextLearningPathLevel = $methodContent['level_rank'] ?? '1.1';
+        $nextLearningPathLevel = $methodContent['higher_key_progress'] ?? '1.1';
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
 
         $upcomingEventsCount = $upcomingEvents->count();

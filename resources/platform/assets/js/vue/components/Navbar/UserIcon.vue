@@ -84,7 +84,7 @@ export default {
         :name="userName"
         :onOptionClick="() => {}"
         :userPhoto="userAvatar"
-        :accountUrl="accountUrl"
+        :href="accountUrl.length ? accountUrl : '/profile'"
       />
       <OptionGroup>
         <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
