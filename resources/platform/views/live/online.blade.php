@@ -41,6 +41,7 @@
                             <div class="tw-flex tw-flex-col tw-grow">
                                 <content-assignment
                                     theme-color="{{ $brand }}"
+                                    brand="{{ $brand }}"
                                     timecode="{{ $assignment->fetch('data.timecode', 0) }}"
                                     id="{{ $assignment->fetch('id') }}"
                                     xp="{{ $assignment->fetch('xp') }}"
