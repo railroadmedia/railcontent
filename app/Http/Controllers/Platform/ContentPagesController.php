@@ -257,10 +257,36 @@ class ContentPagesController extends BaseController
 
         $xpBonus = $firstLevelContent->fetch('xp_bonus', 0);
 
-        $backButton = [
-            "text" => "&laquo; Learning Paths",
-            "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
-        ];
+        if ($primaryPage == "method") {
+            switch (brand()) {
+                case 'drumeo':
+                    $methodSlug = 'drumeo-method';
+                    break;
+                case 'pianote':
+                    $methodSlug = 'pianote-method';
+                    break;
+                case 'guitareo':
+                    $methodSlug = 'guitareo-method';
+                    break;
+                case 'singeo':
+                    $methodSlug = 'singeo-method';
+                    break;
+                default:
+                    throw new NotFoundHttpException();
+            }
+            $methodContent =$this->contentService->getBySlugAndType($methodSlug, 'learning-path')->first();
+            $backButton = [
+                "text" => "&laquo; Learning Paths",
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $methodContent['slug'], $methodContent['id']]),
+            ];
+        } else {
+            // for $primaryPage == "method"
+            $backButton = [
+                "text" => "Back to All Courses",
+                "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => 'courses']),
+            ];
+        }
+
 
         // attach the trailer video from vimeo
         $firstLevelContent =
