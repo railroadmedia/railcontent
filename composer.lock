@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6db6ac0e51ff226175f8a920a58d997a",
+    "content-hash": "eec2003bebfd0de72bd3fe272e3484e2",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.234.2",
+            "version": "3.234.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4e0edc577543d4c009c1a1b5d70d34f58b9f2e25"
+                "reference": "21ee9e4181c1e676b43018bd3743dd4c9f8bafc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4e0edc577543d4c009c1a1b5d70d34f58b9f2e25",
-                "reference": "4e0edc577543d4c009c1a1b5d70d34f58b9f2e25",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/21ee9e4181c1e676b43018bd3743dd4c9f8bafc2",
+                "reference": "21ee9e4181c1e676b43018bd3743dd4c9f8bafc2",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.3"
             },
-            "time": "2022-08-24T18:19:29+00:00"
+            "time": "2022-08-25T18:30:13+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -919,16 +919,16 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "07d15c8a766e664ec271ae84e5dfc597aeeb03b1"
+                "reference": "d93dbc5ef2e6e98a5b16ca5b07c3e15de9fd9113"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/07d15c8a766e664ec271ae84e5dfc597aeeb03b1",
-                "reference": "07d15c8a766e664ec271ae84e5dfc597aeeb03b1",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/d93dbc5ef2e6e98a5b16ca5b07c3e15de9fd9113",
+                "reference": "d93dbc5ef2e6e98a5b16ca5b07c3e15de9fd9113",
                 "shasum": ""
             },
             "require": {
@@ -983,9 +983,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/collections/issues",
-                "source": "https://github.com/doctrine/collections/tree/1.7.0"
+                "source": "https://github.com/doctrine/collections/tree/1.7.1"
             },
-            "time": "2022-08-18T05:44:45+00:00"
+            "time": "2022-08-23T18:47:41+00:00"
         },
         {
             "name": "doctrine/common",
@@ -7942,6 +7942,62 @@
                 "source": "https://github.com/railroadmedia/permissions/tree/v2.0.0"
             },
             "time": "2022-05-13T16:02:12+00:00"
+        },
+        {
+            "name": "railroad/points",
+            "version": "dev-v1.0-php-8-laravel-9-migration",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/points.git",
+                "reference": "21037979afac4e435b9afee25c88e26bb60744fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/points/zipball/21037979afac4e435b9afee25c88e26bb60744fb",
+                "reference": "21037979afac4e435b9afee25c88e26bb60744fb",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0",
+                "php": "^8.1",
+                "railroad/permissions": "^2.0",
+                "railroad/resora": "^2.0",
+                "railroad/response": "2.0.x-dev"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.4",
+                "phpunit/php-code-coverage": "^9.2.10",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Railroad\\Points\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Favor",
+                    "email": "calebfavor@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A user point tracking system, which is commonly used for tracking user XP, like in a video game.",
+            "keywords": [
+                "data",
+                "event",
+                "sync",
+                "synchronizer"
+            ],
+            "support": {
+                "issues": "https://github.com/railroadmedia/points/issues",
+                "source": "https://github.com/railroadmedia/points/tree/v1.0-php-8-laravel-9-migration"
+            },
+            "time": "2022-08-24T15:05:38+00:00"
         },
         {
             "name": "railroad/railanalytics",
@@ -15521,16 +15577,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.3.1",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "997363fbcce809b1e55f571997d49017f9c623d9"
+                "reference": "dd3d456779108d7078baf4e43f8c2b937d9794a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/997363fbcce809b1e55f571997d49017f9c623d9",
-                "reference": "997363fbcce809b1e55f571997d49017f9c623d9",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/dd3d456779108d7078baf4e43f8c2b937d9794a1",
+                "reference": "dd3d456779108d7078baf4e43f8c2b937d9794a1",
                 "shasum": ""
             },
             "require": {
@@ -15592,7 +15648,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-16T13:16:07+00:00"
+            "time": "2022-08-26T11:51:15+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -15754,7 +15810,8 @@
         "railroad/event-data-synchronizer": 20,
         "railroad/musora-api": 20,
         "railroad/railcontent": 20,
-        "railroad/railforums": 20
+        "railroad/railforums": 20,
+        "railroad/points": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
