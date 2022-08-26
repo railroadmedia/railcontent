@@ -149,6 +149,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -157,6 +158,7 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
             'unit'
         ],
         'completed' => [
@@ -172,6 +174,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -179,6 +182,7 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
             'unit'
         ],
     ],
