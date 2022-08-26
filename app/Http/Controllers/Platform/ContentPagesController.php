@@ -280,7 +280,7 @@ class ContentPagesController extends BaseController
                 "url" => url()->route('platform.content.first-level', [$primaryPage, $methodContent['slug'], $methodContent['id']]),
             ];
         } else {
-            // for $primaryPage == "method"
+            // for the situation when $primaryPage == "courses"
             $backButton = [
                 "text" => "Back to All Courses",
                 "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => 'courses']),
