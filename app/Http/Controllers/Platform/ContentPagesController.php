@@ -275,7 +275,7 @@ class ContentPagesController extends BaseController
             }
         }
 
-        $progressLabelText = 'Level - '.$firstLevelContent->fetch('level_rank','1.1');
+        $progressLabelText = ($primaryPage == 'method')?'Level - '.$firstLevelContent->fetch('higher_key_progress','1.1'):'';
 
         return view('content.overview', [
                                           "parentContent" => $firstLevelContent,
@@ -358,7 +358,7 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank','1.1');
+        $progressLabelText = 'Level - '.$firstContent->fetch('higher_key_progress','1.1');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -458,7 +458,7 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank','1.1');
+        $progressLabelText = 'Level - '.$firstContent->fetch('higher_key_progress','1.1');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
