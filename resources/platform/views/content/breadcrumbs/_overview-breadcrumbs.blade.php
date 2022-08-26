@@ -43,11 +43,7 @@
         "pages" => [
             [
                 "title" => 'Home',
-                "url" => url()->route('members.home'),
-            ],
-            [
-                "title" => 'Learning Paths',
-                "url" => url()->route('members.learning-paths.index'),
+                "url" => url()->route('platform.home'),
             ],
             [
                 "title" => $learningPath->fetch('fields.title'),

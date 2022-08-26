@@ -57,6 +57,7 @@ class InstructorDecorator extends ModeDecoratorBase
                     $coach['current_user_is_subscribed'] = in_array($coach['id'], $userSubscribedContents);
                     $coach['coach_profile_image'] = $field['value']->fetch('data.head_shot_picture_url');
                     $coach['name'] = $coachName;
+                    $coach['url'] = url()->route('platform.content.coach.show', [$coach['slug'], $coach['id']]);
                     $coaches[$coach['id']] = $coach;
                 }
             }

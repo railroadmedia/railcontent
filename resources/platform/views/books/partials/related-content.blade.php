@@ -4,7 +4,7 @@
             <div class="flex flex-column grow">
                 <div class="flex flex-row">
                     <div class="flex flex-column align-v-center grow">
-                        <h6 class="body font-bold text-black dark:tw-text-white text-truncate-2-lines">{{ $relatedLesson['title'] }}</h6>
+                        <h6 class="tw-font-bold tw-text-black dark:tw-text-white text-truncate-2-lines">{{ $relatedLesson['title'] }}</h6>
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
         <div
             class="flex flex-row align-v-center nmh-1"
         >
-            <div class="flex flex-column xs-4 ph-1">
+            <div class="flex flex-column ph-1">
                 @if(!empty($relatedLesson['external_link']))
                     <a
                             href="{{ $relatedLesson['external_link'] }}"
@@ -28,7 +28,7 @@
                 @endif
             </div>
 
-            <div class="flex flex-column xs-4 ph-1">
+            <div class="flex flex-column ph-1">
                 @if(!empty($relatedLesson['youtube_id']))
                     <button
                         class="btn short open-youtube-lesson"
@@ -43,11 +43,11 @@
                 @endif
             </div>
 
-            <div class="flex flex-column xs-4 ph-1">
+            <div class="flex flex-column ph-1">
                 @if(!empty($relatedLesson['content_id']))
                     @if($hasAccess)
                         <a
-                            href="{{ url()->route('members.content.shareable', [$relatedLesson['content_id']]) }}"
+                            href="{{ url()->route('platform.content.jump-to-content-id', [$relatedLesson['content_id']]) }}"
                             class="btn short text-pianote flat bg-pianote"
                             target="_blank"
                         >
