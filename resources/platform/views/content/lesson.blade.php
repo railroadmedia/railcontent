@@ -251,7 +251,7 @@
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
                     <div class="tw-flex tw-flex-col tw-mb-5">
-                        @if( ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song' )
+                        @if( $parent && (ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song' ))
                             <p class="tw-text-{{ $brand }} tw-text-sm tw-mb-1 tw-uppercase">{{ ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) }}</p>
                             <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                                 {{ $parent->fetch('fields.title') }}
