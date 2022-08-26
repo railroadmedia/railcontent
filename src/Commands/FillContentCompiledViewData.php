@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
 class FillContentCompiledViewData extends Command
@@ -37,7 +38,7 @@ class FillContentCompiledViewData extends Command
     {
         $this->info('Starting FillContentCompiledViewData...');
 
-        $dbConnection = $databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConnection = $databaseManager->connection(ConfigService::$connectionMaskPrefix . config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
 
         $totalProcessed = 0;

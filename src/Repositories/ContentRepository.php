@@ -10,6 +10,7 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\VideoTransformer;
 
@@ -65,6 +66,8 @@ class ContentRepository extends RepositoryBase
     private $slugHierarchy = [];
     private $requiredParentIds = [];
 
+    private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
+
     /**
      * @var ContentPermissionRepository
      */
@@ -84,7 +87,6 @@ class ContentRepository extends RepositoryBase
      * @var ContentHierarchyRepository
      */
     private $contentHierarchyRepository;
-
     /**
      * @var ContentInstructorRepository
      */
@@ -93,6 +95,7 @@ class ContentRepository extends RepositoryBase
      * @var ContentStyleRepository
      */
     private $contentStyleRepository;
+
     /**
      * @var ContentBpmRepository
      */
@@ -142,7 +145,8 @@ class ContentRepository extends RepositoryBase
         ContentHierarchyRepository $contentHierarchyRepository,
         ContentInstructorRepository $contentInstructorRepository,
         ContentStyleRepository $contentStyleRepository,
-        ContentBpmRepository $contentBpmRepository
+        ContentBpmRepository $contentBpmRepository,
+        ContentCompiledColumnTransformer $contentCompiledColumnTransformer
     ) {
         parent::__construct();
 
@@ -153,6 +157,7 @@ class ContentRepository extends RepositoryBase
         $this->contentInstructorRepository = $contentInstructorRepository;
         $this->contentStyleRepository = $contentStyleRepository;
         $this->contentBpmRepository = $contentBpmRepository;
+        $this->contentCompiledColumnTransformer = $contentCompiledColumnTransformer;
     }
 
     /**
@@ -744,6 +749,10 @@ class ContentRepository extends RepositoryBase
                 ->where('slug', $slug)
                 ->where('type', $type)
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
+            return $this->contentCompiledColumnTransformer->transform($contentRows);
+        }
 
         $this->configurePresenterForResults($contentRows);
 
