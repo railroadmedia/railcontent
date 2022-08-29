@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -178,6 +179,10 @@ class ContentRepository extends RepositoryBase
         }
 
         $data = $contentRows[0] ?? null;
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($data)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows))[0] ?? null;
+        }
 
         $this->configurePresenterForResults($contentRows);
 

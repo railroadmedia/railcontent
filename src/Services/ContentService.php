@@ -123,7 +123,8 @@ class ContentService
     const STATUS_ARCHIVED = 'archived';
 
     const STATUS_DELETED = 'deleted';
-    private $idContentCache = [];
+
+    public $idContentCache = [];
 
     /**
      * @param ContentRepository $contentRepository
@@ -2362,6 +2363,11 @@ class ContentService
                                     }
                                 } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
                                     $jsonArray[$jsonArrayKey] = $subContentJsonArray;
+                                }
+
+                                // always set length in seconds on parent content data as well
+                                if (isset($subContentJsonArray['length_in_seconds'])) {
+                                    $jsonArray['length_in_seconds'] = $subContentJsonArray['length_in_seconds'];
                                 }
                             }
                         }

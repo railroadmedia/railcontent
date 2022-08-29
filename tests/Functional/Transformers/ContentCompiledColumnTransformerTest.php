@@ -1,523 +1,244 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Repositories;
+namespace Railroad\Railcontent\Tests\Functional\Transformers;
 
-use Illuminate\Support\Facades\Cache;
-use Railroad\Railcontent\Factories\CommentAssignationFactory;
-use Railroad\Railcontent\Factories\CommentFactory;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
-use Railroad\Railcontent\Factories\ContentDatumFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentHierarchyFactory;
-use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\PermissionsFactory;
-use Railroad\Railcontent\Factories\UserContentProgressFactory;
-use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
+use Carbon\Carbon;
+use Illuminate\Database\Events\StatementPrepared;
+use Illuminate\Support\Facades\Event;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use PDO;
+use Railroad\Railcontent\Providers\RailcontentServiceProvider;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Railcontent\Tests\Resources\Models\User;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
+use Railroad\Response\Providers\ResponseServiceProvider;
 
-class ContentCompiledColumnTransformerTest extends RailcontentTestCase
+class ContentCompiledColumnTransformerTest extends BaseTestCase
 {
+    /**
+     * NOTE: This test uses our real database and rows and must be connected to a local mysql database with
+     * production data. In the future we'll create proper content seeders/factories.
+     */
+
     /**
      * @var ContentService
      */
-    protected $classBeingTested;
-
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    /**
-     * @var ContentContentFieldFactory
-     */
-    protected $fieldFactory;
-
-    /**
-     * @var PermissionsFactory
-     */
-    protected $permissionFactory;
-
-    /**
-     * @var ContentPermissionsFactory
-     */
-    protected $contentPermissionFactory;
-
-    /**
-     * @var ContentHierarchyFactory
-     */
-    protected $contentHierarchyFactory;
-
-    /**
-     * @var ContentDatumFactory
-     */
-    protected $datumFactory;
-
-    /**
-     * @var ContentHierarchyRepository
-     */
-    protected $contentHierarchyRepository;
-
-    /**
-     * @var CommentFactory
-     */
-    protected $commentFactory;
-
-    /**
-     * @var CommentAssignationFactory
-     */
-    protected $commentAssignationFactory;
-
-    /**
-     * @var UserContentProgressFactory
-     */
-    protected $userContentProgressFactory;
-
-    public function _test_delete_content()
-    {
-        $parent = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        $otherContent = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        for ($i = 0; $i < 3; $i++) {
-            $expectedFields = $this->fieldFactory->create($content['id']);
-            $expectedData[] = $this->datumFactory->create($content['id']);
-            $children = $this->contentHierarchyFactory->create($content['id']);
-            $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-            $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
-        }
-
-        //save content in user playlist
-        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
-
-        $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
-
-        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherContent['id'], 2);
-
-        $results = $this->classBeingTested->delete($content['id']);
-
-        //check that the results it's true
-        $this->assertTrue($results);
-
-        //check that the content fields are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentFields,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-
-        //check that the content datum are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentData,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-
-        //check that the link with the parent was deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $content['id'],
-            ]
-        );
-
-        //check that the other children are repositioned correctly
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $otherContent['id'],
-                'child_position' => 1,
-            ]
-        );
-
-        //check the the links with the content children are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentHierarchy,
-            [
-                'parent_id' => $content['id'],
-            ]
-        );
-
-        //check that the content it's deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContent,
-            [
-                'id' => $content['id'],
-            ]
-        );
-
-        //check that the content comments and replies are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableComments,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-
-        //check that the comments/replies assignments are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableCommentsAssignment,
-            []
-        );
-
-        //check that the content it's deleted from the playlists
-        $this->assertDatabaseMissing(
-            ConfigService::$tableUserContentProgress,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-    }
-
-    public function _test_soft_delete_content()
-    {
-        $parent = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        $otherSiblingContent = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        for ($i = 0; $i < 3; $i++) {
-            $expectedFields = $this->fieldFactory->create($content['id']);
-            $expectedData[] = $this->datumFactory->create($content['id']);
-
-            $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-            $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
-        }
-
-        $children = $this->contentFactory->create();
-
-        $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
-
-        //save content in user playlist
-        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
-
-        $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
-
-        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherSiblingContent['id'], 2);
-
-        $results = $this->classBeingTested->softDelete($content['id']);
-
-        //check that the results it's true
-        $this->assertEquals(1, $results);
-
-        //check that the content it's marked as deleted
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $content['id'],
-                'status' => ContentService::STATUS_DELETED,
-            ]
-        );
-
-        //check that the content fields are not deleted
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentFields,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-
-        //check that the content datum are not deleted
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentData,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-
-        //check that the link with the parent was not deleted
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $content['id'],
-            ]
-        );
-
-        //check that the link with the parent was not deleted
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $children['id'],
-                'status' => ContentService::STATUS_DELETED,
-            ]
-        );
-
-        //check that the siblings was repositioned
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $otherSiblingContent['id'],
-                'child_position' => $otherChildLink['child_position'] - 1,
-            ]
-        );
-    }
-
-    public function test_getWhereTypeInAndStatusAndPublishedOnOrdered()
-    {
-        $content1 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $content2 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_ARCHIVED
-        );
-
-        $results = $this->classBeingTested->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            [$content1['type']],
-            $content1['status'],
-            $content1['published_on']
-        )
-            ->toArray();
-
-        $this->assertEquals([$content1], $results);
-    }
-
-    public function test_getByChildIdWhereType()
-    {
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        $children = $this->contentFactory->create();
-        $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
-        $content['child_ids'] = [$children['id']];
-        $content['position'] = 1;
-        $content['parent_id'] = $content['id'];
-        $content['child_id'] = $children['id'];
-
-        $results =
-            $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type'])
-                ->toArray();
-
-        $this->assertEquals([$content], $results);
-    }
-
-    public function test_entireCacheNotFlushed()
-    {
-        $user = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $contentResponse = $this->classBeingTested->getById($content['id']);
-
-        CacheHelper::setPrefix();
-        Cache::store(ConfigService::$cacheDriver)
-            ->put('do_not_delete', 'a_value', 10);
-
-        $this->classBeingTested->update($contentResponse['id'], ['slug' => 'slug-' . rand()]);
-
-        $this->assertEquals(
-            'a_value',
-            Cache::store(ConfigService::$cacheDriver)
-                ->get('do_not_delete')
-        );
-
-        $this->classBeingTested->delete($contentResponse['id']);
-
-        $this->assertEquals(
-            'a_value',
-            Cache::store(ConfigService::$cacheDriver)
-                ->get('do_not_delete')
-        );
-    }
-
-    public function test_getAllByType()
-    {
-        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
-        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-
-        $results = $this->classBeingTested->getAllByType($type);
-
-        $this->assertEquals([$content1, $content2], $results->toArray());
-    }
-
-    public function test_getWhereTypeInAndStatusAndField()
-    {
-        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
-        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $fields = $this->fieldFactory->create($content1['id'], 'difficulty', 2, 1, 'string');
-        $results = $this->classBeingTested->getWhereTypeInAndStatusAndField(
-            [$type],
-            ContentService::STATUS_PUBLISHED,
-            'difficulty',
-            2,
-            'string'
-        );
-
-        $this->assertEquals(1, count($results));
-    }
-
-    public function test_getBySlugAndType()
-    {
-        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
-        $slug = $this->faker->slug();
-        $content1 = $this->contentFactory->create($slug, $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-
-        $results = $this->classBeingTested->getBySlugAndType($slug, $type);
-
-        $this->assertEquals(1, count($results));
-    }
-
-    public function test_getByUserIdTypeSlug()
-    {
-        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
-        $slug = $this->faker->slug();
-        $userId = $this->faker->numberBetween();
-        $content1 = $this->contentFactory->create($slug, $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
-        $content2 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            null,
-            null,
-            $userId
-        );
-
-        $results = $this->classBeingTested->getByUserIdTypeSlug($userId, $type, $slug);
-
-        $this->assertEquals(1, count($results));
-    }
-
-    public function test_getPaginatedByTypeUserProgressState()
-    {
-        $type = 'song';
-        $userId = $this->faker->numberBetween();
-
-        $content1 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            null,
-            null,
-            $userId
-        );
-        $content2 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            null,
-            null,
-            $userId
-        );
-
-        $playlist = $this->userContentProgressFactory->startContent($content1['id'], $userId);
-        $playlist = $this->userContentProgressFactory->startContent($content2['id'], $userId);
-
-        $results = $this->classBeingTested->getPaginatedByTypeUserProgressState($type, $userId, 'started');
-
-        $this->assertEquals(2, count($results));
-    }
-
-    public function test_getByContentFieldValuesForTypes()
-    {
-        $type = 'vimeo-video';
-        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $fields = $this->fieldFactory->create($content1['id'], 'length_in_seconds', 0, 1, 'string');
-        // $fields = $this->fieldFactory->create($content2['id'],'length_in_seconds',0,1,'string');
-        $results = $this->classBeingTested->getByContentFieldValuesForTypes(['vimeo-video'], 'length_in_seconds', [0]);
-
-        $this->assertEquals(1, count($results));
-    }
-
-    public function test_countByTypesUserProgressState()
-    {
-        $type = 'song';
-        $userId = $this->faker->numberBetween();
-
-        $content1 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            null,
-            null,
-            $userId
-        );
-        $content2 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            null,
-            null,
-            $userId
-        );
-
-        $playlist = $this->userContentProgressFactory->startContent($content1['id'], $userId);
-        $playlist = $this->userContentProgressFactory->startContent($content2['id'], $userId);
-
-        $results = $this->classBeingTested->countByTypesUserProgressState([$type], $userId, 'started');
-
-        $this->assertEquals(2, $results);
-    }
-
-    public function test_get_content_by_id()
-    {
-        $user = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $contentResponse1 = $this->classBeingTested->getById($content['id']);
-        $contentResponse2 = $this->classBeingTested->getById($content['id']);
-
-        $this->assertEquals($contentResponse1, $contentResponse2);
-        $this->assertEquals($content, $contentResponse1);
-    }
+    protected $contentService;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->classBeingTested = $this->app->make(ContentService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
+        config()->set('database.default', 'mysql');
+        config()->set('railcontent.database_connection_name', 'mysql');
+
+        $this->contentService = $this->app->make(ContentService::class);
+
+        Carbon::setTestNow(Carbon::now());
+
+        Event::listen(StatementPrepared::class, function ($event) {
+            /** @var StatementPrepared $event */
+            $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+        });
+
+        ContentRepository::$bypassPermissions = true;
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $defaultConfig = require(__DIR__ . '/../../../config/railcontent.php');
+
+        $app['config']->set('railcontent.elastic_index_name', 'testing');
+        $app['config']->set(
+            'railcontent.compiled_column_mapping_data_keys',
+            $defaultConfig['compiled_column_mapping_data_keys']
+        );
+        $app['config']->set(
+            'railcontent.compiled_column_mapping_field_keys',
+            $defaultConfig['compiled_column_mapping_field_keys']
+        );
+        $app['config']->set('railcontent.database_connection_name', 'mysql');
+        $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
+        $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
+        $app['config']->set('railcontent.data_mode', $defaultConfig['data_mode']);
+        $app['config']->set('railcontent.use_elastic_search', $defaultConfig['use_elastic_search']);
+        $app['config']->set('railcontent.brand', $defaultConfig['brand']);
+        $app['config']->set('railcontent.available_brands', $defaultConfig['available_brands']);
+        $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
+        $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
+        $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
+        $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
+        $app['config']->set('railcontent.showTypes', $defaultConfig['showTypes']);
+        $app['config']->set('railcontent.cataloguesMetadata', $defaultConfig['cataloguesMetadata']);
+        $app['config']->set('railcontent.topLevelContentTypes', $defaultConfig['topLevelContentTypes']);
+        $app['config']->set('railcontent.userListContentTypes', $defaultConfig['userListContentTypes']);
+        $app['config']->set('railcontent.appUserListContentTypes', $defaultConfig['appUserListContentTypes']);
+        $app['config']->set('railcontent.onboardingContentIds', $defaultConfig['onboardingContentIds']);
+        $app['config']->set('railcontent.validation', $defaultConfig['validation']);
+        $app['config']->set(
+            'railcontent.comment_assignation_owner_ids',
+            $defaultConfig['comment_assignation_owner_ids']
+        );
+        $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
+        $app['config']->set('railcontent.statistics_content_types', $defaultConfig['statistics_content_types']);
+        $app['config']->set('railcontent.contentColumnNamesForFields', $defaultConfig['contentColumnNamesForFields']);
+        $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
+        $app['config']->set(
+            'railcontent.allowed_types_for_bubble_progress',
+            $defaultConfig['allowed_types_for_bubble_progress']
+        );
+        $app['config']->set('railcontent.all_routes_middleware', $defaultConfig['all_routes_middleware']);
+        $app['config']->set('railcontent.user_routes_middleware', $defaultConfig['user_routes_middleware']);
+        $app['config']->set(
+            'railcontent.administrator_routes_middleware',
+            $defaultConfig['administrator_routes_middleware']
+        );
+
+        $xpConfig = require(__DIR__ . '/../../../config/xp_ranks.php');
+        $app['config']->set('xp_ranks', $xpConfig);
+
+        $app['config']->set('database.default', 'mysql');
+        $app['config']->set(
+            'database.connections.mysql',
+            [
+                'driver' => 'mysql',
+                'host' => 'mysql8',
+                'port' => env('MYSQL_PORT', '3306'),
+                'database' => 'musora_laravel',
+                'username' => 'root',
+                'password' => 'root',
+                'charset' => 'utf8mb4',
+                'collation' => 'utf8mb4_general_ci',
+                'prefix' => '',
+                'options' => [
+                    \PDO::ATTR_PERSISTENT => true,
+                ],
+            ]
+        );
+
+        // allows access to built in user auth
+        $app['config']->set('auth.providers.users.model', User::class);
+
+        $app['config']->set(
+            'railcontent.awsS3_remote_storage',
+            [
+                'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
+                'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
+                'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
+                'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
+            ]
+        );
+
+        $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
+
+        $app['config']->set(
+            'database.redis',
+            [
+                'client' => env('REDIS_CLIENT', 'predis'),
+
+                'options' => [
+                    'cluster' => env('REDIS_CLUSTER', 'redis'),
+                ],
+
+                'default' => [
+                    'url' => env('REDIS_URL', 'redis'),
+                    'host' => env('REDIS_HOST', 'redis'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 0,
+                ],
+
+                'cache' => [
+                    'url' => env('REDIS_URL', 'redis'),
+                    'host' => env('REDIS_HOST', 'redis'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 0,
+                ],
+            ],
+        );
+        $app['config']->set('cache.default', env('CACHE_DRIVER', 'array'));
+        $app['config']->set('railcontent.cache_prefix', $defaultConfig['cache_prefix']);
+        $app['config']->set('railcontent.cache_driver', $defaultConfig['cache_driver']);
+
+        $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
+        $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
+        $app['config']->set('railcontent.content_hierarchy_max_depth', $defaultConfig['content_hierarchy_max_depth']);
+        $app['config']->set(
+            'railcontent.content_hierarchy_decorator_allowed_types',
+            $defaultConfig['content_hierarchy_decorator_allowed_types']
+        );
+
+        // vimeo
+        $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
+
+        // register provider
+        $app->register(RailcontentServiceProvider::class);
+        $app->register(ResponseServiceProvider::class);
+    }
+
+
+    public function test_drumeo_quick_tip()
+    {
+        config()->set('railcontent.brand', 'drumeo');
+        ConfigService::$availableBrands = ['drumeo'];
+
+        ContentCompiledColumnTransformer::$useCompiledColumnForServingData = false;
+
+        $contentWithoutTransformer = $this->contentService->getById(197937);
+
+        ContentCompiledColumnTransformer::$useCompiledColumnForServingData = true;
+        $this->contentService->idContentCache = [];
+
+        $contentWithTransformer = $this->contentService->getById(197937);
+
+
+        // for each field and data make sure there is a match in the transformed data
+        $this->assertNotEmpty($contentWithTransformer);
+
+        foreach ($contentWithoutTransformer['data'] as $oldData) {
+            $matchFound = false;
+
+            foreach ($contentWithTransformer['data'] as $newData) {
+                if ($oldData['key'] === $newData['key'] &&
+                    $oldData['value'] == $newData['value'] &&
+                    $oldData['position'] == $newData['position']
+                ) {
+                    $matchFound = true;
+                }
+            }
+
+            if (!$matchFound) {
+                var_dump($oldData);
+                $this->fail('Could not find old data key inside the new transformed data.');
+            }
+        }
+
+        foreach ($contentWithoutTransformer['fields'] as $oldField) {
+            $matchFound = false;
+
+            foreach ($contentWithTransformer['fields'] as $newField) {
+                if ($oldField['key'] === $newField['key'] &&
+                    $oldField['value'] == $newField['value'] &&
+                    $oldField['position'] == $newField['position']
+                ) {
+                    $matchFound = true;
+                }
+            }
+
+            if (!$matchFound) {
+                var_dump($oldField);
+                $this->assertEquals($contentWithoutTransformer['fields'], $contentWithTransformer['fields']);
+                $this->fail('Could not find old field key inside the new transformed data.');
+            }
+        }
     }
 }
