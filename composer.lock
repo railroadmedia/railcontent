@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbeda6da95cc435068bc78ff88fb2ac3",
+    "content-hash": "6db6ac0e51ff226175f8a920a58d997a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.234.0",
+            "version": "3.234.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d2113f1e5ec9f7f19de2472f5063333b39a55280"
+                "reference": "21ee9e4181c1e676b43018bd3743dd4c9f8bafc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d2113f1e5ec9f7f19de2472f5063333b39a55280",
-                "reference": "d2113f1e5ec9f7f19de2472f5063333b39a55280",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/21ee9e4181c1e676b43018bd3743dd4c9f8bafc2",
+                "reference": "21ee9e4181c1e676b43018bd3743dd4c9f8bafc2",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.3"
             },
-            "time": "2022-08-22T18:20:42+00:00"
+            "time": "2022-08-25T18:30:13+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -491,26 +491,26 @@
         },
         {
             "name": "brick/math",
-            "version": "0.9.3",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "ca57d18f028f84f777b2168cd1911b0dee2343ae"
+                "reference": "459f2781e1a08d52ee56b0b1444086e038561e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/ca57d18f028f84f777b2168cd1911b0dee2343ae",
-                "reference": "ca57d18f028f84f777b2168cd1911b0dee2343ae",
+                "url": "https://api.github.com/repos/brick/math/zipball/459f2781e1a08d52ee56b0b1444086e038561e3f",
+                "reference": "459f2781e1a08d52ee56b0b1444086e038561e3f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.1 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.2",
-                "phpunit/phpunit": "^7.5.15 || ^8.5 || ^9.0",
-                "vimeo/psalm": "4.9.2"
+                "phpunit/phpunit": "^9.0",
+                "vimeo/psalm": "4.25.0"
             },
             "type": "library",
             "autoload": {
@@ -535,45 +535,41 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.9.3"
+                "source": "https://github.com/brick/math/tree/0.10.2"
             },
             "funding": [
                 {
                     "url": "https://github.com/BenMorel",
                     "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/brick/math",
-                    "type": "tidelift"
                 }
             ],
-            "time": "2021-08-15T20:50:18+00:00"
+            "time": "2022-08-10T22:54:19+00:00"
         },
         {
             "name": "brick/money",
-            "version": "0.5.3",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/money.git",
-                "reference": "49e6597470da74f6a9f1dd7d5286ea3b4756b7e0"
+                "reference": "7074e1bd463f517fb78447dff63454f4b1523c1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/money/zipball/49e6597470da74f6a9f1dd7d5286ea3b4756b7e0",
-                "reference": "49e6597470da74f6a9f1dd7d5286ea3b4756b7e0",
+                "url": "https://api.github.com/repos/brick/money/zipball/7074e1bd463f517fb78447dff63454f4b1523c1b",
+                "reference": "7074e1bd463f517fb78447dff63454f4b1523c1b",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "~0.7.3 || ~0.8.0 || ~0.9.0",
-                "php": "^7.1 || ^8.0"
+                "brick/math": "~0.10.1",
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "brick/varexporter": "~0.2.1",
+                "brick/varexporter": "~0.3.0",
                 "ext-dom": "*",
                 "ext-pdo": "*",
                 "php-coveralls/php-coveralls": "^2.2",
-                "phpunit/phpunit": "^7.5.15 || ^8.0 || ^9.0",
-                "vimeo/psalm": "4.9.2"
+                "phpunit/phpunit": "^9.4.3",
+                "vimeo/psalm": "4.23.0"
             },
             "suggest": {
                 "ext-intl": "Required to format Money objects"
@@ -596,19 +592,15 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/money/issues",
-                "source": "https://github.com/brick/money/tree/0.5.3"
+                "source": "https://github.com/brick/money/tree/0.6.0"
             },
             "funding": [
                 {
                     "url": "https://github.com/BenMorel",
                     "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/brick/money",
-                    "type": "tidelift"
                 }
             ],
-            "time": "2021-10-10T11:59:43+00:00"
+            "time": "2022-08-01T23:09:55+00:00"
         },
         {
             "name": "code-lts/laravel-fcm",
@@ -927,16 +919,16 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "07d15c8a766e664ec271ae84e5dfc597aeeb03b1"
+                "reference": "d93dbc5ef2e6e98a5b16ca5b07c3e15de9fd9113"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/07d15c8a766e664ec271ae84e5dfc597aeeb03b1",
-                "reference": "07d15c8a766e664ec271ae84e5dfc597aeeb03b1",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/d93dbc5ef2e6e98a5b16ca5b07c3e15de9fd9113",
+                "reference": "d93dbc5ef2e6e98a5b16ca5b07c3e15de9fd9113",
                 "shasum": ""
             },
             "require": {
@@ -991,22 +983,22 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/collections/issues",
-                "source": "https://github.com/doctrine/collections/tree/1.7.0"
+                "source": "https://github.com/doctrine/collections/tree/1.7.1"
             },
-            "time": "2022-08-18T05:44:45+00:00"
+            "time": "2022-08-23T18:47:41+00:00"
         },
         {
             "name": "doctrine/common",
-            "version": "3.3.1",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "6a76bd25b1030d35d6ba2bf2f69ca858a41fc580"
+                "reference": "e09556bbdf95b8420e649162b19ae9da2d1a80f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/6a76bd25b1030d35d6ba2bf2f69ca858a41fc580",
-                "reference": "6a76bd25b1030d35d6ba2bf2f69ca858a41fc580",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/e09556bbdf95b8420e649162b19ae9da2d1a80f3",
+                "reference": "e09556bbdf95b8420e649162b19ae9da2d1a80f3",
                 "shasum": ""
             },
             "require": {
@@ -1026,7 +1018,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Common\\": "lib/Doctrine/Common"
+                    "Doctrine\\Common\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1068,7 +1060,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/common/issues",
-                "source": "https://github.com/doctrine/common/tree/3.3.1"
+                "source": "https://github.com/doctrine/common/tree/3.4.0"
             },
             "funding": [
                 {
@@ -1084,7 +1076,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-20T10:48:54+00:00"
+            "time": "2022-08-23T19:46:56+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -2934,16 +2926,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.47.1",
+            "version": "v1.47.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "14d856517d18b14754b364896b28210df2738df0"
+                "reference": "f30823d6ff2bf3d7d3a4b089804f8dc5a1680501"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/14d856517d18b14754b364896b28210df2738df0",
-                "reference": "14d856517d18b14754b364896b28210df2738df0",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/f30823d6ff2bf3d7d3a4b089804f8dc5a1680501",
+                "reference": "f30823d6ff2bf3d7d3a4b089804f8dc5a1680501",
                 "shasum": ""
             },
             "require": {
@@ -2958,10 +2950,10 @@
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "google/common-protos": "^1.0||^2.0",
                 "google/gax": "^1.9",
                 "opis/closure": "^3",
                 "phpdocumentor/reflection": "^3.0||^4.0",
+                "phpspec/prophecy": "^1.10.3",
                 "phpunit/phpunit": "^4.8|^5.0|^8.0",
                 "squizlabs/php_codesniffer": "2.*",
                 "yoast/phpunit-polyfills": "^1.0"
@@ -2993,22 +2985,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.47.1"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.47.2"
             },
-            "time": "2022-08-05T00:41:21+00:00"
+            "time": "2022-08-23T20:22:22+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.28.0",
+            "version": "v1.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "017c14eeb2a3717a1ce9c27a39c66a779e6914cf"
+                "reference": "83e8beac404f38d2e869da4c3fbb7bdf96193f77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/017c14eeb2a3717a1ce9c27a39c66a779e6914cf",
-                "reference": "017c14eeb2a3717a1ce9c27a39c66a779e6914cf",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/83e8beac404f38d2e869da4c3fbb7bdf96193f77",
+                "reference": "83e8beac404f38d2e869da4c3fbb7bdf96193f77",
                 "shasum": ""
             },
             "require": {
@@ -3020,6 +3012,7 @@
                 "google/cloud-pubsub": "^1.0",
                 "phpdocumentor/reflection": "^3.0||^4.0",
                 "phpseclib/phpseclib": "^2.0||^3.0",
+                "phpspec/prophecy": "^1.10.3",
                 "phpunit/phpunit": "^4.8|^5.0|^8.0",
                 "squizlabs/php_codesniffer": "2.*",
                 "yoast/phpunit-polyfills": "^1.0"
@@ -3048,9 +3041,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.28.0"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.28.1"
             },
-            "time": "2022-07-29T00:07:49+00:00"
+            "time": "2022-08-23T20:22:22+00:00"
         },
         {
             "name": "google/crc32",
@@ -4101,16 +4094,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.25.1",
+            "version": "v9.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e8af8c2212e3717757ea7f459a655a2e9e771109"
+                "reference": "1ccfb91afee7a351b09ba1f1b97739096a3ad1cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e8af8c2212e3717757ea7f459a655a2e9e771109",
-                "reference": "e8af8c2212e3717757ea7f459a655a2e9e771109",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1ccfb91afee7a351b09ba1f1b97739096a3ad1cf",
+                "reference": "1ccfb91afee7a351b09ba1f1b97739096a3ad1cf",
                 "shasum": ""
             },
             "require": {
@@ -4277,24 +4270,24 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-08-16T16:36:05+00:00"
+            "time": "2022-08-23T19:00:07+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.12.14",
+            "version": "4.13.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "dd6ca3f63ca7f436066b8993b418482e8d4b3c2f"
+                "reference": "cfa590fae6c3fb0b2a58e78d4aa74a169bd07930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-dd6ca3f63ca7f436066b8993b418482e8d4b3c2f-zip-8fc20d.zip",
-                "reference": "dd6ca3f63ca7f436066b8993b418482e8d4b3c2f",
-                "shasum": "fa837b2ac36669f0598ee3c0a328798af581750b"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-cfa590fae6c3fb0b2a58e78d4aa74a169bd07930-zip-9ec0c1.zip",
+                "reference": "cfa590fae6c3fb0b2a58e78d4aa74a169bd07930",
+                "shasum": "48b7596e35f08a6a0b7d0cd50d1fde48d75a1d6c"
             },
             "require": {
-                "brick/money": "^0.5.0",
+                "brick/money": "^0.5.0|^0.6.0",
                 "doctrine/dbal": "^2.13.3|^3.1.2",
                 "illuminate/support": "^8.83.4|^9.3.1",
                 "inertiajs/inertia-laravel": "^0.4.5|^0.5.2|^0.6.0",
@@ -4385,9 +4378,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.12.14"
+                "source": "https://github.com/laravel/nova/tree/v4.13.0"
             },
-            "time": "2022-08-02T20:14:55+00:00"
+            "time": "2022-08-23T18:05:42+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4715,16 +4708,16 @@
         },
         {
             "name": "laravel/vapor-ui",
-            "version": "v1.5.2",
+            "version": "v1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-ui.git",
-                "reference": "3e85ba79a7588e940bf81c6d0a1b4ea8ab22b9e6"
+                "reference": "69fa2f94eb98f7e72d66bbdf8bc936260bdd9a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-ui/zipball/3e85ba79a7588e940bf81c6d0a1b4ea8ab22b9e6",
-                "reference": "3e85ba79a7588e940bf81c6d0a1b4ea8ab22b9e6",
+                "url": "https://api.github.com/repos/laravel/vapor-ui/zipball/69fa2f94eb98f7e72d66bbdf8bc936260bdd9a36",
+                "reference": "69fa2f94eb98f7e72d66bbdf8bc936260bdd9a36",
                 "shasum": ""
             },
             "require": {
@@ -4776,7 +4769,7 @@
                 "issues": "https://github.com/laravel/vapor-ui/issues",
                 "source": "https://github.com/laravel/vapor-ui"
             },
-            "time": "2022-02-01T16:35:52+00:00"
+            "time": "2022-08-19T15:04:13+00:00"
         },
         {
             "name": "lcobucci/clock",
@@ -7861,12 +7854,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "fd7bc955de7859c2c35a6a669d834a07cf1f2022"
+                "reference": "131c4f1182ce83c98caa2311665685bc595a0f00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/fd7bc955de7859c2c35a6a669d834a07cf1f2022",
-                "reference": "fd7bc955de7859c2c35a6a669d834a07cf1f2022",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/131c4f1182ce83c98caa2311665685bc595a0f00",
+                "reference": "131c4f1182ce83c98caa2311665685bc595a0f00",
                 "shasum": ""
             },
             "require": {
@@ -7898,7 +7891,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-08-19T12:25:40+00:00"
+            "time": "2022-08-26T13:06:28+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8108,12 +8101,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "14ff140c94aaeca0f8c37d276ebdcd56cc64ddb0"
+                "reference": "a6f6760379f69d88ff047f4e13d0e033e05cf037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/14ff140c94aaeca0f8c37d276ebdcd56cc64ddb0",
-                "reference": "14ff140c94aaeca0f8c37d276ebdcd56cc64ddb0",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/a6f6760379f69d88ff047f4e13d0e033e05cf037",
+                "reference": "a6f6760379f69d88ff047f4e13d0e033e05cf037",
                 "shasum": ""
             },
             "require": {
@@ -8154,7 +8147,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0"
             },
-            "time": "2022-08-17T12:07:12+00:00"
+            "time": "2022-08-24T15:23:26+00:00"
         },
         {
             "name": "railroad/railhelpscout",
@@ -8195,21 +8188,22 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.x-dev",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "dd48b3244cc70dba677ee5fcea5ac0b3c6d72784"
+                "reference": "8750efeb82dd464367e59557f678a07d89175405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/dd48b3244cc70dba677ee5fcea5ac0b3c6d72784",
-                "reference": "dd48b3244cc70dba677ee5fcea5ac0b3c6d72784",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/8750efeb82dd464367e59557f678a07d89175405",
+                "reference": "8750efeb82dd464367e59557f678a07d89175405",
                 "shasum": ""
             },
             "require": {
                 "code-lts/laravel-fcm": "1.7.*",
                 "doctrine/dbal": "^3.3",
+                "ext-pdo": "*",
                 "ext-redis": "*",
                 "guzzlehttp/guzzle": "^7.2",
                 "jms/serializer": "1.*",
@@ -8254,9 +8248,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.1"
             },
-            "time": "2022-07-18T08:51:24+00:00"
+            "time": "2022-08-23T17:04:49+00:00"
         },
         {
             "name": "railroad/referral",
@@ -15527,16 +15521,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.3.1",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "997363fbcce809b1e55f571997d49017f9c623d9"
+                "reference": "dd3d456779108d7078baf4e43f8c2b937d9794a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/997363fbcce809b1e55f571997d49017f9c623d9",
-                "reference": "997363fbcce809b1e55f571997d49017f9c623d9",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/dd3d456779108d7078baf4e43f8c2b937d9794a1",
+                "reference": "dd3d456779108d7078baf4e43f8c2b937d9794a1",
                 "shasum": ""
             },
             "require": {
@@ -15598,7 +15592,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-16T13:16:07+00:00"
+            "time": "2022-08-26T11:51:15+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -15753,12 +15747,6 @@
             "version": "2.0.9999999.9999999-dev",
             "alias": "v2.0.6",
             "alias_normalized": "2.0.6.0"
-        },
-        {
-            "package": "railroad/railnotifications",
-            "version": "3.0.9999999.9999999-dev",
-            "alias": "v3.0",
-            "alias_normalized": "3.0.0.0"
         }
     ],
     "minimum-stability": "dev",
@@ -15766,8 +15754,7 @@
         "railroad/event-data-synchronizer": 20,
         "railroad/musora-api": 20,
         "railroad/railcontent": 20,
-        "railroad/railforums": 20,
-        "railroad/railnotifications": 20
+        "railroad/railforums": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

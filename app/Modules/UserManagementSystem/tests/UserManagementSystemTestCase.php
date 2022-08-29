@@ -8,6 +8,8 @@ use Faker\Generator;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -31,6 +33,9 @@ abstract class UserManagementSystemTestCase extends BaseTestCase
         parent::setUp();
 
         URL::forceRootUrl('https://testing.musora.com');
+
+        Mail::fake();
+        Notification::fake();
     }
 
     /**

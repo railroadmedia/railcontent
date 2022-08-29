@@ -4,7 +4,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
@@ -149,6 +149,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -157,6 +158,8 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
+            'unit'
         ],
         'completed' => [
             'course',
@@ -171,6 +174,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -178,6 +182,8 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
+            'unit'
         ],
     ],
 
@@ -671,7 +677,7 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
-                'shortname' => 'Quick Tips',
+                'shortname' => 'Courses',
                 "icon" => "icon-courses",
                 "description" => "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.",
                 'amountOfFutureLessonsToShow' => 3,
@@ -870,7 +876,7 @@ return [
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
@@ -1067,7 +1073,9 @@ return [
         'chord-and-scale',
         'podcasts',
         'boot-camps',
-        'quick-tips'
+        'quick-tips',
+        'unit-part',
+        'song-part',
     ],
     'appUserListContentTypes' => [
         'course',

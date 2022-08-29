@@ -37,6 +37,5 @@ return [
 
 
     // password reset
-    'password_reset_form_route_name' => 'members.pages.reset-password',
     'login_success_redirect_path' => '/members',
 ];

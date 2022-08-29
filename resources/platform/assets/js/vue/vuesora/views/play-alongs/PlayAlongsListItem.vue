@@ -82,7 +82,6 @@
             >
                 <i
                     class="fas fa-video flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
-                    :class="themeHoverTextClass"
                     title="Watch Lesson Video"
                 ></i>
             </a>

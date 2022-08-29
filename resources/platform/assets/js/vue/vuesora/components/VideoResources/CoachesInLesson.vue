@@ -55,7 +55,7 @@
             </svg>
           </div>
           <div
-            v-on:click="goToCoachProfile(instructor.slug)"
+            v-on:click="goToCoachProfile(instructor.url)"
             class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500"
             :style="'border: 2px solid;'"
           ></div>
@@ -67,12 +67,13 @@
           tw-flex-col
           tw-pl-3
           tw-text-gray-500
+          dark:tw-text-white
           tw-uppercase
           tw-justify-between
           tw-shrink-0
         "
       >
-        <h4 v-on:click="goToCoachProfile(instructor.slug)" class="tw-cursor-pointer">
+        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
@@ -107,13 +108,13 @@
             tw-text-left tw-px-0 tw-py-0 tw-text-xs
             sm:tw-text-base
             tw-transition-none
-            tw-text-white
             tw-border-none
             tw-bg-transparent
             tw-uppercase
             tw-font-bold
             tw-cursor-pointer
           "
+          :class="`tw-text-${brand}`"
         >
           <span>
             <i aria-hidden="true" class="fa fa-check"></i>
@@ -221,8 +222,8 @@ export default {
       });
     },
 
-    goToCoachProfile(slug) {
-      window.location.href = `${window.location.origin}/members/coaches/${slug}`
+    goToCoachProfile(url) {
+      window.location.href = `${url}`
     }
   },
 };

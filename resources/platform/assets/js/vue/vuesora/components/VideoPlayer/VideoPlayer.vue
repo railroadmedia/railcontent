@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated, onBeforeMount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -701,10 +701,6 @@ function enableIntersectionObserver(videoWrap) {
 function handleOverlayClick () {
     mediaElement.value.pause();
 };
-
-onBeforeMount(() => {
-    console.log('chaca chaca', typeof shaka)
-});
 
 onMounted(() => {
     const supportsMSE = false;

@@ -44,8 +44,8 @@
     @include('books.partials.ask-question-modal')
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-        <div class="flex flex-row flex-wrap nmh-1 pv-1 mt-1">
-            <div class="flex flex-column pr-1 xs-12 sm-4 mb-1 m-xs-only">
+        <div class="tw-flex tw-flex-row tw-flex-wrap md:tw-flex-nowrap tw-w-full pv-1 mt-1">
+            <div class="tw-flex tw-flex-col tw-w-full md:tw-mr-2 tw-mb-2">
                 <a
                     class="btn bg-pianote text-white"
                     href="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/All-Songs.pdf"
@@ -57,7 +57,7 @@
                 </a>
             </div>
 
-            <div class="flex flex-column pr-1 xs-12 sm-4 mb-1 m-xs-only">
+            <div class="tw-flex tw-flex-col tw-w-full md:tw-mr-2 tw-mb-2">
                 <a
                     class="btn bg-pianote text-white"
                     href="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/foundations-worksheets.pdf"
@@ -69,7 +69,7 @@
                 </a>
             </div>
 
-            <div class="flex flex-column pr-1 xs-12 sm-4 mb-1 m-xs-only">
+            <div class="tw-flex tw-flex-col tw-w-full md:tw-mr-2 tw-mb-2">
                 <a
                     class="btn bg-pianote text-white"
                     href="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/foundations-answer-key.pdf"
@@ -82,24 +82,25 @@
             </div>
         </div>
 
-        <div class="flex flex-row flex-wrap align-center nmh-1 mb-1">
+        <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 4xl:tw-grid-cols-6 tw-mb-8">
             @foreach($chapterThumbs as $index => $chapter)
                 <div class="flex flex-column chapter-thumb pa-1">
                     <a
-                        href="{{ url()->route('books.resources.chapter', [($index + 1)]) }}"
-                        class="book-cover bg-black corners-5 overflow"
+                        href="{{ url()->route('platform.books.resources.chapter', [($index + 1)]) }}"
+                        class="book-cover bg-grey-2 dark:tw-bg-[#081825] tw-rounded-xl tw-overflow-hidden tw-group"
                     >
-                        <div class="thumb-hover absolute-fill heading">
-                            <i class="fas fa-arrow-right absolute-center"></i>
-                        </div>
 
                         <img
-                            src="https://dmmior4id2ysr.cloudfront.net/assets/images/image-loader.svg"
-                            data-ix-src="{{ $chapter }}"
-                            data-ix-fade
+                            src="{{ $chapter }}"
                             alt="Foundations Chapter {{ $index }} Thumbnail"
-                            class="corners-5"
+                            class="corners-5 tw-transition-opacity tw-opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('tw-opacity-0')"
                         >
+
+                        <div class="tw-bg-black/40 absolute-fill heading tw-transition tw-text-white tw-opacity-0 group-hover:tw-opacity-100">
+                            <i class="fas fa-arrow-right absolute-center"></i>
+                        </div>
                     </a>
                 </div>
             @endforeach
@@ -108,5 +109,5 @@
 @endsection
 
 @section('layout-scripts')
-    <script src="{{ mix('assets/members/js/books.js') }}"></script>
+    <script src="{{ mix('platform/js/books.js') }}"></script>
 @endsection

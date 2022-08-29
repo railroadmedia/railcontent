@@ -227,7 +227,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'secondLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs'])
             ->name('platform.content.second-level');
 
         Route::get(
@@ -423,14 +423,19 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo'])
             ->name('platform.legacy-resources.loops');
 
+        /**
+         * Pianote Foundation Book
+         */
+        Route::get('/{brand}/resources', [\App\Http\Controllers\Platform\BooksController::class, 'resources'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources');
+
+        Route::get('/{brand}/resources/level-{chapterNumber}', [\App\Http\Controllers\Platform\BooksController::class, 'chapter'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources.chapter');
+
 //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
     });
-
-//Route fallback - when no route is matched
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-})
-    ->middleware(['web_authenticated']);

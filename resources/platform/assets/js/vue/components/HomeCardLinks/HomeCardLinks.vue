@@ -29,8 +29,12 @@
                         </span>
                     </template>
                     <template v-else>
-                        <span v-if="hasStartedMethod" :class="`tw-text-${brand}`">
-                            Continue Level {{ nextLearningPathLevel }} - {{ nextLearningPathLessonTitle }}
+                        <span
+                            v-if="hasStartedMethod"
+                            :class="`tw-text-${brand}`"
+                            :title="`Continue Level ${nextLearningPathLevel} - ${nextLearningPathLessonTitle }`"
+                        >
+                            Continue Level {{ nextLearningPathLevel }}
                         </span>
                         <span v-else :class="`tw-text-${brand} tw-flex tw-items-center`">
                             Start
