@@ -4,14 +4,14 @@
             <img class="w-full rounded-lg" src="@if(str_contains($bundle['thumbnail'], 'amazonaws') || str_contains($bundle['thumbnail'], 'cloudfront')){{ $bundle['thumbnail'] }} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $bundle['thumbnail']  }}@endif" alt="product thumbnail{{$key}}">
         </div>
         <div>
-            <strong>{{ $bundle['name'] }} - <span @if($bundle['priceColor'] == 'orange') class="orange" @endif>{{ $bundle['price']}}</span>
-                    <br @if(!$bundle['bundle_free_shipping'] && !$bundle['bundle_lifetime_access']) class="hidden" @endif>
+            <strong>{{ $bundle['name'] }} - <span @if($bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span>
+                    <br @if(!$bundle['bundle_free_shipping'] && !$bundle['lifetime_access'] && !$bundle['free_bonus']) class="hidden" @endif>
 
                     @if($bundle['free_bonus'])
                         <span style="color:#0B76DB;">*FREE BONUS*</span>
                     @endif
 
-                    @if($bundle['bundle_lifetime_access'])
+                    @if($bundle['lifetime_access'])
                         <span style="color:#E69500;">LIFETIME ACCESS</span>
                     @endif
 
@@ -19,7 +19,7 @@
                         <span style="color:#E69500;">FREE SHIPPING</span>
                     @endif
             </strong><br>
-            {{ $bundle['short_desc'] }}
+            {{ $bundle['bundle_desc'] }}
             <br>
         </div>
     </div>
