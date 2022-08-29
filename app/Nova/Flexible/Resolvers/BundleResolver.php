@@ -27,6 +27,8 @@ class BundleResolver implements ResolverInterface
 
             return $layout->duplicateAndHydrate($bundle->id, [
                 'product' => $bundle->name,
+                'free_bonus' => $bundle->free_bonus,
+                'lifetime_access' => $bundle->lifetime_access,
                 'id' => $bundle->id ? : null,
             ]);
         });
@@ -49,20 +51,28 @@ class BundleResolver implements ResolverInterface
             foreach($groups as $key => $group){
                 //update
                 if(!is_null($group['id'])){
-                    $dbBundle = Bundle::find($group['id'])->join('products', 'product_id', '=', 'products.id')->first();
+                    $dbBundle = Bundle::find($group['id']);
                     $updatedIds[] = $group['id'];
 
                     if(empty($group['product'])){
                         $dbBundle->delete();
                     }
                     else{
-                        if($dbBundle->name !== $group['product']){
-                            $product_id = Product::where('name', $group['product'])->first()->id;
-
+                        $product_id = Product::where('name', $group['product'])->first()->id;
+                        if($dbBundle->name !== $product_id){
                             $dbBundle->product_id = $product_id;
                         }
+
                         if($dbBundle->order_number !== $key){
                             $dbBundle->order_number = $key;
+                        }
+
+                        if($dbBundle->free_bonus !== $group['free_bonus']){
+                            $dbBundle->free_bonus = $group['free_bonus'];
+                        }
+
+                        if($dbBundle->lifetime_access !== $group['lifetime_access']){
+                            $dbBundle->lifetime_access = $group['lifetime_access'];
                         }
 
                         $dbBundle->save();
@@ -76,6 +86,8 @@ class BundleResolver implements ResolverInterface
                         $addBundle = new Bundle();
                         $addBundle->bundle_id = $model['id'];
                         $addBundle->product_id = $product_id;
+                        $addBundle->free_bonus = $group['free_bonus'];
+                        $addBundle->lifetime_access = $group['lifetime_access'];
                         $addBundle->order_number = $key;
                         $addBundle->save();
 
