@@ -123,14 +123,14 @@ class ProfileSettingsPagesController extends BaseController
 
         $userProducts = $this->userProductService->getAllUsersProducts($userId);
 
-        $productsDigitalAccessTypeSpecific = [];
+        $userProductsDigitalAccessTypeSpecific = [];
 
         $activeAllContentAccess = false;
         $subscriptionIsPaused = false;
 
         foreach ($userProducts as $userProduct) {
             if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
-                $productsDigitalAccessTypeSpecific[] = $userProduct;
+                $userProductsDigitalAccessTypeSpecific[] = $userProduct;
             }
             $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt($now) : null;
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
@@ -191,14 +191,15 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-
         // -------------------------------------------------------------------------------------------------------------
+
+//        dd($productsDigitalAccessTypeSpecific);
 
         return view('account.settings.account',
             [
                 'user' => user(),
                 'sections' => $this->settingSections('account'),
-                'productsDigitalAccessTypeSpecific' => $productsDigitalAccessTypeSpecific,
+                'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
                 'activeAllContentAccess' => $activeAllContentAccess,
                 'isLifetime' => $isLifetime,
                 'subscriptionIsPaused' => $subscriptionIsPaused,

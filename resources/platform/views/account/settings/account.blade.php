@@ -18,12 +18,24 @@
 
             <!-- ================================= Owned products ================================= -->
 
+            <h2>Your Access Levels</h2>
+            <p>Your Account includes:</p>
 
+            @if($isLifetime)
+                <li>Lifetime Membership</li>
+            @elseif($membershipSubscription)
+                <li>Membership</li>
+            @endif
 
-
-
-
-
+            @foreach($userProductsDigitalAccessTypeSpecific as $userProduct)
+                @php
+                    /** @var $product \Railroad\Ecommerce\Entities\UserProduct */
+                    $product = $userProduct->getProduct();
+                @endphp
+                @if($product->getType() !== 'physical one time')
+                    <li>{{ $product->getName() }}</li>
+                @endif
+            @endforeach
 
 
             <!-- ================================= Subscription Info Section ================================= -->
