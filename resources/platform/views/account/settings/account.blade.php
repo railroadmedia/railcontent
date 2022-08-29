@@ -42,21 +42,21 @@
 
             <b>Subscription Info Section</b> <!-- todo: remove this -->
 
+            <p>Thank you for being a student since {{ user()->created_at->format('F j, Y') }}.</p>
             @if($isLifetime)
-                {{-- lifetime_msg--}}
-                <p>lifetime_msg</p>
+                {{-- <p>lifetime_msg</p>--}}
+                <p>Thank you for being a student since {{ user()->getCreatedAt()->format('F j, Y') }}.</p>
 
             @elseif(!$hasHadMembership)
-                {{-- logo_only--}}
-                <p>logo_only</p>
+                {{-- <p>logo_only</p>--}}
 
             @elseif($subscriptionIsPaused)
-                {{-- paused_msg--}}
-                <p>paused_msg</p>
+                {{-- <p>paused_msg</p>--}}
+                <p>Thank you for being a student since {{ user()->getCreatedAt()->format('F j, Y') }}.</p>
 
             @else
-                {{-- default --}}
-                <p>default </p>
+                {{-- <p>default </p>--}}
+                <p>Thank you for being a student since {{ user()->getCreatedAt()->format('F j, Y') }}.</p>
 
             @endif
 
@@ -67,28 +67,22 @@
             <b>Call-to-action Section</b> <!-- todo: remove this -->
 
             @if($isLifetime)
-            {{-- 'no_action' --}}
-                <p>no_action</p>
+            {{--<p>no_action</p>--}}
 
             @elseif($accessIsFromAppPurchase)
-            {{-- 'app_subscription_links' --}}
-                <p>app_subscription_links</p>
+            {{--<p>app_subscription_links</p>--}}
 
             @elseif($subscriptionIsPaused)
-            {{-- 'unpause_btn' --}}
-                <p>unpause_btn</p>
+            {{--<p>unpause_btn</p>--}}
 
             @elseif(!$hasHadMembership)
-            {{-- 'trial_offer' --}}
-                <p>trial_offer</p>
+            {{--<p>trial_offer</p>--}}
 
             @elseif(!$membershipSubscription)
-            {{-- 'link_to_sales' --}}
-                <p>link_to_sales</p>
+            {{--<p>link_to_sales</p>--}}
 
             @else
-            {{-- 'standard' --}}
-                <p>standard</p>
+            {{--<p>standard</p>--}}
 
             @endif
 

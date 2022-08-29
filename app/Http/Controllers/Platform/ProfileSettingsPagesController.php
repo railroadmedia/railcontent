@@ -193,8 +193,6 @@ class ProfileSettingsPagesController extends BaseController
 
         // -------------------------------------------------------------------------------------------------------------
 
-//        dd($productsDigitalAccessTypeSpecific);
-
         return view('account.settings.account',
             [
                 'user' => user(),
