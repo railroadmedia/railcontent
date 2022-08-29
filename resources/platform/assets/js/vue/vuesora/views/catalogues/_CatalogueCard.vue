@@ -67,9 +67,12 @@
                    :class="displayInline ? 'align-v-center' : 'tw-py-2'"
                 >
                     <!-- Coach Title -->
-                    <h5 class="tw-text-xs tw-font-normal tw-leading-none text-grey-4 tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
-                        v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
-                    </h5>
+                    <div v-if="item.type !== 'song-part'">
+                        <h5 class="tw-text-xs tw-font-normal tw-leading-none text-grey-4 tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
+                            v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
+                        </h5>
+                    </div>
+
                     <!-- Video Title -->
                     <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
                         :class="{'text-center': isGuitareoChordAndScale}"

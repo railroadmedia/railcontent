@@ -7,7 +7,7 @@
         >
             <div class="flex flex-column pa-1">
                 <div class="flex flex-row">
-                    <h1 class="title">
+                    <h1 class="title dark:tw-text-white">
                         {{ loop }}
                     </h1>
                 </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row pa-1 loops-audio-player">
+        <div class="flex flex-row pa-1 loops-audio-player tw-rounded-lg">
             <div
                 v-if="clickTrack"
                 class="flex flex-column icon-col"

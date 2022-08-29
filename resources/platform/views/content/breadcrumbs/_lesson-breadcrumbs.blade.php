@@ -5,13 +5,10 @@
                 "title" => 'Home',
                 "url" => url()->route('platform.home')
             ],
+
             [
-                "title" => 'Learning Paths',
-                "url" => url()->route('members.learning-paths.index')
-            ],
-            [
-                "title" => $learningPath->fetch('fields.title'),
-                "url" => $learningPath->fetch('url')
+                "title" => $firstContent->fetch('fields.title'),
+                "url" => $firstContent->fetch('url')
             ],
             [
                 "title" => $parent->fetch('fields.title'),

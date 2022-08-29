@@ -20,7 +20,7 @@
             :range="$_range.range"
             :key="$_range.range"
         >
-            <div class="widescreen title text-singeo">
+            <div class="widescreen title" :class="`tw-text-${themeColor}`">
                 <i class="fas fa-spinner fa-spin absolute-center"></i>
             </div>
         </video-media-element>

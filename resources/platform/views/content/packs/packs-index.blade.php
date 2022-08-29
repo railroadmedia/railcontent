@@ -16,9 +16,15 @@
                         <span class="tw-text-32 tw-font-bold">Packs</span>
                     </h1>
                     <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
-                        Here you can access Musora training packs. If you've purchased access to these packs
-                        individually you’ll have lifetime access to them. If you own a Musora Membership
-                        you'll have access to these packs as long as you're a member!
+                        @if($brand === "drumeo")
+                            Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on.
+                        @elseif($brand === "pianote")
+                            Training packs help you dive deeper and build expertise in specific skills and genres, taking your piano playing to the next level in particular areas you want to focus on.
+                        @elseif($brand === "guitareo")
+                            Training packs help you dive deeper and build expertise in specific skills and genres, taking your guitar playing to the next level in particular areas you want to focus on.
+                        @else
+                            Here you can access Musora training packs. If you've purchased access to these packs individually you’ll have lifetime access to them. If you own a Musora Membership you'll have access to these packs as long as you're a member!
+                        @endif
                     </p>
                 </div>
             </div>

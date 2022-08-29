@@ -4,7 +4,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
@@ -149,6 +149,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -157,6 +158,8 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
+            'unit'
         ],
         'completed' => [
             'course',
@@ -171,6 +174,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -178,6 +182,8 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
+            'unit'
         ],
     ],
 
@@ -379,44 +385,35 @@ return [
             'coaches' => [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
-                'description' => "This is where you’ll find all of our step-by-step video courses.
-                    Make sure to use the filters on this page to sort by level, topic, or instructor so
-                    you can find the perfect lessons for you.",
+                'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
                 'allowableFilters' => ['progress'],
                 'sortBy' => '-published_on',
             ],
             'courses' => [
                 'name' => 'Courses',
                 'icon' => 'icon-courses',
-                'description' => "This is where you’ll find all of our step-by-step video courses.
-                    Make sure to use the filters on this page to sort by level, topic, or instructor so
-                    you can find the perfect lessons for you.",
+                'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'songs' => [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
-                'description' => "One of the best things about learning the drums is playing along
-                    to your favorite songs! Here you’ll find song breakdowns for music by popular bands
-                    from a range of eras and styles.",
+                'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'allowableFilters' => ['difficulty', 'style', 'artist', 'progress'],
                 'sortBy' => 'slug',
             ],
             'student-focus' => [
                 'name' => 'Student Focus',
                 'icon' => 'icon-student-focus',
-                'description' => "What do you want to focus on next? This is where you can submit your
-                    student plan application and watch videos where we’ll break down student videos and offer
-                    tips to improve your playing.",
-                'allowableFilters' => ['instructor', 'progress'],
+                'description' => "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.",
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
                 'sortBy' => '-published_on',
             ],
             'rudiments' => [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
-                'description' => "Hi, I'm Dave from Drumeo - and we're excited to help you learn all 40 drum
-                    rudiments. You can click on each rudiment below to get started.",
+                'description' => "Rudiments are small patterns that form the foundation for more complex drumming patterns. You can learn all 40 here!",
                 'allowableFilters' => ['topic', 'progress'],
                 'sortBy' => 'sort',
             ],
@@ -452,9 +449,7 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/show-quick-tips.jpg',
                 'name' => 'Quick Tips',
                 'icon' => 'icon-shows',
-                'description' => "These videos are great for quick inspiration or if you don’t have time to sit
-                    down and watch a full lesson. They are short and to the point, giving you tips, concepts,
-                    and exercises you can take to your kit.",
+                'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
@@ -505,9 +500,7 @@ return [
                 'name' => 'Live',
                 'shortname' => 'Live Lessons',
                 'icon' => 'icon-shows',
-                'description' => "All Drumeo live lessons are archived to our library so if you miss one, you can
-                    still watch it in here. This includes lessons from all the guest artists we have had out as well
-                    as our satellite and in-house instructors.",
+                'description' => "Practice sessions, Q&A, celebrations, and more are available during Drumeo live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
@@ -555,15 +548,6 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'published_on',
             ],
-            //        '25-days-of-christmas' => [
-            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/advent-calendar-show-card.jpg',
-            //            'name' => '25 Days of Christmas',
-            //            'shortname' => 'Videos',
-            //            'icon' => 'icon-shows',
-            //            'description' => "Join Jared, Dave, and Reuben in Drumeo’s version of a Christmas Advent Calendar! You will receive a new drumming treat each day counting down to Christmas! Be sure to “Subscribe” to the calendar to make sure you never miss an episode!",
-            //            'allowableFilters' => [],
-            //            'sortBy' => 'sort',
-            //        ],
             'rhythms-from-another-planet' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/rythms-from-another-planet.jpg',
                 'name' => 'Rhythms From Another Planet',
@@ -573,15 +557,6 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => 'sort',
             ],
-            //        'namm-2019' => [
-            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card.jpg',
-            //            'name' => 'NAMM 2019',
-            //            'shortname' => 'Episodes',
-            //            'icon' => 'icon-shows',
-            //            'description' => "Take a closer look at the 2019 NAMM show, including the best and most obscure products and booths from the show, and performances from the worlds best drummers at the Drumeo booth!",
-            //            'allowableFilters' => [],
-            //            'sortBy' => 'published_on',
-            //        ],
             'tama-drums' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/tama-drums.jpg',
                 'name' => 'Tama Drums',
@@ -609,15 +584,6 @@ return [
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
             ],
-            //        'camp-drumeo-ah' => [
-            //            'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/camp-drumeo-ah.jpg',
-            //            'name' => 'Camp Drumeo-Ah: Summer 2019',
-            //            'shortname' => 'Episodes',
-            //            'icon' => 'icon-shows',
-            //            'description' => "Welcome to Camp Drum-eh-oh-ah! I’m K-Rad, the camp counselor, and are you in for a treat fellow drummers :). Get your sunscreen on and take your sticks out of hiding because we are in for some super awesome fun this summer!!!",
-            //            'allowableFilters' => ['instructor'],
-            //            'sortBy' => '-published_on',
-            //        ],
             'diy-drum-experiments' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg',
                 'name' => 'DIY Drum Experiments',
@@ -668,7 +634,7 @@ return [
             'play-alongs' => [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
-                "description" => "The Play-Alongs has to be the most underrated area of the site. Each Play-Along teaches you a track in the style of a famous song or artist. You will learn every element you need to play each play-along - the chords, strumming patterns, riffs, and song layout. From there you Play-Along to the full jam track complete with sheet music and TAB. There is nothing like learning the guitar through playing music!",
+                "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['bpm', 'style'],
             ],
         ],
@@ -702,7 +668,7 @@ return [
                 'sortBy' => '-published_on',
                 'shortname' => 'songs',
                 "icon" => "icon-songs",
-                "description" => "Every song has something to teach you! Our song tutorials allow you to choose between learning with sheet music or learning with a chord chart. We've included practice along tracks to make learning even more fun and engaging!",
+                "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -711,9 +677,9 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
-                'shortname' => 'Quick Tips',
+                'shortname' => 'Courses',
                 "icon" => "icon-courses",
-                "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
+                "description" => "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -724,14 +690,14 @@ return [
                 'sortBy' => '-published_on',
                 'shortname' => 'Quick Tips',
                 'icon' => 'fa-lightbulb',
-                'description' => "These videos are great for quick inspiration or if you don’t have time to sit down and watch a full lesson. They are short and to the point, giving you tips, concepts, and exercises you can take right to the piano!",
+                'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
             'student-reviews' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => ['instructor'],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
@@ -757,7 +723,7 @@ return [
                 'sortBy' => '-published_on',
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',
-                'description' => "Ready to work? Bootcamps are designed to help you really integrate and develop new skills. Select a topic that you want to improve on and get ready to play along with the lesson.",
+                'description' => "These bootcamps deliver results, but they also require commitment. Select a topic that you want to become an expert in, and get ready to learn!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -768,7 +734,7 @@ return [
                 'sortBy' => '-published_on',
                 'shortname' => 'Podcast',
                 'icon' => 'icon-podcast',
-                'description' => "A podcast discussing everything Piano. Join Lisa in her quest to unify piano players around the world, build community, and make playing the piano cool!",
+                'description' => "Join Lisa in her quest to unify piano players around the world, build community, and make playing the piano cool!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -779,7 +745,7 @@ return [
                 'sortBy' => '-published_on',
                 "shortname" => "Chords & Scales",
                 "icon" => "icon-chords-scales-icon",
-                "description" => "Chords and scales will unlock the piano for you. They will help you to develop keyboard familiarity, dexterity, speed, accuracy, hand independance and more. We suggest working a major and minor chord/scale practice into your daily routine.",
+                "description" => "Chords and scales are the building blocks of playing the guitar. This is an excellent reference for expanding your chord and scale vocabulary!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -790,7 +756,7 @@ return [
                 'sortBy' => '-published_on',
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',
-                'description' => "Ready to work? Bootcamps are designed to help you really integrate and develop new skills. Select a topic that you want to improve on and get ready to play along with the lesson.",
+                'description' => "These bootcamps deliver results, but they also require commitment. Select a topic that you want to become an expert in, and get ready to learn!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -807,25 +773,25 @@ return [
             'courses' => [
                 "name" => "Courses",
                 "icon" => "icon-courses",
-                "description" => "The Courses area is where you will find all of the individual step-by-step Guitareo video courses. You will find a wide variety of topics including but not limited to strumming, scales, chords, techniques, exercises, reading music, music theory, lead guitar, rhythm guitar, and more.",
+                "description" => "These jam-packed training courses cover various lesson topics in detail. Find one that suits your guitar goals, and get started!",
                 "allowableFilters" => ['difficulty', 'topic', 'instructor', 'progress'],
             ],
             'songs' => [
                 "name" => "Songs",
                 "icon" => "icon-songs",
-                "description" => "Want to learn famous cover songs? You are in the right place! Each song series here breaks down the tune and then turns you loose to jam with it for yourself over a fully produced jam track, TAB, and sheet music so you can be the guitarist in the band. It may seem like a lot of work to learn an entire song, but there is no better way to learn new things on the guitar. ",
+                "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
             ],
             'play-alongs' => [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
-                "description" => "The Play-Alongs has to be the most underrated area of the site. Each Play-Along teaches you a track in the style of a famous song or artist. You will learn every element you need to play each play-along - the chords, strumming patterns, riffs, and song layout. From there you Play-Along to the full jam track complete with sheet music and TAB. There is nothing like learning the guitar through playing music!",
+                "description" => "Our play-along feature teaches you chords, strumming patterns, riffs, and song layouts -- with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['difficulty', 'style', 'topic', 'progress'],
             ],
             'chords-scales' => [
                 "name" => "Chords & Scales",
                 "icon" => "icon-chords-scales-guitareo",
-                "description" => "Chords and scales are some of the building blocks of our playing. I know that there are loads of chords and scales out there so sometimes it can feel a bit overwhelming to keep learning more. This area is a great resource to use when you need to learn a new chord or scale for a song or when you just feel like expanding your personal chord or scale library.",
+                "description" => "Chords and scales are the building blocks of playing the guitar. This is an excellent reference for expanding your chord and scale vocabulary!",
                 "allowableFilters" => [],
             ],
             'archives' => [
@@ -840,7 +806,7 @@ return [
                 "name" => "Quick Tips",
                 "shortname" => "quick-tips",
                 "icon" => "icon-shows",
-                "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you play your way to success!",
+                "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 "allowableFilters" => ['difficulty', 'topic', 'progress'],
             ],
             'question-and-answer' => [
@@ -855,7 +821,7 @@ return [
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                "allowableFilters" => [],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -887,20 +853,20 @@ return [
             'courses' => [
                 "name" => "Courses",
                 "icon" => "icon-courses",
-                "description" => "This is where you’ll find all of our step-by-step video courses. Courses are like mini versions of our learning paths. Use the filters on this page to sort by level, topic, or instructor so you can find the perfect lessons for you.",
+                "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'songs' => [
                 "name" => "Songs",
                 "icon" => "icon-songs",
-                "description" => "We all love singing along with our favorite songs!  Here you'll find a wide variety of songs from different artists and styles that you can sing along with.  You can even choose between three vocal ranges to fit your unique voice!",
+                "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg',
                 "name" => "Quick Tips",
                 "icon" => "icon-shows",
-                "description" => "Looking for quick inspiration? Don’t have time to sit down and watch a full lesson? These videos are short and to the point, giving you tips, concepts, and exercises to help you sing your way to success!",
+                "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'question-and-answer' => [
@@ -910,17 +876,17 @@ return [
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                "allowableFilters" => [],
+                'allowableFilters' => ['difficulty', 'instructor', 'topic'],
             ],
             'routines' => [
                 "name" => "Routines",
                 "icon" => "icon-shows",
-                "description" => "Finding the perfect practice routine to build your singing skills can be tough, especially on a busy schedule. Start your day right or warm-up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for the busy days when you just want to shake things up a bit.",
+                "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
             ],
         ],
@@ -1107,7 +1073,9 @@ return [
         'chord-and-scale',
         'podcasts',
         'boot-camps',
-        'quick-tips'
+        'quick-tips',
+        'unit-part',
+        'song-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1388,6 +1356,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'song' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',

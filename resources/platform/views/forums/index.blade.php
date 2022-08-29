@@ -25,13 +25,20 @@
                 </h1>
 
                 <p class="tw-text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
-                    The <span class="tw-capitalize">{{ $brand }}</span> Forum is a great place for members and instructors alike to hang out, chat singing,
-                    and just get to know each other
+                    @if($brand === "drumeo")
+                        Connect with drummers from around the world! Our forums help you build social connections and find other students that share your goals and passions. 
+                    @elseif($brand === "pianote")
+                        Connect with piano players from around the world! Our forums help you build social connections and find other students that share your goals and passions. 
+                    @elseif($brand === "guitareo")
+                        Connect with guitarists from around the world! Our forums help you build social connections and find other students that share your goals and passions.
+                    @elseif($brand === "singeo")
+                        Connect with singers from around the world! Our forums help you build social connections and find other students that share your goals and passions.
+                    @endif
                 </p>
 
                 <div class="tw-inline-flex tw-items-center tw-flex-wrap header-buttons">
                     @if($user['access_level'] === 'team')
-                        <a href="{{ url()->route('forums.forum.create') }}"
+                        <a href="{{ url()->route('forums.show-create-category-form') }}"
                             class="tw-btn-primary tw-bg-{{ $brand }} sm:tw-mr-2 tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
                             dusk="create-post-button">
                             <i class="fas fa-pencil tw-mr-2"></i>

@@ -29,6 +29,11 @@ return [
             'data.description',
             'fields.high_soundslice_slug',
             'fields.low_soundslice_slug',
+            'fields.live_event_start_time',
+            'fields.live_event_end_time',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone'
         ],
 
         'instructor' => [
@@ -58,6 +63,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'published_on_in_timezone'
             ],
             'total_lessons',
             'lessons_filter_options',
@@ -131,6 +137,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'published_on_in_timezone'
             ],
             'lessons_filter_options',
             'total_comments',
@@ -182,6 +189,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
+                'published_on_in_timezone'
             ],
             'current_lesson_index',
             'next_lesson' => [
@@ -378,6 +386,12 @@ return [
                 '*data.sheet_music_image_url',
                 'data.timecode',
             ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'course' => [
@@ -426,6 +440,12 @@ return [
                 'data.thumbnail_url',
             ],
             '*fields.instructor',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'course-part' => [
@@ -513,6 +533,12 @@ return [
             'last_watch_position_in_seconds',
             'fields.video.fields.length_in_seconds',
             'parent',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'play-along' => [
@@ -601,6 +627,12 @@ return [
             'parent',
             'fields.artist',
             'fields.style',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'song' => [
@@ -659,6 +691,24 @@ return [
             'fields.artist',
             'fields.style',
             'lesson_count',
+            'lessons' => [
+                'id',
+                'type',
+                'published_on',
+                'completed',
+                'started',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'length_in_seconds',
+                'data.thumbnail_url',
+            ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
         'song-part' => [
             'ranges',
@@ -715,6 +765,12 @@ return [
             'parent',
             'fields.artist',
             'fields.style',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
         'coach-stream' => [
             'id',
@@ -798,6 +854,15 @@ return [
             'parent',
             'fields.artist',
             'fields.style',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'top-header-pack' => [
@@ -853,6 +918,15 @@ return [
             'started',
             'instructors',
             'isLive',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'live' => [
@@ -875,6 +949,15 @@ return [
             'questionsChannelName',
             'token',
             'userId',
+            'live_event_start_time_in_timezone',
+            'live_event_end_time_in_timezone',
+            'published_on_in_timezone',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'pack' => [
@@ -918,6 +1001,12 @@ return [
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
+            ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
             ],
         ],
 
@@ -963,6 +1052,12 @@ return [
                 'is_added_to_primary_playlist',
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
+            ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
             ],
         ],
 
@@ -1053,6 +1148,12 @@ return [
                 '*data.sheet_music_image_url',
                 'data.timecode',
             ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'assignment' => [
@@ -1135,6 +1236,12 @@ return [
                 'status',
                 'mobile_app_url',
             ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'learning-path-level' => [
@@ -1196,6 +1303,12 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
             ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'learning-path-course' => [
@@ -1247,6 +1360,12 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'mobile_app_url',
+            ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
             ],
         ],
 
@@ -1340,6 +1459,12 @@ return [
             'captions',
             'last_watch_position_in_seconds',
             'resources',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'student-focus' => [
@@ -1422,6 +1547,12 @@ return [
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
             'parent',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'show-lesson' => [
@@ -1504,6 +1635,12 @@ return [
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
             'parent',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'download' => [
@@ -1588,6 +1725,12 @@ return [
                 ],
             ],
             '*fields.instructor',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'profile' => [
@@ -1688,6 +1831,12 @@ return [
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
             'parent',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'chord-and-scale' => [
@@ -1754,6 +1903,12 @@ return [
                 'data.timecode',
             ],
             'data.guitar_chord_image_url',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
 
         'rudiment' => [
@@ -1845,6 +2000,12 @@ return [
                 '*data.sheet_music_image_url',
                 'data.timecode',
             ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
         'podcasts' => [
             'id',
@@ -1935,6 +2096,12 @@ return [
                 '*data.sheet_music_image_url',
                 'data.timecode',
             ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
         ],
         'boot-camps' => [
             'id',
@@ -2024,6 +2191,12 @@ return [
                 'data.description',
                 '*data.sheet_music_image_url',
                 'data.timecode',
+            ],
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
             ],
         ],
 

@@ -63,7 +63,7 @@ export default {
             <button @click="handleClose" class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
                 <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
             </button>
-            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-10 tw-h-screen md:tw-justify-center tw-relative">
+            <div class="tw-flex tw-flex-col tw-overflow-auto tw-py-12 tw-px-10 tw-h-screen md:tw-items-center md:tw-justify-center tw-relative">
                 <h2 class="tw-mb-[36px] tw-w-full tw-text-2xl md:tw-text-3xl tw-text-center tw-font-extrabold tw-text-white">
                     What instrument would you like to learn? 
                 </h2>
@@ -92,7 +92,7 @@ export default {
             </div>
         </ModalRenderer>
         <button v-on:click="() => handleBrandOpen(true)"
-            :class="`tw-group tw-flex tw-h-full tw-h-[58px] tw-flex-row tw-items-center lg:tw-px-[12px] tw-transition-all hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] ${isSelectorOpen}`">
+            :class="`tw-group tw-flex tw-h-[58px] tw-flex-row tw-items-center lg:tw-px-[12px] tw-transition-all hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] ${isSelectorOpen}`">
             <img :src="brandUrl[brand]" class="tw-w-full tw-min-w-[92px] tw-max-w-[102px] tw-max-h-8" />
             <i :class="`fas fa-chevron-down ${textColor[brand]} tw-text-xs tw-pl-[4px] tw-transition-all group-hover:tw-mt-1 tw-align-middle`"></i>
         </button>

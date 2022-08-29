@@ -18,14 +18,16 @@
                     Coaches
                 </h1>
 
-                <p
-                    class="text-white body"
-                    style="max-width:960px"
-                >
-                    Every month, you’ll have new opportunities to learn from your coaches. You can choose the topics
-                    that you need help with OR follow the coach that works with your style and what you want to achieve
-                    with your voice. And you’ll always get the full recording so you never miss that ‘aha’ moment you’ve
-                    been waiting for.
+                <p class="text-white body tw-max-w-[960px]">
+                    @if($brand === "drumeo")
+                        Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world! 
+                    @elseif($brand === "pianote")
+                        Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!
+                    @elseif($brand === "guitareo")
+                        Tackle your next guitar goal with bite-sized courses from many of the world's best guitarists.
+                    @elseif($brand === "singeo")
+                        Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world! 
+                    @endif
                 </p>
             </div>
         @endslot
@@ -92,11 +94,18 @@
             <div class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow">
                     
-                    <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-                        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-3">
-                            From Subscribed Coaches
-                        </h2>
-                    </div>
+                    <!-- Section Title -->
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        <a href="/{{ $brand }}/lessons/subscribed" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                            <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
+                        </a>
+                        <a href="/{{ $brand }}/lessons/subscribed"  
+                            aria-label="See All Subscribed Lessons"
+                            class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                        >
+                            See All
+                        </a>
+                    </div> 
 
                     <div class="tw-flex tw-flex-row six-cards-row">
                         <transition appear name="fade">

@@ -66,10 +66,11 @@
                 </page-container>
                 
             </app-container>
+
+            {{-- Review Modals Must Be Global --}}
+            @include('partials._review-modal')
         </div>
 
-        {{-- Review Modals Must Be Global --}}
-        @include('partials._review-modal')
 
         {{-- Scripts --}}
         <script src="{{ mix('platform/js/manifest.js') }}"></script>

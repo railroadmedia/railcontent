@@ -16,7 +16,7 @@ export default {
       isSidebarHidden ? 'tw--left-64 ' : 'tw-left-0',
     ]"
   >
-    <div class="tw-h-full tw-w-full tw-top-0 tw-left-0 tw-transition-color tw-bg-white dark:tw-bg-[#081825]">
+    <div class="tw-h-full tw-w-full tw-top-0 tw-left-0 tw-transition-color tw-bg-white dark:tw-bg-[#081825] tw-border-t dark:tw-border-t-[#1E364A]">
         <div class="tw-flex tw-flex-col tw-right-0 tw-bottom-0 tw-h-full tw-no-scrollbar tw-overflow-y-auto tw-overflow-x-hidden tw-pb-10 tw-pt-[10px] lg:tw-pt-0" data-simplebar>
 
           <slot />

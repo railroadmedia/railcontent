@@ -6332,10 +6332,11 @@ stylehacks@^5.0.1:
     browserslist "^4.16.6"
     postcss-selector-parser "^6.0.4"
 
-stylesora@^1.0.102-t3.10:
-  version "1.0.102-t3.10"
-  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-t3.10.tgz#efb7c0eeacf1afac7d6183bd034ec14629f261a7"
-  integrity sha512-9wIHdJ9Tzr9cRNNkThTJBBiL7QztpbcFOosv4cUZC9o1OJsM8Vqk0m5DHPHePifJbhB3jxNcbfDDiEyQycx3cg==
+
+stylesora@^1.0.102:
+  version "1.0.102"
+  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102.tgz#21e77c4753d18881f722ed8d779c330ebac28537"
+  integrity sha512-W3bn9bF5QUCtcnVCM7j0sYrfoVbCvCjIxblqlHkKWZdeqhA8SPv7zFMcrjHY5xScJHcV14PQjJs8ve0C6DS1cQ==
   dependencies:
     cssnano "^5.0.6"
 

@@ -6,7 +6,9 @@
 
 @section('content')
 
-    @component('partials._header-banner')
+    @component('partials._header-banner', [
+        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+    ])
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
@@ -15,24 +17,20 @@
                 </h1>
 
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    We'd LOVE for you to join us for a live lesson! This is where you'll see the upcoming schedule
-                    for live lessons and other releases. Take a look. And make sure to click the "Add To Calendar"
-                    button for anything that catches your eye so you don't miss out!
+                    Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">{{ $brand }}</span> live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!
                 </p>
 
                 <div class="tw-flex tw-flex-row">
                     <div class="tw-flex tw-flex-col xs-12 sm-4">
-                        <label id="timezoneLabel" for="timezoneSelector" class="tw-mt-3">
-                            <button class="btn collapse-250">
-                    <span class="tw-bg-white tw-text-white inverted short">
-                        <i class="fas fa-globe tw-mr-1"></i>
-                        Change Your Timezone
-                    </span>
+                        <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer tw-w-fit">
+                            <button class="tw-btn-secondary tw-text-white">
+                                <i class="fas fa-globe mr-1"></i>
+                                Change Your Timezone
                             </button>
-
                             <select name="timezone" id="timezoneSelector">
                                 @foreach($timezones as $timezone)
-                                    <option {{
+                                    <option class="tw-text-[#00101D]"
+                                            {{
                                                 substr(
                                                     $timezone,
                                                     0,
@@ -52,24 +50,29 @@
     @endcomponent
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
-        <div class="content-table tw-flex tw-flex-col tw-mb-3">
-            <div id="scheduleHeader" class="tw-flex tw-flex-row pv-3 tw-flex-wrap tw-items-center">
-                <div class="tw-flex tw-flex-col xs-12 sm-8 md-9 tw-mb-2 m-xs-only">
-                    <h1 class="heading">Scheduled Releases</h1>
+        <div class="tw-flex tw-flex-col mv-3">
+            <div id="scheduleHeader" class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
+                <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
+                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                        Scheduled Releases
+                    </h1>
                 </div>
-                <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
-                    <button class="btn" data-open-modal="scheduleAddToCalendarModal">
-                        <span class="tw-text-{{ $brand }} tw-bg-{{ $brand }} inverted">
-                            <i class="fas fa-calendar-plus tw-mr-1"></i>
-                            Subscribe to Calendar
-                        </span>
+                <div class="tw-flex tw-flex-col">
+                    <button class="tw-btn-secondary tw-text-{{ $brand }}" 
+                            data-open-modal="scheduleAddToCalendarModal"
+                    >
+                        <i class="fas fa-calendar-plus tw-mr-2"></i>
+                        Subscribe to Calendar 
                     </button>
                 </div>
+            </div>   
+            <div class="tw-flex tw-flex-row">
+                <content-schedule
+                    :preloaded-content="{{ $scheduleEvents }}"
+                    subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
+                    theme-color="{{ $brand }}"
+                />
             </div>
-
-            <content-schedule :preloaded-content="{{ $scheduleEvents }}"
-                            subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
-                            theme-color="{{ $brand }}"></content-schedule>
         </div>
 
         <div id="printSchedule" class="flex-center">

@@ -70,7 +70,7 @@ export default {
   >
     <!-- User Image -->
     <div class="tw-relative tw-h-[42px] tw-w-[42px] tw-rounded-full tw-bg-cover">
-      <img v-if="userAvatar.length" :src="userAvatar" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
+      <img v-if="userAvatar" :src="userAvatar" class="tw-h-[42px] tw-w-[42px] tw-rounded-full"/>
 
       <!-- Notification Indicator -->
       <span v-if="hasNotifications" class="tw-absolute tw-top-0 tw-right-1 tw-flex tw-h-[8px] tw-w-[8px]">
@@ -82,9 +82,9 @@ export default {
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader
         :name="userName"
-        :optionClick="() => {}"
+        :onOptionClick="() => {}"
         :userPhoto="userAvatar"
-        :accountUrl="accountUrl"
+        :href="accountUrl.length ? accountUrl : '/profile'"
       />
       <OptionGroup>
         <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
@@ -120,7 +120,7 @@ export default {
         </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement @optionClick="() => $emit('onColorModeToggle')">
+        <OptionElement @onOptionClick="() => $emit('onColorModeToggle')">
 
           <musora-icon v-if="!isDarkModeSelected" icon-name="sun" class="tw-w-[20px] tw-mr-2"/>
           <musora-icon v-if="isDarkModeSelected" icon-name="moon" class="tw-w-[20px] tw-mr-2"/>

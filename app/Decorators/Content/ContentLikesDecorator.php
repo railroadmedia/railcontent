@@ -42,6 +42,7 @@ class ContentLikesDecorator extends ModeDecoratorBase
         );
 
         foreach ($contents as $contentIndex => $content) {
+            $contents[$contentIndex]['is_liked_by_current_user'] = false;
             foreach ($thisUsersLikes as $thisUsersLike) {
                 if ($thisUsersLike['content_id'] == $content['id']) {
                     $contents[$contentIndex]['is_liked_by_current_user'] = true;

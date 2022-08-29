@@ -17,7 +17,7 @@
                 >
                     <select
                         id="commentSort"
-                        class="dark:tw-text-white tw-pb-0"
+                        class="dark:tw-text-white tw-pb-0 has-input"
                         v-model="sortInterface"
                     >
                         <option class="tw-text-[#00101D]" value="-like_count">

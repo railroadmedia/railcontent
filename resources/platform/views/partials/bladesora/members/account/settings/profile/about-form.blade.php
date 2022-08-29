@@ -76,7 +76,6 @@
                             </div>
                         </div>
                     @endif
-
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
                         <div class="tw-flex tw-flex-col tw-w-full tw-pr-1">
                             @include('partials.bladesora.members.inputs.select-input', array_merge([

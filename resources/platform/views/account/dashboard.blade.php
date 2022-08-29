@@ -75,13 +75,13 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
             {{-- Completed Lessons --}}
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 @if ($isCurrentUsersProfile)
-                    <a href="{{ '' }}" dusk="see-all-started"
+                    <a href="/{{ $brand }}/lists/completed" dusk="see-all-started"
                         class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                         <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed
                             Lessons</h2>
                     </a>
-                    <a href="{{ '' }}" dusk="see-all-started"
-                        class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    <a href="/{{ $brand }}/lists/completed" dusk="see-all-started"
+                        class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                         See All
                     </a>
                 @endif
@@ -101,13 +101,13 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
             {{-- Started Lessons --}}
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 @if ($isCurrentUsersProfile)
-                    <a href="{{ '' }}" dusk="see-all-started"
+                    <a href="/{{ $brand }}/lists/in-progress" dusk="see-all-started"
                         class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                         <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started
                             Lessons</h2>
                     </a>
-                    <a href="{{ '' }}" dusk="see-all-started"
-                        class="tw-text-base tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    <a href="/{{ $brand }}/lists/in-progress" dusk="see-all-started"
+                        class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                         See All
                     </a>
                 @endif

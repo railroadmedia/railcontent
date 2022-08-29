@@ -7,8 +7,8 @@
         <!-- THUMBNAIL COLUMN -->
         <div
             class="flex flex-column align-v-center thumbnail-col hide-xs-only"
-            :class="themeColor"
-        >
+            :class="themeColor"        
+            >
             <div class="thumb-wrap corners-10">
                 <div
                     class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825]"
@@ -81,8 +81,7 @@
                 @click.stop
             >
                 <i
-                    class="fas fa-video flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
-                    :class="themeHoverTextClass"
+                    class="fas fa-video flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
                     title="Watch Lesson Video"
                 ></i>
             </a>
@@ -98,7 +97,7 @@
                 @click.stop.prevent="addToList"
             >
                 <i
-                    class="add-to-list fa-star flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+                    class="add-to-list fa-star flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
                     :class="addedToListClasses"
                     :title="is_added ? 'Remove from Favorites' : 'Add to Favorites'"
                 ></i>
@@ -115,7 +114,7 @@
                 @click.stop.prevent="markAsComplete"
             >
                 <i
-                    class="add-to-list fa-check-circle flex-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+                    class="add-to-list fa-check-circle flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
                     :class="markedAsCompletedClasses"
                     :title="isCompleted ? 'Restart Progress' : 'Mark as Complete'"
                 ></i>

@@ -13,6 +13,7 @@ use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
+use App\Http\Controllers\Platform\LegacyResourcesController;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,10 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
             ->whereIn('brand', all_brands())
             ->name('platform.new-lessons');
+
+        Route::get('/{brand}/lessons/subscribed', [ContentPagesController::class, 'subscribedContent'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.subscribed-lessons');
 
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
@@ -209,8 +214,10 @@ Route::domain('{musoraDomain}')
                     'exploring-beats',
                     'sonor-drums',
                     'student-reviews',
+                    'student-focus',
                     'archives',
                     'recording',
+                    'play-alongs',
                 ]
             )
             ->name('platform.content.first-level');
@@ -220,7 +227,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'secondLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs'])
             ->name('platform.content.second-level');
 
         Route::get(
@@ -396,6 +403,36 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/support', [SupportController::class, 'memberSupport'])
             ->whereIn('brand', all_brands())
             ->name('platform.support');
+
+        /*
+         * Drumeo legacy resources
+         */
+        Route::get('/{brand}/legacy-resources', [LegacyResourcesController::class, 'show'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('platform.legacy-resources');
+
+        Route::get('/{brand}/legacy-resources/archives', [LegacyResourcesController::class, 'archive'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('platform.legacy-resources.archive');
+
+        Route::get('/{brand}/legacy-resources/dictionary-of-terms', [LegacyResourcesController::class, 'dictionary'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('platform.legacy-resources.dictionary');
+
+        Route::get('/{brand}/legacy-resources/loops', [LegacyResourcesController::class, 'loops'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('platform.legacy-resources.loops');
+
+        /**
+         * Pianote Foundation Book
+         */
+        Route::get('/{brand}/resources', [\App\Http\Controllers\Platform\BooksController::class, 'resources'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources');
+
+        Route::get('/{brand}/resources/level-{chapterNumber}', [\App\Http\Controllers\Platform\BooksController::class, 'chapter'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources.chapter');
 
 //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
