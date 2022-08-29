@@ -221,7 +221,7 @@
             ></add-event-modal>
         </div>
     @else
-        @if($catalogueMeta['name'] !== "Play Alongs" )
+        @if( $catalogueMeta['name'] !== "Play Alongs" || $catalogueMeta['name'] === "Play Alongs" && $brand === "guitareo" ) 
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
                 <div class="tw-flex tw-flex-col mt-3">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
@@ -235,8 +235,7 @@
                                 @endif
                             </h1>
                         </div>
-                        @if($catalogueMeta['name'] !== "Songs" &&
-                            !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
+                        @if( $catalogueMeta['name'] !== "Songs" && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]) )
                             <div class="tw-flex tw-flex-col">
                                 <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
                                     <i class="fas fa-calendar-plus mr-1"></i>
@@ -258,17 +257,15 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
 
-        {{-- Play Alongs Catalogue --}}
-        @if( $catalogueMeta['name'] === "Play Alongs" )
-
+        {{-- Play Alongs Catalogue for Drumeo --}}
+        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
+            
             <play-alongs
                 ref="playAlongsVueInstance"
                 content-endpoint="/laravel/public/railcontent/content"
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"
-                {{-- user-playlist-id="{{ $usersPrimaryPlaylistId }}" --}}
-                {{-- session-token="{{ railtracker_session_token() }}" --}}
                 @play="handlePlayAlongsPlay"
                 @pause="handlePlayAlongsPause"
             ></play-alongs>
