@@ -4,8 +4,11 @@ namespace App\Nova;
 
 use App\Models\ProductType;
 use App\Nova\Flexible\Layouts\BundleLayout;
+use App\Nova\Flexible\Layouts\ImageLayout;
 use App\Nova\Flexible\Presets\BundlePreset;
+use App\Nova\Flexible\Presets\ImagePreset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -31,6 +34,8 @@ class Bundle extends Resource
 
     public function fields(NovaRequest $request)
     {
+        $uuid  = Str::uuid();
+
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
@@ -45,34 +50,6 @@ class Bundle extends Resource
             //slug field for saving
             Text::make('Slug')->required()->hideFromDetail()->hideFromIndex(),
             Text::make('Sku')->hideFromIndex()->required(),
-            Image::make('Thumbnail')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    return $request->file('thumbnail')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(is_null($value)) return null;
-
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
-                }),
-            Image::make('Thumbnail Logo', 'thumbnail_logo')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->disableDownload()
-                ->nullable()
-                ->storeAs(function (Request $request){
-                    return $request->file('thumbnail_logo')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(is_null($value)) return null;
-
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
-                }),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
             Image::make('Meta Image', 'meta_img')
                 ->disk('nova_s3')
@@ -81,27 +58,30 @@ class Bundle extends Resource
                 ->disableDownload()
                 ->deletable(false)
                 ->storeAs(function (Request $request){
-                    return $request->file('meta_img')->getClientOriginalName();
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(is_null($value)) return null;
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Image::make('Bundle Image', 'bundle_img')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->disableDownload()
-                ->nullable()
-                ->storeAs(function (Request $request){
-                    return $request->file('bundle_img')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(is_null($value)) return null;
-
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
-                }),
+            Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Image::make('Page Logo', 'page_logo')
                 ->disk('nova_s3')
                 ->prunable()
@@ -109,23 +89,42 @@ class Bundle extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    return $request->file('page_logo')->getClientOriginalName();
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(is_null($value)) return null;
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Video Link', 'video_src')
-                ->hideFromIndex(),
-            Text::make('Short Description', 'short_desc')->hideFromIndex(),
+            Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
+            Text::make('Video Link', 'video_src')
+                ->hideFromIndex(),
+            Flexible::make('Images')
+                ->addLayout(ImageLayout::class)
+                ->preset(ImagePreset::class),
             Markdown::make('Overview')
                 ->hideFromIndex(),
-            Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Visible')->default(false)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
