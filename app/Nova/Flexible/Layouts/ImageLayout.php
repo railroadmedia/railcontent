@@ -35,18 +35,19 @@ class ImageLayout extends Layout
         $uuid  = Str::uuid();
 
         return [
-            Image::make('Image','path')
+            Image::make('Image','path_file')
                 ->disk('nova_s3')
                 ->prunable()
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
 
-                    return $request->uuid.'-'.$request->file('path')->getClientOriginalName();
+                    return $request->uuid.'-'.$request->file('path_file')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+            Text::make('Image', 'path_text')->hideFromIndex()->hideFromDetail(),
             Hidden::make('id', 'id'),
             Hidden::make('uuid')->withMeta(["value" => $uuid]),
         ];
