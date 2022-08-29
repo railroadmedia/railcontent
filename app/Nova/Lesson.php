@@ -190,8 +190,6 @@ class Lesson extends Resource
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
             Markdown::make('Overview')->hideFromIndex(),
-            Text::make('Study Text', 'study_text')
-                ->hideFromIndex(),
             Flexible::make('Benefits')
                 ->addLayout(BenefitLayout::class)
                 ->preset(BenefitPreset::class),
@@ -232,13 +230,12 @@ class Lesson extends Resource
                 ->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
-            Boolean::make('Free Bonus', 'free_bonus')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
-            Boolean::make('Bundle Lifetime Access', 'bundle_lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
+            Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
             Number::make('Display order', 'display_order'),
             Flexible::make('Features/Topics')
                 ->addLayout(FeatureLayout::class)
