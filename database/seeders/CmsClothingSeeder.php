@@ -1737,7 +1737,7 @@ class CmsClothingSeeder extends Seeder
                 "meta_img" => "https://www.drumeo.com/laravel/public/assets/order-form/images/product-images/holidayshirt-XXL.png",
                 "short_desc" => "",
                 "header_text" => "The Holiday T-Shirt",
-                "price" => 0,
+                "price" => 25,
                 "discounted_price" => "",
                 "special_text" => "",
                 "features" => [
@@ -1767,7 +1767,7 @@ class CmsClothingSeeder extends Seeder
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 "images" => [
-
+                    'https://s3.amazonaws.com/drumeo-packs/Merch/holiday.jpg'
                 ],
                 "sizeChart" => "",
                 "sizes" => [
