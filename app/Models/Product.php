@@ -57,12 +57,19 @@ class Product extends Model
 
     public function bundles()
     {
-        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id', 'products.thumbnail', 'products.bundle_lifetime_access', 'products.bundle_free_shipping', 'products.price', 'products.free_bonus', 'products.short_desc'])->orderBy('order_number');
+        return $this->hasManyThrough( Product::class,Bundle::class, 'bundle_id', 'id', 'id', 'product_id')->select(['products.name', 'bundles.id', 'bundles.product_id as bundle_product_id', 'bundles.lifetime_access', 'products.thumbnail', 'products.bundle_desc', 'products.bundle_free_shipping', 'products.price', 'bundles.free_bonus'])->orderBy('order_number');
     }
 
     public function sizeChart()
     {
         return $this->belongsTo(SizeChart::class, 'size_chart_id');
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+          get: fn ($value) => str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $value ),
+        );
     }
 
     protected function slug(): Attribute
@@ -80,43 +87,28 @@ class Product extends Model
             $uuid = $model['uuid'];
             unset($model['uuid']);
 
-            $brandId = $model['brand_id'];
-            $brand = '';
-
-
-            if($brandId === 1) {
-                $brand = 'Drumeo';
-            }
-            elseif($brandId === 2){
-                $brand = 'Pianote';
-            }
-            elseif($brandId === 3){
-                $brand = 'Guitareo';
-            }
-            elseif($brandId === 4){
-                $brand = 'Singeo';
-            }
+            $model['name'] = $model->brand->name.'-'.$model['name'];
 
             $model['slug'] = $model->brand->name.'-'.$model['slug'];
 
             if(gettype($model['meta_img']) === 'object'){
-                $model['meta_img'] = $brand.'/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
+                $model['meta_img'] = $model->brand->name.'/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
             }
 
             if(gettype($model['thumbnail']) === 'object'){
-                $model['thumbnail'] = $brand.'/'.$uuid.'-'.$model['thumbnail']->getClientOriginalName();
+                $model['thumbnail'] = $model->brand->name.'/'.$uuid.'-'.$model['thumbnail']->getClientOriginalName();
             }
 
             if(gettype($model['thumbnail_logo']) === 'object'){
-                $model['thumbnail_logo'] = $brand.'/'.$uuid.'-'.$model['thumbnail_logo']->getClientOriginalName();
+                $model['thumbnail_logo'] = $model->brand->name.'/'.$uuid.'-'.$model['thumbnail_logo']->getClientOriginalName();
             }
 
             if(gettype($model['page_logo']) === 'object'){
-                $model['page_logo'] = $brand.'/'.$uuid.'-'.$model['page_logo']->getClientOriginalName();
+                $model['page_logo'] = $model->brand->name.'/'.$uuid.'-'.$model['page_logo']->getClientOriginalName();
             }
 
             if(gettype($model['product_img']) === 'object'){
-                $model['product_img'] = $brand.'/'.$uuid.'-'.$model['product_img']->getClientOriginalName();
+                $model['product_img'] = $model->brand->name.'/'.$uuid.'-'.$model['product_img']->getClientOriginalName();
             }
         });
 
