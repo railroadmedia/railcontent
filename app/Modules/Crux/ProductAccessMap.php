@@ -40,12 +40,42 @@ class ProductAccessMap
         return self::$internalProductsBySkuCache;
     }
 
-    public static function foo()
+    public static function productsGrantingAllContentAccess()
     {
-        DB::connection(config('ecommerce.database_connection_name'))
+        // todo: implement cache
+
+        $results = DB::connection(config('ecommerce.database_connection_name'))
             ->table('ecommerce_products')
+            ->where('digital_access_type', 'all content access')
             ->get(['id', 'sku'])
-            ->keyBy('sku')
-            ->toArray();
+            ;//->toArray();
+
+        return $results;
+    }
+
+    public static function productsGrantingAllContentAccessIdsOnly()
+    {
+        // todo: implement cache
+
+        $results = self::productsGrantingAllContentAccess();
+
+        foreach ($results as $result) {
+            $ids[] = $result->id;
+        }
+
+        return $ids;
+    }
+
+    public static function productsGrantingSpecificContentAccess()
+    {
+        // todo: implement cache
+
+        $results = DB::connection(config('ecommerce.database_connection_name'))
+            ->table('ecommerce_products')
+            ->where('digital_access_type', 'specific content access')
+            ->get(['id', 'sku'])
+            ;//->toArray();
+
+        return $results;
     }
 }
