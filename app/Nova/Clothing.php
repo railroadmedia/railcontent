@@ -134,14 +134,13 @@ class Clothing extends Resource
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
-            Boolean::make('Free Bonus', 'free_bonus')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Bundle Lifetime Access', 'bundle_lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Membership Discount', 'membership_discount')->default(false)->hideFromIndex(),
+            Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
             Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
+            Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
             Number::make('Display order', 'display_order'),
             Flexible::make('Images')
                 ->addLayout(ImageLayout::class)
