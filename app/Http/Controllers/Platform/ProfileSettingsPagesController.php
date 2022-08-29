@@ -108,21 +108,6 @@ class ProfileSettingsPagesController extends BaseController
 
     public function account(Request $request, $domain, $brand, $userId)
     {
-
-    /*  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-
-    "what the account-details page backend needs to know"
-    ------------------------------------------------------------------------
-
-
-        1. [ ] what subscription-info-section
-        1. [ ] what call-to-action-section
-        1. [ ] hideGetHelpRequestLink
-
-
-    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
         if ($userId != auth()->id()) {
             // todo: redirect to version of this page for auth()->id()
         }
@@ -147,9 +132,9 @@ class ProfileSettingsPagesController extends BaseController
             if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
                 $productsDigitalAccessTypeSpecific[] = $userProduct;
             }
-            $expired = $userProduct->getExpirationDate()->lt($now);
+            $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt($now) : null;
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
-            if (!$expired && $isAllContentAccessProduct) {
+            if (($expired !== true) && $isAllContentAccessProduct) {
                 $paused = $userProduct->getStartDate() ? $userProduct->getStartDate()->gt($now) : false;
                 if ($paused) {
                     $subscriptionIsPaused = true;
@@ -168,7 +153,7 @@ class ProfileSettingsPagesController extends BaseController
 
         $subscriptions = $this->subscriptionRepository->getSubscriptionsForUsers([$userId]);
 
-        $hasOrHadAnAllContentAccessSubscriptionAtAnytime = false;
+        $hasHadMembership = false;
 
         foreach ($subscriptions as $subscription) {
             $isCorrectType = $subscription->getType() == 'subscription';
@@ -177,7 +162,7 @@ class ProfileSettingsPagesController extends BaseController
             $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
 
             if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
-                $hasOrHadAnAllContentAccessSubscriptionAtAnytime = true;
+                $hasHadMembership = true;
             }
         }
 
@@ -215,10 +200,11 @@ class ProfileSettingsPagesController extends BaseController
                 'sections' => $this->settingSections('account'),
                 'productsDigitalAccessTypeSpecific' => $productsDigitalAccessTypeSpecific,
                 'activeAllContentAccess' => $activeAllContentAccess,
-                'hasOrHadAnAllContentAccessSubscriptionAtAnytime' => $hasOrHadAnAllContentAccessSubscriptionAtAnytime,
-                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
                 'isLifetime' => $isLifetime,
-                'isPaused' => $subscriptionIsPaused,
+                'subscriptionIsPaused' => $subscriptionIsPaused,
+                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
+                'membershipSubscription' => $membershipSubscription,
+                'hasHadMembership' => $hasHadMembership
             ]
         );
     }
