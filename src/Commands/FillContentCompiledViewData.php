@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
+use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -38,7 +39,7 @@ class FillContentCompiledViewData extends Command
     {
         $this->info('Starting FillContentCompiledViewData...');
 
-        $dbConnection = $databaseManager->connection(ConfigService::$connectionMaskPrefix . config('railcontent.database_connection_name'));
+        $dbConnection = RepositoryBase::$connectionMask;
         $dbConnection->disableQueryLog();
 
         $totalProcessed = 0;
@@ -49,7 +50,6 @@ class FillContentCompiledViewData extends Command
 //            ->where('id', 360406)
 //                ->whereNotIn('type', ['youtube-video', 'vimeo-video', 'assignment'])
             ->chunk(250, function (Collection $rows) use ($contentService, $dbConnection, &$totalProcessed) {
-
                 $contentService->fillCompiledViewContentDataColumnForContentIds($rows->pluck('id')->toArray());
                 $totalProcessed += $rows->count();
 
