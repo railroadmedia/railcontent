@@ -164,7 +164,7 @@ Route::group(
 
         Route::get('/onboarding', ApiJsonController::class . '@onboarding');
 
-        Route::get('/shows', ApiJsonController::class . '@getShows');
+        Route::get('/shows', ApiJsonController::class . '@getShows')->name('api.shows');
 
         Route::get('/comments', ApiJsonController::class . '@getComments');
 
