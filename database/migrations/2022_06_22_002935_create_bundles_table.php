@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('bundle_id');
             $table->integer('product_id');
+            $table->boolean('free_bonus')->default(false);
+            $table->boolean('lifetime_access')->default(false);
             $table->integer('order_number');
             $table->timestamps();
         });

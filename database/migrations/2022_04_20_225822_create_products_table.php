@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('product_type_id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('sku');
+            $table->longText('sku');
             $table->string('promo_code')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('badge_text')->nullable();
@@ -42,15 +42,14 @@ return new class extends Migration
             $table->boolean('sold_out')->default(false);
             $table->boolean('guaranteed')->default(false);
             $table->boolean('visible')->default(true);
-            $table->boolean('free_bonus')->default(false);
-            $table->boolean('membership_discount')->default(false);
             $table->boolean('lifetime_access')->default(false);
             $table->boolean('free_shipping')->default(false);
             $table->boolean('included_edge')->default(false);
-            $table->boolean('bundle_lifetime_access')->default(false);
-            $table->boolean('bundle_free_shipping')->default(false);
             $table->boolean('size_case_sensitive')->default(false);
-            $table->integer('display_order');
+            $table->boolean('physical')->default(false);
+            $table->boolean('bundle_free_shipping')->default(false);
+            $table->longText('bundle_desc')->nullable();
+            $table->integer('display_order')->default(0);
             $table->timestamps();
         });
     }

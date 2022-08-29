@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->integer('product_id');
             $table->integer('size_id');
-            $table->boolean('sold_out')->default(false);
             $table->timestamps();
         });
     }

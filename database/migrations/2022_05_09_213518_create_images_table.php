@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->string('path')->unique();
+            $table->string('path');
             $table->integer('order_number');
             $table->timestamps();
         });
