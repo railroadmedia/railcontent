@@ -45,32 +45,15 @@
                     @include('musora.product.partials.benefits',[
                         'benefits' => $product->benefits
                     ])
+                @endif
 
+                @if(!empty($product->overview))
                     @include('musora.product.partials.overview',[
                         "overview" => $product->overview,
                     ])
+                @endif
 
-                    @include('musora.product.partials.specs',[
-                        'specList'=> $product->specs,
-                    ])
-
-                    @include('musora.product.partials.instructor',[
-                        "instructorPhoto" => $product->product_img,
-                        "instructorBio" => $product->instructor_desc
-                    ])
-
-                    @include('musora.product.partials.topics',[
-                        "topicList" => $product->features
-                    ])
-
-                @elseif($product->productType->name === 'Bundle')
-                    @if(!is_null($product->bundle_img))<img class="mb-4" src="@if(str_contains($product->bundle_img, 'amazonaws') || str_contains($product->bundle_img, 'cloudfront')) {{$product->bundle_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->bundle_img  }}@endif" />@endif
-
-                    @include('musora.product.partials.overview',[
-                        "overview" => $product->overview,
-                        "interactive" => false,
-                    ])
-
+                @if($product->productType->name === 'Bundle')
                     <hr class="my-8" />
 
                     <p class="mb-4">
@@ -78,20 +61,22 @@
                         <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $theme }}, and they’re yours forever.</em>
                     </p>
 
-
                     @include('musora.product.partials.bonuses')
                 @else
-                    @if(!empty($product->overview))
-                        <p><x-markdown>{!! nl2br($product->overview) !!}</x-markdown></p>
-                    @endif
+                   @include('musora.product.partials.specs',[
+                       'specList'=> $product->specs,
+                       $product->productType->name !== 'Bundle' && $product->productType->name !== 'Lesson' && 'featureList' => $product->features
+                   ])
+                @endif
 
-                        @if(!empty($product->product_img))
-                            <img class="my-4" src="@if(str_contains($product->product_img, 'amazonaws') || str_contains($product->product_img, 'cloudfront')) {{$product->product_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->product_img  }}@endif" alt="product image" />
-                        @endif
+                @if($product->productType->name === 'Lesson')
+                    @include('musora.product.partials.instructor',[
+                        "instructorPhoto" => $product->product_img,
+                        "instructorBio" => $product->instructor_desc
+                    ])
 
-                    @include('musora.product.partials.specs',[
-                        'specList'=> $product->specs,
-                        'featureList' => $product->features
+                    @include('musora.product.partials.topics',[
+                        "topicList" => $product->features
                     ])
                 @endif
 
