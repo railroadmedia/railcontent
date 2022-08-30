@@ -47,7 +47,7 @@ class FillContentCompiledViewData extends Command
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->orderBy(config('railcontent.table_prefix') . 'content.id', 'desc')
             // for testing only
-//            ->where('id', 360406)
+            ->where('id', 197937)
 //                ->whereNotIn('type', ['youtube-video', 'vimeo-video', 'assignment'])
             ->chunk(250, function (Collection $rows) use ($contentService, $dbConnection, &$totalProcessed) {
                 $contentService->fillCompiledViewContentDataColumnForContentIds($rows->pluck('id')->toArray());

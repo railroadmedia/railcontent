@@ -181,6 +181,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.elastic_index_name', 'testing');
         $app['config']->set('railcontent.compiled_column_mapping_data_keys', $defaultConfig['compiled_column_mapping_data_keys']);
         $app['config']->set('railcontent.compiled_column_mapping_field_keys', $defaultConfig['compiled_column_mapping_field_keys']);
+        $app['config']->set('railcontent.compiled_column_mapping_sub_content_field_keys', $defaultConfig['compiled_column_mapping_sub_content_field_keys']);
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);

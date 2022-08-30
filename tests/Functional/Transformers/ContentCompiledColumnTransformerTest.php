@@ -65,6 +65,10 @@ class ContentCompiledColumnTransformerTest extends BaseTestCase
             'railcontent.compiled_column_mapping_field_keys',
             $defaultConfig['compiled_column_mapping_field_keys']
         );
+        $app['config']->set(
+            'railcontent.compiled_column_mapping_sub_content_field_keys',
+            $defaultConfig['compiled_column_mapping_sub_content_field_keys']
+        );
         $app['config']->set('railcontent.database_connection_name', 'mysql');
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
@@ -193,14 +197,15 @@ class ContentCompiledColumnTransformerTest extends BaseTestCase
 
         ContentCompiledColumnTransformer::$useCompiledColumnForServingData = false;
 
-        $contentWithoutTransformer = $this->contentService->getById(197937);
+        $contentWithoutTransformer = $this->contentService->getById(355090);
 
         ContentCompiledColumnTransformer::$useCompiledColumnForServingData = true;
         $this->contentService->idContentCache = [];
 
-        $contentWithTransformer = $this->contentService->getById(197937);
+        $contentWithTransformer = $this->contentService->getById(355090);
 
 
+        dd($contentWithTransformer['fields']);
         // for each field and data make sure there is a match in the transformed data
         $this->assertNotEmpty($contentWithTransformer);
 

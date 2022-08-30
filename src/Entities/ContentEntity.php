@@ -22,7 +22,12 @@ class ContentEntity extends Entity
             if (isset($field['value']['id'])) {
 
                 // linked contents
-                $linkedContentDots = (new ContentEntity($field['value']))->dot();
+                if ($field['value'] instanceof ContentEntity) {
+                    $linkedContentDots = $field['value']->dot();
+                } else {
+                    $linkedContentDots = (new ContentEntity($field['value']))->dot();
+                }
+
                 $fieldDots['*fields.' . $field['key']][] = $field['value'];
 
                 foreach ($linkedContentDots as $linkedContentDotKey => $linkedContentDotValue) {

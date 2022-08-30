@@ -114,4 +114,32 @@ class UserPlaylistContentRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    /**
+     * returns: [
+     *    content_id_1 => true/false,
+     *    content_id_2 => true/false,
+     *    etc...
+     * ]
+     * @param  array  $contentIds
+     * @param $playlistId
+     * @return array
+     */
+    public function areContentIdsInPlaylist(array $contentIds, $playlistId)
+    {
+        $playlistContentIdLinkRows = $this->query()
+            ->select(['content_id'])
+            ->where('user_playlist_id', $playlistId)
+            ->whereIn('content_id', $contentIds)
+            ->get()
+            ->toArray();
+
+        $contentIdsInPlaylistBooleans = [];
+
+        foreach ($contentIds as $contentId) {
+            $contentIdsInPlaylistBooleans[$contentId] = in_array($contentId, $playlistContentIdLinkRows);
+        }
+
+        return $contentIdsInPlaylistBooleans;
+    }
 }
