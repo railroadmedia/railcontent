@@ -28,6 +28,7 @@
         "railroad/event-data-synchronizer": "dev-v8.0-railcontent-2-integration-referral-3",
         "railroad/mailora": "^3.0",
         "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
+        "railroad/railanalytics": "v3.0.*",
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "dev-v2.0-content-optimisations as v2.0.0",
         "railroad/railforums": "v2.0.x-dev as v2.0.6",
