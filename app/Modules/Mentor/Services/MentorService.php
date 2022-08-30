@@ -29,6 +29,7 @@ class MentorService
         $mentor->supported_brands = $supportedBrand;
         $mentor->active_student_max_count = $maxStudents;
         $mentor->active_student_count = 0;
+        $mentor->total_student_count = 0;
         $mentor->save();
     }
 
@@ -57,6 +58,7 @@ class MentorService
         if ($mentorStudent->active) {
             $mentor->active_student_count += 1;
         }
+        $mentor->total_student_count += 1;
         $mentorStudent->save();
         $mentor->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
@@ -162,6 +164,7 @@ class MentorService
         if ($mentorStudent->active) {
             $mentor->active_student_count += 1;
         }
+        $mentor->total_student_count += 1;
         $mentor->save();
         $mentorStudent->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
@@ -186,6 +189,7 @@ class MentorService
             $mentor = new Mentor();
             $mentor->user_id = $userId;
             $mentor->active_student_count = 0;
+            $mentor->total_student_count = 0;
         }
         $mentor->supported_brands = $supportedBrands;
         $mentor->active_student_max_count = $activeStudentMaxCount;
@@ -200,6 +204,7 @@ class MentorService
                 $newMentor = $this->chooseNewMentor($mentorStudent);
                 $mentorStudent->mentor_user_id = $newMentor->user_id;
                 $newMentor->active_student_count += 1;
+                $newMentor->total_student_count += 1;
                 if (!array_key_exists($newMentor->user_id, $mentors)) {
                     $mentors[$newMentor->user_id] = $newMentor;
                 }

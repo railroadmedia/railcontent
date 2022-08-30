@@ -19,6 +19,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property string $supported_brands
  * @property integer $active_student_max_count
  * @property integer $active_student_count
+ * @property integer $total_student_count
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read User $user

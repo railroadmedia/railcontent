@@ -15,7 +15,8 @@ class MentorFactory extends Factory
         return [
             'user_id' => User::factory(),
             'active_student_max_count' => config('mentor.default_active_student_max_count'),
-            'active_student_count' => 0
+            'active_student_count' => 0,
+            'total_student_count' => 0
         ];
     }
 
