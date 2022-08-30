@@ -153,14 +153,14 @@ export default {
               text,
               icon: "fa-envelope",
             });
-            // console.log("Subscribed to: " + this.coachName);
+            console.log("Subscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = false;
             this.$emit("onShowNotification", {
               error: true,
             });
-            // console.log("Subscribed did not work");
+            console.log("Subscribed did not work");
           });
       } else {
         this.item.current_user_is_subscribed = false;
