@@ -25899,6 +25899,9 @@ a:visited{
   .lg\:tw-w-full{
     width: 100% !important;
   }
+  .lg\:tw-max-w-\[50\%\]{
+    max-width: 50% !important;
+  }
   .lg\:tw-max-w-\[567px\]{
     max-width: 567px !important;
   }
