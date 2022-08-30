@@ -15,6 +15,7 @@ use Modules\UserManagementSystem\Models\User;
  *
  * @property integer $id
  * @property integer $user_id
+ * @property boolean $active
  * @property string $primary_brand
  * @property integer $mentor_user_id
  *

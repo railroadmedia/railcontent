@@ -46,10 +46,17 @@ class MentorService
     public function assignMentorByBrand(int $userId, string $brand): void
     {
         $mentor = $this->chooseMentor($brand);
-        $mentorStudent = $this->getMentorStudent($userId);
+        $mentorStudent = $this->getMentorStudentOrNull($userId);
+        if (!$mentorStudent) {
+            $mentorStudent = new MentorStudent();
+            $mentorStudent->user_id = $userId;
+            $mentorStudent->active = true; //assumes mentor is active
+        }
         $mentorStudent->primary_brand = $brand;
         $mentorStudent->mentor_user_id = $mentor->user_id;
-        $mentor->active_student_count += 1;
+        if ($mentorStudent->active) {
+            $mentor->active_student_count += 1;
+        }
         $mentorStudent->save();
         $mentor->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
@@ -142,22 +149,27 @@ class MentorService
 
     public function updateStudentMentor(int $userId, int $newMentorId): void
     {
-        $mentorStudent = $this->getMentorStudent($userId);
+        $mentorStudent = $this->getMentorStudentOrNull($userId);
+        if (!$mentorStudent) {
+            $mentorStudent = new MentorStudent();
+            $mentorStudent->user_id = $userId;
+            $mentorStudent->active = $this->isActive();
+        }
+
         $mentor = $this->getMentorOrNull($newMentorId);
+
         $mentorStudent->mentor_user_id = $mentor->user_id;
-        $mentor->active_student_count += 1;
+        if ($mentorStudent->active) {
+            $mentor->active_student_count += 1;
+        }
         $mentor->save();
         $mentorStudent->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
     }
 
-    private function getMentorStudent(int $userId): MentorStudent
+    private function getMentorStudentOrNull(int $userId): ?MentorStudent
     {
         $mentorStudent = MentorStudent::query()->where('user_id', '=', $userId)->first();
-        if (!$mentorStudent) {
-            $mentorStudent = new MentorStudent();
-            $mentorStudent->user_id = $userId;
-        }
         return $mentorStudent;
     }
 
@@ -184,19 +196,25 @@ class MentorService
     {
         $mentors = [];
         foreach ($mentorStudents as $mentorStudent) {
-            $newMentor = $this->chooseNewMentor($mentorStudent);
-            $mentorStudent->mentor_user_id = $newMentor->user_id;
-            $newMentor->active_student_count += 1;
-            if (!array_key_exists($newMentor->user_id, $mentors)) {
-                $mentors[$newMentor->user_id] = $newMentor;
+            if ($mentorStudent->active) {
+                $newMentor = $this->chooseNewMentor($mentorStudent);
+                $mentorStudent->mentor_user_id = $newMentor->user_id;
+                $newMentor->active_student_count += 1;
+                if (!array_key_exists($newMentor->user_id, $mentors)) {
+                    $mentors[$newMentor->user_id] = $newMentor;
+                }
+            } else {
+                $mentorStudent->mentor_user_id = '';
             }
         }
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
             $ids = $data->map(fn($t) => $t->id);
             MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId]);
-            $newMentor = $mentors[$mentorUserId];
-            $newMentor->save();
+            if ($mentorUserId) {
+                $newMentor = $mentors[$mentorUserId];
+                $newMentor->save();
+            }
             event(StudentMentorsUpdated::newWithMentorStudentCollection($data));
         });
     }
