@@ -1,7 +1,7 @@
 {{-- Featured Pack --}}
 <div class="flex flex-row ">
-    <div class="relative gq-container corners-10 overflow">
-        <a href="{{ $lessonsUrl }}" class="bg-grey-2 dark:tw-bg-[#081825]">
+    <div class="relative gq-container corners-10 overflow bg-grey-2 dark:tw-bg-[#081825]">
+        <a href="{{ $lessonsUrl }}">
             {{-- Desktop Image --}}
             <img src="https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
                 class="gq-large-thumb tw-transition-opacity tw-opacity-0" 
