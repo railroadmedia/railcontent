@@ -1087,6 +1087,7 @@ return [
         'quick-tips',
         'unit-part',
         'song-part',
+        'play-along-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1368,6 +1369,7 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
+            'play-along' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',

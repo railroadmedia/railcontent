@@ -219,7 +219,7 @@ class ContentPagesController extends BaseController
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
         }
 
-        $areMultipartSongs = ($primaryPage == 'songs' && (in_array($brand,['pianote','guitareo'])));
+        $areMultipartSongs = (in_array($primaryPage ,['songs','play-alongs']) && (in_array($brand,['pianote','guitareo'])));
         if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes()) && !$areMultipartSongs) {
             return $this->videoLessonPage(
                 $request,
