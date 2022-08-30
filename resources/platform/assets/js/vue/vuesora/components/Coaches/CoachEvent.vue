@@ -9,7 +9,7 @@
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a
-        href="/members/live"
+        :href="`${brand}/live`"
         class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex"
       >
         <div class="tw-relative">
@@ -31,12 +31,12 @@
           <div class="tw-flex tw-items-center tw-mb-1">
             <!-- Live Badge -->
             <a
-              href="/members/live"
+              :href="`${brand}/live`"
               class="tw-flex tw-no-underline flex-row"
               v-if="eventIsLive"
             >
               <div
-                class="flex-center tw-text-white tw-uppercase tw-rounded tw-bg-red-500 tw-text-sm tw-font-bold tw-leading-none tw-p-1.5"
+                class="flex-center tw-text-white tw-uppercase tw-rounded tw-bg-red-500 tw-text-sm tw-font-bold tw-leading-none tw-p-1"
               >
                 <span>live</span>
               </div>
@@ -72,7 +72,7 @@
           <!-- Event Title & Desc -->
           <div class="tw-mb-1.5">
             <a
-              href="/members/live"
+              :href="`${brand}/live`"
               class="tw-font-bold tw-no-underline tw-text-[#00101D] tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white"
             >
               {{ content.title }}
@@ -85,7 +85,7 @@
                 v-for="(coach, i) in instructors" 
                 :key="i"
             >
-              <a :href="`/members/coaches/${coach.slug}`"
+              <a :href="`${brand}/coaches/${coach.slug}`"
                  class="tw-no-underline tw-mr-1.5 tw-block"
               >
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
@@ -109,10 +109,10 @@
           "
         >
           <div v-if="eventIsLive || showWatch">
-            <div class="tw-flex tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
+            <div class="tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
               <div>
                 <a
-                  href="/members/live"
+                  :href="`${brand}/live`"
                   class="tw-btn-primary tw-w-full"
                   :class="[brandBGColor, brandHoverColor]"
                 >
