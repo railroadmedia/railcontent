@@ -20,8 +20,8 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
     private static $cache = [];
 
     /**
-     * @param UserPlaylistContentRepository $userPlaylistContentRepository
-     * @param UserPlaylistsRepository $userPlaylistsRepository
+     * @param  UserPlaylistContentRepository  $userPlaylistContentRepository
+     * @param  UserPlaylistsRepository  $userPlaylistsRepository
      */
     public function __construct(
         UserPlaylistContentRepository $userPlaylistContentRepository,
@@ -32,7 +32,7 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
     }
 
     /**
-     * @param Collection $contents
+     * @param  Collection  $contents
      * @return mixed
      */
     public function decorate(Collection $contents)
@@ -47,38 +47,25 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
             return $contents;
         }
 
-        if (key_exists(user()->id, self::$cache)) {
-            $userPlaylistContents = self::$cache[user()->id];
-        } else {
-            $userPlaylist =
-                \Arr::first($this->userPlaylistsRepository->getUserPlaylist(user()->id, 'primary-playlist', brand()));
-
-            if ($userPlaylist) {
-                $userPlaylistContents =
-                    $this->userPlaylistContentRepository->getUserPlaylistContents($userPlaylist['id']);
-
-                self::$cache[user()->id] = $userPlaylistContents;
-            }
-        }
+        $userPlaylist =
+            \Arr::first($this->userPlaylistsRepository->getUserPlaylist(user()->id, 'primary-playlist', brand()));
 
         foreach ($contentsOfType as $index => $content) {
             $contentsOfType[$index]['user_playlists'][user()->id] = [];
             $contentsOfType[$index]['is_added_to_primary_playlist'] = false;
         }
 
-        if (empty($userPlaylistContents[0]['id'])) {
+        if (empty($userPlaylist)) {
             return $contents;
         }
+
+        $areContentIdsInPlaylist =
+            $this->userPlaylistContentRepository->areContentIdsInPlaylist($contentIds, $userPlaylist['id']);
 
         $contentsOfType = $contentsOfType->toArray();
 
         foreach ($contentsOfType as $index => $content) {
-            foreach ($userPlaylistContents as $userPlaylistContent) {
-                if ($userPlaylistContent['id'] == $content['id']) {
-                    $contentsOfType[$index]['user_playlists'][user()->id][] = $userPlaylistContent;
-                    $contentsOfType[$index]['is_added_to_primary_playlist'] = true;
-                }
-            }
+            $contentsOfType[$index]['is_added_to_primary_playlist'] = $areContentIdsInPlaylist[$content['id']] ?? false;
         }
 
         return new Collection($contentsOfType);
