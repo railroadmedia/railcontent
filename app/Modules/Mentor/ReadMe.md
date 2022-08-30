@@ -2,8 +2,13 @@
 
 ### Initialization
 
+> **Note**: When testing locally it is best to disable customer.io job processing by setting the QUEUE_CONNECTION to
+> database.  Otherwise, processing will be much slower since it needs to wait for the
+> customer.io requests
+
 Run the following to create mentors, assign mentors to active users,
 register the help scout web hook (Only in production) and populate the help scout user table.
+
 ```
 r mwp artisan mentors:init
 ```
@@ -64,18 +69,22 @@ tail -f /app/musora-web-platform/storage/logs/laravel.log
 To test you can send an email to musora-dev-sandbox-testing@musoramedia.helpscoutapp.com to see the results.
 
 ### Customer IO Integration
+
 Whenever a students mentor is updated we post the following customer attributes to the musora workspace in customer.io
+
 - primary_brand
 - assigned_mentor_email
 
 See EventDataSynchronizer Module for implementation details
 
 #### Debugging
+
 Customer.io syncing uses Laravel Queues to push information to customer.io without interrupting the current request.  
 Ensure the QUEUE_CONNECTION env setting is set to sync, to automatically process the jobs in real time.
 By default this is setup to push data to the Customer.io Dev Sandbox Musora.
 > **Note**: Demoting a mentor might not work with real time processing because it creates 1000s of calls to customer.io.
-To test this change QUEUE_CONNECTION to database and process the commands using the artisan queue:listen command
+> To test this change QUEUE_CONNECTION to database and process the commands using the artisan queue:listen command
+
 ```
 r mwp artisan queue:listen database --queue=customer-io --timeout=10000000
 ```
