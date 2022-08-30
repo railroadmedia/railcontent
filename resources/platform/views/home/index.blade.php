@@ -109,9 +109,11 @@
             ])
         @endcomponent
 
+
         {{-- Live Banner --}}
         <coach-event
             brand="{{ $brand }}"
+            class="tw-mb-6"
             :preloaded-content='{{ $coachEvent }}'
             current-date-string="{{ $currentDate }}"
             subscription-calendar-id="{{ $calendarId }}"
