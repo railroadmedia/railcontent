@@ -151,7 +151,6 @@ export default {
             const text = `You will now receive updates when ${this.coachFirstName} releases new content!`;
             this.$emit("onShowNotification", {
               text,
-              icon: "fa-envelope",
             });
             console.log("Subscribed to: " + this.coachName);
           })
@@ -169,7 +168,6 @@ export default {
             const text = `You will no longer receive updates when ${this.coachFirstName} releases new content!`;
             this.$emit("onShowNotification", {
               text,
-              icon: "fa-bell-slash",
             });
             // console.log("Unsubscribed to: " + this.coachName);
           })

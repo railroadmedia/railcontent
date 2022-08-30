@@ -5,27 +5,27 @@
   >
     <div class="tw-text-center tw-pb-6">
       <div
-        :style="isError ? 'background-color: red;' : ''"
         class="
-          tw-px-3
-          tw-py-2
+          tw-px-[16px]
+          tw-py-[20px]
           tw-w-4/6
           tw-justify-self-center
           tw-mx-auto
           tw-rounded-md
+          tw-drop-shadow-md
         "
-        :class="isError ? '' : 'tw-bg-' + brand"
+        :class="isError ? 'tw-bg-red' : 'tw-text-black dark:tw-text-white tw-bg-white dark:tw-bg-[#081825]'"
       >
-        <div class="tw-flex tw-justify-between tw-text-white tw-text-small">
+        <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
           <div>
-            <i class="far tw-mr-2" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
+            <i class="far tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
             {{ notificationText }}
           </div>
           <button
-            class="tw-bg-transparent tw-border-none"
+            class="tw-bg-[#E4E4E7] dark:tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-border-none tw-rounded-full"
             v-on:click="hide();"
           >
-            <i class="far fa-times-circle tw-text-white"></i>
+            <i class="far fa-times tw-text-black dark:tw-text-white"></i>
           </button>
         </div>
       </div>
@@ -50,10 +50,6 @@ const autoHide = (context) => {
 export default {
   name: "NotificationToasts",
   props: {
-    brand: {
-      type: String,
-      default: () => "drumeo",
-    },
     text: {
       type: String,
       default: () => "",
