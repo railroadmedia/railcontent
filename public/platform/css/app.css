@@ -22078,6 +22078,9 @@ a:visited{
 .tw-mb-0{
   margin-bottom: 0px !important;
 }
+.tw-mt-4{
+  margin-top: 1rem !important;
+}
 .tw-mt-8{
   margin-top: 2rem !important;
 }
@@ -22089,9 +22092,6 @@ a:visited{
 }
 .tw-mb-1{
   margin-bottom: 0.25rem !important;
-}
-.tw-mt-4{
-  margin-top: 1rem !important;
 }
 .tw-mt-\[5px\]{
   margin-top: 5px !important;
@@ -25960,10 +25960,6 @@ a:visited{
   .lg\:tw-px-\[12px\]{
     padding-left: 12px !important;
     padding-right: 12px !important;
-  }
-  .lg\:tw-px-7{
-    padding-left: 1.75rem !important;
-    padding-right: 1.75rem !important;
   }
   .lg\:tw-px-12{
     padding-left: 3rem !important;
