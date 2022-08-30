@@ -440,7 +440,7 @@ class HomePageController extends BaseController
         return [
             "xp" => [
                 "icon" => "icon-experience-points",
-                "value" => user()->total_xp,
+                "value" => user()->getTotalXp(),
                 "label" => user()->getXpRank(),
             ],
             "forums_likes" => [

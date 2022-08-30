@@ -334,7 +334,9 @@ class ContentProgressEventListener
                     );
                 }
             }
-            event(new UserPointsUpdated($userContentProgressSaved->userId, brand()));
+
+            user()->total_xp = $this->userPointsService->countUserPoints($userContentProgressSaved->userId);
+            user()->save();
         }
     }
 
@@ -491,5 +493,8 @@ class ContentProgressEventListener
                 ]
             );
         }
+
+        user()->total_xp = $this->userPointsService->countUserPoints($userContentsProgressReset->userId);
+        user()->save();
     }
 }

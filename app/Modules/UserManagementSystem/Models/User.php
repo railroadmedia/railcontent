@@ -263,7 +263,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'drumeo_onboarding_skip_setup',
         'pianote_onboarding_skip_setup',
         'guitareo_onboarding_skip_setup',
-        'singeo_onboarding_skip_setup'
+        'singeo_onboarding_skip_setup',
+        'total_xp'
     ];
 
 
@@ -340,18 +341,18 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return url()->route('platform.profile.dashboard', [$this->id]);
     }
 
-    /**
-     * @return Attribute
-     */
-    public function totalXp()
-    : Attribute
-    {
-        return Attribute::make(
-            get: function ($value) {
-                return !empty($this->total_xp) ? $this->total_xp : 0;
-            },
-        );
-    }
+//    /**
+//     * @return Attribute
+//     */
+//    public function totalXp()
+//    : Attribute
+//    {
+//        return Attribute::make(
+//            get: function ($value) {
+//                return !empty($this->total_xp) ? $this->total_xp : 0;
+//            },
+//        );
+//    }
 
     /**
      * @return string
@@ -620,5 +621,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
+    }
+
+    public function getTotalXp()
+    {
+        return $this->total_xp ?? 0;
     }
 }
