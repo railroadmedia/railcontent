@@ -1,9 +1,12 @@
 # Mentors
 
-### Launch
+### Initialization
 
-Run InitializeMentors artisan command on production launch. This creates mentors, assigns mentors to active users,
-registers the help scout web hook and populates the help scout user table.
+Run the following to create mentors, assign mentors to active users,
+register the help scout web hook (Only in production) and populate the help scout user table.
+```
+r mwp artisan mentors:init
+```
 
 ### UMS Integration
 
