@@ -33,7 +33,9 @@ return [
             'fields.live_event_end_time',
             'live_event_start_time_in_timezone',
             'live_event_end_time_in_timezone',
-            'published_on_in_timezone'
+            'published_on_in_timezone',
+            'lesson_count',
+            'lessons'
         ],
 
         'instructor' => [
