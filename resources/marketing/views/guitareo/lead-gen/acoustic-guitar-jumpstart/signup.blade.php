@@ -54,7 +54,7 @@
                         "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
                         "formName" => 'Acoustic Guitar Jump Start',
                         "submitButtonColor" => "#ff8c00",
-                ])
+                    ])
                 </div>
             </div>
         </div>

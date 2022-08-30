@@ -62,7 +62,7 @@
             >
               <span>{{ startWeekday }}</span
               >,
-              <span>{{ startMonth }}</span>
+              <span class="tw-mr-1">{{ startMonth }}</span>
               <span> {{ startDay }}</span>
               @
               <span>{{ formattedTime }}</span>
