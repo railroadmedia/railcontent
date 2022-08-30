@@ -648,6 +648,7 @@ return [
                 'length_in_seconds',
                 'data.thumbnail_url',
             ],
+            'total_xp'
         ],
 
         'play-along-part' => [
