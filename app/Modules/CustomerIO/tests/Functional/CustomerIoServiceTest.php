@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\CustomerIO\Tests\Functional;
+namespace App\Modules\CustomerIO\tests\Functional;
 
 use Carbon\Carbon;
 use Exception;
@@ -10,7 +10,7 @@ use App\Modules\CustomerIO\Events\CustomerCreated;
 use App\Modules\CustomerIO\Events\CustomerUpdated;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService;
-use App\Modules\CustomerIO\Tests\CustomerIoTestCase;
+use App\Modules\CustomerIO\tests\CustomerIoTestCase;
 
 class CustomerIoServiceTest extends CustomerIoTestCase
 {
