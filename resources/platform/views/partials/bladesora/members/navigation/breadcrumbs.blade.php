@@ -7,7 +7,7 @@
                 @endif
 
                 @if(!empty($page['url']))
-                    <a class="tiny text-grey-3 tw-no-underline" href="{{ $page['url'] }}">
+                    <a class="tiny tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-no-underline" href="{{ $page['url'] }}">
                         {{ ucwords($page['title']) }}
                     </a>
                 @else
