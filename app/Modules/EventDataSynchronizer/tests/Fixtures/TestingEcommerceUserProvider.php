@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\Tests\Fixtures;
+namespace App\Modules\EventDataSynchronizer\tests\Fixtures;
 
 use Doctrine\Inflector\Inflector;
 use Doctrine\ORM\OptimisticLockException;
@@ -47,7 +47,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
         $usoraUser = $this->userService->getByEmailOrNull($id);
 
         if ($usoraUser) {
-            return new User($usorauser->id, $usoraUser->email);
+            return new User($usoraUser->id, $usoraUser->email);
         }
 
         return null;
@@ -68,7 +68,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
      */
     public function getUserId(User $user): int
     {
-        return $user->id;
+        return $user->getId();
     }
 
     /**
@@ -151,7 +151,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
 
         event(new UserCreated($usoraUser));
 
-        return new User($usorauser->id, $usoraUser->email);
+        return new User($usoraUser->id, $usoraUser->email);
     }
 
     /**
@@ -187,7 +187,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
         $usoraUser = $this->userService->getByEmailOrNull($email);
 
         if ($usoraUser) {
-            return new User($usorauser->id, $usoraUser->email);
+            return new User($usoraUser->id, $usoraUser->email);
         }
 
         return null;

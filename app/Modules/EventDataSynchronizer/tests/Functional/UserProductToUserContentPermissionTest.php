@@ -1,35 +1,30 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\Tests\Functional;
+namespace App\Modules\EventDataSynchronizer\tests\Functional;
 
 use Carbon\Carbon;
+use App\Modules\EventDataSynchronizer\tests\EventDataSynchronizerTestCase;
+use Google\Service\Vision\Product;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\UserProductRepository;
-use App\Modules\EventDataSynchronizer\Tests\EventDataSynchronizerTestCase;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 // todo: update tests for new ecom package...
 class UserProductToUserContentPermissionTest extends EventDataSynchronizerTestCase
 {
-    /**
-     * @var UserProductRepository
-     */
-    private $userProductRepository;
 
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
-    /**
-     * @var PermissionRepository
-     */
-    private $permissionRepository;
+    private UserProductRepository $userProductRepository;
+    private ProductRepository $productRepository;
+    private PermissionRepository $permissionRepository;
 
     protected function setUp(): void
     {
+        parent::setUp();
 
+        $this->userProductRepository = $this->app->make(UserProductRepository::class);
+        $this->productRepository = $this->app->make(ProductRepository::class);
+        $this->permissionRepository = $this->app->make(PermissionRepository::class);
     }
 
     public function test_handle_empty_product()

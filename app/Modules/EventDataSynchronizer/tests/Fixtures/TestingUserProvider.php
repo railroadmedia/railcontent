@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\Tests\Fixtures;
+namespace App\Modules\EventDataSynchronizer\tests\Fixtures;
 
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\Tests\Fixtures;
+namespace App\Modules\EventDataSynchronizer\tests\Fixtures;
 
 use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface;
 use App\Modules\UserManagementSystem\Services\UserService;

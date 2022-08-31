@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\Tests\Fixtures;
+namespace App\Modules\EventDataSynchronizer\tests\Fixtures;
 
+use Railroad\Ecommerce\Entities\User;
 use Railroad\Railforums\Contracts\UserProviderInterface;
-use Modules\UserManagementSystem\Models\User;
 
 class TestingRailforumsUserProvider implements UserProviderInterface
 {
@@ -24,14 +24,6 @@ class TestingRailforumsUserProvider implements UserProviderInterface
         return '';
     }
 
-    /**
-     * @param $userId
-     * @return User
-     */
-    public function getUser($userId)
-    {
-        return null;
-    }
 
     /**
      * @param array $userIds
@@ -68,4 +60,10 @@ class TestingRailforumsUserProvider implements UserProviderInterface
     {
         return [];
     }
+
+    public function getUser($userId): ?\Railroad\Railforums\Entities\User
+    {
+        return null;
+    }
+
 }

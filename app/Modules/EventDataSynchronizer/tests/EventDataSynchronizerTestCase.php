@@ -1,40 +1,32 @@
 <?php
 
-namespace Railroad\EventDataSynchronizer\Tests;
+namespace App\Modules\EventDataSynchronizer\tests;
 
+use App\Modules\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider;
+use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
+use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingEcommerceUserProvider;
+use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingRailforumsUserProvider;
+use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingUserProvider;
 use Carbon\Carbon;
 use Doctrine\Inflector\InflectorFactory;
-use Faker\Generator;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 use Railroad\Ecommerce\Faker\Factory;
 use Railroad\Ecommerce\Faker\Faker as EcommerceFaker;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Providers\EcommerceServiceProvider;
-use Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider;
-use Railroad\EventDataSynchronizer\Providers\UserProviderInterface;
-use Railroad\EventDataSynchronizer\Tests\Fixtures\TestingEcommerceUserProvider;
-use Railroad\EventDataSynchronizer\Tests\Fixtures\TestingRailforumsUserProvider;
-use Railroad\EventDataSynchronizer\Tests\Fixtures\TestingUserProvider;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
-use App\Modules\UserManagementSystem\Managers\UsoraEntityManager;
-use App\Modules\UserManagementSystem\Providers\UsoraServiceProvider;
+use Railroad\Usora\Managers\UsoraEntityManager;
+use Railroad\Usora\Providers\UsoraServiceProvider;
+use Tests\TestCase;
 
-class EventDataSynchronizerTestCase extends BaseTestCase
+class EventDataSynchronizerTestCase extends TestCase
 {
-    /**
-     * @var Generator
-     */
-    protected $faker;
-
     /**
      * @var EcommerceFaker
      */
@@ -61,63 +53,22 @@ class EventDataSynchronizerTestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // make sure all entity managers are using the same connection as eachother and laravel
-        /**
-         * @var EcommerceEntityManager $ecommerceEntityManager
-         */
-        $ecommerceEntityManager = app(EcommerceEntityManager::class);
-
-        // make sure laravel is using the same connection
-        DB::connection('testbench')
-            ->setPdo($ecommerceEntityManager->getConnection()->getNativeConnection());
-
-        DB::connection('testbench')
-            ->setReadPdo($ecommerceEntityManager->getConnection()->getNativeConnection());
-
-        Schema::connection('testbench')->getConnection()->setPdo(
-            $ecommerceEntityManager->getConnection()->getNativeConnection()
-        );
-        Schema::connection('testbench')->getConnection()->setReadPdo(
-            $ecommerceEntityManager->getConnection()->getNativeConnection()
-        );
-
         $this->userProvider = app(TestingUserProvider::class);
 
         $this->app->instance(UserProviderInterface::class, $this->userProvider);
         $this->app->instance(RailforumsUserProviderInterface::class, app(TestingRailforumsUserProvider::class));
 
-        $this->artisan('migrate:fresh', []);
-        $this->artisan('cache:clear', []);
-
-        // This is only here because these migrations now live inside musora-web-platform instead of usora package
-        // so we must copy them to this package.
-        Schema::connection('testbench')->table('usora_users', function (Blueprint $table) {
-            $table->string('access_level')->after('last_used_brand')->nullable()->index();
-            $table->integer('total_xp')->after('access_level')->nullable()->index();
-            $table->json('brand_method_levels')->after('total_xp')->nullable();
-            $table->dateTime('membership_expiration_date')->after('last_used_brand')->nullable()->index();
-            $table->boolean('is_lifetime_member')->after('membership_expiration_date')->default(false)->index();
-        });
-
-        $this->faker = $this->app->make(Generator::class);
         $this->ecommerceFaker = Factory::create();
 
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
 
+
         Carbon::setTestNow(Carbon::now());
-    }
 
-    protected function tearDown(): void
-    {
-        Schema::connection('testbench')->table('usora_users', function (Blueprint $table) {
-            $table->dropColumn(
-                ['access_level', 'total_xp', 'brand_method_levels', 'membership_expiration_date', 'is_lifetime_member']
-            );
-        });
 
-        parent::tearDown();
+
     }
 
 
