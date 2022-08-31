@@ -10,16 +10,19 @@ use App\Modules\Mentor\Models\MentorStudent;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
+use Modules\Mentor\Services\ActiveStudentService;
 use Str;
 
 class MentorService
 {
     private PrimaryBrandService $primaryBrandService;
     private ?Collection $mentors = null;
+    private ActiveStudentService $activeStudentService;
 
-    public function __construct(PrimaryBrandService $primaryBrandService)
+    public function __construct(PrimaryBrandService $primaryBrandService, ActiveStudentService $activeStudentService)
     {
         $this->primaryBrandService = $primaryBrandService;
+        $this->activeStudentService = $activeStudentService;
     }
 
     public function store(int $userId, string $supportedBrand, int $maxStudents = 5000): void
@@ -51,7 +54,7 @@ class MentorService
         if (!$mentorStudent) {
             $mentorStudent = new MentorStudent();
             $mentorStudent->user_id = $userId;
-            $mentorStudent->active = true; //assumes mentor is active
+            $mentorStudent->active = $this->activeStudentService->isActive($userId);
         }
         $mentorStudent->primary_brand = $brand;
         $mentorStudent->mentor_user_id = $mentor->user_id;
@@ -155,7 +158,7 @@ class MentorService
         if (!$mentorStudent) {
             $mentorStudent = new MentorStudent();
             $mentorStudent->user_id = $userId;
-            $mentorStudent->active = $this->isActive();
+            $mentorStudent->active = $this->activeStudentService->isActive($userId);
         }
 
         $mentor = $this->getMentorOrNull($newMentorId);

@@ -183,6 +183,7 @@ return [
          */
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
+        App\Modules\Ecommerce\Providers\EcommerceServiceProvider::class,
         App\Modules\Mentor\Providers\MentorServiceProvider::class,
         App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
         App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
