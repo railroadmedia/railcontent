@@ -27,6 +27,11 @@ class UrlDecorator extends ModeDecoratorBase
             $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
             $contentParentData = $content->getParentContentData();
 
+            //TODO: Should be deleted when the hierarchy with the draft learning-path: advanced-lead-guitar is deleted
+            if(brand() == 'guitareo' && $content['type'] == 'play-along'){
+                $contentParentData = [];
+            }
+
             // first-level types
             if (count($contentParentData) == 0 &&
                 !empty($contentTypeToURLSlugMap[$content['type']])) {

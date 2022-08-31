@@ -29,9 +29,9 @@
                     {{ method_field($method) }}
                     {{ csrf_field() }}
 
-                    <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
+                    {{-- <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
                         <p class="tiny text-grey-3">WARNING: Changing your password in {{ ucfirst($brand) }} will also change your password in {{ $otherBrands }}.</p>
-                    </div>
+                    </div> --}}
 
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-3">
                         <div class="tw-flex tw-flex-col tw-w-full">

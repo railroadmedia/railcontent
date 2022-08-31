@@ -52,6 +52,17 @@ return [
         'rudiment',
         'coach-stream',
         'coach',
+        'unit-part',
+        'play-along-part',
+        'chord-and-scale',
+        'entertainment',
+        'quick-tips',
+        'question-and-answer',
+        'student-review',
+        'song-part',
+        'boot-camps',
+        'podcasts',
+        'podcast',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -1076,6 +1087,7 @@ return [
         'quick-tips',
         'unit-part',
         'song-part',
+        'play-along-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1357,6 +1369,7 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
+            'play-along' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',
