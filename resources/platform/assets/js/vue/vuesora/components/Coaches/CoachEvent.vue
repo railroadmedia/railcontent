@@ -57,7 +57,7 @@
 
             <!-- Start Date -->
             <p
-              class="tw-uppercase tw-leading-none tw-hidden xl:tw-block"
+              class="tw-uppercase tw-leading-none dark:tw-text-white tw-hidden xl:tw-block"
               v-if="!eventIsLive"
             >
               <span>{{ startWeekday }}</span
