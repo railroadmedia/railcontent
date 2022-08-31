@@ -154,7 +154,9 @@ class HomePageController extends BaseController
             LiveStreamEventService::$upcomingPriorMinutes = config('railcontent.webUpcomingEventPriorMinutes');
         }
 
+        ContentRepository::$pullFilterResultsOptionsAndCount = true;
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
         $coachOfTheMonth = $this->contentService->getFiltered(
             1,

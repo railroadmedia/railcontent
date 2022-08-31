@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-mb-6 md:tw-mb-8 tw-w-full tw-py-4 tw-px-4 lg:tw-px-7 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
+  <div class="tw-mb-3 tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
     <NotificationToasts
       :icon="toast.icon"
       :text="toast.text"
@@ -9,7 +9,7 @@
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a
-        href="/members/live"
+        :href="`${brand}/live`"
         class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex"
       >
         <div class="tw-relative">
@@ -31,12 +31,12 @@
           <div class="tw-flex tw-items-center tw-mb-1">
             <!-- Live Badge -->
             <a
-              href="/members/live"
+              :href="`${brand}/live`"
               class="tw-flex tw-no-underline flex-row"
               v-if="eventIsLive"
             >
               <div
-                class="flex-center tw-text-white tw-uppercase tw-rounded tw-bg-red-500 tw-text-sm tw-font-bold tw-leading-none tw-p-1.5"
+                class="flex-center tw-text-white tw-uppercase tw-rounded tw-bg-red-500 tw-text-sm tw-font-bold tw-leading-none tw-p-1"
               >
                 <span>live</span>
               </div>
@@ -62,7 +62,7 @@
             >
               <span>{{ startWeekday }}</span
               >,
-              <span>{{ startMonth }}</span>
+              <span class="tw-mr-1">{{ startMonth }}</span>
               <span> {{ startDay }}</span>
               @
               <span>{{ formattedTime }}</span>
@@ -72,7 +72,7 @@
           <!-- Event Title & Desc -->
           <div class="tw-mb-1.5">
             <a
-              href="/members/live"
+              :href="`${brand}/live`"
               class="tw-font-bold tw-no-underline tw-text-[#00101D] tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white"
             >
               {{ content.title }}
@@ -85,7 +85,7 @@
                 v-for="(coach, i) in instructors" 
                 :key="i"
             >
-              <a :href="`/members/coaches/${coach.slug}`"
+              <a :href="`${brand}/coaches/${coach.slug}`"
                  class="tw-no-underline tw-mr-1.5 tw-block"
               >
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
@@ -109,10 +109,10 @@
           "
         >
           <div v-if="eventIsLive || showWatch">
-            <div class="tw-flex tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
+            <div class="tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
               <div>
                 <a
-                  href="/members/live"
+                  :href="`${brand}/live`"
                   class="tw-btn-primary tw-w-full"
                   :class="[brandBGColor, brandHoverColor]"
                 >
@@ -246,7 +246,7 @@ export default {
     };
   },
   mounted() {
-    if ( this.preloadedContent.data[0].length ) {
+    if ( this.preloadedContent.data[0] ) {
       this.content = ContentHelpers.flattenContentObject(
         this.preloadedContent.data[0],
         true

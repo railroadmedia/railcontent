@@ -227,7 +227,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'secondLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs', 'play-alongs'])
             ->name('platform.content.second-level');
 
         Route::get(

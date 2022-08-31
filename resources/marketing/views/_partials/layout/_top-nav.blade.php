@@ -1,7 +1,7 @@
 <nav id="nav" class="bg-[#020815] fixed w-full top-0 left-0 flex items-center h-10 md:h-14">
     <!-- Logo/Home Link -->
     <a href="{{ $homeUrl ?? '/' }}" class="h-full px-2 md:px-4 flex items-center">
-        <img src="{{ $logo }}" alt="Logo" class="w-full max-w-[77px] md:max-w-[144px] max-h-9">
+        <img src="{{ $logo }}" alt="Musora Logo" class="w-full max-w-[77px] md:max-w-[144px] max-h-9">
     </a>
 
     <!-- link-wrapper -->
