@@ -367,7 +367,7 @@ class HomePageController extends BaseController
                 ->select(['forum_posts.*', 'forum_threads.title'])
                 ->leftJoin('forum_threads', 'forum_threads.id', '=', 'forum_posts.thread_id')
                 ->leftJoin('forum_categories', 'forum_threads.category_id', '=', 'forum_categories.id')
-                ->limit(100)
+                ->limit(10)
                 ->whereNull('forum_posts.deleted_at')
                 ->whereNull('forum_threads.deleted_at')
                 ->whereNull('forum_categories.deleted_at')
