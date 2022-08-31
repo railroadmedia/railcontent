@@ -13,6 +13,7 @@ use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Product;
+use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Ecommerce\Services\SubscriptionService;
@@ -113,20 +114,22 @@ class ProfileSettingsPagesController extends BaseController
         }
 
         $userId = auth()->id();
-
         $ecommerceUser = $this->userProvider->getCurrentUser();
 
         $now = Carbon::now();
+        $hasHadMembership = false;
+        $userProductsDigitalAccessTypeSpecific = [];
+        $activeAllContentAccessExpiryDate = null;
+        $pausedSubscriptionStartDate = null;
+        $accessIsFromAppPurchase = false;
+        $isLifetime = false;
+
+        $trialUrl = ''; // todo
 
 
         // ---------------------------- determine all owned digital non-membership products ----------------------------
 
         $userProducts = $this->userProductService->getAllUsersProducts($userId);
-
-        $userProductsDigitalAccessTypeSpecific = [];
-
-        $activeAllContentAccess = false;
-        $subscriptionIsPaused = false;
 
         foreach ($userProducts as $userProduct) {
             if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
@@ -134,26 +137,28 @@ class ProfileSettingsPagesController extends BaseController
             }
             $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt($now) : null;
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
-            if (($expired !== true) && $isAllContentAccessProduct) {
-                $paused = $userProduct->getStartDate() ? $userProduct->getStartDate()->gt($now) : false;
-                if ($paused) {
-                    $subscriptionIsPaused = true;
-                } else {
-                    $activeAllContentAccess = true;
+            if ($isAllContentAccessProduct) {
+                $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt($now);
+                if(!$expired) {
+                    if ($paused) {
+                        $pausedSubscriptionStartDate = $userProduct->getStartDate();
+                    } else {
+                        $activeAllContentAccessExpiryDate = $userProduct->getExpirationDate();
+                    }
                 }
+                $hasHadMembership = true;
             }
         }
 
-        // ---------------------------------------- get the active subscription ----------------------------------------
 
-        $membershipSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+        // --------------------------------------- get the active subscription -----------------------------------------
+
+        $activeSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
 
 
         // ---------------------------------- have they had a membership previously? ----------------------------------
 
         $subscriptions = $this->subscriptionRepository->getSubscriptionsForUsers([$userId]);
-
-        $hasHadMembership = false;
 
         foreach ($subscriptions as $subscription) {
             $isCorrectType = $subscription->getType() == 'subscription';
@@ -163,33 +168,81 @@ class ProfileSettingsPagesController extends BaseController
 
             if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
                 $hasHadMembership = true;
-            }
-        }
-
-
-        // ------------------------------------------ access from app purchase -----------------------------------------
-
-        $accessIsFromAppPurchase = false;
-
-        if ($membershipSubscription) {
-            if (
-                $membershipSubscription->getType() == 'apple_subscription' ||
-                $membershipSubscription->getType() == 'google_subscription'
-            ) {
-                $accessIsFromAppPurchase = true;
+                $membershipSubscriptions[] = $subscription;
             }
         }
 
 
         // --------------------------------------------- is lifetime member --------------------------------------------
 
-        $isLifetime = false;
-
         foreach ($userProducts as $userProduct) {
             if (in_array($userProduct->getProduct()->getId(), [7,8,22,141,412])) {
                 $isLifetime = true;
             }
         }
+
+
+        // --------------------- is their current access remaining from a cancelled subscription? ----------------------
+
+        $noMembershipSubscriptionNowButHadOnePreviously = empty($activeSubscription) && !empty($membershipSubscriptions);
+
+        if ($noMembershipSubscriptionNowButHadOnePreviously && !$isLifetime) {
+
+            foreach ($subscriptions as $subscription) {           // todo: delete
+                $paidUntil = $subscription->getPaidUntil();       // todo: delete
+                $cancelledOn = $subscription->getCanceledOn();    // todo: delete
+                $sku = $subscription->getProduct()->getSku();     // todo: delete
+                $cancelledSubs1[] = [                             // todo: delete
+                    'subId' => $subscription->getId(),            // todo: delete
+                    'paidUntil' => $paidUntil,                    // todo: delete
+                    'cancelledOn' => $cancelledOn,                // todo: delete
+                    'sku' => $sku,                                // todo: delete
+                ];                                                // todo: delete
+            }                                                     // todo: delete
+
+            usort($subscriptions, function($x, $y){
+                /**
+                 * @var $x Subscription
+                 * @var $y Subscription
+                 */
+                if ($x->getPaidUntil() === $y->getPaidUntil()) {
+                    $xCancelledOn = $x->getCanceledOn() ?? null;
+                    $yCancelledOn = $y->getCanceledOn() ?? null;
+                    if ($xCancelledOn === $yCancelledOn) {
+                        return 0;
+                    }
+                    return $xCancelledOn < $yCancelledOn ? -1 : 1;
+                }
+                return $x->getPaidUntil() < $y->getPaidUntil() ? -1 : 1;
+            });
+
+            foreach ($subscriptions as $subscription) {           // todo: delete
+                $paidUntil = $subscription->getPaidUntil();       // todo: delete
+                $cancelledOn = $subscription->getCanceledOn();    // todo: delete
+                $sku = $subscription->getProduct()->getSku();     // todo: delete
+                $cancelledSubs2[] = [                             // todo: delete
+                    'subId' => $subscription->getId(),            // todo: delete
+                    'paidUntil' => $paidUntil,                    // todo: delete
+                    'cancelledOn' => $cancelledOn,                // todo: delete
+                    'sku' => $sku,                                // todo: delete
+                ];
+            }
+
+            $mostRecentSubscription = end($subscriptions);
+            $mostRecentSubscriptionCancelledOn = $mostRecentSubscription->getCanceledOn() ?? null;
+        }
+
+        // ------------------------------------------ access from app purchase -----------------------------------------
+
+        if ($activeSubscription) {
+            if (
+                $activeSubscription->getType() == 'apple_subscription' ||
+                $activeSubscription->getType() == 'google_subscription'
+            ) {
+                $accessIsFromAppPurchase = true;
+            }
+        }
+
 
         // -------------------------------------------------------------------------------------------------------------
 
@@ -198,12 +251,15 @@ class ProfileSettingsPagesController extends BaseController
                 'user' => user(),
                 'sections' => $this->settingSections('account'),
                 'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
-                'activeAllContentAccess' => $activeAllContentAccess,
+                'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
                 'isLifetime' => $isLifetime,
-                'subscriptionIsPaused' => $subscriptionIsPaused,
+                'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
                 'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
-                'membershipSubscription' => $membershipSubscription,
-                'hasHadMembership' => $hasHadMembership
+                'subscription' => $activeSubscription,
+                'hasHadMembership' => $hasHadMembership,
+                'now' => $now,
+                'trialUrl' => $trialUrl,
+                'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
             ]
         );
     }
