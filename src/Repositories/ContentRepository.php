@@ -907,6 +907,7 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->where(ConfigService::$tableContent . '.brand', brand())
                 ->where(ConfigService::$tableContent . '.status', $status)
                 ->where(
                     ConfigService::$tableContent . '.published_on',
