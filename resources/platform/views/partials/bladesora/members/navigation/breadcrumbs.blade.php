@@ -3,15 +3,15 @@
         {{--<div class="flex flex-row">--}}
             @foreach($pages as $index => $page)
                 @if($index !== 0)
-                    <span class="mh-1 tiny">/</span>
+                    <span class="mh-1 tw-text-sm">/</span>
                 @endif
 
                 @if(!empty($page['url']))
-                    <a class="tiny tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-no-underline" href="{{ $page['url'] }}">
+                    <a class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-no-underline" href="{{ $page['url'] }}">
                         {{ ucwords($page['title']) }}
                     </a>
                 @else
-                    <span class="tiny tw-font-bold">{{ ucwords($page['title']) }}</span>
+                    <span class="tw-text-sm tw-font-bold">{{ ucwords($page['title']) }}</span>
                 @endif
             @endforeach
         {{--</div>--}}

@@ -52,7 +52,7 @@
                            :class="thumbnailIcon"
                         ></i>
                         <p v-if="!isReleased"
-                           class="tiny text-white font-bold"
+                           class="tw-text-sm text-white font-bold"
                         >
                             {{ releaseDate }}
                         </p>
