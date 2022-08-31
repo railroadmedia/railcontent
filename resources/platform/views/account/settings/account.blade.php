@@ -148,6 +148,19 @@
 
                 @else
 
+                    @if($subscription->getIntervalType() == 'month')
+                        <form method="post"
+                            {{-- action="{{  }}" --}} > {{-- todo: action for this --}}
+
+                            {{ csrf_field() }}
+
+                            <a href="#"
+                               onclick="this.parentNode.submit(); return false;"
+                               class="">
+                                Upgrade
+                            </a>
+                        </form>
+                    @endif
 
                     <a href="{{-- {{ url()->route('crux.cancel-reason-form') }} --}}" /> {{-- todo: action for this --}}
                         Cancel Membership
