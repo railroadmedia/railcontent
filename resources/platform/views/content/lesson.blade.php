@@ -12,7 +12,7 @@
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
-    {{-- <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}"> --}}
+     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
 
     <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
