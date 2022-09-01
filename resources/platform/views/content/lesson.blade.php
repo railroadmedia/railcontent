@@ -100,6 +100,7 @@
                                                 content-id="{{ $lessonContent->fetch('id') }}"
                                                 user-id="{{ user()->id }}"
                                                 video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+                                                video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                                 :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                                 cast-title="{{ $lessonContent->fetch('fields.title') }}"
                                                 :use-intersection-observer="true"
