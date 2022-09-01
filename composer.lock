@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.234.6",
+            "version": "3.234.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c0ae9fbc8295678502a8fde6a2ecc49f2bd39580"
+                "reference": "325931ead99e794657f88393c5b7cdf56723aadb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c0ae9fbc8295678502a8fde6a2ecc49f2bd39580",
-                "reference": "c0ae9fbc8295678502a8fde6a2ecc49f2bd39580",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/325931ead99e794657f88393c5b7cdf56723aadb",
+                "reference": "325931ead99e794657f88393c5b7cdf56723aadb",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.7"
             },
-            "time": "2022-08-30T20:25:10+00:00"
+            "time": "2022-08-31T18:25:01+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8046,12 +8046,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "a8b63b7d285bd200f1b227c5dd07b01baa25d2ff"
+                "reference": "6763adf328c5a7483d1d5817e196559adf2c5ba4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a8b63b7d285bd200f1b227c5dd07b01baa25d2ff",
-                "reference": "a8b63b7d285bd200f1b227c5dd07b01baa25d2ff",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/6763adf328c5a7483d1d5817e196559adf2c5ba4",
+                "reference": "6763adf328c5a7483d1d5817e196559adf2c5ba4",
                 "shasum": ""
             },
             "require": {
@@ -8107,7 +8107,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-optimisations-compiled-column"
             },
-            "time": "2022-08-31T17:13:39+00:00"
+            "time": "2022-09-01T16:57:10+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -15560,16 +15560,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "71c627a0838f107562e89bc2b0201a81f26e9011"
+                "reference": "29deea5d9cf921590184be6956e657c4f4566440"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/71c627a0838f107562e89bc2b0201a81f26e9011",
-                "reference": "71c627a0838f107562e89bc2b0201a81f26e9011",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/29deea5d9cf921590184be6956e657c4f4566440",
+                "reference": "29deea5d9cf921590184be6956e657c4f4566440",
                 "shasum": ""
             },
             "require": {
@@ -15646,7 +15646,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-26T13:28:24+00:00"
+            "time": "2022-09-01T11:31:14+00:00"
         },
         {
             "name": "theseer/tokenizer",
