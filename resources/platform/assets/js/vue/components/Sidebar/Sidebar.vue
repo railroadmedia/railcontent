@@ -72,7 +72,7 @@ export default {
     <SearchInput :isSidebarCollapsed="isSidebarCollapsed" :brand="brand" @onCollapse="handleCollapse"/>
 
     <!-- Sidebar Link Sections -->
-    <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i" class="tw-border-b dark:tw-border-b-[#102230]">
+    <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i" class="tw-border-b dark:tw-border-b-[#1E364A]">
       <ul>
         <li v-for="(link, j) in section" :key="j" :class="[activePath(link.path) ? textColor[brand] : '']">
           <a :href="`${link.path}`"

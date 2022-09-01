@@ -1,18 +1,20 @@
 {{-- Featured Pack --}}
 <div class="flex flex-row ">
-    <div class="relative gq-container corners-10 overflow">
-        <a href="{{ $lessonsUrl }}" class="bg-grey-2 dark:tw-bg-[#081825]">
+    <div class="relative gq-container corners-10 overflow bg-grey-2 dark:tw-bg-[#081825]">
+        <a href="{{ $lessonsUrl }}">
             {{-- Desktop Image --}}
             <img src="https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
+                alt="Guitar Quest Lesson Promotional Image"
                 class="gq-large-thumb tw-transition-opacity tw-opacity-0" 
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
             {{-- Mobile Image --}}
             <img src="https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background-mobile.jpg"
-                    class="gq-small-thumb tw-transition-opacity tw-opacity-0" 
-                    loading="lazy"
-                    onload="this.classList.remove('tw-opacity-0')"
+                alt="Guitar Quest Lesson Promotional Image"
+                class="gq-small-thumb tw-transition-opacity tw-opacity-0" 
+                loading="lazy"
+                onload="this.classList.remove('tw-opacity-0')"
             >
             <div class="bg-guitareoGuitarQuest text-white tw-font-normal dense uppercase title tw-px-3 tw-py-2 tw-leading-none tw-absolute tw-top-0 tw-left-0" 
                  style="border-radius:10px 0 10px 0">
@@ -24,8 +26,8 @@
                 <div class="flex flex-column align-h-center">
                     <div class="mb-1" style="max-width: 190px">
                         <img src="{{ $logoImage }}" 
-                             class="tw-transition-opacity tw-opacity-0"
                              alt="Guitar Quest Logo"
+                             class="tw-transition-opacity tw-opacity-0"
                              loading="lazy"
                              onload="this.classList.remove('tw-opacity-0')"
                         >
