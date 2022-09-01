@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Mentor\Services;
+namespace App\Modules\Mentor\Services;
 
 
 use Carbon\Carbon;
-use Modules\Ecommerce\Services\SubscriptionService;
-use Modules\Ecommerce\Services\UserProductService;
+use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\Ecommerce\Services\UserProductService;
 
 class ActiveStudentService
 {

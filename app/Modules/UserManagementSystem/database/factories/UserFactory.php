@@ -2,6 +2,8 @@
 
 namespace Modules\UserManagementSystem\Factories;
 
+use App\Modules\Ecommerce\Models\Subscription;
+use App\Modules\Ecommerce\Models\UserProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Modules\UserManagementSystem\Models\User;
@@ -95,5 +97,21 @@ class UserFactory extends Factory
             'pianote_onboarding_skip_setup' => 0,
             'drumeo_onboarding_skip_setup' => 0,
         ];
+    }
+
+    public function hasSubscription(array $array = []): UserFactory
+    {
+        return $this->afterCreating(function (User $user) use ($array) {
+            $array['user_id'] = $user->id;
+            Subscription::factory()->create($array);
+        });
+    }
+
+    public function hasUserProduct(array $array = []): UserFactory
+    {
+        return $this->afterCreating(function (User $user) use ($array) {
+            $array['user_id'] = $user->id;
+            UserProduct::factory()->create($array);
+        });
     }
 }

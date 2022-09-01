@@ -2,8 +2,10 @@
 
 namespace App\Modules\Mentor\tests\Feature\Services;
 
+use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Services\MentorService;
+use Illuminate\Support\Facades\Event;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -12,7 +14,15 @@ class MentorServiceTest extends TestCase
 
     private MentorService $mentorService;
 
-    public function createMentor(string $brand) :Mentor
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->mentorService = app(MentorService::class);
+        Event::fake();
+    }
+
+
+    public function createMentor(string $brand): Mentor
     {
         $mentor = Mentor::factory()->create([
             'supported_brands' => $brand
@@ -20,11 +30,6 @@ class MentorServiceTest extends TestCase
         return $mentor;
     }
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->mentorService = app(MentorService::class);
-    }
 
     public function assertHasMentor(User $user, Mentor $mentor): void
     {
@@ -34,11 +39,12 @@ class MentorServiceTest extends TestCase
         ]);
     }
 
-    public function assertMentorCount(Mentor $mentor, int $count): void
+    public function assertMentorCount(Mentor $mentor, int $activeCount, int $totalCount): void
     {
         $this->assertDatabaseHas('mentors', [
             'user_id' => $mentor->user_id,
-            'active_student_count' => $count
+            'active_student_count' => $activeCount,
+            'total_student_count' => $totalCount
         ]);
     }
 
@@ -49,6 +55,7 @@ class MentorServiceTest extends TestCase
         $user = User::factory()->create();
 
         $this->mentorService->assignMentorByBrand($user->id, $brand);
+        Event::assertDispatched(StudentMentorsUpdated::class);
         $this->assertHasMentor($user, $mentor);
     }
 
@@ -56,16 +63,19 @@ class MentorServiceTest extends TestCase
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
-        $user = User::factory()->create();
 
+
+        //create 3 users, 2 active, 1 not
+        $user = User::factory()->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
-        $user2 = User::factory()->create();
+        $user2 = User::factory()->hasSubscription()->create();
         $this->mentorService->assignMentorByBrand($user2->id, $brand);
-        $user3 = User::factory()->create();
+        $user3 = User::factory()->hasUserProduct()->create();
         $this->mentorService->assignMentorByBrand($user3->id, $brand);
+        Event::assertDispatched(StudentMentorsUpdated::class, 3);
 
         $this->assertHasMentor($user3, $mentor);
-        $this->assertMentorCount($mentor, 3);
+        $this->assertMentorCount($mentor, 2, 3);
     }
 
     /** @var User $user */
@@ -73,18 +83,20 @@ class MentorServiceTest extends TestCase
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
-        $user = User::factory()->create();
+        //create 3 users, 2 active, 1 not
+        $this->mentorService->assignMentorByBrand(User::factory()->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasSubscription()->create()->id, $brand);
+        $user = User::factory()->hasUserProduct()->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
-        $user = User::factory()->create();
+        Event::assertDispatched(StudentMentorsUpdated::class, 3);
 
-        $this->mentorService->assignMentorByBrand($user->id, $brand);
         $this->assertHasMentor($user, $mentor);
-        $this->assertMentorCount($mentor, 2);
+        $this->assertMentorCount($mentor, 2, 3);
         $mentor2 = $this->createMentor($brand);
-        $this->assertMentorCount($mentor2, 0);
+        $this->assertMentorCount($mentor2, 0, 0);
 
         $this->mentorService->delete($mentor->user_id);
         $this->assertHasMentor($user, $mentor2);
-        $this->assertMentorCount($mentor2, 2);
+        $this->assertMentorCount($mentor2, 2, 2);
     }
 }

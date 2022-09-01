@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class UserProduct
- * @internal
  *
  * @package App\Modules\Ecommerce\Models
  *

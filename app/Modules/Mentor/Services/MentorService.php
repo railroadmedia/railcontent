@@ -10,7 +10,7 @@ use App\Modules\Mentor\Models\MentorStudent;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
-use Modules\Mentor\Services\ActiveStudentService;
+use App\Modules\Mentor\Services\ActiveStudentService;
 use Str;
 
 class MentorService
