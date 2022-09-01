@@ -33,7 +33,7 @@ class ContentCompiledColumnTransformer
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
 
             if (!is_array($contentRow)) {
-                dd($contentRow);
+                continue;
             }
 
             $contentRows[$contentRowIndex]['data'] = [];

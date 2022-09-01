@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
 use Railroad\Railcontent\Repositories\RepositoryBase;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
 class FillContentCompiledViewData extends Command
@@ -44,11 +43,22 @@ class FillContentCompiledViewData extends Command
 
         $totalProcessed = 0;
 
+        // process instructors and videos first
+        $dbConnection->table(config('railcontent.table_prefix') . 'content')
+            ->orderBy(config('railcontent.table_prefix') . 'content.id', 'desc')
+            ->whereIn('type', ['instructor', 'youtube-video', 'vimeo-video', 'assignment'])
+            ->chunk(250, function (Collection $rows) use ($contentService, $dbConnection, &$totalProcessed) {
+                $contentService->fillCompiledViewContentDataColumnForContentIds($rows->pluck('id')->toArray());
+                $totalProcessed += $rows->count();
+
+                $this->info('Done ' . $totalProcessed);
+            });
+
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->orderBy(config('railcontent.table_prefix') . 'content.id', 'desc')
             // for testing only
 //            ->where('id', 197937)
-//                ->whereNotIn('type', ['youtube-video', 'vimeo-video', 'assignment'])
+            ->whereNotIn('type', ['instructor', 'youtube-video', 'vimeo-video', 'assignment'])
             ->chunk(250, function (Collection $rows) use ($contentService, $dbConnection, &$totalProcessed) {
                 $contentService->fillCompiledViewContentDataColumnForContentIds($rows->pluck('id')->toArray());
                 $totalProcessed += $rows->count();
