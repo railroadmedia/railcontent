@@ -31,6 +31,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentStyleRepository;
 use Railroad\Railcontent\Repositories\ContentTopicRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
+use Railroad\Railcontent\Repositories\ContentVideoRepository;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
@@ -112,6 +113,10 @@ class ContentService
     private $contentStyleRepository;
 
     private $contentBpmRepository;
+    /**
+     * @var ContentVideoRepository
+     */
+    private $contentVideoRepository;
 
     private DatabaseManager $databaseManager;
 
@@ -159,7 +164,8 @@ class ContentService
         ContentInstructorRepository $contentInstructorRepository,
         ContentStyleRepository $contentStyleRepository,
         ContentBpmRepository $contentBpmRepository,
-        DatabaseManager $databaseManager
+        DatabaseManager $databaseManager,
+        ContentVideoRepository $contentVideoRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
@@ -178,6 +184,7 @@ class ContentService
         $this->contentStyleRepository = $contentStyleRepository;
         $this->contentBpmRepository = $contentBpmRepository;
         $this->databaseManager = $databaseManager;
+        $this->contentVideoRepository = $contentVideoRepository;
     }
 
     /**
@@ -2548,10 +2555,12 @@ class ContentService
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-        return new ContentFilterResultsEntity([
+        $results = new ContentFilterResultsEntity([
                                                   'results' => $scheduleEvents,
                                                   'total_results' => $countEvents,
                                               ]);
+
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -2607,4 +2616,12 @@ class ContentService
 
     }
 
+    /**
+     * @param $videoId
+     * @return \Illuminate\Support\Collection
+     */
+    public function getContentWithExternalVideoId($videoId)
+    {
+        return $this->contentVideoRepository->getContentWithExternalVideoId($videoId);
+    }
 }

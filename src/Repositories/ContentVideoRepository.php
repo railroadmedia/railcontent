@@ -50,4 +50,21 @@ class ContentVideoRepository extends RepositoryBase
 
         return $this->parserResult($data);
     }
+
+    public function getContentWithExternalVideoId($videoId)
+    {
+        $results =  $this->query()
+            ->select(config('railcontent.table_prefix').'content.id as content_id', 'content.*')
+            ->join(
+                config('railcontent.table_prefix').'content as content',
+                'content.video',
+                '=',
+                config('railcontent.table_prefix').'content.id'
+            )
+            ->where(config('railcontent.table_prefix').'content.vimeo_video_id','=', $videoId)
+            ->orWhere(config('railcontent.table_prefix').'content.youtube_video_id','=', $videoId)
+            ->get();
+
+        return $results;
+    }
 }
