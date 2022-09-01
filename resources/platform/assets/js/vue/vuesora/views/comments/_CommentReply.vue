@@ -72,7 +72,7 @@
                     <div class="tw-flex tw-flex-row">
                         <span
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tiny no-decoration tw-cursor-pointer tw-mr-1"
+                            class="tw-text-sm no-decoration tw-cursor-pointer tw-mr-1"
                             @click="deleteComment"
                         >
                             <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />

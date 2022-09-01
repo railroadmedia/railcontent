@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row pv-2">
         <div
-            class="flex flex-column align-h-left text-grey-3 hover-text-white flex-auto pr-2 pointer noselect"
+            class="flex flex-column align-h-left tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] hover-text-white flex-auto pr-2 pointer noselect"
             data-open-modal="shareVideoModal"
         >
             <p class="body font-bold uppercase dense">
@@ -14,8 +14,8 @@
 
         <div class="flex flex-column align-h-right flex-auto ph-2 pointer noselect">
             <p
-                class="body text-grey-3 text-right font-bold uppercase dense hover-text-white"
-                :class="lessonIsLiked ? 'text-white' : 'text-grey-3'"
+                class="body tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] text-right font-bold uppercase dense hover-text-white"
+                :class="lessonIsLiked ? 'text-white' : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
                 @click="likeLesson"
             >
                 <i
@@ -28,7 +28,7 @@
 
         <div class="flex flex-column align-h-right flex-auto pl-2 pointer noselect">
             <div
-                class="flex flex-row body font-bold text-grey-3 hover-text-white align-v-center"
+                class="flex flex-row body font-bold tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] hover-text-white align-v-center"
                 :data-open-modal="lessonLikeCount > 0 ? 'lessonLikeUsers' : ''"
                 @click="addLikeUsersToModal"
             >
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <p class="tiny font-italic text-grey-3">
+                <p class="tiny font-italic tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]">
                     This link is only accessible by {{ toCapitalCase(brand) }} Members.
                 </p>
             </div>

@@ -48,7 +48,7 @@
                 :class="themeTextClass"
             >
                 <i class="fas fa-spinner fa-spin"></i>
-                <p class="x-tiny font-italic">
+                <p class="tw-text-xs font-italic">
                     Loading Please Wait...
                 </p>
             </div>

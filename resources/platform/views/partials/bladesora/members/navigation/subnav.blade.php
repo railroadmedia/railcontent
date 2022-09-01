@@ -15,7 +15,7 @@
                         @endif
 
                     </i>
-                    <p class="x-tiny tw-font-bold wrap tw-text-center
+                    <p class="tw-text-xs tw-font-bold wrap tw-text-center
                             {{ $section['active'] ? 'tw-text-white' : 'text-grey-4' }}" style="max-width:100%;white-space:normal;">
                         {{ $section['title'] }}
                     </p>
