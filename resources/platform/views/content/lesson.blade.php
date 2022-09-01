@@ -26,7 +26,9 @@
                     @if ($lessonType == 'song')
                         <youtube-player
                             ref="mediaElementVueInstance"
+                            brand="{{ $brand }}"
                             video-id="{{ $rangesVideoIds['original'] ?? '' }}"
+                            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                             :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
                             :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                             progress-state="{{ $lessonContent->fetch('progress_state') }}"
@@ -40,9 +42,11 @@
                             <transition appear name="fade">
                                 <youtube-player
                                     ref="mediaElementVueInstance"
+                                    brand="{{ $brand }}"
                                     video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
                                     :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
                                     :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+                                    video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                     progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                     content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                                     theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
@@ -81,6 +85,7 @@
                                             <video-player
                                                 ref="mediaElementVueInstance"
                                                 theme-color="{{ $brand }}"
+                                                brand="{{ $brand }}"
                                                 poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
                                                 :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
                                                 @if ($lessonType == 'song')
@@ -95,6 +100,7 @@
                                                 content-id="{{ $lessonContent->fetch('id') }}"
                                                 user-id="{{ user()->id }}"
                                                 video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+                                                :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                                 cast-title="{{ $lessonContent->fetch('fields.title') }}"
                                                 :use-intersection-observer="true"
                                                 @play="handleVideoPlay"

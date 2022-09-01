@@ -14,7 +14,7 @@ return [
     'data_mode' => 'client', // 'host' or 'client'
 
     // brand
-    'brand' => 'drumeo',
+    'brand' => 'musora',
 
     // tables
     'tables' => [
