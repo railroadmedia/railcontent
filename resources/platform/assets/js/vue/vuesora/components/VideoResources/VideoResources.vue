@@ -14,9 +14,9 @@
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" @click="likeContent">
               <span
-                class="tw-shadow-none"
+                class="tw-shadow-none tw-text-lg"
                 style="padding: 0 8px"
-                :class="hasLiked ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
+                :class="hasLiked ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
               >
                 <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mb-1" />
                 {{ totalLikes }}
@@ -27,7 +27,7 @@
           <!-- Share Button -->
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" data-open-modal="shareVideoModal">
-              <span class="tw-shadow-none text-grey-3 dark:tw-text-white" style="padding: 0 8px">
+              <span class="tw-shadow-none tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] tw-text-lg" style="padding: 0 8px">
                 <musora-icon icon-name="share"  class="tw-w-6 tw-h-6 tw-mb-1" />
                 Share
               </span>
@@ -44,7 +44,7 @@
             >
               <span
                 class="tw-shadow-none"
-                :class="resourceDropdown ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
+                :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] tw-text-lg'"
                 style="padding: 0 8px"
               >
                 <musora-icon icon-name="download"  class="tw-w-6 tw-h-6 tw-mb-1" />
@@ -91,9 +91,9 @@
           >
             <button class="btn stacked" @click="addToList">
               <span
-                class="tw-shadow-none"
+                class="tw-shadow-none tw-text-lg"
                 style="padding: 0 8px"
-                :class="hasAdded ? themeTextClass : 'text-grey-3 dark:tw-text-white'"
+                :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
               >
                 <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
                 <span class="hide-xs-only">
@@ -153,7 +153,7 @@
             </div>
           </div>
 
-          <p class="tiny font-italic text-grey-3">
+          <p class="tiny font-italic tw-text-[#3F3F46]">
             This link is only accessible by {{ toCapitalCase(brand) }} Members.
           </p>
         </div>

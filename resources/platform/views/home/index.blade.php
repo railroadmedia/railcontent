@@ -109,7 +109,6 @@
             ])
         @endcomponent
 
-
         {{-- Live Banner --}}
         <coach-event
             brand="{{ $brand }}"

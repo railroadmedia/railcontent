@@ -491,7 +491,7 @@
                     </td>
                 </tr>
                 <tr class="bg-light">
-                    <td class="x-tiny pa-1">
+                    <td class="tw-text-xs pa-1">
                         X-Tiny
                     </td>
                     <td class="pa-1">
