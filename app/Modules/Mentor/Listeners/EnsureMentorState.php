@@ -5,7 +5,7 @@ namespace Modules\Mentor\Listeners;
 use App\Modules\Mentor\Services\MentorService;
 use Railroad\Ecommerce\Events\GiveContentAccess;
 
-class EnsureMentorAssigned
+class EnsureMentorState
 {
     private MentorService $mentorService;
 
@@ -17,6 +17,6 @@ class EnsureMentorAssigned
     public function handle(GiveContentAccess $event): void
     {
         $userId = $event->order->getUser()->getId();
-        $this->mentorService->ensureMentorAssigned($userId);
+        $this->mentorService->ensureMentorState($userId);
     }
 }

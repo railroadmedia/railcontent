@@ -4,9 +4,10 @@ namespace App\Modules\Mentor\Providers;
 
 use App\Modules\Mentor\Commands\InitializeMentors;
 use App\Modules\Mentor\Commands\UnassignMentors;
+use App\Modules\Mentor\Commands\VerifyMentors;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Modules\Mentor\Listeners\EnsureMentorAssigned;
+use Modules\Mentor\Listeners\EnsureMentorState;
 use Railroad\Ecommerce\Events\GiveContentAccess;
 
 class MentorServiceProvider extends ServiceProvider
@@ -18,7 +19,7 @@ class MentorServiceProvider extends ServiceProvider
      */
     protected $listen = [
         GiveContentAccess::class => [
-            EnsureMentorAssigned::class,
+            EnsureMentorState::class,
         ]
     ];
 
@@ -49,6 +50,7 @@ class MentorServiceProvider extends ServiceProvider
 
         $this->commands([
             InitializeMentors::class,
+            VerifyMentors::class,
             UnassignMentors::class, //used for debugging can be removed after initial launch
         ]);
 
