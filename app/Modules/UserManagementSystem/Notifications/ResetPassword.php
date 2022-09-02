@@ -37,23 +37,11 @@ class ResetPassword extends ResetPasswordBase
                 'user-management-system::emails.password-reset-email',
                 [
                     'input' => [
-                        'lines' => [
-                            'We\'ve received a request to reset your password. To reset your password, click the button below.',
-                            'If you did not initiate this request please contact support@musora.com',
-                            'If the button does not work, copy and paste this url into your browser: ' . url()->route(
-                                'user_management_system.password.show-reset-form',
-                                ['token' => $this->token, 'email' => request('email')]
-                            ),
-                        ],
-                        'callToAction' => [
-                            'text' => 'RESET PASSWORD',
-                            'url' => url()->route(
-                                'user_management_system.password.show-reset-form',
-                                ['token' => $this->token, 'email' => request('email')]
-                            ),
-                        ],
-                        'logo' => 'https://musora-ui.s3.amazonaws.com/logos/musora-black.svg',
-                        'brand' => ''
+                        'url' => url()->route(
+                            'user_management_system.password.show-reset-form',
+                            ['token' => $this->token, 'email' => request('email')]
+                        ),
+                        'logo' => 'https://musora-ui.s3.amazonaws.com/logos/musora-white.svg',
                     ]
                 ]
             )->from('system@musora.com', 'Musora');
