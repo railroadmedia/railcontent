@@ -28,9 +28,11 @@
                             ref="mediaElementVueInstance"
                             brand="{{ $brand }}"
                             video-id="{{ $rangesVideoIds['original'] ?? '' }}"
-                            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
+                            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds',
+ $lessonContent->fetch('fields.original_video.fields.length_in_seconds')) }}"
                             :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
-                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds',
+ $lessonContent->fetch('fields.original_video.fields.length_in_seconds')) }}"
                             progress-state="{{ $lessonContent->fetch('progress_state') }}"
                             :content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                             @play="handleVideoPlay" @pause="handleVideoPause"
