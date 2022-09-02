@@ -22504,6 +22504,9 @@ a:visited{
 .tw-h-12{
   height: 3rem !important;
 }
+.tw-h-\[40px\]{
+  height: 40px !important;
+}
 .tw-h-\[82px\]{
   height: 82px !important;
 }
@@ -24201,6 +24204,9 @@ a:visited{
 .tw-text-\[75px\]{
   font-size: 75px !important;
 }
+.tw-text-\[22px\]{
+  font-size: 22px !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24530,6 +24536,10 @@ a:visited{
 }
 .tw-blur-sm{
   --tw-blur: blur(4px) !important;
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
+}
+.tw-drop-shadow-md{
+  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06)) !important;
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 .tw-grayscale{
@@ -24891,6 +24901,10 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#00101D\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#223F57\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(34 63 87 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
   background-color: rgb(0 12 23 / 0.8) !important;

@@ -28,10 +28,10 @@ return [
     'saasquatch_api_key' => env('SAASQUATCH_API_KEY', 'TEST_HHxOG6K0aWBwLVFXiQOippYPDo6jxXIC'),
     'saasquatch_tenant_alias' => env('SAASQUATCH_TENANT_ALIAS', 'test_aqv1e8qhpmnxs'),
     'saasquatch_referral_program_id' => [
-        'drumeo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_DRUMEO'),
-        'pianote' => env('SAASQUATCH_CURRENT_PROGRAM_ID_PIANOTE'),
-        'guitareo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_GUITAREO'),
-        'singeo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_SINGEO'),
+        'drumeo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_DRUMEO', 'drumeo-web-staging-three'),
+        'pianote' => env('SAASQUATCH_CURRENT_PROGRAM_ID_PIANOTE', 'pianote-web-staging-three'),
+        'guitareo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_GUITAREO', 'guitareo-web-staging-three'),
+        'singeo' => env('SAASQUATCH_CURRENT_PROGRAM_ID_SINGEO', 'singeo-web-staging-three'),
     ],
 
     'messages' => [

@@ -256,7 +256,7 @@ app.component('AppContainer', AppContainer)
 
     .component('StudentReviewForm', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "student-review-form" */
+            /* webpackChunkName: "student-review-form-iframe" */
             './vue/components/IFrames/StudentReviewForm.vue'
         )
     ))
