@@ -143,7 +143,7 @@
                                             <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:40px 10px 10px 40px;font-family:'Open Sans',sans-serif;" align="left">
 
                                                 <div class="v-text-align" style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-size: 18px; line-height: 25.2px; font-family: 'Open Sans', sans-serif;">Hello <strong>MusoraUser26</strong>, </p>
+                                                    <p style="font-size: 18px; line-height: 25.2px; font-family: 'Open Sans', sans-serif;">Hello <strong>{{ $input['display_name'] }}</strong>, </p>
                                                 </div>
 
                                             </td>

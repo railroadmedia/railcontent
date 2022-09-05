@@ -4,6 +4,7 @@ namespace Modules\UserManagementSystem\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordBase;
 use Illuminate\Notifications\Messages\MailMessage;
+use Modules\UserManagementSystem\Models\User;
 
 class ResetPassword extends ResetPasswordBase
 {
@@ -13,7 +14,6 @@ class ResetPassword extends ResetPasswordBase
      * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-
     public function toMail($notifiable)
     {
         if (static::$toMailCallback) {
@@ -31,6 +31,8 @@ class ResetPassword extends ResetPasswordBase
      */
     protected function buildMailMessage($url)
     {
+        $user = User::where('email', request('email'))->first();
+
         return (new MailMessage)
             ->subject('Musora Account Password Reset Link')
             ->view(
@@ -42,6 +44,7 @@ class ResetPassword extends ResetPasswordBase
                             ['token' => $this->token, 'email' => request('email')]
                         ),
                         'logo' => 'https://musora-ui.s3.amazonaws.com/logos/musora-white.svg',
+                        'display_name' => $user->display_name
                     ]
                 ]
             )->from('system@musora.com', 'Musora');
