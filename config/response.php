@@ -874,7 +874,7 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'data.thumbnail_url',
                 'fields.artist',
-                'fields.style',
+                '*fields.style',
             ],
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
@@ -887,6 +887,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'artist'
         ],
         'coach-stream' => [
             'id',
