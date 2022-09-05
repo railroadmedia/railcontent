@@ -7,6 +7,7 @@ import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
 
 import { brandUrl, bgImgCard } from "../../../../constants/brands";
+import { saveInstrumentHistoryData } from "../services";
 const props = defineProps({
   brand: {
     type: String,
@@ -24,9 +25,14 @@ function onInstrumentSelection(instrument) {
   emit("onChangeInfo", { ...props.info, user: props.info.user, instrument });
   emit("onCheckStep", 1, true);
   emit("onChangeStep", 2);
+    saveInstrumentHistoryData({
+        instrument: instrument,
+    }).then(response => response)
+        .catch(error => {console.error(error)});
+
   /*
   TODO: Check if this is still necessary.
-  
+
   for (let i = 2; i < 6; i++) {
     emit("onCheckStep", i, false);
   }
