@@ -3,7 +3,7 @@
 return [
     // database
     'database_connection_name' => 'musora_laravel_mysql',
-    'data_mode' => 'host',
+    'data_mode' => env('REFERRAL_DATA_MODE', 'client'),
     'development_mode' => env('APP_DEBUG', true),
 
     // unique user validation database info
