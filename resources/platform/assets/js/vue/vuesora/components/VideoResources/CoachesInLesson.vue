@@ -67,6 +67,7 @@
           tw-flex-col
           tw-pl-3
           tw-text-gray-500
+          dark:tw-text-white
           tw-uppercase
           tw-justify-between
           tw-shrink-0
@@ -107,13 +108,13 @@
             tw-text-left tw-px-0 tw-py-0 tw-text-xs
             sm:tw-text-base
             tw-transition-none
-            tw-text-white
             tw-border-none
             tw-bg-transparent
             tw-uppercase
             tw-font-bold
             tw-cursor-pointer
           "
+          :class="`tw-text-${brand}`"
         >
           <span>
             <i aria-hidden="true" class="fa fa-check"></i>

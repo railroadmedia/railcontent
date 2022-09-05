@@ -240,7 +240,7 @@
           :class="themeBgClass"
         >
           <i class="fas fa-spinner fa-spin text-white"></i>
-          <p class="x-tiny text-white">Loading Please Wait...</p>
+          <p class="tw-text-xs text-white">Loading Please Wait...</p>
         </div>
       </div>
     </transition>

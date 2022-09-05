@@ -37,7 +37,7 @@
             >
                 <page-container
                     brand="{{ $brand }}"
-                    :is-live="false"
+                    :is-live="{{ isLive() ? 'true':'false' }}"
                     search-url=""
                     @if(!empty( user() ))
                         user-name="{{ user()->display_name }}"
