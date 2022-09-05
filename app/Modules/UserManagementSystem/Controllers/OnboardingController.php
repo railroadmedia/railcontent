@@ -145,7 +145,7 @@ class OnboardingController extends Controller
             $request->validate(['instrument' => 'string|required|not-in:undefined']);
         } catch (ValidationException $e) {
             $message = ['error' => 'Get parameter instrument is missing'];
-            return response($message, 400);
+            return response($message, 422);
         }
 
         OnboardingAnswerHistory::create([
@@ -168,7 +168,7 @@ class OnboardingController extends Controller
 
         } catch (ValidationException $e) {
             $message = ['error' => 'Get parameter is missing from onboarding-answer-history-coach api request.'];
-            return response($message, 400);
+            return response($message, 422);
         }
 
         OnboardingAnswerHistory::create([
