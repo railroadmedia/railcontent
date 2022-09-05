@@ -300,7 +300,17 @@ class ContentTransformer
         if (is_array($value)) {
             foreach ($value as $val) {
                 if (($key == 'style') || ($key == 'bpm') || ($key == 'topic') || ($key == 'focus')) {
-
+                    if(is_array($val) && !isset($val['id'])){
+                        foreach($val as $v) {
+                            $field[$key][$v['content_id']][] = [
+                                'content_id' => $v['content_id'],
+                                'key' => $key,
+                                'position' => $v['position'] ?? 1,
+                                'value' => $v['value'],
+                                'type' => 'string',
+                            ];
+                        }
+                    }else {
                         $field[$key][$val['content_id']][] = [
                             'content_id' => $val['content_id'],
                             'key' => $key,
@@ -308,6 +318,7 @@ class ContentTransformer
                             'value' => $val['value'],
                             'type' => 'string',
                         ];
+                    }
 
                 } else {
                     if(is_array($val) && !isset($val['id'])) {

@@ -12,7 +12,7 @@ class TopicTransformer
 
         $results = [];
         foreach ($data as $topic) {
-            $results[$topic['content_id']] = [
+            $results[$topic['content_id']][] = [
                 'id' => $topic['id'] ?? null,
                 'content_id' => $topic['content_id'],
                 'key' => 'topic',
