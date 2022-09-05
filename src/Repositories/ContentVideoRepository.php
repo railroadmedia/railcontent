@@ -54,10 +54,16 @@ class ContentVideoRepository extends RepositoryBase
     public function getContentWithExternalVideoId($videoId)
     {
         $results =  $this->query()
-            ->select(config('railcontent.table_prefix').'content.id as content_id', 'content.*')
-            ->join(
-                config('railcontent.table_prefix').'content as content',
-                'content.video',
+            ->select(config('railcontent.table_prefix').'content.id as content_id', 'content_with_video.*', 'content_with_original_video.*')
+            ->leftJoin(
+                config('railcontent.table_prefix').'content as content_with_video',
+                'content_with_video.video',
+                '=',
+                config('railcontent.table_prefix').'content.id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix').'content as content_with_original_video',
+                'content_with_original_video.original_video',
                 '=',
                 config('railcontent.table_prefix').'content.id'
             )
