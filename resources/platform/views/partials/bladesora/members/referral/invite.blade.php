@@ -46,10 +46,16 @@ $cardImage = $cardImages[brand()];
                 <strong>{{ $titleLineOne }}<br> {{ $titleLineTwo }}</strong>
             </h1>
             <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4 {{ $containerClass }}">
-                <div class="tw-flex-shrink-0 tw-w-full lg:tw-w-auto tw-my-5 md:tw-my-6 lg:tw-my-0">
-                    <div class="tw-relative">
-                        <img class="tw-inline-block tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl"
-                            src="{{ $cardImage }}">
+                
+                <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl tw-my-5 md:tw-my-6 lg:tw-my-0">
+                    <div class="tw-flex tw-w-full tw-relative">
+                        <div class="tw-inline-flex tw-w-full ">
+                            <img class="tw-inline-block tw-w-full tw-transition-opacity tw-opacity-0"
+                                src="{{ $cardImage }}"
+                                loading="lazy"
+                                onload="this.classList.remove('tw-opacity-0')"
+                            >
+                        </div>
                         <div class="tw-absolute tw-bottom-0 tw-w-full tw-p-4 tw-text-white">
                             <p class="tw-leading-none">PASSES REDEEMED</p>
                             <h1 class="tw-leading-none">

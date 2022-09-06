@@ -1,41 +1,45 @@
 <template>
     <div class="flex flex-column grow play-alongs">
-        <div v-if="showFilters" class="flex flex-row mt-2">
+        <div v-if="showFilters" class="flex flex-row mt-2 tw-flex-wrap">
             <div class="flex flex-column align-v-center">
-                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-mb-3 ">
                     {{ totalResults }} Play Alongs
                 </h1>
             </div>
 
-            <div class="flex flex-column mr-1">
-                <InputLabel
-                    inputOverride="tw-w-full dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
-                    :brand="brand" inputType="text" id="playAlongsSearchInput" inputName="search"
-                    placeholder="Search..." :inputErrors="[]" :removeDefaultInputStyles="true"
-                    @onChange="handleTitleChange" @onEnter="handleTriggerSearch" :disabled="displayFilters" />
-            </div>
-
-            <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
-                <button
-                    :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary tw-bg-${brand}`"
-                    title="Search Play Along by Term" @click="handleTriggerSearch">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-
-            <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
-                <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
-                    :class="isShuffle ? `tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
-                    title="Toggle Shuffle" @click="toggleShuffle">
-                    <i class="fas fa-random"></i>
-                </button>
-            </div>
-            <div class="flex flex-column enable-filters tw-h-[50px]">
-                <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
-                    :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
-                    title="Toggle Filters" @click="displayFilters = !displayFilters">
-                    <i class="fas fa-filter"></i>
-                </button>
+            <!-- Play Along Actions -->
+            <div class="tw-flex tw-flex-wrap tw-w-full md:tw-w-auto">
+                <div class="flex flex-row mr-1 tw-mb-3 tw-w-full md:tw-w-auto">
+                    <InputLabel
+                        inputOverride="mr-1 tw-w-full dark:placeholder:tw-text-white tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+                        :brand="brand" inputType="text" id="playAlongsSearchInput" inputName="search"
+                        placeholder="Search..." :inputErrors="[]" :removeDefaultInputStyles="true"
+                        @onChange="handleTitleChange" @onEnter="handleTriggerSearch" :disabled="displayFilters" 
+                    />
+                    <div class="flex flex-column tw-h-[50px]">
+                        <button
+                            :class="`tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0 tw-btn-primary tw-bg-${brand}`"
+                            title="Search Play Along by Term" @click="handleTriggerSearch">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
+                    <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
+                        :class="isShuffle ? `tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
+                        title="Toggle Shuffle" @click="toggleShuffle">
+                        <i class="fas fa-random"></i>
+                    </button>
+                </div>
+                <div class="flex flex-column enable-filters tw-h-[50px]">
+                    <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
+                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
+                            title="Toggle Filters" 
+                            @click="displayFilters = !displayFilters"
+                    >
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -225,7 +229,7 @@ export default {
                 y: 0,
             },
             showMobileFilters: false,
-            displayFilters: false,
+            displayFilters: true,
             progressTracker: this.trackProgress ? new ProgressTracker() : null,
             isPlaying: false,
         };

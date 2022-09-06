@@ -39,7 +39,7 @@ const toggleSearchModal = (val) => {
 <template>
   <nav
     class="
-      tw-z-50
+      tw-z-[100]
       tw-fixed
       tw-top-0
       tw-flex

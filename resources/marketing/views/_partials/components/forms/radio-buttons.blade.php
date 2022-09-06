@@ -1,7 +1,7 @@
 <fieldset class="fieldset border-none">
     <p class="fieldset-title">
         <span v-if="required" class="text-red-500">*</span>
-        {{ $label }}
+        <span class="{{ $darkMode ? 'text-white' : 'text-[#00101D]' }}">{{ $label }}</span>
     </p>
     <div class="radio-group">
         @foreach ($buttonList as $key => $button)
@@ -14,18 +14,22 @@
                     x-model="formData.{{$name}}"
                     x-on:input.change="if(invalids.{{$name}}) invalids.{{$name}} = false;"
                 >
-                <label for="radio-{{$name}}-{{$key}}">
+                <label for="radio-{{$name}}-{{$key}}" 
+                       class="{{ $darkMode ? 'text-white' : 'text-[#00101D]' }}"
+                >
                     {{ $button['label'] }}
                 </label>
             </div>
         @endforeach
         
     </div>
-    <p class="input-message text-[#EF4444]" x-bind:class="invalids.{{$name}} ? 'block' : 'hidden'">
+    <p  x-cloak class="input-message text-[#EF4444]" 
+        x-bind:class="invalids.{{$name}} ? 'block' : 'hidden'"
+    >
         {{ $errorMessage }}
     </p>
-    <p 
-        class="text-sm italic text-blue-500" 
+    <p  x-cloak
+        class="text-sm italic {{ $darkMode ? 'text-[#a1afc9]' : 'text-blue-500' }}" 
         x-bind:class="(formData.{{$name}} === 'Is not a member' || formData.{{$name}} === '') && 'hidden'"
     >
         {{$selectMessage}}

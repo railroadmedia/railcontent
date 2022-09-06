@@ -26,7 +26,7 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="tw-flex xl:tw-flex-row tw-flex-col align-v-top ">
 
-            <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow">
+            <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
                 {{-- Back Button --}}
                 <a href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}" 
                    class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center tw-w-fit">
@@ -34,13 +34,15 @@
                    <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 {{-- Song Container --}}
-                <div class="tw-flex tw-flex-row pt-4 pb-4 song-content-container">
+                <div class="tw-flex tw-flex-col sm:tw-flex-row pt-4 pb-4 song-content-container">
 
-                    <div class="tw-flex tw-flex-col song-play-button song-album-cover tw-mr-6">
-                        <div class="2xl:tw-w-screen tw-aspect-square tw-max-w-[338px] tw-min-w-[175px] corners-10 flex-center flex-column shadow-md">
+                    <div class="tw-flex tw-flex-col song-play-button song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
+                        <div class=" tw-aspect-square sm:tw-max-w-[338px] tw-min-w-[175px] 2xl:tw-w-screen corners-10 flex-center flex-column shadow-md tw-bg-[#d1d1d1] dark:tw-bg-[#081825]">
                             <img src="{{ $lessonContent->fetch( 'data.original_thumbnail_url', $lessonContent->fetch('data.thumbnail_url') ) }}"
                                  alt="Album Art"
-                                 class="corners-10"
+                                 class="corners-10 tw-transition-opacity tw-opacity-0"
+                                 loading="lazy"
+                                 onload="this.classList.remove('tw-opacity-0')"
                             >
                             {{-- Play Icon --}}
                             <div class="thumb-title flex-center text-center ph-1 rounded ba-white-2 hover-border-drumeo"
@@ -105,8 +107,8 @@
 
                 {{-- Mobile Small Sidebar --}}
                 <div class="flex flex-column mb-3 hide-sm-up">
-                    <div class="flex flex-row mb-2 ph-1">
-                        <h6 class="title text-black dark:tw-text-white">
+                    <div class="flex flex-row mb-2">
+                        <h6 class="tw-text-3xl text-black dark:tw-text-white tw-font-bold">
                             Related Lessons
                         </h6>
                     </div>
@@ -177,8 +179,8 @@
 
             {{-- Desktop Sidebar --}}
             <div class="flex flex-column mb-3 hide-xs-only xl:tw-max-w-[420px]">
-                <div class="flex flex-row mb-2 ph-1">
-                    <h6 class="title text-black dark:tw-text-white">
+                <div class="flex flex-row mb-2">
+                    <h6 class="tw-text-3xl text-black dark:tw-text-white tw-font-bold">
                         Related Lessons
                     </h6>
                 </div>

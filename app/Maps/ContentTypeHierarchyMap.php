@@ -17,5 +17,6 @@ class ContentTypeHierarchyMap
         'course' => 'course-part',
         'pack' => 'pack-bundle',
         'pack-bundle' => 'pack-bundle-lesson',
+        'play-along' => 'play-along-part'
     ];
 }

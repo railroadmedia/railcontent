@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
+        class="flex tw-w-full flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
         :class="month"
     >
             <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-[#00101D]">
@@ -13,7 +13,7 @@
                         class="thumb-img corners-10 widescreen text-center"
                         :style="`background-image: url( ${ item.original_thumbnail_url } )`"
                     >
-                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/70 tw-h-full tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }}
                             </p>
@@ -102,20 +102,24 @@ export default {
     computed: {
 
         time_to_display() {
-            // Just pull the default published on
-            return this.item.published_on;
+            // time_to_display method should display live_event_start_time_in_timezone or published_on_in_timezone if exists
+            return this.item.published_on_in_timezone ? this.item.published_on_in_timezone : this.item.live_event_start_time_in_timezone;
+        },
+
+        formatted_time() {
+            return new Date(this.time_to_display).toISOString().slice(0, 19).replace('T', ' ')
         },
 
         month() {
-            return DateTime.fromSQL(this.time_to_display).toFormat('LLL').toLowerCase();
+            return DateTime.fromSQL(this.formatted_time).toFormat('LLL').toLowerCase();
         },
 
         day() {
-            return DateTime.fromSQL(this.time_to_display).toFormat('ccc d');
+            return DateTime.fromSQL(this.formatted_time).toFormat('ccc d');
         },
 
         time() {
-            return DateTime.fromSQL(this.time_to_display).toFormat('h:mm a');
+            return DateTime.fromSQL(this.formatted_time).toFormat('h:mm a');
         },
 
         releaseType() {

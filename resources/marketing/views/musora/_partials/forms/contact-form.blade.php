@@ -4,19 +4,20 @@
 @endphp
 
 {{-- Contact Page Email Form --}}
-<form class="flex flex-col my-4"
+<form class="flex flex-col py-4"
         novalidate="true"
         x-data='contactForm()'
         x-on:submit.prevent='submitForm'
 >
     <!-- Name -->
     @component('_partials.components.forms.text-input',[
-        'label' => 'name',
         'name' => 'name',
+        'required' => true,
+        'label' => 'name',
         'id' => 'customer-name',
         'placeholder' => 'Enter your name...',
         'errorMessage' => 'Please enter your name.',
-        'required' => true,
+        'darkMode' => true,
     ])@endcomponent
 
     {{-- <text-input
@@ -40,12 +41,13 @@
                 'value' => 'Is currently a member',
             ],
             [
-                'label' => 'no',
+                'label' => 'No',
                 'value' => 'Is not a member',
             ]
         ],
         'errorMessage' => 'Please select an option.',
-        'selectMessage' => 'If your account is under a different email address than noted below, please provide it in your description.'
+        'selectMessage' => 'If your account is under a different email address than noted below, please provide it in your description.',
+        'darkMode' => true,
     ])@endcomponent
 
     {{-- <radio-buttons
@@ -68,8 +70,8 @@
         'id' => 'support-listbox',
         'placeholder' => 'Enter your email address...',
         'required' => true,
+        'darkMode' => true,
     ])@endcomponent
-
 
     {{-- <email-input
         name="Email Address"
@@ -91,6 +93,7 @@
         'errorMessage' => 'Please select an option that is closest to your request.',
         'listData' => $supportOptions,
         'required' => true,
+        'darkMode' => true,
     ])@endcomponent
 
     {{-- <multilevel-dropdown
@@ -115,7 +118,8 @@
         'placeholder' => 'Add message here...',
         'rows' => 4,
         'errorMessage' => 'Please enter the details of your request.',
-        'required' => true
+        'required' => true,
+        'darkMode' => true,
     ])@endcomponent
 
     {{-- <textarea-input
@@ -153,6 +157,7 @@
                 'accept' => 'video/*,image/*',
                 'megabiteLimit' => '100',
                 'message' => 'For security reasons, we only accept image and video files.',
+                'darkMode' => true,
             ])@endcomponent
 
             {{-- <file-input

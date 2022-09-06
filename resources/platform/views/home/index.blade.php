@@ -82,7 +82,7 @@
         @if($hasfollowedLessons)
             @component('partials.bladesora.members.components.home._followed-section', [
                 'brand' => brand(),
-                'subscribedLessons' => '', // todo: need url
+                'subscribedLessons' => '/'.$brand.'/lessons/subscribed', // todo: need url
                 'contentEndpoint' => '/laravel/public/railcontent/content',
                 'followedLessons' => $followedLessons,
                 'hasfollowedLessons' => $hasfollowedLessons,
@@ -112,6 +112,7 @@
         {{-- Live Banner --}}
         <coach-event
             brand="{{ $brand }}"
+            class="tw-mb-6"
             :preloaded-content='{{ $coachEvent }}'
             current-date-string="{{ $currentDate }}"
             subscription-calendar-id="{{ $calendarId }}"
@@ -124,7 +125,7 @@
         @if($hasUpcomingEvents)
             @component('partials.bladesora.members.components.home._upcoming-section', [
                 'brand' => brand(),
-                'upcomingUrl' => '', // todo: url
+                'upcomingUrl' => '/'.$brand.'/live', // todo: url
                 'upcomingEvents' => $upcomingEvents,
                 'contentEndpoint' => '/laravel/public/railcontent/content',
                 ])
@@ -134,9 +135,10 @@
         {{-- My Stats --}}
         <stats-section
             brand="{{ $brand }}"
+            account-url="{{ user()->getDashboardUrl() }}"
             :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
             next-learning-path-level="{{ $nextLearningPathLevel }}"
-            :userMetrics="{{ json_encode($userMetrics) }}"
+            :user-metrics="{{ json_encode($userMetrics) }}"
         ></stats-section>
 
     </div>

@@ -19,7 +19,7 @@
         @endslot
     @endcomponent
 
-    <div id="dictionaryNav" class="container fluid bg-grey-5 pv tw-sticky tw-top-[58px]">
+    <div id="dictionaryNav" class="container fluid bg-grey-5 pv tw-sticky tw-w-full tw-top-0 tw-z-10">
         <div class="flex flex-row flex-wrap align-center">
             @foreach($dictionaryTerms as $letter => $definition)
                 <div class="text-white flex flex-column letter-anchor align-center">
@@ -34,8 +34,8 @@
         <div class="flex flex-column">
             @foreach($dictionaryTerms as $letter => $terms)
                 <div class="flex flex-column mb-2 tw-relative">
-                    <a id="{{ $letter }}" class="tw-absolute tw--top-[65px]"></a>
-                    <div class="tw-flex tw-flex-row bg-grey-2 dark:tw-bg-[#223457] tw-rounded tw-items-center tw-justify-center pa">
+                    <a id="{{ $letter }}" class="tw-absolute tw--top-[165px] sm:tw--top-[125px]"></a>
+                    <div class="tw-flex tw-flex-row bg-grey-2 dark:tw-bg-[#223457] tw-rounded-lg tw-items-center tw-justify-center pa">
                         <h1 class="heading tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-text-center">
                             {{ $letter }}
                         </h1>

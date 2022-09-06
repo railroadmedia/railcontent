@@ -1,5 +1,5 @@
 <div class="input-field">
-    <label for="{{ $id }}" class="label text-[#00101D] dark:text-white">
+    <label for="{{ $id }}" class="label {{ $darkMode ? 'text-white' : 'text-[#00101D]' }}">
         <span class="text-red-500 @if(empty($required)) hidden @endif">*</span>
         {{$label}}
     </label>

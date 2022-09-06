@@ -4,6 +4,7 @@
             <div class="flex flex-column grow">
                 <ContentAssignment
                     :theme-color="assignment.themeColor"
+                    :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
                     :id="assignment.id"
                     :title="assignment.title"

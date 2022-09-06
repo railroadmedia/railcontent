@@ -90,7 +90,7 @@
             </div>
 
             @if(!empty($itemDetails) && $isOwned)
-                <div class="flex flex-column align-center basic-col tw-uppercase text-grey-3 dark:tw-text-[#9EC0DC] font-italic x-tiny hide-sm-down">
+                <div class="flex flex-column align-center basic-col tw-uppercase text-grey-3 dark:tw-text-[#9EC0DC] font-italic tw-text-xs hide-sm-down">
                     {{ $itemDetails }}
                 </div>
             @endif

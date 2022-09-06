@@ -248,7 +248,7 @@
                     <p class="tiny font-bold text-white">
                         We're always here to help
                     </p>
-                    <p class="x-tiny text-white">
+                    <p class="tw-text-xs text-white">
                         <a target="_blank" class="text-white" href="https://help.singeo.com/">See our FAQs & answers</a>, or<br>
                         <a target="_blank" class="text-white" href="/contact">click here to contact us directly</a>.
                     </p>
@@ -263,7 +263,7 @@
                     <p class="tiny font-bold text-white mt-2">
                         Your Information is Secure
                     </p>
-                    <p class="x-tiny text-white">
+                    <p class="tw-text-xs text-white">
                         This page is securely encrypted <br>
                         with world-class SSL protection.
                     </p>
@@ -277,7 +277,7 @@
                     <p class="tiny font-bold text-white">
                         100% Money Back Guarantee
                     </p>
-                    <p class="x-tiny text-white">
+                    <p class="tw-text-xs text-white">
                         Order risk-free with our 90-day, <br>
                         100% money back guarantee.
                     </p>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Musora\MarketingController;
 use App\Http\Controllers\Musora\ReferralJoinController;
+use App\Http\Controllers\Platform\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 Route::domain('{musoraDomain}')

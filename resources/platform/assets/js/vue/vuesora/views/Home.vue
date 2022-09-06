@@ -55,7 +55,7 @@
             <p class="body">
                 <span class="keyword">npm link</span>
             </p>
-            <p class="tiny font-italic mb-1">
+            <p class="tw-text-sm font-italic mb-1">
                 Wait for the command to finish
             </p>
 

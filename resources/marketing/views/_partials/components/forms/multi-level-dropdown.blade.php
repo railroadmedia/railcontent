@@ -8,7 +8,7 @@
         placeholder : '{{$placeholder}}',
     }"
 >
-    <label id="{{$id}}" class="label text-[#00101D] dark:text-white">
+    <label id="{{$id}}" class="label {{ $darkMode ? 'text-white' : 'text-[#00101D]' }}">
         <span class="text-red-500 @if(empty($required)) hidden @endif">*</span>
         {{ $label }}
     </label>
@@ -74,6 +74,7 @@
 
         <!-- Separate the Dropdown from the Ul's - Make the container full width -->
         <div 
+            x-cloak
             x-show="dropdownMenuOpen"
             tabindex="-1"
             x-on:mouseleave="dropdownMenuOpen = false; activeCategory = ''"

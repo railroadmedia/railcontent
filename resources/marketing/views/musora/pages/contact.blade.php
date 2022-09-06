@@ -20,20 +20,22 @@
         </div>
     </section>
 
-    <div class="pt-28 text-white" style="background:#000c17;">
+    <div class="pt-20 pb-10 text-white bg-[#000c17]">
         <div class="container mx-auto text-center">
             <h2 class="font-bold text-xl md:text-3xl">We'd love to hear from you!</h2>
             <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">Whether your question is about membership, shipping, technical troubles or anything else, our amazing support team is ready to answer any and all of your questions!
                 <br><br>
-                You may find your response in our <a href="https://help.drumeo.com/" class="tw-font-bold tw-no-underline tw-text-drumeo" title="go to help center"><u>Help Center here</u></a>, but if not, fill out the <a target="_blank" href="https://www.drumeo.com/support/"><u>quick form here</u></a>.</p>
+                You may find your response in our <a href="https://help.drumeo.com/" class="tw-font-bold tw-no-underline tw-text-drumeo" title="go to help center"><u>Help Center here</u></a>, but if not, fill out the below.</p>
         </div>
     </div>
 
-    <div class="max-w-3xl mx-auto">
-        @include('musora._partials.forms.contact-form')
+    <div class="bg-[#000c17]">
+        <div class="max-w-3xl mx-auto">
+            @include('musora._partials.forms.contact-form')
+        </div>
     </div>
     
-    <div class="pt-28 text-white" style="background:#000c17;">
+    <div class="pt-16 text-white bg-[#000c17]">
         <div class="container mx-auto text-center max-w-3xl">
             <div class="flex flex-wrap items-center">
                 <h2 class="font-bold text-xl md:text-3xl w-full">Old fashioned phone calls work too!</h2>
@@ -50,7 +52,7 @@
         </div>
     </div>
 
-    <div class="py-28 text-white" style="background:#000c17;">
+    <div class="py-20 text-white bg-[#000c17]">
         <div class="container mx-auto text-center">
             <h2 class="font-bold text-xl md:text-3xl">Want to join the team?</h2>
             <p class="mt-5 text-sm md:text-base text-[#a1afc9]">For current available positions at our company, please visit <a href="/careers"><u>Musora.com/Careers</u></a>.</p>

@@ -7,7 +7,7 @@
 >
     <label 
         for="{{$id}}" 
-        class="btn-secondary text-gray-400 sm:btn-small"
+        class="btn-secondary sm:btn-small {{ $darkMode ? 'text-[#a1afc9]' : 'text-gray-400' }}"
         @if(!empty($required)) aria-required="required" @endif 
         {{-- x-bind:aria-invalid="invalid" --}}
         {{-- x-bind:aria-valid="valid" --}}
@@ -65,7 +65,7 @@
     </label>
     {{-- <!-- Message --> --}}
     <div class="input-messages">
-        <p class="primary-message text-[#00101D] dark:text-[#9EC0DC]" x-text="message"></p>
+        <p class="primary-message {{ $darkMode ? 'text-white' : 'text-[#00101D]' }}" x-text="message"></p>
         <p 
             x-bind:class="message === '' && 'hidden'"
             class="secondary-message">
@@ -88,10 +88,10 @@
                 </span>
                 {{-- <!-- Remove File --> --}}
                 <div class="ml-4 inline-flex"
-                        x-on:click="
-                            formData.{{$name}} = [];
-                            message = '{{$message}}'
-                        ">
+                    x-on:click="
+                        formData.{{$name}} = [];
+                        message = '{{$message}}'
+                    ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 h-4 w-4 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>

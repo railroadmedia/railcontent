@@ -76,6 +76,10 @@
                         <musora-icon icon-name="eigth-notes-filled"
                                      class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
                         </musora-icon>
+                    @elseif($catalogueMeta['name'] == 'New Content')
+                        <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                    @elseif($catalogueMeta['name'] == 'Subscribed')
+                        <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
@@ -192,31 +196,6 @@
         </div>
     @endif
 
-    {{-- <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
-        <div class="tw-flex tw-flex-col mt-3">
-            <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
-                <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">
-                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
-                </div>
-                @if($catalogueMeta['name'] !== "Songs"
-                    && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
-                    <div class="tw-flex tw-flex-col">
-                        <button class="tw-btn-secondary tw-mb-0 tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
-                                <i class="fas fa-calendar-plus mr-1"></i>
-                                Subscribe to Calendar
-                        </button>
-                    </div>
-                    <add-event-modal
-                        modal-id="addToCalendarModal"
-                        subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
-                        theme-color="{{ $brand }}"
-                        toggleSubscribe="toggleSubscribe"
-                ></add-event-modal>
-                @endif
-            </div>
-        </div>
-    </div> --}}
-
     @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent)
         && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
@@ -242,17 +221,21 @@
             ></add-event-modal>
         </div>
     @else
-        @if($catalogueMeta['name'] !== "Play Alongs" )
+        @if( $catalogueMeta['name'] !== "Play Alongs" || $catalogueMeta['name'] === "Play Alongs" && $brand === "guitareo" ) 
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
                 <div class="tw-flex tw-flex-col mt-3">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
                         <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
                             <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
-                                All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
+                                All
+                                @if( !empty($catalogueMeta['shortname']) && $catalogueMeta['shortname'] === 'Podcast')
+                                    Episodes {{-- Change Podcast Name}} --}}
+                                @else 
+                                    {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
+                                @endif
                             </h1>
                         </div>
-                        @if($catalogueMeta['name'] !== "Songs" &&
-                            !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))
+                        @if( $catalogueMeta['name'] !== "Songs" && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]) )
                             <div class="tw-flex tw-flex-col">
                                 <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
                                     <i class="fas fa-calendar-plus mr-1"></i>
@@ -274,17 +257,15 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
 
-        {{-- Play Alongs Catalogue --}}
-        @if( $catalogueMeta['name'] === "Play Alongs" )
-
+        {{-- Play Alongs Catalogue for Drumeo --}}
+        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
+            
             <play-alongs
                 ref="playAlongsVueInstance"
                 content-endpoint="/laravel/public/railcontent/content"
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"
-                {{-- user-playlist-id="{{ $usersPrimaryPlaylistId }}" --}}
-                {{-- session-token="{{ railtracker_session_token() }}" --}}
                 @play="handlePlayAlongsPlay"
                 @pause="handlePlayAlongsPause"
             ></play-alongs>
@@ -300,6 +281,7 @@
                     subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"
                     catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"
                     :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+                    content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}"
                     :use-theme-color="true"
                     :pre-loaded-content="{{ $listLessons }}"
                     :is-admin="{{ json_encode(user()->isAdmin()) }}"
