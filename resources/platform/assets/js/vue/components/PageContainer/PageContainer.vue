@@ -148,6 +148,7 @@ const onResize = (e) => {
 onMounted(() => {
   //Check if Mobile on Resize
   window.addEventListener("resize", onResize);
+  console.log('show notification', app.config.globalProperties.$showNotification)
 })
 
 onUnmounted(() => {
