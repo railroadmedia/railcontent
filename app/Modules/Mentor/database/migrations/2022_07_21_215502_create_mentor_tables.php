@@ -30,7 +30,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('usora_users');
             $table->string('primary_brand')->nullable();
-            $table->unsignedInteger('mentor_user_id');
+            $table->unsignedInteger('mentor_user_id')->nullable();
             $table->foreign('mentor_user_id')->references('id')->on('usora_users');
             $table->foreign('mentor_user_id', 'mentor_students_mentors_foreign')->references('user_id')->on('mentors');
         });

@@ -23,6 +23,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property User $user
+ * @property mixed|null $mentor
  */
 class MentorStudent extends Model
 {
@@ -33,6 +34,11 @@ class MentorStudent extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function mentor(): BelongsTo
+    {
+        return $this->belongsTo(Mentor::class, 'mentor_user_id');
     }
 
     public function isActive(): bool

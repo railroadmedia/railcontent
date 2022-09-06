@@ -16,7 +16,6 @@ abstract class Command extends CommandBase
         $bar = $this->output->createProgressBar($count);
         $bar->setFormat('debug');
         $bar->start();
-
         $query->chunk($chunks, function ($items) use ($function, $bar) {
             foreach ($items as $item) {
                 call_user_func($function, $item);
@@ -24,7 +23,6 @@ abstract class Command extends CommandBase
             }
         });
 
-        $this->info("Processing Completed");
-
+        $this->info("\nProcessing Completed");
     }
 }

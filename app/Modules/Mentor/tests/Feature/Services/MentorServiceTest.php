@@ -100,4 +100,19 @@ class MentorServiceTest extends TestCase
         $this->assertHasMentor($user, $mentor2);
         $this->assertMentorCount($mentor2, 2, 2);
     }
+
+    public function test_recalculate_mentor_totals()
+    {
+        $brand = 'drumeo';
+        $mentor = $this->createMentor($brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(100)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(200)->create()->id, $brand);
+
+        $this->assertMentorCount($mentor, 2, 2);
+
+        Carbon::setTestNow(Carbon::now()->addDays(150));
+        $this->mentorService->recalculateMentorTotals($mentor);
+
+        $this->assertMentorCount($mentor, 1, 2);
+    }
 }

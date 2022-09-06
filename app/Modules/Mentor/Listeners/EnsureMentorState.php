@@ -17,5 +17,9 @@ class EnsureMentorState
     public function handle(UserMembershipDateUpdated $event): void
     {
         $this->mentorService->ensureMentorState($event->getUser());
+        $mentor = $event->getUser()->mentorStudent?->mentor;
+        if ($mentor) {
+            $this->mentorService->recalculateMentorTotals();
+        }
     }
 }

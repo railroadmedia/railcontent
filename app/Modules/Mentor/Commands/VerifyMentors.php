@@ -4,21 +4,14 @@ namespace App\Modules\Mentor\Commands;
 
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Modules\Mentor\Models\Mentor;
-use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Mentor\Services\MentorService;
+use Artisan;
 use Modules\UserManagementSystem\Models\User;
 
 class VerifyMentors extends Command
 {
     protected $signature = 'mentors:verify';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Run to initialize mentor system';
+    protected $description = 'Ensures all active students have mentors and recalculates mentor totals';
     private MentorService $mentorService;
 
     public function __construct(
@@ -36,75 +29,25 @@ class VerifyMentors extends Command
     public function handle()
     {
         $this->EnsureActiveUsersHaveMentors();
-        $this->VerifyStudentMentors();
-        $this->VerifyMentorCounts();
+        Artisan::call('mentors:recalculateTotals', outputBuffer: $this->output);
         return true;
     }
 
     public function EnsureActiveUsersHaveMentors(): void
     {
         $this->info("Ensure Active Users have Mentors");
-        $query = User::query()->with('mentorStudent');
+        $query = User::query()->with('mentorStudent')->with('mentorStudent.mentor')->where('id', '=', '158525');
 
         $n = 0;
-        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
+        $updated = [];
+        $this->withProgressBarChunked($query, function (User $user) use (&$n, &$updated) {
             $result = $this->mentorService->ensureMentorState($user);
             if ($result > 0) {
                 $n++;
+                $updated[$user->id]->$user->id;
             }
         });
-        $this->info("$n students updated.");
-    }
-
-    public function VerifyStudentMentors()
-    {
-        $query = MentorStudent::query()->with('user');
-
-        $n = 0;
-        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
-            $result = $this->mentorService->ensureMentorState($user);
-            if ($result > 0) {
-                $n++;
-            }
-        });
-        $this->info("$n students updated.");
-    }
-
-    private function VerifyMentorCounts()
-    {
-        $count = Mentor::query()->count();
-        $this->info("\nVerifying $count Mentors");
-
-        $flagged = [];
-        $bar = $this->output->createProgressBar($count);
-        Mentor::query()->chunk(100, function ($mentors) use (&$flagged, $bar) {
-            /* @var Mentor $mentor */
-            foreach ($mentors as $mentor) {
-                $total = MentorStudent::query()->where('mentor_user_id', '=', $mentor->user_id)->count();
-                $totalActive = MentorStudent::query()->where('mentor_user_id', '=', $mentor->user_id)
-                    ->where('active', '=', 1)->count();
-
-                if ($total != $mentor->total_student_count) {
-                    $flagged[$mentor->user_id] = $mentor->user_id;
-                    $this->info(
-                        "Updating mentor $mentor->user_id total count from $mentor->total_student_count to $total"
-                    );
-                    $mentor->total_student_count = $total;
-                    $mentor->save();
-                }
-                if ($totalActive != $mentor->active_student_count) {
-                    $flagged[$mentor->user_id] = $mentor->user_id;
-                    $this->info(
-                        "Updating mentor $mentor->user_id total count from $mentor->active_student_count to $totalActive"
-                    );
-                    $mentor->active_student_count = $totalActive;
-                    $mentor->save();
-                }
-                $bar->advance();
-            }
-        });
-
-        $countFlagged = count($flagged);
-        $this->info("$countFlagged records flagged.");
+        $this->info("$n student mentors assigned.");
+        var_dump($updated);
     }
 }

@@ -10,7 +10,6 @@ use App\Modules\Mentor\Services\HelpScoutMentorService;
 use App\Modules\Mentor\Services\MentorService;
 use App\Services\DatabaseService;
 use App\Services\DatabaseServiceProvider;
-use DB;
 use Illuminate\Database\DatabaseManager;
 use Modules\UserManagementSystem\Models\User;
 

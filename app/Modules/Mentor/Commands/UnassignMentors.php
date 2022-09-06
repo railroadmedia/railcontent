@@ -4,11 +4,9 @@ namespace App\Modules\Mentor\Commands;
 
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
-use App\Modules\Mentor\Services\MentorService;
 use App\Services\DatabaseServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Railroad\Ecommerce\Services\DateTimeService;
 
 class UnassignMentors extends Command
 {

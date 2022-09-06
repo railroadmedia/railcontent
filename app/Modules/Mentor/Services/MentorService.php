@@ -9,6 +9,7 @@ use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Str;
@@ -89,29 +90,28 @@ class MentorService
             if ($this->assignMentor($user->id)) {
                 return EnsureMentorResult::MentorAssigned;
             }
-        } elseif ($active && $mentorStudent && !$mentorStudent->isActive()) {
-            $this->activateMentorStudent($mentorStudent);
-            return EnsureMentorResult::ActiveStateUpdated;
-        } elseif (!$active && $mentorStudent && $mentorStudent->isActive()) {
-            $this->deactivateMentorStudent($mentorStudent);
-            return EnsureMentorResult::ActiveStateUpdated;
         }
+
         return EnsureMentorResult::NoChange;
     }
 
-    private function activateMentorStudent(?MentorStudent $mentorStudent): void
+    public function recalculateMentorTotals(Mentor $mentor)
     {
-        Log::info("Activating student $mentorStudent->user_id");
-        $mentor = $this->getMentorOrNull($mentorStudent->mentor_user_id);
-        $mentor->active_student_count++;
-        $mentor->save();
-    }
+        $data = MentorStudent::query()
+            ->join(
+                'usora_users',
+                'usora_users.id',
+                '=',
+                'mentor_students.user_id'
+            )
+            ->where('mentor_user_id', '=', $mentor->user_id)
+            ->select('usora_users.membership_expiration_date')
+            ->get();
 
-    private function deactivateMentorStudent(?MentorStudent $mentorStudent): void
-    {
-        Log::info("Deactivating student $mentorStudent->user_id");
-        $mentor = $this->getMentorOrNull($mentorStudent->mentor_user_id);
-        $mentor->active_student_count--;
+        $mentor->total_student_count = $data->count();
+        $mentor->active_student_count = $data
+            ->where('membership_expiration_date', '>=', Carbon::now()->addDays(-30))
+            ->count();
         $mentor->save();
     }
 
@@ -245,13 +245,13 @@ class MentorService
                     $mentors[$newMentor->user_id] = $newMentor;
                 }
             } else {
-                $mentorStudent->mentor_user_id = '';
+                $mentorStudent->mentor_user_id = null;
             }
         }
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
             $ids = $data->map(fn($t) => $t->id);
-            MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId]);
+            MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId ? $mentorUserId : null]);
             if ($mentorUserId) {
                 $newMentor = $mentors[$mentorUserId];
                 $newMentor->save();

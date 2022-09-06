@@ -100,11 +100,11 @@ class UserFactory extends Factory
         ];
     }
 
-    public function hasActiveMembership(): UserFactory
+    public function hasActiveMembership(int $days = 60): UserFactory
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function (array $attributes) use ($days) {
             return [
-                'membership_expiration_date' => Carbon::now()->addDays(60)
+                'membership_expiration_date' => Carbon::now()->addDays($days)
             ];
         });
     }

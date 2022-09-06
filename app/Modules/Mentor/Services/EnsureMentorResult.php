@@ -6,5 +6,4 @@ enum EnsureMentorResult: int
 {
     case NoChange = 0;
     case MentorAssigned = 1;
-    case ActiveStateUpdated = 2;
 }
