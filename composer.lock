@@ -4786,16 +4786,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.22.4",
+            "version": "v2.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "9632ea0ad1f59287df456e7fe67968f81bd5b5e5"
+                "reference": "ce8133018968ad3f801730609864c59ee45ef75f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/9632ea0ad1f59287df456e7fe67968f81bd5b5e5",
-                "reference": "9632ea0ad1f59287df456e7fe67968f81bd5b5e5",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/ce8133018968ad3f801730609864c59ee45ef75f",
+                "reference": "ce8133018968ad3f801730609864c59ee45ef75f",
                 "shasum": ""
             },
             "require": {
@@ -4851,9 +4851,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.22.4"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.23.0"
             },
-            "time": "2022-07-07T18:10:55+00:00"
+            "time": "2022-09-06T12:59:25+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -7899,12 +7899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "9750113b9daed0c16606215ed51a963890a34124"
+                "reference": "4c9a805abe62a0dfb8a0784824e868b2db8a19fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/9750113b9daed0c16606215ed51a963890a34124",
-                "reference": "9750113b9daed0c16606215ed51a963890a34124",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/4c9a805abe62a0dfb8a0784824e868b2db8a19fe",
+                "reference": "4c9a805abe62a0dfb8a0784824e868b2db8a19fe",
                 "shasum": ""
             },
             "require": {
@@ -7955,7 +7955,7 @@
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
                 "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration-points"
             },
-            "time": "2022-09-01T14:12:27+00:00"
+            "time": "2022-09-06T13:37:00+00:00"
         },
         {
             "name": "railroad/location",
@@ -8717,7 +8717,7 @@
             "name": "railroad/response",
             "version": "2.0.x-dev",
             "source": {
-  project-points              "type": "git",
+                "type": "git",
                 "url": "https://github.com/railroadmedia/response.git",
                 "reference": "7f99c200e3bd9b3c11f8e623a39620c8c481cc98"
             },
