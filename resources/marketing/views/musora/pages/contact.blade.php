@@ -21,7 +21,7 @@
     </section>
 
     <div class="pt-20 pb-10 text-white bg-[#000c17]">
-        <div class="container mx-auto text-center">
+        <div class="container mx-auto text-center px-4 lg:px-8">
             <h2 class="font-bold text-xl md:text-3xl">We'd love to hear from you!</h2>
             <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">Whether your question is about membership, shipping, technical troubles or anything else, our amazing support team is ready to answer any and all of your questions!
                 <br><br>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="bg-[#000c17]">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto px-4 lg:px-8">
             @include('musora._partials.forms.contact-form')
         </div>
     </div>
