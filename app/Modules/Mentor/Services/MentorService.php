@@ -183,7 +183,7 @@ class MentorService
         return $mentorStudent?->mentor_user_id;
     }
 
-    public function updateStudentMentor(int $userId, int $newMentorId): void
+    public function updateStudentMentor(int $userId, ?int $newMentorId): void
     {
         $mentorStudent = $this->getMentorStudentOrNull($userId);
         if (!$mentorStudent) {
@@ -191,14 +191,17 @@ class MentorService
             $mentorStudent->user_id = $userId;
         }
 
+
         $mentor = $this->getMentorOrNull($newMentorId);
 
-        $mentorStudent->mentor_user_id = $mentor->user_id;
-        if ($mentorStudent->isActive()) {
-            $mentor->active_student_count += 1;
+        $mentorStudent->mentor_user_id = $mentor?->user_id;
+        if ($mentor) {
+            if ($mentorStudent->isActive()) {
+                $mentor->active_student_count += 1;
+            }
+            $mentor->total_student_count += 1;
+            $mentor->save();
         }
-        $mentor->total_student_count += 1;
-        $mentor->save();
         $mentorStudent->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
     }
@@ -210,8 +213,11 @@ class MentorService
         return $mentorStudent;
     }
 
-    public function getMentorOrNull(int $userId): ?Mentor
+    public function getMentorOrNull(?int $userId): ?Mentor
     {
+        if (!$userId) {
+            return null;
+        }
         /* @var ?Mentor $mentor */
         $mentor = Mentor::query()->where('user_id', '=', $userId)->first();
         return $mentor;
@@ -251,7 +257,9 @@ class MentorService
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
             $ids = $data->map(fn($t) => $t->id);
-            MentorStudent::query()->whereIn('id', $ids)->update(['mentor_user_id' => $mentorUserId ? $mentorUserId : null]);
+            MentorStudent::query()->whereIn('id', $ids)->update(
+                ['mentor_user_id' => $mentorUserId ? $mentorUserId : null]
+            );
             if ($mentorUserId) {
                 $newMentor = $mentors[$mentorUserId];
                 $newMentor->save();

@@ -32,11 +32,11 @@ class MentorServiceTest extends TestCase
     }
 
 
-    public function assertHasMentor(User $user, Mentor $mentor): void
+    public function assertHasMentor(User $user, ?Mentor $mentor): void
     {
         $this->assertDatabaseHas('mentor_students', [
             'user_id' => $user->id,
-            'mentor_user_id' => $mentor->user_id
+            'mentor_user_id' => $mentor?->user_id
         ]);
     }
 
@@ -116,5 +116,21 @@ class MentorServiceTest extends TestCase
         $this->mentorService->recalculateMentorTotals($mentor);
 
         $this->assertMentorCount($mentor, 1, 2);
+    }
+
+    public function test_update_mentor_student(){
+        $brand = 'drumeo';
+        $mentor = $this->createMentor($brand);
+        $user = User::factory()->hasActiveMembership(100)->create();
+        $this->mentorService->assignMentorByBrand($user->id, $brand);
+        $this->assertHasMentor($user, $mentor);
+
+        $mentor2 = $this->createMentor($brand);
+
+        $this->mentorService->updateStudentMentor($user->id, $mentor2->user_id);
+        $this->assertHasMentor($user, $mentor2);
+
+        $this->mentorService->updateStudentMentor($user->id, null);
+        $this->assertHasMentor($user, null);
     }
 }
