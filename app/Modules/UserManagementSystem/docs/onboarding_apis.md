@@ -66,7 +66,7 @@ if it does not return: show the experience step
 
 when pressing 'next button':
 
-**`POST /user_management_system/onboarding-experience`**
+**`POST /user-management-system/onboarding-experience`**
 
 ```php
 [
@@ -91,7 +91,7 @@ if it does not return: show the genres step
 
 when pressing 'next button':
 
-**`POST /user_management_system/onboarding-genres`**
+**`POST /user-management-system/onboarding-genres`**
 
 ```php
 [
@@ -114,7 +114,7 @@ if it does not return: show the topics step
 
 when pressing 'next button':
 
-**`POST /user_management_system/onboarding-topics`**
+**`POST /user-management-system/onboarding-topics`**
 
 ```php
 [
@@ -148,7 +148,7 @@ When bell is clicked, follow new coach:
 During onboarding process, once the brand is selected, the user can press 'SKIP ACCOUNT SETUP' button:
 This will set the user attribute [brand]_onboarding_skip_setup to 'true'
 
-**`POST /user_management_system/onboarding-skip-account-setup`**
+**`POST /user-management-system/onboarding-skip-account-setup`**
 
 ```php
 [
@@ -158,3 +158,36 @@ This will set the user attribute [brand]_onboarding_skip_setup to 'true'
 ```
 
 The response will return the user json, together with the updated value. So if user()->pianote_onboarding_skip_setup == true, then 'Complete your account' div must be hidden on pianote.
+
+
+## 9 ONBOARDING ANSWER HISTORY INSTRUMENT
+
+When the instrument is selected during the onboarding process, the onboarding answer history instrument request is also called.
+We are using it to story historical data about the options chosen by the user during the onboarding process.
+
+**`GET /user-management-system/onboarding-answer-history-instrument?instrument=${instrument}`**
+
+```php
+[
+    'instrument' => 'string|required|possible-values:[drums, guitar, singing, piano]',
+];
+```
+
+The response will return a json with a 200 code in case of success.
+
+## 10 ONBOARDING ANSWER HISTORY COACH
+
+When the user subscribes to a coach during the onboarding process, the onboarding answer history coach request is also called.
+We are using it to store historical data about the options chosen by the user during the onboarding process.
+
+
+**`GET /user-management-system/onboarding-answer-history-coach?coachName=${coachName}&coachId=${coachId}`**
+
+```php
+[
+    'coachName' => 'string|required',
+    'coachId' => 'int|required
+];
+```
+
+The response will return a json with a 200 code in case of success.
