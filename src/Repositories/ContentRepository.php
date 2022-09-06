@@ -2055,8 +2055,8 @@ class ContentRepository extends RepositoryBase
                 ->toArray();
 
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
-                    $filterOptionValueToClean
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(trim(
+                    $filterOptionValueToClean)
                 );
             }
 
