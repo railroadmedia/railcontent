@@ -70,7 +70,7 @@
                         'inputName' => 'country',
                         'inputValue' => old('country', user()->country),
                         'inputErrors' => $errors->get('country'),
-                        'inputOptions' => [] // todo: location package
+                        'inputOptions' => \Railroad\Location\Services\CountryListService::allWithCommonDuplicatedAtTop()
                     ],
                     'birthdayInput' => [
                         'inputName' => 'birthday',
