@@ -33,8 +33,10 @@
                 </div>
                 <div class="flex flex-column enable-filters tw-h-[50px]">
                     <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
-                        :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
-                        title="Toggle Filters" @click="displayFilters = !displayFilters">
+                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
+                            title="Toggle Filters" 
+                            @click="displayFilters = !displayFilters"
+                    >
                         <i class="fas fa-filter"></i>
                     </button>
                 </div>
@@ -227,7 +229,7 @@ export default {
                 y: 0,
             },
             showMobileFilters: false,
-            displayFilters: false,
+            displayFilters: true,
             progressTracker: this.trackProgress ? new ProgressTracker() : null,
             isPlaying: false,
         };
