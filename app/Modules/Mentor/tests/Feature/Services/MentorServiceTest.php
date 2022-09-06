@@ -86,16 +86,18 @@ class MentorServiceTest extends TestCase
         $mentor = $this->createMentor($brand);
         //create 3 users, 2 active, 1 not
         $this->mentorService->assignMentorByBrand(User::factory()->create()->id, $brand);
-        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership()->create()->id, $brand);
-        $user = User::factory()->hasActiveMembership()->create();
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(100)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(200)->create()->id, $brand);
+        $user = User::factory()->hasActiveMembership(200)->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
-        Event::assertDispatched(StudentMentorsUpdated::class, 3);
+        Event::assertDispatched(StudentMentorsUpdated::class, 4);
 
         $this->assertHasMentor($user, $mentor);
-        $this->assertMentorCount($mentor, 2, 3);
+        $this->assertMentorCount($mentor, 3, 4);
         $mentor2 = $this->createMentor($brand);
         $this->assertMentorCount($mentor2, 0, 0);
 
+        Carbon::setTestNow(Carbon::now()->addDays(150));
         $this->mentorService->delete($mentor->user_id);
         $this->assertHasMentor($user, $mentor2);
         $this->assertMentorCount($mentor2, 2, 2);
