@@ -41,9 +41,11 @@
                         </div>
                     @endif
 
-                    <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
-                        <p class="tiny text-grey-3">WARNING: Changing your email in {{ ucfirst($brand) }} will also change your email in {{ $otherBrands }}.</p>
-                    </div>
+                    {{-- 
+                        <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
+                            <p class="tiny text-grey-3">WARNING: Changing your email in {{ ucfirst($brand) }} will also change your email in {{ $otherBrands }}.</p>
+                        </div> 
+                    --}}
 
                     <div class="tw-flex tw-flex-row ph-3 tw-mb-2">
                         <div class="tw-flex tw-flex-col tw-w-full">

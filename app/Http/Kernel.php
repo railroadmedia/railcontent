@@ -55,7 +55,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-//            \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,

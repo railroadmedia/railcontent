@@ -84,7 +84,7 @@
                     USD ${{ parseTotal(totals.due) }}
                     <template v-if="totals.shipping > 0">
                         <br>
-                        <span class="x-tiny font-regular text-grey-3">
+                        <span class="tw-text-xs font-regular text-grey-3">
                             Shipping included
                         </span>
                     </template>

@@ -48,8 +48,6 @@
             'itemProgress' => $guitarQuestPack->fetch('progress_state'),
         ])
 
-        <p>{{ $guitarQuestPack->fetch('url') }}</p>
-
         <div class="flex flex-row flex-wrap">
             @foreach($packs as $pack)
                 @include('partials.content._lessons-pack', [

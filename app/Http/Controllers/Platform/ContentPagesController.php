@@ -219,7 +219,8 @@ class ContentPagesController extends BaseController
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
         }
 
-        if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes())) {
+        $areMultipartSongs = (in_array($primaryPage ,['songs','play-alongs']) && (in_array($brand,['pianote','guitareo'])));
+        if (in_array($firstLevelContent['type'], ContentTypes::singularContentTypes()) && !$areMultipartSongs) {
             return $this->videoLessonPage(
                 $request,
                 $domain,
@@ -230,7 +231,7 @@ class ContentPagesController extends BaseController
             );
         }
 
-        $childrenContent =
+        $childrenContent = $firstLevelContent['units'] ??
             $this->contentService->getByParentIdWhereTypeIn(
                 $firstLevelContent['id'],
                 [ContentTypeHierarchyMap::$map[$firstLevelContent['type']]]
@@ -243,7 +244,7 @@ class ContentPagesController extends BaseController
             "xp" => $firstLevelContent->fetch('xp', 0),
         ];
 
-        $nextLessonUrl = $nextContentForUser['web_url'] ?? '';
+        $nextLessonUrl = $nextContentForUser['url'] ?? '';
         $nextLessonJson = $nextContentForUser ?? null;
 
         if (!empty($nextLessonJson)) {
@@ -256,9 +257,34 @@ class ContentPagesController extends BaseController
 
         $xpBonus = $firstLevelContent->fetch('xp_bonus', 0);
 
-        $backButton = [
-            "text" => "&laquo; Learning Paths",
-        ];
+        if ($primaryPage == "method") {
+            switch (brand()) {
+                case 'drumeo':
+                    $methodSlug = 'drumeo-method';
+                    break;
+                case 'pianote':
+                    $methodSlug = 'pianote-method';
+                    break;
+                case 'guitareo':
+                    $methodSlug = 'guitareo-method';
+                    break;
+                case 'singeo':
+                    $methodSlug = 'singeo-method';
+                    break;
+            }
+            $methodContent =$this->contentService->getBySlugAndType($methodSlug, 'learning-path')->first();
+            $backButton = [
+                "text" => "&laquo; Learning Paths",
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $methodContent['slug'], $methodContent['id']]),
+            ];
+        } else {
+            // for the situation when $primaryPage == "courses"
+            $backButton = [
+                "text" => "Back to All Courses",
+                "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => 'courses']),
+            ];
+        }
+
 
         // attach the trailer video from vimeo
         $firstLevelContent =
@@ -273,8 +299,7 @@ class ContentPagesController extends BaseController
             }
         }
 
-        $progressLabelText =
-            $firstLevelContent->fetch('level_rank') ? 'Level - '.$firstLevelContent->fetch('level_rank') : '';
+        $progressLabelText = ($primaryPage == 'method')?'Level - '.$firstLevelContent->fetch('higher_key_progress','1.1'):'';
 
         return view('content.overview', [
                                           "parentContent" => $firstLevelContent,
@@ -283,8 +308,8 @@ class ContentPagesController extends BaseController
                                           "showLevels" => true,
                                           "progressLabelText" => $progressLabelText,
                                           "infoData" => $infoData,
-                                          "nextLessonUrl" => $nextLessonUrl,
-                                          "nextLessonJson" => $nextLessonJson,
+                                          "nextLessonUrl" => !$areMultipartSongs?$nextLessonUrl:'',
+                                          "nextLessonJson" => !$areMultipartSongs?$nextLessonJson:'',
                                           "xpBonus" => $xpBonus,
                                           'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
                                       ]);
@@ -334,11 +359,17 @@ class ContentPagesController extends BaseController
         $secondContentResultsEntity = new ContentFilterResultsEntity(['results' => $courses]);
 
         // next lesson for user
-        if ($firstContent->fetch('next_lesson_level_id') == $secondContent['id']) {
-            $nextLearningPathLesson =
-                (new ContentFilterResultsEntity(
-                    ['results' => [$firstContent->fetch('next_lesson', [])], 'total_results' => 1]))->toResponseRawJson(
-                );
+        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+            $secondContent['id'],
+            auth()->id()
+        );
+        $nextLessonUrl = $nextContentForUser['url'] ?? '';
+        $nextLessonJson = $nextContentForUser ?? null;
+
+        if (!empty($nextLessonJson)) {
+            $nextLearningPathLesson = (new ContentFilterResultsEntity(
+                ['results' => [$nextLessonJson], 'total_results' => 1]
+            ))->toResponseRawJson();
         } else {
             $nextLearningPathLesson = '';
         }
@@ -351,7 +382,7 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - '.$firstContent->fetch('higher_key_progress','1.1');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -368,7 +399,7 @@ class ContentPagesController extends BaseController
                                           "parentContent" => $secondContent,
                                           "childContent" => $secondContentResultsEntity->toResponseRawJson(),
                                           "infoData" => $infoData,
-                                          "nextLessonUrl" => $secondContent->fetch('current_lesson')['url'] ?? '',
+                                          "nextLessonUrl" => $secondContent->fetch('current_lesson')['url'] ?? $nextLessonUrl,
                                           "progressLabelText" => $progressLabelText,
                                           "nextLessonJson" => $nextLearningPathLesson,
                                           'backButton' => $backButton,
@@ -428,11 +459,17 @@ class ContentPagesController extends BaseController
         $thirdContentResultsEntity = new ContentFilterResultsEntity(['results' => $courses]);
 
         // next lesson for user
-        if ($firstContent->fetch('next_lesson_level_id') == $thirdContent['id']) {
-            $nextLearningPathLesson =
-                (new ContentFilterResultsEntity(
-                    ['results' => [$firstContent->fetch('next_lesson', [])], 'total_results' => 1]))->toResponseRawJson(
-                );
+        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+            $thirdContent['id'],
+            auth()->id()
+        );
+        $nextLessonUrl = $nextContentForUser['url'] ?? '';
+        $nextLessonJson = $nextContentForUser ?? null;
+
+        if (!empty($nextLessonJson)) {
+            $nextLearningPathLesson = (new ContentFilterResultsEntity(
+                ['results' => [$nextLessonJson], 'total_results' => 1]
+            ))->toResponseRawJson();
         } else {
             $nextLearningPathLesson = '';
         }
@@ -445,7 +482,7 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('level_rank');
+        $progressLabelText = 'Level - '.$firstContent->fetch('higher_key_progress','1.1');
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -466,7 +503,7 @@ class ContentPagesController extends BaseController
                                           "parentContent" => $thirdContent,
                                           "childContent" => $thirdContentResultsEntity->toResponseRawJson(),
                                           "infoData" => $infoData,
-                                          "nextLessonUrl" => $thirdContent->fetch('current_lesson')['url'] ?? '',
+                                          "nextLessonUrl" => $thirdContent->fetch('current_lesson')['url'] ?? $nextLessonUrl,
                                           "progressLabelText" => $progressLabelText,
                                           "nextLessonJson" => $nextLearningPathLesson,
                                           'backButton' => $backButton,
@@ -709,6 +746,28 @@ class ContentPagesController extends BaseController
 
         $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildrenTrimmed]))->toResponseRawJson();
 
+        $rangesVideoIds = [];
+        if($primaryPage == 'songs' && $brand == 'singeo') {
+            $rangesVideoIds = [];
+            $ranges = ['low', 'original', 'high'];
+            $contentToRenderAsLesson['ranges'] = [];
+
+            foreach ($contentToRenderAsLesson['fields'] as $field) {
+                foreach ($ranges as $range) {
+                    $fetchFieldTemplate = 'fields.%s_video.fields.youtube_video_id';
+                    $fetchFieldString = sprintf($fetchFieldTemplate, $range);
+                    $videoId = $contentToRenderAsLesson->fetch($fetchFieldString);
+
+                    if (!empty($videoId)) {
+                        $rangesVideoIds[$range] = $videoId;
+                        $contentToRenderAsLesson['ranges'][] = $range;
+                    }
+                }
+
+                $contentToRenderAsLesson['ranges'] = array_unique($contentToRenderAsLesson['ranges'] ?? []);
+            }
+        }
+
         return view('content.lesson', [
                                         "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
                                         "lessonType" => $contentToRenderAsLesson['type'],
@@ -727,6 +786,7 @@ class ContentPagesController extends BaseController
                                         "nextLessonJson" => content_to_json($nextChild),
                                         "showEmail" => false,
                                         "firstContent" => $firstContent,
+                                        "rangesVideoIds" => $rangesVideoIds
                                     ]);
     }
 
@@ -1146,7 +1206,16 @@ class ContentPagesController extends BaseController
                                                                       $contentRow->id,
                                                                   ]);
         }
-
+        if (in_array($contentRow->type, ContentTypes::singularContentTypes())) {
+            return $this->videoLessonPage(
+                $request,
+                $domain,
+                brand(),
+                '',
+                $contentRow->slug,
+                $contentRow->id
+            );
+        }
         if (empty($contentRow)) {
             throw new NotFoundHttpException();
         }

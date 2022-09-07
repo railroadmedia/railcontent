@@ -52,6 +52,17 @@ return [
         'rudiment',
         'coach-stream',
         'coach',
+        'unit-part',
+        'play-along-part',
+        'chord-and-scale',
+        'entertainment',
+        'quick-tips',
+        'question-and-answer',
+        'student-review',
+        'song-part',
+        'boot-camps',
+        'podcasts',
+        'podcast',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -149,6 +160,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -157,6 +169,8 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
+            'unit'
         ],
         'completed' => [
             'course',
@@ -171,6 +185,7 @@ return [
             'course-part',
             'play-along',
             'song',
+            'song-part',
             'student-focus',
             'rudiment',
             'assignment',
@@ -178,6 +193,8 @@ return [
             'learning-path-lesson',
             'learning-path-course',
             'learning-path-level',
+            'unit-part',
+            'unit'
         ],
     ],
 
@@ -671,7 +688,7 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
-                'shortname' => 'Quick Tips',
+                'shortname' => 'Courses',
                 "icon" => "icon-courses",
                 "description" => "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.",
                 'amountOfFutureLessonsToShow' => 3,
@@ -870,7 +887,7 @@ return [
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
             ],
-            'student-review' => [
+            'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
@@ -1067,7 +1084,10 @@ return [
         'chord-and-scale',
         'podcasts',
         'boot-camps',
-        'quick-tips'
+        'quick-tips',
+        'unit-part',
+        'song-part',
+        'play-along-part',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1349,6 +1369,7 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
+            'play-along' => 'lessons',
         ],
         'singeo' => [
             'learning-path' => 'levels',

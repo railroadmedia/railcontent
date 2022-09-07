@@ -47,7 +47,7 @@
 
                 <page-container 
                     brand="{{ $brand }}" 
-                    :is-live="false" 
+                    :is-live="{{ !empty($coachEvent) }}"
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
                     user-id="{{ user()->id }}"

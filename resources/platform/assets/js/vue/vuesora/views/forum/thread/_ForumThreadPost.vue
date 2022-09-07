@@ -120,8 +120,8 @@
                         title="Share this post"
                         @click="$emit('updateCurrentPostID', post.id)"
                     >
-                    <i class="fas fa-share"></i>
-                    Share
+                        <i class="fas fa-share"></i>
+                        Share
                     </button>
                 </div>
                 </div>
@@ -131,25 +131,21 @@
                         class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                         @click="reportPost"
                     >
-                    Report
+                        Report
                     </p>
-                    <!--<p v-if="currentUser.isAdmin" class="x-tiny text-grey-2 ml-3 font-bold font-italic tw-uppercase dense tw-cursor-pointer"-->
-                    <!--@click="hidePost">-->
-                    <!--Hide-->
-                    <!--</p>-->
                     <p
                         v-if="index !== 0 && canEdit"
                         class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                         @click="deletePost"
                     >
-                    Delete
+                        Delete
                     </p>
                     <p
                         v-if="canEdit"
                         class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                         @click="editing = !editing"
                     >
-                    Edit
+                        Edit
                     </p>
                 </div>
                 </div>

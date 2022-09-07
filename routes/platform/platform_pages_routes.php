@@ -227,7 +227,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'secondLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs', 'play-alongs'])
             ->name('platform.content.second-level');
 
         Route::get(
@@ -422,6 +422,17 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/legacy-resources/loops', [LegacyResourcesController::class, 'loops'])
             ->whereIn('brand', ['drumeo'])
             ->name('platform.legacy-resources.loops');
+
+        /**
+         * Pianote Foundation Book
+         */
+        Route::get('/{brand}/resources', [\App\Http\Controllers\Platform\BooksController::class, 'resources'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources');
+
+        Route::get('/{brand}/resources/level-{chapterNumber}', [\App\Http\Controllers\Platform\BooksController::class, 'chapter'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources.chapter');
 
 //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
