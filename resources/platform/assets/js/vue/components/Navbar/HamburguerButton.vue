@@ -16,15 +16,15 @@ export default {
     <div class="tw-block tw-w-5 tw-absolute tw-text-[#111827] dark:tw-text-white tw-left-1/2 tw-top-1/2 tw-transform tw--translate-x-1/2 tw--translate-y-1/2">
         <span aria-hidden="true" 
               class="tw-block tw-absolute tw-h-0.5 tw-w-5 tw-bg-current tw-transform tw-transition tw-duration-300 ease-in-out" 
-              :class="[ !isSidebarHidden && !isSidebarCollapsed ? 'tw-rotate-45 md:tw-rotate-0 md:tw--translate-y-1.5' : 'tw--translate-y-1.5' ]">
+              :class="[ !isSidebarHidden && !isSidebarCollapsed ? 'tw-rotate-45 lg:tw-rotate-0 lg:tw--translate-y-1.5' : 'tw--translate-y-1.5' ]">
         </span>
         <span aria-hidden="true" 
               class="tw-block tw-absolute tw-h-0.5 tw-w-5 tw-bg-current tw-transform tw-transition tw-duration-300 ease-in-out" 
-              :class="[ !isSidebarHidden && !isSidebarCollapsed ? 'tw-opacity-0 md:tw-opacity-100' : '' ]">
+              :class="[ !isSidebarHidden && !isSidebarCollapsed ? 'tw-opacity-0 lg:tw-opacity-100' : '' ]">
         </span>
         <span aria-hidden="true" 
               class="tw-block tw-absolute tw-h-0.5 tw-w-5 tw-bg-current tw-transform tw-transition tw-duration-300 ease-in-out" 
-              :class="[ !isSidebarHidden && !isSidebarCollapsed ? 'tw--rotate-45 md:tw-rotate-0 md:tw-translate-y-1.5' : 'tw-translate-y-1.5' ]">
+              :class="[ !isSidebarHidden && !isSidebarCollapsed ? 'tw--rotate-45 lg:tw-rotate-0 lg:tw-translate-y-1.5' : 'tw-translate-y-1.5' ]">
         </span>
     </div>
   </button>

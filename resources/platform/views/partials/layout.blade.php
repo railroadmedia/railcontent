@@ -37,8 +37,7 @@
             >
                 <page-container
                     brand="{{ $brand }}"
-                    {{--:is-live="{{ !empty($coachEvent) }}"--}}
-                    :is-live="true"
+                    :is-live="{{ isLive() ? 'true':'false' }}"
                     search-url=""
                     @if(!empty( user() ))
                         user-name="{{ user()->display_name }}"
