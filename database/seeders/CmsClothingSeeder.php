@@ -22,12 +22,67 @@ class CmsClothingSeeder extends Seeder
     {
         $products = [
             [
+                "brand" => 2,
+                "product_type_id" => 4,
+                "name" => "Pianote Floral Shirt White",
+                "slug" => "shirt-floral-white",
+                "sku" => "tshirt-pianote-floral-white",
+                "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/womens-floral-shirt.jpg",
+                "meta_desc" => "This custom-designed graphic features roses and a grand piano.",
+                "meta_img" => "https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-114-Edit.jpg",
+                "short_desc" => "This custom-designed graphic features roses and a grand piano.",
+                "header_text" => "Women’s White Floral T-Shirt",
+                "price" => 29,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                    "Music brings happiness. A simple concept you know to be true. This custom-designed graphic features roses and a grand piano. Share a beautiful image, and a beautiful message."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Women's"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Boxercraft"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "80% Polyester, 20% Cotton Sueded Jersey"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "White"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => '	Relaxed Fit Scoop Neck Short Sleeve T-Shirt'
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-105-Edit.jpg',
+                    'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-112-Edit.jpg',
+                    'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-130-Edit.jpg',
+                    'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-114-Edit.jpg'
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+                    1,2,3,4,5
+                ]
+            ],
+            [
                 "brand" => 1,
                 "product_type_id" => 3,
                 "name" => "Minimalist Hat",
                 "slug" => "hat-minimalist",
                 "sku" => "6477-wool-flexfit-cap-black",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/minimalist-hat.jpg",
+                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/minimalist-hat2.jpg",
                 "meta_desc" => "Simple and clean, this hat features a branded snare icon on the front and a discreet Drumeo logo on the back.",
                 "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/hat.jpg",
                 "short_desc" => "Simple and clean, this hat features a branded snare icon on the front and a discreet Drumeo logo on the back.",
@@ -75,6 +130,60 @@ class CmsClothingSeeder extends Seeder
                 "sizes" => [
                     9,10
                 ]
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 3,
+                "name" => "Drumeo Beanie",
+                "slug" => "beanie",
+                "sku" => "Drumeo-Beanie",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/beanie.jpg",
+                "meta_desc" => "Smooth, slim fit keeps you warm + Drumeo logo keeps you cool.",
+                "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
+                "short_desc" => "",
+                "header_text" => "Drumeo Beanie",
+                "price" => 19,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                    "It gets cold here at the Drumeo HQ in Canada, so we’ve finally embraced the cold with a Drumeo-branded beanie to keep every drummer warm and styling!"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Manufacturer",
+                        "desc" => "Apollo"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Acrylic"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                    [
+                        "title" => "Size",
+                        "desc" => "8.5”"
+                    ],
+                    [
+                        "title" => "Logo",
+                        "desc" => "4” wide, front embroidery."
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/3.jpg",
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/4.jpg"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
             ],
             [
                 "brand" => 2,
@@ -216,7 +325,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Black with a blue Drumeo logo"
                     ],
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1359,7 +1468,7 @@ class CmsClothingSeeder extends Seeder
             [
                 "brand" => 2,
                 "product_type_id" => 4,
-                "name" => "Iconic Pianote T-Shirt",
+                "name" => "Discounted Iconic Pianote T-Shirt",
                 "slug" => "shirt-iconic-discount",
                 "sku" => "2019-TSHIRT",
                 "promo_code" => "25-off",
@@ -1392,7 +1501,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Vintage Black"
                     ],
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1708,7 +1817,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Relaxed fit v-neck shirt."
                     ],
                     [
-                        "title" => "Log",
+                        "title" => "Logo",
                         "desc" => "8” wide front screenprint"
                     ],
                 ],

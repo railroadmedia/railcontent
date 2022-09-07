@@ -39,7 +39,7 @@ class CmsAccessorySeeder extends Seeder
                 "specs" => [
                 ],
                 "visible" => true,
-                "sold_out" => true,
+                "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
@@ -942,7 +942,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "name" => "Guitareo Survival Guide",
                 "slug" => "survival-guide",
                 "sku" => "survival-guide",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-108-Edit.jpg",
+                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg",
                 "meta_desc" => "The Guitareo Survival Guide is perfect for adding a little fun while navigating your way through the wild and rewarding world of learning how to play the guitar.",
                 "meta_img" => "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102.jpg",
                 "short_desc" => "Guitar Chords Scales And Licks You Can Take Anywhere",
@@ -975,6 +975,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'bundle_free_shipping' => true,
                 "images" => [
                     "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102-Edit.jpg",
                     "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-108-Edit.jpg",
@@ -1087,6 +1088,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "sizes" => [
 
                 ],
+                'bundle_desc' => 'Knowing how to style and pronounce your vowels will have instant effects on your singing. This poster will be your new favorite practice tool - and your ticket to hitting higher notes with ease and confidence.'
             ],
             [
                 "brand" => 4,
@@ -1169,7 +1171,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                         "desc" => "Matte pearlized finish"
                     ],
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1181,60 +1183,6 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                     "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-109.jpg",
                     "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-120-Edit.jpg",
                     "https://singeo.s3.amazonaws.com/products/doremi-tumbler/2022-03-18-DoReMiMug-104-2-up.jpg"
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ],
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
-                "name" => "Drumeo Beanie",
-                "slug" => "beanie",
-                "sku" => "Drumeo-Beanie",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/beanie.jpg",
-                "meta_desc" => "Smooth, slim fit keeps you warm + Drumeo logo keeps you cool.",
-                "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
-                "short_desc" => "",
-                "header_text" => "Drumeo Beanie",
-                "price" => 19,
-                "discounted_price" => "",
-                "special_text" => "",
-                "features" => [
-                    "It gets cold here at the Drumeo HQ in Canada, so we’ve finally embraced the cold with a Drumeo-branded beanie to keep every drummer warm and styling!"
-                ],
-                "specs" => [
-                    [
-                        "title" => "Manufacturer",
-                        "desc" => "Apollo"
-                    ],
-                    [
-                        "title" => "Fabric",
-                        "desc" => "100% Acrylic"
-                    ],
-                    [
-                        "title" => "Color",
-                        "desc" => "Black"
-                    ],
-                    [
-                        "title" => "Size",
-                        "desc" => "8.5”"
-                    ],
-                    [
-                        "title" => "Logo",
-                        "desc" => "4” wide, front embroidery."
-                    ],
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                "images" => [
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/3.jpg",
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/4.jpg"
                 ],
                 "sizeChart" => "",
                 "sizes" => [
@@ -1362,7 +1310,7 @@ And so many more!",
                         "desc" => "92 pages"
                     ],
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
