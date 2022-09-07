@@ -20,6 +20,29 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
+.join {
+    border-radius: 50px;
+    font: 600 20px/1em Open Sans, sans-serif;
+    padding: 17px 7%;
+    color: white;
+    position: relative;
+    text-transform: uppercase;
+    display: inline-block;
+    @media (min-width: 768px) {
+        font-size: 28px;
+    }
+
+    .smaller {
+        font-size: 13px;
+        padding: 7px 25px;
+        @media (min-width: 768px) {
+            font-size: 14px;
+            padding: 13px 30px
+        }
+    }
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
