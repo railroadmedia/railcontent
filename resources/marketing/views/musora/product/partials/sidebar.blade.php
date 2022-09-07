@@ -54,7 +54,7 @@
                         data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
                         data-product-json='{"{{ $sku }}": 1}'
                     >
-                        <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
+                        <button class="text-xl join border-none font-bebas"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                     </a>
                 @endif
 
@@ -83,7 +83,7 @@
                         @endif
                         @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                     >
-                        <button class="join border-none w-full">
+                        <button class="text-xl join border-none w-full font-bebas">
                             <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
                         </button>
                     </a>
