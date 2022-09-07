@@ -126,7 +126,13 @@
                 <ul class="fixed-cards">
                     <li>
                         <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-{{ $theme }}"><i class="fas fa-tshirt"></i></div>
+                            <div class="heading-icon text-{{ $theme }}">
+                                <img
+                                    src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg"
+                                    alt="hat icon"
+                                    style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
+                                />
+                            </div>
                             Hats
                         </h1>
                     </li>
@@ -185,7 +191,13 @@
                 <ul class="fixed-cards container mx-auto">
                     <li>
                         <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-{{ $theme }}"><i class="fas fa-tshirt"></i></div>
+                            <div class="heading-icon">
+                                <img
+                                    src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg"
+                                    alt="hoodie icon"
+                                    style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
+                                />
+                            </div>
                             Hoodies
                         </h1>
                     </li>
