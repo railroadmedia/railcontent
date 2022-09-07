@@ -11,12 +11,23 @@ use Throwable;
 
 class RailcontentV2DataSyncingService
 {
-    private DatabaseManager $databaseManager;
-    private RailcontentURLProviderInterface $railcontentURLProvider;
-    private ContentService $contentService;
+    /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
 
-    private array $fieldNameToContentColumnNameMap;
-    private array $fieldNameToTableMap;
+    /**
+     * @var RailcontentURLProviderInterface
+     */
+    private $railcontentURLProvider;
+
+    /**
+     * @var ContentService
+     */
+    private $contentService;
+
+    private $fieldNameToContentColumnNameMap = [];
+    private $fieldNameToTableMap = [];
 
     public function __construct(
         DatabaseManager $databaseManager,

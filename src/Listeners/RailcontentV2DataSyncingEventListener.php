@@ -21,8 +21,15 @@ use Railroad\Railcontent\Services\ContentService;
 
 class RailcontentV2DataSyncingEventListener
 {
-    private ContentService $contentService;
-    private DatabaseManager $databaseManager;
+    /**
+     * @var ContentService
+     */
+    private $contentService;
+
+    /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
 
     public function __construct(ContentService $contentService, DatabaseManager $databaseManager)
     {
