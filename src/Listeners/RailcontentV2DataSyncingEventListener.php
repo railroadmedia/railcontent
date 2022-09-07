@@ -16,6 +16,7 @@ use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\HierarchyUpdated;
+use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -135,9 +136,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function updateContentsThatLinkToContentViaField($contentId)
     {
-        $this->databaseManager->connection(
-            ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName
-        )
+        RepositoryBase::$connectionMask
             ->table('railcontent_content_fields')
             ->whereIn('key', ['instructor', 'video'])
             ->where('value', $contentId)
@@ -151,9 +150,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function updateAllContentsChildrenParentDataColumns($contentId)
     {
-        $hierarchyRows = $this->databaseManager->connection(
-            ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName
-        )
+        $hierarchyRows = RepositoryBase::$connectionMask
             ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',
@@ -250,9 +247,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function fillCompiledViewContentDataColumnForAllParentsAndChildren($contentId)
     {
-        $childHierarchyRows = $this->databaseManager->connection(
-            ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName
-        )
+        $childHierarchyRows = RepositoryBase::$connectionMask
             ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',
@@ -344,9 +339,7 @@ class RailcontentV2DataSyncingEventListener
             }
         }
 
-        $parentHierarchyRows = $this->databaseManager->connection(
-            ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName
-        )
+        $parentHierarchyRows = RepositoryBase::$connectionMask
             ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',
