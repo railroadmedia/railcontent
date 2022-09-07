@@ -53,10 +53,16 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentDeleted(ContentDeleted $contentDeleted)
     {
+        $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentDeleted->contentId));
+        $this->contentService->fillCompiledViewContentDataColumnForContentIds(Arr::wrap($contentDeleted->contentId));
+        $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($contentDeleted->contentId);
     }
 
     public function handleContentSoftDeleted(ContentSoftDeleted $contentSoftDeleted)
     {
+        $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentSoftDeleted->contentId));
+        $this->contentService->fillCompiledViewContentDataColumnForContentIds(Arr::wrap($contentSoftDeleted->contentId));
+        $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($contentSoftDeleted->contentId);
     }
 
     public function handleContentFieldCreated(ContentFieldCreated $contentFieldCreated)
