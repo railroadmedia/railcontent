@@ -4,6 +4,8 @@ namespace Modules\UserManagementSystem\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
+use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 use Modules\UserManagementSystem\Models\OnboardingExperience;
 use Modules\UserManagementSystem\Models\OnboardingGear;
 use Modules\UserManagementSystem\Models\OnboardingTopic;
@@ -26,6 +28,12 @@ class OnboardingController extends Controller
 
         foreach ($request->data as $gear) {
             OnboardingGear::create(['gear' => $gear, 'brand' => $request->brand, 'user_id' => user()->id]);
+            OnboardingAnswerHistory::create([
+                'onboarding_question' => OnboardingAnswerHistory::QUESTION_GEAR,
+                'onboarding_answer' => $gear,
+                'brand' => $request->brand,
+                'user_id' => user()->id
+                ]);
         }
 
         return response(json_encode(user()), 200);
@@ -46,6 +54,12 @@ class OnboardingController extends Controller
 
         foreach ($request->data as $topic) {
             OnboardingTopic::create(['topic' => $topic, 'brand' => $request->brand, 'user_id' => user()->id]);
+            OnboardingAnswerHistory::create([
+                'onboarding_question' => OnboardingAnswerHistory::QUESTION_TOPIC,
+                'onboarding_answer' => $topic,
+                'brand' => $request->brand,
+                'user_id' => user()->id
+            ]);
         }
 
         return response(json_encode(user()), 200);
@@ -66,6 +80,12 @@ class OnboardingController extends Controller
 
         foreach ($request->data as $genre) {
             OnboardingGenre::create(['genre' => $genre, 'brand' => $request->brand, 'user_id' => user()->id]);
+            OnboardingAnswerHistory::create([
+                'onboarding_question' => OnboardingAnswerHistory::QUESTION_GENRE,
+                'onboarding_answer' => $genre,
+                'brand' => $request->brand,
+                'user_id' => user()->id
+            ]);
         }
 
         return response(json_encode(user()), 200);
@@ -87,7 +107,40 @@ class OnboardingController extends Controller
             ['experience_level' => $request->experience_level, 'brand' => $request->brand, 'user_id' => user()->id]
         );
 
+        $onboardingAnswerHistory = new OnboardingAnswerHistory;
+        $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_EXPERIENCE;
+        $onboardingAnswerHistory->setExperienceLevelAnswer($request->experience_level);
+        $onboardingAnswerHistory->brand = $request->brand;
+        $onboardingAnswerHistory->user_id = user()->id;
+        $onboardingAnswerHistory->save();
+
         return response(json_encode(user()), 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     */
+    public function getUserOnboardingInformation(Request $request)
+    {
+        try {
+            $request->validate(['brand' => 'string|required']);
+        } catch (ValidationException $e) {
+            $message = ['error' => 'Get parameter brand is invalid.'];
+            return response($message, 422);
+        }
+
+        $brand = $request->brand;
+        $experience = OnboardingExperience::select('experience_level')->where(['brand' => $brand, 'user_id' => user()->id])->first();
+
+        $response = [
+            'gears' => OnboardingGear::where(['brand' => $brand, 'user_id' => user()->id])->pluck('gear')->toArray(),
+            'experience' => $experience ? intval($experience->experience_level) : $experience,
+            'genres' => OnboardingGenre::where(['brand' => $brand, 'user_id' => user()->id])->pluck('genre')->toArray(),
+            'topics' => OnboardingTopic::where(['brand' => $brand, 'user_id' => user()->id])->pluck('topic')->toArray(),
+        ];
+
+        return response($response, 200);
     }
 
     /**
@@ -108,5 +161,50 @@ class OnboardingController extends Controller
         return response(json_encode(user()), 200);
     }
 
+    /**
+     *
+     * @param Request $request
+     */
+    public function saveOnboardingHistoryForInstrument(Request $request)
+    {
+        try {
+            $request->validate(['instrument' => 'string|required|not-in:undefined']);
+        } catch (ValidationException $e) {
+            $message = ['error' => 'Get parameter instrument is missing'];
+            return response($message, 422);
+        }
+
+        OnboardingAnswerHistory::create([
+            'onboarding_question' => OnboardingAnswerHistory::QUESTION_INSTRUMENT,
+            'onboarding_answer' => $request->get('instrument'),
+            'user_id' => user()->id
+        ]);
+        return response("History data for instrument has been saved.", 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     */
+    public function saveOnboardingHistoryForCoach(Request $request)
+    {
+        try {
+            $request->validate(['coachName' => 'string|required|not-in:undefined']);
+            $request->validate(['coachId' => 'integer|required|not-in:undefined']);
+
+        } catch (ValidationException $e) {
+            $message = ['error' => 'Get parameter is missing from onboarding-answer-history-coach api request.'];
+            return response($message, 422);
+        }
+
+        OnboardingAnswerHistory::create([
+            'onboarding_question' => OnboardingAnswerHistory::QUESTION_COACH,
+            'onboarding_answer' => $request->get('coachId'),
+            'coach_name' => $request->get('coachName'),
+            'brand' => brand(),
+            'user_id' => user()->id
+        ]);
+        return response("History data for coach has been saved.", 200);
+    }
 
 }
