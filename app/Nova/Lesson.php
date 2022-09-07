@@ -225,7 +225,7 @@ class Lesson extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Instructor Image', 'proudct_img')->hideFromIndex()->hideFromDetail(),
+            Text::make('Instructor Image', 'product_img')->hideFromIndex()->hideFromDetail(),
             Markdown::make('Instructor Description', 'instructor_desc')
                 ->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
