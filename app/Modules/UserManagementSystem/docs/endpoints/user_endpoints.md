@@ -29,9 +29,9 @@ $.ajax({
 
 ### User Form API
 
-**`PUT /user_management_system/user/store`**  
-**`PATCH /user_management_system/user/update/{user_id}`**    
-**`DELETE /user_management_system/user/delete/{user_id}`**
+**`PUT /user-management-system/user/store`**
+**`PATCH /user-management-system/user/update/{user_id}`**
+**`DELETE /user-management-system/user/delete/{user_id}`**
 
 Parameters and validation for PUT/PATCH:
 
@@ -99,7 +99,7 @@ flashed to the session.
 
 ### Email Change Form API
 
-**`POST /user_management_system/email-change/request`**
+**`POST /user-management-system/email-change/request`**
 
 Parameters and validation for POST:
 
@@ -121,7 +121,7 @@ flashed to the session.
 
 
 
-**`GET /user_management_system/email-change/confirm`**
+**`GET /user-management-system/email-change/confirm`**
 
 ```php
 [
@@ -170,7 +170,7 @@ flashed to the session.
 ```js
 $.ajax({
     url: 'https://www.domain.com' +
-             '/user_management_system/user/index',
+             '/user-management-system/user/index',
 {
     "search_term": "nisi",
     "per_page": 2,
@@ -189,7 +189,7 @@ $.ajax({
 
 
 ### HTTP Request
-    `PUT user_management_system/picture/upload`
+    `PUT user-management-system/picture/upload`
 
 ## Request parameters:
 - depending on the attributes sent, the request will update one of the following User attributes:
@@ -225,3 +225,28 @@ See: [https://github.com/railroadmedia/musora-web-platform/blob/master/resources
 Returns entire user JSON object. Can get new profile pic URL with: response.profile_picture_url.
 
 
+## Check if display name is unique
+
+
+### HTTP Request
+    `PUT user-management-system/is-display-name-unique`
+
+#### Request parameter:
+```php
+['display_name' => 'required']
+```
+The request checks if another user exists with the same display name.
+
+
+#### Success response:
+```php
+{"unique":true}
+```
+#### Unsuccess response:
+```php
+{"unique":false}
+```
+#### Missing parameter response:
+```php
+{"errors":{"code":"Error: The display name field is required."}}
+```

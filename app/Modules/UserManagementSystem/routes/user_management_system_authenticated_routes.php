@@ -128,6 +128,11 @@ Route::group(
             'onboarding-answer-history-coach',
             OnboardingController::class . '@saveOnboardingHistoryForCoach'
         );
+
+        Route::get(
+            'is-display-name-unique',
+            UserController::class . '@isDisplayNameUnique'
+        );
     }
 );
 
