@@ -73,9 +73,9 @@ class UserContentProgressEventListener extends Event
                 $lastLevel1Children =
                     $this->connection()
                         ->table('railcontent_content_hierarchy')
-                        ->join('railcontent_content', 'child_id','=','railcontent_content.id')
+                        ->join('railcontent_content', 'child_id', '=', 'railcontent_content.id')
                         ->where('parent_id', $event->contentId)
-                        ->where('railcontent_content.status','=','published')
+                        ->where('railcontent_content.status', '=', 'published')
                         ->orderBy('child_position', 'desc')
                         ->first();
                 $level1Position = $lastLevel1Children->child_position;
@@ -83,13 +83,12 @@ class UserContentProgressEventListener extends Event
                 $lastLevel2Children =
                     $this->connection()
                         ->table('railcontent_content_hierarchy')
-                        ->join('railcontent_content', 'child_id','=','railcontent_content.id')
+                        ->join('railcontent_content', 'child_id', '=', 'railcontent_content.id')
                         ->where('parent_id', $lastLevel1Children->child_id)
-                        ->where('railcontent_content.status','=','published')
+                        ->where('railcontent_content.status', '=', 'published')
                         ->orderBy('child_position', 'desc')
                         ->first();
                 $level2Position = $lastLevel2Children->child_position;
-
             } else {
                 $level1Children =
                     $this->connection()
@@ -144,15 +143,15 @@ class UserContentProgressEventListener extends Event
 
             // set
             $this->userContentProgressRepository->updateOrCreate([
-                                                                     'content_id' => $event->contentId,
-                                                                     'user_id' => $event->userId,
-                                                                 ], [
-                                                                     'higher_key_progress' => $level1Position .
-                                                                         '.' .
-                                                                         $level2Position,
-                                                                     'updated_on' => Carbon::now()
-                                                                         ->toDateTimeString(),
-                                                                 ]);
+                'content_id' => $event->contentId,
+                'user_id' => $event->userId,
+            ], [
+                'higher_key_progress' => $level1Position .
+                    '.' .
+                    $level2Position,
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]);
         }
     }
 
