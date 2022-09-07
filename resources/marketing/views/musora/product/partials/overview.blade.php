@@ -1,6 +1,5 @@
 <div class="drumshop-accordion">
     @if(!empty($overview))
-        <h4 class="font-bold text-lg uppercase mb-6 md:text-xl lg:text-2xl mt-0">Overview</h4>
         <p><x-markdown>{!! nl2br($overview) !!}</x-markdown></p>
         @if(!empty($overviewList))
             <ul>
