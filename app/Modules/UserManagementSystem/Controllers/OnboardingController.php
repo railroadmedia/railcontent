@@ -121,6 +121,32 @@ class OnboardingController extends Controller
      *
      * @param Request $request
      */
+    public function getUserOnboardingInformation(Request $request)
+    {
+        try {
+            $request->validate(['brand' => 'string|required']);
+        } catch (ValidationException $e) {
+            $message = ['error' => 'Get parameter brand is invalid.'];
+            return response($message, 422);
+        }
+
+        $brand = $request->brand;
+        $experience = OnboardingExperience::select('experience_level')->where(['brand' => $brand, 'user_id' => user()->id])->first();
+
+        $response = [
+            'gears' => OnboardingGear::where(['brand' => $brand, 'user_id' => user()->id])->pluck('gear')->toArray(),
+            'experience' => $experience ? intval($experience->experience_level) : $experience,
+            'genres' => OnboardingGenre::where(['brand' => $brand, 'user_id' => user()->id])->pluck('genre')->toArray(),
+            'topics' => OnboardingTopic::where(['brand' => $brand, 'user_id' => user()->id])->pluck('topic')->toArray(),
+        ];
+
+        return response($response, 200);
+    }
+
+    /**
+     *
+     * @param Request $request
+     */
     public function skipAccountSetup(Request $request)
     {
         $request->validate([
