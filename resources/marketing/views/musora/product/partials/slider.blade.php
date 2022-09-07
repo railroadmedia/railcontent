@@ -33,7 +33,7 @@
                     @foreach ($images as $image)
                         <div style="display:none;">
                             <img
-                                class="w-full rounded border-4 border-solid w-full border-white slide-img cursor-pointer"
+                                class="w-full rounded-md border-4 border-solid w-full border-white slide-img cursor-pointer"
                                 src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif">
                         </div>
                     @endforeach
