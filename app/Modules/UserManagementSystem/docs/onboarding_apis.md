@@ -191,3 +191,44 @@ We are using it to store historical data about the options chosen by the user du
 ```
 
 The response will return a json with a 200 code in case of success.
+
+
+## 11 ONBOARDING SAVED ANSWERS
+
+Used to return all onboarding gears, genres, topics and the experience saved by the authenticated user on a certain brand
+
+**`GET /user-management-system/onboarding-saved-answers?brand={brand}`**
+
+```php
+[
+    'brand' => 'string|required',
+];
+```
+
+In case of success, the response will return a json containing the gears, genres, topics and experience.
+Example of a successful response:
+
+
+```php
+{
+    "gears": // array
+    [
+        "Acoustic Kit",
+        "Practice Pad"
+    ],
+    "experience": "1", // int|null; possible values: [0,1,2,3]
+    "genres": // array
+    [
+        "Pop",
+        "Jazz",
+        "CCM/Worship"
+    ],
+    "topics": // array
+    [
+        "Fills",
+        "Performance",
+        "Electronic Drums"
+    ]
+}
+
+```
