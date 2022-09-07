@@ -42,7 +42,7 @@ class Product extends Model
     public function sizes()
     {
         return $this->hasManyThrough(Size::class, ProductSize::class, 'product_id', 'id', 'id', 'size_id')
-                    ->addSelect(['product_sizes.sold_out', 'product_sizes.id', 'sizes.name', 'sizes.id as sizeId', 'sizes.code'])->orderBy('sizeId');
+                    ->addSelect(['product_sizes.id', 'sizes.name', 'sizes.id as sizeId', 'sizes.code'])->orderBy('sizeId');
     }
 
     public function product_size()
@@ -65,13 +65,6 @@ class Product extends Model
         return $this->belongsTo(SizeChart::class, 'size_chart_id');
     }
 
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-          get: fn ($value) => str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $value ),
-        );
-    }
-
     protected function slug(): Attribute
     {
         return Attribute::make(
@@ -86,8 +79,6 @@ class Product extends Model
         self::saving(function ($model){
             $uuid = $model['uuid'];
             unset($model['uuid']);
-
-            $model['name'] = $model->brand->name.'-'.$model['name'];
 
             $model['slug'] = $model->brand->name.'-'.$model['slug'];
 
