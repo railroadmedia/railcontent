@@ -27,7 +27,7 @@
     <!-- Footer Bottom -->
     <div class="container mx-auto pt-7 px-4 flex flex-col items-center text-gray-500">
         <!-- Logo -->
-        <img src="{{ $logo }}" class="w-36 mb-6 opacity-70" alt="Brand Logo">
+        <img src="{{ $logo }}" class="w-36 mb-6 opacity-70" alt="Musora Logo">
 
         <p class="text-center">
             <a class="text-xs md:text-sm block leading-loose md:leading-normal" rel="noopener" href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">

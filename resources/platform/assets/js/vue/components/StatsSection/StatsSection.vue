@@ -84,7 +84,7 @@ export default {
                 </i>
 
                 <h4 class="tw-text-3xl md:tw-text-5xl tw-my-1 tw-font-bold">{{ metric.value }}</h4>
-                <h6 class="tw-text-xs md:tw-text-sm xl:tw-text-base tw-font-bebas-neue tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-uppercase tw-px-5">{{ metric.label }}</h6>
+                <h6 class="tw-text-xs md:tw-text-sm xl:tw-text-base tw-font-bebas-neue tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] tw-uppercase tw-px-5">{{ metric.label }}</h6>
             </a>
         </div>
     </section>

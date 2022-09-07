@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import ContentAPI from '../../vuesora/assets/js/services/content';
+import { saveCoachHistoryData } from "../Onboarding/services"
 
 const props = defineProps({
   id: {
@@ -22,7 +23,11 @@ const props = defineProps({
 
 const isCoachFollowed = ref(props.isFollowed);
 
-const followEndpoint = (id) => {
+const followEndpoint = (id, name) => {
+
+    saveCoachHistoryData({coachName: name, coachId: id})
+    .then(response => response)
+    .catch(error => {console.error(error)});
   return ContentAPI.followCoach({ coachId: id });
 };
 
@@ -38,7 +43,7 @@ function onFollow(e) {
       isCoachFollowed.value = false;
     });
   } else {
-    followEndpoint(props.id).then(() => {
+    followEndpoint(props.id, props.name).then(() => {
       // console.log('then follow')
       isCoachFollowed.value = true;
     });
