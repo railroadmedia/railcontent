@@ -125,26 +125,6 @@ module.exports = {
             fontSize: '16px',
           },
         },
-        '.join':{
-          borderRadius: '50px',
-          font: '600 20px/1em "Open Sans", sans-serif',
-          padding: '17px 7%',
-          color: 'white',
-          position: 'relative',
-          textTransform: 'uppercase',
-          display: 'inline-block',
-          '@media (min-width: 768px)': {
-            fontSize: '28px'
-          }
-        },
-        '.join.smaller':{
-          fontSize: '13px',
-          padding: '7px 25px',
-          '@media (min-width: 768px)': {
-            fontSize: '14px',
-            padding: '13px 30px'
-          },
-        }
       })
     }),
 
