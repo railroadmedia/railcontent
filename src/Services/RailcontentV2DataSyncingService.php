@@ -257,7 +257,11 @@ class RailcontentV2DataSyncingService
             }
         }
 
-        Content::massUpdate(values: $contentsColumnsToUpdate);
+        foreach ($contentsColumnsToUpdate as $contentColumnsToUpdate) {
+            $databaseConnection->table('railcontent_content')
+                ->where('id', $contentColumnsToUpdate['id'])
+                ->update($contentColumnsToUpdate);
+        }
 
         foreach ($tableRowsToInsert as $tableName => $rowsToInsert) {
             $databaseConnection->table($tableName)->insert($rowsToInsert);
