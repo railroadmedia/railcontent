@@ -642,7 +642,12 @@ EOT;
                     '=',
                     ConfigService::$tableContentStatistics . '.content_id'
                 )
-                ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
+                ->groupBy([
+                    ConfigService::$tableContentStatistics . '.content_id',
+                    ConfigService::$tableContentStatistics . '.content_type',
+                    ConfigService::$tableContentStatistics . '.content_published_on',
+                    ConfigService::$tableContentFields . '.value',
+                ]);
 
         if ($smallDate) {
             $query->where(ConfigService::$tableContentStatistics . '.start_interval', '>=', $smallDate)

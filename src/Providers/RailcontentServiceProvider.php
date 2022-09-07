@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Providers;
 
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
@@ -44,6 +45,32 @@ use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
+    protected $listen = [
+        ContentCreated::class => [],
+        ContentUpdated::class => [],
+        ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
+        ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
+        ContentFieldCreated::class => [
+            // VersionContentEventListener::class . '@handleFieldCreated',
+            ContentTotalXPListener::class . '@handleFieldCreated',
+        ],
+        ContentFieldUpdated::class => [
+            // VersionContentEventListener::class . '@handleFieldUpdated',
+            ContentTotalXPListener::class . '@handleFieldUpdated',
+        ],
+        ContentFieldDeleted::class => [
+            // VersionContentEventListener::class . '@handleFieldDeleted',
+            ContentTotalXPListener::class . '@handleFieldDeleted',
+        ],
+        ContentDatumCreated::class => [],
+        ContentDatumUpdated::class => [],
+        ContentDatumDeleted::class => [],
+        CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
+        CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
+        UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
+        HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
+    ];
+
     /**
      * Bootstrap the application services.
      *
@@ -51,44 +78,6 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->listen = [
-            StatementPrepared::class => [
-                function (StatementPrepared $event) {
-
-                    // we only want to use assoc fetching for this packages database calls
-                    // so we need to use a separate 'mask' connection
-
-                    if ($event->connection->getName() ==
-                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
-                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
-                    }
-                }
-            ],
-            ContentCreated::class => [],
-            ContentUpdated::class => [],
-            ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
-            ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentFieldCreated::class => [
-               // VersionContentEventListener::class . '@handleFieldCreated',
-                ContentTotalXPListener::class . '@handleFieldCreated',
-            ],
-            ContentFieldUpdated::class => [
-               // VersionContentEventListener::class . '@handleFieldUpdated',
-                ContentTotalXPListener::class . '@handleFieldUpdated',
-            ],
-            ContentFieldDeleted::class => [
-               // VersionContentEventListener::class . '@handleFieldDeleted',
-                ContentTotalXPListener::class . '@handleFieldDeleted',
-            ],
-            ContentDatumCreated::class => [],
-            ContentDatumUpdated::class => [],
-            ContentDatumDeleted::class => [],
-            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
-            CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
-            HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
-        ];
-
         parent::boot();
 
         $this->setupConfig();
@@ -98,10 +87,6 @@ class RailcontentServiceProvider extends ServiceProvider
                 __DIR__ . '/../../config/railcontent.php' => config_path('railcontent.php'),
             ]
         );
-
-        $this->publishes([
-            __DIR__ . '/../../database/seeds/CoachV2Seeder.php' => database_path('seeds/CoachV2Seeder.php'),
-        ]);
 
         if (ConfigService::$dataMode == 'host') {
             $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
@@ -237,6 +222,14 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Event::listen(StatementPrepared::class, function($event) {
+            /** @var StatementPrepared $event */
+            if ($event->connection->getName() ==
+                ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
+                $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+            }
+        });
 
+        parent::register();
     }
 }
