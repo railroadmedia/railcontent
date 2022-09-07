@@ -16026,7 +16026,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/event-data-synchronizer": 20,
         "railroad/musora-api": 20,
         "railroad/railcontent": 20,
         "railroad/railforums": 20
