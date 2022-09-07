@@ -17,8 +17,8 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Repositories\RepositoryBase;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 
 class RailcontentV2DataSyncingEventListener
 {
@@ -32,14 +32,24 @@ class RailcontentV2DataSyncingEventListener
      */
     private $databaseManager;
 
-    public function __construct(ContentService $contentService, DatabaseManager $databaseManager)
-    {
+    /**
+     * @var RailcontentV2DataSyncingService
+     */
+    private $railcontentV2DataSyncingService;
+
+    public function __construct(
+        ContentService $contentService,
+        DatabaseManager $databaseManager,
+        RailcontentV2DataSyncingService $railcontentV2DataSyncingService
+    ) {
         $this->contentService = $contentService;
         $this->databaseManager = $databaseManager;
+        $this->railcontentV2DataSyncingService = $railcontentV2DataSyncingService;
     }
 
     public function handleContentCreated(ContentCreated $contentCreated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentCreated->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentCreated->contentId));
         $this->contentService->fillCompiledViewContentDataColumnForContentIds(Arr::wrap($contentCreated->contentId));
         $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($contentCreated->contentId);
@@ -47,6 +57,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentUpdated(ContentUpdated $contentUpdated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentUpdated->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentUpdated->contentId));
         $this->contentService->fillCompiledViewContentDataColumnForContentIds(Arr::wrap($contentUpdated->contentId));
         $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($contentUpdated->contentId);
@@ -54,6 +65,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentDeleted(ContentDeleted $contentDeleted)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentDeleted->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentDeleted->contentId));
         $this->contentService->fillCompiledViewContentDataColumnForContentIds(Arr::wrap($contentDeleted->contentId));
         $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($contentDeleted->contentId);
@@ -61,13 +73,17 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentSoftDeleted(ContentSoftDeleted $contentSoftDeleted)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentSoftDeleted->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentSoftDeleted->contentId));
-        $this->contentService->fillCompiledViewContentDataColumnForContentIds(Arr::wrap($contentSoftDeleted->contentId));
+        $this->contentService->fillCompiledViewContentDataColumnForContentIds(
+            Arr::wrap($contentSoftDeleted->contentId)
+        );
         $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($contentSoftDeleted->contentId);
     }
 
     public function handleContentFieldCreated(ContentFieldCreated $contentFieldCreated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentFieldCreated->newField['content_id']);
         $this->contentService->fillParentContentDataColumnForContentIds(
             Arr::wrap($contentFieldCreated->newField['content_id'])
         );
@@ -79,6 +95,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentFieldUpdated(ContentFieldUpdated $contentFieldUpdated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentFieldUpdated->newField['content_id']);
         $this->contentService->fillParentContentDataColumnForContentIds(
             Arr::wrap($contentFieldUpdated->newField['content_id'])
         );
@@ -90,6 +107,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentFieldDeleted(ContentFieldDeleted $contentFieldDeleted)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentFieldDeleted->deletedField['content_id']);
         $this->contentService->fillParentContentDataColumnForContentIds(
             Arr::wrap($contentFieldDeleted->deletedField['content_id'])
         );
@@ -103,6 +121,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentDatumCreated(ContentDatumCreated $contentDatumCreated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentDatumCreated->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentDatumCreated->contentId));
         $this->contentService->fillCompiledViewContentDataColumnForContentIds(
             Arr::wrap($contentDatumCreated->contentId)
@@ -112,6 +131,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentDatumUpdated(ContentDatumUpdated $contentDatumUpdated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentDatumUpdated->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentDatumUpdated->contentId));
         $this->contentService->fillCompiledViewContentDataColumnForContentIds(
             Arr::wrap($contentDatumUpdated->contentId)
@@ -121,6 +141,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleContentDatumDeleted(ContentDatumDeleted $contentDatumDeleted)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($contentDatumDeleted->contentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($contentDatumDeleted->contentId));
         $this->contentService->fillCompiledViewContentDataColumnForContentIds(
             Arr::wrap($contentDatumDeleted->contentId)
@@ -130,6 +151,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function handleHierarchyUpdated(HierarchyUpdated $hierarchyUpdated)
     {
+        $this->railcontentV2DataSyncingService->syncContentId($hierarchyUpdated->parentId);
         $this->contentService->fillParentContentDataColumnForContentIds(Arr::wrap($hierarchyUpdated->parentId));
         $this->fillCompiledViewContentDataColumnForAllParentsAndChildren($hierarchyUpdated->parentId);
     }
