@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('brand_id');
             $table->integer('product_type_id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->longText('sku');
             $table->string('promo_code')->nullable();
