@@ -1284,6 +1284,11 @@ class ContentRepository extends RepositoryBase
             $query->restrictFollowedContent();
         }
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
+
+            return $this->getFilterOptionsFromCompiledColumn($query);
+        }
+
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
 
         return $possibleContentFields;
@@ -2221,6 +2226,87 @@ class ContentRepository extends RepositoryBase
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
             usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
+        }
+
+        return $filterOptionsArray;
+    }
+
+    private function getFilterOptionsFromCompiledColumn(ContentQueryBuilder $contentQueryBuilder)
+    {
+        $filterOptionsArray = [];
+
+        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+                'difficulty',
+                'artist',
+                'difficulty_range',
+                'type',
+            ];
+
+        $filterOptions = array_unique($filterOptions);
+
+        foreach ($filterOptions as $filterOption) {
+            $filterOptionsArray[$filterOption] = [];
+        }
+
+        $contentRows = $contentQueryBuilder->get();
+        foreach ($contentRows as $contentRowIndex => $contentRow) {
+            $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
+            foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
+                if ($filterOptionName == 'instructor' && isset($contentRowCompiledColumnValues[$filterOptionName])) {
+                    $instructors = $contentRowCompiledColumnValues[$filterOptionName];
+                    if (isset($instructors['id'])) {
+                        $instructors = [$instructors];
+                    }
+                    foreach ($instructors as $instructor) {
+                        if (isset($instructor['id'])) {
+                            $filterOptionsArray[$filterOptionName][] = [
+                                'id' => $instructor['id'],
+                                'name' => $instructor['name'],
+                                'fields' => [
+                                    [
+                                        "id" => $instructor['id'],
+                                        "key" => "name",
+                                        "value" => $instructor['name'],
+                                    ],
+                                ],
+                                'data' => [],
+                            ];
+                        }
+                    }
+                } elseif (isset($contentRowCompiledColumnValues[$filterOptionName])) {
+                    $filterOptionsArray[$filterOptionName] = array_merge(
+                        $filterOptionsArray[$filterOptionName] ?? [],
+                        (array)$contentRowCompiledColumnValues[$filterOptionName]
+                    );
+                }
+            }
+        }
+
+        foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
+            foreach ($filterOptionValue as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                if (!is_array($filterOptionValueToClean)) {
+                    $filterOptionValue[$filterOptionIndexToClean] = trim(ucwords(
+                        $filterOptionValueToClean
+                    ));
+                    $filterOptionsArray[$filterOptionName] = array_keys(array_flip($filterOptionValue));
+                    sort($filterOptionsArray[$filterOptionName]);
+                } else {
+                    $tempArr = array_unique(array_column($filterOptionValue, 'id'));
+                    $filterOptionsArray[$filterOptionName] = array_intersect_key($filterOptionValue, $tempArr);
+                    usort($filterOptionsArray[$filterOptionName], function ($a, $b) {
+                        if (is_array($a)) {
+                            return strncmp(strtolower($a['name']), strtolower($b['name']), 15);
+                        }
+
+                        return strncmp(strtolower($a), strtolower($b), 15);
+                    });
+                }
+            }
         }
 
         return $filterOptionsArray;
