@@ -123,13 +123,13 @@
         </transition>
 
         <div class="flex flex-row bb-grey-1-1 pa-2 tw-text-xs align-v-center">
-            <p class="tiny dense mr-3">
+            <p class="tw-text-sm dense mr-3">
                 <i class="fas fa-check-square text-success mr-1"></i> Replied to (no response)
             </p>
-            <p class="tiny dense mr-3">
+            <p class="tw-text-sm dense mr-3">
                 <i class="fas fa-check-square text-warning mr-1"></i> Replied to (has response)
             </p>
-            <p class="tiny dense mr-3">
+            <p class="tw-text-sm dense mr-3">
                 <i class="fas fa-times-square text-error mr-1"></i> Not replied to
             </p>
         </div>
@@ -168,7 +168,7 @@
                         <div class="rounded overflow avatar mb-1 hide-xs-only">
                             <img :src="comment.user['fields.profile_picture_image_url']">
                         </div>
-                        <h6 class="tiny font-bold text-center text-truncate">
+                        <h6 class="tw-text-sm font-bold text-center text-truncate">
                             {{ comment.user.display_name }}
                         </h6>
                         <!--                        </div>-->
@@ -183,7 +183,7 @@
                     <div class="flex flex-column lesson-title hide-xs-only ph-1">
                         <h6
                             v-if="comment.content"
-                            class="tiny font-bold"
+                            class="tw-text-sm font-bold"
                         >
                             {{ comment.content.title }}
                         </h6>
@@ -196,7 +196,7 @@
                         ></i>
                         <h6
                             v-if="comment.content"
-                            class="tiny capitalize text-center"
+                            class="tw-text-sm capitalize text-center"
                         >
                             {{ comment.content.type.replace(/-/g, ' ') }}
                         </h6>

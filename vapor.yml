@@ -5,8 +5,8 @@ environments:
         domain: 'platform.musora.com'
         runtime: docker
         gateway-version: 2
-        memory: 768
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -23,8 +23,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -42,8 +42,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 1024
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -60,8 +60,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -81,8 +81,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -99,8 +99,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -117,8 +117,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 1024
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -135,8 +135,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -153,8 +153,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -171,8 +171,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048
@@ -189,8 +189,8 @@ environments:
         scheduler: false
         runtime: docker
         gateway-version: 2
-        memory: 512
-        cli-memory: 2048
+        memory: 1728
+        cli-memory: 1728
         cli-timeout: 900
         timeout: 120
         tmp-storage: 2048

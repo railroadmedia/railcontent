@@ -22,7 +22,7 @@
                             First Name
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.first_name"
                                 :key="'firstNameError' + i"
@@ -53,7 +53,7 @@
                             Last Name
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.last_name"
                                 :key="'lastNameError' + i"
@@ -84,7 +84,7 @@
                             Address - Line 1
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.street_line_one"
                                 :key="'streetLineOneError' + i"
@@ -114,7 +114,7 @@
                         >
                             Address - Line 2
                         </label>
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.street_line_two"
                                 :key="'streetLineTwoError' + i"
@@ -152,7 +152,7 @@
                             Country
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.country"
                                 :key="'countryError' + i"
@@ -192,7 +192,7 @@
                             Province
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.state"
                                 :key="'stateError' + i"
@@ -226,7 +226,7 @@
                             State/Region
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.state"
                                 :key="'stateError' + i"
@@ -257,7 +257,7 @@
                             City
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.city"
                                 :key="'cityError' + i"
@@ -288,7 +288,7 @@
                             Zip/Postal Code
                         </label>
 
-                        <ul class="errors tiny">
+                        <ul class="errors tw-text-sm">
                             <li
                                 v-for="(error, i) in errors.zip_or_postal_code"
                                 :key="'zipOrPostalCodeError' + i"

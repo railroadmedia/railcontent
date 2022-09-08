@@ -52,7 +52,7 @@
                            :class="thumbnailIcon"
                         ></i>
                         <p v-if="!isReleased"
-                           class="tiny text-white font-bold"
+                           class="tw-text-sm text-white font-bold"
                         >
                             {{ releaseDate }}
                         </p>
@@ -68,7 +68,7 @@
                 >
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
-                        <h5 class="tw-text-xs tw-font-normal tw-leading-none text-grey-4 tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
+                        <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
                             v-if="!isGuitareoChordAndScale" v-html="mappedData.color_title">
                         </h5>
                     </div>
@@ -81,12 +81,12 @@
                     </h4>
                     <!-- Video Description -->
                     <p v-if="mappedData.show_description"
-                       class="tw-text-xs font-compressed text-grey-4 dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description tw-line-clamp-2"
+                       class="tw-text-xs font-compressed tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] pb-1 tw-mb-1 item-description tw-line-clamp-2"
                     >
                         {{ mappedData.description.replace(/<[^>]+>/g, '') }}
                     </p>
                     <!-- Content -->
-                    <h6 class="tw-text-xs tw-font-normal text-grey-3 tw-capitalize dark:tw-text-[#9EC0DC]"
+                    <h6 class="tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         <span v-html="mappedData.content_type"></span>

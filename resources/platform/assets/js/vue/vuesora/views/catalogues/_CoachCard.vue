@@ -151,16 +151,15 @@ export default {
             const text = `You will now receive updates when ${this.coachFirstName} releases new content!`;
             this.$emit("onShowNotification", {
               text,
-              icon: "fa-envelope",
             });
-            // console.log("Subscribed to: " + this.coachName);
+            console.log("Subscribed to: " + this.coachName);
           })
           .catch(() => {
             this.item.current_user_is_subscribed = false;
             this.$emit("onShowNotification", {
               error: true,
             });
-            // console.log("Subscribed did not work");
+            console.log("Subscribed did not work");
           });
       } else {
         this.item.current_user_is_subscribed = false;
@@ -169,7 +168,6 @@ export default {
             const text = `You will no longer receive updates when ${this.coachFirstName} releases new content!`;
             this.$emit("onShowNotification", {
               text,
-              icon: "fa-bell-slash",
             });
             // console.log("Unsubscribed to: " + this.coachName);
           })
