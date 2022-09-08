@@ -319,17 +319,8 @@ class HelpScoutService extends HelpScoutServiceBase
         return $operations;
     }
 
-    public function getHelpScoutUserIdFromUserId(int $userId): ?int
+    public function getMailBoxes(): array
     {
-        $userId = HelpScoutUser::query()->select('helpscout_user_id')->where(['user_id' => $userId,])
-            ->first();
-        if (!$userId) {
-           $helpScoutUserData = $this->client->users()->list()->extract();
-            foreach ($helpScoutUserData as $item) {
-
-           }
-        }
-        return $userId;
+        return $this->client->mailboxes()->list()->toArray();
     }
-
 }

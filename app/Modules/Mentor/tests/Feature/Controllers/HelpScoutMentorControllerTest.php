@@ -6,6 +6,7 @@ use App\Modules\HelpScout\Models\HelpScoutCustomer;
 use App\Modules\HelpScout\Models\HelpScoutUser;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Services\MentorService;
+use Illuminate\Support\Facades\Event;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -21,6 +22,7 @@ class HelpScoutMentorControllerTest extends TestCase
     {
         parent::setUp();
         $this->mentorService = app(MentorService::class);
+        Event::fake();
     }
 
     public function test_helpscout_conversation_created_webhook()

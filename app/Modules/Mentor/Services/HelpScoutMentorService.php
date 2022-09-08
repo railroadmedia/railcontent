@@ -28,19 +28,29 @@ class HelpScoutMentorService
     {
         $url = route('helpscout_conversation_new');
         Log::info("Registering help scout route $url");
-        if (!app()->isProduction()) {
-            throw new Exception("Can only use this method to register production web hook");
-        }
         $this->helpScoutWebHookService->registerWebHook(
             $url,
             ['convo.created']
         );
     }
 
-    public function newHelpScoutConversation(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail): void
+    public function unregisterHelpScoutWebHook(): void
+    {
+        $url = route('helpscout_conversation_new');
+        Log::info("Unregistering help scout route $url");
+        $this->helpScoutWebHookService->unregister($url);
+    }
+
+    public function newHelpScoutConversation(int $conversationId, int $helpScoutCustomerId, $helpScoutEmail, int $mailboxId): void
     {
         Log::debug("");
-        Log::debug("New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail");
+        Log::debug("New help scout conversation $conversationId from customer $helpScoutCustomerId $helpScoutEmail mailbox $mailboxId");
+
+        if(!in_array($mailboxId, config('mentor.helpscout_mailboxes'))){
+            Log::debug("Not watching helpscout mailbox $mailboxId");
+            return;
+        }
+
         $userId = $this->helpScoutUserService->getUserIdFromHelpScoutCustomerInfo(
             $helpScoutCustomerId,
             $helpScoutEmail
@@ -56,18 +66,7 @@ class HelpScoutMentorService
             return;
         }
         $mentorHelpScoutUserId = $this->helpScoutUserService->getHelpScoutUserIdFromUserId($mentorUserId);
-        $this->updateConversationAssignedUser($conversationId, $mentorHelpScoutUserId);
-    }
-
-    private function updateConversationAssignedUser(int $conversationId, int $helpScoutUserId): void
-    {
-        if (app()->isProduction()) {
-            $this->helpScoutUserService->updateConversationAssignedUser($conversationId, $helpScoutUserId);
-        } else {
-            Log::info(
-                "Suppressed update to helpscout to assign user $helpScoutUserId to conversation $conversationId."
-            );
-        }
+        $this->helpScoutUserService->updateConversationAssignedUser($conversationId, $mentorHelpScoutUserId);
     }
 
 

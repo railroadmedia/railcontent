@@ -3,7 +3,7 @@
 ### Initialization
 
 > **Note**: When testing locally it is best to disable customer.io job processing by setting the QUEUE_CONNECTION to
-> database.  Otherwise, processing will be much slower since it needs to wait for the
+> database. Otherwise, processing will be much slower since it needs to wait for the
 > customer.io requests
 
 Run the following to create mentors, assign mentors to active users,
@@ -11,6 +11,13 @@ register the help scout web hook (Only in production) and populate the help scou
 
 ```
 r mwp artisan mentors:init
+```
+
+HELPSCOUT_MENTOR_MAILBOXES_TO_WATCH env variable must be set. Accepts comma list of mailbox ids.
+Find mailbox ids that you want to update incoming conversations on with the following command
+
+```
+r mwp artisan helpscout:getMailBoxes
 ```
 
 ### UMS Integration
@@ -27,8 +34,11 @@ User Page can be used to :
 
 ### Help Scout Integration
 
-/mentors/helpscout/conversation/new - Web hook endpoint for help scout new conversation. Production web hook registered
-on InitializeMentors
+The help scout integration is used to assign new incoming student conversations to their assigned mentors.
+We receive incoming help scout web hook requests to determine which mentor to assign the conversation to.
+
+/mentors/helpscout/conversation/new - Web hook endpoint for help scout new conversation. 
+Production web hook registered on InitializeMentors
 
 Available helpscout artisan commands to fix issues with webhooks
 
@@ -38,7 +48,30 @@ r mwp artisan helpscout:unregister {url}
 r mwp artisan helpscout:register {url} convo.created
 ```
 
-#### Debugging
+#### Troubleshooting
+If conversations are not being assigned in helpscout.
+
+Does the user have an assigned mentor?  (see http://musora.com/admin/users/{id})
+Is the mailbox you want to watch in env HELPSCOUT_MENTOR_MAILBOXES_TO_WATCH?
+Is the Mentor in helpscout and do they have access to the watched mailbox? (see https://secure.helpscout.net/users/)
+Does Mentor email in musora match helpscout email?  Otherwise we can't make the link.  See musora_laravel.helpscout_users table.
+
+#### Testing on Staging
+
+Make sure HELPSCOUT_MENTOR_MAILBOXES_TO_WATCH is set
+Run mentor:registerWebHook to register the web hook
+
+The final assignment will depend on whether the mentor is actually in the mailboxMaybe need to update helpscout_users to
+all point to.  
+For testing on the sandbox we can set all helpscout users to the Dev Department user
+
+```
+UPDATE helpscout_users SET helpscout_user_id = 554771
+```
+
+Ensure you unregister the web hook after
+
+#### Debugging Locally
 
 > **Note**: This did not work when i tried it on the office network, only at home
 
@@ -51,10 +84,9 @@ ngrok http https://dev.musora.com:8443/
 
 Take the ngrok.io url and build the web hook end point. Run the following artisan command to register the webhook with
 helpscout.
-Only the production environment will actually update the conversation with the assigned mentor.
 
 ```
-r mwp artisan helpscout:register https://3a05-50-67-89-148.ngrok.io/mentor/helpscout/conversation/new convo.created
+r mwp artisan helpscout:register https://3a05-50-67-89-148.ngrok.io/mentors/helpscout/conversation/new convo.created
 ```
 
 Run helpscout:webhooks to make sure url is registered.
