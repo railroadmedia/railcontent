@@ -49,7 +49,25 @@ class EmailChangeController extends Controller
      */
     public function request(Request $request)
     {
-        $user = User::findOrFail(auth()->id());
+        try {
+            $request->validate([
+                'email' => 'email|max:255|unique:' .
+                    config('user_management_system.database_connection_name') . '.usora_users'
+            ]);
+        } catch (ValidationException $e) {
+            $messagesByField = $e->validator->getMessageBag()->getMessages();
+            $messagesForFieldFailingField = reset($messagesByField);
+
+            foreach ($messagesForFieldFailingField as $messagesForField) {
+                $errorMessageToUser = $messagesForField;
+                break;
+            }
+            $default = 'Please try again, and contact support if the problem persists.';
+            $message = ['error-message' => ($errorMessageToUser ?? $default)];
+
+            return redirect()->back()->with($message);
+        }
+        $user = user();
 
         if (!$request->get('email')) {
             return back()
@@ -72,8 +90,7 @@ class EmailChangeController extends Controller
         ) {
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
-
-        //todo: validation: check if email is unique
+        
         $payload = [
             'email' => $request->get('email'),
             'token' => $this->createNewToken($request->get('email')),
@@ -81,7 +98,7 @@ class EmailChangeController extends Controller
                 ->toDateTimeString(),
         ];
 
-        $emailChange = EmailChange::where('email', $user->email)->first();
+        $emailChange = EmailChange::where('user_id', $user->id)->first();
 
         if (!$emailChange) {
             $emailChange = new EmailChange();

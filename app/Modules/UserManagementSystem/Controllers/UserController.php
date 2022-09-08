@@ -43,7 +43,7 @@ class UserController extends Controller
                 //todo: make email and display_name unique
                 'email' => 'required|email|max:255',
                 'password' => 'required|string|min:8|max:128',
-                'display_name' => 'required|string|max:64|min:2'
+                'display_name' => 'required|string|max:64|min:2|unique:usora_users'
             ];
 
             $this->validate(
@@ -127,8 +127,29 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $isJson = request()->expectsJson();
+
         if (auth()->user()->id != $id) {
             $this->authorize('update-users');
+        }
+        try {
+            $request->validate([
+                'display_name' => 'required|string|max:64|min:2|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
+            ]);
+        } catch (ValidationException $e) {
+            $messagesByField = $e->validator->getMessageBag()->getMessages();
+            $messagesForFieldFailingField = reset($messagesByField);
+
+            foreach ($messagesForFieldFailingField as $messagesForField) {
+                $errorMessageToUser = $messagesForField;
+            break;
+            }
+            $default = 'Please try again, and contact support if the problem persists.';
+            $message = ['error-message' => ($errorMessageToUser ?? $default)];
+
+            if ($isJson) {
+                return response()->json(['errors' => $message], 422);
+            }
+            return redirect()->back()->with($message);
         }
 
         $user = User::findOrFail($id);
@@ -141,7 +162,6 @@ class UserController extends Controller
         if ($user) {
             $oldUser = clone($user);
 
-            // todo: find a way to check how to give an error message in case q request attribute is not fillable
             $user->fill($request->all());
             $user->save();
 
