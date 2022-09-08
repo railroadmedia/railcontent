@@ -40,10 +40,9 @@ class UserController extends Controller
 
         try {
             $validationRules = [
-                //todo: make email and display_name unique
-                'email' => 'required|email|max:255',
+                'email' => 'email|max:255|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
                 'password' => 'required|string|min:8|max:128',
-                'display_name' => 'required|string|max:64|min:2|unique:usora_users'
+                'display_name' => 'required|string|max:64|min:2|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
             ];
 
             $this->validate(
