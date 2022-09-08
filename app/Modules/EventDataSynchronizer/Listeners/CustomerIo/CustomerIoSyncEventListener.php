@@ -1120,9 +1120,11 @@ class CustomerIoSyncEventListener
                     $emailInvite->getReceiversEmail(),
                     $emailInvite->getBrand(),  //todo: is this param correct? or should we use another one?
                     [
-                        config(
-                            'event-data-synchronizer.customer_io_saasquatch_email_invite_link_attribute_name'
-                        ) => $emailInvite->getReferralLink()
+                        [
+                            $emailInvite->getBrand() . config(
+                                'event-data-synchronizer.customer_io_saasquatch_email_invite_link_attribute_name'
+                            ) => $emailInvite->getReferralLink()
+                        ]
                     ]
                 ))->onConnection($this->queueConnectionName)
                     ->onQueue($this->queueName)
@@ -1137,7 +1139,7 @@ class CustomerIoSyncEventListener
                     $emailInvite->getBrand(),
                     $emailInvite->getReceiversEmail(),
                     null,
-                    config('event-data-synchronizer.customer_io_saasquatch_email_invite_event_name')
+                    $emailInvite->getBrand() . config('event-data-synchronizer.customer_io_saasquatch_email_invite_event_name')
                 ))->onConnection($this->queueConnectionName)
                     ->onQueue($this->queueName)
                     ->delay(
@@ -1209,15 +1211,17 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            dispatch((new CustomerIoSyncMentor(
-                $studentMentorsUpdated->mentorStudentData
-            ))
-                ->onConnection($this->queueConnectionName)
-                ->onQueue($this->queueName)
-                ->delay(
-                    Carbon::now()
-                        ->addSeconds(3)
-                ));
+            dispatch(
+                (new CustomerIoSyncMentor(
+                    $studentMentorsUpdated->mentorStudentData
+                ))
+                    ->onConnection($this->queueConnectionName)
+                    ->onQueue($this->queueName)
+                    ->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
+            );
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
