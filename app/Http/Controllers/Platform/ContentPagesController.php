@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Platform;
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\ResourceDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypeHierarchyMap;
@@ -31,6 +32,7 @@ use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Decorators\Content\ModeDecoratorBase as AppModeDecoratorBase;
 
 class ContentPagesController extends BaseController
 {
@@ -572,7 +574,10 @@ class ContentPagesController extends BaseController
         $fourthId = null
     ) {
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+
+        $this->contentService->idContentCache = [];
 
         $firstContent = $this->contentService->getById($firstId);
 
@@ -952,8 +957,11 @@ class ContentPagesController extends BaseController
 
     public function guitareoLessonsPage(Request $request, $domain, $brand)
     {
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+
+        $this->contentService->idContentCache = [];
 
         // all members have access to all packs atm
         if (user()->isAMember()) {
