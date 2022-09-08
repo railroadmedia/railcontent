@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\HelpScout\Commands;
+namespace App\Modules\HelpScout\Console\Commands;
 
 use App\Modules\HelpScout\Services\HelpScoutWebHookService;
 use Illuminate\Console\Command;

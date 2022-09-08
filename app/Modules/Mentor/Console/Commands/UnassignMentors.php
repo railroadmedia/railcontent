@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Mentor\Commands;
+namespace App\Modules\Mentor\Console\Commands;
 
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Mentor\Commands;
+namespace App\Modules\Mentor\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\HelpScout\Services\HelpScoutUserService;

@@ -61,7 +61,7 @@ class Kernel extends ConsoleKernel
     {
         $commandPaths = [__DIR__ . '/Commands'];
         // Add module command folders if they exist
-        array_push($commandPaths, ...glob(__DIR__ . '/../Modules/*/Commands'));
+        array_push($commandPaths, ...glob(__DIR__ . '/../Modules/*/Console/Commands'));
         return $commandPaths;
     }
 }
