@@ -23,7 +23,7 @@
           </div>
           <button
             class="dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-border-none tw-rounded-full"
-            v-on:click="hide();"
+            v-on:click="handleOnClose"
           >
             <i class="far fa-times dark:tw-text-black tw-text-white"></i>
           </button>
@@ -49,6 +49,12 @@ export default {
       type: Boolean,
       default: () => false,
     },
+  },
+  emits: ['onClose'],
+  methods: {
+    handleOnClose() {
+      this.$emit('onClose')
+    }
   },
   data() {
     return {

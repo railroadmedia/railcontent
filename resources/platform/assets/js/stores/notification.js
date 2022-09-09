@@ -9,6 +9,13 @@ export const useNotificationStore = defineStore({
   }),
 
   actions: {
+    clear() {
+      this.$patch({
+        icon: '',
+        text: '',
+        isError: false,
+      });
+    },
     async push({
       icon,
       text,

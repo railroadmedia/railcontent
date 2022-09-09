@@ -183,7 +183,6 @@ export default {
       this.$forceUpdate();
     },
     followCoach(id) {
-      this.toast.showErrorMessage = false;
       this.updateCoachState(id);
       return ContentService.followCoach({
         coachId: id,
@@ -191,7 +190,7 @@ export default {
         const selectedInstructor = this.getSelectedInstructor(id);
         const firstName = selectedInstructor.name.split(' ')[0];
         const text = `You will now receive updates when ${firstName} releases new content!`;
-        this.showNotificationToast({ text, icon: 'fa-envelope' });
+        this.showNotificationToast({ text, icon: 'fa-bell' });
       }).catch(() => {
         this.showNotificationToast({ error: true });
         this.updateCoachState(id);
@@ -199,7 +198,6 @@ export default {
     },
 
     unfollowCoach(id) {
-      this.toast.showErrorMessage = false;
       this.updateCoachState(id);
       return ContentService.unfollowCoach({
         coachId: id,

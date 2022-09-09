@@ -162,6 +162,10 @@ const handleCloseConfirmationModal = () => {
   confirmation.cancel();
 };
 
+const handleNotificationClear = () => {
+  notification.clear();
+};;
+
 const onResize = (e) => {
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
   if (smallBreakpoint.matches) {
@@ -185,7 +189,7 @@ onUnmounted(() => {
 <template>
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" />
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" @onClose="handleNotificationClear" />
     <ConfirmationModal
       v-if="confirmation.title"
       :brand="brand"
