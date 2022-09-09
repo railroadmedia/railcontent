@@ -26,6 +26,7 @@
         "laravel/vapor-ui": "^1.5",
         "league/flysystem-aws-s3-v3": "^3.0",
         "railroad/ecommerce": "^5.0",
+        "railroadmedia/helpscout-api-php": "~3.7",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
         "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
