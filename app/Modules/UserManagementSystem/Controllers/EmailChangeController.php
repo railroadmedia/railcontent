@@ -51,8 +51,8 @@ class EmailChangeController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'email|max:255|unique:' .
-                    config('user_management_system.database_connection_name') . '.usora_users'
+                'email' => 'email|max:255',
+                'user_password' => 'required'
             ]);
         } catch (ValidationException $e) {
             $messagesByField = $e->validator->getMessageBag()->getMessages();
@@ -69,20 +69,9 @@ class EmailChangeController extends Controller
         }
         $user = user();
 
-        if (!$request->get('email')) {
+        if ($request->get('email') == user()->email) {
             return back()
-                ->withInput($request->except('email'))
-                ->withErrors(
-                    ['email' => 'Email is missing from request']
-                );
-        }
-
-        if (!$request->get('user_password')) {
-            return back()
-                ->withInput($request->except('email'))
-                ->withErrors(
-                    ['user_password' => 'Email is missing from request']
-                );
+                ->with(['error-message' => "Please choose a new email."]);
         }
 
         if (
@@ -90,7 +79,7 @@ class EmailChangeController extends Controller
         ) {
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
-        
+
         $payload = [
             'email' => $request->get('email'),
             'token' => $this->createNewToken($request->get('email')),

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
@@ -132,7 +133,13 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-                'display_name' => 'required|string|max:64|min:2|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
+                'display_name' => [
+                    'required',
+                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore($id),
+                    'string',
+                    'max:64',
+                    'min:2'
+                ]
             ]);
         } catch (ValidationException $e) {
             $messagesByField = $e->validator->getMessageBag()->getMessages();
