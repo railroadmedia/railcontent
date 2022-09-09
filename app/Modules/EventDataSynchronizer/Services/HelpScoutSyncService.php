@@ -2,12 +2,11 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
-use Carbon\Carbon;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Repositories\UserProductRepository;
-use Railroad\Usora\Entities\User;
+use Modules\UserManagementSystem\Models\User;
 
 class HelpScoutSyncService
 {
@@ -27,9 +26,9 @@ class HelpScoutSyncService
     protected $userProductRepository;
 
     /**
-     * @param  OrderRepository $orderRepository
-     * @param  SubscriptionRepository  $subscriptionRepository
-     * @param  UserProductRepository  $userProductRepository
+     * @param OrderRepository $orderRepository
+     * @param SubscriptionRepository $subscriptionRepository
+     * @param UserProductRepository $userProductRepository
      */
     public function __construct(
         OrderRepository $orderRepository,
@@ -42,7 +41,7 @@ class HelpScoutSyncService
     }
 
     /**
-     * @param  User  $user
+     * @param User $user
      *
      * @return array
      */
@@ -50,18 +49,18 @@ class HelpScoutSyncService
     {
         return array_merge(
             $this->getUsersMusoraProfileAttributes($user),
-            $this->getUsersMembershipAttributes($user->getId())
+            $this->getUsersMembershipAttributes($user->id)
         );
     }
 
     /**
-     * @param  int  $userId
-     * @param  string|null  $firstName
-     * @param  string|null  $displayName
-     * @param  string|null  $country
-     * @param  string|null  $city
-     * @param  string|null  $phoneNumber
-     * @param  string|null  $timezone
+     * @param int $userId
+     * @param string|null $firstName
+     * @param string|null $displayName
+     * @param string|null $country
+     * @param string|null $city
+     * @param string|null $phoneNumber
+     * @param string|null $timezone
      *
      * @return array
      */
@@ -74,7 +73,6 @@ class HelpScoutSyncService
         $phoneNumber,
         $timezone
     ): array {
-
         $musoraProfileAttributes = [
             'musora_profile_preferred-name' => !empty($firstName) ? $firstName : $displayName,
             'musora_profile_country' => $country,
@@ -90,23 +88,23 @@ class HelpScoutSyncService
     }
 
     /**
-     * @param  User  $user
+     * @param User $user
      *
      * @return array
      */
     public function getUsersMusoraProfileAttributes(User $user): array
     {
         return [
-            'musora_profile_preferred-name' => !empty($user->getFirstName()) ? $user->getFirstName() : $user->getDisplayName(),
-            'musora_profile_country' => $user->getCountry(),
-            'musora_profile_city' => $user->getCity(),
-            'musora_profile_phone-number' => $user->getPhoneNumber(),
-            'musora_profile_timezone' => $user->getTimezone(),
+            'musora_profile_preferred-name' => !empty($user->first_name) ? $user->first_name : $user->display_name,
+            'musora_profile_country' => $user->country,
+            'musora_profile_city' => $user->city,
+            'musora_profile_phone-number' => $user->phone_number,
+            'musora_profile_timezone' => $user->timezone,
         ];
     }
 
     /**
-     * @param  User  $user
+     * @param User $user
      *
      * @return array
      */
@@ -132,7 +130,7 @@ class HelpScoutSyncService
                 // make sure the subscriptions product is in this brands pre-configured products that represent a membership
                 if (!in_array(
                     $userProduct->getProduct()->getSku(),
-                    config('event-data-synchronizer.'.$brand.'_membership_product_skus', [])
+                    config('event-data-synchronizer.' . $brand . '_membership_product_skus', [])
                 )) {
                     continue;
                 }
@@ -159,8 +157,7 @@ class HelpScoutSyncService
 
                 // if this product expiration date is further in the past than whatever is currently set, skip it
                 if (!empty($latestMembershipUserProduct) &&
-                    ($latestMembershipUserProduct->getExpirationDate() < $eligibleUserProduct->getExpirationDate(
-                        ))) {
+                    ($latestMembershipUserProduct->getExpirationDate() < $eligibleUserProduct->getExpirationDate())) {
                     $latestMembershipUserProduct = $eligibleUserProduct;
                 }
             }
@@ -204,7 +201,8 @@ class HelpScoutSyncService
                     if (
                         $userSubscription->getProduct()
                         && $latestMembershipUserProduct->getProduct()
-                        && $userSubscription->getProduct()->getSku() == $latestMembershipUserProduct->getProduct()->getSku()
+                        && $userSubscription->getProduct()->getSku() == $latestMembershipUserProduct->getProduct(
+                        )->getSku()
                     ) {
                         if (empty($latestSubscription)) {
                             $latestSubscription = $userSubscription;
@@ -230,7 +228,7 @@ class HelpScoutSyncService
                     $membershipRate = $latestSubscription->getTotalPrice();
                     $membershipFailedRenewalAttempts = $latestSubscription->getRenewalAttempt();
 
-                    $membershipDetails = $membershipType . '|' . $membershipStatus . '|'. $membershipRate;
+                    $membershipDetails = $membershipType . '|' . $membershipStatus . '|' . $membershipRate;
 
                     $membershipCancellationDate = $membershipCancellationReason = null;
 
@@ -253,40 +251,48 @@ class HelpScoutSyncService
                     )) {
                         $membershipSourceAppStore = true;
                     }
-                } else if (empty($latestMembershipUserProduct->getExpirationDate())) {
-                    $membershipDetails = 'lifetime';
                 } else {
-                    $latestMembershipProduct = $latestMembershipUserProduct->getProduct();
-                    $membershipType = $latestMembershipProduct->getSubscriptionIntervalCount() . $latestMembershipProduct->getSubscriptionIntervalType();
+                    if (empty($latestMembershipUserProduct->getExpirationDate())) {
+                        $membershipDetails = 'lifetime';
+                    } else {
+                        $latestMembershipProduct = $latestMembershipUserProduct->getProduct();
+                        $membershipType = $latestMembershipProduct->getSubscriptionIntervalCount(
+                            ) . $latestMembershipProduct->getSubscriptionIntervalType();
 
-                    $userOrders = $this->orderRepository->getUserOrdersForProduct(
+                        $userOrders = $this->orderRepository->getUserOrdersForProduct(
                             $userId,
                             $latestMembershipUserProduct->getProduct()
                         );
 
-                    $membershipRate = 'unknown';
+                        $membershipRate = 'unknown';
 
-                    $latestMembershipOrder = null;
+                        $latestMembershipOrder = null;
 
-                    if (count($userOrders) == 1) {
-                        $latestMembershipOrder = $userOrders[0];
-                    } else if (count($userOrders) > 1) {
-                        foreach ($userOrders as $order) {
-                            if ($order->getCreatedAt()->format('Ym') == $latestMembershipUserProduct->getCreatedAt()->format('Ym')) {
-                                $latestMembershipOrder = $order;
+                        if (count($userOrders) == 1) {
+                            $latestMembershipOrder = $userOrders[0];
+                        } else {
+                            if (count($userOrders) > 1) {
+                                foreach ($userOrders as $order) {
+                                    if ($order->getCreatedAt()->format(
+                                            'Ym'
+                                        ) == $latestMembershipUserProduct->getCreatedAt()->format('Ym')) {
+                                        $latestMembershipOrder = $order;
+                                    }
+                                }
                             }
                         }
-                    }
 
-                    if ($latestMembershipOrder) {
-                        foreach ($latestMembershipOrder->getOrderItems() as $orderItem) {
-                            if ($orderItem->getProduct()->getSku() == $latestMembershipProduct->getSku()) {
-                                $membershipRate = $orderItem->getFinalPrice();
+                        if ($latestMembershipOrder) {
+                            foreach ($latestMembershipOrder->getOrderItems() as $orderItem) {
+                                if ($orderItem->getProduct()->getSku() == $latestMembershipProduct->getSku()) {
+                                    $membershipRate = $orderItem->getFinalPrice();
+                                }
                             }
                         }
-                    }
 
-                    $membershipDetails = $membershipType . '|' . $latestMembershipProduct->getType() . '|'. $membershipRate;
+                        $membershipDetails = $membershipType . '|' . $latestMembershipProduct->getType(
+                            ) . '|' . $membershipRate;
+                    }
                 }
             }
 

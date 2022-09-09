@@ -26,8 +26,11 @@ class InitializeMentors extends Command
     private HelpScoutMentorService $helpScoutMentorService;
     private HelpScoutUserService $helpScoutUserService;
 
-    public function __construct(MentorService $mentorService, HelpScoutMentorService $helpScoutMentorService, HelpScoutUserService $helpScoutUserService)
-    {
+    public function __construct(
+        MentorService $mentorService,
+        HelpScoutMentorService $helpScoutMentorService,
+        HelpScoutUserService $helpScoutUserService
+    ) {
         parent::__construct();
         $this->mentorService = $mentorService;
         $this->helpScoutMentorService = $helpScoutMentorService;
@@ -43,10 +46,12 @@ class InitializeMentors extends Command
     {
         $this->assignMentors($databaseManager);
 
-        $this->info("\nRegister Web Hook");
-        $this->helpScoutMentorService->registerHelpScoutWebHook();
+        if (app()->isProduction()) {
+            $this->info("\nRegister Web Hook");
+            $this->helpScoutMentorService->registerHelpScoutWebHook();
+        }
 
-        $this->info("Populate Help Scout User Data");
+        $this->info("\nPopulate Help Scout User Data");
         $this->helpScoutUserService->populateHelpScoutUserData();
 
         return true;
@@ -67,72 +72,91 @@ class InitializeMentors extends Command
             $this->info("Mentors not populated.  Populate Mentor Table");
 
             $mentorData = collect([
-                429774 => [
-                    "name" => "veronica",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                451392 => [
-                    "name" => "sara",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                454844 => [
-                    "name" => "karissa",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                150447 => [
-                    "name" => "kaitlyn",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                427720 => [
-                    "name" => "joy",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                427608 => [
-                    "name" => "jorge",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                361772 => [
-                    "name" => "jennvo",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                155762 => [
-                    "name" => "jenn",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
-                ],
-                403844 => [
-                    "name" => "hannah",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
+                451393 => [
+                    "name" => "carlos",
+                    "supported_brands" => "guitareo, drumeo",
+                    "maxStudents" => 6000
                 ],
                 451390 => [
                     "name" => "emily",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
+                    "supported_brands" => "singeo, pianote",
+                    "maxStudents" => 6000
                 ],
-                154064 => [
-                    "name" => "celina",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
+                403844 => [
+                    "name" => "hannah",
+                    "supported_brands" => "pianote, guitareo",
+                    "maxStudents" => 6000
                 ],
-                451393 => [
-                    "name" => "carlos",
-                    "supported_brands" => "pianote, guitareo, drumeo, singeo",
-                    "maxStudents" => 5000
+                155762 => [
+                    "name" => "jenn",
+                    "supported_brands" => "pianote, drumeo",
+                    "maxStudents" => 4000
                 ],
-
+                361772 => [
+                    "name" => "jennvo",
+                    "supported_brands" => "pianote, drumeo",
+                    "maxStudents" => 4000
+                ],
+                427608 => [
+                    "name" => "jorge",
+                    "supported_brands" => "drumeo, pianote",
+                    "maxStudents" => 7000
+                ],
+                427720 => [
+                    "name" => "joy",
+                    "supported_brands" => "drumeo, pianote",
+                    "maxStudents" => 7000
+                ],
+                150447 => [
+                    "name" => "kaitlyn",
+                    "supported_brands" => "drumeo, pianote",
+                    "maxStudents" => 7000
+                ],
+                429774 => [
+                    "name" => "sara",
+                    "supported_brands" => "drumeo, pianote",
+                    "maxStudents" => 7000
+                ],
+                429774 => [
+                    "name" => "veronica",
+                    "supported_brands" => "drumeo, pianote",
+                    "maxStudents" => 4000
+                ],
+                451392 => [
+                    "name" => "sara",
+                    "supported_brands" => "pianote, singeo",
+                    "maxStudents" => 6000
+                ],
             ]);
             $mentorData->each(function ($mentor, $userId) {
                 $this->mentorService->store($userId, $mentor["supported_brands"], $mentor["maxStudents"]);
             });
         }
+
+        $active_users = collect(
+            $connection->select(
+                "select u.id FROM usora_users u
+            inner join (
+                select user_id, max(paid_until) as paid_until
+                from ecommerce_subscriptions where brand in ('guitareo', 'singeo') group by user_id) s on s.user_id = u.id
+            where NOT EXISTS(select * FROM user_roles
+                                      WHERE role = 'administrator'
+                                        and user_id = u.id)
+                AND s.paid_until >= DATE_ADD(NOW(), INTERVAL -30 DAY)
+                AND NOT EXISTS(select * FROM mentor_students where user_id = u.id);"
+            )
+        );
+        $this->info("\nFound {$active_users->count()} active subscription unassigned users (guitareo, singeo)");
+        $this->info("Assigning Users (guitareo, singeo)...");
+        $this->withProgressBar($active_users, function ($user) {
+            try {
+                $this->mentorService->assignMentor($user->id);
+            } catch (Exception $exception) {
+                $this->info("Unable to assign assign mentor to user {$user->id}");
+            }
+        });
+
+
 
         $active_users = collect(
             $connection->select(
@@ -147,8 +171,8 @@ class InitializeMentors extends Command
                 AND NOT EXISTS(select * FROM mentor_students where user_id = u.id);"
             )
         );
-        $this->info("Found {$active_users->count()} active subscription unassigned users");
-        $this->info("Assigning Users...");
+        $this->info("\nFound {$active_users->count()} active subscription unassigned users (drumeo, pianote)");
+        $this->info("Assigning Users (drumeo, pianote)...");
         $this->withProgressBar($active_users, function ($user) {
             try {
                 $this->mentorService->assignMentor($user->id);
@@ -171,7 +195,7 @@ class InitializeMentors extends Command
                 AND NOT EXISTS(select * FROM mentor_students where user_id = u.id);"
             )
         );
-        $this->info("Found {$active_users->count()} unassigned users with active user products");
+        $this->info("\nFound {$active_users->count()} unassigned users with active user products");
         $this->info("Assigning Users...");
         $this->withProgressBar($active_users, function ($user) {
             try {

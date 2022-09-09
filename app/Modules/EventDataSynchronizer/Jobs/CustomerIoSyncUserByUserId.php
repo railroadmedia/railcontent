@@ -2,13 +2,13 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
-use Railroad\CustomerIo\Services\CustomerIoService;
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Services\UserProductService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Repositories\UserRepository;
+use Modules\UserManagementSystem\Models\User;
 
 class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
 {
@@ -29,13 +29,13 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     public function handle(
         CustomerIoService $customerIoService,
         CustomerIoSyncService $customerIoSyncService,
-        UserRepository $userRepository,
+        UserService $userService,
         UserProductService $userProductService
     ) {
         try {
             $this->reconnectToMySQLDatabases();
 
-            $this->user = $userRepository->find($this->user->getId());
+            $this->user = $userService->getByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
 
@@ -46,7 +46,7 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
 
                 foreach ($brands as $brand) {
                     if ($userProductService->userHadOrHasAnyDigitalProductsForBrand(
-                            new EcommerceUser($this->user->getId(), $this->user->getEmail()),
+                            new EcommerceUser($this->user->id, $this->user->email),
                             $brand
                         ) || $accountNameToSyncAllBrand == $brand) {
                         $syncThisWorkspace = true;
@@ -57,11 +57,11 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                     $customerAttributes = $customerIoSyncService->getUsersCustomAttributes($this->user, $brands);
 
                     $customerIoService->createOrUpdateCustomerByUserId(
-                        $this->user->getId(),
+                        $this->user->id,
                         $accountName,
-                        $this->user->getEmail(),
+                        $this->user->email,
                         $customerAttributes,
-                        $this->user->getCreatedAt()->timestamp
+                        $this->user->created_at->timestamp
                     );
                 }
             }
@@ -79,7 +79,7 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     {
         error_log(
             'Error on CustomerIoSyncUserById job trying to sync user to customer.io. User ID: '.
-            $this->user->getId().' - lookupEmail: '.$this->user->getEmail()
+            $this->user->id.' - lookupEmail: '.$this->user->email
         );
 
         error_log($exception);

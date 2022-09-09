@@ -3,14 +3,18 @@
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use App\Modules\EventDataSynchronizer\Services\HelpScoutSyncService;
+use App\Modules\HelpScout\Services\HelpScoutService;
 use Carbon\Carbon;
 use Exception;
+use HelpScout\Api\Exception\ConflictException;
+use HelpScout\Api\Exception\RateLimitExceededException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 
 class SynchUsoraHelpscout implements ShouldQueue

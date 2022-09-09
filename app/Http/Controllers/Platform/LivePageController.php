@@ -348,7 +348,7 @@ class LivePageController extends BaseController
                 Carbon::now() < $endTimeUtc->addMinutes(self::NOT_LIVE_PAGE_SWITCH_MINUTES)) {
                 // give xp
                 $this->userPointsService->setPoints(
-                    $user->getId(),
+                    $user->id,
                     [
                         'content_id' => $liveEvent['id'],
                         'live_stream_start_time' => $startTimeUtc->toDateTimeString(),

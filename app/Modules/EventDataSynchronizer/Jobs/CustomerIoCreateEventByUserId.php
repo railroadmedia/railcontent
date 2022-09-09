@@ -2,10 +2,10 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\UserManagementSystem\Services\UserService;
 use Exception;
-use Railroad\CustomerIo\Services\CustomerIoService;
-use Railroad\Usora\Events\User\UserCreated;
-use Railroad\Usora\Repositories\UserRepository;
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use Modules\UserManagementSystem\Events\User\UserCreated;
 use Throwable;
 
 class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
@@ -73,18 +73,18 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
      */
     public function handle(
         CustomerIoService $customerIoService,
-        UserRepository $userRepository
+        UserService $userService
     ) {
         try {
             $this->reconnectToMySQLDatabases();
 
-            $user = $userRepository->find($this->userId);
+            $user = $userService->GetByIdOrNull($this->userId);
 
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
 
             try {
-                $existingSpecificBrandCustomer = $customerIoService->getCustomerByUserId($this->accountName, $user->getId(), false);
-                $existingAllBrandCustomer = $customerIoService->getCustomerByUserId($this->accountName, $user->getId(), false);
+                $existingSpecificBrandCustomer = $customerIoService->getCustomerByUserId($this->accountName, $user->id, false);
+                $existingAllBrandCustomer = $customerIoService->getCustomerByUserId($this->accountName, $user->id, false);
             } catch (Throwable $exception) {
                 if (empty($existingSpecificBrandCustomer) || empty($existingAllBrandCustomer)) {
                     dispatch_now(new CustomerIoSyncNewUserByEmail($user));
@@ -93,13 +93,13 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
 
                     $this->reconnectToMySQLDatabases();
 
-                    $user = $userRepository->find($this->userId);
+                    $user = $userService->GetByIdOrNull($this->userId);
                 }
             }
 
             // events always sync to the brand specific workspace and the primary all synced workspace
             $customerIoService->createEventForUserId(
-                $user->getId(),
+                $user->id,
                 $this->accountName,
                 $this->eventName,
                 $this->eventData,
@@ -108,7 +108,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
             );
 
             $customerIoService->createEventForUserId(
-                $user->getId(),
+                $user->id,
                 $accountNameToSyncAllBrand,
                 $this->eventName,
                 $this->eventData,

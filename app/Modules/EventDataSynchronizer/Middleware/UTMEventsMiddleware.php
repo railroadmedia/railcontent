@@ -18,7 +18,7 @@ class UTMEventsMiddleware
                 //customer-io event
                 event(
                     new UTMLinks(
-                        $currentUser->getId(),
+                        $currentuser->id,
                         config('event-data-synchronizer.customer_io_brand_activity_event'),
                         Carbon::now()
                             ->toDateTimeString(),

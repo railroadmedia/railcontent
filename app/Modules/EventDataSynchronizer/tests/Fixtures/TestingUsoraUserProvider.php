@@ -3,33 +3,25 @@
 namespace App\Modules\EventDataSynchronizer\Tests\Fixtures;
 
 use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Repositories\UserRepository;
+use App\Modules\UserManagementSystem\Services\UserService;
 
 class TestingUsoraUserProvider implements UserProviderInterface
 {
     CONST RESOURCE_TYPE = 'user';
 
     /**
-     * @var UserRepository
+     * @var UserService
      */
-    private $userRepository;
-
-    /**
-     * @var UsoraEntityManager
-     */
-    private $usoraEntityManager;
+    private $userService;
 
     /**
      * UsoraTestingUserProvider constructor.
      *
-     * @param UserRepository $userRepository
-     * @param UsoraEntityManager $usoraEntityManager
+     * @param UserService $userService
      */
-    public function __construct(UserRepository $userRepository, UsoraEntityManager $usoraEntityManager)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
-        $this->usoraEntityManager = $usoraEntityManager;
+        $this->userService = $userService;
     }
 
     /**
@@ -47,7 +39,7 @@ class TestingUsoraUserProvider implements UserProviderInterface
             is_object($entity) &&
             method_exists($entity, $setterName)) {
 
-            $user = $this->userRepository->find($data['data']['id']);
+            $user = $this->userService->getByEmailOrNull($data['data']['id']);
 
             call_user_func([$entity, $setterName], $user);
         }

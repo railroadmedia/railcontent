@@ -19,7 +19,7 @@ class UserActivitySyncMiddleware
             $eventName =
                 config('event-data-synchronizer.customer_io_brand_activity_event') .
                 '_members_area_activity_' .
-                $currentUser->getId();
+                $currentuser->id;
 
             if (!$redis->exists($eventName)) {
                 //store user event key in Redis, ttl=24 hours
@@ -34,7 +34,7 @@ class UserActivitySyncMiddleware
                 //customer-io event
                 event(
                     new FirstActivityPerDay(
-                        $currentUser->getId(),
+                        $currentuser->id,
                         config('event-data-synchronizer.customer_io_brand_activity_event'),
                         Carbon::now()
                             ->toDateTimeString()

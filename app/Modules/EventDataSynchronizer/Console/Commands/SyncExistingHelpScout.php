@@ -10,8 +10,8 @@ use HelpScout\Api\Exception\RateLimitExceededException;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use App\Modules\EventDataSynchronizer\Services\HelpScoutSyncService;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Repositories\UserRepository;
+use Modules\UserManagementSystem\Models\User;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Throwable;
 
 class SyncExistingHelpScout extends Command
@@ -42,7 +42,7 @@ class SyncExistingHelpScout extends Command
         DatabaseManager $databaseManager,
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService,
-        UserRepository $userRepository
+        UserService $userService
     ) {
         $currentPage = null;
 
@@ -65,7 +65,7 @@ class SyncExistingHelpScout extends Command
                 $customersMap[$customer->getId()] = $customer;
             }
 
-            $users = $userRepository->findByEmails(array_keys($emailsMap));
+            $users = $userService->getByEmailsOrNull(array_keys($emailsMap));
 
             $existingCustomersMap =
                 $railhelpscoutConnection->table('helpscout_customers')
@@ -81,13 +81,13 @@ class SyncExistingHelpScout extends Command
                     ->toArray();
 
             foreach ($users as $user) {
-                if (!isset($existingCustomersMap[$user->getId()]) && isset($emailsMap[$user->getEmail()])) {
-                    $customerId = $emailsMap[$user->getEmail()];
+                if (!isset($existingCustomersMap[$user->id]) && isset($emailsMap[$user->email])) {
+                    $customerId = $emailsMap[$user->email];
                     $customer = $customersMap[$customerId];
 
                     $this->info(
-                        'Syncing user ' . $user->getEmail()
-                        . ', usora id: ' . $user->getId()
+                        'Syncing user ' . $user->email
+                        . ', usora id: ' . $user->id
                         . ', helpscout id: ' . $customer->getId()
                     );
 
@@ -98,7 +98,7 @@ class SyncExistingHelpScout extends Command
                         $customer
                     );
 
-                    $existingCustomersMap[$user->getId()] = true;
+                    $existingCustomersMap[$user->id] = true;
                 }
             }
 
@@ -159,10 +159,10 @@ class SyncExistingHelpScout extends Command
         while ($attempt <= self::RETRY_ATTEMPTS) {
             try {
                 $railHelpScoutService->syncExistingCustomer(
-                    $user->getId(),
-                    $user->getFirstName(),
-                    $user->getLastName(),
-                    $user->getEmail(),
+                    $user->id,
+                    $user->first_name,
+                    $user->last_name,
+                    $user->email,
                     $userAttributes,
                     $brandsAttributesKeys,
                     $customer
@@ -171,7 +171,7 @@ class SyncExistingHelpScout extends Command
                 return;
             } catch (RateLimitExceededException $rateException) {
                 $this->error(
-                    'RateLimitExceededException raised when syncing user ' . $user->getEmail()
+                    'RateLimitExceededException raised when syncing user ' . $user->email
                     . ', sleeping for ' . self::SLEEP_DELAY . ' seconds'
                 );
 

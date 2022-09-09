@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Services;
 
 use Carbon\Carbon;
 use Exception;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\PaymentMethod;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\UserProduct;
@@ -12,7 +13,6 @@ use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Repositories\UserProductRepository;
 use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Services\ConfigService as RailcontentConfigService;
-use Railroad\Usora\Entities\User;
 
 class CustomerIoSyncService
 {
@@ -80,25 +80,25 @@ class CustomerIoSyncService
     {
         $fullNameArray = [];
 
-        if (!empty($user->getFirstName())) {
-            $fullNameArray[] = $user->getFirstName();
+        if (!empty($user->first_name)) {
+            $fullNameArray[] = $user->first_name;
         }
 
-        if (!empty($user->getLastName())) {
-            $fullNameArray[] = $user->getLastName();
+        if (!empty($user->last_name)) {
+            $fullNameArray[] = $user->last_name;
         }
 
         return [
             'musora_profile_preffered-name' => !empty($fullNameArray) ? implode(' ', $fullNameArray) : null,
-            'musora_profile_display-name' => $user->getDisplayName(),
-            'musora_profile_gender' => $user->getGender(),
-            'musora_profile_country' => $user->getCountry(),
-            'musora_profile_region' => $user->getRegion(),
-            'musora_profile_city' => $user->getCity(),
-            'musora_profile_birthday' => !empty($user->getBirthday()) ? $user->getBirthday()->timestamp : null,
-            'musora_phone-number' => $user->getPhoneNumber(),
-            'musora_timezone' => $user->getTimezone(),
-            'musora_notify_of_weekly_updates' => $user->getNotifyWeeklyUpdate(),
+            'musora_profile_display-name' => $user->display_name,
+            'musora_profile_gender' => $user->gender,
+            'musora_profile_country' => $user->country,
+            'musora_profile_region' => $user->region,
+            'musora_profile_city' => $user->city,
+            'musora_profile_birthday' => $user->birthday,
+            'musora_phone-number' => $user->phone_number,
+            'musora_timezone' => $user->timezone,
+            'musora_notify_of_weekly_updates' => $user->notify_weekly_update,
         ];
     }
 
@@ -119,7 +119,7 @@ class CustomerIoSyncService
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
         }
 
-        $userProducts = $this->userProductRepository->getAllUsersProducts($user->getId());
+        $userProducts = $this->userProductRepository->getAllUsersProducts($user->id);
 
         $productAttributes = [];
 
@@ -232,7 +232,7 @@ class CustomerIoSyncService
             ->where(
                 [
                     RailcontentConfigService::$tableContent . '.type' => 'instructor',
-                    RailcontentConfigService::$tableContentFollows. '.user_id' => $user->getId(),
+                    RailcontentConfigService::$tableContentFollows. '.user_id' => $user->id,
                 ]
             )
             ->get();
@@ -275,7 +275,7 @@ class CustomerIoSyncService
 
         $subscriptionAttributes = [];
 
-        $userSubscriptions = $this->subscriptionRepository->getAllUsersSubscriptions($user->getId());
+        $userSubscriptions = $this->subscriptionRepository->getAllUsersSubscriptions($user->id);
 
         foreach ($brands as $brand) {
             $membershipRenewalDate = null;
@@ -534,7 +534,7 @@ class CustomerIoSyncService
         /**
          * @var $userProducts UserProduct[]
          */
-        $userProducts = $this->userProductRepository->getAllUsersProducts($user->getId());
+        $userProducts = $this->userProductRepository->getAllUsersProducts($user->id);
 
         $finalArray = [];
 

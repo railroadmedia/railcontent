@@ -10,10 +10,9 @@ use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as ArrayHydra
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Transformers\UserTransformer;
-use Railroad\Usora\Entities\User as UsoraUser;
-use Railroad\Usora\Events\User\UserCreated;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Repositories\UserRepository;
+use Modules\UserManagementSystem\Models\User as UsoraUser;
+use Modules\UserManagementSystem\Events\User\UserCreated;
+use App\Modules\UserManagementSystem\Services\UserService;
 
 use function app;
 use function auth;
@@ -23,23 +22,19 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
 {
     CONST RESOURCE_TYPE = 'user';
 
-    private UserRepository $userRepository;
-    private UsoraEntityManager $usoraEntityManager;
+    private UserService $userService;
     private Inflector $inflector;
 
     /**
      * EcommerceUserProvider constructor.
      *
-     * @param UsoraEntityManager $usoraEntityManager
-     * @param UserRepository $userRepository
+     * @param UserService $userService
      */
     public function __construct(
-        UsoraEntityManager $usoraEntityManager,
-        UserRepository $userRepository
+        UserService $userService
     )
     {
-        $this->userRepository = $userRepository;
-        $this->usoraEntityManager = $usoraEntityManager;
+        $this->userService = $userService;
         $this->inflector = app('DoctrineInflector');
     }
 
@@ -49,10 +44,10 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
      */
     public function getUserById(int $id): ?User
     {
-        $usoraUser = $this->userRepository->find($id);
+        $usoraUser = $this->userService->getByEmailOrNull($id);
 
         if ($usoraUser) {
-            return new User($usoraUser->getId(), $usoraUser->getEmail());
+            return new User($usorauser->id, $usoraUser->email);
         }
 
         return null;
@@ -64,16 +59,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
      */
     public function getUsersByIds(array $ids): array
     {
-        $qb = $this->userRepository->createQueryBuilder('u');
-
-        $qb
-            ->where(
-                $qb->expr()
-                    ->in('u.id', ':userIds')
-            )
-            ->setParameter('userIds', $ids);
-
-        return $qb->getQuery()->getResult();
+        return $this->userService->getUsersByIds($ids);
     }
 
     /**
@@ -82,7 +68,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
      */
     public function getUserId(User $user): int
     {
-        return $user->getId();
+        return $user->id;
     }
 
     /**
@@ -161,12 +147,11 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
         $usoraUser->setDisplayName($parts[0] . rand(10000, 99999));
         $usoraUser->setPassword($password);
 
-        $this->usoraEntityManager->persist($usoraUser);
-        $this->usoraEntityManager->flush();
+        $usoraUser->save();
 
         event(new UserCreated($usoraUser));
 
-        return new User($usoraUser->getId(), $usoraUser->getEmail());
+        return new User($usorauser->id, $usoraUser->email);
     }
 
     /**
@@ -179,7 +164,7 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
      */
     public function checkEmailExists(string $email): bool
     {
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->userService->getByEmailOrNull($email);
 
         return ($user != null);
     }
@@ -199,10 +184,10 @@ class TestingEcommerceUserProvider implements UserProviderInterface, ArrayHydrat
      */
     public function getUserByEmail(string $email): ?User
     {
-        $usoraUser = $this->userRepository->findOneByEmail($email);
+        $usoraUser = $this->userService->getByEmailOrNull($email);
 
         if ($usoraUser) {
-            return new User($usoraUser->getId(), $usoraUser->getEmail());
+            return new User($usorauser->id, $usoraUser->email);
         }
 
         return null;

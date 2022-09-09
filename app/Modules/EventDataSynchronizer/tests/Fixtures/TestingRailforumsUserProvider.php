@@ -3,11 +3,12 @@
 namespace App\Modules\EventDataSynchronizer\Tests\Fixtures;
 
 use Railroad\Railforums\Contracts\UserProviderInterface;
+use Modules\UserManagementSystem\Models\User;
 
 class TestingRailforumsUserProvider implements UserProviderInterface
 {
     /**
-     * @return mixed|\Railroad\Usora\Entities\User|null
+     * @return mixed|User|null
      */
     public function getCurrentUser()
     {
@@ -18,14 +19,14 @@ class TestingRailforumsUserProvider implements UserProviderInterface
      * @param $userId
      * @return mixed|string
      */
-    public function getUserAccessLevel($userId)
+    public function getUserAccessLevel($userId): string
     {
         return '';
     }
 
     /**
      * @param $userId
-     * @return \Railroad\Usora\Entities\User
+     * @return User
      */
     public function getUser($userId)
     {
@@ -34,7 +35,7 @@ class TestingRailforumsUserProvider implements UserProviderInterface
 
     /**
      * @param array $userIds
-     * @return array|\Railroad\Usora\Entities\User[]
+     * @return array|User[]
      */
     public function getUsersByIds(array $userIds): array
     {

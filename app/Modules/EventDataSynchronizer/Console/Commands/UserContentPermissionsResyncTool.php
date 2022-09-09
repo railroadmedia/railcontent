@@ -7,8 +7,6 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use App\Modules\EventDataSynchronizer\Listeners\UserProductToUserContentPermissionListener;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Repositories\UserRepository;
 
 class UserContentPermissionsResyncTool extends Command
 {
@@ -41,9 +39,7 @@ class UserContentPermissionsResyncTool extends Command
      */
     public function handle(
         DatabaseManager $databaseManager,
-        UserRepository $userRepository,
         EcommerceEntityManager $ecommerceEntityManager,
-        UsoraEntityManager $usoraEntityManager,
         UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener
     ) {
         $brand = $this->option('brand');
@@ -60,7 +56,6 @@ class UserContentPermissionsResyncTool extends Command
         $done = 0;
 
         $query->chunk(250, function (Collection $userProductRows) use (
-            $usoraEntityManager,
             $ecommerceEntityManager,
             $userProductToUserContentPermissionListener,
             &$done
@@ -71,13 +66,8 @@ class UserContentPermissionsResyncTool extends Command
             }
 
             $ecommerceEntityManager->flush();
-            $usoraEntityManager->flush();
-
             $ecommerceEntityManager->clear();
-            $usoraEntityManager->clear();
-
             $ecommerceEntityManager->getConnection()->ping();
-            $usoraEntityManager->getConnection()->ping();
 
             $this->info('Done ' . $done);
         });

@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\HelpScout\Services\HelpScoutService;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,8 +10,8 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Modules\EventDataSynchronizer\Services\HelpScoutSyncService;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Repositories\UserRepository;
+use Modules\UserManagementSystem\Models\User;
+use App\Modules\UserManagementSystem\Services\UserService;
 
 class HelpScoutUpdateUser implements ShouldQueue
 {
@@ -29,26 +30,26 @@ class HelpScoutUpdateUser implements ShouldQueue
     /**
      * @param  HelpScoutSyncService $helpScoutSyncService
      * @param  HelpScoutService $helpScoutService
-     * @param  UserRepository $userRepository
+     * @param  UserService $userService
      *
      * @throws \Throwable
      */
     public function handle(
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService,
-        UserRepository $userRepository
+        UserService $userService
     ) {
         try {
-            $this->user = $userRepository->find($this->user->getId());
+            $this->user = $userService->GetByIdOrNull($this->user->id);
 
             $userAttributes = $helpScoutSyncService->getUsersAttributes($this->user);
             $brandsAttributesKeys = $helpScoutSyncService->getBrandsMembershipAttributesKeys();
 
             $helpScoutService->createOrUpdateCustomer(
-                $this->user->getId(),
-                $this->user->getFirstName(),
-                $this->user->getLastName(),
-                $this->user->getEmail(),
+                $this->user->id,
+                $this->user->first_name,
+                $this->user->last_name,
+                $this->user->email,
                 $userAttributes,
                 $brandsAttributesKeys
             );
@@ -66,7 +67,7 @@ class HelpScoutUpdateUser implements ShouldQueue
     {
         error_log(
             'Error on HelpScoutUpdateUser job trying to sync user to helpscout. User ID: '.
-            $this->user->getId().' - lookupEmail: '.$this->user->getEmail()
+            $this->user->id.' - lookupEmail: '.$this->user->email
         );
 
         error_log($exception);

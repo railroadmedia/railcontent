@@ -3,8 +3,8 @@
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use Exception;
-use Railroad\CustomerIo\Services\CustomerIoService;
-use Railroad\Usora\Repositories\UserRepository;
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\UserManagementSystem\Services\UserService;
 
 class CustomerIoSyncUserDevice extends CustomerIoBaseJob
 {
@@ -47,18 +47,18 @@ class CustomerIoSyncUserDevice extends CustomerIoBaseJob
 
     /**
      * @param CustomerIoService $customerIoService
-     * @param UserRepository $userRepository
+     * @param UserService $userService
      * @throws \Throwable
      */
     public function handle(
         CustomerIoService $customerIoService,
-        UserRepository $userRepository
+        UserService $userService
     ) {
         try {
-            $user = $userRepository->find($this->userId);
+            $user = $userService->GetByIdOrNull($this->userId);
 
             $customerIoService->syncDeviceForUserId(
-                $user->getId(),
+                $user->id,
                 $this->accountName,
                 $this->deviceData,
                 $this->timestamp

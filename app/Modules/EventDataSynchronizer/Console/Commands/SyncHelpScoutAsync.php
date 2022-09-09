@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
+use App\Modules\EventDataSynchronizer\Jobs\SynchUsoraHelpscout;
 use Illuminate\Console\Command;
 
 class SyncHelpScoutAsync extends Command

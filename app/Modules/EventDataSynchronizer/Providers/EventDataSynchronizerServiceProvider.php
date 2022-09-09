@@ -42,9 +42,9 @@ use Railroad\Railcontent\Events\ContentUnfollow;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
-use Railroad\Usora\Events\MobileAppLogin;
-use Railroad\Usora\Events\User\UserCreated;
-use Railroad\Usora\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Events\MobileAppLogin;
+use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Railroad\Referral\Events\EmailInvite;
 
 class EventDataSynchronizerServiceProvider extends EventServiceProvider

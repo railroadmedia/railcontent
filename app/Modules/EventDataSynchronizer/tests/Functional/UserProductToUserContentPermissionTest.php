@@ -27,13 +27,9 @@ class UserProductToUserContentPermissionTest extends EventDataSynchronizerTestCa
      */
     private $permissionRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
 
-        $this->userProductRepository = $this->app->make(UserProductRepository::class);
-        $this->productRepository = $this->app->make(ProductRepository::class);
-        $this->permissionRepository = $this->app->make(PermissionRepository::class);
     }
 
     public function test_handle_empty_product()

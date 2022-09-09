@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -185,7 +185,7 @@ return [
         App\Modules\Brand\Providers\BrandServiceProvider::class,
         App\Modules\Mentor\Providers\MentorServiceProvider::class,
         App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
-
+        App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
         /*
          * Application Service Providers...
          */

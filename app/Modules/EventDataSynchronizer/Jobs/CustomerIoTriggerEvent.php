@@ -4,10 +4,9 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Railroad\CustomerIo\Models\Customer;
-use Railroad\CustomerIo\Services\CustomerIoService;
+use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use Railroad\Usora\Managers\UsoraEntityManager;
 
 class CustomerIoTriggerEvent extends CustomerIoBaseJob
 {

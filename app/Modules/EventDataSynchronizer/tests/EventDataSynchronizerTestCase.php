@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\Tests;
+namespace Railroad\EventDataSynchronizer\Tests;
 
 use Carbon\Carbon;
 use Doctrine\Inflector\InflectorFactory;
@@ -17,16 +17,16 @@ use Railroad\Ecommerce\Faker\Factory;
 use Railroad\Ecommerce\Faker\Faker as EcommerceFaker;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Providers\EcommerceServiceProvider;
-use App\Modules\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider;
-use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
-use App\Modules\EventDataSynchronizer\Tests\Fixtures\TestingEcommerceUserProvider;
-use App\Modules\EventDataSynchronizer\Tests\Fixtures\TestingRailforumsUserProvider;
-use App\Modules\EventDataSynchronizer\Tests\Fixtures\TestingUserProvider;
+use Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider;
+use Railroad\EventDataSynchronizer\Providers\UserProviderInterface;
+use Railroad\EventDataSynchronizer\Tests\Fixtures\TestingEcommerceUserProvider;
+use Railroad\EventDataSynchronizer\Tests\Fixtures\TestingRailforumsUserProvider;
+use Railroad\EventDataSynchronizer\Tests\Fixtures\TestingUserProvider;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
-use Railroad\Usora\Managers\UsoraEntityManager;
-use Railroad\Usora\Providers\UsoraServiceProvider;
+use App\Modules\UserManagementSystem\Managers\UsoraEntityManager;
+use App\Modules\UserManagementSystem\Providers\UsoraServiceProvider;
 
 class EventDataSynchronizerTestCase extends BaseTestCase
 {
@@ -221,7 +221,7 @@ class EventDataSynchronizerTestCase extends BaseTestCase
             [
                 [
                     'path' => __DIR__ . '/../vendor/railroad/usora/src/Entities',
-                    'namespace' => 'Railroad\Usora\Entities',
+                    'namespace' => 'App\Modules\UserManagementSystem\Entities',
                 ],
             ]
         );

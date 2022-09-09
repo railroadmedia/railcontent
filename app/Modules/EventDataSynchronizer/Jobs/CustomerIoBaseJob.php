@@ -9,9 +9,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use Railroad\Usora\Managers\UsoraEntityManager;
 
 class CustomerIoBaseJob implements ShouldQueue
 {
@@ -31,20 +29,16 @@ class CustomerIoBaseJob implements ShouldQueue
 
     public function reconnectToMySQLDatabases()
     {
-        /**
-         * @var $databaseManager DatabaseManager
-         */
-        $databaseManager = app(DatabaseManager::class);
-
-        $databaseManager->reconnect(config('customer-io.database_connection_name'));
-        $databaseManager->reconnect(config('railcontent.database_connection_name'));
-
-        $usoraEntityManager = app(UsoraEntityManager::class);
-        $usoraEntityManager->getConnection()->close();
-        $usoraEntityManager->getConnection()->connect();
-
-        $ecommerceEntityManager = app(EcommerceEntityManager::class);
-        $ecommerceEntityManager->getConnection()->close();
-        $ecommerceEntityManager->getConnection()->connect();
+//        /**
+//         * @var $databaseManager DatabaseManager
+//         */
+//        $databaseManager = app(DatabaseManager::class);
+//
+//        $databaseManager->reconnect(config('customer-io.database_connection_name'));
+//        $databaseManager->reconnect(config('railcontent.database_connection_name'));
+//
+//        $ecommerceEntityManager = app(EcommerceEntityManager::class);
+//        $ecommerceEntityManager->getConnection()->close();
+//        $ecommerceEntityManager->getConnection()->connect();
     }
 }

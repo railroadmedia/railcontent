@@ -302,8 +302,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true)
-    : Attribute {
+    public function profilePictureUrl($usingCDN = true): Attribute
+    {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
@@ -326,8 +326,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return Attribute
      */
-    public function accessLevel()
-    : Attribute {
+    public function accessLevel(): Attribute
+    {
         return Attribute::make(
             get: function ($value) {
                 if (!empty($value)) {
@@ -345,6 +345,18 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function getDashboardUrl()
     {
         return url()->route('platform.profile.dashboard', [$this->id]);
+    }
+
+    /**
+     * @return Attribute
+     */
+    public function totalXp(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                return !empty($this->total_xp) ? $this->total_xp : 0;
+            },
+        );
     }
 
     /**
@@ -591,7 +603,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingExperience::class);
     }
 
-   /**
+    /**
      * @return bool
      */
     public function isPackOwner()

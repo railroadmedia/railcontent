@@ -2,16 +2,16 @@
 
 namespace App\Modules\EventDataSynchronizer\Tests\Functional;
 
+use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
-use App\Modules\EventDataSynchronizer\Tests\EventDataSynchronizerTestCase;
+use Railroad\EventDataSynchronizer\Tests\EventDataSynchronizerTestCase;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Services\ConfigService;
+use Tests\TestCase;
 
 class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 {

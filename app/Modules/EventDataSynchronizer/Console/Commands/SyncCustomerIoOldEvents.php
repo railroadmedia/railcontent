@@ -12,7 +12,7 @@ use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Usora\Repositories\UserRepository;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Throwable;
 
 class SyncCustomerIoOldEvents extends Command
@@ -49,7 +49,7 @@ class SyncCustomerIoOldEvents extends Command
         CustomerIoSyncEventListener $customerIoSyncEventListener,
         OrderRepository $orderRepository,
         PaymentRepository $paymentRepository,
-        UserRepository $userRepository,
+        UserService $userService,
         SubscriptionRepository $subscriptionRepository,
         EcommerceEntityManager $ecommerceEntityManager
     ) {

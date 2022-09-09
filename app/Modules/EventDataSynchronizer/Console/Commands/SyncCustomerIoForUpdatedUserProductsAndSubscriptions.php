@@ -9,8 +9,8 @@ use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Repositories\UserProductRepository;
-use Railroad\Usora\Events\User\UserUpdated;
-use Railroad\Usora\Repositories\UserRepository;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
+use App\Modules\UserManagementSystem\Services\UserService;
 
 class SyncCustomerIoForUpdatedUserProductsAndSubscriptions extends Command
 {
@@ -38,7 +38,7 @@ class SyncCustomerIoForUpdatedUserProductsAndSubscriptions extends Command
     public function handle(
         UserProductRepository $userProductRepository,
         CustomerIoSyncEventListener $customerIoSyncEventListener,
-        UserRepository $userRepository,
+        UserService $userService,
         SubscriptionRepository $subscriptionRepository
     ) {
         $lastTime = Carbon::now()->subHours(48);
@@ -85,8 +85,8 @@ class SyncCustomerIoForUpdatedUserProductsAndSubscriptions extends Command
         $allUserIds = array_unique($allUserIds);
 
         foreach ($allUserIds as $allUserId) {
-            $user = $userRepository->find($allUserId);
-            $this->info('Handling ' . $user->getEmail());
+            $user = $userService->GetByIdOrNull($allUserId);
+            $this->info('Handling ' . $user->email);
             $customerIoSyncEventListener->handleUserUpdated(new UserUpdated($user, $user));
         }
 

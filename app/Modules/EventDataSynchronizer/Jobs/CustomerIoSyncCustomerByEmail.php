@@ -3,7 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use Exception;
-use Railroad\CustomerIo\Services\CustomerIoService;
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use Throwable;
 
 class CustomerIoSyncCustomerByEmail extends CustomerIoBaseJob

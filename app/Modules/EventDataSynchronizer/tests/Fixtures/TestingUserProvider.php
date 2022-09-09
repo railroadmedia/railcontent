@@ -28,7 +28,8 @@ class TestingUserProvider implements UserProviderInterface
         int $userId,
         ?Carbon $membershipExpirationDate,
         bool $isLifetimeMember,
-        string $accessLevel
+        string $accessLevel,
+        bool $isPackOwner
     ): bool {
         return $this->databaseManager->connection(config('event-data-synchronizer.users_database_connection_name'))
                 ->table(config('event-data-synchronizer.users_table_name'))

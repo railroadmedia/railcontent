@@ -2,7 +2,12 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Events\MobileAppLogin;
+use Modules\UserManagementSystem\Models\User;
+use Modules\UserManagementSystem\Events\User\UserCreated;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
@@ -27,7 +32,6 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncNewUserByEmail;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserDevice;
-use Railroad\Railchat\Exceptions\NotFoundException;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\ContentFollow;
@@ -42,19 +46,14 @@ use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
 use Railroad\Referral\Events\EmailInvite;
-use Railroad\Usora\Entities\User;
-use Railroad\Usora\Events\MobileAppLogin;
-use Railroad\Usora\Events\User\UserCreated;
-use Railroad\Usora\Events\User\UserUpdated;
-use Railroad\Usora\Repositories\UserRepository;
 use Throwable;
 
 class CustomerIoSyncEventListener
 {
     /**
-     * @var UserRepository
+     * @var UserService
      */
-    private $userRepository;
+    private $userService;
 
     /**
      * @var CommentRepository
@@ -97,21 +96,21 @@ class CustomerIoSyncEventListener
     /**
      * CustomerIoSyncEventListener constructor.
      *
-     * @param  UserRepository  $userRepository
-     * @param  CommentRepository  $commentRepository
-     * @param  CategoryRepository  $categoryRepository
-     * @param  ThreadRepository  $threadRepository
-     * @param  PostRepository  $postRepository
+     * @param UserService $userService
+     * @param CommentRepository $commentRepository
+     * @param CategoryRepository $categoryRepository
+     * @param ThreadRepository $threadRepository
+     * @param PostRepository $postRepository
      */
     public function __construct(
-        UserRepository $userRepository,
+        UserService $userService,
         CommentRepository $commentRepository,
         CategoryRepository $categoryRepository,
         ThreadRepository $threadRepository,
         PostRepository $postRepository,
         ContentService $contentService
     ) {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
 
         $this->queueConnectionName = config('event-data-synchronizer.customer_io_queue_connection_name', 'database');
         $this->queueName = config('event-data-synchronizer.customer_io_queue_name', 'customer_io');
@@ -123,7 +122,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UserCreated  $userCreated
+     * @param UserCreated $userCreated
      */
     public function handleUserCreated(UserCreated $userCreated)
     {
@@ -132,14 +131,11 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $user = $this->userRepository->find(
-                $userCreated->getUser()
-                    ->getId()
-            );
+            $user = $this->userService->getByIdOrNull($userCreated->getUser()->id);
 
             if (!empty($user) && !in_array(
                     $userCreated->getUser()
-                        ->getId(),
+                        ->id,
                     self::$alreadyQueuedUserIds
                 )) {
                 dispatch(
@@ -153,7 +149,7 @@ class CustomerIoSyncEventListener
 
                 self::$alreadyQueuedUserIds[] =
                     $userCreated->getUser()
-                        ->getId();
+                        ->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -161,7 +157,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UserUpdated  $userUpdated
+     * @param UserUpdated $userUpdated
      */
     public function handleUserUpdated(UserUpdated $userUpdated)
     {
@@ -170,14 +166,10 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $user = $this->userRepository->find(
-                $userUpdated->getNewUser()
-                    ->getId()
-            );
+            $user = $this->userService->getByIdOrNull($userUpdated->getNewUser()->id);
 
             if (!empty($user) && !in_array(
-                    $userUpdated->getNewUser()
-                        ->getId(),
+                    $userUpdated->getNewUser()->id,
                     self::$alreadyQueuedUserIds
                 )) {
                 dispatch(
@@ -189,7 +181,7 @@ class CustomerIoSyncEventListener
                         )
                 );
 
-                self::$alreadyQueuedUserIds[] = $user->getId();
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -197,7 +189,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  PaymentMethodCreated  $paymentMethodCreated
+     * @param PaymentMethodCreated $paymentMethodCreated
      */
     public function handleUserPaymentMethodCreated(PaymentMethodCreated $paymentMethodCreated)
     {
@@ -221,7 +213,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  PaymentMethodUpdated  $paymentMethodUpdated
+     * @param PaymentMethodUpdated $paymentMethodUpdated
      */
     public function handleUserPaymentMethodUpdated(PaymentMethodUpdated $paymentMethodUpdated)
     {
@@ -238,10 +230,8 @@ class CustomerIoSyncEventListener
                         ->getId(),
                     self::$alreadyQueuedUserIds
                 )) {
-                $user = $this->userRepository->find(
-                    $paymentMethodUpdated->getUser()
-                        ->getId()
-                );
+                $userId = $paymentMethodUpdated->getUser()->getId();
+                $user = $this->userService->getByIdOrNull($userId);
 
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
@@ -252,7 +242,7 @@ class CustomerIoSyncEventListener
                         )
                 );
 
-                self::$alreadyQueuedUserIds[] = $user->getId();
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -260,7 +250,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UserProductCreated  $userProductCreated
+     * @param UserProductCreated $userProductCreated
      */
     public function handleUserProductCreated(UserProductCreated $userProductCreated)
     {
@@ -269,13 +259,12 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $user = $this->userRepository->find(
-                $userProductCreated->getUserProduct()
-                    ->getUser()
-                    ->getId()
-            );
+            $userId = $userProductCreated->getUserProduct()
+                ->getUser()
+                ->getId();
+            $user = $this->userService->getByIdOrNull($userId);
 
-            if (!empty($user) && !in_array($user->getId(), self::$alreadyQueuedUserIds)) {
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
                         ->onQueue($this->queueName)
@@ -285,7 +274,7 @@ class CustomerIoSyncEventListener
                         )
                 );
 
-                self::$alreadyQueuedUserIds[] = $user->getId();
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -293,7 +282,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UserProductUpdated  $userProductUpdated
+     * @param UserProductUpdated $userProductUpdated
      */
     public function handleUserProductUpdated(UserProductUpdated $userProductUpdated)
     {
@@ -302,13 +291,12 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $user = $this->userRepository->find(
-                $userProductUpdated->getNewUserProduct()
-                    ->getUser()
-                    ->getId()
-            );
+            $userId = $userProductUpdated->getNewUserProduct()
+                ->getUser()
+                ->getId();
+            $user = $this->userService->getByIdOrNull($userId);
 
-            if (!empty($user) && !in_array($user->getId(), self::$alreadyQueuedUserIds)) {
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
                         ->onQueue($this->queueName)
@@ -318,7 +306,7 @@ class CustomerIoSyncEventListener
                         )
                 );
 
-                self::$alreadyQueuedUserIds[] = $user->getId();
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -326,7 +314,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UserProductDeleted  $userProductDeleted
+     * @param UserProductDeleted $userProductDeleted
      */
     public function handleUserProductDeleted(UserProductDeleted $userProductDeleted)
     {
@@ -335,13 +323,12 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $user = $this->userRepository->find(
-                $userProductDeleted->getUserProduct()
-                    ->getUser()
-                    ->getId()
-            );
+            $userId = $userProductDeleted->getUserProduct()
+                ->getUser()
+                ->getId();
+            $user = $this->userService->getByIdOrNull($userId);
 
-            if (!empty($user) && !in_array($user->getId(), self::$alreadyQueuedUserIds)) {
+            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
                         ->onQueue($this->queueName)
@@ -351,7 +338,7 @@ class CustomerIoSyncEventListener
                         )
                 );
 
-                self::$alreadyQueuedUserIds[] = $user->getId();
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -359,7 +346,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  SubscriptionCreated  $subscriptionCreated
+     * @param SubscriptionCreated $subscriptionCreated
      */
     public function handleSubscriptionCreated(SubscriptionCreated $subscriptionCreated)
     {
@@ -374,13 +361,12 @@ class CustomerIoSyncEventListener
                 $subscriptionCreated->getSubscription()
                     ->getUser() instanceof User
             )) {
-                $user = $this->userRepository->find(
-                    $subscriptionCreated->getSubscription()
-                        ->getUser()
-                        ->getId()
-                );
+                $userId = $subscriptionCreated->getSubscription()
+                    ->getUser()
+                    ->getId();
+                $user = $this->userService->getByIdOrNull($userId);
 
-                if (!empty($user) && !in_array($user->getId(), self::$alreadyQueuedUserIds)) {
+                if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                     dispatch(
                         (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
                             ->onQueue($this->queueName)
@@ -390,7 +376,7 @@ class CustomerIoSyncEventListener
                             )
                     );
 
-                    self::$alreadyQueuedUserIds[] = $user->getId();
+                    self::$alreadyQueuedUserIds[] = $user->id;
                 }
             }
         } catch (Throwable $throwable) {
@@ -399,7 +385,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  SubscriptionUpdated  $subscriptionUpdated
+     * @param SubscriptionUpdated $subscriptionUpdated
      */
     public function handleSubscriptionUpdated(SubscriptionUpdated $subscriptionUpdated)
     {
@@ -413,14 +399,13 @@ class CustomerIoSyncEventListener
             $user = $newSubscription->getUser();
 
             if ($user instanceof EcommerceUser) {
-                $user = $this->userRepository->find(
-                    $newSubscription->getUser()
-                        ->getId()
-                );
+                $userId = $newSubscription->getUser()
+                    ->getId();
+                $user = $this->userService->getByIdOrNull($userId);
             }
 
             if ($user instanceof User) {
-                if (!in_array($user->getId(), self::$alreadyQueuedUserIds)) {
+                if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
                     dispatch(
                         (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
                             ->onQueue($this->queueName)
@@ -430,7 +415,7 @@ class CustomerIoSyncEventListener
                             )
                     );
 
-                    self::$alreadyQueuedUserIds[] = $user->getId();
+                    self::$alreadyQueuedUserIds[] = $user->id;
                 }
             }
         } catch (Throwable $throwable) {
@@ -439,7 +424,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  AppSignupStartedEvent  $appSignupStarted
+     * @param AppSignupStartedEvent $appSignupStarted
      */
     public function handleAppSignupStarted(AppSignupStartedEvent $appSignupStarted)
     {
@@ -455,7 +440,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  AppSignupFinishedEvent  $appSignupFinished
+     * @param AppSignupFinishedEvent $appSignupFinished
      */
     public function handleAppSignupFinished(AppSignupFinishedEvent $appSignupFinished)
     {
@@ -471,7 +456,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  SubscriptionRenewed  $subscriptionRenewed
+     * @param SubscriptionRenewed $subscriptionRenewed
      */
     public function handleSubscriptionRenewed(SubscriptionRenewed $subscriptionRenewed)
     {
@@ -487,7 +472,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  SubscriptionRenewFailed  $subscriptionRenewFailed
+     * @param SubscriptionRenewFailed $subscriptionRenewFailed
      */
     public function handleSubscriptionRenewalAttemptFailed(SubscriptionRenewFailed $subscriptionRenewFailed)
     {
@@ -508,7 +493,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  CommentLiked  $commentLiked
+     * @param CommentLiked $commentLiked
      */
     public function handleCommentLiked(CommentLiked $commentLiked)
     {
@@ -519,12 +504,12 @@ class CustomerIoSyncEventListener
         try {
             $comment = $this->commentRepository->getById($commentLiked->commentId);
             $content = $this->contentService->getById($comment['content_id']);
-            $user = $this->userRepository->find($commentLiked->userId);
+            $user = $this->userService->getByIdOrNull($commentLiked->userId);
 
             if (!empty($comment) && !empty($content) && !empty($user)) {
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->getId(), $content['brand'], $content['brand'].'_action_lesson_comment-like', [
+                        $user->id, $content['brand'], $content['brand'] . '_action_lesson_comment-like', [
                         'content_id' => $content['id'],
                         'content_name' => $content->fetch('fields.title'),
                         'content_type' => $content['type'],
@@ -543,7 +528,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  CommentCreated  $commentCreated
+     * @param CommentCreated $commentCreated
      */
     public function handleCommentCreated(CommentCreated $commentCreated)
     {
@@ -554,12 +539,12 @@ class CustomerIoSyncEventListener
         try {
             $comment = $this->commentRepository->getById($commentCreated->commentId);
             $content = $this->contentService->getById($comment['content_id']);
-            $user = $this->userRepository->find($commentCreated->userId);
+            $user = $this->userService->getByIdOrNull($commentCreated->userId);
 
             if (!empty($comment) && !empty($content) && !empty($user)) {
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->getId(), $content['brand'], $content['brand'].'_action_lesson_comment', [
+                        $user->id, $content['brand'], $content['brand'] . '_action_lesson_comment', [
                         'content_id' => $content['id'],
                         'content_name' => $content->fetch('fields.title'),
                         'content_type' => $content['type'],
@@ -578,7 +563,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  ThreadCreated  $threadCreated
+     * @param ThreadCreated $threadCreated
      */
     public function handleForumsThreadCreated(ThreadCreated $threadCreated)
     {
@@ -589,20 +574,20 @@ class CustomerIoSyncEventListener
         try {
             $thread =
                 $this->threadRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableThreads.'.id', $threadCreated->getThreadId())
+                    ->where(ConfigService::$tableThreads . '.id', $threadCreated->getThreadId())
                     ->first();
             $category =
                 $this->categoryRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableCategories.'.id', $thread['category_id'])
+                    ->where(ConfigService::$tableCategories . '.id', $thread['category_id'])
                     ->first();
-            $user = $this->userRepository->find($threadCreated->getUserId());
+            $user = $this->userService->getByIdOrNull($threadCreated->getUserId());
 
             if (!empty($thread) && !empty($user)) {
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->getId(),
+                        $user->id,
                         $category['brand'],
-                        $category['brand'].'_action_forum_create-thread',
+                        $category['brand'] . '_action_forum_create-thread',
                         [],
                         null,
                         Carbon::now()->timestamp
@@ -620,7 +605,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  PostCreated  $postCreated
+     * @param PostCreated $postCreated
      */
     public function handleForumsPostCreated(PostCreated $postCreated)
     {
@@ -631,24 +616,24 @@ class CustomerIoSyncEventListener
         try {
             $post =
                 $this->postRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tablePosts.'.id', $postCreated->getPostId())
+                    ->where(ConfigService::$tablePosts . '.id', $postCreated->getPostId())
                     ->first();
             $thread =
                 $this->threadRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableThreads.'.id', $post['thread_id'])
+                    ->where(ConfigService::$tableThreads . '.id', $post['thread_id'])
                     ->first();
             $category =
                 $this->categoryRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableCategories.'.id', $thread['category_id'])
+                    ->where(ConfigService::$tableCategories . '.id', $thread['category_id'])
                     ->first();
-            $user = $this->userRepository->find($post['author_id']);
+            $user = $this->userService->getByIdOrNull($post['author_id']);
 
             if (!empty($thread) && !empty($user)) {
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->getId(),
+                        $user->id,
                         $category['brand'],
-                        $category['brand'].'_action_forum_comment',
+                        $category['brand'] . '_action_forum_comment',
                         [],
                         null,
                         Carbon::now()->timestamp
@@ -666,7 +651,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UserContentProgressSaved  $userContentProgressSaved
+     * @param UserContentProgressSaved $userContentProgressSaved
      */
     public function handleUserContentProgressSaved(UserContentProgressSaved $userContentProgressSaved)
     {
@@ -676,7 +661,7 @@ class CustomerIoSyncEventListener
 
         try {
             $content = $this->contentService->getById($userContentProgressSaved->contentId);
-            $user = $this->userRepository->find($userContentProgressSaved->userId);
+            $user = $this->userService->getByIdOrNull($userContentProgressSaved->userId);
 
             if (!empty($content) && !empty($user)) {
                 // map the content type to the event string
@@ -700,12 +685,12 @@ class CustomerIoSyncEventListener
 
                     dispatch(
                         (new CustomerIoCreateEventByUserId(
-                            $user->getId(),
+                            $user->id,
                             $content['brand'],
-                            $content['brand'].
-                            '_action_'.
-                            $contentTypeToEventStringMap[$content['type']].
-                            '_'.
+                            $content['brand'] .
+                            '_action_' .
+                            $contentTypeToEventStringMap[$content['type']] .
+                            '_' .
                             $userContentProgressSaved->progressStatus,
                             $data,
                             null,
@@ -729,9 +714,9 @@ class CustomerIoSyncEventListener
 
                     dispatch(
                         (new CustomerIoCreateEventByUserId(
-                            $user->getId(),
+                            $user->id,
                             $content['brand'],
-                            $content['brand'].'_action_lesson'.'_'.$userContentProgressSaved->progressStatus,
+                            $content['brand'] . '_action_lesson' . '_' . $userContentProgressSaved->progressStatus,
                             $data,
                             null,
                             Carbon::now()->timestamp
@@ -754,7 +739,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  LiveStreamEventAttended  $liveStreamEventAttended
+     * @param LiveStreamEventAttended $liveStreamEventAttended
      */
     public function handleLiveLessonAttended(LiveStreamEventAttended $liveStreamEventAttended)
     {
@@ -764,7 +749,7 @@ class CustomerIoSyncEventListener
 
         try {
             $content = $this->contentService->getById($liveStreamEventAttended->getContentId());
-            $user = $this->userRepository->find($liveStreamEventAttended->getUserId());
+            $user = $this->userService->getByIdOrNull($liveStreamEventAttended->getUserId());
 
             if (!empty($content) && !empty($user)) {
                 $data = [
@@ -775,9 +760,9 @@ class CustomerIoSyncEventListener
 
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->getId(),
+                        $user->id,
                         $content['brand'],
-                        $content['brand'].'_action_live-stream-event-attended',
+                        $content['brand'] . '_action_live-stream-event-attended',
                         $data,
                         null,
                         Carbon::now()->timestamp
@@ -795,7 +780,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  OrderEvent  $orderEvent
+     * @param OrderEvent $orderEvent
      */
     public function handleOrderPlaced(OrderEvent $orderEvent)
     {
@@ -811,7 +796,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  PaymentEvent  $paymentEvent
+     * @param PaymentEvent $paymentEvent
      */
     public function handlePaymentPaid(PaymentEvent $paymentEvent)
     {
@@ -831,7 +816,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  FirstActivityPerDay  $activityEvent
+     * @param FirstActivityPerDay $activityEvent
      */
     public function handleFirstActivityPerDay(FirstActivityPerDay $activityEvent)
     {
@@ -844,7 +829,7 @@ class CustomerIoSyncEventListener
                 (new CustomerIoCreateEventByUserId(
                     $activityEvent->getUserId(),
                     $activityEvent->getBrand(),
-                    $activityEvent->getBrand().'_members_area_activity',
+                    $activityEvent->getBrand() . '_members_area_activity',
                     [],
                     null,
                     Carbon::now()->timestamp
@@ -877,7 +862,7 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $user = $this->userRepository->find($userId);
+            $user = $this->userService->getByIdOrNull($userId);
 
             if (!empty($user) && !in_array($userId, self::$alreadyQueuedUserIds)) {
                 dispatch(
@@ -889,7 +874,7 @@ class CustomerIoSyncEventListener
                         )
                 );
 
-                self::$alreadyQueuedUserIds[] = $user->getId();
+                self::$alreadyQueuedUserIds[] = $user->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -923,7 +908,7 @@ class CustomerIoSyncEventListener
                         $order->getUser()
                             ->getId(),
                         $order->getBrand(),
-                        $order->getBrand().'_user_order',
+                        $order->getBrand() . '_user_order',
                         $data,
                         null,
                         $order->getCreatedAt()->timestamp
@@ -951,8 +936,8 @@ class CustomerIoSyncEventListener
                                 $order->getUser()
                                     ->getId(),
                                 $order->getBrand(),
-                                $order->getBrand().
-                                '_pack_'.
+                                $order->getBrand() .
+                                '_pack_' .
                                 $skuToEventNameMap[$orderItem->getProduct()
                                     ->getSku()],
                                 [
@@ -976,7 +961,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  PaymentEvent  $paymentEvent
+     * @param PaymentEvent $paymentEvent
      */
     public function syncPayment($payment, $userId)
     {
@@ -1024,7 +1009,7 @@ class CustomerIoSyncEventListener
                     (new CustomerIoCreateEventByUserId(
                         $userId,
                         $payment->getGatewayName(),
-                        $payment->getGatewayName().'_user_payment',
+                        $payment->getGatewayName() . '_user_payment',
                         $data,
                         null,
                         $payment->getCreatedAt()->timestamp
@@ -1051,9 +1036,9 @@ class CustomerIoSyncEventListener
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
                         $subscription->getUser()
-                            ->getId(), $subscription->getBrand(), $subscription->getBrand().'_membership_renewed', [
-                            'membership_rate' => $subscription->getTotalPrice(),
-                        ], null, $subscription->getCreatedAt()->timestamp
+                            ->getId(), $subscription->getBrand(), $subscription->getBrand() . '_membership_renewed', [
+                        'membership_rate' => $subscription->getTotalPrice(),
+                    ], null, $subscription->getCreatedAt()->timestamp
                     ))->onConnection($this->queueConnectionName)
                         ->onQueue($this->queueName)
                         ->delay(
@@ -1068,7 +1053,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  UTMLinks  $UTMLinks
+     * @param UTMLinks $UTMLinks
      */
     public function handleUTMLinks(UTMLinks $UTMLinks)
     {
@@ -1095,7 +1080,7 @@ class CustomerIoSyncEventListener
                 (new CustomerIoCreateEventByUserId(
                     $UTMLinks->getUserId(),
                     $UTMLinks->getBrand(),
-                    $UTMLinks->getBrand().'_prospect_ultimate-toolbox',
+                    $UTMLinks->getBrand() . '_prospect_ultimate-toolbox',
                     $data,
                     null,
                     Carbon::now()->timestamp
@@ -1112,7 +1097,7 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param  EmailInvite  $emailInvite
+     * @param EmailInvite $emailInvite
      */
     public function handleReferralInvite(EmailInvite $emailInvite)
     {
@@ -1132,7 +1117,11 @@ class CustomerIoSyncEventListener
                 (new CustomerIoSyncCustomerByEmail(
                     $emailInvite->getReceiversEmail(),
                     $emailInvite->getBrand(),  //todo: is this param correct? or should we use another one?
-                    [config('event-data-synchronizer.customer_io_saasquatch_email_invite_link_attribute_name') => $emailInvite->getReferralLink()]
+                    [
+                        config(
+                            'event-data-synchronizer.customer_io_saasquatch_email_invite_link_attribute_name'
+                        ) => $emailInvite->getReferralLink()
+                    ]
                 ))->onConnection($this->queueConnectionName)
                     ->onQueue($this->queueName)
                     ->delay(
@@ -1159,7 +1148,7 @@ class CustomerIoSyncEventListener
         }
     }
 
-   /**
+    /**
      * @param MobileAppLogin $mobileAppLogin
      */
     public function handleMobileAppLogin(MobileAppLogin $mobileAppLogin)
@@ -1174,8 +1163,7 @@ class CustomerIoSyncEventListener
 
         try {
             $this->syncDevice(
-                $mobileAppLogin->getUser()
-                    ->getId(),
+                $mobileAppLogin->getUser()->id,
                 $mobileAppLogin->getFirebaseToken(),
                 $mobileAppLogin->getPlatform()
             );
@@ -1196,9 +1184,9 @@ class CustomerIoSyncEventListener
             dispatch(
                 (new CustomerIoSyncUserDevice(
                     $userId, $brand ?? config('event-data-synchronizer.customer_io_brand_activity_event'), [
-                        'id' => $token,
-                        'platform' => $platform,
-                    ], $timestamp ?? Carbon::now()->timestamp
+                    'id' => $token,
+                    'platform' => $platform,
+                ], $timestamp ?? Carbon::now()->timestamp
                 ))->onConnection($this->queueConnectionName)
                     ->onQueue($this->queueName)
                     ->delay(
