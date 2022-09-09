@@ -7,7 +7,6 @@
       tw-grid-flow-row tw-gap-0
     "
   >
-  <NotificationToasts :icon="toast.icon" :text="toast.text" :isError="toast.showErrorMessage" :brandName="brand"/>
     <div
       v-for="instructor in instructorList"
       :key="
@@ -128,13 +127,9 @@
 
 <script>
 import ContentService from "../../assets/js/services/content";
-import NotificationToasts from "../NotificationToasts/NotificationToasts.vue"
 
 export default {
   name: "CoachesInLesson",
-  components: {
-    'NotificationToasts': NotificationToasts,
-  },
   props: {
     brand: {
       type: String,
@@ -150,11 +145,6 @@ export default {
   data() {
     return {
       instructorList: [],
-      toast: {
-        icon: '',
-        text: '',
-        showErrorMessage: false,
-      },
     };
   },
   mounted() {
@@ -163,12 +153,14 @@ export default {
   methods: {
     showNotificationToast({ icon, text, error }) {
       if (error) {
-        this.toast.showErrorMessage = true;
-        this.toast.icon = '';
-        this.toast.text = '';
+        window.shownotification({
+          isError: true
+        })
       } else {
-        this.toast.icon = icon;
-        this.toast.text = text;
+        window.shownotification({
+          icon, 
+          text
+        });
       }
     },
     getInstructorIndex(id) {
