@@ -634,11 +634,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return $this->total_xp ?? 0;
     }
-        
+
     public function isActiveStudent(): bool
     {
         return !$this->isAdmin()
             && !empty($this->membership_expiration_date)
-            && $this->membership_expiration_date >= Carbon::now()->addDays(-30);
+            && $this->membership_expiration_date >= Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'));
     }
 }

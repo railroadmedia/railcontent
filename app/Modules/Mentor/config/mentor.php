@@ -7,4 +7,5 @@ return [
 
     //Default mentor mailbox is the dev sandbox
     'helpscout_mailboxes' => explode(',', env('HELPSCOUT_MENTOR_MAILBOXES_TO_WATCH', '253239')),
+    'active_after_membership_expired_days' => 30
 ];

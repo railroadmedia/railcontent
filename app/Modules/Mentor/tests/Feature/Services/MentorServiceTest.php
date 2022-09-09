@@ -87,8 +87,8 @@ class MentorServiceTest extends TestCase
         //create 3 users, 2 active, 1 not
         $this->mentorService->assignMentorByBrand(User::factory()->create()->id, $brand);
         $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(100)->create()->id, $brand);
-        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(200)->create()->id, $brand);
-        $user = User::factory()->hasActiveMembership(200)->create();
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(140)->create()->id, $brand);
+        $user = User::factory()->hasActiveMembership(160)->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
         Event::assertDispatched(StudentMentorsUpdated::class, 4);
 
@@ -108,17 +108,22 @@ class MentorServiceTest extends TestCase
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
         $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(100)->create()->id, $brand);
-        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(200)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(119)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(120)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(140)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(150)->create()->id, $brand);
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership(160)->create()->id, $brand);
 
-        $this->assertMentorCount($mentor, 2, 2);
+        $this->assertMentorCount($mentor, 6, 6);
 
         Carbon::setTestNow(Carbon::now()->addDays(150));
         $this->mentorService->recalculateMentorTotals($mentor);
 
-        $this->assertMentorCount($mentor, 1, 2);
+        $this->assertMentorCount($mentor, 4, 6);
     }
 
-    public function test_update_mentor_student(){
+    public function test_update_mentor_student()
+    {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
         $user = User::factory()->hasActiveMembership(100)->create();
@@ -132,5 +137,18 @@ class MentorServiceTest extends TestCase
 
         $this->mentorService->updateStudentMentor($user->id, null);
         $this->assertHasMentor($user, null);
+    }
+
+    public function test_update_mentor()
+    {
+        $brand = 'drumeo';
+        $mentor = $this->createMentor($brand);
+
+        $this->mentorService->updateMentor($mentor->user_id, 'test', 4);
+        $this->assertDatabaseHas('mentors', [
+            'user_id' => $mentor->user_id,
+            'supported_brands' => 'test',
+            'active_student_max_count' => 4,
+        ]);
     }
 }
