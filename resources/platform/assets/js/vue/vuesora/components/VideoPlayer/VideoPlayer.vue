@@ -812,8 +812,6 @@ onMounted(() => {
         });
     }
 
-    console.log(props.useIntersectionObserver, intersection.value, typeof IntersectionObserver !== 'undefined', videoWrap.value)
-
     if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
         enableIntersectionObserver(videoWrap.value);
     }

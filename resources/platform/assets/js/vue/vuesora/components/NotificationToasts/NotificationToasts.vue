@@ -14,18 +14,18 @@
           tw-rounded-md
           tw-drop-shadow-md
         "
-        :class="isError ? 'tw-bg-red' : 'tw-text-black dark:tw-text-white tw-bg-white dark:tw-bg-[#081825]'"
+        :class="isError ? 'tw-bg-red' : 'dark:tw-text-black tw-text-white dark:tw-bg-white tw-bg-[#081825]'"
       >
         <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
           <div>
-            <i class="far tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
+            <i class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
             {{ notificationText }}
           </div>
           <button
-            class="tw-bg-[#E4E4E7] dark:tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-border-none tw-rounded-full"
+            class="dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-border-none tw-rounded-full"
             v-on:click="hide();"
           >
-            <i class="far fa-times tw-text-black dark:tw-text-white"></i>
+            <i class="far fa-times dark:tw-text-black tw-text-white"></i>
           </button>
         </div>
       </div>
@@ -34,19 +34,6 @@
 </template>
 
 <script>
-let timeout = null;
-const hideToast = (context) => {
-  context.showNotification = false;
-  context.notificationIcon = '';
-  context.notificationText = '';
-  clearTimeout(timeout);
-};
-const autoHide = (context) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      hideToast(context);
-    }, 3000);
-};
 export default {
   name: "NotificationToasts",
   props: {
@@ -70,33 +57,40 @@ export default {
       notificationText: this.text,
     };
   },
-  methods: {
-    hide: function() {
-      hideToast(this);
-    },
-  },
   watch: {
     icon(val) {
-      this.showNotification = true;
-      this.notificationIcon = val;
+      if (val === 'error') {
+        this.notificationIcon = 'fa-exclamation-circle tw-text-[#ef4444]';
+      } else if (val === 'warning') {
+        this.notificationIcon = 'fa-exclamation-circle tw-text-[#facb15]';
+      } else if (val === 'check') {
+        this.notificationIcon = 'fa-check-circle tw-text-[#22c55d]';
+      } else if (val === 'xp') {
+        this.notificationIcon = 'fa-child dark:tw-text-black tw-text-white';
+      }  else {
+        this.notificationIcon = val;
+      }
+      if (val !== '') {
+        this.showNotification = true;
+      } else {
+        this.showNotification = false;
+      }
     },
     text(val) {
-      this.showNotification = true;
+      if (val !== '') {
+        this.showNotification = true;
+      } else {
+        this.showNotification = false;
+      }
       this.notificationText = val;
     },
     isError(val) {
-      if (val) {
+      if (val === true) {
         this.showNotification = true;
         this.notificationText = 'There has been an error, please try again later';
         this.notificationIcon = 'fa-exclamation-circle';
       }
     },
-  },
-  mounted() {
-    autoHide(this);
-  },
-  updated() {
-    autoHide(this);
   },
 };
 </script>
