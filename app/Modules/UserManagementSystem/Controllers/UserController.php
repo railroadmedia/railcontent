@@ -237,23 +237,37 @@ class UserController extends Controller
      */
     public function isDisplayNameUnique(Request $request)
     {
-        try {
-            $request->validate(['display_name' => 'required']);
-        } catch (ValidationException $e) {
-            $messagesByField = $e->validator->getMessageBag()->getMessages();
-            $messagesForFieldFailingField = reset($messagesByField);
+        $validator = validator($request->all(), [
+            'display_name' => 'required',
+        ]);
 
-            foreach ($messagesForFieldFailingField as $messagesForField) {
-                $errorMessageToUser = $messagesForField;
-                break;
-            }
-            $default = 'Please try again, and contact support if the problem persists.';
-            $message = ['code' => 'Error: ' . ($errorMessageToUser ?? $default)];
-
-            return response()->json(['errors' => $message], 422);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->getMessageBag()], 422);
         }
 
         $user = User::where('display_name', $request->display_name)->where('id' , '!=', user()->id)->first();
+
+        if ($user) {
+            return response()->json(['unique' => false]);
+        }
+
+        return response()->json(['unique' => true]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function isEmailUnique(Request $request)
+    {
+        $validator = validator($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->getMessageBag()], 422);
+        }
+        $user = User::where('email', $request->email)->where('id' , '!=', user()->id)->first();
 
         if ($user) {
             return response()->json(['unique' => false]);
