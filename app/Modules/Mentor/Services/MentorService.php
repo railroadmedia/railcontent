@@ -93,7 +93,9 @@ class MentorService
     public function chooseMentor(string $brand): ?Mentor
     {
         $mentors = $this->getMentorsByBrand($brand);
-        $test= $mentors->map(function($t){ return $t->active_student_count;});
+        $test = $mentors->map(function ($t) {
+            return $t->active_student_count;
+        });
         if ($mentors->count() == 0) {
             Log::warning("Unable to find mentor for brand '$brand'");
             return null;
@@ -122,10 +124,10 @@ class MentorService
      */
     private function getMentorsByBrand(string $brand)
     {
-        if(!$this->mentors){
+        if (!$this->mentors) {
             $this->mentors = Mentor::all();
         }
-        $mentors = $this->mentors->where(fn(Mentor $t)=> Str::contains($t->supported_brands, $brand));
+        $mentors = $this->mentors->where(fn(Mentor $t) => Str::contains($t->supported_brands, $brand));
         return $mentors;
     }
 
@@ -216,5 +218,4 @@ class MentorService
             $newMentor->save();
         });
     }
-
 }

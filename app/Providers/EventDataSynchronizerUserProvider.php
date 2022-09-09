@@ -55,4 +55,9 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
 
         return false;
     }
+
+    public function savePackOwnerData(int $userId, bool $isPackOwner): bool
+    {
+        // TODO: Implement savePackOwnerData() method.
+    }
 }

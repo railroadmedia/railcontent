@@ -17,8 +17,4 @@ class MentorStudent extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function mentor()
-    {
-        return $this->belongsTo(Mentor::class, 'mentor_user_id');
-    }
 }

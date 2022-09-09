@@ -3,6 +3,7 @@
 namespace Modules\Mentor\Controllers;
 
 use App\Modules\Mentor\Models\Mentor;
+use App\Modules\Mentor\Services\HelpScoutWebHookService;
 use App\Modules\Mentor\Services\MentorService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -10,10 +11,12 @@ use Illuminate\Routing\Controller;
 class MentorController extends Controller
 {
     private MentorService $mentorService;
+    private HelpScoutWebHookService $service;
 
-    public function __construct(MentorService $mentorService)
+    public function __construct(MentorService $mentorService, HelpScoutWebHookService $service)
     {
         $this->mentorService = $mentorService;
+        $this->service = $service;
     }
 
     public function getMentorIdByStudent(Request $request, $userId)
@@ -72,5 +75,19 @@ class MentorController extends Controller
         return $mentorStudents->map(fn($mentorStudent) => $mentorStudent->user->email);
     }
 
+    public function test()
+    {
+
+        //$data = $this->service->unregisterWebHook(43428);
+
+        //$data = $this->service->getWebHooks()->extract();
+
+//        $data = $this->service->unregisterWebHook(43422);
+//        $data = $this->service->unregisterWebHook(43423);
+//        $data = $this->service->unregisterWebHook(43424);
+//        $data = $this->service->unregisterWebHook(43425);
+
+        return $data;
+    }
 
 }
