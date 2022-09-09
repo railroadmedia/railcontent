@@ -110,16 +110,19 @@
         @endcomponent
 
         {{-- Live Banner --}}
-        <coach-event
-            brand="{{ $brand }}"
-            class="tw-mb-6"
-            :preloaded-content='{{ $coachEvent }}'
-            current-date-string="{{ $currentDate }}"
-            subscription-calendar-id="{{ $calendarId }}"
-            youtube-event-id="{{ $youtubeId }}"
-            :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-        ></coach-event>
+
+        @if($coachEvent)
+            <coach-event
+                brand="{{ $brand }}"
+                class="tw-mb-6"
+                :preloaded-content='{{ $coachEvent }}'
+                current-date-string="{{ $currentDate }}"
+                subscription-calendar-id="{{ $calendarId }}"
+                youtube-event-id="{{ $youtubeId }}"
+                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            ></coach-event>
+        @endif
 
         {{-- Upcoming Events --}}
         @if($hasUpcomingEvents)
