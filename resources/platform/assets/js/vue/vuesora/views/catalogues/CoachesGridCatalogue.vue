@@ -2,7 +2,6 @@
   <div
     class="tw-grid tw-gap-3 tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 2xl:tw-grid-cols-7 3xl:tw-grid-cols-8 tw-mb-4"
   >
-    <NotificationToasts :icon="toast.icon" :text="toast.text" :isError="toast.showErrorMessage" :brandName="brand"/>
     <!-- Loop through Cards -->
     <coach-card
       v-for="(item, i) in content"
@@ -21,13 +20,11 @@
 <script>
 import CoachCard from "./_CoachCard.vue";
 import UserCatalogueEvents from "../../mixins/UserCatalogueEvents";
-import NotificationToasts from '../../components/NotificationToasts/NotificationToasts.vue';
 
 export default {
   name: "CoachesGridCatalogue",
   components: {
     "coach-card": CoachCard,
-    "NotificationToasts": NotificationToasts
   },
   mixins: [UserCatalogueEvents],
   data() {
@@ -42,12 +39,14 @@ export default {
   methods: {
     onShowNotificationMessage({ icon, text, error }) {
       if (error) {
-        this.toast.showErrorMessage = true;
-        this.toast.icon = '';
-        this.toast.text = '';
+        window.shownotification({
+          isError: true
+        })
       } else {
-        this.toast.icon = icon;
-        this.toast.text = text;
+        window.shownotification({
+          icon, 
+          text
+        });
       }
     },
   },
