@@ -26,6 +26,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "railroad/ecommerce": "^5.0",
         "railroad/event-data-synchronizer": "8.0.*",
+        "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
         "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
         "railroad/railchat": "2.0.*",
