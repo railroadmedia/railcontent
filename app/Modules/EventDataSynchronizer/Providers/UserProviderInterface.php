@@ -27,4 +27,11 @@ interface UserProviderInterface
         string $accessLevel,
         bool $isPackOwner
     ): bool;
+
+    /**
+     * @param int $userId
+     * @param int $totalXp
+     * @return bool
+     */
+    public function saveExperiencePoints(int $userId, int $totalXp): bool;
 }
