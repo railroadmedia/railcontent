@@ -73,7 +73,7 @@
         <div
             v-if="totalPages > 0"
             ref="carouselContainer"
-            class="flex flex-row carousel overflow mv pb-3"
+            class="flex flex-row carousel overflow mv pa-3"
         >
             <div
                 v-for="(page, i) in pages"

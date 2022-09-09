@@ -71,6 +71,7 @@
                                 <div v-if="currentPage > 1" class="side-button prev flex-center" @click="scrollToPage(currentPage - 1)">
                                     <i class="fas fa-chevron-left"></i>
                                 </div>
+                                
                                 <div v-if="currentPage < $_totalPages" class="side-button next flex-center" @click="scrollToPage(currentPage + 1)">
                                     <i class="fas fa-chevron-right"></i>
                                 </div>

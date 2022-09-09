@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100%+1.75rem)] tw-justify-center tw-items-center">
-        <img src="https://musora-web-platform.s3.amazonaws.com/Rehearsal+Studio_deSaturated.png" 
+        <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://musora-web-platform.s3.amazonaws.com/Rehearsal+Studio_deSaturated.png" 
              alt="Image of Musical instrument on a stage" 
              class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
              onload="this.classList.remove('tw-opacity-0')"
