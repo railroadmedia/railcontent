@@ -8,7 +8,7 @@ use App\Services\CalendarService;
 use App\Services\LiveStreamEventService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Railroad\EventDataSynchronizer\Events\LiveStreamEventAttended;
+use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railchat\Services\RailchatService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
