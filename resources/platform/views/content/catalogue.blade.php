@@ -215,13 +215,13 @@
             </div>
             <add-event-modal
                 modal-id="addToCalendarModal"
-                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"
+                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] ?? null }}"
                 theme-color="{{ $brand }}"
                 toggleSubscribe="toggleSubscribe"
             ></add-event-modal>
         </div>
     @else
-        @if( $catalogueMeta['name'] !== "Play Alongs" || $catalogueMeta['name'] === "Play Alongs" && $brand === "guitareo" ) 
+        @if( $catalogueMeta['name'] !== "Play Alongs" || $catalogueMeta['name'] === "Play Alongs" && $brand === "guitareo" )
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
                 <div class="tw-flex tw-flex-col mt-3">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
@@ -230,7 +230,7 @@
                                 All
                                 @if( !empty($catalogueMeta['shortname']) && $catalogueMeta['shortname'] === 'Podcast')
                                     Episodes {{-- Change Podcast Name}} --}}
-                                @else 
+                                @else
                                     {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}
                                 @endif
                             </h1>
@@ -259,7 +259,7 @@
 
         {{-- Play Alongs Catalogue for Drumeo --}}
         @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
-            
+
             <play-alongs
                 ref="playAlongsVueInstance"
                 content-endpoint="/laravel/public/railcontent/content"

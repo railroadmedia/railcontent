@@ -163,10 +163,11 @@ const app = createApp({
                 progressTracker = new ProgressTracker();
 
                 const { mediaElementVueInstance } = this.$refs;
+                const sessionTokenElement = document.querySelector('#sessionToken');
 
                 if (mediaElementVueInstance) {
                     window.addEventListener('unload', (event) => {
-                        progressTracker.send({
+                      progressTracker.send({
                             mediaId: mediaElementVueInstance.videoId,
                             mediaType: 'video',
                             mediaCategory: 'vimeo',
@@ -174,7 +175,8 @@ const app = createApp({
                                 || mediaElementVueInstance.currentTime,
                             totalDuration: mediaElementVueInstance.videoLength
                                 || mediaElementVueInstance.totalDuration,
-                            sessionToken: sessionTokenElement.value || null
+                            sessionToken: sessionTokenElement.value || null,
+                            brand:mediaElementVueInstance.brand,
                         });
                     });
                 }
@@ -244,14 +246,14 @@ app.component('AppContainer', AppContainer)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
-    
+
     .component('PianoBackingTracks', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "piano-backing-tracks" */
             './vue/vuesora/components/PianoBackingTracks'
         )
     ))
-    
+
     .component('StudentReviewForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "student-review-form-iframe" */

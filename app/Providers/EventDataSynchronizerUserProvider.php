@@ -42,4 +42,17 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
 
         return false;
     }
+
+    public function saveExperiencePoints(int $userId, int $totalXp):bool
+    {
+        $user = User::query()->find($userId);
+        if (!empty($user)) {
+            $user->total_xp = $totalXp;
+            $user->save();
+
+            return true;
+        }
+
+        return false;
+    }
 }
