@@ -43,7 +43,10 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
             $mediaLengthSeconds,
             $userId,
             $typeId,
-            $currentSecond
+            $currentSecond,
+            $secondsPlayed,
+            brand(),
+            $startedOn
         );
     }
 
@@ -52,7 +55,8 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
         return  $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
             $sessionId,
             $secondsPlayed,
-            $currentSecond
+            $currentSecond,
+            $lastUpdatedOn
         );
     }
 }
