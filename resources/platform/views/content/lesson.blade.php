@@ -12,7 +12,7 @@
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
-    {{-- <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}"> --}}
+     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
 
     <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
@@ -26,9 +26,13 @@
                     @if ($lessonType == 'song')
                         <youtube-player
                             ref="mediaElementVueInstance"
+                            brand="{{ $brand }}"
                             video-id="{{ $rangesVideoIds['original'] ?? '' }}"
+                            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds',
+ $lessonContent->fetch('fields.original_video.fields.length_in_seconds')) }}"
                             :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
-                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds',
+ $lessonContent->fetch('fields.original_video.fields.length_in_seconds')) }}"
                             progress-state="{{ $lessonContent->fetch('progress_state') }}"
                             :content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                             @play="handleVideoPlay" @pause="handleVideoPause"
@@ -40,9 +44,11 @@
                             <transition appear name="fade">
                                 <youtube-player
                                     ref="mediaElementVueInstance"
+                                    brand="{{ $brand }}"
                                     video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
                                     :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
                                     :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+                                    video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                     progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                     content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                                     theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
@@ -81,6 +87,7 @@
                                             <video-player
                                                 ref="mediaElementVueInstance"
                                                 theme-color="{{ $brand }}"
+                                                brand="{{ $brand }}"
                                                 poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
                                                 :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
                                                 @if ($lessonType == 'song')
@@ -95,6 +102,8 @@
                                                 content-id="{{ $lessonContent->fetch('id') }}"
                                                 user-id="{{ user()->id }}"
                                                 video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+                                                video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
+                                                :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                                 cast-title="{{ $lessonContent->fetch('fields.title') }}"
                                                 :use-intersection-observer="true"
                                                 @play="handleVideoPlay"

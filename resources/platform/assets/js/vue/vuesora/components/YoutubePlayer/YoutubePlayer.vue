@@ -72,6 +72,10 @@ export default {
           type: Object,
           default: () => ({}),
         },
+        brand: {
+            type: String,
+            default: () => 'singeo',
+        },
     },
     data() {
         return {
