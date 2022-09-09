@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db83b1bd539865b38cc5715dced29bcd",
+    "content-hash": "f5cdae83b0f45a9d4f32f7b570ed2f27",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -7895,16 +7895,16 @@
         },
         {
             "name": "railroad/event-data-synchronizer",
-            "version": "dev-v8.0-railcontent-2-integration-points",
+            "version": "v8.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "0f819f98311ec41f3fbd67663d4b5a1c8ab67db4"
+                "reference": "682c020fb20ab2003fa722e34651f2fd967c1333"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/0f819f98311ec41f3fbd67663d4b5a1c8ab67db4",
-                "reference": "0f819f98311ec41f3fbd67663d4b5a1c8ab67db4",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/682c020fb20ab2003fa722e34651f2fd967c1333",
+                "reference": "682c020fb20ab2003fa722e34651f2fd967c1333",
                 "shasum": ""
             },
             "require": {
@@ -7953,9 +7953,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
-                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0-railcontent-2-integration-points"
+                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.4"
             },
-            "time": "2022-09-07T13:49:08+00:00"
+            "time": "2022-09-09T10:04:29+00:00"
         },
         {
             "name": "railroad/location",
