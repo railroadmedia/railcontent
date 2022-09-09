@@ -236,7 +236,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $fillable = [
         'first_name',
         'last_name',
-        'location',
+        'country',
         'birthday',
         'biography',
         'profile_picture_url',
