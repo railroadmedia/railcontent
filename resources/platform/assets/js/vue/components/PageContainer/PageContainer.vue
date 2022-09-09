@@ -1,5 +1,5 @@
 <script setup>
-import { ref, provide, onBeforeMount, onMounted, onUnmounted } from "vue";
+import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
 import { useNotificationStore } from '../../../stores/notification';
 import { useConfirmationStore } from '../../../stores/confirmation';
 import NotificationToasts from '../../vuesora/components/NotificationToasts/NotificationToasts.vue';
@@ -177,11 +177,14 @@ const onResize = (e) => {
 onMounted(() => {
   //Check if Mobile on Resize
   window.addEventListener("resize", onResize);
-  console.log('show notification', app.config.globalProperties.$showNotification)
 })
 
 onUnmounted(() => {
   window.removeEventListener("resize", onResize);
+})
+
+onUpdated(() => {
+  console.log('updated')
 })
 
 </script>

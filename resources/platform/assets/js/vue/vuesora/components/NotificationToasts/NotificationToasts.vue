@@ -13,8 +13,11 @@
           tw-mx-auto
           tw-rounded-md
           tw-drop-shadow-md
+          dark:tw-text-black
+          tw-text-white
+          dark:tw-bg-white
+          tw-bg-[#081825]
         "
-        :class="isError ? 'tw-bg-red' : 'dark:tw-text-black tw-text-white dark:tw-bg-white tw-bg-[#081825]'"
       >
         <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
           <div>
@@ -91,10 +94,14 @@ export default {
       this.notificationText = val;
     },
     isError(val) {
-      if (val === true) {
+      if (val) {
         this.showNotification = true;
         this.notificationText = 'There has been an error, please try again later';
-        this.notificationIcon = 'fa-exclamation-circle';
+        this.notificationIcon = 'fa-exclamation-circle tw-text-[#ef4444]';
+      } else {
+        this.showNotification = false;
+        this.notificationText = '';
+        this.notificationIcon = '';
       }
     },
   },
