@@ -341,19 +341,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return url()->route('platform.profile.dashboard', [$this->id]);
     }
 
-//    /**
-//     * @return Attribute
-//     */
-//    public function totalXp()
-//    : Attribute
-//    {
-//        return Attribute::make(
-//            get: function ($value) {
-//                return !empty($this->total_xp) ? $this->total_xp : 0;
-//            },
-//        );
-//    }
-
     /**
      * @return string
      */
