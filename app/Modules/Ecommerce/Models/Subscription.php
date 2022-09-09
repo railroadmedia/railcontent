@@ -34,11 +34,26 @@ class Subscription extends Model
 {
     use HasFactory;
 
+    const TYPE_SUBSCRIPTION = 'subscription';
+    const TYPE_APPLE_SUBSCRIPTION = 'apple_subscription';
+    const TYPE_GOOGLE_SUBSCRIPTION = 'google_subscription';
+    const TYPE_PAYPAL_SUBSCRIPTION = 'paypal_recurring_profile_subscription';
+    const TYPE_PAYMENT_PLAN = 'payment plan';
+
+    // log actions names
+    const ACTION_RENEW = 'renew';
+    const ACTION_CANCEL = 'cancel';
+    const ACTION_DEACTIVATED = 'deactivated';
+
+    // states
+    const STATE_ACTIVE = 'active';
+    const STATE_SUSPENDED = 'suspended';
+    const STATE_CANCELED = 'canceled';
+    const STATE_STOPPED = 'stopped';
+
     protected $table = 'ecommerce_subscriptions';
 
     protected $primaryKey = 'id';
-
-    const TYPE_SUBSCRIPTION = 'subscription';
 
     public function scopeFromUser(Builder $query, int $userId): Builder
     {

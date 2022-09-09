@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\database\factories;
 
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -15,7 +16,7 @@ class UserProductFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'product_id' => fake()->randomNumber(),
+            'product_id' => Product::factory(),
             'quantity' => fake()->numberBetween(1, 5),
             'start_date' => Carbon::now()->subDays(10)->toDateTimeString(),
             'expiration_date' => Carbon::now()->addDays(10)->toDateTimeString(),
