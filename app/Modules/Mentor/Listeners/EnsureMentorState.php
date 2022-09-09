@@ -2,8 +2,8 @@
 
 namespace Modules\Mentor\Listeners;
 
+use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
 use App\Modules\Mentor\Services\MentorService;
-use Railroad\Ecommerce\Events\GiveContentAccess;
 
 class EnsureMentorState
 {
@@ -14,9 +14,8 @@ class EnsureMentorState
         $this->mentorService = $mentorService;
     }
 
-    public function handle(GiveContentAccess $event): void
+    public function handle(UserMembershipDateUpdated $event): void
     {
-        $userId = $event->order->getUser()->getId();
-        $this->mentorService->ensureMentorState($userId);
+        $this->mentorService->ensureMentorState($event->getUser());
     }
 }

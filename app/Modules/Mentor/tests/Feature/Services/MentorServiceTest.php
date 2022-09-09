@@ -5,6 +5,7 @@ namespace App\Modules\Mentor\tests\Feature\Services;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Services\MentorService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
@@ -68,9 +69,9 @@ class MentorServiceTest extends TestCase
         //create 3 users, 2 active, 1 not
         $user = User::factory()->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
-        $user2 = User::factory()->hasSubscription()->create();
+        $user2 = User::factory()->hasActiveMembership()->create();
         $this->mentorService->assignMentorByBrand($user2->id, $brand);
-        $user3 = User::factory()->hasUserProduct()->create();
+        $user3 = User::factory()->hasActiveMembership()->create();
         $this->mentorService->assignMentorByBrand($user3->id, $brand);
         Event::assertDispatched(StudentMentorsUpdated::class, 3);
 
@@ -85,8 +86,8 @@ class MentorServiceTest extends TestCase
         $mentor = $this->createMentor($brand);
         //create 3 users, 2 active, 1 not
         $this->mentorService->assignMentorByBrand(User::factory()->create()->id, $brand);
-        $this->mentorService->assignMentorByBrand(User::factory()->hasSubscription()->create()->id, $brand);
-        $user = User::factory()->hasUserProduct()->create();
+        $this->mentorService->assignMentorByBrand(User::factory()->hasActiveMembership()->create()->id, $brand);
+        $user = User::factory()->hasActiveMembership()->create();
         $this->mentorService->assignMentorByBrand($user->id, $brand);
         Event::assertDispatched(StudentMentorsUpdated::class, 3);
 

@@ -5,6 +5,7 @@ namespace App\Modules\Mentor\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\UserManagementSystem\Models\User;
 
 /**
@@ -15,13 +16,13 @@ use Modules\UserManagementSystem\Models\User;
  *
  * @property integer $id
  * @property integer $user_id
- * @property boolean $active
  * @property string $primary_brand
  * @property integer $mentor_user_id
  *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ * @property User $user
  */
 class MentorStudent extends Model
 {
@@ -29,9 +30,13 @@ class MentorStudent extends Model
 
     protected $table = 'mentor_students';
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function isActive(): bool
+    {
+        return $this->user->isActiveStudent();
+    }
 }

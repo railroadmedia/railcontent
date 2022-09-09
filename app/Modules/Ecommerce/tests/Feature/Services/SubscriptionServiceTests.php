@@ -19,33 +19,6 @@ class SubscriptionServiceTests extends TestCase
         $this->subscriptionService = app(SubscriptionService::class);
     }
 
-
-    public function test_get_latest_subscription_time(): void
-    {
-        /** @var User $user */
-        $user = User::factory()->create();
-        $expected = Carbon::today()->addDays(30);
-
-        Subscription::factory()->create([
-            'user_id' => $user->id,
-            'paid_until' => $expected->copy()->addDays(-100)
-        ]);
-
-        Subscription::factory()->create([
-            'user_id' => $user->id,
-            'paid_until' => $expected
-        ]);
-
-        Subscription::factory()->create([
-            'user_id' => $user->id,
-            'paid_until' => $expected->copy()->addDays(-10)
-        ]);
-
-        $actual = $this->subscriptionService->getLatestSubscriptionTime($user->id);
-        $this->assertEquals($expected, $actual);
-    }
-
-
     public function test_get_first_subscription_brand(): void
     {
         $user = User::factory()->create();

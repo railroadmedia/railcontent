@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
@@ -204,6 +205,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereIsPackOwner($value)
  * @method static Builder|User wherePianoteOnboardingSkipSetup($value)
  * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
+ * @property ?MentorStudent $mentorStudent
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -280,7 +282,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         parent::__construct($attributes);
     }
 
-    public function mentorStudent()
+    public function mentorStudent(): HasOne
     {
         return $this->hasOne(MentorStudent::class, 'user_id');
     }
@@ -631,5 +633,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function getTotalXp()
     {
         return $this->total_xp ?? 0;
+    }
+        
+    public function isActiveStudent(): bool
+    {
+        return !$this->isAdmin()
+            && !empty($this->membership_expiration_date)
+            && $this->membership_expiration_date >= Carbon::now()->addDays(-30);
     }
 }

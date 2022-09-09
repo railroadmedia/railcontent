@@ -29,7 +29,6 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('usora_users');
-            $table->boolean('active');
             $table->string('primary_brand')->nullable();
             $table->unsignedInteger('mentor_user_id');
             $table->foreign('mentor_user_id')->references('id')->on('usora_users');

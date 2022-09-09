@@ -4,6 +4,7 @@ namespace Modules\UserManagementSystem\Factories;
 
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserProduct;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Modules\UserManagementSystem\Models\User;
@@ -97,6 +98,15 @@ class UserFactory extends Factory
             'pianote_onboarding_skip_setup' => 0,
             'drumeo_onboarding_skip_setup' => 0,
         ];
+    }
+
+    public function hasActiveMembership(): UserFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'membership_expiration_date' => Carbon::now()->addDays(60)
+            ];
+        });
     }
 
     public function hasSubscription(array $array = []): UserFactory

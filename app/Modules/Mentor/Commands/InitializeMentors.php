@@ -2,26 +2,23 @@
 
 namespace App\Modules\Mentor\Commands;
 
+use App\Console\Commands\Infrastructure\Command;
 use App\Modules\HelpScout\Services\HelpScoutUserService;
 use App\Modules\Mentor\Models\Mentor;
+use App\Modules\Mentor\Services\EnsureMentorResult;
 use App\Modules\Mentor\Services\HelpScoutMentorService;
 use App\Modules\Mentor\Services\MentorService;
 use App\Services\DatabaseService;
 use App\Services\DatabaseServiceProvider;
-use Illuminate\Console\Command;
+use DB;
 use Illuminate\Database\DatabaseManager;
-use Railroad\Ecommerce\Services\DateTimeService;
+use Modules\UserManagementSystem\Models\User;
 
 class InitializeMentors extends Command
 {
     protected $signature = 'mentors:init';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Run to initialize mentor system';
+
     private MentorService $mentorService;
     private HelpScoutMentorService $helpScoutMentorService;
     private HelpScoutUserService $helpScoutUserService;
@@ -37,14 +34,11 @@ class InitializeMentors extends Command
         $this->helpScoutUserService = $helpScoutUserService;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle(DatabaseManager $databaseManager): bool
     {
-        $this->assignMentors($databaseManager);
+        $this->ensureMentorsCreated($databaseManager);
+        $this->ensureGuitareoSingeoMentorsAssigned();
+        $this->ensureOtherMentorsAssigned();
 
         if (app()->isProduction()) {
             $this->info("\nRegister Web Hook");
@@ -57,7 +51,7 @@ class InitializeMentors extends Command
         return true;
     }
 
-    private function assignMentors(DatabaseManager $databaseManager)
+    private function ensureMentorsCreated(DatabaseManager $databaseManager)
     {
         $connection = $databaseManager->connection('musora_laravel_mysql');
         $db = new DatabaseService($connection);
@@ -132,77 +126,41 @@ class InitializeMentors extends Command
                 $this->mentorService->store($userId, $mentor["supported_brands"], $mentor["maxStudents"]);
             });
         }
+    }
 
-        $active_users = collect(
-            $connection->select(
-                "select u.id FROM usora_users u
-            inner join (
-                select user_id, max(paid_until) as paid_until
-                from ecommerce_subscriptions where brand in ('guitareo', 'singeo') group by user_id) s on s.user_id = u.id
-            where NOT EXISTS(select * FROM user_roles
-                                      WHERE role = 'administrator'
-                                        and user_id = u.id)
-                AND s.paid_until >= DATE_ADD(NOW(), INTERVAL -30 DAY)
-                AND NOT EXISTS(select * FROM mentor_students where user_id = u.id);"
-            )
-        );
-        $this->info("\nFound {$active_users->count()} active subscription unassigned users (guitareo, singeo)");
+    public function ensureGuitareoSingeoMentorsAssigned(): void
+    {
+        $this->info("Assigning Mentors (guitareo, singeo)...");
+        $query = User::query()->with('mentorStudent')
+            ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+            ->whereIn('ecommerce_subscriptions.brand', ['guitareo', 'singeo'])
+            ->select('usora_users.*');
+
+        $n = 0;
+        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
+            $result = $this->mentorService->ensureMentorState($user);
+            if ($result == EnsureMentorResult::MentorAssigned) {
+                $n++;
+            }
+        });
+        $this->info("$n mentors assigned.");
+    }
+
+    public function ensureOtherMentorsAssigned(): void
+    {
         $this->info("Assigning Users (guitareo, singeo)...");
-        $this->withProgressBar($active_users, function ($user) {
-            try {
-                $this->mentorService->assignMentor($user->id);
-            } catch (Exception $exception) {
-                $this->info("Unable to assign assign mentor to user {$user->id}");
+        $query = User::query()->with('mentorStudent')
+            ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+            ->whereNotIn('ecommerce_subscriptions.brand', ['guitareo', 'singeo'])
+            ->select('usora_users.*');
+
+        $n = 0;
+        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
+            $result = $this->mentorService->ensureMentorState($user);
+            if ($result == EnsureMentorResult::MentorAssigned) {
+                $n++;
             }
         });
-
-
-
-        $active_users = collect(
-            $connection->select(
-                "select u.id FROM usora_users u
-            inner join (
-                select user_id, max(paid_until) as paid_until
-                from ecommerce_subscriptions group by user_id) s on s.user_id = u.id
-            where NOT EXISTS(select * FROM user_roles
-                                      WHERE role = 'administrator'
-                                        and user_id = u.id)
-                AND s.paid_until >= DATE_ADD(NOW(), INTERVAL -30 DAY)
-                AND NOT EXISTS(select * FROM mentor_students where user_id = u.id);"
-            )
-        );
-        $this->info("\nFound {$active_users->count()} active subscription unassigned users (drumeo, pianote)");
-        $this->info("Assigning Users (drumeo, pianote)...");
-        $this->withProgressBar($active_users, function ($user) {
-            try {
-                $this->mentorService->assignMentor($user->id);
-            } catch (Exception $exception) {
-                $this->info("Unable to assign assign mentor to user {$user->id}");
-            }
-        });
-
-
-        $active_users = collect(
-            $connection->select(
-                "SELECT u.id FROM usora_users u
-            inner join (
-                select user_id, max(expiration_date) as expiration_date from ecommerce_user_products group by user_id
-            ) up on up.user_id = u.id
-            where NOT EXISTS(select * FROM user_roles
-                                      WHERE role = 'administrator'
-                                        and user_id = u.id)
-                AND up.expiration_date >= DATE_ADD(NOW(), INTERVAL -30 DAY)
-                AND NOT EXISTS(select * FROM mentor_students where user_id = u.id);"
-            )
-        );
-        $this->info("\nFound {$active_users->count()} unassigned users with active user products");
-        $this->info("Assigning Users...");
-        $this->withProgressBar($active_users, function ($user) {
-            try {
-                $this->mentorService->assignMentor($user->id);
-            } catch (Exception $exception) {
-                $this->info("Unable to assign assign mentor to user {$user->id}");
-            }
-        });
+        $this->info("$n mentors assigned.");
     }
 }

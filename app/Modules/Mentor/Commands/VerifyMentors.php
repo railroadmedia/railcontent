@@ -3,12 +3,10 @@
 namespace App\Modules\Mentor\Commands;
 
 
+use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Mentor\Services\MentorService;
-use App\Services\DatabaseServiceProvider;
-use Illuminate\Console\Command;
-use Illuminate\Database\DatabaseManager;
 use Modules\UserManagementSystem\Models\User;
 
 class VerifyMentors extends Command
@@ -35,7 +33,7 @@ class VerifyMentors extends Command
      *
      * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager)
+    public function handle()
     {
         $this->EnsureActiveUsersHaveMentors();
         $this->VerifyStudentMentors();
@@ -43,63 +41,33 @@ class VerifyMentors extends Command
         return true;
     }
 
-    public function EnsureActiveUsersHaveMentors()
+    public function EnsureActiveUsersHaveMentors(): void
     {
-        $count = User::query()->count();
-        $this->info("\nEnsure Active Users have Mentors");
-        $this->info("Processing $count Users ");
-        $flagged = [];
-        $bar = $this->output->createProgressBar($count);
-        $bar->setFormat('debug');
+        $this->info("Ensure Active Users have Mentors");
+        $query = User::query()->with('mentorStudent');
 
-        User::query()->chunk(100, function ($users) use (&$flagged, $bar) {
-            foreach ($users as $user) {
-                if (!$this->mentorService->validateMentorState($user->id)) {
-                    $this->info($user->id);
-                    $flagged[$user->id] = $user->id;
-                }
-                $bar->advance();
+        $n = 0;
+        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
+            $result = $this->mentorService->ensureMentorState($user);
+            if ($result > 0) {
+                $n++;
             }
         });
-
-        $countFlagged = count($flagged);
-        $this->info("$countFlagged records flagged.");
-
-        if ($countFlagged > 0) {
-            $this->info("Fixing flagged records.");
-            $this->withProgressBar($flagged, function($userId){
-                $this->mentorService->ensureMentorState($userId);
-            });
-        }
-
-        $this->info("Finished processing");
+        $this->info("$n students updated.");
     }
 
     public function VerifyStudentMentors()
     {
-        $count = MentorStudent::query()->count();
-        $this->info("\nVerifying $count Active Students");
-        $flagged = [];
-        $bar = $this->output->createProgressBar($count);
-        MentorStudent::query()->chunk(100, function ($students) use (&$flagged, $bar) {
-            foreach ($students as $student) {
-                if (!$this->mentorService->validateMentorState($student->user_id)) {
-                    $flagged[$student->user_id] = $student->user_id;
-                };
-                $bar->advance();
+        $query = MentorStudent::query()->with('user');
+
+        $n = 0;
+        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
+            $result = $this->mentorService->ensureMentorState($user);
+            if ($result > 0) {
+                $n++;
             }
         });
-
-        $countFlagged = count($flagged);
-        $this->info("$countFlagged records flagged.");
-
-        if ($countFlagged > 0) {
-            $this->info("Fixing flagged records.");
-            $this->withProgressBar($flagged, function($userId){
-                $this->mentorService->ensureMentorState($userId);
-            });
-        }
-        return $flagged;
+        $this->info("$n students updated.");
     }
 
     private function VerifyMentorCounts()

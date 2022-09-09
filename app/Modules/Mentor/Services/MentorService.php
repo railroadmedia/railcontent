@@ -10,19 +10,17 @@ use App\Modules\Mentor\Models\MentorStudent;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
-use App\Modules\Mentor\Services\ActiveStudentService;
+use Modules\UserManagementSystem\Models\User;
 use Str;
 
 class MentorService
 {
     private PrimaryBrandService $primaryBrandService;
     private ?Collection $mentors = null;
-    private ActiveStudentService $activeStudentService;
 
-    public function __construct(PrimaryBrandService $primaryBrandService, ActiveStudentService $activeStudentService)
+    public function __construct(PrimaryBrandService $primaryBrandService)
     {
         $this->primaryBrandService = $primaryBrandService;
-        $this->activeStudentService = $activeStudentService;
     }
 
     public function store(int $userId, string $supportedBrand, int $maxStudents = 5000): void
@@ -36,36 +34,40 @@ class MentorService
         $mentor->save();
     }
 
-    public function assignMentor(int $userId): void
+    public function assignMentor(int $userId): bool
     {
         $brand = $this->getPrimaryBrandForAssigningMentor($userId);
         if (!$brand) {
             Log::warning("Unable to choose a brand for user '$userId'");
-            return;
+            return false;
             //throw new Exception("Unable to choose a brand for user '$userId'");
         }
-        $this->assignMentorByBrand($userId, $brand);
+        return $this->assignMentorByBrand($userId, $brand);
     }
 
-    public function assignMentorByBrand(int $userId, string $brand): void
+    public function assignMentorByBrand(int $userId, string $brand): bool
     {
         Log::info("Assigning Mentor to User $userId");
         $mentor = $this->chooseMentor($brand);
+        if (!$mentor) {
+            Log::warning("Unable to assign Mentor to User $userId");
+            return false;
+        }
         $mentorStudent = $this->getMentorStudentOrNull($userId);
         if (!$mentorStudent) {
             $mentorStudent = new MentorStudent();
             $mentorStudent->user_id = $userId;
-            $mentorStudent->active = $this->activeStudentService->isActive($userId);
         }
         $mentorStudent->primary_brand = $brand;
         $mentorStudent->mentor_user_id = $mentor->user_id;
-        if ($mentorStudent->active) {
+        if ($mentorStudent->isActive()) {
             $mentor->active_student_count += 1;
         }
         $mentor->total_student_count += 1;
         $mentorStudent->save();
         $mentor->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
+        return true;
     }
 
     private function chooseNewMentor(MentorStudent $mentorStudent): ?Mentor
@@ -78,31 +80,39 @@ class MentorService
         return $mentor;
     }
 
-    public function ensureMentorState(int $userId): void
+
+    public function ensureMentorState(User $user): EnsureMentorResult
     {
-        $active = $this->activeStudentService->isActive($userId);
-        $mentorStudent = $this->getMentorStudentOrNull($userId);
+        $active = $user->isActiveStudent();
+        $mentorStudent = $user->mentorStudent;
         if ($active && (!$mentorStudent || !$mentorStudent->mentor_user_id)) {
-            $this->assignMentor($userId);
-        } elseif ($active && $mentorStudent && !$mentorStudent->active) {
+            if ($this->assignMentor($user->id)) {
+                return EnsureMentorResult::MentorAssigned;
+            }
+        } elseif ($active && $mentorStudent && !$mentorStudent->isActive()) {
             $this->activateMentorStudent($mentorStudent);
-        } elseif (!$active && $mentorStudent && $mentorStudent->active) {
+            return EnsureMentorResult::ActiveStateUpdated;
+        } elseif (!$active && $mentorStudent && $mentorStudent->isActive()) {
             $this->deactivateMentorStudent($mentorStudent);
+            return EnsureMentorResult::ActiveStateUpdated;
         }
+        return EnsureMentorResult::NoChange;
     }
 
-    public function validateMentorState(int $userId): bool
+    private function activateMentorStudent(?MentorStudent $mentorStudent): void
     {
-        $active = $this->activeStudentService->isActive($userId);
-        $mentorStudent = $this->getMentorStudentOrNull($userId);
-        if ($active && (!$mentorStudent || !$mentorStudent->mentor_user_id)) {
-            return false;
-        } elseif ($active && $mentorStudent && !$mentorStudent->active) {
-            return false;
-        } elseif (!$active && $mentorStudent && $mentorStudent->active) {
-            return false;
-        }
-        return true;
+        Log::info("Activating student $mentorStudent->user_id");
+        $mentor = $this->getMentorOrNull($mentorStudent->mentor_user_id);
+        $mentor->active_student_count++;
+        $mentor->save();
+    }
+
+    private function deactivateMentorStudent(?MentorStudent $mentorStudent): void
+    {
+        Log::info("Deactivating student $mentorStudent->user_id");
+        $mentor = $this->getMentorOrNull($mentorStudent->mentor_user_id);
+        $mentor->active_student_count--;
+        $mentor->save();
     }
 
     private function getPrimaryBrandForAssigningMentor($userId): string
@@ -148,6 +158,7 @@ class MentorService
     public function delete(int $mentorUserId): Collection
     {
         $mentorStudents = MentorStudent::query()
+            ->with('user')
             ->where('mentor_user_id', '=', $mentorUserId)
             ->get();
 
@@ -164,8 +175,12 @@ class MentorService
 
     public function getMentorIdByStudent(int $userId): ?int
     {
-        $result = MentorStudent::query()->select('mentor_user_id')->where('user_id', '=', $userId)->first();
-        return $result?->mentor_user_id;
+        /* @var ?MentorStudent $mentorStudent */
+        $mentorStudent = MentorStudent::query()
+            ->select('mentor_user_id')
+            ->where('user_id', '=', $userId)
+            ->first();
+        return $mentorStudent?->mentor_user_id;
     }
 
     public function updateStudentMentor(int $userId, int $newMentorId): void
@@ -174,13 +189,12 @@ class MentorService
         if (!$mentorStudent) {
             $mentorStudent = new MentorStudent();
             $mentorStudent->user_id = $userId;
-            $mentorStudent->active = $this->activeStudentService->isActive($userId);
         }
 
         $mentor = $this->getMentorOrNull($newMentorId);
 
         $mentorStudent->mentor_user_id = $mentor->user_id;
-        if ($mentorStudent->active) {
+        if ($mentorStudent->isActive()) {
             $mentor->active_student_count += 1;
         }
         $mentor->total_student_count += 1;
@@ -191,12 +205,14 @@ class MentorService
 
     private function getMentorStudentOrNull(int $userId): ?MentorStudent
     {
+        /* @var ?MentorStudent $mentorStudent */
         $mentorStudent = MentorStudent::query()->where('user_id', '=', $userId)->first();
         return $mentorStudent;
     }
 
     public function getMentorOrNull(int $userId): ?Mentor
     {
+        /* @var ?Mentor $mentor */
         $mentor = Mentor::query()->where('user_id', '=', $userId)->first();
         return $mentor;
     }
@@ -215,11 +231,12 @@ class MentorService
         $mentor->save();
     }
 
-    public function bulkReassignMentors(Collection $mentorStudents): void
+    private function bulkReassignMentors(Collection $mentorStudents): void
     {
         $mentors = [];
         foreach ($mentorStudents as $mentorStudent) {
-            if ($mentorStudent->active) {
+            /* @var MentorStudent $mentorStudent */
+            if ($mentorStudent->isActive()) {
                 $newMentor = $this->chooseNewMentor($mentorStudent);
                 $mentorStudent->mentor_user_id = $newMentor->user_id;
                 $newMentor->active_student_count += 1;
@@ -243,23 +260,4 @@ class MentorService
         });
     }
 
-    private function activateMentorStudent(?MentorStudent $mentorStudent): void
-    {
-        Log::info("Activating student $mentorStudent->user_id");
-        $mentor = $this->getMentorOrNull($mentorStudent->mentor_user_id);
-        $mentor->active_student_count++;
-        $mentor->save();
-        $mentorStudent->active = true;
-        $mentorStudent->save();
-    }
-
-    private function deactivateMentorStudent(?MentorStudent $mentorStudent): void
-    {
-        Log::info("Deactivating student $mentorStudent->user_id");
-        $mentor = $this->getMentorOrNull($mentorStudent->mentor_user_id);
-        $mentor->active_student_count--;
-        $mentor->save();
-        $mentorStudent->active = false;
-        $mentorStudent->save();
-    }
 }

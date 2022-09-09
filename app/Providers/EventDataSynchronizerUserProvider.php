@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
@@ -29,6 +30,11 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         $user = User::query()->find($userId);
 
         if (!empty($user)) {
+            if ($isLifetimeMember) {
+                $membershipExpirationDate = Carbon::maxValue();
+            }
+            $isUpdatingMembershipDate = $user->membership_expiration_date != $membershipExpirationDate;
+
             $user->membership_expiration_date = !empty($membershipExpirationDate) ?
                 $membershipExpirationDate->toDateTimeString() : null;
             $user->is_lifetime_member = $isLifetimeMember;
@@ -37,6 +43,9 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
 
             $user->save();
 
+            if ($isUpdatingMembershipDate) {
+                event(new UserMembershipDateUpdated($user));
+            }
             return true;
         }
 

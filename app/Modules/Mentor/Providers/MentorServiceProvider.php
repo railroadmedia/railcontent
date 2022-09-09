@@ -2,13 +2,13 @@
 
 namespace App\Modules\Mentor\Providers;
 
+use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
 use App\Modules\Mentor\Commands\InitializeMentors;
 use App\Modules\Mentor\Commands\UnassignMentors;
 use App\Modules\Mentor\Commands\VerifyMentors;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Mentor\Listeners\EnsureMentorState;
-use Railroad\Ecommerce\Events\GiveContentAccess;
 
 class MentorServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class MentorServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        GiveContentAccess::class => [
+        UserMembershipDateUpdated::class => [
             EnsureMentorState::class,
         ]
     ];

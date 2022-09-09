@@ -7,13 +7,6 @@ use Carbon\Carbon;
 
 class UserProductService
 {
-
-    public function getLatestExpirationTime(int $userId): ?Carbon
-    {
-        $max = UserProduct::query()->fromUser($userId)->max('expiration_date');
-        return $max != null ? Carbon::parse($max) : null;
-    }
-
     public function getFirstUserProductBrand(int $userId, array $brands): string
     {
         $result = UserProduct::query()
