@@ -432,10 +432,6 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
-
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.invite-a-friend');
     });
 
 /*
