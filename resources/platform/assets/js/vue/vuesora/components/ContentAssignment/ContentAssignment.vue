@@ -270,8 +270,8 @@ export default {
         accordionButtonClasses() {
             return {
                 inverted: this.accordionActive,
-                'text-grey-3': this.accordionActive,
-                'text-white': !this.accordionActive,
+                'text-grey-3 dark:tw-text-[#7E9AB1] dark:tw-border-[#7E9AB1]': this.accordionActive,
+                'dark:tw-bg-[#7E9AB1] dark:tw-text-[#000C17] text-white': !this.accordionActive,
             };
         },
 

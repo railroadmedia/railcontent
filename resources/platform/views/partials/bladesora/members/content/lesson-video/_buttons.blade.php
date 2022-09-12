@@ -8,7 +8,7 @@
                 <span class="hide-xs-only ml-1">Previous Lesson</span>
             </a>
         @else
-            <a class="tw-btn-secondary tw-text-gray-400 no-events">
+            <a class="tw-btn-secondary tw-text-gray-400 dark:tw-text-[#7E9AB1] no-events">
                 <i class="fas fa-chevron-left"></i>
                 <span class="hide-xs-only ml-1">Previous Lesson</span>
             </a>
@@ -45,7 +45,7 @@
                 <i class="fas fa-chevron-right"></i>
             </a>
         @else
-            <a class="tw-btn-secondary tw-text-gray-400 no-events">
+            <a class="tw-btn-secondary tw-text-gray-400 dark:tw-text-[#7E9AB1] no-events">
                 <span class="hide-xs-only mr-1">Next Lesson</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
