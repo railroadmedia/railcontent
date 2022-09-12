@@ -59,7 +59,7 @@ class SizeResolver implements ResolverInterface
             foreach($sizes as $size){
                 if(!is_null($size['size_id'])){
                     if(in_array($size['size_id'], $sizeIds)){
-                        dd('the size already exists');
+                        abort(500, 'There are duplicated sizes');
                     }
 
                     array_push($sizeIds, $size['size_id']);
