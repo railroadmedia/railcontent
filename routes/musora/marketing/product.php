@@ -28,6 +28,7 @@ Route::get('drumeo/shop/practice-pad-full', function(){ return view('drumeo.prod
 Route::get('drumeo/shop/quietpad', function(){ return view('drumeo.products.full-page-assets.quietpad'); });
 Route::get('drumeo/shop/the-drummers-toolbox', function(){ return view('drumeo.products.full-page-assets.the-drummers-toolbox'); });
 Route::get('drumeo/shop/beginner-book', function(){ return view('drumeo.products.full-page-assets.beginner-book'); });
+Route::get('drumeo/shop/30-day-drummer', function(){ return view('drumeo.products.full-page-assets.30-day-drummer'); });
 
 //pianote
 Route::get('pianote/shop/play-beautiful-piano', function(){ return view('pianote.products.play-beautiful-piano'); });
