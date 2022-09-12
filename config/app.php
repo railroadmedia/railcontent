@@ -193,6 +193,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\VaporUiServiceProvider::class,
 
+        Venturecraft\Revisionable\RevisionableServiceProvider::class,
     ],
 
     /*
