@@ -114,6 +114,7 @@ class CmsLessonSeeder extends Seeder
                 "guaranteed" => true,
                 "lifetime_access" => true,
                 "free_shipping" => false,
+                "included_edge" => true,
                 "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
                 "page_logo" => "",
                 "video" => "",
@@ -354,7 +355,7 @@ class CmsLessonSeeder extends Seeder
                 "header_text" => "",
                 "speicalText" => "Or free with Drumeo",
                 "price" => 197,
-                "discounted_price" => 97,
+                "discounted_price" => '',
                 "features" => [
 
                 ],
@@ -389,7 +390,7 @@ class CmsLessonSeeder extends Seeder
                 "short_desc" => "Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums -- with 18 hours of video lessons and a 274-page workbook.",
                 "header_text" => "",
                 "price" => 247,
-                "discounted_price" => 197,
+                "discounted_price" => '',
                 "features" => [
 
                 ],
@@ -424,7 +425,7 @@ class CmsLessonSeeder extends Seeder
                 "header_text" => "",
                 "speicalText" => "Or free with Drumeo",
                 "price" => 247,
-                "discounted_price" => 197,
+                "discounted_price" => '',
                 "features" => [
 
                 ],
@@ -1556,6 +1557,40 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "page_logo" => "",
                 "video" => "",
                 "instructor_name" => "Ayla Tesler-Mabe",
+                "instructor_desc" => "",
+                "instructor_img" => "",
+                "studyText" => "",
+                "overview" => "",
+                'bundle_desc' => 'Get inspired, stay motivated, and crush your goals on guitar with a Guitareo Membership. Ayla Tesler-Mabe’s 10-level METHOD curriculum will help you reach all of your goals – plus you’ll have access to guitar courses by Mark Lettieri (Snarky Puppy), Yvette Young (Covet), Dave Weiner (Steve Vai’s Guitarist), and more. Even better – you’ll get access to REAL teachers who will be able to answer any questions you have along the way.',
+            ],
+            [
+                "brand" => 3,
+                "product_type_id" => 1,
+                "name" => "Rhythm & Groove",
+                "slug" => "rhythm-and-groove",
+                "sku" => "rhythm-and-groove",
+                "thumbnail" => "https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/coach.jpg",
+                "meta_desc" => "",
+                "meta_img" => "",
+                "short_desc" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
+                "header_text" => "",
+                "price" => 47,
+                "discounted_price" => 30,
+                "features" => [
+
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "freeBonus" => false,
+                "guaranteed" => true,
+                "lifetime_access" => true,
+                "free_shipping" => false,
+                "thumbnail_logo" => "https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg",
+                "page_logo" => "",
+                "video" => "",
+                "instructor_name" => "Sami Ghawi",
                 "instructor_desc" => "",
                 "instructor_img" => "",
                 "studyText" => "",
@@ -2956,6 +2991,8 @@ This powerful resource makes it easy to access your lessons anytime from virtual
 //                ]
 //            ],
         ];
+
+        Product::truncate();
 
         $drumeo = 5;
         $pianote = 5;

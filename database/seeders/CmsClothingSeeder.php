@@ -71,7 +71,7 @@ class CmsClothingSeeder extends Seeder
                     'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-130-Edit.jpg',
                     'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-114-Edit.jpg'
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 10,
                 "sizes" => [
                     1,2,3,4,5
                 ]
@@ -255,7 +255,7 @@ class CmsClothingSeeder extends Seeder
                 "discounted_price" => "",
                 "special_text" => "",
                 "features" => [
-                    "he classic Drumeo hand-drawn drum set logo. Created by Drumeo’s own Catrina Jackson, wearing this shirt is like joining an exclusive club. Be prepared for secretive winks and curt nods of approval from Drumeo die-hards around the globe flying the “Sketchy Drums” flag."
+                    "The classic Drumeo hand-drawn drum set logo. Created by Drumeo’s own Catrina Jackson, wearing this shirt is like joining an exclusive club. Be prepared for secretive winks and curt nods of approval from Drumeo die-hards around the globe flying the “Sketchy Drums” flag."
                 ],
                 "specs" => [
                     [
@@ -284,7 +284,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch1.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 1,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -334,7 +334,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch1.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/sketch2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 1,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -384,7 +384,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/gab2.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/gab3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 2,
                 "sizes" => [
                     2,3,4,5,6,7,8
                 ]
@@ -433,7 +433,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/tank1.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/tank2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 3,
                 "sizes" => [
                     2,3,4,5
                 ]
@@ -484,7 +484,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/binary4.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/binary2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -535,7 +535,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/minimalist-gray3.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/minimalist-gray.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -586,7 +586,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/minimalist-teal4.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/minimalist-teal2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -636,7 +636,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/space-goblin3.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/space-goblin.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -687,7 +687,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/vintage3.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/vintage4.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 5,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -738,7 +738,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/jokester.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/jokester2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -790,7 +790,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/team5.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/team3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -841,7 +841,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/skull2.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/skull.jpg",
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 4,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -890,7 +890,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/hoodie2.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/hoodie1.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 6,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -940,7 +940,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/retro2.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2020-merch/retro3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 7,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -992,7 +992,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/minimalist-hoodie4.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/minimalist-hoodie5.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 8,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -1043,7 +1043,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/vintage-hoodie3.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/vintage-hoodie4.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 9,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -1094,7 +1094,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/rainbow-2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/rainbow-3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 11,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -1145,7 +1145,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-black-piano1.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-black-piano-3.jpg",
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 12,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -1196,7 +1196,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-funkeys-2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-funkeys-3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 12,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -1246,7 +1246,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 12,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -1301,7 +1301,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/red-v-1.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/red-v-3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 13,
                 "sizes" => [
                     1,2,3,4,5,6
                 ]
@@ -1460,7 +1460,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 14,
                 "sizes" => [
                     2,3,4,5,6,7,8
                 ]
@@ -1511,7 +1511,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-shirt/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 14,
                 "sizes" => [
                     2,3,4,5,6,7,8
                 ]
@@ -1565,7 +1565,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt/2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 10,
                 "sizes" => [
                     1,2,3,4,5
                 ]
@@ -1619,7 +1619,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt-mint/2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/floral-shirt-mint/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 10,
                 "sizes" => [
                     1,2,3,4,5
                 ]
@@ -1674,7 +1674,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hoodie-1.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-hoodie-2.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 15,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -1728,7 +1728,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-hoodie/2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/iconic-hoodie/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 6,
                 "sizes" => [
                     2,3,4,5,6,7
                 ]
@@ -1777,7 +1777,7 @@ class CmsClothingSeeder extends Seeder
                 "images" => [
                     "https://singeo.s3.amazonaws.com/products/retro-shirt-thumb.png"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 14,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -1830,7 +1830,7 @@ class CmsClothingSeeder extends Seeder
                     "https://s3.amazonaws.com/drumeo-packs/Merch/ladies-shirt/2.jpg",
                     "https://s3.amazonaws.com/drumeo-packs/Merch/ladies-shirt/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 16,
                 "sizes" => [
                     2,3,4,5
                 ]
@@ -1878,7 +1878,7 @@ class CmsClothingSeeder extends Seeder
                 "images" => [
                     'https://s3.amazonaws.com/drumeo-packs/Merch/holiday.jpg'
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 17,
                 "sizes" => [
                     2,3,4,5,6
                 ]
@@ -1932,7 +1932,7 @@ class CmsClothingSeeder extends Seeder
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/2.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/3.jpg"
                 ],
-                "sizeChart" => "",
+                "sizeChart" => 18,
                 "sizes" => [
                     1,2,3,4,5
                 ]
@@ -2033,6 +2033,7 @@ class CmsClothingSeeder extends Seeder
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'size_chart_id' => null,
                 'physical' => true,
+                'size_chart_id' => $product['sizeChart'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

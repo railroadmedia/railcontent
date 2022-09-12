@@ -21,6 +21,76 @@ class CmsAccessorySeeder extends Seeder
     {
         $products = [
             [
+                "brand" => 2,
+                "product_type_id" => 2,
+                "name" => "Classical Piano Pieces",
+                "slug" => "classical-book",
+                "sku" => "classical-book",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
+                "badge_text" => "New",
+                "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
+                "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
+                "header_text" => "Classical Piano Pieces (You Can Actually Play)",
+                "price" => 39,
+                "discounted_price" => "",
+                "special_text" => "",
+                "overview" => "**Classical piano has a reputation.**
+
+Let’s be honest…
+
+Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
+
+So we’re out to change that reputation.
+
+Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
+
+It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
+
+Here are some of our favorites:
+  - Ukrainian Folk Song by Ludwig van Beethoven
+  - Minuet in F Major by Wolfgang Amadeus Mozart
+  - Prelude in C Major by Johann Sebastian Bach
+  - Sonatina in B-flat Major by George Frideric Handel
+  - Waltz in A Minor by Frédéric Chopin
+And so many more!",
+                "features" => [
+                ],
+                "specs" => [
+                    [
+                        "title" => "Size",
+                        "desc" => '11" x 8.5"'
+                    ],
+                    [
+                        "title" => "Weight",
+                        "desc" => "1 lbs"
+                    ],
+                    [
+                        "title" => "Pages",
+                        "desc" => "92 pages"
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+                "bundle_desc" => "What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.",
+            ],
+            [
                 "brand" => 1,
                 "product_type_id" => 2,
                 "name" => "Drumeo EarDRUM In-Ear Monitors",
@@ -127,7 +197,7 @@ class CmsAccessorySeeder extends Seeder
                 "short_desc" => "The Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums.",
                 "header_text" => "",
                 "price" => 149,
-                "discounted_price" => 97,
+                "discounted_price" => '',
                 "special_text" => "",
                 "features" => [
                 ],
@@ -571,7 +641,7 @@ class CmsAccessorySeeder extends Seeder
                         "desc" => "143 pages"
                     ],
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -703,7 +773,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                         "desc" => "198 pages total. Includes 12 undated months, chord reference chart, note reference guide, blank pages for notes, blank ledger-line pages"
                     ],
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1188,76 +1258,6 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "sizes" => [
 
                 ],
-            ],
-            [
-                "brand" => 2,
-                "product_type_id" => 2,
-                "name" => "Classical Piano Pieces",
-                "slug" => "classical-book",
-                "sku" => "classical-book",
-                "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
-                "badge_text" => "New",
-                "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
-                "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
-                "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
-                "header_text" => "Classical Piano Pieces (You Can Actually Play)",
-                "price" => 39,
-                "discounted_price" => "",
-                "special_text" => "",
-                "overview" => "**Classical piano has a reputation.**
-
-Let’s be honest…
-
-Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
-
-So we’re out to change that reputation.
-
-Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
-
-It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
-
-Here are some of our favorites:
-  - Ukrainian Folk Song by Ludwig van Beethoven
-  - Minuet in F Major by Wolfgang Amadeus Mozart
-  - Prelude in C Major by Johann Sebastian Bach
-  - Sonatina in B-flat Major by George Frideric Handel
-  - Waltz in A Minor by Frédéric Chopin
-And so many more!",
-                "features" => [
-                ],
-                "specs" => [
-                    [
-                        "title" => "Size",
-                        "desc" => '11" x 8.5"'
-                    ],
-                    [
-                        "title" => "Weight",
-                        "desc" => "1 lbs"
-                    ],
-                    [
-                        "title" => "Pages",
-                        "desc" => "92 pages"
-                    ],
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                "images" => [
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ],
-                "bundle_desc" => "What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.",
             ],
             [
                 "brand" => 2,
