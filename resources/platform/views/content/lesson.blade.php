@@ -184,8 +184,8 @@
                 <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
 
                 @if (!empty($lessonContent->fetch('*assignments', [])))
-                    <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3">
-                        <div class="tw-flex tw-flex-row pv-3">
+                    <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                        <div class="tw-flex tw-flex-row pv-3 tw-w-full">
                             <h1 class="heading dark:tw-text-white">Assignments</h1>
                             @php
                                 $formattedAssignments = [];
@@ -221,7 +221,7 @@
                                 $formattedAssignments[] = $content;
                             }
                         @endphp
-                        <div class="tw-flex tw-flex-row">
+                        <div class="tw-flex tw-flex-row tw-w-full">
                             <assignments-container :assignments="{{ json_encode($formattedAssignments) }}">
                                 <template slot="completion-bonus">
                                     @include('partials.bladesora.members.partials._completion-bonus', [

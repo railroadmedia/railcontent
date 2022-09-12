@@ -1,11 +1,5 @@
 <template>
   <div class="tw-mb-3 tw-w-full tw-py-4 tw-px-4 tw-rounded-xl tw-bg-[#F3F4F6] tw-border tw-border-black/[0.15] dark:tw-bg-[#002039]/[0.7] dark:tw-border-white/[0.15]" v-if="content && $_hours <= 48">
-    <NotificationToasts
-      :icon="toast.icon"
-      :text="toast.text"
-      :isError="toast.showErrorMessage"
-      :brandName="brand"
-    />
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
       <a
@@ -188,12 +182,10 @@ import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentSchedule from "../../views/schedule/Schedule.vue";
 import ContentService from "../../assets/js/services/content";
 import { DateTime } from "luxon";
-import NotificationToasts from '../NotificationToasts/NotificationToasts.vue';
 
 export default {
   components: {
     "content-schedule": ContentSchedule,
-    "NotificationToasts": NotificationToasts,
   },
   name: "CoachEvent",
   props: {
@@ -238,11 +230,6 @@ export default {
       startMonth: "",
       formattedTime: "",
       showSubscribePopup: false,
-      toast: {
-        icon: "",
-        text: "",
-        showErrorMessage: false,
-      },
     };
   },
   mounted() {
@@ -377,12 +364,14 @@ export default {
 
     showNotificationToast({ icon, text, error }) {
       if (error) {
-        this.toast.showErrorMessage = true;
-        this.toast.icon = "";
-        this.toast.text = "";
+        window.shownotification({
+          isError: true
+        })
       } else {
-        this.toast.icon = icon;
-        this.toast.text = text;
+        window.shownotification({
+          icon, 
+          text
+        });
       }
     },
   },

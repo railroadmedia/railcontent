@@ -25,6 +25,9 @@
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
         <!-- Modal Container -->
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+
+        <!-- Confirmation Modal Container -->
+        <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
         
         <!-- App Container -->
         <div id="app" class="flex-1">

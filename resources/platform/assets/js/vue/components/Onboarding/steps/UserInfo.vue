@@ -6,7 +6,6 @@ import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
-import NotificationToast from "../../NotificationToastV2/NotificationToast.vue"
 import { saveDisplayName } from '../services';
 
 const props = defineProps({
@@ -31,10 +30,6 @@ const onInputChange = (value) => {
   });
 }
 
-const hideErrorNotification = () => {
-  showErrorNotification.value = false;
-};
-
 const handleSkipStep = () => {
   emit('onChangeStep', 1);
   emit('onCheckStep', 0, true);
@@ -48,12 +43,15 @@ const handleNextStep = () => {
     emit('onChangeStep', 1);
     emit('onCheckStep', 0, true);
   }).catch(() => {
-    showErrorNotification.value = true;
+    handleError();
   });
 };
 
-const handleUploadError = () => {
-  showErrorNotification.value = true;
+const handleError = () => {
+    window.shownotification({
+      icon: 'error',
+      text: 'Hmm, something has gone wrong. Your information has been saved up to this point.'
+    })
 };
 
 </script>
@@ -64,7 +62,7 @@ const handleUploadError = () => {
       class="tw-h-full md:tw-h-auto tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-mt-[40px] md:tw-mt-0">
       <StepHeader title="Just a few quick questions to set up your account" subtitle="Your musical journey is personalized to you. Tell us a little bit
             about yourself so that we can get it right." :hideBackButton="true" />
-      <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleUploadError"
+      <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleError"
         :userId="info.user.id" />
       <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-mb-[56px] tw-items-center" :initialValue="info.user.name"
         labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
@@ -84,9 +82,5 @@ const handleUploadError = () => {
         SKIP THIS STEP
       </button>
     </div>
-    <NotificationToast v-if="showErrorNotification"
-      text="Hmm, something has gone wrong. Your information has been saved up to this point."
-      @onHide="hideErrorNotification" classOverride="tw-bg-[#002039] tw-text-white tw-opacity-95">
-    </NotificationToast>
   </StepWrapper>
 </template>
