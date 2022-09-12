@@ -10,7 +10,7 @@ export const setEndpointPrefix = () => {
 };
 
 export const searchCoaches = (brand, term) => {
-    const coachesUrl = `${setEndpointPrefix()}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
+    const coachesUrl = `${window.ENDPOINT_PREFIX}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
     return axios.get(coachesUrl);
 }
 
