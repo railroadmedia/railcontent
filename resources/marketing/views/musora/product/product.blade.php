@@ -65,9 +65,10 @@
                 @else
                    @include('musora.product.partials.specs',[
                        'specList'=> $product->specs,
-                       $product->productType->name !== 'Bundle' && $product->productType->name !== 'Lesson' && 'featureList' => $product->features
+                       'featureList' => $product->productType->name !== 'Bundle' && $product->productType->name !== 'Lesson' ? $product->features : [],
                    ])
                 @endif
+
 
                 @if($product->productType->name === 'Lesson')
                     @include('musora.product.partials.instructor',[
