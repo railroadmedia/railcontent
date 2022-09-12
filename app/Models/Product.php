@@ -6,13 +6,17 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Venturecraft\Revisionable\RevisionableTrait;
+
 
 class Product extends Model
 {
     use HasFactory;
+    use RevisionableTrait;
 
     protected $with = ["brand", "productType"];
+    protected $dontKeepRevisionOf = ['uuid'];
+    protected $revisionForceDeleteEnabled = true;
 
     public function brand()
     {
