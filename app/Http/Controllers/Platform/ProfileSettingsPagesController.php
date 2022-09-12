@@ -338,8 +338,39 @@ class ProfileSettingsPagesController extends BaseController
     public function submitCancelReason(Request $request)
     {
         $reason = $request->get('reason');
-        $otherReasonText = $request->get('other-reason-text');
+        $textReason = $request->get('other-reason-text');
 
+        // get current subscription
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+        $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+        // determine if the subscription is a trial
+        $trialMembershipProductIds = ProductAccessMap::trialMembershipProductIds();
+        $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
+
+        /*
+         * previous version here stored cancellation-reason and cancellation-reason-text in session, but I don't
+         * understand why, so I am leaving it out for now
+         */
+
+        // store in session (reason and reason-text)
+        session()->put('cancel-reason', $reason);
+        session()->put('cancel-reason-text', $textReason);
+
+        // check if they've claimed the retention(win-back) offer recently
+        if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
+            return $this->cancel($request);
+        }
+
+        // check if they've claimed the retention(win-back) offer recently
+
+        // get reasons map from config
+
+        // create list of reasons that qualify for criteria
+
+        // see if reason is in list
+
+        // send to final offer screen depending on use case
 
 
     }
