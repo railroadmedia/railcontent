@@ -1046,6 +1046,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 'bundle_free_shipping' => true,
+                'bundle_desc' => 'This 37-page book gives you all the essential chords, strumming patterns, scales, and riffs to make your journey playing the guitar as fun and enjoyable as possible.',
                 "images" => [
                     "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102-Edit.jpg",
                     "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-108-Edit.jpg",
