@@ -43,14 +43,12 @@ class Bundle extends Resource
             Text::make('Name')->required(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
-                $slug = str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $this->slug );
-
-                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$slug.'">'.$slug.'</a>';
+                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';
             })->asHtml(),
             //slug field for saving
-            Text::make('Slug')->required()->hideFromDetail()->hideFromIndex(),
-            Text::make('Sku')->hideFromIndex()->required(),
-            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
+            Text::make('Slug')->hideFromDetail()->hideFromIndex(),
+            Text::make('Sku')->hideFromIndex(),
+            Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
             Image::make('Meta Image', 'meta_img')
                 ->disk('nova_s3')
                 ->prunable()
@@ -82,6 +80,8 @@ class Bundle extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
+            Currency::make('Price')->required(),
+            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Image::make('Page Logo', 'page_logo')
                 ->disk('nova_s3')
                 ->prunable()
@@ -114,8 +114,6 @@ class Bundle extends Resource
                 }),
             Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
-            Currency::make('Price')->required(),
-            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
