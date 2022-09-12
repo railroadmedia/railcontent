@@ -317,7 +317,58 @@ Route::domain('{musoraDomain}')
             [ProfileSettingsPagesController::class, 'account']
         )
             ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.account.id');
+
+        Route::get(
+            '/{brand}/profile/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
+        )
+            ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
+
+        /*
+         * Cancellation-related
+         */
+        // POST accept-annual-offer
+        Route::post(
+            '/{brand}/profile/settings/account/accept-annual-offer',
+            [ProfileSettingsPagesController::class, 'acceptAnnualOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.acceptAnnualOffer');
+
+        // POST resume-paused
+        Route::post(
+            '/{brand}/profile/settings/account/resume-paused',
+            [ProfileSettingsPagesController::class, 'resumePaused']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.resumePaused');
+
+        // POST submit-cancel-reason
+        Route::post(
+            '/{brand}/profile/settings/account/submit-cancel-reason',
+            [ProfileSettingsPagesController::class, 'submitCancelReason']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.submit-cancel-reason');
+
+
+        // GET cancel-reason-form
+        Route::get(
+            '/{brand}/profile/settings/account/cancel',
+            [ProfileSettingsPagesController::class, 'cancelReasonForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.cancel');
+
+        // GET win-back
+        Route::post(
+            '/{brand}/profile/settings/account/win-back',
+            [ProfileSettingsPagesController::class, 'winBack']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.win-back');
 
         /*
          * Notifications Pages

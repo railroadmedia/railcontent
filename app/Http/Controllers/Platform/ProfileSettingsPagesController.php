@@ -25,13 +25,16 @@ use Railroad\Railnotifications\Services\NotificationSettingsService;
 
 class ProfileSettingsPagesController extends BaseController
 {
-    private NotificationSettingsService $notificationSettingsService;
+    const MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER = 10;
 
+    /**
+     * @var NotificationSettingsService
+     */
+    private $notificationSettingsService;
     /**
      * @var UserPermissionsService
      */
     private $userPermissionsService;
-
     /**
      * @var UserProductService
      */
@@ -107,8 +110,12 @@ class ProfileSettingsPagesController extends BaseController
         ]);
     }
 
-    public function account(Request $request, $domain, $brand, $userId)
+    public function account(Request $request, $domain, $brand, $userId = null)
     {
+        if (!$userId) {
+            $userId = auth()->id();
+        }
+
         if ($userId != auth()->id()) {
             // todo: redirect to version of this page for auth()->id()
         }
@@ -235,14 +242,43 @@ class ProfileSettingsPagesController extends BaseController
         // ------------------------------------------ access from app purchase -----------------------------------------
 
         if ($activeSubscription) {
+
+            // if the student's subscription is administered via a mobile app, we don't offer the same controls and
+            // instead direct them to the Apple's or Google's pages on the matter.
             if (
                 $activeSubscription->getType() == 'apple_subscription' ||
                 $activeSubscription->getType() == 'google_subscription'
             ) {
                 $accessIsFromAppPurchase = true;
             }
-        }
 
+            // if the student is an active monthly subscriber we present an offer to upgrade to an annual membership
+            if ($activeSubscription->getType() == 'subscription') {
+                if ($activeSubscription->getIntervalType() == 'month') {
+
+                    if ($activeSubscription->getIntervalCount() == 1) {
+                        $multiplyFactor = 12;
+                    } elseif ($activeSubscription->getIntervalCount() == 3) {
+                        $multiplyFactor = 4;
+                    } elseif ($activeSubscription->getIntervalCount() == 6) {
+                        $multiplyFactor = 2;
+                    }
+
+                    if ($multiplyFactor ?? false) {
+                        $offerUpgradeToAnnualPrice = ProductAccessMap::annualSubscriptionPrice();
+                        $currentMonthlySubPricePerYear = $activeSubscription->getTotalPrice() * $multiplyFactor;
+                        $savingsFactor = 1 - ($offerUpgradeToAnnualPrice / $currentMonthlySubPricePerYear);
+                        $savingsPercentageRaw = $savingsFactor * 100;
+
+                        if ($savingsPercentageRaw > self::MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER) {
+                            $offerUpgradeToAnnualShowToStudent = true;
+                            $offerUpgradeToAnnualPercentSaved = round($savingsPercentageRaw);
+                        }
+                    }
+
+                }
+            }
+        }
 
         // -------------------------------------------------------------------------------------------------------------
 
@@ -260,8 +296,63 @@ class ProfileSettingsPagesController extends BaseController
                 'now' => $now,
                 'trialUrl' => $trialUrl,
                 'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
+                'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
+                'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
             ]
         );
+    }
+
+    /**
+     * @return void
+     * POST
+     */
+    public function acceptAnnualOffer()
+    {
+        $foo = 'bar';
+    }
+
+    /**
+     * @return void
+     * POST
+     */
+    public function resumePaused()
+    {
+        $foo = 'bar';
+    }
+
+    /**
+     * @return void
+     * GET
+     */
+    public function cancelReasonForm($domain, $brand)
+    {
+        $foo = 'bar';
+
+        return view('account.settings.cancel', ['brand' => $brand, 'domain' => $domain, 'userId' => user()->id]);
+    }
+
+    /**
+     * @return void
+     * POST
+     */
+    public function submitCancelReason(Request $request)
+    {
+        $reason = $request->get('reason');
+        $otherReasonText = $request->get('other-reason-text');
+
+
+
+    }
+
+    /**
+     * @return void
+     * GET
+     */
+    public function winBack(Request $request)
+    {
+        dd($request);
+
+        return view('account.settings.win-back', []);
     }
 
     public function payments(Request $request)
@@ -401,7 +492,7 @@ class ProfileSettingsPagesController extends BaseController
                     'active' => $section === 'settings',
                 ],
                 [
-                    "url" => url()->route('platform.profile.settings.account', ['userId' => user()->id]),
+                    "url" => url()->route('platform.profile.settings.account'),
                     'icon' => 'fas fa-calendar-alt',
                     'title' => 'Account Details',
                     'active' => $section === 'account',

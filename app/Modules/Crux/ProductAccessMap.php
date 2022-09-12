@@ -78,4 +78,21 @@ class ProductAccessMap
 
         return $results;
     }
+
+    public static function annualSubscriptionPrice()
+    {
+        // todo: implement cache
+
+        $result = DB::connection(config('ecommerce.database_connection_name'))
+            ->table('ecommerce_products')
+            ->where('sku', 'PIANOTE-MEMBERSHIP-1-YEAR')
+            ->get(['price'])
+            ->first();
+
+        if ($result && !empty($result->price)) {
+            return $result->price;
+        }
+
+        return null;
+    }
 }
