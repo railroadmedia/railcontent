@@ -81,7 +81,7 @@ class ApiJsonController extends Controller
 
         foreach (config('railcontent.showTypes')[$brand] ?? [] as $showType) {
             if(array_key_exists($showType, $metaData)) {
-                $contentType =  ($showType == 'live-streams')?'live':$showType;
+                $contentType =  ($showType == 'live-streams')?'live':(($showType == 'student-reviews')?'student-review':$showType);
                 $shows[$contentType] = $metaData[$showType] ?? [];
                 $shows[$contentType]['episodeNumber'] = $episodesNumber[$showType]['total'] ?? '';
             }
