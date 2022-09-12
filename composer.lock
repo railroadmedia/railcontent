@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.235.4",
+            "version": "3.235.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4adc3ba34f1666c13a2a35894e225bd47e8af7c4"
+                "reference": "3b002b92369dbcb8d86f32546cb324eabcd19a4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4adc3ba34f1666c13a2a35894e225bd47e8af7c4",
-                "reference": "4adc3ba34f1666c13a2a35894e225bd47e8af7c4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3b002b92369dbcb8d86f32546cb324eabcd19a4e",
+                "reference": "3b002b92369dbcb8d86f32546cb324eabcd19a4e",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.5"
             },
-            "time": "2022-09-08T18:49:27+00:00"
+            "time": "2022-09-09T18:19:38+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1843,16 +1843,16 @@
         },
         {
             "name": "dragonmantank/cron-expression",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dragonmantank/cron-expression.git",
-                "reference": "be85b3f05b46c39bbc0d95f6c071ddff669510fa"
+                "reference": "782ca5968ab8b954773518e9e49a6f892a34b2a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/be85b3f05b46c39bbc0d95f6c071ddff669510fa",
-                "reference": "be85b3f05b46c39bbc0d95f6c071ddff669510fa",
+                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/782ca5968ab8b954773518e9e49a6f892a34b2a8",
+                "reference": "782ca5968ab8b954773518e9e49a6f892a34b2a8",
                 "shasum": ""
             },
             "require": {
@@ -1892,7 +1892,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dragonmantank/cron-expression/issues",
-                "source": "https://github.com/dragonmantank/cron-expression/tree/v3.3.1"
+                "source": "https://github.com/dragonmantank/cron-expression/tree/v3.3.2"
             },
             "funding": [
                 {
@@ -1900,7 +1900,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-18T15:43:28+00:00"
+            "time": "2022-09-10T18:51:20+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2829,16 +2829,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.265.0",
+            "version": "v0.266.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "a23754daa452e26a8dd31a7848863c67a2e3d67e"
+                "reference": "27ead5edc8ba4a17ddd211ad03216c313a57411f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a23754daa452e26a8dd31a7848863c67a2e3d67e",
-                "reference": "a23754daa452e26a8dd31a7848863c67a2e3d67e",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/27ead5edc8ba4a17ddd211ad03216c313a57411f",
+                "reference": "27ead5edc8ba4a17ddd211ad03216c313a57411f",
                 "shasum": ""
             },
             "require": {
@@ -2867,9 +2867,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.265.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.266.0"
             },
-            "time": "2022-09-04T00:58:12+00:00"
+            "time": "2022-09-12T01:28:14+00:00"
         },
         {
             "name": "google/auth",
@@ -4242,16 +4242,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.28.0",
+            "version": "v9.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "396a89e1f3654123d1c7f56306051212e5c75bc0"
+                "reference": "585da0913e907fd54941260860ae3d7d4be8e8cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/396a89e1f3654123d1c7f56306051212e5c75bc0",
-                "reference": "396a89e1f3654123d1c7f56306051212e5c75bc0",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/585da0913e907fd54941260860ae3d7d4be8e8cb",
+                "reference": "585da0913e907fd54941260860ae3d7d4be8e8cb",
                 "shasum": ""
             },
             "require": {
@@ -4418,7 +4418,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-09-06T14:57:01+00:00"
+            "time": "2022-09-09T18:21:21+00:00"
         },
         {
             "name": "laravel/nova",
@@ -8297,12 +8297,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c3b2d94b4d3242816fa6079153c08962116fa58a"
+                "reference": "873cf7aa748f33cc2d80c7352e2ea64a0f344e03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c3b2d94b4d3242816fa6079153c08962116fa58a",
-                "reference": "c3b2d94b4d3242816fa6079153c08962116fa58a",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/873cf7aa748f33cc2d80c7352e2ea64a0f344e03",
+                "reference": "873cf7aa748f33cc2d80c7352e2ea64a0f344e03",
                 "shasum": ""
             },
             "require": {
@@ -8358,7 +8358,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
             },
-            "time": "2022-09-06T08:50:05+00:00"
+            "time": "2022-09-12T10:38:22+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -9461,16 +9461,16 @@
         },
         {
             "name": "sokil/php-isocodes-db-only",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sokil/php-isocodes-db-only.git",
-                "reference": "ccfab2065c66d6253f1afe85dff2a16d0d728e2b"
+                "reference": "13b5aff75baf6f43b82f24fc862726929cb8c4df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sokil/php-isocodes-db-only/zipball/ccfab2065c66d6253f1afe85dff2a16d0d728e2b",
-                "reference": "ccfab2065c66d6253f1afe85dff2a16d0d728e2b",
+                "url": "https://api.github.com/repos/sokil/php-isocodes-db-only/zipball/13b5aff75baf6f43b82f24fc862726929cb8c4df",
+                "reference": "13b5aff75baf6f43b82f24fc862726929cb8c4df",
                 "shasum": ""
             },
             "require": {
@@ -9495,9 +9495,9 @@
             "description": "Database for ISO country, subdivision, language, currency and script definitions and their translations. Based on pythons pycountry and Debian's iso-codes.",
             "support": {
                 "issues": "https://github.com/sokil/php-isocodes-db-only/issues",
-                "source": "https://github.com/sokil/php-isocodes-db-only/tree/4.0.2"
+                "source": "https://github.com/sokil/php-isocodes-db-only/tree/4.0.3"
             },
-            "time": "2022-08-15T17:42:01+00:00"
+            "time": "2022-09-09T19:47:11+00:00"
         },
         {
             "name": "spatie/fractalistic",
@@ -16037,5 +16037,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
