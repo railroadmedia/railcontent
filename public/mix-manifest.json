@@ -13,7 +13,7 @@
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=5b8f9ad553a8a2548b47904df645d509",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=207130abd393aa661ed06230e35b81ca",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=9b6e9b9667993f92f8cb8483f993c965",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=6553db7e2ceec1b3a7cfc5f95c39299f",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=966e618861b96b7a3cad2551718c6384",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=136e4e8c42e71aa8103d74063f276e5c",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=a0fd581dd961a82ea00212b1624f43a5",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=81bad596bfbadf2608734994e4cd04e6",
@@ -21,5 +21,5 @@
     "/platform/css/app.css": "/platform/css/app.css?id=01bc83e62024db3d61c484c686e16c12",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=c0d1f718effc958056637c6015d2ac2d",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=0ebe07ca2c16d87d6530ad4ecf51133c"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=42cbda8fd74382c3215c0ac5e56d83d9"
 }
