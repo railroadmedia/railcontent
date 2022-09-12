@@ -380,7 +380,7 @@ return [
                 'name' => 'New Content',
                 'shortname' => 'Content',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of every lesson that's been published in Drumeo. Browse on your
+                'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
@@ -657,7 +657,7 @@ return [
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of every lesson that's been published in Pianote. Browse on your own or use search to find whatever it is you'd like to learn!",
+                'description' => "Here's a list of all lessons recently added to Pianote. Browse on your own or use search to find whatever it is you'd like to learn!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
@@ -776,7 +776,7 @@ return [
             'all' => [
                 'name' => 'New Content',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of every lesson that's been published in Guitareo. Browse on your
+                'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
@@ -848,7 +848,7 @@ return [
                 'name' => 'New Content',
                 'shortname' => 'Content',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of every lesson that's been published in Singeo. Browse on your
+                'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
                 'sortBy' => '-published_on',
@@ -1023,7 +1023,17 @@ return [
         'play-along',
         'student-focus',
         'coach-stream',
-        //        'song',
+        'learning-path-level',
+        'unit',
+        'quick-tips',
+        'live',
+        'question-and-answer',
+        'student-review',
+        'boot-camps',
+        'song',
+        'chords-and-scales',
+        'pack',
+        'podcasts',
     ],
     'homeInProgressContentTypes' => [
         'course',
