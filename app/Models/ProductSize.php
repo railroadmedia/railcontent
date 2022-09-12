@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class ProductSize extends Model
 {
     use HasFactory;
+    use RevisionableTrait;
 
     public function product()
     {
