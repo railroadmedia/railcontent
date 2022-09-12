@@ -107,7 +107,7 @@ const props = defineProps({
 
     useIntersectionObserver: {
         type: Boolean,
-        default: () => false,
+        default: () => true,
     },
 
     ranges: {
@@ -688,7 +688,7 @@ function enableIntersectionObserver(videoWrap) {
     intersection.value = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             const isVisible = entry.intersectionRatio >= 0.5;
-            isPipEnabled.value = !isVisible && !isMobileViewport && isPlaying.value;
+            isPipEnabled.value = !isVisible && !isMobileViewport.value && isPlaying.value;
         });
     }, {
         root: null,
@@ -811,6 +811,10 @@ onMounted(() => {
             isAirplayConnected.value = !isAirplayConnected.value;
         });
     }
+
+    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
+        enableIntersectionObserver(videoWrap.value);
+    }
 })
 
 onUpdated(() => {
@@ -818,10 +822,6 @@ onUpdated(() => {
     if (overlay && !overlay.getAttribute('overlay-click-pause-video')) {
         overlay.addEventListener("click", handleOverlayClick);
         overlay.setAttribute('overlay-click-pause-video', true)
-    }
-
-    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
-        enableIntersectionObserver(videoWrap.value);
     }
 });
 

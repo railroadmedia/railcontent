@@ -5,8 +5,10 @@ namespace Modules\UserManagementSystem\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
@@ -39,10 +41,9 @@ class UserController extends Controller
 
         try {
             $validationRules = [
-            //todo: make email and display_name unique
-                'email' => 'required|email|max:255',
+                'email' => 'email|max:255|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
                 'password' => 'required|string|min:8|max:128',
-                'display_name' => 'required|string|max:64|min:2'
+                'display_name' => 'required|string|max:64|min:2|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
             ];
 
             $this->validate(
@@ -117,8 +118,6 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException();
         }
-
-
     }
 
     /**
@@ -127,10 +126,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $isJson = request()->expectsJson();
+
         if (auth()->user()->id != $id) {
             $this->authorize('update-users');
+        }
+        try {
+            $request->validate([
+                'display_name' => [
+                    'required',
+                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore($id),
+                    'string',
+                    'max:64',
+                    'min:2'
+                ]
+            ]);
+        } catch (ValidationException $e) {
+            $messagesByField = $e->validator->getMessageBag()->getMessages();
+            $messagesForFieldFailingField = reset($messagesByField);
+
+            foreach ($messagesForFieldFailingField as $messagesForField) {
+                $errorMessageToUser = $messagesForField;
+            break;
+            }
+            $default = 'Please try again, and contact support if the problem persists.';
+            $message = ['error-message' => ($errorMessageToUser ?? $default)];
+
+            if ($isJson) {
+                return response()->json(['errors' => $message], 422);
+            }
+            return redirect()->back()->with($message);
         }
 
         $user = User::findOrFail($id);
@@ -143,7 +168,6 @@ class UserController extends Controller
         if ($user) {
             $oldUser = clone($user);
 
-            // todo: find a way to check how to give an error message in case q request attribute is not fillable
             $user->fill($request->all());
             $user->save();
 
@@ -184,7 +208,6 @@ class UserController extends Controller
         if ($user) {
             $user->delete();
             event(new UserDeleted($user));
-
         } else {
             return response('', 404);
         }
@@ -209,15 +232,12 @@ class UserController extends Controller
         }
     }
 
-
-
     /**
      * @param Request $request
      */
     public function index(Request $request)
     {
         $this->authorize('index-users');
-
         $searchTerm = $request->get('search_term');
 
         $users = User::query()
@@ -230,12 +250,55 @@ class UserController extends Controller
             ->orderBy($request->get('sort', 'createdAt'))
             ->get();
 
-
         return json_encode(
             array(
                 "data" => json_encode($users)
             )
         );
+    }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function isDisplayNameUnique(Request $request)
+    {
+        $validator = validator($request->all(), [
+            'display_name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->getMessageBag()], 422);
+        }
+
+        $user = User::where('display_name', $request->display_name)->where('id' , '!=', user()->id)->first();
+
+        if ($user) {
+            return response()->json(['unique' => false]);
+        }
+
+        return response()->json(['unique' => true]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function isEmailUnique(Request $request)
+    {
+        $validator = validator($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->getMessageBag()], 422);
+        }
+        $user = User::where('email', $request->email)->where('id' , '!=', user()->id)->first();
+
+        if ($user) {
+            return response()->json(['unique' => false]);
+        }
+
+        return response()->json(['unique' => true]);
     }
 }

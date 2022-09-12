@@ -29,6 +29,11 @@ class SetContentPermissions
 
             if (user()->isAMember()) {
                 ContentRepository::$bypassPermissions = true;
+
+                ContentRepository::$pullFutureContent = (bool)$request->get(
+                    'include_future',
+                    false
+                );
             }
 
             if (user()->isAdmin()) {
@@ -55,6 +60,10 @@ class SetContentPermissions
             } else {
                 ContentRepository::$availableContentStatues =
                     [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+                ContentRepository::$pullFutureContent = (bool)$request->get(
+                    'include_future',
+                    false
+                );
             }
         }
 

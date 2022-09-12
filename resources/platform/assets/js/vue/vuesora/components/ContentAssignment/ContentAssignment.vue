@@ -36,19 +36,19 @@
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row tw-justify-end">
+                <div class="flex flex-row tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
                     
                     <button id="open-exercise-button" 
                             v-if="soundsliceSlug" 
-                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] mr-1 tw-w-[250px]" 
+                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]" 
                             @click="openExercise">
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
     
-                    <button class="tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
-                            <i class="fas fa-check mr-1"></i>
-                            {{ isComplete ? 'Completed' : 'Complete' }}
-                        </button>
+                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                        <i class="fas fa-check mr-1"></i>
+                        {{ isComplete ? 'Completed' : 'Complete' }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -71,6 +71,7 @@
                                 <div v-if="currentPage > 1" class="side-button prev flex-center" @click="scrollToPage(currentPage - 1)">
                                     <i class="fas fa-chevron-left"></i>
                                 </div>
+                                
                                 <div v-if="currentPage < $_totalPages" class="side-button next flex-center" @click="scrollToPage(currentPage + 1)">
                                     <i class="fas fa-chevron-right"></i>
                                 </div>

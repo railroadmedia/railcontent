@@ -41,11 +41,11 @@ export default {
 
         this_post.duplicates = [];
 
-        this_post['fields'].forEach(field => {
+        this_post['fields'] && this_post['fields'].forEach(field => {
             this.createOrPushArray(field.key, field.value, field.id, field.position, this_post, onlyReturnValue, 'field');
         });
 
-        this_post['data'].forEach(data => {
+        this_post['data'] && this_post['data'].forEach(data => {
             this.createOrPushArray(data.key, data.value, data.id, data.position, this_post, onlyReturnValue, 'data');
         });
 

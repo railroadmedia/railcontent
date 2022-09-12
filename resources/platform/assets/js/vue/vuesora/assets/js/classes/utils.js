@@ -21,7 +21,7 @@ export default {
      * @param {array} content_posts - the results array returned from the endpoint
      * @returns {array} - The new array of flattened objects
      */
-    flattenContent(content_posts) {
+    flattenContent(content_posts = []) {
         const flattened_posts = [];
 
         content_posts.forEach((post) => {
@@ -41,11 +41,11 @@ export default {
     flattenContentObjectFields(post, flattened) {
         const this_post = post;
 
-        post.fields.forEach((field) => {
+        post.fields && post.fields.forEach((field) => {
             this.createOrPushArray(field.key, field.value, this_post);
         });
 
-        post.data.forEach((data) => {
+        post.data && post.data.forEach((data) => {
             this.createOrPushArray(data.key, data.value, this_post);
         });
 

@@ -11,6 +11,7 @@ use Railroad\Railforums\Events\PostLiked;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
 
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -33,8 +34,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         CommentLiked::class =>[
             NotificationEventListener::class.'@handleCommentLiked',
-        ]
-
+        ],
     ];
 
     /**
