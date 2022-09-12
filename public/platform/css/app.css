@@ -23324,6 +23324,10 @@ a:visited{
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
 }
+.tw-py-4{
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
 .tw-px-16{
   padding-left: 4rem !important;
   padding-right: 4rem !important;
@@ -23347,10 +23351,6 @@ a:visited{
 .tw-py-3{
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important;
-}
-.tw-py-4{
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
 }
 .tw-px-3{
   padding-left: 0.75rem !important;
