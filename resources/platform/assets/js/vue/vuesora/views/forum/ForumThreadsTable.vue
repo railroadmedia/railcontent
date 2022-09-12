@@ -44,7 +44,7 @@
 
         <!-- Search -->
         <div class="tw-flex tw-px-2 ">
-            <div class="tw-flex tw-flex-col sm:tw-mb-6 tw-w-full">
+            <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
                 <div class="tw-flex tw-flex-wrap">
 
                     <template v-if="!onlyFollowed && !searching">
