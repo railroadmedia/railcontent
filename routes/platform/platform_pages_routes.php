@@ -14,6 +14,7 @@ use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Http\Controllers\Platform\LegacyResourcesController;
+use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -331,13 +332,6 @@ Route::domain('{musoraDomain}')
             ->name('platform.notifications');
 
         /*
-         * Referral Pages
-         */
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.invite-a-friend');
-
-        /*
          * Forums
          */
         Route::get('/{brand}/forums', [ForumPagesController::class, 'showCategories'])
@@ -438,4 +432,15 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
+    });
+
+/*
+ * Referral Pages
+ */
+Route::domain('{musoraDomain}')
+    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+    ->group(function () {
+        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.invite-a-friend');
     });
