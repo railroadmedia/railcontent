@@ -59,7 +59,7 @@ class SpecResolver implements ResolverInterface
             //update and insert items
             foreach ($specs as $spec){
                 if(empty($spec['title']) || empty($spec['desc'])) {
-                    dd('title and description can\'t be null');
+                    abort(500, 'Title and description can\'t be empty');
                 }
                 else {
                     if(!is_null($spec['id'])){
