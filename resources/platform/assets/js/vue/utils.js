@@ -3,14 +3,14 @@ import axios from 'axios';
 export const setEndpointPrefix = () => {
     const { origin } = window.location;
     if (origin.includes('dev')) {
-        window.ENDPOINT_PREFIX = 'https://devplatform.musora.com:8443'
+        window.ENDPOINT_PREFIX = `https://${location.hostname}:${location.port}`
     } else {
-        window.ENDPOINT_PREFIX = 'https://musora.com'
+        window.ENDPOINT_PREFIX = 'https://' + location.hostname
     }
 };
 
 export const searchCoaches = (brand, term) => {
-    const coachesUrl = `https://${location.hostname}${location.port ? ':'+location.port : ''}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
+    const coachesUrl = `${setEndpointPrefix()}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term='+term : ''}`
     return axios.get(coachesUrl);
 }
 
