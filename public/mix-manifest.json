@@ -8,7 +8,7 @@
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=904efe1216aa43bbff7a7e7651cc39a5",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=eb41b41737ad6114df32c9a598998227",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=6c14a677f30ac487e69283290a628785",
-    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=bbd47087b99d8395631d0c7adcc8b06b",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=11858752b415491f19f423f60394ec50",
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=6344d0fecc2a8e8defce5e7089d74c5d",
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=5b8f9ad553a8a2548b47904df645d509",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=207130abd393aa661ed06230e35b81ca",
@@ -21,7 +21,5 @@
     "/platform/css/app.css": "/platform/css/app.css?id=6aa75d995483e97f0a8fbf2086daedc4",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=c0d1f718effc958056637c6015d2ac2d",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=42cbda8fd74382c3215c0ac5e56d83d9",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=3cb1ba71e07cb8f567ed5da10870612e",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=2b93d8701b999a1b15288ff2627e70e6"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=42cbda8fd74382c3215c0ac5e56d83d9"
 }
