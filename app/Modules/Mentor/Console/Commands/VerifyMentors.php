@@ -36,7 +36,7 @@ class VerifyMentors extends Command
     public function EnsureActiveUsersHaveMentors(): void
     {
         $this->info("Ensure Active Users have Mentors");
-        $query = User::query()->with('mentorStudent')->with('mentorStudent.mentor')->where('id', '=', '158525');
+        $query = User::query()->with('mentorStudent')->with('mentorStudent.mentor');
 
         $n = 0;
         $updated = [];

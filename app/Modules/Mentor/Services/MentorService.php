@@ -109,7 +109,11 @@ class MentorService
 
         $mentor->total_student_count = $data->count();
         $mentor->active_student_count = $data
-            ->where('membership_expiration_date', '>=', Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days')))
+            ->where(
+                'membership_expiration_date',
+                '>=',
+                Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'))
+            )
             ->count();
         $mentor->save();
     }

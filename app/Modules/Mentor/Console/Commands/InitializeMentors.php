@@ -3,6 +3,7 @@
 namespace App\Modules\Mentor\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\HelpScout\Services\HelpScoutUserService;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Services\EnsureMentorResult;
@@ -37,7 +38,7 @@ class InitializeMentors extends Command
     {
         $this->ensureMentorsCreated($databaseManager);
         $this->ensureGuitareoSingeoMentorsAssigned();
-        $this->ensureOtherMentorsAssigned();
+        $this->ensureAllMentorsAssigned();
 
         if (app()->isProduction()) {
             $this->info("\nRegister Web Hook");
@@ -130,10 +131,14 @@ class InitializeMentors extends Command
     public function ensureGuitareoSingeoMentorsAssigned(): void
     {
         $this->info("Assigning Mentors (guitareo, singeo)...");
-        $query = User::query()->with('mentorStudent')
-            ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
+        $subQuery = Subscription::query()
+            ->select('user_id')
             ->whereIn('ecommerce_subscriptions.brand', ['guitareo', 'singeo'])
-            ->select('usora_users.*');
+            ->groupBy('user_id');
+        $query = User::query()->with('mentorStudent')
+            ->joinSub($subQuery, 's', function($join){
+                $join->on('usora_users.id', '=', 's.user_id');
+            });
 
         $n = 0;
         $this->withProgressBarChunked($query, function (User $user) use (&$n) {
@@ -145,13 +150,10 @@ class InitializeMentors extends Command
         $this->info("$n mentors assigned.");
     }
 
-    public function ensureOtherMentorsAssigned(): void
+    public function ensureAllMentorsAssigned(): void
     {
         $this->info("Assigning Users (guitareo, singeo)...");
-        $query = User::query()->with('mentorStudent')
-            ->join('ecommerce_subscriptions', 'ecommerce_subscriptions.user_id', '=', 'usora_users.id')
-            ->whereNotIn('ecommerce_subscriptions.brand', ['guitareo', 'singeo'])
-            ->select('usora_users.*');
+        $query = User::query()->with('mentorStudent');
 
         $n = 0;
         $this->withProgressBarChunked($query, function (User $user) use (&$n) {
