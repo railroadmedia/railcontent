@@ -705,10 +705,12 @@ class ContentPagesController extends BaseController
             }
         }
 
-        LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
-        $this->lessonAssignmentDecorator->decorate(new Collection([$contentToRenderAsLesson]))
-            ->first();
-
+        if(empty($contentToRenderAsLesson['assignments'] ?? [])) {
+            LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+            $this->lessonAssignmentDecorator->decorate(new Collection([$contentToRenderAsLesson]))
+                ->first();
+        }
+        
         $lessonAssignments = $contentToRenderAsLesson['assignments'] ?? [];
 
         $contentToRenderAsLesson['assignments'] = $lessonAssignments;
