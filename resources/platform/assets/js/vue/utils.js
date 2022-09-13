@@ -15,7 +15,11 @@ export const searchCoaches = (brand, term) => {
 }
 
 const getResultValue = (el, searchKey, searchObj) => {
-    return el[searchObj] ? el[searchObj].find(({ key }) => key === searchKey).value : '';
+    if (el[searchObj]) {
+        const findResult = el[searchObj].find(({ key }) => key === searchKey);
+        return findResult ? findResult.value : '';
+    }
+    return  '';
 };
 
 
