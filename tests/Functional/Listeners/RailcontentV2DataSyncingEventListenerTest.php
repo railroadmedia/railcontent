@@ -269,6 +269,65 @@ class RailcontentV2DataSyncingEventListenerTest extends RailcontentTestCase
         );
     }
 
+    public function test_update_compiled_column_for_parents_and_children()
+    {
+        $content = $this->contentFactory->create(
+            $this->faker->slug(),
+            'learning-path-level',
+            ContentService::STATUS_PUBLISHED
+        );
+
+        // children
+        $childIds = [];
+
+        for ($a = 0; $a < 2; $a++) {
+            $child1 = $this->contentFactory->create(
+                $this->faker->slug(),
+                'learning-path-course',
+                ContentService::STATUS_PUBLISHED
+            );
+            $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $child1['id'], $a + 1);
+            $childIds[] = $child1['id'];
+
+            for ($b = 0; $b < 2; $b++) {
+                $child2 = $this->contentFactory->create(
+                    $this->faker->slug(),
+                    'learning-path-lesson',
+                    ContentService::STATUS_PUBLISHED
+                );
+                $childrenHierarchy = $this->contentHierarchyFactory->create($child1['id'], $child2['id'], $b + 1);
+                $childIds[] = $child2['id'];
+
+                for ($c = 0; $c < 2; $c++) {
+                    $child3 = $this->contentFactory->create(
+                        $this->faker->slug(),
+                        'assignment',
+                        ContentService::STATUS_PUBLISHED
+                    );
+                    $childrenHierarchy = $this->contentHierarchyFactory->create($child2['id'], $child3['id'], $c + 1);
+                    $childIds[] = $child3['id'];
+                }
+            }
+        }
+
+        // parent
+        $parent1 = $this->contentFactory->create(
+            $this->faker->slug(),
+            'learning-path',
+            ContentService::STATUS_PUBLISHED
+        );
+        $childrenHierarchyParent1 = $this->contentHierarchyFactory->create($parent1['id'], $content['id'], $c + 1);
+
+        $contentIdsToProcessed = $this->classBeingTested->fillCompiledViewContentDataColumnForAllParentsAndChildren($content['id']);
+
+        foreach ($childIds as $childId) {
+            $this->assertContains($childId, $contentIdsToProcessed);
+        }
+
+        $this->assertContains($parent1['id'], $contentIdsToProcessed);
+    }
+
+
     protected function setUp(): void
     {
         parent::setUp();

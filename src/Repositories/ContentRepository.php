@@ -4,12 +4,14 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\VideoTransformer;
 
@@ -65,6 +67,8 @@ class ContentRepository extends RepositoryBase
     private $slugHierarchy = [];
     private $requiredParentIds = [];
 
+    private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
+
     /**
      * @var ContentPermissionRepository
      */
@@ -84,7 +88,6 @@ class ContentRepository extends RepositoryBase
      * @var ContentHierarchyRepository
      */
     private $contentHierarchyRepository;
-
     /**
      * @var ContentInstructorRepository
      */
@@ -93,6 +96,7 @@ class ContentRepository extends RepositoryBase
      * @var ContentStyleRepository
      */
     private $contentStyleRepository;
+
     /**
      * @var ContentBpmRepository
      */
@@ -142,7 +146,8 @@ class ContentRepository extends RepositoryBase
         ContentHierarchyRepository $contentHierarchyRepository,
         ContentInstructorRepository $contentInstructorRepository,
         ContentStyleRepository $contentStyleRepository,
-        ContentBpmRepository $contentBpmRepository
+        ContentBpmRepository $contentBpmRepository,
+        ContentCompiledColumnTransformer $contentCompiledColumnTransformer
     ) {
         parent::__construct();
 
@@ -153,6 +158,7 @@ class ContentRepository extends RepositoryBase
         $this->contentInstructorRepository = $contentInstructorRepository;
         $this->contentStyleRepository = $contentStyleRepository;
         $this->contentBpmRepository = $contentBpmRepository;
+        $this->contentCompiledColumnTransformer = $contentCompiledColumnTransformer;
     }
 
     /**
@@ -173,6 +179,10 @@ class ContentRepository extends RepositoryBase
         }
 
         $data = $contentRows[0] ?? null;
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($data)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows))[0] ?? null;
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -203,6 +213,10 @@ class ContentRepository extends RepositoryBase
             }
         }
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -228,6 +242,10 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
                 ->selectInheritenceColumns()
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -262,6 +280,10 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -292,6 +314,10 @@ class ContentRepository extends RepositoryBase
                 ->whereIn(ConfigService::$tableContent . '.type', $types)
                 ->selectInheritenceColumns()
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -327,6 +353,10 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->selectInheritenceColumns()
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -375,6 +405,10 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -401,6 +435,10 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -426,6 +464,10 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent . '.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -480,6 +522,10 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -516,6 +562,10 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -548,6 +598,10 @@ class ContentRepository extends RepositoryBase
                 ->limit($limit)
                 ->skip($skip)
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -585,6 +639,10 @@ class ContentRepository extends RepositoryBase
                 ->limit($limit)
                 ->skip($skip)
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -655,9 +713,12 @@ class ContentRepository extends RepositoryBase
 
         $merged = array_merge($beforeContents, $afterContents);
 
-        $this->configurePresenterForResults($merged);
-
-        $processedContents = $this->parserResult($merged);
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($merged)) {
+            $processedContents = $this->contentCompiledColumnTransformer->transform(Arr::wrap($merged)) ?? [];
+        } else {
+            $this->configurePresenterForResults($merged);
+            $processedContents = $this->parserResult($merged);
+        }
 
         foreach ($afterContents as $afterContentIndex => $afterContent) {
             foreach ($processedContents as $processedContentIndex => $processedContent) {
@@ -725,6 +786,10 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -744,6 +809,10 @@ class ContentRepository extends RepositoryBase
                 ->where('slug', $slug)
                 ->where('type', $type)
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -766,6 +835,10 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->where(ConfigService::$tableContent . '.user_id', $userId)
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -807,6 +880,10 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentRows = $query->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -864,6 +941,10 @@ class ContentRepository extends RepositoryBase
                 ->whereIn(ConfigService::$tableContent . '.type', $types)
                 ->where(ConfigService::$tableContent . '.status', $status)
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $contentFieldRows = $this->getFieldsByContentIds($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -948,6 +1029,10 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentRows = $contentRows->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -1140,6 +1225,10 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         $this->configurePresenterForResults($contentRows);
 
         return $this->parserResult($contentRows);
@@ -1193,6 +1282,11 @@ class ContentRepository extends RepositoryBase
 
         if (self::$getFollowedContentOnly) {
             $query->restrictFollowedContent();
+        }
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
+
+            return $this->getFilterOptionsFromCompiledColumn($query);
         }
 
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
@@ -1490,6 +1584,10 @@ class ContentRepository extends RepositoryBase
                 ->whereNull('user_id')
                 ->getToArray();
 
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
         return $contentRows;
     }
 
@@ -1559,6 +1657,10 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
                 ->selectInheritenceColumns()
                 ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 
@@ -2129,6 +2231,87 @@ class ContentRepository extends RepositoryBase
         return $filterOptionsArray;
     }
 
+    private function getFilterOptionsFromCompiledColumn(ContentQueryBuilder $contentQueryBuilder)
+    {
+        $filterOptionsArray = [];
+
+        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+                'difficulty',
+                'artist',
+                'difficulty_range',
+                'type',
+            ];
+
+        $filterOptions = array_unique($filterOptions);
+
+        foreach ($filterOptions as $filterOption) {
+            $filterOptionsArray[$filterOption] = [];
+        }
+
+        $contentRows = $contentQueryBuilder->get();
+        foreach ($contentRows as $contentRowIndex => $contentRow) {
+            $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
+            foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
+                if ($filterOptionName == 'instructor' && isset($contentRowCompiledColumnValues[$filterOptionName])) {
+                    $instructors = $contentRowCompiledColumnValues[$filterOptionName];
+                    if (isset($instructors['id'])) {
+                        $instructors = [$instructors];
+                    }
+                    foreach ($instructors as $instructor) {
+                        if (isset($instructor['id'])) {
+                            $filterOptionsArray[$filterOptionName][] = [
+                                'id' => $instructor['id'],
+                                'name' => $instructor['name'],
+                                'fields' => [
+                                    [
+                                        "id" => $instructor['id'],
+                                        "key" => "name",
+                                        "value" => $instructor['name'],
+                                    ],
+                                ],
+                                'data' => [],
+                            ];
+                        }
+                    }
+                } elseif (isset($contentRowCompiledColumnValues[$filterOptionName])) {
+                    $filterOptionsArray[$filterOptionName] = array_merge(
+                        $filterOptionsArray[$filterOptionName] ?? [],
+                        (array)$contentRowCompiledColumnValues[$filterOptionName]
+                    );
+                }
+            }
+        }
+
+        foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
+            foreach ($filterOptionValue as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                if (!is_array($filterOptionValueToClean)) {
+                    $filterOptionValue[$filterOptionIndexToClean] = trim(ucwords(
+                        $filterOptionValueToClean
+                    ));
+                    $filterOptionsArray[$filterOptionName] = array_keys(array_flip($filterOptionValue));
+                    sort($filterOptionsArray[$filterOptionName]);
+                } else {
+                    $tempArr = array_unique(array_column($filterOptionValue, 'id'));
+                    $filterOptionsArray[$filterOptionName] = array_intersect_key($filterOptionValue, $tempArr);
+                    usort($filterOptionsArray[$filterOptionName], function ($a, $b) {
+                        if (is_array($a)) {
+                            return strncmp(strtolower($a['name']), strtolower($b['name']), 15);
+                        }
+
+                        return strncmp(strtolower($a), strtolower($b), 15);
+                    });
+                }
+            }
+        }
+
+        return $filterOptionsArray;
+    }
+
     /**
      * @param $a
      * @param $b
@@ -2215,6 +2398,10 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentRows = $contentRows->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $this->configurePresenterForResults($contentRows);
 

@@ -33,6 +33,7 @@ use Railroad\Railcontent\Repositories\ContentTopicRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Repositories\ContentVideoRepository;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
+use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Support\Collection;
@@ -127,7 +128,8 @@ class ContentService
     const STATUS_ARCHIVED = 'archived';
 
     const STATUS_DELETED = 'deleted';
-    private $idContentCache = [];
+
+    public $idContentCache = [];
 
     /**
      * @param ContentRepository $contentRepository
@@ -2104,13 +2106,13 @@ class ContentService
     public function getNextContentForParentContentForUser($parentContentId, $userId)
     {
         $isParentComplete =
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            RepositoryBase::$connectionMask
                 ->table('railcontent_user_content_progress')
                 ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
                 ->exists();
 
         $contentHierarchyDataQuery =
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            RepositoryBase::$connectionMask
                 ->table('railcontent_content_hierarchy AS ch_1')
                 ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
@@ -2274,7 +2276,7 @@ class ContentService
          * coach_focus_text
          */
         $contentRowsById =
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            RepositoryBase::$connectionMask
                 ->table('railcontent_content')
                 ->whereIn('id', $contentIds)
                 ->get()
@@ -2282,7 +2284,7 @@ class ContentService
 
         // content fields are the source of truth at the moment but that will change eventually
         $contentsFieldRows =
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            RepositoryBase::$connectionMask
                 ->table('railcontent_content_fields')
                 ->whereIn('content_id', $contentIds)
                 ->get();
@@ -2290,7 +2292,7 @@ class ContentService
         $contentsFieldRowsByContentId = $contentsFieldRows->groupBy('content_id');
 
         $contentsDataRowsByContentId =
-            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            RepositoryBase::$connectionMask
                 ->table('railcontent_content_data')
                 ->whereIn('content_id', $contentIds)
                 ->get()
@@ -2308,21 +2310,21 @@ class ContentService
 
         if (!empty($linkedContentIds)) {
             $contentsFieldLinkedContentRowsById =
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                RepositoryBase::$connectionMask
                     ->table('railcontent_content')
                     ->whereIn('id', $linkedContentIds)
                     ->get()
                     ->keyBy('id');
 
             $contentsFieldLinkedContentsFieldRowsById =
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                RepositoryBase::$connectionMask
                     ->table('railcontent_content_fields')
                     ->whereIn('content_id', $linkedContentIds)
                     ->get()
                     ->groupBy('content_id');
 
             $contentsFieldLinkedContentsDataRowsById =
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                RepositoryBase::$connectionMask
                     ->table('railcontent_content_data')
                     ->whereIn('content_id', $linkedContentIds)
                     ->get()
@@ -2368,6 +2370,11 @@ class ContentService
                                     }
                                 } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
                                     $jsonArray[$jsonArrayKey] = $subContentJsonArray;
+                                }
+
+                                // always set length in seconds on parent content data as well
+                                if (isset($subContentJsonArray['length_in_seconds'])) {
+                                    $jsonArray['length_in_seconds'] = $subContentJsonArray['length_in_seconds'];
                                 }
                             }
                         }

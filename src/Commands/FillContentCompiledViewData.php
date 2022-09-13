@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
+use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ContentService;
 
 class FillContentCompiledViewData extends Command
@@ -37,18 +38,28 @@ class FillContentCompiledViewData extends Command
     {
         $this->info('Starting FillContentCompiledViewData...');
 
-        $dbConnection = $databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConnection = RepositoryBase::$connectionMask;
         $dbConnection->disableQueryLog();
 
         $totalProcessed = 0;
 
+        // process instructors and videos first
+        $dbConnection->table(config('railcontent.table_prefix') . 'content')
+            ->orderBy(config('railcontent.table_prefix') . 'content.id', 'desc')
+            ->whereIn('type', ['instructor', 'youtube-video', 'vimeo-video', 'assignment'])
+            ->chunk(250, function (Collection $rows) use ($contentService, $dbConnection, &$totalProcessed) {
+                $contentService->fillCompiledViewContentDataColumnForContentIds($rows->pluck('id')->toArray());
+                $totalProcessed += $rows->count();
+
+                $this->info('Done ' . $totalProcessed);
+            });
+
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->orderBy(config('railcontent.table_prefix') . 'content.id', 'desc')
             // for testing only
-//            ->where('id', 360406)
-//                ->whereNotIn('type', ['youtube-video', 'vimeo-video', 'assignment'])
+//            ->where('id', 197937)
+            ->whereNotIn('type', ['instructor', 'youtube-video', 'vimeo-video', 'assignment'])
             ->chunk(250, function (Collection $rows) use ($contentService, $dbConnection, &$totalProcessed) {
-
                 $contentService->fillCompiledViewContentDataColumnForContentIds($rows->pluck('id')->toArray());
                 $totalProcessed += $rows->count();
 
