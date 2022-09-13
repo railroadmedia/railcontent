@@ -422,5 +422,16 @@ export default {
 };
 </script>
 <style>
-
+    /* Post Body Specific Styles */
+    .post-body ul, .post-body ol {
+        list-style: revert;
+        padding-left: 40px;
+        margin: 10px 0;
+    }
+    .post-body p {
+        margin: 10px 0;
+    }
+    blockquote {
+        margin: 14px 0;
+    }
 </style>
