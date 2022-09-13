@@ -71,14 +71,16 @@ export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, s
     } else {
       return selectedExperience.brand === brand;
     }
-  }
+  };
   const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
   const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
 
   if (hasGear) {
+    newSteps[0].checked = true;
+    newSteps[1].checked = true;
     newSteps[2].checked = true;
   }
-  if (hasExperience) {
+  if (hasExperience()) {
     newSteps[3].checked = true;
   }
   if (hasGenres) {

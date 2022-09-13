@@ -35,10 +35,6 @@ const options = ref(
 
 const currentSelection = ref(props.info.instrumentTypes[props.brand]);
 
-onMounted(() => {
-  console.log(currentSelection.value, !currentSelection.value);
-});
-
 function handleMultiSelection(selection) {
   currentSelection.value = selection;
 }
