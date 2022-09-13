@@ -422,5 +422,9 @@ export default {
 };
 </script>
 <style>
-
+    .post-body ul, .post-body ol {
+        list-style: revert;
+        padding-left: 40px;
+        margin: 10px 0;
+    }
 </style>

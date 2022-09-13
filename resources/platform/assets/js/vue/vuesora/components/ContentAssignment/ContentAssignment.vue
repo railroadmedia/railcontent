@@ -19,7 +19,7 @@
                     <div class="flex flex-column">
                         <div class="flex flex-row align-v-center">
                             <div class="flex flex-column pointer" @click="openAssignment">
-                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white">
+                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white md:tw-mr-4">
                                     {{ title }} 
                                 </h3>
                             </div>
