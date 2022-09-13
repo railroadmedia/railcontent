@@ -558,7 +558,7 @@ The Simple Songs Bundle will get you there in no time. You’ll get expert teach
                 'header_text' => 'Chase your guitar goals with 5 digital training packs for one low price.',
                 'video_src' => '',
                 'images' => [
-                    'https://guitareo.s3.amazonaws.com/sales/promos/july/5pack_banner.jpg"'
+                    'https://guitareo.s3.amazonaws.com/sales/promos/july/5pack_banner.jpg'
                 ],
                 'overview' => 'Sure, six packs are all the rage – but this 5-pack bundle will give you goal-oriented lesson plans for the most popular guitar goals.
 
