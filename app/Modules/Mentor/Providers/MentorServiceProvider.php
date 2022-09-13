@@ -3,6 +3,12 @@
 namespace App\Modules\Mentor\Providers;
 
 use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
+use App\Modules\Mentor\Console\Commands\InitializeMentors;
+use App\Modules\Mentor\Console\Commands\RecalculateMentorTotals;
+use App\Modules\Mentor\Console\Commands\RegisterHelpScoutWebHook;
+use App\Modules\Mentor\Console\Commands\UnassignMentors;
+use App\Modules\Mentor\Console\Commands\UnregisterHelpScoutWebHook;
+use App\Modules\Mentor\Console\Commands\VerifyMentors;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -38,6 +44,16 @@ class MentorServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->commands([
+            InitializeMentors::class,
+            VerifyMentors::class,
+            RecalculateMentorTotals::class,
+            RegisterHelpScoutWebHook::class,
+            UnregisterHelpScoutWebHook::class,
+            UnassignMentors::class, //used for debugging can be removed after initial launch
+        ]);
+
+
         $this->mergeConfigFrom(
             __DIR__ . '/../config/mentor.php',
             'mentor'

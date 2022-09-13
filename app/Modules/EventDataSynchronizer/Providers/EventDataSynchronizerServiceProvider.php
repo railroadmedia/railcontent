@@ -190,6 +190,20 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
     {
         parent::boot();
 
+        $this->commands(
+            [
+                SyncCustomerIoForUpdatedUserProductsAndSubscriptions::class,
+                UserContentPermissionsResyncTool::class,
+                SyncHelpScout::class,
+                SyncExistingHelpScout::class,
+                HelpScoutIndex::class,
+                SyncHelpScoutAsync::class,
+                SyncCustomerIoOldEvents::class,
+                SyncCustomerIoExistingDevices::class,
+                UserMembershipFieldsResyncTool::class,
+                PackOwnerUserFieldResyncTool::class,
+            ]
+        );
         $this->mergeConfigFrom(
             __DIR__ . '/../config/event-data-synchronizer.php',
             'event-data-synchronizer'

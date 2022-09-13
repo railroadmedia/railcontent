@@ -45,23 +45,9 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $commandPaths = $this->getCommandPaths();
-        $this->load($commandPaths);
+        $this->load(__DIR__ . '/Commands');
 
         // TODO: uncomment when the console route file exists
         //require base_path('routes/console.php');
-    }
-
-
-    /**
-     * Returns paths to all command directories
-     * @return string[]
-     */
-    public function getCommandPaths(): array
-    {
-        $commandPaths = [__DIR__ . '/Commands'];
-        // Add module command folders if they exist
-        array_push($commandPaths, ...glob(__DIR__ . '/../Modules/*/Console/Commands'));
-        return $commandPaths;
     }
 }
