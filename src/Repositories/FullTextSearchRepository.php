@@ -82,6 +82,11 @@ class FullTextSearchRepository extends RepositoryBase
     {
         //delete old indexes
         $this->deleteOldIndexes();
+        $brands = config('railcontent.available_brands');
+        $showTypes = [];
+        foreach ($brands as $brand){
+            $showTypes += config('railcontent.showTypes', [])[$brand] ?? [];
+        }
 
         $query =
             $this->contentQuery()
@@ -89,7 +94,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictByTypes(
                     array_unique(
                         array_merge(
-                            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
+                            $showTypes,
                             config('railcontent.topLevelContentTypes', []),
                             config('railcontent.searchable_content_types', []),
                             config('railcontent.singularContentTypes', [])
