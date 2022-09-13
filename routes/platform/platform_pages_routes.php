@@ -171,6 +171,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.packs.third-level');
 
+        Route::get('/{brand}/semester-packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.semester-packs.first-level');
+
+        Route::get('/{brand}/semester-packs/{packSlug}/{packId}/{packLessonSlug}/{packLessonId}', [PackPagesController::class, 'semesterPackLesson'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.semester-packs.lesson');
+
         /*
          * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
          */
