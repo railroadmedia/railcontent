@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Collections\PackCollection;
+use App\Decorators\Content\ContentLikesDecorator;
+use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
@@ -16,6 +18,8 @@ use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
@@ -70,6 +74,8 @@ class HomePageController extends BaseController
     {
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         switch (brand()) {
             case 'drumeo':
@@ -111,7 +117,9 @@ class HomePageController extends BaseController
                 ->toDateTimeString(),
             '>',
             'published_on',
-            'asc'
+            'asc',
+            [],
+            6
         );
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
@@ -359,7 +367,7 @@ class HomePageController extends BaseController
                 ->select(['forum_posts.*', 'forum_threads.title'])
                 ->leftJoin('forum_threads', 'forum_threads.id', '=', 'forum_posts.thread_id')
                 ->leftJoin('forum_categories', 'forum_threads.category_id', '=', 'forum_categories.id')
-                ->limit(100)
+                ->limit(10)
                 ->whereNull('forum_posts.deleted_at')
                 ->whereNull('forum_threads.deleted_at')
                 ->whereNull('forum_categories.deleted_at')
