@@ -8,7 +8,7 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
         @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
             {{-- On Boarding TriggerBanner --}}
-            <trigger-banner>
+            <trigger-banner brand="{{ $brand }}">
             </trigger-banner>
         @endif
 
