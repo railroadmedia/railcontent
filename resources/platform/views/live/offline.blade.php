@@ -67,6 +67,7 @@
             <div class="tw-flex tw-flex-row">
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
+                    subscription-calendar-id=""
                     theme-color="{{ $brand }}"
                 />
             </div>

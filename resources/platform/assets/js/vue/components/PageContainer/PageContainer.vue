@@ -183,10 +183,6 @@ onUnmounted(() => {
   window.removeEventListener("resize", onResize);
 })
 
-onUpdated(() => {
-  console.log('updated')
-})
-
 </script>
 
 <template>

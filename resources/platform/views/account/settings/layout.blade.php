@@ -156,7 +156,7 @@
                     @endforeach
                 </div>
                 <div class="tw-flex tw-flex-row">
-                    <div class="tw-flex tw-flex-col tw-grow">
+                    <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                         @yield('edit-forms')
                     </div>
                 </div>
