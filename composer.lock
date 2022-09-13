@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5cdae83b0f45a9d4f32f7b570ed2f27",
+    "content-hash": "d064131ff1382a7ba9035303d549d520",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.235.6",
+            "version": "3.235.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d7c649ff9d55eb8099cac97c5a37a5ed2720d06b"
+                "reference": "0f5d86c0dbed9b413cae6b77c4b5811bb857c9cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d7c649ff9d55eb8099cac97c5a37a5ed2720d06b",
-                "reference": "d7c649ff9d55eb8099cac97c5a37a5ed2720d06b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0f5d86c0dbed9b413cae6b77c4b5811bb857c9cb",
+                "reference": "0f5d86c0dbed9b413cae6b77c4b5811bb857c9cb",
                 "shasum": ""
             },
             "require": {
@@ -204,6 +204,7 @@
                 "aws/aws-php-sns-message-validator": "~1.0",
                 "behat/behat": "~3.0",
                 "composer/composer": "^1.10.22",
+                "dms/phpunit-arraysubset-asserts": "^0.4.0",
                 "doctrine/cache": "~1.4",
                 "ext-dom": "*",
                 "ext-openssl": "*",
@@ -211,10 +212,11 @@
                 "ext-sockets": "*",
                 "nette/neon": "^2.3",
                 "paragonie/random_compat": ">= 2",
-                "phpunit/phpunit": "^4.8.35 || ^5.6.3",
+                "phpunit/phpunit": "^4.8.35 || ^5.6.3 || ^9.5",
                 "psr/cache": "^1.0",
                 "psr/simple-cache": "^1.0",
-                "sebastian/comparator": "^1.2.3"
+                "sebastian/comparator": "^1.2.3 || ^4.0",
+                "yoast/phpunit-polyfills": "^1.0"
             },
             "suggest": {
                 "aws/aws-php-sns-message-validator": "To validate incoming SNS notifications",
@@ -262,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.7"
             },
-            "time": "2022-09-12T18:15:48+00:00"
+            "time": "2022-09-13T18:19:11+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4427,17 +4429,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.13.0",
+            "version": "4.14.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "cfa590fae6c3fb0b2a58e78d4aa74a169bd07930"
+                "reference": "d9854b3b84f169e813494e3a9b361736a5a8ba4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-cfa590fae6c3fb0b2a58e78d4aa74a169bd07930-zip-9ec0c1.zip",
-                "reference": "cfa590fae6c3fb0b2a58e78d4aa74a169bd07930",
-                "shasum": "48b7596e35f08a6a0b7d0cd50d1fde48d75a1d6c"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-d9854b3b84f169e813494e3a9b361736a5a8ba4c-zip-9c190f.zip",
+                "reference": "d9854b3b84f169e813494e3a9b361736a5a8ba4c",
+                "shasum": "72a105edea3274c2f0cf0c1df8af257b58c0fb06"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0",
@@ -4531,9 +4533,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.13.0"
+                "source": "https://github.com/laravel/nova/tree/v4.14.1"
             },
-            "time": "2022-08-23T18:05:42+00:00"
+            "time": "2022-09-13T18:52:43+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4730,16 +4732,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v4.0.1",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "c43d29941ee8f41547572968123eadbd81392841"
+                "reference": "9aa6930c8ae98b2465594d7f14f4ac131bfd6a99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/c43d29941ee8f41547572968123eadbd81392841",
-                "reference": "c43d29941ee8f41547572968123eadbd81392841",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/9aa6930c8ae98b2465594d7f14f4ac131bfd6a99",
+                "reference": "9aa6930c8ae98b2465594d7f14f4ac131bfd6a99",
                 "shasum": ""
             },
             "require": {
@@ -4785,9 +4787,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v4.0.1"
+                "source": "https://github.com/laravel/ui/tree/v4.0.2"
             },
-            "time": "2022-09-06T14:48:07+00:00"
+            "time": "2022-09-09T18:20:35+00:00"
         },
         {
             "name": "laravel/vapor-core",
@@ -7901,16 +7903,16 @@
         },
         {
             "name": "railroad/event-data-synchronizer",
-            "version": "v8.0.4",
+            "version": "v8.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "682c020fb20ab2003fa722e34651f2fd967c1333"
+                "reference": "737e2886f3fdd88225962a871c8881db545afe59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/682c020fb20ab2003fa722e34651f2fd967c1333",
-                "reference": "682c020fb20ab2003fa722e34651f2fd967c1333",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/737e2886f3fdd88225962a871c8881db545afe59",
+                "reference": "737e2886f3fdd88225962a871c8881db545afe59",
                 "shasum": ""
             },
             "require": {
@@ -7920,7 +7922,7 @@
                 "railroad/ecommerce": "5.0.*",
                 "railroad/points": "1.0.*",
                 "railroad/railanalytics": "3.0.*",
-                "railroad/railcontent": "2.0.0",
+                "railroad/railcontent": "2.0.*",
                 "railroad/railforums": "2.0.*",
                 "railroad/railhelpscout": "2.0.*",
                 "railroad/railtracker": "4.0.*",
@@ -7959,9 +7961,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
-                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.4"
+                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.5"
             },
-            "time": "2022-09-09T10:04:29+00:00"
+            "time": "2022-09-13T19:18:45+00:00"
         },
         {
             "name": "railroad/location",
@@ -8298,16 +8300,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-v2.0-content-optimisations",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "a5c38a0a87eedb5c3b6ac9686bde1a0a64e45bd4"
+                "reference": "11c4a2105e394ad9deb5b05d4de9587877afab57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a5c38a0a87eedb5c3b6ac9686bde1a0a64e45bd4",
-                "reference": "a5c38a0a87eedb5c3b6ac9686bde1a0a64e45bd4",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/11c4a2105e394ad9deb5b05d4de9587877afab57",
+                "reference": "11c4a2105e394ad9deb5b05d4de9587877afab57",
                 "shasum": ""
             },
             "require": {
@@ -8361,9 +8363,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-content-optimisations"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.2"
             },
-            "time": "2022-09-13T12:23:07+00:00"
+            "time": "2022-09-13T19:03:28+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16018,12 +16020,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/railcontent",
-            "version": "dev-v2.0-content-optimisations",
-            "alias": "v2.0.0",
-            "alias_normalized": "2.0.0.0"
-        },
-        {
             "package": "railroad/railforums",
             "version": "2.0.9999999.9999999-dev",
             "alias": "v2.0.6",
@@ -16033,7 +16029,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/musora-api": 20,
-        "railroad/railcontent": 20,
         "railroad/railforums": 20
     },
     "prefer-stable": true,
