@@ -175,6 +175,8 @@ return [
         Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
         Railroad\Railnotifications\NotificationsServiceProvider::class,
         Railroad\Referral\Providers\ReferralServiceProvider::class,
+        Railroad\Points\Providers\PointsServiceProvider::class,
+        Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
 
         /*
          * Module Service Providers

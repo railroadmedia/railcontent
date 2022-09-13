@@ -38,7 +38,7 @@
                 @slot('content')
                     <div class="tw-inline-flex tw-w-full tw-flex-col sm:tw-pr-4 sm:tw-mt-14">
                         <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                            <a href="/members/forums" class="no-decoration tw-mr-3 back-arrow">
+                            <a href="/{{ $brand }}/forums" class="no-decoration tw-mr-3 back-arrow">
                                 <i class="fas fa-arrow-circle-left tw-text-white tw-text-32"></i>
                             </a>
                             @if($discussion['icon'])

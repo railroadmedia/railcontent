@@ -26,6 +26,7 @@
           <div class="
                 tw-text-white
                 tw-max-w-full
+                tw-text-lg
                 tw-rounded-full
                 tw-py-4
                 tw-uppercase

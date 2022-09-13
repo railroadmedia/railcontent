@@ -311,8 +311,9 @@ class ContentPagesController extends BaseController
             }
         }
 
-        $progressLabelText =
-            ($primaryPage == 'method') ? 'Level - ' . $firstLevelContent->fetch('higher_key_progress', '1.1') : '';
+        $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
+        $progressLevel = 'Level - '.(($noProgress)?'1.1':$firstLevelContent->fetch('higher_key_progress','1.1'));
+        $progressLabelText = ($primaryPage == 'method')?$progressLevel:'';
 
         return view('content.overview', [
             "parentContent" => $firstLevelContent,
@@ -395,7 +396,9 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - ' . $firstContent->fetch('higher_key_progress', '1.1');
+        $noProgress = empty($firstContent->fetch('higher_key_progress'));
+        $progressLevel = 'Level - '.(($noProgress)?'1.1':$firstContent->fetch('higher_key_progress','1.1'));
+        $progressLabelText = ($primaryPage == 'method')?$progressLevel:'';
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -495,7 +498,9 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - ' . $firstContent->fetch('higher_key_progress', '1.1');
+        $noProgress = empty($firstContent->fetch('higher_key_progress'));
+        $progressLevel = 'Level - '.(($noProgress)?'1.1':$firstContent->fetch('higher_key_progress','1.1'));
+        $progressLabelText = ($primaryPage == 'method')?$progressLevel:'';
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -726,10 +731,12 @@ class ContentPagesController extends BaseController
             }
         }
 
-        LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
-        $this->lessonAssignmentDecorator->decorate(new Collection([$contentToRenderAsLesson]))
-            ->first();
-
+        if(empty($contentToRenderAsLesson['assignments'] ?? [])) {
+            LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+            $this->lessonAssignmentDecorator->decorate(new Collection([$contentToRenderAsLesson]))
+                ->first();
+        }
+        
         $lessonAssignments = $contentToRenderAsLesson['assignments'] ?? [];
 
         $contentToRenderAsLesson['assignments'] = $lessonAssignments;
@@ -1331,31 +1338,9 @@ class ContentPagesController extends BaseController
 
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
-        ContentRepository::$pullFutureContent = true;
 
-        $futureLessons = $this->contentService->getFiltered(
-            1,
-            5,
-            '-published_on',
-            $filteredType ?? $lessonType,
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            true,
-            true
-        );
-
-        foreach ($futureLessons['results'] as $futureLessonIndex => $futureLesson) {
-            if (Carbon::parse($futureLesson['published_on']) < Carbon::now()) {
-                unset($futureLessons['results'][$futureLessonIndex]);
-            }
-        }
-
-        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -1370,20 +1355,13 @@ class ContentPagesController extends BaseController
             $request->get('included_user_states', [])
         );
 
-        $listLessons['results'] = $listLessons['results']->merge($futureLessons['results']);
-        $listLessons['total_results'] = $listLessons['total_results'] + $futureLessons['total_results'];
-
-        $listLessons['results'] = $listLessons['results']->sort(function ($a, $b) {
-            return Carbon::parse($a["published_on"]) < Carbon::parse($b["published_on"]);
-        });
-
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
 
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
             "hasStartedLessons" => false,
             'isAllContent' => true,
-            "lessonType" => implode(',', $lessonType),
+            "lessonType" => implode(',', $listLessons['filter_options']['type']),
             "totalResults" => $listLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
         ]);

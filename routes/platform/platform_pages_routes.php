@@ -14,6 +14,7 @@ use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Http\Controllers\Platform\LegacyResourcesController;
+use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -169,6 +170,14 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.packs.third-level');
+
+        Route::get('/{brand}/semester-packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.semester-packs.first-level');
+
+        Route::get('/{brand}/semester-packs/{packSlug}/{packId}/{packLessonSlug}/{packLessonId}', [PackPagesController::class, 'semesterPackLesson'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.semester-packs.lesson');
 
         /*
          * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
@@ -331,13 +340,6 @@ Route::domain('{musoraDomain}')
             ->name('platform.notifications');
 
         /*
-         * Referral Pages
-         */
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.invite-a-friend');
-
-        /*
          * Forums
          */
         Route::get('/{brand}/forums', [ForumPagesController::class, 'showCategories'])
@@ -439,3 +441,21 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
     });
+
+/*
+ * Referral Pages
+ */
+Route::domain('{musoraDomain}')
+    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+    ->group(function () {
+        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.invite-a-friend');
+    });
+
+Route::get('/apple-app-site-association', function () {
+    $json = file_get_contents(base_path('apple-app-site-association'));
+
+    return response($json, 200)
+        ->header('Content-Type', 'application/json');
+});

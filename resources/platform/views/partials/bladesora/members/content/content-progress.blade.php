@@ -18,7 +18,7 @@
                         class="trophy-progress relative bg-white"
                         style="transform:translateX({{ $progress - 100 }}%);"
                     >
-                        <span class="progress-percent body font-bold text-{{ $brand }}
+                        <span class="progress-percent body tw-font-bold text-{{ $brand }}
                                     {{ $progress > 50 ? '' : 'right' }}">
                             {{ round($progress) }}%
                         </span>
