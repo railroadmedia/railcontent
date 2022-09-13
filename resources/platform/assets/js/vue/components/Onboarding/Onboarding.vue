@@ -12,6 +12,10 @@ import { initialSteps, instrumentBrand } from './constants';
 import { getInitialInfo, getCheckedSteps } from './utils';
 
 const props = defineProps({
+    startOnStep: {
+        type: Number,
+        default: null,
+    },
     selectedBrand: {
         type: String,
         default: null,
@@ -62,11 +66,20 @@ function checkStepToggle(step, val) {
 
 onMounted(() => {
     if (props.selectedBrand) {
-        const newSteps = getCheckedSteps({ ...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: props.selectedBrand });
-        steps.value = newSteps;
-        console.log(newSteps)
-        const lastCheckedStep = newSteps.findLastIndex(idx => idx.checked);
-        currentStep.value = lastCheckedStep > 0 ? lastCheckedStep : 0;
+        if (props.startOnStep) {
+            const newSteps = [...steps.value];
+            newSteps.forEach(({}, index) => {
+                if (props.startOnStep >= index) {
+                    newSteps[index].checked = true;
+                }
+            });
+            currentStep.value = props.startOnStep;
+        } else {
+            const newSteps = getCheckedSteps({ ...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: props.selectedBrand });
+            steps.value = newSteps;
+            const lastCheckedStep = newSteps.findLastIndex(idx => idx.checked);
+            currentStep.value = lastCheckedStep > 0 ? lastCheckedStep : 0;
+        }
     }
 });
 </script>
