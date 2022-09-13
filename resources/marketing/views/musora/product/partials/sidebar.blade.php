@@ -38,7 +38,7 @@
                         <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
                     @endif
                 </h1>
-            @elseif(isset($price) && $price !== "0.00")
+            @elseif(isset($price) && !$soldOut)
                 <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif
 
