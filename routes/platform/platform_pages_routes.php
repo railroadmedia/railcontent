@@ -446,6 +446,7 @@ Route::domain('{musoraDomain}')
     });
 
 Route::get('/apple-app-site-association', function () {
+dd(base_path('apple-app-site-association'));
     $json = file_get_contents(base_path('apple-app-site-association'));
 
     return response($json, 200)
