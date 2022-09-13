@@ -9,7 +9,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentRepositoryFieldSubContents extends RailcontentTestCase
+class ContentRepositoryFieldSubContentsTest extends RailcontentTestCase
 {
     /**
      * @var ContentRepository
@@ -25,15 +25,6 @@ class ContentRepositoryFieldSubContents extends RailcontentTestCase
      * @var ContentContentFieldFactory
      */
     protected $fieldFactory;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-    }
 
     public function test_sub_content_id_field_is_replace_by_content()
     {
@@ -105,5 +96,14 @@ class ContentRepositoryFieldSubContents extends RailcontentTestCase
 
         $this->assertEquals('content', $result['fields'][2]['type']);
         $this->assertEquals($subContents[2]->getArrayCopy(), $result['fields'][2]['value']);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 }

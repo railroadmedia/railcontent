@@ -5988,14 +5988,6 @@ $.ajax({
             "child_id": null,
             "fields": [
                 {
-                    "id": 12849,
-                    "content_id": 21065,
-                    "key": "legacy_wordpress_post_id",
-                    "value": "21065",
-                    "type": "integer",
-                    "position": 1
-                },
-                {
                     "id": 2421,
                     "content_id": 21065,
                     "key": "title",
@@ -6245,14 +6237,6 @@ $.ajax({
                         "key": "tag",
                         "value": "beats",
                         "type": "string",
-                        "position": 1
-                    },
-                    {
-                        "id": 12853,
-                        "content_id": 21067,
-                        "key": "legacy_wordpress_post_id",
-                        "value": "21067",
-                        "type": "integer",
                         "position": 1
                     },
                     {
@@ -6719,14 +6703,6 @@ $.ajax({
                         "key": "tag",
                         "value": "beats",
                         "type": "string",
-                        "position": 1
-                    },
-                    {
-                        "id": 12854,
-                        "content_id": 21069,
-                        "key": "legacy_wordpress_post_id",
-                        "value": "21069",
-                        "type": "integer",
                         "position": 1
                     },
                     {

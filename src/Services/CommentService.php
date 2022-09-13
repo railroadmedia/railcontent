@@ -82,7 +82,7 @@ class CommentService
         //return null if the content type it's not predefined in config file
         if (!in_array(
             $content['type'],
-            array_merge(config('railcontent.commentable_content_types', []), config('railcontent.showTypes', []))
+            array_merge(config('railcontent.commentable_content_types', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         )) {
             return null;
         }

@@ -3,15 +3,15 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
-use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentLikeRepository;
 use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ContentStatisticsService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -43,35 +43,18 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
      * @var ContentContentFieldFactory
      */
     protected $contentFieldFactory;
-
-    /**
-     * @var ContentStatisticsRepository
-     */
-    private $contentStatisticsRepository;
-
-    /**
-     * @var ContentStatisticsService
-     */
-    private $contentStatisticsService;
-
     /**
      * @var UserContentProgressRepository
      */
     protected $userContentRepository;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->commentRepository = $this->app->make(CommentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
-        $this->contentStatisticsRepository = $this->app->make(ContentStatisticsRepository::class);
-        $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
-        $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
-    }
+    /**
+     * @var ContentStatisticsRepository
+     */
+    private $contentStatisticsRepository;
+    /**
+     * @var ContentStatisticsService
+     */
+    private $contentStatisticsService;
 
     public function test_content_statistics()
     {
@@ -87,7 +70,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         // add content
         $contentData = [];
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
                 $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -112,9 +95,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $expectedStats = [];
 
         foreach ($intervals as $interval) {
-
             foreach ($contentData as $contentId => $content) {
-
                 if (!$this->faker->randomElement([0, 1, 1, 1, 1])) {
                     // for 1 in 5 chance, do not add content stats, as in all stats should be 0
                     continue;
@@ -134,9 +115,9 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
                 ];
 
                 $insertData = array_diff_key(
-                    $content,
-                    ['content_brand' => true, 'content_title' => true]
-                ) + $contentStats;
+                        $content,
+                        ['content_brand' => true, 'content_title' => true]
+                    ) + $contentStats;
 
                 $this->contentStatisticsRepository->create($insertData);
 
@@ -148,12 +129,12 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
                 ) {
                     if (!isset($expectedStats[$contentId])) {
                         $expectedStats[$contentId] = $content + [
-                            'total_completes' => 0,
-                            'total_starts' => 0,
-                            'total_comments' => 0,
-                            'total_likes' => 0,
-                            'total_added_to_list' => 0,
-                        ];
+                                'total_completes' => 0,
+                                'total_starts' => 0,
+                                'total_comments' => 0,
+                                'total_likes' => 0,
+                                'total_added_to_list' => 0,
+                            ];
                     }
 
                     $expectedStats[$contentId]['total_completes'] += $contentStats['completes'];
@@ -206,7 +187,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         // add content
         $contentIds = [];
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
                 $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -220,13 +201,12 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $expectedCompleted = 0;
 
         // add progress complete
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             // increased chance to add progress to test content id
             $contentId = $this->faker->randomElement(
                 [
                     $this->faker->randomElement($contentIds),
-                    $testContentId
+                    $testContentId,
                 ]
             );
 
@@ -251,13 +231,12 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $expectedStarts = 0;
 
         // add progress started
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             // increased chance to add progress to test content id
             $contentId = $this->faker->randomElement(
                 [
                     $this->faker->randomElement($contentIds),
-                    $testContentId
+                    $testContentId,
                 ]
             );
 
@@ -282,13 +261,12 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $expectedComments = 0;
 
         // add comments
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             // increased chance to add comment to test content id
             $contentId = $this->faker->randomElement(
                 [
                     $this->faker->randomElement($contentIds),
-                    $testContentId
+                    $testContentId,
                 ]
             );
 
@@ -309,13 +287,12 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $expectedLikes = 0;
 
         // add likes
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             // increased chance to add like to test content id
             $contentId = $this->faker->randomElement(
                 [
                     $this->faker->randomElement($contentIds),
-                    $testContentId
+                    $testContentId,
                 ]
             );
 
@@ -336,13 +313,12 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $expectedAddToList = 0;
 
         // add to lists
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             // increased chance to add to a list the test content id
             $contentId = $this->faker->randomElement(
                 [
                     $this->faker->randomElement($contentIds),
-                    $testContentId
+                    $testContentId,
                 ]
             );
 
@@ -401,7 +377,7 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
                 'progress_percent' => $progressPercent,
                 'updated_on' => $updatedOn,
                 'started_on' => $updatedOn,
-                'completed_on' => $updatedOn
+                'completed_on' => $updatedOn,
             ]
         );
     }
@@ -474,5 +450,19 @@ class ContentStatisticsJsonControllerTest extends RailcontentTestCase
         $this->query()
             ->table(ConfigService::$tablePlaylistContents)
             ->insertGetId($userPlaylistContent1);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->commentRepository = $this->app->make(CommentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
+        $this->contentStatisticsRepository = $this->app->make(ContentStatisticsRepository::class);
+        $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
+        $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
     }
 }

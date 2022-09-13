@@ -3,19 +3,19 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
-use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
-
-//use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
@@ -31,10 +31,14 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentStyleRepository;
 use Railroad\Railcontent\Repositories\ContentTopicRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
+use Railroad\Railcontent\Repositories\ContentVideoRepository;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
+use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Support\Collection;
+
+//use Railroad\Railcontent\Events\XPModified;
 
 class ContentService
 {
@@ -110,15 +114,22 @@ class ContentService
     private $contentStyleRepository;
 
     private $contentBpmRepository;
+    /**
+     * @var ContentVideoRepository
+     */
+    private $contentVideoRepository;
+
+    private DatabaseManager $databaseManager;
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_ARCHIVED = 'archived';
+
     const STATUS_DELETED = 'deleted';
 
-    private $idContentCache = [];
+    public $idContentCache = [];
 
     /**
      * @param ContentRepository $contentRepository
@@ -154,7 +165,9 @@ class ContentService
         ContentTopicRepository $contentTopicRepository,
         ContentInstructorRepository $contentInstructorRepository,
         ContentStyleRepository $contentStyleRepository,
-        ContentBpmRepository $contentBpmRepository
+        ContentBpmRepository $contentBpmRepository,
+        DatabaseManager $databaseManager,
+        ContentVideoRepository $contentVideoRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
@@ -172,6 +185,8 @@ class ContentService
         $this->contentInstructorRepository = $contentInstructorRepository;
         $this->contentStyleRepository = $contentStyleRepository;
         $this->contentBpmRepository = $contentBpmRepository;
+        $this->databaseManager = $databaseManager;
+        $this->contentVideoRepository = $contentVideoRepository;
     }
 
     /**
@@ -299,6 +314,7 @@ class ContentService
      * @param string $publishedOnComparisonOperator
      * @param string $orderByColumn
      * @param string $orderByDirection
+     * @param integer $limit
      * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -308,7 +324,8 @@ class ContentService
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc',
-        $requiredField = []
+        $requiredField = [],
+        $limit = null
     ) {
         return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -318,7 +335,8 @@ class ContentService
                 $publishedOnComparisonOperator,
                 $orderByColumn,
                 $orderByDirection,
-                $requiredField
+                $requiredField,
+                $limit
             ),
             'content'
         );
@@ -1070,6 +1088,13 @@ class ContentService
                         $filterOptions['instructor'] = $instructors;
                     }
 
+                    if (!empty($filterOptions['difficulty'])) {
+                        $filterOptions['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                            $includedTypes,
+                            $filterOptions['difficulty']
+                        );
+                    }
+
                     $filters = $filterOptions;
                     $finish = microtime(true) - $start;
 
@@ -1085,13 +1110,21 @@ class ContentService
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
-                $resultsDB = new ContentFilterResultsEntity(
-                    [
-                        'results' => $filter->retrieveFilter(),
-                        'total_results' => $pullPagination ? $filter->countFilter() : 0,
-                        'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
-                    ]
-                );
+                $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
+
+                if ($pullFilterFields && !empty($filterFields['difficulty'])) {
+                    $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                        $includedTypes,
+                        $filterFields['difficulty']
+                    );
+                }
+
+                $resultsDB = new ContentFilterResultsEntity([
+                                                                'results' => $filter->retrieveFilter(),
+                                                                'total_results' => $pullPagination ?
+                                                                    $filter->countFilter() : 0,
+                                                                'filter_options' => $filterFields,
+                                                            ]);
 
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
@@ -1099,6 +1132,43 @@ class ContentService
         }
 
         return Decorator::decorate($results, 'content');
+    }
+
+    // for remove extraneous options and order logically rather than alphabetically
+    private function difficultyFilterOptionsCleanup($includedContentTypes, $difficultyOptions)
+    {
+        // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+        // accommodates—have an "included_types" value like this—an array of one string.
+        $isContentTypeWithSpecialConditions = in_array($includedContentTypes, [
+            ['student-focus'],
+            ['student-review'],
+        ]);
+
+        if (!$isContentTypeWithSpecialConditions) {
+            return $difficultyOptions;
+        }
+
+        foreach ($difficultyOptions as &$option) {
+            $option = is_string($option) ? strtolower((string)$option) : $option;
+        }
+
+        $hasBeginner = in_array('beginner', $difficultyOptions);
+        $hasIntermediate = in_array('intermediate', $difficultyOptions);
+        $hasAdvanced = in_array('advanced', $difficultyOptions);
+        if ($hasBeginner || $hasIntermediate || $hasAdvanced) {
+            $difficultyOptions = [];
+            if ($hasBeginner) {
+                $difficultyOptions[] = 'Beginner';
+            }
+            if ($hasIntermediate) {
+                $difficultyOptions[] = 'Intermediate';
+            }
+            if ($hasAdvanced) {
+                $difficultyOptions[] = 'Advanced';
+            }
+        }
+
+        return $difficultyOptions;
     }
 
     /**
@@ -1369,11 +1439,11 @@ class ContentService
     public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
     {
         $liveEventsTypes = array_merge(
-            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
             (array)config('railcontent.liveContentTypes', [])
         );
         $contentReleasesTypes = array_merge(
-            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
             (array)config('railcontent.contentReleaseContentTypes', [])
         );
 
@@ -1868,4 +1938,697 @@ class ContentService
         return $documents;
     }
 
+    public function fillParentContentDataColumnForContentIds(array $contentIds)
+    {
+        $hierarchyRows =
+            $this->contentRepository->query()
+                ->from(config('railcontent.table_prefix').'content_hierarchy as rch1')
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp1',
+                    'rcp1.id',
+                    '=',
+                    'rch1.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content_hierarchy as rch2',
+                    'rch2.child_id',
+                    '=',
+                    'rch1.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp2',
+                    'rcp2.id',
+                    '=',
+                    'rch2.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content_hierarchy as rch3',
+                    'rch3.child_id',
+                    '=',
+                    'rch2.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp3',
+                    'rcp3.id',
+                    '=',
+                    'rch3.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content_hierarchy as rch4',
+                    'rch4.child_id',
+                    '=',
+                    'rch3.parent_id'
+                )
+                ->leftJoin(
+                    config('railcontent.table_prefix').'content as rcp4',
+                    'rcp4.id',
+                    '=',
+                    'rch4.parent_id'
+                )
+                ->select([
+                             'rch1.child_id as rch1_child_id',
+                             'rch1.parent_id as rch1_parent_id',
+                             'rch1.child_position as rch1_child_position',
+                             'rcp1.id as rcp1_content_id',
+                             'rcp1.slug as rcp1_content_slug',
+                             'rcp1.type as rcp1_content_type',
+                             'rch2.child_id as rch2_child_id',
+                             'rch2.parent_id as rch2_parent_id',
+                             'rch2.child_position as rch2_child_position',
+                             'rcp2.id as rcp2_content_id',
+                             'rcp2.slug as rcp2_content_slug',
+                             'rcp2.type as rcp2_content_type',
+                             'rch3.child_id as rch3_child_id',
+                             'rch3.parent_id as rch3_parent_id',
+                             'rch3.child_position as rch3_child_position',
+                             'rcp3.id as rcp3_content_id',
+                             'rcp3.slug as rcp3_content_slug',
+                             'rcp3.type as rcp3_content_type',
+                             'rch4.child_id as rch4_child_id',
+                             'rch4.parent_id as rch4_parent_id',
+                             'rch4.child_position as rch4_child_position',
+                             'rcp4.id as rcp4_content_id',
+                             'rcp4.slug as rcp4_content_slug',
+                             'rcp4.type as rcp4_content_type',
+                         ])
+                ->whereIn('rch1.child_id', $contentIds)
+                ->get();
+
+        $cases = [];
+        $ids = [];
+        $params = [];
+
+        foreach ($contentIds as $contentId) {
+            $hierarchyData =
+                $hierarchyRows->where('rch1_child_id', $contentId)
+                    ->first();
+
+            if (!empty($hierarchyData)) {
+                $parentContentDataForDatabase = [];
+
+                if (!empty($hierarchyData['rch1_parent_id']) &&
+                    !empty($hierarchyData['rcp1_content_id']) &&
+                    !empty($hierarchyData['rcp1_content_slug'])) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData['rcp1_content_id'],
+                        'slug' => $hierarchyData['rcp1_content_slug'],
+                        'type' => $hierarchyData['rcp1_content_type'],
+                        'position' => $hierarchyData['rch2_child_position'],
+                    ];
+                }
+
+                if (!empty($hierarchyData['rch2_parent_id']) &&
+                    !empty($hierarchyData['rcp2_content_id']) &&
+                    !empty($hierarchyData['rcp2_content_slug'])) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData['rcp2_content_id'],
+                        'slug' => $hierarchyData['rcp2_content_slug'],
+                        'type' => $hierarchyData['rcp2_content_type'],
+                        'position' => $hierarchyData['rch3_child_position'],
+                    ];
+                }
+
+                if (!empty($hierarchyData['rch3_parent_id']) &&
+                    !empty($hierarchyData['rcp3_content_id']) &&
+                    !empty($hierarchyData['rcp3_content_slug'])) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData['rcp3_content_id'],
+                        'slug' => $hierarchyData['rcp3_content_slug'],
+                        'type' => $hierarchyData['rcp3_content_type'],
+                        'position' => $hierarchyData['rch4_child_position'],
+                    ];
+                }
+
+                if (!empty($hierarchyData['rch4_parent_id']) &&
+                    !empty($hierarchyData['rcp4_content_id']) &&
+                    !empty($hierarchyData['rcp4_content_slug'])) {
+                    $parentContentDataForDatabase[] = (object)[
+                        'id' => $hierarchyData['rcp4_content_id'],
+                        'slug' => $hierarchyData['rcp4_content_slug'],
+                        'type' => $hierarchyData['rcp4_content_type'],
+                        'position' => null,
+                    ];
+                }
+
+                // save
+
+                if (!empty($parentContentDataForDatabase)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = json_encode($parentContentDataForDatabase);
+                    $ids[] = $contentId;
+                } elseif (!empty($contentRow->parent_content_data)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = null;
+                    $ids[] = $contentId;
+                }
+            }
+        }
+
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+
+        if (!empty($ids)) {
+            DB::connection(config('railcontent.database_connection_name'))
+                ->update(
+                    "UPDATE railcontent_content SET `parent_content_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
+                    $params
+                );
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $parentContentId
+     * @param $userId
+     * @return array|ContentEntity
+     */
+    public function getNextContentForParentContentForUser($parentContentId, $userId)
+    {
+        $isParentComplete =
+            RepositoryBase::$connectionMask
+                ->table('railcontent_user_content_progress')
+                ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
+                ->exists();
+
+        $contentHierarchyDataQuery =
+            RepositoryBase::$connectionMask
+                ->table('railcontent_content_hierarchy AS ch_1')
+                ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
+                ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
+                ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
+                ->leftJoin('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_1_child.id', '=', 'ch_1.child_id')
+                        ->whereNot('ch_1_child.type', 'assignment')
+                        ->where('ch_1_child.status', '=', 'published')
+                        ->where(
+                            'ch_1_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin('railcontent_content AS ch_2_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_2_child.id', '=', 'ch_2.child_id')
+                        ->whereNot('ch_2_child.type', 'assignment')
+                        ->where('ch_2_child.status', '=', 'published')
+                        ->where(
+                            'ch_2_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin('railcontent_content AS ch_3_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_3_child.id', '=', 'ch_3.child_id')
+                        ->whereNot('ch_3_child.type', 'assignment')
+                        ->where('ch_2_child.status', '=', 'published')
+                        ->where(
+                            'ch_2_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin('railcontent_content AS ch_4_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_4_child.id', '=', 'ch_4.child_id')
+                        ->whereNot('ch_4_child.type', 'assignment')
+                        ->where('ch_2_child.status', '=', 'published')
+                        ->where(
+                            'ch_2_child.published_on',
+                            '<',
+                            Carbon::now()
+                                ->toDateTimeString()
+                        );
+                })
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_1',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
+                            ->where('ucp_1.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_2',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
+                            ->where('ucp_2.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_3',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
+                            ->where('ucp_3.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_4',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
+                            ->where('ucp_4.user_id', $userId);
+                    }
+                )
+                ->select([
+                             'ch_1.parent_id AS ch_1_parent_id',
+                             'ch_2.parent_id AS ch_2_parent_id',
+                             'ch_3.parent_id AS ch_3_parent_id',
+                             'ch_4.parent_id AS ch_4_parent_id',
+                             'ch_1.child_id AS ch_1_child_id',
+                             'ch_2.child_id AS ch_2_child_id',
+                             'ch_3.child_id AS ch_3_child_id',
+                             'ch_4.child_id AS ch_4_child_id',
+                             'ch_1.child_position AS ch_1_child_position',
+                             'ch_2.child_position AS ch_2_child_position',
+                             'ch_3.child_position AS ch_3_child_position',
+                             'ch_4.child_position AS ch_4_child_position',
+                             'ch_1_child.slug AS ch_1_child_slug',
+                             'ch_2_child.slug AS ch_2_child_slug',
+                             'ch_3_child.slug AS ch_3_child_slug',
+                             'ch_4_child.slug AS ch_4_child_slug',
+                             'ucp_1.state AS ucp_1_state',
+                             'ucp_2.state AS ucp_2_state',
+                             'ucp_3.state AS ucp_3_state',
+                             'ucp_4.state AS ucp_4_state',
+                         ])
+                ->where('ch_1.parent_id', $parentContentId)
+                ->orderBy('ch_1.child_position')
+                ->orderBy('ch_2.child_position')
+                ->orderBy('ch_3.child_position')
+                ->orderBy('ch_4.child_position')
+                ->limit(1);
+
+        // if the parent is complete, then just return the first lesson, otherwise get the next uncomplete lesson
+        if (!$isParentComplete) {
+            $contentHierarchyDataQuery->where($this->databaseManager->raw('IFNULL(ucp_1.state, "")'), '!=', 'completed')
+                ->where($this->databaseManager->raw('IFNULL(ucp_2.state, "")'), '!=', 'completed')
+                ->where($this->databaseManager->raw('IFNULL(ucp_3.state, "")'), '!=', 'completed')
+                ->where($this->databaseManager->raw('IFNULL(ucp_4.state, "")'), '!=', 'completed');
+        }
+
+        $contentHierarchyDataRow =
+            $contentHierarchyDataQuery->get()
+                ->first();
+
+        $contentId = null;
+
+        if (!empty($contentHierarchyDataRow)) {
+            if (!empty($contentHierarchyDataRow->ch_4_child_slug)) {
+                $contentId = $contentHierarchyDataRow->ch_4_child_id;
+            } elseif (!empty($contentHierarchyDataRow->ch_3_child_slug)) {
+                $contentId = $contentHierarchyDataRow->ch_3_child_id;
+            } elseif (!empty($contentHierarchyDataRow->ch_2_child_slug)) {
+                $contentId = $contentHierarchyDataRow->ch_2_child_id;
+            } elseif (!empty($contentHierarchyDataRow->ch_1_child_slug)) {
+                $contentId = $contentHierarchyDataRow->ch_1_child_id;
+            }
+        }
+
+        if (!empty($contentId)) {
+            return $this->getById($contentId);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $parentContentId
+     * @param $userId
+     * @return void
+     */
+    public function getLatestActiveContentForParentContentForUser($parentContentId, $userId)
+    {
+    }
+
+    public function fillCompiledViewContentDataColumnForContentIds(array $contentIds)
+    {
+        /*
+         * Keys:
+         * title
+         * instructor_names
+         * type
+         * difficulty
+         * description
+         * song_styles
+         * song_artist
+         * song_album
+         * coach_name
+         * coach_focus_text
+         */
+        $contentRowsById =
+            RepositoryBase::$connectionMask
+                ->table('railcontent_content')
+                ->whereIn('id', $contentIds)
+                ->get()
+                ->keyBy('id');
+
+        // content fields are the source of truth at the moment but that will change eventually
+        $contentsFieldRows =
+            RepositoryBase::$connectionMask
+                ->table('railcontent_content_fields')
+                ->whereIn('content_id', $contentIds)
+                ->get();
+
+        $contentsFieldRowsByContentId = $contentsFieldRows->groupBy('content_id');
+
+        $contentsDataRowsByContentId =
+            RepositoryBase::$connectionMask
+                ->table('railcontent_content_data')
+                ->whereIn('content_id', $contentIds)
+                ->get()
+                ->groupBy('content_id');
+
+        // get all content that is linked via field
+        $keysThatLinkToOtherContent = ['instructor', 'video'];
+        $linkedContentIds =
+            $contentsFieldRows->whereIn('key', $keysThatLinkToOtherContent)
+                ->pluck('value');
+
+        $contentsFieldLinkedContentRowsById = collect();
+        $contentsFieldLinkedContentsFieldRowsById = collect();
+        $contentsFieldLinkedContentsDataRowsById = collect();
+
+        if (!empty($linkedContentIds)) {
+            $contentsFieldLinkedContentRowsById =
+                RepositoryBase::$connectionMask
+                    ->table('railcontent_content')
+                    ->whereIn('id', $linkedContentIds)
+                    ->get()
+                    ->keyBy('id');
+
+            $contentsFieldLinkedContentsFieldRowsById =
+                RepositoryBase::$connectionMask
+                    ->table('railcontent_content_fields')
+                    ->whereIn('content_id', $linkedContentIds)
+                    ->get()
+                    ->groupBy('content_id');
+
+            $contentsFieldLinkedContentsDataRowsById =
+                RepositoryBase::$connectionMask
+                    ->table('railcontent_content_data')
+                    ->whereIn('content_id', $linkedContentIds)
+                    ->get()
+                    ->groupBy('content_id');
+        }
+
+        $cases = [];
+        $ids = [];
+        $params = [];
+
+        foreach ($contentIds as $contentId) {
+            $contentRow = $contentRowsById[$contentId];
+
+            if (!empty($contentRow)) {
+                // compile
+                $contentFieldRows = $contentsFieldRowsByContentId[$contentId] ?? collect();
+                $contentDataRows = $contentsDataRowsByContentId[$contentId] ?? collect();
+
+                $jsonArray = $this->compileContentData($contentRow, $contentFieldRows, $contentDataRows);
+
+                // handle contents linked by fields
+                foreach ($linkedContentIds as $linkedContentId) {
+                    $linkedContentRow = $contentsFieldLinkedContentRowsById[$linkedContentId] ?? [];
+                    $linkedContentFieldRows = $contentsFieldRowsByContentId[$linkedContentId] ?? collect();
+                    $linkedContentDataRows = $contentsDataRowsByContentId[$linkedContentId] ?? collect();
+
+                    if (!empty($linkedContentRow)) {
+                        $subContentJsonArray = $this->compileContentData(
+                            $linkedContentRow,
+                            $linkedContentFieldRows,
+                            $linkedContentDataRows
+                        );
+
+                        // substitute the field id with the compiled data
+                        foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                            if (in_array($jsonArrayKey, $keysThatLinkToOtherContent) && !empty($subContentJsonArray)) {
+                                if (is_array($jsonArrayValue)) {
+                                    foreach ($jsonArrayValue as $jsonArraySubKey => $jsonArraySubValue) {
+                                        if ((integer)$jsonArraySubValue == $linkedContentRow['id'] &&
+                                            $jsonArraySubKey !== 'id') {
+                                            $jsonArray[$jsonArrayKey][$jsonArraySubKey] = $subContentJsonArray;
+                                        }
+                                    }
+                                } elseif ((integer)$jsonArrayValue == $linkedContentRow['id']) {
+                                    $jsonArray[$jsonArrayKey] = $subContentJsonArray;
+                                }
+
+                                // always set length in seconds on parent content data as well
+                                if (isset($subContentJsonArray['length_in_seconds'])) {
+                                    $jsonArray['length_in_seconds'] = $subContentJsonArray['length_in_seconds'];
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // add a few shorthand compiled keys for easy usage
+                // instructor_names
+                $instructorNames = [];
+
+                foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                    if ($jsonArrayKey == 'instructor') {
+                        if (is_array($jsonArrayValue) && empty($jsonArrayValue['id'])) {
+                            foreach ($jsonArrayValue as $jsonArraySubValue) {
+                                if (!empty($jsonArraySubValue['name'])) {
+                                    $instructorNames[] = $jsonArraySubValue['name'];
+                                }
+                            }
+                        } else {
+                            if (!empty($jsonArrayValue['name'])) {
+                                $instructorNames[] = $jsonArrayValue['name'];
+                            }
+                        }
+                    }
+                }
+
+                if (!empty($instructorNames)) {
+                    $jsonArray['instructor_names'] = $instructorNames;
+                }
+
+                // remove compiled view data from json data
+                foreach ($jsonArray as $jsonArrayKey => $jsonArrayValue) {
+                    if ($jsonArrayKey == 'compiled_view_data') {
+                        unset($jsonArray[$jsonArrayKey]);
+                    }
+                }
+
+                // save
+                if (!empty($jsonArray)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = json_encode($jsonArray);
+                    $ids[] = $contentId;
+                } elseif (!empty($contentRow->compiled_view_data)) {
+                    $cases[] = "WHEN {$contentId} then ?";
+                    $params[] = null;
+                    $ids[] = $contentId;
+                }
+            }
+        }
+
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+
+        if (!empty($ids)) {
+            DB::connection(config('railcontent.database_connection_name'))
+                ->update(
+                    "UPDATE railcontent_content SET `compiled_view_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
+                    $params
+                );
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $contentRow
+     * @param \Illuminate\Support\Collection $contentFieldRows
+     * @param \Illuminate\Support\Collection $contentDataRows
+     * @return array
+     */
+    public function compileContentData(
+        $contentRow,
+        \Illuminate\Support\Collection $contentFieldRows,
+        \Illuminate\Support\Collection $contentDataRows
+    ) {
+        $compiledData = (array)$contentRow;
+
+        // remove null/empty values
+        foreach ($compiledData as $contentRowColumnKey => $contentRowColumnValue) {
+            if (empty($contentRowColumnValue)) {
+                unset($compiledData[$contentRowColumnKey]);
+            }
+        }
+
+        $contentFieldDataRows = $contentFieldRows->merge($contentDataRows);
+        $contentFieldDataRowsGroupedByKey = $contentFieldDataRows->groupBy('key');
+
+        foreach ($contentFieldDataRowsGroupedByKey as $key => $rows) {
+            foreach ($rows as $row) {
+                // skip empty values except 0
+                if ($row['value'] === '' || $row['value'] === null) {
+                    continue;
+                }
+
+                if (empty($compiledData[$key])) {
+                    $compiledData[$key] = $row['value'];
+                } elseif (!empty($compiledData[$key]) && !is_array($compiledData[$key])) {
+                    $existingValue = $compiledData[$key];
+                    $compiledData[$key] = [$existingValue, $row['value']];
+                } elseif (is_array($compiledData[$key])) {
+                    $compiledData[$key][] = $row['value'];
+                }
+
+                // remove dupes
+                if (is_array($compiledData[$key])) {
+                    $compiledData[$key] = array_unique($compiledData[$key]);
+                }
+
+                // if its an array with a single value, change it back to a single value instead of an array
+                if (is_array($compiledData[$key]) && count($compiledData[$key]) === 1) {
+                    $compiledData[$key] = reset($compiledData[$key]);
+                }
+            }
+        }
+
+        return $compiledData;
+    }
+
+    /**
+     * @param null $brand
+     * @param null $limit
+     * @param int $page
+     * @return ContentFilterResultsEntity|Collection
+     */
+    public function getScheduledContent($brand = null, $limit = null, $page = 1)
+    {
+        $liveEventsTypes = array_merge(
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
+            (array)config('railcontent.liveContentTypes', [])
+        );
+        $contentReleasesTypes = array_merge(
+            (array)config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [],
+            (array)config('railcontent.contentReleaseContentTypes', [])
+        );
+
+        if (empty($liveEventsTypes) && empty($contentReleasesTypes)) {
+            // Accommodates AddEvent calling this method from Musora, where railcontent config is different than expected.
+            $liveEventsTypes = array_merge(
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.liveContentTypes', [])
+            );
+            $contentReleasesTypes = array_merge(
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.'.$brand.'.contentReleaseContentTypes', [])
+            );
+        }
+
+        $oldStatuses = ContentRepository::$availableContentStatues;
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
+        $types = array_merge($liveEventsTypes, $contentReleasesTypes);
+
+        if (empty($types)) {
+            return new Collection();
+        }
+
+        $scheduleEvents = $this->contentRepository->getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+            $types,
+            [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
+            Carbon::now()
+                ->toDateTimeString(),
+            '>',
+            'published_on',
+            'asc',
+            [],
+            $limit,
+            $page
+        );
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
+            [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
+            Carbon::now()
+                                                                                            ->toDateTimeString(),
+            '>',
+            'published_on',
+            'asc',
+            []);
+
+        ContentRepository::$availableContentStatues = $oldStatuses;
+        ContentRepository::$pullFutureContent = $oldFutureContent;
+
+        $results = new ContentFilterResultsEntity([
+                                                  'results' => $scheduleEvents,
+                                                  'total_results' => $countEvents,
+                                              ]);
+
+        return Decorator::decorate($results, 'content');
+    }
+
+    /**
+     * Get ordered contents by type, status and published_on date.
+     *
+     * @param array $types
+     * @param string $status
+     * @param string $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param integer $limit
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+        array $types,
+        $status,
+        $publishedOnValue,
+        $publishedOnComparisonOperator = '=',
+        $orderByColumn = 'published_on',
+        $orderByDirection = 'desc',
+        $requiredField = [],
+        $limit = null,
+        $page = 1
+    ) {
+        $scheduleEvents = Decorator::decorate(
+            $this->contentRepository->getWhereTypeInAndStatusInAndPublishedOnOrderedAndPaginated(
+                $types,
+                $status,
+                $publishedOnValue,
+                $publishedOnComparisonOperator,
+                $orderByColumn,
+                $orderByDirection,
+                $requiredField,
+                $limit,
+                $page
+            ),
+            'content'
+        );
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
+                                                                                        [ContentService::STATUS_SCHEDULED],
+                                                                                        Carbon::now()
+                                                                                            ->toDateTimeString(),
+                                                                                        '>',
+                                                                                        'published_on',
+                                                                                        'asc',
+                                                                                        []);
+
+        return new ContentFilterResultsEntity([
+                                                  'results' => $scheduleEvents,
+                                                  'total_results' => $countEvents,
+                                              ]);
+
+    }
+
+    /**
+     * @param $videoId
+     * @return \Illuminate\Support\Collection
+     */
+    public function getContentWithExternalVideoId($videoId)
+    {
+        return $this->contentVideoRepository->getContentWithExternalVideoId($videoId);
+    }
 }

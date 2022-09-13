@@ -22,7 +22,12 @@ class ContentEntity extends Entity
             if (isset($field['value']['id'])) {
 
                 // linked contents
-                $linkedContentDots = (new ContentEntity($field['value']))->dot();
+                if ($field['value'] instanceof ContentEntity) {
+                    $linkedContentDots = $field['value']->dot();
+                } else {
+                    $linkedContentDots = (new ContentEntity($field['value']))->dot();
+                }
+
                 $fieldDots['*fields.' . $field['key']][] = $field['value'];
 
                 foreach ($linkedContentDots as $linkedContentDotKey => $linkedContentDotValue) {
@@ -176,5 +181,21 @@ class ContentEntity extends Entity
         }
 
         return $results;
+    }
+
+    /**
+     * Lowest key is the nearest parent.
+     *
+     * Structure:
+     * [
+     *     0 => {id: 123, slug: 'my-content', type: 'my-type'},
+     *     1 => {id: 123, slug: 'my-content', type: 'my-type'},
+     * ]
+     *
+     * @return array
+     */
+    public function getParentContentData()
+    {
+        return json_decode($this['parent_content_data'] ?? '') ?? [];
     }
 }

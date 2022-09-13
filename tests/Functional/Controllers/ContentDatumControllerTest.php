@@ -8,9 +8,9 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Railroad\Railcontent\Services\ConfigService;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {
@@ -26,16 +26,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
      * @var ContentDatumFactory
      */
     protected $contentDatumFactory;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
-        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
-    }
 
     public function test_add_content_datum_controller_method_response()
     {
@@ -60,13 +50,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertArraySubset(
             [
                 'datum' => [
-                        'id' => '1',
-                        'content_id' => $content['id'],
-                        'key' => $key,
-                        'value' => $value,
-                        'position' => 1,
+                    'id' => '1',
+                    'content_id' => $content['id'],
+                    'key' => $key,
+                    'value' => $value,
+                    'position' => 1,
                 ],
-            ], $response->decodeResponseJson()->json()
+            ],
+            $response->decodeResponseJson()->json()
         );
     }
 
@@ -83,7 +74,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             [
                 "source" => "content_id",
                 "detail" => "The content id field is required.",
-            ]
+            ],
         ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
@@ -104,7 +95,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             [
                 "source" => "content_id",
                 "detail" => "The selected content id is invalid.",
-            ]
+            ],
         ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
@@ -141,13 +132,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertArraySubset(
             [
                 'datum' => [
-                        'id' => 1,
-                        'content_id' => $content['id'],
-                        'key' => $data['key'],
-                        'value' => $new_value,
-                        'position' => 1,
+                    'id' => 1,
+                    'content_id' => $content['id'],
+                    'key' => $data['key'],
+                    'value' => $new_value,
+                    'position' => 1,
                 ],
-            ], $response->decodeResponseJson()->json()
+            ],
+            $response->decodeResponseJson()->json()
         );
     }
 
@@ -179,7 +171,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             [
                 "source" => "key",
                 "detail" => "The key must not be greater than 255 characters.",
-            ]
+            ],
         ], $response->decodeResponseJson()->json('meta')['errors']);
     }
 
@@ -308,5 +300,15 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 return $event->contentId == $contentId;
             }
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
+        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
     }
 }

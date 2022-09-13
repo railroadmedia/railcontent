@@ -34,17 +34,6 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
      */
     protected $commentAssignationFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-
-        $this->classBeingTested = $this->app->make(CommentAssignmentService::class);
-    }
-
     public function test_store()
     {
         $managerId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
@@ -60,7 +49,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
             'id' => 1,
             'comment_id' => $comment['id'],
             'user_id' => $managerId,
-            'assigned_on' => Carbon::now()->toDateTimeString()
+            'assigned_on' => Carbon::now()->toDateTimeString(),
         ], $store);
     }
 
@@ -86,5 +75,16 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->deleteCommentAssignations($comment['id']);
 
         $this->assertTrue($results);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+
+        $this->classBeingTested = $this->app->make(CommentAssignmentService::class);
     }
 }

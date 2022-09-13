@@ -13,13 +13,6 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
      */
     protected $classBeingTested;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentFieldRepository::class);
-    }
-
     public function test_get()
     {
         $contentId = rand();
@@ -35,7 +28,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                     'key' => $key,
                     'value' => $value,
                     'position' => $position,
-                    'type' => $type
+                    'type' => $type,
                 ]
             )
         );
@@ -47,7 +40,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $value,
                 'position' => $position,
-                'type' => $type
+                'type' => $type,
             ],
             $result
         );
@@ -155,7 +148,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $value,
                 'position' => $position,
-                'type' => $type
+                'type' => $type,
             ]
         );
 
@@ -168,7 +161,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $value,
                 'position' => $position,
-                'type' => $type
+                'type' => $type,
             ]
         );
     }
@@ -211,7 +204,6 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $newData['type'],
             ]
         );
-
     }
 
     public function test_delete()
@@ -276,7 +268,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $this->faker->word,
                 'type' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $field['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $field);
@@ -306,5 +298,12 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 $expectedDatum
             );
         }
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentFieldRepository::class);
     }
 }

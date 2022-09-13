@@ -14,13 +14,6 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
      */
     protected $classBeingTested;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentHierarchyRepository::class);
-    }
-
     public function test_create_new_link()
     {
         $parentId = rand();
@@ -37,7 +30,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
                 'parent_id' => $parentId,
                 'child_id' => $childId,
                 'child_position' => 1,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
     }
@@ -62,7 +55,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
                 'parent_id' => $parentId,
                 'child_id' => $childId,
                 'child_position' => $position,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
 
@@ -72,7 +65,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
                 'parent_id' => $parentId,
                 'child_id' => 1,
                 'child_position' => 1,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
 
@@ -82,7 +75,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
                 'parent_id' => $parentId,
                 'child_id' => 2,
                 'child_position' => 3,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
 
@@ -92,7 +85,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
                 'parent_id' => $parentId,
                 'child_id' => 3,
                 'child_position' => 4,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
     }
@@ -116,7 +109,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => $childId,
-                'child_position' => $position
+                'child_position' => $position,
             ]
         );
 
@@ -125,7 +118,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 1,
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
 
@@ -134,7 +127,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 2,
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
 
@@ -143,7 +136,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 4,
-                'child_position' => 3
+                'child_position' => 3,
             ]
         );
 
@@ -152,7 +145,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 5,
-                'child_position' => 4
+                'child_position' => 4,
             ]
         );
 
@@ -161,7 +154,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 6,
-                'child_position' => 5
+                'child_position' => 5,
             ]
         );
 
@@ -170,7 +163,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 7,
-                'child_position' => 7
+                'child_position' => 7,
             ]
         );
 
@@ -179,7 +172,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 8,
-                'child_position' => 8
+                'child_position' => 8,
             ]
         );
     }
@@ -203,7 +196,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => $childId,
-                'child_position' => $position
+                'child_position' => $position,
             ]
         );
 
@@ -212,7 +205,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 1,
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
 
@@ -221,7 +214,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 2,
-                'child_position' => 3
+                'child_position' => 3,
             ]
         );
 
@@ -230,7 +223,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 3,
-                'child_position' => 4
+                'child_position' => 4,
             ]
         );
 
@@ -239,7 +232,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 4,
-                'child_position' => 5
+                'child_position' => 5,
             ]
         );
 
@@ -248,7 +241,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 5,
-                'child_position' => 6
+                'child_position' => 6,
             ]
         );
 
@@ -257,7 +250,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 6,
-                'child_position' => 7
+                'child_position' => 7,
             ]
         );
 
@@ -266,7 +259,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 8,
-                'child_position' => 8
+                'child_position' => 8,
             ]
         );
     }
@@ -313,7 +306,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId1,
                 'child_id' => 1,
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
 
@@ -322,7 +315,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId2,
                 'child_id' => 1,
-                'child_position' => 5
+                'child_position' => 5,
             ]
         );
 
@@ -331,7 +324,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId1,
                 'child_id' => 3,
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
 
@@ -340,7 +333,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId2,
                 'child_id' => 3,
-                'child_position' => 4
+                'child_position' => 4,
             ]
         );
 
@@ -349,7 +342,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId1,
                 'child_id' => 4,
-                'child_position' => 3
+                'child_position' => 3,
             ]
         );
 
@@ -358,7 +351,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId2,
                 'child_id' => 5,
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
 
@@ -367,7 +360,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId1,
                 'child_id' => 5,
-                'child_position' => 4
+                'child_position' => 4,
             ]
         );
 
@@ -376,7 +369,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId2,
                 'child_id' => 6,
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
     }
@@ -413,7 +406,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 3,
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
 
@@ -422,7 +415,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 4,
-                'child_position' => 3
+                'child_position' => 3,
             ]
         );
 
@@ -431,7 +424,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 5,
-                'child_position' => 4
+                'child_position' => 4,
             ]
         );
 
@@ -440,7 +433,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 6,
-                'child_position' => 5
+                'child_position' => 5,
             ]
         );
     }
@@ -462,7 +455,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 1,
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
 
@@ -471,7 +464,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 2,
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
 
@@ -480,7 +473,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 3,
-                'child_position' => 3
+                'child_position' => 3,
             ]
         );
 
@@ -489,7 +482,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 4,
-                'child_position' => 4
+                'child_position' => 4,
             ]
         );
 
@@ -498,10 +491,16 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 5,
-                'child_position' => 5
+                'child_position' => 5,
             ]
         );
+    }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentHierarchyRepository::class);
     }
 
 }

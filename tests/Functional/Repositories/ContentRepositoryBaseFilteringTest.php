@@ -28,20 +28,6 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
      */
     protected $contentHierarchyFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
-
     public function test_empty()
     {
         $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [], [])
@@ -90,7 +76,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $slugHierarchyToInclude = [
             'top-slug-' . rand(),
             'second-slug-' . rand(),
-            'third-slug-' . rand()
+            'third-slug-' . rand(),
         ];
 
         $includedParentContentIds = [];
@@ -112,7 +98,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $slugHierarchyToExclude = [
             $slugHierarchyToInclude[0],
             $slugHierarchyToInclude[1],
-            'random-slug-' . rand()
+            'random-slug-' . rand(),
         ];
 
         $excludedParentContentIds = [];
@@ -188,14 +174,14 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $slugHierarchyToInclude = [
             'top-slug-' . rand(),
             'second-slug-' . rand(),
-            'third-slug-' . rand()
+            'third-slug-' . rand(),
         ];
 
         $includedParentContentIds = [];
 
         foreach ($slugHierarchyToInclude as $slugToInclude) {
             $includedParentContentIds[] =
-                $this->contentFactory->create($slugToInclude, $type,ContentService::STATUS_PUBLISHED)['id'];
+                $this->contentFactory->create($slugToInclude, $type, ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
@@ -210,7 +196,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $slugHierarchyToExclude = [
             $slugHierarchyToInclude[0],
             $slugHierarchyToInclude[1],
-            'random-slug-' . rand()
+            'random-slug-' . rand(),
         ];
 
         $excludedParentContentIds = [];
@@ -283,7 +269,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             'brand' => ConfigService::$brand,
             'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'archived_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $parentContentId = $this->classBeingTested->create($parentContent);
@@ -299,7 +285,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
                 'brand' => ConfigService::$brand,
                 'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => Carbon::now()->toDateTimeString()
+                'archived_on' => Carbon::now()->toDateTimeString(),
             ];
 
             $childContent['id'] = $this->classBeingTested->create($childContent);
@@ -331,6 +317,20 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             ->retrieveFilter();
 
         $this->assertArraySubset($expectedChildContents, $results);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
     }
 
 }

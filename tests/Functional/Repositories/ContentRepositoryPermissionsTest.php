@@ -3,12 +3,10 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -40,23 +38,6 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
      * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
      */
     protected $userPermissionsRepository;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
-
-    }
-
-    protected function tearDown()
-    {
-       // Cache::store('redis')->flush();
-    }
 
     public function test_get_by_id_is_protected_by_single()
     {
@@ -103,7 +84,8 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->word,
-            ContentService::STATUS_PUBLISHED);
+            ContentService::STATUS_PUBLISHED
+        );
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -118,7 +100,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
             'user_id' => $userId,
             'permission_id' => $permission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString()
+            'created_on' => Carbon::now()->toDateTimeString(),
         ]);
 
         $response = $this->classBeingTested->getById($content['id']);
@@ -132,7 +114,8 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->word,
-            ContentService::STATUS_PUBLISHED);
+            ContentService::STATUS_PUBLISHED
+        );
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -151,7 +134,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
             'user_id' => $userId,
             'permission_id' => $otherPermission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString()
+            'created_on' => Carbon::now()->toDateTimeString(),
         ]);
 
         $response = $this->classBeingTested->getById($content['id']);
@@ -189,7 +172,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $otherPermission = $this->permissionFactory->create($this->faker->word);
         $otherContentPermission =
             $this->contentPermissionFactory->create(null, $content['type'], $permission['id']);
-$user = $this->createAndLogInNewUser();
+        $user = $this->createAndLogInNewUser();
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertNull($response);
@@ -205,7 +188,8 @@ $user = $this->createAndLogInNewUser();
             'en-US',
             ConfigService::$brand,
             rand(),
-            Carbon::now()->toDateTimeString());
+            Carbon::now()->toDateTimeString()
+        );
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -218,7 +202,7 @@ $user = $this->createAndLogInNewUser();
             'user_id' => $userId,
             'permission_id' => $permission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString()
+            'created_on' => Carbon::now()->toDateTimeString(),
         ]);
 
         $response = $this->classBeingTested->getById($content['id']);
@@ -232,7 +216,8 @@ $user = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->word,
-            ContentService::STATUS_PUBLISHED);
+            ContentService::STATUS_PUBLISHED
+        );
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -250,12 +235,28 @@ $user = $this->createAndLogInNewUser();
             'user_id' => $userId,
             'permission_id' => $otherPermission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString()
+            'created_on' => Carbon::now()->toDateTimeString(),
         ]);
 
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertEquals($content->getArrayCopy(), $response);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
+    }
+
+    protected function tearDown(): void
+    {
+        // Cache::store('redis')->flush();
     }
 
 }

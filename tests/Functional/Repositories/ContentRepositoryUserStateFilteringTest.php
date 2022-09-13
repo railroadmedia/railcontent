@@ -27,15 +27,6 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
      */
     protected $userStateFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->userStateFactory = $this->app->make(UserContentProgressFactory::class);
-    }
-
     public function test_require_started_state_with_pagination()
     {
         /*
@@ -152,5 +143,14 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
             ->retrieveFilter();
 
         $this->assertEquals([7, 8, 9], array_column($rows, 'id'));
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->userStateFactory = $this->app->make(UserContentProgressFactory::class);
     }
 }

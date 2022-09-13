@@ -3,8 +3,12 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class FullTextSearchQueryBuilder extends QueryBuilder
@@ -63,6 +67,63 @@ class FullTextSearchQueryBuilder extends QueryBuilder
         if ($column) {
             $this->orderByRaw($column .' '. $direction);
         }
+
+        $this->orderByRaw(' content_id '. $direction);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictByPermissions()
+    {
+        if (ContentRepository::$bypassPermissions === true) {
+            return $this;
+        }
+
+        $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
+            function (JoinClause $join) {
+                $join->on(
+                    'id_content_permissions'.'.content_id',
+                    ConfigService::$tableSearchIndexes.'.content_id'
+                );
+            })
+            ->where(function (Builder $builder) {
+                return $builder->where(function (Builder $builder) {
+                    return $builder->whereNull(
+                        'id_content_permissions'.'.permission_id'
+                    );
+                })
+                    ->orWhereExists(function (Builder $builder) {
+                        return $builder->select('id')
+                            ->from(ConfigService::$tableUserPermissions)
+                            ->where('user_id', auth()->id() ?? null)
+                            ->where(function (Builder $builder) {
+                                return $builder->whereRaw(
+                                    'permission_id = id_content_permissions.permission_id'
+                                );
+                            })
+                            ->where(function (Builder $builder) {
+                                return $builder->where(
+                                    'expiration_date',
+                                    '>=',
+                                    Carbon::now()
+                                        ->toDateTimeString()
+                                )
+                                    ->orWhereNull('expiration_date');
+                            })
+                            ->where(function (Builder $builder) {
+                                return $builder->where(
+                                    'start_date',
+                                    '<=',
+                                    Carbon::now()
+                                        ->toDateTimeString()
+                                )
+                                    ->orWhereNull('start_date');
+                            });
+                    });
+            });
 
         return $this;
     }

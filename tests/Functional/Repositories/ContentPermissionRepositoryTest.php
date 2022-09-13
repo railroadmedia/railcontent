@@ -31,17 +31,6 @@ class ContentPermissionRepositoryTest extends RailcontentTestCase
      */
     protected $permissionRepository;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-
-        $this->classBeingTested = $this->app->make(ContentPermissionRepository::class);
-        $this->permissionRepository = $this->app->make(PermissionRepository::class);
-    }
-
     public function test_assign_permission_to_specific_content()
     {
         $permission = $this->permissionFactory->create();
@@ -55,7 +44,7 @@ class ContentPermissionRepositoryTest extends RailcontentTestCase
             [
                 'content_id' => $contentId,
                 'content_type' => null,
-                'permission_id' => $permission['id']
+                'permission_id' => $permission['id'],
             ]
         );
     }
@@ -73,7 +62,7 @@ class ContentPermissionRepositoryTest extends RailcontentTestCase
             [
                 'content_id' => null,
                 'content_type' => $contentType,
-                'permission_id' => $permission['id']
+                'permission_id' => $permission['id'],
             ]
         );
     }
@@ -88,8 +77,19 @@ class ContentPermissionRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tableContentPermissions,
             [
-                'id' => $permission['id']
+                'id' => $permission['id'],
             ]
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+
+        $this->classBeingTested = $this->app->make(ContentPermissionRepository::class);
+        $this->permissionRepository = $this->app->make(PermissionRepository::class);
     }
 }

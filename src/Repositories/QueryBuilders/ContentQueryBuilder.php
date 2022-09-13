@@ -17,11 +17,9 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function selectPrimaryColumns()
     {
-        $this->addSelect(
-            [
-                ConfigService::$tableContent . '.*',
-            ]
-        );
+        $this->addSelect([
+                             ConfigService::$tableContent.'.*',
+                         ]);
 
         return $this;
     }
@@ -32,11 +30,21 @@ class ContentQueryBuilder extends QueryBuilder
     public function selectCountColumns($orderBy = null)
     {
         $this->addSelect([
-                ConfigService::$tableContent . '.id as id',
-            ]);
+                             $this->raw('DISTINCT('. ConfigService::$tableContent.'.id) as id'),
+                             ConfigService::$tableContent . '.published_on',
+                             ConfigService::$tableContent . '.created_on',
+                             ConfigService::$tableContent . '.slug',
+                             ConfigService::$tableContent . '.popularity',
+                             ConfigService::$tableContent . '.title',
+                             ConfigService::$tableContent . '.sort',
+                         ]);
 
-        if($orderBy && $orderBy == 'content_likes'){
+        if ($orderBy && $orderBy == 'content_likes') {
             $this->addSelect([DB::raw('count('.ConfigService::$tableContentLikes.'.id) as '.$orderBy)]);
+        }
+
+        if ($orderBy && $orderBy == 'progress') {
+            $this->addSelect([DB::raw(ConfigService::$tableUserContentProgress.'.updated_on ')]);
         }
 
         return $this;
@@ -47,13 +55,11 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function selectInheritenceColumns()
     {
-        $this->addSelect(
-            [
-                ConfigService::$tableContentHierarchy . '.child_position as child_position',
-                ConfigService::$tableContentHierarchy . '.child_id as child_id',
-                ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
-            ]
-        );
+        $this->addSelect([
+                             ConfigService::$tableContentHierarchy.'.child_position as child_position',
+                             ConfigService::$tableContentHierarchy.'.child_id as child_id',
+                             ConfigService::$tableContentHierarchy.'.parent_id as parent_id',
+                         ]);
 
         return $this;
     }
@@ -63,12 +69,10 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function selectFilterOptionColumns()
     {
-        $this->addSelect(
-            [
-                ConfigService::$tableContent . '.type as content_type',
-                ConfigService::$tableContent . '.*',
-            ]
-        );
+        $this->addSelect([
+                             ConfigService::$tableContent.'.type as content_type',
+                             ConfigService::$tableContent.'.*',
+                         ]);
 
         return $this;
     }
@@ -83,9 +87,9 @@ class ContentQueryBuilder extends QueryBuilder
     public function addSubJoinToQuery(Builder $subQuery)
     {
         $this->join(
-            $this->connection->raw('(' . $subQuery->toSql() . ') inner_content'),
+            $this->connection->raw('('.$subQuery->toSql().') inner_content'),
             function (JoinClause $joinClause) {
-                $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                $joinClause->on(ConfigService::$tableContent.'.id', '=', 'inner_content.id');
             }
         )
             ->addBinding($subQuery->getBindings());
@@ -103,27 +107,27 @@ class ContentQueryBuilder extends QueryBuilder
         $previousTableJoinColumn = '.id';
 
         foreach ($slugHierarchy as $i => $slug) {
-            $tableName = 'inheritance_' . $i;
+            $tableName = 'inheritance_'.$i;
 
             $this->leftJoin(
-                ConfigService::$tableContentHierarchy . ' as ' . $tableName,
-                $tableName . '.child_id',
+                ConfigService::$tableContentHierarchy.' as '.$tableName,
+                $tableName.'.child_id',
                 '=',
-                $previousTableName . $previousTableJoinColumn
+                $previousTableName.$previousTableJoinColumn
             );
 
-            $inheritedContentTableName = 'inherited_content_' . $i;
+            $inheritedContentTableName = 'inherited_content_'.$i;
 
             $this->leftJoin(
-                ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
-                $inheritedContentTableName . '.id',
+                ConfigService::$tableContent.' as '.$inheritedContentTableName,
+                $inheritedContentTableName.'.id',
                 '=',
-                $tableName . '.parent_id'
+                $tableName.'.parent_id'
             );
 
-            $this->addSelect([$tableName . '.child_position as child_position_' . $i]);
-            $this->addSelect([$tableName . '.parent_id as parent_id_' . $i]);
-            $this->addSelect([$inheritedContentTableName . '.slug as parent_slug_' . $i]);
+            $this->addSelect([$tableName.'.child_position as child_position_'.$i]);
+            $this->addSelect([$tableName.'.parent_id as parent_id_'.$i]);
+            $this->addSelect([$inheritedContentTableName.'.slug as parent_slug_'.$i]);
 
             $previousTableName = $tableName;
             $previousTableJoinColumn = '.parent_id';
@@ -142,41 +146,38 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->whereIn(
-            ConfigService::$tableContent . '.id',
-            function (Builder $builder) use ($slugHierarchy) {
-                $builder->select([ConfigService::$tableContent . '.id'])
-                    ->from(ConfigService::$tableContent);
+        $this->whereIn(ConfigService::$tableContent.'.id', function (Builder $builder) use ($slugHierarchy) {
+            $builder->select([ConfigService::$tableContent.'.id'])
+                ->from(ConfigService::$tableContent);
 
-                $previousTableName = ConfigService::$tableContent;
-                $previousTableJoinColumn = '.id';
+            $previousTableName = ConfigService::$tableContent;
+            $previousTableJoinColumn = '.id';
 
-                foreach (array_reverse($slugHierarchy) as $i => $slug) {
-                    $tableName = 'inheritance_' . $i;
+            foreach (array_reverse($slugHierarchy) as $i => $slug) {
+                $tableName = 'inheritance_'.$i;
 
-                    $builder->leftJoin(
-                        ConfigService::$tableContentHierarchy . ' as ' . $tableName,
-                        $tableName . '.child_id',
-                        '=',
-                        $previousTableName . $previousTableJoinColumn
-                    );
+                $builder->leftJoin(
+                    ConfigService::$tableContentHierarchy.' as '.$tableName,
+                    $tableName.'.child_id',
+                    '=',
+                    $previousTableName.$previousTableJoinColumn
+                );
 
-                    $inheritedContentTableName = 'inherited_content_' . $i;
+                $inheritedContentTableName = 'inherited_content_'.$i;
 
-                    $builder->leftJoin(
-                        ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
-                        $inheritedContentTableName . '.id',
-                        '=',
-                        $tableName . '.parent_id'
-                    );
+                $builder->leftJoin(
+                    ConfigService::$tableContent.' as '.$inheritedContentTableName,
+                    $inheritedContentTableName.'.id',
+                    '=',
+                    $tableName.'.parent_id'
+                );
 
-                    $builder->where($inheritedContentTableName . '.slug', $slug);
+                $builder->where($inheritedContentTableName.'.slug', $slug);
 
-                    $previousTableName = $tableName;
-                    $previousTableJoinColumn = '.parent_id';
-                }
+                $previousTableName = $tableName;
+                $previousTableJoinColumn = '.parent_id';
             }
-        );
+        });
 
         return $this;
     }
@@ -187,7 +188,7 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $this->whereIn('status', ContentRepository::$availableContentStatues);
+            $this->whereIn(ConfigService::$tableContent.'.status', ContentRepository::$availableContentStatues);
         }
 
         return $this;
@@ -200,25 +201,23 @@ class ContentQueryBuilder extends QueryBuilder
     {
         if (!ContentRepository::$pullFutureContent) {
             $this->where(
-                'published_on',
+                ConfigService::$tableContent.'.published_on',
                 '<=',
                 Carbon::now()
                     ->toDateTimeString()
             );
         } else {
             // this strange hack is required to get the DB indexing to be used, todo: fix properly
-            $this->where(
-                function ($builder) {
-                    $builder->where(
-                        'published_on',
-                        '<=',
-                        Carbon::now()
-                            ->addMonths(18)
-                            ->toDateTimeString()
-                    )
-                        ->orWhereNull('published_on');
-                }
-            );
+            $this->where(function ($builder) {
+                $builder->where(
+                    ConfigService::$tableContent.'.published_on',
+                    '<=',
+                    Carbon::now()
+                        ->addMonths(18)
+                        ->toDateTimeString()
+                )
+                    ->orWhereNull(ConfigService::$tableContent.'.published_on');
+            });
         }
 
         return $this;
@@ -230,7 +229,7 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictBrand()
     {
         $this->whereIn(
-            ConfigService::$tableContent . '.brand',
+            ConfigService::$tableContent.'.brand',
             array_values(Arr::wrap(ConfigService::$availableBrands))
         );
 
@@ -244,7 +243,7 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictByTypes(array $typesToInclude)
     {
         if (!empty($typesToInclude)) {
-            $this->whereIn(ConfigService::$tableContent . '.type', $typesToInclude);
+            $this->whereIn(ConfigService::$tableContent.'.type', $typesToInclude);
         }
 
         return $this;
@@ -260,14 +259,11 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->whereIn(
-            ConfigService::$tableContent . '.id',
-            function (Builder $builder) use ($parentIds) {
-                $builder->select([ConfigService::$tableContentHierarchy . '.child_id'])
-                    ->from(ConfigService::$tableContentHierarchy)
-                    ->whereIn('parent_id', $parentIds);
-            }
-        );
+        $this->whereIn(ConfigService::$tableContent.'.id', function (Builder $builder) use ($parentIds) {
+            $builder->select([ConfigService::$tableContentHierarchy.'.child_id'])
+                ->from(ConfigService::$tableContentHierarchy)
+                ->whereIn('parent_id', $parentIds);
+        });
 
         return $this;
     }
@@ -283,17 +279,18 @@ class ContentQueryBuilder extends QueryBuilder
         }
 
         foreach ($requiredUserStates as $index => $requiredUserState) {
-            $tableName = 'ucp_' . $index;
+            $tableName = 'ucp_'.$index;
 
-            $this->join(ConfigService::$tableUserContentProgress . ' as ' . $tableName,
+            $this->join(
+                ConfigService::$tableUserContentProgress.' as '.$tableName,
                 function (JoinClause $joinClause) use ($requiredUserState, $tableName) {
                     $joinClause->on(
-                        $tableName . '.content_id',
+                        $tableName.'.content_id',
                         '=',
-                        ConfigService::$tableContent . '.id'
+                        ConfigService::$tableContent.'.id'
                     )
                         ->on(
-                            $tableName . '.user_id',
+                            $tableName.'.user_id',
                             '=',
                             $joinClause->raw(
                                 DB::connection()
@@ -302,7 +299,7 @@ class ContentQueryBuilder extends QueryBuilder
                             )
                         )
                         ->on(
-                            $tableName . '.state',
+                            $tableName.'.state',
                             '=',
                             $joinClause->raw(
                                 DB::connection()
@@ -330,16 +327,16 @@ class ContentQueryBuilder extends QueryBuilder
         $this->join(ConfigService::$tableUserContentProgress,
             function (JoinClause $joinClause) use ($includedUserStates) {
                 $joinClause->on(
-                    ConfigService::$tableUserContentProgress . '.content_id',
+                    ConfigService::$tableUserContentProgress.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 );
 
                 $joinClause->on(function (JoinClause $joinClause) use ($includedUserStates) {
                     foreach ($includedUserStates as $index => $includedUserState) {
                         $joinClause->orOn(function (JoinClause $joinClause) use ($includedUserState) {
                             $joinClause->on(
-                                ConfigService::$tableUserContentProgress . '.user_id',
+                                ConfigService::$tableUserContentProgress.'.user_id',
                                 '=',
                                 $joinClause->raw(
                                     DB::connection()
@@ -348,7 +345,7 @@ class ContentQueryBuilder extends QueryBuilder
                                 )
                             )
                                 ->on(
-                                    ConfigService::$tableUserContentProgress . '.state',
+                                    ConfigService::$tableUserContentProgress.'.state',
                                     '=',
                                     $joinClause->raw(
                                         DB::connection()
@@ -376,84 +373,58 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        foreach ($requiredFields as $index => $requiredFieldData) {
-            $tableName = 'cf_' . $index;
+        // group the required fields by name first since we only need 1 join per associated table
+        $requiredFieldsGroupedByTable = [];
 
-            if ($requiredFieldData['field'] != '') {
-                $this->join(ConfigService::$tableContentFields . ' as ' . $tableName,
-                    function (JoinClause $join) use ($tableName, $requiredFieldData, $index) {
-                        $join->on(
-                            $tableName . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->on(
-                                $tableName . '.key',
-                                '=',
-                                $join->raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($requiredFieldData['name'])
-                                )
-                            );
-                    })
-                    ->join(ConfigService::$tableContentFields . ' as ' . $tableName . '_f'.$index,
-                        function (JoinClause $join) use ($tableName, $requiredFieldData, $index) {
-                            $join->on(
-                                $tableName . '_f'.$index . '.content_id',
-                                '=',
-                                $tableName . '.value'
-                            )
-                                ->on(
-                                    $tableName . '_f'.$index . '.key',
-                                    '=',
-                                    $join->raw(
-                                        DB::connection()
-                                            ->getPdo()
-                                            ->quote($requiredFieldData['value'])
-                                    )
-                                )
-                                ->on(
-                                    $tableName . '_f'.$index . '.value',
-                                    '=',
-                                    $join->raw(
-                                        DB::connection()
-                                            ->getPdo()
-                                            ->quote($requiredFieldData['field'])
-                                    )
-                                );
-                        });
+        foreach ($requiredFields as $requiredFieldIndex => $requiredField) {
+            if (!empty($requiredField['associated_table']['table'])) {
+                $requiredFieldsGroupedByTable[$requiredField['associated_table']['table']][] = $requiredField;
             } else {
-                $this->join(
-                    ConfigService::$tableContentFields . ' as ' . $tableName,
-                    function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
-                        $joinClause->on(
-                            $tableName . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->on(
-                                $tableName . '.key',
-                                '=',
-                                $joinClause->raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($requiredFieldData['name'])
-                                )
-                            )
-                            ->on(
-                                $tableName . '.value',
-                                $requiredFieldData['operator'],
-                                is_numeric($requiredFieldData['value']) ?
-                                    $joinClause->raw($requiredFieldData['value']) : $joinClause->raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($requiredFieldData['value'])
-                                )
-                            );
-                    }
-                );
+                $requiredFieldsGroupedByTable[$requiredField['name']][] = $requiredField;
             }
+        }
+
+        // set the joins first, then we'll add the where's after
+        foreach ($requiredFieldsGroupedByTable as $name => $requiredFieldDataGrouped) {
+            if ($requiredFieldDataGrouped[0]['is_content_column']) {
+                $this->where(
+                    'railcontent_content.'.$requiredFieldDataGrouped[0]['name'],
+                    $requiredFieldDataGrouped[0]['operator'],
+                    is_numeric($requiredFieldDataGrouped[0]['value']) ? DB::raw($requiredFieldDataGrouped[0]['value']) :
+                        DB::raw(
+                            DB::connection()
+                                ->getPdo()
+                                ->quote($requiredFieldDataGrouped[0]['value'])
+                        )
+                );
+            } elseif (!empty($requiredFieldDataGrouped[0]['associated_table'])) {
+                $this->leftJoin(
+                    $requiredFieldDataGrouped[0]['associated_table']['table'].
+                    ' as '.
+                    $requiredFieldDataGrouped[0]['associated_table']['alias'],
+                    $requiredFieldDataGrouped[0]['associated_table']['alias'].'.content_id',
+                    '=',
+                    ConfigService::$tableContent.'.id'
+                );
+                $this->where(function (Builder $builder) use (
+                    $requiredFieldDataGrouped
+                ) {
+                    foreach ($requiredFieldDataGrouped as $requiredFieldGroup) {
+                        $this->where(
+                            $requiredFieldGroup['associated_table']['alias'].
+                            '.'.
+                            $requiredFieldGroup['associated_table']['column'],
+                            $requiredFieldGroup['operator'],
+                            is_numeric($requiredFieldGroup['value']) ? DB::raw($requiredFieldGroup['value']) :
+                                DB::raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($requiredFieldGroup['value'])
+                                )
+                        );
+                    }
+                });
+            };
         }
 
         return $this;
@@ -469,44 +440,53 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $tableName = '_icf';
+        // group the included fields by name first since we only need 1 join per associated table
+        $includedFieldsGroupedByTable = [];
 
-        $this->join(ConfigService::$tableContentFields . ' as ' . $tableName,
-            function (JoinClause $joinClause) use ($includedFields, $tableName) {
-                $joinClause->on(
-                    $tableName . '.content_id',
+        foreach ($includedFields as $includedFieldIndex => $includedField) {
+            if (!empty($includedField['associated_table']['table'])) {
+                $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+            } else {
+                $includedFieldsGroupedByTable[$includedField['name']][] = $includedField;
+            }
+        }
+
+        // set the joins first, then we'll add the where's after
+        foreach ($includedFieldsGroupedByTable as $name => $includedFieldDataGrouped) {
+            if ($includedFieldDataGrouped[0]['is_content_column']) {
+                $this->where(
+                    'railcontent_content.' . $includedFieldDataGrouped[0]['name'],
+                    $includedFieldDataGrouped[0]['operator'],
+                    is_numeric($includedFieldDataGrouped[0]['value']) ?
+                        DB::raw($includedFieldDataGrouped[0]['value']) : DB::raw(
+                        DB::connection()
+                            ->getPdo()
+                            ->quote($includedFieldDataGrouped[0]['value'])
+                    )
+                );
+            } elseif (!empty($includedFieldDataGrouped[0]['associated_table'])) {
+                $this->leftJoin(
+                    $includedFieldDataGrouped[0]['associated_table']['table'].
+                    ' as '.
+                    $includedFieldDataGrouped[0]['associated_table']['alias'],
+                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.content_id',
                     '=',
                     ConfigService::$tableContent . '.id'
                 );
 
-                $joinClause->on(function (JoinClause $joinClause) use ($tableName, $includedFields) {
-                    foreach ($includedFields as $index => $includedFieldData) {
-                        $joinClause->orOn(function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
-                            $joinClause->on(
-                                $tableName . '.key',
-                                '=',
-                                $joinClause->raw(
-                                    DB::connection()
-                                        ->getPdo()
-                                        ->quote($includedFieldData['name'])
-                                )
-                            )
-                                ->on(
-                                    $tableName . '.value',
-                                    $includedFieldData['operator'],
-                                    is_numeric($includedFieldData['value']) ?
-                                        $joinClause->raw($includedFieldData['value']) : $joinClause->raw(
-                                        DB::connection()
-                                            ->getPdo()
-                                            ->quote($includedFieldData['value'])
-                                    )
-                                );
-                        });
-                    }
+                $whereInArray = [];
+
+                foreach ($includedFieldDataGrouped as $includedFieldData) {
+                    $whereInArray[] = $includedFieldData['value'];
                 }
 
+                $this->whereIn(
+                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.' .
+                    $includedFieldDataGrouped[0]['associated_table']['column'],
+                    $whereInArray
                 );
-            });
+            }
+        }
 
         return $this;
     }
@@ -520,28 +500,28 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->leftJoin(ConfigService::$tableContentPermissions . ' as id_content_permissions',
+        $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
             function (JoinClause $join) {
                 $join->on(
-                    'id_content_permissions' . '.content_id',
-                    ConfigService::$tableContent . '.id'
+                    'id_content_permissions'.'.content_id',
+                    ConfigService::$tableContent.'.id'
                 );
             })
-            ->leftJoin(ConfigService::$tableContentPermissions . ' as type_content_permissions',
+            ->leftJoin(ConfigService::$tableContentPermissions.' as type_content_permissions',
                 function (JoinClause $join) {
                     $join->on(
-                        'type_content_permissions' . '.content_type',
-                        ConfigService::$tableContent . '.type'
+                        'type_content_permissions'.'.content_type',
+                        ConfigService::$tableContent.'.type'
                     )
-                        ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
+                        ->whereIn('type_content_permissions'.'.brand', ConfigService::$availableBrands);
                 })
             ->where(function (Builder $builder) {
                 return $builder->where(function (Builder $builder) {
                     return $builder->whereNull(
-                        'id_content_permissions' . '.permission_id'
+                        'id_content_permissions'.'.permission_id'
                     )
                         ->whereNull(
-                            'type_content_permissions' . '.permission_id'
+                            'type_content_permissions'.'.permission_id'
                         );
                 })
                     ->orWhereExists(function (Builder $builder) {
@@ -602,97 +582,69 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $orderByExploded = explode(' ', $orderBy);
 
-        $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+        $orderByColumns = [ConfigService::$tableContent.'.'.'created_on'];
 
         foreach ($orderByExploded as $orderByColumn) {
             if ($orderByColumn == 'content_likes') {
                 array_unshift(
                     $orderByColumns,
-                    $orderByColumn . ' ' . $orderDirection
+                    $orderByColumn.' '.$orderDirection
                 );
-            }elseif ($orderByColumn == 'title') {
-                array_unshift(
-                    $orderByColumns,
-                     'field.value ' . $orderDirection
-                );
-            }
-            elseif ($orderByColumn != 'progress') {
-                array_unshift(
-                    $orderByColumns,
-                    ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $orderDirection
-                );
+            } elseif ($orderByColumn != 'progress') {
+                $orderByColumns = [ConfigService::$tableContent.'.'.$orderByColumn];
             } else {
                 array_unshift(
                     $orderByColumns,
-                    ConfigService::$tableUserContentProgress . '.' . 'updated_on' . ' ' . $orderDirection
+                    ConfigService::$tableUserContentProgress.'.'.'updated_on'.' '.$orderDirection
                 );
             }
         }
 
-
-            if ($orderBy == 'progress') {
-                $this->leftJoin(ConfigService::$tableUserContentProgress, function (JoinClause $joinClause) {
-                    $joinClause->on(
-                        ConfigService::$tableUserContentProgress . '.content_id',
+        if ($orderBy == 'progress') {
+            $this->leftJoin(ConfigService::$tableUserContentProgress, function (JoinClause $joinClause) {
+                $joinClause->on(
+                    ConfigService::$tableUserContentProgress.'.content_id',
+                    '=',
+                    ConfigService::$tableContent.'.id'
+                )
+                    ->on(
+                        ConfigService::$tableUserContentProgress.'.user_id',
                         '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                        ->on(
-                            ConfigService::$tableUserContentProgress . '.user_id',
-                            '=',
-                            $joinClause->raw(
-                                DB::connection()
-                                    ->getPdo()
-                                    ->quote(auth()->id())
-                            )
-                        );
-                });
-                $this->orderByRaw(
-                    DB::raw(
-                        implode(', ', $orderByColumns) . ' ' . $orderDirection
-                    )
-                );
-            } elseif ($orderBy == 'title') {
-                    $this->join(ConfigService::$tableContentFields. ' as field', function (JoinClause $joinClause) {
-                        $joinClause->on(
-                             'field.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
+                        $joinClause->raw(
+                            DB::connection()
+                                ->getPdo()
+                                ->quote(auth()->id())
                         )
-                            ->where(
-                                 'field.key',
-                                '=',
-                               "title"
-                            );
-                    });
+                    );
+            });
+            $this->orderByRaw(
+                DB::raw(
+                    implode(', ', $orderByColumns).' '.$orderDirection
+                )
+            );
+        } elseif ($orderBy == 'content_likes') {
+            $this->leftJoin(ConfigService::$tableContentLikes, function (JoinClause $joinClause) {
+                $joinClause->on(
+                    ConfigService::$tableContentLikes.'.content_id',
+                    '=',
+                    ConfigService::$tableContent.'.id'
+                );
+            });
 
             $this->orderByRaw(
                 DB::raw(
-                    implode(', ', $orderByColumns) . ' ' . $orderDirection
+                    implode(', ', $orderByColumns).' '.$orderDirection
                 )
             );
-        } elseif($orderBy == 'content_likes'){
-                $this->leftJoin(ConfigService::$tableContentLikes, function (JoinClause $joinClause) {
-                    $joinClause->on(
-                        ConfigService::$tableContentLikes . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                        ;
-                });
+            $this->groupBy(ConfigService::$tableContent.'.id');
+        } else {
+            $this->orderByRaw(
+                DB::raw(
+                    implode(', ', $orderByColumns).' '.$orderDirection
+                )
+            );
+        }
 
-                $this->orderByRaw(
-                    DB::raw(
-                        implode(', ', $orderByColumns) . ' ' . $orderDirection
-                    )
-                );
-            }else {
-                $this->orderByRaw(
-                    DB::raw(
-                        implode(', ', $orderByColumns) . ' ' . $orderDirection
-                    )
-                );
-            }
         return $this;
     }
 
@@ -704,13 +656,13 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $orderByExploded = explode(' ', $orderBy);
 
-        $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+        $groupByColumns = [ConfigService::$tableContent.'.'.'created_on'];
 
         foreach ($orderByExploded as $orderByColumn) {
             if (($orderByColumn != 'progress') && ($orderByColumn != 'content_likes') && ($orderByColumn != 'title')) {
-                array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
+                array_unshift($groupByColumns, ConfigService::$tableContent.'.'.$orderByColumn);
             } elseif ($orderByColumn == 'content_likes') {
-                array_unshift($groupByColumns, ConfigService::$tableContentLikes . '.content_id');
+                array_unshift($groupByColumns, ConfigService::$tableContentLikes.'.content_id');
             } elseif ($orderByColumn == 'title') {
                 array_unshift($groupByColumns, 'field.value');
             } elseif ($orderByColumn == 'progress') {
@@ -721,8 +673,8 @@ class ContentQueryBuilder extends QueryBuilder
         return $this->groupBy(
             array_merge(
                 [
-                    ConfigService::$tableContent . '.id',
-                    ConfigService::$tableContent . '.' . 'created_on',
+                    ConfigService::$tableContent.'.id',
+                    ConfigService::$tableContent.'.'.'created_on',
                 ],
                 $groupByColumns
             )
@@ -736,12 +688,12 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $this->join(ConfigService::$tableContentFollows, function (JoinClause $joinClause) {
             $joinClause->on(
-                ConfigService::$tableContentFollows . '.content_id',
+                ConfigService::$tableContentFollows.'.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             );
         })
-            ->where(ConfigService::$tableContentFollows . '.user_id', auth()->id() ?? null);
+            ->where(ConfigService::$tableContentFollows.'.user_id', auth()->id() ?? null);
 
         return $this;
     }

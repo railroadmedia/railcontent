@@ -20,28 +20,46 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
     private $comments;
     private $content;
 
-    protected function setUp(): void
+    public function test_user_likes_comment()
     {
-        parent::setUp();
+        $userIdOfLiker = $this->createAndLogInNewUser();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-
-        $this->comments = [];
-        $this->content = [];
+        $this->like($userIdOfLiker, true);
     }
 
     // ========================== helper classes ====================================
 
-    private function createContent($amount = 1)
+    public function like($userIdOfLiker, $assertions = false)
     {
-        for ($i = 0; $i < $amount; $i++) {
-            $this->content[] = $this->contentFactory->create(
-                $this->faker->word,
-                $this->faker->randomElement(ConfigService::$commentableContentTypes),
-                ContentService::STATUS_PUBLISHED
+        $this->createComments();
+
+        $contentId = $this->content[0]['id'];
+        $comment = $this->comments[$contentId][0];
+
+        $commentId = $comment['id'];
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/comment-like/' . $commentId,
+            [
+                'comment_id' => $commentId,
+                'user_id' => $userIdOfLiker,
+            ]
+        );
+
+        if ($assertions) {
+            $this->assertEquals(200, $response->getStatusCode());
+
+            $this->assertDatabaseHas(
+                ConfigService::$tableCommentLikes,
+                [
+                    'comment_id' => $commentId,
+                    'user_id' => $userIdOfLiker,
+                ]
             );
         }
+
+        return $commentId;
     }
 
     private function createComments($content = null, $amount = 1, $parentId = null)
@@ -63,47 +81,18 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
         }
     }
 
-    public function like($userIdOfLiker, $assertions = false)
+    private function createContent($amount = 1)
     {
-        $this->createComments();
-
-        $contentId = $this->content[0]['id'];
-        $comment = $this->comments[$contentId][0];
-
-        $commentId = $comment['id'];
-
-        $response = $this->call(
-            'PUT',
-            'railcontent/comment-like/'.$commentId,
-            [
-                'comment_id' => $commentId,
-                'user_id' => $userIdOfLiker,
-            ]
-        );
-
-        if($assertions) {
-            $this->assertEquals(200, $response->getStatusCode());
-
-            $this->assertDatabaseHas(
-                ConfigService::$tableCommentLikes,
-                [
-                    'comment_id' => $commentId,
-                    'user_id' => $userIdOfLiker,
-                ]
+        for ($i = 0; $i < $amount; $i++) {
+            $this->content[] = $this->contentFactory->create(
+                $this->faker->word,
+                $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                ContentService::STATUS_PUBLISHED
             );
         }
-
-        return $commentId;
     }
 
     // ============================ test cases ======================================
-
-    public function test_user_likes_comment()
-    {
-        $userIdOfLiker = $this->createAndLogInNewUser();
-
-        $this->like($userIdOfLiker, true);
-    }
 
     public function test_user_unlikes_comment()
     {
@@ -113,7 +102,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'DELETE',
-            'railcontent/comment-like/'.$commentId,
+            'railcontent/comment-like/' . $commentId,
             [
                 'comment_id' => $commentId,
                 'user_id' => $userIdOfLiker,
@@ -129,5 +118,16 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
                 'user_id' => $userIdOfLiker,
             ]
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+
+        $this->comments = [];
+        $this->content = [];
     }
 }

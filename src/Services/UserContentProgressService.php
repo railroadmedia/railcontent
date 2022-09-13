@@ -506,11 +506,11 @@ class UserContentProgressService
 
         $allowedTypesForStarted = array_merge(
             config('railcontent.allowed_types_for_bubble_progress')['started'],
-            config('railcontent.showTypes', [])
+            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
         );
         $allowedTypesForCompleted = array_merge(
             config('railcontent.allowed_types_for_bubble_progress')['completed'],
-            config('railcontent.showTypes', [])
+            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
         );
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 

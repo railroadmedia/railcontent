@@ -18,14 +18,6 @@ class PermissionRepositoryTest extends RailcontentTestCase
      */
     protected $permissionsFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(PermissionRepository::class);
-        $this->permissionsFactory = $this->app->make(PermissionsFactory::class);
-    }
-
     public function test_create_permission()
     {
         $name = $this->faker->word;
@@ -96,5 +88,13 @@ class PermissionRepositoryTest extends RailcontentTestCase
         $response = $this->classBeingTested->getById(rand());
 
         $this->assertEmpty($response);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(PermissionRepository::class);
+        $this->permissionsFactory = $this->app->make(PermissionsFactory::class);
     }
 }

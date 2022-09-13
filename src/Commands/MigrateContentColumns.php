@@ -56,8 +56,6 @@ class MigrateContentColumns extends Command
         $contentColumnNames = [
             'difficulty',
             'home_staff_pick_rating',
-            'legacy_id',
-            'legacy_wordpress_post_id',
             'qna_video',
             'title',
             'video',

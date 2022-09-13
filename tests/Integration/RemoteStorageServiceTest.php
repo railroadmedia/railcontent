@@ -12,72 +12,15 @@ class RemoteStorageServiceTest extends RailcontentTestCase
     /** @var string */
     protected $s3DirectoryForThisInstance;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        
-        $this->awsConfigInitForTesting();
-
-        $this->s3DirectoryForThisInstance = '/test' . time();
-        $this->remoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
-    }
-
-    protected function tearDown(): void
-    {
-        $contentsList = $this->remoteStorageService->listContents($this->s3DirectoryForThisInstance);
-        $notDeleted = [];
-
-        /*
-         * We're injecting an instance of RemoteStorageService into this test class (This file).
-         * When we do that we're setting a "root" dir of `$this->s3DirectoryForThisInstance` (which
-         * looks something like "/test1509570412"). But when we're done we want to delete everything
-         * added to s3 for running these tests. That means not only the files added to the directory,
-         * but also the directory itself. We can't call deleteDir() on root-even if it's only root
-         * relative to this test class instance. So, just create another instance of RemoteStorageService
-         * and do not declare a "root", thus defaulting to the one in the config. Then you can target
-         * the one created for the test class with deleteDir.
-         *      Jonathan, Nov 2017
-         */
-        $newRemoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
-        $deleteDir = $newRemoteStorageService->deleteDir($this->s3DirectoryForThisInstance);
-
-        if (!$deleteDir) {
-            $this->fail('Failed to delete directory ' . $this->s3DirectoryForThisInstance . '.');
-        }
-
-        foreach ($contentsList as $item) {
-            if ($this->remoteStorageService->exists($item['path'])) {
-                $notDeleted[] = $item['path'];
-            };
-        }
-
-        if (!empty($notDeleted)) {
-            $this->fail('contents not deleted (' . var_export($notDeleted, true) . ')');
-        }
-
-        parent::tearDown();
-    }
-
-
-    /*
-     * about filename vs filepath...
-     *
-     * 1. filenameRelative: `foo.jpg` // this is the name of the *file* relative to (from **within** the current dir)
-     * 2. filenameAbsolute: `/bar/qux/foo.jpg` // this is the *absolute* filepath.
-     * 3. filenameWithoutExtension: `foo`
-     *
-     * There does not appear to be a standard.
-     *  * https://stackoverflow.com/questions/2119156/name-of-a-path-containing-the-complete-file-name
-     *  * https://stackoverflow.com/questions/2235173/file-name-path-name-base-name-naming-standard-for-pieces-of-a-path
-     */
-
     public function test_create()
     {
         $useToCreateFileName = $this->faker->word;
         $filenameAbsolute = $this->create($useToCreateFileName);
         $this->assertEquals(
             $this->getFilenameAbsoluteFromRelative(
-                $useToCreateFileName . '.' . $this->getExtensionFromRelative($this->getFilenameRelativeFromAbsolute($filenameAbsolute))
+                $useToCreateFileName .
+                '.' .
+                $this->getExtensionFromRelative($this->getFilenameRelativeFromAbsolute($filenameAbsolute))
             ),
             $filenameAbsolute
         );
@@ -93,6 +36,19 @@ class RemoteStorageServiceTest extends RailcontentTestCase
             $this->remoteStorageService->filesystem->read($nameWithExtension)
         );
     }
+
+
+    /*
+     * about filename vs filepath...
+     *
+     * 1. filenameRelative: `foo.jpg` // this is the name of the *file* relative to (from **within** the current dir)
+     * 2. filenameAbsolute: `/bar/qux/foo.jpg` // this is the *absolute* filepath.
+     * 3. filenameWithoutExtension: `foo`
+     *
+     * There does not appear to be a standard.
+     *  * https://stackoverflow.com/questions/2119156/name-of-a-path-containing-the-complete-file-name
+     *  * https://stackoverflow.com/questions/2235173/file-name-path-name-base-name-naming-standard-for-pieces-of-a-path
+     */
 
     public function test_update()
     {
@@ -111,9 +67,11 @@ class RemoteStorageServiceTest extends RailcontentTestCase
     public function test_exist()
     {
         $name = $this->faker->word;
-        $this->assertTrue($this->remoteStorageService->exists(
-            $this->concatNameAndExtension($name, $this->getExtensionFromAbsolute($this->create($name)))
-        ));
+        $this->assertTrue(
+            $this->remoteStorageService->exists(
+                $this->concatNameAndExtension($name, $this->getExtensionFromAbsolute($this->create($name)))
+            )
+        );
     }
 
     public function test_delete()
@@ -205,8 +163,8 @@ class RemoteStorageServiceTest extends RailcontentTestCase
         $word = $this->faker->word;
         $this->remoteStorageService->createDir($word);
         $contents = $this->remoteStorageService->listContents();
-        foreach($contents as $item){
-            if($item['basename'] === $word && $item['type'] === 'dir'){
+        foreach ($contents as $item) {
+            if ($item['basename'] === $word && $item['type'] === 'dir') {
                 $pass = true;
             }
         }
@@ -219,8 +177,8 @@ class RemoteStorageServiceTest extends RailcontentTestCase
         $word = $this->faker->word;
         $this->remoteStorageService->createDir($word);
         $contents = $this->remoteStorageService->listContents();
-        foreach($contents as $item){
-            if($item['basename'] === $word && $item['type'] === 'dir'){
+        foreach ($contents as $item) {
+            if ($item['basename'] === $word && $item['type'] === 'dir') {
                 $pass = true;
             }
         }
@@ -236,21 +194,67 @@ class RemoteStorageServiceTest extends RailcontentTestCase
         $wordFile = $this->faker->word;
         $wordDir = $this->faker->word;
         $filenameAbsolute = $this->create($wordFile);
-        $dir =  $this->remoteStorageService->createDir($wordDir);
+        $dir = $this->remoteStorageService->createDir($wordDir);
         $this->assertTrue($dir);
         $contents = $this->remoteStorageService->listContents();
         $expectedFileName = $this->concatNameAndExtension(
             $wordFile,
             $this->getExtensionFromAbsolute($filenameAbsolute)
         );
-        foreach($contents as $item){
-            if($item['basename'] === $expectedFileName && $item['type'] === 'file'){
+        foreach ($contents as $item) {
+            if ($item['basename'] === $expectedFileName && $item['type'] === 'file') {
                 $passFile = true;
             }
-            if($item['basename'] === $wordDir && $item['type'] === 'dir'){
+            if ($item['basename'] === $wordDir && $item['type'] === 'dir') {
                 $passDir = true;
             }
         }
         $this->assertTrue($passFile && $passDir);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->awsConfigInitForTesting();
+
+        $this->s3DirectoryForThisInstance = '/test' . time();
+        $this->remoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
+    }
+
+    protected function tearDown(): void
+    {
+        $contentsList = $this->remoteStorageService->listContents($this->s3DirectoryForThisInstance);
+        $notDeleted = [];
+
+        /*
+         * We're injecting an instance of RemoteStorageService into this test class (This file).
+         * When we do that we're setting a "root" dir of `$this->s3DirectoryForThisInstance` (which
+         * looks something like "/test1509570412"). But when we're done we want to delete everything
+         * added to s3 for running these tests. That means not only the files added to the directory,
+         * but also the directory itself. We can't call deleteDir() on root-even if it's only root
+         * relative to this test class instance. So, just create another instance of RemoteStorageService
+         * and do not declare a "root", thus defaulting to the one in the config. Then you can target
+         * the one created for the test class with deleteDir.
+         *      Jonathan, Nov 2017
+         */
+        $newRemoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
+        $deleteDir = $newRemoteStorageService->deleteDir($this->s3DirectoryForThisInstance);
+
+        if (!$deleteDir) {
+            $this->fail('Failed to delete directory ' . $this->s3DirectoryForThisInstance . '.');
+        }
+
+        foreach ($contentsList as $item) {
+            if ($this->remoteStorageService->exists($item['path'])) {
+                $notDeleted[] = $item['path'];
+            };
+        }
+
+        if (!empty($notDeleted)) {
+            $this->fail('contents not deleted (' . var_export($notDeleted, true) . ')');
+        }
+
+        parent::tearDown();
     }
 }

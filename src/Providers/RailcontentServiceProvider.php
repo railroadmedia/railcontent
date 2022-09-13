@@ -20,6 +20,8 @@ use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
 use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
+use Railroad\Railcontent\Commands\FillContentCompiledViewData;
+use Railroad\Railcontent\Commands\FillContentParentContentDataColumnFromHierarchy;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
@@ -27,6 +29,7 @@ use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
+use Railroad\Railcontent\Commands\SyncContentRowFromRelatedTables;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -129,6 +132,9 @@ class RailcontentServiceProvider extends ServiceProvider
             MigrateContentToElasticsearch::class,
             MigrateUserPlaylist::class,
             DeleteContentAndHierarchiesForUserPlaylists::class,
+            SyncContentRowFromRelatedTables::class,
+            FillContentParentContentDataColumnFromHierarchy::class,
+            FillContentCompiledViewData::class,
         ]);
 
         Validator::extend(

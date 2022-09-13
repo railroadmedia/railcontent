@@ -8,11 +8,6 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 class RemoteStorageJsonControllerTest extends RailcontentTestCase
 {
 
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-    
     public function test_put()
     {
         $this->markAsRisky();
@@ -30,15 +25,15 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
         );
 
         if ($useThisFilename !== $this->getFilenameRelativeFromAbsolute($filenameAbsolute)) {
-            $this->fail( '$useThisFilename !== $this->getFilenameRelativeFromAbsolute($filenameAbsolute)' );
+            $this->fail('$useThisFilename !== $this->getFilenameRelativeFromAbsolute($filenameAbsolute)');
         }
 
         $filenameToUseTestDirectoryPrefixAdded = $this->s3DirectoryForThisInstance . '/' . $useThisFilename;
 
-        $response = $this->call( 'PUT', '/railcontent/remote', [
+        $response = $this->call('PUT', '/railcontent/remote', [
             'target' => $filenameToUseTestDirectoryPrefixAdded,
-            'file' => new UploadedFile($filenameAbsolute, $useThisFilename)
-        ] );
+            'file' => new UploadedFile($filenameAbsolute, $useThisFilename),
+        ]);
 
         $this->assertEquals(201, $response->status());
 
@@ -46,5 +41,10 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
             'https://' . config('railcontent.awsCloudFront') . $filenameToUseTestDirectoryPrefixAdded,
             json_decode($response->getContent())->results
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
     }
 }

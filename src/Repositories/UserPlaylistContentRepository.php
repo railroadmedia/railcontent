@@ -40,11 +40,11 @@ class UserPlaylistContentRepository extends RepositoryBase
      * @param $playlistId
      * @param array $contentType
      * @param null $limit
-     * @param int $skip
+     * @param int $page
      * @return mixed
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $skip = 0)
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
     {
         $query =
             $this->query()
@@ -62,7 +62,7 @@ class UserPlaylistContentRepository extends RepositoryBase
 
         if ($limit) {
             $query->limit($limit)
-                ->skip($skip);
+                ->skip(($page - 1) * $limit);
         }
 
         $contentRows =
@@ -113,5 +113,33 @@ class UserPlaylistContentRepository extends RepositoryBase
             ->where('content_id', $contentId)
             ->get()
             ->toArray();
+    }
+
+    /**
+     * returns: [
+     *    content_id_1 => true/false,
+     *    content_id_2 => true/false,
+     *    etc...
+     * ]
+     * @param  array  $contentIds
+     * @param $playlistId
+     * @return array
+     */
+    public function areContentIdsInPlaylist(array $contentIds, $playlistId)
+    {
+        $playlistContentIdLinkRows = $this->query()
+            ->select(['content_id'])
+            ->where('user_playlist_id', $playlistId)
+            ->whereIn('content_id', $contentIds)
+            ->get()
+            ->toArray();
+
+        $contentIdsInPlaylistBooleans = [];
+
+        foreach ($contentIds as $contentId) {
+            $contentIdsInPlaylistBooleans[$contentId] = in_array($contentId, $playlistContentIdLinkRows);
+        }
+
+        return $contentIdsInPlaylistBooleans;
     }
 }

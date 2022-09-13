@@ -12,7 +12,7 @@ class TagTransformer
 
         $results = [];
         foreach ($data as $tag) {
-            $results[$tag['content_id']] = [
+            $results[$tag['content_id']][] = [
                 'id' => $tag['id'] ?? null,
                 'content_id' => $tag['content_id'],
                 'key' => 'tag',

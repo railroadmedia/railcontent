@@ -75,23 +75,6 @@ class ContentServiceTest extends RailcontentTestCase
      */
     protected $userContentProgressFactory;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
-    }
-
     public function _test_delete_content()
     {
         $parent = $this->contentFactory->create(
@@ -294,7 +277,6 @@ class ContentServiceTest extends RailcontentTestCase
                 'child_position' => $otherChildLink['child_position'] - 1,
             ]
         );
-
     }
 
     public function test_getWhereTypeInAndStatusAndPublishedOnOrdered()
@@ -520,5 +502,22 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals($contentResponse1, $contentResponse2);
         $this->assertEquals($content, $contentResponse1);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentService::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 }

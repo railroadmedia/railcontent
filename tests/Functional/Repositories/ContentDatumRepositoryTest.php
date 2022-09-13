@@ -13,13 +13,6 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
      */
     protected $classBeingTested;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
-    }
-
     public function test_get_by_id()
     {
         $contentId = rand();
@@ -33,7 +26,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                     'content_id' => $contentId,
                     'key' => $key,
                     'value' => $value,
-                    'position' => $position
+                    'position' => $position,
                 ]
             )
         );
@@ -44,7 +37,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => 1
+                'position' => 1,
             ],
             $result
         );
@@ -70,7 +63,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -84,7 +77,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => rand(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -107,7 +100,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $i + 1,
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -121,7 +114,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => rand(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -147,7 +140,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => $position
+                'position' => $position,
             ]
         );
 
@@ -159,7 +152,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => 1
+                'position' => 1,
             ]
         );
     }
@@ -192,10 +185,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $newData['content_id'],
                 'key' => $newData['key'],
                 'value' => $newData['value'],
-                'position' => 1
+                'position' => 1,
             ]
         );
-
     }
 
     public function test_delete()
@@ -231,7 +223,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -260,7 +252,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
             $data['position'] = $i + 1;
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -288,7 +280,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => rand()
+                'position' => rand(),
             ];
             $data['position'] = $i + 1;
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -300,7 +292,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'key' => $key,
             'value' => $value,
-            'position' => 0
+            'position' => 0,
         ];
         $this->classBeingTested->createOrUpdateAndReposition(2, $newData);
         $expectedData[1]['position'] = 1;
@@ -313,6 +305,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             );
         }
     }
+
     public function test_reposition_other_datum_after_update_with_position_null()
     {
         $contentId = rand();
@@ -325,7 +318,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => rand()
+                'position' => rand(),
             ];
             $data['position'] = $i + 1;
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -337,7 +330,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'key' => $key,
             'value' => $value,
-            'position' => 3
+            'position' => 3,
         ];
         $this->classBeingTested->createOrUpdateAndReposition(2, $newData);
         $expectedData[1]['position'] = 3;
@@ -363,7 +356,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => rand()
+                'position' => rand(),
             ];
             $data['position'] = $i + 1;
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -375,7 +368,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'key' => $key,
             'value' => $value,
-            'position' => $this->faker->numberBetween(500, 550)
+            'position' => $this->faker->numberBetween(500, 550),
         ];
         $this->classBeingTested->createOrUpdateAndReposition(2, $newData);
         $expectedData[1]['position'] = 3;
@@ -399,7 +392,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
             $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
@@ -429,5 +422,12 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 $expectedDatum
             );
         }
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
     }
 }

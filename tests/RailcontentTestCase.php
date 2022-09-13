@@ -13,7 +13,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use PDO;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
@@ -63,6 +62,56 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected $elasticService;
 
+    /**
+     * @return int
+     */
+    public function createAndLogInNewUser()
+    {
+        $userId = $this->databaseManager->connection()->table('users')->insertGetId(
+            ['email' => $this->faker->email]
+        );
+
+        $this->authManager->guard()->onceUsingId($userId);
+
+        request()->setUserResolver(
+            function () use ($userId) {
+                return User::query()->find($userId);
+            }
+        );
+
+        return $userId;
+    }
+
+    /**
+     * @return Connection
+     */
+    public function query()
+    {
+        return $this->databaseManager->connection();
+    }
+
+    public function createExpectedResult($status, $code, $results)
+    {
+        return [
+            "status" => $status,
+            "code" => $code,
+            "results" => $results,
+        ];
+    }
+
+    public function createPaginatedExpectedResult($status, $code, $page, $limit, $totalResults, $results, $filter)
+    {
+        return [
+            "status" => $status,
+            "code" => $code,
+            "page" => $page,
+            "limit" => $limit,
+            "total_results" => $totalResults,
+            "results" => $results,
+            "filter_options" => $filter,
+        ];
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -81,7 +130,7 @@ class RailcontentTestCase extends BaseTestCase
         $this->router = $this->app->make(Router::class);
 
         $this->elasticService = $this->app->make(ElasticService::class);
-        $this->elasticService->deleteIndex(config('railcontent.elastic_index_name','content'));
+        $this->elasticService->deleteIndex(config('railcontent.elastic_index_name', 'content'));
 
         $this->elasticService->createContentIndex();
 
@@ -107,16 +156,18 @@ class RailcontentTestCase extends BaseTestCase
             );
         }
 
-        Event::listen(StatementPrepared::class, function($event) {
+        Event::listen(StatementPrepared::class, function ($event) {
             /** @var StatementPrepared $event */
             $event->statement->setFetchMode(PDO::FETCH_ASSOC);
         });
     }
 
+    // -------------------- used by RemoteStorage Service & Controller tests --------------------
+
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -128,6 +179,9 @@ class RailcontentTestCase extends BaseTestCase
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
         $app['config']->set('railcontent.elastic_index_name', 'testing');
+        $app['config']->set('railcontent.compiled_column_mapping_data_keys', $defaultConfig['compiled_column_mapping_data_keys']);
+        $app['config']->set('railcontent.compiled_column_mapping_field_keys', $defaultConfig['compiled_column_mapping_field_keys']);
+        $app['config']->set('railcontent.compiled_column_mapping_sub_content_field_keys', $defaultConfig['compiled_column_mapping_sub_content_field_keys']);
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
@@ -184,7 +238,7 @@ class RailcontentTestCase extends BaseTestCase
                 'prefix' => '',
                 'options' => [
                     \PDO::ATTR_PERSISTENT => true,
-                ]
+                ],
             ]
         );
 
@@ -206,7 +260,7 @@ class RailcontentTestCase extends BaseTestCase
                 'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
                 'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
                 'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-                'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET')
+                'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
             ]
         );
 
@@ -245,7 +299,10 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
         $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
         $app['config']->set('railcontent.content_hierarchy_max_depth', $defaultConfig['content_hierarchy_max_depth']);
-        $app['config']->set('railcontent.content_hierarchy_decorator_allowed_types', $defaultConfig['content_hierarchy_decorator_allowed_types']);
+        $app['config']->set(
+            'railcontent.content_hierarchy_decorator_allowed_types',
+            $defaultConfig['content_hierarchy_decorator_allowed_types']
+        );
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
@@ -255,40 +312,20 @@ class RailcontentTestCase extends BaseTestCase
         $app->register(ResponseServiceProvider::class);
     }
 
-    /**
-     * @return int
-     */
-    public function createAndLogInNewUser()
+    public function getConnectionType()
     {
-        $userId = $this->databaseManager->connection()->table('users')->insertGetId(
-            ['email' => $this->faker->email]
-        );
-
-        $this->authManager->guard()->onceUsingId($userId);
-
-        request()->setUserResolver(
-            function () use ($userId) {
-                return User::query()->find($userId);
-            }
-        );
-
-        return $userId;
+        return $this->connectionType;
     }
 
-    /**
-     * @return Connection
-     */
-    public function query()
+    public function setConnectionType($type = 'testbench')
     {
-        return $this->databaseManager->connection();
+        $this->connectionType = $type;
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
     }
-
-    // -------------------- used by RemoteStorage Service & Controller tests --------------------
 
     protected function awsConfigInitForTesting()
     {
@@ -319,7 +356,7 @@ class RailcontentTestCase extends BaseTestCase
     }
 
     /**
-     * @param string|null $useThisFilenameWithoutExtension
+     * @param  string|null  $useThisFilenameWithoutExtension
      * @return string
      */
     protected function create($useThisFilenameWithoutExtension = null)
@@ -343,7 +380,31 @@ class RailcontentTestCase extends BaseTestCase
     }
 
     /**
-     * @param string $filenameRelative
+     * @param  string  $filenameAbsolute
+     * @param  string  $name
+     * @return string
+     */
+    protected function changeImageNameLocally($filenameAbsolute, $name)
+    {
+        $extension = $this->getExtensionFromAbsolute($filenameAbsolute);
+        $nameWithExtension = $this->concatNameAndExtension($name, $extension);
+        $newFilenameAbsolute = sys_get_temp_dir() . '/' . $nameWithExtension;
+        rename($filenameAbsolute, $newFilenameAbsolute);
+
+        return $newFilenameAbsolute;
+    }
+
+    /**
+     * @param  string  $filenameAbsolute
+     * @return string
+     */
+    protected function getExtensionFromAbsolute($filenameAbsolute)
+    {
+        return $this->getExtensionFromRelative($this->getFilenameRelativeFromAbsolute($filenameAbsolute));
+    }
+
+    /**
+     * @param  string  $filenameRelative
      * @return string
      */
     protected function getExtensionFromRelative($filenameRelative)
@@ -356,20 +417,12 @@ class RailcontentTestCase extends BaseTestCase
         if (!is_string($extension)) {
             $this->fail('Value retrieved for file extension is not a string.');
         }
+
         return $extension;
     }
 
     /**
-     * @param string $filenameAbsolute
-     * @return string
-     */
-    protected function getExtensionFromAbsolute($filenameAbsolute)
-    {
-        return $this->getExtensionFromRelative($this->getFilenameRelativeFromAbsolute($filenameAbsolute));
-    }
-
-    /**
-     * @param string $filenameAbsolute
+     * @param  string  $filenameAbsolute
      * @return string
      */
     protected function getFilenameRelativeFromAbsolute($filenameAbsolute)
@@ -380,31 +433,8 @@ class RailcontentTestCase extends BaseTestCase
     }
 
     /**
-     * @param string $filenameRelative
-     * @return string
-     */
-    protected function getFilenameAbsoluteFromRelative($filenameRelative)
-    {
-        return sys_get_temp_dir() . '/' . $filenameRelative;
-    }
-
-    /**
-     * @param string $filenameAbsolute
-     * @param string $name
-     * @return string
-     */
-    protected function changeImageNameLocally($filenameAbsolute, $name)
-    {
-        $extension = $this->getExtensionFromAbsolute($filenameAbsolute);
-        $nameWithExtension = $this->concatNameAndExtension($name, $extension);
-        $newFilenameAbsolute = sys_get_temp_dir() . '/' . $nameWithExtension;
-        rename($filenameAbsolute, $newFilenameAbsolute);
-        return $newFilenameAbsolute;
-    }
-
-    /**
-     * @param string $name
-     * @param string $extension
+     * @param  string  $name
+     * @param  string  $extension
      * @return string
      */
     protected function concatNameAndExtension($name, $extension)
@@ -412,35 +442,12 @@ class RailcontentTestCase extends BaseTestCase
         return $name . '.' . $extension;
     }
 
-    public function createExpectedResult($status, $code, $results)
+    /**
+     * @param  string  $filenameRelative
+     * @return string
+     */
+    protected function getFilenameAbsoluteFromRelative($filenameRelative)
     {
-        return [
-            "status" => $status,
-            "code" => $code,
-            "results" => $results
-        ];
+        return sys_get_temp_dir() . '/' . $filenameRelative;
     }
-
-    public function createPaginatedExpectedResult($status, $code, $page, $limit, $totalResults, $results, $filter)
-    {
-        return [
-            "status" => $status,
-            "code" => $code,
-            "page" => $page,
-            "limit" => $limit,
-            "total_results" => $totalResults,
-            "results" => $results,
-            "filter_options" => $filter
-        ];
-    }
-
-    public function setConnectionType($type = 'testbench')
-    {
-        $this->connectionType = $type;
-    }
-
-    public function getConnectionType()
-    {
-        return $this->connectionType;
-    }
-    }
+}

@@ -31,10 +31,10 @@ class CommentCreated extends Event
      * @param $commentId
      * @param $userId
      * @param $parentId
-     * @param $commentText
+     * @param string $commentText
      * @param string|null $brand
      */
-    public function __construct($commentId, $userId, $parentId, $commentText, ?string $brand = null)
+    public function __construct($commentId, $userId, $parentId, string $commentText, ?string $brand = null)
     {
         $this->commentId = $commentId;
         $this->userId = $userId;

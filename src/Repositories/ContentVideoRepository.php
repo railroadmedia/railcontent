@@ -23,7 +23,7 @@ class ContentVideoRepository extends RepositoryBase
         return $this->connection()->table(config('railcontent.table_prefix').'content');
     }
 
-    public function getByContentIds($contentIds)
+    public function getByContentIds($contentIds, $key = 'video')
     {
         if (empty($contentIds)) {
             return [];
@@ -34,7 +34,7 @@ class ContentVideoRepository extends RepositoryBase
                 ->select(config('railcontent.table_prefix').'content.id as content_id', 'videoRow.*')
                 ->join(
                     config('railcontent.table_prefix').'content as videoRow',
-                    config('railcontent.table_prefix').'content.video',
+                    config('railcontent.table_prefix').'content.'.$key,
                     '=',
                     'videoRow.id'
                 )
@@ -49,5 +49,28 @@ class ContentVideoRepository extends RepositoryBase
         $parser->presenter->addParam(['data' => ContentHelper::groupArrayBy($contentDatumRows, 'content_id')]);
 
         return $this->parserResult($data);
+    }
+
+    public function getContentWithExternalVideoId($videoId)
+    {
+        $results =  $this->query()
+            ->select(config('railcontent.table_prefix').'content.id as content_id', 'content_with_video.*', 'content_with_original_video.*')
+            ->leftJoin(
+                config('railcontent.table_prefix').'content as content_with_video',
+                'content_with_video.video',
+                '=',
+                config('railcontent.table_prefix').'content.id'
+            )
+            ->leftJoin(
+                config('railcontent.table_prefix').'content as content_with_original_video',
+                'content_with_original_video.original_video',
+                '=',
+                config('railcontent.table_prefix').'content.id'
+            )
+            ->where(config('railcontent.table_prefix').'content.vimeo_video_id','=', $videoId)
+            ->orWhere(config('railcontent.table_prefix').'content.youtube_video_id','=', $videoId)
+            ->get();
+
+        return $results;
     }
 }

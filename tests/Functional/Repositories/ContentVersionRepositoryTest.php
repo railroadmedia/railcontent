@@ -14,13 +14,6 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
      */
     protected $classBeingTested;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentVersionRepository::class);
-    }
-
     public function test_store_content_version()
     {
         $content = [
@@ -40,7 +33,7 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'author_id' => rand(),
             'state' => $this->faker->word,
             'data' => serialize($content),
-            'saved_on' => Carbon::now()->toDateTimeString()
+            'saved_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $id = $this->classBeingTested->create($version);
@@ -76,7 +69,7 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'author_id' => rand(),
             'state' => $this->faker->word,
             'data' => serialize($content),
-            'saved_on' => Carbon::now()->toDateTimeString()
+            'saved_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $id = $this->classBeingTested->create($version);
@@ -112,7 +105,7 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'author_id' => rand(),
             'state' => $this->faker->word,
             'data' => serialize($oldContent),
-            'saved_on' => Carbon::now()->toDateTimeString()
+            'saved_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $oldId = $this->classBeingTested->create($oldVersion);
@@ -124,7 +117,7 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'author_id' => rand(),
             'state' => $this->faker->word,
             'data' => serialize($newContent),
-            'saved_on' => Carbon::now()->toDateTimeString()
+            'saved_on' => Carbon::now()->toDateTimeString(),
         ];
 
         $newId = $this->classBeingTested->create($newVersion);
@@ -132,5 +125,12 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
         $oldContentVersion = $this->classBeingTested->getById($oldId);
 
         $this->assertEquals(array_merge(['id' => $oldId], $oldVersion), $oldContentVersion);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentVersionRepository::class);
     }
 }

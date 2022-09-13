@@ -61,6 +61,9 @@ abstract class RepositoryBase
         'style' => ContentStyleRepository::class,
         'bpm' => ContentBpmRepository::class,
         'video' => ContentVideoRepository::class,
+        'original_video' => ContentVideoRepository::class,
+        'low_video' => ContentVideoRepository::class,
+        'high_video' => ContentVideoRepository::class,
         'focus' => ContentFocusRepository::class
     ];
 
@@ -635,7 +638,7 @@ abstract class RepositoryBase
                 $repositoryName = self::REPOSITORYMAPPING[$key];
                 if ($repositoryName) {
                     $repository = app()->make($repositoryName);
-                    $results[$key] = $repository->getByContentIds(array_column($contentRows, 'id'));
+                    $results[$key] = $repository->getByContentIds(array_column($contentRows, 'id'), $key);
                     if($key == 'data' ){
                         $results[$key] = ContentHelper::groupArrayBy($results[$key], 'content_id');
                     }

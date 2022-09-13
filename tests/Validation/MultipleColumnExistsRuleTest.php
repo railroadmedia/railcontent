@@ -22,22 +22,12 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
     /**
      * MultipleColumnExistsRuleTest constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->databaseManager = app()->make(DatabaseManager::class);
         $this->contentFactory = app()->make(ContentFactory::class);
-    }
-
-    private function createContent(...$arg){
-        $content = $this->contentFactory->create(...$arg);
-
-        if(is_null($content)){
-            $this->fail('Failed to generate mock content.');
-        }
-
-        return $content;
     }
 
     /**
@@ -53,8 +43,19 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $rule = 'exists_multiple_columns:' . $connectionName . ',' . 'railcontent_content,' . 'id' . '&' .
             $connectionName . ',' . 'railcontent_content,' . 'type,' . $typeOne;
         /** @var $validator Validator */
-        $validator = Validator::make(['id' => $contentOne['id']],['id' => $rule]);
+        $validator = Validator::make(['id' => $contentOne['id']], ['id' => $rule]);
         $this->assertEquals('1', $validator->validate()['id']);
+    }
+
+    private function createContent(...$arg)
+    {
+        $content = $this->contentFactory->create(...$arg);
+
+        if (is_null($content)) {
+            $this->fail('Failed to generate mock content.');
+        }
+
+        return $content;
     }
 
     /**
@@ -143,7 +144,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type.
+            $type .
 
             '&' .
             'or:' . // <-- note this here... it makes all the difference
@@ -260,7 +261,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type.
+            $type .
 
             '&' .
             'or:' . // <-- note this here... it makes all the difference
@@ -275,7 +276,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'slug,' .
-            $slug.
+            $slug .
 
             '&' .
             'or:' . // <-- note this here... it makes all the difference
@@ -302,7 +303,8 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      *
      * @return void
      */
-    public function test_multiple_or_clauses_fail(){
+    public function test_multiple_or_clauses_fail()
+    {
         /*
          * I was having issue with this test failing - inconsistantly - because of collisions from $this->faker-word
          * products. So, there's some stringent checking before calling the system under test, and we run it bunch
@@ -341,13 +343,13 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $oldSlug = $slug;
         $oldType = $type;
 
-        if(rand(0,1)){ // randomly pick one to not match
+        if (rand(0, 1)) { // randomly pick one to not match
             do {
                 $slugForFail = $this->faker->word;
                 // $slugForFail = rand(0,10) < 1 ? $this->faker->word : $slug; // confirm works has expected
             } while ($slugForFail === $slug);
             $slug = $slugForFail;
-        }else{
+        } else {
             do {
                 $typeForFail = $this->faker->word;
             } while ($typeForFail === $type);
@@ -375,7 +377,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type.
+            $type .
 
             '&' .
             'or:' . // <-- note this here... it makes all the difference
@@ -390,7 +392,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'slug,' .
-            $slug.
+            $slug .
 
             '&' .
             'or:' . // <-- note this here... it makes all the difference
@@ -415,10 +417,11 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          */
         //$this->expectException('Illuminate\Validation\ValidationException');
 
-        try{
+        try {
             $validator->validate()['id'];
-        }catch(ValidationException $exception){
+        } catch (ValidationException $exception) {
             $this->assertTrue(true);
+
             return true;
         }
 

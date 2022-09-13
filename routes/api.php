@@ -24,19 +24,19 @@ Route::group(
             '/content/field/{id}',
             ContentFieldJsonController::class . '@show'
         )
-            ->name('content.field.show');
+            ->name('api.content.field.show');
         // permissions
         Route::get(
             '/permission',
             PermissionJsonController::class . '@index'
         )
-            ->name('permissions.index');
+            ->name('api.permissions.index');
         // content
         Route::options(
             '/content',
             ContentJsonController::class . '@options'
         )
-            ->name('content.options');
+            ->name('api.content.options');
         Route::get(
             '/content',
             ContentJsonController::class . '@index'
@@ -46,107 +46,107 @@ Route::group(
             '/content/parent/{parentId}',
             ContentJsonController::class . '@getByParentId'
         )
-            ->name('content.get-by-parent-id');
+            ->name('api.content.get-by-parent-id');
         Route::get(
             '/content/get-by-ids',
             ContentJsonController::class . '@getByIds'
         )
-            ->name('content.get-by-ids');
+            ->name('api.content.get-by-ids');
 //        Route::get(
 //            '/content/{id}',
 //            ContentJsonController::class . '@show'
 //        )
-//            ->name('content.show');
+//            ->name('api.content.show');
         // content user progression
         Route::put(
             '/start',
             ContentProgressJsonController::class . '@startContent'
         )
-            ->name('content.progress.start');
+            ->name('api.content.progress.start');
         Route::put(
             '/complete',
             ContentProgressJsonController::class . '@completeContent'
         )
-            ->name('content.progress.complete');
+            ->name('api.content.progress.complete');
         Route::put(
             '/reset',
             ContentProgressJsonController::class . '@resetContent'
         )
-            ->name('content.progress.reset');
+            ->name('api.content.progress.reset');
         Route::put(
             '/progress',
             ContentProgressJsonController::class . '@saveProgress'
         )
-            ->name('content.progress.store');
+            ->name('api.content.progress.store');
         //comments
         Route::put(
             '/comment',
             CommentJsonController::class . '@store'
         )
-            ->name('comment.store');
+            ->name('api.comment.store');
         Route::patch(
             '/comment/{id}',
             CommentJsonController::class . '@update'
         )
-            ->name('comment.update');
+            ->name('api.comment.update');
         Route::delete(
             '/comment/{id}',
             CommentJsonController::class . '@delete'
         )
-            ->name('comment.delete');
+            ->name('api.comment.delete');
         Route::put(
             '/comment/reply',
             CommentJsonController::class . '@reply'
         )
-            ->name('comment.reply');
+            ->name('api.comment.reply');
         Route::get(
             '/comment',
             CommentJsonController::class . '@index'
         )
-            ->name('comment.index');
+            ->name('api.comment.index');
         Route::get(
             '/comment/{id}',
             CommentJsonController::class . '@getLinkedComment'
         )
-            ->name('comment.linked');
+            ->name('api.comment.linked');
         //comment-likes
         Route::get(
             '/comment-likes/{commentId}',
             CommentLikeJsonController::class . '@index'
         )
-            ->name('comment-likes.index');
+            ->name('api.comment-likes.index');
         Route::put(
             '/comment-like/{id}',
             CommentLikeJsonController::class . '@store'
         )
-            ->name('comment-like.store');
+            ->name('api.comment-like.store');
         Route::delete(
             '/comment-like/{id}',
             CommentLikeJsonController::class . '@delete'
         )
-            ->name('comment-like.delete');
+            ->name('api.comment-like.delete');
         // content-likes
         Route::get(
             '/content-like/{id}',
             ContentLikeJsonController::class . '@index'
         )
-            ->name('content-likes.index');
+            ->name('api.content-likes.index');
         Route::put(
             '/content-like',
             ContentLikeJsonController::class . '@like'
         )
-            ->name('content-like.store');
+            ->name('api.content-like.store');
         Route::delete(
             '/content-like',
             ContentLikeJsonController::class . '@unlike'
         )
-            ->name('content-like.delete');
+            ->name('api.content-like.delete');
         //full text search
         Route::get(
             '/search',
             FullTextSearchJsonController::class . '@index'
         )
-            ->name('search.index');
+            ->name('api.search.index');
 
         Route::get('/all', ContentJsonController::class . '@getAllContent');
         Route::get(
@@ -164,7 +164,7 @@ Route::group(
 
         Route::get('/onboarding', ApiJsonController::class . '@onboarding');
 
-        Route::get('/shows', ApiJsonController::class . '@getShows');
+        Route::get('/shows', ApiJsonController::class . '@getShows')->name('api.shows');
 
         Route::get('/comments', ApiJsonController::class . '@getComments');
 

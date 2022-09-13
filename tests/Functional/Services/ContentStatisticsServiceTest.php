@@ -4,12 +4,12 @@ namespace Railroad\Railcontent\Tests\Functional\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentLikeRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ContentStatisticsService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -41,17 +41,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
      * @var UserContentProgressRepository
      */
     protected $userContentRepository;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->commentRepository = $this->app->make(CommentRepository::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
-        $this->contentRepository = $this->app->make(ContentRepository::class);
-        $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
-    }
 
     public function test_get_content_statistics_intervals()
     {
@@ -114,7 +103,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         // add content
         $contentData = [];
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $content = $this->addContent(
                 $this->faker->randomElement(ConfigService::$statisticsContentTypes),
                 ContentService::STATUS_PUBLISHED,
@@ -130,8 +119,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $stats = [];
 
         // add progress complete
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // user content progress date may be a little out of the test interval
@@ -156,7 +144,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 }
 
                 if (!isset($stats[$index][$contentId])) {
-
                     $content = $contentData[$contentId];
 
                     $stats[$index][$contentId] = [
@@ -179,8 +166,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add progress started
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // user content progress date may be a little out of the test interval
@@ -205,7 +191,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 }
 
                 if (!isset($stats[$index][$contentId])) {
-
                     $content = $contentData[$contentId];
 
                     $stats[$index][$contentId] = [
@@ -228,8 +213,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add comments
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             // increased chance to add comment to test content id
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
@@ -251,7 +235,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 }
 
                 if (!isset($stats[$index][$contentId])) {
-
                     $content = $contentData[$contentId];
 
                     $stats[$index][$contentId] = [
@@ -274,8 +257,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add likes
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // like date may be a little out of the test interval
@@ -296,7 +278,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 }
 
                 if (!isset($stats[$index][$contentId])) {
-
                     $content = $contentData[$contentId];
 
                     $stats[$index][$contentId] = [
@@ -319,8 +300,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add to lists
-        for ($i=0; $i < 50; $i++) {
-
+        for ($i = 0; $i < 50; $i++) {
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // add to lists date may be a little out of the test interval
@@ -341,7 +321,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 }
 
                 if (!isset($stats[$index][$contentId])) {
-
                     $content = $contentData[$contentId];
 
                     $stats[$index][$contentId] = [
@@ -375,17 +354,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
     }
 
-    protected function getIntervalForDate($date, $intervals)
-    {
-        foreach ($intervals as $interval) {
-            if ($date >= $interval['start'] && $date <= $interval['end']) {
-                return $interval;
-            }
-        }
-
-        return null;
-    }
-
     protected function addContent($contentType, $contentStatus, $contentCreatedOn = null)
     {
         // ContentFactory does not allow to specify the content created_on field
@@ -401,9 +369,9 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 'total_xp' => null,
                 'user_id' => null,
                 'published_on' => $contentCreatedOn ?? Carbon::now()
-                    ->toDateTimeString(),
+                        ->toDateTimeString(),
                 'created_on' => $contentCreatedOn ?? Carbon::now()
-                    ->toDateTimeString(),
+                        ->toDateTimeString(),
             ]
         );
 
@@ -431,6 +399,17 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 'updated_on' => $updatedOn,
             ]
         );
+    }
+
+    protected function getIntervalForDate($date, $intervals)
+    {
+        foreach ($intervals as $interval) {
+            if ($date >= $interval['start'] && $date <= $interval['end']) {
+                return $interval;
+            }
+        }
+
+        return null;
     }
 
     protected function addContentComment($contentId, $createdOn = null)
@@ -493,5 +472,16 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 'created_on' => $createdOn,
             ]
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->commentRepository = $this->app->make(CommentRepository::class);
+        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
+        $this->contentRepository = $this->app->make(ContentRepository::class);
+        $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
     }
 }

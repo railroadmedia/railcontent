@@ -26,15 +26,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
      */
     protected $fieldFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-    }
-
     public function test_empty()
     {
         $rows =
@@ -720,6 +711,15 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             ->countFilter();
 
         $this->assertEquals(10, $count);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 
 }

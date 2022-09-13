@@ -11,7 +11,7 @@ trait SeedDatabase
      */
     public function seedDatabase()
     {
-        if (! SeedDatabaseState::$seeded) {
+        if (!SeedDatabaseState::$seeded) {
             $this->runSeeders();
 
             if (SeedDatabaseState::$seedOnce) {

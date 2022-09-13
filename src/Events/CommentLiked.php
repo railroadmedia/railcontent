@@ -11,7 +11,7 @@ class CommentLiked extends Event
      */
     public $commentId;
     /**
-     * @var
+     * @var integer
      */
     public $userId;
     /**

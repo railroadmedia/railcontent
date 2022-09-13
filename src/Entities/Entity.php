@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Entities;
 
 use ArrayObject;
+use Illuminate\Support\Arr;
 
 class Entity extends ArrayObject
 {
@@ -23,7 +24,7 @@ class Entity extends ArrayObject
             return $this->dotCache;
         }
 
-        $this->dotCache = array_dot($this->getArrayCopy());
+        $this->dotCache = Arr::dot($this->getArrayCopy());
 
         return $this->dotCache;
     }
@@ -35,16 +36,16 @@ class Entity extends ArrayObject
         $this->dotCache = null;
     }
 
-    public function offsetSet($index, $newval)
+    public function offsetSet(mixed $key, mixed $value): void
     {
-        parent::offsetSet($index, $newval);
+        parent::offsetSet($key, $value);
 
         $this->dotCache = null;
     }
 
-    public function offsetUnset($index)
+    public function offsetUnset(mixed $key): void
     {
-        parent::offsetUnset($index);
+        parent::offsetUnset($key);
 
         $this->dotCache = null;
     }

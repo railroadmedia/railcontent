@@ -12,7 +12,7 @@ class StyleTransformer
 
         $results = [];
         foreach ($data as $style) {
-            $results[$style['content_id']] = [
+            $results[$style['content_id']][] = [
                 'id' => $style['id'] ?? null,
                 'content_id' => $style['content_id'],
                 'key' => 'style',

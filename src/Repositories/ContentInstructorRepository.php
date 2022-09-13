@@ -45,8 +45,13 @@ class ContentInstructorRepository extends RepositoryBase
                 )
                 ->whereIn('content_id', $contentIds)
                 ->orderBy('position', 'asc')
-                ->get()
-                ->toArray();
+                ->get();
+
+        $unique = $data->unique(function ($item)
+        {
+            return $item['instructor_id'] . $item['content_id'];
+        });
+        $data = $unique->all();
 
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($data, 'instructor_id'));
         $parser = $this->setPresenter(InstructorTransformer::class);
