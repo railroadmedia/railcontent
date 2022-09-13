@@ -75,7 +75,7 @@ class Bundle extends Resource
                     return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
-                    if(is_null($value)) return null;
+                    if(empty($value)) return null;
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
@@ -108,7 +108,7 @@ class Bundle extends Resource
                     return '/'.$brand.'/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
-                    if(is_null($value)) return null;
+                    if(empty($value)) return null;
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
