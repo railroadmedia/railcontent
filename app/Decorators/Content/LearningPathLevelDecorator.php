@@ -24,7 +24,7 @@ class LearningPathLevelDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             // level number
-            $contentsOfType[$contentIndex]['level_number'] = $content['hierarchy_position_number'];
+            $contentsOfType[$contentIndex]['level_number'] = $contentsOfType[$contentIndex]['level_position'] = $content['hierarchy_position_number'];
 
             // course count
             $contentsOfType[$contentIndex]['lesson_count'] =$content['child_count'];

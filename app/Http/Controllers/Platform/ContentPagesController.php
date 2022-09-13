@@ -299,7 +299,9 @@ class ContentPagesController extends BaseController
             }
         }
 
-        $progressLabelText = ($primaryPage == 'method')?'Level - '.$firstLevelContent->fetch('higher_key_progress','1.1'):'';
+        $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
+        $progressLevel = 'Level - '.(($noProgress)?'1.1':$firstLevelContent->fetch('higher_key_progress','1.1'));
+        $progressLabelText = ($primaryPage == 'method')?$progressLevel:'';
 
         return view('content.overview', [
                                           "parentContent" => $firstLevelContent,
@@ -382,7 +384,9 @@ class ContentPagesController extends BaseController
             "xp" => $secondContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('higher_key_progress','1.1');
+        $noProgress = empty($firstContent->fetch('higher_key_progress'));
+        $progressLevel = 'Level - '.(($noProgress)?'1.1':$firstContent->fetch('higher_key_progress','1.1'));
+        $progressLabelText = ($primaryPage == 'method')?$progressLevel:'';
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
@@ -482,7 +486,9 @@ class ContentPagesController extends BaseController
             "xp" => $thirdContent->fetch('total_xp', 0),
         ];
 
-        $progressLabelText = 'Level - '.$firstContent->fetch('higher_key_progress','1.1');
+        $noProgress = empty($firstContent->fetch('higher_key_progress'));
+        $progressLevel = 'Level - '.(($noProgress)?'1.1':$firstContent->fetch('higher_key_progress','1.1'));
+        $progressLabelText = ($primaryPage == 'method')?$progressLevel:'';
 
         $backButton = [
             "text" => "&laquo; Learning Paths",
