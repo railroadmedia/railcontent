@@ -8,7 +8,6 @@ import StepHeader from "../StepHeader.vue";
 import MultiSelect from "../../MultiSelect/MultiSelect.vue";
 import { saveGear } from "../services"
 import { getMultiSelectOptions } from "../utils";
-import constant from "lodash/constant";
 
 const props = defineProps({
   brand: {
@@ -53,7 +52,7 @@ const handleNextStep = () => {
     if (isChecked) {
       data.push(type);
     }
-  })
+  });
 
   saveGear({
     data,
@@ -69,7 +68,6 @@ const handleNextStep = () => {
 function goBack() {
   emit('onChangeStep', 1);
 }
-
 
 const isNextButtonDisabled = () => {
   return !Object.values(currentSelection.value).filter(val => {

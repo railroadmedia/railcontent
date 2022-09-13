@@ -102,7 +102,7 @@ module.exports = {
           'ul, ol': {
             listStyle: 'revert',
             paddingLeft: '40px',
-            marginBottom: '10px',
+            margin: '10px 0',
           }
         }
       })
