@@ -14800,7 +14800,7 @@ input[type=text].bg-light.inverted,
 .form-group input[type=date]:disabled,
 .form-group select:disabled,
 .form-group textarea:disabled {
-  background-color: #f2f2f2;
+  background-color: rgba(150, 150, 150, 0.2) !important;
   color: #8c9698;
 }
 .form-group input[type=text].has-error,
