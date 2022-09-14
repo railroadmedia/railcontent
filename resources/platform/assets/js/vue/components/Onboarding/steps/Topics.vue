@@ -55,6 +55,7 @@ const handleNextStep = () => {
     brand: props.brand
   }).then(() => {
     emit('onChangeStep', 6);
+    emit('onCheckStep', 5, true);
   }).catch(() => {
     showErrorNotification.value = true;
   });
