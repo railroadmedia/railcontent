@@ -2233,14 +2233,14 @@ class ContentService
         $contentId = null;
 
         if (!empty($contentHierarchyDataRow)) {
-            if (!empty($contentHierarchyDataRow->ch_4_child_slug)) {
-                $contentId = $contentHierarchyDataRow->ch_4_child_id;
-            } elseif (!empty($contentHierarchyDataRow->ch_3_child_slug)) {
-                $contentId = $contentHierarchyDataRow->ch_3_child_id;
-            } elseif (!empty($contentHierarchyDataRow->ch_2_child_slug)) {
-                $contentId = $contentHierarchyDataRow->ch_2_child_id;
-            } elseif (!empty($contentHierarchyDataRow->ch_1_child_slug)) {
-                $contentId = $contentHierarchyDataRow->ch_1_child_id;
+            if (!empty($contentHierarchyDataRow['ch_4_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_4_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_3_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_3_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_2_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_2_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_1_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_1_child_id'];
             }
         }
 

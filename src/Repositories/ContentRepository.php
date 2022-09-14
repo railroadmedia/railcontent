@@ -2265,6 +2265,9 @@ class ContentRepository extends RepositoryBase
                     if (isset($instructors['id'])) {
                         $instructors = [$instructors];
                     }
+                    if(!is_array($instructors)) {
+                        continue;
+                    }
                     foreach ($instructors as $instructor) {
                         if (isset($instructor['id'])) {
                             $filterOptionsArray[$filterOptionName][] = [
