@@ -7903,16 +7903,16 @@
         },
         {
             "name": "railroad/event-data-synchronizer",
-            "version": "v8.0.5",
+            "version": "v8.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/event-data-synchronizer.git",
-                "reference": "737e2886f3fdd88225962a871c8881db545afe59"
+                "reference": "38a6542b624515f2988a84ce55e50d58c50f12d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/737e2886f3fdd88225962a871c8881db545afe59",
-                "reference": "737e2886f3fdd88225962a871c8881db545afe59",
+                "url": "https://api.github.com/repos/railroadmedia/event-data-synchronizer/zipball/38a6542b624515f2988a84ce55e50d58c50f12d0",
+                "reference": "38a6542b624515f2988a84ce55e50d58c50f12d0",
                 "shasum": ""
             },
             "require": {
@@ -7961,9 +7961,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/event-data-synchronizer/issues",
-                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.5"
+                "source": "https://github.com/railroadmedia/event-data-synchronizer/tree/v8.0.6"
             },
-            "time": "2022-09-13T19:18:45+00:00"
+            "time": "2022-09-14T12:52:29+00:00"
         },
         {
             "name": "railroad/location",
@@ -8070,12 +8070,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "e695bdad7e76447cf5226e62fe3a966fcbd99081"
+                "reference": "a7bbb3b98fa84979e66d1331728533ad9cc073a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e695bdad7e76447cf5226e62fe3a966fcbd99081",
-                "reference": "e695bdad7e76447cf5226e62fe3a966fcbd99081",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a7bbb3b98fa84979e66d1331728533ad9cc073a2",
+                "reference": "a7bbb3b98fa84979e66d1331728533ad9cc073a2",
                 "shasum": ""
             },
             "require": {
@@ -8107,7 +8107,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-13T14:43:30+00:00"
+            "time": "2022-09-14T12:44:16+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8300,16 +8300,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "44a5b3066d68655ae20749cbc896a00a87824053"
+                "reference": "69e4fc9142cca861c1644bd86f4b20e8c5888e6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/44a5b3066d68655ae20749cbc896a00a87824053",
-                "reference": "44a5b3066d68655ae20749cbc896a00a87824053",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/69e4fc9142cca861c1644bd86f4b20e8c5888e6e",
+                "reference": "69e4fc9142cca861c1644bd86f4b20e8c5888e6e",
                 "shasum": ""
             },
             "require": {
@@ -8363,9 +8363,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.3"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.4"
             },
-            "time": "2022-09-14T06:27:21+00:00"
+            "time": "2022-09-14T12:39:08+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8526,16 +8526,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "3584b4f77f1ee31aedaef917d364ff30f6a6ce23"
+                "reference": "60f52e647c9ff4e870f6ca0ea7b39e050c7a3518"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/3584b4f77f1ee31aedaef917d364ff30f6a6ce23",
-                "reference": "3584b4f77f1ee31aedaef917d364ff30f6a6ce23",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/60f52e647c9ff4e870f6ca0ea7b39e050c7a3518",
+                "reference": "60f52e647c9ff4e870f6ca0ea7b39e050c7a3518",
                 "shasum": ""
             },
             "require": {
@@ -8581,9 +8581,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.3"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.4"
             },
-            "time": "2022-09-09T12:39:17+00:00"
+            "time": "2022-09-14T12:41:24+00:00"
         },
         {
             "name": "railroad/referral",
@@ -14876,16 +14876,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "4.0.6",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "55f4261989e546dc112258c7a75935a81a7ce382"
+                "reference": "fa0f136dd2334583309d32b62544682ee972b51a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/55f4261989e546dc112258c7a75935a81a7ce382",
-                "reference": "55f4261989e546dc112258c7a75935a81a7ce382",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/fa0f136dd2334583309d32b62544682ee972b51a",
+                "reference": "fa0f136dd2334583309d32b62544682ee972b51a",
                 "shasum": ""
             },
             "require": {
@@ -14938,7 +14938,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/4.0.6"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/4.0.8"
             },
             "funding": [
                 {
@@ -14946,7 +14946,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T15:49:45+00:00"
+            "time": "2022-09-14T12:41:17+00:00"
         },
         {
             "name": "sebastian/complexity",
