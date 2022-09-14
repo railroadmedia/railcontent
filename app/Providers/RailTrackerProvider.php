@@ -56,7 +56,8 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
             $sessionId,
             $secondsPlayed,
             $currentSecond,
-            $lastUpdatedOn
+            $lastUpdatedOn,
+            brand()
         );
     }
 }
