@@ -322,8 +322,8 @@ class ContentPagesController extends BaseController
             "showLevels" => true,
             "progressLabelText" => $progressLabelText,
             "infoData" => $infoData,
-            "nextLessonUrl" => !$areMultipartSongs ? $nextLessonUrl : '',
-            "nextLessonJson" => !$areMultipartSongs ? $nextLessonJson : '',
+            "nextLessonUrl" => $nextLessonUrl ,
+            "nextLessonJson" => $nextLessonJson,
             "xpBonus" => $xpBonus,
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
         ]);

@@ -110,8 +110,7 @@
         @endcomponent
 
         {{-- Live Banner --}}
-
-        @if($coachEvent)
+        @if( !empty($coachEvent) )
             <coach-event
                 brand="{{ $brand }}"
                 class="tw-mb-6"
