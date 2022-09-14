@@ -9,7 +9,7 @@ Route::get('{brand}/shop', [ProductPagesController::class, 'products'])
     ->name('marketing.products');
 
 /*---- CUSTOM PRODUCT PAGE ----*/
-//drumeo
+//Drumeo
 Route::get('drumeo/shop/new-drummers', function(){ return view('drumeo.products.full-page-assets.new-drummers'); });
 Route::get('drumeo/shop/rock-drumming-masterclass', function(){ return view('drumeo.products.full-page-assets.rock-drumming-masterclass'); });
 Route::get('drumeo/shop/drum-technique-made-easy', function(){ return view('drumeo.products.full-page-assets.drum-technique-made-easy'); });
@@ -30,7 +30,7 @@ Route::get('drumeo/shop/the-drummers-toolbox', function(){ return view('drumeo.p
 Route::get('drumeo/shop/beginner-book', function(){ return view('drumeo.products.full-page-assets.beginner-book'); });
 Route::get('drumeo/shop/30-day-drummer', function(){ return view('drumeo.products.full-page-assets.30-day-drummer'); });
 
-//pianote
+//Pianote
 Route::get('pianote/shop/play-beautiful-piano', function(){ return view('pianote.products.play-beautiful-piano'); });
 Route::get('pianote/shop/500-songs', function(){ return view('pianote.products.500-songs'); });
 Route::get('pianote/shop/worship-piano', function(){ return view('pianote.products.worship-piano'); });
@@ -41,6 +41,17 @@ Route::get('pianote/shop/riffs-and-fills', function(){ return view('pianote.prod
 Route::get('pianote/shop/beginner-classical-piano', function(){ return view('pianote.products.beginner-classical-piano.beginner-classical-piano'); });
 Route::get('pianote/shop/the-power-of-chords', function(){ return view('pianote.products.the-power-of-chords'); });
 Route::get('pianote/shop/the-power-of-chords-bootcamp', function(){ return view('pianote.products.the-power-of-chords-bootcamp'); });
+
+//Guitareo
+Route::get('guitareo/shop/rhythm-and-groove', function(){ return view('guitareo.products.rhythm-and-groove'); });
+Route::get('guitareo/shop/guitar-technique-made-easy', function(){ return view('guitareo.products.guitar-technique-made-easy'); });
+Route::get('guitareo/shop/acoustic-guitar-made-easy', function(){ return view('guitareo.products.acoustic-guitar-made-easy'); });
+Route::get('guitareo/shop/guitar-system', function(){ return view('guitareo.products.guitar-system'); });
+Route::get('guitareo/shop/guitar-quest', function(){ return view('guitareo.products.guitar-quest.guitar-quest'); });
+Route::get('guitareo/shop/500-songs', function(){ return view('guitareo.products.500-songs'); });
+
+//Singeo
+Route::get('singeo/shop/singing-starter-kit', function(){ return view('singeo.products.singing-starter-kit'); });
 
 Route::get('{brand}/shop/{product:slug}', [ProductPagesController::class, 'product'])
     ->whereIn('brand', all_brands())
