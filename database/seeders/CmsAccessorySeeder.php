@@ -571,6 +571,31 @@ And so many more!",
                 "price" => 39,
                 "discounted_price" => "",
                 "special_text" => "",
+                'overview' => "Master Every Chord. Every Scale. In Every Key.
+
+This brand new book will help you learn every chord shape, chord variation, and scale in EVERY key.
+
+It’s the ultimate guide to mastering the building blocks of music on the piano.
+
+The handy tabs on the side will make it easy to look up any key signature and quickly find all the different scales and chords you need when it comes time to practice or learn a new song.
+
+Here’s what that means:
+
+Say you're learning a new song, and it's in the key of Eb major. But you haven't learned Eb yet. Easy...
+
+You simply pull out your handy Chords & Scales Book and use the keyboard tabs on the side to find Eb and quickly flip to the page:
+
+<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
+
+In there, you'll find all the major, minor, sus, and 7th chords you can expect in Eb, along with the notes of 9 different scales all starting on Eb.
+
+Or, say you need to quickly find an F major chord in 1st inversion. Again, just use the tab to flip to F and find all the information you need:
+
+<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
+
+Easy peasy!
+
+Start Mastering your Chords & Scales today.",
                 "features" => [
                 ],
                 "specs" => [
@@ -601,9 +626,6 @@ And so many more!",
                     "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-118.jpg",
                     "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-111.jpg"
                 ],
-                "images" => [
-
-                ],
                 "sizeChart" => "",
                 "sizes" => [
 
@@ -625,6 +647,31 @@ And so many more!",
                 "price" => 39,
                 "discounted_price" => "",
                 "special_text" => "",
+                'overview' => "Master Every Chord. Every Scale. In Every Key.
+
+This brand new book will help you learn every chord shape, chord variation, and scale in EVERY key.
+
+It’s the ultimate guide to mastering the building blocks of music on the piano.
+
+The handy tabs on the side will make it easy to look up any key signature and quickly find all the different scales and chords you need when it comes time to practice or learn a new song.
+
+Here’s what that means:
+
+Say you're learning a new song, and it's in the key of Eb major. But you haven't learned Eb yet. Easy...
+
+You simply pull out your handy Chords & Scales Book and use the keyboard tabs on the side to find Eb and quickly flip to the page:
+
+<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
+
+In there, you'll find all the major, minor, sus, and 7th chords you can expect in Eb, along with the notes of 9 different scales all starting on Eb.
+
+Or, say you need to quickly find an F major chord in 1st inversion. Again, just use the tab to flip to F and find all the information you need:
+
+<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
+
+Easy peasy!
+
+Start Mastering your Chords & Scales today.",
                 "features" => [
                 ],
                 "specs" => [
