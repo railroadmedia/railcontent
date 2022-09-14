@@ -42,6 +42,7 @@ return [
         'support-email-address' => 'support@drumeo.com',
         'support-sender-name' => 'Drumeo',
         'submit-student-focus-recipient' => 'support@drumeo.com',
+        'ask-question-recipient' => 'support+question-and-answer@drumeo.com',
         'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png'
     ],
 
@@ -49,6 +50,7 @@ return [
         'support-email-address' => 'support@pianote.com',
         'support-sender-name' => 'Pianote System',
         'submit-student-focus-recipient' => 'team+studentreviews@pianote.com',
+        'ask-question-recipient' => 'team+question-and-answer@pianote.com',
         'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png'
     ],
 
@@ -56,6 +58,7 @@ return [
         'support-email-address' => 'support@guitareo.com',
         'support-sender-name' => 'Guitareo System',
         'submit-student-focus-recipient' => 'support@guitareo.com',
+        'ask-question-recipient' => 'support@guitareo.com',
         'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo.png'
     ],
 
@@ -63,6 +66,7 @@ return [
         'support-email-address' => 'support@singeo.com',
         'support-sender-name' => 'Singeo System',
         'submit-student-focus-recipient' => 'support@singeo.com',
+        'ask-question-recipient' => 'team+question-and-answer@singeo.com',
         'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple.png'
     ]
 

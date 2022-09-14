@@ -16,7 +16,7 @@
         <email-form
                 email-subject="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
                 brand="{{ $brand }}"
-                recipient="{{ config('mailora.'. $brand . '.support-email-address') }}"
+                recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
                 input-label="Ask your question here..."
                 email-type="layouts/inline/alert"
                 email-endpoint="/mailora/secure/send"
