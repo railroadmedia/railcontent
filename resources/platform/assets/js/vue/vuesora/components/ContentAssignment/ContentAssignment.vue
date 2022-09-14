@@ -19,7 +19,7 @@
                     <div class="flex flex-column">
                         <div class="flex flex-row align-v-center">
                             <div class="flex flex-column pointer" @click="openAssignment">
-                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white">
+                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white md:tw-mr-4">
                                     {{ title }} 
                                 </h3>
                             </div>
@@ -270,8 +270,8 @@ export default {
         accordionButtonClasses() {
             return {
                 inverted: this.accordionActive,
-                'text-grey-3': this.accordionActive,
-                'text-white': !this.accordionActive,
+                'text-grey-3 dark:tw-text-[#7E9AB1] dark:tw-border-[#7E9AB1]': this.accordionActive,
+                'dark:tw-bg-[#7E9AB1] dark:tw-text-[#000C17] text-white': !this.accordionActive,
             };
         },
 

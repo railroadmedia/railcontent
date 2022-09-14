@@ -5,7 +5,7 @@ import { saveCoachHistoryData } from "../Onboarding/services"
 
 const props = defineProps({
   id: {
-    type: String,
+    type: [String, Number],
   },
   cardImg: {
     type: String,

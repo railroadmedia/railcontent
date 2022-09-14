@@ -41,8 +41,8 @@
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
-                    class="tw-text-[#00101D] dark:tw-text-white"
-                    :class="['tw-flex', 'tw-flex-col', 'post-body', 'grow', brand]"
+                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full"
+                    :class="['post-body', brand]"
                     v-html="post.postBody"
                 >
                 </div>
@@ -155,7 +155,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
+                    class="tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>
@@ -422,5 +422,21 @@ export default {
 };
 </script>
 <style>
-
+    /* Post Body Specific Styles */
+    .post-body ul, 
+    .post-body ol {
+        list-style: revert;
+        padding-left: 40px;
+        margin: 15px 0;
+    }
+    .post-body p { 
+        margin: 15px 0; 
+        font-size: 1rem; 
+        line-height: 1.5rem; 
+    }
+    .post-body p:empty { display: none; }
+    .post-body blockquote { 
+        margin: 15px 0; 
+        width: 100%;
+    }
 </style>

@@ -33,19 +33,18 @@ const options = ref(
   })
 );
 
+const currentSelection = ref(props.info.topics[props.brand]);
+
 function handleMultiSelection(selection) {
-  emit(
-    "onCheckStep",
-    5,
-    !!Object.values(selection).find((val) => val)
-  );
-  emit("onChangeInfo", { ...props.info, topics: { ...props.info.topics, [props.brand]: selection} });
+  currentSelection.value = selection;
 }
 
 const handleNextStep = () => {
   const data = [];
 
-  Object.entries(props.info.topics[props.brand]).forEach(([type, isChecked]) => {
+  emit("onChangeInfo", { ...props.info, topics: { ...props.info.topics, [props.brand]: currentSelection.value} });
+
+  Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
     if (isChecked) {
       data.push(type);
     }
@@ -56,6 +55,7 @@ const handleNextStep = () => {
     brand: props.brand
   }).then(() => {
     emit('onChangeStep', 6);
+    emit('onCheckStep', 5, true);
   }).catch(() => {
     showErrorNotification.value = true;
   });
@@ -64,6 +64,12 @@ const handleNextStep = () => {
 function goBack() {
   emit('onChangeStep', 4);
 }
+
+const isNextButtonDisabled = () => {
+  return !Object.values(currentSelection.value).filter(val => {
+    return val;
+  }).length;
+};
 </script>
 
 <template>
@@ -82,7 +88,7 @@ function goBack() {
         @onGoBack="goBack" />
       <MultiSelect
         :options="options"
-        :initialSelection="info.topics[brand]"
+        :initialSelection="currentSelection"
         classOverride="tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />
@@ -98,7 +104,7 @@ function goBack() {
       <Button
         :brand="brand"
         @onButtonClick="handleNextStep"
-        :isDisabled="!steps[5].checked"
+        :isDisabled="isNextButtonDisabled()"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
         >Next</Button
       >
@@ -111,7 +117,7 @@ function goBack() {
       <Button
         :brand="brand"
         @onButtonClick="handleNextStep"
-        :isDisabled="!steps[5].checked"
+        :isDisabled="isNextButtonDisabled()"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >

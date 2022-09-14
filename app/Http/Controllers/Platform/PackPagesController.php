@@ -369,7 +369,7 @@ class PackPagesController extends Controller
         $lessonSlug,
         $lessonId
     ) {
-        if (current_user()->getPermissionLevel() == 'administrator') {
+        if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues =
                 [
                     ContentService::STATUS_PUBLISHED,
@@ -382,7 +382,7 @@ class PackPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
         }
 
-        if (UserAccessService::isMember(current_user()->getId())) {
+        if (user()->isAMember()) {
             ContentRepository::$bypassPermissions = true;
         }
 
@@ -391,7 +391,7 @@ class PackPagesController extends Controller
                 ->first();
 
         if (empty($pack)) {
-            throw new NotFoundHttpException();
+           throw new NotFoundHttpException();
         }
 
         $allPackLessons = [];
@@ -533,5 +533,105 @@ class PackPagesController extends Controller
         }
 
         throw new NotFoundHttpException();
+    }
+
+    public function semesterPackLesson(
+        Request $request,
+        $domain,
+        $brand,
+        $packSlug,
+        $packId,
+        $semesterPackLessonSlug,
+        $semesterPackLessonId
+    ) {
+        if (user()->isAdmin()) {
+            ContentRepository::$availableContentStatues =
+                [
+                    ContentService::STATUS_PUBLISHED,
+                    ContentService::STATUS_ARCHIVED,
+                    ContentService::STATUS_SCHEDULED,
+                    ContentService::STATUS_DRAFT
+                ];
+        } else {
+            ContentRepository::$availableContentStatues =
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+        }
+
+        if (user()->isAMember()) {
+            ContentRepository::$bypassPermissions = true;
+        }
+
+        $pack =
+            $this->contentService->getBySlugAndType($packSlug, 'semester-pack')
+                ->first();
+
+        if (empty($pack)) {
+            throw new NotFoundHttpException();
+        }
+
+        $parentChildren = $this->contentService->getByParentId($pack['id']);
+
+        foreach ($parentChildren as $parentChild) {
+            if ($parentChild['id'] == $semesterPackLessonId) {
+                $lesson = $parentChild;
+            }
+        }
+
+        if (empty($lesson)) {
+            throw new NotFoundHttpException();
+        }
+
+        $nextChild = $parentChildren->getMatchOffset($lesson, 1);
+        $previousChild = $parentChildren->getMatchOffset($lesson, -1);
+
+        $lessonContent =
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$lesson]))
+                ->first();
+
+        $parentChildrenTrimmed = [];
+        $matched = false;
+
+        foreach ($parentChildren as $parentChildIndex => $parentChild) {
+            if ((count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
+                $parentChildrenTrimmed[] = $parentChild;
+            } elseif ($matched && count($parentChildrenTrimmed) < 10) {
+                $parentChildrenTrimmed[] = $parentChild;
+            }
+
+            if ($parentChild['id'] == $lessonContent['id']) {
+                $matched = true;
+            }
+        }
+
+        $lessonAssignments = $lesson['assignments'] ?? [];
+
+        $relatedLessons = (new ContentFilterResultsEntity(
+            ['results' => $parentChildrenTrimmed]
+        ))->toResponseRawJson();
+
+        $lesson['assignments'] = $lessonAssignments;
+
+        $userAccessLevel = user()->access_level;
+
+        return view(
+            'content.lesson',
+            [
+                "parentType" => 'semester-pack',
+                "lessonType" => 'semester-pack-lesson',
+                "lessonContent" => $lesson,
+                "thisLessonJson" => content_to_json(clone $lesson),
+                "nextLessonJson" => content_to_json($nextChild),
+                "pack" => $pack,
+                "parent" => $pack,
+                "parentChildren" => $parentChildren,
+                "nextChild" => $nextChild,
+                "previousChild" => $previousChild,
+                "isLive" => false,
+                "relatedLessons" => $relatedLessons,
+                "showEmail" => false,
+                'showRelated' => true,
+                "userAccessLevel" => $userAccessLevel,
+            ]
+        );
     }
 }

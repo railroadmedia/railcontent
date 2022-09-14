@@ -412,7 +412,7 @@ export default {
         },
 
         sharePostLink() {
-            return `${window.location.protocol }//${window.location.host}/members/forums/jump-to-post/${this.currentPostID}`;
+            return `${window.location.protocol }//${window.location.host}/${this.brand}/forums/jump-to-post/${this.currentPostID}`;
         },
 
         postReplyInterface: {
