@@ -292,7 +292,7 @@ return [
             \App\Decorators\Content\ResourceDecorator::class,
             // this one
             \App\Decorators\Content\ContentExperienceDecorator::class,
-            //            \App\Decorators\Content\ContentUserWatchPositionDecorator::class, // todo: media playback tracker
+            \App\Decorators\Content\ContentUserWatchPositionDecorator::class,
             \App\Decorators\Content\PackBundleLessonDecorator::class,
             \App\Decorators\Content\PackBundleDecorator::class,
             \App\Decorators\Content\PackDecorator::class,
@@ -307,7 +307,7 @@ return [
             \App\Decorators\Content\CourseDecorator::class,
             //            \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
-            //            \App\Decorators\Content\SongsDecorator::class,
+            \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
             \App\Decorators\Content\StudentFocusDecorator::class,
             \App\Decorators\Content\RudimentDecorator::class,

@@ -8300,16 +8300,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "11c4a2105e394ad9deb5b05d4de9587877afab57"
+                "reference": "44a5b3066d68655ae20749cbc896a00a87824053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/11c4a2105e394ad9deb5b05d4de9587877afab57",
-                "reference": "11c4a2105e394ad9deb5b05d4de9587877afab57",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/44a5b3066d68655ae20749cbc896a00a87824053",
+                "reference": "44a5b3066d68655ae20749cbc896a00a87824053",
                 "shasum": ""
             },
             "require": {
@@ -8363,9 +8363,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.2"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.3"
             },
-            "time": "2022-09-13T19:03:28+00:00"
+            "time": "2022-09-14T06:27:21+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -15136,16 +15136,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "65e8b7db476c5dd267e65eea9cab77584d3cfff9"
+                "reference": "ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/65e8b7db476c5dd267e65eea9cab77584d3cfff9",
-                "reference": "65e8b7db476c5dd267e65eea9cab77584d3cfff9",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d",
+                "reference": "ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d",
                 "shasum": ""
             },
             "require": {
@@ -15201,7 +15201,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.4"
+                "source": "https://github.com/sebastianbergmann/exporter/tree/4.0.5"
             },
             "funding": [
                 {
@@ -15209,7 +15209,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-11T14:18:36+00:00"
+            "time": "2022-09-14T06:03:37+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -16037,5 +16037,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
