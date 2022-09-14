@@ -32,14 +32,15 @@ Route::get('drumeo/shop/30-day-drummer', function(){ return view('drumeo.product
 
 //pianote
 Route::get('pianote/shop/play-beautiful-piano', function(){ return view('pianote.products.play-beautiful-piano'); });
-Route::get('pianote/shop/pianote-500-songs', function(){ return view('pianote.products.500-songs'); });
+Route::get('pianote/shop/500-songs', function(){ return view('pianote.products.500-songs'); });
 Route::get('pianote/shop/worship-piano', function(){ return view('pianote.products.worship-piano'); });
 Route::get('pianote/shop/piano-technique-made-easy', function(){ return view('pianote.products.piano-technique-made-easy'); });
 Route::get('pianote/shop/destupefy-your-left-hand', function(){ return view('pianote.products.destupefy-your-left-hand'); });
 Route::get('pianote/shop/faster-fingers', function(){ return view('pianote.products.faster-fingers'); });
 Route::get('pianote/shop/riffs-and-fills', function(){ return view('pianote.products.riffs-and-fills'); });
 Route::get('pianote/shop/beginner-classical-piano', function(){ return view('pianote.products.beginner-classical-piano.beginner-classical-piano'); });
-
+Route::get('pianote/shop/the-power-of-chords', function(){ return view('pianote.products.the-power-of-chords'); });
+Route::get('pianote/shop/the-power-of-chords-bootcamp', function(){ return view('pianote.products.the-power-of-chords-bootcamp'); });
 
 Route::get('{brand}/shop/{product:slug}', [ProductPagesController::class, 'product'])
     ->whereIn('brand', all_brands())
