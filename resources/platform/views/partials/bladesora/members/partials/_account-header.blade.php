@@ -29,9 +29,13 @@
                 {{ $user->access_level }}"
             >
                 <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
-                    @if($currentUser['avatar'])
+                    @if( !empty($currentUser['avatar']) )
                         <img class="tw-inline-block tw-rounded-full tw-h-full" 
                              src="{{ $currentUser['avatar'] }}"
+                        >
+                    @else
+                        <img class="tw-inline-block tw-rounded-full tw-h-full" 
+                             src="{{ $user->profile_picture_url }}"
                         >
                     @endif
                 </div>
