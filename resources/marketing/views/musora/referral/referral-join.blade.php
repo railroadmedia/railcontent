@@ -1,7 +1,7 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    <title>Join | Pianote</title>
+    <title>Join | {{ ucfirst($referralBrand) }}</title>
 
     <style>
         h1 strong,
@@ -72,7 +72,7 @@
 @section('layout-body')
 
     @include('musora.referral.join')
-    
+
 @stop
 
 @section('layout-scripts')
