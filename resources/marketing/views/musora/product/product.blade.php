@@ -4,7 +4,7 @@
     <title>{{ $product->name }}</title>
     <meta property="og:description" content="{{ $product->meta_desc  }}}">
     <meta property="og:url" content="">
-    @if(!is_null($product->meta_img))
+    @if(!empty($product->meta_img))
         <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
     @endif
 
@@ -81,7 +81,7 @@
                     ])
                 @endif
 
-                @if(!is_null($product->size_chart_id))
+                @if(!empty($product->size_chart_id))
                     <img class="mt-10" src="https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->sizeChart->chart }}" alt="size chart" />
                 @endif
 
