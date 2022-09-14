@@ -63,7 +63,7 @@ return [
         'support-email-address' => 'support@singeo.com',
         'support-sender-name' => 'Singeo System',
         'submit-student-focus-recipient' => 'support@singeo.com',
-        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple'
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple.png'
     ]
 
 ];
