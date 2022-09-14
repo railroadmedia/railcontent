@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Benefit;
+use App\Models\Bundle;
 use App\Models\Feature;
+use App\Models\Image;
 use App\Models\Product;
+use App\Models\ProductSize;
 use App\Models\Spec;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -1738,7 +1741,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 "brand" => 3,
                 "product_type_id" => 1,
                 "name" => "500 Songs In 5 Days",
-                "slug" => "guitareo-500-songs",
+                "slug" => "500-songs",
                 "sku" => "500-songs-in-5-days-guitareo",
                 "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/500-songs-card-small.jpg",
                 "meta_desc" => "",
@@ -2993,6 +2996,13 @@ This powerful resource makes it easy to access your lessons anytime from virtual
         ];
 
         Product::truncate();
+        Benefit::truncate();
+        Spec::truncate();
+        Feature::truncate();
+        Image::truncate();
+        ProductSize::truncate();
+        Bundle::truncate();
+
 
         $drumeo = 5;
         $pianote = 5;

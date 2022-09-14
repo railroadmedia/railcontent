@@ -571,7 +571,7 @@ And so many more!",
                 "price" => 39,
                 "discounted_price" => "",
                 "special_text" => "",
-                'overview' => "Master Every Chord. Every Scale. In Every Key.
+                'overview' => "**Master Every Chord. Every Scale. In Every Key.**
 
 This brand new book will help you learn every chord shape, chord variation, and scale in EVERY key.
 
@@ -647,7 +647,7 @@ Start Mastering your Chords & Scales today.",
                 "price" => 39,
                 "discounted_price" => "",
                 "special_text" => "",
-                'overview' => "Master Every Chord. Every Scale. In Every Key.
+                'overview' => "**Master Every Chord. Every Scale. In Every Key.**
 
 This brand new book will help you learn every chord shape, chord variation, and scale in EVERY key.
 
@@ -722,7 +722,7 @@ Start Mastering your Chords & Scales today.",
                 "discounted_price" => "",
                 "page_logo" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/logo.png",
                 "special_text" => "",
-                "overview" => "Always know exactly what to practice.
+                "overview" => "**Always know exactly what to practice.**
 
 They say practice makes perfect.
 
@@ -734,7 +734,12 @@ Worse -- you could be wasting your time.
 
 The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.
 
-This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.",
+This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.
+
+        <a target=\"_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
+            <strong>Click to see inside &raquo;</strong><br>
+            <img class='w-full mt-1' src=\"https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
+        </a>",
                 "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
                 "features" => [
                 ],
@@ -790,7 +795,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                 "discounted_price" => "",
                 "page_logo" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/logo.png",
                 "special_text" => "",
-                "overview" => "Always know exactly what to practice.
+                "overview" => "**Always know exactly what to practice.**
 
 They say practice makes perfect.
 
@@ -802,7 +807,12 @@ Worse -- you could be wasting your time.
 
 The new Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve.
 
-This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.",
+This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.
+
+        <a target=\"_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
+            <strong>Click to see inside &raquo;</strong><br>
+            <img class='w-full mt-1' src=\"https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
+        </a>",
                 "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
                 "features" => [
                 ],
@@ -1067,6 +1077,25 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "price" => 19,
                 "discounted_price" => "",
                 "special_text" => "or free with Guitareo",
+                'overview' => "Learning to play the guitar takes practice and patience.
+
+But sometimes, you just want to show off a cool lick or get people singing along around the fire… without sitting down and learning an entire lesson.
+
+That’s what makes The Guitareo Survival Guide such a handy tool.
+
+This 37-page book gives you all the essential chords, strumming patterns, scales, and riffs to make your journey playing the guitar as fun and enjoyable as possible.
+
+Set it up in your practice space, jam room, or toss it in your guitar case and take it wherever you go.
+
+Want to play the riffs that sound just like Chuck Berry?
+
+It’s got those.
+
+Want to make your chords sound more like Jimi Hendrix?
+
+You can.
+
+The Guitareo Survival Guide is perfect for adding a little fun while navigating your way through the wild and rewarding world of learning how to play the guitar. Because that’s what it’s all about!",
                 "features" => [
                 ],
                 "specs" => [
