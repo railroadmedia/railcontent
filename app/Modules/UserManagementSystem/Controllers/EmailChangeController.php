@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Validation\Rule;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Carbon\Carbon;
 use Doctrine\ORM\OptimisticLockException;
@@ -51,7 +52,11 @@ class EmailChangeController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'email|max:255',
+                'email' => [
+                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore(user()->id),
+                    'email',
+                    'max:255'
+                ],
                 'user_password' => 'required'
             ]);
         } catch (ValidationException $e) {
