@@ -206,7 +206,7 @@ class FullTextSearchRepository extends RepositoryBase
             $values[$valueIndex] = str_replace('/', '_', $value);
         }
 
-        return implode(' ', $values);
+        return substr(preg_replace("/[^A-Za-z0-9 ]/", '', implode(' ', array_unique($values))), 0, 245);
     }
 
     /**
@@ -329,6 +329,8 @@ class FullTextSearchRepository extends RepositoryBase
         }
 
         $contentRows = $query->getToArray();
+
+        dd($contentRows);
 
         return array_column($contentRows, 'content_id');
 
