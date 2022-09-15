@@ -90,7 +90,7 @@ class LivePageController extends BaseController
         return view(
             'live.embed',
             [
-                'apiKey' => config('railchat.' . $brand . '..get_stream_credentials')['key'],
+                'apiKey' => config('railchat.' . $brand . '.get_stream_credentials')['key'],
                 'token' => $token,
                 'chatChannelName' => $chatChannelName,
                 'questionsChannelName' => $questionsChannelName,
