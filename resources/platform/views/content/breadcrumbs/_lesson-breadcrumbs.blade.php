@@ -35,6 +35,22 @@
                 ]
             ]
         ])
+@elseif($lessonType === 'coach-stream')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+           [
+                        "title" => 'Coaches',
+                        "url" => url()->route('platform.coaches'),
+                    ],
+                      [
+                        "title" => !empty($coach->fetch('fields.title')) ? $coach->fetch('fields.title') : $coach->fetch('fields.name'),
+                        "url" => $coach->fetch('url')
+                    ],
+                    [
+                        "title" => $lessonContent->fetch('fields.title')
+                    ]
+        ]
+    ])
 @elseif(!empty($pack))
     @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
         @include('partials.bladesora.members.navigation.breadcrumbs', [
