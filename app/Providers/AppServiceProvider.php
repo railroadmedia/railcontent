@@ -33,14 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // This is for clearing the tmp folder on lambda container invocations to stop the same tmp files being
-        // shared across requests which can cause recursion issues.
-        $this->app->terminating(function () {
-            if (app()->environment() !== 'development') {
-                exec("rm -rf /tmp/..?* /tmp/.[!.]* /tmp/*");
-            }
-        });
-
         if (!$this->app->environment('production')) {
             Mail::alwaysTo('musora-dev-test-5632c3@inbox.mailtrap.io');
         }
