@@ -59,9 +59,8 @@ const handleRedirect = () => {
   <StepWrapper :brand="brand" :showBgImg="true">
     <div
       class="
-        tw-w-full tw-flex tw-flex-col tw-items-center
-        md:tw-justify-center
-        md:tw-mt-0
+        tw-flex tw-flex-col tw-items-center tw-pb-[20px] tw-pt-[20px]
+        md:tw-pb-0
       "
     >
       <StepHeader
@@ -96,7 +95,6 @@ const handleRedirect = () => {
         />
       </div>
       <CoachCarousel :brand="brand" :coachResults="coachResults" :searchString="searchString" />
-    </div>
     <div
       class="
         tw-justify-self-end
@@ -125,6 +123,7 @@ const handleRedirect = () => {
         classOverride="md:tw-w-[543px] tw-uppercase tw-mt-[40px] tw-hidden md:tw-block"
         >Complete Your Account</Button
       >
+    </div>
     </div>
   </StepWrapper>
 </template>

@@ -21,7 +21,7 @@ const props = defineProps({
     <div :class="`tw-flex tw-absolute tw-w-full tw-h-full tw-flex-col tw-items-center tw-justify-between ${
       showBgImg ? 'tw-bg-transparent' : 'tw-bg-[#000c17]'
     }`">
-      <div class="tw-flex tw-flex-col tw-items-center tw-h-full tw-w-full tw-pt-[24px] md:tw-pt-[40px] tw-overflow-y-scroll tw-pb-[24px] md:tw-pb-[40px] tw-justify-between lg:tw-justify-center">
+      <div class="tw-flex tw-flex-col tw-items-center tw-h-full tw-w-full tw-pt-[24px] md:tw-pt-[40px] tw-overflow-y-scroll tw-pb-[24px] md:tw-pb-[40px] tw-justify-between lg:tw-justify-start xl:tw-justify-center">
         <slot />
       </div>
       <div class="tw-flex tw-justify-center tw-items-center tw-w-full tw-self-end tw-pb-[40px] tw-hidden xl:tw-flex">
