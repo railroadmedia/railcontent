@@ -16,6 +16,18 @@
         body {
             background-color: #f6f6f6;
         }
+        tr .bg-color-drumeo {
+            background-color: #0b76db;
+        }
+        tr .bg-color-pianote {
+            background-color: #f61a30;
+        }
+        tr .bg-color-guitareo {
+            background-color: #00c9ac;
+        }
+        tr .bg-color-singeo {
+            background-color: #8300e9;
+        }
         @media only screen and (max-width: 640px) {
             body {
                 padding: 0 !important;
@@ -74,8 +86,8 @@
             <div style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
                 <table width="100%" cellpadding="0" cellspacing="0" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff">
                     <tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                        <td style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 16px; color: #fff; font-weight: 500; border-radius: 3px 3px 0 0; margin: 0; padding: 20px;" align="center" bgcolor="#0B76DB" valign="top">
-                            {{ $input['alert'] }}
+                        <td style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 16px; color: #fff; font-weight: 500; border-radius: 3px 3px 0 0; margin: 0; padding: 20px;" align="center" class="bg-color-{{$brand}}" valign="top">
+                            {{ $input['alert'] }} {{ $brand }}
                         </td>
                     </tr>
                     <tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
