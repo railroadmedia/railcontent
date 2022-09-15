@@ -76,11 +76,8 @@ const isNextButtonDisabled = () => {
   <StepWrapper :brand="brand" :showBgImg="true">
     <div
       class="
-        tw-h-full
-        md:tw-h-auto
         tw-w-full tw-flex tw-flex-col tw-items-center
         md:tw-justify-center
-        tw-mt-[40px]
         md:tw-mt-0
       "
     >
@@ -94,15 +91,13 @@ const isNextButtonDisabled = () => {
       <MultiSelect
         :options="options"
         :initialSelection="currentSelection"
-        classOverride="tw-mb-[52px]"
+        classOverride="md:tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />
     </div>
     <div
       class="
-        tw-justify-self-end
-        md:tw-justify-self-center
-        tw-flex tw-flex-col tw-items-center tw-pb-[20px]
+        tw-flex tw-flex-col tw-items-center tw-pb-[20px] tw-pt-[20px]
         md:tw-pb-0
       "
     >

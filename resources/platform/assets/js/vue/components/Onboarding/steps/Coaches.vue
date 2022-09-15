@@ -59,11 +59,8 @@ const handleRedirect = () => {
   <StepWrapper :brand="brand" :showBgImg="true">
     <div
       class="
-        tw-h-full
-        md:tw-h-auto
         tw-w-full tw-flex tw-flex-col tw-items-center
         md:tw-justify-center
-        tw-mt-[40px]
         md:tw-mt-0
       "
     >

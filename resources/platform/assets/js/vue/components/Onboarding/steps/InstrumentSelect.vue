@@ -37,14 +37,9 @@ function goBack() {
 <template>
   <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false">
     <div class="
-        tw-flex-grow
-        md:tw-flex-grow-0
-        md:tw-h-auto
-        tw-w-full tw-flex tw-flex-col tw-items-center
-        md:tw-justify-center
-        tw-pt-[40px]
-        md:tw-mt-0
-        tw-overflow-y-scroll
+        tw-w-full tw-min-h-full tw-flex tw-flex-col tw-items-center
+        tw-justify-between
+        xl:tw-justify-center
       ">
       <StepHeader title="What instrument would you like to learn?" subtitle="Want to learn more than one instument? You can change your instrument at any
     time in your profile or by using the instrument selector in the navigation." @onGoBack="goBack" />
@@ -66,18 +61,16 @@ function goBack() {
           <InstrumentCardContent instrumentText="SINGING" :logoUrl="brandUrl.singeo" logoAltText="Singeo Logo" />
         </SquaredCard>
       </SquaresContainer>
-    </div>
-    <div class="
-        tw-justify-self-end
-        md:tw-justify-self-center
-        tw-flex tw-flex-col
-        tw-items-center
-        tw-pb-[30px]
-        tw-pt-[10px]
-        md:tw-pb-0
-        md:tw-pt-0
-      ">
-      <ProgressBar :brand="brand" :currentStep="1" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+      <div class="
+          tw-flex tw-flex-col
+          tw-items-center
+          tw-pb-[30px]
+          tw-pt-[10px]
+          xl:tw-pb-0
+          xl:tw-pt-0
+        ">
+        <ProgressBar :brand="brand" :currentStep="1" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+      </div>
     </div>
   </StepWrapper>
 </template>

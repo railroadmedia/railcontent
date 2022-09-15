@@ -42,7 +42,7 @@ function handleMultiSelection(selection) {
 const handleNextStep = () => {
   const data = [];
 
-  emit("onChangeInfo", { ...props.info, topics: { ...props.info.topics, [props.brand]: currentSelection.value} });
+  emit("onChangeInfo", { ...props.info, topics: { ...props.info.topics, [props.brand]: currentSelection.value } });
 
   Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
     if (isChecked) {
@@ -74,56 +74,26 @@ const isNextButtonDisabled = () => {
 
 <template>
   <StepWrapper :brand="brand" :showBgImg="true">
-    <div
-      class="
-        tw-h-full
-        md:tw-h-auto
-        tw-w-full tw-flex tw-flex-col tw-items-center
-        md:tw-justify-center
-        tw-mt-[40px]
-        md:tw-mt-0
-      "
-    >
-      <StepHeader title="Okay, and what topics would you like to study?"
-        @onGoBack="goBack" />
-      <MultiSelect
-        :options="options"
-        :initialSelection="currentSelection"
-        classOverride="tw-mb-[52px]"
-        @onChangeSelection="handleMultiSelection"
-      />
-    </div>
-    <div
-      class="
-        tw-justify-self-end
-        md:tw-justify-self-center
-        tw-flex tw-flex-col tw-items-center tw-pb-[20px]
-        md:tw-pb-0
-      "
-    >
-      <Button
-        :brand="brand"
-        @onButtonClick="handleNextStep"
-        :isDisabled="isNextButtonDisabled()"
-        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
-        >Next</Button
-      >
-      <ProgressBar
-        :brand="brand"
-        :currentStep="5"
-        :steps="steps"
-        @onChangeStep="(s) => emit('onChangeStep', s)"
-      />
-      <Button
-        :brand="brand"
-        @onButtonClick="handleNextStep"
-        :isDisabled="isNextButtonDisabled()"
-        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
-        >Next</Button
-      >
-      <SkipStep :brand="brand"
-        classOverride="tw-mt-[20px] md:tw-mt-0"
-      />
+    <div class="
+        tw-w-full tw-min-h-full tw-flex tw-flex-col tw-items-center
+        tw-justify-between
+        xl:tw-justify-center
+      ">
+      <StepHeader title="Okay, and what topics would you like to study?" @onGoBack="goBack" />
+      <MultiSelect :options="options" :initialSelection="currentSelection" classOverride="md:tw-mb-[52px]"
+        @onChangeSelection="handleMultiSelection" />
+
+      <div class="
+        tw-flex tw-flex-col tw-items-center tw-pt-[20px] tw-pb-[20px]
+        xl:tw-pb-0
+      ">
+        <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
+          classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>
+        <ProgressBar :brand="brand" :currentStep="5" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+        <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
+          classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
+        <SkipStep :brand="brand" classOverride="tw-mt-[20px] md:tw-mt-0" />
+      </div>
     </div>
   </StepWrapper>
 </template>

@@ -78,7 +78,7 @@ function handleDrop(e) {
                     <PhotographIcon class="tw-text-[#91acc1] tw-w-[32px] tw-h-[32px]" />
                 </div>
             </div>
-            <div class="tw-w-full tw-text-center tw-text-white tw-mt-[18px] tw-text-[16px]">Drop your image here, or <span class="tw-text-[#3B82F6] tw-font-bold">upload from your computer</span></div>
+            <div class="tw-w-full tw-text-center tw-text-white tw-mt-[18px] tw-text-[16px] tw-px-[8px]">Drop your image here, or <span class="tw-text-[#3B82F6] tw-font-bold">upload from your computer</span></div>
             <div class="tw-w-full tw-text-center tw-text-white tw-italic tw-text-[14px]">Max file size: 5MB</div>
         </div>
         <input id="fileUploadInput" type="file" style="visibility:hidden" accept=".jpg,.jpeg,.png,.gif" @change="handleFileChange" />
