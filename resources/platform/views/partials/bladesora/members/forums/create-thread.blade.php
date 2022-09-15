@@ -1,5 +1,5 @@
 <div class="tw-flex tw-flex-col">
-    <div class="tw-flex tw-flex-col pa-3 bb-light-1">
+    <div class="tw-flex tw-flex-col ph pv-3 bb-light-1">
         <h1 class="tw-text-3xl tw-font-bold tw-text-[#000C17] dark:tw-text-white tw-flex tw-items-center tw-leading-none">
             <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-2">
                 <i class="fas fa-arrow-circle-left tw-text-3xl tw-mt-1 dark:tw-text-white"></i>
