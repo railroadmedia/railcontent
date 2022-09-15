@@ -1,7 +1,6 @@
-@extends('layout-template')
+@extends('drumeo._partials.layout')
 
-@section('global-head')
-    @parent
+@section('head-includes')
     <title>30 Day Drummer | Drumeo</title>
     <meta property="og:title" content="30 Day Drummer | Drumeo">
     <meta name="description" content="Learn the drums with daily guided workouts.">
@@ -9,7 +8,7 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/og-image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('partials.fonts')
+    @parent
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
     <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
@@ -190,9 +189,6 @@
 @stop()
 
 @section('global-body')
-    @include("sales.partials._nav", [
-        "cartVersion" => true
-    ])
     @include('products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
                 "fullPrice" => Prices::$earDrumsFull,
@@ -914,9 +910,7 @@
         "video" => '//player.vimeo.com/video/738385463?autoplay=1',
         "title" => 'trailer'
     ])
-
-
-    @include("sales.partials._footer")
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
