@@ -41,8 +41,8 @@
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
-                    class="tw-text-[#00101D] dark:tw-text-white"
-                    :class="['tw-flex', 'tw-flex-col', 'post-body', 'grow', brand]"
+                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full"
+                    :class="['post-body', brand]"
                     v-html="post.postBody"
                 >
                 </div>
@@ -64,16 +64,16 @@
                             :initial-value="post.postBody"
                         />
 
-                        <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4">
+                        <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">
                             <a
-                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
+                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2 tw-w-full sm:tw-w-auto"
                                 @click="editing = false"
                             >
                                 Cancel
                             </a>
 
                             <button
-                                class="tw-btn-primary"
+                                class="tw-btn-primary tw-w-full sm:tw-w-auto"
                                 :class="`tw-bg-${ brand }`"
                                 type="submit"
                             >
@@ -87,67 +87,67 @@
             <!-- Actions -->
             <div class="tw-flex tw-flex-row tw-flex-wrap">
                 <div class="tw-flex tw-flex-col mb-1">
-                <div class="tw-flex tw-flex-row tw-items-center">
-                    <p
-                        class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                        :class="post.isLiked ? themeTextClass : 'text-grey-3'"
-                        @click="likePost"
-                    >
-                    <i
-                        class="fas fa-thumbs-up"
-                        :class="post.isLiked ? 'fas' : 'fal'"
-                    ></i>
-                    </p>
-                    <p
-                        class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                        :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                        :data-open-modal="openModalString"
-                        @click="openLikes"
-                    >
-                    {{ post.totalLikes }}
-                    </p>
+                    <div class="tw-flex tw-flex-row tw-items-center">
+                        <p
+                            class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            :class="post.isLiked ? themeTextClass : 'text-grey-3'"
+                            @click="likePost"
+                        >
+                        <i
+                            class="fas fa-thumbs-up"
+                            :class="post.isLiked ? 'fas' : 'fal'"
+                        ></i>
+                        </p>
+                        <p
+                            class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                            :data-open-modal="openModalString"
+                            @click="openLikes"
+                        >
+                        {{ post.totalLikes }}
+                        </p>
 
-                    <p
-                        v-if="!post.isLocked"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                        @click="replyToPost"
-                    >
-                    Reply
-                    </p>
-                    <button
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
-                        data-open-modal="sharePostModal"
-                        title="Share this post"
-                        @click="$emit('updateCurrentPostID', post.id)"
-                    >
-                        <i class="fas fa-share"></i>
-                        Share
-                    </button>
+                        <p
+                            v-if="!post.isLocked"
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            @click="replyToPost"
+                        >
+                        Reply
+                        </p>
+                        <button
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
+                            data-open-modal="sharePostModal"
+                            title="Share this post"
+                            @click="$emit('updateCurrentPostID', post.id)"
+                        >
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
                 </div>
-                </div>
-                <div class="tw-flex tw-flex-col mb-1 tw-ml-auto">
-                <div class="tw-flex tw-flex-row tw-items-center">
-                    <p
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                        @click="reportPost"
-                    >
-                        Report
-                    </p>
-                    <p
-                        v-if="index !== 0 && canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                        @click="deletePost"
-                    >
-                        Delete
-                    </p>
-                    <p
-                        v-if="canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                        @click="editing = !editing"
-                    >
-                        Edit
-                    </p>
-                </div>
+                <div class="tw-flex tw-flex-col mb-1 sm:tw-ml-auto">
+                    <div class="tw-flex tw-flex-row tw-items-center">
+                        <p
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white sm:ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="reportPost"
+                        >
+                            Report
+                        </p>
+                        <p
+                            v-if="index !== 0 && canEdit"
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="deletePost"
+                        >
+                            Delete
+                        </p>
+                        <p
+                            v-if="canEdit"
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="editing = !editing"
+                        >
+                            Edit
+                        </p>
+                    </div>
                 </div>
             </div>
             
@@ -155,7 +155,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
+                    class="tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>
@@ -422,5 +422,21 @@ export default {
 };
 </script>
 <style>
-
+    /* Post Body Specific Styles */
+    .post-body ul, 
+    .post-body ol {
+        list-style: revert;
+        padding-left: 40px;
+        margin: 15px 0;
+    }
+    .post-body p { 
+        margin: 15px 0; 
+        font-size: 1rem; 
+        line-height: 1.5rem; 
+    }
+    .post-body p:empty { display: none; }
+    .post-body blockquote { 
+        margin: 15px 0; 
+        width: 100%;
+    }
 </style>

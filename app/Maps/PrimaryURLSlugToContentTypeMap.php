@@ -44,6 +44,7 @@ class PrimaryURLSlugToContentTypeMap
         'exploring-beats' => 'exploring-beats',
         'sonor-drums' => 'sonor-drums',
         'packs' => 'pack',
+        'semester-packs' => 'semester-pack',
         'coaches' => 'instructor',
         'rudiments' => 'rudiment',
         'routines' => 'routine',

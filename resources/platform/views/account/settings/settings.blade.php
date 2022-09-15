@@ -5,7 +5,7 @@
 @endsection
 
 @section('edit-forms')
-    <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
+    <div class="tw-flex tw-flex-row tw-px-3 tw-pt-6 tw-pb-0 tw-flex-auto">
         <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white">Notification Settings</h1>
     </div>
 
@@ -18,7 +18,7 @@
                 {{ csrf_field() }}
 
                 @include('account.settings.partials._brand-notifications-settings', ['allBrands' => $allBrands])
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-[#00101D] dark:tw-text-white tw-py-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto tw-p-3 tw-text-[#00101D] dark:tw-text-white">
                     <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
 
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-text-[#00101D] dark:tw-text-white tw-py-3">
+                <div class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-p-3">
                     <h2 class="tw-font-bold tw-text-lg">How often would you like to receive email notifications?</h2>
                 </div>
 
@@ -136,11 +136,11 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 
-                <div class="tw-flex tw-flex-row pa-3">
-                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mr-2" type="submit">
+                <div class="tw-flex tw-flex-row tw-py-6 tw-px-3 tw-flex-wrap sm:tw-flex-nowrap">
+                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white sm:tw-mr-2 tw-w-full sm:tw-w-auto" type="submit">
                         Save
                     </button>
-                    <button class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-white/10 hover:tw-bg-black/10" type="reset">
+                    <button class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-white/10 hover:tw-bg-black/10 tw-w-full sm:tw-w-auto" type="reset">
                         Cancel
                     </button>
                 </div>

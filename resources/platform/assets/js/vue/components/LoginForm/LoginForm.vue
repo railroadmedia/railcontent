@@ -70,7 +70,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div>
+  <div class="tw-flex tw-flex-col tw-w-full tw-px-4 tw-items-center">
     <section
       v-if="currentForm === 'login'"
       id="loginForm"
@@ -79,7 +79,8 @@ onBeforeMount(() => {
         tw-flex-col
         tw-bg-[#081825]/[90]
         tw-rounded-xl
-        tw-w-[423px]
+        tw-w-full
+        tw-max-w-[423px]
         tw-min-h-[369px]
         tw-border-[1px]
         tw-border-[#445F74]
@@ -169,7 +170,8 @@ onBeforeMount(() => {
         tw-flex-col
         tw-bg-[#081825]/[90]
         tw-rounded-xl
-        tw-w-[423px]
+        tw-w-full
+        tw-max-w-[423px]
         tw-h-[369px]
         tw-border-[1px]
         tw-border-[#445F74]

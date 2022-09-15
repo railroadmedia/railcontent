@@ -3,14 +3,14 @@
     <div class="relative gq-container corners-10 overflow bg-grey-2 dark:tw-bg-[#081825]">
         <a href="{{ $lessonsUrl }}">
             {{-- Desktop Image --}}
-            <img src="https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
+            <img src="https://musora.com/cdn-cgi/image/width=1000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
                 class="gq-large-thumb tw-transition-opacity tw-opacity-0" 
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
             {{-- Mobile Image --}}
-            <img src="https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background-mobile.jpg"
+            <img src="https://musora.com/cdn-cgi/image/width=600,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background-mobile.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
                 class="gq-small-thumb tw-transition-opacity tw-opacity-0" 
                 loading="lazy"

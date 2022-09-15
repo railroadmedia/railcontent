@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\Mentor\Models\MentorStudent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
@@ -203,6 +205,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereIsPackOwner($value)
  * @method static Builder|User wherePianoteOnboardingSkipSetup($value)
  * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
+ * @property ?MentorStudent $mentorStudent
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -236,7 +239,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $fillable = [
         'first_name',
         'last_name',
-        'location',
+        'country',
         'birthday',
         'biography',
         'profile_picture_url',
@@ -263,7 +266,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'drumeo_onboarding_skip_setup',
         'pianote_onboarding_skip_setup',
         'guitareo_onboarding_skip_setup',
-        'singeo_onboarding_skip_setup'
+        'singeo_onboarding_skip_setup',
+        'total_xp'
     ];
 
 
@@ -276,6 +280,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->connection = config('user_management_system.database_connection_name');
 
         parent::__construct($attributes);
+    }
+
+    public function mentorStudent(): HasOne
+    {
+        return $this->hasOne(MentorStudent::class, 'user_id');
     }
 
     /**
@@ -295,8 +304,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true)
-    : Attribute {
+    public function profilePictureUrl($usingCDN = true): Attribute
+    {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
@@ -319,8 +328,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return Attribute
      */
-    public function accessLevel()
-    : Attribute {
+    public function accessLevel(): Attribute
+    {
         return Attribute::make(
             get: function ($value) {
                 if (!empty($value)) {
@@ -343,8 +352,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function totalXp()
-    : Attribute
+    public function totalXp(): Attribute
     {
         return Attribute::make(
             get: function ($value) {
@@ -597,7 +605,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingExperience::class);
     }
 
-   /**
+    /**
      * @return bool
      */
     public function isPackOwner()
@@ -620,5 +628,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
+    }
+
+    public function getTotalXp()
+    {
+        return $this->total_xp ?? 0;
+    }
+
+    public function isActiveStudent(): bool
+    {
+        return !$this->isAdmin()
+            && !empty($this->membership_expiration_date)
+            && $this->membership_expiration_date >= Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'));
     }
 }

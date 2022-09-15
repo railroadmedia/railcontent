@@ -59,7 +59,7 @@
             <h6 class="tw-text-sm tw-font-bold">{{ forum.latestPost ? forum.latestPost.created_at_diff : '' }}</h6>
             <!-- <p class="tw-text-sm"><span class="tw-font-bold">In:</spanZ> </p> -->
             <p class="tw-text-sm tw-truncate">
-                <span class="">By:</span>
+                <span class="">By: </span>
                 <span class="tw-font-bold">{{ forum.latestPost ? forum.latestPost.author_display_name : '' }}</span>
             </p>
         </div>

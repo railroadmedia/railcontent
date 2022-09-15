@@ -167,7 +167,10 @@
             <div class="sidebar-member-section flex flex-row align-v-center bb-grey-1-1">
                 <div class="member-avatar">
                     <a href="{{ $member['profileUrl'] ?? '#' }}">
-                        <img class="bg-grey-2 rounded {{ $themeColor }}" src="https://musora.com/cdn-cgi/image/width=60,height=60,quality=90/{{ $member['avatar'] }}" alt="member avatar">
+                        <img class="bg-grey-2 rounded {{ $themeColor }}" 
+                             src="https://musora.com/cdn-cgi/image/width=60,height=60,quality=90/{{ $member['avatar'] }}" 
+                             alt="member avatar"
+                        >
                     </a>
                 </div>
                 <div class="member-details">

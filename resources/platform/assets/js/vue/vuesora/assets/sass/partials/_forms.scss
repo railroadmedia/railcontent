@@ -120,7 +120,7 @@
     }
 
     &:disabled {
-      background-color:#f2f2f2;
+      background-color: rgba(150,150,150,.2) !important;
       color:nth(nth($greys, 3), 2);;
     }
 
