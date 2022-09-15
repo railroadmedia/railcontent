@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         // shared across requests which can cause recursion issues.
         $this->app->terminating(function () {
             if (app()->environment() !== 'development') {
-                exec("rm -rf /tmp/..?* /tmp/.[!.]* /tmp/*");
+              //  exec("rm -rf /tmp/..?* /tmp/.[!.]* /tmp/*");
             }
         });
 
