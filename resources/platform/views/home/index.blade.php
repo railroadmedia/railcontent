@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Home | Musora</title>
+    <title>{{ ucfirst($brand) }} Home | Musora</title>
 @endsection
 
 @section('content')
@@ -110,8 +110,7 @@
         @endcomponent
 
         {{-- Live Banner --}}
-
-        @if($coachEvent)
+        @if( !empty($coachEvent) )
             <coach-event
                 brand="{{ $brand }}"
                 class="tw-mb-6"

@@ -3,35 +3,35 @@
         <div class="flex flex-column tw-w-fit tw-shrink-0">
             <div class="flex flex-row flex-wrap filter-tabs align-v-center">
                 <!-- Added Tab -->
-                <a class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit"
-                   :href="`/${brand}/lists/my-list`"
+                <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit"
+                     @click="changeTab('added')"
                 >
                     <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
-                        :class="isActive(`/${brand}/lists/my-list`) ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
+                        :class="selected_tab === 'added' ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                     >
                         Added
                     </h3>
-                </a>
+                </div>
                 <!-- In Progress Tab -->
-                <a class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit"
-                   :href="`/${brand}/lists/in-progress`"
+                <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit"
+                     @click="changeTab('started')"
                 >
                     <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
-                        :class="isActive(`/${brand}/lists/in-progress`) ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
+                        :class="selected_tab === 'started' ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                     >
                         In Progress
                     </h3>
-                </a>
+                </div>
                 <!-- Completed Tab -->
-                <a class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit"
-                   :href="`/${brand}/lists/completed`"
+                <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit"
+                     @click="changeTab('completed')"
                 >
                     <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
-                        :class="isActive(`/${brand}/lists/completed`) ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
+                        :class="selected_tab === 'completed' ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                     >
                         Complete
                     </h3>
-                </a>
+                </div>
             </div>
         </div>
         <!-- Catalog -->
@@ -109,8 +109,6 @@ export default {
             const params = window.location.search;
             const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
 
-            console.log(item.value);
-
             if (item.value) {
                 query_object.type = item.value;
             } else if (query_object.type) {
@@ -120,12 +118,47 @@ export default {
             window.location.href = `${location.protocol}//${location.host 
             }${location.pathname}?${QueryString.stringify(query_object)}`;
         },
+        
+        changeTab(tab) {
+            const params = window.location.search;
+            const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
+
+            if (tab !== 'added') {
+                query_object.state = tab;
+            } else if (query_object.state) {
+                delete query_object.state;
+            }
+
+            window.location.href = `${location.protocol}//${location.host 
+            }${location.pathname}?${QueryString.stringify(query_object)}`;
+        },
+
         formatOption(option) {
             return option.replace(/-/g, ' ').replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
         },
-        isActive(path) {
-            return window.location.pathname === path;
-        }
+    },
+    mounted() {
+        const params = window.location.search;
+        const query_object = QueryString.parse(params, { arrayFormat: 'bracket' });
+        const keys = Object.keys(query_object);
+
+        keys.forEach((key) => {
+            if (key === 'type') {
+                if (this.includedTypes.indexOf(query_object[key]) !== -1) {
+                    this.selected_types = query_object[key];
+                }
+            }
+
+            if (key === 'state') {
+                if (query_object[key] === 'started') {
+                    this.selected_tab = 'started';
+                }
+
+                if (query_object[key] === 'completed') {
+                    this.selected_tab = 'completed';
+                }
+            }
+        });
     },
 };
 </script>

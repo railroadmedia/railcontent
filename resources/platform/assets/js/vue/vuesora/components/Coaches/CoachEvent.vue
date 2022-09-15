@@ -4,7 +4,7 @@
       <!-- Live Event Image -->
       <a
         :href="`${brand}/live`"
-        class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex"
+        class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex"
       >
         <div class="tw-relative">
           <img
@@ -51,7 +51,7 @@
 
             <!-- Start Date -->
             <p
-              class="tw-uppercase tw-leading-none tw-hidden xl:tw-block"
+              class="tw-uppercase tw-leading-none tw-hidden xl:tw-block dark:tw-text-white"
               v-if="!eventIsLive"
             >
               <span>{{ startWeekday }}</span
@@ -233,7 +233,7 @@ export default {
     };
   },
   mounted() {
-    if ( this.preloadedContent.data[0].length ) {
+    if ( this.preloadedContent.data[0] ) {
       this.content = ContentHelpers.flattenContentObject(
         this.preloadedContent.data[0],
         true

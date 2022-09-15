@@ -40,18 +40,20 @@
         ])
     @endcomponent
 
-    <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
-        {{-- Live Banner --}}
-        <coach-event
-            brand="{{ $brand }}"
-            :preloaded-content='{{ $coachEvent }}'
-            current-date-string="{{ $currentDate }}"
-            subscription-calendar-id="{{ $currentEventCalendarId }}"
-            youtube-event-id="{{ $youtubeId }}"
-            :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-        ></coach-event>
-    </div>
+    @if( !empty($coachEvent) )
+        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
+            {{-- Live Banner --}}
+            <coach-event
+                brand="{{ $brand }}"
+                :preloaded-content='{{ $coachEvent }}'
+                current-date-string="{{ $currentDate }}"
+                subscription-calendar-id="{{ $currentEventCalendarId }}"
+                youtube-event-id="{{ $youtubeId }}"
+                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            ></coach-event>
+        </div>
+    @endif
 
     @if (session()->has('success-message'))
         <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
