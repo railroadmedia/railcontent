@@ -12,23 +12,15 @@ class RecalculateMentorTotals extends Command
     protected $signature = 'mentors:recalculateTotals';
 
     protected $description = 'Recalculates each mentor totals';
-    private MentorService $mentorService;
 
-    public function __construct(
-        MentorService $mentorService,
-    ) {
-        parent::__construct();
-        $this->mentorService = $mentorService;
-    }
-
-    public function handle()
+    public function handle(MentorService $mentorService)
     {
-        $this->info("Recalulate Mentor Totals");
+        $this->info("Recalculate Mentor Totals");
 
-        $this->withProgressBarChunked(Mentor::query(), function (Mentor $mentor) {
+        $this->withProgressBarChunked(Mentor::query(), function (Mentor $mentor) use ($mentorService) {
             $currentTotal = $mentor->total_student_count;
             $currentActiveTotal = $mentor->active_student_count;
-            $this->mentorService->recalculateMentorTotals($mentor);
+            $mentorService->recalculateMentorTotals($mentor);
 
             if ($currentTotal != $mentor->total_student_count) {
                 $this->info(

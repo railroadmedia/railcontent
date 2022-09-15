@@ -6,7 +6,6 @@ use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Services\DatabaseServiceProvider;
 use Illuminate\Console\Command;
-use Illuminate\Database\DatabaseManager;
 
 class UnassignMentors extends Command
 {
@@ -20,19 +19,8 @@ class UnassignMentors extends Command
      */
     protected $description = 'Assigns a mentor to each active user without one';
 
-    public function __construct()
+    public function handle()
     {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle(DatabaseManager $databaseManager)
-    {
-
         MentorStudent::query()->delete();
         Mentor::query()->delete();
 

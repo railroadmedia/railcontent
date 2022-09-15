@@ -10,7 +10,6 @@ use App\Modules\Mentor\Services\EnsureMentorResult;
 use App\Modules\Mentor\Services\HelpScoutMentorService;
 use App\Modules\Mentor\Services\MentorService;
 use App\Services\DatabaseService;
-use App\Services\DatabaseServiceProvider;
 use Illuminate\Database\DatabaseManager;
 use Modules\UserManagementSystem\Models\User;
 
@@ -19,39 +18,28 @@ class InitializeMentors extends Command
     protected $signature = 'mentors:init';
     protected $description = 'Run to initialize mentor system';
 
-    private MentorService $mentorService;
-    private HelpScoutMentorService $helpScoutMentorService;
-    private HelpScoutUserService $helpScoutUserService;
-
-    public function __construct(
-        MentorService $mentorService,
-        HelpScoutMentorService $helpScoutMentorService,
-        HelpScoutUserService $helpScoutUserService
-    ) {
-        parent::__construct();
-        $this->mentorService = $mentorService;
-        $this->helpScoutMentorService = $helpScoutMentorService;
-        $this->helpScoutUserService = $helpScoutUserService;
-    }
-
-    public function handle(DatabaseManager $databaseManager): bool
+    public function handle(DatabaseManager        $databaseManager,
+                           MentorService          $mentorService,
+                           HelpScoutMentorService $helpScoutMentorService,
+                           HelpScoutUserService   $helpScoutUserService
+    ): bool
     {
-        $this->ensureMentorsCreated($databaseManager);
-        $this->ensureGuitareoSingeoMentorsAssigned();
-        $this->ensureAllMentorsAssigned();
+        $this->ensureMentorsCreated($databaseManager, $mentorService);
+        $this->ensureGuitareoSingeoMentorsAssigned($mentorService);
+        $this->ensureAllMentorsAssigned($mentorService);
 
         if (app()->isProduction()) {
             $this->info("\nRegister Web Hook");
-            $this->helpScoutMentorService->registerHelpScoutWebHook();
+            $helpScoutMentorService->registerHelpScoutWebHook();
         }
 
         $this->info("\nPopulate Help Scout User Data");
-        $this->helpScoutUserService->populateHelpScoutUserData();
+        $helpScoutUserService->populateHelpScoutUserData();
 
         return true;
     }
 
-    private function ensureMentorsCreated(DatabaseManager $databaseManager)
+    private function ensureMentorsCreated(DatabaseManager $databaseManager, MentorService $mentorService)
     {
         $connection = $databaseManager->connection('musora_laravel_mysql');
         $db = new DatabaseService($connection);
@@ -107,11 +95,6 @@ class InitializeMentors extends Command
                     "maxStudents" => 7000
                 ],
                 429774 => [
-                    "name" => "sara",
-                    "supported_brands" => "drumeo, pianote",
-                    "maxStudents" => 7000
-                ],
-                429774 => [
                     "name" => "veronica",
                     "supported_brands" => "drumeo, pianote",
                     "maxStudents" => 4000
@@ -122,13 +105,13 @@ class InitializeMentors extends Command
                     "maxStudents" => 6000
                 ],
             ]);
-            $mentorData->each(function ($mentor, $userId) {
-                $this->mentorService->store($userId, $mentor["supported_brands"], $mentor["maxStudents"]);
+            $mentorData->each(function ($mentor, $userId) use ($mentorService) {
+                $mentorService->store($userId, $mentor["supported_brands"], $mentor["maxStudents"]);
             });
         }
     }
 
-    public function ensureGuitareoSingeoMentorsAssigned(): void
+    public function ensureGuitareoSingeoMentorsAssigned(MentorService $mentorService): void
     {
         $this->info("Assigning Mentors (guitareo, singeo)...");
         $subQuery = Subscription::query()
@@ -136,13 +119,13 @@ class InitializeMentors extends Command
             ->whereIn('ecommerce_subscriptions.brand', ['guitareo', 'singeo'])
             ->groupBy('user_id');
         $query = User::query()->with('mentorStudent')
-            ->joinSub($subQuery, 's', function($join){
+            ->joinSub($subQuery, 's', function ($join) {
                 $join->on('usora_users.id', '=', 's.user_id');
             });
 
         $n = 0;
-        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
-            $result = $this->mentorService->ensureMentorState($user);
+        $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n) {
+            $result = $mentorService->ensureMentorState($user);
             if ($result == EnsureMentorResult::MentorAssigned) {
                 $n++;
             }
@@ -150,14 +133,14 @@ class InitializeMentors extends Command
         $this->info("$n mentors assigned.");
     }
 
-    public function ensureAllMentorsAssigned(): void
+    public function ensureAllMentorsAssigned(MentorService $mentorService): void
     {
         $this->info("Assigning Users (guitareo, singeo)...");
         $query = User::query()->with('mentorStudent');
 
         $n = 0;
-        $this->withProgressBarChunked($query, function (User $user) use (&$n) {
-            $result = $this->mentorService->ensureMentorState($user);
+        $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n) {
+            $result = $mentorService->ensureMentorState($user);
             if ($result == EnsureMentorResult::MentorAssigned) {
                 $n++;
             }
