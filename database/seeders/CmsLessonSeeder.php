@@ -3041,7 +3041,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                             'thumbnail_logo' => empty($product['thumbnail_logo']) ? null : $product['thumbnail_logo'],
                             'page_logo' => empty($product['page_logo']) ? null : $product['page_logo'],
                             'price' => $product['price'],
-                            'discounted_price' => $product['discounted_price'],
+                            'discounted_price' => empty($product['discounted_price']) ? 0 : $product['discounted_price'],
                             'video_src' => $product['video'],
                             'overview' => $product['overview'],
                             'instructor_name' => $product['instructor_name'],

@@ -2023,7 +2023,7 @@ class CmsClothingSeeder extends Seeder
                 'meta_img' => $product['meta_img'],
                 'special_text' => $product['special_text'],
                 'price' => $product['price'],
-                'discounted_price' => $product['discounted_price'],
+                'discounted_price' => empty($product['discounted_price']) ? 0 : $product['discounted_price'],
                 'sold_out' => $product['sold_out'],
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
