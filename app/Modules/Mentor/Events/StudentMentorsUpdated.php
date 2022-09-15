@@ -24,7 +24,7 @@ class StudentMentorsUpdated
     {
         $data = $mentorStudents->map(function ($mentorStudent) {
             return [
-                'userId' => 519690,
+                'userId' => $mentorStudent->user_id,
                 'mentorUserId' => $mentorStudent->mentor_user_id,
                 'primaryBrand' => $mentorStudent->primary_brand,
             ];
