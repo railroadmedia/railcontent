@@ -3,7 +3,6 @@
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
 use App\Modules\Brand\Services\PrimaryBrandService;
-use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
 use App\Modules\Mentor\Services\MentorService;
 use Event;
 use Illuminate\Console\Command;
@@ -11,7 +10,6 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
-use Modules\Mentor\Listeners\EnsureMentorState;
 
 class UserMembershipFieldsResyncTool extends Command
 {
@@ -35,7 +33,7 @@ class UserMembershipFieldsResyncTool extends Command
      *
      * @var string
      */
-    protected $signature = 'UserMembershipFieldsResyncTool {startingUserId=0}';
+    protected $signature = 'UserMembershipFieldsResyncTool {startingUserId=0} {endingUserId=9999999}';
 
     /**
      * Execute the console command.
@@ -67,6 +65,10 @@ class UserMembershipFieldsResyncTool extends Command
 
         if (!empty($this->argument('startingUserId'))) {
             $query->where('user_id', '>', $this->argument('startingUserId'));
+        }
+
+        if (!empty($this->argument('endingUserId'))) {
+            $query->where('user_id', '<', $this->argument('endingUserId'));
         }
 
         $this->info('Total to fix around 232k');
