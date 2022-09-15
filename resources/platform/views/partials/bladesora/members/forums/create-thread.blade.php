@@ -9,7 +9,7 @@
     </div>
     <div class="tw-flex tw-flex-col ph pv-3" >
         <div class="tw-flex tw-flex-row">
-            <div class="tw-flex tw-flex-col avatar-column hide-xs-only">
+            <div class="tw-hidden sm:tw-flex tw-flex-col avatar-column tw-flex-shrink-0">
                 <img class="rounded" src="{{ $userAvatar }}">
             </div>
             <div class="tw-flex tw-flex-col ph tw-w-full">
@@ -54,13 +54,13 @@
                         <p class="tiny text-error pa">* The post content field is required</p>
                     @endif
 
-                    <div class="tw-flex tw-flex-row tw-justify-end mt-2">
+                    <div class="tw-flex tw-flex-row tw-justify-end mt-2 tw-flex-wrap">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1" dusk="cancel-button">
+                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 sm:tw-mr-1 tw-w-full sm:tw-w-auto" dusk="cancel-button">
                             Cancel
                         </a>
 
-                        <button class="tw-btn-primary tw-bg-{{ $brand }}" type="submit" dusk="submit-button">
+                        <button class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full sm:tw-w-auto" type="submit" dusk="submit-button">
                             Create Thread
                         </button>
                     </div>
