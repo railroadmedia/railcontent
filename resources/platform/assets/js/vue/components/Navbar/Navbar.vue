@@ -128,6 +128,10 @@ const toggleSearchModal = (val) => {
       />
     </div>
 
-    <SearchModal @onClose="() => toggleSearchModal(false)" v-if="showSearchModal" />
+    <SearchModal 
+      @onClose="() => toggleSearchModal(false)" 
+      :brand="brand"
+      v-if="showSearchModal" 
+    />
   </nav>
 </template>
