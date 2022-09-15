@@ -41,7 +41,6 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            AlphaTestingAccountCreationMiddleware::class, // todo: remove after alpha testing
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
