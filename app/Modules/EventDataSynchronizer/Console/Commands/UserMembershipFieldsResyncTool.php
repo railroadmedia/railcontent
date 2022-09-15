@@ -2,11 +2,14 @@
 
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
+use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
+use Event;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
+use Modules\Mentor\Listeners\EnsureMentorState;
 
 class UserMembershipFieldsResyncTool extends Command
 {
@@ -41,6 +44,9 @@ class UserMembershipFieldsResyncTool extends Command
         DatabaseManager $databaseManager,
         UserMembershipFieldsService $userMembershipFieldsService
     ) {
+        //don't fire assign mentor events yet, mentors not initialized
+        Event::forget( UserMembershipDateUpdated::class . EnsureMentorState::class);
+
         $databaseManager->connection(config('ecommerce.database_connection_name'))
             ->disableQueryLog();
 
