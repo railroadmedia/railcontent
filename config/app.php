@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -170,7 +170,7 @@ return [
         Railroad\Ecommerce\Providers\EcommerceServiceProvider::class,
         Railroad\Usora\Providers\UsoraServiceProvider::class,
         Railroad\Railforums\Providers\ForumServiceProvider::class,
-        Railroad\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
+        App\Modules\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider::class,
         Railroad\Permissions\Providers\PermissionsServiceProvider::class,
         Railroad\MusoraApi\Providers\MusoraApiServiceProvider::class,
         Railroad\Railnotifications\NotificationsServiceProvider::class,
@@ -183,7 +183,10 @@ return [
          */
         Modules\UserManagementSystem\Providers\UserManagementSystemServiceProvider::class,
         App\Modules\Brand\Providers\BrandServiceProvider::class,
-
+        App\Modules\Ecommerce\Providers\EcommerceServiceProvider::class,
+        App\Modules\Mentor\Providers\MentorServiceProvider::class,
+        App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
+        App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
         /*
          * Application Service Providers...
          */
