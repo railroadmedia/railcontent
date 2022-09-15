@@ -2,6 +2,7 @@
 
 namespace App\Modules\HelpScout\Providers;
 
+use App\Modules\HelpScout\Console\Commands\GetMailBoxes;
 use App\Modules\HelpScout\Console\Commands\RegisterWebHook;
 use App\Modules\HelpScout\Console\Commands\UnregisterWebHook;
 use App\Modules\HelpScout\Console\Commands\WebHooks;
@@ -19,6 +20,7 @@ class HelpScoutServiceProvider extends ServiceProvider
         parent::boot();
 
         $this->commands([
+            GetMailBoxes::class,
             RegisterWebHook::class,
             UnregisterWebHook::class,
             WebHooks::class,
