@@ -2031,9 +2031,8 @@ class CmsClothingSeeder extends Seeder
                 'lifetime_access' => $product['lifetime_access'],
                 'display_order' => $orderNum,
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
-                'size_chart_id' => null,
                 'physical' => true,
-                'size_chart_id' => $product['sizeChart'],
+                'size_chart_id' => empty($product['sizeChart']) ? null : $product['sizeChart'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
