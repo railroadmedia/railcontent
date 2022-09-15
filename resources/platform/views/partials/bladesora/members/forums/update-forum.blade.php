@@ -1,5 +1,5 @@
 <div class="tw-flex tw-flex-col">
-    <div class="tw-flex tw-flex-col pa-3 bb-light-1">
+    <div class="tw-flex tw-flex-col ph pv-3 bb-light-1">
         <h1 class="tw-text-3xl tw-font-bold tw-text-[#000C17] dark:tw-text-white tw-flex tw-items-center tw-leading-none">
             <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-2">
                 <i class="fas fa-arrow-circle-left tw-text-3xl tw-mt-1 dark:tw-text-white"></i>
@@ -50,13 +50,14 @@
                         ])
                     </div>
 
-                    <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end ">
+                    <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end tw-flex-wrap">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1" dusk="cancel-button">
+                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 sm:tw-mr-1 tw-w-full sm:tw-w-auto" 
+                           dusk="cancel-button">
                             Cancel
                         </a>
 
-                        <button class="tw-btn-primary tw-bg-{{ $brand }}" type="submit" dusk="submit-button">
+                        <button class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full sm:tw-w-auto" type="submit" dusk="submit-button">
                             Update Forum
                         </button>
                     </div>

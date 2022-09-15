@@ -1,5 +1,5 @@
-<div class="tw-flex tw-flex-col tw-bg-white tw-shadow corners-10">
-    <div class="tw-flex tw-flex-col pa-3 bb-light-1">
+<div class="tw-flex tw-flex-col tw-bg-white dark:tw-bg-[#081825]/90 tw-shadow corners-10">
+    <div class="tw-flex tw-flex-col ph pv-3 bb-light-1">
         <h1 class="tw-text-3xl tw-font-bold tw-text-[#000C17] dark:tw-text-white tw-flex tw-items-center tw-leading-none">
             <a href="{{ $forumUrl }}" class="tw-no-underline tw-mr-2">
                 <i class="fas fa-arrow-circle-left tw-text-3xl tw-mt-1 dark:tw-text-white"></i>
@@ -42,13 +42,13 @@
                     </div>
                     @endif
 
-                    <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end ">
+                    <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end tw-flex-wrap">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-mr-1">
+                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 sm:tw-mr-1 tw-w-full sm:tw-w-auto">
                             Cancel
                         </a>
 
-                        <button class="tw-btn-primary tw-bg-{{ $brand }}" type="submit">
+                        <button class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full sm:tw-w-auto" type="submit">
                             Edit Thread
                         </button>
                     </div>
