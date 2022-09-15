@@ -2,7 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
+use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
+use App\Modules\Mentor\Services\MentorService;
 use Event;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
@@ -44,8 +46,10 @@ class UserMembershipFieldsResyncTool extends Command
         DatabaseManager $databaseManager,
         UserMembershipFieldsService $userMembershipFieldsService
     ) {
-        //don't fire assign mentor events yet, mentors not initialized
-        Event::forget( UserMembershipDateUpdated::class . EnsureMentorState::class);
+        //don't fire assign mentor events yet, mentors not initialized, can be removed after MWP Launch
+        app()->bind(MentorService::class, function ($app) {
+            return new MentorService($app->make(PrimaryBrandService::class), true);
+        });
 
         $databaseManager->connection(config('ecommerce.database_connection_name'))
             ->disableQueryLog();

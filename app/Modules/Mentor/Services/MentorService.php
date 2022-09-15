@@ -18,10 +18,15 @@ class MentorService
 {
     private PrimaryBrandService $primaryBrandService;
     private ?Collection $mentors = null;
+    /**
+     * Only needed to disable assigned when membership_expiration_date is set, can be removed after MWP Launched
+     */
+    private bool $disableAssigningOnLaunch;
 
-    public function __construct(PrimaryBrandService $primaryBrandService)
+    public function __construct(PrimaryBrandService $primaryBrandService, bool $disableAssigningOnLaunch = false)
     {
         $this->primaryBrandService = $primaryBrandService;
+        $this->disableAssigningOnLaunch = $disableAssigningOnLaunch;
     }
 
     public function store(int $userId, string $supportedBrand, int $maxStudents = 5000): void
@@ -83,6 +88,8 @@ class MentorService
 
     public function ensureMentorState(User $user): EnsureMentorResult
     {
+        if ($this->disableAssigningOnLaunch) return EnsureMentorResult::NoChange;
+
         $active = $user->isActiveStudent();
         $mentorStudent = $user->mentorStudent;
         if ($active && (!$mentorStudent || !$mentorStudent->mentor_user_id)) {
