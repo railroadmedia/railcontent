@@ -11,7 +11,7 @@ use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService;
-use Railroad\EventDataSynchronizer\Services\UserMembershipFieldsService;
+use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 
 class AlphaTestingAccountCreationMiddleware
 {

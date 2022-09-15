@@ -13,15 +13,14 @@
 
         <p class="tiny mb-3 tw-text-[#00101D]">Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.</p>
 
-{{--        todo: set logo based to brand; ex: https://singeo.s3.amazonaws.com/sales/2021/{{$brand}}-logo.png --}}
         <email-form
                 email-subject="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
                 brand="{{ $brand }}"
-                recipient="{{ config('mail-recipients.ask-question-form') ?? 'support@singeo.com' }}"
+                recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
                 input-label="Ask your question here..."
                 email-type="layouts/inline/alert"
                 email-endpoint="/mailora/secure/send"
-                email-logo="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                email-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
                 email-alert="Question Asked by: {{ user()->display_name }} ({{ user()->email }})"
                 theme-color="{{ $brand }}"
                 success-message="Question successfully sent!"

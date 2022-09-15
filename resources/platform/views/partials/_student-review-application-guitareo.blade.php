@@ -3,6 +3,7 @@
         <button class="tw-btn-primary tw-bg-guitareo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="whatIsModal">
             <span class="tw-text-white">
+                <i class="fas fa-question-circle tw-text-base"></i>
                 What is Student Review?
             </span>
         </button>
@@ -11,6 +12,7 @@
         <button class="tw-btn-primary tw-bg-guitareo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="howApplyModal">
             <span class="tw-text-white">
+                <i class="fas fa-question-circle tw-text-base"></i>
                 How to Apply
             </span>
         </button>
@@ -19,7 +21,7 @@
         <button class="tw-btn-primary tw-bg-guitareo tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
                 data-open-modal="applicationModal">
             <span class="tw-text-white">
-                Apply
+                Apply Now »
             </span>
         </button>
     </div>

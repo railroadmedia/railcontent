@@ -179,6 +179,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.semester-packs.lesson');
 
+        Route::get('/{brand}/coaches/{coachSlug}/{contentSlug}/{contentId}', [CoachPagesController::class, 'stream'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.coach.first-level');
+
         /*
          * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
          */

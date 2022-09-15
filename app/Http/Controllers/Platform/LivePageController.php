@@ -8,7 +8,7 @@ use App\Services\CalendarService;
 use App\Services\LiveStreamEventService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Railroad\EventDataSynchronizer\Events\LiveStreamEventAttended;
+use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railchat\Services\RailchatService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -90,7 +90,7 @@ class LivePageController extends BaseController
         return view(
             'live.embed',
             [
-                'apiKey' => config('railchat.' . $brand . '..get_stream_credentials')['key'],
+                'apiKey' => config('railchat.' . $brand . '.get_stream_credentials')['key'],
                 'token' => $token,
                 'chatChannelName' => $chatChannelName,
                 'questionsChannelName' => $questionsChannelName,
@@ -348,7 +348,7 @@ class LivePageController extends BaseController
                 Carbon::now() < $endTimeUtc->addMinutes(self::NOT_LIVE_PAGE_SWITCH_MINUTES)) {
                 // give xp
                 $this->userPointsService->setPoints(
-                    $user->getId(),
+                    $user->id,
                     [
                         'content_id' => $liveEvent['id'],
                         'live_stream_start_time' => $startTimeUtc->toDateTimeString(),

@@ -20,17 +20,15 @@
             "topicOptions" => $categories
         ])
 
-        <div class="tw-flex tw-flex-row pa tw-mt-5">
+        <div class="tw-flex tw-flex-row pa tw-w-full">
             <form action="{{ url()->route('railforums.thread.delete', [$thread['id']]) . '?redirect=' . url()->route('forums.show-categories') }}"
                 method="POST"
                 onSubmit="confirm('Are you sure you wish to delete this thread?')"
-                class="tw-flex tw-items-center tw-pt-5">
+                class="tw-flex tw-items-center tw-pt-5 tw-w-full">
                 <input type="hidden" name="_method" value="DELETE">
 
-                <button class="btn collapse-250 tw-mt-5" type="submit">
-                    <span class="bg-error tw-text-white short">
-                        Delete Thread
-                    </span>
+                <button class="tw-btn-primary tw-bg-red-500 tw-w-full sm:tw-w-auto" type="submit">
+                    Delete Thread
                 </button>
             </form>
         </div>
