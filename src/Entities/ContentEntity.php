@@ -16,7 +16,7 @@ class ContentEntity extends Entity
         $datumDots = [];
 
         // fields
-        foreach ($data['fields'] as $fieldIndex => $field) {
+        foreach (($data['fields'] ?? []) as $fieldIndex => $field) {
             $fieldDots['*fields'] = $data['fields'];
 
             if (isset($field['value']['id'])) {
@@ -76,7 +76,7 @@ class ContentEntity extends Entity
         }
 
         // data
-        foreach ($data['data'] as $dataIndex => $datum) {
+        foreach (($data['data'] ?? []) as $dataIndex => $datum) {
             $fieldDots['*data'] = $data['data'];
 
             if ($datum['position'] == 1) {
@@ -99,7 +99,7 @@ class ContentEntity extends Entity
         }
 
         // permissions
-        foreach ($data['permissions'] as $permissionsIndex => $permission) {
+        foreach (($data['permissions'] ?? []) as $permissionsIndex => $permission) {
             foreach ($permission as $permissionColumnName => $permissionColumnValue) {
                 $datumDots['permissions.' . $permission['name'] . '.' . $permissionColumnName] = $permissionColumnValue;
             }
