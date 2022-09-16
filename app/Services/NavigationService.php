@@ -263,7 +263,7 @@ class NavigationService
                         'icon' => '500-songs',
                     ],
                     [
-                        'name' => 'Chords & Scales',
+                        'name' => 'Chords',
                         'path' => '/'.brand().'/chords-scales',
                         'icon' => 'guitar-tabs',
                     ],
