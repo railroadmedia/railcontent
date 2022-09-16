@@ -307,7 +307,7 @@ class ContentService
                 CacheHelper::saveUserCache($hash, $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**

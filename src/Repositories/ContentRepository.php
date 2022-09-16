@@ -301,34 +301,30 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param $parentId
+     * This has been adapted with work with the railcontent v2.0 data structure for playlists. Can no longer be used
+     * for normal content queries other than legacy playlists.
+     *
+     * @param $playlistId
      * @return array
      */
     public function getByParentIdWhereTypeInPaginated(
-        $parentId,
+        $playlistId,
         array $types,
         $limit = 10,
         $skip = 0,
-        $orderBy = 'child_position',
-        $orderByDirection = 'asc'
+        $orderBy = 'railcontent_user_playlist_content',
+        $orderByDirection = 'desc'
     ) {
-        $contentRows =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->leftJoin(
-                    ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->limit($limit)
-                ->skip($skip)
-                ->selectInheritenceColumns()
-                ->getToArray();
+        $contentRows = $this->query()
+            ->join('railcontent_user_playlist_content', 'railcontent_content.id', '=', 'railcontent_user_playlist_content.content_id')
+            ->where(['user_playlist_id' => $playlistId])
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->orderBy('id', 'desc', 'railcontent_user_playlist_content')
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->limit($limit)
+            ->skip($skip)
+            ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -347,12 +343,17 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param $parentId
+     * This has been adapted with work with the railcontent v2.0 data structure for playlists. Can no longer be used
+     * for normal content queries other than legacy playlists.
+     *
+     * @param $playlistId
      * @return array
      */
-    public function countByParentIdWhereTypeIn($parentId, array $types)
+    public function countByParentIdWhereTypeIn($playlistId, array $types)
     {
         return $this->query()
+            ->join('railcontent_user_playlist_content', 'railcontent_content.id', '=', 'railcontent_user_playlist_content.content_id')
+            ->where(['user_playlist_id' => $playlistId])
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
             ->leftJoin(
@@ -361,7 +362,6 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
             ->whereIn(ConfigService::$tableContent . '.type', $types)
             ->selectInheritenceColumns()
             ->count();
@@ -867,36 +867,29 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * This has been adapted with work with the railcontent v2.0 data structure for playlists. Can no longer be used
+     * for normal content queries other than legacy playlists.
+     *
      * @param $userId
      * @param string $type
      * @param string $slug
-     * @return array|null
+     * @return array|Collection
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
-        $contentRows =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where('slug', $slug)
-                ->where('type', $type)
-                ->where(ConfigService::$tableContent . '.user_id', $userId)
-                ->getToArray();
+        $playlistRows = DB::connection(config('railcontent.database_connection_name'))
+            ->table('railcontent_user_playlists')
+            ->where(['user_id' => $userId, 'type' => 'primary-playlist',])
+            ->whereIn(
+                'brand',
+                array_values(array_wrap(ConfigService::$availableBrands))
+            )
+            ->get()
+            ->map(function($value) {
+                return (array) $value;
+            });
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        return $playlistRows;
     }
 
     /**
