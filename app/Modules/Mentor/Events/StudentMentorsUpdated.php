@@ -22,11 +22,12 @@ class StudentMentorsUpdated
 
     public static function newWithMentorStudentCollection(Collection $mentorStudents): StudentMentorsUpdated
     {
-        $data = $mentorStudents->map(function ($mentorStudent) {
+        $data = $mentorStudents->map(function (MentorStudent $mentorStudent) {
             return [
                 'userId' => $mentorStudent->user_id,
                 'mentorUserId' => $mentorStudent->mentor_user_id,
                 'primaryBrand' => $mentorStudent->primary_brand,
+                'email' => $mentorStudent->user->email,
             ];
         })->toArray();
         return new StudentMentorsUpdated($data);

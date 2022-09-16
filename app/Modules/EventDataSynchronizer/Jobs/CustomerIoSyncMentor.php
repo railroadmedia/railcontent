@@ -38,7 +38,7 @@ class CustomerIoSyncMentor extends CustomerIoBaseJob
                     $mentorStudentDatum['primaryBrand']
                 );
 
-                $customerIoService->createOrUpdateCustomerByUserId($mentorStudentDatum['userId'], $accountName, null, $attributes);
+                $customerIoService->createOrUpdateCustomerByUserId($mentorStudentDatum['userId'], $accountName, $mentorStudentDatum['email'], $attributes);
                 usleep(100000); //precaution to keep customer.io limit under 100 requests per second
             } catch (Exception $exception) {
                 $this->failed($exception);
