@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ ucfirst($catalogueMeta['name']) }} | Musora</title>
+    <title>{{ ucfirst($brand) }} {{ ucfirst($catalogueMeta['name']) }} | Musora</title>
 @endsection
 
 @section('layout-styles')
