@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -66,22 +67,29 @@ class MyListJsonController extends Controller
         }
 
         $userPrimaryPlaylist =
-            array_first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            $this->contentService->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist')
+                ->first();
 
-        if (!$userPrimaryPlaylist) {
-            $userPrimaryPlaylist = $this->contentService->create(
-                'primary-playlist',
-                'user-playlist',
-                ContentService::STATUS_PUBLISHED,
-                null,
-                config('railcontent.brand'),
-                $userId,
-                Carbon::now()
-                    ->toDateTimeString()
-            );
+        if (empty($userPrimaryPlaylist)) {
+            $userPrimaryPlaylistId = DB::connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_user_playlists')
+                ->insertGetId([
+                    'brand' => config('railcontent.brand'),
+                    'type' => 'primary-playlist',
+                    'user_id' => $userId,
+                    'created_at' => Carbon::now()->toDateTimeString()
+                ]);
+        } else {
+            $userPrimaryPlaylistId = $userPrimaryPlaylist['id'];
         }
 
-        $this->contentHierarchyService->create($userPrimaryPlaylist['id'], $request->get('content_id'), 1);
+        DB::connection(config('railcontent.database_connection_name'))
+            ->table('railcontent_user_playlist_content')
+            ->insert([
+                'content_id' => $request->get('content_id'),
+                'user_playlist_id' => $userPrimaryPlaylistId,
+                'created_at' => Carbon::now()->toDateTimeString(),
+            ]);
 
         return response()->json(['success']);
     }
@@ -101,9 +109,29 @@ class MyListJsonController extends Controller
         $userId = auth()->id();
 
         $userPrimaryPlaylist =
-            array_first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            $this->contentService->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist')
+                ->first();
 
-        $this->contentHierarchyService->delete($userPrimaryPlaylist['id'], $request->get('content_id'));
+        if (empty($userPrimaryPlaylist)) {
+            $userPrimaryPlaylistId = DB::connection(config('railcontent.database_connection_name'))
+                ->table('railcontent_user_playlists')
+                ->insertGetId([
+                    'brand' => config('railcontent.brand'),
+                    'type' => 'primary-playlist',
+                    'user_id' => $userId,
+                    'created_at' => Carbon::now()->toDateTimeString()
+                ]);
+        } else {
+            $userPrimaryPlaylistId = $userPrimaryPlaylist['id'];
+        }
+
+        DB::connection(config('railcontent.database_connection_name'))
+            ->table('railcontent_user_playlist_content')
+            ->where([
+                'content_id' => $request->get('content_id'),
+                'user_playlist_id' => $userPrimaryPlaylistId
+            ])
+            ->delete();
 
         return response()->json(['success']);
     }
