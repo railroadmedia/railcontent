@@ -2,7 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
-use App\Modules\Providers\UserProviderInterface;
+use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
