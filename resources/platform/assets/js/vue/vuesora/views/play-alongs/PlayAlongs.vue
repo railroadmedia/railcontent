@@ -135,6 +135,11 @@ export default {
         InputLabel
     },
     mixins: [ThemeClasses, UserCatalogueEvents, EventHandlers],
+    inject: {
+        isSidebarCollapsed: {
+            from: 'isSidebarCollapsed'
+        }
+    },
     props: {
         brand: {
             type: String,
@@ -755,7 +760,8 @@ export default {
         },
 
         getDurationOffsetPercentageByMousePosition() {
-            return (this.currentMousePosition.x / this.$refs.progressBar.$el.clientWidth) * 100;
+            const sidebarOffset = this.isSidebarCollapsed ? 68 : 256;
+            return ((this.currentMousePosition.x - sidebarOffset) / this.$refs.progressBar.$el.clientWidth) * 100;
         },
 
         mouseUpEventHandler() {
@@ -964,6 +970,7 @@ export default {
                 mediaType: 'practice',
                 mediaCategory: 'play-alongs',
                 sessionToken: this.sessionToken,
+                brand: this.brand,
             });
         },
 

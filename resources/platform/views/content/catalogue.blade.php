@@ -266,6 +266,7 @@
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"
+                :session-token="{{ json_encode(railtracker_session_token()) }}"
                 @play="handlePlayAlongsPlay"
                 @pause="handlePlayAlongsPause"
             ></play-alongs>
