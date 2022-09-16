@@ -132,6 +132,7 @@ class UserPlaylistContentRepository extends RepositoryBase
             ->where('user_playlist_id', $playlistId)
             ->whereIn('content_id', $contentIds)
             ->get()
+            ->pluck('content_id')
             ->toArray();
 
         $contentIdsInPlaylistBooleans = [];
