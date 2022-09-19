@@ -42,7 +42,10 @@ const goToNextStep = () => {
 };
 
 const handleNextStep = () => {
-  if (inputValue.value !== props.info.user.name) {
+  if (inputValue.value === '') {
+    nameErrors.value = ['You need to type at least 3 characters'];
+  }
+  else if (inputValue.value !== props.info.user.name) {
     checkDisplayName({ name: inputValue.value })
       .then(({ data: { unique } }) => {
         if (unique) {
@@ -66,6 +69,8 @@ const handleNextStep = () => {
         console.log('entering error block', e)
         handleError();
       });
+  } else {
+    goToNextStep();
   }
 };
 
@@ -81,7 +86,7 @@ const handleError = () => {
 <template>
   <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false">
     <div
-      class="tw-h-full md:tw-h-auto tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center tw-mt-[40px] md:tw-mt-0">
+      class="tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center md:tw-mt-0">
       <StepHeader title="Just a few quick questions to set up your account" subtitle="Your musical journey is personalized to you. Tell us a little bit
             about yourself so that we can get it right." :hideBackButton="true" />
       <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleError"
@@ -96,7 +101,7 @@ const handleError = () => {
       </ul>
     </div>
     <div
-      class="tw-mt-[56px] tw-justify-self-end md:tw-justify-self-center tw-flex tw-flex-col tw-items-center tw-pb-[20px] md:tw-pb-0">
+      class="tw-mt-[24px] xl:tw-mt-[56px] tw-justify-self-end md:tw-justify-self-center tw-flex tw-flex-col tw-items-center tw-pb-[20px] md:tw-pb-0">
       <Button :brand="brand" @onButtonClick="handleNextStep"
         :isDisabled="!info.user.avatarUrl.length && !info.user.name.length"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>

@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Packs | Musora</title>
+    <title>{{ ucfirst($brand) }} Packs | Musora</title>
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ ucfirst($catalogueMeta['name']) }} | Musora</title>
+    <title>{{ ucfirst($brand) }} {{ ucfirst($catalogueMeta['name']) }} | Musora</title>
 @endsection
 
 @section('layout-styles')
@@ -266,6 +266,7 @@
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"
+                :session-token="{{ json_encode(railtracker_session_token()) }}"
                 @play="handlePlayAlongsPlay"
                 @pause="handlePlayAlongsPause"
             ></play-alongs>

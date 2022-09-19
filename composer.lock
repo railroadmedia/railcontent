@@ -7896,12 +7896,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/mailora.git",
-                "reference": "45da20185188218f240b5214129e45feb4353e21"
+                "reference": "fbeb0cbf50934825fdefcf1180ea57c7dbeadd5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/45da20185188218f240b5214129e45feb4353e21",
-                "reference": "45da20185188218f240b5214129e45feb4353e21",
+                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/fbeb0cbf50934825fdefcf1180ea57c7dbeadd5e",
+                "reference": "fbeb0cbf50934825fdefcf1180ea57c7dbeadd5e",
                 "shasum": ""
             },
             "require": {
@@ -7945,7 +7945,7 @@
                 "issues": "https://github.com/railroadmedia/mailora/issues",
                 "source": "https://github.com/railroadmedia/mailora/tree/3.0"
             },
-            "time": "2022-09-14T13:23:27+00:00"
+            "time": "2022-09-16T13:01:35+00:00"
         },
         {
             "name": "railroad/musora-api",
@@ -7953,12 +7953,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "74ea129d6412e0ae838c2014f101f9b6d83ad039"
+                "reference": "f0eb3aadc52dcb9395898a3333043263bd1ab2b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/74ea129d6412e0ae838c2014f101f9b6d83ad039",
-                "reference": "74ea129d6412e0ae838c2014f101f9b6d83ad039",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f0eb3aadc52dcb9395898a3333043263bd1ab2b1",
+                "reference": "f0eb3aadc52dcb9395898a3333043263bd1ab2b1",
                 "shasum": ""
             },
             "require": {
@@ -7990,7 +7990,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-15T14:57:39+00:00"
+            "time": "2022-09-16T12:41:26+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8141,16 +8141,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.5",
+            "version": "v2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "2f7ae58f6339434340316fec15030786b83e9e25"
+                "reference": "f537eeeb7a196c70eae3233cbcfb5df0d801f60d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2f7ae58f6339434340316fec15030786b83e9e25",
-                "reference": "2f7ae58f6339434340316fec15030786b83e9e25",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f537eeeb7a196c70eae3233cbcfb5df0d801f60d",
+                "reference": "f537eeeb7a196c70eae3233cbcfb5df0d801f60d",
                 "shasum": ""
             },
             "require": {
@@ -8204,9 +8204,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.5"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.8"
             },
-            "time": "2022-09-15T16:28:10+00:00"
+            "time": "2022-09-16T17:39:20+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8816,16 +8816,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.5.0",
+            "version": "4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "ef842484ba57f163c6d465ab744bfecb872a11d4"
+                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/ef842484ba57f163c6d465ab744bfecb872a11d4",
-                "reference": "ef842484ba57f163c6d465ab744bfecb872a11d4",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a161a26d917604dc6d3aa25100fddf2556e9f35d",
+                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d",
                 "shasum": ""
             },
             "require": {
@@ -8894,7 +8894,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.5.0"
+                "source": "https://github.com/ramsey/uuid/tree/4.5.1"
             },
             "funding": [
                 {
@@ -8906,7 +8906,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-15T01:44:53+00:00"
+            "time": "2022-09-16T03:22:46+00:00"
         },
         {
             "name": "rap2hpoutre/fast-excel",
@@ -16013,27 +16013,27 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "29deea5d9cf921590184be6956e657c4f4566440"
+                "reference": "192962f4d84526f6868c512530c00633e3165749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/29deea5d9cf921590184be6956e657c4f4566440",
-                "reference": "29deea5d9cf921590184be6956e657c4f4566440",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/192962f4d84526f6868c512530c00633e3165749",
+                "reference": "192962f4d84526f6868c512530c00633e3165749",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "illuminate/support": "^8.77|^9.0",
+                "illuminate/support": "^8.77|^9.27",
                 "monolog/monolog": "^2.3",
                 "php": "^8.0",
                 "spatie/flare-client-php": "^1.0.1",
-                "spatie/ignition": "^1.2.4",
+                "spatie/ignition": "^1.4.1",
                 "symfony/console": "^5.0|^6.0",
                 "symfony/var-dumper": "^5.0|^6.0"
             },
@@ -16099,7 +16099,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-01T11:31:14+00:00"
+            "time": "2022-09-16T13:45:54+00:00"
         },
         {
             "name": "theseer/tokenizer",

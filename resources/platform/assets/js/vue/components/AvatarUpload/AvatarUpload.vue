@@ -93,13 +93,15 @@ function handleUploadError() {
       />
     </InfoModal>
 
-    <button v-on:click="openUploadForm" class="hover:tw-underline">
+    <button v-on:click="openUploadForm" class="hover:tw-underline tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full">
       <div
         class="
           tw-relative
           tw-flex
-          tw-h-[150px]
-          tw-w-[150px]
+          tw-h-[100px]
+          tw-w-[100px]
+          xl:tw-h-[150px]
+          xl:tw-w-[150px]
           tw-items-center
           tw-justify-center
           tw-overflow-hidden
