@@ -6,8 +6,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Validation\Rule;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Carbon\Carbon;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,11 +13,11 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-
-//use MikeMcLin\WpPassword\Facades\WpPassword;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Events\EmailChangeRequest;
+use Modules\UserManagementSystem\Notifications\EmailChange as EmailChangeNotification;
 
 class EmailChangeController extends Controller
 {
@@ -101,12 +99,12 @@ class EmailChangeController extends Controller
         $emailChange->email = $payload['email'];
         $emailChange->token = $payload['token'];
         $emailChange->user_id = $user->id;
+        $emailChange->brand = brand();
         $emailChange->save();
-
 
         event(new EmailChangeRequest($payload['token'], $payload['email']));
 
-//        todo: sendEmailChangeNotification($payload['token'], $payload['email']);
+        $this->sendEmailChangeNotification($payload['token'], $payload['email']);
 
         $message = [
             'successes' => new MessageBag(
@@ -195,13 +193,15 @@ class EmailChangeController extends Controller
         ];
 
         //todo: define route of redirect!
-        return $request->has('redirect') ?
+        return $request->has('redirect_to') ?
             redirect()
                 ->away($request->get('redirect'))
                 ->with($message) :
             redirect()
-                ->back()
-//                ->to(config('usora.email_change_confirmation_success_redirect_path'))
+                ->to(route('platform.profile.settings.login-credentials', [
+                    'userId' => $user->id,
+                    'brand' => $emailChange->brand
+                ]))
                 ->with($message);
     }
 
@@ -218,15 +218,13 @@ class EmailChangeController extends Controller
         return hash_hmac('sha256', Str::random(40), $hash);
     }
 
-//    /**
-//     * @param $token
-//     * @param $email
-//     */
-//    public function sendEmailChangeNotification($token, $email)
-//    {
-//        $class = config('usora.email_change_notification_class');
-//
-//        (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $email)
-//            ->notify(new $class($token));
-//    }
+    /**
+     * @param $token
+     * @param $email
+     */
+    public function sendEmailChangeNotification($token, $email)
+    {
+        (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $email)
+            ->notify(new EmailChangeNotification($token));
+    }
 }
