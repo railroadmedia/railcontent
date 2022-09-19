@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -80,6 +81,9 @@ class ForumPagesController extends Controller
         $categoryIds = $request->get('category_ids', null);
         $pinned = (boolean)$request->get('pinned');
         // $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
+
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -455,6 +459,8 @@ class ForumPagesController extends Controller
         $page = $request->get('page', 1);
 
         $sortBy = $request->get('sortby_val', '-published_on');
+
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
         $thread =
             $this->threadRepository->getDecoratedThreadsByIds([$id])
