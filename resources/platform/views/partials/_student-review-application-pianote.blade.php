@@ -9,6 +9,3 @@
         </button>
     </div>
 </div>
-
-{{-- Review Application Modal --}}
-@include('partials._review-modal')
