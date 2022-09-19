@@ -21,5 +21,7 @@
     "/platform/css/app.css": "/platform/css/app.css?id=552e54286b0ab7dcc39e2496ea5d3b0f",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=c0d1f718effc958056637c6015d2ac2d",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=5a2231c6503a240d69e98c55afab3533",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=42cbda8fd74382c3215c0ac5e56d83d9"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=42cbda8fd74382c3215c0ac5e56d83d9",
+    "/marketing/js/app.js": "/marketing/js/app.js",
+    "/marketing/css/app.css": "/marketing/css/app.css"
 }
