@@ -19,7 +19,9 @@
         "marketing-hot": "mix --mix-config=resources/marketing/webpack.mix.js watch --hot",
         "mw": "mix --mix-config=resources/marketing/webpack.mix.js watch",
         "md": "mix --mix-config=resources/marketing/webpack.mix.js",
-        "mp": "mix --mix-config=resources/marketing/webpack.mix.js --production"
+        "mp": "mix --mix-config=resources/marketing/webpack.mix.js --production",
+        "mrk": "parcel build resources/assets/marketing/*.js --dist-dir public/assets/marketing --no-cache",
+        "mrkw": "parcel watch resources/assets/marketing/*.js --dist-dir public/assets/marketing"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
@@ -61,6 +63,8 @@
         "mitt": "^3.0.0",
         "mux.js": "^5.5.1",
         "normalize.css": "^8.0.1",
+        "noty": "^3.2.0-beta-deprecated",
+        "parcel": "^2.7.0",
         "pinia": "^2.0.17",
         "query-string": "^7.1.1",
         "screenfull": "^6.0.1",
