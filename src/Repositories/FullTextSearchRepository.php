@@ -330,10 +330,7 @@ class FullTextSearchRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        dd($contentRows);
-
         return array_column($contentRows, 'content_id');
-
     }
 
     /** Count all the matches
