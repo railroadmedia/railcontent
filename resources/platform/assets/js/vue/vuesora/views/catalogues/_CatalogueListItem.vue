@@ -14,7 +14,7 @@
       dark:hover:tw-bg-[#002039]
     "
     :class="[class_object, isBranchPath ? [branchPathBG, branchPathText]: 'hover-bg-grey-7 hover-text-black']"
-    :href="renderLink ? item.url : '#'"   
+    :href="renderLink ? item.url : null"   
   >
     <!-- LESSON NUMBERS -->
     <div
