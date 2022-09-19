@@ -38,9 +38,9 @@ class Bundle extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
+            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundle')->first()->id),
-            Text::make('Name')->required(),
+            Text::make('Name')->required()->sortable(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
                 return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';

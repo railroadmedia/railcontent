@@ -45,14 +45,14 @@ class Clothing extends Resource
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand'),
+            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Select::make('Product Type', 'product_type_id')->options([
                 $types->where('name', 'Hat')->first()->id => 'Hat',
                 $types->where('name', 'Shirt')->first()->id => 'Shirt',
                 $types->where('name', 'Hoodie')->first()->id => 'Hoodie'
-            ])->displayUsingLabels(),
+            ])->displayUsingLabels()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('Name')->required(),
+            Text::make('Name')->required()->sortable(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
                 return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';
