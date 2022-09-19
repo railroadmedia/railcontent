@@ -134,7 +134,6 @@ class UserController extends Controller
         try {
             $request->validate([
                 'display_name' => [
-                    'required',
                     Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore($id),
                     'string',
                     'max:64',
