@@ -32,6 +32,12 @@
     @endif
 @endsection
 
+@section('review-modal-section')
+    @if($lessonType === 'student-review' || $lessonType === 'student-focus')
+        @include('partials._review-modal', ['brand' => $brand])
+    @endif
+@endsection
+
 @section('content')
 
     @component('partials._header-banner',
