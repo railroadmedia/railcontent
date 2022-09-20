@@ -1211,17 +1211,7 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            dispatch(
-                (new CustomerIoSyncMentor(
-                    $studentMentorsUpdated->mentorStudentData
-                ))
-                    ->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-            );
+            dispatch(new CustomerIoSyncMentor($studentMentorsUpdated->mentorStudentData));
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
