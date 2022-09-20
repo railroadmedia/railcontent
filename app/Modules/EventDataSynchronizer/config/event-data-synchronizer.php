@@ -17,18 +17,7 @@ return [
 
     'help_scout_sync_brands' => ['drumeo', 'pianote', 'singeo', 'guitareo'],
 
-    'helpscout_queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
-    'helpscout_queue_name' => 'helpscout',
-
-    // impact railanalytics
-    'impact_queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
-    'impact_queue_name' => 'impact',
-
     // customer.io
-    // NOTE: you must add this queue to your queue worker setup, ex: artisan queue:work database --queue=customer_io
-    'customer_io_queue_connection_name' => env('QUEUE_CONNECTION', 'sync'),
-    'customer_io_queue_name' => 'customer-io',
-
     'customer_io_brands_to_sync' => ['drumeo', 'pianote', 'guitareo'],
 
     // all brands will always be synced to this workspace regardless of their products or interaction
