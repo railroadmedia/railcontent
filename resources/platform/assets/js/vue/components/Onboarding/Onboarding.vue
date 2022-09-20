@@ -8,7 +8,7 @@ import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Coaches from './steps/Coaches.vue'
-import { initialSteps, instrumentBrand } from './constants';
+import { initialSteps, instrumentBrand, brandInstrument } from './constants';
 import { getInitialInfo, getCheckedSteps } from './utils';
 
 const props = defineProps({
@@ -42,7 +42,13 @@ const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
 const currentStep = ref(0)
-const info = ref(getInitialInfo({ userId, userName, userAvatar, ...props }))
+const info = ref(getInitialInfo({
+    userId,
+    userName,
+    userAvatar,
+    ...props,
+    instrument: brandInstrument[props.selectedBrand],
+}))
 const steps = ref(initialSteps);
 const brand = computed(() => instrumentBrand[info.value.instrument]);
 

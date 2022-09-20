@@ -38,14 +38,14 @@ const getSavedExperience = (selectedExperience) => {
   return multiSelectMap;
 };
 
-export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions }) => {
+export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument }) => {
   return ({
       user: {
           id: userId,
           name: userName || null,
           avatarUrl: userAvatar || null
       },
-      instrument: 'default',
+      instrument: instrument || 'default',
       instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),
       experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
       genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
