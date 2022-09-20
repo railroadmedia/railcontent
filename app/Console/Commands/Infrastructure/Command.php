@@ -17,7 +17,7 @@ abstract class Command extends CommandBase
         $this->info("$count records found.");
 
         $bar = null;
-        if (App::environment('production')) {
+        if (App::environment('local')) { //progress bar not useful when running vapor commands
             $bar = $this->output->createProgressBar($count);
             $bar->setFormat('debug');
             $bar->start();
