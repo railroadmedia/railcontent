@@ -262,7 +262,7 @@ The request checks if another user exists with the same display name.
 ```php
 ['email' => 'required|email']
 ```
-The request checks if another user exists with the same email.
+The request checks if another user exists with the same email. Authentication is not needed.
 
 
 #### Success response:
