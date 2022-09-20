@@ -25,7 +25,7 @@ export default {
         },
         toolbar: {
             type: String,
-            default: () => 'tw-font-bold tw-italic tw-underline | bullist numlist | link image media | forecolor backcolor | emoticons',
+            default: () => 'bold italic underline | bullist numlist | link image media | forecolor backcolor | emoticons',
         },
         imageUploadEndpoint: {
             type: String,
