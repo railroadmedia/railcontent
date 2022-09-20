@@ -1,23 +1,20 @@
 <?php
+
 namespace App\Modules\EventDataSynchronizer\Listeners\Impact;
+
 use Carbon\Carbon;
 use Railroad\Ecommerce\Events\OrderEvent;
 use App\Modules\EventDataSynchronizer\Jobs\ImpactTrackConversion;
 
 class ImpactEventListener
 {
-    private $queueConnectionName;
+    public function __construct()
+    {
 
-    private $queueName;
-
-
-    public function __construct() {
-        $this->queueConnectionName = config('event-data-synchronizer.impact_queue_connection_name', 'database');
-        $this->queueName = config('event-data-synchronizer.impact_queue_name', 'impact');
     }
 
     /**
-     * @param  OrderEvent  $orderEvent
+     * @param OrderEvent $orderEvent
      */
     public function handleSubscriptionRenewed(OrderEvent $orderEvent)
     {
@@ -26,11 +23,8 @@ class ImpactEventListener
 
         dispatch(
             (new ImpactTrackConversion($order))
-                ->onConnection($this->queueConnectionName)
-                ->onQueue($this->queueName)
                 ->delay(Carbon::now()->addSeconds(3))
         );
-
     }
 
 }
