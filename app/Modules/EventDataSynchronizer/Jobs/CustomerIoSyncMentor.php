@@ -29,7 +29,6 @@ class CustomerIoSyncMentor extends CustomerIoBaseJob
         CustomerIoService $customerIoService,
         CustomerIoMentorSyncService $customerIoMentorSyncService,
     ) {
-        $i = 0;
         foreach($this->mentorStudentData as $mentorStudentDatum) {
             try {
                 $accountName = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
