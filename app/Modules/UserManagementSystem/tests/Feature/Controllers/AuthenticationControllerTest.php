@@ -237,7 +237,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             'email' => $email,
             'password' => Hash::make($password),
         ]);
-        $hashKey = md5(config('app.key') . $user->id . $user->password . Carbon::now()->startOfHour()->toDateTimeString());
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfHour()->toDateTimeString());
 
         $this->expectsEvents([UserEvent::class]);
 
@@ -262,7 +262,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             'email' => $email,
             'password' => Hash::make($password),
         ]);
-        $hashKey = md5(config('app.key') . $user->id . $user->password . Carbon::now()->startOfHour()->subHours(6)->toDateTimeString());
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfHour()->subHours(6)->toDateTimeString());
 
         $this->expectsEvents([UserEvent::class]);
 

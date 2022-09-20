@@ -97,7 +97,7 @@ class AuthenticationController extends Controller
 
         // key expires after 12 hours
         while ($i < 12) {
-            $hash = md5(config('app.key') . $user->id . $user->password . Carbon::now()->startOfHour()->subHours($i)->toDateTimeString());
+            $hash = md5($user->id . $user->password . Carbon::now()->startOfHour()->subHours($i)->toDateTimeString());
 
             if ($hash === $key) {
                 $passedCheck = true;
