@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
+use Throwable;
 
 class CustomerIoTriggerEvent extends CustomerIoBaseJob
 {
@@ -69,8 +70,6 @@ class CustomerIoTriggerEvent extends CustomerIoBaseJob
         CustomerIoService $customerIoService
     ) {
         try {
-            $this->reconnectToMySQLDatabases();
-
             $customerIoService->createEventForEmailOrId(
                 $this->customerEmail,
                 $this->customerId,
@@ -86,9 +85,9 @@ class CustomerIoTriggerEvent extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on CustomerIoTriggerEvent job trying send an email from customer.io. '.
