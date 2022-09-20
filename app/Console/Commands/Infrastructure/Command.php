@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Log;
 abstract class Command extends CommandBase
 {
 
-    public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000): void
+    public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000, $timeout = 600): bool
     {
+        $timeStart = microtime(true);
+
         $count = $query->count();
         $this->info("Processing query...");
         $this->info("$count records found.");
@@ -23,19 +25,25 @@ abstract class Command extends CommandBase
             $bar->start();
         }
         $n = 0;
-        $query->chunk($chunks, function ($items) use ($count, &$n, $function, $bar) {
+        $success = $query->chunk($chunks, function ($items) use ($timeout, $timeStart, $count, &$n, $function, $bar) {
             $last = null;
             foreach ($items as $item) {
                 call_user_func($function, $item);
                 if ($bar) $bar->advance();
                 $last = $item;
+                $sec = intval(microtime(true) - $timeStart);
+                $n += 1;
+                if ($sec >= $timeout) {
+                    $this->info("Processing Timeout.  Processed $n/$count items.");
+                    return false;
+                }
             }
-            $n += $items->count();
             $message = "$n/$count processed. ";
             if ($last?->id) $message .= "Last processed id: $last->id";
             Log::info($message);
         });
 
-        $this->info("\nProcessing Completed");
+        $this->info("Processing Completed");
+        return $success;
     }
 }

@@ -25,8 +25,15 @@ class InitializeMentors extends Command
     ): bool
     {
         $this->ensureMentorsCreated($databaseManager, $mentorService);
-        $this->ensureGuitareoSingeoMentorsAssigned($mentorService);
-        $this->ensureAllMentorsAssigned($mentorService);
+        $success = $this->ensureGuitareoSingeoMentorsAssigned($mentorService);
+        if ($success) {
+            return false;
+        }
+        $success = $this->ensureAllMentorsAssigned($mentorService);
+
+        if ($success) {
+            return false;
+        }
 
         if (app()->isProduction()) {
             $this->info("\nRegister Web Hook");
@@ -111,7 +118,7 @@ class InitializeMentors extends Command
         }
     }
 
-    public function ensureGuitareoSingeoMentorsAssigned(MentorService $mentorService): void
+    public function ensureGuitareoSingeoMentorsAssigned(MentorService $mentorService): bool
     {
         $this->info("Assigning Mentors (guitareo, singeo)...");
         $subQuery = Subscription::query()
@@ -124,27 +131,29 @@ class InitializeMentors extends Command
             });
 
         $n = 0;
-        $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n) {
+        $success = $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n) {
             $result = $mentorService->ensureMentorState($user);
             if ($result == EnsureMentorResult::MentorAssigned) {
                 $n++;
             }
-        });
+        }, timeout: 300);
         $this->info("$n mentors assigned.");
+        return $success;
     }
 
-    public function ensureAllMentorsAssigned(MentorService $mentorService): void
+    public function ensureAllMentorsAssigned(MentorService $mentorService): bool
     {
         $this->info("Assigning Users (guitareo, singeo)...");
         $query = User::query()->with('mentorStudent');
 
         $n = 0;
-        $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n) {
+        $success = $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n) {
             $result = $mentorService->ensureMentorState($user);
             if ($result == EnsureMentorResult::MentorAssigned) {
                 $n++;
             }
-        });
+        }, timeout: 300);
         $this->info("$n mentors assigned.");
+        return $success;
     }
 }
