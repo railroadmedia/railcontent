@@ -8,6 +8,8 @@ use App\Modules\Mentor\Services\HelpScoutWebHookService;
 use App\Modules\Mentor\Services\MentorService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class HelpScoutMentorController extends Controller
 {
@@ -20,11 +22,17 @@ class HelpScoutMentorController extends Controller
 
     public function newHelpScoutConversation(Request $request)
     {
-        $conversationId = $request->input("id");
-        $helpScoutUserId = $request->input('createdBy.id');
-        $helpScoutUserEmail = $request->input('createdBy.email') ?? '';
-        $helpScoutMailBoxId = $request->input('mailboxId');
-        $this->helpScoutMentorService->newHelpScoutConversation($conversationId, $helpScoutUserId, $helpScoutUserEmail, $helpScoutMailBoxId);
+        try {
+            $conversationId = $request->input("id");
+            $helpScoutUserId = $request->input('createdBy.id');
+            $helpScoutUserEmail = $request->input('createdBy.email') ?? '';
+            $helpScoutMailBoxId = $request->input('mailboxId');
+            $this->helpScoutMentorService->newHelpScoutConversation($conversationId, $helpScoutUserId,
+                $helpScoutUserEmail, $helpScoutMailBoxId);
+        } catch (Throwable $exception) {
+            //need to return success to helpscout or it may disable the webhook if too many failures occur
+            Log::error($exception);
+        }
     }
 
 
