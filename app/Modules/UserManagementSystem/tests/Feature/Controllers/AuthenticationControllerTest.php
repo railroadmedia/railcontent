@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -225,6 +226,56 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         );
 
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function test_authenticate_generated_key_success()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+        $hashKey = md5(config('app.key') . $user->id . $user->password . Carbon::now()->startOfHour()->toDateTimeString());
+
+        $this->expectsEvents([UserEvent::class]);
+
+        $response = $this->call(
+            'GET',
+            config('user_management_system.route_prefix') . '/login/generated-key',
+            ['key' => $hashKey, 'user_id' => $user->id]
+        );
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
+    }
+
+    public function test_authenticate_generated_key_success_6_hours_later()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+        $hashKey = md5(config('app.key') . $user->id . $user->password . Carbon::now()->startOfHour()->subHours(6)->toDateTimeString());
+
+        $this->expectsEvents([UserEvent::class]);
+
+        $response = $this->call(
+            'GET',
+            config('user_management_system.route_prefix') . '/login/generated-key',
+            ['key' => $hashKey, 'user_id' => $user->id]
+        );
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
     }
 
     public function test_logout_token()
