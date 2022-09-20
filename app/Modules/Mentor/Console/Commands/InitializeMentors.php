@@ -26,12 +26,12 @@ class InitializeMentors extends Command
     {
         $this->ensureMentorsCreated($databaseManager, $mentorService);
         $success = $this->ensureGuitareoSingeoMentorsAssigned($mentorService);
-        if ($success) {
+        if (!$success) {
             return false;
         }
         $success = $this->ensureAllMentorsAssigned($mentorService);
 
-        if ($success) {
+        if (!$success) {
             return false;
         }
 

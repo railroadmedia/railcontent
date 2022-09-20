@@ -38,9 +38,11 @@ abstract class Command extends CommandBase
                     return false;
                 }
             }
-            $message = "$n/$count processed. ";
-            if ($last?->id) $message .= "Last processed id: $last->id";
-            Log::info($message);
+            if (!$bar) {
+                $message = "$n/$count processed. ";
+                if ($last?->id) $message .= "Last processed id: $last->id";
+                Log::info($message);
+            }
         });
 
         $this->info("Processing Completed");
