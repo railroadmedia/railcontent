@@ -105,14 +105,13 @@ class CustomerIoSyncEventListener
      * @param PostRepository $postRepository
      */
     public function __construct(
-        UserService        $userService,
-        CommentRepository  $commentRepository,
+        UserService $userService,
+        CommentRepository $commentRepository,
         CategoryRepository $categoryRepository,
-        ThreadRepository   $threadRepository,
-        PostRepository     $postRepository,
-        ContentService     $contentService
-    )
-    {
+        ThreadRepository $threadRepository,
+        PostRepository $postRepository,
+        ContentService $contentService
+    ) {
         $this->userService = $userService;
 
         $this->queueConnectionName = config('event-data-synchronizer.customer_io_queue_connection_name', 'database');
