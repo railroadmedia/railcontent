@@ -20,10 +20,6 @@ use Throwable;
 
 class HelpScoutEventListener
 {
-    private $queueConnectionName = 'database';
-
-    private $queueName = 'helpscout';
-
     /**
      * @var bool
      */
@@ -43,9 +39,6 @@ class HelpScoutEventListener
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-
-        $this->queueConnectionName = config('event-data-synchronizer.helpscout_queue_connection_name', 'database');
-        $this->queueName = config('event-data-synchronizer.helpscout_queue_name', 'helpscout');
     }
 
     /**
@@ -64,8 +57,6 @@ class HelpScoutEventListener
 
                 dispatch(
                     (new HelpScoutUpdateUser($user))
-                        ->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
                         ->delay(Carbon::now()->addSeconds(3))
                 );
 
@@ -92,8 +83,6 @@ class HelpScoutEventListener
 
                 dispatch(
                     (new HelpScoutUpdateUser($user))
-                        ->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
                         ->delay(Carbon::now()->addSeconds(3))
                 );
 
@@ -123,8 +112,6 @@ class HelpScoutEventListener
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new HelpScoutUpdateUser($user))
-                        ->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
                         ->delay(Carbon::now()->addSeconds(3))
                 );
 
@@ -154,8 +141,6 @@ class HelpScoutEventListener
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new HelpScoutUpdateUser($user))
-                        ->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
                         ->delay(Carbon::now()->addSeconds(3))
                 );
 
@@ -185,8 +170,6 @@ class HelpScoutEventListener
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
                     (new HelpScoutUpdateUser($user))
-                        ->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
                         ->delay(Carbon::now()->addSeconds(3))
                 );
 
@@ -222,8 +205,6 @@ class HelpScoutEventListener
                 if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                     dispatch(
                         (new HelpScoutUpdateUser($user))
-                            ->onConnection($this->queueConnectionName)
-                            ->onQueue($this->queueName)
                             ->delay(Carbon::now()->addSeconds(3))
                     );
 
@@ -250,15 +231,13 @@ class HelpScoutEventListener
             $user = $newSubscription->getUser();
 
             if ($user instanceof EcommerceUser) {
-                $user = $this->userService->getByEmailOrNull($user->id);
+                $user = $this->userService->getByEmailOrNull($user->getId());
             }
 
             if ($user instanceof User) {
                 if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
                     dispatch(
                         (new HelpScoutUpdateUser($user))
-                            ->onConnection($this->queueConnectionName)
-                            ->onQueue($this->queueName)
                             ->delay(Carbon::now()->addSeconds(3))
                     );
 
@@ -286,15 +265,13 @@ class HelpScoutEventListener
                 $user = $subscriptionRenewed->getSubscription()->getUser();
 
                 if ($user instanceof EcommerceUser) {
-                    $user = $this->userService->getByEmailOrNull($user->id);
+                    $user = $this->userService->getByEmailOrNull($user->getId());
                 }
 
                 if ($user instanceof User) {
                     if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
                         dispatch(
                             (new HelpScoutUpdateUser($user))
-                                ->onConnection($this->queueConnectionName)
-                                ->onQueue($this->queueName)
                                 ->delay(Carbon::now()->addSeconds(3))
                         );
 
@@ -324,15 +301,13 @@ class HelpScoutEventListener
                 $user = $subscriptionRenewFailed->getSubscription()->getUser();
 
                 if ($user instanceof EcommerceUser) {
-                    $user = $this->userService->getByEmailOrNull($user->id);
+                    $user = $this->userService->getByEmailOrNull($user->getId());
                 }
 
                 if ($user instanceof User) {
                     if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
                         dispatch(
                             (new HelpScoutUpdateUser($user))
-                                ->onConnection($this->queueConnectionName)
-                                ->onQueue($this->queueName)
                                 ->delay(Carbon::now()->addSeconds(3))
                         );
 

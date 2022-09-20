@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use Throwable;
 
 class CustomerIoSendTransactionalEmail extends CustomerIoBaseJob
 {
@@ -47,8 +48,6 @@ class CustomerIoSendTransactionalEmail extends CustomerIoBaseJob
         CustomerIoService $customerIoService
     ) {
         try {
-            $this->reconnectToMySQLDatabases();
-
             $customerIoService->sendTransactionalEmail(
                 $this->accountName,
                 $this->customerIoTransactionalMessageId,
@@ -63,9 +62,9 @@ class CustomerIoSendTransactionalEmail extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on CustomerIoSendTransactionalEmail job trying send an email from customer.io. '.
