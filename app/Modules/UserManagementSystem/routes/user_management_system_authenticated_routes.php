@@ -133,11 +133,6 @@ Route::group(
             'is-display-name-unique',
             UserController::class . '@isDisplayNameUnique'
         );
-
-        Route::get(
-            'is-email-unique',
-            UserController::class . '@isEmailUnique'
-        );
     }
 );
 
