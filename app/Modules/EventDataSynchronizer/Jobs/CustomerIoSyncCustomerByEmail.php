@@ -43,8 +43,6 @@ class CustomerIoSyncCustomerByEmail extends CustomerIoBaseJob
     public function handle(CustomerIoService $customerIoService)
     {
         try {
-            $this->reconnectToMySQLDatabases();
-
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
 
@@ -73,9 +71,9 @@ class CustomerIoSyncCustomerByEmail extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on CustomerIoSyncCustomerByEmail job trying to sync customer to customer.io. Email: '.
