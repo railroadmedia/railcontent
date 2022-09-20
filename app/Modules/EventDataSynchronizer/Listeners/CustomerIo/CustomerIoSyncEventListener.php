@@ -105,13 +105,14 @@ class CustomerIoSyncEventListener
      * @param PostRepository $postRepository
      */
     public function __construct(
-        UserService $userService,
-        CommentRepository $commentRepository,
+        UserService        $userService,
+        CommentRepository  $commentRepository,
         CategoryRepository $categoryRepository,
-        ThreadRepository $threadRepository,
-        PostRepository $postRepository,
-        ContentService $contentService
-    ) {
+        ThreadRepository   $threadRepository,
+        PostRepository     $postRepository,
+        ContentService     $contentService
+    )
+    {
         $this->userService = $userService;
 
         $this->queueConnectionName = config('event-data-synchronizer.customer_io_queue_connection_name', 'database');
@@ -1211,17 +1212,7 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            dispatch(
-                (new CustomerIoSyncMentor(
-                    $studentMentorsUpdated->mentorStudentData
-                ))
-                    ->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-            );
+            dispatch(new CustomerIoSyncMentor($studentMentorsUpdated->mentorStudentData));
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
