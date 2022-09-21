@@ -1,8 +1,8 @@
 name: Automated Testing
 
 on:
-  pull_request:
-    branches: [ "web-staging-four" ]
+  push:
+    branches: [ "fix-test-robwillems" ]
 
 jobs:
   laravel-tests:
