@@ -5,7 +5,7 @@ on:
     branches: [ web-staging-four ]
 
 jobs:
-  deploy-web-staging-four:
+  run-automated-tests:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/web-staging-four'
     steps:
