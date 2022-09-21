@@ -96,7 +96,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'last_name' => $user->last_name,
             'avatarUrl' => $user->profile_picture_url,
             'profile_picture_url' => $user->profile_picture_url,
-            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id'),
+            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand() ),
             'level_rank' => $user->getMethodLevel(),
         ];
     }
