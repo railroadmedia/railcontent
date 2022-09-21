@@ -55,6 +55,7 @@
             @if(!empty($resetProgress) && $resetProgress === true)
                 <div class="flex flex-column button-col">
                     <button class="resetProgress btn" title="Reset Progress"
+                            tile="Reset Progress"
                             data-content-id="{{ $contentId }}"
                             data-brand="{{ $brand }}">
                         <span class="text-white bg-white inverted">
