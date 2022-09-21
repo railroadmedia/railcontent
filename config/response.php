@@ -158,6 +158,7 @@ return [
         'pack-bundle' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'completed',
@@ -400,6 +401,7 @@ return [
             'id',
             'data.thumbnail_url',
             'type',
+            'url',
             'published_on',
             'status',
             'fields.title',
@@ -453,6 +455,7 @@ return [
         'course-part' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -546,6 +549,7 @@ return [
         'play-along' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -654,6 +658,7 @@ return [
         'play-along-part' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -749,6 +754,7 @@ return [
             'ranges',
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -829,6 +835,7 @@ return [
             'ranges',
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -894,6 +901,7 @@ return [
         'coach-stream' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -1025,6 +1033,7 @@ return [
         'live-schedule' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'fields.live_event_start_time',
             'fields.live_event_end_time',
@@ -1051,6 +1060,7 @@ return [
         'live' => [
             'id',
             'type',
+            'url',
             'isLive',
             'fields.title',
             'fields.live_event_start_time',
@@ -1082,6 +1092,7 @@ return [
         'pack' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'mobile_app_url',
@@ -1132,6 +1143,7 @@ return [
         'semester-pack' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'url',
@@ -1183,6 +1195,7 @@ return [
         'semester-pack-lesson' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'data.thumbnail_url',
@@ -1307,6 +1320,7 @@ return [
         'learning-path' => [
             'id',
             'started',
+            'url',
             'completed',
             'level_rank',
             'fields.title',
@@ -1367,6 +1381,7 @@ return [
             'id',
             'type',
             'fields.title',
+            'url',
             'fields.video.fields.vimeo_video_id',
             'fields.video.fields.youtube_video_id',
             '*fields.instructor',
@@ -1433,6 +1448,7 @@ return [
         'learning-path-course' => [
             'id',
             'type',
+            'url',
             'is_added_to_primary_playlist',
             'started',
             'completed',
@@ -1491,6 +1507,7 @@ return [
         'learning-path-lesson' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'mobile_app_url',
             'fields.video.fields.length_in_seconds',
@@ -1589,6 +1606,7 @@ return [
         'student-focus' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -1677,6 +1695,7 @@ return [
         'show-lesson' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -1873,6 +1892,7 @@ return [
         'quick-tips' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
@@ -1961,6 +1981,7 @@ return [
         'chord-and-scale' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'data.thumbnail_url',
@@ -2033,6 +2054,7 @@ return [
         'rudiment' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'data.thumbnail_url',
@@ -2129,6 +2151,7 @@ return [
         'podcasts' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'data.thumbnail_url',
@@ -2225,6 +2248,7 @@ return [
         'boot-camps' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'data.thumbnail_url',
@@ -2322,6 +2346,7 @@ return [
         'unit' => [
             'id',
             'type',
+            'url',
             'is_added_to_primary_playlist',
             'started',
             'completed',
@@ -2365,6 +2390,7 @@ return [
         'unit-part' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'fields.video.fields.vimeo_video_id',
@@ -2489,6 +2515,7 @@ return [
         'recording' => [
             'id',
             'type',
+            'url',
             'published_on',
             'completed',
             'started',
