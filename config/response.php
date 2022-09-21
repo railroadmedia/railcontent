@@ -304,6 +304,7 @@ return [
         'pack-bundle-lesson' => [
             'id',
             'type',
+            'url',
             'fields.title',
             'data.description',
             'data.thumbnail_url',
