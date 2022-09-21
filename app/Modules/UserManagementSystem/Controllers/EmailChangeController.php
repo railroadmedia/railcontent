@@ -35,8 +35,7 @@ class EmailChangeController extends Controller
      */
     public function __construct(
         Hasher $hasher,
-    )
-    {
+    ) {
         $this->hasher = $hasher;
     }
 
@@ -51,7 +50,9 @@ class EmailChangeController extends Controller
         try {
             $request->validate([
                 'email' => [
-                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore(user()->id),
+                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore(
+                        user()->id
+                    ),
                     'email',
                     'max:255'
                 ],
@@ -131,8 +132,6 @@ class EmailChangeController extends Controller
     public function confirm(Request $request)
     {
         try {
-            //todo: check if <code> <exists> also!
-//            $validationRules = ['code' => 'bail|required|string|exists'];
             $validationRules = ['code' => 'bail|required|string'];
             $this->validate(
                 $request,
@@ -161,15 +160,13 @@ class EmailChangeController extends Controller
             return redirect()->back()->withErrors(['error-message' => 'Token is invalid']);
         }
 
-        // todo: email_change_token_ttl should be declared in a config file
         if (Carbon::parse(
                 $emailChange->updated_at
                     ->format('Y-m-d H:i:s')
             ) <
             Carbon::now()
-//                ->subHours(config('usora.email_change_token_ttl')))
-                ->subHours(24)) {
-            {
+                ->subHours(config('user_management_system.email_change_token_ttl'))) {
+                {
                 return redirect()
                     ->back()
                     ->withErrors(['code' => 'Your email reset code has expired.']);
@@ -192,16 +189,17 @@ class EmailChangeController extends Controller
             ),
         ];
 
-        //todo: define route of redirect!
         return $request->has('redirect_to') ?
             redirect()
                 ->away($request->get('redirect'))
                 ->with($message) :
             redirect()
-                ->to(route('platform.profile.settings.login-credentials', [
-                    'userId' => $user->id,
-                    'brand' => $emailChange->brand
-                ]))
+                ->to(
+                    route('platform.profile.settings.login-credentials', [
+                        'userId' => $user->id,
+                        'brand' => $emailChange->brand
+                    ])
+                )
                 ->with($message);
     }
 
@@ -224,7 +222,7 @@ class EmailChangeController extends Controller
      */
     public function sendEmailChangeNotification($token, $email)
     {
-        (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $email)
+        (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $email)
             ->notify(new EmailChangeNotification($token));
     }
 }

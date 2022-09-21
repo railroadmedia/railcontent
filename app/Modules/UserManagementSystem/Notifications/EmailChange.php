@@ -40,7 +40,7 @@ class EmailChange extends Notification
      */
     public function via($notifiable)
     {
-        return 'mail';
+        return config('user_management_system.email_change_notification_channel');
     }
 
     /**

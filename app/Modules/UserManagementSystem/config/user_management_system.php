@@ -38,4 +38,8 @@ return [
 
     // password reset
     'login_success_redirect_path' => '/members',
+
+    // email change
+    'email_change_token_ttl' => 24, // hours unit
+    'email_change_notification_channel' => 'mail',
 ];
