@@ -42,4 +42,5 @@ return [
     // email change
     'email_change_token_ttl' => 24, // hours unit
     'email_change_notification_channel' => 'mail',
+    'email_change_notification_class' => Modules\UserManagementSystem\Notifications\EmailChange::class,
 ];

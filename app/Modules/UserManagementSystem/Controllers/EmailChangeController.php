@@ -69,7 +69,7 @@ class EmailChangeController extends Controller
             $default = 'Please try again, and contact support if the problem persists.';
             $message = ['error-message' => ($errorMessageToUser ?? $default)];
 
-            return redirect()->back()->with($message);
+            return redirect()->back()->withErrors($message);
         }
         $user = user();
 
@@ -166,11 +166,11 @@ class EmailChangeController extends Controller
             ) <
             Carbon::now()
                 ->subHours(config('user_management_system.email_change_token_ttl'))) {
-                {
+// todo: error message does not appear
                 return redirect()
                     ->back()
-                    ->withErrors(['code' => 'Your email reset code has expired.']);
-            }
+                    ->withErrors(['error-message' => 'Your email reset code has expired.']);
+
         }
 
         $user = User::find($emailChange->user_id);
@@ -222,7 +222,8 @@ class EmailChangeController extends Controller
      */
     public function sendEmailChangeNotification($token, $email)
     {
+        $class = config('user_management_system.email_change_notification_class');
         (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $email)
-            ->notify(new EmailChangeNotification($token));
+            ->notify(new $class($token));
     }
 }
