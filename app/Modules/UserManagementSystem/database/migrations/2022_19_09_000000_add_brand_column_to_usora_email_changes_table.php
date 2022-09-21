@@ -14,7 +14,7 @@ class AddBrandColumnToUsoraEmailChangesTable extends Migration
     public function up()
     {
         Schema::table('usora_email_changes', function (Blueprint $table) {
-            $table->string('brand')->after('token');
+            $table->string('brand')->after('token')->default("drumeo");
         });
     }
 
