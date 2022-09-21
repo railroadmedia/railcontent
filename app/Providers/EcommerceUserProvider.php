@@ -107,7 +107,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
      */
     public function getCurrentUserId(): ?int
     {
-        return user()->id;
+        return user()->id ?? null;
     }
 
     /**
