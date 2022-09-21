@@ -366,6 +366,10 @@ return [
         '2' => 'DLM-1-year',
         '4' => 'DLM-1-month',
         'pack_1' => 'CC-DIGI',
+
+        //Musora app
+        'musora_monthly_subscription' => 'DLM-1-month',
+        'musora_annual_subscription' => 'DLM-1-year',
     ],
 
     // paypal
