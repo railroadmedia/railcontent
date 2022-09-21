@@ -6,7 +6,7 @@
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=19e8f216159491e9dc5c2dd83e4abb7c",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=a121116bf28ae9fddf985bb2860bc9a9",
-    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=2cb6cdf4d68ab4ce703cbb67c210ec2e",
+    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=eab03459f98fe1540db599bc1d67b7f7",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=f516461955a39967715aea2b616222ff",
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=8e061ca5fc044cc7e3d242ab60c287a6",
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=81a9404cd71a68b793e020b62446c1e8",
@@ -21,5 +21,7 @@
     "/platform/css/app.css": "/platform/css/app.css?id=4bd53eeadef9b44b308fd6c8d94b5a99",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=ff513fe34d3c22e27ef3360b1c99f082",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=06bd17392a8e2ba533590638828d4872",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=b6f4622043548c7d9574ee3a472e8182"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=b6f4622043548c7d9574ee3a472e8182",
+    "/marketing/js/app.js": "/marketing/js/app.js?id=f3d5fcc2a88ba12fcd88bedf73ebd955",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=a6e353aa93088e9910fe4f4885974fa1"
 }

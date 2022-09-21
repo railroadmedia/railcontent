@@ -2,7 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
-use Illuminate\Auth\AuthenticationException;
+use Carbon\Carbon;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -57,6 +57,57 @@ class AuthenticationController extends Controller
         if ($passedCheck) {
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
 
+            auth()->login($user, $remember);
+
+            event(new UserEvent($user->id, 'authenticated'));
+
+            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
+        }
+
+        return redirect()
+            ->to(
+                config('user_management_system.login_page_path') .
+                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+            )
+            ->withErrors(
+                ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
+            );
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    public function loginGeneratedKey(Request $request)
+    {
+        $remember = false;
+
+        if (config('user_management_system.force_remember', false) == true ||
+            (boolean)$request->get('remember', false) == true) {
+            $remember = true;
+        }
+
+        $request->attributes->set('remember', $remember);
+
+        $userId = $request->get('user_id', '');
+        $key = $request->get('key', '');
+
+        $user = User::query()->findOrFail($userId);
+        $passedCheck = false;
+        $i = 0;
+
+        // key expires after 12 hours
+        while ($i < 12) {
+            $hash = md5($user->id . $user->password . Carbon::now()->startOfHour()->subHours($i)->toDateTimeString());
+
+            if ($hash === $key) {
+                $passedCheck = true;
+                break;
+            }
+
+            $i++;
+        }
+
+        if ($passedCheck) {
             auth()->login($user, $remember);
 
             event(new UserEvent($user->id, 'authenticated'));
