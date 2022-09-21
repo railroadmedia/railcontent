@@ -24,17 +24,6 @@ class CustomerIOSyncUser extends Command
      */
     protected $description = 'Sync provided users customer io data';
 
-    private $queueConnectionName = 'database';
-    private $queueName = 'usorahelpscout';
-
-    public function __construct(
-    ) {
-        parent::__construct();
-
-        $this->queueConnectionName = config('event-data-synchronizer.customer_io_queue_connection_name', 'database');
-        $this->queueName = config('event-data-synchronizer.customer_io_queue_name', 'usorahelpscout');
-    }
-
     /**
      * Execute the console command.
      *
@@ -44,13 +33,7 @@ class CustomerIOSyncUser extends Command
     {
         $userId = $this->argument('user');
         $user = $userService->getByIdOrNull($userId);
-        dispatch(
-            (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                ->onQueue($this->queueName)
-                ->delay(
-                    Carbon::now()
-                        ->addSeconds(3)
-                )
-        );
+        dispatch((new CustomerIoSyncUserByUserId($user))
+            ->delay(Carbon::now()->addSeconds(3)));
     }
 }

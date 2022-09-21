@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface as EventDataSynchronizerUserProviderInterface;
+use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as ArrayHydratorUserProviderInterface;
 use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
@@ -47,6 +48,9 @@ class AppServiceProvider extends ServiceProvider
         //        );
 
         $this->app->singleton(EcommerceUserProviderInterface::class, function ($app) {
+            return $app->make(EcommerceUserProvider::class);
+        });
+        $this->app->singleton(ArrayHydratorUserProviderInterface::class, function ($app) {
             return $app->make(EcommerceUserProvider::class);
         });
 

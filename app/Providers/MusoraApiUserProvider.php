@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\FirebaseToken;
+use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
