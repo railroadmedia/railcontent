@@ -16,4 +16,11 @@ export const instrumentBrand = {
     default: 'drumeo'
 };
 
+export const brandInstrument = {
+    pianote: 'piano',
+    drumeo: 'drums',
+    guitareo: 'guitar',
+    singeo: 'singing',
+};
+
 export const brands = ['drumeo', 'singeo', 'pianote', 'guitareo'];

@@ -82,10 +82,6 @@ class CustomerIoSyncEventListener
      */
     private $contentService;
 
-    private $queueConnectionName;
-
-    private $queueName;
-
     /**
      * @var bool
      */
@@ -113,9 +109,6 @@ class CustomerIoSyncEventListener
         ContentService $contentService
     ) {
         $this->userService = $userService;
-
-        $this->queueConnectionName = config('event-data-synchronizer.customer_io_queue_connection_name', 'database');
-        $this->queueName = config('event-data-synchronizer.customer_io_queue_name', 'customer_io');
         $this->commentRepository = $commentRepository;
         $this->categoryRepository = $categoryRepository;
         $this->threadRepository = $threadRepository;
@@ -141,12 +134,10 @@ class CustomerIoSyncEventListener
                     self::$alreadyQueuedUserIds
                 )) {
                 dispatch(
-                    (new CustomerIoSyncNewUserByEmail($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncNewUserByEmail($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] =
@@ -175,12 +166,10 @@ class CustomerIoSyncEventListener
                     self::$alreadyQueuedUserIds
                 )) {
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
@@ -236,12 +225,10 @@ class CustomerIoSyncEventListener
                 $user = $this->userService->getByIdOrNull($userId);
 
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
@@ -268,12 +255,10 @@ class CustomerIoSyncEventListener
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
@@ -300,12 +285,10 @@ class CustomerIoSyncEventListener
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
@@ -332,12 +315,10 @@ class CustomerIoSyncEventListener
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
@@ -370,12 +351,10 @@ class CustomerIoSyncEventListener
 
                 if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
                     dispatch(
-                        (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                            ->onQueue($this->queueName)
-                            ->delay(
-                                Carbon::now()
-                                    ->addSeconds(3)
-                            )
+                        (new CustomerIoSyncUserByUserId($user))->delay(
+                            Carbon::now()
+                                ->addSeconds(3)
+                        )
                     );
 
                     self::$alreadyQueuedUserIds[] = $user->id;
@@ -409,12 +388,10 @@ class CustomerIoSyncEventListener
             if ($user instanceof User) {
                 if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
                     dispatch(
-                        (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                            ->onQueue($this->queueName)
-                            ->delay(
-                                Carbon::now()
-                                    ->addSeconds(3)
-                            )
+                        (new CustomerIoSyncUserByUserId($user))->delay(
+                            Carbon::now()
+                                ->addSeconds(3)
+                        )
                     );
 
                     self::$alreadyQueuedUserIds[] = $user->id;
@@ -516,12 +493,10 @@ class CustomerIoSyncEventListener
                         'content_name' => $content->fetch('fields.title'),
                         'content_type' => $content['type'],
                     ], null, Carbon::now()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -551,12 +526,10 @@ class CustomerIoSyncEventListener
                         'content_name' => $content->fetch('fields.title'),
                         'content_type' => $content['type'],
                     ], null, Carbon::now()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -593,12 +566,10 @@ class CustomerIoSyncEventListener
                         [],
                         null,
                         Carbon::now()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -639,12 +610,10 @@ class CustomerIoSyncEventListener
                         [],
                         null,
                         Carbon::now()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -697,12 +666,10 @@ class CustomerIoSyncEventListener
                             $data,
                             null,
                             Carbon::now()->timestamp
-                        ))->onConnection($this->queueConnectionName)
-                            ->onQueue($this->queueName)
-                            ->delay(
-                                Carbon::now()
-                                    ->addSeconds(3)
-                            )
+                        ))->delay(
+                            Carbon::now()
+                                ->addSeconds(3)
+                        )
                     );
                 }
 
@@ -722,12 +689,10 @@ class CustomerIoSyncEventListener
                             $data,
                             null,
                             Carbon::now()->timestamp
-                        ))->onConnection($this->queueConnectionName)
-                            ->onQueue($this->queueName)
-                            ->delay(
-                                Carbon::now()
-                                    ->addSeconds(3)
-                            )
+                        ))->delay(
+                            Carbon::now()
+                                ->addSeconds(3)
+                        )
                     );
                 }
 
@@ -768,12 +733,10 @@ class CustomerIoSyncEventListener
                         $data,
                         null,
                         Carbon::now()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -835,12 +798,10 @@ class CustomerIoSyncEventListener
                     [],
                     null,
                     Carbon::now()->timestamp
-                ))->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
             );
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -868,12 +829,10 @@ class CustomerIoSyncEventListener
 
             if (!empty($user) && !in_array($userId, self::$alreadyQueuedUserIds)) {
                 dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    (new CustomerIoSyncUserByUserId($user))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
@@ -914,12 +873,10 @@ class CustomerIoSyncEventListener
                         $data,
                         null,
                         $order->getCreatedAt()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(30)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(30)
+                    )
                 );
 
                 // trigger pack specific events
@@ -947,12 +904,10 @@ class CustomerIoSyncEventListener
                                 ],
                                 null,
                                 $order->getCreatedAt()->timestamp
-                            ))->onConnection($this->queueConnectionName)
-                                ->onQueue($this->queueName)
-                                ->delay(
-                                    Carbon::now()
-                                        ->addSeconds(30)
-                                )
+                            ))->delay(
+                                Carbon::now()
+                                    ->addSeconds(30)
+                            )
                         );
                     }
                 }
@@ -1015,12 +970,10 @@ class CustomerIoSyncEventListener
                         $data,
                         null,
                         $payment->getCreatedAt()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(30)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(30)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -1041,12 +994,10 @@ class CustomerIoSyncEventListener
                             ->getId(), $subscription->getBrand(), $subscription->getBrand() . '_membership_renewed', [
                         'membership_rate' => $subscription->getTotalPrice(),
                     ], null, $subscription->getCreatedAt()->timestamp
-                    ))->onConnection($this->queueConnectionName)
-                        ->onQueue($this->queueName)
-                        ->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(3)
+                    )
                 );
             }
         } catch (Throwable $throwable) {
@@ -1086,12 +1037,10 @@ class CustomerIoSyncEventListener
                     $data,
                     null,
                     Carbon::now()->timestamp
-                ))->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
             );
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -1126,12 +1075,10 @@ class CustomerIoSyncEventListener
                             ) => $emailInvite->getReferralLink()
                         ]
                     ]
-                ))->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
             );
 
             dispatch(
@@ -1140,12 +1087,10 @@ class CustomerIoSyncEventListener
                     $emailInvite->getReceiversEmail(),
                     null,
                     $emailInvite->getBrand() . config('event-data-synchronizer.customer_io_saasquatch_email_invite_event_name')
-                ))->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(10)
-                    )
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(10)
+                )
             );
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -1191,12 +1136,10 @@ class CustomerIoSyncEventListener
                     'id' => $token,
                     'platform' => $platform,
                 ], $timestamp ?? Carbon::now()->timestamp
-                ))->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
             );
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -1211,17 +1154,8 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            dispatch(
-                (new CustomerIoSyncMentor(
-                    $studentMentorsUpdated->mentorStudentData
-                ))
-                    ->onConnection($this->queueConnectionName)
-                    ->onQueue($this->queueName)
-                    ->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-            );
+            dispatch((new CustomerIoSyncMentor($studentMentorsUpdated->mentorStudentData))
+                ->delay(Carbon::now()->addSeconds(3)));
         } catch (Throwable $throwable) {
             error_log($throwable);
         }

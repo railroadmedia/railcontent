@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Modules\EventDataSynchronizer\Services\HelpScoutSyncService;
 use Modules\UserManagementSystem\Models\User;
 use App\Modules\UserManagementSystem\Services\UserService;
+use Throwable;
 
 class HelpScoutUpdateUser implements ShouldQueue
 {
@@ -61,9 +62,9 @@ class HelpScoutUpdateUser implements ShouldQueue
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on HelpScoutUpdateUser job trying to sync user to helpscout. User ID: '.

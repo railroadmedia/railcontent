@@ -9,6 +9,7 @@ use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Services\UserProductService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoSyncService;
 use Modules\UserManagementSystem\Models\User;
+use Throwable;
 
 class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
 {
@@ -33,8 +34,6 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
         UserProductService $userProductService
     ) {
         try {
-            $this->reconnectToMySQLDatabases();
-
             $this->user = $userService->getByIdOrNull($this->user->id);
             $accountNameBrandsToSync = config('event-data-synchronizer.customer_io_account_name_brands_to_sync', []);
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
@@ -73,9 +72,9 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on CustomerIoSyncUserById job trying to sync user to customer.io. User ID: '.

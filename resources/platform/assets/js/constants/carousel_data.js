@@ -3,6 +3,16 @@ export const testCarousel = [
         brand: 'drumeo',
         slides: [
             {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/drumeo/support",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
+            {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Drumeo Method",
                 ctaText: "Start Method",
@@ -10,14 +20,6 @@ export const testCarousel = [
                     "Exclusive curriculum so you’ll always know what to work on for maximum results.",
                 ctaUrl: "/drumeo/method/drumeo-method/241247",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/drumeo-method+1.jpg",
-            },
-            {
-                topSubtitle: "Featured Coach",
-                title: "Dennis Chambers",
-                ctaText: "Visit Dennis's Coach Page",
-                description: "Dennis Chambers is a drumming legend who has recorded and performed with artists such as Santana, Steely Dan, Parliament/Funkadelic, and many more.",
-                ctaUrl: "/drumeo/coaches/dennis-chambers/31980",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/drumeo-chambers-coach.jpg",
             },
             {
                 topSubtitle: "Popular Songs in All Genres",
@@ -40,6 +42,16 @@ export const testCarousel = [
     {
         brand: 'pianote',
         slides: [
+            {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/pianote/support",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
             {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Pianote Method",
@@ -79,6 +91,16 @@ export const testCarousel = [
         brand: 'guitareo',
         slides: [
             {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/guitareo/support",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
+            {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Guitareo Method",
                 ctaText: "Start Method",
@@ -116,6 +138,16 @@ export const testCarousel = [
     {
         brand: 'singeo',
         slides: [
+            {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/singeo/support",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
             {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Singeo Method",

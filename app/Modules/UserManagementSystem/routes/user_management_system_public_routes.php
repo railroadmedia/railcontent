@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\AuthenticationController;
 use Modules\UserManagementSystem\Controllers\ForgotPasswordController;
 use Modules\UserManagementSystem\Controllers\ResetPasswordController;
+use Modules\UserManagementSystem\Controllers\UserController;
 
 
 Route::group(
@@ -16,7 +17,7 @@ Route::group(
             'login/token',
             AuthenticationController::class . '@loginToken',
         )->middleware(     [
-//            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
+            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
             \Railroad\MusoraApi\Middleware\AddMemberData::class,
         ])
             ->name('user_management_system.login.token');
@@ -56,6 +57,11 @@ Route::group(
             ResetPasswordController::class . '@resetPasswordWithToken'
         )
             ->name('user_management_system.password.reset-password-with-token');
+
+        Route::get(
+            'is-email-unique',
+            UserController::class . '@isEmailUnique'
+        );
 
     }
 );

@@ -23382,6 +23382,14 @@ a:visited{
   padding-left: 36px !important;
   padding-right: 36px !important;
 }
+.tw-px-\[12px\]{
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+.tw-py-\[9px\]{
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
 .tw-px-0\.5{
   padding-left: 0.125rem !important;
   padding-right: 0.125rem !important;
@@ -23430,10 +23438,6 @@ a:visited{
   padding-left: 13px !important;
   padding-right: 13px !important;
 }
-.tw-py-\[9px\]{
-  padding-top: 9px !important;
-  padding-bottom: 9px !important;
-}
 .tw-px-\[32px\]{
   padding-left: 32px !important;
   padding-right: 32px !important;
@@ -23445,10 +23449,6 @@ a:visited{
 .tw-py-\[32px\]{
   padding-top: 32px !important;
   padding-bottom: 32px !important;
-}
-.tw-px-\[12px\]{
-  padding-left: 12px !important;
-  padding-right: 12px !important;
 }
 .tw-px-\[25px\]{
   padding-left: 25px !important;
@@ -25673,11 +25673,11 @@ a:visited{
   .xl\:tw-max-w-\[665px\]{
     max-width: 665px !important;
   }
-  .xl\:tw-grid-cols-5{
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-  }
   .xl\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  .xl\:tw-grid-cols-5{
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   }
   .xl\:tw-grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
@@ -25702,6 +25702,17 @@ a:visited{
   }
   .xl\:tw-justify-center{
     justify-content: center !important;
+  }
+  .xl\:tw-gap-4{
+    gap: 1rem !important;
+  }
+  .xl\:tw-px-\[48px\]{
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+  .xl\:tw-py-\[12px\]{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
   }
   .xl\:tw-pr-8{
     padding-right: 2rem !important;
@@ -25770,6 +25781,9 @@ a:visited{
   .\32xl\:tw-max-w-none{
     max-width: none !important;
   }
+  .\32xl\:tw-grid-cols-5{
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
   .\32xl\:tw-grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
   }
@@ -25792,6 +25806,9 @@ a:visited{
 @media (min-width: 1815px){
   .\33xl\:tw-w-\[465px\]{
     width: 465px !important;
+  }
+  .\33xl\:tw-grid-cols-6{
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
   }
   .\33xl\:tw-grid-cols-8{
     grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
