@@ -7,7 +7,6 @@
 
     //Change the url on mount
     onMounted(() => {
-        console.log('StudentReview Iframe is mounted')
         srcUrl.value = props.url;
     });
 </script>

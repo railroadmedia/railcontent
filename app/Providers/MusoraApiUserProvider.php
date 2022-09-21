@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\FirebaseToken;
+use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
@@ -95,7 +96,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'last_name' => $user->last_name,
             'avatarUrl' => $user->profile_picture_url,
             'profile_picture_url' => $user->profile_picture_url,
-            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id'),
+            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand() ),
             'level_rank' => $user->getMethodLevel(),
         ];
     }
