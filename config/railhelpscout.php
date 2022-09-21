@@ -10,5 +10,11 @@ return [
         'app_secret' => env('HELPSCOUT_APP_SECRET'),
     ],
 
-    'helpscout_tracking_beacon_id' => env('HELPSCOUT_TRACKING_BEACON_ID'),
+    'helpscout_tracking_beacon_id' =>
+        [
+            'drumeo' => env('HELPSCOUT_TRACKING_BEACON_ID_DRUMEO'),
+            'pianote' => env('HELPSCOUT_TRACKING_BEACON_ID_PIANOTE'),
+            'guitareo' => env('HELPSCOUT_TRACKING_BEACON_ID_GUITAREO'),
+            'singeo' => env('HELPSCOUT_TRACKING_BEACON_ID_SINGEO'),
+        ]
 ];
