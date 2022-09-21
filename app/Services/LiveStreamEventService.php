@@ -63,7 +63,7 @@ class LiveStreamEventService
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
-        ContentUserProgressDecorator::$skip = true;
+//        ContentUserProgressDecorator::$skip = true;
 
         $requiredInstructor = !empty($instructorIds) ? ['key' => 'instructor', 'value' => $instructorIds] : [];
         $liveEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
