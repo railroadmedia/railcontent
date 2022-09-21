@@ -47,7 +47,7 @@ Route::group(
 //            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
 //            \Railroad\MusoraApi\Middleware\AddMemberData::class,
         ])
-            ->name('user_management_system.login.token');
+            ->name('user_management_system.login.generated-key');
 
         Route::post(
             'password/send-reset-email',
