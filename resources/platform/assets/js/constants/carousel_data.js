@@ -7,8 +7,8 @@ export const testCarousel = [
                 title: "INTRODUCING MUSORA",
                 ctaText: "DEVELOPER'S UPDATE",
                 description:
-                    "Be one of the first students to enjoy Musora: a unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing is available to members for a limited time only, so check out the new features and report any bugs below.",
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
                 ctaUrl: "/drumeo/support",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
@@ -47,8 +47,8 @@ export const testCarousel = [
                 title: "INTRODUCING MUSORA",
                 ctaText: "DEVELOPER'S UPDATE",
                 description:
-                    "Be one of the first students to enjoy Musora: a unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing is available to members for a limited time only, so check out the new features and report any bugs below.",
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
                 ctaUrl: "/pianote/support",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
@@ -95,8 +95,8 @@ export const testCarousel = [
                 title: "INTRODUCING MUSORA",
                 ctaText: "DEVELOPER'S UPDATE",
                 description:
-                    "Be one of the first students to enjoy Musora: a unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing is available to members for a limited time only, so check out the new features and report any bugs below.",
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
                 ctaUrl: "/guitareo/support",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
@@ -143,8 +143,8 @@ export const testCarousel = [
                 title: "INTRODUCING MUSORA",
                 ctaText: "DEVELOPER'S UPDATE",
                 description:
-                    "Be one of the first students to enjoy Musora: a unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing is available to members for a limited time only, so check out the new features and report any bugs below.",
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
                 ctaUrl: "/singeo/support",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
