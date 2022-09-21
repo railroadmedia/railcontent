@@ -26,17 +26,11 @@ class SynchUsoraHelpscout implements ShouldQueue
      */
     private $userId;
 
-    private $queueConnectionName = 'database';
-    private $queueName = 'usorahelpscout';
-
     const DELAY_SECONDS = 600;
 
     public function __construct(int $userId)
     {
         $this->userId = $userId;
-
-        $this->queueConnectionName = config('event-data-synchronizer.usora_helpscout_queue_connection_name', 'database');
-        $this->queueName = config('event-data-synchronizer.usora_helpscout_queue_name', 'usorahelpscout');
     }
 
     /**
@@ -118,8 +112,6 @@ class SynchUsoraHelpscout implements ShouldQueue
 
                                 dispatch(
                                     (new SynchUsoraHelpscout($userData->id))
-                                        ->onConnection($this->queueConnectionName)
-                                        ->onQueue($this->queueName)
                                         ->delay(Carbon::now()->addSeconds(self::DELAY_SECONDS))
                                 );
 

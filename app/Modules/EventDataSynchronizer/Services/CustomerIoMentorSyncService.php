@@ -14,12 +14,15 @@ class CustomerIoMentorSyncService
         $this->userService = $userService;
     }
 
-    public function getMentorAttributes(int $mentorUserId, string $primaryBrand): array
+    public function getMentorAttributes(?int $mentorUserId, ?string $primaryBrand): array
     {
-        $mentorUser = $this->userService->getByIdOrNull($mentorUserId);
+        $mentorUser = null;
+        if ($mentorUserId) {
+            $mentorUser = $this->userService->getByIdOrNull($mentorUserId);
+        }
         $data = [];
         $data['assigned_mentor_email'] = $mentorUser?->email ?? '';
-        $data['primary_brand'] = $primaryBrand;
+        $data['primary_brand'] = $primaryBrand ?? '';
         return $data;
     }
 }

@@ -53,13 +53,14 @@
             @endif
 
             @if(!empty($resetProgress) && $resetProgress === true)
-                <div class="tw-flex tw-flex-col button-col">
-                    <button class="resetProgress tw-btn-secondary tw-border-[3px] tw-transform-gpu tw-btn-circle tw-text-white {{ $isAdded ? 'added' : '' }}"
-                            title="Reset Progress"
+                <div class="flex flex-column button-col">
+                    <button class="resetProgress btn" title="Reset Progress"
+                            tile="Reset Progress"
                             data-content-id="{{ $contentId }}"
-                            data-brand="{{ $brand }}"
-                    >
-                        <i class="fas fa-redo-alt fa-flip-horizontal"></i>
+                            data-brand="{{ $brand }}">
+                        <span class="text-white bg-white inverted">
+                            <i class="fas fa-redo-alt fa-flip-horizontal"></i>
+                        </span>
                     </button>
                 </div>
             @endif

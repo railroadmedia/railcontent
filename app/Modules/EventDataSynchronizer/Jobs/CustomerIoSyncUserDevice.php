@@ -5,6 +5,7 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 use Exception;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\UserManagementSystem\Services\UserService;
+use Throwable;
 
 class CustomerIoSyncUserDevice extends CustomerIoBaseJob
 {
@@ -72,9 +73,9 @@ class CustomerIoSyncUserDevice extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param Exception $exception
+     * @param Throwable $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on CustomerIoSyncUserDevice job trying to sync user device to customer.io. User ID: ' .

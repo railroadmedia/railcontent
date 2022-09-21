@@ -41,7 +41,7 @@ const resetInterval = () => {
     } else {
       currentSlide.value = 0;
     }
-  }, 6000);
+  }, 15000);
 };
 
 const handleLeft = () => {
