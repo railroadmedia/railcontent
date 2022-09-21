@@ -40,6 +40,15 @@ Route::group(
         )
             ->name('user_management_system.logout.cookie');
 
+        Route::get(
+            'login/generated-key',
+            AuthenticationController::class . '@loginGeneratedKey',
+        )->middleware(     [
+//            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
+//            \Railroad\MusoraApi\Middleware\AddMemberData::class,
+        ])
+            ->name('user_management_system.login.token');
+
         Route::post(
             'password/send-reset-email',
             ForgotPasswordController::class . '@sendResetLinkEmail'
