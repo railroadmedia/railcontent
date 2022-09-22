@@ -8,6 +8,8 @@ class NotificationDecorator
     {
         if (app()->environment() == 'local') {
             $domain = 'devplatform.musora.com:8443';
+        } else {
+            $domain = env('APP_URL');
         }
 
         foreach ($notifications as $index => $notification) {
