@@ -94,5 +94,11 @@ return array(
         ],
     ],
 
-    'excludedOldForumsIds' => [3, 14, 13, 8]
+    'excludedOldForumsIds' => [3, 14, 13, 8],
+    'forum_rules_post_id' => [
+        'drumeo' => 4721,
+        'guitareo' => 1,
+        'singeo' => 3,
+        'pianote' => 1
+    ]
 );
