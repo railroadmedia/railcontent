@@ -134,7 +134,6 @@ class UserController extends Controller
         try {
             $request->validate([
                 'display_name' => [
-                    'required',
                     Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore($id),
                     'string',
                     'max:64',
@@ -293,7 +292,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->getMessageBag()], 422);
         }
-        $user = User::where('email', $request->email)->where('id' , '!=', user()->id)->first();
+        $user = User::where('email', $request->email)->first();
 
         if ($user) {
             return response()->json(['unique' => false]);

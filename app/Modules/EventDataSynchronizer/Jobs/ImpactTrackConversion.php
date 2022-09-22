@@ -61,9 +61,9 @@ class ImpactTrackConversion implements ShouldQueue
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log($exception);
     }

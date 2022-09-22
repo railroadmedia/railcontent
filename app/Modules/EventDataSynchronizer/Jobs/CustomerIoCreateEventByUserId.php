@@ -76,8 +76,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
         UserService $userService
     ) {
         try {
-            $this->reconnectToMySQLDatabases();
-
             $user = $userService->GetByIdOrNull($this->userId);
 
             $accountNameToSyncAllBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
@@ -90,8 +88,6 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
                     dispatch_now(new CustomerIoSyncNewUserByEmail($user));
 
                     sleep(5);
-
-                    $this->reconnectToMySQLDatabases();
 
                     $user = $userService->GetByIdOrNull($this->userId);
                 }
@@ -123,10 +119,10 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
     /**
      * The job failed to process.
      *
-     * @param  Exception  $exception
+     * @param  Throwable  $exception
      * @param $user
      */
-    public function failed(Exception $exception)
+    public function failed(Throwable $exception)
     {
         error_log(
             'Error on CustomerIoCreateEventByUserId job trying to sync user to customer.io. User ID: '.

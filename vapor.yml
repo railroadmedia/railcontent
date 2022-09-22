@@ -2,7 +2,9 @@ id: 31058
 name: musora-web-platform
 environments:
     production:
-        domain: 'production.musora.com'
+        domain:
+            - 'musora.com'
+            - 'production.musora.com'
         runtime: docker
         gateway-version: 2
         memory: 1728

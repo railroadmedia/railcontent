@@ -7,7 +7,7 @@
            :class="displayInline ? 'flex-row' : 'flex-column'"
         >
             <!-- Thumbnail Section -->
-            <a :href="renderLink ? item.url : false"
+            <a :href="renderLink ? item.url : null"
                class="no-decoration flex flex-column"
                :class="[
                     {'thumbnail-col': displayInline}, 
@@ -57,7 +57,7 @@
 
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
-                <a :href="renderLink ? item.url : false" 
+                <a :href="renderLink ? item.url : null" 
                    class="card-info flex flex-column tw-p-1 tw-rounded-lg"
                    :class="displayInline ? 'align-v-center' : 'tw-py-2'"
                 >

@@ -140,7 +140,7 @@ class ContentPagesController extends BaseController
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', $defaultPage),
-            $sortOverride ?? '-published_on',
+            $sortOverride ?? $request->get('sort', '-published_on'),
             [$lessonType],
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
