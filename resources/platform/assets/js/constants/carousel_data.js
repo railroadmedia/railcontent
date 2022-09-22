@@ -9,7 +9,7 @@ export const testCarousel = [
                 description:
                     "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
                     "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/drumeo/support",
+                ctaUrl: "/drumeo/forums/drumeo-website-feedback/6/musora-early-access/13736",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
             {
@@ -49,7 +49,7 @@ export const testCarousel = [
                 description:
                     "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
                     "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/pianote/support",
+                ctaUrl: "/pianote/forums/platform-update-feedback-discussion/5/musora-early-access/3889?sortby_val=-published_on",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
             {
@@ -97,7 +97,7 @@ export const testCarousel = [
                 description:
                     "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
                     "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/guitareo/support",
+                ctaUrl: "/guitareo/forums/website-update-and-feedback-discussion/6/musora-early-access/2674?sortby_val=-published_on",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
             {
@@ -145,7 +145,7 @@ export const testCarousel = [
                 description:
                     "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
                     "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/singeo/support",
+                ctaUrl: "/singeo/forums/platform-update-feedback-discussion/5/musora-early-access/484?sortby_val=-published_on",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
             {
