@@ -92,7 +92,7 @@ export default {
         },
         timezone: {
             type: String,
-        },
+        },$chapter['chapter_timecode']
     },
     data() {
         return {
@@ -103,11 +103,11 @@ export default {
 
         time_to_display() {
             // time_to_display method should display live_event_start_time_in_timezone or published_on_in_timezone if exists
-            return this.item.published_on_in_timezone ? this.item.published_on_in_timezone : this.item.live_event_start_time_in_timezone;
+            return this.item.live_event_start_time_in_timezone ? this.item.live_event_start_time_in_timezone : this.item.published_on_in_timezone;
         },
 
         formatted_time() {
-            return new Date(this.time_to_display).toISOString().slice(0, 19).replace('T', ' ')
+            return new Date(this.time_to_display + 'Z').toISOString().slice(0, 19).replace('T', ' ')
         },
 
         month() {
