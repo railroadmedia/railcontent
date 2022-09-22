@@ -30,13 +30,22 @@ jobs:
         run: |
           mkdir -p database
           touch database/database.sqlite
-      - name: Execute Unit Tests via PHPUnit
+      - name: Execute Tests via PHPUnit
+        uses: php-actions/phpunit@v3
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: vendor/bin/phpunit --testsuite Unit
-      - name: Execute Feature tests via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
-        run: vendor/bin/phpunit --testsuite Feature
+        with:
+          bootstrap: vendor/autoload.php
+          configuration: phpunit.xml
+          args: --testsuite Feature
+#      - name: Execute Unit Tests via PHPUnit
+#        env:
+#          DB_CONNECTION: sqlite
+#          DB_DATABASE: database/database.sqlite
+#        run: vendor/bin/phpunit --testsuite Unit
+#      - name: Execute Feature tests via PHPUnit
+#        env:
+#          DB_CONNECTION: sqlite
+#          DB_DATABASE: database/database.sqlite
+#        run: vendor/bin/phpunit --testsuite Feature
