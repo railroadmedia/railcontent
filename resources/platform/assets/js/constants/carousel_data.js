@@ -70,14 +70,6 @@ export const testCarousel = [
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-erskine_coach+1.jpg",
             },
             {
-                topSubtitle: "Popular Songs in All Genres",
-                title: "Songs",
-                ctaText: "See the latest songs",
-                description:"Full transcriptions, loops, and practice tools for music by popular bands of all eras and styles.",
-                ctaUrl: "/pianote/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/songs.jpg",
-            },
-            {
                 topSubtitle: "Learn from the legends",
                 title: "Coaches",
                 ctaText: "See Coaches",
@@ -118,14 +110,6 @@ export const testCarousel = [
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/guitareo-sami_coach.jpg",
             },
             {
-                topSubtitle: "Popular Songs in All Genres",
-                title: "Songs",
-                ctaText: "See the latest songs",
-                description:"Play popular songs faster with access to chord charts for every style, era, and skill level.",
-                ctaUrl: "/guitareo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/songs.jpg",
-            },
-            {
                 topSubtitle: "Learn from the legends",
                 title: "Coaches",
                 ctaText: "See Coaches",
@@ -164,14 +148,6 @@ export const testCarousel = [
                 description: "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent who has a very important message on singing your truth.",
                 ctaUrl: "/singeo/coaches/shela/347694",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/singeo-shelea-coach.jpg",
-            },
-            {
-                topSubtitle: "Popular Songs in All Genres",
-                title: "Songs",
-                ctaText: "See the latest songs",
-                description:"Sing along to songs by popular singers of all eras and styles in our extensive Karaoke library.",
-                ctaUrl: "/singeo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/songs.jpg",
             },
             {
                 topSubtitle: "Learn from the legends",
