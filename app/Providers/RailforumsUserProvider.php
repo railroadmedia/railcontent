@@ -164,7 +164,7 @@ class RailforumsUserProvider implements UserProviderInterface
             $userModel->getAttributes()['total_xp'] ?? 0,
             $userModel->getXpRank(),
             $userModel->getMethodLevel(),
-           $userModel->getAttributes()['access_level']
+           $userModel->getAttributes()['access_level'] ?? ''
         );
     }
 }

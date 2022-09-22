@@ -27,7 +27,7 @@ return array(
     'forums_index_page_url' => '/brand/forums',
 
     // host does the db migrations, clients do not
-    'data_mode' => 'client', // 'host' or 'client'
+    'data_mode' => 'host', // 'host' or 'client'
 
     // cache
     'cache_driver' => 'array',
