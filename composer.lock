@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.235.12",
+            "version": "3.235.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e0ebecfb0284dc44dc99a172cd9c68c40739904c"
+                "reference": "a3a5711c00673d18b571199858ffee95296c5f0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e0ebecfb0284dc44dc99a172cd9c68c40739904c",
-                "reference": "e0ebecfb0284dc44dc99a172cd9c68c40739904c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a3a5711c00673d18b571199858ffee95296c5f0d",
+                "reference": "a3a5711c00673d18b571199858ffee95296c5f0d",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.12"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.13"
             },
-            "time": "2022-09-20T18:18:07+00:00"
+            "time": "2022-09-21T19:19:51+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2547,16 +2547,16 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "v3.8.0",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine-extensions/DoctrineExtensions.git",
-                "reference": "4ba5377b1a1d9a988205c4e37f5d5287eb8ebd28"
+                "reference": "d869cf11f12995b27fa6486ec2a860cc76c46988"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine-extensions/DoctrineExtensions/zipball/4ba5377b1a1d9a988205c4e37f5d5287eb8ebd28",
-                "reference": "4ba5377b1a1d9a988205c4e37f5d5287eb8ebd28",
+                "url": "https://api.github.com/repos/doctrine-extensions/DoctrineExtensions/zipball/d869cf11f12995b27fa6486ec2a860cc76c46988",
+                "reference": "d869cf11f12995b27fa6486ec2a860cc76c46988",
                 "shasum": ""
             },
             "require": {
@@ -2583,7 +2583,7 @@
                 "doctrine/doctrine-bundle": "^2.3",
                 "doctrine/mongodb-odm": "^2.3",
                 "doctrine/orm": "^2.10.2",
-                "friendsofphp/php-cs-fixer": "^3.4.0",
+                "friendsofphp/php-cs-fixer": "^3.4.0,<3.10",
                 "nesbot/carbon": "^2.55",
                 "phpstan/phpstan": "^1.1",
                 "phpstan/phpstan-doctrine": "^1.0",
@@ -2601,7 +2601,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.8-dev"
+                    "dev-main": "3.10-dev"
                 }
             },
             "autoload": {
@@ -2647,10 +2647,10 @@
             "support": {
                 "email": "gediminas.morkevicius@gmail.com",
                 "issues": "https://github.com/doctrine-extensions/DoctrineExtensions/issues",
-                "source": "https://github.com/doctrine-extensions/DoctrineExtensions/tree/v3.8.0",
+                "source": "https://github.com/doctrine-extensions/DoctrineExtensions/tree/v3.9.0",
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
-            "time": "2022-07-17T12:04:16+00:00"
+            "time": "2022-09-22T02:37:53+00:00"
         },
         {
             "name": "get-stream/stream",
@@ -7962,12 +7962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "f0eb3aadc52dcb9395898a3333043263bd1ab2b1"
+                "reference": "aa9ad289a237e296ce26ca71420c97dd11302a46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f0eb3aadc52dcb9395898a3333043263bd1ab2b1",
-                "reference": "f0eb3aadc52dcb9395898a3333043263bd1ab2b1",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/aa9ad289a237e296ce26ca71420c97dd11302a46",
+                "reference": "aa9ad289a237e296ce26ca71420c97dd11302a46",
                 "shasum": ""
             },
             "require": {
@@ -7999,7 +7999,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-16T12:41:26+00:00"
+            "time": "2022-09-22T09:25:32+00:00"
         },
         {
             "name": "railroad/permissions",
