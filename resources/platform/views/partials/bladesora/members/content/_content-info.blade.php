@@ -35,10 +35,12 @@
                 <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
                     <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
                     @foreach($contentChapters as $chapter)
-                        <p class="body tw-text-[#191b1c] dark:tw-text-white">
-                            <a class="tw-font-bold font-underline"
-                               data-jump-to-time="{{ $chapter['chapter_timecode'] }}">{{ gmdate('H:i:s', $chapter['chapter_timecode']) }}</a> - {{ $chapter['chapter_description'] }}
-                        </p>
+                        @if(!empty($chapter['chapter_timecode']))
+                            <p class="body tw-text-[#191b1c] dark:tw-text-white">
+                                <a class="tw-font-bold font-underline"
+                                   data-jump-to-time="{{ $chapter['chapter_timecode'] }}">{{ gmdate('H:i:s', $chapter['chapter_timecode']) }}</a> - {{ $chapter['chapter_description'] }}
+                            </p>
+                        @endif
                     @endforeach
                 </div>
             </div>
