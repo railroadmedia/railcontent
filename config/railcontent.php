@@ -863,5 +863,9 @@ return [
     'compiled_column_mapping_sub_content_field_keys' => [
         'video',
         'instructor',
+        'high_video',
+        'low_video',
+        'original_video',
+        'qna_video',
     ],
 ];

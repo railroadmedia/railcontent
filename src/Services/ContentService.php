@@ -2299,7 +2299,7 @@ class ContentService
                 ->groupBy('content_id');
 
         // get all content that is linked via field
-        $keysThatLinkToOtherContent = ['instructor', 'video'];
+        $keysThatLinkToOtherContent = config('railcontent.compiled_column_mapping_sub_content_field_keys');
         $linkedContentIds =
             $contentsFieldRows->whereIn('key', $keysThatLinkToOtherContent)
                 ->pluck('value');
