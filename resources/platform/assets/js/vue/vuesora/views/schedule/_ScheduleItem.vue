@@ -92,7 +92,7 @@ export default {
         },
         timezone: {
             type: String,
-        },$chapter['chapter_timecode']
+        },
     },
     data() {
         return {
