@@ -6,9 +6,7 @@ class NotificationDecorator
 {
     public function decorate($notifications)
     {
-        if (app()->environment() == 'local') {
-            $domain = 'devplatform.musora.com:8443';
-        }
+        $domain = config('app.url');
 
         foreach ($notifications as $index => $notification) {
             $url = str_replace(
