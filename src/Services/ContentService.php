@@ -891,6 +891,7 @@ class ContentService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = [],
+        array $requiredUserPlaylistIds = [],
         $pullFilterFields = true,
         $getFutureContentOnly = false,
         $pullPagination = true,
@@ -916,6 +917,7 @@ class ContentService
                 implode(' ', array_values($includedFields) ?? ''),
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? ''),
+                implode(' ', array_values($requiredUserPlaylistIds) ?? ''),
                 ContentRepository::$bypassPermissions,
                 $getFollowedContentOnly
             );
@@ -935,10 +937,11 @@ class ContentService
                 $includedTypes,
                 $slugHierarchy,
                 $requiredParentIds,
+                $requiredUserPlaylistIds,
                 $getFutureContentOnly,
                 $getFollowedContentOnly
-            );
 
+            );
             foreach ($requiredFields as $requiredField) {
                 $filter->requireField(
                     ...

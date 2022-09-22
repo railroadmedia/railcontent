@@ -66,6 +66,7 @@ class ContentRepository extends RepositoryBase
     private $typesToInclude = [];
     private $slugHierarchy = [];
     private $requiredParentIds = [];
+    private $requiredUserPlaylistIds = [];
 
     private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
 
@@ -1150,6 +1151,7 @@ class ContentRepository extends RepositoryBase
      * @param array $typesToInclude
      * @param array $slugHierarchy
      * @param array $requiredParentIds
+     * @param array $requiredUserPlaylistIds
      * @return $this
      * @internal param array $requiredParentIds
      */
@@ -1161,6 +1163,7 @@ class ContentRepository extends RepositoryBase
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds,
+        array $requiredUserPlaylistIds,
         $getFutureContentOnly = false,
         $getFollowedContentOnly = false
     ) {
@@ -1171,6 +1174,7 @@ class ContentRepository extends RepositoryBase
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
+        $this->requiredUserPlaylistIds = $requiredUserPlaylistIds;
 
         self::$getFutureContentOnly = $getFutureContentOnly;
         self::$getFollowedContentOnly = $getFollowedContentOnly;
@@ -1201,6 +1205,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
+                ->restrictByUserlPlaylistIds($this->requiredUserPlaylistIds)
                 ->order($this->orderBy, $this->orderDirection);
 
         if (self::$getFutureContentOnly) {
@@ -1253,6 +1258,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
+                ->restrictByUserlPlaylistIds($this->requiredUserPlaylistIds)
                 ->groupBy(ConfigService::$tableContent . '.id');
 
         if (self::$getFollowedContentOnly) {
@@ -1281,7 +1287,8 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserStates($this->requiredUserStates)
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
-                ->restrictByParentIds($this->requiredParentIds);
+                ->restrictByParentIds($this->requiredParentIds)
+                ->restrictByUserlPlaylistIds($this->requiredUserPlaylistIds);
 
         if (self::$getFollowedContentOnly) {
             $query->restrictFollowedContent();

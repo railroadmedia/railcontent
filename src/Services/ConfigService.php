@@ -233,4 +233,9 @@ class ConfigService
      * @var array
      */
     public static $tableCommentsAggregates;
+
+    /**
+     * @var string
+     */
+    public static $tableUserPlaylistContent;
 }

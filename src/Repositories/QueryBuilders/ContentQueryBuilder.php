@@ -250,6 +250,27 @@ class ContentQueryBuilder extends QueryBuilder
     }
 
     /**
+     * @param array $userPlaylistIds
+     * @return $this
+     */
+    public function restrictByUserlPlaylistIds(array $userPlaylistIds)
+    {
+        if (empty($userPlaylistIds)) {
+            return $this;
+        }
+
+        $this->whereIn(ConfigService::$tableContent . '.id', function (Builder $builder) use ($userPlaylistIds) {
+            $builder->select([ConfigService::$tableUserPlaylistContent . '.content_id'])
+                ->from(ConfigService::$tableUserPlaylistContent )
+                ->whereIn(ConfigService::$tableUserPlaylistContent . '.user_playlist_id', $userPlaylistIds);
+        });
+
+        return $this;
+    }
+
+
+
+    /**
      * @param array $parentIds
      * @return $this
      */
@@ -267,6 +288,9 @@ class ContentQueryBuilder extends QueryBuilder
 
         return $this;
     }
+
+
+
 
     /**
      * @param array $requiredUserStates

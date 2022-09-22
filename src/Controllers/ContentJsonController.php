@@ -82,6 +82,7 @@ class ContentJsonController extends Controller
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
+            $request->get('required_user_playlist_ids', []),
             $request->get('include_filters', true),
             false,
             true,
@@ -396,6 +397,7 @@ class ContentJsonController extends Controller
                 [],
                 [],
                 [],
+                [],
                 false,
                 false
             );
@@ -454,6 +456,7 @@ class ContentJsonController extends Controller
                 $requiredFields,
                 [],
                 $requiredUserState,
+                [],
                 [],
                 true
             );

@@ -610,7 +610,8 @@ succeded, integer, , number of results
             $parsedFilters['required_fields'] ?? [],
             $parsedFilters['included_fields'] ?? [],
             $parsedFilters['required_user_states'] ?? [],
-            $parsedFilters['included_user_states'] ?? []
+            $parsedFilters['included_user_states'] ?? [],
+            $request->get('required_user_playlist_ids', []),
         );
 ```
 #### Parameters
