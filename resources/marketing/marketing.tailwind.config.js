@@ -41,6 +41,9 @@ module.exports = {
         'body': {
           fontFamily: 'Open Sans, sans-serif',
         },
+        '.text-navy': {
+          color: '#a1afc9'
+        },
         '.text-musora': {
           background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           '-webkit-background-clip': 'text',
@@ -63,6 +66,9 @@ module.exports = {
           borderRadius: 'inherit',
           background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           margin: '-2px',
+        },
+        'h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong': {
+          fontWeight: 900
         },
         'h1':{
           fontSize: '24px',
@@ -124,6 +130,9 @@ module.exports = {
           '@media (min-width: 768px)': {
             fontSize: '16px',
           },
+        },
+        'img': {
+          display: 'inline-block'
         },
         '.join':{
           borderRadius: '50px',
