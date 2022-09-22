@@ -36,13 +36,13 @@
             </a>
             <a class="text-xs md:text-sm block md:inline leading-loose md:leading-normal" href="tel:+18004398921">Toll Free: 1-800-439-8921  / </a>
             <a class="text-xs md:text-sm block md:inline leading-loose md:leading-normal" href="tel:+16048557605">Direct: 1-604-855-7605 / </a>
-            <a class="text-xs md:text-sm" href="/support">Contact Us</a>
+            <a class="text-xs md:text-sm" href="/contact">Contact Us</a>
         </p>
-        <div class="flex items-center justify-center my-4">
+        {{-- <div class="flex items-center justify-center my-4">
             <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="flex items-center justify-center mx-2 text-xl h-11 w-11 border-2 border-gray-500 rounded-full"><i class="fab fa-youtube" aria-hidden="true"></i></a>
             <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="flex items-center justify-center mx-2 text-xl h-11 w-11 border-2 border-gray-500 rounded-full"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
             <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="flex items-center justify-center mx-2 text-xl h-11 w-11 border-2 border-gray-500 rounded-full"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-        </div>
+        </div> --}}
         <p class="text-xs md:text-sm">
             Musora Media, Inc. © 2022 - &nbsp;
             <a class="text-xs md:text-sm" href="/terms-of-service">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
