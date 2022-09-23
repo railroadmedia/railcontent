@@ -39,7 +39,7 @@ return [
         'stack' => [
             'driver' => 'stack',
             'channels' => ['stderr', 'papertrail'],
-            'name' => 'stack-log-channel',
+            'name' => env('STACK_LOG_CHANNEL_NAME', 'stack-log-channel'),
             'ignore_exceptions' => false,
         ],
 
