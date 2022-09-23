@@ -145,7 +145,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                         </div>
 
                         <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
-                            {{ $dashboardUser->biography }}
+                            <p class="body">{!! nl2br($dashboardUser->biography) !!}</p>
                         </div>
                     </div>
                     {{-- User Gear Details --}}
