@@ -61,10 +61,9 @@
                         
                     </template>
                 </page-container>
+                {{-- Review Modals Code Loads Here --}}
+                @yield('review-modal-section')
             </app-container>
-            
-            {{-- Review Modals Must Be Global --}}
-            @include('partials._review-modal')
         </div>
 
         {{-- Scripts --}}

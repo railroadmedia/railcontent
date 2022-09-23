@@ -10,6 +10,20 @@ use Railroad\Railchat\Services\RailchatService;
 class MusoraApiChatProvider implements ChatProviderInterface
 {
  //TODO: INTEGRATE chatroll
+    /**
+     * @var RailchatService
+     */
+    private $railchatService;
+
+    /**
+     * MusoraApiChatProvider constructor.
+     *
+     * @param RailchatService $railchatService
+     */
+    public function __construct(RailchatService $railchatService)
+    {
+        $this->railchatService = $railchatService;
+    }
 
     public function getEmbedUrl()
     : string
@@ -27,7 +41,16 @@ class MusoraApiChatProvider implements ChatProviderInterface
     : array
     {
 
-        $token = '';
+        $member = user();
+
+        $token = $this->railchatService->getUserToken(
+            $member->id,
+            $member->display_name,
+            $member->profile_picture_url,
+            url()->route('platform.profile.dashboard', [$member->id]),
+            $member->isAdmin(),
+            $member->access_level
+        );
 
         return [
             'apiKey' => config('railchat.get_stream_credentials')['key'] ?? '',
@@ -35,6 +58,5 @@ class MusoraApiChatProvider implements ChatProviderInterface
             'questionsChannelName' => config('railchat.questions_channel_name'),
             'token' => $token,
         ];
-
     }
 }

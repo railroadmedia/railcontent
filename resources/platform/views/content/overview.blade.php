@@ -141,6 +141,8 @@
                         {{-- :is-admin="{{ json_encode(user()->isAdmin()) }}" --}}
                         @if($displayItemAsOverview ?? false)
                             :display-items-as-overview="true"
+                        @endif
+                        @if(!user()->isAdmin())
                             :lock-unowned="true"
                         @endif
                         @if($parentContent['type'] !== 'learning-path')

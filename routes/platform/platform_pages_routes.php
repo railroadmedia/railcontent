@@ -457,9 +457,5 @@ Route::domain('{musoraDomain}')
             ->name('platform.invite-a-friend');
     });
 
-Route::get('/apple-app-site-association', function () {
-    $json = file_get_contents(base_path('apple-app-site-association'));
-
-    return response($json, 200)
-        ->header('Content-Type', 'application/json');
-});
+Route::get('/apple-app-site-association', [\App\Http\Controllers\Misc\ManifestFilesController::class, 'appleAssociationFile'])
+    ->name('platform.apple-association-file');

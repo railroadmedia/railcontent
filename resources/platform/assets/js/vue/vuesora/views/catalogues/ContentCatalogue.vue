@@ -655,6 +655,8 @@ export default {
   methods: {
     handleContentSort(event) {
       this.sort = event.target.value;
+      //reset page params
+      this.page = 1;
 
       if (this.useUrlParams) {
         this.setUrlParams();

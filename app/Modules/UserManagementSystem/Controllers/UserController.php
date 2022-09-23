@@ -292,7 +292,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->getMessageBag()], 422);
         }
-        $user = User::where('email', $request->email)->where('id' , '!=', user()->id)->first();
+        $user = User::where('email', $request->email)->first();
 
         if ($user) {
             return response()->json(['unique' => false]);
