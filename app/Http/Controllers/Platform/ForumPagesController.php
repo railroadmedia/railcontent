@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -80,6 +81,9 @@ class ForumPagesController extends Controller
         $categoryIds = $request->get('category_ids', null);
         $pinned = (boolean)$request->get('pinned');
         // $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
+
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -176,12 +180,7 @@ class ForumPagesController extends Controller
         foreach ($discussions as $discussion) {
             $latestPost = $discussion->latest_post;
             if (!empty($latestPost)) {
-                $latestPost['created_at_diff'] =
-                    Carbon::parse($latestPost['created_at'])
-                        ->diffForHumans();
                 $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
-            } else {
-                continue;
             }
 
             $mappedDiscussions[] = [
@@ -190,9 +189,9 @@ class ForumPagesController extends Controller
                 'description' => $discussion->description,
                 "createdOn" => Carbon::parse($discussion->created_at)
                     ->diffForHumans(),
-                "replyAmount" => $discussion->post_count,
-                "authorUsername" => $discussion->latest_post['author_display_name'],
-                "authorAvatar" => $discussion->latest_post['author_avatar_url'],
+                "replyAmount" =>  $discussion->post_count ?? 0,
+                "authorUsername" => $discussion->latest_post['author_display_name'] ?? '',
+                "authorAvatar" => $discussion->latest_post['author_avatar_url'] ?? '',
                 "url" => url()->route('forums.show-category-threads', [$discussion['slug'], $discussion['id']]),
                 "access_level" => $discussion->access_level,
                 "icon" => $discussion->icon ?? '',
@@ -202,16 +201,11 @@ class ForumPagesController extends Controller
 
         $user = user();
 
-        $accessLevel = $user->access_level;
-
-        $userXP = $user->total_xp;
-        $xpRank = $user->getXpRank();
-
         $currentUser = [
             "avatar" => $user->profile_picture_url,
-            "xp" => $user->total_xp,
-            "access_level" => $accessLevel,
-            "xp_rank" => $xpRank,
+            "xp" => $user->totalXp(),
+            "access_level" => $user->access_level,
+            "xp_rank" =>  $user->getXpRank(),
         ];
 
         return view(
@@ -455,6 +449,8 @@ class ForumPagesController extends Controller
         $page = $request->get('page', 1);
 
         $sortBy = $request->get('sortby_val', '-published_on');
+
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
         $thread =
             $this->threadRepository->getDecoratedThreadsByIds([$id])

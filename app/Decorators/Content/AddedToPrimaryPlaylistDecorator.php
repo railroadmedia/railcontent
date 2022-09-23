@@ -19,6 +19,8 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
 
     private static $cache = [];
 
+    public static $skip = false;
+
     /**
      * @param  UserPlaylistContentRepository  $userPlaylistContentRepository
      * @param  UserPlaylistsRepository  $userPlaylistsRepository
@@ -37,13 +39,13 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
      */
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->whereNotIn('type', ['user-playlist']);
+        $contentsOfType = $contents->whereNotIn('type', ['user-playlist', 'instructor']);
 
         $contentIds =
             $contentsOfType->pluck('id')
                 ->toArray();
 
-        if (empty($contentIds) || empty(user())) {
+        if (empty($contentIds) || empty(user()) || self::$skip) {
             return $contents;
         }
 

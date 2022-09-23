@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bda7aec2706898bf761e066f7c054216",
+    "content-hash": "38c7cbeb69bb9cffd6df0e3c74132c93",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8219,16 +8219,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.x-dev",
+            "version": "dev-v2.0-optimizations",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "a6f6760379f69d88ff047f4e13d0e033e05cf037"
+                "reference": "1270533d7246331bbdf5a72258a02889fa2b7416"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/a6f6760379f69d88ff047f4e13d0e033e05cf037",
-                "reference": "a6f6760379f69d88ff047f4e13d0e033e05cf037",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/1270533d7246331bbdf5a72258a02889fa2b7416",
+                "reference": "1270533d7246331bbdf5a72258a02889fa2b7416",
                 "shasum": ""
             },
             "require": {
@@ -8267,9 +8267,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0-optimizations"
             },
-            "time": "2022-08-24T15:23:26+00:00"
+            "time": "2022-09-23T15:50:17+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -15991,7 +15991,7 @@
     "aliases": [
         {
             "package": "railroad/railforums",
-            "version": "2.0.9999999.9999999-dev",
+            "version": "dev-v2.0-optimizations",
             "alias": "v2.0.6",
             "alias_normalized": "2.0.6.0"
         }

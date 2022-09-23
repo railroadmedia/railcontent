@@ -32,7 +32,7 @@
         "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "2.0.*",
-        "railroad/railforums": "v2.0.x-dev as v2.0.6",
+        "railroad/railforums": "dev-v2.0-optimizations as v2.0.6",
         "railroad/railnotifications": "3.0.*",
         "railroad/referral": "3.0.*",
         "railroad/usora": "3.0.*",
