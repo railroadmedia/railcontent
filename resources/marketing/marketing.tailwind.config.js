@@ -42,12 +42,12 @@ module.exports = {
           fontFamily: 'Open Sans, sans-serif',
         },
         '.text-musora': {
-          background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
+          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
         },
         '.bg-musora': {
-          background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
+          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
         },
         '.font-bebas': {
           fontFamily: '"Bebas Neue", sans-serif'
@@ -61,7 +61,7 @@ module.exports = {
           left: '0',
           zIndex: '-1',
           borderRadius: 'inherit',
-          background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
+          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           margin: '-2px',
         },
         'h1':{
