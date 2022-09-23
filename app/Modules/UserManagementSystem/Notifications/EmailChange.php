@@ -55,13 +55,34 @@ class EmailChange extends Notification
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
 
-        return (new MailMessage)->line(
-            'You are receiving this email because we received an email change request for your account.'
-        )
-            ->action('Confirm', url()->route('user_management_system.email-change.confirm', ['code' => $this->token]))
-            ->line('If you did not request the email change, no further action is required.')
+        return $this->buildMailMessage();
+
+    }
+
+    /**
+     * Get the reset password notification mail message for the given URL.
+     *
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    protected function buildMailMessage()
+    {
+        return (new MailMessage)
+            ->subject('Musora Account Email Change Link')
+            ->view(
+                'user-management-system::emails.general-email',
+                [
+                    'input' => [
+                        'line-one' => "You are receiving this email because we received an email change request for your account.  ",
+                        'request-email-change' => true,
+                        'button-name' => 'Confirm Email Change',
+                        'url' => url()->route('user_management_system.email-change.confirm', ['code' => $this->token]),
+                        'logo' => 'https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
+                        'display-name' => user()->display_name
+                    ]
+                ])
             ->from('support@musora.com', 'Musora');
     }
+
 
     /**
      * Set a callback that should be used when building the notification mail message.
