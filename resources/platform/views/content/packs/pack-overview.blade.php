@@ -54,7 +54,6 @@
                 <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full">
                     <div class="pv-5"></div>
                     <div class="pv-5 hide-xs-only"></div>
-                    <div class="pv-5 hide-md-down"></div>
                     <img alt="{{ $pack->fetch('title') }} Logo"
                         class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
                         src="{{ $pack->fetch('data.logo_image_url') }}" 
