@@ -59,8 +59,7 @@ class CustomerIoSyncNewUserByEmail extends CustomerIoBaseJob
                         $this->user->email,
                         $accountName,
                         $customerAttributes,
-                        $this->user->id,
-                        $this->user->getCreatedAt()->timestamp
+                        $this->user->id
                     );
                 }
             }

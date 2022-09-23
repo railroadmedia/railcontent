@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "api-9087326685177199526-733664",
+  "private_key_id": "3193a08d3b97890f7ab07b8583be7c636564ae65",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDwnb95lkYA1YRk\nutDPF68rEBh7DXFNKzxof8vWe+EiXQ1rigReuggBoUqMtSdTSbXMu2Mo/gXSad/e\nC0wQNzzUCtTo9TIEgOQ0gzmbi8rY44C33VspY8lqkHK5+zJk+OOBK4NCy0yr+i7d\nBnuZx7W1jCxEJc2VBKF21B5cpx5eaA24gJsg9VlQ2JH13pPxWcGF0BtFenYsIWtC\ng9Ef5F8PJv7hEL3WC7Yt3f8ljKPDeDWuDcC3UdCxZTmPehANBD6lPicBOmDjG2yM\n1U+Nla4NoLkBAqL/sl7aRDXFYBzG8m4UF+m3LTH2kK5wLpu1z2y0iLbqsZqh/sgm\nRmGcUejHAgMBAAECggEAVFPs7ddxTEyInGbu1I2n6g83jTTOXy3Ge5dCYLbE1e7H\ny8cwteQ79xpIjtzUXffI2+pWm+C/OJm7iE3sSAib7HKpYMXCVFq53/+XmoCZRH8j\nNw1ArFZZGlxqoOy9Ii8qSLRvyeKHSgSiFPt3KROZhvmL8AxRqybW0dcQlwdI+OuP\n00e2mSat+zsRvmM3s2ldL7XZops/BxH5i5X91hkpUoQQEWx9KrScUd6NBSvLr1Ug\nRTxj+gVJJmQQ2Rgm4KJJ5rZEHX4BJFuDoy+eYAIgfGVTD+PioKeYEtnorVjbtRSt\ntp5sxhulHKb+GL2ww+HSDKaAxHnZvqC2Qcmbmo4izQKBgQD+Nyt8vNHX1ji9KCaN\nm8TPamqzTHscVshy88qGsohXF2pzQwx0eRvMtJ/pcd2FXRwqH3uPMQ7OPcx8pT99\nWibGhd3MxKUZOmRpYMPyNu7vzOQg22uxdgR1Dkosrx0KH708rzEQwfH7qyWJQBiy\nQbwpZ7SVHaCc1CyFOwS9jjbvTQKBgQDyTiPOUP+ZMrNZANKC8oYQrFtPUwzrV7De\nhXF1IvH8eufsavUpLXszFHyhTgxo7JQDGrzSyXkUvsh6VwQy9aMcJfNSVNtsg4rQ\nbdo7UgUxIDLtvlBsqfXcnhtVPLKS5t4i3MccfrQI2xi5weVgvrpqa/3OhUaOIUDB\nbaEQ4q3WYwKBgAjNJi9KZkV/wDUkV7ldZEH+IDWW90gy5Pu93wws0DWbtO7Kqnq5\n2rGKq2Kss4uzfo8iyedaPnX7g8HpArq3TVJgPh6hzEmEUQeo9v/C0SDySg+tKRxa\nxqq61OyZH3tDQA0Cz8MRw+v/r+wBkRlS103jrkffX7kuS2BNe8uISfSdAoGBAIDN\n1O7Z0+WGNBx9+WmurmGynZ9fUKDSLq07VoKkHurOEvd0K/rFuJYAr/e3W5VzHYNA\n9Vs/ymOiv0N5ejv0o85UxjHf9fyLOIFvw/CAu03QBgKnhm0dNBsg2PrIl0zL+Q2j\nOx0EpYOHpG8qiVqSSNpFqdfctRLczmWEd3hYZ3xtAoGAH7WQQD7rMxAGT0R+hSCu\nTW+P0t2jIE83IjnOw3AlqxeNg7hsN2WSjNizpxxSunwWqhxMuuJMFIxdTsW6deZ1\n+YTl+ABaiqA/+GprQzLN2wJzhl15y/XYQsQaQISuNJqmyVHxD0Iat9gb/Ts22xmS\n9HSrayA06Ma6mFI26nCplh4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "drumeo-app-api-access@api-9087326685177199526-733664.iam.gserviceaccount.com",
+  "client_id": "114454974837612142508",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/drumeo-app-api-access%40api-9087326685177199526-733664.iam.gserviceaccount.com"
+}
