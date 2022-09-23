@@ -290,8 +290,8 @@ return [
         ],
 
         'google_play_store' => [
-            'credentials' => getenv('CONFIG_PATH') . '/api-9087326685177199526-733664-caa73a600688.json',
-            'application_name' => 'com.drumeo',
+            'credentials' =>  __DIR__ . '/../google-play-api.json',
+            'application_name' => 'com.musoraapp',
             'scope' => ['https://www.googleapis.com/auth/androidpublisher'],
         ],
     ],
