@@ -61,7 +61,7 @@
                 ],
                 [
                     "title" => "Packs",
-                    "url" => url()->route('members.packs.index'),
+                    "url" => url()->route('platform.packs'),
                 ],
                 [
                     "title" => $pack->fetch('fields.title'),
