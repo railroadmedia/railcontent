@@ -107,16 +107,26 @@
     </section>
     <section class="py-12 md:py-20 relative overflow-hidden text-white text-center">
         {{-- background --}}
-        <img src="https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-background.jpg"
-            class="absolute object-cover object-center transition-opacity opacity-0 inset-0"
+        <img src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-background.jpg"
+            class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
         />
         <div class="container mx-auto relative z-0">
-            <img class="h-9 md:h-14 lazyload" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+            <img 
+                class="h-9 md:h-14 transition-opacity opacity-0" 
+                src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>The world’s largest<br class="inline md:hidden"> drum lessons community.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
-                <img class="flex-shrink-0 h-40 md:h-60 lg:h-80 lazyload" src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-graphic.png">
+                <img 
+                    class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0" 
+                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-graphic.png"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-drumeo"><i class="fas fa-trophy"></i></strong> award-winning lessons.<br>
                     <strong class="text-drumeo">100+</strong> legendary teachers.<br>
@@ -131,12 +141,28 @@
             </div>
         </div>
     </section>
-    <section class="content-section relative overflow-hidden text-white text-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-background.jpg" style="background-size:cover;">
+    <section class="py-12 md:py-20 relative overflow-hidden text-white text-center">
+        {{-- background --}}
+        <img src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-background.jpg"
+            class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
         <div class="container mx-auto relative z-0">
-            <img class="h-9 md:h-14 lazyload" data-src="https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">
+            <img 
+            class="h-9 md:h-14 transition-opacity opacity-0" 
+            src="https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>Learn the piano anytime<br class="inline md:hidden"> with real teachers.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
-                <img class="flex-shrink-0 h-40 md:h-60 lg:h-80 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-graphic.png">
+                <img 
+                    class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0" 
+                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-graphic.png"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-pianote"><i class="fas fa-heart"></i></strong> technology meets tradition.<br>
                     <strong class="text-pianote">5+</strong> weekly live events.<br>
@@ -151,12 +177,29 @@
             </div>
         </div>
     </section>
-    <section class="content-section relative overflow-hidden text-white text-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-background.jpg" style="background-size:cover;">
+    <section class="py-12 md:py-20 relative overflow-hidden text-white text-center lazyload">
+        {{-- background --}}
+        <img 
+            src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-background.jpg"
+            class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
         <div class="container mx-auto relative z-0">
-            <img class="h-9 md:h-14 lazyload" data-src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
+            <img 
+                class="h-9 md:h-14 transition-opacity opacity-0" 
+                src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>The first guitar lessons designed<br class="inline md:hidden"> around real-world missions.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
-                <img class="flex-shrink-0 h-40 md:h-60 lg:h-80 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-graphic.png">
+                <img 
+                    class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0" 
+                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-graphic.png"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-guitareo"><i class="fas fa-guitar"></i></strong> just released in 2021.<br>
                     <strong class="text-guitareo">10</strong> goal-based adventures.<br>
@@ -170,12 +213,29 @@
             </div>
         </div>
     </section>
-    <section class="content-section relative overflow-hidden text-white text-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-background.jpg" style="background-size:cover;">
+    <section class="py-12 md:py-20 relative overflow-hidden text-white text-center lazyload">
+            {{-- background --}}
+            <img 
+                src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-background.jpg"
+                class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            />
         <div class="container mx-auto relative z-0">
-            <img class="h-9 md:h-14 lazyload" data-src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
+            <img 
+                class="h-9 md:h-14 transition-opacity opacity-0" 
+                src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>Your start-to-finish guide<br class="inline md:hidden"> to confident singing.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
-                <img class="flex-shrink-0 h-40 md:h-60 lg:h-80 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-graphic.png">
+                <img 
+                    class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0" 
+                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-graphic.png"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-singeo"><i class="fas fa-microphone-stand"></i></strong> just released in 2021.<br>
                     <strong class="text-singeo">3+</strong> weekly live events.<br>
@@ -190,4 +250,5 @@
         </div>
     </section>
 
+    @include('musora._partials._lets-chat')
 @stop
