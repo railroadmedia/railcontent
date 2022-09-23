@@ -1,4 +1,4 @@
-<div class="tw-full fluid collapsed-h pv-5 relative bg-black">
+<div class="tw-full fluid collapsed-h tw-py-8 md:tw-py-11 relative bg-black">
     {{-- Background Image --}}
     <div class="header-background-container absolute-fill bg-top">
         <img src="{{ $backgroundImage }}" 
