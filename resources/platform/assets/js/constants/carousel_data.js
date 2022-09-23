@@ -67,7 +67,7 @@ export const testCarousel = [
                 ctaText: "Visit Erskine's Coach Page",
                 description: "As a music director for Disney star Zendaya, producer and performer, Erskine Hawkins has done a lot. But his favorite thing in the world is playing gospel piano.",
                 ctaUrl: "/pianote/coaches/erskine-hawkins/351708",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-erskine_coach+1.jpg",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-erskine_coach+1.png",
             },
             {
                 topSubtitle: "Learn from the legends",

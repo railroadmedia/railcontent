@@ -66,7 +66,7 @@ module.exports = {
     //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
-        'a:visited': {
+        '.body a:visited': {
           color: 'rgb(11, 118, 219)',
         },
         '.text-musora': {
