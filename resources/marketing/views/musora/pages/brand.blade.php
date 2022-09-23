@@ -1,5 +1,14 @@
 @extends('musora._partials.layout')
 
+@section('head-includes')
+    <title>Musora Brand Guide</title>
+    <meta name="description" content="We help musicians reach their goals through inspiration and education.">
+    <meta property="og:title" content="Musora Brand Guide">
+    <meta property="og:description" content="We help musicians reach their goals through inspiration and education.">
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+@endsection
+
 <!-- Main -->
 @section('layout-body')
 
