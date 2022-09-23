@@ -83,7 +83,7 @@ class ForumPagesController extends Controller
         // $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-//        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -180,13 +180,7 @@ class ForumPagesController extends Controller
         foreach ($discussions as $discussion) {
             $latestPost = $discussion->latest_post;
             if (!empty($latestPost)) {
-               // dd($latestPost);
-//                $latestPost['created_at_diff'] =
-//                    Carbon::parse($latestPost['created_at'])
-//                        ->diffForHumans();
                 $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
-            } else {
-                continue;
             }
 
             $mappedDiscussions[] = [
@@ -207,16 +201,11 @@ class ForumPagesController extends Controller
 
         $user = user();
 
-        $accessLevel = $user->access_level;
-
-        $userXP = $user->total_xp;
-        $xpRank = $user->getXpRank();
-
         $currentUser = [
             "avatar" => $user->profile_picture_url,
-            "xp" => $user->total_xp,
-            "access_level" => $accessLevel,
-            "xp_rank" => $xpRank,
+            "xp" => $user->totalXp(),
+            "access_level" => $user->access_level,
+            "xp_rank" =>  $user->getXpRank(),
         ];
 
         return view(
