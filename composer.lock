@@ -8223,12 +8223,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "1270533d7246331bbdf5a72258a02889fa2b7416"
+                "reference": "08b6f67f5e6cea0c5dd967508110a15cfcc897ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/1270533d7246331bbdf5a72258a02889fa2b7416",
-                "reference": "1270533d7246331bbdf5a72258a02889fa2b7416",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/08b6f67f5e6cea0c5dd967508110a15cfcc897ad",
+                "reference": "08b6f67f5e6cea0c5dd967508110a15cfcc897ad",
                 "shasum": ""
             },
             "require": {
@@ -8269,7 +8269,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0-optimizations"
             },
-            "time": "2022-09-23T15:50:17+00:00"
+            "time": "2022-09-23T16:55:28+00:00"
         },
         {
             "name": "railroad/railnotifications",
