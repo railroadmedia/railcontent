@@ -87,10 +87,26 @@ onMounted(() => {
 <template>
   <div
     class="tw-bg-[#000C17] tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[276px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden">
-    <Slide v-for="(slide, i) in slides" :showSlide="i === currentSlide" :isPrevSlide="i === prevSlide" :key="slide.title"
-      textContentOverride="tw-pb-[26px]" :topSubtitle="slide.topSubtitle" :title="slide.title" :titleClasses="slide.titleClasses" :ctaText="slide.ctaText"
-      :description="slide.description" :ctaUrl="slide.ctaUrl" :img="slide.img" @mouseover="removeInterval"
-      @mouseout="resetInterval" @keyup.left="handleLeft()" @keyup.right="handleRight()" :animateDirection="animateDirection" />
+    
+    <Slide 
+      v-for="(slide, i) in slides" 
+      textContentOverride="tw-pb-[26px]" 
+      :showSlide="i === currentSlide" 
+      :isPrevSlide="i === prevSlide" 
+      :key="slide.title"
+      :animateDirection="animateDirection" 
+      :topSubtitle="slide.topSubtitle" 
+      :title="slide.title" 
+      :titleClasses="slide.titleClasses" 
+      :ctaText="slide.ctaText"
+      :description="slide.description" 
+      :ctaUrl="slide.ctaUrl" 
+      :img="slide.img" 
+      @mouseover="removeInterval"
+      @mouseout="resetInterval" 
+      @keyup.left="handleLeft()" 
+      @keyup.right="handleRight()" 
+    />
 
     <!-- Directional Buttons -->
     <div :key="`carousel-directional-buttons`"

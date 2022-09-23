@@ -66,6 +66,9 @@ module.exports = {
     //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
+        '#sidebar a:visited': {
+          color: 'currentColor',
+        },
         'a:visited': {
           color: 'rgb(11, 118, 219)',
         },

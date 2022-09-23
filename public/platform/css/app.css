@@ -23258,6 +23258,9 @@ a:visited{
 .tw-bg-top{
   background-position: top !important;
 }
+.tw-bg-right{
+  background-position: right !important;
+}
 .tw-bg-center{
   background-position: center !important;
 }
@@ -24176,6 +24179,9 @@ a:visited{
 }
 .tw-overflow-initial{
   overflow: initial !important;
+}
+#sidebar a:visited{
+  color: currentColor !important;
 }
 a:visited{
   color: rgb(11, 118, 219) !important;
@@ -25224,6 +25230,9 @@ a:visited{
   }
   .md\:tw-bg-transparent{
     background-color: transparent !important;
+  }
+  .md\:tw-bg-top{
+    background-position: top !important;
   }
   .md\:tw-p-7{
     padding: 1.75rem !important;
