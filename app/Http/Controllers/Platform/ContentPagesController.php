@@ -187,7 +187,12 @@ class ContentPagesController extends BaseController
         $startedListLessons =
             count($startedLessons) > 0 ?
                 (new ContentFilterResultsEntity(['results' => $startedLessons]))->toResponseRawJson() : false;
+
         $hasStartedLessons = !empty(json_decode($startedListLessons)->data);
+
+        if ($lessonType === 'routine') {
+            $hasStartedLessons = false;
+        }
 
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
@@ -196,7 +201,6 @@ class ContentPagesController extends BaseController
             "lessonType" => $lessonType,
             "sortOverride" => $sortOverride,
             "isStudentFocus" => $isStudentFocus,
-            "recentRoutines" => $recentRoutines,
             "hasRecentRoutines" => $hasRecentRoutines,
             "routinesCount" => $routinesCount,
             "catalogueMeta" => $catalogueMeta,

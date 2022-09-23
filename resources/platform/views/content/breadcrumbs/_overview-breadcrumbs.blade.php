@@ -55,25 +55,43 @@
         ]
     ])
 @elseif($parentContent->fetch('type') === 'pack-bundle')
-    @include('partials.bladesora.members.navigation.breadcrumbs', [
-        "pages" => [
-            [
-                "title" => 'Home',
-                "url" => url()->route('platform.home'),
-            ],
-            [
-                "title" => 'Packs',
-                "url" => url()->route('platform.packs'),
-            ],
-            [
-                "title" => $pack->fetch('fields.title'),
-                "url" => $pack->fetch('url'),
-            ],
-            [
-                "title" => $parentContent->fetch('fields.title'),
+    @if($pack->fetch('bundle_count') > 1)
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => 'Home',
+                    "url" => url()->route('platform.home'),
+                ],
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title'),
+                    "url" => $pack->fetch('url'),
+                ],
+                [
+                    "title" => $parentContent->fetch('fields.title')
+                ]
             ]
-        ]
-    ])
+        ])
+    @elseif($pack->fetch('bundle_count') <= 1)
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => 'Home',
+                    "url" => url()->route('platform.home'),
+                ],
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title')
+                ]
+            ]
+        ])
+    @endif
 @else
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
