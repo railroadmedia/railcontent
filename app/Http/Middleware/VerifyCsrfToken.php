@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '/user-management-system/login/token'
+        '/user-management-system/login/token',
+        '/user-management-system/login/cookie'
     ];
 }

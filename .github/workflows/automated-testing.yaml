@@ -39,4 +39,4 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: vendor/bin/phpunit --testsuite Feature
+        run: vendor/bin/phpunit --testsuite Feature --testdox
