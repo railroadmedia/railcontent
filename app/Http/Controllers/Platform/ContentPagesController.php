@@ -744,7 +744,7 @@ class ContentPagesController extends BaseController
             $this->lessonAssignmentDecorator->decorate(new Collection([$contentToRenderAsLesson]))
                 ->first();
         }
-        
+
         $lessonAssignments = $contentToRenderAsLesson['assignments'] ?? [];
 
         $contentToRenderAsLesson['assignments'] = $lessonAssignments;
@@ -1475,5 +1475,29 @@ class ContentPagesController extends BaseController
             "totalResults" => $followedLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $contentId
+     * @param $commentId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function jumpToContentComment(
+        Request $request,
+        $domain, $brand,
+        $contentId, $commentId){
+        ContentRepository::$bypassPermissions = true;
+        ContentRepository::$availableContentStatues = false;
+        ContentRepository::$pullFutureContent = true;
+
+        $content = $this->contentService->getById($contentId);
+
+        $url = $content->fetch('url', '');
+
+        return redirect($url. '?goToComment=' . $commentId);
     }
 }

@@ -60,6 +60,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.subscribed-lessons');
 
+        Route::get('/{brand}/jump-to-comment/{contentId}/{commentId}', [ContentPagesController::class, 'jumpToContentComment'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.jump-to-comment');
+
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
             ->whereIn('contentTypeName', [
