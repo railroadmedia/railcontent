@@ -70,8 +70,10 @@ export default {
         window.showconfirmationmodal({
             title,
             subtitle,
-            submit: submitButton.callback,
-            cancel: cancelButton.callback
+            callbacks: {
+                submit: submitButton.callback,
+                cancel: cancelButton.callback
+            },
         });
     },
 };
