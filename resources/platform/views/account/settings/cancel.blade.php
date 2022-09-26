@@ -1,13 +1,4 @@
-
-
-{{--
-as far as I can tell, there isn't a layout for a logged-in user where the view doesn't have the standard top-bar and
-sidebar navigation elements. Thus here we use that version with the elements not shown in the designs.
---}}
-
-@extends('partials.layout')
-{{--@extends('layout')--}}
-
+@extends('layout')
 
 @section('content')
 

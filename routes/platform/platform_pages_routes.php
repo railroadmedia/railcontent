@@ -326,6 +326,9 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
 
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
         /*
          * Cancellation-related
          */
@@ -335,7 +338,7 @@ Route::domain('{musoraDomain}')
             [ProfileSettingsPagesController::class, 'acceptAnnualOffer']
         )
             ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.acceptAnnualOffer');
+            ->name('platform.profile.settings.accept-annual-offer');
 
         // POST resume-paused
         Route::post(
@@ -343,7 +346,7 @@ Route::domain('{musoraDomain}')
             [ProfileSettingsPagesController::class, 'resumePaused']
         )
             ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.resumePaused');
+            ->name('platform.profile.settings.resume-paused');
 
         // POST submit-cancel-reason
         Route::post(
@@ -352,6 +355,31 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.submit-cancel-reason');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/student-plan-offer',
+            [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.student-plan-offer');
+
+        // POST accept switch-to-monthly offer
+        Route::post(
+            '/{brand}/profile/settings/account/switch-to-monthly',
+            [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.switch-to-monthly');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/gratis-access',
+            [ProfileSettingsPagesController::class, 'acceptGratisAccess']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.gratis-access');
+
 
 
         // GET cancel-reason-form
@@ -369,6 +397,9 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.win-back');
+
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
 
         /*
          * Notifications Pages

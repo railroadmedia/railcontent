@@ -348,12 +348,12 @@ class ProfileSettingsPagesController extends BaseController
         $trialMembershipProductIds = ProductAccessMap::trialMembershipProductIds();
         $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
 
-        /*
-         * previous version here stored cancellation-reason and cancellation-reason-text in session, but I don't
-         * understand why, so I am leaving it out for now
-         */
-
-        // store in session (reason and reason-text)
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+         * store in session because we don't yet need it. We'll present the student with an offer, and if they     *
+         * accept that offer then we don't need the cancellation-reason anymore (I least I don't think we're doing *
+         * anything with it, though maybe we should anyway). If they do cancel, then we'll take that               *
+         * stored-in-the-session cancellation-reason and use that when writing the cancellation to the DB.         *
+         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
         session()->put('cancel-reason', $reason);
         session()->put('cancel-reason-text', $textReason);
 
@@ -362,18 +362,64 @@ class ProfileSettingsPagesController extends BaseController
             return $this->cancel($request);
         }
 
-        // check if they've claimed the retention(win-back) offer recently
+        $isSubscriberMonthly = false;
+        $isSubscriberAnnual = false;
+        $isSubscriberAnnualRenewingSoon = false;
 
-        // get reasons map from config
+        /* what if the subscription is a 2-month, 3-month, or 6-month subscription? */
+        if ($subscription->getIntervalType() === 'month' && $subscription->getIntervalCount() == 1) {
+            // todo: what if this is zero or negative?
+            $amountSaved = 0;
+            $subscriptionPriceWithTax = $subscription->getTotalPrice();
 
-        // create list of reasons that qualify for criteria
+            dd($subscription->getTax());
 
-        // see if reason is in list
+            if ($subscription->getTax()) {
+                $subscription->getTotalDueAfterTax();
+            }
+
+
+
+            // todo: create as Carbon object
+            $nextPaymentDate = null;
+
+//            return view('account.settings.offer', [
+//                'amountSaved' => $amountSaved,
+//                'subscriptionPrice' => $subscriptionPrice
+//                'nextPaymentDate' => $nextPaymentDate,
+//            ]);
+        }
+
+
+
+
 
         // send to final offer screen depending on use case
 
 
     }
+
+
+
+    public function acceptStudentPlanOffer(Request $request)
+    {
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptStudentPlanOffer', $request);
+    }
+
+    public function acceptSwitchToMonthly(Request $request)
+    {
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptSwitchToMonthly', $request);
+    }
+
+    public function acceptGratisAccess(Request $request)
+    {
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptGratisAccess', $request);
+    }
+
+    public function cancel(Request $request) {
+
+    }
+
 
     /**
      * @return void
