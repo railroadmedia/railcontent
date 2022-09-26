@@ -1,3 +1,5 @@
+
+
 <div class="product-wrap lg:w-2/3 px-3 md:px-4">
     <div class="pack-details slider-wrap w-full pt-5 mx-auto mb-1 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
         <div class="text-center pb-5 sm:pb-6 lg:pb-7">
@@ -21,10 +23,12 @@
                     </div>
                 @endif
                 @if (!empty($images))
-                    @foreach ($images as $image)
-                        <div @if(count($images) > 1)style="display: none;"@endif>
-                            <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif">
-                        </div>
+                    @foreach ($images as $key => $image)
+                        @if((!empty($videoSrc) && $key !== 0) || empty($videoSrc) )
+                                <div @if(count($images) > 1)style="display: none;"@endif>
+                                    <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif">
+                                </div>
+                            @endif
                     @endforeach
                 @endif
             </div>
@@ -34,7 +38,7 @@
                         <div style="display:none;">
                             <img
                                 class="w-full rounded-md border-4 border-solid w-full border-white slide-img cursor-pointer"
-                                src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif">
+                                src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif">
                         </div>
                     @endforeach
                 @endif
