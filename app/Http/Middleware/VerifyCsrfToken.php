@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/user-management-system/login/token',
-        '/user-management-system/login/cookie'
+        '/user-management-system/login/cookie',
+        '/railtracker/media-playback-session',
     ];
 }

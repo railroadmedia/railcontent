@@ -43,15 +43,17 @@ class ContentPagesController extends BaseController
     private FullTextSearchService $fullTextSearchService;
     private CalendarService $calendarService;
     private ContentFollowsService $contentFollowsService;
+    private ResourceDecorator $resourceDecorator;
 
     /**
-     * @param  ContentService  $contentService
-     * @param  VimeoVideoSourcesDecorator  $vimeoVideoSourcesDecorator
-     * @param  LessonAssignmentDecorator  $lessonAssignmentDecorator
-     * @param  RailcontentURLProvider  $railcontentURLProvider
-     * @param  FullTextSearchService  $fullTextSearchService
-     * @param  CalendarService  $calendarService
-     * @param  ContentFollowsService  $contentFollowsService
+     * @param ContentService $contentService
+     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
+     * @param LessonAssignmentDecorator $lessonAssignmentDecorator
+     * @param RailcontentURLProvider $railcontentURLProvider
+     * @param FullTextSearchService $fullTextSearchService
+     * @param CalendarService $calendarService
+     * @param ContentFollowsService $contentFollowsService
+     * @param ResourceDecorator $resourceDecorator
      */
     public function __construct(
         ContentService $contentService,
@@ -60,7 +62,8 @@ class ContentPagesController extends BaseController
         RailcontentURLProvider $railcontentURLProvider,
         FullTextSearchService $fullTextSearchService,
         CalendarService $calendarService,
-        ContentFollowsService $contentFollowsService
+        ContentFollowsService $contentFollowsService,
+        ResourceDecorator $resourceDecorator
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -69,6 +72,7 @@ class ContentPagesController extends BaseController
         $this->fullTextSearchService = $fullTextSearchService;
         $this->calendarService = $calendarService;
         $this->contentFollowsService = $contentFollowsService;
+        $this->resourceDecorator = $resourceDecorator;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -861,6 +865,10 @@ class ContentPagesController extends BaseController
         $lessonContent =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$lessonContent]))
                 ->first();
+
+        ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
+        $lessonContent = $this->resourceDecorator->decorate(new Collection([$lessonContent]))->first();
+        ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MINIMUM;
 
         LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
 
