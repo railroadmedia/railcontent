@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.235.12",
+            "version": "3.235.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e0ebecfb0284dc44dc99a172cd9c68c40739904c"
+                "reference": "d6a696800e1eceec47e8f84ded88a88f4790d016"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e0ebecfb0284dc44dc99a172cd9c68c40739904c",
-                "reference": "e0ebecfb0284dc44dc99a172cd9c68c40739904c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d6a696800e1eceec47e8f84ded88a88f4790d016",
+                "reference": "d6a696800e1eceec47e8f84ded88a88f4790d016",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.12"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.235.14"
             },
-            "time": "2022-09-20T18:18:07+00:00"
+            "time": "2022-09-22T18:16:42+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2547,16 +2547,16 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "v3.8.0",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine-extensions/DoctrineExtensions.git",
-                "reference": "4ba5377b1a1d9a988205c4e37f5d5287eb8ebd28"
+                "reference": "d869cf11f12995b27fa6486ec2a860cc76c46988"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine-extensions/DoctrineExtensions/zipball/4ba5377b1a1d9a988205c4e37f5d5287eb8ebd28",
-                "reference": "4ba5377b1a1d9a988205c4e37f5d5287eb8ebd28",
+                "url": "https://api.github.com/repos/doctrine-extensions/DoctrineExtensions/zipball/d869cf11f12995b27fa6486ec2a860cc76c46988",
+                "reference": "d869cf11f12995b27fa6486ec2a860cc76c46988",
                 "shasum": ""
             },
             "require": {
@@ -2583,7 +2583,7 @@
                 "doctrine/doctrine-bundle": "^2.3",
                 "doctrine/mongodb-odm": "^2.3",
                 "doctrine/orm": "^2.10.2",
-                "friendsofphp/php-cs-fixer": "^3.4.0",
+                "friendsofphp/php-cs-fixer": "^3.4.0,<3.10",
                 "nesbot/carbon": "^2.55",
                 "phpstan/phpstan": "^1.1",
                 "phpstan/phpstan-doctrine": "^1.0",
@@ -2601,7 +2601,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.8-dev"
+                    "dev-main": "3.10-dev"
                 }
             },
             "autoload": {
@@ -2647,10 +2647,10 @@
             "support": {
                 "email": "gediminas.morkevicius@gmail.com",
                 "issues": "https://github.com/doctrine-extensions/DoctrineExtensions/issues",
-                "source": "https://github.com/doctrine-extensions/DoctrineExtensions/tree/v3.8.0",
+                "source": "https://github.com/doctrine-extensions/DoctrineExtensions/tree/v3.9.0",
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
-            "time": "2022-07-17T12:04:16+00:00"
+            "time": "2022-09-22T02:37:53+00:00"
         },
         {
             "name": "get-stream/stream",
@@ -6331,6 +6331,60 @@
             "time": "2022-09-04T07:30:47+00:00"
         },
         {
+            "name": "nova-kit/nova-packages-tool",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nova-kit/nova-packages-tool.git",
+                "reference": "1af44e3422e6a885f51d8d2cad7a9234bc3ca088"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/1af44e3422e6a885f51d8d2cad7a9234bc3ca088",
+                "reference": "1af44e3422e6a885f51d8d2cad7a9234bc3ca088",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": ">=4.15.0 <4.16.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.24 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.4.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "NovaKit\\NovaPackagesTool\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NovaKit\\NovaPackagesTool\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com"
+                }
+            ],
+            "description": "Tool for Laravel Nova Packages Development",
+            "support": {
+                "issues": "https://github.com/nova-kit/nova-packages-tool/issues",
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.4.0"
+            },
+            "time": "2022-09-21T00:26:00+00:00"
+        },
+        {
             "name": "nunomaduro/termwind",
             "version": "v1.14.0",
             "source": {
@@ -7807,16 +7861,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.11",
+            "version": "v5.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "f71e26637968c76ced0d82a48f4d67b2c289457d"
+                "reference": "6baf2148318593ca01f495ea3865626e928d45f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/f71e26637968c76ced0d82a48f4d67b2c289457d",
-                "reference": "f71e26637968c76ced0d82a48f4d67b2c289457d",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/6baf2148318593ca01f495ea3865626e928d45f0",
+                "reference": "6baf2148318593ca01f495ea3865626e928d45f0",
                 "shasum": ""
             },
             "require": {
@@ -7853,9 +7907,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.11"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.15"
             },
-            "time": "2022-08-22T17:56:59+00:00"
+            "time": "2022-09-23T11:46:22+00:00"
         },
         {
             "name": "railroad/location",
@@ -7962,12 +8016,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "f0eb3aadc52dcb9395898a3333043263bd1ab2b1"
+                "reference": "aa9ad289a237e296ce26ca71420c97dd11302a46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f0eb3aadc52dcb9395898a3333043263bd1ab2b1",
-                "reference": "f0eb3aadc52dcb9395898a3333043263bd1ab2b1",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/aa9ad289a237e296ce26ca71420c97dd11302a46",
+                "reference": "aa9ad289a237e296ce26ca71420c97dd11302a46",
                 "shasum": ""
             },
             "require": {
@@ -7999,7 +8053,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-16T12:41:26+00:00"
+            "time": "2022-09-22T09:25:32+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8150,16 +8204,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.8",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "f537eeeb7a196c70eae3233cbcfb5df0d801f60d"
+                "reference": "84d933f3aa86c84191318ec5e41158c8aa1b2db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f537eeeb7a196c70eae3233cbcfb5df0d801f60d",
-                "reference": "f537eeeb7a196c70eae3233cbcfb5df0d801f60d",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/84d933f3aa86c84191318ec5e41158c8aa1b2db1",
+                "reference": "84d933f3aa86c84191318ec5e41158c8aa1b2db1",
                 "shasum": ""
             },
             "require": {
@@ -8213,9 +8267,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.8"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.9"
             },
-            "time": "2022-09-16T17:39:20+00:00"
+            "time": "2022-09-22T19:46:03+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -13469,21 +13523,22 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "3128959da0c48556d752e018ff26cc3a9a145d9f"
+                "reference": "e6de75d4222644933e4f94e7f58dc523a4a8270f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/3128959da0c48556d752e018ff26cc3a9a145d9f",
-                "reference": "3128959da0c48556d752e018ff26cc3a9a145d9f",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/e6de75d4222644933e4f94e7f58dc523a4a8270f",
+                "reference": "e6de75d4222644933e4f94e7f58dc523a4a8270f",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "^8.0|^9.0",
                 "laravel/nova": "^4.0",
+                "nova-kit/nova-packages-tool": "^1.3.1",
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
@@ -13524,7 +13579,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.2"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.3"
             },
             "funding": [
                 {
@@ -13532,7 +13587,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-02T13:51:24+00:00"
+            "time": "2022-09-20T11:04:09+00:00"
         }
     ],
     "packages-dev": [
