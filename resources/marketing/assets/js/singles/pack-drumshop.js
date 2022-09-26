@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 
     if($('#videoPlayer').length) {
-        $('.slider-for').on('afterChange', function () {
+        $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
             var iframe = $('#videoPlayer')
             var src = $('#videoSrc').get(0).innerText
             if(iframe.attr('src')){
@@ -59,7 +59,7 @@ $(document).ready(function () {
         var variantPriceSpanElement = $(this).parent().find('.chosen-variant-price-float');
 
         variantPriceSpanElement.html(selectedPrice);
-        
+
         $(this).removeClass('error');
         orderButton.addClass('active');
         orderButton.attr('href', originalLink);
