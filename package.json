@@ -20,8 +20,8 @@
         "mw": "mix --mix-config=resources/marketing/webpack.mix.js watch",
         "md": "mix --mix-config=resources/marketing/webpack.mix.js",
         "mp": "mix --mix-config=resources/marketing/webpack.mix.js --production",
-        "mrk": "parcel build resources/assets/marketing/*.js --dist-dir public/assets/marketing --no-cache",
-        "mrkw": "parcel watch resources/assets/marketing/*.js --dist-dir public/assets/marketing"
+        "mrk": "parcel build resources/marketing/assets/parcel*.js --dist-dir public/marketing/parcel/js/drumeo --no-cache",
+        "mrkw": "parcel watch resources/marketing/assets/parcel*.js --dist-dir public/marketing/parcel/js/drumeo"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
