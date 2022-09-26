@@ -5,8 +5,18 @@ use App\Http\Controllers\Musora\ProductPagesController;
 use App\Modules\Brand\Enums\Brand;
 
 Route::get('{brand}/shop', [ProductPagesController::class, 'products'])
-    ->whereIn('brand', all_brands())
+    ->defaults('brand', 'singeo')
     ->name('marketing.products');
+
+Route::get('{brand}/shop', [ProductPagesController::class, 'products'])
+    ->defaults('brand', 'guitareo')
+    ->name('marketing.products');
+
+Route::get('{brand}/{category}', [ProductPagesController::class, 'products'])
+    ->whereIn('brand', ['pianote', 'drumeo'])
+    ->whereIn('category',['shop', 'lessons', 'accessories', 'clothing'])
+    ->name('marketing.products');
+
 
 /*---- CUSTOM PRODUCT PAGE ----*/
 //Drumeo
