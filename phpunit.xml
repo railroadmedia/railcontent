@@ -10,6 +10,10 @@
         </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/Brand/tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/Mentor/tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
@@ -27,6 +31,8 @@
         <server name="DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST" value="musora_laravel_mysql_sqlite_testing"/>
         <server name="DB_MUSORA_LARAVEL_MYSQL_READ_HOST" value="musora_laravel_mysql_sqlite_testing"/>
         <server name="DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY" value="musora_laravel_mysql_sqlite_testing"/>
+        <server name="DB_MYSQL_DRIVER" value="pdo_sqlite"/>
+        <server name="DB_MYSQL_IN_MEMORY" value="true"/>
         <server name="MAIL_MAILER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>

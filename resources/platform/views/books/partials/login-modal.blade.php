@@ -11,7 +11,7 @@
                 <form
                     method="POST"
                     action="{{ url()->route(
-                        'usora.authenticate.with-credentials',
+                        'user_management_system.login.cookie',
                         ['redirect' => url()->current()]
                     ) }}"
                 >
@@ -19,7 +19,7 @@
                     {{ csrf_field() }}
 
                     <div class="flex flex-column mb-1">
-                        @include('bladesora::members.inputs.text-input', [
+                        @include('partials.bladesora.members.inputs.text-input', [
                             "brand" => "pianote",
                             "type" => "text",
                             "inputId" => "loginEmail",
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="flex flex-column mb-1">
-                        @include('bladesora::members.inputs.text-input', [
+                        @include('partials.bladesora.members.inputs.text-input', [
                             "brand" => "pianote",
                             "type" => "password",
                             "inputId" => "loginPassword",

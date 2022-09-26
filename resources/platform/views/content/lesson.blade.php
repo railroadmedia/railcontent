@@ -1,7 +1,7 @@
 @extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
-    <title>{{ $lessonContent->fetch('fields.title') }} | {{ $brand }} | Musora</title>
+    <title>{{ $lessonContent->fetch('fields.title') }} | Musora</title>
 @endsection
 
 @section('inject-components')
@@ -12,7 +12,7 @@
     @include('content.breadcrumbs._lesson-breadcrumbs')
 
     {{-- Session Token for Railtracker progress tracking --}}
-    {{-- <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}"> --}}
+     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
 
     <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
@@ -26,9 +26,13 @@
                     @if ($lessonType == 'song')
                         <youtube-player
                             ref="mediaElementVueInstance"
+                            brand="{{ $brand }}"
                             video-id="{{ $rangesVideoIds['original'] ?? '' }}"
+                            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds',
+ $lessonContent->fetch('fields.original_video.fields.length_in_seconds')) }}"
                             :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
-                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds',
+ $lessonContent->fetch('fields.original_video.fields.length_in_seconds')) }}"
                             progress-state="{{ $lessonContent->fetch('progress_state') }}"
                             :content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                             @play="handleVideoPlay" @pause="handleVideoPause"
@@ -40,9 +44,11 @@
                             <transition appear name="fade">
                                 <youtube-player
                                     ref="mediaElementVueInstance"
+                                    brand="{{ $brand }}"
                                     video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
                                     :current-second="{{ $lessonContent->fetch('last_watch_position_in_seconds', 0) }}"
                                     :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+                                    video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                     progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                     content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                                     theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
@@ -81,6 +87,7 @@
                                             <video-player
                                                 ref="mediaElementVueInstance"
                                                 theme-color="{{ $brand }}"
+                                                brand="{{ $brand }}"
                                                 poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
                                                 :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
                                                 @if ($lessonType == 'song')
@@ -95,6 +102,8 @@
                                                 content-id="{{ $lessonContent->fetch('id') }}"
                                                 user-id="{{ user()->id }}"
                                                 video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+                                                video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
+                                                :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                                 cast-title="{{ $lessonContent->fetch('fields.title') }}"
                                                 :use-intersection-observer="true"
                                                 @play="handleVideoPlay"
@@ -175,8 +184,8 @@
                 <input id="lessonProgressPercent" type="hidden" value="{{ $lessonContent->fetch('progress_percent') }}">
 
                 @if (!empty($lessonContent->fetch('*assignments', [])))
-                    <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3">
-                        <div class="tw-flex tw-flex-row pv-3">
+                    <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                        <div class="tw-flex tw-flex-row pv-3 tw-w-full">
                             <h1 class="heading dark:tw-text-white">Assignments</h1>
                             @php
                                 $formattedAssignments = [];
@@ -212,7 +221,7 @@
                                 $formattedAssignments[] = $content;
                             }
                         @endphp
-                        <div class="tw-flex tw-flex-row">
+                        <div class="tw-flex tw-flex-row tw-w-full">
                             <assignments-container :assignments="{{ json_encode($formattedAssignments) }}">
                                 <template slot="completion-bonus">
                                     @include('partials.bladesora.members.partials._completion-bonus', [
@@ -250,10 +259,17 @@
         <div class="">
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <div class="tw-flex tw-flex-row tw-mb-5">
-                        <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                            Related Lessons
-                        </h6>
+                    <div class="tw-flex tw-flex-col tw-mb-5">
+                        @if( $parent && (ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song' ))
+                            <p class="tw-text-{{ $brand }} tw-text-sm tw-mb-1 tw-uppercase">{{ ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) }}</p>
+                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                {{ $parent->fetch('fields.title') }}
+                            </h6>
+                        @else
+                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                Related Lessons
+                            </h6>
+                        @endif
                     </div>
 
                     <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"

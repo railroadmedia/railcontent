@@ -11,7 +11,7 @@
 >
     {{-- Background Image --}}
     <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-        <img src="https://musora.com/cdn-cgi/image/width=640,quality=90/{{$backgroundImage}}" 
+        <img src="https://musora.com/cdn-cgi/image/width=1000,q_auto:best/{{$backgroundImage}}" 
             class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
             onload="this.classList.remove('tw-opacity-0')"
         >
@@ -29,7 +29,11 @@
                 {{ $user->access_level }}"
             >
                 <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
-                    @if($user->profile_picture_url)
+                    @if( !empty($currentUser['avatar']) )
+                        <img class="tw-inline-block tw-rounded-full tw-h-full" 
+                             src="{{ $currentUser['avatar'] }}"
+                        >
+                    @else
                         <img class="tw-inline-block tw-rounded-full tw-h-full" 
                              src="{{ $user->profile_picture_url }}"
                         >

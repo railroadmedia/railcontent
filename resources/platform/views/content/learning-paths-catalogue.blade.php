@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Learning Paths | {{ $brand }} | Musora</title>
+    <title>{{ ucfirst($brand) }} Learning Paths | Musora</title>
 @endsection
 
 @section('content')

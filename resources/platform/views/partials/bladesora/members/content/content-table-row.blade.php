@@ -37,7 +37,7 @@
         <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
             {{ $title }}
         </p>
-        <p class="x-tiny text-grey-3 text-truncate font-italic uppercase hide-md-up">
+        <p class="tw-text-xs text-grey-3 text-truncate font-italic uppercase hide-md-up">
             @foreach($columnData as $index => $column)
                 @if($index > 0)
                     <span class="bullet">-</span>
@@ -49,7 +49,7 @@
     </div>
 
     @foreach($columnData as $column)
-        <div class="flex flex-column uppercase align-center basic-col text-grey-3 font-italic x-tiny hide-sm-down">
+        <div class="flex flex-column uppercase align-center basic-col text-grey-3 font-italic tw-text-xs hide-sm-down">
             {{ $column }}
         </div>
     @endforEach

@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated, onBeforeMount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -107,7 +107,7 @@ const props = defineProps({
 
     useIntersectionObserver: {
         type: Boolean,
-        default: () => false,
+        default: () => true,
     },
 
     ranges: {
@@ -688,7 +688,7 @@ function enableIntersectionObserver(videoWrap) {
     intersection.value = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             const isVisible = entry.intersectionRatio >= 0.5;
-            isPipEnabled.value = !isVisible && !isMobileViewport && isPlaying.value;
+            isPipEnabled.value = !isVisible && !isMobileViewport.value && isPlaying.value;
         });
     }, {
         root: null,
@@ -701,10 +701,6 @@ function enableIntersectionObserver(videoWrap) {
 function handleOverlayClick () {
     mediaElement.value.pause();
 };
-
-onBeforeMount(() => {
-    console.log('chaca chaca', typeof shaka)
-});
 
 onMounted(() => {
     const supportsMSE = false;
@@ -815,6 +811,10 @@ onMounted(() => {
             isAirplayConnected.value = !isAirplayConnected.value;
         });
     }
+
+    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
+        enableIntersectionObserver(videoWrap.value);
+    }
 })
 
 onUpdated(() => {
@@ -822,10 +822,6 @@ onUpdated(() => {
     if (overlay && !overlay.getAttribute('overlay-click-pause-video')) {
         overlay.addEventListener("click", handleOverlayClick);
         overlay.setAttribute('overlay-click-pause-video', true)
-    }
-
-    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
-        enableIntersectionObserver(videoWrap.value);
     }
 });
 

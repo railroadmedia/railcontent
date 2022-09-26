@@ -4,6 +4,13 @@ import { getCookie, setCookie } from '../../vuesora/assets/js/functions/cookies'
 import { XIcon } from "@heroicons/vue/solid";
 import Button from "../Button/Button.vue";
 
+const props = defineProps({
+  brand: {
+    type: String,
+    default: 'drumeo'
+  }
+});
+
 const shouldShowBanner = ref(true);
 
 onBeforeMount(() => {
@@ -43,7 +50,7 @@ const hideOnboardingBanner = () => {
       class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
       You haven’t set up your account for this instrument.
     </div>
-    <a href="onboarding" class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none lg:tw-mr-6 dark:tw-text-white 
+    <a :href="`onboarding?brand=${brand}`" class="tw-btn-secondary tw-text-[#00101D] tw-border-3 tw-leading-none lg:tw-mr-6 dark:tw-text-white 
         hover:tw-bg-black/10 dark:hover:tw-bg-white/10">Complete Your Account
     </a>
     <button class="
@@ -59,8 +66,10 @@ const hideOnboardingBanner = () => {
         tw-flex
         tw-justify-center
         tw-items-center
-        tw-top-[9px]
-        tw-right-[14px]
+        tw-top-[5px]
+        tw-right-[5px]
+        md:tw-top-[9px]
+        md:tw-right-[9px]
         hover:tw-bg-black/10
         dark:hover:tw-bg-white/10
       " @click="hideOnboardingBanner">

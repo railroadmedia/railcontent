@@ -16,7 +16,7 @@ class ContentTimezoneDecorator extends TypeDecoratorBase
             return $contents;
         }
 
-        $timezone = user()->timezone;
+        $timezone = user()->timezone ?? 'America/Los_Angeles';
 
         foreach ($contentsOfType as $contentIndex => $content) {
             if (!empty($content->fetch('fields.live_event_start_time'))) {

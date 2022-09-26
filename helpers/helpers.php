@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\LiveStreamEventService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 
 if (!function_exists('cf_img')) {
@@ -183,4 +184,48 @@ if (!function_exists('parse_xp_value')) {
 
         return $xp;
     }
+}
+
+function isLive()
+{
+    $cacheStore = cache()->store(config('cache.default'))->getStore();
+
+    if (method_exists($cacheStore, 'setPrefix')) {
+        $oldPrefix = $cacheStore->getPrefix();
+        $cacheStore->setPrefix(config('cache.prefix'));
+    }
+
+    $cacheName = brand() . '_is_live';
+
+    if (cache()->has($cacheName)) {
+        return cache()->get($cacheName);
+    }
+
+    /**
+     * @var $liveService LiveStreamEventService
+     */
+    $liveService = app(LiveStreamEventService::class);
+
+    $isLive = $liveService->currentlyLive();
+    if ($isLive) {
+
+        cache()->put(
+            $cacheName,
+            true,
+            1
+        );
+    } else {
+
+        cache()->put(
+            $cacheName,
+            false,
+            1
+        );
+    }
+
+    if (method_exists($cacheStore, 'setPrefix')) {
+        $cacheStore->setPrefix($oldPrefix);
+    }
+
+    return $isLive;
 }

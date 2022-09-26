@@ -7,7 +7,6 @@
       tw-grid-flow-row tw-gap-0
     "
   >
-  <NotificationToasts :icon="toast.icon" :text="toast.text" :isError="toast.showErrorMessage" :brandName="brand"/>
     <div
       v-for="instructor in instructorList"
       :key="
@@ -21,8 +20,9 @@
             tw-relative
             tw-w-14
             tw-h-14
+            tw-flex
             tw-rounded-full
-            tw-bg-contain
+            tw-bg-cover
             tw-bg-center
             tw-bg-no-repeat
             tw-overflow-hidden
@@ -55,7 +55,7 @@
             </svg>
           </div>
           <div
-            v-on:click="goToCoachProfile(instructor.slug)"
+            v-on:click="goToCoachProfile(instructor.url)"
             class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500"
             :style="'border: 2px solid;'"
           ></div>
@@ -67,12 +67,13 @@
           tw-flex-col
           tw-pl-3
           tw-text-gray-500
+          dark:tw-text-white
           tw-uppercase
           tw-justify-between
           tw-shrink-0
         "
       >
-        <h4 v-on:click="goToCoachProfile(instructor.slug)" class="tw-cursor-pointer">
+        <h4 v-on:click="goToCoachProfile(instructor.url)" class="tw-cursor-pointer">
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
@@ -107,13 +108,13 @@
             tw-text-left tw-px-0 tw-py-0 tw-text-xs
             sm:tw-text-base
             tw-transition-none
-            tw-text-white
             tw-border-none
             tw-bg-transparent
             tw-uppercase
             tw-font-bold
             tw-cursor-pointer
           "
+          :class="`tw-text-${brand}`"
         >
           <span>
             <i aria-hidden="true" class="fa fa-check"></i>
@@ -127,13 +128,9 @@
 
 <script>
 import ContentService from "../../assets/js/services/content";
-import NotificationToasts from "../NotificationToasts/NotificationToasts.vue"
 
 export default {
   name: "CoachesInLesson",
-  components: {
-    'NotificationToasts': NotificationToasts,
-  },
   props: {
     brand: {
       type: String,
@@ -149,11 +146,6 @@ export default {
   data() {
     return {
       instructorList: [],
-      toast: {
-        icon: '',
-        text: '',
-        showErrorMessage: false,
-      },
     };
   },
   mounted() {
@@ -162,12 +154,14 @@ export default {
   methods: {
     showNotificationToast({ icon, text, error }) {
       if (error) {
-        this.toast.showErrorMessage = true;
-        this.toast.icon = '';
-        this.toast.text = '';
+        window.shownotification({
+          isError: true
+        })
       } else {
-        this.toast.icon = icon;
-        this.toast.text = text;
+        window.shownotification({
+          icon, 
+          text
+        });
       }
     },
     getInstructorIndex(id) {
@@ -190,7 +184,6 @@ export default {
       this.$forceUpdate();
     },
     followCoach(id) {
-      this.toast.showErrorMessage = false;
       this.updateCoachState(id);
       return ContentService.followCoach({
         coachId: id,
@@ -198,7 +191,7 @@ export default {
         const selectedInstructor = this.getSelectedInstructor(id);
         const firstName = selectedInstructor.name.split(' ')[0];
         const text = `You will now receive updates when ${firstName} releases new content!`;
-        this.showNotificationToast({ text, icon: 'fa-envelope' });
+        this.showNotificationToast({ text, icon: 'fa-bell' });
       }).catch(() => {
         this.showNotificationToast({ error: true });
         this.updateCoachState(id);
@@ -206,7 +199,6 @@ export default {
     },
 
     unfollowCoach(id) {
-      this.toast.showErrorMessage = false;
       this.updateCoachState(id);
       return ContentService.unfollowCoach({
         coachId: id,
@@ -221,8 +213,8 @@ export default {
       });
     },
 
-    goToCoachProfile(slug) {
-      window.location.href = `${window.location.origin}/members/coaches/${slug}`
+    goToCoachProfile(url) {
+      window.location.href = `${url}`
     }
   },
 };

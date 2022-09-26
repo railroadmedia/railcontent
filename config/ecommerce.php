@@ -8,13 +8,13 @@ return [
     'available_brands' => ['drumeo', 'pianote', 'guitareo', 'singeo', 'musora'],
 
     // database
-    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
+    'database_connection_name' => env('USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME','musora_laravel_mysql_writer_only'),
     'database_name' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME'),
     'database_user' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME'),
     'database_password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD'),
     'database_host' => env('DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST'),
-    'database_driver' => 'pdo_mysql',
-    'database_in_memory' => false,
+    'database_driver' => env('DB_MYSQL_DRIVER', 'pdo_mysql'),
+    'database_in_memory' => env('DB_MYSQL_IN_MEMORY', false),
     'enable_query_log' => false,
 
     // unique user validation database info
@@ -285,13 +285,13 @@ return [
         ],
 
         'apple_store_kit' => [
-            'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT'),
-            'shared_secret' => 'b1ab16b41296400bbf10431d72386f5f',
+            'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
+            'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
         ],
 
         'google_play_store' => [
-            'credentials' => getenv('CONFIG_PATH') . '/api-9087326685177199526-733664-caa73a600688.json',
-            'application_name' => 'com.drumeo',
+            'credentials' =>  __DIR__ . '/../google-play-api.json',
+            'application_name' => 'com.musoraapp',
             'scope' => ['https://www.googleapis.com/auth/androidpublisher'],
         ],
     ],
@@ -328,6 +328,10 @@ return [
         'pack' => 'CC-DIGI',
         'test' => '1-YEAR-MEMBERSHIP',
         'test_6month' => '6-MONTH-MEMBERSHIP',
+
+        //musora products
+        'musora_app_monthly_member' => 'DLM-1-month',
+        'musora_app_1_year_member' => 'DLM-1-year',
     ],
 
     'google_store_products_map' => [
@@ -362,6 +366,10 @@ return [
         '2' => 'DLM-1-year',
         '4' => 'DLM-1-month',
         'pack_1' => 'CC-DIGI',
+
+        //Musora app
+        'musora_monthly_subscription' => 'DLM-1-month',
+        'musora_annual_subscription' => 'DLM-1-year',
     ],
 
     // paypal

@@ -14,7 +14,7 @@
       dark:hover:tw-bg-[#002039]
     "
     :class="[class_object, isBranchPath ? [branchPathBG, branchPathText]: 'hover-bg-grey-7 hover-text-black']"
-    :href="renderLink ? item.url : false"
+    :href="renderLink ? item.url : null"   
   >
     <!-- LESSON NUMBERS -->
     <div
@@ -83,7 +83,7 @@
             <p
               v-if="!isReleased"
               class="tw-text-white tw-font-bold"
-              :class="overview ? 'tiny' : 'x-tiny'"
+              :class="overview ? 'tw-text-sm' : 'tw-text-xs'"
             >
               {{ releaseDate }}
             </p>
@@ -107,7 +107,7 @@
             style="border-radius: 50%"
           >
             <i class="fas" :class="thumbnailIcon"></i>
-            <p v-if="!isReleased" class="x-tiny text-white font-bold">
+            <p v-if="!isReleased" class="tw-text-xs tw-text-white tw-font-bold">
               {{ releaseDate }}
             </p>
           </span>
@@ -166,6 +166,8 @@
           tw-uppercase
           xl:tw-hidden
           tw-flex
+          tw-flex-wrap
+          sm:tw-flex-nowrap
         "
         :class="`${this.overview ? 'tw-mt-4' : ''}`"
       >
@@ -237,7 +239,7 @@
         tw-justify-center
         basic-col
         text-center
-        x-tiny
+        tw-text-xs
         hide-sm-down
       "
     >

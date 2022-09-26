@@ -1,35 +1,35 @@
 <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-flex-col 2xl:tw-flex-row">
     
     {{-- Video --}}
-    <div id="video-container" class="tw-w-full tw-flex tw-flex-col tw-mb-8 2xl:tw-mb-0" dusk="video-player">
+    <div id="video-container" class="tw-w-full tw-flex tw-flex-col sm:tw-mb-8 2xl:tw-mb-0" dusk="video-player">
         <div class="widescreen">
             <iframe id="player" frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" src="https://www.youtube.com/embed/{{ $youtubeId }}?rel=0&autoplay=1&playsinline=1&modestthemeColoring=1"></iframe>
         </div>
         <div class="video-title tw-pt-1">
             <div class="tw-flex tw-flex-row">
                 {{-- Lesson Title --}}
-                <div class="flex flex-row flex-wrap align-v-center pv-2">
+                <div class="flex flex-row flex-wrap align-v-center pv-2 tw-pr-2">
                     <div class="flex flex-column tw-text-white">
                         <h1 class="heading">{{ $lessonTitle }}</h1>
                     </div>
                 </div>
 
                 @if(!empty($lessonResources))
-                    <div class="tw-flex tw-flex-col tw-align-top sq-btn-col tw-mr-2">
-                        <div class="btn tw-bg-{{ $brand }} inverted tw-text-{{ $brand }} is-dropdown"
-                             data-tooltip="Download Resources">
-                            <i class="unopen fas fa-download no-events tw-text-{{ $brand }}"></i>
-                            <i class="open fas fa-download no-events tw-text-white"></i>
-
-                            <div class="dropdown-content tw-bg-white tw-shadow tw-text-xs tw-text-[#00101D]">
+                    <div class="flex flex-column align-center sq-btn-col">
+                        <div class="btn bg-{{ $brand }} inverted text-{{ $brand }} is-dropdown"
+                            data-tooltip="Download Resources">
+                            <i class="unopen fas fa-download no-events text-{{ $brand }}"></i>
+                            <i class="open fas fa-download no-events text-white"></i>
+        
+                            <div class="dropdown-content bg-white shadow tiny text-black">
                                 <ul>
                                     @foreach($lessonResources as $resource)
                                         <li>
-                                            <a class="tw-no-underline tw-text-[#00101D] pa-1"
-                                               href="{{ $resource['resource_url'] }}"
-                                               target="_blank"
-                                               download>
-                                                <i class="fas {{ get_resource_icon($resource['resource_url']) }} tw-mr-1" style="width:20px;text-align:center;"></i>  {{ $resource['resource_name'] }}
+                                            <a class="no-decoration text-black dark:tw-text-white pa-1"
+                                            href="{{ $resource['resource_url'] }}"
+                                            target="_blank"
+                                            download>
+                                                <i class="fas {{ get_resource_icon($resource['resource_url']) }} mr-1" style="width:20px;"></i>  {{ $resource['resource_name'] }}
                                             </a>
                                         </li>
                                     @endforeach

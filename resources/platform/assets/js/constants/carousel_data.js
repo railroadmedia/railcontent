@@ -3,6 +3,16 @@ export const testCarousel = [
         brand: 'drumeo',
         slides: [
             {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/drumeo/forums/drumeo-website-feedback/6/musora-early-access/13736",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
+            {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Drumeo Method",
                 ctaText: "Start Method",
@@ -10,14 +20,6 @@ export const testCarousel = [
                     "Exclusive curriculum so you’ll always know what to work on for maximum results.",
                 ctaUrl: "/drumeo/method/drumeo-method/241247",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/drumeo-method+1.jpg",
-            },
-            {
-                topSubtitle: "Featured Coach",
-                title: "Dennis Chambers",
-                ctaText: "Visit Dennis's Coach Page",
-                description: "Dennis Chambers is a drumming legend who has recorded and performed with artists such as Santana, Steely Dan, Parliament/Funkadelic, and many more.",
-                ctaUrl: "/drumeo/coaches/dennis-chambers/31980",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/drumeo-chambers-coach.jpg",
             },
             {
                 topSubtitle: "Popular Songs in All Genres",
@@ -41,6 +43,16 @@ export const testCarousel = [
         brand: 'pianote',
         slides: [
             {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/pianote/forums/platform-update-feedback-discussion/5/musora-early-access/3889?sortby_val=-published_on",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
+            {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Pianote Method",
                 ctaText: "Start Method",
@@ -55,15 +67,7 @@ export const testCarousel = [
                 ctaText: "Visit Erskine's Coach Page",
                 description: "As a music director for Disney star Zendaya, producer and performer, Erskine Hawkins has done a lot. But his favorite thing in the world is playing gospel piano.",
                 ctaUrl: "/pianote/coaches/erskine-hawkins/351708",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-erskine_coach+1.jpg",
-            },
-            {
-                topSubtitle: "Popular Songs in All Genres",
-                title: "Songs",
-                ctaText: "See the latest songs",
-                description:"Full transcriptions, loops, and practice tools for music by popular bands of all eras and styles.",
-                ctaUrl: "/pianote/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/songs.jpg",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-erskine_coach+1.png",
             },
             {
                 topSubtitle: "Learn from the legends",
@@ -78,6 +82,16 @@ export const testCarousel = [
     {
         brand: 'guitareo',
         slides: [
+            {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/guitareo/forums/website-update-and-feedback-discussion/6/musora-early-access/2674?sortby_val=-published_on",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
             {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Guitareo Method",
@@ -96,14 +110,6 @@ export const testCarousel = [
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/guitareo-sami_coach.jpg",
             },
             {
-                topSubtitle: "Popular Songs in All Genres",
-                title: "Songs",
-                ctaText: "See the latest songs",
-                description:"Play popular songs faster with access to chord charts for every style, era, and skill level.",
-                ctaUrl: "/guitareo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/songs.jpg",
-            },
-            {
                 topSubtitle: "Learn from the legends",
                 title: "Coaches",
                 ctaText: "See Coaches",
@@ -116,6 +122,16 @@ export const testCarousel = [
     {
         brand: 'singeo',
         slides: [
+            {
+                topSubtitle: "YOU HAVE EARLY ACCESS",
+                title: "INTRODUCING MUSORA",
+                ctaText: "DEVELOPER'S UPDATE",
+                description:
+                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
+                    "Beta testing lasts for a limited time, click below to learn more.",
+                ctaUrl: "/singeo/forums/platform-update-feedback-discussion/5/musora-early-access/484?sortby_val=-published_on",
+                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+            },
             {
                 topSubtitle: "Step by Step Curriculum",
                 title: "Singeo Method",
@@ -132,14 +148,6 @@ export const testCarousel = [
                 description: "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent who has a very important message on singing your truth.",
                 ctaUrl: "/singeo/coaches/shela/347694",
                 img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/singeo-shelea-coach.jpg",
-            },
-            {
-                topSubtitle: "Popular Songs in All Genres",
-                title: "Songs",
-                ctaText: "See the latest songs",
-                description:"Sing along to songs by popular singers of all eras and styles in our extensive Karaoke library.",
-                ctaUrl: "/singeo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=85,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/songs.jpg",
             },
             {
                 topSubtitle: "Learn from the legends",

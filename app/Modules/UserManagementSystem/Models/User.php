@@ -2,10 +2,12 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\Mentor\Models\MentorStudent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Contracts\Notifications\Dispatcher;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
@@ -189,6 +192,20 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $send_email_notifications
  * @method static Builder|User whereSendEmailNotifications($value)
  * @method static Builder|User whereSendMobileAppPushNotifications($value)
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingExperience[] $onboardingExperience
+ * @property-read int|null $onboarding_experience_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGear[] $onboardingGear
+ * @property-read int|null $onboarding_gear_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingGenre[] $onboardingGenres
+ * @property-read int|null $onboarding_genres_count
+ * @property-read Collection|\Modules\UserManagementSystem\Models\OnboardingTopic[] $onboardingTopics
+ * @property-read int|null $onboarding_topics_count
+ * @method static Builder|User whereDrumeoOnboardingSkipSetup($value)
+ * @method static Builder|User whereGuitareoOnboardingSkipSetup($value)
+ * @method static Builder|User whereIsPackOwner($value)
+ * @method static Builder|User wherePianoteOnboardingSkipSetup($value)
+ * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
+ * @property ?MentorStudent $mentorStudent
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -222,7 +239,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $fillable = [
         'first_name',
         'last_name',
-        'location',
+        'country',
         'birthday',
         'biography',
         'profile_picture_url',
@@ -249,7 +266,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'drumeo_onboarding_skip_setup',
         'pianote_onboarding_skip_setup',
         'guitareo_onboarding_skip_setup',
-        'singeo_onboarding_skip_setup'
+        'singeo_onboarding_skip_setup',
+        'total_xp'
     ];
 
 
@@ -262,6 +280,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         $this->connection = config('user_management_system.database_connection_name');
 
         parent::__construct($attributes);
+    }
+
+    public function mentorStudent(): HasOne
+    {
+        return $this->hasOne(MentorStudent::class, 'user_id');
     }
 
     /**
@@ -281,8 +304,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     /**
      * @return Attribute
      */
-    public function profilePictureUrl($usingCDN = true)
-    : Attribute {
+    public function profilePictureUrl($usingCDN = true): Attribute
+    {
         return Attribute::make(
             get: function ($value) use ($usingCDN) {
                 $imageUrl = 'https://s3.amazonaws.com/pianote/defaults/avatar.png';
@@ -305,8 +328,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      *
      * @return Attribute
      */
-    public function accessLevel()
-    : Attribute {
+    public function accessLevel(): Attribute
+    {
         return Attribute::make(
             get: function ($value) {
                 if (!empty($value)) {
@@ -327,16 +350,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
-     * @return Attribute
+     * @return int
      */
-    public function totalXp()
-    : Attribute
+    public function totalXp(): int
     {
-        return Attribute::make(
-            get: function ($value) {
-                return !empty($this->total_xp) ? $this->total_xp : 0;
-            },
-        );
+        return !empty($this->total_xp) ? $this->total_xp : 0;
     }
 
     /**
@@ -446,7 +464,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function passwordResets()
     {
-        return $this->hasMany(PasswordReset::class, 'user_id');
+        return $this->hasMany(PasswordReset::class, 'email', 'email');
     }
 
     /**
@@ -583,7 +601,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(OnboardingExperience::class);
     }
 
-   /**
+    /**
      * @return bool
      */
     public function isPackOwner()
@@ -606,5 +624,17 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
+    }
+
+    public function getTotalXp()
+    {
+        return $this->total_xp ?? 0;
+    }
+
+    public function isActiveStudent(): bool
+    {
+        return !$this->isAdmin()
+            && !empty($this->membership_expiration_date)
+            && $this->membership_expiration_date >= Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'));
     }
 }

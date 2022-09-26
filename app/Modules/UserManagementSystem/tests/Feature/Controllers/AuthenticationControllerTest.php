@@ -2,6 +2,8 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -9,6 +11,7 @@ use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
+use PDO;
 
 class AuthenticationControllerTest extends UserManagementSystemTestCase
 {
@@ -38,15 +41,15 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
                     [
                         'email' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The email field is required.',
                             ],
                         'password' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The password field is required.',
                             ],
                         'device_name' =>
                             [
-                                0 => 'validation.required',
+                                0 => 'The device name field is required.',
                             ],
                     ],
             ]),
@@ -103,6 +106,8 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
     public function test_authenticate_cookie_invalid_credentials()
     {
+        $pdo = DB::connection('musora_laravel_mysql_sqlite_testing')->getPdo();
+
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/login/cookie',
@@ -221,6 +226,56 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         );
 
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function test_authenticate_generated_key_success()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfHour()->toDateTimeString());
+
+        $this->expectsEvents([UserEvent::class]);
+
+        $response = $this->call(
+            'GET',
+            config('user_management_system.route_prefix') . '/login/generated-key',
+            ['key' => $hashKey, 'user_id' => $user->id]
+        );
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
+    }
+
+    public function test_authenticate_generated_key_success_6_hours_later()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfHour()->subHours(6)->toDateTimeString());
+
+        $this->expectsEvents([UserEvent::class]);
+
+        $response = $this->call(
+            'GET',
+            config('user_management_system.route_prefix') . '/login/generated-key',
+            ['key' => $hashKey, 'user_id' => $user->id]
+        );
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
     }
 
     public function test_logout_token()

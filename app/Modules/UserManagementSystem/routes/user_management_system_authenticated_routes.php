@@ -107,12 +107,32 @@ Route::group(
         )
             ->name('user_management_system.onboarding.experience');
 
+        Route::get(
+            'onboarding-saved-answers',
+            OnboardingController::class . '@getUserOnboardingInformation'
+        );
+
 
         Route::post(
             'onboarding-skip-account-setup',
             OnboardingController::class . '@skipAccountSetup'
         )
-            ->name('user_management_system.onboarding.test');
+            ->name('user_management_system.onboarding.skip');
+
+        Route::get(
+            'onboarding-answer-history-instrument',
+            OnboardingController::class . '@saveOnboardingHistoryForInstrument'
+        );
+
+        Route::get(
+            'onboarding-answer-history-coach',
+            OnboardingController::class . '@saveOnboardingHistoryForCoach'
+        );
+
+        Route::get(
+            'is-display-name-unique',
+            UserController::class . '@isDisplayNameUnique'
+        );
     }
 );
 

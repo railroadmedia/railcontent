@@ -1,5 +1,4 @@
 @import '~normalize.css/normalize.css';
-@import "~noty/src/noty.scss";
 @import "~flatpickr/dist/themes/airbnb.css";
 //@import './partials/_tooltip.scss';
 @import './partials/_flags.scss';
@@ -18,7 +17,6 @@
 @import './partials/_account.scss';
 @import './partials/_modal.scss';
 @import './partials/_faces.scss';
-@import './partials/_toasts.scss';
 @import './partials/_accordion.scss';
 @import './partials/_play-alongs.scss';
 @import './partials/_avatars.scss';
@@ -307,18 +305,6 @@ ul {
     transition:transform .2s ease-in-out;
     display:block;
   }
-}
-
-#noty_layout__topRight {
-  top:55px;
-
-  @include medium {
-    top:66px;
-  }
-}
-
-.noty_buttons {
-  display:flex;
 }
 
 .no-events {
@@ -621,12 +607,6 @@ ul {
       margin-bottom:0;
     }
   }
-}
-
-.header-background-container {
-  max-width: 1530px;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .header-gradient-overlay {

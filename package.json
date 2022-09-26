@@ -61,7 +61,6 @@
         "mitt": "^3.0.0",
         "mux.js": "^5.5.1",
         "normalize.css": "^8.0.1",
-        "noty": "^3.2.0-beta-deprecated",
         "pinia": "^2.0.17",
         "query-string": "^7.1.1",
         "screenfull": "^6.0.1",
@@ -69,7 +68,7 @@
         "simplebar": "^5.3.6",
         "smoothscroll-polyfill": "^0.4.4",
         "stream-chat": "^6.7.3",
-        "vue": "^3.2.19",
+        "vue": "^3.2.38",
         "vue-advanced-cropper": "^2.8.1",
         "vue-axios": "^3.4.1",
         "vue-loader": "^16.8.1"

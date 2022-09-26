@@ -12,6 +12,7 @@ use Illuminate\Support\MessageBag;
 
 class ForgotPasswordController extends Controller
 {
+//https://dev.musora.com:8443/user-management-system/password/password-reset-form?token=3D9e7849f88258c6dfe08fb901bae4bb5d6e3261a8c4fef02aec98c5d016cdf512&email=caleb+lifetime_all_brands_1@drumeo.com
     /**
      * Send a reset link to the given user.
      *
@@ -20,9 +21,7 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-
-        //todo: check email exists also
-        $request->validate(['email' => 'required|email|']);
+        $request->validate(['email' => 'required|email|exists:' . config('user_management_system.database_connection_name') . '.usora_users']);
 
         $response =
             $this->broker()
@@ -35,7 +34,7 @@ class ForgotPasswordController extends Controller
                 session()->put('skip-third-party-auth-check', true);
 
                 return redirect()
-                    ->to(config('usora.login_page_path'))  // todo: to be defined
+                    ->to(config('user_management_system.login_page_path'))  // todo: to be defined
                     ->with(
                         'status',
                         'Password reset link has been sent to your email.'

@@ -4,100 +4,21 @@
     <title>Payments | Musora</title>
 @endsection
 
-@section('styles')
-    <script src="https://js.stripe.com/v3/"></script>
-@endsection
-
-@section('layout-scripts')
-    @parent
-
-    <script src="{{ mix('platform/js/profile.js') }}"></script>
-@endsection
-
 @section('edit-forms')
-    <div id="payment-methods-section">
-        <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bb-grey-1-1">
-            <h1 class="heading">Payment Details</h1>
+    <div id="editForm" class="tw-flex tw-flex-col">
+
+        {{-- <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
+            <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white">Payments</h1>
+        </div> --}}
+
+        {{-- Coming Soon Message --}}
+        <div class="tw-flex tw-flex-col pa-3 tw-pb-0">
+            <h2 class="tw-text-3xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mb-4">Coming Soon</h2>
+            <p class="tw-text-base tw-text-[#00101D] dark:tw-text-white">
+                This page is currently under construction. If you'd like to update your payment information please visit 
+                <a class="tw-underline tw-text-drumeo" href="https://www.{{ $brand }}.com/members/settings/payments" alt="Go to {{ $brand }} payment page">https://www.{{ $brand }}.com/members/settings/payments</a>
+            </p>
         </div>
 
-        <div class="tw-flex tw-flex-row ph-3 tw-mb-3">
-            <payment-methods
-                theme-color="{{ $brand }}"
-                :payment-methods="{{ $paymentMethodsJson }}"
-                brand="{{ $brand }}"
-                stripe-publishable-key="{{ $stripePublishableKey }}"
-                :countries="{{ $countries }}"
-                :provinces="{{ $provinces }}"
-                :cart="{{ $cartJson }}"
-                :has-subscription="{{ json_encode(!empty($currentSubscription)) }}"
-                :is-active="{{ json_encode($existingSubscriptionActive) }}"
-                :user-id="{{ auth()->id() }}"
-            />
-        </div>
-    </div>
-
-    {{-- todo: remove this test code --}}
-    @if(!empty($currentSubscription) && !$existingSubscriptionActive)
-        {{-- show charge immediately checkbox and totals--}}
-    @endif
-
-    @if(!empty($currentSubscription) && $existingSubscriptionActive)
-        {{-- do not show the checkbox, and also hide the payment totals since they will not be charged right away--}}
-    @endif
-
-    @if(empty($currentSubscription))
-        {{-- do not show the checkbox, and also hide the payment totals since they will not be charged right away--}}
-    @endif
-
-    @if(!empty($currentSubscription))
-        {{-- show a message like "all your subscriptions will be set to charge your updated payment method"
-        somewhere so its clear this will be their primary method from now on--}}
-    @endif
-
-    <div class="tw-flex tw-flex-row pa-3 tw-flex-auto bt-grey-1-1">
-        <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-row tw-mb-3">
-                <h4 class="subheading">Payment History</h4>
-            </div>
-            @if($payments)
-                @foreach($payments as $payment)
-                    <a href="{{ url()->route('members.payment-invoice', $payment->getId()) }}"
-                       class="tw-flex tw-flex-row tw-flex-wrap tw-mb-1 tw-text-[#00101D] tw-no-underline"
-                       target="_blank">
-                        <div class="tw-flex tw-flex-col xs-12 md-6">
-                            <div class="tw-flex tw-flex-row">
-                                <p class="tiny tw-font-bold">
-                                    <i class="fal fa-file-pdf tw-mr-1"></i>
-                                    {{ Carbon\Carbon::parse($payment->getCreatedAt())->format('F j, Y') }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="tw-flex tw-flex-col xs-12 md-6">
-                            <div class="tw-flex tw-flex-row">
-                                <div class="tw-flex tw-flex-col x-tiny tw-italic tw-uppercase align-h-left xs-6">
-                                    @if (!empty($payment->getPaymentMethod()) &&
-                                    !empty($payment->getPaymentMethod()->getMethod()) &&
-                                    $payment->getExternalProvider() == 'stripe')
-                                        {{ $payment->getPaymentMethod()->getMethod()->getCompanyName() }} -
-                                        {{ $payment->getPaymentMethod()->getMethod()->getLastFourDigits() }}
-                                    @else
-                                        {{ $payment->getExternalProvider() == 'paypal' ? 'PayPal' : 'Other' }}
-                                    @endif
-
-                                </div>
-                                <div class="tw-flex tw-flex-col x-tiny tw-italic tw-uppercase align-h-center xs-3">
-                                    {{ $payment->getType() }}
-                                </div>
-                                <div class="tw-flex tw-flex-col x-tiny tw-italic tw-uppercase align-h-right xs-3">
-                                    &#36;{{ money_format('%i', $payment->getTotalPaid()) }}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            @else
-                <p class="body">You do not have any payments in your payment history.</p>
-            @endif
-        </div>
     </div>
 @endsection

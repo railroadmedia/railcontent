@@ -5,7 +5,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Forums | {{ $brand }}</title>
+    <title>{{ ucfirst($brand) }} Forums | Musora</title>
 @endsection
 
 @section('content')

@@ -82,6 +82,7 @@
                             <input
                                 id="threadSearch"
                                 class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-pb-0"
+                                :class="{ 'has-input': searchTerm.length }"
                                 ref="searchInput"
                                 v-model.lazy="searchInterface"
                                 type="text"
@@ -104,12 +105,12 @@
                         <!-- Submit Button -->
                         <div class="tw-flex tw-flex-col">
                             <button
-                                class="tw-btn-primary tw-px-5 sm:tw-px-12"
+                                class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"
                                 :class="[brandBGColor]"
                                 @click="$refs.searchInput.blur()"
                             >
-                                <i class="fas fa-search tw-mr-1 tw-text-sm"></i>
-                                <span>Search</span>
+                                <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>
+                                <span class="tw-hidden sm:tw-inline-flex">Search</span>
                             </button>
                         </div>
                     </div>
@@ -117,9 +118,9 @@
 
                 <p
                     v-if="searching"
-                    class="tiny font-italic text-grey-4 tw-mt-2 tw-ml-6"
+                    class="tiny font-italic text-grey-4 dark:tw-text-[#9EC0DC] tw-mt-2 tw-ml-6"
                 >
-                    Showing results for <span class="font-bold text-black">"{{ searchInterface }}"</span> in All Forums.
+                    Showing results for <span class="tw-font-bold tw-text-black dark:tw-text-white">"{{ searchInterface }}"</span> in All Forums.
                 </p>
             </div>
         </div>

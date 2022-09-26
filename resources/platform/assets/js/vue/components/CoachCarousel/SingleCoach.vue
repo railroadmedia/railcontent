@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import ContentAPI from '../../vuesora/assets/js/services/content';
+import { saveCoachHistoryData } from "../Onboarding/services"
 
 const props = defineProps({
   id: {
-    type: String,
+    type: [String, Number],
   },
   cardImg: {
     type: String,
@@ -22,7 +23,11 @@ const props = defineProps({
 
 const isCoachFollowed = ref(props.isFollowed);
 
-const followEndpoint = (id) => {
+const followEndpoint = (id, name) => {
+
+    saveCoachHistoryData({coachName: name, coachId: id})
+    .then(response => response)
+    .catch(error => {console.error(error)});
   return ContentAPI.followCoach({ coachId: id });
 };
 
@@ -38,7 +43,7 @@ function onFollow(e) {
       isCoachFollowed.value = false;
     });
   } else {
-    followEndpoint(props.id).then(() => {
+    followEndpoint(props.id, props.name).then(() => {
       // console.log('then follow')
       isCoachFollowed.value = true;
     });
@@ -116,7 +121,7 @@ function onFollow(e) {
         tw-border-transparent
         tw-rounded-lg
         lg:tw-rounded-xl
-        hover:tw-border-yellow-400
+        hover-hover:hover:tw-border-yellow-400
         tw-box-border tw-w-[232px]
         ${isCoachFollowed ? 'tw-border-yellow-400' : ''}
         `
@@ -163,15 +168,26 @@ function onFollow(e) {
   background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
 }
 
-.single-coach:hover .single-coach__gradient, .single-coach--followed .single-coach__gradient {
-  background: linear-gradient(
-      182.08deg,
-      rgba(1, 5, 15, 0) 1.7%,
-      rgba(250, 163, 0, 0.58) 98.25%
-    ),
-    linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
+@media (hover: hover) {
+  .single-coach:hover .single-coach__gradient {
+    background: linear-gradient(
+        182.08deg,
+        rgba(1, 5, 15, 0) 1.7%,
+        rgba(250, 163, 0, 0.58) 98.25%
+      ),
+      linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
+  }
 }
 
+.single-coach--followed .single-coach__gradient {
+    background: linear-gradient(
+        182.08deg,
+        rgba(1, 5, 15, 0) 1.7%,
+        rgba(250, 163, 0, 0.58) 98.25%
+      ),
+      linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
+  }
+  
 .one-word-per-line {
   word-spacing: 232px;
 }

@@ -1,9 +1,10 @@
 <template>
-    <div class="flex flex-column">
+    <div class="flex flex-column tw-w-full">
         <div v-for="(assignment, index) in assignments" :key="assignment.id" class="flex flex-row" dusk="assignments">
-            <div class="flex flex-column grow">
+            <div class="flex flex-column grow tw-w-full">
                 <ContentAssignment
                     :theme-color="assignment.themeColor"
+                    :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
                     :id="assignment.id"
                     :title="assignment.title"

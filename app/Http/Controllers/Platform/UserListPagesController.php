@@ -66,7 +66,7 @@ class UserListPagesController extends BaseController
                 $userPrimaryPlaylistId,
                 $contentTypes,
                 $request->get('limit', 20),
-                ($request->get('page', 1) - 1) * $request->get('limit', 20)
+                $request->get('page', 1)
             );
 
             $totalResults =

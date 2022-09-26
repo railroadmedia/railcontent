@@ -8,7 +8,7 @@
 <div class="tw-w-full tw-h-[100vh] tw-bg-[#000C17] tw-z-0">
     <img
         id="loginBgImg"
-        src="https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg"
+        src="https://musora.com/cdn-cgi/image/width=1200,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/musora_login.jpg"
         class="tw-absolute tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-w-full tw-h-full tw-z-10"
         loading="lazy"
         onload="document.getElementById('loginBgImg').classList.remove('tw-opacity-0')"

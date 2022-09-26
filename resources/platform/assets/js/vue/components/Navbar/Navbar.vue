@@ -39,7 +39,7 @@ const toggleSearchModal = (val) => {
 <template>
   <nav
     class="
-      tw-z-50
+      tw-z-[100]
       tw-fixed
       tw-top-0
       tw-flex
@@ -128,6 +128,10 @@ const toggleSearchModal = (val) => {
       />
     </div>
 
-    <SearchModal @onClose="() => toggleSearchModal(false)" v-if="showSearchModal" />
+    <SearchModal 
+      @onClose="() => toggleSearchModal(false)" 
+      :brand="brand"
+      v-if="showSearchModal" 
+    />
   </nav>
 </template>

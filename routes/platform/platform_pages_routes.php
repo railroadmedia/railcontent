@@ -14,6 +14,7 @@ use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Http\Controllers\Platform\LegacyResourcesController;
+use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,14 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
             ->whereIn('brand', all_brands())
             ->name('platform.new-lessons');
+
+        Route::get('/{brand}/lessons/subscribed', [ContentPagesController::class, 'subscribedContent'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.subscribed-lessons');
+
+        Route::get('/{brand}/jump-to-comment/{contentId}/{commentId}', [ContentPagesController::class, 'jumpToContentComment'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.jump-to-comment');
 
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
@@ -166,6 +175,18 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.packs.third-level');
 
+        Route::get('/{brand}/semester-packs/{packSlug}/{packId}', [PackPagesController::class, 'packBundles'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.semester-packs.first-level');
+
+        Route::get('/{brand}/semester-packs/{packSlug}/{packId}/{packLessonSlug}/{packLessonId}', [PackPagesController::class, 'semesterPackLesson'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.semester-packs.lesson');
+
+        Route::get('/{brand}/coaches/{coachSlug}/{contentSlug}/{contentId}', [CoachPagesController::class, 'stream'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.coach.first-level');
+
         /*
          * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
          */
@@ -223,7 +244,7 @@ Route::domain('{musoraDomain}')
             [ContentPagesController::class, 'secondLevel']
         )
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses'])
+            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs', 'play-alongs'])
             ->name('platform.content.second-level');
 
         Route::get(
@@ -409,13 +430,6 @@ Route::domain('{musoraDomain}')
             ->name('platform.notifications');
 
         /*
-         * Referral Pages
-         */
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.invite-a-friend');
-
-        /*
          * Forums
          */
         Route::get('/{brand}/forums', [ForumPagesController::class, 'showCategories'])
@@ -501,14 +515,33 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo'])
             ->name('platform.legacy-resources.loops');
 
+        /**
+         * Pianote Foundation Book
+         */
+        Route::get('/{brand}/resources', [\App\Http\Controllers\Platform\BooksController::class, 'resources'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources');
+
+        Route::get('/{brand}/resources/level-{chapterNumber}', [\App\Http\Controllers\Platform\BooksController::class, 'chapter'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources.chapter');
+
 //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
     });
 
-//Route fallback - when no route is matched
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-})
-    ->middleware(['web_authenticated']);
+/*
+ * Referral Pages
+ */
+Route::domain('{musoraDomain}')
+    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+    ->group(function () {
+        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.invite-a-friend');
+    });
+
+Route::get('/apple-app-site-association', [\App\Http\Controllers\Misc\ManifestFilesController::class, 'appleAssociationFile'])
+    ->name('platform.apple-association-file');

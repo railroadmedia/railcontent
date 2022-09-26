@@ -32,19 +32,18 @@ const options = ref(
   })
 );
 
+const currentSelection = ref(props.info.genres[props.brand]);
+
 function handleMultiSelection(selection) {
-  emit(
-    "onCheckStep",
-    4,
-    !!Object.values(selection).find((val) => val)
-  );
-  emit("onChangeInfo", { ...props.info, genres: { ...props.info.genres, [props.brand]: selection} });
+  currentSelection.value = selection;
 }
 
 const handleNextStep = () => {
   const data = [];
 
-  Object.entries(props.info.genres[props.brand]).forEach(([type, isChecked]) => {
+  emit("onChangeInfo", { ...props.info, genres: { ...props.info.genres, [props.brand]: currentSelection.value} });
+
+  Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
     if (isChecked) {
       data.push(type);
     }
@@ -55,6 +54,7 @@ const handleNextStep = () => {
     brand: props.brand
   }).then(() => {
     emit('onChangeStep', 5);
+    emit('onCheckStep', 4, true);
   }).catch(() => {
     showErrorNotification.value = true;
   });
@@ -63,17 +63,20 @@ const handleNextStep = () => {
 function goBack() {
   emit('onChangeStep', 3);
 }
+
+const isNextButtonDisabled = () => {
+  return !Object.values(currentSelection.value).filter(val => {
+    return val;
+  }).length;
+};
 </script>
 
 <template>
   <StepWrapper :brand="brand" :showBgImg="true">
     <div
       class="
-        tw-h-full
-        md:tw-h-auto
         tw-w-full tw-flex tw-flex-col tw-items-center
         md:tw-justify-center
-        tw-mt-[40px]
         md:tw-mt-0
       "
     >
@@ -81,8 +84,8 @@ function goBack() {
         @onGoBack="goBack" />
       <MultiSelect
         :options="options"
-        :initialSelection="info.genres[brand]"
-        classOverride="tw-mb-[52px]"
+        :initialSelection="currentSelection"
+        classOverride="md:tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />
     </div>
@@ -90,14 +93,14 @@ function goBack() {
       class="
         tw-justify-self-end
         md:tw-justify-self-center
-        tw-flex tw-flex-col tw-items-center tw-pb-[20px]
+        tw-flex tw-flex-col tw-items-center tw-pb-[20px] tw-pt-[20px]
         md:tw-pb-0
       "
     >
       <Button
         :brand="brand"
         @onButtonClick="handleNextStep"
-        :isDisabled="!steps[4].checked"
+        :isDisabled="isNextButtonDisabled()"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
         >Next</Button
       >
@@ -110,7 +113,7 @@ function goBack() {
       <Button
         :brand="brand"
         @onButtonClick="handleNextStep"
-        :isDisabled="!steps[4].checked"
+        :isDisabled="isNextButtonDisabled()"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >

@@ -29,9 +29,9 @@ const experienceDescriptionMap = {
   },
   guitareo: {
     0: 'Start from the beginning. No experience required!',
-    1: 'For beginners who can hold your sticks, set up your kit, and can play a few beats and fills.',
-    2: 'For intermediate players who are comfortable playing some songs and have some hand and foot independence.',
-    3: 'For advanced players who are comfortable playing many songs in many styles start to finish, and are looking to improve in specific skills.',
+    1: 'For beginners who want to learn their basic chords and some strumming patterns so they can play around the campfire.',
+    2: 'For intermediate players who want to be able to play tabs and chord charts, dive into some basic soloing, and learn some fancy chords.',
+    3: 'For guitarists who have their essentials down and are looking for the final touches to improve their playing.',
   }
 }
 
@@ -73,95 +73,44 @@ function goBack() {
 
 <template>
   <StepWrapper :brand="brand" :showBgImg="true">
-    <div
-      class="
-        tw-flex-grow
-        md:tw-flex-grow-0
-        md:tw-h-auto
-        tw-w-full tw-flex tw-flex-col tw-items-center
-        md:tw-justify-center
-        tw-pt-[40px]
-        md:tw-mt-0
-        tw-overflow-y-scroll
-      "
-    >
-      <StepHeader
-        title="What experience level best describes you?"
-        subtitle="Now it’s time to choose your experience level. You can change your
-            experience level at anytime in your profile."
-        @onGoBack="goBack"
-      />
+    <div class="
+        tw-w-full tw-min-h-full tw-flex tw-flex-col tw-items-center
+        tw-justify-between
+        xl:tw-justify-center
+      ">
+      <StepHeader title="What experience level best describes you?" subtitle="Now it’s time to choose your experience level. You can change your
+            experience level at anytime in your profile." @onGoBack="goBack" />
       <SquaresContainer>
-        <SquaredCard
-          type="green"
-          :active="info.experience[brand] === 0"
-          defaultBorderColor="tw-border-[#7E9AB1]"
-          @onSelect="() => onExperienceSelection(0)"
-        >
-          <ExperienceCardContent
-            title="Level 1"
-            :subtitle="experienceDescriptionMap[brand][0]"
-            level="1"
-          />
+        <SquaredCard type="green" :active="info.experience[brand] === 0" defaultBorderColor="tw-border-[#7E9AB1]"
+          @onSelect="() => onExperienceSelection(0)">
+          <ExperienceCardContent title="Level 1" :subtitle="experienceDescriptionMap[brand][0]" level="1" />
         </SquaredCard>
-        <SquaredCard
-          :active="info.experience[brand] === 1"
-          type="blue"
-          defaultBorderColor="tw-border-[#7E9AB1]"
-          @onSelect="() => onExperienceSelection(1)"
-        >
-          <ExperienceCardContent
-            title="Level 2-3"
-            :subtitle="experienceDescriptionMap[brand][1]"
-            level="2-3"
-          />
+        <SquaredCard :active="info.experience[brand] === 1" type="blue" defaultBorderColor="tw-border-[#7E9AB1]"
+          @onSelect="() => onExperienceSelection(1)">
+          <ExperienceCardContent title="Level 2-3" :subtitle="experienceDescriptionMap[brand][1]" level="2-3" />
         </SquaredCard>
-        <SquaredCard
-          :active="info.experience[brand] === 2"
-          defaultBorderColor="tw-border-[#7E9AB1]"
-          type="yellow"
-          @onSelect="() => onExperienceSelection(2)"
-        >
-          <ExperienceCardContent
-            title="Level 4-6"
-            :subtitle="experienceDescriptionMap[brand][2]"
-            level="4-6"
-          />
+        <SquaredCard :active="info.experience[brand] === 2" defaultBorderColor="tw-border-[#7E9AB1]" type="yellow"
+          @onSelect="() => onExperienceSelection(2)">
+          <ExperienceCardContent title="Level 4-6" :subtitle="experienceDescriptionMap[brand][2]" level="4-6" />
         </SquaredCard>
-        <SquaredCard
-          :active="info.experience[brand] === 3"
-          defaultBorderColor="tw-border-[#7E9AB1]"
-          type="red"
-          @onSelect="() => onExperienceSelection(3)"
-        >
-          <ExperienceCardContent
-            title="Level 7-10"
-            :subtitle="experienceDescriptionMap[brand][3]"
-            level="7-10"
-          />
+        <SquaredCard :active="info.experience[brand] === 3" defaultBorderColor="tw-border-[#7E9AB1]" type="red"
+          @onSelect="() => onExperienceSelection(3)">
+          <ExperienceCardContent title="Level 7-10" :subtitle="experienceDescriptionMap[brand][3]" level="7-10" />
         </SquaredCard>
       </SquaresContainer>
-    </div>
-
-    <div
-      class="
+      <div class="
         tw-justify-self-end
         md:tw-justify-self-center
         tw-flex tw-flex-col
         tw-items-center
         tw-pb-[30px]
         tw-pt-[10px]
-        md:tw-pb-0
-        md:tw-pt-0
-      "
-    >
-      <ProgressBar
-        :brand="brand"
-        :currentStep="3"
-        :steps="steps"
-        @onChangeStep="(s) => emit('onChangeStep', s)"
-      />
-      <SkipStep :brand="brand" />
+        xl:tw-pb-0
+        xl:tw-pt-0
+      ">
+        <ProgressBar :brand="brand" :currentStep="3" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
+        <SkipStep :brand="brand" />
+      </div>
     </div>
   </StepWrapper>
 </template>

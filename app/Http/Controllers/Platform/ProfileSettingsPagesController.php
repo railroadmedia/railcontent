@@ -62,7 +62,7 @@ class ProfileSettingsPagesController extends BaseController
         UserProductService $userProductService,
         SubscriptionService $subscriptionService,
         SubscriptionRepository $subscriptionRepository,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
     )
     {
         $this->notificationSettingsService = $notificationSettingsService;
@@ -103,7 +103,11 @@ class ProfileSettingsPagesController extends BaseController
             'user' => user(),
             'signature' => ($userSignature) ? $userSignature['signature'] : '', // todo: railforums integration
             'sections' => $this->settingSections('settings'),
-            'userNotificationsSettings' => $this->notificationSettingsService->getUserNotificationSettings(user()->id, null, $request->get('selected-brand', $brand)),
+            'userNotificationsSettings' => $this->notificationSettingsService->getUserNotificationSettings(
+                user()->id,
+                null,
+                $request->get('selected-brand', $brand)
+            ),
             'allBrands' => all_brands(),
             'selectedBrand' => $request->get('selected-brand', $brand)
 
@@ -430,9 +434,10 @@ class ProfileSettingsPagesController extends BaseController
         dd($request);
 
         return view('account.settings.win-back', []);
+
     }
 
-    public function payments(Request $request)
+    public function payments(Request $request, $domain, $brand, $userId)
     {
 //        $this->ecommerceEntityManager->getFilters()
 //            ->disable('soft-deleteable');
@@ -532,7 +537,12 @@ class ProfileSettingsPagesController extends BaseController
 //            'cartJson' => json_encode($this->cartService->toArray()),
 //        ]);
 
-        return 'WIP.';
+        return view('account.settings.payments', [
+            'user' => user(),
+            'sections' => $this->settingSections('payments'),
+            'allBrands' => all_brands(),
+            'selectedBrand' => $request->get('selected-brand', $brand)
+        ]);
     }
 
     /**

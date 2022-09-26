@@ -5,6 +5,9 @@ import OptionGroup from '../AvatarMenu/OptionGroup.vue'
 import AvatarMenu from '../AvatarMenu/AvatarMenu.vue'
 import MenuHeader from '../AvatarMenu/MenuHeader.vue'
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
+import ModalRenderer from '../Modal/ModalRenderer.vue'
+import StudentReviewModal from '../IFrames/StudentReviewFormInModal.vue'
+import { XIcon } from "@heroicons/vue/solid";
 
 export default {
   name: 'UserIcon',
@@ -36,16 +39,28 @@ export default {
     OptionGroup,
     OptionElement,
     MenuHeader,
-    MusoraIcon
+    MusoraIcon,
+    ModalRenderer,
+    StudentReviewModal,
+    XIcon,
   },
   setup(props, context) {
     const isUserMenuOpen = ref(false)
+    const isReviewModalOpen = ref(false)
 
     const handleMenuOpen = (val) => {
       if (typeof val === 'boolean') {
         isUserMenuOpen.value = val
       } else {
         isUserMenuOpen.value = !isUserMenuOpen.value
+      }
+    }
+
+    const handleReviewOpen = (val) => {
+      if (typeof val === 'boolean') {
+        isReviewModalOpen.value = val
+      } else {
+        isReviewModalOpen.value = !isReviewModalOpen.value
       }
     }
 
@@ -56,7 +71,9 @@ export default {
     return {
       handleMenuOpen,
       handleLogout,
-      isUserMenuOpen
+      isUserMenuOpen,
+      isReviewModalOpen,
+      handleReviewOpen
     }
   }
 }
@@ -79,12 +96,19 @@ export default {
       </span>
     </div>
 
+    <ModalRenderer v-if="isReviewModalOpen" @onClose="() => handleReviewOpen(false)">
+      <button @click="() => handleReviewOpen(false)" class="tw-absolute tw-right-3 tw-top-3">
+          <XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" />
+      </button>
+      <StudentReviewModal :brand="brand" />
+    </ModalRenderer>
+
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader
         :name="userName"
-        :optionClick="() => {}"
+        :onOptionClick="() => {}"
         :userPhoto="userAvatar"
-        :accountUrl="accountUrl"
+        :href="accountUrl.length ? accountUrl : '/profile'"
       />
       <OptionGroup>
         <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
@@ -110,7 +134,7 @@ export default {
           <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
           Schedule
         </OptionElement>
-        <OptionElement data-open-modal="applicationModal">
+        <OptionElement @onOptionClick="() => handleReviewOpen(true)">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>
@@ -120,7 +144,7 @@ export default {
         </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement @optionClick="() => $emit('onColorModeToggle')">
+        <OptionElement @onOptionClick="() => $emit('onColorModeToggle')">
 
           <musora-icon v-if="!isDarkModeSelected" icon-name="sun" class="tw-w-[20px] tw-mr-2"/>
           <musora-icon v-if="isDarkModeSelected" icon-name="moon" class="tw-w-[20px] tw-mr-2"/>

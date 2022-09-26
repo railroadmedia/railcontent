@@ -61,7 +61,9 @@ export default class ProgressTracker {
         watchPosition,
         totalDuration,
         sessionToken,
+        brand
     }) {
+        console.log('brand', brand);
         const data = new FormData();
 
         if(this.running){
@@ -75,6 +77,7 @@ export default class ProgressTracker {
         data.append('media_type', mediaType);
         data.append('media_category', mediaCategory);
         data.append('session_id', sessionToken);
+        data.append('brand', brand);
 
         if (watchPosition && totalDuration) {
             data.append('current_second', watchPosition);

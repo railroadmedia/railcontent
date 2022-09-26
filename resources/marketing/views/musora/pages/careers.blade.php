@@ -3,6 +3,15 @@
 @section('head-includes')
     @parent
 
+    <title>Careers | Musora</title>
+    <meta property="og:title" content="Careers | Musora">
+
+    <meta name="description" content="We are looking for exceptional people who believe in the power of music and can contribute on a daily basis to the growth of our brands">
+    <meta property="og:description" content="We are looking for exceptional people who believe in the power of music and can contribute on a daily basis to the growth of our brands">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+
     <style>
         /* .join.gradient-outline.fill-white {
             background: white;

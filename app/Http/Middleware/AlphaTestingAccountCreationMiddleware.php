@@ -11,7 +11,7 @@ use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService;
-use Railroad\EventDataSynchronizer\Services\UserMembershipFieldsService;
+use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 
 class AlphaTestingAccountCreationMiddleware
 {
@@ -38,7 +38,12 @@ class AlphaTestingAccountCreationMiddleware
         Request $request,
         Closure $next
     ) {
-        if ($request->routeIs('user_management_system.login.cookie') && !User::query()->where('email', $request->get('email'))->exists()) {
+        if (app()->runningUnitTests()) {
+            return $next($request);
+        }
+
+        if ($request->routeIs('user_management_system.login.cookie') &&
+            !User::query()->where('email', $request->get('email'))->exists()) {
             $user = new User;
 
             $user->email = $request->get('email');

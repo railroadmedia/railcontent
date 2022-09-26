@@ -26,6 +26,7 @@
           <div class="
                 tw-text-white
                 tw-max-w-full
+                tw-text-lg
                 tw-rounded-full
                 tw-py-4
                 tw-uppercase
@@ -64,7 +65,7 @@
         </transition>
       </div>
 
-      <p v-show="hasSingleEvent" class="x-tiny tw-italic tw-text-center tw-mb-2">
+      <p v-show="hasSingleEvent" class="tw-text-xs tw-italic tw-text-center tw-mb-2">
         {{ singleEventDescription }}
       </p>
     </div>

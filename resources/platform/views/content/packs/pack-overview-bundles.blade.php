@@ -30,7 +30,6 @@
             <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full">
                 <div class="pv-5"></div>
                 <div class="pv-5 hide-xs-only"></div>
-                <div class="pv-5 hide-md-down"></div>
                 @if($pack['slug'] == 'piano-technique-made-easy')
                     <div
                         class="tw-flex tw-flex-col tw-mb-4 tw-rounded-full ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"

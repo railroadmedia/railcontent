@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Search: {{ $searchTerm }} | Musora</title>
+    <title> {{ ucfirst($brand) }} Search | {{ $searchTerm }} | Musora</title>
 @endsection
 
 @section('layout-styles')

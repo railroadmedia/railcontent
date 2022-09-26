@@ -40,16 +40,20 @@
         ])
     @endcomponent
 
-    {{-- Live Banner --}}
-    <coach-event
-        brand="{{ $brand }}"
-        :preloaded-content='{{ $coachEvent }}'
-        current-date-string="{{ $currentDate }}"
-        subscription-calendar-id="{{ $currentEventCalendarId }}"
-        youtube-event-id="{{ $youtubeId }}"
-        :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-        event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-    ></coach-event>
+    @if( !empty($coachEvent) )
+        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
+            {{-- Live Banner --}}
+            <coach-event
+                brand="{{ $brand }}"
+                :preloaded-content='{{ $coachEvent }}'
+                current-date-string="{{ $currentDate }}"
+                subscription-calendar-id="{{ $currentEventCalendarId }}"
+                youtube-event-id="{{ $youtubeId }}"
+                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            ></coach-event>
+        </div>
+    @endif
 
     @if (session()->has('success-message'))
         <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
@@ -139,12 +143,6 @@
         </content-catalogue-container>
     </div>
 
-    @component('partials.bladesora.members.components.coach-subscribe-toasts', [
-        'brandName' => '{{ $brand }}',
-        'firstName' => $firstLastName[0],
-        ])
-    @endcomponent
-
     @component('partials.bladesora.members.components.coach-footer', [
         'brandName' => '{{ $brand }}',
         'shortBio' => $thisCoach->fetch('data.long_bio'),
@@ -186,27 +184,25 @@
         };
 
         function successSubscribeToast() {
-            showElement("subscribeToast");
-            hideElement("unsubscribeToast");
-            hideElement("errorToast");
-            setTimeout(() => {
-                hideElement("subscribeToast");
-            }, 2500);
+            var text = 'You will now receive updates when ' +'{{$firstLastName[0]}}'+ ' releases new content!';
+            window.shownotification({
+                icon: 'fa-bell', 
+                text
+            });
         };
 
         function successUnsubscribeToast() {
-            showElement("unsubscribeToast");
-            hideElement("subscribeToast");
-            hideElement("errorToast");
-            setTimeout(() => {
-                hideElement("unsubscribeToast");
-            }, 2500);
+            var text = 'You will no longer receive updates when ' +'{{$firstLastName[0]}}'+ ' releases new content!';
+            window.shownotification({
+                icon: 'fa-bell-slash', 
+                text
+            });
         };
 
         function showErrorToast() {
-            showElement("errorToast");
-            hideElement("subscribeToast");
-            hideElement("unsubscribeToast");
+            window.shownotification({
+                isError: true
+            });
         };
 
         function subscribeToCoach(coachId, URL) {
@@ -229,6 +225,7 @@
                 })
                 .catch((e) => {
                     switchToSubscribeButton();
+                    showErrorToast();
                 });
         }
 
@@ -251,6 +248,7 @@
                 })
                 .catch((e) => {
                     switchToSubscribedButton();
+                    showErrorToast();
                 });
         }
     </script>

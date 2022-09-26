@@ -33,8 +33,10 @@
                 </div>
                 <div class="flex flex-column enable-filters tw-h-[50px]">
                     <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
-                        :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
-                        title="Toggle Filters" @click="displayFilters = !displayFilters">
+                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
+                            title="Toggle Filters" 
+                            @click="displayFilters = !displayFilters"
+                    >
                         <i class="fas fa-filter"></i>
                     </button>
                 </div>
@@ -133,6 +135,11 @@ export default {
         InputLabel
     },
     mixins: [ThemeClasses, UserCatalogueEvents, EventHandlers],
+    inject: {
+        isSidebarCollapsed: {
+            from: 'isSidebarCollapsed'
+        }
+    },
     props: {
         brand: {
             type: String,
@@ -227,7 +234,7 @@ export default {
                 y: 0,
             },
             showMobileFilters: false,
-            displayFilters: false,
+            displayFilters: true,
             progressTracker: this.trackProgress ? new ProgressTracker() : null,
             isPlaying: false,
         };
@@ -539,7 +546,7 @@ export default {
 
             if (!resume) {
                 this.$nextTick(() => {
-                    const domElement = this.$refs[`list${this.activeItem.id}`].$el;
+                    const domElement = this.$refs[`list${this.activeItem.id}`][0].$el;
                     domElement.scrollIntoView({ block: "start" })
                 });
             }
@@ -698,7 +705,7 @@ export default {
         },
 
         handleAnchorMouseDown(anchor) {
-            this.anchorMouseDown.anchor = true;
+            this.anchorMouseDown[anchor] = true;
         },
 
         handleAnchorButtonClick(anchor) {
@@ -710,7 +717,7 @@ export default {
                 offset = 0;
             }
 
-            this.anchorOffsets.anchor = offset;
+            this.anchorOffsets[anchor] = offset;
         },
 
         resetAnchors() {
@@ -753,7 +760,8 @@ export default {
         },
 
         getDurationOffsetPercentageByMousePosition() {
-            return (this.currentMousePosition.x / this.$refs.progressBar.$el.clientWidth) * 100;
+            const sidebarOffset = this.isSidebarCollapsed ? 68 : 256;
+            return ((this.currentMousePosition.x - sidebarOffset) / this.$refs.progressBar.$el.clientWidth) * 100;
         },
 
         mouseUpEventHandler() {
@@ -962,6 +970,7 @@ export default {
                 mediaType: 'practice',
                 mediaCategory: 'play-alongs',
                 sessionToken: this.sessionToken,
+                brand: this.brand,
             });
         },
 

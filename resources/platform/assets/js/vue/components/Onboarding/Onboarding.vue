@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject, computed } from 'vue'
+import { ref, inject, computed, onMounted } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import UserInfo from './steps/UserInfo.vue'
 import InstrumentSelect from './steps/InstrumentSelect.vue'
@@ -8,10 +8,18 @@ import Experience from './steps/Experience.vue'
 import Genre from './steps/Genre.vue'
 import Topics from './steps/Topics.vue'
 import Coaches from './steps/Coaches.vue'
-import { initialSteps, instrumentBrand } from './constants';
+import { initialSteps, instrumentBrand, brandInstrument } from './constants';
 import { getInitialInfo, getCheckedSteps } from './utils';
 
 const props = defineProps({
+    startOnStep: {
+        type: Number,
+        default: null,
+    },
+    selectedBrand: {
+        type: String,
+        default: null,
+    },
     configOptions: {
         type: Object,
     },
@@ -34,7 +42,13 @@ const userName = inject('userName');
 const userAvatar = inject('userAvatar');
 
 const currentStep = ref(0)
-const info = ref(getInitialInfo({ userId, userName, userAvatar, ...props }))
+const info = ref(getInitialInfo({
+    userId,
+    userName,
+    userAvatar,
+    ...props,
+    instrument: brandInstrument[props.selectedBrand],
+}))
 const steps = ref(initialSteps);
 const brand = computed(() => instrumentBrand[info.value.instrument]);
 
@@ -55,6 +69,25 @@ function checkStepToggle(step, val) {
     newSteps[step].checked = val
     steps.value = newSteps;
 }
+
+onMounted(() => {
+    if (props.selectedBrand) {
+        if (props.startOnStep) {
+            const newSteps = [...steps.value];
+            newSteps.forEach(({}, index) => {
+                if (props.startOnStep >= index) {
+                    newSteps[index].checked = true;
+                }
+            });
+            currentStep.value = props.startOnStep;
+        } else {
+            const newSteps = getCheckedSteps({ ...props, steps: JSON.parse(JSON.stringify(steps.value)), brand: props.selectedBrand });
+            steps.value = newSteps;
+            const lastCheckedStep = newSteps.findLastIndex(idx => idx.checked);
+            currentStep.value = lastCheckedStep > 0 ? lastCheckedStep : 0;
+        }
+    }
+});
 </script>
 
 <template>

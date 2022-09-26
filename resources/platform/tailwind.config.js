@@ -27,6 +27,10 @@ module.exports = {
       screens: {
         '3xl': '1815px',
         '4xl': '2256px',
+        'hover-hover': {
+          //only hover on non-touch devices
+          'raw': '(hover: hover)',
+        },
       },
       animation: {
         'grow-shrink': 'grow-shrink 1.25s infinite'
@@ -62,6 +66,9 @@ module.exports = {
     //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
+        '.body a:visited': {
+          color: 'rgb(11, 118, 219)',
+        },
         '.text-musora': {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
           '-webkit-background-clip': 'text',
@@ -102,7 +109,7 @@ module.exports = {
           'ul, ol': {
             listStyle: 'revert',
             paddingLeft: '40px',
-            marginBottom: '10px',
+            margin: '10px 0',
           }
         }
       })
