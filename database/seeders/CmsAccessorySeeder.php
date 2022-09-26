@@ -722,6 +722,7 @@ Start Mastering your Chords & Scales today.",
                 "discounted_price" => "",
                 "page_logo" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/logo.png",
                 "special_text" => "",
+                "video" => "//player.vimeo.com/video/492665630",
                 "overview" => "**Always know exactly what to practice.**
 
 They say practice makes perfect.
@@ -763,6 +764,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 "images" => [
+                    "https://i.vimeocdn.com/video/1024585383-ee7ef1199d46e1c795118a3665ad371e6a5c85a901ab333154b8a8edc709464b-d",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-front-cover.jpg",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-side-thickness.jpg",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-back-cover.jpg",
@@ -795,6 +797,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                 "discounted_price" => "",
                 "page_logo" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/logo.png",
                 "special_text" => "",
+                "video" => "//player.vimeo.com/video/492665630",
                 "overview" => "**Always know exactly what to practice.**
 
 They say practice makes perfect.
@@ -836,6 +839,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 "images" => [
+                    "https://i.vimeocdn.com/video/1024585383-ee7ef1199d46e1c795118a3665ad371e6a5c85a901ab333154b8a8edc709464b-d",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-front-cover.jpg",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-side-thickness.jpg",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-back-cover.jpg",
@@ -1560,6 +1564,7 @@ And so many more!",
                 'page_logo' => empty($product['page_logo']) ? null : $product['page_logo'],
                 'thumbnail' => $product['thumbnail'],
                 'badge_text' => empty($product['badge_text']) ? null : $product['badge_text'],
+                'video_src' => empty($product['video']) ? null : $product['video'],
                 'header_text' => $product['header_text'],
                 'short_desc' => $product['short_desc'],
                 'meta_desc' => $product['meta_desc'],
