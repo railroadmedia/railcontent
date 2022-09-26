@@ -8,15 +8,15 @@
     <div class="flex flex-1">
 
         <!-- Page Links -->
-        <ul class="flex items-center text-white font-bebas-neue hidden md:flex">
-            <li class="lg:ml-5"><a href="/#method" alt="Go to Method Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Method</a></li>
-            <li class="ml-3 lg:ml-6"><a href="/#songs" alt="Go to Songs Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Songs</a></li>
-            <li class="ml-3 lg:ml-6"><a href="/#coaches" alt="Go to Coaches Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Coaches</a></li>
-        </ul>
+        {{--<ul class="flex items-center text-white font-bebas-neue hidden md:flex">--}}
+            {{--<li class="lg:ml-5"><a href="/#method" alt="Go to Method Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Method</a></li>--}}
+            {{--<li class="ml-3 lg:ml-6"><a href="/#songs" alt="Go to Songs Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Songs</a></li>--}}
+            {{--<li class="ml-3 lg:ml-6"><a href="/#coaches" alt="Go to Coaches Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Coaches</a></li>--}}
+        {{--</ul>--}}
 
         <!-- Nav CTA buttons -->
         <div class="ml-auto flex items-center">
-            <a href="/shop" class="btn-secondary btn-small text-base leading-none text-white mr-1.5 py-1 px-3 md:py-2.5 md:px-8 mb-0 h-auto md:h-initial hover:text-black hover:bg-white hover:border-white">Shop</a>
+            {{--<a href="/shop" class="btn-secondary btn-small text-base leading-none text-white mr-1.5 py-1 px-3 md:py-2.5 md:px-8 mb-0 h-auto md:h-initial hover:text-black hover:bg-white hover:border-white">Shop</a>--}}
             <a href="/members" class="btn-primary btn-small text-base leading-none {{ $theme_bg }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">Log In</a>
         </div>
 
