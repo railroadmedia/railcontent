@@ -19,202 +19,227 @@
 @section('layout-body')
     @include('musora.product.partials._shop-header')
 
-    <div class="container mx-auto px-4 py-10" x-data="{ filter: 'all' }">
+    <div class="container mx-auto px-4 py-10" x-data="{ filter: '{{ !empty($category) && $category !== 'shop' ? $category : 'all' }}' }">
 
-        <div class="px-2 md:px-3 lg:pl-8 md:text-2xl lg:text-4xl mb-10">
-            <span
-                class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                x-on:click="filter = 'all'"
-                x-bind:class="filter === 'all' ? 'border-b-2' : 'text-gray-400'"
-            >
-                All
-            </span>
+        @if($theme === 'drumeo' || $theme === 'pianote')
+            <div class="px-2 md:px-3 lg:pl-8 md:text-2xl lg:text-4xl mb-10">
+                <span
+                    class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                    x-on:click="filter = 'all'"
+                    x-bind:class="filter === 'all' ? 'border-b-2' : 'text-gray-400'"
+                >
+                    All
+                </span>
+                @if(count($lessons) > 0)
+                    <span
+                        class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                        x-on:click="filter = 'lessons'"
+                        x-bind:class="filter === 'lessons' ? 'border-b-2' : 'text-gray-400'"
+                    >
+                        Lessons
+                    </span>
+                @endif
+                @if(count($accessories) > 0)
+                    <span
+                        class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                        x-on:click="filter = 'accessories'"
+                        x-bind:class="filter === 'accessories' ? 'border-b-2' : 'text-gray-400'"
+                    >
+                        Accessories
+                    </span>
+                @endif
+                @if(count($hats) > 0 || count($hats) > 0 || count($hoodies) > 0)
+                    <span
+                        class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                        x-on:click="filter = 'clothing'"
+                        x-bind:class="filter === 'clothing' ? 'border-b-2' : 'text-gray-400'"
+                    >
+                        Clothing
+                    </span>
+                @endif
+            </div>
+
             @if(count($lessons) > 0)
-                <span
-                    class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                    x-on:click="filter = 'lessons'"
-                    x-bind:class="filter === 'lessons' ? 'border-b-2' : 'text-gray-400'"
-                >
-                    Lessons
-                </span>
+                <section class="grid-view" x-show="filter === 'lessons' || filter === 'all'">
+                    <ul class="fixed-cards">
+                        <li>
+                            <h1 class="px-2 md:px-3" >
+                                <div class="heading-icon text-{{ $theme }}"><i class="fas fa-video"></i></div>
+                                Online Lessons
+                            </h1>
+                        </li>
+
+                        @foreach($lessons as $lesson){
+                            @include('musora.product.partials._drum-shop-card', [
+                                "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                                "thumbnail" => $lesson->thumbnail,
+                                "badgeText" => $lesson->badge_text,
+                                "thumbnail_logo" => $lesson->thumbnail_logo,
+                                "packLogo" => $lesson->page_logo,
+                                "title" => $lesson->name,
+                                "packAuthor" => $lesson->instructor_name,
+                                "cardDescription" => $lesson->short_desc,
+                                "fullPrice" => $lesson->price,
+                                "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                                "productJson" => '{ "'.$lesson->sku.'": 1 }',
+                                "buttonText" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? 'see the deal' : null,
+                                "soldOut" => $lesson->sold_out,
+                                "includedEdge" => $lesson->included_edge,
+                            ])
+                        }
+                        @endforeach
+                    </ul>
+                </section>
             @endif
+
             @if(count($accessories) > 0)
-                <span
-                    class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                    x-on:click="filter = 'accessories'"
-                    x-bind:class="filter === 'accessories' ? 'border-b-2' : 'text-gray-400'"
-                >
-                    Accessories
-                </span>
+                <section class="grid-view" x-show="filter === 'accessories' || filter === 'all'">
+                    <ul class="fixed-cards">
+                        <li>
+                            <h1 class="px-2 md:px-3">
+                                <div class="heading-icon text-{{ $theme }}"><i class="fas fa-suitcase"></i></div>
+                                Accessories
+                            </h1>
+                        </li>
+                        @foreach($accessories as $accessory){
+                            @include('musora.product.partials._drum-shop-card', [
+                                "sku" => $accessory->sku,
+                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                                "thumbnail" => $accessory->thumbnail,
+                                "badgeText" => $accessory->badge_text,
+                                "title" => $accessory->name,
+                                "cardDescription" => $accessory->short_desc,
+                                "fullPrice" => $accessory->price,
+                                "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                                "physical" => true,
+                                "sizes" => $accessory->sizes,
+                                "soldOut" => $accessory->sold_out,
+                            ])
+                        }
+                        @endforeach
+                    </ul>
+                </section>
             @endif
-            @if(count($hats) > 0 || count($hats) > 0 || count($hoodies) > 0)
-                <span
-                    class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
-                    x-on:click="filter = 'clothing'"
-                    x-bind:class="filter === 'clothing' ? 'border-b-2' : 'text-gray-400'"
-                >
-                    Clothing
-                </span>
+
+            @if(count($hats) > 0)
+                <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
+                    <ul class="fixed-cards">
+                        <li>
+                            <h1 class="px-2 md:px-3">
+                                <div class="heading-icon text-{{ $theme }}">
+                                    <img
+                                        src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg"
+                                        alt="hat icon"
+                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
+                                    />
+                                </div>
+                                Hats
+                            </h1>
+                        </li>
+                        @foreach($hats as $hat){
+                            @include('musora.product.partials._drum-shop-card', [
+                                "sku" => $hat->sku,
+                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                                "thumbnail" => $hat->thumbnail,
+                                "badgeText" => $hat->badge_text,
+                                "title" => $hat->name,
+                                "cardDescription" => $hat->short_desc,
+                                "fullPrice" => $hat->price,
+                                "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
+                                "physical" => true,
+                                "sizes" => $hat->sizes,
+                                "soldOut" => $hat->sold_out,
+                            ])
+                        }
+                        @endforeach
+                    </ul>
+                </section>
             @endif
-        </div>
 
-        @if(count($lessons) > 0)
-        <section class="grid-view" x-show="filter === 'lessons' || filter === 'all'">
-            <ul class="fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3" >
-                        <div class="heading-icon text-{{ $theme }}"><i class="fas fa-video"></i></div>
-                            Online Lessons
-                    </h1>
-                </li>
+            @if(count($shirts) > 0)
+                <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
+                    <ul class="fixed-cards">
+                        <li>
+                            <h1 class="px-2 md:px-3">
+                                <div class="heading-icon text-{{ $theme }}"><i class="fas fa-tshirt"></i></div>
+                                Shirts
+                            </h1>
+                        </li>
+                        @foreach($shirts as $shirt){
+                            @include('musora.product.partials._drum-shop-card', [
+                                "sku" => $shirt->sku,
+                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                                "thumbnail" => $shirt->thumbnail,
+                                "badgeText" => $shirt->badge_text,
+                                "title" => $shirt->name,
+                                "cardDescription" => $shirt->short_desc,
+                                "fullPrice" => $shirt->price,
+                                "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                                "physical" => true,
+                                "sizes" => $shirt->sizes,
+                                "soldOut" => $shirt->sold_out,
+                                "size_case_sensitive" => $shirt->size_case_sensitive,
+                            ])
+                        }
+                        @endforeach
+                    </ul>
+                </section>
+            @endif
 
-                @foreach($lessons as $lesson){
-                    @include('musora.product.partials._drum-shop-card', [
-                        "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
-                        "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
-                        "thumbnail" => $lesson->thumbnail,
-                        "badgeText" => $lesson->badge_text,
-                        "thumbnail_logo" => $lesson->thumbnail_logo,
-                        "packLogo" => $lesson->page_logo,
-                        "title" => $lesson->name,
-                        "packAuthor" => $lesson->instructor_name,
-                        "cardDescription" => $lesson->short_desc,
-                        "fullPrice" => $lesson->price,
-                        "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
-                        "productJson" => '{ "'.$lesson->sku.'": 1 }',
-                        "buttonText" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? 'see the deal' : null,
-                        "soldOut" => $lesson->sold_out,
-                        "includedEdge" => $lesson->included_edge,
-                    ])
-                }
-                @endforeach
-            </ul>
-        </section>
-        @endif
-
-        @if(count($accessories) > 0)
-            <section class="grid-view" x-show="filter === 'accessories' || filter === 'all'">
-                <ul class="fixed-cards">
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-{{ $theme }}"><i class="fas fa-suitcase"></i></div>
-                            Accessories
-                        </h1>
-                    </li>
-                    @foreach($accessories as $accessory){
+            @if(count($hoodies) > 0)
+                <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
+                    <ul class="fixed-cards container mx-auto">
+                        <li>
+                            <h1 class="px-2 md:px-3">
+                                <div class="heading-icon">
+                                    <img
+                                        src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg"
+                                        alt="hoodie icon"
+                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
+                                    />
+                                </div>
+                                Hoodies
+                            </h1>
+                        </li>
+                        @foreach($hoodies as $hoodie){
                         @include('musora.product.partials._drum-shop-card', [
-                            "sku" => $accessory->sku,
-                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
-                            "thumbnail" => $accessory->thumbnail,
-                            "badgeText" => $accessory->badge_text,
-                            "title" => $accessory->name,
-                            "cardDescription" => $accessory->short_desc,
-                            "fullPrice" => $accessory->price,
-                            "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                            "sku" => $hoodie->sku,
+                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                            "thumbnail" => $hoodie->thumbnail,
+                            "badgeText" => $hoodie->badge_text,
+                            "title" => $hoodie->name,
+                            "cardDescription" => $hoodie->short_desc,
+                            "fullPrice" => $hoodie->price,
+                            "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                             "physical" => true,
-                            "sizes" => $accessory->sizes,
-                            "soldOut" => $accessory->sold_out,
+                            "sizes" => $hoodie->sizes,
+                            "soldOut" => $hoodie->sold_out,
                         ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-        @endif
-
-        @if(count($hats) > 0)
-            <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
-                <ul class="fixed-cards">
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-{{ $theme }}">
-                                <img
-                                    src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg"
-                                    alt="hat icon"
-                                    style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
-                                />
-                            </div>
-                            Hats
-                        </h1>
-                    </li>
-                    @foreach($hats as $hat){
-                    @include('musora.product.partials._drum-shop-card', [
-                        "sku" => $hat->sku,
-                        "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
-                        "thumbnail" => $hat->thumbnail,
-                        "badgeText" => $hat->badge_text,
-                        "title" => $hat->name,
-                        "cardDescription" => $hat->short_desc,
-                        "fullPrice" => $hat->price,
-                        "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
-                        "physical" => true,
-                        "sizes" => $hat->sizes,
-                        "soldOut" => $hat->sold_out,
-                    ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
-        @endif
-
-        @if(count($shirts) > 0)
-        <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
-            <ul class="fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon text-{{ $theme }}"><i class="fas fa-tshirt"></i></div>
-                            Shirts
-                    </h1>
-                </li>
-                @foreach($shirts as $shirt){
-                    @include('musora.product.partials._drum-shop-card', [
-                        "sku" => $shirt->sku,
-                        "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                        "thumbnail" => $shirt->thumbnail,
-                        "badgeText" => $shirt->badge_text,
-                        "title" => $shirt->name,
-                        "cardDescription" => $shirt->short_desc,
-                        "fullPrice" => $shirt->price,
-                        "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
-                        "physical" => true,
-                        "sizes" => $shirt->sizes,
-                        "soldOut" => $shirt->sold_out,
-                        "size_case_sensitive" => $shirt->size_case_sensitive,
-                    ])
-                }
-                @endforeach
-            </ul>
-        </section>
-        @endif
-
-        @if(count($hoodies) > 0)
+                        }
+                        @endforeach
+                    </ul>
+                </section>
+            @endif
+        @else
             <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                 <ul class="fixed-cards container mx-auto">
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon">
-                                <img
-                                    src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg"
-                                    alt="hoodie icon"
-                                    style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
-                                />
-                            </div>
-                            Hoodies
-                        </h1>
-                    </li>
-                    @foreach($hoodies as $hoodie){
-                    @include('musora.product.partials._drum-shop-card', [
-                        "sku" => $hoodie->sku,
-                        "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                        "thumbnail" => $hoodie->thumbnail,
-                        "badgeText" => $hoodie->badge_text,
-                        "title" => $hoodie->name,
-                        "cardDescription" => $hoodie->short_desc,
-                        "fullPrice" => $hoodie->price,
-                        "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
-                        "physical" => true,
-                        "sizes" => $hoodie->sizes,
-                        "soldOut" => $hoodie->sold_out,
-                    ])
+                    @foreach($products as $product){
+                        @include('musora.product.partials._drum-shop-card', [
+                            "sku" => $product->sku,
+                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                            "thumbnail" => $product->thumbnail,
+                            "thumbnail_logo" => $product->thumbnail_logo,
+                            "badgeText" => $product->badge_text,
+                            "title" => $product->name,
+                            "cardDescription" => $product->short_desc,
+                            "fullPrice" => $product->price,
+                            "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                            "physical" => true,
+                            "sizes" => $product->sizes,
+                            "soldOut" => $product->sold_out,
+                            "size_case_sensitive" => $product->size_case_sensitive,
+                        ])
                     }
                     @endforeach
                 </ul>
