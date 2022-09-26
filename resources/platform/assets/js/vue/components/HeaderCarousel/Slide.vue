@@ -54,18 +54,21 @@ const goToUrl = (url) => {
 </script>
 
 <template>
-  <div v-if="showSlide || isPrevSlide" :class="`tw-bg-white tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-cover tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%]
-  ${showSlide
-    ? `tw-absolute tw-w-full tw-h-full tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}`
-    : 'tw-absolute tw-w-full tw-h-full tw-z-0'
-  }
-  ${ctaUrl
-    ? 'tw-cursor-pointer'
-    : ''
-  }
-  `" :style="{
-    backgroundImage: `url('${img}')`,
-  }" @click="goToUrl(ctaUrl)">
+  <div v-if="showSlide || isPrevSlide" 
+      :class="`tw-bg-white tw-overflow-hidden tw-rounded-[10px] tw-bg-no-repeat tw-bg-right tw-bg-cover md:tw-bg-top 3xl:tw-bg-right-top 3xl:tw-bg-[length:70%]
+      ${showSlide
+        ? `tw-absolute tw-w-full tw-h-full tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}`
+        : 'tw-absolute tw-w-full tw-h-full tw-z-0'
+      }
+      ${ctaUrl
+        ? 'tw-cursor-pointer'
+        : ''
+      }
+      `" :style="{
+        backgroundImage: `url('${img}')`,
+      }" 
+      @click="goToUrl(ctaUrl)"
+  >
     <div class="tw-w-full tw-h-full tw-rounded-[10px] header-carousel-slide-bg">
       <div :class="`
           tw-flex

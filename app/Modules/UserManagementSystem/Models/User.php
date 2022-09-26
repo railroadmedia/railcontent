@@ -350,15 +350,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
-     * @return Attribute
+     * @return int
      */
-    public function totalXp(): Attribute
+    public function totalXp(): int
     {
-        return Attribute::make(
-            get: function ($value) {
-                return !empty($this->total_xp) ? $this->total_xp : 0;
-            },
-        );
+        return !empty($this->total_xp) ? $this->total_xp : 0;
     }
 
     /**

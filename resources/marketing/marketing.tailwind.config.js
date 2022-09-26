@@ -41,13 +41,16 @@ module.exports = {
         'body': {
           fontFamily: 'Open Sans, sans-serif',
         },
+        '.text-navy': {
+          color: '#a1afc9'
+        },
         '.text-musora': {
-          background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
+          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
         },
         '.bg-musora': {
-          background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
+          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
         },
         '.font-bebas': {
           fontFamily: '"Bebas Neue", sans-serif'
@@ -61,8 +64,11 @@ module.exports = {
           left: '0',
           zIndex: '-1',
           borderRadius: 'inherit',
-          background: 'linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
+          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           margin: '-2px',
+        },
+        'h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong': {
+          fontWeight: 900
         },
         'h1':{
           fontSize: '24px',
@@ -125,6 +131,29 @@ module.exports = {
             fontSize: '16px',
           },
         },
+        'img': {
+          display: 'inline-block'
+        },
+        '.join':{
+          borderRadius: '50px',
+          font: '600 20px/1em "Open Sans", sans-serif',
+          padding: '17px 7%',
+          color: 'white',
+          position: 'relative',
+          textTransform: 'uppercase',
+          display: 'inline-block',
+          '@media (min-width: 768px)': {
+            fontSize: '28px'
+          }
+        },
+        '.join.smaller':{
+          fontSize: '13px',
+          padding: '7px 25px',
+          '@media (min-width: 768px)': {
+            fontSize: '14px',
+            padding: '13px 30px'
+          },
+        }
       })
     }),
 

@@ -4,11 +4,6 @@
     'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/method/method-header-'.$brand.'.jpg',
 ])
     @slot('content')
-        @section('layout-scripts')
-        {{-- Warning: Script tag inside Vue component --}}
-        <script>(function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })()</script>
-        @stop
-
         <div class="flex flex-column pr-1 align-center">
             @if(!empty($learningPathSlug) && $learningPathSlug == $brand.'-method')
                 @if($brand==="drumeo" || $brand==="pianote")

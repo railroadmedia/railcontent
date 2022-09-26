@@ -3,7 +3,7 @@
            name="{{ $inputName }}"
            value="{{ $inputValue ?? '' }}"
            type="text"
-           class="flatpickr tw-pb-0
+           class="flatpickr tw-pb-0 has-input
             {{ !empty($enableTime) && $enableTime === true ? 'enable-time' : '' }}
             {{ !empty($inputErrors) && count($inputErrors) > 0 ? 'has-error' : '' }}">
     <label for="{{ $inputId }}"

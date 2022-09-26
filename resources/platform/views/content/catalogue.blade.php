@@ -133,7 +133,7 @@
         </div>
     @endif
 
-    @if($hasStartedLessons)
+    @if($hasStartedLessons && $lessonType !== 'routine')
         <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row tw-pt-4">
                 <h1 class="heading capitalize pointer noselect tw-text-[#00101D] dark:tw-text-white tw-border-b-2 tw-border-{{ $brand }}"
@@ -166,40 +166,6 @@
                 </transition>
             </div>
         </section>
-    @endif
-
-    @if($lessonType === 'routine' && $hasRecentRoutines)
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
-            <div class="tw-flex tw-flex-col tw-flex-grow">
-                <div class="tw-flex tw-flex-row tw-items-center pv-2">
-                    <div
-                        class="tw-text-[#00101D] dark:tw-text-white tw-no-underline heading tw-capitalize tw-flex-grow">
-                        Recently Viewed
-                    </div>
-                </div>
-                <div class="tw-flex tw-flex-row">
-                    <transition appear name="fade">
-                        <content-catalogue
-                            brand="{{ $brand }}"
-                            catalogue-type="routines"
-                            limit="4"
-                            theme-color="{{ $brand }}"
-                            :use-theme-color="true"
-                            :lock-unowned="true"
-                            :pre-loaded-content="{{ $recentRoutines }}"
-                            content-endpoint="/laravel/public/railcontent/content"
-                        >
-                            <div class="tw-flex tw-flex-row nmh-1">
-                                @for($i = 0; $i < 4; $i++)
-                                    @include('partials.bladesora.members.skeletons.card-item', [
-                                    ])
-                                @endfor
-                            </div>
-                        </content-catalogue>
-                    </transition>
-                </div>
-            </div>
-        </div>
     @endif
 
     @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent)

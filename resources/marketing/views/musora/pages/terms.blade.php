@@ -1,5 +1,11 @@
 @extends('musora._partials.layout')
 
+@section('head-includes')
+    <title>Terms Of Use | Musora</title>
+    <meta property="og:title" content="Terms Of Use">
+    <meta name="description" content="Please read this agreement carefully before accessing or using this web site.">
+@stop
+
 <!-- Main -->
 @section('layout-body')
 <section class="py-24 md:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg);">

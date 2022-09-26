@@ -60,6 +60,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.subscribed-lessons');
 
+        Route::get('/{brand}/jump-to-comment/{contentId}/{commentId}', [ContentPagesController::class, 'jumpToContentComment'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.jump-to-comment');
+
         Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
             ->whereIn('brand', all_brands())
             ->whereIn('contentTypeName', [
@@ -457,8 +461,5 @@ Route::domain('{musoraDomain}')
             ->name('platform.invite-a-friend');
     });
 
-Route::get('/apple-app-site-association', function () {
-    $json = file_get_contents(base_path('apple-app-site-association'));
-    return response($json, 200)
-        ->header('Content-Type', 'application/json');
-});
+Route::get('/apple-app-site-association', [\App\Http\Controllers\Misc\ManifestFilesController::class, 'appleAssociationFile'])
+    ->name('platform.apple-association-file');

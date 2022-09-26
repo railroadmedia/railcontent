@@ -1,5 +1,16 @@
 @extends('musora._partials.layout')
 
+@section('head-includes')
+    <title>About | Musora</title>
+    <meta property="og:title" content="About | Musora">
+
+    <meta name="description" content="We have two simple goals: create more musicians and keep them playing longer.">
+    <meta property="og:description" content="We have two simple goals: create more musicians and keep them playing longer.">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+@endsection
+
 @section('body-data')
     x-data = '{ 
         modal: false,
