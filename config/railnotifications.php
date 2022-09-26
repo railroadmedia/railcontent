@@ -66,9 +66,9 @@ return [
     ],
 
     // email details
-    'email_address_from' => 'system@pianote.com',
-    'email_brand_from' => 'Pianote',
-    'email_reply_address' => 'suport@pianote.com',
+    'email_address_from' => 'suport@musora.com',
+    'email_brand_from' => 'Musora',
+    'email_reply_address' => 'suport@musora.com',
 
     'mapping_types' => [
         'forum post in followed thread' => 'thread-reply',
