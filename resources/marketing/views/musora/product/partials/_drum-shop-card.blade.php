@@ -140,7 +140,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a target="_blank" href="{{ $itemURL }}"
+                        <a href="{{ $itemURL }}"
                            class="lg:text-lg font-bebas-neue tracking-widest block w-full py-2 rounded-full text-white bg-{{ $theme }} hover:bg-opacity-80"
                            @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
