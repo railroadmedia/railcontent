@@ -370,7 +370,7 @@ class UserContentProgressService
                 ->orderBy('updated_on', 'desc')
                 ->first();
 
-        if (!$overwriteComplete &&
+        if (!$overwriteComplete && $currentProgress &&
             ($currentProgress['state'] == 'completed' || $currentProgress['progress_percent'] == 100)) {
             return true;
         }
