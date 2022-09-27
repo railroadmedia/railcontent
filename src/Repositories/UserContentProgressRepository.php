@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -34,8 +35,18 @@ class UserContentProgressRepository extends RepositoryBase
                     ->whereIn('content_id', $contentIds)
                     ->get()
                     ->toArray();
-
+            if($userId == 149628){
+                Log::debug('Roxana querybuilder method to check progress  --------------------------- ');
+                Log::debug(self::$cache[$key]);
+                Log::debug($contentIds);
+            }
             return self::$cache[$key];
+        }else{
+            if($userId == 149628){
+                Log::debug('Roxana from CACHE progress  --------------------------- ');
+                Log::debug(self::$cache[$key]);
+                Log::debug($contentIds);
+            }
         }
 
         return self::$cache[$key];

@@ -475,9 +475,12 @@ class UserContentProgressService
 
             $contentProgressionsByContentId =
                 array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
-
+            if($userId == 149628){
+                Log::debug('Roxana check contentProgressions  --------------------------- ');
+                Log::debug($contentProgressions);
+                Log::debug($contentProgressionsByContentId);
+            }
             foreach ($contentOrContents as $index => $content) {
-
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
                     $contentOrContents[$index]['user_progress'][$userId] =
                         $contentProgressionsByContentId[$content['id']];
@@ -488,6 +491,9 @@ class UserContentProgressService
                     $contentOrContents[$index][self::STATE_STARTED] =
                         $contentProgressionsByContentId[$content['id']]['state'] == self::STATE_STARTED;
                 } else {
+                    if($userId == 149628){
+                        Log::debug('ROXANA    withoutprogress   attachProgressToContents ');
+                    }
                     $contentOrContents[$index]['user_progress'][$userId] = [];
 
                     $contentOrContents[$index][self::STATE_COMPLETED] = false;
