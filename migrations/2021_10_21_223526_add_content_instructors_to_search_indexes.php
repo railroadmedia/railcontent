@@ -13,7 +13,7 @@ class AddContentInstructorsToSearchIndexes extends Migration
      */
     public function up()
     {
-        if (config()->get('database.default') != 'testbench') {
+        if (config()->get('database.default') != 'testbench' && app()->environment() != 'testing') {
             Schema::connection(ConfigService::$databaseConnectionName)->table(
                 ConfigService::$tableSearchIndexes,
                 function ($table) {
@@ -34,7 +34,7 @@ class AddContentInstructorsToSearchIndexes extends Migration
      */
     public function down()
     {
-        if (config()->get('database.default') != 'testbench') {
+        if (config()->get('database.default') != 'testbench' && app()->environment() != 'testing') {
 
             Schema::connection(ConfigService::$databaseConnectionName)->table(
                 ConfigService::$tableSearchIndexes,
