@@ -7,6 +7,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -37,6 +38,8 @@ class UserContentProgressEventListener extends Event
 
     public function handle(UserContentProgressSaved $event)
     {
+        Log::debug("Logs for completeprogress on content - UserContentProgressSaved listener and event bubble is ".$event->bubble);
+
         if ($event->bubble) {
             $this->userContentProgressService->bubbleProgress($event->userId, $event->contentId);
         }

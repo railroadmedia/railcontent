@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentProgressStarted;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
@@ -531,6 +532,8 @@ class UserContentProgressService
                 ->getToArray()
         );
 
+        Log::debug("Logs for completeprogress on content - bubble content progress for content id ".$content['id']. "    and parents:::::");
+        Log::debug($parents);
         foreach ($parents as $parent) {
 
             // start parent if necessary
@@ -583,6 +586,7 @@ class UserContentProgressService
                 if ($complete &&
                     !$parent[self::STATE_COMPLETED] &&
                     in_array($parent['type'], $allowedTypesForCompleted)) {
+                    Log::debug('Complete parent with id '.$parent['id'].' after child completed '.$content['id']);
                     $this->completeContent($parent['id'], $userId);
                 }
             }
