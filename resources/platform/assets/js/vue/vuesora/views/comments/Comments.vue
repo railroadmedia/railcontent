@@ -270,7 +270,6 @@ export default {
         this.getComments(this.requestParams);
     },
     mounted() {
-        console.log(this.comments)
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
         // Run the goToComment method if it does
@@ -317,9 +316,6 @@ export default {
                         if (this.pinnedComment != null) {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
                         }
-
-                        // console.log('on service', this.comments[0])
-
                     }
                 });
         },
