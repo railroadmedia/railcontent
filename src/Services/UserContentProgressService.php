@@ -533,9 +533,8 @@ class UserContentProgressService
         );
 
         Log::debug("Logs for completeprogress on content - bubble content progress for content id ".$content['id']. "    and parents:::::");
-        Log::debug($parents);
         foreach ($parents as $parent) {
-
+            Log::debug("Parent Id:: ".$parent['id']);
             // start parent if necessary
             if (!$parent[self::STATE_STARTED] &&
                 in_array($parent['type'], $allowedTypesForStarted)) {
