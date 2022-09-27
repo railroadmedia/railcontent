@@ -38,8 +38,6 @@ class UserContentProgressEventListener extends Event
 
     public function handle(UserContentProgressSaved $event)
     {
-        Log::debug("Logs for completeprogress on content - UserContentProgressSaved listener and event bubble is ".$event->bubble);
-
         if ($event->bubble) {
             $this->userContentProgressService->bubbleProgress($event->userId, $event->contentId);
         }

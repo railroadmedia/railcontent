@@ -203,7 +203,7 @@ class UserContentProgressService
                 ->toDateTimeString();
         }
 
-        $id = $this->userContentRepository->updateOrCreate(
+        $this->userContentRepository->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
@@ -211,11 +211,9 @@ class UserContentProgressService
             $updateArray
         );
 
-        if($userId == 149628){
-            Log::debug(' Roxana    for content   we have complete result .............................. ');
-            Log::debug($id);
+        if(key_exists($userId.'+'.$contentId,UserContentProgressRepository::$cache )) {
+                unset(UserContentProgressRepository::$cache[$userId.'+'.$contentId]);
         }
-
 
         if (is_null($contentId)) {
             error_log(
@@ -475,11 +473,7 @@ class UserContentProgressService
 
             $contentProgressionsByContentId =
                 array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
-            if($userId == 149628){
-                Log::debug('Roxana check contentProgressions  --------------------------- ');
-                Log::debug($contentProgressions);
-                Log::debug($contentProgressionsByContentId);
-            }
+
             foreach ($contentOrContents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
                     $contentOrContents[$index]['user_progress'][$userId] =
@@ -491,17 +485,10 @@ class UserContentProgressService
                     $contentOrContents[$index][self::STATE_STARTED] =
                         $contentProgressionsByContentId[$content['id']]['state'] == self::STATE_STARTED;
                 } else {
-                    if($userId == 149628){
-                        Log::debug('ROXANA    withoutprogress   attachProgressToContents ');
-                    }
                     $contentOrContents[$index]['user_progress'][$userId] = [];
 
                     $contentOrContents[$index][self::STATE_COMPLETED] = false;
                     $contentOrContents[$index][self::STATE_STARTED] = false;
-                }
-                if($content['id'] == 282770){
-                    Log::debug('Roxana attachProgressToContents completed is --------------------------- '.($contentOrContents[$index][self::STATE_COMPLETED]).
-                    ' and started --------------------------------'.($contentOrContents[$index][self::STATE_STARTED]));
                 }
             }
         }
@@ -521,7 +508,7 @@ class UserContentProgressService
     public function bubbleProgress($userId, $contentId)
     {
         $content = $this->attachProgressToContents($userId, ['id' => $contentId]);
-Log::debug('Roxana     bubbleProgress content completed is +++++++++++++++++++'.$content[self::STATE_COMPLETED]);
+
         $allowedTypesForStarted = array_merge(
             config('railcontent.allowed_types_for_bubble_progress')['started'],
             config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
@@ -549,9 +536,7 @@ Log::debug('Roxana     bubbleProgress content completed is +++++++++++++++++++'.
                 ->getToArray()
         );
 
-        Log::debug("Logs for completeprogress on content - bubble content progress for content id ".$content['id']. "    and parents:::::");
         foreach ($parents as $parent) {
-            Log::debug("Parent Id:: ".$parent['id']);
             // start parent if necessary
             if (!$parent[self::STATE_STARTED] &&
                 in_array($parent['type'], $allowedTypesForStarted)) {
@@ -590,8 +575,6 @@ Log::debug('Roxana     bubbleProgress content completed is +++++++++++++++++++'.
                 $siblings = new Collection($siblings);
             }
 
-            Log::debug('CheckForParentComplete   check if child or content is completed  ===' .$content[self::STATE_COMPLETED]);
-
             // complete parent content if necessary
             if ($content[self::STATE_COMPLETED]) {
                 $complete = true;
@@ -600,9 +583,6 @@ Log::debug('Roxana     bubbleProgress content completed is +++++++++++++++++++'.
                         $complete = false;
                     }
                 }
-
-                Log::debug('CheckForParentComplete   shouldcomplete === '.$complete.'   content_id=='.$content['id'].'    and parentId=='.$parent['id']
-                           .' and parentAlreadyCompleted== '.(!$parent[self::STATE_COMPLETED]). '  and proper type for parent bubble=='.(in_array($parent['type'], $allowedTypesForCompleted)));
 
                 if ($complete &&
                     !$parent[self::STATE_COMPLETED] &&
