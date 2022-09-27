@@ -582,6 +582,9 @@ class UserContentProgressService
                     }
                 }
 
+                Log::debug('CheckForParentComplete   shouldcomplete === '.$complete.'   content_id=='.$content['id'].'    and parentId=='.$parent['id']
+                           .' and parentAlreadyCompleted== '.(!$parent[self::STATE_COMPLETED]). '  and proper type for parent bubble=='.(in_array($parent['type'], $allowedTypesForCompleted)));
+
                 if ($complete &&
                     !$parent[self::STATE_COMPLETED] &&
                     in_array($parent['type'], $allowedTypesForCompleted)) {
