@@ -150,20 +150,17 @@ class UserMembershipFieldsService
         $latestMembershipUserProductToSync = null;
 
         foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-            if (empty($latestMembershipUserProductToSync)) {
-                $latestMembershipUserProductToSync = $eligibleUserProduct;
-
-                continue;
-            }
-
             // if its lifetime, use it
-            if (!empty($latestMembershipUserProductToSync) &&
-                empty($eligibleUserProduct->getExpirationDate()) &&
+            if (empty($eligibleUserProduct->getExpirationDate()) &&
                 $eligibleUserProduct->getProduct()->getDigitalAccessTimeType() ==
                 Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME) {
                 $latestMembershipUserProductToSync = $eligibleUserProduct;
-
                 break;
+            }
+
+            if (empty($latestMembershipUserProductToSync)) {
+                $latestMembershipUserProductToSync = $eligibleUserProduct;
+                continue;
             }
 
             // if this product expiration date is further in the past than whatever is currently set, skip it
