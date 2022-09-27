@@ -203,13 +203,19 @@ class UserContentProgressService
                 ->toDateTimeString();
         }
 
-        $this->userContentRepository->updateOrCreate(
+        $id = $this->userContentRepository->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
             ],
             $updateArray
         );
+
+        if($userId == 149628){
+            Log::debug(' Roxana    for content   we have complete result .............................. ');
+            Log::debug($id);
+        }
+
 
         if (is_null($contentId)) {
             error_log(
@@ -471,6 +477,7 @@ class UserContentProgressService
                 array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
 
             foreach ($contentOrContents as $index => $content) {
+
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
                     $contentOrContents[$index]['user_progress'][$userId] =
                         $contentProgressionsByContentId[$content['id']];
@@ -485,6 +492,10 @@ class UserContentProgressService
 
                     $contentOrContents[$index][self::STATE_COMPLETED] = false;
                     $contentOrContents[$index][self::STATE_STARTED] = false;
+                }
+                if($content['id'] == 282770){
+                    Log::debug('Roxana attachProgressToContents completed is --------------------------- '.($contentOrContents[$index][self::STATE_COMPLETED]).
+                    ' and started --------------------------------'.($contentOrContents[$index][self::STATE_STARTED]));
                 }
             }
         }
@@ -504,7 +515,7 @@ class UserContentProgressService
     public function bubbleProgress($userId, $contentId)
     {
         $content = $this->attachProgressToContents($userId, ['id' => $contentId]);
-
+Log::debug('Roxana     bubbleProgress content completed is +++++++++++++++++++'.$content[self::STATE_COMPLETED]);
         $allowedTypesForStarted = array_merge(
             config('railcontent.allowed_types_for_bubble_progress')['started'],
             config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
