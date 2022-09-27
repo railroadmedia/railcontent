@@ -4254,16 +4254,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.31.0",
+            "version": "v9.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "75013d4fffe3b24748d313fbbea53206351214f7"
+                "reference": "aae3b59f82434176546c9dd10804adda16da5278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/75013d4fffe3b24748d313fbbea53206351214f7",
-                "reference": "75013d4fffe3b24748d313fbbea53206351214f7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/aae3b59f82434176546c9dd10804adda16da5278",
+                "reference": "aae3b59f82434176546c9dd10804adda16da5278",
                 "shasum": ""
             },
             "require": {
@@ -4436,7 +4436,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-09-20T13:32:50+00:00"
+            "time": "2022-09-27T13:32:56+00:00"
         },
         {
             "name": "laravel/nova",
@@ -7962,12 +7962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d7dfe8b621822d91a3dfce5df2d0742328508c55"
+                "reference": "47b33d31956243ad81695093c2ec9eb8802e32aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d7dfe8b621822d91a3dfce5df2d0742328508c55",
-                "reference": "d7dfe8b621822d91a3dfce5df2d0742328508c55",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/47b33d31956243ad81695093c2ec9eb8802e32aa",
+                "reference": "47b33d31956243ad81695093c2ec9eb8802e32aa",
                 "shasum": ""
             },
             "require": {
@@ -7999,7 +7999,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-27T08:31:02+00:00"
+            "time": "2022-09-27T14:28:48+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8150,16 +8150,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.10",
+            "version": "v2.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c49d743afc41b72e32237f6d7f42611ae4c779d7"
+                "reference": "86aa54f4f3f50e5960b232b4ecec78933b459fb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c49d743afc41b72e32237f6d7f42611ae4c779d7",
-                "reference": "c49d743afc41b72e32237f6d7f42611ae4c779d7",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/86aa54f4f3f50e5960b232b4ecec78933b459fb3",
+                "reference": "86aa54f4f3f50e5960b232b4ecec78933b459fb3",
                 "shasum": ""
             },
             "require": {
@@ -8213,9 +8213,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.10"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.17"
             },
-            "time": "2022-09-27T08:34:31+00:00"
+            "time": "2022-09-27T14:28:07+00:00"
         },
         {
             "name": "railroad/railforums",
