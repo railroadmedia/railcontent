@@ -142,10 +142,10 @@ export default (function () {
                     },
                     cancelButton: {
                         text: '<span class="bg-grey-3 inverted text-grey-3 short">NO</span>',
+                        callback: () => {
+                            isResetCompleteOpened = false;
+                        }
                     },
-                    closeCallback: () => {
-                        isResetCompleteOpened = false;
-                    }
                 });
             }
 
@@ -221,10 +221,10 @@ export default (function () {
                             },
                             cancelButton: {
                                 text: '<span class="bg-grey-3 inverted text-grey-3">Cancel</span>',
+                                callback: () => {
+                                    isResetCompleteOpened = false;
+                                }
                             },
-                            closeCallback: () => {
-                                isResetCompleteOpened = false;
-                            }
                         });
                     }
                 } else {
