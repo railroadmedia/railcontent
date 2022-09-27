@@ -39,7 +39,6 @@ export default {
 
         progressReset(event) {
             const icon = event.target;
-
             Toasts.confirm({
                 title: 'Hold your horses… This will reset your progress, are you sure about this?',
                 submitButton: {
