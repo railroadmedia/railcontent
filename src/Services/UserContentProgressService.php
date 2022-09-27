@@ -573,6 +573,8 @@ class UserContentProgressService
                 $siblings = new Collection($siblings);
             }
 
+            Log::debug('CheckForParentComplete   check if child or content is completed  ===' .$content[self::STATE_COMPLETED]);
+
             // complete parent content if necessary
             if ($content[self::STATE_COMPLETED]) {
                 $complete = true;
