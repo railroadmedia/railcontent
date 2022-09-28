@@ -1,9 +1,9 @@
 <script>
     /**
-         example!
+         usage example!
              <section x-data="timer()" x-init="countdown()">
                  <div>
-                     <div x-show="timeLeft > 0"><span x-text="day"></span><span x-text="dayText"></span></div>
+                     <div x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></div>
                      <div x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></div>
                      <div x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></div>
                      <div x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></div>
@@ -30,7 +30,7 @@
                 let _this = this;
                 this.startTime = new Date().getTime();
                 this.timeLeft = (this.endTime - this.startTime) / 1000;
-                console.log(this.timeLeft)
+
                 if(this.timeLeft > 0){
                     setInterval(() => {
                         this.startTime = new Date().getTime();
@@ -49,8 +49,6 @@
                         @endif
                     }, 1000);
                 }
-
-
 
                 @if(empty($promoVersion))
                     const bodyWidth = window.innerWidth;
