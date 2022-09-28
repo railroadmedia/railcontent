@@ -93,8 +93,12 @@ return array(
             ],
         ],
     ],
-
-    'excludedOldForumsIds' => [3, 14, 13, 8],
+    'excludedOldForumsIds' => [
+        'drumeo' => [3, 14, 13, 8],
+        'pianote' =>[],
+        'singeo' => [],
+        'guitareo' => []
+    ],
     'forum_rules_post_id' => [
         'drumeo' => 4721,
         'guitareo' => 2675,
