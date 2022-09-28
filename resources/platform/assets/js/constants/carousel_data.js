@@ -57,7 +57,7 @@ export const testCarousel = [
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Pianote Community!",
                 ctaUrl: "pianote/schedule",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/2022-05-04-Singeo-Julia-Lisa-100.jpg",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/2022-06-29-Lisa-Kevin-Boogie-Woogie-101-107.jpg",
             }, 
         ]
     },
