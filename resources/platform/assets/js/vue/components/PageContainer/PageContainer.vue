@@ -154,13 +154,8 @@ window.showconfirmationmodal = (n) => {
 })
 
 const handleCloseConfirmationModal = () => {
-  window.showconfirmationmodal({
-    title: null,
-    subtitle: null,
-    confirm: () => { },
-    cancel: () => { }
-  });
-  confirmation.cancel();
+  confirmation.callbacks.cancel();
+  confirmation.reset();
 };
 
 const handleNotificationClear = () => {
@@ -198,7 +193,7 @@ onUnmounted(() => {
       :title="confirmation.title"
       :subtitle="confirmation.subtitle"
       @onCancel="handleCloseConfirmationModal"
-      @onSubmit="confirmation.submit"
+      @onSubmit="confirmation.callbacks.submit"
     />
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
