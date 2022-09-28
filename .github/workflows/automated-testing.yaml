@@ -17,7 +17,7 @@ jobs:
           coverage: none
       - uses: actions/checkout@v3
       - name: Copy .env
-        run: php -r "file_exists('.env') || file_put_contents('.env', '');"
+        run: php -r "file_exists('.env') || file_put_contents('.env', 'APP_NAME="Musora Web Platform"');"
       - name: Add HTTP basic auth credentials
         run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
       - name: Install Dependencies
@@ -25,7 +25,6 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
       - run: php artisan config:cache
-      - run: php -r "file_get_contents('.env');"
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: Create Database
