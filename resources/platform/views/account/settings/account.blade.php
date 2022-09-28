@@ -262,7 +262,7 @@
                         <h2>YOUR PLAN</h2>
                         <p>${{ $subscription->getTotalPrice() }} per month</p>
                         <p>= ${{ $subscription->getTotalPrice() * 12 }} per year</p>
-                        <button>KEEP THIS PLAN</button>
+                        <button class="mu-modal-close tw-cursor-pointer">KEEP THIS PLAN</button>
                     </div>
 
                     <div>
