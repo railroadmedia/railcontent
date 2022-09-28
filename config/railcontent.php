@@ -424,7 +424,7 @@ return [
             'rudiments' => [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
-                'description' => "Rudiments are small patterns that form the foundation for more complex drumming patterns. You can learn all 40 here!",
+                'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
                 'allowableFilters' => ['topic', 'progress'],
                 'sortBy' => 'sort',
             ],
