@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated, defineExpose } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -186,6 +186,44 @@ const timeouts = ref({
 });
 const isTransitioning = ref(false);
 const currentRange = ref('original');
+
+defineExpose({
+    ...props,
+    source,
+    loading,
+    playerError,
+    playerErrorCode,
+    isFullscreen,
+    showContextMenu,
+    textTracks,
+    currentTextTrackLanguage,
+    playerReady,
+    userActive,
+    userActiveTimeout,
+    isPlaying,
+    lastPlayPauseToggleTime,
+    currentTime,
+    totalDuration,
+    mousedown,
+    currentMouseX,
+    currentVolume,
+    settingsDrawer,
+    captionsDrawer,
+    chromeCast,
+    isChromeCastSupported,
+    isChromeCastConnected,
+    isAirplaySupported,
+    isAirplayConnected,
+    performanceNow,
+    currentMousePosition,
+    contextMenuPosition,
+    isPipEnabled,
+    isExperimentalPictureInPictureEnabled,
+    isKeyboardControlsEnabled,
+    hasBeenPlayed,
+    currentPlaybackRate,
+    hasRetriedSource,
+});
 
 //methods
 
