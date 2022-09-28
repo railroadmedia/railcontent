@@ -80,6 +80,7 @@ export default class ProgressTracker {
         data.append('brand', brand);
 
         if (watchPosition && totalDuration) {
+            console.log(totalDuration)
             data.append('current_second', watchPosition);
             data.append('media_length_seconds', totalDuration);
         }
