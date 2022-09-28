@@ -52,6 +52,17 @@
                 body.classList.add('mu-modal-active');
             }
 
+            function closeModal (event) {
+                console.log('closeModal triggered :D');
+                const body = document.querySelector('body');
+                const targetModal = document.querySelector('.mu-modal-is-open');
+
+                targetModal.classList.add('tw-opacity-0');
+                targetModal.classList.add('tw-pointer-events-none');
+                targetModal.classList.remove('mu-modal-is-open');
+                body.classList.remove('mu-modal-active');
+            }
+
         });
     </script>
 @endsection

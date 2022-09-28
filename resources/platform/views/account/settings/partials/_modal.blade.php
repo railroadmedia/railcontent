@@ -2,7 +2,7 @@
 
     <div class="mu-modal-overlay tw-absolute tw-w-full tw-h-full tw-bg-gray-900 tw-opacity-75 tw-z-150"></div>
 
-    <div class="mu-modal-container tw-bg-white tw-w-11/12 md:tw-max-w-2xl tw-mx-auto tw-rounded tw-shadow-lg tw-z-150 tw-overflow-y-auto tw-rounded-lg">
+    <div class="mu-modal-container tw-relative tw-bg-white tw-w-11/12 md:tw-max-w-2xl tw-mx-auto tw-rounded tw-shadow-lg tw-z-150 tw-overflow-y-auto tw-rounded-lg tw-q-151">
 
         <div class="mu-modal-close tw-absolute tw-top-0 tw-right-0 tw-cursor-pointer tw-flex tw-flex-col tw-items-center tw-mt-4 tw-mr-4 tw-text-white tw-text-sm z-50">
             <svg class="tw-fill-current tw-text-white" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
