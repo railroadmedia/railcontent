@@ -361,7 +361,7 @@ class ProfileSettingsPagesController extends BaseController
         session()->put('cancel-reason', $reason);
         session()->put('cancel-reason-text', $textReason);
 
-        // check if they've claimed the retention(win-back) offer recently
+        // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
         if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
             return $this->cancel($request);
         }
