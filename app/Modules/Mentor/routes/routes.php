@@ -7,7 +7,7 @@ use Modules\Mentor\Controllers\MentorController;
 
 Route::group(
 // Todo:  remove cors once musora runs on MWP domain
-    ['prefix' => config('mentor.route_prefix'), 'middleware' => ['cors']],
+    ['prefix' => config('mentor.route_prefix')],
     function () {
         Route::get('/getMentorIdByStudent/{userId}/', [MentorController::class, 'getMentorIdByStudent']);
         Route::get('/getMentors', [MentorController::class, 'getMentors']);
