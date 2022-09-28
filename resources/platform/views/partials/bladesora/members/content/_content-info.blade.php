@@ -38,7 +38,7 @@
                         @if(!empty($chapter['chapter_timecode']))
                             <p class="body tw-text-[#191b1c] dark:tw-text-white">
                                 <a class="tw-font-bold font-underline"
-                                   data-jump-to-time="{{ $chapter['chapter_timecode'] ?? 0 }}">{{ gmdate('H:i:s', $chapter['chapter_timecode'] ?? 0) }}</a> - {{ $chapter['chapter_description'] }}
+                                   data-jump-to-time="{{ $chapter['chapter_timecode'] ?? 0 }}">{{ gmdate('H:i:s', $chapter['chapter_timecode'] ?? 0) }}</a> - {{ $chapter['chapter_description']??'' }}
                             </p>
                         @endif
                     @endforeach
