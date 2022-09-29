@@ -113,10 +113,12 @@ class ForumPagesController extends Controller
 
         foreach ($threads as $thread) {
             $latestPost = $thread->latest_post;
-            $latestPost['created_at_diff'] =
-                Carbon::parse($latestPost['created_at'])
-                    ->diffForHumans();
-            $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
+            if($latestPost) {
+                $latestPost['created_at_diff'] =
+                    Carbon::parse($latestPost['created_at'])
+                        ->diffForHumans();
+                $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
+            }
 
             $mappedThreads[] = [
                 "title" => $thread->title,
@@ -145,10 +147,12 @@ class ForumPagesController extends Controller
 
         foreach ($pinnedThreads as $pinnedThread) {
             $latestPost = $pinnedThread->latest_post;
-            $latestPost['created_at_diff'] =
-                Carbon::parse($latestPost['created_at'])
-                    ->diffForHumans();
-            $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
+            if($latestPost) {
+                $latestPost['created_at_diff'] =
+                    Carbon::parse($latestPost['created_at'])
+                        ->diffForHumans();
+                $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
+            }
 
             $mappedPinnedThreads[] = [
                 "title" => $pinnedThread->title,

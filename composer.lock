@@ -991,16 +991,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "616d5fca274ea66b969cdebbbfd1dc33a87d461b"
+                "reference": "609c3a7b6af49a7b4b13945ca2fdf4af801946af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/616d5fca274ea66b969cdebbbfd1dc33a87d461b",
-                "reference": "616d5fca274ea66b969cdebbbfd1dc33a87d461b",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/609c3a7b6af49a7b4b13945ca2fdf4af801946af",
+                "reference": "609c3a7b6af49a7b4b13945ca2fdf4af801946af",
                 "shasum": ""
             },
             "require": {
@@ -1062,7 +1062,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/common/issues",
-                "source": "https://github.com/doctrine/common/tree/3.4.1"
+                "source": "https://github.com/doctrine/common/tree/3.4.2"
             },
             "funding": [
                 {
@@ -1078,7 +1078,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-26T17:15:48+00:00"
+            "time": "2022-09-28T14:20:50+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -8150,16 +8150,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.17",
+            "version": "v2.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "86aa54f4f3f50e5960b232b4ecec78933b459fb3"
+                "reference": "3317b2f3f2e28e4f106d8dc68c14f188e1c21c84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/86aa54f4f3f50e5960b232b4ecec78933b459fb3",
-                "reference": "86aa54f4f3f50e5960b232b4ecec78933b459fb3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3317b2f3f2e28e4f106d8dc68c14f188e1c21c84",
+                "reference": "3317b2f3f2e28e4f106d8dc68c14f188e1c21c84",
                 "shasum": ""
             },
             "require": {
@@ -8213,9 +8213,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.17"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.18"
             },
-            "time": "2022-09-27T14:28:07+00:00"
+            "time": "2022-09-27T16:46:59+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8223,12 +8223,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "f31361d73026d54643bb3cd04bb14ac74e4f564d"
+                "reference": "1b6951f154b36b5816ae6d9f1253b084c5cdfcbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/f31361d73026d54643bb3cd04bb14ac74e4f564d",
-                "reference": "f31361d73026d54643bb3cd04bb14ac74e4f564d",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/1b6951f154b36b5816ae6d9f1253b084c5cdfcbe",
+                "reference": "1b6951f154b36b5816ae6d9f1253b084c5cdfcbe",
                 "shasum": ""
             },
             "require": {
@@ -8269,7 +8269,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0-optimizations"
             },
-            "time": "2022-09-28T12:32:41+00:00"
+            "time": "2022-09-29T07:28:03+00:00"
         },
         {
             "name": "railroad/railnotifications",
