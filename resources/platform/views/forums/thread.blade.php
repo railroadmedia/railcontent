@@ -38,7 +38,7 @@
         :thread="{{ $thread }}"
         :current-user="{{ $currentUser }}"
         previous-page="{{ $categoryUrl }}"
-        post-store-form-url="{{ url()->route('railforums.post.store').'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
+        post-store-form-url="{{ url()->route('railforums.post.store')}}"
         update-post-base-route="{{ url()->route('railforums.post.update',['#####']).'?redirect='.url()->route('forums.jump-to-post',['#####']) }}"
     />
 
