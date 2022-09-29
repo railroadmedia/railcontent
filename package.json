@@ -44,6 +44,8 @@
         "vue-recaptcha": "^2.0.2"
     },
     "dependencies": {
+        "mediaelement": "^4.2.8",
+        "mediaelement-plugins": "^2.5.0",
         "@musora/icons": "^1.0.6",
         "@tinymce/tinymce-vue": "^5.0.0",
         "@vimeo/player": "^2.15.0",
