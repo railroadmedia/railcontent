@@ -64,7 +64,7 @@ class UserMembershipFieldsService
             $this->sync(
                 $userId,
                 $allUsersUserProductsGroupedByUserId[$userId] ?? [],
-                $associatedCoachesByUserId[$userId] ?? []
+                $associatedCoachesByUserId ?? []
             );
         }
 
