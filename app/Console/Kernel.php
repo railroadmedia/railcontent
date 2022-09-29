@@ -8,6 +8,7 @@ use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\VaporEnvManager;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         PopulateUserRolesTable::class,
         RunMWPPhaseOneLaunchMigrations::class,
         MigrateCoachesToInstructors::class,
+        VaporEnvManager::class,
     ];
 
     /**
