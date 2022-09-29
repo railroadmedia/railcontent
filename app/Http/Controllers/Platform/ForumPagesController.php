@@ -83,7 +83,7 @@ class ForumPagesController extends Controller
         // $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-//        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -454,7 +454,7 @@ class ForumPagesController extends Controller
 
         $sortBy = $request->get('sortby_val', '-published_on');
 
-//        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
         $thread =
             $this->threadRepository->getDecoratedThreadsByIds([$id])

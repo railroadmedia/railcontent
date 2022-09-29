@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d381257b16595dcb1fc93cf00ae4e06e",
+    "content-hash": "38c7cbeb69bb9cffd6df0e3c74132c93",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -16006,7 +16006,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20
+        "railroad/musora-api": 20,
+        "railroad/railforums": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
