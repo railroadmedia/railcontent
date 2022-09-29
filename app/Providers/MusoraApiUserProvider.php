@@ -13,21 +13,29 @@ use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
+use Railroad\Railcontent\Services\CommentService;
+use Railroad\Railforums\Repositories\PostRepository;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private SubscriptionRepository $subscriptionRepository;
     private ProductRepository $productRepository;
     private CalendarService $calendarService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
 
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
-        CalendarService $calendarService
+        CalendarService $calendarService,
+        CommentService $commentService,
+        PostRepository $postRepository
     ) {
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->calendarService = $calendarService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser()
@@ -226,5 +234,45 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         return null;
+    }
+
+    public function deleteAccount(){
+        $user = user();
+        $userId = $user['id'];
+
+        $this->commentService->markUserCommentsAsDeleted($userId);
+        $this->postRepository->deleteByUserId($userId);
+
+        $user->fill([
+            'email' => 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com',
+            'first_name' => null,
+            'last_name' => null,
+            'display_name' => '',
+            'gender' => null,
+            'country' => null,
+            'region' => null,
+            'city' => null,
+            'birthday' => null,
+            'phone_number' => null,
+            'profile_picture_url' => null,
+            'timezone' => null,
+            'permission_level' => null,
+            'drums_gear_photo' => null,
+            'biography' => null,
+            'piano_gear_photo' => null,
+            'drums_gear_set_brands' => null,
+            'drums_gear_hardware_brands' => null,
+            'drums_gear_stick_brands' => null,
+            'drums_gear_cymbal_brands' => null,
+            'drums_playing_since_year' => null,
+            'piano_gear_piano_brands' => null,
+            'piano_gear_keyboard_brands' => null,
+            'piano_playing_since_year' => null,
+
+        ]);
+        $user->email = 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com';
+        $user->save();
+
+        return $user;
     }
 }
