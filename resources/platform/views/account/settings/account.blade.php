@@ -233,9 +233,8 @@
 
             @if($hasHadMembership)
                 <a href="#" class="tw-mt-3 tw-no-underline">
-                    <p class="mu-modal-open text-{{ $brand }}" id="modal-how-can-we-help">Click here if you’d like
-                        help getting the
-                        most out of your account.</p>
+                    <p class="mu-modal-open" id="modal-how-can-we-help">Click here if you’d like
+                        help getting the most out of your account.</p>
                 </a>
             @endif
             &nbsp; <!-- todo: remove this &nbsp -->
@@ -247,6 +246,8 @@
 
         </div>
     </div>
+
+    {{--  ================================================= MODALS ================================================= --}}
 
     @if($offerUpgradeToAnnualShowToStudent)
         @component('account.settings.partials._modal', ['modalId' => 'modal-upgrade'])
@@ -281,6 +282,102 @@
             @endslot
         @endcomponent
     @endif
+
+    @component('account.settings.partials._modal', ['modalId' => 'modal-how-can-we-help'])
+        @slot('contentSlot')
+
+            {{-- todo: this should submit the normal cancel help email that goes to the person is does now and return back to the account details page with a success message --}}
+            <form method="post" action="{{ url()->route('platform.profile.settings.send-help-email') }}"
+{{--                  class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-relative">--}}
+                  class="">
+
+                {{ csrf_field() }}
+
+                <h1 class="heading tw-text-center">How can we help?</h1>
+
+                <div class="tw-text-left">
+                    <p class="body tw-mt-6">
+                        Select any of the issues you’d like help with:
+                    </p>
+                    {{--<div class="tw-ml-3">--}}
+                    <ul class="tw-ml-3">
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="direction" value="direction"
+                                   class="tw-mr-3 tw-mt-6">
+                            <label for="direction">I need more direction</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="time" value="time" class="tw-mr-3">
+                            <label for="time">I don’t have enough time</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="watch" value="watch" class="tw-mr-3">
+                            <label for="watch">I don’t know what lesson to watch</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="easy" value="easy" class="tw-mr-3">
+                            <label for="easy">The lessons are too easy</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="difficult" value="difficult" class="tw-mr-3">
+                            <label for="difficult">The lessons are too difficult</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="website" value="website" class="tw-mr-3">
+                            <label for="website">I don’t know how to use the website/app.</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                        {{-- <p class="body"> --}}
+                        <li>
+                            <input type="radio" name="help-issue" id="other" value="other" class="tw-mr-3">
+                            <label for="other">Other</label>
+                        </li>
+                        {{-- </p> --}}
+
+
+                    </ul>
+
+                    <textarea placeholder="Send your questions to a {{ ucfirst($brand) }} teacher..."
+                              class="tw-mt-6 tw-rounded-lg" name="text-input"></textarea>
+
+                    {{--<label for="email-input" class="tw-py-1 tw-mt-6 tw-block">We'll get back to you at "{{ current_user()->getEmail() }}". If you prefer a different address, please enter it here (optional):</label>--}}
+                    {{--<input type="text" name="email" id="email-input" class="tw-mt-1 tw-pt-0 tw-rounded-lg"--}}
+                    {{--placeholder="Email address">--}}
+                </div>
+
+                <button
+{{--                    class="tw-uppercase tw-font-bold tw-no-underline tw-p-3 tw-pl-16 tw-pr-16 tw-text-white tw-rounded-full tw-mt-8 tw-border-0"--}}
+                    class=""
+                    style="cursor:pointer">
+                    Send Message
+                </button>
+            </form>
+        @endslot
+    @endcomponent
+
 
 {{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
 {{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}

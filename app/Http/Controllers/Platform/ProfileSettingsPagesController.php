@@ -590,4 +590,9 @@ class ProfileSettingsPagesController extends BaseController
             return [];
         }
     }
+
+    public function sendHelpEmail(Request $request)
+    {
+
+    }
 }

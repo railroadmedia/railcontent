@@ -401,6 +401,12 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.gratis-access');
 
+        Route::post(
+            '/{brand}/profile/settings/account/send-help-email',
+            [ProfileSettingsPagesController::class, 'sendHelpEmail']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.send-help-email');
 
 
         // GET cancel-reason-form
@@ -420,6 +426,7 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile.settings.win-back');
 
         // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+        // (end of cancellation-related)
         // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
 
         /*
