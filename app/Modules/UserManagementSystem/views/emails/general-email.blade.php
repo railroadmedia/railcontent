@@ -215,7 +215,7 @@
                                                 <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-family: 'Open Sans', sans-serif; font-size: 14px; line-height: 25.6px;padding-bottom: 10px;">If the button does not work, copy and paste this URL into your browser: </p>
                                                     <div id="urlframe" style="font-family: 'Open Sans', sans-serif; font-size: 14px; line-height: 25.6px;">
-                                                        <a href="{{ $input['url'] }}">{{ $input['url'] }}/</a>
+                                                        <a href="{{ $input['url'] }}">{{ $input['url'] }}</a>
                                                     </div>
                                                 </div>
 
