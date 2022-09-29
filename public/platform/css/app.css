@@ -20766,8 +20766,14 @@ a:visited{
   .tw-container{
     max-width: 640px;
   }
+  .tw-container{
+    max-width: 640px;
+  }
 }
 @media (min-width: 768px){
+  .tw-container{
+    max-width: 768px;
+  }
   .tw-container{
     max-width: 768px;
   }
@@ -20782,8 +20788,14 @@ a:visited{
   .tw-container{
     max-width: 1024px;
   }
+  .tw-container{
+    max-width: 1024px;
+  }
 }
 @media (min-width: 1280px){
+  .tw-container{
+    max-width: 1280px;
+  }
   .tw-container{
     max-width: 1280px;
   }
@@ -20798,6 +20810,9 @@ a:visited{
   .tw-container{
     max-width: 1536px;
   }
+  .tw-container{
+    max-width: 1536px;
+  }
 }
 @media (min-width: 1815px){
   .tw-container{
@@ -20806,8 +20821,14 @@ a:visited{
   .tw-container{
     max-width: 1815px;
   }
+  .tw-container{
+    max-width: 1815px;
+  }
 }
 @media (min-width: 2256px){
+  .tw-container{
+    max-width: 2256px;
+  }
   .tw-container{
     max-width: 2256px;
   }
@@ -24256,8 +24277,14 @@ a:visited{
   .tw-container{
     max-width: 1815px !important;
   }
+  .tw-container{
+    max-width: 1815px !important;
+  }
 }
 @media (min-width: 2256px){
+  .tw-container{
+    max-width: 2256px !important;
+  }
   .tw-container{
     max-width: 2256px !important;
   }
