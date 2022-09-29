@@ -241,7 +241,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $userId = $user['id'];
 
         $this->commentService->markUserCommentsAsDeleted($userId);
-        $this->postRepository->deleteByUserId($userId);
+//        $this->postRepository->deleteByUserId($userId);
 
         $user->fill([
             'email' => 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com',
