@@ -19,6 +19,8 @@ class ContentUserProgressDecorator implements DecoratorInterface
      */
     protected $userContentProgressService;
 
+    public static $skip = false;
+
     /**
      * CommentLikesDecorator constructor.
      * @param UserContentProgressRepository $userContentProgressRepository
@@ -38,7 +40,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
             $userId = auth()->id();
         }
 
-        if (empty($userId)) {
+        if (empty($userId) || self::$skip) {
             return $contents;
         }
 

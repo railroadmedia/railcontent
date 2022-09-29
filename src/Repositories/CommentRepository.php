@@ -559,4 +559,17 @@ class CommentRepository extends RepositoryBase
 
         return $query->count();
     }
+
+    public function markUserCommentsAsDeleted($userId)
+    {
+        $deleted =
+            $this->query()
+                ->where(['user_id' => $userId])
+                ->update([
+                             'deleted_at' => Carbon::now()
+                                 ->toDateTimeString(),
+                         ]);
+
+        return $deleted;
+    }
 }
