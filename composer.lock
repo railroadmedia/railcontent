@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d381257b16595dcb1fc93cf00ae4e06e",
+    "content-hash": "38c7cbeb69bb9cffd6df0e3c74132c93",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.236.1",
+            "version": "3.237.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1e8d1abe7582968df16a2e7a87c5dcc51d0dfd1b"
+                "reference": "9ecb0aac2c8ad78585689d1c3e71817310aa69f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1e8d1abe7582968df16a2e7a87c5dcc51d0dfd1b",
-                "reference": "1e8d1abe7582968df16a2e7a87c5dcc51d0dfd1b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9ecb0aac2c8ad78585689d1c3e71817310aa69f1",
+                "reference": "9ecb0aac2c8ad78585689d1c3e71817310aa69f1",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.236.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.237.0"
             },
-            "time": "2022-09-27T18:19:10+00:00"
+            "time": "2022-09-29T18:16:17+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7962,12 +7962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "47b33d31956243ad81695093c2ec9eb8802e32aa"
+                "reference": "38e59524391624597e0db1424d61c29074f9dff5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/47b33d31956243ad81695093c2ec9eb8802e32aa",
-                "reference": "47b33d31956243ad81695093c2ec9eb8802e32aa",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/38e59524391624597e0db1424d61c29074f9dff5",
+                "reference": "38e59524391624597e0db1424d61c29074f9dff5",
                 "shasum": ""
             },
             "require": {
@@ -7999,7 +7999,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-27T14:28:48+00:00"
+            "time": "2022-09-29T13:35:50+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -9668,12 +9668,12 @@
             "version": "0.1.6",
             "source": {
                 "type": "git",
-                "url": "git@gitlab.com:stella-maris/clock.git",
+                "url": "https://github.com/stella-maris-solutions/clock.git",
                 "reference": "a94228dac03c9a8411198ce8c8dacbbe99c930c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/stella-maris%2Fclock/repository/archive.zip?sha=a94228dac03c9a8411198ce8c8dacbbe99c930c3",
+                "url": "https://api.github.com/repos/stella-maris-solutions/clock/zipball/a94228dac03c9a8411198ce8c8dacbbe99c930c3",
                 "reference": "a94228dac03c9a8411198ce8c8dacbbe99c930c3",
                 "shasum": ""
             },
@@ -9704,6 +9704,10 @@
                 "point in time",
                 "psr20"
             ],
+            "support": {
+                "issues": "https://github.com/stella-maris-solutions/clock/issues",
+                "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.6"
+            },
             "time": "2022-09-27T15:03:11+00:00"
         },
         {
@@ -16002,7 +16006,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20
+        "railroad/musora-api": 20,
+        "railroad/railforums": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -16011,5 +16016,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
