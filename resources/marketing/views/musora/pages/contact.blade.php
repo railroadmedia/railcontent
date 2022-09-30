@@ -1,5 +1,14 @@
 @extends('musora._partials.layout')
 
+@section('head-includes')
+    <title>Contact Us | Musora</title>
+    <meta name="description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, Pianote, and Singeo. ">
+    <meta property="og:title" content="Contact Us">
+    <meta property="og:description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, Pianote, and Singeo. ">
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+@endsection
+
 <!-- Main -->
 @section('layout-body')
 

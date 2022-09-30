@@ -63,7 +63,6 @@ export default class ProgressTracker {
         sessionToken,
         brand
     }) {
-        console.log('brand', brand);
         const data = new FormData();
 
         if(this.running){

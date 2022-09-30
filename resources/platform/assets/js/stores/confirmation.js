@@ -5,22 +5,38 @@ export const useConfirmationStore = defineStore({
   state: () => ({
     title: null,
     subtitle: null,
-    submit: () => { },
-    cancel: () => { },
+    callbacks: {
+      submit: () => { },
+      cancel: () => { },
+    },
   }),
 
   actions: {
     update({
       title,
       subtitle,
-      submit,
-      cancel,
+      callbacks: {
+        submit,
+        cancel,
+      }
     }) {
       this.$patch({
         title,
         subtitle,
-        submit,
-        cancel,
+        callbacks: {
+          submit: submit ? submit : () => {},
+          cancel: cancel ? cancel : () => {},
+        },
+      });
+    },
+    reset() {
+      this.$patch({
+        title: null,
+        subtitle: null,
+        callbacks: {
+          submit: () => { },
+          cancel: () => { },
+        }
       });
     },
   },

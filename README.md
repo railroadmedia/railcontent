@@ -242,7 +242,7 @@ To deploy any environment except production, push to the branch. GitHub actions 
 anytime new changes are pushed. This usually takes around 5 minutes.
 
 ## Production
-Coming soon...
+Merge in to the production branch, same as above.
 
 # How To Run Artisan Commands On Cloud Environments
 You can run commands on our staging and other vapor based cloud environments using
@@ -274,3 +274,12 @@ This mailtrap receiving email address is the only verified email that we can sen
 non-production environments. This prevents accidentally sending emails to students from staging/testing environments.
 
 Emails for all environments including production are sent through AWS SES in the us-east-2 region.
+
+# Logging
+
+Production laravel logs are sent to our papertrail account: 
+[https://my.papertrailapp.com/groups/36174881/events](https://my.papertrailapp.com/groups/36174881/events)  
+
+PHP or lower level logs are in cloudwatch/vapor.
+
+Other environments are being added to papertrial in the near future.

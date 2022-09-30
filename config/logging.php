@@ -1,6 +1,7 @@
 <?php
 
 use Monolog\Handler\NullHandler;
+use Monolog\Handler\SocketHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
@@ -37,7 +38,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['stderr', 'papertrail'],
+            'name' => env('STACK_LOG_CHANNEL_NAME', 'stack-log-channel'),
             'ignore_exceptions' => false,
         ],
 
@@ -65,10 +67,9 @@ return [
         'papertrail' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
-            'handler' => SyslogUdpHandler::class,
+            'handler' => SocketHandler::class,
             'handler_with' => [
-                'host' => env('PAPERTRAIL_URL'),
-                'port' => env('PAPERTRAIL_PORT'),
+                'connectionString' => env('PAPERTRAIL_LOGS_ENDPOINT', 'tls://logs.papertrailapp.com:29656'),
             ],
         ],
 

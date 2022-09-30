@@ -424,9 +424,20 @@ return [
             'rudiments' => [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
-                'description' => "Rudiments are small patterns that form the foundation for more complex drumming patterns. You can learn all 40 here!",
+                'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
                 'allowableFilters' => ['topic', 'progress'],
                 'sortBy' => 'sort',
+            ],
+            'spotlight' => [
+                'thumbnailUrl' => 'https://cdn.musora.com/image/fetch/c_fill,w_500,h_500,q_auto:good/https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/0b67bd7f-220f-41f3-1797-8c6883a00a00/public',
+                'name' => 'Spotlight',
+                'shortname' => 'Spotlight',
+                'icon' => 'icon-shows',
+                'description' => "We're standing on the shoulders of giants. Those who came before us paved the way for everyone who came after by developing most of what we take for granted today, in the world of drum-set playing. Learning about these giants and their contributions to our craft is essential to fully appreciate and understand what we do as musicians. This is the journey Todd Sucherman is inviting you to take on with him, as he navigates the incredible world of Spotlight.",
+                'allowableFilters' => [],
+                'sortBy' => 'sort',
+                'amountOfFutureLessonsToShow' => 10,
+                'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
             'gear-guides' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/gear.jpg',
@@ -911,6 +922,7 @@ return [
      */
     'showTypes' => [
         'drumeo' => [
+            'spotlight',
             'the-history-of-electronic-drums',
             'backstage-secrets',
             'quick-tips',
@@ -923,21 +935,18 @@ return [
             'boot-camps',
             'gear-guides',
             'performances',
-            'in-rhythm', /* 2020 */
-            'challenges', /* 2020 */
-            'on-the-road', /* 2020 */
-            'diy-drum-experiments', /* 2019*/
-            'rhythmic-adventures-of-captain-carson', /* 2019*/
-            'study-the-greats', /* 2019*/
-            'rhythms-from-another-planet', /* 2019*/
-            'tama-drums', /* 2019*/
-            'paiste-cymbals', /* 2019*/
-            'behind-the-scenes', /* 2019*/
-            //        'namm-2019', /* 2019*/
-            //        'camp-drumeo-ah', /* 2019*/
-            //        '25-days-of-christmas', /* 2019*/
-            'exploring-beats', /* 2018*/
-            'sonor-drums', /* 2018*/
+            'in-rhythm',
+            'challenges',
+            'on-the-road',
+            'diy-drum-experiments',
+            'rhythmic-adventures-of-captain-carson',
+            'study-the-greats',
+            'rhythms-from-another-planet',
+            'tama-drums',
+            'paiste-cymbals',
+            'behind-the-scenes',
+            'exploring-beats',
+            'sonor-drums',
         ],
         'pianote' => [
             'student-review',

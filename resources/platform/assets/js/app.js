@@ -154,8 +154,6 @@ const app = createApp({
         },
 
         handleVideoPlay(payload) {
-            // console.log('handleVideoPlay Called')
-            // console.log('hasBeenPlayed', hasBeenPlayed)
             if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
                 ContentService.markContentAsStarted(payload.contentId);
             }
@@ -328,6 +326,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "video-player-component" */
             './vue/vuesora/components/VideoPlayer/VideoPlayer.vue'
+        )
+    ))
+
+    .component('VideoMediaElement', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "video-media-element-component" */
+            './vue/vuesora/components/MediaElement/MediaElement.vue'
         )
     ))
 

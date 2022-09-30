@@ -56,6 +56,9 @@ class SetLastUsedBrand
 
             config()->set('railnotifications.brand', $brand);
 
+            config()->set('event-data-synchronizer.customer_io_brand_activity_event', $brand);
+            config()->set('event-data-synchronizer.brand', $brand);
+
             // set railchat config to be brand specific
             foreach (config('railchat.' . $brand, []) as $configKey => $configValue) {
                 config()->set('railchat.' . $configKey, $configValue);
