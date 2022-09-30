@@ -74,51 +74,51 @@ export default {
     props: {
         elementId: {
             type: String,
-            default: () => 'mediaElementPlayer',
+            default: 'mediaElementPlayer',
         },
         sources: {
             type: Array,
-            default: () => [],
+            default: [],
         },
         hlsManifestUrl: {
             type: String,
-            default: () => '',
+            default: '',
         },
         poster: {
             type: String,
-            default: () => '',
+            default: '',
         },
         brand: {
             type: String,
-            default: () => 'recordeo',
+            default: 'drumeo',
         },
         themeColor: {
             type: String,
-            default: () => 'drumeo',
+            default: 'drumeo',
         },
         checkForTimecode: {
             type: Boolean,
-            default: () => false,
+            default: false,
         },
         castTitle: {
             type: String,
-            default: () => null,
+            default: null,
         },
         castDescription: {
             type: String,
-            default: () => null,
+            default: null,
         },
         isLiked: {
             type: Boolean,
-            default: () => false,
+            default: false,
         },
         likeCount: {
-            type: Number | String,
-            default: () => 0,
+            type: [Number, String],
+            default: 0,
         },
         chapters: {
             type: Array,
-            default: () => [],
+            default: [],
         },
         contentId: {
             type: [String, Number],
@@ -126,23 +126,23 @@ export default {
         },
         userId: {
             type: [String, Number],
-            default: () => null,
+            default: null,
         },
         progressState: {
             type: String,
-            default: () => null,
+            default: null,
         },
         currentSecond: {
             type: [String, Number],
-            default: () => 0,
+            default: 0,
         },
         videoId: {
             type: [String, Number],
-            default: () => null,
+            default: null,
         },
         videoLength: {
             type: [String, Number],
-            default: () => null,
+            default: null,
         },
     },
     data() {
@@ -267,10 +267,6 @@ export default {
         if (this.elementId === 'lessonPlayer') {
             this.initializeChapterMarkerLinks();
         }
-
-        this.$root.$on('pauseVideos', () => {
-            this.pauseVideo();
-        });
     },
     beforeDestroy() {
         const vm = this;

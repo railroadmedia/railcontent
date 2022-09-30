@@ -27,7 +27,7 @@ return array(
     'forums_index_page_url' => '/brand/forums',
 
     // host does the db migrations, clients do not
-    'data_mode' => 'client', // 'host' or 'client'
+    'data_mode' => env('RAILFORUMS_DATA_MODE', 'host'),
 
     // cache
     'cache_driver' => 'array',
@@ -93,6 +93,16 @@ return array(
             ],
         ],
     ],
-
-    'excludedOldForumsIds' => [3, 14, 13, 8]
+    'excludedOldForumsIds' => [
+        'drumeo' => [3, 14, 13, 8],
+        'pianote' =>[],
+        'singeo' => [],
+        'guitareo' => []
+    ],
+    'forum_rules_post_id' => [
+        'drumeo' => 4721,
+        'guitareo' => 2675,
+        'singeo' => 3,
+        'pianote' => 1
+    ]
 );

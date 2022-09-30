@@ -329,6 +329,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('VideoMediaElement', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "video-media-element-component" */
+            './vue/vuesora/components/MediaElement/MediaElement.vue'
+        )
+    ))
+
     .component('ImageCropper', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "image-cropper-component" */

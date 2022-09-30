@@ -20,7 +20,7 @@ class ResetPassword extends ResetPasswordBase
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
 
-        return $this->buildMailMessage(''); // url not used since we have it hard coded in the function override
+        return $this->buildMailMessage('');
     }
 
     /**
@@ -36,15 +36,18 @@ class ResetPassword extends ResetPasswordBase
         return (new MailMessage)
             ->subject('Musora Account Password Reset Link')
             ->view(
-                'user-management-system::emails.password-reset-email',
+                'user-management-system::emails.general-email',
+
                 [
                     'input' => [
+                        'line-one' => "We've received a request to reset your password. To reset your password, click the button below. ",
+                        'button-name' => 'Reset Password',
                         'url' => url()->route(
                             'user_management_system.password.show-reset-form',
                             ['token' => $this->token, 'email' => request('email')]
                         ),
                         'logo' => 'https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
-                        'display_name' => $user->display_name
+                        'display-name' => $user->display_name
                     ]
                 ]
             )->from('system@musora.com', 'Musora');
