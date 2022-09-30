@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38c7cbeb69bb9cffd6df0e3c74132c93",
+    "content-hash": "d381257b16595dcb1fc93cf00ae4e06e",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8219,16 +8219,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "dev-v2.0-optimizations",
+            "version": "v2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "c3f43207e1c53b7a2d631c13d9b975c71d4b4f75"
+                "reference": "2c2b03faa60a9ca5a7d4337579ff519db4675b60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/c3f43207e1c53b7a2d631c13d9b975c71d4b4f75",
-                "reference": "c3f43207e1c53b7a2d631c13d9b975c71d4b4f75",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/2c2b03faa60a9ca5a7d4337579ff519db4675b60",
+                "reference": "2c2b03faa60a9ca5a7d4337579ff519db4675b60",
                 "shasum": ""
             },
             "require": {
@@ -8267,9 +8267,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0-optimizations"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.8"
             },
-            "time": "2022-09-29T09:30:26+00:00"
+            "time": "2022-09-30T07:34:26+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -15996,18 +15996,10 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "railroad/railforums",
-            "version": "dev-v2.0-optimizations",
-            "alias": "v2.0.6",
-            "alias_normalized": "2.0.6.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
-        "railroad/railforums": 20
+        "railroad/musora-api": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
