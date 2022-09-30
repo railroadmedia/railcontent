@@ -4,10 +4,11 @@ namespace Modules\UserManagementSystem\Models;
 
 use App\Modules\Mentor\Models\MentorStudent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use DateTimeZone;
+use Exception;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Contracts\Notifications\Dispatcher;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -337,6 +338,34 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
                 }
 
                 return 'pack';
+            },
+        );
+    }
+
+    /**
+     * Values: pack, member, lifetime, coach, house-coach, team
+     *
+     * @return Attribute
+     */
+    public function timezone(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (!empty($value)) {
+                    try {
+                        // check to make sure its a valid timezone, otherwise reset it
+                        Carbon::parse('2022', 'UTC')
+                            ->timezone($value)
+                            ->toDateTimeString();
+
+                        return $value;
+                    } catch (Exception $e) {
+                        $this->timezone = null;
+                        $this->save();
+                    }
+                }
+
+                return 'America/Los_Angeles';
             },
         );
     }

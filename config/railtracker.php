@@ -42,7 +42,7 @@ return [
     ],
 
     // route middleware group
-    'route_middleware_logged_in_groups' => [],
+    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
 
     'ip_data_api_key' => env('IP_DATA_API_KEY', '3e2874cc4be1cd0bdb4c4197614c8dd9494fc50bc3c57e0485970413')
 ];

@@ -20,8 +20,9 @@
             tw-relative
             tw-w-14
             tw-h-14
+            tw-flex
             tw-rounded-full
-            tw-bg-contain
+            tw-bg-cover
             tw-bg-center
             tw-bg-no-repeat
             tw-overflow-hidden

@@ -25,10 +25,6 @@
                 style="width:480px;max-width:100%;"
             >
 
-            <a data-open-modal="surveyModal" class="btn bg-{{ $brand }} text-white collapse-200 short">
-                <i class="fas fa-question-circle"></i>&nbsp; WHERE TO BEGIN
-            </a>
-
             <div id="previewModal" class="modal">
                 <div class="flex flex-column corners-10">
 
@@ -71,11 +67,6 @@
                             Start Next Lesson
                         </a>
                     </div>
-                </div>
-            </div>
-            <div id="surveyModal" class="modal">
-                <div class="flex flex-column corners-10">
-                    <div class="typeform-widget" data-url="https://form.typeform.com/to/rnPhq70s?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
                 </div>
             </div>
         </div>

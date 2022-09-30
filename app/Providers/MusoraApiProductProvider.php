@@ -19,7 +19,6 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function getAppleProductId($slug)
     : string {
-        return '';
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug')??[];
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -28,8 +27,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function getGoogleProductId($slug)
     : string {
-        return '';
-        // TODO: Implement getGoogleProductId() method.
+        $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
+
+        $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
+        return array_flip(config('ecommerce.google_store_products_map'))[$productSKU] ?? '';
     }
 
     public function currentUserOwnsPack($id)

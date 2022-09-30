@@ -187,6 +187,8 @@ return [
         App\Modules\Mentor\Providers\MentorServiceProvider::class,
         App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
         App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
+        App\Modules\Content\Providers\ContentServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
