@@ -46,7 +46,7 @@
                 >
                     <!-- Hide/Show Replies -->
                     <div v-if="hasShowHideButton" 
-                         class="tw-leading-none tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1] tw-inline-flex tw-items-center tw-ml-auto tw-m-0"
+                         class="tw-leading-none tw-cursor-pointer tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1] hover:tw-text-[#00101D] dark:hover:tw-text-white tw-transition-colors tw-inline-flex tw-items-center tw-ml-auto tw-m-0"
                          @click="showHideQuotes"
                     >
                         {{ quotesHidden ? 'Show' : 'Hide' }} Quotes
