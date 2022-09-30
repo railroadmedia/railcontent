@@ -15,6 +15,7 @@
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=e506be07481459f9744a01d9c7e0938f",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=33b575bfc5d9192a2b0155595baa2e5c",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=cb754ad5b79d6f94f09656649c26aef3",
+<<<<<<< HEAD
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=8a9f8453c8e9691da160d95f3233ce73",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=1435b648dfa43ef38889583bd03e8adc",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=b3a19a0f6c800310a3d3ad15ac631555",
@@ -23,4 +24,16 @@
     "/platform/css/app.css": "/platform/css/app.css?id=b48d6ba90cc719694bde64e79652cee0",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=7bc222fd1f3a49c38cdc6f53cf67541f",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=1546536cc7d174df1975c95c2c3cf7d3"
+=======
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=1435b648dfa43ef38889583bd03e8adc",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=b3a19a0f6c800310a3d3ad15ac631555",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=49e491a00ddf3dda3c606d7a150398a4",
+    "/platform/css/app.css": "/platform/css/app.css?id=b48d6ba90cc719694bde64e79652cee0",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=7bc222fd1f3a49c38cdc6f53cf67541f",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=01834f48baf5b76191b704993294c1e0",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=1546536cc7d174df1975c95c2c3cf7d3",
+    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=8a9f8453c8e9691da160d95f3233ce73",
+    "/marketing/js/app.js": "/marketing/js/app.js?id=9d644b0c0a3bb0fa1983d7e493c64ef6",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=7641569357a3a3b3976a90809bf709b7"
+>>>>>>> master
 }
