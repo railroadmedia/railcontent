@@ -15999,8 +15999,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
-        "railroad/railforums": 20
+        "railroad/musora-api": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
