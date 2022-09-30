@@ -18,17 +18,17 @@
                     </a>
                 </div>
             </div>
-            <div class="tw-flex tw-flex-wrap tw-w-9/12 sm:tw-w-full">
+            <div class="tw-flex tw-flex-col tw-w-9/12 sm:tw-w-full">
                 <!-- Name -->
                 <h2 class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
                     {{ post.authorUsername }}
                 </h2>
-                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
+                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2">
                     <span>{{ post.authorTotalPosts }} Posts</span> -
                     <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
                 </div>
-                <div class="tw-inline-flex tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
+                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-justify-end tw-leading-none">
                     <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
                     <span>&nbsp;- #{{ postNumber }}</span>
                 </div>
@@ -41,10 +41,23 @@
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
-                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full"
+                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
                     :class="['post-body', brand]"
-                    v-html="post.postBody"
                 >
+                    <!-- Hide/Show Replies -->
+                    <div v-if="hasShowHideButton" 
+                         class="tw-leading-none tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1] tw-inline-flex tw-items-center tw-ml-auto tw-m-0"
+                         @click="showHideQuotes"
+                    >
+                        {{ quotesHidden ? 'Show' : 'Hide' }} Quotes
+                        <i class="fa-solid tw-ml-2 tw-text-base"
+                           :class="quotesHidden ? 'fa-chevrons-down' : 'fa-chevrons-up' "
+                           aria-hidden="true"></i>
+                    </div>
+
+                    <div v-html="post.postBody" 
+                         :ref="'post-body'+post.id"
+                    ></div>
                 </div>
 
                 <div
@@ -77,7 +90,7 @@
                                 :class="`tw-bg-${ brand }`"
                                 type="submit"
                             >
-                                    Save Post
+                                Save Post
                             </button>
                         </div>
                     </form>
@@ -189,6 +202,11 @@ export default {
             default: false,
         },
 
+        allQuotesHidden: {
+            type: Boolean,
+            default: false,
+        },
+
         brand: {
             type: String,
             default: 'drumeo',
@@ -227,6 +245,8 @@ export default {
         return {
             editing: false,
             ytEmbedCount: 0,
+            quotesHidden: false,
+            hasShowHideButton: false,
         };
     },
     computed: {
@@ -267,13 +287,14 @@ export default {
         showUserExp() {
             return this.userExpValue != null && (['team', 'pack', 'admin'].indexOf(this.post.access_level) === -1);
         },
-      updatePostRoute() {
-        return this.updatePostBaseRoute.replaceAll('#####', this.post.id);
-      },
 
-      openModalString() {
-        return this.post.totalLikes > 0 ? 'likeUsersModal' : '';
-      },
+        updatePostRoute() {
+            return this.updatePostBaseRoute.replaceAll('#####', this.post.id);
+        },
+
+        openModalString() {
+            return this.post.totalLikes > 0 ? 'likeUsersModal' : '';
+        },
     },
     methods: {
         convertVideoLinksToEmbeds(postContent) {
@@ -418,7 +439,30 @@ export default {
                 });
             }
         },
+
+        //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
+        showHideQuotes() {
+            if(!this.quotesHidden) {
+                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.add('tw-hidden')
+                this.quotesHidden = true;
+            } else {
+                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.remove('tw-hidden')
+                this.quotesHidden = false;
+            }
+        }
     },
+    mounted() {
+        //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
+        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) {
+            //show button
+            this.hasShowHideButton = true;
+            //Hide Blockquotes if prop is passed
+            if(this.allQuotesHidden) {    
+                this.quotesHidden = true;    
+                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.add('tw-hidden')
+            }
+        } 
+    }
 };
 </script>
 <style>

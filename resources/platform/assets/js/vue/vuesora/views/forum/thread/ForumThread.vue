@@ -159,6 +159,7 @@
                 :is-locked="thread.isLocked"
                 :profileBaseRoute="baseProfileRoute"
                 :signatures-hidden="signaturesHidden"
+                :all-quotes-hidden="allQuotesHidden"
                 :theme-color="themeColor"
                 :update-post-base-route="updatePostBaseRoute"
                 @likePost="handlePostLike"
@@ -367,6 +368,7 @@ export default {
             isLocked: this.thread.isLocked,
             isPinned: this.thread.isPinned,
             signaturesHidden: false,
+            allQuotesHidden: false,
             postReplyBody: '',
             currentPost:[],
             formDisabled: false,
@@ -573,7 +575,7 @@ export default {
                     </p><br>
                     ${ payload.postBody }
                 </blockquote>
-                <br><p></p>`;;
+                <br>`;
 
             this.scrollToReply();
             this.postReplyInterface += blockQuoteHtmlString;
