@@ -300,7 +300,8 @@ class ContentProgressEventListener
                         ],
                         str_replace('-', '_', $content['type']).'_content_completed',
                         $pointAmount,
-                        'Awarded per complete '.str_replace('-', ' ', $content['type']).'.'
+                        'Awarded per complete '.str_replace('-', ' ', $content['type']).'.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
