@@ -34,7 +34,7 @@ class ForgotPasswordController extends Controller
                 session()->put('skip-third-party-auth-check', true);
 
                 return redirect()
-                    ->to(config('user_management_system.login_page_path'))  // todo: to be defined
+                    ->to(config('user_management_system.login_page_path'))
                     ->with(
                         'status',
                         'Password reset link has been sent to your email.'
