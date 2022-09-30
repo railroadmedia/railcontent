@@ -13,7 +13,7 @@
                 >
                 <h2 class="tw-text-2xl tw-font-normal uppercase text-white">
                     &nbsp;- Level
-                    {{ $secondContent->fetch('level_position') }}.{{ $parentContent->fetch('course_position')  }}
+                    {{ $secondContent->fetch('level_number') }}.{{ $parentContent->fetch('course_position')  }}
                 </h2>
             </div>
 
