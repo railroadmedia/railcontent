@@ -1367,7 +1367,7 @@ class ContentPagesController extends BaseController
         );
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
-
+        $adminMessage = null;
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
             "hasStartedLessons" => false,
