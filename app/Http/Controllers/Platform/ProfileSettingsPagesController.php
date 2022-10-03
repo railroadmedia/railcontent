@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App;
 use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
 use App\Services\User\UserAccessService;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Mail;
 use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\Payment;
@@ -19,6 +21,8 @@ use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Ecommerce\Services\SubscriptionService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Location\Services\CountryListService;
+use Railroad\Mailora\Mail\General;
+use Railroad\Mailora\Services\MailService;
 use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
@@ -51,6 +55,20 @@ class ProfileSettingsPagesController extends BaseController
      * @var UserProviderInterface
      */
     private $userProvider;
+    /**
+     * @var MailService
+     */
+    private $mailService;
+
+    const HOW_CAN_WE_HELP_OPTIONS = [
+        'direction' => 'I need more direction',
+        'time' => 'I don’t have enough time',
+        'watch' => 'I don’t know what lesson to watch',
+        'easy' => 'The lessons are too easy',
+        'difficult' => 'The lessons are too difficult',
+        'website' => 'I don’t know how to use the website/app.',
+        'other' => 'Other',
+    ];
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -63,6 +81,7 @@ class ProfileSettingsPagesController extends BaseController
         SubscriptionService $subscriptionService,
         SubscriptionRepository $subscriptionRepository,
         UserProviderInterface $userProvider,
+        MailService $mailService
     )
     {
         $this->notificationSettingsService = $notificationSettingsService;
@@ -72,6 +91,7 @@ class ProfileSettingsPagesController extends BaseController
         $this->subscriptionService = $subscriptionService;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProvider = $userProvider;
+        $this->mailService = $mailService;
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
@@ -593,6 +613,36 @@ class ProfileSettingsPagesController extends BaseController
 
     public function sendHelpEmail(Request $request)
     {
+        //Mail::to($recipient)
+
+        $input = [];
+
+        try {
+            $helpIssue = $request->get('help-issue');
+            $helpIssueText = self::HOW_CAN_WE_HELP_OPTIONS[$helpIssue] ?? null;
+            $textInput = $request->get('text-input');
+
+            $mailable = new General($input, 'emails.agnostic');
+
+
+            $debug_userFromAuth = auth();
+            $debug_userFromUserProvider = $this->userProvider->getCurrentUser();
+
+            if (App::environment() !== 'production' ) {
+                $recipientEmailAddress = 'jonathan+email_safety_in_mwp_profilesettingspagecontroller@musora.com';
+            }
+
+            $mailable->to($recipientEmailAddress ?? 'support@musora.com');
+            $mailable->from('system@musora.com', 'Musora System');
+            $mailable->replyTo(user()->email);
+
+            $mailable->subject('Request for help making most of membership from ' . user()->email);
+
+            Mail::send($mailable);
+            $success = true;
+        } catch (\Exception $exception) {
+            error_log($exception);
+        }
 
     }
 }
