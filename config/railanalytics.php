@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'development' => [
+    'local' => [
         'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im'],
         'providers' => [
             'drumeo' => [
