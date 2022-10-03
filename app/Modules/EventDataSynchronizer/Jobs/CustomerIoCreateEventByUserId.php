@@ -85,7 +85,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
                 $existingAllBrandCustomer = $customerIoService->getCustomerByUserId($this->accountName, $user->id, false);
             } catch (Throwable $exception) {
                 if (empty($existingSpecificBrandCustomer) || empty($existingAllBrandCustomer)) {
-                    dispatch_now(new CustomerIoSyncNewUserByEmail($user));
+                    dispatch_sync(new CustomerIoSyncNewUserByEmail($user));
 
                     sleep(5);
 
