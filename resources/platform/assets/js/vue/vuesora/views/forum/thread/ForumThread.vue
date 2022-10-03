@@ -368,7 +368,7 @@ export default {
             isLocked: this.thread.isLocked,
             isPinned: this.thread.isPinned,
             signaturesHidden: false,
-            allQuotesHidden: false,
+            allQuotesHidden: true,
             postReplyBody: '',
             currentPost:[],
             formDisabled: false,
