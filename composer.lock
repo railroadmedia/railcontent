@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d381257b16595dcb1fc93cf00ae4e06e",
+    "content-hash": "d0623639f9f03e94dc9807697fb949d2",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8102,6 +8102,48 @@
                 "source": "https://github.com/railroadmedia/points/tree/v1.0.0"
             },
             "time": "2022-09-01T14:23:35+00:00"
+        },
+        {
+            "name": "railroad/railanalytics",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/railanalytics.git",
+                "reference": "93859bc1abc9517f4740db9a0f27421b8e81c4cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/93859bc1abc9517f4740db9a0f27421b8e81c4cb",
+                "reference": "93859bc1abc9517f4740db9a0f27421b8e81c4cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "laravel/framework": "^9.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Railroad\\Railanalytics\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Favor",
+                    "email": "calebfavor@gmail.com"
+                }
+            ],
+            "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
+            "support": {
+                "issues": "https://github.com/railroadmedia/railanalytics/issues",
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.0"
+            },
+            "time": "2022-05-17T19:31:29+00:00"
         },
         {
             "name": "railroad/railchat",
