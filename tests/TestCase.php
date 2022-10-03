@@ -21,8 +21,6 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUp(): void
     {
-        putenv('RAILCONTENT_DATA_MODE=client');
-
         $this->faker = Factory::create();
 
         Carbon::setTestNow(Carbon::now());
