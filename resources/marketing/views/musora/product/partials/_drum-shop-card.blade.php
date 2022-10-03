@@ -33,7 +33,7 @@
                     <i class="fas fa-arrow-right hover-icon"></i>
                 </div>
                 <div class="p-2 px-2 pb-4 md:py-4 border-t border-[#ddd]">
-                    <h6>{!! $title !!}</h6>
+                    <h6 class="lg:text-base">{!! $title !!}</h6>
                     @if(!empty($packAuthor))
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
@@ -109,7 +109,7 @@
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join">
+                                <button class="btn-primary bg-[#10d05f] hover:bg-opacity-80">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
@@ -123,7 +123,7 @@
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join">
+                                <button class="btn-primary bg-[#10d05f] hover:bg-opacity-80">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
@@ -141,7 +141,7 @@
                     @endif
                     @if(!empty($itemURL))
                         <a href="{{ $itemURL }}"
-                           class="lg:text-lg font-bebas-neue tracking-widest block w-full py-2 rounded-full text-white bg-{{ $theme }} hover:bg-opacity-80"
+                           class="btn-primary hover:bg-opacity-80 bg-{{$theme}}"
                            @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>

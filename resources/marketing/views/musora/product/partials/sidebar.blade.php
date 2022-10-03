@@ -54,7 +54,7 @@
                         data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
                         data-product-json='{"{{ $sku }}": 1}'
                     >
-                        <button class="text-xl join border-none font-bebas"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
+                        <button class="btn-primary bg-[#10d05f] border-none font-bebas my-4"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                     </a>
                 @endif
 

@@ -22,11 +22,11 @@
     <div class="container mx-auto px-4 py-10" x-data="{ filter: '{{ !empty($category) && $category !== 'shop' ? $category : 'all' }}' }">
 
         @if($theme === 'drumeo' || $theme === 'pianote')
-            <div class="px-2 md:px-3 lg:pl-8 md:text-2xl lg:text-4xl mb-10">
+            <div class="px-2 md:px-3 md:text-2xl lg:text-3xl mb-10">
                 <span
                     class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
                     x-on:click="filter = 'all'"
-                    x-bind:class="filter === 'all' ? 'border-b-2' : 'text-gray-400'"
+                    x-bind:class="filter === 'all' ? 'border-b-2 font-bold' : 'text-gray-400'"
                 >
                     All
                 </span>
@@ -34,7 +34,7 @@
                     <span
                         class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
                         x-on:click="filter = 'lessons'"
-                        x-bind:class="filter === 'lessons' ? 'border-b-2' : 'text-gray-400'"
+                        x-bind:class="filter === 'lessons' ? 'border-b-2 font-bold' : 'text-gray-400'"
                     >
                         Lessons
                     </span>
@@ -43,7 +43,7 @@
                     <span
                         class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
                         x-on:click="filter = 'accessories'"
-                        x-bind:class="filter === 'accessories' ? 'border-b-2' : 'text-gray-400'"
+                        x-bind:class="filter === 'accessories' ? 'border-b-2 font-bold' : 'text-gray-400'"
                     >
                         Accessories
                     </span>
@@ -52,7 +52,7 @@
                     <span
                         class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
                         x-on:click="filter = 'clothing'"
-                        x-bind:class="filter === 'clothing' ? 'border-b-2' : 'text-gray-400'"
+                        x-bind:class="filter === 'clothing' ? 'border-b-2 font-bold' : 'text-gray-400'"
                     >
                         Clothing
                     </span>
@@ -63,10 +63,10 @@
                 <section class="grid-view" x-show="filter === 'lessons' || filter === 'all'">
                     <ul class="fixed-cards">
                         <li>
-                            <h1 class="px-2 md:px-3" >
-                                <div class="heading-icon text-{{ $theme }}"><i class="fas fa-video"></i></div>
-                                Online Lessons
-                            </h1>
+                            <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
+                                <div class="inline-block heading-icon text-{{ $theme }} text-3xl mr-4"><i class="fas fa-video"></i></div>
+                                Online @if($theme === 'drumeo') Drum @else Piano @endif Lessons
+                            </h5>
                         </li>
 
                         @foreach($lessons as $lesson){
@@ -97,10 +97,10 @@
                 <section class="grid-view" x-show="filter === 'accessories' || filter === 'all'">
                     <ul class="fixed-cards">
                         <li>
-                            <h1 class="px-2 md:px-3">
-                                <div class="heading-icon text-{{ $theme }}"><i class="fas fa-suitcase"></i></div>
+                            <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
+                                <div class="inline-block heading-icon text-{{ $theme }} text-3xl mr-4"><i class="fas fa-suitcase"></i></div>
                                 Accessories
-                            </h1>
+                            </h5>
                         </li>
                         @foreach($accessories as $accessory){
                             @include('musora.product.partials._drum-shop-card', [
@@ -126,16 +126,17 @@
                 <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                     <ul class="fixed-cards">
                         <li>
-                            <h1 class="px-2 md:px-3">
+                            <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
                                 <div class="heading-icon text-{{ $theme }}">
                                     <img
+                                        class="h-10 mr-4"
                                         src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg"
                                         alt="hat icon"
-                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
+                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
                                     />
                                 </div>
                                 Hats
-                            </h1>
+                            </h5>
                         </li>
                         @foreach($hats as $hat){
                             @include('musora.product.partials._drum-shop-card', [
@@ -161,10 +162,10 @@
                 <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                     <ul class="fixed-cards">
                         <li>
-                            <h1 class="px-2 md:px-3">
-                                <div class="heading-icon text-{{ $theme }}"><i class="fas fa-tshirt"></i></div>
+                            <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
+                                <div class="inline-block heading-icon text-{{ $theme }} text-3xl mr-4"><i class="fas fa-tshirt"></i></div>
                                 Shirts
-                            </h1>
+                            </h5>
                         </li>
                         @foreach($shirts as $shirt){
                             @include('musora.product.partials._drum-shop-card', [
@@ -191,16 +192,17 @@
                 <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                     <ul class="fixed-cards container mx-auto">
                         <li>
-                            <h1 class="px-2 md:px-3">
+                            <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
                                 <div class="heading-icon">
                                     <img
+                                        class="h-8 mr-4"
                                         src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg"
                                         alt="hoodie icon"
-                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'guitareo') filter: invert(79%) sepia(50%) saturate(6682%) hue-rotate(131deg) brightness(97%) contrast(102%); @elseif($theme === 'singeo') filter: invert(25%) sepia(81%) saturate(7486%) hue-rotate(273deg) brightness(83%) contrast(131%);@endif"
+                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
                                     />
                                 </div>
                                 Hoodies
-                            </h1>
+                            </h5>
                         </li>
                         @foreach($hoodies as $hoodie){
                         @include('musora.product.partials._drum-shop-card', [
