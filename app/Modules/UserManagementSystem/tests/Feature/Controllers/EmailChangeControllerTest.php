@@ -72,17 +72,15 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         );
 
 
-        //todo: after we set up the mail
-        // assert the email was sent and contains the confirmation token
-//        Notification::assertSentTo(
-//            (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $newEmail),
-//            config('usora.email_change_notification_class'),
-//            function ($notification) use ($token) {
-//                return $notification->token === $token;
-//            }
-//        );
+        Notification::assertSentTo(
+            (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $newEmail),
+            config('usora.email_change_notification_class'),
+            function ($notification) use ($token) {
+                return $notification->token === $token;
+            }
+        );
     }
-//
+
 //    public function test_request_validation_fail()
 //    {
 //        $user = User::factory()->create([
