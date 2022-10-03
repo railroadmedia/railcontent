@@ -3,14 +3,17 @@
 return [
     'global_is_active' => true,
 
+    // brand database connection names (each brand is on its own database for now)
+    'brand_database_connection_names' => [
+        'musora' => 'musora_laravel_mysql_writer_only',
+        'drumeo' => 'drumeo_laravel_mysql_writer_only',
+        'pianote' => 'pianote_laravel_mysql_writer_only',
+        'guitareo' => 'guitareo_laravel_mysql_writer_only',
+        'singeo' => 'singeo_laravel_mysql_writer_only',
+    ],
+
     // database
-    'database_connection_name' => env('USER_MANAGEMENT_SYSTEM_DATABASE_CONNECTION_NAME','musora_laravel_mysql_writer_only'),
-    'database_name' => env('DB_MUSORA_LARAVEL_MYSQL_DATABASE_NAME'),
-    'database_user' => env('DB_MUSORA_LARAVEL_MYSQL_USER_NAME'),
-    'database_password' => env('DB_MUSORA_LARAVEL_MYSQL_PASSWORD'),
-    'database_host' => env('DB_MUSORA_LARAVEL_MYSQL_WRITE_HOST'),
-    'database_driver' => env('DB_MYSQL_DRIVER', 'pdo_mysql'),
-    'database_in_memory' => env('DB_MYSQL_IN_MEMORY', false),
+    'database_connection_name' => 'musora_laravel_mysql_writer_only',
     'enable_query_log' => false,
     'enable_query_log_dumper' => false,
     'data_mode' => 'host', // 'host' or 'client' (host does the db migrations, clients do not)

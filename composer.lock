@@ -2837,16 +2837,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.268.0",
+            "version": "v0.269.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "af3e1549ae62ed93ba94a57c5c3d65750b0b0ccf"
+                "reference": "01431ddcc1d0fd418b3a0dc4b4d99d7c3b94082f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/af3e1549ae62ed93ba94a57c5c3d65750b0b0ccf",
-                "reference": "af3e1549ae62ed93ba94a57c5c3d65750b0b0ccf",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/01431ddcc1d0fd418b3a0dc4b4d99d7c3b94082f",
+                "reference": "01431ddcc1d0fd418b3a0dc4b4d99d7c3b94082f",
                 "shasum": ""
             },
             "require": {
@@ -2875,9 +2875,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.268.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.269.0"
             },
-            "time": "2022-09-24T01:34:14+00:00"
+            "time": "2022-10-02T00:58:14+00:00"
         },
         {
             "name": "google/auth",
@@ -8146,16 +8146,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.19",
+            "version": "v2.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c19ed994e285363d76baa70c635fb7fb4c8c71be"
+                "reference": "d0dd88ff0eaca1b8a2e3fdfdb3737a3a53aca8bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c19ed994e285363d76baa70c635fb7fb4c8c71be",
-                "reference": "c19ed994e285363d76baa70c635fb7fb4c8c71be",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d0dd88ff0eaca1b8a2e3fdfdb3737a3a53aca8bc",
+                "reference": "d0dd88ff0eaca1b8a2e3fdfdb3737a3a53aca8bc",
                 "shasum": ""
             },
             "require": {
@@ -8209,9 +8209,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.19"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.20"
             },
-            "time": "2022-09-29T12:57:07+00:00"
+            "time": "2022-10-03T08:48:32+00:00"
         },
         {
             "name": "railroad/railforums",

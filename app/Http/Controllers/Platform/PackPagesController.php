@@ -333,6 +333,8 @@ class PackPagesController extends Controller
 
         $userAccessLevel = user()->access_level;
 
+        $lesson['resources'] = $lesson['resources'] ?? $pack['resources'] ?? [];
+
         return view(
             'content.lesson',
             [
