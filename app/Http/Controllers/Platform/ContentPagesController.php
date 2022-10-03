@@ -848,6 +848,7 @@ class ContentPagesController extends BaseController
 
         ContentRepository::$pullFutureContent = false;
 
+        $adminMessage = null;
         if (user()->isAdmin()) {
             ContentRepository::$pullFutureContent = true;
             $unpublished =
