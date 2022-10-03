@@ -130,7 +130,7 @@ class Accessory extends Resource
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
             Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
-            Number::make('Display order', 'display_order'),
+            Number::make('Display order', 'display_order')->required(),
             Markdown::make('Overview')->hideFromIndex(),
             Image::make('Product Image', 'product_img')
                 ->disk('nova_s3')

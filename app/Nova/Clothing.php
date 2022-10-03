@@ -138,7 +138,7 @@ class Clothing extends Resource
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
             Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
-            Number::make('Display order', 'display_order'),
+            Number::make('Display order', 'display_order')->required(),
             Flexible::make('Images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),

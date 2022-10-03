@@ -233,7 +233,7 @@ class Lesson extends Resource
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
-            Number::make('Display order', 'display_order'),
+            Number::make('Display order', 'display_order')->required(),
             Flexible::make('Features/Topics')
                 ->addLayout(FeatureLayout::class)
                 ->preset(FeaturePreset::class),
