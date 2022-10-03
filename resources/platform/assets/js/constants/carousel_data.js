@@ -24,7 +24,7 @@ export const testCarousel = [
                 topSubtitle: "",
                 title: "Rudiment Refresh",
                 ctaText: "Go To Rudiments",
-                description: "We have re-done all of our rudiment videos. Keep an eye out for new lesson videos with John Wooton and Brandon Toews, and rudiment-focused livestreams every Thursday!",
+                description: "We have re-done all of our rudiment videos! Keep an eye out for new lesson videos with John and Brandon, and rudiment-focused livestreams every Thursday!",
                 ctaUrl: "/drumeo/rudiments",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/2022-08-28-John-Wooton-Brandon-Group-banner.jpg",
             },
