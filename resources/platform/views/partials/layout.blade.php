@@ -51,6 +51,9 @@
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
+                    @if(isset($adminMessage))
+                        admin-message="{{ $adminMessage }}"
+                    @endif
                     {{-- @if(isset($forceHideSidebar))
                         :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
                     @endif --}}
