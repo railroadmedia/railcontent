@@ -250,18 +250,5 @@
         </div>
     </section>
 
-    <section x-data="timer()" x-init="countdown()">
-        <div>
-            <div x-show="timeLeft > 0"><span x-text="day"></span><span x-text="dayText"></span></div>
-            <div x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></div>
-            <div x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></div>
-            <div x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></div>
-            <div x-show="timeLeft < 0">Limited Time Left</div>
-        </div>
-    </section>
-
     @include('musora._partials._lets-chat')
-    @include('_partials.components.countdown', [
-        'date' => '2021/10/13'
-    ])
 @stop
