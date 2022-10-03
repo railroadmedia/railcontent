@@ -73,8 +73,8 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
 
 
         Notification::assertSentTo(
-            (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $newEmail),
-            config('usora.email_change_notification_class'),
+            (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $newEmail),
+            config('user_management_system.email_change_notification_class'),
             function ($notification) use ($token) {
                 return $notification->token === $token;
             }
