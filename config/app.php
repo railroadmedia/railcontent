@@ -177,6 +177,7 @@ return [
         Railroad\Referral\Providers\ReferralServiceProvider::class,
         Railroad\Points\Providers\PointsServiceProvider::class,
         Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
+        \Railroad\Railanalytics\AnalyticsServiceProvider::class,
 
         /*
          * Module Service Providers

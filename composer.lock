@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d381257b16595dcb1fc93cf00ae4e06e",
+    "content-hash": "d0623639f9f03e94dc9807697fb949d2",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.237.1",
+            "version": "3.237.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4667dd4b863a8686417e0d2a50da8682d8b68bb5"
+                "reference": "6027eb8b9316d208537fba1c12e53e379a4574b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4667dd4b863a8686417e0d2a50da8682d8b68bb5",
-                "reference": "4667dd4b863a8686417e0d2a50da8682d8b68bb5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6027eb8b9316d208537fba1c12e53e379a4574b6",
+                "reference": "6027eb8b9316d208537fba1c12e53e379a4574b6",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.237.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.237.2"
             },
-            "time": "2022-09-30T18:15:04+00:00"
+            "time": "2022-10-03T18:15:06+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8102,6 +8102,48 @@
                 "source": "https://github.com/railroadmedia/points/tree/v1.0.0"
             },
             "time": "2022-09-01T14:23:35+00:00"
+        },
+        {
+            "name": "railroad/railanalytics",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/railanalytics.git",
+                "reference": "93859bc1abc9517f4740db9a0f27421b8e81c4cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/93859bc1abc9517f4740db9a0f27421b8e81c4cb",
+                "reference": "93859bc1abc9517f4740db9a0f27421b8e81c4cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "laravel/framework": "^9.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Railroad\\Railanalytics\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Favor",
+                    "email": "calebfavor@gmail.com"
+                }
+            ],
+            "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
+            "support": {
+                "issues": "https://github.com/railroadmedia/railanalytics/issues",
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.0"
+            },
+            "time": "2022-05-17T19:31:29+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -16004,5 +16046,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
