@@ -12,14 +12,14 @@ export const testCarousel = [
                 ctaUrl: "/drumeo/forums/drumeo-website-feedback/6/musora-early-access/13736",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
             },
-            {
-                topSubtitle: "Coach of the Month",
-                title: "Steve Smith",
-                ctaText: "Visit Steve's Coach Page",
-                description: "Steve Smith is perhaps best known to most people as the former drummer for Journey. However, Steve is a jazz drummer at heart. He’s the bandleader of Vital Information, and has been a sideman for artists such as Jean-Luc Ponty, Steps Ahead, Dweezil Zappa, Bryan Adams, and Savage Garden, among many others.",
-                ctaUrl: "/drumeo/coaches/steve-smith/253573",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-steve-smith.jpg",
-            },
+            // {
+            //     topSubtitle: "Coach of the Month",
+            //     title: "Steve Smith",
+            //     ctaText: "Visit Steve's Coach Page",
+            //     description: "Steve Smith is perhaps best known to most people as the former drummer for Journey. However, Steve is a jazz drummer at heart. He’s the bandleader of Vital Information, and has been a sideman for artists such as Jean-Luc Ponty, Steps Ahead, Dweezil Zappa, Bryan Adams, and Savage Garden, among many others.",
+            //     ctaUrl: "/drumeo/coaches/steve-smith/253573",
+            //     img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-steve-smith.jpg",
+            // },
             {
                 topSubtitle: "",
                 title: "Rudiment Refresh",
