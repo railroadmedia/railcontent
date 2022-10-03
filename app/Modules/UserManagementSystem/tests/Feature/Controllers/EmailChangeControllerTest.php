@@ -70,8 +70,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
                 'token' => $token,
             ]
         );
-
-
+        
         Notification::assertSentTo(
             (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $newEmail),
             config('user_management_system.email_change_notification_class'),
