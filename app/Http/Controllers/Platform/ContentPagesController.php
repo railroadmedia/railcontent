@@ -96,7 +96,7 @@ class ContentPagesController extends BaseController
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
         ContentRepository::$pullFutureContent = true;
 
-        if (user()->permission_level === 'administrator') {
+        if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
@@ -656,11 +656,9 @@ class ContentPagesController extends BaseController
                 Carbon::createFromTimeString($contentToRenderAsLesson['published_on'])
                     ->isFuture();
             if ($unpublished) {
-                echo '<h2 style="background:yellow;text-align:center;padding:20px;">' .
-                    'ADMIN PREVIEW (publish_on: "' .
+                $adminMessage = 'ADMIN PREVIEW (Published On: "' .
                     $contentToRenderAsLesson['published_on'] .
-                    '")' .
-                    '</h2>';
+                    '")';
             }
         }
 
@@ -823,6 +821,7 @@ class ContentPagesController extends BaseController
             "showEmail" => false,
             "firstContent" => $firstContent,
             "rangesVideoIds" => $rangesVideoIds,
+            "adminMessage" => $adminMessage,
         ]);
     }
 
@@ -854,11 +853,9 @@ class ContentPagesController extends BaseController
                 Carbon::createFromTimeString($lessonContent['published_on'])
                     ->isFuture();
             if ($unpublished) {
-                echo '<h2 style="background:yellow;text-align:center;padding:20px;">' .
-                    'ADMIN PREVIEW (publish_on: "' .
-                    $lessonContent['published_on'] .
-                    '")' .
-                    '</h2>';
+                $adminMessage = 'ADMIN PREVIEW (Published On: "' .
+                    $contentToRenderAsLesson['published_on'] .
+                    '")';
             }
         }
 
@@ -1376,6 +1373,7 @@ class ContentPagesController extends BaseController
             "lessonType" => implode(',', $listLessons['filter_options']['type']),
             "totalResults" => $listLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
+            "adminMessage" => $adminMessage,
         ]);
     }
 
