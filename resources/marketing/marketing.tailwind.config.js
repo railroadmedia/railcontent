@@ -67,8 +67,8 @@ module.exports = {
           background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           margin: '-2px',
         },
-        'h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong': {
-          fontWeight: 900
+        'h1, h2, h3, h4, h5, h6': {
+          fontWeight: 700
         },
         'h1':{
           fontSize: '24px',
