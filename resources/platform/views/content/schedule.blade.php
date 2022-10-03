@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Schedule | Musora</title>
+    <title>{{ ucfirst($brand) }} Schedule | Musora</title>
 @endsection
 
 @section('content')
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <div id="printSchedule" class="flex-center">
+        <div id="printSchedule" class="flex-center tw-mb-6">
             <button class="btn collapse-200" onclick="window.print();">
                 <span class="tw-bg-{{ $brand }} short tw-text-white">
                     <i class="fas fa-print tw-mr-1"></i>

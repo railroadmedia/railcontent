@@ -44,7 +44,7 @@
 
         <!-- Search -->
         <div class="tw-flex tw-px-2 ">
-            <div class="tw-flex tw-flex-col sm:tw-mb-6 tw-w-full">
+            <div class="tw-flex tw-flex-col tw-mb-6 tw-w-full">
                 <div class="tw-flex tw-flex-wrap">
 
                     <template v-if="!onlyFollowed && !searching">
@@ -82,6 +82,7 @@
                             <input
                                 id="threadSearch"
                                 class="dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-pb-0"
+                                :class="{ 'has-input': searchTerm.length }"
                                 ref="searchInput"
                                 v-model.lazy="searchInterface"
                                 type="text"
@@ -117,9 +118,9 @@
 
                 <p
                     v-if="searching"
-                    class="tiny font-italic text-grey-4 tw-mt-2 tw-ml-6"
+                    class="tiny font-italic text-grey-4 dark:tw-text-[#9EC0DC] tw-mt-2 tw-ml-6"
                 >
-                    Showing results for <span class="font-bold text-black">"{{ searchInterface }}"</span> in All Forums.
+                    Showing results for <span class="tw-font-bold tw-text-black dark:tw-text-white">"{{ searchInterface }}"</span> in All Forums.
                 </p>
             </div>
         </div>

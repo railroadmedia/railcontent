@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated, defineExpose } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -107,7 +107,7 @@ const props = defineProps({
 
     useIntersectionObserver: {
         type: Boolean,
-        default: () => false,
+        default: () => true,
     },
 
     ranges: {
@@ -186,6 +186,44 @@ const timeouts = ref({
 });
 const isTransitioning = ref(false);
 const currentRange = ref('original');
+
+defineExpose({
+    ...props,
+    source,
+    loading,
+    playerError,
+    playerErrorCode,
+    isFullscreen,
+    showContextMenu,
+    textTracks,
+    currentTextTrackLanguage,
+    playerReady,
+    userActive,
+    userActiveTimeout,
+    isPlaying,
+    lastPlayPauseToggleTime,
+    currentTime,
+    totalDuration,
+    mousedown,
+    currentMouseX,
+    currentVolume,
+    settingsDrawer,
+    captionsDrawer,
+    chromeCast,
+    isChromeCastSupported,
+    isChromeCastConnected,
+    isAirplaySupported,
+    isAirplayConnected,
+    performanceNow,
+    currentMousePosition,
+    contextMenuPosition,
+    isPipEnabled,
+    isExperimentalPictureInPictureEnabled,
+    isKeyboardControlsEnabled,
+    hasBeenPlayed,
+    currentPlaybackRate,
+    hasRetriedSource,
+});
 
 //methods
 
@@ -401,7 +439,7 @@ function fullscreen() {
         Screenfull.toggle(container.value);
     } else {
         // Otherwise we just take the video element and make it fullscreen
-        mediaElement.value.webkitEnterFullScreen();
+        mediaElement.value.requestFullscreen();
     }
 }
 
@@ -688,7 +726,7 @@ function enableIntersectionObserver(videoWrap) {
     intersection.value = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             const isVisible = entry.intersectionRatio >= 0.5;
-            isPipEnabled.value = !isVisible && !isMobileViewport && isPlaying.value;
+            isPipEnabled.value = !isVisible && !isMobileViewport.value && isPlaying.value;
         });
     }, {
         root: null,
@@ -811,6 +849,10 @@ onMounted(() => {
             isAirplayConnected.value = !isAirplayConnected.value;
         });
     }
+
+    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
+        enableIntersectionObserver(videoWrap.value);
+    }
 })
 
 onUpdated(() => {
@@ -818,10 +860,6 @@ onUpdated(() => {
     if (overlay && !overlay.getAttribute('overlay-click-pause-video')) {
         overlay.addEventListener("click", handleOverlayClick);
         overlay.setAttribute('overlay-click-pause-video', true)
-    }
-
-    if (props.useIntersectionObserver && intersection.value === null && typeof IntersectionObserver !== 'undefined' && videoWrap.value) {
-        enableIntersectionObserver(videoWrap.value);
     }
 });
 
@@ -1096,7 +1134,7 @@ const {
                         </div>
                     </transition>
 
-                    <video ref="player" playsinline preload="metadata" :poster="poster">
+                    <video id="video-component-id" ref="player" playsinline preload="metadata" :poster="poster">
 
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
                     </video>

@@ -80,11 +80,11 @@ class ProfilePublicPagesController extends BaseController
         $completedProgressContents =
             (new ContentFilterResultsEntity(['results' => $completedProgressContents]))->toResponseRawJson();
 
-        $userXP = $user->total_xp;
+        $userXP = $user->getTotalXp();
 
         $currentUser = [
             "avatar" => $user->profile_picture_url,
-            "xp" => $user->total_xp,
+            "xp" => $userXP,
             "access_level" => $user->access_level,
             "xp_rank" => $user->getXpRank(),
         ];
@@ -116,7 +116,7 @@ class ProfilePublicPagesController extends BaseController
         return [
             "xp" => [
                 "icon" => "icon-experience-points",
-                "value" => $user->total_xp,
+                "value" => $user->getTotalXp(),
                 "label" => $user->getXpRank(),
             ],
             "forums_likes" => [

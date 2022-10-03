@@ -5,7 +5,7 @@ import { saveCoachHistoryData } from "../Onboarding/services"
 
 const props = defineProps({
   id: {
-    type: String,
+    type: [String, Number],
   },
   cardImg: {
     type: String,
@@ -121,7 +121,7 @@ function onFollow(e) {
         tw-border-transparent
         tw-rounded-lg
         lg:tw-rounded-xl
-        hover:tw-border-yellow-400
+        hover-hover:hover:tw-border-yellow-400
         tw-box-border tw-w-[232px]
         ${isCoachFollowed ? 'tw-border-yellow-400' : ''}
         `
@@ -168,15 +168,26 @@ function onFollow(e) {
   background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
 }
 
-.single-coach:hover .single-coach__gradient, .single-coach--followed .single-coach__gradient {
-  background: linear-gradient(
-      182.08deg,
-      rgba(1, 5, 15, 0) 1.7%,
-      rgba(250, 163, 0, 0.58) 98.25%
-    ),
-    linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
+@media (hover: hover) {
+  .single-coach:hover .single-coach__gradient {
+    background: linear-gradient(
+        182.08deg,
+        rgba(1, 5, 15, 0) 1.7%,
+        rgba(250, 163, 0, 0.58) 98.25%
+      ),
+      linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
+  }
 }
 
+.single-coach--followed .single-coach__gradient {
+    background: linear-gradient(
+        182.08deg,
+        rgba(1, 5, 15, 0) 1.7%,
+        rgba(250, 163, 0, 0.58) 98.25%
+      ),
+      linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
+  }
+  
 .one-word-per-line {
   word-spacing: 232px;
 }

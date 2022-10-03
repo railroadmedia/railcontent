@@ -18,17 +18,17 @@
                     </a>
                 </div>
             </div>
-            <div class="tw-flex tw-flex-wrap tw-w-9/12 sm:tw-w-full">
+            <div class="tw-flex tw-flex-col tw-w-9/12 sm:tw-w-full">
                 <!-- Name -->
                 <h2 class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
                     {{ post.authorUsername }}
                 </h2>
-                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
+                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2">
                     <span>{{ post.authorTotalPosts }} Posts</span> -
                     <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
                 </div>
-                <div class="tw-inline-flex tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
+                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-justify-end tw-leading-none">
                     <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
                     <span>&nbsp;- #{{ postNumber }}</span>
                 </div>
@@ -41,10 +41,23 @@
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
-                    class="tw-text-[#00101D] dark:tw-text-white"
-                    :class="['tw-flex', 'tw-flex-col', 'post-body', 'grow', brand]"
-                    v-html="post.postBody"
+                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
+                    :class="['post-body', brand]"
                 >
+                    <!-- Hide/Show Replies -->
+                    <div v-if="hasShowHideButton" 
+                         class="tw-leading-none tw-cursor-pointer tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1] hover:tw-text-[#00101D] dark:hover:tw-text-white tw-transition-colors tw-inline-flex tw-items-center tw-ml-auto tw-m-0"
+                         @click="showHideQuotes"
+                    >
+                        {{ quotesHidden ? 'Show' : 'Hide' }} Quotes
+                        <i class="fa-solid tw-ml-2 tw-text-base"
+                           :class="quotesHidden ? 'fa-chevrons-down' : 'fa-chevrons-up' "
+                           aria-hidden="true"></i>
+                    </div>
+
+                    <div v-html="post.postBody" 
+                         :ref="'post-body'+post.id"
+                    ></div>
                 </div>
 
                 <div
@@ -64,20 +77,20 @@
                             :initial-value="post.postBody"
                         />
 
-                        <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4">
+                        <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">
                             <a
-                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2"
+                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2 tw-w-full sm:tw-w-auto"
                                 @click="editing = false"
                             >
                                 Cancel
                             </a>
 
                             <button
-                                class="tw-btn-primary"
+                                class="tw-btn-primary tw-w-full sm:tw-w-auto"
                                 :class="`tw-bg-${ brand }`"
                                 type="submit"
                             >
-                                    Save Post
+                                Save Post
                             </button>
                         </div>
                     </form>
@@ -87,67 +100,67 @@
             <!-- Actions -->
             <div class="tw-flex tw-flex-row tw-flex-wrap">
                 <div class="tw-flex tw-flex-col mb-1">
-                <div class="tw-flex tw-flex-row tw-items-center">
-                    <p
-                        class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                        :class="post.isLiked ? themeTextClass : 'text-grey-3'"
-                        @click="likePost"
-                    >
-                    <i
-                        class="fas fa-thumbs-up"
-                        :class="post.isLiked ? 'fas' : 'fal'"
-                    ></i>
-                    </p>
-                    <p
-                        class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                        :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                        :data-open-modal="openModalString"
-                        @click="openLikes"
-                    >
-                    {{ post.totalLikes }}
-                    </p>
+                    <div class="tw-flex tw-flex-row tw-items-center">
+                        <p
+                            class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            :class="post.isLiked ? themeTextClass : 'text-grey-3'"
+                            @click="likePost"
+                        >
+                        <i
+                            class="fas fa-thumbs-up"
+                            :class="post.isLiked ? 'fas' : 'fal'"
+                        ></i>
+                        </p>
+                        <p
+                            class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
+                            :data-open-modal="openModalString"
+                            @click="openLikes"
+                        >
+                        {{ post.totalLikes }}
+                        </p>
 
-                    <p
-                        v-if="!post.isLocked"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                        @click="replyToPost"
-                    >
-                    Reply
-                    </p>
-                    <button
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
-                        data-open-modal="sharePostModal"
-                        title="Share this post"
-                        @click="$emit('updateCurrentPostID', post.id)"
-                    >
-                        <i class="fas fa-share"></i>
-                        Share
-                    </button>
+                        <p
+                            v-if="!post.isLocked"
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            @click="replyToPost"
+                        >
+                        Reply
+                        </p>
+                        <button
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
+                            data-open-modal="sharePostModal"
+                            title="Share this post"
+                            @click="$emit('updateCurrentPostID', post.id)"
+                        >
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
                 </div>
-                </div>
-                <div class="tw-flex tw-flex-col mb-1 tw-ml-auto">
-                <div class="tw-flex tw-flex-row tw-items-center">
-                    <p
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                        @click="reportPost"
-                    >
-                        Report
-                    </p>
-                    <p
-                        v-if="index !== 0 && canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                        @click="deletePost"
-                    >
-                        Delete
-                    </p>
-                    <p
-                        v-if="canEdit"
-                        class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                        @click="editing = !editing"
-                    >
-                        Edit
-                    </p>
-                </div>
+                <div class="tw-flex tw-flex-col mb-1 sm:tw-ml-auto">
+                    <div class="tw-flex tw-flex-row tw-items-center">
+                        <p
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white sm:ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="reportPost"
+                        >
+                            Report
+                        </p>
+                        <p
+                            v-if="index !== 0 && canEdit"
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="deletePost"
+                        >
+                            Delete
+                        </p>
+                        <p
+                            v-if="canEdit"
+                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="editing = !editing"
+                        >
+                            Edit
+                        </p>
+                    </div>
                 </div>
             </div>
             
@@ -155,7 +168,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-flex tw-flex-col post-body tw-grow bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
+                    class="tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>
@@ -185,6 +198,11 @@ export default {
         },
 
         signaturesHidden: {
+            type: Boolean,
+            default: false,
+        },
+
+        allQuotesHidden: {
             type: Boolean,
             default: false,
         },
@@ -227,6 +245,8 @@ export default {
         return {
             editing: false,
             ytEmbedCount: 0,
+            quotesHidden: false,
+            hasShowHideButton: false,
         };
     },
     computed: {
@@ -267,13 +287,14 @@ export default {
         showUserExp() {
             return this.userExpValue != null && (['team', 'pack', 'admin'].indexOf(this.post.access_level) === -1);
         },
-      updatePostRoute() {
-        return this.updatePostBaseRoute.replaceAll('#####', this.post.id);
-      },
 
-      openModalString() {
-        return this.post.totalLikes > 0 ? 'likeUsersModal' : '';
-      },
+        updatePostRoute() {
+            return this.updatePostBaseRoute.replaceAll('#####', this.post.id);
+        },
+
+        openModalString() {
+            return this.post.totalLikes > 0 ? 'likeUsersModal' : '';
+        },
     },
     methods: {
         convertVideoLinksToEmbeds(postContent) {
@@ -418,9 +439,48 @@ export default {
                 });
             }
         },
+
+        //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
+        showHideQuotes() {
+            if(!this.quotesHidden) {
+                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.add('tw-hidden')
+                this.quotesHidden = true;
+            } else {
+                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.remove('tw-hidden')
+                this.quotesHidden = false;
+            }
+        }
     },
+    mounted() {
+        //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
+        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) {
+            //show button
+            this.hasShowHideButton = true;
+            //Hide Blockquotes if prop is passed
+            if(this.allQuotesHidden) {    
+                this.quotesHidden = true;    
+                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.add('tw-hidden')
+            }
+        } 
+    }
 };
 </script>
 <style>
-
+    /* Post Body Specific Styles */
+    .post-body ul, 
+    .post-body ol {
+        list-style: revert;
+        padding-left: 40px;
+        margin: 15px 0;
+    }
+    .post-body p { 
+        margin: 15px 0; 
+        font-size: 1rem; 
+        line-height: 1.5rem; 
+    }
+    .post-body p:empty { display: none; }
+    .post-body blockquote { 
+        margin: 15px 0; 
+        width: 100%;
+    }
 </style>

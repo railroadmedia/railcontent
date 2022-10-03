@@ -67,6 +67,8 @@
             <div class="tw-flex tw-flex-row">
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
+                    timezone="{{ $fullTimezoneString }}"
+                    subscription-calendar-id=""
                     theme-color="{{ $brand }}"
                 />
             </div>

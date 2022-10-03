@@ -33,6 +33,9 @@
         {{-- Modal Container --}}
         <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
+        <!-- Confirmation Modal Container -->
+        <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+
         {{-- App Container --}}
         <div id="app" class="flex-1">
             <app-container
@@ -52,6 +55,9 @@
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
+                    @if(isset($adminMessage))
+                        admin-message="{{ $adminMessage }}"
+                    @endif
                     {{-- @if(isset($forceHideSidebar))
                         :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
                     @endif --}}
@@ -62,10 +68,9 @@
 
                     </template>
                 </page-container>
+                {{-- Review Modals Code Loads Here --}}
+                @yield('review-modal-section')
             </app-container>
-
-            {{-- Review Modals Must Be Global --}}
-            @include('partials._review-modal')
         </div>
 
         {{-- Scripts --}}

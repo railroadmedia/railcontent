@@ -135,6 +135,11 @@ export default {
         InputLabel
     },
     mixins: [ThemeClasses, UserCatalogueEvents, EventHandlers],
+    inject: {
+        isSidebarCollapsed: {
+            from: 'isSidebarCollapsed'
+        }
+    },
     props: {
         brand: {
             type: String,
@@ -541,7 +546,7 @@ export default {
 
             if (!resume) {
                 this.$nextTick(() => {
-                    const domElement = this.$refs[`list${this.activeItem.id}`].$el;
+                    const domElement = this.$refs[`list${this.activeItem.id}`][0].$el;
                     domElement.scrollIntoView({ block: "start" })
                 });
             }
@@ -700,7 +705,7 @@ export default {
         },
 
         handleAnchorMouseDown(anchor) {
-            this.anchorMouseDown.anchor = true;
+            this.anchorMouseDown[anchor] = true;
         },
 
         handleAnchorButtonClick(anchor) {
@@ -712,7 +717,7 @@ export default {
                 offset = 0;
             }
 
-            this.anchorOffsets.anchor = offset;
+            this.anchorOffsets[anchor] = offset;
         },
 
         resetAnchors() {
@@ -755,7 +760,8 @@ export default {
         },
 
         getDurationOffsetPercentageByMousePosition() {
-            return (this.currentMousePosition.x / this.$refs.progressBar.$el.clientWidth) * 100;
+            const sidebarOffset = this.isSidebarCollapsed ? 68 : 256;
+            return ((this.currentMousePosition.x - sidebarOffset) / this.$refs.progressBar.$el.clientWidth) * 100;
         },
 
         mouseUpEventHandler() {
@@ -964,6 +970,7 @@ export default {
                 mediaType: 'practice',
                 mediaCategory: 'play-alongs',
                 sessionToken: this.sessionToken,
+                brand: this.brand,
             });
         },
 

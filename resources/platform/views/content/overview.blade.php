@@ -28,6 +28,8 @@
 @section('layout-scripts')
     @if($parentContent->fetch('type') === 'learning-path' || $parentContent['type'] === 'learning-path-level')
         <script src="{{ mix('platform/js/learning-path-preview.js') }}"></script>
+        {{-- Typeform Embed --}}
+        <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
     @endif
 @endsection
 
@@ -139,6 +141,8 @@
                         {{-- :is-admin="{{ json_encode(user()->isAdmin()) }}" --}}
                         @if($displayItemAsOverview ?? false)
                             :display-items-as-overview="true"
+                        @endif
+                        @if(!user()->isAdmin())
                             :lock-unowned="true"
                         @endif
                         @if($parentContent['type'] !== 'learning-path')

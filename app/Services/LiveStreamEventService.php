@@ -2,15 +2,20 @@
 
 namespace App\Services;
 
+use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Http\Controllers\Content\LiveController;
 use App\Maps\ContentTypes;
 use Carbon\Carbon;
 use Exception;
 use Google_Client;
 use Google_Service_YouTube;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use App\Decorators\Content\ContentLikesDecorator;
 
 class LiveStreamEventService
 {
@@ -54,6 +59,11 @@ class LiveStreamEventService
         ];
 
         ContentRepository::$pullFutureContent = true;
+
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        AddedToPrimaryPlaylistDecorator::$skip = true;
+//        ContentUserProgressDecorator::$skip = true;
 
         $requiredInstructor = !empty($instructorIds) ? ['key' => 'instructor', 'value' => $instructorIds] : [];
         $liveEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(

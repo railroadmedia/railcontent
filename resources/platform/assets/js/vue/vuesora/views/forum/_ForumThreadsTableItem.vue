@@ -26,8 +26,8 @@
                 </p>
                 <!-- Responsive version (could not reorder with flex) -->
                 <p class="tw-text-sm tw-text-gray-600 dark:tw-text-white lg:tw-hidden">
-                    <span class="tw-text-sm tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</span>
-                    <span>By: <span class="tw-font-bold">{{  thread.latestPost ? thread.latestPost.author_display_name : '' }}</span></span>
+                    <span class="tw-text-sm tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}} </span>
+                    <span> By: <span class="tw-font-bold">{{  thread.latestPost ? thread.latestPost.author_display_name : '' }}</span></span>
                 </p>
             </div>
 
@@ -52,15 +52,15 @@
             <div class="tw-flex-col tw-justify-center tw-mr-6 tw-text-gray-600 dark:tw-text-[#9EC0DC] tw-flex-shrink-0 tw-w-28 tw-hidden lg:tw-flex">
                 <h6 class="tw-text-sm tw-font-bold">{{ thread.latestPost ? thread.latestPost.created_at_diff : ''}}</h6>
                 <p class="tw-text-sm tw-truncate">
-                    <span class="">By:</span>
+                    <span class="">By: </span>
                     <span class="tw-font-bold">{{  thread.latestPost ? thread.latestPost.author_display_name : ''}}</span>
                 </p>
             </div>
 
             <!-- New Badge-->
             <div v-if="thread.isNew"
-                 class="tw-flex-col tw-hidden tw-mr-6 tw-hidden lg:tw-flex">
-                <span class="tw-text-white tw-rounded-sm tw-rounded-full tw-uppercase tw-flex tw-px-2 tw-py-1.5 tw-text-sm tw-items-center tw-font-bold"
+                 class="tw-flex-col tw-hidden tw-mr-6 lg:tw-flex">
+                <span class="tw-text-white tw-rounded-sm tw-uppercase tw-flex tw-px-1 tw-py-0.5 tw-text-sm tw-items-center tw-font-bold"
                     :class="brandBgColor">
                     <i class="fas fa-star tw-mr-0.5"></i> New
                 </span>

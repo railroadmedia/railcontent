@@ -248,5 +248,35 @@ The request checks if another user exists with the same display name.
 ```
 #### Missing parameter response:
 ```php
-{"errors":{"code":"Error: The display name field is required."}}
+{"errors":{"display_name":"The display name field is required."}}
+```
+
+
+## Check if email is unique
+
+
+### HTTP Request
+    `PUT user-management-system/is-email-unique`
+
+#### Request parameter:
+```php
+['email' => 'required|email']
+```
+The request checks if another user exists with the same email. Authentication is not needed.
+
+
+#### Success response:
+```php
+{"unique":true}
+```
+#### Unsuccess response:
+```php
+{"unique":false}
+```
+#### Missing/invalid parameter response:
+```php
+{"errors":{"email":"The email field is required."}}
+```
+```php
+{"errors":{"email":"The email must be a valid email address."}}
 ```
