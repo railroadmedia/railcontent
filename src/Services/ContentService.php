@@ -2479,7 +2479,7 @@ class ContentService
                 }
 
                 // remove dupes
-                if (is_array($compiledData[$key])) {
+                if (is_array($compiledData[$key]) && (!in_array($key, config('railcontent.compiled_columns_that_should_allow_dups', [])))) {
                     $compiledData[$key] = array_unique($compiledData[$key]);
                 }
 
