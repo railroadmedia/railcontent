@@ -106,7 +106,7 @@
                             </button>
                         </div>
                         <div class="tw-flex tw-flex-column self-center tw-text-center tw-flex-grow">
-                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center">
+                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center tw-px-2 tw-w-full">
                                 {{ title }}
                             </h2>
                         </div>
