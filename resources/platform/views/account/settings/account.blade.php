@@ -249,7 +249,7 @@
 
     {{--  ================================================= MODALS ================================================= --}}
 
-    @if($offerUpgradeToAnnualShowToStudent)
+    @if($offerUpgradeToAnnualShowToStudent && $subscription->getIntervalType() === 'month')
         @component('account.settings.partials._modal', ['modalId' => 'modal-upgrade'])
             @slot('contentSlot')
                 <div>
@@ -261,8 +261,36 @@
 
                     <div>
                         <h2>YOUR PLAN</h2>
-                        <p>${{ $subscription->getTotalPrice() }} per month</p>
-                        <p>= ${{ $subscription->getTotalPrice() * 12 }} per year</p>
+
+                        @if($subscription->getIntervalCount() == 1)
+                            <p>${{ $subscription->getTotalPrice() }} per month</p>
+                            <p>= ${{ $subscription->getTotalPrice() * 12 }} per year</p>
+                        @else
+                            @php
+                                switch ($subscription->getIntervalCount()) {
+                                    case 2:
+                                        $intervalCountAsWord = 'two';
+                                        break;
+                                    case 3:
+                                        $intervalCountAsWord = 'three';
+                                        break;
+                                    case 4:
+                                        $intervalCountAsWord = 'four';
+                                        break;
+                                    case 5:
+                                        $intervalCountAsWord = 'five';
+                                        break;
+                                    case 6:
+                                        $intervalCountAsWord = 'six';
+                                        break;
+                                }
+
+                                $annualPriceMultiplicationFactor = 12 / $subscription->getIntervalCount();
+                            @endphp
+                            <p>${{ $subscription->getTotalPrice() }} every {{ $intervalCountAsWord }} months</p>
+                            <p>= ${{ $subscription->getTotalPrice() * $annualPriceMultiplicationFactor }} per year</p>
+                        @endif
+
                         <button class="mu-modal-close tw-cursor-pointer">KEEP THIS PLAN</button>
                     </div>
 

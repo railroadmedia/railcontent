@@ -167,6 +167,7 @@ class ProfileSettingsPagesController extends BaseController
                 $userProductsDigitalAccessTypeSpecific[] = $userProduct;
             }
             $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt($now) : null;
+
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
             if ($isAllContentAccessProduct) {
                 $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt($now);
@@ -291,6 +292,8 @@ class ProfileSettingsPagesController extends BaseController
                         $multiplyFactor = 4;
                     } elseif ($activeSubscription->getIntervalCount() == 6) {
                         $multiplyFactor = 2;
+                    } elseif ($activeSubscription->getIntervalCount() == 2) {
+                        $multiplyFactor = 6;
                     }
 
                     if ($multiplyFactor ?? false) {
