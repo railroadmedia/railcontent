@@ -75,7 +75,7 @@
 
             <!-- ================================= Owned products ================================= -->
 
-            @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription)
+            @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription || $membershipFromOneTimeProduct)
 
                 <div style="min-height:150px">
                     <h2>Your Access Levels</h2>
@@ -83,7 +83,7 @@
 
                     @if($isLifetime)
                         <li>Lifetime Membership</li>
-                    @elseif($subscription)
+                    @elseif($subscription || $membershipFromOneTimeProduct)
                         <li>Membership</li>
                     @endif
 
