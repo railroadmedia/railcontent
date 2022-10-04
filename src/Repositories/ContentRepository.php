@@ -50,6 +50,8 @@ class ContentRepository extends RepositoryBase
     public static $catalogMetaAllowableFilters = null;
     public static $pullFilterResultsOptionsAndCount = true;
 
+    public static $includedInPlaylistsIds = false;
+
     private $requiredFields = [];
     private $includedFields = [];
 

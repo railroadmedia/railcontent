@@ -13,6 +13,7 @@ use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentJsonController extends Controller
@@ -28,16 +29,23 @@ class ContentJsonController extends Controller
     private $validationFactory;
 
     /**
-     * ContentController constructor.
-     *
+     * @var UserPlaylistsService
+     */
+    private $userPlaylistsService;
+
+    /**
      * @param ContentService $contentService
+     * @param ValidationFactory $validationFactory
+     * @param UserPlaylistsService $userPlaylistsService
      */
     public function __construct(
         ContentService $contentService,
-        ValidationFactory $validationFactory
+        ValidationFactory $validationFactory,
+        UserPlaylistsService $userPlaylistsService
     ) {
         $this->contentService = $contentService;
         $this->validationFactory = $validationFactory;
+        $this->userPlaylistsService = $userPlaylistsService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -52,21 +60,34 @@ class ContentJsonController extends Controller
             ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
-        if($request->has('include_future_content')){
+        if ($request->has('include_future_content')) {
             ContentRepository::$pullFutureContent = $request->has('include_future_content');
+        }
+
+        if ($request->has('only_from_my_list') && ($request->get('only_from_my_list') == "true")) {
+            $myList =
+                \Arr::first(
+                    $this->userPlaylistsService->getUserPlaylist(
+                        user()->id,
+                        'primary-playlist',
+                        config('railcontent.brand')
+                    )
+                );
+            $myListId = ($myList) ? [$myList['id']] : [];
+            ContentRepository::$includedInPlaylistsIds = $myListId;
         }
 
         $required_fields = $request->get('required_fields', []);
 
         if ($request->has('term')) {
-            $required_fields[] = 'name,%' . $request->get('term') . '%,string,like';
+            $required_fields[] = 'name,%'.$request->get('term').'%,string,like';
             if ($request->get('sort') == '-score') {
                 $request->merge(['sort' => 'published_on']);
             }
         }
 
         if ($request->has('title')) {
-            $required_fields[] = 'title,%' . $request->get('title') . '%,string,like';
+            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
         }
 
         $contentTypes = $request->get('included_types', []);
@@ -99,7 +120,7 @@ class ContentJsonController extends Controller
                 // accommodates—have an "included_types" value like this—an array of one string.
                 $isContentTypeWithSpecialConditions = in_array($contentTypes, [
                     ['student-focus'],
-                    ['student-review']
+                    ['student-review'],
                 ]);
 
                 if ($isContentTypeWithSpecialConditions) {
@@ -114,10 +135,10 @@ class ContentJsonController extends Controller
         }
 
         return reply()->json($contentData['results'], [
-                'transformer' => DataTransformer::class,
-                'totalResults' => $contentData['total_results'],
-                'filterOptions' => $filters,
-            ]);
+            'transformer' => DataTransformer::class,
+            'totalResults' => $contentData['total_results'],
+            'filterOptions' => $filters,
+        ]);
     }
 
     /** Pull the children contents for the parent id
@@ -130,8 +151,8 @@ class ContentJsonController extends Controller
         $contentData = $this->contentService->getByParentId($parentId);
 
         return reply()->json($contentData, [
-                'transformer' => DataTransformer::class,
-            ]);
+            'transformer' => DataTransformer::class,
+        ]);
     }
 
     public function getByChildIdWhereType($childId, $type)
@@ -139,8 +160,8 @@ class ContentJsonController extends Controller
         $contentData = $this->contentService->getByChildIdWhereType($childId, $type);
 
         return reply()->json($contentData, [
-                'transformer' => DataTransformer::class,
-            ]);
+            'transformer' => DataTransformer::class,
+        ]);
     }
 
     /**
@@ -152,8 +173,8 @@ class ContentJsonController extends Controller
         $contentData = $this->contentService->getByIds(explode(',', $request->get('ids', '')));
 
         return reply()->json($contentData, [
-                'transformer' => DataTransformer::class,
-            ]);
+            'transformer' => DataTransformer::class,
+        ]);
     }
 
     /**
@@ -163,7 +184,7 @@ class ContentJsonController extends Controller
     public function show($id)
     {
         $content = $this->contentService->getById($id);
-        throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
+        throw_unless($content, new NotFoundException('No content with id '.$id.' exists.'));
 
         //        $rules = $this->contentService->getValidationRules($content);
         //        if($rules === false){
@@ -186,13 +207,12 @@ class ContentJsonController extends Controller
         //        $content = array_merge($content, ['validation' => $validation]);
 
         return reply()->json(array_values([$id => $content]), [
-                'transformer' => DataTransformer::class,
-            ]);
+            'transformer' => DataTransformer::class,
+        ]);
     }
 
     public function slugs(Request $request, ...$slugs)
     {
-
     }
 
     /**
@@ -216,9 +236,9 @@ class ContentJsonController extends Controller
         );
 
         return reply()->json([$content], [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]);
+            'transformer' => DataTransformer::class,
+            'code' => 201,
+        ]);
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -239,13 +259,13 @@ class ContentJsonController extends Controller
         //if the update method response it's null the content not exist; we throw the proper exception
         throw_if(
             is_null($content),
-            new NotFoundException('Update failed, content not found with id: ' . $contentId)
+            new NotFoundException('Update failed, content not found with id: '.$contentId)
         );
 
         return reply()->json([$content], [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]);
+            'transformer' => DataTransformer::class,
+            'code' => 201,
+        ]);
     }
 
     /**
@@ -263,7 +283,7 @@ class ContentJsonController extends Controller
         //if the delete method response it's null the content not exist; we throw the proper exception
         throw_if(
             is_null($delete),
-            new NotFoundException('Delete failed, content not found with id: ' . $contentId)
+            new NotFoundException('Delete failed, content not found with id: '.$contentId)
         );
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
@@ -282,11 +302,11 @@ class ContentJsonController extends Controller
     public function options(Request $request)
     {
         return reply()->json(null, [
-                'code' => 200,
-                'Access-Control-Allow-Origin' => '*',
-                'Access-Control-Allow-Methods' => 'POST, PATCH, GET, OPTIONS, PUT, DELETE',
-                'Access-Control-Allow-Headers' => 'X-Requested-With, content-type',
-            ]);
+            'code' => 200,
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => 'POST, PATCH, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers' => 'X-Requested-With, content-type',
+        ]);
     }
 
     /**
@@ -304,7 +324,7 @@ class ContentJsonController extends Controller
         //if the delete method response it's null the content not exist; we throw the proper exception
         throw_if(
             is_null($delete),
-            new NotFoundException('Delete failed, content not found with id: ' . $contentId)
+            new NotFoundException('Delete failed, content not found with id: '.$contentId)
         );
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
@@ -333,7 +353,11 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
+            $types =
+                array_merge(
+                    $types,
+                    array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+                );
         }
 
         if (!empty($types)) {
@@ -358,10 +382,10 @@ class ContentJsonController extends Controller
             array_values(array_diff($filterOptions['content_type'] ?? [], ['course-part']));
 
         return (new ContentFilterResultsEntity([
-                'results' => $lessons,
-                'total_results' => $totalResults,
-                'filter_options' => $filterOptions,
-            ]))->toJsonResponse();
+                                                   'results' => $lessons,
+                                                   'total_results' => $totalResults,
+                                                   'filter_options' => $filterOptions,
+                                               ]))->toJsonResponse();
     }
 
     /**
@@ -379,7 +403,11 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []));
+            $types =
+                array_merge(
+                    $types,
+                    array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+                );
         }
 
         $field = ($request->has('is_home')) ? 'home_staff_pick_rating' : 'staff_pick_rating';
@@ -392,7 +420,7 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                [$field . ',20,integer,<='],
+                [$field.',20,integer,<='],
                 [],
                 [],
                 [],

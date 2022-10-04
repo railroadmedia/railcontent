@@ -568,7 +568,8 @@ class ContentQueryBuilder extends QueryBuilder
         $this->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
-            ->restrictByPermissions();
+            ->restrictByPermissions()
+            ->restrictPlaylistIds();
 
         return $this;
     }
@@ -694,6 +695,27 @@ class ContentQueryBuilder extends QueryBuilder
             );
         })
             ->where(ConfigService::$tableContentFollows.'.user_id', auth()->id() ?? null);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictPlaylistIds()
+    {
+        if (ContentRepository::$includedInPlaylistsIds === false) {
+            return $this;
+        }
+
+        $this->join(ConfigService::$tablePlaylistContents, function (JoinClause $joinClause) {
+            $joinClause->on(
+                ConfigService::$tablePlaylistContents.'.content_id',
+                '=',
+                ConfigService::$tableContent.'.id'
+            );
+        })
+            ->whereIn(ConfigService::$tablePlaylistContents.'.user_playlist_id', ContentRepository::$includedInPlaylistsIds);
 
         return $this;
     }
