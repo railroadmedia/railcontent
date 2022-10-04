@@ -311,8 +311,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         $brand = brand();
 
-        if (isset($this->brand_method_levels->$brand)) {
-            return $this->brand_method_levels->$brand;
+        if (isset($this->brand_method_levels[$brand])) {
+            return $this->brand_method_levels[$brand];
         }
 
         return '1.0';
