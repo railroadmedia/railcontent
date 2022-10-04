@@ -85,11 +85,19 @@ class UserListPagesController extends BaseController
             return strcmp($a, $b);
         });
 
+        $currentUser = [
+            "avatar" => user()->profile_picture_url,
+            "xp" => user()->totalXp(),
+            "access_level" => user()->access_level,
+            "xp_rank" => user()->getXpRank(),
+        ];
+
         return view('account.playlists', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
             "resetProgress" => false,
             "initialPage" => $initialPage,
+            'currentUser' => $currentUser,
             "noResultsMessage" => $noResultsMessage,
         ]);
     }
@@ -136,11 +144,19 @@ class UserListPagesController extends BaseController
             return strcmp($a, $b);
         });
 
+        $currentUser = [
+            "avatar" => user()->profile_picture_url,
+            "xp" => user()->totalXp(),
+            "access_level" => user()->access_level,
+            "xp_rank" => user()->getXpRank(),
+        ];
+
         return view('account.playlists', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
             "resetProgress" => true,
             "initialPage" => $initialPage,
+            'currentUser' => $currentUser,
             "noResultsMessage" => $noResultsMessage,
         ]);
     }
@@ -187,11 +203,19 @@ class UserListPagesController extends BaseController
             return strcmp($a, $b);
         });
 
+        $currentUser = [
+            "avatar" => user()->profile_picture_url,
+            "xp" => user()->totalXp(),
+            "access_level" => user()->access_level,
+            "xp_rank" => user()->getXpRank(),
+        ];
+
         return view('account.playlists', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
             "resetProgress" => true,
             "initialPage" => $initialPage,
+            'currentUser' => $currentUser,
             "noResultsMessage" => $noResultsMessage,
         ]);
     }
