@@ -329,63 +329,12 @@
                     </p>
                     {{--<div class="tw-ml-3">--}}
                     <ul class="tw-ml-3">
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="direction" value="direction"
-                                   class="tw-mr-3 tw-mt-6">
-                            <label for="direction">I need more direction</label>
-                        </li>
-                        {{-- </p> --}}
-
-
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="time" value="time" class="tw-mr-3">
-                            <label for="time">I don’t have enough time</label>
-                        </li>
-                        {{-- </p> --}}
-
-
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="watch" value="watch" class="tw-mr-3">
-                            <label for="watch">I don’t know what lesson to watch</label>
-                        </li>
-                        {{-- </p> --}}
-
-
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="easy" value="easy" class="tw-mr-3">
-                            <label for="easy">The lessons are too easy</label>
-                        </li>
-                        {{-- </p> --}}
-
-
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="difficult" value="difficult" class="tw-mr-3">
-                            <label for="difficult">The lessons are too difficult</label>
-                        </li>
-                        {{-- </p> --}}
-
-
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="website" value="website" class="tw-mr-3">
-                            <label for="website">I don’t know how to use the website/app.</label>
-                        </li>
-                        {{-- </p> --}}
-
-
-                        {{-- <p class="body"> --}}
-                        <li>
-                            <input type="radio" name="help-issue" id="other" value="other" class="tw-mr-3">
-                            <label for="other">Other</label>
-                        </li>
-                        {{-- </p> --}}
-
-
+                        @foreach(ProfileSettingsPagesController::HOW_CAN_WE_HELP_OPTIONS as $label => $text)
+                            <li>
+                                <input type="radio" name="help-issue" id="{{ $label }}" value="{{ $label }}" class="tw-mr-3">
+                                <label for="{{ $label }}">{{ $text }}</label>
+                            </li>
+                        @endforeach
                     </ul>
 
                     <textarea placeholder="Send your questions to a {{ ucfirst($brand) }} teacher..."
