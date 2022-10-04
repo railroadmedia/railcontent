@@ -23746,9 +23746,6 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
-.tw-pb-3{
-  padding-bottom: 0.75rem !important;
-}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24264,9 +24261,6 @@ a:visited{
 .tw-overflow-initial{
   overflow: initial !important;
 }
-.tw-body a:visited{
-  color: rgb(11, 118, 219) !important;
-}
 [v-cloak]{
   display: none !important;
 }
@@ -24307,6 +24301,10 @@ a:visited{
   list-style: revert !important;
   padding-left: 40px !important;
   margin: 10px 0 !important;
+}
+/* Tailwind base style overrides */
+.body a:visited {
+  color: "rgb(11, 118, 219)";
 }
 .placeholder\:tw-text-transparent::-moz-placeholder{
   color: transparent !important;
@@ -25432,9 +25430,6 @@ a:visited{
   }
   .md\:tw-pl-4{
     padding-left: 1rem !important;
-  }
-  .md\:tw-text-left{
-    text-align: left !important;
   }
   .md\:tw-text-2xl{
     font-size: 1.5rem !important;
