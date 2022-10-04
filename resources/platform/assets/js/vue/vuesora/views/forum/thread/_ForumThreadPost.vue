@@ -23,14 +23,16 @@
                 <h2 class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
                     {{ post.authorUsername }}
                 </h2>
-                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2">
-                    <span>{{ post.authorTotalPosts }} Posts</span> -
-                    <span>{{ userExpValue }}</span> -
+                <div class="tw-flex tw-items-center tw-flex-wrap">
+                    <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-order-3 md:tw-order-2 tw-mr-auto">
+                        <span>{{ post.authorTotalPosts }} Posts</span> -
+                        <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
-                </div>
-                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-justify-end tw-leading-none">
-                    <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
-                    <span>&nbsp;- #{{ postNumber }}</span>
+                    </div>
+                    <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last md:tw-justify-end tw-leading-none">
+                        <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
+                        <span>&nbsp;- #{{ postNumber }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,7 +51,7 @@
                          class="tw-leading-none tw-cursor-pointer tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1] hover:tw-text-[#00101D] dark:hover:tw-text-white tw-transition-colors tw-inline-flex tw-items-center tw-ml-auto tw-m-0"
                          @click="showHideQuotes"
                     >
-                        {{ quotesHidden ? 'Show' : 'Hide' }} Quotes
+                        {{ quotesHidden ? 'Show' : 'Hide' }} Replies
                         <i class="fa-solid tw-ml-2 tw-text-base"
                            :class="quotesHidden ? 'fa-chevrons-down' : 'fa-chevrons-up' "
                            aria-hidden="true"></i>
@@ -59,7 +61,6 @@
                          :ref="'post-body'+post.id"
                     ></div>
                 </div>
-
                 <div
                     v-if="editing"
                     class="tw-flex tw-flex-col tw-mb-1 tw-w-full"

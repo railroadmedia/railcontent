@@ -42,7 +42,10 @@ const props = defineProps({
   forceSidebarHidden: {
     type: Boolean,
     default: false
-  }
+  },
+  adminMessage: {
+    type: String,
+  },
 });
 
 const notification = useNotificationStore();
@@ -226,6 +229,9 @@ onUnmounted(() => {
           tw-overflow-x-hidden
           tw-scroll-smooth
         " id="content-container">
+        <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
+          {{ adminMessage }}
+        </h2>
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />
