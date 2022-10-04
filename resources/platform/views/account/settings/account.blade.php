@@ -102,14 +102,23 @@
 
                 <div>
                     <h2>Musora Special Offer</h2>
-                    @if($activeAllContentAccessExpiryDate < \Carbon\Carbon::now())
-                        <p>Your subscription to Musora has been canceled and your access ended
-                            on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact support or reorder on <a
-                                href="/">www.Musora.com</a> to continue your membership.</p>
+                    @if($activeAllContentAccessExpiryDate)
+                        @if($activeAllContentAccessExpiryDate < \Carbon\Carbon::now())
+                            <p>Your subscription to Musora has been canceled and your access ended
+                                on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact support or
+                                reorder on <a
+                                    href="/">www.Musora.com</a> to continue your membership.</p>
+                        @else
+                            <p>Your subscription to Musora has been canceled and your access will be
+                                removed on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact
+                                support
+                                or reorder on <a
+                                    href="/">www.Musora.com</a> to continue your membership.</p>
+                        @endif
                     @else
-                        <p>Your subscription to Musora has been canceled and your access will be
-                            removed on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact support or reorder on <a
-                                href="/">www.Musora.com</a> to continue your membership.</p>
+                        {{-- todo: what to put here? --}}
+
+                        {{-- todo: what to put here? --}}
                     @endif
                 </div>
 
