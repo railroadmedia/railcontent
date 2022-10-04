@@ -82,8 +82,7 @@ class ProfileSettingsPagesController extends BaseController
         SubscriptionRepository $subscriptionRepository,
         UserProviderInterface $userProvider,
         MailService $mailService
-    )
-    {
+    ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
         $this->userPermissionsService = $userPermissionsService;
@@ -171,7 +170,7 @@ class ProfileSettingsPagesController extends BaseController
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
             if ($isAllContentAccessProduct) {
                 $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt($now);
-                if(!$expired) {
+                if (!$expired) {
                     if ($paused) {
                         $pausedSubscriptionStartDate = $userProduct->getStartDate();
                     } else {
@@ -213,7 +212,7 @@ class ProfileSettingsPagesController extends BaseController
         // --------------------------------------------- is lifetime member --------------------------------------------
 
         foreach ($userProducts as $userProduct) {
-            if (in_array($userProduct->getProduct()->getId(), [7,8,22,141,412])) {
+            if (in_array($userProduct->getProduct()->getId(), [7, 8, 22, 141, 412])) {
                 $isLifetime = true;
             }
         }
@@ -224,7 +223,6 @@ class ProfileSettingsPagesController extends BaseController
         $noMembershipSubscriptionNowButHadOnePreviously = empty($activeSubscription) && !empty($membershipSubscriptions);
 
         if ($noMembershipSubscriptionNowButHadOnePreviously && !$isLifetime) {
-
             foreach ($subscriptions as $subscription) {           // todo: delete
                 $paidUntil = $subscription->getPaidUntil();       // todo: delete
                 $cancelledOn = $subscription->getCanceledOn();    // todo: delete
@@ -237,7 +235,7 @@ class ProfileSettingsPagesController extends BaseController
                 ];                                                // todo: delete
             }                                                     // todo: delete
 
-            usort($subscriptions, function($x, $y){
+            usort($subscriptions, function ($x, $y) {
                 /**
                  * @var $x Subscription
                  * @var $y Subscription
@@ -272,7 +270,6 @@ class ProfileSettingsPagesController extends BaseController
         // ------------------------------------------ access from app purchase -----------------------------------------
 
         if ($activeSubscription) {
-
             // if the student's subscription is administered via a mobile app, we don't offer the same controls and
             // instead direct them to the Apple's or Google's pages on the matter.
             if (
@@ -285,7 +282,6 @@ class ProfileSettingsPagesController extends BaseController
             // if the student is an active monthly subscriber we present an offer to upgrade to an annual membership
             if ($activeSubscription->getType() == 'subscription') {
                 if ($activeSubscription->getIntervalType() == 'month') {
-
                     if ($activeSubscription->getIntervalCount() == 1) {
                         $multiplyFactor = 12;
                     } elseif ($activeSubscription->getIntervalCount() == 3) {
@@ -307,14 +303,14 @@ class ProfileSettingsPagesController extends BaseController
                             $offerUpgradeToAnnualPercentSaved = round($savingsPercentageRaw);
                         }
                     }
-
                 }
             }
         }
 
         // -------------------------------------------------------------------------------------------------------------
 
-        return view('account.settings.account',
+        return view(
+            'account.settings.account',
             [
                 'user' => user(),
                 'sections' => $this->settingSections('account'),
@@ -412,7 +408,6 @@ class ProfileSettingsPagesController extends BaseController
             }
 
 
-
             // todo: create as Carbon object
             $nextPaymentDate = null;
 
@@ -422,16 +417,10 @@ class ProfileSettingsPagesController extends BaseController
 //                'nextPaymentDate' => $nextPaymentDate,
 //            ]);
         }
-
-
-
-
-
         // send to final offer screen depending on use case
 
 
     }
-
 
 
     public function acceptStudentPlanOffer(Request $request)
@@ -449,8 +438,8 @@ class ProfileSettingsPagesController extends BaseController
         dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptGratisAccess', $request);
     }
 
-    public function cancel(Request $request) {
-
+    public function cancel(Request $request)
+    {
     }
 
 
@@ -463,7 +452,6 @@ class ProfileSettingsPagesController extends BaseController
         dd($request);
 
         return view('account.settings.win-back', []);
-
     }
 
     public function payments(Request $request, $domain, $brand, $userId)
@@ -637,7 +625,7 @@ class ProfileSettingsPagesController extends BaseController
             $debug_userFromAuth = auth();
             $debug_userFromUserProvider = $this->userProvider->getCurrentUser();
 
-            if (App::environment() !== 'production' ) {
+            if (App::environment() !== 'production') {
                 $recipientEmailAddress = 'jonathan+email_safety_in_mwp_profilesettingspagecontroller@musora.com';
             }
 
@@ -652,6 +640,5 @@ class ProfileSettingsPagesController extends BaseController
         } catch (\Exception $exception) {
             error_log($exception);
         }
-
     }
 }

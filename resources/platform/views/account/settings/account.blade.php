@@ -7,12 +7,13 @@
 
 @section('layout-scripts')
     @parent
-    <script src="https://cdn.tiny.cloud/1/g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script src="{{ mix('platform/js/profile.js') }}"></script>
     <script>
         // console.log('hooray');
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
 
             // class="mu-modal-open"
             // id="modal-upgrade"
@@ -23,7 +24,7 @@
             console.log(openmodal.length);
 
             for (var i = 0; i < openmodal.length; i++) {
-                openmodal[i].addEventListener('click', function(event){
+                openmodal[i].addEventListener('click', function (event) {
                     event.preventDefault();
                     openModal(event);
                 });
@@ -40,7 +41,7 @@
             }
 
             // https://github.com/railroadmedia/drumeo/blob/master/laravel/resources/assets/members/js/profile.js#L231
-            function openModal (event) {
+            function openModal(event) {
                 console.log(event);
                 console.log('openModal triggered :D');
                 const body = document.querySelector('body');
@@ -53,7 +54,7 @@
                 body.classList.add('mu-modal-active');
             }
 
-            function closeModal (event) {
+            function closeModal(event) {
                 console.log('closeModal triggered :D');
                 const body = document.querySelector('body');
                 const targetModal = document.querySelector('.mu-modal-is-open');
@@ -137,7 +138,8 @@
 
                 @elseif(!$subscription)
 
-                    @if($activeAllContentAccessExpiryDate) {{-- access from non-recurring product --}}
+                    @if($activeAllContentAccessExpiryDate)
+                        {{-- access from non-recurring product --}}
                         Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.
                     @else
                         {{-- todo: what to put here? --}}
@@ -149,9 +151,8 @@
                     your next renewal date has been extended to {{ $subscription->getPaidUntil()->format('F j, Y') }}.
                 @else
 
-
-
-                    @if(!$subscription && $subscription->getPaidUntil()->gt($now)) {{-- expired --}}
+                    @if(!$subscription && $subscription->getPaidUntil()->gt($now))
+                        {{-- expired --}}
 
                         Your access ended on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
                         {{-- Might not be totally accurate because of the differnece between userproduct expiration date
@@ -197,7 +198,7 @@
 
                 @elseif($pausedSubscriptionStartDate)
                     <form method="post"
-                          {{-- action="{{  }}" --}} > {{-- todo: action for this --}}
+                        {{-- action="{{  }}" --}} > {{-- todo: action for this --}}
 
                         {{ csrf_field() }}
 
@@ -216,14 +217,15 @@
                     </a>
 
                 @elseif(!$subscription)
-                {{--<p>link_to_sales</p>--}}
+                    {{--<p>link_to_sales</p>--}}
 
                 @elseif($offerUpgradeToAnnualShowToStudent)
 
                     <button
                         class="mu-modal-open"
                         id="modal-upgrade"
-                    >Ugrade</button>
+                    >Ugrade
+                    </button>
 
                     @include('account.settings.partials.cancellation.cancel-btn')
 
@@ -315,7 +317,8 @@
                         <button>SEE OFFER</button>
                     </div>
 
-                    <p>By completing the checkout process on the next page, your monthly billing will be stopped and replaced by an annual billing plan at the posted rate.</p>
+                    <p>By completing the checkout process on the next page, your monthly billing will be stopped and
+                        replaced by an annual billing plan at the posted rate.</p>
                 </div>
             @endslot
         @endcomponent
@@ -326,7 +329,7 @@
 
             {{-- todo: this should submit the normal cancel help email that goes to the person is does now and return back to the account details page with a success message --}}
             <form method="post" action="{{ url()->route('platform.profile.settings.send-help-email') }}"
-{{--                  class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-relative">--}}
+                  {{--                  class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-relative">--}}
                   class="">
 
                 {{ csrf_field() }}
@@ -341,7 +344,8 @@
                     <ul class="tw-ml-3">
                         @foreach(ProfileSettingsPagesController::HOW_CAN_WE_HELP_OPTIONS as $label => $text)
                             <li>
-                                <input type="radio" name="help-issue" id="{{ $label }}" value="{{ $label }}" class="tw-mr-3">
+                                <input type="radio" name="help-issue" id="{{ $label }}" value="{{ $label }}"
+                                       class="tw-mr-3">
                                 <label for="{{ $label }}">{{ $text }}</label>
                             </li>
                         @endforeach
@@ -356,7 +360,7 @@
                 </div>
 
                 <button
-{{--                    class="tw-uppercase tw-font-bold tw-no-underline tw-p-3 tw-pl-16 tw-pr-16 tw-text-white tw-rounded-full tw-mt-8 tw-border-0"--}}
+                    {{--                    class="tw-uppercase tw-font-bold tw-no-underline tw-p-3 tw-pl-16 tw-pr-16 tw-text-white tw-rounded-full tw-mt-8 tw-border-0"--}}
                     class=""
                     style="cursor:pointer">
                     Send Message
@@ -366,22 +370,19 @@
     @endcomponent
 
 
-{{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
-{{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
+    {{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
+    {{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
 
-{{--    <div style="border:3px solid orange; margin: 20px; padding 20px; background: yellow;">--}}
-{{--        <pre>--}}
-{{--            $annualSubscriptionPrice: {{ $annualSubscriptionPrice }}--}}
-{{--            $currentMonthlySubPricePerYear: {{ $currentMonthlySubPricePerYear }}--}}
-{{--            $savingsFactor: {{ $savingsFactor }}--}}
-{{--            $savingsPercentage: {{ round($savingsPercentage) }}--}}
-{{--        </pre>--}}
-{{--    </div>--}}
+    {{--    <div style="border:3px solid orange; margin: 20px; padding 20px; background: yellow;">--}}
+    {{--        <pre>--}}
+    {{--            $annualSubscriptionPrice: {{ $annualSubscriptionPrice }}--}}
+    {{--            $currentMonthlySubPricePerYear: {{ $currentMonthlySubPricePerYear }}--}}
+    {{--            $savingsFactor: {{ $savingsFactor }}--}}
+    {{--            $savingsPercentage: {{ round($savingsPercentage) }}--}}
+    {{--        </pre>--}}
+    {{--    </div>--}}
 
-{{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
-{{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
-
-
-
+    {{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
+    {{--    todo: DELETE THIS --- JUST FOR DEV --- DELETE THIS ANYTIME --- --}}
 
 @endsection
