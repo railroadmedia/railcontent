@@ -1,3 +1,4 @@
+@php use App\Http\Controllers\Platform\ProfileSettingsPagesController; @endphp
 @extends('account.settings.layout')
 
 @section('meta')
