@@ -21,6 +21,8 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUp(): void
     {
+        putenv('RAILFORUMS_DATA_MODE="client"'); //hack to skip rail forums migrations
+
         $this->faker = Factory::create();
 
         Carbon::setTestNow(Carbon::now());
@@ -42,7 +44,6 @@ abstract class TestCase extends BaseTestCase
         $app = require __DIR__ . '/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
-
         return $app;
     }
 
