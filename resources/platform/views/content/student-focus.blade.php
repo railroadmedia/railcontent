@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Student Focus | Musora</title>
+    <title>{{ ucfirst($brand) }} Student Focus | Musora</title>
 @endsection
 
 @section('content')
@@ -27,10 +27,10 @@
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col mv-3">
-                <div class="tw-flex tw-flex-row tw-flex-wrap">
+                <div class="tw-grid tw-gap-2 xl:tw-gap-4 tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-5 3xl:tw-grid-cols-6">
                     @foreach($lessonTypes as $lessonType)
                         <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $lessonType['type']]) }}"
-                        class="tw-flex tw-flex-col xs-6 sm-3 pa-1"
+                        class="tw-flex tw-flex-col tw-w-full pa-1"
                         dusk="{{$lessonType['type']}}">
                             <div class="show-index-card square corners-10 bg-grey-2 dark:tw-bg-[#081825] relative">
                                 <img

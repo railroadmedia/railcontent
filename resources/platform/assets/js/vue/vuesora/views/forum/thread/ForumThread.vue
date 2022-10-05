@@ -10,9 +10,9 @@
                     </h1>
                 </div>
                 
-                <div class="tw-flex tw-w-full md:tw-w-1/2 tw-justify-end tw-flex-col md:tw-flex-row">
+                <div class="tw-flex tw-w-full md:tw-w-1/2 tw-justify-end tw-flex-col md:tw-flex-row tw-flex-wrap">
 
-                    <div class="tw-flex tw-items-center tw-mb-5 md:tw-mb-0">
+                    <div class="tw-flex tw-items-center tw-mb-5 md:tw-mb-1">
                         <!-- Mobile Back Button -->
                         <a :href="previousPage" 
                             class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center md:tw-hidden"
@@ -25,7 +25,8 @@
                             <!-- Edit or delete the thread -->
                             <button
                                 v-if="currentUser.isAdmin || currentUser.isOwner"
-                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-w-[36px] tw-flex-shrink-0"
+                                title="Edit Thread"
                                 @click="update"
                             >
                                 <span
@@ -34,48 +35,35 @@
                                 >
                                     <i class="fas fa-edit"></i>
                                 </span>
-
-                                <!-- Tool Tip -->
-                                <div class="tw-tooltip tw-tooltip-dark">
-                                    Edit
-                                </div>
                             </button>
 
                             <!-- Pins the post to the top of the thread index list -->
                             <button
                                 v-if="currentUser.isAdmin"
-                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-w-[36px] tw-flex-shrink-0"
+                                title="Pin Thread"
                                 @click="pinPost"
                             >
                                 <span :class="[themeBgClass, isPinned ? 'tw-text-white' : 'inverted ' + themeTextClass]">
                                     <i class="fas fa-thumbtack"></i>
                                 </span>
-
-                                <!-- Tool Tip -->
-                                <div class="tw-tooltip tw-tooltip-dark">
-                                    Pin
-                                </div>
                             </button>
 
                             <!-- Disables the option to reply to the post -->
                             <button
                                 v-if="currentUser.isAdmin"
-                                class="btn collapse-square short tw-mr-1 tw-with-tooltip tw-tooltip-center"
+                                class="btn collapse-square short tw-mr-1 tw-w-[36px] tw-flex-shrink-0"
+                                title="Lock Thread"
                                 @click="lockPost"
                             >
                                 <span :class="[themeBgClass, isLocked ? 'tw-text-white' : 'inverted ' + themeTextClass]">
                                     <i class="fas fa-lock"></i>
                                 </span>
-
-                                <!-- Tool Tip -->
-                                <div class="tw-tooltip tw-tooltip-dark">
-                                    Lock
-                                </div>
                             </button>
 
                             <!-- Hides Signatures -->
                             <button
-                                class="btn collapse-square short tw-mr-2 tw-w-[36px]"
+                                class="btn collapse-square short tw-mr-2 tw-w-[36px] tw-flex-shrink-0"
                                 title="Hide All Signatures"
                                 @click="hideSignatures"
                             >
@@ -86,7 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="tw-flex tw-justify-center tw-items-center">
+                    <div class="tw-flex tw-justify-center tw-items-center tw-mb-1">
                         <!-- Follow -->
                         <button
                             class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl" 
@@ -171,6 +159,7 @@
                 :is-locked="thread.isLocked"
                 :profileBaseRoute="baseProfileRoute"
                 :signatures-hidden="signaturesHidden"
+                :all-quotes-hidden="allQuotesHidden"
                 :theme-color="themeColor"
                 :update-post-base-route="updatePostBaseRoute"
                 @likePost="handlePostLike"
@@ -379,6 +368,7 @@ export default {
             isLocked: this.thread.isLocked,
             isPinned: this.thread.isPinned,
             signaturesHidden: false,
+            allQuotesHidden: true,
             postReplyBody: '',
             currentPost:[],
             formDisabled: false,
@@ -412,7 +402,7 @@ export default {
         },
 
         sharePostLink() {
-            return `${window.location.protocol }//${window.location.host}/members/forums/jump-to-post/${this.currentPostID}`;
+            return `${window.location.protocol }//${window.location.host}/${this.brand}/forums/jump-to-post/${this.currentPostID}`;
         },
 
         postReplyInterface: {
@@ -585,7 +575,7 @@ export default {
                     </p><br>
                     ${ payload.postBody }
                 </blockquote>
-                <br><p></p>`;;
+                <br>`;
 
             this.scrollToReply();
             this.postReplyInterface += blockQuoteHtmlString;

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
@@ -33,23 +33,22 @@ const options = ref(
   })
 );
 
+const currentSelection = ref(props.info.instrumentTypes[props.brand]);
+
 function handleMultiSelection(selection) {
-  emit(
-    "onCheckStep",
-    2,
-    !!Object.values(selection).find((val) => val)
-  );
-  emit("onChangeInfo", { ...props.info, instrumentTypes: { ...props.info.instrumentTypes, [props.brand]: selection} });
+  currentSelection.value = selection;
 }
 
 const handleNextStep = () => {
   const data = [];
 
-  Object.entries(props.info.instrumentTypes[props.brand]).forEach(([type, isChecked]) => {
+  emit("onChangeInfo", { ...props.info, instrumentTypes: { ...props.info.instrumentTypes, [props.brand]: currentSelection.value} });
+
+  Object.entries(currentSelection.value).forEach(([type, isChecked]) => {
     if (isChecked) {
       data.push(type);
     }
-  })
+  });
 
   saveGear({
     data,
@@ -65,17 +64,20 @@ const handleNextStep = () => {
 function goBack() {
   emit('onChangeStep', 1);
 }
+
+const isNextButtonDisabled = () => {
+  return !Object.values(currentSelection.value).filter(val => {
+    return val;
+  }).length;
+};
 </script>
 
 <template>
   <StepWrapper :brand="brand" :showBgImg="true">
     <div
       class="
-        tw-h-full
-        md:tw-h-auto
         tw-w-full tw-flex tw-flex-col tw-items-center
         md:tw-justify-center
-        tw-mt-[40px]
         md:tw-mt-0
       "
     >
@@ -88,23 +90,21 @@ function goBack() {
       />
       <MultiSelect
         :options="options"
-        :initialSelection="info.instrumentTypes[brand]"
-        classOverride="tw-mb-[52px]"
+        :initialSelection="currentSelection"
+        classOverride="md:tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection"
       />
     </div>
     <div
       class="
-        tw-justify-self-end
-        md:tw-justify-self-center
-        tw-flex tw-flex-col tw-items-center tw-pb-[20px]
+        tw-flex tw-flex-col tw-items-center tw-pb-[20px] tw-pt-[20px]
         md:tw-pb-0
       "
     >
       <Button
         :brand="brand"
         @onButtonClick="handleNextStep"
-        :isDisabled="!steps[2].checked"
+        :isDisabled="isNextButtonDisabled()"
         classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block"
         >Next</Button
       >
@@ -117,7 +117,7 @@ function goBack() {
       <Button
         :brand="brand"
         @onButtonClick="handleNextStep"
-        :isDisabled="!steps[2].checked"
+        :isDisabled="isNextButtonDisabled()"
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >

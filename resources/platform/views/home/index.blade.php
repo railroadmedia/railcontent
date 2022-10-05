@@ -1,14 +1,14 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Home | Musora</title>
+    <title>{{ ucfirst($brand) }} Home | Musora</title>
 @endsection
 
 @section('content')
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
         @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
             {{-- On Boarding TriggerBanner --}}
-            <trigger-banner>
+            <trigger-banner brand="{{ $brand }}">
             </trigger-banner>
         @endif
 
@@ -110,16 +110,18 @@
         @endcomponent
 
         {{-- Live Banner --}}
-        <coach-event
-            brand="{{ $brand }}"
-            class="tw-mb-6"
-            :preloaded-content='{{ $coachEvent }}'
-            current-date-string="{{ $currentDate }}"
-            subscription-calendar-id="{{ $calendarId }}"
-            youtube-event-id="{{ $youtubeId }}"
-            :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-        ></coach-event>
+        @if( !empty($coachEvent) )
+            <coach-event
+                brand="{{ $brand }}"
+                class="tw-mb-6"
+                :preloaded-content='{{ $coachEvent }}'
+                current-date-string="{{ $currentDate }}"
+                subscription-calendar-id="{{ $calendarId }}"
+                youtube-event-id="{{ $youtubeId }}"
+                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            ></coach-event>
+        @endif
 
         {{-- Upcoming Events --}}
         @if($hasUpcomingEvents)
@@ -137,7 +139,7 @@
             brand="{{ $brand }}"
             account-url="{{ user()->getDashboardUrl() }}"
             :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-            next-learning-path-level="{{ $nextLearningPathLevel }}"
+            next-learning-path-level="{{ user()->getMethodLevel() }}"
             :user-metrics="{{ json_encode($userMetrics) }}"
         ></stats-section>
 

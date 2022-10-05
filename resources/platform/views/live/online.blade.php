@@ -32,7 +32,7 @@
         ])
     </div>
 
-    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
+    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col">
         <div id="lessonInfo" class="tw-flex tw-flex-row tw-items-center">
             <div class="tw-flex tw-flex-col tw-grow tw-shadow">
                 @if(!empty($lessonContent->fetch('*assignments')))

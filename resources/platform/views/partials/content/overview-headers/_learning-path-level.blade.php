@@ -29,7 +29,7 @@
                 </h2>
             </div>
 
-            <h1 class="display text-white mb-1">
+            <h1 class="display text-white mb-1 tw-text-center">
                 {{ $parentContent->fetch('fields.title') }}
             </h1>
 
@@ -63,9 +63,8 @@
                         }"
                     >
                     </video-player>
-
-                    <div class="flex flex-row pv align-v-center">
-                        <h1 class="subheading text-white grow">
+                    <div class="tw-flex tw-flex-row pv tw-items-center tw-flex-wrap">
+                        <h1 class="subheading text-white grow tw-pb-3">
                             {{ $parentContent->fetch('fields.title') }}
                         </h1>
 

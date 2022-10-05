@@ -345,7 +345,7 @@ class CoachPagesController extends Controller
      * @param bool $redirectToFirstChild
      * @return Factory|Application|RedirectResponse|View
      */
-    public function stream(Request $request, $coachSlug, $streamSlug, $streamId)
+    public function stream(Request $request, $domain, $brand, $coachSlug, $streamSlug, $streamId)
     {
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
@@ -439,56 +439,8 @@ class CoachPagesController extends Controller
             (new ContentFilterResultsEntity(['results' => [$thisLessonJson], 'total_results' => 1]))->toResponseRawJson(
             );
 
-        // temp, add instructor from the parent to all children if not set
-        foreach ($parentChildrenTrimmed as $parentChildIndex => $parentChild) {
-            if (empty($parentChild->fetch('fields.instructor.1')) && !empty($parent)) {
-                $parentChildrenTrimmed[$parentChildIndex]['fields'][] = [
-                    'key' => 'instructor',
-                    'value' => $parent->fetch('fields.instructor.1'),
-                    'position' => 1,
-                    'type' => 'content',
-                    'content_id' => $parentChild['id'],
-                ];
-            }
-        }
 
-        $coaches = $this->contentService->getFiltered(
-            1,
-            'null',
-            'slug',
-            ['coach'],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            true
-        )['results']->merge(
-            $this->contentService->getFiltered(
-                1,
-                'null',
-                'slug',
-                ['instructor'],
-                [],
-                [],
-                [],
-                [],
-                [],
-                [],
-                true
-            )['results']
-        );
-
-        $thisCoach = null;
-
-        foreach ($coaches as $coach) {
-            if ($coach['slug'] == $coachSlug) {
-                $thisCoach = $coach;
-                break;
-            }
-        }
-
+        $thisCoach = $this->contentService->getBySlugAndType($coachSlug, 'instructor')->first();
         if (empty($thisCoach)) {
             throw new NotFoundHttpException();
         }
@@ -506,10 +458,11 @@ class CoachPagesController extends Controller
             $request->get('included_user_states', [])
         ))->toResponseRawJson();
 
-        return view('members.content.lesson', [
-            "parentType" => 'coach-stream',
-            "lessonType" => 'coach-stream',
+        return view('content.lesson', [
+            "parentType" => null,
+            "lessonType" => $lessonContent['type'],
             "lessonContent" => $lessonContent,
+            "parent" => null,
             "parentChildren" => $parentChildren,
             "hasSiblings" => !empty($parentChildren),
             "nextChild" => $nextChild,
@@ -521,9 +474,8 @@ class CoachPagesController extends Controller
             "hasLessonInfo" => $hasLessonInfo,
             "thisLessonJson" => $thisLessonJson,
             "nextLessonJson" => content_to_json($nextChild),
-            "coach" => $coach,
             "showEmail" => false,
+            "coach" => $thisCoach,
         ]);
     }
-
 }

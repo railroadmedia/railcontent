@@ -11,7 +11,7 @@ return [
 //        \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
 //
 ////        \App\Http\Middleware\SetContentPermissions::class,
-////        \Railroad\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class
+////        \App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class
 //    ],
     'user-middleware' => [
 //        \Railroad\MusoraApi\Middleware\AuthIfTokenExist::class,

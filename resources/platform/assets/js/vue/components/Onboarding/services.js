@@ -4,6 +4,10 @@ export const saveDisplayName = ({ name, userId }) => {
     return axios.patch(`/user-management-system/user/update/${userId}`, { display_name: name });
 };
 
+export const checkDisplayName = ({ name }) => {
+    return axios.get(`/user-management-system/is-display-name-unique`, { params: { display_name: name } });
+};
+
 export const saveGear = ({ data, brand }) => {
     return axios.post(`/user-management-system/onboarding-gears`, { data, brand });
 };

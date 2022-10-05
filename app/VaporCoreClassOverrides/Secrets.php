@@ -91,19 +91,13 @@ class Secrets
                 try {
                     $parsedDotEnv = Dotenv::parse($value);
 
-                    echo "Found DOT_ENV_ file [{$key}] secret which will be parsed as a .env file.";
-                    var_dump($parsedDotEnv);
-
                     self::setEnvironmentVariables($parsedDotEnv);
-
                 } catch (InvalidFileException $e) {
                     echo "Failed to parse dot env secret [{$key}] into runtime." . PHP_EOL;
                 }
 
                 continue;
             }
-
-            echo "Injecting secret [{$key}] into runtime." . PHP_EOL;
 
             $_ENV[$key] = $value;
             $_SERVER[$key] = $value;

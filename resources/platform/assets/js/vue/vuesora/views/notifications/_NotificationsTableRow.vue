@@ -1,9 +1,9 @@
 <template>
     <a :href="linkedContent.url"
-        class="tw-flex tw-flex-row dark:tw-bg-transparent tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
+        class="tw-flex tw-flex-col md:tw-flex-row dark:tw-bg-transparent tw-border-b-[#223F57] tw-border-b-[1px] relative no-decoration tw-justify-between dark:tw-text-white tw-py-[24px]"
         :class="isRead ? 'tw-bg-[#e4e4e7] dark:tw-bg-[#102230]' : ''">
         <div class="tw-flex">
-            <div class="tw-flex tw-flex-col tw-justify-center">
+            <div class="tw-flex tw-flex-col md:tw-justify-center">
                 
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">
                     <!-- User Avatar -->
@@ -37,7 +37,7 @@
             </div>
 
         </div>
-        <div class="tw-flex">
+        <div class="tw-flex tw-mt-2 md:tw-mt-0 tw-justify-end tw-w-full md:tw-w-auto">
             <div class="tw-flex tw-flex-col tw-justify-center">
                 <div title="Delete" @click.stop.prevent="deleteNotification(id)">
                     <TrashIcon class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc] tw-ml-[35px]" />

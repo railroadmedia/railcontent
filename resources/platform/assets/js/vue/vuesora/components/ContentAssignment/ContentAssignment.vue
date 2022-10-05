@@ -19,7 +19,7 @@
                     <div class="flex flex-column">
                         <div class="flex flex-row align-v-center">
                             <div class="flex flex-column pointer" @click="openAssignment">
-                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white">
+                                <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white md:tw-mr-4">
                                     {{ title }} 
                                 </h3>
                             </div>
@@ -36,19 +36,19 @@
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row tw-justify-end">
+                <div class="flex flex-row tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
                     
                     <button id="open-exercise-button" 
                             v-if="soundsliceSlug" 
-                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] mr-1 tw-w-[250px]" 
+                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]" 
                             @click="openExercise">
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
     
-                    <button class="tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
-                            <i class="fas fa-check mr-1"></i>
-                            {{ isComplete ? 'Completed' : 'Complete' }}
-                        </button>
+                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                        <i class="fas fa-check mr-1"></i>
+                        {{ isComplete ? 'Completed' : 'Complete' }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -68,11 +68,18 @@
                                     </div>
                                 </div>
     
-                                <div v-if="currentPage > 1" class="side-button prev flex-center" @click="scrollToPage(currentPage - 1)">
-                                    <i class="fas fa-chevron-left"></i>
+                                <div v-if="currentPage > 1" 
+                                     class="side-button prev flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
+                                     @click="scrollToPage(currentPage - 1)"
+                                >
+                                    <i class="fas fa-chevron-left dark:tw-text-white"></i>
                                 </div>
-                                <div v-if="currentPage < $_totalPages" class="side-button next flex-center" @click="scrollToPage(currentPage + 1)">
-                                    <i class="fas fa-chevron-right"></i>
+                                
+                                <div v-if="currentPage < $_totalPages" 
+                                     class="side-button next flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
+                                     @click="scrollToPage(currentPage + 1)"
+                                >
+                                    <i class="fas fa-chevron-right dark:tw-text-white"></i>
                                 </div>
     
                                 <div v-if="$_totalPages > 1" class="page-buttons">
@@ -105,7 +112,7 @@
                             </button>
                         </div>
                         <div class="tw-flex tw-flex-column self-center tw-text-center tw-flex-grow">
-                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center">
+                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center tw-px-2 tw-w-full">
                                 {{ title }}
                             </h2>
                         </div>
@@ -269,8 +276,8 @@ export default {
         accordionButtonClasses() {
             return {
                 inverted: this.accordionActive,
-                'text-grey-3': this.accordionActive,
-                'text-white': !this.accordionActive,
+                'text-grey-3 dark:tw-text-[#7E9AB1] dark:tw-border-[#7E9AB1]': this.accordionActive,
+                'dark:tw-bg-[#7E9AB1] dark:tw-text-[#000C17] text-white': !this.accordionActive,
             };
         },
 

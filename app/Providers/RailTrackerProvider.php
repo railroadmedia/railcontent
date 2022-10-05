@@ -3,13 +3,28 @@
 namespace App\Providers;
 
 use Railroad\MusoraApi\Contracts\RailTrackerProviderInterface;
+use Railroad\Railtracker\Trackers\MediaPlaybackTracker;
 
 class RailTrackerProvider implements RailTrackerProviderInterface
 {
+private MediaPlaybackTracker $mediaPlaybackTracker;
+
+    /**
+     * @param MediaPlaybackTracker $mediaPlaybackTracker
+     */
+    public function __construct(MediaPlaybackTracker $mediaPlaybackTracker)
+    {
+        $this->mediaPlaybackTracker = $mediaPlaybackTracker;
+    }
 
     public function trackMediaType($type, $category)
     : string {
-        // TODO: Implement trackMediaType() method.
+        $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType(
+            $type,
+            $category
+        );
+
+        return $mediaTypeId;
     }
 
     public function trackMediaPlaybackStart(
@@ -22,11 +37,27 @@ class RailTrackerProvider implements RailTrackerProviderInterface
         $startedOn = null
     )
     : array {
-        // TODO: Implement trackMediaPlaybackStart() method.
+
+        return $this->mediaPlaybackTracker->trackMediaPlaybackStart(
+            $mediaId,
+            $mediaLengthSeconds,
+            $userId,
+            $typeId,
+            $currentSecond,
+            $secondsPlayed,
+            brand(),
+            $startedOn
+        );
     }
 
     public function trackMediaPlaybackProgress($sessionId, $secondsPlayed, $currentSecond, $lastUpdatedOn = null)
     : ?array {
-        // TODO: Implement trackMediaPlaybackProgress() method.
+        return  $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+            $sessionId,
+            $secondsPlayed,
+            $currentSecond,
+            $lastUpdatedOn,
+            brand()
+        );
     }
 }

@@ -1,11 +1,18 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
+    {{-- <!-- Main --> --}}
+    <title>Contact Us | Musora</title>
+    <meta name="description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, Pianote, and Singeo. ">
+    <meta property="og:title" content="Contact Us">
+    <meta property="og:description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, Pianote, and Singeo. ">
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-@stop
+@endsection
 
-{{-- <!-- Main --> --}}
+<!-- Main -->
 @section('layout-body')
 
     <section class="py-24 md:py-40 text-white text-center relative">

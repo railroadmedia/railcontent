@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Modules\EventDataSynchronizer\Jobs;
+
+use Exception;
+use App\Modules\CustomerIO\Services\CustomerIoService;
+use Throwable;
+
+class CustomerIoSendTransactionalEmail extends CustomerIoBaseJob
+{
+    /**
+     * @var string
+     */
+    private $accountName;
+
+    /**
+     * @var integer
+     */
+    private $customerIoTransactionalMessageId;
+
+    /**
+     * @var string
+     */
+    private $customerEmail;
+
+    /**
+     * @var array
+     */
+    private $messageDataArray;
+
+    public function __construct(
+        $accountName,
+        $customerIoTransactionalMessageId,
+        $customerEmail,
+        $messageDataArray = []
+    ) {
+        $this->accountName = $accountName;
+        $this->customerIoTransactionalMessageId = $customerIoTransactionalMessageId;
+        $this->customerEmail = $customerEmail;
+        $this->messageDataArray = $messageDataArray;
+    }
+
+    /**
+     * @param  CustomerIoService  $customerIoService
+     * @throws \Throwable
+     */
+    public function handle(
+        CustomerIoService $customerIoService
+    ) {
+        try {
+            $customerIoService->sendTransactionalEmail(
+                $this->accountName,
+                $this->customerIoTransactionalMessageId,
+                $this->customerEmail,
+                $this->messageDataArray
+            );
+        } catch (Exception $exception) {
+            $this->failed($exception);
+        }
+    }
+
+    /**
+     * The job failed to process.
+     *
+     * @param  Throwable  $exception
+     */
+    public function failed(Throwable $exception)
+    {
+        error_log(
+            'Error on CustomerIoSendTransactionalEmail job trying send an email from customer.io. '.
+            '$accountName='.$this->accountName.' - '.
+            '$customerIoTransactionalMessageId='.$this->customerIoTransactionalMessageId.' - '.
+            '$customerEmail='.$this->customerEmail.' - '.
+            '$messageDataArray='.var_export($this->messageDataArray).' - '
+        );
+
+        error_log($exception);
+
+        parent::failed($exception);
+    }
+}

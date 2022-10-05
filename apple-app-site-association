@@ -1,0 +1,22 @@
+{
+    "applinks":{
+        "apps":[],
+        "details":[
+            {
+                "appID":"7RM4D35J2P.com.musoraapp",
+                "paths": [
+                "NOT /drumeo/referral/*",
+                "NOT /pianote/referral/*",
+                "NOT /guitareo/referral/*",
+                "NOT /singeo/referral/*",
+                "/drumeo/*",
+                "/pianote/*",
+                "/guitareo/*",
+                "/singeo/*",
+                "/login/",
+                "NOT /*"
+                ]
+            }
+        ]
+    }
+}

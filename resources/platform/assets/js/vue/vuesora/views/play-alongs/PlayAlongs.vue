@@ -135,6 +135,11 @@ export default {
         InputLabel
     },
     mixins: [ThemeClasses, UserCatalogueEvents, EventHandlers],
+    inject: {
+        isSidebarCollapsed: {
+            from: 'isSidebarCollapsed'
+        }
+    },
     props: {
         brand: {
             type: String,
@@ -252,7 +257,7 @@ export default {
                 required_fields: this.parseRequiredFields(),
                 page: this.page,
                 limit: this.limit,
-                required_parent_ids: this.showFavoritesOnly ? [this.userPlaylistId] : undefined,
+                only_from_my_list: this.showFavoritesOnly,
                 required_user_states: this.showCompletedOnly ? ['completed'] : undefined,
                 sort: this.sort,
             };
@@ -320,6 +325,7 @@ export default {
                 included_types: ['play-along'],
                 statuses: ['published'],
                 include_future: 0,
+                only_from_my_list: this.showFavoritesOnly
             })
                 .then((response) => {
                     if (response) {
@@ -471,8 +477,8 @@ export default {
                 });
             }
 
-            if (urlParams.required_parent_ids != null
-                && urlParams.required_parent_ids.indexOf(this.userPlaylistId) !== -1) {
+            if (urlParams.only_from_my_list != null
+                && urlParams.only_from_my_list == 1) {
                 this.showFavoritesOnly = true;
             }
 
@@ -541,7 +547,7 @@ export default {
 
             if (!resume) {
                 this.$nextTick(() => {
-                    const domElement = this.$refs[`list${this.activeItem.id}`].$el;
+                    const domElement = this.$refs[`list${this.activeItem.id}`][0].$el;
                     domElement.scrollIntoView({ block: "start" })
                 });
             }
@@ -700,7 +706,7 @@ export default {
         },
 
         handleAnchorMouseDown(anchor) {
-            this.anchorMouseDown.anchor = true;
+            this.anchorMouseDown[anchor] = true;
         },
 
         handleAnchorButtonClick(anchor) {
@@ -712,7 +718,7 @@ export default {
                 offset = 0;
             }
 
-            this.anchorOffsets.anchor = offset;
+            this.anchorOffsets[anchor] = offset;
         },
 
         resetAnchors() {
@@ -755,7 +761,8 @@ export default {
         },
 
         getDurationOffsetPercentageByMousePosition() {
-            return (this.currentMousePosition.x / this.$refs.progressBar.$el.clientWidth) * 100;
+            const sidebarOffset = this.isSidebarCollapsed ? 68 : 256;
+            return ((this.currentMousePosition.x - sidebarOffset) / this.$refs.progressBar.$el.clientWidth) * 100;
         },
 
         mouseUpEventHandler() {
@@ -964,6 +971,7 @@ export default {
                 mediaType: 'practice',
                 mediaCategory: 'play-alongs',
                 sessionToken: this.sessionToken,
+                brand: this.brand,
             });
         },
 

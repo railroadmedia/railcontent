@@ -1,4 +1,4 @@
-<div class="tw-relative tw-bg-black tw--mb-7">
+<div class="tw-relative tw-bg-black">
     <div class="tw-text-white">
         <div class="sm:tw-py-12 md:tw-py-12 lg:tw-py-16 tw-py-16 tw-px-14">
             <div class="tw-flex tw-flex-col-reverse lg:tw-flex-row">

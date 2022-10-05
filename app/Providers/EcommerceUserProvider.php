@@ -107,7 +107,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
      */
     public function getCurrentUserId(): ?int
     {
-        return user()->id;
+        return user()->id ?? null;
     }
 
     /**
@@ -200,8 +200,10 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
     public function getUserAuthToken(EcommerceUser $user): string
     {
         $user = User::query()->find($user->getId());
+        $token = $user->createToken('ios');
+        $user->withAccessToken($token);
 
-        return $user->currentAccessToken();
+        return $token->plainTextToken;
     }
 
     /**
@@ -213,7 +215,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
         $user = User::query()->where('email', $email)->first();
 
         if ($user) {
-            return new EcommerceUser($user->getId(), $user->getEmail());
+            return new EcommerceUser($user->id, $user->email);
         }
 
         return null;

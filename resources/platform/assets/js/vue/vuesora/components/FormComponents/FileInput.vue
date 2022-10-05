@@ -1,7 +1,7 @@
 <template>
     <div class="tw-file-field" :disabled="disabled">
         <label :for="id" 
-               class="tw-btn-secondary tw-text-gray-400 sm:tw-btn-small"
+               class="tw-btn-secondary tw-text-gray-400 dark:tw-text-[#7E9AB1] sm:tw-btn-small"
                :aria-required="required"
                :aria-invalid="invalid"
                :aria-valid="valid"

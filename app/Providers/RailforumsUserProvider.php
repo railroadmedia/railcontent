@@ -154,12 +154,17 @@ class RailforumsUserProvider implements UserProviderInterface
      */
     private function forumUserFromUserModel(User $userModel)
     {
+
         return new ForumUser(
             $userModel->id,
             $userModel->display_name,
             $userModel->profile_picture_url,
             $userModel->created_at,
-            $userModel->timezone ?? ''
+            $userModel->timezone ?? '',
+            $userModel->getAttributes()['total_xp'] ?? 0,
+            $userModel->getXpRank(),
+            $userModel->getMethodLevel(),
+           $userModel->getAttributes()['access_level'] ?? ''
         );
     }
 }

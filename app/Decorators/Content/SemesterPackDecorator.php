@@ -21,8 +21,8 @@ class SemesterPackDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             if (($content['completed'] ?? false) !== true) {
-//                $contentsOfType[$contentIndex]['next_lesson_url'] =
-//                    url()->route('packs.jump-to-next-lesson', [$content['id']]);
+                $contentsOfType[$contentIndex]['next_lesson_url'] =
+                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
             }
         }
 

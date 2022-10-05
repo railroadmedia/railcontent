@@ -2,7 +2,9 @@ id: 31058
 name: musora-web-platform
 environments:
     production:
-        domain: 'platform.musora.com'
+        domain:
+            - 'musora.com'
+            - 'production.musora.com'
         runtime: docker
         gateway-version: 2
         memory: 1728
@@ -72,9 +74,6 @@ environments:
             - 'php artisan event:clear'
             - 'php artisan route:clear'
             - 'php artisan view:cache'
-            - 'php artisan event:cache'
-            - 'php artisan route:cache'
-            - 'php artisan view:cache'
             - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-two:
         domain: 'web-staging-two.musora.com'
@@ -125,7 +124,7 @@ environments:
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
         build:
-            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install'
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'

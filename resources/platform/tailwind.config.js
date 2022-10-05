@@ -27,6 +27,10 @@ module.exports = {
       screens: {
         '3xl': '1815px',
         '4xl': '2256px',
+        'hover-hover': {
+          //only hover on non-touch devices
+          'raw': '(hover: hover)',
+        },
       },
       animation: {
         'grow-shrink': 'grow-shrink 1.25s infinite'
@@ -102,7 +106,7 @@ module.exports = {
           'ul, ol': {
             listStyle: 'revert',
             paddingLeft: '40px',
-            marginBottom: '10px',
+            margin: '10px 0',
           }
         }
       })

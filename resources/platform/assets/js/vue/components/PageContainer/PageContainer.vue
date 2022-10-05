@@ -1,6 +1,10 @@
 <script setup>
-import { ref, computed, provide, onBeforeMount, onMounted, onUnmounted } from "vue";
+import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
+import { useNotificationStore } from '../../../stores/notification';
+import { useConfirmationStore } from '../../../stores/confirmation';
+import NotificationToasts from '../../vuesora/components/NotificationToasts/NotificationToasts.vue';
 import Navbar from "../Navbar/Navbar.vue";
+import ConfirmationModal from "../Modal/ConfirmationModal.vue";
 import Sidebar from "../Sidebar/Sidebar.vue";
 import Footer from "../Footer/Footer.vue";
 // import { useRouter, useRoute } from "vue-router";
@@ -38,19 +42,24 @@ const props = defineProps({
   forceSidebarHidden: {
     type: Boolean,
     default: false
-  }
+  },
+  adminMessage: {
+    type: String,
+  },
 });
+
+const notification = useNotificationStore();
+const confirmation = useConfirmationStore();
 
 const isSidebarCollapsed = ref(false);
 const isSidebarHidden = ref(false);
 const isDarkModeSelected = ref(false);
 
 provide('isDarkModeSelected', isDarkModeSelected);
-provide('userAvatar', props.userAvatar)
-provide('userName', props.userName)
-provide('userId', props.userId)
-// const route = useRoute();
-// const router = useRouter();
+provide('userAvatar', props.userAvatar);
+provide('userName', props.userName);
+provide('userId', props.userId);
+provide('isSidebarCollapsed', isSidebarCollapsed);
 
 const setDarkMode = (isSelected) => {
   const body = document.getElementById("app-body");
@@ -76,7 +85,7 @@ const onCollapseSidebar = (val) => {
       isSidebarHidden.value = false;
       isSidebarCollapsed.value = !isSidebarCollapsed.value;
       //Dom manipulation... 
-      if(isSidebarCollapsed.value) {
+      if (isSidebarCollapsed.value) {
         document.body.classList.add('sidebar-collapsed')
       } else {
         document.body.classList.remove('sidebar-collapsed')
@@ -118,24 +127,43 @@ onBeforeMount(() => {
 
   if (smallBreakpoint.matches) {
     //Close sidebar by default in mobile
-    if(!isSidebarHidden.value) {
+    if (!isSidebarHidden.value) {
       isSidebarHidden.value = true;
       isSidebarCollapsed.value = false;
     }
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
-      //Dom manipulation... 
-      if(isSidebarCollapsed.value) {
-        document.body.classList.add('sidebar-collapsed')
-      } else {
-        document.body.classList.remove('sidebar-collapsed')
-      }
+    //Dom manipulation... 
+    if (isSidebarCollapsed.value) {
+      document.body.classList.add('sidebar-collapsed')
+    } else {
+      document.body.classList.remove('sidebar-collapsed')
+    }
   } else if (props.forceSidebarHidden) {
     isSidebarCollapsed.value = true;
   }
   setEndpointPrefix();
+
+  // Attach notification push to window
+  window.shownotification = (n) => {
+    notification.push(n);
+  };
+
+// Attach confirmation update to window
+window.showconfirmationmodal = (n) => {
+  confirmation.update(n);
+};
 })
+
+const handleCloseConfirmationModal = () => {
+  confirmation.callbacks.cancel();
+  confirmation.reset();
+};
+
+const handleNotificationClear = () => {
+  notification.clear();
+};;
 
 const onResize = (e) => {
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
@@ -159,11 +187,22 @@ onUnmounted(() => {
 <template>
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" @onClose="handleNotificationClear" />
+    <ConfirmationModal
+      v-if="confirmation.title"
+      :brand="brand"
+      modalId="confirmation-modal"
+      @onClose="handleCloseConfirmationModal"
+      :title="confirmation.title"
+      :subtitle="confirmation.subtitle"
+      @onCancel="handleCloseConfirmationModal"
+      @onSubmit="confirmation.callbacks.submit"
+    />
 
-    <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications" :user-name="userName" :userAvatar="userAvatar"
-      :account-url="accountUrl" :isSidebarHidden="isSidebarHidden" :isDarkModeSelected="isDarkModeSelected"
-      :isSidebarCollapsed="isSidebarCollapsed" @onCollapseSidebar="onCollapseSidebar"
-      @onColorModeToggle="onColorModeToggle" />
+    <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
+      :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"
+      :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="isSidebarCollapsed"
+      @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->
     <div class="
@@ -174,7 +213,8 @@ onUnmounted(() => {
 
       <!-- Sidebar -->
       <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
-        :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar" :forceSidebarHidden="forceSidebarHidden" />
+        :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
+        :forceSidebarHidden="forceSidebarHidden" />
 
       <!-- Content Container -->
       <main class="
@@ -189,13 +229,16 @@ onUnmounted(() => {
           tw-overflow-x-hidden
           tw-scroll-smooth
         " id="content-container">
+        <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
+          {{ adminMessage }}
+        </h2>
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full">
-          <slot :is-dark-mode="isDarkModeSelected"/>
+          <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 
         <!-- Footer -->
-        <Footer :brand="brand"/>
+        <Footer :brand="brand" />
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">

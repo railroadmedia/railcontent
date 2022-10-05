@@ -5,7 +5,6 @@
                 "title" => 'Home',
                 "url" => url()->route('platform.home')
             ],
-
             [
                 "title" => $firstContent->fetch('fields.title'),
                 "url" => $firstContent->fetch('url')
@@ -20,23 +19,39 @@
         ]
     ])
 @elseif($lessonType === 'learning-path-lesson')
-        @include('partials.bladesora.members.navigation.breadcrumbs', [
-            "pages" => [
-                [
-                    "title" => $brand.' Method',
-                    "url" => url()->route('platform.content.first-level', ['method', $firstContent['slug'], $firstContent['id']])
-                ],
-                [
-                    "title" => $parent->fetch('fields.title'),
-                    "url" => $parent->fetch('url')
-                ],
-                [
-                    "title" => $lessonContent->fetch('fields.title')
-                ]
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+            [
+                "title" => $brand.' Method',
+                "url" => url()->route('platform.content.first-level', ['method', $firstContent['slug'], $firstContent['id']])
+            ],
+            [
+                "title" => $parent->fetch('fields.title'),
+                "url" => $parent->fetch('url')
+            ],
+            [
+                "title" => $lessonContent->fetch('fields.title')
             ]
-        ])
+        ]
+    ])
+@elseif($lessonType === 'coach-stream')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        "pages" => [
+           [
+                        "title" => 'Coaches',
+                        "url" => url()->route('platform.coaches'),
+                    ],
+                      [
+                        "title" => !empty($coach->fetch('fields.title')) ? $coach->fetch('fields.title') : $coach->fetch('fields.name'),
+                        "url" => $coach->fetch('url')
+                    ],
+                    [
+                        "title" => $lessonContent->fetch('fields.title')
+                    ]
+        ]
+    ])
 @elseif(!empty($pack))
-    @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
+    @if($theme ?? '' === 'made-easy' || $pack->fetch('bundle_count') <= 1)
         @include('partials.bladesora.members.navigation.breadcrumbs', [
             "pages" => [
                 [
@@ -45,15 +60,35 @@
                 ],
                 [
                     "title" => "Packs",
-                    "url" => url()->route('members.packs.index'),
+                    "url" => url()->route('platform.packs'),
                 ],
                 [
                     "title" => $pack->fetch('fields.title'),
-                    "url" => $pack['url'],
+                    "url" => $pack->fetch('url'),
+                ],
+                [
+                    "title" => $lessonContent->fetch('fields.title')
+                ]
+            ]
+        ])
+    @else
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => 'Home',
+                    "url" => url()->route('platform.home'),
+                ],
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title'),
+                    "url" => $pack->fetch('url'),
                 ],
                 [
                     "title" => $parent->fetch('fields.title'),
-                    "url" => $parent['url'],
+                    "url" => $parent->fetch('url')
                 ],
                 [
                     "title" => $lessonContent->fetch('fields.title')

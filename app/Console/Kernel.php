@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
+use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         PopulateUserRolesTable::class,
         RunMWPPhaseOneLaunchMigrations::class,
         MigrateCoachesToInstructors::class,
+        PopulateUserBrandLevel::class
     ];
 
     /**

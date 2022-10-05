@@ -38,14 +38,14 @@ const getSavedExperience = (selectedExperience) => {
   return multiSelectMap;
 };
 
-export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions }) => {
+export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, selectedTopics, selectedGenres, selectedExperience, configOptions, instrument }) => {
   return ({
       user: {
           id: userId,
           name: userName || null,
           avatarUrl: userAvatar || null
       },
-      instrument: 'default',
+      instrument: instrument || 'default',
       instrumentTypes: getSavedMultiSelect({ options: selectedGear, plural: 'gears', singular: 'gear', configOptions }),
       experience: getSavedExperience(selectedExperience.length ? selectedExperience : [selectedExperience]),
       genres: getSavedMultiSelect({ options: selectedGenres, plural: 'genres', singular: 'genre', configOptions }),
@@ -71,14 +71,16 @@ export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, s
     } else {
       return selectedExperience.brand === brand;
     }
-  }
+  };
   const hasGenres = !!selectedGenres.find(genre => genre.brand === brand);
   const hasTopics = !!selectedTopics.find(topic => topic.brand === brand);
 
   if (hasGear) {
+    newSteps[0].checked = true;
+    newSteps[1].checked = true;
     newSteps[2].checked = true;
   }
-  if (hasExperience) {
+  if (hasExperience()) {
     newSteps[3].checked = true;
   }
   if (hasGenres) {

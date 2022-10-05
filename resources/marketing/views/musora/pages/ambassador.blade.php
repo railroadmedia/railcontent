@@ -57,7 +57,13 @@
             </ul>
         </div>
     </section>
-    <section class="bg-cover bg-center text-center text-white py-8 md:py-10 lg:py-14 px-4 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-piano.jpg" style="background-color:#030d1c;">
+    <section class="bg-cover bg-center text-center text-white py-8 md:py-10 lg:py-14 px-4 relative">
+        {{-- background --}}
+        <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-piano.jpg"
+            class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
         <div class="container mx-auto max-w-6xl relative z-0">
             <h3><strong>How Do I Start?</strong></h3>
             <div class="flex flex-wrap my-8 md:my-12 lg:my-16">
@@ -212,7 +218,7 @@
         </section>
     </div>
 
-    <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg">
+    <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative">
         <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg"
             class="absolute object-cover transition-opacity opacity-0 z-[-2] w-full h-full top-0 left-0 object-cover"
             loading="lazy"
