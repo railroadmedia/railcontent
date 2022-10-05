@@ -25,8 +25,6 @@ private CommentService $commentService;
 
     public function getContentById($id)
     {
-        ContentRepository::$bypassPermissions = true;
-
         return $this->contentService->getById($id);
     }
 

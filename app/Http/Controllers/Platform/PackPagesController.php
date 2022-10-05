@@ -59,10 +59,6 @@ class PackPagesController extends Controller
     {
         ContentRepository::$pullFutureContent = true;
 
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
         $packs = (new PackCollection(
             $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'])['results']
         ))->sortByUserActivity(user()->id);
@@ -92,10 +88,6 @@ class PackPagesController extends Controller
     public function packBundles(Request $request, $domain, $brand, $packSlug, $packId)
     {
         ContentRepository::$pullFutureContent = true;
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
 
         $pack = $this->contentService->getById($packId);
 
@@ -162,10 +154,6 @@ class PackPagesController extends Controller
         $packBundleId
     ) {
         ContentRepository::$pullFutureContent = true;
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
 
         $pack = $this->contentService->getById($packId);
 
@@ -269,10 +257,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         $pack =
@@ -380,10 +364,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         $pack =
@@ -555,10 +535,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         $pack =

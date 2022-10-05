@@ -21,6 +21,7 @@ use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -79,9 +80,6 @@ class ContentPagesController extends BaseController
     {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
-
-        ConfigService::$availableBrands = [brand()];
-        ContentRepository::$bypassPermissions = true;
 
         if ($contentTypeName == 'lessons' && $brand == 'guitareo') {
             return $this->guitareoLessonsPage($request, $domain, $brand);
@@ -216,7 +214,6 @@ class ContentPagesController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
-        ContentRepository::$bypassPermissions = true;
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
@@ -983,9 +980,9 @@ class ContentPagesController extends BaseController
         $this->contentService->idContentCache = [];
 
         // all members have access to all packs atm
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
+//        if (user()->isAMember()) {
+//            ContentRepository::$bypassPermissions = true;
+//        }
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
@@ -1490,11 +1487,14 @@ class ContentPagesController extends BaseController
         Request $request,
         $domain, $brand,
         $contentId, $commentId){
-        ContentRepository::$bypassPermissions = true;
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
         $content = $this->contentService->getById($contentId);
+
+        if (empty($content)) {
+            throw new NotFoundHttpException();
+        }
 
         $url = $content->fetch('url', '');
 

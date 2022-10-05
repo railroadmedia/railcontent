@@ -30,7 +30,7 @@ Route::group(
         )
             ->name('user_management_system.user.delete');
 
-        Route::get(
+        Route::any(
             'user/show/{id}',
             UserController::class . '@read'
         )
