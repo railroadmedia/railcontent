@@ -44,6 +44,7 @@ return [
     'autoload_all_routes' => true,
     'route_middleware_public_groups' => ['web_or_api_public'],
     'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
+    'route_middleware_mobile_app_receipt_validation_groups' => ['api_public'],
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',
