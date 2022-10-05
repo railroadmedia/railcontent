@@ -69,6 +69,51 @@
     </script>
 @endsection
 
+@if(!empty($subscription))
+    @php
+        switch ($subscription->getIntervalCount()) {
+            case 2:
+                $intervalCountAsWord = 'two';
+                break;
+            case 3:
+                $intervalCountAsWord = 'three';
+                break;
+            case 4:
+                $intervalCountAsWord = 'four';
+                break;
+            case 5:
+                $intervalCountAsWord = 'five';
+                break;
+            case 6:
+                $intervalCountAsWord = 'six';
+                break;
+        }
+
+        $annualPriceMultiplicationFactor = 12 / $subscription->getIntervalCount();
+
+        /*
+         * Make subscription price pretty
+         * ------------------------------
+         *
+         * This does two things. In cases where there is only one decimal place, it forces the trailing zero to be
+         * shown, as is standard for pricing. For example where a price might initially be formatted as double `29.9`,
+         * we ensure at appears as a string "29.90". But in cases where the decimal numbers are two zeros
+         * (ex: "$29.00") it doesn't enforce that two-decimal-place rule, but rather transforms it to a much cleaner
+         * "$29".
+         */
+        $subcriptionPrice = $subscription->getTotalPrice();
+        $isDecimal = floor($subcriptionPrice) != $subcriptionPrice;
+
+        /** @var string $subscriptionPriceFormatted */
+        if($isDecimal) {
+            $subscriptionPriceFormatted = number_format((float) $subcriptionPrice, 2, '.', ''); // returns a string
+        } else {
+            $subscriptionPriceFormatted = (string) $subcriptionPrice;
+        }
+
+    @endphp
+@endif
+
 @section('edit-forms')
     <div id="editForm" class="tw-flex tw-flex-row">
         <div class="tw-flex tw-flex-col tw-grow">
@@ -86,14 +131,35 @@
                     @if($isLifetime)
                         <li>Lifetime Membership</li>
                     @elseif($subscription || $membershipFromOneTimeProduct)
-                        <li>Membership</li>
+
+                        @if($subscription)
+                            @if($subscription->getIntervalType() === 'month')
+                                @if($subscription->getIntervalCount() == 1)
+                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }}/month)</li>
+                                @elseif($subscription->getIntervalCount() == 2)
+                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
+                                @elseif($subscription->getIntervalCount() == 3)
+                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
+                                @elseif($subscription->getIntervalCount() == 6)
+                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
+                                @else
+                                    <li>Membership (monthly subscription)</li>
+                                @endif
+                            @elseif($subscription->getIntervalType() === 'year' && $subscription->getIntervalCount() == 1)
+                                <li>Membership (annual subscription)</li>
+                            @else
+                                <li>Membership</li>
+                            @endif
+                        @else
+                            <li>Membership</li>
+                        @endif
                     @endif
 
                     @foreach($userProductsDigitalAccessTypeSpecific as $userProduct)
                         @php
                             /** @var $product \Railroad\Ecommerce\Entities\UserProduct */
                             $product = $userProduct->getProduct();
-                        @endphp
+//                        @endphp
                         @if($product->getType() !== 'physical one time')
                             <li>{{ $product->getName() }}</li>
                         @endif
@@ -133,7 +199,7 @@
                 @if($isLifetime)
 
 
-                @elseif(!$hasHadMembership)
+                @elseif(!$hasHadMembership) {{-- has never had a membership --}}
 
 
                 @elseif(!$subscription)
@@ -168,7 +234,7 @@
                         @endif
                     @else
                         {{-- <p>default, active </p>--}}
-                        Your next renewal is for ${{ $subscription->getTotalPrice() }}
+                        Your next renewal is for ${{ $subscriptionPriceFormatted }}
                         on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
                     @endif
 
@@ -278,27 +344,6 @@
                             <p>${{ $subscription->getTotalPrice() }} per month</p>
                             <p>= ${{ $subscription->getTotalPrice() * 12 }} per year</p>
                         @else
-                            @php
-                                switch ($subscription->getIntervalCount()) {
-                                    case 2:
-                                        $intervalCountAsWord = 'two';
-                                        break;
-                                    case 3:
-                                        $intervalCountAsWord = 'three';
-                                        break;
-                                    case 4:
-                                        $intervalCountAsWord = 'four';
-                                        break;
-                                    case 5:
-                                        $intervalCountAsWord = 'five';
-                                        break;
-                                    case 6:
-                                        $intervalCountAsWord = 'six';
-                                        break;
-                                }
-
-                                $annualPriceMultiplicationFactor = 12 / $subscription->getIntervalCount();
-                            @endphp
                             <p>${{ $subscription->getTotalPrice() }} every {{ $intervalCountAsWord }} months</p>
                             <p>= ${{ $subscription->getTotalPrice() * $annualPriceMultiplicationFactor }} per year</p>
                         @endif
