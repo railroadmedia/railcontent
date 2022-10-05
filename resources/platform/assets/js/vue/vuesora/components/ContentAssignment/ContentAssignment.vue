@@ -68,12 +68,18 @@
                                     </div>
                                 </div>
     
-                                <div v-if="currentPage > 1" class="side-button prev flex-center" @click="scrollToPage(currentPage - 1)">
-                                    <i class="fas fa-chevron-left"></i>
+                                <div v-if="currentPage > 1" 
+                                     class="side-button prev flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
+                                     @click="scrollToPage(currentPage - 1)"
+                                >
+                                    <i class="fas fa-chevron-left dark:tw-text-white"></i>
                                 </div>
                                 
-                                <div v-if="currentPage < $_totalPages" class="side-button next flex-center" @click="scrollToPage(currentPage + 1)">
-                                    <i class="fas fa-chevron-right"></i>
+                                <div v-if="currentPage < $_totalPages" 
+                                     class="side-button next flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
+                                     @click="scrollToPage(currentPage + 1)"
+                                >
+                                    <i class="fas fa-chevron-right dark:tw-text-white"></i>
                                 </div>
     
                                 <div v-if="$_totalPages > 1" class="page-buttons">
@@ -106,7 +112,7 @@
                             </button>
                         </div>
                         <div class="tw-flex tw-flex-column self-center tw-text-center tw-flex-grow">
-                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center">
+                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center tw-px-2 tw-w-full">
                                 {{ title }}
                             </h2>
                         </div>
