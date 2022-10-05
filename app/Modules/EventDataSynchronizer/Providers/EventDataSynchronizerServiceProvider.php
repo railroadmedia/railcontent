@@ -46,6 +46,7 @@ use Railroad\Railcontent\Events\ContentFollow;
 use Railroad\Railcontent\Events\ContentUnfollow;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
+use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
@@ -180,6 +181,9 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         MediaPlaybackTracked::class => [
             ContentProgressEventListener::class . '@handleMediaPlaybackTracked',
         ],
+        HigherKeyProgressUpdated::class => [
+            ContentProgressEventListener::class . '@handleHeighKeyProgressUpdates',
+        ]
     ];
 
     /**
