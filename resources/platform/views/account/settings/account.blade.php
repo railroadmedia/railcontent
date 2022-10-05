@@ -115,215 +115,211 @@
 @endif
 
 @section('edit-forms')
-    <div id="editForm" class="tw-flex tw-flex-row">
-        <div class="tw-flex tw-flex-col tw-grow">
 
-            <h1>Access Details</h1>
+    <h1 class="heading tw-pl-8 tw-pt-8">Access Details</h1>
 
-            <!-- ================================= Owned products ================================= -->
+    <!-- ================================= Owned products ================================= -->
 
-            @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription || $membershipFromOneTimeProduct)
+    @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription || $membershipFromOneTimeProduct)
 
-                <div style="min-height:150px">
-                    <h2>Your Access Levels</h2>
-                    <p>Your Account includes:</p>
+        <div class="tw-flex tw-flex-col tw-p-8 body">
+            <h2 class="subheading">Your Access Levels</h2>
 
-                    @if($isLifetime)
-                        <li>Lifetime Membership</li>
-                    @elseif($subscription || $membershipFromOneTimeProduct)
+            <p class="tw-mt-3">Your account includes:</p>
+            <ul class="tw-mt-3 tw-space-y-1">
+                @if($isLifetime)
+                    <li>Lifetime Membership</li>
+                @elseif($subscription || $membershipFromOneTimeProduct)
 
-                        @if($subscription)
-                            @if($subscription->getIntervalType() === 'month')
-                                @if($subscription->getIntervalCount() == 1)
-                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }}/month)</li>
-                                @elseif($subscription->getIntervalCount() == 2)
-                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
-                                @elseif($subscription->getIntervalCount() == 3)
-                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
-                                @elseif($subscription->getIntervalCount() == 6)
-                                    <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
-                                @else
-                                    <li>Membership (monthly subscription)</li>
-                                @endif
-                            @elseif($subscription->getIntervalType() === 'year' && $subscription->getIntervalCount() == 1)
-                                <li>Membership (annual subscription)</li>
+                    @if($subscription)
+                        @if($subscription->getIntervalType() === 'month')
+                            @if($subscription->getIntervalCount() == 1)
+                                <li>Membership (subscription is ${{ $subscriptionPriceFormatted }}/month)</li>
+                            @elseif($subscription->getIntervalCount() == 2)
+                                <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
+                            @elseif($subscription->getIntervalCount() == 3)
+                                <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
+                            @elseif($subscription->getIntervalCount() == 6)
+                                <li>Membership (subscription is ${{ $subscriptionPriceFormatted }} every {{ $intervalCountAsWord }} months)</li>
                             @else
-                                <li>Membership</li>
+                                <li>Membership (monthly subscription)</li>
                             @endif
+                        @elseif($subscription->getIntervalType() === 'year' && $subscription->getIntervalCount() == 1)
+                            <li>Membership (annual subscription)</li>
                         @else
                             <li>Membership</li>
                         @endif
-                    @endif
-
-                    @foreach($userProductsDigitalAccessTypeSpecific as $userProduct)
-                        @php
-                            /** @var $product \Railroad\Ecommerce\Entities\UserProduct */
-                            $product = $userProduct->getProduct();
-//                        @endphp
-                        @if($product->getType() !== 'physical one time')
-                            <li>{{ $product->getName() }}</li>
-                        @endif
-                    @endforeach
-                </div>
-            @elseif($mostRecentSubscriptionCancelledOn)
-
-                <div>
-                    <h2>Musora Special Offer</h2>
-                    @if($activeAllContentAccessExpiryDate)
-                        @if($activeAllContentAccessExpiryDate < \Carbon\Carbon::now())
-                            <p>Your subscription to Musora has been canceled and your access ended
-                                on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact support or
-                                reorder on <a
-                                    href="/">www.Musora.com</a> to continue your membership.</p>
-                        @else
-                            <p>Your subscription to Musora has been canceled and your access will be
-                                removed on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact
-                                support
-                                or reorder on <a
-                                    href="/">www.Musora.com</a> to continue your membership.</p>
-                        @endif
                     @else
-                        {{-- todo: what to put here? --}}
-
-                        {{-- todo: what to put here? --}}
-                    @endif
-                </div>
-
-            @endif
-
-            <!-- ================================= Subscription Info Section ================================= -->
-            <p style="size:0.8em; color:grey">(Subscription Info Section)</p> <!-- todo: remove this -->
-            <div style="background:lightgrey; min-height:200px; border:1px solid grey;">
-
-
-                @if($isLifetime)
-
-
-                @elseif(!$hasHadMembership) {{-- has never had a membership --}}
-
-
-                @elseif(!$subscription)
-
-                    @if($activeAllContentAccessExpiryDate)
-                        {{-- access from non-recurring product --}}
-                        Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.
-                    @else
-                        {{-- todo: what to put here? --}}
-                    @endif
-
-                @elseif($pausedSubscriptionStartDate)
-                    <strong>Your membership is paused.</strong><br>
-                    Your membership will continue on {{ $pausedSubscriptionStartDate->format('F j, Y') }} and
-                    your next renewal date has been extended to {{ $subscription->getPaidUntil()->format('F j, Y') }}.
-                @else
-
-                    @if(!$subscription && $subscription->getPaidUntil()->gt($now))
-                        {{-- expired --}}
-
-                        Your access ended on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
-                        {{-- Might not be totally accurate because of the differnece between userproduct expiration date
-                        and subscription paid-until times, but I don't know if that's universal. But this is probably fine.
-                        Same for cancelled access below --}}
-
-                    @elseif($subscription->getCanceledOn() !== null)
-                        {{-- <p>default, cancelled </p>--}}
-                        @if($subscription->getPaidUntil()->gt($now) )
-                            Your access ended on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
-                        @else
-                            Your access is ending on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
-                        @endif
-                    @else
-                        {{-- <p>default, active </p>--}}
-                        Your next renewal is for ${{ $subscriptionPriceFormatted }}
-                        on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
+                        <li>Membership</li>
                     @endif
 
                 @endif
 
-                <p>Thank you for being a student since {{ user()->created_at->format('F j, Y') }}.</p>
+                @foreach($userProductsDigitalAccessTypeSpecific as $userProduct)
+                    @php
+                        /** @var $product \Railroad\Ecommerce\Entities\UserProduct */
+                        $product = $userProduct->getProduct();
+                    @endphp
 
-            </div>
-            &nbsp; <!-- todo: remove this &nbsp-->
+                    @if($product->getType() !== 'physical one time')
+                        <li>{{ $product->getName() }}</li>
+                    @endif
 
-            <!-- ================================= Call-to-action Section ================================= -->
-            <p style="size:0.8em; color:grey">(Call-to-action Section)</p> <!-- todo: remove this -->
-            <div style="background:lightgrey; min-height:200px; border:1px solid grey;">
-
-
-                {{-- @if($isLifetime) --}}
-                {{--<p>no_action</p>--}}
-
-                @if($accessIsFromAppPurchase)
-                    <p class="tw-mb-2">To edit your membership please use the following guides:</p>
-                    <a href="https://support.apple.com/en-us/HT202039" class="body tw-mb-2" target="_blank">
-                        For Apple users</a>
-                    <a href="https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en"
-                       class="body tw-mb-1" target="_blank">
-                        For Google users
-                    </a>
-
-                @elseif($pausedSubscriptionStartDate)
-                    <form method="post"
-                        {{-- action="{{  }}" --}} > {{-- todo: action for this --}}
-
-                        {{ csrf_field() }}
-
-                        <a href="#"
-                           onclick="this.parentNode.submit(); return false;"
-                           class="">
-                            Continue Your Membership
-                        </a>
-                    </form>
-
-                @elseif(!$hasHadMembership)
-
-                    <a href="{{ $trialUrl }}"
-                       class="">
-                        Start Free Trial
-                    </a>
-
-                @elseif(!$subscription)
-                    {{--<p>link_to_sales</p>--}}
-
-                @elseif($offerUpgradeToAnnualShowToStudent)
-
-                    <button
-                        class="mu-modal-open"
-                        id="modal-upgrade"
-                    >Ugrade
-                    </button>
-
-                    @include('account.settings.partials.cancellation.cancel-btn')
-
-                    <p>Save with an annual plan</p>
-
-                @else
-
-                    @include('account.settings.partials.cancellation.cancel-btn')
-
-                @endif
-
-            </div>
-            &nbsp; <!-- todo: remove this &nbsp-->
-
-            <!-- ================================= Get Help Request Link ================================= -->
-            <p style="size:0.8em; color:grey">(Get Help Request Link)</p> <!-- todo: remove this -->
-
-            @if($hasHadMembership)
-                <a href="#" class="tw-mt-3 tw-no-underline">
-                    <p class="mu-modal-open" id="modal-how-can-we-help">Click here if you’d like
-                        help getting the most out of your account.</p>
-                </a>
-            @endif
-            &nbsp; <!-- todo: remove this &nbsp -->
-
-
-            <!-- =================================  ================================= -->
-
-            <h1>Legacy Video Settings</h1> <!-- ikr -->
-
+                @endforeach
+            </ul>
         </div>
-    </div>
+
+    @elseif($mostRecentSubscriptionCancelledOn)
+
+        <div>
+            <h2>Musora Special Offer</h2>
+            @if($activeAllContentAccessExpiryDate)
+                @if($activeAllContentAccessExpiryDate < \Carbon\Carbon::now())
+                    <p>Your subscription to Musora has been canceled and your access ended
+                        on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact support or
+                        reorder on <a
+                            href="/">www.Musora.com</a> to continue your membership.</p>
+                @else
+                    <p>Your subscription to Musora has been canceled and your access will be
+                        removed on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}. Please contact
+                        support
+                        or reorder on <a
+                            href="/">www.Musora.com</a> to continue your membership.</p>
+                @endif
+            @else
+                {{-- todo: what to put here? --}}
+
+                {{-- todo: what to put here? --}}
+            @endif
+        </div>
+
+    @endif
+
+
+<!-- ================================= Subscription Info Section ================================= -->
+{{--            <p style="size:0.8em; color:grey">(Subscription Info Section)</p> <!-- todo: remove this -->--}}
+{{--            <div style="background:lightgrey; min-height:200px; border:1px solid grey;">--}}
+
+
+    @if($isLifetime)
+
+
+    @elseif(!$hasHadMembership) {{-- has never had a membership --}}
+
+
+    @elseif(!$subscription)
+
+        @if($activeAllContentAccessExpiryDate)
+            {{-- access from non-recurring product --}}
+            Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.
+        @else
+            {{-- todo: what to put here? --}}
+        @endif
+
+    @elseif($pausedSubscriptionStartDate)
+        <strong>Your membership is paused.</strong><br>
+        Your membership will continue on {{ $pausedSubscriptionStartDate->format('F j, Y') }} and
+        your next renewal date has been extended to {{ $subscription->getPaidUntil()->format('F j, Y') }}.
+    @else
+
+        @if(!$subscription && $subscription->getPaidUntil()->gt($now))
+            {{-- expired --}}
+
+            Your access ended on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
+            {{-- Might not be totally accurate because of the differnece between userproduct expiration date
+            and subscription paid-until times, but I don't know if that's universal. But this is probably fine.
+            Same for cancelled access below --}}
+
+        @elseif($subscription->getCanceledOn() !== null)
+            {{-- <p>default, cancelled </p>--}}
+            @if($subscription->getPaidUntil()->gt($now) )
+                Your access ended on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
+            @else
+                Your access is ending on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
+            @endif
+        @else
+            {{-- <p>default, active </p>--}}
+            Your next renewal is for ${{ $subscriptionPriceFormatted }}
+            on {{ $subscription->getPaidUntil()->format('F j, Y') }}.
+        @endif
+
+    @endif
+
+    <p>Thank you for being a student since {{ user()->created_at->format('F j, Y') }}.</p>
+
+<!-- ================================= Call-to-action Section ================================= -->
+{{--            <p style="size:0.8em; color:grey">(Call-to-action Section)</p> <!-- todo: remove this -->--}}
+{{--            <div style="background:lightgrey; min-height:200px; border:1px solid grey;">--}}
+
+
+    {{-- @if($isLifetime) --}}
+    {{--<p>no_action</p>--}}
+
+    @if($accessIsFromAppPurchase)
+        <p class="tw-mb-2">To edit your membership please use the following guides:</p>
+        <a href="https://support.apple.com/en-us/HT202039" class="body tw-mb-2" target="_blank">
+            For Apple users</a>
+        <a href="https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en"
+           class="body tw-mb-1" target="_blank">
+            For Google users
+        </a>
+
+    @elseif($pausedSubscriptionStartDate)
+        <form method="post"
+            {{-- action="{{  }}" --}} > {{-- todo: action for this --}}
+
+            {{ csrf_field() }}
+
+            <a href="#"
+               onclick="this.parentNode.submit(); return false;"
+               class="">
+                Continue Your Membership
+            </a>
+        </form>
+
+    @elseif(!$hasHadMembership)
+
+        <a href="{{ $trialUrl }}"
+           class="">
+            Start Free Trial
+        </a>
+
+    @elseif(!$subscription)
+        {{--<p>link_to_sales</p>--}}
+
+    @elseif($offerUpgradeToAnnualShowToStudent)
+
+        <button
+            class="mu-modal-open"
+            id="modal-upgrade"
+        >Ugrade
+        </button>
+
+        @include('account.settings.partials.cancellation.cancel-btn')
+
+        <p>Save with an annual plan</p>
+
+    @else
+
+        @include('account.settings.partials.cancellation.cancel-btn')
+
+    @endif
+
+
+    <!-- ================================= Get Help Request Link ================================= -->
+    <p style="size:0.8em; color:grey">(Get Help Request Link)</p> <!-- todo: remove this -->
+
+    @if($hasHadMembership)
+        <a href="#" class="tw-mt-3 tw-no-underline">
+            <p class="mu-modal-open" id="modal-how-can-we-help">Click here if you’d like
+                help getting the most out of your account.</p>
+        </a>
+    @endif
+
+
+    <!-- =================================  ================================= -->
+
+    <h1>Legacy Video Settings</h1> <!-- ikr -->
 
     {{--  ================================================= MODALS ================================================= --}}
 
