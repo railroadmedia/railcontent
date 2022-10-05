@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 
 class UserContentProgressEventListener extends Event
 {
@@ -143,16 +144,19 @@ class UserContentProgressEventListener extends Event
             }
 
             // set
+            $higherKeyProgress = $level1Position .
+                '.' .
+                $level2Position;
             $this->userContentProgressRepository->updateOrCreate([
                 'content_id' => $event->contentId,
                 'user_id' => $event->userId,
             ], [
-                'higher_key_progress' => $level1Position .
-                    '.' .
-                    $level2Position,
+                'higher_key_progress' => $higherKeyProgress,
                 'updated_on' => Carbon::now()
                     ->toDateTimeString(),
             ]);
+
+            event(new HigherKeyProgressUpdated($event->userId, $event->contentId, $higherKeyProgress));
         }
     }
 
