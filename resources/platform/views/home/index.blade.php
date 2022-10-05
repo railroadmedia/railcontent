@@ -139,7 +139,7 @@
             brand="{{ $brand }}"
             account-url="{{ user()->getDashboardUrl() }}"
             :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-            next-learning-path-level="{{ $nextLearningPathLevel }}"
+            next-learning-path-level="{{ user()->getMethodLevel() }}"
             :user-metrics="{{ json_encode($userMetrics) }}"
         ></stats-section>
 
