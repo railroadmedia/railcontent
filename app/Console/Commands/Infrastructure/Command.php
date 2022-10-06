@@ -55,7 +55,9 @@ abstract class Command extends CommandBase
         return $success;
     }
 
-
+    /**
+     * Function for chunking queries into jobs to avoid running into Lambda 15 minute execution limit
+     */
     public function withBatched(callable $getJob, $chunks = 1000, $timeout = 600): bool
     {
         Artisan::call('queue:prune-batches');

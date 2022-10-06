@@ -12,6 +12,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
+/**
+ * Base Job class for chunking queries into jobs to avoid running into Lambda 15 minute execution limit
+ */
 abstract class BatchQueryJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
