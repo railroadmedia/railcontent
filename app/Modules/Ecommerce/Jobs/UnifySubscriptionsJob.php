@@ -51,7 +51,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
         $this->logOldSubscriptions($user);
     }
 
-    public function getActiveSubscriptions(User $user) : Collection
+    public function getActiveSubscriptions(User $user): Collection
     {
         $activeSubscriptions = $user->subscriptions->where(function (Subscription $subscription) {
             return $subscription->is_active
@@ -158,8 +158,11 @@ class UnifySubscriptionsJob extends BatchQueryJob
         }
     }
 
-    public function cancelOtherSubscriptions(Collection $activeSubscriptions, ?Subscription $activeSubscription, User $user): void
-    {
+    public function cancelOtherSubscriptions(
+        Collection $activeSubscriptions,
+        ?Subscription $activeSubscription,
+        User $user
+    ): void {
         foreach ($activeSubscriptions as $subscription) {
             if ($activeSubscription != $subscription) {
                 if ($subscription->type != Subscription::TYPE_SUBSCRIPTION) {
@@ -187,6 +190,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
     {
         $oldActiveSubscriptions = $user->subscriptions->where(function (Subscription $subscription) {
             return $subscription->is_active
+                && $subscription->type == Subscription::TYPE_SUBSCRIPTION
                 && ($subscription->product?->isMembershipProduct() ?? false)
                 && $subscription->paid_until <= Carbon::now()->addDays(-14);
         })->collect();
