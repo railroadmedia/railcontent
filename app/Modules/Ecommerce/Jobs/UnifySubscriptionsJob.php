@@ -80,7 +80,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
                 }
                 $candidate = $this->compareSubscriptions($user, $current, $candidate);
             }
-            return $activeSubscriptions->first();
+            return $candidate;
         }
     }
 
@@ -119,7 +119,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
         }
 
         //Keep first active one they purchased
-        if ($current->created_at > $candidate->created_at) {
+        if ($current->created_at <= $candidate->created_at) {
             return $current;
         } else {
             return $candidate;
