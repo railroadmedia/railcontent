@@ -3,12 +3,8 @@
 namespace App\Console\Commands\Infrastructure;
 
 use Illuminate\Console\Command as CommandBase;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
-use Laravel\SerializableClosure\SerializableClosure;
 
 class BatchStatus extends CommandBase
 {
