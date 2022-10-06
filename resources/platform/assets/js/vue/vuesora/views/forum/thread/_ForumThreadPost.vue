@@ -1,9 +1,7 @@
 <template>
     <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
-        <a
-            :id="'post' + post.id"
-            style="position:relative;top:-75px;"
-        ></a>
+        <!-- Post Anchor -->
+        <a :id="'post' + post.id" class="tw-top-[-68px] tw-relative"></a>
 
         <!-- Post Header -->
         <div class="tw-flex tw-items-center">
