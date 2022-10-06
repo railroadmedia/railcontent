@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=19c13b6bc2f800d78f77dd664f5363f1",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
@@ -23,4 +24,8 @@
     "/platform/css/app.css": "/platform/css/app.css?id=2a4913e7991896b8128f5e8098667703",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=37e333d71844e8a0dc325dc686cbd71e",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0e9edc629e8b706a58e7c8f25bfbe96e"
+=======
+    "/marketing/js/app.js": "/marketing/js/app.js?id=fa8b3f1867b167da5cf0696a62b47bf3",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=8997b4ecc73d7465c9199573c16fee94"
+>>>>>>> feature-contact
 }

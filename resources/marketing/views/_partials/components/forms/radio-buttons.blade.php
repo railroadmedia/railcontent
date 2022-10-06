@@ -1,33 +1,43 @@
-<fieldset class="fieldset border-none" 
-            x-bind:aria-required="required"
-            x-bind:aria-invalid="invalid" 
-            x-bind:disabled="disabled"
->
+<fieldset class="fieldset border-none">
     <p class="fieldset-title">
         <span v-if="required" class="text-red-500">*</span>
-        {{ name }}
+        <span class="{{ $darkMode ? 'text-white' : 'text-[#00101D]' }}">{{ $label }}</span>
     </p>
     <div class="radio-group">
-        <div x-for="(button,i) in buttonsList" 
-                x-bind:key="i"
-            class="radio-field"
-        >
-            <input type="radio" 
-                    x-bind:id="'radio-'+groupName+'-'+i" 
-                    x-bind:name="groupName" 
-                    x-bind:value="button.value"
-                    x-model="selectedRadioButton">
-            <label x-bind:for="'radio-'+groupName+'-'+i">{{ button.label }}</label>
-        </div>
+        @foreach ($buttonList as $key => $button)
+            <div class="radio-field">
+                <input 
+                    type="radio" 
+                    id="radio-{{$name}}-{{$key}}" 
+                    name="{{$name}}" 
+                    value="{{$button['value']}}"
+                    x-model="formData.{{$name}}"
+                    x-on:input.change="if(invalids.{{$name}}) invalids.{{$name}} = false;"
+                >
+                <label for="radio-{{$name}}-{{$key}}" 
+                       class="{{ $darkMode ? 'text-white' : 'text-[#00101D]' }}"
+                >
+                    {{ $button['label'] }}
+                </label>
+            </div>
+        @endforeach
+        
     </div>
-    <p class="input-message" id="">
-        {{ errorMessage }}
+    <p  x-cloak class="input-message text-[#EF4444]" 
+        x-bind:class="invalids.{{$name}} ? 'block' : 'hidden'"
+    >
+        {{ $errorMessage }}
     </p>
-    <p class="text-sm italic text-blue-500" x-show="showSelectMessage">{{ selectMessage }}</p>
+    <p  x-cloak
+        class="text-sm italic {{ $darkMode ? 'text-[#a1afc9]' : 'text-blue-500' }}" 
+        x-bind:class="(formData.{{$name}} === 'Is not a member' || formData.{{$name}} === '') && 'hidden'"
+    >
+        {{$selectMessage}}
+    </p>
 </fieldset>
 
 
-
+{{-- 
 
 
 <script>
@@ -107,4 +117,4 @@ export default {
 
     // lifecycle hooks
 }
-</script>
+</script> --}}
