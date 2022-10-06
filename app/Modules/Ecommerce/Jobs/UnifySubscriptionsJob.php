@@ -100,6 +100,9 @@ class UnifySubscriptionsJob extends BatchQueryJob
 
         //if one is a trial use the other
         if (str_contains($current->product->sku, 'trial') || str_contains($candidate->product->sku, 'trial')) {
+            if(str_contains($current->product->sku, 'trial') && str_contains($candidate->product->sku, 'trial')){
+                //continue if both are trials
+            }
             if (str_contains($current->product->sku, 'trial')) {
                 return $candidate;
             } elseif (str_contains($candidate->product->sku, 'trial')) {
@@ -167,7 +170,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
     ): void {
         foreach ($activeSubscriptions as $subscription) {
             if ($activeSubscription != $subscription) {
-                if ($subscription->type != Subscription::TYPE_SUBSCRIPTION) {
+                if ($subscription->isMobile()) {
                     DB::table('ecommerce_unify_subscriptions_archive')->insert([
                         'user_id' => $user->id,
                         'subscription_id' => $subscription->id,
