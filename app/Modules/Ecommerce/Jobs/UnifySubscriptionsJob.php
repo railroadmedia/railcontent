@@ -108,11 +108,11 @@ class UnifySubscriptionsJob extends BatchQueryJob
         }
 
         //prioritize web over mobile
-        if ($current->type != $candidate->type) {
-            if ($current->type == Subscription::TYPE_SUBSCRIPTION) {
-                return $current;
+        if ($current->isMobile() != $candidate->isMobile()) {
+            if ($current->isMobile()) {
+                return $candidate;
             }
-            if ($candidate->type == Subscription::TYPE_SUBSCRIPTION) {
+            if ($candidate->isMobile()) {
                 return $current;
             }
             throw new \Exception();

@@ -46,7 +46,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  *
- *  @property ?Product $product
+ * @property ?Product $product
  */
 class Subscription extends Model
 {
@@ -107,9 +107,15 @@ class Subscription extends Model
         };
     }
 
-    public function cancel(string $cancellationReason){
+    public function cancel(string $cancellationReason): void
+    {
         $this->canceled_on = Carbon::now();
         $this->cancellation_reason = $cancellationReason;
         $this->is_active = 0;
+    }
+
+    public function isMobile(): bool
+    {
+        return $this->type == Subscription::TYPE_APPLE_SUBSCRIPTION || $this->type == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
     }
 }
