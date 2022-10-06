@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.238.0",
+            "version": "3.238.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f55a1f9e34e45d87628937f04bba170fe56015bb"
+                "reference": "451346e1581d10fbecd23e83bb8357e777036f05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f55a1f9e34e45d87628937f04bba170fe56015bb",
-                "reference": "f55a1f9e34e45d87628937f04bba170fe56015bb",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/451346e1581d10fbecd23e83bb8357e777036f05",
+                "reference": "451346e1581d10fbecd23e83bb8357e777036f05",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.238.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.238.1"
             },
-            "time": "2022-10-04T18:18:02+00:00"
+            "time": "2022-10-05T18:17:54+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4800,16 +4800,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.23.0",
+            "version": "v2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "ce8133018968ad3f801730609864c59ee45ef75f"
+                "reference": "0ad21993fbf74fdd97e739c9fff1c00603b91ef3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/ce8133018968ad3f801730609864c59ee45ef75f",
-                "reference": "ce8133018968ad3f801730609864c59ee45ef75f",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/0ad21993fbf74fdd97e739c9fff1c00603b91ef3",
+                "reference": "0ad21993fbf74fdd97e739c9fff1c00603b91ef3",
                 "shasum": ""
             },
             "require": {
@@ -4865,9 +4865,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.23.0"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.24.0"
             },
-            "time": "2022-09-06T12:59:25+00:00"
+            "time": "2022-10-05T15:41:30+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -7958,12 +7958,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "38e59524391624597e0db1424d61c29074f9dff5"
+                "reference": "9b430caff74b424cf415430fb37a14bd85126515"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/38e59524391624597e0db1424d61c29074f9dff5",
-                "reference": "38e59524391624597e0db1424d61c29074f9dff5",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9b430caff74b424cf415430fb37a14bd85126515",
+                "reference": "9b430caff74b424cf415430fb37a14bd85126515",
                 "shasum": ""
             },
             "require": {
@@ -7995,7 +7995,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-09-29T13:35:50+00:00"
+            "time": "2022-10-06T09:32:52+00:00"
         },
         {
             "name": "railroad/permissions",
