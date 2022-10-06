@@ -100,7 +100,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
 
         //if one is a trial use the other
         if (str_contains($current->product->sku, 'trial') || str_contains($candidate->product->sku, 'trial')) {
-            if(str_contains($current->product->sku, 'trial') && str_contains($candidate->product->sku, 'trial')){
+            if (str_contains($current->product->sku, 'trial') && str_contains($candidate->product->sku, 'trial')) {
                 //continue if both are trials
             }
             if (str_contains($current->product->sku, 'trial')) {
@@ -135,7 +135,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
             case SubscriptionIntervalType::Month:
                 $monthlyPrice = 14.49;
                 if ($activeSubscription->total_price < $monthlyPrice) {
-                    $diff = $activeSubscription->total_price - $monthlyPrice;
+                    $diff = $monthlyPrice - $activeSubscription->total_price;
                     $activeSubscription->total_price = $monthlyPrice;
                     $activeSubscription->save();
                     DB::table('ecommerce_unify_subscriptions_archive')->insert([
@@ -149,7 +149,7 @@ class UnifySubscriptionsJob extends BatchQueryJob
             case SubscriptionIntervalType::Year:
                 $yearlyPrice = 147;
                 if ($activeSubscription->total_price < $yearlyPrice) {
-                    $diff = $activeSubscription->total_price - $yearlyPrice;
+                    $diff = $yearlyPrice - $activeSubscription->total_price;
                     $activeSubscription->total_price = $yearlyPrice;
                     $activeSubscription->save();
                     DB::table('ecommerce_unify_subscriptions_archive')->insert([
