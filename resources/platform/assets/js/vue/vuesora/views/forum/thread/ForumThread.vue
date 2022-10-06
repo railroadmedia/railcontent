@@ -478,6 +478,11 @@ export default {
             iframe.setAttribute('width', '360');
             iframe.setAttribute('height', '205');
         });
+
+        //Scroll Post into view if hash exists
+        if(window.location.hash.length && document.querySelector(window.location.hash)) {
+            document.querySelector(window.location.hash).scrollIntoView({behavior: "smooth"})
+        }
     },
     methods: {
         handleFilterChange(value) {
