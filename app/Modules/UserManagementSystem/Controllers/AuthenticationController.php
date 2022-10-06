@@ -79,39 +79,9 @@ class AuthenticationController extends Controller
      */
     public function loginGeneratedKey(Request $request)
     {
-        $remember = false;
+        // auth logic is not inside middleware AuthenticateViaKeyIfAvailable
 
-        if (config('user_management_system.force_remember', false) == true ||
-            (boolean)$request->get('remember', false) == true) {
-            $remember = true;
-        }
-
-        $request->attributes->set('remember', $remember);
-
-        $userId = $request->get('user_id', '');
-        $key = $request->get('key', '');
-
-        $user = User::query()->findOrFail($userId);
-        $passedCheck = false;
-        $i = 0;
-
-        // key expires after 2 minutes
-        while ($i < 2) {
-            $hash = md5($user->id . $user->password . Carbon::now()->startOfMinute()->subMinutes($i)->toDateTimeString());
-
-            if ($hash === $key) {
-                $passedCheck = true;
-                break;
-            }
-
-            $i++;
-        }
-
-        if ($passedCheck) {
-            auth()->login($user, $remember);
-
-            event(new UserEvent($user->id, 'authenticated'));
-
+        if (!empty(user())) {
             return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
         }
 
