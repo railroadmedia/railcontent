@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('subscription_id');
             $table->string('action');
-            $table->integer('price_adjustment_amount');
+            $table->float('price_adjustment_amount');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_batches');
+        Schema::dropIfExists('ecommerce_unify_subscriptions_archive');
     }
 };

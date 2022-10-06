@@ -132,26 +132,28 @@ class UnifySubscriptionsJob extends BatchQueryJob
             case SubscriptionIntervalType::Month:
                 $monthlyPrice = 14.49;
                 if ($activeSubscription->total_price < $monthlyPrice) {
+                    $diff = $activeSubscription->total_price - $monthlyPrice;
                     $activeSubscription->total_price = $monthlyPrice;
                     $activeSubscription->save();
                     DB::table('ecommerce_unify_subscriptions_archive')->insert([
                         'user_id' => $user->id,
                         'subscription_id' => $activeSubscription->id,
                         'action' => 'price adjusted',
-                        'price_adjustment_amount' => $activeSubscription->total_price - $monthlyPrice
+                        'price_adjustment_amount' => $diff
                     ]);
                 }
                 break;
             case SubscriptionIntervalType::Year:
                 $yearlyPrice = 147;
                 if ($activeSubscription->total_price < $yearlyPrice) {
+                    $diff = $activeSubscription->total_price - $yearlyPrice;
                     $activeSubscription->total_price = $yearlyPrice;
                     $activeSubscription->save();
                     DB::table('ecommerce_unify_subscriptions_archive')->insert([
                         'user_id' => $user->id,
                         'subscription_id' => $activeSubscription->id,
                         'action' => 'price adjusted',
-                        'price_adjustment_amount' => $activeSubscription->total_price - $yearlyPrice
+                        'price_adjustment_amount' => $diff
                     ]);
                 }
                 break;
