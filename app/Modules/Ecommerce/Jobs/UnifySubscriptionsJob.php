@@ -185,20 +185,20 @@ class UnifySubscriptionsJob extends BatchQueryJob
 
     public function logOldSubscriptions(User $user): void
     {
-//        $oldActiveSubscriptions = $user->subscriptions->where(function (Subscription $subscription) {
-//            return $subscription->is_active
-//                && ($subscription->product?->isMembershipProduct() ?? false)
-//                && $subscription->paid_until <= Carbon::now()->addDays(-14);
-//        })->collect();
-//
-//        $oldActiveSubscriptions->each(function (Subscription $subscription) use ($user) {
-//            DB::table('ecommerce_unify_subscriptions_archive')->insert([
-//                'user_id' => $user->id,
-//                'subscription_id' => $subscription->id,
-//                'action' => 'paid until date in past',
-//                'price_adjustment_amount' => 0
-//            ]);
-//        });
+        $oldActiveSubscriptions = $user->subscriptions->where(function (Subscription $subscription) {
+            return $subscription->is_active
+                && ($subscription->product?->isMembershipProduct() ?? false)
+                && $subscription->paid_until <= Carbon::now()->addDays(-14);
+        })->collect();
+
+        $oldActiveSubscriptions->each(function (Subscription $subscription) use ($user) {
+            DB::table('ecommerce_unify_subscriptions_archive')->insert([
+                'user_id' => $user->id,
+                'subscription_id' => $subscription->id,
+                'action' => 'paid until date in past',
+                'price_adjustment_amount' => 0
+            ]);
+        });
     }
 
 }
