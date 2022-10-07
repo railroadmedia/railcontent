@@ -38,16 +38,6 @@ blockquote {
   }
 } 
 
-.quote-heading {
-  em { 
-    font-style:normal;
-    font-family: 'Bebas Neue', cursive;
-    letter-spacing: 1px;
-    opacity: .6;
-    text-transform:uppercase;
-  } 
-}
-
 .pinned {
   background:transparentize($recordeoYellow, 0.9);
 }
