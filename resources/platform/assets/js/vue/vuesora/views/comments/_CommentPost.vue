@@ -1,7 +1,7 @@
 <template>
     <div
         :id="domID"
-        class="tw-flex tw-flex-row comment-post pv mb-1 dark:tw-text-white"
+        class="tw-flex tw-flex-row comment-post pv mb-1 dark:tw-text-white "
         :class="{'pinned': pinned}"
     >
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-row body tw-mb-1">
+            <div class="tw-flex tw-flex-row body tw-mb-2">
                 <div
                     class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post"
                     v-html="comment.comment"
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-row tw-flex-wrap">
+            <div class="tw-flex tw-flex-row tw-flex-wrap tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-my-2 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
                         <p

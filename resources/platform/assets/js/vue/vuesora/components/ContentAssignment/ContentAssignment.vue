@@ -64,7 +64,7 @@
                             <div ref="carouselContainer" class="flex flex-row carousel tw-bg-white dark:tw-bg-transparent overflow tw-mb-3 tw-p-3">
                                 <div class="flex flex-row">
                                     <div v-for="(page, i) in $_sheet_music_pages" :key="'page' + (i + 1)" class="flex flex-column xs-12 grow page" :style="pageScrollPosition">
-                                        <img class="sheet-music-image dark:tw-invert dark:tw-opacity-70" :src="page">
+                                        <img class="sheet-music-image dark:tw-invert dark:tw-opacity-85" :src="page">
                                     </div>
                                 </div>
     
