@@ -682,20 +682,37 @@ export default {
             display: flex;
             align-items: flex-end;
             flex-wrap: wrap;
+            //defaults
+            line-height: 1.7 !important;
+            font-family: "Bebas Neue", cursive;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #52525A;
+            font-size: 1rem; 
+            margin-bottom: 15px;
 
-            strong {
-                line-height: 2;
-                margin-right: 0.25rem;
-            }
-            em {
+            strong,b {
                 line-height: 1.7;
+                margin-right: 0.25rem;
+                font-family: "Open Sans", sans-serif;
+                text-transform: none;
+                letter-spacing: 0; 
+                color: #00101D;
+            }
+
+            em {
+                line-height: 1.6;
                 padding-right: 0.25rem;
-                margin-right: auto;
+                color: #52525A;
+                font-style: normal;
             }
         }
-        body.tw-dark .quote-heading em {
+        body.tw-dark .quote-heading em,
+        body.tw-dark .quote-heading {
             color: #9EC0DC;
-            opacity: 1;
+        }
+        body.tw-dark .quote-heading strong {
+            color: white;
         }
         .post-body blockquote {
             position: relative;
