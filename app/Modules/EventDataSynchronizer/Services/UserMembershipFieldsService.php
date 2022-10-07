@@ -58,7 +58,7 @@ class UserMembershipFieldsService
             $allUsersUserProductsGroupedByUserId[$allUsersUserProduct->getUser()->getId()][] = $allUsersUserProduct;
         }
 
-        $associatedCoachesByUserId = $this->getAssociatedCoaches($userIds);
+        $associatedCoachesByUserId = $this->getCoaches();
 
         foreach ($userIds as $userId) {
             $this->sync(
@@ -239,7 +239,7 @@ class UserMembershipFieldsService
     public function isHouseCoach($userId, array $associatedCoaches = null): bool
     {
         if (!isset($associatedCoaches)) {
-            $associatedCoaches = $this->getAssociatedCoaches([$userId]);
+            $associatedCoaches = $this->getCoaches();
         }
 
         return
@@ -255,24 +255,18 @@ class UserMembershipFieldsService
     public function isCoach($userId, array $associatedCoaches = null): bool
     {
         if (!isset($associatedCoaches)) {
-            $associatedCoaches = $this->getAssociatedCoaches([$userId]);
+            $associatedCoaches = $this->getCoaches();
         }
 
         return !empty($associatedCoaches) && array_key_exists($userId, $associatedCoaches);
     }
 
     /**
-     * @param array $userIds
      * @return array
      */
-    public function getAssociatedCoaches(array $userIds): array
+    public function getCoaches(): array
     {
-        $includedFields = [];
         $associatedUsers = [];
-
-        foreach ($userIds ?? [] as $userId) {
-            $includedFields[] = 'associated_user_id,' . $userId;
-        }
 
         if (!isset($this->instructorsCache)) {
             $this->instructorsCache =
@@ -285,7 +279,7 @@ class UserMembershipFieldsService
                         [],
                         [],
                         [],
-                        $includedFields
+                        []
                     );
         }
 
