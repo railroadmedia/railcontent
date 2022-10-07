@@ -1,9 +1,7 @@
 <template>
-    <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
-        <a
-            :id="'post' + post.id"
-            style="position:relative;top:-75px;"
-        ></a>
+    <div class="tw-flex tw-relative tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
+        <!-- Post Anchor -->
+        <a :id="'post' + post.id" class="tw-top-[-68px] tw-absolute"></a>
 
         <!-- Post Header -->
         <div class="tw-flex tw-items-center">
@@ -46,19 +44,10 @@
                     class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
                     :class="['post-body', brand]"
                 >
-                    <!-- Hide/Show Replies -->
-                    <div v-if="hasShowHideButton" 
-                         class="tw-leading-none tw-cursor-pointer tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1] hover:tw-text-[#00101D] dark:hover:tw-text-white tw-transition-colors tw-inline-flex tw-items-center tw-ml-auto tw-m-0"
-                         @click="showHideQuotes"
-                    >
-                        {{ quotesHidden ? 'Show' : 'Hide' }} Replies
-                        <i class="fa-solid tw-ml-2 tw-text-base"
-                           :class="quotesHidden ? 'fa-chevrons-down' : 'fa-chevrons-up' "
-                           aria-hidden="true"></i>
-                    </div>
-
                     <div v-html="post.postBody" 
-                         :ref="'post-body'+post.id"
+                        :id="'post-body'+post.id"
+                        class="tw-text-base"
+                        :ref="'post-body'+post.id"
                     ></div>
                 </div>
                 <div
@@ -169,7 +158,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
+                    class="forumSignature tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>
@@ -199,11 +188,6 @@ export default {
         },
 
         signaturesHidden: {
-            type: Boolean,
-            default: false,
-        },
-
-        allQuotesHidden: {
             type: Boolean,
             default: false,
         },
@@ -246,8 +230,6 @@ export default {
         return {
             editing: false,
             ytEmbedCount: 0,
-            quotesHidden: false,
-            hasShowHideButton: false,
         };
     },
     computed: {
@@ -440,27 +422,51 @@ export default {
                 });
             }
         },
-
-        //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
-        showHideQuotes() {
-            if(!this.quotesHidden) {
-                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.add('tw-hidden')
-                this.quotesHidden = true;
-            } else {
-                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.remove('tw-hidden')
-                this.quotesHidden = false;
-            }
-        }
     },
     mounted() {
         //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
-        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) {
-            //show button
-            this.hasShowHideButton = true;
-            //Hide Blockquotes if prop is passed
-            if(this.allQuotesHidden) {    
-                this.quotesHidden = true;    
-                this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0].classList.add('tw-hidden')
+        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) { 
+            //Get Top Quote
+            let topQuote = this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0];
+            //Get Quote Count
+            let quoteCount = topQuote.getElementsByTagName('blockquote').length + 1; //Only Counts blockquotes within first blockquote element
+            
+            //Add ShowHide Button if there are multiple quotes
+            if(topQuote.querySelectorAll('blockquote')[0]) {
+                //Hide Multiple Quotes By Default
+                topQuote.querySelectorAll('blockquote')[0].classList.add('tw-hidden');
+
+                //ShowHideButton HTML
+                let buttonHTML = `
+                    <!-- Hide/Show Replies -->
+                    <div class="tw-w-full sm:tw-w-auto tw-ml-0 sm:tw-ml-auto tw-inline-flex tw-items-center">
+                        <div class="tw-leading-[26px] tw-cursor-pointer tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-3 tw-tracking-normal tw-opacity-100
+                                    ${topQuote.querySelector('.quote-heading') ? '' : 'tw-mb-3 tw-relative sm:tw-absolute sm:tw-right-[30px] sm:tw-top-0'}"
+                            tabindex="0"
+                            onClick="hideShow(${this.post.id})"
+                        >
+                            ${ quoteCount } Replies
+                            <i class="fa-solid tw-ml-1.5 tw-text-sm fa-chevrons-down" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                `;
+                
+                //Add Button
+                if(topQuote.querySelector('.quote-heading')) {
+                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML ); 
+                } else {
+                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML ); 
+                } 
+
+                //HideShow Function
+                window.hideShow = function(postID) {
+                    let childQuote = document.getElementById('post-body'+postID).getElementsByTagName('blockquote')[0].querySelectorAll('blockquote')[0];
+                    let QuoteToggleIcon = document.getElementById('post-body'+postID).getElementsByTagName('blockquote')[0].querySelector('.fa-chevrons-down');
+                    //toggle classes
+                    childQuote.classList.toggle('tw-hidden');
+                    QuoteToggleIcon.classList.toggle('tw-rotate-180')
+                };
+                
             }
         } 
     }
@@ -474,14 +480,13 @@ export default {
         padding-left: 40px;
         margin: 15px 0;
     }
-    .post-body p { 
-        margin: 15px 0; 
-        font-size: 1rem; 
-        line-height: 1.5rem; 
-    }
     .post-body p:empty { display: none; }
     .post-body blockquote { 
         margin: 15px 0; 
         width: 100%;
+    }
+    .forumSignature p {
+        font-size: 1rem; /* 16px */
+        line-height: 1.5rem; /* 24px */
     }
 </style>

@@ -129,11 +129,6 @@ export default {
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           My List
         </OptionElement>
-
-        <OptionElement :href="this.userNavigationDropdownLinks.schedulePageUrl">
-          <musora-icon icon-name="calendar" class="tw-w-[20px] tw-mr-2"/>
-          Schedule
-        </OptionElement>
         <OptionElement @onOptionClick="() => handleReviewOpen(true)">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review

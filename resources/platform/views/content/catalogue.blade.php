@@ -86,6 +86,10 @@
                         <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @elseif($catalogueMeta['name'] == 'Subscribed')
                         <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                    @elseif($catalogueMeta['name'] == 'Rudiments')
+                        <musora-icon icon-name="drum-filled"
+                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                        </musora-icon>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
