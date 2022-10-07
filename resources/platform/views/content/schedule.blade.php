@@ -12,8 +12,8 @@
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <i class="fas fa-calendar-alt tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                    <span class="tw-text-32 tw-font-bold">Schedule</span>
+                    <musora-icon icon-name="calendar-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                    <span class="tw-text-32 tw-font-bold tw-capitalize">{{ $brand }} Schedule</span>
                 </h1>
 
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
