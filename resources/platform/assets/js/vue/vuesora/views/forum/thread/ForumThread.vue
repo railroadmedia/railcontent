@@ -481,7 +481,7 @@ export default {
 
         //Scroll Post into view if hash exists
         if(window.location.hash.length && document.querySelector(window.location.hash)) {
-            document.querySelector(window.location.hash).scrollIntoView({behavior: "smooth"})
+            document.querySelector(window.location.hash).scrollIntoView()
         }
     },
     methods: {
@@ -677,6 +677,30 @@ export default {
     //     background-color: transparent;
     // }
 
+    //Temporary (Need to be factored with Blockquotes)
+        .quote-heading {
+            display: flex;
+            align-items: flex-end;
+            flex-wrap: wrap;
+
+            strong {
+                line-height: 2;
+                margin-right: 0.25rem;
+            }
+            em {
+                line-height: 1.7;
+                padding-right: 0.25rem;
+                margin-right: auto;
+            }
+        }
+        body.tw-dark .quote-heading em {
+            color: #9EC0DC;
+            opacity: 1;
+        }
+        .post-body blockquote {
+            position: relative;
+        }
+    //---------------------------//
     .thread-title {
         @include xSmallOnly {
             font-size:20px;
