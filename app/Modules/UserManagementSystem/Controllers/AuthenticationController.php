@@ -38,7 +38,7 @@ class AuthenticationController extends Controller
             return redirect()
                 ->to(
                     config('user_management_system.login_page_path') .
-                    ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                    ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
                 )
                 ->withErrors($exception->errors());
         }
@@ -62,13 +62,13 @@ class AuthenticationController extends Controller
 
             event(new UserEvent($user->id, 'authenticated'));
 
-            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
+            return redirect()->away($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
 
         return redirect()
             ->to(
                 config('user_management_system.login_page_path') .
-                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -83,13 +83,13 @@ class AuthenticationController extends Controller
         // auth logic is not inside middleware AuthenticateViaKeyIfAvailable
 
         if (!empty(user())) {
-            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
+            return redirect()->to($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
 
         return redirect()
             ->to(
                 config('user_management_system.login_page_path') .
-                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -189,7 +189,7 @@ class AuthenticationController extends Controller
             auth()->logout();
         }
 
-        return $request->has('redirect') ? redirect()->away($request->get('redirect')) :
+        return $request->has('redirect_to') ? redirect()->away($request->get('redirect_to')) :
             redirect()->to(config('usora.login_page_path'));
     }
 
