@@ -12,6 +12,7 @@ use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Models\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthenticationController extends Controller
 {
@@ -93,6 +94,29 @@ class AuthenticationController extends Controller
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
             );
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function checkForAuthThenRedirectBackWithAuthKey(Request $request)
+    {
+        $redirectToUrl = strtok($request->get('redirect_to'), '?');
+
+        if (empty($redirectToUrl)) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!empty(user())) {
+            $urlWithAuthKey = $redirectToUrl .
+                '?user_id=' . user()->id .
+                '&auth_key=' . generate_musora_cross_platform_login_key(user()->id, user()->password);
+
+            return redirect()->away($urlWithAuthKey);
+        }
+
+        return redirect()->away($redirectToUrl);
     }
 
     /**
