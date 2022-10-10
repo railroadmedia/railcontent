@@ -30,6 +30,13 @@ class LearningPathCourseDecorator extends TypeDecoratorBase
             //thumb url
             $contentsOfType[$contentIndex]['thumbnail_url'] =
                 $contentsOfType[$contentIndex]->fetch('data.thumbnail_url', '');
+
+            if (!empty($content->getParentContentData()[0]->position)) {
+                $contentsOfType[$contentIndex]['level_rank'] = $content->getParentContentData()[0]->position .
+                    '.' .
+                    $content['hierarchy_position_number'];
+
+            }
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
