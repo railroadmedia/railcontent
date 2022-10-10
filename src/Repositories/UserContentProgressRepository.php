@@ -165,7 +165,8 @@ class UserContentProgressRepository extends RepositoryBase
         $state,
         $orderByColumn = 'updated_on',
         $orderByDirection = 'desc',
-        $limit = 25
+        $limit = 25,
+        $skip = 0
     ) {
         return $this->query()
             ->join(
@@ -184,6 +185,7 @@ class UserContentProgressRepository extends RepositoryBase
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
             ->orderBy($orderByColumn, $orderByDirection)
             ->limit($limit)
+            ->skip($skip)
             ->get()
             ->toArray();
     }
