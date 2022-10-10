@@ -517,9 +517,7 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
-                $comment['user_id']
-            )
+            config('xp_ranks.comment_posted')
         );
     }
 
@@ -562,9 +560,8 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
-                $comment['user_id']
-            )
+            config('xp_ranks.comment_posted'),
+            true
         );
     }
 
@@ -586,9 +583,7 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
-                $comment['user_id']
-            )
+            config('xp_ranks.comment_liked')
         );
     }
 
@@ -604,9 +599,8 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
-                $comment['user_id']
-            )
+            config('xp_ranks.comment_liked'),
+            true
         );
     }
 

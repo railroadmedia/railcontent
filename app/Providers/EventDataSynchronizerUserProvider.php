@@ -58,7 +58,7 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         return false;
     }
 
-    public function saveExperiencePoints(int $userId, int $totalXp)
+    public function saveExperiencePoints(int $userId, int $totalXp, $shouldRevert = false)
     : bool {
         $user =
             User::query()
@@ -66,11 +66,18 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         if (!empty($user)) {
             $userBrandXP = user()->brand_total_xp;
             $brand = config('railcontent.brand');
+            if ($shouldRevert) {
+                $userBrandXP[$brand] = isset($userBrandXP[$brand]) ? $userBrandXP[$brand] - $totalXp : 0;
+                $totalGXp = ($user->total_xp > 0) ? $user->total_xp - $totalXp : 0;
+            } else {
+                $userBrandXP[$brand] = ($userBrandXP[$brand] ?? 0) + $totalXp;
+                $totalGXp = ($user->total_xp ?? 0) + $totalXp;
+            }
 
-            $userBrandXP[$brand] = ($userBrandXP[$brand] ?? 0) + $totalXp;
             $user->brand_total_xp = $userBrandXP;
-            $user->total_xp = ($user->total_xp  ?? 0) + $totalXp;
+            $user->total_xp = $totalGXp;
             $user->save();
+
             return true;
         }
 
