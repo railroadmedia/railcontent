@@ -657,7 +657,7 @@ return [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
-                "allowableFilters" => ['bpm', 'style'],
+                "allowableFilters" => ['bpm', 'style','difficulty'],
             ],
         ],
         'pianote' => [
