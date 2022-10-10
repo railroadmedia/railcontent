@@ -14,34 +14,60 @@ class NavigationService
         }
 
         if (user()->isPackOnlyOwner()) {
-            return [
-                [ // section
-                    [
-                        'name' => 'Home',
-                        'path' => '/'.brand(),
-                        'icon' => 'home',
+            if (brand() === 'singeo') {
+                return [
+                    [ // section
+                        [
+                            'name' => 'Courses',
+                            'path' => '/'.brand().'/courses',
+                            'icon' => 'box',
+                        ],
                     ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
-                        'icon' => 'box',
+                    [ // section
+                        [
+                            'name' => 'Forums',
+                            'path' => '/'.brand().'/forums',
+                            'icon' => 'messages',
+                        ],
+                        [
+                            'name' => 'My List',
+                            'path' => '/'.brand().'/lists/my-list',
+                            'icon' => 'playlist',
+                        ],
                     ],
-                ],
-                [ // section
-                    [
-                        'name' => 'Forums',
-                        'path' => '/'.brand().'/forums',
-                        'icon' => 'messages',
+                ];
+
+            } else {
+                return [
+                    [ // section
+                        [
+                            'name' => 'Home',
+                            'path' => '/'.brand(),
+                            'icon' => 'home',
+                        ],
                     ],
-                    [
-                        'name' => 'My List',
-                        'path' => '/'.brand().'/lists/my-list',
-                        'icon' => 'playlist',
+                    [ // section
+                        [
+                            'name' => 'Packs',
+                            'path' => '/'.brand().'/packs',
+                            'icon' => 'box',
+                        ],
                     ],
-                ],
-            ];
+                    [ // section
+                        [
+                            'name' => 'Forums',
+                            'path' => '/'.brand().'/forums',
+                            'icon' => 'messages',
+                        ],
+                        [
+                            'name' => 'My List',
+                            'path' => '/'.brand().'/lists/my-list',
+                            'icon' => 'playlist',
+                        ],
+                    ],
+                ];
+
+            }
         }
 
         if (brand() === 'drumeo') {
