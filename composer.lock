@@ -8049,16 +8049,16 @@
         },
         {
             "name": "railroad/points",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/points.git",
-                "reference": "a8fec4009a18c70810fb768713f82024fd6a8661"
+                "reference": "1ef23a36484309871cc1790963dbeae0d4aeb933"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/points/zipball/a8fec4009a18c70810fb768713f82024fd6a8661",
-                "reference": "a8fec4009a18c70810fb768713f82024fd6a8661",
+                "url": "https://api.github.com/repos/railroadmedia/points/zipball/1ef23a36484309871cc1790963dbeae0d4aeb933",
+                "reference": "1ef23a36484309871cc1790963dbeae0d4aeb933",
                 "shasum": ""
             },
             "require": {
@@ -8099,9 +8099,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/points/issues",
-                "source": "https://github.com/railroadmedia/points/tree/v1.0.0"
+                "source": "https://github.com/railroadmedia/points/tree/v1.0.1"
             },
-            "time": "2022-09-01T14:23:35+00:00"
+            "time": "2022-10-10T11:40:15+00:00"
         },
         {
             "name": "railroad/railanalytics",
