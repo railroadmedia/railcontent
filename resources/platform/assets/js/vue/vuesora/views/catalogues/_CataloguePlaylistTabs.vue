@@ -6,7 +6,7 @@
                 <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
                     <a :href="'/' + brand + '/lists/my-list'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
-                            :class="selected_tab === 'my-list' ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
+                            :class="selected_tab === 'my-list' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >
                             Added
                         </h3>
@@ -16,7 +16,7 @@
                 <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
                     <a :href="'/' + brand + '/lists/in-progress'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
-                            :class="selected_tab === 'started' ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
+                            :class="selected_tab === 'started' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >
                             In Progress
                         </h3>
@@ -26,7 +26,7 @@
                 <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
                     <a :href="'/' + brand + '/lists/completed'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
-                            :class="selected_tab === 'completed' ? ('tw-text-[#00101D] dark:tw-text-white bb-' + themeColor + '-2') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
+                            :class="selected_tab === 'completed' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >
                             Complete
                         </h3>

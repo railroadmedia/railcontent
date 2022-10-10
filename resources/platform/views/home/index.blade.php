@@ -136,13 +136,13 @@
 
         {{-- My Stats --}}
         @if(user()->isAMember())
-            <stats-section
-                brand="{{ $brand }}"
-                account-url="{{ user()->getDashboardUrl() }}"
-                :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-                next-learning-path-level="{{ $nextLearningPathLevel }}"
-                :user-metrics="{{ json_encode($userMetrics) }}"
-            ></stats-section>
+        	<stats-section
+            	brand="{{ $brand }}"
+            	account-url="{{ user()->getDashboardUrl() }}"
+            	:next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+            	next-learning-path-level="{{ user()->getMethodLevel() }}"
+            	:user-metrics="{{ json_encode($userMetrics) }}"
+        	></stats-section>
         @endif
 
     </div>

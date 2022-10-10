@@ -305,7 +305,7 @@ return [
             \App\Decorators\Content\AssignmentXPDecorator::class,
 
             \App\Decorators\Content\CourseDecorator::class,
-            //            \App\Decorators\Content\CoursePartDecorator::class,
+            \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
             \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
@@ -657,7 +657,7 @@ return [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
-                "allowableFilters" => ['bpm', 'style'],
+                "allowableFilters" => ['bpm', 'style','difficulty'],
             ],
         ],
         'pianote' => [
@@ -1569,4 +1569,6 @@ return [
         'original_video',
         'qna_video',
     ],
+
+    'compiled_columns_that_should_allow_dups' =>['sbt_exercise_number','sbt_bpm']
 ];

@@ -121,6 +121,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
+                    ],
+                    [
                         'name' => 'Play-Alongs',
                         'path' => '/'.brand().'/play-alongs',
                         'icon' => 'eigth-notes',
@@ -200,6 +205,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
+                    ],
+                    [
                         'name' => 'Podcast',
                         'path' => '/'.brand().'/podcasts',
                         'icon' => 'podcast',
@@ -272,6 +282,11 @@ class NavigationService
                         'name' => 'Live',
                         'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
+                    ],
+                    [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
                     ],
                     [
                         'name' => 'Play-Alongs',
@@ -356,6 +371,11 @@ class NavigationService
                         'name' => 'Live',
                         'path' => '/'.brand().'/live',
                         'icon' => 'play-circle',
+                    ],
+                    [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
                     ],
                     [
                         'name' => 'Routines',

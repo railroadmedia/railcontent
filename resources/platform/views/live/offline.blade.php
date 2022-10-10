@@ -55,7 +55,7 @@
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                 <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
                     <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
-                        Scheduled Releases
+                        Upcoming Live Events
                     </h1>
                 </div>
                 <div class="tw-flex tw-flex-col">

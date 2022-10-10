@@ -289,17 +289,33 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
      * @return string
      */
     public function getMethodLevel()
     {
         $brand = brand();
 
-        if (isset($this->brand_method_levels->$brand)) {
-            return $this->brand_method_levels->$brand;
+        if (isset($this->brand_method_levels[$brand])) {
+            return $this->brand_method_levels[$brand];
         }
 
-        return '1.0';
+        return '1.1';
     }
 
     /**

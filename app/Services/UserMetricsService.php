@@ -160,19 +160,20 @@ class UserMetricsService
      */
     private function getTotalMinutesPracticed($userId)
     {
-        return round(
-            ((integer)$this->databaseManager->connection()
-                ->table('railtracker_media_playback_sessions')
-                ->join(
-                    'railtracker_media_playback_types',
-                    'railtracker_media_playback_types.id',
-                    '=',
-                    'railtracker_media_playback_sessions.type_id'
-                )
-                ->where('user_id', $userId)
-                ->where('type', 'assignment')
-                ->sum('seconds_played')) / 60,
-            0
-        );
+        $minutes = $this->databaseManager->connection(config('railtracker.database_connection_name'))
+            ->table('railtracker_media_playback_sessions')
+            ->selectRaw('COALESCE(SUM(seconds_played), 0) as seconds')
+            ->join(
+                'railtracker_media_playback_types',
+                'railtracker_media_playback_types.id',
+                '=',
+                'railtracker_media_playback_sessions.type_id'
+            )
+            ->where('user_id', $userId)
+            ->where('type', 'assignment')
+            ->groupBy('user_id')
+            ->get()->first();
+
+        return ($minutes)?round((integer)$minutes->seconds/60):0;
     }
 }

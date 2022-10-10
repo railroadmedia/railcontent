@@ -257,7 +257,7 @@ export default {
                 required_fields: this.parseRequiredFields(),
                 page: this.page,
                 limit: this.limit,
-                required_parent_ids: this.showFavoritesOnly ? [this.userPlaylistId] : undefined,
+                only_from_my_list: this.showFavoritesOnly,
                 required_user_states: this.showCompletedOnly ? ['completed'] : undefined,
                 sort: this.sort,
             };
@@ -325,6 +325,7 @@ export default {
                 included_types: ['play-along'],
                 statuses: ['published'],
                 include_future: 0,
+                only_from_my_list: this.showFavoritesOnly
             })
                 .then((response) => {
                     if (response) {
@@ -476,8 +477,8 @@ export default {
                 });
             }
 
-            if (urlParams.required_parent_ids != null
-                && urlParams.required_parent_ids.indexOf(this.userPlaylistId) !== -1) {
+            if (urlParams.only_from_my_list != null
+                && urlParams.only_from_my_list == 1) {
                 this.showFavoritesOnly = true;
             }
 

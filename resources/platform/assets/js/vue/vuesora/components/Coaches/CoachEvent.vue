@@ -147,20 +147,12 @@
 
             <!-- Subscribe to Calendar -->
             <button
-              class="tw-cursor-pointer tw-with-tooltip tw-tooltip-top tw-tooltip-right tw-border-0 tw-bg-transparent tw-text-3xl"
+              class="tw-cursor-pointer tw-border-0 tw-bg-transparent tw-text-3xl"
               data-open-modal="scheduleAddToCalendarModal"
+              alt="Subscribe to Calendar"
               :class="[brandTextColor]"
             >
               <i class="fas fa-calendar-plus" @click="toggleSubscribePopup"></i>
-              <!-- Tooltip -->
-              <div
-                role="tooltip"
-                class="tw-tooltip tw-tooltip-dark"
-                :class="[brandBGColor]"
-                id="tooltip-#"
-              >
-                Subscribe to Calendar
-              </div>
             </button>
 
             <content-schedule
