@@ -33,5 +33,5 @@ interface UserProviderInterface
      * @param int $totalXp
      * @return bool
      */
-    public function saveExperiencePoints(int $userId, int $totalXp, $shouldRevert = false): bool;
+    public function saveExperiencePoints(int $userId, array $totalXp, $shouldRevert = false): bool;
 }

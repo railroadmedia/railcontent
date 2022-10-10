@@ -333,7 +333,9 @@ class ContentProgressEventListener
 
             $this->userProvider->saveExperiencePoints(
                 $userContentProgressSaved->userId,
-                $pointAmount
+                $this->userPointsService->countUserPointsPerBrand(
+                    $userContentProgressSaved->userId
+                )
             );
         }
     }
@@ -370,12 +372,13 @@ class ContentProgressEventListener
 
                     $minutes--;
                 }
-
-                $this->userProvider->saveExperiencePoints(
-                    $mediaPlaybackTracked->userId,
-                    $totalAmount
-                );
             }
+            $this->userProvider->saveExperiencePoints(
+                $mediaPlaybackTracked->userId,
+                $this->userPointsService->countUserPointsPerBrand(
+                    $mediaPlaybackTracked->userId
+                )
+            );
 
             return;
         }
@@ -413,7 +416,9 @@ $totalAmount = 0;
 
                 $this->userProvider->saveExperiencePoints(
                     $mediaPlaybackTracked->userId,
-                    $totalAmount
+                    $this->userPointsService->countUserPointsPerBrand(
+                        $mediaPlaybackTracked->userId
+                    )
                 );
             }
 
@@ -453,7 +458,9 @@ $totalAmount = 0;
 
                 $this->userProvider->saveExperiencePoints(
                     $mediaPlaybackTracked->userId,
-                    $totalAmount
+                    $this->userPointsService->countUserPointsPerBrand(
+                        $mediaPlaybackTracked->userId
+                    )
                 );
             }
 
@@ -483,7 +490,7 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $userContentsProgressReset->userId,
-            $this->userPointsService->countUserPoints(
+            $this->userPointsService->countUserPointsPerBrand(
                 $userContentsProgressReset->userId
             )
         );
@@ -517,7 +524,9 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            config('xp_ranks.comment_posted')
+            $this->userPointsService->countUserPointsPerBrand(
+                $comment['user_id']
+            )
         );
     }
 
@@ -560,8 +569,9 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            config('xp_ranks.comment_posted'),
-            true
+            $this->userPointsService->countUserPointsPerBrand(
+                $comment['user_id']
+            )
         );
     }
 
@@ -583,7 +593,9 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            config('xp_ranks.comment_liked')
+            $this->userPointsService->countUserPointsPerBrand(
+                $comment['user_id']
+            )
         );
     }
 
@@ -599,8 +611,9 @@ $totalAmount = 0;
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            config('xp_ranks.comment_liked'),
-            true
+            $this->userPointsService->countUserPointsPerBrand(
+                $comment['user_id']
+            )
         );
     }
 
