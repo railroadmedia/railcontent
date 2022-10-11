@@ -24,7 +24,7 @@
                 </a>
 
                 <p class="tiny font-italic text-grey-3 mt-2">
-                    Max file size: <strong>5MB</strong>
+                    Max file size: <strong>15MB</strong>
                 </p>
             </div>
         </div>
@@ -193,7 +193,7 @@ export default {
                 dictFileTooBig: 'Maximum file size exceeded.',
                 dictInvalidFileType: 'Invalid File Type.',
                 acceptedFiles: '.jpg,.jpeg,.png,.bmp',
-                maxFilesize: 5,
+                maxFilesize: 15,
                 hiddenInputContainer: '.dz-hidden-input',
                 autoProcessQueue: false,
             }),
@@ -343,53 +343,26 @@ export default {
 
             this.loading = true;
 
-            UserService.remoteResourceUpload(this.uploadEndpoint, formData)
-                .then((resolved) => {
+            Vapor.store(formData.get('file'), {
+                visibility: 'public-read',
+                progress: progress => {
+                    // console.log(Math.round(progress * 100));
+                }
+            }).then(response => {
+                axios.post('/user-management-system/picture/upload-from-s3-front-end', {
+                    uuid: response.uuid,
+                    s3_bucket_path: response.key,
+                    bucket: response.bucket,
+                    fieldKey: this.fieldKey
+                }).then((resolved) => {
+                    console.log(resolved);
+
                     if (resolved) {
-
-                        let remoteStorageUrl = null;
-                        
-                        if (this.fieldKey == 'profile_picture_url'){
-                            remoteStorageUrl = resolved.profile_picture_url
-                        } else if (this.fieldKey == 'drums_gear_photo') {
-                            remoteStorageUrl = resolved.drums_gear_photo
-                        } else if (this.fieldKey == 'piano_gear_photo') {
-                            remoteStorageUrl = resolved.piano_gear_photo
-                        } else if (this.fieldKey == 'guitar_gear_photo') {
-                            remoteStorageUrl = resolved.guitar_gear_photo
-                        } else if (this.fieldKey == 'singing_gear_photo') {
-                            remoteStorageUrl = resolved.singing_gear_photo
-                        }
-
-                        this.$emit('image-uploaded', {
-                            image_url: remoteStorageUrl,
-                            cropper: this,
-                        });
-
-                        // this.setImageAsAvatar(remoteStorageUrl);
+                        this.loading = false;
+                        location.reload();
                     }
                 });
-
-            // NOTE: we may need this in the future, leave for now
-            // Vapor.store(formData.get('file'), {
-            //     visibility: 'public-read',
-            //     progress: progress => {
-            //         // console.log(Math.round(progress * 100));
-            //     }
-            // }).then(response => {
-            //     axios.post('/user-management-system/profile-picture/upload', {
-            //         uuid: response.uuid,
-            //         s3_bucket_path: response.key,
-            //         bucket: response.bucket,
-            //     }).then((resolved) => {
-            //         console.log(resolved);
-            //
-            //         if (resolved) {
-            //             this.loading = false;
-            //             location.reload();
-            //         }
-            //     });
-            // });
+            });
         },
 
         resetCropper() {
