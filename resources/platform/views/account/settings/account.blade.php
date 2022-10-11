@@ -343,7 +343,7 @@
 
                     @elseif(!$hasHadMembership)
 
-                        <a href="{{ $trialUrl }}"
+                        <a href="{{ $addToCartUrlTrial }}"
                            class="">
                             Start Free Trial
                         </a>
@@ -418,7 +418,7 @@
                         @else
                             <p>Get limited time bonuses</p>
                         @endif
-                        <a href="">
+                        <a href="{{ $salesPageUrl }}">
                             <button>SEE OFFER</button>
                         </a>
                     </div>
