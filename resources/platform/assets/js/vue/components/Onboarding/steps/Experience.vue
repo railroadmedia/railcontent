@@ -11,7 +11,7 @@ import { saveExperience } from "../services"
 const experienceDescriptionMap = {
   pianote: {
     0: 'Start from the beginning. No experience required!',
-    1: 'For beginners who are familiar with the layout of the keyboard, have good piano posture, and can play chords and scales in at least 2 key signatures.',
+    1: 'For beginners who are familiar with the layout of the keyboard, have good posture, and can play chords and scales in at least 2 key signatures.',
     2: 'For intermediate players who are comfortable playing a few songs and have some hand independence and dexterity.',
     3: 'For advanced players who are comfortable playing many songs in multiple styles from start to finish and are looking to improve specific skills.',
   },
