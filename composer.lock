@@ -4250,16 +4250,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.34.0",
+            "version": "v9.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b7af7ff35497eb1c4e61652f522a862164dbba5a"
+                "reference": "85a465097e4f528520b2fc5924f54609bd6e2e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b7af7ff35497eb1c4e61652f522a862164dbba5a",
-                "reference": "b7af7ff35497eb1c4e61652f522a862164dbba5a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/85a465097e4f528520b2fc5924f54609bd6e2e9c",
+                "reference": "85a465097e4f528520b2fc5924f54609bd6e2e9c",
                 "shasum": ""
             },
             "require": {
@@ -4432,7 +4432,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-10-04T13:33:43+00:00"
+            "time": "2022-10-11T13:56:50+00:00"
         },
         {
             "name": "laravel/nova",
@@ -7803,16 +7803,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.15",
+            "version": "v5.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "6baf2148318593ca01f495ea3865626e928d45f0"
+                "reference": "4af7b132167773ffe68f9b2cc08a2a304abf74fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/6baf2148318593ca01f495ea3865626e928d45f0",
-                "reference": "6baf2148318593ca01f495ea3865626e928d45f0",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/4af7b132167773ffe68f9b2cc08a2a304abf74fd",
+                "reference": "4af7b132167773ffe68f9b2cc08a2a304abf74fd",
                 "shasum": ""
             },
             "require": {
@@ -7849,9 +7849,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.15"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.16"
             },
-            "time": "2022-09-23T11:46:22+00:00"
+            "time": "2022-10-11T13:49:41+00:00"
         },
         {
             "name": "railroad/location",
@@ -7958,12 +7958,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "0afc503e417ef62a1a7850e1a8f99cf53414ea3d"
+                "reference": "a252e939d9f0d76e158c916f8e9178f97ef0fe7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0afc503e417ef62a1a7850e1a8f99cf53414ea3d",
-                "reference": "0afc503e417ef62a1a7850e1a8f99cf53414ea3d",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a252e939d9f0d76e158c916f8e9178f97ef0fe7b",
+                "reference": "a252e939d9f0d76e158c916f8e9178f97ef0fe7b",
                 "shasum": ""
             },
             "require": {
@@ -7995,7 +7995,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-10-11T10:52:47+00:00"
+            "time": "2022-10-11T16:35:20+00:00"
         },
         {
             "name": "railroad/permissions",
