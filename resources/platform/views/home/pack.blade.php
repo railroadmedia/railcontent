@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <div class="tw-container tw-mx-auto tw-pt-[58px] tw-px-4 md:tw-px-8 dark:tw-text-white">
 
         {{-- Add Header Slide "Welcome Username" --}}
 
