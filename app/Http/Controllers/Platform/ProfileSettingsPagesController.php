@@ -330,27 +330,64 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
+
+
         // -------------------------------------------------------------------------------------------------------------
+
+         $urlParamsByBrandForTrial = [
+            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
+            'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
+            'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
+        ];
+
+        if($urlParamsByBrandForTrial[$brand]){
+            $urlParams = $urlParamsByBrandForTrial[$brand];
+            $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
+            if ($brand == 'drumeo') {
+                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
+            }
+        } else {
+            $addToCartUrlTrial = 'https://musora.com/';
+        }
+
+//        $annualSKUsByBrand = [
+//            'drumeo' => 'DLM-1-year',
+//            'pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+//            'guitareo' => 'GUITAREO-1-YEAR-MEMBERSHIP',
+//            'singeo' => 'singeo-annual-recurring-membership',
+//        ];
+
+        $salesPage['drumeo'] = 'https://www.drumeo.com/';
+        $salesPage['pianote'] = 'https://www.pianote.com/';
+        $salesPage['guitareo'] = 'https://www.guitareo.com/';
+        $salesPage['singeo'] = 'https://www.singeo.com/';
+        $salesPageUrl = $salesPage[$brand] ?? $salesPage['drumeo'];
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        $viewData = [
+            'user' => user(),
+            'sections' => $this->settingSections('account'),
+            'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
+            'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
+            'isLifetime' => $isLifetime,
+            'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
+            'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
+            'subscription' => $activeSubscription,
+            'hasHadMembership' => $hasHadMembership,
+            'now' => $now,
+            'addToCartUrlTrial' => $addToCartUrlTrial,
+            'salesPageUrl' => $salesPageUrl,
+            'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
+            'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
+            'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
+            'membershipFromOneTimeProduct' => $membershipFromOneTimeProduct ?? false,
+        ];
 
         return view(
             'account.settings.account',
-            [
-                'user' => user(),
-                'sections' => $this->settingSections('account'),
-                'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
-                'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
-                'isLifetime' => $isLifetime,
-                'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
-                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
-                'subscription' => $activeSubscription,
-                'hasHadMembership' => $hasHadMembership,
-                'now' => $now,
-                'trialUrl' => $trialUrl,
-                'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
-                'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
-                'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
-                'membershipFromOneTimeProduct' => $membershipFromOneTimeProduct ?? false,
-            ]
+            $viewData
         );
     }
 
