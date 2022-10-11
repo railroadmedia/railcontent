@@ -355,11 +355,26 @@ export default {
                     bucket: response.bucket,
                     fieldKey: this.fieldKey
                 }).then((resolved) => {
-                    console.log(resolved);
-
                     if (resolved) {
                         this.loading = false;
-                        location.reload();
+
+                        let remoteStorageUrl = null;
+                        
+                        if (this.fieldKey == 'profile_picture_url'){
+                            remoteStorageUrl = resolved.data.profile_picture_url
+                        } else if (this.fieldKey == 'drums_gear_photo') {
+                            remoteStorageUrl = resolved.data.drums_gear_photo
+                        } else if (this.fieldKey == 'piano_gear_photo') {
+                            remoteStorageUrl = resolved.data.piano_gear_photo
+                        } else if (this.fieldKey == 'guitar_gear_photo') {
+                            remoteStorageUrl = resolved.data.guitar_gear_photo
+                        } else if (this.fieldKey == 'singing_gear_photo') {
+                            remoteStorageUrl = resolved.data.singing_gear_photo
+                        }
+                        this.$emit('image-uploaded', {
+                            image_url: remoteStorageUrl,
+                            cropper: this,
+                        });
                     }
                 });
             });
