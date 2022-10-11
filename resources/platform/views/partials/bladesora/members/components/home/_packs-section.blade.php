@@ -18,7 +18,7 @@
         <div class="tw-flex tw-flex-row tw-flex-wrap">
             @if(count($packs) === 0)
                 <p class="tw-text-xl tw-leading-none lg:tw-leading-none">
-                    You don't own any training packs. <br><br>
+                    You don't own any {{ brand() }} training packs. <br><br>
                     <a href="https://www.{{ brand() }}.com/shop" class="tw-font-bold tw-underline">Shop Now</a>
                 </p>
             @endif
