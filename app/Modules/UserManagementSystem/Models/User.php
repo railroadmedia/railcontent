@@ -325,6 +325,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function getBrandTotalXp()
     {
+        //TODO: Remove line after total_xp per brand column is populated
+        return $this->total_xp ?? 0;
+
         $brand = brand();
 
         if (isset($this->brand_total_xp[$brand])) {
