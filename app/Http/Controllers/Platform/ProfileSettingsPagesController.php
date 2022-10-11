@@ -7,16 +7,22 @@ use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
 use App\Services\User\UserAccessService;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Mail;
 use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
+use Railroad\Ecommerce\Entities\MembershipAction;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Product;
 use App\Modules\Ecommerce\Models\Product as ProductModel;
 use Railroad\Ecommerce\Entities\Subscription;
+use Railroad\Ecommerce\Entities\Traits\NotableEntity;
+use Railroad\Ecommerce\Entities\User;
+use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
+use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\PaymentMethodRepository;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
@@ -38,6 +44,22 @@ use Throwable;
 class ProfileSettingsPagesController extends BaseController
 {
     const MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER = 10;
+
+    const HOW_CAN_WE_HELP_OPTIONS = [
+        'direction' => 'I need more direction',
+        'time' => 'I don’t have enough time',
+        'watch' => 'I don’t know what lesson to watch',
+        'easy' => 'The lessons are too easy',
+        'difficult' => 'The lessons are too difficult',
+        'website' => 'I don’t know how to use the website/app.',
+        'other' => 'Other',
+    ];
+
+    public static $generalSuccessMessageToUser = 'Your account has been updated.';
+
+    public static $generalErrorMessageToUser = 'We\'re sorry, but there\'s been an error. Please reload the page and try ' .
+    'again. If that doesn\'t work email or use the chat at the bottom right of your screen to get things sorted out ' .
+    'right away.';
 
     /**
      * @var NotificationSettingsService
@@ -68,20 +90,15 @@ class ProfileSettingsPagesController extends BaseController
      */
     private $mailService;
 
-    const HOW_CAN_WE_HELP_OPTIONS = [
-        'direction' => 'I need more direction',
-        'time' => 'I don’t have enough time',
-        'watch' => 'I don’t know what lesson to watch',
-        'easy' => 'The lessons are too easy',
-        'difficult' => 'The lessons are too difficult',
-        'website' => 'I don’t know how to use the website/app.',
-        'other' => 'Other',
-    ];
     private CartService $cartService;
     private PaymentRepository $paymentRepository;
     private SubscriptionTransformer $subscriptionTransformer;
     private InvoiceService $invoiceService;
     private PaymentMethodRepository $paymentMethodRepository;
+    /**
+     * @var EcommerceEntityManager
+     */
+    private $ecommerceEntityManager;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -100,6 +117,7 @@ class ProfileSettingsPagesController extends BaseController
         SubscriptionTransformer $subscriptionTransformer,
         InvoiceService $invoiceService,
         PaymentMethodRepository $paymentMethodRepository,
+        EcommerceEntityManager $ecommerceEntityManager
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
@@ -114,6 +132,7 @@ class ProfileSettingsPagesController extends BaseController
         $this->subscriptionTransformer = $subscriptionTransformer;
         $this->invoiceService = $invoiceService;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->ecommerceEntityManager = $ecommerceEntityManager;
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
@@ -380,7 +399,7 @@ class ProfileSettingsPagesController extends BaseController
             'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
             'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
             'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
-            '$membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
+            'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
         ];
 
         return view(
@@ -455,26 +474,40 @@ class ProfileSettingsPagesController extends BaseController
 
         /* what if the subscription is a 2-month, 3-month, or 6-month subscription? */
         if ($subscription->getIntervalType() === 'month' && $subscription->getIntervalCount() == 1) {
-            // todo: what if this is zero or negative?
-            $amountSaved = 0;
-            $subscriptionPriceWithTax = $subscription->getTotalPrice();
 
-            dd($subscription->getTax());
+            $amountSaved = $subscription->getTotalPrice() * 2;
+            $nextPaymentDateWithOffer = Carbon::parse($subscription->getPaidUntil())->addMonths(2);
 
-            if ($subscription->getTax()) {
-                $subscription->getTotalDueAfterTax();
-            }
-
-
-            // todo: create as Carbon object
-            $nextPaymentDate = null;
-
-//            return view('account.settings.offer', [
-//                'amountSaved' => $amountSaved,
-//                'subscriptionPrice' => $subscriptionPrice
-//                'nextPaymentDate' => $nextPaymentDate,
-//            ]);
+            return view('account.settings.offer', [
+                'isSubscriberMonthly' => true,
+                'subscriptionPrice' => $subscription->getTotalPrice(),
+                'amountSaved' => $subscription->getTotalPrice() * 2,
+                'nextPaymentDateWithOffer' => $nextPaymentDateWithOffer,
+            ]);
         }
+
+        if($subscription->getIntervalType() == 'year') {
+
+            $pointBeforeWhichWeConsiderRenewingSoon = Carbon::now()->addMonths(3);
+            $renewingSoon = $subscription->getPaidUntil() <= $pointBeforeWhichWeConsiderRenewingSoon;
+
+            if($renewingSoon) {
+                // $isSubscriberAnnualRenewingSoon = true;
+                // offer
+                    // pause your account
+                    // switch to monthly payments
+
+            } else {
+                // $isSubscriberAnnual = true;
+                // offer
+                    // special renewal offer
+                    // switch to monthly payments
+
+
+            }
+        }
+
+
         // send to final offer screen depending on use case
 
 
@@ -493,7 +526,129 @@ class ProfileSettingsPagesController extends BaseController
 
     public function acceptGratisAccess(Request $request)
     {
-        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptGratisAccess', $request);
+        $userId = auth()->id();
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        try {
+            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+            if(!$subscription) {
+                // todo: return error
+            }
+
+            $this->updateSubscriptionPaidUntilDate($subscription, 'addMonths', 2);
+
+
+
+        } catch (\Exception $e) {
+            return $this->returnRedirect(
+                false,
+                'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                'contact our support team.'
+            );
+        }
+
+
+        $oldSubscription = clone $subscription;
+        event(new SubscriptionUpdated($oldSubscription, $subscription));
+
+        // save membership action
+        $membershipAction = new MembershipAction();
+        /** @var $membershipAction MembershipAction|NotableEntity */
+        $membershipAction->setUser($ecommerceUser);
+        $membershipAction->setBrand($subscription->getProduct()->getBrand());
+        $membershipAction->setSubscription($subscription);
+        $membershipAction->setAction('extended for amount of months');
+        $membershipAction->setActionAmount(2);
+        $membershipAction->setNote('membership was extended by 2 months');
+
+        try {
+            $this->ecommerceEntityManager->persist($membershipAction);
+            $this->ecommerceEntityManager->flush();
+        } catch (ORMException $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        $newRenewalDate = $subscription->getPaidUntil()->format('F j, Y');
+
+        if (true) {
+            $routeParams = [];
+            $msg = 'Your trial has successfully been extended two months. Your new renewal date is: ' . $newRenewalDate;
+        }
+
+        return redirect()->route(
+            'platform.profile.settings.account',
+            $routeParams ?? ['open-modal-id' => 'modal-how-can-we-make-next-month-better']
+        )->with([
+            'success-message' => $msg ?? ('Your access has been extended. Your new renewal date is: ' . $newRenewalDate),
+            'renewal-date' => $newRenewalDate
+        ]);
+
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptGratisAccess');
+    }
+
+    /**
+     * @param bool $success
+     * @param null $msg
+     * @param string $route
+     * @return RedirectResponse
+     */
+    private function returnRedirect($success = true, $msg = null, $route = 'crux.access-details')
+    {
+        $type = $success ? 'success-message' : 'error-message';
+
+        $msg = $msg ?? ($success ? self::$generalSuccessMessageToUser : self::$generalErrorMessageToUser);
+
+        return redirect()->route($route)->with([$type => $msg]);
+    }
+
+
+    /**
+     * @param $targetProductIds []
+     * @param string $carbonMethodName
+     * @param string|int $carbonMethodParamValue
+     * @return Subscription|boolean
+     */
+    private function updateSubscriptionPaidUntilDate($subscriptionToUpdate, $carbonMethodName, $carbonMethodParamValue)
+    {
+        // you're getting the carbon object that is set as an attribute on the entity, not a copy of the carbon object
+        $paidUntil = $subscriptionToUpdate->getPaidUntil();
+
+        try {
+            /** @var Carbon $extendedPaidUntil */
+            $extendedPaidUntil = $paidUntil->$carbonMethodName($carbonMethodParamValue);
+        } catch (\Exception $e) {
+            error_log($e);
+            return false;
+        }
+
+        try {
+            $oldSubscriptionToUpdate = clone($subscriptionToUpdate);
+
+            /*
+             * NOTE: "copy()" to get new obj else Doctrine won't detect change in Subscription entity (Doctrine doesn't
+             * parse obj details, only evaluates whether object is same object of whole different instance)
+             */
+            $subscriptionToUpdate->setPaidUntil($extendedPaidUntil->copy());
+
+            $this->ecommerceEntityManager->persist($subscriptionToUpdate);
+            $this->ecommerceEntityManager->flush();
+
+            event(new SubscriptionUpdated($oldSubscriptionToUpdate, $subscriptionToUpdate));
+        } catch (Throwable $e) {
+            error_log($e);
+            return false;
+        }
+
+        try {
+            $this->userProductService->updateSubscriptionProducts($subscriptionToUpdate);
+        } catch (Throwable $e) {
+            error_log($e);
+            return false;
+        }
+
+        return $subscriptionToUpdate;
     }
 
     public function cancel(Request $request)

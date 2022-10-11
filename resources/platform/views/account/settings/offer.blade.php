@@ -25,8 +25,8 @@
 {{--                        <p style="text-decoration-line: line-through;">$19.00/mo</p>--}}
                         <p style="text-decoration-line: line-through;">${{ $subscriptionPrice }}/mo</p>
                         <p>$0.00/mo</p>
-                        <p>No payment for 60 days.</p>
-                        <p>Next payment will be on {{ Carbon::format($nextPaymentDate) }}</p>
+                        <p>No payment for two months.</p>
+                        <p>Next payment will be on {{ $nextPaymentDateWithOffer->format('F j, Y') }}</p>
                     </div>
                     @include('account.settings.partials.cancellation.continue-membership')
                 </div>
