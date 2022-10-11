@@ -145,37 +145,54 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 
             {{-- About You --}}
             <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap tw-pt-[24px]" dusk="about-user">
-                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-justify-between tw-mb-3 tw-w-full">
-                    {{-- User Details --}}
-                    <div class="tw-flex tw-flex-col tw-mb-4 tw-mr-[36px] lg:tw-max-w-[50%]">
-                        <h1
-                            class="tw-font-bold tw-text-[24px] tw-leading-none tw-mb-[19px]">
-                            About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
-                        </h1>
 
+                {{-- Header --}}
+                <div class="tw-flex tw-flex-row tw-w-full tw-items-center tw-mb-8 tw-flex-wrap">
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-my-2"> 
+                        About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }} 
+                    </h2>
+                    @if ($isCurrentUsersProfile)
+                        <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
+                           class="tw-btn-secondary tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-8 tw-ml-auto" 
+                           dusk="edit-user">
+                            Edit
+                        </a>
+                    @endif
+                </div>
+
+                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-mb-3 tw-w-full">
+                    {{-- User Details --}}
+                    <div class="tw-flex tw-flex-col tw-mb-4 lg:tw-max-w-[50%] tw-mr-auto">
                         <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[12px]">
                             <span class="tw-font-bold">Full Name:&nbsp;</span>
                             <span>{{ $dashboardUser->first_name }}&nbsp;{{ $dashboardUser->last_name }}</span>
                         </div>
 
-                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[12px]">
                             <span class="tw-font-bold">Birthday:&nbsp;</span>
                             <span>{{ $dashboardUser->birthday }}</span>
                         </div>
 
-                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
-                            <p class="body">{!! nl2br($dashboardUser->biography) !!}</p>
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[24px]">
+                            <span class="tw-font-bold">Location:&nbsp;</span>
+                            <span>{{ $dashboardUser->country }}</span>
+                        </div>
+
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[24px]">
+                            <p class="body">
+                                <span class="tw-font-bold">Bio:&nbsp;</span>
+                                {!! nl2br($dashboardUser->biography) !!}
+                            </p>
                         </div>
                     </div>
                     {{-- User Gear Details --}}
-                    <gear-carousel :gear-info="{{ json_encode($dashboardUser) }}" />
+                    <gear-carousel 
+                        :gear-info="{{ json_encode($dashboardUser) }}" 
+                        brand="{{ $brand }}" 
+                        class="tw-flex-grow-0 xl:tw-ml-[36px]" 
+                    />
                 </div>
-                @if ($isCurrentUsersProfile)
-                    <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
-                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg" dusk="edit-user">
-                        Edit
-                    </a>
-                @endif
+
             </section>
         </div>
     </div>

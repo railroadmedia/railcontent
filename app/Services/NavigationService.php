@@ -13,61 +13,40 @@ class NavigationService
             return [];
         }
 
-        if (!user()->isAMember()) {
-            if (brand() === 'singeo') {
-                return [
-                    [ // section
-                        [
-                            'name' => 'Courses',
-                            'path' => '/'.brand().'/courses',
-                            'icon' => 'box',
-                        ],
+        if (user()->isPackOnlyOwner()) {
+            return [
+                [ // section
+                    [
+                        'name' => 'Home',
+                        'path' => '/'.brand(),
+                        'icon' => 'home',
                     ],
-                    [ // section
-                        [
-                            'name' => 'Forums',
-                            'path' => '/'.brand().'/forums',
-                            'icon' => 'messages',
-                        ],
-                        [
-                            'name' => 'My List',
-                            'path' => '/'.brand().'/lists/my-list',
-                            'icon' => 'playlist',
-                        ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
+                ],
+                [ // section
+                    [
+                        'name' => 'Packs',
+                        'path' => '/'.brand().'/packs',
+                        'icon' => 'box',
                     ],
-                ];
-
-            } else {
-                return [
-                    [ // section
-                        [
-                            'name' => 'Home',
-                            'path' => '/'.brand(),
-                            'icon' => 'home',
-                        ],
+                ],
+                [ // section
+                    [
+                        'name' => 'Forums',
+                        'path' => '/'.brand().'/forums',
+                        'icon' => 'messages',
                     ],
-                    [ // section
-                        [
-                            'name' => 'Packs',
-                            'path' => '/'.brand().'/packs',
-                            'icon' => 'box',
-                        ],
+                    [
+                        'name' => 'My List',
+                        'path' => '/'.brand().'/lists/my-list',
+                        'icon' => 'playlist',
                     ],
-                    [ // section
-                        [
-                            'name' => 'Forums',
-                            'path' => '/'.brand().'/forums',
-                            'icon' => 'messages',
-                        ],
-                        [
-                            'name' => 'My List',
-                            'path' => '/'.brand().'/lists/my-list',
-                            'icon' => 'playlist',
-                        ],
-                    ],
-                ];
-
-            }
+                ],
+            ];
         }
 
         if (brand() === 'drumeo') {
@@ -152,6 +131,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'pianote') {
@@ -231,6 +215,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'guitareo') {
@@ -325,6 +314,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'singeo') {
@@ -394,6 +388,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         }
@@ -426,7 +425,6 @@ class NavigationService
             'applyForReviewPageUrl' => '/',
             'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
             'supportPageUrl' => '/'.brand().'/support',
-            'shopPageUrl' => 'https://'.brand().'.com/shop',
             'logoutPageUrl' => '/user-management-system/logout/cookie',
         ];
     }
