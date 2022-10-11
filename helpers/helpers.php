@@ -3,6 +3,18 @@
 use App\Services\LiveStreamEventService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 
+if (!function_exists('get_legacy_brand_base_url')) {
+    function get_legacy_brand_base_url() {
+        if (App::environment() == 'local' || App::environment() == 'development') {
+            return 'https://dev.' . brand() . '.com';
+        } elseif (App::environment() == 'beta-testing' || str_contains(App::environment(), 'staging')) {
+            return 'https://staging.' . brand() . '.com';
+        }
+
+        return 'https://www.' . brand() . '.com';
+    }
+}
+
 if (!function_exists('cf_img')) {
     /**
      * Process image and Get a CDN URL using our cloudflare images account.

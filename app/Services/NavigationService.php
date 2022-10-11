@@ -21,6 +21,11 @@ class NavigationService
                         'path' => '/'.brand(),
                         'icon' => 'home',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
                 [ // section
                     [
@@ -126,6 +131,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'pianote') {
@@ -205,6 +215,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'guitareo') {
@@ -299,6 +314,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'singeo') {
@@ -368,6 +388,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         }
@@ -400,7 +425,6 @@ class NavigationService
             'applyForReviewPageUrl' => '/',
             'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
             'supportPageUrl' => '/'.brand().'/support',
-            'shopPageUrl' => 'https://'.brand().'.com/shop',
             'logoutPageUrl' => '/user-management-system/logout/cookie',
         ];
     }

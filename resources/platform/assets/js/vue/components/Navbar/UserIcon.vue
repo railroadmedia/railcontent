@@ -152,10 +152,6 @@ export default {
           </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement :href="this.userNavigationDropdownLinks.shopPageUrl">
-          <musora-icon icon-name="cart" class="tw-w-[20px] tw-mr-2"/>
-          Shop
-        </OptionElement>
         <OptionElement :href="this.userNavigationDropdownLinks.logoutPageUrl">
           <musora-icon icon-name="sign-out" class="tw-w-[20px] tw-mr-2"/>
           Logout
