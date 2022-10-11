@@ -119,6 +119,16 @@
                 @include('partials._student-focus-application-drumeo')
             @endif
 
+            @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
+                <div class="tw-flex tw-mt-4">
+                    <a href="/drumeo/forums/drumeo-songs/15/november-2022-song-request-voting-thread/13701?sortby_val=published_on" 
+                       class="tw-btn-primary tw-bg-drumeo">
+                        Request A Song 
+                        <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
+                    </a>
+                </div>
+            @endif
+
             @if($lessonType === 'question-and-answer')
                 @include('partials._ask-question-form')
             @endif
