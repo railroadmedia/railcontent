@@ -100,7 +100,6 @@ class CreateVimeoVideoContentRecords extends Command
                     }
 
                     foreach (ConfigService::$availableBrands as $brand) {
-                        ConfigService::$brand = $brand;
                         // create if needed
                         $noRecordOfVideoInCMS = count(
                                 $contentRepository->getBySlugAndTypeAndBrand(
@@ -116,7 +115,7 @@ class CreateVimeoVideoContentRecords extends Command
                                 'vimeo-video',
                                 ContentService::STATUS_PUBLISHED,
                                 null,
-                                null,
+                                $brand,
                                 null,
                                 Carbon::now()->toDateTimeString()
                             );
