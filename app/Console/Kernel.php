@@ -6,8 +6,8 @@ use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserRolesTable;
-use App\Console\Commands\PopulateUserTotalXpPerBrand;
 use App\Console\Commands\RepairVimeoDurations;
+use App\Console\Commands\PopulateUserTotalXpPerBrand;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
         RunMWPPhaseOneLaunchMigrations::class,
         MigrateCoachesToInstructors::class,
         PopulateUserBrandLevel::class,
+        RepairVimeoDurations::class,
         PopulateUserTotalXpPerBrand::class,
-        RepairVimeoDurations::class
     ];
 
     /**
