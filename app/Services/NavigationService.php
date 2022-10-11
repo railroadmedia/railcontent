@@ -13,7 +13,7 @@ class NavigationService
             return [];
         }
 
-        if (user()->isPackOnlyOwner()) {
+        if (!user()->isAMember()) {
             if (brand() === 'singeo') {
                 return [
                     [ // section
