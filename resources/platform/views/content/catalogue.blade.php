@@ -129,6 +129,10 @@
                 </div>
             @endif
 
+            @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
+                @include('partials._student-collaboration-form')
+            @endif
+
             @if($lessonType === 'question-and-answer')
                 @include('partials._ask-question-form')
             @endif
