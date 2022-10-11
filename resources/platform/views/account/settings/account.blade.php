@@ -126,7 +126,7 @@
 
                 <!-- ================================= Owned products ================================= -->
 
-                @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription || $membershipFromOneTimeProduct)
+                @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription || $membershipWithoutSubscription)
 
                     <div class="tw-flex tw-flex-col tw-p-8 body">
                         <div class="tw-flex tw-flex-row tw-flex-auto tw-p-3 tw-text-[#00101D] dark:tw-text-white">
@@ -142,7 +142,7 @@
                                 <ul class="tw-mt-3 tw-space-y-1">
                                     @if($isLifetime)
                                         <li>Lifetime Membership</li>
-                                    @elseif($subscription || $membershipFromOneTimeProduct)
+                                    @elseif($subscription || $membershipWithoutSubscription)
                                         <li>Membership</li>
                                     @endif
 
@@ -350,7 +350,11 @@
 
                     @elseif(!$subscription)
                         {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
-                        <a href="/">RENEW YOUR MEMBERSHIP</a>
+
+                        <a href="{{ $salesPageUrl }}">Renew Your Membership</a>
+
+                        <p>By completing the checkout process on the next page, any remaining time on your account will
+                            be added to your new subscription.</p>
 
                     @elseif($offerUpgradeToAnnualShowToStudent)
 
@@ -380,9 +384,10 @@
         </div>
     </div>
 
-    <!-- =================================  ================================= -->
 
-    <h1>Legacy Video Settings</h1> <!-- ikr -->
+    {{--  ========================================= Legacy Video Settings ========================================= --}}
+
+{{--    <h1>Legacy Video Settings</h1>--}}
 
     {{--  ================================================= MODALS ================================================= --}}
 

@@ -204,16 +204,16 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-
         // --------------------------------------- get the active subscription -----------------------------------------
 
         $activeSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
 
         if (!$activeSubscription) {
-            if ($activeAllContentAccessExpiryDate > \Carbon\Carbon::now()) {
-                $membershipFromOneTimeProduct = true;
+            if ($activeAllContentAccessExpiryDate > Carbon::now()) {
+                $membershipWithoutSubscription = true;
             }
         }
+
 
         // ---------------------------------- have they had a membership previously? ----------------------------------
 
@@ -330,8 +330,6 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-
-
         // -------------------------------------------------------------------------------------------------------------
 
          $urlParamsByBrandForTrial = [
@@ -382,7 +380,7 @@ class ProfileSettingsPagesController extends BaseController
             'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
             'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
             'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
-            'membershipFromOneTimeProduct' => $membershipFromOneTimeProduct ?? false,
+            '$membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
         ];
 
         return view(
