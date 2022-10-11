@@ -336,11 +336,100 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile.settings.notifications');
 
         Route::get(
-            '/{brand}/profile/{userId}/settings/membership',
-            [ProfileSettingsPagesController::class, 'membership']
+            '/{brand}/profile/{userId}/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
         )
             ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.membership');
+            ->name('platform.profile.settings.account.id');
+
+        Route::get(
+            '/{brand}/profile/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.account');
+
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+        /*
+         * Cancellation-related
+         */
+        // POST accept-annual-offer
+        Route::post(
+            '/{brand}/profile/settings/account/accept-annual-offer',
+            [ProfileSettingsPagesController::class, 'acceptAnnualOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.accept-annual-offer');
+
+        // POST resume-paused
+        Route::post(
+            '/{brand}/profile/settings/account/resume-paused',
+            [ProfileSettingsPagesController::class, 'resumePaused']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.resume-paused');
+
+        // POST submit-cancel-reason
+        Route::post(
+            '/{brand}/profile/settings/account/submit-cancel-reason',
+            [ProfileSettingsPagesController::class, 'submitCancelReason']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.submit-cancel-reason');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/student-plan-offer',
+            [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.student-plan-offer');
+
+        // POST accept switch-to-monthly offer
+        Route::post(
+            '/{brand}/profile/settings/account/switch-to-monthly',
+            [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.switch-to-monthly');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/gratis-access',
+            [ProfileSettingsPagesController::class, 'acceptGratisAccess']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.gratis-access');
+
+        Route::post(
+            '/{brand}/profile/settings/account/send-help-email',
+            [ProfileSettingsPagesController::class, 'sendHelpEmail']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.send-help-email');
+
+
+        // GET cancel-reason-form
+        Route::get(
+            '/{brand}/profile/settings/account/cancel',
+            [ProfileSettingsPagesController::class, 'cancelReasonForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.cancel');
+
+        // GET win-back
+        Route::post(
+            '/{brand}/profile/settings/account/win-back',
+            [ProfileSettingsPagesController::class, 'winBack']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.win-back');
+
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+        // (end of cancellation-related)
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
 
         Route::get(
             '/{brand}/profile/{userId}/settings/payment-invoice/{id}',

@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App;
 use App\Http\Controllers\BaseController;
-use App\Maps\ProductAccessMap;
-use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Crux\ProductAccessMap;
 use App\Services\User\UserAccessService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Mail;
 use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
+use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\Payment;
+use Railroad\Ecommerce\Entities\Product;
+use App\Modules\Ecommerce\Models\Product as ProductModel;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\PaymentMethodRepository;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
@@ -16,8 +23,13 @@ use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Services\CartService;
 use Railroad\Ecommerce\Services\InvoiceService;
 use Railroad\Ecommerce\Services\ResponseService;
+use Railroad\Ecommerce\Services\SubscriptionService;
+use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Ecommerce\Transformers\SubscriptionTransformer;
 use Railroad\Location\Services\CountryListService;
+use Railroad\Mailora\Mail\General;
+use Railroad\Mailora\Services\MailService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,14 +37,51 @@ use Throwable;
 
 class ProfileSettingsPagesController extends BaseController
 {
-    private NotificationSettingsService $notificationSettingsService;
-    private UserSignaturesRepository $userSignaturesRepository;
-    private PaymentMethodRepository $paymentMethodRepository;
-    private SubscriptionRepository $subscriptionRepository;
+    const MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER = 10;
+
+    /**
+     * @var NotificationSettingsService
+     */
+    private $notificationSettingsService;
+    /**
+     * @var UserPermissionsService
+     */
+    private $userPermissionsService;
+    /**
+     * @var UserProductService
+     */
+    private $userProductService;
+    /**
+     * @var SubscriptionService
+     */
+    private $subscriptionService;
+    /**
+     * @var SubscriptionRepository
+     */
+    private $subscriptionRepository;
+    /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+    /**
+     * @var MailService
+     */
+    private $mailService;
+
+    const HOW_CAN_WE_HELP_OPTIONS = [
+        'direction' => 'I need more direction',
+        'time' => 'I don’t have enough time',
+        'watch' => 'I don’t know what lesson to watch',
+        'easy' => 'The lessons are too easy',
+        'difficult' => 'The lessons are too difficult',
+        'website' => 'I don’t know how to use the website/app.',
+        'other' => 'Other',
+    ];
     private CartService $cartService;
     private PaymentRepository $paymentRepository;
     private SubscriptionTransformer $subscriptionTransformer;
     private InvoiceService $invoiceService;
+    private PaymentMethodRepository $paymentMethodRepository;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -40,21 +89,31 @@ class ProfileSettingsPagesController extends BaseController
     public function __construct(
         NotificationSettingsService $notificationSettingsService,
         UserSignaturesRepository $userSignaturesRepository,
-        PaymentMethodRepository $paymentMethodRepository,
+        UserPermissionsService $userPermissionsService,
+        UserProductService $userProductService,
+        SubscriptionService $subscriptionService,
         SubscriptionRepository $subscriptionRepository,
+        UserProviderInterface $userProvider,
+        MailService $mailService,
         CartService $cartService,
         PaymentRepository $paymentRepository,
         SubscriptionTransformer $subscriptionTransformer,
-        InvoiceService $invoiceService
+        InvoiceService $invoiceService,
+        PaymentMethodRepository $paymentMethodRepository,
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->userPermissionsService = $userPermissionsService;
+        $this->userProductService = $userProductService;
+        $this->subscriptionService = $subscriptionService;
         $this->subscriptionRepository = $subscriptionRepository;
+        $this->userProvider = $userProvider;
+        $this->mailService = $mailService;
         $this->cartService = $cartService;
         $this->paymentRepository = $paymentRepository;
         $this->subscriptionTransformer = $subscriptionTransformer;
         $this->invoiceService = $invoiceService;
+        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
@@ -97,14 +156,325 @@ class ProfileSettingsPagesController extends BaseController
         ]);
     }
 
-    public function membership(Request $request, $domain, $brand, $userId)
+    public function account(Request $request, $domain, $brand, $userId = null)
     {
-        return view('account.settings.membership', [
-            'user' => user(),
-            'sections' => $this->settingSections('account details'),
-            'allBrands' => all_brands(),
-            'selectedBrand' => $request->get('selected-brand', $brand)
-        ]);
+        if (!$userId) {
+            $userId = auth()->id();
+        }
+
+        if ($userId != auth()->id()) {
+            // todo: redirect to version of this page for auth()->id()
+        }
+
+        $userId = auth()->id();
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        $now = Carbon::now();
+        $hasHadMembership = false;
+        $userProductsDigitalAccessTypeSpecific = [];
+        $activeAllContentAccessExpiryDate = null;
+        $pausedSubscriptionStartDate = null;
+        $accessIsFromAppPurchase = false;
+        $isLifetime = false;
+
+        $trialUrl = ''; // todo
+
+
+        // ---------------------------- determine all owned digital non-membership products ----------------------------
+
+        $userProducts = $this->userProductService->getAllUsersProducts($userId);
+
+        foreach ($userProducts as $userProduct) {
+            if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
+                $userProductsDigitalAccessTypeSpecific[] = $userProduct;
+            }
+            $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt($now) : null;
+
+            $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
+            if ($isAllContentAccessProduct) {
+                $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt($now);
+                if (!$expired) {
+                    if ($paused) {
+                        $pausedSubscriptionStartDate = $userProduct->getStartDate();
+                    } else {
+                        $activeAllContentAccessExpiryDate = $userProduct->getExpirationDate();
+                    }
+                }
+                $hasHadMembership = true;
+            }
+        }
+
+
+        // --------------------------------------- get the active subscription -----------------------------------------
+
+        $activeSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+        if (!$activeSubscription) {
+            if ($activeAllContentAccessExpiryDate > \Carbon\Carbon::now()) {
+                $membershipFromOneTimeProduct = true;
+            }
+        }
+
+        // ---------------------------------- have they had a membership previously? ----------------------------------
+
+        $subscriptions = $this->subscriptionRepository->getSubscriptionsForUsers([$userId]);
+
+        foreach ($subscriptions as $subscription) {
+            $isCorrectType = $subscription->getType() == 'subscription';
+
+            $subscriptionProductId = $subscription->getProduct()->getId();
+            $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
+
+            if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
+                $hasHadMembership = true;
+                $membershipSubscriptions[] = $subscription;
+            }
+        }
+
+
+        // --------------------------------------------- is lifetime member --------------------------------------------
+
+        foreach ($userProducts as $userProduct) {
+            if (in_array($userProduct->getProduct()->getId(), [7, 8, 22, 141, 412])) {
+                $isLifetime = true;
+            }
+        }
+
+
+        // --------------------- is their current access remaining from a cancelled subscription? ----------------------
+
+        $noMembershipSubscriptionNowButHadOnePreviously = empty($activeSubscription) && !empty($membershipSubscriptions);
+
+        if ($noMembershipSubscriptionNowButHadOnePreviously && !$isLifetime) {
+            foreach ($subscriptions as $subscription) {           // todo: delete
+                $paidUntil = $subscription->getPaidUntil();       // todo: delete
+                $cancelledOn = $subscription->getCanceledOn();    // todo: delete
+                $sku = $subscription->getProduct()->getSku();     // todo: delete
+                $cancelledSubs1[] = [                             // todo: delete
+                    'subId' => $subscription->getId(),            // todo: delete
+                    'paidUntil' => $paidUntil,                    // todo: delete
+                    'cancelledOn' => $cancelledOn,                // todo: delete
+                    'sku' => $sku,                                // todo: delete
+                ];                                                // todo: delete
+            }                                                     // todo: delete
+
+            usort($subscriptions, function ($x, $y) {
+                /**
+                 * @var $x Subscription
+                 * @var $y Subscription
+                 */
+                if ($x->getPaidUntil() === $y->getPaidUntil()) {
+                    $xCancelledOn = $x->getCanceledOn() ?? null;
+                    $yCancelledOn = $y->getCanceledOn() ?? null;
+                    if ($xCancelledOn === $yCancelledOn) {
+                        return 0;
+                    }
+                    return $xCancelledOn < $yCancelledOn ? -1 : 1;
+                }
+                return $x->getPaidUntil() < $y->getPaidUntil() ? -1 : 1;
+            });
+
+            foreach ($subscriptions as $subscription) {           // todo: delete
+                $paidUntil = $subscription->getPaidUntil();       // todo: delete
+                $cancelledOn = $subscription->getCanceledOn();    // todo: delete
+                $sku = $subscription->getProduct()->getSku();     // todo: delete
+                $cancelledSubs2[] = [                             // todo: delete
+                    'subId' => $subscription->getId(),            // todo: delete
+                    'paidUntil' => $paidUntil,                    // todo: delete
+                    'cancelledOn' => $cancelledOn,                // todo: delete
+                    'sku' => $sku,                                // todo: delete
+                ];
+            }
+
+            $mostRecentSubscription = end($subscriptions);
+            $mostRecentSubscriptionCancelledOn = $mostRecentSubscription->getCanceledOn() ?? null;
+        }
+
+        // ------------------------------------------ access from app purchase -----------------------------------------
+
+        if ($activeSubscription) {
+            // if the student's subscription is administered via a mobile app, we don't offer the same controls and
+            // instead direct them to the Apple's or Google's pages on the matter.
+            if (
+                $activeSubscription->getType() == 'apple_subscription' ||
+                $activeSubscription->getType() == 'google_subscription'
+            ) {
+                $accessIsFromAppPurchase = true;
+            }
+
+            // if the student is an active monthly subscriber we present an offer to upgrade to an annual membership
+            if ($activeSubscription->getType() == 'subscription') {
+                if ($activeSubscription->getIntervalType() == 'month') {
+                    if ($activeSubscription->getIntervalCount() == 1) {
+                        $multiplyFactor = 12;
+                    } elseif ($activeSubscription->getIntervalCount() == 3) {
+                        $multiplyFactor = 4;
+                    } elseif ($activeSubscription->getIntervalCount() == 6) {
+                        $multiplyFactor = 2;
+                    } elseif ($activeSubscription->getIntervalCount() == 2) {
+                        $multiplyFactor = 6;
+                    }
+
+                    if ($multiplyFactor ?? false) {
+                        $offerUpgradeToAnnualPrice = ProductAccessMap::annualSubscriptionPrice();
+                        $currentMonthlySubPricePerYear = $activeSubscription->getTotalPrice() * $multiplyFactor;
+                        $savingsFactor = 1 - ($offerUpgradeToAnnualPrice / $currentMonthlySubPricePerYear);
+                        $savingsPercentageRaw = $savingsFactor * 100;
+
+                        if ($savingsPercentageRaw > self::MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER) {
+                            $offerUpgradeToAnnualShowToStudent = true;
+                            $offerUpgradeToAnnualPercentSaved = round($savingsPercentageRaw);
+                        }
+                    }
+                }
+            }
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        return view(
+            'account.settings.account',
+            [
+                'user' => user(),
+                'sections' => $this->settingSections('account'),
+                'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
+                'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
+                'isLifetime' => $isLifetime,
+                'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
+                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
+                'subscription' => $activeSubscription,
+                'hasHadMembership' => $hasHadMembership,
+                'now' => $now,
+                'trialUrl' => $trialUrl,
+                'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
+                'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
+                'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
+                'membershipFromOneTimeProduct' => $membershipFromOneTimeProduct ?? false,
+            ]
+        );
+    }
+
+    /**
+     * @return void
+     * POST
+     */
+    public function acceptAnnualOffer()
+    {
+        $foo = 'bar';
+    }
+
+    /**
+     * @return void
+     * POST
+     */
+    public function resumePaused()
+    {
+        $foo = 'bar';
+    }
+
+    /**
+     * @return void
+     * GET
+     */
+    public function cancelReasonForm($domain, $brand)
+    {
+        $foo = 'bar';
+
+        return view('account.settings.cancel', ['brand' => $brand, 'domain' => $domain, 'userId' => user()->id]);
+    }
+
+    /**
+     * @return void
+     * POST
+     */
+    public function submitCancelReason(Request $request)
+    {
+        $reason = $request->get('reason');
+        $textReason = $request->get('other-reason-text');
+
+        // get current subscription
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+        $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+        // determine if the subscription is a trial
+        $trialMembershipProductIds = ProductAccessMap::trialMembershipProductIds();
+        $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+         * store in session because we don't yet need it. We'll present the student with an offer, and if they     *
+         * accept that offer then we don't need the cancellation-reason anymore (I least I don't think we're doing *
+         * anything with it, though maybe we should anyway). If they do cancel, then we'll take that               *
+         * stored-in-the-session cancellation-reason and use that when writing the cancellation to the DB.         *
+         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        session()->put('cancel-reason', $reason);
+        session()->put('cancel-reason-text', $textReason);
+
+        // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
+        if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
+            return $this->cancel($request);
+        }
+
+        $isSubscriberMonthly = false;
+        $isSubscriberAnnual = false;
+        $isSubscriberAnnualRenewingSoon = false;
+
+        /* what if the subscription is a 2-month, 3-month, or 6-month subscription? */
+        if ($subscription->getIntervalType() === 'month' && $subscription->getIntervalCount() == 1) {
+            // todo: what if this is zero or negative?
+            $amountSaved = 0;
+            $subscriptionPriceWithTax = $subscription->getTotalPrice();
+
+            dd($subscription->getTax());
+
+            if ($subscription->getTax()) {
+                $subscription->getTotalDueAfterTax();
+            }
+
+
+            // todo: create as Carbon object
+            $nextPaymentDate = null;
+
+//            return view('account.settings.offer', [
+//                'amountSaved' => $amountSaved,
+//                'subscriptionPrice' => $subscriptionPrice
+//                'nextPaymentDate' => $nextPaymentDate,
+//            ]);
+        }
+        // send to final offer screen depending on use case
+
+
+    }
+
+
+    public function acceptStudentPlanOffer(Request $request)
+    {
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptStudentPlanOffer', $request);
+    }
+
+    public function acceptSwitchToMonthly(Request $request)
+    {
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptSwitchToMonthly', $request);
+    }
+
+    public function acceptGratisAccess(Request $request)
+    {
+        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptGratisAccess', $request);
+    }
+
+    public function cancel(Request $request)
+    {
+    }
+
+
+    /**
+     * @return void
+     * GET
+     */
+    public function winBack(Request $request)
+    {
+        dd($request);
+
+        return view('account.settings.win-back', []);
     }
 
     public function payments(Request $request)
@@ -125,7 +495,7 @@ class ProfileSettingsPagesController extends BaseController
 
         $stripePublishableKey = config('ecommerce.payment_gateways.stripe.drumeo.stripe_publishable_key');
 
-        $membershipProductIds = Product::query()
+        $membershipProductIds = ProductModel::query()
             ->where([
                 'type' => 'digital subscription',
                 'digital_access_type' => 'all content access',
@@ -300,15 +670,49 @@ class ProfileSettingsPagesController extends BaseController
                     'active' => $section === 'settings',
                 ],
                 [
-                    "url" => url()->route('platform.profile.settings.membership', ['userId' => user()->id]),
+                    "url" => url()->route('platform.profile.settings.account'),
                     'icon' => 'fas fa-calendar-alt',
                     'title' => 'Account Details',
-                    'active' => $section === 'account details',
+                    'active' => $section === 'account',
                 ],
             ];
         } catch (\Exception $exception) {
             error_log($exception);
             return [];
+        }
+    }
+
+    public function sendHelpEmail(Request $request)
+    {
+        //Mail::to($recipient)
+
+        $input = [];
+
+        try {
+            $helpIssue = $request->get('help-issue');
+            $helpIssueText = self::HOW_CAN_WE_HELP_OPTIONS[$helpIssue] ?? null;
+            $textInput = $request->get('text-input');
+
+            $mailable = new General($input, 'emails.agnostic');
+
+
+            $debug_userFromAuth = auth();
+            $debug_userFromUserProvider = $this->userProvider->getCurrentUser();
+
+            if (App::environment() !== 'production') {
+                $recipientEmailAddress = 'jonathan+email_safety_in_mwp_profilesettingspagecontroller@musora.com';
+            }
+
+            $mailable->to($recipientEmailAddress ?? 'support@musora.com');
+            $mailable->from('system@musora.com', 'Musora System');
+            $mailable->replyTo(user()->email);
+
+            $mailable->subject('Request for help making most of membership from ' . user()->email);
+
+            Mail::send($mailable);
+            $success = true;
+        } catch (\Exception $exception) {
+            error_log($exception);
         }
     }
 }
