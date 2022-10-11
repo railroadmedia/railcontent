@@ -58,6 +58,7 @@ class CommentUserDecorator extends ModeDecoratorBase
             $comments[$commentIndex]['user']['rank'] = $commentAuthor->getXpRank();
             $comments[$commentIndex]['user']['access_level'] = $commentAuthor['access_level'];
             $comments[$commentIndex]['user']['xp_level'] = $commentAuthor->getMethodLevel();
+            $comments[$commentIndex]['user']['level_number'] = $commentAuthor->getMethodLevel();
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
                 $comments[$commentIndex]['replies'][$replyIndex]['created_on_diff'] =

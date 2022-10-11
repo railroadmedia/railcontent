@@ -62,7 +62,7 @@
                             </a>
                             @if($isAdmin)
                                 <a href="{{ url()->route('forums.show-update-category-form', $discussion['id']) }}"
-                                class="tw-btn-secondary  tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto"
+                                class="tw-btn-secondary  tw-mb-3 tw-px-16 tw-w-full sm:tw-w-auto tw-text-white"
                                 dusk="create-post-button">
                                     <i class="fas fa-pencil tw-mr-2"></i>
                                     Edit Forum

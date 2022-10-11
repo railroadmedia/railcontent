@@ -1,112 +1,115 @@
+{{-- Form Data --}}
+@php
+  require_once(resource_path('marketing/views/musora/_partials/forms/data/support-options.php'))
+@endphp
+
 {{-- Contact Page Email Form --}}
-<form class="flex flex-col my-4"
+<form class="flex flex-col py-4"
         novalidate="true"
-        @submit.prevent="submitForm"
+        x-data='contactForm()'
+        x-on:submit.prevent='submitForm'
 >
-    <!-- Name -->
-    <text-input
-        name="name"
-        :required="true"
-        :invalid="!formValid && !textFieldValid"
-        :inputValue="formData.name"
-        @update:textFieldValid="textFieldValid = $event"
-        @update:inputValue="formData.name = $event"
-        id="customer-name"
-        placeholder="Enter your name..."
-    />
+    {{-- Name --}}
+    @component('_partials.components.forms.text-input',[
+        'name' => 'name',
+        'required' => true,
+        'label' => 'name',
+        'id' => 'customer-name',
+        'placeholder' => 'Enter your name...',
+        'errorMessage' => 'Please enter your name.',
+        'darkMode' => true,
+    ])@endcomponent
 
-    <radio-buttons
-        name="Do you have a membership with us?"
-        groupName="membership"
-        :required="true"
-        :invalid="!formValid && !radioFieldsValid"
-        :buttonsList="buttonsList"
-        @update:radioFieldsValid="radioFieldsValid = $event"
-        @updateValue="updateMembershipStatus($event)"
-        :showSelectMessage="formData.isMember === true"
-        errorMessage="Please select an option."
-        selectMessage="If your account is under a different email address than noted below, please provide it in your description."
-    />
+    {{-- Radio Buttons --}}
+    @component('_partials.components.forms.radio-buttons',[
+        'label' => 'Do you have a membership with us?',
+        'name' => 'membership',
+        'required' => true,
+        'buttonList' => [
+            [
+                'label' => 'Yes',
+                'value' => 'Is currently a member',
+            ],
+            [
+                'label' => 'No',
+                'value' => 'Is not a member',
+            ]
+            ],
+        'errorMessage' => 'Please select an option.',
+        'selectMessage' => 'If your account is under a different email address than noted below, please provide it in your description.',
+        'darkMode' => true,
+    ])@endcomponent
 
-    <!-- Email -->
-    <email-input
-        name="Email Address"
-        :required="true"
-        :invalid="!formValid && !emailFieldValid"
-        :inputValue="formData.email"
-        @update:emailFieldValid="emailFieldValid = $event"
-        @update:inputValue="formData.email = $event"
-        id="customer-email"
-        placeholder="Enter your email address..."
-    />
+    {{-- Email --}}
+    @component('_partials.components.forms.email-input',[
+        'label' => 'Email Address',
+        'name' => 'email',
+        'id' => 'support-listbox',
+        'placeholder' => 'Enter your email address...',
+        'required' => true,
+        'darkMode' => true,
+    ])@endcomponent
 
-    <!-- Help Dropdown -->
-    <multilevel-dropdown
-        label="What can we help you with?"
-        name="support-options"
-        id="support-listbox"
-        :theme="brand"
-        :required="true"
-        :invalid="!formValid && !selectFieldValid"
-        :selectedValue="formData.supportOption"
-        :listData="optionsData"
-        @updateValue="updateSupportOption($event)"
-        placeholder="Please select the option that is closest to your request..."
-        errorMessage="Please select an option that is closest to your request."
-    />
+    {{-- Multi Level Dropdown --}}
+    @component('_partials.components.forms.multi-level-dropdown',[
+        'label' => 'What can we help you with?',
+        'name' => 'supportOption',
+        'id' => 'support-listbox',
+        'placeholder' => 'Please select the option that is closest to your request...',
+        'errorMessage' => 'Please select an option that is closest to your request.',
+        'listData' => $supportOptions,
+        'required' => true,
+        'darkMode' => true,
+    ])@endcomponent
 
     <!-- Description -->
-    <textarea-input
-        name="description"
-        :required="true"
-        :invalid="!formValid && !messageFieldValid"
-        :resize="false"
-        :rows="4"
-        :inputValue="formData.message"
-        @update:messageFieldValid="messageFieldValid = $event"
-        @update:inputValue="formData.message = $event"
-        id="support-description"
-        placeholder="Add message here..."
-    />
+    @component('_partials.components.forms.textarea-input',[
+        'label' => 'description',
+        'name' => 'description',
+        'id' => 'support-description',
+        'placeholder' => 'Add message here...',
+        'rows' => 4,
+        'errorMessage' => 'Please enter the details of your request.',
+        'required' => true,
+        'darkMode' => true,
+    ])@endcomponent
 
     <div class="flex flex-col-reverse sm:flex-row full">
         <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
-            <!-- Recaptcha -->
-            <recaptcha :siteKey="captchakey"
-                        @update:verified="formVerified = $event"
-            />
+            {{-- Recaptcha Form Component --}}
+            @component('_partials.components.forms.recaptcha', [
+                "siteKey" => "6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx",
+                "tokenName" => "recaptchaToken"
+            ])
+            @endcomponent
         </div>
+
         <div class="sm:w-72 sm:ml-auto">
-            <!-- File Upload Button -->
-            <file-input
-                name="attach file"
-                id="support-file"
-                :required="false"
-                :disabled="false"
-                :multiple="false"
-                accept="video/*,image/*"
-                :files="formData.attachments"
-                message="For security reasons, we only accept image and video files."
-                :megabiteLimit="100"
-                @attachFile="attachFile($event)"
-                @removeFile="removeFile($event)"
-                @clearFiles="clearFiles()"
-            />
+            {{-- File Upload Button --}}
+            @component('_partials.components.forms.file-input',[
+                'label' => 'attach file',
+                'name' => 'attachment',
+                'id' => 'support-file',
+                'accept' => 'video/*,image/*',
+                'megabiteLimit' => '100',
+                'message' => 'For security reasons, we only accept image and video files.',
+                'darkMode' => true,
+            ])@endcomponent
+
         </div>
 
     </div>
 
-    <!-- SUBMIT BUTTON -->
-    <button class="btn-primary self-start mr-auto w-full sm:w-min"
+    {{-- SUBMIT BUTTON --}}
+    <button class="btn-primary bg-drumeo self-start mr-auto w-full sm:w-min"
             type="submit"
-            :disabled="!formValid || !formVerified"
-            :class="themeBgClass"
+            x-bind:disabled="!formValid || !formVerified"
     >
             Submit
     </button>
 
-    <!-- Response Message -->
-    <div class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
+    {{-- Response Message --}}
+    <div x-cloak class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
             :class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
     >
         <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
@@ -118,428 +121,103 @@
         <div v-if="formSuccessful">
             <p class="font-bold mb-3">Your message was successfully sent!</p>
             <p class="mb-2">Your message has been submitted to the support team and will be reviewed shortly</p>
-            <p class="font-bold mb-2 cursor-pointer" @click="responseMessageVisible = false">Dismiss</p>
+            <p class="font-bold mb-2 cursor-pointer" x-on:click="responseMessageVisible = false">Dismiss</p>
         </div>
         <div v-else>
             <p class="font-bold mb-3">Your message was not sent</p>
             <p class="mb-2">We could not submit your message to the support team due to a servor error. </p>
-            <p class="font-bold mb-2 cursor-pointer" @click="responseMessageVisible = false">Dismiss</p>
+            <p class="font-bold mb-2 cursor-pointer" x-on:click="responseMessageVisible = false">Dismiss</p>
         </div>
     </div>
 </form>
 
 <script>
-import SupportService from '../../assets/js/services/support';
-//Form Components
-import TextareaInput from '../FormComponents/TextareaInput.vue'
-import TextInput from '../FormComponents/TextInput.vue'
-import RadioButtons from '../FormComponents/RadioButtons.vue'
-import EmailInput from '../FormComponents/EmailInput.vue'
-import FileInput from '../FormComponents/FileInput.vue'
-import MultiLevelDropdown from '../FormComponents/Dropdowns/MultiLevelDropdown.vue'
-import Recaptcha from '../FormComponents/Recaptcha.vue'
-
-export default {
-    name: 'ContactEmailForm',
-
-    components: {
-        'text-input': TextInput,
-        'email-input': EmailInput,
-        'radio-buttons': RadioButtons,
-        'textarea-input': TextareaInput,
-        'file-input': FileInput,
-        'multilevel-dropdown': MultiLevelDropdown,
-        'recaptcha': Recaptcha,
-    },
-
-    props: {
-        brand: {
-            type: String,
-            default: () => 'musora',
-        },
-        captchakey: {
-            type: String,
-            required: true,
-        },
-        recipient: {
-            type: String,
-            default: () => null,
-        },
-        emailType: {
-            type: String,
-            default: () => 'alert',
-        },
-        emailSubject: {
-            type: String,
-            default: () => '',
-        },
-        emailLogo: {
-            type: String,
-            default: () => 'https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png',
-        },
-        emailCallToActionText: {
-            type: String,
-            default: () => null,
-        },
-        emailCallToActionUrl: {
-            type: String,
-            default: () => null,
-        },
-        successMessage: {
-            type: String,
-            default: () => 'Your email has been sent! Thank you for your input.',
-        },
-        emailEndpoint: {
-            type: String,
-            default: () => '/mailora/public/send',
-        },
-        enableEvent: {
-            type: Boolean,
-            default: () => false,
-        },
-        eventName: {
-            type: String,
-            default: () => 'emailFom',
-        },
-    },
-
-    data() {
+    function contactForm(){
         return {
-            formValid: true, //set true by default
-            formVerified: false,
-            emailFieldValid: false,
-            textFieldValid: false,
-            radioFieldsValid: false,
-            messageFieldValid: false,
-            responseMessageVisible: false,
-            formSuccessful: false,
             formData: {
                 name: '',
                 email: '',
-                isMember: null,
+                membership: '',
+                description: '',
                 supportOption: '',
-                message: '',
-                attachments: [],
+                attachment: [],
             },
-            buttonsList: [
-                {
-                    label: "Yes",
-                    value: true,
+            formValid: true, //update this
+            formVerified: true, //update this
+            formSuccessful: false, //update this
+            responseMessageVisible: false,
+            invalids: {
+                name: false,
+                email: {
+                    isInvalid: false,
+                    errorMessage: 'Please enter your email address.',
                 },
-                {
-                    label: "No",
-                    value: false,
+                membership: false,
+                description: false,
+                supportOption: false,
+            },
+            hasValidated: false,
+            submitForm(){
+
+                if(this.formData.name === ''){
+                    this.invalids.name = true;
                 }
-            ],
-            optionsData: [
-                {
-                    label: "Shipping & Orders",
-                    selected: false,
-                    options: [
-                        {
-                            label: 'My shipment tracking inquiry',
-                            value: 'Shipping & Orders, My shipment tracking inquiry',
-                            checked: false,
-                        },
-                        {
-                            label: 'I received the wrong items',
-                            value: 'Shipping & Orders, I received the wrong items',
-                            checked: false,
-                        },
-                        {
-                            label: 'Questions about shipping rates and fees',
-                            value: 'Shipping & Orders, Questions about shipping rates and fees',
-                            checked: false,
-                        },
-                        {
-                            label: 'Other',
-                            value: 'Shipping & Orders, Other',
-                            checked: false,
-                        }
-                    ]
-                },
-                {
-                    label: "Subscriptions & Membership",
-                    selected: false,
-                    options: [
-                        {
-                            label: 'Change or set up a subscription/membership',
-                            value: 'Subscriptions & Membership, Change or set up a subscription/membership',
-                            checked: false,
-                        },
-                        {
-                            label: 'Subscription or pack inquiry',
-                            value: 'Subscriptions & Membership, Subscription or pack inquiry',
-                            checked: false,
-                        },
-                        {
-                            label: 'Cancellation assistance',
-                            value: 'Subscriptions & Membership, Cancellation assistance',
-                            checked: false,
-                        },
-                        {
-                            label: 'Refund assistance',
-                            value: 'Subscriptions & Membership, Refund assistance',
-                            checked: false,
-                        },
-                        {
-                            label: 'Other',
-                            value: 'Subscriptions & Membership, Other',
-                            checked: false,
-                        }
-                    ]
-                },
-                {
-                    label: "Billing & Payment",
-                    selected: false,
-                    options: [
-                        {
-                            label: 'Need assistance changing billing method or schedule',
-                            value: 'Billing & Payment, Need assistance changing billing method or schedule',
-                            checked: false,
-                        },
-                        {
-                            label: 'Refund assistance',
-                            value: 'Billing & Payment, Refund assistance',
-                            checked: false,
-                        },
-                        {
-                            label: 'Cancellation assistance',
-                            value: 'Billing & Payment, Cancellation assistance',
-                            checked: false,
-                        },
-                        {
-                            label: 'Other',
-                            value: 'Billing & Payment, Other',
-                            checked: false,
-                        }
-                    ]
-                },
-                {
-                    label: "Account Settings & Login",
-                    selected: false,
-                    options: [
-                        {
-                            label: 'Can\'t log in',
-                            value: 'Account Settings & Login, Can\'t log in',
-                            checked: false,
-                        },
-                        {
-                            label: 'Other',
-                            value: 'Account Settings & Login, Other',
-                            checked: false,
-                        }
-                    ]
-                },
-                {
-                    label: "Technical Issues",
-                    selected: false,
-                    options: [
-                        {
-                            label: 'Problems with mobile Android or iOS app',
-                            value: 'Technical Issues, Problems with mobile Android or iOS app',
-                            checked: false,
-                        },
-                        {
-                            label: 'Content inaccessible or missing',
-                            value: 'Technical Issues, Content inaccessible or missing',
-                            checked: false,
-                        },
-                        {
-                            label: 'Video Issues',
-                            value: 'Technical Issues, Video Issues',
-                            checked: false,
-                        },
-                        {
-                            label: 'Other',
-                            value: 'Technical Issues, Other',
-                            checked: false,
-                        }
-                    ]
-                },
-                {
-                    label: "Site Navigation & Lessons",
-                    selected: false,
-                    options: [
-                        {
-                            label: 'Question about a lesson or instrument',
-                            value: 'Site Navigation & Lessons, Question about a lesson or instrument',
-                            checked: false,
-                        },
-                        {
-                            label: 'Assistance locating an area of the website',
-                            value: 'Site Navigation & Lessons, Assistance locating an area of the website',
-                            checked: false,
-                        },
-                        {
-                            label: 'Other',
-                            value: 'Site Navigation & Lessons, Other',
-                            checked: false,
-                        }
-                    ]
-                },
-                {
-                    label: "Other",
-                    selected: false,
-                    value: "Other"
+
+                if(this.formData.email === ''){
+                    this.invalids.email.isInvalid = true;
                 }
-            ]
-        };
-    },
-    computed: {
-        selectFieldValid() {
-            return this.formData.supportOption.length !== 0 ? true : false;
-        },
 
-        formState() {
-            if(this.messageFieldValid && this.selectFieldValid && this.textFieldValid && this.emailFieldValid && this.radioFieldsValid) return true;
-        },
+                if(this.formData.membership === ''){
+                    this.invalids.membership = true;
+                }
 
-        themeBgClass() {
-            return 'bg-'+this.brand;
-        },
+                if(this.formData.description === ''){
+                    this.invalids.description = true;
+                }
 
-        themeTextClass() {
-            return 'text-'+this.brand;
-        },
+                if(this.formData.supportOption === ''){
+                    this.invalids.supportOption = true;
+                }
 
-        callToAction() {
-            if (this.emailCallToActionText && this.emailCallToActionUrl) {
-                return {
-                    text: this.emailCallToActionText,
-                    url: this.emailCallToActionUrl,
-                };
-            }
+                console.log(this.formData);
 
-            return null;
-        },
-    },
-    methods: {
-        updateSupportOption(val) {
-            this.formData.supportOption = val;
-        },
-        updateMembershipStatus(val) {
-            this.formData.isMember = val;
-        },
+                grecaptcha.ready(() => {
+                    grecaptcha.execute('6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx', { action: 'post' }).then((token) => {
 
-        attachFile(file) {
-            this.formData.attachments.push(file);
-        },
-        removeFile(index) {
-            this.formData.attachments.splice(index, 1);
-        },
-        clearFiles() {
-            this.formData.attachments = [];
-        },
+                        console.log(token);
 
-        closeResponseMessage() {
-            setTimeout(() => {
-                this.responseMessageVisible = false;
-            }, 3000);
-        },
+                    })
+                })
 
-        submitForm() {
-            //Check Form First
-            this.formValid = this.formState;
+                const formDataObj = new FormData();
+                formDataObj.append('type', 'support-contact');
+                formDataObj.append('subject', 'Contact request');  // append email or name
+                formDataObj.append('studentName', this.formData.name);
+                formDataObj.append('studentEmail', this.formData.email);
+                formDataObj.append('isMember', this.formData.membership);
+                formDataObj.append('supportOption', this.formData.supportOption);
+                formDataObj.append('message', this.formData.description);
+                formDataObj.append('attachment', this.formData.attachment);
+                formDataObj.append('logo', "https://dmmior4id2ysr.cloudfront.net/logos/musora-logo.png");
+                formDataObj.append('recipient', "support@musora.com");
 
-            if(!this.formValid) {
-                return
-            }
-
-            //take snapshot
-            const name = this.formData.name;
-            const email = this.formData.email;
-            const message = this.formData.message;
-            const supportOption = this.formData.supportOption;
-            let attachment;
-            let membership;
-            //convert file(s) to image blobs
-            if(this.formData.attachments[0]) {
-                attachment = this.formData.attachments[0];
-            } else {
-                attachment = null;
-            }
-            //is Member?
-            if(this.formData.isMember === true) {
-                membership = "Is currently a member"
-            } else {
-                membership = "Is not a member"
-            }
-
-            if (this.enableEvent) {
-                this.$root.$emit(this.eventName, { text });
-            }
-
-          SupportService.sendEmail({
-                type: this.emailType,
-                subject: this.emailSubject,
-                studentName: name,
-                studentEmail: email,
-                isMember: this.formData.isMember,
-                supportOption: supportOption,
-                message: message,
-                attachment: attachment, //attachment only accepts one file, use 'attachments' to accept more than one
-                callToAction: this.callToAction,
-                brand: this.brand,
-                logo: this.emailLogo,
-                recipient: this.recipient,
-                endpoint: this.emailEndpoint,
-            })
-                .then((resolved) => {
-                    if (resolved) {
+                axios.post("{{url()->route('mailora.public.send') }}", formDataObj, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                ).then((response) => {
+                    if (response) {
                         this.formSuccessful = true;
                         this.responseMessageVisible = true;
-
-                        this.closeResponseMessage();
-
-                        this.$emit('formSuccess');
-                        window.closeAllModals();
-
-                        //reset option
-                        this.formData = {
-                            name: '',
-                            email: '',
-                            isMember: null,
-                            supportOption: '',
-                            message: '',
-                            attachments: [],
-                        }
-                    } else {
-                        this.formSuccessful = false;
-                        this.responseMessageVisible = true;
-
-                        this.closeResponseMessage()
+                        this.formData.name = '';
+                        this.formData.membership = '';
+                        this.formData.supportOption = '';
+                        this.formData.description = '';
+                        this.formData.email = '';
                     }
                 })
-        },
-    },
-
-    watch: {
-        textFieldValid: function(valid) {
-            if(this.formState) {
-                this.formValid = true;
             }
-        },
-        radioFieldsValid: function(valid) {
-            if(this.formState) {
-                this.formValid = true;
-            }
-        },
-        emailFieldValid: function(valid) {
-            if(this.formState) {
-                this.formValid = true;
-            }
-        },
-        selectFieldValid: function(valid) {
-            if(this.formState) {
-                this.formValid = true;
-            }
-        },
-        messageFieldValid: function(valid) {
-            if(this.formState) {
-                this.formValid = true;
-            }
-        },
+        }
     }
-};
 </script>

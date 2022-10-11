@@ -18,6 +18,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
 use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
+use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 
 class ContentProgressEventListener
 {
@@ -300,7 +301,8 @@ class ContentProgressEventListener
                         ],
                         str_replace('-', '_', $content['type']).'_content_completed',
                         $pointAmount,
-                        'Awarded per complete '.str_replace('-', ' ', $content['type']).'.'
+                        'Awarded per complete '.str_replace('-', ' ', $content['type']).'.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -581,5 +583,15 @@ class ContentProgressEventListener
                 $comment['user_id']
             )
         );
+    }
+
+    public function handleHeighKeyProgressUpdates(HigherKeyProgressUpdated $event)
+    {
+        $userBrandMethodLevels = user()->brand_method_levels;
+        $brand = config('railcontent.brand');
+        $userBrandMethodLevels[$brand] = $event->higherKeyProgress;
+
+        user()->brand_method_levels = $userBrandMethodLevels;
+        user()->save();
     }
 }

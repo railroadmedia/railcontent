@@ -15,17 +15,25 @@ use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Product;
+use App\Modules\Ecommerce\Models\Product as ProductModel;
 use Railroad\Ecommerce\Entities\Subscription;
+use Railroad\Ecommerce\Repositories\PaymentMethodRepository;
+use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
+use Railroad\Ecommerce\Services\CartService;
+use Railroad\Ecommerce\Services\InvoiceService;
 use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Ecommerce\Services\SubscriptionService;
 use Railroad\Ecommerce\Services\UserProductService;
+use Railroad\Ecommerce\Transformers\SubscriptionTransformer;
 use Railroad\Location\Services\CountryListService;
 use Railroad\Mailora\Mail\General;
 use Railroad\Mailora\Services\MailService;
 use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class ProfileSettingsPagesController extends BaseController
 {
@@ -69,6 +77,11 @@ class ProfileSettingsPagesController extends BaseController
         'website' => 'I don’t know how to use the website/app.',
         'other' => 'Other',
     ];
+    private CartService $cartService;
+    private PaymentRepository $paymentRepository;
+    private SubscriptionTransformer $subscriptionTransformer;
+    private InvoiceService $invoiceService;
+    private PaymentMethodRepository $paymentMethodRepository;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -81,7 +94,12 @@ class ProfileSettingsPagesController extends BaseController
         SubscriptionService $subscriptionService,
         SubscriptionRepository $subscriptionRepository,
         UserProviderInterface $userProvider,
-        MailService $mailService
+        MailService $mailService,
+        CartService $cartService,
+        PaymentRepository $paymentRepository,
+        SubscriptionTransformer $subscriptionTransformer,
+        InvoiceService $invoiceService,
+        PaymentMethodRepository $paymentMethodRepository,
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
@@ -91,6 +109,11 @@ class ProfileSettingsPagesController extends BaseController
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProvider = $userProvider;
         $this->mailService = $mailService;
+        $this->cartService = $cartService;
+        $this->paymentRepository = $paymentRepository;
+        $this->subscriptionTransformer = $subscriptionTransformer;
+        $this->invoiceService = $invoiceService;
+        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     public function profile(Request $request, $domain, $brand, $userId)
@@ -491,113 +514,164 @@ class ProfileSettingsPagesController extends BaseController
         return view('account.settings.win-back', []);
     }
 
-    public function payments(Request $request, $domain, $brand, $userId)
+    public function payments(Request $request)
     {
-//        $this->ecommerceEntityManager->getFilters()
-//            ->disable('soft-deleteable');
-//
-//        $currentSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
-//            user()->id,
-//            ProductAccessMap::membershipProductIds()
-//        );
-//
-//        $existingSubscriptionActive = false;
-//
-//        if (!empty($currentSubscription) && $currentSubscription->getIsActive()) {
-//            $existingSubscriptionActive = true;
-//        }
-//
-//        $payments = $this->paymentRepository->getAllUsersPayments(user()->id);
-//
-//        foreach ($payments as $paymentIndex => $payment) {
-//            if ($payment->getGatewayName() != 'pianote') {
-//                unset($payments[$paymentIndex]);
-//            }
-//        }
-//
-//        // sort by date
-//        usort($payments, function (Payment $a, Payment $b) {
-//            return $a->getCreatedAt() < $b->getCreatedAt();
-//        });
-//
-//        $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
-//            user()->id,
-//            $request,
-//            config('ecommerce.brand', null)
-//        );
-//
-//        foreach ($paymentMethods as $paymentMethodIndex => $paymentMethod) {
-//            if (!empty($paymentMethod->getDeletedAt())) {
-//                unset($paymentMethods[$paymentMethodIndex]);
-//            }
-//        }
-//
-//        $paymentMethodsJson = ResponseService::paymentMethod(
-//            $paymentMethods
-//        )
-//            ->respond()
-//            ->getContent();
-//
-//        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.pianote.stripe_publishable_key');
-//
-//        if (!empty($currentSubscription) && !empty($currentSubscription->getProduct())) {
-//            $this->cartService->refreshCart();
-//
-//            $this->cartService->clearCart();
-//
-//            $this->cartService->addToCart(
-//                $currentSubscription->getProduct()
-//                    ->getSku(),
-//                1,
-//                true
-//            );
-//
-//            if ($currentSubscription->getPaymentMethod()) {
-//                $this->cartService->getCart()
-//                    ->setBillingAddress(
-//                        $currentSubscription->getPaymentMethod()
-//                            ->getBillingAddress()
-//                            ->toStructure()
-//                    );
-//            }
-//        }
-//
-//        if (!UserAccessService::isMember(auth()->id()) && current_user()->getPermissionLevel() != 'administrator') {
-//            session()->now(
-//                'successes',
-//                new MessageBag([
-//                    'You do not currently have an active subscription. If you\'d like to subscribe, adding a payment
-//                    method will automatically charge you and add access to your account.',
-//                ])
-//            );
-//        }
-//
-//        if (UserAccessService::isLifetime(user()->id)) {
-//            $currentSubscription = null;
-//        }
-//
-//        return view('members.account.settings.payments', [
-//            'user' => user(),
-//            'existingSubscriptionActive' => $existingSubscriptionActive,
-//            'currentSubscription' => $currentSubscription,
-//            'sections' => $this->settingSections('payments'),
-//            'cards' => [],
-//            'paypalUrl' => '',
-//            'payments' => $payments,
-//            'paymentMethodsJson' => $paymentMethodsJson,
-//            'stripePublishableKey' => $stripePublishableKey,
-//            'countries' => json_encode(array_values(CountryListService::allWithCommonDuplicatedAtTop())),
-//            'provinces' => json_encode(array_keys(config('ecommerce.tax_rates_and_options.canada'))),
-//            'cartJson' => json_encode($this->cartService->toArray()),
-//        ]);
+        $user = user();
 
-        return view('account.settings.payments', [
-            'user' => user(),
-            'sections' => $this->settingSections('payments'),
-            'allBrands' => all_brands(),
-            'selectedBrand' => $request->get('selected-brand', $brand)
-        ]);
+        $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
+            $user->id,
+            $request,
+            'drumeo'
+        );
+
+        $paymentMethodsJson = ResponseService::paymentMethod(
+            $paymentMethods
+        )
+            ->respond()
+            ->getContent();
+
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.drumeo.stripe_publishable_key');
+
+        $membershipProductIds = ProductModel::query()
+            ->where([
+                'type' => 'digital subscription',
+                'digital_access_type' => 'all content access',
+                'digital_access_time_type' => 'recurring'
+            ])
+            ->get(['id'])
+            ->pluck('id')
+            ->toArray();
+
+        $currentSubscription = $this->subscriptionRepository->getUserSubscriptionForProducts(
+            $user->id,
+            $membershipProductIds
+        );
+
+        $existingSubscriptionActive = false;
+
+        if (!empty($currentSubscription) && $currentSubscription->getIsActive()) {
+            $existingSubscriptionActive = true;
+        }
+
+        if (!empty($currentSubscription) && !empty($currentSubscription->getProduct())) {
+            $this->cartService->refreshCart();
+
+            $this->cartService->clearCart();
+
+            $this->cartService->addToCart(
+                $currentSubscription->getProduct()
+                    ->getSku(),
+                1,
+                true
+            );
+
+            try {
+                if (!empty($currentSubscription->getPaymentMethod()) && !empty(
+                    $currentSubscription->getPaymentMethod()
+                        ->getBillingAddress()
+                    )) {
+                    $this->cartService->getCart()
+                        ->setBillingAddress(
+                            $currentSubscription->getPaymentMethod()
+                                ->getBillingAddress()
+                                ->toStructure()
+                        );
+                }
+            } catch (Throwable $throwable) {
+            }
+
+            // if current sub price less than product standard price, set "override to display" price
+
+            $subProductDefaultPrice = $currentSubscription->getProduct()->getPrice();
+            $subCurrentPrice = $currentSubscription->getTotalPrice(); // same as $subTransformed['total_price'] below
+
+            if ($subProductDefaultPrice !== $subCurrentPrice) {
+                $subTransformed = $this->subscriptionTransformer->transform($currentSubscription);
+
+                foreach ($this->cartService->getCart()->getItems() as $cartItem) {
+                    $cartItem->setDueOverride($subTransformed['total_price']);
+                }
+            }
+        }
+
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
+
+        // sort by date
+        usort(
+            $payments,
+            function (Payment $a, Payment $b) {
+                return $a->getCreatedAt() < $b->getCreatedAt();
+            }
+        );
+
+        if ($user->is_lifetime_member) {
+            $currentSubscription = null;
+        }
+
+        return view(
+            'account.settings.payments',
+            [
+                'sections' => $this->settingSections(),
+                'paymentMethodsJson' => $paymentMethodsJson,
+                'stripePublishableKey' => $stripePublishableKey,
+                'countries' => json_encode(array_values(CountryListService::allWithCommonDuplicatedAtTop())),
+                'provinces' => json_encode(array_keys(config('ecommerce.tax_rates_and_options.canada'))),
+                'cartJson' => json_encode($this->cartService->toArray()),
+                'currentSubscription' => $currentSubscription,
+                'existingSubscriptionActive' => $existingSubscriptionActive,
+                'currentUser' => $user,
+                'payments' => $payments,
+                'displayOverrideTax' => $displayOverrideTax ?? false,
+                // todo: remove from here and vuesora because now obsolete
+                'displayOverridePrice' => $displayOverridePrice ?? false,
+                // todo: remove from here and vuesora because now obsolete
+            ]
+        );
     }
+
+    public function showInvoiceForPayment(Request $request, $domain, $brand, $userId, $paymentId)
+    {
+        $payment = $this->paymentRepository->find($paymentId);
+
+        $order = $payment->getOrder();
+        $subscription = $payment->getSubscription();
+        $paymentMethod = $payment->getPaymentMethod();
+
+        if (!empty($subscription) && !empty(
+            config(
+                'ecommerce.invoice_email_details.' .
+                $payment->getGatewayName() .
+                '.subscription_renewal_invoice.invoice_view'
+            )
+            ) && $subscription->getType() != Subscription::TYPE_PAYMENT_PLAN) {
+            $viewData = $this->invoiceService->getViewDataForSubscriptionRenewalInvoice($subscription, $payment);
+
+            return view(
+                config(
+                    'ecommerce.invoice_email_details.' .
+                    $payment->getGatewayName() .
+                    '.subscription_renewal_invoice.invoice_view'
+                ),
+                $viewData
+            );
+        }
+
+        if (!empty($order) && !empty(
+            config(
+                'ecommerce.invoice_email_details.' . $payment->getGatewayName() . '.order_invoice.invoice_view'
+            )
+            )) {
+            $viewData = $this->invoiceService->getViewDataForOrderInvoice($order, $payment);
+
+            return view(
+                config('ecommerce.invoice_email_details.' . $payment->getGatewayName() . '.order_invoice.invoice_view'),
+                $viewData
+            );
+        }
+
+        throw new NotFoundHttpException();
+    }
+
 
     /**
      * @param $section

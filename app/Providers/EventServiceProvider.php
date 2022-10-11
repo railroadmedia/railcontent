@@ -5,10 +5,13 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
+use Railroad\Railforums\EventListeners\PostEventListener;
 use Railroad\Railforums\EventListeners\ThreadEventListener;
 use Railroad\Railforums\Events\PostCreated;
+use Railroad\Railforums\Events\PostDeleted;
 use Railroad\Railforums\Events\PostLiked;
 use Railroad\Railforums\Events\ThreadCreated;
+use Railroad\Railforums\Events\ThreadDeleted;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
 
 
@@ -25,9 +28,16 @@ class EventServiceProvider extends ServiceProvider
         ],
         PostCreated::class => [
             NotificationEventListener::class.'@handlePostCreated',
+            PostEventListener::class.'@onPostCreated'
+        ],
+        PostDeleted::class => [
+            PostEventListener::class.'@onPostDeleted'
         ],
         ThreadCreated::class => [
             ThreadEventListener::class.'@onCreated',
+        ],
+        ThreadDeleted::class => [
+            ThreadEventListener::class.'@onDeleted',
         ],
         CommentCreated::class => [
             NotificationEventListener::class.'@handleCommentCreated',
