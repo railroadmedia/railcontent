@@ -309,25 +309,27 @@ class ProfileSettingsPagesController extends BaseController
 
         // -------------------------------------------------------------------------------------------------------------
 
+        $viewData = [
+            'user' => user(),
+            'sections' => $this->settingSections('account'),
+            'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
+            'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
+            'isLifetime' => $isLifetime,
+            'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
+            'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
+            'subscription' => $activeSubscription,
+            'hasHadMembership' => $hasHadMembership,
+            'now' => $now,
+            'trialUrl' => $trialUrl,
+            'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
+            'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
+            'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
+            'membershipFromOneTimeProduct' => $membershipFromOneTimeProduct ?? false,
+        ];
+
         return view(
             'account.settings.account',
-            [
-                'user' => user(),
-                'sections' => $this->settingSections('account'),
-                'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
-                'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
-                'isLifetime' => $isLifetime,
-                'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
-                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
-                'subscription' => $activeSubscription,
-                'hasHadMembership' => $hasHadMembership,
-                'now' => $now,
-                'trialUrl' => $trialUrl,
-                'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
-                'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
-                'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
-                'membershipFromOneTimeProduct' => $membershipFromOneTimeProduct ?? false,
-            ]
+            $viewData
         );
     }
 
