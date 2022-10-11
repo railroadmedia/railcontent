@@ -61,7 +61,7 @@ export const testCarousel = [
             },
             {
                 topSubtitle: "",
-                title: "Pianote Weekly",
+                title: "The Piano Bench",
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Pianote Community!",
                 ctaUrl: "pianote/schedule",
@@ -115,7 +115,7 @@ export const testCarousel = [
             },  
             {
                 topSubtitle: "",
-                title: "Singeo Weekly",
+                title: "The Stage",
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Singeo Community!",
                 ctaUrl: "/singeo/schedule",

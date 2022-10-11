@@ -13,7 +13,7 @@
                         <span
                             class="tw-shadow-none tw-text-lg"
                             style="padding:0 8px; border: none; box-shadow: none;"
-                            :class="hasLiked ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
+                            :class="hasLiked ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
                         >
                             <musora-icon :icon-name="hasLiked ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mb-1" />
                             {{ totalLikes }}
@@ -28,7 +28,7 @@
                         data-open-modal="shareVideoModal"
                     >
                         <span
-                            class="tw-text-[#3F3F46] dark:tw-text-[#7E9AB1] tw-shadow-none tw-text-lg"
+                            class="tw-text-[#3F3F46] dark:tw-text-white tw-shadow-none tw-text-lg"
                             style="padding:0 8px; box-shadow: none;"
                         >
                             <musora-icon icon-name="share"  class="tw-w-6 tw-h-6 tw-mb-1" />
@@ -48,7 +48,7 @@
                     >
                         <span
                             class="tw-shadow-none tw-text-lg"
-                            :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
+                            :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
                             style="padding:0 8px; box-shadow: none;"
                         >
                             <musora-icon icon-name="download"  class="tw-w-6 tw-h-6 tw-mb-1" />
@@ -93,7 +93,7 @@
                         <span
                             class="tw-shadow-none tw-text-lg"
                             style="padding:0 8px; box-shadow: none;"
-                            :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
+                            :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
                         >
                             <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
                             <span class="hide-xs-only">
@@ -138,7 +138,7 @@
                     </button>
                 </div>
 
-                <p class="tiny font-italic tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]">
+                <p class="tiny font-italic tw-text-[#3F3F46] dark:tw-text-white">
                     This link is only accessible by {{ toCapitalCase(brand) }} Members.
                 </p>
             </div>
