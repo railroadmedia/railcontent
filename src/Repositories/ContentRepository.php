@@ -825,6 +825,31 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param string $slug
+     * @param string $type
+     * @return array|null
+     */
+    public function getBySlugAndTypeAndBrand($slug, $type, $brand)
+    {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->where('slug', $slug)
+                ->where(ConfigService::$tableContent.'.brand', $brand)
+                ->where('type', $type)
+                ->getToArray();
+
+        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
+
+        $this->configurePresenterForResults($contentRows);
+
+        return $this->parserResult($contentRows);
+    }
+
+    /**
      * @param $userId
      * @param string $type
      * @param string $slug
