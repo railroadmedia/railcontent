@@ -12,12 +12,73 @@
         </div> --}}
 
         {{-- Coming Soon Message --}}
-        <div class="tw-flex tw-flex-col pa-3 tw-pb-0">
-            <h2 class="tw-text-3xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mb-4">Coming Soon</h2>
-            <p class="tw-text-base tw-text-[#00101D] dark:tw-text-white">
-                This page is currently under construction. If you'd like to update your payment information please visit 
-                <a class="tw-underline tw-text-drumeo" href="https://www.{{ $brand }}.com/members/settings/payments" alt="Go to {{ $brand }} payment page">https://www.{{ $brand }}.com/members/settings/payments</a>
-            </p>
+        <div id="payment-methods-section">
+            <div class="flex flex-row pa-3 flex-auto bb-grey-1-1">
+                <h1 class="heading">Payment Details</h1>
+            </div>
+
+            <div class="flex flex-row ph-3 mb-3">
+                <payment-methods
+                        theme-color="drumeo"
+                        :payment-methods="{{ $paymentMethodsJson }}"
+                        brand="drumeo"
+                        stripe-publishable-key="{{ $stripePublishableKey }}"
+                        :countries="{{ $countries }}"
+                        :provinces="{{ $provinces }}"
+                        :cart="{{ $cartJson }}"
+                        :has-subscription="{{ json_encode(!empty($currentSubscription)) }}"
+                        :is-active="{{ json_encode($existingSubscriptionActive) }}"
+                        :user-id="{{ $currentUser->getId() }}"
+                        display-override-price="{{ $displayOverridePrice }}"
+                        display-override-tax="{{ $displayOverrideTax }}"
+                ></payment-methods>
+            </div>
+        </div>
+
+        <div class="flex flex-row pa-3 flex-auto bt-grey-1-1">
+            <div class="flex flex-column">
+                <div class="flex flex-row mb-3">
+                    <h4 class="subheading">Payment History</h4>
+                </div>
+                @if($payments)
+                    @foreach($payments as $payment)
+                        <a href="{{ url()->route('platform.profile.settings.payment-invoice', [user()->id, $payment->getId()]) }}"
+                           class="flex flex-row flex-wrap mb-1 text-black no-decoration"
+                           target="_blank">
+                            <div class="flex flex-column xs-12 md-6">
+                                <div class="flex flex-row">
+                                    <p class="tiny font-bold">
+                                        <i class="fal fa-file-pdf mr-1"></i>
+                                        {{ Carbon\Carbon::parse($payment->getCreatedAt())->format('F j, Y') }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex flex-column xs-12 md-6">
+                                <div class="flex flex-row">
+                                    <div class="flex flex-column x-tiny font-italic uppercase align-h-left xs-6">
+                                        @if (!empty($payment->getPaymentMethod()) &&
+                                        !empty($payment->getPaymentMethod()->getMethod()) &&
+                                        $payment->getExternalProvider() == 'stripe')
+                                            {{ $payment->getPaymentMethod()->getMethod()->getCompanyName() }} -
+                                            {{ $payment->getPaymentMethod()->getMethod()->getLastFourDigits() }}
+                                        @else
+                                            {{ $payment->getExternalProvider() == 'paypal' ? 'PayPal' : 'Other' }}
+                                        @endif
+                                    </div>
+                                    <div class="flex flex-column x-tiny font-italic uppercase align-h-center xs-3">
+                                        {{ $payment->getType() }}
+                                    </div>
+                                    <div class="flex flex-column x-tiny font-italic uppercase align-h-right xs-3">
+                                        ${{ number_format($payment->getTotalPaid(), 2, '.') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                @else
+                    <p class="body">You do not have any payments in your payment history.</p>
+                @endif
+            </div>
         </div>
 
     </div>

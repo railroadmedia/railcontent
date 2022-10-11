@@ -4,6 +4,7 @@ use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
+use App\Http\Controllers\Platform\LegacyResourcesController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\NotificationPagesController;
@@ -13,10 +14,9 @@ use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
-use App\Http\Controllers\Platform\LegacyResourcesController;
-use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 
 Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])
@@ -341,6 +341,13 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.membership');
+
+        Route::get(
+            '/{brand}/profile/{userId}/settings/payment-invoice/{id}',
+            [ProfileSettingsPagesController::class, 'showInvoiceForPayment']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.payment-invoice');
 
         /*
          * Notifications Pages
