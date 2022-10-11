@@ -1946,9 +1946,9 @@ class ContentService
                     continue;
                 }
 
-                if (empty($compiledData[$key])) {
+                if (!isset($compiledData[$key])) {
                     $compiledData[$key] = $row['value'];
-                } elseif (!empty($compiledData[$key]) && !is_array($compiledData[$key])) {
+                } elseif (isset($compiledData[$key]) && !is_array($compiledData[$key])) {
                     $existingValue = $compiledData[$key];
                     $compiledData[$key] = [$existingValue, $row['value']];
                 } elseif (is_array($compiledData[$key])) {
