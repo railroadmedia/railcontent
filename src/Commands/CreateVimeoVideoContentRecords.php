@@ -5,6 +5,9 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Support\Facades\Log;
+use League\Flysystem\Config;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Vimeo\Exceptions\VimeoRequestException;
@@ -27,6 +30,7 @@ class CreateVimeoVideoContentRecords extends Command
 
     public function handle(
         ContentService $contentService,
+        ContentRepository $contentRepository,
         DatabaseManager $databaseManager
     ) {
         $this->numberOnLastPage = null;
@@ -94,61 +98,65 @@ class CreateVimeoVideoContentRecords extends Command
                             'str_replace(\'/videos/\', \'\', $uri);"'
                         );
                     }
-                    // create if needed
-                    $noRecordOfVideoInCMS = count(
-                            $contentService->getBySlugAndType(
-                                'vimeo-video-' . $id,
-                                'vimeo-video'
-                            )
-                        ) == 0;
 
-                    if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
-                        // store and add to array for mass insert
-                        $content = $contentService->create(
-                            'vimeo-video-' . $id,
-                            'vimeo-video',
-                            ContentService::STATUS_PUBLISHED,
-                            null,
-                            null,
-                            null,
-                            Carbon::now()->toDateTimeString()
-                        );
-                        if (empty($content)) {
-                            $contentCreationFailed[] = $id;
+                    foreach (ConfigService::$availableBrands as $brand) {
+                        ConfigService::$brand = $brand;
+                        // create if needed
+                        $noRecordOfVideoInCMS = count(
+                                $contentRepository->getBySlugAndTypeAndBrand(
+                                    'vimeo-video-' . $id,
+                                    'vimeo-video',
+                                    $brand
+                                )
+                            ) == 0;
+                        if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
+                            // store and add to array for mass insert
+                            $content = $contentService->create(
+                                'vimeo-video-' . $id,
+                                'vimeo-video',
+                                ContentService::STATUS_PUBLISHED,
+                                null,
+                                null,
+                                null,
+                                Carbon::now()->toDateTimeString()
+                            );
+                            if (empty($content)) {
+                                $contentCreationFailed[] = $id;
+                            } else {
+                                $contentCreatedCount++;
+                                $contentFieldsInsertData[] = [
+                                    'content_id' => $content['id'],
+                                    'key' => 'vimeo_video_id',
+                                    'value' => $id,
+                                    'type' => 'string',
+                                    'position' => 1,
+                                ];
+                                $contentFieldsInsertData[] = [
+                                    'content_id' => $content['id'],
+                                    'key' => 'length_in_seconds',
+                                    'value' => $duration,
+                                    'type' => 'integer',
+                                    'position' => 1,
+                                ];
+                            }
                         } else {
-                            $contentCreatedCount++;
-                            $contentFieldsInsertData[] = [
-                                'content_id' => $content['id'],
-                                'key' => 'vimeo_video_id',
-                                'value' => $id,
-                                'type' => 'string',
-                                'position' => 1,
-                            ];
-                            $contentFieldsInsertData[] = [
-                                'content_id' => $content['id'],
-                                'key' => 'length_in_seconds',
-                                'value' => $duration,
-                                'type' => 'integer',
-                                'position' => 1,
-                            ];
-                        }
-                    } else {
-                        if ($duration === 0) {
-                            $this->info(
-                                'Duration ' .
-                                // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
-                                'for video ' .
-                                $id .
-                                ' is zero and thus video not added.'
-                            );
-                        } elseif (!is_numeric($duration)) {
-                            $this->info(
-                                'Duration ' .
-                                // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
-                                'for video ' .
-                                $id .
-                                ' is not numeric and thus video not added.'
-                            );
+                            if ($duration === 0) {
+                                $this->info(
+                                    'Duration ' .
+                                    // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
+                                    'for video ' .
+                                    $id .
+                                    ' is zero and thus video not added.'
+                                );
+                            } elseif (!is_numeric($duration)) {
+                                $this->info(
+                                    'Duration ' .
+                                    // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
+                                    'for video ' .
+                                    $id .
+                                    ' is not numeric and thus video not added.'
+                                );
+                            }
                         }
                     }
                     $this->amountProcessed++;
