@@ -188,7 +188,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                     {{-- User Gear Details --}}
                     <gear-carousel 
                         :gear-info="{{ json_encode($dashboardUser) }}" 
-                        :brand="{{ $brand }}" 
+                        brand="{{ $brand }}" 
                         class="tw-flex-grow-0 xl:tw-ml-[36px]" 
                     />
                 </div>
