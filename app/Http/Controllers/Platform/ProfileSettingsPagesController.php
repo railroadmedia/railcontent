@@ -222,7 +222,7 @@ class ProfileSettingsPagesController extends BaseController
         );
     }
 
-    public function showInvoiceForPayment(Request $request, $brand, $userId, $paymentId)
+    public function showInvoiceForPayment(Request $request, $domain, $brand, $userId, $paymentId)
     {
         $payment = $this->paymentRepository->find($paymentId);
 
