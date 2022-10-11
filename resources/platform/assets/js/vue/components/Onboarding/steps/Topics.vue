@@ -79,7 +79,11 @@ const isNextButtonDisabled = () => {
         tw-justify-between
         xl:tw-justify-center
       ">
-      <StepHeader title="Okay, and what topics would you like to study?" @onGoBack="goBack" />
+      <StepHeader
+        title="Okay, and what topics would you like to study?"
+        subtitle="You can select more than one topic and change your settings in your profile at any time."
+        @onGoBack="goBack"
+      />
       <MultiSelect :options="options" :initialSelection="currentSelection" classOverride="md:tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection" />
 
