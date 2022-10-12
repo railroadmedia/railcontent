@@ -186,6 +186,10 @@ class CreateVimeoVideoContentRecords extends Command
                 ConfigService::$databaseConnectionName
             )
                 ->table(ConfigService::$tableContentFields)->insert($contentFieldsInsertData);
+            $contentIds = collect($contentFieldsInsertData)->map(function ($field) {
+                return $field['content_id'];
+            })->unique()->toArray();
+            $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
             if ($contentFieldsWriteSuccess && empty($contentCreationFailed)) {
                 $this->info(
                     'Processed ' . count($videos) . ' videos. ' .
