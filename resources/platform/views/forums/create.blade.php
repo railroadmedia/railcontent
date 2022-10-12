@@ -8,6 +8,19 @@
     <title>Create a Discussion | {{ $brand }}</title>
 @endsection
 
+@section('layout-scripts')
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+        wasSubmitted = true;
+        return wasSubmitted;
+      }
+      return false;
+    }    
+</script>
+@stop()
+
 @section('content')
 
     <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14 forum-post">

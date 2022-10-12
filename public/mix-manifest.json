@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=b7ff1f20806ba3b3f80bf8140e401028",
+    "/platform/js/app.js": "/platform/js/app.js?id=04e94eb1895c1a84d64ce4f2c07edd59",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=556c9a29d1562a74c391ca1d75809ca1",
@@ -13,14 +13,14 @@
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=4f9fa2024c6c9c662930e74109573431",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=05f8dba6f8cbb34d5c2129fe12bf9c8e",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=33b575bfc5d9192a2b0155595baa2e5c",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=a98ebba52b73f4a86d3f39cb9c9e4830",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=a31bb54d7bfdc33eee56f0a29ec09149",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=8a9f8453c8e9691da160d95f3233ce73",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=1435b648dfa43ef38889583bd03e8adc",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=b8e97825942c9e63f7e747c504807585",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=49e491a00ddf3dda3c606d7a150398a4",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=01834f48baf5b76191b704993294c1e0",
-    "/platform/css/app.css": "/platform/css/app.css?id=b218c075d10688e62c34ee5ef51695e5",
+    "/platform/css/app.css": "/platform/css/app.css?id=39f6fadefc5a9d61661f7cef682f158e",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=7bc222fd1f3a49c38cdc6f53cf67541f",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2f44cbf28671883a86d6d4bb6ca873d1"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=1546536cc7d174df1975c95c2c3cf7d3"
 }

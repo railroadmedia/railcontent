@@ -9,6 +9,7 @@ use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\PackPagesController;
+use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
@@ -348,6 +349,13 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
+
+        Route::put(
+            '/update-payment-method',
+            [PaymentMethodUpdateController::class, 'submitUpdateForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.update-payment-method');
 
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---

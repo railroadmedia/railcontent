@@ -54,7 +54,7 @@ class CommentUserDecorator extends ModeDecoratorBase
             $comments[$commentIndex]['user']['display_name'] = $commentAuthor['display_name'];
             $comments[$commentIndex]['user']['fields.profile_picture_image_url'] =
                 $commentAuthor['profile_picture_url'];
-            $comments[$commentIndex]['user']['xp'] = $commentAuthor->getTotalXp();
+            $comments[$commentIndex]['user']['xp'] = $commentAuthor->getBrandTotalXp();
             $comments[$commentIndex]['user']['rank'] = $commentAuthor->getXpRank();
             $comments[$commentIndex]['user']['access_level'] = $commentAuthor['access_level'];
             $comments[$commentIndex]['user']['xp_level'] = $commentAuthor->getMethodLevel();
@@ -80,7 +80,7 @@ class CommentUserDecorator extends ModeDecoratorBase
                     $replyAuthor['display_name'];
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['xp'] =
-                    $replyAuthor->getTotalXp();
+                    $replyAuthor->getBrandTotalXp();
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['rank'] =
                     $replyAuthor->getXpRank();

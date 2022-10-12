@@ -77,6 +77,14 @@ class HomePageController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
+        // singeo packs are under courses
+        if (brand() === 'singeo' && user()->isPackOnlyOwner()) {
+            return redirect()->route(
+                'platform.content-type-catalog',
+                ['brand' => 'singeo', 'contentTypeName' => 'courses']
+            );
+        }
+
         switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
@@ -450,7 +458,7 @@ class HomePageController extends BaseController
         return [
             "xp" => [
                 "icon" => "icon-experience-points",
-                "value" => user()->getTotalXp(),
+                "value" => user()->getBrandTotalXp(),
                 "label" => user()->getXpRank(),
             ],
             "forums_likes" => [

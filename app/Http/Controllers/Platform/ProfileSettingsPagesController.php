@@ -171,7 +171,6 @@ class ProfileSettingsPagesController extends BaseController
             ),
             'allBrands' => all_brands(),
             'selectedBrand' => $request->get('selected-brand', $brand)
-
         ]);
     }
 
@@ -683,7 +682,7 @@ class ProfileSettingsPagesController extends BaseController
             ->respond()
             ->getContent();
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.drumeo.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . brand() . '.stripe_publishable_key');
 
         $membershipProductIds = ProductModel::query()
             ->where([
@@ -764,7 +763,7 @@ class ProfileSettingsPagesController extends BaseController
         return view(
             'account.settings.payments',
             [
-                'sections' => $this->settingSections(),
+                'sections' => $this->settingSections('payments'),
                 'paymentMethodsJson' => $paymentMethodsJson,
                 'stripePublishableKey' => $stripePublishableKey,
                 'countries' => json_encode(array_values(CountryListService::allWithCommonDuplicatedAtTop())),
