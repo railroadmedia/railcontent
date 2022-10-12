@@ -11,6 +11,16 @@
     <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
     <style>
         .reveal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483002;display:none;overflow-y:auto;background-color:rgba(0,0,0,0.8)}.reveal-overlay:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:"Font Awesome 5 Pro";font-weight:900;font-style:normal;font-variant:normal;text-rendering:auto;content:"\f00d";color:#fff;z-index:1;opacity:0.8;position:absolute;margin:0;line-height:1em;text-align:center;display:inline-block;outline:none;top:0;right:0;font-size:35px;width:35px}@media (min-width: 768px){.reveal-overlay:after{top:7px;right:7px;font-size:50px;width:50px}}.reveal-overlay .reveal{z-index:1006;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:none;background-color:#fefefe;position:relative;top:100px;margin-right:auto;margin-left:auto;overflow-y:auto;width:90%;height:inherit;min-height:0;outline:none;padding:0;border:none;border-radius:7px}@media (min-width: 768px){.reveal-overlay .reveal{right:auto;left:auto;margin:0 auto}}
+        .join {
+            font-family:"Bebas Neue",sans-serif!important;
+            font-weight: 400!important;
+            font-size: 16px!important;
+        }
+        @media (min-width: 40em) {
+            .join {
+                font-size: 18px!important;
+            }
+        }
         .join.absolute {
             position:absolute!important;
         }
@@ -152,7 +162,7 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap items-center">
                 <div class="header-pic sm:order-1 pb-64 sm:pb-80 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video lazyload" x-on:click="trailer = true; modal = true">
-                    <div class="join white smaller absolute bottom-3 sm:bottom-7 right-3 sm:right-7">PLAY TRAILER</div>
+                    <div class="join white smaller absolute bottom-3 sm:bottom-7 right-3 sm:right-7"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
                 <div class="w-full sm:w-5/12 sm:pr-4 text-center sm:text-left">
                     <img class="h-14 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora_brands_logo.png">
@@ -340,32 +350,32 @@
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/sara.jpg">
                     <h4><strong>Sara T.</strong></h4>
-                    <p class="text-sm">When she’s not chatting with students, Sara spends her free time wandering the forests of the West Coast. You might find her practicing vocal exercises during her adventures (so she doesn’t encounter bears, of course. She’s a great singer - we promise!) Having spent most of her life singing, Sara credits her passion to the happiness and fulfillment of learning music. Whether an ensemble or a solo, Sara’s no stranger to fostering excitement and adventure within everyone’s musical journey.</p>
+                    <p class="text-sm">When she’s not chatting with students, Sara spends her free time wandering the forests of the West Coast. You might find her practicing vocal exercises during her adventures (so she doesn’t encounter bears, of course. She’s a great singer - we promise!) Having spent most of her life singing, Sara credits her passion to the happiness and fulfillment of learning music. </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/roni.jpg">
                     <h4><strong>Roni K.</strong></h4>
-                    <p class="text-sm">Roni grew up in a musical family playing “Name That Tune” and enjoying live music performances her whole life. She took every musical opportunity growing up including Concert and Jazz band, choir, guitar class, drumline, and even played for the Special Olympics opening ceremony. Outside of work, Roni can be found hanging with family and friends, being crafty, and playing her clarinet. She can’t wait to help students pursue their lifelong dreams and is honored to be a part of their journeys!</p>
+                    <p class="text-sm">Roni grew up in a musical family playing “Name That Tune” and enjoying live music performances. She took every musical opportunity growing up including Concert and Jazz band, choir, guitar class, drumline, and even played for the Special Olympics opening ceremony. Roni can be found hanging with family and friends, being crafty, and playing her clarinet. </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/jenn.jpg">
                     <h4><strong>Jenn vO</strong></h4>
-                    <p class="text-sm">Jenn vO grew up in a musical family with piano playing in the background and songs sung around the dinner table. She took piano, trumpet, and guitar lessons, and sang in a concert choir as an alto for eight years! If you think musicals are unrealistic, try unknowingly quoting song lyrics and watch Jenn break into song! Jenn is passionate about helping students reach their potential and when she’s not working, she adores hanging out with her husband and kids and cooking good food for friends.</p>
+                    <p class="text-sm">Jenn vO grew up in a musical family with piano playing in the background and songs sung around the dinner table. She took piano, trumpet, and guitar lessons, and sang in a concert choir for 8 years! When she’s not working, she adores hanging out with her husband and kids and cooking good food for friends. </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/kaitlyn.jpg">
                     <h4><strong>Kaitlyn C.</strong></h4>
-                    <p class="text-sm">Kaitlyn is a huge music lover and has been jamming along to all genres of music all her life! She is a beginner-level piano player (you may have seen some videos in Pianote!). Connecting with students and helping them discover and reach their goals is something she adores and has been doing for three years at Musora! Kaitlyn loves making people laugh, listening to and finding new music, hiking mountains, and spending time with her friends, family, and cat (Leo).</p>
+                    <p class="text-sm">Kaitlyn is a huge music lover and has been jamming along to all genres of music all her life! She is a beginner-level piano player (you may have seen some videos in Pianote!). Kaitlyn loves making people laugh, listening to and finding new music, hiking mountains, and spending time with her friends, family, and cat (Leo). </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/carlos.jpg">
                     <h4><strong>Carlos B.</strong></h4>
-                    <p class="text-sm">Carlos began classical guitar studies through a conservatory in Venezuela, parallel to the IB Program. At 11, he learned to hold the drumsticks and play his first beat using Drumeo! After graduating from Berklee College of Music, Carlos is now a Musora Mentor, helping students improve their skills. Aside from spending time with friends and family, personal training, and traveling, Carlos will soon release his debut album: Inner Child, featuring drummer Matt Garstka.</p>
+                    <p class="text-sm">Carlos began classical guitar studies through a conservatory in Venezuela. At 11, he learned to hold the drumsticks and play his first beat using Drumeo! Aside from spending time with friends and family, personal training, and traveling, Carlos will soon release his debut album: Inner Child, featuring drummer Matt Garstka. </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/emily.jpg">
                     <h4><strong>Emily J.</strong></h4>
-                    <p class="text-sm">Emily’s #1 passion in life is music! She’s toured across six countries with her all-female rock’n’roll band and has released three albums, with a fourth on the way! While her primary focus has always been songwriting, singing, and playing the guitar (both electric & acoustic), she also has a passion for the drums, bass, ukulele & piano! In her spare time, she enjoys hanging out with her puppy & collecting far too many houseplants.</p>
+                    <p class="text-sm">Emily’s #1 passion in life is music! She’s toured across six countries with her all-female rock’n’roll band and has released three albums, with a fourth on the way! While her primary focus has always been songwriting, singing, and playing the guitar, she also has a passion for the drums, bass, ukulele & piano!</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/jorge.jpg">
@@ -375,17 +385,17 @@
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/jennk.jpeg">
                     <h4><strong>Jenn K.</strong></h4>
-                    <p class="text-sm">Jenn K is a die-hard music lover and has worked for Musora for 10+ years.  In her younger years, she played in a family band with her brothers and even had one of her songs placed in a Kate Hudson movie! Jenn is passionate about helping others discover the magic that music can bring to their lives. In her spare time, she enjoys spending time with her kids outside, playing piano, writing songs, and hanging out with her dogs and farm critters.</p>
+                    <p class="text-sm">Jenn K is a die-hard music lover and has worked for Musora for 10+ years.  In her younger years, she played in a family band with her brothers and had one of her songs placed in a Kate Hudson movie! In her spare time, she enjoys spending time with her kids outside, playing piano, writing songs, and hanging with her dogs and farm critters.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
-                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah.jpg">
+                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/joy.jpg">
                     <h4><strong>Joy B.</strong></h4>
-                    <p class="text-sm">Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass (she desperately awaits Basseo!!!!). Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! She loves writing music, impromptu creative sessions, spending time honing her skills in the studio, and hanging out with family and friends.</p>
+                    <p class="text-sm">Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass. Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah.jpg">
                     <h4><strong>Hannah D.</strong></h4>
-                    <p class="text-sm">Hannah is a lifelong music lover who dabbles in piano, singing, guitar, and occasionally ukulele (though don’t ask her how long it’s been since she’s picked up either a guitar or ukulele)! She loves to see students realize the joy music can bring to their lives. In her free time, she loves finding new music to listen to, spending time with her partner and two devious cats, and pursuing various other artistic interests.</p>
+                    <p class="text-sm">Hannah is a lifelong music lover who dabbles in piano, singing, guitar, and occasionally ukulele! She loves to see students realize the joy music can bring to their lives. In her free time, she loves finding new music to listen to, spending time with her partner and two devious cats, and pursuing various other artistic interests.</p>
                 </div>
             </div>
         </div>
@@ -457,9 +467,9 @@
         'name' => 'modal',
         'additionalOnClose' => 'trailer = false;',
         'content' => '
-            <div x-show="trailer">
+            <div x-show="trailer" class="max-w-4xl mx-auto">
                 <div class="w-full relative" style="padding-bottom:56.25%;">
-                    <iframe class="absolute w-full h-full reset-on-close" src="https://www.youtube.com/embed/kZ5TmVFgWx4?rel=0&showinfo=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/759635284" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
         ',
