@@ -445,6 +445,6 @@ return [
     'impact_queue_name' => 'impact',
 
     // sasquatch integration
-    'customer_io_saasquatch_email_invite_event_name' => 'drumeo_saasquatch_referral-link_30-day',
-    'customer_io_saasquatch_email_invite_link_attribute_name' => 'drumeo_saasquatch_referral-link_30-day',
+    'customer_io_saasquatch_email_invite_event_name' => '_saasquatch_referral-link_30-day',
+    'customer_io_saasquatch_email_invite_link_attribute_name' => '_saasquatch_referral-link_30-day',
 ];
