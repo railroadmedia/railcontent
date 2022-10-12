@@ -337,15 +337,18 @@
 
                             @elseif($offerUpgradeToAnnualShowToStudent)
 
-                                <div>
-                                    <button
-                                        class="tw-btn-priamry tw-bg-{{ $brand }} tw-my-3 mu-modal-open"
-                                        id="modal-upgrade"
-                                    >
-                                        Upgrade Membership To Annual
-                                    </button>
-                                </div>
-                                <p class="tw-text-xs tw-italic tw-my-1">Save with an annual plan</p>
+{{-- todo: add back in when upgrading is working --}}
+
+{{--                                <div>--}}
+{{--                                    <button--}}
+{{--                                        class="tw-btn-priamry tw-bg-{{ $brand }} tw-my-3 mu-modal-open"--}}
+{{--                                        id="modal-upgrade"--}}
+{{--                                    >--}}
+{{--                                        Upgrade Membership To Annual--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                                <p class="tw-text-xs tw-italic tw-my-1">Save with an annual plan</p>--}}
+                            
                                 <div>
                                     @include('account.settings.partials.cancellation.cancel-btn')
                                 </div>
