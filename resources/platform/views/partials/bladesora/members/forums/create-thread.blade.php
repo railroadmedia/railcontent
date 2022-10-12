@@ -60,7 +60,7 @@
                             Cancel
                         </a>
 
-                        <button id="create-thread-submit" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full sm:tw-w-auto" type="submit" dusk="submit-button">
+                        <button id="create-thread-submit" class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-w-full sm:tw-w-auto" type="submit" dusk="submit-button">
                             Create Thread
                         </button>
                     </div>

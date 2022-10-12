@@ -106,7 +106,7 @@
                         <div class="tw-flex tw-flex-col">
                             <button
                                 class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"
-                                :class="[brandBGColor]"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 @click="$refs.searchInput.blur()"
                             >
                                 <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>

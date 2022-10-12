@@ -16,7 +16,7 @@
         />
         <button
           class="tw-btn-primary tw-btn-circle tw-flex-shrink-0"
-          :class="`tw-bg-${themeColor}`"
+          :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`"
           title="Search"
           @click="submitSearch"
         >

@@ -77,7 +77,7 @@
 
                             <button
                                 class="tw-btn-primary tw-w-full sm:tw-w-auto"
-                                :class="`tw-bg-${ brand }`"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 type="submit"
                             >
                                 Save Post
