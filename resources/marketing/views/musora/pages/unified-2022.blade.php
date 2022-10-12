@@ -85,30 +85,30 @@
         }
         .flip-div.flipped .front,
         .flip-div.flipped .front {
-            -ms-transform: rotateY(180deg);
-            -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg);
+            -ms-transform: rotateY(180deg)!important;
+            -webkit-transform: rotateY(180deg)!important;
+            transform: rotateY(180deg)!important;
         }
         .flip-div.flipped .back,
         .flip-div.flipped .back {
-            -ms-transform: rotateY(0deg);
-            -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg)!important;
+            -webkit-transform: rotateY(0deg)!important;
+            transform: rotateY(0deg)!important;
         }
         .flip-div .back,
         .flip-div .back {
-            -ms-transform: rotateY(-180deg);
-            -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg)!important;
+            -webkit-transform: rotateY(-180deg)!important;
+            transform: rotateY(-180deg)!important;
         }
         .flip-div .front,
         .flip-div .back {
-            -ms-transition: transform 0.8s;
-            -webkit-transition: transform 0.8s;
-            transition: transform 0.8s;
-            -ms-backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            -ms-transition: transform 0.8s!important;
+            -webkit-transition: transform 0.8s!important;
+            transition: transform 0.8s!important;
+            -ms-backface-visibility: hidden!important;
+            -webkit-backface-visibility: hidden!important;
+            backface-visibility: hidden!important;
         }
 
         .line-container::after {
@@ -469,7 +469,7 @@
                                         <img class="inline-block h-3 mr-1.5 @if(empty($bonus['guitareo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
                                         <img class="inline-block h-3 @if(empty($bonus['singeo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
                                     </div>
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image('https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}')"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }})"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-repeat text-4xl"></i><br>
                                         <p class="text-sm"><strong>LEARN MORE</strong></p>
