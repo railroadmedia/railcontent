@@ -82,6 +82,7 @@ class CreateVimeoVideoContentRecords extends Command
             // Get and parse videos
             $response = $this->getVideos();
             $videos = $response['body']['data'];
+            $contentIds = [];
 
             if (!empty($videos)) {
                 foreach ($videos as $video) {
@@ -98,13 +99,18 @@ class CreateVimeoVideoContentRecords extends Command
                     }
 
                     foreach (ConfigService::$availableBrands as $brand) {
+                        $content = $contentRepository->getBySlugAndTypeAndBrand(
+                            'vimeo-video-' . $id,
+                            'vimeo-video',
+                            $brand
+                        );
+                        if ($content) {
+                            $contentIds[] = $content[0]['id'];
+                        }
+
                         // create if needed
                         $noRecordOfVideoInCMS = count(
-                                $contentRepository->getBySlugAndTypeAndBrand(
-                                    'vimeo-video-' . $id,
-                                    'vimeo-video',
-                                    $brand
-                                )
+                                $content
                             ) == 0;
 
                         if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
@@ -121,6 +127,7 @@ class CreateVimeoVideoContentRecords extends Command
                             if (empty($content)) {
                                 $contentCreationFailed[] = $id;
                             } else {
+                                $contentIds[] = $content['id'];
                                 $contentCreatedCount++;
                                 $contentFieldsInsertData[] = [
                                     'content_id' => $content['id'],
@@ -186,9 +193,6 @@ class CreateVimeoVideoContentRecords extends Command
                 ConfigService::$databaseConnectionName
             )
                 ->table(ConfigService::$tableContentFields)->insert($contentFieldsInsertData);
-            $contentIds = collect($contentFieldsInsertData)->map(function ($field) {
-                return $field['content_id'];
-            })->unique()->toArray();
             $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
             if ($contentFieldsWriteSuccess && empty($contentCreationFailed)) {
                 $this->info(
