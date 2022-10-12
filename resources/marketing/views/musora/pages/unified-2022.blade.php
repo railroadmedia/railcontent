@@ -457,8 +457,8 @@
         'name' => 'modal',
         'additionalOnClose' => 'trailer = false;',
         'content' => '
-            <div x-show="trailer" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
-                <div class="aspect-16:9 w-full relative">
+            <div x-show="trailer">
+                <div class="w-full relative" style="padding-bottom:56.25%;">
                     <iframe class="absolute w-full h-full reset-on-close" src="https://www.youtube.com/embed/kZ5TmVFgWx4?rel=0&showinfo=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
