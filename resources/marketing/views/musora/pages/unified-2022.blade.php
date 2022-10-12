@@ -83,18 +83,6 @@
             }
 
         }
-        .flip-div.flipped .front,
-        .flip-div.flipped .front {
-            -ms-transform: rotateY(180deg)!important;
-            -webkit-transform: rotateY(180deg)!important;
-            transform: rotateY(180deg)!important;
-        }
-        .flip-div.flipped .back,
-        .flip-div.flipped .back {
-            -ms-transform: rotateY(0deg)!important;
-            -webkit-transform: rotateY(0deg)!important;
-            transform: rotateY(0deg)!important;
-        }
         .flip-div .back,
         .flip-div .back {
             -ms-transform: rotateY(-180deg)!important;
@@ -109,6 +97,18 @@
             -ms-backface-visibility: hidden!important;
             -webkit-backface-visibility: hidden!important;
             backface-visibility: hidden!important;
+        }
+        .flip-div.flipped .front,
+        .flip-div.flipped .front {
+            -ms-transform: rotateY(180deg)!important;
+            -webkit-transform: rotateY(180deg)!important;
+            transform: rotateY(180deg)!important;
+        }
+        .flip-div.flipped .back,
+        .flip-div.flipped .back {
+            -ms-transform: rotateY(0deg)!important;
+            -webkit-transform: rotateY(0deg)!important;
+            transform: rotateY(0deg)!important;
         }
 
         .line-container::after {
@@ -458,8 +458,8 @@
                     ]
                 @endphp
                 @foreach($bonuses as $bonus)
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-3 md:px-1.5 w-full sm:w-1/3 lg:w-1/4" style="max-width:250px;" onclick="this.classList.toggle('flipped')">
-                        <div class="flip-div inline-block relative w-full group" style="padding-bottom: 120%; perspective: 1000px;">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-3 md:px-1.5 w-full sm:w-1/3 lg:w-1/4" style="max-width:250px;">
+                        <div class="flip-div inline-block relative w-full group" style="padding-bottom: 120%; perspective: 1000px;" onclick="this.classList.toggle('flipped')">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="shadow-sm front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                     <div class="pb-3 flex flex-wrap content-end justify-center absolute z-30 text-center inset-0 text-white visible text-shadow-2" style="background:linear-gradient(to bottom, transparent 70%, black);">
