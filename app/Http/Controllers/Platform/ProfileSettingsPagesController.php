@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
 use App\Services\User\UserAccessService;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -512,7 +513,6 @@ class ProfileSettingsPagesController extends BaseController
 
     }
 
-
     public function acceptStudentPlanOffer(Request $request)
     {
         dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptStudentPlanOffer', $request);
@@ -532,13 +532,14 @@ class ProfileSettingsPagesController extends BaseController
             $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
 
             if(!$subscription) {
-                // todo: return error
+                return $this->returnRedirect(
+                    false,
+                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                    'contact our support team.'
+                );
             }
 
             $this->updateSubscriptionPaidUntilDate($subscription, 'addMonths', 2);
-
-
-
         } catch (\Exception $e) {
             return $this->returnRedirect(
                 false,
@@ -546,7 +547,6 @@ class ProfileSettingsPagesController extends BaseController
                 'contact our support team.'
             );
         }
-
 
         $oldSubscription = clone $subscription;
         event(new SubscriptionUpdated($oldSubscription, $subscription));
@@ -564,7 +564,7 @@ class ProfileSettingsPagesController extends BaseController
         try {
             $this->ecommerceEntityManager->persist($membershipAction);
             $this->ecommerceEntityManager->flush();
-        } catch (ORMException $e) {
+        } catch (Exception|Throwable $e) {
             error_log($e);
             return $this->returnRedirect(false);
         }
@@ -652,6 +652,100 @@ class ProfileSettingsPagesController extends BaseController
 
     public function cancel(Request $request)
     {
+        $userId = auth()->id();
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        try {
+            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+            if(!$subscription) {
+                return $this->returnRedirect(
+                    false,
+                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                    'contact our support team.'
+                );
+            }
+        } catch (\Exception $e) {
+            return $this->returnRedirect(
+                false,
+                'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                'contact our support team.'
+            );
+        }
+
+        $oldSubscription = clone $subscription;
+
+        $brand = $subscription->getProduct()->getBrand();
+
+        $cancelReason = session($brand . '-cancel-reason');
+        $cancelReasonText = session($brand . '-cancel-reason-text');
+
+        $subscription->setCanceledOn(Carbon::now());
+        $subscription->setIsActive(false);
+        $subscription->setCancellationReason($cancelReason);
+
+        try {
+            $this->ecommerceEntityManager->persist($subscription);
+            $this->ecommerceEntityManager->flush();
+
+            $this->userProductService->updateSubscriptionProducts($subscription);
+        } catch (Exception|Throwable $e) {
+            return $this->returnRedirect(false);
+        }
+
+        event(new SubscriptionUpdated($oldSubscription, $subscription));
+
+        $paidUntilRoundedUp = Carbon::parse($subscription->getPaidUntil()->format('Y-m-d'))->endOfDay();
+
+        $trialMembershipProductIds = [
+            126, 283, 400, 401, 266, 273, // drumeo
+            318, 319, 403, 402, // pianote
+            23, 429, 430, 431, // guitareo
+            413, 414, 423, 424, // singeo
+        ];
+
+        // if trial with no payments made revoke access immediately
+        $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
+        $noPaymentsMade = count($subscription->getPayments()) == 0;
+        $revokeAccessImmediately = $isTrial && $noPaymentsMade;
+
+        if ($revokeAccessImmediately) {
+            $paidUntilRoundedUp = Carbon::now();
+        }
+
+        $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically ' .
+            'billed and your access will end ' . Carbon::parse($paidUntilRoundedUp)->format('l F jS');
+
+        //  todo: send email
+        //      (see \Railroad\Crux\Http\Controllers\ActionController::cancel)
+        //      1. to staff
+        //      2. to student
+
+        // todo: tag in customer.io
+
+        // save membership action
+        $membershipAction = new MembershipAction();
+        /** @var $membershipAction MembershipAction|NotableEntity */
+        $membershipAction->setUser(new User(user()->getId(), user()->getEmail()));
+        $membershipAction->setBrand($brand);
+        $membershipAction->setAction(MembershipAction::ACTION_CANCELLED);
+        $membershipAction->setActionReason($cancelReason);
+        $membershipAction->setSubscription($subscription);
+        $membershipAction->setNote($cancelReasonText);
+
+        try {
+            $this->ecommerceEntityManager->persist($membershipAction);
+            $this->ecommerceEntityManager->flush();
+        } catch (Exception|Throwable $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        session()->remove($brand . '-cancel-reason');
+        session()->remove($brand . '-cancel-reason-text');
+
+        // respond
+        return $this->returnRedirect(false, $cancellationSuccessMessage);
     }
 
 
