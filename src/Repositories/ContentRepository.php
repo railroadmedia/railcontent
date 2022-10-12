@@ -2222,7 +2222,11 @@ class ContentRepository extends RepositoryBase
                     'key' => 'name',
                     'value' => $instructorRow["name"]
                 ];
-                $instructorRows[$instructorRowIndex]["data"] = [];
+                $instructorRows[$instructorRowIndex]["data"] = [
+                    'id' => 1,
+                    'key' => 'head_shot_picture_url',
+                    'value' => $instructorRow["head_shot_picture_url"]
+                ];
             }
 
             $filterOptionsArray['instructor'] = $instructorRows;
@@ -2296,6 +2300,8 @@ class ContentRepository extends RepositoryBase
                         continue;
                     }
                     foreach ($instructors as $instructor) {
+                        $compiledViewData = json_decode($instructor['compiled_view_data'] ?? '', true);
+
                         if (isset($instructor['id'])) {
                             $filterOptionsArray[$filterOptionName][] = [
                                 'id' => $instructor['id'],
@@ -2307,7 +2313,13 @@ class ContentRepository extends RepositoryBase
                                         "value" => $instructor['name'],
                                     ],
                                 ],
-                                'data' => [],
+                                'data' => [
+                                    [
+                                        "id" => $instructor['id'],
+                                        "key" => "head_shot_picture_url",
+                                        "value" => $compiledViewData['head_shot_picture_url'] ?? $compiledViewData['avatar_image_url'] ?? '',
+                                    ],
+                                ],
                             ];
                         }
                     }
