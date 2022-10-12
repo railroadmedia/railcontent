@@ -1878,6 +1878,7 @@ return [
             'display_name',
             'profile_picture_url',
             'totalXp',
+            'musoraXP',
             'xpRank',
             'level_rank',
             'isEdge',
