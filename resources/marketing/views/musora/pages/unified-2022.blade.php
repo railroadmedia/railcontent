@@ -187,7 +187,7 @@
     <header class="text-white px-5 sm:px-6 py-12 sm:py-16 lg:py-24" style="background-color:#020f1a;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap items-center">
-                <div class="header-pic sm:order-1 pb-64 sm:pb-80 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video lazyload" x-on:click="trailer = true; modal = true">
+                <div class="header-pic sm:order-1 pb-64 sm:pb-80 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video" x-on:click="trailer = true; modal = true">
                     <div class="join white smaller absolute bottom-3 sm:bottom-7 right-3 sm:right-7"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
                 <div class="w-full sm:w-5/12 sm:pr-4 text-center sm:text-left">
@@ -469,7 +469,7 @@
                                         <img class="inline-block h-3 mr-1.5 @if(empty($bonus['guitareo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
                                         <img class="inline-block h-3 @if(empty($bonus['singeo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
                                     </div>
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image('https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}')"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-repeat text-4xl"></i><br>
                                         <p class="text-sm"><strong>LEARN MORE</strong></p>
