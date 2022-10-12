@@ -353,7 +353,7 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-16" src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora_mentors_logo.png">
             <p class="mt-1 tracking-wider"><strong>MUSICIANS HELPING MUSICIANS</strong></p>
-            <p class="max-w-2xl my-5">Our music lesson communities have always valued relationships before technology.
+            <p class="max-w-2xl my-5 mx-auto">Our music lesson communities have always valued relationships before technology.
                 <br><br>
                 So we're doubling down on the personal touch with Musora Mentors – where you’ll get direct access to a Mentor that aligns with your musical experience and goals.</p>
             <div class="flex flex-wrap items-center">
