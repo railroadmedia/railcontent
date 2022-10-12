@@ -1879,6 +1879,8 @@ return [
             'profile_picture_url',
             'totalXp',
             'musoraXP',
+            'has_started_method',
+            'has_completed_method',
             'xpRank',
             'level_rank',
             'isEdge',
