@@ -3,23 +3,13 @@ export const testCarousel = [
         brand: 'drumeo',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/drumeo/forums/drumeo-website-feedback/6/musora-early-access/13736",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "RSVP NOW",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
+                ctaUrl: "https://www.addevent.com/event/wq15240029",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
-            // {
-            //     topSubtitle: "Coach of the Month",
-            //     title: "Steve Smith",
-            //     ctaText: "Visit Steve's Coach Page",
-            //     description: "Steve Smith is perhaps best known to most people as the former drummer for Journey. However, Steve is a jazz drummer at heart. He’s the bandleader of Vital Information, and has been a sideman for artists such as Jean-Luc Ponty, Steps Ahead, Dweezil Zappa, Bryan Adams, and Savage Garden, among many others.",
-            //     ctaUrl: "/drumeo/coaches/steve-smith/253573",
-            //     img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-steve-smith.jpg",
-            // },
             {
                 topSubtitle: "",
                 title: "Rudiment Refresh",
@@ -42,14 +32,12 @@ export const testCarousel = [
         brand: 'pianote',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/pianote/forums/platform-update-feedback-discussion/5/musora-early-access/3889?sortby_val=-published_on",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "RSVP NOW",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
+                ctaUrl: "https://www.addevent.com/event/qB15240010",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
                 topSubtitle: "Coach of The Month",
@@ -73,14 +61,12 @@ export const testCarousel = [
         brand: 'guitareo',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/guitareo/forums/website-update-and-feedback-discussion/6/musora-early-access/2674?sortby_val=-published_on",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "RSVP NOW",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
+                ctaUrl: "https://www.addevent.com/event/hc15240033",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
                 topSubtitle: "Coach of The Month",
@@ -96,14 +82,12 @@ export const testCarousel = [
         brand: 'singeo',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/singeo/forums/platform-update-feedback-discussion/5/musora-early-access/484?sortby_val=-published_on",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "RSVP NOW",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
+                ctaUrl: "https://www.addevent.com/event/MP15240035",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
                 topSubtitle: "Coach Of The Month",

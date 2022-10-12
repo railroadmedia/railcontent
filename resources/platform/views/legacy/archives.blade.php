@@ -34,7 +34,7 @@
 
             <div class="tw-flex tw-flex-row">
                 <content-catalogue
-                        content-endpoint="/laravel/public/railcontent/content"
+                        content-endpoint="/railcontent/content"
                         catalogue-type="list"
                         limit="20"
                         theme-color="drumeo"
