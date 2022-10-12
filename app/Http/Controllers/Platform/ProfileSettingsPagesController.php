@@ -450,6 +450,10 @@ class ProfileSettingsPagesController extends BaseController
         $ecommerceUser = $this->userProvider->getCurrentUser();
         $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
 
+        if(!$subscription) {
+            return $this->returnRedirect(false);
+        }
+
         // determine if the subscription is a trial
         $trialMembershipProductIds = ProductAccessMap::trialMembershipProductIds();
         $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
@@ -598,7 +602,7 @@ class ProfileSettingsPagesController extends BaseController
      * @param string $route
      * @return RedirectResponse
      */
-    private function returnRedirect($success = true, $msg = null, $route = 'crux.access-details')
+    private function returnRedirect($success = true, $msg = null, $route = 'platform.profile.settings.account')
     {
         $type = $success ? 'success-message' : 'error-message';
 
