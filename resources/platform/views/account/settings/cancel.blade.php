@@ -26,12 +26,12 @@
                 </svg>
             </div>
 
-            <h2 class="tw-text-3xl tw-mt-14 tw-text-center">Will you let us know why you're cancelling?</h2>
+            <h2 class="tw-text-3xl tw-mt-8 tw-text-center">Will you let us know why you're cancelling?</h2>
 
             <p class="tw-mt-6 tw-leading-7 tw-text-center">We’re sorry to hear that you’re unhappy with your membership.
                 <br>If you have a minute, we’d like to know where we went wrong.</p>
 
-            <div class="tw-flex tw-flex-col md:tw-flex-row tw-mt-5 tw-w-full">
+            <div class="tw-flex tw-flex-col md:tw-flex-row tw-mt-1 tw-w-full">
                 <form method="post"
                       action="{{ url()->route('platform.profile.settings.submit-cancel-reason') }}"
                       id="cancel-reason-form"

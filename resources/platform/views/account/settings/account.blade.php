@@ -139,10 +139,6 @@
                         </div>
 
                         <div class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
-                            <p class="tw-mt-3">Your account includes:</p>
-                        </div>
-
-                        <div class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
                             <div class="tw-flex tw-flex-col">
                                 <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
                                     @if($isLifetime)
@@ -199,7 +195,7 @@
                     <div class="tw-flex tw-flex-col tw-w-full md:tw-w-1/2 tw-p-8 body tw-items-center tw-justify-center
                         tw-border-0 tw-border-b md:tw-border-b-0 md:tw-border-r tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid tw-text-center">
 
-                        <div class="tw-text-[] dark:tw-text-white tw-text-[#00101D]">
+                        <div class="tw-text-[] dark:tw-text-white tw-text-[#00101D] tw-mb-3">
                             <svg class="tw-w-[140px] lg:tw-w-48 tw-transition tw-mx-auto"
                                 alt="Musora logo"
                                 viewBox="0 0 473 80"
@@ -335,7 +331,7 @@
 
                             @elseif(!$subscription)
                                 {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
-                                <a class="tw-btn-primary tw-bg-{{ $brand }} visited:tw-text-white" href="/">
+                                <a class="tw-btn-primary tw-bg-{{ $brand }} visited:tw-text-white" href="{{ get_legacy_brand_base_url() . '/' }}">
                                     RENEW YOUR MEMBERSHIP
                                 </a>
 
