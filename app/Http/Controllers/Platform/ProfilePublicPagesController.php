@@ -102,6 +102,8 @@ class ProfilePublicPagesController extends BaseController
                 'userXP' => $userXP,
                 'currentUser' => $currentUser,
                 "isSubscriber" => $isSubscriber,
+                "nextLearningPathLevel" => '1.1',
+                "nextLearningPathProgressPercent" => 10
             ]
         );
     }
@@ -114,6 +116,11 @@ class ProfilePublicPagesController extends BaseController
         $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics($user->id);
 
         return [
+            "musora_xp" => [
+                "icon" => "icon-experience-points",
+                "value" => $user->getTotalXp(),
+                "label" => $user->getXpRank(),
+            ],
             "xp" => [
                 "icon" => "icon-experience-points",
                 "value" => $user->getBrandTotalXp(),
