@@ -33,7 +33,7 @@
         <div class="flex flex-row pa-3 flex-auto">
             <div class="flex flex-column">
                 <div class="flex flex-row mb-3">
-                    <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Payment History</h2>
+                    <h2 class="tw-font-bold tw-text-lg tw-text-[#00101D] dark:tw-text-white">Payment History</h2>
                 </div>
                 @if($payments)
                     @foreach($payments as $payment)

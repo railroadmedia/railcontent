@@ -39,8 +39,8 @@
                         >
 
                         <span class="box-hover heading corners-10">
-                        <i class="fas fa-arrow-right"></i>
-                    </span>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
                     </div>
                 </a>
             @endforeach

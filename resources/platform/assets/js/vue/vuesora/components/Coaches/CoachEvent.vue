@@ -89,7 +89,7 @@
                   <span class="tw-font-bold">{{ coach.name.split(" ")[2] }}</span>
                 </h4>
               </a>
-              <span v-if="i+1 < instructors.length" class="tw-leading-none tw-font-bold tw-text-lg tw-mr-1.5" >&</span>
+              <span v-if="i+1 < instructors.length" class="tw-leading-none tw-font-bold dark:tw-text-white tw-text-lg tw-mr-1.5" >&</span>
             </div>
           </div>
 

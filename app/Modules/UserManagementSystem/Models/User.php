@@ -207,6 +207,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User wherePianoteOnboardingSkipSetup($value)
  * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
  * @property ?MentorStudent $mentorStudent
+ * @property mixed|null $brand_total_xp
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -220,6 +221,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $guard_name = 'user-management-system';
     protected $casts = [
         'brand_method_levels' => 'json',
+        'brand_total_xp' => 'json'
     ];
 
     /**
@@ -316,6 +318,20 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         }
 
         return '1.1';
+    }
+
+    /**
+     * @return integer
+     */
+    public function getBrandTotalXp()
+    {
+        $brand = brand();
+
+        if (isset($this->brand_total_xp[$brand])) {
+            return $this->brand_total_xp[$brand];
+        }
+
+        return 0;
     }
 
     /**
