@@ -45,7 +45,7 @@
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
     
-                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
                     </button>

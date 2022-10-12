@@ -1,18 +1,18 @@
 <div class="tw-flex tw-flex-row tw-flex-wrap tw-mt-4">
     
-    <button class="tw-btn-primary tw-bg-{{ $brand }} tw-m-1 tw-w-full md:tw-w-auto"
+    <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-m-1 tw-w-full md:tw-w-auto"
             data-open-modal="whatIsModal">
             <i class="fas fa-question-circle"></i>&nbsp; What is Student Collaboration?
     </button>
 
 
-    <button class="tw-btn-primary tw-bg-{{ $brand }} tw-m-1 tw-w-full md:tw-w-auto"
+    <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-m-1 tw-w-full md:tw-w-auto"
             data-open-modal="howCreateModal">
             <i class="fas fa-question-circle"></i>&nbsp; How to Create Your Video   
     </button>
 
 
-    <button class="tw-btn-primary tw-bg-{{ $brand }} tw-m-1 tw-w-full md:tw-w-auto"
+    <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-m-1 tw-w-full md:tw-w-auto"
             data-open-modal="questionModal">
             Submit a Video <span class="tw-text-3xl tw-leading-none tw-ml-1 tw-mt-0.5">»</span>
     </button>

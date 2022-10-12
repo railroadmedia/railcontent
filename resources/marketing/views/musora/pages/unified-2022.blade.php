@@ -369,21 +369,24 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                     <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/jorge.jpg">
-                    <h4><strong>Jorge B</strong></h4>
+                    <h4><strong>Jorge B.</strong></h4>
                     <p class="text-sm">Jorge always dreamed of becoming a musician. He taught himself to play piano by ear at 14. At 16, he discovered Drumeo and began to learn the drums, even though he didn’t have a drum kit, practicing by air drumming and memorizing patterns. Ten years later, he helps Musora students worldwide achieve the same goal: to become musicians. Jorge lives in Madrid, where he works with local artists as a session drummer. He is also a drum teacher, music producer, and soon-to-be audio engineer.</p>
                 </div>
-{{--                <div class="w-full sm:w-1/2 lg:w-1/3 p-2">--}}
-{{--                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/todo.jpg">--}}
-{{--                    --}}{{--                    Hannah D.: Hannah is a lifelong music lover who dabbles in piano, singing, guitar, and occasionally ukulele (though don’t ask her how long it’s been since she’s picked up either a guitar or ukulele)! She loves to see students realize the joy music can bring to their lives. In her free time, she loves finding new music to listen to, spending time with her partner and two devious cats, and pursuing various other artistic interests.--}}
-{{--                </div>--}}
-{{--                <div class="w-full sm:w-1/2 lg:w-1/3 p-2">--}}
-{{--                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/todo.jpg">--}}
-{{--                    --}}{{--                    Jenn K: Jenn K is a die-hard music lover and has worked for Musora for 10+ years.  In her younger years, she played in a family band with her brothers and even had one of her songs placed in a Kate Hudson movie! Jenn is passionate about helping others discover the magic that music can bring to their lives. In her spare time, she enjoys spending time with her kids outside, playing piano, writing songs, and hanging out with her dogs and farm critters.--}}
-{{--                </div>--}}
-{{--                <div class="w-full sm:w-1/2 lg:w-1/3 p-2">--}}
-{{--                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/todo.jpg">--}}
-{{--                    --}}{{--                    Joy B.: Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass (she desperately awaits Basseo!!!!). Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! She loves writing music, impromptu creative sessions, spending time honing her skills in the studio, and hanging out with family and friends.--}}
-{{--                </div>--}}
+                <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/jennk.jpeg">
+                    <h4><strong>Jenn K.</strong></h4>
+                    <p class="text-sm">Jenn K is a die-hard music lover and has worked for Musora for 10+ years.  In her younger years, she played in a family band with her brothers and even had one of her songs placed in a Kate Hudson movie! Jenn is passionate about helping others discover the magic that music can bring to their lives. In her spare time, she enjoys spending time with her kids outside, playing piano, writing songs, and hanging out with her dogs and farm critters.</p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah.jpg">
+                    <h4><strong>Joy B.</strong></h4>
+                    <p class="text-sm">Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass (she desperately awaits Basseo!!!!). Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! She loves writing music, impromptu creative sessions, spending time honing her skills in the studio, and hanging out with family and friends.</p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                    <img class="rounded-xl shadow-sm" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah.jpg">
+                    <h4><strong>Hannah D.</strong></h4>
+                    <p class="text-sm">Hannah is a lifelong music lover who dabbles in piano, singing, guitar, and occasionally ukulele (though don’t ask her how long it’s been since she’s picked up either a guitar or ukulele)! She loves to see students realize the joy music can bring to their lives. In her free time, she loves finding new music to listen to, spending time with her partner and two devious cats, and pursuing various other artistic interests.</p>
+                </div>
             </div>
         </div>
     </section>
