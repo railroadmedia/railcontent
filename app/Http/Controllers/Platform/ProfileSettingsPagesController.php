@@ -463,6 +463,11 @@ class ProfileSettingsPagesController extends BaseController
         session()->put('cancel-reason', $reason);
         session()->put('cancel-reason-text', $textReason);
 
+        // TEMPORARY version that immediately cancels instead of offering a retention offer.
+        return $this->cancel($request);
+        // TEMPORARY version that immediately cancels instead of offering a retention offer.
+
+
         // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
         if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
             return $this->cancel($request);
