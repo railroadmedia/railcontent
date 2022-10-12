@@ -432,7 +432,7 @@
                         'description' => 'Kaitlyn is a huge music lover and has been jamming along to all genres of music all her life! She is a beginner-level piano player (you may have seen some videos in Pianote!). Kaitlyn loves making people laugh, listening to and finding new music, hiking mountains, and spending time with her friends, family, and cat (Leo). ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah.jpg',
+                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah2.jpg',
                         'first' => 'Hannah ',
                         'last' => 'D',
                         'pianote' => true,
@@ -440,7 +440,7 @@
                         'description' => 'Hannah is a lifelong music lover who dabbles in piano, singing, guitar, and occasionally ukulele! She loves to see students realize the joy music can bring to their lives. In her free time, she loves finding new music to listen to, spending time with her partner and two devious cats, and pursuing various other artistic interests.',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/joy.jpg',
+                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/joy2.jpg',
                         'first' => 'Joy ',
                         'last' => 'B',
                         'drumeo' => true,
@@ -448,7 +448,7 @@
                         'description' => 'Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass. Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/jennk.jpeg',
+                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/jenn_k.jpg',
                         'first' => 'Jenn ',
                         'last' => 'K',
                         'drumeo' => true,
