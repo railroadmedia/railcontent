@@ -311,7 +311,7 @@
                     <p class="my-3 sm:my-5 text-gray-500 leading-relaxed"><strong class="text-guitareo"><i class="fas fa-guitar"></i></strong> released in 2017.<br>
                         <strong class="text-guitareo">Full 10-step</strong> curriculum.<br>
                         <strong class="text-guitareo">500+</strong> charts for popular songs.<br></p>
-                    <a class="join guitareo smaller mb-4 sm:w-2/3" href="https://www.musora.com/guitareo/">VISIT GUITAREO</a><br>
+                    <a class="join guitareo smaller mb-4 sm:w-2/3" href="https://www.musora.com/guitareo">VISIT GUITAREO</a><br>
                     <a class="text-gray-400 border-gray-400 transition-colors duration-300 py-1.5 w-9 h-9 text-xl leading-none rounded-full inline-block text-center mx-0.5 border-2 social-button facebook" target="_blank" rel="noopener" href="https://www.facebook.com/guitareoofficial"><i class="fab fa-facebook-f"></i></a>
                     <a class="text-gray-400 border-gray-400 transition-colors duration-300 py-1.5 w-9 h-9 text-xl leading-none rounded-full inline-block text-center mx-0.5 border-2 social-button youtube" target="_blank" rel="noopener" href="https://www.youtube.com/user/guitarlessonscom"><i class="fab fa-youtube"></i></a>
                     <a class="text-gray-400 border-gray-400 transition-colors duration-300 py-1.5 w-9 h-9 text-xl leading-none rounded-full inline-block text-center mx-0.5 border-2 social-button instagram" target="_blank" rel="noopener" href="https://www.instagram.com/guitareoofficial/"><i class="fab fa-instagram"></i></a>
@@ -339,7 +339,7 @@
                     <p class="my-3 sm:my-5 text-gray-500 leading-relaxed"><strong class="text-singeo"><i class="fas fa-microphone-stand"></i></strong> just released in 2021.<br>
                         <strong class="text-singeo">3+</strong> weekly live events.<br>
                         <strong class="text-singeo">100+</strong> songs with karaoke.<br></p>
-                    <a class="join singeo smaller mb-4 sm:w-2/3" href="https://www.singeo.com/">VISIT SINGEO</a><br>
+                    <a class="join singeo smaller mb-4 sm:w-2/3" href="https://www.musora.com/singeo">VISIT SINGEO</a><br>
                     <a class="text-gray-400 border-gray-400 transition-colors duration-300 py-1.5 w-9 h-9 text-xl leading-none rounded-full inline-block text-center mx-0.5 border-2 social-button facebook" target="_blank" rel="noopener" href="https://www.facebook.com/singeoofficial/"><i class="fab fa-facebook-f"></i></a>
                     <a class="text-gray-400 border-gray-400 transition-colors duration-300 py-1.5 w-9 h-9 text-xl leading-none rounded-full inline-block text-center mx-0.5 border-2 social-button youtube" target="_blank" rel="noopener" href="https://www.youtube.com/c/singeoofficial"><i class="fab fa-youtube"></i></a>
                     <a class="text-gray-400 border-gray-400 transition-colors duration-300 py-1.5 w-9 h-9 text-xl leading-none rounded-full inline-block text-center mx-0.5 border-2 social-button instagram" target="_blank" rel="noopener" href="https://www.instagram.com/singeoofficial/"><i class="fab fa-instagram"></i></a>
@@ -517,7 +517,7 @@
             "question" => true,
             "title" => "Which mobile app should I use?",
             "description" => "We’ve launched a brand new Musora mobile app with improved functionality and added features with access to all four brands. The Drumeo and Pianote mobile apps will remain accessible, but will not be updated with new content and features. Download the new app here:
-            <a href='https://play.google.com/store/apps/details?id=com.musoraapp' target='_blank'>GOOGLE PLAY</a> / <a href='https://itunes.apple.com/us/app/musora/id1619053766?ls=1' target='_blank'>APPLE STORE</a>",
+            <a href='https://play.google.com/store/apps/details?id=com.musoraapp' target='_blank'><u>GOOGLE PLAY</u></a> / <a href='https://itunes.apple.com/us/app/musora/id1619053766?ls=1' target='_blank'><u>APPLE STORE</u></a>",
             ])
             @include('musora._partials._dropdown', [
             "customClass" => "sm:rounded-full",
