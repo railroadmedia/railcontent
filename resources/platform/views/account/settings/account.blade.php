@@ -372,13 +372,14 @@
                             <li>Live lessons and personal support.</li>
                         </ul>
 
-                        {{-- ---------------------- How-Can-We-Help Request Link ---------------------- --}}
-                        @if($hasHadMembership)
-                            <a href="#" class="tw-mt-3 body">
-                                <p class="mu-modal-open tw-underline body" id="modal-how-can-we-help">Click here if you’d like
-                                    help getting the most out of your account.</p>
-                            </a>
-                        @endif
+{{-- todo: re-add once the modal form is working --}}
+{{--                        --}}{{-- ---------------------- How-Can-We-Help Request Link ---------------------- --}}
+{{--                        @if($hasHadMembership)--}}
+{{--                            <a href="#" class="tw-mt-3 body">--}}
+{{--                                <p class="mu-modal-open tw-underline body" id="modal-how-can-we-help">Click here if you’d like--}}
+{{--                                    help getting the most out of your account.</p>--}}
+{{--                            </a>--}}
+{{--                        @endif--}}
                     </div>
 
                 </div>
