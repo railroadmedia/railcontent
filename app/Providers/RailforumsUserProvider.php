@@ -161,7 +161,7 @@ class RailforumsUserProvider implements UserProviderInterface
             $userModel->profile_picture_url,
             $userModel->created_at,
             $userModel->timezone ?? '',
-            $userModel->getAttributes()['total_xp'] ?? 0,
+            $userModel->getBrandTotalXp(),
             $userModel->getXpRank(),
             $userModel->getMethodLevel(),
            $userModel->getAttributes()['access_level'] ?? ''

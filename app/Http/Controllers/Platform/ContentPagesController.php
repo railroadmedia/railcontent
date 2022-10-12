@@ -29,6 +29,7 @@ use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
+use Railroad\Railcontent\Services\MethodService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -44,6 +45,7 @@ class ContentPagesController extends BaseController
     private CalendarService $calendarService;
     private ContentFollowsService $contentFollowsService;
     private ResourceDecorator $resourceDecorator;
+    private MethodService $methodService;
 
     /**
      * @param ContentService $contentService
@@ -63,7 +65,8 @@ class ContentPagesController extends BaseController
         FullTextSearchService $fullTextSearchService,
         CalendarService $calendarService,
         ContentFollowsService $contentFollowsService,
-        ResourceDecorator $resourceDecorator
+        ResourceDecorator $resourceDecorator,
+        MethodService $methodService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -73,6 +76,7 @@ class ContentPagesController extends BaseController
         $this->calendarService = $calendarService;
         $this->contentFollowsService = $contentFollowsService;
         $this->resourceDecorator = $resourceDecorator;
+        $this->methodService = $methodService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -661,7 +665,13 @@ class ContentPagesController extends BaseController
             ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
 
-        if (!empty($contentToRenderAsLessonParent)) {
+        if(($contentToRenderAsLesson['type'] == 'learning-path-lesson')){
+            $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
+            $learningPath = \Arr::last($contentToRenderAsLesson->getParentContentData());
+            $nextPrevLessons = $this->methodService->getNextAndPreviousLessons($contentToRenderAsLesson['id'], $learningPath->id);
+            $nextChild = $nextPrevLessons->getNextLesson();
+            $previousChild = $nextPrevLessons->getPreviousLesson();
+        } elseif (!empty($contentToRenderAsLessonParent)) {
             $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
 
             $lessonHierarchyContent =
