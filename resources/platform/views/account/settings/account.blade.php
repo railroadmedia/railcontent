@@ -393,7 +393,10 @@
 
     {{-- =================================  Legacy Video Player Form ================================= --}}
 
-    <form method="POST" action=""> {{-- action="/usora/user/update/{{ current_user()->getId() }}/" ??? --}}
+    <form method="POST" action="{{ url()->route('user_management_system.user.update', ['id' => user()->id ])}}">
+        {{ method_field('PATCH') }}
+        {{ csrf_field() }}
+
         <div class="pa-3 tw-border-0 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid tw-w-full">
             <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">Would you like to use our legacy video player?</h3> 
             <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
@@ -406,8 +409,7 @@
                     "inputID" => "useLegacyPlayer",
                     "inputName" => "use_legacy_video_player",
                     "inputLabel" => "Use legacy video player.",
-                    // "checked" => (boolean) current_user()->getUseLegacyVideoPlayer()
-                    "checked" => "" //temporary
+                    "checked" => (boolean) user()->use_legacy_video_player ?? false
                 ])
             </div>
         </div>
