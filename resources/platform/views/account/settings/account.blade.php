@@ -317,7 +317,7 @@
 
                                     <a href="#"
                                        onclick="this.parentNode.submit(); return false;"
-                                       class="tw-btn-primary tw-bg-{{ $brand }}">
+                                       class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white">
                                         Continue Your Membership
                                     </a>
                                 </form>
@@ -325,13 +325,13 @@
                             @elseif(!$hasHadMembership)
 
                                 <a href="{{ $addToCartUrlTrial }}"
-                                   class="tw-btn-primary tw-bg-{{ $brand }}">
+                                   class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white">
                                     Start Free Trial
                                 </a>
 
                             @elseif(!$subscription)
                                 {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
-                                <a class="tw-btn-primary tw-bg-{{ $brand }} visited:tw-text-white" href="{{ get_legacy_brand_base_url() . '/' }}">
+                                <a class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white" href="{{ get_legacy_brand_base_url() . '/' }}">
                                     RENEW YOUR MEMBERSHIP
                                 </a>
 
@@ -341,7 +341,7 @@
 
 {{--                                <div>--}}
 {{--                                    <button--}}
-{{--                                        class="tw-btn-priamry tw-bg-{{ $brand }} tw-my-3 mu-modal-open"--}}
+{{--                                        class="tw-btn-priamry tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-my-3 mu-modal-open"--}}
 {{--                                        id="modal-upgrade"--}}
 {{--                                    >--}}
 {{--                                        Upgrade Membership To Annual--}}
@@ -510,7 +510,7 @@
 
                 <button
                     {{--                    class="tw-uppercase tw-font-bold tw-no-underline tw-p-3 tw-pl-16 tw-pr-16 tw-text-white tw-rounded-full tw-mt-8 tw-border-0"--}}
-                    class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full tw-my-2"
+                    class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-w-full tw-my-2"
                     style="cursor:pointer">
                     Send Message
                 </button>
