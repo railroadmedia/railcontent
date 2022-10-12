@@ -85,7 +85,10 @@ class ContentPagesController extends BaseController
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         ConfigService::$availableBrands = [brand()];
-        ContentRepository::$bypassPermissions = true;
+
+        if (user()->isAMember()) {
+            ContentRepository::$bypassPermissions = true;
+        }
 
         if ($contentTypeName == 'lessons' && $brand == 'guitareo') {
             return $this->guitareoLessonsPage($request, $domain, $brand);
@@ -220,7 +223,10 @@ class ContentPagesController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
-        ContentRepository::$bypassPermissions = true;
+        if (user()->isAMember()) {
+            ContentRepository::$bypassPermissions = true;
+        }
+
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 

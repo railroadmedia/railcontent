@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Brand\Services\BrandService;
+use Carbon\Carbon;
 
 if (! function_exists('user')) {
     /**
@@ -23,5 +24,12 @@ if (! function_exists('brand')) {
     function brand()
     {
         return BrandService::getLastUsedBrand(user());
+    }
+}
+
+if (!function_exists('generate_musora_cross_platform_login_key')) {
+    function generate_musora_cross_platform_login_key($userId, $userPasswordHash)
+    {
+        return md5($userId . $userPasswordHash . Carbon::now()->startOfMinute()->toDateTimeString());
     }
 }

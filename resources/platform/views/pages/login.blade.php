@@ -22,8 +22,8 @@
 
         <login-form
             brand="drumeo"
-            loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect' => $redirect] : [])) }}"
-            reseturl="{{ url()->route('user_management_system.password.send-reset-email', (!empty($redirect) ? ['redirect' => $redirect] : [])) }}"
+            loginurl="{{ url()->route('user_management_system.login.cookie', (!empty($redirect) ? ['redirect_to' => $redirect] : [])) }}"
+            reseturl="{{ url()->route('user_management_system.password.send-reset-email', (!empty($redirect) ? ['redirect_to' => $redirect] : [])) }}"
             joinurl="{{url('/#orderNow')}}"
             :errors="{{json_encode($errors->all())}}"
             hassessionstatus="{{session()->has('status')}}"
