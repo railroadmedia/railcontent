@@ -5,9 +5,9 @@ export const testCarousel = [
             {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "RSVP NOW",
-                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
-                ctaUrl: "https://www.addevent.com/event/wq15240029",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
+                ctaUrl: "https://www.musora.com/unified-2022",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
@@ -34,9 +34,9 @@ export const testCarousel = [
             {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "RSVP NOW",
-                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
-                ctaUrl: "https://www.addevent.com/event/qB15240010",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
+                ctaUrl: "https://www.musora.com/unified-2022",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
@@ -63,9 +63,9 @@ export const testCarousel = [
             {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "RSVP NOW",
-                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
-                ctaUrl: "https://www.addevent.com/event/hc15240033",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
+                ctaUrl: "https://www.musora.com/unified-2022",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
@@ -84,9 +84,9 @@ export const testCarousel = [
             {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "RSVP NOW",
-                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. We’re celebrating with a MASSIVE live party on November 1st, click below to RSVP.",
-                ctaUrl: "https://www.addevent.com/event/MP15240035",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
+                ctaUrl: "https://www.musora.com/unified-2022",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
             },
             {
