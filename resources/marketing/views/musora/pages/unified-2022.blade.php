@@ -204,7 +204,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
         <div class="container max-w-4xl mx-auto">
             <h3 style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>The Ultimate Music Lessons Experience</strong></h3>
-            <p class="leading-tight mt-3 mb-10 max-w-2xl">You now have access to all of our lessons and practice tools for drums, piano, guitar, and singing – at no extra cost to you – PLUS the unified platform allows us to upgrade your experience easier with shared technology. Here are a few things you’ll notice:</p>
+            <p class="leading-tight mt-3 mb-10 max-w-2xl mx-auto">You now have access to all of our lessons and practice tools for drums, piano, guitar, and singing – at no extra cost to you – PLUS the unified platform allows us to upgrade your experience easier with shared technology. Here are a few things you’ll notice:</p>
 
             <div class="flex flex-wrap items-start text-left">
                 <div class="flex items-start w-full sm:w-1/2 p-4">
@@ -523,7 +523,7 @@
             "customClass" => "sm:rounded-full",
             "question" => true,
             "title" => "What is the price for Musora?",
-            "description" => "Good news! To thank you for support our business, we’re grandfathering in all existing subscription prices. The new price will be equal to or higher than any subscription we’ve ever offered!",
+            "description" => "Good news! To thank you for supporting our business, we’re grandfathering in all existing membership prices. New students will pay a higher premium to become a part of Musora.",
             ])
             @include('musora._partials._dropdown', [
             "customClass" => "sm:rounded-full",
