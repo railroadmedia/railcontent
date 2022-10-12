@@ -11,7 +11,7 @@
         <div id="payment-methods-section">
 
             <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
-                <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white">Payment Details</h1>
+                <h1 class="tw-text-2xl tw-tw-font-bold tw-text-[#00101D] dark:tw-text-white">Payment Details</h1>
             </div>
             
             <payment-methods
@@ -42,7 +42,7 @@
                            target="_blank">
                             <div class="flex flex-column xs-12 md-6">
                                 <div class="flex flex-row">
-                                    <p class="tiny font-bold tw-text-[#00101D] dark:tw-text-white">
+                                    <p class="tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                                         <i class="fal fa-file-pdf mr-1"></i>
                                         {{ Carbon\Carbon::parse($payment->getCreatedAt())->format('F j, Y') }}
                                     </p>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="flex flex-column xs-12 md-6">
                                 <div class="flex flex-row">
-                                    <div class="flex flex-column x-tiny font-italic uppercase align-h-left xs-6 tw-text-[#00101D] dark:tw-text-white">
+                                    <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-left xs-6 tw-text-[#00101D] dark:tw-text-white">
                                         @if (!empty($payment->getPaymentMethod()) &&
                                         !empty($payment->getPaymentMethod()->getMethod()) &&
                                         $payment->getExternalProvider() == 'stripe')
@@ -60,10 +60,10 @@
                                             {{ $payment->getExternalProvider() == 'paypal' ? 'PayPal' : 'Other' }}
                                         @endif
                                     </div>
-                                    <div class="flex flex-column x-tiny font-italic uppercase align-h-center xs-3 tw-text-[#00101D] dark:tw-text-white">
+                                    <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-center xs-3 tw-text-[#00101D] dark:tw-text-white">
                                         {{ $payment->getType() }}
                                     </div>
-                                    <div class="flex flex-column x-tiny font-italic uppercase align-h-right xs-3 tw-text-[#00101D] dark:tw-text-white">
+                                    <div class="flex flex-column tw-text-xs tw-italic tw-uppercase align-h-right xs-3 tw-text-[#00101D] dark:tw-text-white">
                                         ${{ number_format($payment->getTotalPaid(), 2, '.') }}
                                     </div>
                                 </div>
@@ -77,4 +77,8 @@
         </div>
 
     </div>
+@endsection
+
+@section('layout-scripts')
+    <script src="https://js.stripe.com/v3/"></script>
 @endsection

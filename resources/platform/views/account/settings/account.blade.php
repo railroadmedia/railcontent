@@ -335,7 +335,7 @@
         
                             @elseif(!$subscription)
                                 {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
-                                <a class="tw-btn-primary tw-bg-{{ $brand }}" href="/">
+                                <a class="tw-btn-primary tw-bg-{{ $brand }} visited:tw-text-white" href="/">
                                     RENEW YOUR MEMBERSHIP
                                 </a>
         

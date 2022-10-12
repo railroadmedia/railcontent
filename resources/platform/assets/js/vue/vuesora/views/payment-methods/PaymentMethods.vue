@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-column grow">
-        <div class="flex flex-row mb-3 pt-3">
+    <div class="flex flex-column grow pa-3 tw-border-0 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid">
+        <div class="flex flex-row mb-3">
             <h2 class="tw-font-bold tw-text-lg tw-text-[#00101D] dark:tw-text-white">
                 Payment Methods
             </h2>
