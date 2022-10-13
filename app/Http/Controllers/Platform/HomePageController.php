@@ -155,12 +155,21 @@ class HomePageController extends BaseController
             4
         );
 
-        $subscribedCoaches = $this->contentFollowService->getUserFollowedContent(
-            user()->id,
-            brand(),
-            ['instructor'],
+        $subscribedCoaches = $this->contentService->getFiltered(
             1,
-            6
+            6,
+            '-published_on',
+            ['instructor'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false,
+            false,
+            false,
+            true
         );
 
         // coaches live
@@ -340,27 +349,15 @@ class HomePageController extends BaseController
         // latest forum posts
         $forumPosts =
             $this->databaseManager->connection(config('railforums.database_connection_name'))
-                ->table('forum_posts')
+                ->table('forum_threads')
                 ->select(['forum_posts.*', 'forum_threads.title'])
-                ->leftJoin('forum_threads', 'forum_threads.id', '=', 'forum_posts.thread_id')
-                ->leftJoin('forum_categories', 'forum_threads.category_id', '=', 'forum_categories.id')
-                ->limit(10)
+                ->join('forum_posts', 'forum_threads.last_post_id', '=', 'forum_posts.id')
+                ->limit(6)
                 ->whereNull('forum_posts.deleted_at')
                 ->whereNull('forum_threads.deleted_at')
-                ->whereNull('forum_categories.deleted_at')
                 ->where('forum_posts.state', 'published')
-                //   ->whereNotIn('forum_posts.author_id', array_values($administrators))
-                ->orderBy('forum_posts.created_at', 'desc')
-                ->get()
-                ->groupBy('thread_id');
-
-        $forumThreadPosts = $forumPosts->splice(0, 3);
-
-        $forumPosts = new Collection();
-
-        foreach ($forumThreadPosts as $threadId => $forumThreadPosts) {
-            $forumPosts[] = $forumThreadPosts[0];
-        }
+                ->orderBy('forum_threads.last_post_id', 'desc')
+                ->get();
 
         $usersIndexed = User::query()->whereIn('id', $forumPosts->pluck('author_id')->toArray())->get()->keyBy('id');
 
@@ -375,7 +372,7 @@ class HomePageController extends BaseController
                     ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
-                $forumPosts[$forumPostIndex]->user_xp = $user->total_xp;
+                $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
                 $forumPosts[$forumPostIndex]->xp_rank = $user->getXpRank();
             } else {
                 unset($forumPosts[$forumPostIndex]);
@@ -490,13 +487,7 @@ class HomePageController extends BaseController
                                                                                              'updated_on', 'desc', 6);
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
-        $totalResults = $this->contentService->countByTypesUserProgressState(
-            $this->parseContentTypes($contentTypes),
-            user()->id,
-            'started'
-        );
-
-        return (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]));
+        return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
     /**
@@ -518,13 +509,8 @@ class HomePageController extends BaseController
             6
         );
 
-        $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents(
-            $userPrimaryPlaylistId,
-            $contentTypes
-        );
-
         return (new ContentFilterResultsEntity(
-            ['results' => $usersPrimaryList, 'total_results' => $usersListTotalResults]
+            ['results' => $usersPrimaryList]
         ));
     }
 
