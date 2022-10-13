@@ -177,6 +177,8 @@ return [
         Railroad\Referral\Providers\ReferralServiceProvider::class,
         Railroad\Points\Providers\PointsServiceProvider::class,
         Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
+        \Railroad\Railanalytics\AnalyticsServiceProvider::class,
+        \Railroad\Location\Providers\LocationServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -187,6 +189,8 @@ return [
         App\Modules\Mentor\Providers\MentorServiceProvider::class,
         App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
         App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
+        App\Modules\Content\Providers\ContentServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

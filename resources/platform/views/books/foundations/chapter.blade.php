@@ -131,7 +131,7 @@
             <div class="flex flex-row">
                 <a
                     href="{{ $thisChapter['backing_tracks'] }}"
-                    class="tw-btn-primary tw-bg-pianote"
+                    class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600"
                     download
                     target="_blank"
                 >

@@ -43,7 +43,6 @@ class UserMetricsService
         }
 
         $userProfileMetricsVO = new UserProfileMetrics(
-//            UserPointsService::fetchPoints($userId), // todo: fix after points integration
             0,
             0,
             $this->getTotalCommentLikes($userId),
@@ -160,17 +159,15 @@ class UserMetricsService
      */
     private function getTotalMinutesPracticed($userId)
     {
+        $assignmentTypeIds = $this->databaseManager->connection(config('railtracker.database_connection_name'))
+            ->table('railtracker_media_playback_types')->where('type', 'assignment')->get('id');
+        $assignmentTypeIds = $assignmentTypeIds->pluck('id')->toArray();
+
         return round(
-            ((integer)$this->databaseManager->connection()
+            ((integer)$this->databaseManager->connection(config('railtracker.database_connection_name'))
                 ->table('railtracker_media_playback_sessions')
-                ->join(
-                    'railtracker_media_playback_types',
-                    'railtracker_media_playback_types.id',
-                    '=',
-                    'railtracker_media_playback_sessions.type_id'
-                )
                 ->where('user_id', $userId)
-                ->where('type', 'assignment')
+                ->whereIn('type_id', $assignmentTypeIds)
                 ->sum('seconds_played')) / 60,
             0
         );

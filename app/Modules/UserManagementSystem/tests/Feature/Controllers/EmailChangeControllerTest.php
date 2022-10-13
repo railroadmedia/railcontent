@@ -71,16 +71,13 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
             ]
         );
 
-
-        //todo: after we set up the mail
-        // assert the email was sent and contains the confirmation token
-//        Notification::assertSentTo(
-//            (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $newEmail),
-//            config('usora.email_change_notification_class'),
-//            function ($notification) use ($token) {
-//                return $notification->token === $token;
-//            }
-//        );
+        Notification::assertSentTo(
+            (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $newEmail),
+            config('user_management_system.email_change_notification_class'),
+            function ($notification) use ($token) {
+                return $notification->token === $token;
+            }
+        );
     }
 
     public function test_request_validation_fail()
@@ -99,7 +96,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         );
 
         $response->assertSessionHasErrors(
-            ['email']
+            ['error-message']
         );
 
         $response = $this->json(
@@ -109,7 +106,7 @@ class EmailChangeControllerTest extends UserManagementSystemTestCase
         );
 
         $response->assertSessionHasErrors(
-            ['user_password']
+            ['error-message']
         );
     }
 

@@ -26,7 +26,7 @@
             class="tw-flex tw-flex-center tw-pt-3 tw-justify-center">
             <input type="hidden" name="_method" value="DELETE">
 
-            <button class="tw-btn-primary tw-bg-red-600" type="submit">
+            <button class="tw-btn-primary tw-bg-red-600 hover:tw-bg-red-800" type="submit">
                 Delete Forum
             </button>
         </form>

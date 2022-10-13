@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\AlphaTestingAccountCreationMiddleware;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\RedirectIfMobileRequest;
@@ -35,12 +34,14 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web_public' => [
+            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,
@@ -48,12 +49,14 @@ class Kernel extends HttpKernel
         ],
 
         'web_authenticated' => [
+            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class,
             \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
             \App\Http\Middleware\SetContentPermissions::class,

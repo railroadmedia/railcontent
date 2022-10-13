@@ -1,4 +1,4 @@
-<div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none
+<div onclick="this.classList.toggle('active')" class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none
 @if(!empty($defaultOpen)) active @endif
 @if(!empty($customClass)) {!! $customClass !!} @endif
 @if(!empty($navyBorder)) border-navy-600 @endif
@@ -6,7 +6,7 @@
     <div class="bg-singeo py-3 px-2 sm:px-3 ">
         @if(!empty($level))
             <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
-                <span class="text-xs hidden md:inline mr-1"> LEVEL</span> 
+                <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
                 <strong>{{ $level }}</strong>
             </h5>
         @endif
@@ -16,10 +16,10 @@
     <div class="p-3 text-left flex-grow">
         <div class="flex items-center text-left flex-col sm:flex-row relative">
             <h5 class="leading-tight flex-grow w-full sm:w-auto font-bold">{!! $title !!}</h5>
-            @if(!empty($date)) 
+            @if(!empty($date))
                 <p class="inline-flex text-navy-600 w-full sm:w-auto">
                     <em><strong> {!!  $date !!} </strong></em>
-                </p> 
+                </p>
             @endif
         </div>
         @if(!empty($description))

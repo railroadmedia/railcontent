@@ -86,6 +86,10 @@
                         <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
                     @elseif($catalogueMeta['name'] == 'Subscribed')
                         <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                    @elseif($catalogueMeta['name'] == 'Rudiments')
+                        <musora-icon icon-name="drum-filled"
+                                     class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                        </musora-icon>
                     @else
                         <musora-icon icon-name="academic-cap-filled"
                                         class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
@@ -113,6 +117,20 @@
 
             @if($lessonType === 'student-focus' && $brand === 'drumeo')
                 @include('partials._student-focus-application-drumeo')
+            @endif
+
+            @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
+                <div class="tw-flex tw-mt-4">
+                    <a href="/drumeo/forums/drumeo-songs/15/november-2022-song-request-voting-thread/13701?sortby_val=published_on" 
+                       class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
+                        Request A Song 
+                        <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
+                    </a>
+                </div>
+            @endif
+
+            @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
+                @include('partials._student-collaboration-form')
             @endif
 
             @if($lessonType === 'question-and-answer')
@@ -178,7 +196,7 @@
                             All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>
                     </div>
                     <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-0">
-                        <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
+                        <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="addToCalendarModal">
                             <i class="fas fa-calendar-plus mr-1"></i>
                             Subscribe to Calendar
                         </button>
@@ -209,7 +227,7 @@
                         </div>
                         @if( $catalogueMeta['name'] !== "Songs" && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]) )
                             <div class="tw-flex tw-flex-col">
-                                <button class="tw-btn-secondary tw-text-{{ $brand }}" data-open-modal="addToCalendarModal">
+                                <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="addToCalendarModal">
                                     <i class="fas fa-calendar-plus mr-1"></i>
                                     Subscribe to Calendar
                                 </button>
@@ -234,7 +252,7 @@
 
             <play-alongs
                 ref="playAlongsVueInstance"
-                content-endpoint="/laravel/public/railcontent/content"
+                content-endpoint="/railcontent/content"
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"

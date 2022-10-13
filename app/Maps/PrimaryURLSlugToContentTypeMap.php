@@ -25,6 +25,7 @@ class PrimaryURLSlugToContentTypeMap
         'student-focus' => 'student-focus',
         'archives' => 'recording',
         'live-streams' => 'live',
+        'spotlight' => 'spotlight',
         'the-history-of-electronic-drums' => 'the-history-of-electronic-drums',
         'backstage-secrets' => 'backstage-secrets',
         'student-collaborations' => 'student-collaborations',

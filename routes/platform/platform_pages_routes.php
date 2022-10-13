@@ -4,19 +4,20 @@ use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
+use App\Http\Controllers\Platform\LegacyResourcesController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\PackPagesController;
+use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
-use App\Http\Controllers\Platform\LegacyResourcesController;
-use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 use App\Modules\Brand\Enums\Brand;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 
 Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])
@@ -32,6 +33,11 @@ Route::domain('{musoraDomain}')
         Route::get('/members', [HomePageController::class, 'homeRedirect'])
             ->whereIn('brand', all_brands())
             ->name('platform.home-redirect');
+
+        // this automatically redirects to the users profile dashboard
+        Route::get('/members/profile', [HomePageController::class, 'profileRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile-redirect');
 
         /*
         * Onboarding
@@ -83,6 +89,7 @@ Route::domain('{musoraDomain}')
                 'recording',
                 'play-alongs',
                 'archives',
+                'spotlight',
                 'the-history-of-electronic-drums',
                 'backstage-secrets',
                 'student-collaborations',
@@ -209,6 +216,7 @@ Route::domain('{musoraDomain}')
                     'chords-scales',
                     'podcasts',
                     'question-and-answer',
+                    'spotlight',
                     'the-history-of-electronic-drums',
                     'backstage-secrets',
                     'student-collaborations',
@@ -334,11 +342,114 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile.settings.notifications');
 
         Route::get(
-            '/{brand}/profile/{userId}/settings/membership',
-            [ProfileSettingsPagesController::class, 'membership']
+            '/{brand}/profile/{userId}/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
         )
             ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.membership');
+            ->name('platform.profile.settings.account.id');
+
+        Route::get(
+            '/{brand}/profile/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.account');
+
+        Route::put(
+            '/update-payment-method',
+            [PaymentMethodUpdateController::class, 'submitUpdateForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.update-payment-method');
+
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+        /*
+         * Cancellation-related
+         */
+        // POST accept-annual-offer
+        Route::post(
+            '/{brand}/profile/settings/account/accept-annual-offer',
+            [ProfileSettingsPagesController::class, 'acceptAnnualOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.accept-annual-offer');
+
+        // POST resume-paused
+        Route::post(
+            '/{brand}/profile/settings/account/resume-paused',
+            [ProfileSettingsPagesController::class, 'resumePaused']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.resume-paused');
+
+        // POST submit-cancel-reason
+        Route::post(
+            '/{brand}/profile/settings/account/submit-cancel-reason',
+            [ProfileSettingsPagesController::class, 'submitCancelReason']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.submit-cancel-reason');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/student-plan-offer',
+            [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.student-plan-offer');
+
+        // POST accept switch-to-monthly offer
+        Route::post(
+            '/{brand}/profile/settings/account/switch-to-monthly',
+            [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.switch-to-monthly');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/gratis-access',
+            [ProfileSettingsPagesController::class, 'acceptGratisAccess']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.gratis-access');
+
+        Route::post(
+            '/{brand}/profile/settings/account/send-help-email',
+            [ProfileSettingsPagesController::class, 'sendHelpEmail']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.send-help-email');
+
+
+        // GET cancel-reason-form
+        Route::get(
+            '/{brand}/profile/settings/account/cancel',
+            [ProfileSettingsPagesController::class, 'cancelReasonForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.cancel');
+
+        // GET win-back
+        Route::post(
+            '/{brand}/profile/settings/account/win-back',
+            [ProfileSettingsPagesController::class, 'winBack']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.win-back');
+
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+        // (end of cancellation-related)
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+
+        Route::get(
+            '/{brand}/profile/{userId}/settings/payment-invoice/{id}',
+            [ProfileSettingsPagesController::class, 'showInvoiceForPayment']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.payment-invoice');
 
         /*
          * Notifications Pages

@@ -2,12 +2,14 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use DateTimeZone;
+use Exception;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Contracts\Notifications\Dispatcher;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -206,6 +208,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User wherePianoteOnboardingSkipSetup($value)
  * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
  * @property ?MentorStudent $mentorStudent
+ * @property mixed|null $brand_total_xp
+ * @property Collection $subscriptions
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -219,6 +223,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $guard_name = 'user-management-system';
     protected $casts = [
         'brand_method_levels' => 'json',
+        'brand_total_xp' => 'json'
     ];
 
     /**
@@ -267,7 +272,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'pianote_onboarding_skip_setup',
         'guitareo_onboarding_skip_setup',
         'singeo_onboarding_skip_setup',
-        'total_xp'
+        'use_legacy_video_player',
     ];
 
 
@@ -287,6 +292,27 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasOne(MentorStudent::class, 'user_id');
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class, 'user_id');
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
     /**
      * @return string
      */
@@ -294,11 +320,25 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         $brand = brand();
 
-        if (isset($this->brand_method_levels->$brand)) {
-            return $this->brand_method_levels->$brand;
+        if (isset($this->brand_method_levels[$brand])) {
+            return $this->brand_method_levels[$brand];
         }
 
-        return '1.0';
+        return '1.1';
+    }
+
+    /**
+     * @return integer
+     */
+    public function getBrandTotalXp()
+    {
+        $brand = brand();
+
+        if (isset($this->brand_total_xp[$brand])) {
+            return $this->brand_total_xp[$brand];
+        }
+
+        return 0;
     }
 
     /**
@@ -337,6 +377,34 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
                 }
 
                 return 'pack';
+            },
+        );
+    }
+
+    /**
+     * Values: pack, member, lifetime, coach, house-coach, team
+     *
+     * @return Attribute
+     */
+    public function timezone(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (!empty($value)) {
+                    try {
+                        // check to make sure its a valid timezone, otherwise reset it
+                        Carbon::parse('2022', 'UTC')
+                            ->timezone($value)
+                            ->toDateTimeString();
+
+                        return $value;
+                    } catch (Exception $e) {
+                        $this->timezone = null;
+                        $this->save();
+                    }
+                }
+
+                return 'America/Los_Angeles';
             },
         );
     }

@@ -9,7 +9,7 @@
                :href="coachIndexUrl + '#coach-section'"
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
               >
                 All Coaches
               </h3>
@@ -18,7 +18,7 @@
                :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
             >
               <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500', brandBorderColor ]"
+                  :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
               >
                   Subscribed Coaches
               </h3>
@@ -409,7 +409,7 @@ export default {
     },
     searchEndpoint: {
       type: String,
-      default: () => "/laravel/public/railcontent/search",
+      default: () => "/railcontent/search",
     },
     isPlaylists: {
       type: Boolean,

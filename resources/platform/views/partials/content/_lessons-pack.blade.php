@@ -24,7 +24,7 @@
         <div class="flex flex-column align-h-center mt-1">
             <a
                 href="{{ $nextItemUrl }}"
-                class="tw-btn-primary tw-bg-{{ $brand }}"
+                class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600"
             >
 
                 @if($itemProgress === 'started')

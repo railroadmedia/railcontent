@@ -1,7 +1,7 @@
 <template>
   <a
     :href="item.url"
-    class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white"
+    class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white tw-group"
   >
     <img :src="`https://musora.com/cdn-cgi/image/width=300/${coachImage}`" 
          :alt="coachName" 
@@ -15,7 +15,7 @@
     />
     <!-- Coach Details -->
     <div
-      class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-px-2 tw-text-center tw-absolute tw-w-full tw-bottom-0 tw-left-0"
+      class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-px-2 tw-text-center tw-absolute tw-bottom-0 tw-left-0"
       style="background: linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);"
     >
       <h3
@@ -36,34 +36,20 @@
       </div>
     </div>
 
-    <!-- hover -->
-    <div
-      class="tw-absolute tw-flex tw-h-full tw-w-full tw-top-0 tw-left-0 tw-bg-black tw-transition"
+    <!-- Subscribe To Coach -->
+    <button
+      class="tw-btn-primary tw-btn-small tw-h-6 tw-w-6 tw-p-0 tw-absolute tw-right-1 tw-top-1 tw-transitoin-all group-hover:tw-rotate-[15deg] tw-origin-center"
+      :title="item.current_user_is_subscribed ? 'Unsubscribe From Coach' : 'Subscribe to Coach'"
       :class="
         item.current_user_is_subscribed
-          ? 'tw-bg-opacity-0 hover:tw-bg-opacity-30'
-          : 'tw-bg-opacity-30 tw-opacity-0 hover:tw-opacity-100'
+          ? 'tw-bg-yellow-500'
+          : 'tw-bg-[#00101d] tw-opacity-40'
       "
+      @click.prevent="updateCoachSubscription(item.id)"
     >
-      <!-- Subscribe -->
-      <button
-        class="tw-btn-primary tw-btn-small tw-h-6 tw-w-6 tw-p-0 tw-ml-auto tw-mt-1 tw-mr-1"
-        :class="
-          item.current_user_is_subscribed
-            ? 'tw-bg-white ' + themeTextClass
-            : themeBgClass
-        "
-        @click.prevent="updateCoachSubscription(item.id)"
-      >
-        <i class="fas fa-bell tw-text-base"></i>
-        <span class="tw-sr-only">
-          <template v-if="item.current_user_is_subscribed"
-            >Unsubscribe From Coach</template
-          >
-          <template v-else>Subscribe to Coach</template>
-        </span>
-      </button>
-    </div>
+      <i class="fas fa-bell tw-text-base"></i>
+    </button>
+
   </a>
 </template>
 <script>

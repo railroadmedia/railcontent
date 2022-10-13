@@ -59,10 +59,30 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                 <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                     <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-text-2xl lg:tw-text-3xl tw-leading-none lg:tw-leading-none">My Stats</h2>
                 </div>
+
+                <!-- Method Progress -->
+                <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center tw-items-center tw-mb-5 tw-w-full tw-rounded-full tw-min-h-[150px] lg:tw-pr-6 tw-bg-gradient-to-b tw-from-{{ $brand }} tw-to-{{ $brand }}-700">
+                    <div class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-w-full lg:tw-w-7/12">
+                        <img src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg" alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
+                    </div>
+                    <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-10 sm:tw-px-8 tw-w-full lg:tw-w-5/12">
+                        <div class="tw-text-center tw-w-full tw-max-w-[287px]">
+                            <h3 class="text-white tw-text-4xl xl:tw-text-[54px] tw-font-bold tw-leading-none tw-mb-2 tw-uppercase">Level {{ $nextLearningPathLevel }}</h3>
+                            <!-- progress bar -->
+                            <div class="tw-bg-white tw-relative tw-w-full tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]">
+                                <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0 tw-bg-{{ $brand }}" style="width: {{ $nextLearningPathProgressPercent }}%;">
+                                    <span class="tw-absolute tw-top-0 tw-h-full tw-font-bold tw-translate-x-full tw-text-sm tw-right-[-5px] tw-text-{{ $brand }}">{{ $nextLearningPathProgressPercent }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Metrics --}}
                 <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
                     @foreach ($userMetrics as $userMetric)
                         @include('partials.bladesora.members.components.user-metric', [
+                            'index' => $loop->index,
                             'themeColor' => $brand,
                             'icon' => $userMetric['icon'],
                             'value' => $userMetric['value'],
@@ -126,37 +146,54 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 
             {{-- About You --}}
             <section id="editForm" class="tw-flex tw-flex-row tw-flex-wrap tw-pt-[24px]" dusk="about-user">
-                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-justify-between tw-mb-3 tw-w-full">
-                    {{-- User Details --}}
-                    <div class="tw-flex tw-flex-col tw-mb-4 tw-mr-[36px] lg:tw-max-w-[50%]">
-                        <h1
-                            class="tw-font-bold tw-text-[24px] tw-leading-none tw-mb-[19px]">
-                            About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
-                        </h1>
 
+                {{-- Header --}}
+                <div class="tw-flex tw-flex-row tw-w-full tw-items-center tw-mb-8 tw-flex-wrap">
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-my-2">
+                        About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
+                    </h2>
+                    @if ($isCurrentUsersProfile)
+                        <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
+                           class="tw-btn-secondary tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-8 tw-ml-auto"
+                           dusk="edit-user">
+                            Edit
+                        </a>
+                    @endif
+                </div>
+
+                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-mb-3 tw-w-full">
+                    {{-- User Details --}}
+                    <div class="tw-flex tw-flex-col tw-mb-4 lg:tw-max-w-[50%] tw-mr-auto">
                         <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[12px]">
                             <span class="tw-font-bold">Full Name:&nbsp;</span>
                             <span>{{ $dashboardUser->first_name }}&nbsp;{{ $dashboardUser->last_name }}</span>
                         </div>
 
-                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[12px]">
                             <span class="tw-font-bold">Birthday:&nbsp;</span>
                             <span>{{ $dashboardUser->birthday }}</span>
                         </div>
 
-                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[25px]">
-                            <p class="body">{!! nl2br($dashboardUser->biography) !!}</p>
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[24px]">
+                            <span class="tw-font-bold">Location:&nbsp;</span>
+                            <span>{{ $dashboardUser->country }}</span>
+                        </div>
+
+                        <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mb-[24px]">
+                            <p class="body">
+                                <span class="tw-font-bold">Bio:&nbsp;</span>
+                                {!! nl2br($dashboardUser->biography) !!}
+                            </p>
                         </div>
                     </div>
                     {{-- User Gear Details --}}
-                    <gear-carousel :gear-info="{{ json_encode($dashboardUser) }}" />
+                    <gear-carousel
+                        :gear-info="{{ json_encode($dashboardUser) }}"
+                        brand="{{ $brand }}"
+                        class="tw-flex-grow-0 xl:tw-ml-[36px]"
+                    />
                 </div>
-                @if ($isCurrentUsersProfile)
-                    <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
-                        class="tw-btn-primary tw-bg-{{ $brand }} tw-w-[330px] tw-text-lg" dusk="edit-user">
-                        Edit
-                    </a>
-                @endif
+
             </section>
         </div>
     </div>

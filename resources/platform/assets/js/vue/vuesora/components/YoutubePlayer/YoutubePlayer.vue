@@ -1,23 +1,11 @@
 <template>
-    <div
-        ref="videoWrap"
-        class="video-wrap"
-        :class="{'picture-in-picture': isPipEnabled}"
-    >
+    <div ref="videoWrap" class="video-wrap" :class="{'picture-in-picture': isPipEnabled}">
         <div class="widescreen">
-            <div
-                ref="youtubeIframe"
-                class="iframe"
-            ></div>
+            <div ref="youtubeIframe" class="iframe"></div>
         </div>
 
-      <PlayerRanges
-          v-if="ranges"
-          :theme-color="themeColor"
-          :current-range="currentRange"
-          :ranges="ranges"
-          @setRange="setRange"
-      ></PlayerRanges>
+        <PlayerRanges v-if="ranges" :theme-color="themeColor" :current-range="currentRange" :ranges="ranges"
+            @setRange="setRange"></PlayerRanges>
     </div>
 </template>
 
@@ -27,7 +15,7 @@ import PlayerRanges from '../VideoPlayer/_PlayerRanges.vue';
 export default {
     name: 'YoutubePlayer',
     components: {
-      PlayerRanges,
+        PlayerRanges,
     },
     props: {
         videoId: {
@@ -65,12 +53,12 @@ export default {
             default: () => false,
         },
         ranges: {
-          type: Array,
-          default: () => ([]),
+            type: Array,
+            default: () => ([]),
         },
         rangesVideoIds: {
-          type: Object,
-          default: () => ({}),
+            type: Object,
+            default: () => ({}),
         },
         brand: {
             type: String,
@@ -117,6 +105,15 @@ export default {
         if (this.useIntersectionObserver) {
             this.enableIntersectionObserver();
         }
+
+        // Add Event Listeners to chapter marker links
+        document.addEventListener('click', (event) => {
+            const element = event.target;
+            if (element.matches('[data-jump-to-time]')) {
+                this.player.seekTo(element.dataset.jumpToTime)
+                document.getElementById('content-container').scrollTop = 0;
+            }
+        });
     },
     beforeDestroy() {
         clearInterval(this.syncInterval);
@@ -124,13 +121,13 @@ export default {
     methods: {
 
         setRange({ range }) {
-          if (this.rangesVideoIds[range]) {
-            this.currentRange = range;
+            if (this.rangesVideoIds[range]) {
+                this.currentRange = range;
 
-            this.player.loadVideoById(this.rangesVideoIds[range], this.player.getCurrentTime());
+                this.player.loadVideoById(this.rangesVideoIds[range], this.player.getCurrentTime());
 
-            window.localStorage.setItem('currentRange', range);
-          }
+                window.localStorage.setItem('currentRange', range);
+            }
         },
 
         appendIframeApi() {
@@ -152,8 +149,8 @@ export default {
 
             if (window.localStorage.getItem('currentRange') &&
                 this.rangesVideoIds[window.localStorage.getItem('currentRange')]) {
-              videoId = this.rangesVideoIds[window.localStorage.getItem('currentRange')];
-              this.currentRange = window.localStorage.getItem('currentRange');
+                videoId = this.rangesVideoIds[window.localStorage.getItem('currentRange')];
+                this.currentRange = window.localStorage.getItem('currentRange');
             }
 
             this.player = new YT.Player(youtubeIframe, {

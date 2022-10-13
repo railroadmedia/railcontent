@@ -9,6 +9,10 @@ class LoginPageController extends BaseController
 {
     public function show(Request $request)
     {
+        if (!empty(user())) {
+            return redirect()->route('platform.home-redirect');
+        }
+
         return view('pages.login', ['redirect' => $request->get('redirect_to')]);
     }
 

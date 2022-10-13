@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import GearCard from './GearCard.vue';
 
 const gearCarouselMap = [
@@ -45,12 +45,7 @@ const gearCarouselMap = [
     }
 ];
 
-const props = defineProps({
-    gearInfo: {
-        type: Object,
-        default: {}
-    }
-});
+const props = defineProps(['brand', 'gearInfo']);
 
 const buildCarouselData = (info) => {
     return gearCarouselMap.map(({ imgKey, attributes, ...rest }) => {
@@ -83,6 +78,15 @@ const handlePrev = () => {
         currentSlide.value = currentSlide.value - 1;
     }
 };
+
+onBeforeMount(() => {
+    console.log(props.brand)
+    gearCarouselMap.forEach( (slide,index) => {
+        if(props.brand === slide.brand) currentSlide.value = index;
+    })
+})
+
+
 </script>
 
 <template>
@@ -93,7 +97,6 @@ const handlePrev = () => {
           :attributes="attributes"
           :img_src="img_src"
           :title="cardTitle"
-          :brand="brand"
           :isCurrentSlide="currentSlide === index"
           @onNextSlide="handleNext"
           @onPrevSlide="handlePrev"
