@@ -3,6 +3,7 @@
 namespace App\Modules\Mentor\Providers;
 
 use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
+use App\Modules\Mentor\Console\Commands\AssignMentors;
 use App\Modules\Mentor\Console\Commands\InitializeMentors;
 use App\Modules\Mentor\Console\Commands\RecalculateMentorTotals;
 use App\Modules\Mentor\Console\Commands\RegisterHelpScoutWebHook;
@@ -51,6 +52,7 @@ class MentorServiceProvider extends ServiceProvider
             RegisterHelpScoutWebHook::class,
             UnregisterHelpScoutWebHook::class,
             UnassignMentors::class, //used for debugging can be removed after initial launch
+            AssignMentors::class,
         ]);
 
 
@@ -63,8 +65,11 @@ class MentorServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule){
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('mentors:recalculateTotals')->daily();
+
+            //temporary measure to assign mentors until ecommerce is integrated with MWP
+            $schedule->command('mentors:assign')->hourly();
         });
     }
 
