@@ -30,7 +30,7 @@
                 by
                 <strong class="tw-text-{{ $brand }}">{{ $author }}</strong>
             </h6>
-            <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D] tw-break-words">
+            <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D]" style="overflow-wrap: anywhere;">
                 {!! str_replace('&nbsp;', '', $post) !!}...
                 <span class="tw-font-bold dark:tw-text-white tw-text-[#00101D] tw-ml-1 tw-underline">See Post &raquo;</span>
             </p>
