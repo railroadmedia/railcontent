@@ -1,4 +1,4 @@
-<div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded pa-2 hover:tw-shadow-lg">
+<div class="tw-flex tw-transition-colors tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded-md pa-2 hover:tw-shadow-lg dark:hover:tw-bg-[#081825] tw-border tw-border-transparent dark:hover:tw-border-[#223F57]">
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col"
         >

@@ -8106,16 +8106,16 @@
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v3.0.0",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "93859bc1abc9517f4740db9a0f27421b8e81c4cb"
+                "reference": "a220fed9c9d5fdfb9754ff364809f24a8e45a172"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/93859bc1abc9517f4740db9a0f27421b8e81c4cb",
-                "reference": "93859bc1abc9517f4740db9a0f27421b8e81c4cb",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/a220fed9c9d5fdfb9754ff364809f24a8e45a172",
+                "reference": "a220fed9c9d5fdfb9754ff364809f24a8e45a172",
                 "shasum": ""
             },
             "require": {
@@ -8142,9 +8142,9 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.0"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.2"
             },
-            "time": "2022-05-17T19:31:29+00:00"
+            "time": "2022-10-13T13:37:51+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -8189,16 +8189,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.29",
+            "version": "v2.0.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c8fb9457e021f756877bad112247ae7fc34b5b44"
+                "reference": "9b69bc6e5d97363ed1f4685f08f31f60a11d71d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c8fb9457e021f756877bad112247ae7fc34b5b44",
-                "reference": "c8fb9457e021f756877bad112247ae7fc34b5b44",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/9b69bc6e5d97363ed1f4685f08f31f60a11d71d9",
+                "reference": "9b69bc6e5d97363ed1f4685f08f31f60a11d71d9",
                 "shasum": ""
             },
             "require": {
@@ -8252,9 +8252,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.29"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.30"
             },
-            "time": "2022-10-13T11:20:27+00:00"
+            "time": "2022-10-13T15:34:37+00:00"
         },
         {
             "name": "railroad/railforums",

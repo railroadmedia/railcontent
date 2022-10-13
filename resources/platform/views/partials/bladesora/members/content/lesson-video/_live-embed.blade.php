@@ -1,7 +1,7 @@
-<div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-flex-col 2xl:tw-flex-row">
+<div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-flex-col lg:tw-flex-row">
     
     {{-- Video --}}
-    <div id="video-container" class="tw-w-full tw-flex tw-flex-col sm:tw-mb-8 2xl:tw-mb-0" dusk="video-player">
+    <div id="video-container" class="tw-w-full tw-flex tw-flex-col sm:tw-mb-8 lg:tw-mb-0" dusk="video-player">
         <div class="widescreen">
             <iframe id="player" frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" src="https://www.youtube.com/embed/{{ $youtubeId }}?rel=0&autoplay=1&playsinline=1&modestthemeColoring=1"></iframe>
         </div>
@@ -64,7 +64,7 @@
     </div>
     
     {{-- Chat --}}
-    <div id="chat-container" class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-mb-4 2xl:tw-ml-4 tw-overflow-hidden" dusk="chat-container">
+    <div id="chat-container" class="tw-flex tw-flex-col tw-w-full lg:tw-w-[420px] tw-mb-4 lg:tw-ml-4 tw-overflow-hidden" dusk="chat-container">
         <chat
             api-key="{{ $apiKey }}"
             token="{{ $token }}"
