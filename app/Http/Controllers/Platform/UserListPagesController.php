@@ -15,23 +15,20 @@ use Railroad\Railcontent\Services\UserPlaylistsService;
 
 class UserListPagesController extends BaseController
 {
-    /**
-     * @var UserPlaylistsService
-     */
-    private $userPlaylistsService;
-    /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    private $userContentRepository;
+    private UserPlaylistsService $userPlaylistsService;
+    private ContentService $contentService;
+    private UserContentProgressRepository $userContentRepository;
 
     /**
      * @param UserPlaylistsService $userPlaylistsService
      * @param ContentService $contentService
+     * @param UserContentProgressRepository $userContentProgressRepository
      */
-    public function __construct(UserPlaylistsService $userPlaylistsService, ContentService $contentService, UserContentProgressRepository $userContentProgressRepository)
-    {
+    public function __construct(
+        UserPlaylistsService $userPlaylistsService,
+        ContentService $contentService,
+        UserContentProgressRepository $userContentProgressRepository
+    ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
         $this->userContentRepository = $userContentProgressRepository;
@@ -121,8 +118,15 @@ class UserListPagesController extends BaseController
 
         $noResultsMessage =
             'You haven\'t started any lessons of that type yet, once you start a lesson of this type it will show up here for you to access later.';
-        $startedProgressRows = $this->userContentRepository->getForUserStateContentTypes(auth()->id(),  $contentTypes, UserContentProgressService::STATE_STARTED,
-        'updated_on', 'desc', $request->get('limit', 20), ($request->get('page', 1) - 1) * $request->get('limit', 20));
+        $startedProgressRows = $this->userContentRepository->getForUserStateContentTypes(
+            auth()->id(),
+            $contentTypes,
+            UserContentProgressService::STATE_STARTED,
+            'updated_on',
+            'desc',
+            $request->get('limit', 20),
+            ($request->get('page', 1) - 1) * $request->get('limit', 20)
+        );
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
         $totalResults = $this->contentService->countByTypesUserProgressState(
@@ -168,21 +172,23 @@ class UserListPagesController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         if (!empty($request->get('type'))) {
-                $contentTypes = [$request->get('type')];
+            $contentTypes = [$request->get('type')];
         } else {
             $contentTypes = ContentTypes::userListContentTypes();
         }
 
         $noResultsMessage =
             'You haven\'t completed any lessons of that type yet, once you complete a lesson of this type it will show up here for you to access later.';
-
-        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
-            $contentTypes,
+        $completedProgressRows = $this->userContentRepository->getForUserStateContentTypes(
             auth()->id(),
+            $contentTypes,
             UserContentProgressService::STATE_COMPLETED,
+            'updated_on',
+            'desc',
             $request->get('limit', 20),
             ($request->get('page', 1) - 1) * $request->get('limit', 20)
         );
+        $lessons = $this->contentService->getByIds(array_column($completedProgressRows, 'content_id'));
 
         $totalResults = $this->contentService->countByTypesUserProgressState(
             $contentTypes,

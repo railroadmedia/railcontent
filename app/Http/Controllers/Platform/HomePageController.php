@@ -11,6 +11,7 @@ use App\Maps\ContentTypes;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
@@ -37,15 +38,17 @@ class HomePageController extends BaseController
     private UserPlaylistsService $userPlaylistsService;
     private PackService $packService;
     private DatabaseManager $databaseManager;
+    private UserContentProgressService $userContentProgressService;
 
     /**
-     * @param  ContentService  $contentService
-     * @param  ContentFollowsService  $contentFollowsService
-     * @param  LiveStreamEventService  $liveStreamEventService
-     * @param  UserMetricsService  $userMetricsService
-     * @param  UserPlaylistsService  $userPlaylistsService
-     * @param  PackService  $packService
-     * @param  DatabaseManager  $databaseManager
+     * @param ContentService $contentService
+     * @param ContentFollowsService $contentFollowsService
+     * @param LiveStreamEventService $liveStreamEventService
+     * @param UserMetricsService $userMetricsService
+     * @param UserPlaylistsService $userPlaylistsService
+     * @param PackService $packService
+     * @param DatabaseManager $databaseManager
+     * @param UserContentProgressService $userContentProgressService
      */
     public function __construct(
         ContentService $contentService,
@@ -54,7 +57,8 @@ class HomePageController extends BaseController
         UserMetricsService $userMetricsService,
         UserPlaylistsService $userPlaylistsService,
         PackService $packService,
-        DatabaseManager $databaseManager
+        DatabaseManager $databaseManager,
+        UserContentProgressService $userContentProgressService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -63,6 +67,7 @@ class HomePageController extends BaseController
         $this->userPlaylistsService = $userPlaylistsService;
         $this->packService = $packService;
         $this->databaseManager = $databaseManager;
+        $this->userContentProgressService = $userContentProgressService;
     }
 
     public function homeRedirect()
@@ -158,8 +163,6 @@ class HomePageController extends BaseController
             6
         );
 
-        $packs = $this->getPacks();
-
         // coaches live
         $themeColor = 'drumeo';
         $currentDate =
@@ -174,34 +177,15 @@ class HomePageController extends BaseController
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
-        $coachOfTheMonth = $this->contentService->getFiltered(
-            1,
-            1,
-            '-published_on',
-            ['instructor'],
-            [],
-            [],
-            ['is_coach_of_the_month,1,boolean,='],
-            [],
-            [],
-            [],
-            false,
-            false,
-            false
-        )
-            ->results();
-
         $collectionForDecoration = new RailcontentCollection();
         $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
         if (!empty($currentEvent)) {
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
-        $collectionForDecoration = $collectionForDecoration->merge($coachOfTheMonth);
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
         $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
-        $collectionForDecoration = $collectionForDecoration->merge($packs);
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
 
@@ -230,14 +214,7 @@ class HomePageController extends BaseController
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
 
-        $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
-        $showNextLearningPathLesson = !$hasCompletedMethod;
-
-        $nextLearningPathLesson =
-            $this->contentService->getNextContentForParentContentForUser($methodContent['id'], user()->id);
-
-        $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
-        $nextLearningPathLevel = $methodContent['higher_key_progress'] ?? '1.1';
+        $nextLearningPathLevel = user()->getMethodLevel();
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
 
         $upcomingEventsCount = $upcomingEvents->count();
@@ -280,16 +257,9 @@ class HomePageController extends BaseController
             "startedContentJson" => $startedLessons->toResponseRawJson(),
             "startedContentCount" => $startedLessons->totalResults(),
             "usersList" => $usersList->toResponseRawJson(),
-            "usersListCount" => $usersList->totalResults(),
             "userMetrics" => $userMetrics,
-            "displayMethod" => !$hasStartedMethod,
-            "userHasInteractedWithDrumeoMethod" => $hasStartedMethod,
-            "nextLearningPathLesson" => $nextLearningPathLesson,
-            "nextLearningPathLessonUrl" => $nextLearningPathLessonUrl,
             "nextLearningPathLevel" => $nextLearningPathLevel,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
-            "showNextLearningPathLesson" => $showNextLearningPathLesson,
-            "packs" => $packs,
             'themeColor' => $themeColor,
             'currentDate' => $currentDate,
             'currentEvent' => $currentEvent,
@@ -305,7 +275,6 @@ class HomePageController extends BaseController
             "hasfollowedLessons" => $subscribedCoaches->totalResults() > 0 && $followedLessons->totalResults() > 0,
             'upcomingEvents' => $upcomingEvents->toResponseRawJson(),
             'hasUpcomingEvents' => $upcomingEvents->totalResults() > 0,
-            'coachOfTheMonth' => $coachOfTheMonth->first(),
             'hasCompletedMethod' => $hasCompletedMethod,
             'hasStartedMethod' => $hasStartedMethod,
             'hasGear' => $hasGear,
@@ -385,7 +354,7 @@ class HomePageController extends BaseController
                 ->get()
                 ->groupBy('thread_id');
 
-        $forumThreadPosts = $forumPosts->splice(0, 3);
+        $forumThreadPosts = $forumPosts->splice(0, 6);
 
         $forumPosts = new Collection();
 
@@ -406,7 +375,7 @@ class HomePageController extends BaseController
                     ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
-                $forumPosts[$forumPostIndex]->user_xp = $user->total_xp;
+                $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
                 $forumPosts[$forumPostIndex]->xp_rank = $user->getXpRank();
             } else {
                 unset($forumPosts[$forumPostIndex]);
@@ -515,12 +484,11 @@ class HomePageController extends BaseController
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
 
-        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
-            $this->parseContentTypes($contentTypes),
-            user()->id,
-            'started',
-            6
-        );
+        $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
+            auth()->id(),
+            $contentTypes, 'started',
+                                                                                             'updated_on', 'desc', 6);
+        $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
         $totalResults = $this->contentService->countByTypesUserProgressState(
             $this->parseContentTypes($contentTypes),

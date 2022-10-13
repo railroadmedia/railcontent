@@ -232,14 +232,14 @@ class ContentPagesController extends BaseController
 
         $firstLevelContent = $this->contentService->getById($firstId);
 
+        if (empty($firstLevelContent)) {
+            throw new NotFoundHttpException();
+        }
+
         $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
             $firstLevelContent['id'],
             auth()->id()
         );
-
-        if (empty($firstLevelContent)) {
-            throw new NotFoundHttpException();
-        }
 
         if ($primaryPage == 'songs' && $brand == 'drumeo') {
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
@@ -1491,7 +1491,9 @@ class ContentPagesController extends BaseController
         $contentId,
         $commentId
     ) {
-        ContentRepository::$bypassPermissions = true;
+        if (user()->isAMember()) {
+            ContentRepository::$bypassPermissions = true;
+        }
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
