@@ -1,14 +1,25 @@
 <div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded pa-2 hover:tw-shadow-lg">
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
-        <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col">
+        <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col"
+        >
             {{-- Avatar Thumbnail --}}
-            <div class="tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1">
-                <img src="{{ $avatar }}"
-                     alt="{{ $author }} Avatar"
-                     loading="lazy"
-                     class="tw-rounded-full"
-                >
+            <div class="user-avatar tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1.5 
+                        {{ in_array($user->access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
+                        {{ $brand }}
+                        {{-- {{ $user->access_level }} --}} {{-- Always Returns Lifetime --}}
+                "
+            >
+                <div class="tw-no-underline tw-block tw-h-full tw-w-full">
+                    <img class="tw-rounded-full" 
+                         src="{{ $avatar }}"
+                         alt="{{ $author }} Avatar"
+                         loading="lazy"
+                         class="tw-rounded-full"
+                    />
+                </div>
             </div>
+            
+
             {{-- Rank Data --}}
             <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed tw-leading-[1.2]">
                 {{ $rank }}
