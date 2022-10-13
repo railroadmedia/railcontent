@@ -270,7 +270,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'pianote_onboarding_skip_setup',
         'guitareo_onboarding_skip_setup',
         'singeo_onboarding_skip_setup',
-        'total_xp'
+        'use_legacy_video_player',
     ];
 
 

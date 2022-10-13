@@ -232,14 +232,14 @@ class ContentPagesController extends BaseController
 
         $firstLevelContent = $this->contentService->getById($firstId);
 
+        if (empty($firstLevelContent)) {
+            throw new NotFoundHttpException();
+        }
+
         $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
             $firstLevelContent['id'],
             auth()->id()
         );
-
-        if (empty($firstLevelContent)) {
-            throw new NotFoundHttpException();
-        }
 
         if ($primaryPage == 'songs' && $brand == 'drumeo') {
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
@@ -665,10 +665,13 @@ class ContentPagesController extends BaseController
             ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
 
-        if(($contentToRenderAsLesson['type'] == 'learning-path-lesson')){
+        if (($contentToRenderAsLesson['type'] == 'learning-path-lesson')) {
             $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
             $learningPath = \Arr::last($contentToRenderAsLesson->getParentContentData());
-            $nextPrevLessons = $this->methodService->getNextAndPreviousLessons($contentToRenderAsLesson['id'], $learningPath->id);
+            $nextPrevLessons = $this->methodService->getNextAndPreviousLessons(
+                $contentToRenderAsLesson['id'],
+                $learningPath->id
+            );
             $nextChild = $nextPrevLessons->getNextLesson();
             $previousChild = $nextPrevLessons->getPreviousLesson();
         } elseif (!empty($contentToRenderAsLessonParent)) {
@@ -835,8 +838,9 @@ class ContentPagesController extends BaseController
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
 
+        ContentRepository::$pullFutureContent = user()->isAdmin();
+
         if (user()->isAdmin()) {
-            ContentRepository::$pullFutureContent = true;
             array_push(
                 ContentRepository::$availableContentStatues,
                 ContentService::STATUS_SCHEDULED,
@@ -846,11 +850,11 @@ class ContentPagesController extends BaseController
 
         $lessonContent = $this->contentService->getById($firstId);
 
-        if ($lessonContent instanceof Collection && $lessonContent->isEmpty()) {
-            return redirect()->route('members.unreleased');
+        if (empty($lessonContent)) {
+            throw new NotFoundHttpException();
         }
 
-        ContentRepository::$pullFutureContent = user()->isAdmin();
+        $adminMessage = $this->getAdminMessage($lessonContent['published_on']);
 
         $lessonContent =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$lessonContent]))
@@ -963,6 +967,7 @@ class ContentPagesController extends BaseController
             "hasLessonInfo" => $hasLessonInfo,
             "thisLessonJson" => $thisLessonJson,
             "showEmail" => false,
+            "adminMessage" => $adminMessage,
         ]);
     }
 
@@ -1486,7 +1491,9 @@ class ContentPagesController extends BaseController
         $contentId,
         $commentId
     ) {
-        ContentRepository::$bypassPermissions = true;
+        if (user()->isAMember()) {
+            ContentRepository::$bypassPermissions = true;
+        }
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
@@ -1497,7 +1504,7 @@ class ContentPagesController extends BaseController
         return redirect($url . '?goToComment=' . $commentId);
     }
 
-    public function getAdminMessage($published_on): ?string
+    private function getAdminMessage($published_on): ?string
     {
         if (user()->isAdmin()) {
             ContentRepository::$pullFutureContent = true;

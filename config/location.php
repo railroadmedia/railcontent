@@ -35,5 +35,38 @@ return [
             'numeric' => 900,
             'currency' => ['EUR'],
         ]
-    ]
+    ],
+
+    'environment' => env('APP_ENV', 'production'),
+    'testing_ip' => '108.172.176.221',
+    'active_api' => 'ipdata.co',
+    'api' =>
+        [
+            'ipdata.co' => [
+                'url' => 'https://api.ipdata.co/',
+                'apiKey' => env('IP_DATA_API_KEY', '3e2874cc4be1cd0bdb4c4197614c8dd9494fc50bc3c57e0485970413'),
+                'countryKey' => 'country_name',
+                'countryCodeKey' => 'country_code',
+                'regionNameKey' => 'region',
+                'latitudeKey' => 'latitude',
+                'longitudeKey' => 'longitude',
+            ],
+            'freegeoip.net' => [
+                'url' => 'http://freegeoip.net/json/',
+                'countryKey' => 'country_name',
+                'countryCodeKey' => 'country_code',
+                'regionNameKey' => 'region_name',
+                'latitudeKey' => 'latitude',
+                'longitudeKey' => 'longitude',
+            ],
+            'ip-api.com' => [
+                'url' => 'http://ip-api.com/json/',
+                'countryKey' => 'country',
+                'countryCodeKey' => 'countryCode',
+                'regionNameKey' => 'regionName',
+                'latitudeKey' => 'lat',
+                'longitudeKey' => 'lon',
+                'cityKey' => 'city',
+            ],
+        ],
 ];
