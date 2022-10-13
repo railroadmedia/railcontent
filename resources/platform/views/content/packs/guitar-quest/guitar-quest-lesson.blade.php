@@ -301,7 +301,7 @@
                         {{-- todo: update --}}
                         user-xp="{{ 0 }}"
                         user-access-level="{{ '' }}"
-                        profile-base-route="/members/account/"
+                        profile-base-route="/members/profile/"
                         :is-admin="{{ json_encode(current_user()->getPermissionLevel() == 'administrator') }}"
                     ></comments>
                 </div>
