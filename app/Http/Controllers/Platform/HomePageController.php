@@ -177,6 +177,22 @@ class HomePageController extends BaseController
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
+        $collectionForDecoration = new RailcontentCollection();
+        $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
+        if (!empty($currentEvent)) {
+            $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
+        }
+        $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
+        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
+        $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
+        $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
+        $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
+        $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
         $hasGear = count(
                 user()->onboardingGear->filter(function ($item) {
                     return $item->brand == brand();
