@@ -45,7 +45,7 @@
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
     
-                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
                     </button>
@@ -64,7 +64,7 @@
                             <div ref="carouselContainer" class="flex flex-row carousel tw-bg-white dark:tw-bg-transparent overflow tw-mb-3 tw-p-3">
                                 <div class="flex flex-row">
                                     <div v-for="(page, i) in $_sheet_music_pages" :key="'page' + (i + 1)" class="flex flex-column xs-12 grow page" :style="pageScrollPosition">
-                                        <img class="sheet-music-image dark:tw-invert dark:tw-opacity-85" :src="page">
+                                        <img class="sheet-music-image dark:tw-invert dark:tw-opacity-[.85]" :src="page">
                                     </div>
                                 </div>
     

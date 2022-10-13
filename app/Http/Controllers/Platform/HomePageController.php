@@ -75,6 +75,11 @@ class HomePageController extends BaseController
         return redirect()->route('platform.home', ['brand' => brand()]);
     }
 
+    public function profileRedirect()
+    {
+        return redirect("/".brand()."/profile/".user()->id."/dashboard");
+    }
+
     public function home(Request $request, $brand)
     {
         Decorator::$typeDecoratorsEnabled = false;

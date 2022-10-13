@@ -409,7 +409,7 @@ export default {
     },
     searchEndpoint: {
       type: String,
-      default: () => "/laravel/public/railcontent/search",
+      default: () => "/railcontent/search",
     },
     isPlaylists: {
       type: Boolean,

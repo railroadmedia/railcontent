@@ -10,7 +10,7 @@ export default {
 
         profileBaseRoute: {
             type: String,
-            default: () => '/laravel/public/members/profile/',
+            default: () => '/members/profile/',
         },
 
         hasPublicProfiles: {
