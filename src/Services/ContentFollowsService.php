@@ -132,27 +132,14 @@ class ContentFollowsService
         $limit = 10,
         $sort = '-published_on'
     ) {
-        $followedContent = $this->contentFollowsRepository->getFollowedContent(
-            auth()->id(),
-            $brand,
-            null,
-            1,
-            'null'
-        );
-
+        $followedContent = $this->contentFollowsRepository->getFollowedContentIds($brand);
         $contentData = new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]);
 
         if (!empty($followedContent)) {
             $includedFields = [];
 
             foreach ($followedContent as $content) {
-                $includedFields[] = 'instructor,'.$content['id'];
-                $instructor =
-                    $this->contentService->getBySlugAndType($content['slug'], 'coach')
-                        ->first();
-                if ($instructor) {
-                    $includedFields[] = 'instructor,'.$instructor['id'];
-                }
+                $includedFields[] = 'instructor,'.$content;
             }
 
             ContentRepository::$pullFutureContent = false;
@@ -167,7 +154,12 @@ class ContentFollowsService
                 [],
                 [],
                 [],
-                $includedFields
+                $includedFields,
+                [],
+                [],
+                false,
+                false,
+                false
             );
         }
 
