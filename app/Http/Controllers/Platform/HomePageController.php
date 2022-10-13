@@ -354,7 +354,7 @@ class HomePageController extends BaseController
                 ->get()
                 ->groupBy('thread_id');
 
-        $forumThreadPosts = $forumPosts->splice(0, 3);
+        $forumThreadPosts = $forumPosts->splice(0, 6);
 
         $forumPosts = new Collection();
 
@@ -375,7 +375,7 @@ class HomePageController extends BaseController
                     ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
-                $forumPosts[$forumPostIndex]->user_xp = $user->total_xp;
+                $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
                 $forumPosts[$forumPostIndex]->xp_rank = $user->getXpRank();
             } else {
                 unset($forumPosts[$forumPostIndex]);
