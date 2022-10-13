@@ -10,7 +10,7 @@
                 >
             </div>
             {{-- Rank Data --}}
-            <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed">
+            <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed tw-leading-[1.2]">
                 {{ $rank }}
             </p>
             <p
