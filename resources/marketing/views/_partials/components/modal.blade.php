@@ -8,7 +8,7 @@
     x-id="['modal-title']"
     :aria-labelledby="$id('modal-title')"
     class="fixed inset-0 z-10 overflow-y-auto"
-    >
+>
     <!-- Overlay -->
     <div x-show="{{ $name }}" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
 
