@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use DateTimeZone;
@@ -208,6 +209,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
  * @property ?MentorStudent $mentorStudent
  * @property mixed|null $brand_total_xp
+ * @property Collection $subscriptions
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -288,6 +290,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function mentorStudent(): HasOne
     {
         return $this->hasOne(MentorStudent::class, 'user_id');
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class, 'user_id');
     }
 
     /**

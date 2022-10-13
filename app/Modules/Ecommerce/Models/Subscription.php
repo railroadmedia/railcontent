@@ -3,16 +3,19 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Modules\Ecommerce\database\factories\SubscriptionFactory;
+use App\Modules\Ecommerce\Enums\SubscriptionIntervalType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\UserManagementSystem\Models\User;
 
 /**
  * Class Subscription
  *
  * @package App\Modules\Ecommerce\Models
  *
+ * @property integer $id
  * @property string $brand
  * @property string $type
  * @property integer $user_id
@@ -25,10 +28,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $paid_until
  * @property Carbon $canceled_on
  * @property string $cancellation_reason
+ * @property string note
+ * @property float total_price
+ * @property float tax
+ * @property string currency
+ * @property string interval_type
+ * @property int interval_count
+ * @property ?int total_cycles_due
+ * @property int total_cycles_paid
+ * @property int renewal_attempt
+ * @property ?int payment_method_id
+ * @property Carbon apple_expiration_date
+ * @property string external_app_store_id
+ * @property string paypal_recurring_profile_id
+ *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  *
+ * @property ?Product $product
  */
 class Subscription extends Model
 {
@@ -68,5 +86,36 @@ class Subscription extends Model
     protected static function newFactory(): SubscriptionFactory
     {
         return SubscriptionFactory::new();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function getIntervalType(): SubscriptionIntervalType
+    {
+        return match ($this->interval_type) {
+            'month', 'monthly' => SubscriptionIntervalType::Month,
+            'year', 'yearly' => SubscriptionIntervalType::Year,
+            default => SubscriptionIntervalType::Unknown,
+        };
+    }
+
+    public function cancel(string $cancellationReason): void
+    {
+        $this->canceled_on = Carbon::now();
+        $this->cancellation_reason = $cancellationReason;
+        $this->is_active = 0;
+    }
+
+    public function isMobile(): bool
+    {
+        return $this->type == Subscription::TYPE_APPLE_SUBSCRIPTION || $this->type == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
     }
 }

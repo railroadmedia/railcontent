@@ -71,4 +71,9 @@ class Product extends Model
     {
         return ProductFactory::new();
     }
+
+    public function isMembershipProduct(): bool
+    {
+        return $this->digital_access_type == Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS;
+    }
 }
