@@ -111,7 +111,7 @@ class ContentCompiledColumnTransformer
                                 'type' => 'content',
                                 'position' => $fieldKeyCounts[$fieldKey],
                             ];
-                        } else {
+                        } elseif(is_array($compiledFieldValue)) {
                             // there are multiple values
                             foreach ($compiledFieldValue as $compiledFieldSingleValue) {
                                 if (!is_array($compiledFieldSingleValue)) {
