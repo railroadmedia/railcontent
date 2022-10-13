@@ -1,5 +1,5 @@
 <div class="question-dropdown text-left @if(!empty($defaultOpen)) active @endif @if(!empty($customClass)) {!! $customClass !!} @endif @if(empty($weekDescription)) no-drop @endif">
-    <div class="@if(!empty($weekDescription)) w-11/12 @endif w-full float-left drop-down-wrap">
+    <div class="w-full float-left drop-down-wrap">
         <div class="w-1/6 lg:w-1/12 text-center week-number">
             @if(!empty($chapter))<span class="hidden sm:inline"> CHAPTER</span> <strong class="number">{{ $chapter }}</strong> @endif
             @if(!empty($level))<span class="hidden sm:inline"> LEVEL</span> <strong class="number">{{ $level }}</strong> @endif
@@ -8,12 +8,12 @@
         </div>
         <div class="w-5/6 lg:w-11/12 float-right px-4">
             <div class="question">
-                <h2>{!! $weekTitle !!}</h2>
+                <h6>{!! $weekTitle !!}</h6>
 
                 @if(!empty($weekDate)) <p class="details hidden sm:block"><em> {!!  $weekDate !!} </em></p> @endif
             </div>
             @if(!empty($weekDescription))
-                <p>@if(!empty($weekDate)) <em class="inline sm:hidden"> {!!  $weekDate !!} <br><br></em> @endif {!! nl2br( $weekDescription) !!}</p>
+                <p class="text-[14px] lg:text-[15px]">@if(!empty($weekDate)) <em class="inline sm:hidden"> {!!  $weekDate !!} <br><br></em> @endif {!! nl2br( $weekDescription) !!}</p>
             @endif
         </div>
     </div>
