@@ -1,6 +1,6 @@
 @extends('drumeo._partials.layout')
 
-@section('global-head')
+@section('head-includes')
     <title>Beyond Beginner Drumming | Drumeo</title>
     <meta property="og:title" content="Beyond Beginner Drumming">
     <meta name="description" content="Make the jump from beginner to intermediate drummer.">

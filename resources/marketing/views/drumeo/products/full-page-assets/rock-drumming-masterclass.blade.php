@@ -35,8 +35,8 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/parcel/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/js/modal.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/js/drumeo/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/js/drumeo/modal.js') }}"></script>
 @stop()
 
 @section('layout-body')
@@ -46,7 +46,7 @@
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="logo">
                     <p><em>Todd Sucherman's</em></p>
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="white logo">
                 </div>
             </div>
             <h3 class="columns">The Rock Drumming Masterclass is a
@@ -380,7 +380,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png"></span>odd Sucherman has played more than 2000 rock shows -- entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png" alt="bold t"></span>odd Sucherman has played more than 2000 rock shows -- entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
                 <br><br>
                 And for the next six months, Todd will be sharing his “keys to the kingdom” with students around the world through The Rock Drumming Masterclass -- a 26-week course that will give you the confidence you need to play ANY rock music you want.
                 <br><br>
@@ -411,7 +411,7 @@
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/steve-smith.jpg">
                 </div>
                 <div class="columns medium-7 large-8 text">
-                    <h1>Steve Smith <span class="band">(Journey)</span></h1>
+                    <h1 class="mb-1 ml-0">Steve Smith <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Journey)</span></h1>
                     <h2>"Todd Sucherman is one of the premier drummers touring today..."</h2>
                     <p>There are times when his approach reminds me of the way I played with Journey in the late 70s and early 80s, except he’s much better than I was!  He perfected and honed the concept, infusing it with his deep musicianship and super chops. His musical development is inspiring and he continues to grow as a player.  We always have a great time hanging, trading ideas, and discussing music.  Carry on Todd!</p>
                 </div>
@@ -420,17 +420,17 @@
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/will-calhoun.jpg">
-                    <h1>Will Calhoun<br> <span class="band">(Living Colour)</span></h1>
+                    <h1 class="mb-1 ml-0">Will Calhoun<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Living Colour)</span></h1>
                     <p>"Todd Sucherman is a great drummer. Although he’s most known for playing Rock-n-Roll, he possesses the facility and knowledge to play any style of music at a high level."</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-dicenso.jpg">
-                    <h1>Dave DiCenso<br> <span class="band">(Professor of Percussion at Berklee College of Music)</span></h1>
+                    <h1 class="mb-1 ml-0">Dave DiCenso<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Professor of Percussion at Berklee College of Music)</span></h1>
                     <p>"Todd Sucherman is one of the greatest rock drummers of our time. Brains, brawn, heart and soul - he has 'em all!"</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/simon-phillips.jpg">
-                    <h1>Simon Phillips<br> <span class="band">(Toto, The Who, Judas Priest)</span></h1>
+                    <h1 class="mb-1 ml-0">Simon Phillips<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Toto, The Who, Judas Priest)</span></h1>
                     <p>"Whenever I get the opportunity to hear Todd play I am struck by his preciseness and musicality no matter what the musical setting might be."</p>
                 </div>
             </div>
@@ -440,8 +440,8 @@
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gavin-harrison.jpg">
                 </div>
                 <div class="columns medium-7 large-8 text">
-                    <h1>Gavin Harrison <span class="band">(Porcupine Tree)</span></h1>
-                    <h2>"Todd is the most advanced drummer in the world right now… that has bought me a beer"</h2>
+                    <h1 class="mb-4 ml-0">Gavin Harrison <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Porcupine Tree)</span></h1>
+                    <h4 class="text-[#999]">"Todd is the most advanced drummer in the world right now… that has bought me a beer"</h4>
                     <p>&nbsp;</p>
                 </div>
             </div>
@@ -449,17 +449,17 @@
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/matt-garska.jpg">
-                    <h1>Matt Garstka<br> <span class="band">(Animals as Leaders)</span></h1>
+                    <h1 class="mb-1 ml-0">Matt Garstka<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Animals as Leaders)</span></h1>
                     <p>"Todd Sucherman is a legend. He is super clean, musical and really knows what he's doing. This polished playing only comes about after decades of touring and practice."</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-mattacks.jpg">
-                    <h1>Dave Mattacks<br> <span class="band">(Fairport Convention)</span></h1>
+                    <h1 class="mb-1 ml-0">Dave Mattacks<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Fairport Convention)</span></h1>
                     <p>"I’m happy to endorse my chum Todd with this splendid Drumeo course.  Wherever you are along your drumming path, I can honestly say that “Todd hardly ever wrecks the music.”  Seriously though!  You’re in great hands here— double entendre intentional!"</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gary-husband.jpg">
-                    <h1>Gary Husband<br> <span class="band">(Jazz & Rock drummer, pianist, and bandleader.)</span></h1>
+                    <h1 class="mb-1 ml-0">Gary Husband<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Jazz & Rock drummer, pianist, and bandleader.)</span></h1>
                     <p>"It’s always just right-across-the-border drums excellence with Todd! Every time! No matter what the music. It’s the musician he is, primarily, also the warm spirit and how benevolent he is. The taste, the articulation, the feeling, his amazing sound ... all icing on an already delicious cake."</p>
                 </div>
             </div>
@@ -642,7 +642,7 @@
 {{--                {{ round(Prices::$rdmRegular / 26, 2) }}--}}
                 Per Week</h1>
 
-{{--            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>--}}
+{{--            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="btn-primary bg-drumeo w-full">Get Started &raquo;</a></div>--}}
 
             <h2 class="columns uppercase">
 {{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}
