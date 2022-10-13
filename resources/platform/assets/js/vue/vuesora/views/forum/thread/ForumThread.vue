@@ -416,12 +416,6 @@ export default {
         },
 
         baseProfileRoute() {
-            if (this.brand === 'drumeo') {
-                return '/laravel/public/members/profile/';
-            }
-            if (this.brand === 'guitareo') {
-                return '/members/account/';
-            }
             return '/members/profile/';
         },   
 

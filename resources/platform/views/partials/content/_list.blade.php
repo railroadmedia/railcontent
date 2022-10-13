@@ -33,7 +33,7 @@
                     :force-wide-thumbs="true"
                     :six-wide="true"
                     :pre-loaded-content="{{ $preLoadedContent }}"
-                    content-endpoint="/laravel/public/railcontent/content"
+                    content-endpoint="/railcontent/content"
                 >
                     <div class="flex flex-row nmh-1">
                         @for($i = 0; $i < 6; $i++)
