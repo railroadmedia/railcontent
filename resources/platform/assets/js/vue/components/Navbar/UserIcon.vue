@@ -145,6 +145,12 @@ export default {
           <musora-icon v-if="isDarkModeSelected" icon-name="moon" class="tw-w-[20px] tw-mr-2"/>
 
           Appearance: {{ isDarkModeSelected ? 'Dark' : 'Light' }}
+          <!-- Dark/Light Toggle Placeholder -->
+          <div class="tw-ml-auto">
+            <div class="tw-relative tw-w-10 tw-h-5 tw-rounded-full tw-border-2 dark:tw-bg-[#002039] tw-bg-[#e5e7ea] dark:tw-border-[#1e3b53] tw-border-[#e5e7ea] tw-box-content">
+              <div class="tw-transition-all tw-w-5 tw-h-5 tw-rounded-full tw-shadow-md tw-bg-white tw-absolute tw-top-0 dark:tw-right-0 dark:tw-left-auto tw-left-0 tw-right-auto"></div>
+            </div>
+          </div>
         </OptionElement>
         <OptionElement :href="this.userNavigationDropdownLinks.supportPageUrl">
           <musora-icon icon-name="phone" class="tw-w-[20px] tw-mr-2"/>
