@@ -62,7 +62,7 @@
         {{-- New Section --}}
         @component('partials.bladesora.members.components.home._new-section', [
             'brand' => brand(),
-            'contentEndpoint' => '/laravel/public/railcontent/content',
+            'contentEndpoint' => '/railcontent/content',
             'allLessonsUrl' => url()->route('platform.new-lessons'),
             'newContentJson' => $newContentJson,
             ])
@@ -83,7 +83,7 @@
             @component('partials.bladesora.members.components.home._followed-section', [
                 'brand' => brand(),
                 'subscribedLessons' => '/'.$brand.'/lessons/subscribed', // todo: need url
-                'contentEndpoint' => '/laravel/public/railcontent/content',
+                'contentEndpoint' => '/railcontent/content',
                 'followedLessons' => $followedLessons,
                 'hasfollowedLessons' => $hasfollowedLessons,
                 ])
@@ -104,7 +104,7 @@
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
             'myListUrl' => url()->route('platform.lists.my-list'),
-            'contentEndpoint' => '/laravel/public/railcontent/content',
+            'contentEndpoint' => '/railcontent/content',
             'usersList' => $usersList,
             ])
         @endcomponent
@@ -129,7 +129,7 @@
                 'brand' => brand(),
                 'upcomingUrl' => '/'.$brand.'/live', // todo: url
                 'upcomingEvents' => $upcomingEvents,
-                'contentEndpoint' => '/laravel/public/railcontent/content',
+                'contentEndpoint' => '/railcontent/content',
                 ])
             @endcomponent
         @endif

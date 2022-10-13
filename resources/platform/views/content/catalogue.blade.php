@@ -252,7 +252,7 @@
 
             <play-alongs
                 ref="playAlongsVueInstance"
-                content-endpoint="/laravel/public/railcontent/content"
+                content-endpoint="/railcontent/content"
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"

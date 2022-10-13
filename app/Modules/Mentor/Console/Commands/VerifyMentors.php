@@ -4,6 +4,7 @@ namespace App\Modules\Mentor\Console\Commands;
 
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Mentor\Services\EnsureMentorResult;
 use App\Modules\Mentor\Services\MentorService;
 use Artisan;
 use Modules\UserManagementSystem\Models\User;
@@ -26,15 +27,12 @@ class VerifyMentors extends Command
         $query = User::query()->with('mentorStudent')->with('mentorStudent.mentor');
 
         $n = 0;
-        $updated = [];
         $this->withProgressBarChunked($query, function (User $user) use ($mentorService, &$n, &$updated) {
             $result = $mentorService->ensureMentorState($user);
-            if ($result > 0) {
+            if ($result == EnsureMentorResult::MentorAssigned) {
                 $n++;
-                $updated[$user->id]->$user->id;
             }
         });
         $this->info("$n student mentors assigned.");
-        var_dump($updated);
     }
 }

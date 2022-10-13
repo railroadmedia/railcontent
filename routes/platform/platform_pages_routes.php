@@ -34,6 +34,11 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.home-redirect');
 
+        // this automatically redirects to the users profile dashboard
+        Route::get('/members/profile', [HomePageController::class, 'profileRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile-redirect');
+
         /*
         * Onboarding
         */

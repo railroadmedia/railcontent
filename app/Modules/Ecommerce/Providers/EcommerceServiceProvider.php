@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Providers;
 
+use App\Modules\Ecommerce\Console\Commands\UnifySubscriptions;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,7 +25,11 @@ class EcommerceServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+        $this->commands(
+            [
+                UnifySubscriptions::class,
+            ]
+        );
     }
 
     /**
