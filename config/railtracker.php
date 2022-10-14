@@ -3,6 +3,8 @@
 return [
     'global_is_active' => true,
 
+    'brand' => 'musora',
+
     // brand database connection names (each brand is on its own database for now)
     'brand_database_connection_names' => [
         'musora' => 'musora_laravel_mysql_writer_only',

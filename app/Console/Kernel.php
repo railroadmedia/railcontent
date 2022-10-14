@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
+use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
@@ -31,6 +32,7 @@ class Kernel extends ConsoleKernel
         PopulateUserBrandLevel::class,
         RepairVimeoDurations::class,
         PopulateUserTotalXpPerBrand::class,
+        PopulateUserMinutesPracticedPerBrand::class
     ];
 
     /**
