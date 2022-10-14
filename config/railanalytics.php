@@ -42,7 +42,7 @@ return array(
                 ]
         ]
     ],
-    'staging' => [
+    'beta-testing' => [
 //        'active-tracking-providers' => ['ga', 'ga4' 'gtm', 'gaw', 'fp', 'im'],
         'active-tracking-providers' => ['ga4', 'gtm', 'ga'],
 
