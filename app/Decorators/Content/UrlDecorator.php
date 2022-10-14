@@ -39,7 +39,8 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             //TODO: Should be deleted when the hierarchy with the draft learning-path: advanced-lead-guitar is deleted
-            if (brand() == 'guitareo' && $content['type'] == 'play-along') {
+            if ((brand() == 'guitareo' && $content['type'] == 'play-along') ||
+            ($content['type'] == 'course')){
                 $contentParentData = [];
             }
 
@@ -54,7 +55,8 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // second-level types
-            if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type])) {
+            if ((count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
+            ||($content['type'] == 'course-part')){
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$contentParentData[0]->type],
