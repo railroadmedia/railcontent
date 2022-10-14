@@ -269,7 +269,7 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "startedContentCount" => $startedLessons->totalResults(),
+            "startedContentCount" => count($startedLessons),
             "usersList" => $usersList->toResponseRawJson(),
             "userMetrics" => $userMetrics,
             "nextLearningPathLevel" => $nextLearningPathLevel,
@@ -285,8 +285,8 @@ class HomePageController extends BaseController
             'followedLessons' => $followedLessons->toResponseRawJson(),
             'subscribedCoaches' => $subscribedCoaches,
             'subscribedCoachesJson' => $subscribedCoaches->toResponseRawJson(),
-            "hasSubscribedCoaches" => $subscribedCoaches->totalResults() > 0,
-            "hasfollowedLessons" => $subscribedCoaches->totalResults() > 0 && $followedLessons->totalResults() > 0,
+            "hasSubscribedCoaches" => count($subscribedCoaches->results()) > 0,
+            "hasfollowedLessons" => count($subscribedCoaches->results()) > 0 && count($followedLessons->results()) > 0,
             'upcomingEvents' => $upcomingEvents->toResponseRawJson(),
             'hasUpcomingEvents' => $upcomingEvents->totalResults() > 0,
             'hasCompletedMethod' => $hasCompletedMethod,
@@ -501,22 +501,23 @@ class HomePageController extends BaseController
     public function getUsersList()
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
-
-        $userPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'primary-playlist', brand());
-
+        $userPrimaryPlaylist =
+            \Arr::first(
+                $this->userPlaylistsService->getUserPlaylist(
+                    user()->id,
+                    'primary-playlist',
+                    brand()
+                )
+            );
         if (empty($userPrimaryPlaylist)) {
-            return (new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]));
-        }
-        $userPrimaryPlaylistId = $userPrimaryPlaylist[0]['id'];
-        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents(
-            $userPrimaryPlaylistId,
-            $this->parseContentTypes($contentTypes),
-            6
-        );
+                        return (new ContentFilterResultsEntity(['results' => []]));
+                    }
+        $myListId = $userPrimaryPlaylist['id'];
+        ContentRepository::$includedInPlaylistsIds = [$myListId];
+        $results = $this->contentService->getFiltered(1,6,'-published_on', $this->parseContentTypes($contentTypes),[],[],[],[],[],[],false,false,false,false);
+        ContentRepository::$includedInPlaylistsIds = false;
 
-        return (new ContentFilterResultsEntity(
-            ['results' => $usersPrimaryList]
-        ));
+        return $results;
     }
 
     /**
