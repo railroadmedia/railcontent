@@ -94,7 +94,11 @@ abstract class Command extends CommandBase
         $nJobs = count($jobs);
         $this->info("Dispatching $nJobs jobs.");
         if ($isChain) {
-            $batch = Bus::chain($jobs)->dispatch();
+            $chainedJobs = [];
+            foreach ($jobs as $job) {
+                $chainedJobs[] = [$job];
+            }
+            $batch = Bus::batch($chainedJobs)->name(class_basename($this))->dispatch();
         } else {
             $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
         }
