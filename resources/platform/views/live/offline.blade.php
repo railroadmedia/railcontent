@@ -68,7 +68,7 @@
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
                     timezone="{{ $fullTimezoneString }}"
-                    subscription-calendar-id=""
+                    subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
                     theme-color="{{ $brand }}"
                 />
             </div>

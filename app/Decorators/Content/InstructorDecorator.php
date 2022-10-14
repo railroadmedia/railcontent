@@ -33,6 +33,10 @@ class InstructorDecorator extends ModeDecoratorBase
 
     public function decorate(Collection $contents)
     {
+        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+            return $contents;
+        }
+
         if (!user()) {
             return $contents;
         }

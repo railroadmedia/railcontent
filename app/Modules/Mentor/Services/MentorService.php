@@ -52,7 +52,6 @@ class MentorService
 
     public function assignMentorByBrand(int $userId, string $brand): bool
     {
-        //Log::info("Assigning Mentor to User $userId");
         $mentor = $this->chooseMentor($brand);
         if (!$mentor) {
             Log::error("Unable to assign Mentor to User $userId");
@@ -72,6 +71,7 @@ class MentorService
         $mentorStudent->save();
         $mentor->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
+        Log::info("Assigned Mentor $mentor->user_id to User $userId");
         return true;
     }
 
