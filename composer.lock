@@ -8106,16 +8106,16 @@
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "a220fed9c9d5fdfb9754ff364809f24a8e45a172"
+                "reference": "f66389cc1c0ad55be4fefb709961850fed23297b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/a220fed9c9d5fdfb9754ff364809f24a8e45a172",
-                "reference": "a220fed9c9d5fdfb9754ff364809f24a8e45a172",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/f66389cc1c0ad55be4fefb709961850fed23297b",
+                "reference": "f66389cc1c0ad55be4fefb709961850fed23297b",
                 "shasum": ""
             },
             "require": {
@@ -8142,9 +8142,9 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.2"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.3"
             },
-            "time": "2022-10-13T13:37:51+00:00"
+            "time": "2022-10-14T09:10:34+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -16052,5 +16052,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
