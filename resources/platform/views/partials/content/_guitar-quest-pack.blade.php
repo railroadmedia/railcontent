@@ -3,7 +3,7 @@
     <div class="relative gq-container corners-10 bg-grey-2 dark:tw-bg-[#081825] tw-overflow-hidden md:tw-h-[276px] tw-w-full">
         <a href="{{ $lessonsUrl }}" class="tw-w-full tw-h-full">
             {{-- Desktop Image --}}
-            <img src="https://musora.com/cdn-cgi/image/width=1000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
+            <img src="https://musora.com/cdn-cgi/image/width=1600,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
                 class="tw-w-full tw-hidden md:tw-block tw-transition-opacity tw-opacity-0 tw-h-full tw-object-cover" 
                 loading="lazy"
