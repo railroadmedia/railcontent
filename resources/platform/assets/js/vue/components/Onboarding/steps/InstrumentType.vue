@@ -84,8 +84,7 @@ const isNextButtonDisabled = () => {
       <StepHeader
         title="What kind of gear will you be practicing with?"
         :subtitle="`You selected ${info.instrument}! Now it’s time to tell us about
-            your practice set up. You can select <b><i>multiple gear types</i></b> and change
-            your settings in your profile at anytime.`"
+            your practice set up. You can select more than one instrument and change your settings in your profile at any time.`"
         @onGoBack="goBack"
       />
       <MultiSelect
