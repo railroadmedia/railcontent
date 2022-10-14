@@ -143,12 +143,33 @@ class MentorServiceTest extends TestCase
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
-
         $this->mentorService->updateMentor($mentor->user_id, 'test', 4);
         $this->assertDatabaseHas('mentors', [
             'user_id' => $mentor->user_id,
             'supported_brands' => 'test',
             'active_student_max_count' => 4,
         ]);
+    }
+
+    public function test_reassign_random()
+    {
+        $brand = 'drumeo';
+        $mentor = $this->createMentor($brand);
+        $user = User::factory()->hasActiveMembership(100)->create();
+        $this->mentorService->assignMentorByBrand($user->id, $brand);
+
+        $user2 = User::factory()->hasActiveMembership(100)->create();
+        $this->mentorService->assignMentorByBrand($user2->id, $brand);
+
+        $user3 = User::factory() - (100)->create();
+        $this->mentorService->assignMentorByBrand($user3->id, $brand);
+
+        $this->assertMentorCount($mentor, 1, 3);
+
+        $mentor2 = $this->createMentor($brand);
+
+        $this->mentorService->reassignRandomStudents($mentor->user_id, 2);
+        $this->assertMentorCount($mentor, 0, 1);
+        $this->assertMentorCount($mentor2, 2, 2);
     }
 }
