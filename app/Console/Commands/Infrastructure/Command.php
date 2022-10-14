@@ -93,19 +93,23 @@ abstract class Command extends CommandBase
         }
         $nJobs = count($jobs);
         $this->info("Dispatching $nJobs jobs.");
+        $batch = null;
         if ($isChain) {
-            $chainedJobs = [];
-            foreach ($jobs as $job) {
-                $chainedJobs[] = [$job];
-            }
-            $batch = Bus::batch($chainedJobs)->name(class_basename($this))->dispatch();
+            Bus::chain($jobs)->dispatch();
         } else {
             $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
         }
         $this->info("Dispatched $nJobs jobs.");
-        $this->info("Check batch status: artisan batch:status $batch->id");
+        if ($batch) {
+            $this->info("Check batch status: artisan batch:status $batch->id");
+        }
+        else{
+            $this->info("No batched status available");
+        }
 
-        if (App::environment('local')) { //progress bar not useful when running vapor commands
+        if (App::environment('local') && env(
+                'QUEUE_CONNECTION'
+            ) == 'sync') { //progress bar not useful when running vapor commands
             $batchId = $batch->id;
             while (!$batch->finished()) {
                 $batch = Bus::findBatch($batchId);

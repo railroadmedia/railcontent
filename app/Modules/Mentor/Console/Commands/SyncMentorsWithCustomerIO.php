@@ -16,7 +16,7 @@ class SyncMentorsWithCustomerIO extends Command
         $this->info("Unify Subscriptions...");
         $success = $this->runChainQuery(function (int $skip, int $take) {
             return new SyncMentorsWithCustomerIOJob($skip, $take);
-        }, chunks: 50);
+        }, chunks: 5000);
         return $success;
     }
 
