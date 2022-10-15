@@ -40,7 +40,7 @@ class SyncMentorsWithCustomerIOJob extends BatchQueryJob
 
     function handleAllItems($items): bool
     {
-        dispatch((new CustomerIoSyncMentor(StudentMentorsUpdated::newWithMentorStudentCollection($items)->mentorStudentData)));
+        dispatch_sync((new CustomerIoSyncMentor(StudentMentorsUpdated::newWithMentorStudentCollection($items)->mentorStudentData)));
         return true;
     }
 }
