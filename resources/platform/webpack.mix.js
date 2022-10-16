@@ -34,16 +34,4 @@ mix
     .version()
     .mergeManifest();
 
-mix.webpackConfig(webpack => {
-    return {
-        output: {
-            publicPath: ASSET_URL
-        },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ]
-    };
-});
 
