@@ -34,4 +34,17 @@ mix
     .version()
     .mergeManifest();
 
+mix.webpackConfig(webpack => {
+    return {
+        target: ['web', 'es5'],
+        output: {
+            publicPath: ASSET_URL,
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+            })
+        ]
+    };
+});
 
