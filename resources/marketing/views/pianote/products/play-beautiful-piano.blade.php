@@ -1,6 +1,6 @@
-@extends('pianote._partials.layout')
+@extends('pianote._partials.global-layout')
 
-@section('head-includes')
+@section('global-head')
     <title>The Beginner's Guide To Playing Beautiful Piano | Pianote</title>
     <meta property="og:title" content="The Beginner's Guide To Playing Beautiful Piano">
 
@@ -10,10 +10,11 @@
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/products/play-beautiful-piano/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="/assets/marketing/play-beautiful-piano.css" rel="stylesheet">
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/animate.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="/marketing/parcel/pianote/play-beautiful-piano.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/animate.css') }}" rel="stylesheet">
     <style>
         body.modal-open {
             overflow-y:hidden;
@@ -176,15 +177,15 @@
     </style>
 @stop
 
-@section('layout-body')
-    @include('sales.nav', [
+@section('global-body')
+    @include('pianote.sales.nav', [
         "cartVersion" => true
     ])
 
-    @include('shop.partials._promo-banner', [
+    @include('pianote._partials._promo-banner', [
         "name" => "Playing Beautiful Piano",
-        "fullPrice" => App\Prices::$playBeautifulPianoFull,
-        "price" => App\Prices::$playBeautifulPiano,
+        "fullPrice" => PianotePrices::$playBeautifulPianoFull,
+        "price" => PianotePrices::$playBeautifulPiano,
                     "noBreadcrumb" => true
     ])
     <header class="header overflow-hidden w-full text-white bg-black text-center fixed z-0">
@@ -193,7 +194,7 @@
         <div class="container mx-auto">
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30 animated fadeIn">
                 <img class="h-20 md:h-40 lg:h-52 mx-auto" src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png">
-                <h4 class="leading-normal mb-5 md:mb-8">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ \App\Prices::$playBeautifulPiano }}</strong>.</h4>
+                <h4 class="leading-normal mb-5 md:mb-8">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ PianotePrices::$playBeautifulPiano }}</strong>.</h4>
                 <a class="join vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['play-beautiful-piano' => 1], 'redirect' => '/order']) }}">Play Beautifully &raquo;</a>
             </div>
             <div class="bottom absolute bottom-0 left-0 right-0 z-30 pb-5 md:pb-8"><img class="h-14 md:h-16 lg:h-20 animated infinite pulse" src="https://cdn.musora.com/image/fetch/w_70,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/treble-clef.png"></div>
@@ -397,7 +398,7 @@
                 <div class="md:pr-8 lg:pr-10">
                     <h2 class="mb-5 lg:mb-10 text-center md:text-left">The Best Results Guaranteed.<br>
                         <strong>With NO Risk.</strong></h2>
-                    <p class="leading-normal text-left">You’ll be playing beautiful music from your very 1st lesson -- for just ${{ \App\Prices::$playBeautifulPiano }}. That's just ${{ number_format(App\Prices::$playBeautifulPiano / 6, 2) }} per lesson.
+                    <p class="leading-normal text-left">You’ll be playing beautiful music from your very 1st lesson -- for just ${{ PianotePrices::$playBeautifulPiano }}. That's just ${{ number_format(PianotePrices::$playBeautifulPiano / 6, 2) }} per lesson.
                         <br><br>
                         And we’ll admit, there are some pretty big claims on this page. But you know what, we believe them. And we stand by them.
                         <br><br>
@@ -422,20 +423,18 @@
         <div class="container mx-auto">
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30">
                 <img class="h-20 md:h-40 lg:h-52 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png">
-                <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ \App\Prices::$playBeautifulPiano }}</strong>.</h4>
-                <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['play-beautiful-piano' => 1], 'redirect' => '/order']) }}">Play Beautifully For Just ${{ \App\Prices::$playBeautifulPiano }} &raquo;</a>
+                <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ PianotePrices::$playBeautifulPiano }}</strong>.</h4>
+                <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['play-beautiful-piano' => 1], 'redirect' => '/order']) }}">Play Beautifully For Just ${{ PianotePrices::$playBeautifulPiano }} &raquo;</a>
                 <a class="text-pianote" href="/"><h6><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></h6></a>
                 <h6 class="mt-2"><strong>** 90-DAY GUARANTEE **</strong></h6>
             </div>
         </div>
     </section>
 
-    @include('sales.footer')
-@stop
+    @include('pianote.sales.footer')
 
-@section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal.js"></script>
     <script>
         $(function () {
             $(document).foundation();
@@ -453,16 +452,16 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay-alt.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
 
-    @include('shop.partials._promo-countdown')
+    @include('pianote._partials._promo-countdown')
     {!! inspectlet_embed_script() !!}
 @stop

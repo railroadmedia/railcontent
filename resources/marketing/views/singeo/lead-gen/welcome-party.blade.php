@@ -1,8 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>New Student Welcome Party | Singeo</title>
     <meta property="og:title" content="New Student Welcome Party">
 
@@ -12,9 +10,7 @@
     <meta property="og:url" content="https://www.singeo.com/welcome-party/">
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .title-wrap h1 {
             font-size:27px;
@@ -47,7 +43,7 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav")
 
     <div class="title-wrap text-white py-5 md:py-12 lg:py-16 px-5 md:px-7 lg:px-3" style="background: linear-gradient(00deg, #011a33, #000c17);">
@@ -77,5 +73,5 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/assets/marketing/nav-footer.js"></script>
+    <script src="/marketing/parcel/singeo/nav-footer.js"></script>
 @stop

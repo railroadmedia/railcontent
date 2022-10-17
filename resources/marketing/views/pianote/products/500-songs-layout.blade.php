@@ -1,6 +1,6 @@
-@extends('pianote._partials.layout')
+@extends('pianote._partials.global-layout')
 
-@section('head-includes')
+@section('global-head')
     <title>500 Songs In 5 Days | Pianote</title>
     <meta name="description" content="Develop The Skills To Play 500+ Songs On The Piano In 5 Days">
 
@@ -10,13 +10,13 @@
     <meta property="og:url" content="https://www.pianote.com/500-songs">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/marketing/500-songs.css">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/marketing/parcel/pianote/500-songs.css">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 @stop
 
-@section('layout-body')
-    @include('sales.nav', [
+@section('global-body')
+    @include('pianote.sales.nav', [
         "cartVersion" => true
     ])
 
@@ -55,13 +55,13 @@
                 @hasSection('badge')
                     @yield('badge')
                 @endif
-                @if(App\Prices::$songs500Full > $productPrice)
-                        <s>NORMALLY ${{ App\Prices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / App\Prices::$songs500Full))) }}%)
+                @if(PianotePrices::$songs500Full > $productPrice)
+                        <s>NORMALLY ${{ PianotePrices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}%)
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
                     <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    {{--<span style="text-transform:uppercase">ONLY <span class="tzcd-full"></span> LEFT!</span><br>--}}
+                    <span style="text-transform:uppercase">ONLY <span class="tzcd-full"></span> LEFT!</span><br>
                 <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
             @yield('badge-2')
         </div>
@@ -105,8 +105,8 @@
                     The Fastest Way To Learn How<br class="hidden-xs"> To Play Songs -- <u>For Just ${{ $productPrice }}</u>
                 @endif
             </h1>
-            @if(App\Prices::$songs500Full > $productPrice)
-                <h3><em><s>NORMALLY ${{ App\Prices::$songs500Full }}</s></em></h3>
+            @if(PianotePrices::$songs500Full > $productPrice)
+                <h3><em><s>NORMALLY ${{ PianotePrices::$songs500Full }}</s></em></h3>
                 @else
 
                 <h3>&nbsp;</h3>
@@ -372,8 +372,8 @@
                 @endif
                     payment of just
 
-                @if(App\Prices::$songs500Full > $productPrice)
-                    <s>${{ App\Prices::$songs500Full }}</s> <strong>${{ $productPrice }}</strong>
+                @if(PianotePrices::$songs500Full > $productPrice)
+                    <s>${{ PianotePrices::$songs500Full }}</s> <strong>${{ $productPrice }}</strong>
                 @else
                     <strong>${{ $productPrice }}</strong>
                 @endif
@@ -387,13 +387,13 @@
                 @hasSection('badge')
                     @yield('badge')
                 @endif
-                @if(App\Prices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ App\Prices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / App\Prices::$songs500Full))) }}%)
+                @if(PianotePrices::$songs500Full > $productPrice)
+                    <s>NORMALLY ${{ PianotePrices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}%)
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    {{--<span style="text-transform:uppercase">ONLY <span class="tzcd-full"></span> LEFT!</span><br>--}}
+                    <span style="text-transform:uppercase">ONLY <span class="tzcd-full"></span> LEFT!</span><br>
                 <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
 
             <div class="credit-cards col-xs-12">
@@ -412,10 +412,7 @@
         </div>
     </section>
 
-    @include('sales.footer')
-@stop
-
-@section('layout-scripts')
+    @include('pianote.sales.footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
@@ -437,9 +434,9 @@
             }
         });
     </script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>
-    <script src="/assets/js/countUp.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay.js"></script>
+    <script src="/marketing/parcel/pianote/countUp.js"></script>
     <script>
         $(function() {
 
@@ -480,12 +477,12 @@
             $(window).trigger('scroll');
         });
     </script>
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
 
-    @include('shop.partials._promo-countdown')
+    @include('pianote._partials._promo-countdown')
     @yield('scripts')
 
     {!! inspectlet_embed_script() !!}

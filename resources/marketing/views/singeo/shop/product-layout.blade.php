@@ -6,8 +6,8 @@
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet"> --}}
     <link rel="preload" href="{{ mix('tailwindcss/tailwind.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ mix('tailwindcss/tailwind.css') }}"></noscript>
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link href="{{ asset('/assets/marketing/shop-product.css') }}" rel="stylesheet">
 
@@ -32,7 +32,7 @@
         <div class="lg:flex">
             @yield('top')
         </div>
-    
+
 
         <div class="product-wrap px-3 md:px-4 lg:w-2/3">
             <div class="pack-details mb-7 pb-5 sm:pb-9 lg:pb-11">
@@ -49,10 +49,10 @@
     <script src="{{ mix('assets/members/js/app.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/assets/marketing/shop-product.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.countdown-2.js"></script>
+    <script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

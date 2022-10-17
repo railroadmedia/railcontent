@@ -1,0 +1,1292 @@
+@import "./_variables";
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fff;
+  color: #000;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -50px;
+  visibility: hidden;
+}
+
+.join {
+  &.outline {
+    background: transparent;
+    border: 2px solid $pianoteRed;
+
+    &:hover {
+      background: $pianoteRed;
+      color: #000;
+    }
+
+    &.white {
+      border-color: #fff;
+
+      &:hover {
+        background: #fff;
+        color: #000;
+      }
+    }
+  }
+
+  &.smaller {
+
+    font-size: 20px;
+    padding: 13px 70px;
+    @include tablet {
+      padding: 13px 100px;
+
+    }
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: $opensans;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 1.1em;
+  margin: 0 auto 5px;
+  @include tablet {
+    font-size: 30px;
+  }
+  @include desktop {
+    font-size: 39px;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  line-height: 1.1em;
+  @include tablet {
+    font-size: 25px;
+  }
+  @include desktop {
+    font-size: 30px;
+  }
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1em;
+  margin: 0 auto 35px;
+  @include tablet {
+    font-size: 18px;
+    margin: 0 auto 40px;
+  }
+  @include desktop {
+    font-size: 21px;
+    margin: 0 auto 55px;
+  }
+}
+
+h4 {
+  font-size: 14px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktop {
+    font-size: 18px;
+  }
+}
+
+img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  -ms-interpolation-mode: bicubic;
+}
+
+button {
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1;
+}
+
+[type=reset], [type=submit], button, html [type=button] {
+  -webkit-appearance: button;
+}
+
+.text-red {
+  color: $pianoteRed;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+.header {
+  text-align: center;
+  background: #141416;
+  color: #fff;
+  position: relative;
+
+  .container {
+    background:#000 center center/cover no-repeat;
+    padding: 30px 15px;
+    width: 100%;
+    max-width: 1400px;
+    @include tablet {
+      padding: 50px 20px;
+    }
+    @include desktop {
+      padding: 60px 15px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 220px;
+    @include tablet {
+      max-width: 350px;
+    }
+    @include desktop {
+      max-width: 470px;
+    }
+  }
+
+  .play-vimeo {
+    cursor: pointer;
+    outline: none;
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    border-radius: 200px;
+    line-height: 1em;
+    font-size: 29px;
+    padding: 22px;
+    margin: 80px auto;
+    @include tablet {
+      font-size: 35px;
+      padding: 26px 27px;
+      border-width: 4px;
+      margin: 160px auto;
+    }
+    @include desktop {
+      font-size: 39px;
+      padding: 29px 30px;
+      margin: 180px auto;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  h2 {
+    margin: 0 auto;
+    text-shadow: 0 0 15px #000;
+  }
+
+  .join {
+    font-size: 23px;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto;
+    @include tablet {
+      font-size: 46px;
+      padding: 17px 0;
+      max-width: 890px;
+      margin: 30px auto 20px;
+    }
+  }
+
+
+  p {
+    font: 400 14px/1.5em $opensans;
+    text-shadow: 0 0 15px #000;
+    margin: 0 auto 15px;
+    @include tablet {
+      font-size: 16px;
+      margin: 10px auto 0;
+    }
+    @include desktop {
+      font-size: 18px;
+    }
+
+    &.breakdown {
+      font: 400 13px/1.5em $robotocondensed;
+      margin: 0 auto;
+      @include tablet {
+        font-size: 16px;
+      }
+
+      .red {
+        color: $pianoteRed;
+      }
+
+      .yellow {
+        color: #f6bd52;
+      }
+    }
+  }
+}
+
+.modal-backdrop.in {
+  opacity: 0.8;
+}
+
+.modal {
+  .modal-dialog {
+    margin: 50px 10px 10px;
+    @include tablet {
+      margin: 60px auto 30px;
+    }
+
+    .join {
+      margin: 10px auto;
+    }
+  }
+
+  .close {
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+}
+
+.featured-product {
+  background: #eee;
+  padding: 0;
+  color: #000;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  @include tablet {
+    overflow: visible;
+  }
+
+  .noise-wrap {
+    //background-image: url(data:image/png;base64,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);
+    background: url(https://dpwjbsxqtam5n.cloudfront.net/promos/christmas/snow-2.gif) center center/350px;
+    box-shadow: 0 0 100px #eee inset;
+  }
+
+
+  .container {
+    position: relative;
+    padding: 30px 0;
+    @include tablet {
+      padding: 35px 30px;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    @include tablet {
+      max-width: 100%;
+    }
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    filter: invert(1) saturate(0) brightness(1.3);
+    @include tablet {
+      max-width: 300px;
+    }
+    @include desktop {
+      max-width: 380px;
+    }
+  }
+
+
+  p {
+    font: 400 13px/1.6em $opensans;
+    margin: 10px auto 15px;
+    @include tablet {
+      font-size: 14px;
+      max-width: 420px;
+      margin: 0 auto 15px;
+    }
+    @include desktop {
+      font-size: 15px;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+  }
+
+  .tzcd-big {
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: middle;
+
+    div {
+      float: left;
+      padding: 0 20px 0 0;
+      text-align: center;
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      h1 {
+        margin: 0 auto;
+        font-size: 27px;
+      }
+
+      p {
+        font: 700 13px/1em $opensans;
+        color: $pianoteRed;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .join {
+    background: $pianoteRed;
+    font-size: 18px;
+    vertical-align: middle;
+    padding: 11px 30px;
+    margin: 15px auto 0;
+    @include tablet {
+      margin: 0 0 0 15px;
+    }
+
+    &:hover {
+      background: lighten($pianoteRed, 10%);
+    }
+  }
+
+  &.logo-text {
+    .container {
+      max-width: 990px;
+    }
+
+    a {
+      @include tablet {
+        text-align: left;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        margin: 0 auto 10px;
+        width: 120px;
+        max-width: 100%;
+        @include tablet {
+          margin: 0 auto;
+          width: 161px;
+        }
+        @include desktop {
+          width: 257px;
+        }
+      }
+
+      .text {
+        @include tablet {
+          padding-left: 25px;
+          text-align: left;
+        }
+        @include desktop {
+          padding-left: 5%;
+        }
+        .text-red {
+          color: $pianoteRed;
+        }
+
+        p {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.brief-pitch {
+  padding: 30px 0;
+  @include tablet {
+    padding: 40px 10px;
+  }
+  @include desktop {
+    padding: 50px 0;
+  }
+
+  .wrapper {
+    @include tablet {
+      display: flex;
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  h1 {
+    font-weight: 400;
+  }
+
+
+  h3 {
+    margin: 15px auto 30px;
+    @include tablet {
+      margin: 20px auto 30px;
+    }
+    @include desktop {
+      margin: 30px auto 40px;
+    }
+
+    s {
+      color: #8c9697;
+    }
+  }
+
+  p {
+    margin: 0;
+    font: 400 13px/1.7em $opensans;
+    @include tablet {
+      font-size: 14px;
+      padding-right: 20px;
+    }
+    @include desktop {
+      font-size: 15px;
+      padding-right: 30px;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+    background: $pianoteRed;
+    border: 5px solid $pianoteRed;
+    width: 170px;
+    min-width: 170px;
+    margin: 0 auto 20px;
+    @include tablet {
+      width: 200px;
+      min-width: 200px;
+      order: 1;
+      margin: 0 auto;
+
+    }
+    @include desktop {
+      width: 300px;
+      min-width: 300px;
+    }
+  }
+}
+
+.three-modal {
+  background: #191b1c;
+  color: #FFF;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 30px 15px;
+  @include tablet {
+    padding: 50px 15px;
+  }
+  @include desktop {
+    padding: 70px 15px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 33px/1.1em $robotocondensed;
+    margin: 0 auto 20px;
+    @include tablet {
+      font-size: 47px;
+      margin: 0 auto 25px;
+    }
+    @include desktop {
+      font-size: 55px;
+      margin: 0 auto 35px;
+    }
+  }
+
+  p {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin-bottom: 0;
+    }
+  }
+
+  .bg-icon {
+    position: absolute;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    z-index: 0;
+    top: 15%;
+    height: 150px;
+    @include tablet {
+      top: 33%;
+      height: 240px;
+    }
+    @include desktop {
+      top: 40%;
+      height: 400px;
+    }
+
+    &.left-icon {
+      left: -80px;
+      @include tablet {
+        left: -130px;
+      }
+      @include desktop {
+        left: -220px;
+      }
+    }
+
+    &.right-icon {
+      right: -50px;
+      @include tablet {
+        right: -90px;
+      }
+      @include desktop {
+        right: -150px;
+      }
+    }
+  }
+
+  .modal-wrap {
+    position: relative;
+    border: 5px solid red;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 40px auto;
+    }
+    @include desktop {
+      margin: 60px auto;
+    }
+
+    &:hover i {
+      opacity: 0.8;
+    }
+
+    i {
+      -webkit-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+      display: block;
+      outline: none;
+      text-align: center;
+      border: 2px solid #FFF;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      color: #FFF;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      line-height: 36px;
+      margin: -20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+}
+
+.why-speed-matters {
+  background: #eaedef;
+  border-top: 10px solid $pianoteRed;
+  padding: 40px 10px;
+  text-align: center;
+  @include tablet {
+    padding: 50px 0;
+    text-align: left;
+  }
+  @include desktop {
+    padding: 60px 0;
+  }
+
+  .wrapper {
+    @include tablet {
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
+  img {
+    width: 200px;
+    margin: 0 auto 15px;
+    @include tablet {
+      margin: 0 auto;
+      width: 250px;
+      min-width: 250px;
+    }
+    @include desktop {
+      width: 340px;
+      min-width: 340px;
+    }
+  }
+
+  p {
+    margin: 0;
+    font: 400 13px/1.5em $opensans;
+    @include tablet {
+      padding-left: 20px;
+    }
+    @include desktop {
+      padding-left: 40px;
+      font-size: 14px;
+    }
+  }
+}
+
+.day-breakdown {
+  padding: 40px 0;
+  @include tablet {
+    padding: 50px 0;
+  }
+  @include desktop {
+    padding: 60px 0;
+  }
+
+  .stars {
+    width: 100px;
+    @include desktop {
+      width: 150px;
+    }
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 33px/1.1em $robotocondensed;
+    margin: 7px auto 20px;
+    @include tablet {
+      font-size: 47px;
+      margin: 10px auto 25px;
+    }
+    @include desktop {
+      font-size: 55px;
+      margin: 10px auto 35px;
+    }
+  }
+
+
+  .day-slice {
+    text-align: left;
+    margin: 0 auto 20px;
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      align-content: stretch;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .day-thumbnail {
+      width: 100%;
+      max-width: 270px;
+      position: relative;
+      border-radius: 20px;
+      background: $pianoteRed;
+      border: 5px solid $pianoteRed;
+      overflow: hidden;
+      margin: 0 auto 10px;
+      @include tablet {
+        flex-shrink: 0;
+        margin: 0;
+        max-width: 230px;
+      }
+      @include desktop {
+        max-width: 310px;
+      }
+
+      .top-badge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $pianoteRed;
+        z-index: 2;
+        color: #fff;
+        font: 700 15px/1em $opensans;
+        padding: 4px 10px 9px 7px;
+        border-radius: 0 0 20px 0;
+      }
+
+      .bottom-badge {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 2;
+        color: #fff;
+        font: 700 15px/1em $opensans;
+        padding: 9px 7px 4px 10px;
+        border-radius: 20px 0 0 0;
+      }
+    }
+
+    p {
+      font: 400 13px/1.6em $opensans;
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+      max-width: 270px;
+      @include tablet {
+        font-size: 14px;
+        max-width: 100%;
+        flex-grow: 1;
+        margin: 0;
+        padding: 0 15px 0 25px;
+      }
+      @include desktop {
+        font-size: 15px;
+      }
+
+      strong {
+        font-size: 15px;
+        line-height: 1.6em;
+        @include tablet {
+          font-size: 18px;
+        }
+        @include desktop {
+          font-size: 23px;
+        }
+      }
+      .calendar {
+        display: inline-block;
+        text-align: center;
+        border: 2px solid $pianoteRed;
+        color: $pianoteRed;
+        position: relative;
+        border-radius: 7px;
+        font: 800 18px/1em $opensans;
+        padding: 12px 12px 3px;
+        margin: 10px 7px 0 0;
+        @include desktop {
+          padding: 17px 15px 5px;
+          margin: 15px 10px 0 0;
+
+        }
+        &:before {
+          font: 700 9px/1.3em $opensans;
+          content:'DAY';
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          color: #fff;
+          background: $pianoteRed;
+          @include desktop {
+            font-size: 10px;
+            line-height: 1.4em;
+          }
+        }
+      }
+    }
+
+    &.bonus {
+      .day-thumbnail {
+        background: #f6bd52;
+        border-color: #f6bd52;
+
+        .top-badge {
+          background: #f6bd52;
+        }
+      }
+    }
+  }
+}
+
+.play-songs {
+  background: #e9edf0;
+  color: #000;
+  padding: 30px 0;
+  margin-bottom: -30px;
+  @include tablet {
+    padding: 40px 0;
+    margin-bottom: -20px;
+  }
+  @include desktop {
+    padding: 50px 0;
+    margin-bottom: -30px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 33px/1.1em $robotocondensed;
+    margin: 7px auto 20px;
+    @include tablet {
+      font-size: 47px;
+      margin: 10px auto 25px;
+    }
+    @include desktop {
+      font-size: 55px;
+      margin: 10px auto 35px;
+    }
+  }
+
+  .benefit-tile {
+    padding: 0 17px;
+    margin: 0 auto 30px;
+    @include tablet {
+      margin: 0 auto 20px;
+    }
+    @include desktop {
+      margin: 0 auto 30px;
+    }
+
+    i {
+      border: 2px solid $pianoteRed;
+      display: inline-block;
+      color: $pianoteRed;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 35px;
+      line-height: 66px;
+      height: 70px;
+      width: 70px;
+      margin: 0 auto 5px;
+      @include desktop {
+        margin: 0;
+        line-height: 76px;
+        height: 80px;
+        width: 80px;
+        font-size: 40px;
+        float: left;
+      }
+    }
+
+    p {
+      font: 400 13px/1.5em $opensans;
+      margin: 0 auto;
+      max-width: 250px;
+      @include desktop {
+        width: calc(100% - 80px);
+        text-align: left;
+        padding-left: 20px;
+        float: left;
+        max-width: 390px;
+      }
+
+      strong {
+        font-family: $robotocondensed;
+        text-transform: uppercase;
+        color: $pianoteRed;
+        font-size: 20px;
+        line-height: 1.1em;
+        margin: 7px auto;
+        display: inline-block;
+      }
+    }
+  }
+
+}
+
+.personal-teacher {
+  background: #000 center center/cover no-repeat;
+  color: #FFF;
+  position: relative;
+  border-top: 10px solid $pianoteRed;
+  padding: 75px 0;
+  @include tablet {
+    padding: 150px 0;
+  }
+  @include desktop {
+    padding: 180px 0;
+  }
+  @media (min-width: 1800px) {
+    background-size: contain;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 47px/1.1em $robotocondensed;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 70px;
+    }
+    @include desktop {
+      font-size: 90px;
+    }
+  }
+
+  h3 {
+    font: 400 15px/1em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 18px;
+    }
+    @include desktop {
+      font-size: 23px;
+    }
+  }
+}
+
+.teacher-bio {
+  background: #FFF;
+  padding: 30px 10px 0;
+  @include tablet {
+    padding: 40px 15px 0;
+  }
+
+  p {
+    margin: 0 auto;
+    font: 400 14px/1.7em $opensans;
+    @include tablet {
+      column-count: 2;
+      column-gap: 30px;
+      font-size: 14px;
+    }
+    @include desktop {
+      font-size: 17px;
+      column-gap: 130px;
+    }
+  }
+
+  .first-letter {
+    float: left;
+    margin-right: 7px;
+    background: $pianoteRed;
+    border-radius: 5px;
+    color: #fff;
+    font: 900 29px $opensans;
+    text-align: center;
+    width: 44px;
+    line-height: 44px;
+    @include desktop {
+      width: 50px;
+      font-size: 35px;
+      line-height: 50px;
+    }
+  }
+}
+
+.testimonials {
+  border-top: 1px solid #eee;
+  margin-top: 30px;
+  padding: 30px 0 40px;
+  @include tablet {
+    margin-top: 35px;
+    padding: 35px 0 70px;
+  }
+
+  .testimonial {
+    text-align: center;
+    margin: 0 auto 35px;
+    @include tablet {
+      margin: 0 auto;
+    }
+    @include desktop {
+      padding: 0 30px;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
+
+    img {
+      border-radius: 50%;
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+      margin: 0 auto 15px;
+      border: 4px solid #FFF;
+      width: 100%;
+      max-width: 90px;
+    }
+
+    p {
+      font: 400 13px/1.7em $opensans;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 250px;
+      @include tablet {
+        font-size: 14px;
+        max-width: 100%;
+      }
+
+      strong {
+        font-family: $robotocondensed;
+        line-height: 1em;
+        display: block;
+        font-size: 14px;
+        margin: 20px auto 0;
+      }
+
+      .red {
+        color: $pianoteRed;
+        text-transform: uppercase;
+        line-height: 1em;
+        display: block;
+      }
+    }
+  }
+}
+
+.guarantee {
+  color: #000;
+  background: #E9EDF0;
+  padding: 20px 5px;
+  @include tablet {
+    padding: 35px 0;
+  }
+
+  .guarantee-text {
+    padding: 0;
+    text-align: center;
+    @include tablet {
+      text-align: left;
+    }
+
+    h1 {
+      font: 700 20px/1em $robotocondensed;
+      margin: 20px auto 10px;
+      text-transform: uppercase;
+      @include tablet {
+        font-size: 27px;
+        margin: 0 auto 15px;
+      }
+      @include desktop {
+        font-size: 39px;
+        margin: 5px auto 10px;
+      }
+      @include xl {
+        font-size: 44px;
+        margin: 25px auto 20px;
+      }
+    }
+
+    p {
+      font: 400 14px/1.4em $opensans;
+      margin: 0 auto;
+      @include tablet {
+        font-size: 15px;
+        line-height: 1.7em;
+      }
+    }
+  }
+
+  .guarantee-icon {
+    text-align: center;
+    @include tablet {
+      text-align: right;
+    }
+
+    img {
+      width: 100%;
+      max-width: 250px;
+      @include tablet {
+        width: 100%;
+        max-width: 290px;
+      }
+      @include desktop {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+
+.final {
+  background: #171717 center center/cover;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  padding: 60px 0;
+  @include tablet {
+    padding: 90px 0;
+  }
+
+  img {
+    width: 100%;
+    max-width: 260px;
+    @include tablet {
+      max-width: 340px;
+    }
+    @include desktop {
+      max-width: 440px;
+    }
+
+    &.edge {
+      width: 100%;
+      max-width: 130px;
+      margin: 0 auto 10px;
+      @include tablet {
+        max-width: 160px;
+      }
+      @include desktop {
+        max-width: 220px;
+      }
+    }
+  }
+  .countdown {
+
+
+    p {
+      font: 400 14px/1.2em $robotocondensed;
+      margin: 25px auto 0;
+      text-transform: uppercase;
+      color: #fff;
+      @include tablet {
+        font-size: 15px;
+        margin: 35px auto 0;
+      }
+      @include desktop {
+        font-size: 18px;
+      }
+
+    }
+
+    .tzcd-big {
+      text-transform: uppercase;
+      display: inline-block;
+      vertical-align: middle;
+
+      div {
+        float: left;
+        padding: 0 15px 0 0;
+        text-align: center;
+
+        &:last-child {
+          padding-right: 0;
+        }
+
+        h1 {
+          color: #fff;
+          margin: 0 auto;
+          font: 900 28px/1em $opensans;
+          @include tablet {
+            font-size: 34px;
+          }
+        }
+
+        p {
+          font: 700 13px/1em $opensans;
+          color: $pianoteRed;
+          margin: 0 auto;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+
+  h3 {
+    margin: 25px auto;
+    @include tablet {
+      margin: 35px auto;
+    }
+  }
+
+  .join {
+    font-size: 23px;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 300px;
+    @include tablet {
+      font-size: 46px;
+      padding: 17px 0;
+      max-width: 550px;
+    }
+    @include desktop {
+      max-width: 640px;
+    }
+  }
+
+  p.breakdown {
+    font: 400 13px/1.4em $robotocondensed;
+    margin: 25px auto 0;
+    @include tablet {
+      margin: 35px auto 0;
+      font-size: 16px;
+    }
+
+    .red {
+      color: $pianoteRed;
+    }
+
+    .yellow {
+      color: #f6bd52;
+    }
+  }
+
+  .credit-cards {
+    margin: 25px auto 0;
+    @include tablet {
+      margin: 35px auto 0;
+    }
+
+    i {
+      opacity: 0.5;
+      font-size: 40px;
+      margin: 0 5px;
+      @include tablet {
+        font-size: 55px;
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 340px;
+      @include tablet {
+        max-width: 480px;
+      }
+      @include desktop {
+        max-width: 550px;
+      }
+    }
+  }
+
+  .questions {
+    p {
+      margin: 0;
+      opacity: 0.5;
+      max-width: 100%;
+      font-size: 12px;
+      @include tablet {
+        font-size: 13px;
+      }
+
+      a {
+        color: inherit;
+        display: inline-block;
+      }
+    }
+  }
+}
