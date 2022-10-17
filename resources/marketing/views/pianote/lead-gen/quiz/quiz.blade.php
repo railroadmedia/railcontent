@@ -26,19 +26,9 @@
         "joinVersion" => true
     ])
 
-    <section class="py-32 md:py-48 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
-        <div class="max-w-md md:max-w-4xl mx-auto text-center text-white px-6 lg:px-0">
-            <i class="fas fa-spinner fa-spin-pulse text-5xl sm:text-7xl text-pianote"></i>
-            <h2 class="font-extrabold mt-2 mb-6">You're almost there!</h2>
-            <p class="mb-4">
-                Please enter your email address to get your personality result. We’ll also send you <br class="hidden md:inline">some free lessons related to your piano player personality! Don’t worry, we won’t <br class="hidden md:inline">share your email with anyone, and you can unsubscribe at any time.
-            </p>
-            @include('pianote.lead-gen._sign-up-form', [
-                "formName" => 'Personality Quiz',
-                "formId" => "Pianote - Engagement - Trigger - Personality Quiz - Web Form",
-                'buttonText' => 'Show my results',
-                'disclaimerColor' => '#D0E2E7'
-            ])
+    <section class="py-5 sm:py-12 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
+        <div class="container max-w-6xl mx-auto text-center text-white px-6 lg:px-0">
+            <div class="typeform-widget" data-url="https://form.typeform.com/to/VgZGeh8j?typeform-medium=embed-snippet" style="width: 100%; height: 900px;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
         </div>
     </section>
 

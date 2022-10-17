@@ -42,7 +42,7 @@
     <meta property="og:title" content="Perfect Piano Practice Live Bootcamp | Pianote">
     <meta name="description" content="Accelerate your progress on the piano with a FREE 90-minute live lesson from Lisa Witt"/>
     <meta property="og:description" content="Accelerate your progress on the piano with a FREE 90-minute live lesson from Lisa Witt">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/share_image.jpg">
+    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 @endsection
@@ -317,12 +317,6 @@
                             </em>
                         </p>
                     </div>
-                    @include('pianote.lead-gen._sign-up-form', [
-                "formId" => 'Pianote - Engagement - Trigger - Perfect Practice Bootcamp - Web Form',
-                "formName" => 'Perfect Practice Bootcamp',
-                        "buttonText" => "Save my spot!",
-                        "stacked" => true
-                    ])
                 </div>
             </div>
         </div>
@@ -463,13 +457,6 @@
                 Accelerate your progress on the piano <br class="inline sm:hidden">
                 with a FREE 90-minute live lesson from Lisa Witt
             </p>
-
-            @include('pianote.lead-gen._sign-up-form', [
-                "formId" => 'Pianote - Engagement - Trigger - Perfect Practice Bootcamp - Web Form',
-                "formName" => 'Perfect Practice Bootcamp',
-                "buttonText" => "Save my spot!",
-                "oneLineLg" => true,
-            ])
         </div>
     </section>
 

@@ -51,7 +51,7 @@
            <div class="inline-block align-middle text-center">
                <img class="inline-block align-middle mr-2 h-8 filter saturate-0 brightness-0" src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/october/logo_black.png" alt="promo logo">
               {{-- <h5 class="leading-none font-bebas inline-block align-middle mx-auto text-2xl mr-2 h-8 py-1.5 px-2 bg-black rounded-md">Try Pianote</h5> --}}
-               <p class="leading-none inline-block align-middle mx-auto text-xs text-left mt-1"><strong>PRACTICE BETTER. PLAYER BETTER.<br> 5 BONUSES WORTH $262</strong></p>
+               <p class="leading-none inline-block align-middle mx-auto text-xs text-left mt-1"><strong>PRACTICE BETTER. PLAYER BETTER.<br> 6 BONUSES WORTH $262</strong></p>
            </div>
        </div>
    </a>
