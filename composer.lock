@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0623639f9f03e94dc9807697fb949d2",
+    "content-hash": "e64c3a6f756598074ad941227097abe7",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8379,16 +8379,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.7",
+            "version": "v4.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "f040e3b65e255d61106a28e2ad70f38e40deb84b"
+                "reference": "1a725e334d8f503cf1f9ead2d053b37d4e272c8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/f040e3b65e255d61106a28e2ad70f38e40deb84b",
-                "reference": "f040e3b65e255d61106a28e2ad70f38e40deb84b",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/1a725e334d8f503cf1f9ead2d053b37d4e272c8c",
+                "reference": "1a725e334d8f503cf1f9ead2d053b37d4e272c8c",
                 "shasum": ""
             },
             "require": {
@@ -8434,9 +8434,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.7"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0"
             },
-            "time": "2022-10-17T19:26:39+00:00"
+            "time": "2022-10-17T20:14:36+00:00"
         },
         {
             "name": "railroad/referral",
@@ -16050,10 +16050,18 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/railtracker",
+            "version": "4.0.9999999.9999999-dev",
+            "alias": "4.0.7",
+            "alias_normalized": "4.0.7.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20
+        "railroad/musora-api": 20,
+        "railroad/railtracker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

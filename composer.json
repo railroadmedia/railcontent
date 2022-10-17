@@ -41,7 +41,7 @@
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0",
         "railroad/points": "1.0.*",
-        "railroad/railtracker": "4.0.*"
+        "railroad/railtracker": "v4.0.x-dev as 4.0.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
