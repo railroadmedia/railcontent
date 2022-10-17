@@ -21,7 +21,6 @@ import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
-import VimeoVideo from './vue/components/VimeoVideo/VimeoVideo.vue';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -240,7 +239,6 @@ app.component('AppContainer', AppContainer)
     .component('ContentCatalogue', ContentCatalogue)
     .component('PlayAlongs', PlayAlongs)
     .component('GearCarousel', GearCarousel)
-    .component('VimeoVideo', VimeoVideo)
     .component('VideoResources', VideoResources)
     .component('ContentLessonActionButtons', ContentLessonActionButtons)
     .component('AssignmentsContainer', AssignmentsContainer)
