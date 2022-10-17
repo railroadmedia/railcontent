@@ -51,6 +51,7 @@ export default (function () {
         }
 
         function closeModal() {
+            console.log('closeModal called')
             const modalOverlay = document.getElementById('modalOverlay');
             const modalDialogs = document.querySelectorAll('.modal');
 
