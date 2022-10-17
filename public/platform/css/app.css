@@ -16448,11 +16448,6 @@ content-catalogue, transition {
     padding-bottom: 50%;
   }
 }
-@media screen and (max-width: 767px) {
-  .gq-large-thumb {
-    display: none;
-  }
-}
 /**
 * Make a horizontal gradient with 2 colors
 *
@@ -16915,7 +16910,7 @@ content-catalogue, transition {
 }
 
 .sheet-music-col {
-  flex: 0 0 200px;
+  flex: 0 0 250px;
 }
 
 .login-col {
@@ -22928,9 +22923,6 @@ a:visited{
 .tw-border-t{
   border-top-width: 1px !important;
 }
-.tw-border-b-\[3px\]{
-  border-bottom-width: 3px !important;
-}
 .tw-border-t-\[1px\]{
   border-top-width: 1px !important;
 }
@@ -24713,6 +24705,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(128 160 185 / var(--tw-text-opacity)) !important;
 }
+.tw-dark .dark\:tw-text-\[\#445F74\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
+}
 .tw-dark .dark\:tw-text-\[\#7E9AB1\]{
   --tw-text-opacity: 1 !important;
   color: rgb(126 154 177 / var(--tw-text-opacity)) !important;
@@ -24728,10 +24724,6 @@ a:visited{
 .tw-dark .dark\:tw-text-black{
   --tw-text-opacity: 1 !important;
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-}
-.tw-dark .dark\:tw-text-\[\#445F74\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
@@ -24751,9 +24743,6 @@ a:visited{
 }
 .tw-dark .dark\:tw-opacity-20{
   opacity: 0.2 !important;
-}
-.tw-dark .dark\:tw-opacity-\[\.85\]{
-  opacity: .85 !important;
 }
 .tw-dark .dark\:tw-invert{
   --tw-invert: invert(100%) !important;
@@ -25300,6 +25289,9 @@ a:visited{
   }
   .md\:tw-hidden{
     display: none !important;
+  }
+  .md\:tw-h-\[276px\]{
+    height: 276px !important;
   }
   .md\:tw-h-full{
     height: 100% !important;
@@ -26046,6 +26038,10 @@ a:visited{
   .xl\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
+  }
+  .xl\:tw-text-4xl{
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
   }
   .xl\:tw-text-\[30px\]{
     font-size: 30px !important;

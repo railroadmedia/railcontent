@@ -35,8 +35,9 @@ mix
 
 mix.webpackConfig(webpack => {
     return {
+        // target: ['web', 'es5'],
         output: {
-            publicPath: ASSET_URL
+            publicPath: ASSET_URL,
         },
         plugins: [
             new webpack.DefinePlugin({
