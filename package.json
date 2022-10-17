@@ -38,6 +38,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "laravel-mix": "^6.0.43",
         "laravel-mix-merge-manifest": "^2.0.0",
+        "@parcel/transformer-sass": "^2.0.1",
         "postcss": "^8.3.9",
         "prettier": "^2.5.1",
         "prettier-plugin-tailwindcss": "^0.1.4",
