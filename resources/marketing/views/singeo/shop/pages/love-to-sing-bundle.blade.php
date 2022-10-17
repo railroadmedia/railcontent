@@ -18,7 +18,7 @@
     $bonuses = [
         [
             'name' => 'Singeo Annual Membership',
-            'price' => '$' . \App\Prices::$singeoMembershipAnnual . '/yr',
+            'price' => '$' . SingeoPrices::$singeoMembershipAnnual . '/yr',
             'priceColor' => 'orange',
             'savedPrice' => '0',
             'desc' => 'Get ready to sing like you’ve never sung before! Find your confident voice with unlimited access to your step-by-step lesson plan, vocal routines, LIVE Q&A sessions with your teachers, and a karaoke song library with hundreds of your favorite songs to practice along with! You’ll be hitting higher notes, sounding stronger with better breath support, See how proper training, fun practice tools, and regular guidance will take your voice to the next level (and beyond)!',

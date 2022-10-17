@@ -1,10 +1,8 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
-    <title>Winter Recital | Singeo</title>
-    <meta property="og:title" content="Singeo Winter Recital">
+@section('global-head')
+    <title>Singeo Recital</title>
+    <meta property="og:title" content="Singeo Recital">
 
     <meta name="description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
@@ -13,8 +11,8 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg" style="display: none;">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
 
@@ -202,22 +200,24 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav")
     <div class="promo-banner text-white" style="background:linear-gradient(to bottom, #01325b, #01101d);">
         <div class="container mx-auto relative z-10">
             <div class="text text-center">
-                <img class="logo" src="https://drumeo-assets.s3.amazonaws.com/promos/november/recital-logo.svg">
+                {{--<img class="logo" src="https://drumeo-assets.s3.amazonaws.com/promos/november/recital-logo.svg">--}}
                 <p class="leading-none">
                     <strong>Share your progress with the community!</strong> <br>
-                        Submission deadline <strong class="text-singeo">November 26th, 2021.</strong></p>
+                        Submission deadline <strong class="text-singeo">June 15th, 2022.</strong></p>
             </div>
         </div>
     </div>
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
-            <h3 class="leading-tight mb-5 md:mb-10"><strong>
+            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://drumeo-assets.s3.amazonaws.com/promos/may/recitals-logo2.png">
+            <h3 class="leading-tight"><strong>
                     Share your progress with Lisa, <br>Julia, and the Singeo Community!</strong></h3>
+            <a class="join blue smaller anchor-slide my-5 md:my-7" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-4xl">
                 <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-4/12 lg:w-5/12 md:order-1 mb-5 md:mb-0 justify-center">
                     <img class="h-60 md:h-auto" src="https://singeo.s3.amazonaws.com/sales/promos/november/recitals-spread.png">
@@ -237,7 +237,7 @@
                         <br><br>
                         That’s it!
                         <br><br>
-                        Then all that’s left is to join Lisa, Julia, and the rest of the Singeo community to cheer on your peers at the Christmas Recitals in December, dates to be announced soon!
+                        Then all that’s left is to join Lisa, Julia, and the rest of the Singeo community to cheer on your peers at the recitals, dates to be announced soon!
                         <br><br>
                         We can’t wait to see your submission. Don’t be shy! Submit today!</p>
                 </div>
@@ -246,6 +246,7 @@
     </section>
     <section class="py-5 md:py-10 lg:py-16" style="background:#000 url(https://singeo.s3.amazonaws.com/sales/promos/november/recitals-bg.jpg) center center/cover;">
         <div class="container mx-auto max-w-3xl">
+            <div id="form" class="anchor"></div>
             <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSfXmMAynu5wgCebw2OOYKusI6yZbvcQYj2sIvX6DV_HbB2UkQ/viewform?embedded=true" height="2177" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div class="max-w-2xl mx-auto px-5 md:px-3 mt-5">
                 <a class="join w-full mx-auto" href="/members">RETURN TO MEMBER’S AREA &raquo;</a>
@@ -255,5 +256,5 @@
 
     @include("singeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/assets/marketing/nav-footer.js"></script>
+    <script src="/marketing/parcel/singeo/nav-footer.js"></script>
 @stop

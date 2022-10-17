@@ -1,0 +1,1143 @@
+@import "./_variables";
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fff;
+  color: #000;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -50px;
+  visibility: hidden;
+}
+
+.join {
+  &.outline {
+    background: transparent;
+    border: 2px solid $pianoteRed;
+
+    &:hover {
+      background: $pianoteRed;
+      color: #000;
+    }
+
+    &.white {
+      border-color: #fff;
+
+      &:hover {
+        background: #fff;
+        color: #000;
+      }
+    }
+  }
+
+  &.smaller {
+
+    font-size: 20px;
+    padding: 13px 25px;
+    @include tablet {
+      padding: 13px 40px;
+
+    }
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: $opensans;
+}
+
+h1 {
+  font-size: 25px;
+  line-height: 1.1em;
+  @include tablet {
+    font-size: 30px;
+  }
+  @include desktop {
+    font-size: 39px;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  line-height: 1.1em;
+  @include tablet {
+    font-size: 25px;
+  }
+  @include desktop {
+    font-size: 30px;
+  }
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1em;
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktop {
+    font-size: 21px;
+  }
+}
+
+h4 {
+  font-size: 14px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktop {
+    font-size: 18px;
+  }
+}
+
+img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  -ms-interpolation-mode: bicubic;
+}
+
+button {
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1;
+}
+
+[type=reset], [type=submit], button, html [type=button] {
+  -webkit-appearance: button;
+}
+
+.text-red {
+  color: $pianoteRed;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+.header {
+  text-align: center;
+  background: #000c18;
+  color: #fff;
+  position: relative;
+
+  .container {
+    background: #000 30% top/cover no-repeat;
+    padding: 20px 15px;
+    width: 100%;
+    max-width: 1400px;
+    @include tablet {
+      background-position: 40% top;
+      padding: 40px 20px 30px;
+    }
+    @include desktop {
+      background-position: center top;
+      padding: 50px 15px 40px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 230px;
+    @include tablet {
+      max-width: 350px;
+    }
+    @include desktop {
+      max-width: 430px;
+    }
+  }
+
+  .play-vimeo {
+
+    cursor: pointer;
+    outline: none;
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    border-radius: 200px;
+    line-height: 1em;
+    font-size: 29px;
+    padding: 22px;
+    margin: 80px auto;
+    @include tablet {
+      font-size: 35px;
+      padding: 26px 27px;
+      border-width: 4px;
+      margin: 160px auto;
+    }
+    @include desktop {
+      font-size: 39px;
+      padding: 29px 30px;
+      margin: 170px auto;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  h2 {
+    text-shadow: 0 0 15px #000;
+  }
+
+  .join {
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    @include tablet {
+      max-width: 890px;
+      margin: 30px auto 20px;
+    }
+  }
+
+
+  p {
+    font: 400 14px/1.5em $opensans;
+    text-shadow: 0 0 15px #000;
+    margin: 0 auto 15px;
+    @include tablet {
+      font-size: 16px;
+      margin: 10px auto 0;
+    }
+    @include desktop {
+      font-size: 18px;
+    }
+
+    &.breakdown {
+      font: 400 13px/1.5em $robotocondensed;
+      margin: 0 auto;
+      @include tablet {
+        font-size: 16px;
+      }
+
+      .red {
+        color: $pianoteRed;
+      }
+
+      .yellow {
+        color: #f6bd52;
+      }
+    }
+  }
+}
+
+.more-songs {
+  background: #000c18;
+  color: #fff;
+  padding: 25px 10px;
+  @include tablet {
+    padding: 30px 0;
+  }
+
+  img {
+    float: right;
+    width: 140px;
+    padding: 0 0 0 15px;
+    @include tablet {
+      width: 270px;
+      padding: 0 0 0 30px;
+    }
+    @include desktop {
+      width: 350px;
+      padding: 0 0 0 40px;
+    }
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6em;
+    @include tablet {
+      font-size: 15px;
+    }
+    @include desktop {
+      font-size: 17px;
+    }
+  }
+}
+
+.two-video-example {
+  background: #000c18;
+  color: #fff;
+  padding: 30px 0 20px;
+  @include tablet {
+    padding: 40px 0;
+  }
+  @include desktop {
+    padding: 50px 0;
+  }
+
+  p {
+    max-width: 650px;
+    margin: 25px auto;
+    line-height: 1.6em;
+  }
+
+  .thumb {
+    transition: all .3s;
+
+    &:hover {
+      .vid-wrap {
+        border-color: lighten(#1f4261, 15%);
+        opacity: 0.75;
+      }
+
+      p {
+        color: lighten(#1f4261, 15%);
+      }
+    }
+
+    &.active,
+    &.active:hover {
+      .vid-wrap {
+        border-color: $pianoteRed;
+        opacity: 1;
+      }
+
+      p {
+        color: #fff;
+
+        strong {
+          color: $pianoteRed;
+        }
+      }
+    }
+
+    .vid-wrap {
+      opacity: 0.7;
+      border: 4px solid #1f4261;
+      border-radius: 10px;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      cursor: pointer;
+
+      video {
+        width: 100%;
+        outline: none;
+        display: block;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0 auto 20px;
+      color: #1f4261;
+      @include tablet {
+        margin: 0 auto;
+      }
+      @include desktop {
+        font-size: 15px;
+      }
+
+      em {
+        font-weight: 700;
+      }
+    }
+  }
+
+}
+
+.thumb-grid {
+  background: #000c18;
+  color: #fff;
+  padding: 30px 0;
+  @include tablet {
+    padding: 40px 0;
+  }
+  @include desktop {
+    padding: 50px 0;
+  }
+
+  p {
+    max-width: 650px;
+    margin: 25px auto;
+    line-height: 1.6em;
+  }
+
+  .image-grid-item {
+    padding: 20px 10px 0;
+    text-align: left;
+
+    @include desktop {
+      padding: 20px 15px 0;
+    }
+
+    img {
+      border: 4px solid $pianoteRed;
+      border-radius: 10px;
+      margin: 0 auto 20px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.play-songs {
+  background: #000c18;
+  color: #fff;
+  padding: 30px 0;
+  @include tablet {
+    padding: 40px 0;
+  }
+  @include desktop {
+    padding: 50px 0;
+  }
+
+  h1 {
+    margin: 0 auto 35px;
+    @include tablet {
+      margin: 0 auto 50px;
+    }
+    @include desktop {
+      margin: 0 auto 60px;
+    }
+  }
+
+  .benefit-tile {
+    padding: 0 17px;
+    margin: 0 auto 30px;
+    @include tablet {
+      margin: 0 auto 20px;
+    }
+    @include desktop {
+      margin: 0 auto 30px;
+    }
+
+    i {
+      border: 2px solid $pianoteRed;
+      display: inline-block;
+      color: $pianoteRed;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 35px;
+      line-height: 66px;
+      height: 70px;
+      width: 70px;
+      margin: 0 auto 5px;
+      @include desktop {
+        margin: 0;
+        line-height: 76px;
+        height: 80px;
+        width: 80px;
+        font-size: 40px;
+        float: left;
+      }
+    }
+
+    p {
+      font: 400 13px/1.5em $opensans;
+      margin: 0 auto;
+      max-width: 250px;
+      @include desktop {
+        width: calc(100% - 80px);
+        text-align: left;
+        padding-left: 20px;
+        float: left;
+        max-width: 390px;
+        font-size: 14px;
+      }
+
+      strong {
+        color: $pianoteRed;
+        line-height: 1.1em;
+        margin: 7px auto;
+        display: inline-block;
+      }
+    }
+  }
+
+}
+
+.personal-teacher {
+  background: #000c18 center top/650px no-repeat;
+  color: #FFF;
+  position: relative;
+  border-top: 7px solid $pianoteRed;
+  padding: 75px 0 30px;
+  @include tablet {
+    padding: 150px 0 50px;
+    background-size: 1100px;
+  }
+  @include desktop {
+    padding: 180px 0 80px;
+    background-size: 1600px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 47px/1.1em $robotocondensed;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 70px;
+    }
+    @include desktop {
+      font-size: 90px;
+    }
+  }
+
+  h3 {
+    font: 400 15px/1em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 18px;
+    }
+    @include desktop {
+      font-size: 23px;
+    }
+  }
+
+  p {
+    max-width: 510px;
+    text-align: left;
+    line-height: 1.6em;
+    margin: 60px auto 0;
+    @include desktop {
+
+      margin: 130px auto 0;
+    }
+
+    img {
+      width: 110px;
+    }
+  }
+}
+
+
+.guarantee {
+  background: #000c18;
+  color: #fff;
+  padding: 20px 5px;
+  @include tablet {
+    padding: 35px 0;
+  }
+
+  .guarantee-badge {
+    width: 120px;
+    @include tablet {
+      width: 140px;
+      order: 1;
+    }
+    @include desktop {
+      width: 250px;
+    }
+  }
+
+  h1 {
+    line-height: 1.2em;
+  }
+
+  .flex-container {
+    margin: 15px auto 0;
+    padding: 0 15px;
+    @include tablet {
+      padding: 0;
+      margin: 25px auto 0;
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 640px;
+    }
+    @include desktop {
+      margin: 30px auto 0;
+      max-width: 970px;
+    }
+
+    .text-wrap {
+      margin: 15px auto 0;
+      @include tablet {
+        margin: 0;
+        padding-right: 15px;
+      }
+      @include desktop {
+        padding-right: 30px;
+      }
+
+      i {
+        font-size: 14px;
+        @include tablet {
+          font-size: 19px;
+        }
+      }
+
+      h3, h4 {
+        line-height: 1.7em;
+      }
+
+      h3 {
+        margin: 0 auto 15px;
+        @include tablet {
+          margin: 0 auto 20px;
+        }
+        @include desktop {
+          margin: 0 auto 25px;
+        }
+      }
+    }
+  }
+
+}
+
+
+.final {
+  background: #171717 center center/cover;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  padding: 60px 0;
+  @include tablet {
+    padding: 90px 0;
+  }
+
+  img {
+    width: 100%;
+    max-width: 260px;
+    @include tablet {
+      max-width: 340px;
+    }
+    @include desktop {
+      max-width: 440px;
+    }
+
+    &.edge {
+      width: 100%;
+      max-width: 130px;
+      margin: 0 auto 10px;
+      @include tablet {
+        max-width: 160px;
+      }
+      @include desktop {
+        max-width: 220px;
+      }
+    }
+  }
+
+  .countdown {
+
+
+    p {
+      font: 400 14px/1.2em $robotocondensed;
+      margin: 25px auto 0;
+      text-transform: uppercase;
+      color: #fff;
+      @include tablet {
+        font-size: 15px;
+        margin: 35px auto 0;
+      }
+      @include desktop {
+        font-size: 18px;
+      }
+
+    }
+
+    .tzcd-big {
+      text-transform: uppercase;
+      display: inline-block;
+      vertical-align: middle;
+
+      div {
+        float: left;
+        padding: 0 15px 0 0;
+        text-align: center;
+
+        &:last-child {
+          padding-right: 0;
+        }
+
+        h1 {
+          color: #fff;
+          margin: 0 auto;
+          font: 900 28px/1em $opensans;
+          @include tablet {
+            font-size: 34px;
+          }
+        }
+
+        p {
+          font: 700 13px/1em $opensans;
+          color: $pianoteRed;
+          margin: 0 auto;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+
+  h2 {
+    margin: 25px auto;
+    @include tablet {
+      margin: 35px auto;
+    }
+  }
+
+  .join {
+    width: 100%;
+    max-width: 300px;
+    @include tablet {
+      max-width: 550px;
+    }
+    @include desktop {
+      max-width: 640px;
+    }
+  }
+
+  p.breakdown {
+    font: 400 13px/1.4em $robotocondensed;
+    margin: 25px auto 0;
+    @include tablet {
+      margin: 35px auto 0;
+      font-size: 16px;
+    }
+
+    .red {
+      color: $pianoteRed;
+    }
+
+    .yellow {
+      color: #f6bd52;
+    }
+  }
+
+  .credit-cards {
+    margin: 25px auto 0;
+    @include tablet {
+      margin: 35px auto 0;
+    }
+
+    i {
+      opacity: 0.5;
+      font-size: 40px;
+      margin: 0 5px;
+      @include tablet {
+        font-size: 55px;
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 340px;
+      @include tablet {
+        max-width: 480px;
+      }
+      @include desktop {
+        max-width: 550px;
+      }
+    }
+  }
+
+  .questions {
+    p {
+      margin: 0;
+      opacity: 0.5;
+      max-width: 100%;
+      font-size: 12px;
+      @include tablet {
+        font-size: 13px;
+      }
+
+      a {
+        color: inherit;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483001;
+  display: none;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    z-index: 1006;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: none;
+    background-color: #fefefe;
+    position: relative;
+    top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: auto;
+
+    width: 90%;
+    max-width: 75rem;
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    @include tablet {
+      right: auto;
+      left: auto;
+      margin: 0 auto;
+    }
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    p {
+      margin: 5px auto;
+    }
+
+    .join {
+      margin: 10px auto;
+    }
+
+    &.annual-pitch {
+      max-width: 740px;
+      padding: 15px 20px;
+      @include tablet {
+        padding: 15px 30px;
+      }
+      @include desktop {
+        padding: 15px 50px;
+      }
+
+      h3 {
+        line-height: 1.3em;
+      }
+
+      .flex-video {
+        margin: 20px auto;
+        border-radius: 7px;
+      }
+
+      .join {
+        margin: 0 auto;
+        @include tablet {
+          width: 75%;
+        }
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+
+    &.coach-wrap {
+      border-radius: 10px;
+      text-align: center;
+      overflow: visible;
+      max-width: 330px;
+      @include tablet {
+
+        max-width: 450px;
+      }
+
+      .top-image {
+        position: relative;
+        background: #333 center top/cover no-repeat;
+        padding-bottom: 75%;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .bottom-details {
+        user-select: none;
+        padding: 15px;
+        @include tablet {
+
+          padding: 20px;
+        }
+
+        h3 {
+          text-transform: uppercase;
+        }
+
+        p {
+          margin: 0 auto 3px;
+          @include tablet {
+
+            margin: 7px auto;
+          }
+
+          strong {
+            font-weight: 900;
+          }
+
+          .text-red {
+            text-transform: uppercase;
+          }
+        }
+
+        .bio {
+          margin: 0 auto;
+          text-align: left;
+          line-height: 1.3em;
+          @include tablet {
+
+            line-height: 1.5em;
+          }
+        }
+      }
+
+      .next-prev {
+        position: absolute;
+        top: 270px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 40px;
+        @include tablet {
+
+          font-size: 70px;
+        }
+
+        &.fa-angle-left {
+          left: -21px;
+          @include tablet {
+
+            left: -50px;
+          }
+
+        }
+
+        &.fa-angle-right {
+          right: -21px;
+          @include tablet {
+            right: -50px;
+          }
+        }
+      }
+    }
+  }
+}
+.button {
+  user-select: none;
+  border-radius: 900px;
+  background: $pianoteRed;
+  color: #fff;
+  border: 2px solid $pianoteRed;
+  font: 700 15px/1em $robotocondensed;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 11px 0;
+
+  &:hover {
+    background: lighten($pianoteRed, 10%);
+    border-color: lighten($pianoteRed, 10%);
+    color: #fff;
+  }
+
+  &.complete,
+  &.outline.complete {
+    background: #00f677;
+    color: #000718;
+    border-color: #00f677;
+  }
+
+  &.outline {
+    background: transparent;
+    color: $pianoteRed;
+
+    &:hover {
+      background: lighten($pianoteRed, 10%);
+      color: #fff;
+    }
+
+    &.inactive {
+      color: #2e4153;
+      border-color: #2e4153;
+
+      &:hover {
+        background: #2e4153;
+        color: #000718;
+      }
+    }
+
+    &.white {
+      color: #fff;
+      border-color: #fff;
+
+      &:hover {
+        background: #fff;
+        border-color: #fff;
+        color: #000718;
+      }
+    }
+  }
+}
+
+.infusion-form input,
+.infusion-form button {
+  font: 400 18px/45px $opensans;
+  height: 45px;
+  color: #999;
+  border-radius: 100px;
+  padding: 7px 20px;
+  margin: 0 auto 10px;
+  transition: all .2s ease-in;
+  box-shadow: none;
+  text-align: inherit;
+  border: none;
+  @include tablet {
+    font-size: 19px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0 auto 15px;
+  }
+  @include desktop {
+    font-size: 23px;
+  }
+}
+
+.infusion-form button {
+  font-family: $robotocondensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 auto 15px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  background: $pianoteRed;
+
+  &:hover {
+    background: lighten($pianoteRed, 10%);
+  }
+}
+
+
+.thank-you-box {
+  height: auto;
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .4s ease-in;
+  display: block;
+  overflow: hidden;
+
+  &.active {
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    padding: 15px;
+    @include tablet {
+      padding: 20px;
+    }
+    @include desktop {
+      padding: 30px;
+    }
+  }
+
+  p {
+    font: 400 15px/1.4em $opensans;
+    margin: 0 auto;
+    @include tablet {
+
+      font-size: 19px;
+    }
+    @include desktop {
+
+      font-size: 23px;
+    }
+
+    em {
+      line-height: 1.4em;
+      max-width: 550px;
+      display: inline-block;
+      font-size: 12px;
+      @include tablet {
+
+        font-size: 14px;
+      }
+    }
+  }
+
+  .social-media a {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 3px 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 26px;
+    @include desktop {
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      font-size: 35px;
+      margin: 25px 10px 0;
+    }
+  }
+}
+
+.disclaimer {
+  max-width: 470px;
+
+  i {
+    width: 40px;
+    font-size: 21px;
+    @include tablet {
+      font-size: 29px;
+    }
+  }
+
+  span {
+    font: italic 400 12px/1.4em $opensans;
+    width: calc(100% - 40px);
+  }
+}

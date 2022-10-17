@@ -39,53 +39,58 @@
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
             "linkUrl" => "/login",
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
             "linkUrl" => "/contact"
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Singeo",
             "linkIcon" => "icon-courses",
             "linkUrl" => "/",
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "The Chorus",
             "linkIcon" => "fas fa-comment-alt-edit",
             "linkUrl" => "/chorus",
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "4 Vocal Exercises",
             "linkIcon" => "fas fa-microphone-alt",
             "linkUrl" => "/improve-any-voice",
         ])
         <span class="shim"></span>
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/c/singeoofficial",
             "externalLink" => true
         ])
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://www.facebook.com/singeoofficial/",
             "externalLink" => true
         ])
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://www.instagram.com/singeoofficial/",
             "externalLink" => true
         ])
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
+            "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
+            "linkUrl" => "https://www.tiktok.com/@singeoofficial",
+            "externalLink" => true
+        ])
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.singeo.com/",
             "externalLink" => false

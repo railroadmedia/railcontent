@@ -1,8 +1,6 @@
 @extends('singeo.lead-gen.lead-gen-layout')
 
 @section('styles')
-    @parent
-
     <meta name="robots" content="noindex">
     <title>Singeo Holiday Karaoke | Singeo</title>
     <meta property="og:title" content="Singeo Holiday Karaoke | Singeo">
@@ -11,7 +9,7 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/holiday-karaoke/">
 
-    <link href="{{ asset('/assets/marketing/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}" rel="stylesheet">
     <style>
         .edge-pitch {top:40px;}
         @media (min-width: 768px) {  .edge-pitch {top:56px;}  }
@@ -57,7 +55,7 @@
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
-                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ \App\Prices::$songs - 30 }}+ more songs + world-class vocal lessons <br>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ SingeoPrices::$songs - 30 }}+ more songs + world-class vocal lessons <br>
                     inside Singeo. Click for a FREE trial.</p>
             </div>
         </div>
@@ -330,7 +328,7 @@
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>
                 <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal px-3">
-                    Get {{ \App\Prices::$songs }}+ songs & world-class vocal lessons inside <br class="hidden md:inline">
+                    Get {{ SingeoPrices::$songs }}+ songs & world-class vocal lessons inside <br class="hidden md:inline">
                     Singeo. Click below to try a free trial.</h4>
                 <a class="join" href="/choose-your-trial">Free Trial &raquo;</a>
             </div>

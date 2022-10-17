@@ -69,7 +69,7 @@
     @endphp
 @endif
 
-@extends('global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     @parent
@@ -82,9 +82,9 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="/assets/marketing/play-beautiful-piano.css" rel="stylesheet">
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="/marketing/parcel/pianote/play-beautiful-piano.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
 
@@ -118,7 +118,7 @@
             margin-left: -3px;
             z-index: 10;
         }
-    
+
         /* circles in the middle */
         .timeline::after {
             counter-increment: timeline;
@@ -161,7 +161,7 @@
         .timeline-number.left {
             left: -36px;
         }
-    
+
         .timeline-img {
             filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
             border:1px solid #E4E4E4;
@@ -282,7 +282,7 @@
             }
 
             .timeline-number.right {
-                top: -4px;    
+                top: -4px;
                 left: unset;
                 right: -35px;
             }
@@ -330,7 +330,7 @@
 @endsection
 
 @section('global-body')
-    @include('sales.nav', [
+    @include('pianote.sales.nav', [
         "cartVersion" => true
     ])
 
@@ -355,7 +355,7 @@
                         <div class="flex-1 relative">
                             <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
                             {{--<div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">--}}
-                                {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (App\Prices::$powerOfChords / App\Prices::$powerOfChordsFull))) }}%--}}
+                                {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (PianotePrices::$powerOfChords / PianotePrices::$powerOfChordsFull))) }}%--}}
                             {{--</div>--}}
                         </div>
                         <div class="flex-1 flex items-center pl-2">
@@ -381,7 +381,7 @@
                 <div class="relative mb-6">
                     <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
                     {{--<div class="text-pianote text-xs text-center mt-2">--}}
-                        {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (App\Prices::$powerOfChords / App\Prices::$powerOfChordsFull))) }}%--}}
+                        {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (PianotePrices::$powerOfChords / PianotePrices::$powerOfChordsFull))) }}%--}}
                     {{--</div>--}}
                 </div>
                 <div class="flex-1 flex items-center md:pl-2 justify-center">
@@ -405,7 +405,7 @@
                         Even classical music that’s 100s of years old. <br><br>
                         Chords are the foundation of music. When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.
                         <br><br>
-                        Beyond that -- chords allow you to start writing your own music and improvising on the piano. 
+                        Beyond that -- chords allow you to start writing your own music and improvising on the piano.
                         <br><br>
                         It all comes down to chords.
                     </p>
@@ -418,7 +418,7 @@
 
         {{-- diagonal line --}}
         <div class="h-28 absolute bottom-0 left-0 right-0 z-10" style="background: linear-gradient(to top left, #F4F8FB calc(50% - 1px), #F4F8FB , #fff calc(50% + 1px));"></div>
-    </section>  
+    </section>
 
     <section class="pb-10 pt-20 md:py-28 px-4 sm:px-6" style="background: #F4F8FB;">
         <div class="max-w-5xl mx-auto">
@@ -427,7 +427,7 @@
             </h2>
             <div class="timeline-container relative mx-auto -mb-16 md:-mb-16 lg:-mb-28">
                 @foreach ($steps as $key => $step)
-                    @if($step['position'] === 'right') 
+                    @if($step['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 {{--gap-2 md:gap-12 lg:gap-20--}} mb-16 md:mb-0 md:mb-16 lg:mb-28 pl-6 md:pl-0">
                             <div class="content relative flex items-center justify-center pr-1 md:pr-6 lg:pr-10">
                                 <div class="relative w-full">
@@ -492,7 +492,7 @@
                         Downloadable Cheat Sheats
                     </h5>
                     <p style="color:#2A2F34;">
-                        Print every exercise + chord formulas to see better results. 
+                        Print every exercise + chord formulas to see better results.
                     </p>
                 </div>
                 <div class="flex-1">
@@ -523,7 +523,7 @@
                 {{--<p>--}}
                     {{--<span class="font-extrabold">Every Chord. Every Scale. Every Key.</span> <br><br>--}}
                     {{--This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key. <br><br>--}}
-                    {{--Regular ${{ \App\Prices::$chordsScalesBookFull }}. It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.) <br><br>--}}
+                    {{--Regular ${{ PianotePrices::$chordsScalesBookFull }}. It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.) <br><br>--}}
                 {{--</p>--}}
             {{--</div>--}}
             {{--<div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">--}}
@@ -608,10 +608,10 @@
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<s style="color:#BBBBBF;">${{ \App\Prices::$powerOfChordsFull }}</s>--}}
+                                {{--<s style="color:#BBBBBF;">${{ PianotePrices::$powerOfChordsFull }}</s>--}}
                                 {{--<strong>${{ $productPrice }}</strong></h1>--}}
                             {{--<p class="text-sm my-4">--}}
-                                {{--<em>Save {{ round(100 - (100 * (App\Prices::$powerOfChords / App\Prices::$powerOfChordsFull))) }}% for a limited time.</em>--}}
+                                {{--<em>Save {{ round(100 - (100 * (PianotePrices::$powerOfChords / PianotePrices::$powerOfChordsFull))) }}% for a limited time.</em>--}}
                             {{--</p>--}}
                             {{--<div class="mt-4 join smaller w-full transition-opacity duration-300 group-hover:opacity-80"--}}
                                     {{--style="max-width: 230px;">Get Started--}}
@@ -636,7 +636,7 @@
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords + Pianote</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<strong>${{ \App\Prices::$pianoteMembershipAnnualRegular }}</strong>--}}
+                                {{--<strong>${{ PianotePrices::$pianoteMembershipAnnualRegular }}</strong>--}}
                             {{--</h1><p class="inline-block">/yr</p>--}}
                             {{--<p class="text-coaches text-sm my-4"><em>Annual Pianote Membership included.</em></p>--}}
                             {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80"--}}
@@ -658,10 +658,10 @@
             <h6 class="leading-tight text-center mb-1 md:mb-2">
 
                 <strong>ONLY</strong>
-                @if(\App\Prices::$powerOfChordsFull > $productPrice)
-                    <s class="text-gray-400">${{ \App\Prices::$powerOfChordsFull }}</s>
+                @if(PianotePrices::$powerOfChordsFull > $productPrice)
+                    <s class="text-gray-400">${{ PianotePrices::$powerOfChordsFull }}</s>
                     <strong>${{ $productPrice }}</strong>
-                    <em>({{ round(100 - (100 * ($productPrice / App\Prices::$powerOfChordsFull))) }}% Off)</em>
+                    <em>({{ round(100 - (100 * ($productPrice / PianotePrices::$powerOfChordsFull))) }}% Off)</em>
                 @else
                     <strong>${{ $productPrice }}</strong>
                 @endif
@@ -690,11 +690,11 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.video-player',[
+    @include('pianote.lead-gen.partials.video-player',[
         "name" => "sample",
         "vimeoId" => "681588973",
     ])
-    @include('lead-gen.partials.video-player',[
+    @include('pianote.lead-gen.partials.video-player',[
         "name" => "meetlisa",
         "vimeoId" => "676401508",
     ])
@@ -707,11 +707,11 @@
         ])
     @endforeach
 
-    @include('sales.footer')
+    @include('pianote.sales.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/js/modal.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function(){
             $(document).foundation();
@@ -778,18 +778,18 @@
                 });
         })
     </script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay-alt.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay-alt.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
 
-    @include('shop.partials._promo-countdown')
+    @include('pianote._partials._promo-countdown')
     {!! inspectlet_embed_script() !!}
 @endsection

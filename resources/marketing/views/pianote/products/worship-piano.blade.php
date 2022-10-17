@@ -1,6 +1,6 @@
-@extends('pianote._partials.layout')
+@extends('pianote._partials.global-layout')
 
-@section('head-includes')
+@section('global-head')
     <title>Worship Piano - How To Play Piano In Church | Pianote</title>
     <meta name="description" content="Start playing piano or keyboard in your church.">
 
@@ -10,18 +10,18 @@
     <meta property="og:url" content="https://www.pianote.com/worship-piano">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/assets/marketing/worship-piano.css">
 @stop
 
-@section('layout-body')
-    @include('sales.nav', [
+@section('global-body')
+    @include('pianote.sales.nav', [
         "cartVersion" => true
     ])
-    @include('shop.partials._promo-banner', [
+    @include('pianote._partials._promo-banner', [
                     "name" => "Worship Piano",
-                    "fullPrice" => App\Prices::$worshipPianoFull,
-                    "price" => App\Prices::$worshipPianoRegular,
+                    "fullPrice" => PianotePrices::$worshipPianoFull,
+                    "price" => PianotePrices::$worshipPianoRegular,
                     "noBreadcrumb" => true
                 ])
 
@@ -42,11 +42,11 @@
             >Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(App\Prices::$worshipPianoFull > App\Prices::$worshipPianoRegular)
-                    <s>NORMALLY ${{ App\Prices::$worshipPianoFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ App\Prices::$worshipPianoRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$worshipPianoRegular / App\Prices::$worshipPianoFull))) }}%)
+                @if(PianotePrices::$worshipPianoFull > PianotePrices::$worshipPianoRegular)
+                    <s>NORMALLY ${{ PianotePrices::$worshipPianoFull }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$worshipPianoRegular / PianotePrices::$worshipPianoFull))) }}%)
                 @else
-                    <strong><u>ONLY ${{ App\Prices::$worshipPianoRegular }}</u></strong>
+                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -519,11 +519,11 @@
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(App\Prices::$worshipPianoFull > App\Prices::$worshipPianoRegular)
-                    <s>NORMALLY ${{ App\Prices::$worshipPianoFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ App\Prices::$worshipPianoRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$worshipPianoRegular / App\Prices::$worshipPianoFull))) }}%)
+                @if(PianotePrices::$worshipPianoFull > PianotePrices::$worshipPianoRegular)
+                    <s>NORMALLY ${{ PianotePrices::$worshipPianoFull }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$worshipPianoRegular / PianotePrices::$worshipPianoFull))) }}%)
                 @else
-                    <strong><u>ONLY ${{ App\Prices::$worshipPianoRegular }}</u></strong>
+                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -546,16 +546,12 @@
         </div>
     </section>
 
-    @include('sales.footer')
-
-@stop
-
-@section('layout-scripts')
+    @include('pianote.sales.footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay.js"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({
@@ -576,11 +572,11 @@
             });
         });
     </script>
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
 
-    @include('shop.partials._promo-countdown')
+    @include('pianote._partials._promo-countdown')
     {!! inspectlet_embed_script() !!}
 @stop

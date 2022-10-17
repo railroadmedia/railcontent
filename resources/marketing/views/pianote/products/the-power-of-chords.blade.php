@@ -1,16 +1,16 @@
 @extends('products.the-power-of-chords-layout')
 
-@php $productPrice = App\Prices::$powerOfChords @endphp
+@php $productPrice = PianotePrices::$powerOfChords @endphp
 
 @section('order-link')
     {{ url()->route('shopping-cart.add-to-cart', ['products' => ['the-power-of-chords' => 1], 'redirect' => '/order']) }}
 @endsection
 
 @section('topbar')
-    @include('shop.partials._promo-banner', [
+    @include('pianote._partials._promo-banner', [
         "name" => "The Power of Chords",
-        "fullPrice" => \App\Prices::$powerOfChordsFull,
-        "price" => \App\Prices::$powerOfChords,
+        "fullPrice" => PianotePrices::$powerOfChordsFull,
+        "price" => PianotePrices::$powerOfChords,
                     "noBreadcrumb" => true
     ])
 @endsection

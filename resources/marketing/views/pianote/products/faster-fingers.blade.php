@@ -1,6 +1,6 @@
-@extends('pianote._partials.layout')
+@extends('pianote._partials.global-layout')
 
-@section('head-includes')
+@section('global-head')
     <title>Faster Fingers | Pianote</title>
     <meta name="description" content="Play faster, make fewer mistakes, and learn songs quickly!">
 
@@ -11,19 +11,19 @@
     <meta property="og:url" content="https://www.pianote.com/faster-fingers">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/marketing/faster-fingers.css">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/marketing/parcel/pianote/faster-fingers.css">
 @stop
 
-@section('layout-body')
-    @include('sales.nav', [
+@section('global-body')
+    @include('pianote.sales.nav', [
         "cartVersion" => true
     ])
 
-    @include('shop.partials._promo-banner', [
+    @include('pianote._partials._promo-banner', [
                     "name" => "Faster Fingers",
-                    "fullPrice" => App\Prices::$fasterFingersFull,
-                    "price" => App\Prices::$fasterFingersRegular,
+                    "fullPrice" => PianotePrices::$fasterFingersFull,
+                    "price" => PianotePrices::$fasterFingersRegular,
                     "noBreadcrumb" => true
                 ])
 
@@ -40,11 +40,11 @@
                 data-product-json='{"faster-fingers": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(App\Prices::$fasterFingersFull > App\Prices::$fasterFingersRegular)
-                    <s>NORMALLY ${{ App\Prices::$fasterFingersFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ App\Prices::$fasterFingersRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$fasterFingersRegular / App\Prices::$fasterFingersFull))) }}%)
+                @if(PianotePrices::$fasterFingersFull > PianotePrices::$fasterFingersRegular)
+                    <s>NORMALLY ${{ PianotePrices::$fasterFingersFull }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$fasterFingersRegular / PianotePrices::$fasterFingersFull))) }}%)
                 @else
-                    <strong><u>ONLY ${{ App\Prices::$fasterFingersRegular }}</u></strong>
+                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -71,10 +71,10 @@
             <h1>Increase Your Speed And Finger Strength<br class="hidden-xs hidden-md hidden-lg"> With This<br
                         class="hidden-xs hidden-sm"> Step-By-Step Training Pack.<br class="hidden-xs hidden-md hidden-lg">
                 <strong>You WILL Get Faster!</strong></h1>
-            @if(App\Prices::$fasterFingersFull > App\Prices::$fasterFingersRegular)
-                <h3 class="text-red"><em><s>NORMALLY ${{ App\Prices::$fasterFingersFull }}</s> - JUST ${{ App\Prices::$fasterFingersRegular }}</em></h3>
+            @if(PianotePrices::$fasterFingersFull > PianotePrices::$fasterFingersRegular)
+                <h3 class="text-red"><em><s>NORMALLY ${{ PianotePrices::$fasterFingersFull }}</s> - JUST ${{ PianotePrices::$fasterFingersRegular }}</em></h3>
             @else
-                <h3 class="text-red"><em>ONLY ${{ App\Prices::$fasterFingersRegular }}</em></h3>
+                <h3 class="text-red"><em>ONLY ${{ PianotePrices::$fasterFingersRegular }}</em></h3>
             @endif
             <div class="wrapper">
                 <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg">
@@ -382,11 +382,11 @@
                 data-product-json='{"faster-fingers": 1}'
             >Play Faster Today &raquo;</a>
             <p class="breakdown">
-                @if(App\Prices::$fasterFingersFull > App\Prices::$fasterFingersRegular)
-                    <s>NORMALLY ${{ App\Prices::$fasterFingersFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ App\Prices::$fasterFingersRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$fasterFingersRegular / App\Prices::$fasterFingersFull))) }}%)
+                @if(PianotePrices::$fasterFingersFull > PianotePrices::$fasterFingersRegular)
+                    <s>NORMALLY ${{ PianotePrices::$fasterFingersFull }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$fasterFingersRegular / PianotePrices::$fasterFingersFull))) }}%)
                 @else
-                    <strong><u>ONLY ${{ App\Prices::$fasterFingersRegular }}</u></strong>
+                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -417,13 +417,7 @@
         </div>
     </section>
 
-    @include('sales.footer')
-
-
-    @parent
-@stop
-
-@section('layout-scripts')
+    @include('pianote.sales.footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
@@ -475,12 +469,14 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
-    @include('shop.partials._promo-countdown')
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
+    @include('pianote._partials._promo-countdown')
 
     {!! inspectlet_embed_script() !!}
+
+    @parent
 @stop

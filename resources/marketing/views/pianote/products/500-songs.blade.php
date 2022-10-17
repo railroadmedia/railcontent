@@ -1,16 +1,16 @@
-@extends('pianote.products.500-songs-layout')
+@extends('products.500-songs-layout')
 
-@php $productPrice = App\Prices::$songs500Regular @endphp
+@php $productPrice = PianotePrices::$songs500Regular @endphp
 
 @section('order-link')
     {{ url()->route('shopping-cart.add-to-cart', ['products' => ['500-songs-in-5-days' => 1], 'redirect' => '/order', 'locked' => 'true']) }}
 @endsection
 
 @section('topbar')
-    @include('shop.partials._promo-banner', [
+    @include('pianote._partials._promo-banner', [
                     "name" => "500 Songs In 5 Days",
-                    "fullPrice" => App\Prices::$songs500Full,
-                    "price" => App\Prices::$songs500Regular,
+                    "fullPrice" => PianotePrices::$songs500Full,
+                    "price" => PianotePrices::$songs500Regular,
                     "noBreadcrumb" => true
                 ])
 @endsection
