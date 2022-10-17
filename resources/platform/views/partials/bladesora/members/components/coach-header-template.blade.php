@@ -1,26 +1,4 @@
 @section('scripts')
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script type="application/javascript">
-        const attachOverlayListener = function () {
-            const modalOverlay = document.getElementById('modalOverlay');
-
-            modalOverlay.onclick = function () {
-                const videoIframe = document.getElementById('coachVideoIframe');
-                const player = new Vimeo.Player(videoIframe);
-                player.pause();
-            }
-        }
-
-        const onModalButtonClick = function () {
-            const videoIframe = document.getElementById('coachVideoIframe');
-            const player = new Vimeo.Player(videoIframe);
-            player.play();
-
-            setTimeout(function() {
-                attachOverlayListener();
-            }, 100);
-        }
-    </script>
     @if(isset($queuedScripts))
         {{ $queuedScripts }}
     @endif
@@ -96,14 +74,14 @@ $brandColors = $colors[$brand];
 
 @if ($vimeoVideo != null)
     <!-- Video Modal -->
-    <div id="coach-trailer-modal" class="modal">
+    <div id="coach-trailer-modal" class="modal vimeo-embedded-player">
         <div class="flex flex-column corners-3">
             <div class="tw-w-full tw-relative" style="padding-bottom: 56.25%;">
-                <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close"
+                <iframe id="vimeo-iframe" class="tw-absolute tw-w-full tw-h-full reset-on-close"
                     src="https://player.vimeo.com/video/{{$vimeoVideo}}?title=0&byline=0&portrait=0"
                     frameborder="0"
                     allow="autoplay; fullscreen;"
-                    id="coachVideoIframe">
+                    >
                 </iframe>
             </div>
         </div>

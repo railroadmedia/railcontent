@@ -27,12 +27,12 @@
     </div>
 </div>
 
-<div id="whatIsModal" class="modal">
+<div id="whatIsModal" class="modal vimeo-embedded-player">
     <div class="flex flex-column corners-10">
         <div class="video-wrap">
             <div class="widescreen">
                 <div class="flex flex-column video-player user-active">
-                    <iframe style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" 
+                    <iframe id="vimeo-iframe" style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" 
                             src="//player.vimeo.com/video/642883586" 
                             frameborder="0" 
                             allowfullscreen>
@@ -43,12 +43,12 @@
     </div>
 </div>
 
-<div id="howApplyModal" class="modal">
+<div id="howApplyModal" class="modal vimeo-embedded-player">
     <div class="flex flex-column corners-10">
         <div class="video-wrap">
             <div class="widescreen">
                 <div class="flex flex-column video-player user-active">
-                    <iframe style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" 
+                    <iframe id="vimeo-iframe" style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" 
                             src="//player.vimeo.com/video/642900215" 
                             frameborder="0" 
                             allowfullscreen>
