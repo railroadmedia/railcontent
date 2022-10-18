@@ -1,8 +1,7 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=ddbcb350e031afe584beac9234dae4aa",
+    "/platform/js/app.js": "/platform/js/app.js?id=bfde7cb5bf9690525cbdd97db0ded87e",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
-    "/platform/js/learning-path-preview.js": "/platform/js/learning-path-preview.js?id=556c9a29d1562a74c391ca1d75809ca1",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=d8d62832a947bbeb49f77244a81ec811",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=a121116bf28ae9fddf985bb2860bc9a9",
@@ -20,7 +19,7 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=1b30a29d84e80dbc88614b65053675b6",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=49e491a00ddf3dda3c606d7a150398a4",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=01834f48baf5b76191b704993294c1e0",
-    "/platform/css/app.css": "/platform/css/app.css?id=9e86c4536ecefea5c8d6a7a79d2ff011",
+    "/platform/css/app.css": "/platform/css/app.css?id=3a7ba8a4d7fb81f40ff044225243897e",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=7bc222fd1f3a49c38cdc6f53cf67541f",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=1546536cc7d174df1975c95c2c3cf7d3"
 }

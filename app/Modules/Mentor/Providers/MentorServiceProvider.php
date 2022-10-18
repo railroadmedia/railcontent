@@ -15,6 +15,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Mentor\Listeners\EnsureMentorState;
+use Modules\UserManagementSystem\Events\OnboardingInstrumentUpdated;
 
 class MentorServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,9 @@ class MentorServiceProvider extends ServiceProvider
     protected $listen = [
         UserMembershipDateUpdated::class => [
             EnsureMentorState::class,
+        ],
+        OnboardingInstrumentUpdated::class =>[
+            EnsureMentorState::class . '@handleOnboardingInstrumentUpdated'
         ]
     ];
 
