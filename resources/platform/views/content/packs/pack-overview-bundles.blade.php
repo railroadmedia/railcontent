@@ -43,7 +43,7 @@
                             ></i>
                         </div>
                     </div>
-                    <div id="previewModal" class="modal">
+                    <div id="previewModal" class="modal vimeo-embedded-player">
                         <div class="tw-flex tw-flex-col corners-10">
                             <div class="video-wrap">
                                 <div class="widescreen">

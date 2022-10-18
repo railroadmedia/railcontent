@@ -19,7 +19,6 @@ mix
     //JS From Existing Platforms
     .js('resources/platform/assets/js/profile.js', 'public/platform/js')
     .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
-    .js('resources/platform/assets/js/learning-path-preview.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
     .vue({ version: 3 })
     .sass('resources/platform/assets/css/app.scss', 'public/platform/css')

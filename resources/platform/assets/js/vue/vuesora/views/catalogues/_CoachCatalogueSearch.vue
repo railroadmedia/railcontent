@@ -43,7 +43,6 @@
           <div class="flex flex-column form-group mr-1">
             <select
               id="sortInput"
-              type="text"
               class="borderless dark:tw-text-white tw-pb-0"
               @change="handleContentSort($event)"
               v-model="sort"
