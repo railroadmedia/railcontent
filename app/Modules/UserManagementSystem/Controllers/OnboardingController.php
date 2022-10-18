@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
@@ -14,6 +15,13 @@ use Modules\UserManagementSystem\Models\OnboardingGenre;
 
 class OnboardingController extends Controller
 {
+
+    private OnboardingService $onboardingService;
+
+    public function __construct(OnboardingService $onboardingService)
+    {
+        $this->onboardingService = $onboardingService;
+    }
 
     /**
      *
@@ -33,7 +41,7 @@ class OnboardingController extends Controller
                 'onboarding_answer' => $gear,
                 'brand' => $request->brand,
                 'user_id' => user()->id
-                ]);
+            ]);
         }
 
         return response(json_encode(user()), 200);
@@ -131,7 +139,9 @@ class OnboardingController extends Controller
         }
 
         $brand = $request->brand;
-        $experience = OnboardingExperience::select('experience_level')->where(['brand' => $brand, 'user_id' => user()->id])->first();
+        $experience = OnboardingExperience::select('experience_level')->where(
+            ['brand' => $brand, 'user_id' => user()->id]
+        )->first();
 
         $response = [
             'gears' => OnboardingGear::where(['brand' => $brand, 'user_id' => user()->id])->pluck('gear')->toArray(),
@@ -173,12 +183,8 @@ class OnboardingController extends Controller
             $message = ['error' => 'Get parameter instrument is missing'];
             return response($message, 422);
         }
-
-        OnboardingAnswerHistory::create([
-            'onboarding_question' => OnboardingAnswerHistory::QUESTION_INSTRUMENT,
-            'onboarding_answer' => $request->get('instrument'),
-            'user_id' => user()->id
-        ]);
+        $instrument = $request->get('instrument');
+        $this->onboardingService->saveInstrument($instrument);
         return response("History data for instrument has been saved.", 200);
     }
 
@@ -191,7 +197,6 @@ class OnboardingController extends Controller
         try {
             $request->validate(['coachName' => 'string|required|not-in:undefined']);
             $request->validate(['coachId' => 'integer|required|not-in:undefined']);
-
         } catch (ValidationException $e) {
             $message = ['error' => 'Get parameter is missing from onboarding-answer-history-coach api request.'];
             return response($message, 422);
