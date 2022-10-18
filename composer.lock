@@ -4252,6 +4252,9 @@
         {
             "name": "laravel/framework",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f70a0f4d389cfc9023fa047dfa862de410a598b5
             "version": "v9.36.0",
             "source": {
                 "type": "git",
@@ -4262,6 +4265,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/356aed98c338db7204e3c2d4ecbd1221679afb56",
                 "reference": "356aed98c338db7204e3c2d4ecbd1221679afb56",
+<<<<<<< HEAD
 =======
             "version": "v9.36.1",
             "source": {
@@ -4274,6 +4278,8 @@
                 "url": "https://api.github.com/repos/laravel/framework/zipball/584f7bbde1bc24c69c84afe44f16b4ec294f92ef",
                 "reference": "584f7bbde1bc24c69c84afe44f16b4ec294f92ef",
 >>>>>>> master
+=======
+>>>>>>> f70a0f4d389cfc9023fa047dfa862de410a598b5
                 "shasum": ""
             },
             "require": {
@@ -4447,10 +4453,14 @@
                 "source": "https://github.com/laravel/framework"
             },
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2022-10-18T13:38:52+00:00"
 =======
             "time": "2022-10-18T16:04:13+00:00"
 >>>>>>> master
+=======
+            "time": "2022-10-18T13:38:52+00:00"
+>>>>>>> f70a0f4d389cfc9023fa047dfa862de410a598b5
         },
         {
             "name": "laravel/nova",
@@ -16078,5 +16088,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
