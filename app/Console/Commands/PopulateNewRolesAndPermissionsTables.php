@@ -260,6 +260,7 @@ class PopulateNewRolesAndPermissionsTables extends Command
             if (array_key_exists($role, $permissions)) {
                 foreach ($permissions[$role] as $permissionOfRole) {
                     Permission::findOrCreate($permissionOfRole);
+                    app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
                     $newRole->givePermissionTo($permissionOfRole);
                 }
             } else {
