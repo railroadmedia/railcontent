@@ -329,3 +329,12 @@ https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.
 ```
 https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
 ```  
+
+
+# Login As A User
+
+Log in with an authorized account (in incog or another session), 
+then use this URL and swap in the user of the account you wish to log in to:
+```
+https://www.musora.com/user-management-system/login-as-user/USER_ID
+```
