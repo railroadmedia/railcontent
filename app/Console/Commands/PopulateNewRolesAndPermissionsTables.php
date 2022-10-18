@@ -15,7 +15,7 @@ class PopulateNewRolesAndPermissionsTables extends Command
      */
     protected $name = 'PopulateNewRolesAndPermissionsTables';
 
-    protected $signature = 'PopulateNewRolesAndPermissionsTables';
+    protected $signature = 'PopulateNewRolesAndPermissionsTables {give?}';
 
     /**
      * The console command description.
@@ -258,13 +258,13 @@ class PopulateNewRolesAndPermissionsTables extends Command
 
         foreach ($roles as $role) {
             $newRole = Role::findOrCreate($role);
-            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
             if (array_key_exists($role, $permissions)) {
                 foreach ($permissions[$role] as $permissionOfRole) {
                     Permission::findOrCreate($permissionOfRole);
-                    app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-                    $newRole->givePermissionTo($permissionOfRole);
-                    app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+
+                    if ($this->argument('give')) {
+                        $newRole->givePermissionTo($permissionOfRole);
+                    }
                 }
             } else {
                 print_r("Role " . $role . " has not been found in the role_permissions list. \n");
