@@ -55,8 +55,8 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // second-level types
-            if ((count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
-            ||($content['type'] == 'course-part')){
+            if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
+            {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$contentParentData[0]->type],
