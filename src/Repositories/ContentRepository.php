@@ -2238,6 +2238,7 @@ class ContentRepository extends RepositoryBase
             'difficulty_range' => ConfigService::$tableContent.'.difficulty_range',
             'artist' => ConfigService::$tableContent.'.artist',
             'type' => ConfigService::$tableContent.'.type',
+            'instrument'  => ConfigService::$tableContent.'.instrument',
         ];
 
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
@@ -2279,6 +2280,7 @@ class ContentRepository extends RepositoryBase
                 'artist',
                 'difficulty_range',
                 'type',
+                'instrument'
             ];
 
         $filterOptions = array_unique($filterOptions);
