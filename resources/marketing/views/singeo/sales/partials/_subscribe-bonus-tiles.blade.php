@@ -56,7 +56,7 @@
         </div>
         <a class="join promo memcta" href="{{ $annualLink }}">START MY SINGING LESSONS NOW</a>
         <br><br>
-        <a class="memcta monthly-alt" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ App\Prices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="memcta monthly-alt" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ SingeoPrices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 

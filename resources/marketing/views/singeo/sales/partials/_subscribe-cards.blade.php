@@ -15,11 +15,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>MONTHLY</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(App\Prices::$singeoMembershipMonthlyFull > App\Prices::$singeoMembershipMonthly)
-                                <s class="opacity-60">${{ App\Prices::$singeoMembershipMonthlyFull }}</s>
+                            @if(SingeoPrices::$singeoMembershipMonthlyFull > SingeoPrices::$singeoMembershipMonthly)
+                                <s class="opacity-60">${{ SingeoPrices::$singeoMembershipMonthlyFull }}</s>
                             @endif
-                            <strong>${{ App\Prices::$singeoMembershipMonthly }}</strong></h1> <p class="inline-block {{---mr-16--}}">per month</p>
-                        <p class="text-sm my-4"><em>Only ${{ number_format((App\Prices::$singeoMembershipMonthly * 12) / 52, 2) }} per week.</em></p>
+                            <strong>${{ SingeoPrices::$singeoMembershipMonthly }}</strong></h1> <p class="inline-block {{---mr-16--}}">per month</p>
+                        <p class="text-sm my-4"><em>Only ${{ number_format((SingeoPrices::$singeoMembershipMonthly * 12) / 52, 2) }} per week.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -37,11 +37,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>ANNUAL</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(App\Prices::$singeoMembershipAnnualFull > App\Prices::$singeoMembershipAnnual)
-                                <s class="opacity-60">${{ App\Prices::$singeoMembershipAnnualFull }}</s>
+                            @if(SingeoPrices::$singeoMembershipAnnualFull > SingeoPrices::$singeoMembershipAnnual)
+                                <s class="opacity-60">${{ SingeoPrices::$singeoMembershipAnnualFull }}</s>
                             @endif
-                            <strong>${{ App\Prices::$singeoMembershipAnnual }}</strong></h1> <p class="inline-block -mr-14">per year</p>
-                        <p class="text-singeo text-sm my-4"><em>Save {{ round(100 - (100 * (App\Prices::$singeoMembershipAnnual / (App\Prices::$singeoMembershipMonthly * 12)))) }}% vs monthly.</em></p>
+                            <strong>${{ SingeoPrices::$singeoMembershipAnnual }}</strong></h1> <p class="inline-block -mr-14">per year</p>
+                        <p class="text-singeo text-sm my-4"><em>Save {{ round(100 - (100 * (SingeoPrices::$singeoMembershipAnnual / (SingeoPrices::$singeoMembershipMonthly * 12)))) }}% vs monthly.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
