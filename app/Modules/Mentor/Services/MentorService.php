@@ -193,7 +193,18 @@ class MentorService
         }
         $mentorStudents = MentorStudent::query()
             ->with('user')
-            ->where('mentor_user_id', '=', $mentorUserId)
+            ->join(
+                'usora_users',
+                'usora_users.id',
+                '=',
+                'mentor_students.user_id'
+            )->where('mentor_user_id', '=', $mentorUserId)
+            ->where(
+                'usora_users.membership_expiration_date',
+                '>',
+                Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'))
+            )
+            ->select('mentor_students.*')
             ->inRandomOrder()
             ->take($nStudents)
             ->get();
@@ -278,7 +289,7 @@ class MentorService
             if ($mentorStudent->isActive()) {
                 $newMentor = $this->chooseNewMentor($mentorStudent, $ignoreMentorUserID);
                 if ($newMentor == null) {
-                    throw new Exception("Unable to reassign Mentor to User $mentorStudent->user_id");
+                    throw new Exception("Unable to reassign User to Mentor $mentorStudent->user_id");
                 }
                 $mentorStudent->mentor_user_id = $newMentor->user_id;
                 if (!array_key_exists($newMentor->user_id, $mentors)) {
