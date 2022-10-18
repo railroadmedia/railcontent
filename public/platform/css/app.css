@@ -22852,6 +22852,9 @@ a:visited{
 .tw-rounded-xl{
   border-radius: 0.75rem !important;
 }
+.tw-rounded-sm{
+  border-radius: 0.125rem !important;
+}
 .tw-rounded-2xl{
   border-radius: 1rem !important;
 }
@@ -22875,9 +22878,6 @@ a:visited{
 }
 .tw-rounded-3xl{
   border-radius: 1.5rem !important;
-}
-.tw-rounded-sm{
-  border-radius: 0.125rem !important;
 }
 .tw-rounded-none{
   border-radius: 0px !important;

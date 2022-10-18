@@ -17,7 +17,7 @@
           tw-text-white
           dark:tw-bg-white
           tw-bg-[#081825]
-          ${slideClass}`
+          ${slideClassData}`
         "
       >
         <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
@@ -61,10 +61,10 @@ export default {
   emits: ['onClose'],
   methods: {
     handleOnClose() {
-      this.slideClass = 'slide-out-bottom';
+      this.slideClassData = 'slide-out-bottom';
       setTimeout(() => {
         this.$emit('onClose');
-        this.slideClass = 'slide-in-bottom';
+        this.slideClassData = 'slide-in-bottom';
       }, 500);
     }
   },
@@ -73,12 +73,12 @@ export default {
       showNotification: false,
       notificationIcon: this.icon,
       notificationText: this.text,
-      slideClass: this.slideClass,
+      slideClassData: this.slideClass,
     };
   },
   watch: {
     slideClass(val) {
-      this.slideClass = val;
+      this.slideClassData = val;
     },
     icon(val) {
       if (val === 'error') {
