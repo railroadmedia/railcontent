@@ -300,8 +300,14 @@ of our CDN url to serve it from our cloudflare CDN.
 [Formatting Options Docs](https://developers.cloudflare.com/images/image-resizing/url-format/)
 
 URL Structure:  
-```https://musora.com/cdn-cgi/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL```
+```
+https://musora.com/cdn-cgi/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
+```
 
 Examples:  
-```https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public```  
-```https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg```  
+```
+https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+```  
+```
+https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
+```  
