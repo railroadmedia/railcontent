@@ -243,6 +243,7 @@ class ContentJsonController extends Controller
                     'user_id' => '',
                     'published_on' => '',
                     'archived_on' => '',
+                    'instrument' => ''
                 ])
         );
 
