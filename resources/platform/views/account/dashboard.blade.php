@@ -71,7 +71,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                             <div class="tw-flex">
                                 <!-- progress bar -->
                                 <div class="tw-bg-white tw-relative tw-w-full tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]">
-                                    <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0" style="width: {{ $nextLearningPathProgressPercent }}%;"></div>
+                                    <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0 tw-bg-{{ $brand }}" style="width: {{ $nextLearningPathProgressPercent }}%;"></div>
                                 </div>
                                 <!-- Progress percentage -->
                                 <span class="tw-font-bold tw-ml-2 tw-text-sm tw-text-white">{{ $nextLearningPathProgressPercent }}%</span>
