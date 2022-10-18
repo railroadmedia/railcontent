@@ -1,4 +1,4 @@
-@extends('pianote.lead-gen.lead-gen-layout')
+@extends('pianote.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
     @parent

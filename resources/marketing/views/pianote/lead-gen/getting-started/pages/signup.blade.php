@@ -198,7 +198,7 @@
                         <img class="h-14 sm:h-16 lg:h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo-m.png" alt="logo white">
                     </picture>
                     <h3 class="font-extrabold leading-tight text-white mt-80 md:mt-6">
-                        Go from a total beginner to playing your first song <br class="hidden">in this FREE series.
+                        Go from a total beginner to playing your first song in four easy lessons!
                     </h3>
                     <h6 class="my-4" style="color: rgba(208, 226, 231, 0.8);">
                         Enter your email below for your free beginner lessons.
@@ -469,7 +469,7 @@
                         <strong>Is this really free?</strong>
                     </h4>
                     <p style="color:#ABB5C2;">
-                        Yes! We love sharing videos to help musicians -- and deep down we hope you’ll see some of the value that we provide inside Piano juuuuust in case you ever want to consider joining!
+                        Yes! We love sharing videos to help piano players -- and deep down we hope you’ll see some of the value that we provide inside Piano juuuuust in case you ever want to consider joining!
                     </p>
                 </div>
                 <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">
