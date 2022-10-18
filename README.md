@@ -283,3 +283,49 @@ Production laravel logs are sent to our papertrail account:
 PHP or lower level logs are in cloudwatch/vapor.
 
 Other environments are being added to papertrial in the near future.
+
+
+# Image CDN Uploading, Serving, and Formatting 
+
+We use the Cloudflare Images service to manage all our images.    
+
+## Uploading New Images
+New images can be uploaded from the cloudflare console at:   
+[https://dash.cloudflare.com/13b43223393c313ed5db36bcc2138a95/images/images](https://dash.cloudflare.com/13b43223393c313ed5db36bcc2138a95/images/images)
+
+Once you upload an image please use the musora.com domain instead of the cloudflare default domain for the source image.  
+
+```
+https://imagedelivery.net/*
+```
+
+Should be changed to:  
+```
+https://musora.com/cdn-cgi/imagedelivery/*
+```
+
+Example:  
+```
+https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+to
+https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+```
+
+## Serving & Formatting Images
+All images **from any source** must be served through the cloudflare image CDN. You can put any image URL at the end 
+of our CDN url to serve it from our cloudflare CDN.  
+
+[Formatting Options Docs](https://developers.cloudflare.com/images/image-resizing/url-format/)
+
+URL Structure:  
+```
+https://musora.com/cdn-cgi/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
+```
+
+Examples:  
+```
+https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+```  
+```
+https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
+```  
