@@ -71,7 +71,8 @@ export default {
             endorsements: [],
             topic: [],
             key: [],
-            key_pitch_type: []
+            key_pitch_type: [],
+            instrument: []
         };
 
         keys.forEach(key => {
