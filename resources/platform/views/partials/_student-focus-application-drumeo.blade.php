@@ -32,7 +32,7 @@
         <div class="video-wrap">
             <div class="widescreen">
                 <div class="flex flex-column video-player user-active">
-                    <iframe id="vimeo-iframe" style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" src="//player.vimeo.com/video/450154189" frameborder="0" allowfullscreen></iframe>
+                    <iframe style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" src="//player.vimeo.com/video/450154189" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="video-wrap">
             <div class="widescreen">
                 <div class="flex flex-column video-player user-active">
-                    <iframe id="vimeo-iframe" style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" src="//player.vimeo.com/video/450152568" frameborder="0" allowfullscreen></iframe>
+                    <iframe style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" src="//player.vimeo.com/video/450152568" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

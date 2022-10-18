@@ -77,7 +77,7 @@ $brandColors = $colors[$brand];
     <div id="coach-trailer-modal" class="modal vimeo-embedded-player">
         <div class="flex flex-column corners-3">
             <div class="tw-w-full tw-relative" style="padding-bottom: 56.25%;">
-                <iframe id="vimeo-iframe" class="tw-absolute tw-w-full tw-h-full reset-on-close"
+                <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close"
                     src="https://player.vimeo.com/video/{{$vimeoVideo}}?title=0&byline=0&portrait=0"
                     frameborder="0"
                     allow="autoplay; fullscreen;"
