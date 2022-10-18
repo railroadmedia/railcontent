@@ -812,11 +812,8 @@ onMounted(() => {
 
     // Add Event Listeners to chapter marker links
     document.addEventListener('click', (event) => {
-        const element = event.target;
-        console.log(element)
-        if (element.matches('[data-jump-to-time]')) {
-            console.log(element)
-            seek(element.dataset.jumpToTime);
+        if (event.target.matches('[data-jump-to-time]')) {
+            seek(event.target.dataset.jumpToTime);
             document.getElementById('content-container').scrollTop=0;
         }
     });
