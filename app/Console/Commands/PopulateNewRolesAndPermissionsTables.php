@@ -235,9 +235,8 @@ class PopulateNewRolesAndPermissionsTables extends Command
                 'accounting' => ['accounting-reporting'],
                 'membership_stats' => ['membership_stats'],
                 'retention_stats' => ['retention-stats'],
-                'it' => ['it']
-
-
+                'it' => ['it'],
+                'login_as_users' => ['login_as_users'],
             ];
 
         $roles = [
@@ -252,7 +251,8 @@ class PopulateNewRolesAndPermissionsTables extends Command
             'accounting',
             'membership_stats',
             'retention_stats',
-            'it'
+            'it',
+            'login_as_users',
         ];
 
         foreach ($roles as $role) {
