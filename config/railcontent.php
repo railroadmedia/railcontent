@@ -425,7 +425,7 @@ return [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
-                'allowableFilters' => ['topic', 'progress'],
+                'allowableFilters' => ['topic', 'progress', 'instrument'],
                 'sortBy' => 'sort',
             ],
             'spotlight' => [
@@ -1331,6 +1331,7 @@ return [
         'published_on' => 'published_on',
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
+        'instrument' => 'instrument'
     ],
     'content_hierarchy' => [
         'drumeo' => [
