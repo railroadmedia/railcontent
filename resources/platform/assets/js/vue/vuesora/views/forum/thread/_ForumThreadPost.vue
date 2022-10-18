@@ -1,9 +1,7 @@
 <template>
-    <div class="tw-flex tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
-        <a
-            :id="'post' + post.id"
-            style="position:relative;top:-75px;"
-        ></a>
+    <div class="tw-flex tw-relative tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
+        <!-- Post Anchor -->
+        <a :id="'post' + post.id" class="tw-top-[-68px] tw-absolute"></a>
 
         <!-- Post Header -->
         <div class="tw-flex tw-items-center">
@@ -18,19 +16,21 @@
                     </a>
                 </div>
             </div>
-            <div class="tw-flex tw-flex-wrap tw-w-9/12 sm:tw-w-full">
+            <div class="tw-flex tw-flex-col tw-w-9/12 sm:tw-w-full">
                 <!-- Name -->
                 <h2 class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
                     {{ post.authorUsername }}
                 </h2>
-                <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-w-full tw-order-3 md:tw-order-2 md:tw-w-1/2">
-                    <span>{{ post.authorTotalPosts }} Posts</span> -
-                    <span>{{ userExpValue }}</span> -
+                <div class="tw-flex tw-items-center tw-flex-wrap">
+                    <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-order-3 md:tw-order-2 tw-mr-auto">
+                        <span>{{ post.authorTotalPosts }} Posts</span> -
+                        <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
-                </div>
-                <div class="tw-inline-flex tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last tw-w-full md:tw-w-1/2 md:tw-justify-end">
-                    <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
-                    <span>&nbsp;- #{{ postNumber }}</span>
+                    </div>
+                    <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last md:tw-justify-end tw-leading-none">
+                        <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
+                        <span>&nbsp;- #{{ postNumber }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,12 +41,15 @@
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
                 <div
                     v-if="!editing"
-                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full"
+                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
                     :class="['post-body', brand]"
-                    v-html="post.postBody"
                 >
+                    <div v-html="post.postBody" 
+                        :id="'post-body'+post.id"
+                        class="tw-text-base"
+                        :ref="'post-body'+post.id"
+                    ></div>
                 </div>
-
                 <div
                     v-if="editing"
                     class="tw-flex tw-flex-col tw-mb-1 tw-w-full"
@@ -74,10 +77,10 @@
 
                             <button
                                 class="tw-btn-primary tw-w-full sm:tw-w-auto"
-                                :class="`tw-bg-${ brand }`"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 type="submit"
                             >
-                                    Save Post
+                                Save Post
                             </button>
                         </div>
                     </form>
@@ -155,7 +158,7 @@
             <div class="tw-flex tw-flex-row body">
                 <div
                     v-if="post.authorSignature && !signaturesHidden"
-                    class="tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
+                    class="forumSignature tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
                     v-html="post.authorSignature"
                 >
                 </div>
@@ -267,13 +270,14 @@ export default {
         showUserExp() {
             return this.userExpValue != null && (['team', 'pack', 'admin'].indexOf(this.post.access_level) === -1);
         },
-      updatePostRoute() {
-        return this.updatePostBaseRoute.replaceAll('#####', this.post.id);
-      },
 
-      openModalString() {
-        return this.post.totalLikes > 0 ? 'likeUsersModal' : '';
-      },
+        updatePostRoute() {
+            return this.updatePostBaseRoute.replaceAll('#####', this.post.id);
+        },
+
+        openModalString() {
+            return this.post.totalLikes > 0 ? 'likeUsersModal' : '';
+        },
     },
     methods: {
         convertVideoLinksToEmbeds(postContent) {
@@ -419,6 +423,53 @@ export default {
             }
         },
     },
+    mounted() {
+        //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
+        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) { 
+            //Get Top Quote
+            let topQuote = this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0];
+            //Get Quote Count
+            let quoteCount = topQuote.getElementsByTagName('blockquote').length + 1; //Only Counts blockquotes within first blockquote element
+            
+            //Add ShowHide Button if there are multiple quotes
+            if(topQuote.querySelectorAll('blockquote')[0]) {
+                //Hide Multiple Quotes By Default
+                topQuote.querySelectorAll('blockquote')[0].classList.add('tw-hidden');
+
+                //ShowHideButton HTML
+                let buttonHTML = `
+                    <!-- Hide/Show Replies -->
+                    <div class="tw-w-full sm:tw-w-auto tw-ml-0 sm:tw-ml-auto tw-inline-flex tw-items-center">
+                        <div class="tw-leading-[26px] tw-cursor-pointer tw-uppercase tw-text-lg tw-font-bebas-neue tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-3 tw-tracking-normal tw-opacity-100
+                                    ${topQuote.querySelector('.quote-heading') ? '' : 'tw-mb-3 tw-relative sm:tw-absolute sm:tw-right-[30px] sm:tw-top-0'}"
+                            tabindex="0"
+                            onClick="hideShow(${this.post.id})"
+                        >
+                            ${ quoteCount } Replies
+                            <i class="fa-solid tw-ml-1.5 tw-text-sm fa-chevrons-down" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                `;
+                
+                //Add Button
+                if(topQuote.querySelector('.quote-heading')) {
+                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML ); 
+                } else {
+                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML ); 
+                } 
+
+                //HideShow Function
+                window.hideShow = function(postID) {
+                    let childQuote = document.getElementById('post-body'+postID).getElementsByTagName('blockquote')[0].querySelectorAll('blockquote')[0];
+                    let QuoteToggleIcon = document.getElementById('post-body'+postID).getElementsByTagName('blockquote')[0].querySelector('.fa-chevrons-down');
+                    //toggle classes
+                    childQuote.classList.toggle('tw-hidden');
+                    QuoteToggleIcon.classList.toggle('tw-rotate-180')
+                };
+                
+            }
+        } 
+    }
 };
 </script>
 <style>
@@ -429,14 +480,13 @@ export default {
         padding-left: 40px;
         margin: 15px 0;
     }
-    .post-body p { 
-        margin: 15px 0; 
-        font-size: 1rem; 
-        line-height: 1.5rem; 
-    }
     .post-body p:empty { display: none; }
     .post-body blockquote { 
         margin: 15px 0; 
         width: 100%;
+    }
+    .forumSignature p {
+        font-size: 1rem; /* 16px */
+        line-height: 1.5rem; /* 24px */
     }
 </style>

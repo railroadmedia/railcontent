@@ -237,14 +237,14 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             'email' => $email,
             'password' => Hash::make($password),
         ]);
-        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfHour()->toDateTimeString());
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfMinute()->toDateTimeString());
 
         $this->expectsEvents([UserEvent::class]);
 
         $response = $this->call(
             'GET',
             config('user_management_system.route_prefix') . '/login/generated-key',
-            ['key' => $hashKey, 'user_id' => $user->id]
+            ['auth_key' => $hashKey, 'user_id' => $user->id]
         );
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -253,7 +253,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $this->assertEquals($user->toArray(), user()->toArray());
     }
 
-    public function test_authenticate_generated_key_success_6_hours_later()
+    public function test_authenticate_generated_key_success_1_minute_later()
     {
         $email = $this->faker->email;
         $password = $this->faker->words(3, true);
@@ -262,20 +262,63 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
             'email' => $email,
             'password' => Hash::make($password),
         ]);
-        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfHour()->subHours(6)->toDateTimeString());
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfMinute()->subMinutes(1)->toDateTimeString());
 
         $this->expectsEvents([UserEvent::class]);
 
         $response = $this->call(
             'GET',
             config('user_management_system.route_prefix') . '/login/generated-key',
-            ['key' => $hashKey, 'user_id' => $user->id]
+            ['auth_key' => $hashKey, 'user_id' => $user->id]
         );
 
         $this->assertEquals(302, $response->getStatusCode());
 
         $this->assertEquals($user->toArray(), auth()->user()->toArray());
         $this->assertEquals($user->toArray(), user()->toArray());
+    }
+
+    public function test_check_for_auth_then_redirect_back_with_auth_key_success()
+    {
+        $redirectUrl = 'https://www.domain.com/order';
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+        $hashKey = md5($user->id . $user->password . Carbon::now()->startOfMinute()->toDateTimeString());
+
+        auth()->login($user);
+
+        $response = $this->call(
+            'GET',
+            config('user_management_system.route_prefix') . '/check-for-auth-then-redirect-back-with-auth-key',
+            ['redirect_to' => $redirectUrl]
+        );
+
+        $response->assertRedirect($redirectUrl . '?user_id=' . $user->id . '&auth_key=' . $hashKey);
+
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $this->assertEquals($user->toArray(), auth()->user()->toArray());
+        $this->assertEquals($user->toArray(), user()->toArray());
+    }
+
+    public function test_check_for_auth_then_redirect_back_with_auth_key_fail()
+    {
+        $redirectUrl = 'https://www.domain.com/order';
+
+        $response = $this->call(
+            'GET',
+            config('user_management_system.route_prefix') . '/check-for-auth-then-redirect-back-with-auth-key',
+            ['redirect_to' => $redirectUrl]
+        );
+
+        $response->assertRedirect($redirectUrl);
+
+        $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function test_logout_token()

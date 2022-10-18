@@ -80,8 +80,11 @@ const isNextButtonDisabled = () => {
         md:tw-mt-0
       "
     >
-      <StepHeader title="Great. What kind of songs are you into these days?" 
-        @onGoBack="goBack" />
+      <StepHeader
+        title="Great. What kind of songs are you into these days?"
+        subtitle="You can select more than one genre and change your settings in your profile at any time."
+        @onGoBack="goBack"
+      />
       <MultiSelect
         :options="options"
         :initialSelection="currentSelection"

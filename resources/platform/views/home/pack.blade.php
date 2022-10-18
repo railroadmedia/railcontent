@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <div class="tw-container tw-mx-auto tw-pt-[58px] tw-px-4 md:tw-px-8 dark:tw-text-white">
 
         {{-- Add Header Slide "Welcome Username" --}}
 
@@ -42,14 +42,14 @@
             @endcomponent
         @endif
 
-        {{-- My Stats --}}
-        <stats-section
-            brand="{{ $brand }}"
-            account-url="{{ user()->getDashboardUrl() }}"
-            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent ?? 0 }}"
-            next-learning-path-level="{{ $nextLearningPathLevel ?? '1.1' }}"
-            :userMetrics="{{ json_encode($userMetrics) }}"
-        ></stats-section>
+{{--        --}}{{-- My Stats --}}
+{{--        <stats-section--}}
+{{--            brand="{{ $brand }}"--}}
+{{--            account-url="{{ user()->getDashboardUrl() }}"--}}
+{{--            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent ?? 0 }}"--}}
+{{--            next-learning-path-level="{{ $nextLearningPathLevel ?? '1.1' }}"--}}
+{{--            :userMetrics="{{ json_encode($userMetrics) }}"--}}
+{{--        ></stats-section>--}}
 
     </div>
 

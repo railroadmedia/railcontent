@@ -54,29 +54,29 @@
              alt="header image"
         />
         <div class="container mx-auto">
-            <img 
-                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0" 
+            <img
+                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo blue"
             >
-            <img 
-                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0" 
+            <img
+                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo red"
             >
-            <img 
-                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0" 
+            <img
+                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo green"
             >
-            <img 
-                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0" 
+            <img
+                class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -94,9 +94,9 @@
 
             <div class="flex flex-wrap items-start max-w-xs md:max-w-none mx-auto px-6 md:px-0">
                 <div class="w-full md:w-1/3 px-2 lg:px-5 mb-5 sm:mb-0">
-                    <img 
-                        class="h-10 inline-block transition-opacity opacity-0" 
-                        src="https://musora-center.s3.amazonaws.com/careers/empathy--icon.svg" 
+                    <img
+                        class="h-10 inline-block transition-opacity opacity-0"
+                        src="https://musora-center.s3.amazonaws.com/careers/empathy--icon.svg"
                         alt="empathy icon"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -106,9 +106,9 @@
                         We listen deeply, ask questions, and celebrate achievements. Students know that we care.</p>
                 </div>
                 <div class="w-full md:w-1/3 px-2 lg:px-5 mb-5 sm:mb-0">
-                    <img 
-                        class="h-10 inline-block transition-opacity opacity-0" 
-                        src="https://musora-center.s3.amazonaws.com/careers/grit-icon.svg" 
+                    <img
+                        class="h-10 inline-block transition-opacity opacity-0"
+                        src="https://musora-center.s3.amazonaws.com/careers/grit-icon.svg"
                         alt="grit icon"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -118,9 +118,9 @@
                         We strive for excellence, overcome setbacks, and keep pushing. Students know that we’ll deliver.</p>
                 </div>
                 <div class="w-full md:w-1/3 px-2 lg:px-5">
-                    <img 
-                        class="h-10 inline-block transition-opacity opacity-0" 
-                        src="https://musora-center.s3.amazonaws.com/careers/passion-icon.svg" 
+                    <img
+                        class="h-10 inline-block transition-opacity opacity-0"
+                        src="https://musora-center.s3.amazonaws.com/careers/passion-icon.svg"
                         alt="passion icon"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -134,15 +134,15 @@
     </section>
     <section class="pt-10 sm:pt-14 lg:pt-16 pb-96 px-5 relative text-white text-center" style="background-color:#000c17;">
         <div class="container mx-auto relative z-0 max-w-5xl">
-            <img 
-                class="-mt-40 inline-block sm:hidden transition-opacity opacity-0" 
+            <img
+                class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-1-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
             >
-            <img 
-                class="-mt-40 hidden sm:inline-block transition-opacity opacity-0" 
+            <img
+                class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-1.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -156,15 +156,15 @@
                 When you join our team, you’ll join our mission to create new musicians and keep them playing longer. That means caring about the details -- the messaging, the experience, and the impact. It also means that we’ll care about you, all humans are unique and we care about ensuring that our people feel welcome, heard and appreciated. We want to make sure you’re supported in the work you do -- with perks, benefits, opportunities for growth and more! We’d love to connect with you.
             </p>
 
-            <img 
-                class="my-12 inline-block sm:hidden transition-opacity opacity-0" 
+            <img
+                class="my-12 inline-block sm:hidden transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://musora-center.s3.amazonaws.com/careers/quote-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
             >
-            <img 
-                class="my-24 hidden sm:inline-block transition-opacity opacity-0" 
+            <img
+                class="my-24 hidden sm:inline-block transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/careers/quote.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -174,7 +174,7 @@
             <div id="join" class="anchor block relative invisible"></div>
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
-                <div class="w-full relative" style="padding-bottom: 90%;">
+                <div class="w-full relative" style="height:700px;">
                     <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/jobs/" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
@@ -190,15 +190,15 @@
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">
         <div class="container mx-auto max-w-5xl">
-            <img 
-                class="-mt-96 inline-block sm:hidden transition-opacity opacity-0" 
+            <img
+                class="-mt-96 inline-block sm:hidden transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-2-m.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
-            <img 
-                class="-mt-96 hidden sm:inline-block" 
+            <img
+                class="-mt-96 hidden sm:inline-block"
                 src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-2.png"
                 alt="collage 2"
                 loading="lazy"
@@ -350,7 +350,7 @@
             <div class="relative -mt-4 sm:-mt-9"></div>
         </div>
     </section>
-    
+
     @include('musora._partials._lets-chat', [
         'onJobs' => true
     ])

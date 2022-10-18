@@ -13,21 +13,34 @@ use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
+use Railroad\Railcontent\Services\CommentService;
+use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railforums\Repositories\PostRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private SubscriptionRepository $subscriptionRepository;
     private ProductRepository $productRepository;
     private CalendarService $calendarService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
+    private ContentService $contentService;
 
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
         ProductRepository $productRepository,
-        CalendarService $calendarService
+        CalendarService $calendarService,
+        CommentService $commentService,
+        PostRepository $postRepository,
+        ContentService $contentService
     ) {
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->calendarService = $calendarService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
+        $this->contentService = $contentService;
     }
 
     public function getCurrentUser()
@@ -87,6 +100,31 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $user = user();
 
+        switch (brand()) {
+            case 'drumeo':
+                $methodSlug = 'drumeo-method';
+                break;
+            case 'pianote':
+                $methodSlug = 'pianote-method';
+                break;
+            case 'guitareo':
+                $methodSlug = 'guitareo-method';
+                break;
+            case 'singeo':
+                $methodSlug = 'singeo-method';
+                break;
+            default:
+                throw new NotFoundHttpException();
+        }
+
+        $methodContent =
+            $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
+                ->first();
+        if($methodContent){
+            $hasStartedMethod = $methodContent['started'];
+            $hasCompletedMethod = $methodContent['completed'];
+        }
+
         return [
             'id' => $user->id,
             'email' => $user->email,
@@ -98,6 +136,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'profile_picture_url' => $user->profile_picture_url,
             'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand() ),
             'level_rank' => $user->getMethodLevel(),
+            'has_started_method' => $hasStartedMethod ?? false,
+            'has_completed_method' => $hasCompletedMethod ?? false,
         ];
     }
 
@@ -105,8 +145,9 @@ class MusoraApiUserProvider implements UserProviderInterface
     : array
     {
         return [
-            'totalXp' => user()->total_xp,
+            'totalXp' => user()->getBrandTotalXp(),
             'xpRank' => user()->getXpRank(),
+            'musoraXP' => user()->getTotalXp()
         ];
     }
 
@@ -226,5 +267,45 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         return null;
+    }
+
+    public function deleteAccount(){
+        $user = user();
+        $userId = $user['id'];
+
+        $this->commentService->markUserCommentsAsDeleted($userId);
+        $this->postRepository->deleteByUserId($userId);
+
+        $user->fill([
+            'email' => 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com',
+            'first_name' => null,
+            'last_name' => null,
+            'display_name' => '',
+            'gender' => null,
+            'country' => null,
+            'region' => null,
+            'city' => null,
+            'birthday' => null,
+            'phone_number' => null,
+            'profile_picture_url' => null,
+            'timezone' => null,
+            'permission_level' => null,
+            'drums_gear_photo' => null,
+            'biography' => null,
+            'piano_gear_photo' => null,
+            'drums_gear_set_brands' => null,
+            'drums_gear_hardware_brands' => null,
+            'drums_gear_stick_brands' => null,
+            'drums_gear_cymbal_brands' => null,
+            'drums_playing_since_year' => null,
+            'piano_gear_piano_brands' => null,
+            'piano_gear_keyboard_brands' => null,
+            'piano_playing_since_year' => null,
+
+        ]);
+        $user->email = 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com';
+        $user->save();
+
+        return $user;
     }
 }

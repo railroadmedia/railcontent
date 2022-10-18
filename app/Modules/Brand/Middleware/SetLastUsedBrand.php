@@ -7,6 +7,8 @@ use App\Modules\Brand\Services\BrandService;
 use Closure;
 use Illuminate\Http\Request;
 
+use Railroad\Railtracker\Services\ConfigService;
+
 use function user;
 
 class SetLastUsedBrand
@@ -53,6 +55,7 @@ class SetLastUsedBrand
             config()->set('railforums.forums_index_page_url', $brand . '/forums');
 
             config()->set('railcontent.brand', $brand);
+            config()->set('points.brand', $brand);
 
             config()->set('railnotifications.brand', $brand);
 
@@ -63,6 +66,13 @@ class SetLastUsedBrand
             foreach (config('railchat.' . $brand, []) as $configKey => $configValue) {
                 config()->set('railchat.' . $configKey, $configValue);
             }
+
+            // set railtracker brand and DB connection
+            $railtrackerConnectionName = config('railtracker.brand_database_connection_names')[$brand];
+            ConfigService::$databaseConnectionName = $railtrackerConnectionName;
+            config()->set('railtracker.database_connection', $railtrackerConnectionName);
+            config()->set('railtracker.database_connection_name', $railtrackerConnectionName);
+            config()->set('railtracker.brand', $brand);
         }
 
         return $next($request);

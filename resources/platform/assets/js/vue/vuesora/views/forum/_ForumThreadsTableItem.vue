@@ -59,8 +59,8 @@
 
             <!-- New Badge-->
             <div v-if="thread.isNew"
-                 class="tw-flex-col tw-hidden tw-mr-6 tw-hidden lg:tw-flex">
-                <span class="tw-text-white tw-rounded-sm tw-rounded-full tw-uppercase tw-flex tw-px-2 tw-py-1.5 tw-text-sm tw-items-center tw-font-bold"
+                 class="tw-flex-col tw-hidden tw-mr-6 lg:tw-flex">
+                <span class="tw-text-white tw-rounded-sm tw-uppercase tw-flex tw-px-1 tw-py-0.5 tw-text-sm tw-items-center tw-font-bold"
                     :class="brandBgColor">
                     <i class="fas fa-star tw-mr-0.5"></i> New
                 </span>

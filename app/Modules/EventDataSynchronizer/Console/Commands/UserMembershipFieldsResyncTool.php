@@ -44,11 +44,6 @@ class UserMembershipFieldsResyncTool extends Command
         DatabaseManager $databaseManager,
         UserMembershipFieldsService $userMembershipFieldsService
     ) {
-        //don't fire assign mentor events yet, mentors not initialized, can be removed after MWP Launch
-        app()->bind(MentorService::class, function ($app) {
-            return new MentorService($app->make(PrimaryBrandService::class), true);
-        });
-
         $databaseManager->connection(config('ecommerce.database_connection_name'))
             ->disableQueryLog();
 

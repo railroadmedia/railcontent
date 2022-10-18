@@ -12,8 +12,8 @@
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <i class="fas fa-calendar-alt tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                    <span class="tw-text-32 tw-font-bold">Schedule</span>
+                    <musora-icon icon-name="calendar-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                    <span class="tw-text-32 tw-font-bold tw-capitalize">{{ $brand }} Schedule</span>
                 </h1>
 
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
@@ -58,7 +58,7 @@
                     </h1>
                 </div>
                 <div class="tw-flex tw-flex-col">
-                    <button class="tw-btn-secondary tw-text-{{ $brand }}" 
+                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" 
                             data-open-modal="scheduleAddToCalendarModal"
                     >
                         <i class="fas fa-calendar-plus tw-mr-2"></i>
@@ -69,7 +69,7 @@
             <div class="tw-flex tw-flex-row">
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
-                    subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
+                    subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
                     theme-color="{{ $brand }}"
                 />
             </div>

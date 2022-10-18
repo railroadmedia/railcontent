@@ -57,7 +57,7 @@
                             Cancel
                         </a>
 
-                        <button class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full sm:tw-w-auto" type="submit" dusk="submit-button">
+                        <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-w-full sm:tw-w-auto" type="submit" dusk="submit-button">
                             Update Forum
                         </button>
                     </div>

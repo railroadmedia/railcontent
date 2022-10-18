@@ -97,15 +97,7 @@ export default {
     },
     computed: {
         baseProfileRoute() {
-            if (this.brand === 'guitareo') {
-                return '/members/account/';
-            }
-
-            if (this.brand === 'pianote') {
-                return '/members/profile/';
-            }
-
-            return '/laravel/public/members/profile/';
+            return '/members/profile/';
         },
     },
     mounted() {

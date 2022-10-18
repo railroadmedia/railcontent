@@ -24,7 +24,7 @@
     <section>
         <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full" :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
 
-            <a :href=" `/members/profile?brand=${brand }` " 
+            <a :href=" `/members/profile` " 
                 :title="[ isSidebarCollapsed ? 'Playlists': '' ]"
                 class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
                 :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"

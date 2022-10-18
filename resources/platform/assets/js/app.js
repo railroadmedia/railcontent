@@ -45,7 +45,7 @@ import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vu
 import PlayAlongs from './vue/vuesora/views/play-alongs/PlayAlongs.vue';
 import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
-import PaymentMethods from './vue/vuesora/views/payment-methods';
+import PaymentMethods from './vue/vuesora/views/payment-methods/PaymentMethods.vue';
 import AssignmentsContainer from './vue/vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 import ContentAssignment from './vue/vuesora/components/ContentAssignment/ContentAssignment.vue';
 import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
@@ -326,6 +326,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "video-player-component" */
             './vue/vuesora/components/VideoPlayer/VideoPlayer.vue'
+        )
+    ))
+
+    .component('VideoMediaElement', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "video-media-element-component" */
+            './vue/vuesora/components/MediaElement/MediaElement.vue'
         )
     ))
 

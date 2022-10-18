@@ -3,11 +3,15 @@
 namespace App\Services;
 
 use App\Collections\PackCollection;
+use App\Decorators\Content\ContentLikesDecorator;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Services\UserProductService;
+use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Usora\Entities\User;
 
 class PackService
 {
@@ -35,8 +39,13 @@ class PackService
      * @return PackCollection
      * @throws \Doctrine\ORM\ORMException
      */
-    public function getPacks($user, $getAll = false)
+    public function getPacks(User $user, $getAll = false)
     {
+        Decorator::$typeDecoratorsEnabled = true;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+
         $oldPullFutureContent = ContentRepository::$pullFutureContent;
         $oldAvailableContentStatues = ContentRepository::$availableContentStatues;
 

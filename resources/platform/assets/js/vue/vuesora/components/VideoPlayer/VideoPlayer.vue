@@ -439,7 +439,7 @@ function fullscreen() {
         Screenfull.toggle(container.value);
     } else {
         // Otherwise we just take the video element and make it fullscreen
-        mediaElement.value.webkitEnterFullScreen();
+        mediaElement.value.requestFullscreen();
     }
 }
 
@@ -813,8 +813,9 @@ onMounted(() => {
     // Add Event Listeners to chapter marker links
     document.addEventListener('click', (event) => {
         const element = event.target;
-
+        console.log(element)
         if (element.matches('[data-jump-to-time]')) {
+            console.log(element)
             seek(element.dataset.jumpToTime);
             document.getElementById('content-container').scrollTop=0;
         }
@@ -1134,7 +1135,7 @@ const {
                         </div>
                     </transition>
 
-                    <video ref="player" playsinline preload="metadata" :poster="poster">
+                    <video id="video-component-id" ref="player" playsinline preload="metadata" :poster="poster">
 
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
                     </video>

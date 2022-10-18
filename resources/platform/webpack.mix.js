@@ -19,7 +19,6 @@ mix
     //JS From Existing Platforms
     .js('resources/platform/assets/js/profile.js', 'public/platform/js')
     .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
-    .js('resources/platform/assets/js/learning-path-preview.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
     .vue({ version: 3 })
     .sass('resources/platform/assets/css/app.scss', 'public/platform/css')
@@ -27,7 +26,7 @@ mix
         postCss: [tailwindcss('./resources/platform/tailwind.config.js')],
     })
     .extract(['alpinejs', 'fast-glob'], 'vendor~unused.js')
-    .extract(['shaka-player', 'screenful', 'mux.js'], 'vendor~player.js')
+    .extract(['shaka-player', 'screenful', 'mux.js', 'mediaelement', 'mediaelement-plugins'], 'vendor~player.js')
     .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()
@@ -36,8 +35,9 @@ mix
 
 mix.webpackConfig(webpack => {
     return {
+        // target: ['web', 'es5'],
         output: {
-            publicPath: ASSET_URL
+            publicPath: ASSET_URL,
         },
         plugins: [
             new webpack.DefinePlugin({

@@ -52,7 +52,6 @@ class MentorService
 
     public function assignMentorByBrand(int $userId, string $brand): bool
     {
-        //Log::info("Assigning Mentor to User $userId");
         $mentor = $this->chooseMentor($brand);
         if (!$mentor) {
             Log::error("Unable to assign Mentor to User $userId");
@@ -72,6 +71,7 @@ class MentorService
         $mentorStudent->save();
         $mentor->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
+        Log::info("Assigned Mentor $mentor->user_id to User $userId");
         return true;
     }
 
@@ -88,7 +88,9 @@ class MentorService
 
     public function ensureMentorState(User $user): EnsureMentorResult
     {
-        if ($this->disableAssigningOnLaunch) return EnsureMentorResult::NoChange;
+        if ($this->disableAssigningOnLaunch) {
+            return EnsureMentorResult::NoChange;
+        }
 
         $active = $user->isActiveStudent();
         $mentorStudent = $user->mentorStudent;
@@ -181,6 +183,22 @@ class MentorService
         $this->bulkReassignMentors($mentorStudents, $mentorUserId);
         $mentor->delete();
         return $mentorStudents;
+    }
+
+    public function reassignRandomStudents(int $mentorUserId, int $nStudents): void
+    {
+        $mentor = $this->getMentorOrNull($mentorUserId);
+        if (!$mentor) {
+            throw new Exception('Mentor does not exist');
+        }
+        $mentorStudents = MentorStudent::query()
+            ->with('user')
+            ->where('mentor_user_id', '=', $mentorUserId)
+            ->inRandomOrder()
+            ->take($nStudents)
+            ->get();
+        $this->bulkReassignMentors($mentorStudents, $mentorUserId);
+        $this->recalculateMentorTotals($mentor);
     }
 
     public function resetCachedMentors()

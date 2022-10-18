@@ -65,7 +65,7 @@
                             </p>
 
                             <div class="flex flex-row flex-wrap play-complete-buttons">
-                                <button class="tw-btn-primary tw-bg-{{ $brand }} tw-mr-3 tw-mb-3 song-play-button">
+                                <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-mr-3 tw-mb-3 song-play-button">
                                     <i class="fas fa-play tw-mr-2 tw-text-base song-play-button"></i>
                                     Play
                                 </button>
@@ -129,7 +129,7 @@
                 @if(!empty($lessonContent->fetch('*assignments', [])))
                     <div style="height: 0px; overflow: hidden;">
                         <div class="flex flex-row pv-3">
-                            <h1 class="heading">Assignments</h1>
+                            <h1 class="heading dark:tw-text-white">Assignments</h1>
                         </div>
                         <div class="flex flex-row">
                             <div class="flex flex-column">

@@ -1,52 +1,51 @@
 <template>
-    <div class="flex flex-column grow">
-        <div class="flex flex-row mb-3 pt-3">
-            <h4 class="subheading">
+    <div class="flex flex-column grow pa-3 tw-border-0 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid">
+        <div class="flex flex-row mb-3">
+            <h2 class="tw-font-bold tw-text-lg tw-text-[#00101D] dark:tw-text-white">
                 Payment Methods
-            </h4>
+            </h2>
         </div>
 
         <ul class="body list-style-none mb-3 flex-column">
             <li class="flex flex-row align-v-center mb-2">
                 <div class="flex flex-column default-col text-center hide-xs-only">
-                    <h6 class="tiny font-bold dense">
+                    <h6 class="tiny font-bold dense tw-text-[#00101D] dark:tw-text-white">
                         Default
                     </h6>
                 </div>
 
                 <div class="flex flex-column">
-                    <h6 class="tiny font-bold dense">
+                    <h6 class="tiny font-bold dense tw-text-[#00101D] dark:tw-text-white">
                         Info
                     </h6>
                 </div>
 
                 <div class="flex flex-column expiry-col text-center">
-                    <h6 class="tiny font-bold dense">
+                    <h6 class="tiny font-bold dense tw-text-[#00101D] dark:tw-text-white">
                         Expires On
                     </h6>
                 </div>
 
                 <div class="flex flex-column actions-col text-center">
-                    <h6 class="tiny font-bold dense">
+                    <h6 class="tiny font-bold dense tw-text-[#00101D] dark:tw-text-white">
                         Actions
                     </h6>
                 </div>
             </li>
             <li
                 v-for="(paymentMethod, i) in paymentMethodsData.data" :key="i"
-                class="flex flex-row align-v-center"
-                style="border-top: 1px solid #ddd;"
+                class="flex flex-row align-v-center tw-border-0 tw-border-t tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid"
             >
                 <div class="flex flex-column default-col text-center body hide-xs-only">
                     <i
                         v-if="isPrimaryPaymentMethod(paymentMethod)"
-                        class="fas fa-check"
+                        class="fas fa-check tw-text-[#00101D] dark:tw-text-white"
                     ></i>
                 </div>
 
                 <div
                     v-if="paymentMethod.relationships.method.data.type === 'creditCard'"
-                    class="flex flex-column body"
+                    class="flex flex-column body tw-text-[#00101D] dark:tw-text-white"
                 >
                     {{ getRelatedAttributesByTypeAndId(
                         paymentMethod.relationships.method.data
@@ -59,12 +58,12 @@
 
                 <div
                     v-if="paymentMethod.relationships.method.data.type === 'paypalBillingAgreement'"
-                    class="flex flex-column body"
+                    class="flex flex-column body tw-text-[#00101D] dark:tw-text-white"
                 >
                     PayPal
                 </div>
 
-                <div class="flex flex-column body expiry-col text-center">
+                <div class="flex flex-column body expiry-col text-center tw-text-[#00101D] dark:tw-text-white">
                     {{ getExpirationDate(paymentMethod) }}
                 </div>
 
@@ -99,16 +98,11 @@
         <div class="flex flex-row flex-wrap align-v-center">
             <div class="flex flex-column xs-12 sm-7 md-4">
                 <button
-                    class="btn"
+                    class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white"
                     data-open-modal="paymentMethodModal"
                     title="Add New Payment Method"
                 >
-                    <span
-                        class="text-white"
-                        :class="themeBgClass"
-                    >
-                        <i class="fas fa-plus mr-1"></i> New Payment Method
-                    </span>
+                    <i class="fas fa-plus tw-mr-2"></i> New Payment Method
                 </button>
             </div>
         </div>
@@ -157,6 +151,7 @@
                     Loading Please Wait...
                 </p>
 
+                <!-- Success Message -->
                 <transition name="grow-fade">
                     <div
                         v-show="formSuccess"

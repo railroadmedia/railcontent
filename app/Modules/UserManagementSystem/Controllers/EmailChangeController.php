@@ -6,8 +6,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Validation\Rule;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Carbon\Carbon;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,11 +13,11 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-
-//use MikeMcLin\WpPassword\Facades\WpPassword;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Modules\UserManagementSystem\Models\EmailChange;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Events\EmailChangeRequest;
+use Modules\UserManagementSystem\Notifications\EmailChange as EmailChangeNotification;
 
 class EmailChangeController extends Controller
 {
@@ -37,8 +35,7 @@ class EmailChangeController extends Controller
      */
     public function __construct(
         Hasher $hasher,
-    )
-    {
+    ) {
         $this->hasher = $hasher;
     }
 
@@ -53,7 +50,9 @@ class EmailChangeController extends Controller
         try {
             $request->validate([
                 'email' => [
-                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore(user()->id),
+                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore(
+                        user()->id
+                    ),
                     'email',
                     'max:255'
                 ],
@@ -70,7 +69,7 @@ class EmailChangeController extends Controller
             $default = 'Please try again, and contact support if the problem persists.';
             $message = ['error-message' => ($errorMessageToUser ?? $default)];
 
-            return redirect()->back()->with($message);
+            return redirect()->back()->withErrors($message);
         }
         $user = user();
 
@@ -101,12 +100,12 @@ class EmailChangeController extends Controller
         $emailChange->email = $payload['email'];
         $emailChange->token = $payload['token'];
         $emailChange->user_id = $user->id;
+        $emailChange->brand = brand();
         $emailChange->save();
-
 
         event(new EmailChangeRequest($payload['token'], $payload['email']));
 
-//        todo: sendEmailChangeNotification($payload['token'], $payload['email']);
+        $this->sendEmailChangeNotification($payload['token'], $payload['email']);
 
         $message = [
             'successes' => new MessageBag(
@@ -133,8 +132,6 @@ class EmailChangeController extends Controller
     public function confirm(Request $request)
     {
         try {
-            //todo: check if <code> <exists> also!
-//            $validationRules = ['code' => 'bail|required|string|exists'];
             $validationRules = ['code' => 'bail|required|string'];
             $this->validate(
                 $request,
@@ -163,19 +160,17 @@ class EmailChangeController extends Controller
             return redirect()->back()->withErrors(['error-message' => 'Token is invalid']);
         }
 
-        // todo: email_change_token_ttl should be declared in a config file
         if (Carbon::parse(
                 $emailChange->updated_at
                     ->format('Y-m-d H:i:s')
             ) <
             Carbon::now()
-//                ->subHours(config('usora.email_change_token_ttl')))
-                ->subHours(24)) {
-            {
+                ->subHours(config('user_management_system.email_change_token_ttl'))) {
+// todo: error message does not appear
                 return redirect()
                     ->back()
-                    ->withErrors(['code' => 'Your email reset code has expired.']);
-            }
+                    ->withErrors(['error-message' => 'Your email reset code has expired.']);
+
         }
 
         $user = User::find($emailChange->user_id);
@@ -194,14 +189,17 @@ class EmailChangeController extends Controller
             ),
         ];
 
-        //todo: define route of redirect!
-        return $request->has('redirect') ?
+        return $request->has('redirect_to') ?
             redirect()
                 ->away($request->get('redirect'))
                 ->with($message) :
             redirect()
-                ->back()
-//                ->to(config('usora.email_change_confirmation_success_redirect_path'))
+                ->to(
+                    route('platform.profile.settings.login-credentials', [
+                        'userId' => $user->id,
+                        'brand' => $emailChange->brand
+                    ])
+                )
                 ->with($message);
     }
 
@@ -218,15 +216,14 @@ class EmailChangeController extends Controller
         return hash_hmac('sha256', Str::random(40), $hash);
     }
 
-//    /**
-//     * @param $token
-//     * @param $email
-//     */
-//    public function sendEmailChangeNotification($token, $email)
-//    {
-//        $class = config('usora.email_change_notification_class');
-//
-//        (new AnonymousNotifiable)->route(config('usora.email_change_notification_channel'), $email)
-//            ->notify(new $class($token));
-//    }
+    /**
+     * @param $token
+     * @param $email
+     */
+    public function sendEmailChangeNotification($token, $email)
+    {
+        $class = config('user_management_system.email_change_notification_class');
+        (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $email)
+            ->notify(new $class($token));
+    }
 }

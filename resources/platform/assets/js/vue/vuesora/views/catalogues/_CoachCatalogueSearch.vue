@@ -16,7 +16,7 @@
         />
         <button
           class="tw-btn-primary tw-btn-circle tw-flex-shrink-0"
-          :class="`tw-bg-${themeColor}`"
+          :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`"
           title="Search"
           @click="submitSearch"
         >
@@ -43,7 +43,6 @@
           <div class="flex flex-column form-group mr-1">
             <select
               id="sortInput"
-              type="text"
               class="borderless dark:tw-text-white tw-pb-0"
               @change="handleContentSort($event)"
               v-model="sort"

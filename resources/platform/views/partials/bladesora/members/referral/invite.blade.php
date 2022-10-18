@@ -23,7 +23,7 @@ $cardImage = $cardImages[brand()];
         style="z-index: 2000; position: fixed !important; width: 100%">
         <div
             class="
-                tw-bg-{{ $brand }}
+                tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600
                 tw-px-3
                 tw-py-2
                 tw-w-4/6
@@ -83,7 +83,7 @@ $cardImage = $cardImages[brand()];
                                     class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="email" id="email" name="email" placeholder="Email address..." value="">
                                 <input name="button" type="submit" id="button"
-                                    class=" tw-btn-primary tw-bg-{{ $brand }} tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                    class=" tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Send Guest Pass" />
                             </div>
                         </form>
@@ -98,7 +98,7 @@ $cardImage = $cardImages[brand()];
                                     type="text" id="referral-link" readonly name="referral-link" placeholder="link"
                                     value="{{ $userReferralLink }}">
                                 <input onclick="copyLink()" name="button" id="button" readonly
-                                    class="tw-bg-{{ $brand }} tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                    class="tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Copy Link" />
                             </div>
                         </form>
