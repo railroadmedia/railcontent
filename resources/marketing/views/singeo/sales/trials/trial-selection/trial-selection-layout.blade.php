@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
             color: #f6bd03;
@@ -100,7 +100,7 @@
                             <h1 class="my-2 md:my-4"><strong>@yield('extra-savings-divided')</strong><sub>/month</sub></h1>
                             <p class="text-yellow"><em>Billed as @yield('extra-savings') per year. </em></p>
                         @else
-                            <h1 class="my-2 md:my-4"><strong>${{ number_format(App\Prices::$singeoMembershipAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
+                            <h1 class="my-2 md:my-4"><strong>${{ number_format(SingeoPrices::$singeoMembershipAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
                             <p class="text-yellow"><em>Billed as ${{ SingeoPrices::$singeoMembershipAnnualFull }} per year. </em></p>
                         @endif
                         <ul class="fa-ul text-left my-4 md:my-6">

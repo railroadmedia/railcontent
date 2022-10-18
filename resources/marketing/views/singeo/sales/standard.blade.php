@@ -76,5 +76,5 @@
 @endsection
 
 @section('final')
-     @include("sales.partials._subscribe-options")
+     @include("singeo.sales.partials._subscribe-options")
 @endsection

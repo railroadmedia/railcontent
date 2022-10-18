@@ -2,7 +2,7 @@
 
 @section('head-includes')
     @parent
-    
+
     <title>The Singeo Retro T-shirt</title>
     <meta name="description" content="Sing with confidence AND style with this super slick Singeo Retro T-shirt!">
     <meta property="og:description" content="Sing with confidence AND style with this super slick Singeo Retro T-shirt!">
@@ -13,8 +13,8 @@
 @section('shop')
     @include('singeo.shop.partials._shop-nav', [
         "name" => "The Singeo Retro T-shirt",
-        "fullPrice" => App\Prices::$mugFull,
-        "price" => App\Prices::$mug,
+        "fullPrice" => SingeoPrices::$mugFull,
+        "price" => SingeoPrices::$mug,
         "clothing" => true
     ])
 @endsection
@@ -28,37 +28,37 @@
 
     @include('singeo.shop.partials.sidebar', [
         "options" => true,
-        "fullPrice" => App\Prices::$shirtsFull,
-        "price" => App\Prices::$shirts,
+        "fullPrice" => SingeoPrices::$shirtsFull,
+        "price" => SingeoPrices::$shirts,
         "variations" => [
             (object)[
                 "name" => "Small",
-                "fullPrice" => App\Prices::$shirtsFull,
-                "price" => App\Prices::$shirts,
+                "fullPrice" => SingeoPrices::$shirtsFull,
+                "price" => SingeoPrices::$shirts,
                 "sku" => "retro-shirt-s"
             ],
             (object)[
                 "name" => "Medium",
-                "fullPrice" => App\Prices::$shirtsFull,
-                "price" => App\Prices::$shirts,
+                "fullPrice" => SingeoPrices::$shirtsFull,
+                "price" => SingeoPrices::$shirts,
                 "sku" => "retro-shirt-m"
             ],
             (object)[
                 "name" => "Large",
-                "fullPrice" => App\Prices::$shirtsFull,
-                "price" => App\Prices::$shirts,
+                "fullPrice" => SingeoPrices::$shirtsFull,
+                "price" => SingeoPrices::$shirts,
                 "sku" => "retro-shirt-l"
             ],
             (object)[
                 "name" => "X-Large",
-                "fullPrice" => App\Prices::$shirtsFull,
-                "price" => App\Prices::$shirts,
+                "fullPrice" => SingeoPrices::$shirtsFull,
+                "price" => SingeoPrices::$shirts,
                 "sku" => "retro-shirt-xl"
             ],
             (object)[
                 "name" => "XX-Large",
-                "fullPrice" => App\Prices::$shirtsFull,
-                "price" => App\Prices::$shirts,
+                "fullPrice" => SingeoPrices::$shirtsFull,
+                "price" => SingeoPrices::$shirts,
                 "sku" => "retro-shirt-xxl"
             ]
         ],

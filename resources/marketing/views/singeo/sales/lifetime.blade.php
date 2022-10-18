@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/animate.css') }}" rel="stylesheet">
 
@@ -42,8 +42,8 @@
     ])
     {{--@include('shop.partials.promo-banner', [--}}
                 {{--"name" => "The Love To Sing Bundle",--}}
-                {{--"fullPrice" => App\Prices::$bundleLifetime,--}}
-                {{--"price" => App\Prices::$bundleLifetime,--}}
+                {{--"fullPrice" => SingeoPrices::$bundleLifetime,--}}
+                {{--"price" => SingeoPrices::$bundleLifetime,--}}
                     {{--"noBreadcrumb" => true,--}}
                     {{--"specialText" => "<strong>EXTENDED FOR CYBER MONDAY</strong>",--}}
             {{--])--}}

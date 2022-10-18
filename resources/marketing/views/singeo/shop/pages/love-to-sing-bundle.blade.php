@@ -105,8 +105,8 @@
 @section('banner')
     @include('singeo.shop.partials.promo-banner', [
                 "name" => "The Love To Sing Bundle",
-                "fullPrice" => App\Prices::$singeoMembershipAnnualFull,
-                "price" => App\Prices::$singeoMembershipAnnual,
+                "fullPrice" => SingeoPrices::$singeoMembershipAnnualFull,
+                "price" => SingeoPrices::$singeoMembershipAnnual,
                     "specialText" => "Save 24%",
                 "noBreadcrumb" => true
             ])
@@ -124,8 +124,8 @@
         "logo" => "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/annual-logo.png",
         "bundle" => true,
         "sku" => "products[singeo-annual-recurring-membership]=1&products[vowel-sounds-poster]=1&products[mouth-mug]=1&products[wallflower-tumbler]=1&products[singing-starter-kit]=1&redirect=/order&locked=true",
-        "fullPrice" => App\Prices::$singeoMembershipAnnualFull,
-        "price" => App\Prices::$singeoMembershipAnnual,
+        "fullPrice" => SingeoPrices::$singeoMembershipAnnualFull,
+        "price" => SingeoPrices::$singeoMembershipAnnual,
         "specialText" => "+$72 In Bonuses",
         "guaranteeBadge" => true,
         "soldOut" => true,

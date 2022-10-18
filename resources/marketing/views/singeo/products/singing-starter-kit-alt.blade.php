@@ -27,8 +27,8 @@
 
     {{--@include('shop.partials.promo-banner', [--}}
                 {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => App\Prices::$singingStarterKitFull,--}}
-                {{--"price" => App\Prices::$singingStarterKit,--}}
+                {{--"fullPrice" => SingeoPrices::$singingStarterKitFull,--}}
+                {{--"price" => SingeoPrices::$singingStarterKit,--}}
                 {{--"noBreadcrumb" => true--}}
             {{--])--}}
 
