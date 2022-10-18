@@ -3,7 +3,7 @@
 @section('global-head')
     <title>You're almost there | Pianote</title>
     <meta property="og:title" content="You're almost there | Pianote">
-    
+
     <meta name="description" content="Please enter your email address to get your personality result. ">
     <meta property="og:description" content="Please enter your email address to get your personality result. ">
 
@@ -37,6 +37,8 @@
                 "formName" => 'Personality Quiz Explorer',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Explorer - Web Form",
                 'buttonText' => 'Show my results',
+                'redirect' => true,
+                'redirectURL' => '/personality-quiz/explorer',
                 'disclaimerColor' => '#D0E2E7'
             ])
         </div>
