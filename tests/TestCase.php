@@ -21,7 +21,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUp(): void
     {
-        putenv('RAILCONTENT_DATA_MODE=client');
+        putenv('RAILFORUMS_DATA_MODE="client"'); //hack to skip rail forums migrations
 
         $this->faker = Factory::create();
 
@@ -39,10 +39,19 @@ abstract class TestCase extends BaseTestCase
      */
     public function createApplication()
     {
+        $this->ensureDatabaseExists();
+
         $app = require __DIR__ . '/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
-
         return $app;
+    }
+
+    private function ensureDatabaseExists(): void
+    {
+        $databasePath = __DIR__ . '/../database/testing.sqlite';
+        if (!file_exists($databasePath)) {
+            file_put_contents($databasePath, '');
+        }
     }
 }

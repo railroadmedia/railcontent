@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use Doctrine\Inflector\InflectorFactory;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
 use Railroad\Ecommerce\Faker\Factory;
@@ -229,27 +228,5 @@ class EventDataSynchronizerTestCase extends TestCase
 
         // this is required for railcontent connection masking to work properly from test to test
         RepositoryBase::$connectionMask = null;
-    }
-
-    /**
-     * @param $email
-     * @param $password
-     * @return int
-     */
-    public function createUserAndGetId($email = null, $password = null, $permissionLevel = null)
-    {
-        return $this->databaseManager->connection('testbench')->table('usora_users')
-            ->insertGetId(
-                [
-                    'email' => $email ?? $this->faker->email,
-                    'password' => $password ?? $this->faker->password,
-                    'display_name' => $this->faker->name,
-                    'permission_level' => $permissionLevel,
-                    'created_at' => Carbon::now()
-                        ->toDateTimeString(),
-                    'updated_at' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
     }
 }
