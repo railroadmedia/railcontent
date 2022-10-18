@@ -243,7 +243,7 @@
                             {{--<p><strong>6 Months of Singing Lessons</strong><br>--}}
                                 {{--<em>6-Month Singeo Membership (Normally $90) <br class="inline md:hidden lg:inline">--}}
                                     {{--+ Singing Starter Kit</em>--}}
-                                {{--<span class="price"><s class="opacity-30">$109</s> <strong style="color:#ffa360;">${{ App\Prices::$singeoMembership6Month }}</strong></span>--}}
+                                {{--<span class="price"><s class="opacity-30">$109</s> <strong style="color:#ffa360;">${{ SingeoPrices::$singeoMembership6Month }}</strong></span>--}}
                             {{--</p>--}}
                             {{--<span class="join" style="background-color:#ffa360;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
@@ -258,7 +258,7 @@
                             {{--<p><strong>1 Year of Singing Lessons</strong><br>--}}
                                 {{--<em>Annual Singeo Membership + <br class="inline md:hidden lg:inline">--}}
                                     {{--Tumbler + Mug + Poster + Singing Starter Kit </em>--}}
-                                {{--<span class="price"><s class="opacity-30">$199</s> <strong style="color:#ed4277;">${{ App\Prices::$singeoMembershipAnnual }}</strong></span>--}}
+                                {{--<span class="price"><s class="opacity-30">$199</s> <strong style="color:#ed4277;">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>--}}
                             {{--</p>--}}
                             {{--<span class="join" style="background-color:#ed4277;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
@@ -342,8 +342,8 @@
                     "thumbnail" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
                     "title" => "Retro T-shirt",
                     "cardDescription" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
-                    "fullPrice" => App\Prices::$shirtsFull,
-                    "price" => App\Prices::$shirts,
+                    "fullPrice" => SingeoPrices::$shirtsFull,
+                    "price" => SingeoPrices::$shirts,
                     "popularity" => "85",
                     "category" => "shirts",
                     "physical" => true,

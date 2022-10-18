@@ -34,9 +34,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/04/g-major-scale.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/04/g-major-scale.jpg',
             "imgAlt" => "g-major-scale",
-            "gifVideo" => cdn('quick-start/gifs/04/g-major-scale.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/04/g-major-scale.mp4',
         ])
     </div>
 

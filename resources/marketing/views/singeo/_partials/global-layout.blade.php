@@ -37,7 +37,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     @yield('global-body')
-    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])
+{{--    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])--}}
     <script type="text/javascript">
         Beacon('on', 'ready', () => {
             document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";

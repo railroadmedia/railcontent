@@ -1,4 +1,4 @@
-@extends('sales.standard-layout', [
+@extends('singeo.sales.standard-layout', [
     "trialVersion" => true
 ])
 @section('global-head')
@@ -40,5 +40,5 @@
 
 @section('final')
     <div id="customize-anchor" class="anchor"></div>
-    @include('sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
+    @include('singeo.sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
 @stop

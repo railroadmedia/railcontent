@@ -97,13 +97,13 @@
 @section('body-class', 'tw-m-0')
 
 @section('global-body')
-    @include('sales.partials._nav', [
+    @include('singeo.sales.partials._nav', [
         'cartVersion' => true
     ])
 
     @include('bladesora::members.referral.join')
 
-    @include('sales.partials._footer')
+    @include('singeo.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>

@@ -700,6 +700,55 @@ Make this summer one to remember with the Summer Songs Bundle.',
                     ],
                 ],
             ],
+            [
+                'brand' => 4,
+                'product_type_id' => 6,
+                'name' => 'The Perfect Harmony Bundle',
+                'slug' => 'ultimate-bundle',
+                'sku' => 'products[singeo-annual-recurring-membership]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[singing-starter-kit]=1&locked=true',
+                'meta_desc' => 'The EASY way to sing in perfect harmony',
+                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg',
+                'price' => 158,
+                'discounted_price' => 127,
+                'special_text' => '',
+                'page_logo' => 'https://singeo.s3.amazonaws.com/sales/promos/october/perfect_harmony_bundle_black.png',
+                'header_text' => 'The EASY way to sing in perfect harmony',
+                'video_src' => '',
+                'images' => [
+                    'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg'
+                ],
+                'overview' => "If you dream of singing beautiful harmonies and creating something extraordinary, then you need The Perfect Harmony Bundle.
+
+Kick your singing journey into gear with the Singer Starter Kit and learn to unleash the full potential of your voice. From warm-up exercise routines to tricks and techniques to help you vocalize with less tension and accurate pitch.
+
+Then use The Essential Guide To Beautiful Harmonies to elevate your performances with your choir, band, or duet partner. This 8-lesson, easy-to-follow course will have you harmonizing after the first lesson. **That means you could sing your first harmony 10 minutes from now!**
+
+Finally, use your Singeo Member Access to get unlimited personal feedback from real coaches to help you get unstuck in your journey. Get the support you need to achieve your singing goals and have the voice you’ve always wanted.
+
+**Lifetime Access:**
+
+Once you grab The Perfect Harmony Bundle, you’ll never have to worry about having access to your lessons. Because even if you don’t choose to renew your Singeo membership, you’ll get to keep your bonus featured courses FOREVER.",
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => true,
+                'products' => [
+                    [
+                        'name' => 'Singeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'The Singing Starter Kit',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'The Essential Guide to Beautiful Harmonies',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                ],
+            ],
 //            [
 //                'brand' => 4,
 //                'product_type_id' => 6,

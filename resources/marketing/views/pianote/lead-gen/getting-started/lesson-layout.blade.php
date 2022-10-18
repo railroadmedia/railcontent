@@ -14,11 +14,11 @@
 
 @section('meta-description', 'Go from absolute beginner to playing your first song in four easy lessons!')
 
-@section('meta-img', cdn('chord-hacks/bg.jpg'))
+@section('meta-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/bg.jpg')
 
 @section('meta-url', 'https://www.pianote.com/getting-started')
 
-@section('lesson-logo', cdn('lead-gen/getting-started/logo-2.svg'))
+@section('lesson-logo', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/logo-2.svg')
 
 @section('lesson-index-url', '/getting-started/lessons')
 

@@ -2,7 +2,7 @@
 
 @section('head-includes')
     @parent
-    
+
     <title>The Singeo Rockstar Mug</title>
     <meta name="description" content="keep your vocal cords hydrated with this super rad mug.">
     <meta property="og:description" content="keep your vocal cords hydrated with this super rad mug.">
@@ -13,8 +13,8 @@
 @section('banner')
     @include('singeo.shop.partials._shop-nav', [
         "name" => "The Singeo Rockstar Mug",
-        "fullPrice" => App\Prices::$mugFull,
-        "price" => App\Prices::$mug,
+        "fullPrice" => SingeoPrices::$mugFull,
+        "price" => SingeoPrices::$mug,
         "clothing" => true
     ])
 @endsection
@@ -28,8 +28,8 @@
 
     @include('singeo.shop.partials.sidebar', [
         "sku" => "mouth-mug",
-        "fullPrice" => App\Prices::$mugFull,
-        "price" => App\Prices::$mug,
+        "fullPrice" => SingeoPrices::$mugFull,
+        "price" => SingeoPrices::$mug,
     ])
 @endsection
 

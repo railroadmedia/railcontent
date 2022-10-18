@@ -48,8 +48,8 @@
 @section('banner')
     @include('singeo.shop.partials.promo-banner', [
                 "name" => "The Beginner Bundle",
-                "fullPrice" => App\Prices::$singeoMembership6MonthFull,
-                "price" => App\Prices::$singeoMembership6Month,
+                "fullPrice" => SingeoPrices::$singeoMembership6MonthFull,
+                "price" => SingeoPrices::$singeoMembership6Month,
                 "noBreadcrumb" => true
             ])
 @endsection
@@ -66,8 +66,8 @@
         "logo" => "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-logo.png",
         "bundle" => true,
         "sku" => "products[singeo-6-month-recurring-membership]=1&products[singing-starter-kit]=1&locked=true",
-        "fullPrice" => App\Prices::$singeoMembership6MonthFull,
-        "price" => App\Prices::$singeoMembership6Month,
+        "fullPrice" => SingeoPrices::$singeoMembership6MonthFull,
+        "price" => SingeoPrices::$singeoMembership6Month,
         "specialText" => "+$19 In Bonuses",
         "guaranteeBadge" => true,
         "soldOut" => true,

@@ -17,7 +17,7 @@
                 <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/july/footer_collage.png">
             </div>
         </div>
-        <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ App\Prices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ SingeoPrices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 

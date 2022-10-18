@@ -1,4 +1,4 @@
-@extends('sales.standard-layout', [
+@extends('singeo.sales.standard-layout', [
 "trialVersion" => true
 ])
 
@@ -11,5 +11,5 @@
 
 @section('final')
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include("sales.partials._final-trial", [ "url" => "/choose-your-trial-month" ])
+    @include("singeo.sales.partials._final-trial", [ "url" => "/choose-your-trial-month" ])
 @endsection

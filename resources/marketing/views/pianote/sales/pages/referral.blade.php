@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/fb-share-image.jpg" style="display: none;">
 
-    @include('members.partials._fonts')
+    @include('pianote._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">

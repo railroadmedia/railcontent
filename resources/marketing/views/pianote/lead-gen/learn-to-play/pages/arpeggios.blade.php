@@ -30,9 +30,9 @@
         </p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-        "gifImage" => cdn('quick-start/gifs/09/right-hand-arpeggio.jpg'),
+        "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/09/right-hand-arpeggio.jpg',
         "imgAlt" => "right-hand-arpeggio",
-        "gifVideo" => cdn('quick-start/gifs/09/right-hand-arpeggio.mp4'),
+        "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/09/right-hand-arpeggio.mp4',
         ])
     </div>
 
@@ -48,9 +48,9 @@
         </p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-           "gifImage" => cdn('quick-start/gifs/09/arpeggio-progression.jpg'),
+           "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/09/arpeggio-progression.jpg',
            "imgAlt" => "arpeggio-progression",
-           "gifVideo" => cdn('quick-start/gifs/09/arpeggio-progression.mp4'),
+           "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/09/arpeggio-progression.mp4',
        ])
     </div>
 @endsection

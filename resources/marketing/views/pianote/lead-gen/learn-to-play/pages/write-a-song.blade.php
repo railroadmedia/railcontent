@@ -28,9 +28,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-           "gifImage" => cdn('quick-start/gifs/10/i-iv-v-progression-triads.jpg'),
+           "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/10/i-iv-v-progression-triads.jpg',
            "imgAlt" => "i-iv-v-progression-triads",
-           "gifVideo" => cdn('quick-start/gifs/10/i-iv-v-progression-triads.mp4'),
+           "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/10/i-iv-v-progression-triads.mp4',
         ])
     </div>
 

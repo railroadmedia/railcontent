@@ -19,7 +19,7 @@
 
     <div class="container jordan-message mx-auto lg:max-w-6xl flex flex-wrap items-center">
         <div class="w-full md:w-1/4 lg:w-1/5 text-center px-4">
-            <img class="mx-auto" src="{{ cdn('lead-gen/getting-started/lisa-witt.jpg') }}" alt="lisa-witt">
+            <img class="mx-auto" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lisa-witt.jpg" alt="lisa-witt">
         </div>
         <div class="w-full md:w-3/4 lg:w-4/5 px-4">
             <div class="medium-heading mt-4 mb-2 lg:mt-6">Start Reading Music On The Piano In Minutes!</div>

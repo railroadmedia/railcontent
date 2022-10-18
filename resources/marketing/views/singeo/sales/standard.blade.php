@@ -1,4 +1,4 @@
-@extends('sales.standard-layout', [
+@extends('singeo.sales.standard-layout', [
     "openVersion" => true
 ])
 
@@ -76,5 +76,5 @@
 @endsection
 
 @section('final')
-     @include("sales.partials._subscribe-options")
+     @include("singeo.sales.partials._subscribe-options")
 @endsection

@@ -29,9 +29,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/02/c-major-triad.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/02/c-major-triad.jpg',
             "imgAlt" => "c-major-triad",
-            "gifVideo" => cdn('quick-start/gifs/02/c-major-triad.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/02/c-major-triad.mp4',
         ])
     </div>
 
@@ -44,9 +44,9 @@
 
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/02/left-hand-c-major-triad.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/02/left-hand-c-major-triad.jpg',
             "imgAlt" => "left-hand-c-major-triad",
-            "gifVideo" => cdn('quick-start/gifs/02/left-hand-c-major-triad.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/02/left-hand-c-major-triad.mp4',
         ])
     </div>
 

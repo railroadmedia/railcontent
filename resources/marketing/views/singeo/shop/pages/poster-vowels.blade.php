@@ -2,7 +2,7 @@
 
 @section('head-includes')
     @parent
-    
+
     <title>Vowel Practice Poster</title>
     <meta name="description" content="Your new favorite practice tool.">
     <meta property="og:description" content="Your new favorite practice tool.">
@@ -13,8 +13,8 @@
 @section('banner')
     @include('singeo.shop.partials._shop-nav', [
         "name" => "Vowel Practice Poster",
-        "fullPrice" => App\Prices::$posterFull,
-        "price" => App\Prices::$poster,
+        "fullPrice" => SingeoPrices::$posterFull,
+        "price" => SingeoPrices::$poster,
         "clothing" => true
     ])
 @endsection
@@ -28,8 +28,8 @@
 
     @include('singeo.shop.partials.sidebar', [
         "sku" => "vowel-sounds-poster",
-        "fullPrice" => App\Prices::$posterFull,
-        "price" => App\Prices::$poster,
+        "fullPrice" => SingeoPrices::$posterFull,
+        "price" => SingeoPrices::$poster,
     ])
 @endsection
 
@@ -52,4 +52,3 @@
         ]
     ])
 @endsection
-   

@@ -32,9 +32,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/06/walk-from-a-c.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/walk-from-a-c.jpg',
             "imgAlt" => "walk-from-a-c",
-            "gifVideo" => cdn('quick-start/gifs/06/walk-from-a-c.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/walk-from-a-c.mp4',
         ])
     </div>
 
@@ -57,9 +57,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/06/a-minor-triad.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/a-minor-triad.jpg',
             "imgAlt" => "a-minor-triad",
-            "gifVideo" => cdn('quick-start/gifs/06/a-minor-triad.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/a-minor-triad.mp4',
         ])
     </div>
 
@@ -76,9 +76,9 @@
 
     <div class="flex flex-col lg:flex-row mb-4">
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/06/e-minor-triad.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/e-minor-triad.jpg',
             "imgAlt" => "e-minor-triad",
-            "gifVideo" => cdn('quick-start/gifs/06/e-minor-triad.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/e-minor-triad.mp4',
         ])
 
         <br>
@@ -86,9 +86,9 @@
         <p class="small-body text-center lg:hidden">The D minor triad is composed of notes D-F-A</p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/06/d-minor-triad.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/d-minor-triad.jpg',
             "imgAlt" => "d-minor-triad",
-            "gifVideo" => cdn('quick-start/gifs/06/d-minor-triad.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/06/d-minor-triad.mp4',
         ])
     </div>
 
