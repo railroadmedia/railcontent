@@ -121,8 +121,8 @@
         }
     </style>
 
-    @include('members.partials._fonts')
-    @include('members.partials._favicons')
+    @include('pianote._partials._fonts')
+    @include('pianote._partials._favicons')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 

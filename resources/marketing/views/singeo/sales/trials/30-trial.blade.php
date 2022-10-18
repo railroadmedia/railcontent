@@ -1,4 +1,4 @@
-@extends('sales.standard-layout', [
+@extends('singeo.sales.standard-layout', [
 "trialVersion" => true
 ])
 

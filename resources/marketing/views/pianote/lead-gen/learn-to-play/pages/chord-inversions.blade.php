@@ -32,9 +32,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/07/c-1st-inversion.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/07/c-1st-inversion.jpg',
             "imgAlt" => "c-1st-inversion",
-            "gifVideo" => cdn('quick-start/gifs/07/c-1st-inversion.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/07/c-1st-inversion.mp4',
         ])
     </div>
 
@@ -45,9 +45,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/07/c-2nd-inversion.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/07/c-2nd-inversion.jpg',
             "imgAlt" => "c-2nd-inversion",
-            "gifVideo" => cdn('quick-start/gifs/07/c-2nd-inversion.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/07/c-2nd-inversion.mp4',
         ])
     </div>
 
@@ -64,9 +64,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-           "gifImage" => cdn('quick-start/gifs/07/c-triads-exercise.jpg'),
+           "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/07/c-triads-exercise.jpg',
            "imgAlt" => "c-triads-exercise",
-           "gifVideo" => cdn('quick-start/gifs/07/c-triads-exercise.mp4'),
+           "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/07/c-triads-exercise.mp4',
        ])
     </div>
 

@@ -14,7 +14,7 @@
 
     <header class="header text-center text-white py-12 md:py-18 lg:py-20 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/bg.jpg);">
         <div class="container mx-auto relative z-10 max-w-4xl">
-            <img class="h-6 md:h-10 lg:h-12" src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/{{cdn('chord-hacks/logo.png')}}" alt="cord hacks logo">
+            <img class="h-6 md:h-10 lg:h-12" src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png" alt="cord hacks logo">
         </div>
     </header>
 

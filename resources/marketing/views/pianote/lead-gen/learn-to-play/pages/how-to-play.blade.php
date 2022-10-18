@@ -37,7 +37,7 @@
     </p>
 
     <div class="text-center">
-        <img class="piano-img mx-auto" src="{{ cdn('quick-start/graphics/2-octaves.jpg') }}" alt="2-octaves">
+        <img class="piano-img mx-auto" src="https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/graphics/2-octaves.jpg" alt="2-octaves">
     </div>
 
     <p class="mb-4">
@@ -58,9 +58,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/01/c-major-scale.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/c-major-scale.jpg',
             "imgAlt" => "c-major-scale",
-            "gifVideo" => cdn('quick-start/gifs/01/c-major-scale.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/c-major-scale.mp4',
         ])
     </div>
 
@@ -72,9 +72,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/01/fingers.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/fingers.jpg',
             "imgAlt" => "fingers",
-            "gifVideo" => cdn('quick-start/gifs/01/fingers.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/fingers.mp4',
         ])
     </div>
 
@@ -90,15 +90,15 @@
 
     <div class="flex flex-col lg:flex-row">
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/01/thumbtuck.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/thumbtuck.jpg',
             "imgAlt" => "thumbtuck",
-            "gifVideo" => cdn('quick-start/gifs/01/thumbtuck.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/thumbtuck.mp4',
         ])
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/01/left-hand-thumbtuck.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/left-hand-thumbtuck.jpg',
             "imgAlt" => "left-hand-thumbtuck",
-            "gifVideo" => cdn('quick-start/gifs/01/left-hand-thumbtuck.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/01/left-hand-thumbtuck.mp4',
         ])
     </div>
 

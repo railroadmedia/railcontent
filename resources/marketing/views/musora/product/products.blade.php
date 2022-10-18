@@ -184,6 +184,20 @@
                             ])
                         }
                         @endforeach
+                        @if($theme === 'drumeo')
+                            @include('musora.product.partials._drum-shop-card', [
+                                 "badgeText" => "SEE MORE ON TEESPRING",
+                                 "itemURL" => "https://teespring.com/stores/drumeo",
+                                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/teespring.jpg",
+                                 "title" => "Teespring Drumeo Store",
+                                 "cardDescription" => "Check out our on-demand designs that are only available through Teespring.",
+                                 "specialPrice" => "Various Designs & Pricing",
+                                 "price" => 'Various Designs & Pricing',
+                                 "category" => "shirts",
+                                 "buttonText" => "VISIT TEESPRING <i class='fas fa-external-link'></i>",
+                                 "externalURL" => true,
+                            ])
+                        @endif
                     </ul>
                 </section>
             @endif

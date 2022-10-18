@@ -9,7 +9,7 @@
 
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/Q-SCIENTIST.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    @include('members.partials._fonts')
+    @include('pianote._partials._fonts')
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">

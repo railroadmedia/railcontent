@@ -14,7 +14,7 @@
 
 @section('meta-description', 'Ever wanted to learn the piano?  This video series will get you playing in no time!')
 
-@section('meta-img', cdn('quick-start/learn-piano.jpg'))
+@section('meta-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/learn-piano.jpg')
 
 @section('meta-url', 'https://www.pianote.com/learn-piano')
 

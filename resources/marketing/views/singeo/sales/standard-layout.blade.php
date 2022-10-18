@@ -1333,13 +1333,13 @@
     {{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>--}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="/assets/marketing/sales-page.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/sales-page.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/modal.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
     <script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/assets/js/sliding-anchor.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/sliding-anchor.js"></script>
     <script>
         $(document).ready(function () {
             $('.tzcd-full').countdown('2022/10/01')

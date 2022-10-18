@@ -31,9 +31,9 @@
         </p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/03/finger-exercise-3.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/03/finger-exercise-3.jpg',
             "imgAlt" => "finger-exercise-3",
-            "gifVideo" => cdn('quick-start/gifs/03/finger-exercise-3.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/03/finger-exercise-3.mp4',
         ])
     </div>
 
@@ -49,9 +49,9 @@
         </p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/03/2-handed-scale.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/03/2-handed-scale.jpg',
             "imgAlt" => "2-handed-scale",
-            "gifVideo" => cdn('quick-start/gifs/03/2-handed-scale.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/03/2-handed-scale.mp4',
         ])
     </div>
 

@@ -31,9 +31,9 @@
         </p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/08/d-minor-chord.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/d-minor-chord.jpg',
             "imgAlt" => "d-minor-chord",
-            "gifVideo" => cdn('quick-start/gifs/08/d-minor-chord.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/d-minor-chord.mp4',
         ])
     </div>
 
@@ -46,9 +46,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-           "gifImage" => cdn('quick-start/gifs/08/e-minor-chord.jpg'),
+           "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/e-minor-chord.jpg',
            "imgAlt" => "e-minor-chord",
-           "gifVideo" => cdn('quick-start/gifs/08/e-minor-chord.mp4'),
+           "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/e-minor-chord.mp4',
         ])
     </div>
 
@@ -61,9 +61,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-           "gifImage" => cdn('quick-start/gifs/08/f-major-and-g-major-chords.jpg'),
+           "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/f-major-and-g-major-chords.jpg',
            "imgAlt" => "f-major-and-g-major-chords",
-           "gifVideo" => cdn('quick-start/gifs/08/f-major-and-g-major-chords.mp4'),
+           "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/f-major-and-g-major-chords.mp4',
        ])
     </div>
 
@@ -76,9 +76,9 @@
         </div>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-           "gifImage" => cdn('quick-start/gifs/08/b-half-diminished-chord.jpg'),
+           "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/b-half-diminished-chord.jpg',
            "imgAlt" => "b-half-diminished-chord",
-           "gifVideo" => cdn('quick-start/gifs/08/b-half-diminished-chord.mp4'),
+           "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/08/b-half-diminished-chord.mp4',
        ])
     </div>
 

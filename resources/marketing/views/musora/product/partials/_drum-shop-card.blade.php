@@ -17,7 +17,7 @@
                             Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif
-                    @if ($soldOut)
+                    @if (!empty($soldOut) && $soldOut)
                         <span
                             class="bg-{{ $theme }} text-white rounded-br-md py-1 px-2 font-roboto absolute top-0 left-0 uppercase font-bold text-[11px]">
                                 sold out
@@ -33,12 +33,12 @@
                     <i class="fas fa-arrow-right hover-icon"></i>
                 </div>
                 <div class="p-2 px-2 pb-4 md:py-4 border-t border-[#ddd]">
-                    <h6 class="lg:text-base">{!! $title !!}</h6>
+                    <h6 class="lg:text-base font-bold">{!! $title !!}</h6>
                     @if(!empty($packAuthor))
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{ floatval($specialPrice) }}</strong></p>
+                        <p class="text-{{$theme}}"><strong>{{ $specialPrice }}</strong></p>
                     @elseif(!empty($soldOut) && $soldOut)
                         <p class="text-{{$theme}}"><strong>SOLD OUT</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)

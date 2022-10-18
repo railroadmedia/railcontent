@@ -8,7 +8,7 @@
 @section('page-body')
     @include('pianote.lead-gen.partials.header2',[
         "bg" => 'url("https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/bg.jpg") center center/cover no-repeat',
-        "imgSrc" => cdn('chord-hacks/logo.png'),
+        "imgSrc" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png',
         "text" => '<div class="medium-body mt-4 mb-5"><em>The easier way to learn piano chords so you can play popular songs!</em></div>
         <p class="medium-body">Just enter your email below <br class="md:hidden "> for 6 free video lessons...</p>',
         "form" => true,
@@ -18,7 +18,7 @@
 
     <div class="container jordan-message lg:mx-auto lg:max-w-6xl flex flex-wrap items-center">
         <div class="w-full md:w-1/4 lg:w-1/5 text-center px-4">
-            <img class="mx-auto" src="{{ cdn('chord-hacks/lisa.jpg') }}" alt="lisa-witt">
+            <img class="mx-auto" src="https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/lisa.jpg" alt="lisa-witt">
         </div>
         <div class="w-full md:w-3/4 lg:w-4/5 px-4">
             <div class="medium-heading mt-4 mb-2 lg:mt-6">Learn to play piano quicker with chords!</div>
@@ -29,27 +29,27 @@
     @include('pianote.lead-gen.partials.series1',[
         "lessons" => [
             [
-                "boxImage" => cdn('chord-hacks/chord-hacking.jpg'),
+                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/chord-hacking.jpg',
                 "boxAlt" => "chord-hacking",
             ],
             [
-                "boxImage" => cdn('chord-hacks/inversions.jpg'),
+                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/inversions.jpg',
                 "boxAlt" => "inversions",
             ],
             [
-                "boxImage" => cdn('chord-hacks/adding-rhythm.jpg'),
+                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/adding-rhythm.jpg',
                 "boxAlt" => "adding-rhythm",
             ],
             [
-                "boxImage" => cdn('chord-hacks/two-hands.jpg'),
+                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/two-hands.jpg',
                 "boxAlt" => "two-hands",
             ],
             [
-                "boxImage" => cdn('chord-hacks/chord-progressions.jpg'),
+                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/chord-progressions.jpg',
                 "boxAlt" => "chord-progressions",
             ],
             [
-                "boxImage" => cdn('chord-hacks/popular-songs.jpg'),
+                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/popular-songs.jpg',
                 "boxAlt" => "popular-songs",
             ],
         ],
@@ -66,7 +66,7 @@
     <div class="reveal text-center modal" id="signUpModal" data-reveal style="max-width:560px;background-color: rgb(243, 244, 246);">
         <div class="modal-content">
             <div class="w-full">
-                <img class="inverted" src="{{ cdn('chord-hacks/logo.png') }}" alt="getting-started-logo">
+                <img class="inverted" src="https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png" alt="getting-started-logo">
 
                 <div class="medium-body text-center">
                     Enter your email below <br>  for your free piano lessons!

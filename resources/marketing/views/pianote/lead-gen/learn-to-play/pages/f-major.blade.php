@@ -30,7 +30,7 @@
         The reason why we need to add sharps and flats to certain keys is because there is a formula that all major scales follow.  Without this formula all of your scales will sound slightly off in one way or another.  Let’s take a look at how this formula works to give us that major scale sound.  We can break any scale down into a series of full-tones and semitones.  You’ve already learned about semitones via sharps and flats.  A full-tone step is two piano keys apart.  For example, the jump from E to F is a semitone jump, as there's not black key in between..
     </p>
 
-    <img class="piano-img w-full" src="{{ cdn('quick-start/graphics/full-tone-semi-tone.jpg') }}" alt="full-tone-semi-tone">
+    <img class="piano-img w-full" src="https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/graphics/full-tone-semi-tone.jpg}" alt="full-tone-semi-tone">
 
     <p class="mb-4">
         A major scale is mostly made up of fulltones with two big exceptions.  There are semitone jumps between notes 3-4 and notes 7-8 of every major scale.  If you look closely at the pattern of the keyboard from starting on F, you can see why we need to flatten the fourth note, B in order for the scale to work within that formula.  As long as you remember those two semitone ‘jump-points’ you can play that major scale pattern in any key!
@@ -42,9 +42,9 @@
         </p>
 
         @include('pianote.lead-gen.learn-to-play.elements.gif', [
-            "gifImage" => cdn('quick-start/gifs/05/f-major-scale.jpg'),
+            "gifImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/05/f-major-scale.jpg',
             "imgAlt" => "f-major-scale",
-            "gifVideo" => cdn('quick-start/gifs/05/f-major-scale.mp4'),
+            "gifVideo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/gifs/05/f-major-scale.mp4',
         ])
     </div>
 @endsection

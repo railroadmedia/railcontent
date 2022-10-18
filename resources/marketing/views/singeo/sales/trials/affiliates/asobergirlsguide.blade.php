@@ -1,4 +1,4 @@
-@extends('sales.trials.affiliates.affiliate-trial-layout')
+@extends('singeo.sales.trials.affiliates.affiliate-trial-layout')
 
 @section('name', 'A Sober Girls Guide')
 
