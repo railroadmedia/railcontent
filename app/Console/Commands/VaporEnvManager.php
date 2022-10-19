@@ -78,14 +78,28 @@ class VaporEnvManager extends Command
             'credentials' => $credentials
         ]);
 
-        $allParameters = $ssmClient->describeParameters();
+        // MaxResults
+        $allParameters = [];
+        $maxResults = 3;
+        $nextToken = null;
+
+        do {
+            $parametersResponse = $ssmClient->describeParameters([
+                'NextToken' => $nextToken,
+                "MaxResults" => $maxResults
+            ]);
+
+            $nextToken = $parametersResponse['NextToken'] ?? null;
+
+            $allParameters = array_merge($allParameters, $parametersResponse->toArray()['Parameters']);
+        } while (count($parametersResponse['Parameters']) == $maxResults);
+
         $parametersForEnvironment = [];
 
-        foreach ($allParameters->toArray()['Parameters'] ?? [] as $parameterData) {
+        foreach ($allParameters ?? [] as $parameterData) {
             $parameterNamePathParts = explode('/', trim($parameterData['Name'], '/'));
             $parameterEnvironmentPathName = $parameterNamePathParts[0];
             $parameterSecretName = $parameterNamePathParts[1];
-
 
             if ($parameterEnvironmentPathName == ('musora-web-platform-' . $environmentName) &&
                 str_starts_with($parameterSecretName, 'DOT_ENV_')) {
@@ -141,8 +155,10 @@ class VaporEnvManager extends Command
         $file = getcwd() . '/.env.full.' . $environmentName;
 
         if (!file_exists($file)) {
-            $this->error('Environment file for ' . $environmentName .
-                ' does not exist. Pull first. Checked for file: ' . $file);
+            $this->error(
+                'Environment file for ' . $environmentName .
+                ' does not exist. Pull first. Checked for file: ' . $file
+            );
 
             return 1;
         }
@@ -226,7 +242,6 @@ class VaporEnvManager extends Command
         foreach ($allSecretsSavedToVapor as $secretsSavedToVapor) {
             if (!in_array($secretsSavedToVapor['name'], $secretNamesToKeep) &&
                 str_starts_with($secretsSavedToVapor['name'], 'DOT_ENV_')) {
-
                 $this->info('Found orphaned secret, deleting : ' . $secretsSavedToVapor['name']);
 
                 $vapor->deleteSecret($secretsSavedToVapor['id']);
