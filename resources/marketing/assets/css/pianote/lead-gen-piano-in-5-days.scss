@@ -1,4 +1,4 @@
-@import "../all/_variables";
+@import "./_variables";
 
 .text-navy {
   color: #a1afc9;
@@ -110,20 +110,20 @@
     z-index: 10;
     padding: 12px 16px;
     margin: 0 5px;
-    bottom: -50px;  
+    bottom: -50px;
     top: unset;
     @include tablet {
       top: 50%;
       bottom: unset;
     }
-  
+
     &:hover,
     &:focus {
       opacity: 1;
       color: white  ;
       background: lighten(#062743, 10%);
     }
-  
+
     &.slick-next:before,
     &.slick-prev:before {
       -moz-osx-font-smoothing: grayscale;
@@ -139,24 +139,24 @@
       color: white  ;
       font-size: 20px;
     }
-  
+
     &.slick-next {
       right: 35%;
       @include tablet {
         right: -20px;
       }
-  
+
       &:before {
         content: "\f105";
       }
     }
-  
+
     &.slick-prev {
       left: 35%;
       @include tablet {
         left: -20px;
       }
-  
+
       &:before {
         content: "\f104";
       }
