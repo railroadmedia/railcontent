@@ -60,6 +60,7 @@
                 </div>
                 <div class="tw-flex tw-flex-col">
                     <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
+                        <i class="fas fa-calendar-plus mr-1"></i>
                         Subscribe to Calendar 
                     </button>
                 </div>
@@ -68,7 +69,7 @@
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
                     timezone="{{ $fullTimezoneString }}"
-                    subscription-calendar-id=""
+                    subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
                     theme-color="{{ $brand }}"
                 />
             </div>

@@ -1,4 +1,4 @@
-@extends('sales.standard-layout')
+@extends('pianote.sales.standard-layout')
 
 @section('meta')
     <title>Learn the piano anytime with real teachers. | Pianote</title>

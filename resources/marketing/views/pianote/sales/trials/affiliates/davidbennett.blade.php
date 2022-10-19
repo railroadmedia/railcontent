@@ -1,4 +1,4 @@
-@extends('sales.trials.affiliates.affiliate-trial-layout')
+@extends('pianote.sales.trials.affiliates.affiliate-trial-layout')
 
 @section('name', 'David Bennett')
 

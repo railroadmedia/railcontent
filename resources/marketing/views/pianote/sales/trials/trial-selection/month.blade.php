@@ -1,1 +1,1 @@
-@extends('sales.trials.trial-selection.trial-selection-layout')
+@extends('pianote.sales.trials.trial-selection.trial-selection-layout')

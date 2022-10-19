@@ -1,4 +1,4 @@
-@extends('products.500-songs-layout')
+@extends('pianote.products.500-songs-layout')
 
 @php $productPrice = 39 @endphp
 

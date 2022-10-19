@@ -1679,11 +1679,11 @@
 
     @include('pianote.sales.footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="/assets/marketing/sales.js?v={{ filemtime(__FILE__) }}"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/sales.js?v={{ filemtime(__FILE__) }}"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/modal.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay-alt.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/jquery.countdown-2.min.js"></script>
@@ -1752,6 +1752,6 @@
 
     @yield('scripts')
 
-    {!! inspectlet_embed_script() !!}
+{{--    {!! inspectlet_embed_script() !!}--}}
 @stop
 

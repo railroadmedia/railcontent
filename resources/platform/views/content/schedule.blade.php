@@ -69,7 +69,7 @@
             <div class="tw-flex tw-flex-row">
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
-                    subscription-calendar-id="{{ config('addevent.uniquekeys.brand-overview') }}"
+                    subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
                     theme-color="{{ $brand }}"
                 />
             </div>

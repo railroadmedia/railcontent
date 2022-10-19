@@ -56,9 +56,22 @@ abstract class Command extends CommandBase
     }
 
     /**
-     * Function for chunking queries into jobs to avoid running into Lambda 15 minute execution limit
+     * Function for chunking queries into a batch of jobs to avoid running into Lambda 15 minute execution limit
      */
-    public function withBatched(callable $getJob, $chunks = 1000, $timeout = 600): bool
+    public function runBatchQuery(callable $getJob, $chunks = 1000): bool
+    {
+        return $this->runJobsQuery($getJob, false, $chunks);
+    }
+
+    /**
+     * Function for chunking queries into a chain of jobs to avoid running into Lambda 15 minute execution limit
+     */
+    public function runChainQuery(callable $getJob, $chunks = 1000): bool
+    {
+        return $this->runJobsQuery($getJob, true, $chunks);
+    }
+
+    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000,): bool
     {
         Artisan::call('queue:prune-batches');
         $timeStart = microtime(true);
@@ -80,11 +93,23 @@ abstract class Command extends CommandBase
         }
         $nJobs = count($jobs);
         $this->info("Dispatching $nJobs jobs.");
-        $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
+        $batch = null;
+        if ($isChain) {
+            Bus::chain($jobs)->dispatch();
+        } else {
+            $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
+        }
         $this->info("Dispatched $nJobs jobs.");
-        $this->info("Check batch status: artisan batch:status $batch->id");
+        if ($batch) {
+            $this->info("Check batch status: artisan batch:status $batch->id");
+        }
+        else{
+            $this->info("No batched status available");
+        }
 
-        if (App::environment('local')) { //progress bar not useful when running vapor commands
+        if (App::environment('local') && env(
+                'QUEUE_CONNECTION'
+            ) == 'sync') { //progress bar not useful when running vapor commands
             $batchId = $batch->id;
             while (!$batch->finished()) {
                 $batch = Bus::findBatch($batchId);

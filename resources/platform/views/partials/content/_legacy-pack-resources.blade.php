@@ -7,7 +7,7 @@
                 <div class="flex flex-row sbt-row ">
                     <div class="flex flex-column">
                         <div class="flex flex-row pa">
-                            <h3 class="title">Exercise #{{ $sbtExerciseNumber }}</h3>
+                            <h3 class="title dark:tw-text-white">Exercise #{{ $sbtExerciseNumber }}</h3>
                         </div>
                         <div class="flex flex-row flex-wrap">
                             <div class="flex flex-column align-center xs-12 lg-3 sbt-buttons pa">
@@ -31,7 +31,7 @@
                                 @endforeach
                             </div>
                             <div class="flex flex-column xs-12 lg-9 sbt-sheets pa">
-                                <img class="sbt-image"
+                                <img class="sbt-image tw-rounded-sm"
                                      src="{{ reset($bpms)['image_url'] }}"
                                      style="object-fit:contain;"
                                      data-exercise="{{ $sbtExerciseNumber }}"/>
@@ -60,7 +60,7 @@
             <div class="flex flex-row sbt-row">
                 <div class="flex flex-column">
                     <div class="flex flex-row pa">
-                        <h3 class="title">Exercise #{{ $sbtExerciseNumber }}</h3>
+                        <h3 class="title dark:tw-text-white">Exercise #{{ $sbtExerciseNumber }}</h3>
                     </div>
                     <div class="flex flex-row flex-wrap">
                         <div class="flex flex-column align-center xs-12 lg-3 sbt-buttons pa">
@@ -84,7 +84,7 @@
                             @endforeach
                         </div>
                         <div class="flex flex-column xs-12 lg-9 sbt-sheets pa">
-                            <img class="sbt-image"
+                            <img class="sbt-image tw-rounded-sm"
                                  src="{{ reset($bpms)['image_url'] }}"
                                  data-exercise="{{ $sbtExerciseNumber }}"/>
                             @foreach ($bpms as $bpm => $data)
@@ -109,7 +109,7 @@
             <div class="flex flex-row sbt-row">
                 <div class="flex flex-column">
                     <div class="flex flex-row pa">
-                        <h3 class="title">Exercise #{{ $exerciseNumber }}</h3>
+                        <h3 class="title dark:tw-text-white">Exercise #{{ $exerciseNumber }}</h3>
                     </div>
                     <div class="flex flex-row flex-wrap">
                         <div class="flex flex-column xs-12 lg-3 sb-buttons pa">
@@ -128,7 +128,7 @@
                             @endif
                         </div>
                         <div class="flex flex-column xs-12 lg-9 pa">
-                            <img class="sbt-image" src="{{ $sbtData['image_url'] }}"/>
+                            <img class="sbt-image tw-rounded-sm" src="{{ $sbtData['image_url'] }}"/>
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
             <div class="flex flex-row sbt-row">
                 <div class="flex flex-column">
                     <div class="flex flex-row pa">
-                        <h3 class="title">Exercise #{{ $sbtExerciseNumber }}</h3>
+                        <h3 class="title dark:tw-text-white">Exercise #{{ $sbtExerciseNumber }}</h3>
                     </div>
                     <div class="flex flex-row flex-wrap">
                         <div class="flex flex-column xs-12 lg-3 sbt-buttons pa">
@@ -161,7 +161,7 @@
                             @endif
                         </div>
                         <div class="flex flex-column xs-12 lg-9 sbt-sheets pa">
-                            <img class="sbt-image" src="{{ $sbtData['image_url'] }}"/>
+                            <img class="sbt-image tw-rounded-sm" src="{{ $sbtData['image_url'] }}"/>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('sales.standard-layout', [
+@extends('pianote.sales.standard-layout', [
 "rolandVersion" => true,
 ])
 @php $orderLink = '/ecommerce/add-to-cart?products[pianote_membership_90_days_access]=1&locked=true&redirect=/order&promo-code=roland' @endphp

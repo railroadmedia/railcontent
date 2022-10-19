@@ -5,7 +5,7 @@
   >
     <div class="tw-text-center tw-pb-6">
       <div
-        class="
+        :class="`
           tw-px-[16px]
           tw-py-[20px]
           tw-w-4/6
@@ -17,6 +17,7 @@
           tw-text-white
           dark:tw-bg-white
           tw-bg-[#081825]
+          ${slideClassData}`
         "
       >
         <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
@@ -40,6 +41,10 @@
 export default {
   name: "NotificationToasts",
   props: {
+    slideClass: {
+      type: String,
+      default: 'slide-in-bottom'
+    },
     text: {
       type: String,
       default: () => "",
@@ -56,7 +61,11 @@ export default {
   emits: ['onClose'],
   methods: {
     handleOnClose() {
-      this.$emit('onClose')
+      this.slideClassData = 'slide-out-bottom';
+      setTimeout(() => {
+        this.$emit('onClose');
+        this.slideClassData = 'slide-in-bottom';
+      }, 500);
     }
   },
   data() {
@@ -64,9 +73,13 @@ export default {
       showNotification: false,
       notificationIcon: this.icon,
       notificationText: this.text,
+      slideClassData: this.slideClass,
     };
   },
   watch: {
+    slideClass(val) {
+      this.slideClassData = val;
+    },
     icon(val) {
       if (val === 'error') {
         this.notificationIcon = 'fa-exclamation-circle tw-text-[#ef4444]';
@@ -107,3 +120,66 @@ export default {
   },
 };
 </script>
+
+<style>
+.slide-in-bottom {
+	-webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-out-bottom {
+	-webkit-animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+ @-webkit-keyframes slide-out-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+}
+
+</style>

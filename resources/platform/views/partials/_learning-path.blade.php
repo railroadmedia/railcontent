@@ -35,7 +35,7 @@
                 @endif
 
                 {{-- Preview Modal --}}
-                <div id="previewModal" class="modal">
+                <div id="previewModal" class="modal vimeo-embedded-player">
                     <div class="flex flex-column corners-10">
                         @if($brand !== 'drumeo')
                             @php

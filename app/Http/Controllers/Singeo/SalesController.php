@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Singeo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 
-class HomePageController extends BaseController
+class SalesController extends BaseController
 {
-    public function show()
+    public function home()
     {
-        return view('singeo.home');
+        return view('singeo.sales.standard');
     }
 }

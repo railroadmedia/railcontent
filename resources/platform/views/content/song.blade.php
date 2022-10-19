@@ -129,7 +129,7 @@
                 @if(!empty($lessonContent->fetch('*assignments', [])))
                     <div style="height: 0px; overflow: hidden;">
                         <div class="flex flex-row pv-3">
-                            <h1 class="heading">Assignments</h1>
+                            <h1 class="heading dark:tw-text-white">Assignments</h1>
                         </div>
                         <div class="flex flex-row">
                             <div class="flex flex-column">

@@ -4,7 +4,7 @@
             <div class="tw-flex tw-flex-col-reverse lg:tw-flex-row">
                 <div class="tw-flex-grow lg:tw-pr-6">
                     <h1 class="tw-text-4xl tw-mb-2 tw-uppercase tw-font-normal">
-                        {{ $firstName }} <span class="tw-font-bold">{{ $lastName }}</span>
+                        {{ $firstName }} <span class="tw-font-bold">{{ $lastName }}</span> <span class="tw-font-bold">{{ $nameThree }}</span>
                     </h1>
                     <div class="tw-uppercase tw-font-semibold tw-mb-6" style="color: #7E9AB1;">
                         @php

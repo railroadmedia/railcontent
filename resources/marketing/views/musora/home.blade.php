@@ -16,7 +16,7 @@
 
     <!-- Hero Component -->
     @component('_partials.components.hero-section', [
-        "backgroundImage" => "https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora-hero.jpg",
+        "backgroundImage" => "https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora-hero.jpg",
     ])
         @slot('content')
             <div class="text-center text-white">
