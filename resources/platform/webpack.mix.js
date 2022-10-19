@@ -1,6 +1,8 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 require('laravel-mix-merge-manifest');
+require('laravel-mix-polyfill');
+
 const ASSET_URL =
   process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
@@ -30,8 +32,14 @@ mix
     .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()
+    .polyfill({
+        enabled: true,
+        useBuiltIns: "usage",
+        targets: "firefox 50, IE 11"
+     })
     .version()
-    .mergeManifest();
+    .mergeManifest()
+    ;
 
 mix.webpackConfig(webpack => {
     return {
