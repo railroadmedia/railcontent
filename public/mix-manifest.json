@@ -19,7 +19,9 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=503fa8fa6ee41736e20d64af70bbca31",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=30c222662e6d3c2a837f8311b829f7c6",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=b6bf52a2a4993b1c89191250b898ca45",
-    "/platform/css/app.css": "/platform/css/app.css?id=cdb03a0c07c5f06df006a6c3b9dc69d3",
+    "/platform/css/app.css": "/platform/css/app.css?id=fb9ce5484c752306a1479252fd2b377a",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=37e333d71844e8a0dc325dc686cbd71e",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=0e9edc629e8b706a58e7c8f25bfbe96e"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=0e9edc629e8b706a58e7c8f25bfbe96e",
+    "/marketing/js/app.js": "/marketing/js/app.js?id=fa8b3f1867b167da5cf0696a62b47bf3",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=da6c93429deb3c814c19ea143f142613"
 }
