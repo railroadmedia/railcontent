@@ -21,14 +21,14 @@
 @section('next-thumb', 'https://d1923uyy6spedc.cloudfront.net/221071-card-thumbnail-maxres-1551456914')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "#7a Solo Groove",
         "assignmentID" => 'songSC',
         "pdfURL" => "https://d1923uyy6spedc.cloudfront.net/221118-sheet-image-1551468088.svg",
         "soundslice" => "200384",
         "score" => true
     ])
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "#7b Fill",
         "assignmentID" => 'songSC2',
         "pdfURL" => "https://d1923uyy6spedc.cloudfront.net/221119-sheet-image-1551468294.svg",

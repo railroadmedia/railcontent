@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/560727218-21ae1bae198ad6c555b15363f351ba618f2846e2efbdf98a2480cba5ed7648e7-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Dance Pop Grooves​",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/02-dance-pop-grooves.pdf",
     ])

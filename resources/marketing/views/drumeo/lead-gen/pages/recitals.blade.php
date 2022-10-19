@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.drumeo.com/recitals/">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -204,7 +204,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <div class="promo-banner text-white" style="background:linear-gradient(to bottom, #01325b, #01101d);">
         <div class="container mx-auto relative z-10">
             <div class="text text-center">
@@ -256,7 +256,7 @@
         </div>
     </section>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>

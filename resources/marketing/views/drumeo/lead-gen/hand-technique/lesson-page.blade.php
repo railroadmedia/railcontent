@@ -18,7 +18,7 @@
 @section('lesson-tile-width', 'w-1/2 sm:w-1/3')
 
 @section('assets')
-  @include('lead-gen.partials._assignment-resources', [
+  @include('drumeo.lead-gen.partials._assignment-resources', [
     "title" => "Lesson Resources",
     "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/courses/pdf/dcb-34.pdf",
   ])

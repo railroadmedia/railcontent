@@ -14,5 +14,5 @@
         </div>
     </header>
 
-    @include('lead-gen.courses.full._catalogues')
+    @include('drumeo.lead-gen.courses.full._catalogues')
 @stop

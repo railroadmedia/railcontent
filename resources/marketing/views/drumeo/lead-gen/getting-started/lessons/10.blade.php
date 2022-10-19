@@ -15,7 +15,7 @@
 @section('assets')
     @parent
 
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Developing a Practice Routine",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf",
     ])

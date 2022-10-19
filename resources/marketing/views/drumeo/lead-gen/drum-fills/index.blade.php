@@ -36,7 +36,7 @@
     <div class="container mx-auto lg:max-w-6xl">
         <div class="lesson-grid px-4 grid sm:grid-cols-3 sm:gap-6">
             @foreach ($lessons as $lesson)
-                @include('lead-gen.drum-beats.._video-link',[
+                @include('drumeo.lead-gen.drum-beats.._video-link',[
                     "lessonUrl" => $lesson['url'],
                     "lessonImg" => $lesson['image'],
                     "lessonTitle" => $lesson['title']

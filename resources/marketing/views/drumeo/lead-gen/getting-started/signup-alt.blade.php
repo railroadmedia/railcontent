@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -88,7 +88,7 @@
 
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <header class="py-6 md:py-24 bg-center md:bg-top bg-no-repeat" style="background-color:#021536;">
         <div class="max-w-4xl mx-auto px-2 md:px-4 lg:px-0">
             <div class="max-w-lg mx-auto md:mx-0 text-center md:text-left">
@@ -105,7 +105,7 @@
                     </h6>
                 </div>
                 <div class="md:pr-20">
-                    @include("lead-gen.partials.sign-up-form-tw", [
+                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                         "formName" => 'Getting Started On The Drums',
                         "buttonText" => "Get started",
@@ -420,7 +420,7 @@
                     <i class="text-drumeo fas fa-check sm:mr-2 text-xl"></i> 100% free -- lifetime access!
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
-                    @include("lead-gen.partials.sign-up-form-tw", [
+                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
                         "buttonText" => "Get started ",
@@ -486,7 +486,7 @@
     <div class="reveal max-w-xl text-center" id="signUpModal" data-reveal data-reset-on-close="false">
         <div class="p-4">
             <h2 class="mb-2"><strong>Enter your email address<br class="inline sm:hidden"> below to get started:</strong></h2>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
@@ -495,7 +495,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

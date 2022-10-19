@@ -4,13 +4,13 @@
     {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-    @include('partials.favicons')
+    @include('drumeo._partials._favicons')
 
     <meta name="robots" content="noindex">
     <title>Grooves Of John Bonham | Drumeo</title>
     <meta name="description" content="The ultimate breakdown of Led Zeppelin’s famous drum grooves. (FREE)">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
     <base target="_parent">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -109,5 +109,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
 </body>
-@include("lead-gen.partials.impact-email-sign-up-tracker")
+@include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>

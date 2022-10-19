@@ -303,7 +303,7 @@
 @stop()
 
 @section('content')
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Tone Control Kit",
                 "fullPrice" => Prices::$toneControlKitFull,
                 "price" => Prices::$toneControlKitRegular,

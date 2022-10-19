@@ -52,7 +52,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials._free-trial-offer')
+    @include('drumeo.lead-gen.partials._free-trial-offer')
 
     <input type="hidden" id="openModal" data-open="UnsubModal">
 

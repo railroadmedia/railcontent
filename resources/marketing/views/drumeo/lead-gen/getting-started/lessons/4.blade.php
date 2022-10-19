@@ -19,7 +19,7 @@
 @section('assets')
     @parent
 
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Reading Drum Notation",
         "pdfURL" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg",
     ])

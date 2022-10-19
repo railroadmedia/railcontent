@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/551839496-2316746236b066eb501ca6b120f2afb0e5d1a77dab1ee4902541021bbf2ebf79-d?mw=1200&mh=675')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Drum theory",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/2-drum-theory.pdf",
     ])

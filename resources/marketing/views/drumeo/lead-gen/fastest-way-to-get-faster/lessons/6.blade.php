@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/aixl1vCL3Wk/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "The Illusion Of Speed",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/06-the-illusion-of-speed.png",
     ])

@@ -1,4 +1,4 @@
-@extends('products.misc-products-layout')
+@extends('drumeo.products.misc-products-layout')
 
 @section('meta')
     @parent
@@ -32,7 +32,7 @@
 @stop()
 
 @section('content')
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                     "name" => "Drumming System",
                     "fullPrice" => Prices::$dsOnlineFull,
                     "price" => Prices::$dsOnlineRegular,
@@ -78,140 +78,140 @@
             <h1>Learn Everything On The Drums... <u>For Just ${{ Prices::$dsOnlineRegular }}</u></h1>
             <h3 class="light"><s>NORMALLY ${{ Prices::$dsOnlineFull }}</s></h3>
             <div class="float-left w-full px-3 sm:px-4 tile-wrap grid grid-cols-2 sm:grid-cols-3 gap-4">
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/1.jpg",
                 "tileTitle" => "Play Drums By Ear",
                 "tileDescription" => "Start playing drums for the very first time - no sheet music or reading required!",
                 "lessonNumber" => "10",
                 "lessonDuration" => "1 HR 38",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/2.jpg",
                 "tileTitle" => "Practice Efficiently",
                 "tileDescription" => "Create the perfect routine to get the most out of your practice time.",
                 "lessonNumber" => "8",
                 "lessonDuration" => "27",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/3.jpg",
                 "tileTitle" => "Theory & Notation",
                 "tileDescription" => "Drum theory doesn’t need to be complicated. Get ready to understand music on a whole new level.",
                 "lessonNumber" => "20",
                 "lessonDuration" => "1 HR 58",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/4.jpg",
                 "tileTitle" => "Hand Techniques",
                 "tileDescription" => "Get the most out of every single stroke with proper hand technique that will change your playing.",
                 "lessonNumber" => "4",
                 "lessonDuration" => "1 HR 6",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/5.jpg",
                 "tileTitle" => "Drum Rudiments",
                 "tileDescription" => "Get valuable insights into the 40 drum rudiments and exactly how to apply them around the kit.",
                 "lessonNumber" => "48",
                 "lessonDuration" => "1 HR 36",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/6.jpg",
                 "tileTitle" => "Foot Techniques",
                 "tileDescription" => "Improve your bass drum speed, power, control, and independence.",
                 "lessonNumber" => "13",
                 "lessonDuration" => "1 HR 42",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/7.jpg",
                 "tileTitle" => "Heavy Rock",
                 "tileDescription" => "Learn beginner to advanced grooves for punk, heavy metal, speed metal, grunge, prog, and hard rock.",
                 "lessonNumber" => "28",
                 "lessonDuration" => "1 HR 23",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/8.jpg",
                 "tileTitle" => "Mixed Rock",
                 "tileDescription" => "Dive into sub genres of rock including folk rock, classic rock, country, and odd-time.",
                 "lessonNumber" => "20",
                 "lessonDuration" => "1 HR 58",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/9.jpg",
                 "tileTitle" => "Groove Rock",
                 "tileDescription" => "Play the drums with more groove with blues, funk, reggae, and shuffle beats!",
                 "lessonNumber" => "21",
                 "lessonDuration" => "1 HR 59",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/10.jpg",
                 "tileTitle" => "Jazz & Latin",
                 "tileDescription" => "Take your playing to the next level with jazz and latin drumming patterns and play-alongs.",
                 "lessonNumber" => "10",
                 "lessonDuration" => "58",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/11.jpg",
                 "tileTitle" => "Drum Fills",
                 "tileDescription" => "Finally play the amazing drum fills that you’ve always wished you could.",
                 "lessonNumber" => "8",
                 "lessonDuration" => "1 HR 49",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/12.jpg",
                 "tileTitle" => "Dynamic Drumming",
                 "tileDescription" => "Add dynamics to your playing to make even the simplest of drum beats sound amazing.",
                 "lessonNumber" => "6",
                 "lessonDuration" => "58",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/13.jpg",
                 "tileTitle" => "How To Build Speed",
                 "tileDescription" => "Build incredible speed with simple exercises that are proven to work.",
                 "lessonNumber" => "7",
                 "lessonDuration" => "46",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/14.jpg",
                 "tileTitle" => "Setup, Tuning, & Gear",
                 "tileDescription" => "Learn everything you need to get your kit setup and sounding great!",
                 "lessonNumber" => "8",
                 "lessonDuration" => "1 HR 34",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/15.jpg",
                 "tileTitle" => "Live Gig & Studio Drumming",
                 "tileDescription" => "Want to become a working drummer? Mike shares his best advice from 20+ years in the business.",
                 "lessonNumber" => "6",
                 "lessonDuration" => "1 HR 2",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/16.jpg",
                 "tileTitle" => "Drum Soloing",
                 "tileDescription" => "Create unique & musical drum solos that express your personality on the drums.",
                 "lessonNumber" => "16",
                 "lessonDuration" => "2 HR 37",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/17.jpg",
                 "tileTitle" => "Drum Play-Alongs 1",
                 "tileDescription" => "28 play-alongs that work well for every style of music covered in the Drumming System.",
                 "lessonNumber" => "28",
                 "lessonDuration" => "2 HR 5",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/18.jpg",
                 "tileTitle" => "Drum Play-Alongs 2",
                 "tileDescription" => "20 more play-alongs along so you can apply your skills to real music.",
                 "lessonNumber" => "20",
                 "lessonDuration" => "2 HR 5",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/19.jpg",
                 "tileTitle" => "Writing With A Band",
                 "tileDescription" => "See exactly what it takes to write music as a band creates and then performs six new tracks.",
                 "lessonNumber" => "13",
                 "lessonDuration" => "3 HR 26",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/20.jpg",
                 "tileTitle" => "Hand Drumming & Percussion",
                 "tileDescription" => "Get more options for creating music with the congas, djembe, cajon, shakers, tambourines, and more!",

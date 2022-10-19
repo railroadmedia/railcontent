@@ -84,7 +84,7 @@
                 <p>
                     Enter your email to receive <br class="sm:hidden">this FREE Drumeo course.
                 </p>
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - Must Know - Web Form",
                     "formName" => 'Must-Know Drum Grooves',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -93,7 +93,7 @@
         </div>
     </header>
 
-    @include('lead-gen.courses.full.partials.instructor',[
+    @include('drumeo.lead-gen.courses.full.partials.instructor',[
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/concert-photo.jpg",
         "title" => '
             NASHVILLE, LA,
@@ -109,11 +109,11 @@
         Get ready to improve your versatility as a drummer with <strong>eight of drumming’s most important grooves</strong> taught by one of drumming’s most in-demand players. By the end, you’ll have the foundation to confidently play in a wide variety of musical settings and have every band begging to hire you."
     ])
 
-    @include('lead-gen.courses.full.partials.lessons',[
+    @include('drumeo.lead-gen.courses.full.partials.lessons',[
         "headLine" => "THE SERIES"
     ])
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#eff0f0",
         "textColor" => "black",
     ])
@@ -127,7 +127,7 @@
             </div>
             <p>Enter your email to receive <br class="sm:hidden">this FREE Drumeo course.</p>
             <br><br class="show-for-medium">
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Must Know - Web Form",
                 "formName" => 'Must-Know Drum Grooves',
                 "buttonText" => 'Send The Videos&nbsp;'

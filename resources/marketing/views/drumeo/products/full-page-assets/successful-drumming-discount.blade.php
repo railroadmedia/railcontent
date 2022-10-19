@@ -27,7 +27,7 @@
 @stop()
 
 @section('content')
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                     "name" => "Successful Drumming",
                     "fullPrice" => Prices::$sdOnlineFull,
                     "price" => Prices::$sdOnlineRegular,
@@ -69,63 +69,63 @@
                 Your Skills… <u>For Just ${{ Prices::$sdOnlineRegular }}</u></h1>
             <h3 class="light"><s>NORMALLY ${{ Prices::$sdOnlineFull }}</s></h3>
             <div class="float-left w-full px-3 sm:px-4 tile-wrap grid grid-cols-2 sm:grid-cols-3 gap-4">
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/1.jpg",
                 "tileTitle" => "THE FOUNDATION",
                 "tileDescription" => "Build a solid foundation on topics like technique, notation, and your first beats and fills!",
                 "lessonNumber" => "32",
                 "lessonDuration" => "3 HR 44",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/2.jpg",
                 "tileTitle" => "THE TECHNIQUES",
                 "tileDescription" => "Take your drumming to the next level with step-by-step lessons on essential technical topics.",
                 "lessonNumber" => "11",
                 "lessonDuration" => "2 HR 25",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/3.jpg",
                 "tileTitle" => "THE GROOVES",
                 "tileDescription" => "Get time-saving tools and video guides for composing your own beats and fills for any musical style.",
                 "lessonNumber" => "14",
                 "lessonDuration" => "2 HR 19",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/4.jpg",
                 "tileTitle" => "THE BREAKDOWN",
                 "tileDescription" => "Get three unique tools to simplify your favorite songs so you can apply your skills to real music.",
                 "lessonNumber" => "4",
                 "lessonDuration" => "1 HR 12",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/5.jpg",
                 "tileTitle" => "THE BASSIST",
                 "tileDescription" => "The three keys to locking-in with a bass guitar player to make the band sound and perform better.",
                 "lessonNumber" => "6",
                 "lessonDuration" => "42",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/6.jpg",
                 "tileTitle" => "THE BAND",
                 "tileDescription" => "Watch the creation of 5 original songs and get a 10 step process for establishing your band’s goals.",
                 "lessonNumber" => "12",
                 "lessonDuration" => "3 HR 57",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/7.jpg",
                 "tileTitle" => "THE SHOWS",
                 "tileDescription" => "You’ll get detailed interviews with professional gigging drummers and a checklist for your next gig.",
                 "lessonNumber" => "6",
                 "lessonDuration" => "2 HR 27",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/8.jpg",
                 "tileTitle" => "THE MUSIC",
                 "tileDescription" => "Enjoy 10 fun play-along songs that you can jam along with to challenge yourself and build experience.",
                 "lessonNumber" => "10",
                 "lessonDuration" => "39",
                 ])
-                @include('products.partials.lesson-tile2', [
+                @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/9.jpg",
                 "tileTitle" => "THE LIFESTYLE",
                 "tileDescription" => "Three tools for focusing on your goals, staying excited about the drums, and connecting with other musicians.",

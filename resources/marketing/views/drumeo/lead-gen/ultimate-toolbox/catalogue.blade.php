@@ -43,55 +43,55 @@
             <h1 class="text-center">Click on any of the tools below to get started!</h1>
             <div class="thumbnail-wrap grid gap-6 grid-cols-2 md:grid-cols-3">
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/gsotd/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/getting-started-on-the-drums.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/prg.pdf",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/practice-routine-generator.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/dodt/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/the-dictionary-of-drum-terms.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/htls/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/how-to-learn-songs-quickly.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/mcsa/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/how-to-make-your-cheap-kit-sound-amazing.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/fwtgf/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/fastest-way-to-get-faster.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/urfd/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/useful-rudiments-for-modern-drummers.png",
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/bdbc/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/bass-drum-bootcamp.png",
                     ])
                 </div>
                 <div class="w-full end">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "url" => "/ultimate-toolbox/5pa/",
                         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/5-drum-play-along-songs.png",
                     ])

@@ -13,7 +13,7 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/grooves-of-john-bonham/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/grooves-of-john-bonham/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
     <a href="/choose-your-trial" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
@@ -63,9 +63,9 @@
         </div>
     </section>
 
-    @include('lead-gen.partials._free-trial-offer')
+    @include('drumeo.lead-gen.partials._free-trial-offer')
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
     <script>

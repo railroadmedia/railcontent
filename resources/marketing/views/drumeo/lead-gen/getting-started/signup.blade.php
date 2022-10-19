@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -37,7 +37,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
     <header class="pt-8 sm:pt-20">
         <div class="max-w-xl md:max-w-4xl mx-auto flex flex-col md:flex-row px-3 sm:px-4 lg:px-0 text-center md:text-left">
@@ -58,7 +58,7 @@
                     </h6>
                 </div>
 
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
                     "buttonText" => "Get started for free ",
@@ -140,7 +140,7 @@
             <h3 class="leading-tight font-extrabold my-10">
                 Enter your email address<br class="inline sm:hidden"> below to get started:
             </h3>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
                 "buttonText" => "Get started for free ",
@@ -153,7 +153,7 @@
     <div class="reveal max-w-xl text-center" id="signUpModal" data-reveal data-reset-on-close="false">
         <div class="p-4">
             <h2 class="mb-2"><strong>Enter your email address<br class="inline sm:hidden"> below to get started:</strong></h2>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>

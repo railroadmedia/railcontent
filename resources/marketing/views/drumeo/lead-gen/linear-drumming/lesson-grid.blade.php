@@ -42,7 +42,7 @@
             <div class="thumbnail-wrap grid gap-4 grid-cols-2 md:grid-cols-3">
                 @foreach ($lessons as $key => $lesson)
                     <div class="w-full">
-                        @include("lead-gen.partials.thumbnail-signup", [
+                        @include("drumeo.lead-gen.partials.thumbnail-signup", [
                             "url" => $lesson['url'],
                             "image" => $lesson['image'],
                             "badge" => "Lesson #" . strval($key + 1),

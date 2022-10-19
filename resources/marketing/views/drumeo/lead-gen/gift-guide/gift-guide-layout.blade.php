@@ -7,7 +7,7 @@
     <meta property="og:description" content="Choosing gifts for the drummer in your life can be a tricky task.">
     <meta property="og:image" content="{{ cdn('promos/gift-guide/og-image.jpg') }}" style="display: none;">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
 
@@ -17,7 +17,7 @@
 
 @section('global-body')
 
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
     <header class="header">
         <div class="row">
@@ -55,7 +55,7 @@
 
     <section class="grid-view">
         <ul class="row fixed-cards">
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => Prices::$padRegular,
                         "popularity" => "100",
                         "itemURL" => "/drumshop/practice-pad-full/",
@@ -65,7 +65,7 @@
                         "onDrumeo" => "TRUE"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => Prices::$drumeoEdgeAnnual,
                         "popularity" => "100",
                         "stockingStuffer" => "TRUE",
@@ -79,7 +79,7 @@
                         "onDrumeo" => "TRUE"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "22",
                         "popularity" => "98",
                         "giggingDrummer" => "TRUE",
@@ -89,7 +89,7 @@
                         "bottomText" => "The essential emergency kit to get through any gig. Included are snare strings, cymbal felts, a drumhead repair patch, and cymbal stand sleeves and washers."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "15",
                         "popularity" => "95",
                         "stockingStuffer" => "TRUE",
@@ -99,7 +99,7 @@
                         "bottomText" => "These steel jingles will add a different touch to your playing by delivering a shimmering sound that blends perfectly with any drum beat. Easy to place on any hi-hat, crash, ride, or cymbal stack without any wingnuts!"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "299",
                         "popularity" => "93",
                         "jazzDrummer" => "TRUE",
@@ -109,7 +109,7 @@
                         "bottomText" => "These unique cymbals deliver a sound 80% quieter than a traditional cymbal without losing that authentic feel. Perfect for home practice, lesson rooms, and even quiet gigs. Available as a set of 14” hi hats, 16” crash, and a 20” ride - or buy them individually!"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "13",
                         "popularity" => "90",
                         "giggingDrummer" => "TRUE",
@@ -119,7 +119,7 @@
                         "bottomText" => "This cup holder features the same metal design and fastening system as their popular stick holders for supreme durability. The Drink Holder has an inside diameter of 3 1/2&quot;, large enough for most drinks, cups, and sports bottles and securely fastens to cymbal stands with an easy-to-turn knob."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "86",
                         "price" => Prices::$cardMonth,
                         "stockingStuffer" => "TRUE",
@@ -130,7 +130,7 @@
                         "onDrumeo" => "TRUE"
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "8",
                         "popularity" => "85",
                         "stockingStuffer" => "TRUE",
@@ -140,7 +140,7 @@
                         "bottomText" => "The perfect way to practice on any surface. Simply add rubber tips to the end of your sticks and play!"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "14",
                         "popularity" => "83",
                         "stockingStuffer" => "TRUE",
@@ -151,7 +151,7 @@
                         "bottomText" => "Thirteen gig ready tools specifically selected to fit all drums, pedals, and hardware. It features six hex keys, five screwdrivers, a standard drum key, and a bottle opener for when all the hard work is done."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "82",
                         "price" => Prices::$waterBottleRegular,
                         "stockingStuffer" => "TRUE",
@@ -162,7 +162,7 @@
                         "onDrumeo" => "TRUE"
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "15",
                         "popularity" => "80",
                         "itemURL" => "https://amzn.to/2hDs8bV",
@@ -171,7 +171,7 @@
                         "bottomText" => "These ambassador drumheads are designed for quiet practice applications where standard drum set volumes are an issue. Constructed with 1-ply mesh material, they provide a soft spring-like feel at very low decibel levels."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "69",
                         "popularity" => "80",
                         "giggingDrummer" => "TRUE",
@@ -181,7 +181,7 @@
                         "bottomText" => "This digital tuner is the fastest, easiest and best way to get your drums sounding great. It features a large LCD screen optimized for use in the studio or on a dark stage and clips to any standard drum hoop."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "80",
                         "rockDrummer" => "TRUE",
@@ -191,7 +191,7 @@
                         "bottomText" => "This unique drum accessory was engineered to give any snare drum a vintage, beefy, thumpy sound. Unlike gels or tape, the Big Fat Snare Drum lowers the fundamental pitch of your snare drum without any of the hassle. Simple place directly on top of your snare head!"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "80",
                         "stockingStuffer" => "TRUE",
@@ -202,7 +202,7 @@
                         "bottomText" => "By simply gripping and pressing the two buttons on both sides, drummers can remove the cymbal mate with just one touch to make adding, removing, or swapping your cymbals a breeze. Comes in a pack of four."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => Prices::$sticksRegular,
                         "popularity" => "80",
                         "stockingStuffer" => "TRUE",
@@ -214,7 +214,7 @@
                         "onDrumeo" => "TRUE"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "19",
                         "popularity" => "80",
                         "stockingStuffer" => "TRUE",
@@ -225,7 +225,7 @@
                         "bottomText" => "The Evans Torque drum key has an ergonomic grip for maximum comfort, a knurled knob for quick spinning, and a slip-resistant magnetic head. The torque handle can be set to a desired tension to help drummers attain more accurate tuning."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "9",
                         "popularity" => "80",
                         "stockingStuffer" => "TRUE",
@@ -235,7 +235,7 @@
                         "bottomText" => "This tool is a medium-weight ratchet-style drum key wrench with tighten and loosen tension adjustment positions."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => Prices::$dsOnlineRegular,
                         "popularity" => "75",
                         "itemURL" => "/drumshop/drumming-system/",
@@ -245,7 +245,7 @@
                         "onDrumeo" => "TRUE"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "75",
                         "giggingDrummer" => "TRUE",
@@ -255,7 +255,7 @@
                         "bottomText" => "This stick bag offers plenty of room to carry multiple pairs of stick, brushes, mallets, and whatever else you need for a successful gig or rehearsal. The external pockets allow you to store any extra accessories."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "21",
                         "popularity" => "72",
                         "jazzDrummer" => "TRUE",
@@ -265,7 +265,7 @@
                         "bottomText" => "Made of premium birch dowels, these rods have a lighter sound than sticks but more attack than brushes. They provide an excellent consistency and feel with a smooth grip for easy playability."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "71",
                         "price" => Prices::$drummerTowelRegular,
                         "stockingStuffer" => "TRUE",
@@ -276,7 +276,7 @@
                         "onDrumeo" => "TRUE"
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "18",
                         "popularity" => "70",
                         "rockDrummer" => "TRUE",
@@ -286,7 +286,7 @@
                         "bottomText" => "The Evans EQ Pad is a highly efficient bass drum muffler that attaches to the bottom of the bass drum shell with Velcro. The hinged pad bounces off the head, allowing sustain, before returning to damp the vibrating head."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "68",
                         "price" => Prices::$shirtRegular,
                         "stockingStuffer" => "TRUE",
@@ -297,7 +297,7 @@
                         "onDrumeo" => "TRUE"
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "60",
                         "popularity" => "70",
                         "giggingDrummer" => "TRUE",
@@ -307,7 +307,7 @@
                         "bottomText" => "Easily tune your drums by measuring pressure on the drum head. Fast, precise, and no whacking necessary!"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "180",
                         "popularity" => "70",
                         "giggingDrummer" => "TRUE",
@@ -317,7 +317,7 @@
                         "bottomText" => "This portable 5-piece practice pad set is the ultimate way to practice drums whether at home or on the go. The surfaces have a natural feel and rebound and allow for a ultra-quiet practice session. The set is heavy-duty and easy to assemble."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "29",
                         "popularity" => "67",
                         "itemURL" => "https://amzn.to/2y08Cwf",
@@ -326,7 +326,7 @@
                         "bottomText" => "These mute pads allow players to practice on their normal drum sets and in the comfort of their own homes without making noise. This pack includes sizes to fit a drum configuration of 12, 13, and 16 inch toms with a 14 inch snare drum."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "65",
                         "giggingDrummer" => "TRUE",
@@ -336,7 +336,7 @@
                         "bottomText" => "This stick holder is smartly designed for an infinite amount of settings, angles, and locations around the kit. It features a solid steel construction for maximum durability, as well as a rubber insert to keep your stick tips protected."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "9",
                         "popularity" => "65",
                         "stockingStuffer" => "TRUE",
@@ -346,7 +346,7 @@
                         "bottomText" => "Keep your cymbals looking fresh and new with this no-rubbing, no-buffing, no-polishing cymbal cleaner. Suitable for all cymbal brands, this cleaner features an advanced formula that removes grease, fingerprints, and dirt."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "14",
                         "popularity" => "65",
                         "stockingStuffer" => "TRUE",
@@ -357,7 +357,7 @@
                         "bottomText" => "The perfect alternative to putting permanent rivets in your favorite cymbal. Achieve the same classic sound without the hassle. The cymbal sizzler comes with a cymbal felt and fits conveniently on the cymbal post."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "90",
                         "popularity" => "65",
                         "giggingDrummer" => "TRUE",
@@ -367,7 +367,7 @@
                         "bottomText" => "This metronome has everything a drummer needs to make sure they stay on tempo-live and in the studio. It features plenty of volume to use while playing real drums, a dial for quick tempo adjustments, separate volumes for all note values, and much more."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "147",
                         "popularity" => "64",
                         "giggingDrummer" => "TRUE",
@@ -377,7 +377,7 @@
                         "bottomText" => "Practice in style with the flagship of the Dr. Beat Metronome line. The DB-90 is loaded with quality sounds and drum patterns to make your practice sessions less mundane and more musical. There’s a rhythm coach function with an on-board mic, a reference-tone function for tuning, an Instrument input, MIDI input, and other handy tools to make learning fun and effective."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "60",
                         "stockingStuffer" => "TRUE",
@@ -388,7 +388,7 @@
                         "bottomText" => "This beater features both hard and padded surface beater surfaces with an adjustable shaft weight. The felt side offers a more traditional sound and feel, while the plastic side offers increased attack."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "15",
                         "popularity" => "50",
                         "stockingStuffer" => "TRUE",
@@ -399,7 +399,7 @@
                         "bottomText" => "Inspired by a classic design, this bass drum beater is excellent for a variety of music style. It features a strong steel shaft and a circular felt beater."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "50",
                         "stockingStuffer" => "TRUE",
@@ -410,7 +410,7 @@
                         "bottomText" => "This beater was conceived and designed to replicate the soft but boomy bass drum tones of the great jazz era. The cork center is wrapped with a puffy synthetic covering and is reminiscent in look, feel, and sound to the lamb’s wool beater from decades ago."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "34",
                         "popularity" => "50",
                         "jazzDrummer" => "TRUE",
@@ -420,7 +420,7 @@
                         "bottomText" => "This recently released brush by Vic Firth is designed with 2 separate rows of wire, producing a unique sound with different qualities of articulation. The pull rod is also triple crimped, allowing for additional setting options."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "5",
                         "popularity" => "50",
                         "stockingStuffer" => "TRUE",
@@ -431,7 +431,7 @@
                         "bottomText" => "This non-slip black nylon bass drum patch increases attack and strengthens the head without affecting sustain or low-end. Available in single and double pedal versions."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "70",
                         "popularity" => "47",
                         "rockDrummer" => "TRUE",
@@ -442,7 +442,7 @@
                         "bottomText" => "Designed to protect musicians from the high sound level associated with their instruments, these headphones drastically reduce the level of external sound reaching the ear. These are the go-to choice for many drummers. Perfect for practice or gigs."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "45",
                         "price" => "25",
                         "stockingStuffer" => "TRUE",
@@ -452,7 +452,7 @@
                         "bottomText" => "Made from strong poly-carbonate and featuring thirteen different color effects, these drumsticks create amazing visual effects as they're moved through the air."
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "99",
                         "popularity" => "47",
                         "rockDrummer" => "TRUE",
@@ -463,7 +463,7 @@
                         "bottomText" => "Featuring enhanced bass and detailed sound, the Shure SE215s include a single dynamic microdriver. With a detachable cable, formable wire, and many different sized buds, the SE215’s ensure comfort whether on stage or on the go."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "62",
                         "popularity" => "37",
                         "itemURL" => "https://amzn.to/2zvNiTJ",
@@ -472,7 +472,7 @@
                         "bottomText" => "This pad provides the best practice substitute to an acoustic drum. It features a gum rubber surface for a realistic rebound, a wide pad to accommodate a double pedal, and a collapsible construction."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "35",
                         "popularity" => "37",
                         "itemURL" => "https://amzn.to/2itvRbQ",
@@ -481,7 +481,7 @@
                         "bottomText" => "This practice pad has a large playing surface that fits inside a standard snare basket. It has a natural gum feel on one side for realistic stick rebound and a harder recycled rubber surface on the other for a real workout."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "34",
                         "popularity" => "35",
                         "itemURL" => "https://amzn.to/2hCCI32",
@@ -490,7 +490,7 @@
                         "bottomText" => "Available with soft rubber for quiet practice on one side and with hard rubber for intensifying the workout and hearing each stroke on the opposite side. This pad features a dense wooden base for an authentic feel. Two distinct densities, two distinct feels."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "18",
                         "popularity" => "35",
                         "itemURL" => "https://amzn.to/2iuid7Z",
@@ -499,7 +499,7 @@
                         "bottomText" => "This tunable practice pad features a replaceable Ambassador Coated drumhead providing the bounce and feel of a real drum. A great practice pad for a beginner drummer just getting started or an advanced drummer looking to maintain their chops."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "13",
                         "popularity" => "33",
                         "itemURL" => "https://amzn.to/2iYf2JP",
@@ -508,7 +508,7 @@
                         "bottomText" => "These sticks feature a revolutionary heat-tempering process that transforms ordinary drumsticks into precision tools with unprecedented durability. Hickory is the most popular wood choice due to its resilience, responsiveness, and classic feel."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "32",
                         "price" => "15",
                         "stockingStuffer" => "TRUE",
@@ -518,7 +518,7 @@
                         "bottomText" => "The paradiddle is one of the most iconic drum rudiments that any drummer can identify with. Availble in five different colors."
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "6",
                         "popularity" => "30",
                         "stockingStuffer" => "TRUE",
@@ -529,7 +529,7 @@
                         "bottomText" => "The world's first drumming tape to be designed for use on both sticks and fingers. The tape helps prevent blisters and hand fatigue, while still allowing a sense of 'feel' to maximize dexterity and grip."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "29",
                         "price" => "11",
                         "stockingStuffer" => "TRUE",
@@ -539,7 +539,7 @@
                         "bottomText" => "The perfect gift for any Zildjian fan featuring a splash graphic on top and a padded underside."
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "25",
                         "popularity" => "28",
                         "stockingStuffer" => "TRUE",
@@ -551,7 +551,7 @@
                         "bottomText" => "This hi hat clutch outperforms the standard clutch in versatility, ease of use, and setup time. It does away with threads, meaning more loosening on the bottom nut - making this the most convenient clutch available today."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "26",
                         "popularity" => "27",
                         "itemURL" => "https://amzn.to/2zjtNND",
@@ -560,7 +560,7 @@
                         "bottomText" => "Crafted from LP’s exclusive plastic formulation, these jam blocks have the rich sound of wood blocks and the strength and durability to withstand even the hardest-hitting players. Each block includes a heavy duty mounting bracket for easy installation on any drum set."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "50",
                         "popularity" => "22",
                         "itemURL" => "https://amzn.to/2y0cDAP",
@@ -569,7 +569,7 @@
                         "bottomText" => "What started as a successful Kickstarter campaign in early 2015, the Switch Kick helps drummers to ‘switch’ beaters fast without any tools – with more than 10 different beater heads available."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "34",
                         "popularity" => "20",
                         "rockDrummer" => "TRUE",
@@ -579,7 +579,7 @@
                         "bottomText" => "Every song needs more cowbell. This model offers a signature sound that has made it one of the greatest selling cowbells in history. Available in a regular and large version."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "36",
                         "popularity" => "17",
                         "itemURL" => "https://amzn.to/2xYeMwZ",
@@ -588,7 +588,7 @@
                         "bottomText" => "This tambourine is rugged, durable, and easily mountable on any drum set. A great way to add an extra layer of sound to your playing."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "16",
                         "price" => "10",
                         "stockingStuffer" => "TRUE",
@@ -598,7 +598,7 @@
                         "bottomText" => "These novelty socks are the perfect gift for any drummer. Clear graphic, holds up in the wash, and fits feet of all sizes!"
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "16",
                         "price" => "20",
                         "stockingStuffer" => "TRUE",
@@ -608,7 +608,7 @@
                         "bottomText" => "This cutting board made of 100% bamboo will make the kitchen feel like home to any drummer."
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "9",
                         "popularity" => "15",
                         "stockingStuffer" => "TRUE",
@@ -618,7 +618,7 @@
                         "bottomText" => "This specifically designed set of egg shakers from Meinl offer 4 different, distinct sounds ranging from soft to loud, giving you the full range of sound possibilities for studio and live performances."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "14",
                         "price" => "18",
                         "stockingStuffer" => "TRUE",
@@ -628,7 +628,7 @@
                         "bottomText" => "This shirt is made with 100% combed ring-spun cotton with is softer than your average cotton. Available in a wide range of sizes."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "13",
                         "price" => "11",
                         "stockingStuffer" => "TRUE",
@@ -638,7 +638,7 @@
                         "bottomText" => "Drum on your pots and pans when you're not stirring! Made of solid beechwood, each set includes one slotted spoon and one solid spoon."
             ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "28",
                         "popularity" => "12",
                         "stockingStuffer" => "TRUE",
@@ -650,7 +650,7 @@
                         "bottomText" => "Strap on these gloves for a better stick grip. These gloves feature a vented back, a soft lambskin palm, and a velcro closure. Available in small, medium, and large sizes."
                         ])
 
-            @include("lead-gen.gift-guide._item-card", [
+            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "25",
                         "popularity" => "10",
                         "stockingStuffer" => "TRUE",
@@ -663,7 +663,7 @@
         </ul>
     </section>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>

@@ -82,7 +82,7 @@
                     <h2>Michael Jackson</h2>
                 </div>
                 <p>Enter your email below <br class="inline sm:hidden"> for 10 free video lessons...</p>
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - Grooves of MJ - Web Form",
                     "formName" => 'Grooves Of Michael Jackson',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -91,7 +91,7 @@
         </div>
     </header>
 
-    @include('lead-gen.courses.full.partials.instructor',[
+    @include('drumeo.lead-gen.courses.full.partials.instructor',[
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/avatar.jpg",
         "title" => '
             Learn From The Master --
@@ -103,11 +103,11 @@
         In this 10-video series, you’ll learn Michael Jackson’s most iconic drum grooves firsthand from the man who brought them to life in arenas around the world. “Sugarfoot” doesn’t just break down the technical, he teaches you the composure and passion required to hold it down for the world’s biggest pop artist.'
     ])
 
-    @include('lead-gen.courses.full.partials.lessons',[
+    @include('drumeo.lead-gen.courses.full.partials.lessons',[
         "headLine" => "THE SERIES"
     ])
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#eff0f0",
         "textColor" => "black",
     ])
@@ -120,7 +120,7 @@
             </div>
             <p>Enter your email below <br class="sm:hidden"> for 10 free video lessons...</p>
             <br><br class="hidden sm:inlin">
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Grooves of MJ - Web Form",
                 "formName" => 'Grooves Of Michael Jackson',
                 "buttonText" => 'Send The Videos&nbsp;'

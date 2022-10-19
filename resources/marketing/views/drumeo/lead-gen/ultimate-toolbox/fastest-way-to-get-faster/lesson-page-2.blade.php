@@ -19,7 +19,7 @@
 @section('lesson-tile-width', 'w-1/2 sm:w-1/3')
 
 @section('offers')
-    @include('lead-gen.partials._free-trial-offer')
+    @include('drumeo.lead-gen.partials._free-trial-offer')
 @endsection
 
 @php

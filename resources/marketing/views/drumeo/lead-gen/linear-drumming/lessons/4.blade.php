@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/560727679-c21a30b3084fcaf2a799dbd465d526ed48cdfba97e436f6a209f8bc332e30ca6-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Gospel Grooves​​",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/04-gospel-grooves.pdf",
     ])

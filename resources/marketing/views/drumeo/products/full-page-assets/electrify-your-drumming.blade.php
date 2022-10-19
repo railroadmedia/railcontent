@@ -1,4 +1,4 @@
-@extends('products.misc-products-layout')
+@extends('drumeo.products.misc-products-layout')
 
 
 @section('meta')
@@ -40,7 +40,7 @@
 
 @section('content')
 
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Electrify Your Drumming",
                 "fullPrice" => Prices::$eydFull,
                 "price" => Prices::$eydRegular,

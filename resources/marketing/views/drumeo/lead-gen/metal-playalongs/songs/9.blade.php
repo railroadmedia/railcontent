@@ -15,7 +15,7 @@
 @section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Brotherhood+Of+The+Snake.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Song Chart",
         "imgURL" => "https://d1923uyy6spedc.cloudfront.net/1515594241-drumeo-pa143-teratogenesis.png",
     ])

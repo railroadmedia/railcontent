@@ -189,7 +189,7 @@
 @stop()
 
 @section('global-body')
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
                 "fullPrice" => Prices::$earDrumsFull,
                 "price" => Prices::$earDrums,
@@ -821,38 +821,38 @@
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
                 @if(is_current_user_a_member())
-                    @include('products.partials.question-dropdown-tw', [
+                    @include('drumeo.products.partials.question-dropdown-tw', [
                     "customClass" => "sm:rounded-full",
                     "question" => true,
                     "title" => "Why do I need to register if I get it for free as a member?",
                     "description" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
                     ])
                 @endif
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "Do I need to attend the lessons live?",
                 "description" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
                 ])
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "What if I’m going to miss a day (or two, or more)?",
                 "description" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
                 ])
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "Do I need a full drum set to complete the course?",
                 "description" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
                 ])
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "How much time per week will this course require?",
                 "description" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
                 ])
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "What devices can I access the course on?",
@@ -895,7 +895,7 @@
             <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
             <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
                 next edition of 30-Day Drummer is announced. </p>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                                 "formName" => '30 Day Drummer Waitlist',
                                 "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
                                 "buttonText" => "Let Me Know ",
@@ -905,12 +905,12 @@
         </div>
     </div>
 
-    @include('sales.partials._video-modal',[
+    @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/738385463?autoplay=1',
         "title" => 'trailer'
     ])
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>

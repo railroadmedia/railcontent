@@ -40,74 +40,74 @@
 @endsection
 
 @section('lesson-grid')
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/gospel-chops/bfm-image-1.jpg",
          "lessonText" => "RLRRKK"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/gospel-chops/bfm-image-2.jpg",
          "lessonText" => "Double Combination"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/gospel-chops/bfm-image-3.jpg",
          "lessonText" => "Flam Stroke Combinations"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/gospel-chops/bfm-image-4.jpg",
          "lessonText" => "Expressions<br> With A Buzz"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/gospel-chops/bfm-image-5.jpg",
          "lessonText" => "Singles"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/gospel-chops/bfm-image-6.jpg",
          "lessonText" => "Tips For<br> Creativity"
     ])
 @endsection
 
 @section('artists')
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/brian-tichy.jpg",
     "tileName" => "Brian Tichy",
     "tileText" => "Breaking Down The Grooves Of John Bonham"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/carmine-appice.jpg",
     "tileName" => "Carmine Appice",
     "tileText" => "Polyrhythmic Paradiddles"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/randy-cooke.jpg",
     "tileName" => "Randy Cooke",
     "tileText" => "The Rock Beat Formula"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/jonathan-moffett.jpg",
     "tileName" => "JONATHAN MOFFETT",
     "tileText" => "The Grooves Of Michael Jackson"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/anika-nilles.jpg",
     "tileName" => "ANIKA NILLES",
     "tileText" => "Building Creativity"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/david-garibaldi.jpg",
     "tileName" => "DAVID GARIBALDI",
     "tileText" => "The Funky Foot"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/mark-guiliana.jpg",
     "tileName" => "MARK GUILIANA",
     "tileText" => "Building Rhythmic Confidence"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/tommy-igoe.jpg",
     "tileName" => "TOMMY IGOE",

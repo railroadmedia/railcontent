@@ -62,10 +62,10 @@
 @stop
 
 @section('layout-body')
-{{--    @include("sales.partials._nav", [--}}
+{{--    @include("drumeo.sales.partials._nav", [--}}
 {{--        "cartVersion" => true--}}
 {{--    ])--}}
-{{--    @include('products.partials.promo-banner', [--}}
+{{--    @include('drumeo.products.partials.promo-banner', [--}}
 {{--                    "name" => "Beyond Beginner Drumming",--}}
 {{--                    "fullPrice" => Prices::$beyondBeginnerDrummingFull,--}}
 {{--                    "price" => Prices::$beyondBeginnerDrumming,--}}
@@ -313,7 +313,7 @@
     </div>
 
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>

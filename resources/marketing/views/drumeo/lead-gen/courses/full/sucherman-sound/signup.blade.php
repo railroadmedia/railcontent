@@ -59,7 +59,7 @@
                     <h3>DRUMMER</h3>
                 </div>
                 <p>Your free guide to playing the<br class="sm:hidden"> drums with precision & clarity.</p>
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - Sucherman Sound - Web Form",
                     "formName" => 'Sucherman Sound',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -104,7 +104,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#eff0f0",
         "textColor" => "black",
     ])
@@ -118,7 +118,7 @@
             </div>
             <p>Enter your email and receive<br class="sm:hidden"> the five video series, FREE.</p>
             <br><br class="hidden lg:inline">
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Sucherman Sound - Web Form",
                 "formName" => 'Sucherman Sound',
                 "buttonText" => 'Send The Videos&nbsp;'

@@ -108,7 +108,7 @@
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -227,7 +227,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
     <section class="py-20 text-center text-white" style="background:#01050F;">
         <div class="mx-auto">
@@ -582,7 +582,7 @@
         </div>
     </section>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>

@@ -6,7 +6,7 @@
 @endphp
 
 @section('form1')
-    @include("lead-gen.partials.sign-up-form-tw", [
+    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "submitArrows" => true,
             "formId" => $formId,
             "formName" => $formName,
@@ -14,7 +14,7 @@
 @stop
 
 @section('form2')
-    @include("lead-gen.partials.sign-up-form-tw", [
+    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "stacked" => true,
             "submitArrows" => true,
             "formId" => $formId,

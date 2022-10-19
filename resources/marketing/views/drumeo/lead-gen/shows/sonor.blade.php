@@ -27,93 +27,93 @@
 @endsection
 
 @section('lesson-grid')
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e03-how-to-find-your-motivation-low.jpg",
          "lessonText" => "How To Find Your Motivation"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e05-factory-secrets-to-creating-drum-shells-low.jpg",
          "lessonText" => "Factory Secrets To Creating Drum Shells"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e07-the-finer-details-of-sonor-drums-low.jpg",
          "lessonText" => "The Finer Details of Sonor Drums"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e09-exploring-a-whole-new-side-of-sonor-drums-low.jpg",
          "lessonText" => "Exploring A Whole New Side of Sonor Drums"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e10-trying-out-every-kit-in-the-sonor-drums-factory-low.jpg",
          "lessonText" => "Trying Out Every Sonor Kit In The Factory"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e11-jared-jams-with-himself-low.jpg",
          "lessonText" => "Jared Jams With Himself At Sonor"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e13-jared-gets-creative-at-sonor-low.jpg",
          "lessonText" => "Jared Gets Creative At Sonor"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e14-a-kid-in-a-candy-store-low.jpg",
          "lessonText" => "A Kid In A Candy Store"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/e15-mountaintop-solo-low.jpg",
          "lessonText" => "Mountain-Top Solo In Bad Berleburg, Germany"
     ])
 @endsection
 
 @section('artists')
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/sonor-drums.jpg",
     "tileName" => "SONOR",
     "tileText" => "A DRUMEO DOCUMENTARY"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/paiste-cymbals.jpg",
     "tileName" => "PAISTE",
     "tileText" => "A Drumeo Documentary"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card2.jpg",
     "tileName" => "The NAMM Show",
     "tileText" => "With Dave Atkinson & Reuben Spyker"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/study-the-greats.jpg",
     "tileName" => "Study The Greats",
     "tileText" => "With Austin Burcham"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/show-podcast.jpg",
     "tileName" => "The Drumeo Podcast",
     "tileText" => "With Jared Falk & Dave Atkinson"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/exploring-beats.jpg",
     "tileName" => "Exploring Beats",
     "tileText" => "With Carson Gant"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/gear.jpg",
     "tileName" => "Gear Guides",
     "tileText" => "Find Out What Gear The Pros Are Using."
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/behind-the-scenes.jpg",
     "tileName" => "Behind The Scenes",

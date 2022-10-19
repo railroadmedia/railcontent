@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/liDmsVjp2wE/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Do you Even Math",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/04-do-you-even-math.png",
     ])

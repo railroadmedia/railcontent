@@ -13,7 +13,7 @@
 @section('prev-thumb', 'https://img.youtube.com/vi/zBLSP4zcnUk/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Take'r For A Rip, Eh?",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/10-take-er-for-a-rip-eh.png",
     ])

@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/470777467-95f29a8b2d8d254c258715092af748a95cc20e933239e63dd10280948d0c1807-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources',[
+    @include('drumeo.lead-gen.partials._assignment-resources',[
         'title' => 'PDF',
         'pdfURL' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/4-reading-drum-notation.pdf',
     ])

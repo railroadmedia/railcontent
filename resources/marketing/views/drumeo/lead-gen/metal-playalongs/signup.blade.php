@@ -67,7 +67,7 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Logo.svg" alt="play-along-logo">
             <h6 class="leading-normal my-5">Add your drumming to nine heavy drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formName" => 'Metal Play-Alongs',
                     "formId" => "Drumeo - Engagement - Trigger - Metal Play-Alongs - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -207,7 +207,7 @@
             </div>
         </div>
     </section>
-{{--    @include('lead-gen.partials.screen-slider',[--}}
+{{--    @include('drumeo.lead-gen.partials.screen-slider',[--}}
 {{--        "screens" => [--}}
 {{--           [--}}
 {{--               "img" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/All+Skill+Levels.jpg",--}}
@@ -264,7 +264,7 @@
 {{--        ],--}}
 {{--    ])--}}
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#000a1e",
         "textColor" => "white"
     ])
@@ -274,7 +274,7 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Logo.svg" alt="metal-playalongs-icon">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drum play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formName" => 'Metal Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Metal Play-Alongs - Web Form",
                         "buttonText" => "Hook Me Up ",
@@ -289,7 +289,7 @@
                     Add your drumming to nine high-quality <br class="inline md:hidden">
                     drumless play-along tracks.
                 </strong></h4>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formName" => 'Metal Play-Alongs',
                 "formId" => "Drumeo - Engagement - Trigger - Metal Play-Alongs - Web Form",
                 "buttonText" => "Hook Me Up ",

@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Opus+I+Excerpt%2C+No.5.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Song Chart",
         "imgURL" => "https://d1923uyy6spedc.cloudfront.net/1515589078-drumeo-pa140-resurrection-through-fire.png",
     ])

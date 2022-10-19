@@ -27,105 +27,105 @@
 @endsection
 
 @section('lesson-grid')
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP1_Low-2.jpg",
          "lessonText" => "Traffic Cones."
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP2_Low.jpg",
          "lessonText" => "Holding The Pants Ransom"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP3_Low.jpg",
          "lessonText" => "Mark Guiliana & The Hunt For The Dirty Dish Bandits"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP5_Low.jpg",
          "lessonText" => "Senri Kawaguchi: The First Drummer To Break A Snare?"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP6_Low.jpg",
          "lessonText" => "Parking Lot Pals & The Prank Call"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP8_Low.jpg",
          "lessonText" => "Jonathan Moffett: Don’t Call Me The Goat, I Don’t Eat Paper!"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP9_Low.jpg",
          "lessonText" => "Drummers, Drinks & Drums"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/BTS_EP10_Low.jpg",
          "lessonText" => "The Best Drumming Product"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/bts-ep12-low.jpg",
          "lessonText" => "Drumeo Is Getting Fat"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/episode-14-low.jpg",
          "lessonText" => "Dave’s Got No Clue Why His Office Got Destroyed"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/220245-card-thumbnail-1550501724",
          "lessonText" => "The All-New Drumeo Desk"
          ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223896-card-thumbnail-1556292632.jpg",
          "lessonText" => "Harry Miree Stages A Coup"
          ])
 @endsection
 
 @section('artists')
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/behind-the-scenes.jpg",
     "tileName" => "Behind The Scenes",
     "tileText" => "What really happens at Drumeo?"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/sonor-drums.jpg",
     "tileName" => "SONOR",
     "tileText" => "A DRUMEO DOCUMENTARY"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/paiste-cymbals.jpg",
     "tileName" => "PAISTE",
     "tileText" => "A Drumeo Documentary"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card2.jpg",
     "tileName" => "The NAMM Show",
     "tileText" => "With Dave Atkinson & Reuben Spyker"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/study-the-greats.jpg",
     "tileName" => "Study The Greats",
     "tileText" => "With Austin Burcham"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/gear.jpg",
     "tileName" => "Gear Guides",
     "tileText" => "Find Out What Gear The Pros Are Using."
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/exploring-beats.jpg",
     "tileName" => "Exploring Beats",
     "tileText" => "With Carson Gant"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/show-podcast.jpg",
     "tileName" => "The Drumeo Podcast",

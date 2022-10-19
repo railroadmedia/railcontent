@@ -38,7 +38,7 @@
                     Click the button below for free <br class="inline sm:hidden">
                     lifetime access to this online course.
                 </p>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Gavins Grooves - Web Form",
                 "formName" => 'Gavins Grooves',
                 "buttonText" => 'Send The Videos&nbsp;'
@@ -51,7 +51,7 @@
         </div>
     </header>
 
-    @include('lead-gen.courses.full.partials.instructor',[
+    @include('drumeo.lead-gen.courses.full.partials.instructor',[
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gavins-grooves/gavin.jpg",
         "title" => '
             Gavin Harrison Is <br class="hidden sm:inline">
@@ -98,7 +98,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "white",
         "textColor" => "black",
     ])
@@ -114,7 +114,7 @@
                 lifetime access to this online course.
             </p>
             <br><br>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Gavins Grooves - Web Form",
                 "formName" => 'Gavins Grooves',
                 "buttonText" => 'Send The Videos&nbsp;'

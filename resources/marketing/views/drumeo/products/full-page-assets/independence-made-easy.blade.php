@@ -1,4 +1,4 @@
-@extends('products.misc-products-layout')
+@extends('drumeo.products.misc-products-layout')
 
 
 @section('meta')
@@ -52,7 +52,7 @@
 @stop()
 
 @section('content')
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                     "name" => "Independence Made Easy",
                     "fullPrice" => Prices::$imeFull,
                     "price" => Prices::$imeRegular,
@@ -502,23 +502,23 @@
         <div class="row">
             <h1>Still Have Questions?</h1>
             <div class="columns">
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "When does the course officially start?",
                 "answer" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "Will I still have full access to the course after 26 weeks?",
                 "answer" => "Yes! Even though it’s designed as a 26-week course, you’ll have LIFETIME online access to everything inside Independence Made Easy, so you can review the materials or re-watch the lessons, anytime."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "What if I can’t follow the lessons EVERY week?",
                 "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You’ll have lifetime access to the entire course so you’ll never lose your spot -- and you can continue whenever it’s most convenient for you."
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "Do these lessons work for electronic and acoustic drum-sets? ",
                 "answer" => "Yes, the lessons will work on both electric and acoustic drum-sets. Since you'll be developing your drumming independence, you can actually practice on anything - even pots and pans if you want!"
                 ])
-                @include('products.partials.question-dropdown', [
+                @include('drumeo.products.partials.question-dropdown', [
                 "question" => "How much time per week will this course require?",
                 "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])

@@ -68,10 +68,10 @@
 @stop
 
 @section('layout-body')
-    @include("sales.partials._nav", [
+    @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "QuietKick",
                 "fullPrice" => Prices::$quietKickFull,
                 "price" => Prices::$quietKick,
@@ -289,19 +289,19 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
             <div class="dropdowns">
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "Does the QuietKick work with a double bass pedal?",
                 "description" => "Yes! You’ll see the option to add a second beater to your QuietKick. This allows you to attach your double pedal and work out both your feet. The extra beater is the only additional piece you need for this.",
                 ])
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "Does the QuietKick scoot?",
                 "description" => "You know what we mean – when your bass drum goes scooting across the floor everytime you hit it. The QuietKick has little to no scooting – but on a hard floor it will shift a little. For the best results, use your QuietKick on a rug or carpet. If you’re still having trouble add a bit of velcro to the bottom.",
                 ])
-                @include('products.partials.question-dropdown-tw', [
+                @include('drumeo.products.partials.question-dropdown-tw', [
                 "customClass" => "sm:rounded-full",
                 "question" => true,
                 "title" => "Will it ship internationally?",

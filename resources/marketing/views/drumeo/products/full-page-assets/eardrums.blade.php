@@ -79,10 +79,10 @@
 @stop()
 
 @section('layout-body')
-    @include("sales.partials._nav", [
+    @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
                 "fullPrice" => Prices::$earDrumsFull,
                 "price" => Prices::$earDrums,
@@ -410,7 +410,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
 
 
 @stop

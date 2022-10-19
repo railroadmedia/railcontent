@@ -17,5 +17,5 @@
 @section('lesson-index', '/ultimate-toolbox/catalogue')
 
 @section('offers')
-    @include('lead-gen.partials._free-trial-offer')
+    @include('drumeo.lead-gen.partials._free-trial-offer')
 @endsection

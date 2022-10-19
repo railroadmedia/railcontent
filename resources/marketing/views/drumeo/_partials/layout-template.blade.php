@@ -8,9 +8,9 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('partials.google-optimize')
+    <script src="https://www.googleoptimize.com/optimize.js?id=GTM-WP9MPV8"></script>
 
-    @include('partials.favicons')
+    @include('drumeo._partials._favicons')
 
     @yield('global-head')
 
@@ -42,7 +42,13 @@
 
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
-@include('members.partials._customer-io')
+<script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
+<script type="text/javascript">
+    window.Beacon('init', '14d9d94c-d89d-42e7-93ad-15ff13964974')
+    Beacon('on', 'ready', () => {
+        document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
+    });
+</script>
 
 </body>
 </html>

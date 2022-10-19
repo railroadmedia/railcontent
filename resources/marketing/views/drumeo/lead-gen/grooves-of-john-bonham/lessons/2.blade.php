@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://d1923uyy6spedc.cloudfront.net/221065-card-thumbnail-maxres-1551454986')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "#1",
         "assignmentID" => 'songSC',
         "pdfURL" => "https://d1923uyy6spedc.cloudfront.net/221110-sheet-image-1551465529.svg",

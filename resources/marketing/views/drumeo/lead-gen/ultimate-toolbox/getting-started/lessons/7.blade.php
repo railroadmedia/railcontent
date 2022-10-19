@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/469065379-b1df7a24a11a3150f8ecb85f6db3f8fdd5d582223be3121de116b464590aab2e-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources',[
+    @include('drumeo.lead-gen.partials._assignment-resources',[
         'title' => 'Resources',
         'zipURL' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/7-playing-your-first-fill.zip',
     ])

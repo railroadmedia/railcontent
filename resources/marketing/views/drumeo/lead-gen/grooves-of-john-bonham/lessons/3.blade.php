@@ -21,14 +21,14 @@
 @section('next-thumb', 'https://d1923uyy6spedc.cloudfront.net/221066-card-thumbnail-maxres-1551455602')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "#2a Hi-Hat Groove",
         "assignmentID" => 'songSC',
         "pdfURL" => "https://d1923uyy6spedc.cloudfront.net/221111-sheet-image-1551465999.svg",
         "soundslice" => "200372",
         "score" => true
     ])
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "#2b Ride Groove",
         "assignmentID" => 'songSC2',
         "pdfURL" => "https://d1923uyy6spedc.cloudfront.net/221112-sheet-image-1551466569.svg",
