@@ -192,8 +192,8 @@
                 const formDataObj = new FormData();
                 formDataObj.append('type', 'support-contact');
                 formDataObj.append('subject', 'Contact request');  // append email or name
-                formDataObj.append('studentName', this.formData.name);
-                formDataObj.append('studentEmail', this.formData.email);
+                formDataObj.append('sender-name', this.formData.name);
+                formDataObj.append('sender-address', this.formData.email);
                 formDataObj.append('isMember', this.formData.membership);
                 formDataObj.append('supportOption', this.formData.supportOption);
                 formDataObj.append('message', this.formData.description);
