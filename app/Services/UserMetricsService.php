@@ -157,11 +157,18 @@ class UserMetricsService
      *
      * @return integer
      */
-    private function getTotalMinutesPracticed($userId)
+    public function getTotalMinutesPracticed($userId, $assignmentTypeIds=[])
     {
-        $assignmentTypeIds = $this->databaseManager->connection(config('railtracker.database_connection_name'))
-            ->table('railtracker_media_playback_types')->where('type', 'assignment')->get('id');
-        $assignmentTypeIds = $assignmentTypeIds->pluck('id')->toArray();
+        if(empty($assignmentTypeIds)) {
+            $assignmentTypeIds =
+                $this->databaseManager->connection(config('railtracker.database_connection_name'))
+                    ->table('railtracker_media_playback_types')
+                    ->where('type', 'assignment')
+                    ->get('id');
+            $assignmentTypeIds =
+                $assignmentTypeIds->pluck('id')
+                    ->toArray();
+        }
 
         return round(
             ((integer)$this->databaseManager->connection(config('railtracker.database_connection_name'))

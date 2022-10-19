@@ -161,11 +161,11 @@ class MentorServiceTest extends TestCase
         $user2 = User::factory()->hasActiveMembership(100)->create();
         $this->mentorService->assignMentorByBrand($user2->id, $brand);
 
-        $user3 = User::factory() - (100)->create();
+        $user3 = User::factory()->create();
         $this->mentorService->assignMentorByBrand($user3->id, $brand);
 
-        $this->assertMentorCount($mentor, 1, 3);
-
+        $this->assertMentorCount($mentor, 2, 3);
+        $this->mentorService->resetCachedMentors();
         $mentor2 = $this->createMentor($brand);
 
         $this->mentorService->reassignRandomStudents($mentor->user_id, 2);

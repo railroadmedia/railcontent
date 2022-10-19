@@ -4,6 +4,7 @@ namespace Modules\Mentor\Tests\Feature\Controllers;
 
 use App\Modules\HelpScout\Models\HelpScoutCustomer;
 use App\Modules\HelpScout\Models\HelpScoutUser;
+use App\Modules\HelpScout\Services\HelpScoutUserService;
 use App\Modules\Mentor\Models\Mentor;
 use App\Modules\Mentor\Services\MentorService;
 use Illuminate\Support\Facades\Event;
@@ -41,6 +42,11 @@ class HelpScoutMentorControllerTest extends TestCase
             'user_id' => $mentor->id,
             'helpscout_user_id' => 1234,
         ]);
+
+        //Mock actual call to helpscout
+        $mock = $this->partialMock(HelpScoutUserService::class);
+        $mock->shouldReceive('updateConversationAssignedUser')->once();
+        $this->app->instance(HelpScoutUserService::class, $mock);
 
         $path = __DIR__ . "/helpScoutConversationCreatedExampleData.json";
         $file = fopen($path, "r");

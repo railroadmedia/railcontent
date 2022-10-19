@@ -120,7 +120,6 @@ auth.json.vapor/
 .vapor
 auth.json
 
-.env.*
 .env.pre-production
 .env.app-staging-three
 .env.beta-testing
@@ -131,5 +130,6 @@ auth.json
 .env.web-staging-five
 .env.app-staging-one
 .env.app-staging-two
+.env*
 
 storage/clockwork*

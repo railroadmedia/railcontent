@@ -110,25 +110,26 @@
 
     {{-- Response Message --}}
     <div x-cloak class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
-            :class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
+         x-bind:class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
     >
-        <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
+        <svg x-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
         </svg>
         <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
         </svg>
-        <div v-if="formSuccessful">
+        <div x-if="formSuccessful">
             <p class="font-bold mb-3">Your message was successfully sent!</p>
             <p class="mb-2">Your message has been submitted to the support team and will be reviewed shortly</p>
             <p class="font-bold mb-2 cursor-pointer" x-on:click="responseMessageVisible = false">Dismiss</p>
         </div>
-        <div v-else>
+        <div x-if="!formSuccessful">
             <p class="font-bold mb-3">Your message was not sent</p>
             <p class="mb-2">We could not submit your message to the support team due to a servor error. </p>
             <p class="font-bold mb-2 cursor-pointer" x-on:click="responseMessageVisible = false">Dismiss</p>
         </div>
     </div>
+    
 </form>
 
 <script>
@@ -192,8 +193,8 @@
                 const formDataObj = new FormData();
                 formDataObj.append('type', 'support-contact');
                 formDataObj.append('subject', 'Contact request');  // append email or name
-                formDataObj.append('studentName', this.formData.name);
-                formDataObj.append('studentEmail', this.formData.email);
+                formDataObj.append('sender-name', this.formData.name);
+                formDataObj.append('sender-address', this.formData.email);
                 formDataObj.append('isMember', this.formData.membership);
                 formDataObj.append('supportOption', this.formData.supportOption);
                 formDataObj.append('message', this.formData.description);

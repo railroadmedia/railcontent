@@ -21418,9 +21418,6 @@ a:visited{
 .tw-left-0{
   left: 0px !important;
 }
-.tw-right-\[-5px\]{
-  right: -5px !important;
-}
 .tw--top-\[165px\]{
   top: -165px !important;
 }
@@ -21674,6 +21671,9 @@ a:visited{
 .tw-mb-2{
   margin-bottom: 0.5rem !important;
 }
+.tw-ml-2{
+  margin-left: 0.5rem !important;
+}
 .tw-mb-8{
   margin-bottom: 2rem !important;
 }
@@ -21760,9 +21760,6 @@ a:visited{
 }
 .tw-mb-\[-2px\]{
   margin-bottom: -2px !important;
-}
-.tw-ml-2{
-  margin-left: 0.5rem !important;
 }
 .tw-mt-24{
   margin-top: 6rem !important;
@@ -22509,10 +22506,6 @@ a:visited{
 }
 .tw-origin-center{
   transform-origin: center !important;
-}
-.tw-translate-x-full{
-  --tw-translate-x: 100% !important;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 .tw--translate-x-1\/2{
   --tw-translate-x: -50% !important;
@@ -23896,6 +23889,9 @@ a:visited{
 }
 .tw-text-\[75px\]{
   font-size: 75px !important;
+}
+.tw-text-\[40px\]{
+  font-size: 40px !important;
 }
 .tw-text-\[22px\]{
   font-size: 22px !important;

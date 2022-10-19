@@ -11,6 +11,7 @@ use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Modules\UserManagementSystem\Models\User as UsoraUser;
 
 class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 {
@@ -42,7 +43,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_no_user_products()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $this->userMembershipFieldsService->sync($userId);
 
@@ -55,7 +56,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_basic_recurring_monthly_membership_access()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -100,7 +101,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_basic_recurring_annual_membership_access()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -145,7 +146,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_expired_recurring_annual_membership_access()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -190,7 +191,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_lifetime_annual_membership_access()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -233,7 +234,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_lifetime_annual_membership_access_that_is_expired()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -276,7 +277,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_pack_owner()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -319,7 +320,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_admin_team()
     {
-        $userId = $this->createUserAndGetId(null, null, 'administrator');
+        $userId = UsoraUser::factory()->create(['permission_level' => 'administrator'])->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -362,7 +363,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_coach()
     {
-        $userId = $this->createUserAndGetId(null, null, 'administrator');
+        $userId = UsoraUser::factory()->create(['permission_level' => 'administrator'])->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -416,7 +417,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_house_coach()
     {
-        $userId = $this->createUserAndGetId(null, null, 'administrator');
+        $userId = UsoraUser::factory()->create(['permission_level' => 'administrator'])->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -478,7 +479,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_recurring_monthly_membership_access_ignore_old_user_products()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
@@ -545,7 +546,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_sync_lifetime_membership_access_ignore_old_user_products()
     {
-        $userId = $this->createUserAndGetId();
+        $userId = UsoraUser::factory()->create()->id;
 
         $user = new User($userId, $this->faker->email);
 
