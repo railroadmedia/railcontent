@@ -50,8 +50,8 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
         );
     }
 
-    public function trackMediaPlaybackProgress($sessionId, $secondsPlayed, $currentSecond, $lastUpdatedOn = null)
-    : ?array {
+    public function trackMediaPlaybackProgress($sessionId, $secondsPlayed, $currentSecond, $lastUpdatedOn = null):bool|array|null
+    {
         return  $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
             $sessionId,
             $secondsPlayed,
