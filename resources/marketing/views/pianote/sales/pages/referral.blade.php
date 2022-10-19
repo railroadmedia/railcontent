@@ -97,7 +97,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("pianote.sales.nav")
 
     <section class="text-center text-white py-6 md:py-10 lg:pt-12 lg:pb-16" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
         <div class="container mx-auto max-w-6xl">

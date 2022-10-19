@@ -11,7 +11,7 @@
         [
             'title' => 'Singing Beautiful Harmonies',
             'description' => 'In this lesson we’ll be applying our parallel thirds to a song. Learn our original song “Day Or Night” with us to practice your harmonies.',
-        ],        
+        ],
         [
             'title' => 'What If My Harmony Doesn’t Fit?',
             'description' => 'Together we’ll learn what to do when your harmony suddenly doesn’t sound good and that parallel third doesn’t work anymore. In this lesson we’ll become familiar with chords, sharpen our ears and practice singing the notes of a chord.',
@@ -35,7 +35,7 @@
     ];
 @endphp
 
-@extends('global-layout')
+@extends('singeo._partials.global-layout')
 
 @section('global-head')
     <title>Harmony Pack | Singeo</title>
@@ -47,9 +47,9 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/harmony-pack/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
 
     <style>
 
@@ -65,7 +65,7 @@
 @endsection
 
 @section('global-body')
-    @include("sales.partials._nav", [
+    @include("singeo.sales.partials._nav", [
         "cartVersion" => true
     ])
 
@@ -174,7 +174,7 @@
                 Exactly HOW TO PRACTICE. You’ll be able to sing along with hand-picked practice exercises after every lesson. You just have to press play.
             </p>
             @foreach($lessons as $key => $lesson)
-                <div 
+                <div
                     x-data = "{ open: false }"
                     x-on:click="open = !open; console.log(open)"
                     class="dropdown text-center border border-singeo rounded-md overflow-hidden flex cursor-pointer mb-3 select-none"
@@ -189,7 +189,7 @@
                         <div class="flex items-center text-left flex-col sm:flex-row relative">
                             <h5 class="text-singeo leading-tight flex-grow w-full sm:w-auto"><strong>{!! $lesson['title'] !!}</strong></h5>
                         </div>
-                        <p 
+                        <p
                             x-bind:class="open && 'active'"
                             class="description leading-normal transition-all duration-500 overflow-hidden h-0 invisible max-h-0 opacity-0"
                             style="color:#1B1B1B;"
@@ -237,7 +237,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="py-12 md:py-20 text-center" style="background:#F7ECFF;">
         <img class="h-20 md:h-24 lg:h-32 mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/harmony-pack/logo_center_dark.png" alt="logo">
         <h3 class="font-extrabold leading-snug md:leading-normal mb-4">
@@ -247,11 +247,11 @@
         <p style="color:#747474;">**90-DAY GUARANTEE**</p>
     </section>
 
-    @include('lead-gen.partials._video-player',[
+    @include('singeo.lead-gen.partials._video-player',[
         "id" => "trailer",
         "code" => "738333190"
     ])
-    @include("sales.partials._footer")
+    @include("singeo.sales.partials._footer")
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -259,9 +259,9 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/assets/js/modal.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/modal.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
 @endsection

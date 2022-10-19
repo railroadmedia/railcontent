@@ -1,4 +1,4 @@
-@extends('global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     @parent
@@ -13,13 +13,13 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
 @stop()
 
 @section('global-body')
-    @include('sales.nav')
+    @include('pianote.sales.nav')
 
     <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4" style="background-color:#000c18;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/shop/affiliate-header.jpg);">
         <div class="container mx-auto relative z-10">
@@ -264,10 +264,10 @@
 
 
 
-    @include('sales.footer')
+    @include('pianote.sales.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
 
     <script>
         $(function () {

@@ -1,4 +1,4 @@
-@extends('sales.standard-layout', [
+@extends('pianote.sales.standard-layout', [
     "trialVersion" => true
 ])
 @section('meta')

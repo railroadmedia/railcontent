@@ -1,4 +1,4 @@
-@extends('pianote._partials.global-layout')
+@extends('singeo._partials.global-layout')
 
 @section('global-head')
     <title>Cookie Policy | Pianote</title>
@@ -8,8 +8,8 @@
     <meta property="og:url" content="https://www.pianote.com/cookie/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
         h1, h2, h3, p {
@@ -19,7 +19,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('singeo.sales.partials._nav', [
         "joinVersion" => true
     ])
 
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="container mx-auto py-12 px-3 md:px-4">
-        <p class="py-2">When you visit or access Musora Media, Inc websites, which include drumeo.com, pianote.com, guitareo.com and any other product or service that links to this policy, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies (“Tracking Technologies”). This is explained in this policy (“Cookie Policy”) which is a part of our <a class="text-blue-600" href="/privacy">Privacy Policy</a>.</p>
+        <p class="py-2">When you visit or access Musora Media, Inc websites, which include drumeo.com, pianote.com, guitareo.com, singeo.com and any other product or service that links to this policy, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies (“Tracking Technologies”). This is explained in this policy (“Cookie Policy”) which is a part of our <a class="text-blue-600" href="/privacy">Privacy Policy</a>.</p>
 
         <p class="py-2">Tracking Technologies allow us to automatically collect information about you and your online behavior in order to enhance your navigation on our websites, improve our performance and customize your experience on it. We also use this information to collect statistics about the usage of our service, perform analytics, serve ads, and to administer services to our users, customers and partners.</p>
 
@@ -61,8 +61,8 @@
     </div>
 
 
-    @include('pianote.sales.footer')
+    @include('singeo.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
 @stop

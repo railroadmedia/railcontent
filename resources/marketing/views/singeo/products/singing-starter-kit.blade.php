@@ -1,4 +1,4 @@
-@extends('products.singing-starter-kit-layout')
+@extends('singeo.products.singing-starter-kit-layout')
 
 @php $productPrice = SingeoPrices::$singingStarterKit @endphp
 

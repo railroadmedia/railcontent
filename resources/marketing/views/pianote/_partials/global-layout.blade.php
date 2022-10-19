@@ -8,7 +8,7 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('pianote.partials.google-optimize')
+    @include('pianote._partials.google-optimize')
 
     @yield('global-head')
 
@@ -27,7 +27,7 @@
 @yield('global-body')
 <script type="text/javascript" src="{{ url()->asset('marketing/parcel/pianote/pre-form-submit-facebook-lead.js') }}"></script>
 
-@include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])
+{{--@include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])--}}
 <script type="text/javascript">
     Beacon('on', 'ready', () => {
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";

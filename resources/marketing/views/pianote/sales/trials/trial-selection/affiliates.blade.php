@@ -1,3 +1,3 @@
-@extends('sales.trials.trial-selection.trial-selection-layout')
+@extends('pianote.sales.trials.trial-selection.trial-selection-layout')
 
 @section('badge-text', 'BEST DEAL')

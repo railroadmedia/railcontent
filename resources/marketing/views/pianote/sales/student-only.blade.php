@@ -1,4 +1,4 @@
-@extends('sales.standard-layout')
+@extends('pianote.sales.standard-layout')
 
 @section('meta')
     <meta name="robots" content="noindex">

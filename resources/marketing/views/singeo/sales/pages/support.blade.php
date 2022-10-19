@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/assets/marketing/nav-footer.css">
 
     <!-- Tailwind -->
-    <link rel="stylesheet" href="{{ mix('tailwindcss/tailwind.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
 
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
@@ -37,23 +37,23 @@
     ])
 
     <!-- Header -->
-    <header class="tw-py-10 md:tw-py-16 tw-bg-black tw-bg-center tw-bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/background-order.jpg);">
+    <header class="py-10 md:py-16 bg-black bg-center bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/background-order.jpg);">
         <div class="container mx-auto">
-            <h1 class="tw-mx-auto tw-text-center tw-text-white tw-text-2xl md:tw-text-4xl tw-font-bold">
-                <i class="fas fa-phone fa-flip-horizontal tw-text-singeo tw-text-3xl tw-mr-1"></i>
+            <h1 class="mx-auto text-center text-white text-2xl md:text-4xl font-bold">
+                <i class="fas fa-phone fa-flip-horizontal text-singeo text-3xl mr-1"></i>
                 Contact Us
             </h1>
         </div>
     </header>
 
-    <main class="tw-flex tw-flex-col tw-max-w-3xl tw-mx-auto tw-px-4">
+    <main class="flex flex-col max-w-3xl mx-auto px-4">
 
         <!-- Intro -->
         <section>
-            <div class="tw-my-8 tw-text-center">
-                <h2 class="tw-font-bold tw-text-3xl tw-mb-6">We'd love to hear from you!</h2>
-                <p class="tw-mb-6 tw-text-base">Whether your question is about membership, shipping, technical troubles or anything else, our amazing support team is ready to answer any and all of your questions!</p>
-                <p class="tw-text-base">You may find your response in our <a href="https://help.singeo.com/" class="tw-font-bold tw-no-underline tw-text-singeo" title="go to help center">Help Center here</a>, but if not, fill out the quick form below.</p>
+            <div class="my-8 text-center">
+                <h2 class="font-bold text-3xl mb-6">We'd love to hear from you!</h2>
+                <p class="mb-6 text-base">Whether your question is about membership, shipping, technical troubles or anything else, our amazing support team is ready to answer any and all of your questions!</p>
+                <p class="text-base">You may find your response in our <a href="https://help.singeo.com/" class="font-bold no-underline text-singeo" title="go to help center">Help Center here</a>, but if not, fill out the quick form below.</p>
             </div>
         </section>
 
@@ -73,29 +73,29 @@
         </section>
 
         <!-- Contact -->
-        <section class="tw-flex tw-flex-col tw-text-center tw-my-8">
-            <h2 class="tw-font-bold tw-text-3xl">Old fashioned phone calls work too!</h2>
-            <div class="tw-flex tw-my-8 tw-flex-col tw-items-center sm:tw-flex-row">
-                <div class="tw-flex tw-flex-col tw-w-10/12 sm:tw-w-1/3 tw-font-bold tw-justify-center tw-p-3 tw-border-solid tw-border-0 tw-border-b-2 sm:tw-border-b-0 sm:tw-border-r-2 tw-border-gray-300">
-                    <h4 class="tw-font-bold tw-mb-1">Toll-Free</h4>
-                    <a href="tel:+18004398921" class=" tw-text-singeo sm:mb-2 tw-no-underline tw-text-base">1-800-439-8921</a>
+        <section class="flex flex-col text-center my-8">
+            <h2 class="font-bold text-3xl">Old fashioned phone calls work too!</h2>
+            <div class="flex my-8 flex-col items-center sm:flex-row">
+                <div class="flex flex-col w-10/12 sm:w-1/3 font-bold justify-center p-3 border-solid border-0 border-b-2 sm:border-b-0 sm:border-r-2 border-gray-300">
+                    <h4 class="font-bold mb-1">Toll-Free</h4>
+                    <a href="tel:+18004398921" class=" text-singeo sm:mb-2 no-underline text-base">1-800-439-8921</a>
                 </div>
-                <div class="tw-flex tw-flex-col tw-w-10/12 sm:tw-w-1/3 tw-font-bold tw-justify-center tw-p-3 tw-border-solid tw-border-0 tw-border-b-2 sm:tw-border-b-0 sm:tw-border-r-2 tw-border-gray-300">
-                    <h4 class="tw-font-bold tw-mb-1">Direct/International</h4>
-                    <a href="tel:+16048557605" class=" tw-text-singeo sm:mb-2 tw-no-underline tw-text-base">1-604-855-7605</a>
+                <div class="flex flex-col w-10/12 sm:w-1/3 font-bold justify-center p-3 border-solid border-0 border-b-2 sm:border-b-0 sm:border-r-2 border-gray-300">
+                    <h4 class="font-bold mb-1">Direct/International</h4>
+                    <a href="tel:+16048557605" class=" text-singeo sm:mb-2 no-underline text-base">1-604-855-7605</a>
                 </div>
-                <div class="tw-flex tw-flex-col tw-w-10/12 sm:tw-w-1/3 tw-font-bold tw-justify-center tw-p-3">
-                    <h4 class="tw-font-bold tw-mb-1">Office Hours</h4>
-                    <p class="tw-text-singeo tw-text-base"> Monday-Friday</p>
-                    <p class="tw-text-singeo sm:mb-2 tw-text-base">8 AM - 4 PM Pacific Time</p>
+                <div class="flex flex-col w-10/12 sm:w-1/3 font-bold justify-center p-3">
+                    <h4 class="font-bold mb-1">Office Hours</h4>
+                    <p class="text-singeo text-base"> Monday-Friday</p>
+                    <p class="text-singeo sm:mb-2 text-base">8 AM - 4 PM Pacific Time</p>
                 </div>
             </div>
         </section>
 
         <!-- Join -->
-        <section class="tw-flex tw-flex-col tw-text-center tw-mb-12">
-            <h2 class="tw-font-bold tw-text-3xl tw-mb-3 md:tw-mb-6">Want to join the team?</h2>
-            <p class="tw-text-base">For current available positions at our company, please visit <a href="https://musora.com/jobs" title="go to help center" class="tw-font-bold tw-no-underline tw-text-singeo">Musora.com/Jobs</a>.</p>
+        <section class="flex flex-col text-center mb-12">
+            <h2 class="font-bold text-3xl mb-3 md:mb-6">Want to join the team?</h2>
+            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/jobs" title="go to help center" class="font-bold no-underline text-singeo">Musora.com/Jobs</a>.</p>
         </section>
 
     </main>
@@ -104,7 +104,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/singeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/singeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/singeo/app.js') }}"></script>
 @stop

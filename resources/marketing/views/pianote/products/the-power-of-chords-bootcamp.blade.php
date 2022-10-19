@@ -1,4 +1,4 @@
-@extends('products.the-power-of-chords-layout')
+@extends('pianote.products.the-power-of-chords-layout')
 
 @php $productPrice = 5 @endphp
 
