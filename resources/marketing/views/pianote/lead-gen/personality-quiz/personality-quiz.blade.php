@@ -1,11 +1,11 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>You're almost there | Pianote</title>
-    <meta property="og:title" content="You're almost there | Pianote">
+    <title>What's your piano personality? | Pianote</title>
+    <meta property="og:title" content="What's your piano personality? | Pianote">
 
-    <meta name="description" content="Please enter your email address to get your personality result. ">
-    <meta property="og:description" content="Please enter your email address to get your personality result. ">
+    <meta name="description" content="Pick the best answer to these 10 questions and discover which of our piano personalities fits you!">
+    <meta property="og:description" content="Pick the best answer to these 10 questions and discover which of our piano personalities fits you!">
 
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
