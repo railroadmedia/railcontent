@@ -348,11 +348,7 @@ class ContentProgressEventListener
     {
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
         if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds))  {
-            \Debugbar::addMessage($assignmentTypeIds);
-
             $min = $this->userMetricsService->getTotalMinutesPracticed($mediaPlaybackTracked->userId, $assignmentTypeIds);
-            \Debugbar::addMessage($min);
-
             $userBrandMinutesPracticed = user()->brand_minutes_practiced;
             $brand = config('railcontent.brand');
             $userBrandMinutesPracticed[$brand] = $min;
