@@ -8,7 +8,7 @@
 
     <header id="pageHeader"
             class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
-            style="background-image:url('https://musora-web-platform.s3.amazonaws.com/headers/{{ $brand }}-header.jpg');">
+            style="background-image:url('https://musora.com/cdn-cgi/image/quality=100/https://musora-web-platform.s3.amazonaws.com/headers/{{ $brand }}-header.jpg');">
         <div class="tw-container tw-mx-auto tw-text-center">
             <h1 class="heading tw-text-white tw-mb-2">
                 <a href="javascript:history.back()" class="tw-no-underline">

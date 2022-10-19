@@ -4,6 +4,7 @@ namespace App\Modules\Brand\Services;
 
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
@@ -13,13 +14,16 @@ class PrimaryBrandService
 {
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
+    private OnboardingService $onboardingService;
 
     public function __construct(
         SubscriptionService $subscriptionService,
         UserProductService $userProductService,
+        OnboardingService $onboardingService,
     ) {
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
+        $this->onboardingService = $onboardingService;
     }
 
     /**
@@ -28,6 +32,11 @@ class PrimaryBrandService
      */
     public function getInitialBrand(int $userId): string
     {
+        $brand = $this->onboardingService->getBrand($userId);
+        if ($brand) {
+            return $brand;
+        }
+
         $brand = $this->subscriptionService->getFirstSubscriptionBrand($userId, config('brands'));
         if ($brand) {
             return $brand;

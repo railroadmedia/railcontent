@@ -19,7 +19,7 @@
 </div>
 
 {{-- How To Apply Modal --}}
-<div id="howApplyModal" class="modal">
+<div id="howApplyModal" class="modal vimeo-embedded-player">
     <div class="flex flex-column corners-10">
         <div class="video-wrap">
             <div class="widescreen">

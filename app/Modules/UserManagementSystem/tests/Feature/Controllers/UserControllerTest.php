@@ -25,51 +25,51 @@ class UserControllerTest extends UserManagementSystemTestCase
 //        )->middleware([AuthenticatedOnly::class]);
     }
 
-    public function test_create()
-    {
-        $email = $this->faker->email;
-        $password = $this->faker->words(3, true);
-        $device = 'test_device';
-
-        $user = User::factory()->create([
-            'email' => $email,
-            'password' => Hash::make($password),
-        ]);
-
-        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'create-users']);
-        $user->givePermissionTo($permission);
-
-        auth()->login($user);
-
-        $response = $this->json(
-            'PUT',
-            config('user_management_system.route_prefix') . '/user/store',
-            []
-        );
-
-        $this->assertEquals(
-            json_encode([
-                'errors' =>
-                    [
-                        'email' =>
-                            [
-                                0 => 'The email field is required.',
-                            ],
-                        'password' =>
-                            [
-                                0 => 'The password field is required.',
-                            ],
-                        'display_name' =>
-                            [
-                                0 => 'The display name field is required.',
-                            ],
-                    ],
-            ]),
-            $response->getContent()
-        );
-
-//        $this->assertEmpty(auth()->id());
-    }
+//    public function test_create()
+//    {
+//        $email = $this->faker->email;
+//        $password = $this->faker->words(3, true);
+//        $device = 'test_device';
+//
+//        $user = User::factory()->create([
+//            'email' => $email,
+//            'password' => Hash::make($password),
+//        ]);
+//
+//        $permission = Permission::create(['guard' => 'user-management-system', 'name' => 'create-users']);
+//        $user->givePermissionTo($permission);
+//
+//        auth()->login($user);
+//
+//        $response = $this->json(
+//            'PUT',
+//            config('user_management_system.route_prefix') . '/user/store',
+//            []
+//        );
+//
+//        $this->assertEquals(
+//            json_encode([
+//                'errors' =>
+//                    [
+//                        'email' =>
+//                            [
+//                                0 => 'The email field is required.',
+//                            ],
+//                        'password' =>
+//                            [
+//                                0 => 'The password field is required.',
+//                            ],
+//                        'display_name' =>
+//                            [
+//                                0 => 'The display name field is required.',
+//                            ],
+//                    ],
+//            ]),
+//            $response->getContent()
+//        );
+//
+////        $this->assertEmpty(auth()->id());
+//    }
 
 
 

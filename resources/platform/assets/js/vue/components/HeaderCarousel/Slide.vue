@@ -70,7 +70,7 @@ const goToUrl = (url) => {
       </div> 
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white md:tw-bg-[#00101D] tw-h-4/5 md:tw-h-full tw-bg-gradient-to-t tw-from-[#00101D] tw-via-[#00101D]">
-        <div class="tw-flex tw-flex-col tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-[26px]">
+        <div class="tw-flex tw-flex-col tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-[26px] lg:tw-pb-0">
           <h4 class="tw-font-bold tw-text-[16px] tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue

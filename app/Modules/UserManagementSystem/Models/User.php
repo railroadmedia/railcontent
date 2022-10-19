@@ -210,6 +210,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property ?MentorStudent $mentorStudent
  * @property mixed|null $brand_total_xp
  * @property Collection $subscriptions
+ * @property mixed|null $brand_minutes_practiced
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -223,7 +224,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $guard_name = 'user-management-system';
     protected $casts = [
         'brand_method_levels' => 'json',
-        'brand_total_xp' => 'json'
+        'brand_total_xp' => 'json',
+        'brand_minutes_practiced' => 'json'
     ];
 
     /**
@@ -341,6 +343,19 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 0;
     }
 
+    /**
+     * @return integer
+     */
+    public function getBrandMinutesPracticed()
+    {
+        $brand = brand();
+
+        if (isset($this->brand_minutes_practiced[$brand])) {
+            return $this->brand_minutes_practiced[$brand];
+        }
+
+        return 0;
+    }
     /**
      * @return Attribute
      */
