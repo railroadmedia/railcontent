@@ -2,53 +2,17 @@
 
 namespace Modules\UserManagementSystem\Tests;
 
-use Carbon\Carbon;
-use Faker\Factory;
-use Faker\Generator;
-use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\URL;
-use Railroad\Railcontent\Services\ConfigService;
+use Tests\TestCase;
 
-abstract class UserManagementSystemTestCase extends BaseTestCase
+abstract class UserManagementSystemTestCase extends TestCase
 {
-    use RefreshDatabase;
-
-    /**
-     * @var Factory
-     */
-    protected Generator|Factory $faker;
-
     protected function setUp(): void
     {
-        putenv('RAILCONTENT_DATA_MODE=client');
-
-        $this->faker = Factory::create();
-
-        Carbon::setTestNow(Carbon::now());
-
         parent::setUp();
-
-        URL::forceRootUrl('https://testing.musora.com');
 
         Mail::fake();
         Notification::fake();
-    }
-
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../../../../bootstrap/app.php';
-
-        $app->make(Kernel::class)->bootstrap();
-
-        return $app;
     }
 }

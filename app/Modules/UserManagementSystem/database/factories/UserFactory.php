@@ -97,6 +97,7 @@ class UserFactory extends Factory
             'guitareo_onboarding_skip_setup' => 0,
             'pianote_onboarding_skip_setup' => 0,
             'drumeo_onboarding_skip_setup' => 0,
+            'brand_total_xp' => null
         ];
     }
 

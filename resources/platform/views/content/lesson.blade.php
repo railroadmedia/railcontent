@@ -197,7 +197,7 @@
                     <div class="container mv-3">
                         <div class="flex flex-column grow">
                             <div class="flex flex-row pv-3">
-                                <h1 class="heading">Resources</h1>
+                                <h1 class="heading dark:tw-text-white">Resources</h1>
                             </div>
                             <div class="flex flex-row">
                                 @include('partials.content._legacy-pack-resources')

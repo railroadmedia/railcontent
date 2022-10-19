@@ -4251,16 +4251,35 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.35.1",
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f70a0f4d389cfc9023fa047dfa862de410a598b5
+            "version": "v9.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "79aed20f54b6ab75f926bf7d0dd7a5043ceb774a"
+                "reference": "356aed98c338db7204e3c2d4ecbd1221679afb56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/79aed20f54b6ab75f926bf7d0dd7a5043ceb774a",
-                "reference": "79aed20f54b6ab75f926bf7d0dd7a5043ceb774a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/356aed98c338db7204e3c2d4ecbd1221679afb56",
+                "reference": "356aed98c338db7204e3c2d4ecbd1221679afb56",
+<<<<<<< HEAD
+=======
+            "version": "v9.36.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "584f7bbde1bc24c69c84afe44f16b4ec294f92ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/584f7bbde1bc24c69c84afe44f16b4ec294f92ef",
+                "reference": "584f7bbde1bc24c69c84afe44f16b4ec294f92ef",
+>>>>>>> master
+=======
+>>>>>>> f70a0f4d389cfc9023fa047dfa862de410a598b5
                 "shasum": ""
             },
             "require": {
@@ -4433,7 +4452,15 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-10-11T17:30:47+00:00"
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "time": "2022-10-18T13:38:52+00:00"
+=======
+            "time": "2022-10-18T16:04:13+00:00"
+>>>>>>> master
+=======
+            "time": "2022-10-18T13:38:52+00:00"
+>>>>>>> f70a0f4d389cfc9023fa047dfa862de410a598b5
         },
         {
             "name": "laravel/nova",

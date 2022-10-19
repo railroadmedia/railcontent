@@ -61,11 +61,13 @@ export default {
             <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-10 sm:tw-px-8 tw-w-full lg:tw-w-5/12">
                 <div class="tw-text-center tw-w-full tw-max-w-[287px]">
                     <h3 class="text-white tw-text-4xl xl:tw-text-[54px] tw-font-bold tw-leading-none tw-mb-2 tw-uppercase">Level {{ nextLearningPathLevel }}</h3>
-                    <!-- progress bar -->
-                    <div class="tw-bg-white tw-relative tw-w-full tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]">
-                        <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0" :class="[bgColor[brand]]" :style="`width: ${nextLearningPathProgressPercent}%;`">
-                            <span class="tw-absolute tw-top-0 tw-h-full tw-font-bold tw-translate-x-full tw-text-sm tw-right-[-5px]" :class="textColor[brand]">{{nextLearningPathProgressPercent}}%</span>
+                    <div class="tw-flex">
+                        <!-- progress bar -->
+                        <div class="tw-bg-white tw-relative tw-w-full tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]">
+                            <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0" :class="[bgColor[brand]]" :style="`width: ${nextLearningPathProgressPercent}%;`"></div>
                         </div>
+                        <!-- Progress percentage -->
+                        <span class="tw-font-bold tw-ml-2 tw-text-sm tw-text-white">{{nextLearningPathProgressPercent}}%</span>
                     </div>
                 </div>
             </div>

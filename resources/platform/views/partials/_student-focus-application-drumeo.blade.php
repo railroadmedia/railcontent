@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div id="whatIsModal" class="modal">
+<div id="whatIsModal" class="modal vimeo-embedded-player">
     <div class="flex flex-column corners-10">
         <div class="video-wrap">
             <div class="widescreen">
@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div id="howApplyModal" class="modal">
+<div id="howApplyModal" class="modal vimeo-embedded-player">
     <div class="twflex tw-flex-col tw-rounded-[10px]">
         <div class="video-wrap">
             <div class="widescreen">
