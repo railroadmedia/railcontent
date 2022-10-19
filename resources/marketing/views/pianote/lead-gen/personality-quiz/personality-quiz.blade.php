@@ -26,9 +26,9 @@
         "joinVersion" => true
     ])
 
-    <section class="py-5 sm:py-12 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
-        <div class="container max-w-6xl mx-auto text-center text-white px-6 lg:px-0">
-            <div class="typeform-widget" data-url="https://form.typeform.com/to/VgZGeh8j?typeform-medium=embed-snippet" style="width: 100%; height: 900px;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+    <section class="py-3 sm:py-5 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
+        <div class="container mx-auto text-center text-white">
+            <div class="typeform-widget" data-url="https://form.typeform.com/to/VgZGeh8j?typeform-medium=embed-snippet" style="width: 100%; height: 90vh;"></div> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
         </div>
     </section>
 
