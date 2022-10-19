@@ -92,7 +92,7 @@ class VaporEnvManager extends Command
             $nextToken = $parametersResponse['NextToken'] ?? null;
 
             $allParameters = array_merge($allParameters, $parametersResponse->toArray()['Parameters']);
-        } while (count($parametersResponse['Parameters']) == $maxResults);
+        } while (count($parametersResponse['Parameters']) == $maxResults && !empty($parametersResponse['NextToken']));
 
         $parametersForEnvironment = [];
 
