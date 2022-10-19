@@ -176,7 +176,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $response = $this->call(
             'POST',
             config('user_management_system.route_prefix') . '/login/cookie',
-            ['email' => $email, 'password' => $password, 'redirect' => $redirectUrl]
+            ['email' => $email, 'password' => $password, 'redirect_to' => $redirectUrl]
         );
 
         $this->assertEquals(302, $response->getStatusCode());

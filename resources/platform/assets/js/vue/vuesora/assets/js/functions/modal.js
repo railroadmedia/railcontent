@@ -72,14 +72,15 @@ export default (function () {
                 dialog.classList.remove('displayed');
 
                 if (dialog.classList.contains('vimeo-embedded-player')) {
-                    const iframe = document.getElementById('vimeo-iframe');
-
-                    if (iframe) {
-                        const player = new Player(iframe);
-                        player.pause();
-                    } else {
-                        console.log('A dialog was declared to have embedded vimeo video player, but iframe with id "vimeo-iframe" was not found!');
-                    }
+                    // pause all videos in an iframe if they contain a vimeo src
+                    const iframes = dialog.getElementsByTagName('iframe');
+                    Array.from(iframes).forEach((iframe) => {
+                        const isVimeoIframe = iframe.getAttribute('src')?.includes('vimeo');
+                        if (iframe && isVimeoIframe) {
+                            const player = new Player(iframe);
+                            player.pause();
+                        }
+                    })
                 }
             });
 

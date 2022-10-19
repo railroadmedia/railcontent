@@ -5,7 +5,7 @@
   >
     <div class="tw-text-center tw-pb-6">
       <div
-        class="
+        :class="`
           tw-px-[16px]
           tw-py-[20px]
           tw-w-4/6
@@ -17,6 +17,7 @@
           tw-text-white
           dark:tw-bg-white
           tw-bg-[#081825]
+          ${slideClassData}`
         "
       >
         <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
@@ -56,7 +57,11 @@ export default {
   emits: ['onClose'],
   methods: {
     handleOnClose() {
-      this.$emit('onClose')
+      this.slideClassData = 'slide-out-bottom';
+      setTimeout(() => {
+        this.$emit('onClose');
+        this.slideClassData = 'slide-in-bottom';
+      }, 500);
     }
   },
   data() {
@@ -64,9 +69,13 @@ export default {
       showNotification: false,
       notificationIcon: this.icon,
       notificationText: this.text,
+      slideClassData: this.slideClass,
     };
   },
   watch: {
+    slideClass(val) {
+      this.slideClassData = val;
+    },
     icon(val) {
       if (val === 'error') {
         this.notificationIcon = 'fa-exclamation-circle tw-text-[#ef4444]';

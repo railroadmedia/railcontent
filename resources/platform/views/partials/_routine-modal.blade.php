@@ -5,7 +5,7 @@
     </button>
 </div>
 
-<div id="routineModal" class="modal">
+<div id="routineModal" class="modal vimeo-embedded-player">
     <div class="flex flex-column corners-10">
         <div class="video-wrap">
             <div class="widescreen">

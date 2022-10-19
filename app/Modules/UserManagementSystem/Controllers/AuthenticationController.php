@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthenticationController extends Controller
 {
+    use AuthorizesRequests;
     use ValidatesRequests;
 
     /**
@@ -212,5 +214,24 @@ class AuthenticationController extends Controller
                 'message' => 'Successfully logged out',
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @param $userId
+     * @return RedirectResponse
+     */
+    public function loginAsUser(Request $request, $userId)
+    {
+        $this->authorize('login_as_users');
+
+        if (!empty(user()) && user()->isAdmin()) {
+            auth()->logout();
+            auth()->loginUsingId($userId);
+
+            return redirect()->to('/members');
+        }
+
+        throw new NotFoundHttpException();
     }
 }

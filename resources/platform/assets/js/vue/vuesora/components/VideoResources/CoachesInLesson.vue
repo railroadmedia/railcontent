@@ -35,6 +35,7 @@
           "
         >
           <div
+            v-if="instructor.name !== 'Students Of Guitareo'"
             class="tw-absolute tw-bottom-0 tw-w-full tw-h-3 tw-p-0 tw-m-0 tw-bg-yellow-500"
           >
             <svg
@@ -56,8 +57,7 @@
           </div>
           <div
             v-on:click="goToCoachProfile(instructor.url)"
-            class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500"
-            :style="'border: 2px solid;'"
+            class="tw-w-full tw-h-full tw-absolute tw-rounded-full tw-cursor-pointer tw-border-solid tw-border-yellow-500 tw-border-2"
           ></div>
         </div>
       </div>
@@ -69,7 +69,7 @@
           tw-text-gray-500
           dark:tw-text-white
           tw-uppercase
-          tw-justify-between
+          tw-justify-center
           tw-shrink-0
         "
       >
@@ -77,50 +77,58 @@
           <span class="tw-text-xs sm:tw-text-base tw-font-normal tw-mr-1">
             {{ instructor.name.split(" ")[0] }}
           </span>
-          <span class="tw-text-xs sm:tw-text-base tw-font-bold tw-mr-1">
+          <span class="tw-text-xs sm:tw-text-base tw-mr-1 tw-font-bold">
             {{ instructor.name.split(" ")[1] }}
           </span>
-        </h4>
-        <button
-          v-if="!instructor.current_user_is_subscribed"
-          v-on:click="followCoach(instructor.id)"
-          class="
-            tw-text-left tw-px-0 tw-py-0 tw-text-xs
-            sm:tw-text-base
-            tw-transition-none
-            tw-text-[#00101D] dark:tw-text-white
-            tw-border-none
-            tw-bg-transparent
-            tw-uppercase
-            tw-font-bold
-            tw-cursor-pointer
-          "
-        >
-          <span>
-            <i aria-hidden="true" class="fa fa-bell"></i>
-            <span class="tw-pl-2">Subscribe</span></span
+          <span v-if="instructor.name.split(' ')[2]" 
+                class="tw-text-xs sm:tw-text-base tw-font-bold tw-mr-1"
           >
-        </button>
-        <button
-          v-if="instructor.current_user_is_subscribed"
-          v-on:click="unfollowCoach(instructor.id)"
-          class="
-            tw-text-left tw-px-0 tw-py-0 tw-text-xs
-            sm:tw-text-base
-            tw-transition-none
-            tw-border-none
-            tw-bg-transparent
-            tw-uppercase
-            tw-font-bold
-            tw-cursor-pointer
-          "
-          :class="`tw-text-${brand}`"
-        >
-          <span>
-            <i aria-hidden="true" class="fa fa-check"></i>
-            <span class="tw-pl-2">Subscribed</span>
+            {{ instructor.name.split(" ")[2] }}
           </span>
-        </button>
+        </h4>
+        <!-- Subscribe CTA -->
+        <div v-if="instructor.name !== 'Students Of Guitareo'">
+          <button
+            v-if="!instructor.current_user_is_subscribed"
+            v-on:click="followCoach(instructor.id)"
+            class="
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs
+              sm:tw-text-base
+              tw-transition-none
+              tw-text-[#00101D] dark:tw-text-white
+              tw-border-none
+              tw-bg-transparent
+              tw-uppercase
+              tw-font-bold
+              tw-cursor-pointer
+            "
+          >
+            <span>
+              <i aria-hidden="true" class="fa fa-bell"></i>
+              <span class="tw-pl-2">Subscribe</span></span
+            >
+          </button>
+          <button
+            v-if="instructor.current_user_is_subscribed"
+            v-on:click="unfollowCoach(instructor.id)"
+            class="
+              tw-text-left tw-px-0 tw-py-0 tw-text-xs
+              sm:tw-text-base
+              tw-transition-none
+              tw-border-none
+              tw-bg-transparent
+              tw-uppercase
+              tw-font-bold
+              tw-cursor-pointer
+            "
+            :class="`tw-text-${brand}`"
+          >
+            <span>
+              <i aria-hidden="true" class="fa fa-check"></i>
+              <span class="tw-pl-2">Subscribed</span>
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
