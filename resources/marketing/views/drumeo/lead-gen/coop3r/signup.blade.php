@@ -38,7 +38,7 @@
                 <img class="series-logo mx-auto" src="{{ cdn('lead-gen/coop3r/coop3r-logo2.png') }}" alt="How To Start Playing Drums">
                 <p>Enter your email below for 5 free <br class="hidden lg:inline">
                     video lessons for getting started.</p>
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "stacked" => true,
                     "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
                     "formName" => 'COOP3RDRUMM3R - CC HTSPD - Lead Gen',
@@ -54,35 +54,35 @@
             <p>In this exclusive video series, you'll get his best tips for how YOU can start playing the drums right away!</p>
             <div class="thumbnail-wrap grid grid-cols-2 gap-4 sm:grid-cols-3">
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/551839388-a432e655008cce35ee73cec69639b3c801281023879f6a54a323f112782e7ef3-d_640",
                         "badge" => "Lesson #1",
                         "title" => "Understanding The Drum Set"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/548962045-245c563e3dc6c0dfc39ffcd73ea0818c46579c70cf31b71c5f5ddf969b23580e-d_640",
                         "badge" => "Lesson #2",
                         "title" => "Drum Theory"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/551839496-2316746236b066eb501ca6b120f2afb0e5d1a77dab1ee4902541021bbf2ebf79-d_640",
                         "badge" => "Lesson #3",
                         "title" => "How To Practice"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/548963870-f2b45bc2cf148787602cd2dd0cd604ee6df16a75b28d4b303eb01ff3e5a77c53-d_640",
                         "badge" => "Lesson #4",
                         "title" => "Starter Grooves"
                     ])
                 </div>
                 <div class="w-full end">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/551839554-da5d348f09ac3cc5864cc2a4d0651e216216127609a1e657d1e2ba932f673eff-d_640",
                         "badge" => "Lesson #5",
                         "title" => "Starter Fills"
@@ -92,7 +92,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.enter-email1',[
+    @include('drumeo.lead-gen.partials.enter-email1',[
         "headLine" => "Enter your email below for 5 free video lessons for getting started.",
         "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
         "formName" => "COOP3RDRUMM3R - CC HTSPD - Lead Gen"
@@ -105,7 +105,7 @@
                 video lessons for getting started.
             </h1>
 
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
                 "formName" => 'COOP3RDRUMM3R - CC HTSPD - Lead Gen',

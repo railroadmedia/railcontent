@@ -22,14 +22,14 @@
 @section('lesson-tile-width', 'w-1/2 sm:w-1/3 lg:w-1/4')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "All Course PDFs",
         "zipURL" => "https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip"
     ])
 @endsection
 
 @section('offers')
-    @include('lead-gen.partials._free-trial-offer')
+    @include('drumeo.lead-gen.partials._free-trial-offer')
 @endsection
 
 @section('modal')

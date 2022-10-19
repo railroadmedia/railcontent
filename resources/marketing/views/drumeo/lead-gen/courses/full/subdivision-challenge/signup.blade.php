@@ -57,7 +57,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#eff0f0",
         "textColor" => "black",
     ])

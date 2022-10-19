@@ -21,17 +21,17 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/460801706-c1b2d2bcbaa562b61c4920d519e77bb0377a18e5c63fa573b3067132304b968f-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "PDF",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/bossa-nova.pdf",
     ])
 
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "MP3",
         "mp3URL" => "https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/bossa-nova-no-click.mp3",
     ])
 
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "MP3 with click",
         "mp3URL" => "https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/bossa-nova-click.mp3",
     ])

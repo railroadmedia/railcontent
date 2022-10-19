@@ -19,5 +19,5 @@
 @section('lesson-tile-width', 'w-1/2 sm:w-1/3 lg:w-1/4')
 
 @section('offers')
-    @include('lead-gen.courses.full.michael-jackson-grooves._related-courses')
+    @include('drumeo.lead-gen.courses.full.michael-jackson-grooves._related-courses')
 @endsection

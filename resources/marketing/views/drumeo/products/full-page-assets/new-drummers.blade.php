@@ -54,7 +54,7 @@
 @stop
 
 @section('layout-body')
-{{--    @include('products.partials.promo-banner', [--}}
+{{--    @include('drumeo.products.partials.promo-banner', [--}}
 {{--                    "name" => "New Drummers Start Here",--}}
 {{--                    "fullPrice" => Prices::$ndshFull,--}}
 {{--                    "price" => Prices::$ndshRegular,--}}
@@ -640,7 +640,7 @@
         </div>
     </section>
 
-{{--    @include("sales.partials._footer")--}}
+{{--    @include("drumeo.sales.partials._footer")--}}
 
 
 @stop

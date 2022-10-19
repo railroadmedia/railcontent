@@ -35,66 +35,66 @@
 @endsection
 
 @section('lesson-grid')
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/aaron-gillespie.jpg",
          "lessonText" => "Aaron Gillespie<br><span class='light'>(Underoath, The Almost, Paramore)</span>"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/aric-improta.jpg",
          "lessonText" => "Aric Improta<br><span class='light'>(Night Verses, Fever 333)</span>"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/brian-fraser-moore.jpg",
          "lessonText" => "Brian Frasier-Moore<br><span class='light'>(Justin Timberlake, Madonna, Christina Aguilera)</span>"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/tim-oxford.jpg",
          "lessonText" => "Tim Oxford<br><span class='light'>(Arkells)</span>"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/matt-greiner.jpg",
          "lessonText" => "Matt Greiner<br><span class='light'>(August Burns Red)</span>"
     ])
-    @include('lead-gen.shows._lesson-grid', [
+    @include('drumeo.lead-gen.shows._lesson-grid', [
         "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/mike-sleath.jpg",
          "lessonText" => "Mike Sleath<br><span class='light'>(Shawn Mendes)</span>"
     ])
 @endsection
 
 @section('artists')
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/in-rhythm-show-card.jpg",
     "tileName" => "In Rhythm",
     "tileText" => "By Beau Bokan"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/study-the-greats.jpg",
     "tileName" => "Study The Greats",
     "tileText" => "With Austin Burcham"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg",
     "tileName" => "DIY Drum Experiments",
     "tileText" => "With David Raouf"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/sonor-drums.jpg",
     "tileName" => "SONOR",
     "tileText" => "A DRUMEO DOCUMENTARY"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/paiste-cymbals.jpg",
     "tileName" => "PAISTE",
     "tileText" => "A Drumeo Documentary"
     ])
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card2.jpg",
     "tileName" => "The NAMM Show",

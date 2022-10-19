@@ -8,7 +8,7 @@
     <meta property="og:description" content="You clicked the link! You'll continue to receive emails from us.">
     <meta property="og:url" content="https://www.drumeo.com/click/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
@@ -98,7 +98,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
     <div class="row title-wrap">
         <div class="columns">
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>

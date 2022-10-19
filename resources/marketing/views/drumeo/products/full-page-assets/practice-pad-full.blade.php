@@ -1025,7 +1025,7 @@
 
 @section('content')
 
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "The P4 Practice Pad",
                 "fullPrice" => Prices::$padFull,
                 "price" => Prices::$padRegular,
@@ -1359,7 +1359,7 @@
 
             <div class="disclaimer"></div>
 
-            @include('lead-gen.partials.thank-you-box', [
+            @include('drumeo.lead-gen.partials.thank-you-box', [
                 "headline" => "SENT",
                 "body" => "We'll respond to you soon! If you haven't heard back in the next week, please email <a class='text-white' href='/support'>contact us</a>."
             ])

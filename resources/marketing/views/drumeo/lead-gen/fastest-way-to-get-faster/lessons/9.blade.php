@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/6QmiAkOTYGM/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Everything's Better When You're Part Of A Team",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/09-everythings-better-when-your-part-of-a-team.png",
     ])

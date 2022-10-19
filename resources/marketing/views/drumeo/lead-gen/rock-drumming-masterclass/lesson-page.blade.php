@@ -17,7 +17,7 @@
 @section('lesson-tile-width', 'w-1/2 sm:w-1/3')
 
 @section('lesson-description')
-    @include('lead-gen.partials._a-link-button',[
+    @include('drumeo.lead-gen.partials._a-link-button',[
         'containerStyles' => 'mt-8',
         'href' => '/rock-drumming-masterclass',
         'text' => 'Rock Drumming Masterclass'

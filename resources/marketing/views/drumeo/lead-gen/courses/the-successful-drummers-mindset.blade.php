@@ -41,23 +41,23 @@
 @endsection
 
 @section('lesson-grid')
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/221961-card-thumbnail-1552647482.jpg",
          "lessonText" => "It’s Not About Practice, It’s About Purpose!"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/221962-card-thumbnail-1552661620.jpg",
          "lessonText" => "Finding The Time To Work On Your Drumming"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/221963-card-thumbnail-1552661674.jpg",
          "lessonText" => "How To Be An Efficient Drumming Practitioner"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/221964-card-thumbnail-1552661962.jpg",
          "lessonText" => "What To Do When You’re Stuck In A Rut"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/221965-card-thumbnail-1552662456.jpg",
          "lessonText" => "Become A Better Musician"
     ])
@@ -65,47 +65,47 @@
 
 @section('artists')
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/jared-falk.jpg",
     "tileName" => "Jared Falk",
     "tileText" => "THE SUCCESSFUL DRUMMER’S MINDSET"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/rich-redmond.jpg",
     "tileName" => "Rich Redmond",
     "tileText" => "Useful Grooves Drummers Should Know"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/tommy-igoe.jpg",
     "tileName" => "Tommy Igoe",
     "tileText" => "The Secrets Of Groove Essentials"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/instructors/john-blackwell.png",
     "tileName" => "John Blackwell",
     "tileText" => "Building Groove"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://d1923uyy6spedc.cloudfront.net/harry-miree-1.jpg",
     "tileName" => "Harry Miree",
     "tileText" => "Tools For The Average Working Drummer"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/todd-sucherman.jpg",
     "tileName" => "Todd Sucherman",
     "tileText" => "How To Become A Good Sounding Drummer"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/casey-cooper.jpg",
     "tileName" => "Casey Cooper",
     "tileText" => "How To Learn Songs Quickly"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/instructors/chip-ritter.png",
     "tileName" => "Chip Ritter",

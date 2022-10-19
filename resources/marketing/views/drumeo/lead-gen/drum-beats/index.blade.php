@@ -29,27 +29,27 @@
 @section('page-body')
     <div class="container mx-auto lg:max-w-6xl">
         <div class="lesson-grid px-4 grid sm:grid-cols-3 sm:gap-6">
-            @include('lead-gen.drum-beats.._video-link',[
+            @include('drumeo.lead-gen.drum-beats.._video-link',[
                 "lessonUrl" => "/drum-beats/1/",
                 "lessonImg" => "https://img.youtube.com/vi/kclUtptKsT8/maxresdefault.jpg",
                 "lessonTitle" => "Part 1"
             ])
-            @include('lead-gen.drum-beats.._video-link',[
+            @include('drumeo.lead-gen.drum-beats.._video-link',[
                 "lessonUrl" => "/drum-beats/2",
                 "lessonImg" => "https://img.youtube.com/vi/gfMtxzhJwm4/maxresdefault.jpg",
                 "lessonTitle" => "Part 2"
             ])
-            @include('lead-gen.drum-beats.._video-link',[
+            @include('drumeo.lead-gen.drum-beats.._video-link',[
                 "lessonUrl" => "/drum-beats/3",
                 "lessonImg" => "https://img.youtube.com/vi/8h8dYx0O-y0/maxresdefault.jpg",
                 "lessonTitle" => "Part 3"
             ])
-            @include('lead-gen.drum-beats.._video-link',[
+            @include('drumeo.lead-gen.drum-beats.._video-link',[
                 "lessonUrl" => "/drum-beats/4",
                 "lessonImg" => "https://img.youtube.com/vi/G0oVrJigVyY/maxresdefault.jpg",
                 "lessonTitle" => "Part 4"
             ])
-            @include('lead-gen.drum-beats.._video-link',[
+            @include('drumeo.lead-gen.drum-beats.._video-link',[
                 "lessonUrl" => "/drum-beats/5",
                 "lessonImg" => "https://img.youtube.com/vi/-HcuBTP3tIA/maxresdefault.jpg",
                 "lessonTitle" => "Play Alongs"

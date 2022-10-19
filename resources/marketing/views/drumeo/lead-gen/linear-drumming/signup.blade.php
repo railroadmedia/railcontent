@@ -39,7 +39,7 @@
                 <h1 class="hidden">Linear Drumming</h1>
                 <p>Enter your email below for 5 free <br class="hidden lg:inline">
                     video lessons on linear drumming.</p>
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "stacked" => true,
                     "formId" => "Drumeo - Engagement - Trigger - CC Linear - Web Form",
                     "formName" => 'Linear Drumming',
@@ -55,35 +55,35 @@
             <p>In this exclusive video series, you'll get his best tips on linear drumming and how to apply it to a range of fills, grooves, and styles of music!</p>
             <div class="thumbnail-wrap grid gap-4 grid-cols-2 md:grid-cols-3">
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/560726784-7f2c75c0dbb17e9ae0fceb339df0fd6b681c626b3401fd46d7c9b06dadae617d-d_640",
                         "badge" => "Lesson #1",
                         "title" => "What Is Linear Drumming"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/560726966-41e3db31ccbccda9d6a259160f07ed51c064dbbfb09a3e56a12e9065b9043655-d_640",
                         "badge" => "Lesson #2",
                         "title" => "​Dance Pop Grooves​"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/560727218-21ae1bae198ad6c555b15363f351ba618f2846e2efbdf98a2480cba5ed7648e7-d_640",
                         "badge" => "Lesson #3",
                         "title" => "​Rock Tom Grooves​"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/560727540-477b10caa006c5bd1c67b666ca5ff8408b56e302acfdeffc32513f649aa716bb-d_640",
                         "badge" => "Lesson #4",
                         "title" => "​Gospel Grooves​"
                     ])
                 </div>
                 <div class="w-full end">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://i.vimeocdn.com/video/560727679-c21a30b3084fcaf2a799dbd465d526ed48cdfba97e436f6a209f8bc332e30ca6-d_640",
                         "badge" => "Lesson #5",
                         "title" => "​Metal Fills​"
@@ -93,7 +93,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.enter-email1',[
+    @include('drumeo.lead-gen.partials.enter-email1',[
         "headLine" => "Enter your email below for 5 free video lessons on linear drumming.",
         "formId" => "Drumeo - Engagement - Trigger - CC Linear - Web Form",
         "formName" => 'Linear Drumming',
@@ -104,7 +104,7 @@
             <h1 class="text-center">Enter your email below for 5 free <br class="show-for-medium">
                 video lessons on linear drumming.</h1>
 
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - CC Linear - Web Form",
                 "formName" => 'Linear Drumming',

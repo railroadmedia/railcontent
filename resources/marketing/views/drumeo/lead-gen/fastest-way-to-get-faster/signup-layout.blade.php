@@ -44,70 +44,70 @@
             <p>The Fastest Way To Get Faster is a 10-Day routine that will help you rapidly improve your speed around the kit. You will need to practice hard, you will need to stick with it, and you might need to push yourself harder than usual - but it's been created to deliver results.</p>
             <div class="thumbnail-wrap grid gap-6 grid-cols-2 md:grid-cols-3">
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/1.jpg",
                         "badge" => "Day #1",
                         "title" => "Paradiddle Madness"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/2.jpg",
                         "badge" => "Day #2",
                         "title" => "The Buddy Bruiser"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/3.jpg",
                         "badge" => "Day #3",
                         "title" => "The Forearm Crusher"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/4.jpg",
                         "badge" => "Day #4",
                         "title" => "Do You Even Math?"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/5.jpg",
                         "badge" => "Day #5",
                         "title" => "Crazy Crossover"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/6.jpg",
                         "badge" => "Day #6",
                         "title" => "The Illusion Of Speed"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/7.jpg",
                         "badge" => "Day #7",
                         "title" => "The Main Foot Killer"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/8.jpg",
                         "badge" => "Day #8",
                         "title" => "Do You Even Math? (The Sequel)"
                     ])
                 </div>
                 <div class="w-full">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/9.jpg",
                         "badge" => "Day #9",
                         "title" => "Everything's Better When You're Part Of A Team"
                     ])
                 </div>
                 <div class="w-full end">
-                    @include("lead-gen.partials.thumbnail-signup", [
+                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
                         "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/10.jpg",
                         "badge" => "Day #10",
                         "title" => "Take'r For A Rip, Eh?"
@@ -117,7 +117,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.enter-email1',[
+    @include('drumeo.lead-gen.partials.enter-email1',[
         "headLine" => "Enter your email below for 10 free video lessons...",
         "formId" => $formId,
         "formName" => $formName,

@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.drumeo.com/awards-giveaway/">
      <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg" style="display: none;">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
@@ -234,7 +234,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <section class="text-center text-white pb-5 md:pb-10 px-3 md:px-4" style="background:linear-gradient(to bottom, #000 65%, #06488F);">
         <div class="container mx-auto max-w-5xl">
             <a href="todo" target="_blank"><img class="inline-block h-48 md:h-96" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg"></a>
@@ -326,7 +326,7 @@
         </div>
     </section>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
     <script src="{{ asset('/assets/js/pre-form-submit-facebook-lead.js') }}"></script>

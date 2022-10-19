@@ -15,17 +15,17 @@
 @section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/tony-coleman-shuffle.png')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Song Chart",
         "assignmentID" => 'songSC',
         "pdfURL" => "https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/drumeo-pa-just-a-second-01.svg",
         "soundslice" => "thQDc",
     ])
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "MP3",
         "mp3URL" => "https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/just-a-second-pa-no-drums-no-click.mp3"
     ])
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "MP3 With Metronome",
         "mp3URL" => "https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/just-a-second-pa-no-drums-click.mp3"
     ])

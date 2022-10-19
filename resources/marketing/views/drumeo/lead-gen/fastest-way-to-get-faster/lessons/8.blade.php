@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/zBLSP4zcnUk/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Do You Even Math? (The Sequel)",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/08-do-you-even-math-the-sequel.png",
     ])

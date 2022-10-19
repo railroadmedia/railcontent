@@ -19,7 +19,7 @@
 @section('assets')
     @parent
 
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Playing Your First Song",
         "zipURL" => "https://dzryyo1we6bm3.cloudfront.net/gsotd/9-playing-your-first-song.zip",
     ])

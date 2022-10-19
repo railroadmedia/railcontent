@@ -120,7 +120,7 @@
 
 @section('content')
 
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo QuietPad",
                 "fullPrice" => Prices::$quietPadFull,
                 "price" => Prices::$quietPadRegular,

@@ -21,12 +21,12 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/460642069-7ec02f90f4f1aac27bfac4c189f22b6f7b677ae8a368e23477102b8016dc6526-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "PDF",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-flat-foot-technique.pdf",
     ])
 
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "MP3s",
         "zipURL" => "https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-flat-foot-technique.zip",
     ])

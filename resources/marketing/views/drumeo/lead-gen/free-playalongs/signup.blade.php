@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/free-playalongs/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <header class="text-white relative overflow-hidden text-center py-24 md:py-44 lg:py-52 px-4 md:px-6" style="background-color:#0c3361;">
         <video class="object-cover h-full w-full absolute top-0 left-0 right-0 bottom-0 z-0" poster="" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10" style="    background: linear-gradient(to bottom, rgba(18, 80, 161, 0.3) 0%, rgba(5, 46, 87, 0.9) 100%);"></div>
@@ -28,7 +28,7 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/logo.svg" alt="play-along-logo">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formName" => 'Free Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
                         "buttonText" => "Hook Me Up ",
@@ -167,7 +167,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#000a1e",
         "textColor" => "white"
     ])
@@ -177,7 +177,7 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/logo.svg" alt="free-playalongs-icon">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formName" => 'Free Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
                         "buttonText" => "Hook Me Up ",
@@ -192,7 +192,7 @@
                     Add your drumming to nine high-quality <br class="inline md:hidden">
                     drumless play-along tracks.
                 </strong></h4>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formName" => 'Free Play-Alongs',
                 "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
                 "buttonText" => "Hook Me Up ",
@@ -201,7 +201,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
     <script>

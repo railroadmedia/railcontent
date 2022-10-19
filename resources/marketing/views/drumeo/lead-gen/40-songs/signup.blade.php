@@ -9,7 +9,7 @@
     <meta property="og:description" content="Get expertly transcribed sheet music for 40 of drumming’s biggest songs (FREE).">
     <meta property="og:url" content="https://www.drumeo.com/40-songs/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
@@ -22,7 +22,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
     <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
         <div class="container mx-auto max-w-5xl">
@@ -45,7 +45,7 @@
                         40 of drumming’s biggest songs FREE.
                     </h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
-                        @include("lead-gen.partials.sign-up-form-tw", [
+                        @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                                 "formName" => '40 Songs',
                                 "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
@@ -68,7 +68,7 @@
                   we’d let you get in on the fun. Scroll down to find your favorites.
             </h6>
 
-            @include('lead-gen.40-songs.anthems',[
+            @include('drumeo.lead-gen.40-songs.anthems',[
                 "dataOpen" => "signUpModal",
             ])
         </div>
@@ -127,7 +127,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#030a21",
         "textColor" => "white",
     ])
@@ -141,7 +141,7 @@
                     playback tools for 40 of drumming’s biggest songs FREE.
                 </h4>
                 <div class="mx-auto" style="max-width:700px">
-                    @include("lead-gen.partials.sign-up-form-tw", [
+                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
                             "formName" => '40 Songs',
@@ -160,7 +160,7 @@
                     40 of drumming’s biggest songs FREE.
                 </strong>
             </h4>
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
             "formName" => '40 Songs',
@@ -169,7 +169,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
     <script>

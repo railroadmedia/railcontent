@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/663016828-3d4605b90d40133d5b7d594f7b2ac2c66adeffa4d4a25ee51e8782626e37e494-d?mw=1200&mh=675')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Life",
         "imgURL" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gavins-grooves/life.png"
     ])

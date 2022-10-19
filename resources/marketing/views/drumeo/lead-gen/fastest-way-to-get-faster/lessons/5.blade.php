@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/55yHSKYj_6k/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Crazy Crossovers",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/05-crazy-crossovers.png",
     ])

@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Double+Bass.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Song Chart",
         "assignmentID" => 'songSC',
         "imgURL" => "https://d1923uyy6spedc.cloudfront.net/drumeo-pa231-nightmares.svg",

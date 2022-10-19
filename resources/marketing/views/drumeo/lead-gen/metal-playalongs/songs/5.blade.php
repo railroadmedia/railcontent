@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Resurrection+Through+Fire.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Song Chart",
         "imgURL" => "https://d1923uyy6spedc.cloudfront.net/drumeo-pa224-hypnotized.png",
     ])

@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/469067095-0284183a7b530d903528db71ba826503cddfe27567da138ac67ff1e29f9f8e21-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources',[
+    @include('drumeo.lead-gen.partials._assignment-resources',[
         'title' => 'Resources',
         'zipURL' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/6-playing-your-first-beat.zip',
     ])

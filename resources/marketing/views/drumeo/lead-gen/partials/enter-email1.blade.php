@@ -2,7 +2,7 @@
     <div class="container mx-auto max-w-5xl px-4 text-center">
         <h1>{{ $headLine }}</h1>
 
-        @include("lead-gen.partials.sign-up-form-tw", [
+        @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "submitArrows" => true,
             "formId" => $formId,
             "formName" => $formName,

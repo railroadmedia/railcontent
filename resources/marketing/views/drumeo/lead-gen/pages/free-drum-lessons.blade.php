@@ -17,7 +17,7 @@
     <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/laravel/public/assets/members-area/css/gulp/blog.css" />
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
     <style>
         header {
             background:#061221 url(https://dpwjbsxqtam5n.cloudfront.net/beat/free-lessons-header.jpg) center center/cover;
@@ -152,7 +152,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
 <header>
     <div class="row">
@@ -439,7 +439,7 @@
     </div>
 
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>

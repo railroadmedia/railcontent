@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -203,7 +203,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https:/dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
@@ -228,7 +228,7 @@
         </div>
     </section>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>

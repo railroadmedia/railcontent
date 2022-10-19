@@ -65,7 +65,7 @@
                     <h4 class="text-yellow">WITH DAVID RAOUF</h4>
                 </div>
                 <div class="condensed uppercase mb-2 text-xl sm:text-3xl">Keep your kit <strong><em>sparkling</em></strong><br class="sm:hidden"> with this free series</div>
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - Drum Maintenance - Web Form",
                     "formName" => 'Drum Set Maintenance',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -74,14 +74,14 @@
         </div>
     </header>
 
-    @include('lead-gen.courses.full.partials.lessons',[
+    @include('drumeo.lead-gen.courses.full.partials.lessons',[
         "headLine" => '
             Your guide to better sounding, nicer<br class="hidden sm:inline">
             looking, and longer-lasting gear.
         '
     ])
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#eff0f0",
         "textColor" => "black",
     ])
@@ -95,7 +95,7 @@
             </div>
             <p>Enter your email and receive <br class="sm:hidden"> the seven video series, FREE.</p>
             <br><br class="hidden sm:inline">
-            @include("lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Drum Maintenance - Web Form",
                 "formName" => 'Drum Set Maintenance',
                 "buttonText" => 'Send The Videos&nbsp;',

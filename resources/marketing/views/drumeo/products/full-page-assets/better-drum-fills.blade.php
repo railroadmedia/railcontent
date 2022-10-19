@@ -1,4 +1,4 @@
-@extends('products.misc-products-layout')
+@extends('drumeo.products.misc-products-layout')
 
 
 @section('meta')
@@ -39,7 +39,7 @@
 
 @section('content')
 
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Four Weeks To Better Drum Fills",
                 "fullPrice" => Prices::$bdfFull,
                 "price" => Prices::$bdfRegular,
@@ -103,23 +103,23 @@
         <div class="row">
             <h2>Go beyond <strong><em>filling space</em></strong><br class="hide-for-medium"> with your drum fills</h2>
             <div class="columns">
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "1",
                 "weekTitle" => "Drum Fill Foundations",
                 "weekDescription" => "Every professional in any field will always focus on the foundational elements of their craft. Drumming is no different. Most drummers hit ceilings in their drumming due to a lack of foundation. The first week is all about establishing a solid foundation of theory, technique, and vocabulary to set yourself up for success in the following weeks of lessons. We’ll cover how to practice, the drumming motions, and note value tree. With each week of lessons, you’ll be given specific instructions on exactly what to practice. ",
                 "defaultOpen" => true
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "2",
                 "weekTitle" => "Three Levels of Drum Fills",
                 "weekDescription" => "Through the three levels of drum fills, I will help you take any accented pattern, over any period of time within the music, and turn it into something amazing. Level one starts with the basic accent patterns, level two you’ll focus on orchestrations, and for the final level you’ll be blazing around the kit fluidly with some epic sounding fills. And this isn’t 100s of pages of exercises. You will gain a blueprint that you can apply to ANY accented pattern over ANY period of time. This week will unlock an entirely new world for your drumming… buckle up."
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "3",
                 "weekTitle" => "Building Musical Tension",
                 "weekDescription" => "Growing up, I was always mesmerized when I saw my favorite drummers blazing around the kit which seemed to be an incomprehensible group of rudiments and vocabulary at speeds which made it impossible for me to decipher. Years later, after studying with Benny Greb (one of my fav drummers) and many other instructors on Drumeo, I got obsessed with repeating odd-grouping phrases to come up with some crazy combinations around the kit… and you wanna know the best part? It’s much easier than you think. I break down this concept for you in great detail and will show you how to use groupings to come up with musical inspiring “off the cuff” drum fills. Like previous weeks, I am not going to give you the biggest drum fill fish, I am going to teach you how, with lots of practice, you can fill your boat of drum fill vocabulary so full you’ll be sinking in new ideas! "
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "4",
                 "weekTitle" => "Unlimited Drum Fill Ideas",
                 "weekDescription" => "Linear drumming: a concept so simple, yet incredibly challenging. As within all weeks, there are lessons for beginners, intermediate, and advanced drummers. So if you’re just starting out, there is something to learn. Linear drumming means no two limbs are playing at the same time. Leveraging the foundational week’s lessons, you’ll explore note values and how they relate to linear drumming. I’ll show you how you can take one pattern that you’re comfortable with and play it in thousands of different ways. "

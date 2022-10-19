@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/EEra-3i65yQ/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "The Main Foot Killer",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/07-the-main-foot-killer.png",
     ])

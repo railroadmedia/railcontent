@@ -3190,7 +3190,7 @@
                         ABBA, ABCA.</p>
                 </div>
             </div>
-            @include('lead-gen.partials.ad')
+            @include('drumeo.lead-gen.partials.ad')
         </div>
     </section>
 @stop

@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/grooves-of-john-bonham/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/grooves-of-john-bonham/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
 
     <header class="text-white relative overflow-hidden text-center py-5 md:py-8 px-4 md:px-6" style="background:#0f1012 url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/courses/the-grooves-of-bonham/header-image.jpg) center top/cover;">
         <div class="container mx-auto relative z-20">
@@ -33,7 +33,7 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -104,7 +104,7 @@
         </div>
     </section>
 
-    @include('lead-gen.partials.quick-questions',[
+    @include('drumeo.lead-gen.partials.quick-questions',[
         "bgColor" => "#000a1e",
         "textColor" => "white"
     ])
@@ -117,7 +117,7 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {

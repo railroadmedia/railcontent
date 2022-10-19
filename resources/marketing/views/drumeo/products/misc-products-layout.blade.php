@@ -13,7 +13,7 @@
 @stop
 
 @section('layout-body')
-    @include("sales.partials._nav", [
+    @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
 

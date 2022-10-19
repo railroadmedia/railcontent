@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/469052552-33deecae0570b09577411a972fa6f80334c930dd68b498e57f1509505b3b3f4b-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources',[
+    @include('drumeo.lead-gen.partials._assignment-resources',[
         'title' => 'PDF',
         'pdfURL' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/5-basic-counting.pdf',
     ])

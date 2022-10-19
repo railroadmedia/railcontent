@@ -31,7 +31,7 @@
         </div>
     @endif
 
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                     "name" => "The Drummer's Toolbox",
                     "fullPrice" => Prices::$toolboxBookFull,
                     "price" => Prices::$toolboxBookRegular,
@@ -380,53 +380,53 @@
         <div class="row">
             <h1 class="blue-tab">TABLE OF CONTENTS</h1>
             <div class="lesson-descriptions columns">
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "defaultOpen" => true,
                 "chapter" => "1",
                 "weekTitle" => "Rock <span class='page'>3</span>",
                 "weekDescription" => "Pop Rock <span class='page'>4</span><br>Bo Diddley <span class='page'>7</span><br>Surf Rock <span class='page'>11</span><br>Latin Rock <span class='page'>14</span><br>Hard Rock <span class='page'>18</span><br>Progressive Rock <span class='page'>22</span><br>Rock Ballad <span class='page'>25</span><br>Punk Rock <span class='page'>29</span><br>Grunge <span class='page'>33</span><br>Pop Punk <span class='page'>37</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "2",
                 "weekTitle" => "Jazz <span class='page'>43</span>",
                 "weekDescription" => "4/4 Swing <span class='page'>44</span><br>Up-Tempo Swing <span class='page'>48</span><br>Big Band <span class='page'>52</span><br>3/4 Waltz <span class='page'>56</span><br>Brushes <span class='page'>60</span><br>Jazz Shuffle <span class='page'>66</span><br>Odd Time Swing <span class='page'>70</span><br>Jazz Fusion <span class='page'>74</span><br>ECM Feel <span class='page'>78</span><br>Contemporary Jazz <span class='page'>82</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "3",
                 "weekTitle" => "Blues <span class='page'>89</span>",
                 "weekDescription" => "Blues Shuffle <span class='page'>90</span><br>Straight 12/8 Blues <span class='page'>94</span><br>Swung 12/8 Blues <span class='page'>98</span><br>Memphis Blues <span class='page'>101</span><br>Texas Blues <span class='page'>105</span><br>Jump Blues <span class='page'>109</span><br>Chicago Blues <span class='page'>113</span><br>Flat Tire Shuffle <span class='page'>117</span><br>Blues Rock <span class='page'>121</span><br>Half-Time Shuffle <span class='page'>125</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "4",
                 "weekTitle" => "Country <span class='page'>131</span>",
                 "weekDescription" => "Train Beat <span class='page'>132</span><br>Western Swing <span class='page'>136</span><br>Bluegrass <span class='page'>139</span><br>Country Waltz <span class='page'>142</span><br>Two-Step <span class='page'>145</span><br>Rockabilly <span class='page'>148</span><br>Country Pop <span class='page'>152</span><br>Country 6/8 <span class='page'>156</span><br>Country Shuffle <span class='page'>159</span><br>Country Rock <span class='page'>163</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "5",
                 "weekTitle" => "Soul & Funk <span class='page'>169</span>",
                 "weekDescription" => "Gospel <span class='page'>171</span><br>Motown <span class='page'>175</span><br>Boogaloo <span class='page'>178</span><br>Neo-Soul <span class='page'>182</span><br>Second Line <span class='page'>186</span><br>Funk <span class='page'>189</span><br>New Orleans Funk <span class='page'>193</span><br>Latin Funk <span class='page'>197</span><br>Go-Go <span class='page'>201</span><br>Disco <span class='page'>205</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "6",
                 "weekTitle" => "Metal <span class='page'>211</span>",
                 "weekDescription" => "Doom Metal <span class='page'>213</span><br>Speed Metal <span class='page'>216</span><br>Thrash Metal <span class='page'>220</span><br>Death Metal <span class='page'>223</span><br>Power Metal <span class='page'>227</span><br>Progressive Metal <span class='page'>231</span><br>Groove Metal <span class='page'>235</span><br>Nu Metal <span class='page'>239</span><br>Metalcore <span class='page'>243</span><br>Folk Metal <span class='page'>247</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "7",
                 "weekTitle" => "Electronic <span class='page'>253</span>",
                 "weekDescription" => "Hip-Hop <span class='page'>255</span><br>Breakbeat <span class='page'>259</span><br>Electro <span class='page'>263</span><br>House <span class='page'>267</span><br>Techno <span class='page'>271</span><br>Trance <span class='page'>275</span><br>Jungle <span class='page'>278</span><br>Drum And Bass <span class='page'>282</span><br>Dubstep <span class='page'>285</span><br>Trap <span class='page'>288</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "8",
                 "weekTitle" => "Afro-Cuban <span class='page'>293</span>",
                 "weekDescription" => "Abakuá <span class='page'>295</span><br>Guajira <span class='page'>299</span><br>Bolero <span class='page'>302</span><br>Guaguancó <span class='page'>306</span><br>Conga <span class='page'>311</span><br>Mambo <span class='page'>314</span><br>Cha-Cha-Chá <span class='page'>318</span><br>Nanigo <span class='page'>321</span><br>Mozambique <span class='page'>325</span><br>Songo <span class='page'>329</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "9",
                 "weekTitle" => "Afro-Brazilian <span class='page'>335</span>",
                 "weekDescription" => "Afoxê <span class='page'>337</span><br>Samba <span class='page'>340</span><br>Maracatu <span class='page'>344</span><br>Choro <span class='page'>348</span><br>Marcha <span class='page'>351</span><br>Frevo <span class='page'>355</span><br>Partido Alto <span class='page'>359</span><br>Baião <span class='page'>362</span><br>Bossa Nova <span class='page'>366</span><br>Samba Reggae <span class='page'>370</span>",
                 ])
-                @include('products.partials.week-breakdown', [
+                @include('drumeo.products.partials.week-breakdown', [
                 "chapter" => "10",
                 "weekTitle" => "Afro-Caribbean <span class='page'>375</span>",
                 "weekDescription" => "Calypso <span class='page'>377</span><br>Biguine <span class='page'>380</span><br>Merengue <span class='page'>383</span><br>Bachata <span class='page'>387</span><br>Ska <span class='page'>390</span><br>Reggae <span class='page'>393</span><br>Salsa <span class='page'>397</span><br>Soca <span class='page'>400</span><br>Dancehall <span class='page'>404</span><br>Zouk <span class='page'>407</span>",
@@ -504,40 +504,40 @@
     <div class="questions">
         <div class="row">
             <h1 class="columns">Still Have Questions?</h1>
-            {{--@include('products.partials.question-dropdown', [--}}
+            {{--@include('drumeo.products.partials.question-dropdown', [--}}
             {{--"question" => "Why isn’t the book available on Amazon?",--}}
             {{--"answer" => "Our inventory through Amazon sold out much quicker than expected. We have another shipment on the way to Amazon and we’ll add the link again soon."--}}
             {{--])--}}
-            {{--@include('products.partials.question-dropdown', [--}}
+            {{--@include('drumeo.products.partials.question-dropdown', [--}}
             {{--"question" => "How should I order in Canada/UK?",--}}
             {{--"answer" => "Canadian Drummers: <a target='_blank' href='https://www.amazon.ca/dp/B07G8N348K'>Click here to order through Amazon.ca</a>. <br>UK Drummers: <a target='_blank' href='https://www.amazon.co.uk/dp/B07G8N348K'>Click here to order through Amazon.co.uk</a>."--}}
             {{--])--}}
-            @include('products.partials.question-dropdown', [
+            @include('drumeo.products.partials.question-dropdown', [
             "question" => "How should I order in Canada?",
             "answer" => "Canadian Drummers: <a target='_blank' href='https://www.amazon.ca/dp/B07ZTTHK82'>Click here to order through Amazon.ca</a>."
             ])
-            @include('products.partials.question-dropdown', [
+            @include('drumeo.products.partials.question-dropdown', [
             "question" => "Can I get a discount when ordering the book in bulk?",
             "answer" => "Yes! We have bulk discounts available for ordering more than 100 copies, as well as shipping discounts. <a href='#bulkOrder' class='anchor-slide open-bulk'>Click here to fill in a short web form to get started.</a>"
             ])
-            @include('products.partials.question-dropdown', [
+            @include('drumeo.products.partials.question-dropdown', [
             "question" => "Should I order through Drumeo or Amazon?",
             "answer" => "It’s totally up to you! Amazon might be able to save you a couple dollars on shipping rates due to their bulk shipping discounts, but depending on where you live they might not be able to ship to your country."
             ])
-            @include('products.partials.question-dropdown', [
+            @include('drumeo.products.partials.question-dropdown', [
             "question" => "How much does shipping cost?",
             "answer" => "If you order through this website (rather than Amazon), the shipping rates for one book are:<br><br>- United States: $9<br>- Canada, United Kingdom, and Germany: $15<br>- Everywhere Else: $40<br><br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future."
             ])
             {{--<br><strong>The book ships free worldwide when ordered in the Drumeo membership bundle here: <a href='/'>www.Drumeo.com/</a></strong>--}}
-            @include('products.partials.question-dropdown', [
+            @include('drumeo.products.partials.question-dropdown', [
             "question" => "How long will it take for the book to arrive?",
             "answer" => "If you order through this website (rather than Amazon), the shipping should take about this long, depending on your location:<br><br>- United States: 2-10 Business Days<br>- Everywhere Else: 7-20 Business Days"
             ])
-            @include('products.partials.question-dropdown', [
+            @include('drumeo.products.partials.question-dropdown', [
             "question" => "Do you have a digital version available? (e-book or audiobook)",
             "answer" => "Kindle Version: <a target='_blank' href='https://www.amazon.com/dp/B07ZTTHK82/'>Click here to order through Amazon</a>. <br>Apple Books Version: <a target='_blank' href='https://books.apple.com/ca/book/id1487097588'>Click here to order through Apple</a>."
             ])
-            {{--@include('products.partials.question-dropdown', [--}}
+            {{--@include('drumeo.products.partials.question-dropdown', [--}}
             {{--"question" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",--}}
             {{--"answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($29 value)."--}}
             {{--])--}}
@@ -579,7 +579,7 @@
 
                 <div class="disclaimer"></div>
 
-                @include('lead-gen.partials.thank-you-box', [
+                @include('drumeo.lead-gen.partials.thank-you-box', [
                     "headline" => "SENT",
                     "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='/support'>contact us</a>."
                 ])

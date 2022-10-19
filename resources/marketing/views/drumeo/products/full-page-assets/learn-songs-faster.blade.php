@@ -1,4 +1,4 @@
-@extends('products.misc-products-layout')
+@extends('drumeo.products.misc-products-layout')
 
 
 @section('meta')
@@ -28,7 +28,7 @@
 
 @section('content')
 
-    @include('products.partials.promo-banner', [
+    @include('drumeo.products.partials.promo-banner', [
                 "name" => "Learn Songs Faster",
                 "fullPrice" => Prices::$learnSongsFasterFull,
                 "price" => Prices::$learnSongsFasterRegular,

@@ -13,7 +13,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/6N658525ULs/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Paradiddle Madness",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/01-paradiddle-madness.png",
     ])

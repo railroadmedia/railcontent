@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/560727540-477b10caa006c5bd1c67b666ca5ff8408b56e302acfdeffc32513f649aa716bb-d_640')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Rock Tom Grooves​​",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/03-rock-tom-grooves.pdf",
     ])

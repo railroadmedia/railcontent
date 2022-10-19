@@ -40,39 +40,39 @@
 @endsection
 
 @section('lesson-grid')
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223759-card-thumbnail-1555584155.jpg",
          "lessonText" => "The Importance Of Combinations"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223760-card-thumbnail-1555584322.jpg",
          "lessonText" => "Tom-Snare Combination"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223761-card-thumbnail-1555584389.jpg",
          "lessonText" => "Speed Combination"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223762-card-thumbnail-1555584547.jpg",
          "lessonText" => "THREES!"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223763-card-thumbnail-1555584724.jpg",
          "lessonText" => "Triplet Hand To Foot Combo"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223764-card-thumbnail-1555584793.jpg",
          "lessonText" => "16th Triplet Hand To Foot"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223765-card-thumbnail-1555584889.jpg",
          "lessonText" => "Hi-Hat Inverted Paradiddle"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223766-card-thumbnail-1555585350.jpg",
          "lessonText" => "The Overlap Combination"
     ])
-    @include('lead-gen.courses._lesson-grid', [
+    @include('drumeo.lead-gen.courses._lesson-grid', [
         "lessonThumb" => "https://d1923uyy6spedc.cloudfront.net/223767-card-thumbnail-1555585413.jpg",
          "lessonText" => "Combining Combinations"
     ])
@@ -80,47 +80,47 @@
 
 @section('artists')
 
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://d1923uyy6spedc.cloudfront.net/marco-minnemann-thumb.jpg",
     "tileName" => "Marco Minnemann",
     "tileText" => "BUILDING FREEDOM USING COMBINATIONS"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/jp-bouvet.jpg",
     "tileName" => "JP Bouvet",
     "tileText" => "Creating Unique Grooves"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/todd-sucherman.jpg",
     "tileName" => "Todd Sucherman",
     "tileText" => "Expanding Rudimental Ideas"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/instructors/scott-pellegrom.png",
     "tileName" => "Scott Pellegrom",
     "tileText" => "Recycling What You Already Know"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/eric-moore.jpg",
     "tileName" => "Eric Moore",
     "tileText" => "Creative Concepts With Diddles"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/anika-nilles.jpg",
     "tileName" => "Anika Nilles",
     "tileText" => "Building Creativity With Groupings"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/matt-garstka.jpg",
     "tileName" => "Matt Garstka",
     "tileText" => "Creating Freedom By Building Systems"
     ])
-    @include('lead-gen.courses._artist-tile', [
+    @include('drumeo.lead-gen.courses._artist-tile', [
     "responsiveHide" => true,
     "tileThumb" => "https://dpwjbsxqtam5n.cloudfront.net/sales-site/teachers-grid/faces/kaz-rodriguez.jpg",
     "tileName" => "Kaz Rodriguez",

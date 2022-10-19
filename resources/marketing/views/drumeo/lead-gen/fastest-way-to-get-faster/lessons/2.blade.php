@@ -17,7 +17,7 @@
 @section('next-thumb', 'https://img.youtube.com/vi/AxLiCX13xGI/maxresdefault.jpg')
 
 @section('assets')
-    @include('lead-gen.partials._assignment-resources', [
+    @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "The Buddy Bruiser",
         "pdfURL" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/png/02-the-buddy-bruiser.png",
     ])

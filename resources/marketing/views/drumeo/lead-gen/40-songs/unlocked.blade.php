@@ -10,7 +10,7 @@
     <meta property="og:description" content="Get expertly transcribed sheet music for 40 of drumming’s biggest songs (FREE).">
     <meta property="og:url" content="https://www.drumeo.com/40-songs/">
 
-    @include('partials.fonts')
+    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -24,7 +24,7 @@
 @stop
 
 @section('global-body')
-    @include("sales.partials._nav")
+    @include("drumeo.sales.partials._nav")
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
     <a href="/choose-your-trial" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
@@ -47,7 +47,7 @@
                 Choose a song below:
             </h6>
 
-            @include('lead-gen.40-songs.anthems')
+            @include('drumeo.lead-gen.40-songs.anthems')
 
         </div>
     </section>
@@ -63,7 +63,7 @@
         </div>
     </section>
 
-    @include("sales.partials._footer")
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
     <script>
