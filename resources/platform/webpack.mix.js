@@ -32,14 +32,13 @@ mix
     .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()
+    .version()
+    .mergeManifest()
     .polyfill({
         enabled: true,
         useBuiltIns: "usage",
-        targets: "firefox 50, IE 11"
-     })
-    .version()
-    .mergeManifest()
-    ;
+        targets: "firefox 50, IE 11, iOS 12"
+     });
 
 mix.webpackConfig(webpack => {
     return {
