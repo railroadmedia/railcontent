@@ -43,6 +43,9 @@ class UrlDecorator extends ModeDecoratorBase
             ($content['type'] == 'course')){
                 $contentParentData = [];
             }
+            if(($content['type'] == 'course-part') && count($contentParentData) > 1){
+                $contentParentData = array_slice($contentParentData, 0, 1);
+            }
 
             // first-level types
             if (count($contentParentData) == 0 && !empty($contentTypeToURLSlugMap[$content['type']])) {

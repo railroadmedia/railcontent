@@ -308,12 +308,12 @@
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block">
-                                        Name: {{ $input['studentName'] }}
+                                        Name: {{ $input['sender-name'] }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        Email: {{ $input['studentEmail'] }}
+                                        Email: {{ $input['sender-address'] }}
                                     </td>
                                 </tr>
                                 <tr>
