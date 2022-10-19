@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Singeo\HomePageController;
+use App\Http\Controllers\Singeo\SalesController;
 
 Route::domain('{singeoDomain}')->group(function () {
-    Route::get('/', [HomePageController::class, 'home']);
+    Route::get('/', [SalesController::class, 'home']);
     Route::get('/support', function () { return view('singeo.sales.pages.support'); } );
     Route::get('/student-only', function () { return view('singeo.sales.student-only'); } );
     Route::get('/privacy', function () { return view('singeo.sales.pages.privacy'); } );
@@ -13,6 +13,7 @@ Route::domain('{singeoDomain}')->group(function () {
     Route::get('/trial-month', function () { return view('singeo.sales.trials.30-trial'); } );
     Route::get('/choose-your-trial', function () { return view('singeo.sales.trials.trial-selection.week'); } );
     Route::get('/choose-your-trial-month', function () { return view('singeo.sales.trials.trial-selection.month'); } );
+    Route::get('/cookie', function () { return view('singeo.sales.pages.cookie'); } );
 
     Route::get('/affiliate/asobergirlsguide', function () { return view('singeo.sales.trials.affiliates.asobergirlsguide'); });
     Route::get('/affiliate-trial', function () { return view('singeo.sales.trials.trial-selection.affiliates'); });
