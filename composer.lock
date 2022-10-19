@@ -8378,16 +8378,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.8",
+            "version": "v4.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "e046b29981e2b9eadf3245bb9d6618e75aa10246"
+                "reference": "ed09bf37612e9a308cd60359e66260c23afdb34b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/e046b29981e2b9eadf3245bb9d6618e75aa10246",
-                "reference": "e046b29981e2b9eadf3245bb9d6618e75aa10246",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/ed09bf37612e9a308cd60359e66260c23afdb34b",
+                "reference": "ed09bf37612e9a308cd60359e66260c23afdb34b",
                 "shasum": ""
             },
             "require": {
@@ -8433,9 +8433,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.8"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.9"
             },
-            "time": "2022-10-17T21:23:52+00:00"
+            "time": "2022-10-19T07:58:40+00:00"
         },
         {
             "name": "railroad/referral",
@@ -9564,16 +9564,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "5.5.6",
+            "version": "5.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "91f8bea7c87a1cce8f73b20b757f66ed50535a1c"
+                "reference": "5e96846341cb883bbe74f735502b743ee9898669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/91f8bea7c87a1cce8f73b20b757f66ed50535a1c",
-                "reference": "91f8bea7c87a1cce8f73b20b757f66ed50535a1c",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/5e96846341cb883bbe74f735502b743ee9898669",
+                "reference": "5e96846341cb883bbe74f735502b743ee9898669",
                 "shasum": ""
             },
             "require": {
@@ -9634,7 +9634,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/5.5.6"
+                "source": "https://github.com/spatie/laravel-permission/tree/5.5.10"
             },
             "funding": [
                 {
@@ -9642,7 +9642,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-18T18:49:53+00:00"
+            "time": "2022-10-19T02:25:19+00:00"
         },
         {
             "name": "spatie/once",
