@@ -22,6 +22,8 @@ mix
     .options({
         postCss: [tailwindcss('./resources/marketing/marketing.tailwind.config.js')],
     })
+    .extract()
+    .sourceMaps()
     .version()
     .mergeManifest();
 
