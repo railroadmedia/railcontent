@@ -1,8 +1,7 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
+@section('meta')
     @parent
-    
     <meta name="robots" content="noindex">
     <title>@if(!empty($title)) {{ $title }} @endif | 1-Hour Challenge</title>
     <meta name="description" content="Rob Scallon will lead you on a guitar adventure with 9 free videos to gain the fundamentals, transition between chords, and play a full song from start to finish. Are you up for the challenge?"/>
@@ -11,15 +10,13 @@
     <meta property="og:title" content="Play Your First Song On The Guitar | 1-Hour Challenge">
     <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour -- even if you’ve never played before.">
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
-
-    <link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css">
-    
+    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
     <style>
         .reveal-overlay {background: linear-gradient(180deg, rgba(1, 7, 19, 0.9), #10052b);}
     </style>
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
     <script type="text/javascript">
@@ -249,17 +246,17 @@
             return Math.round(totalCompleted / totalToComplete * 100);
         }
     </script>
-    <script src="/assets/js/modal-autoplay.js"></script>
+    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
 @stop
 
-@section('layout-body')
+@section('body')
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7" style="background-image: url(https://cdn.musora.com/image/fetch/w_300,q_60,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg);background-color:#000718;">
         <div class="container mx-auto clearfix" style="max-width:940px">
             <div class="text-center sm:px-3">
                 <img class="logo mx-auto inline-block w-40 sm:w-56" src="https://cdn.musora.com/image/fetch/w_448,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-purple.png">
                 <div class="video-row relative my-4 sm:my-7">
                     @hasSection('prev-thumb')
-                        <img class="absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%;width: 80%;" src="@yield('prev-thumb')">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%;width: 80%;" src="@yield('prev-thumb')">
                     @endif
 
                     <div class="aspect-16:9 w-full relative">
@@ -267,7 +264,7 @@
                     </div>
 
                     @hasSection('next-thumb')
-                        <img class="absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 110%;width: 80%;" src="@yield('next-thumb')">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 110%;width: 80%;" src="@yield('next-thumb')">
                     @endif
                 </div>
             </div>

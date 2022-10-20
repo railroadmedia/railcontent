@@ -7,7 +7,7 @@
 @stop
 
 @section('video')
-    <iframe class="tw-absolute tw-w-full tw-h-full" src="//player.vimeo.com/video/488587514" frameborder="0" allowfullscreen></iframe>
+    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/488587514" frameborder="0" allowfullscreen></iframe>
 @stop
 
 @section('lesson-number', 'Bonus Lesson')

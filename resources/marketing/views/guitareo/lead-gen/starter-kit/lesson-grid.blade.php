@@ -56,5 +56,5 @@
         ];
     @endphp
 
-    @include('guitareo.lead-gen.partials.lesson-grid1')
+@include('guitareo.lead-gen.partials.lesson-grid1')
 @endsection

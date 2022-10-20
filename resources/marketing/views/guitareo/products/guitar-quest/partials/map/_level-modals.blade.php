@@ -1,26 +1,26 @@
 <!-- Guitar Quest: Level Modals -->
 
 <!-- Level Modal  -->
-<div x-show.transition.opacity="levelModalOpen" 
+<div x-show.transition.opacity="levelModalOpen"
      x-on:keydown.escape="levelModalOpen = false;"
      x-cloak
      class="fixed justify-center items-center inset-0 bg-black bg-opacity-75 z-250 soft-flex">
-    
+
     <!-- Flex Wrapper -->
     <div class="flex min-h-full items-center justify-center"
          x-on:click.away="levelModalOpen = false;"
     >
-        <!-- Previous Button --> 
+        <!-- Previous Button -->
         <button class="text-white text-7xl cursor-pointer focus:outline-none"
-                x-bind:class="{ 'pointer-events-none opacity-40': levelModalOpen === 1 }"    
+                x-bind:class="{ 'pointer-events-none opacity-40': levelModalOpen === 1 }"
                 x-on:click.stop="levelModalOpen -= 1">
             <i class="fas fa-angle-left"></i>
         </button>
-        
+
         <!-- Modal Wrapper -->
         <div class="w-screen max-w-xl p-3 h-screen overflow-auto flex scrollbar-none"
              x-on:click="levelModalOpen = false;">
-            
+
             <!-- Level One Modal -->
             <div x-show="levelModalOpen === 1"
                  x-on:click.stop
@@ -112,7 +112,7 @@
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Learn The D Chord</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Switching From G To D</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Play A Chord Progression</span></li>
-                        <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Play The Campfire Song</span></li> 
+                        <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Play The Campfire Song</span></li>
                     </ul>
                 </div>
             </div>
@@ -232,15 +232,15 @@
             </div>
         </div>
 
-        <!-- Next Button --> 
+        <!-- Next Button -->
         <button class="text-white text-7xl cursor-pointer focus:outline-none"
-                x-bind:class="{ 'pointer-events-none opacity-40': levelModalOpen === 9 }"   
+                x-bind:class="{ 'pointer-events-none opacity-40': levelModalOpen === 9 }"
                 x-on:click.stop="levelModalOpen += 1">
             <i class="fas fa-angle-right"></i>
         </button>
     </div>
 
-    <!-- Close Modal Button --> 
+    <!-- Close Modal Button -->
     <button class="text-white absolute text-5xl md:text-7xl cursor-pointer top-1 right-1 focus:outline-none"
             x-on:click.stop="levelModalOpen = false;">
         <i class="fas fa-times"></i>

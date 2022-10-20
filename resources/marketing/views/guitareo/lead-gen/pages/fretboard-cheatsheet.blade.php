@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
+@section('meta')
     @parent
 
     <title>Fretboard Cheatsheet</title>
@@ -10,8 +10,7 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/Fretboard+Cheatsheet/share-image.png">
     <meta property="og:url" content="https://www.guitareo.com/fretboard-cheatsheet/">
 
-    <link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css">
-
+    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
     <style>
         .hero-header img {
             width:auto;
@@ -48,19 +47,17 @@
     </style>
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="/assets/js/modal-autoplay.js"></script>
+    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
 @stop
 
-@section('layout-body')
+@section('body')
     <header class="hero-header text-white text-center px-3 py-5 md:py-12 relative" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/Fretboard+Cheatsheet/header-3.jpg);">
         <div class="container mx-auto relative z-10">
             <img class="h-6 md:h-11 lg:h-12 w-auto mx-auto" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/Fretboard+Cheatsheet/logo.png"><br>
@@ -69,7 +66,7 @@
             <h2 class="leading-tight text-shadow-4"><strong>Your All-In-One Guide To<br class="hidden md:inline"> Understand The Fretboard</strong></h2>
             <h6 class="px-4 sm:px-0 mt-1 mb-5 text-guitareo leading-normal max-w-xs md:max-w-full">Download your free PDF and easily navigate the fretboard<br class="hidden sm:inline">
                  to unlock new possibilities in your playing</h6>
-            @include("lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                     "formId" => "Guitareo - Engagement - Trigger - Fretboard Cheatsheet - Web Form",
                     "formName" => 'Fretboard Cheatsheet',
                     "buttonText" => "Get It Now",
@@ -77,8 +74,9 @@
         </div>
     </header>
 
-    @include('guitareo.lead-gen._partials._video-player',[
-        "id" => "trailer",
-        "code" => "675629928"
-    ])
+    <div class="reveal trailer text-center" id="trailer" data-reveal data-reset-on-close="false">
+        <div class="aspect-16:9 w-full relative">
+            <iframe class="inset-0 absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/675629928?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+        </div>
+    </div>
 @stop

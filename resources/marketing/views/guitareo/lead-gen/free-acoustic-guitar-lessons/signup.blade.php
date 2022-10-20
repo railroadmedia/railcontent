@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
+@section('meta')
     @parent
 
     <title>Getting Started On The Acoustic Guitar</title>
@@ -12,34 +12,52 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/free-acoustic-guitar-lessons/">
 
-    <link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css">
+    <link rel="preload" href="/marketing/parcel/guitareo/song-in-an-hour.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css"></noscript>
+
     <style>
         .hero-header img {
             width:auto;
             max-width:100%;
         }
 
+        .header-bg {
+            background-image: url('https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
+        }
+
         .meet-rob {
             background-color:#020317;
             background-size: 1060px;
             background-position: 20% 30px;
+            background-image: url('https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
         }
-        @media (min-width:768px) {
-            .meet-rob {
-                background-size: cover;
-                background-position: 45% top;
-            }
-        }
-        @media (min-width:1024px) {
-            .meet-rob {
-                background-size: cover;
-                background-position: 50% top;
-            }
-        }
+
         .meet-rob .content-wrap {
             max-width:500px;
         }
+
+        @media (min-width:768px) {
+            .header-bg {
+                background-image: url('https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
+            }
+
+            .meet-rob {
+                background-size: cover;
+                background-position: 45% top;
+                background-image: url('https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
+            }
+        }
         @media (min-width:1024px) {
+            .header-bg {
+                background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
+            }
+
+            .meet-rob {
+                background-size: cover;
+                background-position: 50% top;
+                background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
+            }
+
             .meet-rob .content-wrap {
                 max-width:700px;
             }
@@ -47,23 +65,25 @@
     </style>
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="/assets/js/modal-autoplay.js"></script>
+    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
 @stop
 
-@section('layout-body')
+@section('body')
     @include('guitareo.lead-gen.partials._header1', [
-        "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg",
         "bgColor" => "#010416",
-        "imgs" => ['<img class="h-14 sm:h-20 lg:h-28 mb-5 lg:mb-8" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png">'],
+        "imgs" => ['
+            <picture>
+                <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png">
+                <img class="h-14 sm:h-20 lg:h-28 mb-5 lg:mb-8" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo">
+            </picture>
+        '],
         "playButton" => "up",
         "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Acoustic Guitar - Web Form",
         "formName" => 'Getting Started On The Acoustic Guitar',
@@ -72,8 +92,8 @@
     @include('guitareo.lead-gen.partials._lesson1', [
         "bg" => "linear-gradient(to bottom, #011029, #010414)",
         "textbg" => "linear-gradient(to bottom, #0e2834 56%, #16102b)",
-        "headLine" => '<h3>Pick up your guitar and<br class="inline md:hidden"> <strong>start playing today!</strong></h3>',
-        "subHeadLine" => '<h6 class="opacity-70 mt-3 mb-8 leading-normal">Learn everything you need to get started on the acoustic<br class="hidden sm:inline-block"> guitar and start playing music as fast as possible!</h6>',
+        "headLine" => '<div class="font-black text-lg md:text-2xl lg:text-3xl">Pick up your guitar and<br class="inline md:hidden"> <strong>start playing today!</strong></div>',
+        "subHeadLine" => '<div class="opacity-70 mt-3 mb-8 leading-normal lg:text-lg lg:leading-normal">Learn everything you need to get started on the acoustic<br class="hidden sm:inline-block"> guitar and start playing music as fast as possible!</div>',
         $lessons = [
             [
             'title' => "Becoming Familiar With Your Acoustic Guitar",
@@ -163,17 +183,30 @@
         ]
     ])
 
-    @include('guitareo.lead-gen.partials._trailer', [
-        "trailer" => "//player.vimeo.com/video/678469858?autoplay=1",
-        "slap" => "https://www.youtube.com/embed/qqrYZlW4Hjg?autoplay=1",
-        "delay" => "https://www.youtube.com/embed/C3f0HC0-J10?autoplay=1",
-        "fret" => "https://www.youtube.com/embed/PILuE378Mj4?autoplay=1",
+    @include('guitareo.lead-gen.partials._video-player',[
+        "id" => "trailer",
+        "url" => "//player.vimeo.com/video/678469858?autoplay=1",
+    ])
+
+    @include('guitareo.lead-gen.partials._video-player',[
+        "id" => "slap",
+        "url" => "https://www.youtube.com/embed/qqrYZlW4Hjg?autoplay=1",
+    ])
+
+    @include('guitareo.lead-gen.partials._video-player',[
+        "id" => "delay",
+        "url" => "https://www.youtube.com/embed/C3f0HC0-J10?autoplay=1",
+    ])
+
+    @include('guitareo.lead-gen.partials._video-player',[
+        "id" => "fret",
+        "url" => "https://www.youtube.com/embed/PILuE378Mj4?autoplay=1",
     ])
 
     @include('guitareo.lead-gen.partials._enter-email', [
         "bgColor" => "linear-gradient(to bottom, #042932, #010317)",
-        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png" />',
-        "text" => '<h3 class="leading-tight my-5 md:my-8">Enter your email below to get<br class="inline sm:hidden"> the ENTIRE 6-video course.</h3>',
+        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo" />',
+        "text" => '<div class="leading-tight text-lg md:leading-tight md:text-2xl lg:leading-tight lg:text-3xl my-5 md:my-8">Enter your email below to get<br class="inline sm:hidden"> the ENTIRE 6-video course.</div>',
         "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Acoustic Guitar - Web Form",
         "formName" => "Getting Started On The Acoustic Guitar",
     ])
