@@ -26,7 +26,9 @@
         {!! \App\Analytics\Tracker::headBottom() !!}
     </head>
 
-    <body class="flex flex-col w-full min-h-screen lg:pt-[56px]" x-data="{ sidebarOpen: false, showOverlay: false }">
+    <body class="flex flex-col w-full min-h-screen lg:pt-[56px] @yield('body-class')" 
+          x-data="{ sidebarOpen: false, showOverlay: false }"
+    >
         {!! \App\Analytics\Tracker::bodyTop() !!}
 
         @yield('layout-header')

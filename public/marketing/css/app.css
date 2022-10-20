@@ -935,6 +935,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .invisible {
   visibility: hidden !important;
 }
+.static {
+  position: static !important;
+}
 .fixed {
   position: fixed !important;
 }
@@ -2685,6 +2688,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .uppercase {
   text-transform: uppercase !important;
 }
+.capitalize {
+  text-transform: capitalize !important;
+}
 .italic {
   font-style: italic !important;
 }
@@ -2894,6 +2900,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .outline {
   outline-style: solid !important;
+}
+.blur {
+  --tw-blur: blur(8px) !important;
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 .brightness-0 {
   --tw-brightness: brightness(0) !important;
