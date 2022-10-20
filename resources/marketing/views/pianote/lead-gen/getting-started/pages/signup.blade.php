@@ -230,7 +230,7 @@
                             course overview
                         </p>
                         <p class="mb-8 lg:mb-10">
-                            Learning the piano can be daunting. But it doesn’t have to be. Start your piano journey with perfectly structure lessons from a REAL teacher so you can learn the right way -- while having fun. You’ll be playing real pop songs on the keys in just 4 easy lessons. And it won’t cost a cent.
+                            Learning the piano can be daunting. But it doesn’t have to be. Start your piano journey with perfectly structured lessons from a REAL teacher so you can learn the right way -- while having fun. You’ll be playing real pop songs on the keys in just 4 easy lessons. And it won’t cost a cent.
                         </p>
                         <div class="flex flex-wrap mb-10 text-left">
                             <div class="w-1/2 mb-6 pl-2 md:pl-4" style="border-left:3px solid #FF0000;">

@@ -39,8 +39,9 @@
                 How many chords do you know? Check your knowledge of <a href="/blog/how-to-play-piano-chords/"><u>all chord types</u></a>, from majors and minors to 7th chords, altered chords, and extensions. Or try Pianote for free.
             </p>
             <a href="/trial" class="join mb-4 smaller">TRY PIANOTE FOR 7 DAYS</a>
+            <h5 class="mb-4"><strong>Share your result</strong></h5>
             <div >
-                <a class="inline-block mr-2" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/quiz/scientist">
+                <a class="inline-block mr-2" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/{{ Request::path() }}">
                     <div class="border-2 rounded-full w-8 h-8 flex justify-center items-center border-gray-400 text-gray-400">
                         <i class="fab fa-facebook-f"></i>
                     </div>

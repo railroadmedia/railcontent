@@ -35,11 +35,12 @@
             <h2 class="font-extrabold mb-6">You're the Academic!</h2>
             <p class="mb-4">
                 You’re the Academic! You hold a deep admiration for the great composers and classics. And while you may find improvising more challenging, you feel at home with sheet music and can creatively interpret what’s written. You may also be curious about music history, you practice diligently, and it shows! <br><br>
-                Nerd out on the most difficult piano pieces and <a href="/blog/hardest-piano-song/"><u>what makes them hard</u></a>. Or, level up your playing by trying Pianote for free.
+                Nerd out on the <a href="/blog/famous-classical-piano-songs"><u>most famous classical pieces</u></a> of all time. <br>Or, level up your playing by trying Pianote for free.
             </p>
             <a href="/trial" class="join mb-4 smaller">TRY PIANOTE FOR 7 DAYS</a>
+            <h5 class="mb-4"><strong>Share your result</strong></h5>
             <div >
-                <a class="inline-block mr-2" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/quiz/academic">
+                <a class="inline-block mr-2" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/{{ Request::path() }}">
                     <div class="border-2 rounded-full w-8 h-8 flex justify-center items-center border-gray-400 text-gray-400">
                         <i class="fab fa-facebook-f"></i>
                     </div>
