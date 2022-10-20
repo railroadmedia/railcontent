@@ -15,8 +15,10 @@ require('laravel-mix-merge-manifest');
 
 mix
     .js('resources/marketing/assets/js/app.js', 'public/marketing/js')
-    .postCss('resources/marketing/assets/css/app.css', 'public/marketing/css', [
-        tailwindcss('./resources/marketing/marketing.tailwind.config.js')
-    ])
+    .vue({ version: 3 })
+    .sass('resources/marketing/assets/css/app.scss', 'public/marketing/css')
+    .options({
+        postCss: [tailwindcss('./resources/marketing/marketing.tailwind.config.js')],
+    })
     .version()
     .mergeManifest();
