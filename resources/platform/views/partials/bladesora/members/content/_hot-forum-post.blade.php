@@ -3,11 +3,11 @@
         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col"
         >
             {{-- Avatar Thumbnail --}}
-            <div class="user-avatar tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1.5 
-                        {{ in_array($user->access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
+            <div class="user-avatar tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1.5
+                        {{ in_array($author_access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
                         {{ $brand }}
-                        {{-- {{ $user->access_level }} --}} {{-- Always Returns Lifetime --}}
-                "
+                        {{ $author_access_level }}
+               "
             >
                 <div class="tw-no-underline tw-block tw-h-full tw-w-full">
                     <img class="tw-rounded-full" 
