@@ -12,6 +12,7 @@ env:
   DEBUGBAR_ENABLED: false
   APP_URL: http://localhost
   LOG_LEVEL: warning
+  REDIS_HOST: 0
 jobs:
   laravel-tests:
 
