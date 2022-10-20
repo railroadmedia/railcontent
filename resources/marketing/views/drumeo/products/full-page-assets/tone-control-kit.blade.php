@@ -12,7 +12,7 @@
 
 @section('head')
     @parent
-    <link href="{{ asset('/assets/members-area/css/gulp/tone-control-kit.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/tone-control-kit.css') }}" rel="stylesheet">
 
     <?php \App\Analytics\Tracker::trackProductImpression('tone-control-kit'); ?>
 @stop()
@@ -299,7 +299,7 @@
             });
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop()
 
 @section('content')

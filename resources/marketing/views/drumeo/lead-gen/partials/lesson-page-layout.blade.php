@@ -1,7 +1,7 @@
 @extends('drumeo.lead-gen.lead-gen-layout-tw')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('/assets/members-area/css/gulp/lead-gen-tw.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}">
 @stop
 
 @section('scripts')

@@ -12,7 +12,7 @@
 
 @section('head')
     @parent
-    <link href="{{ asset('/assets/members-area/css/gulp/vater-sticks.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/vater-sticks.css') }}" rel="stylesheet">
 
     <?php \App\Analytics\Tracker::trackProductImpression('Drumeo-VaterSticks'); ?>
 @stop()
@@ -33,7 +33,7 @@
             });
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop()
 
 @section('content')

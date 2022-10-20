@@ -13,8 +13,8 @@
     @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css" />
-    <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
+    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <style>
         h1 strong,
         label strong {
@@ -200,7 +200,7 @@
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -211,5 +211,5 @@
             });
         });
     </script>
-    {{--<script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>--}}
 @stop

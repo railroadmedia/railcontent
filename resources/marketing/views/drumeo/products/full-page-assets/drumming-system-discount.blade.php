@@ -13,7 +13,7 @@
 @section('head')
     @parent
     <?php \App\Analytics\Tracker::trackProductImpression('DSYS2-DIGI'); ?>
-    <link href="{{ asset('/assets/members-area/css/gulp/tripwire.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/tripwire.css') }}" rel="stylesheet">
     <style>
         .top-bar .button-wrap .join:nth-child(1) {
             display: none;
@@ -28,7 +28,7 @@
             $(document).foundation();
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop()
 
 @section('content')

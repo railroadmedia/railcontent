@@ -10,9 +10,9 @@
 
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
 
-    <link href="{{ asset('/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/sales-2020.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <style>
         .header {
             height:600px;
@@ -314,9 +314,9 @@
 
 @section('layout-scripts')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}" defer></script>
-    <script type="text/javascript" src="/laravel/public/assets/js/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}" defer></script>
+    <script type="text/javascript" src="/marketing/js/drumeo/jquery.countdown-2.min.js"></script>
     <script>
         setInterval(function(){
             setTimeout(function(){
@@ -347,7 +347,7 @@
                 });
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('/assets/js/sliding-anchor.js') }}" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>

@@ -13,9 +13,9 @@
     @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/lead-gen-tw.css') }}" rel="stylesheet">
+    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
 
     <style>
         h3 {
@@ -164,15 +164,15 @@
 
     @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script defer src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
+    <script defer src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
     <script defer src="{{ asset('/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
-    <script defer src="{{ asset('/assets/members-area/js/gulp/compiled/infusionsoft-tracking.js') }}"></script>
+    <script defer src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop

@@ -7,9 +7,9 @@
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
-    <link href="{{ asset('/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">
 
     @yield('styles')
 @stop
@@ -29,10 +29,10 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
     @yield('scripts')
-    <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
 
-    <script src="{{ asset('/assets/members-area/js/gulp/compiled/infusionsoft-tracking.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
 @stop

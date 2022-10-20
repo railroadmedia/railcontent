@@ -17,9 +17,9 @@
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
-    <link href="{{ asset('/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/sales-app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-app.css') }}" rel="stylesheet">
 
 @stop
 
@@ -114,12 +114,12 @@
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop

@@ -13,7 +13,7 @@
 
 @section('head')
     @parent
-    <link href="{{ asset('/assets/members-area/css/gulp/drum-shop-ime.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-ime.css') }}" rel="stylesheet">
 
     <?php \App\Analytics\Tracker::trackProductImpression('independence-made-easy'); ?>
 @stop()
@@ -48,7 +48,7 @@
             }
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop()
 
 @section('content')

@@ -10,7 +10,7 @@
     @parent
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/drum-shop-dtme.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-dtme.css') }}" rel="stylesheet">
 
 <!--    --><?php //\App\Analytics\Tracker::trackProductImpression('drum-technique-made-easy'); ?>
 @stop()

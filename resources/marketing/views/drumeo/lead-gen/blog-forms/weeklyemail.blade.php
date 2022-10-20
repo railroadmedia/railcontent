@@ -13,7 +13,7 @@
     @include('drumeo._partials._fonts')
     <base target="_parent">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
+    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
     <style>
         body {
             height:100vh;
@@ -134,7 +134,7 @@
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+<script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 </body>
 @include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>
