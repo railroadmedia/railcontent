@@ -5,8 +5,8 @@
     <meta property="fb:app_id" content="1772693566314871" />
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
-    <link rel="preload" href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}"></noscript>
     <link rel="preload" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}"></noscript>
     <link rel="stylesheet" href="/marketing/parcel/pianote/lead-gen.css">

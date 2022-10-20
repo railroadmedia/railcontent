@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body.modal-open {
             overflow-y:hidden;
@@ -610,10 +610,10 @@
         }, false);
     </script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
     {!! inspectlet_embed_script() !!}

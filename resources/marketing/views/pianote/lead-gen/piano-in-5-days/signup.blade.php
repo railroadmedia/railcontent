@@ -304,7 +304,7 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/modal.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 @endsection

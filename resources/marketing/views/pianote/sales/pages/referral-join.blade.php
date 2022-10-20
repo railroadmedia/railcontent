@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/fb-share-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css"/>
-    <link href="/marketing/parcel/pianote/tailwind-helpers.css" rel="stylesheet">
+    <link href="/marketing/css/pianote/tailwind-helpers.css" rel="stylesheet">
     <link href="/marketing/parcel/pianote/nav-footer.css" rel="stylesheet">
 
 

@@ -551,7 +551,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay.js"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({
@@ -572,10 +572,10 @@
             });
         });
     </script>
-    <script src="{{ mix('marketing/parcel/pianote/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/parcel/pianote/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/parcel/pianote/app.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
     {!! inspectlet_embed_script() !!}
