@@ -1,0 +1,591 @@
+@import "_variables";
+
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
+    font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6, li, p {
+    font-weight: 400;
+    line-height: 1em;
+    font-family: $opensans;
+    margin: 0 auto;
+
+    sup {
+        font-size: 50%;
+        top: -0.75em;
+    }
+}
+
+h1 {
+    line-height: 1.2em;
+    font-size: 24px;
+    @include tablet {
+        font-size: 36px;
+    }
+    @include desktop {
+        font-size: 48px;
+    }
+}
+
+h2 {
+    line-height: 1.2em;
+    font-size: 20px;
+    @include tablet {
+        font-size: 30px;
+    }
+    @include desktop {
+        font-size: 36px;
+    }
+}
+
+h3 {
+    font-size: 18px;
+    @include tablet {
+        font-size: 24px;
+    }
+    @include desktop {
+        font-size: 30px;
+    }
+}
+
+h4 {
+    font-size: 17px;
+    @include tablet {
+        font-size: 20px;
+    }
+    @include desktop {
+        font-size: 24px;
+    }
+}
+
+h5 {
+    font-size: 15px;
+    @include tablet {
+        font-size: 18px;
+    }
+    @include desktop {
+        font-size: 20px;
+    }
+}
+
+h6 {
+    font-size: 15px;
+    @include tablet {
+        font-size: 16px;
+    }
+    @include desktop {
+        font-size: 18px;
+    }
+}
+
+p, li {
+    line-height: 1.6em;
+    font-size: 15px;
+    @include desktop {
+        font-size: 16px;
+    }
+}
+
+img {
+    display: inline-block;
+}
+
+
+.lazyload {
+    opacity: 0;
+}
+
+.lazyloading {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+
+.join {
+    &.smaller {
+        padding: 10px 30px 6px;
+        font-size: 16px;
+        @include tablet {
+            font-size: 18px;
+            padding: 12px 30px 10px;
+        }
+    }
+
+    &.medium {
+        padding: 13px 30px;
+        font-size: 19px;
+        @include tablet {
+            font-size: 24px;
+            padding: 15px 30px;
+        }
+
+    }
+
+    &.white {
+        background: #fff;
+        color: #000;
+
+        &:hover,
+        &:focus {
+            background: #eee;
+            color: #000;
+        }
+    }
+}
+
+.play-button {
+    cursor: pointer;
+    outline: none;
+    transition: opacity .3s;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    border-radius: 200px;
+    line-height: 1em;
+    font-size: 29px;
+    padding: 18px 22px;
+    @include tablet {
+        font-size: 35px;
+        padding: 22px 27px;
+        border-width: 4px;
+    }
+    @include desktop {
+        font-size: 39px;
+        padding: 25px 30px;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &.smaller {
+        border-width: 2px;
+        font-size: 24px;
+        padding: 17px;
+    }
+}
+
+.timeline-container {
+    &::after {
+        content: '';
+        position: absolute;
+        width: 3px;
+        background-color: #0b76db;
+        top: 0;
+        bottom: 0;
+        transform: translate(-50%, 0);
+        z-index: 0;
+        left: 0;
+    }
+
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, 0);
+        background-color: #0b76db;
+        top: 0;
+        border-radius: 50%;
+        z-index: 1;
+        left: -16px;
+    }
+}
+
+.timeline-container::after,
+.timeline::after {
+    @include tablet {
+        left: 50%;
+    }
+}
+
+
+.dropdown {
+    .bg-pred {
+        min-width: 32px;
+        @include tablet {
+            min-width: 83px;
+        }
+    }
+
+    .description {
+        height: 0;
+        max-height: 0;
+        visibility: hidden;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    &.active .description {
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+        max-height: 400px;
+    }
+}
+
+$rotaterHeight: 60px;
+
+.rotater-text {
+    height: $rotaterHeight;
+
+    span {
+        line-height: $rotaterHeight;
+        animation: move 55s infinite;
+    }
+}
+
+@keyframes move {
+    0% {
+        top: 0;
+    }
+    6% {
+        top: 0;
+    }
+    7% {
+        top: $rotaterHeight * -1;
+    }
+    13% {
+        top: $rotaterHeight * -1;
+    }
+    14% {
+        top: $rotaterHeight * -2;
+    }
+    20% {
+        top: $rotaterHeight * -2;
+    }
+    21% {
+        top: $rotaterHeight * -3;
+    }
+    27% {
+        top: $rotaterHeight * -3;
+    }
+    28% {
+        top: $rotaterHeight * -4;
+    }
+    34% {
+        top: $rotaterHeight * -4;
+    }
+    35% {
+        top: $rotaterHeight * -5;
+    }
+    41% {
+        top: $rotaterHeight * -5;
+    }
+    42% {
+        top: $rotaterHeight * -6;
+    }
+    48% {
+        top: $rotaterHeight * -6;
+    }
+    49% {
+        top: $rotaterHeight * -7;
+    }
+    55% {
+        top: $rotaterHeight * -7;
+    }
+    56% {
+        top: $rotaterHeight * -8;
+    }
+    62% {
+        top: $rotaterHeight * -8;
+    }
+    63% {
+        top: $rotaterHeight * -9;
+    }
+    69% {
+        top: $rotaterHeight * -9;
+    }
+    70% {
+        top: $rotaterHeight * -10;
+    }
+    76% {
+        top: $rotaterHeight * -10;
+    }
+    77% {
+        top: $rotaterHeight * -11;
+    }
+    83% {
+        top: $rotaterHeight * -11;
+    }
+    84% {
+        top: $rotaterHeight * -12;
+    }
+    90% {
+        top: $rotaterHeight * -12;
+    }
+    91% {
+        top: $rotaterHeight * -13;
+    }
+    97% {
+        top: $rotaterHeight * -13;
+    }
+    98% {
+        top: $rotaterHeight * -14;
+    }
+    99.9% {
+        top: $rotaterHeight * -14;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+table.comparison {
+    tr {
+        &:hover,
+        &:nth-child(even):hover {
+            background-color: #f2f5fa;
+
+            td:nth-child(2) {
+                background-color: lighten($drumeoBlue, 2%);
+            }
+
+            td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+                background-color: lighten(#f2f5fa, 1%);
+            }
+
+        }
+
+        td {
+            padding: 10px 7px;
+            font: 400 12px/1.2em $opensans;
+            @include tablet {
+                font-size: 14px;
+                padding: 20px 10px;
+            }
+
+            &:nth-child(1) {
+                text-align: right;
+                font-weight: 900;
+            }
+
+            &:nth-child(2) {
+                color: #fff;
+                background-color: $drumeoBlue;
+                text-shadow: 3px 3px 0 #0c6fcc;
+            }
+
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-child(5) {
+                background-color: #f2f5fa;
+            }
+
+
+            &:nth-child(2),
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-child(5) {
+                width: 38%;
+                @include tablet {
+                    width: 22%;
+                }
+            }
+        }
+
+        &:nth-child(1) td {
+            border-width: 0 0 2px;
+            border-color: #fff;
+            padding: 18px 0;
+            @include tablet {
+                font-size: 17px;
+                padding: 18px 10px;
+            }
+            @include desktop {
+                font-size: 19px;
+            }
+
+        }
+
+        &:last-child td {
+            padding: 14px 10px;
+            @include tablet {
+                padding: 25px 10px;
+            }
+
+            strong {
+                font-size: 19px;
+                @include tablet {
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+
+    &.private {
+        tr td {
+            &:nth-child(3) {
+                display: table-cell;
+            }
+
+            &:nth-child(4),
+            &:nth-child(5) {
+                display: none;
+                @include tablet {
+                    display: table-cell;
+                }
+            }
+        }
+    }
+
+    &.online {
+        tr td {
+            &:nth-child(4) {
+                display: table-cell;
+            }
+
+            &:nth-child(3),
+            &:nth-child(5) {
+                display: none;
+                @include tablet {
+                    display: table-cell;
+                }
+            }
+        }
+    }
+
+    &.books {
+        tr td {
+            &:nth-child(5) {
+                display: table-cell;
+            }
+
+            &:nth-child(3),
+            &:nth-child(4) {
+                display: none;
+                @include tablet {
+                    display: table-cell;
+                }
+            }
+        }
+    }
+}
+
+
+.reveal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483002;
+    display: none;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    &:after {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 900;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        content: "\f00d";
+        color: #fff;
+        z-index: 1;
+        opacity: 0.8;
+        position: absolute;
+        margin: 0;
+        line-height: 1em;
+        text-align: center;
+        display: inline-block;
+        outline: none;
+        top: 0;
+        right: 0;
+        font-size: 35px;
+        width: 35px;
+        @include tablet {
+            top: 7px;
+            right: 7px;
+            font-size: 50px;
+            width: 50px;
+        }
+    }
+
+    .reveal {
+        z-index: 1006;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        display: none;
+        background-color: #fefefe;
+        position: relative;
+        top: 100px;
+        margin-right: auto;
+        margin-left: auto;
+        overflow-y: auto;
+        width: 95%;
+        max-width: 75rem;
+        height: inherit;
+        min-height: 0;
+        outline: none;
+        padding: 0;
+        border: none;
+        border-radius: 7px;
+        @include tablet {
+            right: auto;
+            left: auto;
+            margin: 0 auto;
+        }
+
+        &.coach-wrap {
+            user-select: none;
+            border-radius: 10px;
+            text-align: center;
+            overflow: visible;
+            max-width: 310px;
+            top: 40px !important;
+            @include tablet {
+                max-width: 450px;
+                top: 96px !important;
+            }
+
+            .bubble {
+                display: inline-block;
+                padding: 0 5px;
+                @include tablet {
+                    padding: 0 10px;
+                }
+
+                p {
+                    font: 400 10px/1.2em $opensans;
+                    margin: 0 auto;
+                    text-transform: uppercase;
+
+                    i {
+                        font-size: 12px;
+                        @include tablet {
+                            font-size: 13px;
+                        }
+                    }
+
+                    strong {
+                        line-height: 1.2em;
+                        color: #000;
+                        font-size: 13px;
+                        @include tablet {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                &.facebook {
+                    color: $facebook;
+                }
+
+                &.youtube {
+                    color: $youtube;
+                }
+
+                &.instagram {
+                    color: $instagram;
+                }
+
+                &.spotify {
+                    color: #1db954;
+                }
+            }
+        }
+
+    }
+}
