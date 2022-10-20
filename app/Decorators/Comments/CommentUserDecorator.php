@@ -86,12 +86,11 @@ class CommentUserDecorator extends ModeDecoratorBase
                     $replyAuthor->getXpRank();
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['access_level'] = $replyAuthor['access_level'];
-                $comments[$commentIndex]['replies'][$replyIndex]['user']['xp_level'] = $replyAuthor->getMethodLevel();
+                $comments[$commentIndex]['replies'][$replyIndex]['user']['level_number'] = $replyAuthor->getMethodLevel();
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['fields.profile_picture_image_url'] =
                     $replyAuthor['profile_picture_url'];
             }
         }
-
         return $comments;
     }
 }
