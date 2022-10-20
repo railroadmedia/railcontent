@@ -1314,10 +1314,10 @@ class ContentRepository extends RepositoryBase
             $query->restrictFollowedContent();
         }
 
-        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
-
-            return $this->getFilterOptionsFromCompiledColumn($query);
-        }
+//        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
+//
+//            return $this->getFilterOptionsFromCompiledColumn($query);
+//        }
 
         $possibleContentFields = $this->getFilterOptionsForQuery($query);
 
@@ -2208,7 +2208,8 @@ class ContentRepository extends RepositoryBase
                             '=',
                             ConfigService::$tableContent . '.id'
                         )
-                            ->where( ConfigService::$tableContentData . '.key','=', 'head_shot_picture_url');
+                        ->where(ConfigService::$tableContentData . '.id','=',
+                                DB::raw('(SELECT id FROM '.ConfigService::$tableContentData.' WHERE '.ConfigService::$tableContentData.'.content_id = railcontent_content.id and railcontent_content_data.key = \'head_shot_picture_url\' LIMIT 1)'));
                     }
                 )
                 ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
@@ -2222,7 +2223,7 @@ class ContentRepository extends RepositoryBase
                     'key' => 'name',
                     'value' => $instructorRow["name"]
                 ];
-                $instructorRows[$instructorRowIndex]["data"] = [
+                $instructorRows[$instructorRowIndex]["data"][] = [
                     'id' => 1,
                     'key' => 'head_shot_picture_url',
                     'value' => $instructorRow["head_shot_picture_url"]
@@ -2302,9 +2303,10 @@ class ContentRepository extends RepositoryBase
                         continue;
                     }
                     foreach ($instructors as $instructor) {
-                        $compiledViewData = json_decode($instructor['compiled_view_data'] ?? '', true);
+                        if (isset($instructor['id']) && !isset($compiledViewData[$instructor['id']])) {
+                            $compiledViewData[$instructor['id']] = json_decode($instructor['compiled_view_data'] ?? '', true);
 
-                        if (isset($instructor['id'])) {
+
                             $filterOptionsArray[$filterOptionName][] = [
                                 'id' => $instructor['id'],
                                 'name' => $instructor['name'],
@@ -2319,7 +2321,7 @@ class ContentRepository extends RepositoryBase
                                     [
                                         "id" => $instructor['id'],
                                         "key" => "head_shot_picture_url",
-                                        "value" => $compiledViewData['head_shot_picture_url'] ?? $compiledViewData['avatar_image_url'] ?? '',
+                                        "value" => $compiledViewData[$instructor['id']]['head_shot_picture_url'] ?? $compiledViewData[$instructor['id']]['avatar_image_url'] ?? '',
                                     ],
                                 ],
                             ];
