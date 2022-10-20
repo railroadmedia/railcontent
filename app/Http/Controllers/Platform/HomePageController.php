@@ -444,7 +444,7 @@ class HomePageController extends BaseController
             ],
             "practiced" => [
                 "icon" => "icon-minutes-practiced",
-                "value" => $userProfileMetrics->getMinutesPracticed(),
+                "value" => user()->getBrandMinutesPracticed(),
                 "label" => "Minutes Practiced",
             ],
         ];
