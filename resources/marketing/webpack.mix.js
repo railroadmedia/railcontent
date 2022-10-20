@@ -1,6 +1,8 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 require('laravel-mix-merge-manifest');
+const ASSET_URL =
+  process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
 /*
  |--------------------------------------------------------------------------
@@ -22,3 +24,17 @@ mix
     })
     .version()
     .mergeManifest();
+
+mix.webpackConfig(webpack => {
+    return {
+        // target: ['web', 'es5'],
+        output: {
+            publicPath: ASSET_URL,
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+            })
+        ]
+    };
+});
