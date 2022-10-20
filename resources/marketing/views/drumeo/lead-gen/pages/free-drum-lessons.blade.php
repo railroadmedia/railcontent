@@ -14,8 +14,8 @@
     <meta property="og:description" content="Whether you want to learn your favorite tunes, find out how to play different drum fills and rudiments or improve your technique, make sure you bookmark this page!">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/laravel/public/assets/members-area/css/gulp/blog.css" />
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/marketing/parcel/drumeo/blog.css" />
 
     @include('drumeo._partials._fonts')
     <style>
@@ -526,5 +526,5 @@
         });
     </script>
 
-    <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

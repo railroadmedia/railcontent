@@ -13,7 +13,7 @@
 
 @section('head')
     @parent
-    <link href="{{ asset('/assets/members-area/css/gulp/electrify-your-drumming.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/electrify-your-drumming.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 
     <?php \App\Analytics\Tracker::trackProductImpression('electrify-your-drumming'); ?>
@@ -35,7 +35,7 @@
 
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop()
 
 @section('content')

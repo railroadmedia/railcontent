@@ -8,7 +8,7 @@
     @include('drumeo._partials._fonts')
     @include('drumeo._partials._favicons')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
+    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
     <style>
         body {
             text-align:center;

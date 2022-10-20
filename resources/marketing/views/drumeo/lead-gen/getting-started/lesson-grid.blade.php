@@ -14,7 +14,7 @@
     <meta property="og:description" content="Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk's free video series!">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 
-    <link rel="stylesheet" href="{{ asset('/assets/members-area/css/gulp/lead-gen-tw.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}">
 @stop
 
 @section('scripts')

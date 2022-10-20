@@ -10,7 +10,7 @@
 @stop
 
 @section('styles')
-    <link href="{{ asset('/assets/members-area/css/gulp/lead-gen-course.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-course.css') }}" rel="stylesheet">
     <style>
         .header.alt .row {
             background-position: center 30px;

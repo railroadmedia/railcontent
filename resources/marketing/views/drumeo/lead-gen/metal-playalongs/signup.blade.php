@@ -10,7 +10,7 @@
 @stop
 
 @section('styles')
-    <link href="{{ asset('/assets/members-area/css/gulp/lead-gen-tw.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>
         .lazyload {opacity: 0;}  .lazyloading {opacity: 1;transition: opacity 300ms;}
     </style>
