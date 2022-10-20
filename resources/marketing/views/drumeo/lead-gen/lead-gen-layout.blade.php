@@ -6,8 +6,8 @@
     @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/members-area/css/gulp/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">
 
     @yield('styles')
 @stop
@@ -25,10 +25,10 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
     @yield('scripts')
-    <script src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
 
-    <script src="{{ asset('/assets/members-area/js/gulp/compiled/infusionsoft-tracking.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
 @stop

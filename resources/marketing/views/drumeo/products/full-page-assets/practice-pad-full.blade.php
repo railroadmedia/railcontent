@@ -14,7 +14,7 @@
 
 @section('head')
     @parent
-    <link href="{{ asset('/assets/members-area/css/gulp/drum-shop-p4.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-p4.css') }}" rel="stylesheet">
 
     <?php \App\Analytics\Tracker::trackProductImpression('practicepad'); ?>
     <style>
@@ -960,7 +960,7 @@
 
 @section('scripts')
     @parent
-    <script src="/laravel/public/js/imageMapResizer.min.js"></script>
+    <script src="/marketing/js/drumeo/imageMapResizer.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>
     <script>

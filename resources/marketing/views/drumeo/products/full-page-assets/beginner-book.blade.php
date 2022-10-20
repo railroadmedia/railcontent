@@ -12,7 +12,7 @@
 @stop
 
 @section('head')
-    <link href="{{ asset('/assets/members-area/css/gulp/beginner-book.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/beginner-book.css') }}" rel="stylesheet">
 @stop
 
 @section('content')

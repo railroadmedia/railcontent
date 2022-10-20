@@ -27,8 +27,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/misc.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="/laravel/public/assets/js/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="/marketing/js/drumeo/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -77,7 +77,7 @@
                 });
         });
     </script>
-    <script src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 
     <script src="{{ _mix('js/manifest.js') }}"></script>
     <script src="{{ _mix('js/vendor.js') }}"></script>

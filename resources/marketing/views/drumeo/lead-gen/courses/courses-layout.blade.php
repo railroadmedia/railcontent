@@ -10,7 +10,7 @@
 @stop
 
 @section('styles')
-    <link href="{{ asset('/assets/members-area/css/gulp/lead-gen-shows.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-shows.css') }}" rel="stylesheet">
 @stop
 
 @section('scripts')
@@ -49,7 +49,7 @@
             }
         }
     </script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop
 
 @section('content')

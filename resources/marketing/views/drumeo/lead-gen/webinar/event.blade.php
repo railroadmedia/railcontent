@@ -12,7 +12,7 @@
 @stop()
 
 @section('styles')
-    <link href="{{ asset('/assets/members-area/css/gulp/webinar.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/webinar.css') }}" rel="stylesheet">
 @stop()
 
 @section('content')
