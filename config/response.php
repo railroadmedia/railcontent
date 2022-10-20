@@ -151,9 +151,8 @@ return [
 
         'coach-filter' => [
             'id',
-            'fields.name',
+            'name',
             'data.head_shot_picture_url',
-            'type',
         ],
 
         'pack-bundle' => [

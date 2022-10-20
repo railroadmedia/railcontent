@@ -821,7 +821,7 @@ return [
                 "shortname" => "Lessons",
                 "icon" => "icon-library",
                 "description" => "Miss a live event or just want to watch a particular episode again? This is the place to do it. All of the Guitareo live broadcasts are archived here for you to watch at your leisure. If you have any questions or want to discuss the topics mentioned in the videos you can always post in the forum.",
-                "allowableFilters" => ['difficulty', 'topic', 'progress'],
+                "allowableFilters" => ['difficulty', 'topic', 'progress', 'instructor'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
