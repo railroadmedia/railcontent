@@ -38,8 +38,9 @@
                 Want to level up? Cultivate a <a href="/blog/kevin-castro-musicians-mindset-podcast/"><u>musician’s mindset</u></a> and learn <a href="/blog/erskine-hawkins-podcast/"><u>how to get gigs.</u></a> Or keep sharpening your skills with a free trial of Pianote.
             </p>
             <a href="/trial" class="join mb-4 smaller">TRY PIANOTE FOR 7 DAYS</a>
+            <h5 class="mb-4"><strong>Share your result</strong></h5>
             <div >
-                <a class="inline-block mr-2" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/quiz/entertainer">
+                <a class="inline-block mr-2" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/{{ Request::path() }}">
                     <div class="border-2 rounded-full w-8 h-8 flex justify-center items-center border-gray-400 text-gray-400">
                         <i class="fab fa-facebook-f"></i>
                     </div>

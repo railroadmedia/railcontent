@@ -1,8 +1,8 @@
 @extends('global-layout')
 
 @section('global-head')
-    <title>You're almost there | Pianote</title>
-    <meta property="og:title" content="You're almost there | Pianote">
+    <title>You are the Scientist | Pianote</title>
+    <meta property="og:title" content="You are the Scientist | Pianote">
 
     <meta name="description" content="Please enter your email address to get your personality result. ">
     <meta property="og:description" content="Please enter your email address to get your personality result. ">
@@ -29,9 +29,11 @@
     <section class="py-32 md:py-48 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
         <div class="max-w-md md:max-w-4xl mx-auto text-center text-white px-6 lg:px-0">
             <i class="fas fa-spinner fa-spin-pulse text-5xl sm:text-7xl text-pianote"></i>
-            <h2 class="font-extrabold mt-2 mb-6">You're almost there!</h2>
+            <h2 class="font-extrabold mt-2 mb-6">You are the Scientist!</h2>
             <p class="mb-4">
-                Please enter your email address to get your personality result. We’ll also send you <br class="hidden md:inline">some free lessons related to your piano player personality! Don’t worry, we won’t <br class="hidden md:inline">share your email with anyone, and you can unsubscribe at any time.
+                To learn more about what this means and to get free lessons tailored to your<br class="hidden md:inline">
+                personality type, please enter your email address. Don’t worry, we won’t <br class="hidden md:inline">
+                share your email with anyone, and you can unsubscribe at any time.
             </p>
             @include('lead-gen._sign-up-form', [
                 "formName" => 'Personality Quiz Scientist',

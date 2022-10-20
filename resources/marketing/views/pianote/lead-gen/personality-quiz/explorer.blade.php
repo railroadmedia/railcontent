@@ -38,8 +38,9 @@
                 Want to take your skills to the next level? Expand your style pallet by learning how to play <a href="/blog/twinkle-twinkle-5-styles/"><u>“Twinkle Twinkle Little Star” in five ways.</u></a> Or try Pianote for free.
             </p>
             <a href="/trial" class="join mb-4">TRY PIANOTE FOR 7 DAYS</a>
+            <h5 class="mb-4"><strong>Share your result</strong></h5>
             <div >
-                <a class="inline-block mr-2" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/quiz/explorer">
+                <a class="inline-block mr-2" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//www.pianote.com/{{ Request::path() }}">
                     <div class="border-2 rounded-full w-8 h-8 flex justify-center items-center border-gray-400 text-gray-400">
                         <i class="fab fa-facebook-f"></i>
                     </div>
