@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.pianote.com/app/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/sales-app.css') }}" rel="stylesheet">
 @stop
@@ -106,5 +106,5 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
 @stop

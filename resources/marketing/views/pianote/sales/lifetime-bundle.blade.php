@@ -10,10 +10,10 @@
         <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/black-friday/lifetime/vid-thumb21-alt.jpg" style="display: none;">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link href="{{ asset('/marketing/parcel/pianote/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/pianote/animate.css') }}" rel="stylesheet">
     <style>
         .lazyload {
             opacity: 0;
