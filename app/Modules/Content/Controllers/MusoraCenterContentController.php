@@ -19,6 +19,7 @@ class MusoraCenterContentController extends Controller
 
     public function showPreview($domain, $brand, $contentId)
     {
+        if ($contentId) $contentId = str_replace(')', '', $contentId);
         ConfigService::$availableBrands = [$brand];
         ContentRepository::$pullFutureContent = true;
 
