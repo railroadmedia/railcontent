@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=cec753cc3d3ba965b021f71ee6f1226a",
-=======
     "/platform/js/app.js": "/platform/js/app.js?id=20b618020e182185e80edde634938257",
->>>>>>> master
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -26,6 +22,8 @@
     "/platform/css/app.css": "/platform/css/app.css?id=31e3aba0a7211092d036b07ea1931300",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=7bc222fd1f3a49c38cdc6f53cf67541f",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=1546536cc7d174df1975c95c2c3cf7d3",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=46c9dc84d59c35d3e9fde5e312b24280",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=37604cd4d2bc2e80cc077f471b4c3ec3"
+    "/marketing/js/app.js": "/marketing/js/app.js?id=93f52de4447639c9f087c4bbfec1112b",
+    "/marketing/js/manifest.js": "/marketing/js/manifest.js?id=893012fbe0ba6677bf4b948c7c2309b9",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=f336dcb6d59bd65a68614551bec19352",
+    "/marketing/js/vendor.js": "/marketing/js/vendor.js?id=6320b0da449a0d72bef160431af4879f"
 }
