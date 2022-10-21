@@ -25,7 +25,8 @@ mix
     .extract()
     .sourceMaps()
     .version()
-    .mergeManifest();
+    .mergeManifest()
+    .dump();
 
 mix.webpackConfig(webpack => {
     return {
