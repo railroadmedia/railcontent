@@ -101,7 +101,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ _mix('js/manifest.js') }}"></script>
-    <script src="{{ _mix('js/vendor.js') }}"></script>
-    <script src="{{ _mix('js/app.js') }}"></script>
+    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
 @stop
