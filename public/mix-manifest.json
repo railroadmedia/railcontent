@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=38386c863c21097a4fcade236dfbdfb3",
+    "/platform/js/app.js": "/platform/js/app.js?id=78f2c543a632a865ad15519cf980240e",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
@@ -19,7 +19,9 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=503fa8fa6ee41736e20d64af70bbca31",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=30c222662e6d3c2a837f8311b829f7c6",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=b6bf52a2a4993b1c89191250b898ca45",
-    "/platform/css/app.css": "/platform/css/app.css?id=cd6e6645ab3308b5d6b80420d1298d81",
+    "/platform/css/app.css": "/platform/css/app.css?id=fb9ce5484c752306a1479252fd2b377a",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=37e333d71844e8a0dc325dc686cbd71e",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=0e9edc629e8b706a58e7c8f25bfbe96e"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=0e9edc629e8b706a58e7c8f25bfbe96e",
+    "/marketing/js/app.js": "/marketing/js/app.js?id=46c9dc84d59c35d3e9fde5e312b24280",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=37604cd4d2bc2e80cc077f471b4c3ec3"
 }

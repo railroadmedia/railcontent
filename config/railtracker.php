@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'global_is_active' => true,
+    'global_is_active' => env('RAILTRACKER_ENABLED', true),
+
+    'brand' => 'musora',
 
     // brand database connection names (each brand is on its own database for now)
     'brand_database_connection_names' => [

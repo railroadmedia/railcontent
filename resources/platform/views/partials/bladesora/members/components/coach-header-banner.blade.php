@@ -1,5 +1,6 @@
 @component('partials.bladesora.members.components.coach-header-template', [
     'brand'=> $brand,
+    'fullName' => $fullName,
     'backgroundImage'=> $backgroundImage,
     'vimeoVideo' => $vimeoVideo,
 ])
@@ -16,11 +17,13 @@
     @endslot
 
     @slot('title')
-        {{ $firstName }} <span class="tw-font-bold">{{ $lastName }}</span>
+        {{ $firstName }} <span class="tw-font-bold">{{ $lastName }}</span> <span class="tw-font-bold">{{ $nameThree }}</span>
     @endslot
+
     @slot('shortBio')
         {!! $shortBio !!}
     @endslot
+
     @slot('actions')
         {{-- Subscribe --}}
         <div id="subscribeButton" class="{{ $isUserSubscribed ? 'tw-hidden' : '' }}">

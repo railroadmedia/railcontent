@@ -247,6 +247,7 @@ export default {
             open: false,
             loading: true,
             isPlaying: false,
+            hasBeenPlayed: false,
             accordionActive: false,
             accordionLoading: false,
             thisAssignment: {
@@ -540,6 +541,11 @@ export default {
 
         handlePlay() {
             this.isPlaying = true;
+
+            if (!this.hasBeenPlayed) {
+                this.hasBeenPlayed = true;
+                ContentService.markContentAsStarted(this.id);
+            }
 
             this.progressTracker.start();
 
