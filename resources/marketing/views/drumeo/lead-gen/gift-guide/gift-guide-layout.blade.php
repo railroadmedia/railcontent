@@ -5,7 +5,7 @@
     <meta name="description" content="Choosing gifts for the drummer in your life can be a tricky task.">
     <meta property="og:title" content="Gift Guide by Drumeo">
     <meta property="og:description" content="Choosing gifts for the drummer in your life can be a tricky task.">
-    <meta property="og:image" content="{{ cdn('promos/gift-guide/og-image.jpg') }}" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/og-image.jpg" style="display: none;">
 
     @include('drumeo._partials._fonts')
 

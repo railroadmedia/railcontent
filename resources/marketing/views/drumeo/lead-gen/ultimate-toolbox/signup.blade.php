@@ -31,7 +31,7 @@
     <header class="header toolbox">
         <div class="container max-w-6xl mx-auto px-4">
             <div class="text-center">
-                <img class="series-logo mx-auto" src="{{ cdn('lead-gen/tudt/tudt-logo.png') }}" alt="The Ultimate Drumming Toolbox">
+                <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/tudt-logo.png" alt="The Ultimate Drumming Toolbox">
                 <h1 class="hidden">The Ultimate Drumming Toolbox</h1>
                 <p>Enter your email below to open your toolbox...</p>
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [

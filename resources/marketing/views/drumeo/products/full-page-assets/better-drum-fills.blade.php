@@ -236,7 +236,7 @@
             </div>
             <div class="bio columns no-padding">
                 <p class="columns">
-                    <span class="first-letter smaller"><img src="{{ cdn('tripwires/sd/bold-j.png') }}"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
+                    <span class="first-letter smaller"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/bold-j.png"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
                     <br><br>
                     Back in 2003, Jared partnered with one of his private drum students to create simple websites with drum articles, video tutorials, and community discussion forums. As online drum lessons transitioned to becoming a full-time job, Jared launched several step-by-step DVD packs including the One-Handed Drum Roll, Bass Drum Secrets, and The Rock Drumming System.
                     <br><br>

@@ -97,7 +97,7 @@
             <div class="float-left benefit-row practice">
                 <div class="sm:w-1/2 float-right">
                     <div class="arrow-outline">
-                        <img src="{{ cdn('drum-technique-made-easy/bubble1.jpg') }}">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble1.jpg">
                     </div>
                 </div>
                 <div class="sm:w-1/2 text-wrap">
@@ -111,7 +111,7 @@
             <div class="float-left benefit-row play">
                 <div class="sm:w-1/2 float-left">
                     <div class="arrow-outline right">
-                        <img src="{{ cdn('drum-technique-made-easy/bubble2.jpg') }}">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble2.jpg">
                     </div>
                 </div>
                 <div class="sm:w-1/2 text-wrap float-right">
@@ -125,7 +125,7 @@
             <div class="float-left benefit-row support">
                 <div class="sm:w-1/2 float-right">
                     <div class="arrow-outline">
-                        <img src="{{ cdn('drum-technique-made-easy/bubble3.jpg') }}">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble3.jpg">
                     </div>
                 </div>
                 <div class="sm:w-1/2 text-wrap">
@@ -416,7 +416,7 @@
     <section class="bruce-bio">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <p class="px-3 md:px-4">
-                <span class="first-letter"><img src="{{ cdn('drum-technique-made-easy/bold-b.png') }}"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
                 <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles -- including Neil Peart, Steve Smith, and Dave Weckl.
                 <br><br> Bruce not only benefited from Freddie’s instruction for eight years, but he also developed a close personal relationship.
                 <br><br> “I became as close as one could become with him. I became Freddie’s go-to guy, house sitter, and airport runner,” Bruce told Modern Drummer in 2013. “I am the only guy I know of that actually did five clinics with him. There are too many stories to tell.”
@@ -426,9 +426,9 @@
                 <br><br> Bruce Becker’s conceptual approach to the drums is defined as “Balance + Motion = Emotion”. And through Drum Technique Made Easy, you’ll have the opportunity to study with Bruce and gain his best insights for improving your technique through 26 weekly lessons.
             </p>
             <div class="px-3 md:px-4 timeline-pic">
-                <img class="hidden lg:inline-block" src="{{ cdn('drum-technique-made-easy/timeline.jpg') }}">
-                <img class="hidden lg:hidden sm:inline-block" src="{{ cdn('drum-technique-made-easy/timeline-tablet.jpg') }}">
-                <img class="inline-block sm:hidden" src="{{ cdn('drum-technique-made-easy/timeline-mobile.jpg') }}">
+                <img class="hidden lg:inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline.jpg">
+                <img class="hidden lg:hidden sm:inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline-tablet.jpg">
+                <img class="inline-block sm:hidden" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline-mobile.jpg">
             </div>
         </div>
     </section>
@@ -438,7 +438,7 @@
             <h1>What Drummers Are<br> Saying About Bruce Becker</h1>
             <div class="drummer-testimonial featured-testimonial">
                 <div class="float-left w-full px-3 md:px-4 sm:w-5/12 picture">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/jojo-mayer.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/jojo-mayer.jpg">
                 </div>
                 <div class="float-right px-3 md:px-4 sm:w-7/12 text">
                     <h1>JoJo Mayer <span class="band">(Nerve)</span></h1>
@@ -447,24 +447,24 @@
             </div>
             <div class="float-left drummer-testimonial">
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/steve-smith.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/steve-smith.jpg">
                     <h1>Steve Smith<br> <span class="band">(Journey, Vital Information)</span></h1>
                     <p>"Bruce has managed to distill many of Fred Gruber’s essential teachings into manageable portions. Combining Freddie’s ideas with his own teaching discoveries and methods, Bruce has created a program that is vital viewing for all serious students of the drumset."</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/mark-schulman.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/mark-schulman.jpg">
                     <h1>Mark Schulman<br> <span class="band">(Pink, Cher, Foreigner)</span></h1>
                     <p>"Bruce is not only one of my best friends and the most analytical and progressive drum teacher on the planet, he is also MY teacher! I do success coaching music lessons and when any of my students want to study on a regular basis, I always refer them to Bruce no matter what their level. I tell them: Don’t waste any more time, just study with the best!"</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/david-garibaldi.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/david-garibaldi.jpg">
                     <h1>David Garibaldi<br> <span class="band">(Tower of Power)</span></h1>
                     <p>"Bruce is a tremendous educator. His years as an understudy to the late great Freddie Gruber are now serving him well. He fully understands and teaches all aspects of hand/foot technique, and is very adept at assessing what the student needs. I'm currently studying with him and look forward to where this will take me."</p>
                 </div>
             </div>
             <div class="float-left drummer-testimonial featured-testimonial">
                 <div class="float-right sm:float-left w-full px-3 md:px-4 sm:w-5/12 picture">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/dave-weckl.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/dave-weckl.jpg">
                 </div>
                 <div class="float-right px-3 md:px-4 sm:w-7/12 text">
                     <h1>Dave Weckl <span class="band">(The Dave Weckl Band, Chick Corea)</span></h1>
@@ -473,17 +473,17 @@
             </div>
             <div class="float-left drummer-testimonial">
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/daniel-glass.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/daniel-glass.jpg">
                     <h1>Daniel Glass<br> <span class="band">(Royal Crown Revue)</span></h1>
                     <p>"Not only is Bruce a fantastic player, but a master teacher in his own right. Having worked intensively with Freddie Gruber for nearly two decades, Bruce is in a unique position to not only pass along Freddie's teachings, but take them to his own place as well. He has a thorough knowledge of fundamental concepts such as balance, control, and developing the "internal clock" - key information that will dramatically enhance any drummers ability, no matter what style or skill level."</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/ralph-johnson.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/ralph-johnson.jpg">
                     <h1>Ralph Johnson<br> <span class="band">(Earth, Wind, & Fire)</span></h1>
                     <p>"The study of a musical instrument is a lifetime study. Having said that, it’s absolutely essential to find a teacher who can convey the ideas and concepts that will allow you to become a confident, technical, proficient musician. Teaching is a very special gift and Bruce Becker has it. The time that I’ve spent with Bruce has been highly informative and very edifying. I always look forward to our time together. Here’s to great teachers!"</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="{{ cdn('drum-technique-made-easy/tris-imboden.jpg') }}">
+                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/tris-imboden.jpg">
                     <h1>Tris Imboden<br> <span class="band">(Chicago)</span></h1>
                     <p>"Bruce Becker has the uncanny ability to break down and explain those subtle things that have always before eluded me in proper hand technique. Being primarily self taught, this has been of immeasurable help to me. He demystifies the mysteries in such a clear, concise, and understandable way."</p>
                 </div>
@@ -506,8 +506,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="{{ cdn('drum-technique-made-easy/macbook.png') }}" class="macbook"><br>
-                        <img src="{{ cdn('drum-technique-made-easy/logo-black.png') }}" class="blue-logo">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/macbook.png" class="macbook"><br>
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-black.png" class="blue-logo">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -655,7 +655,7 @@
 
     <section class="final">
         <div class="container clearfix lg:mx-auto max-w-6xl">
-            <div class="logo"><img src="{{ cdn('drum-technique-made-easy/logo-white.png') }}"></div>
+            <div class="logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png"></div>
 
             <h1>
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">

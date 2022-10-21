@@ -264,17 +264,17 @@
     <section class="student-reviews">
         <div class="container mx-auto clearfix">
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="{{ cdn('tripwires/ds/testimonials/geoff-arnold.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/testimonials/geoff-arnold.jpg">
                 <p>"Mike Michalkow lays down a very well thought out learning program for you, from your first whack at the skins for the newcomer, on through to a seasoned player."</p>
                 <h2>Geoff Arnold <span class="location">- Oregon</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="{{ cdn('tripwires/ds/testimonials/matt-denton.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/testimonials/matt-denton.jpg">
                 <p>"My drumming is transformed. With all of the new patterns I am learning the band I am in are blown away... Thank you, Thank you, Thank you!"</p>
                 <h2>Matt Denton <span class="location">- New Jersey</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="{{ cdn('tripwires/ds/testimonials/pedro-rios.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/testimonials/pedro-rios.jpg">
                 <p>"...all it took was to play the Drumming System DVD #1, and boy did I improve in less than 1 hour. I only wish this system was available sooner."</p>
                 <h2>Pedro Rios <span class="location">- Puerto Rico</span></h2>
             </div>
@@ -287,7 +287,7 @@
                 <h1>Mike Michalkow: 20+ Years <br class="hidden lg:inline"> of World-Class Teaching</h1>
                 <p class="hidden sm:inline">"He doesn't assume what you know or don't know; he lays it all out very simply, and lets the viewer determine how to proceed..."</p>
                 <div class="float-left w-full px-3 sm:px-4 no-padding steve-details hidden sm:inline">
-                    <img src="{{ cdn('tripwires/ds/omar.jpg') }}">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/omar.jpg">
                     <div class="float-left w-full px-3 sm:px-4 end text">
                         <h2>OMAR ALVARADO</h2>
                         <h3>Georgia</h3>
@@ -300,7 +300,7 @@
     <section class="bruce-bio">
         <div class="container mx-auto clearfix">
             <p class="float-left w-full px-3 sm:px-4">
-                <span class="first-letter"><img src="{{ cdn('tripwires/ds/bold-m.png') }}"></span>ike Michalkow has been performing, recording, and teaching drums for more than 20 years -- with a storied career that has him connecting with hundreds of thousands of drumming students and brushing shoulders with many of the most recognized performers in the industry.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/bold-m.png"></span>ike Michalkow has been performing, recording, and teaching drums for more than 20 years -- with a storied career that has him connecting with hundreds of thousands of drumming students and brushing shoulders with many of the most recognized performers in the industry.
                 <br><br>
                 Mike started playing the drums at 17 years of age under the direction of Mitch Dorge (Crash Test Dummies) and quickly made a name for himself when he started his performing career. Soon after, he attended Grant MacEwan College in Edmonton where he majored in Latin and Jazz and graduated at the top of his class.
                 <br><br>
@@ -318,17 +318,17 @@
     <section class="student-reviews">
         <div class="container mx-auto clearfix">
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="{{ cdn('tripwires/ds/testimonials/kevin-gouty.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/testimonials/kevin-gouty.jpg">
                 <p>"Mike teaching style is very patient and detailed. I am a veteran drummer of 30+ yrs and I am learning new techniques and things that I never knew"</p>
                 <h2>Kevin Gouty <span class="location">- Indiana</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="{{ cdn('tripwires/ds/testimonials/dana-meyer.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/testimonials/dana-meyer.jpg">
                 <p>"Mike made it so simple. Learning the fills has been great and after I get them down pat, I'm looking forward to demonstrating what I've learned."</p>
                 <h2>Dana Meyer <span class="location">- Nebraska</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="{{ cdn('tripwires/ds/testimonials/john-pines.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/testimonials/john-pines.jpg">
                 <p>"...Mike keeps it real, you never feel like you are being talked down to. Most importantly, the teaching style makes it easy to learn..."</p>
                 <h2>John Pines <span class="location">- Michigan</span></h2>
             </div>
