@@ -285,6 +285,7 @@ return [
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
             \App\Decorators\Content\LessonAssignmentDecorator::class,
+            \App\Decorators\Content\UnitDecorator::class,
             // this one
             //            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
             \App\Decorators\Content\ContentLikesDecorator::class,
