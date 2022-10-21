@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -16,7 +17,7 @@ class MusoraCenterContentController extends Controller
         $this->contentService = $contentService;
     }
 
-    public function showPreview($brand, $contentId)
+    public function showPreview($domain, $brand, $contentId)
     {
         ConfigService::$availableBrands = [$brand];
         ContentRepository::$pullFutureContent = true;
@@ -26,6 +27,7 @@ class MusoraCenterContentController extends Controller
         if ($content && $content['url']) {
             return redirect($content['url']);
         }
+        Log::debug("showPreview failed: $domain $brand $contentId");
         abort(404);
     }
 }

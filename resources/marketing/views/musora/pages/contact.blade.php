@@ -1,7 +1,7 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    {{-- <!-- Main --> --}}
+    {{-- Main --}}
     <title>Contact Us | Musora</title>
     <meta name="description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, Pianote, and Singeo. ">
     <meta property="og:title" content="Contact Us">
@@ -9,10 +9,12 @@
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
     <!-- Scripts -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
 @endsection
 
 <!-- Main -->
+@section('body-class', 'dark')
+
 @section('layout-body')
 
     <section class="py-24 md:py-40 text-white text-center relative">
@@ -36,11 +38,21 @@
         </div>
     </div>
 
-    <div class="bg-[#000c17]">
-        <div class="max-w-3xl mx-auto px-4 lg:px-8">
-            @include('musora._partials.forms.contact-form')
+    <section class="bg-[#000c17]">
+        <div class="max-w-3xl mx-auto px-4 lg:px-8" id="contactPageApp">
+            <contact-email-form 
+                brand="drumeo"
+                captchakey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"
+                email-subject="Support Request From Musora"
+                email-type="support-contact"
+                email-endpoint="{{url()->route('mailora.public.send') }}"
+                email-logo="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png"
+                input-label="Report your issue here.."
+                recipient="support@musora.com"
+                success-message="Your email has been sent!"
+            />
         </div>
-    </div>
+    </section>
     
     <div class="pt-16 text-white bg-[#000c17]">
         <div class="container mx-auto text-center max-w-3xl">

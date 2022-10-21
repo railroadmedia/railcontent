@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/drum-beats/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/drum-beats/lessons.php'))
 @endphp
 
 @extends('drumeo.lead-gen.partials.lesson-page-layout')
