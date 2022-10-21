@@ -1,0 +1,242 @@
+@import './_variables.scss';
+
+body {
+  &.sidebar {
+    @include medium {
+      margin-left: 250px;
+      &.sidebar-collapsed {
+        margin-left: 100px;
+        &.pianote {
+          margin-left: 100px;
+        }
+      }
+    }
+
+    @include xLarge {
+      .container:not(.fluid) {
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+    }
+  }
+
+  &.dim-sidebar #sidebar {
+    z-index: 96;
+  }
+
+  &.live #sidebar #sidebar-live-badge {
+    display: inline-block;
+  }
+}
+
+#nav {
+  .nav-inner {
+    max-width: 100%;
+
+    > .flex-row {
+      @include medium {
+        padding-left: 10px;
+        padding-right: 15px;
+      }
+    }
+
+    .nav-page-links {
+      @include large {
+        padding: 0 100px;
+      }
+    }
+  }
+}
+
+#sidebar {
+  display: none;
+  position: fixed;
+  top: 50px;
+  height: calc(100% - 50px);
+  left: 0;
+  width: 250px;
+  z-index: 99;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0,0,0,0.13), 0 0 15px rgba(0,0,0,0.11), 0 0 20px rgba(0,0,0,0.10);
+  clip-path: inset(0px -20px 0px 0px);
+  overflow-y: auto;
+
+  @include medium {
+    display: block;
+    height: calc(100% - 56px);
+    top: 56px;
+  }
+
+  .sidebar-header {
+    display: none;
+    padding-top: 12px;
+    padding-bottom: 11px;
+
+    #sidebar-close {
+      font-size: 22px;
+      line-height: 0.8;
+      padding-left: 20px;
+      padding-right: 20px;
+      cursor: pointer;
+    }
+
+    .sidebar-header-inner {
+      width: 110px;
+    }
+  }
+
+  &.mobile {
+    display: block;
+    height: 100%;
+    top: 0;
+
+    .sidebar-header {
+      display: flex;
+    }
+  }
+
+  .sidebar-section {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    h5 {
+      margin-top: 4px;
+      padding-bottom: 10px;
+
+      a {
+        font-size: 15px;
+        text-decoration: none;
+        color: #181B1B;
+      }
+    }
+  }
+
+  .sidebar-link {
+    width: 100%;
+    display: inline-block;
+    color:$sidebarLink;
+    padding-top: 8px;
+    height: 45px;
+
+    svg {
+      fill:$sidebarLink;
+    }
+
+    .sidebar-link-icon {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 16px;
+      line-height: 1em;
+      width: 40px;
+    }
+
+    .sidebar-link-title {
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 1em;
+    }
+
+    &:hover {
+      background-color: #F2F3F3;
+      
+      &.pianote svg {
+      }
+
+      .sidebar-link-title {
+        font-weight: 550;
+      }
+    }
+
+    &.active {
+      background-color: #CCD0D3;
+
+      &.drumeo {
+        color: $drumeoBlue;
+      }
+      &.drumeo svg {
+        fill: $drumeoBlue;
+      }
+      &.pianote {
+        color: $pianoteRed;
+      }
+      &.pianote svg {
+        fill: $pianoteRed;
+      }
+      &.guitareo {
+        color: $guitareoGreen;
+      }
+      &.guitareo svg {
+        fill: $guitareoGreen;
+      }
+      &.singeo {
+        color: $singeoPurple;
+      }
+      &.singeo svg {
+        fill: $singeoPurple;
+      }
+
+      .sidebar-link-title {
+        font-weight: 550;
+      }
+    }
+
+    #sidebar-live-badge {
+      display: none;
+      vertical-align: middle;
+      font-size: 10px;
+      line-height: 1em;
+      background: #F71B26;
+      padding: 4px;
+      margin-left: 5px;
+      font-weight: 600;
+    }
+  }
+
+  &.sidebar-collapsed {
+    width: 100px;
+    
+    .sidebar-section {
+      border-bottom: none;
+
+      &:not(:first-child) {
+        padding-top: 0;
+      }
+
+      &:not(:last-child) {
+        padding-bottom: 0;
+      }
+    }
+
+    .sidebar-link-container:not(.show-collapsed),
+    .sidebar-section .sidebar-section-title {
+      display: none;
+    }
+
+    .sidebar-link {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      height: 75px;
+
+      .sidebar-link-icon {
+        width: auto;
+        margin-bottom: 5px;
+      }
+
+      &.drumeo {
+
+      }
+      &.active {
+        &.drumeo {
+          background-color: #FCFCFC;
+          .sidebar-link-title {
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}

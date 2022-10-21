@@ -46,7 +46,7 @@ class UserMetricsService
             0,
             0,
             $this->getTotalCommentLikes($userId),
-            $this->getTotalMinutesPracticed($userId),
+            0,
             $this->getTotalForumLikes($userId),
         );
 
@@ -148,7 +148,9 @@ class UserMetricsService
         return $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table('railcontent_comments')
             ->join('railcontent_comment_likes', 'railcontent_comment_likes.comment_id', '=', 'railcontent_comments.id')
+            ->join('railcontent_content','railcontent_comments.content_id', '=', 'railcontent_content.id' )
             ->where('railcontent_comments.user_id', '=', $userId)
+            ->where('railcontent_content.brand','=', brand())
             ->count();
     }
 

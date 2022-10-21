@@ -1090,6 +1090,20 @@ class CustomerIoSyncEventListener
                         ->addSeconds(10)
                 )
             );
+
+            dispatch(
+                (new CustomerIoTriggerEvent(
+                    config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                    $emailInvite->getReceiversEmail(),
+                    null,
+                    config('event-data-synchronizer.customer_io_account_to_sync_all_brands') . config(
+                        'event-data-synchronizer.customer_io_saasquatch_email_invite_event_name'
+                    )
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(10)
+                )
+            );
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
