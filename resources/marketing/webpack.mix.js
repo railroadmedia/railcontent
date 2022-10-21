@@ -23,7 +23,8 @@ mix
         postCss: [tailwindcss('./resources/marketing/marketing.tailwind.config.js')],
     })
     .version()
-    .mergeManifest();
+    .mergeManifest()
+    .dump();
 
 mix.webpackConfig(webpack => {
     return {
