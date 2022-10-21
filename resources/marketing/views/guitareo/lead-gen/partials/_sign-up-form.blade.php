@@ -52,4 +52,4 @@
 
 @include('guitareo.lead-gen.partials.thank-you-alt')
 
-@include("lead-gen.partials.impact-email-sign-up-tracker")
+@include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")

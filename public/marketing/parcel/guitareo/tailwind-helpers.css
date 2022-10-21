@@ -1,0 +1,73 @@
+/*spacing*/
+.tw-aspect-1\:1,
+.aspect-1\:1 {
+    padding-bottom:100%;
+}
+
+.aspect-16\:9,
+.tw-aspect-16\:9 {
+    padding-bottom:56.25%;
+}
+
+.tw-clearfix::after {
+    content:"";
+    display:table;
+    clear:both;
+}
+
+/*backgrounds*/
+.tw-bg-guitareo,
+.bg-guitareo {
+    background-color:#00C9AC;
+}
+
+/*borders*/
+.tw-border-guitareo,
+.border-guitareo {
+    border-color:#00C9AC;
+}
+.border-navy-700 {
+    border-color:#04203C;
+}
+
+.border-navy-600 {
+    border-color:#204261;
+}
+
+/*typography*/
+
+.tw-font-roboto,
+.font-roboto {
+    font-family:"Roboto Condensed", sans-serif;
+}
+
+.font-bebas {
+    font-family:"Bebas Neue", sans-serif;
+}
+
+.tw-text-guitareo,
+.text-guitareo {
+    color:#00C9AC;
+}
+
+.text-shadow-1 {
+    text-shadow:0 0 4px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-2 {
+    text-shadow:0 0 8px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-3 {
+    text-shadow:0 0 12px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-4 {
+    text-shadow:0 0 16px rgba(0, 0, 0, 0.7);
+}
+
+img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}

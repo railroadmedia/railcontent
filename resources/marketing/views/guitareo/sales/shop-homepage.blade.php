@@ -1,12 +1,10 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
-    <title>Online Beginner Guitar Lessons | Guitareo.com</title>
+@section('meta')
+    <title>Learn to play guitar anytime with real teachers. | Guitareo.com</title>
     <meta name="description" content="Nate Savage’s step-by-step video guitar lessons for complete beginners — with topics on both electric and acoustic guitar, live lessons, progress tracking, jam tracks, community forums, and much more." />
     <meta property="og:url" content="https://www.guitareo.com"/>
-    <meta property="og:title" content="Guitareo.com: Online Beginner Guitar Lessons"/>
+    <meta property="og:title" content="Guitareo.com: Learn to play guitar anytime with real teachers."/>
     <meta property="og:description" content="Nate Savage’s step-by-step video guitar lessons for complete beginners — with topics on both electric and acoustic guitar, live lessons, progress tracking, jam tracks, community forums, and much more."/>
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
     <script type="application/ld+json">
@@ -23,13 +21,13 @@
           ]
         }
     </script>
+@endsection
 
-    @include('_partials.components.google-optimize')
-
+@section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
     <link href="/assets/marketing/homepage.css" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .lead-gen-banner {
             background: linear-gradient(to right, rgba(2, 2, 36, 0.6), rgba(2, 2, 36, 0.6)), url(https://cdn.musora.com/image/fetch/w_3000,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/header.jpg) 45% 45%/1150px;
@@ -147,7 +145,7 @@
     </style>
 @endsection
 
-@section('layout-body')
+@section('content')
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
@@ -354,7 +352,7 @@
                 <img class="logo" src="https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-purple.png">
                 <h2><em>play your first song on the guitar, start to finish, in an hour.<br class="show-for-medium">
                         Enter your email address below to get started!</em></h2>
-                <form accept-charset="UTF-8" action="/customer-io/submit-email-form" class="tw-clearfix infusion-form facebook-track-lead" method="POST">
+                <form id="GuitareoEngagementTriggerSongHourWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" class="tw-clearfix infusion-form facebook-track-lead" method="POST">
                     <input type="hidden" name="form_name" value="Song Hour">
                     <div class="w-full float-left px-2 md:w-7/12 lg:w-8/12">
                         <input class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="">
@@ -379,9 +377,9 @@
     @include("guitareo.sales.partials._footer")
 @endsection
 
-@section('layout-scripts')
+@section('scripts')
 
-    <script src="/assets/marketing/nav-footer.js"></script>
+    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script>
         $('document').ready(function() {
 
@@ -398,11 +396,11 @@
             });
         });
     </script>
-    <script src="/js/jquery.countdown-2.min.js"></script>
+    <script src="/marketing/parcel/guitareo/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
+            $('.tzcd-full').countdown('2022/08/01')
                 .on('update.countdown', function (event) {
                     var format = '%-M Minute%!M %-S Second%!S';
                     if (event.offset.totalHours > 0) {
@@ -416,7 +414,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('a limited time');
                 });
-            $('.tzcd-small').countdown('2021/11/30')
+            $('.tzcd-small').countdown('2022/08/01')
                 .on('update.countdown', function (event) {
                     var format = '%-MM %-SS';
                     if (event.offset.totalHours > 0) {
@@ -430,7 +428,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('a limited time');
                 });
-            $('.tzcd-big').countdown('2021/11/30')
+            $('.tzcd-big').countdown('2022/08/01')
                 .on('update.countdown', function (event) {
                     var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
                     if (event.offset.totalHours > 0) {

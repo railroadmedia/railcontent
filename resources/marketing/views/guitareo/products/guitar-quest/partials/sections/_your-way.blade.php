@@ -5,10 +5,10 @@
             <div class="text-center mb-12 w-3/4 m-auto md:w-full">
                 <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png", ["auto" => "format", "w" => 200]) }}" width="200px" class="mb-4">
                 <h2 class="uppercase font-bison-bold mb-6 text-5xl md:text-6xl">
-                    <span class="">Play</span> 
-                    <span class="text-goldenrod underline">Your Way</span> 
+                    <span class="">Play</span>
+                    <span class="text-goldenrod underline">Your Way</span>
                 </h2>
-                <p class="font-semibold md:text-lg">Start today with any computer, laptop, tablet, or smartphone.</p>   
+                <p class="font-semibold md:text-lg">Start today with any computer, laptop, tablet, or smartphone.</p>
             </div>
             <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread.png", ["auto" => "format", "w" => 1000]) }}" class="hidden md:block mb-14">
             <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread-mobile.png", ["auto" => "format", "w" => 1000]) }}" class="md:hidden mb-14">
@@ -22,7 +22,7 @@
                         <p class="font-bold text-xl font-bison-bold mb-1">Step-By-Step Videos</p>
                         <p class="text-sm">Rob Scallon is your guide with helpful step-by-step videos for every quest!</p>
                     </li>
-                    <li class="w-full relative custom-list-style pl-4"> 
+                    <li class="w-full relative custom-list-style pl-4">
                         <p class="font-bold text-xl font-bison-bold mb-1">11 Exclusive Songs</p>
                         <p class="text-sm">You’ll get exclusive songs from a bunch of genres (and varying levels of silliness!)</p>
                     </li>

@@ -8,45 +8,45 @@
     <ul class="flex items-center text-center uppercase m-0 px-3 list-none font-primary font-semibold hidden lg:inline-flex">
         <li class="px-3">
             <a @click.stop="atElement = 'your_quest'"
-               href="#your_quest" 
-               class="text-white transition relative duration-200 linear text-goldenrod-hover" 
-               :class="{ 'active' : atElement==='your_quest' }" 
+               href="#your_quest"
+               class="text-white transition relative duration-200 linear text-goldenrod-hover"
+               :class="{ 'active' : atElement==='your_quest' }"
             >
                Your Quest
             </a>
         </li>
         <li class="px-3">
             <a @click.stop="atElement = 'your_map'"
-               href="#your_map" 
-               class="text-white transition relative duration-200 linear text-goldenrod-hover" 
-               :class="{ 'active' : atElement==='your_map' }" 
+               href="#your_map"
+               class="text-white transition relative duration-200 linear text-goldenrod-hover"
+               :class="{ 'active' : atElement==='your_map' }"
             >
                 Your Map
             </a>
         </li>
         <li class="px-3">
             <a @click.stop="atElement = 'your_skills'"
-               href="#your_skills" 
-               class="text-white transition relative duration-200 linear text-goldenrod-hover" 
-               :class="{ 'active' : atElement==='your_skills' }" 
+               href="#your_skills"
+               class="text-white transition relative duration-200 linear text-goldenrod-hover"
+               :class="{ 'active' : atElement==='your_skills' }"
             >
             Your Skills
             </a>
         </li>
         <li class="px-3">
             <a @click.stop="atElement = 'your_teacher'"
-               href="#your_teacher" 
-               class="text-white transition relative duration-200 linear text-goldenrod-hover" 
-               :class="{ 'active' : atElement==='your_teacher' }" 
+               href="#your_teacher"
+               class="text-white transition relative duration-200 linear text-goldenrod-hover"
+               :class="{ 'active' : atElement==='your_teacher' }"
             >
                 Your Teacher
             </a>
         </li>
         <li class="px-3">
             <a @click.stop="atElement = 'your_way'"
-               href="#your_way" 
-               class="text-white transition relative duration-200 linear text-goldenrod-hover" 
-               :class="{ 'active' : atElement==='your_way' }" 
+               href="#your_way"
+               class="text-white transition relative duration-200 linear text-goldenrod-hover"
+               :class="{ 'active' : atElement==='your_way' }"
             >
                 Your Way
             </a>

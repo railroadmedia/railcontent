@@ -72,7 +72,8 @@
             "app/Modules/Brand/helpers/brand_helpers.php",
             "app/Modules/Brand/helpers/prices.php",
             "app/Modules/Brand/helpers/singeoprices.php",
-            "app/Modules/Brand/helpers/pianoteprices.php"
+            "app/Modules/Brand/helpers/pianoteprices.php",
+            "app/Modules/Brand/helpers/guitareoprices.php"
         ]
     },
     "autoload-dev": {

@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout')
 
-@section('head-includes')
+@section('meta')
     <title>The Guitarist's Toolbox by Nate Savage</title>
     <meta name="description"
             content="Sign up and you'll get a collection of exclusive guitar courses with Nate Savage covering a wide range of essential topics."/>
@@ -13,9 +13,8 @@
     @parent
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -23,17 +22,25 @@
     </script>
 @stop
 
-@section('layout-body')
+@section('body')
     <header class="header blue" style="background:#1a1c1d;">
         <div class="container clearfix mx-auto max-w-6xl flex flex-col">
-            <img class="logo" src="https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+            <picture>
+                <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                <img class="logo" src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+            </picture>
             <div class="flex flex-col sm:flex-row">
                 <div class="text-center sm:w-5/12 preview-circle">
-                    <img class="circle-nate" src="https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
+                    <picture>
+                        <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
+                        <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
+                        <img class="circle-nate" src="https://cdn.musora.com/image/fetch/w_270,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg" alt="nate-savage">
+                    </picture>
                 </div>
                 <div class="px-2 sm:px-8 sm:w-7/12">
                     <h2>Enter your email below to get my <br> free collection of guitar courses!</h2>
-                    @include("lead-gen.partials._sign-up-form-tw", [
+                    @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                     "stacked" => true,
                         "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
                         "formName" => 'The Guitarists Toolbox',
@@ -125,12 +132,16 @@
             style="background-image:url(https://guitareo.s3.amazonaws.com/toolbox/bottom-background.jpg);">
         <div class="container clearfix mx-auto max-w-6xl">
             <div class="logo">
-                <img src="https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+                <picture>
+                    <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                    <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                    <img src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+                </picture>
             </div>
             <p>
                 Enter your email below to get <br class="lg:hidden"> a free beginner guitar course!</p>
 
-            @include("lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                 "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
                 "formName" => 'The Guitarists Toolbox',
                 "submitButtonColor" => "#408beb",
@@ -139,8 +150,9 @@
     </section>
 
     <div class="reveal large blue" id="getAccess" data-reveal data-reset-on-close="true" style="background:#1a1c1d;">
-        <p>Enter your email below to get a free beginner guitar <br class="sm:hidden"> course and start learning music theory.</p>
-        @include("lead-gen.partials._sign-up-form-tw", [
+        <p>Enter your email below to get a free beginner guitar <br
+                    class="sm:hidden"> course and start learning music theory.</p>
+        @include("guitareo.lead-gen.partials._sign-up-form-tw", [
            "stacked" => true,
             "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
             "formName" => 'The Guitarists Toolbox',

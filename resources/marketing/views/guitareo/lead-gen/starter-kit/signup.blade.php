@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout')
 
-@section('head-includes')
+@section('meta')
     <title>The Beginner Guitar Starter Kit by Nate Savage</title>
     <meta name="description" content="Sign up and you'll get an exclusive beginner guitar course with Nate Savage designed specifically for new guitarists."/>
 
@@ -11,9 +11,8 @@
     @parent
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -27,15 +26,19 @@
     </script>
 @stop
 
-@section('layout-body')
+@section('body')
     <header class="header" style="background: url(https://guitareo.s3.amazonaws.com/starter-kit/bg-tile.jpg);">
         <div class="container clearfix mx-auto max-w-6xl flex flex-col">
             <div class="flex flex-col-reverse sm:flex-row">
                 <div class="sm:w-3/4">
-                    <img class="logo" src="https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
+                    <picture>
+                        <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
+                        <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
+                        <img class="logo" src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png" alt="logo">
+                    </picture>
                 </div>
                 <div class="text-center sm:w-1/4">
-                    <img class="circle-nate" src="https://guitareo.s3.amazonaws.com/gl-sales/nate-circle.png">
+                    <img class="circle-nate" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://guitareo.s3.amazonaws.com/gl-sales/nate-circle.png" alt="nate-circle">
                 </div>
             </div>
             <div>
@@ -131,12 +134,16 @@
     <section class="final">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <div class="logo">
-                <img src="https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
+                <picture>
+                    <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
+                    <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
+                    <img src="https://cdn.musora.com/image/fetch/w_330,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png" alt="logo">
+                </picture>
             </div>
             <p>
                 Enter your email below to get <br class="lg:hidden">
                 a free beginner guitar course!</p>
-            @include("lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                 "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
                 "formName" => 'The Beginner Guitar Starter',
             ])
@@ -150,9 +157,9 @@
     <div class="reveal w-full text-center" id="getAccess" data-reveal data-reset-on-close="true">
         <p>Enter your email below to get a free beginner guitar <br class="hidden sm:inline">
             course and start learning music theory.</p>
-        @include("lead-gen.partials._sign-up-form-tw", [
+        @include("guitareo.lead-gen.partials._sign-up-form-tw", [
             "stacked" => true,
-           "outline" => true,
+            "outline" => true,
             "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
             "formName" => 'The Beginner Guitar Starter',
         ])

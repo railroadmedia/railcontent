@@ -2,7 +2,7 @@
 
 @section('body-content')
     @include('guitareo.lead-gen.toolbox._header', [
-        "noBack" => true,
+    "noBack" => true,
     ])
 
     @php

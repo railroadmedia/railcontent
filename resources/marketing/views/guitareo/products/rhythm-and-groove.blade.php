@@ -1,4 +1,4 @@
-@extends('layouts.global-vue-layout')
+@extends('guitareo._partial.global-vue-layout')
 
 @section('meta')
     @parent
@@ -15,34 +15,34 @@
 @section('styles')
     @parent
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 @stop()
 
 
 @section('content')
-    @include("sales.partials._nav", [
+    @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('shop.elements.promo-banner', [
+    @include('guitareo._partials.promo-banner', [
                 "name" => "Rhythm & Groove",
-                "fullPrice" => App\Prices::$rhythmAndGrooveFull,
-                "price" => App\Prices::$rhythmAndGroove,
+                "fullPrice" => GuitareoPrices::$rhythmAndGrooveFull,
+                "price" => GuitareoPrices::$rhythmAndGroove,
                 "noBreadcrumb" => true
             ])
 
     <header class="px-5 sm:px-6 py-8 lg:py-10 text-white text-center bg-cover bg-center relative lazyload" style="background-color:#020b17;" data-bg="https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/header.jpg">
         <div class="container mx-auto max-w-5xl relative z-10">
-            <img class="h-16 sm:h-16 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg"><br>
-            <i class="fas fa-play play-button mt-64 autoplay-video" data-open="trailer"></i>
-            <h2 class="mt-5"><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
+            <img class="h-16 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg"><br>
+            <i class="fas fa-play play-button mt-56 sm:mt-80 mb-5 sm:mb-24 lg:mb-28 autoplay-video" data-open="trailer"></i>
+            <h2><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
             <a class="join my-3 md:my-4 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
             <h3>
-                @if(\App\Prices::$rhythmAndGrooveFull > \App\Prices::$rhythmAndGroove)
-                    <s class="opacity-60">${{ \App\Prices::$rhythmAndGrooveFull }}</s>
+                @if(GuitareoPrices::$rhythmAndGrooveFull > GuitareoPrices::$rhythmAndGroove)
+                    <s class="opacity-60">${{ GuitareoPrices::$rhythmAndGrooveFull }}</s>
                 @endif
-                <strong class="">Only ${{ \App\Prices::$rhythmAndGroove }}</strong> {{--<span style="font-size: 75%;"><em>({{ round(100 - (100 * (\App\Prices::$rhythmAndGroove / \App\Prices::$rhythmAndGrooveFull))) }}% off)</em></span>--}}</h3>
+                <strong class="">Only ${{ GuitareoPrices::$rhythmAndGroove }}</strong> {{--<span style="font-size: 75%;"><em>({{ round(100 - (100 * (GuitareoPrices::$rhythmAndGroove / GuitareoPrices::$rhythmAndGrooveFull))) }}% off)</em></span>--}}</h3>
             <p class="leading-tight mt-2"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
                     <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
         </div>
@@ -99,7 +99,7 @@
             <h2 class="leading-normal"><strong>Make your chords<br class="inline sm:hidden"> come alive.</strong></h2>
             <p class="leading-normal mt-2 sm:mt-4 mb-8 sm:mb-12">Get in the groove to elevate your guitar playing. You’ll go from learning the most basic strum<br class="hidden sm:inline">
                 patterns to exciting rhythmic techniques you can throw into any song or practice session.</p>
-            
+
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
                     <div data-open="meetSami" class="cursor-pointer autoplay-video relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_meet.jpg">
@@ -253,11 +253,11 @@
             {{--<p class="text-coaches tracking-widest">LIMITED TIME OFFER</p>--}}
             <a class="join my-2 md:my-3 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
             <h3>
-                @if(\App\Prices::$rhythmAndGrooveFull > \App\Prices::$rhythmAndGroove)
-                    <s class="opacity-60">${{ \App\Prices::$rhythmAndGrooveFull }}</s>
+                @if(GuitareoPrices::$rhythmAndGrooveFull > GuitareoPrices::$rhythmAndGroove)
+                    <s class="opacity-60">${{ GuitareoPrices::$rhythmAndGrooveFull }}</s>
                 @endif
-                <strong class="">Only  ${{ \App\Prices::$rhythmAndGroove }}</strong>
-                    {{--<em style="font-size: 70%;">({{ round(100 - (100 * (\App\Prices::$rhythmAndGroove / \App\Prices::$rhythmAndGrooveFull))) }}% off)</em>--}}
+                <strong class="">Only  ${{ GuitareoPrices::$rhythmAndGroove }}</strong>
+                    {{--<em style="font-size: 70%;">({{ round(100 - (100 * (GuitareoPrices::$rhythmAndGroove / GuitareoPrices::$rhythmAndGrooveFull))) }}% off)</em>--}}
             </h3>
             <p class="leading-tight mt-4"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
                 <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
@@ -301,19 +301,19 @@
         </div>
     @endforeach
 
-    @include("sales.partials._footer")
+    @include("guitareo.sales.partials._footer")
 @stop
 
 @section('scripts')
     @parent
-    <script src="/assets/js/modal.js"></script>
-    <script src="{{ asset('assets/marketing/nav-footer.js') }}"></script>
+    <script src="/marketing/parcel/guitareo/modal.js"></script>
+    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="/assets/js/modal-autoplay.js"></script>
+    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()
