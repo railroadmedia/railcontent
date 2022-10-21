@@ -6,9 +6,7 @@
     Next Steps
 @stop
 
-@section('video')
-    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/488587484" frameborder="0" allowfullscreen></iframe>
-@stop
+@section('video', '488587484')
 
 @section('lesson-number', 'Bonus Lesson')
 

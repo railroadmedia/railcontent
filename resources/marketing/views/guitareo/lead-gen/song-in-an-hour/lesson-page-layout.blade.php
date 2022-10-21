@@ -3,7 +3,7 @@
 @section('meta')
     @parent
     <meta name="robots" content="noindex">
-    <title>@if(!empty($title)) {{ $title }} @endif | 1-Hour Challenge</title>
+    <title>@hasSection('title') @yield('title') @endif | 1-Hour Challenge</title>
     <meta name="description" content="Rob Scallon will lead you on a guitar adventure with 9 free videos to gain the fundamentals, transition between chords, and play a full song from start to finish. Are you up for the challenge?"/>
 
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/og-image.jpg">
@@ -270,7 +270,7 @@
             </div>
             <div class="title-header-interaction text-center">
                 <div class="px-2 md:px-3">
-                    <h3><strong>@if(!empty($title)) {{ $title }} @endif</strong></h3>
+                    <h3><strong>@hasSection('title') @yield('title') @endif</strong></h3>
                     @hasSection('lesson-number')
                         <p class="text-yellow mt-1 sm:mt-2">@yield('lesson-number')</p>
                     @endif
