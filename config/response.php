@@ -7,6 +7,7 @@ return [
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
             'type',
+            'instrument',
             'published_on',
             'status',
             'fields.title',
@@ -150,9 +151,8 @@ return [
 
         'coach-filter' => [
             'id',
-            'fields.name',
+            'name',
             'data.head_shot_picture_url',
-            'type',
         ],
 
         'pack-bundle' => [
@@ -2063,6 +2063,7 @@ return [
             'data.description',
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
+            'instrument',
             'completed',
             'started',
             'progress_percent',

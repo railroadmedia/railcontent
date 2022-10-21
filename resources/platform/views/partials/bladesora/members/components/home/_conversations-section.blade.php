@@ -24,6 +24,7 @@
                     "title" => $post->title,
                     "date" => \Carbon\Carbon::parse($post->updated_at)->diffForHumans(),
                     "author" => $post->user->display_name,
+                    "author_access_level"=>$post->user->access_level,
                     "post" =>  substr(strip_tags($post->content),0,255),
                     "url" => url()->route('forums.jump-to-post', ['brand' => brand(), 'postId' => $post->id])
                 ])

@@ -42,7 +42,7 @@
     </div>
 
     @include("singeo.sales.partials._footer")
-
+    
     <script src="{{ asset('marketing/parcel/singeo/manifest.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/vendor.js') }}"></script>
     <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
