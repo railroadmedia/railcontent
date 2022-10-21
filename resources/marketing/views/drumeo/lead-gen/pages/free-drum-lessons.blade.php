@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/pages/free-drum-lesson-data.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/pages/free-drum-lesson-data.php'))
 @endphp
 
 @extends('drumeo._partials.layout-template')

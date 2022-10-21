@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/fastest-way-to-get-faster/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/fastest-way-to-get-faster/lessons.php'))
 @endphp
 
 @extends('drumeo.lead-gen.partials.lesson-page-layout')
