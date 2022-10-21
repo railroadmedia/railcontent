@@ -19,7 +19,6 @@ class MusoraCenterContentController extends Controller
 
     public function showPreview($domain, $brand, $contentId)
     {
-        if ($contentId) $contentId = str_replace(')', '', $contentId);
         ConfigService::$availableBrands = [$brand];
         ContentRepository::$pullFutureContent = true;
 
@@ -28,7 +27,7 @@ class MusoraCenterContentController extends Controller
         if ($content && $content['url']) {
             return redirect($content['url']);
         }
-        Log::debug("showPreview failed: $domain $brand $contentId)");
+        Log::debug("showPreview failed: $domain $brand $contentId");
         abort(404);
     }
 }
