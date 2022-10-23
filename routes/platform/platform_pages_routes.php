@@ -16,6 +16,7 @@ use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 
@@ -270,6 +271,9 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->whereIn('primaryPage', ['method'])
             ->name('platform.content.fourth-level');
+
+        Route::get('/{brand}/content/{contentId}',
+            [MusoraCenterContentController::class,'showPreview']);
 
         Route::get(
             '/jump-to-content-id/{contentId}',
