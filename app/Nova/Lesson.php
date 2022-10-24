@@ -32,7 +32,7 @@ class Lesson extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->where('product_types.name', 'Lesson')->select('products.*');
+            ->where('product_types.name', 'Lessons')->select('products.*');
     }
 
     public function fields(NovaRequest $request)
@@ -42,7 +42,7 @@ class Lesson extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Lesson')->first()->id),
+            Hidden::make('product_type_id', 'product_type_id')->default(ProductType::where('name', '=', 'Lessons')->first()->id),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),
             //slug field for displaying to use a tag

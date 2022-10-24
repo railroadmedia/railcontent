@@ -29,7 +29,7 @@ class Bundle extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->where('product_types.name', 'Bundle')->select('products.*');
+            ->where('product_types.name', 'Bundles')->select('products.*');
     }
 
     public function fields(NovaRequest $request)
@@ -39,7 +39,7 @@ class Bundle extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundle')->first()->id),
+            Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundles')->first()->id),
             Text::make('Name')->required()->sortable(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
