@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/courses/full/gavins-grooves/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/courses/full/gavins-grooves/lessons.php'))
 @endphp
 
 @extends('drumeo.lead-gen.courses.full.lesson-index')

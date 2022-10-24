@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/rock-drumming-masterclass/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/rock-drumming-masterclass/lessons.php'))
 @endphp
 
 @extends('drumeo.lead-gen.rock-drumming-masterclass.lesson-page')

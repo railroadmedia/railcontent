@@ -36,7 +36,7 @@
         });
     </script>
     <script src="{{ asset('/marketing/parcel/js/drumeo/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/js/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
 @stop()
 
 @section('layout-body')

@@ -3,7 +3,7 @@
 @section('global-head')
     @parent
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet"> --}}
-    <link rel="preload" href="{{ mix('marketing/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ ('marketing/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}"></noscript>
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
@@ -99,11 +99,11 @@
     </div>
 
     @include("singeo.sales.partials._footer")
-
     <script src="{{ asset('marketing/parcel/singeo/manifest.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/vendor.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/app.js') }}"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>

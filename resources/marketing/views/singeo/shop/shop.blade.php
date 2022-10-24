@@ -345,6 +345,7 @@
     <script src="{{ asset('marketing/parcel/singeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/app.js') }}"></script>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>

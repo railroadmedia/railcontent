@@ -107,11 +107,3 @@
     <script src="{{ asset('marketing/parcel/singeo/manifest.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/vendor.js') }}"></script>
     <script src="{{ asset('marketing/parcel/singeo/app.js') }}"></script>
-@stop
-=======
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script src="{{ mix('marketings/js/manifest.js') }}"></script>
-    <script src="{{ mix('marketings/js/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/app.js') }}"></script>
-@stop
->>>>>>> master

@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/hand-technique/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/hand-technique/lessons.php'))
 @endphp
 
 @extends('drumeo.lead-gen.lead-gen-layout-tw')
@@ -12,10 +12,10 @@
 @stop
 
 @section('content')
-    <header class="header" style="background-image:url({{ cdn('lead-gen/dtme/bg.jpg') }});">
+    <header class="header" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/dtme/bg.jpg);">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="text-center">
-                <img class="series-logo slim mx-auto" src="{{ cdn('lead-gen/dtme/logo-slim.png') }}" alt="Hand Technique">
+                <img class="series-logo slim mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/dtme/logo-slim.png" alt="Hand Technique">
                 <h1 class="hidden">Hand Technique</h1>
             </div>
         </div>

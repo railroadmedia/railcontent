@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/courses/full/subdivision-challenge/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/courses/full/subdivision-challenge/lessons.php'))
 @endphp
 
 @extends('drumeo.lead-gen.partials.lesson-page-layout')

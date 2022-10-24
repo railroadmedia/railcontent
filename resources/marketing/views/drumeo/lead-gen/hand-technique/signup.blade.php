@@ -25,10 +25,10 @@
 @stop
 
 @section('content')
-    <header class="header" style="background-image:url({{ cdn('lead-gen/dtme/bg.jpg') }});">
+    <header class="header" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/dtme/bg.jpg);">
         <div class="container max-w-6xl mx-auto px-4">
             <div class="text-center">
-                <img class="series-logo mx-auto" src="{{ cdn('lead-gen/dtme/logo.png') }}" alt="Hand Technique">
+                <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/dtme/logo.png" alt="Hand Technique">
                 <p>Enter your email address <br class="inline sm:hidden">
                     below to unlock your lessons...</p>
 

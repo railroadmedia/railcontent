@@ -1,5 +1,5 @@
 @php
-  require_once(resource_path('views/lead-gen/grooves-of-john-bonham/lessons.php'))
+  require_once(resource_path('marketing/views/drumeo/lead-gen/grooves-of-john-bonham/lessons.php'))
 @endphp
 
 @extends('drumeo._partials.layout-template')
@@ -67,7 +67,7 @@
 
     @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

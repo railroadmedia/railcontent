@@ -10,7 +10,7 @@
 
     <script src="https://www.googleoptimize.com/optimize.js?id=GTM-WP9MPV8"></script>
 
-    @include('drumeo._partials._favicons')
+    @include('_partials.layout.favicons.drumeo-favicons')
 
     @yield('global-head')
 

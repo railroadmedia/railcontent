@@ -12,7 +12,7 @@
     <meta property="og:description" content="Introduce your kids to drumming through entertaining shows.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._favicons')
+    @include('_partials.layout.favicons.drumeo-favicons')
     @include('drumeo._partials._fonts')
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -133,7 +133,7 @@
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script>
