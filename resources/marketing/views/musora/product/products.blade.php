@@ -251,10 +251,10 @@
                             "cardDescription" => $product->short_desc,
                             "fullPrice" => $product->price,
                             "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
-                            "physical" => true,
                             "sizes" => $product->sizes,
                             "soldOut" => $product->sold_out,
                             "size_case_sensitive" => $product->size_case_sensitive,
+                            "category" => strtolower($product->productType->name),
                         ])
                     }
                     @endforeach
