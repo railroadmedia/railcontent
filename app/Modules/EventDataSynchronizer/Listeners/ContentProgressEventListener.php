@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
+use App\Maps\ContentTypes;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use App\Services\UserMetricsService;
 use Railroad\Points\Services\UserPointsService;
@@ -305,7 +306,7 @@ class ContentProgressEventListener
             // other singular lesson types
             if (in_array(
                 $content['type'],
-                config('railcontent.singularContentTypes', [])
+                ContentTypes::singularContentTypes()
             )) {
                 $pointAmount =
                     config('xp_ranks.difficulty_xp_map')[$content->fetch('fields.difficulty')]
