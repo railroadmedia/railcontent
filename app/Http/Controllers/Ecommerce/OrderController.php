@@ -270,7 +270,7 @@ class OrderController extends Controller
             ->getContent();
 
         return view(
-            'order-form.order-form',
+            'drumeo.pages.order-form',
             [
                 'cart' => $this->cartService->toArray(),
                 'billingAddress' => $billingAddress->toArray(),
