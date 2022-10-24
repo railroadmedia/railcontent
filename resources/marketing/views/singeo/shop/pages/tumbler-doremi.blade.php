@@ -12,8 +12,8 @@
 @section('shop')
     @include('singeo.shop.partials._shop-nav', [
         "name" => "Singeo Do-Re-Mi Tumbler",
-        "fullPrice" => App\Prices::$tumblerFull,
-        "price" => App\Prices::$tumbler,
+        "fullPrice" => SingeoPrices::$tumblerFull,
+        "price" => SingeoPrices::$tumbler,
         "clothing" => true
     ])
 @endsection
@@ -27,8 +27,8 @@
 
     @include('singeo.shop.partials.sidebar', [
         "sku" => "wallflower-tumbler",
-        "fullPrice" => App\Prices::$tumblerFull,
-        "price" => App\Prices::$tumbler,
+        "fullPrice" => SingeoPrices::$tumblerFull,
+        "price" => SingeoPrices::$tumbler,
     ])
 @endsection
 

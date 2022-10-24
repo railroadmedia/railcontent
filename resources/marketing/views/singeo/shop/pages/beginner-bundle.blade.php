@@ -2,7 +2,7 @@
 
 @section('head-includes')
     @parent
-    
+
     <title>The Beginner Bundle</title>
     <meta name="description" content="You CAN Sing! And this is the perfect place to start.">
     <meta property="og:description" content="You CAN Sing! And this is the perfect place to start.">
@@ -20,7 +20,7 @@
             'name' => '6-Month Singeo Membership',
             'price' => '$90/six months',
             'priceColor' => 'orange',
-            'fullPrice' => \App\Prices::$singeoMembership6Month,
+            'fullPrice' => SingeoPrices::$singeoMembership6Month,
             'discountedPrice' => 90,
             'desc' => 'Take your voice to new levels without the huge commitment (and the extra cost). Get unlimited access to singing lessons, routines, and a karaoke library with hundreds of your favorite songs for fun practice. Submit performance videos and receive feedback from your teachers during our weekly Live Q&A sessions, or reach out to our support team any time you have questions.',
             'freeBonus' => false,
@@ -48,8 +48,8 @@
 @section('banner')
     @include('singeo.shop.partials.promo-banner', [
                 "name" => "The Beginner Bundle",
-                "fullPrice" => App\Prices::$singeoMembership6MonthFull,
-                "price" => App\Prices::$singeoMembership6Month,
+                "fullPrice" => SingeoPrices::$singeoMembership6MonthFull,
+                "price" => SingeoPrices::$singeoMembership6Month,
                 "noBreadcrumb" => true
             ])
 @endsection
@@ -66,8 +66,8 @@
         "logo" => "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-logo.png",
         "bundle" => true,
         "sku" => "products[singeo-6-month-recurring-membership]=1&products[singing-starter-kit]=1&locked=true",
-        "fullPrice" => App\Prices::$singeoMembership6MonthFull,
-        "price" => App\Prices::$singeoMembership6Month,
+        "fullPrice" => SingeoPrices::$singeoMembership6MonthFull,
+        "price" => SingeoPrices::$singeoMembership6Month,
         "specialText" => "+$19 In Bonuses",
         "guaranteeBadge" => true,
         "soldOut" => true,

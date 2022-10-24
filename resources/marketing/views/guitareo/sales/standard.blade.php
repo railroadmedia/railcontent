@@ -1,52 +1,69 @@
 @extends('guitareo.sales.standard-layout', [
-    "openVersion" => true
+"openVersion" => true,
 ])
+{{--"trialVersion" => true,--}}
 
-@section('head-includes')
-    @parent
-
-    <title>Online guitar lessons that care about you. | Guitareo.com</title>
+@section('meta')
+    <title>Learn to play guitar anytime with real teachers. | Guitareo.com</title>
     <meta property="og:url" content="https://www.guitareo.com"/>
-    <meta property="og:title" content="Guitareo.com: Online guitar lessons that care about you."/>
+    <meta property="og:title" content="Guitareo.com: Learn to play guitar anytime with real teachers."/>
+    @parent
 @endsection
 
 @section('promo-banner')
-    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-3 lg:px-5 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:radial-gradient(#022040, #01050f 80%);">
-        <div class="container mx-auto relative z-10 max-w-6xl">
-            <img class="h-16 sm:h-28 lg:h-36 mb-3 md:mb-5" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/march/play-better-solos-green.png">
-            {{--<h1 class="font-bebas leading-none mb-1 text-5xl md:text-6xl --}}{{--mb-3 md:mb-5--}}{{--">PLAY  <span class="text-coaches">BETTER SOLOS</span></h1>--}}
-            <p class="leading-tight mb-3 md:mb-5 uppercase"><strong>SAVE 21% ON GUITAREO &<br class="inline sm:hidden"> GET $253 IN FREE BONUSES
-                    {{--<br><span class="text-coaches">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span>--}}
-                </strong></p>
-            <p class="leading-relaxed text-light-navy mb-8 max-w-3xl">Stop noodling around with the same old tired licks. Break out of your pentatonic box and learn how to play solos that actually sound good.
-                <br><br>
-                This month you’ll find Your New Sounds For Soloing with a BRAND NEW course launching inside Guitareo. And to celebrate, you’ll save 21% on your membership + get lifetime access to Guitar Technique Made Easy and The Guitar System for FREE.</p>
-            <div class="max-w-lg lg:max-w-2xl mx-auto relative">
-                <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/688169456" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    <section class="py-10 md:py-20 bg-center bg-cover bg-no-repeat" style="background-image:url('https://pianote.s3.amazonaws.com/sales/promos/piano-month/practice_better_promo_bg.png')">
+        <div class="max-w-md md:max-w-5xl mx-auto text-white px-2 lg:px-4">
+            <div class="md:flex md:items-center md:gap-6 mb-10 text-center md:text-left">
+                <div class="md:w-3/5 mb-6 md:mb-0">
+                    <img class="h-16 md:h-20 lg:h-24 mb-4" src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/scary_logo_coloured.png" alt="scary good lesson logo">
+                    <p class="mb-2 leading-tight">
+                        <b>JOIN GUITAREO + GET 3 TRICK-FREE <br class="md:hidden">TREATS WORTH $441</b>
+{{--                        <br>--}}
+{{--                        <span class="tzcd-full text-coaches uppercase hidden md:inline"></span>--}}
+{{--                        <span class="tzcd-small text-coaches uppercase md:hidden"></span>--}}
+                    </p>
+                    <p>
+                        Don’t let guitar theory haunt you.
+                        When you join today, you’ll get full access to the Guitareo METHOD – a 10-level curriculum designed to eliminate boring theory lessons AND help you to play music right away. <br><br>
+                        You will have loads of fun advancing your guitar skills with resources such as play-along tracks and guitar challenges. <br><br>
+                        Now that’s scary good. <br><br>
+                        And as a special Halloween treat, you’ll also get LIFETIME access to three of the most popular lesson packs in Guitareo – so you can continue to unlock new guitar skills by playing songs you love.
+                    </p>
                 </div>
-                <img style="transform: translate(100%, -50%);" class="absolute hidden sm:inline top-1/2 -right-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/left-spread-guitareo.png">
-                <img style="transform: translate(-100%, -50%);" class="absolute hidden sm:inline top-1/2 -left-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/right-spread-guitareo.png">
+                <div class="md:w-2/5">
+                    <img class="h-96 md:h-auto" src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/collage.png" alt="collage">
+                </div>
+            </div>
+            <div class="text-center">
+                <a class="join smaller md:w-52 lg:w-60" href="#orderNow" style="color:black;">See the deal</a>
             </div>
         </div>
     </section>
 @endsection
 
 @section('sticky-bar')
-
-    <div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #97fabf, #9ddcf7);"></div>
-    <a href="#customize-anchor" style="background:linear-gradient(to bottom, #97fabf, #9ddcf7);"
-            class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">
-        <div class="container mx-auto relative">
-            <div class="inline-block align-middle text-left">
-                <img class="inline-block align-middle mr-2 h-8" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/march/play-better-solos-black.png">
-                {{--<h5 class="leading-none font-bebas inline-block align-middle mx-auto text-2xl mr-2 h-8 py-1.5 px-2 bg-black rounded-md text-white">PLAY BETTER SOLOS</h5>--}}
-                <p class="inline-block align-middle mx-auto font-bebas  leading-none sm:text-lg sm:leading-none h-8 text-black">Save 21% on Guitareo &<br> Get $254 In FREE BONUSES</p>
-            </div>
-        </div>
-    </a>
+   <div class="h-10 relative w-full block"></div>
+   <a href="#customize-anchor" {{--style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/september/sticky_bar.jpg)"--}}
+           class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md z-0 mx-auto -mt-10 text-xs">
+       <div class="relative">
+        <div class="absolute inset-0" style="background:radial-gradient(50.22% 125.94% at 0% 0%, #00C9AC 0%, #E1FFFB 100%); transform:rotate(-180deg)"></div>
+           <div class="inline-block align-middle text-left py-1 relative">
+               <div class="inline-block leading-none font-bebas align-middle mx-auto text-2xl mr-2{{--py-0.5 px-1 bg-black rounded-md--}}text-white">
+                   <img class="h-7 sm:h-8" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/scary_logo.png" alt="play-better-solos">
+               </div>
+{{--                --}}{{--<h5 class="leading-none font-bebas inline-block align-middle mx-auto text-2xl mr-2 h-8 py-1.5 px-2 bg-black rounded-md text-white">PLAY BETTER SOLOS</h5>--}}
+               <p class="inline-block align-middle mx-auto text-black leading-none text-base font-bebas">GET SCARY GOOD GUITAR LESSONS <br>+ 3 TRICK-FREE TREATS WORTH $391</p>
+           </div>
+       </div>
+   </a>
 @endsection
 
+{{--@section('final')--}}
+{{--    @include("guitareo.sales.partials._subscribe-options")--}}
+{{--@endsection--}}
+
+{{--@section('start-button', '/choose-your-trial/')--}}
 @section('final')
-    @include("guitareo.sales.partials._subscribe-bonus-tiles")
+    {{-- @include("guitareo.sales.partials._final-trial", [ "sevenDay" => true, "url" => "/choose-your-trial/" ]) --}}
+    @include('guitareo.sales.partials._subscribe-bonus-tiles')
 @endsection

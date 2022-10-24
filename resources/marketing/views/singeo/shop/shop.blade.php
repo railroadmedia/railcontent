@@ -1,4 +1,4 @@
-@extends('global-layout')
+@extends('singeo._partials.global-layout')
 
 @section('head-includes')
     @parent
@@ -11,8 +11,8 @@
     <meta property="og:url" content="https://www.singeo.com/shop/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
 
@@ -243,7 +243,7 @@
                             {{--<p><strong>6 Months of Singing Lessons</strong><br>--}}
                                 {{--<em>6-Month Singeo Membership (Normally $90) <br class="inline md:hidden lg:inline">--}}
                                     {{--+ Singing Starter Kit</em>--}}
-                                {{--<span class="price"><s class="opacity-30">$109</s> <strong style="color:#ffa360;">${{ App\Prices::$singeoMembership6Month }}</strong></span>--}}
+                                {{--<span class="price"><s class="opacity-30">$109</s> <strong style="color:#ffa360;">${{ SingeoPrices::$singeoMembership6Month }}</strong></span>--}}
                             {{--</p>--}}
                             {{--<span class="join" style="background-color:#ffa360;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
@@ -258,7 +258,7 @@
                             {{--<p><strong>1 Year of Singing Lessons</strong><br>--}}
                                 {{--<em>Annual Singeo Membership + <br class="inline md:hidden lg:inline">--}}
                                     {{--Tumbler + Mug + Poster + Singing Starter Kit </em>--}}
-                                {{--<span class="price"><s class="opacity-30">$199</s> <strong style="color:#ed4277;">${{ App\Prices::$singeoMembershipAnnual }}</strong></span>--}}
+                                {{--<span class="price"><s class="opacity-30">$199</s> <strong style="color:#ed4277;">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>--}}
                             {{--</p>--}}
                             {{--<span class="join" style="background-color:#ed4277;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
@@ -273,7 +273,7 @@
                             {{--<p><strong>Lifetime of Singing Lessons</strong><br>--}}
                                 {{--<em>Lifetime Singeo Membership + Tumbler <br class="inline md:hidden lg:inline">--}}
                                     {{--+ Mug + Poster + Singing Starter Kit </em>--}}
-                                {{--<strong class="price"><span style="color:#60458b">${{ \App\Prices::$bundleLifetime }}</span> --}}{{----}}{{--<sub style="color: #de0031;bottom: 0;">(ONLY {{ $products['singeo-lifetime-membership-access']->getStock() }} SPOTS)</sub>--}}{{----}}{{--</strong>--}}
+                                {{--<strong class="price"><span style="color:#60458b">${{ SingeoPrices::$bundleLifetime }}</span> --}}{{----}}{{--<sub style="color: #de0031;bottom: 0;">(ONLY {{ $products['singeo-lifetime-membership-access']->getStock() }} SPOTS)</sub>--}}{{----}}{{--</strong>--}}
                             {{--</p>--}}
                             {{--<span class="join" style="background-color:#60458b;color:#fff;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
@@ -291,8 +291,8 @@
                 "title" => "Singing Starter Kit",
                 "packAuthor" => "Lisa Witt",
                 "cardDescription" => "Everything You Need To Start Singing Now",
-                "fullPrice" => \App\Prices::$singingStarterKitFull,
-                "price" => \App\Prices::$singingStarterKit,
+                "fullPrice" => SingeoPrices::$singingStarterKitFull,
+                "price" => SingeoPrices::$singingStarterKit,
                 "popularity" => "99",
                 "category" => "lessons",
                 "redirectUrl" => "/shop",
@@ -304,8 +304,8 @@
                 "thumbnail" => "https://singeo.s3.amazonaws.com/products/tumbler-doremi2.png",
                 "title" => "Do Re Mi Tumbler",
                 "cardDescription" => "This cozy tumbler will keep you hydrated at home or on the go.",
-                "fullPrice" => \App\Prices::$tumblerFull,
-                "price" => \App\Prices::$tumbler,
+                "fullPrice" => SingeoPrices::$tumblerFull,
+                "price" => SingeoPrices::$tumbler,
                 "popularity" => "92",
                 "category" => "lessons",
                 "redirectUrl" => "/shop",
@@ -317,8 +317,8 @@
                 "thumbnail" => "https://singeo.s3.amazonaws.com/products/mug-rockstar.jpg",
                 "title" => "Rockstar Mug",
                 "cardDescription" => "Keep your vocal cords hydrated with this super rad mug.",
-                "fullPrice" => \App\Prices::$mugFull,
-                "price" => \App\Prices::$mug,
+                "fullPrice" => SingeoPrices::$mugFull,
+                "price" => SingeoPrices::$mug,
                 "popularity" => "91",
                 "category" => "lessons",
                 "redirectUrl" => "/shop",
@@ -330,8 +330,8 @@
                 "thumbnail" => "https://singeo.s3.amazonaws.com/products/poster-vowel2.png",
                 "title" => "Vowel Practice Poster",
                 "cardDescription" => "Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.",
-                "fullPrice" => \App\Prices::$posterFull,
-                "price" => \App\Prices::$poster,
+                "fullPrice" => SingeoPrices::$posterFull,
+                "price" => SingeoPrices::$poster,
                 "popularity" => "90",
                 "category" => "lessons",
                 "redirectUrl" => "/shop",
@@ -342,8 +342,8 @@
                     "thumbnail" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
                     "title" => "Retro T-shirt",
                     "cardDescription" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
-                    "fullPrice" => App\Prices::$shirtsFull,
-                    "price" => App\Prices::$shirts,
+                    "fullPrice" => SingeoPrices::$shirtsFull,
+                    "price" => SingeoPrices::$shirts,
                     "popularity" => "85",
                     "category" => "shirts",
                     "physical" => true,
@@ -391,8 +391,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.countdown-2.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
     <script>
         $(document).ready(function () {
             $(function () {

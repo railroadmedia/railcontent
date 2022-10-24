@@ -18,7 +18,7 @@
     $bonuses = [
         [
             'name' => 'Singeo Annual Membership',
-            'price' => '$' . \App\Prices::$singeoMembershipAnnual . '/yr',
+            'price' => '$' . SingeoPrices::$singeoMembershipAnnual . '/yr',
             'priceColor' => 'orange',
             'savedPrice' => '0',
             'desc' => 'Get ready to sing like you’ve never sung before! Find your confident voice with unlimited access to your step-by-step lesson plan, vocal routines, LIVE Q&A sessions with your teachers, and a karaoke song library with hundreds of your favorite songs to practice along with! You’ll be hitting higher notes, sounding stronger with better breath support, See how proper training, fun practice tools, and regular guidance will take your voice to the next level (and beyond)!',
@@ -105,8 +105,8 @@
 @section('banner')
     @include('singeo.shop.partials.promo-banner', [
                 "name" => "The Love To Sing Bundle",
-                "fullPrice" => App\Prices::$singeoMembershipAnnualFull,
-                "price" => App\Prices::$singeoMembershipAnnual,
+                "fullPrice" => SingeoPrices::$singeoMembershipAnnualFull,
+                "price" => SingeoPrices::$singeoMembershipAnnual,
                     "specialText" => "Save 24%",
                 "noBreadcrumb" => true
             ])
@@ -124,8 +124,8 @@
         "logo" => "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/annual-logo.png",
         "bundle" => true,
         "sku" => "products[singeo-annual-recurring-membership]=1&products[vowel-sounds-poster]=1&products[mouth-mug]=1&products[wallflower-tumbler]=1&products[singing-starter-kit]=1&redirect=/order&locked=true",
-        "fullPrice" => App\Prices::$singeoMembershipAnnualFull,
-        "price" => App\Prices::$singeoMembershipAnnual,
+        "fullPrice" => SingeoPrices::$singeoMembershipAnnualFull,
+        "price" => SingeoPrices::$singeoMembershipAnnual,
         "specialText" => "+$72 In Bonuses",
         "guaranteeBadge" => true,
         "soldOut" => true,

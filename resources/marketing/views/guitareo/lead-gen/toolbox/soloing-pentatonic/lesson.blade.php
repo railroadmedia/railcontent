@@ -1,13 +1,10 @@
-@extends('guitareo.lead-gen.starter-kit.starter-kit-layout')
+@extends('guitareo.lead-gen.starter-kit.partials._lesson-page-layout')
 
-@section('head-includes')
-    <title>Soloing With Minor Pentatonic Scales</title>
-@endsection
+@section('lesson-total-number', 8)
 
-@section('body-content')
-    @include('guitareo.lead-gen.toolbox._header')
-
-    @include('guitareo.lead-gen.partials.lesson-page1')
-
-    @include('guitareo.lead-gen.toolbox.soloing-pentatonic._lesson-grid')
+@section('assets')
+    @include('guitareo.lead-gen.partials._assignment-resources', [
+        "title" => "Soloing With Pentatonic Scales Examples",
+        "pdfURL" => "https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/minor-pentatonic-scales-1-examples.pdf"
+    ])
 @endsection

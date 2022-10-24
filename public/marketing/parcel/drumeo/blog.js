@@ -1,0 +1,2 @@
+$(document).ready((function(o){var t=o(window).scrollTop();o(window).scroll((function(){var s=o(window).scrollTop();s>t?o(".beat-navigation").removeClass("scrollUp"):o(".beat-navigation").addClass("scrollUp"),t=s})),o(".sub-toggle").on("click",(function(t){t.preventDefault(),t.stopPropagation(),o(this).toggleClass("active"),o(this).parent().find(".sub-list").toggleClass("active")})),o(document).on("click",(function(t){!1===o(t.target).is(o(".sub-toggle"))&&(o(".sub-toggle").removeClass("active"),o(".sub-list").removeClass("active"))}))}));
+//# sourceMappingURL=blog.js.map

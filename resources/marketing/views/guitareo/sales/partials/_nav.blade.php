@@ -31,7 +31,7 @@
         </div>
         <div class="button-wrap">
             <a href="/shop" class="join outline-button">Shop</a>
-            <a href="#customize-anchor" class="join anchor-slide">Join Guitareo</a>
+            <a href="#customize-anchor" class="join anchor-slide">Join<span class="show-for-medium"> Guitareo</span></a>
         </div>
     @endif
 </div>
@@ -41,7 +41,7 @@
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => URL::Route('members.login')
+            "linkUrl" => "/login"
         ])
 
         @include('guitareo.sales.partials._nav-link', [
@@ -67,13 +67,18 @@
             "linkIcon" => 'fas fa-comment-alt-edit'
         ])
 
-        @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "Free Resources",
-            "linkIcon" => "icon-live",
-            "hasDropdown" => true,
-            "linkUrl" => '',
-            "noClick" => true
-        ])
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="icon-live"></i>
+                Free Resources
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+
         <div class="lesson-links dropdown">
             @include('guitareo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Acoustic Guitar",
@@ -115,18 +120,23 @@
 
         <span class="shim"></span>
         @include('guitareo.sales.partials._nav-secondary-link', [
-            "linkName" => "YouTube <i class='fas fa-external-link'></i>",
+            "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/user/guitarlessonscom",
             "externalLink" => true
         ])
         @include('guitareo.sales.partials._nav-secondary-link', [
-            "linkName" => "Facebook <i class='fas fa-external-link'></i>",
+            "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://www.facebook.com/guitareoofficial",
             "externalLink" => true
         ])
         @include('guitareo.sales.partials._nav-secondary-link', [
-            "linkName" => "Instagram <i class='fas fa-external-link'></i>",
+            "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://www.instagram.com/guitareoofficial/",
+            "externalLink" => true
+        ])
+        @include('guitareo.sales.partials._nav-secondary-link', [
+            "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
+            "linkUrl" => "https://www.tiktok.com/@guitareoofficial",
             "externalLink" => true
         ])
         @include('guitareo.sales.partials._nav-secondary-link', [

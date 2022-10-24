@@ -1,8 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Terms Of Use | Singeo</title>
     <meta property="og:title" content="Terms Of Use">
     <meta name="description" content="Please read this agreement carefully before accessing or using this web site.">
@@ -10,8 +8,8 @@
     <meta property="og:url" content="https://www.singeo.com/terms/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
         h1, h2, h3, p {
@@ -20,7 +18,7 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true,
     ])
@@ -154,5 +152,5 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
 @stop

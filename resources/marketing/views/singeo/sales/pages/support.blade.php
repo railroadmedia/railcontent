@@ -1,8 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Contact Us | Singeo</title>
     <meta name="description" content="You can contact Singeo Support by phone at 604-855-7605 or use the links on this page. We’re always here to help.">
 
@@ -11,14 +9,13 @@
     <meta property="og:description" content="You can contact Singeo Support by phone at 604-855-7605 or use the links on this page. We’re always here to help.">
     <meta property="og:url" content="https://www.singeo.com/contact/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.4/tailwind.min.css" />
     <link href="/assets/css/tailwind-helpers.css" rel="stylesheet">
     <link href="/assets/marketing/nav-footer.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/marketing/nav-footer.css">
 
     <!-- Tailwind -->
-    <link rel="stylesheet" href="{{ mix('tailwindcss/tailwind.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
 
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
@@ -34,21 +31,21 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true,
     ])
-    
+
     <!-- Header -->
     <header class="py-10 md:py-16 bg-black bg-center bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/background-order.jpg);">
         <div class="container mx-auto">
             <h1 class="mx-auto text-center text-white text-2xl md:text-4xl font-bold">
-                <i class="fas fa-phone fa-flip-horizontal text-singeo text-3xl mr-1"></i> 
+                <i class="fas fa-phone fa-flip-horizontal text-singeo text-3xl mr-1"></i>
                 Contact Us
             </h1>
         </div>
     </header>
-    
+
     <main class="flex flex-col max-w-3xl mx-auto px-4">
 
         <!-- Intro -->
@@ -59,10 +56,10 @@
                 <p class="text-base">You may find your response in our <a href="https://help.singeo.com/" class="font-bold no-underline text-singeo" title="go to help center">Help Center here</a>, but if not, fill out the quick form below.</p>
             </div>
         </section>
-        
+
         <!-- Form -->
         <section id="app">
-            <contact-email-form 
+            <contact-email-form
                 brand="singeo"
                 captchakey="6LcSMHgdAAAAAOFqEZob05w0ZZAInbnfqMdMnhNB"
                 email-subject="Support Request From Singeo.com"
@@ -94,7 +91,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Join -->
         <section class="flex flex-col text-center mb-12">
             <h2 class="font-bold text-3xl mb-3 md:mb-6">Want to join the team?</h2>
@@ -104,10 +101,9 @@
     </main>
 
     @include("singeo.sales.partials._footer")
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script src="{{ mix('marketings/js/manifest.js') }}"></script>
     <script src="{{ mix('marketings/js/vendor.js') }}"></script>
     <script src="{{ mix('marketing/js/app.js') }}"></script>
-@stop

@@ -1,23 +1,22 @@
-@extends('guitareo.lead-gen.starter-kit.starter-kit-layout')
+@extends('guitareo.lead-gen.starter-kit.partials._lesson-page-layout')
 
-@section('head-includes')
-    <title>What's Next?</title>
+@section('styles')
+    <link rel="stylesheet" href="/marketing/parcel/guitareo/lead-gen-lessons.css">
 @endsection
 
-@section('body-content')
-    @include('guitareo.lead-gen.starter-kit.partials._header')
+@section('lesson-total-number', 1)
 
-    @section('title')
-        What's Next?
-    @endsection
+@section('current-lesson-number', 1)
 
-    @section('video')
-        <iframe src="https://player.vimeo.com/video/253880980" frameborder="0" allowfullscreen></iframe>
-    @endsection
+@section('subtitle')
+    What's Next?
+@endsection
 
-    @include('guitareo.lead-gen.partials.lesson-page1')
+@section('video', 'https://player.vimeo.com/video/253880980')
 
-    <div class="container lg:mx-auto max-w-6xl mb-14 -mt-10 flex flex-col lg:flex-row">
+
+@section('lesson-description')
+    <div class="container lg:mx-auto max-w-6xl mb-14 mt-10 flex flex-col lg:flex-row">
         <div class="px-3 md:px-4 w-full lg:w-1/2">
             <a href="/trial" target="_blank" class="download-button outline big">Learn More About Guitareo</a>
         </div>

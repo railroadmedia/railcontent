@@ -1,19 +1,19 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo._partials.global-layout')
 
-@section('head-includes')
+@section('meta')
     <title>New Student Welcome Party | Guitareo</title>
     <meta property="og:title" content="New Student Welcome Party">
 
     <meta name="description" content="Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party!">
     <meta property="og:description" content="Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party!">
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-kent.jpg"/>
+    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-kent.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/welcome-party/">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('/tailwindcss/tailwind.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 
     <style>
         .text-blue {
@@ -93,16 +93,16 @@
 
 
 @section('navigation')
-    @include("sales.partials._nav")
+    @include("guitareo.sales.partials._nav")
 @stop
 
 @section('content')
     <div class="title-wrap">
         <div class="container mx-auto">
             <div class="text-wrap">
-                <img class="w-full rounded-xl" src="https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-kent.jpg">
+                <img class="w-full rounded-xl" src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-kent.jpg">
                 <h1>Thanks for confirming!</h1>
-                <p>Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party! We are all so excited to welcome you into the Guitareo community. Kent (your guitar instructor) is really looking forward to meeting you and eager to chat about the incredible things you will learn to play on the guitar!
+                <p>Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party! We are all so excited to welcome you into the Guitareo community. Kent (your in-house coach) is really looking forward to meeting you and eager to chat about the incredible things you will learn to play on the guitar!
                    <br><br>
                     You’ll receive an email confirmation in the next 24 hours.</p>
                 <div class="text-center">
@@ -113,4 +113,8 @@
     </div>
 
     @include("guitareo.sales.partials._footer")
+@stop
+
+@section('scripts')
+    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
 @stop

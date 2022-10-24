@@ -1,8 +1,6 @@
 @extends('singeo.lead-gen.lead-gen-layout')
 
 @section('styles')
-    @parent
-
     <title>Singeo Holiday Karaoke | Singeo</title>
     <meta property="og:title" content="Singeo Holiday Karaoke | Singeo">
     <meta name="description" content="Simply enter your email to unlock your holiday karaoke library!">
@@ -10,7 +8,7 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/holiday-karaoke/">
 
-    <link href="{{ asset('/assets/marketing/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}" rel="stylesheet">
 @stop
 
 @section('body')

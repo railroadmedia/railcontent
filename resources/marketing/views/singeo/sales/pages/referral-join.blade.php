@@ -1,8 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Join | Singeo</title>
 
     <meta property="og:title" content="Singeo | The Ultimate Online Singing Lesson Experience">
@@ -13,7 +11,6 @@
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/fb-share-image.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
     <link href="/assets/css/tailwind-helpers.css" rel="stylesheet">
     <link href="/assets/marketing/nav-footer.css" rel="stylesheet">
 
@@ -97,9 +94,9 @@
     </script>
 @endsection
 
-{{-- @section('body-class', 'tw-m-0') --}}
+@section('body-class', 'tw-m-0')
 
-@section('layout-body')
+@section('global-body')
     @include('singeo.sales.partials._nav', [
         'cartVersion' => true
     ])
@@ -109,5 +106,5 @@
     @include('singeo.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
 @endsection

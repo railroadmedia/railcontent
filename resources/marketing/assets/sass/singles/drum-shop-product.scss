@@ -1,0 +1,120 @@
+@import "../all/_variables";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.side-bar .side-slide {
+  &.fixedSlider {
+    position: fixed;
+    height: initial;
+    //top: 80px;
+    top: 100px;
+  }
+
+  .online-atc.merch {
+    .join {
+      background: #777;
+    }
+
+    &.active .join {
+      background: #10D05F;
+
+      &:hover {
+        background: lighten(#10D05F, 10%);
+      }
+    }
+  }
+
+  .join {
+    transition: all .3s;
+    font-size: 20px;
+    width: 100%;
+    max-width: 310px;
+    padding: 10px 10px;
+    margin: 7px auto;
+    @include tablet {
+      padding: 13px 10px;
+      margin: 15px auto;
+    }
+    @include desktop {
+      padding: 20px 10px;
+    }
+
+    &.bundle-option {
+      margin: 5px auto 15px;
+    }
+  }
+
+  .pack-pick {
+    &.error {
+      background-color: #FFC7C7;
+      border-color: #F71B26;
+    }
+
+    option {
+      &[disabled] {
+        color: #CCC;
+      }
+    }
+  }
+
+  .selected-pack {
+    .join {
+      background: #8C9698;
+    }
+
+    &.active .join {
+      background: #10D05F;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.pack-details {
+  .slider-container .slider-nav .slick-slide {
+    padding: 7px 3px;
+    outline: none;
+    cursor: pointer;
+    height: initial;
+    position: relative;
+  }
+
+  .bonus-pic .image-wrap {
+    min-width: 140px;
+    max-width: 140px;
+    @include desktop {
+      min-width: 170px;
+      max-width: 170px;
+    }
+
+    &.shipping:after {
+      content: 'FREE SHIPPING';
+      position: absolute;
+      background: $drumeoBlue;
+      color: #fff;
+      display: block;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font: 700 13px/1em $opensans;
+      padding: 4px 0;
+    }
+  }
+
+  table.specTable {
+    td, th {
+      padding: 7px;
+      font-size: 13px;
+      font-family: $opensans;
+      @include tablet {
+        font-size: 16px;
+      }
+    }
+
+    tr:nth-child(even) {
+      background: #eee;
+    }
+  }
+}
