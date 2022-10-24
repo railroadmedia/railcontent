@@ -1080,7 +1080,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "header_text" => "The Guitareo Survival Guide",
                 "price" => 19,
                 "discounted_price" => "",
-                "special_text" => "or free with Guitareo",
+                "special_text" => "",
                 'overview' => "Learning to play the guitar takes practice and patience.
 
 But sometimes, you just want to show off a cool lick or get people singing along around the fire… without sitting down and learning an entire lesson.
@@ -1188,7 +1188,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     ],
                 ],
                 "visible" => true,
-                "sold_out" => false,
+                "sold_out" => true,
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
