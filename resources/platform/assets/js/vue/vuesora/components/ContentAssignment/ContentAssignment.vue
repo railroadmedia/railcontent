@@ -89,7 +89,7 @@
                             <div v-if="timecode != 0" class="flex flex-row hide-sm-up">
                                 <a class="tiny font-bold font-underline" :class="brandTextColor" :data-jump-to-time="timecode">
                                         {{ formattedTimecode }}
-                                    </a>
+                                </a>
                             </div>
                         </div>
                     </div>
