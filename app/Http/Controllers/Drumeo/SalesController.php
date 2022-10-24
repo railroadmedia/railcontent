@@ -31,7 +31,7 @@ function array_entity_column(array $arrayOfEntities, $getMethodName)
 
     return $arrayOfValues;
 }
-class MarketingController extends BaseController
+class SalesController extends BaseController
 {
 
 
@@ -315,6 +315,35 @@ class MarketingController extends BaseController
     public function drumBeatsPart($part)
     {
         return view('drumeo.lead-gen.drum-beats.lesson', ['partNum' => $part]);
+    }
+
+    public function toneControl()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.full-page-assets.tone-control-kit', ['products' => $products]);
+    }
+    public function quietKick()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.full-page-assets.quietkick', ['products' => $products]);
+    }
+    public function eardrums()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.full-page-assets.eardrums', ['products' => $products]);
+    }
+    public function thirtyDayDrummer()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.full-page-assets.30-day-drummer', ['products' => $products]);
     }
 
     public function hitLikeAGirlSubmission(Request $request)
