@@ -1,4 +1,4 @@
-@extends('layouts.global-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('meta')
     <title>Guitareo Shop</title>
@@ -8,17 +8,15 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 
-    @include('layouts.partials._favicons')
-    @include('layouts.partials._fonts')
+    @include('guitareo._partials._favicons')
+    @include('guitareo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
     <style>
-
-
         .tooltip {
             position: relative;
         }
@@ -72,10 +70,10 @@
     {{--<script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script src="/js/jquery.countdown-2.min.js"></script>
+    <script src="/marketing/parcel/guitareo/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(function () {
@@ -172,7 +170,7 @@
 @stop
 
 @section('content')
-    @include("sales.partials._nav", [
+    @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
 
@@ -278,124 +276,27 @@
         {{--</section>--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards">
-                @include('shop.elements._shop-card', [
-                "itemURL" => "/",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/2021/header-background.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/sales/storefront/guitareo-membership-logo-white.svg",
-                "title" => "Guitareo Membership",
-                "packAuthor" => "Join Today",
-                "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
-                "fullPrice" => \App\Prices::$guitareoMembershipAnnualFull,
-                "price" => \App\Prices::$guitareoMembershipAnnual,
-                "popularity" => "99",
-                "category" => "lessons",
-                "buttonText" => "Get Started",
-                ])
-                @include('shop.elements._shop-card', [
-                "badgeText" => "NEW",
-                "sku" => "rhythm-and-groove",
-                "itemURL" => "/rhythm-and-groove",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/coach.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg",
-                "title" => "Rhythm  & Groove",
-                "packAuthor" => "Sami Ghawi",
-                "cardDescription" => "Go beyond simple strumming on the guitar.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$rhythmAndGrooveFull,
-                "price" => \App\Prices::$rhythmAndGroove,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('shop.elements._shop-card', [
-                "sku" => "survival-guide",
-                "itemURL" => "/shop/survival-guide",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg",
-                "title" => "Guitareo Survival Guide",
-                "packAuthor" => "Guitareo",
-                "cardDescription" => "Guitar Chords Scales And Licks You Can Take Anywhere",
-                "fullPrice" => \App\Prices::$survivalGuideFull,
-                "price" => \App\Prices::$survivalGuide,
-                "popularity" => "89",
-                "category" => "accessories",
-                "redirectUrl" => "/shop",
-                "soldOut" => $products['survival-guide']->isProductSoldOut()
-                ])
-                @include('shop.elements._shop-card', [
-                "sku" => "GTME-OCT-2018-SEMESTER",
-                "itemURL" => "/guitar-technique-made-easy",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/storefront/guitar-technique-made-easy-image.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/gtme/logo-white.png",
-                "title" => "Guitar Technique Made Easy",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Learn the most important guitar techniques and reach total guitar freedom.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$GTMEFull,
-                "price" => \App\Prices::$GTMERegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('shop.elements._shop-card', [
-                "sku" => "GUITAR-SYSTEM",
-                "itemURL" => "/guitar-system",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/guitar-system.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png",
-                "title" => "The Guitar System",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$guitarSystemFull,
-                "price" => \App\Prices::$guitarSystemRegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('shop.elements._shop-card', [
-                "sku" => "guitar-quest",
-                "itemURL" => "/guitar-quest",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/guitar-quest.jpg",
-                "packLogo" => "https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png",
-                "title" => "GuitarQuest",
-                "packAuthor" => "Rob Scallon",
-                "cardDescription" => "Skip the boring stuff and start having fun! Your journey starts here.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$guitarQuestFull,
-                "price" => \App\Prices::$guitarQuestRegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('shop.elements._shop-card', [
-                "sku" => "AGME-JAN-2019-SEMESTER",
-                "itemURL" => "/acoustic-guitar-made-easy",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/storefront/acoustic-guitar-made-easy-image.jpg",
-                "packLogo" => "https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png",
-                "title" => "Acoustic Guitar Made Easy",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Build a rock-solid foundation and get started on the acoustic guitar the right way.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$AGMEFull,
-                "price" => \App\Prices::$AGMERegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('shop.elements._shop-card', [
-                "sku" => "500-songs-in-5-days-guitareo",
-                "itemURL" => "/500-songs",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/500-songs-card-small.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/500-songs/logo.svg",
-                "title" => "500 Songs In 5 Days",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Build the skills and knowledge to play 500 songs on the guitar. Comes with downloadable chord charts.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$songs500Full,
-                "price" => \App\Prices::$songs500Regular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
+                @foreach($products as $product){
+                    @include('guitareo.shop._partials._shop-card', [
+                        "sku" => $product->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                        "thumbnail" => $product->thumbnail,
+                        "packLogo" => $product->thumbnail_logo,
+                        "badgeText" => $product->badge_text,
+                        "title" => $product->name,
+                        "packAuthor" => $product->instructor_name ? $product->instructor_name : 'Guitareo',
+                        "cardDescription" => $product->short_desc,
+                        "includedEdge" => $product->included_edge,
+                        "fullPrice" => $product->price,
+                        "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                        "category" => strtolower($product->productType->name),
+                        "sizes" => $product->sizes,
+                        "soldOut" => $product->sold_out,
+                        "size_case_sensitive" => $product->size_case_sensitive,
+                    ])
+                }
+                @endforeach
+
             </ul>
         </section>
 
@@ -424,5 +325,5 @@
         </div>
     </section>
 
-    @include("sales.partials._footer")
+    @include("guitareo.sales.partials._footer")
 @stop

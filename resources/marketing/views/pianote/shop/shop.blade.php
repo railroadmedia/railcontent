@@ -1,4 +1,4 @@
-@extends('global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     @parent
@@ -9,18 +9,13 @@
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">--}}
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
-@stop()
 
-@section('global-body')
-    @include('sales.nav', [
-        "cartVersion" => true
-    ])
-{{--    @include('shop.partials._promo-banner')--}}
     <style>
         .shipping-delay .delay-bar {
             background:#e3e3e3;
@@ -131,6 +126,20 @@
             }
         }
     </style>
+@stop()
+
+@section('global-body')
+    @include('pianote.sales.nav', [
+    "joinVersion" => true,
+    "scrollToJoin" => true,
+    "homepageVersion" => true,
+    ])
+
+{{--    @include('pianote.sales.nav', [--}}
+{{--        "cartVersion" => true--}}
+{{--    ])--}}
+{{--    @include('shop.partials._promo-banner')--}}
+
     <div class="shipping-delay">
         <div class="delay-bar text-center">
             <div class="container mx-auto">
@@ -201,21 +210,23 @@
         </section>
     @endif
 
-        @yield('filters')
+    @include('pianote.shop.partials._catalogue-filters', [
+        "all" => true
+    ])
     <div class="white-box">
         @yield('cards')
     </div>
 
 
-    @include('sales.footer')
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    @include('pianote.sales.footer')
+    <script src="{{ asset('marketing/parcel/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/pianote/app.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script src="/assets/js/shop-filters.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script src="/marketing/parcel/pianote/shop-filters.js"></script>
     <script>
         $(function () {
             $('.scalable-card').click(function (e) {
@@ -299,5 +310,5 @@
     </script>
     @yield('scripts')
 
-    @include('shop.partials._promo-countdown')
+    @include('pianote.shop.partials._promo-countdown')
 @stop
