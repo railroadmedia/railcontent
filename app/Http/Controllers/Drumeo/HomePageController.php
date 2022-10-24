@@ -9,6 +9,6 @@ class HomePageController extends BaseController
 {
     public function show()
     {
-        return view('drumeo.home');
+        return view('drumeo.drumeo.home');
     }
 }

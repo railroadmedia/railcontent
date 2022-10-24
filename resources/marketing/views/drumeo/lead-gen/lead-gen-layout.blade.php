@@ -28,7 +28,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
     @yield('scripts')
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
+    <script src="{{ asset('/marketing/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
 
     <script src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
 @stop

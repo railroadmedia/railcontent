@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Drumeo;
 
+use App\Http\Controllers\BaseController;
 use App\Listeners\OrderEventListener;
 use Carbon\Carbon;
 use Exception;
@@ -13,7 +14,24 @@ use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Services\UserProductService;
 
-class MarketingController extends Controller
+/**
+ * @param stdClass[] $arrayOfEntities
+ * @param string $getMethodName
+ * @return array
+ */
+function array_entity_column(array $arrayOfEntities, $getMethodName)
+{
+    $arrayOfValues = [];
+
+    foreach ($arrayOfEntities as $entity) {
+        if (method_exists($entity, $getMethodName)) {
+            $arrayOfValues[] = $entity->$getMethodName();
+        }
+    }
+
+    return $arrayOfValues;
+}
+class MarketingController extends BaseController
 {
 
 
@@ -218,7 +236,7 @@ class MarketingController extends Controller
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('sales.homepage', ['blogPosts' => $blogPostsViewData], ['products' => $products]);
+        return view('drumeo.sales.homepage', ['blogPosts' => $blogPostsViewData], ['products' => $products]);
     }
 
     public function sales()
@@ -226,35 +244,35 @@ class MarketingController extends Controller
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('sales.standard', ['products' => $products]);
+        return view('drumeo.sales.standard', ['products' => $products]);
     }
     public function salesStudents()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('sales.student-only', ['products' => $products]);
+        return view('drumeo.sales.student-only', ['products' => $products]);
     }
     public function salesUpgrade()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('sales.upgrade-offer', ['products' => $products]);
+        return view('drumeo.sales.upgrade-offer', ['products' => $products]);
     }
     public function salesUpgradeLifetime()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('sales.lifetime', ['products' => $products]);
+        return view('drumeo.sales.lifetime', ['products' => $products]);
     }
     public function salesBeginner()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('sales.beginner', ['products' => $products]);
+        return view('drumeo.sales.beginner', ['products' => $products]);
     }
 
     public function Festival()
@@ -262,7 +280,7 @@ class MarketingController extends Controller
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('products.full-page-assets.festival', ['products' => $products]);
+        return view('drumeo.products.full-page-assets.festival', ['products' => $products]);
     }
 
     public function festivalCoastal()
@@ -270,7 +288,7 @@ class MarketingController extends Controller
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('products.full-page-assets.festival-coastal', ['products' => $products]);
+        return view('drumeo.products.full-page-assets.festival-coastal', ['products' => $products]);
     }
 
     public function festivalMd()
@@ -278,7 +296,7 @@ class MarketingController extends Controller
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('products.full-page-assets.festival-md', ['products' => $products]);
+        return view('drumeo.products.full-page-assets.festival-md', ['products' => $products]);
     }
 
     public function festivalEdge()
@@ -286,17 +304,17 @@ class MarketingController extends Controller
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('products.full-page-assets.festival-edge', ['products' => $products]);
+        return view('drumeo.products.full-page-assets.festival-edge', ['products' => $products]);
     }
 
     public function drumFillsPart($part)
     {
-        return view('lead-gen.drum-fills.lesson', ['partNum' => $part]);
+        return view('drumeo.lead-gen.drum-fills.lesson', ['partNum' => $part]);
     }
 
     public function drumBeatsPart($part)
     {
-        return view('lead-gen.drum-beats.lesson', ['partNum' => $part]);
+        return view('drumeo.lead-gen.drum-beats.lesson', ['partNum' => $part]);
     }
 
     public function hitLikeAGirlSubmission(Request $request)

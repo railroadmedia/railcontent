@@ -6,7 +6,7 @@
     <title>Check your email | Drumeo</title>
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     @include('drumeo._partials._fonts')
-    @include('drumeo._partials._favicons')
+    @include('_partials.layout.favicons.drumeo-favicons')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <style>
         body {

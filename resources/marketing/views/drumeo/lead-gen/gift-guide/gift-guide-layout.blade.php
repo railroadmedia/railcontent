@@ -5,7 +5,7 @@
     <meta name="description" content="Choosing gifts for the drummer in your life can be a tricky task.">
     <meta property="og:title" content="Gift Guide by Drumeo">
     <meta property="og:description" content="Choosing gifts for the drummer in your life can be a tricky task.">
-    <meta property="og:image" content="{{ cdn('promos/gift-guide/og-image.jpg') }}" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/og-image.jpg" style="display: none;">
 
     @include('drumeo._partials._fonts')
 
@@ -668,5 +668,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/assets/js/drum-shop-filters.js') }}"></script>
+    <script src="{{ asset('/marketing/assets/js/drum-shop-filters.js') }}"></script>
 @stop

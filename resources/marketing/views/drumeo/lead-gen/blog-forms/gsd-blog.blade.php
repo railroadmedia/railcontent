@@ -4,7 +4,7 @@
     {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-    @include('drumeo._partials._favicons')
+    @include('_partials.layout.favicons.drumeo-favicons')
 
     <meta name="robots" content="noindex">
     <title>Todd Sucherman - How To Become A  Good Sounding Drummer | Drumeo</title>

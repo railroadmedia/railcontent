@@ -14,7 +14,7 @@
     <header class="header toolbox">
         <div class="container mx-auto max-w-6xl px-4">
             <div class="text-center">
-                <img class="series-logo mx-auto" src="{{ cdn('lead-gen/tudt/tudt-logo.png') }}" alt="The Ultimate Drumming Toolbox">
+                <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/tudt-logo.png" alt="The Ultimate Drumming Toolbox">
             </div>
             <div class="text-center">
                 <a class="go-back" href="/ultimate-toolbox/catalogue">Back To All Lessons</a>

@@ -315,7 +315,7 @@
 @section('layout-scripts')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}" defer></script>
     <script type="text/javascript" src="/marketing/js/drumeo/jquery.countdown-2.min.js"></script>
     <script>
         setInterval(function(){
@@ -348,7 +348,7 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/assets/js/sliding-anchor.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
 @stop
