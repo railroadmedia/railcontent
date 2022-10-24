@@ -129,7 +129,7 @@
 @section('inject-components')
     @parent
 
-    <script src="{{ mix('assets/members/js/order-form.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/pianote/order-form.js') }}"></script>
     <script>
         document.addEventListener('click', function (event) {
             if (!event.target.closest('.shipping-trigger')) return;
