@@ -12,7 +12,7 @@
     @include('drumeo._partials._fonts')
 
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ _mix('tailwindcss/tailwind.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/tailwindcss/tailwind.css') }}" />
 
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
@@ -101,7 +101,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 @stop

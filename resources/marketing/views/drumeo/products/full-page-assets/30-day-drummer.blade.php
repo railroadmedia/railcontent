@@ -916,10 +916,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
     <script type="text/javascript" src="/marketing/js/drumeo/jquery.countdown-2.min.js"></script>
     <script>

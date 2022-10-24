@@ -79,9 +79,9 @@
     </script>
     <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 
-    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
     @yield('scripts')
 @stop
