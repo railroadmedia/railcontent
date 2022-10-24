@@ -1,7 +1,7 @@
 <nav id="nav" class="top-bar row expanded">
     <div class="logo">
         <a href="/">
-            <img src="{{ cdn('logos/logo-blue.png') }}" alt="Drumeo">
+            <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
         </a>
     </div>
 

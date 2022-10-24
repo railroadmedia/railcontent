@@ -5,7 +5,7 @@
     <meta name="description" content="The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.">
 
     <!-- Social Media -->
-    <meta property="og:image" content="{{ cdn('books/best-beginner-drum-book/sales/og-image.jpg') }}" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/og-image.jpg" style="display: none;">
     <meta property="og:title" content="The Best Beginner Drum Book">
     <meta property="og:description" content="The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -41,10 +41,10 @@
     <header class="book-header">
         <div class="clearfix mx-auto max-w-6xl relative">
             <div class="w-full sm:w-1/2 float-right text-center p-4">
-                <img src="{{ cdn('books/best-beginner-drum-book/sales/see-inside.png') }}" class="see-inside">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/see-inside.png" class="see-inside">
                 <span style="position:relative;display: inline-block;">
-                    <img src="{{ cdn('books/best-beginner-drum-book/sales/book-kindle-alt.png') }}" data-open="seeInside" class="book">
-                    <a target="_blank" href="https://www.amazon.com/dp/B07TB4SN3V"><img src="{{ cdn('books/best-beginner-drum-book/sales/kindle-badge.png') }}" class="kindle-badge"></a>
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/book-kindle-alt.png" data-open="seeInside" class="book">
+                    <a target="_blank" href="https://www.amazon.com/dp/B07TB4SN3V"><img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/kindle-badge.png" class="kindle-badge"></a>
                 </span>
             </div>
 
@@ -60,7 +60,7 @@
                     @endif
                 </p>
                 <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[BeginnerBook]=1" class="join">Click Here To Order</a>
-                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="{{ cdn('books/best-beginner-drum-book/sales/amazon-logo.png') }}"></a>
+                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
     </header>
@@ -68,32 +68,32 @@
     <section class="page-previews text-center">
         <div class="mx-auto clearfix">
             <div class="float-left px-2 lg:w-1/6 sm:w-1/3 w-1/2">
-                <div class="background-wrap" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/chapter2.jpg') }}');">
+                <div class="background-wrap" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/chapter2.jpg');">
                     <div class="magnify"><i class="far fa-search-plus"></i></div>
                 </div>
             </div>
             <div class="float-left px-2 lg:w-1/6 sm:w-1/3 w-1/2">
-                <div class="background-wrap" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/other1.jpg') }}');">
+                <div class="background-wrap" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/other1.jpg');">
                     <div class="magnify"><i class="far fa-search-plus"></i></div>
                 </div>
             </div>
             <div class="float-left px-2 lg:w-1/6 sm:w-1/3 w-1/2">
-                <div class="background-wrap" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/chapter8.jpg') }}');">
+                <div class="background-wrap" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/chapter8.jpg');">
                     <div class="magnify"><i class="far fa-search-plus"></i></div>
                 </div>
             </div>
             <div class="float-left px-2 lg:w-1/6 sm:w-1/3 w-1/2">
-                <div class="background-wrap" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/other2.jpg') }}');">
+                <div class="background-wrap" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/other2.jpg');">
                     <div class="magnify"><i class="far fa-search-plus"></i></div>
                 </div>
             </div>
             <div class="float-left px-2 lg:w-1/6 sm:w-1/3 w-1/2">
-                <div class="background-wrap" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/chapter6.jpg') }}');">
+                <div class="background-wrap" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/chapter6.jpg');">
                     <div class="magnify"><i class="far fa-search-plus"></i></div>
                 </div>
             </div>
             <div class="float-left px-2 lg:w-1/6 sm:w-1/3 w-1/2">
-                <div class="background-wrap" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/other3.jpg') }}');">
+                <div class="background-wrap" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/other3.jpg');">
                     <div class="magnify"><i class="far fa-search-plus"></i></div>
                 </div>
             </div>
@@ -103,22 +103,22 @@
     <div class="slider-lightbox">
         <div class="row">
             <div class="slide">
-                <div class="image" style="background-image:url({{ cdn('books/best-beginner-drum-book/sales/chapter2.jpg') }});"></div>
+                <div class="image" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/chapter2.jpg);"></div>
             </div>
             <div class="slide">
-                <div class="image" style="background-image:url({{ cdn('books/best-beginner-drum-book/sales/other1.jpg') }});"></div>
+                <div class="image" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/other1.jpg);"></div>
             </div>
             <div class="slide">
-                <div class="image" style="background-image:url({{ cdn('books/best-beginner-drum-book/sales/chapter8.jpg') }});"></div>
+                <div class="image" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/chapter8.jpg);"></div>
             </div>
             <div class="slide">
-                <div class="image" style="background-image:url({{ cdn('books/best-beginner-drum-book/sales/other2.jpg') }});"></div>
+                <div class="image" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/other2.jpg);"></div>
             </div>
             <div class="slide">
-                <div class="image" style="background-image:url({{ cdn('books/best-beginner-drum-book/sales/chapter6.jpg') }});"></div>
+                <div class="image" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/chapter6.jpg);"></div>
             </div>
             <div class="slide">
-                <div class="image" style="background-image:url({{ cdn('books/best-beginner-drum-book/sales/other3.jpg') }});"></div>
+                <div class="image" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/other3.jpg);"></div>
             </div>
         </div>
         <div class="arrow scroll-left"><i class="fas fa-chevron-left"></i></div>
@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="columns large-7 text-center">
-                    <img class="brandon-jared" src="{{ cdn('books/best-beginner-drum-book/sales/brandon-jared.jpg') }}">
+                    <img class="brandon-jared" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/brandon-jared.jpg">
                 </div>
             </div>
         </div>
@@ -233,7 +233,7 @@
                 <div class="columns no-padding medium-8">
                     <div class="instructor-wrap columns no-padding horizontal">
                         <div class="instructor-pic columns medium-5">
-                            <div class="bg-pic" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/cobham.jpg') }}');"></div>
+                            <div class="bg-pic" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/cobham.jpg');"></div>
                         </div>
                         <div class="columns medium-7 text">
                             <h1>Billy Cobham</h1>
@@ -243,7 +243,7 @@
                     </div>
                     <div class="instructor-wrap columns no-padding medium-6 vertical">
                         <div class="instructor-pic columns">
-                            <div class="bg-pic" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/nilles.jpg') }}');"></div>
+                            <div class="bg-pic" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/nilles.jpg');"></div>
                         </div>
                         <div class="columns text text-left medium-text-center">
                             <h1>Anika Nilles</h1>
@@ -253,7 +253,7 @@
                     </div>
                     <div class="instructor-wrap columns no-padding medium-6 vertical">
                         <div class="instructor-pic columns">
-                            <div class="bg-pic" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/dornyei.jpg') }}');"></div>
+                            <div class="bg-pic" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/dornyei.jpg');"></div>
                         </div>
                         <div class="columns text text-left medium-text-center">
                             <h1>Gabor Dornyei</h1>
@@ -263,7 +263,7 @@
                     </div>
                     <div class="instructor-wrap columns no-padding horizontal">
                         <div class="instructor-pic columns medium-5">
-                            <div class="bg-pic" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/garibaldi.jpg') }}');"></div>
+                            <div class="bg-pic" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/garibaldi.jpg');"></div>
                         </div>
                         <div class="columns medium-7 text">
                             <h1>David Garibaldi</h1>
@@ -275,7 +275,7 @@
                 <div class="columns no-padding medium-4">
                     <div class="instructor-wrap columns no-padding vertical">
                         <div class="instructor-pic columns">
-                            <div class="bg-pic" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/cooper.jpg') }}');"></div>
+                            <div class="bg-pic" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/cooper.jpg');"></div>
                         </div>
                         <div class="columns text text-left medium-text-center">
                             <h1>Casey Cooper</h1>
@@ -285,7 +285,7 @@
                     </div>
                     <div class="instructor-wrap columns no-padding vertical">
                         <div class="instructor-pic columns">
-                            <div class="bg-pic" style="background-image:url('{{ cdn('books/best-beginner-drum-book/sales/browne.jpg') }}');"></div>
+                            <div class="bg-pic" style="background-image:url('https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/browne.jpg');"></div>
                         </div>
                         <div class="columns text text-left medium-text-center">
                             <h1>Sean Browne</h1>
@@ -301,7 +301,7 @@
     <section class="foreword tab-switcher">
         <div class="row">
             <div class="columns text-center">
-                <img src="{{ cdn('books/best-beginner-drum-book/sales/foreword.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/foreword.jpg">
             </div>
             <div class="columns">
                 <p>I first saw Jared playing the drums on a Sunday evening in 1997, in a packed church full of over two thousand people. The music was great, but as a beginner drummer myself what brought me back each week was the sheer energy, creativity, and power of Jared’s drumming. It drew me in. Soon I connected with him to take lessons, and a friendship was born. Eventually we became business partners in the world’s largest online drum education company—Drumeo.
@@ -323,7 +323,7 @@
     <section class="jareds-letter tab-switcher">
         <div class="row">
             <div class="columns text-center">
-                <img src="{{ cdn('books/best-beginner-drum-book/sales/jareds-letter.jpg') }}">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/jareds-letter.jpg">
             </div>
             <div class="columns">
                 <p>Drums... I could never have guessed that I’d give and receive so much enjoyment from this primal instrument. But here I am: drums are my life.
@@ -430,7 +430,7 @@
     <section class="final-pitch">
         <div class="row">
             <div class="columns medium-6 float-right text-center">
-                <img src="{{ cdn('books/best-beginner-drum-book/sales/book-pass-alt.png') }}" class="book">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/book-pass-alt.png" class="book">
             </div>
             <div class="columns medium-6 text-wrap">
                 <h1>The Best Beginner<br class="show-for-medium"> Drum Book</h1>
@@ -442,7 +442,7 @@
                 @endif
                 </p>
                 <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[BeginnerBook]=1" class="join">Click Here To Order</a>
-                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="{{ cdn('books/best-beginner-drum-book/sales/amazon-logo.png') }}"></a>
+                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
     </section>
@@ -529,15 +529,15 @@
     </div>
 
     <div class="reveal large text-center" id="seeInside" data-reveal data-reset-on-close="true">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-1-5.png') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-6.png') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-7.jpg') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-8.jpg') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-9.png') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-10.png') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-11.jpg') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-12.jpg') }}">
-        <img src="{{ cdn('books/best-beginner-drum-book/sales/page-13.jpg') }}">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-1-5.png">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-6.png">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-7.jpg">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-8.jpg">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-9.png">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-10.png">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-11.jpg">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-12.jpg">
+        <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/page-13.jpg">
         <div class="end-of-preview">
             <h1>The Book Preview Is Over.</h1>
             <p>Order Today To Get The <br class="hide-for-medium"> Full Book With 210 Pages</p>
@@ -546,7 +546,7 @@
 @stop
 
 @section('scripts')
-    <script src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

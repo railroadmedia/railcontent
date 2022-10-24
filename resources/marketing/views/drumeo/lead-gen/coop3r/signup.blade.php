@@ -27,7 +27,7 @@
 @stop
 
 @section('content')
-    <header class="header" style="background-image:url({{ cdn('headers/9.jpg') }});">
+    <header class="header" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/headers/9.jpg);">
         <div class="container max-w-6xl mx-auto px-4 flex flex-col sm:items-center sm:flex-row">
             <div class="w-full sm:mr-4 sm:w-7/12 lg:w-2/3">
                 <div class="flex-video widescreen aspect-16:9 w-full relative">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="w-full sm:w-5/12 lg:w-1/3">
-                <img class="series-logo mx-auto" src="{{ cdn('lead-gen/coop3r/coop3r-logo2.png') }}" alt="How To Start Playing Drums">
+                <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/coop3r/coop3r-logo2.png" alt="How To Start Playing Drums">
                 <p>Enter your email below for 5 free <br class="hidden lg:inline">
                     video lessons for getting started.</p>
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [

@@ -26,10 +26,10 @@
 @stop
 
 @section('content')
-    <header class="header" style="background-image:url({{ cdn('headers/9.jpg') }});">
+    <header class="header" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/headers/9.jpg);">
         <div class="container px-4 max-w-6xl mx-auto">
             <div class="text-center">
-                <img class="series-logo slim mx-auto" src="{{ cdn('lead-gen/coop3r/coop3r-logo2.png') }}" alt="How To Start Playing Drums">
+                <img class="series-logo slim mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/coop3r/coop3r-logo2.png" alt="How To Start Playing Drums">
                 <h1 class="hidden">How To Start Playing Drums</h1>
             </div>
         </div>

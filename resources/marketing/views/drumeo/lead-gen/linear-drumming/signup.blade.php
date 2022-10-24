@@ -27,7 +27,7 @@
 @stop
 
 @section('content')
-    <header class="header" style="background-image:url({{ cdn('headers/9.jpg') }});">
+    <header class="header" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/headers/9.jpg);">
         <div class="container mx-auto px-4 max-w-6xl flex flex-col md:flex-row md:items-center">
             <div class="w-full md:mr-4 md:w-7/12 lg:w-2/3 lg:mr-10">
                 <div class="flex-video widescreen aspect-16:9 w-full relative">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="w-full md:w-5/12 lg:w-1/3">
-                <img class="series-logo mx-auto" src="{{ cdn('lead-gen/coop3r/coop3r-logo2.png') }}" alt="Linear Drumming">
+                <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/coop3r/coop3r-logo2.png" alt="Linear Drumming">
                 <h1 class="hidden">Linear Drumming</h1>
                 <p>Enter your email below for 5 free <br class="hidden lg:inline">
                     video lessons on linear drumming.</p>

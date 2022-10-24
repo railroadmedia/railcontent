@@ -592,7 +592,7 @@
 @stop
 @section('scripts')
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>
         $(document).ready(function () {
             // book sticks to nav on scroll

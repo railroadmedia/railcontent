@@ -442,7 +442,7 @@
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('/assets/js/sliding-anchor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>
         $(document).ready(function () {
 
