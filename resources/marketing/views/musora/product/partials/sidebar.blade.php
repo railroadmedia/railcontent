@@ -27,7 +27,7 @@
                     <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
                 @endif
                 @if(!empty($logo))
-                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif">
+                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif" alt="logo">
                 @endif
 
                 @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
@@ -90,9 +90,9 @@
                         </a>
                     @endif
 
-                    @if(!empty($bundle))
-                        <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{{ $sku }}"
-                                data-base-url="/laravel/public/shopping-cart/api/query?{{ $sku }}">
+                    @if($product->productType->name === 'Bundles')
+                        <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{{ $product->sku }}"
+                                data-base-url="/laravel/public/shopping-cart/api/query?{{ $product->sku }}">
                             <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                         </a>
                     @endif
