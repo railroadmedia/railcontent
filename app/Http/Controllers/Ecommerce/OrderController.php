@@ -85,7 +85,7 @@ class OrderController extends Controller
         );
     }
 
-    public function showOrderForm(Request $request)
+    public function showOrderForm(Request $request, $domain, $brand)
     {
         $currentUrl = route('order-form');
         $loginUrl = route('login', ['redirect_to' => $currentUrl]);
@@ -270,7 +270,7 @@ class OrderController extends Controller
             ->getContent();
 
         return view(
-            'drumeo.pages.order-form',
+            $brand . '.pages.order-form',
             [
                 'cart' => $this->cartService->toArray(),
                 'billingAddress' => $billingAddress->toArray(),
