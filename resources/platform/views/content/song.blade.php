@@ -10,7 +10,6 @@
     <script type="text/javascript">
         document.querySelectorAll('.song-play-button').forEach(item => {
             item.addEventListener("click", function () {
-                console.log('test');
                 document.getElementById('open-exercise-button').click();
             });
         })

@@ -16,7 +16,7 @@ class MusoraCenterContentController extends Controller
         $this->contentService = $contentService;
     }
 
-    public function showPreview($brand, $contentId)
+    public function showPreview($domain, $brand, $contentId)
     {
         ConfigService::$availableBrands = [$brand];
         ContentRepository::$pullFutureContent = true;
