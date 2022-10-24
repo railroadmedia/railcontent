@@ -1,6 +1,5 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=bbdeb8a90f43d49b6f0d55238638e5e0",
+    "/platform/js/app.js": "/platform/js/app.js?id=1caebb7e5445d3e45bad4e20272d77cf",
     "/platform/js/profile.js": "/platform/js/profile.js?id=ff3b906d68853ed670d48bee0f874eed",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=c8ad6ad6033627f6e06cb5ce04974f80",
     "/platform/js/books.js": "/platform/js/books.js?id=eeaa37d290ae2b65f80d51d147088203",
@@ -25,33 +24,4 @@
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=e5b309e96b9dc1fd5b9bbd1278510f39",
     "/marketing/js/app.js": "/marketing/js/app.js?id=46c9dc84d59c35d3e9fde5e312b24280",
     "/marketing/css/app.css": "/marketing/css/app.css?id=37604cd4d2bc2e80cc077f471b4c3ec3"
-=======
-    "/platform/js/app.js": "/platform/js/app.js",
-    "/platform/js/profile.js": "/platform/js/profile.js",
-    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js",
-    "/platform/js/books.js": "/platform/js/books.js",
-    "/platform/js/manifest.js": "/platform/js/manifest.js",
-    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js",
-    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js",
-    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js",
-    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js",
-    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js",
-    "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js",
-    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js",
-    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js",
-    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js",
-    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js",
-    "/platform/js/comments-component.js": "/platform/js/comments-component.js",
-    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js",
-    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js",
-    "/platform/css/app.css": "/platform/css/app.css",
-    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js",
-    "/platform/js/vendor.js": "/platform/js/vendor.js",
-    "/marketing/js/app.js": "/marketing/js/app.js",
-    "/marketing/js/manifest.js": "/marketing/js/manifest.js?id=893012fbe0ba6677bf4b948c7c2309b9",
-    "/marketing/css/app.css": "/marketing/css/app.css",
-    "/marketing/js/vendor.js": "/marketing/js/vendor.js?id=6320b0da449a0d72bef160431af4879f"
->>>>>>> master
 }
