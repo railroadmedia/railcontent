@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Guitareo;
+namespace App\Http\Controllers\Singeo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -10,15 +10,15 @@ class ShopController extends BaseController
 {
     public function shop()
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'singeo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
-        return view('guitareo.shop.shop', [ 'products' => $products ]);
+        return view('singeo.shop.shop', [ 'products' => $products ]);
     }
 
     public function product($root, $slug)
     {
-        $product = Product::where('slug', 'Guitareo-'.$slug)->firstOrFail();
+        $product = Product::where('slug', 'Singeo-'.$slug)->firstOrFail();
 
-        return view('guitareo.shop.product-layout', [ 'product' => $product, 'theme' => 'guitareo' ]);
+        return view('singeo.shop.product-layout', [ 'product' => $product, 'theme' => 'singeo' ]);
     }
 }
