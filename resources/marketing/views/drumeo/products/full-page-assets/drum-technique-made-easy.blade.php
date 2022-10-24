@@ -51,7 +51,7 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/parcel/js/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop()
 
 @section('layout-body')

@@ -329,6 +329,6 @@
     @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
+    <script src="{{ asset('/marketing/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
 @stop

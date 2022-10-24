@@ -12,7 +12,7 @@
     <meta property="og:description" content="You’re eligible for a free 30-day membership to Drumeo (normally $29).">
     <meta property="og:url" content="https://www.drumeo.com/sonor/">
 
-    @include('drumeo._partials._favicons')
+    @include('_partials.layout.favicons.drumeo-favicons')
     @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
@@ -299,6 +299,6 @@
             }
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
 @stop

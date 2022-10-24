@@ -211,5 +211,5 @@
             });
         });
     </script>
-    {{--<script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal.js') }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>--}}
 @stop
