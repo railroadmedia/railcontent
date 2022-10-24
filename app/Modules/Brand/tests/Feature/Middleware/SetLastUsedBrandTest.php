@@ -6,10 +6,10 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Brand\Middleware\SetLastUsedBrand;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Modules\Brand\Tests\BrandTestCase;
 use Modules\UserManagementSystem\Models\User;
+use Tests\TestCase;
 
-class SetLastUsedBrandTest extends BrandTestCase
+class SetLastUsedBrandTest extends TestCase
 {
     protected function setUp(): void
     {

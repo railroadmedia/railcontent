@@ -78,7 +78,7 @@
                         <!-- Follow -->
                         <button
                             class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl" 
-                            :class="[brandBgColor]"
+                            :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                             @click="followPost"
                         >
                             <span>
@@ -89,7 +89,7 @@
                         <!-- Reply -->
                         <button
                             class="tw-btn-primary tw-btn-small tw-w-full tw-px-4 tw-h-10 tw-mb-0 tw-text-xl"
-                            :class="[brandBgColor]"
+                            :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                             @click="scrollToReply"
                         >
                             <span>
@@ -248,7 +248,7 @@
                             
                             <button
                                 class="tw-btn-primary thread-reply-button"
-                                :class="`tw-bg-${ brand }`"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 type="submit"
                                 :disabled="formDisabled"
                             >
@@ -289,7 +289,7 @@
                                    readonly
                             >
                             <button class="tw-btn-primary tw-px-10" 
-                                    :class="[brandBgColor]"
+                                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                     role="button" 
                                     title="copy link to clipboard"
                                     @click="copyShareLink()">
@@ -368,7 +368,7 @@ export default {
             isLocked: this.thread.isLocked,
             isPinned: this.thread.isPinned,
             signaturesHidden: false,
-            allQuotesHidden: false,
+            allQuotesHidden: true,
             postReplyBody: '',
             currentPost:[],
             formDisabled: false,
@@ -416,12 +416,6 @@ export default {
         },
 
         baseProfileRoute() {
-            if (this.brand === 'drumeo') {
-                return '/laravel/public/members/profile/';
-            }
-            if (this.brand === 'guitareo') {
-                return '/members/account/';
-            }
             return '/members/profile/';
         },   
 
@@ -478,6 +472,11 @@ export default {
             iframe.setAttribute('width', '360');
             iframe.setAttribute('height', '205');
         });
+
+        //Scroll Post into view if hash exists
+        if(window.location.hash.length && document.querySelector(window.location.hash)) {
+            document.querySelector(window.location.hash).scrollIntoView()
+        }
     },
     methods: {
         handleFilterChange(value) {
@@ -672,6 +671,47 @@ export default {
     //     background-color: transparent;
     // }
 
+    //Temporary (Need to be factored with Blockquotes)
+        .quote-heading {
+            display: flex;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            //defaults
+            line-height: 1.7 !important;
+            font-family: "Bebas Neue", cursive;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #52525A;
+            font-size: 1rem; 
+            margin-bottom: 15px;
+
+            strong,b {
+                line-height: 1.7;
+                margin-right: 0.25rem;
+                font-family: "Open Sans", sans-serif;
+                text-transform: none;
+                letter-spacing: 0; 
+                color: #00101D;
+            }
+
+            em {
+                line-height: 1.6;
+                padding-right: 0.25rem;
+                color: #52525A;
+                font-style: normal;
+            }
+        }
+        body.tw-dark .quote-heading em,
+        body.tw-dark .quote-heading {
+            color: #9EC0DC;
+        }
+        body.tw-dark .quote-heading strong {
+            color: white;
+        }
+        .post-body blockquote {
+            position: relative;
+        }
+    //---------------------------//
     .thread-title {
         @include xSmallOnly {
             font-size:20px;

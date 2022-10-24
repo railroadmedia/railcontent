@@ -1,10 +1,9 @@
-<vue-recaptcha ref="recaptcha"
-    x-on:verify="onVerify" 
-    x-bind:sitekey="siteKey"
-/>
+{{-- Reacaptcha Componetn --}}
 
+<div class="g-recaptcha" data-sitekey="{{ $siteKey }}"></div>
+<input type="hidden" name="{{$tokenName}}" x-ref="{{$tokenName}}">
 
-
+{{-- 
 <script>
 import { VueRecaptcha } from 'vue-recaptcha';
 
@@ -28,4 +27,4 @@ export default {
 
 
 }
-</script>
+</script> --}}

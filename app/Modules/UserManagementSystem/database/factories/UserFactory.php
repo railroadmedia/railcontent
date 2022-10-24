@@ -67,14 +67,14 @@ class UserFactory extends Factory
             'drums_gear_cymbal_brands' => $this->faker->words(3, true),
             'drums_gear_photo' => $this->faker->imageUrl,
             'drums_playing_since_year' => rand(1950, 2020),
-            'notify_on_lesson_comment_like' => true,
+            'notify_on_lesson_comment_like' => 1,
             'notifications_summary_frequency_minutes' => 5000,
-            'notify_on_forum_post_reply' => true,
-            'notify_on_forum_followed_thread_reply' => true,
-            'notify_on_forum_post_like' => true,
-            'notify_weekly_update' => true,
-            'notify_on_lesson_comment_reply' => true,
-            'use_legacy_video_player' => false,
+            'notify_on_forum_post_reply' => 1,
+            'notify_on_forum_followed_thread_reply' => 1,
+            'notify_on_forum_post_like' => 1,
+            'notify_weekly_update' => 1,
+            'notify_on_lesson_comment_reply' => 1,
+            'use_legacy_video_player' => 0,
             'drums_skill_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced', null]),
             'guitar_skill_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced', null]),
             'piano_skill_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced', null]),
@@ -97,6 +97,8 @@ class UserFactory extends Factory
             'guitareo_onboarding_skip_setup' => 0,
             'pianote_onboarding_skip_setup' => 0,
             'drumeo_onboarding_skip_setup' => 0,
+            'brand_total_xp' => null,
+            'brand_minutes_practiced' => null
         ];
     }
 

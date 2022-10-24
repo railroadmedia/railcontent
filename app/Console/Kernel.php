@@ -4,10 +4,15 @@ namespace App\Console;
 
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
+use App\Console\Commands\PopulateUserBrandLevel;
+use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
+use App\Console\Commands\PopulateUserTotalXpPerBrand;
+use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\VaporEnvManager;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +30,11 @@ class Kernel extends ConsoleKernel
         PopulateUserRolesTable::class,
         RunMWPPhaseOneLaunchMigrations::class,
         MigrateCoachesToInstructors::class,
+        PopulateUserBrandLevel::class,
+        RepairVimeoDurations::class,
+        PopulateUserTotalXpPerBrand::class,
+        PopulateUserMinutesPracticedPerBrand::class,
+        VaporEnvManager::class,
     ];
 
     /**
@@ -35,7 +45,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('ProcessTrackings')->everyMinute();
     }
 
     /**

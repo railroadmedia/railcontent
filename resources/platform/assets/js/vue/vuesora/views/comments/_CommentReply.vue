@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-row comment-post pv mv-1  dark:tw-text-white">
+    <div class="tw-flex tw-flex-row comment-post pv mv-1  dark:tw-text-white tw-ml-[-70px] sm:tw-ml-[-60] md:tw-ml-0">
         <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
             <div
                 v-if="hasPublicProfiles"
@@ -81,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-row body tw-mb-1">
+            <div class="tw-flex tw-flex-row body tw-mb-2">
                 <div
                     class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post"
                     v-html="comment.comment"

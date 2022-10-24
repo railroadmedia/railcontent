@@ -18,7 +18,7 @@ class TestingUserProvider implements UserProviderInterface
     public function isAdministrator(int $userId): bool
     {
         return $this->databaseManager->connection(config('event-data-synchronizer.users_database_connection_name'))
-            ->table(config('event-data-synchronizer.users_table_name'))
+            ->table('usora_users')
             ->where('id', $userId)
             ->where('permission_level', 'administrator')
             ->exists();
@@ -32,7 +32,7 @@ class TestingUserProvider implements UserProviderInterface
         bool $isPackOwner
     ): bool {
         return $this->databaseManager->connection(config('event-data-synchronizer.users_database_connection_name'))
-                ->table(config('event-data-synchronizer.users_table_name'))
+                ->table('usora_users')
                 ->where('id', $userId)
                 ->update(
                     [
@@ -44,4 +44,8 @@ class TestingUserProvider implements UserProviderInterface
                 ) > 0;
     }
 
+    public function saveExperiencePoints(int $userId, int $totalXp): bool
+    {
+        // TODO: Implement saveExperiencePoints() method.
+    }
 }

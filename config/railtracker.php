@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'global_is_active' => true,
+    'global_is_active' => env('RAILTRACKER_ENABLED', true),
+
+    'brand' => 'musora',
 
     // brand database connection names (each brand is on its own database for now)
     'brand_database_connection_names' => [
@@ -27,12 +29,10 @@ return [
     'media_playback_sessions_table' => 'media_playback_sessions',
 
     // cache
-//    'redis_host' => env('REDIS_HOST', 'redis'),
-//    'redis_port' => env('REDIS_PORT', 6379),
-    'cache_prefix' => 'musora_railtracker_',
-    'cache_driver' => 'array',
+    'redis_connection_name' => 'railtracker',
+    'cache_prefix' => 'mwp_railtracker_',
     'cache_duration' => 60 * 60 * 24 * 2, // 2 days
-    'batch_prefix' => env('RAILTRACKER_BATCH_PREFIX', 'railtracker4_drumeo_'),
+    'batch_prefix' => env('RAILTRACKER_BATCH_PREFIX', 'railtracker4_mwp_'),
 
     'exclusion_regex_paths'=> [
         '/members\/live\-poll/',

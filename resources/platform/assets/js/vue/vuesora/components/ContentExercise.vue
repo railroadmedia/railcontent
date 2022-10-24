@@ -89,14 +89,14 @@
 
             <div
                 v-if="currentPage > 1"
-                class="side-button prev flex-center"
+                class="side-button prev flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40"
                 @click="scrollToPage(currentPage - 1)"
             >
                 <i class="fas fa-chevron-left"></i>
             </div>
             <div
                 v-if="currentPage < totalPages"
-                class="side-button next flex-center"
+                class="side-button next flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40"
                 @click="scrollToPage(currentPage + 1)"
             >
                 <i class="fas fa-chevron-right"></i>

@@ -117,7 +117,7 @@ onUnmounted(() => {
         </div>
         <div class="tw-flex tw-justify-end tw-px-[32px]">
           <button @click="onCancel" class="tw-grow tw-btn-secondary tw-text-gray-400">No</button>
-          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-bg-${brand} tw-ml-[16px]`">Yes</button>
+          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-ml-[16px]`">Yes</button>
         </div>
       </div>
     </div>

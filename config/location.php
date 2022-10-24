@@ -37,7 +37,7 @@ return [
         ]
     ],
 
-    'environment' => env('APP_ENV', 'local'),
+    'environment' => env('APP_ENV', 'production'),
     'testing_ip' => '108.172.176.221',
     'active_api' => 'ipdata.co',
     'api' =>

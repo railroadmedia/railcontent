@@ -1,0 +1,10 @@
+@import './_variables.scss';
+
+[data-image-fade] {
+  opacity:0;
+  transition: opacity .5s;
+
+  &.image-loaded {
+    opacity:1;
+  }
+}

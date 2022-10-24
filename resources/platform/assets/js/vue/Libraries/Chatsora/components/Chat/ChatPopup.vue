@@ -8,7 +8,7 @@
                     class="cs-sub-menu tw-w-44 tw-p-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white cs-text-sm tw-z-50"
                 >
                     <div v-if="message.user.id != userId && !isAdministrator">
-                        <a :href="message.user.profileUrl" target="_blank" class="tw-no-underline tw-text-white">View Profile</a>
+                        <a :href="message.user.profileUrl" target="_blank" class="tw-no-underline tw-text-white">View Dashboard</a>
                     </div>
                     <div
                         :class="{'tw-mb-2': isAdministrator}"

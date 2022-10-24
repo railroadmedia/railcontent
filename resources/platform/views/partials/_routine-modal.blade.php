@@ -1,11 +1,11 @@
 <div class="flex flex-row align-left">
-    <button class="tw-btn-primary tw-bg-{{ $brand }} tw-px-16"
+    <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-px-16"
             data-open-modal="routineModal">
         How To Use Routines
     </button>
 </div>
 
-<div id="routineModal" class="modal">
+<div id="routineModal" class="modal vimeo-embedded-player">
     <div class="flex flex-column corners-10">
         <div class="video-wrap">
             <div class="widescreen">

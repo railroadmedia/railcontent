@@ -54,10 +54,11 @@ class CommentUserDecorator extends ModeDecoratorBase
             $comments[$commentIndex]['user']['display_name'] = $commentAuthor['display_name'];
             $comments[$commentIndex]['user']['fields.profile_picture_image_url'] =
                 $commentAuthor['profile_picture_url'];
-            $comments[$commentIndex]['user']['xp'] = $commentAuthor->getTotalXp();
+            $comments[$commentIndex]['user']['xp'] = $commentAuthor->getBrandTotalXp();
             $comments[$commentIndex]['user']['rank'] = $commentAuthor->getXpRank();
             $comments[$commentIndex]['user']['access_level'] = $commentAuthor['access_level'];
             $comments[$commentIndex]['user']['xp_level'] = $commentAuthor->getMethodLevel();
+            $comments[$commentIndex]['user']['level_number'] = $commentAuthor->getMethodLevel();
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
                 $comments[$commentIndex]['replies'][$replyIndex]['created_on_diff'] =
@@ -79,18 +80,17 @@ class CommentUserDecorator extends ModeDecoratorBase
                     $replyAuthor['display_name'];
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['xp'] =
-                    $replyAuthor->getTotalXp();
+                    $replyAuthor->getBrandTotalXp();
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['rank'] =
                     $replyAuthor->getXpRank();
 
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['access_level'] = $replyAuthor['access_level'];
-                $comments[$commentIndex]['replies'][$replyIndex]['user']['xp_level'] = $replyAuthor->getMethodLevel();
+                $comments[$commentIndex]['replies'][$replyIndex]['user']['level_number'] = $replyAuthor->getMethodLevel();
                 $comments[$commentIndex]['replies'][$replyIndex]['user']['fields.profile_picture_image_url'] =
                     $replyAuthor['profile_picture_url'];
             }
         }
-
         return $comments;
     }
 }

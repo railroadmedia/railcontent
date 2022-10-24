@@ -29,7 +29,7 @@
                 </h2>
             </div>
 
-            <h1 class="display text-white mb-1">
+            <h1 class="display text-white mb-1 tw-text-center">
                 {{ $parentContent->fetch('fields.title') }}
             </h1>
 

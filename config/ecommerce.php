@@ -44,6 +44,7 @@ return [
     'autoload_all_routes' => true,
     'route_middleware_public_groups' => ['web_or_api_public'],
     'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
+    'route_middleware_mobile_app_receipt_validation_groups' => ['api_public'],
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',
@@ -279,8 +280,20 @@ return [
 
         'stripe' => [
             'drumeo' => [
-                'stripe_api_secret' => env('STRIPE_API_SECRET'),
-                'stripe_publishable_key' => env('STRIPE_PUBLISHABLE_KEY'),
+                'stripe_api_secret' => env('DRUMEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('DRUMEO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'pianote' => [
+                'stripe_api_secret' => env('PIANOTE_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('PIANOTE_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'guitareo' => [
+                'stripe_api_secret' => env('GUITAREO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('GUITAREO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'singeo' => [
+                'stripe_api_secret' => env('SINGEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('SINGEO_STRIPE_PUBLISHABLE_KEY'),
             ],
         ],
 

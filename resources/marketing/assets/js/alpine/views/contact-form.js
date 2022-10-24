@@ -1,0 +1,1 @@
+//When a component wraps a multiple components place it in this direcory as a 'view' component

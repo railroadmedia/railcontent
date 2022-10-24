@@ -2,7 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
+use App\Maps\ContentTypes;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
+use App\Services\UserMetricsService;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
@@ -18,6 +20,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
 use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
+use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 
 class ContentProgressEventListener
 {
@@ -58,6 +61,8 @@ class ContentProgressEventListener
 
     private UserProviderInterface $userProvider;
 
+    private UserMetricsService $userMetricsService;
+
     public function __construct(
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
@@ -67,7 +72,8 @@ class ContentProgressEventListener
         ContentRepository $contentRepository,
         UserPointsService $userPointsService,
         UserProviderInterface $userProvider,
-        MediaPlaybackRepository $mediaPlaybackRepository
+        MediaPlaybackRepository $mediaPlaybackRepository,
+        UserMetricsService $userMetricsService
     ) {
         $this->userContentProgressService = $userContentProgressService;
         $this->contentService = $contentService;
@@ -77,6 +83,7 @@ class ContentProgressEventListener
         $this->userPointsService = $userPointsService;
         $this->userProvider = $userProvider;
         $this->mediaPlaybackRepository = $mediaPlaybackRepository;
+        $this->userMetricsService = $userMetricsService;
     }
 
     public function handleUserProgressSaved(UserContentProgressSaved $userContentProgressSaved)
@@ -91,6 +98,7 @@ class ContentProgressEventListener
             // award xp
             // course
             if ($content['type'] == 'course') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.course_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -99,8 +107,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'course_content_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.course_content_completed')),
-                        'Awarded per complete course.'
+                        $pointAmount,
+                        'Awarded per complete course.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -112,6 +121,7 @@ class ContentProgressEventListener
 
             // semester pack
             if ($content['type'] == 'semester-pack') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.pack_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -120,8 +130,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'pack_content_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.pack_content_completed')),
-                        'Awarded per complete pack.'
+                        $pointAmount,
+                        'Awarded per complete pack.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -133,6 +144,7 @@ class ContentProgressEventListener
 
             // pack
             if ($content['type'] == 'pack') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.pack_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -141,8 +153,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'pack_content_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.pack_content_completed')),
-                        'Awarded per complete pack.'
+                        $pointAmount,
+                        'Awarded per complete pack.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -154,6 +167,7 @@ class ContentProgressEventListener
 
             // pack bundle
             if ($content['type'] == 'pack-bundle') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.pack_bundle_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -162,8 +176,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'pack_bundle_content_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.pack_bundle_content_completed')),
-                        'Awarded per complete pack dvd/bundle.'
+                        $pointAmount,
+                        'Awarded per complete pack dvd/bundle.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -175,6 +190,7 @@ class ContentProgressEventListener
 
             // learning path
             if ($content['type'] == 'learning-path') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.learning_path_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -183,8 +199,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'learning_path_content_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.learning_path_content_completed')),
-                        'Awarded per complete learning path.'
+                        $pointAmount,
+                        'Awarded per complete learning path.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -196,6 +213,7 @@ class ContentProgressEventListener
 
             // learning path level
             if ($content['type'] == 'learning-path-level') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.learning_path_level_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -204,8 +222,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'learning_path_content_level_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.learning_path_level_content_completed')),
-                        'Awarded per complete learning path level.'
+                        $pointAmount,
+                        'Awarded per complete learning path level.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -217,6 +236,7 @@ class ContentProgressEventListener
 
             // learning path course
             if ($content['type'] == 'learning-path-course') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.learning_path_course_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -225,8 +245,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'learning_path_content_course_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.learning_path_course_content_completed')),
-                        'Awarded per complete learning path course.'
+                        $pointAmount,
+                        'Awarded per complete learning path course.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -238,6 +259,7 @@ class ContentProgressEventListener
 
             // learning path lesson
             if ($content['type'] == 'learning-path-lesson') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.learning_path_lesson_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -246,8 +268,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'learning_path_content_lesson_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.learning_path_lesson_content_completed')),
-                        'Awarded per complete learning path lesson.'
+                        $pointAmount,
+                        'Awarded per complete learning path lesson.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -259,6 +282,7 @@ class ContentProgressEventListener
 
             // assignment
             if ($content['type'] == 'assignment') {
+                $pointAmount = $content->fetch('fields.xp', config('xp_ranks.assignment_content_completed'));
                 if (($percent == 100 || $state == 'completed')) {
                     $this->userPointsService->setPoints(
                         $userContentProgressSaved->userId,
@@ -267,8 +291,9 @@ class ContentProgressEventListener
                             'progress_state' => 'completed',
                         ],
                         'assignment_content_completed',
-                        $content->fetch('fields.xp', config('xp_ranks.assignment_content_completed')),
-                        'Awarded per complete assignment.'
+                        $pointAmount,
+                        'Awarded per complete assignment.',
+                        brand()
                     );
                 } else {
                     $this->userPointsService->deletePoints($userContentProgressSaved->userId, [
@@ -281,7 +306,7 @@ class ContentProgressEventListener
             // other singular lesson types
             if (in_array(
                 $content['type'],
-                config('railcontent.singularContentTypes', [])
+                ContentTypes::singularContentTypes()
             )) {
                 $pointAmount =
                     config('xp_ranks.difficulty_xp_map')[$content->fetch('fields.difficulty')]
@@ -310,9 +335,10 @@ class ContentProgressEventListener
                     ]);
                 }
             }
+
             $this->userProvider->saveExperiencePoints(
                 $userContentProgressSaved->userId,
-                $this->userPointsService->countUserPoints(
+                $this->userPointsService->countUserPointsPerBrand(
                     $userContentProgressSaved->userId
                 )
             );
@@ -321,6 +347,18 @@ class ContentProgressEventListener
 
     public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
     {
+        $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
+        if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds))  {
+            $min = $this->userMetricsService->getTotalMinutesPracticed($mediaPlaybackTracked->userId, $assignmentTypeIds);
+            $userBrandMinutesPracticed = user()->brand_minutes_practiced;
+            $brand = config('railcontent.brand');
+            $userBrandMinutesPracticed[$brand] = $min;
+
+            user()->brand_minutes_practiced = $userBrandMinutesPracticed;
+            user()->save();
+
+        }
+
         // sound slice assignment
         if ($mediaPlaybackTracked->typeId == 4) {
             $maxMinutesToTrack = 600;
@@ -333,7 +371,7 @@ class ContentProgressEventListener
 
             if ($totalTimeWatched <= $maxMinutesToTrack) {
                 $minutes = floor($totalTimeWatched / 60);
-
+                $totalAmount = 0;
                 while ($minutes > 0) {
                     $this->userPointsService->setPoints(
                         $mediaPlaybackTracked->userId,
@@ -347,9 +385,17 @@ class ContentProgressEventListener
                         $mediaPlaybackTracked->brand
                     );
 
+                    $totalAmount = $totalAmount + config('xp_ranks.per_minute_of_assignment_practiced');
+
                     $minutes--;
                 }
             }
+            $this->userProvider->saveExperiencePoints(
+                $mediaPlaybackTracked->userId,
+                $this->userPointsService->countUserPointsPerBrand(
+                    $mediaPlaybackTracked->userId
+                )
+            );
 
             return;
         }
@@ -366,7 +412,7 @@ class ContentProgressEventListener
 
             if ($totalTimeWatched <= $maxMinutesToTrack) {
                 $minutes = floor($totalTimeWatched / 60);
-
+                $totalAmount = 0;
                 while ($minutes > 0) {
                     $this->userPointsService->setPoints(
                         $mediaPlaybackTracked->userId,
@@ -380,14 +426,25 @@ class ContentProgressEventListener
                         $mediaPlaybackTracked->brand
                     );
 
+                    $totalAmount = $totalAmount + config('xp_ranks.per_minute_of_play_along_practiced');
+
                     $minutes--;
                 }
+
+                $this->userProvider->saveExperiencePoints(
+                    $mediaPlaybackTracked->userId,
+                    $this->userPointsService->countUserPointsPerBrand(
+                        $mediaPlaybackTracked->userId
+                    )
+                );
             }
 
             return;
         }
 
-        $vimeoIdFields = $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId)->toArray();
+        $vimeoIdFields =
+            $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId)
+                ->toArray();
 
         $lengthInSeconds = $mediaPlaybackTracked->mediaLengthInSeconds;
 
@@ -400,7 +457,7 @@ class ContentProgressEventListener
 
             if ($lengthInSeconds > 0 && $totalTimeWatched < $lengthInSeconds) {
                 $minutes = floor($totalTimeWatched / 60);
-
+                $totalAmount = 0;
                 while ($minutes > 0) {
                     $this->userPointsService->setPoints(
                         $mediaPlaybackTracked->userId,
@@ -414,14 +471,16 @@ class ContentProgressEventListener
                         $mediaPlaybackTracked->brand
                     );
 
+                    $totalAmount = $totalAmount + config('xp_ranks.per_minute_content_watched');
                     $minutes--;
-                    $this->userProvider->saveExperiencePoints(
-                        $mediaPlaybackTracked->userId,
-                        $this->userPointsService->countUserPoints(
-                            $mediaPlaybackTracked->userId
-                        )
-                    );
                 }
+
+                $this->userProvider->saveExperiencePoints(
+                    $mediaPlaybackTracked->userId,
+                    $this->userPointsService->countUserPointsPerBrand(
+                        $mediaPlaybackTracked->userId
+                    )
+                );
             }
 
             if ($mediaPlaybackTracked->mediaLengthInSeconds > 0) {
@@ -437,13 +496,6 @@ class ContentProgressEventListener
                 );
             }
         }
-
-        $this->userProvider->saveExperiencePoints(
-            $mediaPlaybackTracked->userId,
-            $this->userPointsService->countUserPoints(
-                $mediaPlaybackTracked->userId
-            )
-        );
     }
 
     public function handleReset(UserContentsProgressReset $userContentsProgressReset)
@@ -457,7 +509,7 @@ class ContentProgressEventListener
 
         $this->userProvider->saveExperiencePoints(
             $userContentsProgressReset->userId,
-            $this->userPointsService->countUserPoints(
+            $this->userPointsService->countUserPointsPerBrand(
                 $userContentsProgressReset->userId
             )
         );
@@ -491,7 +543,7 @@ class ContentProgressEventListener
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
+            $this->userPointsService->countUserPointsPerBrand(
                 $comment['user_id']
             )
         );
@@ -521,9 +573,9 @@ class ContentProgressEventListener
 
             foreach ($commentLikes as $commentLike) {
                 $hashes[] = $this->userPointsService->hash([
-                    'comment_id' => $comment['id'],
-                    'comment_liker_user_id' => $commentLike['user_id'],
-                ]);
+                                                               'comment_id' => $comment['id'],
+                                                               'comment_liker_user_id' => $commentLike['user_id'],
+                                                           ]);
             }
 
             $this->userPointsService->repository()
@@ -536,7 +588,7 @@ class ContentProgressEventListener
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
+            $this->userPointsService->countUserPointsPerBrand(
                 $comment['user_id']
             )
         );
@@ -560,7 +612,7 @@ class ContentProgressEventListener
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
+            $this->userPointsService->countUserPointsPerBrand(
                 $comment['user_id']
             )
         );
@@ -578,9 +630,19 @@ class ContentProgressEventListener
 
         $this->userProvider->saveExperiencePoints(
             $comment['user_id'],
-            $this->userPointsService->countUserPoints(
+            $this->userPointsService->countUserPointsPerBrand(
                 $comment['user_id']
             )
         );
+    }
+
+    public function handleHeighKeyProgressUpdates(HigherKeyProgressUpdated $event)
+    {
+        $userBrandMethodLevels = user()->brand_method_levels;
+        $brand = config('railcontent.brand');
+        $userBrandMethodLevels[$brand] = $event->higherKeyProgress;
+
+        user()->brand_method_levels = $userBrandMethodLevels;
+        user()->save();
     }
 }

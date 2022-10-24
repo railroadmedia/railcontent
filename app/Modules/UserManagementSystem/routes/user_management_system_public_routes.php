@@ -43,11 +43,14 @@ Route::group(
         Route::get(
             'login/generated-key',
             AuthenticationController::class . '@loginGeneratedKey',
-        )->middleware(     [
-//            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
-//            \Railroad\MusoraApi\Middleware\AddMemberData::class,
-        ])
+        )
             ->name('user_management_system.login.generated-key');
+
+        Route::get(
+            'check-for-auth-then-redirect-back-with-auth-key',
+            AuthenticationController::class . '@checkForAuthThenRedirectBackWithAuthKey',
+        )
+            ->name('user_management_system.check-for-auth-then-redirect-back-with-auth-key');
 
         Route::post(
             'password/send-reset-email',

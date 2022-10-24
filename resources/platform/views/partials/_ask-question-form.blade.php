@@ -1,6 +1,6 @@
 <div class="tw-flex tw-flex-row">
     <div class="tw-flex tw-flex-col tw-mr-4 tw-py-1">
-        <button class="tw-btn tw-btn-primary tw-bg-{{ $brand }} tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
+        <button class="tw-btn tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-h-[50px] tw-w-full lg:tw-w-[345px] 3xl:tw-w-[465px]"
             data-open-modal="askQuestionModal">
             Ask a Question
         </button>

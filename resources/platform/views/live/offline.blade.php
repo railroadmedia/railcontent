@@ -55,11 +55,12 @@
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                 <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
                     <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
-                        Scheduled Releases
+                        Upcoming Live Events
                     </h1>
                 </div>
                 <div class="tw-flex tw-flex-col">
                     <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
+                        <i class="fas fa-calendar-plus mr-1"></i>
                         Subscribe to Calendar 
                     </button>
                 </div>
@@ -68,7 +69,7 @@
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
                     timezone="{{ $fullTimezoneString }}"
-                    subscription-calendar-id=""
+                    subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
                     theme-color="{{ $brand }}"
                 />
             </div>
