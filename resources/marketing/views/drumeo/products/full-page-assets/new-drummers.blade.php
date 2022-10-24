@@ -77,7 +77,7 @@
                     ${{ Prices::$ndshRegular }}
                 </strong>
             </h4>
-{{--            <a class="join ndsh anchor-slide" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>--}}
+{{--            <a class="join ndsh anchor-slide" href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>--}}
         </div>
     </header>
 
@@ -594,7 +594,7 @@
                 </strong>
             </h4>
 
-{{--            <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>--}}
+{{--            <a href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>--}}
 
             <div class="inline-block w-full px-3 md:px-4 mt-5 md:mt-8 text-light-navy text-4xl md:text-5xl">
                 <i class="fab mx-1 fa-cc-visa"></i>

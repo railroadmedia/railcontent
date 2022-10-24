@@ -2,7 +2,7 @@
 
 @section('badge-text', 'NEW DRUMMERS START HERE SPECIAL')
 @section('annual-url')
-    href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-Trial-Annual-30-Day]=1&promo-code=coach-discount&locked=true"
+    href="/laravel/public/shopping-cart/api/query?products[DLM-Trial-Annual-30-Day]=1&promo-code=coach-discount&locked=true"
 @endsection
 @section('extra-savings', '$200')
 @section('extra-savings-divided', '$16.67')

@@ -65,7 +65,7 @@
                 <br class="inline lg:hidden">online course with Bruce Becker & Jared Falk.</h3>
 
             <div>
-{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
+{{--                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
             </div>
 
             <p class="uppercase price">
@@ -84,7 +84,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
+{{--                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
             </div>
         </div>
     </header>
@@ -665,7 +665,7 @@
             </h1>
 
             <div>
-{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
+{{--                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
             </div>
 
             <h2 class="uppercase">

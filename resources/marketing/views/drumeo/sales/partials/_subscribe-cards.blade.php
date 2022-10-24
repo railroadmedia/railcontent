@@ -8,7 +8,7 @@
         <h2 class="mt-3 mb-10"><strong>Choose the plan <br class="inline md:hidden">that's right for you.</strong></h2>
         <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM]=1,month,1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>Monthly</strong></h5>
                         <h1 class="inline-block leading-none">

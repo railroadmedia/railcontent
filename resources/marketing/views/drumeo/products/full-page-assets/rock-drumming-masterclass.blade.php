@@ -35,7 +35,7 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/parcel/js/drumeo/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
 @stop()
 
@@ -52,7 +52,7 @@
             <h3 class="columns">The Rock Drumming Masterclass is a
                 <br class="show-for-medium-only">26-week online course with Todd Sucherman.</h3>
 
-{{--            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>--}}
+{{--            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>--}}
 
             <p class="columns uppercase price">
 {{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}
@@ -71,7 +71,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400735162?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-{{--                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>--}}
+{{--                <a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>--}}
             </div>
         </div>
     </header>
@@ -642,7 +642,7 @@
 {{--                {{ round(Prices::$rdmRegular / 26, 2) }}--}}
                 Per Week</h1>
 
-{{--            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[rock-drumming-masterclass-pack]=1" class="btn-primary bg-drumeo w-full">Get Started &raquo;</a></div>--}}
+{{--            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="btn-primary bg-drumeo w-full">Get Started &raquo;</a></div>--}}
 
             <h2 class="columns uppercase">
 {{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}

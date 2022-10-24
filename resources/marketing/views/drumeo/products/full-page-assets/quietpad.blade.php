@@ -1,7 +1,7 @@
 @extends('drumeo.products.full-page-assets.quietpad-layout')
 
 @section('button')
-    <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+    <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
     {{--<a class="join sold-out">Sold Out &raquo;</a>--}}
 @stop
 

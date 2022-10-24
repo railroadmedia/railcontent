@@ -1056,7 +1056,7 @@
         <div class="row order-bar text-center">
             <div class="columns">
                 <a class="join stores big"
-                        href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[practicepad]=1">Click Here To Order &raquo;</a>
+                        href="/laravel/public/shopping-cart/api/query?products[practicepad]=1">Click Here To Order &raquo;</a>
                 <p>Or buy through your favorite online stores:</p>
                 {{--<a target="_blank" class="join amazon" href="https://www.amazon.com/dp/B01IRNGWDK"><img style="padding-top: 5px;"--}}
                 {{--src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>--}}
@@ -1291,7 +1291,7 @@
                     <h1>ONLY ${{ Prices::$padRegular }}</h1>
                 @endif
                 <a class="join stores big"
-                        href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[practicepad]=1">Click Here To Order &raquo;</a>
+                        href="/laravel/public/shopping-cart/api/query?products[practicepad]=1">Click Here To Order &raquo;</a>
                 <p>Or buy through your favorite online stores:</p>
                 {{--<a target="_blank" class="join stores amazon" href="https://www.amazon.com/dp/B01IRNGWDK"><img style="padding-top: 5px;"--}}
                 {{--src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>--}}

@@ -80,7 +80,7 @@
                 </div>
                 <p>Unlock your musicality & creativity on <br class="hide-for-medium">
                     the drums through 26 weekly lessons.</p>
-                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+                <a href="/laravel/public/shopping-cart/api/query?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
                 <p class="uppercase price-info">
                     @if(Prices::$imeFull > Prices::$imeRegular)
                         <s>Normally ${{ Prices::$imeFull }}</s> <strong>Only ${{ Prices::$imeRegular, 2 }}</strong> (Save {{ round(100 - (100 * (Prices::$imeRegular / Prices::$imeFull))) }}%)
@@ -99,7 +99,7 @@
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/401069316?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
             <br>
-            <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+            <a href="/laravel/public/shopping-cart/api/query?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
         </div>
     </header>
 
@@ -472,7 +472,7 @@
                 Jared Falk’s 26-Week Online <br class="hide-for-large">
                 Course For Just ${{ round(Prices::$imeRegular / 26, 2) }} Per Week</h1>
 
-            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="columns uppercase">
                 @if(Prices::$imeFull > Prices::$imeRegular)

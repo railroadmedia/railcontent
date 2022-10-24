@@ -18,7 +18,6 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
     Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
     Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
-    Route::get('/better-sound/', [SalesController::class, 'salesBetterSound'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
     Route::get('/festival/coastal-jazz-discount/', [SalesController::class, 'festivalCoastal'] );
     Route::get('/festival/edge/', [SalesController::class, 'festivalEdge'] );

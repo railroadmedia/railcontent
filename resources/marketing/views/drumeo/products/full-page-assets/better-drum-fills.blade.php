@@ -56,7 +56,7 @@
             </div>
             <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
             <h1>The ultimate crash course to playing <strong>more creative &<br class="show-for-medium"> more musical drum fills</strong> your audience will love!</h1>
-            <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
+            <a href="/laravel/public/shopping-cart/api/query?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
             <p>
                 @if(Prices::$bdfFull > Prices::$bdfRegular)
                     <strong>ONLY <s>${{ Prices::$bdfFull }}</s>
@@ -78,7 +78,7 @@
         <div class="flex-video widescreen vimeo">
             <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/424843063?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
         </div>
-        <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
+        <a href="/laravel/public/shopping-cart/api/query?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
     </div>
 
     <section class="one-common text-center">
@@ -295,7 +295,7 @@
 
             <h2 class="columns">The ultimate crash course to playing <strong>more creative &<br class="show-for-medium"> more musical drum fills</strong> your audience will love!</h2>
 
-            <div class="columns"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h4 class="columns uppercase">
                 @if(Prices::$bdfFull > Prices::$bdfRegular)

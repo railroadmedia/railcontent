@@ -47,7 +47,7 @@
                 <p>Jared Falk’s step-by-step plan for building a rock-solid <br class="hidden sm:inline">
                     drumming foundation for achieving any musical goals. </p>
                 {{--<a class="join sold-out">Sold Out</a>--}}
-                <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>
+                <a href="/laravel/public/shopping-cart/api/query?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>
                 <p class="price-info">
                     <s>NORMALLY ${{ Prices::$sdOnlineFull }}.</s> <strong>NOW ${{ Prices::$sdOnlineRegular }}</strong> (SAVE {{ round(100 - (100 * (Prices::$sdOnlineRegular / Prices::$sdOnlineFull))) }}%).
                     <br> <span class="text-blue">90-DAY GUARANTEE.</span>
@@ -307,7 +307,7 @@
             <h2 class="float-left w-full px-3 sm:px-4">Get Jared Falk’s trusted step-by-step curriculum <br class="inline sm:hidden">
                 for a one-time payment of just ${{ Prices::$sdOnlineRegular }}.</h2>
             {{--<div class="float-left w-full px-3 sm:px-4"><a class="join sold-out">Sold Out</a></div>--}}
-            <div class="float-left w-full px-3 sm:px-4"><a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="float-left w-full px-3 sm:px-4"><a href="/laravel/public/shopping-cart/api/query?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h2 class="float-left w-full px-3 sm:px-4 highlighted"><s>NORMALLY ${{ Prices::$sdOnlineFull }}.</s> <strong><u>ONLY ${{ Prices::$sdOnlineRegular }}</u></strong> (SAVE {{ round(100 - (100 * (Prices::$sdOnlineRegular / Prices::$sdOnlineFull))) }}%).
                 <br> <span class="text-blue">90-DAY GUARANTEE.</span>
