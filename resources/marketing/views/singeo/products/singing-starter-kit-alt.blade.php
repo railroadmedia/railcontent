@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/singing-starter-kit.css') }}" rel="stylesheet">
 
@@ -312,7 +312,7 @@
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/singeo/modal.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
     <script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
     <script>

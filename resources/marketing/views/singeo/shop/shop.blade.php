@@ -9,7 +9,7 @@
     <meta property="og:url" content="https://www.singeo.com/shop/">
 
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/singeo/shop.css') }}" rel="stylesheet">
@@ -340,10 +340,10 @@
 
     @include("singeo.sales.partials._footer")
 
-    <script src="{{ asset('marketing/parcel/singeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/singeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/singeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/singeo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/app.js') }}"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
