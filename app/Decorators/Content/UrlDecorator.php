@@ -40,7 +40,9 @@ class UrlDecorator extends ModeDecoratorBase
 
             //TODO: Should be deleted when the hierarchy with the draft learning-path: advanced-lead-guitar is deleted
             if ((brand() == 'guitareo' && $content['type'] == 'play-along') ||
-            ($content['type'] == 'course')){
+                ($content['type'] == 'course') ||
+                (($content['type'] ==  'song') && (brand() == 'guitareo' ))) {
+
                 $contentParentData = [];
             }
             if(($content['type'] == 'course-part') && count($contentParentData) > 1){
