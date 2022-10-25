@@ -4,26 +4,23 @@
     }
 @endphp
 
-<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ $soldOut ? 'sold-out' : '' }}" data-price="{{ floatval($price) }}" data-category="{{ $category }}"
-        {{ !empty($featured) ? 'data-featured-item=yes' : '' }}>
+<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ floatVal($price) }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
-            <section class="shop">
+            <section class="drum-shop">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
                     @if (!empty($badgeText))
                         <span class="top-left-badge">
                             {!! $badgeText !!}
                         </span>
-                    @elseif ($soldOut)
-                        <span class="top-left-badge">Sold Out</span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <span class="top-left-badge">
-                            <i class="fas fa-star"></i> Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
+                            Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img @if(!empty($invertLogo)) style="filter:invert(1);" @endif src="{{ $packLogo }}">
+                            <img src="{{ $packLogo }}" alt="product logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -33,12 +30,19 @@
                     @if(!empty($packAuthor))
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
-                    @if (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p><s>WAS ${{ floatval($fullPrice) }}</s> <strong> NOW ${{  floatval($price)  }}</strong></p>
-                    @elseif(!empty($soldOut))
-                        <p><strong>SOLD OUT</strong></p>
+                    @if(!empty($specialPrice))
+                        <p><strong>{{ $specialPrice }}</strong></p>
+                    @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
+                        <p><s>WAS ${{ floatVal($fullPrice) }}</s>
+                            <strong> NOW
+                                @if(number_format($price, 2) == intval($price))
+                                    ${{  floatVal($price)  }}
+                                @else
+                                    ${{  floatVal(number_format($price, 2))  }}
+                                @endif
+                            </strong></p>
                     @else
-                        <p><strong> ${{  floatval($price)  }}</strong></p>
+                        <p><strong>${{  floatVal($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -53,38 +57,51 @@
                     @if(!empty($cardDescription))
                         <p class="description">{!! $cardDescription  !!}</p>
                     @endif
-                    @if (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ floatval($fullPrice) }}</s> <strong> ${{ floatval($price)  }}</strong></p>
+                    @if(!empty($specialPrice))
+                        <p><strong>{{  floatVal($specialPrice)  }}</strong><br><br></p>
+                    @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
+                        <p class="price"><s>${{ floatVal($fullPrice) }}</s> <strong>
+                                @if(number_format($price, 2) == intval($price))
+                                    ${{  floatVal($price)  }}
+                                @else
+                                    ${{  floatVal(number_format($price, 2))  }}
+                                @endif
+                            </strong></p>
                     @else
-                        <p class="price"><strong> ${{  floatval($price)  }}</strong></p>
+                        <p class="price"><strong> ${{  floatVal($price)  }}</strong></p>
                     @endif
-                    @if(!empty($includedMembership)) && $includedMembership)
-                        <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-pianote">Or free with a Pianote membership</em></p>
+                    @if(!empty($includedEdge))
+                        <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Drumeo</em></p>
                     @endif
                     @if(!$soldOut)
-                        @if(!empty($sku) && !empty($sizes) && count($sizes) > 0)
+                        @if(!empty($sku) && count($sizes) > 0)
                             <select class="pack-pick" title="Shirt Size" required>
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$variant->sku]->isProductSoldOut()) disabled @endif
-                                    value="?products[{{$sku}}-{{$size->code}}]=1"
-                                        data-product-json='{"{{$sku}}-{{$size->code}}": 1}'
-                                    >{{ $size->name  }}</option>
+                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$size->sku]->isProductSoldOut()) disabled @endif value="?products[{{ $sku }}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                                        data-product-json='{ "{{ $sku }}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
+                                    >
+                                        {{ $size->name }}
+                                    </option>
                                 @endforeach
                             </select>
 
-                            <a class="online-atc selected-pack vue-add-to-cart" href="/ecommerce/add-to-cart">
+                            <a
+                                class="online-atc selected-pack vue-add-to-cart"
+                                href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                                @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
+                                @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                            >
                                 <button class="join">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
                             </a>
-                        @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
+                        @elseif(!empty($sku) && count($sizes) === 0)
                             <a
-                                class="online-atc vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop" data-base-url="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
-                                data-product-json='{"{{ $sku }}": 1}'
+                                class="online-atc vue-add-to-cart" href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"   data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
+                                data-product-json='{ "{{$sku}}": 1 }'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
@@ -105,10 +122,11 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ $itemURL }}" class="join black">@if(!empty($buttonText)) {{ $buttonText }} @else View Product
+                        <a href="{{ $itemURL }}" class="join outline" @if(!empty($externalURL)) target="_blank" @endif>
+                            @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
-                    <p class="disclaimer"><em>@if($category !== 'lessons') Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
+                    <p class="disclaimer"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
                 </div>
             </div>
         @endif
