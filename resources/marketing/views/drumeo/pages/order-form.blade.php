@@ -13,10 +13,14 @@
     @endif
 
     @include('drumeo._partials._fonts')
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="{{ asset('/marketing/css/drumeo/tailwind.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -46,9 +50,97 @@
         ])
     @endif
 
+    <div id="app">
+        @if(!empty(current_user()))
+            <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
+        @endif
+        @if(session()->has('toast-success-message-data') && is_array(session()->get('toast-success-message-data')))
+            @php
+                $toastData = session()->has('toast-success-message-data');
+            @endphp
 
+            <input id="on-page-load-toast-data" type="hidden" data-icon="{{ $toastData['icon'] ?? 'happy' }}" data-title="{{ $toastData['title'] ?? '' }}" data-message="{{ $toastData['message'] ?? '' }}">
+        @endif
+        <div class="container order-form mv-3">
+            <order-form
+                theme-color="drumeo"
+                brand="drumeo"
+                :cart="{{ json_encode($cart) }}"
+                :billing-address="{{ json_encode($billingAddress) }}"
+                :shipping-address="{{ json_encode($shippingAddress) }}"
+                :user="{{ json_encode($user) }}"
+                :login-url="{{ json_encode($loginUrl) }}"
+                :logout-url="{{ json_encode($logoutUrl) }}"
+                :stripe-publishable-key="{{ json_encode($stripePublishableKey) }}"
+                :countries="{{ $countries }}"
+                :banned-countries="{{ $bannedCountries }}"
+                :provinces="{{ $provinces }}"
+                :bonuses="{{ $bonuses }}"
+                :payment-methods="{{ $paymentMethodsJson }}"
+                :shipping-addresses = "{{ $shippingAddressesJson }}"
+                :all-membership-product-skus = "{{ json_encode($allMembershipProductSkus) }}"
+                :lifetime-membership-product-skus = "{{ json_encode($lifetimeMembershipProductSkus) }}"
+                :memberships-number-of-free-days= "{{ json_encode($membershipsNumberOfFreeDays) }}"
+            >
+            </order-form>
+        </div>
+        <div class="container fluid bg-grey-4">
+            <div class="container collapsed-h">
+                <div class="flex flex-row flex-wrap text-center features">
+                    <div class="flex flex-column xs-12 sm-4 align-center pa-3">
+                        <i
+                            class="fal fa-mobile text-white mb-2"
+                            style="font-size:40px;"
+                        ></i>
+
+                        <p class="tiny font-bold text-white">
+                            We're always here to help
+                        </p>
+                        <p class="x-tiny text-white">
+                            <a target="_blank" class="text-white" href="https://help.drumeo.com/">See our FAQs & answers</a>, or<br>
+                            <a target="_blank" class="text-white" href="/contact">click here to contact us directly</a>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-column xs-12 sm-4 display pa-3 align-center">
+                        <img
+                            src="https://dmmior4id2ysr.cloudfront.net/icons/icon-trusted.png"
+                            style="height:40px;width:auto;"
+                        >
+
+                        <p class="tiny font-bold text-white mt-2">
+                            Your Information is Secure
+                        </p>
+                        <p class="x-tiny text-white">
+                            This page is securely encrypted <br>
+                            with world-class SSL protection.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-column xs-12 sm-4 pa-3 pv-2 align-center">
+                        <i
+                            class="fal fa-check-circle text-white mb-2"
+                            style="font-size:40px;"
+                        ></i>
+                        <p class="tiny font-bold text-white">
+                            100% Money Back Guarantee
+                        </p>
+                        <p class="x-tiny text-white">
+                            Order risk-free with our 90-day, <br>
+                            100% money back guarantee.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @include("drumeo.sales.partials._footer")
 
 
+    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ _mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/order-form.js') }}"></script>
+    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
     @yield('scripts')
 @stop
