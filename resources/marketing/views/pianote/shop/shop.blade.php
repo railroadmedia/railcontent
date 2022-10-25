@@ -130,9 +130,9 @@
 
 @section('global-body')
     @include('pianote.sales.nav', [
-    "joinVersion" => true,
-    "scrollToJoin" => true,
-    "homepageVersion" => true,
+        "joinVersion" => true,
+        "scrollToJoin" => true,
+        "homepageVersion" => true,
     ])
 
 {{--    @include('pianote.sales.nav', [--}}
@@ -214,7 +214,64 @@
         "all" => true
     ])
     <div class="white-box">
-        @yield('cards')
+
+        {{--    LESSONS    --}}
+        <section class="grid-view category-section" data-category="lessons">
+            <ul class="container mx-auto fixed-cards">
+                <li>
+                    <h1 class="float-left px-2 md:px-3 w-full">
+                        <div class="heading-icon"><i class="fas fa-video"></i></div>
+                        Piano Lessons
+                    </h1>
+                </li>
+
+                @foreach($lessons as $lesson){
+                    @include('pianote.shop.partials._shop-card', [
+                            "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                            "thumbnail" => $lesson->thumbnail,
+                            "packLogo" => $lesson->thumbnail_logo,
+                            "title" => $lesson->name,
+                            "packAuthor" => $lesson->instructor_name,
+                            "cardDescription" => $lesson->short_desc,
+                            "fullPrice" => $lesson->price,
+                            "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                            "category" => strtolower($lesson->productType->name),
+                            "soldOut" => $lesson->sold_out,
+                            "includedMembership" => $lesson->included_edge,
+                            "badgeText" => $lesson->badge_text,
+                    ])
+                }
+                @endforeach
+            </ul>
+        </section>
+
+        {{--  ACCESSORIES      --}}
+        <section class="grid-view category-section" data-category="shirts">
+            <ul class="container mx-auto fixed-cards">
+                <li>
+                    <h1 class="float-left px-2 md:px-3 w-full">
+                        <div class="heading-icon"><i class="fas fa-mug-hot"></i></div>
+                        Accessories
+                    </h1>
+                </li>
+                @foreach($accessories as $accessory){
+                    @include('pianote.shop.partials._shop-card', [
+                            "sku" => $accessory->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                            "thumbnail" => $accessory->thumbnail,
+                            "badgeText" => $accessory->badge_text,
+                            "title" => $accessory->name,
+                            "cardDescription" => $accessory->short_desc,
+                            "fullPrice" => $accessory->price,
+                            "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                            "category" => strtolower($lesson->productType->name),
+                            "soldOut" => $lesson->sold_out,
+                    ])
+                }
+                @endforeach
+            </ul>
+        </section>
     </div>
 
 
