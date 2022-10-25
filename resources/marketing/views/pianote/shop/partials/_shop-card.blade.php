@@ -1,0 +1,117 @@
+@php
+    if(!empty($sku) && !empty($products[$sku]) && !empty($physical) && $physical){
+        $soldOut = $products[$sku]->isProductSoldOut();
+    }
+@endphp
+
+<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ $price }}" data-category="{{ $category }}" data-popularity="{{ $popularity }}"
+        {{ !empty($featured) ? 'data-featured-item=yes' : '' }}>
+    <div class="flip-card-inner">
+        <div class="flip-card-front card-inside">
+            <section class="shop">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
+                    @if (!empty($badgeText))
+                        <span class="top-left-badge">
+                            {!! $badgeText !!}
+                        </span>
+                    @elseif (!empty($soldOut))
+                        <span class="top-left-badge">Sold Out</span>
+                    @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
+                        <span class="top-left-badge">
+                            <i class="fas fa-star"></i> Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
+                        </span>
+                    @endif
+                    @if(!empty($packLogo))
+                        <div class="logo">
+                            <img @if(!empty($invertLogo)) style="filter:invert(1);" @endif src="{{ $packLogo }}">
+                        </div>
+                    @endif
+                    <i class="fas fa-arrow-right hover-icon"></i>
+                </div>
+                <div class="bottom-section">
+                    <h6>{!! $title !!}</h6>
+                    @if(!empty($packAuthor))
+                        <p><em>{{ $packAuthor }}</em></p>
+                    @endif
+                    @if (round(100 - (100 * ($price / $fullPrice))) > 1)
+                        <p><s>WAS ${{ $fullPrice }}</s> <strong> NOW ${{  $price  }}</strong></p>
+                    @elseif(!empty($soldOut))
+                        <p><strong>SOLD OUT</strong></p>
+                    @else
+                        <p><strong> ${{  $price  }}</strong></p>
+                    @endif
+                </div>
+            </section>
+        </div>
+        @if(empty($isBundle))
+            <div class="flip-card-back">
+                <div class="card-center">
+                    <h6>{!! $title !!}</h6>
+                    @if(!empty($packAuthor))
+                        <p><em>{{ $packAuthor }}</em></p>
+                    @endif
+                    @if(!empty($cardDescription))
+                        <p class="description">{!! $cardDescription  !!}</p>
+                    @endif
+                    @if (round(100 - (100 * ($price / $fullPrice))) > 1)
+                        <p class="price"><s>${{ $fullPrice }}</s> <strong> ${{  $price  }}</strong></p>
+                    @else
+                        <p class="price"><strong> ${{  $price  }}</strong></p>
+                    @endif
+                    @if(!empty($includedMembership))
+                        <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-pianote">Or free with a Pianote membership</em></p>
+                    @endif
+                    @if(empty($soldOut))
+                        @if(!empty($sku) && !empty($variations))
+                            <select class="pack-pick" title="Shirt Size" required>
+                                <option hidden value="">Choose Size</option>
+                                @foreach($variations as $variant)
+                                    <option
+                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$variant->sku]->isProductSoldOut()) disabled @endif
+                                        value="?products[{{$sku}}-{{$variant->sku}}]=1"
+                                        data-product-json='{"{{$sku}}-{{$variant->sku}}": 1}'
+                                    >{{ $variant->name  }}</option>
+                                @endforeach
+                            </select>
+
+                            <a class="online-atc selected-pack vue-add-to-cart" href="/ecommerce/add-to-cart">
+                                <button class="join">
+                                    <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
+                                    <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
+                                </button>
+                            </a>
+                        @elseif(!empty($sku) && empty($variations))
+                            <a
+                                class="online-atc vue-add-to-cart"
+                                href="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
+                                data-base-url="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
+                                data-product-json='{"{{ $sku }}": 1}'
+                                @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
+                                @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                            >
+                                <button class="join">
+                                    <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
+                                    <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
+                                </button>
+                            </a>
+                        @endif
+                    @else
+                        <a class="online-atc">
+                            <button class="join sold-out">Sold Out</button>
+                        </a>
+                    @endif
+                    @if(!empty($amazonLink))
+                        <a href="{{ $amazonLink }}">
+                            <button class="join amazon">Buy Through Amazon</button>
+                        </a>
+                    @endif
+                    @if(!empty($itemURL))
+                        <a href="{{ $itemURL }}" class="join black">@if(!empty($buttonText)) {{ $buttonText }} @else View Product
+                            <i class="fas fa-arrow-right"></i> @endif</a>
+                    @endif
+                    <p class="disclaimer"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
+                </div>
+            </div>
+        @endif
+    </div>
+</li>
