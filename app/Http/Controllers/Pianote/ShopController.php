@@ -12,7 +12,34 @@ class ShopController extends BaseController
     {
         $products = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
-        return view('pianote.shop.shop', [ 'products' => $products ]);
+        $lessons = $products->filter(function($value, $key){
+            return $value->productType->name === 'Lessons';
+        });
+
+        $accessories = $products->filter(function($value, $key){
+            return $value->productType->name === 'Accessories';
+        });
+
+        $hats = $products->filter(function($value, $key){
+            return $value->productType->name === 'Hats';
+        });
+
+        $shirts = $products->filter(function($value, $key){
+            return $value->productType->name === 'Shirts';
+        });
+
+        $hoodies = $products->filter(function($value, $key){
+            return $value->productType->name === 'Hoodies';
+        });
+
+        return view('pianote.shop.shop', [
+            'lessons' => $lessons,
+            'accessories' => $accessories,
+            'hats' => $hats,
+            'shirts' => $shirts,
+            'hoodies' => $hoodies,
+            'theme' => 'pianote',
+        ]);
     }
 
     public function product($root, $slug)
