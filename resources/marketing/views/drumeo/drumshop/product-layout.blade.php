@@ -14,7 +14,18 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-product.css') }}" rel="stylesheet">
-    @yield('head')
+
+    <?php
+        if(count($product->sizes) > 0){
+            foreach($product->sizes as $size){
+                \App\Analytics\Tracker::trackProductImpression($product->sku.'-'.(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code);
+            }
+        }
+        else {
+            \App\Analytics\Tracker::trackProductImpression($product->sku);
+        }
+    ?>
+
     <style>
         * {
             box-sizing: border-box;
