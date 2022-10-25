@@ -305,7 +305,7 @@
                     <div class="md:w-2/5 py-6 lg:py-12 inline-block text-center">
                         <img class="mt-40 sm:mt-0 h-28 md:h-24 lg:h-36 mb-2 lg:mb-4 inline-block" src="https://singeo.s3.amazonaws.com/sales/promos/october/perfect_harmony_white.png" alt="perfect harmony logo">
                         <p class="text-white px-2 md:pr-1 lg:px-5 mb-2 text-sm">
-                            Sinego Annual Membership + <b>*NEW*</b> The Essential Guide To Beautiful Harmonies <s style="color:#9C70BF;">($27)</s> + Singer Starter Kit <s style="color:#9C70BF;">($19)</s>
+                            Singeo Annual Membership + <b>*NEW*</b> The Essential Guide To Beautiful Harmonies <s style="color:#9C70BF;">($27)</s> + Singer Starter Kit <s style="color:#9C70BF;">($19)</s>
                         </p>
                         <a class="join smaller md:inline-block hidden" href="/shop/harmony-bundle">Get my free bonuses</a>
                         <a class="join inline-block md:hidden" href="/shop/harmony-bundle">Get my free bonuses</a>

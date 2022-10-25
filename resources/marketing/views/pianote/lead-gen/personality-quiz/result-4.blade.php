@@ -28,7 +28,7 @@
 
     <section class="py-32 md:py-48 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
         <div class="max-w-md md:max-w-4xl mx-auto text-center text-white px-6 lg:px-0">
-            <i class="fas fa-spinner fa-spin-pulse text-5xl sm:text-7xl text-pianote"></i>
+            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/Q-SCIENTIST.png" alt="scientist">
             <h2 class="font-extrabold mt-2 mb-6">You are the Scientist!</h2>
             <p class="mb-4">
                 To learn more about what this means and to get free lessons tailored to your<br class="hidden md:inline">
