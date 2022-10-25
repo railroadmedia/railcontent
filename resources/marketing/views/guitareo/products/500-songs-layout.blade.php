@@ -14,7 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="/marketing/parcel/guitareo/500-songs.css">
     <style>
 

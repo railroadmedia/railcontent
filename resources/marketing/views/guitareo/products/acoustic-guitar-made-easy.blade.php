@@ -19,7 +19,7 @@
 @section('scripts')
     <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script src="/marketing/js/modal.js"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/countUp.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {

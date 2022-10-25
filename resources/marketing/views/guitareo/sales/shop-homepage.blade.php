@@ -25,7 +25,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <link href="/assets/marketing/homepage.css" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>

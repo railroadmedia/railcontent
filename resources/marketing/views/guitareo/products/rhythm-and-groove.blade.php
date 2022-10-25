@@ -15,7 +15,7 @@
 @section('styles')
     @parent
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 @stop()
@@ -313,7 +313,7 @@
             $(document).foundation();
         });
     </script>
-    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
+    <script src="/marketing/parcel/drumeo/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()

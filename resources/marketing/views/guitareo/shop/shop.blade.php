@@ -12,7 +12,7 @@
     @include('guitareo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
@@ -67,7 +67,7 @@
 @section('scripts')
     @parent
     {{--<script src="/assets/js/modal.js"></script>--}}
-    {{--<script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>--}}
+    {{--<script type="text/javascript" src="/assets/parcel/drumeo/modal-autoplay.js"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>

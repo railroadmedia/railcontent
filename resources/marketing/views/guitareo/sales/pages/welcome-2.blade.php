@@ -14,7 +14,7 @@
 @section('styles')
     @parent
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .expired {

@@ -42,10 +42,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
 
-    <script src="{{ asset('marketing/parce/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/parce/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parce/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/parce/guitareo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/app.js') }}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>

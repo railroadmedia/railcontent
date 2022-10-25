@@ -8,6 +8,13 @@ $(document).ready(function () {
             $(this).attr('src', lazyLoadIframeElement.data('lazy-load-url'));
         });
     });
+    $('.reveal .join').on('click', function (e) {
+        if (e.target !== this) {
+            return;
+        }
+
+        $('.reset-on-close').attr('src', 'about:blank');
+    });
     $('.reveal-overlay').on('click', function (e) {
         if (e.target !== this) {
             return;
