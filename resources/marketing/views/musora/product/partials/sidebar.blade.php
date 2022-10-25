@@ -66,9 +66,9 @@
                                 <option
                                     class="bg-white @if($size->sold_out) text-gray @else text-black @endif"
                                     @if($size->sold_out) disabled @endif
-                                    value="{{$product->sku . '-' . $size->code}}"
+                                    value="{{$product->sku . '-' . (!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                     data-price="{{floatVal($product->price) ?? 0}}"
-                                    data-product-json='{"{{$product->sku . '-' . $size->code}}": 1}'
+                                    data-product-json='{"{{$product->sku . '-' . (!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                                 >{{ $size->name }}</option>
                             @endforeach
                         </select>
