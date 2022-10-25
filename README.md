@@ -341,6 +341,9 @@ r mwp artisan VaporEnvManager web-staging-one pull
 r mwp artisan VaporEnvManager web-staging-one push
 ```
 
+**Important Note**  
+Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
+them. They should be deleted from your machine after updates are pushed.
 
 # Emails and Testing Emails
 All non-production environment emails sent by our system go to our mailtrap account and email address be default:
