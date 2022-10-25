@@ -62,6 +62,8 @@
         "laravel-vapor": "^0.6.0",
         "lodash": "^4.17.19",
         "luxon": "^3.0.1",
+        "mediaelement": "^4.2.8",
+        "mediaelement-plugins": "^2.5.0",
         "mitt": "^3.0.0",
         "mux.js": "^5.5.1",
         "normalize.css": "^8.0.1",
