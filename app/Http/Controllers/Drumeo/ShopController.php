@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pianote;
+namespace App\Http\Controllers\Drumeo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -10,7 +10,7 @@ class ShopController extends BaseController
 {
     public function shop()
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
         $lessons = $products->filter(function($value, $key){
             return $value->productType->name === 'Lessons';
@@ -32,20 +32,20 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        return view('pianote.shop.shop', [
+        return view('drumeo.drumshop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
-            'theme' => 'pianote',
+            'theme' => 'drumeo',
         ]);
     }
 
     public function product($root, $slug)
     {
-        $product = Product::where('slug', 'Pianote-'.$slug)->firstOrFail();
+        $product = Product::where('slug', 'Drumeo-'.$slug)->firstOrFail();
 
-        return view('pianote.shop.product-layout', [ 'product' => $product, 'theme' => 'pianote' ]);
+        return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
     }
 }
