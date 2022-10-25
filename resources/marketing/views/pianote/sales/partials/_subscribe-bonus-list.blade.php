@@ -22,6 +22,7 @@
         </h5>
 
         @php
+
             $bonuses = [
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Pianote_Planner_Card.jpg',
@@ -35,7 +36,7 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/100_Days_Card.jpg',
                     'title' => '',
                     'description' => 'Stay motivated and on track with 100 days of practice.',
-                    'price' => PianotePrices::$classicalBookFull,
+                    'price' => PianotePrices::$posterFull,
                     'online-ship' => "Free Shipping",
                     'badge' => 'Classical Piano Pieces'
                 ],
@@ -43,7 +44,7 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Chords_Card.jpg',
                     'title' => '',
                     'description' => 'Always know your chord shapes with this helpful poster.',
-                    'price' => 9,
+                    'price' => PianotePrices::$posterFull,
                     'online-ship' => "Free Shipping",
                     'badge' => 'Chords Poster'
                 ],
@@ -51,21 +52,21 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Scales_Card.jpg',
                     'title' => '',
                     'description' => 'Never forget the notes of a scale with this easy-to-read poster.',
-                    'price' => PianotePrices::$PTMEFull,
+                    'price' => PianotePrices::$posterFull,
                     'online-ship' => "Free Shipping"
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
                     'title' => '',
                     'description' => 'Play the music you love using the power of chords.',
-                    'price' => 97,
+                    'price' => PianotePrices::$powerOfChordsFull,
                     'online-ship' => "Lifetime Access"
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
                     'title' => '',
                     'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => 79,
+                    'price' => PianotePrices::$fasterFingersFull,
                     'online-ship' => "Lifetime Access"
                 ],
             ]
