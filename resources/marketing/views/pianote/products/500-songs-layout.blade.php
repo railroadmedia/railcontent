@@ -435,7 +435,7 @@
         });
     </script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script>
         $(function() {

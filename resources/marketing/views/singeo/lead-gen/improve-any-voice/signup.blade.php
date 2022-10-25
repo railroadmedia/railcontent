@@ -36,7 +36,7 @@
     </style>
 @stop
 @section('scripts')
-    <script type="text/javascript" src="/marketing/parcel/drumeo/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
 @section('body')

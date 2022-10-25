@@ -79,7 +79,7 @@
             });
         });
     </script>
-    <script src="/marketing/parcel/drumeo/modal-autoplay.js"></script>
+    <script src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
 @section('body')

@@ -121,5 +121,5 @@
             $(document).foundation();
         });
     </script>
-    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

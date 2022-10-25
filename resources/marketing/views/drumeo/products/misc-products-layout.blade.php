@@ -77,7 +77,7 @@
                 });
         });
     </script>
-    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 
     <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>

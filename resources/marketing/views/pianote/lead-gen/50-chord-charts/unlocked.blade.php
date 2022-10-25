@@ -27,7 +27,7 @@
         });
     </script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/drumeo/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @endsection
 
 @section('page-body')

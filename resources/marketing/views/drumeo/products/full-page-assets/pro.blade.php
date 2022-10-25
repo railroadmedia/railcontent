@@ -24,7 +24,7 @@
         });
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
-    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @stop()
 
