@@ -104,5 +104,11 @@ return array(
         'guitareo' => 2675,
         'singeo' => 3,
         'pianote' => 1
+    ],
+    'decorators'=> [
+        'posts' => [
+            \App\Decorators\Forums\UserSignatureDecorator::class,
+            \App\Decorators\Forums\PostUrlsDecorator::class
+            ]
     ]
 );
