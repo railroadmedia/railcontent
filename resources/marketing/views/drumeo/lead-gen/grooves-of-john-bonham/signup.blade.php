@@ -140,7 +140,7 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/marketing/assets/js/pre-form-submit-facebook-lead.js') }}"></script>

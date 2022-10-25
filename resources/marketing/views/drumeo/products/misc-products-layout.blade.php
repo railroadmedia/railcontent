@@ -28,7 +28,7 @@
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/assets/members-area/js/misc.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="/marketing/js/drumeo/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

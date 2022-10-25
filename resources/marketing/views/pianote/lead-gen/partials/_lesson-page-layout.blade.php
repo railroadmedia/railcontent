@@ -20,7 +20,7 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

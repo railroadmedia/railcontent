@@ -396,7 +396,7 @@
             });
         });
     </script>
-    <script src="/marketing/parcel/guitareo/jquery.countdown-2.min.js"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

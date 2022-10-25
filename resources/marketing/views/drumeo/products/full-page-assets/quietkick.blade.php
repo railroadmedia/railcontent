@@ -315,8 +315,8 @@
 @section('layout-scripts')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}" defer></script>
-    <script type="text/javascript" src="/marketing/js/drumeo/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}" defer></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         setInterval(function(){
             setTimeout(function(){

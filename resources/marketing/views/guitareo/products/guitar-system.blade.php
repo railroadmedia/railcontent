@@ -25,9 +25,9 @@
 
 @section('scripts')
     @parent
-    <script src="/marketing/parcel/guitareo/modal.js"></script>
+    <script src="/marketing/js/modal.js"></script>
     <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
-    <script src="/marketing/parcel/guitareo/jquery.countdown-2.js"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

@@ -543,7 +543,7 @@
 @section('scripts')
     @parent
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         $(document).ready(function () {

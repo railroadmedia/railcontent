@@ -73,7 +73,7 @@
     <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script src="/marketing/parcel/guitareo/jquery.countdown-2.min.js"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(function () {

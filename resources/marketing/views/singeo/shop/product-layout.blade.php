@@ -109,7 +109,7 @@
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/shop-product.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/jquery.countdown-2.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

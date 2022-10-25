@@ -31,7 +31,7 @@
     <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/guitareo/shop-product.js"></script>
-    <script src="/marketing/parcel/guitareo/jquery.countdown-2.min.js"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

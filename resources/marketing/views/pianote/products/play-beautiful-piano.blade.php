@@ -434,7 +434,7 @@
     @include('pianote.sales.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script>
         $(function () {
             $(document).foundation();

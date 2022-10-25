@@ -365,7 +365,7 @@
 
 @section('scripts')
     <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
-    <script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(function() {
             $('.tzcd-full').countdown('2022/09/19')
