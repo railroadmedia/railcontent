@@ -19,16 +19,12 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
     Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
-    Route::get('/festival/coastal-jazz-discount/', [SalesController::class, 'festivalCoastal'] );
-    Route::get('/festival/edge/', [SalesController::class, 'festivalEdge'] );
-    Route::get('/festival/modern-drummer/', [SalesController::class, 'festivalMd'] );
     Route::post('/hlag-submit/', [SalesController::class, 'hitLikeAGirlSubmission'] );
     Route::get('/kids/', [SalesController::class, 'kids'] );
     Route::get('/mydrumset', [SalesController::class, 'sales'] );
     Route::get('/impact', function () { return view('drumeo.sales.pages.impact'); });
 
-    Route::get('/lifetime-masterclass', function () { return view('drumeo.sales.lifetime-masterclass'); });
-    Route::get('/support', function () { return view('drumeo.sales.pages.contact'); });
+    Route::get('/support', function () { return view('drumeo.sales.pages.support'); });
     Route::get('/courses/{slug}', function ($slug) {return view('drumeo.lead-gen.courses.' . $slug);});
     Route::get('/about', function () { return view('drumeo.sales.pages.about'); });
     Route::get('/privacy', function () { return view('drumeo.sales.pages.privacy'); });
@@ -37,7 +33,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/cookie', function () { return view('drumeo.sales.pages.cookie'); });
     Route::get('/beginner', function () { return view('drumeo.sales.beginner'); });
     Route::get('/app', function () { return view('drumeo.sales.apps.app'); });
-    Route::get('/kids', function () { return view('drumeo.sales.apps.drumeo-kids'); });
+    Route::get('/kids', function () { return view('drumeo.sales.apps.kids'); });
     Route::get('/trial', function () { return view('drumeo.sales.trials.trial'); });
 
     Route::get('/aric', function () { return view('drumeo.sales.trials.coaches.aric'); });

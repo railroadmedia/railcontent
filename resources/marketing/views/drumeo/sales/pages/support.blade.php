@@ -12,7 +12,7 @@
     @include('drumeo._partials._fonts')
 
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/tailwindcss/tailwind.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
 
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
