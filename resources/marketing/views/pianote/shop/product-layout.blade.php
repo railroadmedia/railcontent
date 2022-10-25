@@ -10,6 +10,18 @@
     <link href="/marketing/parcel/pianote/shop-product.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}">
+
+    <?php
+        if(count($product->sizes) > 0){
+            foreach($product->sizes as $size){
+                \App\Analytics\Tracker::trackProductImpression($product->sku.'-'.(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code);
+            }
+        }
+        else {
+            \App\Analytics\Tracker::trackProductImpression($product->sku);
+        }
+    ?>
+
     <style>
         * {
             box-sizing: border-box;
