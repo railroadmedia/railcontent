@@ -4,7 +4,7 @@
     }
 @endphp
 
-<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ $price }}" data-category="{{ $category }}" data-popularity="{{ $popularity }}"
+<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ $soldOut ? 'sold-out' : '' }}" data-price="{{ floatval($price) }}" data-category="{{ $category }}"
         {{ !empty($featured) ? 'data-featured-item=yes' : '' }}>
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
@@ -14,7 +14,7 @@
                         <span class="top-left-badge">
                             {!! $badgeText !!}
                         </span>
-                    @elseif (!empty($soldOut))
+                    @elseif ($soldOut)
                         <span class="top-left-badge">Sold Out</span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <span class="top-left-badge">
@@ -34,11 +34,11 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p><s>WAS ${{ $fullPrice }}</s> <strong> NOW ${{  $price  }}</strong></p>
+                        <p><s>WAS ${{ floatval($fullPrice) }}</s> <strong> NOW ${{  floatval($price)  }}</strong></p>
                     @elseif(!empty($soldOut))
                         <p><strong>SOLD OUT</strong></p>
                     @else
-                        <p><strong> ${{  $price  }}</strong></p>
+                        <p><strong> ${{  floatval($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -54,23 +54,23 @@
                         <p class="description">{!! $cardDescription  !!}</p>
                     @endif
                     @if (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ $fullPrice }}</s> <strong> ${{  $price  }}</strong></p>
+                        <p class="price"><s>${{ floatval($fullPrice) }}</s> <strong> ${{ floatval($price)  }}</strong></p>
                     @else
-                        <p class="price"><strong> ${{  $price  }}</strong></p>
+                        <p class="price"><strong> ${{  floatval($price)  }}</strong></p>
                     @endif
-                    @if(!empty($includedMembership))
+                    @if(!empty($includedMembership)) && $includedMembership)
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-pianote">Or free with a Pianote membership</em></p>
                     @endif
-                    @if(empty($soldOut))
-                        @if(!empty($sku) && !empty($variations))
+                    @if(!$soldOut)
+                        @if(!empty($sku) && !empty($sizes) && count($sizes) > 0)
                             <select class="pack-pick" title="Shirt Size" required>
                                 <option hidden value="">Choose Size</option>
-                                @foreach($variations as $variant)
+                                @foreach($sizes as $size)
                                     <option
                                         @if(!empty($physical) && $physical && $products[$sku.'-'.$variant->sku]->isProductSoldOut()) disabled @endif
-                                        value="?products[{{$sku}}-{{$variant->sku}}]=1"
-                                        data-product-json='{"{{$sku}}-{{$variant->sku}}": 1}'
-                                    >{{ $variant->name  }}</option>
+                                    value="?products[{{$sku}}-{{$size->code}}]=1"
+                                        data-product-json='{"{{$sku}}-{{$size->code}}": 1}'
+                                    >{{ $size->name  }}</option>
                                 @endforeach
                             </select>
 
@@ -80,11 +80,10 @@
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
                             </a>
-                        @elseif(!empty($sku) && empty($variations))
+                        @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
                             <a
                                 class="online-atc vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
-                                data-base-url="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
+                                href="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop" data-base-url="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
                                 data-product-json='{"{{ $sku }}": 1}'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
@@ -109,7 +108,7 @@
                         <a href="{{ $itemURL }}" class="join black">@if(!empty($buttonText)) {{ $buttonText }} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
-                    <p class="disclaimer"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
+                    <p class="disclaimer"><em>@if($category !== 'lessons') Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
                 </div>
             </div>
         @endif
