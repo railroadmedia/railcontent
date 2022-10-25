@@ -13,7 +13,7 @@ Route::domain('{pianoteDomain}')->group(function () {
     Route::get('/terms', function () { return view('pianote.sales.pages.terms'); } );
     Route::get('/privacy', function () {return view('pianote.sales.pages.privacy'); } );
 
-    Route::get('/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
+    Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
     Route::get('/student-only', [SalesController::class, 'studentOnly'] );
     Route::get('/2', [SalesController::class, 'home'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
@@ -30,8 +30,8 @@ Route::domain('{pianoteDomain}')->group(function () {
     Route::get('/affiliate/pianodreamers', function () { return view('pianote.sales.trials.affiliates.pianodreamers'); });
     Route::get('/affiliate-trial', function () { return view('pianote.sales.trials.trial-selection.affiliates'); });
 
-    Route::get('/500-songs', [SalesController::class, 'songs500'] );
-    Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
+    Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
+    Route::get('/shop/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
     Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
 
     Route::get('/giveaway', function () { return view('pianote.lead-gen.giveaway'); });
@@ -46,11 +46,11 @@ Route::domain('{pianoteDomain}')->group(function () {
     Route::get('/500-songs-taylor-swift', function () { return view('pianote.products.500-songs-taylor-swift'); } );
     Route::get('/500-songs-the-beatles', function () { return view('pianote.products.500-songs-the-beatles'); } );
     Route::get('/500-songs-free-lesson', function () { return view('pianote.lead-gen.500-songs-free-lesson'); } );
-    Route::get('/faster-fingers', function () { return view('pianote.products.faster-fingers'); } );
-    Route::get('/worship-piano', function () { return view('pianote.products.worship-piano'); } );
-    Route::get('/piano-technique-made-easy', function () { return view('pianote.products.piano-technique-made-easy'); } );
-    Route::get('/destupefy-your-left-hand', function () { return view('pianote.products.destupefy-your-left-hand'); } );
-    Route::get('/play-beautiful-piano', function () { return view('pianote.products.play-beautiful-piano'); } );
+    Route::get('/shop/faster-fingers', function () { return view('pianote.products.faster-fingers'); } );
+    Route::get('/shop/worship-piano', function () { return view('pianote.products.worship-piano'); } );
+    Route::get('/shop/piano-technique-made-easy', function () { return view('pianote.products.piano-technique-made-easy'); } );
+    Route::get('/shop/destupefy-your-left-hand', function () { return view('pianote.products.destupefy-your-left-hand'); } );
+    Route::get('/shop/play-beautiful-piano', function () { return view('pianote.products.play-beautiful-piano'); } );
     Route::get('/beginner-classical-piano', function () { return view('pianote.products.beginner-classical-piano'); } );
 
     Route::get('/lisa-recommends', function () { return view('pianote.shop.lisa-recommends'); } );
