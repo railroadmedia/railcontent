@@ -1,6 +1,7 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo._partials.layout-template')
 
-@section('head-includes')
+@section('global-head')
+    @parent
     <title>30 Day Drummer | Drumeo</title>
     <meta property="og:title" content="30 Day Drummer | Drumeo">
     <meta name="description" content="Learn the drums with daily guided workouts.">
@@ -8,7 +9,7 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/og-image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @parent
+    @include('drumeo._partials._fonts')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -189,6 +190,9 @@
 @stop()
 
 @section('global-body')
+    @include("drumeo.sales.partials._nav", [
+        "cartVersion" => true
+    ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
                 "fullPrice" => Prices::$earDrumsFull,
@@ -896,12 +900,12 @@
             <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
                 next edition of 30-Day Drummer is announced. </p>
             @include("drumeo.lead-gen.partials.sign-up-form-tw", [
-                                "formName" => '30 Day Drummer Waitlist',
-                                "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
-                                "buttonText" => "Let Me Know ",
-                                "stacked" => true,
-                                "noSocial" => true,
-                            ])
+                "formName" => '30 Day Drummer Waitlist',
+                "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
+                "buttonText" => "Let Me Know ",
+                "stacked" => true,
+                "noSocial" => true,
+            ])
         </div>
     </div>
 
@@ -912,14 +916,16 @@
     ])
 
 
+    @include("drumeo.sales.partials._footer")
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
 
     <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>

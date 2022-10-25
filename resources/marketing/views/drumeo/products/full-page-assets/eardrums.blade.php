@@ -1,6 +1,6 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo._partials.layout-template')
 
-@section('head-includes')
+@section('global-head')
     @parent
     <title>Drumeo EarDrums</title>
     <meta property="og:title" content="Drumeo EarDrums">
@@ -9,6 +9,8 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Pro_BG2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
+    @include('drumeo._partials._fonts')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
     <link rel="stylesheet" href="/marketing/css/animate.css">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -78,7 +80,7 @@
     <?php \App\Analytics\Tracker::trackProductImpression('comfort-cover'); ?>
 @stop()
 
-@section('layout-body')
+@section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
@@ -412,18 +414,14 @@
 
     @include("drumeo.sales.partials._footer")
 
-
-@stop
-
-@section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
 
     <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>

@@ -1,21 +1,24 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo.products.misc-products-layout')
 
-@section('head-includes')
+
+@section('meta')
+    @parent
     <title>Drum Technique Made Easy | Drumeo</title>
     <meta name="description" content="Drum Technique Made Easy is a 26-week online course with Bruce Becker.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Drum Technique Made Easy is a 26-week online course with Bruce Becker.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-
-    @parent
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-dtme.css') }}" rel="stylesheet">
-
-<!--    --><?php //\App\Analytics\Tracker::trackProductImpression('drum-technique-made-easy'); ?>
 @stop()
 
-@section('layout-scripts')
+@section('head')
+    @parent
+    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-dtme.css') }}" rel="stylesheet">
+
+    <?php \App\Analytics\Tracker::trackProductImpression('drum-technique-made-easy'); ?>
+@stop()
+
+@section('scripts')
+    @parent
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
@@ -54,7 +57,13 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
-@section('layout-body')
+@section('content')
+    @include('drumeo.products.partials.promo-banner', [
+                    "name" => "Drum Technique Made Easy",
+                    "fullPrice" => Prices::$dtmeFull,
+                    "price" => Prices::$dtmeRegular,
+                "noBreadcrumb" => true
+                ])
     <header class="hero-header">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <div class="video-wrap autoplay-video" data-open="trailer">
@@ -64,16 +73,14 @@
             <h3>Drum Technique Made Easy is a 26-week
                 <br class="inline lg:hidden">online course with Bruce Becker & Jared Falk.</h3>
 
-            <div>
-{{--                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
-            </div>
+            <div><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <p class="uppercase price">
-{{--                @if(Prices::$dtmeFull > Prices::$dtmeRegular)--}}
-{{--                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)--}}
-{{--                @else--}}
-{{--                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>--}}
-{{--                @endif--}}
+                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
+                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
+                @else
+                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
+                @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
                 <br>
@@ -84,7 +91,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-{{--                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
+                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
             </div>
         </div>
     </header>
@@ -416,7 +423,7 @@
     <section class="bruce-bio">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <p class="px-3 md:px-4">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/'drum-technique-made-easy/bold-b.png'"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
                 <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles -- including Neil Peart, Steve Smith, and Dave Weckl.
                 <br><br> Bruce not only benefited from Freddie’s instruction for eight years, but he also developed a close personal relationship.
                 <br><br> “I became as close as one could become with him. I became Freddie’s go-to guy, house sitter, and airport runner,” Bruce told Modern Drummer in 2013. “I am the only guy I know of that actually did five clinics with him. There are too many stories to tell.”
@@ -494,12 +501,8 @@
     <section class="compare-table">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>
-                while saving
-{{--                {{ round(100 - (100 * (round(Prices::$dtmeRegular / 26, 2) / 30))) }}--}}
-                % or more <br class="inline sm:inline">
-                compared to private lessons.
-            </h3>
+            <h3>while saving {{ round(100 - (100 * (round(Prices::$dtmeRegular / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
+                compared to private lessons.</h3>
 
             <table>
                 <tbody>
@@ -568,21 +571,13 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>
-                        $
-{{--                        {{ round(Prices::$dtmeRegular / 26, 2) }}--}}
-                        /week
-                    </td>
+                    <td>${{ round(Prices::$dtmeRegular / 26, 2) }}/week</td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just
-{{--                    {{ round(Prices::$dtmeRegular / 26, 2) }} --}}
-                    per week</u> (billed at $
-{{--                {{ Prices::$dtmeRegular }} --}}
-                for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(Prices::$dtmeRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$dtmeRegular }} for the entire course).
                 <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
@@ -659,21 +654,16 @@
 
             <h1>
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">
-                Course For Just $
-{{--                {{ round(Prices::$dtmeRegular / 26, 2) }} --}}
-                Per Week
-            </h1>
+                Course For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week</h1>
 
-            <div>
-{{--                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>--}}
-            </div>
+            <div><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="uppercase">
-{{--                @if(Prices::$dtmeFull > Prices::$dtmeRegular)--}}
-{{--                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)--}}
-{{--                @else--}}
-{{--                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>--}}
-{{--                @endif--}}
+                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
+                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
+                @else
+                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
+                @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
                 <br>

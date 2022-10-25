@@ -1,6 +1,6 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo._partials.layout-template')
 
-@section('head-includes')
+@section('global-head')
     <title>QuietKick | Drumeo</title>
     <meta property="og:title" content="QuietKick | Drumeo">
     <meta name="description" content="Improve your kick foot anywhere.">
@@ -8,8 +8,11 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/quietkick/">
 
+    @include('drumeo._partials._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
@@ -67,7 +70,7 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
@@ -242,8 +245,8 @@
                         </a>
                     </div>
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:#777;"><strong></strong></p>--}}
-                        <a {{--href="/laravel/public/shopping-cart/api/query?products[quietkick]=1&products[quietkick-beater]=1"--}} class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
+                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Double Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
@@ -251,17 +254,20 @@
                                         <s class="opacity-60">${{ Prices::$quietKickFull + 20 }}</s>
                                     @endif
                                     <strong>${{ Prices::$quietKick + 20 }}</strong></h1><br>
-                                <p class="text-sm my-2 sm:my-3"><em>Plus shipping.</em></p>
-                                {{--<div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>--}}
-                                <div class="join sold-out smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Sold Out</div>
+                                <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
+                                <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
                             </div>
                             <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                                <p><strong>HEADS UP:</strong><br> We ran out of extra beaters! You can purchase the Single Kick version (it's the same main unit) and we'll email you when we receive more additional beaters for purchase.</p>
+                                <p class="mb-1"><strong>INCLUDES:</strong></p>
+                                <p class="mb-1">1 Drumeo QuietKick</p>
+                                <p class="mb-1">2 Reverse Angle Beaters</p>
+                                <p class="mb-1">2 Ultra-quiet strike pads</p>
+                                <p>1 Long-lasting strike pad</p>
                             </div>
                         </a>
                     </div>
                 </div>
-                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/#customize-anchor"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
+                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif
@@ -310,9 +316,8 @@
             </div>
         </div>
     </section>
-@stop
 
-@section('layout-scripts')
+    @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}" defer></script>

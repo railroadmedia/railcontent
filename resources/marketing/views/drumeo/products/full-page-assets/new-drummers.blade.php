@@ -1,6 +1,6 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo._partials.layout-template')
 
-@section('head-includes')
+@section('global-head')
     <title>New Drummers Start Here | Drumeo</title>
     <meta name="description" content="The fastest way to get started on the drums and play the songs you love.">
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/og-image.jpg" style="display: none;">
@@ -8,11 +8,12 @@
     <meta property="og:description" content="The ultimate guide to getting started on the drums and playing the songs you love.">
     <meta property="og:url" content="https://www.drumeo.com/new-drummers/">
 
-    @parent
+    @include('drumeo._partials._fonts')
 
-    <link rel="stylesheet" href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
-    <link href="{{ asset('/marketing/parcel/css/drumeo/ndsh.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
     <link rel="stylesheet" href="/marketing/css/animate.css">
@@ -53,31 +54,27 @@
     </style>
 @stop
 
-@section('layout-body')
-{{--    @include('drumeo.products.partials.promo-banner', [--}}
-{{--                    "name" => "New Drummers Start Here",--}}
-{{--                    "fullPrice" => Prices::$ndshFull,--}}
-{{--                    "price" => Prices::$ndshRegular,--}}
-{{--                "noBreadcrumb" => true--}}
-{{--    ])--}}
+@section('global-body')
+    @include("drumeo.sales.partials._nav", [
+        "cartVersion" => true
+    ])
+    @include('drumeo.products.partials.promo-banner', [
+                    "name" => "New Drummers Start Here",
+                    "fullPrice" => Prices::$ndshFull,
+                    "price" => Prices::$ndshRegular,
+                "noBreadcrumb" => true
+                ])
 
     <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#020d1f;background-image: url(https://cdn.musora.com/image/fetch/w_3000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/header.jpg);">
         <div class="container mx-auto relative z-10">
-            <img class="logo mx-auto" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png"><br>
+            <img class="logo" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png"><br>
             <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" data-open="trailer"></i>
             <h2><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
-            <h4 class="text-yellow-400 mb-3 md:mb-5">
-                <strong>ONLY
-                    @if(Prices::$ndshFull > Prices::$ndshRegular)
-                        <s class="opacity-60">
-                            ${{ Prices::$ndshFull }}
-                        </s>
-                    @endif
-                    ${{ Prices::$ndshRegular }}
-                </strong>
-            </h4>
-{{--            <a class="join ndsh anchor-slide" href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>--}}
+            <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
+                    @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
+                    ${{ Prices::$ndshRegular }}</strong></h4>
+            <a class="join ndsh" href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
         </div>
     </header>
 
@@ -102,9 +99,9 @@
                         <h4 class="uppercase leading-none w-full"><strong>Beginner</strong></h4>
                         <p class="text-xs leading-none absolute left-0 right-0" style="color:#003e5a;bottom: 7px;"><i class="fas fa-long-arrow-left"></i> 90 Days <i class="fas fa-long-arrow-right"></i></p>
                     </div>
-                    <h4 class="uppercase leading-none w-full"><strong>Intermediate</strong></h4>
+                    <h4 class="uppercase leading-none"><strong>Intermediate</strong></h4>
                     <div class="h-full flex items-center" style="background-color:#1a4b89;">
-                        <h4 class="uppercase leading-none w-full"><strong>Advanced</strong></h4>
+                        <h4 class="uppercase leading-none"><strong>Advanced</strong></h4>
                     </div>
                 </div>
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text block md:hidden" style="max-width: 840px;">
@@ -366,7 +363,7 @@
             <h3 class=" mb-6 md:mb-10 lg:mb-14"><strong>Why study with Jared Falk & Drumeo?</strong></h3>
             <div class="float-left w-1/3">
                 <div class="social-platform py-4 md:py-5 lg:py-6 rounded-3xl w-11/12" style="color: #0b76db;background: linear-gradient(#000a1e, #00102e);">
-                    <img class="lazyload w-auto h-10 md:h-12 lg:h-14 py-2 mx-auto" data-src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+                    <img class="lazyload w-auto h-10 md:h-12 lg:h-14 py-2" data-src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
                     <h1 class="count font-black leading-none my-2 md:my-4 text-white" id="likes-count" data-total-count="51000">0</h1>
                     <p class="uppercase leading-none md:tracking-widest">Active Students</p>
                 </div>
@@ -469,8 +466,8 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td><img class="lazyload mx-auto" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png"></td>
-                        <td><img class="lazyload mx-auto" data-src="https://cdn.musora.com/image/fetch/w_190,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"></td>
+                        <td><img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png"></td>
+                        <td><img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_190,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"></td>
                         <td class="cursor-pointer">Other Online<br> Courses</td>
                         <td class="cursor-pointer"><img src="https://cdn.musora.com/image/fetch/w_190,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/udemy.png"></td>
                         <td class="cursor-pointer"><img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/masterclass.png"></td>
@@ -532,17 +529,16 @@
                     </tr>
                     <tr style="background-color:transparent!important;">
                         <td>TOTAL INVESTMENT</td>
-                        <td>
-{{--                            @if(Prices::$ndshFull > Prices::$ndshRegular)--}}
-{{--                                <s>${{ Prices::$ndshFull }}</s>--}}
-{{--                            @endif--}}
-{{--                            @if(Prices::$ndshRegular == 0)--}}
-{{--                                FREE--}}
-{{--                            @else--}}
-{{--                                ${{ Prices::$ndshRegular }}--}}
-{{--                            @endif--}}
+                        <td>@if(Prices::$ndshFull > Prices::$ndshRegular)
+                                <s>${{ Prices::$ndshFull }}</s>
+                            @endif
+                            @if(Prices::$ndshRegular == 0)
+                                FREE
+                            @else
+                                ${{ Prices::$ndshRegular }}
+                            @endif
                         </td>
-{{--                        <td>${{ Prices::$drumeoEdgeAnnual }}/yr</td>--}}
+                        <td>${{ Prices::$drumeoEdgeAnnual }}/yr</td>
                         <td>$89-$270</td>
                         <td>$89.99</td>
                         <td>$240/yr</td>
@@ -557,7 +553,7 @@
     <section class="relative text-center text-white py-10 md:py-14 lg:py-16" style="background:#ff570d;    border-bottom: 5px solid #ffa16a;border-top: 5px solid #ffa16a;box-shadow: 0 0px 0px 5px #0bf;">
         <div class="container mx-auto">
             <h3 class="leading-tight"><strong>Say goodbye to jumping around<br class="hidden md:inline"> between random YouTube videos.</strong></h3>
-            <h6 class="mt-3 leading-relaxed px-4 mx-auto" style="max-width: 700px;">You’ll have a step-by-step guide to getting started on the drums all in one place. And with simple assignments after every lesson, New Drummers Start Here helps you fly through your first 90 days of playing the drums.</h6>
+            <h6 class="mt-3 leading-relaxed px-4" style="max-width: 700px;">You’ll have a step-by-step guide to getting started on the drums all in one place. And with simple assignments after every lesson, New Drummers Start Here helps you fly through your first 90 days of playing the drums.</h6>
         </div>
     </section>
 
@@ -578,23 +574,17 @@
     <div id="customize-anchor" class="anchor"></div>
     <section class="final text-center text-white py-10 md:py-20 lg:py-24 bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/order-background.jpg">
         <div class="container mx-auto">
-            <img class="logo lazyload mx-auto" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png">
+            <img class="logo lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png">
             <h2 class="mt-5 md:mt-8"><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure -- get your beginner lessons for just $7 <br class="hidden md:inline">--}}
-            {{--or add a practice pad and drumsticks for a discount. </em></h6>--}}
+                    {{--or add a practice pad and drumsticks for a discount. </em></h6>--}}
 
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
-            <h4 class="text-yellow-400 mb-10 md:mb-14">
-                <strong>
-{{--                    ONLY--}}
-{{--                    @if(Prices::$ndshFull > Prices::$ndshRegular) --}}
-{{--                        <s class="opacity-60">${{ Prices::$ndshFull }}</s> --}}
-{{--                    @endif--}}
-{{--                    ${{ Prices::$ndshRegular }}--}}
-                </strong>
-            </h4>
+            <h4 class="text-yellow-400 mb-10 md:mb-14"><strong>ONLY
+                    @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
+                    ${{ Prices::$ndshRegular }}</strong></h4>
 
-{{--            <a href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>--}}
+            <a href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
 
             <div class="inline-block w-full px-3 md:px-4 mt-5 md:mt-8 text-light-navy text-4xl md:text-5xl">
                 <i class="fab mx-1 fa-cc-visa"></i>
@@ -615,39 +605,35 @@
         <div class="container mx-auto">
             <h3><strong>Still have questions?</strong></h3>
             <div class="dropdowns">
-                @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
-                        "question" => true,
-                        "title" => "Do I need a full drum set to complete the course?",
-                        "description" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
-                        ])
-                @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
-                        "question" => true,
-                        "title" => "How much time per week will this course require?",
-                        "description" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
-                        ])
-                @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
-                        "question" => true,
-                        "title" => "What devices can I access the course on?",
-                        "description" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
-                        ])
+            @include('drumeo.products.partials.question-dropdown-tw', [
+                    "customClass" => "border-blue md:rounded-full",
+                    "customArrow" => "text-blue",
+                    "question" => true,
+                    "title" => "Do I need a full drum set to complete the course?",
+                    "description" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
+                    ])
+            @include('drumeo.products.partials.question-dropdown-tw', [
+                    "customClass" => "border-blue md:rounded-full",
+                    "customArrow" => "text-blue",
+                    "question" => true,
+                    "title" => "How much time per week will this course require?",
+                    "description" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
+                    ])
+            @include('drumeo.products.partials.question-dropdown-tw', [
+                    "customClass" => "border-blue md:rounded-full",
+                    "customArrow" => "text-blue",
+                    "question" => true,
+                    "title" => "What devices can I access the course on?",
+                    "description" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
+                    ])
             </div>
         </div>
     </section>
 
-{{--    @include("drumeo.sales.partials._footer")--}}
+    @include("drumeo.sales.partials._footer")
 
-
-@stop
-
-@section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('/marketing/parcel/js/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
@@ -668,19 +654,19 @@
             $('.slick-2').slick({
                 slidesToShow: 3,
                 responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1
-                        }
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
                     }
-                ]
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
 
             });
             //scrolls up subscriber count
@@ -730,7 +716,7 @@
                 $(this).find('i').toggleClass('rotate-180');
             });
 
-            $('.tzcd-big').countdown('2021/11/30')
+            $('.tzcd-big').countdown('2022/08/01')
                 .on('update.countdown', function (event) {
                     var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
                     if (event.offset.totalHours > 0) {

@@ -1,6 +1,6 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo._partials.layout-template')
 
-@section('head-includes')
+@section('global-head')
     <title>Beyond Beginner Drumming | Drumeo</title>
     <meta property="og:title" content="Beyond Beginner Drumming">
     <meta name="description" content="Make the jump from beginner to intermediate drummer.">
@@ -8,11 +8,12 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Banner.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @parent
+    @include('drumeo._partials._fonts')
 
-    <link rel="stylesheet" href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
-    <link href="{{ asset('/marketing/parcel/css/drumeo/ndsh.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
     <link rel="stylesheet" href="/marketing/css/animate.css">
@@ -61,16 +62,16 @@
     </style>
 @stop
 
-@section('layout-body')
-{{--    @include("drumeo.sales.partials._nav", [--}}
-{{--        "cartVersion" => true--}}
-{{--    ])--}}
-{{--    @include('drumeo.products.partials.promo-banner', [--}}
-{{--                    "name" => "Beyond Beginner Drumming",--}}
-{{--                    "fullPrice" => Prices::$beyondBeginnerDrummingFull,--}}
-{{--                    "price" => Prices::$beyondBeginnerDrumming,--}}
-{{--                    "noBreadcrumb" => true--}}
-{{--                ])--}}
+@section('global-body')
+    @include("drumeo.sales.partials._nav", [
+        "cartVersion" => true
+    ])
+    @include('drumeo.products.partials.promo-banner', [
+                    "name" => "Beyond Beginner Drumming",
+                    "fullPrice" => Prices::$beyondBeginnerDrummingFull,
+                    "price" => Prices::$beyondBeginnerDrumming,
+                "noBreadcrumb" => true
+                ])
 
     <header class="text-center text-white py-5 md:py-10 px-4 bg-top bg-no-repeat relative" style="background-color:#00101d;background-image: url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Header_BG.jpg);">
         <div class="container mx-auto relative z-10">

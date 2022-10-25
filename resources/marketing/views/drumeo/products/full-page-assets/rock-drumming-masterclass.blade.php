@@ -1,21 +1,23 @@
-@extends('drumeo._partials.layout')
+@extends('drumeo.products.misc-products-layout')
 
-@section('head-includes')
+
+@section('meta')
+    @parent
     <title>Rock Drumming Masterclass | Drumeo</title>
     <meta name="description" content="Unlock your rock drumming potential in this exclusive 26-week masterclass with Todd Sucherman.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Unlock your rock drumming potential in this exclusive 26-week masterclass with Todd Sucherman.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-
-    @parent
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/css/drumeo/drum-shop-rdm.css') }}" rel="stylesheet">
-<!--    --><?php //\App\Analytics\Tracker::trackProductImpression('rock-drumming-masterclass'); ?>
 @stop()
 
-@section('layout-scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@section('head')
+    @parent
+    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-rdm.css') }}" rel="stylesheet">
+    <?php \App\Analytics\Tracker::trackProductImpression('rock-drumming-masterclass'); ?>
+@stop()
+
+@section('scripts')
+    @parent
     <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>
         $(function () {
@@ -36,30 +38,35 @@
         });
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
 @stop()
 
-@section('layout-body')
+@section('content')
+    @include('drumeo.products.partials.promo-banner', [
+                    "name" => "Rock Drumming Masterclass",
+                    "fullPrice" => Prices::$rdmFull,
+                    "price" => Prices::$rdmRegular,
+                "noBreadcrumb" => true
+                ])
     <header class="hero-header">
         <div class="row">
             <div class="columns video-wrap autoplay-video" data-open="trailer">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="logo">
                     <p><em>Todd Sucherman's</em></p>
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="white logo">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png">
                 </div>
             </div>
             <h3 class="columns">The Rock Drumming Masterclass is a
                 <br class="show-for-medium-only">26-week online course with Todd Sucherman.</h3>
 
-{{--            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>--}}
+            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
 
             <p class="columns uppercase price">
-{{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}
-{{--                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)--}}
-{{--                @else--}}
-{{--                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>--}}
-{{--                @endif--}}
+                @if(Prices::$rdmFull > Prices::$rdmRegular)
+                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)
+                @else
+                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>
+                @endif
 
                 <br>
                 <u class="text-blue"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -71,7 +78,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400735162?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-{{--                <a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>--}}
+                <a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>
             </div>
         </div>
     </header>
@@ -380,7 +387,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png" alt="bold t"></span>odd Sucherman has played more than 2000 rock shows -- entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png"></span>odd Sucherman has played more than 2000 rock shows -- entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
                 <br><br>
                 And for the next six months, Todd will be sharing his “keys to the kingdom” with students around the world through The Rock Drumming Masterclass -- a 26-week course that will give you the confidence you need to play ANY rock music you want.
                 <br><br>
@@ -411,7 +418,7 @@
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/steve-smith.jpg">
                 </div>
                 <div class="columns medium-7 large-8 text">
-                    <h1 class="mb-1 ml-0">Steve Smith <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Journey)</span></h1>
+                    <h1>Steve Smith <span class="band">(Journey)</span></h1>
                     <h2>"Todd Sucherman is one of the premier drummers touring today..."</h2>
                     <p>There are times when his approach reminds me of the way I played with Journey in the late 70s and early 80s, except he’s much better than I was!  He perfected and honed the concept, infusing it with his deep musicianship and super chops. His musical development is inspiring and he continues to grow as a player.  We always have a great time hanging, trading ideas, and discussing music.  Carry on Todd!</p>
                 </div>
@@ -420,17 +427,17 @@
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/will-calhoun.jpg">
-                    <h1 class="mb-1 ml-0">Will Calhoun<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Living Colour)</span></h1>
+                    <h1>Will Calhoun<br> <span class="band">(Living Colour)</span></h1>
                     <p>"Todd Sucherman is a great drummer. Although he’s most known for playing Rock-n-Roll, he possesses the facility and knowledge to play any style of music at a high level."</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-dicenso.jpg">
-                    <h1 class="mb-1 ml-0">Dave DiCenso<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Professor of Percussion at Berklee College of Music)</span></h1>
+                    <h1>Dave DiCenso<br> <span class="band">(Professor of Percussion at Berklee College of Music)</span></h1>
                     <p>"Todd Sucherman is one of the greatest rock drummers of our time. Brains, brawn, heart and soul - he has 'em all!"</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/simon-phillips.jpg">
-                    <h1 class="mb-1 ml-0">Simon Phillips<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Toto, The Who, Judas Priest)</span></h1>
+                    <h1>Simon Phillips<br> <span class="band">(Toto, The Who, Judas Priest)</span></h1>
                     <p>"Whenever I get the opportunity to hear Todd play I am struck by his preciseness and musicality no matter what the musical setting might be."</p>
                 </div>
             </div>
@@ -440,8 +447,8 @@
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gavin-harrison.jpg">
                 </div>
                 <div class="columns medium-7 large-8 text">
-                    <h1 class="mb-4 ml-0">Gavin Harrison <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Porcupine Tree)</span></h1>
-                    <h4 class="text-[#999]">"Todd is the most advanced drummer in the world right now… that has bought me a beer"</h4>
+                    <h1>Gavin Harrison <span class="band">(Porcupine Tree)</span></h1>
+                    <h2>"Todd is the most advanced drummer in the world right now… that has bought me a beer"</h2>
                     <p>&nbsp;</p>
                 </div>
             </div>
@@ -449,17 +456,17 @@
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/matt-garska.jpg">
-                    <h1 class="mb-1 ml-0">Matt Garstka<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Animals as Leaders)</span></h1>
+                    <h1>Matt Garstka<br> <span class="band">(Animals as Leaders)</span></h1>
                     <p>"Todd Sucherman is a legend. He is super clean, musical and really knows what he's doing. This polished playing only comes about after decades of touring and practice."</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-mattacks.jpg">
-                    <h1 class="mb-1 ml-0">Dave Mattacks<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Fairport Convention)</span></h1>
+                    <h1>Dave Mattacks<br> <span class="band">(Fairport Convention)</span></h1>
                     <p>"I’m happy to endorse my chum Todd with this splendid Drumeo course.  Wherever you are along your drumming path, I can honestly say that “Todd hardly ever wrecks the music.”  Seriously though!  You’re in great hands here— double entendre intentional!"</p>
                 </div>
                 <div class="columns medium-4">
                     <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gary-husband.jpg">
-                    <h1 class="mb-1 ml-0">Gary Husband<br> <span class="band font-roboto font-normal tracking-none uppercase text-drumeo italic">(Jazz & Rock drummer, pianist, and bandleader.)</span></h1>
+                    <h1>Gary Husband<br> <span class="band">(Jazz & Rock drummer, pianist, and bandleader.)</span></h1>
                     <p>"It’s always just right-across-the-border drums excellence with Todd! Every time! No matter what the music. It’s the musician he is, primarily, also the warm spirit and how benevolent he is. The taste, the articulation, the feeling, his amazing sound ... all icing on an already delicious cake."</p>
                 </div>
             </div>
@@ -469,18 +476,14 @@
     <section class="compare-table">
         <div class="row">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>
-                while saving
-{{--                {{ round(100 - (100 * (round(Prices::$rdmRegular / 26, 2) / 30))) }}--}}
-                % or more <br class="hide-for-medium"> compared to private lessons.
-            </h3>
+            <h3>while saving {{ round(100 - (100 * (round(Prices::$rdmRegular / 26, 2) / 30))) }}% or more <br class="hide-for-medium"> compared to private lessons.</h3>
             <table>
                 <tbody>
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook mx-auto inline-block"><br>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo mx-auto">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook"><br>
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -546,22 +549,13 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>
-                        $
-{{--                        {{ round(Prices::$rdmRegular / 26, 2) }}--}}
-                        /week
-                    </td>
+                    <td>${{ round(Prices::$rdmRegular / 26, 2) }}/week</td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong>
-                to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just $
-{{--                    {{ round(Prices::$rdmRegular / 26, 2) }}--}}
-                    per week</u> (billed at $
-{{--                {{ Prices::$rdmRegular }}--}}
-                for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just ${{ round(Prices::$rdmRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$rdmRegular }} for the entire course).
                 <br><br>
                 You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
@@ -638,18 +632,16 @@
 
             <h1 class="columns">
                 Todd Sucherman’s 26-Week Online <br class="hide-for-large">
-                Course For Just $
-{{--                {{ round(Prices::$rdmRegular / 26, 2) }}--}}
-                Per Week</h1>
+                Course For Just ${{ round(Prices::$rdmRegular / 26, 2) }} Per Week</h1>
 
-{{--            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="btn-primary bg-drumeo w-full">Get Started &raquo;</a></div>--}}
+            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h2 class="columns uppercase">
-{{--                @if(Prices::$rdmFull > Prices::$rdmRegular)--}}
-{{--                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)--}}
-{{--                @else--}}
-{{--                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>--}}
-{{--                @endif--}}
+                @if(Prices::$rdmFull > Prices::$rdmRegular)
+                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)
+                @else
+                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>
+                @endif
                 <br>
                 <u class="text-blue"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
                 <br>
