@@ -96,41 +96,6 @@ class CmsLessonSeeder extends Seeder
             [
                 "brand" => 1,
                 "product_type_id" => 1,
-                "name" => "Beyond Beginner Drumming",
-                "slug" => "beyond-beginner-drumming",
-                "sku" => "beyond-beginner-drumming",
-                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Card.jpg",
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
-                "meta_desc" => "",
-                "meta_img" => "",
-                "short_desc" => "Make the jump from beginner to intermediate drummer",
-                "header_text" => "",
-                "price" => 127,
-                "discounted_price" => "",
-                "features" => [
-
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "freeBonus" => false,
-                "guaranteed" => true,
-                "lifetime_access" => true,
-                "free_shipping" => false,
-                "included_edge" => true,
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
-                "page_logo" => "",
-                "video" => "",
-                "instructor_name" => "Siros Vaziri",
-                "instructor_desc" => "",
-                "instructor_img" => null,
-                "studyText" => "",
-                "overview" => "",
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 1,
                 "name" => "New Drummers Start Here",
                 "slug" => "new-drummers",
                 "sku" => "new-drummers-start-here",
@@ -349,6 +314,41 @@ class CmsLessonSeeder extends Seeder
             [
                 "brand" => 1,
                 "product_type_id" => 1,
+                "name" => "Beyond Beginner Drumming",
+                "slug" => "beyond-beginner-drumming",
+                "sku" => "beyond-beginner-drumming",
+                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Card.jpg",
+                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
+                "meta_desc" => "",
+                "meta_img" => "",
+                "short_desc" => "Make the jump from beginner to intermediate drummer",
+                "header_text" => "",
+                "price" => 127,
+                "discounted_price" => "",
+                "features" => [
+
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "freeBonus" => false,
+                "guaranteed" => true,
+                "lifetime_access" => true,
+                "free_shipping" => false,
+                "included_edge" => true,
+                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
+                "page_logo" => "",
+                "video" => "",
+                "instructor_name" => "Siros Vaziri",
+                "instructor_desc" => "",
+                "instructor_img" => null,
+                "studyText" => "",
+                "overview" => "",
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 1,
                 "name" => "Electrify Your Drumming",
                 "slug" => "electrify-your-drumming",
                 "sku" => "electrify-your-drumming",
@@ -436,7 +436,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -450,91 +450,6 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 1,
-                "name" => "Anatomy Of A Drum Solo",
-                "slug" => "anatomy-of-a-drum-solo",
-                "sku" => "AOADS-DIGI",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/anatomy-of-a-drum-solo.jpg",
-                "meta_desc" => "In-studio footage of Neil Peart discussing, in detail, his approach to soloing.",
-                "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/og-image.jpg",
-                "short_desc" => "Neil Peart breaks down his approach to drum soloing -- with more than three hours of online video to improve your rhythm and improvisation.",
-                "header_text" => "Neil Peart’s Inspiration, Improvisation,& Approach To Soloing",
-                "special_text" => "",
-                "price" => 29.99,
-                "discounted_price" => "",
-                "features" => [
-                    "Overall approach to composing a drum solo.",
-                    "Introduction to the drums and setup that Peart uses.",
-                    "The R30 tour setlist.",
-                    "Introduction to “Element 1” of his drum solo.",
-                    "How he uses the narrative arc in soloing.",
-                    "Incorporating African rhythms into a solo.",
-                    "Rhythmic variations and incorporating them into your playing.",
-                    "Creating mood changes with different voices on the drums.",
-                    "Hand technique and how it’s changed throughout his career.",
-                    "Big band sections of drum solos.",
-                ],
-                "specs" => [
-                    [
-                        "title" => "Publisher",
-                        "desc" => "Hudson Music, 2005"
-                    ],
-                    [
-                        "title" => "Video",
-                        "desc" => "200 minutes"
-                    ],
-                    [
-                        "title" => "Online",
-                        "desc" => "Lifetime access to all content"
-                    ],
-                    [
-                        "title" => "Skill",
-                        "desc" => "Intermediate"
-                    ],
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "freeBonus" => false,
-                "guaranteed" => true,
-                "lifetime_access" => true,
-                "free_shipping" => false,
-                "thumbnail_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
-                "page_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
-                "video" => "//player.vimeo.com/video/292144959",
-                "instructor_name" => "Neil Peart",
-                "instructor_desc" => "Best known as the drummer and primary lyricist for the rock band Rush, Neil Peart has received numerous awards for his musical performances including Best Rock Drummer, Best Multi-Percussionist, Best All Around Drummer, as well as inductions into the Rock and Roll Hall of Fame and the Modern Drummer Hall of Fame.
-
-Peart is noted for his distinctive in-concert drum solos, characterized by exotic percussion instruments and long, intricate passages in odd time signatures - and his drum solos were featured on every live album released by Rush. “Anatomy of a Drum Solo” gives you an in-depth examination of how he constructs a solo that is musical, rather than indulgent, using his solo from the 2004 R30 30th anniversary tour as an example.",
-                "benefits" => [
-                    [
-                        "icon" => "fa-trophy",
-                        "heading" => "Study With Neil Peart",
-                        "desc" => "World-renowned drummer for Rush. Inducted into the Rock and Roll Hall of Fame in 2013."
-                    ],
-                    [
-                        "icon" => "fa-users",
-                        "heading" => "Drumeo Interactive Edition",
-                        "desc" => "The famous Hudson Music DVD has been reformatted for a world-class digital, interactive experience."
-                    ],
-                ],
-                "overview" => "**“Best Instructional Video”, Modern Drummer Readers Poll (2006)
-                “Best DVD”, DRUM! Magazine Drummie Awards (2007)**
-
-In-studio footage of Neil Peart discussing, in detail, his approach to soloing. Using a solo recorded in 2004 in Frankfurt, Germany, as a framework - Peart talks about each segment of this nine-minute tour de force that is a highlight of each Rush performance.
-
-Also included are:
-
-Two explorations -- completely improved workouts at the drums, each over thirty minutes long; a never-before-released solo recorded in Hamburg, Germany in September, 2004.
-Peart’s Grammy Award-nominated solo from Rush in Rio.
-Two full Rush performances from Frankfurt 2004, shown entirely from the perspective of the drum cameras.
-Interviews with Lorne Wheaton, Peart’s drum tech, and Paul Northfield, Rush co-producer and engineer.
-A previously unreleased solo from the Rush Counterparts tour recorded in 1994 at the Palace of Auburn Hills in Michigan.
-
-You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
-                "instructor_img" => "https://s3.amazonaws.com/drumeo-packs/Instructors/neil-peart.jpg",
             ],
             [
                 "brand" => 1,
@@ -856,6 +771,91 @@ Petrillo has served as a faculty member at the Drummer’s Collective in New Yor
 This video pack also comes with a 52 page workbook.
 
 All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the notation, speeding up or slowing down the exercises, and creating loops to improve your learning experience. You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 1,
+                "name" => "Anatomy Of A Drum Solo",
+                "slug" => "anatomy-of-a-drum-solo",
+                "sku" => "AOADS-DIGI",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/anatomy-of-a-drum-solo.jpg",
+                "meta_desc" => "In-studio footage of Neil Peart discussing, in detail, his approach to soloing.",
+                "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/og-image.jpg",
+                "short_desc" => "Neil Peart breaks down his approach to drum soloing -- with more than three hours of online video to improve your rhythm and improvisation.",
+                "header_text" => "Neil Peart’s Inspiration, Improvisation,& Approach To Soloing",
+                "special_text" => "",
+                "price" => 29.99,
+                "discounted_price" => "",
+                "features" => [
+                    "Overall approach to composing a drum solo.",
+                    "Introduction to the drums and setup that Peart uses.",
+                    "The R30 tour setlist.",
+                    "Introduction to “Element 1” of his drum solo.",
+                    "How he uses the narrative arc in soloing.",
+                    "Incorporating African rhythms into a solo.",
+                    "Rhythmic variations and incorporating them into your playing.",
+                    "Creating mood changes with different voices on the drums.",
+                    "Hand technique and how it’s changed throughout his career.",
+                    "Big band sections of drum solos.",
+                ],
+                "specs" => [
+                    [
+                        "title" => "Publisher",
+                        "desc" => "Hudson Music, 2005"
+                    ],
+                    [
+                        "title" => "Video",
+                        "desc" => "200 minutes"
+                    ],
+                    [
+                        "title" => "Online",
+                        "desc" => "Lifetime access to all content"
+                    ],
+                    [
+                        "title" => "Skill",
+                        "desc" => "Intermediate"
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "freeBonus" => false,
+                "guaranteed" => true,
+                "lifetime_access" => true,
+                "free_shipping" => false,
+                "thumbnail_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
+                "page_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
+                "video" => "//player.vimeo.com/video/292144959",
+                "instructor_name" => "Neil Peart",
+                "instructor_desc" => "Best known as the drummer and primary lyricist for the rock band Rush, Neil Peart has received numerous awards for his musical performances including Best Rock Drummer, Best Multi-Percussionist, Best All Around Drummer, as well as inductions into the Rock and Roll Hall of Fame and the Modern Drummer Hall of Fame.
+
+Peart is noted for his distinctive in-concert drum solos, characterized by exotic percussion instruments and long, intricate passages in odd time signatures - and his drum solos were featured on every live album released by Rush. “Anatomy of a Drum Solo” gives you an in-depth examination of how he constructs a solo that is musical, rather than indulgent, using his solo from the 2004 R30 30th anniversary tour as an example.",
+                "benefits" => [
+                    [
+                        "icon" => "fa-trophy",
+                        "heading" => "Study With Neil Peart",
+                        "desc" => "World-renowned drummer for Rush. Inducted into the Rock and Roll Hall of Fame in 2013."
+                    ],
+                    [
+                        "icon" => "fa-users",
+                        "heading" => "Drumeo Interactive Edition",
+                        "desc" => "The famous Hudson Music DVD has been reformatted for a world-class digital, interactive experience."
+                    ],
+                ],
+                "overview" => "**“Best Instructional Video”, Modern Drummer Readers Poll (2006)
+                “Best DVD”, DRUM! Magazine Drummie Awards (2007)**
+
+In-studio footage of Neil Peart discussing, in detail, his approach to soloing. Using a solo recorded in 2004 in Frankfurt, Germany, as a framework - Peart talks about each segment of this nine-minute tour de force that is a highlight of each Rush performance.
+
+Also included are:
+
+Two explorations -- completely improved workouts at the drums, each over thirty minutes long; a never-before-released solo recorded in Hamburg, Germany in September, 2004.
+Peart’s Grammy Award-nominated solo from Rush in Rio.
+Two full Rush performances from Frankfurt 2004, shown entirely from the perspective of the drum cameras.
+Interviews with Lorne Wheaton, Peart’s drum tech, and Paul Northfield, Rush co-producer and engineer.
+A previously unreleased solo from the Rush Counterparts tour recorded in 1994 at the Palace of Auburn Hills in Michigan.
+
+You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
+                "instructor_img" => "https://s3.amazonaws.com/drumeo-packs/Instructors/neil-peart.jpg",
             ],
             [
                 "brand" => 1,
