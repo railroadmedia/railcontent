@@ -68,6 +68,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::group([], base_path('routes/drumeo/sales.php'));
             Route::group([], base_path('routes/drumeo/lead-gen.php'));
+            Route::group([], base_path('routes/drumeo/shop.php'));
 
             Route::group([], base_path('routes/guitareo/sales.php'));
             Route::group([], base_path('routes/guitareo/lead-gen.php'));
