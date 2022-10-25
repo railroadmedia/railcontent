@@ -49,65 +49,65 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/sharon', function () { return view('drumeo.sales.trials.coaches.sharon'); });
     Route::get('/todd', function () { return view('drumeo.sales.trials.coaches.todd'); });
 
-    Route::get('/estepario', function () { return view('drumeo.sales.trials.affiliates.estepario'); });
+    Route::get('/estepario', function () { return view('drumeo.sales.trials.affiliate.estepario'); });
 
     Route::group(['prefix' => 'a' ],
         function () {
-            Route::get('/66samus', function () { return view('drumeo.sales.trials.affiliates.66samus'); });
-            Route::get('/adriendrums', function () { return view('drumeo.sales.trials.affiliates.adriendrums'); });
-            Route::get('/alejandrosifuentes', function () { return view('drumeo.sales.trials.affiliates.alejandrosifuentes'); });
-            Route::get('/brandonscott', function () { return view('drumeo.sales.trials.affiliates.brandonscott'); });
-            Route::get('/cooperdrummer', function () { return view('drumeo.sales.trials.affiliates.cooperdrummer'); });
-            Route::get('/davidcola', function () { return view('drumeo.sales.trials.affiliates.davidcola'); });
-            Route::get('/drumhelper', function () { return view('drumeo.sales.trials.affiliates.drumhelper'); });
-            Route::get('/joshcrawford', function () { return view('drumeo.sales.trials.affiliates.joshcrawford'); });
-            Route::get('/leviclay', function () { return view('drumeo.sales.trials.affiliates.leviclay'); });
-            Route::get('/linaanderberg', function () { return view('drumeo.sales.trials.affiliates.linaanderberg'); });
-            Route::get('/rdavidr', function () { return view('drumeo.sales.trials.affiliates.rdavidr'); });
-            Route::get('/robbrown', function () { return view('drumeo.sales.trials.affiliates.robbrown'); });
-            Route::get('/the8bitdrummer', function () { return view('drumeo.sales.trials.affiliates.the8bitdrummer'); });
-            Route::get('/worshipdrummer', function () { return view('drumeo.sales.trials.affiliates.worshipdrummer'); });
-            Route::get('/wyattstav', function () { return view('drumeo.sales.trials.affiliates.wyattstav'); });
-            Route::get('/zackgrooves', function () { return view('drumeo.sales.trials.affiliates.zackgrooves'); });
+            Route::get('/66samus', function () { return view('drumeo.sales.trials.affiliate.66samus'); });
+            Route::get('/adriendrums', function () { return view('drumeo.sales.trials.affiliate.adriendrums'); });
+            Route::get('/alejandrosifuentes', function () { return view('drumeo.sales.trials.affiliate.alejandrosifuentes'); });
+            Route::get('/brandonscott', function () { return view('drumeo.sales.trials.affiliate.brandonscott'); });
+            Route::get('/cooperdrummer', function () { return view('drumeo.sales.trials.affiliate.cooperdrummer'); });
+            Route::get('/davidcola', function () { return view('drumeo.sales.trials.affiliate.davidcola'); });
+            Route::get('/drumhelper', function () { return view('drumeo.sales.trials.affiliate.drumhelper'); });
+            Route::get('/joshcrawford', function () { return view('drumeo.sales.trials.affiliate.joshcrawford'); });
+            Route::get('/leviclay', function () { return view('drumeo.sales.trials.affiliate.leviclay'); });
+            Route::get('/linaanderberg', function () { return view('drumeo.sales.trials.affiliate.linaanderberg'); });
+            Route::get('/rdavidr', function () { return view('drumeo.sales.trials.affiliate.rdavidr'); });
+            Route::get('/robbrown', function () { return view('drumeo.sales.trials.affiliate.robbrown'); });
+            Route::get('/the8bitdrummer', function () { return view('drumeo.sales.trials.affiliate.the8bitdrummer'); });
+            Route::get('/worshipdrummer', function () { return view('drumeo.sales.trials.affiliate.worshipdrummer'); });
+            Route::get('/wyattstav', function () { return view('drumeo.sales.trials.affiliate.wyattstav'); });
+            Route::get('/zackgrooves', function () { return view('drumeo.sales.trials.affiliate.zackgrooves'); });
         }
     );
     Route::group(['prefix' => 'affiliate' ],
         function () {
-            Route::get('/andrewrooney', function () { return view('drumeo.sales.trials.affiliates.andrewrooney'); });
-            Route::get('/asobergirlsguide', function () { return view('drumeo.sales.trials.affiliates.asobergirlsguide'); });
-            Route::get('/bhcollective', function () { return view('drumeo.sales.trials.affiliates.bhcollective'); });
-            Route::get('/bryanforcedrums', function () { return view('drumeo.sales.trials.affiliates.bryanforcedrums'); });
-            Route::get('/drummingreview', function () { return view('drumeo.sales.trials.affiliates.drummingreview'); });
-            Route::get('/drumninja', function () { return view('drumeo.sales.trials.affiliates.drumninja'); });
-            Route::get('/electronicdrumadvisor', function () { return view('drumeo.sales.trials.affiliates.electronicdrumadvisor'); });
-            Route::get('/jessica-burdeaux', function () { return view('drumeo.sales.trials.affiliates.jessica-burdeaux'); });
-            Route::get('/kylemcgrail', function () { return view('drumeo.sales.trials.affiliates.kylemcgrail'); });
-            Route::get('/leyandrums', function () { return view('drumeo.sales.trials.affiliates.leyandrums'); });
-            Route::get('/lindseyward', function () { return view('drumeo.sales.trials.affiliates.lindseyward'); });
-            Route::get('/musicindustryhowto', function () { return view('drumeo.sales.trials.affiliates.musicindustryhowto'); });
-            Route::get('/rickyficarelli', function () { return view('drumeo.sales.trials.affiliates.rickyficarelli'); });
-            Route::get('/tobines', function () { return view('drumeo.sales.trials.affiliates.tobines'); });
+            Route::get('/andrewrooney', function () { return view('drumeo.sales.trials.affiliate.andrewrooney'); });
+            Route::get('/asobergirlsguide', function () { return view('drumeo.sales.trials.affiliate.asobergirlsguide'); });
+            Route::get('/bhcollective', function () { return view('drumeo.sales.trials.affiliate.bhcollective'); });
+            Route::get('/bryanforcedrums', function () { return view('drumeo.sales.trials.affiliate.bryanforcedrums'); });
+            Route::get('/drummingreview', function () { return view('drumeo.sales.trials.affiliate.drummingreview'); });
+            Route::get('/drumninja', function () { return view('drumeo.sales.trials.affiliate.drumninja'); });
+            Route::get('/electronicdrumadvisor', function () { return view('drumeo.sales.trials.affiliate.electronicdrumadvisor'); });
+            Route::get('/jessica-burdeaux', function () { return view('drumeo.sales.trials.affiliate.jessica-burdeaux'); });
+            Route::get('/kylemcgrail', function () { return view('drumeo.sales.trials.affiliate.kylemcgrail'); });
+            Route::get('/leyandrums', function () { return view('drumeo.sales.trials.affiliate.leyandrums'); });
+            Route::get('/lindseyward', function () { return view('drumeo.sales.trials.affiliate.lindseyward'); });
+            Route::get('/musicindustryhowto', function () { return view('drumeo.sales.trials.affiliate.musicindustryhowto'); });
+            Route::get('/rickyficarelli', function () { return view('drumeo.sales.trials.affiliate.rickyficarelli'); });
+            Route::get('/tobines', function () { return view('drumeo.sales.trials.affiliate.tobines'); });
         }
     );
 
-    Route::get('/coach-trial', function () { return view('drumeo.sales.trials.trial-selection.coaches'); });
-    Route::get('/choose-your-trial', function () { return view('drumeo.sales.trials.trial-selection.week'); });
+    Route::get('/coach-trial', function () { return view('drumeo.sales.trials.trial-selection.coach-trial'); });
+    Route::get('/choose-your-trial', function () { return view('drumeo.sales.trials.trial-selection.choose-your-trial'); });
     Route::get('/earthworks', function () { return view('drumeo.sales.trials.earthworks'); });
-    Route::get('/earthworks-trial', function () { return view('drumeo.sales.trials.trial-selection.earthworks'); });
+    Route::get('/earthworks-trial', function () { return view('drumeo.sales.trials.trial-selection.earthworks-trial'); });
     Route::get('/coaches-quiz', function () { return view('drumeo.sales.trials.coaches-quiz'); });
-    Route::get('/coaches-quiz-trial', function () { return view('drumeo.sales.trials.trial-selection.coaches-quiz'); });
+    Route::get('/coaches-quiz-trial', function () { return view('drumeo.sales.trials.trial-selection.coaches-quiz-trial'); });
     Route::get('/30-day-trial', function () { return view('drumeo.sales.trials.30-day-trial'); });
-    Route::get('/choose-your-trial-month', function () { return view('drumeo.sales.trials.trial-selection.month'); });
+    Route::get('/choose-your-trial-month', function () { return view('drumeo.sales.trials.trial-selection.choose-your-trial-month'); });
     Route::get('/melodics', function () { return view('drumeo.sales.trials.melodics'); });
-    Route::get('/melodics-trial', function () { return view('drumeo.sales.trials.trial-selection.melodics'); });
+    Route::get('/melodics-trial', function () { return view('drumeo.sales.trials.trial-selection.melodics-trial'); });
     Route::get('/new-drummers-trial', function () { return view('drumeo.sales.trials.new-drummers-trial'); });
-    Route::get('/new-drummers-trial-month', function () { return view('drumeo.sales.trials.trial-selection.new-drummers'); });
+    Route::get('/new-drummers-trial-month', function () { return view('drumeo.sales.trials.trial-selection.new-drummers-trial-month'); });
 
-    Route::get('/affiliate-trial', function () { return view('drumeo.sales.trials.trial-selection.affiliates'); });
+    Route::get('/affiliate-trial', function () { return view('drumeo.sales.trials.trial-selection.affiliate-trial'); });
 
     Route::get('/power-pack', function () { return view('drumeo.sales.trials.power-pack'); });
-    Route::get('/bestbook-trial', function () { return view('drumeo.sales.trials.trial-book'); });
-    Route::get('/toolbox-trial', function () { return view('drumeo.sales.trials.trial-toolbox-book'); });
+    Route::get('/bestbook-trial', function () { return view('drumeo.sales.trials.bestbook-trial'); });
+    Route::get('/toolbox-trial', function () { return view('drumeo.sales.trials.toolbox-trial'); });
     Route::get('/vdrums', function () { return view('drumeo.sales.trials.vdrums'); });
     Route::get('/beat-testing/', function () { return view('beat.beat-layout'); });
     Route::get('/birthday-gifts/', function () { return view('drumeo.lead-gen.gift-guide.birthday-guide'); });

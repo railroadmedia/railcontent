@@ -328,9 +328,11 @@
             <div class="logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/promos/february/hlag-logo.png"> </div>
             <h3>Claim Your Free 30-Day <br class="hide-for-medium"> Membership To Drumeo</h3>
             <div class="columns">
-                @foreach ($errors->all() as $error)
-                    <p class="mb-1 text-error body">{{ $error }}</p>
-                @endforeach
+                @if(!empty($errors))
+                    @foreach ($errors->all() as $error)
+                        <p class="mb-1 text-error body">{{ $error }}</p>
+                    @endforeach
+                @endif
 
                 @if(session()->has('success'))
                         <div class="success">
