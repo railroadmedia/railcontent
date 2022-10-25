@@ -13,7 +13,7 @@
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link href="{{ asset('/marketing/css/pianote/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <style>
         .lazyload {
             opacity: 0;

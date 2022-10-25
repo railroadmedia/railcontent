@@ -10,7 +10,7 @@
             .content-section.customize > div > img { height:40px; }
         </style>
         <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-        <link href="{{ asset('/marketing/css/drumeo/animate.css') }}" rel="stylesheet">
+        <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     @endsection
 
     @include("drumeo.sales.partials._subscribe-bonus-list-alt", [

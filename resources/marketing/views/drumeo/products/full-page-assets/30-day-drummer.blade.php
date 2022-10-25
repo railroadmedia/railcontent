@@ -13,7 +13,7 @@
     <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/css/drumeo/animate.css">
+    <link rel="stylesheet" href="/marketing/css/animate.css">
     <style>
 
         [placeholder]:focus::-webkit-input-placeholder {

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/singeo/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
 
     <style>
         .lazyload {

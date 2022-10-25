@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/css/drumeo/animate.css">
+    <link rel="stylesheet" href="/marketing/css/animate.css">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/comfort-cover.css') }}" rel="stylesheet">

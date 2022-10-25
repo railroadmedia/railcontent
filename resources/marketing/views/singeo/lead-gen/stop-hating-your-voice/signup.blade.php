@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/stop-hating-your-voice/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
     <style>
 

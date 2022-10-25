@@ -14,7 +14,7 @@
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="/marketing/parcel/pianote/play-beautiful-piano.css" rel="stylesheet">
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/pianote/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <style>
         body.modal-open {
             overflow-y:hidden;
