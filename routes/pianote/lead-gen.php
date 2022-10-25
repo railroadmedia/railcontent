@@ -37,9 +37,9 @@ Route::domain('{pianoteDomain}')->group(function () {
                 });
         }
     );
+
     Route::group(['prefix' => 'riffs-and-fills' ],
         function () {
-//                Route::get('/', function () { return view('pianote.lead-gen.riffs-and-fills.signup'); });
             Route::get('/', function () { return view('pianote.products.riffs-and-fills'); });
             Route::group(['prefix' => 'lessons' ],
                 function () {
@@ -54,6 +54,23 @@ Route::domain('{pianoteDomain}')->group(function () {
                 });
         }
     );
+    Route::group(['prefix' => 'shop/riffs-and-fills' ],
+        function () {
+            Route::get('/', function () { return view('pianote.products.riffs-and-fills'); });
+            Route::group(['prefix' => 'lessons' ],
+                function () {
+                    Route::get('/', function () { return view('pianote.lead-gen.riffs-and-fills.pages.lesson-index'); });
+                    Route::get('/1', function () { return view('pianote.lead-gen.riffs-and-fills.pages.1'); });
+                    Route::get('/2', function () { return view('pianote.lead-gen.riffs-and-fills.pages.2'); });
+                    Route::get('/3', function () { return view('pianote.lead-gen.riffs-and-fills.pages.3'); });
+                    Route::get('/4', function () { return view('pianote.lead-gen.riffs-and-fills.pages.4'); });
+                    Route::get('/5', function () { return view('pianote.lead-gen.riffs-and-fills.pages.5'); });
+                    Route::get('/6', function () { return view('pianote.lead-gen.riffs-and-fills.pages.6'); });
+                    Route::get('/7', function () { return view('pianote.lead-gen.riffs-and-fills.pages.7'); });
+                });
+        }
+    );
+
     Route::group(['prefix' => 'method' ],
         function () {
             Route::get('/why-people-fail', function () { return view('pianote.lead-gen.method.lessons.1'); });
