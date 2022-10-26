@@ -34,9 +34,11 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
-        "cartVersion" => true
-    ])
+    @include('pianote.sales.nav')
+
+{{--    @include('pianote.sales.nav', [--}}
+{{--        "cartVersion" => true--}}
+{{--    ])--}}
 
     <div class="clearfix container mx-auto max-w-6xl">
         <div class="lg:flex">
@@ -63,7 +65,7 @@
 
         <div class="product-wrap px-3 md:px-4 lg:w-2/3">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
-                @if($product->productType->name === 'Lesson')
+                @if($product->productType->name === 'Lessons')
                     @include('musora.product.partials.benefits',[
                         'benefits' => $product->benefits
                     ])
@@ -75,7 +77,7 @@
                     ])
                 @endif
 
-                @if($product->productType->name === 'Bundle')
+                @if($product->productType->name === 'Bundles')
                     <hr class="my-8" />
 
                     <p class="mb-4">
@@ -87,12 +89,12 @@
                 @else
                     @include('musora.product.partials.specs',[
                         'specList'=> $product->specs,
-                        'featureList' => $product->productType->name !== 'Bundle' && $product->productType->name !== 'Lesson' ? $product->features : [],
+                        'featureList' => $product->productType->name !== 'Bundles' && $product->productType->name !== 'Lessons' ? $product->features : [],
                     ])
                 @endif
 
 
-                @if($product->productType->name === 'Lesson')
+                @if($product->productType->name === 'Lessons')
                     @include('musora.product.partials.instructor',[
                         "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc

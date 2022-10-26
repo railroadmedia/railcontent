@@ -3,8 +3,7 @@
 @section('global-head')
     @parent
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet"> --}}
-    <link rel="preload" href="{{ ('marketing/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}"></noscript>
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -57,13 +56,14 @@
                 "specialText" => $product->special_text,
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
+                "category" => strtolower($product->productType->name),
             ])
         </div>
 
 
         <div class="product-wrap px-3 md:px-4 lg:w-2/3">
             <div class="pack-details mb-7 pb-5 sm:pb-9 lg:pb-11">
-                @if($product->productType->name === 'Lesson')
+                @if($product->productType->name === 'Lessons')
                     @include('musora.product.partials.benefits',[
                         'benefits' => $product->benefits
                     ])
@@ -75,7 +75,7 @@
                     ])
                 @endif
 
-                @if($product->productType->name === 'Bundle')
+                @if($product->productType->name === 'Bundles')
                     <hr class="my-8" />
 
                     <p class="mb-4">
@@ -87,12 +87,12 @@
                 @else
                     @include('musora.product.partials.specs',[
                         'specList'=> $product->specs,
-                        'featureList' => $product->productType->name !== 'Bundle' && $product->productType->name !== 'Lesson' ? $product->features : [],
+                        'featureList' => $product->productType->name !== 'Bundles' && $product->productType->name !== 'Lessons' ? $product->features : [],
                     ])
                 @endif
 
 
-                @if($product->productType->name === 'Lesson')
+                @if($product->productType->name === 'Lessons')
                     @include('musora.product.partials.instructor',[
                         "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc
