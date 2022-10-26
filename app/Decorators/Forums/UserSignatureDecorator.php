@@ -17,7 +17,10 @@ class UserSignatureDecorator
                     'https://www.guitareo.com/members/forums',
                     '/laravel/public',
                     '"/members/forums',
-                    'http://forums.drumeo.com/index.php?',
+                    'http://forums.drumeo.com/index.php?/topic',
+                    'http://drumeo.com/forums/index.php?/topic',
+                    'https://www.drumeo.com/forums/index.php?/topic',
+                    'http://www.drumeo.com/forums/index.php?/topic',
                 ],
                 [
                     $domain,
@@ -26,7 +29,10 @@ class UserSignatureDecorator
                     $domain.'/guitareo/forums',
                     '',
                     '"'.route('forums.show-categories'),
-                    $domain.'/drumeo/forums',
+                    $domain.'/drumeo/forums/jump-to-thread',
+                    $domain.'/drumeo/forums/jump-to-thread',
+                    $domain.'/drumeo/forums/jump-to-thread',
+                    $domain.'/drumeo/forums/jump-to-thread',
                 ],
                 $post['author']['signature']
             );
