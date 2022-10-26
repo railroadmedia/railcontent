@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/marketing/worship-piano.css">
+    <link rel="stylesheet" href="/marketing/parcel/pianote/worship-piano.css">
 @stop
 
 @section('global-body')
@@ -377,7 +377,7 @@
                 <img class="album-banner" src="@yield('albums-url')">
             @endif
             <div class="song-list">
-                @include('products._worship-songs')
+                @include('pianote.products._worship-songs')
             </div>
             <div class="text-center">
                 <a id="uncoverAll" class="join outline">Show All</a>
@@ -572,10 +572,10 @@
             });
         });
     </script>
-    <script src="{{ mix('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
     {!! inspectlet_embed_script() !!}

@@ -16,8 +16,8 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
-        "cartVersion" => true
+    @include('pianote.sales.nav',[
+         "cartVersion" => true
     ])
 
     {{--check blog sidebar--}}
@@ -207,7 +207,7 @@
                 <img class="album-banner" src="@yield('albums-url')">
             @endif
             <div class="song-list">
-                @include('products._songs')
+                @include('pianote.products._songs')
             </div>
             <div class="text-center">
                 <a id="uncoverAll" class="join outline white">Show All</a>
@@ -477,10 +477,10 @@
             $(window).trigger('scroll');
         });
     </script>
-    <script src="{{ mix('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
     @yield('scripts')

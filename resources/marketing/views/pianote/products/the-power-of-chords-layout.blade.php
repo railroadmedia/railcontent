@@ -700,7 +700,7 @@
     ])
 
     @foreach ($modalImages as $key => $img)
-        @include('products.partials.image-modal',[
+        @include('pianote.products.partials.image-modal',[
             'id' => "seeInside".$key,
             "image" => $img,
             "imageName" => "seeInside".$key,

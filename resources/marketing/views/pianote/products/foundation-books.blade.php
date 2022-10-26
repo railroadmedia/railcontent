@@ -460,7 +460,7 @@
         <div class="container mx-auto">
             <h1 class="font-bold mb-10 sm:mb-16 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>What students are saying about Lisa &<br class="hidden sm:inline"> the Pianote Foundations book set.</strong></h1>
             <div class="testimonials px-6">
-                @include('products._testimonial-2', [
+                @include('pianote.products._testimonial-2', [
                     "image" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/dominic.jpg",
                     "heading" => "I've felt motivated to learn because of them.",
                     "testimonial" => "The idea of having tangible course material to accompany the online lessons was such an appealing prospect; especially as I love to learn from books.<br><br>I have noticed a considerable improvement in both my practical skills and theoretical knowledge.<br><br>I cannot recommend them highly enough; they've brought structure and understanding to the whole process of learning the foundations of the piano. Most importantly though, they're a joy to follow. I've felt motivated to learn because of them.",
