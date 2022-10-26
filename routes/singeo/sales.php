@@ -34,7 +34,6 @@ Route::domain('{singeoDomain}')->group(function () {
     Route::get('/recitals', function () { return view('singeo.lead-gen.recitals'); });
     Route::get('/giveaway', function () { return view('singeo.lead-gen.giveaway'); });
 
-    Route::get('/lifetime', ['uses' => 'SalesController@lifetime', 'as' => 'sales.lifetime']);
 
     // redirect pages
     Route::get('/beginner-bundle', function(){ return redirect('/shop/beginner-bundle'); });
