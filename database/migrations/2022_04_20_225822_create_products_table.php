@@ -48,6 +48,7 @@ return new class extends Migration
             $table->boolean('size_case_sensitive')->default(false);
             $table->boolean('physical')->default(false);
             $table->boolean('bundle_free_shipping')->default(false);
+            $table->string('bundle_img')->nullable();
             $table->longText('bundle_desc')->nullable();
             $table->integer('display_order')->default(0);
             $table->timestamps();
