@@ -346,6 +346,36 @@ Route::domain('{drumeoDomain}')->group(function () {
         }
     );
 
+    Route::get('/courses/{slug}', function ($slug) {return view('drumeo.lead-gen.courses.' . $slug);});
+    Route::get('/shows/{slug}', function ($slug) {return view('drumeo.lead-gen.shows.' . $slug);});
+
+    Route::get('/birthday-gifts/', function () { return view('drumeo.lead-gen.gift-guide.birthday-guide'); });
+    Route::get('/christmas-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.christmas-guide'); });
+    Route::get('/click/', function () { return view('drumeo.lead-gen.pages.click'); });
+    Route::get('/druminar/coming-back-to-the-drums', function () { return view('drumeo.lead-gen.webinar.coming-back-to-the-drums'); });
+    Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', function () { return view('drumeo.lead-gen.webinar.event'); });
+    Route::get('/fathers-day-gifts/', function () { return view('drumeo.lead-gen.gift-guide.fathers-day-guide'); });
+    Route::get('/for-teachers/teach-drums/', function () { return view('drumeo.lead-gen.pages.teach-drums'); });
+    Route::get('/free-drum-lessons/', function () { return view('drumeo.lead-gen.pages.free-drum-lessons'); });
+    Route::get('/free-gift/', function () { return view('drumeo.lead-gen.free-gift.free-gift'); });
+    Route::get('/gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.new-years-guide'); });
+    Route::get('/new-years-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.new-years-guide'); });
+    Route::get('/quick-drummer-survey/', function () { return view('drumeo.lead-gen.pages.quick-drummer-survey'); });
+    Route::get('/teach-a-beginner/', function () { return view('drumeo.lead-gen.pages.teach-a-beginner'); });
+    Route::get('/teach-a-beginner/lessons/', function () { return view('drumeo.lead-gen.pages.teach-a-beginner-lessons'); });
+    Route::get('/thankyou/', function () { return view('drumeo.lead-gen.pages.thank-you'); });
+    Route::get('/thank-you/', function () { return view('drumeo.lead-gen.pages.thank-you-alt'); });
+    Route::get('/30-day-drummer-unsubscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-unsubscribe'); });
+    Route::get('/30-day-drummer-subscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-subscribe'); });
+    Route::get('/confirming/', function () { return view('drumeo.lead-gen.pages.confirming'); });
+    Route::get('/lets-stay-together/', function () { return view('drumeo.lead-gen.pages.lets-stay-together'); });
+    Route::get('/welcome-party/', function () { return view('drumeo.lead-gen.pages.welcome-party'); });
+    Route::get('/2-million/', function () { return view('drumeo.lead-gen.pages.2-million'); });
+    Route::get('/awards-giveaway/', function () { return view('drumeo.lead-gen.pages.awards-giveaway'); });
+    Route::get('/recitals/', function () { return view('drumeo.lead-gen.pages.recitals'); });
+    Route::get('/lifetime-members-masterclass/', function () { return view('drumeo.lead-gen.pages.lifetime-members-masterclass'); });
+    Route::get('/30-day-drummer-live/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-live'); });
+    Route::get('/awards/', function () { return view('drumeo.lead-gen.pages.awards'); });
     Route::get('/weeklyemail/', function () { return view('drumeo.lead-gen.blog-forms.weeklyemail'); });
     Route::get('/weekly-email/', function () { return view('drumeo.lead-gen.blog-forms.weekly-email'); });
     Route::get('/fwtgf-blog/', function () { return view('drumeo.lead-gen.blog-forms.fwtgf-blog'); });

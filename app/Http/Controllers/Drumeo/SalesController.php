@@ -267,13 +267,6 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.lifetime', ['products' => $products]);
     }
-    public function salesBeginner()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.beginner', ['products' => $products]);
-    }
 
     public function Festival()
     {
@@ -281,40 +274,6 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.products.full-page-assets.festival', ['products' => $products]);
-    }
-
-    public function festivalCoastal()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.full-page-assets.festival-coastal', ['products' => $products]);
-    }
-
-    public function festivalMd()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.full-page-assets.festival-md', ['products' => $products]);
-    }
-
-    public function festivalEdge()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.full-page-assets.festival-edge', ['products' => $products]);
-    }
-
-    public function drumFillsPart($part)
-    {
-        return view('drumeo.lead-gen.drum-fills.lesson', ['partNum' => $part]);
-    }
-
-    public function drumBeatsPart($part)
-    {
-        return view('drumeo.lead-gen.drum-beats.lesson', ['partNum' => $part]);
     }
 
     public function toneControl()
