@@ -21,6 +21,7 @@ class UserSignatureDecorator
                     'http://drumeo.com/forums/index.php?/topic',
                     'https://www.drumeo.com/forums/index.php?/topic',
                     'http://www.drumeo.com/forums/index.php?/topic',
+                    'https://www.singeo.com/members/forums',
                 ],
                 [
                     $domain,
@@ -33,6 +34,7 @@ class UserSignatureDecorator
                     $domain.'/drumeo/forums/jump-to-thread',
                     $domain.'/drumeo/forums/jump-to-thread',
                     $domain.'/drumeo/forums/jump-to-thread',
+                    $domain.'/singeo/forums',
                 ],
                 $post['author']['signature']
             );
