@@ -61,7 +61,6 @@ environments:
             - 'php artisan view:cache'
             - 'yarn install --frozen-lockfile'
             - 'yarn platform-production'
-            - 'yarn marketing-production'
             - 'rm -rf node_modules'
     web-staging-one:
         domain: 'web-staging-one.musora.com'
