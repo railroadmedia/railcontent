@@ -16,15 +16,17 @@ class UserSignatureDecorator
                     'https://www.pianote.com/members/forums',
                     'https://www.guitareo.com/members/forums',
                     '/laravel/public',
-                    '"/members/forums'
+                    '"/members/forums',
+                    'http://forums.drumeo.com/index.php?',
                 ],
                 [
                     $domain,
                     $domain,
-                    $domain.'pianote/forums',
-                    $domain.'guitareo/forums',
+                    $domain.'/pianote/forums',
+                    $domain.'/guitareo/forums',
                     '',
                     '"'.route('forums.show-categories'),
+                    $domain.'/drumeo/forums',
                 ],
                 $post['author']['signature']
             );
