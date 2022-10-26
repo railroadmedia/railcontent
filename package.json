@@ -27,7 +27,6 @@
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
-        "@parcel/transformer-sass": "^2.0.1",
         "@tailwindcss/aspect-ratio": "^0.4.0",
         "@tailwindcss/forms": "^0.5.0",
         "@tailwindcss/line-clamp": "^0.4.2",
@@ -38,6 +37,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "laravel-mix": "^6.0.43",
         "laravel-mix-merge-manifest": "^2.0.0",
+        "@parcel/transformer-sass": "^2.0.1",
         "postcss": "^8.3.9",
         "prettier": "^2.5.1",
         "prettier-plugin-tailwindcss": "^0.1.4",
@@ -49,6 +49,8 @@
         "vue-recaptcha": "^2.0.2"
     },
     "dependencies": {
+        "mediaelement": "^4.2.8",
+        "mediaelement-plugins": "^2.5.0",
         "@musora/icons": "^1.0.6",
         "@tinymce/tinymce-vue": "^5.0.0",
         "@vimeo/player": "^2.15.0",
@@ -63,8 +65,6 @@
         "laravel-vapor": "^0.6.0",
         "lodash": "^4.17.19",
         "luxon": "^3.0.1",
-        "mediaelement": "^4.2.8",
-        "mediaelement-plugins": "^2.5.0",
         "mitt": "^3.0.0",
         "mux.js": "^5.5.1",
         "normalize.css": "^8.0.1",
