@@ -1,10 +1,6 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 require('laravel-mix-merge-manifest');
-require('laravel-mix-polyfill');
-
-const ASSET_URL =
-  process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
 /*
  |--------------------------------------------------------------------------
@@ -16,6 +12,7 @@ const ASSET_URL =
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.setPublicPath('./public/');
 mix
     .js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms
@@ -33,23 +30,5 @@ mix
     .extract()
     .sourceMaps()
     .version()
-    .mergeManifest()
-    .polyfill({
-        enabled: true,
-        useBuiltIns: "usage",
-        targets: "firefox 50, IE 11, iOS 12"
-     });
-
-mix.webpackConfig(webpack => {
-    return {
-        output: {
-            publicPath: ASSET_URL
-        },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ]
-    };
-});
+    .mergeManifest();
 
