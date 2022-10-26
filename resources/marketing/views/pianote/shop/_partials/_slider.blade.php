@@ -2,7 +2,7 @@
     <div class="pack-details slider-wrap mb-1 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
         <div class="text-center pb-5 sm:pb-6 lg:pb-7">
             @if(!empty($headerText))
-                <div class="text-xl md:text-3xl lg:text-4xl leading-none">{!! $headerText !!}</div>
+                <div class="text-xl md:text-3xl lg:text-4xl leading-none font-bold">{!! $headerText !!}</div>
             @endif
             @if(!empty($specialText))
                 {!! $specialText !!}
