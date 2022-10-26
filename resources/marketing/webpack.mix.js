@@ -23,8 +23,7 @@ mix
     .extract()
     .sourceMaps()
     .version()
-    .mergeManifest()
-    .dump();
+    .mergeManifest();
 
 if (mix.inProduction()) {
     const ASSET_URL = process.env.ASSET_URL + "/";
