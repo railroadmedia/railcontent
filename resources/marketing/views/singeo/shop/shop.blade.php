@@ -17,15 +17,9 @@
 @stop
 
 @section('global-body')
-
     @include("singeo.sales.partials._nav", [
-        "joinVersion" => true,
-        "scrollToJoin" => true,
-        "homepage" => true
+        "cartVersion" => true,
     ])
-{{--    @include("singeo.sales.partials._nav", [--}}
-{{--        "cartVersion" => true,--}}
-{{--    ])--}}
 
     <style>
         img {
