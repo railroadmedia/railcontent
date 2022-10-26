@@ -6,7 +6,7 @@
             <div class="clearfix">
                 <div class="w-full">
                     @if(!empty($headerText))
-                        <div class="text-xl md:text-3xl lg:text-4xl leading-none">{!! $headerText !!}</div>
+                        <div class="text-xl md:text-3xl lg:text-4xl leading-none font-bold">{!! $headerText !!}</div>
                     @endif
                     @if(!empty($specialText))
                         {!! $specialText !!}

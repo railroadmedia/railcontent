@@ -3,7 +3,7 @@
         <div class="product-title text-center pb-5 sm:pb-6 lg:pb-7">
             <div class="clearfix w-full">
                 @if(!empty($headerText))
-                    <div class="text-xl md:text-3xl lg:text-4xl leading-none">{!! $headerText !!}</div>
+                    <div class="text-xl md:text-3xl lg:text-4xl leading-none font-bold">{!! $headerText !!}</div>
                 @endif
                 @if(!empty($specialText))
                     {!! $specialText !!}
@@ -21,7 +21,7 @@
                     <img src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $videoThumb }}" alt="thumbnail">
                 @endif
                 @if (!empty($images))
-                    @foreach ($images as $image)
+                    @foreach ($images as $key => $image)
                             <div @if(count($images) > 1)style="display: none;"@endif>
                                 <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
                             </div>
