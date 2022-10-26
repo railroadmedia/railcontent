@@ -20,13 +20,16 @@ class PostUrlsDecorator
 
     public function decorate($posts)
     {
-        foreach($posts as $index=>$post)
-        {
+        foreach ($posts as $index => $post) {
             $url = str_replace(
                 [
-                    '"/members/forums'
+                    '"/members/forums',
+                    '"/members/',
+                    '"/pianote/forums',
                 ],
                 [
+                    '"'.route('forums.show-categories'),
+                    '"'.config('app.url').brand().'/',
                     '"'.route('forums.show-categories'),
                 ],
                 $posts[$index]['content']
@@ -36,8 +39,7 @@ class PostUrlsDecorator
             if (preg_match_all(self::HTML_HREF_REGEX_PATTERN, $post['content'], $matches)) {
                 $urls = $this->getUrls($matches[0]);
                 foreach ($urls as $oldUrl => $mwpUrl) {
-                    $posts[$index]['content'] =
-                        str_replace($oldUrl, $mwpUrl, $posts[$index]['content']);
+                    $posts[$index]['content'] = str_replace($oldUrl, $mwpUrl, $posts[$index]['content']);
                 }
             }
         }
@@ -49,6 +51,9 @@ class PostUrlsDecorator
         $segments,
         $url
     ) {
+        if (empty($segments)) {
+            return $url;
+        }
 
         ContentRepository::$bypassPermissions = true;
         $unifiedUrl = '/'.$segments[0].'/';
@@ -130,83 +135,58 @@ class PostUrlsDecorator
             return $url;
         }
 
-        if (($segments[1] == 'forums') ||($segments[2] == 'forums')) {
-
-            $url = str_replace(
-                [
-                    'www.drumeo.com/members/lessons',
-                    'www.drumeo.com/laravel/public/members',
-                    'www.drumeo.com/members',
-                    'www.pianote.com/members',
-                    'www.singeo.com/members',
-                    'www.singeo.com',
-                    'www.guitareo.com',
-                    'loops',
-                ],
-                [
-                    'www.musora.com/drumeo',
-                    'www.musora.com/drumeo',
-                    'www.musora.com/drumeo',
-                    'www.musora.com/pianote',
-                    'www.musora.com/singeo',
-                    'www.musora.com/singeo',
-                    'www.musora.com/guitareo',
-                    'legacy-resources/loops',
-                ],
-                $url
-            );
-
+        if (in_array('forums', $segments)) {
+            if ($numberOfSegments > 0) {
+                if (in_array('jump-to-post', $segments)) {
+                    $url = route('forums.jump-to-post', ['postId' => $lastSegment]);
+                } else {
+                    $url = route('forums.jump-to-thread', ['threadId' => $lastSegment]);
+                }
+                return $url;
+            }
             return $url;
-        }elseif (is_numeric($lastSegment)) {
+        } elseif (is_numeric($lastSegment)) {
             $content = $this->contentService->getById($lastSegment);
             return $content['url'] ?? '';
-        } elseif ($numberOfSegments == 3 && $segments[1] == 'packs') {
+        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'pack')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'coaches') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'instructor')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'learning-paths') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'learning-path')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 4 && $segments[1] == 'packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'pack-bundle')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 5 && $segments[1] == 'packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'pack-bundle-lesson')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 4 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack-lesson')
                     ->first();
-
             return $content['url'];
         } elseif ($numberOfSegments == 4 && $segments[1] == 'learning-paths') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'learning-path-level')
                     ->first();
-
             return $content['url'];
         } elseif ($lastSegment == 'loops') {
             $url = str_replace(
@@ -242,21 +222,23 @@ class PostUrlsDecorator
     private function getUrls($matches)
     : array {
         $urls = [];
+
         foreach ($matches as $match) {
             $url = $match;
             $initialRequest = \Request::create($url);
+
             if (!in_array($initialRequest->getHttpHost(), [
                 'www.drumeo.com',
                 'www.pianote.com',
                 'www.singeo.com',
                 'www.guitareo.com',
-                'forums.drumeo.com'
+                'forums.drumeo.com',
+                request()->getHttpHost(),
             ])) {
                 continue;
             }
 
             $oldRequest = \Request::create($url);
-
             $segments = $this->formatNewUrl($oldRequest->segments(), $url);
             if ($oldRequest->getQueryString()) {
                 $segments = $segments.'?'.$oldRequest->getQueryString();
