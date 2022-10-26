@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Providers;
 
+use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,8 +17,11 @@ class ContentServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        $this->commands([
+            CoachBulkDataUpdate::class
+        ]);
 
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule){
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
         });
     }
